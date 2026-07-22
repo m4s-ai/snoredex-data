@@ -13,8 +13,8 @@ Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories,
 | `analysis_shared_cards.json` | Cards printed across multiple releases, grouped, with artists |
 | `analysis_artists.json` | Artist → printings index |
 | `analysis_variants.json` | Set+number clusters with more than one Cardmarket product |
-| `*.ps1` | Reproducible build/join/analysis scripts |
-| `verification/` | **Source verification layer** — one row per card × language × variant, each with a confirmed source outside Cardmarket. See `verification/RESUME.md` |
+| `scripts/` | Reproducible dataset build pipeline (`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze`) |
+| `verification/` | **Source verification layer** — one row per card × language × variant, each with a confirmed source outside Cardmarket. Recurring tools at top level (`report`, `audit_evidence`, `classify_manual`, `review_integrity`); every completed one-shot pass in `verification/passes/`. See `verification/RESUME.md` |
 
 242 products − 44 non-card items (playmats, sleeves, binders, tins, blisters, pins, deck boxes) = **198 singles**. Six of those 198 are online/live code cards, flagged `isCodeCard: true`.
 
