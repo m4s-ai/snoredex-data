@@ -311,13 +311,25 @@ https://www.pokemon-card.com/card-search/resultAPI.php
 - The search matches fuzzily and returns ゴンベ (Munchlax) alongside カビゴン; filter by name.
 - Detail page `details.php/card/<id>/regu/all` yields collector number, set code (from the card image path) and illustrator.
 
-### Language scope: Spanish
+### Language scope: Spanish — a documented blind spot, proven by specimen
 
-"Spanish" throughout this dataset is Cardmarket's single Spanish filter, which is **European
-Spanish**. Latin-American Spanish became a distinct print edition from **Journey Together (2025)**
-onward, but Cardmarket does not list it as a separate language in the harvested data, so there are
-no LATAM-ES units and none are chased. When the owner confirms "ES" they mean European Spanish and
-explicitly exclude LATAM-ES (e.g. `xPRE 076`: FR/DE/IT/ES-European confirmed, PT and LATAM-ES not).
+"Spanish" throughout this dataset is Cardmarket's single Spanish filter. Latin-American Spanish
+became a **physically distinct print edition** from **Journey Together (2025)** onward, and the
+owner photographed both side by side for Hop's Snorlax SVP 184 ("Snorlax de Paul", 150 PS,
+Illus. OKACHEKE, ©2025):
+
+| | European Spanish | Latin-American Spanish |
+|---|---|---|
+| Attack | **Presión Dinámica** | **Plancha Dinámica** |
+| Set name on card | **Juntos de Aventuras** | **Aventuras Compartidas** |
+| Set code (bottom left) | differs | differs |
+
+Same card, different translation, different set branding, different set code. **The harvest contains
+no LATAM products at all** — Cardmarket's language filter collapses both into one "Spanish" — so
+LATAM-ES cannot be represented as units here and every "Spanish" confirmation strictly means the
+European print. Anyone extending this dataset for SV-era (2025+) cards must treat LATAM-ES as a
+separate edition Cardmarket does not distinguish. (e.g. `xPRE 076`: FR/DE/IT/ES-European confirmed,
+PT and LATAM-ES not.)
 
 ### Scope decisions (user)
 
