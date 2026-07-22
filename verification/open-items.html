@@ -1,0 +1,350 @@
+<title>Snorlax verification — open items</title>
+
+<style>
+  :root {
+    --paper:      #E9EDEF;
+    --surface:    #FFFFFF;
+    --surface-2:  #F3F6F7;
+    --ink:        #111A21;
+    --ink-soft:   #4C5D68;
+    --ink-faint:  #7A8B96;
+    --rule:       #D0D9DE;
+    --rule-soft:  #E2E9EC;
+    --accent:     #23606E;
+    --gap:        #9C5417;
+    --gap-bg:     #F6E9DC;
+    --have:       #3F6E58;
+    --have-bg:    #E7EFEA;
+    --shadow:     0 1px 2px rgba(17,26,33,.06), 0 8px 24px -18px rgba(17,26,33,.5);
+
+    --serif: Georgia, "Iowan Old Style", "Source Serif Pro", "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:     #0D1317;
+      --surface:   #161E24;
+      --surface-2: #1B252C;
+      --ink:       #DFE7EB;
+      --ink-soft:  #9DAEB8;
+      --ink-faint: #74868F;
+      --rule:      #29363E;
+      --rule-soft: #212C33;
+      --accent:    #74B4C2;
+      --gap:       #DC9B57;
+      --gap-bg:    #2E2318;
+      --have:      #7FAF95;
+      --have-bg:   #1A2721;
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.9);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1317; --surface:#161E24; --surface-2:#1B252C; --ink:#DFE7EB;
+    --ink-soft:#9DAEB8; --ink-faint:#74868F; --rule:#29363E; --rule-soft:#212C33;
+    --accent:#74B4C2; --gap:#DC9B57; --gap-bg:#2E2318; --have:#7FAF95; --have-bg:#1A2721;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.9);
+  }
+  :root[data-theme="light"] {
+    --paper:#E9EDEF; --surface:#FFFFFF; --surface-2:#F3F6F7; --ink:#111A21;
+    --ink-soft:#4C5D68; --ink-faint:#7A8B96; --rule:#D0D9DE; --rule-soft:#E2E9EC;
+    --accent:#23606E; --gap:#9C5417; --gap-bg:#F6E9DC; --have:#3F6E58; --have-bg:#E7EFEA;
+    --shadow:0 1px 2px rgba(17,26,33,.06), 0 8px 24px -18px rgba(17,26,33,.5);
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+
+  /* ---- masthead ---- */
+  .masthead { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 2rem; }
+  .eyebrow {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 600; font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+    line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -.01em;
+  }
+  .lede { color: var(--ink-soft); max-width: 60ch; margin: 0; font-size: 1.02rem; }
+
+  /* ---- summary ---- */
+  .totals {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+    border-radius: 3px; overflow: hidden; margin: 2rem 0 1rem;
+  }
+  .tot { background: var(--surface); padding: .85rem 1rem; }
+  .tot dt {
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 .25rem;
+  }
+  .tot dd {
+    margin: 0; font-family: var(--mono); font-size: 1.5rem; font-variant-numeric: tabular-nums;
+    font-weight: 600; line-height: 1;
+  }
+  .tot.is-gap dd { color: var(--gap); }
+  .tot.is-have dd { color: var(--have); }
+
+  .meter { height: 6px; display: flex; border-radius: 3px; overflow: hidden; background: var(--rule); }
+  .meter span { display: block; }
+  .meter .m-have { background: var(--have); }
+  .meter .m-contra { background: var(--accent); }
+  .meter .m-manual { background: var(--ink-faint); }
+  .meter .m-open { background: var(--gap); }
+  .meter-key {
+    display: flex; flex-wrap: wrap; gap: 1rem; margin: .55rem 0 0;
+    font-size: .78rem; color: var(--ink-soft);
+  }
+  .meter-key b { font-weight: 500; }
+  .dot { display: inline-block; width: .55rem; height: .55rem; border-radius: 2px; margin-right: .35rem; }
+
+  /* ---- filters ---- */
+  .filters { display: flex; flex-wrap: wrap; gap: .4rem; margin: 2.25rem 0 1.25rem; align-items: center; }
+  .filters .label {
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-faint); margin-right: .35rem;
+  }
+  .filters button {
+    font: inherit; font-size: .82rem; cursor: pointer;
+    background: var(--surface); color: var(--ink-soft);
+    border: 1px solid var(--rule); border-radius: 2px; padding: .28rem .6rem;
+  }
+  .filters button:hover { border-color: var(--accent); color: var(--ink); }
+  .filters button[aria-pressed="true"] {
+    background: var(--accent); border-color: var(--accent); color: var(--surface);
+  }
+  :root[data-theme="dark"] .filters button[aria-pressed="true"],
+  .filters button[aria-pressed="true"] { color: #fff; }
+  @media (prefers-color-scheme: dark) {
+    .filters button[aria-pressed="true"] { color: #0D1317; }
+  }
+  :root[data-theme="dark"] .filters button[aria-pressed="true"] { color: #0D1317; }
+  :root[data-theme="light"] .filters button[aria-pressed="true"] { color: #fff; }
+  .filters button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---- sections ---- */
+  section { margin-top: 2.5rem; }
+  h2 {
+    font-family: var(--serif); font-size: 1.18rem; font-weight: 600; margin: 0 0 .3rem;
+    letter-spacing: -.005em;
+  }
+  .sec-note { margin: 0 0 1rem; color: var(--ink-soft); font-size: .92rem; max-width: 62ch; }
+
+  /* ---- rows ---- */
+  .rows { display: flex; flex-direction: column; gap: 1px; background: var(--rule);
+          border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .row {
+    background: var(--surface); padding: .9rem 1rem;
+    display: grid; grid-template-columns: minmax(0,1fr) auto; gap: .6rem 1.5rem; align-items: start;
+  }
+  .row:hover { background: var(--surface-2); }
+  .ident { min-width: 0; }
+  .cardname { font-weight: 600; font-size: 1rem; }
+  .cardname a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+  .cardname a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+  .cardname a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .code {
+    font-family: var(--mono); font-size: .82rem; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .meta { font-size: .85rem; color: var(--ink-faint); margin-top: .1rem; }
+  .meta .sep { opacity: .5; padding: 0 .35rem; }
+
+  .langs { display: flex; flex-wrap: wrap; gap: .3rem; justify-content: flex-end; max-width: 22rem; }
+  .chip {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .02em;
+    padding: .16rem .45rem; border-radius: 2px; white-space: nowrap; border: 1px solid transparent;
+  }
+  .chip.gap { background: var(--gap-bg); color: var(--gap); border-color: var(--gap); font-weight: 600; }
+  .chip.have { background: transparent; color: var(--ink-faint); border-color: var(--rule); }
+
+  /* ---- manual review ---- */
+  .manual .row { border-left: 3px solid var(--ink-faint); }
+  .reason {
+    font-size: .8rem; color: var(--ink-faint); margin-top: .35rem; font-style: italic;
+  }
+
+  footer {
+    margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+    color: var(--ink-faint); font-size: .85rem;
+  }
+  footer code { font-family: var(--mono); font-size: .82rem; color: var(--ink-soft); }
+  .empty { padding: 1.2rem 1rem; background: var(--surface); color: var(--ink-faint); font-size: .9rem; }
+
+  @media (max-width: 40rem) {
+    .row { grid-template-columns: 1fr; }
+    .langs { justify-content: flex-start; max-width: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Cardmarket · Snorlax · source verification</div>
+    <h1>What still needs a source</h1>
+    <p class="lede">
+      Every claim is one card × one language × one variant, and each needs a confirmation
+      from outside Cardmarket. 719 such claims exist. These are the ones still standing open.
+    </p>
+  </header>
+
+  <dl class="totals">
+    <div class="tot is-have"><dt>Confirmed</dt><dd>603</dd></div>
+    <div class="tot"><dt>Contradicted</dt><dd>71</dd></div>
+    <div class="tot"><dt>Your call</dt><dd>36</dd></div>
+    <div class="tot is-gap"><dt>Open</dt><dd>9</dd></div>
+  </dl>
+
+  <div class="meter" role="img" aria-label="603 confirmed, 71 contradicted, 36 awaiting your decision, 9 open, of 719 claims">
+    <span class="m-have" style="width:83.9%"></span>
+    <span class="m-contra" style="width:9.9%"></span>
+    <span class="m-manual" style="width:5.0%"></span>
+    <span class="m-open" style="width:1.3%"></span>
+  </div>
+  <p class="meter-key">
+    <span><i class="dot" style="background:var(--have)"></i><b>603 confirmed</b> — external source found</span>
+    <span><i class="dot" style="background:var(--accent)"></i><b>71 contradicted</b> — source says the language does not exist</span>
+    <span><i class="dot" style="background:var(--ink-faint)"></i><b>36 your call</b></span>
+    <span><i class="dot" style="background:var(--gap)"></i><b>9 open</b></span>
+  </p>
+
+  <div class="filters">
+    <span class="label">Filter</span>
+    <button type="button" data-lang="*" aria-pressed="true">All</button>
+    <button type="button" data-lang="Korean" aria-pressed="false">Korean</button>
+    <button type="button" data-lang="T-Chinese" aria-pressed="false">T-Chinese</button>
+    <button type="button" data-lang="S-Chinese" aria-pressed="false">S-Chinese</button>
+    <button type="button" data-lang="Japanese" aria-pressed="false">Japanese</button>
+    <button type="button" data-lang="Spanish" aria-pressed="false">Spanish</button>
+    <button type="button" data-lang="Portuguese" aria-pressed="false">Portuguese</button>
+    <button type="button" data-lang="German" aria-pressed="false">German</button>
+    <button type="button" data-lang="Italian" aria-pressed="false">Italian</button>
+  </div>
+
+  <section>
+    <h2>Western sets — Spanish and Portuguese</h2>
+    <p class="sec-note">
+      The product articles list localized names for French, German and Italian but stop there.
+      A missing entry in a name table is not proof of non-release, so these stay open rather than
+      contradicted — and the <code>XY179</code> promo showed why: no database carried its German,
+      Italian or Spanish printings, yet physical copies of all three exist.
+    </p>
+    <div class="rows" id="sec-west"></div>
+  </section>
+
+  <section>
+    <h2>Japanese promos — cleared</h2>
+    <p class="sec-note">
+      All promo claims are now resolved. The decisive source was a collector database that lists
+      one entry per market printing: it carries S-P Snorlax promos in six languages, so finding
+      <code>S-P 156</code> only in Japanese is evidence rather than a gap. Note that a Japanese
+      retail campaign alone proves nothing — <code>XY-P 149</code> came from a Marumiya promotion
+      in Japan and the very same card from a Kisstick sausages promotion in Korea.
+    </p>
+    <div class="rows" id="sec-promo"></div>
+  </section>
+
+  <section>
+    <h2>Japanese decks and collection products</h2>
+    <p class="sec-note">
+      Most of this block closed once the infobox <code>release</code> field was checked — deck
+      products list their per-language release dates there rather than in a language table.
+      What remains are products whose release field names only one market. Main expansions are a
+      separate case and are all resolved: the Asian markets never received translations of them,
+      so the printing turns up under a catch-up set instead. For the rest, a sealed product listing
+      from a seller in that market is often the only evidence that exists.
+    </p>
+    <div class="rows" id="sec-deck"></div>
+  </section>
+
+  <section class="manual">
+    <h2>Awaiting your decision</h2>
+    <p class="sec-note">
+      No card database will ever carry these. Mark each one confirmed or false in
+      <code>MANUAL_REVIEW.csv</code>.
+    </p>
+    <div class="rows" id="sec-manual"></div>
+  </section>
+
+  <footer>
+    Generated 22 July 2026 from <code>verification/units.json</code>.
+    Full evidence per claim in <code>confirmed_sources.json</code>,
+    refuted claims in <code>CONTRADICTED.json</code>.
+    175 of 191 card variants are now fully resolved across all their languages.
+  </footer>
+</div>
+
+<script>
+  const OPEN = [
+    {n:"Snorlax", c:"WCD23 · LOR 143", s:"WCD 2023", r:"World Championship Deck", g:["Portuguese","Spanish"], h:["English","French","German","Italian"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/WCD-2023/Snorlax-WCD23LOR-143", sec:"sec-west"},
+    {n:"Snorlax", c:"BA20 MWT", s:"Battle Academy 2020", r:"Fixed", g:["Portuguese","Spanish"], h:["English","French","German","Italian"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Academy-2020/Snorlax-HIF50", sec:"sec-west"},
+
+    {n:"Snorlax", c:"sA 10", s:"Sword & Shield Starter Decks", r:"Fixed", g:["Korean","T-Chinese"], h:["Japanese"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Starter-Decks/Snorlax-sA10", sec:"sec-deck"},
+    {n:"Snorlax", c:"mP1 012", s:"MEGA Start Deck 100 Battle Collection CoroCiao", r:"Fixed", g:["Korean"], h:["Japanese","T-Chinese"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection-Corociao-Version/Snorlax-mP1012", sec:"sec-deck"},
+    {n:"Snorlax", c:"svG 021", s:"Venusaur & Charizard & Blastoise Special Deck Set ex", r:"Fixed", g:["T-Chinese"], h:["Japanese","Korean"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Venusaur-Charizard-Blastoise-Special-Deck-Set-ex/Snorlax-svG021", sec:"sec-deck"},
+    {n:"Snorlax", c:"svIba 046", s:"Scarlet & Violet Battle Academy", r:"Fixed", g:["T-Chinese"], h:["Japanese","Korean","S-Chinese"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Battle-Academy/Snorlax-svIba046", sec:"sec-deck"}
+  ];
+
+  const MANUAL = [
+    {n:"Hop's Snorlax", c:"PPS7 · JTG 117", s:"Play! Pokémon Prize Pack Series Seven", r:"Prize Pack", g:["English","French","German","Italian","Spanish"], h:["Portuguese"], why:"Portuguese confirmed via LigaPokemon; the other five have no source", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Seven/Hops-Snorlax-PPS7JTG-117"},
+    {n:"Hop's Snorlax", c:"PPS8 · JTG 117", v:"V1", s:"Play! Pokémon Prize Pack Series Eight", r:"Prize Pack", g:["English","French","German","Italian","Spanish"], h:["Portuguese"], why:"Portuguese confirmed via LigaPokemon; the other five have no source", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117"},
+    {n:"Hop's Snorlax", c:"PPS8 · JTG 117", v:"V2", s:"Play! Pokémon Prize Pack Series Eight", r:"Prize Pack", g:["English","French","German","Italian","Spanish"], h:["Portuguese"], why:"Portuguese confirmed via LigaPokemon; the other five have no source", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117"},
+    {n:"Snorlax ex", c:"xPRE 076", v:"V1", s:"Prismatic Evolutions: Additionals", r:"Stamped promo", g:["French","German","Italian","Portuguese","Spanish"], h:["English"], why:"Special Collection stamp — only the English release is documented", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V1-xPRE076"},
+    {n:"Snorlax ex", c:"xPRE 076", v:"V2", s:"Prismatic Evolutions: Additionals", r:"Jumbo", g:["French","German","Italian","Portuguese","Spanish"], h:["English"], why:"Jumbo printing — only the English release is documented", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V2-xPRE076"},
+    {n:"Hop's Snorlax", c:"xm2a 136", v:"V1", s:"MEGA Dream ex: Additionals", r:"Energy-star mirror", g:["Indonesian","Korean","T-Chinese","Thai"], h:["Japanese"], why:"Mirror-holo variant — Cardmarket grouping, absent from card databases", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136"},
+    {n:"Hop's Snorlax", c:"xm2a 136", v:"V2", s:"MEGA Dream ex: Additionals", r:"Poké Ball mirror", g:["Indonesian","Korean","T-Chinese","Thai"], h:["Japanese"], why:"Mirror-holo variant — Cardmarket grouping, absent from card databases", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136"},
+    {n:"Snorlax", c:"PPS1 · VIV 131", v:"V1", s:"Play! Pokémon Prize Pack Series One", r:"Prize Pack", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Portuguese absent from the series language table", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V1-PPS1VIV-131"},
+    {n:"Snorlax", c:"PPS1 · VIV 131", v:"V2", s:"Play! Pokémon Prize Pack Series One", r:"Prize Pack", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Portuguese absent from the series language table", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V2-PPS1VIV-131"},
+    {n:"Snorlax", c:"PPS3 · LOR 143", s:"Play! Pokémon Prize Pack Series Three", r:"Prize Pack", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Portuguese absent from the series language table", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Three/Snorlax-PPS3LOR-143"}
+  ];
+
+  const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+  function rowHTML(d, withReason) {
+    const variant = d.v ? `<span class="sep">·</span>${esc(d.v)}` : "";
+    const gaps = d.g.map(l => `<span class="chip gap">${esc(l)}</span>`).join("");
+    const haves = d.h.map(l => `<span class="chip have">${esc(l)}</span>`).join("");
+    const reason = withReason ? `<div class="reason">${esc(d.why)}</div>` : "";
+    return `<div class="row" data-langs="${esc(d.g.join("|"))}">
+      <div class="ident">
+        <div class="cardname"><a href="${esc(d.u)}" target="_blank" rel="noopener">${esc(d.n)}</a>
+          <span class="sep">·</span><span class="code">${esc(d.c)}</span>${variant}</div>
+        <div class="meta">${esc(d.s)}<span class="sep">·</span>${esc(d.r)}</div>
+        ${reason}
+      </div>
+      <div class="langs">${gaps}${haves}</div>
+    </div>`;
+  }
+
+  for (const id of ["sec-west","sec-promo","sec-deck"]) {
+    document.getElementById(id).innerHTML =
+      OPEN.filter(d => d.sec === id).map(d => rowHTML(d, false)).join("");
+  }
+  document.getElementById("sec-manual").innerHTML = MANUAL.map(d => rowHTML(d, true)).join("");
+
+  const buttons = [...document.querySelectorAll(".filters button")];
+  buttons.forEach(btn => btn.addEventListener("click", () => {
+    const lang = btn.dataset.lang;
+    buttons.forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+    document.querySelectorAll(".rows").forEach(box => {
+      let shown = 0;
+      box.querySelectorAll(".row").forEach(row => {
+        const hit = lang === "*" || row.dataset.langs.split("|").includes(lang);
+        row.style.display = hit ? "" : "none";
+        if (hit) shown++;
+      });
+      const old = box.querySelector(".empty");
+      if (old) old.remove();
+      if (!shown) box.insertAdjacentHTML("beforeend",
+        `<div class="empty">Nothing open in ${esc(lang)} in this group.</div>`);
+    });
+  }));
+</script>
