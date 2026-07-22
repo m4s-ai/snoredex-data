@@ -7,15 +7,25 @@
     "nonCardProductsExcluded": 44,
     "artistSources": [
       "pokemontcg.io v2 API",
-      "limitlesstcg.com (3 cards missing upstream)"
+      "limitlesstcg.com (3 cards missing upstream)",
+      "pokemon-card.com official Japanese card database (36 JP-market cards)"
     ],
     "notes": [
       "languages = languages Cardmarket actually lists offers in for that product; it is marketplace availability, not an official print-run manifest.",
       "cardKey = Cardmarket Versions grouping (card name + attack names). Same cardKey = same card text, NOT necessarily same artwork.",
       "variantToken = Cardmarket -V1/-V2/-V3 slug, used to separate distinct printings sharing a collector number.",
       "variantAxes = filters Cardmarket exposes for the product (Reverse Holo / First Edition indicate those variants exist).",
-      "artist is only available for English-market releases; Japanese/Simplified-Chinese printings are not covered by the artist sources."
-    ]
+      "artist coverage is 115/198: English-market releases from pokemontcg.io/limitlesstcg, Japanese-market releases from the official pokemon-card.com database. Remaining nulls are mostly Korean/Chinese deck products with no published illustrator credit."
+    ],
+    "verification": {
+      "description": "Every card x language x variant claim was checked against sources outside Cardmarket. See verification/RESUME.md.",
+      "confirmed": 634,
+      "contradicted": 71,
+      "needsManualReview": 5,
+      "open": 9,
+      "totalUnits": 719,
+      "lastUpdated": "2026-07-23"
+    }
   },
   "cards": [
     {

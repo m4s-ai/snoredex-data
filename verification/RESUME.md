@@ -7,11 +7,13 @@ Goal: every **card × language × variant** gets at least one confirmed source *
 | | |
 |---|---|
 | Total units (card × language × variant) | **719** |
-| Confirmed with external source | **591** — 82.2 % of all, **86.9 % of what is resolvable** |
-| **Contradicted** — Cardmarket claims the language, source says no | **66** |
-| **Needs manual review** — genuinely undocumentable | **39** (10 card-variants) |
-| Still open | **23** |
-| Card-variants fully resolved | **168 / 191** |
+| Confirmed with external source | **634** — 88.2 % of all, **88.8 % of what is resolvable** |
+| **Contradicted** — Cardmarket claims the language, source says no | **71** |
+| **Needs manual review** | **5** — all the same question: does a Portuguese printing exist? (`xPRE 076` V1/V2, `PPS1 VIV 131` V1/V2, `PPS3 LOR 143`) |
+| Still open | **9** — `BA20`/`WCD23` ES+PT, `sA 10` KO+TC, `mP1 012` KO, `svG 021` TC, `svIba 046` TC |
+| Card-variants fully resolved | **180 / 191** |
+
+Run `verification\review_integrity.ps1` after any write pass — 16 structural checks over units, cards, images, evidence log and the documented remainder.
 
 Open items are also published as a browsable page: `verification/open-items.html`.
 
