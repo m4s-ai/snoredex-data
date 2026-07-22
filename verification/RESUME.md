@@ -324,12 +324,21 @@ Illus. OKACHEKE, ©2025):
 | Set name on card | **Juntos de Aventuras** | **Aventuras Compartidas** |
 | Set code (bottom left) | differs | differs |
 
-Same card, different translation, different set branding, different set code. **The harvest contains
-no LATAM products at all** — Cardmarket's language filter collapses both into one "Spanish" — so
-LATAM-ES cannot be represented as units here and every "Spanish" confirmation strictly means the
-European print. Anyone extending this dataset for SV-era (2025+) cards must treat LATAM-ES as a
-separate edition Cardmarket does not distinguish. (e.g. `xPRE 076`: FR/DE/IT/ES-European confirmed,
-PT and LATAM-ES not.)
+Same card, different translation, different set branding, different set code. **Cardmarket does not
+support LATAM-ES at all** (owner) — its filter collapses both editions into one "Spanish" — so
+LATAM-ES cannot be sourced from the harvest and every "Spanish" confirmation strictly means the
+European print.
+
+**If LATAM-ES is ever added as a dimension** (owner guidance):
+
+- Source: the **official public Pokémon site**, not Cardmarket. Probed: `pokemon.com/latam`
+  responds to scripts (HTTP 200); the LATAM card database would hang off that locale.
+- Scope: **from Journey Together (March 2025) onward, sets only.** Prize Packs have no LATAM-ES
+  edition so far.
+- Cards in this dataset that fall inside that scope: `JTG 117`, `xJTG 117` (V1–V3), `SVP 184`
+  (V1/V2 — LATAM specimen-proven, photo above), `POR 063`. Outside scope: `PRE`/`xPRE 076`
+  (released January 2025, before JTG), `SVP 051`/`SVP 122` (older promos), and all
+  `PPS…` Prize Packs.
 
 ### Scope decisions (user)
 
