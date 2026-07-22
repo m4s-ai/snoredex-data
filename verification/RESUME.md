@@ -311,6 +311,14 @@ https://www.pokemon-card.com/card-search/resultAPI.php
 - The search matches fuzzily and returns ゴンベ (Munchlax) alongside カビゴン; filter by name.
 - Detail page `details.php/card/<id>/regu/all` yields collector number, set code (from the card image path) and illustrator.
 
+### Language scope: Spanish
+
+"Spanish" throughout this dataset is Cardmarket's single Spanish filter, which is **European
+Spanish**. Latin-American Spanish became a distinct print edition from **Journey Together (2025)**
+onward, but Cardmarket does not list it as a separate language in the harvested data, so there are
+no LATAM-ES units and none are chased. When the owner confirms "ES" they mean European Spanish and
+explicitly exclude LATAM-ES (e.g. `xPRE 076`: FR/DE/IT/ES-European confirmed, PT and LATAM-ES not).
+
 ### Scope decisions (user)
 
 - **Code cards are out of scope** — 75 units / 7 products moved to `excluded_codecards.json`. They are code inserts, not collectible cards.

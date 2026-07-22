@@ -197,22 +197,22 @@
   </header>
 
   <dl class="totals">
-    <div class="tot is-have"><dt>Confirmed</dt><dd>626</dd></div>
+    <div class="tot is-have"><dt>Confirmed</dt><dd>634</dd></div>
     <div class="tot"><dt>Contradicted</dt><dd>71</dd></div>
-    <div class="tot"><dt>Your call</dt><dd>13</dd></div>
+    <div class="tot"><dt>Your call</dt><dd>5</dd></div>
     <div class="tot is-gap"><dt>Open</dt><dd>9</dd></div>
   </dl>
 
-  <div class="meter" role="img" aria-label="626 confirmed, 71 contradicted, 13 awaiting your decision, 9 open, of 719 claims">
-    <span class="m-have" style="width:87.1%"></span>
+  <div class="meter" role="img" aria-label="634 confirmed, 71 contradicted, 5 awaiting your decision, 9 open, of 719 claims">
+    <span class="m-have" style="width:88.2%"></span>
     <span class="m-contra" style="width:9.9%"></span>
-    <span class="m-manual" style="width:1.8%"></span>
+    <span class="m-manual" style="width:0.7%"></span>
     <span class="m-open" style="width:1.3%"></span>
   </div>
   <p class="meter-key">
-    <span><i class="dot" style="background:var(--have)"></i><b>626 confirmed</b> — external source found</span>
+    <span><i class="dot" style="background:var(--have)"></i><b>634 confirmed</b> — external source found</span>
     <span><i class="dot" style="background:var(--accent)"></i><b>71 contradicted</b> — source says the language does not exist</span>
-    <span><i class="dot" style="background:var(--ink-faint)"></i><b>13 your call</b></span>
+    <span><i class="dot" style="background:var(--ink-faint)"></i><b>5 your call</b></span>
     <span><i class="dot" style="background:var(--gap)"></i><b>9 open</b></span>
   </p>
 
@@ -268,8 +268,11 @@
   <section class="manual">
     <h2>Awaiting your decision</h2>
     <p class="sec-note">
-      No card database will ever carry these. Mark each one confirmed or false in
-      <code>MANUAL_REVIEW.csv</code>.
+      Down to five, and all of them are the same question: does a <strong>Portuguese</strong>
+      printing exist for these Prize Pack / Additionals cards? Every other language on them is
+      resolved. LigaPokemon (Brazilian market) is the natural next check.
+      ("Spanish" throughout means Cardmarket's European Spanish; Latin-American Spanish became a
+      separate edition from Journey Together on but isn't listed as its own language here.)
     </p>
     <div class="rows" id="sec-manual"></div>
   </section>
@@ -297,8 +300,8 @@
     {n:"Snorlax", c:"PPS1 · VIV 131", v:"V1", s:"Play! Pokémon Prize Pack Series One", r:"Prize Pack", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Portuguese absent from the series language table — try LigaPokemon next", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V1-PPS1VIV-131"},
     {n:"Snorlax", c:"PPS1 · VIV 131", v:"V2", s:"Play! Pokémon Prize Pack Series One", r:"Prize Pack", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Portuguese absent from the series language table — try LigaPokemon next", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V2-PPS1VIV-131"},
     {n:"Snorlax", c:"PPS3 · LOR 143", s:"Play! Pokémon Prize Pack Series Three", r:"Prize Pack", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Portuguese absent from the series language table — try LigaPokemon next", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Three/Snorlax-PPS3LOR-143"},
-    {n:"Snorlax ex", c:"xPRE 076", v:"V1", s:"Prismatic Evolutions: Additionals", r:"Stamped promo", g:["French","German","Italian","Portuguese","Spanish"], h:["English"], why:"Special Collection stamp — only the English release is documented", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V1-xPRE076"},
-    {n:"Snorlax ex", c:"xPRE 076", v:"V2", s:"Prismatic Evolutions: Additionals", r:"Jumbo", g:["French","German","Italian","Portuguese","Spanish"], h:["English"], why:"Jumbo printing — only the English release is documented", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V2-xPRE076"},
+    {n:"Snorlax ex", c:"xPRE 076", v:"V1", s:"Prismatic Evolutions: Additionals", r:"Stamped promo", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Owner confirmed FR/DE/IT/ES(European); Portuguese not confirmed", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V1-xPRE076"},
+    {n:"Snorlax ex", c:"xPRE 076", v:"V2", s:"Prismatic Evolutions: Additionals", r:"Jumbo", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Owner confirmed FR/DE/IT/ES(European); Portuguese not confirmed", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V2-xPRE076"},
   ];
 
   const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
