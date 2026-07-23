@@ -9,8 +9,11 @@ function Check($name,$ok,$detail){
 }
 
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
-$cards=(Get-Content "$B\snorlax_cards.json" -Raw -Encoding utf8|ConvertFrom-Json).cards
+$cardDoc=Get-Content "$B\snorlax_cards.json" -Raw -Encoding utf8|ConvertFrom-Json
+$cards=$cardDoc.cards
 $excluded=Get-Content "$V\excluded_codecards.json" -Raw -Encoding utf8|ConvertFrom-Json
+$finishDoc=Get-Content "$V\finish_units.json" -Raw -Encoding utf8|ConvertFrom-Json
+$finishUnits=$finishDoc.units
 
 # --- 1. unit totals and identity ---
 Check "719 units total" ($units.Count -eq 719) "found $($units.Count)"
@@ -74,6 +77,66 @@ $pend=@($units|?{$_.status -eq 'pending'})
 $manual=@($units|?{$_.status -eq 'needs-manual-review'})
 Check "9 pending" ($pend.Count -eq 9) (($pend|%{"$($_.setCode) $($_.number) $($_.language)"}) -join '; ')
 Check "5 manual review, all Portuguese" (($manual.Count -eq 5) -and (@($manual|?{$_.language -ne 'Portuguese'}).Count -eq 0)) (($manual|%{"$($_.setCode) $($_.variant)"}) -join '; ')
+
+# --- 11. finish-verification layer ---
+Check "637 finish units" ($finishUnits.Count -eq 637) "found $($finishUnits.Count)"
+$finishDupIds=@($finishUnits|Group-Object finishUnitId|?{$_.Count -gt 1})
+Check "finishUnitIds unique" ($finishDupIds.Count -eq 0) "$($finishDupIds.Count) duplicates"
+$claimFinishKeys=@($units|%{"$($_.setCode)|$($_.number)|$($_.language)"}|Sort-Object -Unique)
+$actualFinishKeys=@($finishUnits|%{"$($_.setCode)|$($_.number)|$($_.language)"}|Sort-Object -Unique)
+$finishKeyDiff=@(Compare-Object $claimFinishKeys $actualFinishKeys)
+Check "finish units exactly cover claim groups" (($actualFinishKeys.Count -eq 637) -and ($finishKeyDiff.Count -eq 0)) "$($finishKeyDiff.Count) key differences"
+
+$allowedFinishes=@('non-holo','holo','reverse-holo','mirror-holo','unknown')
+$allowedFinishStatuses=@('confirmed','owner-attested','marketplace-claimed','pending')
+$allowedMapStatuses=@('confirmed','partial','pending','not-applicable')
+$allowedPatternStatuses=@('confirmed','partial','pending','not-applicable')
+$badFinishState=@($finishUnits|?{
+  $_.availabilityStatus -notin $allowedFinishStatuses -or
+  $_.productMappingStatus -notin $allowedMapStatuses -or
+  $_.patternStatus -notin $allowedPatternStatuses -or
+  @($_.printings|?{$_.finish -notin $allowedFinishes -or $_.verificationStatus -notin $allowedFinishStatuses}).Count
+})
+Check "finish taxonomy and statuses valid" ($badFinishState.Count -eq 0) (($badFinishState|Select-Object -First 5 -Expand finishUnitId) -join ',')
+
+$allPrintingIds=@($finishUnits|%{$_.printings}|Select-Object -Expand printingId)
+$dupPrintingIds=@($allPrintingIds|Group-Object|?{$_.Count -gt 1})
+Check "printingIds unique" (($allPrintingIds.Count -gt 0) -and ($dupPrintingIds.Count -eq 0)) "$($dupPrintingIds.Count) duplicates"
+
+$badFinishSources=@()
+$badFinishMappings=@()
+$badMarkingRoles=@()
+foreach($finishUnit in $finishUnits){
+  $productVariants=@($finishUnit.products|Select-Object -Expand variant -Unique)
+  foreach($printing in $finishUnit.printings){
+    if(@($printing.sources).Count -eq 0){ $badFinishSources += $printing.printingId }
+    foreach($mappedVariant in @($printing.mappedVariants)){
+      if($mappedVariant -notin $productVariants){ $badFinishMappings += $printing.printingId }
+    }
+    foreach($marking in @($printing.markings|Where-Object {$_})){
+      if($marking.role -notin @('reverse-holo-treatment','distribution-promo')){ $badMarkingRoles += $printing.printingId }
+      if($marking.role -eq 'reverse-holo-treatment' -and $printing.finish -ne 'reverse-holo'){ $badMarkingRoles += $printing.printingId }
+    }
+  }
+}
+Check "finish printings have sources" ($badFinishSources.Count -eq 0) (($badFinishSources|Select-Object -First 5) -join ',')
+Check "finish mappings reference local products" ($badFinishMappings.Count -eq 0) (($badFinishMappings|Select-Object -First 5) -join ',')
+Check "stamp roles valid and finish-safe" ($badMarkingRoles.Count -eq 0) (($badMarkingRoles|Select-Object -First 5) -join ',')
+
+$dragonFrontiers=@($finishUnits|?{$_.setCode -eq 'DF' -and $_.number -eq '10'}|%{$_.printings}|?{
+  $_.finish -eq 'reverse-holo' -and $_.foilPattern -eq 'plain-foil-on-pokemon' -and
+  @($_.markings|?{$_.kind -eq 'set-logo' -and $_.role -eq 'reverse-holo-treatment'}).Count -eq 1
+})
+Check "Dragon Frontiers stamped reverse modeled" ($dragonFrontiers.Count -eq 4) "found $($dragonFrontiers.Count) language printings"
+
+$hopEnglish=$finishUnits|?{$_.setCode -eq 'JTG' -and $_.number -eq '117' -and $_.language -eq 'English'}
+Check "JTG 117 discloses non-holo + holo + reverse" (@('non-holo','holo','reverse-holo'|?{$_ -notin $hopEnglish.availableFinishes}).Count -eq 0) ($hopEnglish.availableFinishes -join ',')
+
+$badCardFinishSummary=@($cards|?{
+  if($_.isCodeCard){ $_.finishAvailability.status -ne 'not-applicable' }
+  else { -not $_.finishAvailability -or @($_.finishAvailability.byLanguage).Count -ne @($_.languages).Count }
+})
+Check "all cards carry finish summaries" ($badCardFinishSummary.Count -eq 0) (($badCardFinishSummary|Select-Object -First 5|%{"$($_.setCode) $($_.number)"}) -join '; ')
 
 Write-Host ""
 if($fail.Count){ Write-Host "=== REVIEW FAILED: $($fail -join ', ') ===" } else { Write-Host "=== ALL CHECKS PASSED ===" }
