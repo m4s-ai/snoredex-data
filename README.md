@@ -1,4 +1,5 @@
 # Snorlax on Cardmarket — dataset & analysis
+n> **Taking over this project?** Start with [`HANDOVER.md`](HANDOVER.md) — the cold-start guide.
 
 Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories, 9 pages, 242 products).
 
