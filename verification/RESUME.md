@@ -1,6 +1,8 @@
 # Verification — state and how to resume
 
-Goal: every **card × language × variant** gets at least one confirmed source **outside Cardmarket**.
+Goal: every **card × language × variant** gets at least one confirmed source **outside Cardmarket**,
+and every physical **set number × language** gets a positive-evidence finish inventory with any
+Cardmarket-product mappings kept explicit.
 
 This file is both the current verification playbook and a chronological research log. Use the
 **Current state** section below for authoritative totals; later counts describe historical
@@ -17,10 +19,38 @@ root.
 | **Needs manual review** | **5** — all the same question: does a Portuguese printing exist? (`xPRE 076` V1/V2, `PPS1 VIV 131` V1/V2, `PPS3 LOR 143`) |
 | Still open | **9** — `BA20`/`WCD23` ES+PT, `sA 10` KO+TC, `mP1 012` KO, `svG 021` TC, `svIba 046` TC |
 | Card-variants fully resolved | **180 / 191** |
+| Finish units (set number × language) | **637** |
+| Finish units with externally confirmed finish | **321** |
+| Finish units with marketplace-only positive claim | **109** |
+| Finish units with no positive finish evidence | **207** |
+| Finish units with unresolved product mapping | **175** |
 
-Run `verification\review_integrity.ps1` after any write pass — 16 structural checks over units, cards, images, evidence log and the documented remainder.
+Run `verification\review_integrity.ps1` after any write pass — 27 structural checks over language
+claims, cards, images, evidence, finish units, printing IDs, product mappings, and stamp roles.
 
 Open items are also published as a browsable page: `verification/open-items.html`.
+
+### Finish verification is a separate positive-evidence layer
+
+`units.json` answers whether a Cardmarket card-product-language claim exists. It does not answer
+whether the physical printing is non-holo, holo, reverse holo, or mirror holo. That second question
+lives in `finish_units.json`, grouped by set number and language because TCGdex's finish flags are
+not product-specific.
+
+Only upstream `true` values are confirmations. A false or missing TCGdex flag stays `pending`; the
+API's own documentation says detailed per-marketplace variant mapping is still being developed.
+Cardmarket's Reverse Holo filter and rarity are retained only as `marketplace-claimed` positives.
+
+Keep `finish`, `foilPattern`, `markings`, `distribution`, and `cardSize` separate. In particular:
+
+- EX-era set-logo stamps intrinsic to a reverse treatment use `role=reverse-holo-treatment`;
+- later prerelease, Staff, retailer, and Pokémon Center stamps use `role=distribution-promo`;
+- a distribution stamp never changes the finish category by itself.
+
+The worked examples are `DF 10` (Dragon Frontiers stamped reverse treatment), `CL 33` and
+`SVP 184` (prerelease/Staff distribution stamps), and `JTG 117` (non-holo + holo + reverse holo).
+Edit curated exceptions in `finish_overrides.json`, not generated `finish_units.json`, then run
+`python scripts/finishes.py`.
 
 ### Deck products put their languages in the infobox, not in a language table
 
@@ -380,6 +410,9 @@ location and can be rerun from any checkout or working directory.
 | `evidence.jsonl` | Append-only log of every confirmation (never rewritten, survives crashes) |
 | `confirmed_sources.json` | Export of all confirmed units with their sources |
 | `UNCONFIRMED.json` | **The gap list** — grouped by card+variant, showing which languages still lack a source |
+| `finish_units.json` | **Finish state store** — set number × language, logical printings, evidence, and product mappings |
+| `finish_overrides.json` | Curated special finish/pattern/stamp/size and mapping facts; edit this, not generated finish units |
+| `FINISH_REVIEW.json` / `.csv` | The remaining finish, reverse/mirror-pattern, and product-mapping queue |
 | `state.json` | Last completed phase |
 | `cache/` | Raw API responses. Deleting a file forces a refetch; keeping it makes resume instant. |
 
@@ -390,12 +423,13 @@ location and can be rerun from any checkout or working directory.
 pwsh -File verification\passes\fetch_full.ps1    # no-op if cache present
 pwsh -File verification\passes\verify2.ps1       # re-matches only open units
 pwsh -File verification\report.ps1               # regenerates coverage + UNCONFIRMED.json
-pwsh -File verification\review_integrity.ps1     # 16 structural checks
+python scripts\finishes.py                       # regenerates finish state/review + main summaries
+pwsh -File verification\review_integrity.ps1     # 27 structural checks
 
 # Layout: verification\*.ps1 are the four recurring tools (report, audit_evidence,
 # classify_manual, review_integrity). verification\passes\ holds every completed one-shot
 # pass in chronological naming. All PowerShell paths derive from $PSScriptRoot. The dataset build
-# pipeline lives in scripts\ (mkunits -> build -> join -> getimages -> finalize -> analyze).
+# pipeline lives in scripts\ (mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes).
 ```
 
 Safe to interrupt at any point — `units.json` is rewritten only after a full pass, and `evidence.jsonl` is appended per confirmation.

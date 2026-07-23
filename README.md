@@ -17,6 +17,7 @@ working directory.
 | [`verification/open-items.html`](verification/open-items.html) | You want a browsable view of the pending and manual-review units. |
 | [`verification/confirmed-releases.html`](verification/confirmed-releases.html) | You want the chronological confirmed-release table. |
 | [`verification/MANUAL_REVIEW.csv`](verification/MANUAL_REVIEW.csv) | You are recording manual verdicts for the remaining hand-checked units. |
+| [`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) | You are resolving finish, reverse/mirror-pattern, or Cardmarket-product mapping gaps. |
 
 For current totals, trust the opening **Current state** sections in `HANDOVER.md` and
 `verification/RESUME.md`; later numbers in `RESUME.md` may describe historical checkpoints.
@@ -27,15 +28,19 @@ Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories,
 
 | File | Contents |
 |---|---|
-| `snorlax_cards.json` | **Main dataset** — 198 Snorlax *singles* with name, set code, set name, languages, rarity, image, variant info, cross-release key |
+| `snorlax_cards.json` | **Main dataset** — 198 Snorlax *singles* with identity, language, rarity, image, variant info, and `finishAvailability` by language |
 | `images/` | 198 card images, one per product (`SETCODE_NUMBER_NAME[_Vn]_ID.jpg`) |
 | `artists_pokemontcgio.json` | 57 English Snorlax-family cards with illustrator credits |
 | `analysis_language_drift.json` | Per-card deviation from its market's language baseline |
 | `analysis_shared_cards.json` | Cards printed across multiple releases, grouped, with artists |
 | `analysis_artists.json` | Artist → printings index |
 | `analysis_variants.json` | Set+number clusters with more than one Cardmarket product |
-| `scripts/` | Reproducible dataset build pipeline (`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze`) |
-| `verification/` | **Source verification layer** — one row per card × language × variant, each with a confirmed source outside Cardmarket. Recurring tools at top level (`report`, `audit_evidence`, `classify_manual`, `review_integrity`); every completed one-shot pass in `verification/passes/`. See `verification/RESUME.md` |
+| `analysis_finishes.json` | Finish coverage, finish combinations, reverse/mirror patterns, and stamp-role counts |
+| `scripts/` | Reproducible dataset build pipeline (`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze` → `finishes`) |
+| `verification/finish_units.json` | **Finish state store** — one row per set number × language, with logical printings, finish/pattern/stamp/size dimensions, evidence, and Cardmarket-product mappings |
+| `verification/FINISH_REVIEW.json` / `.csv` | Finish, pattern, and product-mapping gaps that still need evidence |
+| `verification/finish_overrides.json` | Curated special-printing details that group-level APIs cannot express |
+| `verification/` | **Source verification layer** — language/product claims plus the separate finish layer. Recurring tools at top level (`report`, `audit_evidence`, `classify_manual`, `review_integrity`); completed one-shot passes live in `verification/passes/`. See `verification/RESUME.md` |
 
 242 products − 44 non-card items (playmats, sleeves, binders, tins, blisters, pins, deck boxes) = **198 singles**. Six of those 198 are online/live code cards, flagged `isCodeCard: true`.
 
@@ -45,7 +50,9 @@ Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories,
 - **"Spanish" cannot distinguish European from Latin-American Spanish.** From Journey Together (2025) LATAM-ES is a physically distinct edition for regular sets — not Prize Packs — with different attack translations, set name and set code (specimen-verified for `SVP 184`: "Presión Dinámica"/"Juntos de Aventuras" vs "Plancha Dinámica"/"Aventuras Compartidas"). Cardmarket does not support LATAM-ES; sourcing it would require the official Pokémon site. Every Spanish entry here means the European print. See `verification/RESUME.md`.
 - **`cardKey` groups the same *card*, not the same *artwork*.** Cardmarket derives it from card name + attack names. Reprints with brand-new art share a `cardKey`. That's a feature here — it's exactly how the "same card, new art" cases below were found — but don't read it as art identity.
 - **Artist coverage is 115/198 (58%).** Illustrators come from pokemontcg.io/limitlesstcg (English-market) and the official pokemon-card.com database (Japanese-market). The uncovered rows are mostly Korean/Chinese deck products with no published illustrator credit. Rather than guess, `artist` is left `null` there; use `cardKey` to find a sibling that has one.
-- **Stamp variants are not labelled anywhere in Cardmarket's text.** Master Ball vs Poké Ball holo, prerelease and staff stamps are only distinguishable in the artwork and by Cardmarket splitting them into separate `-V1/-V2/-V3` products. `variantToken` captures the split; naming the stamp would require reading the images.
+- **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** Use `finishAvailability` on each card or the authoritative `verification/finish_units.json`. A `pending` finish means “not established,” never “does not exist.”
+- **A Cardmarket V-token is not a finish.** TCGdex's `normal`/`holo`/`reverse` flags apply to the set number and language; `V1`/`V2`/`V3` mapping is recorded only when it is unambiguous or independently identified.
+- **Stamp role matters.** EX-era set-logo stamps that form part of the reverse-holo design use `markings.role: "reverse-holo-treatment"`. Later prerelease, Staff, retailer, and Pokémon Center stamps use `markings.role: "distribution-promo"` and do not imply reverse holo.
 
 ## Language drift
 
@@ -105,15 +112,51 @@ The market split across all 198: Western 83 · Japanese 68 · Simplified Chinese
 
 **Most-used illustrators:** Ken Sugimori (7 English printings), 5ban Graphics (4), Mitsuhiro Arita (4), Kouki Saitou (3), aky CG Works (3).
 
-## Variants
+## Finishes, foil patterns, and stamps
 
-17 set+number clusters hold more than one Cardmarket product. `variantAxes` records which variant dimensions Cardmarket exposes per product:
+Finish availability is modeled independently of Cardmarket products. The authoritative file has
+**637 set-number-language units**. It currently records at least one externally confirmed finish
+for **321**, a marketplace-only positive claim for **109**, and no positive finish evidence yet
+for **207**. Because upstream catalogues are incomplete, this is deliberately a positive-evidence
+model: an unlisted finish remains `pending` rather than being marked unavailable.
 
-- **`Reverse Holo`** — present on regular set cards, absent on promos.
-- **`First Edition?`** — present on pre-2020 sets, absent on modern ones.
-- Rarity itself carries variant meaning: `Illustration Rare`, `Special Illustration Rare`, `Character Rare`, `Shiny Rare`, `Rainbow Rare`, `Secret Rare`, `Triple Rare`, `Oversized`, `Prize Pack Series`, `World Championship Deck`.
+Current positive coverage (units can appear in more than one row):
 
-Examples: `sv2a 143` has V1/V2 (base vs Master Ball/Poké Ball holo); `SSH 142` has three products (Ultra Rare, Rainbow Rare `206`, Oversized); `xJTG 117` has V1/V2/V3 with V3 English-only.
+| Known available finish | Set-number-language units |
+|---|---:|
+| Non-holo | 272 |
+| Holo | 136 |
+| Reverse holo | 240 |
+| Mirror holo | 10 |
+| Both non-holo and holo | 24 |
+
+Each unit contains `finishStatus` for `non-holo`, `holo`, `reverse-holo`, and `mirror-holo`, plus
+one or more physical `printings`. A printing keeps four separate dimensions:
+
+- `finish` — non-holo, holo, reverse-holo, mirror-holo, or temporarily unknown;
+- `foilPattern` — for example Cosmos, crosshatch, tiled type symbol, Poké Ball, or Master Ball;
+- `markings` — a physical set logo, Staff, retailer, or Pokémon Center stamp, including its role;
+- `distribution` and `cardSize` — how it was released and whether it is standard or jumbo.
+
+The distinction fixes two easy-to-confuse cases. `DF 10` has a normal holo printing and an
+EX Dragon Frontiers reverse holo whose set-logo stamp is intrinsic to that reverse treatment.
+By contrast, `CL 33`, `VIV 131`, and `SVP 184` have later prerelease/Staff set-name stamps recorded
+as distribution promos; the stamp itself does not make a card reverse holo. `JTG 117` now explicitly
+shows non-holo, holo, and intricate-tile reverse-holo availability by language.
+
+Run `python scripts/finishes.py` after rebuilding the main dataset. It caches TCGdex responses in
+the gitignored `verification/cache/finish-tcgdex/`, regenerates all finish outputs, and reattaches
+the per-product summaries to `snorlax_cards.json`.
+
+## Cardmarket product variants
+
+17 set+number clusters hold more than one Cardmarket product. `variantToken` preserves Cardmarket's
+opaque V1/V2/V3 split; it does not have a universal meaning. `variantAxes` preserves Cardmarket's
+filter UI only as a hint.
+
+Examples: `xsv2a 143` maps V1 to Poké Ball mirror holo and V2 to Master Ball mirror holo;
+`PPS8 JTG 117` maps V1 to non-holo and V2 to Cosmos holo; `SSH 142` separates standard and jumbo
+products; `xJTG 117` has three distribution stamps whose finish is still pending.
 
 ## Collection method
 
