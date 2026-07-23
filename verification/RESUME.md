@@ -20,9 +20,12 @@ root.
 | Still open | **9** — `BA20`/`WCD23` ES+PT, `sA 10` KO+TC, `mP1 012` KO, `svG 021` TC, `svIba 046` TC |
 | Card-variants fully resolved | **180 / 191** |
 | Finish units (set number × language) | **637** |
-| Finish units with externally confirmed finish | **321** |
-| Finish units with marketplace-only positive claim | **109** |
-| Finish units with no positive finish evidence | **207** |
+| Finish units with externally confirmed finish | **331** |
+| Finish units with marketplace-only positive claim | **104** |
+| Applicable finish units with no positive finish evidence | **138** |
+| Finish units not applicable because all product-language claims are contradicted | **64** |
+| Finish units in the remaining review queue | **233** |
+| Finish units covered by a complete official manifest | **4** — English `DF 10`, `PPS3 LOR 143`, `PPS7 JTG 117`, `PPS8 JTG 117` |
 | Finish units with unresolved product mapping | **175** |
 
 Run `verification\review_integrity.ps1` after any write pass — 27 structural checks over language
@@ -40,6 +43,14 @@ not product-specific.
 Only upstream `true` values are confirmations. A false or missing TCGdex flag stays `pending`; the
 API's own documentation says detailed per-marketplace variant mapping is still being developed.
 Cardmarket's Reverse Holo filter and rarity are retained only as `marketplace-claimed` positives.
+When every underlying product-language claim is contradicted, the finish unit remains in the state
+store as `not-applicable` for exact key coverage but is not finish-research work and does not appear
+in `FINISH_REVIEW`.
+
+Only a complete official checklist with explicit finish columns can establish that a covered
+alternative is absent. TCGdex false values, TCGCSV subtype omissions, PSA population omissions, and
+catalogue gaps cannot. The source ladder, exact endpoints, and current special-case findings are in
+[`FINISH_SOURCES.md`](FINISH_SOURCES.md).
 
 Keep `finish`, `foilPattern`, `markings`, `distribution`, and `cardSize` separate. In particular:
 
@@ -412,6 +423,8 @@ location and can be rerun from any checkout or working directory.
 | `UNCONFIRMED.json` | **The gap list** — grouped by card+variant, showing which languages still lack a source |
 | `finish_units.json` | **Finish state store** — set number × language, logical printings, evidence, and product mappings |
 | `finish_overrides.json` | Curated special finish/pattern/stamp/size and mapping facts; edit this, not generated finish units |
+| `FINISH_SOURCES.md` | Finish evidence hierarchy, confirmed cases, exact source endpoints, and next research targets |
+| `verify_finish_sources.ps1` | Live check of TCGCSV product identity and the positive subtypes declared in `finish_overrides.json` |
 | `FINISH_REVIEW.json` / `.csv` | The remaining finish, reverse/mirror-pattern, and product-mapping queue |
 | `state.json` | Last completed phase |
 | `cache/` | Raw API responses. Deleting a file forces a refetch; keeping it makes resume instant. |
@@ -424,10 +437,11 @@ pwsh -File verification\passes\fetch_full.ps1    # no-op if cache present
 pwsh -File verification\passes\verify2.ps1       # re-matches only open units
 pwsh -File verification\report.ps1               # regenerates coverage + UNCONFIRMED.json
 python scripts\finishes.py                       # regenerates finish state/review + main summaries
+pwsh -File verification\verify_finish_sources.ps1 # validates exact TCGCSV IDs/subtypes
 pwsh -File verification\review_integrity.ps1     # 27 structural checks
 
-# Layout: verification\*.ps1 are the four recurring tools (report, audit_evidence,
-# classify_manual, review_integrity). verification\passes\ holds every completed one-shot
+# Layout: verification\*.ps1 are the five recurring tools (report, audit_evidence,
+# classify_manual, verify_finish_sources, review_integrity). verification\passes\ holds every completed one-shot
 # pass in chronological naming. All PowerShell paths derive from $PSScriptRoot. The dataset build
 # pipeline lives in scripts\ (mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes).
 ```
