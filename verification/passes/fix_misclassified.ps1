@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 
 # BUG FIX. classify_manual.ps1 used  $u.setCode -match '^x'  to detect Cardmarket

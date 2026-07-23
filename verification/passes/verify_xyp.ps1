@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 $jpUrl='https://bulbapedia.bulbagarden.net/wiki/XY-P_Promotional_cards_(TCG)'
 $srcType='Bulbapedia (fan wiki), Japanese promo series article + Korean promo series article'

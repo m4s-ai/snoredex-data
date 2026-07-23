@@ -1,5 +1,5 @@
 $ErrorActionPreference='Continue'
-$base="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$base=Split-Path -Parent $PSScriptRoot
 $cache="$base\cache"
 $ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36"
 $langs=@('en','fr','de','es','it','pt','pt-br','nl','pl','ru','ja','ko','zh-tw','zh-cn','id','th')

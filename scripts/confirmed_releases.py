@@ -9,8 +9,9 @@ Date sources, in precedence order:
 Outputs: verification/confirmed-releases.html + analysis_confirmed_releases.json
 """
 import json, io, html, os
+from pathlib import Path
 
-B = r"C:\Users\marku\Claude\snorlax-cardmarket"
+B = Path(__file__).resolve().parent.parent
 cards = json.load(io.open(os.path.join(B, "snorlax_cards.json"), encoding="utf-8"))["cards"]
 units = json.load(io.open(os.path.join(B, "verification", "units.json"), encoding="utf-8"))
 artists = json.load(io.open(os.path.join(B, "artists_pokemontcgio.json"), encoding="utf-8"))

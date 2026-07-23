@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$base="C:\Users\marku\Claude\snorlax-cardmarket"
+$base=Split-Path -Parent $PSScriptRoot
 $cards=Get-Content "$base\_cards_stage3.json" -Raw -Encoding utf8|ConvertFrom-Json
 $WEST=@('English','French','German','Spanish','Italian','Portuguese')
 $ASIA=@('Japanese','Korean','T-Chinese')

@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$V=$PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 
 # Audit for the $EV/$ev case-insensitivity bug: any resolved unit whose evidence is
