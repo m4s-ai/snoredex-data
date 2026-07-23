@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 $KSS='https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)'
 $TYPE='Bulbapedia (fan wiki), expansion article'

@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 
 # Physical holo specimens of the PPS8 (Play! Pokemon Prize Pack Series Eight) Hop's Snorlax

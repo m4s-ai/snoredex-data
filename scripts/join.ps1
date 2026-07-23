@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$base="C:\Users\marku\Claude\snorlax-cardmarket"
+$base=Split-Path -Parent $PSScriptRoot
 $cards=Get-Content "$base\_cards_stage1.json" -Raw -Encoding utf8|ConvertFrom-Json
 $src=Get-Content "$base\artists_pokemontcgio.json" -Raw -Encoding utf8|ConvertFrom-Json
 

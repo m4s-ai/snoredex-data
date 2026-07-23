@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$B="C:\Users\marku\Claude\snorlax-cardmarket"
+$B=Split-Path -Parent $PSScriptRoot
 $V="$B\verification"
 $fail=@()
 function Check($name,$ok,$detail){

@@ -2,6 +2,11 @@
 
 Goal: every **card × language × variant** gets at least one confirmed source **outside Cardmarket**.
 
+This file is both the current verification playbook and a chronological research log. Use the
+**Current state** section below for authoritative totals; later counts describe historical
+checkpoints unless explicitly marked current. Paths and commands are relative to the repository
+root.
+
 ## Current state
 
 | | |
@@ -83,7 +88,8 @@ Six specimens were photographed and their card text read off — `Relaxo` / `Ron
 
 **Grade physical evidence explicitly.** `sourceType` distinguishes *photographed specimen* from *owner attestation*; `passes/verify_xypr_pt.ps1` reports how many units rest on attestation alone. That count is currently **0**.
 
-Every card now has at least one confirmed language. The 25 open units are all *additional* language claims on cards that are otherwise evidenced.
+At this checkpoint, every card had at least one confirmed language. The then-25 open units were
+all *additional* language claims on cards that were otherwise evidenced.
 
 ### PowerShell variable names are case-insensitive — this bit twice
 
@@ -229,7 +235,9 @@ Resolved from that:
 
 ### `needs-manual-review` — handed to the user
 
-51 units remain genuinely undocumentable: Prize Pack Series Seven and Eight have no "In other languages" table (categorized only as *English promotional cards*), and Portuguese is absent from the Series One/Three tables.
+At this checkpoint, 51 units remained genuinely undocumentable: Prize Pack Series Seven and
+Eight had no "In other languages" table (categorized only as *English promotional cards*), and
+Portuguese was absent from the Series One/Three tables.
 
 Deliverables for hand-checking: **`MANUAL_REVIEW.csv`** (flat, one row per unit, with empty `verdict` / `yourSource` columns) and **`MANUAL_REVIEW.json`** (grouped per card-variant, showing which languages are already confirmed for the same card). Fill `verdict` with `confirmed` or `false`.
 
@@ -273,7 +281,8 @@ Find the right article titles with:
 
 Cardmarket's set names do **not** match Bulbapedia's article titles for Chinese products. Confirmed mappings: `CS6bC` Azure Shadow → *Marine Shadow*, `CS5aC` Brave Stars → *Gallant Galaxy*, `CSV10C` Chasing Glory Together → *Together in Pursuit of Glory*, `CSVL1C` Adventure Special Pack → *Journey Theme Pack*, `CSZC` Variety Treasure Box → *Peripheral Collection Gift Box: Variety Treasure Box*.
 
-Artist coverage in the main dataset is now **113/198**, all from the official Japanese database or pokemontcg.io — never inferred.
+Artist coverage at this checkpoint reached **113/198**, all from the official Japanese database
+or pokemontcg.io — never inferred.
 
 ### `KSS 26` — the worked example of the Cardmarket artefact
 
@@ -297,9 +306,16 @@ Phases: `tcgdex` → `tcgdex-full` → `asia-official` → `exclude-codecards` �
 
 ### The Traditional Chinese problem
 
-12 of the 19 contradictions are Traditional Chinese on **pre-2021 Japanese sets** — Tag Bolt, Double Blaze, Wild Blaze, Plasma Gale, Rebellion Crash, Shield, Awakening Psychic King. The Traditional Chinese TCG only launched around 2020/21, so those sets never had a Traditional Chinese printing, yet Cardmarket offers the language filter for them. This is the same artefact as `KSS 26`: the filter reflects Cardmarket's global language list, not print reality. Expect the same for the remaining 30 open T-Chinese units on old sets.
+At this checkpoint, 12 of the then-19 contradictions were Traditional Chinese on **pre-2021
+Japanese sets** — Tag Bolt, Double Blaze, Wild Blaze, Plasma Gale, Rebellion Crash, Shield,
+Awakening Psychic King. The Traditional Chinese TCG only launched around 2020/21, so those sets
+never had a Traditional Chinese printing, yet Cardmarket offers the language filter for them.
+This is the same artefact as `KSS 26`: the filter reflects Cardmarket's global language list,
+not print reality. Thirty T-Chinese units on old sets were still open at that stage.
 
-Side benefit: the official Japanese database also publishes illustrators, so artist coverage in the **main dataset rose from 79/198 to 108/198**. See `artists_official_jp.json` and `backfill_artists.ps1`.
+Side benefit at this stage: the official Japanese database also publishes illustrators, so artist
+coverage in the **main dataset rose from 79/198 to 108/198**. See `artists_official_jp.json` and
+`backfill_artists.ps1`.
 
 ### Official Japanese API — hard-won details
 
@@ -352,7 +368,9 @@ European print.
 
 Rare-language checks turned up something more useful than a gap: for 7 units an external source **actively refutes** Cardmarket's language claim. This confirms the caveat in the main README — Cardmarket's language filter reflects seller listings and, for some products, appears to fall back to a full global language list rather than actual print availability. `KSS 26` is the clearest case: Cardmarket shows 17 languages, Bulbapedia documents 7. See `CONTRADICTED.json`.
 
-Everything is checkpointed. Re-running any script is safe and idempotent — confirmed units are skipped, caches are reused, nothing is re-fetched.
+Everything is checkpointed, and passes were designed to be idempotent: confirmed units are
+skipped, caches are reused, and nothing is re-fetched. Scripts derive paths from their own
+location and can be rerun from any checkout or working directory.
 
 ## Files
 
@@ -368,7 +386,7 @@ Everything is checkpointed. Re-running any script is safe and idempotent — con
 ## Resume procedure
 
 ```powershell
-cd C:\Users\marku\Claude\snorlax-cardmarket
+# Run from the repository root.
 pwsh -File verification\passes\fetch_full.ps1    # no-op if cache present
 pwsh -File verification\passes\verify2.ps1       # re-matches only open units
 pwsh -File verification\report.ps1               # regenerates coverage + UNCONFIRMED.json
@@ -376,9 +394,8 @@ pwsh -File verification\review_integrity.ps1     # 16 structural checks
 
 # Layout: verification\*.ps1 are the four recurring tools (report, audit_evidence,
 # classify_manual, review_integrity). verification\passes\ holds every completed one-shot
-# pass in chronological naming — they all use absolute paths and remain runnable. The
-# dataset build pipeline lives in scripts\ (mkunits -> build -> join -> getimages ->
-# finalize -> analyze).
+# pass in chronological naming. All PowerShell paths derive from $PSScriptRoot. The dataset build
+# pipeline lives in scripts\ (mkunits -> build -> join -> getimages -> finalize -> analyze).
 ```
 
 Safe to interrupt at any point — `units.json` is rewritten only after a full pass, and `evidence.jsonl` is appended per confirmation.
@@ -399,7 +416,7 @@ Safe to interrupt at any point — `units.json` is rewritten only after a full p
 - **HTTP 403 to scripts:** Bulbapedia, tcgcollector, eBay. Browser tool only.
 - **Working but unintegrated:** `pokellector` (incl. `jp.` subdomain), `yuyu-tei` (JP shop listings), `pokemon-card.com` detail pages (JS-driven search, but direct `details.php/card/{id}` works), serebii, pkmncards.
 
-## Where the remaining 442 sit
+## Historical checkpoint — where the then-remaining 442 sat
 
 | Cluster | Open units | Why | Next source |
 |---|---|---|---|
@@ -410,6 +427,9 @@ Safe to interrupt at any point — `units.json` is rewritten only after a full p
 | Korean / Simplified-Chinese | ~112 | TCGdex has almost no ko/zh-cn cards | `asia.pokemon-card.com`, official CN site |
 | Dutch / Polish / Russian / Czech / Hungarian | ~29 | Very small print regions | Bulbapedia set pages (via browser), eBay listings |
 
-## Open policy question
+## Historical policy question — resolved
 
-The "Additionals" and Prize-Pack rows are the **same physical card** as a printing that is already confirmed — Cardmarket just files them as separate products. They are currently counted as *unconfirmed* rather than inheriting their base card's source, because inheriting would overstate the evidence. If you would rather they inherit (with the relationship recorded in `evidence`), that is a one-line change in `verify2.ps1` and would close roughly 80 units.
+The "Additionals" and Prize-Pack rows are the **same physical card** as a printing that is already
+confirmed — Cardmarket just files them as separate products. Inheriting the base card's evidence
+was considered here, but the owner later resolved the policy: Prize Packs and `x…` Additionals
+must be verified independently. See **Scope decisions (user)** above.

@@ -1,5 +1,5 @@
 $ErrorActionPreference='Continue'
-$V="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $ua="Mozilla/5.0"
 $langs=@('en','fr','de','es','it','pt','pt-br','nl','pl','ru','ja','ko','zh-tw','zh-cn','id','th')
 foreach($l in $langs){

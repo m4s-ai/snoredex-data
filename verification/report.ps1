@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\Users\marku\Claude\snorlax-cardmarket\verification"
+$V=$PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 $conf=@($units|?{$_.status -eq 'confirmed'})
 $contra=@($units|?{$_.status -eq 'contradicted'})
