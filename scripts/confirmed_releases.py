@@ -150,6 +150,9 @@ for u in units:
 LANG_ORDER = ["English","French","German","Italian","Spanish","Portuguese","Dutch","Polish",
               "Russian","Japanese","Korean","T-Chinese","S-Chinese","Indonesian","Thai"]
 
+def order(ls):
+    return [l for l in LANG_ORDER if l in ls]
+
 rows = []
 skipped = []
 for c in cards:
@@ -157,25 +160,33 @@ for c in cards:
         continue
     vt = c.get("variantToken") or "base"
     key = (c["setCode"], str(c.get("number") or ""), vt)
-    langs = conf.get(key, [])
-    langs = [l for l in LANG_ORDER if l in langs]
+    langs = order(conf.get(key, []))
     if not langs:
         skipped.append(key)
         continue
     d, exact = get_date(c)
-    rows.append({
+    ed = c.get("editions") or {}
+    base = {
         "date": d, "dateExact": exact,
         "name": c["name"], "setCode": c["setCode"], "number": c.get("number"),
         "setName": c["setName"], "variant": vt,
         "variantName": c.get("variantName"), "rarity": c.get("rarity"),
-        "artist": c.get("artist"), "confirmedLanguages": langs,
-        "cardmarketUrl": c["productUrl"], "image": c["imageFile"],
-    })
+        "artist": c.get("artist"), "cardmarketUrl": c["productUrl"], "image": c["imageFile"],
+    }
+    if ed.get("hasFirstEdition"):
+        fe = order([l for l in ed.get("firstEditionLanguages", []) if l in langs])
+        # 1st Edition run (edord=0 so it sorts before Unlimited), then Unlimited run
+        rows.append({**base, "edition": "1st Edition", "edord": 0, "confirmedLanguages": fe})
+        rows.append({**base, "edition": "Unlimited",   "edord": 1, "confirmedLanguages": langs})
+    elif ed.get("system") in ("WOTC-unlimited-only", "JP-unlimited-only"):
+        rows.append({**base, "edition": "Unlimited", "edord": 1, "confirmedLanguages": langs})
+    else:
+        rows.append({**base, "edition": "—", "edord": 1, "confirmedLanguages": langs})
 
-rows.sort(key=lambda r: (r["date"], r["setName"], str(r["number"]), r["variant"]))
+rows.sort(key=lambda r: (r["date"], r["setName"], str(r["number"]), r["variant"], r["edord"]))
 
 json.dump({"generated": "2026-07-23",
-           "note": "One row per card-variant; confirmedLanguages holds only externally confirmed printings. dateExact=false means the date is approximate (year-level).",
+           "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). dateExact=false means the date is approximate (year-level). For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
            "variants": rows},
           io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
@@ -196,18 +207,20 @@ LANG_CODE = {"English":"EN","French":"FR","German":"DE","Italian":"IT","Spanish"
              "Portuguese":"PT","Dutch":"NL","Polish":"PL","Russian":"RU","Japanese":"JA",
              "Korean":"KO","T-Chinese":"ZH-T","S-Chinese":"ZH-S","Indonesian":"ID","Thai":"TH"}
 LANG_COLS = [LANG_CODE[l] for l in LANG_ORDER]
-total_langs = sum(len(r["confirmedLanguages"]) for r in rows)
+# canonical count: each confirmed card x language once (Unlimited / no-edition rows carry all langs)
+total_langs = sum(len(r["confirmedLanguages"]) for r in rows if r["edition"] != "1st Edition")
+fe_langs = sum(len(r["confirmedLanguages"]) for r in rows if r["edition"] == "1st Edition")
 
 # --- CSV (Excel-friendly matrix: one column per language, X = confirmed) ---
 import csv
 with io.open(os.path.join(B, "analysis_confirmed_releases.csv"), "w", encoding="utf-8-sig", newline="") as f:
     w = csv.writer(f, delimiter=";")
-    w.writerow(["#","Release","Date exact","Card","Set code","Number","Variant","Variant name",
+    w.writerow(["#","Release","Date exact","Card","Set code","Number","Edition","Variant","Variant name",
                 "Set / expansion","Rarity","Artist","Langs"] + LANG_COLS + ["Cardmarket URL"])
     for i, r in enumerate(rows, 1):
         have = {LANG_CODE[l] for l in r["confirmedLanguages"]}
         w.writerow([i, fmt_date(r), "yes" if r["dateExact"] else "approx",
-                    r["name"], r["setCode"], r["number"] or "", r["variant"],
+                    r["name"], r["setCode"], r["number"] or "", r["edition"], r["variant"],
                     r.get("variantName") or "", r["setName"], r.get("rarity") or "",
                     r.get("artist") or "", len(r["confirmedLanguages"])]
                    + ["X" if c in have else "" for c in LANG_COLS]
@@ -219,25 +232,31 @@ def cell_langs(r):
     return "".join(f'<td class="L{" on" if c in have else ""}">{c if c in have else ""}</td>' for c in LANG_COLS)
 
 lang_head = "".join(f'<th class="L" title="{html.escape(l)}">{LANG_CODE[l]}</th>' for l in LANG_ORDER)
+n_cards = len({(r["setCode"], str(r["number"]), r["variant"]) for r in rows})
+fe_count = len({(r["setCode"], str(r["number"]), r["variant"]) for r in rows if r["edition"] == "1st Edition"})
 
 trs = []
 prev_year = None
 for i, r in enumerate(rows, 1):
     y = r["date"][:4]
     if y != prev_year:
-        trs.append(f'<tr class="yr"><td colspan="{7+len(LANG_COLS)+1}">{y}</td></tr>')
+        trs.append(f'<tr class="yr"><td colspan="{8+len(LANG_COLS)+1}">{y}</td></tr>')
         prev_year = y
     variant = html.escape(r["variant"]) if r["variant"] != "base" else '<span class="dim">base</span>'
     if r.get("variantName"):
         variant += f'<div class="vn" title="{html.escape(r["variantName"])}">{html.escape(r["variantName"])}</div>'
     num = html.escape(str(r["number"])) if r["number"] else ""
     dcls = "d" if r["dateExact"] else "d approx"
+    ed = r["edition"]
+    edcls = "ed1" if ed == "1st Edition" else ("edu" if ed == "Unlimited" else "edn")
+    edtxt = "1st Ed." if ed == "1st Edition" else ed
     trs.append(f'''<tr>
 <td class="n">{i}</td>
 <td class="{dcls}">{fmt_date(r)}</td>
 <td class="nm"><a href="{html.escape(r["cardmarketUrl"])}" target="_blank" rel="noopener">{html.escape(r["name"])}</a></td>
 <td class="code">{html.escape(r["setCode"])}</td>
 <td class="code num">{num}</td>
+<td class="ed"><span class="{edcls}">{edtxt}</span></td>
 <td class="var">{variant}</td>
 <td class="set">{html.escape(r["setName"])}<span class="rar">{html.escape(r.get("rarity") or "")}</span></td>
 {cell_langs(r)}
@@ -290,6 +309,13 @@ page = f'''<title>Snorlax — confirmed printings, chronological</title>
   td.nm a:hover {{ color:var(--accent); text-decoration:underline; }}
   td.code {{ font-family:var(--mono); color:var(--accent); white-space:nowrap; }}
   td.num {{ color:var(--ink-soft); }}
+  td.ed {{ white-space:nowrap; }}
+  td.ed span {{ font-family:var(--mono); font-size:.68rem; padding:.1rem .35rem; border-radius:2px; letter-spacing:.02em; }}
+  .ed1 {{ background:#B9761722; color:#9C5417; border:1px solid #9C541766; font-weight:700; }}
+  .edu {{ color:var(--ink-faint); }}
+  .edn {{ color:var(--ink-faint); opacity:.5; }}
+  @media (prefers-color-scheme: dark) {{ .ed1 {{ background:#DC9B5722; color:#DC9B57; border-color:#DC9B5766; }} }}
+  :root[data-theme="dark"] .ed1 {{ background:#DC9B5722; color:#DC9B57; border-color:#DC9B5766; }}
   td.var {{ font-family:var(--mono); font-size:.76rem; color:var(--ink-soft); }}
   td.var .dim {{ color:var(--ink-faint); }}
   td.var .vn {{ font-family:var(--sans); font-style:italic; font-size:.72rem; color:var(--ink-faint);
@@ -307,18 +333,21 @@ page = f'''<title>Snorlax — confirmed printings, chronological</title>
 <div class="wrap">
   <div class="eyebrow">Cardmarket · Snorlax · source verification</div>
   <h1>Confirmed printings — chronological table</h1>
-  <p class="lede">{len(rows)} card-variants, 1997–2026, with {total_langs} externally confirmed
-  language printings. One row per variant; a language cell is filled only where an outside source
-  confirmed that printing — contradicted and still-open claims are blank.</p>
+  <p class="lede">{n_cards} card-variants, 1997–2026, carrying {total_langs} externally confirmed
+  card×language printings. A language cell is filled only where an outside source confirmed that
+  printing — contradicted and still-open claims are blank. The {n_cards} variants render as
+  {len(rows)} rows because the {fe_count} cards with a 1st-edition run appear twice —
+  <span class="ed1" style="padding:.05rem .3rem;border-radius:2px">1st Ed.</span> (the {fe_langs}
+  languages that got a first-edition run) then Unlimited (all confirmed languages).</p>
   <div class="legend">
-    <span><b>Date</b> ISO; <b><i>~YYYY</i></b> italic = approximate (set-level, not pinned to a source)</span>
-    <span><b>EN FR DE IT ES PT</b> = European · <b>NL PL RU</b> · <b>JA KO ZH-T ZH-S ID TH</b> = Asian</span>
-    <span>"ES" is European Spanish; LATAM-ES is a separate edition Cardmarket doesn't list</span>
+    <span><b>Edition</b> from Bulbapedia + Elite Fourum: WOTC 1st ed = Base Set→Neo Destiny (not Base Set 2); Japanese 1st ed = ADV/e-Card→XY (none since Sun &amp; Moon); Korean/Chinese never</span>
+    <span><b>Date</b> ISO; <b><i>~YYYY</i></b> italic = approximate</span>
+    <span><b>EN FR DE IT ES PT</b> European · <b>NL PL RU</b> · <b>JA KO ZH-T ZH-S ID TH</b> Asian. ES = European Spanish (LATAM-ES not listed by Cardmarket)</span>
   </div>
   <div class="scroll">
     <table>
       <thead><tr>
-        <th>#</th><th>Release</th><th>Card</th><th>Set</th><th>No.</th><th>Variant</th><th>Expansion</th>
+        <th>#</th><th>Release</th><th>Card</th><th>Set</th><th>No.</th><th>Edition</th><th>Variant</th><th>Expansion</th>
         {lang_head}<th class="L" title="confirmed language count">Σ</th>
       </tr></thead>
       <tbody>
