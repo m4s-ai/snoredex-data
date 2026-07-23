@@ -1,0 +1,613 @@
+{
+  "meta": {
+    "description": "Curated finish, foil-pattern, marking, size, and Cardmarket-product mappings that cannot be represented by TCGdex's group-level normal/holo/reverse flags.",
+    "lastUpdated": "2026-07-23",
+    "policy": [
+      "A physical stamp is recorded in markings; the way a card was distributed is recorded separately in distribution.",
+      "EX-era set-logo stamps that are intrinsic to the reverse-holo design use role=reverse-holo-treatment.",
+      "Prerelease, Staff, retailer, Pokemon Center, and similar later stamps use role=distribution-promo and do not imply reverse holo.",
+      "An override applies only where its mapped Cardmarket variant exists for the language, unless mappedVariants is empty."
+    ]
+  },
+  "sources": {
+    "holofoil-patterns": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+      "sourceType": "Bulbapedia holofoil pattern history",
+      "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+    },
+    "dragon-frontiers-specimen": {
+      "url": "https://exorgames.com/products/snorlax-10-101-delta-species-stamped-ex-dragon-frontiers",
+      "sourceType": "Retail listing with identified physical printing",
+      "evidence": "Identifies Snorlax 10/101 as the stamped EX Dragon Frontiers reverse-holo printing."
+    },
+    "rising-rivals-snorlax": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Rising_Rivals_33)",
+      "sourceType": "Bulbapedia card release history",
+      "evidence": "Documents the special English Crosshatch Holofoil Pokemon League Rival Season printing."
+    },
+    "call-of-legends-snorlax": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Call_of_Legends_33)",
+      "sourceType": "Bulbapedia card release history",
+      "evidence": "Documents the Call of Legends prerelease promo and the specially stamped Staff printing."
+    },
+    "pokemon-go-set": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/S10b",
+      "sourceType": "Bulbapedia expansion release list",
+      "evidence": "Lists Snorlax 055 as a Cosmos Holofoil Pokemon GO Tin exclusive."
+    },
+    "sv-promos": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/SVP_Black_Star_Promos_(TCG)",
+      "sourceType": "Bulbapedia promo release list",
+      "evidence": "Lists the relevant SV Black Star Promo distributions and stamped printings."
+    },
+    "sv-etb": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Elite_Trainer_Box",
+      "sourceType": "Bulbapedia product release history",
+      "evidence": "Documents the standard and Pokemon Center-stamped Snorlax SVP 051 Elite Trainer Box promos."
+    },
+    "cardmarket-stock-image": {
+      "url": null,
+      "sourceType": "Cardmarket stock image (visual evidence)",
+      "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence."
+    },
+    "owner-scan-review": {
+      "url": null,
+      "sourceType": "Owner attestation plus downloaded scan review",
+      "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan."
+    }
+  },
+  "overrides": [
+    {
+      "setCode": "DF",
+      "number": "10",
+      "suppressAutoFinishes": ["reverse-holo"],
+      "printings": [
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "plain-foil-on-pokemon",
+          "markings": [
+            {
+              "kind": "set-logo",
+              "text": "EX Dragon Frontiers",
+              "role": "reverse-holo-treatment"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": ["base"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["holofoil-patterns", "dragon-frontiers-specimen"]
+        }
+      ]
+    },
+    {
+      "setCode": "RR",
+      "number": "33",
+      "mapAutoFinishes": {
+        "non-holo": ["V1"],
+        "reverse-holo": ["V1"]
+      }
+    },
+    {
+      "setCode": "RR",
+      "number": "33",
+      "languages": ["English"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "crosshatch",
+          "markings": [],
+          "distribution": {
+            "kind": "pokemon-league",
+            "name": "Rival Season",
+            "date": "2009-09"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["rising-rivals-snorlax", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "CL",
+      "number": "33",
+      "mapAutoFinishes": {
+        "non-holo": ["V1"],
+        "reverse-holo": ["V1"]
+      }
+    },
+    {
+      "setCode": "CL",
+      "number": "33",
+      "languages": ["English"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "set-logo",
+              "text": "Call of Legends",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease",
+            "name": "Call of Legends Prerelease"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["call-of-legends-snorlax", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "staff",
+              "text": "Staff",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease-staff",
+            "name": "Call of Legends Prerelease Staff"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["call-of-legends-snorlax"]
+        }
+      ]
+    },
+    {
+      "setCode": "PGO",
+      "number": "055",
+      "mapAutoFinishes": {
+        "reverse-holo": ["V1"]
+      }
+    },
+    {
+      "setCode": "PGO",
+      "number": "055",
+      "languages": ["English"],
+      "suppressAutoFinishes": ["holo"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": {
+            "kind": "booster-set",
+            "name": "Pokemon GO"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": [],
+          "distribution": {
+            "kind": "tin-exclusive",
+            "name": "Pokemon GO Tin"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["pokemon-go-set", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "VIV",
+      "number": "131",
+      "mapAutoFinishes": {
+        "reverse-holo": ["V1"]
+      }
+    },
+    {
+      "setCode": "VIV",
+      "number": "131",
+      "languages": ["English"],
+      "suppressAutoFinishes": ["holo"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": {
+            "kind": "booster-set",
+            "name": "Vivid Voltage"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "set-logo",
+              "text": "Vivid Voltage",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease",
+            "name": "Vivid Voltage Build & Battle"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "SVP",
+      "number": "051",
+      "languages": ["English"],
+      "suppressAutoFinishes": ["holo"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": {
+            "kind": "elite-trainer-box",
+            "name": "Pokemon 151 Elite Trainer Box"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["sv-etb", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "pokemon-center",
+              "text": "Pokemon Center",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "pokemon-center-elite-trainer-box",
+            "name": "Pokemon Center 151 Elite Trainer Box"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["sv-etb", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "SVP",
+      "number": "184",
+      "languages": ["English"],
+      "suppressAutoFinishes": ["holo"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "set-logo",
+              "text": "Journey Together",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease",
+            "name": "Journey Together Prerelease"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["sv-promos", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "staff",
+              "text": "Staff",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease-staff",
+            "name": "Journey Together Prerelease Staff"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["sv-promos", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "FLF",
+      "number": "80",
+      "mapAutoFinishes": {
+        "non-holo": ["V1"],
+        "reverse-holo": ["V1"]
+      }
+    },
+    {
+      "setCode": "FLF",
+      "number": "80",
+      "languages": ["English"],
+      "printings": [
+        {
+          "finish": "unknown",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "retailer",
+              "text": "Build-A-Bear Workshop",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "retailer-promo",
+            "name": "Build-A-Bear Workshop"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "PPS1 VIV",
+      "number": "VIV 131",
+      "languages": ["English"],
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "PPS8 JTG",
+      "number": "JTG 117",
+      "languages": ["English"],
+      "suppressAutoFinishes": ["non-holo", "holo"],
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": null,
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "xJTG",
+      "number": "117",
+      "printings": [
+        {
+          "finish": "unknown",
+          "foilPattern": null,
+          "markings": [{"kind": "set-logo", "text": "Journey Together", "role": "distribution-promo"}],
+          "distribution": {"kind": "gift-with-purchase", "region": "Malaysia/Philippines/Singapore"},
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "unknown",
+          "foilPattern": null,
+          "markings": [{"kind": "retailer", "text": "GameStop", "role": "distribution-promo"}],
+          "distribution": {"kind": "gift-with-purchase", "region": "USA/Canada"},
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "unknown",
+          "foilPattern": null,
+          "markings": [{"kind": "retailer", "text": "EB Games", "role": "distribution-promo"}],
+          "distribution": {"kind": "gift-with-purchase", "region": "Australia/New Zealand"},
+          "cardSize": "standard",
+          "mappedVariants": ["V3"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "xm2a",
+      "number": "136",
+      "suppressAutoFinishes": ["mirror-holo"],
+      "printings": [
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "colorless-energy-star",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "poke-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "xsv2a",
+      "number": "143",
+      "suppressAutoFinishes": ["mirror-holo"],
+      "printings": [
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "poke-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "master-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["owner-scan-review", "cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "xPRE",
+      "number": "076",
+      "printings": [
+        {
+          "finish": "unknown",
+          "foilPattern": null,
+          "markings": [{"kind": "set-logo", "text": "Prismatic Evolutions", "role": "distribution-promo"}],
+          "distribution": {"kind": "special-collection", "name": "Snorlax ex & Blissey ex Special Collection"},
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        },
+        {
+          "finish": "unknown",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {"kind": "special-collection", "name": "Snorlax ex & Blissey ex Special Collection"},
+          "cardSize": "jumbo",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "SM",
+      "number": "05",
+      "languages": ["English"],
+      "suppressAutoFinishes": ["holo"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": ["base"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "jumbo",
+          "mappedVariants": ["V2"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        }
+      ]
+    },
+    {
+      "setCode": "SSH",
+      "number": "142",
+      "languages": ["English"],
+      "suppressAutoFinishes": ["holo"],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": ["V1"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "jumbo",
+          "mappedVariants": ["V3"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": ["cardmarket-stock-image"]
+        }
+      ]
+    }
+  ]
+}
