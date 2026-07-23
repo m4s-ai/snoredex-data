@@ -14,6 +14,7 @@ $cards=$cardDoc.cards
 $excluded=Get-Content "$V\excluded_codecards.json" -Raw -Encoding utf8|ConvertFrom-Json
 $finishDoc=Get-Content "$V\finish_units.json" -Raw -Encoding utf8|ConvertFrom-Json
 $finishUnits=$finishDoc.units
+$finishReview=Get-Content "$V\FINISH_REVIEW.json" -Raw -Encoding utf8|ConvertFrom-Json
 
 # --- 1. unit totals and identity ---
 Check "719 units total" ($units.Count -eq 719) "found $($units.Count)"
@@ -88,16 +89,32 @@ $finishKeyDiff=@(Compare-Object $claimFinishKeys $actualFinishKeys)
 Check "finish units exactly cover claim groups" (($actualFinishKeys.Count -eq 637) -and ($finishKeyDiff.Count -eq 0)) "$($finishKeyDiff.Count) key differences"
 
 $allowedFinishes=@('non-holo','holo','reverse-holo','mirror-holo','unknown')
-$allowedFinishStatuses=@('confirmed','owner-attested','marketplace-claimed','pending')
+$allowedAvailabilityStatuses=@('confirmed','owner-attested','marketplace-claimed','pending','not-applicable')
+$allowedPrintingStatuses=@('confirmed','owner-attested','marketplace-claimed','pending')
 $allowedMapStatuses=@('confirmed','partial','pending','not-applicable')
 $allowedPatternStatuses=@('confirmed','partial','pending','not-applicable')
+$allowedCompletenessStatuses=@('complete-manifest','positive-evidence-only','pending','not-applicable')
 $badFinishState=@($finishUnits|?{
-  $_.availabilityStatus -notin $allowedFinishStatuses -or
+  $_.applicabilityStatus -notin @('applicable','not-applicable') -or
+  $_.availabilityStatus -notin $allowedAvailabilityStatuses -or
   $_.productMappingStatus -notin $allowedMapStatuses -or
   $_.patternStatus -notin $allowedPatternStatuses -or
-  @($_.printings|?{$_.finish -notin $allowedFinishes -or $_.verificationStatus -notin $allowedFinishStatuses}).Count
+  $_.completenessStatus -notin $allowedCompletenessStatuses -or
+  @($_.printings|?{$_.finish -notin $allowedFinishes -or $_.verificationStatus -notin $allowedPrintingStatuses}).Count -or
+  ($_.applicabilityStatus -eq 'not-applicable' -and (
+    $_.availabilityStatus -ne 'not-applicable' -or @($_.printings).Count -ne 0 -or @($_.unresolved).Count -ne 0 -or
+    @($_.products|?{$_.claimStatus -ne 'contradicted'}).Count -ne 0
+  ))
 })
-Check "finish taxonomy and statuses valid" ($badFinishState.Count -eq 0) (($badFinishState|Select-Object -First 5 -Expand finishUnitId) -join ',')
+$notApplicableFinish=@($finishUnits|?{$_.applicabilityStatus -eq 'not-applicable'})
+$reviewNotApplicable=@($finishReview.units|?{$_.availabilityStatus -eq 'not-applicable'})
+$finishStateOk=(
+  $badFinishState.Count -eq 0 -and $notApplicableFinish.Count -eq 64 -and
+  @($finishUnits|?{$_.completenessStatus -eq 'complete-manifest'}).Count -eq 4 -and
+  $finishReview.meta.count -eq 233 -and @($finishReview.units).Count -eq 233 -and
+  $reviewNotApplicable.Count -eq 0
+)
+Check "finish taxonomy, applicability, and review queue valid" $finishStateOk "bad=$($badFinishState.Count), not-applicable=$($notApplicableFinish.Count), review=$($finishReview.meta.count)"
 
 $allPrintingIds=@($finishUnits|%{$_.printings}|Select-Object -Expand printingId)
 $dupPrintingIds=@($allPrintingIds|Group-Object|?{$_.Count -gt 1})
@@ -110,6 +127,11 @@ foreach($finishUnit in $finishUnits){
   $productVariants=@($finishUnit.products|Select-Object -Expand variant -Unique)
   foreach($printing in $finishUnit.printings){
     if(@($printing.sources).Count -eq 0){ $badFinishSources += $printing.printingId }
+    foreach($source in @($printing.sources)){
+      if($source.supportsAbsence -eq $true -and ($source.authorityTier -ne 'official-primary' -or $source.coverage -ne 'complete-manifest')){
+        $badFinishSources += $printing.printingId
+      }
+    }
     foreach($mappedVariant in @($printing.mappedVariants)){
       if($mappedVariant -notin $productVariants){ $badFinishMappings += $printing.printingId }
     }
@@ -127,10 +149,28 @@ $dragonFrontiers=@($finishUnits|?{$_.setCode -eq 'DF' -and $_.number -eq '10'}|%
   $_.finish -eq 'reverse-holo' -and $_.foilPattern -eq 'plain-foil-on-pokemon' -and
   @($_.markings|?{$_.kind -eq 'set-logo' -and $_.role -eq 'reverse-holo-treatment'}).Count -eq 1
 })
-Check "Dragon Frontiers stamped reverse modeled" ($dragonFrontiers.Count -eq 4) "found $($dragonFrontiers.Count) language printings"
+$battleAcademy=$finishUnits|?{$_.setCode -eq 'BA20' -and $_.number -eq 'MWT' -and $_.language -eq 'English'}
+$classic=$finishUnits|?{$_.setCode -eq 'CLV' -and $_.number -eq '016' -and $_.language -eq 'English'}
+$prize3=$finishUnits|?{$_.setCode -eq 'PPS3 LOR' -and $_.number -eq 'LOR 143' -and $_.language -eq 'English'}
+$prize7=$finishUnits|?{$_.setCode -eq 'PPS7 JTG' -and $_.number -eq 'JTG 117' -and $_.language -eq 'English'}
+$jtgPromos=$finishUnits|?{$_.setCode -eq 'xJTG' -and $_.number -eq '117' -and $_.language -eq 'English'}
+$prismatic=$finishUnits|?{$_.setCode -eq 'xPRE' -and $_.number -eq '076' -and $_.language -eq 'English'}
+$specialFinishOk=(
+  $dragonFrontiers.Count -eq 4 -and
+  @($battleAcademy.printings|?{$_.finish -eq 'non-holo'}).Count -eq 1 -and
+  @($classic.printings|?{$_.finish -eq 'holo'}).Count -eq 1 -and
+  @($prize3.printings|?{$_.finish -eq 'non-holo'}).Count -eq 1 -and
+  @($prize7.printings|?{$_.finish -eq 'non-holo'}).Count -eq 1 -and
+  @($jtgPromos.printings|?{$_.finish -eq 'holo' -and $_.foilPattern -eq 'cosmos'}).Count -eq 3 -and
+  @($prismatic.printings|?{$_.finish -eq 'holo' -and $_.cardSize -eq 'standard'}).Count -eq 1 -and
+  @($prismatic.printings|?{$_.finish -eq 'holo' -and $_.cardSize -eq 'jumbo'}).Count -eq 1
+)
+Check "special finish cases modeled" $specialFinishOk "DF=$($dragonFrontiers.Count), xJTG=$(@($jtgPromos.printings).Count), xPRE=$(@($prismatic.printings).Count)"
 
 $hopEnglish=$finishUnits|?{$_.setCode -eq 'JTG' -and $_.number -eq '117' -and $_.language -eq 'English'}
-Check "JTG 117 discloses non-holo + holo + reverse" (@('non-holo','holo','reverse-holo'|?{$_ -notin $hopEnglish.availableFinishes}).Count -eq 0) ($hopEnglish.availableFinishes -join ',')
+$hopEnglishFinishes=@($hopEnglish.availableFinishes)
+$hopEnglishOk=$hopEnglishFinishes.Count -eq 2 -and @('holo','reverse-holo'|?{$_ -notin $hopEnglishFinishes}).Count -eq 0
+Check "regular JTG 117 discloses holo + reverse only" $hopEnglishOk ($hopEnglishFinishes -join ',')
 
 $badCardFinishSummary=@($cards|?{
   if($_.isCodeCard){ $_.finishAvailability.status -ne 'not-applicable' }

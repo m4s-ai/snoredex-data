@@ -111,7 +111,7 @@ def reverse_pattern(card_url: str | None) -> str | None:
     if not card_url or "/cards/" not in card_url:
         return None
     card_id = card_url.rsplit("/cards/", 1)[1]
-    if card_id.startswith("base6-"):
+    if card_id.startswith(("base6-", "lc-")):
         return "fireworks"
     if re.match(r"ecard[123]-", card_id):
         return "flat-foil-card-body"
@@ -140,6 +140,8 @@ def reverse_pattern(card_url: str | None) -> str | None:
     match = re.match(r"xy(\d+)-", card_id)
     if match:
         return "plain-foil-background" if int(match.group(1)) == 12 else "type-symbol-background"
+    if card_id.startswith("g1-"):
+        return "type-symbol-background"
     if re.match(r"sm\d", card_id):
         return "large-type-symbol-left"
     if card_id.startswith("swsh"):
@@ -218,6 +220,17 @@ def resolve_override_sources(
 def strongest_status(printings: list[dict[str, Any]], finish: str | None = None) -> str:
     statuses = [item["verificationStatus"] for item in printings if finish is None or item["finish"] == finish]
     return max(statuses, key=lambda status: STATUS_RANK[status]) if statuses else "pending"
+
+
+def has_complete_manifest(printings: list[dict[str, Any]], language: str) -> bool:
+    """Return true only for a complete source whose declared language covers this unit."""
+    return any(
+        source.get("supportsAbsence") is True
+        and source.get("coverage") == "complete-manifest"
+        and (not source.get("languages") or language in source["languages"])
+        for printing in printings
+        for source in printing.get("sources") or []
+    )
 
 
 def compact_printing(printing: dict[str, Any]) -> dict[str, Any]:
@@ -312,6 +325,7 @@ def main() -> None:
         active_variants = {
             product["variant"] for product in products if product["claimStatus"] != "contradicted"
         }
+        all_claims_contradicted = bool(products) and not active_variants
         card_name = member_units[0]["cardName"]
         set_name = member_units[0]["setName"]
         printings: list[dict[str, Any]] = []
@@ -510,7 +524,10 @@ def main() -> None:
         deduplicated_printings: list[dict[str, Any]] = []
         for printing in printings:
             add_printing(deduplicated_printings, printing)
-        printings = deduplicated_printings
+        # A finish cannot be attached to a product-language claim that the language
+        # verification layer has already disproved. These units remain in the state
+        # store for exact key coverage, but they are not finish-research work.
+        printings = [] if all_claims_contradicted else deduplicated_printings
 
         printings.sort(
             key=lambda item: (
@@ -526,7 +543,10 @@ def main() -> None:
             printing.pop("_origin", None)
 
         available_finishes = [finish for finish in FINISHES if any(p["finish"] == finish for p in printings)]
-        finish_status = {finish: strongest_status(printings, finish) for finish in FINISHES}
+        finish_status = {
+            finish: "not-applicable" if all_claims_contradicted else strongest_status(printings, finish)
+            for finish in FINISHES
+        }
         mapped_variants = {variant for printing in printings for variant in printing["mappedVariants"]}
         required_variants = active_variants
         if not required_variants:
@@ -539,6 +559,7 @@ def main() -> None:
             product_mapping_status = "pending"
 
         known_printings = [printing for printing in printings if printing["finish"] in FINISHES]
+        complete_manifest = has_complete_manifest(known_printings, language)
         pattern_target_printings = [
             printing for printing in printings if printing["finish"] in {"reverse-holo", "mirror-holo"}
         ]
@@ -553,7 +574,7 @@ def main() -> None:
             pattern_status = "pending"
 
         unresolved: list[str] = []
-        if not known_printings:
+        if not all_claims_contradicted and not known_printings:
             unresolved.append("No positive finish evidence has been recorded for this set-number-language unit.")
         if product_mapping_status in {"partial", "pending"}:
             unresolved.append(
@@ -562,8 +583,19 @@ def main() -> None:
             )
         if pattern_status in {"partial", "pending"}:
             unresolved.append("The exact reverse- or mirror-holo pattern is not identified for every known printing of those types.")
-        if any(product["claimStatus"] == "contradicted" for product in products):
+        if not all_claims_contradicted and any(
+            product["claimStatus"] == "contradicted" for product in products
+        ):
             unresolved.append("The underlying Cardmarket language claim is contradicted for at least one product variant.")
+
+        if all_claims_contradicted:
+            completeness_status = "not-applicable"
+        elif complete_manifest:
+            completeness_status = "complete-manifest"
+        elif known_printings:
+            completeness_status = "positive-evidence-only"
+        else:
+            completeness_status = "pending"
 
         finish_units.append(
             {
@@ -576,8 +608,11 @@ def main() -> None:
                 "products": products,
                 "availableFinishes": available_finishes,
                 "finishStatus": finish_status,
-                "availabilityStatus": strongest_status(known_printings),
-                "completenessStatus": "positive-evidence-only" if known_printings else "pending",
+                "applicabilityStatus": "not-applicable" if all_claims_contradicted else "applicable",
+                "availabilityStatus": (
+                    "not-applicable" if all_claims_contradicted else strongest_status(known_printings)
+                ),
+                "completenessStatus": completeness_status,
                 "productMappingStatus": product_mapping_status,
                 "patternStatus": pattern_status,
                 "printings": printings,
@@ -603,14 +638,18 @@ def main() -> None:
             product = next((item for item in unit["products"] if item["variant"] == token), None)
             mapped = [printing for printing in unit["printings"] if token in printing["mappedVariants"]]
             mapped_known = [printing for printing in mapped if printing["finish"] in FINISHES]
-            finish_status = {finish: strongest_status(mapped_known, finish) for finish in FINISHES}
+            not_applicable = bool(product and product["claimStatus"] == "contradicted")
+            finish_status = {
+                finish: "not-applicable" if not_applicable else strongest_status(mapped_known, finish)
+                for finish in FINISHES
+            }
             by_language.append(
                 {
                     "language": language,
                     "claimStatus": product["claimStatus"] if product else "pending",
                     "availableFinishes": [finish for finish in FINISHES if any(p["finish"] == finish for p in mapped)],
                     "finishStatus": finish_status,
-                    "status": strongest_status(mapped_known),
+                    "status": "not-applicable" if not_applicable else strongest_status(mapped_known),
                     "finishUnitId": unit["finishUnitId"],
                     "printings": [compact_printing(printing) for printing in mapped],
                 }
@@ -621,9 +660,12 @@ def main() -> None:
             if any(finish in row["availableFinishes"] for row in by_language)
         ]
         language_statuses = [row["status"] for row in by_language]
-        if language_statuses and all(status == "confirmed" for status in language_statuses):
+        applicable_statuses = [status for status in language_statuses if status != "not-applicable"]
+        if language_statuses and not applicable_statuses:
+            overall_status = "not-applicable"
+        elif applicable_statuses and all(status == "confirmed" for status in applicable_statuses):
             overall_status = "confirmed"
-        elif any(status != "pending" for status in language_statuses):
+        elif any(status != "pending" for status in applicable_statuses):
             overall_status = "partial"
         else:
             overall_status = "pending"
@@ -639,6 +681,8 @@ def main() -> None:
         "withConfirmedFinish": sum(unit["availabilityStatus"] == "confirmed" for unit in finish_units),
         "withOnlyMarketplaceClaim": sum(unit["availabilityStatus"] == "marketplace-claimed" for unit in finish_units),
         "pendingFinish": sum(unit["availabilityStatus"] == "pending" for unit in finish_units),
+        "notApplicableFinish": sum(unit["availabilityStatus"] == "not-applicable" for unit in finish_units),
+        "withCompleteManifest": sum(unit["completenessStatus"] == "complete-manifest" for unit in finish_units),
         "withNonHolo": sum("non-holo" in unit["availableFinishes"] for unit in finish_units),
         "withHolo": sum("holo" in unit["availableFinishes"] for unit in finish_units),
         "withReverseHolo": sum("reverse-holo" in unit["availableFinishes"] for unit in finish_units),
@@ -682,6 +726,8 @@ def main() -> None:
             "scope": "Physical cards only; online/live code cards are excluded.",
             "sourcePolicy": [
                 "Only positive availability is asserted. pending means not yet established, never proven absent.",
+                "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
+                "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest can set completenessStatus=complete-manifest.",
                 "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
                 "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
                 "Cardmarket Reverse Holo axes and rarity labels are retained as marketplace-claimed hints, not external confirmation.",
@@ -690,8 +736,10 @@ def main() -> None:
             "taxonomy": {
                 "finish": list(FINISHES) + ["unknown"],
                 "verificationStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending"],
+                "availabilityStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending", "not-applicable"],
                 "cardSize": ["standard", "jumbo", "unknown"],
                 "markingRoles": ["reverse-holo-treatment", "distribution-promo"],
+                "completenessStatus": ["complete-manifest", "positive-evidence-only", "pending", "not-applicable"],
             },
             "counts": counts,
             "fetchErrors": fetch_errors,
@@ -810,7 +858,8 @@ def main() -> None:
         "availability: "
         f"confirmed={counts['withConfirmedFinish']} "
         f"marketplace-only={counts['withOnlyMarketplaceClaim']} "
-        f"pending={counts['pendingFinish']}"
+        f"pending={counts['pendingFinish']} "
+        f"not-applicable={counts['notApplicableFinish']}"
     )
     print(
         "finishes: "

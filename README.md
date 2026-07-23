@@ -14,8 +14,9 @@ working directory.
 | [`HANDOVER.md`](HANDOVER.md) | You need the current state, repository layout, working rules, and prioritized next actions. This is the main entry point for continuing work. |
 | [`README.md`](README.md) | You are consuming the dataset and need its scope, caveats, analysis findings, and collection method. |
 | [`verification/RESUME.md`](verification/RESUME.md) | You are adding or changing verification evidence. It records source techniques, failed approaches, corrections, and methodology decisions. |
+| [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) | You are confirming non-holo, holo, reverse/mirror, stamped promo, Prize Pack, or jumbo versions. It defines the source ladder and repeatable finish workflow. |
 | [`verification/open-items.html`](verification/open-items.html) | You want a browsable view of the pending and manual-review units. |
-| [`verification/confirmed-releases.html`](verification/confirmed-releases.html) | You want the chronological confirmed-release table. |
+| [`verification/confirmed-releases.html`](verification/confirmed-releases.html) | You want the visual collection: card images, chronological releases, confirmed languages, finish/treatment badges, and interactive filters. |
 | [`verification/MANUAL_REVIEW.csv`](verification/MANUAL_REVIEW.csv) | You are recording manual verdicts for the remaining hand-checked units. |
 | [`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) | You are resolving finish, reverse/mirror-pattern, or Cardmarket-product mapping gaps. |
 
@@ -40,7 +41,8 @@ Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories,
 | `verification/finish_units.json` | **Finish state store** — one row per set number × language, with logical printings, finish/pattern/stamp/size dimensions, evidence, and Cardmarket-product mappings |
 | `verification/FINISH_REVIEW.json` / `.csv` | Finish, pattern, and product-mapping gaps that still need evidence |
 | `verification/finish_overrides.json` | Curated special-printing details that group-level APIs cannot express |
-| `verification/` | **Source verification layer** — language/product claims plus the separate finish layer. Recurring tools at top level (`report`, `audit_evidence`, `classify_manual`, `review_integrity`); completed one-shot passes live in `verification/passes/`. See `verification/RESUME.md` |
+| `verification/FINISH_SOURCES.md` | Finish evidence hierarchy, confirmed special cases, exact API endpoints, and next source targets |
+| `verification/` | **Source verification layer** — language/product claims plus the separate finish layer. Recurring tools at top level (`report`, `audit_evidence`, `classify_manual`, `verify_finish_sources`, `review_integrity`); completed one-shot passes live in `verification/passes/`. See `verification/RESUME.md` |
 
 242 products − 44 non-card items (playmats, sleeves, binders, tins, blisters, pins, deck boxes) = **198 singles**. Six of those 198 are online/live code cards, flagged `isCodeCard: true`.
 
@@ -116,18 +118,22 @@ The market split across all 198: Western 83 · Japanese 68 · Simplified Chinese
 
 Finish availability is modeled independently of Cardmarket products. The authoritative file has
 **637 set-number-language units**. It currently records at least one externally confirmed finish
-for **321**, a marketplace-only positive claim for **109**, and no positive finish evidence yet
-for **207**. Because upstream catalogues are incomplete, this is deliberately a positive-evidence
-model: an unlisted finish remains `pending` rather than being marked unavailable.
+for **331**, a marketplace-only positive claim for **104**, and no positive finish evidence yet
+for **138 applicable units**. Another **64** units are `not-applicable` because every underlying
+product-language claim is contradicted. Because upstream catalogues are incomplete, this is
+deliberately a positive-evidence model: an unlisted finish remains `pending` rather than being
+marked unavailable. The remaining review queue contains **233** units after those false-language
+claims and newly sourced cases are removed. Four English units have an official
+`complete-manifest`; all other sourced units remain explicitly positive-only.
 
 Current positive coverage (units can appear in more than one row):
 
 | Known available finish | Set-number-language units |
 |---|---:|
-| Non-holo | 272 |
-| Holo | 136 |
-| Reverse holo | 240 |
-| Mirror holo | 10 |
+| Non-holo | 276 |
+| Holo | 145 |
+| Reverse holo | 234 |
+| Mirror holo | 8 |
 | Both non-holo and holo | 24 |
 
 Each unit contains `finishStatus` for `non-holo`, `holo`, `reverse-holo`, and `mirror-holo`, plus
@@ -144,6 +150,11 @@ By contrast, `CL 33`, `VIV 131`, and `SVP 184` have later prerelease/Staff set-n
 as distribution promos; the stamp itself does not make a card reverse holo. `JTG 117` now explicitly
 shows non-holo, holo, and intricate-tile reverse-holo availability by language.
 
+Source strength and completeness are explicit. Only a complete official checklist may establish
+that a listed alternative is absent; API flags, TCGplayer/TCGCSV subtypes, PSA registries, and scans
+are positive-only. See [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) for the
+evidence ladder and the confirmed Prize Pack, promo, stamped, deck, and jumbo cases.
+
 Run `python scripts/finishes.py` after rebuilding the main dataset. It caches TCGdex responses in
 the gitignored `verification/cache/finish-tcgdex/`, regenerates all finish outputs, and reattaches
 the per-product summaries to `snorlax_cards.json`.
@@ -156,7 +167,7 @@ filter UI only as a hint.
 
 Examples: `xsv2a 143` maps V1 to Poké Ball mirror holo and V2 to Master Ball mirror holo;
 `PPS8 JTG 117` maps V1 to non-holo and V2 to Cosmos holo; `SSH 142` separates standard and jumbo
-products; `xJTG 117` has three distribution stamps whose finish is still pending.
+products; `xJTG 117` has three distribution stamps, all independently identified as Cosmos holo.
 
 ## Collection method
 
