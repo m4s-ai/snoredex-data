@@ -40,9 +40,12 @@ evidence (see §6).
 | Card-variants with every language resolved | 180 / 191 |
 | Artist coverage in main dataset | 115 / 198 |
 | Finish units (set number × language) | **637** |
-| Finish units with an externally confirmed finish | **321** |
-| Finish units with marketplace-only positive finish claim | **109** |
-| Finish units with no positive finish evidence yet | **207** |
+| Finish units with an externally confirmed finish | **331** |
+| Finish units with marketplace-only positive finish claim | **104** |
+| Applicable finish units with no positive finish evidence yet | **138** |
+| Finish units not applicable because every language claim is contradicted | **64** |
+| Finish units in the remaining review queue | **233** |
+| Finish units covered by a complete official manifest | **4** — English `DF 10`, `PPS3 LOR 143`, `PPS7 JTG 117`, `PPS8 JTG 117` |
 | Finish units with unresolved Cardmarket-product mapping | **175** |
 
 Numbers live in `verification/units.json` (the state store) and are echoed in
@@ -87,16 +90,20 @@ verification/
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
   UNCONFIRMED.json            The open units, grouped by card.
   open-items.html             Browsable page of open + manual-review items (an Artifact).
-  confirmed-releases.html     Browsable chronological table w/ edition column (an Artifact).
+  confirmed-releases.html     Browsable visual collection with images, chronology, editions,
+                              confirmed languages, finish/treatment badges and filters (an Artifact).
   finish_units.json           FINISH STATE STORE. Set number×language units with physical printings,
                               finish/pattern/marking/size, sources and Cardmarket-product mappings.
   finish_overrides.json       Curated special-printing facts not expressible in group-level APIs.
+  FINISH_SOURCES.md           Finish evidence hierarchy, confirmed special cases, exact source
+                              endpoints and the repeatable research workflow.
   FINISH_REVIEW.json / .csv   The remaining finish, pattern and product-mapping review queue.
   RESUME.md                   The verification playbook (read before editing evidence).
   state.json                  Last completed phase.
   report.ps1                  Regenerates coverage + all export files.
   audit_evidence.ps1          Checks every resolved unit has a non-trivial evidence string.
   classify_manual.ps1         (Re)tags structurally undocumentable units.
+  verify_finish_sources.ps1   Rechecks exact TCGCSV product IDs and expected positive subtypes.
   review_integrity.ps1        27 structural checks — run after every write pass.
   passes/                     ~65 completed one-shot verification scripts. Each closed a batch
                               and is named by what it did. Paths derive from each script's location,
@@ -122,6 +129,8 @@ verification/
   `normal`/`holo`/`reverse` flags apply at this level. `printings[]` records the logical physical
   versions and maps them to Cardmarket products only when evidence supports that mapping.
   `finishStatus` is positive-evidence-only: `pending` means unknown, never proven absent.
+  If every underlying product-language claim is contradicted, the finish unit remains in the state
+  store as `not-applicable` and is excluded from `FINISH_REVIEW`.
 - **Finish dimensions stay separate.** `finish` is non-holo/holo/reverse-holo/mirror-holo;
   `foilPattern` is Cosmos/crosshatch/type-symbol/Poké Ball/etc.; `markings` is the physical stamp;
   `distribution` says how it was released; `cardSize` separates standard from jumbo.
@@ -150,6 +159,9 @@ Full detail in `RESUME.md`. The essentials:
 | Source | Access | Use for |
 |---|---|---|
 | **TCGdex API** `api.tcgdex.net` | scriptable | en/fr/de/es/it/pt/ja/zh-tw/id/th card existence; positive normal/holo/reverse flags |
+| **Official Pokemon checklists** `assets.pokemon.com` / `d1wx537rtdixyy.cloudfront.net` | scriptable PDFs | complete set and Prize Pack finish manifests; the only current finish source allowed to establish absence within its stated scope |
+| **TCGCSV** `tcgcsv.com` | scriptable JSON | reproducible TCGplayer product identity plus positive Normal/Holofoil/Reverse Holofoil subtypes; positive-only marketplace evidence |
+| **PSA cert/spec/registry** `psacard.com` | scriptable | exact named grading varieties; never use population counts or omissions as negative evidence |
 | **Bulbapedia** | scriptable **only via in-app browser** + MediaWiki API (`/w/api.php?action=parse&prop=wikitext&redirects=1`) — plain fetch is 403 | set lists, `release=` infobox fields, `ko=`/`pt_br=` langtable lines, per-language articles (`(KTCG)`/`(TCTCG)`/`(ITCG)`/`(ATCG)`/`(SCTCG)` suffixes) |
 | **Official JP** `pokemon-card.com` | scriptable (`resultAPI.php`, param `regulation_sidebar_form=all`, page param is `page` not `pg`) | Japanese cards + illustrators |
 | **Official Asia** `asia.pokemon-card.com` | scriptable | tw/id/th recent cards |
@@ -199,6 +211,7 @@ pwsh -File verification\review_integrity.ps1     # after any write
 python scripts\editions.py                       # if edition data changed
 python scripts\confirmed_releases.py             # regenerate chronological table + CSV
 python scripts\finishes.py                       # regenerate finish units/review + main summaries
+pwsh -File verification\verify_finish_sources.ps1 # recheck machine-readable TCGCSV assertions
 ```
 
 All scripts derive paths from their own location: `$PSScriptRoot` in PowerShell and
@@ -218,10 +231,13 @@ normal on Windows and harmless.
 
 ## 8. Immediate next actions (in priority order)
 
-1. **Finish review** — work `verification/FINISH_REVIEW.csv`: first the 207 units with no positive
-   finish evidence, then the 175 units whose logical finish is not mapped to every Cardmarket
-   product. Put durable special-printing facts in `finish_overrides.json`, rerun
-   `python scripts/finishes.py`, then run integrity. Do not convert pending fields to negative claims.
+1. **Finish review** — read `verification/FINISH_SOURCES.md`, then work the 233 rows in
+   `verification/FINISH_REVIEW.csv`: first the 138 applicable units with no positive finish
+   evidence, then the 175 units whose logical finish is not mapped to every Cardmarket product
+   (the queues overlap). Put durable facts and source metadata in `finish_overrides.json`, rerun
+   `python scripts/finishes.py`, then run integrity. Do not convert positive-only source omissions
+   into negative claims. The 64 fully contradicted language groups are already `not-applicable` and
+   are intentionally absent from this queue.
 2. **The 5 Portuguese manual-review units** — check LigaPokemon via the user's Chrome for
    `PPS1 VIV 131` and `PPS3 LOR 143`. (`xPRE` is an Additionals product that may not appear on a
    marketplace as its own entry.)
