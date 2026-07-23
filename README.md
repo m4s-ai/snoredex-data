@@ -1,5 +1,6 @@
 # Snorlax on Cardmarket — dataset & analysis
-n> **Taking over this project?** Start with [`HANDOVER.md`](HANDOVER.md) — the cold-start guide.
+
+> **Taking over this project?** Start with [`HANDOVER.md`](HANDOVER.md) — the cold-start guide.
 
 Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories, 9 pages, 242 products).
 
@@ -24,7 +25,7 @@ Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories,
 - **`languages` is marketplace availability, not a print manifest — and this is now proven, not just suspected.** Cross-checking every card × language against outside sources produced **71 contradictions**: cases where Cardmarket offers a language for which no printing exists. The clearest is `KSS 26` (XY Kalos Starter Set), where Cardmarket advertises **17 languages** and the expansion was printed in **7** (EN, DE, FR, IT, ES, PT, RU). For some products the filter falls back to a global language list. See `verification/CONTRADICTED.json`.
 - **"Spanish" cannot distinguish European from Latin-American Spanish.** From Journey Together (2025) LATAM-ES is a physically distinct edition for regular sets — not Prize Packs — with different attack translations, set name and set code (specimen-verified for `SVP 184`: "Presión Dinámica"/"Juntos de Aventuras" vs "Plancha Dinámica"/"Aventuras Compartidas"). Cardmarket does not support LATAM-ES; sourcing it would require the official Pokémon site. Every Spanish entry here means the European print. See `verification/RESUME.md`.
 - **`cardKey` groups the same *card*, not the same *artwork*.** Cardmarket derives it from card name + attack names. Reprints with brand-new art share a `cardKey`. That's a feature here — it's exactly how the "same card, new art" cases below were found — but don't read it as art identity.
-- **Artist coverage is 79/198 (40%).** Illustrators are only published for English-market releases. The 119 uncovered rows are Japanese, Simplified-Chinese, Korean and SEA printings. Rather than guess, `artist` is left `null` there; use `cardKey` to find the English sibling.
+- **Artist coverage is 115/198 (58%).** Illustrators come from pokemontcg.io/limitlesstcg (English-market) and the official pokemon-card.com database (Japanese-market). The uncovered rows are mostly Korean/Chinese deck products with no published illustrator credit. Rather than guess, `artist` is left `null` there; use `cardKey` to find a sibling that has one.
 - **Stamp variants are not labelled anywhere in Cardmarket's text.** Master Ball vs Poké Ball holo, prerelease and staff stamps are only distinguishable in the artwork and by Cardmarket splitting them into separate `-V1/-V2/-V3` products. `variantToken` captures the split; naming the stamp would require reading the images.
 
 ## Language drift
