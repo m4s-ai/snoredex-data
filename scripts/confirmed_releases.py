@@ -180,96 +180,156 @@ json.dump({"generated": "2026-07-23",
           io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 
-# --- HTML ---
+# --- shared formatting ---
 def fmt_date(r):
     d = r["date"]
     if not r["dateExact"]:
         return "~" + d[:4] if len(d) >= 4 else "~" + d
     p = d.split("-")
     M = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-    if len(p) == 3: return f"{int(p[2])} {M[int(p[1])]} {p[0]}"
-    if len(p) == 2: return f"{M[int(p[1])]} {p[0]}"
+    if len(p) == 3: return f"{p[0]}-{p[1]}-{p[2]}"
+    if len(p) == 2: return f"{p[0]}-{p[1]}"
     return d
 
-years = {}
-for r in rows:
-    years.setdefault(r["date"][:4], []).append(r)
-
+# compact 2-letter language codes, in the fixed column order of the matrix
+LANG_CODE = {"English":"EN","French":"FR","German":"DE","Italian":"IT","Spanish":"ES",
+             "Portuguese":"PT","Dutch":"NL","Polish":"PL","Russian":"RU","Japanese":"JA",
+             "Korean":"KO","T-Chinese":"ZH-T","S-Chinese":"ZH-S","Indonesian":"ID","Thai":"TH"}
+LANG_COLS = [LANG_CODE[l] for l in LANG_ORDER]
 total_langs = sum(len(r["confirmedLanguages"]) for r in rows)
-body = []
-for y in sorted(years):
-    body.append(f'<section><h2>{y}<span class="ycount">{len(years[y])} printings</span></h2><div class="rows">')
-    for r in years[y]:
-        chips = "".join(f'<span class="chip">{html.escape(l)}</span>' for l in r["confirmedLanguages"])
-        vname = f'<div class="vname">{html.escape(r["variantName"])}</div>' if r.get("variantName") else ""
-        variant = f'<span class="sep">·</span>{r["variant"]}' if r["variant"] != "base" else ""
-        num = f' {html.escape(str(r["number"]))}' if r["number"] else ""
-        artist = f'<span class="sep">·</span>Illus. {html.escape(r["artist"])}' if r.get("artist") else ""
-        dcls = "date" if r["dateExact"] else "date approx"
-        body.append(f'''<div class="row">
-  <div class="{dcls}">{fmt_date(r)}</div>
-  <div class="ident">
-    <div class="cardname"><a href="{html.escape(r["cardmarketUrl"])}" target="_blank" rel="noopener">{html.escape(r["name"])}</a>
-      <span class="sep">·</span><span class="code">{html.escape(r["setCode"])}{num}</span>{variant}</div>
-    <div class="meta">{html.escape(r["setName"])}<span class="sep">·</span>{html.escape(r.get("rarity") or "")}{artist}</div>
-    {vname}
-  </div>
-  <div class="langs">{chips}</div>
-</div>''')
-    body.append("</div></section>")
+
+# --- CSV (Excel-friendly matrix: one column per language, X = confirmed) ---
+import csv
+with io.open(os.path.join(B, "analysis_confirmed_releases.csv"), "w", encoding="utf-8-sig", newline="") as f:
+    w = csv.writer(f, delimiter=";")
+    w.writerow(["#","Release","Date exact","Card","Set code","Number","Variant","Variant name",
+                "Set / expansion","Rarity","Artist","Langs"] + LANG_COLS + ["Cardmarket URL"])
+    for i, r in enumerate(rows, 1):
+        have = {LANG_CODE[l] for l in r["confirmedLanguages"]}
+        w.writerow([i, fmt_date(r), "yes" if r["dateExact"] else "approx",
+                    r["name"], r["setCode"], r["number"] or "", r["variant"],
+                    r.get("variantName") or "", r["setName"], r.get("rarity") or "",
+                    r.get("artist") or "", len(r["confirmedLanguages"])]
+                   + ["X" if c in have else "" for c in LANG_COLS]
+                   + [r["cardmarketUrl"]])
+
+# --- HTML table ---
+def cell_langs(r):
+    have = {LANG_CODE[l] for l in r["confirmedLanguages"]}
+    return "".join(f'<td class="L{" on" if c in have else ""}">{c if c in have else ""}</td>' for c in LANG_COLS)
+
+lang_head = "".join(f'<th class="L" title="{html.escape(l)}">{LANG_CODE[l]}</th>' for l in LANG_ORDER)
+
+trs = []
+prev_year = None
+for i, r in enumerate(rows, 1):
+    y = r["date"][:4]
+    if y != prev_year:
+        trs.append(f'<tr class="yr"><td colspan="{7+len(LANG_COLS)+1}">{y}</td></tr>')
+        prev_year = y
+    variant = html.escape(r["variant"]) if r["variant"] != "base" else '<span class="dim">base</span>'
+    if r.get("variantName"):
+        variant += f'<div class="vn" title="{html.escape(r["variantName"])}">{html.escape(r["variantName"])}</div>'
+    num = html.escape(str(r["number"])) if r["number"] else ""
+    dcls = "d" if r["dateExact"] else "d approx"
+    trs.append(f'''<tr>
+<td class="n">{i}</td>
+<td class="{dcls}">{fmt_date(r)}</td>
+<td class="nm"><a href="{html.escape(r["cardmarketUrl"])}" target="_blank" rel="noopener">{html.escape(r["name"])}</a></td>
+<td class="code">{html.escape(r["setCode"])}</td>
+<td class="code num">{num}</td>
+<td class="var">{variant}</td>
+<td class="set">{html.escape(r["setName"])}<span class="rar">{html.escape(r.get("rarity") or "")}</span></td>
+{cell_langs(r)}
+<td class="ct">{len(r["confirmedLanguages"])}</td>
+</tr>''')
 
 page = f'''<title>Snorlax — confirmed printings, chronological</title>
 <style>
-  :root {{ --paper:#E9EDEF; --surface:#FFFFFF; --surface-2:#F3F6F7; --ink:#111A21; --ink-soft:#4C5D68;
-    --ink-faint:#7A8B96; --rule:#D0D9DE; --accent:#23606E; --have:#3F6E58; --have-bg:#E7EFEA;
+  :root {{ --paper:#E9EDEF; --surface:#FFFFFF; --zebra:#F4F7F8; --head:#E4EAEC; --yr:#DCE6E3;
+    --ink:#111A21; --ink-soft:#4C5D68; --ink-faint:#7A8B96; --rule:#CFD8DD; --rule-soft:#E5EBEE;
+    --accent:#23606E; --have:#2F7D5B; --have-bg:#DCEEE4;
     --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }}
-  @media (prefers-color-scheme: dark) {{ :root {{ --paper:#0D1317; --surface:#161E24; --surface-2:#1B252C;
-    --ink:#DFE7EB; --ink-soft:#9DAEB8; --ink-faint:#74868F; --rule:#29363E; --accent:#74B4C2;
-    --have:#7FAF95; --have-bg:#1A2721; }} }}
-  :root[data-theme="dark"] {{ --paper:#0D1317; --surface:#161E24; --surface-2:#1B252C; --ink:#DFE7EB;
-    --ink-soft:#9DAEB8; --ink-faint:#74868F; --rule:#29363E; --accent:#74B4C2; --have:#7FAF95; --have-bg:#1A2721; }}
-  :root[data-theme="light"] {{ --paper:#E9EDEF; --surface:#FFFFFF; --surface-2:#F3F6F7; --ink:#111A21;
-    --ink-soft:#4C5D68; --ink-faint:#7A8B96; --rule:#D0D9DE; --accent:#23606E; --have:#3F6E58; --have-bg:#E7EFEA; }}
-  body {{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.5; }}
-  .wrap {{ max-width:64rem; margin:0 auto; padding:3rem 1.25rem 5rem; }}
-  .eyebrow {{ font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); }}
-  h1 {{ font-family:var(--serif); font-weight:600; font-size:clamp(1.7rem,3.2vw,2.4rem); margin:.4rem 0 .5rem; text-wrap:balance; }}
-  .lede {{ color:var(--ink-soft); max-width:62ch; margin:0 0 2rem; }}
-  h2 {{ font-family:var(--serif); font-size:1.3rem; font-weight:600; margin:2.2rem 0 .6rem; display:flex; align-items:baseline; gap:.7rem; }}
-  .ycount {{ font-family:var(--mono); font-size:.72rem; color:var(--ink-faint); letter-spacing:.06em; }}
-  .rows {{ display:flex; flex-direction:column; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden; }}
-  .row {{ background:var(--surface); padding:.75rem 1rem; display:grid; grid-template-columns:6.2rem minmax(0,1fr) auto; gap:.4rem 1.2rem; align-items:start; }}
-  .row:hover {{ background:var(--surface-2); }}
-  .date {{ font-family:var(--mono); font-size:.78rem; color:var(--ink-soft); font-variant-numeric:tabular-nums; padding-top:.15rem; }}
-  .date.approx {{ color:var(--ink-faint); font-style:italic; }}
-  .cardname {{ font-weight:600; font-size:.95rem; }}
-  .cardname a {{ color:inherit; text-decoration:none; }}
-  .cardname a:hover {{ color:var(--accent); }}
-  .code {{ font-family:var(--mono); font-size:.8rem; color:var(--accent); }}
-  .meta {{ font-size:.82rem; color:var(--ink-faint); }}
-  .vname {{ font-size:.8rem; color:var(--ink-soft); font-style:italic; margin-top:.1rem; }}
-  .sep {{ opacity:.5; padding:0 .3rem; }}
-  .langs {{ display:flex; flex-wrap:wrap; gap:.28rem; justify-content:flex-end; max-width:20rem; }}
-  .chip {{ font-family:var(--mono); font-size:.7rem; padding:.13rem .4rem; border-radius:2px;
-    background:var(--have-bg); color:var(--have); border:1px solid var(--have); white-space:nowrap; }}
-  footer {{ margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--rule); color:var(--ink-faint); font-size:.84rem; }}
-  @media (max-width:44rem) {{ .row {{ grid-template-columns:1fr; }} .langs {{ justify-content:flex-start; max-width:none; }} }}
+  @media (prefers-color-scheme: dark) {{ :root {{ --paper:#0D1317; --surface:#141C22; --zebra:#18222A;
+    --head:#1F2A31; --yr:#243530; --ink:#DFE7EB; --ink-soft:#9DAEB8; --ink-faint:#74868F;
+    --rule:#2A363E; --rule-soft:#212C33; --accent:#74B4C2; --have:#7FC7A0; --have-bg:#183026; }} }}
+  :root[data-theme="dark"] {{ --paper:#0D1317; --surface:#141C22; --zebra:#18222A; --head:#1F2A31;
+    --yr:#243530; --ink:#DFE7EB; --ink-soft:#9DAEB8; --ink-faint:#74868F; --rule:#2A363E;
+    --rule-soft:#212C33; --accent:#74B4C2; --have:#7FC7A0; --have-bg:#183026; }}
+  :root[data-theme="light"] {{ --paper:#E9EDEF; --surface:#FFFFFF; --zebra:#F4F7F8; --head:#E4EAEC;
+    --yr:#DCE6E3; --ink:#111A21; --ink-soft:#4C5D68; --ink-faint:#7A8B96; --rule:#CFD8DD;
+    --rule-soft:#E5EBEE; --accent:#23606E; --have:#2F7D5B; --have-bg:#DCEEE4; }}
+  * {{ box-sizing:border-box; }}
+  body {{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); }}
+  .wrap {{ max-width:98rem; margin:0 auto; padding:2rem 1rem 4rem; }}
+  .eyebrow {{ font-family:var(--mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); }}
+  h1 {{ font-family:var(--serif); font-weight:600; font-size:clamp(1.5rem,3vw,2.1rem); margin:.35rem 0 .4rem; }}
+  .lede {{ color:var(--ink-soft); max-width:70ch; margin:0 0 1rem; font-size:.92rem; line-height:1.5; }}
+  .legend {{ display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; font-size:.78rem; color:var(--ink-soft); margin:0 0 1.25rem; }}
+  .legend b {{ font-family:var(--mono); font-weight:600; color:var(--ink); }}
+  .scroll {{ overflow-x:auto; border:1px solid var(--rule); border-radius:4px; }}
+  table {{ border-collapse:collapse; width:100%; font-size:.8rem; }}
+  thead th {{ position:sticky; top:0; z-index:2; background:var(--head); color:var(--ink-soft);
+    font-weight:600; text-align:left; padding:.5rem .55rem; border-bottom:2px solid var(--rule);
+    white-space:nowrap; font-size:.72rem; letter-spacing:.02em; }}
+  th.L {{ text-align:center; padding:.5rem .2rem; font-family:var(--mono); color:var(--ink-faint);
+    border-left:1px solid var(--rule-soft); }}
+  tbody td {{ padding:.4rem .55rem; border-bottom:1px solid var(--rule-soft); vertical-align:top; }}
+  tbody tr:nth-child(even of :not(.yr)) td {{ background:var(--zebra); }}
+  tbody tr:hover td {{ background:var(--have-bg); }}
+  tr.yr td {{ background:var(--yr); font-family:var(--mono); font-weight:700; font-size:.82rem;
+    letter-spacing:.05em; color:var(--ink); position:sticky; top:1.95rem; z-index:1;
+    padding:.3rem .55rem; border-bottom:1px solid var(--rule); }}
+  tr.yr:hover td {{ background:var(--yr); }}
+  td.n {{ font-family:var(--mono); color:var(--ink-faint); font-variant-numeric:tabular-nums; text-align:right; }}
+  td.d {{ font-family:var(--mono); color:var(--ink-soft); white-space:nowrap; font-variant-numeric:tabular-nums; }}
+  td.d.approx {{ color:var(--ink-faint); font-style:italic; }}
+  td.nm {{ font-weight:600; min-width:8rem; }}
+  td.nm a {{ color:inherit; text-decoration:none; }}
+  td.nm a:hover {{ color:var(--accent); text-decoration:underline; }}
+  td.code {{ font-family:var(--mono); color:var(--accent); white-space:nowrap; }}
+  td.num {{ color:var(--ink-soft); }}
+  td.var {{ font-family:var(--mono); font-size:.76rem; color:var(--ink-soft); }}
+  td.var .dim {{ color:var(--ink-faint); }}
+  td.var .vn {{ font-family:var(--sans); font-style:italic; font-size:.72rem; color:var(--ink-faint);
+    max-width:14rem; white-space:normal; margin-top:.15rem; }}
+  td.set {{ min-width:11rem; }}
+  td.set .rar {{ display:block; color:var(--ink-faint); font-size:.72rem; }}
+  td.L {{ text-align:center; padding:.4rem .2rem; border-left:1px solid var(--rule-soft);
+    font-family:var(--mono); font-size:.68rem; color:transparent; }}
+  td.L.on {{ color:var(--have); font-weight:700; background:var(--have-bg); }}
+  td.ct {{ font-family:var(--mono); text-align:center; color:var(--ink-soft); font-variant-numeric:tabular-nums;
+    border-left:1px solid var(--rule); }}
+  footer {{ margin-top:1.5rem; color:var(--ink-faint); font-size:.82rem; }}
+  footer code {{ font-family:var(--mono); }}
 </style>
 <div class="wrap">
-  <header>
-    <div class="eyebrow">Cardmarket · Snorlax · source verification</div>
-    <h1>Every confirmed printing, in release order</h1>
-    <p class="lede">{len(rows)} card-variants spanning 1997–2026, carrying {total_langs} externally
-    confirmed language printings. Dates in italics with a tilde are approximate (set-level, not
-    pinned to a source); all others come from pokemontcg.io release data or dates verified during
-    the source checks. Chips list only <em>confirmed</em> languages — contradicted and unresolved
-    claims are excluded.</p>
-  </header>
-  {"".join(body)}
-  <footer>Generated 23 July 2026 from <code>verification/units.json</code> and
-  <code>snorlax_cards.json</code> by <code>scripts/confirmed_releases.py</code>.
-  Machine-readable copy: <code>analysis_confirmed_releases.json</code>.</footer>
+  <div class="eyebrow">Cardmarket · Snorlax · source verification</div>
+  <h1>Confirmed printings — chronological table</h1>
+  <p class="lede">{len(rows)} card-variants, 1997–2026, with {total_langs} externally confirmed
+  language printings. One row per variant; a language cell is filled only where an outside source
+  confirmed that printing — contradicted and still-open claims are blank.</p>
+  <div class="legend">
+    <span><b>Date</b> ISO; <b><i>~YYYY</i></b> italic = approximate (set-level, not pinned to a source)</span>
+    <span><b>EN FR DE IT ES PT</b> = European · <b>NL PL RU</b> · <b>JA KO ZH-T ZH-S ID TH</b> = Asian</span>
+    <span>"ES" is European Spanish; LATAM-ES is a separate edition Cardmarket doesn't list</span>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>#</th><th>Release</th><th>Card</th><th>Set</th><th>No.</th><th>Variant</th><th>Expansion</th>
+        {lang_head}<th class="L" title="confirmed language count">Σ</th>
+      </tr></thead>
+      <tbody>
+      {"".join(trs)}
+      </tbody>
+    </table>
+  </div>
+  <footer>Generated 23 July 2026 by <code>scripts/confirmed_releases.py</code> from
+  <code>verification/units.json</code> + <code>snorlax_cards.json</code>. Downloads:
+  <code>analysis_confirmed_releases.csv</code> (Excel, semicolon-separated) and
+  <code>analysis_confirmed_releases.json</code>.</footer>
 </div>'''
 
 io.open(os.path.join(B, "verification", "confirmed-releases.html"), "w", encoding="utf-8").write(page)
@@ -277,3 +337,4 @@ print(f"variants: {len(rows)}  confirmed language printings: {total_langs}")
 print(f"skipped (no confirmed lang): {len(skipped)} -> {skipped}")
 approx = sum(1 for r in rows if not r["dateExact"])
 print(f"approx dates: {approx} / {len(rows)}")
+print("wrote: confirmed-releases.html, analysis_confirmed_releases.csv, analysis_confirmed_releases.json")
