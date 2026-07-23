@@ -50,10 +50,15 @@ def classify(c):
     west_langs = [l for l in conf if l in WEST]
     if sc in WEST_1ST:
         # WOTC 1st edition applied to all its Western-language releases
+        src = SRC["west"]
+        if sc == "JU":
+            # Brazilian Portuguese Jungle 1st edition specifically confirmed by the owner
+            # (domain expert has seen the cards; does not personally own them).
+            src += " Portuguese (Brazilian) Jungle 1st edition confirmed by owner attestation."
         return {"hasFirstEdition": True, "system": "WOTC",
                 "firstEditionLanguages": west_langs,
                 "unlimitedLanguages": conf,
-                "source": SRC["west"]}
+                "source": src}
     if sc in JP_1ST:
         # only the Japanese print had a 1st edition; Korean/Chinese were unlimited-only
         fe = ["Japanese"] if "Japanese" in conf else []
@@ -87,7 +92,7 @@ data["meta"]["editionRuleset"] = {
     "westernFirstEdition": "Base Set through Neo Destiny except Base Set 2 (WOTC, English+European)",
     "japaneseFirstEdition": "ADV/e-Card era through XY era; none from Sun & Moon era onward; none 1996-2001",
     "koreanChineseSEA": "unlimited only, never 1st edition",
-    "note": "Cardmarket's First Edition filter axis was NOT used (unreliable: present on 83/198 incl. modern cards). Starter/beginning products had no 1st-edition run. Lost Link and BREAK Starter Pack are on the Elite Fourum omitted list.",
+    "note": "Cardmarket's First Edition filter axis was NOT used (unreliable: present on 83/198 incl. modern cards). Starter/beginning products had no 1st-edition run. Lost Link and BREAK Starter Pack are on the Elite Fourum omitted list. Jungle 1st edition existed in all seven Western languages including Brazilian Portuguese (owner-confirmed).",
     "source": "Bulbapedia + Elite Fourum '1st Edition Timeline' (t/16054), verified 2026-07-23",
 }
 json.dump(data, io.open(os.path.join(B, "snorlax_cards.json"), "w", encoding="utf-8"),
