@@ -1,5 +1,5 @@
 $ErrorActionPreference='Continue'
-$base="C:\redacted\Claude\snorlax-cardmarket"
+$base=Split-Path -Parent $PSScriptRoot
 $dir="$base\images"
 $cards=Get-Content "$base\_cards_stage2.json" -Raw -Encoding utf8|ConvertFrom-Json
 $h=@{"Referer"="https://www.cardmarket.com/";"Accept"="image/avif,image/webp,image/apng,image/*,*/*;q=0.8";"Accept-Language"="en-US,en;q=0.9"}

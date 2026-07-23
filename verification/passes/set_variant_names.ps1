@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$B="C:\redacted\Claude\snorlax-cardmarket"
+$B=Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $V="$B\verification"
 $cards=Get-Content "$B\snorlax_cards.json" -Raw -Encoding utf8|ConvertFrom-Json
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json

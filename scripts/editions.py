@@ -18,8 +18,9 @@ Cardmarket's own "First Edition?" filter axis is NOT used - it is present on 83/
 including SwSh/SM-era cards that never had a 1st edition, so it is unreliable.
 """
 import json, io, os
+from pathlib import Path
 
-B = r"C:\redacted\Claude\snorlax-cardmarket"
+B = Path(__file__).resolve().parent.parent
 data = json.load(io.open(os.path.join(B, "snorlax_cards.json"), encoding="utf-8"))
 cards = data["cards"]
 

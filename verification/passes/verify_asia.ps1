@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\redacted\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $A="$V\cache\asia"
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 

@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\redacted\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 
 # Upgrade: Portuguese for XY Black Star Promos 179 was previously recorded on owner attestation

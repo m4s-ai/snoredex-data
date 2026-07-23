@@ -1,5 +1,5 @@
 Add-Type -AssemblyName System.Drawing
-$B="C:\redacted\Claude\snorlax-cardmarket"
+$B=Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $out="$B\verification\zoom"
 New-Item -ItemType Directory -Force -Path $out | Out-Null
 
