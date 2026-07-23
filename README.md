@@ -1,6 +1,25 @@
 # Snorlax on Cardmarket — dataset & analysis
 
-> **Taking over this project?** Start with [`HANDOVER.md`](HANDOVER.md) — the cold-start guide.
+> **Taking over or continuing the project?** Read [`HANDOVER.md`](HANDOVER.md) first, then
+> [`verification/RESUME.md`](verification/RESUME.md) before changing verification evidence.
+
+## Documentation guide
+
+All paths and commands in the documentation are relative to the repository root. PowerShell and
+Python scripts resolve the checkout from their own file location, so they can be invoked from any
+working directory.
+
+| Document | Use it when |
+|---|---|
+| [`HANDOVER.md`](HANDOVER.md) | You need the current state, repository layout, working rules, and prioritized next actions. This is the main entry point for continuing work. |
+| [`README.md`](README.md) | You are consuming the dataset and need its scope, caveats, analysis findings, and collection method. |
+| [`verification/RESUME.md`](verification/RESUME.md) | You are adding or changing verification evidence. It records source techniques, failed approaches, corrections, and methodology decisions. |
+| [`verification/open-items.html`](verification/open-items.html) | You want a browsable view of the pending and manual-review units. |
+| [`verification/confirmed-releases.html`](verification/confirmed-releases.html) | You want the chronological confirmed-release table. |
+| [`verification/MANUAL_REVIEW.csv`](verification/MANUAL_REVIEW.csv) | You are recording manual verdicts for the remaining hand-checked units. |
+
+For current totals, trust the opening **Current state** sections in `HANDOVER.md` and
+`verification/RESUME.md`; later numbers in `RESUME.md` may describe historical checkpoints.
 
 Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories, 9 pages, 242 products).
 

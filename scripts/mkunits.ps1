@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$base="C:\redacted\Claude\snorlax-cardmarket"
+$base=Split-Path -Parent $PSScriptRoot
 $j=Get-Content "$base\snorlax_cards.json" -Raw -Encoding utf8|ConvertFrom-Json
 $units=@()
 $i=0

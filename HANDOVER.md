@@ -84,8 +84,9 @@ verification/
   audit_evidence.ps1          Checks every resolved unit has a non-trivial evidence string.
   classify_manual.ps1         (Re)tags structurally undocumentable units.
   review_integrity.ps1        16 structural checks — run after every write pass.
-  passes/                     ~65 completed one-shot verification scripts (absolute paths,
-                              still runnable). Each closed a batch; named by what it did.
+  passes/                     ~65 completed one-shot verification scripts. Each closed a batch
+                              and is named by what it did. Paths derive from each script's location,
+                              so passes can be run from any checkout or working directory.
   cache/                      Raw API dumps (gitignored — reproducible via fetch_* scripts).
 ```
 
@@ -162,7 +163,7 @@ Brazilian Prize Pack confirmations were obtained.
 ## 7. How to resume / continue
 
 ```powershell
-cd C:\redacted\Claude\snorlax-cardmarket
+# Run from the repository root.
 pwsh -File verification\review_integrity.ps1     # confirm clean starting state
 pwsh -File verification\report.ps1               # regenerate exports if needed
 # ... do verification work in a new passes\verify_*.ps1 script ...
@@ -171,6 +172,9 @@ pwsh -File verification\review_integrity.ps1     # after any write
 python scripts\editions.py                       # if edition data changed
 python scripts\confirmed_releases.py             # regenerate chronological table + CSV
 ```
+
+All scripts derive paths from their own location: `$PSScriptRoot` in PowerShell and
+`Path(__file__)` in Python. Keep that convention in new scripts.
 
 Then update the two Artifacts (`open-items.html`, `confirmed-releases.html`) if their numbers
 changed, and commit + push:

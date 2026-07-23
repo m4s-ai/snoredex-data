@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\redacted\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 $KR='https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_South_Korea'
 $TW='https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_Taiwan'

@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\redacted\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 $B='https://bulbapedia.bulbagarden.net/wiki/'
 $T151='Bulbapedia (fan wiki), 151 (TCG) expansion article'

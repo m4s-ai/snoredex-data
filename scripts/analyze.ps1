@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$base="C:\redacted\Claude\snorlax-cardmarket"
+$base=Split-Path -Parent $PSScriptRoot
 $stage = if(Test-Path "$base\_cards_stage3.json"){"$base\_cards_stage3.json"}else{"$base\_cards_stage2.json"}
 $cards=Get-Content $stage -Raw -Encoding utf8|ConvertFrom-Json
 

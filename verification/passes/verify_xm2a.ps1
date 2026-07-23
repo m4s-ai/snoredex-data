@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$V="C:\redacted\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $units=Get-Content "$V\units.json" -Raw -Encoding utf8|ConvertFrom-Json
 
 # MEGA Dream ex mirror-holo Additionals (Hop's Snorlax xm2a 136 - V1 energy-star, V2 Poke Ball).

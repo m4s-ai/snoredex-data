@@ -1,5 +1,5 @@
 $ErrorActionPreference='Continue'
-$V="C:\redacted\Claude\snorlax-cardmarket\verification"
+$V=Split-Path -Parent $PSScriptRoot
 $J="$V\cache\jp"
 New-Item -ItemType Directory -Force -Path $J | Out-Null
 $ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36"

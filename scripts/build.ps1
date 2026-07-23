@@ -1,5 +1,5 @@
 $ErrorActionPreference='Stop'
-$base="C:\redacted\Claude\snorlax-cardmarket"
+$base=Split-Path -Parent $PSScriptRoot
 $rows=@()
 foreach($f in 1..3){ $rows += (Get-Content "$base\_chunk$f.json" -Raw -Encoding utf8 | ConvertFrom-Json) }
 Write-Host "rows: $($rows.Count)"
