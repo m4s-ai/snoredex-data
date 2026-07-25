@@ -171,9 +171,15 @@ def main() -> int:
         links = page.eval_on_selector_all(
             "#rows td.corr a", "els => els.map(e => e.getAttribute('href'))")
         check("exactly one correction link per row", len(links) == 203, f"{len(links)} links")
-        check("every correction link carries a stable row id",
-              all("Row+ID" in href or "Row%20ID" in href for href in links),
-              "correction links must quote rowId, not the generated row number")
+        # Links now deep-link into the generated issue form (#20) with the row identity in
+        # query parameters, rather than pasting a prose body. Identity must still be the stable
+        # rowId, never the rendered position.
+        check("every correction link targets the correction issue form",
+              all("template=printing-correction.yml" in href for href in links),
+              "correction links must open the generated form")
+        check("every correction link prefills the stable row id",
+              all("row-id=" in href for href in links),
+              "correction links must carry rowId, not the generated row number")
 
         # --- checklist builder ---
         preview = page.text_content("#cl-preview")

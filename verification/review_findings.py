@@ -591,6 +591,95 @@ else:
 
 
 # --------------------------------------------------------------------------- #
+# T — community correction issue form (#20)
+# --------------------------------------------------------------------------- #
+
+form_path = ROOT / ".github" / "ISSUE_TEMPLATE" / "printing-correction.yml"
+if form_path.exists():
+    form = form_path.read_text(encoding="utf-8")
+
+    required_ids = [
+        "row-id", "card-name", "set-code", "card-number", "current-state",
+        "correction-type", "finishes", "foil-pattern", "stamp", "language",
+        "edition", "card-size", "description", "evidence", "acknowledgement",
+    ]
+    missing_ids = [i for i in required_ids if f"id: {i}\n" not in form]
+    check("T1", "Correction form defines every required field", "FAIL", not missing_ids,
+          f"missing field ids: {missing_ids}")
+
+    # The form's vocabulary is generated from the finish store, so the invariant is simply that
+    # the generated file is current. Re-deriving the labels here with a second normalization
+    # would just test this checker against itself — the first attempt did exactly that and
+    # produced four false failures on accents and British spelling.
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import issue_templates
+
+        expected_form = issue_templates.build_form(issue_templates.collect_vocabularies())
+        stale_form = expected_form != form
+        vocab = issue_templates.collect_vocabularies()
+        detail = (
+            "the form no longer matches the data; run python scripts/issue_templates.py"
+            if stale_form else ""
+        )
+        check("T2", "Correction form is generated from the current data vocabulary", "FAIL",
+              not stale_form, detail)
+
+        # And the vocabulary must actually be complete, not merely current.
+        store_patterns = {
+            p["foilPattern"] for u in finish_units for p in u["printings"] if p.get("foilPattern")
+        }
+        store_stamps = {
+            m["text"] for u in finish_units for p in u["printings"]
+            for m in (p.get("markings") or []) if isinstance(m, dict) and m.get("text")
+        }
+        missing_vocab = (
+            [f"pattern:{p}" for p in store_patterns if p not in vocab["patterns"]]
+            + [f"stamp:{s2}" for s2 in store_stamps if s2 not in vocab["stamps"]]
+        )
+        check("T2b", "Correction form covers every pattern and stamp in the store", "FAIL",
+              not missing_vocab, f"absent from the form: {sorted(missing_vocab)[:6]}")
+    except ImportError as error:  # pragma: no cover
+        check("T2", "Correction form generator is importable", "FAIL", False, str(error))
+
+    # The project's central discipline has to survive contact with the public.
+    check("T3", "Correction form requires positive evidence and warns against absence arguments",
+          "FAIL",
+          "id: evidence" in form and "required: true" in form
+          and "not evidence of absence" in form.replace("\n", " ").replace("  ", " ")
+          or "gap in that source" in form,
+          "the form must ask for evidence and state that an absence is not a finding")
+
+    # Correction links must reach the form with identity attached.
+    index_html = (ROOT / "index.html")
+    if index_html.exists():
+        page = index_html.read_text(encoding="utf-8")
+        links = re.findall(r"https://github\.com/m4s-ai/snoredex-data/issues/new\?[^\"\\]+", page)
+        bad_template = [u for u in links if "template=printing-correction.yml" not in u]
+        check("T4", "Every correction link targets the generated issue form", "FAIL",
+              bool(links) and not bad_template,
+              f"{len(links)} links found, {len(bad_template)} not targeting the form")
+
+        missing_prefill = [
+            u[:80] for u in links
+            if not all(k in u for k in ("row-id=", "card-name=", "set-code=", "current-state="))
+        ]
+        check("T5", "Every correction link prefills the row identity", "FAIL",
+              not missing_prefill,
+              f"{len(missing_prefill)} links miss a prefill parameter: {missing_prefill[:2]}")
+
+        # GitHub rejects issue-creation URLs beyond roughly 8 KB.
+        overlong = [(len(u), u[:60]) for u in links if len(u) > 6000]
+        longest = max((len(u) for u in links), default=0)
+        check("T6", "No correction link approaches GitHub's URL length limit", "FAIL",
+              not overlong, f"longest link is {longest} chars; {len(overlong)} exceed 6000")
+else:
+    check("T1", "Correction issue form exists", "FAIL", False,
+          ".github/ISSUE_TEMPLATE/printing-correction.yml is missing; "
+          "run python scripts/issue_templates.py")
+
+
+# --------------------------------------------------------------------------- #
 # Regression guards for invariants that currently hold — keep them holding
 # --------------------------------------------------------------------------- #
 
