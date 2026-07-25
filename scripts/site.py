@@ -59,6 +59,7 @@ COLUMNS = [
 
 
 def read_json(path: Path) -> Any:
+    # Tolerate historical PowerShell 5.1 BOM output; all active writers now emit UTF-8 no-BOM.
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
@@ -198,6 +199,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "edition": row["edition"],
             "dateSort": row["dateSort"],
             "dateDisplay": display_date(row),
+            "dateStatus": "approximate" if row.get("dateApproximate") else "exact",
             "image": row.get("image"),
             "finishes": sorted(finishes),
             "finishDisplay": [
@@ -301,7 +303,9 @@ def main() -> int:
     for lang in LANG_ORDER:
         head_cells.append(
             f'<th scope="col" class="langcell" data-key="lang-{LANG_CODE[lang]}" '
-            f'title="{html.escape(lang)}">{LANG_CODE[lang]}</th>'
+            f'aria-sort="none" title="{html.escape(lang)}">'
+            f'<button type="button" class="sort" data-key="lang-{LANG_CODE[lang]}" '
+            f'aria-label="Sort by {html.escape(lang)} availability">{LANG_CODE[lang]}</button></th>'
         )
     head_cells.append('<th scope="col" class="corr">Report</th>')
 
@@ -411,12 +415,19 @@ def main() -> int:
     <details class="morefilters">
       <summary>Column filters</summary>
       <div class="row" style="margin-top:8px">
+        {multiselect("dateStatus", "Release status")}
+        {multiselect("name", "Card")}
         {multiselect("setCode", "Set")}
+        {multiselect("setName", "Expansion")}
+        {multiselect("number", "Collector number")}
         {multiselect("edition", "Edition")}
+        {multiselect("variant", "Variant")}
+        {multiselect("variantName", "Variant description")}
         {multiselect("rarity", "Rarity")}
         {multiselect("artist", "Artist")}
         {multiselect("finish", "Finish")}
         {multiselect("pattern", "Foil pattern")}
+        {multiselect("marking", "Stamp")}
         {multiselect("markingRole", "Stamp role")}
         {multiselect("size", "Card size")}
         {multiselect("distribution", "Distribution")}
@@ -467,6 +478,11 @@ def main() -> int:
         <select id="cl-layout">
           <option value="compact">Compact (text only)</option>
           <option value="images">With images</option>
+        </select></div>
+      <div class="field"><label for="cl-paper">Paper</label>
+        <select id="cl-paper">
+          <option value="A4">A4</option>
+          <option value="Letter">US Letter</option>
         </select></div>
       <div class="field"><label for="cl-unresolved">Unresolved</label>
         <span><input type="checkbox" id="cl-unresolved" checked> include placeholders</span></div>
@@ -549,10 +565,12 @@ def main() -> int:
 
 <section id="license">
   <h2>License and notices</h2>
-  <p>This repository is a mixed work; no single licence covers all of it. Original software is under
-  <strong>PolyForm Noncommercial 1.0.0</strong>; the original data selection and arrangement,
-  verification annotations, documentation and site copy are under
-  <strong>CC BY-NC-SA 4.0</strong>. This is noncommercial source-available, not OSI open source.</p>
+  <p>This repository is a mixed work; no single licence covers all of it. The intended terms are
+  <strong>PolyForm Noncommercial 1.0.0</strong> for original software and
+  <strong>CC BY-NC-SA 4.0</strong> for the original data selection and arrangement, verification
+  annotations, documentation and site copy. The verbatim texts are included, but the grants are
+  <strong>not yet operative</strong> until the owner records publication approval. This is intended
+  to be noncommercial source-available, not OSI open source.</p>
   <p><strong>Excluded:</strong> Pok&eacute;mon card artwork and images, names, logos and trademarks,
   illustrator credits and the underlying illustrations, quoted provider content, and third-party
   photographs. The licences above grant nothing in respect of any of it.</p>
@@ -611,8 +629,10 @@ def main() -> int:
         print("site is current")
         return 0
 
-    INDEX_PATH.write_text(page, encoding="utf-8", newline="\n")
-    ALIAS_PATH.write_text(alias, encoding="utf-8", newline="\n")
+    with INDEX_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(page)
+    with ALIAS_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(alias)
     print(f"index.html: {len(rows)} rows, {len(checklist)} checklist items, "
           f"{registry['meta']['counts']['evidenceRecords']} sources "
           f"({INDEX_PATH.stat().st_size // 1024} KB)")

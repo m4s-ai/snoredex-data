@@ -60,6 +60,7 @@ LANG_RANK = {language: index for index, language in enumerate(LANG_ORDER)}
 
 
 def read_json(path: Path) -> Any:
+    # Tolerate historical PowerShell 5.1 BOM output; all active writers now emit UTF-8 no-BOM.
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
@@ -881,8 +882,8 @@ def main() -> None:
     write_json(REVIEW_JSON_PATH, review_document)
     write_json(ANALYSIS_PATH, analysis)
     write_json(CARDS_PATH, cards_document)
-    with REVIEW_CSV_PATH.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.writer(handle)
+    with REVIEW_CSV_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(
             [
                 "finishUnitId",

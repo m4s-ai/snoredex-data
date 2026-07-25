@@ -7,9 +7,10 @@ someone else.
 
 This project is **noncommercial and source-available**. It is deliberately **not** OSI open source.
 
-> **Status: not yet in force.** Three decisions listed under *Open decisions* below are the
-> owner's to make, and the two verbatim licence texts have not been added yet (see `LICENSES/`).
-> Until both are resolved this file describes the intended structure, not an operative grant.
+> **Status: not yet in force.** The two verbatim licence texts are present and hash-verified, but
+> the owner decisions listed below have not been approved. Until
+> `publication-decisions.json` records that approval, this file describes the intended structure,
+> not an operative grant.
 
 ## 1. Original software — PolyForm Noncommercial 1.0.0
 
@@ -21,6 +22,10 @@ Covers the build and verification code written for this project:
 
 Full text: `LICENSES/PolyForm-Noncommercial-1.0.0.md` ·
 canonical source <https://polyformproject.org/licenses/noncommercial/1.0.0/>
+
+The publisher's versioned source file is
+<https://github.com/polyformproject/polyform-licenses/blob/1.0.0/PolyForm-Noncommercial-1.0.0.md>;
+the older rendered URL currently returns 404 but remains the URL printed in the licence itself.
 
 Permits personal, hobby, research, and other noncommercial use, including modification and
 redistribution. Commercial use requires a separate grant from the licensor.
@@ -76,7 +81,8 @@ for purchase, grading, insurance, or valuation decisions without independent ver
 
 ## Open decisions
 
-These belong to the repository owner and are unresolved:
+These belong to the repository owner and remain false/unset in
+`publication-decisions.json`:
 
 1. **Scope of "private use".** Recommended default: noncommercial reuse *with* modification and
    redistribution permitted — which is what the two licences above provide. The alternative,
@@ -87,5 +93,12 @@ These belong to the repository owner and are unresolved:
 3. **Publication consent.** Owner attestations and any photographed specimens need explicit
    consent before publication. These are currently represented as anonymous evidence classes with
    no personal identifiers, which is the right shape, but consent is still the owner's to give.
+4. **Repository versus site publication.** The current safe decision is to keep the repository
+   private. Its history contains old absolute local paths. A curated Pages artifact can be
+   published separately after the other approvals; making the repository history public requires
+   either an explicit acceptance of that disclosure or a separately authorized history rewrite.
+
+Merging the implementation does not grant these approvals and does not deploy the site. The Pages
+workflow is manual and calls `verification/publication_gate.py` before any upload.
 
 See issue #5 and `verification/PUBLIC-READINESS-AUDIT.md`.

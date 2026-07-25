@@ -5,13 +5,21 @@ $overridePath = Join-Path $verificationDir 'finish_overrides.json'
 $overrideDocument = Get-Content -LiteralPath $overridePath -Raw -Encoding utf8 | ConvertFrom-Json
 $responseCache = @{}
 $failures = @()
+$networkFailures = @()
 $checkedSources = 0
 $checkedProducts = 0
 
 function Get-TcgCsvResults([string]$uri) {
   if (-not $script:responseCache.ContainsKey($uri)) {
-    $response = Invoke-RestMethod -Uri $uri -Headers @{'User-Agent' = 'snoredex-data/finish-source-verification'}
-    $script:responseCache[$uri] = @($response.results)
+    try {
+      $response = Invoke-RestMethod -Uri $uri -Headers @{'User-Agent' = 'snoredex-data/finish-source-verification'}
+      $script:responseCache[$uri] = [pscustomobject]@{Success=$true; Results=@($response.results); Error=$null}
+    }
+    catch {
+      $detail = $_.Exception.Message
+      $script:networkFailures += "$uri — $detail"
+      $script:responseCache[$uri] = [pscustomobject]@{Success=$false; Results=@(); Error=$detail}
+    }
   }
   return $script:responseCache[$uri]
 }
@@ -29,8 +37,13 @@ foreach ($sourceProperty in $overrideDocument.sources.PSObject.Properties) {
     continue
   }
 
-  $products = Get-TcgCsvResults $source.identityUrl
-  $prices = Get-TcgCsvResults $source.url
+  $productResponse = Get-TcgCsvResults $source.identityUrl
+  $priceResponse = Get-TcgCsvResults $source.url
+  if (-not $productResponse.Success -or -not $priceResponse.Success) {
+    continue
+  }
+  $products = @($productResponse.Results)
+  $prices = @($priceResponse.Results)
   foreach ($expectation in $source.expectedSubtypes.PSObject.Properties) {
     $checkedProducts++
     $productId = [int]$expectation.Name
@@ -60,7 +73,15 @@ if ($failures.Count) {
   foreach ($failure in $failures) {
     Write-Host "[FAIL] $failure"
   }
-  throw "Finish-source verification failed for $($failures.Count) assertion(s)."
+  throw "Finish-source DATA MISMATCH for $($failures.Count) assertion(s)."
+}
+
+if ($networkFailures.Count) {
+  foreach ($failure in $networkFailures) {
+    Write-Host "[RETRY] $failure"
+  }
+  Write-Error "Finish-source verification could not reach $($networkFailures.Count) endpoint(s); this is a transient network failure, not a data mismatch."
+  exit 2
 }
 
 Write-Host ""
