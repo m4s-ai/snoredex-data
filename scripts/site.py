@@ -22,7 +22,6 @@ from __future__ import annotations
 import html
 import json
 import sys
-from datetime import date
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlencode
@@ -273,7 +272,10 @@ def main() -> int:
     rows = build_rows(releases_doc["variants"])
     checklist = build_checklist(checklist_doc["items"])
     verification = dataset["meta"]["verification"]
-    generated = date.today().isoformat()
+    # The page is a projection of committed inputs. A wall-clock date made an unchanged checkout
+    # stale as soon as CI ran in a different timezone or on the next day. Reuse the checklist
+    # snapshot date so identical inputs always produce identical bytes.
+    generated = str(checklist_doc.get("meta", {}).get("generated") or "unknown")
 
     confirmed_pairs = sum(len(r["confirmedLanguages"]) for r in releases_doc["variants"]
                           if r["edition"] != "1st Edition")
