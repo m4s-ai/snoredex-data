@@ -87,6 +87,7 @@ jobs:
           python scripts/source_registry.py --check
           python scripts/checklist.py --check
           python scripts/readme_stats.py --check
+          python scripts/issue_templates.py --check
           python scripts/site.py --check
           git diff --exit-code -- snorlax_cards.json analysis_confirmed_releases.json \
             analysis_confirmed_releases.csv || {

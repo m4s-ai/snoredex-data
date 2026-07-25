@@ -63,27 +63,70 @@ def read_json(path: Path) -> Any:
         return json.load(handle)
 
 
-def correction_url(row: dict[str, Any]) -> str:
-    title = f'[Correction] {row["name"]} — {row["setCode"]} {row["number"] or "unnumbered"} ({row["variant"]})'
-    body = "\n".join([
-        "A correction was requested from the Snoredex collection page.",
+def current_state_summary(row: dict[str, Any]) -> str:
+    """Compact description of what the page shows for this row, for the form's prefill.
+
+    Kept terse on purpose: it travels in a URL query string, and GitHub rejects issue-creation
+    URLs beyond roughly 8 KB. The reporter needs enough to confirm we are looking at the same
+    row, not a full dump — the row ID already carries exact identity.
+    """
+    finishes: dict[str, str] = {}
+    patterns: set[str] = set()
+    stamps: set[str] = set()
+    sizes: set[str] = set()
+    rank = {"pending": 0, "other-product": 1, "unmapped": 2,
+            "marketplace-claimed": 3, "owner-attested": 4, "confirmed": 5}
+    for cell in row.get("finishByLanguage") or []:
+        for finish, status in (cell.get("finishStatus") or {}).items():
+            if status in ("pending", "not-applicable"):
+                continue
+            if rank.get(status, 0) > rank.get(finishes.get(finish, "pending"), 0):
+                finishes[finish] = status
+        for printing in cell.get("printings") or []:
+            if printing.get("foilPattern"):
+                patterns.add(printing["foilPattern"])
+            for marking in printing.get("markings") or []:
+                if isinstance(marking, dict) and marking.get("text"):
+                    stamps.add(marking["text"])
+            if printing.get("cardSize"):
+                sizes.add(printing["cardSize"])
+
+    release = str(row["date"]) + (" (approximate)" if row.get("dateApproximate") else "")
+    finish_text = ", ".join(f"{f} = {s}" for f, s in sorted(finishes.items())) or "none recorded"
+    return "\n".join([
+        f"Edition: {row['edition']}",
+        f"Release: {release}",
+        f"Confirmed languages: {', '.join(row['confirmedLanguages']) or 'none'}",
+        f"Finishes: {finish_text}",
+        f"Foil patterns: {', '.join(sorted(patterns)) or 'none recorded'}",
+        f"Stamps: {', '.join(sorted(stamps)) or 'none recorded'}",
+        f"Card size: {', '.join(sorted(sizes)) or 'unknown'}",
+        f"Cardmarket: {row['cardmarketUrl']}",
         "",
-        "## Row to correct",
-        f'- Row ID: `{row["rowId"]}`  (stable; survives sorting and filtering)',
-        f'- Card: {row["name"]}',
-        f'- Set: {row["setName"]} ({row["setCode"]})',
-        f'- Collector number: {row["number"] or "unnumbered"}',
-        f'- Variant: {row["variant"]}',
-        f'- Edition: {row["edition"]}',
-        f'- Release: {row["date"]}{"" if not row.get("dateApproximate") else " (approximate)"}',
-        f'- Confirmed languages: {", ".join(row["confirmedLanguages"])}',
-        f'- Cardmarket product: {row["cardmarketUrl"]}',
-        "",
-        "## Suggested correction",
-        "Describe what is wrong and, if possible, include a source, link, or photograph:",
-        "",
+        "(pending = not yet established, never proven absent)",
     ])
-    return "https://github.com/m4s-ai/snoredex-data/issues/new?" + urlencode({"title": title, "body": body})
+
+
+def correction_url(row: dict[str, Any]) -> str:
+    """Deep-link into the generated issue form with the row's identity already filled in.
+
+    Only `input` and `textarea` fields are prefilled. GitHub keys issue-form prefill on each
+    field's `id`, and support is most reliable for those two types — so the fields the site must
+    fill are exactly the ones with dependable prefill, and the dropdowns and checkboxes the
+    reporter sets by hand never need it. If prefill were to fail entirely the form still works;
+    the reporter would just retype the row ID.
+    """
+    params = {
+        "template": "printing-correction.yml",
+        "title": f'[Correction] {row["name"]} — {row["setCode"]} '
+                 f'{row["number"] or "unnumbered"} ({row["variant"]})',
+        "row-id": row["rowId"],
+        "card-name": row["name"],
+        "set-code": f'{row["setCode"]} — {row["setName"]}',
+        "card-number": row["number"] or "unnumbered",
+        "current-state": current_state_summary(row),
+    }
+    return "https://github.com/m4s-ai/snoredex-data/issues/new?" + urlencode(params)
 
 
 def display_date(row: dict[str, Any]) -> str:

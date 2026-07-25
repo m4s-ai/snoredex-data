@@ -215,6 +215,7 @@ python scripts\confirmed_releases.py             # regenerate chronological JSON
 python scripts\source_registry.py                # rebuild provider/evidence registry
 python scripts\checklist.py                      # rebuild canonical checklist items
 python scripts\readme_stats.py                   # refresh generated README blocks
+python scripts\issue_templates.py                # rebuild the community correction form
 python scripts\site.py                           # rebuild index.html + the alias redirect
 pwsh -File verification\review_integrity.ps1     # after any write
 python verification\review_findings.py           # after any write
