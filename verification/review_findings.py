@@ -499,13 +499,32 @@ check(
     f"{history_scanned} blobs. Public repository approval must remain false unless these are "
     f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
 )
+
+try:
+    identity_fields = subprocess.check_output(
+        ["git", "log", "--all", "--format=%ae%x00%ce"], cwd=ROOT
+    ).decode("utf-8", errors="replace").replace("\n", "\0").split("\0")
+except (OSError, subprocess.CalledProcessError):
+    identity_fields = ["commit metadata unavailable"]
+personal_commit_emails = sorted({
+    email.strip() for email in identity_fields
+    if "@" in email and "noreply" not in email.lower()
+})
+check(
+    "P7",
+    "Reachable commit metadata exposes no personal email address",
+    "FAIL",
+    not personal_commit_emails,
+    f"personal commit emails: {personal_commit_emails}",
+)
 check(
     "I3",
     "Full-history publication audit",
     "INFO",
     True,
     f"{history_scanned} reachable blobs scanned; {len(history_hits)} sensitive-history hits; "
-    f"repository publication approved={decisions.get('repositoryPublicationApproved')}",
+    f"repository publication approved={decisions.get('repositoryPublicationApproved')}; "
+    f"personal commit emails={len(personal_commit_emails)}",
 )
 
 
