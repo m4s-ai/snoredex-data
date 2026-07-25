@@ -211,15 +211,21 @@ pwsh -File verification\audit_evidence.ps1       # after any write
 python scripts\editions.py                       # if edition data changed
 python scripts\finishes.py                       # regenerate finish units/review + main summaries
 python scripts\language_status.py                # refresh per-card language verdicts
-python scripts\confirmed_releases.py             # regenerate chronological table + CSV
+python scripts\confirmed_releases.py             # regenerate chronological JSON + CSV
+python scripts\source_registry.py                # rebuild provider/evidence registry
+python scripts\checklist.py                      # rebuild canonical checklist items
 python scripts\readme_stats.py                   # refresh generated README blocks
+python scripts\site.py                           # rebuild index.html + the alias redirect
 pwsh -File verification\review_integrity.ps1     # after any write
 python verification\review_findings.py           # after any write
+python verification\test_site.py                 # browser behaviour (needs playwright+chromium)
 pwsh -File verification\verify_finish_sources.ps1 # recheck machine-readable TCGCSV assertions
 ```
 
-Order matters: `finishes.py` writes the card finish summaries, `language_status.py` writes the
-card language verdicts, and `confirmed_releases.py` reads both. `finishes.py --reproject` redoes
+Order matters, and it is the order above: `finishes.py` writes the card finish summaries,
+`language_status.py` writes the card language verdicts, `confirmed_releases.py` reads both and
+writes the chronological rows, and `checklist.py` and `site.py` read those. Every generator has a
+`--check` mode that fails instead of writing, which is what the release gate runs. `finishes.py --reproject` redoes
 only the card projection from the committed finish store and needs no network, which is the fast
 path when a projection rule changes.
 
@@ -231,8 +237,8 @@ rising number by editing the baseline — that is the habit the split exists to 
 All scripts derive paths from their own location: `$PSScriptRoot` in PowerShell and
 `Path(__file__)` in Python. Keep that convention in new scripts.
 
-Then update the two Artifacts (`open-items.html`, `confirmed-releases.html`) if their numbers
-changed, and commit + push:
+`index.html` is the single public page; `verification/confirmed-releases.html` is a redirect to
+it, so there is no second page to keep in step. Commit + push:
 
 ```bash
 git add -A && git commit -m "..." && git push origin main
