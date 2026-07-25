@@ -21,4 +21,4 @@ foreach($unit in $units){
 Write-Host ("resolved units: {0}" -f @($units|?{$_.status -in @('confirmed','contradicted')}).Count)
 Write-Host ("units with unusable evidence: {0}" -f $bad.Count)
 if($bad.Count){ $bad | Format-Table -Auto }
-$bad | ConvertTo-Json -Depth 3 | Set-Content "$V\_evidence_audit.json" -Encoding utf8
+$bad | ConvertTo-Json -Depth 3 | Set-Content "$V\_evidence_audit.json" -Encoding utf8NoBOM

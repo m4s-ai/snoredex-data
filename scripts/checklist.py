@@ -15,9 +15,9 @@ Rules, in the order they bite:
    physical printing yield one item, not two.
 3. Expand by edition only where that edition is supported for that language, taken from the
    edition model rather than assumed.
-4. Never silently apply edition-agnostic finish evidence to both First Edition and Unlimited.
-   Every item records `editionScope`, and a First Edition item built from evidence that does not
-   itself distinguish editions is marked `edition-agnostic-evidence` - a disclosure, not a claim.
+4. Never apply edition-agnostic finish evidence to both First Edition and Unlimited. When more
+   than one edition is supported, a concrete printing is emitted only if the printing explicitly
+   identifies its edition. Otherwise each confirmed edition receives one unresolved placeholder.
 5. Where a confirmed card-language-edition has no printing detail at all, emit exactly one
    `finish: "unresolved"` placeholder rather than inventing a finish.
 6. Keep stamps, patterns, distribution channels and card sizes as separate physical items even
@@ -41,10 +41,11 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "analysis_checklist.json"
 
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
 
 
 def read_json(path: Path) -> Any:
+    # Tolerate historical PowerShell 5.1 BOM output; all active writers now emit UTF-8 no-BOM.
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
@@ -83,6 +84,20 @@ def distribution_slug(distribution: Any) -> str:
         str(distribution.get(field)) for field in ("kind", "name", "region")
         if distribution.get(field)
     ))
+
+
+def printing_editions(printing: dict[str, Any]) -> set[str]:
+    """Return editions explicitly attributed to a logical printing.
+
+    The current finish store is edition-agnostic, so this normally returns an empty set. Keeping
+    the reader here gives future evidence passes a narrow, machine-checked way to make a concrete
+    First Edition or Unlimited assertion without reintroducing cross multiplication.
+    """
+    editions = printing.get("editions")
+    if isinstance(editions, list):
+        return {str(value) for value in editions if value}
+    edition = printing.get("edition")
+    return {str(edition)} if edition else set()
 
 
 def main() -> int:
@@ -153,18 +168,36 @@ def main() -> int:
         # Rule 2: logical printings, already deduped by physical signature in the store.
         printings = [p for p in unit["printings"] if p["finish"] in FINISHES]
 
+        multiple_editions = len(seen_editions) > 1
         for edition, edition_source in seen_editions.items():
-            if not printings:
+            if multiple_editions:
+                edition_printings = [p for p in printings if edition in printing_editions(p)]
+                edition_scope = (
+                    "explicit-printing-mapping" if edition_printings else "unresolved"
+                )
+                if printings and not edition_printings:
+                    warnings.append(
+                        f"{unit['finishUnitId']} {language} {edition}: finish evidence exists but "
+                        "does not identify an edition; emitted an unresolved placeholder"
+                    )
+            else:
+                edition_printings = printings
+                edition_scope = (
+                    "no-edition-system" if edition == "—" else "only-supported-edition"
+                )
+
+            if not edition_printings:
                 # Rule 5: one honest placeholder, never an invented finish.
                 items.append(
                     build_item(unit, reference, confirming, edition, edition_source,
-                               printing=None, release=release_by_key)
+                               printing=None, edition_scope=edition_scope, release=release_by_key)
                 )
                 continue
-            for printing in printings:
+            for printing in edition_printings:
                 items.append(
                     build_item(unit, reference, confirming, edition, edition_source,
-                               printing=printing, release=release_by_key)
+                               printing=printing, edition_scope=edition_scope,
+                               release=release_by_key)
                 )
 
     # Rule 6 relies on the ID carrying every physical dimension; a collision means two genuinely
@@ -192,7 +225,7 @@ def main() -> int:
                 "Only confirmed language claims enter; contradicted and unresolved languages and code cards are excluded.",
                 "Expansion follows logical printings[], never group-level finish booleans.",
                 "Editions expand only where the edition model supports that edition for that language.",
-                "Edition-agnostic finish evidence is never silently applied to First Edition; editionScope discloses it.",
+                "When multiple editions are supported, concrete finishes require an explicit edition mapping; otherwise each edition receives one unresolved placeholder.",
                 "A confirmed card-language-edition with no printing detail yields exactly one finish:unresolved placeholder.",
                 "Stamps, foil patterns, distribution channels and card sizes remain separate items even when the finish name matches.",
                 "Positive evidence is not proof of completeness: only completenessStatus=complete-manifest asserts that an unlisted alternative is absent.",
@@ -246,7 +279,7 @@ def main() -> int:
     return 0
 
 
-def build_item(unit, reference, confirming, edition, edition_source, printing, release):
+def build_item(unit, reference, confirming, edition, edition_source, printing, edition_scope, release):
     """Build one checklist record. `printing=None` yields the unresolved placeholder."""
     set_code = unit["setCode"]
     number = str(unit["number"] or "")
@@ -280,14 +313,6 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, r
     if card_size and card_size != "standard":
         id_parts.append(slug(card_size))
     checklist_id = "-".join(id_parts)
-
-    # Disclose, never assume, how edition evidence relates to finish evidence.
-    if edition == "1st Edition":
-        edition_scope = "edition-agnostic-evidence" if printing else "unresolved"
-    elif edition == "Unlimited":
-        edition_scope = "edition-agnostic-evidence" if printing else "unresolved"
-    else:
-        edition_scope = "no-edition-system"
 
     return {
         "checklistId": checklist_id,

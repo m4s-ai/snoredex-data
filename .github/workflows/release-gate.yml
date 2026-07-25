@@ -21,9 +21,16 @@ permissions:
 
 jobs:
   gate:
-    runs-on: ubuntu-latest
+    name: gate (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -32,11 +39,19 @@ jobs:
       - name: Install browser test dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install playwright
-          python -m playwright install --with-deps chromium
+          pip install -r requirements.txt
+
+      - name: Install Chromium with Linux dependencies
+        if: runner.os == 'Linux'
+        run: python -m playwright install --with-deps chromium
+
+      - name: Install Chromium on Windows
+        if: runner.os == 'Windows'
+        run: python -m playwright install chromium
 
       # --- syntax: every script must parse before anything is trusted to run ---
       - name: Parse every Python file
+        shell: bash
         run: |
           python - <<'PY'
           import ast, pathlib, sys
@@ -75,11 +90,17 @@ jobs:
         shell: pwsh
         run: pwsh -File verification/audit_evidence.ps1
 
+      - name: Live finish-source verification
+        if: runner.os == 'Linux'
+        shell: pwsh
+        run: pwsh -File verification/verify_finish_sources.ps1
+
       - name: Cross-artifact consistency and publication readiness
         run: python verification/review_findings.py
 
       # --- determinism: committed artifacts must match what the generators produce ---
       - name: Generated artifacts match their inputs
+        shell: bash
         run: |
           python scripts/finishes.py --reproject
           python scripts/language_status.py
@@ -89,8 +110,7 @@ jobs:
           python scripts/readme_stats.py --check
           python scripts/issue_templates.py --check
           python scripts/site.py --check
-          git diff --exit-code -- snorlax_cards.json analysis_confirmed_releases.json \
-            analysis_confirmed_releases.csv || {
+          git diff --exit-code || {
               echo "::error::Regenerating produced different output than what is committed."
               exit 1
             }
@@ -101,9 +121,12 @@ jobs:
 
       # --- artifact hygiene ---
       - name: Public artifact contains only allowlisted files
-        run: python scripts/publish.py --out _site --verify
+        run: |
+          python scripts/publish.py --out _site
+          python scripts/publish.py --out _site --verify
 
       - name: No absolute paths, secrets, or caches in the tree
+        shell: bash
         run: |
           python - <<'PY'
           import pathlib, re, sys

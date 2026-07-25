@@ -5,7 +5,8 @@ was actually checked, what passed, and what a human still has to decide.
 
 Re-run the mechanical parts with:
 
-    python verification/review_findings.py     # checks P1–P4, L1
+    python verification/review_findings.py     # current tree, every Git blob, licences, decisions
+    python verification/publication_gate.py    # intentionally fails until owner approval
 
 Audit date: 2026-07-25 · commit range: full history, root through `HEAD`.
 
@@ -13,11 +14,11 @@ Audit date: 2026-07-25 · commit range: full history, root through `HEAD`.
 
 | Check | Method | Result |
 |---|---|---|
-| No absolute local paths | `grep -rEI "C:\\\\Users\|/Users/\|/home/[a-z]+/\|D:\\\\"` across all tracked `.ps1`, `.py`, `.md`, `.json` | **0 hits.** Scripts resolve the checkout from `$PSScriptRoot` / `Path(__file__)`. |
-| No credentials, tokens, cookies | `grep -rEIn "(api[_-]?key\|secret\|passwd\|password\|token *=\|Bearer \|Authorization\|Cookie:)"` | **0 hits** after excluding `variantToken`, the Cardmarket V-token vocabulary. |
-| No email addresses or personal identifiers | regex sweep across tracked text files | **0 hits.** |
-| No deleted files hiding in history | `git log --diff-filter=D --name-only` | **Empty.** Nothing was ever committed and removed, so history holds no withdrawn material. |
-| Committer identity | `git log --format='%an <%ae>'` | Single committer, GitHub `noreply` address. No personal email exposed. |
+| Current tracked tree | `git ls-files -z`, binary detection, regex scan of every text file | **0 hits.** Scripts resolve the checkout from `$PSScriptRoot` / `Path(__file__)`. |
+| Complete reachable history | `git rev-list --objects --all` + `git cat-file --batch`, every unique reachable blob | **82 hits**, all old `C:\Users\...` absolute-path occurrences across build, verification, and handover blobs. No credential or personal-email hit was found. The executable report prints the current blob count. |
+| Shallow-check protection | `git rev-parse --is-shallow-repository` | **False.** CI uses `fetch-depth: 0`, so “full history” cannot silently mean one commit. |
+| Deleted-name check | `git log --diff-filter=D --name-only` | Empty, but this is only supplementary: modified historical versions can still contain withdrawn data, which the blob scan catches. |
+| Committer identity | `git log --format='%an <%ae>'` | Claude and Scarrty identities, using GitHub/automation addresses rather than a personal contact address. |
 | Caches and scratch excluded | `.gitignore` review | `verification/cache/`, `verification/zoom/`, `_evidence_audit.json`, `__pycache__/` all excluded and absent from the tree. |
 
 ## Requires human judgement — not cleared
@@ -31,22 +32,25 @@ These cannot be settled by a text scan and remain open:
 2. **Owner attestations and photographed specimens.** Recorded as anonymous evidence classes with
    no personal identifiers, which is the right shape. Publication consent is still the owner's to
    give explicitly.
-3. **Repository vs site visibility.** Publishing the repository exposes the full history —
-   including every verification pass and its reasoning. Publishing only a curated Pages artifact
-   keeps the working history private. The epic recommends deciding before any visibility change.
+3. **Repository vs site visibility.** The enforced safe default is `private`. Publishing only a
+   curated Pages artifact avoids exposing the 82 historical local-path blobs. Public repository
+   visibility requires an explicit decision and either acceptance of those paths or an authorized
+   history rewrite.
 4. **Licensor identity.** `m4s-ai` or "contributors to snoredex-data". See `LICENSE.md`.
 
-## Blocking gaps
+## Mechanical blockers resolved
 
-- **Verbatim licence texts are absent.** `LICENSES/` holds only instructions. The environment
-  used for this pass denies outbound access to `polyformproject.org` and `creativecommons.org`,
-  and reconstructing a legal text from memory risks silent divergence from the published wording.
-  Check `L1` fails until both files exist, and the release gate refuses to publish.
+- Both verbatim licence texts are present. `L1` verifies their publisher SHA-256 values.
+- `publication-decisions.json` records every outstanding owner choice with safe false/private
+  defaults. The manual Pages workflow calls `publication_gate.py`, so adding licence files alone
+  can never trigger publication.
 
 ## Verdict
 
-The repository is **clean of secrets, personal paths, and withdrawn material** — the failure mode
-most likely to make a visibility change irreversible does not apply here.
+The current tracked tree is clean of detected credentials, personal paths, and contact details.
+The complete Git history is **not** clean of personal local paths: 82 reachable blobs contain the
+historical `C:\Users\...` checkout prefix. The repository must remain private unless that disclosure
+is expressly accepted or a history rewrite is separately authorized.
 
-It is **not yet publishable**: the verbatim licence texts are missing and four owner decisions are
-open. No visibility change should be made until both are resolved.
+The implementation is safe to merge but **not yet authorized to publish**. Four owner decisions
+remain open, and the deployment gate enforces them independently of ordinary PR validation.

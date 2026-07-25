@@ -22,6 +22,12 @@
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
+  function escapeHTML(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
   /* ---------------------------------------------------------------- sorting */
 
   // Collector numbers are not lexicographic: "9" sorts before "10", and "TG10" before "TG2"
@@ -48,7 +54,7 @@
     setCode: (r) => (r.setCode || "").toLowerCase(),
     setName: (r) => (r.setName || "").toLowerCase(),
     number: null, // natural
-    variant: (r) => (r.variant || "").toLowerCase(),
+    variant: (r) => ((r.variant || "") + " " + (r.variantName || "")).toLowerCase(),
     variantName: (r) => (r.variantName || "").toLowerCase(),
     rarity: (r) => (r.rarity || "").toLowerCase(),
     artist: (r) => (r.artist || "").toLowerCase(),
@@ -62,6 +68,9 @@
     evidence: (r) => (r.evidence || []).join(","),
     langCount: (r) => r.confirmedLanguages.length,
   };
+  LANGS.forEach((lang) => {
+    SORTERS["lang-" + lang.code] = (r) => r.langCodes.includes(lang.code) ? 1 : 0;
+  });
 
   let sortKey = "release";
   let sortDir = 1;
@@ -88,12 +97,19 @@
 
   const state = {
     q: "",
+    dateStatus: [],
+    name: [],
     setCode: [],
+    setName: [],
+    number: [],
     edition: [],
+    variant: [],
+    variantName: [],
     rarity: [],
     artist: [],
     finish: [],
     pattern: [],
+    marking: [],
     markingRole: [],
     size: [],
     distribution: [],
@@ -105,20 +121,30 @@
     lang: {}, // code -> "" | "present" | "absent"
   };
 
-  const MULTI = ["setCode", "edition", "rarity", "artist", "finish", "pattern",
+  const MULTI = ["dateStatus", "name", "setCode", "setName", "number", "edition",
+    "variant", "variantName", "rarity", "artist", "finish", "pattern", "marking",
     "markingRole", "size", "distribution", "evidence"];
 
+  const valuesOrNone = (values) => values && values.length ? values : ["—"];
+
   const ROW_FIELD = {
+    dateStatus: (r) => [r.dateStatus],
+    name: (r) => [r.name],
     setCode: (r) => [r.setCode],
+    setName: (r) => [r.setName],
+    number: (r) => [r.number || "—"],
     edition: (r) => [r.edition],
-    rarity: (r) => [r.rarity || ""],
-    artist: (r) => [r.artist || ""],
-    finish: (r) => r.finishes,
-    pattern: (r) => r.patterns,
-    markingRole: (r) => r.markingRoles,
-    size: (r) => r.sizes,
-    distribution: (r) => r.distributions,
-    evidence: (r) => r.evidence,
+    variant: (r) => [r.variant],
+    variantName: (r) => [r.variantName || "—"],
+    rarity: (r) => [r.rarity || "—"],
+    artist: (r) => [r.artist || "—"],
+    finish: (r) => valuesOrNone(r.finishes),
+    pattern: (r) => valuesOrNone(r.patterns),
+    marking: (r) => valuesOrNone(r.markings),
+    markingRole: (r) => valuesOrNone(r.markingRoles),
+    size: (r) => valuesOrNone(r.sizes),
+    distribution: (r) => valuesOrNone(r.distributions),
+    evidence: (r) => valuesOrNone(r.evidence),
   };
 
   function matches(row) {
@@ -216,12 +242,20 @@
       const wrap = document.createElement("div");
       wrap.className = "field";
       const id = "f-lang-" + lang.code;
-      wrap.innerHTML =
-        '<label for="' + id + '">' + lang.code + "</label>" +
-        '<select id="' + id + '"><option value="">any</option>' +
-        '<option value="present">present</option><option value="absent">absent</option></select>';
+      const label = document.createElement("label");
+      label.htmlFor = id;
+      label.textContent = lang.code;
+      const select = document.createElement("select");
+      select.id = id;
+      [["", "any"], ["present", "present"], ["absent", "absent"]].forEach(([value, text]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+        select.appendChild(option);
+      });
+      wrap.append(label, select);
       langGrid.appendChild(wrap);
-      wrap.querySelector("select").addEventListener("change", (event) => {
+      select.addEventListener("change", (event) => {
         state.lang[lang.code] = event.target.value;
         render();
       });
@@ -299,7 +333,7 @@
   let visibleRows = [];
 
   function pill(text, cls) {
-    return '<span class="pill ' + cls + '">' + text + "</span>";
+    return '<span class="pill ' + escapeHTML(cls) + '">' + escapeHTML(text) + "</span>";
   }
 
   function rowHTML(row) {
@@ -310,27 +344,27 @@
     const finishPills = row.finishDisplay.map((f) => pill(f.label, f.status)).join("");
     return (
       "<tr>" +
-      '<td class="img">' + (row.image ? '<img loading="lazy" src="' + row.image + '" alt="' + row.name + '">' : "") + "</td>" +
-      "<td>" + row.dateDisplay + "</td>" +
-      "<td>" + row.name + "</td>" +
-      "<td>" + row.setCode + "</td>" +
-      '<td class="secondary">' + row.setName + "</td>" +
-      "<td>" + (row.number || "—") + "</td>" +
-      '<td class="secondary">' + row.variant + (row.variantName ? "<br><small>" + row.variantName + "</small>" : "") + "</td>" +
-      '<td class="secondary">' + (row.rarity || "—") + "</td>" +
-      '<td class="secondary">' + (row.artist || "—") + "</td>" +
-      "<td>" + row.edition + "</td>" +
+      '<td class="img">' + (row.image ? '<img loading="lazy" src="' + escapeHTML(row.image) + '" alt="' + escapeHTML(row.name) + '">' : "") + "</td>" +
+      "<td>" + escapeHTML(row.dateDisplay) + "</td>" +
+      "<td>" + escapeHTML(row.name) + "</td>" +
+      "<td>" + escapeHTML(row.setCode) + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.setName) + "</td>" +
+      "<td>" + escapeHTML(row.number || "—") + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.variant) + (row.variantName ? "<br><small>" + escapeHTML(row.variantName) + "</small>" : "") + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.rarity || "—") + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.artist || "—") + "</td>" +
+      "<td>" + escapeHTML(row.edition) + "</td>" +
       "<td>" + (finishPills || '<span class="pill pending">no evidence</span>') + "</td>" +
-      '<td class="secondary">' + (row.patterns.join(", ") || "—") + "</td>" +
-      '<td class="secondary">' + (row.markings.join(", ") || "—") + "</td>" +
-      '<td class="secondary">' + (row.markingRoles.join(", ") || "—") + "</td>" +
-      '<td class="secondary">' + row.sizes.join(", ") + "</td>" +
-      '<td class="secondary">' + (row.distributions.join(", ") || "—") + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.patterns.join(", ") || "—") + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.markings.join(", ") || "—") + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.markingRoles.join(", ") || "—") + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.sizes.join(", ")) + "</td>" +
+      '<td class="secondary">' + escapeHTML(row.distributions.join(", ") || "—") + "</td>" +
       '<td class="secondary">' + row.evidence.map((e) => pill(e, e)).join("") + "</td>" +
       '<td class="langcell">' + row.confirmedLanguages.length + "</td>" +
       langCells +
-      '<td class="corr"><a href="' + row.correctionUrl + '" target="_blank" rel="noopener" ' +
-      'aria-label="Report a correction for ' + row.name + " " + row.setCode + " " + (row.number || "") +
+      '<td class="corr"><a href="' + escapeHTML(row.correctionUrl) + '" target="_blank" rel="noopener" ' +
+      'aria-label="Report a correction for ' + escapeHTML(row.name + " " + row.setCode + " " + (row.number || "")) +
       '">Correction?</a></td>' +
       "</tr>"
     );
@@ -416,16 +450,11 @@
     return (item.releaseDate || "undated") + " — " + item.setName;
   }
 
-  function escapeHTML(value) {
-    return String(value == null ? "" : value)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-  }
-
   function buildChecklistDocument() {
     const items = checklistSelection();
     const mode = $("#cl-group").value;
     const compact = $("#cl-layout").value === "compact";
+    const paper = $("#cl-paper").value === "Letter" ? "Letter" : "A4";
     const today = new Date().toISOString().slice(0, 10);
 
     const groups = new Map();
@@ -438,8 +467,8 @@
     const sections = Array.from(groups.entries()).map(([heading, list]) => {
       const rows = list.map((item) => {
         const detail = [
-          item.language,
-          item.edition !== "—" ? item.edition : null,
+          escapeHTML(item.language),
+          item.edition !== "—" ? escapeHTML(item.edition) : null,
           item.finish === "unresolved"
             ? "<em>finish unresolved — not a confirmed version</em>"
             : escapeHTML(item.finish),
@@ -449,15 +478,20 @@
         ].filter(Boolean).join(" · ");
         const image = !compact && item.image
           ? '<img src="' + escapeHTML(item.image) + '" alt="">' : "";
-        return '<tr class="' + (item.finish === "unresolved" ? "unresolved" : "") + '">' +
+        return '<tr data-checklist-id="' + escapeHTML(item.checklistId) + '" class="' +
+          (item.finish === "unresolved" ? "unresolved" : "") + '">' +
           '<td class="box"><span class="cb"></span></td>' +
           (compact ? "" : '<td class="thumb">' + image + "</td>") +
           "<td><strong>" + escapeHTML(item.cardName) + "</strong> — " +
           escapeHTML(item.setCode) + " " + escapeHTML(item.number || "—") +
           "<br><small>" + detail + "</small></td>" +
+          '<td class="id"><code>' + escapeHTML(item.checklistId) + "</code></td>" +
           "</tr>";
       }).join("");
-      return "<section><h2>" + escapeHTML(heading) + "</h2><table>" + rows + "</table></section>";
+      return "<section><h2>" + escapeHTML(heading) + "</h2><table><thead><tr>" +
+        "<th>Owned</th>" + (compact ? "" : "<th>Image</th>") +
+        "<th>Printing</th><th>Checklist ID</th></tr></thead><tbody>" + rows +
+        "</tbody></table></section>";
     }).join("");
 
     const unresolved = items.filter((i) => i.finish === "unresolved").length;
@@ -467,7 +501,7 @@
     return "<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">" +
       '<meta name="viewport" content="width=device-width,initial-scale=1">' +
       "<title>Snoredex checklist " + today + "</title><style>" +
-      "@page{size:A4;margin:14mm}" +
+      "@page{size:" + paper + ";margin:14mm}" +
       "body{font:11pt/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;" +
       "color:#000;background:#fff;margin:0;padding:16px}" +
       "h1{font-size:17pt;margin:0 0 4px}h2{font-size:12pt;margin:16px 0 4px;border-bottom:1px solid #000;" +
@@ -475,8 +509,10 @@
       ".meta{font-size:9pt;color:#333;margin-bottom:12px}" +
       "table{width:100%;border-collapse:collapse}" +
       "tr{page-break-inside:avoid;break-inside:avoid}" +
-      "td{padding:3px 4px;border-bottom:1px solid #bbb;vertical-align:top}" +
+      "th,td{padding:3px 4px;border-bottom:1px solid #bbb;vertical-align:top;text-align:left}" +
+      "thead{display:table-header-group}th{font-size:8pt}" +
       "td.box{width:20px}td.thumb{width:42px}td.thumb img{width:38px;height:auto}" +
+      "td.id{width:24%;font-size:7pt;overflow-wrap:anywhere}" +
       ".cb{display:inline-block;width:12px;height:12px;border:1.4px solid #000;border-radius:2px}" +
       "tr.unresolved td{background:#f0f0f0}" +
       "small{color:#333}" +
@@ -489,15 +525,16 @@
       "<h1>Snorlax collection checklist</h1>" +
       '<div class="meta">Generated ' + today + " · scope: " + scopeLabel +
       " · " + items.length + " items (" + unresolved + " with unresolved finish)" +
-      " · paper: A4 and US Letter</div>" +
+      " · paper: " + paper + "</div>" +
       sections +
       '<div class="notice"><strong>Positive evidence only.</strong> This lists printings this ' +
       "project has documented, not everything that exists. An item marked <em>finish unresolved" +
       "</em> is a card whose finish has not been established — it is not a confirmed physical " +
       "version, and must not be treated as one. Absence from this list means no evidence has been " +
       "found, never that a printing does not exist.<br><br>" +
-      "Data: snoredex-data, noncommercial — original selection, arrangement and verification " +
-      "annotations under CC BY-NC-SA 4.0. Pokémon card artwork, images, names and trademarks " +
+      "Intended data terms: CC BY-NC-SA 4.0; the verbatim text is included in the project, but " +
+      "the grant is not operative until the owner records publication approval. Pokémon card " +
+      "artwork, images, names and trademarks " +
       "are excluded and remain © Pokémon / Nintendo / Creatures / GAME FREAK. " +
       "Unofficial fan project, not affiliated with or endorsed by any rights holder." +
       "</div></div></body></html>";
@@ -521,7 +558,7 @@
     fill("cl-langs", languages);
     fill("cl-editions", editions);
     fill("cl-finishes", finishes);
-    ["cl-scope", "cl-group", "cl-layout"].forEach((id) => {
+    ["cl-scope", "cl-group", "cl-layout", "cl-paper"].forEach((id) => {
       document.getElementById(id).addEventListener("change", updateChecklistPreview);
     });
     $("#cl-unresolved").addEventListener("change", updateChecklistPreview);

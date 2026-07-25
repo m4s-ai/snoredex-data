@@ -19,6 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_PREFIX = "_site"
 
 # Exact files. Each is here because the site links to it or a reader needs it.
 FILES = [
@@ -94,7 +95,23 @@ def collect() -> list[str]:
     return wanted
 
 
+def validate_output(out: Path) -> Path:
+    """Restrict destructive rebuilds to a dedicated staging directory.
+
+    The publisher intentionally replaces its output. Without this guard, a typo such as
+    ``--out .`` targets the checkout itself, while an absolute path can target unrelated data.
+    Requiring a direct child named ``_site*`` keeps the operation explicit and recoverable.
+    """
+    resolved = out.resolve()
+    if resolved.parent != ROOT or not resolved.name.startswith(OUTPUT_PREFIX):
+        raise ValueError(
+            f"output must be a direct child of {ROOT} named {OUTPUT_PREFIX}*; got {resolved}"
+        )
+    return resolved
+
+
 def build(out: Path) -> list[str]:
+    out = validate_output(out)
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -109,6 +126,7 @@ def build(out: Path) -> list[str]:
 
 
 def verify(out: Path) -> int:
+    out = validate_output(out)
     if not out.is_dir():
         print(f"{out} does not exist; run without --verify first", file=sys.stderr)
         return 1
@@ -159,7 +177,12 @@ def main() -> int:
     parser.add_argument("--out", default="_site", help="output directory")
     parser.add_argument("--verify", action="store_true", help="verify instead of rebuilding")
     args = parser.parse_args()
-    out = (ROOT / args.out).resolve() if not Path(args.out).is_absolute() else Path(args.out)
+    candidate = ROOT / args.out if not Path(args.out).is_absolute() else Path(args.out)
+    try:
+        out = validate_output(candidate)
+    except ValueError as error:
+        print(f"refusing unsafe output path: {error}", file=sys.stderr)
+        return 2
 
     if args.verify:
         return verify(out)

@@ -7,11 +7,11 @@ $manual=@($units|?{$_.status -eq 'needs-manual-review'})
 $open=@($units|?{$_.status -notin @('confirmed','contradicted','needs-manual-review')})
 
 $conf | Select-Object unitId,cardName,setCode,setName,number,variant,language,sourceType,sourceUrl,evidence,checkedAt |
-  ConvertTo-Json -Depth 4 | Set-Content "$V\confirmed_sources.json" -Encoding utf8
+  ConvertTo-Json -Depth 4 | Set-Content "$V\confirmed_sources.json" -Encoding utf8NoBOM
 
 # CONTRADICTED: Cardmarket claims the language, an external source says otherwise
 $contra | Select-Object unitId,cardName,setCode,setName,number,variant,language,sourceType,sourceUrl,evidence,cmUrl |
-  ConvertTo-Json -Depth 4 | Set-Content "$V\CONTRADICTED.json" -Encoding utf8
+  ConvertTo-Json -Depth 4 | Set-Content "$V\CONTRADICTED.json" -Encoding utf8NoBOM
 
 # OPEN: still no external source either way
 $grp = $open | Group-Object {"$($_.cardName)|$($_.setCode) $($_.number)|$($_.variant)"} | ForEach-Object{
@@ -23,7 +23,7 @@ $grp = $open | Group-Object {"$($_.cardName)|$($_.setCode) $($_.number)|$($_.var
     confirmedLanguages=@($units|?{$_.setCode -eq $g.setCode -and $_.number -eq $g.number -and $_.variant -eq $g.variant -and $_.status -eq 'confirmed'}|Select-Object -Expand language|Sort-Object)
   }
 } | Sort-Object {$_.openLanguages.Count} -Descending
-$grp | ConvertTo-Json -Depth 5 | Set-Content "$V\UNCONFIRMED.json" -Encoding utf8
+$grp | ConvertTo-Json -Depth 5 | Set-Content "$V\UNCONFIRMED.json" -Encoding utf8NoBOM
 
 $byCard=@($units|Group-Object {"$($_.setCode)|$($_.number)|$($_.variant)"})
 $full=@($byCard|?{ @($_.Group|?{$_.status -notin @('confirmed','contradicted')}).Count -eq 0 })

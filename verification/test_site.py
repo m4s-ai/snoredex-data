@@ -9,14 +9,18 @@ Run against the local file, exactly as a reader with a checkout would:
 
     python verification/test_site.py
 
-Requires `playwright` and the Chromium already present in this image. Skips with a clear message
-if the browser is unavailable, so the suite never fails for the wrong reason.
+Requires the pinned `playwright` dependency and its Chromium build. Missing prerequisites are a
+test failure: a release gate that silently skips its browser contract is not a release gate.
 """
 
 from __future__ import annotations
 
 import json
+import os
+import re
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,28 +37,20 @@ def main() -> int:
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
-        print("playwright is not installed; skipping browser tests")
-        print("  pip install playwright")
-        return 0
+        print("playwright is not installed; run: pip install -r requirements.txt", file=sys.stderr)
+        return 1
 
     url = INDEX.as_uri()
     with sync_playwright() as p:
-        # The image ships a pinned Chromium that may not match the pip playwright build's
-        # expected revision, so prefer whatever is actually on disk over the bundled default.
-        candidates = sorted(Path("/opt/pw-browsers").glob("chromium*/chrome-linux/chrome"))
-        browser = None
-        for candidate in candidates:
-            try:
-                browser = p.chromium.launch(executable_path=str(candidate))
-                break
-            except Exception:
-                continue
-        if browser is None:
-            try:
-                browser = p.chromium.launch()
-            except Exception as error:  # pragma: no cover - environment dependent
-                print(f"chromium unavailable, skipping browser tests: {error}")
-                return 0
+        try:
+            # Playwright resolves both its default cache and PLAYWRIGHT_BROWSERS_PATH itself.
+            # Contributors may instead select an installed Playwright channel (for example
+            # ``chrome``) without baking a machine-specific executable path into the suite.
+            channel = os.environ.get("SNOREDEX_BROWSER_CHANNEL") or None
+            browser = p.chromium.launch(channel=channel)
+        except Exception as error:  # pragma: no cover - environment dependent
+            print(f"chromium unavailable: {error}", file=sys.stderr)
+            return 1
 
         page = browser.new_page()
         console_errors: list[str] = []
@@ -99,6 +95,36 @@ def main() -> int:
         page.fill("#f-q", "")
         page.wait_for_timeout(120)
 
+        required_filters = [
+            "dateStatus", "name", "setCode", "setName", "number", "edition", "variant",
+            "variantName", "rarity", "artist", "finish", "pattern", "marking",
+            "markingRole", "size", "distribution", "evidence",
+        ]
+        missing_filters = [
+            field for field in required_filters if page.locator("#f-" + field).count() != 1
+        ]
+        check("every semantic field has a dedicated filter", not missing_filters,
+              f"missing controls: {missing_filters}")
+
+        page.select_option("#f-dateStatus", ["approximate"])
+        page.wait_for_timeout(120)
+        approximate = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
+        check("exact/approximate release status is filterable", 0 < approximate < 203,
+              f"{approximate} approximate rows")
+        page.select_option("#f-dateStatus", [])
+        page.wait_for_timeout(120)
+
+        first_name = page.evaluate(
+            "JSON.parse(document.getElementById('data-rows').textContent)[0].name"
+        )
+        page.select_option("#f-name", [first_name])
+        page.wait_for_timeout(120)
+        named = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
+        check("card name has an exact field filter", 0 < named < 203,
+              f"{named} rows for {first_name}")
+        page.select_option("#f-name", [])
+        page.wait_for_timeout(120)
+
         # Language tri-state: absent must be the complement of present.
         page.select_option("#f-lang-JA", "present")
         page.wait_for_timeout(120)
@@ -138,6 +164,20 @@ def main() -> int:
         seps = page.eval_on_selector_all("#rows tr.yearsep", "els => els.length")
         check("year headings are hidden outside chronological order", seps == 0,
               f"{seps} year separator rows while sorted by collector number")
+
+        page.click('th[data-key="lang-JA"] button.sort')
+        page.wait_for_timeout(150)
+        ja_ends = page.evaluate("""() => {
+          const headers = [...document.querySelectorAll('thead th')];
+          const column = headers.findIndex((th) => th.dataset.key === 'lang-JA') + 1;
+          const cells = [...document.querySelectorAll(
+            `#rows tr:not(.yearsep) td:nth-child(${column})`
+          )];
+          return [cells[0].className, cells[cells.length - 1].className];
+        }""")
+        check("language columns are sortable by absence/presence",
+              "no" in ja_ends[0] and "yes" in ja_ends[1],
+              f"first/last classes={ja_ends}")
 
         page.click('th[data-key="release"] button.sort')
         page.wait_for_timeout(150)
@@ -212,8 +252,8 @@ def main() -> int:
         with page.expect_download() as download_info:
             page.click("#cl-download")
         download = download_info.value
-        target = Path("/tmp/claude-0/checklist-test.html")
-        target.parent.mkdir(parents=True, exist_ok=True)
+        scratch = Path(tempfile.mkdtemp(prefix="snoredex-site-test-"))
+        target = scratch / "checklist-A4.html"
         download.save_as(target)
         content = target.read_text(encoding="utf-8")
         check("checklist downloads with a dated filename",
@@ -226,13 +266,32 @@ def main() -> int:
         check("checklist marks unresolved items as not confirmed",
               "finish unresolved" in content, "unresolved placeholders must be visibly marked")
         check("checklist carries the licence and evidence caveat",
-              "CC BY-NC-SA" in content and "never that a printing does not exist" in content,
+              "CC BY-NC-SA" in content and "not operative" in content
+              and "never that a printing does not exist" in content,
               "notice block missing")
         checkbox_count = content.count('class="cb"')
         check("checklist has an ownership checkbox per item",
               checkbox_count > 100, f"{checkbox_count} checkboxes")
-        check("checklist sets A4 page size with print styles",
-              "@page" in content and "A4" in content, "print CSS missing")
+        checklist_id_count = content.count('data-checklist-id="')
+        check("every printed line carries its stable checklist ID",
+              checklist_id_count == checkbox_count,
+              f"{checklist_id_count} IDs for {checkbox_count} checkboxes")
+        check("checklist repeats semantic headings when printing",
+              "<thead>" in content and "Checklist ID</th>" in content
+              and "thead{display:table-header-group}" in content,
+              "repeatable table headings missing")
+        check("checklist sets the selected A4 page size",
+              "@page{size:A4;" in content, "A4 print CSS missing")
+
+        page.select_option("#cl-paper", "Letter")
+        with page.expect_download() as letter_download_info:
+            page.click("#cl-download")
+        letter_download = letter_download_info.value
+        letter_target = scratch / "checklist-Letter.html"
+        letter_download.save_as(letter_target)
+        letter_content = letter_target.read_text(encoding="utf-8")
+        check("checklist sets the selected US Letter page size",
+              "@page{size:Letter;" in letter_content, "Letter print CSS missing")
 
         # --- print smoke tests on both paper sizes ---
         # A4 is 794 CSS px at 96dpi, US Letter 816. Emulating print media and clamping the
@@ -247,9 +306,9 @@ def main() -> int:
             check(f"collection page prints without horizontal overflow ({paper})",
                   overflow <= 1, f"overflow {overflow}px at {width}px")
 
-        checklist_page = browser.new_page()
-        checklist_page.goto(target.as_uri())
         for paper, width in PAPER.items():
+            checklist_page = browser.new_page()
+            checklist_page.goto((target if paper == "A4" else letter_target).as_uri())
             checklist_page.emulate_media(media="print")
             checklist_page.set_viewport_size({"width": width, "height": 1000})
             checklist_page.wait_for_timeout(120)
@@ -257,7 +316,69 @@ def main() -> int:
                 "() => document.documentElement.scrollWidth - document.documentElement.clientWidth")
             check(f"downloaded checklist prints without horizontal overflow ({paper})",
                   overflow <= 1, f"overflow {overflow}px at {width}px")
-        checklist_page.close()
+            checklist_page.close()
+
+        # Adversarial fixture: future source text must remain text, never active markup or an
+        # attribute breakout. This drives the generated page with the production JavaScript.
+        hostile_root = scratch / "hostile"
+        hostile_root.mkdir()
+        shutil.copytree(ROOT / "site", hostile_root / "site")
+        hostile_html = INDEX.read_text(encoding="utf-8")
+        pattern = re.compile(
+            r'(<script type="application/json" id="data-rows">)(.*?)(</script>)', re.S
+        )
+        match = pattern.search(hostile_html)
+        hostile_rows = json.loads(match.group(2)) if match else []
+        payload = '<img id="xss-probe" src=x onerror="window.__snoredexXss=1">'
+        hostile_rows[0]["name"] = payload
+        hostile_rows[0]["image"] = 'x" onerror="window.__snoredexXss=1'
+        encoded = json.dumps(
+            hostile_rows, ensure_ascii=False, separators=(",", ":")
+        ).replace("</", "<\\/")
+        hostile_html = pattern.sub(
+            lambda found: found.group(1) + encoded + found.group(3), hostile_html, count=1
+        )
+        checklist_pattern = re.compile(
+            r'(<script type="application/json" id="data-checklist">)(.*?)(</script>)', re.S
+        )
+        checklist_match = checklist_pattern.search(hostile_html)
+        hostile_checklist = json.loads(checklist_match.group(2)) if checklist_match else []
+        checklist_payload = (
+            '<img id="xss-checklist-probe" src=x onerror="window.__snoredexXss=1">'
+        )
+        hostile_checklist[0]["edition"] = checklist_payload
+        hostile_checklist[0]["image"] = 'x" onerror="window.__snoredexXss=1'
+        checklist_encoded = json.dumps(
+            hostile_checklist, ensure_ascii=False, separators=(",", ":")
+        ).replace("</", "<\\/")
+        hostile_html = checklist_pattern.sub(
+            lambda found: found.group(1) + checklist_encoded + found.group(3),
+            hostile_html,
+            count=1,
+        )
+        (hostile_root / "index.html").write_text(hostile_html, encoding="utf-8")
+        hostile_page = browser.new_page()
+        hostile_page.goto((hostile_root / "index.html").as_uri())
+        hostile_page.wait_for_selector("#rows tr")
+        hostile_executed = hostile_page.evaluate("window.__snoredexXss === 1")
+        hostile_markup = hostile_page.locator("#xss-probe").count()
+        check("source-derived row values cannot inject DOM markup",
+              not hostile_executed and hostile_markup == 0,
+              f"executed={hostile_executed} injected_nodes={hostile_markup}")
+
+        with hostile_page.expect_download() as hostile_download_info:
+            hostile_page.click("#cl-download")
+        hostile_target = scratch / "hostile-checklist.html"
+        hostile_download_info.value.save_as(hostile_target)
+        hostile_checklist_page = browser.new_page()
+        hostile_checklist_page.goto(hostile_target.as_uri())
+        checklist_executed = hostile_checklist_page.evaluate("window.__snoredexXss === 1")
+        checklist_markup = hostile_checklist_page.locator("#xss-checklist-probe").count()
+        check("source-derived checklist values cannot inject DOM markup",
+              not checklist_executed and checklist_markup == 0,
+              f"executed={checklist_executed} injected_nodes={checklist_markup}")
+        hostile_checklist_page.close()
+        hostile_page.close()
 
         page.emulate_media(media="screen")
         page.set_viewport_size({"width": 1280, "height": 900})
@@ -267,10 +388,27 @@ def main() -> int:
         page.wait_for_timeout(120)
         body_overflow = page.evaluate(
             "() => document.body.scrollWidth - document.body.clientWidth")
+        mobile_offenders = page.evaluate("""() => [...document.querySelectorAll('body *')]
+          .map((element) => {
+            const box = element.getBoundingClientRect();
+            return {
+              selector: element.tagName.toLowerCase()
+                + (element.id ? '#' + element.id : '')
+                + (element.className && typeof element.className === 'string'
+                  ? '.' + element.className.trim().replace(/\\s+/g, '.') : ''),
+              right: Math.round(box.right), width: Math.round(box.width),
+              scrollWidth: element.scrollWidth, clientWidth: element.clientWidth,
+            };
+          })
+          .filter((item) => item.right > document.body.clientWidth + 1
+            && item.right <= document.body.scrollWidth + 1)
+          .sort((a, b) => b.right - a.right)
+          .slice(0, 10)""")
         check("mobile layout does not scroll the page body horizontally", body_overflow <= 1,
-              f"body overflow {body_overflow}px at 390px wide")
+              f"body overflow {body_overflow}px at 390px wide; offenders={mobile_offenders}")
 
         browser.close()
+        shutil.rmtree(scratch, ignore_errors=True)
 
     failures = [r for r in results if not r[1]]
     for name, ok, detail in results:

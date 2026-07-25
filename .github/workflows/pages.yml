@@ -1,16 +1,13 @@
 name: Publish site
 
-# Deploys the generated site to GitHub Pages from `main` only, and never without the release
-# gate passing first. The gate job carries no Pages permissions, so a failed check cannot be
-# bypassed by a later step.
+# Deploys only from an explicit manual run on `main`, after both owner publication approval and
+# the full release gate pass. Merging code or adding licence files cannot publish by itself.
 #
 # The published artifact is an explicit allowlist. Nothing is copied wholesale, so caches,
 # browser state, verification scratch files and unrelated repository content cannot be
 # published by accident.
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -21,8 +18,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  approval:
+    name: Owner publication approval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require explicit publication decisions
+        run: |
+          test "${GITHUB_REF}" = "refs/heads/main"
+          python verification/publication_gate.py
+
   gate:
     name: Release gate
+    needs: approval
     uses: ./.github/workflows/release-gate.yml
 
   deploy:

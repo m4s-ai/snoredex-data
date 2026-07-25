@@ -50,7 +50,7 @@ evidence (see §6).
 
 Numbers live in `verification/units.json` (the state store) and are echoed in
 `snorlax_cards.json` → `meta.verification`. **After any change, run
-`verification\review_integrity.ps1`** (27 structural checks) — it is the truth test.
+`verification/review_integrity.ps1`** (27 structural checks) — it is the truth test.
 
 The language/product claim backlog and the finish backlog are separate. Language truth lives in
 `verification/units.json`; finish truth lives in `verification/finish_units.json`. Never infer a
@@ -203,24 +203,24 @@ Brazilian Prize Pack confirmations were obtained.
 
 ```powershell
 # Run from the repository root.
-pwsh -File verification\review_integrity.ps1     # confirm clean starting state
-python verification\review_findings.py           # cross-artifact consistency (no pwsh needed)
-pwsh -File verification\report.ps1               # regenerate exports if needed
-# ... do verification work in a new passes\verify_*.ps1 script ...
-pwsh -File verification\audit_evidence.ps1       # after any write
-python scripts\editions.py                       # if edition data changed
-python scripts\finishes.py                       # regenerate finish units/review + main summaries
-python scripts\language_status.py                # refresh per-card language verdicts
-python scripts\confirmed_releases.py             # regenerate chronological JSON + CSV
-python scripts\source_registry.py                # rebuild provider/evidence registry
-python scripts\checklist.py                      # rebuild canonical checklist items
-python scripts\readme_stats.py                   # refresh generated README blocks
-python scripts\issue_templates.py                # rebuild the community correction form
-python scripts\site.py                           # rebuild index.html + the alias redirect
-pwsh -File verification\review_integrity.ps1     # after any write
-python verification\review_findings.py           # after any write
-python verification\test_site.py                 # browser behaviour (needs playwright+chromium)
-pwsh -File verification\verify_finish_sources.ps1 # recheck machine-readable TCGCSV assertions
+pwsh -File verification/review_integrity.ps1     # confirm clean starting state
+python verification/review_findings.py           # cross-artifact consistency (no pwsh needed)
+pwsh -File verification/report.ps1               # regenerate exports if needed
+# ... do verification work in a new verification/passes/verify_*.ps1 script ...
+pwsh -File verification/audit_evidence.ps1       # after any write
+python scripts/editions.py                       # if edition data changed
+python scripts/finishes.py                       # regenerate finish units/review + main summaries
+python scripts/language_status.py                # refresh per-card language verdicts
+python scripts/confirmed_releases.py             # regenerate chronological JSON + CSV
+python scripts/source_registry.py                # rebuild provider/evidence registry
+python scripts/checklist.py                      # rebuild canonical checklist items
+python scripts/readme_stats.py                   # refresh generated README blocks
+python scripts/issue_templates.py                # rebuild the community correction form
+python scripts/site.py                           # rebuild index.html + the alias redirect
+pwsh -File verification/review_integrity.ps1     # after any write
+python verification/review_findings.py           # after any write
+python verification/test_site.py                 # browser behaviour (needs playwright+chromium)
+pwsh -File verification/verify_finish_sources.ps1 # recheck machine-readable TCGCSV assertions
 ```
 
 Order matters, and it is the order above: `finishes.py` writes the card finish summaries,

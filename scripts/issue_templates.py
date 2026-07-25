@@ -68,6 +68,7 @@ FINISH_LABELS = {
 
 
 def read_json(path: Path) -> Any:
+    # Tolerate historical PowerShell 5.1 BOM output; all active writers now emit UTF-8 no-BOM.
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
@@ -338,8 +339,10 @@ def main() -> int:
         return 0
 
     TEMPLATE_DIR.mkdir(parents=True, exist_ok=True)
-    FORM_PATH.write_text(form, encoding="utf-8", newline="\n")
-    CONFIG_PATH.write_text(config, encoding="utf-8", newline="\n")
+    with FORM_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(form)
+    with CONFIG_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(config)
     print(f"printing-correction.yml: {len(vocab['patterns'])} foil patterns, "
           f"{len(vocab['stamps'])} stamps, {len(vocab['languages'])} languages, "
           f"{len(vocab['distributions'])} distribution channels")

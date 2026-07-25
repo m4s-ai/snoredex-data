@@ -28,7 +28,7 @@ foreach($c in $j.cards){
     $i++
   }
 }
-$units | ConvertTo-Json -Depth 4 | Set-Content "$base\verification\units.json" -Encoding utf8
+$units | ConvertTo-Json -Depth 4 | Set-Content "$base\verification\units.json" -Encoding utf8NoBOM
 Write-Host "units: $($units.Count)"
 Write-Host "distinct sets: $(($units|Select-Object -Expand setName -Unique).Count)"
 Write-Host "distinct set x language: $(($units|ForEach-Object{"$($_.setName)|$($_.language)"}|Select-Object -Unique).Count)"

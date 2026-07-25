@@ -366,6 +366,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
 
 
 def read_json(path: Path) -> Any:
+    # Tolerate historical PowerShell 5.1 BOM output; all active writers now emit UTF-8 no-BOM.
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
@@ -544,7 +545,8 @@ def main() -> int:
     with REGISTRY_PATH.open("w", encoding="utf-8", newline="\n") as handle:
         json.dump(document, handle, ensure_ascii=False, indent=1)
         handle.write("\n")
-    MARKDOWN_PATH.write_text(markdown, encoding="utf-8", newline="\n")
+    with MARKDOWN_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(markdown)
 
     counts = document["meta"]["counts"]
     print(f"providers: {counts['providers']}  evidence records: {counts['evidenceRecords']} "

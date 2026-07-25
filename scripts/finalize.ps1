@@ -36,5 +36,5 @@ $out=[pscustomobject]@{
   }
   cards=$cards
 }
-$out | ConvertTo-Json -Depth 6 | Set-Content "$base\snorlax_cards.json" -Encoding utf8
+$out | ConvertTo-Json -Depth 6 | Set-Content "$base\snorlax_cards.json" -Encoding utf8NoBOM
 Write-Host "wrote snorlax_cards.json  cards=$($cards.Count)  withArtist=$(($cards|?{$_.artist}).Count)  withImage=$(($cards|?{$_.imageFile}).Count)"

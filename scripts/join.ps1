@@ -76,7 +76,7 @@ foreach($c in $cards){
     if($hit){ $c.artist=$hit.artist; $c.artistSource="same card as $baseCode $($c.number) (Additionals printing)"; $addl++ }
   }
 }
-$cards | ConvertTo-Json -Depth 5 | Set-Content "$base\_cards_stage2.json" -Encoding utf8
+$cards | ConvertTo-Json -Depth 5 | Set-Content "$base\_cards_stage2.json" -Encoding utf8NoBOM
 $known=($cards|?{$_.artist}).Count
 Write-Host "direct=$direct reprint-number=$rep reprint-slug=$urlref additionals=$addl"
 Write-Host "artist known: $known / $($cards.Count)"

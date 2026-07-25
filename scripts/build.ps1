@@ -31,5 +31,5 @@ $cards = foreach($r in $rows){
     artistSource  = $null
   }
 }
-$cards | ConvertTo-Json -Depth 5 | Set-Content "$base\_cards_stage1.json" -Encoding utf8
+$cards | ConvertTo-Json -Depth 5 | Set-Content "$base\_cards_stage1.json" -Encoding utf8NoBOM
 Write-Host "cards: $($cards.Count)  langs-empty: $(($cards|?{$_.languageCount -eq 0}).Count)"
