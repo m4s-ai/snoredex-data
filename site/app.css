@@ -98,7 +98,12 @@ p { max-width: 78ch; }
   background: var(--bg); color: var(--fg); border: 1px solid var(--line);
   border-radius: 6px; padding: 6px 8px; font: inherit; min-width: 130px;
 }
-.field select[multiple] { min-height: 84px; }
+.field select[multiple] {
+  /* A long option label otherwise becomes the flex item's intrinsic width and can make the
+   * entire page overflow on narrow screens. The control remains scrollable and its title/text
+   * still exposes the complete value. */
+  min-height: 84px; min-width: 0; width: 220px; max-width: 100%;
+}
 .field input[type="number"] { width: 88px; min-width: 0; }
 
 details.morefilters { margin-top: 10px; }

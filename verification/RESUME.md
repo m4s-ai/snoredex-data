@@ -28,7 +28,7 @@ root.
 | Finish units covered by a complete official manifest | **4** — English `DF 10`, `PPS3 LOR 143`, `PPS7 JTG 117`, `PPS8 JTG 117` |
 | Finish units with unresolved product mapping | **175** |
 
-Run `verification\review_integrity.ps1` after any write pass — 27 structural checks over language
+Run `verification/review_integrity.ps1` after any write pass — 27 structural checks over language
 claims, cards, images, evidence, finish units, printing IDs, product mappings, and stamp roles.
 
 Open items are also published as a browsable page: `verification/open-items.html`.
@@ -433,17 +433,15 @@ location and can be rerun from any checkout or working directory.
 
 ```powershell
 # Run from the repository root.
-pwsh -File verification\passes\fetch_full.ps1    # no-op if cache present
-pwsh -File verification\passes\verify2.ps1       # re-matches only open units
-pwsh -File verification\report.ps1               # regenerates coverage + UNCONFIRMED.json
-python scripts\finishes.py                       # regenerates finish state/review + main summaries
-pwsh -File verification\verify_finish_sources.ps1 # validates exact TCGCSV IDs/subtypes
-pwsh -File verification\review_integrity.ps1     # 27 structural checks
+pwsh -File verification/review_integrity.ps1      # confirm the canonical state is coherent
+python verification/review_findings.py            # cross-artifact and publication checks
+pwsh -File verification/verify_finish_sources.ps1 # validate exact live TCGCSV IDs/subtypes
 
-# Layout: verification\*.ps1 are the five recurring tools (report, audit_evidence,
-# classify_manual, verify_finish_sources, review_integrity). verification\passes\ holds every completed one-shot
-# pass in chronological naming. All PowerShell paths derive from $PSScriptRoot. The dataset build
-# pipeline lives in scripts\ (mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes).
+# Layout: verification/*.ps1 are the five recurring tools (report, audit_evidence,
+# classify_manual, verify_finish_sources, review_integrity). verification/passes/ holds every
+# completed one-shot pass in chronological naming; do not rerun those archived passes. All
+# PowerShell paths derive from $PSScriptRoot. The dataset build
+# pipeline lives in scripts/ (mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes).
 ```
 
 Safe to interrupt at any point — `units.json` is rewritten only after a full pass, and `evidence.jsonl` is appended per confirmation.

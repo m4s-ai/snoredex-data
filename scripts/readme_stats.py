@@ -27,6 +27,7 @@ ANALYSIS_PATH = ROOT / "analysis_finishes.json"
 
 
 def read_json(path: Path) -> Any:
+    # Tolerate historical PowerShell 5.1 BOM output; all active writers now emit UTF-8 no-BOM.
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
 
@@ -67,7 +68,8 @@ def main() -> int:
         return 0
 
     if updated != original:
-        README_PATH.write_text(updated, encoding="utf-8", newline="\n")
+        with README_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+            handle.write(updated)
         print("README.md updated")
     else:
         print("README.md already current")

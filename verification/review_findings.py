@@ -19,7 +19,9 @@ Runs on Python 3.9+ with no third-party dependencies and no network access.
 from __future__ import annotations
 
 import json
+import hashlib
 import re
+import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
@@ -335,24 +337,30 @@ check(
 # --------------------------------------------------------------------------- #
 
 required_licences = {
-    "LICENSES/PolyForm-Noncommercial-1.0.0.md": "https://polyformproject.org/licenses/noncommercial/1.0.0/",
-    "LICENSES/CC-BY-NC-SA-4.0.md": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt",
+    "LICENSES/PolyForm-Noncommercial-1.0.0.md": {
+        "url": "https://github.com/polyformproject/polyform-licenses/blob/1.0.0/PolyForm-Noncommercial-1.0.0.md",
+        "sha256": "c0ea4a896d2c8c394b29f9427589996db826cd501c512279ff0ed3ef48fabbe5",
+    },
+    "LICENSES/CC-BY-NC-SA-4.0.md": {
+        "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt",
+        "sha256": "e66c269d4819aaab34b49ef5220c4ddab6756f21bb5180761a4eb8561f2b7bbd",
+    },
 }
 missing_licences = [name for name in required_licences if not (ROOT / name).exists()]
-# A licence text that is short is a stub or a truncated download, not a licence.
-stub_licences = [
-    name
-    for name in required_licences
-    if (ROOT / name).exists() and len((ROOT / name).read_text(encoding="utf-8")) < 2000
-]
+wrong_licence_hashes = []
+for name, source in required_licences.items():
+    path = ROOT / name
+    if path.exists():
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != source["sha256"]:
+            wrong_licence_hashes.append(f"{name}: {actual}")
 check(
     "L1",
-    "Verbatim licence texts are present and complete",
+    "Verbatim licence texts match their canonical publisher bytes",
     "FAIL",
-    not missing_licences and not stub_licences,
-    f"missing={missing_licences} suspiciously_short={stub_licences}. Fetch each from its canonical "
-    f"URL and commit unmodified: {required_licences}. Reconstructing legal text from memory risks "
-    f"silent divergence from the published wording, so this is deliberately not automated.",
+    not missing_licences and not wrong_licence_hashes,
+    f"missing={missing_licences} wrong_hash={wrong_licence_hashes}. Canonical sources and pinned "
+    f"SHA-256 values: {required_licences}",
 )
 
 for doc in ("LICENSE.md", "THIRD_PARTY_NOTICES.md", "verification/PUBLIC-READINESS-AUDIT.md"):
@@ -370,32 +378,178 @@ secret_pattern = re.compile(
     r"|C:\\Users\\|/Users/[a-z]|/home/[a-z]+/",
     re.IGNORECASE,
 )
+def sensitive_matches(data: bytes, label: str) -> list[str]:
+    if b"\0" in data:
+        return []
+    text = data.decode("utf-8", errors="ignore")
+    found_hits = []
+    for match in secret_pattern.finditer(text):
+        found = match.group(0)
+        if "noreply" not in found.lower():
+            found_hits.append(f"{label}: {found[:80]}")
+    return found_hits
+
+
 scanned, hits = 0, []
-for pattern in ("*.py", "*.ps1", "*.md", "*.json"):
-    for path in ROOT.rglob(pattern):
-        if any(part in {".git", "cache", "zoom", "__pycache__", "node_modules"} for part in path.parts):
-            continue
-        scanned += 1
-        try:
-            text = path.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
-            continue
-        # The audit and this scanner both quote the patterns they look for.
-        if path.name in {"PUBLIC-READINESS-AUDIT.md", "review_findings.py"}:
-            continue
-        for match in secret_pattern.finditer(text):
-            found = match.group(0)
-            # GitHub's noreply addresses are the commit-trailer convention, not contact details.
-            if "noreply" in found.lower():
-                continue
-            hits.append(f"{path.relative_to(ROOT)}: {found[:40]}")
+tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).split(b"\0")
+for raw_name in tracked:
+    if not raw_name:
+        continue
+    relative = raw_name.decode("utf-8", errors="surrogateescape")
+    path = ROOT / relative
+    if relative in {"verification/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+        continue  # These files quote the expressions and known historical finding.
+    try:
+        data = path.read_bytes()
+    except OSError:
+        continue
+    scanned += 1
+    hits.extend(sensitive_matches(data, relative))
 check(
     "P4",
-    "No secrets, personal paths, or contact details in the tracked tree",
+    "No secrets, personal paths, or contact details in the complete tracked tree",
     "FAIL",
     not hits,
     f"{len(hits)} hits across {scanned} scanned files: {hits[:5]}",
 )
+
+
+def scan_history() -> tuple[bool, int, list[str]]:
+    """Scan every reachable Git blob, not merely the current version of each filename."""
+    try:
+        shallow = subprocess.check_output(
+            ["git", "rev-parse", "--is-shallow-repository"], cwd=ROOT, text=True
+        ).strip() == "true"
+        objects = subprocess.check_output(
+            ["git", "rev-list", "--objects", "--all"], cwd=ROOT, text=True
+        ).splitlines()
+    except (OSError, subprocess.CalledProcessError):
+        return True, 0, ["Git history could not be read"]
+
+    process = subprocess.Popen(
+        ["git", "cat-file", "--batch"], cwd=ROOT,
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+    )
+    assert process.stdin is not None and process.stdout is not None
+    history_hits: list[str] = []
+    scanned_blobs = 0
+    for entry in objects:
+        sha, _, path = entry.partition(" ")
+        process.stdin.write((sha + "\n").encode("ascii"))
+        process.stdin.flush()
+        header = process.stdout.readline().decode("ascii", errors="replace").strip().split()
+        if len(header) < 3 or header[1] == "missing":
+            continue
+        object_type, size = header[1], int(header[2])
+        data = process.stdout.read(size)
+        process.stdout.read(1)  # protocol newline
+        if object_type != "blob" or size > 5_000_000:
+            continue
+        if path in {"verification/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+            continue
+        scanned_blobs += 1
+        history_hits.extend(sensitive_matches(data, f"{sha[:10]}:{path or '(unknown path)'}"))
+    process.stdin.close()
+    process.wait(timeout=10)
+    return shallow, scanned_blobs, sorted(set(history_hits))
+
+
+history_shallow, history_scanned, history_hits = scan_history()
+decisions_path = ROOT / "publication-decisions.json"
+try:
+    decisions = json.loads(decisions_path.read_text(encoding="utf-8"))
+except (OSError, json.JSONDecodeError):
+    decisions = {}
+
+decision_keys = {
+    "repositoryVisibility", "repositoryPublicationApproved", "sitePublicationApproved",
+    "licenseGrantsApproved", "licensor", "ownerAttestationsApproved",
+    "thirdPartyImagesApproved", "approvedBy", "approvedAt",
+}
+check(
+    "P5",
+    "Publication decisions are explicit, complete, and well typed",
+    "FAIL",
+    decision_keys <= set(decisions)
+    and decisions.get("repositoryVisibility") in {"private", "public"}
+    and all(
+        isinstance(decisions.get(key), bool)
+        for key in {
+            "repositoryPublicationApproved", "sitePublicationApproved",
+            "licenseGrantsApproved", "ownerAttestationsApproved", "thirdPartyImagesApproved",
+        }
+    )
+    and decisions.get("licensor") in {None, "m4s-ai", "contributors to snoredex-data"}
+    and (decisions.get("approvedBy") is None or isinstance(decisions.get("approvedBy"), str))
+    and (
+        decisions.get("approvedAt") is None
+        or bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(decisions.get("approvedAt"))))
+    ),
+    "publication-decisions.json must contain every decision with valid value types; the separate "
+    "publication gate enforces approval before deployment",
+)
+check(
+    "P6",
+    "Full history was available and public-repository approval accounts for its findings",
+    "FAIL",
+    not history_shallow and (
+        not decisions.get("repositoryPublicationApproved") or not history_hits
+    ),
+    f"shallow={history_shallow}; {len(history_hits)} sensitive-history hits across "
+    f"{history_scanned} blobs. Public repository approval must remain false unless these are "
+    f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
+)
+check(
+    "I3",
+    "Full-history publication audit",
+    "INFO",
+    True,
+    f"{history_scanned} reachable blobs scanned; {len(history_hits)} sensitive-history hits; "
+    f"repository publication approved={decisions.get('repositoryPublicationApproved')}",
+)
+
+
+# --------------------------------------------------------------------------- #
+# Portability contract (#19)
+# --------------------------------------------------------------------------- #
+
+gitattributes = (ROOT / ".gitattributes").read_text(encoding="utf-8") if (ROOT / ".gitattributes").exists() else ""
+requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8") if (ROOT / "requirements.txt").exists() else ""
+check("X1", "Git attributes enforce LF text and binary image handling", "FAIL",
+      "* text=auto eol=lf" in gitattributes and "*.jpg binary" in gitattributes,
+      ".gitattributes must normalize text and protect image bytes")
+check("X2", "Browser dependency is pinned in a manifest", "FAIL",
+      bool(re.search(r"^playwright==\d+\.\d+\.\d+$", requirements, re.MULTILINE)),
+      "requirements.txt must pin Playwright")
+
+active_ps = list((ROOT / "scripts").glob("*.ps1")) + list((ROOT / "verification").glob("*.ps1"))
+legacy_writers = []
+direct_io = []
+for path in active_ps:
+    text = path.read_text(encoding="utf-8-sig")
+    if re.search(r"(?:Set-Content|Add-Content|Export-Csv).*?-Encoding\s+utf8(?!NoBOM)", text):
+        legacy_writers.append(str(path.relative_to(ROOT)))
+for path in ROOT.rglob("*.ps1"):
+    if re.search(r"\[System\.IO\.", path.read_text(encoding="utf-8-sig"), re.IGNORECASE):
+        direct_io.append(str(path.relative_to(ROOT)))
+check("X3", "Active PowerShell writers use UTF-8 without BOM", "FAIL", not legacy_writers,
+      f"legacy writers: {legacy_writers}")
+check("X4", "PowerShell path portability is not bypassed through direct System.IO calls", "FAIL",
+      not direct_io, f"direct System.IO users: {direct_io}")
+
+bom_files = []
+for raw_name in tracked:
+    if not raw_name:
+        continue
+    path = ROOT / raw_name.decode("utf-8", errors="surrogateescape")
+    if path.suffix.lower() in {".json", ".jsonl", ".csv", ".md", ".py", ".ps1", ".js", ".css", ".html", ".yml", ".yaml"}:
+        try:
+            if path.read_bytes().startswith(b"\xef\xbb\xbf"):
+                bom_files.append(str(path.relative_to(ROOT)))
+        except OSError:
+            pass
+check("X5", "Tracked text artifacts contain no UTF-8 BOM", "FAIL", not bom_files,
+      f"BOM files: {bom_files[:10]}")
 
 
 # --------------------------------------------------------------------------- #
@@ -514,13 +668,15 @@ if checklist_path.exists():
     check("C5", "Unresolved items are explicit placeholders, not asserted finishes", "FAIL",
           not bad_placeholder, f"{len(bad_placeholder)} malformed placeholders: {bad_placeholder[:5]}")
 
-    # Every First Edition item must disclose how its finish evidence relates to the edition.
-    undisclosed = [
+    # A disclosure is not enough: a concrete First Edition finish must have explicit scope.
+    unsupported_first_editions = [
         i["checklistId"] for i in items
-        if i["edition"] == "1st Edition" and not i.get("editionScope")
+        if i["edition"] == "1st Edition" and i["finish"] != "unresolved"
+        and i.get("editionScope") not in {"explicit-printing-mapping", "only-supported-edition"}
     ]
-    check("C6", "Every First Edition item declares its edition-to-finish scope", "FAIL",
-          not undisclosed, f"{len(undisclosed)} items without editionScope: {undisclosed[:5]}")
+    check("C6", "No First Edition finish is asserted from edition-agnostic evidence", "FAIL",
+          not unsupported_first_editions,
+          f"{len(unsupported_first_editions)} unsupported assertions: {unsupported_first_editions[:5]}")
 
     # --- required regression fixtures (#8) ---
     def finishes_for(set_code: str, number: str, language: str) -> set[str]:

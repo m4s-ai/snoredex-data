@@ -19,6 +19,6 @@ foreach($c in $cards){
   catch{ $fail += "$($c.imageUrl) :: $($_.Exception.Message)" }
   Start-Sleep -Milliseconds 350
 }
-$cards | ConvertTo-Json -Depth 5 | Set-Content "$base\_cards_stage3.json" -Encoding utf8
+$cards | ConvertTo-Json -Depth 5 | Set-Content "$base\_cards_stage3.json" -Encoding utf8NoBOM
 Write-Host "downloaded/present: $ok / $($cards.Count)"
 if($fail){ Write-Host "FAILURES:"; $fail | Select-Object -First 20 | ForEach-Object{Write-Host $_} }

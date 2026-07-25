@@ -36,7 +36,7 @@ foreach($c in $cards){
     }
   }
 }
-$drift | ConvertTo-Json -Depth 4 | Set-Content "$base\analysis_language_drift.json" -Encoding utf8
+$drift | ConvertTo-Json -Depth 4 | Set-Content "$base\analysis_language_drift.json" -Encoding utf8NoBOM
 
 # ---- Same card across releases (Cardmarket cardKey = name + attack names) ----
 $groups = $cards | Where-Object {$_.cardKey} | Group-Object cardKey | Where-Object {$_.Count -gt 1} | Sort-Object Count -Descending
@@ -53,21 +53,21 @@ $shared = foreach($g in $groups){
     releases=@($g.Group | ForEach-Object{ [pscustomobject]@{ set=$_.setName; code="$($_.setCode) $($_.number)"; rarity=$_.rarity; variant=$_.variantToken; artist=$_.artist; market=$_.market; image=$_.imageFile } })
   }
 }
-$shared | ConvertTo-Json -Depth 6 | Set-Content "$base\analysis_shared_cards.json" -Encoding utf8
+$shared | ConvertTo-Json -Depth 6 | Set-Content "$base\analysis_shared_cards.json" -Encoding utf8NoBOM
 
 # ---- Artists ----
 $byArtist = $cards | Where-Object {$_.artist} | Group-Object artist | Sort-Object Count -Descending | ForEach-Object{
   [pscustomobject]@{ artist=$_.Name; printings=$_.Count
     cards=@($_.Group | ForEach-Object{ "$($_.name) ($($_.setCode) $($_.number)) [$($_.setName)]" }) }
 }
-$byArtist | ConvertTo-Json -Depth 4 | Set-Content "$base\analysis_artists.json" -Encoding utf8
+$byArtist | ConvertTo-Json -Depth 4 | Set-Content "$base\analysis_artists.json" -Encoding utf8NoBOM
 
 # ---- Variants: same set+number, multiple products ----
 $var = $cards | Group-Object {"$($_.setCode)|$($_.number)"} | Where-Object {$_.Count -gt 1} | ForEach-Object{
   [pscustomobject]@{ setAndNumber=$_.Name; count=$_.Count
     products=@($_.Group|ForEach-Object{ [pscustomobject]@{ variant=$_.variantToken; rarity=$_.rarity; name=$_.name; url=$_.productUrl; image=$_.imageFile } }) }
 }
-$var | ConvertTo-Json -Depth 5 | Set-Content "$base\analysis_variants.json" -Encoding utf8
+$var | ConvertTo-Json -Depth 5 | Set-Content "$base\analysis_variants.json" -Encoding utf8NoBOM
 
 Write-Host "drift rows      : $($drift.Count)"
 Write-Host "shared groups   : $(@($shared).Count)"

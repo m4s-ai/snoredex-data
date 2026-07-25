@@ -24,7 +24,7 @@ foreach($u in $units){
   $u.checkedAt=(Get-Date -Format s)
   $n++
 }
-$units|ConvertTo-Json -Depth 4|Set-Content "$V\units.json" -Encoding utf8
+$units|ConvertTo-Json -Depth 4|Set-Content "$V\units.json" -Encoding utf8NoBOM
 
 $m=@($units|?{$_.status -eq 'needs-manual-review'})
 # grouped, decision-ready export
@@ -42,12 +42,12 @@ $grp = $m | Group-Object {"$($_.cardName)|$($_.setCode) $($_.number)|$($_.varian
     yourSource=''   # <- fill in
   }
 } | Sort-Object card
-$grp | ConvertTo-Json -Depth 5 | Set-Content "$V\MANUAL_REVIEW.json" -Encoding utf8
+$grp | ConvertTo-Json -Depth 5 | Set-Content "$V\MANUAL_REVIEW.json" -Encoding utf8NoBOM
 
 # flat CSV for quick editing
 $m | Select-Object unitId,cardName,setCode,number,variant,language,setName,rarity,cmUrl,manualReason,
   @{n='verdict';e={''}},@{n='yourSource';e={''}} |
-  Export-Csv "$V\MANUAL_REVIEW.csv" -NoTypeInformation -Encoding utf8
+  Export-Csv "$V\MANUAL_REVIEW.csv" -NoTypeInformation -Encoding utf8NoBOM
 
 Write-Host "moved to manual review: $n units, $(@($grp).Count) card-variants"
 $units|Group-Object status|Sort-Object Count -Desc|Format-Table Count,Name -Auto

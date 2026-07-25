@@ -282,8 +282,8 @@ fe_langs = sum(len(r["confirmedLanguages"]) for r in rows if r["edition"] == "1s
 
 # --- CSV (Excel-friendly matrix: one column per language, X = confirmed) ---
 import csv
-with io.open(os.path.join(B, "analysis_confirmed_releases.csv"), "w", encoding="utf-8-sig", newline="") as f:
-    w = csv.writer(f, delimiter=";")
+with io.open(os.path.join(B, "analysis_confirmed_releases.csv"), "w", encoding="utf-8", newline="") as f:
+    w = csv.writer(f, delimiter=";", lineterminator="\n")
     w.writerow(["#","Release","Date exact","Card","Set code","Number","Edition","Variant","Variant name",
                 "Set / expansion","Rarity","Artist","Known finishes","Finish evidence","Langs"] + LANG_COLS + ["Cardmarket URL"])
     for i, r in enumerate(rows, 1):
