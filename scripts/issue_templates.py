@@ -12,9 +12,9 @@ must fill — row identity, card, set, number, and the current recorded state �
 `textarea`, and every field the *reporter* sets by hand is a `dropdown` or `checkboxes`. Prefill
 never has to work for the form to be usable.
 
-One-time repository setup: the form applies the labels `correction` and `needs-evidence`. GitHub
-silently drops labels that do not exist, so create them once in repository settings — the form
-works either way, it just will not self-triage until they exist.
+Labels must match the repository's existing label names **exactly**. GitHub silently drops a
+label that does not resolve, so a near-miss produces a form that looks fine and quietly fails to
+triage. See ISSUE_LABELS below.
 
     python scripts/issue_templates.py
     python scripts/issue_templates.py --check   # fail if regeneration would change the output
@@ -52,6 +52,12 @@ PATTERN_LABELS = {
     "flat-foil-card-body": "Flat foil card body",
     "fireworks": "Fireworks",
 }
+
+# Applied to every submitted correction. These must match the repository's labels character for
+# character - GitHub drops anything that does not resolve, without warning. Verified against the
+# repository on 2026-07-25: the labels are capitalised and "Needs Evidence" uses a space, not a
+# hyphen, so the obvious kebab-case guess would silently never apply.
+ISSUE_LABELS = ["Correction", "Needs Evidence"]
 
 FINISH_LABELS = {
     "non-holo": "Non-Holo",
@@ -167,7 +173,7 @@ def build_form(vocab: dict[str, list[str]]) -> str:
         "name: Printing correction",
         "description: Correct or add a physical printing — finish, foil pattern, stamp, language, or size.",
         "title: \"[Correction] \"",
-        "labels: [\"correction\", \"needs-evidence\"]",
+        "labels: [" + ", ".join(yaml_quote(l) for l in ISSUE_LABELS) + "]",
         "body:",
         "  - type: markdown",
         "    attributes:",
