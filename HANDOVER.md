@@ -204,15 +204,29 @@ Brazilian Prize Pack confirmations were obtained.
 ```powershell
 # Run from the repository root.
 pwsh -File verification\review_integrity.ps1     # confirm clean starting state
+python verification\review_findings.py           # cross-artifact consistency (no pwsh needed)
 pwsh -File verification\report.ps1               # regenerate exports if needed
 # ... do verification work in a new passes\verify_*.ps1 script ...
 pwsh -File verification\audit_evidence.ps1       # after any write
-pwsh -File verification\review_integrity.ps1     # after any write
 python scripts\editions.py                       # if edition data changed
-python scripts\confirmed_releases.py             # regenerate chronological table + CSV
 python scripts\finishes.py                       # regenerate finish units/review + main summaries
+python scripts\language_status.py                # refresh per-card language verdicts
+python scripts\confirmed_releases.py             # regenerate chronological table + CSV
+python scripts\readme_stats.py                   # refresh generated README blocks
+pwsh -File verification\review_integrity.ps1     # after any write
+python verification\review_findings.py           # after any write
 pwsh -File verification\verify_finish_sources.ps1 # recheck machine-readable TCGCSV assertions
 ```
+
+Order matters: `finishes.py` writes the card finish summaries, `language_status.py` writes the
+card language verdicts, and `confirmed_releases.py` reads both. `finishes.py --reproject` redoes
+only the card projection from the committed finish store and needs no network, which is the fast
+path when a projection rule changes.
+
+**The integrity suite no longer asserts counts.** Unit totals, coverage and queue depths are
+reported as drift against a baseline, because closing an open unit is the goal, not a regression;
+only a count going *backwards* is flagged. Structural facts still fail the run. Do not "fix" a
+rising number by editing the baseline — that is the habit the split exists to prevent.
 
 All scripts derive paths from their own location: `$PSScriptRoot` in PowerShell and
 `Path(__file__)` in Python. Keep that convention in new scripts.
