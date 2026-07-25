@@ -1,13 +1,13 @@
 {
  "generated": "2026-07-23",
- "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). dateExact=false means the date is approximate (year-level). For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
+ "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value; dateApproximate says the value is not trusted beyond the year and is displayed as ~YYYY; dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
    "date": "1997-03",
    "dateExact": false,
    "name": "Snorlax",
    "setCode": "PJU",
-   "number": null,
+   "number": "",
    "setName": "Pokémon Jungle",
    "variant": "base",
    "variantName": null,
@@ -105,14 +105,18 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pju-nonumber-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "1997-03-01"
   },
   {
    "date": "1997-12",
    "dateExact": true,
    "name": "Hungry Snorlax",
    "setCode": "UNP",
-   "number": null,
+   "number": "",
    "setName": "Unnumbered Promos",
    "variant": "base",
    "variantName": null,
@@ -195,14 +199,18 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "unp-nonumber-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "1997-12-01"
   },
   {
    "date": "1998",
    "dateExact": false,
    "name": "Snorlax",
    "setCode": "EXS",
-   "number": null,
+   "number": "",
    "setName": "Expansion Sheet",
    "variant": "base",
    "variantName": null,
@@ -256,14 +264,18 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "exs-nonumber-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "1998-01-01"
   },
   {
    "date": "1999",
    "dateExact": false,
    "name": "Rocket's Snorlax",
    "setCode": "G2",
-   "number": null,
+   "number": "",
    "setName": "Challenge from the Darkness",
    "variant": "base",
    "variantName": null,
@@ -361,7 +373,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "g2-nonumber-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "1999-01-01"
   },
   {
    "date": "1999-06-16",
@@ -656,7 +672,11 @@
     "Spanish",
     "Portuguese",
     "Dutch"
-   ]
+   ],
+   "rowId": "ju-11-v1-1e",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "1999-06-16"
   },
   {
    "date": "1999-06-16",
@@ -951,7 +971,11 @@
     "Spanish",
     "Portuguese",
     "Dutch"
-   ]
+   ],
+   "rowId": "ju-11-v1-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "1999-06-16"
   },
   {
    "date": "1999-06-16",
@@ -1246,7 +1270,11 @@
     "Spanish",
     "Portuguese",
     "Dutch"
-   ]
+   ],
+   "rowId": "ju-27-v2-1e",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "1999-06-16"
   },
   {
    "date": "1999-06-16",
@@ -1541,7 +1569,11 @@
     "Spanish",
     "Portuguese",
     "Dutch"
-   ]
+   ],
+   "rowId": "ju-27-v2-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "1999-06-16"
   },
   {
    "date": "2000-02-24",
@@ -1602,7 +1634,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "b2-30-base-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2000-02-24"
   },
   {
    "date": "2000-08-14",
@@ -1663,7 +1699,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "gh-33-base-1e",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2000-08-14"
   },
   {
    "date": "2000-08-14",
@@ -1724,7 +1764,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "gh-33-base-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2000-08-14"
   },
   {
    "date": "2002",
@@ -1829,7 +1873,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "ec5-062-base-1e",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2002-01-01"
   },
   {
    "date": "2002",
@@ -1934,7 +1982,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "ec5-062-base-unl",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2002-01-01"
   },
   {
    "date": "2002-05-24",
@@ -2007,7 +2059,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "lc-64-base-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2002-05-24"
   },
   {
    "date": "2002-08",
@@ -2200,7 +2256,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "wp-49-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2002-08-01"
   },
   {
    "date": "2003-05-12",
@@ -2375,7 +2435,11 @@
     "English",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "sk-100-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2003-05-12"
   },
   {
    "date": "2004",
@@ -2448,7 +2512,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pcg1-074-base-1e",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2004-01-01"
   },
   {
    "date": "2004",
@@ -2521,7 +2589,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pcg1-074-base-unl",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2004-01-01"
   },
   {
    "date": "2004",
@@ -2582,7 +2654,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pcg3-062-base-1e",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2004-01-01"
   },
   {
    "date": "2004",
@@ -2643,7 +2719,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pcg3-062-base-unl",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2004-01-01"
   },
   {
    "date": "2004-09-01",
@@ -2869,7 +2949,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "fl-15-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2004-09-01"
   },
   {
    "date": "2004-11-01",
@@ -2954,7 +3038,11 @@
    "confirmedLanguages": [
     "English",
     "Portuguese"
-   ]
+   ],
+   "rowId": "trr-104-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2004-11-01"
   },
   {
    "date": "2006",
@@ -3015,7 +3103,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pcg9-001-base-1e",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2006-01-01"
   },
   {
    "date": "2006",
@@ -3076,14 +3168,18 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pcg9-001-base-unl",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2006-01-01"
   },
   {
    "date": "2006-10",
    "dateExact": false,
    "name": "Snorlax Lv.35",
    "setCode": "DP1",
-   "number": null,
+   "number": "",
    "setName": "Space-Time Creation",
    "variant": "base",
    "variantName": null,
@@ -3181,14 +3277,18 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "dp1-nonumber-base-1e",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2006-10-01"
   },
   {
    "date": "2006-10",
    "dateExact": false,
    "name": "Snorlax Lv.35",
    "setCode": "DP1",
-   "number": null,
+   "number": "",
    "setName": "Space-Time Creation",
    "variant": "base",
    "variantName": null,
@@ -3286,7 +3386,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "dp1-nonumber-base-unl",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2006-10-01"
   },
   {
    "date": "2006-11-01",
@@ -3536,7 +3640,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "df-10-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2006-11-01"
   },
   {
    "date": "2007-05-01",
@@ -3915,7 +4023,11 @@
     "Spanish",
     "Portuguese",
     "Polish"
-   ]
+   ],
+   "rowId": "dp-37-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2007-05-01"
   },
   {
    "date": "2008-10",
@@ -4005,7 +4117,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "dpp-126-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2008-10-01"
   },
   {
    "date": "2008-12",
@@ -4097,7 +4213,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "dpp-127-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2008-12-01"
   },
   {
    "date": "2009-03",
@@ -4170,7 +4290,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pt2-070-base-1e",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2009-03-01"
   },
   {
    "date": "2009-03",
@@ -4243,7 +4367,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "pt2-070-base-unl",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2009-03-01"
   },
   {
    "date": "2009-05-16",
@@ -4457,7 +4585,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "rr-111-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2009-05-16"
   },
   {
    "date": "2009-05-16",
@@ -4684,7 +4816,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "rr-33-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2009-05-16"
   },
   {
    "date": "2009-05-16",
@@ -4832,7 +4968,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "rr-33-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2009-05-16"
   },
   {
    "date": "2009-05-16",
@@ -5058,7 +5198,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "rr-81-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2009-05-16"
   },
   {
    "date": "2010",
@@ -5163,7 +5307,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "ll-028-base-unl",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2010-01-01"
   },
   {
    "date": "2011-02-09",
@@ -5409,7 +5557,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "cl-33-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2011-02-09"
   },
   {
    "date": "2011-02-09",
@@ -5581,7 +5733,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "cl-33-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2011-02-09"
   },
   {
    "date": "2012",
@@ -5671,7 +5827,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "hsz-027-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2012-01-01"
   },
   {
    "date": "2012",
@@ -5792,7 +5952,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "bw7-055-base-1e",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2012-01-01"
   },
   {
    "date": "2012",
@@ -5914,7 +6078,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "bw7-055-base-unl",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2012-01-01"
   },
   {
    "date": "2012-11-07",
@@ -6242,7 +6410,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "bcr-109-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2012-11-07"
   },
   {
    "date": "2013-02",
@@ -6347,7 +6519,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "bwp-207-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2013-02-01"
   },
   {
    "date": "2013-02-06",
@@ -6675,7 +6851,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "pls-101-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2013-02-06"
   },
   {
    "date": "2013-11-08",
@@ -7274,7 +7454,11 @@
     "Spanish",
     "Portuguese",
     "Russian"
-   ]
+   ],
+   "rowId": "kss-26-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2013-11-08"
   },
   {
    "date": "2013-12",
@@ -7366,7 +7550,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "hxy-026-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2013-12-01"
   },
   {
    "date": "2014-03",
@@ -7487,7 +7675,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "xy2-066-base-1e",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2014-03-01"
   },
   {
    "date": "2014-03",
@@ -7609,7 +7801,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "xy2-066-base-unl",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2014-03-01"
   },
   {
    "date": "2014-05-07",
@@ -7988,7 +8184,11 @@
     "Spanish",
     "Portuguese",
     "Russian"
-   ]
+   ],
+   "rowId": "flf-80-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2014-05-07"
   },
   {
    "date": "2014-05-07",
@@ -8219,7 +8419,11 @@
     "Spanish",
     "Portuguese",
     "Russian"
-   ]
+   ],
+   "rowId": "flf-80-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2014-05-07"
   },
   {
    "date": "2015-07",
@@ -8341,7 +8545,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "xyp-149-v1-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2015-07-01"
   },
   {
    "date": "2015-11-04",
@@ -8720,7 +8928,11 @@
     "Spanish",
     "Portuguese",
     "Russian"
-   ]
+   ],
+   "rowId": "bkt-118-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2015-11-04"
   },
   {
    "date": "2016-02-22",
@@ -9070,7 +9282,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "gen-58-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-02-22"
   },
   {
    "date": "2016-03",
@@ -9191,7 +9407,11 @@
    "edord": 0,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "xy10-057-base-1e",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2016-03-01"
   },
   {
    "date": "2016-03",
@@ -9313,7 +9533,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "xy10-057-base-unl",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2016-03-01"
   },
   {
    "date": "2016-05-02",
@@ -9663,7 +9887,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "fco-77-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-05-02"
   },
   {
    "date": "2016-09",
@@ -9785,7 +10013,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "20th-047-base-unl",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2016-09-01"
   },
   {
    "date": "2016-09-01",
@@ -9890,7 +10122,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "xyp-261-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-09-01"
   },
   {
    "date": "2016-12",
@@ -9960,7 +10196,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "smp-1-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2016-12-01"
   },
   {
    "date": "2016-12-14",
@@ -10217,7 +10457,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "sm-05-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-12-14"
   },
   {
    "date": "2016-12-14",
@@ -10474,7 +10718,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "sm-05-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-12-14"
   },
   {
    "date": "2016-12-14",
@@ -10670,7 +10918,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "xypr-179-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-12-14"
   },
   {
    "date": "2018",
@@ -10762,7 +11014,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "sml-038-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2018-01-01"
   },
   {
    "date": "2018-12",
@@ -10832,7 +11088,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "smp-297-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2018-12-01"
   },
   {
    "date": "2018-12-07",
@@ -10924,7 +11184,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "sm9-066-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2018-12-07"
   },
   {
    "date": "2018-12-07",
@@ -11016,7 +11280,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "sm9-106-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2018-12-07"
   },
   {
    "date": "2018-12-07",
@@ -11108,7 +11376,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "sm9-115-v3-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2018-12-07"
   },
   {
    "date": "2019-02",
@@ -11364,7 +11636,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "sm-169-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2019-02-01"
   },
   {
    "date": "2019-02-01",
@@ -11620,7 +11896,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "teu-120-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-02-01"
   },
   {
    "date": "2019-02-01",
@@ -11876,7 +12156,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "teu-171-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-02-01"
   },
   {
    "date": "2019-02-01",
@@ -12132,7 +12416,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "teu-191-v3-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-02-01"
   },
   {
    "date": "2019-03-01",
@@ -12290,7 +12578,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "sm10-076-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-03-01"
   },
   {
    "date": "2019-05-03",
@@ -12690,7 +12982,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "unb-158-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-05-03"
   },
   {
    "date": "2019-08-23",
@@ -13018,7 +13314,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "hif-50-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-08-23"
   },
   {
    "date": "2019-11-29",
@@ -13108,7 +13408,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "sa-10-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-11-29"
   },
   {
    "date": "2019-12-06",
@@ -13200,7 +13504,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "s1h-45-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-12-06"
   },
   {
    "date": "2019-12-06",
@@ -13292,7 +13600,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "s1h-46-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-12-06"
   },
   {
    "date": "2019-12-06",
@@ -13384,7 +13696,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "s1h-66-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-12-06"
   },
   {
    "date": "2019-12-06",
@@ -13476,7 +13792,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "s1h-70-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-12-06"
   },
   {
    "date": "2020-02-07",
@@ -13804,7 +14124,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "ssh-140-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-02-07"
   },
   {
    "date": "2020-02-07",
@@ -14060,7 +14384,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "ssh-141-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-02-07"
   },
   {
    "date": "2020-02-07",
@@ -14306,7 +14634,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "ssh-142-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-02-07"
   },
   {
    "date": "2020-02-07",
@@ -14552,7 +14884,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "ssh-142-v3-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-02-07"
   },
   {
    "date": "2020-02-07",
@@ -14808,7 +15144,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "ssh-197-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-02-07"
   },
   {
    "date": "2020-02-07",
@@ -15064,7 +15404,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "ssh-206-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-02-07"
   },
   {
    "date": "2020-03-06",
@@ -15210,191 +15554,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
-  },
-  {
-   "date": "2020-05",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "SWSH",
-   "number": "032",
-   "setName": "SWSH Black Star Promos",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Promo",
-   "artist": "Tika Matsuno",
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SWSH-Black-Star-Promos/Snorlax-SWSH32",
-   "image": "images/SWSH_032_Snorlax_461684.jpg",
-   "finishByLanguage": [
-    {
-     "language": "English",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "holo"
-     ],
-     "unitAvailableFinishes": [
-      "holo"
-     ],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "confirmed",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "confirmed",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "confirmed",
-     "finishUnitId": "F0525",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0525-P01",
-       "finish": "holo",
-       "foilPattern": null,
-       "markings": [],
-       "distribution": {
-        "kind": "collection-promo",
-        "name": "Snorlax Pin Collection"
-       },
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "French",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0526",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "German",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0527",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "Spanish",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0529",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "Italian",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0528",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "Portuguese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0530",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
    ],
-   "finishCompletenessByLanguage": {
-    "English": "positive-evidence-only",
-    "French": "pending",
-    "German": "pending",
-    "Italian": "pending",
-    "Spanish": "pending",
-    "Portuguese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "English",
-    "French",
-    "German",
-    "Italian",
-    "Spanish",
-    "Portuguese"
-   ]
+   "rowId": "s2-77-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-03-06"
   },
   {
    "date": "2020-05-01",
@@ -15722,7 +15886,199 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "rcl-141-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-05-01"
+  },
+  {
+   "date": "2020-05",
+   "dateExact": false,
+   "name": "Snorlax",
+   "setCode": "SWSH",
+   "number": "032",
+   "setName": "SWSH Black Star Promos",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Promo",
+   "artist": "Tika Matsuno",
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SWSH-Black-Star-Promos/Snorlax-SWSH32",
+   "image": "images/SWSH_032_Snorlax_461684.jpg",
+   "finishByLanguage": [
+    {
+     "language": "English",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "confirmed",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "confirmed",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "confirmed",
+     "finishUnitId": "F0525",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0525-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": {
+        "kind": "collection-promo",
+        "name": "Snorlax Pin Collection"
+       },
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "French",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0526",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "German",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0527",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "Spanish",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0529",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "Italian",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0528",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "Portuguese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0530",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "English": "positive-evidence-only",
+    "French": "pending",
+    "German": "pending",
+    "Italian": "pending",
+    "Spanish": "pending",
+    "Portuguese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "English",
+    "French",
+    "German",
+    "Italian",
+    "Spanish",
+    "Portuguese"
+   ],
+   "rowId": "swsh-032-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2020-05-01"
   },
   {
    "date": "2020-06",
@@ -15908,7 +16264,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "ba20-mwt-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2020-06-01"
   },
   {
    "date": "2020-09-18",
@@ -16134,7 +16494,11 @@
     "Korean",
     "T-Chinese",
     "S-Chinese"
-   ]
+   ],
+   "rowId": "s4-84-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-09-18"
   },
   {
    "date": "2020-11",
@@ -16390,7 +16754,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "swsh-068-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2020-11-01"
   },
   {
    "date": "2020-11-13",
@@ -16771,7 +17139,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "viv-131-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-11-13"
   },
   {
    "date": "2020-11-13",
@@ -17032,7 +17404,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "viv-131-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2020-11-13"
   },
   {
    "date": "2021-01-21",
@@ -17122,7 +17498,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese"
-   ]
+   ],
+   "rowId": "sp-156-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-01-21"
   },
   {
    "date": "2021-03-19",
@@ -17339,7 +17719,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "s5a-93-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-03-19"
   },
   {
    "date": "2021-06-18",
@@ -17595,7 +17979,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "cre-224-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-06-18"
   },
   {
    "date": "2021-07",
@@ -17851,7 +18239,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "swsh-119-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2021-07-01"
   },
   {
    "date": "2021-07-09",
@@ -17984,7 +18376,11 @@
     "Korean",
     "T-Chinese",
     "S-Chinese"
-   ]
+   ],
+   "rowId": "sh-038-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-07-09"
   },
   {
    "date": "2021-10",
@@ -18030,7 +18426,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "T-Chinese"
-   ]
+   ],
+   "rowId": "pkmtchsp-sp145-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2021-10-01"
   },
   {
    "date": "2021-11-12",
@@ -18358,7 +18758,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "fst-206-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-11-12"
   },
   {
    "date": "2021-12-03",
@@ -18587,7 +18991,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "s8b-126-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-12-03"
   },
   {
    "date": "2021-12-17",
@@ -18765,7 +19173,11 @@
     "Korean",
     "T-Chinese",
     "S-Chinese"
-   ]
+   ],
+   "rowId": "si100-341-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-12-17"
   },
   {
    "date": "2021-12-17",
@@ -18943,7 +19355,11 @@
     "Korean",
     "T-Chinese",
     "S-Chinese"
-   ]
+   ],
+   "rowId": "si100-342-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2021-12-17"
   },
   {
    "date": "2022-03",
@@ -19052,7 +19468,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "sn-008-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2022-03-01"
   },
   {
    "date": "2022-05-13",
@@ -19329,7 +19749,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "s10a-058-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-05-13"
   },
   {
    "date": "2022-05-13",
@@ -19471,7 +19895,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "s10a-077-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-05-13"
   },
   {
    "date": "2022-06-17",
@@ -19688,7 +20116,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "s10b-056-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-06-17"
   },
   {
    "date": "2022-07-01",
@@ -20069,7 +20501,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "pgo-055-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-07-01"
   },
   {
    "date": "2022-07-01",
@@ -20324,7 +20760,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "pgo-055-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-07-01"
   },
   {
    "date": "2022-09-09",
@@ -20652,7 +21092,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "lor-143-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-09-09"
   },
   {
    "date": "2022-09-09",
@@ -20980,7 +21424,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "lor-tg10-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-09-09"
   },
   {
    "date": "2022-11-09",
@@ -21169,7 +21617,11 @@
     "German",
     "Italian",
     "Spanish"
-   ]
+   ],
+   "rowId": "pps1viv-viv131-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-11-09"
   },
   {
    "date": "2022-11-09",
@@ -21358,7 +21810,11 @@
     "German",
     "Italian",
     "Spanish"
-   ]
+   ],
+   "rowId": "pps1viv-viv131-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-11-09"
   },
   {
    "date": "2023",
@@ -21404,7 +21860,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csac-009-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2023-01-01"
   },
   {
    "date": "2023",
@@ -21450,7 +21910,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs1dc-152-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2023-01-01"
   },
   {
    "date": "2023",
@@ -21709,7 +22173,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "svp-051-v1-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2023-01-01"
   },
   {
    "date": "2023",
@@ -21779,7 +22247,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "svp-051-v2-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2023-01-01"
   },
   {
    "date": "2023",
@@ -21825,7 +22297,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "spcs-061-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2023-01-01"
   },
   {
    "date": "2023-01-20",
@@ -22153,7 +22629,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "crz-109-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-01-20"
   },
   {
    "date": "2023-05-19",
@@ -22226,7 +22706,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs1ac-110-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-05-19"
   },
   {
    "date": "2023-05-19",
@@ -22272,7 +22756,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs1ac-111-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-05-19"
   },
   {
    "date": "2023-05-19",
@@ -22318,7 +22806,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs1ac-112-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-05-19"
   },
   {
    "date": "2023-05-19",
@@ -22364,7 +22856,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs1ac-188-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-05-19"
   },
   {
    "date": "2023-05-19",
@@ -22410,7 +22906,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs1ac-207-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-05-19"
   },
   {
    "date": "2023-06",
@@ -22598,7 +23098,11 @@
     "German",
     "Italian",
     "Spanish"
-   ]
+   ],
+   "rowId": "pps3lor-lor143-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2023-06-01"
   },
   {
    "date": "2023-06-16",
@@ -22815,7 +23319,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "sv2a-143-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-06-16"
   },
   {
    "date": "2023-06-16",
@@ -23017,7 +23525,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "sv2a-181-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-06-16"
   },
   {
    "date": "2023-06-16",
@@ -23236,7 +23748,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "xsv2a-143-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-06-16"
   },
   {
    "date": "2023-06-16",
@@ -23455,7 +23971,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "xsv2a-143-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-06-16"
   },
   {
    "date": "2023-09-22",
@@ -23783,7 +24303,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "mew-143-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-09-22"
   },
   {
    "date": "2023-10-27",
@@ -23961,7 +24485,11 @@
     "Korean",
     "T-Chinese",
     "Thai"
-   ]
+   ],
+   "rowId": "sv4k-059-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-10-27"
   },
   {
    "date": "2023-11",
@@ -24055,7 +24583,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "clf-016-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2023-11-01"
   },
   {
    "date": "2023-11",
@@ -24241,7 +24773,11 @@
     "French",
     "German",
     "Italian"
-   ]
+   ],
+   "rowId": "wcd23lor-lor143-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2023-11-01"
   },
   {
    "date": "2023-11-03",
@@ -24569,7 +25105,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "par-175-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-11-03"
   },
   {
    "date": "2023-11-10",
@@ -24661,7 +25201,11 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean"
-   ]
+   ],
+   "rowId": "svg-021-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-11-10"
   },
   {
    "date": "2023-11-17",
@@ -24725,7 +25269,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "clv-016-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-11-17"
   },
   {
    "date": "2023-12-01",
@@ -24942,7 +25490,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "sv4a-145-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-12-01"
   },
   {
    "date": "2023-12-01",
@@ -25129,7 +25681,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "sv4a-310-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-12-01"
   },
   {
    "date": "2024",
@@ -25202,7 +25758,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csv5c-115-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2024-01-01"
   },
   {
    "date": "2024",
@@ -25248,7 +25808,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs3dc-117-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2024-01-01"
   },
   {
    "date": "2024",
@@ -25504,7 +26068,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "svp-122-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2024-01-01"
   },
   {
    "date": "2024",
@@ -25550,7 +26118,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Thai"
-   ]
+   ],
+   "rowId": "svpth-082-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2024-01-01"
   },
   {
    "date": "2024",
@@ -25659,7 +26231,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "svln-010-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2024-01-01"
   },
   {
    "date": "2024",
@@ -25732,7 +26308,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs2ac-086-v1-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2024-01-01"
   },
   {
    "date": "2024",
@@ -25778,7 +26358,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs2ac-142-v2-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2024-01-01"
   },
   {
    "date": "2024-01-26",
@@ -26034,7 +26618,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "paf-202-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-01-26"
   },
   {
    "date": "2024-03-08",
@@ -26150,7 +26738,11 @@
     "Japanese",
     "Korean",
     "S-Chinese"
-   ]
+   ],
+   "rowId": "sviba-046-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-03-08"
   },
   {
    "date": "2024-03-22",
@@ -26328,7 +26920,11 @@
     "Korean",
     "T-Chinese",
     "Thai"
-   ]
+   ],
+   "rowId": "sv5a-051-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-03-22"
   },
   {
    "date": "2024-05-24",
@@ -26656,7 +27252,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "twm-136-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-05-24"
   },
   {
    "date": "2024-06-28",
@@ -26702,7 +27302,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Indonesian"
-   ]
+   ],
+   "rowId": "svpid-117-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-06-28"
   },
   {
    "date": "2024-06-28",
@@ -26748,7 +27352,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Indonesian"
-   ]
+   ],
+   "rowId": "svpid-117-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-06-28"
   },
   {
    "date": "2024-11-08",
@@ -27076,7 +27684,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "ssp-144-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-11-08"
   },
   {
    "date": "2024-11-22",
@@ -27218,7 +27830,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "svm-094-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-11-22"
   },
   {
    "date": "2025",
@@ -27264,7 +27880,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csvl1c-109-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27337,7 +27957,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs6bc-113-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27383,7 +28007,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csmpc-h009-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27456,7 +28084,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csv7c-158-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27529,7 +28161,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs5ac-093-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27575,7 +28211,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs5dc-097-v1-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27621,7 +28261,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cs5dc-098-v2-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27667,7 +28311,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csuc-010-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27713,7 +28361,111 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csm21c-054-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
+  },
+  {
+   "date": "2025-26",
+   "dateExact": false,
+   "name": "Snorlax",
+   "setCode": "CSVH4C",
+   "number": "a003",
+   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003",
+   "image": "images/CSVH4C_a003_Snorlax_888115.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0080",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csvh4c-a003-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
+  },
+  {
+   "date": "2025-26",
+   "dateExact": false,
+   "name": "Snorlax ex",
+   "setCode": "CSVH4C",
+   "number": "p006",
+   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-ex-CSVH4Cp006",
+   "image": "images/CSVH4C_p006_Snorlax_ex_888095.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0081",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csvh4c-p006-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27759,7 +28511,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csvh1c-a001-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27820,7 +28576,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "svpcs-277-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27866,7 +28626,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csm2cc-103-v1-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27912,7 +28676,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csm2cc-170-v2-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -27958,7 +28726,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csm2cc-171-v3-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -28031,7 +28803,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csm2bc-124-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -28077,7 +28853,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csm2dc-213-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -28123,7 +28903,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csm1cc-102-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025",
@@ -28184,7 +28968,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "cszc-018-base-none",
+   "datePrecision": "year",
+   "dateApproximate": true,
+   "dateSort": "2025-01-01"
   },
   {
    "date": "2025-01-17",
@@ -28257,7 +29045,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "151c-143-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-01-17"
   },
   {
    "date": "2025-01-17",
@@ -28303,7 +29095,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "151c-169-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-01-17"
   },
   {
    "date": "2025-01-17",
@@ -28559,7 +29355,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "pre-076-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-01-17"
   },
   {
    "date": "2025-01-24",
@@ -28698,7 +29498,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "sv9-075-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-01-24"
   },
   {
    "date": "2025-02",
@@ -29006,7 +29810,11 @@
     "German",
     "Italian",
     "Spanish"
-   ]
+   ],
+   "rowId": "xpre-076-v1-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-02-01"
   },
   {
    "date": "2025-02",
@@ -29278,7 +30086,11 @@
     "German",
     "Italian",
     "Spanish"
-   ]
+   ],
+   "rowId": "xpre-076-v2-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-02-01"
   },
   {
    "date": "2025-02-28",
@@ -29324,7 +30136,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csve1c-093-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-02-28"
   },
   {
    "date": "2025-03",
@@ -29579,7 +30395,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "svp-184-v1-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-03-01"
   },
   {
    "date": "2025-03",
@@ -29834,7 +30654,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "svp-184-v2-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-03-01"
   },
   {
    "date": "2025-03-28",
@@ -30162,7 +30986,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "jtg-117-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-03-28"
   },
   {
    "date": "2025-04",
@@ -30342,7 +31170,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "xjtg-117-v1-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-04-01"
   },
   {
    "date": "2025-04",
@@ -30522,7 +31354,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "xjtg-117-v2-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-04-01"
   },
   {
    "date": "2025-04",
@@ -30592,7 +31428,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "English"
-   ]
+   ],
+   "rowId": "xjtg-117-v3-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-04-01"
   },
   {
    "date": "2025-07-18",
@@ -30638,7 +31478,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csve2c-122-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-07-18"
   },
   {
    "date": "2025-07-25",
@@ -30684,7 +31528,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "Indonesian"
-   ]
+   ],
+   "rowId": "svpid-278-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-07-25"
   },
   {
    "date": "2025-08-14",
@@ -30874,7 +31722,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "pps7jtg-jtg117-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-08-14"
   },
   {
    "date": "2025-11-28",
@@ -31043,7 +31895,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "m2a-136-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-11-28"
   },
   {
    "date": "2025-11-28",
@@ -31260,7 +32116,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "xm2a-136-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-11-28"
   },
   {
    "date": "2025-11-28",
@@ -31477,7 +32337,11 @@
     "T-Chinese",
     "Indonesian",
     "Thai"
-   ]
+   ],
+   "rowId": "xm2a-136-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-11-28"
   },
   {
    "date": "2025-12",
@@ -31550,7 +32414,11 @@
    "edord": 1,
    "confirmedLanguages": [
     "S-Chinese"
-   ]
+   ],
+   "rowId": "csv10c-175-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-12-01"
   },
   {
    "date": "2025-12",
@@ -31659,7 +32527,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "mc-567-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-12-01"
   },
   {
    "date": "2025-12",
@@ -31810,7 +32682,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "mc-568-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-12-01"
   },
   {
    "date": "2025-12",
@@ -31919,7 +32795,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
+   ],
+   "rowId": "mc-569-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2025-12-01"
   },
   {
    "date": "2025-12-19",
@@ -32011,99 +32891,11 @@
    "confirmedLanguages": [
     "Japanese",
     "T-Chinese"
-   ]
-  },
-  {
-   "date": "2025-26",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSVH4C",
-   "number": "a003",
-   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003",
-   "image": "images/CSVH4C_a003_Snorlax_888115.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0080",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
    ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ]
-  },
-  {
-   "date": "2025-26",
-   "dateExact": false,
-   "name": "Snorlax ex",
-   "setCode": "CSVH4C",
-   "number": "p006",
-   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-ex-CSVH4Cp006",
-   "image": "images/CSVH4C_p006_Snorlax_ex_888095.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0081",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ]
+   "rowId": "mp1-012-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-12-19"
   },
   {
    "date": "2026-01",
@@ -32242,53 +33034,11 @@
     "Japanese",
     "Korean",
     "T-Chinese"
-   ]
-  },
-  {
-   "date": "2026-01",
-   "dateExact": true,
-   "name": "Snorlax",
-   "setCode": "SV-P/ID",
-   "number": "286",
-   "setName": "Scarlet & Violet Indonesian Promos",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Promo",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID286",
-   "image": "images/SV-P_ID_286_Snorlax_879048.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Indonesian",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0459",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
    ],
-   "finishCompletenessByLanguage": {
-    "Indonesian": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Indonesian"
-   ]
+   "rowId": "m3-062-base-none",
+   "datePrecision": "month",
+   "dateApproximate": true,
+   "dateSort": "2026-01-01"
   },
   {
    "date": "2026-01-01",
@@ -32559,7 +33309,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "pps8jtg-jtg117-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-01-01"
   },
   {
    "date": "2026-01-01",
@@ -32830,7 +33584,61 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "pps8jtg-jtg117-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-01-01"
+  },
+  {
+   "date": "2026-01",
+   "dateExact": true,
+   "name": "Snorlax",
+   "setCode": "SV-P/ID",
+   "number": "286",
+   "setName": "Scarlet & Violet Indonesian Promos",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Promo",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID286",
+   "image": "images/SV-P_ID_286_Snorlax_879048.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Indonesian",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0459",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Indonesian": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Indonesian"
+   ],
+   "rowId": "svpid-286-base-none",
+   "datePrecision": "month",
+   "dateApproximate": false,
+   "dateSort": "2026-01-01"
   },
   {
    "date": "2026-03-27",
@@ -33158,7 +33966,11 @@
     "Italian",
     "Spanish",
     "Portuguese"
-   ]
+   ],
+   "rowId": "por-063-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-03-27"
   }
  ]
 }

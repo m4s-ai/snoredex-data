@@ -19,6 +19,7 @@ Runs on Python 3.9+ with no third-party dependencies and no network access.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -275,23 +276,46 @@ check(
 
 
 def precision(value: Any) -> str:
-    return {10: "day", 7: "month", 4: "year"}.get(len(str(value)), "unknown")
+    """Classify by validating, not by measuring length: "2025-26" is a year range, not a month."""
+    text = str(value)
+    if re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])", text):
+        return "day"
+    if re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", text):
+        return "month"
+    return "year"
 
 
-exact_conflicts = [
-    (row["setCode"], norm_number(row.get("number")), row["date"])
+# The defect was one boolean carrying two independent facts: how precise the value is, and
+# whether it is trusted at that precision. The fix is that precision is *derived*, so it can
+# never contradict the value it describes, and confidence stands alone.
+precision_conflicts = [
+    (row["setCode"], norm_number(row.get("number")), row["date"], row.get("datePrecision"))
     for row in releases
-    if precision(row.get("date")) != "day" and row.get("dateExact") is True
+    if row.get("datePrecision") != precision(row.get("date"))
+]
+missing_confidence = [
+    row["setCode"] for row in releases if not isinstance(row.get("dateApproximate"), bool)
 ]
 check(
     "F7.1",
-    "dateExact is applied consistently for a given date precision",
+    "Date precision is derived from the value, and confidence is a separate field",
     "FAIL",
-    not exact_conflicts,
-    f"{len(exact_conflicts)} month-precision rows are flagged dateExact=true while "
-    f"{sum(1 for r in releases if precision(r.get('date')) == 'month' and not r.get('dateExact'))} "
-    f"month-precision rows are flagged false. The documented rule is that false means year-level, so "
-    f"the same precision carries both flags. e.g. {exact_conflicts[:4]}",
+    not precision_conflicts and not missing_confidence,
+    f"{len(precision_conflicts)} rows carry a datePrecision that contradicts their date value; "
+    f"{len(missing_confidence)} rows lack a boolean dateApproximate. e.g. {precision_conflicts[:3]}",
+)
+
+bad_sort = [
+    (row["setCode"], row.get("date"), row.get("dateSort"))
+    for row in releases
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(row.get("dateSort") or ""))
+]
+check(
+    "F7.3",
+    "Every normalized sort date is a valid full ISO date",
+    "FAIL",
+    not bad_sort,
+    f"{len(bad_sort)} rows have a malformed dateSort. e.g. {bad_sort[:4]}",
 )
 
 has_sort_key = all(row.get("dateSort") for row in releases)
