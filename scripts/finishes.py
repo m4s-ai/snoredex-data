@@ -15,6 +15,7 @@ import csv
 import hashlib
 import json
 import re
+import sys
 import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
@@ -233,7 +234,7 @@ def has_complete_manifest(printings: list[dict[str, Any]], language: str) -> boo
     )
 
 
-def compact_printing(printing: dict[str, Any]) -> dict[str, Any]:
+def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") -> dict[str, Any]:
     return {
         "printingId": printing["printingId"],
         "finish": printing["finish"],
@@ -242,6 +243,71 @@ def compact_printing(printing: dict[str, Any]) -> dict[str, Any]:
         "distribution": printing.get("distribution"),
         "cardSize": printing.get("cardSize"),
         "verificationStatus": printing["verificationStatus"],
+        "productMapping": product_mapping,
+    }
+
+
+def project_unit_onto_product(unit: dict[str, Any], token: str) -> dict[str, Any]:
+    """Project one finish unit onto one Cardmarket product without losing evidence.
+
+    A finish unit is keyed on (set, number, language); a Cardmarket product is one V-token
+    within it. Printings are therefore in one of three relationships to a given product:
+
+    * mapped here      - attributed to this token by evidence;
+    * unresolved       - attributed to no product yet, so it may belong to this one;
+    * another product  - attributed to a different token of the same unit.
+
+    Earlier revisions kept only the first group, so confirmed printings attributed to no
+    product reached no consumer at all and cells rendered blank where the store held
+    evidence. All three groups are now represented, and each finish carries a status that
+    says which relationship it rests on, so `pending` keeps its single documented meaning
+    of "no positive evidence anywhere in this unit".
+    """
+    product = next((item for item in unit["products"] if item["variant"] == token), None)
+    not_applicable = bool(product and product["claimStatus"] == "contradicted")
+
+    mapped_here = [p for p in unit["printings"] if token in p["mappedVariants"]]
+    unresolved = [p for p in unit["printings"] if not p["mappedVariants"]]
+    other_product = [
+        p for p in unit["printings"] if p["mappedVariants"] and token not in p["mappedVariants"]
+    ]
+
+    def status_for(finish: str) -> str:
+        if not_applicable:
+            return "not-applicable"
+        attributed = [p for p in mapped_here if p["finish"] == finish]
+        if attributed:
+            return strongest_status(attributed, finish)
+        if any(p["finish"] == finish for p in unresolved):
+            return "unmapped"
+        if any(p["finish"] == finish for p in other_product):
+            return "other-product"
+        return "pending"
+
+    finish_status = {finish: status_for(finish) for finish in FINISHES}
+    attributed_known = [p for p in mapped_here if p["finish"] in FINISHES]
+
+    return {
+        "language": unit["language"],
+        "claimStatus": product["claimStatus"] if product else "pending",
+        # Finishes evidence attributes to this specific Cardmarket product.
+        "availableFinishes": [
+            finish for finish in FINISHES if any(p["finish"] == finish for p in mapped_here)
+        ],
+        # Finishes known for this set number and language regardless of which product carries
+        # them. Always populated when the store holds evidence, so a consumer never sees an
+        # empty cell for a card whose finishes are in fact documented.
+        "unitAvailableFinishes": list(unit["availableFinishes"]),
+        "finishStatus": finish_status,
+        # The store's own status, carried verbatim. Product attribution can only ever be weaker
+        # than the unit's knowledge, so this guarantees the projection loses no evidence.
+        "unitFinishStatus": dict(unit["finishStatus"]),
+        "status": "not-applicable" if not_applicable else strongest_status(attributed_known),
+        "finishUnitId": unit["finishUnitId"],
+        # Propagated so `pending` and `unmapped` can be told apart without loading the store.
+        "productMappingStatus": unit["productMappingStatus"],
+        "printings": [compact_printing(p, "mapped") for p in mapped_here]
+        + [compact_printing(p, "unresolved") for p in unresolved],
     }
 
 
@@ -635,25 +701,7 @@ def main() -> None:
         by_language: list[dict[str, Any]] = []
         for language in card.get("languages") or []:
             unit = finish_lookup[(str(card.get("setCode") or ""), str(card.get("number") or ""), language)]
-            product = next((item for item in unit["products"] if item["variant"] == token), None)
-            mapped = [printing for printing in unit["printings"] if token in printing["mappedVariants"]]
-            mapped_known = [printing for printing in mapped if printing["finish"] in FINISHES]
-            not_applicable = bool(product and product["claimStatus"] == "contradicted")
-            finish_status = {
-                finish: "not-applicable" if not_applicable else strongest_status(mapped_known, finish)
-                for finish in FINISHES
-            }
-            by_language.append(
-                {
-                    "language": language,
-                    "claimStatus": product["claimStatus"] if product else "pending",
-                    "availableFinishes": [finish for finish in FINISHES if any(p["finish"] == finish for p in mapped)],
-                    "finishStatus": finish_status,
-                    "status": "not-applicable" if not_applicable else strongest_status(mapped_known),
-                    "finishUnitId": unit["finishUnitId"],
-                    "printings": [compact_printing(printing) for printing in mapped],
-                }
-            )
+            by_language.append(project_unit_onto_product(unit, token))
         union_finishes = [
             finish
             for finish in FINISHES
@@ -670,9 +718,23 @@ def main() -> None:
         else:
             overall_status = "pending"
         card["finishAvailability"] = {
-            "scope": "this Cardmarket product variant, by listed language; full evidence is in verification/finish_units.json",
+            "scope": (
+                "this Cardmarket product variant, by listed language; full evidence is in "
+                "verification/finish_units.json"
+            ),
+            "statusMeanings": {
+                "confirmed/owner-attested/marketplace-claimed": "evidence attributes this finish to this product",
+                "unmapped": "the card and language have this finish, but no product is attributed yet; it may be this one",
+                "other-product": "the card and language have this finish, attributed to a different Cardmarket product",
+                "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
+                "not-applicable": "this product-language claim is contradicted",
+            },
             "status": overall_status,
             "availableFinishes": union_finishes,
+            "unitAvailableFinishes": sorted(
+                {finish for row in by_language for finish in row["unitAvailableFinishes"]},
+                key=FINISHES.index,
+            ),
             "byLanguage": by_language,
         }
 
@@ -874,5 +936,91 @@ def main() -> None:
     print(f"TCGdex: {len(tcgdex_data)}/{len(tcgdex_urls)} fetched; errors={len(fetch_errors)}")
 
 
+def reproject() -> None:
+    """Re-apply the card projection from the committed finish store, without network access.
+
+    `main()` needs TCGdex to rebuild `finish_units.json`. The projection step does not: it is a
+    pure function of the committed store. Exposing it separately lets the release gate assert
+    that the published card summaries are reproducible from the store, and lets a projection
+    fix be applied without a full re-fetch.
+    """
+    cards_document = read_json(CARDS_PATH)
+    finish_units = read_json(OUTPUT_PATH)["units"]
+    finish_lookup = {
+        (unit["setCode"], unit["number"], unit["language"]): unit for unit in finish_units
+    }
+
+    for card in cards_document["cards"]:
+        if card.get("isCodeCard"):
+            card["finishAvailability"] = {
+                "scope": "not-applicable",
+                "status": "not-applicable",
+                "reason": "Online/live code cards do not have physical card finishes.",
+            }
+            continue
+        token = variant_token(card)
+        by_language = [
+            project_unit_onto_product(
+                finish_lookup[
+                    (str(card.get("setCode") or ""), str(card.get("number") or ""), language)
+                ],
+                token,
+            )
+            for language in card.get("languages") or []
+        ]
+        union_finishes = [
+            finish for finish in FINISHES if any(finish in row["availableFinishes"] for row in by_language)
+        ]
+        language_statuses = [row["status"] for row in by_language]
+        applicable = [status for status in language_statuses if status != "not-applicable"]
+        if language_statuses and not applicable:
+            overall_status = "not-applicable"
+        elif applicable and all(status == "confirmed" for status in applicable):
+            overall_status = "confirmed"
+        elif any(status != "pending" for status in applicable):
+            overall_status = "partial"
+        else:
+            overall_status = "pending"
+        card["finishAvailability"] = {
+            "scope": (
+                "this Cardmarket product variant, by listed language; full evidence is in "
+                "verification/finish_units.json"
+            ),
+            "statusMeanings": {
+                "confirmed/owner-attested/marketplace-claimed": "evidence attributes this finish to this product",
+                "unmapped": "the card and language have this finish, but no product is attributed yet; it may be this one",
+                "other-product": "the card and language have this finish, attributed to a different Cardmarket product",
+                "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
+                "not-applicable": "this product-language claim is contradicted",
+            },
+            "status": overall_status,
+            "availableFinishes": union_finishes,
+            "unitAvailableFinishes": sorted(
+                {finish for row in by_language for finish in row["unitAvailableFinishes"]},
+                key=FINISHES.index,
+            ),
+            "byLanguage": by_language,
+        }
+
+    write_json(CARDS_PATH, cards_document)
+    reachable = {
+        printing["printingId"]
+        for card in cards_document["cards"]
+        for row in (card.get("finishAvailability") or {}).get("byLanguage", [])
+        for printing in row["printings"]
+    }
+    confirmed = {
+        printing["printingId"]
+        for unit in finish_units
+        for printing in unit["printings"]
+        if printing["verificationStatus"] == "confirmed"
+    }
+    print(f"reprojected {len(cards_document['cards'])} cards from {len(finish_units)} finish units")
+    print(f"confirmed printings reachable from a product view: {len(confirmed & reachable)}/{len(confirmed)}")
+
+
 if __name__ == "__main__":
-    main()
+    if "--reproject" in sys.argv:
+        reproject()
+    else:
+        main()
