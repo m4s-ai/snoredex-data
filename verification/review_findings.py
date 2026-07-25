@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import os
 import re
 import subprocess
 import sys
@@ -500,9 +501,20 @@ check(
     f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
 )
 
+# A pull_request workflow checks out GitHub's disposable merge commit. Its metadata belongs to
+# GitHub/the PR author and is not part of either branch; audit the PR head (second parent) there.
+# Everywhere else, audit the current branch ancestry that a normal merge/rebase can publish.
+identity_tip = "HEAD"
+if os.environ.get("GITHUB_EVENT_NAME") == "pull_request":
+    try:
+        identity_tip = subprocess.check_output(
+            ["git", "rev-parse", "HEAD^2"], cwd=ROOT, text=True
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        identity_tip = "HEAD"
 try:
     identity_fields = subprocess.check_output(
-        ["git", "log", "--all", "--format=%ae%x00%ce"], cwd=ROOT
+        ["git", "log", identity_tip, "--format=%ae%x00%ce"], cwd=ROOT
     ).decode("utf-8", errors="replace").replace("\n", "\0").split("\0")
 except (OSError, subprocess.CalledProcessError):
     identity_fields = ["commit metadata unavailable"]
@@ -512,7 +524,7 @@ personal_commit_emails = sorted({
 })
 check(
     "P7",
-    "Reachable commit metadata exposes no personal email address",
+    "Publishable branch ancestry exposes no personal email address",
     "FAIL",
     not personal_commit_emails,
     f"personal commit emails: {personal_commit_emails}",
