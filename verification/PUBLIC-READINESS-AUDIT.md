@@ -18,7 +18,7 @@ Audit date: 2026-07-25 · commit range: full history, root through `HEAD`.
 | Complete reachable history | `git rev-list --objects --all` + `git cat-file --batch`, every unique reachable blob | **82 hits**, all old `C:\Users\...` absolute-path occurrences across build, verification, and handover blobs. No credential or personal-email hit was found. The executable report prints the current blob count. |
 | Shallow-check protection | `git rev-parse --is-shallow-repository` | **False.** CI uses `fetch-depth: 0`, so “full history” cannot silently mean one commit. |
 | Deleted-name check | `git log --diff-filter=D --name-only` | Empty, but this is only supplementary: modified historical versions can still contain withdrawn data, which the blob scan catches. |
-| Commit identity | `git log --all --format='%ae %ce'`, enforced by check P7 | Author and committer addresses use GitHub/automation `noreply` identities rather than a personal contact address. |
+| Commit identity | `git log <publishable-head> --format='%ae %ce'`, enforced by check P7 | Author and committer addresses in the branch ancestry use GitHub/automation `noreply` identities rather than a personal contact address. GitHub's disposable PR merge commit is not treated as branch history. |
 | Caches and scratch excluded | `.gitignore` review | `verification/cache/`, `verification/zoom/`, `_evidence_audit.json`, `__pycache__/` all excluded and absent from the tree. |
 
 ## Requires human judgement — not cleared
