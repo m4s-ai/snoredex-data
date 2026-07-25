@@ -52,7 +52,8 @@ Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories,
 - **"Spanish" cannot distinguish European from Latin-American Spanish.** From Journey Together (2025) LATAM-ES is a physically distinct edition for regular sets — not Prize Packs — with different attack translations, set name and set code (specimen-verified for `SVP 184`: "Presión Dinámica"/"Juntos de Aventuras" vs "Plancha Dinámica"/"Aventuras Compartidas"). Cardmarket does not support LATAM-ES; sourcing it would require the official Pokémon site. Every Spanish entry here means the European print. See `verification/RESUME.md`.
 - **`cardKey` groups the same *card*, not the same *artwork*.** Cardmarket derives it from card name + attack names. Reprints with brand-new art share a `cardKey`. That's a feature here — it's exactly how the "same card, new art" cases below were found — but don't read it as art identity.
 - **Artist coverage is 115/198 (58%).** Illustrators come from pokemontcg.io/limitlesstcg (English-market) and the official pokemon-card.com database (Japanese-market). The uncovered rows are mostly Korean/Chinese deck products with no published illustrator credit. Rather than guess, `artist` is left `null` there; use `cardKey` to find a sibling that has one.
-- **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** Use `finishAvailability` on each card or the authoritative `verification/finish_units.json`. A `pending` finish means “not established,” never “does not exist.”
+- **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** The two finish layers answer *different* questions, so pick deliberately rather than treating them as alternatives. `finishAvailability` on a card answers “what does evidence attribute to **this Cardmarket product**?” `verification/finish_units.json` answers “what is known for this **set number and language**, whichever product carries it?” Product attribution is necessarily the weaker of the two, so each card row also carries `unitAvailableFinishes` and `unitFinishStatus` from the store. Read the status words exactly: `pending` means no positive evidence anywhere in the unit; `unmapped` means the finish is known but no product is attributed yet; `other-product` means it is attributed to a different listing of the same card. None of the three ever means “does not exist.”
+- **`languages` is the raw Cardmarket claim; the verdict lives beside it.** Each card carries `languagesConfirmed`, `languagesContradicted`, and `languagesUnresolved`. Use `languagesConfirmed` for printings backed by an outside source — 36 products still list at least one language this project has itself refuted, and `languages` deliberately preserves that claim because the over-claiming is a finding.
 - **A Cardmarket V-token is not a finish.** TCGdex's `normal`/`holo`/`reverse` flags apply to the set number and language; `V1`/`V2`/`V3` mapping is recorded only when it is unambiguous or independently identified.
 - **Stamp role matters.** EX-era set-logo stamps that form part of the reverse-holo design use `markings.role: "reverse-holo-treatment"`. Later prerelease, Staff, retailer, and Pokémon Center stamps use `markings.role: "distribution-promo"` and do not imply reverse holo.
 
@@ -128,13 +129,15 @@ claims and newly sourced cases are removed. Four English units have an official
 
 Current positive coverage (units can appear in more than one row):
 
+<!-- generated:finish-coverage — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Known available finish | Set-number-language units |
 |---|---:|
-| Non-holo | 276 |
+| Non-holo | 270 |
 | Holo | 145 |
 | Reverse holo | 234 |
 | Mirror holo | 8 |
-| Both non-holo and holo | 24 |
+| Both non-holo and holo | 18 |
+<!-- /generated:finish-coverage -->
 
 Each unit contains `finishStatus` for `non-holo`, `holo`, `reverse-holo`, and `mirror-holo`, plus
 one or more physical `printings`. A printing keeps four separate dimensions:
@@ -147,8 +150,10 @@ one or more physical `printings`. A printing keeps four separate dimensions:
 The distinction fixes two easy-to-confuse cases. `DF 10` has a normal holo printing and an
 EX Dragon Frontiers reverse holo whose set-logo stamp is intrinsic to that reverse treatment.
 By contrast, `CL 33`, `VIV 131`, and `SVP 184` have later prerelease/Staff set-name stamps recorded
-as distribution promos; the stamp itself does not make a card reverse holo. `JTG 117` now explicitly
-shows non-holo, holo, and intricate-tile reverse-holo availability by language.
+as distribution promos; the stamp itself does not make a card reverse holo. The regular `JTG 117`
+records holo and intricate-tile reverse-holo availability by language — **not** non-holo. The
+non-holo Hop's Snorlax is the Prize Pack product (`PPS8 JTG 117` V1), a separate printing; keeping
+them apart is exactly what the product/finish split is for.
 
 Source strength and completeness are explicit. Only a complete official checklist may establish
 that a listed alternative is absent; API flags, TCGplayer/TCGCSV subtypes, PSA registries, and scans
