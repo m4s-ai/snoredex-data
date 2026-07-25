@@ -8,7 +8,7 @@ Date sources, in precedence order:
   3. Approximate dates carry exact=False and render as "~YYYY".
 Outputs: verification/confirmed-releases.html + analysis_confirmed_releases.json
 """
-import json, io, html, os
+import json, io, html, os, re
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -200,10 +200,62 @@ for c in cards:
     else:
         rows.append({**base, "edition": "—", "edord": 1, "confirmedLanguages": langs})
 
-rows.sort(key=lambda r: (r["date"], r["setName"], str(r["number"]), r["variant"], r["edord"]))
+# --- stable identity and typed date fields -------------------------------------------------
+# Identity must not be the sort position: filtering and sorting reorder rows, and correction
+# links, checklist scope and deep links all have to survive that. (setCode, number, variant,
+# edition) is unique across every row, so it is the natural key.
+EDITION_SLUG = {"1st Edition": "1e", "Unlimited": "unl", "—": "none"}
+
+def row_id(r):
+    parts = [r["setCode"], str(r["number"] or "no-number"), r["variant"],
+             EDITION_SLUG.get(r["edition"], r["edition"])]
+    slug = "-".join(re.sub(r"[^A-Za-z0-9]+", "", p) or "x" for p in parts)
+    return slug.lower()
+
+def date_precision(d):
+    """Classify a date value by validating it, not by measuring its length.
+
+    Length alone is wrong: "2025-26" is a year *range* (CSVH4C), not a month, and would be
+    mistaken for month precision and then normalized into the invalid month 26.
+    """
+    d = str(d)
+    if re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])", d):
+        return "day"
+    if re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", d):
+        return "month"
+    return "year"
+
+def date_sort_key(d):
+    """Normalize a mixed-precision date to a full ISO date for typed ordering.
+
+    Missing components resolve to the start of the period, so a year-precision row sorts at
+    the head of its year rather than lexicographically among that year's dated rows.
+    """
+    d = str(d)
+    precision = date_precision(d)
+    if precision == "day":
+        return d
+    if precision == "month":
+        return f"{d}-01"
+    return f"{d[:4]}-01-01"
+
+for r in rows:
+    r["rowId"] = row_id(r)
+    # `dateExact` conflated two things: how precise the value is, and whether it is trusted at
+    # that precision. Both are now explicit. `datePrecision` is derived from the value, so it
+    # can never contradict it; `dateApproximate` carries the confidence judgement alone.
+    r["datePrecision"] = date_precision(r["date"])
+    r["dateApproximate"] = not r["dateExact"]
+    r["dateSort"] = date_sort_key(r["date"])
+
+_dupe_ids = {i for i in (r["rowId"] for r in rows) if list(r["rowId"] for r in rows).count(i) > 1}
+if _dupe_ids:
+    raise SystemExit(f"rowId collision, identity is not stable: {sorted(_dupe_ids)}")
+
+rows.sort(key=lambda r: (r["dateSort"], r["setName"], str(r["number"]), r["variant"], r["edord"]))
 
 json.dump({"generated": "2026-07-23",
-           "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). dateExact=false means the date is approximate (year-level). For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
+           "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value; dateApproximate says the value is not trusted beyond the year and is displayed as ~YYYY; dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
            "variants": rows},
           io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
@@ -370,7 +422,7 @@ def correction_issue_url(r, row_number, finish_values):
         "A correction was requested from `verification/confirmed-releases.html`.",
         "",
         "## Row to correct",
-        f'- Generated row: {row_number}',
+        f'- Row ID: `{r["rowId"]}`  (stable; survives sorting and filtering)',
         f'- Card: {r["name"]}',
         f'- Set: {r["setName"]} ({r["setCode"]})',
         f'- Collector number: {r["number"] or "unnumbered"}',
