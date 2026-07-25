@@ -1,0 +1,218 @@
+/* Snoredex public site styles.
+ *
+ * Extracted from scripts/confirmed_releases.py, which embedded ~500 lines of CSS in a Python
+ * string literal. Kept as a real stylesheet so it can be edited, diffed and linted.
+ *
+ * Only project-relative paths are used, so the page works identically from file:// and from the
+ * /snoredex-data/ project path on GitHub Pages.
+ */
+
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --fg: #14171a;
+  --muted: #5b6570;
+  --line: #dfe3e8;
+  --panel: #f6f8fa;
+  --accent: #1c56b3;
+  --confirmed: #1a7f4b;
+  --marketplace: #8a6100;
+  --pending: #6b7280;
+  --contradicted: #a3282b;
+  --chip: #eaeef3;
+  --focus: #1c56b3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1216;
+    --fg: #e8ecf1;
+    --muted: #98a3b0;
+    --line: #262d36;
+    --panel: #161b22;
+    --accent: #6ea8ff;
+    --confirmed: #4ec98a;
+    --marketplace: #d9a441;
+    --pending: #9aa4b0;
+    --contradicted: #ef6f72;
+    --chip: #1d242d;
+    --focus: #6ea8ff;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible,
+summary:focus-visible, th button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px 64px; }
+
+/* --- masthead and navigation --- */
+header.masthead { border-bottom: 1px solid var(--line); background: var(--panel); }
+header.masthead .wrap { padding-top: 20px; padding-bottom: 0; }
+h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.01em; }
+.tagline { color: var(--muted); margin: 0 0 14px; max-width: 68ch; }
+
+nav.sections ul { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; margin: 0; padding: 0; }
+nav.sections a {
+  display: block; padding: 8px 12px; text-decoration: none; color: var(--fg);
+  border-bottom: 2px solid transparent; font-weight: 500;
+}
+nav.sections a:hover { border-bottom-color: var(--accent); }
+
+section { scroll-margin-top: 12px; padding-top: 28px; }
+h2 { font-size: 20px; margin: 0 0 10px; }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p { max-width: 78ch; }
+
+/* --- statistic tiles --- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 16px 0; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.stat .n { font-size: 22px; font-weight: 650; display: block; }
+.stat .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+
+.callout {
+  border-left: 3px solid var(--accent); background: var(--panel);
+  padding: 12px 14px; border-radius: 0 8px 8px 0; margin: 16px 0;
+}
+.callout ul { margin: 8px 0 0; padding-left: 20px; }
+.callout li { max-width: 78ch; margin-bottom: 4px; }
+
+/* --- filter controls --- */
+.controls { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin: 12px 0; }
+.controls .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.field input, .field select {
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 8px; font: inherit; min-width: 130px;
+}
+.field select[multiple] { min-height: 84px; }
+.field input[type="number"] { width: 88px; min-width: 0; }
+
+details.morefilters { margin-top: 10px; }
+details.morefilters > summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+.langgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 8px; margin-top: 8px; }
+.langgrid .field select { min-width: 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip {
+  background: var(--chip); border: 1px solid var(--line); border-radius: 999px;
+  padding: 3px 10px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;
+}
+.chip button { background: none; border: 0; color: inherit; cursor: pointer; font-size: 14px; line-height: 1; padding: 0; }
+button.primary {
+  background: var(--accent); color: #fff; border: 0; border-radius: 6px;
+  padding: 8px 14px; font: inherit; font-weight: 600; cursor: pointer;
+}
+button.ghost {
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 7px 12px; font: inherit; cursor: pointer;
+}
+.count { color: var(--muted); font-size: 13px; margin-top: 8px; }
+
+/* --- collection table --- */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td {
+  padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top;
+  /* 34 columns in a 1200px shell squeezed text cells into 6-line wraps and 170px rows. Let the
+   * cells take their natural width and scroll .tablewrap horizontally instead. */
+  white-space: nowrap;
+}
+td small { white-space: normal; }
+thead th { position: sticky; top: 0; background: var(--panel); z-index: 2; white-space: nowrap; }
+th button.sort {
+  background: none; border: 0; color: inherit; font: inherit; font-weight: 650;
+  cursor: pointer; padding: 0; display: inline-flex; gap: 4px; align-items: center;
+}
+th[aria-sort="ascending"] button.sort::after { content: "\2191"; }
+th[aria-sort="descending"] button.sort::after { content: "\2193"; }
+th[aria-sort="none"] button.sort::after { content: "\2195"; opacity: .35; }
+
+tbody tr:hover { background: var(--panel); }
+tr.yearsep td {
+  background: var(--panel); font-weight: 700; letter-spacing: .04em;
+  position: sticky; left: 0;
+}
+td.img img { width: 46px; height: auto; max-height: 64px; object-fit: contain;
+  border-radius: 3px; display: block; }
+/* Frozen pane: without a visible edge the sticky column reads as truncated text rather than
+ * as content scrolling underneath it. */
+td.corr, th.corr {
+  position: sticky; right: 0; background: var(--bg);
+  border-left: 1px solid var(--line);
+  box-shadow: -7px 0 8px -7px rgba(0, 0, 0, .3);
+}
+th.corr { background: var(--panel); z-index: 3; }
+tbody tr:hover td.corr { background: var(--panel); }
+
+.pill {
+  display: inline-block; border-radius: 999px; padding: 1px 8px;
+  font-size: 11px; font-weight: 650; border: 1px solid currentColor; margin: 1px 2px 1px 0;
+}
+.pill.confirmed { color: var(--confirmed); }
+.pill.marketplace-claimed, .pill.owner-attested { color: var(--marketplace); }
+.pill.pending, .pill.unmapped, .pill.other-product { color: var(--pending); }
+.pill.not-applicable { color: var(--contradicted); }
+.langcell { text-align: center; font-weight: 650; }
+.langcell.yes { color: var(--confirmed); }
+.langcell.no { color: var(--line); }
+
+.empty { padding: 28px; text-align: center; color: var(--muted); }
+
+/* --- checklist builder --- */
+.builder { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+.builder .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+.builder .preview { margin-top: 12px; font-size: 14px; }
+.builder .preview strong { font-size: 18px; }
+
+/* --- sources --- */
+table.sources { font-size: 13px; }
+details.sourcelist { margin-top: 12px; }
+details.sourcelist > summary { cursor: pointer; font-weight: 600; }
+details.sourcelist ol { max-height: 420px; overflow-y: auto; font-size: 12px; padding-left: 22px; }
+details.sourcelist li { margin-bottom: 3px; word-break: break-all; }
+
+footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 16px; color: var(--muted); font-size: 13px; }
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 10px 48px; }
+  h1 { font-size: 21px; }
+  td.img img { width: 34px; max-height: 48px; }
+  .field input, .field select { min-width: 110px; }
+}
+
+@media print {
+  @page { size: A4; margin: 12mm; }
+
+  /* 34 columns cannot fit A4 or US Letter. Rather than overflow the sheet and silently
+   * truncate the right-hand side, print drops the language matrix, the secondary columns and
+   * the interactive furniture, leaving a legible chronological summary. The full matrix stays
+   * available on screen and in the downloadable checklist. */
+  nav.sections, .controls, .builder, .stats, details,
+  td.corr, th.corr, .langcell, .secondary, td.img, th.img { display: none !important; }
+
+  body { background: #fff; color: #000; font-size: 9pt; }
+  .wrap { max-width: none; padding: 0; }
+  .tablewrap { overflow: visible; border: 0; }
+  table { table-layout: fixed; width: 100%; font-size: 8.5pt; }
+  th, td { padding: 2px 4px; word-wrap: break-word; white-space: normal; }
+  thead { display: table-header-group; }
+  thead th { position: static; }
+  tr { break-inside: avoid; }
+  tr.yearsep td { position: static; }
+  a { color: #000; text-decoration: none; }
+  section { padding-top: 12px; break-inside: auto; }
+}
