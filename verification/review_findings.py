@@ -331,6 +331,74 @@ check(
 
 
 # --------------------------------------------------------------------------- #
+# Publication readiness (#5) — release blockers, not data defects
+# --------------------------------------------------------------------------- #
+
+required_licences = {
+    "LICENSES/PolyForm-Noncommercial-1.0.0.md": "https://polyformproject.org/licenses/noncommercial/1.0.0/",
+    "LICENSES/CC-BY-NC-SA-4.0.md": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt",
+}
+missing_licences = [name for name in required_licences if not (ROOT / name).exists()]
+# A licence text that is short is a stub or a truncated download, not a licence.
+stub_licences = [
+    name
+    for name in required_licences
+    if (ROOT / name).exists() and len((ROOT / name).read_text(encoding="utf-8")) < 2000
+]
+check(
+    "L1",
+    "Verbatim licence texts are present and complete",
+    "FAIL",
+    not missing_licences and not stub_licences,
+    f"missing={missing_licences} suspiciously_short={stub_licences}. Fetch each from its canonical "
+    f"URL and commit unmodified: {required_licences}. Reconstructing legal text from memory risks "
+    f"silent divergence from the published wording, so this is deliberately not automated.",
+)
+
+for doc in ("LICENSE.md", "THIRD_PARTY_NOTICES.md", "verification/PUBLIC-READINESS-AUDIT.md"):
+    check(
+        f"P{1 + list(('LICENSE.md', 'THIRD_PARTY_NOTICES.md', 'verification/PUBLIC-READINESS-AUDIT.md')).index(doc)}",
+        f"{doc} exists",
+        "FAIL",
+        (ROOT / doc).exists(),
+        f"{doc} is required before publication (#5)",
+    )
+
+secret_pattern = re.compile(
+    r"(?:api[_-]?key|passwd|password|Bearer\s+[A-Za-z0-9._-]{8,}|Authorization:|Cookie:)"
+    r"|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}"
+    r"|C:\\Users\\|/Users/[a-z]|/home/[a-z]+/",
+    re.IGNORECASE,
+)
+scanned, hits = 0, []
+for pattern in ("*.py", "*.ps1", "*.md", "*.json"):
+    for path in ROOT.rglob(pattern):
+        if any(part in {".git", "cache", "zoom", "__pycache__", "node_modules"} for part in path.parts):
+            continue
+        scanned += 1
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        # The audit and this scanner both quote the patterns they look for.
+        if path.name in {"PUBLIC-READINESS-AUDIT.md", "review_findings.py"}:
+            continue
+        for match in secret_pattern.finditer(text):
+            found = match.group(0)
+            # GitHub's noreply addresses are the commit-trailer convention, not contact details.
+            if "noreply" in found.lower():
+                continue
+            hits.append(f"{path.relative_to(ROOT)}: {found[:40]}")
+check(
+    "P4",
+    "No secrets, personal paths, or contact details in the tracked tree",
+    "FAIL",
+    not hits,
+    f"{len(hits)} hits across {scanned} scanned files: {hits[:5]}",
+)
+
+
+# --------------------------------------------------------------------------- #
 # Regression guards for invariants that currently hold — keep them holding
 # --------------------------------------------------------------------------- #
 
