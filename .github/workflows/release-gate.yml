@@ -22,6 +22,9 @@ permissions:
 jobs:
   gate:
     name: gate (${{ matrix.os }})
+    env:
+      # Keep the checkout artifact-clean while generators import sibling modules.
+      PYTHONDONTWRITEBYTECODE: "1"
     strategy:
       fail-fast: false
       matrix:
