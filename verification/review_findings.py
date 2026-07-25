@@ -399,6 +399,68 @@ check(
 
 
 # --------------------------------------------------------------------------- #
+# S — source registry (#6)
+# --------------------------------------------------------------------------- #
+
+registry_path = ROOT / "verification" / "source_registry.json"
+if registry_path.exists():
+    registry = load("verification/source_registry.json")
+    declared = {provider["providerId"] for provider in registry["providers"]}
+    orphans = [
+        row.get("canonicalUrl") or row.get("nonUrlEvidenceId")
+        for row in registry["evidence"]
+        if row["providerId"] not in declared
+    ]
+    check(
+        "S1",
+        "Every evidence record maps to a declared provider",
+        "FAIL",
+        not orphans,
+        f"{len(orphans)} orphaned evidence records: {orphans[:5]}",
+    )
+    malformed = [
+        row["canonicalUrl"]
+        for row in registry["evidence"]
+        if row["canonicalUrl"] and not re.match(r"^https?://[^/\s]+", row["canonicalUrl"])
+    ]
+    check(
+        "S2",
+        "Every registry URL is well formed",
+        "FAIL",
+        not malformed,
+        f"{len(malformed)} malformed URLs: {malformed[:5]}",
+    )
+    no_link_faked = [
+        row["providerId"]
+        for row in registry["evidence"]
+        if row["nonUrlEvidenceId"] and row["canonicalUrl"]
+    ]
+    check(
+        "S3",
+        "Non-URL evidence is never given a hyperlink",
+        "FAIL",
+        not no_link_faked,
+        f"{len(no_link_faked)} non-URL evidence classes carry a URL: {no_link_faked[:5]}",
+    )
+    missing_attribution = [
+        provider["providerId"]
+        for provider in registry["providers"]
+        if not provider.get("attribution") or not provider.get("licenseOrTerms")
+        or provider.get("supportsAbsence") is None
+    ]
+    check(
+        "S4",
+        "Every provider declares attribution, terms and its absence policy",
+        "FAIL",
+        not missing_attribution,
+        f"providers missing required fields: {missing_attribution}",
+    )
+else:
+    check("S1", "Source registry exists", "FAIL", False,
+          "verification/source_registry.json is missing; run python scripts/source_registry.py")
+
+
+# --------------------------------------------------------------------------- #
 # Regression guards for invariants that currently hold — keep them holding
 # --------------------------------------------------------------------------- #
 
