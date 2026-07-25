@@ -1,0 +1,334 @@
+#!/usr/bin/env python3
+"""Generate the canonical checklist-item export (#8).
+
+A checklist item is one **documented physical thing a collector can own**. The hard part is not
+producing rows, it is refusing to produce rows that were never printed. A naive expansion of
+card x language x edition x finish invents combinations, and this project's whole discipline is
+that an unlisted finish is *unknown*, not *absent*.
+
+Rules, in the order they bite:
+
+1. Start from confirmed language claims only. Contradicted languages, unresolved languages, and
+   code cards never enter.
+2. Iterate the finish store's logical `printings[]`, never the group-level finish booleans. The
+   store already dedupes printings by physical signature, so two Cardmarket products sharing one
+   physical printing yield one item, not two.
+3. Expand by edition only where that edition is supported for that language, taken from the
+   edition model rather than assumed.
+4. Never silently apply edition-agnostic finish evidence to both First Edition and Unlimited.
+   Every item records `editionScope`, and a First Edition item built from evidence that does not
+   itself distinguish editions is marked `edition-agnostic-evidence` - a disclosure, not a claim.
+5. Where a confirmed card-language-edition has no printing detail at all, emit exactly one
+   `finish: "unresolved"` placeholder rather than inventing a finish.
+6. Keep stamps, patterns, distribution channels and card sizes as separate physical items even
+   when their finish names match.
+
+    python scripts/checklist.py
+    python scripts/checklist.py --check    # fail if regeneration would change the output
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import sys
+from collections import Counter, defaultdict
+from datetime import date
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_PATH = ROOT / "analysis_checklist.json"
+
+FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
+SCHEMA_VERSION = "1.0.0"
+
+
+def read_json(path: Path) -> Any:
+    with path.open(encoding="utf-8-sig") as handle:
+        return json.load(handle)
+
+
+def slug(value: Any) -> str:
+    text = re.sub(r"[^A-Za-z0-9]+", "-", str(value or "")).strip("-").lower()
+    return text or "x"
+
+
+def marking_slug(markings: Any) -> str:
+    """Identify a stamp by what is physically printed on the card.
+
+    `text` is the distinguishing part: xJTG 117 carries three Cosmos-holo printings that differ
+    only by their retailer/set-logo stamp ("EB Games", "GameStop", "Journey Together"). Keying on
+    `role` alone collapses all three into one item, which is exactly the regression #8 guards
+    against.
+    """
+    if not markings:
+        return ""
+    parts = []
+    for marking in markings:
+        if isinstance(marking, dict):
+            parts.append(slug("-".join(
+                str(marking.get(field)) for field in ("kind", "text") if marking.get(field)
+            ) or marking.get("role")))
+        else:
+            parts.append(slug(marking))
+    return "-".join(p for p in parts if p)
+
+
+def distribution_slug(distribution: Any) -> str:
+    """Distribution channel plus region: the same promotion ran in different territories."""
+    if not distribution:
+        return ""
+    return slug("-".join(
+        str(distribution.get(field)) for field in ("kind", "name", "region")
+        if distribution.get(field)
+    ))
+
+
+def main() -> int:
+    cards = read_json(ROOT / "snorlax_cards.json")["cards"]
+    finish_units = read_json(ROOT / "verification" / "finish_units.json")["units"]
+    releases = read_json(ROOT / "analysis_confirmed_releases.json")["variants"]
+
+    # Products keyed by (setCode, number) so a finish unit can find its edition model, imagery
+    # and Cardmarket URLs. A finish unit is language-scoped; products are variant-scoped.
+    products_by_group: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for card in cards:
+        if card.get("isCodeCard"):
+            continue
+        products_by_group[(card["setCode"], str(card.get("number") or ""))].append(card)
+
+    release_by_key: dict[tuple[str, str, str, str], dict[str, Any]] = {
+        (row["setCode"], str(row.get("number") or ""), row["variant"], row["edition"]): row
+        for row in releases
+    }
+
+    items: list[dict[str, Any]] = []
+    warnings: list[str] = []
+
+    for unit in finish_units:
+        if unit["applicabilityStatus"] != "applicable":
+            continue
+        group = (unit["setCode"], str(unit["number"] or ""))
+        products = products_by_group.get(group, [])
+        if not products:
+            continue
+        language = unit["language"]
+
+        # Rule 1: only confirmed language claims. The card carries the verdict; a product whose
+        # claim for this language is contradicted or unresolved contributes nothing.
+        confirming = [
+            product for product in products
+            if language in (product.get("languagesConfirmed") or [])
+        ]
+        if not confirming:
+            continue
+
+        # Rule 3: editions supported for THIS language, from the edition model.
+        #
+        # This mirrors scripts/confirmed_releases.py exactly. `unlimitedLanguages` is populated
+        # even for cards to which no edition system applies, so membership alone would label
+        # every modern card "Unlimited" here while the chronological table calls it "—", and the
+        # two artifacts would disagree about the same card.
+        editions: list[tuple[str, str]] = []
+        for product in confirming:
+            model = product.get("editions") or {}
+            source = model.get("source") or ""
+            if model.get("hasFirstEdition"):
+                if language in (model.get("firstEditionLanguages") or []):
+                    editions.append(("1st Edition", source))
+                if language in (model.get("unlimitedLanguages") or []):
+                    editions.append(("Unlimited", source))
+            elif model.get("system") in ("WOTC-unlimited-only", "JP-unlimited-only"):
+                editions.append(("Unlimited", source))
+            else:
+                editions.append(("—", source or "No edition system applies to this card."))
+        if not editions:
+            editions = [("—", "No edition system applies to this card.")]
+        seen_editions: dict[str, str] = {}
+        for name, source in editions:
+            seen_editions.setdefault(name, source)
+
+        reference = confirming[0]
+        # Rule 2: logical printings, already deduped by physical signature in the store.
+        printings = [p for p in unit["printings"] if p["finish"] in FINISHES]
+
+        for edition, edition_source in seen_editions.items():
+            if not printings:
+                # Rule 5: one honest placeholder, never an invented finish.
+                items.append(
+                    build_item(unit, reference, confirming, edition, edition_source,
+                               printing=None, release=release_by_key)
+                )
+                continue
+            for printing in printings:
+                items.append(
+                    build_item(unit, reference, confirming, edition, edition_source,
+                               printing=printing, release=release_by_key)
+                )
+
+    # Rule 6 relies on the ID carrying every physical dimension; a collision means two genuinely
+    # different physical things were about to be merged, so fail rather than silently dedupe.
+    duplicates = [cid for cid, count in Counter(item["checklistId"] for item in items).items() if count > 1]
+    if duplicates:
+        print(f"ERROR: {len(duplicates)} duplicate checklist IDs: {duplicates[:10]}", file=sys.stderr)
+        return 1
+
+    items.sort(key=lambda item: (item["releaseSort"], item["setCode"], item["number"],
+                                 item["language"], item["edition"], item["checklistId"]))
+
+    resolved = [item for item in items if item["finish"] != "unresolved"]
+    unresolved_items = [item for item in items if item["finish"] == "unresolved"]
+    first_edition = [item for item in items if item["edition"] == "1st Edition"]
+    agnostic = [item for item in first_edition if item["editionScope"] == "edition-agnostic-evidence"]
+
+    document = {
+        "meta": {
+            "schema": "snoredex-checklist",
+            "schemaVersion": SCHEMA_VERSION,
+            "generated": date.today().isoformat(),
+            "description": "One record per documented physical collectible item, or per explicitly unresolved one.",
+            "rules": [
+                "Only confirmed language claims enter; contradicted and unresolved languages and code cards are excluded.",
+                "Expansion follows logical printings[], never group-level finish booleans.",
+                "Editions expand only where the edition model supports that edition for that language.",
+                "Edition-agnostic finish evidence is never silently applied to First Edition; editionScope discloses it.",
+                "A confirmed card-language-edition with no printing detail yields exactly one finish:unresolved placeholder.",
+                "Stamps, foil patterns, distribution channels and card sizes remain separate items even when the finish name matches.",
+                "Positive evidence is not proof of completeness: only completenessStatus=complete-manifest asserts that an unlisted alternative is absent.",
+            ],
+            "warning": (
+                "This checklist lists what is DOCUMENTED, not what exists. An item's absence means "
+                "no evidence has been established, never that the printing does not exist."
+            ),
+            "counts": {
+                "items": len(items),
+                "documentedPrintings": len(resolved),
+                "unresolvedPlaceholders": len(unresolved_items),
+                "firstEditionItems": len(first_edition),
+                "firstEditionWithEditionAgnosticEvidence": len(agnostic),
+                "completeManifestItems": sum(
+                    1 for item in items if item["completenessStatus"] == "complete-manifest"
+                ),
+                "languages": len({item["language"] for item in items}),
+                "cards": len({(item["setCode"], item["number"]) for item in items}),
+            },
+        },
+        "items": items,
+    }
+
+    if warnings:
+        for warning in warnings[:10]:
+            print(f"warning: {warning}", file=sys.stderr)
+
+    if "--check" in sys.argv:
+        if not OUTPUT_PATH.exists():
+            print("analysis_checklist.json missing; run python scripts/checklist.py")
+            return 1
+        existing = read_json(OUTPUT_PATH)
+        if existing["items"] != items:
+            print("analysis_checklist.json is stale; run python scripts/checklist.py")
+            return 1
+        print(f"checklist is current ({len(items)} items)")
+        return 0
+
+    with OUTPUT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        json.dump(document, handle, ensure_ascii=False, indent=1)
+        handle.write("\n")
+
+    counts = document["meta"]["counts"]
+    print(f"checklist items: {counts['items']} "
+          f"({counts['documentedPrintings']} documented printings + "
+          f"{counts['unresolvedPlaceholders']} unresolved placeholders)")
+    print(f"first edition: {counts['firstEditionItems']} items, "
+          f"{counts['firstEditionWithEditionAgnosticEvidence']} resting on edition-agnostic evidence")
+    print(f"complete-manifest items: {counts['completeManifestItems']}")
+    return 0
+
+
+def build_item(unit, reference, confirming, edition, edition_source, printing, release):
+    """Build one checklist record. `printing=None` yields the unresolved placeholder."""
+    set_code = unit["setCode"]
+    number = str(unit["number"] or "")
+    language = unit["language"]
+
+    variants = sorted({v for p in ([printing] if printing else []) for v in (p.get("mappedVariants") or [])})
+    product = next(
+        (c for c in confirming if (c.get("variantToken") or "base") in variants),
+        reference,
+    )
+    row = release.get(
+        (set_code, number, product.get("variantToken") or "base", edition)
+    ) or release.get((set_code, number, product.get("variantToken") or "base", "—"))
+
+    finish = printing["finish"] if printing else "unresolved"
+    pattern = printing.get("foilPattern") if printing else None
+    markings = printing.get("markings") if printing else None
+    distribution = printing.get("distribution") if printing else None
+    card_size = (printing.get("cardSize") if printing else None) or "unknown"
+
+    # Every physical dimension participates in the ID, so two items differing only by stamp,
+    # pattern, channel or size cannot collide.
+    id_parts = [
+        slug(set_code), slug(number or "no-number"), slug(language),
+        {"1st Edition": "1e", "Unlimited": "unl", "—": "none"}.get(edition, slug(edition)),
+        slug(finish),
+    ]
+    for extra in (slug(pattern) if pattern else "", marking_slug(markings), distribution_slug(distribution)):
+        if extra:
+            id_parts.append(extra)
+    if card_size and card_size != "standard":
+        id_parts.append(slug(card_size))
+    checklist_id = "-".join(id_parts)
+
+    # Disclose, never assume, how edition evidence relates to finish evidence.
+    if edition == "1st Edition":
+        edition_scope = "edition-agnostic-evidence" if printing else "unresolved"
+    elif edition == "Unlimited":
+        edition_scope = "edition-agnostic-evidence" if printing else "unresolved"
+    else:
+        edition_scope = "no-edition-system"
+
+    return {
+        "checklistId": checklist_id,
+        "cardName": unit["cardName"],
+        "setCode": set_code,
+        "setName": unit["setName"],
+        "number": number,
+        "language": language,
+        "edition": edition,
+        "editionScope": edition_scope,
+        "editionSource": edition_source or None,
+        "finish": finish,
+        "finishVerificationStatus": printing["verificationStatus"] if printing else "pending",
+        "foilPattern": pattern,
+        "markings": markings,
+        "markingRoles": sorted({m.get("role") for m in (markings or []) if isinstance(m, dict) and m.get("role")}),
+        "distribution": distribution,
+        "cardSize": card_size,
+        "cardmarketVariant": product.get("variantToken") or "base",
+        "cardmarketVariantName": product.get("variantName"),
+        "mappedVariants": variants,
+        "productMapping": "mapped" if variants else ("unresolved" if printing else "not-applicable"),
+        "rarity": product.get("rarity"),
+        "artist": product.get("artist"),
+        "releaseDate": (row or {}).get("date"),
+        "releaseDatePrecision": (row or {}).get("datePrecision"),
+        "releaseApproximate": (row or {}).get("dateApproximate"),
+        "releaseSort": (row or {}).get("dateSort") or "9999-01-01",
+        "rowId": (row or {}).get("rowId"),
+        "finishUnitId": unit["finishUnitId"],
+        "printingId": printing["printingId"] if printing else None,
+        "completenessStatus": unit["completenessStatus"],
+        "sourceIds": sorted({
+            s.get("url") or s.get("sourceType")
+            for s in ((printing or {}).get("sources") or [])
+            if s.get("url") or s.get("sourceType")
+        }),
+        "image": product.get("imageFile"),
+        "cardmarketUrl": product.get("productUrl"),
+    }
+
+
+if __name__ == "__main__":
+    sys.exit(main())

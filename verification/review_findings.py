@@ -460,6 +460,136 @@ else:
           "verification/source_registry.json is missing; run python scripts/source_registry.py")
 
 
+def marking_text(item: dict) -> str:
+    """Flatten an item's stamps to comparable text, for the xJTG three-stamp regression."""
+    return "|".join(
+        f"{m.get('kind')}:{m.get('text')}"
+        for m in (item.get("markings") or [])
+        if isinstance(m, dict)
+    )
+
+
+# --------------------------------------------------------------------------- #
+# C — canonical checklist export (#8)
+# --------------------------------------------------------------------------- #
+
+checklist_path = ROOT / "analysis_checklist.json"
+if checklist_path.exists():
+    checklist_doc = load("analysis_checklist.json")
+    items = checklist_doc["items"]
+
+    dupes = [cid for cid, n in Counter(i["checklistId"] for i in items).items() if n > 1]
+    check("C1", "Checklist IDs are unique", "FAIL", not dupes,
+          f"{len(dupes)} duplicates: {dupes[:5]}")
+
+    check("C2", "Checklist carries schema and version metadata", "FAIL",
+          bool(checklist_doc["meta"].get("schema") and checklist_doc["meta"].get("schemaVersion")),
+          "meta.schema and meta.schemaVersion are required for a canonical export")
+
+    # No contradicted language may enter, and no code card.
+    refuted = {
+        (card["setCode"], norm_number(card.get("number")), language)
+        for card in cards
+        for language in card.get("languagesContradicted") or []
+    }
+    leaked = [
+        i["checklistId"] for i in items
+        if (i["setCode"], i["number"], i["language"]) in refuted
+    ]
+    check("C3", "No contradicted language enters the checklist", "FAIL", not leaked,
+          f"{len(leaked)} items rest on a refuted language claim: {leaked[:5]}")
+
+    code_card_sets = {
+        (c["setCode"], norm_number(c.get("number"))) for c in cards if c.get("isCodeCard")
+    }
+    code_leak = [i["checklistId"] for i in items if (i["setCode"], i["number"]) in code_card_sets]
+    check("C4", "No code card enters the checklist", "FAIL", not code_leak,
+          f"{len(code_leak)} code-card items: {code_leak[:5]}")
+
+    # Unknown finish detail must be an explicit placeholder, never an invented finish.
+    bad_placeholder = [
+        i["checklistId"] for i in items
+        if i["finish"] == "unresolved" and i.get("finishVerificationStatus") != "pending"
+    ]
+    check("C5", "Unresolved items are explicit placeholders, not asserted finishes", "FAIL",
+          not bad_placeholder, f"{len(bad_placeholder)} malformed placeholders: {bad_placeholder[:5]}")
+
+    # Every First Edition item must disclose how its finish evidence relates to the edition.
+    undisclosed = [
+        i["checklistId"] for i in items
+        if i["edition"] == "1st Edition" and not i.get("editionScope")
+    ]
+    check("C6", "Every First Edition item declares its edition-to-finish scope", "FAIL",
+          not undisclosed, f"{len(undisclosed)} items without editionScope: {undisclosed[:5]}")
+
+    # --- required regression fixtures (#8) ---
+    def finishes_for(set_code: str, number: str, language: str) -> set[str]:
+        return {
+            i["finish"] for i in items
+            if i["setCode"] == set_code and i["number"] == number and i["language"] == language
+        }
+
+    jtg_regular = finishes_for("JTG", "117", "English")
+    check("C7", "Regular JTG 117 is holo + reverse holo only, never regular non-holo", "FAIL",
+          jtg_regular == {"holo", "reverse-holo"},
+          f"got {sorted(jtg_regular)}; the non-holo Hop's Snorlax is the PPS8 Prize Pack product")
+
+    pps8 = finishes_for("PPS8 JTG", "JTG 117", "English")
+    check("C8", "JTG Prize Pack stays a separate product with its own non-holo and Cosmos holo",
+          "FAIL", pps8 == {"non-holo", "holo"}, f"got {sorted(pps8)}")
+
+    xjtg = [i for i in items if i["setCode"] == "xJTG" and i["language"] == "English"]
+    xjtg_stamps = {marking_text(i) for i in xjtg}
+    check("C9", "xJTG 117 keeps three distribution stamps as separate items", "FAIL",
+          len(xjtg) == 3 and len(xjtg_stamps) == 3,
+          f"{len(xjtg)} items with {len(xjtg_stamps)} distinct stamps: {sorted(xjtg_stamps)}")
+
+    df_reverse = [
+        i for i in items
+        if i["setCode"] == "DF" and i["finish"] == "reverse-holo"
+        and "reverse-holo-treatment" in (i.get("markingRoles") or [])
+    ]
+    check("C10", "Dragon Frontiers reverse holo retains its set-logo treatment role", "FAIL",
+          bool(df_reverse), f"{len(df_reverse)} DF reverse-holo items carry reverse-holo-treatment")
+
+    promo_stamp_implies_reverse = [
+        i["checklistId"] for i in items
+        if "distribution-promo" in (i.get("markingRoles") or []) and i["finish"] == "reverse-holo"
+    ]
+    check("C11", "A distribution stamp never implies reverse holo", "FAIL",
+          not promo_stamp_implies_reverse,
+          f"{len(promo_stamp_implies_reverse)} items treat a distribution promo as reverse holo: "
+          f"{promo_stamp_implies_reverse[:5]}")
+
+    balls = {
+        i["foilPattern"] for i in items
+        if i["setCode"] == "xsv2a" and i["finish"] == "mirror-holo"
+    }
+    check("C12", "Poke Ball and Master Ball mirror versions stay separate", "FAIL",
+          {"poke-ball", "master-ball"} <= balls, f"patterns found: {sorted(p for p in balls if p)}")
+
+    jumbo = [i for i in items if i["cardSize"] == "jumbo"]
+    jumbo_pairs = [
+        i for i in jumbo
+        if any(o["setCode"] == i["setCode"] and o["number"] == i["number"]
+               and o["language"] == i["language"] and o["cardSize"] == "standard" for o in items)
+    ]
+    check("C13", "Jumbo cards are separate items from their standard counterparts", "FAIL",
+          bool(jumbo) and len(jumbo_pairs) == len([
+              i for i in jumbo
+              if any(o["setCode"] == i["setCode"] and o["number"] == i["number"] for o in items
+                     if o["cardSize"] == "standard")
+          ]),
+          f"{len(jumbo)} jumbo items, {len(jumbo_pairs)} with a standard sibling")
+
+    check("C14", "Checklist warns that positive evidence is not proof of completeness", "FAIL",
+          "documented" in (checklist_doc["meta"].get("warning") or "").lower(),
+          "meta.warning must state that absence from the checklist is not absence of the printing")
+else:
+    check("C1", "Canonical checklist export exists", "FAIL", False,
+          "analysis_checklist.json is missing; run python scripts/checklist.py")
+
+
 # --------------------------------------------------------------------------- #
 # Regression guards for invariants that currently hold — keep them holding
 # --------------------------------------------------------------------------- #
