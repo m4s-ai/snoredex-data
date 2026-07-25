@@ -69,68 +69,74 @@ finish_by_key = {
 # F1 — confirmed printings must stay reachable from a product view
 # --------------------------------------------------------------------------- #
 
-orphan_printings = [
-    (unit["finishUnitId"], printing["printingId"], unit["setCode"], norm_number(unit["number"]),
-     unit["language"], printing["finish"])
+reachable_printings = {
+    printing["printingId"]
+    for card in cards
+    for row in (card.get("finishAvailability") or {}).get("byLanguage", [])
+    for printing in row.get("printings", [])
+}
+confirmed_printings = {
+    printing["printingId"]: (unit["setCode"], norm_number(unit["number"]), unit["language"],
+                             printing["finish"])
     for unit in finish_units
     for printing in unit["printings"]
-    if not printing.get("mappedVariants") and printing["verificationStatus"] == "confirmed"
-]
+    if printing["verificationStatus"] == "confirmed"
+}
+unreachable = sorted(set(confirmed_printings) - reachable_printings)
 check(
     "F1.1",
-    "Every externally confirmed printing is mapped to at least one Cardmarket product",
+    "Every externally confirmed printing is reachable from at least one product view",
     "FAIL",
-    not orphan_printings,
-    f"{len(orphan_printings)} confirmed printings have mappedVariants=[] and therefore appear in no "
-    f"card view, no chronological row, and no generated page. "
-    f"e.g. {', '.join(f'{p[1]} {p[2]} {p[3]} {p[4]} {p[5]}' for p in orphan_printings[:4])}",
+    not unreachable,
+    f"{len(unreachable)} confirmed printings appear in no card view, no chronological row, and no "
+    f"generated page. e.g. "
+    f"{', '.join(f'{pid} {confirmed_printings[pid]}' for pid in unreachable[:3])}",
 )
 
-# The projected per-product view must never claim less evidence than the store without saying why.
+# The projected per-product view may hold less evidence than the store only where it says so.
+# "unmapped" and "other-product" are the two legitimate reasons; anything else is silent loss.
 projection_gaps: list[tuple[str, ...]] = []
 for card in cards:
     for row in (card.get("finishAvailability") or {}).get("byLanguage", []):
         unit = finish_by_id.get(row.get("finishUnitId"))
         if unit is None:
             continue
-        for finish in FINISHES:
-            projected = row["finishStatus"].get(finish, "pending")
-            stored = unit["finishStatus"].get(finish, "pending")
-            if STRENGTH.get(projected, 0) < STRENGTH.get(stored, 0):
-                projection_gaps.append(
-                    (card["setCode"], norm_number(card.get("number")),
-                     str(card.get("variantToken")), row["language"], finish, projected, stored)
-                )
+        if row.get("unitFinishStatus") != unit["finishStatus"]:
+            projection_gaps.append(
+                (card["setCode"], norm_number(card.get("number")),
+                 str(card.get("variantToken")), row["language"],
+                 str(row.get("unitFinishStatus")), str(unit["finishStatus"]))
+            )
 check(
     "F1.2",
-    "Projected card view never understates the finish store without a mapping-status marker",
+    "Projected rows carry unit-level finish status verbatim, so projection loses no evidence",
     "FAIL",
     not projection_gaps,
-    f"{len(projection_gaps)} card-language-finish cells are weaker in snorlax_cards.json than in "
-    f"finish_units.json, and the projected row carries no field explaining why. "
-    f"e.g. {projection_gaps[:3]}",
+    f"{len(projection_gaps)} projected rows do not reproduce the store's finishStatus. Product "
+    f"attribution is necessarily weaker than unit knowledge, so the unit view must travel with it. "
+    f"e.g. {projection_gaps[:2]}",
 )
 
-empty_cells = []
+blind_cells = []
 for row in releases:
     for cell in row.get("finishByLanguage") or []:
         unit = finish_by_key.get(
             (row["setCode"], norm_number(row.get("number")), cell.get("language"))
         )
-        if unit is None:
+        if unit is None or not unit["availableFinishes"]:
             continue
-        if not cell.get("availableFinishes") and unit["availableFinishes"]:
-            empty_cells.append(
+        if not cell.get("availableFinishes") and not cell.get("unitAvailableFinishes"):
+            blind_cells.append(
                 (row["setCode"], norm_number(row.get("number")), row["variant"],
                  cell["language"], unit["availableFinishes"])
             )
 check(
     "F1.3",
-    "Published table renders no empty finish cell where the store holds evidence",
+    "Published table never renders a blind cell where the store holds evidence",
     "FAIL",
-    not empty_cells,
-    f"{len(empty_cells)} published cells render as blank while finish_units.json holds positive "
-    f"evidence for that set-number-language. e.g. {empty_cells[:3]}",
+    not blind_cells,
+    f"{len(blind_cells)} published cells expose neither product-attributed nor unit-level finishes "
+    f"while finish_units.json holds positive evidence. e.g. {blind_cells[:3]}",
 )
 
 
