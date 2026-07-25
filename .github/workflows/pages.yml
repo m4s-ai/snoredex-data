@@ -1,0 +1,73 @@
+name: Publish site
+
+# Deploys the generated site to GitHub Pages from `main` only, and never without the release
+# gate passing first. The gate job carries no Pages permissions, so a failed check cannot be
+# bypassed by a later step.
+#
+# The published artifact is an explicit allowlist. Nothing is copied wholesale, so caches,
+# browser state, verification scratch files and unrelated repository content cannot be
+# published by accident.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    name: Release gate
+    uses: ./.github/workflows/release-gate.yml
+
+  deploy:
+    name: Deploy to Pages
+    needs: gate
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Publish only freshly generated output, so the deployed site can never be a stale
+      # artifact that happens to be committed.
+      - name: Regenerate site artifacts
+        run: |
+          python scripts/finishes.py --reproject
+          python scripts/language_status.py
+          python scripts/confirmed_releases.py
+          python scripts/source_registry.py
+          python scripts/checklist.py
+          python scripts/readme_stats.py
+          python scripts/site.py
+
+      - name: Assemble the public artifact from an allowlist
+        run: |
+          set -euo pipefail
+          python scripts/publish.py --out _site
+          echo "--- published tree ---"
+          find _site -maxdepth 2 -type d | sort
+
+      - name: Verify the assembled artifact
+        run: python scripts/publish.py --out _site --verify
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

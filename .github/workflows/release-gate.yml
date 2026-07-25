@@ -1,0 +1,119 @@
+name: Release gate
+
+# Every check that must pass before the site may be published (#11), and the same suite a
+# contributor can run locally. Called by pages.yml and runnable on its own.
+#
+# Two deliberate choices:
+#
+#  * Generators run and their output is compared against what is committed. A generated artifact
+#    that disagrees with its inputs fails here rather than being published.
+#  * Counts are never asserted. review_integrity.ps1 reports them as drift, because closing an
+#    open verification unit is the project's goal, and a gate that blocks on progress is a gate
+#    people learn to bypass.
+
+on:
+  workflow_call:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install browser test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          python -m playwright install --with-deps chromium
+
+      # --- syntax: every script must parse before anything is trusted to run ---
+      - name: Parse every Python file
+        run: |
+          python - <<'PY'
+          import ast, pathlib, sys
+          bad = []
+          for path in pathlib.Path(".").rglob("*.py"):
+              if any(part in {".git", "cache", "__pycache__"} for part in path.parts):
+                  continue
+              try:
+                  ast.parse(path.read_text(encoding="utf-8"))
+              except SyntaxError as error:
+                  bad.append(f"{path}: {error}")
+          print(f"parsed {len(list(pathlib.Path('.').rglob('*.py')))} Python files")
+          if bad:
+              sys.exit("\n".join(bad))
+          PY
+
+      - name: Parse every PowerShell file
+        shell: pwsh
+        run: |
+          $bad = @()
+          Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object {
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $_.FullName, [ref]$null, [ref]$errors) | Out-Null
+            if ($errors.Count) { $bad += "$($_.FullName): $($errors[0].Message)" }
+          }
+          Write-Host "parsed $((Get-ChildItem -Recurse -Filter *.ps1).Count) PowerShell files"
+          if ($bad.Count) { $bad | ForEach-Object { Write-Error $_ }; exit 1 }
+
+      # --- integrity: structural invariants, in both suites ---
+      - name: Structural integrity (PowerShell)
+        shell: pwsh
+        run: pwsh -File verification/review_integrity.ps1
+
+      - name: Evidence audit
+        shell: pwsh
+        run: pwsh -File verification/audit_evidence.ps1
+
+      - name: Cross-artifact consistency and publication readiness
+        run: python verification/review_findings.py
+
+      # --- determinism: committed artifacts must match what the generators produce ---
+      - name: Generated artifacts match their inputs
+        run: |
+          python scripts/finishes.py --reproject
+          python scripts/language_status.py
+          python scripts/confirmed_releases.py
+          python scripts/source_registry.py --check
+          python scripts/checklist.py --check
+          python scripts/readme_stats.py --check
+          python scripts/site.py --check
+          git diff --exit-code -- snorlax_cards.json analysis_confirmed_releases.json \
+            analysis_confirmed_releases.csv || {
+              echo "::error::Regenerating produced different output than what is committed."
+              exit 1
+            }
+
+      # --- behaviour: the page has to actually work ---
+      - name: Browser tests
+        run: python verification/test_site.py
+
+      # --- artifact hygiene ---
+      - name: Public artifact contains only allowlisted files
+        run: python scripts/publish.py --out _site --verify
+
+      - name: No absolute paths, secrets, or caches in the tree
+        run: |
+          python - <<'PY'
+          import pathlib, re, sys
+          # review_findings.py check P4 covers the tracked tree; this catches anything that
+          # slipped in during the workflow itself, such as a cache directory.
+          leaked = [
+              str(p) for p in pathlib.Path(".").rglob("*")
+              if p.is_dir() and p.name in {"cache", "zoom", "__pycache__", ".pytest_cache"}
+              and ".git" not in p.parts and "_site" not in p.parts
+          ]
+          if leaked:
+              sys.exit("cache directories present in the build tree: " + ", ".join(leaked))
+          print("no cache directories in the build tree")
+          PY
