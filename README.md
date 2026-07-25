@@ -16,7 +16,9 @@ working directory.
 | [`verification/RESUME.md`](verification/RESUME.md) | You are adding or changing verification evidence. It records source techniques, failed approaches, corrections, and methodology decisions. |
 | [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) | You are confirming non-holo, holo, reverse/mirror, stamped promo, Prize Pack, or jumbo versions. It defines the source ladder and repeatable finish workflow. |
 | [`verification/open-items.html`](verification/open-items.html) | You want a browsable view of the pending and manual-review units. |
-| [`verification/confirmed-releases.html`](verification/confirmed-releases.html) | You want the visual collection: card images, chronological releases, confirmed languages, finish/treatment badges, and interactive filters. |
+| [`index.html`](index.html) | You want the visual collection: card images, chronological releases, confirmed languages, finish badges, per-column filtering and sorting, and the printable checklist builder. (`verification/confirmed-releases.html` redirects here.) |
+| [`verification/SOURCES.md`](verification/SOURCES.md) | You want to know which provider backs a claim, and which of them may establish an absence. |
+| [`LICENSE.md`](LICENSE.md) | You want to reuse any of this, or need the third-party exclusions. |
 | [`verification/MANUAL_REVIEW.csv`](verification/MANUAL_REVIEW.csv) | You are recording manual verdicts for the remaining hand-checked units. |
 | [`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) | You are resolving finish, reverse/mirror-pattern, or Cardmarket-product mapping gaps. |
 
@@ -37,7 +39,11 @@ Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories,
 | `analysis_artists.json` | Artist → printings index |
 | `analysis_variants.json` | Set+number clusters with more than one Cardmarket product |
 | `analysis_finishes.json` | Finish coverage, finish combinations, reverse/mirror patterns, and stamp-role counts |
-| `scripts/` | Reproducible dataset build pipeline (`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze` → `finishes`) |
+| `index.html` | **The public site** — collection table with per-column sorting/filtering, checklist builder, methodology, generated sources, and licence notices. Built by `scripts/site.py`; open it directly from a checkout |
+| `analysis_checklist.json` | **Canonical checklist items** — one record per documented physical printing, or per explicitly unresolved one |
+| `verification/source_registry.json` / `SOURCES.md` | Provider registry and evidence index: every sourced claim mapped to exactly one provider |
+| `site/` | Page styles and behaviour (`app.css`, `app.js`) |
+| `scripts/` | Reproducible build pipeline (`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze` → `finishes` → `language_status` → `confirmed_releases` → `source_registry` → `checklist` → `readme_stats` → `site`) |
 | `verification/finish_units.json` | **Finish state store** — one row per set number × language, with logical printings, finish/pattern/stamp/size dimensions, evidence, and Cardmarket-product mappings |
 | `verification/FINISH_REVIEW.json` / `.csv` | Finish, pattern, and product-mapping gaps that still need evidence |
 | `verification/finish_overrides.json` | Curated special-printing details that group-level APIs cannot express |
@@ -159,6 +165,11 @@ Source strength and completeness are explicit. Only a complete official checklis
 that a listed alternative is absent; API flags, TCGplayer/TCGCSV subtypes, PSA registries, and scans
 are positive-only. See [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) for the
 evidence ladder and the confirmed Prize Pack, promo, stamped, deck, and jumbo cases.
+
+Two checks guard this layer: `python verification/review_findings.py` (cross-artifact
+consistency, publication readiness, and the checklist regression fixtures) and
+`pwsh -File verification/review_integrity.ps1` (structural invariants). Neither asserts counts —
+rising numbers are verification progress, not regressions.
 
 Run `python scripts/finishes.py` after rebuilding the main dataset. It caches TCGdex responses in
 the gitignored `verification/cache/finish-tcgdex/`, regenerates all finish outputs, and reattaches
