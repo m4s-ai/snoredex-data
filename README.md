@@ -1,56 +1,116 @@
-# Snorlax on Cardmarket — dataset & analysis
+# Snoredex Data
 
-> **Taking over or continuing the project?** Read [`HANDOVER.md`](HANDOVER.md) first, then
-> [`verification/RESUME.md`](verification/RESUME.md) before changing verification evidence.
+Evidence-backed data and collection tooling for every Snorlax Pokémon TCG product found on
+Cardmarket.
 
-## Documentation guide
+<!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
+[![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
+[![Cards](https://img.shields.io/badge/cards-198-2563eb)](snorlax_cards.json)
+[![Checklist](https://img.shields.io/badge/checklist-837_items-2563eb)](analysis_checklist.json)
+[![Publication](https://img.shields.io/badge/publication-owner_approval_required-d97706)](publication-decisions.json)
+[![Licence](https://img.shields.io/badge/licence-grants_not_in_force-d97706)](LICENSE.md)
+[![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
+<!-- /generated:badges -->
 
-All paths and commands in the documentation are relative to the repository root. PowerShell and
-Python scripts resolve the checkout from their own file location, so they can be invoked from any
-working directory.
+The repository combines a preserved Cardmarket catalogue with an independent evidence layer. It
+distinguishes marketplace claims from confirmed physical printings, models finishes and editions,
+and produces a stable machine-readable checklist plus an interactive collection browser.
 
-| Document | Use it when |
+> [!IMPORTANT]
+> The implementation is ready, but publication is not approved. The repository remains private,
+> GitHub Pages requires a manual run and owner approval, and the proposed licence grants are not
+> yet in force. See [`publication-decisions.json`](publication-decisions.json) and
+> [`LICENSE.md`](LICENSE.md).
+
+## Current state
+
+<!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
+Status snapshot: **2026-07-26**, after the database review and release-readiness work merged to `main`.
+
+| Area | Current state |
 |---|---|
-| [`HANDOVER.md`](HANDOVER.md) | You need the current state, repository layout, working rules, and prioritized next actions. This is the main entry point for continuing work. |
-| [`README.md`](README.md) | You are consuming the dataset and need its scope, caveats, analysis findings, and collection method. |
-| [`verification/RESUME.md`](verification/RESUME.md) | You are adding or changing verification evidence. It records source techniques, failed approaches, corrections, and methodology decisions. |
-| [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) | You are confirming non-holo, holo, reverse/mirror, stamped promo, Prize Pack, or jumbo versions. It defines the source ladder and repeatable finish workflow. |
-| [`verification/open-items.html`](verification/open-items.html) | You want a browsable view of the pending and manual-review units. |
-| [`index.html`](index.html) | You want the visual collection: card images, chronological releases, confirmed languages, finish badges, per-column filtering and sorting, and the printable checklist builder. (`verification/confirmed-releases.html` redirects here.) |
-| [`verification/SOURCES.md`](verification/SOURCES.md) | You want to know which provider backs a claim, and which of them may establish an absence. |
-| [`LICENSE.md`](LICENSE.md) | You want to reuse any of this, or need the third-party exclusions. |
-| [`verification/MANUAL_REVIEW.csv`](verification/MANUAL_REVIEW.csv) | You are recording manual verdicts for the remaining hand-checked units. |
-| [`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) | You are resolving finish, reverse/mirror-pattern, or Cardmarket-product mapping gaps. |
+| Cardmarket catalogue | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
+| Language verification | **719 claims**: 634 externally confirmed, 71 contradicted, 5 awaiting manual review, and 9 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
+| Physical checklist | **837 items** across 174 cards and 15 languages: 662 documented printings plus 175 explicit unresolved placeholders. |
+| Finish evidence | **637 card-number × language units**: 331 externally confirmed, 104 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
+| Evidence registry | **18 providers**, 864 evidence records, 857 unique URLs, and 2,722 attributed claims. Only complete official manifests may establish absence. |
+| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
+| Site and publication | The repository is private. The interactive site is generated and usable locally; Pages deployment is manual and blocked until every required owner decision is recorded. |
+| Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are inactive pending owner approval and licensor selection. |
+| AI transparency | Development used AI in a human-directed copilot workflow. Scope and safeguards are declared in [`AI-DECLARATION.md`](AI-DECLARATION.md). |
+<!-- /generated:current-state -->
 
-For current totals, trust the opening **Current state** sections in `HANDOVER.md` and
-`verification/RESUME.md`; later numbers in `RESUME.md` may describe historical checkpoints.
+The counts above come from the committed data stores. Generated dates can differ by artifact when
+the underlying evidence did not change; use `snorlax_cards.json` and
+`verification/finish_units.json` as the authoritative count sources.
 
-Scraped from Cardmarket's Pokémon product search for "snorlax" (all categories, 9 pages, 242 products).
+## Use the project
 
-## Files
+- Browse the collection and build a printable checklist by serving the repository and opening
+  `index.html`:
 
-| File | Contents |
+  ```console
+  python -m http.server 8000
+  ```
+
+  Then visit <http://localhost:8000/>.
+
+- Consume [`snorlax_cards.json`](snorlax_cards.json) for the Cardmarket product view. Use
+  `languagesConfirmed`, `languagesContradicted`, and `languagesUnresolved` instead of treating the
+  raw `languages` field as a print manifest.
+- Consume [`analysis_checklist.json`](analysis_checklist.json) for stable physical-collectible
+  items, or [`verification/finish_units.json`](verification/finish_units.json) for the underlying
+  positive-evidence finish model.
+- Before adding or changing evidence, read [`HANDOVER.md`](HANDOVER.md) and
+  [`verification/RESUME.md`](verification/RESUME.md). They capture the source ladder, failed
+  approaches, invariants, and remaining work.
+
+## Validate a checkout
+
+Python 3.11 and PowerShell 7 are the supported baseline. The browser suite also needs Playwright's
+Chromium installation.
+
+```console
+python -m pip install -r requirements.txt
+python -m playwright install chromium
+pwsh -File verification/review_integrity.ps1
+pwsh -File verification/audit_evidence.ps1
+python verification/review_findings.py
+python verification/test_site.py
+```
+
+The complete CI sequence, including deterministic regeneration and public-artifact hygiene, lives
+in [`.github/workflows/release-gate.yml`](.github/workflows/release-gate.yml).
+
+## Repository map
+
+All paths and commands are relative to the repository root. PowerShell and Python scripts resolve
+the checkout from their own file location and can be invoked from any working directory.
+
+| Path | Purpose |
 |---|---|
-| `snorlax_cards.json` | **Main dataset** — 198 Snorlax *singles* with identity, language, rarity, image, variant info, and `finishAvailability` by language |
-| `images/` | 198 card images, one per product (`SETCODE_NUMBER_NAME[_Vn]_ID.jpg`) |
-| `artists_pokemontcgio.json` | 57 English Snorlax-family cards with illustrator credits |
-| `analysis_language_drift.json` | Per-card deviation from its market's language baseline |
-| `analysis_shared_cards.json` | Cards printed across multiple releases, grouped, with artists |
-| `analysis_artists.json` | Artist → printings index |
-| `analysis_variants.json` | Set+number clusters with more than one Cardmarket product |
-| `analysis_finishes.json` | Finish coverage, finish combinations, reverse/mirror patterns, and stamp-role counts |
-| `index.html` | **The public site** — collection table with per-column sorting/filtering, checklist builder, methodology, generated sources, and licence notices. Built by `scripts/site.py`; open it directly from a checkout |
-| `analysis_checklist.json` | **Canonical checklist items** — one record per documented physical printing, or per explicitly unresolved one |
-| `verification/source_registry.json` / `SOURCES.md` | Provider registry and evidence index: every sourced claim mapped to exactly one provider |
-| `site/` | Page styles and behaviour (`app.css`, `app.js`) |
-| `scripts/` | Reproducible build pipeline (`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze` → `finishes` → `language_status` → `confirmed_releases` → `source_registry` → `checklist` → `readme_stats` → `site`) |
-| `verification/finish_units.json` | **Finish state store** — one row per set number × language, with logical printings, finish/pattern/stamp/size dimensions, evidence, and Cardmarket-product mappings |
-| `verification/FINISH_REVIEW.json` / `.csv` | Finish, pattern, and product-mapping gaps that still need evidence |
-| `verification/finish_overrides.json` | Curated special-printing details that group-level APIs cannot express |
-| `verification/FINISH_SOURCES.md` | Finish evidence hierarchy, confirmed special cases, exact API endpoints, and next source targets |
-| `verification/` | **Source verification layer** — language/product claims plus the separate finish layer. Recurring tools at top level (`report`, `audit_evidence`, `classify_manual`, `verify_finish_sources`, `review_integrity`); completed one-shot passes live in `verification/passes/`. See `verification/RESUME.md` |
+| [`snorlax_cards.json`](snorlax_cards.json) | **Main product dataset** — 198 singles with identity, language verdicts, rarity, image, variant data, artist, editions, and product-level finish summaries. |
+| [`analysis_checklist.json`](analysis_checklist.json) | **Canonical physical checklist** — one stable record per documented printing, or per explicitly unresolved one. |
+| [`index.html`](index.html) | Generated collection browser with sorting, filtering, checklist building, methodology, sources, and licence notices. |
+| [`images/`](images/) | 198 third-party card images used for identification; excluded from this project's licence grants. |
+| [`verification/units.json`](verification/units.json) | Language-verification state store: one row per card × language × variant claim. |
+| [`verification/finish_units.json`](verification/finish_units.json) | Finish state store: one row per set number × language with logical printings, evidence, and product mappings. |
+| [`verification/SOURCES.md`](verification/SOURCES.md) | Human-readable provider and evidence index generated from `source_registry.json`. |
+| [`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) | Remaining finish, pattern, and Cardmarket-product mapping queue. |
+| [`scripts/`](scripts/) | Reproducible data, verification, checklist, issue-template, publication, and site generators. |
+| [`site/`](site/) | Source CSS and JavaScript for the generated site. |
+| [`HANDOVER.md`](HANDOVER.md) | Cold-start guide, working rules, invariants, and prioritized next actions. |
+| [`verification/RESUME.md`](verification/RESUME.md) | Detailed verification playbook, source techniques, corrections, and dead ends. |
+| [`LICENSE.md`](LICENSE.md) / [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Intended licensing scope, exclusions, attribution, and third-party rights. |
+| [`AI-DECLARATION.md`](AI-DECLARATION.md) | Structured disclosure of AI involvement under the [`AI-DECLARATION.md` 0.1.2 specification](https://ai-declaration.md/en/0.1.2/). |
 
-242 products − 44 non-card items (playmats, sleeves, binders, tins, blisters, pins, deck boxes) = **198 singles**. Six of those 198 are online/live code cards, flagged `isCodeCard: true`.
+The reproducible pipeline is:
+
+`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze` → `finishes` →
+`language_status` → `confirmed_releases` → `source_registry` → `checklist` → `readme_stats` →
+`issue_templates` → `site`
+
+Scraping covered all nine result pages for Cardmarket's Pokémon product search for “snorlax.”
 
 ## Scope and caveats — read before using
 
