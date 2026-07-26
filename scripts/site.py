@@ -271,6 +271,7 @@ def main() -> int:
     # The licensor is an owner decision, so the page reads it rather than hardcoding a name that
     # could drift from the record the publication gate actually enforces.
     licensor = str(read_json(ROOT / "publication-decisions.json").get("licensor") or "undecided")
+    licensor_contact = "https://www.instagram.com/" + licensor.lower() + "/"
 
     rows = build_rows(releases_doc["variants"])
     checklist = build_checklist(checklist_doc["items"])
@@ -610,7 +611,10 @@ def main() -> int:
   <p><strong>Licensor: {html.escape(licensor)}.</strong> Once the grants are in force, that is the
   name CC BY-NC-SA attribution must credit, and the party from whom a commercial exception is
   sought. Both licences here are noncommercial; neither permits commercial use without a separate
-  grant.</p>
+  grant. Licensing and commercial-use enquiries:
+  <a href="{html.escape(licensor_contact)}" rel="noopener">@{html.escape(licensor)} on Instagram</a>.
+  That is a licensing contact, not a corrections channel — corrections belong in the
+  <a href="#contribute">issue tracker</a>, where they are recorded with their evidence.</p>
   <p><strong>Excluded:</strong> Pok&eacute;mon card artwork and images, names, logos and trademarks,
   illustrator credits and the underlying illustrations, quoted provider content, and third-party
   photographs. The licences above grant nothing in respect of any of it.</p>

@@ -123,6 +123,17 @@ Two properties worth stating plainly, because they are consequences rather than 
   granted by a pseudonym, which is normal for hobby projects and sufficient for attribution, but
   is weaker than a named person or company if a grant ever had to be enforced or transferred.
 - A licensor must be **reachable**, or a commercial exception cannot be requested and the
-  attribution requirement points at no one. The handle is reachable on Instagram under the same
-  name; if a longer-lived contact route is wanted later, add it here rather than replacing the
-  attribution name, so existing downstream credits stay correct.
+  attribution requirement points at no one.
+
+### Contact
+
+Commercial-use enquiries and licensing questions: **[@M4S.Collection on
+Instagram](https://www.instagram.com/m4s.collection/)**.
+
+This is a licensing contact, not a corrections channel. Data corrections belong in the issue
+tracker, where they are graded against the source ladder and recorded with their evidence — see
+[`CONTRIBUTING.md`](CONTRIBUTING.md). Corrections sent by direct message cannot be attributed to a
+source and will be redirected.
+
+If a longer-lived contact route is added later, add it alongside this one rather than replacing
+the attribution name, so credits already published downstream stay correct.
