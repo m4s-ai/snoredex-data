@@ -6,8 +6,11 @@ The finish coverage table drifted twice by being hand-maintained: it claimed 276
 were typed in the same commit that regenerated the data. Prose that restates generated facts
 has to be generated, or it will disagree with them again.
 
-Blocks are delimited by `<!-- generated:NAME -->` / `<!-- /generated:NAME -->`. Everything
-between the markers is replaced; everything outside is left alone.
+The top-level status, badge counts, and finish table all come from the canonical stores. This keeps
+the repository's front page honest as verification progresses or publication decisions change.
+
+Blocks are delimited by `<!-- generated:NAME -->` / `<!-- /generated:NAME -->`. Everything between
+the markers is replaced; everything outside is left alone.
 
     python scripts/readme_stats.py          # rewrite
     python scripts/readme_stats.py --check  # fail if stale, for the release gate
@@ -18,12 +21,19 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 README_PATH = ROOT / "README.md"
 ANALYSIS_PATH = ROOT / "analysis_finishes.json"
+DATASET_PATH = ROOT / "snorlax_cards.json"
+UNITS_PATH = ROOT / "verification" / "units.json"
+FINISH_UNITS_PATH = ROOT / "verification" / "finish_units.json"
+CHECKLIST_PATH = ROOT / "analysis_checklist.json"
+SOURCE_REGISTRY_PATH = ROOT / "verification" / "source_registry.json"
+DECISIONS_PATH = ROOT / "publication-decisions.json"
 
 
 def read_json(path: Path) -> Any:
@@ -45,6 +55,104 @@ def finish_coverage_block(counts: dict[str, int]) -> str:
     return "\n".join(lines)
 
 
+def badges_block(dataset: dict[str, Any], checklist: dict[str, Any],
+                 decisions: dict[str, Any]) -> str:
+    cards = dataset["meta"]["singlesCaptured"]
+    items = checklist["meta"]["counts"]["items"]
+    publication_approved = decisions.get("sitePublicationApproved") is True
+    grants_approved = decisions.get("licenseGrantsApproved") is True
+    publication = "approved" if publication_approved else "owner_approval_required"
+    publication_color = "2ea44f" if publication_approved else "d97706"
+    licence = "grants_in_force" if grants_approved else "grants_not_in_force"
+    licence_color = "2ea44f" if grants_approved else "d97706"
+    return "\n".join((
+        "[![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/"
+        "release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/"
+        "workflows/release-gate.yml)",
+        f"[![Cards](https://img.shields.io/badge/cards-{cards}-2563eb)](snorlax_cards.json)",
+        f"[![Checklist](https://img.shields.io/badge/checklist-{items}_items-2563eb)]"
+        "(analysis_checklist.json)",
+        f"[![Publication](https://img.shields.io/badge/publication-{publication}-"
+        f"{publication_color})](publication-decisions.json)",
+        f"[![Licence](https://img.shields.io/badge/licence-{licence}-{licence_color})]"
+        "(LICENSE.md)",
+        "[![AI-DECLARATION: copilot](https://img.shields.io/badge/"
+        "%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)]"
+        "(AI-DECLARATION.md)",
+    ))
+
+
+def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
+                        finish_doc: dict[str, Any], checklist: dict[str, Any],
+                        sources: dict[str, Any], decisions: dict[str, Any]) -> str:
+    meta = dataset["meta"]
+    verification = Counter(unit["status"] for unit in units)
+    finishes = finish_doc["meta"]["counts"]
+    checklist_meta = checklist["meta"]
+    checklist_counts = checklist_meta["counts"]
+    source_meta = sources["meta"]
+    source_counts = source_meta["counts"]
+    dates = [
+        meta["verification"]["lastUpdated"],
+        finish_doc["meta"]["generated"],
+        checklist_meta["generated"],
+        source_meta["generated"],
+    ]
+    snapshot = max(dates)
+    code_cards = sum(bool(card.get("isCodeCard")) for card in dataset["cards"])
+    repository_visibility = decisions.get("repositoryVisibility", "unknown")
+    publication_state = (
+        "approved by the owner but still requires a manual workflow run"
+        if decisions.get("sitePublicationApproved") is True
+        else "manual and blocked until every required owner decision is recorded"
+    )
+    licence_state = (
+        "active under the recorded owner approvals"
+        if decisions.get("licenseGrantsApproved") is True
+        else "inactive pending owner approval and licensor selection"
+    )
+    lines = [
+        f"Status snapshot: **{snapshot}**, after the database review and release-readiness work "
+        "merged to `main`.",
+        "",
+        "| Area | Current state |",
+        "|---|---|",
+        f"| Cardmarket catalogue | **{meta['totalProductsOnCardmarket']} products** harvested: "
+        f"**{meta['singlesCaptured']} singles** retained and {meta['nonCardProductsExcluded']} "
+        f"accessories excluded. {code_cards} retained products are code cards and are explicitly "
+        "flagged. |",
+        f"| Language verification | **{len(units)} claims**: {verification['confirmed']} externally "
+        f"confirmed, {verification['contradicted']} contradicted, "
+        f"{verification['needs-manual-review']} awaiting manual review, and "
+        f"{verification['pending']} still open. Raw Cardmarket languages remain preserved beside "
+        "their verdicts. |",
+        f"| Physical checklist | **{checklist_counts['items']} items** across "
+        f"{checklist_counts['cards']} cards and {checklist_counts['languages']} languages: "
+        f"{checklist_counts['documentedPrintings']} documented printings plus "
+        f"{checklist_counts['unresolvedPlaceholders']} explicit unresolved placeholders. |",
+        f"| Finish evidence | **{finishes['totalFinishUnits']} card-number × language units**: "
+        f"{finishes['withConfirmedFinish']} externally confirmed, "
+        f"{finishes['withOnlyMarketplaceClaim']} marketplace-only positives, "
+        f"{finishes['pendingFinish']} without positive finish evidence, and "
+        f"{finishes['notApplicableFinish']} not applicable. The remaining detail/mapping queue "
+        f"contains {finishes['withAnyUnresolvedDetail']} units. |",
+        f"| Evidence registry | **{source_counts['providers']} providers**, "
+        f"{source_counts['evidenceRecords']} evidence records, "
+        f"{source_counts['uniqueUrls']} unique URLs, and "
+        f"{source_counts['claimsAttributed']:,} attributed claims. Only complete official "
+        "manifests may establish absence. |",
+        "| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact "
+        "consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |",
+        f"| Site and publication | The repository is {repository_visibility}. The interactive site "
+        f"is generated and usable locally; Pages deployment is {publication_state}. |",
+        "| Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present "
+        f"and hash-verified. The intended mixed-work grants are {licence_state}. |",
+        "| AI transparency | Development used AI in a human-directed copilot workflow. Scope and "
+        "safeguards are declared in [`AI-DECLARATION.md`](AI-DECLARATION.md). |",
+    ]
+    return "\n".join(lines)
+
+
 def replace_block(text: str, name: str, body: str) -> str:
     pattern = re.compile(
         rf"(<!-- generated:{re.escape(name)}[^>]*-->\n).*?(\n<!-- /generated:{re.escape(name)} -->)",
@@ -57,8 +165,20 @@ def replace_block(text: str, name: str, body: str) -> str:
 
 def main() -> int:
     counts = read_json(ANALYSIS_PATH)["counts"]
+    dataset = read_json(DATASET_PATH)
+    units = read_json(UNITS_PATH)
+    finish_doc = read_json(FINISH_UNITS_PATH)
+    checklist = read_json(CHECKLIST_PATH)
+    sources = read_json(SOURCE_REGISTRY_PATH)
+    decisions = read_json(DECISIONS_PATH)
     original = README_PATH.read_text(encoding="utf-8")
-    updated = replace_block(original, "finish-coverage", finish_coverage_block(counts))
+    updated = replace_block(original, "badges", badges_block(dataset, checklist, decisions))
+    updated = replace_block(
+        updated,
+        "current-state",
+        current_state_block(dataset, units, finish_doc, checklist, sources, decisions),
+    )
+    updated = replace_block(updated, "finish-coverage", finish_coverage_block(counts))
 
     if "--check" in sys.argv:
         if updated != original:

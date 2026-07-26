@@ -5,8 +5,9 @@ Complements `verification/review_integrity.ps1`. That script validates invariant
 *within* each store; this one validates consistency *between* the state stores and
 the derived artifacts that consumers and the future public site actually read.
 
-Every check corresponds to a finding in `verification/REVIEW-2026-07-25.md`. Run it
-after any write pass, and re-run it to confirm a fix:
+Most checks correspond to a finding in `verification/REVIEW-2026-07-25.md`; later checks protect
+the release, portability, and transparency contracts added during remediation. Run it after any
+write pass, and re-run it to confirm a fix:
 
     python verification/review_findings.py
 
@@ -205,6 +206,75 @@ check(
     f"README describes regular JTG 117 as non-holo + holo + reverse holo; the verified model and "
     f"review_integrity.ps1 check 'regular JTG 117 discloses holo + reverse only' both say "
     f"{jtg_finishes}. The non-holo printing belongs to the Prize Pack product, not the regular card.",
+)
+
+
+# --------------------------------------------------------------------------- #
+# AI transparency — declaration and README must agree with specification 0.1.2
+# --------------------------------------------------------------------------- #
+
+ai_declaration_path = ROOT / "AI-DECLARATION.md"
+ai_declaration = (
+    ai_declaration_path.read_text(encoding="utf-8") if ai_declaration_path.exists() else ""
+)
+frontmatter_match = re.match(r"\A---\n(.*?)\n---\n", ai_declaration, re.DOTALL)
+allowed_levels = ("none", "hint", "assist", "pair", "copilot", "auto")
+allowed_processes = {"design", "implementation", "testing", "documentation", "review", "deployment"}
+declaration_fields: dict[str, str] = {}
+declared_processes: dict[str, str] = {}
+unknown_frontmatter_fields: list[str] = []
+if frontmatter_match:
+    in_processes = False
+    for line in frontmatter_match.group(1).splitlines():
+        if line == "processes:":
+            declaration_fields["processes"] = ""
+            in_processes = True
+            continue
+        process_match = re.fullmatch(r"  ([a-z]+): ([a-z]+)", line)
+        if in_processes and process_match:
+            declared_processes[process_match.group(1)] = process_match.group(2)
+            continue
+        in_processes = False
+        field_match = re.fullmatch(r"([a-z]+): [\"']?([^\"']+)[\"']?", line)
+        if field_match:
+            key, value = field_match.groups()
+            declaration_fields[key] = value
+            if key not in {"version", "level"}:
+                unknown_frontmatter_fields.append(key)
+        elif line.strip():
+            unknown_frontmatter_fields.append(line.strip())
+
+global_level = declaration_fields.get("level")
+process_levels_valid = bool(declared_processes) and all(
+    process in allowed_processes and level in allowed_levels
+    for process, level in declared_processes.items()
+)
+highest_process_level = (
+    max(declared_processes.values(), key=allowed_levels.index)
+    if process_levels_valid else None
+)
+check(
+    "A1",
+    "AI-DECLARATION.md conforms to AI-DECLARATION specification 0.1.2",
+    "FAIL",
+    bool(frontmatter_match)
+    and declaration_fields.get("version") == "0.1.2"
+    and global_level in allowed_levels
+    and process_levels_valid
+    and global_level == highest_process_level
+    and not unknown_frontmatter_fields
+    and "\n## Notes\n" in ai_declaration,
+    "The declaration requires version and level fields, recognized process levels, a global level "
+    "equal to the highest process level, no extra frontmatter fields, and a ## Notes section.",
+)
+check(
+    "A2",
+    "README and declaration expose the same copilot-level AI transparency contract",
+    "FAIL",
+    "](AI-DECLARATION.md)" in readme
+    and "AI--DECLARATION-copilot" in readme
+    and "https://ai-declaration.md/en/0.1.2/" in ai_declaration,
+    "README must link the copilot badge to AI-DECLARATION.md, which must link specification 0.1.2.",
 )
 
 
