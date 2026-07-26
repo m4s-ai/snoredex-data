@@ -69,15 +69,25 @@ transfers the entire object graph by default, every clone shipped all 82 blobs r
 Owner-authorized on 2026-07-26 and executed with `git filter-repo --replace-text`, redacting the
 user segment of the prefix to `C:\redacted` and leaving the remainder of each path intact:
 
-- All 43 commits were rewritten; commit messages, authorship and ordering are unchanged.
-- Both branch tree hashes are byte-identical before and after, confirming that no current content
-  was altered — the rewrite reached historical blobs only.
-- Re-audit: 0 sensitive-history hits across 551 reachable blobs, so `P4`, `P6` and `P7` all pass.
+- **All 64 commits across all six branches** were rewritten — 43 on the `main` line, plus four
+  stale branches left behind by squash-merged pull requests (`agent/portable-script-paths`,
+  `claude/database-review-recommendations-kq8aec`, `codex/finish-verification`,
+  `codex/readme-ai-declaration`). Those four are the reason a first pass over `main` alone was not
+  enough: `git clone` fetches every `refs/heads/*`, so a merged branch nobody deleted kept
+  shipping the full pre-redaction history to every cloner. Verified by cloning the remote and
+  scanning the result, not by reasoning about which refs *should* matter.
+- Commit messages, authorship, dates and ordering are unchanged. Commit signatures are dropped,
+  which is unavoidable: a signature over rewritten content cannot still verify.
+- Branch tree hashes are byte-identical before and after, confirming no current content was
+  altered — the rewrite reached historical blobs only.
+- Re-audit of a fresh clone: **0 hits across 570 blobs**, all six branches. `P4`, `P6` and `P7`
+  pass.
 
-Scope, stated precisely: Git transfers only reachable objects, so no clone, fetch or pull can
-carry the redacted content again. The pre-rewrite objects still exist on GitHub's servers and stay
-reachable by direct commit SHA and through the four merged pull-request pages, which were
-deliberately retained. Removing those would require deleting the pull requests and asking GitHub
+Scope, stated precisely: Git transfers only reachable objects, and `git clone` fetches
+`refs/heads/*` but never `refs/pull/*`. No clone, fetch or pull can carry the redacted content
+again. The pre-rewrite objects still exist on GitHub's servers and stay reachable by direct commit
+SHA and through the five merged pull-request refs, which were deliberately retained so the review
+history stays intact. Removing those would require deleting the pull requests and asking GitHub
 Support to purge unreachable objects; the owner accepted that residual on 2026-07-26.
 
 ## Verdict
