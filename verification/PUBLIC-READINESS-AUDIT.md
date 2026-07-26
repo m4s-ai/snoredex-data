@@ -35,8 +35,9 @@ These cannot be settled by a text scan and remain open:
 3. **Repository vs site visibility — these are not independent.** The enforced safe default is
    `private`. Publishing only a curated Pages artifact does avoid exposing the 82 historical
    local-path blobs, but it cannot deliver a site that collects corrections: the site's entire
-   correction affordance is 206 links into this repository — 203 per-row *Correction?* links plus
-   the repository and issue-tracker links — and every one of them is a 404 for a visitor who
+   correction affordance is 206 links into this repository — 203 per-row *Correction?* links, one
+   general correction entry point, and the repository and issue-tracker links — and every one of
+   them is a 404 for a visitor who
    cannot see a private repository. Publishing the site alone therefore asks strangers for help
    and then turns them away. Checks P8 and `publication_gate.py` now refuse that combination, so
    the real choice is:
