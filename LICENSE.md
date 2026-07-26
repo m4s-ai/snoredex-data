@@ -7,10 +7,12 @@ someone else.
 
 This project is **noncommercial and source-available**. It is deliberately **not** OSI open source.
 
-> **Status: not yet in force.** The two verbatim licence texts are present and hash-verified, but
-> the owner decisions listed below have not been approved. Until
-> `publication-decisions.json` records that approval, this file describes the intended structure,
-> not an operative grant.
+> **Status: in force since 2026-07-26.** The owner approved the licence grants on that date and
+> `publication-decisions.json` records it, so the terms below are an operative grant rather than a
+> described intention. The two verbatim licence texts are present and hash-verified.
+>
+> Publication of the site is a separate decision and is still pending; the grants do not depend on
+> it.
 
 ## 1. Original software — PolyForm Noncommercial 1.0.0
 
@@ -79,28 +81,33 @@ The dataset records evidence and its strength. It is not a print manifest and is
 complete or correct. `pending` means *not established*, never *proven absent*. Do not rely on it
 for purchase, grading, insurance, or valuation decisions without independent verification.
 
-## Open decisions
+## Owner decisions
 
-These belong to the repository owner and remain false/unset in
-`publication-decisions.json`:
+Recorded in `publication-decisions.json`, which `verification/publication_gate.py` verifies before
+any deployment.
 
-1. **Scope of "private use".** Recommended default: noncommercial reuse *with* modification and
-   redistribution permitted — which is what the two licences above provide. The alternative,
-   individual use only, would need different licences.
-2. ~~**Licensor identity.**~~ **Decided 2026-07-26: the licensor is `M4S.Collection`.** This is
-   the name downstream CC BY-NC-SA attribution must reproduce, and the party from whom a
-   commercial exception is sought. It is a pseudonymous handle rather than a legal entity name;
-   see *Licensor* below.
-3. **Publication consent.** Owner attestations and any photographed specimens need explicit
-   consent before publication. These are currently represented as anonymous evidence classes with
-   no personal identifiers, which is the right shape, but consent is still the owner's to give.
-4. **Repository versus site publication.** The site's correction links all point into this
+**Settled 2026-07-26, approved by `M4S.Collection`:**
+
+1. **Scope of "private use".** Noncommercial reuse *with* modification and redistribution
+   permitted — which is what the two licences above provide.
+2. **Licensor identity.** `M4S.Collection`. This is the name downstream CC BY-NC-SA attribution
+   must reproduce, and the party from whom a commercial exception is sought. It is a pseudonymous
+   handle rather than a legal entity name; see *Licensor* below.
+3. **Publication consent.** Owner attestations and photographed specimens may be published. They
+   are represented as anonymous evidence classes carrying no personal identifiers.
+4. **Third-party images.** The 198 Cardmarket card images may be published on the basis set out in
+   `THIRD_PARTY_NOTICES.md`.
+
+**Still open:**
+
+5. **Site publication and repository visibility.** The site's correction links all point into this
    repository's issue tracker, so publishing the site for public review requires the repository to
-   be public too — `publication_gate.py` enforces that. The historical local paths that previously
-   blocked this were redacted on 2026-07-26; see `verification/PUBLIC-READINESS-AUDIT.md`.
+   be public too, and `publication_gate.py` enforces that the two are decided together. The
+   historical local paths that previously blocked public visibility were redacted on 2026-07-26;
+   see `verification/PUBLIC-READINESS-AUDIT.md` and `verification/LAUNCH-RUNBOOK.md`.
 
-Merging the implementation does not grant these approvals and does not deploy the site. The Pages
-workflow is manual and calls `verification/publication_gate.py` before any upload.
+The licence grants above are in force and do not depend on decision 5. Merging code does not
+deploy the site: the Pages workflow is manual and calls the publication gate before any upload.
 
 See issue #5 and `verification/PUBLIC-READINESS-AUDIT.md`.
 

@@ -6,8 +6,9 @@ the repository owner, after which this file describes what was done.
 Nothing here is automatic. The deployment gate blocks until the decisions below are recorded, and
 it is meant to — publishing is the one step in this project that cannot be undone.
 
-**Status: prepared, not executed.** Steps 1 and 2 are owner decisions and are deliberately not
-pre-filled. Everything they depend on is already in place.
+**Status: step 1 done, step 2 pending.** The owner approved the licence grants, owner attestations
+and third-party images on 2026-07-26. What remains is site publication and repository visibility,
+which must be decided together — see step 2.
 
 ---
 
@@ -22,44 +23,37 @@ python verification/review_findings.py     # must be 59/59
 
 ---
 
-## Step 1 — Record the publication approvals
+## Step 1 — Record the publication approvals — **done 2026-07-26**
 
-Four of these are substantive attestations, not switches. They were left for you because only you
-can make them:
+Three substantive attestations, approved by `M4S.Collection` and recorded in
+`publication-decisions.json`:
 
-| Field | What you are attesting |
-|---|---|
-| `licenseGrantsApproved` | The PolyForm and CC BY-NC-SA grants in `LICENSE.md` become **operative**. Until now they were a described intention. |
-| `ownerAttestationsApproved` | Evidence recorded as owner attestations and photographed specimens may be published. They carry no personal identifiers, but the consent is yours to give. |
-| `thirdPartyImagesApproved` | The 198 Cardmarket card images may be published on the basis set out in `THIRD_PARTY_NOTICES.md`. Confirm none is a personal photograph rather than a catalogue image. |
-| `sitePublicationApproved` | The site may be deployed to GitHub Pages. |
+| Field | What was attested | State |
+|---|---|---|
+| `licenseGrantsApproved` | The PolyForm and CC BY-NC-SA grants in `LICENSE.md` are **operative**, no longer a described intention. | `true` |
+| `ownerAttestationsApproved` | Evidence recorded as owner attestations and photographed specimens may be published. They carry no personal identifiers. | `true` |
+| `thirdPartyImagesApproved` | The 198 Cardmarket card images may be published on the basis in `THIRD_PARTY_NOTICES.md`. | `true` |
+| `sitePublicationApproved` | The site may be deployed to GitHub Pages. | **`false` — belongs to step 2** |
 
-Set them in `publication-decisions.json`, together with who approved and when:
+`licensor` is recorded as `M4S.Collection` and verified byte-exactly by the gate. `approvedBy` and
+`approvedAt` are set.
+
+> **Why `sitePublicationApproved` is not set with the rest.** Setting it while the repository is
+> still private makes check **P8 fail**, turning the release gate red on every pull request. That
+> is deliberate: a public site whose 206 correction links point into a private tracker is broken by
+> construction. It is the atomic partner of repository visibility, so both belong in step 2.
+
+## Step 2 — Publish the site and make the repository public
+
+One change, both fields together:
 
 ```json
   "sitePublicationApproved": true,
-  "licenseGrantsApproved": true,
-  "ownerAttestationsApproved": true,
-  "thirdPartyImagesApproved": true,
-  "approvedBy": "M4S.Collection",
-  "approvedAt": "YYYY-MM-DD",
-```
-
-`licensor` is already recorded as `M4S.Collection` and is verified byte-exactly by the gate.
-
-> **Order matters.** Setting `sitePublicationApproved: true` while the repository is still private
-> makes check **P8 fail**, turning the release gate red on every pull request. That is deliberate —
-> a public site whose 206 correction links point into a private tracker is broken by construction.
-> Do step 1 and step 2 together, in the same change.
-
-## Step 2 — Make the repository public
-
-```json
   "repositoryVisibility": "public",
   "repositoryPublicationApproved": true,
 ```
 
-Then flip it for real in **Settings → General → Danger Zone → Change visibility**.
+Then flip visibility for real in **Settings → General → Danger Zone → Change visibility**.
 
 The history obstacle that previously blocked this is resolved: the historical Windows checkout
 paths were redacted on 2026-07-26 and a fresh clone of the remote reports zero hits across all six

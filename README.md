@@ -8,7 +8,7 @@ Cardmarket.
 [![Cards](https://img.shields.io/badge/cards-198-2563eb)](snorlax_cards.json)
 [![Checklist](https://img.shields.io/badge/checklist-837_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-owner_approval_required-d97706)](publication-decisions.json)
-[![Licence](https://img.shields.io/badge/licence-grants_not_in_force-d97706)](LICENSE.md)
+[![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
 <!-- /generated:badges -->
 
@@ -17,10 +17,11 @@ distinguishes marketplace claims from confirmed physical printings, models finis
 and produces a stable machine-readable checklist plus an interactive collection browser.
 
 > [!IMPORTANT]
-> The implementation is ready, but publication is not approved. The repository remains private,
-> GitHub Pages requires a manual run and owner approval, and the proposed licence grants are not
-> yet in force. See [`publication-decisions.json`](publication-decisions.json) and
-> [`LICENSE.md`](LICENSE.md).
+> The licence grants are **in force** since 2026-07-26, granted by `M4S.Collection`. Publication is
+> a separate decision and is **not yet approved**: the repository remains private and GitHub Pages
+> requires a manual run that the publication gate still blocks. See
+> [`publication-decisions.json`](publication-decisions.json), [`LICENSE.md`](LICENSE.md), and
+> [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md) for the remaining steps.
 
 ## Current state
 
@@ -36,7 +37,7 @@ Status snapshot: **2026-07-26**, after the database review and release-readiness
 | Evidence registry | **18 providers**, 864 evidence records, 857 unique URLs, and 2,722 attributed claims. Only complete official manifests may establish absence. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is private. The interactive site is generated and usable locally; Pages deployment is manual and blocked until every required owner decision is recorded. |
-| Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are inactive pending owner approval and licensor selection. |
+| Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
 | AI transparency | Development used AI in a human-directed copilot workflow. Scope and safeguards are declared in [`AI-DECLARATION.md`](AI-DECLARATION.md). |
 <!-- /generated:current-state -->
 
@@ -103,7 +104,7 @@ the checkout from their own file location and can be invoked from any working di
 | [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md) | Ordered steps to take the site public, and what each approval attests. |
 | [`HANDOVER.md`](HANDOVER.md) | Cold-start guide, working rules, invariants, and prioritized next actions. |
 | [`verification/RESUME.md`](verification/RESUME.md) | Detailed verification playbook, source techniques, corrections, and dead ends. |
-| [`LICENSE.md`](LICENSE.md) / [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Intended licensing scope, exclusions, attribution, and third-party rights. |
+| [`LICENSE.md`](LICENSE.md) / [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Licensing scope, licensor and contact, exclusions, attribution, and third-party rights. |
 | [`AI-DECLARATION.md`](AI-DECLARATION.md) | Structured disclosure of AI involvement under the [`AI-DECLARATION.md` 0.1.2 specification](https://ai-declaration.md/en/0.1.2/). |
 
 The reproducible pipeline is:

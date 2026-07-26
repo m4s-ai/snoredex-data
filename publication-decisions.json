@@ -3,11 +3,11 @@
   "repositoryVisibility": "private",
   "repositoryPublicationApproved": false,
   "sitePublicationApproved": false,
-  "licenseGrantsApproved": false,
+  "licenseGrantsApproved": true,
   "licensor": "M4S.Collection",
-  "ownerAttestationsApproved": false,
-  "thirdPartyImagesApproved": false,
-  "approvedBy": null,
-  "approvedAt": null,
-  "notes": "Licensor decided 2026-07-26. The four approval flags and approvedBy/approvedAt are owner attestations and remain unset; setting sitePublicationApproved before repositoryVisibility is public fails check P8 by design. Follow verification/LAUNCH-RUNBOOK.md."
+  "ownerAttestationsApproved": true,
+  "thirdPartyImagesApproved": true,
+  "approvedBy": "M4S.Collection",
+  "approvedAt": "2026-07-26",
+  "notes": "Owner approved the licence grants, owner attestations and third-party images on 2026-07-26; the grants are now in force. sitePublicationApproved is deliberately still false: it is the atomic partner of repositoryVisibility, because check P8 fails if the site is published while its correction links point into a private tracker. Set both together as the final step — see verification/LAUNCH-RUNBOOK.md."
 }

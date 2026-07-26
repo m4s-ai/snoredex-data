@@ -270,8 +270,16 @@ def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
     # The licensor is an owner decision, so the page reads it rather than hardcoding a name that
     # could drift from the record the publication gate actually enforces.
-    licensor = str(read_json(ROOT / "publication-decisions.json").get("licensor") or "undecided")
+    decisions = read_json(ROOT / "publication-decisions.json")
+    licensor = str(decisions.get("licensor") or "undecided")
     licensor_contact = "https://www.instagram.com/" + licensor.lower() + "/"
+    # Licence status is an owner decision too. Deriving the sentence from the record means the
+    # published page cannot claim a grant the owner has not made, or deny one they have.
+    grants_state = (
+        f"<strong>in force</strong>, granted by {html.escape(licensor)}"
+        if decisions.get("licenseGrantsApproved") is True
+        else "<strong>not yet operative</strong> until the owner records approval"
+    )
 
     rows = build_rows(releases_doc["variants"])
     checklist = build_checklist(checklist_doc["items"])
@@ -605,12 +613,11 @@ def main() -> int:
   <p>This repository is a mixed work; no single licence covers all of it. The intended terms are
   <strong>PolyForm Noncommercial 1.0.0</strong> for original software and
   <strong>CC BY-NC-SA 4.0</strong> for the original data selection and arrangement, verification
-  annotations, documentation and site copy. The verbatim texts are included, but the grants are
-  <strong>not yet operative</strong> until the owner records publication approval. This is intended
-  to be noncommercial source-available, not OSI open source.</p>
-  <p><strong>Licensor: {html.escape(licensor)}.</strong> Once the grants are in force, that is the
-  name CC BY-NC-SA attribution must credit, and the party from whom a commercial exception is
-  sought. Both licences here are noncommercial; neither permits commercial use without a separate
+  annotations, documentation and site copy. The verbatim texts are included, and the grants are
+  {grants_state}. This is noncommercial source-available, not OSI open source.</p>
+  <p><strong>Licensor: {html.escape(licensor)}.</strong> That is the name CC BY-NC-SA attribution
+  must credit, and the party from whom a commercial exception is sought. Both licences here are
+  noncommercial; neither permits commercial use without a separate
   grant. Licensing and commercial-use enquiries:
   <a href="{html.escape(licensor_contact)}" rel="noopener">@{html.escape(licensor)} on Instagram</a>.
   That is a licensing contact, not a corrections channel — corrections belong in the
