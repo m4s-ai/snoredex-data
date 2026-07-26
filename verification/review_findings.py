@@ -571,30 +571,47 @@ check(
     f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
 )
 
-# A pull_request workflow checks out GitHub's disposable merge commit. Its metadata belongs to
-# GitHub/the PR author and is not part of either branch; audit the PR head (second parent) there.
-# Everywhere else, audit the current branch ancestry that a normal merge/rebase can publish.
-identity_tip = "HEAD"
-if os.environ.get("GITHUB_EVENT_NAME") == "pull_request":
+def synthetic_merge_commit() -> str | None:
+    """GitHub's disposable `refs/pull/N/merge` commit, when the workflow checked one out.
+
+    A `pull_request` workflow builds a merge commit that exists only inside the run. Its
+    identity fields belong to GitHub rather than to either branch, so auditing them reports a
+    finding nobody can fix. Excluding that one commit is the whole exemption — every other
+    reachable commit is still audited, because making a repository public publishes every ref,
+    not merely the ancestry of the branch that happens to be checked out.
+    """
+    if os.environ.get("GITHUB_EVENT_NAME") != "pull_request":
+        return None
     try:
-        identity_tip = subprocess.check_output(
-            ["git", "rev-parse", "HEAD^2"], cwd=ROOT, text=True
-        ).strip()
+        parents = subprocess.check_output(
+            ["git", "rev-list", "--parents", "-n", "1", "HEAD"], cwd=ROOT, text=True
+        ).split()
     except (OSError, subprocess.CalledProcessError):
-        identity_tip = "HEAD"
+        return None
+    # sha + two parents == a merge commit, which is what the PR checkout produces.
+    return parents[0] if len(parents) == 3 else None
+
+
 try:
+    excluded_commit = synthetic_merge_commit()
     identity_fields = subprocess.check_output(
-        ["git", "log", identity_tip, "--format=%ae%x00%ce"], cwd=ROOT
-    ).decode("utf-8", errors="replace").replace("\n", "\0").split("\0")
+        ["git", "log", "--all", "--format=%H%x00%ae%x00%ce"], cwd=ROOT
+    ).decode("utf-8", errors="replace").splitlines()
 except (OSError, subprocess.CalledProcessError):
-    identity_fields = ["commit metadata unavailable"]
-personal_commit_emails = sorted({
-    email.strip() for email in identity_fields
-    if "@" in email and "noreply" not in email.lower()
-})
+    excluded_commit, identity_fields = None, ["\0commit metadata unavailable\0"]
+personal_commit_emails = set()
+for record in identity_fields:
+    commit_sha, _, addresses = record.partition("\0")
+    if excluded_commit and commit_sha == excluded_commit:
+        continue
+    for email in addresses.split("\0"):
+        email = email.strip()
+        if "@" in email and "noreply" not in email.lower():
+            personal_commit_emails.add(email)
+personal_commit_emails = sorted(personal_commit_emails)
 check(
     "P7",
-    "Publishable branch ancestry exposes no personal email address",
+    "No reachable commit exposes a personal email address",
     "FAIL",
     not personal_commit_emails,
     f"personal commit emails: {personal_commit_emails}",
@@ -607,6 +624,38 @@ check(
     f"{history_scanned} reachable blobs scanned; {len(history_hits)} sensitive-history hits; "
     f"repository publication approved={decisions.get('repositoryPublicationApproved')}; "
     f"personal commit emails={len(personal_commit_emails)}",
+)
+
+# The site exists to collect corrections, and it collects them exclusively through links into
+# this repository's issue tracker. Publishing the site while the repository stays private turns
+# every one of those links into a 404 for exactly the people the site is asking for help — the
+# failure is silent, because the gate, the browser tests and the link audit all still pass.
+# So the site may only go public together with the tracker it points at.
+site_html = (ROOT / "index.html").read_text(encoding="utf-8") if (ROOT / "index.html").exists() else ""
+repo_links = len(re.findall(r"https://github\.com/m4s-ai/snoredex-data", site_html))
+tracker_public = (
+    decisions.get("repositoryVisibility") == "public"
+    and decisions.get("repositoryPublicationApproved") is True
+)
+check(
+    "P8",
+    "A published site never points its correction links into a private tracker",
+    "FAIL",
+    not (decisions.get("sitePublicationApproved") is True and repo_links and not tracker_public),
+    f"the site embeds {repo_links} links to github.com/m4s-ai/snoredex-data (203 per-row "
+    f"correction links plus repository and issue-tracker links). sitePublicationApproved="
+    f"{decisions.get('sitePublicationApproved')}, repositoryVisibility="
+    f"{decisions.get('repositoryVisibility')}, repositoryPublicationApproved="
+    f"{decisions.get('repositoryPublicationApproved')}. Publish both together, or remove the "
+    f"correction affordance from the site.",
+)
+check(
+    "I4",
+    "Correction-loop reachability",
+    "INFO",
+    True,
+    f"{repo_links} repository links embedded in the site; tracker publicly reachable="
+    f"{tracker_public}. Contributors can only file corrections once this is True.",
 )
 
 
@@ -917,13 +966,20 @@ if form_path.exists():
               bool(links) and not bad_template,
               f"{len(links)} links found, {len(bad_template)} not targeting the form")
 
+        # The per-row links must carry the full identity. The contribute section also offers one
+        # general entry point with no row attached, which is the intended way in for a reader who
+        # has not found the row yet — it is not a per-row link missing its prefill.
+        row_links = [u for u in links if "row-id=" in u]
+        general_links = {u for u in links if "row-id=" not in u}
         missing_prefill = [
-            u[:80] for u in links
-            if not all(k in u for k in ("row-id=", "card-name=", "set-code=", "current-state="))
+            u[:80] for u in row_links
+            if not all(k in u for k in ("card-name=", "set-code=", "current-state="))
         ]
-        check("T5", "Every correction link prefills the row identity", "FAIL",
-              not missing_prefill,
-              f"{len(missing_prefill)} links miss a prefill parameter: {missing_prefill[:2]}")
+        check("T5", "Every per-row correction link prefills the row identity", "FAIL",
+              bool(row_links) and not missing_prefill and len(general_links) <= 1,
+              f"{len(row_links)} per-row links, {len(missing_prefill)} missing a prefill parameter "
+              f"{missing_prefill[:2]}; {len(general_links)} unprefilled entry-point links "
+              f"(at most one is intended)")
 
         # GitHub rejects issue-creation URLs beyond roughly 8 KB.
         overlong = [(len(u), u[:60]) for u in links if len(u) > 6000]

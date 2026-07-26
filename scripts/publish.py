@@ -13,6 +13,7 @@ public site by omission.
 from __future__ import annotations
 
 import argparse
+import posixpath
 import re
 import shutil
 import sys
@@ -20,6 +21,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PREFIX = "_site"
+REPO_BLOB = "https://github.com/m4s-ai/snoredex-data/blob/main/"
+
+# Markdown links resolve against the repository, but the artifact is a strict subset of it, so a
+# link to something deliberately left out (a script, the handover notes) silently breaks on the
+# published site. Rather than publishing more than the allowlist intends, repoint those links at
+# the repository itself. Anything present in the artifact keeps its relative link and stays
+# browsable offline.
+MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 
 # Exact files. Each is here because the site links to it or a reader needs it.
 FILES = [
@@ -37,7 +46,12 @@ FILES = [
     "analysis_shared_cards.json",
     "analysis_language_drift.json",
     "artists_pokemontcgio.json",
+    "AI-DECLARATION.md",
+    "CONTRIBUTING.md",
+    "publication-decisions.json",
     "verification/confirmed-releases.html",
+    "verification/open-items.html",
+    "verification/FINISH_REVIEW.csv",
     "verification/source_registry.json",
     "verification/SOURCES.md",
     "verification/finish_units.json",
@@ -110,16 +124,43 @@ def validate_output(out: Path) -> Path:
     return resolved
 
 
+def relink_markdown(text: str, source: str, published: set[str]) -> str:
+    """Repoint links that leave the artifact at the repository, leaving internal links alone."""
+    base = Path(source).parent
+
+    def replace(match: re.Match[str]) -> str:
+        target = match.group(2)
+        if target.startswith(("http://", "https://", "#", "mailto:", "data:", "//")):
+            return match.group(0)
+        path, _, fragment = target.partition("#")
+        if not path:
+            return match.group(0)
+        # Normalize textually: the target need not exist on disk, and `..` must collapse the
+        # same way on every platform.
+        resolved = posixpath.normpath(posixpath.join(base.as_posix(), path)).lstrip("/")
+        if resolved in published:
+            return match.group(0)
+        return f"{match.group(1)}{REPO_BLOB}{resolved}{'#' + fragment if fragment else ''}{match.group(3)}"
+
+    return MARKDOWN_LINK.sub(replace, text)
+
+
 def build(out: Path) -> list[str]:
     out = validate_output(out)
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
     wanted = collect()
+    published = set(wanted)
     for relative in wanted:
         target = out / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, target)
+        if target.suffix == ".md":
+            original = target.read_text(encoding="utf-8")
+            rewritten = relink_markdown(original, relative, published)
+            if rewritten != original:
+                target.write_text(rewritten, encoding="utf-8")
     # Pages serves Jekyll by default, which would skip files beginning with an underscore.
     (out / ".nojekyll").write_text("", encoding="utf-8")
     return wanted
@@ -149,17 +190,25 @@ def verify(out: Path) -> int:
         if name != ".nojekyll":
             problems.append(f"allowlisted but absent from the artifact: {name}")
 
-    index = out / "index.html"
-    if index.exists():
-        html = index.read_text(encoding="utf-8")
-        # Every local asset the page references must exist in the artifact, or the published
-        # site has a broken link that no unit test would catch.
-        for match in re.finditer(r'(?:href|src)="([^"#:]+)"', html):
-            target = match.group(1)
-            if target.startswith(("http", "//", "mailto:", "data:")):
+    # Every local reference in every published page must resolve inside the artifact. Checking
+    # only index.html let the published Markdown accumulate links to files the allowlist
+    # deliberately excludes, which read as broken pages to the very reviewers the site invites.
+    for page in sorted(out.rglob("*")):
+        if not page.is_file() or page.suffix not in {".html", ".md"}:
+            continue
+        text = page.read_text(encoding="utf-8", errors="replace")
+        targets = re.findall(r'(?:href|src)="([^"]+)"', text)
+        if page.suffix == ".md":
+            targets += [match.group(2) for match in MARKDOWN_LINK.finditer(text)]
+        name = page.relative_to(out).as_posix()
+        for target in sorted(set(targets)):
+            if target.startswith(("http://", "https://", "//", "mailto:", "data:", "#")):
                 continue
-            if not (out / target).exists():
-                problems.append(f"index.html references a missing local asset: {target}")
+            if "${" in target:
+                continue  # A client-side template placeholder, resolved only in the browser.
+            target = target.split("#")[0]
+            if target and not (page.parent / target).exists():
+                problems.append(f"{name} references a missing local target: {target}")
 
     if problems:
         print(f"artifact verification failed ({len(problems)} problems):", file=sys.stderr)

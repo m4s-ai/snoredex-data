@@ -32,10 +32,24 @@ These cannot be settled by a text scan and remain open:
 2. **Owner attestations and photographed specimens.** Recorded as anonymous evidence classes with
    no personal identifiers, which is the right shape. Publication consent is still the owner's to
    give explicitly.
-3. **Repository vs site visibility.** The enforced safe default is `private`. Publishing only a
-   curated Pages artifact avoids exposing the 82 historical local-path blobs. Public repository
-   visibility requires an explicit decision and either acceptance of those paths or an authorized
-   history rewrite.
+3. **Repository vs site visibility — these are not independent.** The enforced safe default is
+   `private`. Publishing only a curated Pages artifact does avoid exposing the 82 historical
+   local-path blobs, but it cannot deliver a site that collects corrections: the site's entire
+   correction affordance is 206 links into this repository — 203 per-row *Correction?* links plus
+   the repository and issue-tracker links — and every one of them is a 404 for a visitor who
+   cannot see a private repository. Publishing the site alone therefore asks strangers for help
+   and then turns them away. Checks P8 and `publication_gate.py` now refuse that combination, so
+   the real choice is:
+
+   - **Publish both.** Requires resolving the history finding below, and is the only option that
+     makes the stated goal — public review and correction — actually work.
+   - **Publish the site alone,** having first removed the correction affordance from it. The site
+     becomes a read-only reference with no feedback path.
+
+   Public repository visibility requires an explicit decision and either acceptance of the
+   `C:\Users\...` paths or an authorized history rewrite. The repository has never been public and
+   has no forks, so a rewrite is cheap now and irreversible-in-practice later: once a public clone
+   exists, the paths cannot be recalled.
 4. **Licensor identity.** `m4s-ai` or "contributors to snoredex-data". See `LICENSE.md`.
 
 ## Mechanical blockers resolved
@@ -54,3 +68,8 @@ is expressly accepted or a history rewrite is separately authorized.
 
 The implementation is safe to merge but **not yet authorized to publish**. Four owner decisions
 remain open, and the deployment gate enforces them independently of ordinary PR validation.
+
+Publishing the site for public review additionally requires the repository to be public, because
+that is where corrections are filed. The 82 historical `C:\Users\...` blobs are therefore on the
+critical path to the project's stated goal, not a side note: they are the one finding standing
+between the current state and a working public correction loop.

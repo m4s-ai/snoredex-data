@@ -99,6 +99,7 @@ the checkout from their own file location and can be invoked from any working di
 | [`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) | Remaining finish, pattern, and Cardmarket-product mapping queue. |
 | [`scripts/`](scripts/) | Reproducible data, verification, checklist, issue-template, publication, and site generators. |
 | [`site/`](site/) | Source CSS and JavaScript for the generated site. |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a correction, what counts as evidence, and how reports are graded. |
 | [`HANDOVER.md`](HANDOVER.md) | Cold-start guide, working rules, invariants, and prioritized next actions. |
 | [`verification/RESUME.md`](verification/RESUME.md) | Detailed verification playbook, source techniques, corrections, and dead ends. |
 | [`LICENSE.md`](LICENSE.md) / [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Intended licensing scope, exclusions, attribution, and third-party rights. |

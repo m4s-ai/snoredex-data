@@ -221,6 +221,24 @@ def main() -> int:
               all("row-id=" in href for href in links),
               "correction links must carry rowId, not the generated row number")
 
+        # --- the contribute section is the front door for public reviewers ---
+        check("a contribute section explains how to report a correction",
+              page.locator("#contribute").count() == 1
+              and page.locator('nav.sections a[href="#contribute"]').count() == 1,
+              "the site must state how corrections are reported, not only link them per row")
+        contribute_text = (page.text_content("#contribute") or "").lower()
+        check("the contribute section states the positive-evidence rule",
+              "positive evidence" in contribute_text
+              and "not proof of absence" in contribute_text
+              and "never unavailable" in contribute_text,
+              "a reviewer must learn the evidence rule before filing, not after being rejected")
+        contribute_links = page.eval_on_selector_all(
+            "#contribute a", "els => els.map(e => e.getAttribute('href'))")
+        check("the contribute section links the guide, the ladder and the open questions",
+              {"CONTRIBUTING.md", "verification/FINISH_SOURCES.md",
+               "verification/open-items.html"} <= set(contribute_links),
+              f"contribute links: {contribute_links}")
+
         # --- checklist builder ---
         preview = page.text_content("#cl-preview")
         check("checklist preview reports an item count", "checklist items" in (preview or ""),
