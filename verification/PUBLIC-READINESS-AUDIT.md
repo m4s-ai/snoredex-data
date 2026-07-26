@@ -50,7 +50,8 @@ These cannot be settled by a text scan and remain open:
 
    The historical-paths obstacle to publishing both is resolved — see the history redaction
    below. What remains here is the owner's decision to make the repository public at all.
-4. **Licensor identity.** `m4s-ai` or "contributors to snoredex-data". See `LICENSE.md`.
+4. ~~**Licensor identity.**~~ **Decided 2026-07-26: `M4S.Collection`**, a pseudonymous handle
+   chosen so downstream attribution never carries the owner's legal name. See `LICENSE.md`.
 
 ## Mechanical blockers resolved
 

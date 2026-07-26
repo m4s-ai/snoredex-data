@@ -11,6 +11,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DECISIONS = ROOT / "publication-decisions.json"
 
+# The licensor the owner selected on 2026-07-26. Pinned to one exact string rather than a list of
+# candidates: the name is what downstream CC BY-NC-SA attribution must reproduce and who a
+# commercial exception would be sought from, so a near-miss spelling is a real defect, not a
+# stylistic one. Changing the licensor is an owner decision — edit here and in LICENSE.md together.
+LICENSOR = "M4S.Collection"
+
 
 def main() -> int:
     try:
@@ -27,8 +33,8 @@ def main() -> int:
     }
     problems = [f"{key} must be true" for key in sorted(required_true) if decision.get(key) is not True]
 
-    if decision.get("licensor") not in {"m4s-ai", "contributors to snoredex-data"}:
-        problems.append("licensor must name an approved project licensor")
+    if decision.get("licensor") != LICENSOR:
+        problems.append(f"licensor must be exactly {LICENSOR!r}")
     if not decision.get("approvedBy"):
         problems.append("approvedBy must identify the approving repository owner")
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(decision.get("approvedAt") or "")):

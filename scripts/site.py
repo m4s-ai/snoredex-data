@@ -268,6 +268,9 @@ def main() -> int:
     dataset = read_json(ROOT / "snorlax_cards.json")
     registry = read_json(ROOT / "verification" / "source_registry.json")
     units = read_json(ROOT / "verification" / "units.json")
+    # The licensor is an owner decision, so the page reads it rather than hardcoding a name that
+    # could drift from the record the publication gate actually enforces.
+    licensor = str(read_json(ROOT / "publication-decisions.json").get("licensor") or "undecided")
 
     rows = build_rows(releases_doc["variants"])
     checklist = build_checklist(checklist_doc["items"])
@@ -604,6 +607,10 @@ def main() -> int:
   annotations, documentation and site copy. The verbatim texts are included, but the grants are
   <strong>not yet operative</strong> until the owner records publication approval. This is intended
   to be noncommercial source-available, not OSI open source.</p>
+  <p><strong>Licensor: {html.escape(licensor)}.</strong> Once the grants are in force, that is the
+  name CC BY-NC-SA attribution must credit, and the party from whom a commercial exception is
+  sought. Both licences here are noncommercial; neither permits commercial use without a separate
+  grant.</p>
   <p><strong>Excluded:</strong> Pok&eacute;mon card artwork and images, names, logos and trademarks,
   illustrator credits and the underlying illustrations, quoted provider content, and third-party
   photographs. The licences above grant nothing in respect of any of it.</p>

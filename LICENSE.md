@@ -87,18 +87,42 @@ These belong to the repository owner and remain false/unset in
 1. **Scope of "private use".** Recommended default: noncommercial reuse *with* modification and
    redistribution permitted — which is what the two licences above provide. The alternative,
    individual use only, would need different licences.
-2. **Licensor identity.** `m4s-ai` or "contributors to snoredex-data". This affects who can grant
-   a commercial exception later. Recommended: `m4s-ai`, without naming the collection owner
-   personally.
+2. ~~**Licensor identity.**~~ **Decided 2026-07-26: the licensor is `M4S.Collection`.** This is
+   the name downstream CC BY-NC-SA attribution must reproduce, and the party from whom a
+   commercial exception is sought. It is a pseudonymous handle rather than a legal entity name;
+   see *Licensor* below.
 3. **Publication consent.** Owner attestations and any photographed specimens need explicit
    consent before publication. These are currently represented as anonymous evidence classes with
    no personal identifiers, which is the right shape, but consent is still the owner's to give.
-4. **Repository versus site publication.** The current safe decision is to keep the repository
-   private. Its history contains old absolute local paths. A curated Pages artifact can be
-   published separately after the other approvals; making the repository history public requires
-   either an explicit acceptance of that disclosure or a separately authorized history rewrite.
+4. **Repository versus site publication.** The site's correction links all point into this
+   repository's issue tracker, so publishing the site for public review requires the repository to
+   be public too — `publication_gate.py` enforces that. The historical local paths that previously
+   blocked this were redacted on 2026-07-26; see `verification/PUBLIC-READINESS-AUDIT.md`.
 
 Merging the implementation does not grant these approvals and does not deploy the site. The Pages
 workflow is manual and calls `verification/publication_gate.py` before any upload.
 
 See issue #5 and `verification/PUBLIC-READINESS-AUDIT.md`.
+
+## Licensor
+
+**`M4S.Collection`** — selected 2026-07-26 and recorded in `publication-decisions.json`, which
+`publication_gate.py` verifies before any deployment.
+
+Where the name appears once the grants are in force:
+
+- **Attribution.** CC BY-NC-SA 4.0 requires reuse to credit the licensor by name, so
+  `M4S.Collection` is the credit line downstream users must reproduce.
+- **Commercial exceptions.** Both licences are noncommercial. Anyone wanting commercial use needs
+  a separate grant, and `M4S.Collection` is the party who can give it.
+
+Two properties worth stating plainly, because they are consequences rather than problems:
+
+- It is a **pseudonymous handle, not a legal entity**. That is a deliberate choice and keeps the
+  collection owner's legal name out of every downstream attribution. It does mean the licence is
+  granted by a pseudonym, which is normal for hobby projects and sufficient for attribution, but
+  is weaker than a named person or company if a grant ever had to be enforced or transferred.
+- A licensor must be **reachable**, or a commercial exception cannot be requested and the
+  attribution requirement points at no one. The handle is reachable on Instagram under the same
+  name; if a longer-lived contact route is wanted later, add it here rather than replacing the
+  attribution name, so existing downstream credits stay correct.

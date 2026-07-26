@@ -550,7 +550,7 @@ check(
             "licenseGrantsApproved", "ownerAttestationsApproved", "thirdPartyImagesApproved",
         }
     )
-    and decisions.get("licensor") in {None, "m4s-ai", "contributors to snoredex-data"}
+    and decisions.get("licensor") in {None, "M4S.Collection"}
     and (decisions.get("approvedBy") is None or isinstance(decisions.get("approvedBy"), str))
     and (
         decisions.get("approvedAt") is None
