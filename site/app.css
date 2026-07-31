@@ -354,11 +354,12 @@ details.sourcelist > summary { cursor: pointer; font-weight: 600; }
 details.sourcelist ol { max-height: 420px; overflow-y: auto; font-size: 12px; padding-left: 22px; }
 details.sourcelist li { margin-bottom: 3px; word-break: break-all; }
 
+#methodology a { overflow-wrap: anywhere; }
 footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 16px; color: var(--muted); font-size: 13px; }
 
 @media (max-width: 720px) {
   .wrap { padding: 0 10px 48px; }
-  .masthead-row { align-items: stretch; gap: 10px; }
+  .masthead-row { align-items: flex-start; gap: 10px; }
   .theme-toggle { min-width: 44px; width: 44px; padding-inline: 0; }
   .theme-toggle-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   h1 { font-size: 21px; }
