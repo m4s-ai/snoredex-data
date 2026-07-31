@@ -117,6 +117,16 @@ def collect_vocabularies() -> dict[str, list[str]]:
     }
 
 
+def described(description: str) -> list[str]:
+    """Emit `description:` only when there is one.
+
+    GitHub validates issue forms against a schema and rejects the *whole file* when any attribute
+    fails, falling back to a blank issue with no indication of why. An empty `description: ""` is
+    both meaningless and a validation risk, so absent beats blank.
+    """
+    return [f"      description: {yaml_quote(description)}"] if description.strip() else []
+
+
 def dropdown(field_id: str, label: str, description: str, options: list[str],
              required: bool = False) -> list[str]:
     lines = [
@@ -124,7 +134,7 @@ def dropdown(field_id: str, label: str, description: str, options: list[str],
         f"    id: {field_id}",
         "    attributes:",
         f"      label: {yaml_quote(label)}",
-        f"      description: {yaml_quote(description)}",
+        *described(description),
         "      options:",
     ]
     lines += [f"        - {yaml_quote(option)}" for option in options]
@@ -140,7 +150,7 @@ def checkboxes(field_id: str, label: str, description: str,
         f"    id: {field_id}",
         "    attributes:",
         f"      label: {yaml_quote(label)}",
-        f"      description: {yaml_quote(description)}",
+        *described(description),
         "      options:",
     ]
     for text, required in options:
@@ -157,7 +167,7 @@ def text_field(field_id: str, label: str, description: str, placeholder: str = "
         f"    id: {field_id}",
         "    attributes:",
         f"      label: {yaml_quote(label)}",
-        f"      description: {yaml_quote(description)}",
+        *described(description),
     ]
     if placeholder:
         lines.append(f"      placeholder: {yaml_quote(placeholder)}")

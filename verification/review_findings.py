@@ -956,6 +956,65 @@ if form_path.exists():
           or "gap in that source" in form,
           "the form must ask for evidence and state that an absence is not a finding")
 
+    # GitHub validates the form against its own schema and rejects the whole file when any
+    # attribute fails, silently serving a blank issue instead. Nothing here could see that: the
+    # form existed, was current, and every link pointed at it, so T1-T4 all passed while the
+    # correction loop was dead in the browser. An empty `description: ""` was the actual cause.
+    schema_problems: list[str] = []
+    yaml_available = True
+    try:
+        import yaml  # type: ignore
+
+        form_doc = yaml.safe_load(form)
+    except ImportError:
+        # Never pass silently. A check that quietly does nothing is how the empty attribute
+        # survived in the first place.
+        form_doc, yaml_available = None, False
+        schema_problems = ["PyYAML is not installed, so the form could not be validated"]
+    except yaml.YAMLError as error:  # type: ignore[name-defined]
+        form_doc, schema_problems = None, [f"form is not valid YAML: {error}"]
+
+    if form_doc is not None:
+        for key in ("name", "description", "body"):
+            if not form_doc.get(key):
+                schema_problems.append(f"top-level {key!r} is missing or empty")
+        allowed_types = {"markdown", "input", "textarea", "dropdown", "checkboxes"}
+        for index, element in enumerate(form_doc.get("body") or []):
+            kind = element.get("type")
+            attributes = element.get("attributes") or {}
+            where = f"body[{index}] ({kind}/{element.get('id', 'no-id')})"
+            if kind not in allowed_types:
+                schema_problems.append(f"{where}: unsupported type")
+            # An attribute present but blank is what GitHub rejects, so blank is worse than absent.
+            for name, value in attributes.items():
+                if isinstance(value, str) and not value.strip():
+                    schema_problems.append(f"{where}: attribute {name!r} is present but empty")
+            if kind == "markdown" and (element.get("id") or element.get("validations")):
+                schema_problems.append(f"{where}: markdown takes neither id nor validations")
+            if kind == "dropdown":
+                options = attributes.get("options") or []
+                if not options:
+                    schema_problems.append(f"{where}: dropdown has no options")
+                if len(options) != len(set(options)):
+                    schema_problems.append(f"{where}: dropdown has duplicate options")
+                if any(not str(option).strip() for option in options):
+                    schema_problems.append(f"{where}: dropdown has an empty option")
+            if kind == "checkboxes":
+                for option in attributes.get("options") or []:
+                    if not (option or {}).get("label", "").strip():
+                        schema_problems.append(f"{where}: checkbox option without a label")
+            if kind in {"input", "textarea", "dropdown", "checkboxes"}:
+                if not attributes.get("label", "").strip():
+                    schema_problems.append(f"{where}: missing label")
+                if not element.get("id"):
+                    schema_problems.append(f"{where}: missing id, so it cannot be prefilled")
+
+    check("T7", "Correction form satisfies GitHub's issue-form schema",
+          "FAIL" if yaml_available else "INFO",
+          not schema_problems,
+          f"{len(schema_problems)} violations; GitHub rejects the whole form and serves a blank "
+          f"issue instead: {schema_problems[:4]}")
+
     # Correction links must reach the form with identity attached.
     index_html = (ROOT / "index.html")
     if index_html.exists():
