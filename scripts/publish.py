@@ -54,6 +54,8 @@ FILES = [
     "verification/FINISH_REVIEW.csv",
     "verification/source_registry.json",
     "verification/SOURCES.md",
+    "verification/bulbapedia_release_dates.json",
+    "verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md",
     "verification/finish_units.json",
     "verification/units.json",
     "verification/CONTRADICTED.json",

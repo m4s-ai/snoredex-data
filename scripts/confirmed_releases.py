@@ -2,15 +2,18 @@
 """Build a chronological list of every card-variant with its CONFIRMED languages.
 
 Date sources, in precedence order:
-  1. artists_pokemontcgio.json releaseDate (exact, English-market sets)
+  1. Reviewed Bulbapedia expansion/product release fields in
+     verification/bulbapedia_release_dates.json. One article commonly carries both English and
+     Japanese dates, so the reviewed record identifies the matching field as well as the page.
   2. DATES table below - dates verified during the verification sessions
      (official DB entries, Bulbapedia infobox release fields, campaign dates)
-  3. Approximate dates carry exact=False and render as "~YYYY".
+  3. artists_pokemontcg.io releaseDate (English-market fallback)
+  4. Approximate dates carry exact=False and render as "~YYYY".
 Outputs: analysis_confirmed_releases.json + .csv (the HTML page is built by scripts/site.py)
 """
 import json, io, html, os, re
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 
 B = Path(__file__).resolve().parent.parent
 cards = json.load(io.open(os.path.join(B, "snorlax_cards.json"), encoding="utf-8"))["cards"]
@@ -24,6 +27,14 @@ finish_counts = finish_document["meta"]["counts"]
 finish_lookup = {
     (u["setCode"], str(u.get("number") or ""), u["language"]): u for u in finish_units
 }
+bulbapedia_document = json.load(
+    io.open(os.path.join(B, "verification", "bulbapedia_release_dates.json"), encoding="utf-8")
+)
+bulbapedia_dates = {record["setCode"]: record for record in bulbapedia_document["records"]}
+
+
+def bulbapedia_url(page):
+    return "https://bulbapedia.bulbagarden.net/wiki/" + quote(page.replace(" ", "_"))
 
 # --- 1. exact EN set dates from pokemontcg.io ---
 en_dates = {}
@@ -141,14 +152,25 @@ DATES = {
 
 def get_date(c):
     num = c.get("number") or ""
-    for key in ((c["setCode"], num), c["setCode"]):
-        if key in DATES:
-            d, exact = DATES[key]
-            return d, exact
+    specific = (c["setCode"], num)
+    if specific in DATES:
+        d, exact = DATES[specific]
+        return d, exact, None
+    sourced = bulbapedia_dates.get(c["setCode"])
+    if sourced:
+        return sourced["date"], True, {
+            "provider": "Bulbapedia",
+            "url": bulbapedia_url(sourced["page"]),
+            "page": sourced["page"],
+            "field": sourced["field"],
+        }
+    if c["setCode"] in DATES:
+        d, exact = DATES[c["setCode"]]
+        return d, exact, None
     en = EN_NAME_MAP.get(c["setName"])
     if en and en in en_dates:
-        return en_dates[en], True
-    return ("9999", False)
+        return en_dates[en], True, None
+    return ("9999", False, None)
 
 # --- collect confirmed languages per card-variant ---
 conf = {}
@@ -175,10 +197,10 @@ for c in cards:
     if not langs:
         skipped.append(key)
         continue
-    d, exact = get_date(c)
+    d, exact, date_source = get_date(c)
     ed = c.get("editions") or {}
     base = {
-        "date": d, "dateExact": exact,
+        "date": d, "dateExact": exact, "dateSource": date_source,
         "name": c["name"], "setCode": c["setCode"], "number": c.get("number"),
         "setName": c["setName"], "variant": vt,
         "variantName": c.get("variantName"), "rarity": c.get("rarity"),
@@ -255,10 +277,10 @@ if _dupe_ids:
 
 rows.sort(key=lambda r: (r["dateSort"], r["setName"], str(r["number"]), r["variant"], r["edord"]))
 
-json.dump({"generated": "2026-07-23",
-           "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value; dateApproximate says the value is not trusted beyond the year and is displayed as ~YYYY; dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
+json.dump({"generated": "2026-07-31",
+           "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
            "variants": rows},
-          io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8"),
+          io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8", newline="\n"),
           ensure_ascii=False, indent=1)
 
 # --- shared formatting ---
@@ -285,7 +307,7 @@ fe_langs = sum(len(r["confirmedLanguages"]) for r in rows if r["edition"] == "1s
 import csv
 with io.open(os.path.join(B, "analysis_confirmed_releases.csv"), "w", encoding="utf-8", newline="") as f:
     w = csv.writer(f, delimiter=";", lineterminator="\n")
-    w.writerow(["#","Release","Date exact","Card","Set code","Number","Edition","Variant","Variant name",
+    w.writerow(["#","Release","Date exact","Release source","Card","Set code","Number","Edition","Variant","Variant name",
                 "Set / expansion","Rarity","Artist","Known finishes","Finish evidence","Langs"] + LANG_COLS + ["Cardmarket URL"])
     for i, r in enumerate(rows, 1):
         have = {LANG_CODE[l] for l in r["confirmedLanguages"]}
@@ -299,6 +321,7 @@ with io.open(os.path.join(B, "analysis_confirmed_releases.csv"), "w", encoding="
         ]
         finish_evidence = sorted({item.get("status", "pending") for item in finish_rows})
         w.writerow([i, fmt_date(r), "yes" if r["dateExact"] else "approx",
+                    (r.get("dateSource") or {}).get("url", ""),
                     r["name"], r["setCode"], r["number"] or "", r["edition"], r["variant"],
                     r.get("variantName") or "", r["setName"], r.get("rarity") or "",
                     r.get("artist") or "", ", ".join(known_finishes), ", ".join(finish_evidence),

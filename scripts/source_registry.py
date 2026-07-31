@@ -122,7 +122,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "supportsAbsence": False,
         "usedFor": ["language", "edition", "date", "finish"],
         "attribution": "Content from Bulbapedia, licensed CC BY-NC-SA 2.5.",
-        "notes": "Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
+        "notes": "Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
     },
     {
         "providerId": "tcgcsv",
@@ -402,6 +402,9 @@ def main() -> int:
     overrides = read_json(ROOT / "verification" / "finish_overrides.json")
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     artists = read_json(ROOT / "artists_pokemontcgio.json")
+    bulbapedia_dates = read_json(
+        ROOT / "verification" / "bulbapedia_release_dates.json"
+    )
 
     evidence: dict[str, dict[str, Any]] = {}
     unresolved: list[str] = []
@@ -467,6 +470,12 @@ def main() -> int:
         if entry.get("releaseDate"):
             record("https://api.pokemontcg.io/v2/cards", "pokemontcg.io v2 API", "date",
                    f"{entry.get('setName')} {entry.get('number')}".strip())
+
+    for entry in bulbapedia_dates["records"]:
+        page = entry["page"].replace(" ", "_")
+        record(f"https://bulbapedia.bulbagarden.net/wiki/{page}",
+               "Bulbapedia expansion/product release field", "date",
+               entry["setCode"], bulbapedia_dates["generated"])
 
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):

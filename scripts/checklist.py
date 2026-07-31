@@ -49,7 +49,7 @@ FINISH_FAMILY = {
     "mirror-holo": "reverse-holo",
     "unresolved": "unresolved",
 }
-SCHEMA_VERSION = "1.3.0"
+SCHEMA_VERSION = "1.4.0"
 
 
 def read_json(path: Path) -> Any:
@@ -338,11 +338,13 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
         release_date_precision = release_precision(printing_release)
         release_approximate = bool(printing.get("releaseApproximate", False))
         release_sort_value = release_sort(printing_release)
+        release_date_source = printing.get("releaseDateSource")
     else:
         release_date = (row or {}).get("date")
         release_date_precision = (row or {}).get("datePrecision")
         release_approximate = (row or {}).get("dateApproximate")
         release_sort_value = (row or {}).get("dateSort") or "9999-01-01"
+        release_date_source = (row or {}).get("dateSource")
 
     finish = printing["finish"] if printing else "unresolved"
     finish_family = FINISH_FAMILY[finish]
@@ -410,6 +412,7 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
         "releaseDatePrecision": release_date_precision,
         "releaseApproximate": release_approximate,
         "releaseSort": release_sort_value,
+        "releaseDateSource": release_date_source,
         "rowId": (row or {}).get("rowId"),
         "finishUnitId": unit["finishUnitId"],
         "printingId": printing["printingId"] if printing else None,

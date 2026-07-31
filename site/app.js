@@ -385,10 +385,16 @@
       : "";
     const patternBadges = row.patterns.map((pattern) =>
       '<span class="treatment">' + escapeHTML(patternLabel(pattern)) + "</span>").join("");
+    const release = row.dateSource && row.dateSource.url
+      ? '<a class="release-source" href="' + escapeHTML(row.dateSource.url) +
+        '" target="_blank" rel="noopener" title="' +
+        escapeHTML("Source: " + row.dateSource.page + " (" + row.dateSource.field + ")") + '">' +
+        escapeHTML(row.dateDisplay) + "</a>"
+      : escapeHTML(row.dateDisplay);
     return (
       "<tr>" +
       '<td class="img">' + image + "</td>" +
-      "<td>" + escapeHTML(row.dateDisplay) + "</td>" +
+      "<td>" + release + "</td>" +
       "<td>" + escapeHTML(row.name) + "</td>" +
       "<td>" + escapeHTML(row.setCode) + "</td>" +
       clippedCell(row.setName, "col-expansion") +

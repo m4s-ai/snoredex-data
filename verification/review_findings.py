@@ -65,6 +65,7 @@ finish_units = finish_doc["units"]
 dataset = load("snorlax_cards.json")
 cards = dataset["cards"]
 releases = load("analysis_confirmed_releases.json")["variants"]
+bulbapedia_release_dates = load("verification/bulbapedia_release_dates.json")["records"]
 finish_analysis = load("analysis_finishes.json")
 
 finish_by_id = {unit["finishUnitId"]: unit for unit in finish_units}
@@ -412,6 +413,49 @@ check(
     f"`date` mixes YYYY, YYYY-MM and YYYY-MM-DD in one string field "
     f"({dict(Counter(precision(r.get('date')) for r in releases))}). #10 requires typed release "
     f"sorting that retains approximate-date display; no normalized sort key exists.",
+)
+
+bulbapedia_codes = [record["setCode"] for record in bulbapedia_release_dates]
+malformed_bulbapedia_dates = [
+    (record.get("setCode"), record.get("date"))
+    for record in bulbapedia_release_dates
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(record.get("date") or ""))
+]
+check(
+    "F7.4",
+    "Reviewed Bulbapedia release records have unique set codes and full ISO dates",
+    "FAIL",
+    len(bulbapedia_codes) == len(set(bulbapedia_codes)) and not malformed_bulbapedia_dates,
+    f"duplicate codes={sorted(code for code, count in Counter(bulbapedia_codes).items() if count > 1)}; "
+    f"malformed dates={malformed_bulbapedia_dates[:4]}",
+)
+
+release_rows_by_code: dict[str, list[dict[str, Any]]] = {}
+for release_row in releases:
+    release_rows_by_code.setdefault(release_row["setCode"], []).append(release_row)
+bulbapedia_projection_drift = []
+for source_record in bulbapedia_release_dates:
+    for release_row in release_rows_by_code.get(source_record["setCode"], []):
+        date_source = release_row.get("dateSource") or {}
+        if (
+            release_row.get("date") != source_record["date"]
+            or release_row.get("dateApproximate")
+            or date_source.get("provider") != "Bulbapedia"
+            or date_source.get("page") != source_record["page"]
+            or date_source.get("field") != source_record["field"]
+            or not str(date_source.get("url") or "").startswith(
+                "https://bulbapedia.bulbagarden.net/wiki/"
+            )
+        ):
+            bulbapedia_projection_drift.append((source_record["setCode"], release_row.get("rowId")))
+check(
+    "F7.5",
+    "Reviewed Bulbapedia dates and source fields reach every generated release row",
+    "FAIL",
+    not bulbapedia_projection_drift
+    and set(bulbapedia_codes).issubset(release_rows_by_code),
+    f"projection drift={bulbapedia_projection_drift[:5]}; "
+    f"missing codes={sorted(set(bulbapedia_codes) - set(release_rows_by_code))}",
 )
 
 

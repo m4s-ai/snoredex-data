@@ -1,10 +1,16 @@
 {
- "generated": "2026-07-23",
- "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value; dateApproximate says the value is not trusted beyond the year and is displayed as ~YYYY; dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
+ "generated": "2026-07-31",
+ "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
-   "date": "1997-03",
-   "dateExact": false,
+   "date": "1997-03-05",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_%28TCG%29",
+    "page": "Jungle (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "PJU",
    "number": "",
@@ -107,13 +113,14 @@
     "Japanese"
    ],
    "rowId": "pju-nonumber-base-none",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "1997-03-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "1997-03-05"
   },
   {
    "date": "1997-12",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hungry Snorlax",
    "setCode": "UNP",
    "number": "",
@@ -208,6 +215,7 @@
   {
    "date": "1998-03-23",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "EXS",
    "number": "",
@@ -306,117 +314,9 @@
    "dateSort": "1998-03-23"
   },
   {
-   "date": "1999",
-   "dateExact": false,
-   "name": "Rocket's Snorlax",
-   "setCode": "G2",
-   "number": "",
-   "setName": "Challenge from the Darkness",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Challenge-from-the-Darkness/Rockets-Snorlax-CFTD",
-   "image": "images/G2__Rocket_s_Snorlax_605388.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0132",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0132-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0133",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0134",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese"
-   ],
-   "rowId": "g2-nonumber-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "1999-01-01"
-  },
-  {
    "date": "1999-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "JU",
    "number": "11",
@@ -716,6 +616,7 @@
   {
    "date": "1999-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "JU",
    "number": "11",
@@ -1015,6 +916,7 @@
   {
    "date": "1999-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "JU",
    "number": "27",
@@ -1314,6 +1216,7 @@
   {
    "date": "1999-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "JU",
    "number": "27",
@@ -1611,8 +1514,124 @@
    "dateSort": "1999-06-16"
   },
   {
+   "date": "1999-06-25",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Gym_Challenge_%28TCG%29",
+    "page": "Gym Challenge (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Rocket's Snorlax",
+   "setCode": "G2",
+   "number": "",
+   "setName": "Challenge from the Darkness",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Challenge-from-the-Darkness/Rockets-Snorlax-CFTD",
+   "image": "images/G2__Rocket_s_Snorlax_605388.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0132",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0132-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0133",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0134",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese"
+   ],
+   "rowId": "g2-nonumber-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "1999-06-25"
+  },
+  {
    "date": "2000-02-24",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "B2",
    "number": "30",
@@ -1678,6 +1697,7 @@
   {
    "date": "2000-08-14",
    "dateExact": true,
+   "dateSource": null,
    "name": "Rocket's Snorlax",
    "setCode": "GH",
    "number": "33",
@@ -1743,6 +1763,7 @@
   {
    "date": "2000-08-14",
    "dateExact": true,
+   "dateSource": null,
    "name": "Rocket's Snorlax",
    "setCode": "GH",
    "number": "33",
@@ -1806,226 +1827,9 @@
    "dateSort": "2000-08-14"
   },
   {
-   "date": "2002",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "EC5",
-   "number": "062",
-   "setName": "Mysterious Mountains",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Common",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
-   "image": "images/EC5_062_Snorlax_654062.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0104",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0104-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0105",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0106",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
-   },
-   "edition": "1st Edition",
-   "edord": 0,
-   "confirmedLanguages": [
-    "Japanese"
-   ],
-   "rowId": "ec5-062-base-1e",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2002-01-01"
-  },
-  {
-   "date": "2002",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "EC5",
-   "number": "062",
-   "setName": "Mysterious Mountains",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Common",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
-   "image": "images/EC5_062_Snorlax_654062.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0104",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0104-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0105",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0106",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
-   },
-   "edition": "Unlimited",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese"
-   ],
-   "rowId": "ec5-062-base-unl",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2002-01-01"
-  },
-  {
    "date": "2002-05-24",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "LC",
    "number": "64",
@@ -2103,6 +1907,7 @@
   {
    "date": "2002-08",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "WP",
    "number": "49",
@@ -2298,8 +2103,239 @@
    "dateSort": "2002-08-01"
   },
   {
+   "date": "2002-10-04",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Skyridge_%28TCG%29",
+    "page": "Skyridge (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Snorlax",
+   "setCode": "EC5",
+   "number": "062",
+   "setName": "Mysterious Mountains",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Common",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
+   "image": "images/EC5_062_Snorlax_654062.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0104",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0104-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0105",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0106",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only"
+   },
+   "edition": "1st Edition",
+   "edord": 0,
+   "confirmedLanguages": [
+    "Japanese"
+   ],
+   "rowId": "ec5-062-base-1e",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2002-10-04"
+  },
+  {
+   "date": "2002-10-04",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Skyridge_%28TCG%29",
+    "page": "Skyridge (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Snorlax",
+   "setCode": "EC5",
+   "number": "062",
+   "setName": "Mysterious Mountains",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Common",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
+   "image": "images/EC5_062_Snorlax_654062.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0104",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0104-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0105",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0106",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only"
+   },
+   "edition": "Unlimited",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese"
+   ],
+   "rowId": "ec5-062-base-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2002-10-04"
+  },
+  {
    "date": "2003-05-12",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SK",
    "number": "100",
@@ -2477,8 +2513,14 @@
    "dateSort": "2003-05-12"
   },
   {
-   "date": "2004",
-   "dateExact": false,
+   "date": "2004-04-09",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_FireRed_%26_LeafGreen_%28TCG%29",
+    "page": "EX FireRed & LeafGreen (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "PCG1",
    "number": "074",
@@ -2549,13 +2591,19 @@
     "Japanese"
    ],
    "rowId": "pcg1-074-base-1e",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2004-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2004-04-09"
   },
   {
-   "date": "2004",
-   "dateExact": false,
+   "date": "2004-04-09",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_FireRed_%26_LeafGreen_%28TCG%29",
+    "page": "EX FireRed & LeafGreen (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "PCG1",
    "number": "074",
@@ -2626,143 +2674,19 @@
     "Japanese"
    ],
    "rowId": "pcg1-074-base-unl",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2004-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2004-04-09"
   },
   {
-   "date": "2004",
-   "dateExact": false,
-   "name": "Rocket's Snorlax ex",
-   "setCode": "PCG3",
-   "number": "062",
-   "setName": "Rocket Gang Strikes Back",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Ultra Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rocket-Gang-Strikes-Back/Rockets-Snorlax-ex-PCG3062",
-   "image": "images/PCG3_062_Rocket_s_Snorlax_ex_783415.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "confirmed",
-     "finishUnitId": "F0247",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0247-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
-   },
-   "edition": "1st Edition",
-   "edord": 0,
-   "confirmedLanguages": [
-    "Japanese"
-   ],
-   "rowId": "pcg3-062-base-1e",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2004-01-01"
-  },
-  {
-   "date": "2004",
-   "dateExact": false,
-   "name": "Rocket's Snorlax ex",
-   "setCode": "PCG3",
-   "number": "062",
-   "setName": "Rocket Gang Strikes Back",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Ultra Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rocket-Gang-Strikes-Back/Rockets-Snorlax-ex-PCG3062",
-   "image": "images/PCG3_062_Rocket_s_Snorlax_ex_783415.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "confirmed",
-     "finishUnitId": "F0247",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0247-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
-   },
-   "edition": "Unlimited",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese"
-   ],
-   "rowId": "pcg3-062-base-unl",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2004-01-01"
-  },
-  {
-   "date": "2004-09-01",
+   "date": "2004-08-30",
    "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_FireRed_%26_LeafGreen_%28TCG%29",
+    "page": "EX FireRed & LeafGreen (TCG)",
+    "field": "enrelease"
+   },
    "name": "Snorlax",
    "setCode": "FL",
    "number": "15",
@@ -2988,11 +2912,159 @@
    "rowId": "fl-15-base-none",
    "datePrecision": "day",
    "dateApproximate": false,
-   "dateSort": "2004-09-01"
+   "dateSort": "2004-08-30"
   },
   {
-   "date": "2004-11-01",
+   "date": "2004-10-15",
    "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_Team_Rocket_Returns_%28TCG%29",
+    "page": "EX Team Rocket Returns (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Rocket's Snorlax ex",
+   "setCode": "PCG3",
+   "number": "062",
+   "setName": "Rocket Gang Strikes Back",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Ultra Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rocket-Gang-Strikes-Back/Rockets-Snorlax-ex-PCG3062",
+   "image": "images/PCG3_062_Rocket_s_Snorlax_ex_783415.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "confirmed",
+     "finishUnitId": "F0247",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0247-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only"
+   },
+   "edition": "1st Edition",
+   "edord": 0,
+   "confirmedLanguages": [
+    "Japanese"
+   ],
+   "rowId": "pcg3-062-base-1e",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2004-10-15"
+  },
+  {
+   "date": "2004-10-15",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_Team_Rocket_Returns_%28TCG%29",
+    "page": "EX Team Rocket Returns (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Rocket's Snorlax ex",
+   "setCode": "PCG3",
+   "number": "062",
+   "setName": "Rocket Gang Strikes Back",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Ultra Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rocket-Gang-Strikes-Back/Rockets-Snorlax-ex-PCG3062",
+   "image": "images/PCG3_062_Rocket_s_Snorlax_ex_783415.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "confirmed",
+     "finishUnitId": "F0247",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0247-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only"
+   },
+   "edition": "Unlimited",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese"
+   ],
+   "rowId": "pcg3-062-base-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2004-10-15"
+  },
+  {
+   "date": "2004-11-08",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_Team_Rocket_Returns_%28TCG%29",
+    "page": "EX Team Rocket Returns (TCG)",
+    "field": "enrelease"
+   },
    "name": "Rocket's Snorlax ex",
    "setCode": "TRR",
    "number": "104",
@@ -3077,11 +3149,17 @@
    "rowId": "trr-104-base-none",
    "datePrecision": "day",
    "dateApproximate": false,
-   "dateSort": "2004-11-01"
+   "dateSort": "2004-11-08"
   },
   {
-   "date": "2006",
-   "dateExact": false,
+   "date": "2006-06-29",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_Dragon_Frontiers_%28TCG%29",
+    "page": "EX Dragon Frontiers (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax δ Delta Species",
    "setCode": "PCG9",
    "number": "001",
@@ -3140,13 +3218,19 @@
     "Japanese"
    ],
    "rowId": "pcg9-001-base-1e",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2006-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2006-06-29"
   },
   {
-   "date": "2006",
-   "dateExact": false,
+   "date": "2006-06-29",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_Dragon_Frontiers_%28TCG%29",
+    "page": "EX Dragon Frontiers (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax δ Delta Species",
    "setCode": "PCG9",
    "number": "001",
@@ -3205,231 +3289,19 @@
     "Japanese"
    ],
    "rowId": "pcg9-001-base-unl",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2006-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2006-06-29"
   },
   {
-   "date": "2006-10",
-   "dateExact": false,
-   "name": "Snorlax Lv.35",
-   "setCode": "DP1",
-   "number": "",
-   "setName": "Space-Time Creation",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Uncommon",
-   "artist": "Ken Sugimori",
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
-   "image": "images/DP1__Snorlax_Lv_35_699402.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0101",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0101-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0102",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0103",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
-   },
-   "edition": "1st Edition",
-   "edord": 0,
-   "confirmedLanguages": [
-    "Japanese"
-   ],
-   "rowId": "dp1-nonumber-base-1e",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2006-10-01"
-  },
-  {
-   "date": "2006-10",
-   "dateExact": false,
-   "name": "Snorlax Lv.35",
-   "setCode": "DP1",
-   "number": "",
-   "setName": "Space-Time Creation",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Uncommon",
-   "artist": "Ken Sugimori",
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
-   "image": "images/DP1__Snorlax_Lv_35_699402.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0101",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0101-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0102",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0103",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
-   },
-   "edition": "Unlimited",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese"
-   ],
-   "rowId": "dp1-nonumber-base-unl",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2006-10-01"
-  },
-  {
-   "date": "2006-11-01",
+   "date": "2006-11-08",
    "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/EX_Dragon_Frontiers_%28TCG%29",
+    "page": "EX Dragon Frontiers (TCG)",
+    "field": "enrelease"
+   },
    "name": "Snorlax δ Delta Species",
    "setCode": "DF",
    "number": "10",
@@ -3679,11 +3551,247 @@
    "rowId": "df-10-base-none",
    "datePrecision": "day",
    "dateApproximate": false,
-   "dateSort": "2006-11-01"
+   "dateSort": "2006-11-08"
   },
   {
-   "date": "2007-05-01",
+   "date": "2006-11-30",
    "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Diamond_%26_Pearl_%28TCG%29",
+    "page": "Diamond & Pearl (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Snorlax Lv.35",
+   "setCode": "DP1",
+   "number": "",
+   "setName": "Space-Time Creation",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Uncommon",
+   "artist": "Ken Sugimori",
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+   "image": "images/DP1__Snorlax_Lv_35_699402.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0101",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0101-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0102",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0103",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only"
+   },
+   "edition": "1st Edition",
+   "edord": 0,
+   "confirmedLanguages": [
+    "Japanese"
+   ],
+   "rowId": "dp1-nonumber-base-1e",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2006-11-30"
+  },
+  {
+   "date": "2006-11-30",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Diamond_%26_Pearl_%28TCG%29",
+    "page": "Diamond & Pearl (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Snorlax Lv.35",
+   "setCode": "DP1",
+   "number": "",
+   "setName": "Space-Time Creation",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Uncommon",
+   "artist": "Ken Sugimori",
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+   "image": "images/DP1__Snorlax_Lv_35_699402.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0101",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0101-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0102",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0103",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only"
+   },
+   "edition": "Unlimited",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese"
+   ],
+   "rowId": "dp1-nonumber-base-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2006-11-30"
+  },
+  {
+   "date": "2007-05-23",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Diamond_%26_Pearl_%28TCG%29",
+    "page": "Diamond & Pearl (TCG)",
+    "field": "enrelease"
+   },
    "name": "Snorlax Lv.35",
    "setCode": "DP",
    "number": "37",
@@ -4062,11 +4170,12 @@
    "rowId": "dp-37-base-none",
    "datePrecision": "day",
    "dateApproximate": false,
-   "dateSort": "2007-05-01"
+   "dateSort": "2007-05-23"
   },
   {
    "date": "2008-10",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax Lv.37",
    "setCode": "DP-P",
    "number": "126",
@@ -4161,6 +4270,7 @@
   {
    "date": "2008-12",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax Lv.X",
    "setCode": "DP-P",
    "number": "127",
@@ -4255,8 +4365,14 @@
    "dateSort": "2008-12-01"
   },
   {
-   "date": "2009-03",
-   "dateExact": false,
+   "date": "2008-12-26",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Rising_Rivals_%28TCG%29",
+    "page": "Rising Rivals (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax Lv.40",
    "setCode": "Pt2",
    "number": "070",
@@ -4327,13 +4443,19 @@
     "Japanese"
    ],
    "rowId": "pt2-070-base-1e",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2009-03-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2008-12-26"
   },
   {
-   "date": "2009-03",
-   "dateExact": false,
+   "date": "2008-12-26",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Rising_Rivals_%28TCG%29",
+    "page": "Rising Rivals (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax Lv.40",
    "setCode": "Pt2",
    "number": "070",
@@ -4404,13 +4526,14 @@
     "Japanese"
    ],
    "rowId": "pt2-070-base-unl",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2009-03-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2008-12-26"
   },
   {
    "date": "2009-05-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax LV.X",
    "setCode": "RR",
    "number": "111",
@@ -4629,6 +4752,7 @@
   {
    "date": "2009-05-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax Lv.37",
    "setCode": "RR",
    "number": "33",
@@ -4860,6 +4984,7 @@
   {
    "date": "2009-05-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax Lv.37",
    "setCode": "RR",
    "number": "33",
@@ -5012,6 +5137,7 @@
   {
    "date": "2009-05-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax Lv.40",
    "setCode": "RR",
    "number": "81",
@@ -5240,8 +5366,14 @@
    "dateSort": "2009-05-16"
   },
   {
-   "date": "2010",
-   "dateExact": false,
+   "date": "2010-04-16",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Lost_Link_%28TCG%29",
+    "page": "Lost Link (TCG)",
+    "field": "date"
+   },
    "name": "Snorlax",
    "setCode": "LL",
    "number": "028",
@@ -5344,13 +5476,14 @@
     "Japanese"
    ],
    "rowId": "ll-028-base-unl",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2010-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2010-04-16"
   },
   {
    "date": "2011-02-09",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CL",
    "number": "33",
@@ -5601,6 +5734,7 @@
   {
    "date": "2011-02-09",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CL",
    "number": "33",
@@ -5775,8 +5909,14 @@
    "dateSort": "2011-02-09"
   },
   {
-   "date": "2012",
-   "dateExact": false,
+   "date": "2012-04-20",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/National_Beginning_Set_%28TCG%29",
+    "page": "National Beginning Set (TCG)",
+    "field": "release"
+   },
    "name": "Snorlax",
    "setCode": "HSZ",
    "number": "027",
@@ -5864,13 +6004,19 @@
     "Japanese"
    ],
    "rowId": "hsz-027-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2012-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2012-04-20"
   },
   {
-   "date": "2012",
-   "dateExact": false,
+   "date": "2012-09-14",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Plasma_Storm_%28TCG%29",
+    "page": "Plasma Storm (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "BW7",
    "number": "055",
@@ -5989,13 +6135,19 @@
     "Japanese"
    ],
    "rowId": "bw7-055-base-1e",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2012-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2012-09-14"
   },
   {
-   "date": "2012",
-   "dateExact": false,
+   "date": "2012-09-14",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Plasma_Storm_%28TCG%29",
+    "page": "Plasma Storm (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "BW7",
    "number": "055",
@@ -6115,13 +6267,14 @@
     "Korean"
    ],
    "rowId": "bw7-055-base-unl",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2012-01-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2012-09-14"
   },
   {
    "date": "2012-11-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "BCR",
    "number": "109",
@@ -6454,6 +6607,7 @@
   {
    "date": "2013-02",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "BW-P",
    "number": "207",
@@ -6563,6 +6717,7 @@
   {
    "date": "2013-02-06",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PLS",
    "number": "101",
@@ -6895,6 +7050,109 @@
   {
    "date": "2013-11-08",
    "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_%28TCG%29",
+    "page": "Kalos Starter Set (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Snorlax",
+   "setCode": "HXY",
+   "number": "026",
+   "setName": "XY Beginning Set",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": "Naoki Saito",
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Beginning-Set/Snorlax",
+   "image": "images/HXY_026_Snorlax_564579.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0152",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0153",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0154",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "pending",
+    "Korean": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese",
+    "Korean"
+   ],
+   "rowId": "hxy-026-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2013-11-08"
+  },
+  {
+   "date": "2013-11-08",
+   "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "KSS",
    "number": "26",
@@ -7496,104 +7754,14 @@
    "dateSort": "2013-11-08"
   },
   {
-   "date": "2013-12",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "HXY",
-   "number": "026",
-   "setName": "XY Beginning Set",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": "Naoki Saito",
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Beginning-Set/Snorlax",
-   "image": "images/HXY_026_Snorlax_564579.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0152",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0153",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0154",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "pending",
-    "Korean": "pending"
+   "date": "2014-03-15",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Flashfire_%28TCG%29",
+    "page": "Flashfire (TCG)",
+    "field": "jarelease"
    },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese",
-    "Korean"
-   ],
-   "rowId": "hxy-026-base-none",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2013-12-01"
-  },
-  {
-   "date": "2014-03",
-   "dateExact": false,
    "name": "Snorlax",
    "setCode": "XY2",
    "number": "066",
@@ -7712,13 +7880,19 @@
     "Japanese"
    ],
    "rowId": "xy2-066-base-1e",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2014-03-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2014-03-15"
   },
   {
-   "date": "2014-03",
-   "dateExact": false,
+   "date": "2014-03-15",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Flashfire_%28TCG%29",
+    "page": "Flashfire (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "XY2",
    "number": "066",
@@ -7838,13 +8012,14 @@
     "Korean"
    ],
    "rowId": "xy2-066-base-unl",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2014-03-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2014-03-15"
   },
   {
    "date": "2014-05-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "FLF",
    "number": "80",
@@ -8228,6 +8403,7 @@
   {
    "date": "2014-05-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "FLF",
    "number": "80",
@@ -8463,6 +8639,7 @@
   {
    "date": "2015-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "XY-P",
    "number": "149",
@@ -8589,6 +8766,7 @@
   {
    "date": "2015-11-04",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "BKT",
    "number": "118",
@@ -8972,6 +9150,7 @@
   {
    "date": "2016-02-22",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "GEN",
    "number": "58",
@@ -9324,8 +9503,146 @@
    "dateSort": "2016-02-22"
   },
   {
-   "date": "2016-03",
-   "dateExact": false,
+   "date": "2016-02-27",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Generations_%28TCG%29",
+    "page": "Generations (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Snorlax",
+   "setCode": "20th",
+   "number": "047",
+   "setName": "BREAK Starter Pack",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": "Mitsuhiro Arita",
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAK-Starter-Pack/Snorlax-20th047",
+   "image": "images/20th_047_Snorlax_563078.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0002",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0002-P01",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0003",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0003-P01",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0004",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only",
+    "Korean": "positive-evidence-only"
+   },
+   "edition": "Unlimited",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese",
+    "Korean"
+   ],
+   "rowId": "20th-047-base-unl",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-02-27"
+  },
+  {
+   "date": "2016-03-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Fates_Collide_%28TCG%29",
+    "page": "Fates Collide (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "XY10",
    "number": "057",
@@ -9444,13 +9761,19 @@
     "Japanese"
    ],
    "rowId": "xy10-057-base-1e",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2016-03-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-03-18"
   },
   {
-   "date": "2016-03",
-   "dateExact": false,
+   "date": "2016-03-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Fates_Collide_%28TCG%29",
+    "page": "Fates Collide (TCG)",
+    "field": "jarelease"
+   },
    "name": "Snorlax",
    "setCode": "XY10",
    "number": "057",
@@ -9570,13 +9893,14 @@
     "Korean"
    ],
    "rowId": "xy10-057-base-unl",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2016-03-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2016-03-18"
   },
   {
    "date": "2016-05-02",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "FCO",
    "number": "77",
@@ -9929,134 +10253,9 @@
    "dateSort": "2016-05-02"
   },
   {
-   "date": "2016-09",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "20th",
-   "number": "047",
-   "setName": "BREAK Starter Pack",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": "Mitsuhiro Arita",
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAK-Starter-Pack/Snorlax-20th047",
-   "image": "images/20th_047_Snorlax_563078.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0002",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0002-P01",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0003",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0003-P01",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0004",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only",
-    "Korean": "positive-evidence-only"
-   },
-   "edition": "Unlimited",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese",
-    "Korean"
-   ],
-   "rowId": "20th-047-base-unl",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2016-09-01"
-  },
-  {
    "date": "2016-09-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "XY-P",
    "number": "261",
@@ -10166,6 +10365,7 @@
   {
    "date": "2016-12",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax GX",
    "setCode": "SM-P",
    "number": "1",
@@ -10240,6 +10440,7 @@
   {
    "date": "2016-12-14",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax GX",
    "setCode": "SM",
    "number": "05",
@@ -10501,6 +10702,7 @@
   {
    "date": "2016-12-14",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax GX",
    "setCode": "SM",
    "number": "05",
@@ -10762,6 +10964,7 @@
   {
    "date": "2016-12-14",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "XYPR",
    "number": "179",
@@ -10960,104 +11163,9 @@
    "dateSort": "2016-12-14"
   },
   {
-   "date": "2018",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "smL",
-   "number": "038",
-   "setName": "Sun & Moon Family Pokémon Card Game",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": "Akira Komayama",
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Family-Pokemon-Card-Game/Snorlax",
-   "image": "images/smL_038_Snorlax_564732.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0414",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0415",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "contradicted",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
-     },
-     "status": "not-applicable",
-     "finishUnitId": "F0416",
-     "productMappingStatus": "not-applicable",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "pending",
-    "Korean": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese",
-    "Korean"
-   ],
-   "rowId": "sml-038-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2018-01-01"
-  },
-  {
    "date": "2018-12",
    "dateExact": true,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "SM-P",
    "number": "297",
@@ -11132,6 +11240,7 @@
   {
    "date": "2018-12-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "sm9",
    "number": "066",
@@ -11228,6 +11337,7 @@
   {
    "date": "2018-12-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "sm9",
    "number": "106",
@@ -11324,6 +11434,7 @@
   {
    "date": "2018-12-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "sm9",
    "number": "115",
@@ -11420,6 +11531,7 @@
   {
    "date": "2019-02",
    "dateExact": false,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "SM",
    "number": "169",
@@ -11680,6 +11792,7 @@
   {
    "date": "2019-02-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "TEU",
    "number": "120",
@@ -11940,6 +12053,7 @@
   {
    "date": "2019-02-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "TEU",
    "number": "171",
@@ -12200,6 +12314,7 @@
   {
    "date": "2019-02-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Eevee & Snorlax GX",
    "setCode": "TEU",
    "number": "191",
@@ -12460,6 +12575,7 @@
   {
    "date": "2019-03-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sm10",
    "number": "076",
@@ -12620,8 +12736,111 @@
    "dateSort": "2019-03-01"
   },
   {
+   "date": "2019-03-15",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_Family_Pok%C3%A9mon_Card_Game_%28TCG%29",
+    "page": "Sun & Moon Family Pokémon Card Game (TCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "smL",
+   "number": "038",
+   "setName": "Sun & Moon Family Pokémon Card Game",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": "Akira Komayama",
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Family-Pokemon-Card-Game/Snorlax",
+   "image": "images/smL_038_Snorlax_564732.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0414",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0415",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "contradicted",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "unitFinishStatus": {
+      "non-holo": "not-applicable",
+      "holo": "not-applicable",
+      "reverse-holo": "not-applicable",
+      "mirror-holo": "not-applicable"
+     },
+     "status": "not-applicable",
+     "finishUnitId": "F0416",
+     "productMappingStatus": "not-applicable",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "pending",
+    "Korean": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese",
+    "Korean"
+   ],
+   "rowId": "sml-038-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2019-03-15"
+  },
+  {
    "date": "2019-05-03",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "UNB",
    "number": "158",
@@ -13026,6 +13245,7 @@
   {
    "date": "2019-08-23",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "HIF",
    "number": "50",
@@ -13358,6 +13578,7 @@
   {
    "date": "2019-11-29",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sA",
    "number": "10",
@@ -13452,6 +13673,7 @@
   {
    "date": "2019-12-06",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax V",
    "setCode": "s1H",
    "number": "45",
@@ -13548,6 +13770,7 @@
   {
    "date": "2019-12-06",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax VMAX",
    "setCode": "s1H",
    "number": "46",
@@ -13644,6 +13867,7 @@
   {
    "date": "2019-12-06",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax V",
    "setCode": "s1H",
    "number": "66",
@@ -13740,6 +13964,7 @@
   {
    "date": "2019-12-06",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax VMAX",
    "setCode": "s1H",
    "number": "70",
@@ -13836,6 +14061,7 @@
   {
    "date": "2020-02-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SSH",
    "number": "140",
@@ -14168,6 +14394,7 @@
   {
    "date": "2020-02-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax V",
    "setCode": "SSH",
    "number": "141",
@@ -14428,6 +14655,7 @@
   {
    "date": "2020-02-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax VMAX",
    "setCode": "SSH",
    "number": "142",
@@ -14678,6 +14906,7 @@
   {
    "date": "2020-02-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax VMAX",
    "setCode": "SSH",
    "number": "142",
@@ -14928,6 +15157,7 @@
   {
    "date": "2020-02-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax V",
    "setCode": "SSH",
    "number": "197",
@@ -15188,6 +15418,7 @@
   {
    "date": "2020-02-07",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax VMAX",
    "setCode": "SSH",
    "number": "206",
@@ -15448,6 +15679,7 @@
   {
    "date": "2020-03-06",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "s2",
    "number": "77",
@@ -15598,6 +15830,7 @@
   {
    "date": "2020-05-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "RCL",
    "number": "141",
@@ -15930,6 +16163,7 @@
   {
    "date": "2020-05",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SWSH",
    "number": "032",
@@ -16116,8 +16350,14 @@
    "dateSort": "2020-05-01"
   },
   {
-   "date": "2020-06",
+   "date": "2020-06-21",
    "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2020_%28TCG%29",
+    "page": "Battle Academy 2020 (TCG)",
+    "field": "release"
+   },
    "name": "Snorlax",
    "setCode": "BA20",
    "number": "MWT",
@@ -16301,13 +16541,14 @@
     "Italian"
    ],
    "rowId": "ba20-mwt-base-none",
-   "datePrecision": "month",
+   "datePrecision": "day",
    "dateApproximate": false,
-   "dateSort": "2020-06-01"
+   "dateSort": "2020-06-21"
   },
   {
    "date": "2020-09-18",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "s4",
    "number": "84",
@@ -16538,6 +16779,7 @@
   {
    "date": "2020-11",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SWSH",
    "number": "068",
@@ -16798,6 +17040,7 @@
   {
    "date": "2020-11-13",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "VIV",
    "number": "131",
@@ -17183,6 +17426,7 @@
   {
    "date": "2020-11-13",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "VIV",
    "number": "131",
@@ -17448,6 +17692,7 @@
   {
    "date": "2021-01-21",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "S-P",
    "number": "156",
@@ -17542,6 +17787,7 @@
   {
    "date": "2021-03-19",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "s5a",
    "number": "93",
@@ -17763,6 +18009,7 @@
   {
    "date": "2021-06-18",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CRE",
    "number": "224",
@@ -18023,6 +18270,7 @@
   {
    "date": "2021-07",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SWSH",
    "number": "119",
@@ -18283,6 +18531,7 @@
   {
    "date": "2021-07-09",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sH",
    "number": "038",
@@ -18420,6 +18669,7 @@
   {
    "date": "2021-10",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PKMTCH S-P",
    "number": "S-P 145",
@@ -18470,6 +18720,7 @@
   {
    "date": "2021-11-12",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "FST",
    "number": "206",
@@ -18802,6 +19053,7 @@
   {
    "date": "2021-12-03",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "s8b",
    "number": "126",
@@ -19035,6 +19287,7 @@
   {
    "date": "2021-12-17",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sI100",
    "number": "341",
@@ -19217,6 +19470,7 @@
   {
    "date": "2021-12-17",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sI100",
    "number": "342",
@@ -19399,6 +19653,7 @@
   {
    "date": "2022-03",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sN",
    "number": "008",
@@ -19512,6 +19767,7 @@
   {
    "date": "2022-05-13",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "s10a",
    "number": "058",
@@ -19793,6 +20049,7 @@
   {
    "date": "2022-05-13",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "s10a",
    "number": "077",
@@ -19939,6 +20196,7 @@
   {
    "date": "2022-06-17",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "s10b",
    "number": "056",
@@ -20160,6 +20418,7 @@
   {
    "date": "2022-07-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PGO",
    "number": "055",
@@ -20545,6 +20804,7 @@
   {
    "date": "2022-07-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PGO",
    "number": "055",
@@ -20804,6 +21064,7 @@
   {
    "date": "2022-09-09",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "LOR",
    "number": "143",
@@ -21136,6 +21397,7 @@
   {
    "date": "2022-09-09",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "LOR",
    "number": "TG10",
@@ -21466,8 +21728,65 @@
    "dateSort": "2022-09-09"
   },
   {
+   "date": "2022-10-28",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Storming_Emergence_%28ATCG%29",
+    "page": "Storming Emergence (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax GX",
+   "setCode": "CSM1cC",
+   "number": "102",
+   "setName": "Storming Emergence - Abundant",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Double Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Storming-Emergence-Abundant/Snorlax-GX-CSM1cC102",
+   "image": "images/CSM1cC_102_Snorlax_GX_853670.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0065",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csm1cc-102-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2022-10-28"
+  },
+  {
    "date": "2022-11-09",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PPS1 VIV",
    "number": "VIV 131",
@@ -21661,6 +21980,7 @@
   {
    "date": "2022-11-09",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PPS1 VIV",
    "number": "VIV 131",
@@ -21854,106 +22174,7 @@
   {
    "date": "2023",
    "dateExact": false,
-   "name": "Snorlax V",
-   "setCode": "CSAC",
-   "number": "009",
-   "setName": "Dynamax Clash Deck Building Box",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Deck-Building-Box/Snorlax-V-CSAC009",
-   "image": "images/CSAC_009_Snorlax_V_882263.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0064",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csac-009-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2023-01-01"
-  },
-  {
-   "date": "2023",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS1DC",
-   "number": "152",
-   "setName": "Dynamax Clash V Starter Deck",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-V-Starter-Deck/Snorlax-CS1DC152",
-   "image": "images/CS1DC_152_Snorlax_887087.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0056",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs1dc-152-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2023-01-01"
-  },
-  {
-   "date": "2023",
-   "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SVP",
    "number": "051",
@@ -22217,6 +22438,7 @@
   {
    "date": "2023",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SVP",
    "number": "051",
@@ -22291,6 +22513,7 @@
   {
    "date": "2023",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "S-P/CS",
    "number": "061",
@@ -22339,8 +22562,316 @@
    "dateSort": "2023-01-01"
   },
   {
+   "date": "2023-01-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_%28ATCG%29",
+    "page": "Shining Synergy (ATCG)",
+    "field": "release"
+   },
+   "name": "Eevee & Snorlax GX",
+   "setCode": "CSM2cC",
+   "number": "103",
+   "setName": "Shining Synergy - Summon",
+   "variant": "V1",
+   "variantName": null,
+   "rarity": "Double Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V1-CSM2cC103",
+   "image": "images/CSM2cC_103_Eevee___Snorlax_GX_V1_851389.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0068",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csm2cc-103-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-01-18"
+  },
+  {
+   "date": "2023-01-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_%28ATCG%29",
+    "page": "Shining Synergy (ATCG)",
+    "field": "release"
+   },
+   "name": "Eevee & Snorlax GX",
+   "setCode": "CSM2cC",
+   "number": "170",
+   "setName": "Shining Synergy - Summon",
+   "variant": "V2",
+   "variantName": null,
+   "rarity": "Ultra Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V2-CSM2cC170",
+   "image": "images/CSM2cC_170_Eevee___Snorlax_GX_V2_851456.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0069",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csm2cc-170-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-01-18"
+  },
+  {
+   "date": "2023-01-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_%28ATCG%29",
+    "page": "Shining Synergy (ATCG)",
+    "field": "release"
+   },
+   "name": "Eevee & Snorlax GX",
+   "setCode": "CSM2cC",
+   "number": "171",
+   "setName": "Shining Synergy - Summon",
+   "variant": "V3",
+   "variantName": null,
+   "rarity": "Special Illustration Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V3-CSM2cC171",
+   "image": "images/CSM2cC_171_Eevee___Snorlax_GX_V3_851457.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0070",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csm2cc-171-v3-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-01-18"
+  },
+  {
+   "date": "2023-01-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_%28ATCG%29",
+    "page": "Shining Synergy (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSM2bC",
+   "number": "124",
+   "setName": "Shining Synergy - Supreme",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Supreme/Snorlax-CSM2bC124",
+   "image": "images/CSM2bC_124_Snorlax_850753.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0067",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0067-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0067-P02",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csm2bc-124-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-01-18"
+  },
+  {
+   "date": "2023-01-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_GX_Starter_Deck_%28ATCG%29",
+    "page": "Shining Synergy GX Starter Deck (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSM2DC",
+   "number": "213",
+   "setName": "Shining Synergy GX Starter Deck",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-GX-Starter-Deck/Snorlax-CSM2DC213",
+   "image": "images/CSM2DC_213_Snorlax_888916.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0071",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csm2dc-213-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-01-18"
+  },
+  {
    "date": "2023-01-20",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CRZ",
    "number": "109",
@@ -22671,8 +23202,65 @@
    "dateSort": "2023-01-20"
   },
   {
+   "date": "2023-04-15",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Battle_Party_Set_%28ATCG%29",
+    "page": "Battle Party Set (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSMPC",
+   "number": "h009",
+   "setName": "Battle Party Set",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Party-Set/Snorlax-CSMPCh009",
+   "image": "images/CSMPC_h009_Snorlax_886773.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0072",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csmpc-h009-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-04-15"
+  },
+  {
    "date": "2023-05-19",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CS1aC",
    "number": "110",
@@ -22750,6 +23338,7 @@
   {
    "date": "2023-05-19",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax V",
    "setCode": "CS1aC",
    "number": "111",
@@ -22800,6 +23389,7 @@
   {
    "date": "2023-05-19",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax VMAX",
    "setCode": "CS1aC",
    "number": "112",
@@ -22850,6 +23440,7 @@
   {
    "date": "2023-05-19",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax V",
    "setCode": "CS1aC",
    "number": "188",
@@ -22900,6 +23491,7 @@
   {
    "date": "2023-05-19",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax VMAX",
    "setCode": "CS1aC",
    "number": "207",
@@ -22948,8 +23540,121 @@
    "dateSort": "2023-05-19"
   },
   {
+   "date": "2023-05-19",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_Deck_Building_Gift_Box_%28ATCG%29",
+    "page": "Dynamax Clash Deck Building Gift Box (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax V",
+   "setCode": "CSAC",
+   "number": "009",
+   "setName": "Dynamax Clash Deck Building Box",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Deck-Building-Box/Snorlax-V-CSAC009",
+   "image": "images/CSAC_009_Snorlax_V_882263.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0064",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csac-009-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-05-19"
+  },
+  {
+   "date": "2023-05-19",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_V_Starter_Deck_%28ATCG%29",
+    "page": "Dynamax Clash V Starter Deck (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS1DC",
+   "number": "152",
+   "setName": "Dynamax Clash V Starter Deck",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-V-Starter-Deck/Snorlax-CS1DC152",
+   "image": "images/CS1DC_152_Snorlax_887087.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0056",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs1dc-152-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-05-19"
+  },
+  {
    "date": "2023-06",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PPS3 LOR",
    "number": "LOR 143",
@@ -23142,6 +23847,7 @@
   {
    "date": "2023-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sv2a",
    "number": "143",
@@ -23363,6 +24069,7 @@
   {
    "date": "2023-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sv2a",
    "number": "181",
@@ -23569,6 +24276,7 @@
   {
    "date": "2023-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "xsv2a",
    "number": "143",
@@ -23792,6 +24500,7 @@
   {
    "date": "2023-06-16",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "xsv2a",
    "number": "143",
@@ -24013,8 +24722,204 @@
    "dateSort": "2023-06-16"
   },
   {
+   "date": "2023-08-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_%28ATCG%29",
+    "page": "Vivid Portrayals (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS2aC",
+   "number": "086",
+   "setName": "Vivid Portrayals - Obsidian",
+   "variant": "V1",
+   "variantName": null,
+   "rarity": "Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
+   "image": "images/CS2aC_086_Snorlax_V1_845033.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0057",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0057-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0057-P02",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs2ac-086-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-08-18"
+  },
+  {
+   "date": "2023-08-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_%28ATCG%29",
+    "page": "Vivid Portrayals (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS2aC",
+   "number": "142",
+   "setName": "Vivid Portrayals - Obsidian",
+   "variant": "V2",
+   "variantName": null,
+   "rarity": "Secret Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V2-CS2aC142",
+   "image": "images/CS2aC_142_Snorlax_V2_845092.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0058",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs2ac-142-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-08-18"
+  },
+  {
+   "date": "2023-09-09",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Golden_Energy_%28ATCG%29",
+    "page": "Golden Energy (ATCG)",
+    "field": "date"
+   },
+   "name": "Eevee & Snorlax GX",
+   "setCode": "CSM2.1C",
+   "number": "054",
+   "setName": "Golden Energy",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Golden-Energy/Eevee-Snorlax-GX-CSM21C054",
+   "image": "images/CSM2.1C_054_Eevee___Snorlax_GX_881945.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0066",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csm21c-054-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-09-09"
+  },
+  {
    "date": "2023-09-22",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "MEW",
    "number": "143",
@@ -24347,6 +25252,7 @@
   {
    "date": "2023-10-27",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax Doll",
    "setCode": "sv4K",
    "number": "059",
@@ -24529,6 +25435,7 @@
   {
    "date": "2023-11",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CLF",
    "number": "016",
@@ -24627,6 +25534,7 @@
   {
    "date": "2023-11",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "WCD23 LOR",
    "number": "LOR 143",
@@ -24817,6 +25725,7 @@
   {
    "date": "2023-11-03",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax Doll",
    "setCode": "PAR",
    "number": "175",
@@ -25149,6 +26058,7 @@
   {
    "date": "2023-11-10",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "svG",
    "number": "021",
@@ -25245,6 +26155,7 @@
   {
    "date": "2023-11-17",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CLV",
    "number": "016",
@@ -25311,8 +26222,65 @@
    "dateSort": "2023-11-17"
   },
   {
+   "date": "2023-11-17",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Primordial_Arts_V_Starter_Deck_%28ATCG%29",
+    "page": "Primordial Arts V Starter Deck (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS3DC",
+   "number": "117",
+   "setName": "Primordial Arts V Starter Deck",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Primordial-Arts-V-Starter-Deck/Snorlax-CS3DC117",
+   "image": "images/CS3DC_117_Snorlax_882597.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0059",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs3dc-117-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2023-11-17"
+  },
+  {
    "date": "2023-12-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sv4a",
    "number": "145",
@@ -25534,6 +26502,7 @@
   {
    "date": "2023-12-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sv4a",
    "number": "310",
@@ -25725,133 +26694,7 @@
   {
    "date": "2024",
    "dateExact": false,
-   "name": "Snorlax Doll",
-   "setCode": "CSV5C",
-   "number": "115",
-   "setName": "Dark Crystal Blaze",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Uncommon",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Crystal-Blaze/Snorlax-Doll-CSV5C115",
-   "image": "images/CSV5C_115_Snorlax_Doll_848605.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0075",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0075-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0075-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csv5c-115-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2024-01-01"
-  },
-  {
-   "date": "2024",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS3DC",
-   "number": "117",
-   "setName": "Primordial Arts V Starter Deck",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Primordial-Arts-V-Starter-Deck/Snorlax-CS3DC117",
-   "image": "images/CS3DC_117_Snorlax_882597.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0059",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs3dc-117-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2024-01-01"
-  },
-  {
-   "date": "2024",
-   "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SVP",
    "number": "122",
@@ -26112,6 +26955,7 @@
   {
    "date": "2024",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SV-P/TH",
    "number": "082",
@@ -26160,248 +27004,9 @@
    "dateSort": "2024-01-01"
   },
   {
-   "date": "2024",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "svLN",
-   "number": "010",
-   "setName": "Stellar Tera Type Starter Set Sylveon ex",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Tera-Type-Starter-Set-Sylveon-ex/Snorlax-svLN010",
-   "image": "images/svLN_010_Snorlax_785477.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "confirmed",
-     "finishUnitId": "F0499",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0499-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0500",
-     "productMappingStatus": "pending",
-     "printings": []
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0501",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only",
-    "Korean": "pending",
-    "T-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese",
-    "Korean",
-    "T-Chinese"
-   ],
-   "rowId": "svln-010-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2024-01-01"
-  },
-  {
-   "date": "2024",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS2aC",
-   "number": "086",
-   "setName": "Vivid Portrayals - Obsidian",
-   "variant": "V1",
-   "variantName": null,
-   "rarity": "Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
-   "image": "images/CS2aC_086_Snorlax_V1_845033.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0057",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0057-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0057-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs2ac-086-v1-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2024-01-01"
-  },
-  {
-   "date": "2024",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS2aC",
-   "number": "142",
-   "setName": "Vivid Portrayals - Obsidian",
-   "variant": "V2",
-   "variantName": null,
-   "rarity": "Secret Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V2-CS2aC142",
-   "image": "images/CS2aC_142_Snorlax_V2_845092.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0058",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs2ac-142-v2-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2024-01-01"
-  },
-  {
    "date": "2024-01-26",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "PAF",
    "number": "202",
@@ -26662,6 +27267,7 @@
   {
    "date": "2024-03-08",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "svIba",
    "number": "046",
@@ -26782,6 +27388,7 @@
   {
    "date": "2024-03-22",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "sv5a",
    "number": "051",
@@ -26964,6 +27571,7 @@
   {
    "date": "2024-05-24",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "TWM",
    "number": "136",
@@ -27294,8 +27902,204 @@
    "dateSort": "2024-05-24"
   },
   {
+   "date": "2024-06-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_%28ATCG%29",
+    "page": "Gallant Galaxy (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS5aC",
+   "number": "093",
+   "setName": "Brave Stars - Charm",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-Charm/Snorlax-PKMSCHCS5aC-093",
+   "image": "images/CS5aC_093_Snorlax_800137.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0060",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0060-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0060-P02",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs5ac-093-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-06-18"
+  },
+  {
+   "date": "2024-06-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_V_Starter_Deck_%28ATCG%29",
+    "page": "Gallant Galaxy V Starter Deck (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS5DC",
+   "number": "097",
+   "setName": "Brave Stars V Starter Deck",
+   "variant": "V1",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-V-Starter-Deck/Snorlax-V1-CS5DC097",
+   "image": "images/CS5DC_097_Snorlax_V1_882375.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0061",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs5dc-097-v1-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-06-18"
+  },
+  {
+   "date": "2024-06-18",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_V_Starter_Deck_%28ATCG%29",
+    "page": "Gallant Galaxy V Starter Deck (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS5DC",
+   "number": "098",
+   "setName": "Brave Stars V Starter Deck",
+   "variant": "V2",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-V-Starter-Deck/Snorlax-V2-CS5DC098",
+   "image": "images/CS5DC_098_Snorlax_V2_882376.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0062",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs5dc-098-v2-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-06-18"
+  },
+  {
    "date": "2024-06-28",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SV-P/ID",
    "number": "117",
@@ -27346,6 +28150,7 @@
   {
    "date": "2024-06-28",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SV-P/ID",
    "number": "117",
@@ -27394,8 +28199,267 @@
    "dateSort": "2024-06-28"
   },
   {
+   "date": "2024-08-30",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_%28TCG%29",
+    "page": "Stellar Tera Type Starter Sets (TCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "svLN",
+   "number": "010",
+   "setName": "Stellar Tera Type Starter Set Sylveon ex",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Tera-Type-Starter-Set-Sylveon-ex/Snorlax-svLN010",
+   "image": "images/svLN_010_Snorlax_785477.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "confirmed",
+     "finishUnitId": "F0499",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0499-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0500",
+     "productMappingStatus": "pending",
+     "printings": []
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0501",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only",
+    "Korean": "pending",
+    "T-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese",
+    "Korean",
+    "T-Chinese"
+   ],
+   "rowId": "svln-010-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-08-30"
+  },
+  {
+   "date": "2024-09-20",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Marine_Shadow_%28ATCG%29",
+    "page": "Marine Shadow (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CS6bC",
+   "number": "113",
+   "setName": "Azure Shadow - Pursuit",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Azure-Shadow-Pursuit/Snorlax-CS6bC113",
+   "image": "images/CS6bC_113_Snorlax_841773.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0063",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0063-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0063-P02",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cs6bc-113-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-09-20"
+  },
+  {
+   "date": "2024-10-26",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Card_Display_Set_Gift_Box_Vol._3_%28ATCG%29",
+    "page": "Pokémon Card Display Set Gift Box Vol. 3 (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSUC",
+   "number": "010",
+   "setName": "Display Set Gift Box Gengar",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Display-Set-Gift-Box-Gengar/Snorlax-CSDC010",
+   "image": "images/CSUC_010_Snorlax_853988.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0073",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csuc-010-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-10-26"
+  },
+  {
    "date": "2024-11-08",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SSP",
    "number": "144",
@@ -27726,8 +28790,80 @@
    "dateSort": "2024-11-08"
   },
   {
+   "date": "2024-11-15",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Peripheral_Collection_Gift_Box%3A_Variety_Treasure_Box_%28ATCG%29",
+    "page": "Peripheral Collection Gift Box: Variety Treasure Box (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSZC",
+   "number": "018",
+   "setName": "Variety Treasure Box",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Variety-Treasure-Box/Snorlax-CSZC018",
+   "image": "images/CSZC_018_Snorlax_854381.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0083",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0083-P01",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "cszc-018-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2024-11-15"
+  },
+  {
    "date": "2024-11-22",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax ex",
    "setCode": "svM",
    "number": "094",
@@ -27874,687 +29010,7 @@
   {
    "date": "2025",
    "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSVL1C",
-   "number": "109",
-   "setName": "Adventure Special Pack",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Adventure-Special-Pack/Snorlax-CSVL1C109",
-   "image": "images/CSVL1C_109_Snorlax_839842.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0082",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csvl1c-109-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS6bC",
-   "number": "113",
-   "setName": "Azure Shadow - Pursuit",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Azure-Shadow-Pursuit/Snorlax-CS6bC113",
-   "image": "images/CS6bC_113_Snorlax_841773.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0063",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0063-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0063-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs6bc-113-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSMPC",
-   "number": "h009",
-   "setName": "Battle Party Set",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Party-Set/Snorlax-CSMPCh009",
-   "image": "images/CSMPC_h009_Snorlax_886773.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0072",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csmpc-h009-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSV7C",
-   "number": "158",
-   "setName": "Blade Awakening",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Uncommon",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
-   "image": "images/CSV7C_158_Snorlax_867080.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0076",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0076-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0076-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csv7c-158-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS5aC",
-   "number": "093",
-   "setName": "Brave Stars - Charm",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-Charm/Snorlax-PKMSCHCS5aC-093",
-   "image": "images/CS5aC_093_Snorlax_800137.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0060",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0060-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0060-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs5ac-093-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS5DC",
-   "number": "097",
-   "setName": "Brave Stars V Starter Deck",
-   "variant": "V1",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-V-Starter-Deck/Snorlax-V1-CS5DC097",
-   "image": "images/CS5DC_097_Snorlax_V1_882375.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0061",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs5dc-097-v1-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CS5DC",
-   "number": "098",
-   "setName": "Brave Stars V Starter Deck",
-   "variant": "V2",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-V-Starter-Deck/Snorlax-V2-CS5DC098",
-   "image": "images/CS5DC_098_Snorlax_V2_882376.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0062",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cs5dc-098-v2-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSUC",
-   "number": "010",
-   "setName": "Display Set Gift Box Gengar",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Display-Set-Gift-Box-Gengar/Snorlax-CSDC010",
-   "image": "images/CSUC_010_Snorlax_853988.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0073",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csuc-010-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Eevee & Snorlax GX",
-   "setCode": "CSM2.1C",
-   "number": "054",
-   "setName": "Golden Energy",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Golden-Energy/Eevee-Snorlax-GX-CSM21C054",
-   "image": "images/CSM2.1C_054_Eevee___Snorlax_GX_881945.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0066",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csm21c-054-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025-26",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSVH4C",
-   "number": "a003",
-   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003",
-   "image": "images/CSVH4C_a003_Snorlax_888115.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0080",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csvh4c-a003-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025-26",
-   "dateExact": false,
-   "name": "Snorlax ex",
-   "setCode": "CSVH4C",
-   "number": "p006",
-   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-ex-CSVH4Cp006",
-   "image": "images/CSVH4C_p006_Snorlax_ex_888095.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0081",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csvh4c-p006-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSVH1C",
-   "number": "a001",
-   "setName": "Happy Set Pikachu & Clefairy & Turtwig & Gimmighoul",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Pikachu-Clefairy-Turtwig-Gimmighoul/Snorlax-CSVH1Ca001",
-   "image": "images/CSVH1C_a001_Snorlax_860966.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0079",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csvh1c-a001-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SV-P/CS",
    "number": "277",
@@ -28618,400 +29074,9 @@
    "dateSort": "2025-01-01"
   },
   {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Eevee & Snorlax GX",
-   "setCode": "CSM2cC",
-   "number": "103",
-   "setName": "Shining Synergy - Summon",
-   "variant": "V1",
-   "variantName": null,
-   "rarity": "Double Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V1-CSM2cC103",
-   "image": "images/CSM2cC_103_Eevee___Snorlax_GX_V1_851389.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0068",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csm2cc-103-v1-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Eevee & Snorlax GX",
-   "setCode": "CSM2cC",
-   "number": "170",
-   "setName": "Shining Synergy - Summon",
-   "variant": "V2",
-   "variantName": null,
-   "rarity": "Ultra Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V2-CSM2cC170",
-   "image": "images/CSM2cC_170_Eevee___Snorlax_GX_V2_851456.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0069",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csm2cc-170-v2-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Eevee & Snorlax GX",
-   "setCode": "CSM2cC",
-   "number": "171",
-   "setName": "Shining Synergy - Summon",
-   "variant": "V3",
-   "variantName": null,
-   "rarity": "Special Illustration Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V3-CSM2cC171",
-   "image": "images/CSM2cC_171_Eevee___Snorlax_GX_V3_851457.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0070",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csm2cc-171-v3-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSM2bC",
-   "number": "124",
-   "setName": "Shining Synergy - Supreme",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Supreme/Snorlax-CSM2bC124",
-   "image": "images/CSM2bC_124_Snorlax_850753.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0067",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0067-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0067-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csm2bc-124-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSM2DC",
-   "number": "213",
-   "setName": "Shining Synergy GX Starter Deck",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-GX-Starter-Deck/Snorlax-CSM2DC213",
-   "image": "images/CSM2DC_213_Snorlax_888916.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0071",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csm2dc-213-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax GX",
-   "setCode": "CSM1cC",
-   "number": "102",
-   "setName": "Storming Emergence - Abundant",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Double Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Storming-Emergence-Abundant/Snorlax-GX-CSM1cC102",
-   "image": "images/CSM1cC_102_Snorlax_GX_853670.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "pending",
-     "finishUnitId": "F0065",
-     "productMappingStatus": "pending",
-     "printings": []
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "pending"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csm1cc-102-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
-   "date": "2025",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "CSZC",
-   "number": "018",
-   "setName": "Variety Treasure Box",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Fixed",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Variety-Treasure-Box/Snorlax-CSZC018",
-   "image": "images/CSZC_018_Snorlax_854381.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "pending",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0083",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0083-P01",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "cszc-018-base-none",
-   "datePrecision": "year",
-   "dateApproximate": true,
-   "dateSort": "2025-01-01"
-  },
-  {
    "date": "2025-01-17",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "151C",
    "number": "143",
@@ -29089,6 +29154,7 @@
   {
    "date": "2025-01-17",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "151C",
    "number": "169",
@@ -29139,6 +29205,63 @@
   {
    "date": "2025-01-17",
    "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Pikachu_%26_Clefairy_%26_Turtwig_%26_Gimmighoul_Happy_Set_%28ATCG%29",
+    "page": "Pikachu & Clefairy & Turtwig & Gimmighoul Happy Set (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSVH1C",
+   "number": "a001",
+   "setName": "Happy Set Pikachu & Clefairy & Turtwig & Gimmighoul",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Pikachu-Clefairy-Turtwig-Gimmighoul/Snorlax-CSVH1Ca001",
+   "image": "images/CSVH1C_a001_Snorlax_860966.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0079",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csvh1c-a001-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-01-17"
+  },
+  {
+   "date": "2025-01-17",
+   "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax ex",
    "setCode": "PRE",
    "number": "076",
@@ -29399,6 +29522,7 @@
   {
    "date": "2025-01-24",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "sv9",
    "number": "075",
@@ -29542,6 +29666,7 @@
   {
    "date": "2025-02",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax ex",
    "setCode": "xPRE",
    "number": "076",
@@ -29854,6 +29979,7 @@
   {
    "date": "2025-02",
    "dateExact": false,
+   "dateSource": null,
    "name": "Snorlax ex",
    "setCode": "xPRE",
    "number": "076",
@@ -30130,6 +30256,7 @@
   {
    "date": "2025-02-28",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CSVE1C",
    "number": "093",
@@ -30180,6 +30307,7 @@
   {
    "date": "2025-03",
    "dateExact": false,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "SVP",
    "number": "184",
@@ -30439,6 +30567,7 @@
   {
    "date": "2025-03",
    "dateExact": false,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "SVP",
    "number": "184",
@@ -30698,6 +30827,7 @@
   {
    "date": "2025-03-28",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "JTG",
    "number": "117",
@@ -31030,6 +31160,7 @@
   {
    "date": "2025-04",
    "dateExact": false,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "xJTG",
    "number": "117",
@@ -31214,6 +31345,7 @@
   {
    "date": "2025-04",
    "dateExact": false,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "xJTG",
    "number": "117",
@@ -31398,6 +31530,7 @@
   {
    "date": "2025-04",
    "dateExact": false,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "xJTG",
    "number": "117",
@@ -31470,8 +31603,65 @@
    "dateSort": "2025-04-01"
   },
   {
+   "date": "2025-06-13",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Journey_Theme_Pack_%28ATCG%29",
+    "page": "Journey Theme Pack (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSVL1C",
+   "number": "109",
+   "setName": "Adventure Special Pack",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Adventure-Special-Pack/Snorlax-CSVL1C109",
+   "image": "images/CSVL1C_109_Snorlax_839842.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0082",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csvl1c-109-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-06-13"
+  },
+  {
    "date": "2025-07-18",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "CSVE2C",
    "number": "122",
@@ -31522,6 +31712,7 @@
   {
    "date": "2025-07-25",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SV-P/ID",
    "number": "278",
@@ -31572,6 +31763,7 @@
   {
    "date": "2025-08-14",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "PPS7 JTG",
    "number": "JTG 117",
@@ -31764,8 +31956,92 @@
    "dateSort": "2025-08-14"
   },
   {
+   "date": "2025-09-12",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Ardent_Obsidian_%28ATCG%29",
+    "page": "Ardent Obsidian (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax Doll",
+   "setCode": "CSV5C",
+   "number": "115",
+   "setName": "Dark Crystal Blaze",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Uncommon",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Crystal-Blaze/Snorlax-Doll-CSV5C115",
+   "image": "images/CSV5C_115_Snorlax_Doll_848605.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0075",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0075-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0075-P02",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csv5c-115-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-09-12"
+  },
+  {
    "date": "2025-11-28",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "m2a",
    "number": "136",
@@ -31939,6 +32215,7 @@
   {
    "date": "2025-11-28",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "xm2a",
    "number": "136",
@@ -32160,6 +32437,7 @@
   {
    "date": "2025-11-28",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "xm2a",
    "number": "136",
@@ -32379,85 +32657,14 @@
    "dateSort": "2025-11-28"
   },
   {
-   "date": "2025-12",
-   "dateExact": false,
-   "name": "Hop's Snorlax",
-   "setCode": "CSV10C",
-   "number": "175",
-   "setName": "Chasing Glory Together",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Rare",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chasing-Glory-Together/Hops-Snorlax-CSV10C175",
-   "image": "images/CSV10C_175_Hop_s_Snorlax_897733.jpg",
-   "finishByLanguage": [
-    {
-     "language": "S-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0074",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0074-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0074-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
+   "date": "2025-12-19",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_%28TCG%29",
+    "page": "Start Deck 100 Battle Collection (TCG)",
+    "field": "release"
    },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "S-Chinese"
-   ],
-   "rowId": "csv10c-175-base-none",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2025-12-01"
-  },
-  {
-   "date": "2025-12",
-   "dateExact": false,
    "name": "Snorlax",
    "setCode": "mC",
    "number": "567",
@@ -32564,13 +32771,19 @@
     "T-Chinese"
    ],
    "rowId": "mc-567-base-none",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2025-12-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-12-19"
   },
   {
-   "date": "2025-12",
-   "dateExact": false,
+   "date": "2025-12-19",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_%28TCG%29",
+    "page": "Start Deck 100 Battle Collection (TCG)",
+    "field": "release"
+   },
    "name": "Snorlax",
    "setCode": "mC",
    "number": "568",
@@ -32719,13 +32932,19 @@
     "T-Chinese"
    ],
    "rowId": "mc-568-base-none",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2025-12-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-12-19"
   },
   {
-   "date": "2025-12",
-   "dateExact": false,
+   "date": "2025-12-19",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_%28TCG%29",
+    "page": "Start Deck 100 Battle Collection (TCG)",
+    "field": "release"
+   },
    "name": "Hop's Snorlax",
    "setCode": "mC",
    "number": "569",
@@ -32832,13 +33051,14 @@
     "T-Chinese"
    ],
    "rowId": "mc-569-base-none",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2025-12-01"
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2025-12-19"
   },
   {
    "date": "2025-12-19",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "mP1",
    "number": "012",
@@ -32933,151 +33153,9 @@
    "dateSort": "2025-12-19"
   },
   {
-   "date": "2026-01",
-   "dateExact": false,
-   "name": "Snorlax",
-   "setCode": "m3",
-   "number": "062",
-   "setName": "Nihil Zero",
-   "variant": "base",
-   "variantName": null,
-   "rarity": "Common",
-   "artist": null,
-   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
-   "image": "images/m3_062_Snorlax_868040.jpg",
-   "finishByLanguage": [
-    {
-     "language": "Japanese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "confirmed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "confirmed",
-     "finishUnitId": "F0213",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0213-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "Korean",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0214",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0214-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    },
-    {
-     "language": "T-Chinese",
-     "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo"
-     ],
-     "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "pending",
-      "mirror-holo": "pending"
-     },
-     "status": "marketplace-claimed",
-     "finishUnitId": "F0215",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0215-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
-      }
-     ]
-    }
-   ],
-   "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only",
-    "Korean": "positive-evidence-only",
-    "T-Chinese": "positive-evidence-only"
-   },
-   "edition": "—",
-   "edord": 1,
-   "confirmedLanguages": [
-    "Japanese",
-    "Korean",
-    "T-Chinese"
-   ],
-   "rowId": "m3-062-base-none",
-   "datePrecision": "month",
-   "dateApproximate": true,
-   "dateSort": "2026-01-01"
-  },
-  {
    "date": "2026-01-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "PPS8 JTG",
    "number": "JTG 117",
@@ -33353,6 +33431,7 @@
   {
    "date": "2026-01-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Hop's Snorlax",
    "setCode": "PPS8 JTG",
    "number": "JTG 117",
@@ -33628,6 +33707,7 @@
   {
    "date": "2026-01",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "SV-P/ID",
    "number": "286",
@@ -33676,8 +33756,241 @@
    "dateSort": "2026-01-01"
   },
   {
+   "date": "2026-01-16",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Blade_Awakening_%28ATCG%29",
+    "page": "Blade Awakening (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSV7C",
+   "number": "158",
+   "setName": "Blade Awakening",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Uncommon",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
+   "image": "images/CSV7C_158_Snorlax_867080.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0076",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0076-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0076-P02",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csv7c-158-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-01-16"
+  },
+  {
+   "date": "2026-01-23",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Nihil_Zero_%28TCG%29",
+    "page": "Nihil Zero (TCG)",
+    "field": "jarelease"
+   },
+   "name": "Snorlax",
+   "setCode": "m3",
+   "number": "062",
+   "setName": "Nihil Zero",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Common",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
+   "image": "images/m3_062_Snorlax_868040.jpg",
+   "finishByLanguage": [
+    {
+     "language": "Japanese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "confirmed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "confirmed",
+     "finishUnitId": "F0213",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0213-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "Korean",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0214",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0214-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    },
+    {
+     "language": "T-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0215",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0215-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "Japanese": "positive-evidence-only",
+    "Korean": "positive-evidence-only",
+    "T-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "Japanese",
+    "Korean",
+    "T-Chinese"
+   ],
+   "rowId": "m3-062-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-01-23"
+  },
+  {
    "date": "2026-03-27",
    "dateExact": true,
+   "dateSource": null,
    "name": "Snorlax",
    "setCode": "POR",
    "number": "063",
@@ -34006,6 +34319,201 @@
    "datePrecision": "day",
    "dateApproximate": false,
    "dateSort": "2026-03-27"
+  },
+  {
+   "date": "2026-04-10",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Decidueye_%26_Melmetal_%26_Koraidon_%26_Miraidon_Happy_Set_%28ATCG%29",
+    "page": "Decidueye & Melmetal & Koraidon & Miraidon Happy Set (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax",
+   "setCode": "CSVH4C",
+   "number": "a003",
+   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003",
+   "image": "images/CSVH4C_a003_Snorlax_888115.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0080",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csvh4c-a003-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-04-10"
+  },
+  {
+   "date": "2026-04-10",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Decidueye_%26_Melmetal_%26_Koraidon_%26_Miraidon_Happy_Set_%28ATCG%29",
+    "page": "Decidueye & Melmetal & Koraidon & Miraidon Happy Set (ATCG)",
+    "field": "release"
+   },
+   "name": "Snorlax ex",
+   "setCode": "CSVH4C",
+   "number": "p006",
+   "setName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Fixed",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-ex-CSVH4Cp006",
+   "image": "images/CSVH4C_p006_Snorlax_ex_888095.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
+     "finishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
+     },
+     "status": "pending",
+     "finishUnitId": "F0081",
+     "productMappingStatus": "pending",
+     "printings": []
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "pending"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csvh4c-p006-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-04-10"
+  },
+  {
+   "date": "2026-07-16",
+   "dateExact": true,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Together_in_Pursuit_of_Glory_%28ATCG%29",
+    "page": "Together in Pursuit of Glory (ATCG)",
+    "field": "release"
+   },
+   "name": "Hop's Snorlax",
+   "setCode": "CSV10C",
+   "number": "175",
+   "setName": "Chasing Glory Together",
+   "variant": "base",
+   "variantName": null,
+   "rarity": "Rare",
+   "artist": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chasing-Glory-Together/Hops-Snorlax-CSV10C175",
+   "image": "images/CSV10C_175_Hop_s_Snorlax_897733.jpg",
+   "finishByLanguage": [
+    {
+     "language": "S-Chinese",
+     "claimStatus": "confirmed",
+     "availableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "reverse-holo"
+     ],
+     "finishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "unitFinishStatus": {
+      "non-holo": "marketplace-claimed",
+      "holo": "pending",
+      "reverse-holo": "marketplace-claimed",
+      "mirror-holo": "pending"
+     },
+     "status": "marketplace-claimed",
+     "finishUnitId": "F0074",
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0074-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0074-P02",
+       "finish": "reverse-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "marketplace-claimed",
+       "productMapping": "mapped"
+      }
+     ]
+    }
+   ],
+   "finishCompletenessByLanguage": {
+    "S-Chinese": "positive-evidence-only"
+   },
+   "edition": "—",
+   "edord": 1,
+   "confirmedLanguages": [
+    "S-Chinese"
+   ],
+   "rowId": "csv10c-175-base-none",
+   "datePrecision": "day",
+   "dateApproximate": false,
+   "dateSort": "2026-07-16"
   }
  ]
 }
