@@ -24,9 +24,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Require explicit publication decisions
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           test "${GITHUB_REF}" = "refs/heads/main"
-          python verification/publication_gate.py
+          # Read the repository's real visibility rather than trusting the decision file's claim.
+          actual=$(gh api "repos/${GITHUB_REPOSITORY}" --jq .visibility)
+          echo "GitHub reports visibility: ${actual}"
+          python verification/publication_gate.py --actual-visibility "${actual}"
 
   gate:
     name: Release gate

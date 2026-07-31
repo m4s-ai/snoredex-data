@@ -163,6 +163,49 @@ def replace_block(text: str, name: str, body: str) -> str:
     return pattern.sub(lambda m: m.group(1) + body + m.group(2), text)
 
 
+def status_block(decisions: dict[str, Any]) -> str:
+    """The front-page status callout.
+
+    This was hand-written and went stale twice — once claiming the licence grants were not in
+    force after they were, once claiming the repository was private after it was public. A
+    prominent claim about the project's legal and publication state is exactly the kind that must
+    not be maintained by hand, so it is derived from the decision record like everything else.
+    """
+    grants = decisions.get("licenseGrantsApproved") is True
+    site = decisions.get("sitePublicationApproved") is True
+    public = decisions.get("repositoryVisibility") == "public"
+    licensor = decisions.get("licensor") or "an unrecorded licensor"
+    approved_at = decisions.get("approvedAt") or "an unrecorded date"
+
+    licence = (
+        f"The licence grants are **in force**, granted by `{licensor}`."
+        if grants
+        else "The licence grants are **not yet in force**."
+    )
+    if site and public:
+        publication = (
+            f"Publication was approved on {approved_at}: the repository is **public** and the site "
+            "may be deployed. Deployment stays a manual workflow run — merging never publishes."
+        )
+    elif site:
+        publication = (
+            "Site publication is approved but the repository is **not public**, so the correction "
+            "links would 404. Check P8 blocks this."
+        )
+    else:
+        publication = (
+            "Publication is a separate decision and is **not yet approved**: GitHub Pages requires "
+            "a manual run that the publication gate still blocks."
+        )
+    return "\n".join([
+        "> [!IMPORTANT]",
+        f"> {licence} {publication} See",
+        "> [`publication-decisions.json`](publication-decisions.json), "
+        "[`LICENSE.md`](LICENSE.md), and",
+        "> [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md).",
+    ])
+
+
 def main() -> int:
     counts = read_json(ANALYSIS_PATH)["counts"]
     dataset = read_json(DATASET_PATH)
@@ -173,6 +216,7 @@ def main() -> int:
     decisions = read_json(DECISIONS_PATH)
     original = README_PATH.read_text(encoding="utf-8")
     updated = replace_block(original, "badges", badges_block(dataset, checklist, decisions))
+    updated = replace_block(updated, "status", status_block(decisions))
     updated = replace_block(
         updated,
         "current-state",

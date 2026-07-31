@@ -7,7 +7,7 @@ Cardmarket.
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
 [![Cards](https://img.shields.io/badge/cards-198-2563eb)](snorlax_cards.json)
 [![Checklist](https://img.shields.io/badge/checklist-837_items-2563eb)](analysis_checklist.json)
-[![Publication](https://img.shields.io/badge/publication-owner_approval_required-d97706)](publication-decisions.json)
+[![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
 <!-- /generated:badges -->
@@ -16,12 +16,12 @@ The repository combines a preserved Cardmarket catalogue with an independent evi
 distinguishes marketplace claims from confirmed physical printings, models finishes and editions,
 and produces a stable machine-readable checklist plus an interactive collection browser.
 
+<!-- generated:status — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 > [!IMPORTANT]
-> The licence grants are **in force** since 2026-07-26, granted by `M4S.Collection`. Publication is
-> a separate decision and is **not yet approved**: the repository remains private and GitHub Pages
-> requires a manual run that the publication gate still blocks. See
+> The licence grants are **in force**, granted by `M4S.Collection`. Publication was approved on 2026-07-31: the repository is **public** and the site may be deployed. Deployment stays a manual workflow run — merging never publishes. See
 > [`publication-decisions.json`](publication-decisions.json), [`LICENSE.md`](LICENSE.md), and
-> [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md) for the remaining steps.
+> [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md).
+<!-- /generated:status -->
 
 ## Current state
 
@@ -36,7 +36,7 @@ Status snapshot: **2026-07-26**, after the database review and release-readiness
 | Finish evidence | **637 card-number × language units**: 331 externally confirmed, 104 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
 | Evidence registry | **18 providers**, 864 evidence records, 857 unique URLs, and 2,722 attributed claims. Only complete official manifests may establish absence. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
-| Site and publication | The repository is private. The interactive site is generated and usable locally; Pages deployment is manual and blocked until every required owner decision is recorded. |
+| Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
 | AI transparency | Development used AI in a human-directed copilot workflow. Scope and safeguards are declared in [`AI-DECLARATION.md`](AI-DECLARATION.md). |
 <!-- /generated:current-state -->

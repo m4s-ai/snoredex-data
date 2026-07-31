@@ -6,9 +6,9 @@ the repository owner, after which this file describes what was done.
 Nothing here is automatic. The deployment gate blocks until the decisions below are recorded, and
 it is meant to — publishing is the one step in this project that cannot be undone.
 
-**Status: step 1 done, step 2 pending.** The owner approved the licence grants, owner attestations
-and third-party images on 2026-07-26. What remains is site publication and repository visibility,
-which must be decided together — see step 2.
+**Status: steps 1–3 done. Step 4, the first deployment, is what remains.** The owner approved the
+licence grants, owner attestations and third-party images on 2026-07-26, and on 2026-07-31 made
+the repository public, enabled Pages and forking, and approved site publication.
 
 ---
 
@@ -43,9 +43,7 @@ Three substantive attestations, approved by `M4S.Collection` and recorded in
 > is deliberate: a public site whose 206 correction links point into a private tracker is broken by
 > construction. It is the atomic partner of repository visibility, so both belong in step 2.
 
-## Step 2 — Publish the site and make the repository public
-
-One change, both fields together:
+## Step 2 — Publish the site and make the repository public — **done 2026-07-31**
 
 ```json
   "sitePublicationApproved": true,
@@ -53,7 +51,14 @@ One change, both fields together:
   "repositoryPublicationApproved": true,
 ```
 
-Then flip visibility for real in **Settings → General → Danger Zone → Change visibility**.
+Visibility was flipped in **Settings → General → Danger Zone**, and verified: the GitHub API
+reports `visibility: public`, and anonymous requests to the repository and to `CONTRIBUTING.md`
+both return HTTP 200.
+
+The decision file is no longer taken on trust. The deploy workflow reads the repository's real
+visibility from the API and passes it to `publication_gate.py --actual-visibility`, which refuses
+to publish if the record and reality disagree — the failure mode where someone sets the field but
+forgets the toggle, and the site goes live with every correction link 404ing.
 
 The history obstacle that previously blocked this is resolved: the historical Windows checkout
 paths were redacted on 2026-07-26 and a fresh clone of the remote reports zero hits across all six
@@ -66,17 +71,16 @@ python verification/publication_gate.py    # must now exit 0
 python verification/review_findings.py     # must still be 59/59, with P8 passing
 ```
 
-## Step 3 — Repository settings for public contribution
+## Step 3 — Repository settings for public contribution — **mostly done 2026-07-31**
 
 These are not enforced by any check, because they live in GitHub settings rather than in the
 repository. All are in **Settings → General** unless noted.
 
-- **Allow forking** — currently off. Required if you want pull requests from people outside the
-  organisation. Issues alone do not need it.
-- **Pages source** — set **Settings → Pages → Source** to **GitHub Actions**. The repository has
-  never had Pages enabled, so the first deployment will fail without this.
-- **Discussions** — currently off. Optional. Worth enabling if you want a place for questions that
-  are not correction reports, so the issue tracker stays a work queue.
+- **Allow forking** — **enabled.** Pull requests from outside the organisation are possible.
+- **Pages source** — **enabled** (`has_pages: true`). Confirm it is set to **GitHub Actions**
+  rather than a branch, or the workflow's upload has nowhere to go.
+- **Discussions** — still off. Optional. Worth enabling if you want a place for questions that are
+  not correction reports, so the issue tracker stays a work queue.
 - **Stale branches** — four merged branches remain (`agent/portable-script-paths`,
   `claude/database-review-recommendations-kq8aec`, `codex/finish-verification`,
   `codex/readme-ai-declaration`). Their pull requests are merged and deleting the branches does not

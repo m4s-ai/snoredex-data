@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0.0",
-  "repositoryVisibility": "private",
-  "repositoryPublicationApproved": false,
-  "sitePublicationApproved": false,
+  "repositoryVisibility": "public",
+  "repositoryPublicationApproved": true,
+  "sitePublicationApproved": true,
   "licenseGrantsApproved": true,
   "licensor": "M4S.Collection",
   "ownerAttestationsApproved": true,
   "thirdPartyImagesApproved": true,
   "approvedBy": "M4S.Collection",
-  "approvedAt": "2026-07-26",
-  "notes": "Owner approved the licence grants, owner attestations and third-party images on 2026-07-26; the grants are now in force. sitePublicationApproved is deliberately still false: it is the atomic partner of repositoryVisibility, because check P8 fails if the site is published while its correction links point into a private tracker. Set both together as the final step — see verification/LAUNCH-RUNBOOK.md."
+  "approvedAt": "2026-07-31",
+  "notes": "Fully approved. Licence grants, owner attestations and third-party images approved 2026-07-26; site publication and public repository visibility approved 2026-07-31, after the owner made the repository public and enabled Pages. The deploy workflow verifies repositoryVisibility against the GitHub API, so this record cannot silently disagree with reality."
 }

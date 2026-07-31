@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -19,6 +20,14 @@ LICENSOR = "M4S.Collection"
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--actual-visibility",
+        help="the repository's real visibility, read from the GitHub API by the deploy workflow. "
+        "Without it this gate can only check what the decision file claims.",
+    )
+    args = parser.parse_args()
+
     try:
         decision = json.loads(DECISIONS.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
@@ -58,6 +67,21 @@ def main() -> int:
                 "on the published site is a 404 for visitors"
             )
 
+    # Everything above trusts the decision file's claim about visibility. That claim is the one
+    # the correction loop depends on, and it is easy to record without performing: set it to
+    # "public", forget the actual toggle, and the site publishes with every correction link 404ing
+    # for the visitors it is asking for help. The deploy workflow reads the real value from the
+    # API and passes it here, so the record has to match the world.
+    if args.actual_visibility:
+        if args.actual_visibility not in {"private", "public"}:
+            problems.append(f"unrecognized actual visibility {args.actual_visibility!r}")
+        elif args.actual_visibility != visibility:
+            problems.append(
+                f"the decision file records repositoryVisibility={visibility!r}, but the "
+                f"repository is actually {args.actual_visibility!r}. Fix whichever is wrong "
+                f"before publishing — a public site in front of a private tracker is broken"
+            )
+
     if problems:
         print("publication remains blocked:", file=sys.stderr)
         for problem in problems:
@@ -65,7 +89,10 @@ def main() -> int:
         return 1
 
     print(f"publication approved by {decision['approvedBy']} on {decision['approvedAt']}")
-    print(f"repository visibility decision: {visibility}")
+    if args.actual_visibility:
+        print(f"repository visibility: {visibility} (verified against the GitHub API)")
+    else:
+        print(f"repository visibility decision: {visibility} (recorded, not verified)")
     return 0
 
 
