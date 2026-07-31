@@ -25,6 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
+EXPECTED_ROWS = 204
 
 results: list[tuple[str, bool, str]] = []
 
@@ -63,7 +64,18 @@ def main() -> int:
 
         total = page.evaluate("JSON.parse(document.getElementById('data-rows').textContent).length")
         check("page loads with no console errors", not console_errors, "; ".join(console_errors[:3]))
-        check("all rows render", total == 203, f"data has {total} rows")
+        check("all rows render", total == EXPECTED_ROWS, f"data has {total} rows")
+
+        exs_rows = page.evaluate("""() => JSON.parse(
+          document.getElementById('data-rows').textContent
+        ).filter(r => r.setCode === 'EXS')""")
+        check("both dated EXS physical variants appear in 1998",
+              len(exs_rows) == 2
+              and [row["dateDisplay"] for row in exs_rows] == ["1998-03-23", "1998-12-04"]
+              and [row["variant"] for row in exs_rows] == ["V1", "V2"]
+              and [row["image"] is not None for row in exs_rows] == [False, True]
+              and len({row["rowId"] for row in exs_rows}) == 2,
+              f"EXS rows: {exs_rows}")
 
         # Sort affordances must render as glyphs, not as the literal CSS escape text. A
         # double-escaped content string printed "\\2195" in every heading and passed every
@@ -151,7 +163,7 @@ def main() -> int:
               "preview remained open")
 
         count_text = page.text_content("#count")
-        check("shown/total count is displayed", "203" in (count_text or ""), count_text or "")
+        check("shown/total count is displayed", str(EXPECTED_ROWS) in (count_text or ""), count_text or "")
 
         sourced_dates = page.evaluate("""() => {
           const rows = JSON.parse(document.getElementById('data-rows').textContent);
@@ -190,7 +202,7 @@ def main() -> int:
         page.fill("#f-q", "jungle")
         page.wait_for_timeout(120)
         filtered = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
-        check("global search filters rows", 0 < filtered < 203, f"{filtered} rows for 'jungle'")
+        check("global search filters rows", 0 < filtered < EXPECTED_ROWS, f"{filtered} rows for 'jungle'")
 
         page.fill("#f-q", "")
         page.wait_for_timeout(120)
@@ -235,7 +247,7 @@ def main() -> int:
         page.select_option("#f-dateStatus", ["approximate"])
         page.wait_for_timeout(120)
         approximate = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
-        check("exact/approximate release status is filterable", 0 < approximate < 203,
+        check("exact/approximate release status is filterable", 0 < approximate < EXPECTED_ROWS,
               f"{approximate} approximate rows")
         page.select_option("#f-dateStatus", [])
         page.wait_for_timeout(120)
@@ -246,7 +258,7 @@ def main() -> int:
         page.select_option("#f-name", [first_name])
         page.wait_for_timeout(120)
         named = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
-        check("card name has an exact field filter", 0 < named < 203,
+        check("card name has an exact field filter", 0 < named < EXPECTED_ROWS,
               f"{named} rows for {first_name}")
         page.select_option("#f-name", [])
         page.wait_for_timeout(120)
@@ -259,8 +271,8 @@ def main() -> int:
         page.wait_for_timeout(120)
         absent = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
         check("language tri-state present/absent partitions the rows",
-              present + absent == 203 and present > 0 and absent > 0,
-              f"present={present} absent={absent} total=203")
+              present + absent == EXPECTED_ROWS and present > 0 and absent > 0,
+              f"present={present} absent={absent} total={EXPECTED_ROWS}")
 
         page.select_option("#f-lang-JA", "")
         page.wait_for_timeout(120)
@@ -330,13 +342,13 @@ def main() -> int:
         page.click("#reset")
         page.wait_for_timeout(150)
         reset_rows = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
-        check("reset restores the unfiltered chronological view", reset_rows == 203,
+        check("reset restores the unfiltered chronological view", reset_rows == EXPECTED_ROWS,
               f"{reset_rows} rows after reset")
 
         # --- correction links are stable, one per row ---
         links = page.eval_on_selector_all(
             "#rows td.corr a", "els => els.map(e => e.getAttribute('href'))")
-        check("exactly one correction link per row", len(links) == 203, f"{len(links)} links")
+        check("exactly one correction link per row", len(links) == EXPECTED_ROWS, f"{len(links)} links")
         # Links now deep-link into the generated issue form (#20) with the row identity in
         # query parameters, rather than pasting a prose body. Identity must still be the stable
         # rowId, never the rendered position.
@@ -376,6 +388,19 @@ def main() -> int:
               and not any(value == "mirror-holo" for value, _ in checklist_finish_options)
               and "Reverse Holo treatments" in (preview or ""),
               f"options={checklist_finish_options}; preview={preview}")
+
+        # A filtered physical variant must select only its own checklist item, even though both
+        # EXS versions share one canonical Cardmarket product row.
+        page.fill("#f-q", "EXS")
+        page.select_option("#f-marking", ["Uncommon rarity symbol"])
+        page.select_option("#cl-scope", "filtered")
+        page.wait_for_timeout(150)
+        exs_scoped = page.text_content("#cl-preview") or ""
+        check("filtered EXS V1 scope selects only its physical checklist item",
+              int(exs_scoped.split()[0]) == 1, exs_scoped)
+        page.click("#reset")
+        page.select_option("#cl-scope", "all")
+        page.wait_for_timeout(150)
 
         # Scope must follow the *filtered* rows, so filter first, then switch scope.
         page.select_option("#f-edition", ["1st Edition"])

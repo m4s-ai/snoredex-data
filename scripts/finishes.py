@@ -249,6 +249,11 @@ def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") 
     }
     if printing.get("releaseDate"):
         compact["releaseDate"] = printing["releaseDate"]
+    # An explicit null suppresses a Cardmarket product image for a physical printing whose
+    # pictured version is different. Preserve the key as well as a concrete image path so the
+    # public projection can make that distinction.
+    if "image" in printing:
+        compact["image"] = printing["image"]
     return compact
 
 
