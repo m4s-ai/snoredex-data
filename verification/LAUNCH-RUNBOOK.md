@@ -6,9 +6,9 @@ the repository owner, after which this file describes what was done.
 Nothing here is automatic. The deployment gate blocks until the decisions below are recorded, and
 it is meant to — publishing is the one step in this project that cannot be undone.
 
-**Status: steps 1–3 done. Step 4, the first deployment, is what remains.** The owner approved the
-licence grants, owner attestations and third-party images on 2026-07-26, and on 2026-07-31 made
-the repository public, enabled Pages and forking, and approved site publication.
+**Status: launched 2026-07-31.** Every step below is done. The site is live at
+<https://m4s-ai.github.io/snoredex-data/>, the repository is public, and the correction loop is
+verified end to end by issue #22. This file now records what was done rather than what to do.
 
 ---
 
@@ -86,27 +86,38 @@ repository. All are in **Settings → General** unless noted.
   `codex/readme-ai-declaration`). Their pull requests are merged and deleting the branches does not
   affect them. Optional tidying, visible to anyone browsing once public.
 
-## Step 4 — Deploy
+## Step 4 — Deploy — **done 2026-07-31**
 
 Run the **Publish site** workflow manually: **Actions → Publish site → Run workflow**, on `main`.
 
-It will, in order: re-check every publication decision, run the full release gate on Ubuntu and
-Windows, regenerate every artifact from its inputs, assemble the public tree from the allowlist in
-`scripts/publish.py`, verify that tree contains nothing else, and only then upload.
+It runs, in order: re-check every publication decision, the full release gate on Ubuntu and
+Windows, regeneration of every artifact from its inputs, assembly of the public tree from the
+allowlist in `scripts/publish.py`, verification that the tree holds nothing else, and only then
+the upload. If the approval job fails, nothing is uploaded — that is the intended behaviour, not
+an error to work around.
 
-If the approval job fails, nothing is uploaded. That is the intended behaviour, not an error to
-work around.
+First run: all four jobs green, deployed to <https://m4s-ai.github.io/snoredex-data/>.
 
 ## Step 5 — After the first deployment
 
-- Open the published site and follow one **Correction?** link end to end. It should land on a
-  pre-filled issue form. This is the single most important thing to test, because it is the
-  reason the site is public at all.
+- **Follow one Correction? link end to end** — the single most important test, because it is the
+  reason the site is public at all. **Done 2026-07-31 (issue #22):** the form rendered in full,
+  with the row identity, card, set, number and current state pre-filled, and the `Correction` and
+  `Needs Evidence` labels applied automatically.
+
+  This test earned its place. The form was rejected outright by GitHub on the first two attempts
+  and served a blank issue instead — once for an empty `description` attribute, then for the
+  reserved word `None` in a dropdown. Every local check passed throughout: the form existed, was
+  current, demanded evidence, and all 203 links pointed at it. Only clicking one revealed that it
+  never loaded. Check `T7` now covers both causes.
+
 - Check that `CONTRIBUTING.md`, `verification/FINISH_SOURCES.md` and
   `verification/open-items.html` all resolve from the *Help correct this* section.
 - Watch the first few incoming reports against the source ladder. The rule that decides whether a
   report is usable — positive evidence, never absence — is stated in the form, in
   `CONTRIBUTING.md`, and on the site, but it is the thing newcomers most often get wrong.
+- Close the test issue once you are satisfied; it is otherwise the first thing a visitor sees in
+  the tracker.
 
 ---
 
@@ -118,7 +129,9 @@ Nothing below needs action; it is recorded so the launch state is auditable.
 - Licensor recorded as `M4S.Collection`, pinned byte-exactly in the gate, with a licensing contact
   in `LICENSE.md` and on the site.
 - Correction loop built and tested: 203 per-row links plus a general entry point, all prefilled,
-  all targeting the generated issue form; 44 browser checks cover it.
+  all targeting the generated issue form; 44 browser checks cover it, and check `T7` validates the
+  form against the rules GitHub's own validator enforces — including the reserved words that the
+  published JSON Schema does not describe.
 - `CONTRIBUTING.md` and the site's *Help correct this* section state the evidence rule.
 - Public artifact restricted to an allowlist, with every published page link-checked.
 - Release gate runs on Ubuntu and Windows for every pull request.
