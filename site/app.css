@@ -204,9 +204,13 @@ button.ghost {
   overflow-x: auto; border: 1px solid var(--line); border-radius: 8px;
   overscroll-behavior-x: contain;
 }
+/* Floating overlays: this panel is fixed over whatever happens to be scrolling beneath it, so its
+ * edge is the only thing saying where the heading stops and the rows resume. That makes it meaning
+ * rather than decoration, and it takes the control line like the frozen-pane edge below. The
+ * box-shadow reinforces the separation but cannot be relied on to carry it alone. */
 .table-sticky-header {
   position: fixed; z-index: 5; display: none; overflow: hidden;
-  border: 1px solid var(--line); background: var(--panel);
+  border: 1px solid var(--control-line); background: var(--panel);
   box-shadow: 0 5px 12px -10px rgba(0, 0, 0, .7);
 }
 .table-sticky-header.is-visible { display: block; }
@@ -217,7 +221,7 @@ button.ghost {
 .table-sticky-header th { position: static; background: var(--panel); }
 .table-sticky-correction {
   position: absolute; top: 0; right: 0; display: flex; align-items: flex-start;
-  padding: 4px 5px; border-left: 1px solid var(--line); background: var(--panel);
+  padding: 4px 5px; border-left: 1px solid var(--control-line); background: var(--panel);
   box-shadow: -7px 0 8px -7px rgba(0, 0, 0, .3); font-weight: 650;
 }
 .tableframe.is-overflowing .tablewrap { border-radius: 0 0 8px 8px; }
@@ -298,9 +302,11 @@ tr.yearsep td {
   filter: saturate(1.08);
   box-shadow: 0 5px 14px -5px rgba(0, 0, 0, .55);
 }
+/* Also floating over arbitrary content, and over card art rather than a known background, so the
+ * same rule applies: the edge bounds the popup and takes the control line. */
 .card-preview {
   position: fixed; z-index: 100; width: min(320px, calc(100vw - 24px));
-  margin: 0; padding: 7px; border: 1px solid var(--line); border-radius: 10px;
+  margin: 0; padding: 7px; border: 1px solid var(--control-line); border-radius: 10px;
   background: var(--bg); color: var(--fg);
   box-shadow: 0 18px 55px -16px rgba(0, 0, 0, .65);
   pointer-events: none;
