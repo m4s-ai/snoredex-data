@@ -34,7 +34,7 @@ Status snapshot: **2026-07-31**, after the database review and release-readiness
 | Language verification | **719 claims**: 634 externally confirmed, 71 contradicted, 5 awaiting manual review, and 9 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Physical checklist | **838 items** across 174 cards and 15 languages: 663 documented printings plus 175 explicit unresolved placeholders. |
 | Finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
-| Evidence registry | **18 providers**, 882 evidence records, 875 unique URLs, and 2,777 attributed claims. Only complete official manifests may establish absence. |
+| Evidence registry | **18 providers**, 878 evidence records, 871 unique URLs, and 2,777 attributed claims. Only complete official manifests may establish absence. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |

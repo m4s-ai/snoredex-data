@@ -33,7 +33,7 @@ from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = ROOT / "verification" / "source_registry.json"
@@ -372,13 +372,15 @@ def read_json(path: Path) -> Any:
 
 
 def canonical_url(url: str) -> str:
-    """Strip fragments and trailing slashes so the same page is not counted twice.
+    """Normalize path encoding, fragments and slashes so a page is counted once.
 
     Query strings are preserved: several providers put the language or the card id in the query,
     so dropping it would merge genuinely different endpoints.
     """
     parts = urlsplit(url.strip())
-    path = parts.path.rstrip("/") or "/"
+    # Evidence stores historically mixed Unicode/raw ampersands with percent-encoded paths.
+    # Keep ordinary path punctuation readable, but encode ampersands and non-ASCII characters.
+    path = quote(unquote(parts.path), safe="/:@!$'()*+,;=-._~").rstrip("/") or "/"
     return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, ""))
 
 
