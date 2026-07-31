@@ -671,6 +671,10 @@
       const correctionWidth = widths[widths.length - 1];
       const visible = headBox.top <= toolOffset && scrollerBox.bottom > toolOffset + headerHeight;
 
+      // Everything focusable inside the table scrolls clear of this band; see app.css.
+      document.documentElement.style.setProperty(
+        "--sticky-head-offset", Math.ceil(toolOffset + headerHeight) + "px");
+
       overlay.style.left = Math.round(scrollerBox.left) + "px";
       overlay.style.top = Math.round(toolOffset) + "px";
       overlay.style.width = Math.round(scrollerBox.width) + "px";

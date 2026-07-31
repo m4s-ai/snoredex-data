@@ -256,6 +256,13 @@ tr.yearsep td {
 }
 .col-size { width: calc(4.5rem + 10px); min-width: calc(4.5rem + 10px); }
 .col-evidence { width: calc(10rem + 10px); min-width: calc(10rem + 10px); }
+/* The overflow toolbar and the sticky heading cover the top of the table, and a browser scrolls a
+ * focused element only as far as the viewport edge. Without this reservation, tabbing to a cell
+ * disclosure or a correction link lands the focus ring underneath that furniture (WCAG 2.2
+ * 2.4.11). The JS keeps --sticky-head-offset at the measured height of both. */
+#rows .cell-clip, #rows a, #rows button, tr.yearsep td {
+  scroll-margin-top: calc(var(--sticky-head-offset, 66px) + 6px);
+}
 .cell-clip[data-clipped="true"] { cursor: zoom-in; }
 .cell-clip[data-clipped="true"]:hover { text-decoration: underline dotted; text-underline-offset: 2px; }
 .cell-clip.is-expanded {
@@ -305,10 +312,11 @@ tr.yearsep td {
   font-size: 12px; line-height: 1.3; text-align: center; text-overflow: ellipsis; white-space: nowrap;
 }
 /* Frozen pane: without a visible edge the sticky column reads as truncated text rather than
- * as content scrolling underneath it. */
+ * as content scrolling underneath it. That makes the edge meaning rather than decoration, so it
+ * uses the control line — the divider colour stays below the 3:1 those carry. */
 td.corr, th.corr {
   position: sticky; right: 0; background: var(--bg);
-  border-left: 1px solid var(--line);
+  border-left: 1px solid var(--control-line);
   box-shadow: -7px 0 8px -7px rgba(0, 0, 0, .3);
 }
 th.corr { background: var(--panel); z-index: 3; }

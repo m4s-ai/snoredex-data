@@ -27,6 +27,108 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
 EXPECTED_ROWS = 204
 
+# Every surface #43 enumerates, measured in both themes: (label, selector, property, mode,
+# threshold). "text" measures the property against the element's own composited backdrop;
+# "boundary" measures it against the backdrop behind the element, which is what a border or a
+# focus ring actually sits on.
+#
+# Thresholds follow WCAG 2.2 AA: 4.5:1 for text (nothing here is large text — the biggest is the
+# 26px masthead heading, asserted at the stricter figure anyway), 3:1 for the boundaries and state
+# indicators of user interface components. Decorative separators — panel edges, row rules, the
+# footer line — are deliberately absent: 1.4.11 covers what identifies a component or a state, and
+# raising every divider to 3:1 would draw a heavy grid over a 204-row table. The frozen-pane edge
+# is listed because it carries meaning; it tells the reader the column is pinned rather than cut.
+THEME_SURFACES = [
+    ("masthead heading", ".masthead h1", "color", "text", 4.5),
+    ("masthead tagline", ".masthead .tagline", "color", "text", 4.5),
+    ("theme toggle label", "#theme-toggle", "color", "text", 4.5),
+    ("theme toggle border", "#theme-toggle", "borderTopColor", "boundary", 3.0),
+    ("navigation link", "nav.sections a", "color", "text", 4.5),
+    ("section heading", "#about h2", "color", "text", 4.5),
+    ("body text", "#about p", "color", "text", 4.5),
+    ("body link", "#methodology a", "color", "text", 4.5),
+    ("statistic value", ".stat .n", "color", "text", 4.5),
+    ("statistic label", ".stat .k", "color", "text", 4.5),
+    ("callout text", ".callout", "color", "text", 4.5),
+    ("callout rule", ".callout", "borderLeftColor", "boundary", 3.0),
+    ("filter label", ".field label", "color", "text", 4.5),
+    ("filter input text", "#f-q", "color", "text", 4.5),
+    ("filter input border", "#f-q", "borderTopColor", "boundary", 3.0),
+    ("filter select text", ".field select", "color", "text", 4.5),
+    ("filter select border", ".field select", "borderTopColor", "boundary", 3.0),
+    ("disclosure summary", "details.morefilters > summary", "color", "text", 4.5),
+    ("active filter chip", ".chip", "color", "text", 4.5),
+    ("primary button text", "button.primary", "color", "text", 4.5),
+    ("primary button edge", "button.primary", "borderTopColor", "boundary", 3.0),
+    ("ghost button text", "button.ghost", "color", "text", 4.5),
+    ("ghost button edge", "button.ghost", "borderTopColor", "boundary", 3.0),
+    ("result count", "#count", "color", "text", 4.5),
+    ("scroll hint", "#collection-scroll-hint", "color", "text", 4.5),
+    ("scroll hint icon", ".scroll-hint .scroll-icon", "color", "text", 3.0),
+    ("scroll button glyph", "#collection-scroll-right", "color", "text", 4.5),
+    ("scroll button edge", "#collection-scroll-right", "borderTopColor", "boundary", 3.0),
+    ("column heading", "#collection-table thead th button.sort", "color", "text", 4.5),
+    ("table cell", "#rows tr td:nth-child(3)", "color", "text", 4.5),
+    ("clipped cell", "#rows .cell-clip", "color", "text", 4.5),
+    ("year separator", "tr.yearsep td", "color", "text", 4.5),
+    ("frozen column heading", "#collection-table th.corr", "color", "text", 4.5),
+    ("frozen column link", "#rows td.corr a", "color", "text", 4.5),
+    ("frozen column edge", "#rows td.corr", "borderLeftColor", "boundary", 3.0),
+    ("confirmed pill", ".pill.confirmed", "color", "text", 4.5),
+    ("marketplace pill", ".pill.marketplace-claimed", "color", "text", 4.5),
+    ("pending pill", ".pill.pending", "color", "text", 4.5),
+    ("not-applicable pill", ".pill.not-applicable", "color", "text", 4.5),
+    ("treatment badge", "#rows .treatment", "color", "text", 4.5),
+    ("language present", "td.langcell.yes", "color", "text", 4.5),
+    ("language absent", "td.langcell.no", "color", "text", 4.5),
+    ("language count", "td.langcount", "color", "text", 4.5),
+    ("legend text", ".language-legend", "color", "text", 4.5),
+    ("legend present state", ".language-legend .yes", "color", "text", 4.5),
+    ("legend absent state", ".language-legend .no", "color", "text", 4.5),
+    ("checklist preview", ".builder .preview", "color", "text", 4.5),
+    ("sources table text", "table.sources td", "color", "text", 4.5),
+    ("sources list link", "details.sourcelist li a", "color", "text", 4.5),
+    ("footer text", "footer.sitefoot", "color", "text", 4.5),
+]
+
+# Computed backgrounds are frequently transparent or semi-transparent — the overflow toolbar uses
+# color-mix over the panel — so the backdrop is composited down to an opaque rgb() rather than
+# handing a partially transparent colour to the ratio calculation.
+MEASURE_SURFACES = """(surfaces) => {
+  const parse = (value) => {
+    const parts = (value.match(/[\\d.]+/g) || []).map(Number);
+    if (value.startsWith('color(')) {
+      return {r: parts[0] * 255, g: parts[1] * 255, b: parts[2] * 255,
+              a: parts.length > 3 ? parts[3] : 1};
+    }
+    return {r: parts[0], g: parts[1], b: parts[2], a: parts.length > 3 ? parts[3] : 1};
+  };
+  const over = (top, bottom) => ({
+    r: top.r * top.a + bottom.r * (1 - top.a),
+    g: top.g * top.a + bottom.g * (1 - top.a),
+    b: top.b * top.a + bottom.b * (1 - top.a),
+    a: 1,
+  });
+  const rgb = (c) => 'rgb(' + [c.r, c.g, c.b].map((v) => Math.round(v)).join(', ') + ')';
+  const backdrop = (element) => {
+    let colour = {r: 255, g: 255, b: 255, a: 0};
+    const stack = [];
+    for (let node = element; node; node = node.parentElement) {
+      stack.push(parse(getComputedStyle(node).backgroundColor));
+    }
+    stack.push(parse(getComputedStyle(document.documentElement).backgroundColor));
+    stack.push({r: 255, g: 255, b: 255, a: 1});
+    for (let index = stack.length - 1; index >= 0; index -= 1) colour = over(stack[index], colour);
+    return rgb(colour);
+  };
+  return surfaces.map(([label, selector, property, mode]) => {
+    const element = document.querySelector(selector);
+    if (!element) return {label, missing: true};
+    const behind = mode === 'boundary' ? element.parentElement || document.body : element;
+    return {label, value: rgb(parse(getComputedStyle(element)[property])), against: backdrop(behind)};
+  });
+}"""
+
 results: list[tuple[str, bool, str]] = []
 
 
@@ -109,6 +211,11 @@ def main() -> int:
             theme_page.goto(url)
             theme_page.wait_for_selector("#rows tr")
             first_frame_theme = theme_page.evaluate("window.__snoredexThemeAtFirstFrame")
+            # Chips and treatment badges exist only once a filter narrows the table, and the
+            # language filters live in a collapsed disclosure.
+            theme_page.eval_on_selector_all("details", "els => els.forEach(d => d.open = true)")
+            theme_page.fill("#f-q", "holo")
+            theme_page.wait_for_timeout(150)
             theme_metrics = theme_page.evaluate("""() => {
               const primary = getComputedStyle(document.querySelector('button.primary'));
               const control = getComputedStyle(document.querySelector('.field select'));
@@ -144,6 +251,60 @@ def main() -> int:
                   and contrast_ratio(theme_metrics["absentForeground"],
                                      theme_metrics["bodyBackground"]) >= 4.5,
                   str(theme_metrics))
+            # The representative sample above is a smoke test; #43 asks for the whole interface.
+            surfaces = theme_page.evaluate(MEASURE_SURFACES, THEME_SURFACES)
+            surface_failures = []
+            for surface, (label, _selector, _property, _mode, threshold) in zip(
+                    surfaces, THEME_SURFACES):
+                if surface.get("missing"):
+                    surface_failures.append(f"{label}: not rendered")
+                    continue
+                ratio = contrast_ratio(surface["value"], surface["against"])
+                if ratio < threshold:
+                    surface_failures.append(
+                        f"{label}: {ratio:.2f}:1 needs {threshold}:1 "
+                        f"({surface['value']} on {surface['against']})")
+            check(f"every {scheme}-mode surface meets its WCAG 2.2 AA contrast threshold",
+                  not surface_failures,
+                  f"{len(surface_failures)}/{len(THEME_SURFACES)} failing: "
+                  f"{'; '.join(surface_failures[:6])}")
+
+            # 2.4.11: a focus ring that lands under the sticky furniture is not visible focus.
+            # The filtered table is too short to scroll into, so restore the full list first.
+            theme_page.fill("#f-q", "")
+            theme_page.wait_for_timeout(150)
+            theme_page.evaluate("""() => {
+              document.querySelector('#collection-table-frame').scrollIntoView();
+              scrollBy(0, 600);
+            }""")
+            theme_page.wait_for_timeout(150)
+            obscured = theme_page.evaluate("""() => {
+              const overlay = document.querySelector('#collection-sticky-header');
+              const tools = document.querySelector('#collection-scroll-tools');
+              const band = overlay.classList.contains('is-visible')
+                ? overlay.getBoundingClientRect()
+                : tools.getBoundingClientRect();
+              const covers = (box) => box.top < band.bottom && box.bottom > band.top;
+              const targets = [...document.querySelectorAll(
+                '#rows td.corr a, #rows .cell-clip[data-clipped="true"]')];
+              // Start from something the furniture is already covering, so the assertion measures
+              // the scroll adjustment rather than a row that happened to sit clear of it.
+              const start = targets.find((element) => covers(element.getBoundingClientRect()));
+              if (!start) return {missing: true};
+              start.focus();
+              const box = start.getBoundingClientRect();
+              return {
+                covered: covers(box),
+                inViewport: box.top >= 0 && box.bottom <= innerHeight,
+                focusTop: box.top, bandTop: band.top, bandBottom: band.bottom,
+              };
+            }""")
+            check(f"keyboard focus in the table clears the sticky furniture in {scheme} mode",
+                  not obscured.get("missing")
+                  and not obscured["covered"] and obscured["inViewport"],
+                  str(obscured))
+            theme_page.evaluate("scrollTo(0, 0)")
+
             check(f"theme toggle exposes state and an adequate target in {scheme} mode",
                   theme_metrics["pressed"] == str(scheme == "dark").lower()
                   and scheme in theme_metrics["label"]
