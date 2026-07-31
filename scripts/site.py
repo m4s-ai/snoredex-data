@@ -53,14 +53,18 @@ FINISH_LABEL = {
 # print stylesheet that lets the table overflow silently truncates the right-hand side.
 COLUMNS = [
     ("", None, "img"), ("Release", "release", ""), ("Card", "name", ""),
-    ("Set", "setCode", ""), ("Expansion", "setName", "secondary"),
-    ("No.", "number", ""), ("Variant", "variant", "secondary"),
-    ("Rarity", "rarity", "secondary"), ("Artist", "artist", "secondary"),
+    ("Set", "setCode", ""), ("Expansion", "setName", "secondary col-expansion"),
+    ("No.", "number", ""), ("Variant", "variant", "secondary col-variant"),
+    ("Rarity", "rarity", "secondary col-rarity"),
+    ("Artist", "artist", "secondary col-artist"),
     ("Edition", "edition", ""), ("Finish", "finish", ""),
-    ("Pattern", "pattern", "secondary"), ("Stamp", "marking", "secondary"),
-    ("Stamp role", "markingRole", "secondary"), ("Size", "size", "secondary"),
-    ("Distribution", "distribution", "secondary"), ("Evidence", "evidence", "secondary"),
-    ("Langs", "langCount", ""),
+    ("Pattern", "pattern", "secondary col-pattern"),
+    ("Stamp", "marking", "secondary col-marking"),
+    ("Stamp role", "markingRole", "secondary col-marking-role"),
+    ("Size", "size", "secondary col-size"),
+    ("Distribution", "distribution", "secondary col-distribution"),
+    ("Evidence", "evidence", "secondary col-evidence"),
+    ("Langs", "langCount", "langcount"),
 ]
 
 
@@ -475,12 +479,28 @@ def main() -> int:
     <div class="count" id="count"></div>
   </div>
 
-  <div class="tablewrap">
-    <table id="collection">
-      <caption class="sr">Chronological list of documented Snorlax card printings</caption>
-      <thead><tr>{"".join(head_cells)}</tr></thead>
-      <tbody id="rows"></tbody>
-    </table>
+  <div class="tableframe" id="collection-table-frame">
+    <div class="table-scroll-tools" id="collection-scroll-tools" hidden>
+      <span class="scroll-hint" id="collection-scroll-hint" aria-live="polite">
+        <span class="scroll-icon" aria-hidden="true">&#8596;</span><span class="scroll-hint-text">More columns are available</span>
+      </span>
+      <span class="scroll-actions">
+        <button type="button" class="scroll-button" id="collection-scroll-left"
+          aria-controls="collection-table-scroll" aria-label="Scroll collection table left">&#8592;</button>
+        <button type="button" class="scroll-button" id="collection-scroll-right"
+          aria-controls="collection-table-scroll" aria-label="Scroll collection table right">&#8594;</button>
+      </span>
+    </div>
+    <span class="table-edge left" aria-hidden="true"></span>
+    <div class="tablewrap" id="collection-table-scroll" tabindex="0"
+      aria-describedby="collection-scroll-hint">
+      <table id="collection-table">
+        <caption class="sr">Chronological list of documented Snorlax card printings</caption>
+        <thead><tr>{"".join(head_cells)}</tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <span class="table-edge right" aria-hidden="true"></span>
   </div>
 </section>
 

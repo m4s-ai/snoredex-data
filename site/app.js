@@ -362,34 +362,49 @@
     return '<span class="pill ' + escapeHTML(cls) + '">' + escapeHTML(text) + "</span>";
   }
 
+  function clippedCell(value, classes, rendered) {
+    const text = value || "—";
+    return '<td class="secondary ' + classes + '"><span class="cell-clip" title="' +
+      escapeHTML(text) + '">' + (rendered === undefined ? escapeHTML(text) : rendered) +
+      "</span></td>";
+  }
+
   function rowHTML(row) {
     const langCells = LANGS.map((lang) => {
       const has = row.langCodes.includes(lang.code);
       return '<td class="langcell ' + (has ? "yes" : "no") + '">' + (has ? "●" : "·") + "</td>";
     }).join("");
     const finishPills = row.finishDisplay.map((f) => pill(f.label, f.status)).join("");
+    const variant = row.variant + (row.variantName ? " — " + row.variantName : "");
+    const evidence = row.evidence.join(", ") || "—";
+    const image = row.image
+      ? '<button type="button" class="card-preview-trigger" aria-expanded="false" ' +
+        'aria-label="Enlarge card image: ' + escapeHTML(row.name) + '" title="Enlarge card image">' +
+        '<img loading="lazy" src="' + escapeHTML(row.image) + '" alt="' + escapeHTML(row.name) + '">' +
+        "</button>"
+      : "";
     const patternBadges = row.patterns.map((pattern) =>
       '<span class="treatment">' + escapeHTML(patternLabel(pattern)) + "</span>").join("");
     return (
       "<tr>" +
-      '<td class="img">' + (row.image ? '<img loading="lazy" src="' + escapeHTML(row.image) + '" alt="' + escapeHTML(row.name) + '">' : "") + "</td>" +
+      '<td class="img">' + image + "</td>" +
       "<td>" + escapeHTML(row.dateDisplay) + "</td>" +
       "<td>" + escapeHTML(row.name) + "</td>" +
       "<td>" + escapeHTML(row.setCode) + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.setName) + "</td>" +
+      clippedCell(row.setName, "col-expansion") +
       "<td>" + escapeHTML(row.number || "—") + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.variant) + (row.variantName ? "<br><small>" + escapeHTML(row.variantName) + "</small>" : "") + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.rarity || "—") + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.artist || "—") + "</td>" +
+      clippedCell(variant, "col-variant") +
+      clippedCell(row.rarity || "—", "col-rarity") +
+      clippedCell(row.artist || "—", "col-artist") +
       "<td>" + escapeHTML(row.edition) + "</td>" +
       "<td>" + (finishPills || '<span class="pill pending">no evidence</span>') + "</td>" +
-      '<td class="secondary">' + (patternBadges || "—") + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.markings.join(", ") || "—") + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.markingRoles.join(", ") || "—") + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.sizes.join(", ")) + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.distributions.join(", ") || "—") + "</td>" +
-      '<td class="secondary">' + row.evidence.map((e) => pill(e, e)).join("") + "</td>" +
-      '<td class="langcell">' + row.confirmedLanguages.length + "</td>" +
+      clippedCell(row.patterns.join(", ") || "—", "col-pattern", patternBadges || "—") +
+      clippedCell(row.markings.join(", ") || "—", "col-marking") +
+      clippedCell(row.markingRoles.join(", ") || "—", "col-marking-role") +
+      clippedCell(row.sizes.join(", "), "col-size") +
+      clippedCell(row.distributions.join(", ") || "—", "col-distribution") +
+      clippedCell(evidence, "col-evidence", row.evidence.map((e) => pill(e, e)).join("") || "—") +
+      '<td class="langcount">' + row.confirmedLanguages.length + "</td>" +
       langCells +
       '<td class="corr"><a href="' + escapeHTML(row.correctionUrl) + '" target="_blank" rel="noopener" ' +
       'aria-label="Report a correction for ' + escapeHTML(row.name + " " + row.setCode + " " + (row.number || "")) +
@@ -435,6 +450,144 @@
     renderChips();
     writeURL();
     updateChecklistPreview();
+    window.requestAnimationFrame(refreshTableOverflow);
+  }
+
+  /* ------------------------------------------ horizontal table affordance */
+
+  let refreshTableOverflow = () => {};
+
+  function initTableOverflow() {
+    const frame = $("#collection-table-frame");
+    const scroller = $("#collection-table-scroll");
+    const tools = $("#collection-scroll-tools");
+    const hint = $(".scroll-hint-text", tools);
+    const left = $("#collection-scroll-left");
+    const right = $("#collection-scroll-right");
+
+    const update = () => {
+      const max = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+      const overflowing = max > 2;
+      const canLeft = overflowing && scroller.scrollLeft > 2;
+      const canRight = overflowing && scroller.scrollLeft < max - 2;
+
+      tools.hidden = !overflowing;
+      frame.classList.toggle("is-overflowing", overflowing);
+      frame.classList.toggle("can-scroll-left", canLeft);
+      frame.classList.toggle("can-scroll-right", canRight);
+      left.disabled = !canLeft;
+      right.disabled = !canRight;
+
+      if (canLeft && canRight) hint.textContent = "More columns on both sides";
+      else if (canLeft) hint.textContent = "More columns to the left";
+      else hint.textContent = "More columns to the right — scroll horizontally";
+    };
+
+    const scrollByPage = (direction) => {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      scroller.scrollBy({
+        left: direction * Math.max(280, Math.round(scroller.clientWidth * 0.72)),
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    };
+
+    left.addEventListener("click", () => scrollByPage(-1));
+    right.addEventListener("click", () => scrollByPage(1));
+    scroller.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    if (window.ResizeObserver) new ResizeObserver(update).observe(scroller);
+    update();
+    return update;
+  }
+
+  /* ---------------------------------------------------- card image preview */
+
+  function initCardPreview() {
+    const preview = document.createElement("figure");
+    preview.className = "card-preview";
+    preview.hidden = true;
+    preview.setAttribute("aria-hidden", "true");
+    preview.innerHTML = '<img alt=""><figcaption></figcaption>';
+    document.body.appendChild(preview);
+
+    const previewImage = $("img", preview);
+    const caption = $("figcaption", preview);
+    let active = null;
+    let pinned = false;
+
+    const position = () => {
+      if (!active || preview.hidden) return;
+      const anchor = active.getBoundingClientRect();
+      const box = preview.getBoundingClientRect();
+      const gap = 14;
+      const margin = 12;
+      let left;
+      let top;
+
+      if (window.innerWidth <= 720) {
+        left = (window.innerWidth - box.width) / 2;
+        top = (window.innerHeight - box.height) / 2;
+      } else {
+        left = anchor.right + gap;
+        if (left + box.width > window.innerWidth - margin) left = anchor.left - gap - box.width;
+        if (left < margin) left = (window.innerWidth - box.width) / 2;
+        top = anchor.top + (anchor.height - box.height) / 2;
+      }
+
+      preview.style.left = Math.round(Math.max(margin, Math.min(left, window.innerWidth - box.width - margin))) + "px";
+      preview.style.top = Math.round(Math.max(margin, Math.min(top, window.innerHeight - box.height - margin))) + "px";
+    };
+
+    const hide = () => {
+      if (active) active.setAttribute("aria-expanded", "false");
+      active = null;
+      pinned = false;
+      preview.hidden = true;
+      preview.setAttribute("aria-hidden", "true");
+    };
+
+    const show = (trigger, keepOpen) => {
+      if (active && active !== trigger) active.setAttribute("aria-expanded", "false");
+      active = trigger;
+      pinned = Boolean(keepOpen);
+      const image = $("img", trigger);
+      previewImage.src = image.currentSrc || image.src;
+      caption.textContent = image.alt;
+      trigger.setAttribute("aria-expanded", "true");
+      preview.hidden = false;
+      preview.setAttribute("aria-hidden", "false");
+      window.requestAnimationFrame(position);
+    };
+
+    document.addEventListener("pointerover", (event) => {
+      const trigger = event.target.closest && event.target.closest(".card-preview-trigger");
+      if (!trigger || trigger.contains(event.relatedTarget) || event.pointerType === "touch") return;
+      show(trigger, false);
+    });
+    document.addEventListener("pointerout", (event) => {
+      const trigger = event.target.closest && event.target.closest(".card-preview-trigger");
+      if (!trigger || trigger.contains(event.relatedTarget) || pinned) return;
+      hide();
+    });
+    document.addEventListener("focusin", (event) => {
+      const trigger = event.target.closest && event.target.closest(".card-preview-trigger");
+      if (trigger) show(trigger, false);
+    });
+    document.addEventListener("focusout", (event) => {
+      const trigger = event.target.closest && event.target.closest(".card-preview-trigger");
+      if (trigger && !pinned) hide();
+    });
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest && event.target.closest(".card-preview-trigger");
+      if (trigger) {
+        if (active === trigger && pinned) hide();
+        else show(trigger, true);
+      } else if (pinned) hide();
+    });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") hide(); });
+    previewImage.addEventListener("load", position);
+    window.addEventListener("resize", position);
+    window.addEventListener("scroll", position, { passive: true });
   }
 
   /* ------------------------------------------------------- checklist builder */
@@ -615,6 +768,8 @@
   readURL();
   buildControls();
   initChecklist();
+  refreshTableOverflow = initTableOverflow();
+  initCardPreview();
   syncControls();
   render();
 })();

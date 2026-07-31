@@ -56,7 +56,7 @@ summary:focus-visible, th button:focus-visible {
   outline-offset: 2px;
 }
 
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px 64px; }
+.wrap { max-width: 192rem; margin: 0 auto; padding: 0 clamp(10px, 1.35vw, 26px) 64px; }
 
 /* --- masthead and navigation --- */
 header.masthead { border-bottom: 1px solid var(--line); background: var(--panel); }
@@ -128,12 +128,46 @@ button.ghost {
 .count { color: var(--muted); font-size: 13px; margin-top: 8px; }
 
 /* --- collection table --- */
-.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.tableframe { position: relative; }
+.table-scroll-tools {
+  position: sticky; top: 0; z-index: 6;
+  display: flex; align-items: center; gap: 8px;
+  min-height: 38px; padding: 5px 7px 5px 10px;
+  background: var(--panel);
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  border: 1px solid var(--line); border-bottom: 0; border-radius: 8px 8px 0 0;
+  box-shadow: 0 5px 12px -12px rgba(0, 0, 0, .65);
+  backdrop-filter: blur(8px);
+}
+.table-scroll-tools[hidden] { display: none; }
+.scroll-hint { min-width: 0; color: var(--muted); font-size: 12px; }
+.scroll-hint .scroll-icon { color: var(--accent); font-size: 15px; margin-right: 5px; }
+.scroll-actions { display: flex; gap: 4px; margin-left: auto; }
+.scroll-button {
+  display: inline-grid; place-items: center; width: 30px; height: 27px;
+  padding: 0; border: 1px solid var(--line); border-radius: 5px;
+  background: var(--bg); color: var(--fg); font: inherit; font-size: 16px;
+  font-weight: 700; line-height: 1; cursor: pointer;
+}
+.scroll-button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.scroll-button:disabled { color: var(--muted); cursor: default; opacity: .38; }
+.table-edge {
+  position: absolute; top: 38px; bottom: 0; z-index: 4; width: 24px;
+  opacity: 0; pointer-events: none; transition: opacity 120ms ease;
+}
+.table-edge.left { left: 1px; background: linear-gradient(90deg, rgba(0, 0, 0, .18), transparent); }
+.table-edge.right { right: 1px; background: linear-gradient(270deg, rgba(0, 0, 0, .18), transparent); }
+.tableframe.can-scroll-left .table-edge.left,
+.tableframe.can-scroll-right .table-edge.right { opacity: 1; }
+
+.tablewrap {
+  overflow-x: auto; border: 1px solid var(--line); border-radius: 8px;
+  overscroll-behavior-x: contain;
+}
+.tableframe.is-overflowing .tablewrap { border-radius: 0 0 8px 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
 th, td {
-  padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top;
-  /* 34 columns in a 1200px shell squeezed text cells into 6-line wraps and 170px rows. Let the
-   * cells take their natural width and scroll .tablewrap horizontally instead. */
+  padding: 4px 6px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top;
   white-space: nowrap;
 }
 td small { white-space: normal; }
@@ -151,8 +185,48 @@ tr.yearsep td {
   background: var(--panel); font-weight: 700; letter-spacing: .04em;
   position: sticky; left: 0;
 }
-td.img img { width: 46px; height: auto; max-height: 64px; object-fit: contain;
-  border-radius: 3px; display: block; }
+.cell-clip {
+  display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.col-expansion .cell-clip { width: 10rem; }
+.col-variant .cell-clip { width: 8rem; }
+.col-rarity .cell-clip { width: 6.5rem; }
+.col-artist .cell-clip { width: 7rem; }
+.col-pattern .cell-clip { width: 4.75rem; }
+.col-marking .cell-clip, .col-marking-role .cell-clip,
+.col-distribution .cell-clip { width: 6.75rem; }
+.col-size .cell-clip { width: 4.5rem; }
+.col-evidence .cell-clip { width: 10rem; }
+
+.card-preview-trigger {
+  display: block; padding: 0; border: 0; border-radius: 4px;
+  background: transparent; cursor: zoom-in;
+}
+.card-preview-trigger img {
+  width: 40px; height: auto; max-height: 56px; object-fit: contain;
+  border-radius: 3px; display: block;
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+.card-preview-trigger:hover img,
+.card-preview-trigger:focus-visible img,
+.card-preview-trigger[aria-expanded="true"] img {
+  transform: translateY(-1px) scale(1.08);
+  filter: saturate(1.08);
+  box-shadow: 0 5px 14px -5px rgba(0, 0, 0, .55);
+}
+.card-preview {
+  position: fixed; z-index: 100; width: min(320px, calc(100vw - 24px));
+  margin: 0; padding: 7px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--bg); color: var(--fg);
+  box-shadow: 0 18px 55px -16px rgba(0, 0, 0, .65);
+  pointer-events: none;
+}
+.card-preview[hidden] { display: none; }
+.card-preview img { display: block; width: 100%; max-height: calc(100vh - 72px); object-fit: contain; border-radius: 6px; }
+.card-preview figcaption {
+  overflow: hidden; padding: 6px 3px 1px; color: var(--muted);
+  font-size: 12px; line-height: 1.3; text-align: center; text-overflow: ellipsis; white-space: nowrap;
+}
 /* Frozen pane: without a visible edge the sticky column reads as truncated text rather than
  * as content scrolling underneath it. */
 td.corr, th.corr {
@@ -164,7 +238,7 @@ th.corr { background: var(--panel); z-index: 3; }
 tbody tr:hover td.corr { background: var(--panel); }
 
 .pill {
-  display: inline-block; border-radius: 999px; padding: 1px 8px;
+  display: inline-block; border-radius: 999px; padding: 1px 5px;
   font-size: 11px; font-weight: 650; border: 1px solid currentColor; margin: 1px 2px 1px 0;
 }
 .pill.confirmed { color: var(--confirmed); }
@@ -176,7 +250,9 @@ tbody tr:hover td.corr { background: var(--panel); }
   border-radius: 4px; border: 1px solid var(--line); background: var(--panel);
   color: var(--muted); font-size: 11px; font-weight: 600;
 }
-.langcell { text-align: center; font-weight: 650; }
+.langcell { min-width: 1.8rem; width: 1.8rem; padding-inline: 3px; text-align: center; font-weight: 650; }
+.langcell button.sort { gap: 1px; }
+.langcount { text-align: center; font-weight: 650; }
 .langcell.yes { color: var(--confirmed); }
 .langcell.no { color: var(--line); }
 
@@ -200,8 +276,14 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
 @media (max-width: 720px) {
   .wrap { padding: 0 10px 48px; }
   h1 { font-size: 21px; }
-  td.img img { width: 34px; max-height: 48px; }
+  .table-scroll-tools { top: 0; }
+  .scroll-hint { font-size: 11px; }
+  .card-preview-trigger img { width: 34px; max-height: 48px; }
   .field input, .field select { min-width: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-edge, .card-preview-trigger img { transition: none; }
 }
 
 @media print {
@@ -211,12 +293,13 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
    * truncate the right-hand side, print drops the language matrix, the secondary columns and
    * the interactive furniture, leaving a legible chronological summary. The full matrix stays
    * available on screen and in the downloadable checklist. */
-  nav.sections, .controls, .builder, .stats, details,
+  nav.sections, .controls, .builder, .stats, details, .table-scroll-tools, .table-edge, .card-preview,
   td.corr, th.corr, .langcell, .secondary, td.img, th.img { display: none !important; }
 
   body { background: #fff; color: #000; font-size: 9pt; }
   .wrap { max-width: none; padding: 0; }
   .tablewrap { overflow: visible; border: 0; }
+  .tableframe.is-overflowing .tablewrap { border-radius: 0; }
   table { table-layout: fixed; width: 100%; font-size: 8.5pt; }
   th, td { padding: 2px 4px; word-wrap: break-word; white-space: normal; }
   thead { display: table-header-group; }
