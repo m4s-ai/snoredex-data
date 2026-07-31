@@ -343,13 +343,15 @@
       render();
     });
 
-    $$("th button.sort").forEach((button) => {
-      button.addEventListener("click", () => {
-        const key = button.dataset.key;
-        if (sortKey === key) sortDir = -sortDir;
-        else { sortKey = key; sortDir = 1; }
-        render();
-      });
+    // Delegated rather than bound per button: the sticky heading is a clone of this row, and a
+    // clone carries no listeners. Delegation keeps the visible copy and the real one in step.
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest && event.target.closest("button.sort");
+      if (!button) return;
+      const key = button.dataset.key;
+      if (sortKey === key) sortDir = -sortDir;
+      else { sortKey = key; sortDir = 1; }
+      render();
     });
   }
 
@@ -684,6 +686,20 @@
     const schedule = () => {
       if (!scheduled) scheduled = window.requestAnimationFrame(sync);
     };
+
+    // The overlay covers the real heading, so it has to answer for the interactions it hides.
+    // Its sort buttons work through the delegated handler; a click that misses one must stop here
+    // rather than fall through to whichever row happens to be scrolling past underneath.
+    overlay.addEventListener("mousedown", (event) => {
+      // Focus stays out of an aria-hidden subtree; the real heading remains the keyboard target.
+      event.preventDefault();
+    });
+    overlay.addEventListener("wheel", (event) => {
+      if (!event.deltaX) return;
+      scroller.scrollLeft += event.deltaX;
+      event.preventDefault();
+      schedule();
+    }, { passive: false });
 
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);

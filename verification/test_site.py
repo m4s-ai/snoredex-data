@@ -331,6 +331,47 @@ def main() -> int:
               "-500" in sticky_scroll["transform"]
               and abs(sticky_scroll["reportRight"] - sticky_scroll["overlayRight"]) <= 1,
               str(sticky_scroll))
+        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
+        page.wait_for_timeout(80)
+
+        # A heading that covers the table owes the user the interactions it hides. Sorting from the
+        # sticky copy must sort, and a click anywhere on it must not reach the row underneath —
+        # otherwise aiming at a column heading expands a cell or opens a card preview instead.
+        sticky_sort = page.evaluate("""() => {
+          const overlay = document.querySelector('#collection-sticky-header');
+          const button = overlay.querySelector('th[data-key="name"] button.sort');
+          const box = button.getBoundingClientRect();
+          const point = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
+          return {
+            reaches: overlay.contains(point),
+            x: box.x + box.width / 2,
+            y: box.y + box.height / 2,
+            hit: point ? point.tagName + '.' + point.className : null,
+          };
+        }""")
+        check("sticky headings receive their own clicks instead of passing them through",
+              sticky_sort["reaches"], str(sticky_sort))
+        page.mouse.click(sticky_sort["x"], sticky_sort["y"])
+        page.wait_for_timeout(120)
+        sticky_sorted = page.evaluate("""() => ({
+          aria: document.querySelector('#collection-table thead th[data-key="name"]')
+            .getAttribute('aria-sort'),
+          overlayAria: document.querySelector('#collection-sticky-header th[data-key="name"]')
+            .getAttribute('aria-sort'),
+          names: [...document.querySelectorAll('#rows tr td:nth-child(3)')]
+            .slice(0, 12).map((cell) => cell.innerText.trim()),
+          expanded: document.querySelectorAll('.cell-clip.is-expanded').length,
+          preview: !document.querySelector('.card-preview').hidden,
+        })""")
+        check("sorting from the sticky heading sorts the table and mirrors its state",
+              sticky_sorted["aria"] == "ascending"
+              and sticky_sorted["overlayAria"] == "ascending"
+              and sticky_sorted["names"] == sorted(sticky_sorted["names"], key=str.lower)
+              and sticky_sorted["expanded"] == 0
+              and not sticky_sorted["preview"],
+              str(sticky_sorted))
+        page.click('th[data-key="release"] button.sort')
+        page.wait_for_timeout(120)
         page.evaluate("scrollTo(0, 0)")
         page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
         page.wait_for_timeout(80)
