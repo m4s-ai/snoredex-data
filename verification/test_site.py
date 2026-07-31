@@ -83,6 +83,73 @@ def main() -> int:
         check("table rows do not blow up from text wrapping", max_row <= 120,
               f"tallest row {max_row}px")
 
+        # The site used to clamp every monitor to a 1,200px content shell while the table itself
+        # needed 3,711px. A wide display must now be used, and the compact column treatment should
+        # fit the complete matrix at 2560px without manufacturing a horizontal-scroll problem.
+        page.set_viewport_size({"width": 2560, "height": 1000})
+        page.wait_for_timeout(120)
+        wide_layout = page.evaluate("""() => {
+          const wrap = document.querySelector('.wrap');
+          const scroller = document.querySelector('#collection-table-scroll');
+          const tools = document.querySelector('#collection-scroll-tools');
+          return {
+            wrap: Math.round(wrap.getBoundingClientRect().width),
+            overflow: scroller.scrollWidth - scroller.clientWidth,
+            toolsHidden: tools.hidden,
+          };
+        }""")
+        check("wide monitors use the available viewport width", wide_layout["wrap"] >= 2500,
+              f"content shell is only {wide_layout['wrap']}px at a 2560px viewport")
+        check("the complete collection matrix fits a 2560px viewport",
+              wide_layout["overflow"] <= 1 and wide_layout["toolsHidden"],
+              f"overflow={wide_layout['overflow']} toolsHidden={wide_layout['toolsHidden']}")
+
+        # At narrower widths some overflow is unavoidable. It must be announced at the top of the
+        # table, with working controls, instead of exposing only a scrollbar after 203 rows.
+        page.set_viewport_size({"width": 1280, "height": 900})
+        page.wait_for_timeout(120)
+        overflow_start = page.evaluate("""() => ({
+          overflow: document.querySelector('#collection-table-scroll').scrollWidth
+            - document.querySelector('#collection-table-scroll').clientWidth,
+          toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
+          rightDisabled: document.querySelector('#collection-scroll-right').disabled,
+          hint: document.querySelector('.scroll-hint-text').textContent,
+        })""")
+        check("horizontal overflow is clearly indicated above the table",
+              overflow_start["overflow"] > 0 and not overflow_start["toolsHidden"]
+              and not overflow_start["rightDisabled"] and "right" in overflow_start["hint"],
+              str(overflow_start))
+        page.click("#collection-scroll-right")
+        page.wait_for_timeout(500)
+        overflow_after_click = page.evaluate("""() => ({
+          left: document.querySelector('#collection-table-scroll').scrollLeft,
+          leftDisabled: document.querySelector('#collection-scroll-left').disabled,
+        })""")
+        check("overflow controls scroll the table in both directions",
+              overflow_after_click["left"] > 0 and not overflow_after_click["leftDisabled"],
+              str(overflow_after_click))
+        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
+        page.wait_for_timeout(80)
+
+        # Thumbnails visibly react and render their large preview outside the clipped table.
+        image_trigger = page.locator(".card-preview-trigger").first
+        image_trigger.hover()
+        page.wait_for_timeout(120)
+        preview_geometry = page.evaluate("""() => {
+          const trigger = document.querySelector('.card-preview-trigger').getBoundingClientRect();
+          const preview = document.querySelector('.card-preview');
+          const box = preview.getBoundingClientRect();
+          return {hidden: preview.hidden, triggerWidth: trigger.width, previewWidth: box.width};
+        }""")
+        check("hovering a card thumbnail opens a substantially larger preview",
+              not preview_geometry["hidden"]
+              and preview_geometry["previewWidth"] >= preview_geometry["triggerWidth"] * 4,
+              str(preview_geometry))
+        page.keyboard.press("Escape")
+        check("the enlarged card preview closes with Escape",
+              page.locator(".card-preview").evaluate("element => element.hidden"),
+              "preview remained open")
+
         count_text = page.text_content("#count")
         check("shown/total count is displayed", "203" in (count_text or ""), count_text or "")
 
@@ -463,6 +530,33 @@ def main() -> int:
           .slice(0, 10)""")
         check("mobile layout does not scroll the page body horizontally", body_overflow <= 1,
               f"body overflow {body_overflow}px at 390px wide; offenders={mobile_offenders}")
+
+        mobile_overflow = page.evaluate("""() => ({
+          overflow: document.querySelector('#collection-table-scroll').scrollWidth
+            - document.querySelector('#collection-table-scroll').clientWidth,
+          toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
+          hint: document.querySelector('.scroll-hint-text').textContent,
+        })""")
+        check("mobile users receive the horizontal-scroll indication",
+              mobile_overflow["overflow"] > 0 and not mobile_overflow["toolsHidden"]
+              and "right" in mobile_overflow["hint"], str(mobile_overflow))
+
+        mobile_trigger = page.locator(".card-preview-trigger").first
+        mobile_trigger.click()
+        page.wait_for_timeout(120)
+        mobile_preview = page.evaluate("""() => {
+          const preview = document.querySelector('.card-preview');
+          const box = preview.getBoundingClientRect();
+          return {hidden: preview.hidden, left: box.left, right: box.right, width: box.width};
+        }""")
+        check("tapping a card opens a preview that fits the mobile viewport",
+              not mobile_preview["hidden"] and mobile_preview["left"] >= 0
+              and mobile_preview["right"] <= 390,
+              str(mobile_preview))
+        mobile_trigger.click()
+        check("tapping the active card closes its preview",
+              page.locator(".card-preview").evaluate("element => element.hidden"),
+              "preview remained open after the second tap")
 
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
