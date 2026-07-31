@@ -106,6 +106,32 @@ def main() -> int:
         check("every semantic field has a dedicated filter", not missing_filters,
               f"missing controls: {missing_filters}")
 
+        finish_options = page.eval_on_selector_all(
+            "#f-finish option", "els => els.map(e => [e.value, e.textContent])")
+        check("public finish filter exposes one Reverse Holo family",
+              ["reverse-holo", "Reverse Holo"] in finish_options
+              and not any(value == "mirror-holo" or label == "Mirror Holo"
+                          for value, label in finish_options),
+              f"finish options: {finish_options}")
+        technical_mirror_rows = page.evaluate("""() => JSON.parse(
+          document.getElementById('data-rows').textContent
+        ).filter(r => r.technicalFinishes.includes('mirror-holo'))""")
+        check("technical mirror-holo evidence remains in the embedded audit projection",
+              len(technical_mirror_rows) == 4
+              and all("reverse-holo" in row["finishes"] and "mirror-holo" not in row["finishes"]
+                      for row in technical_mirror_rows),
+              f"technical mirror rows: {[(r['rowId'], r['finishes']) for r in technical_mirror_rows]}")
+
+        page.select_option("#f-finish", ["reverse-holo"])
+        page.wait_for_timeout(120)
+        mirror_family_rows = page.locator("#rows tr:not(.yearsep)").filter(has_text="xsv2a")
+        check("Reverse Holo filter includes Poké Ball and Master Ball product rows",
+              mirror_family_rows.count() == 2
+              and all("Reverse Holo" in text for text in mirror_family_rows.all_text_contents()),
+              f"xsv2a rows under Reverse Holo: {mirror_family_rows.all_text_contents()}")
+        page.select_option("#f-finish", [])
+        page.wait_for_timeout(120)
+
         page.select_option("#f-dateStatus", ["approximate"])
         page.wait_for_timeout(120)
         approximate = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
@@ -243,6 +269,13 @@ def main() -> int:
         preview = page.text_content("#cl-preview")
         check("checklist preview reports an item count", "checklist items" in (preview or ""),
               preview or "")
+        checklist_finish_options = page.eval_on_selector_all(
+            "#cl-finishes option", "els => els.map(e => [e.value, e.textContent])")
+        check("checklist selector aggregates mirror treatments under Reverse Holo",
+              ["reverse-holo", "Reverse Holo"] in checklist_finish_options
+              and not any(value == "mirror-holo" for value, _ in checklist_finish_options)
+              and "Reverse Holo treatments" in (preview or ""),
+              f"options={checklist_finish_options}; preview={preview}")
 
         # Scope must follow the *filtered* rows, so filter first, then switch scope.
         page.select_option("#f-edition", ["1st Edition"])
@@ -294,6 +327,12 @@ def main() -> int:
         check("every printed line carries its stable checklist ID",
               checklist_id_count == checkbox_count,
               f"{checklist_id_count} IDs for {checkbox_count} checkboxes")
+        check("downloaded checklist labels patterned mirror treatments as Reverse Holo",
+              "Reverse Holo" in content and "Poké Ball" in content and "Master Ball" in content,
+              "Reverse Holo family or its named treatments are missing")
+        check("downloaded checklist retains deterministic finish-family grouping",
+              content.count('data-finish-group-id="') == checkbox_count,
+              "every physical line must keep both its stable item ID and family group ID")
         check("checklist repeats semantic headings when printing",
               "<thead>" in content and "Checklist ID</th>" in content
               and "thead{display:table-header-group}" in content,

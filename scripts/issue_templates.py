@@ -63,7 +63,6 @@ FINISH_LABELS = {
     "non-holo": "Non-Holo",
     "holo": "Holo",
     "reverse-holo": "Reverse Holo",
-    "mirror-holo": "Mirror Holo",
 }
 
 
@@ -248,13 +247,15 @@ def build_form(vocab: dict[str, list[str]]) -> str:
 
     lines += checkboxes(
         "finishes", "Finishes that DO exist",
-        "Tick every finish you can positively confirm for this card, language and edition.",
-        [(FINISH_LABELS[f], False) for f in ("non-holo", "holo", "reverse-holo", "mirror-holo")])
+        "Tick every collector-facing finish family you can positively confirm for this card, "
+        "language and edition. Reverse Holo includes patterned reverse and mirror treatments.",
+        [(FINISH_LABELS[f], False) for f in ("non-holo", "holo", "reverse-holo")])
 
     lines += dropdown(
         "foil-pattern", "Foil pattern",
-        "The pattern of the foil itself. Poké Ball and Master Ball are Mirror Holo patterns, "
-        "not Reverse Holo — pick the pattern you can see and we will map it to the right finish.",
+        "The exact treatment within the finish family. For Poké Ball, Master Ball, energy and "
+        "other patterned reverse or mirror treatments, select Reverse Holo above and identify "
+        "the visible pattern here.",
         ["Not applicable / non-holo", "I do not know"]
         + [label_for(p) for p in vocab["patterns"]]
         + ["Other (describe below)"])

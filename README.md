@@ -26,7 +26,7 @@ and produces a stable machine-readable checklist plus an interactive collection 
 ## Current state
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-07-26**, after the database review and release-readiness work merged to `main`.
+Status snapshot: **2026-07-31**, after the database review and release-readiness work merged to `main`.
 
 | Area | Current state |
 |---|---|
@@ -201,17 +201,24 @@ Current positive coverage (units can appear in more than one row):
 <!-- generated:finish-coverage — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Known available finish | Set-number-language units |
 |---|---:|
-| Non-holo | 270 |
+| Non-Holo | 270 |
 | Holo | 145 |
-| Reverse holo | 234 |
-| Mirror holo | 8 |
-| Both non-holo and holo | 18 |
+| Reverse Holo family | 242 |
+| Both Non-Holo and Holo | 18 |
 <!-- /generated:finish-coverage -->
 
-Each unit contains `finishStatus` for `non-holo`, `holo`, `reverse-holo`, and `mirror-holo`, plus
-one or more physical `printings`. A printing keeps four separate dimensions:
+The public site and checklist use three collector-facing finish families: **Non-Holo**, **Holo**,
+and **Reverse Holo**. Reverse Holo aggregates the technical `reverse-holo` and `mirror-holo`
+classifications, while the exact Poké Ball, Master Ball, energy, tiled, stamped, or other treatment
+remains visible and keeps its own physical checklist item.
+
+Each finish unit still contains the auditable technical `finishStatus` values `non-holo`, `holo`,
+`reverse-holo`, and `mirror-holo`, plus one or more physical `printings`. The technical dimensions
+remain separate, and checklist items add the collector-facing projection:
 
 - `finish` — non-holo, holo, reverse-holo, mirror-holo, or temporarily unknown;
+- `finishFamily` — the collector-facing projection used by checklist items; both reverse-holo and
+  mirror-holo map to Reverse Holo;
 - `foilPattern` — for example Cosmos, crosshatch, tiled type symbol, Poké Ball, or Master Ball;
 - `markings` — a physical set logo, Staff, retailer, or Pokémon Center stamp, including its role;
 - `distribution` and `cardSize` — how it was released and whether it is standard or jumbo.
