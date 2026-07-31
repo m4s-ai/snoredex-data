@@ -139,6 +139,11 @@ original. Reviving ingestion is issue #28 and is a *data-access* decision — Ca
 deliberately rate-limited — not a translation task. If #28 revives the pipeline, it should be
 written in Python then, against real inputs.
 
+They are archived rather than ported, but not before their data flow — stages, inputs, outputs,
+ordering — is written into #28. Those six files are the only surviving description of what
+ingestion did, and archiving them without capturing that leaves #28 starting from nothing. The
+capture is a reading pass, not a port: it produces a spec in the issue, not code in the tree.
+
 ## 4. Waves
 
 Ordered topologically by artifact coupling and by how hard the node is to prove equivalent.
@@ -194,30 +199,39 @@ has caching conventions.
 ### Wave 4 — decommission
 
 - Delete the "Parse every PowerShell file" CI step.
-- Re-scope or retire `X3` and `X4` in `review_findings.py`; if the archive stays under
-  `verification/passes/`, `X3`/`X4` should be re-pointed at it or replaced by a single check that
-  the archive is unmodified. Keep `X5` — BOM-free text is worth enforcing regardless of producer.
-- Move the archive to a location that says what it is (`verification/archive/passes/`), with a
-  README stating the never-rerun policy. This is the only change to archived files: their path.
+- Replace `X3` and `X4` — both police PowerShell specifically — with a single check that the
+  archive is unmodified. Keep `X5`; BOM-free text is worth enforcing regardless of producer.
+- Move the archive to `verification/archive/passes/`, with a README stating the never-rerun
+  policy. This is the only change to archived files: their path.
+- Move the 6 dormant `scripts/*.ps1` alongside it, after their data flow is captured in #28.
+- Trim the Windows matrix leg rather than dropping it. It keeps every step that touches the
+  filesystem — generator determinism and `git diff --exit-code`, `review_findings.py`,
+  `publish.py --verify`, the build-tree check — because those are the path-portability surface
+  that issue #28 is about, and a backslash assumption is exactly what a Linux-only gate misses.
+  The browser suite and its Chromium install stay Linux-only: they are the expensive steps, and
+  they exercise rendering rather than path handling.
+- Harden `P7`'s synthetic-merge exemption while the harness is being consolidated. It currently
+  excludes GitHub's `refs/pull/N/merge` commit only when that commit is `HEAD`, which made the
+  same commit pass on Windows and fail on Ubuntu twice in a row (PR #49). Excluding any commit
+  reachable only from `refs/pull/*/merge` makes the verdict deterministic. Dormant today only
+  because no personal address exists to find.
 - Update `README.md`, `HANDOVER.md`, `verification/RESUME.md`, `verification/FINISH_SOURCES.md`,
   `verification/passes/README.md`, `CONTRIBUTING.md` and the `verification/*.ps1` glob in
   `LICENSE.md`.
-- Decide whether the Windows matrix leg stays. **It should** — it now proves the *Python* code is
-  path-portable, which is the assumption issue #28 is about.
 
 **Exit:** `find . -name '*.ps1' -not -path './verification/archive/*'` is empty; no `pwsh` in any
 workflow; both gate jobs green.
 
-## 5. Consolidation decision
+## 5. Consolidation
 
 Translating `review_integrity.ps1` into a standalone `review_integrity.py` would move the
 duplication rather than remove it: two harnesses, two output formats, two places to add a rule.
 
-The recommendation is to fold its 22 invariants into the existing `check()` harness in
-`review_findings.py`, extracting the shared parts (artifact loading, the check/report protocol,
-the exit-code contract) into a small module both entry points import. Two CI steps remain, so a
-failure still names which family broke, but there is one implementation of "how a check is
-declared and reported".
+Instead, the shared parts — artifact loading, the check/report protocol, the exit-code contract —
+are extracted into a small module that both entry points import, and the 22 invariants join the
+`check()` harness that `review_findings.py` already uses. Two CI steps remain, so a red gate still
+names which family broke, but there is one implementation of "how a check is declared and
+reported".
 
 One semantic must survive the merge intact: `review_integrity.ps1` deliberately **reports** count
 drift instead of failing on it, and fails only when a count moves *backwards*. The file explains
@@ -291,16 +305,26 @@ plus both gate jobs green, `verification/test_site.py` at its current count, and
 Total new Python is on the order of 800 lines replacing 445 lines of PowerShell — porting is not
 compression, and the harness and fixtures are new capability rather than translated code.
 
-## 10. Open decisions
+## 10. Decisions
 
-These need an owner's answer before Wave 1, because they change the shape of the work:
+Answered by the owner, 2026-07-31. They are recorded here rather than in a thread because each
+one changes the shape of the work, and a later reader should not have to reconstruct why.
 
-1. **Consolidate or translate?** Fold `review_integrity` into the `review_findings` harness
-   (recommended), or keep a standalone `review_integrity.py` mirroring the original file for
-   file-level diffability against history?
-2. **Archive location.** Move to `verification/archive/passes/` (recommended — the path then
-   states the policy), or leave the passes where they are and adjust `X3`/`X4` instead?
-3. **The dormant `scripts/` pipeline.** Archive it alongside the passes (recommended), or hold it
-   in place pending issue #28?
-4. **Windows matrix leg.** Keep (recommended, it now tests Python path portability) or drop for
-   CI minutes?
+1. **Consolidate, do not translate.** The 22 invariants join the `review_findings` harness through
+   a shared module; no standalone twin. Accepted cost: the port is harder to diff against the
+   PowerShell original during review, which is a one-time price for removing a permanent
+   duplication. The drift-versus-fail semantic is ported verbatim regardless.
+2. **The archive moves to `verification/archive/passes/`,** so the path states the policy rather
+   than a README having to. `X3`/`X4` are replaced by one check that the archive is unmodified.
+3. **The dormant pipeline is archived, but its data flow is captured in #28 first.** Archiving
+   the only surviving description of ingestion without writing down what it did would leave #28
+   starting from nothing.
+4. **The Windows leg stays, trimmed.** It keeps the filesystem-touching steps, because those are
+   the path-portability surface #28 cares about, and sheds the browser suite and Chromium install,
+   which are the expensive steps and exercise rendering rather than paths. Worth stating the
+   residual risk plainly: a Windows-only *rendering* regression would now reach `main` unseen.
+   That is judged acceptable because the page is generated once and rendered by the same Chromium
+   on both platforms; if the site ever grows platform-specific behaviour, this decision should be
+   revisited rather than inherited.
+5. **`P7`'s runner-dependent exemption is fixed inside this work,** in the decommissioning wave,
+   rather than as a separate change. See Wave 4.
