@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 18,
-   "evidenceRecords": 867,
-   "uniqueUrls": 860,
+   "evidenceRecords": 882,
+   "uniqueUrls": 875,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2732
+   "claimsAttributed": 2777
   }
  },
  "providers": [
@@ -127,12 +127,12 @@
     "finish"
    ],
    "attribution": "Content from Bulbapedia, licensed CC BY-NC-SA 2.5.",
-   "notes": "Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
+   "notes": "Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 75,
-   "claimsSupported": 647
+   "uniqueSources": 90,
+   "claimsSupported": 692
   },
   {
    "providerId": "tcgcsv",
@@ -527,17 +527,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSV5C",
     "U0521"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/BW-P_Promotional_cards_(TCG)",
@@ -563,15 +566,18 @@
    "sourceTypes": [
     "Bulbapedia (fan wiki), product article, \"In other languages\" table",
     "Bulbapedia (fan wiki), product article, deck list",
+    "Bulbapedia expansion/product release field",
     "Bulbapedia sealed-deck contents"
    ],
    "dimensions": [
+    "date",
     "finish",
     "finish-override",
     "language"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 7,
    "stableIds": [
+    "BA20",
     "F0006-P01",
     "U0293",
     "U0294",
@@ -579,8 +585,8 @@
     "U0297",
     "override:battle-academy-2020"
    ],
-   "retrievedAt": "2026-07-23",
-   "usageCount": 6
+   "retrievedAt": "2026-07-31",
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Battle_Party:_Shared_Dream_(ATCG)",
@@ -621,17 +627,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSMPC",
     "U0675"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
@@ -655,17 +664,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSV7C",
     "U0685"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Collection_151_(ATCG)",
@@ -721,6 +733,41 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Decidueye_&_Melmetal_&_Koraidon_&_Miraidon_Happy_Set_(ATCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "CSVH4C"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Diamond_&_Pearl_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "DP",
+    "DP1"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_(ATCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -746,33 +793,127 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSAC",
     "U0514"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_V_Starter_Deck_(ATCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "CS1DC",
+    "U0581"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/EX_Dragon_Frontiers_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "DF",
+    "PCG9"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/EX_FireRed_&_LeafGreen_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "FL",
+    "PCG1"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/EX_Team_Rocket_Returns_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "PCG3",
+    "TRR"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Fates_Collide_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "U0581"
+    "XY10"
    ],
-   "retrievedAt": "2026-07-22",
+   "retrievedAt": "2026-07-31",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Flashfire_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "XY2"
+   ],
+   "retrievedAt": "2026-07-31",
    "usageCount": 1
   },
   {
@@ -780,86 +921,101 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CS5aC",
     "U0183"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_V_Starter_Deck_(ATCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "CS5DC",
     "U0650",
     "U0765"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 2
+   "retrievedAt": "2026-07-31",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field"
+    "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "20th",
     "U0680"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Golden_Energy_(ATCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSM2.1C",
     "U0559"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Gym_Challenge_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), expansion set list (Japanese numbering)"
+    "Bulbapedia (fan wiki), expansion set list (Japanese numbering)",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "G2",
     "U0427"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Hidden_Fates_(TCG)",
@@ -967,17 +1123,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSVL1C",
     "U0588"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
@@ -1014,21 +1173,24 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), expansion article",
-    "Bulbapedia (fan wiki), expansion set list (Japanese numbering)"
+    "Bulbapedia (fan wiki), expansion set list (Japanese numbering)",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 6,
    "stableIds": [
+    "PJU",
     "U0094",
     "U0095",
     "U0124",
     "U0125",
     "U0380"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 5
+   "retrievedAt": "2026-07-31",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
@@ -1036,13 +1198,16 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), expansion article",
-    "Bulbapedia (fan wiki), expansion article, \"Languages this set is released in\""
+    "Bulbapedia (fan wiki), expansion article, \"Languages this set is released in\"",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 12,
+   "stableIdCount": 13,
    "stableIds": [
+    "HXY",
     "U0482",
     "U0484",
     "U0485",
@@ -1056,8 +1221,8 @@
     "U0495",
     "U0586"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 12
+   "retrievedAt": "2026-07-31",
+   "usageCount": 13
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
@@ -1127,6 +1292,23 @@
    "usageCount": 72
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Lost_Link_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "LL"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/MEGA_Dream_ex_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -1149,16 +1331,53 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "CS6bC",
+    "U0213"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/National_Beginning_Set_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "U0213"
+    "HSZ"
    ],
-   "retrievedAt": "2026-07-21",
+   "retrievedAt": "2026-07-31",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Nihil_Zero_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "m3"
+   ],
+   "retrievedAt": "2026-07-31",
    "usageCount": 1
   },
   {
@@ -1183,17 +1402,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSZC",
     "U0431"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pikachu_%26_Clefairy_%26_Turtwig_%26_Gimmighoul_Happy_Set_(ATCG)",
@@ -1210,6 +1432,40 @@
     "U0612"
    ],
    "retrievedAt": "2026-07-22",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pikachu_&_Clefairy_&_Turtwig_&_Gimmighoul_Happy_Set_(ATCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "CSVH1C"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Plasma_Storm_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "BW7"
+   ],
+   "retrievedAt": "2026-07-31",
    "usageCount": 1
   },
   {
@@ -1400,21 +1656,41 @@
    "usageCount": 22
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pokémon_Card_Display_Set_Gift_Box_Vol._3_(ATCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "CSUC"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Primordial_Arts_V_Starter_Deck_(ATCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CS3DC",
     "U0614"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
@@ -1452,6 +1728,23 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Rising_Rivals_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "Pt2"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/S-P_Promotional_cards_(SCTCG)",
@@ -1624,55 +1917,65 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 6,
    "stableIds": [
+    "CSM2bC",
+    "CSM2cC",
     "U0240",
     "U0430",
     "U0457",
     "U0635"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 4
+   "retrievedAt": "2026-07-31",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_GX_Starter_Deck_(ATCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSM2DC",
     "U0613"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Skyridge_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), expansion article, \"Languages this set is released in\""
+    "Bulbapedia (fan wiki), expansion article, \"Languages this set is released in\"",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "EC5",
     "U0186",
     "U0605"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 2
+   "retrievedAt": "2026-07-31",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
@@ -1796,19 +2099,22 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product/card article"
+    "Bulbapedia (fan wiki), product/card article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "U0590",
     "U0683",
-    "U0763"
+    "U0763",
+    "mC"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 3
+   "retrievedAt": "2026-07-31",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
@@ -1832,34 +2138,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list"
+    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "U0677"
+    "U0677",
+    "svLN"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Storming_Emergence_(ATCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSM1cC",
     "U0438"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_Family_Pok%C3%A9mon_Card_Game_(TCG)",
@@ -1876,6 +2188,23 @@
     "U0583"
    ],
    "retrievedAt": "2026-07-22",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sun_&_Moon_Family_Pokémon_Card_Game_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion/product release field"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "smL"
+   ],
+   "retrievedAt": "2026-07-31",
    "usageCount": 1
   },
   {
@@ -1919,17 +2248,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "CSV10C",
     "U0761"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
@@ -1973,19 +2305,22 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, via shared card identity"
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, via shared card identity",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
+    "CS2aC",
     "U0255",
     "U0289",
     "U0592"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 3
+   "retrievedAt": "2026-07-31",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",

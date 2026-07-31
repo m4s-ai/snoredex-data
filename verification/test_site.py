@@ -153,6 +153,39 @@ def main() -> int:
         count_text = page.text_content("#count")
         check("shown/total count is displayed", "203" in (count_text or ""), count_text or "")
 
+        sourced_dates = page.evaluate("""() => {
+          const rows = JSON.parse(document.getElementById('data-rows').textContent);
+          return Object.fromEntries(['G2', 'PCG9', 'DF', 'CS2aC'].map(code => {
+            const row = rows.find(candidate => candidate.setCode === code);
+            return [code, {date: row.dateDisplay, source: row.dateSource}];
+          }));
+        }""")
+        expected_dates = {
+            "G2": ("1999-06-25", "Gym Challenge (TCG)", "jarelease"),
+            "PCG9": ("2006-06-29", "EX Dragon Frontiers (TCG)", "jarelease"),
+            "DF": ("2006-11-08", "EX Dragon Frontiers (TCG)", "enrelease"),
+            "CS2aC": ("2023-08-18", "Vivid Portrayals (ATCG)", "release"),
+        }
+        release_projection_ok = all(
+            sourced_dates[code]["date"] == date
+            and sourced_dates[code]["source"]["page"] == source_page
+            and sourced_dates[code]["source"]["field"] == field
+            for code, (date, source_page, field) in expected_dates.items()
+        )
+        check("Bulbapedia market-specific release dates reach the site projection",
+              release_projection_ok, str(sourced_dates))
+
+        page.fill("#f-q", "challenge from the darkness")
+        page.wait_for_timeout(120)
+        release_link = page.locator("#rows tr:not(.yearsep) .release-source")
+        check("sourced release dates link to the reviewed Bulbapedia page",
+              release_link.count() == 1
+              and release_link.first.text_content() == "1999-06-25"
+              and "Gym_Challenge" in (release_link.first.get_attribute("href") or ""),
+              f"links={release_link.count()}")
+        page.fill("#f-q", "")
+        page.wait_for_timeout(120)
+
         # --- filtering ---
         page.fill("#f-q", "jungle")
         page.wait_for_timeout(120)

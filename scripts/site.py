@@ -104,12 +104,14 @@ def current_state_summary(row: dict[str, Any]) -> str:
                 sizes.add(printing["cardSize"])
 
     release = str(row["date"]) + (" (approximate)" if row.get("dateApproximate") else "")
+    release_source = row.get("dateSource") or {}
     finish_text = ", ".join(
         f"{FINISH_LABEL.get(f, f)} = {s}" for f, s in sorted(finishes.items())
     ) or "none recorded"
     return "\n".join([
         f"Edition: {row['edition']}",
         f"Release: {release}",
+        f"Release source: {release_source.get('url') or 'not recorded'}",
         f"Confirmed languages: {', '.join(row['confirmedLanguages']) or 'none'}",
         f"Finishes: {finish_text}",
         f"Foil patterns: {', '.join(sorted(patterns)) or 'none recorded'}",
@@ -218,6 +220,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "dateSort": row["dateSort"],
             "dateDisplay": display_date(row),
             "dateStatus": "approximate" if row.get("dateApproximate") else "exact",
+            "dateSource": row.get("dateSource"),
             "image": row.get("image"),
             "finishes": sorted(finishes),
             "technicalFinishes": sorted(technical_finishes),
@@ -579,6 +582,11 @@ def main() -> int:
   Product attribution is necessarily the weaker view, so a finish can read <code>unmapped</code>
   (known, but not yet attributable to this listing) or <code>other-product</code> (attributed to a
   different listing) rather than being silently downgraded to <code>pending</code>.</p>
+  <h3>Release dates follow the matching market</h3>
+  <p>Bulbapedia commonly records English and Japanese counterpart releases on the same article.
+  The set's published or translated name selects <code>enrelease</code> or <code>jarelease</code>;
+  the article title alone does not. Reviewed Bulbapedia dates take precedence over the generic API
+  fallback, and linked dates in the table open the exact source page used.</p>
   <h3>Data downloads</h3>
   <ul>
     <li><a href="snorlax_cards.json">snorlax_cards.json</a> — main dataset</li>
@@ -587,6 +595,8 @@ def main() -> int:
     <li><a href="analysis_confirmed_releases.csv">analysis_confirmed_releases.csv</a> — spreadsheet export</li>
     <li><a href="verification/finish_units.json">verification/finish_units.json</a> — finish state store</li>
     <li><a href="verification/units.json">verification/units.json</a> — language state store</li>
+    <li><a href="verification/bulbapedia_release_dates.json">verification/bulbapedia_release_dates.json</a> — reviewed release-date sources</li>
+    <li><a href="verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md">verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md</a> — full date-difference audit</li>
     <li><a href="verification/source_registry.json">verification/source_registry.json</a> — source registry</li>
   </ul>
   <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
