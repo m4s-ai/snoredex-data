@@ -34,10 +34,16 @@ EXPECTED_ROWS = 204
 #
 # Thresholds follow WCAG 2.2 AA: 4.5:1 for text (nothing here is large text — the biggest is the
 # 26px masthead heading, asserted at the stricter figure anyway), 3:1 for the boundaries and state
-# indicators of user interface components. Decorative separators — panel edges, row rules, the
-# footer line — are deliberately absent: 1.4.11 covers what identifies a component or a state, and
-# raising every divider to 3:1 would draw a heavy grid over a 204-row table. The frozen-pane edge
-# is listed because it carries meaning; it tells the reader the column is pinned rather than cut.
+# indicators of user interface components. Decorative separators — panel edges, row rules, chip and
+# treatment borders, the masthead and footer lines — are deliberately absent: 1.4.11 covers what
+# identifies a component or a state, and raising every divider to 3:1 would draw a heavy grid over a
+# 204-row table. A chip is identified by its text and fill, a row by its content.
+#
+# The dividing line is whether the edge bounds something floating over content the reader cannot
+# predict. The frozen-pane edge qualifies — it tells the reader the column is pinned rather than cut
+# — and so do the sticky heading overlay, its own pinned-column edge, and the card preview, each of
+# which is positioned over arbitrary rows or card art. Those four are listed and take the control
+# line; their box-shadows reinforce the separation but are not relied on to carry it.
 THEME_SURFACES = [
     ("masthead heading", ".masthead h1", "color", "text", 4.5),
     ("masthead tagline", ".masthead .tagline", "color", "text", 4.5),
@@ -74,6 +80,9 @@ THEME_SURFACES = [
     ("frozen column heading", "#collection-table th.corr", "color", "text", 4.5),
     ("frozen column link", "#rows td.corr a", "color", "text", 4.5),
     ("frozen column edge", "#rows td.corr", "borderLeftColor", "boundary", 3.0),
+    ("sticky heading edge", "#collection-sticky-header", "borderTopColor", "boundary", 3.0),
+    ("sticky heading frozen edge", ".table-sticky-correction", "borderLeftColor", "boundary", 3.0),
+    ("card preview edge", ".card-preview", "borderTopColor", "boundary", 3.0),
     ("confirmed pill", ".pill.confirmed", "color", "text", 4.5),
     ("marketplace pill", ".pill.marketplace-claimed", "color", "text", 4.5),
     ("pending pill", ".pill.pending", "color", "text", 4.5),
