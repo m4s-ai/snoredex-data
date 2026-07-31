@@ -77,6 +77,10 @@ images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg).
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
                               finishes, confirmed_releases (chronological). Plus CSV exports.
 artists_pokemontcgio.json     57 English cards with illustrator + exact release dates.
+verification/bulbapedia_release_dates.json
+                              Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
+                              articles often carry both enrelease and jarelease; never select by
+                              article title alone. Recheck with audit_bulbapedia_release_dates.py.
 scripts/                      Build pipeline, in run order:
                                 mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes
                               plus editions.py (edition classification) and
