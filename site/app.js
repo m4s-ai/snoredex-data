@@ -446,14 +446,27 @@
     const finishes = Array.from($("#cl-finishes").selectedOptions).map((o) => o.value);
     const includeUnresolved = $("#cl-unresolved").checked;
 
-    let allowedRowIds = null;
+    let allowedChecklistKeys = null;
     if (scope === "filtered") {
-      // Scope follows stable row IDs, never the rendered order.
-      allowedRowIds = new Set(visibleRows.map((r) => r.rowId));
+      // A catalogue product can project to several dated physical rows. Keep filtered checklist
+      // scope attached to the selected physical printing without changing the canonical row ID.
+      allowedChecklistKeys = new Set();
+      visibleRows.forEach((row) => {
+        const sourceRowId = row.sourceRowId || row.rowId;
+        if (row.splitPhysicalPrinting && row.printingIds.length) {
+          row.printingIds.forEach((printingId) => {
+            allowedChecklistKeys.add(sourceRowId + "|" + printingId);
+          });
+        } else {
+          allowedChecklistKeys.add(sourceRowId + "|*");
+        }
+      });
     }
 
     return CHECKLIST.filter((item) => {
-      if (allowedRowIds && !allowedRowIds.has(item.rowId)) return false;
+      if (allowedChecklistKeys
+          && !allowedChecklistKeys.has(item.rowId + "|*")
+          && !allowedChecklistKeys.has(item.rowId + "|" + item.printingId)) return false;
       if (langs.length && !langs.includes(item.language)) return false;
       if (editions.length && !editions.includes(item.edition)) return false;
       if (item.finish === "unresolved") return includeUnresolved;

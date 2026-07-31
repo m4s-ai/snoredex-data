@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -145,9 +146,96 @@ def display_date(row: dict[str, Any]) -> str:
     return str(row["date"])
 
 
+def release_sort(value: str) -> str:
+    """Normalize a printing-level release date for chronological presentation."""
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        return value
+    if re.fullmatch(r"\d{4}-\d{2}", value):
+        return value + "-01"
+    return value[:4] + "-01-01"
+
+
+def expand_dated_printings(row: dict[str, Any]) -> list[dict[str, Any]]:
+    """Split one catalogue row when it contains separately dated physical printings.
+
+    Cardmarket can catalogue multiple physical versions as one product. The canonical finish
+    layer keeps those versions separate, but the collection table historically flattened them
+    back into one row and displayed only the catalogue row's first release date. When every
+    logical printing is dated and there is more than one date, expose one chronological variant
+    per date. Undated or single-date products retain the established one-row projection.
+    """
+    cells = row.get("finishByLanguage") or []
+    printings = [printing for cell in cells for printing in (cell.get("printings") or [])]
+    dated = [printing for printing in printings if printing.get("releaseDate")]
+    dates = sorted({str(printing["releaseDate"]) for printing in dated})
+    if len(dates) <= 1 or len(dated) != len(printings):
+        return [row]
+
+    expanded = []
+    for index, date in enumerate(dates, 1):
+        projected_cells = []
+        distributions = set()
+        printing_ids = set()
+        explicit_images = []
+        for cell in cells:
+            matching = [
+                printing for printing in (cell.get("printings") or [])
+                if str(printing.get("releaseDate") or "") == date
+            ]
+            if not matching:
+                continue
+            projected_cell = dict(cell)
+            projected_cell["printings"] = matching
+            matching_finishes = {printing.get("finish") for printing in matching}
+            projected_cell["availableFinishes"] = sorted(
+                finish for finish in matching_finishes if finish in FINISH_FAMILY
+            )
+            projected_cell["finishStatus"] = {
+                finish: status if finish in matching_finishes else "pending"
+                for finish, status in (cell.get("finishStatus") or {}).items()
+            }
+            projected_cells.append(projected_cell)
+            for printing in matching:
+                if printing.get("printingId"):
+                    printing_ids.add(printing["printingId"])
+                distribution = printing.get("distribution") or {}
+                if distribution.get("name"):
+                    distributions.add(distribution["name"])
+                if "image" in printing:
+                    explicit_images.append(printing["image"])
+
+        projected = dict(row)
+        projected["date"] = date
+        projected["dateExact"] = True
+        projected["datePrecision"] = (
+            "day" if re.fullmatch(r"\d{4}-\d{2}-\d{2}", date)
+            else "month" if re.fullmatch(r"\d{4}-\d{2}", date)
+            else "year"
+        )
+        projected["dateApproximate"] = False
+        projected["dateSort"] = release_sort(date)
+        projected["variant"] = f"V{index}" if row["variant"] == "base" else f'{row["variant"]}.{index}'
+        projected["variantName"] = " / ".join(sorted(distributions)) or row.get("variantName")
+        projected["finishByLanguage"] = projected_cells
+        projected["confirmedLanguages"] = [cell["language"] for cell in projected_cells]
+        projected["rowId"] = f'{row["rowId"]}-{date.replace("-", "")}'
+        projected["sourceRowId"] = row["rowId"]
+        projected["printingIds"] = sorted(printing_ids)
+        projected["splitPhysicalPrinting"] = True
+        if explicit_images:
+            unique_images = {image for image in explicit_images}
+            if len(unique_images) == 1:
+                projected["image"] = unique_images.pop()
+        expanded.append(projected)
+    return expanded
+
+
 def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
-    for row in releases:
+    expanded_releases = [
+        row for source_row in releases for row in expand_dated_printings(source_row)
+    ]
+    for row in expanded_releases:
         finishes: set[str] = set()
         technical_finishes: set[str] = set()
         patterns: set[str] = set()
@@ -202,6 +290,9 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
         ])
         rows.append({
             "rowId": row["rowId"],
+            "sourceRowId": row.get("sourceRowId", row["rowId"]),
+            "printingIds": row.get("printingIds", []),
+            "splitPhysicalPrinting": bool(row.get("splitPhysicalPrinting")),
             "name": row["name"],
             "setCode": row["setCode"],
             "setName": row["setName"],
@@ -255,6 +346,7 @@ def build_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "finish": item["finish"],
             "finishFamily": item["finishFamily"],
             "finishGroupId": item["finishGroupId"],
+            "printingId": item.get("printingId"),
             "foilPattern": item.get("foilPattern"),
             "marking": markings[0] if markings else None,
             "markings": markings,
@@ -558,7 +650,9 @@ def main() -> int:
   records what is known for the <em>set number and language</em>, whichever product carries it.
   Product attribution is necessarily the weaker view, so a finish can read <code>unmapped</code>
   (known, but not yet attributable to this listing) or <code>other-product</code> (attributed to a
-  different listing) rather than being silently downgraded to <code>pending</code>.</p>
+  different listing) rather than being silently downgraded to <code>pending</code>. When one
+  Cardmarket product contains multiple physical printings with distinct release dates, the
+  chronological table gives each printing its own dated variant row.</p>
   <h3>Data downloads</h3>
   <ul>
     <li><a href="snorlax_cards.json">snorlax_cards.json</a> — main dataset</li>
