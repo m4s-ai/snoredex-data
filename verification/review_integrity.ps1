@@ -151,7 +151,7 @@ foreach($finishUnit in $finishUnits){
       if($mappedVariant -notin $productVariants){ $badFinishMappings += $printing.printingId }
     }
     foreach($marking in @($printing.markings|Where-Object {$_})){
-      if($marking.role -notin @('reverse-holo-treatment','distribution-promo')){ $badMarkingRoles += $printing.printingId }
+      if($marking.role -notin @('print-identity','reverse-holo-treatment','distribution-promo')){ $badMarkingRoles += $printing.printingId }
       if($marking.role -eq 'reverse-holo-treatment' -and $printing.finish -ne 'reverse-holo'){ $badMarkingRoles += $printing.printingId }
     }
   }
@@ -170,6 +170,9 @@ $prize3=$finishUnits|?{$_.setCode -eq 'PPS3 LOR' -and $_.number -eq 'LOR 143' -a
 $prize7=$finishUnits|?{$_.setCode -eq 'PPS7 JTG' -and $_.number -eq 'JTG 117' -and $_.language -eq 'English'}
 $jtgPromos=$finishUnits|?{$_.setCode -eq 'xJTG' -and $_.number -eq '117' -and $_.language -eq 'English'}
 $prismatic=$finishUnits|?{$_.setCode -eq 'xPRE' -and $_.number -eq '076' -and $_.language -eq 'English'}
+$exs=$finishUnits|?{$_.setCode -eq 'EXS' -and $_.number -eq '' -and $_.language -eq 'Japanese'}
+$exsDates=@($exs.printings|Select-Object -Expand releaseDate)
+$exsRoles=@($exs.printings|%{$_.markings}|Select-Object -Expand role -Unique)
 $specialFinishOk=(
   $dragonFrontiers.Count -eq 4 -and
   @($battleAcademy.printings|?{$_.finish -eq 'non-holo'}).Count -eq 1 -and
@@ -178,9 +181,12 @@ $specialFinishOk=(
   @($prize7.printings|?{$_.finish -eq 'non-holo'}).Count -eq 1 -and
   @($jtgPromos.printings|?{$_.finish -eq 'holo' -and $_.foilPattern -eq 'cosmos'}).Count -eq 3 -and
   @($prismatic.printings|?{$_.finish -eq 'holo' -and $_.cardSize -eq 'standard'}).Count -eq 1 -and
-  @($prismatic.printings|?{$_.finish -eq 'holo' -and $_.cardSize -eq 'jumbo'}).Count -eq 1
+  @($prismatic.printings|?{$_.finish -eq 'holo' -and $_.cardSize -eq 'jumbo'}).Count -eq 1 -and
+  @($exs.printings|?{$_.finish -eq 'non-holo'}).Count -eq 2 -and
+  @('1998-03-23','1998-12-04'|?{$_ -notin $exsDates}).Count -eq 0 -and
+  'print-identity' -in $exsRoles
 )
-Check "special finish cases modeled" $specialFinishOk "DF=$($dragonFrontiers.Count), xJTG=$(@($jtgPromos.printings).Count), xPRE=$(@($prismatic.printings).Count)"
+Check "special finish cases modeled" $specialFinishOk "DF=$($dragonFrontiers.Count), xJTG=$(@($jtgPromos.printings).Count), xPRE=$(@($prismatic.printings).Count), EXS=$(@($exs.printings).Count)"
 
 $hopEnglish=$finishUnits|?{$_.setCode -eq 'JTG' -and $_.number -eq '117' -and $_.language -eq 'English'}
 $hopEnglishFinishes=@($hopEnglish.availableFinishes)

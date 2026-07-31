@@ -165,6 +165,7 @@ def printing_signature(printing: dict[str, Any]) -> str:
         "foilPattern": printing.get("foilPattern"),
         "markings": printing.get("markings"),
         "distribution": printing.get("distribution"),
+        "releaseDate": printing.get("releaseDate"),
         "cardSize": printing.get("cardSize"),
     }
     return json.dumps(identity, ensure_ascii=False, sort_keys=True)
@@ -236,7 +237,7 @@ def has_complete_manifest(printings: list[dict[str, Any]], language: str) -> boo
 
 
 def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") -> dict[str, Any]:
-    return {
+    compact = {
         "printingId": printing["printingId"],
         "finish": printing["finish"],
         "foilPattern": printing.get("foilPattern"),
@@ -246,6 +247,9 @@ def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") 
         "verificationStatus": printing["verificationStatus"],
         "productMapping": product_mapping,
     }
+    if printing.get("releaseDate"):
+        compact["releaseDate"] = printing["releaseDate"]
+    return compact
 
 
 def project_unit_onto_product(unit: dict[str, Any], token: str) -> dict[str, Any]:
@@ -586,6 +590,10 @@ def main() -> None:
                     ),
                     "_origin": "manual",
                 }
+                if "releaseDate" in manual:
+                    candidate["releaseDate"] = manual["releaseDate"]
+                if "image" in manual:
+                    candidate["image"] = manual["image"]
                 add_printing(printings, candidate)
 
         deduplicated_printings: list[dict[str, Any]] = []
@@ -599,6 +607,7 @@ def main() -> None:
         printings.sort(
             key=lambda item: (
                 FINISHES.index(item["finish"]) if item["finish"] in FINISHES else 99,
+                str(item.get("releaseDate") or ""),
                 str(item.get("foilPattern") or ""),
                 json.dumps(item.get("markings"), ensure_ascii=False, sort_keys=True),
                 item.get("cardSize") or "",
@@ -769,7 +778,7 @@ def main() -> None:
     generated_note_prefixes = (
         "variantAxes =",
         "variantAxes and hasReverseHolo are",
-        "markings.role distinguishes EX-era",
+        "markings.role distinguishes",
     )
     notes = [
         note for note in notes if not any(str(note).startswith(prefix) for prefix in generated_note_prefixes)
@@ -778,13 +787,13 @@ def main() -> None:
         "variantAxes and hasReverseHolo are Cardmarket catalogue hints only. finishAvailability is the positive-evidence finish layer; pending never means a finish is proven not to exist."
     )
     notes.append(
-        "markings.role distinguishes EX-era reverse-holo-treatment set logos from later distribution-promo stamps such as prerelease, Staff, retailer, and Pokemon Center marks."
+        "markings.role distinguishes print-identity features, EX-era reverse-holo-treatment set logos, and later distribution-promo stamps such as prerelease, Staff, retailer, and Pokemon Center marks."
     )
     cards_document["meta"]["notes"] = notes
 
     finish_document = {
         "meta": {
-            "description": "One row per set code x collector number x language, with logical physical printings and Cardmarket product mappings.",
+            "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
             "generated": date.today().isoformat(),
             "scope": "Physical cards only; online/live code cards are excluded.",
             "sourcePolicy": [
@@ -794,14 +803,14 @@ def main() -> None:
                 "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
                 "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
                 "Cardmarket Reverse Holo axes and rarity labels are retained as marketplace-claimed hints, not external confirmation.",
-                "EX-era set-logo stamps intrinsic to reverse holo use markings.role=reverse-holo-treatment; later promotional stamps use markings.role=distribution-promo.",
+                "Printed identity features use markings.role=print-identity; EX-era set-logo stamps intrinsic to reverse holo use markings.role=reverse-holo-treatment; later promotional stamps use markings.role=distribution-promo.",
             ],
             "taxonomy": {
                 "finish": list(FINISHES) + ["unknown"],
                 "verificationStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending"],
                 "availabilityStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending", "not-applicable"],
                 "cardSize": ["standard", "jumbo", "unknown"],
-                "markingRoles": ["reverse-holo-treatment", "distribution-promo"],
+                "markingRoles": ["print-identity", "reverse-holo-treatment", "distribution-promo"],
                 "completenessStatus": ["complete-manifest", "positive-evidence-only", "pending", "not-applicable"],
             },
             "counts": counts,

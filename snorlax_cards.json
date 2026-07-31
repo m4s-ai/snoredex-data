@@ -14,9 +14,9 @@
       "languages = languages Cardmarket actually lists offers in for that product; it is marketplace availability, not an official print-run manifest.",
       "cardKey = Cardmarket Versions grouping (card name + attack names). Same cardKey = same card text, NOT necessarily same artwork.",
       "variantToken = Cardmarket -V1/-V2/-V3 slug, used to separate distinct printings sharing a collector number.",
-      "artist coverage is 115/198: English-market releases from pokemontcg.io/limitlesstcg, Japanese-market releases from the official pokemon-card.com database. Remaining nulls are mostly Korean/Chinese deck products with no published illustrator credit.",
+      "artist coverage is 116/198: English-market releases from pokemontcg.io/limitlesstcg, Japanese-market releases from the official pokemon-card.com database. Remaining nulls are mostly Korean/Chinese deck products with no published illustrator credit.",
       "variantAxes and hasReverseHolo are Cardmarket catalogue hints only. finishAvailability is the positive-evidence finish layer; pending never means a finish is proven not to exist.",
-      "markings.role distinguishes EX-era reverse-holo-treatment set logos from later distribution-promo stamps such as prerelease, Staff, retailer, and Pokemon Center marks.",
+      "markings.role distinguishes print-identity features, EX-era reverse-holo-treatment set logos, and later distribution-promo stamps such as prerelease, Staff, retailer, and Pokemon Center marks.",
       "languagesConfirmed / languagesContradicted / languagesUnresolved carry the external verification verdict for each Cardmarket language claim. languages itself is left as the raw marketplace claim, which over-claims: see verification/CONTRADICTED.json."
     ],
     "verification": {
@@ -37,10 +37,10 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-07-23",
+      "lastUpdated": "2026-07-31",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 331,
-      "withOnlyMarketplaceClaim": 104,
+      "withConfirmedFinish": 332,
+      "withOnlyMarketplaceClaim": 103,
       "pendingFinish": 138,
       "notApplicableFinish": 64,
       "withCompleteManifest": 4,
@@ -26778,8 +26778,8 @@
       "cardKey": "Snorlax-Guard-Roll-Over",
       "versionsCount": null,
       "availableItems": 10,
-      "artist": null,
-      "artistSource": null,
+      "artist": "Keita Takahashi",
+      "artistSource": "Bulbapedia (fan wiki), card release history",
       "market": "Japanese",
       "languagesMissingVsMarketBaseline": [
         "Korean",
@@ -26805,7 +26805,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo"
         ],
@@ -26823,18 +26823,18 @@
               "non-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0107",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -26842,11 +26842,46 @@
                 "printingId": "F0107-P01",
                 "finish": "non-holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
+                "markings": [
+                  {
+                    "kind": "rarity-symbol",
+                    "text": "Uncommon rarity symbol",
+                    "role": "print-identity"
+                  }
+                ],
+                "distribution": {
+                  "kind": "vending-sheet",
+                  "name": "Expansion Sheet 1, Sheet 16"
+                },
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "releaseDate": "1998-03-23"
+              },
+              {
+                "printingId": "F0107-P02",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "rarity-symbol",
+                    "text": "No rarity symbol",
+                    "role": "print-identity"
+                  },
+                  {
+                    "kind": "illustrator-credit",
+                    "text": "CoroCoro Comic Illust Contest winning card",
+                    "role": "print-identity"
+                  }
+                ],
+                "distribution": {
+                  "kind": "fixed-deck",
+                  "name": "Quick Starter Gift Set Red Deck"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "releaseDate": "1998-12-04"
               }
             ]
           }
@@ -26864,7 +26899,8 @@
         "contradicted": 0,
         "unresolved": 0,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for printings backed by an outside source. A contradicted language is refuted; an unresolved one is not yet established, never proven absent."
-      }
+      },
+      "artistSourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)"
     },
     {
       "name": "Hop's Snorlax",

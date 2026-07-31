@@ -1,7 +1,14 @@
 $ErrorActionPreference='Stop'
 $base=Split-Path -Parent $PSScriptRoot
-$stage = if(Test-Path "$base\_cards_stage3.json"){"$base\_cards_stage3.json"}else{"$base\_cards_stage2.json"}
-$cards=Get-Content $stage -Raw -Encoding utf8|ConvertFrom-Json
+$stage = if(Test-Path "$base\_cards_stage3.json"){
+  "$base\_cards_stage3.json"
+}elseif(Test-Path "$base\_cards_stage2.json"){
+  "$base\_cards_stage2.json"
+}else{
+  "$base\snorlax_cards.json"
+}
+$inputDocument=Get-Content $stage -Raw -Encoding utf8|ConvertFrom-Json
+$cards=if($inputDocument.cards){$inputDocument.cards}else{$inputDocument}
 
 $WEST=@('English','French','German','Spanish','Italian','Portuguese')
 $ASIA=@('Japanese','Korean','T-Chinese')

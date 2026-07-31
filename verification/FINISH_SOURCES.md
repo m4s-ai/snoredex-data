@@ -34,6 +34,7 @@ covers that unit's language; currently this applies to four English units.
 | `PPS7 JTG 117` English | Play!-stamped non-holo | [Official Series Seven checklist](https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf) has Standard Set only; TCGCSV product `648657` is Normal |
 | `PPS8 JTG 117` English | Play!-stamped non-holo and Cosmos holo | [Official Series Eight checklist](https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf) has both columns; TCGCSV products `648657` and `703844` distinguish Normal and Cosmos Holo |
 | `BA20 MWT` English | Non-holo with Mewtwo deck mark; Cardmarket's Reverse Holo axis is suppressed for every language | Fixed-deck list, local product image, and TCGCSV product `219182` Normal |
+| `EXS` Japanese | Two non-holo printings: glossy Expansion Sheet 1 Sheet 16 with an Uncommon rarity symbol (1998-03-23), and non-glossy Quick Starter Gift Set Red Deck with no rarity symbol and an added contest credit (1998-12-04) | Bulbapedia card and product release histories plus the two physical scans supplied with issue #24 |
 | `CLV 016` English | Holo | Local product image and TCGCSV product `527903` Holofoil |
 | `SWSH 032` English | Holo Snorlax Pin Collection promo | PSA's Snorlax Master Set names the Holo variety; TCGCSV product `210578` is Holofoil |
 | `WCD23 LOR 143` English | Non-holo remains marketplace-claimed rather than externally confirmed | TCGCSV product `541770` Normal; this is positive-only evidence |

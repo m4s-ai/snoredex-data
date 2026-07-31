@@ -27,7 +27,7 @@ The owner (`Scarrty` in git; addressed as the domain expert throughout) directs 
 supplies physical specimens. **Owner statements are authoritative** but graded explicitly as
 evidence (see §6).
 
-## 2. Current state (2026-07-23)
+## 2. Current state (2026-07-31)
 
 | | |
 |---|---|
@@ -38,10 +38,10 @@ evidence (see §6).
 | **Needs manual review** | **5** — all the same question: *does a Portuguese printing exist?* |
 | **Still open** | **9** |
 | Card-variants with every language resolved | 180 / 191 |
-| Artist coverage in main dataset | 115 / 198 |
+| Artist coverage in main dataset | 116 / 198 |
 | Finish units (set number × language) | **637** |
-| Finish units with an externally confirmed finish | **331** |
-| Finish units with marketplace-only positive finish claim | **104** |
+| Finish units with an externally confirmed finish | **332** |
+| Finish units with marketplace-only positive finish claim | **103** |
 | Applicable finish units with no positive finish evidence yet | **138** |
 | Finish units not applicable because every language claim is contradicted | **64** |
 | Finish units in the remaining review queue | **233** |
@@ -138,7 +138,8 @@ verification/
   Cosmos/crosshatch/type-symbol/Poké Ball/etc. distinct; `markings` is the physical stamp;
   `distribution` says how it was released; `cardSize` separates standard from jumbo. Never replace
   the technical finish or collapse the underlying printing/checklist IDs merely to group the UI.
-- **EX stamp rule** — EX-era set-logo stamps that are part of the reverse design use
+- **Marking-role rule** — printed identity features such as rarity symbols and contest credits use
+  `markings.role=print-identity`. EX-era set-logo stamps that are part of the reverse design use
   `markings.role=reverse-holo-treatment` (`DF 10` is the worked example). Later set-name
   prerelease stamps, Staff, retailer and Pokémon Center marks use
   `markings.role=distribution-promo`; they do not imply a reverse holo.

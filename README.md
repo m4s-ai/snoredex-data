@@ -6,7 +6,7 @@ Cardmarket.
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
 [![Cards](https://img.shields.io/badge/cards-198-2563eb)](snorlax_cards.json)
-[![Checklist](https://img.shields.io/badge/checklist-837_items-2563eb)](analysis_checklist.json)
+[![Checklist](https://img.shields.io/badge/checklist-838_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
@@ -32,9 +32,9 @@ Status snapshot: **2026-07-31**, after the database review and release-readiness
 |---|---|
 | Cardmarket catalogue | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Language verification | **719 claims**: 634 externally confirmed, 71 contradicted, 5 awaiting manual review, and 9 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Physical checklist | **837 items** across 174 cards and 15 languages: 662 documented printings plus 175 explicit unresolved placeholders. |
-| Finish evidence | **637 card-number × language units**: 331 externally confirmed, 104 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
-| Evidence registry | **18 providers**, 864 evidence records, 857 unique URLs, and 2,722 attributed claims. Only complete official manifests may establish absence. |
+| Physical checklist | **838 items** across 174 cards and 15 languages: 663 documented printings plus 175 explicit unresolved placeholders. |
+| Finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
+| Evidence registry | **18 providers**, 867 evidence records, 860 unique URLs, and 2,732 attributed claims. Only complete official manifests may establish absence. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -120,11 +120,11 @@ Scraping covered all nine result pages for Cardmarket's Pokémon product search 
 - **`languages` is marketplace availability, not a print manifest — and this is now proven, not just suspected.** Cross-checking every card × language against outside sources produced **71 contradictions**: cases where Cardmarket offers a language for which no printing exists. The clearest is `KSS 26` (XY Kalos Starter Set), where Cardmarket advertises **17 languages** and the expansion was printed in **7** (EN, DE, FR, IT, ES, PT, RU). For some products the filter falls back to a global language list. See `verification/CONTRADICTED.json`.
 - **"Spanish" cannot distinguish European from Latin-American Spanish.** From Journey Together (2025) LATAM-ES is a physically distinct edition for regular sets — not Prize Packs — with different attack translations, set name and set code (specimen-verified for `SVP 184`: "Presión Dinámica"/"Juntos de Aventuras" vs "Plancha Dinámica"/"Aventuras Compartidas"). Cardmarket does not support LATAM-ES; sourcing it would require the official Pokémon site. Every Spanish entry here means the European print. See `verification/RESUME.md`.
 - **`cardKey` groups the same *card*, not the same *artwork*.** Cardmarket derives it from card name + attack names. Reprints with brand-new art share a `cardKey`. That's a feature here — it's exactly how the "same card, new art" cases below were found — but don't read it as art identity.
-- **Artist coverage is 115/198 (58%).** Illustrators come from pokemontcg.io/limitlesstcg (English-market) and the official pokemon-card.com database (Japanese-market). The uncovered rows are mostly Korean/Chinese deck products with no published illustrator credit. Rather than guess, `artist` is left `null` there; use `cardKey` to find a sibling that has one.
+- **Artist coverage is 116/198 (59%).** Illustrators come from pokemontcg.io/limitlesstcg (English-market), the official pokemon-card.com database (Japanese-market), and exact card release histories such as Bulbapedia's EXS Snorlax record. The uncovered rows are mostly Korean/Chinese deck products with no published illustrator credit. Rather than guess, `artist` is left `null` there; use `cardKey` to find a sibling that has one.
 - **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** The two finish layers answer *different* questions, so pick deliberately rather than treating them as alternatives. `finishAvailability` on a card answers “what does evidence attribute to **this Cardmarket product**?” `verification/finish_units.json` answers “what is known for this **set number and language**, whichever product carries it?” Product attribution is necessarily the weaker of the two, so each card row also carries `unitAvailableFinishes` and `unitFinishStatus` from the store. Read the status words exactly: `pending` means no positive evidence anywhere in the unit; `unmapped` means the finish is known but no product is attributed yet; `other-product` means it is attributed to a different listing of the same card. None of the three ever means “does not exist.”
 - **`languages` is the raw Cardmarket claim; the verdict lives beside it.** Each card carries `languagesConfirmed`, `languagesContradicted`, and `languagesUnresolved`. Use `languagesConfirmed` for printings backed by an outside source — 36 products still list at least one language this project has itself refuted, and `languages` deliberately preserves that claim because the over-claiming is a finding.
 - **A Cardmarket V-token is not a finish.** TCGdex's `normal`/`holo`/`reverse` flags apply to the set number and language; `V1`/`V2`/`V3` mapping is recorded only when it is unambiguous or independently identified.
-- **Stamp role matters.** EX-era set-logo stamps that form part of the reverse-holo design use `markings.role: "reverse-holo-treatment"`. Later prerelease, Staff, retailer, and Pokémon Center stamps use `markings.role: "distribution-promo"` and do not imply reverse holo.
+- **Marking role matters.** Printed identity features such as rarity symbols and contest credits use `markings.role: "print-identity"`. EX-era set-logo stamps that form part of the reverse-holo design use `markings.role: "reverse-holo-treatment"`. Later prerelease, Staff, retailer, and Pokémon Center stamps use `markings.role: "distribution-promo"` and do not imply reverse holo.
 
 ## Language drift
 
@@ -188,7 +188,7 @@ The market split across all 198: Western 83 · Japanese 68 · Simplified Chinese
 
 Finish availability is modeled independently of Cardmarket products. The authoritative file has
 **637 set-number-language units**. It currently records at least one externally confirmed finish
-for **331**, a marketplace-only positive claim for **104**, and no positive finish evidence yet
+for **332**, a marketplace-only positive claim for **103**, and no positive finish evidence yet
 for **138 applicable units**. Another **64** units are `not-applicable` because every underlying
 product-language claim is contradicted. Because upstream catalogues are incomplete, this is
 deliberately a positive-evidence model: an unlisted finish remains `pending` rather than being

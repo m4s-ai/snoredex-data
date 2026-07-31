@@ -57,8 +57,8 @@ COLUMNS = [
     ("No.", "number", ""), ("Variant", "variant", "secondary"),
     ("Rarity", "rarity", "secondary"), ("Artist", "artist", "secondary"),
     ("Edition", "edition", ""), ("Finish", "finish", ""),
-    ("Pattern", "pattern", "secondary"), ("Stamp", "marking", "secondary"),
-    ("Stamp role", "markingRole", "secondary"), ("Size", "size", "secondary"),
+    ("Pattern", "pattern", "secondary"), ("Stamp / marking", "marking", "secondary"),
+    ("Marking role", "markingRole", "secondary"), ("Size", "size", "secondary"),
     ("Distribution", "distribution", "secondary"), ("Evidence", "evidence", "secondary"),
     ("Langs", "langCount", ""),
 ]
@@ -109,7 +109,7 @@ def current_state_summary(row: dict[str, Any]) -> str:
         f"Confirmed languages: {', '.join(row['confirmedLanguages']) or 'none'}",
         f"Finishes: {finish_text}",
         f"Foil patterns: {', '.join(sorted(patterns)) or 'none recorded'}",
-        f"Stamps: {', '.join(sorted(stamps)) or 'none recorded'}",
+        f"Markings: {', '.join(sorted(stamps)) or 'none recorded'}",
         f"Card size: {', '.join(sorted(sizes)) or 'unknown'}",
         f"Cardmarket: {row['cardmarketUrl']}",
         "",
@@ -239,11 +239,10 @@ def build_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Compact projection of the canonical export — only what the builder UI needs."""
     compact = []
     for item in items:
-        marking = None
+        markings = []
         for entry in item.get("markings") or []:
             if isinstance(entry, dict) and entry.get("text"):
-                marking = entry["text"]
-                break
+                markings.append(entry["text"])
         compact.append({
             "checklistId": item["checklistId"],
             "rowId": item.get("rowId"),
@@ -257,7 +256,9 @@ def build_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "finishFamily": item["finishFamily"],
             "finishGroupId": item["finishGroupId"],
             "foilPattern": item.get("foilPattern"),
-            "marking": marking,
+            "marking": markings[0] if markings else None,
+            "markings": markings,
+            "distribution": item.get("distribution"),
             "cardSize": item.get("cardSize"),
             "releaseDate": item.get("releaseDate"),
             "image": item.get("image"),
@@ -460,8 +461,8 @@ def main() -> int:
         {multiselect("artist", "Artist")}
         {multiselect("finish", "Finish")}
         {multiselect("pattern", "Foil pattern")}
-        {multiselect("marking", "Stamp")}
-        {multiselect("markingRole", "Stamp role")}
+        {multiselect("marking", "Stamp / marking")}
+        {multiselect("markingRole", "Marking role")}
         {multiselect("size", "Card size")}
         {multiselect("distribution", "Distribution")}
         {multiselect("evidence", "Evidence")}
@@ -545,12 +546,13 @@ def main() -> int:
     <li>Only a complete official checklist may establish that an alternative does <em>not</em>
     exist, and only within its stated scope.</li>
   </ul>
-  <h3>Finish family, treatment, stamp, distribution and size are separate dimensions</h3>
+  <h3>Finish family, treatment, marking, distribution and size are separate dimensions</h3>
   <p>The collector-facing <strong>Reverse Holo</strong> family includes technical
   <code>reverse-holo</code> and <code>mirror-holo</code> printings. Exact treatments such as
   Pok&eacute; Ball, Master Ball, energy patterns and EX-era set-logo reverse treatments stay visible
-  and independently traceable. A later prerelease, Staff, retailer or Pok&eacute;mon Center
-  <code>distribution-promo</code> stamp does not imply a reverse-holo finish.</p>
+  and independently traceable. Printed identity features such as rarity symbols and contest
+  credits use <code>print-identity</code>. A later prerelease, Staff, retailer or Pok&eacute;mon
+  Center <code>distribution-promo</code> stamp does not imply a reverse-holo finish.</p>
   <h3>Two evidence scopes, deliberately</h3>
   <p>A card row shows what evidence attributes to <em>that Cardmarket product</em>. The finish store
   records what is known for the <em>set number and language</em>, whichever product carries it.

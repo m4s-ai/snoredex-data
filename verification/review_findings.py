@@ -929,6 +929,20 @@ if checklist_path.exists():
           and {i["finishFamily"] for i in xsv2a_ja} == {"reverse-holo"}
           and len({i["finishGroupId"] for i in xsv2a_ja}) == 1,
           f"Japanese xsv2a items: {[(i.get('checklistId'), i.get('finishFamily'), i.get('finishGroupId')) for i in xsv2a_ja]}")
+
+    exs = [
+        i for i in items
+        if i["setCode"] == "EXS" and i["number"] == "" and i["language"] == "Japanese"
+    ]
+    exs_dates = {i.get("releaseDate") for i in exs}
+    exs_markings = {marking_text(i) for i in exs}
+    check("C17", "EXS Snorlax keeps the Vending and Quick Starter printings separate", "FAIL",
+          len(exs) == 2
+          and exs_dates == {"1998-03-23", "1998-12-04"}
+          and len(exs_markings) == 2
+          and all("print-identity" in (i.get("markingRoles") or []) for i in exs),
+          f"{len(exs)} items, dates={sorted(d for d in exs_dates if d)}, "
+          f"markings={sorted(exs_markings)}")
 else:
     check("C1", "Canonical checklist export exists", "FAIL", False,
           "analysis_checklist.json is missing; run python scripts/checklist.py")

@@ -498,6 +498,11 @@
     const sections = Array.from(groups.entries()).map(([heading, list]) => {
       const rows = list.map((item) => {
         const family = collectorFinish(item);
+        const markingText = (item.markings || []).join(", ") || item.marking;
+        const distributionText = item.distribution && [
+          item.distribution.name || item.distribution.kind,
+          item.distribution.region,
+        ].filter(Boolean).join(" — ");
         const detail = [
           escapeHTML(item.language),
           item.edition !== "—" ? escapeHTML(item.edition) : null,
@@ -505,7 +510,8 @@
             ? "<em>finish unresolved — not a confirmed version</em>"
             : "<strong>" + escapeHTML(finishLabel(family)) + "</strong>",
           item.foilPattern ? "treatment: " + escapeHTML(patternLabel(item.foilPattern)) : null,
-          item.marking ? "stamp: " + escapeHTML(item.marking) : null,
+          markingText ? "markings: " + escapeHTML(markingText) : null,
+          distributionText ? "distribution: " + escapeHTML(distributionText) : null,
           item.cardSize && item.cardSize !== "standard" ? escapeHTML(item.cardSize) : null,
         ].filter(Boolean).join(" · ");
         const image = !compact && item.image
