@@ -263,7 +263,9 @@ def build_form(vocab: dict[str, list[str]]) -> str:
         "stamp", "Stamp or marking on the card",
         "A physical stamp printed on the card. A distribution stamp does not by itself make a "
         "card Reverse Holo.",
-        ["None", "I do not know"] + vocab["stamps"] + ["Other (describe below)"])
+        # "None" is a reserved word GitHub refuses in dropdown options; it rejects the entire
+        # template over it. "No stamp" says the same thing to a reporter.
+        ["No stamp", "I do not know"] + vocab["stamps"] + ["Other (describe below)"])
 
     lines += dropdown(
         "language", "Language",

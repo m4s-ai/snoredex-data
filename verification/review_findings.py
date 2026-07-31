@@ -34,6 +34,10 @@ ROOT = Path(__file__).resolve().parent.parent
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
 STRENGTH = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confirmed": 3}
 
+# Words GitHub refuses as issue-form dropdown options, rejecting the entire template. Lower-case;
+# compared case-insensitively. Learned from GitHub's own validator, not from any published schema.
+RESERVED_DROPDOWN_OPTIONS = {"none"}
+
 results: list[tuple[str, str, str, bool, str]] = []
 
 
@@ -999,6 +1003,16 @@ if form_path.exists():
                     schema_problems.append(f"{where}: dropdown has duplicate options")
                 if any(not str(option).strip() for option in options):
                     schema_problems.append(f"{where}: dropdown has an empty option")
+                # GitHub reserves "None" for its own empty entry and rejects the whole template
+                # if an option uses it. This is not in the published JSON Schema — validating
+                # against that schema reported zero errors while GitHub refused the file — so it
+                # has to be asserted here explicitly.
+                for option in options:
+                    if str(option).strip().lower() in RESERVED_DROPDOWN_OPTIONS:
+                        schema_problems.append(
+                            f"{where}: option {option!r} is a word GitHub reserves; "
+                            f"the entire template is rejected"
+                        )
             if kind == "checkboxes":
                 for option in attributes.get("options") or []:
                     if not (option or {}).get("label", "").strip():
