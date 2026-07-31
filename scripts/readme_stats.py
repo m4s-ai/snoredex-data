@@ -42,16 +42,19 @@ def read_json(path: Path) -> Any:
         return json.load(handle)
 
 
-def finish_coverage_block(counts: dict[str, int]) -> str:
+def finish_coverage_block(counts: dict[str, int], finish_units: list[dict[str, Any]]) -> str:
+    reverse_family = sum(
+        bool({"reverse-holo", "mirror-holo"} & set(unit["availableFinishes"]))
+        for unit in finish_units
+    )
     rows = (
-        ("Non-holo", "withNonHolo"),
-        ("Holo", "withHolo"),
-        ("Reverse holo", "withReverseHolo"),
-        ("Mirror holo", "withMirrorHolo"),
-        ("Both non-holo and holo", "withBothNonHoloAndHolo"),
+        ("Non-Holo", counts["withNonHolo"]),
+        ("Holo", counts["withHolo"]),
+        ("Reverse Holo family", reverse_family),
+        ("Both Non-Holo and Holo", counts["withBothNonHoloAndHolo"]),
     )
     lines = ["| Known available finish | Set-number-language units |", "|---|---:|"]
-    lines += [f"| {label} | {counts[key]} |" for label, key in rows]
+    lines += [f"| {label} | {value} |" for label, value in rows]
     return "\n".join(lines)
 
 
@@ -222,7 +225,9 @@ def main() -> int:
         "current-state",
         current_state_block(dataset, units, finish_doc, checklist, sources, decisions),
     )
-    updated = replace_block(updated, "finish-coverage", finish_coverage_block(counts))
+    updated = replace_block(
+        updated, "finish-coverage", finish_coverage_block(counts, finish_doc["units"])
+    )
 
     if "--check" in sys.argv:
         if updated != original:

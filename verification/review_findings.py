@@ -177,21 +177,29 @@ check(
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 counts = finish_analysis["counts"]
 prose_errors = []
-for label, key in (
-    ("Non-holo", "withNonHolo"),
-    ("Holo", "withHolo"),
-    ("Reverse holo", "withReverseHolo"),
-    ("Mirror holo", "withMirrorHolo"),
-    ("Both non-holo and holo", "withBothNonHoloAndHolo"),
-):
-    for line in readme.splitlines():
-        if line.startswith(f"| {label} |"):
-            stated = line.rstrip("| ").split("|")[-1].strip()
-            if stated != str(counts[key]):
-                prose_errors.append(f"README '{label}' says {stated}, generated data says {counts[key]}")
+reverse_family_units = sum(
+    bool({"reverse-holo", "mirror-holo"} & set(unit["availableFinishes"]))
+    for unit in finish_units
+)
+expected_finish_rows = {
+    "Non-Holo": counts["withNonHolo"],
+    "Holo": counts["withHolo"],
+    "Reverse Holo family": reverse_family_units,
+    "Both Non-Holo and Holo": counts["withBothNonHoloAndHolo"],
+}
+for label, expected in expected_finish_rows.items():
+    matching = [line for line in readme.splitlines() if line.startswith(f"| {label} |")]
+    if len(matching) != 1:
+        prose_errors.append(f"README has {len(matching)} rows named '{label}', expected one")
+        continue
+    stated = matching[0].rstrip("| ").split("|")[-1].strip()
+    if stated != str(expected):
+        prose_errors.append(f"README '{label}' says {stated}, generated data says {expected}")
+if "| Mirror holo |" in readme or "| Mirror Holo |" in readme:
+    prose_errors.append("README exposes Mirror Holo as a separate collector-facing finish")
 check(
     "F3.1",
-    "README finish table matches analysis_finishes.json",
+    "README finish-family table matches the generated finish stores",
     "FAIL",
     not prose_errors,
     "; ".join(prose_errors),
@@ -895,6 +903,32 @@ if checklist_path.exists():
     check("C14", "Checklist warns that positive evidence is not proof of completeness", "FAIL",
           "documented" in (checklist_doc["meta"].get("warning") or "").lower(),
           "meta.warning must state that absence from the checklist is not absence of the printing")
+
+    family_map = {
+        "non-holo": "non-holo", "holo": "holo",
+        "reverse-holo": "reverse-holo", "mirror-holo": "reverse-holo",
+        "unresolved": "unresolved",
+    }
+    bad_families = [
+        i["checklistId"] for i in items
+        if i.get("finishFamily") != family_map.get(i["finish"]) or not i.get("finishGroupId")
+    ]
+    check("C15", "Every checklist item has the correct collector finish family and group ID",
+          "FAIL", not bad_families,
+          f"{len(bad_families)} malformed family projections: {bad_families[:5]}")
+
+    xsv2a_ja = [
+        i for i in items
+        if i["setCode"] == "xsv2a" and i["language"] == "Japanese"
+        and i["foilPattern"] in {"poke-ball", "master-ball"}
+    ]
+    check("C16", "Poke Ball and Master Ball stay separate items under one Reverse Holo group",
+          "FAIL",
+          len(xsv2a_ja) == 2
+          and len({i["checklistId"] for i in xsv2a_ja}) == 2
+          and {i["finishFamily"] for i in xsv2a_ja} == {"reverse-holo"}
+          and len({i["finishGroupId"] for i in xsv2a_ja}) == 1,
+          f"Japanese xsv2a items: {[(i.get('checklistId'), i.get('finishFamily'), i.get('finishGroupId')) for i in xsv2a_ja]}")
 else:
     check("C1", "Canonical checklist export exists", "FAIL", False,
           "analysis_checklist.json is missing; run python scripts/checklist.py")
@@ -949,6 +983,10 @@ if form_path.exists():
         )
         check("T2b", "Correction form covers every pattern and stamp in the store", "FAIL",
               not missing_vocab, f"absent from the form: {sorted(missing_vocab)[:6]}")
+        check("T2c", "Correction form exposes one Reverse Holo collector family", "FAIL",
+              'label: "Reverse Holo"' in form and 'label: "Mirror Holo"' not in form
+              and "Reverse Holo includes patterned reverse and mirror treatments" in form,
+              "the form must group technical reverse-holo and mirror-holo treatments for reporters")
     except ImportError as error:  # pragma: no cover
         check("T2", "Correction form generator is importable", "FAIL", False, str(error))
 

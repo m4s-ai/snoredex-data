@@ -36,9 +36,11 @@ Open items are also published as a browsable page: `verification/open-items.html
 ### Finish verification is a separate positive-evidence layer
 
 `units.json` answers whether a Cardmarket card-product-language claim exists. It does not answer
-whether the physical printing is non-holo, holo, reverse holo, or mirror holo. That second question
-lives in `finish_units.json`, grouped by set number and language because TCGdex's finish flags are
-not product-specific.
+whether the physical printing is non-holo, holo, reverse holo, or mirror holo. That technical
+question lives in `finish_units.json`, grouped by set number and language because TCGdex's finish
+flags are not product-specific. The public site and checklist add a collector-facing
+`finishFamily`: both technical reverse-holo and mirror-holo printings appear under **Reverse Holo**,
+with their exact foil pattern and physical checklist item retained.
 
 Only upstream `true` values are confirmations. A false or missing TCGdex flag stays `pending`; the
 API's own documentation says detailed per-marketplace variant mapping is still being developed.
@@ -52,7 +54,10 @@ alternative is absent. TCGdex false values, TCGCSV subtype omissions, PSA popula
 catalogue gaps cannot. The source ladder, exact endpoints, and current special-case findings are in
 [`FINISH_SOURCES.md`](FINISH_SOURCES.md).
 
-Keep `finish`, `foilPattern`, `markings`, `distribution`, and `cardSize` separate. In particular:
+Keep technical `finish`, collector-facing `finishFamily`, `foilPattern`, `markings`, `distribution`,
+and `cardSize` separate. Aggregating under Reverse Holo must never delete the underlying
+reverse-holo/mirror-holo distinction, pattern, source, product mapping, or printing ID. In
+particular:
 
 - EX-era set-logo stamps intrinsic to a reverse treatment use `role=reverse-holo-treatment`;
 - later prerelease, Staff, retailer, and Pokémon Center stamps use `role=distribution-promo`;

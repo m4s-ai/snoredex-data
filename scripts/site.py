@@ -37,9 +37,16 @@ LANG_CODE = {
 }
 LANG_ORDER = list(LANG_CODE)
 
+FINISH_FAMILY = {
+    "non-holo": "non-holo",
+    "holo": "holo",
+    "reverse-holo": "reverse-holo",
+    "mirror-holo": "reverse-holo",
+}
 FINISH_LABEL = {
-    "non-holo": "non-holo", "holo": "holo",
-    "reverse-holo": "reverse", "mirror-holo": "mirror",
+    "non-holo": "Non-Holo",
+    "holo": "Holo",
+    "reverse-holo": "Reverse Holo",
 }
 
 # `secondary` columns are dropped when printing: 34 columns cannot fit A4 or US Letter, and a
@@ -77,9 +84,10 @@ def current_state_summary(row: dict[str, Any]) -> str:
     rank = {"pending": 0, "other-product": 1, "unmapped": 2,
             "marketplace-claimed": 3, "owner-attested": 4, "confirmed": 5}
     for cell in row.get("finishByLanguage") or []:
-        for finish, status in (cell.get("finishStatus") or {}).items():
+        for technical_finish, status in (cell.get("finishStatus") or {}).items():
             if status in ("pending", "not-applicable"):
                 continue
+            finish = FINISH_FAMILY.get(technical_finish, technical_finish)
             if rank.get(status, 0) > rank.get(finishes.get(finish, "pending"), 0):
                 finishes[finish] = status
         for printing in cell.get("printings") or []:
@@ -92,7 +100,9 @@ def current_state_summary(row: dict[str, Any]) -> str:
                 sizes.add(printing["cardSize"])
 
     release = str(row["date"]) + (" (approximate)" if row.get("dateApproximate") else "")
-    finish_text = ", ".join(f"{f} = {s}" for f, s in sorted(finishes.items())) or "none recorded"
+    finish_text = ", ".join(
+        f"{FINISH_LABEL.get(f, f)} = {s}" for f, s in sorted(finishes.items())
+    ) or "none recorded"
     return "\n".join([
         f"Edition: {row['edition']}",
         f"Release: {release}",
@@ -139,6 +149,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
     for row in releases:
         finishes: set[str] = set()
+        technical_finishes: set[str] = set()
         patterns: set[str] = set()
         markings: set[str] = set()
         marking_roles: set[str] = set()
@@ -151,14 +162,17 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
         rank = {"pending": 0, "other-product": 1, "unmapped": 2,
                 "marketplace-claimed": 3, "owner-attested": 4, "confirmed": 5}
         for cell in row.get("finishByLanguage") or []:
-            for finish, status in (cell.get("finishStatus") or {}).items():
+            for technical_finish, status in (cell.get("finishStatus") or {}).items():
                 if status in ("pending", "not-applicable"):
                     continue
+                finish = FINISH_FAMILY.get(technical_finish, technical_finish)
                 if rank.get(status, 0) > rank.get(best.get(finish, "pending"), 0):
                     best[finish] = status
             for printing in cell.get("printings") or []:
-                if printing.get("finish") in FINISH_LABEL:
-                    finishes.add(printing["finish"])
+                technical_finish = printing.get("finish")
+                if technical_finish in FINISH_FAMILY:
+                    technical_finishes.add(technical_finish)
+                    finishes.add(FINISH_FAMILY[technical_finish])
                 if printing.get("foilPattern"):
                     patterns.add(printing["foilPattern"])
                 for marking in printing.get("markings") or []:
@@ -182,7 +196,8 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
         search = " ".join(str(v).lower() for v in [
             row["name"], row["setCode"], row["setName"], row["number"], row["variant"],
             row.get("variantName") or "", row.get("rarity") or "", row.get("artist") or "",
-            row["edition"], " ".join(sorted(finishes)), " ".join(sorted(patterns)),
+            row["edition"], " ".join(sorted(finishes)), " ".join(sorted(technical_finishes)),
+            " ".join(sorted(patterns)),
             " ".join(sorted(markings)), " ".join(lang_codes), display_date(row),
         ])
         rows.append({
@@ -201,9 +216,10 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "dateStatus": "approximate" if row.get("dateApproximate") else "exact",
             "image": row.get("image"),
             "finishes": sorted(finishes),
+            "technicalFinishes": sorted(technical_finishes),
             "finishDisplay": [
                 {"label": FINISH_LABEL[f], "status": best.get(f, "pending")}
-                for f in ("non-holo", "holo", "reverse-holo", "mirror-holo") if f in finishes
+                for f in ("non-holo", "holo", "reverse-holo") if f in finishes
             ],
             "patterns": sorted(patterns),
             "markings": sorted(markings),
@@ -238,6 +254,8 @@ def build_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "language": item["language"],
             "edition": item["edition"],
             "finish": item["finish"],
+            "finishFamily": item["finishFamily"],
+            "finishGroupId": item["finishGroupId"],
             "foilPattern": item.get("foilPattern"),
             "marking": marking,
             "cardSize": item.get("cardSize"),
@@ -470,7 +488,8 @@ def main() -> int:
   <h2>Checklist</h2>
   <p>Generate a printable ownership checklist from the canonical export. It lists what has been
   <em>documented</em>, and marks items whose finish is unresolved so they cannot be mistaken for
-  confirmed physical versions.</p>
+  confirmed physical versions. Patterned reverse and mirror treatments are grouped under
+  <strong>Reverse Holo</strong>, while each distinct physical treatment keeps its own checkbox.</p>
   <div class="builder">
     <div class="row">
       <div class="field"><label for="cl-scope">Scope</label>
@@ -526,11 +545,13 @@ def main() -> int:
     <li>Only a complete official checklist may establish that an alternative does <em>not</em>
     exist, and only within its stated scope.</li>
   </ul>
-  <h3>Finish, pattern, stamp, distribution and size are separate dimensions</h3>
-  <p>A stamp does not make a card reverse holo. EX-era set logos that are part of the reverse
-  treatment are recorded as <code>reverse-holo-treatment</code>; later prerelease, Staff, retailer
-  and Pok&eacute;mon Center marks are <code>distribution-promo</code> and imply nothing about finish.</p>
-  <h3>Two finish layers, deliberately</h3>
+  <h3>Finish family, treatment, stamp, distribution and size are separate dimensions</h3>
+  <p>The collector-facing <strong>Reverse Holo</strong> family includes technical
+  <code>reverse-holo</code> and <code>mirror-holo</code> printings. Exact treatments such as
+  Pok&eacute; Ball, Master Ball, energy patterns and EX-era set-logo reverse treatments stay visible
+  and independently traceable. A later prerelease, Staff, retailer or Pok&eacute;mon Center
+  <code>distribution-promo</code> stamp does not imply a reverse-holo finish.</p>
+  <h3>Two evidence scopes, deliberately</h3>
   <p>A card row shows what evidence attributes to <em>that Cardmarket product</em>. The finish store
   records what is known for the <em>set number and language</em>, whichever product carries it.
   Product attribution is necessarily the weaker view, so a finish can read <code>unmapped</code>

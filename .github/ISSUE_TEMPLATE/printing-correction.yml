@@ -90,17 +90,16 @@ body:
     id: finishes
     attributes:
       label: "Finishes that DO exist"
-      description: "Tick every finish you can positively confirm for this card, language and edition."
+      description: "Tick every collector-facing finish family you can positively confirm for this card, language and edition. Reverse Holo includes patterned reverse and mirror treatments."
       options:
         - label: "Non-Holo"
         - label: "Holo"
         - label: "Reverse Holo"
-        - label: "Mirror Holo"
   - type: dropdown
     id: foil-pattern
     attributes:
       label: "Foil pattern"
-      description: "The pattern of the foil itself. Poké Ball and Master Ball are Mirror Holo patterns, not Reverse Holo — pick the pattern you can see and we will map it to the right finish."
+      description: "The exact treatment within the finish family. For Poké Ball, Master Ball, energy and other patterned reverse or mirror treatments, select Reverse Holo above and identify the visible pattern here."
       options:
         - "Not applicable / non-holo"
         - "I do not know"

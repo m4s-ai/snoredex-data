@@ -21,7 +21,8 @@ Rules, in the order they bite:
 5. Where a confirmed card-language-edition has no printing detail at all, emit exactly one
    `finish: "unresolved"` placeholder rather than inventing a finish.
 6. Keep stamps, patterns, distribution channels and card sizes as separate physical items even
-   when their finish names match.
+   when their collector-facing finish family matches. `mirror-holo` remains an auditable technical
+   finish, but is presented to collectors under the `reverse-holo` family.
 
     python scripts/checklist.py
     python scripts/checklist.py --check    # fail if regeneration would change the output
@@ -41,7 +42,14 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "analysis_checklist.json"
 
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
-SCHEMA_VERSION = "1.1.0"
+FINISH_FAMILY = {
+    "non-holo": "non-holo",
+    "holo": "holo",
+    "reverse-holo": "reverse-holo",
+    "mirror-holo": "reverse-holo",
+    "unresolved": "unresolved",
+}
+SCHEMA_VERSION = "1.2.0"
 
 
 def read_json(path: Path) -> Any:
@@ -214,20 +222,28 @@ def main() -> int:
     unresolved_items = [item for item in items if item["finish"] == "unresolved"]
     first_edition = [item for item in items if item["edition"] == "1st Edition"]
     agnostic = [item for item in first_edition if item["editionScope"] == "edition-agnostic-evidence"]
+    finish_groups = {item["finishGroupId"] for item in items}
+    reverse_family = [item for item in resolved if item["finishFamily"] == "reverse-holo"]
+    reverse_family_groups = {item["finishGroupId"] for item in reverse_family}
 
     document = {
         "meta": {
             "schema": "snoredex-checklist",
             "schemaVersion": SCHEMA_VERSION,
             "generated": date.today().isoformat(),
-            "description": "One record per documented physical collectible item, or per explicitly unresolved one.",
+            "description": (
+                "One record per documented physical collectible item, or per explicitly unresolved "
+                "one. Collector-facing finishFamily groups technical reverse-holo and mirror-holo "
+                "treatments without collapsing their physical printing records."
+            ),
             "rules": [
                 "Only confirmed language claims enter; contradicted and unresolved languages and code cards are excluded.",
                 "Expansion follows logical printings[], never group-level finish booleans.",
                 "Editions expand only where the edition model supports that edition for that language.",
                 "When multiple editions are supported, concrete finishes require an explicit edition mapping; otherwise each edition receives one unresolved placeholder.",
                 "A confirmed card-language-edition with no printing detail yields exactly one finish:unresolved placeholder.",
-                "Stamps, foil patterns, distribution channels and card sizes remain separate items even when the finish name matches.",
+                "Stamps, foil patterns, distribution channels and card sizes remain separate items even when the finish family matches.",
+                "Technical mirror-holo printings use finishFamily:reverse-holo for collector-facing grouping while retaining finish:mirror-holo.",
                 "Positive evidence is not proof of completeness: only completenessStatus=complete-manifest asserts that an unlisted alternative is absent.",
             ],
             "warning": (
@@ -243,6 +259,9 @@ def main() -> int:
                 "completeManifestItems": sum(
                     1 for item in items if item["completenessStatus"] == "complete-manifest"
                 ),
+                "finishFamilyGroups": len(finish_groups),
+                "reverseHoloFamilyItems": len(reverse_family),
+                "reverseHoloFamilyGroups": len(reverse_family_groups),
                 "languages": len({item["language"] for item in items}),
                 "cards": len({(item["setCode"], item["number"]) for item in items}),
             },
@@ -295,6 +314,7 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
     ) or release.get((set_code, number, product.get("variantToken") or "base", "—"))
 
     finish = printing["finish"] if printing else "unresolved"
+    finish_family = FINISH_FAMILY[finish]
     pattern = printing.get("foilPattern") if printing else None
     markings = printing.get("markings") if printing else None
     distribution = printing.get("distribution") if printing else None
@@ -314,6 +334,22 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
         id_parts.append(slug(card_size))
     checklist_id = "-".join(id_parts)
 
+    # The family ID intentionally excludes the technical finish, foil pattern and Cardmarket
+    # V-token. It lets the collector UI place reverse-holo and mirror-holo treatments under one
+    # Reverse Holo heading without losing any of the physical checklist items above. Dimensions
+    # that represent a genuinely different product context remain in the group identity.
+    group_parts = [
+        "fg", slug(set_code), slug(number or "no-number"), slug(language),
+        {"1st Edition": "1e", "Unlimited": "unl", "—": "none"}.get(edition, slug(edition)),
+        slug(finish_family),
+    ]
+    for extra in (marking_slug(markings), distribution_slug(distribution)):
+        if extra:
+            group_parts.append(extra)
+    if card_size and card_size != "standard":
+        group_parts.append(slug(card_size))
+    finish_group_id = "-".join(group_parts)
+
     return {
         "checklistId": checklist_id,
         "cardName": unit["cardName"],
@@ -325,6 +361,8 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
         "editionScope": edition_scope,
         "editionSource": edition_source or None,
         "finish": finish,
+        "finishFamily": finish_family,
+        "finishGroupId": finish_group_id,
         "finishVerificationStatus": printing["verificationStatus"] if printing else "pending",
         "foilPattern": pattern,
         "markings": markings,

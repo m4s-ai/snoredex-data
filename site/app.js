@@ -19,6 +19,25 @@
   const META = readJSON("data-meta");
   const LANGS = META.languages;
 
+  const FINISH_LABELS = {
+    "non-holo": "Non-Holo",
+    "holo": "Holo",
+    "reverse-holo": "Reverse Holo",
+    "unresolved": "Unresolved",
+  };
+  const PATTERN_LABELS = {
+    "cosmos": "Cosmos", "crosshatch": "Crosshatch", "poke-ball": "Poké Ball",
+    "master-ball": "Master Ball", "colorless-energy-star": "Colorless energy star",
+    "energy-symbol-artwork-poke-ball": "Energy symbol + Poké Ball artwork",
+    "tiled-type-symbol": "Tiled type symbol",
+    "intricate-tiled-type-symbol": "Intricate tiled type symbol",
+    "type-symbol-background": "Type symbol background",
+    "large-type-symbol-left": "Large type symbol (left)",
+    "plain-foil-background": "Plain foil background",
+    "plain-foil-on-pokemon": "Plain foil on the Pokémon",
+    "flat-foil-card-body": "Flat foil card body", "fireworks": "Fireworks",
+  };
+
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
@@ -27,6 +46,12 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
+
+  const finishLabel = (value) => FINISH_LABELS[value] || value;
+  const patternLabel = (value) => PATTERN_LABELS[value] ||
+    String(value || "").replace(/-/g, " ").replace(/^./, (c) => c.toUpperCase());
+  const collectorFinish = (item) => item.finishFamily ||
+    (item.finish === "mirror-holo" ? "reverse-holo" : item.finish);
 
   /* ---------------------------------------------------------------- sorting */
 
@@ -228,7 +253,8 @@
       distinct(ROW_FIELD[field]).forEach((value) => {
         const option = document.createElement("option");
         option.value = value;
-        option.textContent = value;
+        option.textContent = field === "finish" ? finishLabel(value)
+          : field === "pattern" ? patternLabel(value) : value;
         select.appendChild(option);
       });
       select.addEventListener("change", () => {
@@ -342,6 +368,8 @@
       return '<td class="langcell ' + (has ? "yes" : "no") + '">' + (has ? "●" : "·") + "</td>";
     }).join("");
     const finishPills = row.finishDisplay.map((f) => pill(f.label, f.status)).join("");
+    const patternBadges = row.patterns.map((pattern) =>
+      '<span class="treatment">' + escapeHTML(patternLabel(pattern)) + "</span>").join("");
     return (
       "<tr>" +
       '<td class="img">' + (row.image ? '<img loading="lazy" src="' + escapeHTML(row.image) + '" alt="' + escapeHTML(row.name) + '">' : "") + "</td>" +
@@ -355,7 +383,7 @@
       '<td class="secondary">' + escapeHTML(row.artist || "—") + "</td>" +
       "<td>" + escapeHTML(row.edition) + "</td>" +
       "<td>" + (finishPills || '<span class="pill pending">no evidence</span>') + "</td>" +
-      '<td class="secondary">' + escapeHTML(row.patterns.join(", ") || "—") + "</td>" +
+      '<td class="secondary">' + (patternBadges || "—") + "</td>" +
       '<td class="secondary">' + escapeHTML(row.markings.join(", ") || "—") + "</td>" +
       '<td class="secondary">' + escapeHTML(row.markingRoles.join(", ") || "—") + "</td>" +
       '<td class="secondary">' + escapeHTML(row.sizes.join(", ")) + "</td>" +
@@ -429,7 +457,7 @@
       if (langs.length && !langs.includes(item.language)) return false;
       if (editions.length && !editions.includes(item.edition)) return false;
       if (item.finish === "unresolved") return includeUnresolved;
-      if (finishes.length && !finishes.includes(item.finish)) return false;
+      if (finishes.length && !finishes.includes(collectorFinish(item))) return false;
       return true;
     });
   }
@@ -437,10 +465,13 @@
   function updateChecklistPreview() {
     const items = checklistSelection();
     const unresolved = items.filter((i) => i.finish === "unresolved").length;
+    const reverseItems = items.filter((i) => collectorFinish(i) === "reverse-holo");
+    const reverseGroups = new Set(reverseItems.map((i) => i.finishGroupId)).size;
     $("#cl-preview").innerHTML =
       "<strong>" + items.length + "</strong> checklist items — " +
       (items.length - unresolved) + " documented printings, " +
-      unresolved + " with unresolved finish.";
+      unresolved + " with unresolved finish. " + reverseItems.length +
+      " Reverse Holo treatments in " + reverseGroups + " finish groups.";
   }
 
   function groupKey(item, mode) {
@@ -466,19 +497,21 @@
 
     const sections = Array.from(groups.entries()).map(([heading, list]) => {
       const rows = list.map((item) => {
+        const family = collectorFinish(item);
         const detail = [
           escapeHTML(item.language),
           item.edition !== "—" ? escapeHTML(item.edition) : null,
           item.finish === "unresolved"
             ? "<em>finish unresolved — not a confirmed version</em>"
-            : escapeHTML(item.finish),
-          item.foilPattern ? "pattern: " + escapeHTML(item.foilPattern) : null,
+            : "<strong>" + escapeHTML(finishLabel(family)) + "</strong>",
+          item.foilPattern ? "treatment: " + escapeHTML(patternLabel(item.foilPattern)) : null,
           item.marking ? "stamp: " + escapeHTML(item.marking) : null,
           item.cardSize && item.cardSize !== "standard" ? escapeHTML(item.cardSize) : null,
         ].filter(Boolean).join(" · ");
         const image = !compact && item.image
           ? '<img src="' + escapeHTML(item.image) + '" alt="">' : "";
-        return '<tr data-checklist-id="' + escapeHTML(item.checklistId) + '" class="' +
+        return '<tr data-checklist-id="' + escapeHTML(item.checklistId) +
+          '" data-finish-group-id="' + escapeHTML(item.finishGroupId) + '" class="' +
           (item.finish === "unresolved" ? "unresolved" : "") + '">' +
           '<td class="box"><span class="cb"></span></td>' +
           (compact ? "" : '<td class="thumb">' + image + "</td>") +
@@ -543,21 +576,21 @@
   function initChecklist() {
     const languages = Array.from(new Set(CHECKLIST.map((i) => i.language))).sort();
     const editions = Array.from(new Set(CHECKLIST.map((i) => i.edition))).sort();
-    const finishes = Array.from(new Set(CHECKLIST.map((i) => i.finish)))
+    const finishes = Array.from(new Set(CHECKLIST.map((i) => collectorFinish(i))))
       .filter((f) => f !== "unresolved").sort();
-    const fill = (id, values) => {
+    const fill = (id, values, labeler) => {
       const select = document.getElementById(id);
       values.forEach((value) => {
         const option = document.createElement("option");
         option.value = value;
-        option.textContent = value;
+        option.textContent = labeler ? labeler(value) : value;
         select.appendChild(option);
       });
       select.addEventListener("change", updateChecklistPreview);
     };
     fill("cl-langs", languages);
     fill("cl-editions", editions);
-    fill("cl-finishes", finishes);
+    fill("cl-finishes", finishes, finishLabel);
     ["cl-scope", "cl-group", "cl-layout", "cl-paper"].forEach((id) => {
       document.getElementById(id).addEventListener("change", updateChecklistPreview);
     });

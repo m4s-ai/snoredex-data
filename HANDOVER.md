@@ -131,9 +131,13 @@ verification/
   `finishStatus` is positive-evidence-only: `pending` means unknown, never proven absent.
   If every underlying product-language claim is contradicted, the finish unit remains in the state
   store as `not-applicable` and is excluded from `FINISH_REVIEW`.
-- **Finish dimensions stay separate.** `finish` is non-holo/holo/reverse-holo/mirror-holo;
-  `foilPattern` is Cosmos/crosshatch/type-symbol/Poké Ball/etc.; `markings` is the physical stamp;
-  `distribution` says how it was released; `cardSize` separates standard from jumbo.
+- **Finish dimensions stay separate.** `finish` remains the auditable technical value
+  non-holo/holo/reverse-holo/mirror-holo. Generated site/checklist `finishFamily` is the
+  collector-facing layer:
+  both reverse-holo and mirror-holo appear under **Reverse Holo**. `foilPattern` keeps
+  Cosmos/crosshatch/type-symbol/Poké Ball/etc. distinct; `markings` is the physical stamp;
+  `distribution` says how it was released; `cardSize` separates standard from jumbo. Never replace
+  the technical finish or collapse the underlying printing/checklist IDs merely to group the UI.
 - **EX stamp rule** — EX-era set-logo stamps that are part of the reverse design use
   `markings.role=reverse-holo-treatment` (`DF 10` is the worked example). Later set-name
   prerelease stamps, Staff, retailer and Pokémon Center marks use
