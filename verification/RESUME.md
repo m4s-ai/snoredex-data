@@ -28,7 +28,7 @@ root.
 | Finish units covered by a complete official manifest | **4** — English `DF 10`, `PPS3 LOR 143`, `PPS7 JTG 117`, `PPS8 JTG 117` |
 | Finish units with unresolved product mapping | **175** |
 
-Run `verification/review_integrity.ps1` after any write pass — 27 structural checks over language
+Run `verification/review_integrity.py` after any write pass — 27 structural checks over language
 claims, cards, images, evidence, finish units, printing IDs, product mappings, and stamp roles.
 
 Open items are also published as a browsable page: `verification/open-items.html`.
@@ -142,7 +142,7 @@ all *additional* language claims on cards that were otherwise evidenced.
 
 `$EV` (evidence text) and `$ev` (log array) are **the same variable**. Declaring `$ev=@()` after `$EV='...'` silently wipes the text, and units get written with an empty or array-typed `evidence` while still being marked `confirmed`. It does not throw. Same class of bug as `$R`/`$r` earlier.
 
-`audit_evidence.ps1` checks every resolved unit for a non-trivial string evidence field — **run it after every write pass**. It caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier.
+`audit_evidence.py` checks every resolved unit for a non-trivial string evidence field — **run it after every write pass**. It caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier.
 
 ### Traditional Chinese prints can live under a different set entirely
 
@@ -439,7 +439,7 @@ location and can be rerun from any checkout or working directory.
 
 ```powershell
 # Run from the repository root.
-pwsh -File verification/review_integrity.ps1      # confirm the canonical state is coherent
+python verification/review_integrity.py      # confirm the canonical state is coherent
 python verification/review_findings.py            # cross-artifact and publication checks
 pwsh -File verification/verify_finish_sources.ps1 # validate exact live TCGCSV IDs/subtypes
 

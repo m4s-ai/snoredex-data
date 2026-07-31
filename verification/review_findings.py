@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent database review harness.
 
-Complements `verification/review_integrity.ps1`. That script validates invariants
+Complements `verification/review_integrity.py`. That script validates invariants
 *within* each store; this one validates consistency *between* the state stores and
 the derived artifacts that consumers and the future public site actually read.
 
@@ -29,6 +29,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from checks import Check, Note, Suite
+
 ROOT = Path(__file__).resolve().parent.parent
 
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
@@ -38,7 +40,9 @@ STRENGTH = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confir
 # compared case-insensitively. Learned from GitHub's own validator, not from any published schema.
 RESERVED_DROPDOWN_OPTIONS = {"none"}
 
-results: list[tuple[str, str, str, bool, str]] = []
+# The check protocol is shared with `review_integrity.py` — one implementation of how a check is
+# declared and when the process exits non-zero. The output format below stays this suite's own.
+suite = Suite()
 
 
 def load(rel: str) -> Any:
@@ -47,7 +51,11 @@ def load(rel: str) -> Any:
 
 
 def check(check_id: str, title: str, severity: str, ok: bool, detail: str = "") -> None:
-    results.append((check_id, title, severity, ok, detail))
+    """Declare a finding. Severity INFO reports without ever failing the run."""
+    if severity == "INFO":
+        suite.note(check_id, title, detail)
+    else:
+        suite.check(title, ok, detail, ident=check_id)
 
 
 def norm_number(value: Any) -> str:
@@ -217,7 +225,7 @@ check(
     "FAIL",
     not jtg_prose_wrong,
     f"README describes regular JTG 117 as non-holo + holo + reverse holo; the verified model and "
-    f"review_integrity.ps1 check 'regular JTG 117 discloses holo + reverse only' both say "
+    f"review_integrity.py check 'regular JTG 117 discloses holo + reverse only' both say "
     f"{jtg_finishes}. The non-holo printing belongs to the Prize Pack product, not the regular card.",
 )
 
@@ -1263,20 +1271,23 @@ check(
 # Report
 # --------------------------------------------------------------------------- #
 
+def emit(result: Check | Note) -> None:
+    """This suite's output format, unchanged by the move onto the shared protocol."""
+    if isinstance(result, Note):
+        print(f"[info] {result.ident} {result.name}: {result.detail}")
+        return
+    if result.ok:
+        print(f"[ ok ] {result.ident} {result.name}")
+        return
+    print(f"[FAIL] {result.ident} {result.name}")
+    if result.detail:
+        print(f"       {result.detail}")
+
+
 def main() -> int:
-    failures = 0
-    for check_id, title, severity, ok, detail in results:
-        if severity == "INFO":
-            print(f"[info] {check_id} {title}: {detail}")
-            continue
-        if ok:
-            print(f"[ ok ] {check_id} {title}")
-        else:
-            failures += 1
-            print(f"[FAIL] {check_id} {title}")
-            if detail:
-                print(f"       {detail}")
-    total = sum(1 for r in results if r[2] != "INFO")
+    suite.render(emit)
+    total = len(suite.checks)
+    failures = len(suite.failed)
     print(f"\n{total - failures}/{total} checks passed, {failures} failing.")
     return 1 if failures else 0
 

@@ -37,12 +37,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 GOLDEN = ROOT / "verification" / "parity" / "golden"
 
-# The five scripts the migration actually has to replace: everything a CI step or the documented
-# recurring workflow reaches. The 61 archived passes and the dormant scripts/ pipeline are
-# deliberately absent — they are record, not code that runs.
+# The five live checkers, each pointing at its *current* implementation: everything a CI step or
+# the documented recurring workflow reaches. The 61 archived passes and the dormant scripts/
+# pipeline are deliberately absent — they are record, not code that runs. Entries move from .ps1
+# to .py as the migration lands, so `selftest` keeps proving determinism after the port too.
 LIVE = {
-    "review_integrity": "verification/review_integrity.ps1",
-    "audit_evidence": "verification/audit_evidence.ps1",
+    "review_integrity": "verification/review_integrity.py",
+    "audit_evidence": "verification/audit_evidence.py",
     "report": "verification/report.ps1",
     "classify_manual": "verification/classify_manual.ps1",
     "verify_finish_sources": "verification/verify_finish_sources.ps1",
@@ -161,7 +162,12 @@ def execute(script: str, names: list[str]) -> dict:
             command = [sys.executable, str(target)]
         else:
             die(f"cannot run {script}: expected a .ps1 or .py file")
-        completed = subprocess.run(command, cwd=tree, capture_output=True, timeout=900)
+        # A Python twin that imports a shared module drops a .pyc next to it, which is not an
+        # artifact by any definition its readers would recognise. Suppressed rather than filtered
+        # out, so the comparison keeps reporting every file that actually appears. The release
+        # gate sets the same variable.
+        env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+        completed = subprocess.run(command, cwd=tree, capture_output=True, timeout=900, env=env)
         after = snapshot(tree)
         return {
             "script": script,

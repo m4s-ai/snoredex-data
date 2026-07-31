@@ -7,7 +7,7 @@ name: Release gate
 #
 #  * Generators run and their output is compared against what is committed. A generated artifact
 #    that disagrees with its inputs fails here rather than being published.
-#  * Counts are never asserted. review_integrity.ps1 reports them as drift, because closing an
+#  * Counts are never asserted. review_integrity.py reports them as drift, because closing an
 #    open verification unit is the project's goal, and a gate that blocks on progress is a gate
 #    people learn to bypass.
 
@@ -85,13 +85,13 @@ jobs:
           if ($bad.Count) { $bad | ForEach-Object { Write-Error $_ }; exit 1 }
 
       # --- integrity: structural invariants, in both suites ---
-      - name: Structural integrity (PowerShell)
+      - name: Structural integrity
         shell: pwsh
-        run: pwsh -File verification/review_integrity.ps1
+        run: python verification/review_integrity.py
 
       - name: Evidence audit
         shell: pwsh
-        run: pwsh -File verification/audit_evidence.ps1
+        run: python verification/audit_evidence.py
 
       - name: Live finish-source verification
         if: runner.os == 'Linux'

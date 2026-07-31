@@ -50,7 +50,7 @@ evidence (see §6).
 
 Numbers live in `verification/units.json` (the state store) and are echoed in
 `snorlax_cards.json` → `meta.verification`. **After any change, run
-`verification/review_integrity.ps1`** (27 structural checks) — it is the truth test.
+`verification/review_integrity.py`** (27 structural checks) — it is the truth test.
 
 The language/product claim backlog and the finish backlog are separate. Language truth lives in
 `verification/units.json`; finish truth lives in `verification/finish_units.json`. Never infer a
@@ -105,10 +105,10 @@ verification/
   RESUME.md                   The verification playbook (read before editing evidence).
   state.json                  Last completed phase.
   report.ps1                  Regenerates coverage + all export files.
-  audit_evidence.ps1          Checks every resolved unit has a non-trivial evidence string.
+  audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.ps1         (Re)tags structurally undocumentable units.
   verify_finish_sources.ps1   Rechecks exact TCGCSV product IDs and expected positive subtypes.
-  review_integrity.ps1        27 structural checks — run after every write pass.
+  review_integrity.py         27 structural checks — run after every write pass.
   passes/                     ~65 completed one-shot verification scripts. Each closed a batch
                               and is named by what it did. Paths derive from each script's location,
                               so passes can be run from any checkout or working directory.
@@ -123,7 +123,7 @@ verification/
 - **Unit** = (setCode, number, variant, language). `variant` is Cardmarket's `-V1/-V2/-V3`
   slug or `base`. Status is one of `confirmed | contradicted | needs-manual-review | pending`
   (`pending` = still open). Every resolved unit MUST have a non-trivial `evidence` string and a
-  `sourceType`; `review_integrity.ps1` enforces this.
+  `sourceType`; `review_integrity.py` enforces this.
 - **`variantName`** — Cardmarket's V1/V2/V3 tokens are opaque; the real meaning is recorded here
   (e.g. `xsv2a` V1=Poké Ball mirror / V2=Master Ball mirror; `xm2a` V1=energy-star mirror /
   V2=Poké Ball mirror — note the order flips between sets; `PPS8` V1=Non-Holo / V2=Holo;
@@ -199,7 +199,7 @@ Brazilian Prize Pack confirmations were obtained.
    an absence-argument produced a false contradiction that had to be reverted (`XY-P 149`).
    The same rule applies to finishes: TCGdex `true` confirms a printing; `false` is not used to
    prove that a finish is unavailable because its variant data is still incomplete.
-4. **Run `audit_evidence.ps1` and `review_integrity.ps1` after every write pass.** Silent data
+4. **Run `audit_evidence.py` and `review_integrity.py` after every write pass.** Silent data
    corruption has happened here (see next point) and only the audit caught it.
 5. **PowerShell is case-insensitive** — this bit FOUR times. `$R`/`$r` and `$EV`/`$ev` are the
    same variable (declaring the log array silently wiped the evidence text); `-match '^x'` also
@@ -212,11 +212,11 @@ Brazilian Prize Pack confirmations were obtained.
 
 ```powershell
 # Run from the repository root.
-pwsh -File verification/review_integrity.ps1     # confirm clean starting state
+python verification/review_integrity.py     # confirm clean starting state
 python verification/review_findings.py           # cross-artifact consistency (no pwsh needed)
 pwsh -File verification/report.ps1               # regenerate exports if needed
 # ... do verification work in a new verification/passes/verify_*.ps1 script ...
-pwsh -File verification/audit_evidence.ps1       # after any write
+python verification/audit_evidence.py       # after any write
 python scripts/editions.py                       # if edition data changed
 python scripts/finishes.py                       # regenerate finish units/review + main summaries
 python scripts/language_status.py                # refresh per-card language verdicts
@@ -226,7 +226,7 @@ python scripts/checklist.py                      # rebuild canonical checklist i
 python scripts/readme_stats.py                   # refresh generated README blocks
 python scripts/issue_templates.py                # rebuild the community correction form
 python scripts/site.py                           # rebuild index.html + the alias redirect
-pwsh -File verification/review_integrity.ps1     # after any write
+python verification/review_integrity.py     # after any write
 python verification/review_findings.py           # after any write
 python verification/test_site.py                 # browser behaviour (needs playwright+chromium)
 pwsh -File verification/verify_finish_sources.ps1 # recheck machine-readable TCGCSV assertions

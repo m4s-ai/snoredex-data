@@ -63,8 +63,8 @@ locations. The examples below assume the repository root only for readability.
 ```powershell
 python scripts\finishes.py
 pwsh -File verification\verify_finish_sources.ps1
-pwsh -File verification\audit_evidence.ps1
-pwsh -File verification\review_integrity.ps1
+python verification/audit_evidence.py
+python verification/review_integrity.py
 ```
 
 For a curated case:

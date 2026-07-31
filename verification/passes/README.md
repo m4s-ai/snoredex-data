@@ -6,8 +6,8 @@ release toolchain and are not expected to be rerun.
 
 Recurring verification lives directly under `verification/`:
 
-- `review_integrity.ps1`
-- `audit_evidence.ps1`
+- `review_integrity.py`
+- `audit_evidence.py`
 - `report.ps1`
 - `classify_manual.ps1`
 - `verify_finish_sources.ps1`
