@@ -27,11 +27,127 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
 EXPECTED_ROWS = 204
 
+# Every surface #43 enumerates, measured in both themes: (label, selector, property, mode,
+# threshold). "text" measures the property against the element's own composited backdrop;
+# "boundary" measures it against the backdrop behind the element, which is what a border or a
+# focus ring actually sits on.
+#
+# Thresholds follow WCAG 2.2 AA: 4.5:1 for text (nothing here is large text — the biggest is the
+# 26px masthead heading, asserted at the stricter figure anyway), 3:1 for the boundaries and state
+# indicators of user interface components. Decorative separators — panel edges, row rules, the
+# footer line — are deliberately absent: 1.4.11 covers what identifies a component or a state, and
+# raising every divider to 3:1 would draw a heavy grid over a 204-row table. The frozen-pane edge
+# is listed because it carries meaning; it tells the reader the column is pinned rather than cut.
+THEME_SURFACES = [
+    ("masthead heading", ".masthead h1", "color", "text", 4.5),
+    ("masthead tagline", ".masthead .tagline", "color", "text", 4.5),
+    ("theme toggle label", "#theme-toggle", "color", "text", 4.5),
+    ("theme toggle border", "#theme-toggle", "borderTopColor", "boundary", 3.0),
+    ("navigation link", "nav.sections a", "color", "text", 4.5),
+    ("section heading", "#about h2", "color", "text", 4.5),
+    ("body text", "#about p", "color", "text", 4.5),
+    ("body link", "#methodology a", "color", "text", 4.5),
+    ("statistic value", ".stat .n", "color", "text", 4.5),
+    ("statistic label", ".stat .k", "color", "text", 4.5),
+    ("callout text", ".callout", "color", "text", 4.5),
+    ("callout rule", ".callout", "borderLeftColor", "boundary", 3.0),
+    ("filter label", ".field label", "color", "text", 4.5),
+    ("filter input text", "#f-q", "color", "text", 4.5),
+    ("filter input border", "#f-q", "borderTopColor", "boundary", 3.0),
+    ("filter select text", ".field select", "color", "text", 4.5),
+    ("filter select border", ".field select", "borderTopColor", "boundary", 3.0),
+    ("disclosure summary", "details.morefilters > summary", "color", "text", 4.5),
+    ("active filter chip", ".chip", "color", "text", 4.5),
+    ("primary button text", "button.primary", "color", "text", 4.5),
+    ("primary button edge", "button.primary", "borderTopColor", "boundary", 3.0),
+    ("ghost button text", "button.ghost", "color", "text", 4.5),
+    ("ghost button edge", "button.ghost", "borderTopColor", "boundary", 3.0),
+    ("result count", "#count", "color", "text", 4.5),
+    ("scroll hint", "#collection-scroll-hint", "color", "text", 4.5),
+    ("scroll hint icon", ".scroll-hint .scroll-icon", "color", "text", 3.0),
+    ("scroll button glyph", "#collection-scroll-right", "color", "text", 4.5),
+    ("scroll button edge", "#collection-scroll-right", "borderTopColor", "boundary", 3.0),
+    ("column heading", "#collection-table thead th button.sort", "color", "text", 4.5),
+    ("table cell", "#rows tr td:nth-child(3)", "color", "text", 4.5),
+    ("clipped cell", "#rows .cell-clip", "color", "text", 4.5),
+    ("year separator", "tr.yearsep td", "color", "text", 4.5),
+    ("frozen column heading", "#collection-table th.corr", "color", "text", 4.5),
+    ("frozen column link", "#rows td.corr a", "color", "text", 4.5),
+    ("frozen column edge", "#rows td.corr", "borderLeftColor", "boundary", 3.0),
+    ("confirmed pill", ".pill.confirmed", "color", "text", 4.5),
+    ("marketplace pill", ".pill.marketplace-claimed", "color", "text", 4.5),
+    ("pending pill", ".pill.pending", "color", "text", 4.5),
+    ("not-applicable pill", ".pill.not-applicable", "color", "text", 4.5),
+    ("treatment badge", "#rows .treatment", "color", "text", 4.5),
+    ("language present", "td.langcell.yes", "color", "text", 4.5),
+    ("language absent", "td.langcell.no", "color", "text", 4.5),
+    ("language count", "td.langcount", "color", "text", 4.5),
+    ("legend text", ".language-legend", "color", "text", 4.5),
+    ("legend present state", ".language-legend .yes", "color", "text", 4.5),
+    ("legend absent state", ".language-legend .no", "color", "text", 4.5),
+    ("checklist preview", ".builder .preview", "color", "text", 4.5),
+    ("sources table text", "table.sources td", "color", "text", 4.5),
+    ("sources list link", "details.sourcelist li a", "color", "text", 4.5),
+    ("footer text", "footer.sitefoot", "color", "text", 4.5),
+]
+
+# Computed backgrounds are frequently transparent or semi-transparent — the overflow toolbar uses
+# color-mix over the panel — so the backdrop is composited down to an opaque rgb() rather than
+# handing a partially transparent colour to the ratio calculation.
+MEASURE_SURFACES = """(surfaces) => {
+  const parse = (value) => {
+    const parts = (value.match(/[\\d.]+/g) || []).map(Number);
+    if (value.startsWith('color(')) {
+      return {r: parts[0] * 255, g: parts[1] * 255, b: parts[2] * 255,
+              a: parts.length > 3 ? parts[3] : 1};
+    }
+    return {r: parts[0], g: parts[1], b: parts[2], a: parts.length > 3 ? parts[3] : 1};
+  };
+  const over = (top, bottom) => ({
+    r: top.r * top.a + bottom.r * (1 - top.a),
+    g: top.g * top.a + bottom.g * (1 - top.a),
+    b: top.b * top.a + bottom.b * (1 - top.a),
+    a: 1,
+  });
+  const rgb = (c) => 'rgb(' + [c.r, c.g, c.b].map((v) => Math.round(v)).join(', ') + ')';
+  const backdrop = (element) => {
+    let colour = {r: 255, g: 255, b: 255, a: 0};
+    const stack = [];
+    for (let node = element; node; node = node.parentElement) {
+      stack.push(parse(getComputedStyle(node).backgroundColor));
+    }
+    stack.push(parse(getComputedStyle(document.documentElement).backgroundColor));
+    stack.push({r: 255, g: 255, b: 255, a: 1});
+    for (let index = stack.length - 1; index >= 0; index -= 1) colour = over(stack[index], colour);
+    return rgb(colour);
+  };
+  return surfaces.map(([label, selector, property, mode]) => {
+    const element = document.querySelector(selector);
+    if (!element) return {label, missing: true};
+    const behind = mode === 'boundary' ? element.parentElement || document.body : element;
+    return {label, value: rgb(parse(getComputedStyle(element)[property])), against: backdrop(behind)};
+  });
+}"""
+
 results: list[tuple[str, bool, str]] = []
 
 
 def check(name: str, ok: bool, detail: str = "") -> None:
     results.append((name, ok, detail))
+
+
+def contrast_ratio(foreground: str, background: str) -> float:
+    """Return the WCAG contrast ratio for computed rgb()/rgba() colors."""
+    def luminance(color: str) -> float:
+        channels = [int(value) / 255 for value in re.findall(r"\d+", color)[:3]]
+        linear = [
+            value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4
+            for value in channels
+        ]
+        return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+    first, second = luminance(foreground), luminance(background)
+    return (max(first, second) + 0.05) / (min(first, second) + 0.05)
 
 
 def main() -> int:
@@ -77,6 +193,147 @@ def main() -> int:
               and len({row["rowId"] for row in exs_rows}) == 2,
               f"EXS rows: {exs_rows}")
 
+        # --- complete light/dark themes (#43) ---
+        source_html = INDEX.read_text(encoding="utf-8")
+        check("theme selection runs before the stylesheet loads",
+              source_html.find('localStorage.getItem("snoredex-theme")')
+              < source_html.find('<link rel="stylesheet"'),
+              "the theme bootstrap must precede CSS to avoid an opposite-theme flash")
+
+        for scheme in ("light", "dark"):
+            theme_context = browser.new_context(color_scheme=scheme)
+            theme_context.add_init_script("""
+              window.__snoredexThemeAtFirstFrame = new Promise((resolve) => {
+                requestAnimationFrame(() => resolve(document.documentElement.dataset.theme));
+              });
+            """)
+            theme_page = theme_context.new_page()
+            theme_page.goto(url)
+            theme_page.wait_for_selector("#rows tr")
+            first_frame_theme = theme_page.evaluate("window.__snoredexThemeAtFirstFrame")
+            # Chips and treatment badges exist only once a filter narrows the table, and the
+            # language filters live in a collapsed disclosure.
+            theme_page.eval_on_selector_all("details", "els => els.forEach(d => d.open = true)")
+            theme_page.fill("#f-q", "holo")
+            theme_page.wait_for_timeout(150)
+            theme_metrics = theme_page.evaluate("""() => {
+              const primary = getComputedStyle(document.querySelector('button.primary'));
+              const control = getComputedStyle(document.querySelector('.field select'));
+              const panel = getComputedStyle(document.querySelector('.controls'));
+              const absent = getComputedStyle(document.querySelector('td.langcell.no'));
+              const body = getComputedStyle(document.body);
+              const toggle = document.querySelector('#theme-toggle');
+              const toggleBox = toggle.getBoundingClientRect();
+              return {
+                theme: document.documentElement.dataset.theme,
+                colorScheme: getComputedStyle(document.documentElement).colorScheme,
+                pressed: toggle.getAttribute('aria-pressed'),
+                label: toggle.getAttribute('aria-label'),
+                toggleWidth: toggleBox.width,
+                toggleHeight: toggleBox.height,
+                primaryForeground: primary.color,
+                primaryBackground: primary.backgroundColor,
+                controlBorder: control.borderTopColor,
+                panelBackground: panel.backgroundColor,
+                absentForeground: absent.color,
+                bodyBackground: body.backgroundColor,
+              };
+            }""")
+            check(f"{scheme} mode follows the initial system preference before first paint",
+                  theme_metrics["theme"] == scheme and first_frame_theme == scheme
+                  and theme_metrics["colorScheme"] == scheme,
+                  f"firstFrame={first_frame_theme} metrics={theme_metrics}")
+            check(f"{scheme} mode meets representative WCAG contrast thresholds",
+                  contrast_ratio(theme_metrics["primaryForeground"],
+                                 theme_metrics["primaryBackground"]) >= 4.5
+                  and contrast_ratio(theme_metrics["controlBorder"],
+                                     theme_metrics["panelBackground"]) >= 3
+                  and contrast_ratio(theme_metrics["absentForeground"],
+                                     theme_metrics["bodyBackground"]) >= 4.5,
+                  str(theme_metrics))
+            # The representative sample above is a smoke test; #43 asks for the whole interface.
+            surfaces = theme_page.evaluate(MEASURE_SURFACES, THEME_SURFACES)
+            surface_failures = []
+            for surface, (label, _selector, _property, _mode, threshold) in zip(
+                    surfaces, THEME_SURFACES):
+                if surface.get("missing"):
+                    surface_failures.append(f"{label}: not rendered")
+                    continue
+                ratio = contrast_ratio(surface["value"], surface["against"])
+                if ratio < threshold:
+                    surface_failures.append(
+                        f"{label}: {ratio:.2f}:1 needs {threshold}:1 "
+                        f"({surface['value']} on {surface['against']})")
+            check(f"every {scheme}-mode surface meets its WCAG 2.2 AA contrast threshold",
+                  not surface_failures,
+                  f"{len(surface_failures)}/{len(THEME_SURFACES)} failing: "
+                  f"{'; '.join(surface_failures[:6])}")
+
+            # 2.4.11: a focus ring that lands under the sticky furniture is not visible focus.
+            # The filtered table is too short to scroll into, so restore the full list first.
+            theme_page.fill("#f-q", "")
+            theme_page.wait_for_timeout(150)
+            theme_page.evaluate("""() => {
+              document.querySelector('#collection-table-frame').scrollIntoView();
+              scrollBy(0, 600);
+            }""")
+            theme_page.wait_for_timeout(150)
+            obscured = theme_page.evaluate("""() => {
+              const overlay = document.querySelector('#collection-sticky-header');
+              const tools = document.querySelector('#collection-scroll-tools');
+              const band = overlay.classList.contains('is-visible')
+                ? overlay.getBoundingClientRect()
+                : tools.getBoundingClientRect();
+              const covers = (box) => box.top < band.bottom && box.bottom > band.top;
+              const targets = [...document.querySelectorAll(
+                '#rows td.corr a, #rows .cell-clip[data-clipped="true"]')];
+              // Start from something the furniture is already covering, so the assertion measures
+              // the scroll adjustment rather than a row that happened to sit clear of it.
+              const start = targets.find((element) => covers(element.getBoundingClientRect()));
+              if (!start) return {missing: true};
+              start.focus();
+              const box = start.getBoundingClientRect();
+              return {
+                covered: covers(box),
+                inViewport: box.top >= 0 && box.bottom <= innerHeight,
+                focusTop: box.top, bandTop: band.top, bandBottom: band.bottom,
+              };
+            }""")
+            check(f"keyboard focus in the table clears the sticky furniture in {scheme} mode",
+                  not obscured.get("missing")
+                  and not obscured["covered"] and obscured["inViewport"],
+                  str(obscured))
+            theme_page.evaluate("scrollTo(0, 0)")
+
+            check(f"theme toggle exposes state and an adequate target in {scheme} mode",
+                  theme_metrics["pressed"] == str(scheme == "dark").lower()
+                  and scheme in theme_metrics["label"]
+                  and theme_metrics["toggleWidth"] >= 44
+                  and theme_metrics["toggleHeight"] >= 44,
+                  str(theme_metrics))
+
+            if scheme == "dark":
+                toggle = theme_page.locator("#theme-toggle")
+                toggle.focus()
+                toggle.press("Enter")
+                toggled = theme_page.evaluate("""() => ({
+                  theme: document.documentElement.dataset.theme,
+                  saved: localStorage.getItem('snoredex-theme'),
+                  pressed: document.querySelector('#theme-toggle').getAttribute('aria-pressed'),
+                })""")
+                restored_page = theme_context.new_page()
+                restored_page.goto(url)
+                restored = restored_page.evaluate("""() => ({
+                  theme: document.documentElement.dataset.theme,
+                  saved: localStorage.getItem('snoredex-theme'),
+                })""")
+                check("keyboard theme toggle persists an explicit user preference",
+                      toggled == {"theme": "light", "saved": "light", "pressed": "false"}
+                      and restored == {"theme": "light", "saved": "light"},
+                      f"toggled={toggled} restored={restored}")
+                restored_page.close()
+            theme_context.close()
+
         # Sort affordances must render as glyphs, not as the literal CSS escape text. A
         # double-escaped content string printed "\\2195" in every heading and passed every
         # functional assertion, so this is checked explicitly.
@@ -116,6 +373,57 @@ def main() -> int:
               wide_layout["overflow"] <= 1 and wide_layout["toolsHidden"],
               f"overflow={wide_layout['overflow']} toolsHidden={wide_layout['toolsHidden']}")
 
+        page.set_viewport_size({"width": 3072, "height": 1200})
+        page.wait_for_timeout(120)
+        clipping = page.evaluate("""() => {
+          const cells = [...document.querySelectorAll('.cell-clip')].map((cell) => {
+            const parent = cell.parentElement;
+            const style = getComputedStyle(parent);
+            const available = parent.clientWidth - parseFloat(style.paddingLeft)
+              - parseFloat(style.paddingRight);
+            const clipped = cell.scrollWidth > cell.clientWidth + 1;
+            return {
+              clipped,
+              avoidable: clipped && available >= cell.scrollWidth - 1,
+              ratio: cell.scrollWidth ? cell.clientWidth / cell.scrollWidth : 1,
+              disclosed: cell.dataset.clipped === 'true'
+                && cell.getAttribute('role') === 'button'
+                && cell.tabIndex === 0,
+            };
+          });
+          return {
+            clipped: cells.filter((cell) => cell.clipped).length,
+            avoidable: cells.filter((cell) => cell.avoidable).length,
+            underHalf: cells.filter((cell) => cell.clipped && cell.ratio < .5).length,
+            undisclosed: cells.filter((cell) => cell.clipped && !cell.disclosed).length,
+          };
+        }""")
+        check("wide cells use allocated table width instead of avoidably clipping",
+              clipping["avoidable"] == 0 and clipping["clipped"] < 250,
+              str(clipping))
+        check("severely clipped values are reduced and expose a disclosure control",
+              clipping["underHalf"] < 60 and clipping["undisclosed"] == 0,
+              str(clipping))
+
+        disclosure = page.locator('.cell-clip[data-clipped="true"]').first
+        collapsed_height = disclosure.evaluate("element => element.getBoundingClientRect().height")
+        disclosure.focus()
+        disclosure.press("Enter")
+        expanded_state = disclosure.evaluate("""element => ({
+          expanded: element.getAttribute('aria-expanded'),
+          whiteSpace: getComputedStyle(element).whiteSpace,
+          height: element.getBoundingClientRect().height,
+          label: element.getAttribute('aria-label'),
+        })""")
+        disclosure.press("Escape")
+        check("clipped values expand and collapse from the keyboard",
+              expanded_state["expanded"] == "true"
+              and expanded_state["whiteSpace"] == "normal"
+              and expanded_state["height"] > collapsed_height
+              and "Hide full value" in expanded_state["label"]
+              and disclosure.get_attribute("aria-expanded") == "false",
+              f"collapsed={collapsed_height} expanded={expanded_state}")
+
         # At narrower widths some overflow is unavoidable. It must be announced at the top of the
         # table, with working controls, instead of exposing only a scrollbar after 203 rows.
         page.set_viewport_size({"width": 1280, "height": 900})
@@ -140,6 +448,92 @@ def main() -> int:
         check("overflow controls scroll the table in both directions",
               overflow_after_click["left"] > 0 and not overflow_after_click["leftDisabled"],
               str(overflow_after_click))
+        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
+        page.wait_for_timeout(80)
+
+        page.set_viewport_size({"width": 1440, "height": 900})
+        table_start = page.eval_on_selector(
+            "#collection-table-frame", "element => element.getBoundingClientRect().top + scrollY"
+        )
+        page.evaluate("position => scrollTo(0, position + 180)", table_start)
+        page.wait_for_timeout(120)
+        sticky_header = page.evaluate("""() => {
+          const overlay = document.querySelector('#collection-sticky-header');
+          const overlayBox = overlay.getBoundingClientRect();
+          const toolbarBox = document.querySelector('#collection-scroll-tools').getBoundingClientRect();
+          const scrollerBox = document.querySelector('#collection-table-scroll').getBoundingClientRect();
+          return {
+            visible: getComputedStyle(overlay).display !== 'none',
+            top: overlayBox.top,
+            bottom: overlayBox.bottom,
+            left: overlayBox.left,
+            right: overlayBox.right,
+            toolbarBottom: toolbarBox.bottom,
+            scrollerLeft: scrollerBox.left,
+            scrollerRight: scrollerBox.right,
+            release: overlay.querySelector('th:nth-child(2)').innerText.trim(),
+          };
+        }""")
+        check("collection headers remain visible below the sticky overflow toolbar",
+              sticky_header["visible"]
+              and abs(sticky_header["top"] - sticky_header["toolbarBottom"]) <= 1
+              and abs(sticky_header["left"] - sticky_header["scrollerLeft"]) <= 1
+              and abs(sticky_header["right"] - sticky_header["scrollerRight"]) <= 1
+              and sticky_header["release"] == "Release",
+              str(sticky_header))
+        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 500; }")
+        page.wait_for_timeout(80)
+        sticky_scroll = page.evaluate("""() => ({
+          transform: getComputedStyle(document.querySelector('#collection-sticky-header table')).transform,
+          reportRight: document.querySelector('.table-sticky-correction').getBoundingClientRect().right,
+          overlayRight: document.querySelector('#collection-sticky-header').getBoundingClientRect().right,
+        })""")
+        check("sticky headings follow horizontal scrolling and retain the Report heading",
+              "-500" in sticky_scroll["transform"]
+              and abs(sticky_scroll["reportRight"] - sticky_scroll["overlayRight"]) <= 1,
+              str(sticky_scroll))
+        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
+        page.wait_for_timeout(80)
+
+        # A heading that covers the table owes the user the interactions it hides. Sorting from the
+        # sticky copy must sort, and a click anywhere on it must not reach the row underneath —
+        # otherwise aiming at a column heading expands a cell or opens a card preview instead.
+        sticky_sort = page.evaluate("""() => {
+          const overlay = document.querySelector('#collection-sticky-header');
+          const button = overlay.querySelector('th[data-key="name"] button.sort');
+          const box = button.getBoundingClientRect();
+          const point = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
+          return {
+            reaches: overlay.contains(point),
+            x: box.x + box.width / 2,
+            y: box.y + box.height / 2,
+            hit: point ? point.tagName + '.' + point.className : null,
+          };
+        }""")
+        check("sticky headings receive their own clicks instead of passing them through",
+              sticky_sort["reaches"], str(sticky_sort))
+        page.mouse.click(sticky_sort["x"], sticky_sort["y"])
+        page.wait_for_timeout(120)
+        sticky_sorted = page.evaluate("""() => ({
+          aria: document.querySelector('#collection-table thead th[data-key="name"]')
+            .getAttribute('aria-sort'),
+          overlayAria: document.querySelector('#collection-sticky-header th[data-key="name"]')
+            .getAttribute('aria-sort'),
+          names: [...document.querySelectorAll('#rows tr td:nth-child(3)')]
+            .slice(0, 12).map((cell) => cell.innerText.trim()),
+          expanded: document.querySelectorAll('.cell-clip.is-expanded').length,
+          preview: !document.querySelector('.card-preview').hidden,
+        })""")
+        check("sorting from the sticky heading sorts the table and mirrors its state",
+              sticky_sorted["aria"] == "ascending"
+              and sticky_sorted["overlayAria"] == "ascending"
+              and sticky_sorted["names"] == sorted(sticky_sorted["names"], key=str.lower)
+              and sticky_sorted["expanded"] == 0
+              and not sticky_sorted["preview"],
+              str(sticky_sorted))
+        page.click('th[data-key="release"] button.sort')
+        page.wait_for_timeout(120)
+        page.evaluate("scrollTo(0, 0)")
         page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
         page.wait_for_timeout(80)
 
@@ -276,6 +670,26 @@ def main() -> int:
 
         page.select_option("#f-lang-JA", "")
         page.wait_for_timeout(120)
+
+        present_cell = page.locator("#rows td.langcell.yes").first
+        absent_cell = page.locator("#rows td.langcell.no").first
+        language_accessibility = {
+            "presentLabel": present_cell.get_attribute("aria-label"),
+            "absentLabel": absent_cell.get_attribute("aria-label"),
+            "presentSnapshot": present_cell.aria_snapshot(),
+            "absentSnapshot": absent_cell.aria_snapshot(),
+            "legend": page.locator("#collection-table-legend").inner_text(),
+        }
+        check("language cells expose named present and absent states",
+              language_accessibility["presentLabel"].endswith(": present")
+              and language_accessibility["absentLabel"].endswith(": absent")
+              and "present" in language_accessibility["presentSnapshot"]
+              and "absent" in language_accessibility["absentSnapshot"],
+              str(language_accessibility))
+        check("language symbols have a visible non-color legend",
+              "✓ present" in language_accessibility["legend"]
+              and "— absent" in language_accessibility["legend"],
+              language_accessibility["legend"])
 
         # --- no-results state ---
         page.fill("#f-q", "zzzzzznotacard")
@@ -480,6 +894,10 @@ def main() -> int:
         # viewport to the paper width is what catches a table that silently truncates on paper.
         PAPER = {"A4": 794, "Letter": 816}
         for paper, width in PAPER.items():
+            page.evaluate("""() => {
+              document.documentElement.dataset.theme = 'dark';
+              document.documentElement.style.colorScheme = 'dark';
+            }""")
             page.emulate_media(media="print")
             page.set_viewport_size({"width": width, "height": 1000})
             page.wait_for_timeout(120)
@@ -487,6 +905,33 @@ def main() -> int:
                 "() => document.documentElement.scrollWidth - document.documentElement.clientWidth")
             check(f"collection page prints without horizontal overflow ({paper})",
                   overflow <= 1, f"overflow {overflow}px at {width}px")
+            print_geometry = page.evaluate("""() => {
+              const table = document.querySelector('#collection-table');
+              const row = [...table.tBodies[0].rows].find((candidate) =>
+                !candidate.classList.contains('yearsep'));
+              const cells = [...row.cells].filter((cell) => getComputedStyle(cell).display !== 'none');
+              const tableBox = table.getBoundingClientRect();
+              const usedRight = Math.max(...cells.map((cell) => cell.getBoundingClientRect().right));
+              const body = getComputedStyle(document.body);
+              return {
+                visibleColumns: cells.length,
+                usedPercent: (usedRight - tableBox.left) / tableBox.width * 100,
+                widths: cells.map((cell) => cell.getBoundingClientRect().width),
+                rowHeight: row.getBoundingClientRect().height,
+                bodyBackground: body.backgroundColor,
+                bodyColor: body.color,
+              };
+            }""")
+            check(f"collection print columns use the printable width ({paper})",
+                  print_geometry["visibleColumns"] == 7
+                  and print_geometry["usedPercent"] >= 98
+                  and min(print_geometry["widths"]) >= 50
+                  and print_geometry["rowHeight"] <= 80,
+                  str(print_geometry))
+            check(f"collection print remains light when screen theme is dark ({paper})",
+                  print_geometry["bodyBackground"] == "rgb(255, 255, 255)"
+                  and print_geometry["bodyColor"] == "rgb(0, 0, 0)",
+                  str(print_geometry))
 
         for paper, width in PAPER.items():
             checklist_page = browser.new_page()
@@ -563,9 +1008,32 @@ def main() -> int:
         hostile_page.close()
 
         page.emulate_media(media="screen")
+        page.evaluate("""() => {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.style.colorScheme = 'light';
+        }""")
         page.set_viewport_size({"width": 1280, "height": 900})
 
         # --- mobile layout ---
+        page.set_viewport_size({"width": 320, "height": 700})
+        page.wait_for_timeout(120)
+        narrow_mobile = page.evaluate("""() => ({
+          bodyOverflow: document.documentElement.scrollWidth
+            - document.documentElement.clientWidth,
+          tableOverflow: document.querySelector('#collection-table-scroll').scrollWidth
+            - document.querySelector('#collection-table-scroll').clientWidth,
+          toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
+          toggleWidth: document.querySelector('#theme-toggle').getBoundingClientRect().width,
+          toggleHeight: document.querySelector('#theme-toggle').getBoundingClientRect().height,
+        })""")
+        check("320px layout reflows without body overflow and retains table affordances",
+              narrow_mobile["bodyOverflow"] <= 1
+              and narrow_mobile["tableOverflow"] > 0
+              and not narrow_mobile["toolsHidden"]
+              and narrow_mobile["toggleWidth"] >= 44
+              and narrow_mobile["toggleHeight"] >= 44,
+              str(narrow_mobile))
+
         page.set_viewport_size({"width": 390, "height": 844})
         page.wait_for_timeout(120)
         body_overflow = page.evaluate(
@@ -598,6 +1066,29 @@ def main() -> int:
         check("mobile users receive the horizontal-scroll indication",
               mobile_overflow["overflow"] > 0 and not mobile_overflow["toolsHidden"]
               and "right" in mobile_overflow["hint"], str(mobile_overflow))
+
+        mobile_table_start = page.eval_on_selector(
+            "#collection-table-frame", "element => element.getBoundingClientRect().top + scrollY"
+        )
+        page.evaluate("position => scrollTo(0, position + 180)", mobile_table_start)
+        page.wait_for_timeout(120)
+        mobile_sticky = page.evaluate("""() => {
+          const overlay = document.querySelector('#collection-sticky-header').getBoundingClientRect();
+          const toolbar = document.querySelector('#collection-scroll-tools').getBoundingClientRect();
+          return {
+            visible: getComputedStyle(document.querySelector('#collection-sticky-header')).display
+              !== 'none',
+            top: overlay.top,
+            toolbarBottom: toolbar.bottom,
+            release: document.querySelector('#collection-sticky-header th:nth-child(2)')
+              .innerText.trim(),
+          };
+        }""")
+        check("sticky collection headings remain visible on mobile",
+              mobile_sticky["visible"]
+              and abs(mobile_sticky["top"] - mobile_sticky["toolbarBottom"]) <= 1
+              and mobile_sticky["release"] == "Release",
+              str(mobile_sticky))
 
         mobile_trigger = page.locator(".card-preview-trigger").first
         mobile_trigger.click()

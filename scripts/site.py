@@ -469,16 +469,36 @@ def main() -> int:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Snoredex — documented Snorlax TCG printings</title>
 <meta name="description" content="An auditable catalogue of physical Snorlax Pokemon TCG printings across variants, editions, languages, finishes, patterns, stamps, distribution and card size. Every claim carries an external source.">
+<script>
+(function () {{
+  var root = document.documentElement;
+  var saved = null;
+  try {{ saved = localStorage.getItem("snoredex-theme"); }} catch (error) {{ /* storage may be unavailable */ }}
+  var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var theme = saved === "light" || saved === "dark" ? saved : (systemDark ? "dark" : "light");
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+}})();
+</script>
 <link rel="stylesheet" href="site/app.css">
 <style>.sr{{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}</style>
 </head>
 <body>
 <header class="masthead">
   <div class="wrap">
-    <h1>Snoredex — documented Snorlax TCG printings</h1>
-    <p class="tagline">An auditable catalogue of <strong>physical</strong> Snorlax Pok&eacute;mon TCG
-    printings: variants, editions, languages, finishes, foil patterns, stamps, distribution and card
-    size. Every claim carries a source outside the marketplace it came from.</p>
+    <div class="masthead-row">
+      <div class="masthead-copy">
+        <h1>Snoredex — documented Snorlax TCG printings</h1>
+        <p class="tagline">An auditable catalogue of <strong>physical</strong> Snorlax Pok&eacute;mon TCG
+        printings: variants, editions, languages, finishes, foil patterns, stamps, distribution and card
+        size. Every claim carries a source outside the marketplace it came from.</p>
+      </div>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false"
+        aria-label="Change color theme">
+        <span class="theme-toggle-icon" aria-hidden="true">&#9680;</span>
+        <span class="theme-toggle-text">Theme</span>
+      </button>
+    </div>
     <nav class="sections" aria-label="Sections">
       <ul>
         <li><a href="#about">About</a></li>
@@ -575,6 +595,13 @@ def main() -> int:
     <div class="count" id="count"></div>
   </div>
 
+  <p class="language-legend" id="collection-table-legend">
+    <strong>Language availability:</strong>
+    <span><span class="yes" aria-hidden="true">&#10003;</span> present</span>
+    <span><span class="no" aria-hidden="true">&mdash;</span> absent</span>
+    <span>Ellipsized values can be selected to expand.</span>
+  </p>
+
   <div class="tableframe" id="collection-table-frame">
     <div class="table-scroll-tools" id="collection-scroll-tools" hidden>
       <span class="scroll-hint" id="collection-scroll-hint" aria-live="polite">
@@ -589,7 +616,7 @@ def main() -> int:
     </div>
     <span class="table-edge left" aria-hidden="true"></span>
     <div class="tablewrap" id="collection-table-scroll" tabindex="0"
-      aria-describedby="collection-scroll-hint">
+      aria-describedby="collection-scroll-hint collection-table-legend">
       <table id="collection-table">
         <caption class="sr">Chronological list of documented Snorlax card printings</caption>
         <thead><tr>{"".join(head_cells)}</tr></thead>

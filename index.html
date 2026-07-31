@@ -5,16 +5,36 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Snoredex — documented Snorlax TCG printings</title>
 <meta name="description" content="An auditable catalogue of physical Snorlax Pokemon TCG printings across variants, editions, languages, finishes, patterns, stamps, distribution and card size. Every claim carries an external source.">
+<script>
+(function () {
+  var root = document.documentElement;
+  var saved = null;
+  try { saved = localStorage.getItem("snoredex-theme"); } catch (error) { /* storage may be unavailable */ }
+  var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var theme = saved === "light" || saved === "dark" ? saved : (systemDark ? "dark" : "light");
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+})();
+</script>
 <link rel="stylesheet" href="site/app.css">
 <style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style>
 </head>
 <body>
 <header class="masthead">
   <div class="wrap">
-    <h1>Snoredex — documented Snorlax TCG printings</h1>
-    <p class="tagline">An auditable catalogue of <strong>physical</strong> Snorlax Pok&eacute;mon TCG
-    printings: variants, editions, languages, finishes, foil patterns, stamps, distribution and card
-    size. Every claim carries a source outside the marketplace it came from.</p>
+    <div class="masthead-row">
+      <div class="masthead-copy">
+        <h1>Snoredex — documented Snorlax TCG printings</h1>
+        <p class="tagline">An auditable catalogue of <strong>physical</strong> Snorlax Pok&eacute;mon TCG
+        printings: variants, editions, languages, finishes, foil patterns, stamps, distribution and card
+        size. Every claim carries a source outside the marketplace it came from.</p>
+      </div>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false"
+        aria-label="Change color theme">
+        <span class="theme-toggle-icon" aria-hidden="true">&#9680;</span>
+        <span class="theme-toggle-text">Theme</span>
+      </button>
+    </div>
     <nav class="sections" aria-label="Sections">
       <ul>
         <li><a href="#about">About</a></li>
@@ -111,6 +131,13 @@
     <div class="count" id="count"></div>
   </div>
 
+  <p class="language-legend" id="collection-table-legend">
+    <strong>Language availability:</strong>
+    <span><span class="yes" aria-hidden="true">&#10003;</span> present</span>
+    <span><span class="no" aria-hidden="true">&mdash;</span> absent</span>
+    <span>Ellipsized values can be selected to expand.</span>
+  </p>
+
   <div class="tableframe" id="collection-table-frame">
     <div class="table-scroll-tools" id="collection-scroll-tools" hidden>
       <span class="scroll-hint" id="collection-scroll-hint" aria-live="polite">
@@ -125,7 +152,7 @@
     </div>
     <span class="table-edge left" aria-hidden="true"></span>
     <div class="tablewrap" id="collection-table-scroll" tabindex="0"
-      aria-describedby="collection-scroll-hint">
+      aria-describedby="collection-scroll-hint collection-table-legend">
       <table id="collection-table">
         <caption class="sr">Chronological list of documented Snorlax card printings</caption>
         <thead><tr><th scope="col" class="img"><span class="sr">Image</span></th><th scope="col" class="" data-key="release" aria-sort="none"><button type="button" class="sort" data-key="release">Release</button></th><th scope="col" class="" data-key="name" aria-sort="none"><button type="button" class="sort" data-key="name">Card</button></th><th scope="col" class="" data-key="setCode" aria-sort="none"><button type="button" class="sort" data-key="setCode">Set</button></th><th scope="col" class="secondary col-expansion" data-key="setName" aria-sort="none"><button type="button" class="sort" data-key="setName">Expansion</button></th><th scope="col" class="" data-key="number" aria-sort="none"><button type="button" class="sort" data-key="number">No.</button></th><th scope="col" class="secondary col-variant" data-key="variant" aria-sort="none"><button type="button" class="sort" data-key="variant">Variant</button></th><th scope="col" class="secondary col-rarity" data-key="rarity" aria-sort="none"><button type="button" class="sort" data-key="rarity">Rarity</button></th><th scope="col" class="secondary col-artist" data-key="artist" aria-sort="none"><button type="button" class="sort" data-key="artist">Artist</button></th><th scope="col" class="" data-key="edition" aria-sort="none"><button type="button" class="sort" data-key="edition">Edition</button></th><th scope="col" class="" data-key="finish" aria-sort="none"><button type="button" class="sort" data-key="finish">Finish</button></th><th scope="col" class="secondary col-pattern" data-key="pattern" aria-sort="none"><button type="button" class="sort" data-key="pattern">Pattern</button></th><th scope="col" class="secondary col-marking" data-key="marking" aria-sort="none"><button type="button" class="sort" data-key="marking">Stamp / marking</button></th><th scope="col" class="secondary col-marking-role" data-key="markingRole" aria-sort="none"><button type="button" class="sort" data-key="markingRole">Marking role</button></th><th scope="col" class="secondary col-size" data-key="size" aria-sort="none"><button type="button" class="sort" data-key="size">Size</button></th><th scope="col" class="secondary col-distribution" data-key="distribution" aria-sort="none"><button type="button" class="sort" data-key="distribution">Distribution</button></th><th scope="col" class="secondary col-evidence" data-key="evidence" aria-sort="none"><button type="button" class="sort" data-key="evidence">Evidence</button></th><th scope="col" class="langcount" data-key="langCount" aria-sort="none"><button type="button" class="sort" data-key="langCount">Langs</button></th><th scope="col" class="langcell" data-key="lang-EN" aria-sort="none" title="English"><button type="button" class="sort" data-key="lang-EN" aria-label="Sort by English availability">EN</button></th><th scope="col" class="langcell" data-key="lang-FR" aria-sort="none" title="French"><button type="button" class="sort" data-key="lang-FR" aria-label="Sort by French availability">FR</button></th><th scope="col" class="langcell" data-key="lang-DE" aria-sort="none" title="German"><button type="button" class="sort" data-key="lang-DE" aria-label="Sort by German availability">DE</button></th><th scope="col" class="langcell" data-key="lang-IT" aria-sort="none" title="Italian"><button type="button" class="sort" data-key="lang-IT" aria-label="Sort by Italian availability">IT</button></th><th scope="col" class="langcell" data-key="lang-ES" aria-sort="none" title="Spanish"><button type="button" class="sort" data-key="lang-ES" aria-label="Sort by Spanish availability">ES</button></th><th scope="col" class="langcell" data-key="lang-PT" aria-sort="none" title="Portuguese"><button type="button" class="sort" data-key="lang-PT" aria-label="Sort by Portuguese availability">PT</button></th><th scope="col" class="langcell" data-key="lang-NL" aria-sort="none" title="Dutch"><button type="button" class="sort" data-key="lang-NL" aria-label="Sort by Dutch availability">NL</button></th><th scope="col" class="langcell" data-key="lang-PL" aria-sort="none" title="Polish"><button type="button" class="sort" data-key="lang-PL" aria-label="Sort by Polish availability">PL</button></th><th scope="col" class="langcell" data-key="lang-RU" aria-sort="none" title="Russian"><button type="button" class="sort" data-key="lang-RU" aria-label="Sort by Russian availability">RU</button></th><th scope="col" class="langcell" data-key="lang-JA" aria-sort="none" title="Japanese"><button type="button" class="sort" data-key="lang-JA" aria-label="Sort by Japanese availability">JA</button></th><th scope="col" class="langcell" data-key="lang-KO" aria-sort="none" title="Korean"><button type="button" class="sort" data-key="lang-KO" aria-label="Sort by Korean availability">KO</button></th><th scope="col" class="langcell" data-key="lang-ZH-T" aria-sort="none" title="T-Chinese"><button type="button" class="sort" data-key="lang-ZH-T" aria-label="Sort by T-Chinese availability">ZH-T</button></th><th scope="col" class="langcell" data-key="lang-ZH-S" aria-sort="none" title="S-Chinese"><button type="button" class="sort" data-key="lang-ZH-S" aria-label="Sort by S-Chinese availability">ZH-S</button></th><th scope="col" class="langcell" data-key="lang-ID" aria-sort="none" title="Indonesian"><button type="button" class="sort" data-key="lang-ID" aria-label="Sort by Indonesian availability">ID</button></th><th scope="col" class="langcell" data-key="lang-TH" aria-sort="none" title="Thai"><button type="button" class="sort" data-key="lang-TH" aria-label="Sort by Thai availability">TH</button></th><th scope="col" class="corr">Report</th></tr></thead>

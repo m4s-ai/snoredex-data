@@ -41,6 +41,49 @@
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
+  /* --------------------------------------------------------------- theme */
+
+  function initTheme() {
+    const root = document.documentElement;
+    const button = $("#theme-toggle");
+    const icon = $(".theme-toggle-icon", button);
+    const label = $(".theme-toggle-text", button);
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    let saved = null;
+
+    try { saved = window.localStorage.getItem("snoredex-theme"); }
+    catch (error) { /* Storage can be unavailable for local files or hardened browsers. */ }
+
+    let explicitChoice = saved === "light" || saved === "dark";
+
+    const apply = (theme, persist) => {
+      const dark = theme === "dark";
+      root.dataset.theme = dark ? "dark" : "light";
+      root.style.colorScheme = dark ? "dark" : "light";
+      button.setAttribute("aria-pressed", String(dark));
+      button.setAttribute("aria-label", "Color theme: " + (dark ? "dark" : "light") +
+        ". Switch to " + (dark ? "light" : "dark") + " mode");
+      label.textContent = dark ? "Dark mode" : "Light mode";
+      icon.textContent = dark ? "☾" : "☀";
+      if (persist) {
+        explicitChoice = true;
+        try { window.localStorage.setItem("snoredex-theme", dark ? "dark" : "light"); }
+        catch (error) { /* The selected theme still applies for the current page. */ }
+      }
+      window.dispatchEvent(new CustomEvent("snoredex:themechange", { detail: { theme } }));
+    };
+
+    apply(root.dataset.theme || (media.matches ? "dark" : "light"), false);
+    button.addEventListener("click", () => {
+      apply(root.dataset.theme === "dark" ? "light" : "dark", true);
+    });
+    const followSystem = (event) => {
+      if (!explicitChoice) apply(event.matches ? "dark" : "light", false);
+    };
+    if (media.addEventListener) media.addEventListener("change", followSystem);
+    else if (media.addListener) media.addListener(followSystem);
+  }
+
   function escapeHTML(value) {
     return String(value == null ? "" : value)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -300,13 +343,15 @@
       render();
     });
 
-    $$("th button.sort").forEach((button) => {
-      button.addEventListener("click", () => {
-        const key = button.dataset.key;
-        if (sortKey === key) sortDir = -sortDir;
-        else { sortKey = key; sortDir = 1; }
-        render();
-      });
+    // Delegated rather than bound per button: the sticky heading is a clone of this row, and a
+    // clone carries no listeners. Delegation keeps the visible copy and the real one in step.
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest && event.target.closest("button.sort");
+      if (!button) return;
+      const key = button.dataset.key;
+      if (sortKey === key) sortDir = -sortDir;
+      else { sortKey = key; sortDir = 1; }
+      render();
     });
   }
 
@@ -372,7 +417,10 @@
   function rowHTML(row) {
     const langCells = LANGS.map((lang) => {
       const has = row.langCodes.includes(lang.code);
-      return '<td class="langcell ' + (has ? "yes" : "no") + '">' + (has ? "●" : "·") + "</td>";
+      const state = has ? "present" : "absent";
+      return '<td class="langcell ' + (has ? "yes" : "no") + '" data-state="' + state +
+        '" aria-label="' + escapeHTML(lang.name + ": " + state) + '">' +
+        '<span aria-hidden="true">' + (has ? "✓" : "—") + "</span></td>";
     }).join("");
     const finishPills = row.finishDisplay.map((f) => pill(f.label, f.status)).join("");
     const variant = row.variant + (row.variantName ? " — " + row.variantName : "");
@@ -456,7 +504,88 @@
     renderChips();
     writeURL();
     updateChecklistPreview();
-    window.requestAnimationFrame(refreshTableOverflow);
+    window.requestAnimationFrame(() => {
+      refreshTableOverflow();
+      refreshClippedCells();
+      refreshStickyHeader();
+    });
+  }
+
+  /* ------------------------------------------- clipped-cell disclosure */
+
+  let refreshClippedCells = () => {};
+
+  function initClippedCells() {
+    // Runs after every render — including every keystroke in the search field — over roughly two
+    // thousand cells. Measuring and marking in one pass interleaves reads with writes, so each
+    // attribute write invalidates style for the next scrollWidth read and layout runs again. The
+    // measurements are taken first, then applied, and a cell already in the right state is left
+    // alone: 10.9ms to 4.1ms per pass at 3072px, which is the difference between fitting in a
+    // frame and dropping one.
+    const update = () => {
+      const cells = $$(".cell-clip");
+      const clipping = cells.map((cell) =>
+        cell.classList.contains("is-expanded") ? null : cell.scrollWidth > cell.clientWidth + 1);
+      cells.forEach((cell, index) => {
+        const clipped = clipping[index];
+        if (clipped === null) return;
+        if (clipped) {
+          if (cell.dataset.clipped === "true") return;
+          const text = cell.getAttribute("title") || cell.textContent.trim();
+          cell.dataset.clipped = "true";
+          cell.tabIndex = 0;
+          cell.setAttribute("role", "button");
+          cell.setAttribute("aria-expanded", "false");
+          cell.setAttribute("aria-label", text + ". Show full value");
+        } else if (cell.dataset.clipped) {
+          delete cell.dataset.clipped;
+          cell.removeAttribute("tabindex");
+          cell.removeAttribute("role");
+          cell.removeAttribute("aria-expanded");
+          cell.removeAttribute("aria-label");
+        }
+      });
+    };
+
+    const toggle = (cell, force) => {
+      if (!cell || (cell.dataset.clipped !== "true" && !cell.classList.contains("is-expanded"))) return;
+      const expanded = force === undefined ? !cell.classList.contains("is-expanded") : force;
+      const text = cell.getAttribute("title") || cell.textContent.trim();
+      cell.classList.toggle("is-expanded", expanded);
+      cell.dataset.clipped = "true";
+      cell.tabIndex = 0;
+      cell.setAttribute("role", "button");
+      cell.setAttribute("aria-expanded", String(expanded));
+      cell.setAttribute("aria-label", text + (expanded ? ". Hide full value" : ". Show full value"));
+      window.requestAnimationFrame(() => {
+        refreshTableOverflow();
+        refreshStickyHeader();
+        if (!expanded) update();
+      });
+    };
+
+    document.addEventListener("click", (event) => {
+      const cell = event.target.closest && event.target.closest(".cell-clip");
+      if (cell) toggle(cell);
+    });
+    document.addEventListener("keydown", (event) => {
+      const cell = event.target.closest && event.target.closest(".cell-clip");
+      if (!cell) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggle(cell);
+      } else if (event.key === "Escape" && cell.classList.contains("is-expanded")) {
+        event.preventDefault();
+        toggle(cell, false);
+      }
+    });
+    // A window drag fires resize continuously; one measurement per frame is enough.
+    let scheduled = 0;
+    window.addEventListener("resize", () => {
+      if (scheduled) return;
+      scheduled = window.requestAnimationFrame(() => { scheduled = 0; update(); });
+    });
+    return update;
   }
 
   /* ------------------------------------------ horizontal table affordance */
@@ -504,6 +633,100 @@
     if (window.ResizeObserver) new ResizeObserver(update).observe(scroller);
     update();
     return update;
+  }
+
+  /* --------------------------------------------- sticky table heading */
+
+  let refreshStickyHeader = () => {};
+
+  function initStickyTableHeader() {
+    const scroller = $("#collection-table-scroll");
+    const tools = $("#collection-scroll-tools");
+    const table = $("#collection-table");
+    const sourceHead = $("thead", table);
+    const overlay = document.createElement("div");
+    overlay.id = "collection-sticky-header";
+    overlay.className = "table-sticky-header";
+    overlay.setAttribute("aria-hidden", "true");
+
+    const cloneTable = document.createElement("table");
+    const colgroup = document.createElement("colgroup");
+    const cloneHead = sourceHead.cloneNode(true);
+    $$("button", cloneHead).forEach((button) => { button.tabIndex = -1; });
+    cloneTable.append(colgroup, cloneHead);
+
+    const correction = document.createElement("div");
+    correction.className = "table-sticky-correction";
+    correction.textContent = $("th.corr", sourceHead).textContent.trim();
+    overlay.append(cloneTable, correction);
+    document.body.appendChild(overlay);
+
+    let scheduled = 0;
+
+    const sync = () => {
+      scheduled = 0;
+      if (window.matchMedia("print").matches) {
+        overlay.classList.remove("is-visible");
+        return;
+      }
+
+      const sourceCells = $$("th", sourceHead);
+      const cloneCells = $$("th", cloneHead);
+      const widths = sourceCells.map((cell) => cell.getBoundingClientRect().width);
+      colgroup.innerHTML = widths.map((width) => '<col style="width:' + width + 'px">').join("");
+      cloneCells.forEach((cell, index) => {
+        cell.setAttribute("aria-sort", sourceCells[index].getAttribute("aria-sort") || "none");
+      });
+
+      const scrollerBox = scroller.getBoundingClientRect();
+      const headBox = sourceHead.getBoundingClientRect();
+      const tableBox = table.getBoundingClientRect();
+      const toolOffset = tools.hidden ? 0 : tools.getBoundingClientRect().height;
+      const headerHeight = headBox.height;
+      const correctionWidth = widths[widths.length - 1];
+      const visible = headBox.top <= toolOffset && scrollerBox.bottom > toolOffset + headerHeight;
+
+      // Everything focusable inside the table scrolls clear of this band; see app.css.
+      document.documentElement.style.setProperty(
+        "--sticky-head-offset", Math.ceil(toolOffset + headerHeight) + "px");
+
+      overlay.style.left = Math.round(scrollerBox.left) + "px";
+      overlay.style.top = Math.round(toolOffset) + "px";
+      overlay.style.width = Math.round(scrollerBox.width) + "px";
+      overlay.style.height = Math.ceil(headerHeight) + "px";
+      cloneTable.style.width = Math.ceil(tableBox.width) + "px";
+      cloneTable.style.height = Math.ceil(headerHeight) + "px";
+      cloneTable.style.transform = "translateX(" + Math.round(-scroller.scrollLeft) + "px)";
+      correction.style.width = Math.ceil(correctionWidth) + "px";
+      correction.style.height = Math.ceil(headerHeight) + "px";
+      overlay.classList.toggle("is-visible", visible);
+    };
+
+    const schedule = () => {
+      if (!scheduled) scheduled = window.requestAnimationFrame(sync);
+    };
+
+    // The overlay covers the real heading, so it has to answer for the interactions it hides.
+    // Its sort buttons work through the delegated handler; a click that misses one must stop here
+    // rather than fall through to whichever row happens to be scrolling past underneath.
+    overlay.addEventListener("mousedown", (event) => {
+      // Focus stays out of an aria-hidden subtree; the real heading remains the keyboard target.
+      event.preventDefault();
+    });
+    overlay.addEventListener("wheel", (event) => {
+      if (!event.deltaX) return;
+      scroller.scrollLeft += event.deltaX;
+      event.preventDefault();
+      schedule();
+    }, { passive: false });
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("snoredex:themechange", schedule);
+    scroller.addEventListener("scroll", schedule, { passive: true });
+    if (window.ResizeObserver) new ResizeObserver(schedule).observe(scroller);
+    sync();
+    return sync;
   }
 
   /* ---------------------------------------------------- card image preview */
@@ -790,10 +1013,13 @@
 
   /* ------------------------------------------------------------------ boot */
 
+  initTheme();
   readURL();
   buildControls();
   initChecklist();
   refreshTableOverflow = initTableOverflow();
+  refreshClippedCells = initClippedCells();
+  refreshStickyHeader = initStickyTableHeader();
   initCardPreview();
   syncControls();
   render();
