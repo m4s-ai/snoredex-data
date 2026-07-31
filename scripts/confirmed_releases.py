@@ -57,7 +57,8 @@ EN_NAME_MAP = {
 DATES = {
     # Japanese classics
     "PJU": ("1997-03", False), "UNP": ("1997-12", True),  # Hungry Snorlax N64 campaign Dec 1997
-    "EXS": ("1998", False), "G2": ("1999", False), "EC5": ("2002", False),
+    "EXS": ("1998-03-23", True),  # Expansion Sheet 1; later Quick Starter printing is dated per checklist item
+    "G2": ("1999", False), "EC5": ("2002", False),
     "PCG1": ("2004", False), "PCG3": ("2004", False), "PCG9": ("2006", False),
     "DP1": ("2006-10", False),
     ("DP-P", "126"): ("2008-10", True),   # Domino's Pizza Oct-Dec 2008

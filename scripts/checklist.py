@@ -20,9 +20,9 @@ Rules, in the order they bite:
    identifies its edition. Otherwise each confirmed edition receives one unresolved placeholder.
 5. Where a confirmed card-language-edition has no printing detail at all, emit exactly one
    `finish: "unresolved"` placeholder rather than inventing a finish.
-6. Keep stamps, patterns, distribution channels and card sizes as separate physical items even
-   when their collector-facing finish family matches. `mirror-holo` remains an auditable technical
-   finish, but is presented to collectors under the `reverse-holo` family.
+6. Keep markings, patterns, distribution channels, release dates and card sizes attached to each
+   physical item even when their collector-facing finish family matches. `mirror-holo` remains an
+   auditable technical finish, but is presented to collectors under the `reverse-holo` family.
 
     python scripts/checklist.py
     python scripts/checklist.py --check    # fail if regeneration would change the output
@@ -49,7 +49,7 @@ FINISH_FAMILY = {
     "mirror-holo": "reverse-holo",
     "unresolved": "unresolved",
 }
-SCHEMA_VERSION = "1.2.0"
+SCHEMA_VERSION = "1.3.0"
 
 
 def read_json(path: Path) -> Any:
@@ -92,6 +92,25 @@ def distribution_slug(distribution: Any) -> str:
         str(distribution.get(field)) for field in ("kind", "name", "region")
         if distribution.get(field)
     ))
+
+
+def release_precision(value: Any) -> str:
+    text = str(value or "")
+    if re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])", text):
+        return "day"
+    if re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", text):
+        return "month"
+    return "year"
+
+
+def release_sort(value: Any) -> str:
+    text = str(value or "9999")
+    precision = release_precision(text)
+    if precision == "day":
+        return text
+    if precision == "month":
+        return f"{text}-01"
+    return f"{text[:4]}-01-01"
 
 
 def printing_editions(printing: dict[str, Any]) -> set[str]:
@@ -242,7 +261,7 @@ def main() -> int:
                 "Editions expand only where the edition model supports that edition for that language.",
                 "When multiple editions are supported, concrete finishes require an explicit edition mapping; otherwise each edition receives one unresolved placeholder.",
                 "A confirmed card-language-edition with no printing detail yields exactly one finish:unresolved placeholder.",
-                "Stamps, foil patterns, distribution channels and card sizes remain separate items even when the finish family matches.",
+                "Markings, foil patterns, distribution channels, release dates and card sizes remain attached to each physical item even when the finish family matches.",
                 "Technical mirror-holo printings use finishFamily:reverse-holo for collector-facing grouping while retaining finish:mirror-holo.",
                 "Positive evidence is not proof of completeness: only completenessStatus=complete-manifest asserts that an unlisted alternative is absent.",
             ],
@@ -313,6 +332,18 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
         (set_code, number, product.get("variantToken") or "base", edition)
     ) or release.get((set_code, number, product.get("variantToken") or "base", "—"))
 
+    printing_release = printing.get("releaseDate") if printing else None
+    if printing_release:
+        release_date = printing_release
+        release_date_precision = release_precision(printing_release)
+        release_approximate = bool(printing.get("releaseApproximate", False))
+        release_sort_value = release_sort(printing_release)
+    else:
+        release_date = (row or {}).get("date")
+        release_date_precision = (row or {}).get("datePrecision")
+        release_approximate = (row or {}).get("dateApproximate")
+        release_sort_value = (row or {}).get("dateSort") or "9999-01-01"
+
     finish = printing["finish"] if printing else "unresolved"
     finish_family = FINISH_FAMILY[finish]
     pattern = printing.get("foilPattern") if printing else None
@@ -375,10 +406,10 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
         "productMapping": "mapped" if variants else ("unresolved" if printing else "not-applicable"),
         "rarity": product.get("rarity"),
         "artist": product.get("artist"),
-        "releaseDate": (row or {}).get("date"),
-        "releaseDatePrecision": (row or {}).get("datePrecision"),
-        "releaseApproximate": (row or {}).get("dateApproximate"),
-        "releaseSort": (row or {}).get("dateSort") or "9999-01-01",
+        "releaseDate": release_date,
+        "releaseDatePrecision": release_date_precision,
+        "releaseApproximate": release_approximate,
+        "releaseSort": release_sort_value,
         "rowId": (row or {}).get("rowId"),
         "finishUnitId": unit["finishUnitId"],
         "printingId": printing["printingId"] if printing else None,
@@ -388,7 +419,11 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
             for s in ((printing or {}).get("sources") or [])
             if s.get("url") or s.get("sourceType")
         }),
-        "image": product.get("imageFile"),
+        "image": (
+            printing["image"]
+            if printing is not None and "image" in printing
+            else product.get("imageFile")
+        ),
         "cardmarketUrl": product.get("productUrl"),
     }
 

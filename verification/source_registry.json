@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-07-25",
+  "generated": "2026-07-31",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence is true only for complete official manifests, and only within their stated scope.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 18,
-   "evidenceRecords": 864,
-   "uniqueUrls": 857,
+   "evidenceRecords": 867,
+   "uniqueUrls": 860,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2722
+   "claimsAttributed": 2732
   }
  },
  "providers": [
@@ -131,8 +131,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 73,
-   "claimsSupported": 639
+   "uniqueSources": 75,
+   "claimsSupported": 647
   },
   {
    "providerId": "tcgcsv",
@@ -269,8 +269,8 @@
     "cardmarket.com",
     "product-images.s3.cardmarket.com"
    ],
-   "uniqueSources": 396,
-   "claimsSupported": 931
+   "uniqueSources": 397,
+   "claimsSupported": 933
   },
   {
    "providerId": "pokemontcgio",
@@ -433,9 +433,11 @@
    "nonUrlEvidenceId": "evidence:bulbapedia",
    "providerId": "bulbapedia",
    "sourceTypes": [
+    "Bulbapedia (fan wiki), card release history",
     "Bulbapedia + Elite Fourum 1st Edition timeline"
    ],
    "dimensions": [
+    "artist",
     "edition"
    ],
    "stableIdCount": 196,
@@ -492,7 +494,7 @@
     "DF 10 base"
    ],
    "retrievedAt": null,
-   "usageCount": 198
+   "usageCount": 199
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)",
@@ -1433,6 +1435,25 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Quick_Starter_Gift_Set_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia fixed-deck release history"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0107-P02",
+    "override:quick-starter-gift-set"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/S-P_Promotional_cards_(SCTCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -1710,21 +1731,27 @@
    "usageCount": 2
   },
   {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(TCG)",
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), master card list for the species"
+    "Bulbapedia (fan wiki), card release history",
+    "Bulbapedia card release history"
    ],
    "dimensions": [
+    "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 4,
    "stableIds": [
-    "U0458"
+    "F0107-P01",
+    "F0107-P02",
+    "U0458",
+    "override:snorlax-wizards-promo-49"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-07-31",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_VMAX_(Sword_%26_Shield_142)",
@@ -1905,6 +1932,25 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia expansion release history"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0107-P01",
+    "override:vending-machine-cards"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Venusaur_%26_Charizard_%26_Blastoise_Special_Deck_Set_ex_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -1992,6 +2038,25 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket",
+   "sourceTypes": [
+    "Cardmarket marketplace article scan (physical specimen)"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0107-P01",
+    "override:exs-rarity-symbol-specimen"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/151C/819209/819209.jpg",
@@ -6375,8 +6440,8 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "Cardmarket stock image (visual evidence)"
    ],
    "dimensions": [
     "finish",
@@ -6385,7 +6450,7 @@
    "stableIdCount": 2,
    "stableIds": [
     "EXS  base",
-    "F0107-P01"
+    "F0107-P02"
    ],
    "retrievedAt": null,
    "usageCount": 2

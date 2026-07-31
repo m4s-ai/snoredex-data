@@ -1,7 +1,7 @@
 {
   "meta": {
-    "description": "One row per set code x collector number x language, with logical physical printings and Cardmarket product mappings.",
-    "generated": "2026-07-23",
+    "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
+    "generated": "2026-07-31",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -10,7 +10,7 @@
       "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
       "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
       "Cardmarket Reverse Holo axes and rarity labels are retained as marketplace-claimed hints, not external confirmation.",
-      "EX-era set-logo stamps intrinsic to reverse holo use markings.role=reverse-holo-treatment; later promotional stamps use markings.role=distribution-promo."
+      "Printed identity features use markings.role=print-identity; EX-era set-logo stamps intrinsic to reverse holo use markings.role=reverse-holo-treatment; later promotional stamps use markings.role=distribution-promo."
     ],
     "taxonomy": {
       "finish": [
@@ -39,6 +39,7 @@
         "unknown"
       ],
       "markingRoles": [
+        "print-identity",
         "reverse-holo-treatment",
         "distribution-promo"
       ],
@@ -51,8 +52,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 331,
-      "withOnlyMarketplaceClaim": 104,
+      "withConfirmedFinish": 332,
+      "withOnlyMarketplaceClaim": 103,
       "pendingFinish": 138,
       "notApplicableFinish": 64,
       "withCompleteManifest": 4,
@@ -7007,35 +7008,121 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "rarity-symbol",
+              "text": "Uncommon rarity symbol",
+              "role": "print-identity"
+            }
+          ],
+          "distribution": {
+            "kind": "vending-sheet",
+            "name": "Expansion Sheet 1, Sheet 16"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Expansion-Sheet/Snorlax-EXS",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
+              "sourceType": "Bulbapedia card release history",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-31",
+              "evidence": "Identifies Keita Takahashi as the illustrator and distinguishes the glossy Expansion Sheet 1 Sheet 16 printing with a rarity symbol from the non-glossy Quick Starter Gift Set Red Deck reprint; it also records the extra CoroCoro Comic Illust Contest text on the Quick Starter printing."
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
+              "sourceType": "Bulbapedia expansion release history",
+              "authorityTier": "specialist-reference",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-31",
+              "evidence": "Records the Expansion Sheet 1 release date as March 23, 1998, describes the cards as glossy, lists Snorlax as Uncommon, and places it on Sheet 16."
+            },
+            {
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg",
+              "sourceType": "Cardmarket marketplace article scan (physical specimen)",
+              "authorityTier": "physical-specimen",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-31",
+              "evidence": "Physical-card scan supplied with issue #24 showing the Expansion Sheet 1 printing with its rarity symbol."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "releaseDate": "1998-03-23",
+          "image": null,
           "printingId": "F0107-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "rarity-symbol",
+              "text": "No rarity symbol",
+              "role": "print-identity"
+            },
+            {
+              "kind": "illustrator-credit",
+              "text": "CoroCoro Comic Illust Contest winning card",
+              "role": "print-identity"
+            }
+          ],
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Quick Starter Gift Set Red Deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
+              "sourceType": "Bulbapedia card release history",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-31",
+              "evidence": "Identifies Keita Takahashi as the illustrator and distinguishes the glossy Expansion Sheet 1 Sheet 16 printing with a rarity symbol from the non-glossy Quick Starter Gift Set Red Deck reprint; it also records the extra CoroCoro Comic Illust Contest text on the Quick Starter printing."
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Quick_Starter_Gift_Set_(TCG)",
+              "sourceType": "Bulbapedia fixed-deck release history",
+              "authorityTier": "specialist-reference",
+              "coverage": "complete-deck-list",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-31",
+              "evidence": "Records the Quick Starter Gift Set release date as December 4, 1998, states that its Vending reprints are non-glossy and have no rarity symbols, and lists one Snorlax in the Red Deck."
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Expansion-Sheet/Snorlax-EXS",
+              "sourceType": "Cardmarket stock image (visual evidence)",
+              "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+              "image": "images/EXS__Snorlax_548656.jpg"
+            }
+          ],
+          "releaseDate": "1998-12-04",
+          "printingId": "F0107-P02"
         }
       ],
       "unresolved": []

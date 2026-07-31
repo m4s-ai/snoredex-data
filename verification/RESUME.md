@@ -20,8 +20,8 @@ root.
 | Still open | **9** — `BA20`/`WCD23` ES+PT, `sA 10` KO+TC, `mP1 012` KO, `svG 021` TC, `svIba 046` TC |
 | Card-variants fully resolved | **180 / 191** |
 | Finish units (set number × language) | **637** |
-| Finish units with externally confirmed finish | **331** |
-| Finish units with marketplace-only positive claim | **104** |
+| Finish units with externally confirmed finish | **332** |
+| Finish units with marketplace-only positive claim | **103** |
 | Applicable finish units with no positive finish evidence | **138** |
 | Finish units not applicable because all product-language claims are contradicted | **64** |
 | Finish units in the remaining review queue | **233** |
@@ -59,6 +59,7 @@ and `cardSize` separate. Aggregating under Reverse Holo must never delete the un
 reverse-holo/mirror-holo distinction, pattern, source, product mapping, or printing ID. In
 particular:
 
+- printed identity features such as rarity symbols and contest credits use `role=print-identity`;
 - EX-era set-logo stamps intrinsic to a reverse treatment use `role=reverse-holo-treatment`;
 - later prerelease, Staff, retailer, and Pokémon Center stamps use `role=distribution-promo`;
 - a distribution stamp never changes the finish category by itself.

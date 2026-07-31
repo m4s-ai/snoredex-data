@@ -1,9 +1,10 @@
 {
   "meta": {
-    "description": "Curated finish, foil-pattern, marking, size, and Cardmarket-product mappings that cannot be represented by TCGdex's group-level normal/holo/reverse flags.",
-    "lastUpdated": "2026-07-23",
+    "description": "Curated finish, foil-pattern, marking, distribution, release-date, size, and Cardmarket-product mappings that cannot be represented by TCGdex's group-level normal/holo/reverse flags.",
+    "lastUpdated": "2026-07-31",
     "policy": [
       "A physical stamp is recorded in markings; the way a card was distributed is recorded separately in distribution.",
+      "Printed identity features such as a rarity symbol or contest credit use role=print-identity; they do not imply a finish.",
       "EX-era set-logo stamps that are intrinsic to the reverse-holo design use role=reverse-holo-treatment.",
       "Prerelease, Staff, retailer, Pokemon Center, and similar later stamps use role=distribution-promo and do not imply reverse holo.",
       "An override applies only where its mapped Cardmarket variant exists for the language, unless mappedVariants is empty.",
@@ -195,6 +196,42 @@
       "retrievedAt": "2026-07-23",
       "evidence": "Lists two copies of Hidden Fates Snorlax 50/68 in the fixed Mewtwo deck; the downloaded product image supplies the Mewtwo deck marking."
     },
+    "snorlax-wizards-promo-49": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
+      "sourceType": "Bulbapedia card release history",
+      "authorityTier": "specialist-reference",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "retrievedAt": "2026-07-31",
+      "evidence": "Identifies Keita Takahashi as the illustrator and distinguishes the glossy Expansion Sheet 1 Sheet 16 printing with a rarity symbol from the non-glossy Quick Starter Gift Set Red Deck reprint; it also records the extra CoroCoro Comic Illust Contest text on the Quick Starter printing."
+    },
+    "vending-machine-cards": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
+      "sourceType": "Bulbapedia expansion release history",
+      "authorityTier": "specialist-reference",
+      "coverage": "product-line-description",
+      "supportsAbsence": false,
+      "retrievedAt": "2026-07-31",
+      "evidence": "Records the Expansion Sheet 1 release date as March 23, 1998, describes the cards as glossy, lists Snorlax as Uncommon, and places it on Sheet 16."
+    },
+    "quick-starter-gift-set": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Quick_Starter_Gift_Set_(TCG)",
+      "sourceType": "Bulbapedia fixed-deck release history",
+      "authorityTier": "specialist-reference",
+      "coverage": "complete-deck-list",
+      "supportsAbsence": false,
+      "retrievedAt": "2026-07-31",
+      "evidence": "Records the Quick Starter Gift Set release date as December 4, 1998, states that its Vending reprints are non-glossy and have no rarity symbols, and lists one Snorlax in the Red Deck."
+    },
+    "exs-rarity-symbol-specimen": {
+      "url": "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg",
+      "sourceType": "Cardmarket marketplace article scan (physical specimen)",
+      "authorityTier": "physical-specimen",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "retrievedAt": "2026-07-31",
+      "evidence": "Physical-card scan supplied with issue #24 showing the Expansion Sheet 1 printing with its rarity symbol."
+    },
     "m2a-official": {
       "url": "https://www.pokemon-card.com/ex/m2a/index.html",
       "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -264,6 +301,68 @@
     }
   },
   "overrides": [
+    {
+      "setCode": "EXS",
+      "number": "",
+      "languages": ["Japanese"],
+      "suppressAutoFinishes": ["non-holo"],
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "rarity-symbol",
+              "text": "Uncommon rarity symbol",
+              "role": "print-identity"
+            }
+          ],
+          "distribution": {
+            "kind": "vending-sheet",
+            "name": "Expansion Sheet 1, Sheet 16"
+          },
+          "releaseDate": "1998-03-23",
+          "image": null,
+          "cardSize": "standard",
+          "mappedVariants": ["base"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "snorlax-wizards-promo-49",
+            "vending-machine-cards",
+            "exs-rarity-symbol-specimen"
+          ]
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "rarity-symbol",
+              "text": "No rarity symbol",
+              "role": "print-identity"
+            },
+            {
+              "kind": "illustrator-credit",
+              "text": "CoroCoro Comic Illust Contest winning card",
+              "role": "print-identity"
+            }
+          ],
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Quick Starter Gift Set Red Deck"
+          },
+          "releaseDate": "1998-12-04",
+          "cardSize": "standard",
+          "mappedVariants": ["base"],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "snorlax-wizards-promo-49",
+            "quick-starter-gift-set",
+            "cardmarket-stock-image"
+          ]
+        }
+      ]
+    },
     {
       "setCode": "BA20",
       "number": "MWT",

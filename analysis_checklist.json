@@ -1,7 +1,7 @@
 {
  "meta": {
   "schema": "snoredex-checklist",
-  "schemaVersion": "1.2.0",
+  "schemaVersion": "1.3.0",
   "generated": "2026-07-31",
   "description": "One record per documented physical collectible item, or per explicitly unresolved one. Collector-facing finishFamily groups technical reverse-holo and mirror-holo treatments without collapsing their physical printing records.",
   "rules": [
@@ -10,19 +10,19 @@
    "Editions expand only where the edition model supports that edition for that language.",
    "When multiple editions are supported, concrete finishes require an explicit edition mapping; otherwise each edition receives one unresolved placeholder.",
    "A confirmed card-language-edition with no printing detail yields exactly one finish:unresolved placeholder.",
-   "Stamps, foil patterns, distribution channels and card sizes remain separate items even when the finish family matches.",
+   "Markings, foil patterns, distribution channels, release dates and card sizes remain attached to each physical item even when the finish family matches.",
    "Technical mirror-holo printings use finishFamily:reverse-holo for collector-facing grouping while retaining finish:mirror-holo.",
    "Positive evidence is not proof of completeness: only completenessStatus=complete-manifest asserts that an unlisted alternative is absent."
   ],
   "warning": "This checklist lists what is DOCUMENTED, not what exists. An item's absence means no evidence has been established, never that the printing does not exist.",
   "counts": {
-   "items": 837,
-   "documentedPrintings": 662,
+   "items": 838,
+   "documentedPrintings": 663,
    "unresolvedPlaceholders": 175,
    "firstEditionItems": 24,
    "firstEditionWithEditionAgnosticEvidence": 0,
    "completeManifestItems": 6,
-   "finishFamilyGroups": 829,
+   "finishFamilyGroups": 830,
    "reverseHoloFamilyItems": 249,
    "reverseHoloFamilyGroups": 241,
    "languages": 15,
@@ -109,7 +109,7 @@
    "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unnumbered-Promos/Hungry-Snorlax"
   },
   {
-   "checklistId": "exs-no-number-japanese-none-non-holo",
+   "checklistId": "exs-no-number-japanese-none-non-holo-rarity-symbol-uncommon-rarity-symbol-vending-sheet-expansion-sheet-1-sheet-16",
    "cardName": "Snorlax",
    "setCode": "EXS",
    "setName": "Expansion Sheet",
@@ -120,12 +120,23 @@
    "editionSource": "Post-Neo-Destiny Western / Sun & Moon-era-onward Japanese / Korean-Chinese-SEA: the 1st-edition system does not apply. Cards have a single edition.",
    "finish": "non-holo",
    "finishFamily": "non-holo",
-   "finishGroupId": "fg-exs-no-number-japanese-none-non-holo",
-   "finishVerificationStatus": "marketplace-claimed",
+   "finishGroupId": "fg-exs-no-number-japanese-none-non-holo-rarity-symbol-uncommon-rarity-symbol-vending-sheet-expansion-sheet-1-sheet-16",
+   "finishVerificationStatus": "confirmed",
    "foilPattern": null,
-   "markings": null,
-   "markingRoles": [],
-   "distribution": null,
+   "markings": [
+    {
+     "kind": "rarity-symbol",
+     "text": "Uncommon rarity symbol",
+     "role": "print-identity"
+    }
+   ],
+   "markingRoles": [
+    "print-identity"
+   ],
+   "distribution": {
+    "kind": "vending-sheet",
+    "name": "Expansion Sheet 1, Sheet 16"
+   },
    "cardSize": "standard",
    "cardmarketVariant": "base",
    "cardmarketVariantName": null,
@@ -134,16 +145,77 @@
    ],
    "productMapping": "mapped",
    "rarity": "Uncommon",
-   "artist": null,
-   "releaseDate": "1998",
-   "releaseDatePrecision": "year",
-   "releaseApproximate": true,
-   "releaseSort": "1998-01-01",
+   "artist": "Keita Takahashi",
+   "releaseDate": "1998-03-23",
+   "releaseDatePrecision": "day",
+   "releaseApproximate": false,
+   "releaseSort": "1998-03-23",
    "rowId": "exs-nonumber-base-none",
    "finishUnitId": "F0107",
    "printingId": "F0107-P01",
    "completenessStatus": "positive-evidence-only",
    "sourceIds": [
+    "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
+    "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
+    "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg"
+   ],
+   "image": null,
+   "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Expansion-Sheet/Snorlax-EXS"
+  },
+  {
+   "checklistId": "exs-no-number-japanese-none-non-holo-rarity-symbol-no-rarity-symbol-illustrator-credit-corocoro-comic-illust-contest-winning-card-fixed-deck-quick-starter-gift-set-red-deck",
+   "cardName": "Snorlax",
+   "setCode": "EXS",
+   "setName": "Expansion Sheet",
+   "number": "",
+   "language": "Japanese",
+   "edition": "—",
+   "editionScope": "no-edition-system",
+   "editionSource": "Post-Neo-Destiny Western / Sun & Moon-era-onward Japanese / Korean-Chinese-SEA: the 1st-edition system does not apply. Cards have a single edition.",
+   "finish": "non-holo",
+   "finishFamily": "non-holo",
+   "finishGroupId": "fg-exs-no-number-japanese-none-non-holo-rarity-symbol-no-rarity-symbol-illustrator-credit-corocoro-comic-illust-contest-winning-card-fixed-deck-quick-starter-gift-set-red-deck",
+   "finishVerificationStatus": "confirmed",
+   "foilPattern": null,
+   "markings": [
+    {
+     "kind": "rarity-symbol",
+     "text": "No rarity symbol",
+     "role": "print-identity"
+    },
+    {
+     "kind": "illustrator-credit",
+     "text": "CoroCoro Comic Illust Contest winning card",
+     "role": "print-identity"
+    }
+   ],
+   "markingRoles": [
+    "print-identity"
+   ],
+   "distribution": {
+    "kind": "fixed-deck",
+    "name": "Quick Starter Gift Set Red Deck"
+   },
+   "cardSize": "standard",
+   "cardmarketVariant": "base",
+   "cardmarketVariantName": null,
+   "mappedVariants": [
+    "base"
+   ],
+   "productMapping": "mapped",
+   "rarity": "Uncommon",
+   "artist": "Keita Takahashi",
+   "releaseDate": "1998-12-04",
+   "releaseDatePrecision": "day",
+   "releaseApproximate": false,
+   "releaseSort": "1998-12-04",
+   "rowId": "exs-nonumber-base-none",
+   "finishUnitId": "F0107",
+   "printingId": "F0107-P02",
+   "completenessStatus": "positive-evidence-only",
+   "sourceIds": [
+    "https://bulbapedia.bulbagarden.net/wiki/Quick_Starter_Gift_Set_(TCG)",
+    "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
     "https://www.cardmarket.com/en/Pokemon/Products/Singles/Expansion-Sheet/Snorlax-EXS"
    ],
    "image": "images/EXS__Snorlax_548656.jpg",
