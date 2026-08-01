@@ -21,6 +21,7 @@ is a finding.
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
@@ -58,8 +59,68 @@ def write_json(path: Path, payload: Any) -> None:
 
     Two spaces, no BOM, non-ASCII left as itself, and a trailing newline. The committed exports
     were produced by that pipeline, so anything else churns them on the next run.
+
+    Written to a temporary file in the same directory and moved into place, so an interrupted run
+    leaves either the old file or the complete new one, never a half-written store (#29). The
+    replace is atomic on POSIX and on Windows for same-volume moves, which is why the temporary
+    file is a sibling rather than somewhere under /tmp.
     """
-    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    body = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+    tmp = path.with_name(path.name + ".tmp")
+    try:
+        tmp.write_text(body, encoding="utf-8")
+        os.replace(tmp, path)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
+
+
+# --- verification status model ------------------------------------------------------------- #
+# The statuses a language unit may hold, and the moves between them that a writer may make. This
+# lived as a bare tuple in review_integrity.py: enough to reject an unknown value after the fact,
+# not enough to stop a pass making a move nobody intended (#29).
+#
+# The rule the transitions encode is that resolving is deliberate and un-resolving is not
+# automatic. A pass may resolve an open unit or hand it to a human; it may correct one verdict to
+# the other, because evidence does get overturned. What it may not do is push a unit that someone
+# already resolved back into the open pool, which is how a generic lookup pass silently undid
+# earlier work.
+
+STATUSES = ("confirmed", "contradicted", "needs-manual-review", "pending")
+RESOLVED_STATUSES = ("confirmed", "contradicted")
+
+ALLOWED_TRANSITIONS: dict[str, tuple[str, ...]] = {
+    "pending": ("confirmed", "contradicted", "needs-manual-review", "pending"),
+    "needs-manual-review": ("confirmed", "contradicted", "needs-manual-review"),
+    "confirmed": ("confirmed", "contradicted"),
+    "contradicted": ("contradicted", "confirmed"),
+}
+
+
+class TransitionError(ValueError):
+    """A writer attempted a status move the model does not allow."""
+
+
+def transition(unit: dict, new_status: str) -> dict:
+    """Move `unit` to `new_status`, refusing anything the model does not permit.
+
+    Raises rather than returning a flag: a rejected transition means the caller's logic is wrong
+    about what it is looking at, and continuing would write that misunderstanding to the store.
+    """
+    current = unit.get("status")
+    if new_status not in STATUSES:
+        raise TransitionError(
+            f"{unit.get('unitId')}: {new_status!r} is not a verification status "
+            f"(known: {', '.join(STATUSES)})")
+    if current not in ALLOWED_TRANSITIONS:
+        raise TransitionError(f"{unit.get('unitId')}: current status {current!r} is not a "
+                              f"verification status")
+    if new_status not in ALLOWED_TRANSITIONS[current]:
+        raise TransitionError(
+            f"{unit.get('unitId')}: {current} -> {new_status} is not an allowed transition "
+            f"(from {current}: {', '.join(ALLOWED_TRANSITIONS[current])})")
+    unit["status"] = new_status
+    return unit
 
 
 @dataclass

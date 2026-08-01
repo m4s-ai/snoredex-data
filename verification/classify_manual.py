@@ -8,14 +8,27 @@ distributed. They stay in the dataset but leave the "open" pool, so the open cou
 remaining work rather than work nobody can do.
 
     python verification/classify_manual.py
+    python verification/classify_manual.py --dry-run   # report, write nothing
 
 Writes `units.json`, `MANUAL_REVIEW.json` and `MANUAL_REVIEW.csv`.
 
-**This script is not idempotent, and the port keeps it that way.** It skips only `confirmed` and
-`contradicted`, so a unit already sitting in `needs-manual-review` is matched again and re-stamped
-with a fresh `checkedAt` — rewriting `units.json` on every run even when nothing has changed. That
-behaviour predates the port; reproducing it is deliberate, so that this commit is a translation
-and not a translation plus a silent fix. Making it idempotent is #29, and belongs in its own diff.
+Idempotent since #29. It used to skip only `confirmed` and `contradicted`, so a unit already
+sitting in `needs-manual-review` was matched again and re-stamped with a fresh `checkedAt` —
+rewriting `units.json` on every run even when nothing had changed, and moving a timestamp that
+records when a decision was made rather than when it was last re-derived. A unit already carrying
+this verdict for this reason is now left alone, and the second run of a pair changes nothing.
+
+Status changes go through `checks.transition`, which rejects any move the model does not allow.
+Nothing here needs that freedom — the only move made is into `needs-manual-review` — but a writer
+that cannot express an unintended transition cannot make one.
+
+**No `evidence.jsonl` entry is written here, and that is the decision, not an omission** (#29).
+The journal records what a source said about a claim. This script consults no source: it reads the
+set code and concludes that no source can exist, which is why the unit is being handed to a human.
+`manualReason` carries that verdict on the unit itself. Only resolution — `confirmed` or
+`contradicted` — cites evidence, and `review_findings.py` check E5 requires every resolved unit to
+appear in the journal. Writing an entry that says "no source was consulted" would make the journal
+harder to read for the property it does guarantee.
 """
 
 from __future__ import annotations
@@ -27,7 +40,7 @@ import sys
 from collections import Counter
 from datetime import datetime
 
-from checks import VERIFICATION, format_table, read_json, write_json
+from checks import VERIFICATION, format_table, read_json, transition, write_json
 
 RESOLVED = ("confirmed", "contradicted")
 
@@ -78,11 +91,22 @@ def main() -> int:
         reason = reason_for(unit)
         if not reason:
             continue
+        # Already carrying this verdict for this reason: nothing to record (#29). Re-stamping
+        # `checkedAt` here is what made the script non-idempotent — it rewrote units.json on every
+        # run and moved timestamps that describe when a decision was made, not when it was
+        # last re-derived.
+        if unit.get("status") == "needs-manual-review" and unit.get("manualReason") == reason:
+            continue
         # English prize-pack units are already confirmed; only the undocumented languages land here
-        unit["status"] = "needs-manual-review"
+        transition(unit, "needs-manual-review")
         unit["manualReason"] = reason
         unit["checkedAt"] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         moved += 1
+
+    if "--dry-run" in sys.argv:
+        print(f"--dry-run: {moved} unit(s) would change; units.json not written")
+        return 0
+
     write_json(VERIFICATION / "units.json", units)
 
     manual = [u for u in units if u.get("status") == "needs-manual-review"]

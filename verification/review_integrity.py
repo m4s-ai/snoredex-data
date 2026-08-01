@@ -21,10 +21,12 @@ from __future__ import annotations
 import json
 import sys
 
-from checks import ROOT, VERIFICATION, Check, Metric, Suite, read_json
+from checks import (ROOT, STATUSES as KNOWN_STATUSES, VERIFICATION, Check, Metric,
+                    Suite, read_json)
 
 RESOLVED = ("confirmed", "contradicted")
-KNOWN_STATUSES = ("confirmed", "contradicted", "needs-manual-review", "pending")
+# KNOWN_STATUSES is imported above: one definition shared with the writers, so a value
+# cannot be valid to write and invalid to check (#29).
 
 ALLOWED_FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo", "unknown")
 ALLOWED_AVAILABILITY = ("confirmed", "owner-attested", "marketplace-claimed", "pending",
