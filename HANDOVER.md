@@ -76,7 +76,8 @@ snorlax_cards.json            MAIN dataset: 198 singles, one object each. Fields
                               variantToken (V1/V2/V3), variantName (+source), variantAxes,
                               cardKey, artist(+source), editions{}, finishAvailability{}, market,
                               meta{}.
-images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg).
+images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg or .png — the
+                              extension states the actual format; 55 are PNG, see #34).
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
                               finishes, confirmed_releases (chronological). Plus CSV exports.
 artists_pokemontcgio.json     57 English cards with illustrator + exact release dates.
@@ -84,17 +85,34 @@ verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
                               articles often carry both enrelease and jarelease; never select by
                               article title alone. Recheck with audit_bulbapedia_release_dates.py.
-scripts/                      Generators, in run order (§7 has the full command list):
-                                finishes -> language_status -> confirmed_releases -> source_registry
-                                -> checklist -> readme_stats -> issue_templates -> site
+scripts/                      Two halves; only the second can be re-run (#28).
+
+                              LIVE generators, in run order (§7 has the full command list):
+                                analyze.ps1 -> finishes -> language_status -> confirmed_releases
+                                -> source_registry -> checklist -> readme_stats -> issue_templates
+                                -> open_items -> site
                               plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). All Python, stdlib only. Five take
-                              --check; see §7 for which, and how the gate covers the rest.
-                              mkunits/build/join/getimages/finalize/analyze .ps1 are the original
-                              harvest stages. They are DORMANT history: their _chunk*/_cards_stage*
-                              inputs are not in the repository, so the committed dataset is the
-                              input of record. They join the archive once #28 captures their data
-                              flow.
+                              and verifies the Pages artifact). Six take --check; see §7.
+                              analyze.ps1 is the SOLE producer of analysis_artists,
+                              _shared_cards, _variants and _language_drift, and the last step
+                              needing PowerShell. It is NOT dormant: it runs today via its
+                              snorlax_cards.json fallback.
+
+                              HISTORICAL, inputs absent, do not run:
+                                build -> join -> getimages -> finalize
+                              They read _chunk1..3.json, a 2026-07-21 scrape of a live
+                              marketplace. Not in the repo, not reproducible: the same search
+                              today returns different products. snorlax_cards.json is therefore
+                              the INPUT of record, not an output of this repository. These five
+                              join the archive once their data flow is captured (#28 did that).
+
+                                mkunits    Also historical, and destructive: rebuilds
+                                           verification/units.json from scratch with fresh ids,
+                                           discarding the state of all 719 units. Never part
+                                           of a rebuild.
+
+                              The release gate runs the live half and fails if the output differs
+                              from what is committed, so "regenerates cleanly" is proven per PR.
 verification/
   units.json                  THE STATE STORE. One row per card×language×variant with status,
                               sourceUrl, sourceType, evidence, checkedAt.

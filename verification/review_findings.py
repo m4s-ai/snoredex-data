@@ -300,6 +300,79 @@ check(
 
 
 # --------------------------------------------------------------------------- #
+# B — the documented build is the build that can actually run
+# --------------------------------------------------------------------------- #
+# README and HANDOVER used to present one pipeline starting at `mkunits`, which no clean clone can
+# execute: the harvest reads _chunk1..3.json, which are not in the repository, and `mkunits`
+# rebuilds units.json from scratch and discards the verification state (#28). Following the
+# documented order destroyed data.
+
+handover = (ROOT / "HANDOVER.md").read_text(encoding="utf-8")
+
+# Reads inputs that are not in the repository. Historical record, never part of a rebuild.
+HARVEST_STEPS = {"build.ps1", "join.ps1", "getimages.ps1", "finalize.ps1"}
+# Runnable from what is committed. The gate regenerates these and diffs the result.
+LIVE_STEPS = {
+    "analyze.ps1", "finishes.py", "language_status.py", "confirmed_releases.py",
+    "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
+    "site.py", "editions.py", "publish.py",
+}
+
+missing_steps = sorted(s for s in LIVE_STEPS | HARVEST_STEPS | {"mkunits.ps1"}
+                       if not (ROOT / "scripts" / s).is_file())
+check(
+    "B1",
+    "Every documented build step exists",
+    "FAIL",
+    not missing_steps,
+    f"scripts/ is missing {missing_steps}",
+)
+
+# A live step must not depend on an input the harvest was supposed to leave behind.
+absent_inputs = sorted(p.name for p in
+                       [ROOT / "_chunk1.json", ROOT / "_cards_stage1.json",
+                        ROOT / "_cards_stage2.json", ROOT / "_cards_stage3.json"]
+                       if p.exists())
+live_sources = {s: (ROOT / "scripts" / s).read_text(encoding="utf-8") for s in LIVE_STEPS}
+hard_dependents = sorted(
+    name for name, body in live_sources.items()
+    if re.search(r"_chunk|_cards_stage", body) and "snorlax_cards.json" not in body
+)
+check(
+    "B2",
+    "No live build step depends on a harvest artifact without a committed fallback",
+    "FAIL",
+    not hard_dependents,
+    f"{hard_dependents} read a stage or chunk file with no fallback to snorlax_cards.json, so a "
+    f"clean clone cannot run them"
+    + (f" (present here: {absent_inputs})" if absent_inputs else ""),
+)
+
+# The destructive one must never be presented as part of a rebuild. Checked as prose because that
+# is where the instruction lived, and prose is what a reader follows.
+rebuild_docs = {"README.md": readme, "HANDOVER.md": handover}
+resurrected = [
+    name for name, text in rebuild_docs.items()
+    if re.search(r"mkunits\s*(->|→)\s*build", text)
+]
+check(
+    "B3",
+    "mkunits is not documented as the start of a rebuild",
+    "FAIL",
+    not resurrected,
+    f"{resurrected} present mkunits as a build step. It rebuilds units.json with fresh ids and "
+    f"discards the verification state of every unit.",
+)
+
+check(
+    "B4",
+    "Docs state that the harvest is not reproducible",
+    "FAIL",
+    all(re.search(r"not reproducible|nicht reproduzierbar", text) for text in rebuild_docs.values()),
+    "README and HANDOVER must both say the harvest cannot be re-run, or the next reader will try.",
+)
+
+# --------------------------------------------------------------------------- #
 # M — every referenced image is the format its name claims, and decodes
 # --------------------------------------------------------------------------- #
 # R5 pairs references with filenames. That cannot see inside a file, so an HTML error page, a
@@ -450,7 +523,6 @@ check(
     f"e.g. {unverifiable[:5]}",
 )
 
-handover = (ROOT / "HANDOVER.md").read_text(encoding="utf-8")
 stated = re.search(r"(\d+)\s+units rest on owner attestation alone", handover)
 check(
     "E4",

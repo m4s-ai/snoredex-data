@@ -109,11 +109,40 @@ the checkout from their own file location and can be invoked from any working di
 | [`LICENSE.md`](LICENSE.md) / [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Licensing scope, licensor and contact, exclusions, attribution, and third-party rights. |
 | [`AI-DECLARATION.md`](AI-DECLARATION.md) | Structured disclosure of AI involvement under the [`AI-DECLARATION.md` 0.1.2 specification](https://ai-declaration.md/en/0.1.2/). |
 
-The reproducible pipeline is:
+### How the data is produced
 
-`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze` → `finishes` →
-`language_status` → `confirmed_releases` → `source_registry` → `checklist` → `readme_stats` →
-`issue_templates` → `site`
+The pipeline has two halves, and only one of them can be re-run (#28).
+
+**The harvest is historical.** `build` → `join` → `getimages` → `finalize` read
+`_chunk1..3.json`, the captured Cardmarket result pages, and hand `snorlax_cards.json` to
+everything downstream. Those chunks are not in the repository and are not reproducible: they are a
+scrape of a live marketplace from 2026-07-21, and re-running the search today returns different
+products, prices and language filters. Re-scraping would not rebuild this dataset, it would
+produce a new one. **`snorlax_cards.json` is therefore an input to this repository, not an output
+of it** — the evidence layer is what is maintained here, and every claim in it cites a source that
+can be checked independently of the harvest.
+
+`mkunits` is in the same category and is destructive besides: it rebuilds `verification/units.json`
+from scratch with freshly numbered ids, discarding the verification state of all 719 units. It is
+not part of any rebuild.
+
+**Everything downstream regenerates from what is committed**, and the release gate proves it by
+running the generators and failing if the output differs from the tree:
+
+```console
+pwsh -File scripts/analyze.ps1     # analysis_artists, _shared_cards, _variants, _language_drift
+python scripts/finishes.py --reproject
+python scripts/language_status.py
+python scripts/confirmed_releases.py
+python scripts/source_registry.py
+python scripts/checklist.py
+python scripts/readme_stats.py
+python scripts/issue_templates.py
+python scripts/site.py
+```
+
+`scripts/analyze.ps1` is the only step still requiring PowerShell. It prefers `_cards_stage3.json`
+if present and falls back to `snorlax_cards.json`, which is the path that runs in practice.
 
 Scraping covered all nine result pages for Cardmarket's Pokémon product search for “snorlax.”
 

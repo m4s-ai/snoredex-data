@@ -5,6 +5,14 @@ verification/cache/
 # Intermediate upscaled image crops used once to read the xm2a mirror-foil variants
 verification/zoom/
 
+# Intermediate stages of the historical Cardmarket harvest (#28). _chunk1..3.json are the captured
+# result pages; _cards_stage1..3.json are what build/join/getimages hand along before finalize
+# writes snorlax_cards.json. None are reproducible — the chunks are a scrape of a live marketplace
+# — so they are ignored rather than committed or regenerated. Anyone who recovers a copy can drop
+# it in without dirtying the tree, and analyze.ps1 will prefer it over snorlax_cards.json.
+_chunk*.json
+_cards_stage*.json
+
 # Local receiver / scratch
 verification/_evidence_audit.json
 
