@@ -62,7 +62,7 @@ locations. The examples below assume the repository root only for readability.
 
 ```powershell
 python scripts\finishes.py
-pwsh -File verification\verify_finish_sources.ps1
+python verification/verify_finish_sources.py
 python verification/audit_evidence.py
 python verification/review_integrity.py
 ```
@@ -79,7 +79,7 @@ For a curated case:
 5. Inspect the affected printing IDs, recheck the live source assertions, and run the evidence and
    integrity audits.
 
-`verify_finish_sources.ps1` reads the exact product IDs and expected positive subtypes from the
+`verify_finish_sources.py` reads the exact product IDs and expected positive subtypes from the
 source registry, fetches the current TCGCSV product and price exports, and fails if any assertion no
 longer matches. It does not infer negatives from missing subtypes.
 

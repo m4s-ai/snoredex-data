@@ -10,7 +10,7 @@ Recurring verification lives directly under `verification/`:
 - `audit_evidence.py`
 - `report.py`
 - `classify_manual.py`
-- `verify_finish_sources.ps1`
+- `verify_finish_sources.py`
 - `review_findings.py`
 - `test_site.py`
 

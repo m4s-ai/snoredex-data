@@ -107,7 +107,7 @@ verification/
   report.py                   Regenerates coverage + all export files.
   audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.py          (Re)tags structurally undocumentable units.
-  verify_finish_sources.ps1   Rechecks exact TCGCSV product IDs and expected positive subtypes.
+  verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
   review_integrity.py         27 structural checks — run after every write pass.
   passes/                     ~65 completed one-shot verification scripts. Each closed a batch
                               and is named by what it did. Paths derive from each script's location,
@@ -229,7 +229,7 @@ python scripts/site.py                           # rebuild index.html + the alia
 python verification/review_integrity.py     # after any write
 python verification/review_findings.py           # after any write
 python verification/test_site.py                 # browser behaviour (needs playwright+chromium)
-pwsh -File verification/verify_finish_sources.ps1 # recheck machine-readable TCGCSV assertions
+python verification/verify_finish_sources.py # recheck machine-readable TCGCSV assertions
 ```
 
 Order matters, and it is the order above: `finishes.py` writes the card finish summaries,

@@ -430,7 +430,7 @@ location and can be rerun from any checkout or working directory.
 | `finish_units.json` | **Finish state store** — set number × language, logical printings, evidence, and product mappings |
 | `finish_overrides.json` | Curated special finish/pattern/stamp/size and mapping facts; edit this, not generated finish units |
 | `FINISH_SOURCES.md` | Finish evidence hierarchy, confirmed cases, exact source endpoints, and next research targets |
-| `verify_finish_sources.ps1` | Live check of TCGCSV product identity and the positive subtypes declared in `finish_overrides.json` |
+| `verify_finish_sources.py` | Live check of TCGCSV product identity and the positive subtypes declared in `finish_overrides.json` |
 | `FINISH_REVIEW.json` / `.csv` | The remaining finish, reverse/mirror-pattern, and product-mapping queue |
 | `state.json` | Last completed phase |
 | `cache/` | Raw API responses. Deleting a file forces a refetch; keeping it makes resume instant. |
@@ -441,7 +441,7 @@ location and can be rerun from any checkout or working directory.
 # Run from the repository root.
 python verification/review_integrity.py      # confirm the canonical state is coherent
 python verification/review_findings.py            # cross-artifact and publication checks
-pwsh -File verification/verify_finish_sources.ps1 # validate exact live TCGCSV IDs/subtypes
+python verification/verify_finish_sources.py # validate exact live TCGCSV IDs/subtypes
 
 # Layout: verification/*.ps1 are the five recurring tools (report, audit_evidence,
 # classify_manual, verify_finish_sources, review_integrity). verification/passes/ holds every

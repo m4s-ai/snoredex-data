@@ -86,17 +86,14 @@ jobs:
 
       # --- integrity: structural invariants, in both suites ---
       - name: Structural integrity
-        shell: pwsh
         run: python verification/review_integrity.py
 
       - name: Evidence audit
-        shell: pwsh
         run: python verification/audit_evidence.py
 
       - name: Live finish-source verification
         if: runner.os == 'Linux'
-        shell: pwsh
-        run: pwsh -File verification/verify_finish_sources.ps1
+        run: python verification/verify_finish_sources.py
 
       - name: Cross-artifact consistency and publication readiness
         run: python verification/review_findings.py

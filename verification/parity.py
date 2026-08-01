@@ -46,7 +46,7 @@ LIVE = {
     "audit_evidence": "verification/audit_evidence.py",
     "report": "verification/report.py",
     "classify_manual": "verification/classify_manual.py",
-    "verify_finish_sources": "verification/verify_finish_sources.ps1",
+    "verify_finish_sources": "verification/verify_finish_sources.py",
 }
 
 # verify_finish_sources calls TCGCSV live, so it is only as reproducible as the upstream API.
