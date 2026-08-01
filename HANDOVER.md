@@ -6,8 +6,10 @@ back it up and are cited where relevant:
 - **`CLAUDE.md`** — the condensed operating rules for an agent working here: the
   non-negotiables, the data-model traps, the command order and the git conventions, all pointing
   back at this file for detail. `AGENTS.md` is a pointer to it.
-- **`README.md`** — the dataset spec, the findings (language drift, shared art, variants), and
-  data caveats. Read before *using* the data.
+- **`README.md`** — the public entry point: why the verification exists, how to start, which file
+  answers which question, and the data caveats. Read before *using* the data.
+  **`FINDINGS.md`** hangs off it with the findings themselves — language drift, shared art,
+  variant clusters, and how the one-off harvest was run.
 - **`verification/RESUME.md`** — the verification playbook: every hard-won source technique,
   every dead end, every methodology correction. Read before *adding* any confirmation or
   contradiction. It is long (~415 lines) and worth it — it will stop you repeating mistakes

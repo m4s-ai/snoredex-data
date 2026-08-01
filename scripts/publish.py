@@ -34,6 +34,7 @@ MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 FILES = [
     "index.html",
     "README.md",
+    "FINDINGS.md",
     "LICENSE.md",
     "THIRD_PARTY_NOTICES.md",
     "snorlax_cards.json",
