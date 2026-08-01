@@ -300,6 +300,55 @@ check(
 
 
 # --------------------------------------------------------------------------- #
+# F3b — market and product type stay independent
+# --------------------------------------------------------------------------- #
+# `market` says which regional catalogue lists a product; `isCodeCard` says what kind of product
+# it is. They were entangled: a `$languages.Count -ge 10` branch in the generators returned the
+# market value "Global (code card)", so KSS 26 — an ordinary card sold in 17 languages — was
+# classified as a code card, four genuine code cards listed in six languages were not, and the
+# dataset reported a different code-card count from the README.
+#
+# These live here rather than in the generators because the generators are dormant PowerShell
+# heading for the archive (#28, #50 Wave 4). The invariant has to outlive them.
+
+typed_markets = sorted({c["market"] for c in cards
+                        if "code card" in str(c.get("market", "")).lower()})
+check(
+    "F3b.1",
+    "No market value names a product type",
+    "FAIL",
+    not typed_markets,
+    f"market must describe where a product is listed, not what it is. Found {typed_markets}",
+)
+
+# The count has to agree wherever it is stated, which is what the README got wrong.
+code_cards = [c for c in cards if c.get("isCodeCard")]
+readme_claim = re.search(r"(\d+)\s+retained products are code cards", readme)
+check(
+    "F3b.2",
+    "Dataset and README report the same code-card count",
+    "FAIL",
+    bool(readme_claim) and int(readme_claim.group(1)) == len(code_cards),
+    f"dataset has {len(code_cards)}; README says "
+    f"{readme_claim.group(1) if readme_claim else 'nothing matching'}",
+)
+
+# Language count must not be able to imply product type again, in either direction.
+many_languages = [c["name"] for c in cards
+                  if len(c.get("languages") or []) >= 10 and not c.get("isCodeCard")]
+few_languages = [c["name"] for c in cards
+                 if len(c.get("languages") or []) < 10 and c.get("isCodeCard")]
+check(
+    "F3b.3",
+    "Product type is not inferable from language count",
+    "FAIL",
+    bool(many_languages) and bool(few_languages),
+    "the split is only meaningful while both sides are populated: "
+    f"{len(many_languages)} non-code-card products list 10+ languages, "
+    f"{len(few_languages)} code cards list fewer",
+)
+
+# --------------------------------------------------------------------------- #
 # F4 — refuted language claims must be marked in the main dataset
 # --------------------------------------------------------------------------- #
 

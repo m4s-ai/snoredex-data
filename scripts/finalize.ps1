@@ -3,8 +3,17 @@ $base=Split-Path -Parent $PSScriptRoot
 $cards=Get-Content "$base\_cards_stage3.json" -Raw -Encoding utf8|ConvertFrom-Json
 $WEST=@('English','French','German','Spanish','Italian','Portuguese')
 $ASIA=@('Japanese','Korean','T-Chinese')
+# Market is the marketplace claim: which regional catalogue Cardmarket lists the product in. It
+# says nothing about what kind of product it is - that is `isCodeCard`, derived from the product
+# name below, and the two are independent (#31).
+#
+# There used to be a `$L.Count -ge 10 -> 'Global (code card)'` branch here. Counting languages
+# cannot identify a product type: KSS 26 is an ordinary card sold in 17 languages and was
+# classified as a code card, while four genuine code cards listed in fewer languages were not.
+# It also hid KSS from the language-drift analysis, which is the one card that analysis most
+# needs to show.
 function Market($L){
-  if($L -contains 'English'){ if($L.Count -ge 10){return 'Global (code card)'}; return 'Western' }
+  if($L -contains 'English'){ return 'Western' }
   if($L -contains 'Japanese'){ return 'Japanese' }
   if(($L -contains 'S-Chinese') -and $L.Count -eq 1){ return 'Simplified Chinese' }
   if(($L -contains 'Indonesian') -or ($L -contains 'Thai')){ return 'SEA promo' }

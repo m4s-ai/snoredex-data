@@ -164,7 +164,11 @@ Two genuine outliers, both worth knowing about:
 - **`KSS 26` (XY Kalos Starter Set) — 17 languages**, including Czech and Hungarian. Starter-set products were distributed far wider than booster sets.
 - **`SVP 051` splits.** Cardmarket carries two products for the same promo number: one with the full 6 Western languages, one **English-only** (`-V2`, 20 listings). Same card, different distribution — a real drift case, not a data error.
 
-The market split across all 198: Western 83 · Japanese 68 · Simplified Chinese 37 · SEA promo 5 · global code cards 4 · Traditional Chinese 1.
+The market split across all 198: Western 87 · Japanese 68 · Simplified Chinese 37 · SEA promo 5 · Traditional Chinese 1.
+
+`market` records which regional catalogue Cardmarket lists a product in — a marketplace claim, like
+`languages` beside it. It is independent of what the product *is*: that is `isCodeCard`, derived
+from the product name, and the 7 code cards are spread across markets rather than forming one.
 
 ## Shared art across releases
 

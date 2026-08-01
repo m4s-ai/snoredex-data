@@ -13,8 +13,11 @@ $cards=if($inputDocument.cards){$inputDocument.cards}else{$inputDocument}
 $WEST=@('English','French','German','Spanish','Italian','Portuguese')
 $ASIA=@('Japanese','Korean','T-Chinese')
 
+# Kept identical to scripts/finalize.ps1: market is the marketplace claim, product type is
+# `isCodeCard`, and the two are independent (#31). The language-count branch that used to return
+# 'Global (code card)' is gone - see the note in finalize.ps1.
 function Market($langs){
-  if($langs -contains 'English'){ if($langs.Count -ge 10){return 'Global (code card)'}; return 'Western' }
+  if($langs -contains 'English'){ return 'Western' }
   if($langs -contains 'Japanese'){ return 'Japanese' }
   if(($langs -contains 'S-Chinese') -and $langs.Count -eq 1){ return 'Simplified Chinese' }
   if(($langs -contains 'Indonesian') -or ($langs -contains 'Thai')){ return 'SEA promo' }
@@ -24,8 +27,14 @@ function Market($langs){
 foreach($c in $cards){ $c | Add-Member market (Market $c.languages) -Force }
 
 # ---- Language drift ----
+# Code cards are excluded (#31). Drift measures a printing's language coverage against its market
+# baseline; a code card is a redemption slip bundled with a product, not a printing, and its
+# language list follows the online client rather than any print run. Three of them carry the same
+# 17 languages as KSS 26, so without this they would sit beside the one entry that matters - an
+# ordinary card listed in 17 languages - looking exactly like it.
 $drift=@()
 foreach($c in $cards){
+  if($c.isCodeCard){ continue }
   $L=$c.languages
   if($c.market -eq 'Western'){
     $missing = @($WEST | Where-Object { $_ -notin $L })
