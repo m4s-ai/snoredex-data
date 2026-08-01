@@ -109,7 +109,7 @@ verification/
   classify_manual.py          (Re)tags structurally undocumentable units.
   verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
   review_integrity.py         27 structural checks — run after every write pass.
-  passes/                     ~65 completed one-shot verification scripts. Each closed a batch
+  archive/passes/             ~65 completed one-shot verification scripts. Each closed a batch
                               and is named by what it did. Paths derive from each script's location,
                               so passes can be run from any checkout or working directory.
   cache/                      Raw API dumps (gitignored — reproducible via fetch_* scripts).
@@ -205,7 +205,7 @@ Brazilian Prize Pack confirmations were obtained.
    same variable (declaring the log array silently wiped the evidence text); `-match '^x'` also
    matched `XY-P`/`XY2`/`XYPR`. Use **distinct variable names** and **`-cmatch`**. None of these
    threw an error; they produced wrong data.
-6. **Write findings via a new `verification/passes/verify_*.ps1` script**, then run report +
+6. **Write findings via a new new Python pass under `verification/`**, then run report +
    audit + integrity. Don't hand-edit `units.json`.
 
 ## 7. How to resume / continue
@@ -215,7 +215,7 @@ Brazilian Prize Pack confirmations were obtained.
 python verification/review_integrity.py     # confirm clean starting state
 python verification/review_findings.py           # cross-artifact consistency (no pwsh needed)
 python verification/report.py               # regenerate exports if needed
-# ... do verification work in a new verification/passes/verify_*.ps1 script ...
+# ... do verification work in a new Python pass under verification/ ...
 python verification/audit_evidence.py       # after any write
 python scripts/editions.py                       # if edition data changed
 python scripts/finishes.py                       # regenerate finish units/review + main summaries

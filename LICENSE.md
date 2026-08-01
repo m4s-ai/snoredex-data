@@ -19,7 +19,7 @@ This project is **noncommercial and source-available**. It is deliberately **not
 Covers the build and verification code written for this project:
 
 - `scripts/**` — dataset build pipeline, finish modelling, chronological and site generators;
-- `verification/*.ps1`, `verification/*.py`, `verification/passes/**` — verification tooling;
+- `verification/*.py`, `verification/archive/**` — verification tooling;
 - any workflow or configuration files authored here.
 
 Full text: `LICENSES/PolyForm-Noncommercial-1.0.0.md` ·

@@ -11,7 +11,7 @@ represented set-code/name pairs by article title, `setname`, `transsetname`, and
 - 21 represented entries have no directly corresponding Bulbapedia set-release page; these are
   chiefly promo series, Cardmarket “Additionals” groupings, and card-specific campaigns.
 
-Run `python verification/passes/audit_bulbapedia_release_dates.py` to repeat the live comparison.
+Run `python verification/archive/passes/audit_bulbapedia_release_dates.py` to repeat the live comparison.
 The reviewed source records consumed by the generator are in
 `verification/bulbapedia_release_dates.json`.
 

@@ -71,19 +71,6 @@ jobs:
               sys.exit("\n".join(bad))
           PY
 
-      - name: Parse every PowerShell file
-        shell: pwsh
-        run: |
-          $bad = @()
-          Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object {
-            $errors = $null
-            [System.Management.Automation.Language.Parser]::ParseFile(
-              $_.FullName, [ref]$null, [ref]$errors) | Out-Null
-            if ($errors.Count) { $bad += "$($_.FullName): $($errors[0].Message)" }
-          }
-          Write-Host "parsed $((Get-ChildItem -Recurse -Filter *.ps1).Count) PowerShell files"
-          if ($bad.Count) { $bad | ForEach-Object { Write-Error $_ }; exit 1 }
-
       # --- integrity: structural invariants, in both suites ---
       - name: Structural integrity
         run: python verification/review_integrity.py

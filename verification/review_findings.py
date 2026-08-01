@@ -736,20 +736,30 @@ check("X2", "Browser dependency is pinned in a manifest", "FAIL",
       bool(re.search(r"^playwright==\d+\.\d+\.\d+$", requirements, re.MULTILINE)),
       "requirements.txt must pin Playwright")
 
-active_ps = list((ROOT / "scripts").glob("*.ps1")) + list((ROOT / "verification").glob("*.ps1"))
-legacy_writers = []
-direct_io = []
-for path in active_ps:
-    text = path.read_text(encoding="utf-8-sig")
-    if re.search(r"(?:Set-Content|Add-Content|Export-Csv).*?-Encoding\s+utf8(?!NoBOM)", text):
-        legacy_writers.append(str(path.relative_to(ROOT)))
-for path in ROOT.rglob("*.ps1"):
-    if re.search(r"\[System\.IO\.", path.read_text(encoding="utf-8-sig"), re.IGNORECASE):
-        direct_io.append(str(path.relative_to(ROOT)))
-check("X3", "Active PowerShell writers use UTF-8 without BOM", "FAIL", not legacy_writers,
-      f"legacy writers: {legacy_writers}")
-check("X4", "PowerShell path portability is not bypassed through direct System.IO calls", "FAIL",
-      not direct_io, f"direct System.IO users: {direct_io}")
+# The archive is the record of how the committed evidence was produced. A rerun of it cannot be
+# reproduced and an edit of it cannot be detected by reading the file, so the hashes are the
+# check. This replaced X3 "Active PowerShell writers use UTF-8 without BOM" and X4 "PowerShell
+# path portability is not bypassed through direct System.IO calls" once no PowerShell was left to
+# police: both only ever constrained scripts that ran, and none do (#50).
+archive = ROOT / "verification" / "archive"
+manifest_path = archive / "MANIFEST.json"
+archive_drift: list[str] = []
+if not manifest_path.exists():
+    archive_drift.append("verification/archive/MANIFEST.json is missing")
+else:
+    recorded = json.loads(manifest_path.read_text(encoding="utf-8"))["files"]
+    present = {
+        str(path.relative_to(archive)).replace("\\", "/"): hashlib.sha256(
+            path.read_bytes()).hexdigest()
+        for path in sorted(archive.rglob("*"))
+        if path.is_file() and path.name != "MANIFEST.json"
+    }
+    archive_drift.extend(f"modified: {name}" for name, digest in present.items()
+                         if name in recorded and recorded[name] != digest)
+    archive_drift.extend(f"added: {name}" for name in present if name not in recorded)
+    archive_drift.extend(f"removed: {name}" for name in recorded if name not in present)
+check("X3", "The archived one-shot record is unmodified", "FAIL", not archive_drift,
+      f"{len(archive_drift)} archive difference(s): {archive_drift[:5]}")
 
 bom_files = []
 for raw_name in tracked:

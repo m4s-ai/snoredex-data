@@ -133,7 +133,7 @@ All three databases point the same way, and all three are wrong:
 
 Six specimens were photographed and their card text read off — `Relaxo` / `Ronflex` / `Snorlax`, ability `Immunität` / `Vaccin` / `Immunità` / `Inmunidad` / `Imunidade`, all bearing `XY179`, Ken Sugimori and ©2016. Had the absence-argument been applied here as it was for the Asian promos, it would have produced four false contradictions.
 
-**Grade physical evidence explicitly.** `sourceType` distinguishes *photographed specimen* from *owner attestation*; `passes/verify_xypr_pt.ps1` reports how many units rest on attestation alone. That count is currently **0**.
+**Grade physical evidence explicitly.** `sourceType` distinguishes *photographed specimen* from *owner attestation*; `archive/passes/verify_xypr_pt.ps1` reports how many units rest on attestation alone. That count is currently **0**.
 
 At this checkpoint, every card had at least one confirmed language. The then-25 open units were
 all *additional* language claims on cards that were otherwise evidenced.
@@ -345,7 +345,7 @@ Fully closed: Cardmarket advertises **17 languages**, the expansion article stat
 
 Simplified-Chinese-exclusive products have their own Bulbapedia articles with the suffix **`(ATCG)`**, e.g. `Dynamax_Clash_(ATCG)`, `Collection_151_(ATCG)`, `Shining_Synergy_(ATCG)`. These carry full set lists and are the correct source.
 
-The blocker is **extraction truncation**: these set lists are long, and the fetch returns the head of the table only. `Collection 151` confirmed 143/151 but cut off before 169; `Shining Synergy` truncated before any Snorlax row. Add new findings to `passes/verify_manual.ps1`, which applies hand-verified rows.
+The blocker is **extraction truncation**: these set lists are long, and the fetch returns the head of the table only. `Collection 151` confirmed 143/151 but cut off before 169; `Shining Synergy` truncated before any Snorlax row. Add new findings to `archive/passes/verify_manual.ps1`, which applies hand-verified rows.
 
 Dead ends, do not retry: `pokemonkorea.co.kr` (410 to scripts), `pokemon.cardmon.com` (host gone), `ptcg.cn` (a Magic: The Gathering site, not Pokémon), `pokeos.com` (JS-driven). **52poke wiki** is scriptable via `wiki.52poke.com/api.php` but names card pages by *Japanese* set code (`卡比兽（S1H）`), so it evidences the card, not a Simplified Chinese printing.
 
@@ -444,7 +444,7 @@ python verification/review_findings.py            # cross-artifact and publicati
 python verification/verify_finish_sources.py # validate exact live TCGCSV IDs/subtypes
 
 # Layout: verification/*.ps1 are the five recurring tools (report, audit_evidence,
-# classify_manual, verify_finish_sources, review_integrity). verification/passes/ holds every
+# classify_manual, verify_finish_sources, review_integrity). verification/archive/passes/ holds every
 # completed one-shot pass in chronological naming; do not rerun those archived passes. All
 # PowerShell paths derive from $PSScriptRoot. The dataset build
 # pipeline lives in scripts/ (mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes).
