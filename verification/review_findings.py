@@ -635,39 +635,39 @@ check(
     f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
 )
 
-def synthetic_merge_commit() -> str | None:
-    """GitHub's disposable `refs/pull/N/merge` commit, when the workflow checked one out.
+def published_refs() -> list[str]:
+    """Every ref this repository publishes, minus GitHub's synthetic pull-request merge refs.
 
-    A `pull_request` workflow builds a merge commit that exists only inside the run. Its
-    identity fields belong to GitHub rather than to either branch, so auditing them reports a
-    finding nobody can fix. Excluding that one commit is the whole exemption — every other
-    reachable commit is still audited, because making a repository public publishes every ref,
-    not merely the ancestry of the branch that happens to be checked out.
+    A `pull_request` workflow builds a `refs/pull/N/merge` commit that exists only to be tested.
+    Its identity fields belong to GitHub and to whoever opened the pull request, not to either
+    branch, so auditing them reports a finding nobody can fix by changing this repository.
+
+    This used to exempt exactly one commit — the one that happened to be `HEAD` — which made the
+    verdict depend on the checkout rather than on the repository: the same commit passed on the
+    Windows runner and failed on the Linux one, twice, on #49. Excluding the whole pull namespace
+    is what makes the check deterministic. Branches and tags are still audited in full, because
+    making a repository public publishes every one of them.
     """
-    if os.environ.get("GITHUB_EVENT_NAME") != "pull_request":
-        return None
     try:
-        parents = subprocess.check_output(
-            ["git", "rev-list", "--parents", "-n", "1", "HEAD"], cwd=ROOT, text=True
+        refs = subprocess.check_output(
+            ["git", "for-each-ref", "--format=%(refname)", "refs/heads", "refs/tags",
+             "refs/remotes"], cwd=ROOT, text=True
         ).split()
     except (OSError, subprocess.CalledProcessError):
-        return None
-    # sha + two parents == a merge commit, which is what the PR checkout produces.
-    return parents[0] if len(parents) == 3 else None
+        return []
+    return [ref for ref in refs if "/pull/" not in ref]
 
 
 try:
-    excluded_commit = synthetic_merge_commit()
+    audited = published_refs()
     identity_fields = subprocess.check_output(
-        ["git", "log", "--all", "--format=%H%x00%ae%x00%ce"], cwd=ROOT
-    ).decode("utf-8", errors="replace").splitlines()
+        ["git", "log", "--format=%H%x00%ae%x00%ce"] + audited, cwd=ROOT
+    ).decode("utf-8", errors="replace").splitlines() if audited else []
 except (OSError, subprocess.CalledProcessError):
-    excluded_commit, identity_fields = None, ["\0commit metadata unavailable\0"]
+    identity_fields = ["\0commit metadata unavailable\0"]
 personal_commit_emails = set()
 for record in identity_fields:
     commit_sha, _, addresses = record.partition("\0")
-    if excluded_commit and commit_sha == excluded_commit:
-        continue
     for email in addresses.split("\0"):
         email = email.strip()
         if "@" in email and "noreply" not in email.lower():
