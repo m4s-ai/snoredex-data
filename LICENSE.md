@@ -60,7 +60,11 @@ The licences above grant **nothing** in respect of:
 - **quoted or extracted factual content** from Bulbapedia, TCGdex, TCGplayer/TCGCSV, PSA,
   pokumon.com, Elite Fourum, Cardmarket, and the official Pokémon sites — each carries its own
   terms, recorded in `THIRD_PARTY_NOTICES.md`;
-- **photographs of physical cards** supplied by third parties.
+- **photographs of physical cards**, whoever took them. Where the licensor took the photograph,
+  the licensor holds rights in that photograph and grants them under §2 — but the **card artwork
+  visible in it remains the rights holders' and is granted by nobody here**. A specimen photograph
+  is therefore usable as evidence of what a card looks like, and is not a licence to the artwork
+  it depicts.
 
 Raw factual observations — that a given card exists in a given language with a given finish — are
 facts. This project claims no ownership of facts; the claim is over the selection, arrangement,
@@ -95,8 +99,12 @@ any deployment.
    handle rather than a legal entity name; see *Licensor* below.
 3. **Publication consent.** Owner attestations and photographed specimens may be published. They
    are represented as anonymous evidence classes carrying no personal identifiers.
-4. **Third-party images.** The 198 Cardmarket card images may be published on the basis set out in
-   `THIRD_PARTY_NOTICES.md`.
+4. **Third-party images.** The Cardmarket card images in `images/`, and the licensor's own
+   specimen photographs in `verification/specimens/`, may be published on the basis set out in
+   `THIRD_PARTY_NOTICES.md`. This applies to the categories rather than to a fixed list, so
+   specimen photographs added over time are covered as they arrive without the decision needing to
+   be retaken. It does not extend to any other third-party image: anything from a source not
+   already named in `THIRD_PARTY_NOTICES.md` is a new decision.
 
 **Still open:**
 
