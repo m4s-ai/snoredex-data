@@ -45,7 +45,7 @@ LIVE = {
     "review_integrity": "verification/review_integrity.py",
     "audit_evidence": "verification/audit_evidence.py",
     "report": "verification/report.py",
-    "classify_manual": "verification/classify_manual.ps1",
+    "classify_manual": "verification/classify_manual.py",
     "verify_finish_sources": "verification/verify_finish_sources.ps1",
 }
 

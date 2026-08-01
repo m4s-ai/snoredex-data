@@ -106,7 +106,7 @@ verification/
   state.json                  Last completed phase.
   report.py                   Regenerates coverage + all export files.
   audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
-  classify_manual.ps1         (Re)tags structurally undocumentable units.
+  classify_manual.py          (Re)tags structurally undocumentable units.
   verify_finish_sources.ps1   Rechecks exact TCGCSV product IDs and expected positive subtypes.
   review_integrity.py         27 structural checks — run after every write pass.
   passes/                     ~65 completed one-shot verification scripts. Each closed a batch
