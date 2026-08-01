@@ -1,4 +1,6 @@
 {
+ "schema": "snoredex-confirmed-releases",
+ "schemaVersion": "1.0.0",
  "generated": "2026-07-31",
  "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
@@ -107,6 +109,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -201,6 +212,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -303,6 +323,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -597,6 +626,57 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only",
     "Dutch": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Dutch": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "1st Edition",
    "edord": 0,
@@ -898,6 +978,57 @@
     "Portuguese": "positive-evidence-only",
     "Dutch": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Dutch": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "Unlimited",
    "edord": 1,
    "confirmedLanguages": [
@@ -1197,6 +1328,57 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only",
     "Dutch": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Dutch": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "1st Edition",
    "edord": 0,
@@ -1498,6 +1680,57 @@
     "Portuguese": "positive-evidence-only",
     "Dutch": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Dutch": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "Unlimited",
    "edord": 1,
    "confirmedLanguages": [
@@ -1619,6 +1852,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -1684,6 +1926,15 @@
    ],
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -1751,6 +2002,15 @@
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -1816,6 +2076,15 @@
    ],
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -1894,6 +2163,15 @@
    ],
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -2093,6 +2371,15 @@
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -2208,6 +2495,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -2322,6 +2618,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -2501,6 +2806,29 @@
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -2586,6 +2914,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -2668,6 +3005,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -2902,6 +3248,36 @@
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -2976,6 +3352,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -3046,6 +3431,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -3141,6 +3535,22 @@
     "English": "positive-evidence-only",
     "Portuguese": "pending"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -3213,6 +3623,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -3283,6 +3702,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -3541,6 +3969,36 @@
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -3659,6 +4117,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -3773,6 +4240,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -4157,6 +4633,57 @@
     "Portuguese": "positive-evidence-only",
     "Polish": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Polish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -4258,6 +4785,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -4354,6 +4890,22 @@
     "Japanese": "pending",
     "Korean": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -4438,6 +4990,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -4520,6 +5081,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -4736,6 +5306,36 @@
     "French": "positive-evidence-only",
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -4969,6 +5569,36 @@
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -5121,6 +5751,36 @@
     "French": "positive-evidence-only",
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -5353,6 +6013,36 @@
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -5470,6 +6160,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -5719,6 +6418,36 @@
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -5896,6 +6625,36 @@
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -5998,6 +6757,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -6130,6 +6898,22 @@
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -6260,6 +7044,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -6590,6 +7390,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -6704,6 +7548,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -7033,6 +7886,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -7138,6 +8035,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "Korean": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -7738,6 +8651,57 @@
     "Portuguese": "positive-evidence-only",
     "Russian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Russian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -7875,6 +8839,22 @@
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -8005,6 +8985,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -8385,6 +9381,57 @@
     "Portuguese": "positive-evidence-only",
     "Russian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Russian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -8621,6 +9668,57 @@
     "Portuguese": "positive-evidence-only",
     "Russian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Russian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -8752,6 +9850,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -9132,6 +10246,57 @@
     "Portuguese": "positive-evidence-only",
     "Russian": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Russian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -9488,6 +10653,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -9624,6 +10833,22 @@
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "Unlimited",
    "edord": 1,
    "confirmedLanguages": [
@@ -9756,6 +10981,22 @@
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "1st Edition",
    "edord": 0,
    "confirmedLanguages": [
@@ -9886,6 +11127,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "Unlimited",
    "edord": 1,
@@ -10238,6 +11495,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -10353,6 +11654,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -10426,6 +11736,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "Korean": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -10684,6 +12010,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -10947,6 +12317,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -11148,6 +12562,50 @@
     "Spanish": "pending",
     "Portuguese": "pending"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Italian": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Spanish": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Portuguese": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": false
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -11226,6 +12684,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "Korean": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -11324,6 +12798,22 @@
     "Japanese": "pending",
     "Korean": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -11421,6 +12911,22 @@
     "Japanese": "pending",
     "Korean": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -11517,6 +13023,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "Korean": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -11774,6 +13296,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -12036,6 +13602,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -12296,6 +13906,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -12558,6 +14212,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -12725,6 +14423,22 @@
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -12826,6 +14540,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "Korean": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -13228,6 +14958,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -13561,6 +15335,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -13661,6 +15479,15 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -13756,6 +15583,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "Korean": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -13854,6 +15697,22 @@
     "Japanese": "pending",
     "Korean": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -13951,6 +15810,22 @@
     "Japanese": "pending",
     "Korean": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -14047,6 +15922,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "Korean": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -14377,6 +16268,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -14638,6 +16573,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -14889,6 +16868,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -15139,6 +17162,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -15401,6 +17468,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -15662,6 +17773,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -15816,6 +17971,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -16146,6 +18317,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -16334,6 +18549,50 @@
     "Italian": "pending",
     "Spanish": "pending",
     "Portuguese": "pending"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -16532,6 +18791,36 @@
     "French": "pending",
     "German": "pending",
     "Italian": "pending"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -16763,6 +19052,36 @@
     "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only",
     "S-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -17022,6 +19341,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -17409,6 +19772,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -17675,6 +20082,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -17774,6 +20225,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -17992,6 +20452,43 @@
     "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -18252,6 +20749,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -18514,6 +21055,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -18654,6 +21239,36 @@
     "T-Chinese": "positive-evidence-only",
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -18707,6 +21322,15 @@
    ],
    "finishCompletenessByLanguage": {
     "T-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -19036,6 +21660,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -19271,6 +21939,43 @@
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -19455,6 +22160,36 @@
     "T-Chinese": "positive-evidence-only",
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -19638,6 +22373,36 @@
     "T-Chinese": "positive-evidence-only",
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -19752,6 +22517,29 @@
     "Japanese": "pending",
     "Korean": "pending",
     "T-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -20033,6 +22821,43 @@
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -20179,6 +23004,43 @@
     "T-Chinese": "pending",
     "Indonesian": "pending",
     "Thai": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -20401,6 +23263,43 @@
     "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -20787,6 +23686,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -21046,6 +23989,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -21380,6 +24367,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -21713,6 +24744,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -21773,6 +24848,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -21963,6 +25047,43 @@
     "German": "pending",
     "Italian": "pending",
     "Spanish": "pending"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -22157,6 +25278,43 @@
     "German": "pending",
     "Italian": "pending",
     "Spanish": "pending"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -22421,6 +25579,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -22501,6 +25703,15 @@
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -22551,6 +25762,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -22608,6 +25828,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -22664,6 +25893,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -22719,6 +25957,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -22803,6 +26050,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -22858,6 +26114,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -23187,6 +26452,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -23247,6 +26556,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -23326,6 +26644,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -23376,6 +26703,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -23428,6 +26764,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -23479,6 +26824,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -23529,6 +26883,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -23586,6 +26949,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -23641,6 +27013,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -23830,6 +27211,43 @@
     "German": "pending",
     "Italian": "pending",
     "Spanish": "pending"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -24053,6 +27471,43 @@
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -24259,6 +27714,43 @@
     "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -24486,6 +27978,29 @@
     "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -24710,6 +28225,29 @@
     "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -24795,6 +28333,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -24851,6 +28398,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -24906,6 +28462,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -25235,6 +28800,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -25420,6 +29029,36 @@
     "T-Chinese": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -25519,6 +29158,29 @@
     "Japanese": "pending",
     "Korean": "pending",
     "T-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -25709,6 +29371,36 @@
     "French": "pending",
     "German": "pending",
     "Italian": "pending"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "elitefourum",
+     "provider": "Elite Fourum",
+     "authorityTier": 4,
+     "corroborated": true,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "elitefourum",
+     "provider": "Elite Fourum",
+     "authorityTier": 4,
+     "corroborated": true,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "elitefourum",
+     "provider": "Elite Fourum",
+     "authorityTier": 4,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "elitefourum",
+     "provider": "Elite Fourum",
+     "authorityTier": 4,
+     "corroborated": true,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -26041,6 +29733,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -26142,6 +29878,22 @@
     "Japanese": "pending",
     "Korean": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -26212,6 +29964,15 @@
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -26267,6 +30028,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -26486,6 +30256,43 @@
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -26677,6 +30484,43 @@
     "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -26938,6 +30782,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -26993,6 +30881,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Thai": "pending"
+   },
+   "languageEvidence": {
+    "Thai": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -27250,6 +31147,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -27373,6 +31314,29 @@
     "Japanese": "pending",
     "Korean": "pending",
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -27555,6 +31519,36 @@
     "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only",
     "Thai": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -27887,6 +31881,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -27975,6 +32013,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -28030,6 +32077,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -28087,6 +32143,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -28138,6 +32203,15 @@
    "finishCompletenessByLanguage": {
     "Indonesian": "pending"
    },
+   "languageEvidence": {
+    "Indonesian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -28188,6 +32262,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Indonesian": "pending"
+   },
+   "languageEvidence": {
+    "Indonesian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -28306,6 +32389,29 @@
     "Korean": "pending",
     "T-Chinese": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -28391,6 +32497,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -28446,6 +32561,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -28775,6 +32899,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -28850,6 +33018,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -28994,6 +33171,43 @@
     "Indonesian": "pending",
     "Thai": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "retailer-listing",
+     "provider": "Retailer and specialist card listings",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -29063,6 +33277,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -29142,6 +33365,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -29192,6 +33424,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -29248,6 +33489,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -29505,6 +33755,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -29651,6 +33945,29 @@
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -29963,6 +34280,43 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "German": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Italian": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Spanish": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -30240,6 +34594,43 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "German": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Italian": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Spanish": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -30294,6 +34685,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -30549,6 +34949,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -30809,6 +35253,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -31143,6 +35631,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -31333,6 +35865,15 @@
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -31518,6 +36059,15 @@
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -31593,6 +36143,15 @@
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -31649,6 +36208,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -31700,6 +36268,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -31750,6 +36327,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Indonesian": "pending"
+   },
+   "languageEvidence": {
+    "Indonesian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -31941,6 +36527,50 @@
     "Spanish": "pending",
     "Portuguese": "pending"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "French": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "German": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Italian": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Spanish": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Portuguese": {
+     "providerId": "ligapokemon",
+     "provider": "LigaPokemon",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -32028,6 +36658,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -32198,6 +36837,43 @@
     "T-Chinese": "pending",
     "Indonesian": "pending",
     "Thai": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    },
+    "Indonesian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Thai": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -32421,6 +37097,43 @@
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "T-Chinese": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Indonesian": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Thai": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -32643,6 +37356,43 @@
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "T-Chinese": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Indonesian": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Thai": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -32763,6 +37513,29 @@
     "Japanese": "positive-evidence-only",
     "Korean": "pending",
     "T-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -32925,6 +37698,29 @@
     "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -33044,6 +37840,29 @@
     "Korean": "pending",
     "T-Chinese": "pending"
    },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -33141,6 +37960,22 @@
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
     "T-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "pokemon-card-jp",
+     "provider": "Pokémon Card official database (Japan)",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -33413,6 +38248,50 @@
     "Italian": "positive-evidence-only",
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "English": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "French": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "German": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Italian": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Spanish": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Portuguese": {
+     "providerId": "ligapokemon",
+     "provider": "LigaPokemon",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -33690,6 +38569,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "French": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "German": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": false,
+     "checkable": false
+    },
+    "Italian": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Spanish": {
+     "providerId": "photographed-specimen",
+     "provider": "Photographed physical specimen",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": false
+    },
+    "Portuguese": {
+     "providerId": "ligapokemon",
+     "provider": "LigaPokemon",
+     "authorityTier": 3,
+     "corroborated": true,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -33745,6 +38668,15 @@
    ],
    "finishCompletenessByLanguage": {
     "Indonesian": "pending"
+   },
+   "languageEvidence": {
+    "Indonesian": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -33828,6 +38760,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -33975,6 +38916,29 @@
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "Japanese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "pokemon-card-asia",
+     "provider": "Pokémon Card official database (Asia)",
+     "authorityTier": 1,
+     "corroborated": true,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -34306,6 +39270,50 @@
     "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
+   "languageEvidence": {
+    "English": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "French": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "German": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Italian": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Spanish": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Portuguese": {
+     "providerId": "tcgdex",
+     "provider": "TCGdex",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -34367,6 +39375,15 @@
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
    },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
+   },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
@@ -34422,6 +39439,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "pending"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,
@@ -34505,6 +39531,15 @@
    ],
    "finishCompletenessByLanguage": {
     "S-Chinese": "positive-evidence-only"
+   },
+   "languageEvidence": {
+    "S-Chinese": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
+    }
    },
    "edition": "—",
    "edord": 1,

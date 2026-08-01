@@ -173,12 +173,33 @@ def get_date(c):
     return ("9999", False, None)
 
 # --- collect confirmed languages per card-variant ---
+# Each confirmed language also carries how strong the claim behind it is (#32): which provider,
+# that provider's authority tier from the registry, and whether a second provider agreed. A
+# Bulbapedia row and a photographed specimen are both "confirmed" and are not the same claim, and
+# until now the site could not say so.
+source_registry = json.load(
+    io.open(os.path.join(B, "verification", "source_registry.json"), encoding="utf-8")
+)
+TIER_BY_PROVIDER = {p["providerId"]: p["authorityTier"] for p in source_registry["providers"]}
+NAME_BY_PROVIDER = {p["providerId"]: p["displayName"] for p in source_registry["providers"]}
+
 conf = {}
+strength = {}
 for u in units:
     if u["status"] != "confirmed":
         continue
     key = (u["setCode"], str(u.get("number") or ""), u.get("variant") or "base")
     conf.setdefault(key, []).append(u["language"])
+    provider = u.get("providerId")
+    strength.setdefault(key, {})[u["language"]] = {
+        "providerId": provider,
+        "provider": NAME_BY_PROVIDER.get(provider),
+        "authorityTier": TIER_BY_PROVIDER.get(provider),
+        "corroborated": bool(u.get("corroborated")),
+        # A claim with no URL cannot be re-checked by a reader following a link, whatever its
+        # tier. That is a different question from how strong the source is, so it is its own field.
+        "checkable": bool(u.get("sourceUrl")),
+    }
 
 LANG_ORDER = ["English","French","German","Italian","Spanish","Portuguese","Dutch","Polish",
               "Russian","Japanese","Korean","T-Chinese","S-Chinese","Indonesian","Thai"]
@@ -212,6 +233,8 @@ for c in cards:
             )
             for language in langs
         },
+        "languageEvidence": {language: strength.get(key, {}).get(language)
+                             for language in langs},
     }
     if ed.get("hasFirstEdition"):
         fe = order([l for l in ed.get("firstEditionLanguages", []) if l in langs])
@@ -285,7 +308,14 @@ rows.sort(key=lambda r: (r["dateSort"], r["setName"], str(r["number"]), r["varia
 # whole, so the date has to be a function of the inputs.
 generated = max(u["checkedAt"][:10] for u in units if u.get("checkedAt"))
 
-json.dump({"generated": generated,
+json.dump({"schema": "snoredex-confirmed-releases",
+           # 1.x while `dateExact` is still emitted. It is the deprecated inverse of
+           # `dateApproximate` and is scheduled for removal at 2.0.0 (#37); consumers that
+           # read it should move to `datePrecision` + `dateApproximate` before then. The
+           # file previously carried no schema at all, so there was no way to announce a
+           # removal rather than spring it.
+           "schemaVersion": "1.0.0",
+           "generated": generated,
            "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
            "variants": rows},
           io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8", newline="\n"),

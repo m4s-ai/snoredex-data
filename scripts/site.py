@@ -287,6 +287,18 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
         evidence |= completeness
 
         lang_codes = [LANG_CODE[l] for l in row["confirmedLanguages"] if l in LANG_CODE]
+        # Evidence strength per confirmed language, keyed by the same code the cells use so
+        # the renderer can look it up without a second mapping (#32).
+        lang_evidence = {
+            LANG_CODE[language]: {
+                "tier": (info or {}).get("authorityTier"),
+                "provider": (info or {}).get("provider"),
+                "corroborated": bool((info or {}).get("corroborated")),
+                "checkable": bool((info or {}).get("checkable")),
+            }
+            for language, info in (row.get("languageEvidence") or {}).items()
+            if language in LANG_CODE
+        }
         search = " ".join(str(v).lower() for v in [
             row["name"], row["setCode"], row["setName"], row["number"], row["variant"],
             row.get("variantName") or "", row.get("rarity") or "", row.get("artist") or "",
@@ -327,6 +339,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "evidence": sorted(e for e in evidence if e),
             "confirmedLanguages": row["confirmedLanguages"],
             "langCodes": lang_codes,
+            "langEvidence": lang_evidence,
             "correctionUrl": correction_url(row),
             "search": search,
         })
@@ -599,6 +612,8 @@ def main() -> int:
     <strong>Language availability:</strong>
     <span><span class="yes" aria-hidden="true">&#10003;</span> present</span>
     <span><span class="no" aria-hidden="true">&mdash;</span> absent</span>
+    <span><span class="yes legend-unverifiable" aria-hidden="true">&#10003;</span> present, but on a
+      single source with no public URL &mdash; hover any tick for its provider and evidence tier</span>
     <span>Ellipsized values can be selected to expand.</span>
   </p>
 
