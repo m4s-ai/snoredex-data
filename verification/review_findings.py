@@ -568,6 +568,105 @@ check(
 )
 
 # --------------------------------------------------------------------------- #
+# S7-S10 — physical specimens are identified, not described
+# --------------------------------------------------------------------------- #
+# A claim resting on a card the owner holds used to say "(physical specimen supplied by the user)"
+# in prose, which cannot be cited twice or pointed at (#32). Each inspected card now has a stable
+# id, and a claim references it. Photographs arrive over time, so every check here has to pass
+# both while `photograph` is null and after a file lands.
+
+specimen_doc = load("verification/specimens.json")
+specimens = specimen_doc["specimens"]
+specimen_by_id = {s["specimenId"]: s for s in specimens}
+specimen_dir = ROOT / "verification" / "specimens"
+
+duplicate_specimens = [sid for sid, n in Counter(s["specimenId"] for s in specimens).items() if n > 1]
+check(
+    "S7",
+    "Specimen ids are unique",
+    "FAIL",
+    not duplicate_specimens,
+    f"duplicated: {duplicate_specimens}",
+)
+
+# Every specimen: reference resolves, and identifies the same printing as the unit citing it.
+dangling, mismatched = [], []
+for unit in resolved_units:
+    ref = str(unit.get("sourceRef") or "")
+    if not ref.startswith("specimen:"):
+        continue
+    specimen = specimen_by_id.get(ref.split(":", 1)[1])
+    if specimen is None:
+        dangling.append(f"{unit['unitId']} -> {ref}")
+        continue
+    same = (specimen["setCode"] == unit["setCode"]
+            and specimen["number"] == str(unit["number"])
+            and specimen["variant"] == (unit.get("variant") or "base")
+            and specimen["language"] == unit["language"])
+    if not same:
+        mismatched.append(f"{unit['unitId']} cites {ref}")
+check(
+    "S8",
+    "Every specimen reference resolves to the printing it is cited for",
+    "FAIL",
+    not dangling and not mismatched,
+    f"unresolved={dangling[:5]} wrong-printing={mismatched[:5]}",
+)
+
+# A declared photograph must exist and be a real image; a missing one must be declared null rather
+# than pointed at a file that is not there.
+photo_problems = []
+for specimen in specimens:
+    name = specimen.get("photograph")
+    if name is None:
+        continue
+    path = specimen_dir / name
+    if not path.is_file():
+        photo_problems.append(f"{specimen['specimenId']}: {name} not on disk")
+        continue
+    blob = path.read_bytes()
+    if image_format(blob) is None:
+        photo_problems.append(f"{specimen['specimenId']}: {name} is not a decodable image")
+check(
+    "S9",
+    "Declared specimen photographs exist and decode",
+    "FAIL",
+    not photo_problems,
+    f"{len(photo_problems)} problem(s): {photo_problems[:5]}",
+)
+
+# The reverse: a file nobody references is either a forgotten registry entry or an image that
+# should not be published, and both are worth catching before the artifact ships.
+declared_photos = {s["photograph"] for s in specimens if s.get("photograph")}
+stray_photos = sorted(p.name for p in specimen_dir.iterdir()
+                      if p.is_file() and p.name not in declared_photos) if specimen_dir.is_dir() else []
+check(
+    "S10",
+    "No specimen photograph is unreferenced",
+    "FAIL",
+    not stray_photos,
+    f"{len(stray_photos)} file(s) in verification/specimens/ that no registry entry claims: "
+    f"{stray_photos[:5]}",
+)
+
+check(
+    "S11",
+    "Specimen registry carries schema and version metadata",
+    "FAIL",
+    bool(specimen_doc.get("schema") and specimen_doc.get("schemaVersion")),
+    "schema and schemaVersion are required for a canonical store",
+)
+
+check(
+    "S12",
+    "Specimen photograph coverage",
+    "INFO",
+    True,
+    f"{len(declared_photos)} of {len(specimens)} inspected specimens have their photograph "
+    f"committed; the rest rest on the recorded inspection alone until one is supplied.",
+)
+
+# --------------------------------------------------------------------------- #
 # F3b — market and product type stay independent
 # --------------------------------------------------------------------------- #
 # `market` says which regional catalogue lists a product; `isCodeCard` says what kind of product

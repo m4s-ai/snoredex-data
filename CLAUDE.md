@@ -85,6 +85,11 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   attack names.
 - **"Spanish" is European Spanish only.** LATAM-ES is a physically distinct edition, out of scope.
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
+- **Physical specimens are cited, not described.** A card the owner holds has a stable id in
+  `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. To add
+  its photograph: file into `verification/specimens/`, set `photograph` to the filename, rerun
+  `review_findings.py`. Never write a new prose description of a specimen — that is what the ids
+  replaced.
 
 ## Commands
 

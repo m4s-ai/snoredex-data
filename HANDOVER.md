@@ -124,6 +124,15 @@ verification/
                               matches its current row. units.json is the state; this is the
                               record of how it was reached. check E5 requires every resolved
                               unit to appear here, which is the property it can actually offer.
+  specimens.json              Physical cards the owner holds and inspected, each with a stable
+                              SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
+                              instead of describing it in prose. `photograph` is null until the
+                              image is supplied; the claim rests on the recorded inspection either
+                              way, and the file is what lets a third party re-check it.
+                              TO ADD A PHOTOGRAPH: drop the file in verification/specimens/, set
+                              `photograph` to its filename, run review_findings.py. Checks S7-S12
+                              cover it; publish.py already allowlists the directory and LICENSE.md
+                              decision 4 covers the category, so no approval is needed per image.
   confirmed_sources.json      Export of all confirmed units.
   CONTRADICTED.json           The 71 refuted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
