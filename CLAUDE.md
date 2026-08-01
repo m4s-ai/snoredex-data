@@ -124,6 +124,14 @@ way. `publish.py` takes `--verify` rather than `--check`.
 `python scripts/finishes.py --reproject` redoes only the card projection from the committed store
 and needs no network; it is the fast path when a projection rule changes.
 
+A full `finishes.py` run reads TCGdex through a cache under `verification/cache/finish-tcgdex/`.
+Entries carry their URL, fetch time, HTTP status, content hash and item count, expire after 30
+days, and are never written for a failed or implausible response — an empty body, a non-object, or
+anything without an `id` is an error, not an answer. Transient failures (timeouts, 429, 5xx) are
+retried with backoff; a 404 is an answer and is not. `--refresh-cache` forces a refetch. Exit 2
+means a source could not be reached, matching `verify_finish_sources.py`: the artifacts are not
+wrong, the upstream evidence is missing, so retry rather than investigate.
+
 The pre-PR gate, matching CI:
 
 ```console

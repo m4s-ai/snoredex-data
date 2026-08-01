@@ -303,11 +303,17 @@ Order matters, and it is the order above: `finishes.py` writes the card finish s
 `language_status.py` writes the card language verdicts, `confirmed_releases.py` reads both and
 writes the chronological rows, and `checklist.py` and `site.py` read those. Five generators take a
 `--check` mode that fails instead of writing — `checklist`, `readme_stats`, `issue_templates`,
-`site`, `source_registry` — and the release gate runs those with `--check`, runs `finishes.py
+`site`, `source_registry`, `open_items` — and the release gate runs those with `--check`, runs `finishes.py
 --reproject`, `language_status.py` and `confirmed_releases.py` for real, then asserts
 `git diff --exit-code`. Either way a generator whose output would move fails the build.
 `publish.py` takes `--verify`. `finishes.py --reproject` redoes only the card projection from the
 committed finish store and needs no network, which is the fast path when a projection rule changes.
+
+A full `finishes.py` run reads TCGdex through a cache under `verification/cache/finish-tcgdex/`.
+Entries record their URL, fetch time, HTTP status, content hash and item count, expire after 30
+days, and are never written for a failed or implausible response. Transient failures are retried
+with backoff; a 404 is an answer and is not. `--refresh-cache` forces a refetch, and exit 2 means
+a source could not be reached rather than that the data is wrong (#35).
 
 **The integrity suite no longer asserts counts.** Unit totals, coverage and queue depths are
 reported as drift against a baseline, because closing an open unit is the goal, not a regression;
