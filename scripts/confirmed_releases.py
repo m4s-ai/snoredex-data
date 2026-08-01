@@ -277,7 +277,15 @@ if _dupe_ids:
 
 rows.sort(key=lambda r: (r["dateSort"], r["setName"], str(r["number"]), r["variant"], r["edord"]))
 
-json.dump({"generated": "2026-07-31",
+# Derived from the evidence, not from the clock (#37). The release gate regenerates this file and
+# requires `git diff --exit-code`, so `date.today()` would fail every run made on a later day —
+# which is why this was a literal. Taking the newest `checkedAt` keeps the field honest and
+# reproducible at once: it moves when the evidence moves, and not otherwise. Other generators use
+# `date.today()` safely because their `--check` compares only the payload; this one is compared
+# whole, so the date has to be a function of the inputs.
+generated = max(u["checkedAt"][:10] for u in units if u.get("checkedAt"))
+
+json.dump({"generated": generated,
            "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
            "variants": rows},
           io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8", newline="\n"),

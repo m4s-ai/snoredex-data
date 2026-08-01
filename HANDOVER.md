@@ -140,7 +140,12 @@ verification/
   state.json                  Last completed phase.
   source_registry.json        Generated provider/evidence index. Counts live in README's
                               generated block; don't restate them here.
-  report.py                   Regenerates coverage + all export files.
+  report.py                   Prints coverage and rewrites exactly three exports:
+                              confirmed_sources.json, CONTRADICTED.json, UNCONFIRMED.json.
+                              NOT "all exports" — MANUAL_REVIEW.* comes from classify_manual.py,
+                              open-items.html from scripts/open_items.py, SOURCES.md from
+                              scripts/source_registry.py, and the FINISH_* queue from
+                              scripts/finishes.py.
   audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.py          (Re)tags structurally undocumentable units.
   verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
