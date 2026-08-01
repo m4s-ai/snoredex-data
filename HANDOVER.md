@@ -98,7 +98,13 @@ scripts/                      Generators, in run order (§7 has the full command
 verification/
   units.json                  THE STATE STORE. One row per card×language×variant with status,
                               sourceUrl, sourceType, evidence, checkedAt.
-  evidence.jsonl              Append-only log of every confirmation (survives crashes).
+  evidence.jsonl              Append-only journal of what was observed, and when. NOT a
+                              projection of units.json and not replayable into one: entries are
+                              appended as observations happen, corrections are appended rather
+                              than rewritten, and nothing guarantees the last entry for a unit
+                              matches its current row. units.json is the state; this is the
+                              record of how it was reached. check E5 requires every resolved
+                              unit to appear here, which is the property it can actually offer.
   confirmed_sources.json      Export of all confirmed units.
   CONTRADICTED.json           The 71 refuted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
@@ -216,9 +222,18 @@ Brazilian Prize Pack confirmations were obtained.
 
 1. **Evidence outside Cardmarket only.** The card's *language filter* on Cardmarket is not
    evidence; a seller's *photo* of the physical card is.
-2. **Grade evidence.** `sourceType` distinguishes *photographed specimen* > *marketplace listing*
-   / *official DB* / *fan wiki* > *owner attestation*. Currently 0 units rest on attestation alone
-   without corroboration; keep it that way where possible.
+2. **Grade evidence.** `providerId` names the source, `corroborated` says whether more than one
+   provider agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
+   *photographed specimen* (1) > *official DB* (1) > *open database* (2) / *owner attestation* (2)
+   > *fan wiki* (3) / *marketplace listing* (3) > *collector community* (4).
+
+   A single non-URL source may confirm a unit. **16 units rest on owner attestation alone** and 5
+   on a photographed specimen alone, all queryable as
+   `corroborated == false and providerId in {owner-attestation, photographed-specimen}`. The
+   owner physically holds these cards and no database records them, so the alternative is not
+   better evidence but a false "open" count. What is not acceptable is a single *weaker* source:
+   `review_findings.py` check E3 fails if anything below tier 2 confirms a unit uncorroborated,
+   and E4 fails if the number above stops matching the data. Prefer corroboration where it exists.
 3. **Never contradict on bare absence.** First prove the source *covers the category* (e.g.
    pokumon lists Korean promos, so a missing Korean row is meaningful). This rule exists because
    an absence-argument produced a false contradiction that had to be reverted (`XY-P 149`).

@@ -26,7 +26,7 @@ and produces a stable machine-readable checklist plus an interactive collection 
 ## Current state
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-07-31**, after the database review and release-readiness work merged to `main`.
+Status snapshot: **2026-08-01**, after the database review and release-readiness work merged to `main`.
 
 | Area | Current state |
 |---|---|

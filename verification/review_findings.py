@@ -300,6 +300,102 @@ check(
 
 
 # --------------------------------------------------------------------------- #
+# E — evidence identity is queryable, and the documented policy is the real one
+# --------------------------------------------------------------------------- #
+# `sourceUrl` used to hold either a URL or a sentence, and whether a second source agreed was
+# buried in prose. `providerId`, `sourceRef` and `corroborated` make all three queryable (#32).
+
+registry = load("verification/source_registry.json")
+provider_by_id = {p["providerId"]: p for p in registry["providers"]}
+resolved_units = [u for u in units if u["status"] in ("confirmed", "contradicted")]
+
+prose_urls = [u["unitId"] for u in resolved_units
+              if u.get("sourceUrl") and not str(u["sourceUrl"]).startswith("http")]
+check(
+    "E1",
+    "sourceUrl holds a URL or nothing, never prose",
+    "FAIL",
+    not prose_urls,
+    f"{len(prose_urls)} resolved units describe their source in the URL field. e.g. {prose_urls[:5]}",
+)
+
+undeclared = [u["unitId"] for u in resolved_units
+              if u.get("providerId") not in provider_by_id]
+check(
+    "E2",
+    "Every resolved unit names a declared provider",
+    "FAIL",
+    not undeclared,
+    f"{len(undeclared)} units carry no providerId or one absent from the registry. "
+    f"e.g. {undeclared[:5]}",
+)
+
+# The policy, stated once here and in HANDOVER.md: a single non-URL source may confirm a unit, and
+# the count is published rather than left to be discovered. Attestation and a photographed
+# specimen are different classes — the registry ranks the photograph tier 1 and bare attestation
+# tier 2 — so they are counted separately.
+single_source = [u for u in resolved_units
+                 if u.get("providerId") in provider_by_id
+                 and provider_by_id[u["providerId"]]["category"] == "non-url-evidence"
+                 and not u.get("corroborated")]
+by_provider = Counter(u["providerId"] for u in single_source)
+
+# Keyed on the absence of a URL, not on the provider's category. A URL is checkable by anyone,
+# whatever its tier; evidence with no URL is checkable by nobody, so only the strong classes may
+# carry a claim alone. Keying on category instead would make this vacuous — the only categories
+# that reach it would be the tier 1 and 2 ones it is meant to police.
+unverifiable = [u["unitId"] for u in resolved_units
+                if not u.get("sourceUrl")
+                and not u.get("corroborated")
+                and u.get("providerId") in provider_by_id
+                and provider_by_id[u["providerId"]]["authorityTier"] > 2]
+check(
+    "E3",
+    "A claim with no URL and no corroboration rests on a tier 1-2 source",
+    "FAIL",
+    not unverifiable,
+    f"{len(unverifiable)} units are confirmed by a source that is neither checkable nor strong. "
+    f"e.g. {unverifiable[:5]}",
+)
+
+handover = (ROOT / "HANDOVER.md").read_text(encoding="utf-8")
+stated = re.search(r"(\d+)\s+units rest on owner attestation alone", handover)
+check(
+    "E4",
+    "HANDOVER states the real number of attestation-only units",
+    "FAIL",
+    bool(stated) and int(stated.group(1)) == by_provider.get("owner-attestation", 0),
+    f"data has {by_provider.get('owner-attestation', 0)} attestation-only units; HANDOVER says "
+    f"{stated.group(1) if stated else 'nothing matching'}",
+)
+
+# The log is a journal, not a projection of the store: it records what was observed and when, and
+# replaying it does not reconstruct state. What it must do is account for every resolved unit.
+logged = set()
+for line in (ROOT / "verification" / "evidence.jsonl").read_text(encoding="utf-8").splitlines():
+    if line.strip():
+        logged.add(json.loads(line).get("unitId"))
+unlogged = [u["unitId"] for u in resolved_units if u["unitId"] not in logged]
+check(
+    "E5",
+    "Every resolved unit appears in the evidence journal",
+    "FAIL",
+    not unlogged,
+    f"{len(unlogged)} resolved units have no entry in evidence.jsonl. e.g. {unlogged[:5]}",
+)
+
+check(
+    "E6",
+    "Evidence provenance",
+    "INFO",
+    True,
+    f"{len(resolved_units)} resolved units across {len({u['providerId'] for u in resolved_units})} "
+    f"providers; {sum(1 for u in resolved_units if u.get('corroborated'))} corroborated by more "
+    f"than one; {len(single_source)} resting on a single non-URL source "
+    f"({', '.join(f'{n} {p}' for p, n in sorted(by_provider.items()))}).",
+)
+
+# --------------------------------------------------------------------------- #
 # F3b — market and product type stay independent
 # --------------------------------------------------------------------------- #
 # `market` says which regional catalogue lists a product; `isCodeCard` says what kind of product
