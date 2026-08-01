@@ -313,9 +313,9 @@ handover = (ROOT / "HANDOVER.md").read_text(encoding="utf-8")
 HARVEST_STEPS = {"build.ps1", "join.ps1", "getimages.ps1", "finalize.ps1"}
 # Runnable from what is committed. The gate regenerates these and diffs the result.
 LIVE_STEPS = {
-    "analyze.ps1", "finishes.py", "language_status.py", "confirmed_releases.py",
+    "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
     "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
-    "site.py", "editions.py", "publish.py",
+    "open_items.py", "site.py", "editions.py", "publish.py",
 }
 
 missing_steps = sorted(s for s in LIVE_STEPS | HARVEST_STEPS | {"mkunits.ps1"}

@@ -115,8 +115,8 @@ python verification/review_integrity.py     # after any write
 python verification/review_findings.py      # after any write
 ```
 
-Six generators take `--check`, which fails instead of writing: `checklist`, `readme_stats`,
-`issue_templates`, `site`, `source_registry`, `open_items`. The gate runs those with `--check`, runs
+Seven generators take `--check`, which fails instead of writing: `checklist`, `readme_stats`,
+`issue_templates`, `site`, `source_registry`, `open_items`, `analyze`. The gate runs those with `--check`, runs
 `finishes.py --reproject`, `language_status.py` and `confirmed_releases.py` for real, and then
 asserts `git diff --exit-code` — so a generator whose output would move fails the build either
 way. `publish.py` takes `--verify` rather than `--check`.
@@ -158,16 +158,16 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
   committed data came to be. Its files are never rerun and never edited; check `X3` hashes them
   against `verification/archive/MANIFEST.json` and fails on any change. A translated pass is not
   the script that produced the record.
-- **Five** of the six `scripts/*.ps1` are **dormant history** — `build`, `join`, `getimages`,
+- The five remaining `scripts/*.ps1` are **dormant history** — `build`, `join`, `getimages`,
   `finalize` and `mkunits`. Their `_chunk*`/`_cards_stage*` inputs are not in the repository and
   are not reproducible (a 2026-07-21 scrape of a live marketplace), so `snorlax_cards.json` is the
   input of record rather than an output. #28 captured that data flow, so they can join the archive.
   `mkunits` is additionally destructive: it rebuilds `units.json` with fresh ids and discards the
   verification state. Never run it.
-- **`scripts/analyze.ps1` is not dormant.** It is the sole producer of `analysis_artists.json`,
-  `analysis_shared_cards.json`, `analysis_variants.json` and `analysis_language_drift.json`, and it
-  runs today via its `snorlax_cards.json` fallback. Archiving it would leave four committed
-  artifacts with no generator. It is also the last step that needs PowerShell.
+- **`scripts/analyze.py`** produces `analysis_artists.json`, `analysis_shared_cards.json`,
+  `analysis_variants.json` and `analysis_language_drift.json` — nothing else generates them. It
+  reads `snorlax_cards.json` only, which is #30's single canonical node. Its PowerShell
+  predecessor is archived at `verification/archive/scripts/analyze.ps1`.
 - **LF line endings** (check `X1`) and **no UTF-8 BOM** (check `X5`) in tracked text.
 - `verification/checks.py` is the check protocol shared by the two suites: `review_integrity.py`
   validates invariants *within* each store, `review_findings.py` validates consistency *between*

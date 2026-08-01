@@ -68,7 +68,8 @@ the underlying evidence did not change; use `snorlax_cards.json` and
 
 ## Validate a checkout
 
-Python 3.11 and PowerShell 7 are the supported baseline. The browser suite also needs Playwright's
+Python 3.11 is the supported baseline. PowerShell is no longer required for anything: the last
+step that needed it, `analyze.ps1`, is now `scripts/analyze.py`. The browser suite also needs Playwright's
 Chromium installation.
 
 ```console
@@ -85,8 +86,8 @@ in [`.github/workflows/release-gate.yml`](.github/workflows/release-gate.yml).
 
 ## Repository map
 
-All paths and commands are relative to the repository root. PowerShell and Python scripts resolve
-the checkout from their own file location and can be invoked from any working directory.
+All paths and commands are relative to the repository root. Every script resolves the checkout
+from its own file location and can be invoked from any working directory.
 
 | Path | Purpose |
 |---|---|
@@ -130,7 +131,7 @@ not part of any rebuild.
 running the generators and failing if the output differs from the tree:
 
 ```console
-pwsh -File scripts/analyze.ps1     # analysis_artists, _shared_cards, _variants, _language_drift
+python scripts/analyze.py          # analysis_artists, _shared_cards, _variants, _language_drift
 python scripts/finishes.py --reproject
 python scripts/language_status.py
 python scripts/confirmed_releases.py
@@ -141,8 +142,9 @@ python scripts/issue_templates.py
 python scripts/site.py
 ```
 
-`scripts/analyze.ps1` is the only step still requiring PowerShell. It prefers `_cards_stage3.json`
-if present and falls back to `snorlax_cards.json`, which is the path that runs in practice.
+`scripts/analyze.py` reads `snorlax_cards.json` and nothing else. Its PowerShell predecessor
+preferred whichever `_cards_stage*.json` happened to be present, which made the canonical input
+depend on the working directory; the port is what closes #30's single-canonical-node criterion.
 
 Scraping covered all nine result pages for Cardmarket's Pokémon product search for “snorlax.”
 

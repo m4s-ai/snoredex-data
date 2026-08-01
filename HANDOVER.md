@@ -88,15 +88,16 @@ verification/bulbapedia_release_dates.json
 scripts/                      Two halves; only the second can be re-run (#28).
 
                               LIVE generators, in run order (§7 has the full command list):
-                                analyze.ps1 -> finishes -> language_status -> confirmed_releases
+                                analyze -> finishes -> language_status -> confirmed_releases
                                 -> source_registry -> checklist -> readme_stats -> issue_templates
                                 -> open_items -> site
                               plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). Six take --check; see §7.
-                              analyze.ps1 is the SOLE producer of analysis_artists,
-                              _shared_cards, _variants and _language_drift, and the last step
-                              needing PowerShell. It is NOT dormant: it runs today via its
-                              snorlax_cards.json fallback.
+                              and verifies the Pages artifact). Seven take --check; see §7.
+                              analyze.py is the SOLE producer of analysis_artists,
+                              _shared_cards, _variants and _language_drift, and reads
+                              snorlax_cards.json only — the single canonical node (#30). Its
+                              PowerShell predecessor is archived under archive/scripts/.
+                              ALL PYTHON: PowerShell is no longer needed for anything.
 
                               HISTORICAL, inputs absent, do not run:
                                 build -> join -> getimages -> finalize
@@ -303,7 +304,7 @@ Order matters, and it is the order above: `finishes.py` writes the card finish s
 `language_status.py` writes the card language verdicts, `confirmed_releases.py` reads both and
 writes the chronological rows, and `checklist.py` and `site.py` read those. Five generators take a
 `--check` mode that fails instead of writing — `checklist`, `readme_stats`, `issue_templates`,
-`site`, `source_registry`, `open_items` — and the release gate runs those with `--check`, runs `finishes.py
+`site`, `source_registry`, `open_items`, `analyze` — and the release gate runs those with `--check`, runs `finishes.py
 --reproject`, `language_status.py` and `confirmed_releases.py` for real, then asserts
 `git diff --exit-code`. Either way a generator whose output would move fails the build.
 `publish.py` takes `--verify`. `finishes.py --reproject` redoes only the card projection from the

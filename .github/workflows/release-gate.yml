@@ -97,6 +97,7 @@ jobs:
       - name: Generated artifacts match their inputs
         shell: bash
         run: |
+          python scripts/analyze.py --check
           python scripts/finishes.py --reproject
           python scripts/language_status.py
           python scripts/confirmed_releases.py
