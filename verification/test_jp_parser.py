@@ -23,6 +23,14 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+# This suite names the Japanese tokens it exists to keep out — "V進化", "レベルアップ LV. X" — in its
+# case labels and its failure details. Windows Python writes stdout as cp1252 by default, which
+# cannot encode them, so printing a result raised UnicodeEncodeError before any assertion was
+# reported. The subject matter is Japanese; the output has to be able to say so.
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8", errors="backslashreplace")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from jp_parse import illustrator  # noqa: E402
