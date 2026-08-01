@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the generated blocks in README.md from the current data.
+"""Regenerate the generated blocks in README.md and FINDINGS.md from the current data.
 
 The finish coverage table drifted twice by being hand-maintained: it claimed 276 non-holo and
 24 both-non-holo-and-holo units while the generated data said 270 and 18, and the wrong numbers
@@ -10,7 +10,8 @@ The top-level status, badge counts, and finish table all come from the canonical
 the repository's front page honest as verification progresses or publication decisions change.
 
 Blocks are delimited by `<!-- generated:NAME -->` / `<!-- /generated:NAME -->`. Everything between
-the markers is replaced; everything outside is left alone.
+the markers is replaced; everything outside is left alone. Most blocks live in README.md; the
+market split lives in FINDINGS.md, next to the drift tables it belongs with.
 
     python scripts/readme_stats.py          # rewrite
     python scripts/readme_stats.py --check  # fail if stale, for the release gate
@@ -27,6 +28,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 README_PATH = ROOT / "README.md"
+FINDINGS_PATH = ROOT / "FINDINGS.md"
 ANALYSIS_PATH = ROOT / "analysis_finishes.json"
 DATASET_PATH = ROOT / "snorlax_cards.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
@@ -172,13 +174,13 @@ def market_split_block(dataset: dict[str, Any]) -> str:
     return f"The market split across all {len(dataset['cards'])}: {parts}."
 
 
-def replace_block(text: str, name: str, body: str) -> str:
+def replace_block(text: str, name: str, body: str, where: str = "README.md") -> str:
     pattern = re.compile(
         rf"(<!-- generated:{re.escape(name)}[^>]*-->\n).*?(\n<!-- /generated:{re.escape(name)} -->)",
         re.DOTALL,
     )
     if not pattern.search(text):
-        raise SystemExit(f"README.md has no generated:{name} block")
+        raise SystemExit(f"{where} has no generated:{name} block")
     return pattern.sub(lambda m: m.group(1) + body + m.group(2), text)
 
 
@@ -244,21 +246,34 @@ def main() -> int:
     updated = replace_block(
         updated, "finish-coverage", finish_coverage_block(counts, finish_doc["units"])
     )
-    updated = replace_block(updated, "market-split", market_split_block(dataset))
+
+    findings_original = FINDINGS_PATH.read_text(encoding="utf-8")
+    findings_updated = replace_block(
+        findings_original, "market-split", market_split_block(dataset), "FINDINGS.md"
+    )
+
+    documents = [
+        (README_PATH, original, updated),
+        (FINDINGS_PATH, findings_original, findings_updated),
+    ]
 
     if "--check" in sys.argv:
-        if updated != original:
-            print("README.md generated blocks are stale; run python scripts/readme_stats.py")
+        stale = [path.name for path, before, after in documents if before != after]
+        if stale:
+            print(f"{', '.join(stale)} generated blocks are stale; "
+                  "run python scripts/readme_stats.py")
             return 1
-        print("README.md generated blocks are current")
+        print("README.md and FINDINGS.md generated blocks are current")
         return 0
 
-    if updated != original:
-        with README_PATH.open("w", encoding="utf-8", newline="\n") as handle:
-            handle.write(updated)
-        print("README.md updated")
-    else:
-        print("README.md already current")
+    written = []
+    for path, before, after in documents:
+        if before != after:
+            with path.open("w", encoding="utf-8", newline="\n") as handle:
+                handle.write(after)
+            written.append(path.name)
+    print(f"{', '.join(written)} updated" if written
+          else "README.md and FINDINGS.md already current")
     return 0
 
 
