@@ -300,6 +300,98 @@ check(
 
 
 # --------------------------------------------------------------------------- #
+# M — every referenced image is the format its name claims, and decodes
+# --------------------------------------------------------------------------- #
+# R5 pairs references with filenames. That cannot see inside a file, so an HTML error page, a
+# truncated download or a PNG called .jpg all passed it (#34). These read the bytes.
+#
+# Structural rather than pixel-accurate, and stdlib-only on purpose: a decoder would be a new
+# dependency in the release gate to prove a property the container already states. Truncation is
+# what actually happens to a downloaded file, and both formats mark their own end.
+
+IMAGE_MAGIC = {b"\x89PNG\r\n\x1a\n": "png", b"\xff\xd8\xff": "jpg"}
+
+
+def image_format(data: bytes) -> str | None:
+    return next((ext for sig, ext in IMAGE_MAGIC.items() if data.startswith(sig)), None)
+
+
+def image_complete(data: bytes, ext: str) -> bool:
+    """Whether the file carries its own end marker, which a truncated download does not."""
+    if ext == "png":
+        return data.rstrip().endswith(b"IEND\xaeB`\x82")
+    return data.rstrip().endswith(b"\xff\xd9")
+
+
+def image_size(data: bytes, ext: str) -> tuple[int, int] | None:
+    """Dimensions from the header. None when the header is not where it should be."""
+    if ext == "png":
+        if len(data) < 24 or data[12:16] != b"IHDR":
+            return None
+        return (int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big"))
+    i = 2
+    while i + 9 < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            return (int.from_bytes(data[i + 7:i + 9], "big"),
+                    int.from_bytes(data[i + 5:i + 7], "big"))
+        i += 2 + int.from_bytes(data[i + 2:i + 4], "big")
+    return None
+
+
+image_dir = ROOT / "images"
+mislabelled, unreadable, truncated, degenerate = [], [], [], []
+for image in sorted(image_dir.iterdir()) if image_dir.is_dir() else []:
+    if not image.is_file():
+        continue
+    blob = image.read_bytes()
+    actual = image_format(blob)
+    if actual is None:
+        unreadable.append(f"{image.name} ({len(blob)} bytes)")
+        continue
+    if image.suffix.lstrip(".").lower() != actual:
+        mislabelled.append(f"{image.name} is {actual}")
+    if not image_complete(blob, actual):
+        truncated.append(image.name)
+    size = image_size(blob, actual)
+    if size is None or min(size) < 2:
+        degenerate.append(f"{image.name} {size}")
+
+check(
+    "M1",
+    "Every image file is a decodable image",
+    "FAIL",
+    not unreadable,
+    f"{len(unreadable)} files under images/ are not JPEG or PNG — an HTML error page or an empty "
+    f"download looks exactly like this. e.g. {unreadable[:5]}",
+)
+check(
+    "M2",
+    "File extension matches the actual format",
+    "FAIL",
+    not mislabelled,
+    f"{len(mislabelled)} images are served under the wrong extension. e.g. {mislabelled[:5]}",
+)
+check(
+    "M3",
+    "No image is truncated",
+    "FAIL",
+    not truncated,
+    f"{len(truncated)} images lack their format's end marker, so the download did not finish. "
+    f"e.g. {truncated[:5]}",
+)
+check(
+    "M4",
+    "Every image reports usable dimensions",
+    "FAIL",
+    not degenerate,
+    f"{len(degenerate)} images have an unreadable or degenerate header. e.g. {degenerate[:5]}",
+)
+
+# --------------------------------------------------------------------------- #
 # E — evidence identity is queryable, and the documented policy is the real one
 # --------------------------------------------------------------------------- #
 # `sourceUrl` used to hold either a URL or a sentence, and whether a second source agreed was
