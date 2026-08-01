@@ -523,14 +523,22 @@ check(
     f"e.g. {unverifiable[:5]}",
 )
 
-stated = re.search(r"(\d+)\s+units rest on owner attestation alone", handover)
+# Both documents state this number, and both are read by someone deciding whether owner evidence
+# is acceptable — HANDOVER by a human, CLAUDE.md by an agent. A number stated twice drifts twice.
+attestation_only = by_provider.get("owner-attestation", 0)
+policy_docs = {"HANDOVER.md": handover,
+               "CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8")}
+disagreeing = {}
+for name, text in policy_docs.items():
+    found = re.search(r"\*?\*?(\d+) units rest on owner attestation alone", text)
+    if not found or int(found.group(1)) != attestation_only:
+        disagreeing[name] = found.group(1) if found else "no such statement"
 check(
     "E4",
-    "HANDOVER states the real number of attestation-only units",
+    "Every document stating the attestation-only count states the real one",
     "FAIL",
-    bool(stated) and int(stated.group(1)) == by_provider.get("owner-attestation", 0),
-    f"data has {by_provider.get('owner-attestation', 0)} attestation-only units; HANDOVER says "
-    f"{stated.group(1) if stated else 'nothing matching'}",
+    not disagreeing,
+    f"data has {attestation_only} attestation-only units; {disagreeing}",
 )
 
 # The log is a journal, not a projection of the store: it records what was observed and when, and
