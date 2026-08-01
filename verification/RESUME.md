@@ -28,7 +28,7 @@ root.
 | Finish units covered by a complete official manifest | **4** — English `DF 10`, `PPS3 LOR 143`, `PPS7 JTG 117`, `PPS8 JTG 117` |
 | Finish units with unresolved product mapping | **175** |
 
-Run `verification/review_integrity.ps1` after any write pass — 27 structural checks over language
+Run `verification/review_integrity.py` after any write pass — 27 structural checks over language
 claims, cards, images, evidence, finish units, printing IDs, product mappings, and stamp roles.
 
 Open items are also published as a browsable page: `verification/open-items.html`.
@@ -133,7 +133,7 @@ All three databases point the same way, and all three are wrong:
 
 Six specimens were photographed and their card text read off — `Relaxo` / `Ronflex` / `Snorlax`, ability `Immunität` / `Vaccin` / `Immunità` / `Inmunidad` / `Imunidade`, all bearing `XY179`, Ken Sugimori and ©2016. Had the absence-argument been applied here as it was for the Asian promos, it would have produced four false contradictions.
 
-**Grade physical evidence explicitly.** `sourceType` distinguishes *photographed specimen* from *owner attestation*; `passes/verify_xypr_pt.ps1` reports how many units rest on attestation alone. That count is currently **0**.
+**Grade physical evidence explicitly.** `sourceType` distinguishes *photographed specimen* from *owner attestation*; `archive/passes/verify_xypr_pt.ps1` reports how many units rest on attestation alone. That count is currently **0**.
 
 At this checkpoint, every card had at least one confirmed language. The then-25 open units were
 all *additional* language claims on cards that were otherwise evidenced.
@@ -142,7 +142,7 @@ all *additional* language claims on cards that were otherwise evidenced.
 
 `$EV` (evidence text) and `$ev` (log array) are **the same variable**. Declaring `$ev=@()` after `$EV='...'` silently wipes the text, and units get written with an empty or array-typed `evidence` while still being marked `confirmed`. It does not throw. Same class of bug as `$R`/`$r` earlier.
 
-`audit_evidence.ps1` checks every resolved unit for a non-trivial string evidence field — **run it after every write pass**. It caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier.
+`audit_evidence.py` checks every resolved unit for a non-trivial string evidence field — **run it after every write pass**. It caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier.
 
 ### Traditional Chinese prints can live under a different set entirely
 
@@ -345,7 +345,7 @@ Fully closed: Cardmarket advertises **17 languages**, the expansion article stat
 
 Simplified-Chinese-exclusive products have their own Bulbapedia articles with the suffix **`(ATCG)`**, e.g. `Dynamax_Clash_(ATCG)`, `Collection_151_(ATCG)`, `Shining_Synergy_(ATCG)`. These carry full set lists and are the correct source.
 
-The blocker is **extraction truncation**: these set lists are long, and the fetch returns the head of the table only. `Collection 151` confirmed 143/151 but cut off before 169; `Shining Synergy` truncated before any Snorlax row. Add new findings to `passes/verify_manual.ps1`, which applies hand-verified rows.
+The blocker is **extraction truncation**: these set lists are long, and the fetch returns the head of the table only. `Collection 151` confirmed 143/151 but cut off before 169; `Shining Synergy` truncated before any Snorlax row. Add new findings to `archive/passes/verify_manual.ps1`, which applies hand-verified rows.
 
 Dead ends, do not retry: `pokemonkorea.co.kr` (410 to scripts), `pokemon.cardmon.com` (host gone), `ptcg.cn` (a Magic: The Gathering site, not Pokémon), `pokeos.com` (JS-driven). **52poke wiki** is scriptable via `wiki.52poke.com/api.php` but names card pages by *Japanese* set code (`卡比兽（S1H）`), so it evidences the card, not a Simplified Chinese printing.
 
@@ -430,7 +430,7 @@ location and can be rerun from any checkout or working directory.
 | `finish_units.json` | **Finish state store** — set number × language, logical printings, evidence, and product mappings |
 | `finish_overrides.json` | Curated special finish/pattern/stamp/size and mapping facts; edit this, not generated finish units |
 | `FINISH_SOURCES.md` | Finish evidence hierarchy, confirmed cases, exact source endpoints, and next research targets |
-| `verify_finish_sources.ps1` | Live check of TCGCSV product identity and the positive subtypes declared in `finish_overrides.json` |
+| `verify_finish_sources.py` | Live check of TCGCSV product identity and the positive subtypes declared in `finish_overrides.json` |
 | `FINISH_REVIEW.json` / `.csv` | The remaining finish, reverse/mirror-pattern, and product-mapping queue |
 | `state.json` | Last completed phase |
 | `cache/` | Raw API responses. Deleting a file forces a refetch; keeping it makes resume instant. |
@@ -439,12 +439,12 @@ location and can be rerun from any checkout or working directory.
 
 ```powershell
 # Run from the repository root.
-pwsh -File verification/review_integrity.ps1      # confirm the canonical state is coherent
+python verification/review_integrity.py      # confirm the canonical state is coherent
 python verification/review_findings.py            # cross-artifact and publication checks
-pwsh -File verification/verify_finish_sources.ps1 # validate exact live TCGCSV IDs/subtypes
+python verification/verify_finish_sources.py # validate exact live TCGCSV IDs/subtypes
 
 # Layout: verification/*.ps1 are the five recurring tools (report, audit_evidence,
-# classify_manual, verify_finish_sources, review_integrity). verification/passes/ holds every
+# classify_manual, verify_finish_sources, review_integrity). verification/archive/passes/ holds every
 # completed one-shot pass in chronological naming; do not rerun those archived passes. All
 # PowerShell paths derive from $PSScriptRoot. The dataset build
 # pipeline lives in scripts/ (mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes).

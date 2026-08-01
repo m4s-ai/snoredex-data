@@ -74,8 +74,8 @@ Chromium installation.
 ```console
 python -m pip install -r requirements.txt
 python -m playwright install chromium
-pwsh -File verification/review_integrity.ps1
-pwsh -File verification/audit_evidence.ps1
+python verification/review_integrity.py
+python verification/audit_evidence.py
 python verification/review_findings.py
 python verification/test_site.py
 ```
@@ -241,7 +241,7 @@ evidence ladder and the confirmed Prize Pack, promo, stamped, deck, and jumbo ca
 
 Two checks guard this layer: `python verification/review_findings.py` (cross-artifact
 consistency, publication readiness, and the checklist regression fixtures) and
-`pwsh -File verification/review_integrity.ps1` (structural invariants). Neither asserts counts —
+`python verification/review_integrity.py` (structural invariants). Neither asserts counts —
 rising numbers are verification progress, not regressions.
 
 Run `python scripts/finishes.py` after rebuilding the main dataset. It caches TCGdex responses in

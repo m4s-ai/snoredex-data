@@ -7,7 +7,7 @@ name: Release gate
 #
 #  * Generators run and their output is compared against what is committed. A generated artifact
 #    that disagrees with its inputs fails here rather than being published.
-#  * Counts are never asserted. review_integrity.ps1 reports them as drift, because closing an
+#  * Counts are never asserted. review_integrity.py reports them as drift, because closing an
 #    open verification unit is the project's goal, and a gate that blocks on progress is a gate
 #    people learn to bypass.
 
@@ -44,13 +44,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # The browser suite runs on Linux only. Windows is here to prove the Python is
+      # path-portable — the assumption the old PowerShell only satisfied by accident of its
+      # provider normalising backslashes — and rendering is not path handling. Accepted cost: a
+      # Windows-only rendering regression would reach main unseen. The page is generated once and
+      # drawn by the same Chromium on both platforms, so that risk is judged small; if the site
+      # ever grows platform-specific behaviour, restore this leg rather than inherit the decision.
       - name: Install Chromium with Linux dependencies
         if: runner.os == 'Linux'
         run: python -m playwright install --with-deps chromium
-
-      - name: Install Chromium on Windows
-        if: runner.os == 'Windows'
-        run: python -m playwright install chromium
 
       # --- syntax: every script must parse before anything is trusted to run ---
       - name: Parse every Python file
@@ -71,32 +73,16 @@ jobs:
               sys.exit("\n".join(bad))
           PY
 
-      - name: Parse every PowerShell file
-        shell: pwsh
-        run: |
-          $bad = @()
-          Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object {
-            $errors = $null
-            [System.Management.Automation.Language.Parser]::ParseFile(
-              $_.FullName, [ref]$null, [ref]$errors) | Out-Null
-            if ($errors.Count) { $bad += "$($_.FullName): $($errors[0].Message)" }
-          }
-          Write-Host "parsed $((Get-ChildItem -Recurse -Filter *.ps1).Count) PowerShell files"
-          if ($bad.Count) { $bad | ForEach-Object { Write-Error $_ }; exit 1 }
-
       # --- integrity: structural invariants, in both suites ---
-      - name: Structural integrity (PowerShell)
-        shell: pwsh
-        run: pwsh -File verification/review_integrity.ps1
+      - name: Structural integrity
+        run: python verification/review_integrity.py
 
       - name: Evidence audit
-        shell: pwsh
-        run: pwsh -File verification/audit_evidence.ps1
+        run: python verification/audit_evidence.py
 
       - name: Live finish-source verification
         if: runner.os == 'Linux'
-        shell: pwsh
-        run: pwsh -File verification/verify_finish_sources.ps1
+        run: python verification/verify_finish_sources.py
 
       - name: Cross-artifact consistency and publication readiness
         run: python verification/review_findings.py
@@ -120,6 +106,7 @@ jobs:
 
       # --- behaviour: the page has to actually work ---
       - name: Browser tests
+        if: runner.os == 'Linux'
         run: python verification/test_site.py
 
       # --- artifact hygiene ---

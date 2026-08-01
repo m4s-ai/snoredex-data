@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent database review harness.
 
-Complements `verification/review_integrity.ps1`. That script validates invariants
+Complements `verification/review_integrity.py`. That script validates invariants
 *within* each store; this one validates consistency *between* the state stores and
 the derived artifacts that consumers and the future public site actually read.
 
@@ -29,6 +29,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from checks import Check, Note, Suite
+
 ROOT = Path(__file__).resolve().parent.parent
 
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
@@ -38,7 +40,9 @@ STRENGTH = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confir
 # compared case-insensitively. Learned from GitHub's own validator, not from any published schema.
 RESERVED_DROPDOWN_OPTIONS = {"none"}
 
-results: list[tuple[str, str, str, bool, str]] = []
+# The check protocol is shared with `review_integrity.py` — one implementation of how a check is
+# declared and when the process exits non-zero. The output format below stays this suite's own.
+suite = Suite()
 
 
 def load(rel: str) -> Any:
@@ -47,7 +51,11 @@ def load(rel: str) -> Any:
 
 
 def check(check_id: str, title: str, severity: str, ok: bool, detail: str = "") -> None:
-    results.append((check_id, title, severity, ok, detail))
+    """Declare a finding. Severity INFO reports without ever failing the run."""
+    if severity == "INFO":
+        suite.note(check_id, title, detail)
+    else:
+        suite.check(title, ok, detail, ident=check_id)
 
 
 def norm_number(value: Any) -> str:
@@ -217,7 +225,7 @@ check(
     "FAIL",
     not jtg_prose_wrong,
     f"README describes regular JTG 117 as non-holo + holo + reverse holo; the verified model and "
-    f"review_integrity.ps1 check 'regular JTG 117 discloses holo + reverse only' both say "
+    f"review_integrity.py check 'regular JTG 117 discloses holo + reverse only' both say "
     f"{jtg_finishes}. The non-holo printing belongs to the Prize Pack product, not the regular card.",
 )
 
@@ -627,39 +635,39 @@ check(
     f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
 )
 
-def synthetic_merge_commit() -> str | None:
-    """GitHub's disposable `refs/pull/N/merge` commit, when the workflow checked one out.
+def published_refs() -> list[str]:
+    """Every ref this repository publishes, minus GitHub's synthetic pull-request merge refs.
 
-    A `pull_request` workflow builds a merge commit that exists only inside the run. Its
-    identity fields belong to GitHub rather than to either branch, so auditing them reports a
-    finding nobody can fix. Excluding that one commit is the whole exemption — every other
-    reachable commit is still audited, because making a repository public publishes every ref,
-    not merely the ancestry of the branch that happens to be checked out.
+    A `pull_request` workflow builds a `refs/pull/N/merge` commit that exists only to be tested.
+    Its identity fields belong to GitHub and to whoever opened the pull request, not to either
+    branch, so auditing them reports a finding nobody can fix by changing this repository.
+
+    This used to exempt exactly one commit — the one that happened to be `HEAD` — which made the
+    verdict depend on the checkout rather than on the repository: the same commit passed on the
+    Windows runner and failed on the Linux one, twice, on #49. Excluding the whole pull namespace
+    is what makes the check deterministic. Branches and tags are still audited in full, because
+    making a repository public publishes every one of them.
     """
-    if os.environ.get("GITHUB_EVENT_NAME") != "pull_request":
-        return None
     try:
-        parents = subprocess.check_output(
-            ["git", "rev-list", "--parents", "-n", "1", "HEAD"], cwd=ROOT, text=True
+        refs = subprocess.check_output(
+            ["git", "for-each-ref", "--format=%(refname)", "refs/heads", "refs/tags",
+             "refs/remotes"], cwd=ROOT, text=True
         ).split()
     except (OSError, subprocess.CalledProcessError):
-        return None
-    # sha + two parents == a merge commit, which is what the PR checkout produces.
-    return parents[0] if len(parents) == 3 else None
+        return []
+    return [ref for ref in refs if "/pull/" not in ref]
 
 
 try:
-    excluded_commit = synthetic_merge_commit()
+    audited = published_refs()
     identity_fields = subprocess.check_output(
-        ["git", "log", "--all", "--format=%H%x00%ae%x00%ce"], cwd=ROOT
-    ).decode("utf-8", errors="replace").splitlines()
+        ["git", "log", "--format=%H%x00%ae%x00%ce"] + audited, cwd=ROOT
+    ).decode("utf-8", errors="replace").splitlines() if audited else []
 except (OSError, subprocess.CalledProcessError):
-    excluded_commit, identity_fields = None, ["\0commit metadata unavailable\0"]
+    identity_fields = ["\0commit metadata unavailable\0"]
 personal_commit_emails = set()
 for record in identity_fields:
     commit_sha, _, addresses = record.partition("\0")
-    if excluded_commit and commit_sha == excluded_commit:
-        continue
     for email in addresses.split("\0"):
         email = email.strip()
         if "@" in email and "noreply" not in email.lower():
@@ -728,20 +736,30 @@ check("X2", "Browser dependency is pinned in a manifest", "FAIL",
       bool(re.search(r"^playwright==\d+\.\d+\.\d+$", requirements, re.MULTILINE)),
       "requirements.txt must pin Playwright")
 
-active_ps = list((ROOT / "scripts").glob("*.ps1")) + list((ROOT / "verification").glob("*.ps1"))
-legacy_writers = []
-direct_io = []
-for path in active_ps:
-    text = path.read_text(encoding="utf-8-sig")
-    if re.search(r"(?:Set-Content|Add-Content|Export-Csv).*?-Encoding\s+utf8(?!NoBOM)", text):
-        legacy_writers.append(str(path.relative_to(ROOT)))
-for path in ROOT.rglob("*.ps1"):
-    if re.search(r"\[System\.IO\.", path.read_text(encoding="utf-8-sig"), re.IGNORECASE):
-        direct_io.append(str(path.relative_to(ROOT)))
-check("X3", "Active PowerShell writers use UTF-8 without BOM", "FAIL", not legacy_writers,
-      f"legacy writers: {legacy_writers}")
-check("X4", "PowerShell path portability is not bypassed through direct System.IO calls", "FAIL",
-      not direct_io, f"direct System.IO users: {direct_io}")
+# The archive is the record of how the committed evidence was produced. A rerun of it cannot be
+# reproduced and an edit of it cannot be detected by reading the file, so the hashes are the
+# check. This replaced X3 "Active PowerShell writers use UTF-8 without BOM" and X4 "PowerShell
+# path portability is not bypassed through direct System.IO calls" once no PowerShell was left to
+# police: both only ever constrained scripts that ran, and none do (#50).
+archive = ROOT / "verification" / "archive"
+manifest_path = archive / "MANIFEST.json"
+archive_drift: list[str] = []
+if not manifest_path.exists():
+    archive_drift.append("verification/archive/MANIFEST.json is missing")
+else:
+    recorded = json.loads(manifest_path.read_text(encoding="utf-8"))["files"]
+    present = {
+        str(path.relative_to(archive)).replace("\\", "/"): hashlib.sha256(
+            path.read_bytes()).hexdigest()
+        for path in sorted(archive.rglob("*"))
+        if path.is_file() and path.name != "MANIFEST.json"
+    }
+    archive_drift.extend(f"modified: {name}" for name, digest in present.items()
+                         if name in recorded and recorded[name] != digest)
+    archive_drift.extend(f"added: {name}" for name in present if name not in recorded)
+    archive_drift.extend(f"removed: {name}" for name in recorded if name not in present)
+check("X3", "The archived one-shot record is unmodified", "FAIL", not archive_drift,
+      f"{len(archive_drift)} archive difference(s): {archive_drift[:5]}")
 
 bom_files = []
 for raw_name in tracked:
@@ -1263,20 +1281,23 @@ check(
 # Report
 # --------------------------------------------------------------------------- #
 
+def emit(result: Check | Note) -> None:
+    """This suite's output format, unchanged by the move onto the shared protocol."""
+    if isinstance(result, Note):
+        print(f"[info] {result.ident} {result.name}: {result.detail}")
+        return
+    if result.ok:
+        print(f"[ ok ] {result.ident} {result.name}")
+        return
+    print(f"[FAIL] {result.ident} {result.name}")
+    if result.detail:
+        print(f"       {result.detail}")
+
+
 def main() -> int:
-    failures = 0
-    for check_id, title, severity, ok, detail in results:
-        if severity == "INFO":
-            print(f"[info] {check_id} {title}: {detail}")
-            continue
-        if ok:
-            print(f"[ ok ] {check_id} {title}")
-        else:
-            failures += 1
-            print(f"[FAIL] {check_id} {title}")
-            if detail:
-                print(f"       {detail}")
-    total = sum(1 for r in results if r[2] != "INFO")
+    suite.render(emit)
+    total = len(suite.checks)
+    failures = len(suite.failed)
     print(f"\n{total - failures}/{total} checks passed, {failures} failing.")
     return 1 if failures else 0
 
