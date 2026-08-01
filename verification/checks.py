@@ -40,6 +40,28 @@ def read_json(path: Path) -> Any:
         return json.load(handle)
 
 
+def format_table(rows: list[dict], columns: list[str] | None = None) -> list[str]:
+    """Reproduce `Format-Table -Auto`: columns sized to content, underlined, single-space gaps."""
+    if not rows:
+        return []
+    names = columns or list(rows[0])
+    widths = {c: max(len(c), max(len(str(row.get(c, ""))) for row in rows)) for c in names}
+    lines = [" ".join(c.ljust(widths[c]) for c in names).rstrip(),
+             " ".join("-" * widths[c] for c in names).rstrip()]
+    lines.extend(" ".join(str(row.get(c, "")).ljust(widths[c]) for c in names).rstrip()
+                 for row in rows)
+    return lines
+
+
+def write_json(path: Path, payload: Any) -> None:
+    """Write JSON the way `ConvertTo-Json | Set-Content -Encoding utf8NoBOM` did.
+
+    Two spaces, no BOM, non-ASCII left as itself, and a trailing newline. The committed exports
+    were produced by that pipeline, so anything else churns them on the next run.
+    """
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 @dataclass
 class Check:
     """A structural assertion. Failing one fails the run."""

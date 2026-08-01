@@ -104,7 +104,7 @@ verification/
   FINISH_REVIEW.json / .csv   The remaining finish, pattern and product-mapping review queue.
   RESUME.md                   The verification playbook (read before editing evidence).
   state.json                  Last completed phase.
-  report.ps1                  Regenerates coverage + all export files.
+  report.py                   Regenerates coverage + all export files.
   audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.ps1         (Re)tags structurally undocumentable units.
   verify_finish_sources.ps1   Rechecks exact TCGCSV product IDs and expected positive subtypes.
@@ -214,7 +214,7 @@ Brazilian Prize Pack confirmations were obtained.
 # Run from the repository root.
 python verification/review_integrity.py     # confirm clean starting state
 python verification/review_findings.py           # cross-artifact consistency (no pwsh needed)
-pwsh -File verification/report.ps1               # regenerate exports if needed
+python verification/report.py               # regenerate exports if needed
 # ... do verification work in a new verification/passes/verify_*.ps1 script ...
 python verification/audit_evidence.py       # after any write
 python scripts/editions.py                       # if edition data changed
