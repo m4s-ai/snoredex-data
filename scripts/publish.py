@@ -69,6 +69,11 @@ FILES = [
 TREES = [
     ("site", {".css", ".js"}),
     ("images", {".jpg", ".jpeg", ".png", ".webp"}),
+    # Owner specimen photographs, added as claims requiring them arise (#32). Listed here so a
+    # photograph is published when it lands rather than silently dropped from the artifact, which
+    # is what happens to anything not allowlisted. Publication rests on the owner decision in
+    # LICENSE.md, which covers the category rather than a fixed list; the directory need not exist.
+    ("verification/specimens", {".jpg", ".jpeg", ".png", ".webp"}),
     ("LICENSES", {".md", ".txt"}),
 ]
 

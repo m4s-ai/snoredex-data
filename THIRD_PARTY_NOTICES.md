@@ -17,6 +17,21 @@ by** any of them. No claim of ownership is made over any Pokémon intellectual p
 Cardmarket's product image host. The depicted artwork is the rights holders' property; the card
 photography and hosting are Cardmarket's. They are included for identification only.
 
+**Specimen photographs.** Files in `verification/specimens/` are photographs the collection owner
+took of cards they hold, published as evidence for claims no database records — the printing runs
+where the physical card is the only source. Three parties are distinguishable in one of these
+files and only one of them is the licensor:
+
+- the **photograph** is the licensor's, granted under `LICENSE.md` §2;
+- the **card artwork** in it is the rights holders' and is granted by nobody here;
+- nothing personal is depicted, and the images carry no identifiers — the evidence class is
+  anonymous exactly as the attestations are.
+
+They are added over time rather than in one batch, as claims requiring them arise. Publication
+rests on the owner decision recorded in `LICENSE.md`, which covers the category rather than a
+fixed list. A photograph of a card the owner does **not** hold belongs to whoever took it and is
+not covered: it is a third-party photograph under `LICENSE.md` §3.
+
 ## Data providers
 
 Each provider below appears in the generated source registry

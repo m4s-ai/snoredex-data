@@ -300,6 +300,422 @@ check(
 
 
 # --------------------------------------------------------------------------- #
+# B — the documented build is the build that can actually run
+# --------------------------------------------------------------------------- #
+# README and HANDOVER used to present one pipeline starting at `mkunits`, which no clean clone can
+# execute: the harvest reads _chunk1..3.json, which are not in the repository, and `mkunits`
+# rebuilds units.json from scratch and discards the verification state (#28). Following the
+# documented order destroyed data.
+
+handover = (ROOT / "HANDOVER.md").read_text(encoding="utf-8")
+
+# Reads inputs that are not in the repository. Historical record, never part of a rebuild.
+HARVEST_STEPS = {"build.ps1", "join.ps1", "getimages.ps1", "finalize.ps1"}
+# Runnable from what is committed. The gate regenerates these and diffs the result.
+LIVE_STEPS = {
+    "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
+    "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
+    "open_items.py", "site.py", "editions.py", "publish.py",
+}
+
+missing_steps = sorted(s for s in LIVE_STEPS | HARVEST_STEPS | {"mkunits.ps1"}
+                       if not (ROOT / "scripts" / s).is_file())
+check(
+    "B1",
+    "Every documented build step exists",
+    "FAIL",
+    not missing_steps,
+    f"scripts/ is missing {missing_steps}",
+)
+
+# A live step must not depend on an input the harvest was supposed to leave behind.
+absent_inputs = sorted(p.name for p in
+                       [ROOT / "_chunk1.json", ROOT / "_cards_stage1.json",
+                        ROOT / "_cards_stage2.json", ROOT / "_cards_stage3.json"]
+                       if p.exists())
+live_sources = {s: (ROOT / "scripts" / s).read_text(encoding="utf-8") for s in LIVE_STEPS}
+hard_dependents = sorted(
+    name for name, body in live_sources.items()
+    if re.search(r"_chunk|_cards_stage", body) and "snorlax_cards.json" not in body
+)
+check(
+    "B2",
+    "No live build step depends on a harvest artifact without a committed fallback",
+    "FAIL",
+    not hard_dependents,
+    f"{hard_dependents} read a stage or chunk file with no fallback to snorlax_cards.json, so a "
+    f"clean clone cannot run them"
+    + (f" (present here: {absent_inputs})" if absent_inputs else ""),
+)
+
+# The destructive one must never be presented as part of a rebuild. Checked as prose because that
+# is where the instruction lived, and prose is what a reader follows.
+rebuild_docs = {"README.md": readme, "HANDOVER.md": handover}
+resurrected = [
+    name for name, text in rebuild_docs.items()
+    if re.search(r"mkunits\s*(->|→)\s*build", text)
+]
+check(
+    "B3",
+    "mkunits is not documented as the start of a rebuild",
+    "FAIL",
+    not resurrected,
+    f"{resurrected} present mkunits as a build step. It rebuilds units.json with fresh ids and "
+    f"discards the verification state of every unit.",
+)
+
+check(
+    "B4",
+    "Docs state that the harvest is not reproducible",
+    "FAIL",
+    all(re.search(r"not reproducible|nicht reproduzierbar", text) for text in rebuild_docs.values()),
+    "README and HANDOVER must both say the harvest cannot be re-run, or the next reader will try.",
+)
+
+# --------------------------------------------------------------------------- #
+# M — every referenced image is the format its name claims, and decodes
+# --------------------------------------------------------------------------- #
+# R5 pairs references with filenames. That cannot see inside a file, so an HTML error page, a
+# truncated download or a PNG called .jpg all passed it (#34). These read the bytes.
+#
+# Structural rather than pixel-accurate, and stdlib-only on purpose: a decoder would be a new
+# dependency in the release gate to prove a property the container already states. Truncation is
+# what actually happens to a downloaded file, and both formats mark their own end.
+
+IMAGE_MAGIC = {b"\x89PNG\r\n\x1a\n": "png", b"\xff\xd8\xff": "jpg"}
+
+
+def image_format(data: bytes) -> str | None:
+    return next((ext for sig, ext in IMAGE_MAGIC.items() if data.startswith(sig)), None)
+
+
+def image_complete(data: bytes, ext: str) -> bool:
+    """Whether the file carries its own end marker, which a truncated download does not."""
+    if ext == "png":
+        return data.rstrip().endswith(b"IEND\xaeB`\x82")
+    return data.rstrip().endswith(b"\xff\xd9")
+
+
+def image_size(data: bytes, ext: str) -> tuple[int, int] | None:
+    """Dimensions from the header. None when the header is not where it should be."""
+    if ext == "png":
+        if len(data) < 24 or data[12:16] != b"IHDR":
+            return None
+        return (int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big"))
+    i = 2
+    while i + 9 < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            return (int.from_bytes(data[i + 7:i + 9], "big"),
+                    int.from_bytes(data[i + 5:i + 7], "big"))
+        i += 2 + int.from_bytes(data[i + 2:i + 4], "big")
+    return None
+
+
+image_dir = ROOT / "images"
+mislabelled, unreadable, truncated, degenerate = [], [], [], []
+for image in sorted(image_dir.iterdir()) if image_dir.is_dir() else []:
+    if not image.is_file():
+        continue
+    blob = image.read_bytes()
+    actual = image_format(blob)
+    if actual is None:
+        unreadable.append(f"{image.name} ({len(blob)} bytes)")
+        continue
+    if image.suffix.lstrip(".").lower() != actual:
+        mislabelled.append(f"{image.name} is {actual}")
+    if not image_complete(blob, actual):
+        truncated.append(image.name)
+    size = image_size(blob, actual)
+    if size is None or min(size) < 2:
+        degenerate.append(f"{image.name} {size}")
+
+check(
+    "M1",
+    "Every image file is a decodable image",
+    "FAIL",
+    not unreadable,
+    f"{len(unreadable)} files under images/ are not JPEG or PNG — an HTML error page or an empty "
+    f"download looks exactly like this. e.g. {unreadable[:5]}",
+)
+check(
+    "M2",
+    "File extension matches the actual format",
+    "FAIL",
+    not mislabelled,
+    f"{len(mislabelled)} images are served under the wrong extension. e.g. {mislabelled[:5]}",
+)
+check(
+    "M3",
+    "No image is truncated",
+    "FAIL",
+    not truncated,
+    f"{len(truncated)} images lack their format's end marker, so the download did not finish. "
+    f"e.g. {truncated[:5]}",
+)
+check(
+    "M4",
+    "Every image reports usable dimensions",
+    "FAIL",
+    not degenerate,
+    f"{len(degenerate)} images have an unreadable or degenerate header. e.g. {degenerate[:5]}",
+)
+
+# --------------------------------------------------------------------------- #
+# E — evidence identity is queryable, and the documented policy is the real one
+# --------------------------------------------------------------------------- #
+# `sourceUrl` used to hold either a URL or a sentence, and whether a second source agreed was
+# buried in prose. `providerId`, `sourceRef` and `corroborated` make all three queryable (#32).
+
+registry = load("verification/source_registry.json")
+provider_by_id = {p["providerId"]: p for p in registry["providers"]}
+resolved_units = [u for u in units if u["status"] in ("confirmed", "contradicted")]
+
+prose_urls = [u["unitId"] for u in resolved_units
+              if u.get("sourceUrl") and not str(u["sourceUrl"]).startswith("http")]
+check(
+    "E1",
+    "sourceUrl holds a URL or nothing, never prose",
+    "FAIL",
+    not prose_urls,
+    f"{len(prose_urls)} resolved units describe their source in the URL field. e.g. {prose_urls[:5]}",
+)
+
+undeclared = [u["unitId"] for u in resolved_units
+              if u.get("providerId") not in provider_by_id]
+check(
+    "E2",
+    "Every resolved unit names a declared provider",
+    "FAIL",
+    not undeclared,
+    f"{len(undeclared)} units carry no providerId or one absent from the registry. "
+    f"e.g. {undeclared[:5]}",
+)
+
+# The policy, stated once here and in HANDOVER.md: a single non-URL source may confirm a unit, and
+# the count is published rather than left to be discovered. Attestation and a photographed
+# specimen are different classes — the registry ranks the photograph tier 1 and bare attestation
+# tier 2 — so they are counted separately.
+single_source = [u for u in resolved_units
+                 if u.get("providerId") in provider_by_id
+                 and provider_by_id[u["providerId"]]["category"] == "non-url-evidence"
+                 and not u.get("corroborated")]
+by_provider = Counter(u["providerId"] for u in single_source)
+
+# Keyed on the absence of a URL, not on the provider's category. A URL is checkable by anyone,
+# whatever its tier; evidence with no URL is checkable by nobody, so only the strong classes may
+# carry a claim alone. Keying on category instead would make this vacuous — the only categories
+# that reach it would be the tier 1 and 2 ones it is meant to police.
+unverifiable = [u["unitId"] for u in resolved_units
+                if not u.get("sourceUrl")
+                and not u.get("corroborated")
+                and u.get("providerId") in provider_by_id
+                and provider_by_id[u["providerId"]]["authorityTier"] > 2]
+check(
+    "E3",
+    "A claim with no URL and no corroboration rests on a tier 1-2 source",
+    "FAIL",
+    not unverifiable,
+    f"{len(unverifiable)} units are confirmed by a source that is neither checkable nor strong. "
+    f"e.g. {unverifiable[:5]}",
+)
+
+# Both documents state this number, and both are read by someone deciding whether owner evidence
+# is acceptable — HANDOVER by a human, CLAUDE.md by an agent. A number stated twice drifts twice.
+attestation_only = by_provider.get("owner-attestation", 0)
+policy_docs = {"HANDOVER.md": handover,
+               "CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8")}
+disagreeing = {}
+for name, text in policy_docs.items():
+    found = re.search(r"\*?\*?(\d+) units rest on owner attestation alone", text)
+    if not found or int(found.group(1)) != attestation_only:
+        disagreeing[name] = found.group(1) if found else "no such statement"
+check(
+    "E4",
+    "Every document stating the attestation-only count states the real one",
+    "FAIL",
+    not disagreeing,
+    f"data has {attestation_only} attestation-only units; {disagreeing}",
+)
+
+# The log is a journal, not a projection of the store: it records what was observed and when, and
+# replaying it does not reconstruct state. What it must do is account for every resolved unit.
+logged = set()
+for line in (ROOT / "verification" / "evidence.jsonl").read_text(encoding="utf-8").splitlines():
+    if line.strip():
+        logged.add(json.loads(line).get("unitId"))
+unlogged = [u["unitId"] for u in resolved_units if u["unitId"] not in logged]
+check(
+    "E5",
+    "Every resolved unit appears in the evidence journal",
+    "FAIL",
+    not unlogged,
+    f"{len(unlogged)} resolved units have no entry in evidence.jsonl. e.g. {unlogged[:5]}",
+)
+
+check(
+    "E6",
+    "Evidence provenance",
+    "INFO",
+    True,
+    f"{len(resolved_units)} resolved units across {len({u['providerId'] for u in resolved_units})} "
+    f"providers; {sum(1 for u in resolved_units if u.get('corroborated'))} corroborated by more "
+    f"than one; {len(single_source)} resting on a single non-URL source "
+    f"({', '.join(f'{n} {p}' for p, n in sorted(by_provider.items()))}).",
+)
+
+# --------------------------------------------------------------------------- #
+# S7-S10 — physical specimens are identified, not described
+# --------------------------------------------------------------------------- #
+# A claim resting on a card the owner holds used to say "(physical specimen supplied by the user)"
+# in prose, which cannot be cited twice or pointed at (#32). Each inspected card now has a stable
+# id, and a claim references it. Photographs arrive over time, so every check here has to pass
+# both while `photograph` is null and after a file lands.
+
+specimen_doc = load("verification/specimens.json")
+specimens = specimen_doc["specimens"]
+specimen_by_id = {s["specimenId"]: s for s in specimens}
+specimen_dir = ROOT / "verification" / "specimens"
+
+duplicate_specimens = [sid for sid, n in Counter(s["specimenId"] for s in specimens).items() if n > 1]
+check(
+    "S7",
+    "Specimen ids are unique",
+    "FAIL",
+    not duplicate_specimens,
+    f"duplicated: {duplicate_specimens}",
+)
+
+# Every specimen: reference resolves, and identifies the same printing as the unit citing it.
+dangling, mismatched = [], []
+for unit in resolved_units:
+    ref = str(unit.get("sourceRef") or "")
+    if not ref.startswith("specimen:"):
+        continue
+    specimen = specimen_by_id.get(ref.split(":", 1)[1])
+    if specimen is None:
+        dangling.append(f"{unit['unitId']} -> {ref}")
+        continue
+    same = (specimen["setCode"] == unit["setCode"]
+            and specimen["number"] == str(unit["number"])
+            and specimen["variant"] == (unit.get("variant") or "base")
+            and specimen["language"] == unit["language"])
+    if not same:
+        mismatched.append(f"{unit['unitId']} cites {ref}")
+check(
+    "S8",
+    "Every specimen reference resolves to the printing it is cited for",
+    "FAIL",
+    not dangling and not mismatched,
+    f"unresolved={dangling[:5]} wrong-printing={mismatched[:5]}",
+)
+
+# A declared photograph must exist and be a real image; a missing one must be declared null rather
+# than pointed at a file that is not there.
+photo_problems = []
+for specimen in specimens:
+    name = specimen.get("photograph")
+    if name is None:
+        continue
+    path = specimen_dir / name
+    if not path.is_file():
+        photo_problems.append(f"{specimen['specimenId']}: {name} not on disk")
+        continue
+    blob = path.read_bytes()
+    if image_format(blob) is None:
+        photo_problems.append(f"{specimen['specimenId']}: {name} is not a decodable image")
+check(
+    "S9",
+    "Declared specimen photographs exist and decode",
+    "FAIL",
+    not photo_problems,
+    f"{len(photo_problems)} problem(s): {photo_problems[:5]}",
+)
+
+# The reverse: a file nobody references is either a forgotten registry entry or an image that
+# should not be published, and both are worth catching before the artifact ships.
+declared_photos = {s["photograph"] for s in specimens if s.get("photograph")}
+stray_photos = sorted(p.name for p in specimen_dir.iterdir()
+                      if p.is_file() and p.name not in declared_photos) if specimen_dir.is_dir() else []
+check(
+    "S10",
+    "No specimen photograph is unreferenced",
+    "FAIL",
+    not stray_photos,
+    f"{len(stray_photos)} file(s) in verification/specimens/ that no registry entry claims: "
+    f"{stray_photos[:5]}",
+)
+
+check(
+    "S11",
+    "Specimen registry carries schema and version metadata",
+    "FAIL",
+    bool(specimen_doc.get("schema") and specimen_doc.get("schemaVersion")),
+    "schema and schemaVersion are required for a canonical store",
+)
+
+check(
+    "S12",
+    "Specimen photograph coverage",
+    "INFO",
+    True,
+    f"{len(declared_photos)} of {len(specimens)} inspected specimens have their photograph "
+    f"committed; the rest rest on the recorded inspection alone until one is supplied.",
+)
+
+# --------------------------------------------------------------------------- #
+# F3b — market and product type stay independent
+# --------------------------------------------------------------------------- #
+# `market` says which regional catalogue lists a product; `isCodeCard` says what kind of product
+# it is. They were entangled: a `$languages.Count -ge 10` branch in the generators returned the
+# market value "Global (code card)", so KSS 26 — an ordinary card sold in 17 languages — was
+# classified as a code card, four genuine code cards listed in six languages were not, and the
+# dataset reported a different code-card count from the README.
+#
+# These live here rather than in the generators because the generators are dormant PowerShell
+# heading for the archive (#28, #50 Wave 4). The invariant has to outlive them.
+
+typed_markets = sorted({c["market"] for c in cards
+                        if "code card" in str(c.get("market", "")).lower()})
+check(
+    "F3b.1",
+    "No market value names a product type",
+    "FAIL",
+    not typed_markets,
+    f"market must describe where a product is listed, not what it is. Found {typed_markets}",
+)
+
+# The count has to agree wherever it is stated, which is what the README got wrong.
+code_cards = [c for c in cards if c.get("isCodeCard")]
+readme_claim = re.search(r"(\d+)\s+retained products are code cards", readme)
+check(
+    "F3b.2",
+    "Dataset and README report the same code-card count",
+    "FAIL",
+    bool(readme_claim) and int(readme_claim.group(1)) == len(code_cards),
+    f"dataset has {len(code_cards)}; README says "
+    f"{readme_claim.group(1) if readme_claim else 'nothing matching'}",
+)
+
+# Language count must not be able to imply product type again, in either direction.
+many_languages = [c["name"] for c in cards
+                  if len(c.get("languages") or []) >= 10 and not c.get("isCodeCard")]
+few_languages = [c["name"] for c in cards
+                 if len(c.get("languages") or []) < 10 and c.get("isCodeCard")]
+check(
+    "F3b.3",
+    "Product type is not inferable from language count",
+    "FAIL",
+    bool(many_languages) and bool(few_languages),
+    "the split is only meaningful while both sides are populated: "
+    f"{len(many_languages)} non-code-card products list 10+ languages, "
+    f"{len(few_languages)} code cards list fewer",
+)
+
+# --------------------------------------------------------------------------- #
 # F4 — refuted language claims must be marked in the main dataset
 # --------------------------------------------------------------------------- #
 

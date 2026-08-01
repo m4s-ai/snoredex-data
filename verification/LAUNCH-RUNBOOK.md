@@ -32,7 +32,7 @@ Three substantive attestations, approved by `M4S.Collection` and recorded in
 |---|---|---|
 | `licenseGrantsApproved` | The PolyForm and CC BY-NC-SA grants in `LICENSE.md` are **operative**, no longer a described intention. | `true` |
 | `ownerAttestationsApproved` | Evidence recorded as owner attestations and photographed specimens may be published. They carry no personal identifiers. | `true` |
-| `thirdPartyImagesApproved` | The 198 Cardmarket card images may be published on the basis in `THIRD_PARTY_NOTICES.md`. | `true` |
+| `thirdPartyImagesApproved` | The Cardmarket card images in `images/`, and the licensor's own specimen photographs in `verification/specimens/`, may be published on the basis in `THIRD_PARTY_NOTICES.md`. Covers the categories, so photographs added later need no fresh approval. | `true` |
 | `sitePublicationApproved` | The site may be deployed to GitHub Pages. | **`false` — belongs to step 2** |
 
 `licensor` is recorded as `M4S.Collection` and verified byte-exactly by the gate. `approvedBy` and

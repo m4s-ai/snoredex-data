@@ -76,7 +76,8 @@ snorlax_cards.json            MAIN dataset: 198 singles, one object each. Fields
                               variantToken (V1/V2/V3), variantName (+source), variantAxes,
                               cardKey, artist(+source), editions{}, finishAvailability{}, market,
                               meta{}.
-images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg).
+images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg or .png — the
+                              extension states the actual format; 55 are PNG, see #34).
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
                               finishes, confirmed_releases (chronological). Plus CSV exports.
 artists_pokemontcgio.json     57 English cards with illustrator + exact release dates.
@@ -84,21 +85,54 @@ verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
                               articles often carry both enrelease and jarelease; never select by
                               article title alone. Recheck with audit_bulbapedia_release_dates.py.
-scripts/                      Generators, in run order (§7 has the full command list):
-                                finishes -> language_status -> confirmed_releases -> source_registry
-                                -> checklist -> readme_stats -> issue_templates -> site
+scripts/                      Two halves; only the second can be re-run (#28).
+
+                              LIVE generators, in run order (§7 has the full command list):
+                                analyze -> finishes -> language_status -> confirmed_releases
+                                -> source_registry -> checklist -> readme_stats -> issue_templates
+                                -> open_items -> site
                               plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). All Python, stdlib only. Five take
-                              --check; see §7 for which, and how the gate covers the rest.
-                              mkunits/build/join/getimages/finalize/analyze .ps1 are the original
-                              harvest stages. They are DORMANT history: their _chunk*/_cards_stage*
-                              inputs are not in the repository, so the committed dataset is the
-                              input of record. They join the archive once #28 captures their data
-                              flow.
+                              and verifies the Pages artifact). Seven take --check; see §7.
+                              analyze.py is the SOLE producer of analysis_artists,
+                              _shared_cards, _variants and _language_drift, and reads
+                              snorlax_cards.json only — the single canonical node (#30). Its
+                              PowerShell predecessor is archived under archive/scripts/.
+                              ALL PYTHON: PowerShell is no longer needed for anything.
+
+                              HISTORICAL, inputs absent, do not run:
+                                build -> join -> getimages -> finalize
+                              They read _chunk1..3.json, a 2026-07-21 scrape of a live
+                              marketplace. Not in the repo, not reproducible: the same search
+                              today returns different products. snorlax_cards.json is therefore
+                              the INPUT of record, not an output of this repository. These five
+                              join the archive once their data flow is captured (#28 did that).
+
+                                mkunits    Also historical, and destructive: rebuilds
+                                           verification/units.json from scratch with fresh ids,
+                                           discarding the state of all 719 units. Never part
+                                           of a rebuild.
+
+                              The release gate runs the live half and fails if the output differs
+                              from what is committed, so "regenerates cleanly" is proven per PR.
 verification/
   units.json                  THE STATE STORE. One row per card×language×variant with status,
                               sourceUrl, sourceType, evidence, checkedAt.
-  evidence.jsonl              Append-only log of every confirmation (survives crashes).
+  evidence.jsonl              Append-only journal of what was observed, and when. NOT a
+                              projection of units.json and not replayable into one: entries are
+                              appended as observations happen, corrections are appended rather
+                              than rewritten, and nothing guarantees the last entry for a unit
+                              matches its current row. units.json is the state; this is the
+                              record of how it was reached. check E5 requires every resolved
+                              unit to appear here, which is the property it can actually offer.
+  specimens.json              Physical cards the owner holds and inspected, each with a stable
+                              SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
+                              instead of describing it in prose. `photograph` is null until the
+                              image is supplied; the claim rests on the recorded inspection either
+                              way, and the file is what lets a third party re-check it.
+                              TO ADD A PHOTOGRAPH: drop the file in verification/specimens/, set
+                              `photograph` to its filename, run review_findings.py. Checks S7-S12
+                              cover it; publish.py already allowlists the directory and LICENSE.md
+                              decision 4 covers the category, so no approval is needed per image.
   confirmed_sources.json      Export of all confirmed units.
   CONTRADICTED.json           The 71 refuted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
@@ -116,7 +150,12 @@ verification/
   state.json                  Last completed phase.
   source_registry.json        Generated provider/evidence index. Counts live in README's
                               generated block; don't restate them here.
-  report.py                   Regenerates coverage + all export files.
+  report.py                   Prints coverage and rewrites exactly three exports:
+                              confirmed_sources.json, CONTRADICTED.json, UNCONFIRMED.json.
+                              NOT "all exports" — MANUAL_REVIEW.* comes from classify_manual.py,
+                              open-items.html from scripts/open_items.py, SOURCES.md from
+                              scripts/source_registry.py, and the FINISH_* queue from
+                              scripts/finishes.py.
   audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.py          (Re)tags structurally undocumentable units.
   verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
@@ -216,9 +255,18 @@ Brazilian Prize Pack confirmations were obtained.
 
 1. **Evidence outside Cardmarket only.** The card's *language filter* on Cardmarket is not
    evidence; a seller's *photo* of the physical card is.
-2. **Grade evidence.** `sourceType` distinguishes *photographed specimen* > *marketplace listing*
-   / *official DB* / *fan wiki* > *owner attestation*. Currently 0 units rest on attestation alone
-   without corroboration; keep it that way where possible.
+2. **Grade evidence.** `providerId` names the source, `corroborated` says whether more than one
+   provider agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
+   *photographed specimen* (1) > *official DB* (1) > *open database* (2) / *owner attestation* (2)
+   > *fan wiki* (3) / *marketplace listing* (3) > *collector community* (4).
+
+   A single non-URL source may confirm a unit. **16 units rest on owner attestation alone** and 5
+   on a photographed specimen alone, all queryable as
+   `corroborated == false and providerId in {owner-attestation, photographed-specimen}`. The
+   owner physically holds these cards and no database records them, so the alternative is not
+   better evidence but a false "open" count. What is not acceptable is a single *weaker* source:
+   `review_findings.py` check E3 fails if anything below tier 2 confirms a unit uncorroborated,
+   and E4 fails if the number above stops matching the data. Prefer corroboration where it exists.
 3. **Never contradict on bare absence.** First prove the source *covers the category* (e.g.
    pokumon lists Korean promos, so a missing Korean row is meaningful). This rule exists because
    an absence-argument produced a false contradiction that had to be reverted (`XY-P 149`).
@@ -265,11 +313,17 @@ Order matters, and it is the order above: `finishes.py` writes the card finish s
 `language_status.py` writes the card language verdicts, `confirmed_releases.py` reads both and
 writes the chronological rows, and `checklist.py` and `site.py` read those. Five generators take a
 `--check` mode that fails instead of writing — `checklist`, `readme_stats`, `issue_templates`,
-`site`, `source_registry` — and the release gate runs those with `--check`, runs `finishes.py
+`site`, `source_registry`, `open_items`, `analyze` — and the release gate runs those with `--check`, runs `finishes.py
 --reproject`, `language_status.py` and `confirmed_releases.py` for real, then asserts
 `git diff --exit-code`. Either way a generator whose output would move fails the build.
 `publish.py` takes `--verify`. `finishes.py --reproject` redoes only the card projection from the
 committed finish store and needs no network, which is the fast path when a projection rule changes.
+
+A full `finishes.py` run reads TCGdex through a cache under `verification/cache/finish-tcgdex/`.
+Entries record their URL, fetch time, HTTP status, content hash and item count, expire after 30
+days, and are never written for a failed or implausible response. Transient failures are retried
+with backoff; a 404 is an answer and is not. `--refresh-cache` forces a refetch, and exit 2 means
+a source could not be reached rather than that the data is wrong (#35).
 
 **The integrity suite no longer asserts counts.** Unit totals, coverage and queue depths are
 reported as drift against a baseline, because closing an open unit is the goal, not a regression;

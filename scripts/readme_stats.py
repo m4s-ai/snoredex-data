@@ -156,6 +156,22 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
     return "\n".join(lines)
 
 
+def market_split_block(dataset: dict[str, Any]) -> str:
+    """The market distribution, counted rather than typed (#37).
+
+    This line was hand-written prose and went stale when the code-card market value was removed
+    (#31): the README claimed a "global code cards" bucket that no longer existed. It is a count
+    of a committed field, so it belongs to the generator like every other count in this file.
+
+    Ordered by size so the shape of the catalogue is readable, with ties broken by name to keep
+    the output stable.
+    """
+    counts = Counter(card["market"] for card in dataset["cards"])
+    parts = " · ".join(f"{market} {n}" for market, n in
+                       sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
+    return f"The market split across all {len(dataset['cards'])}: {parts}."
+
+
 def replace_block(text: str, name: str, body: str) -> str:
     pattern = re.compile(
         rf"(<!-- generated:{re.escape(name)}[^>]*-->\n).*?(\n<!-- /generated:{re.escape(name)} -->)",
@@ -228,6 +244,7 @@ def main() -> int:
     updated = replace_block(
         updated, "finish-coverage", finish_coverage_block(counts, finish_doc["units"])
     )
+    updated = replace_block(updated, "market-split", market_split_block(dataset))
 
     if "--check" in sys.argv:
         if updated != original:

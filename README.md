@@ -26,7 +26,7 @@ and produces a stable machine-readable checklist plus an interactive collection 
 ## Current state
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-07-31**, after the database review and release-readiness work merged to `main`.
+Status snapshot: **2026-08-01**, after the database review and release-readiness work merged to `main`.
 
 | Area | Current state |
 |---|---|
@@ -68,7 +68,8 @@ the underlying evidence did not change; use `snorlax_cards.json` and
 
 ## Validate a checkout
 
-Python 3.11 and PowerShell 7 are the supported baseline. The browser suite also needs Playwright's
+Python 3.11 is the supported baseline. PowerShell is no longer required for anything: the last
+step that needed it, `analyze.ps1`, is now `scripts/analyze.py`. The browser suite also needs Playwright's
 Chromium installation.
 
 ```console
@@ -85,8 +86,8 @@ in [`.github/workflows/release-gate.yml`](.github/workflows/release-gate.yml).
 
 ## Repository map
 
-All paths and commands are relative to the repository root. PowerShell and Python scripts resolve
-the checkout from their own file location and can be invoked from any working directory.
+All paths and commands are relative to the repository root. Every script resolves the checkout
+from its own file location and can be invoked from any working directory.
 
 | Path | Purpose |
 |---|---|
@@ -109,11 +110,41 @@ the checkout from their own file location and can be invoked from any working di
 | [`LICENSE.md`](LICENSE.md) / [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Licensing scope, licensor and contact, exclusions, attribution, and third-party rights. |
 | [`AI-DECLARATION.md`](AI-DECLARATION.md) | Structured disclosure of AI involvement under the [`AI-DECLARATION.md` 0.1.2 specification](https://ai-declaration.md/en/0.1.2/). |
 
-The reproducible pipeline is:
+### How the data is produced
 
-`mkunits` → `build` → `join` → `getimages` → `finalize` → `analyze` → `finishes` →
-`language_status` → `confirmed_releases` → `source_registry` → `checklist` → `readme_stats` →
-`issue_templates` → `site`
+The pipeline has two halves, and only one of them can be re-run (#28).
+
+**The harvest is historical.** `build` → `join` → `getimages` → `finalize` read
+`_chunk1..3.json`, the captured Cardmarket result pages, and hand `snorlax_cards.json` to
+everything downstream. Those chunks are not in the repository and are not reproducible: they are a
+scrape of a live marketplace from 2026-07-21, and re-running the search today returns different
+products, prices and language filters. Re-scraping would not rebuild this dataset, it would
+produce a new one. **`snorlax_cards.json` is therefore an input to this repository, not an output
+of it** — the evidence layer is what is maintained here, and every claim in it cites a source that
+can be checked independently of the harvest.
+
+`mkunits` is in the same category and is destructive besides: it rebuilds `verification/units.json`
+from scratch with freshly numbered ids, discarding the verification state of all 719 units. It is
+not part of any rebuild.
+
+**Everything downstream regenerates from what is committed**, and the release gate proves it by
+running the generators and failing if the output differs from the tree:
+
+```console
+python scripts/analyze.py          # analysis_artists, _shared_cards, _variants, _language_drift
+python scripts/finishes.py --reproject
+python scripts/language_status.py
+python scripts/confirmed_releases.py
+python scripts/source_registry.py
+python scripts/checklist.py
+python scripts/readme_stats.py
+python scripts/issue_templates.py
+python scripts/site.py
+```
+
+`scripts/analyze.py` reads `snorlax_cards.json` and nothing else. Its PowerShell predecessor
+preferred whichever `_cards_stage*.json` happened to be present, which made the canonical input
+depend on the working directory; the port is what closes #30's single-canonical-node criterion.
 
 Scraping covered all nine result pages for Cardmarket's Pokémon product search for “snorlax.”
 
@@ -164,7 +195,13 @@ Two genuine outliers, both worth knowing about:
 - **`KSS 26` (XY Kalos Starter Set) — 17 languages**, including Czech and Hungarian. Starter-set products were distributed far wider than booster sets.
 - **`SVP 051` splits.** Cardmarket carries two products for the same promo number: one with the full 6 Western languages, one **English-only** (`-V2`, 20 listings). Same card, different distribution — a real drift case, not a data error.
 
-The market split across all 198: Western 83 · Japanese 68 · Simplified Chinese 37 · SEA promo 5 · global code cards 4 · Traditional Chinese 1.
+<!-- generated:market-split — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
+The market split across all 198: Western 87 · Japanese 68 · Simplified Chinese 37 · SEA promo 5 · Traditional Chinese 1.
+<!-- /generated:market-split -->
+
+`market` records which regional catalogue Cardmarket lists a product in — a marketplace claim, like
+`languages` beside it. It is independent of what the product *is*: that is `isCodeCard`, derived
+from the product name, and the 7 code cards are spread across markets rather than forming one.
 
 ## Shared art across releases
 

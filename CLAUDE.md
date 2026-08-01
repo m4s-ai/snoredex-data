@@ -32,9 +32,17 @@ correction already made here, and reading it is how you avoid repeating one.
 
 1. **Evidence outside Cardmarket only.** A product's *language filter* on Cardmarket is not
    evidence. A seller's *photo* of the physical card is.
-2. **Grade every source.** `sourceType` ranks *photographed specimen* > *marketplace listing* /
-   *official DB* / *fan wiki* > *owner attestation*. No unit currently rests on attestation alone
-   without corroboration; keep it that way where you can.
+2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
+   agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
+   *photographed specimen* (1) / *official DB* (1) > *open database* (2) / *owner attestation* (2)
+   > *fan wiki* (3) / *marketplace listing* (3) > *collector community* (4).
+
+   A single non-URL source may confirm a unit: **16 units rest on owner attestation alone** and 5
+   on a photographed specimen alone. The owner holds those cards and no database records them, so
+   refusing the evidence buys a false "open" count rather than better evidence. What is not
+   allowed is a single *weaker* source — check `E3` fails if anything below tier 2 confirms a unit
+   uncorroborated, and `E4` fails when that number stops matching the data. Prefer corroboration
+   where it exists.
 3. **Never contradict on bare absence.** A source that fails to list a printing has a gap; it has
    not proved the printing does not exist. First prove the source *covers the category* — pokumon
    lists Korean promos, so a missing Korean row there is meaningful; its West coverage is one
@@ -77,6 +85,11 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   attack names.
 - **"Spanish" is European Spanish only.** LATAM-ES is a physically distinct edition, out of scope.
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
+- **Physical specimens are cited, not described.** A card the owner holds has a stable id in
+  `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. To add
+  its photograph: file into `verification/specimens/`, set `photograph` to the filename, rerun
+  `review_findings.py`. Never write a new prose description of a specimen — that is what the ids
+  replaced.
 
 ## Commands
 
@@ -100,20 +113,29 @@ python scripts/source_registry.py           # provider/evidence registry
 python scripts/checklist.py                 # canonical checklist items
 python scripts/readme_stats.py              # generated README blocks
 python scripts/issue_templates.py           # community correction form
+python scripts/open_items.py                # verification/open-items.html
 python scripts/site.py                      # index.html + alias redirect
 
 python verification/review_integrity.py     # after any write
 python verification/review_findings.py      # after any write
 ```
 
-Five generators take `--check`, which fails instead of writing: `checklist`, `readme_stats`,
-`issue_templates`, `site`, `source_registry`. The gate runs those with `--check`, runs
+Seven generators take `--check`, which fails instead of writing: `checklist`, `readme_stats`,
+`issue_templates`, `site`, `source_registry`, `open_items`, `analyze`. The gate runs those with `--check`, runs
 `finishes.py --reproject`, `language_status.py` and `confirmed_releases.py` for real, and then
 asserts `git diff --exit-code` — so a generator whose output would move fails the build either
 way. `publish.py` takes `--verify` rather than `--check`.
 
 `python scripts/finishes.py --reproject` redoes only the card projection from the committed store
 and needs no network; it is the fast path when a projection rule changes.
+
+A full `finishes.py` run reads TCGdex through a cache under `verification/cache/finish-tcgdex/`.
+Entries carry their URL, fetch time, HTTP status, content hash and item count, expire after 30
+days, and are never written for a failed or implausible response — an empty body, a non-object, or
+anything without an `id` is an error, not an answer. Transient failures (timeouts, 429, 5xx) are
+retried with backoff; a 404 is an answer and is not. `--refresh-cache` forces a refetch. Exit 2
+means a source could not be reached, matching `verify_finish_sources.py`: the artifacts are not
+wrong, the upstream evidence is missing, so retry rather than investigate.
 
 The pre-PR gate, matching CI:
 
@@ -141,9 +163,16 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
   committed data came to be. Its files are never rerun and never edited; check `X3` hashes them
   against `verification/archive/MANIFEST.json` and fails on any change. A translated pass is not
   the script that produced the record.
-- The six `scripts/*.ps1` harvest scripts are **dormant history** — their stage inputs are not in
-  the repository. The committed dataset is the input of record. They join the archive once #28
-  captures their data flow.
+- The five remaining `scripts/*.ps1` are **dormant history** — `build`, `join`, `getimages`,
+  `finalize` and `mkunits`. Their `_chunk*`/`_cards_stage*` inputs are not in the repository and
+  are not reproducible (a 2026-07-21 scrape of a live marketplace), so `snorlax_cards.json` is the
+  input of record rather than an output. #28 captured that data flow, so they can join the archive.
+  `mkunits` is additionally destructive: it rebuilds `units.json` with fresh ids and discards the
+  verification state. Never run it.
+- **`scripts/analyze.py`** produces `analysis_artists.json`, `analysis_shared_cards.json`,
+  `analysis_variants.json` and `analysis_language_drift.json` — nothing else generates them. It
+  reads `snorlax_cards.json` only, which is #30's single canonical node. Its PowerShell
+  predecessor is archived at `verification/archive/scripts/analyze.ps1`.
 - **LF line endings** (check `X1`) and **no UTF-8 BOM** (check `X5`) in tracked text.
 - `verification/checks.py` is the check protocol shared by the two suites: `review_integrity.py`
   validates invariants *within* each store, `review_findings.py` validates consistency *between*

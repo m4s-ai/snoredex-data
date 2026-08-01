@@ -346,6 +346,18 @@ tbody tr:hover td.corr { background: var(--panel); }
 .langcount { text-align: center; font-weight: 650; }
 .langcell.yes { color: var(--confirmed); }
 .langcell.no { color: var(--absent); }
+
+/* Evidence strength behind a confirmed language (#32). "Confirmed" is not one thing: an official
+   database entry and an uncorroborated owner attestation are both a tick. The full provider, tier
+   and corroboration state are in each cell's title and aria-label; this marks the one case a
+   reader most needs to notice — a claim with no public URL and no second source, which nobody can
+   re-check by following a link. Deliberately an underline rather than a colour change, so it
+   carries no contrast burden and stays visible to anyone who cannot distinguish the colours. */
+.legend-unverifiable,
+.langcell.yes[data-unverifiable="true"] > span {
+  border-bottom: 2px dotted currentColor;
+  padding-bottom: 1px;
+}
 .language-legend {
   display: flex; flex-wrap: wrap; align-items: center; gap: 5px 12px;
   margin: 8px 0; color: var(--muted); font-size: 12px;

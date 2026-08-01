@@ -77,6 +77,12 @@ jobs:
       - name: Structural integrity
         run: python verification/review_integrity.py
 
+      # Parser regression fixtures. The illustrator credit used to be read from the flattened page
+      # text, which absorbed the adjacent stage label (#33); these fixtures are the page shapes that
+      # broke it.
+      - name: JP illustrator parser tests
+        run: python verification/test_jp_parser.py
+
       - name: Evidence audit
         run: python verification/audit_evidence.py
 
@@ -91,6 +97,7 @@ jobs:
       - name: Generated artifacts match their inputs
         shell: bash
         run: |
+          python scripts/analyze.py --check
           python scripts/finishes.py --reproject
           python scripts/language_status.py
           python scripts/confirmed_releases.py
@@ -98,6 +105,7 @@ jobs:
           python scripts/checklist.py --check
           python scripts/readme_stats.py --check
           python scripts/issue_templates.py --check
+          python scripts/open_items.py --check
           python scripts/site.py --check
           git diff --exit-code || {
               echo "::error::Regenerating produced different output than what is committed."

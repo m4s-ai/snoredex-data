@@ -16,11 +16,12 @@ import hashlib
 import json
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -85,27 +86,131 @@ def group_sort_key(key: tuple[str, str, str]) -> tuple[Any, ...]:
     return (set_code.casefold(), number_parts, LANG_RANK.get(language, 999), language.casefold())
 
 
+# --- fetch cache (#35) ----------------------------------------------------------------------- #
+# Entries used to be the bare payload under a hash of the URL. That is unattributable: given a
+# cached file there was no way to say which URL produced it, when, or whether the response was
+# plausible — and the cache directory is gitignored, so none of it appears in a diff either. A
+# stale or thin entry was not wrong so much as invisible.
+#
+# Each entry is now an envelope recording the URL, the fetch time, the HTTP status, the content
+# hash and the item count. Entries in the old bare format are treated as stale and refetched:
+# accepting them would mean keeping exactly the unattributable state this replaces.
+
+CACHE_SCHEMA = "snoredex-fetch-cache/1"
+CACHE_MAX_AGE_DAYS = 30
+FETCH_ATTEMPTS = 3
+FETCH_BACKOFF_SECONDS = 1.5
+# Transient by nature: worth retrying. A 404 is an answer, and retrying it just costs time.
+RETRY_STATUS = frozenset({408, 425, 429, 500, 502, 503, 504})
+
+
 def cache_path(url: str) -> Path:
     return CACHE_DIR / f"{hashlib.sha256(url.encode('utf-8')).hexdigest()}.json"
 
 
-def fetch_tcgdex(url: str) -> tuple[str, dict[str, Any] | None, str | None]:
-    cached = cache_path(url)
-    if cached.exists():
-        try:
-            return url, read_json(cached), None
-        except (OSError, json.JSONDecodeError):
-            pass
+def implausible(payload: Any) -> str | None:
+    """Why this response cannot be a TCGdex card, or None if it looks like one.
 
-    request = urllib.request.Request(url, headers={"User-Agent": "snoredex-data/finish-verification"})
+    Checked before the response is cached, because a cache entry is trusted on every later run and
+    an empty or wrongly-shaped body is indistinguishable from a real answer once stored.
+    """
+    if not isinstance(payload, dict):
+        return f"expected a JSON object, got {type(payload).__name__}"
+    if not payload:
+        return "empty object"
+    if "id" not in payload:
+        return "no 'id' field, so this is not a card record"
+    return None
+
+
+def cache_entry_age_days(entry: dict[str, Any]) -> float | None:
+    stamp = entry.get("fetchedAt")
+    if not isinstance(stamp, str):
+        return None
     try:
-        with urllib.request.urlopen(request, timeout=25) as response:
-            payload = json.load(response)
-        CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        write_json(cached, payload)
+        fetched = datetime.fromisoformat(stamp.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return (datetime.now(timezone.utc) - fetched).total_seconds() / 86400
+
+
+def read_cache(url: str, refresh: bool, max_age_days: float) -> tuple[dict[str, Any] | None, str]:
+    """Return the cached payload and why it was or was not used."""
+    path = cache_path(url)
+    if refresh:
+        return None, "refresh requested"
+    if not path.exists():
+        return None, "not cached"
+    try:
+        entry = read_json(path)
+    except (OSError, json.JSONDecodeError):
+        return None, "cache entry unreadable"
+    if not isinstance(entry, dict) or entry.get("schema") != CACHE_SCHEMA:
+        return None, "cache entry predates the metadata envelope"
+    payload = entry.get("payload")
+    if json_hash(payload) != entry.get("contentHash"):
+        return None, "cache entry failed its own content hash"
+    age = cache_entry_age_days(entry)
+    if age is None:
+        return None, "cache entry has no usable timestamp"
+    if age > max_age_days:
+        return None, f"cache entry is {age:.0f} days old"
+    return payload, "cached"
+
+
+def json_hash(payload: Any) -> str:
+    return "sha256:" + hashlib.sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+
+
+def write_cache(url: str, payload: Any, status: int, content_type: str | None) -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    write_json(cache_path(url), {
+        "schema": CACHE_SCHEMA,
+        "url": url,
+        "fetchedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "httpStatus": status,
+        "contentType": content_type,
+        "contentHash": json_hash(payload),
+        "itemCount": len(payload) if isinstance(payload, (list, dict)) else None,
+        "payload": payload,
+    })
+
+
+def fetch_tcgdex(url: str, refresh: bool = False,
+                 max_age_days: float = CACHE_MAX_AGE_DAYS
+                 ) -> tuple[str, dict[str, Any] | None, str | None]:
+    payload, _reason = read_cache(url, refresh, max_age_days)
+    if payload is not None:
         return url, payload, None
-    except (OSError, urllib.error.URLError, json.JSONDecodeError) as error:
-        return url, None, str(error)
+
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "snoredex-data/finish-verification"})
+    last_error = "unknown error"
+    for attempt in range(1, FETCH_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=25) as response:
+                status = getattr(response, "status", 200) or 200
+                content_type = response.headers.get("Content-Type")
+                body = json.load(response)
+        except urllib.error.HTTPError as error:
+            last_error = f"HTTP {error.code}"
+            if error.code not in RETRY_STATUS or attempt == FETCH_ATTEMPTS:
+                return url, None, last_error
+        except (OSError, urllib.error.URLError, json.JSONDecodeError) as error:
+            last_error = str(error)
+            if attempt == FETCH_ATTEMPTS:
+                return url, None, last_error
+        else:
+            problem = implausible(body)
+            if problem:
+                # Not cached. A response that cannot be a card is a failure, and storing it would
+                # make it look like a settled answer on every later run.
+                return url, None, f"implausible response: {problem}"
+            write_cache(url, body, status, content_type)
+            return url, body, None
+        time.sleep(FETCH_BACKOFF_SECONDS * attempt)
+    return url, None, last_error
 
 
 def reverse_pattern(card_url: str | None) -> str | None:
@@ -352,7 +457,8 @@ def main() -> None:
     tcgdex_data: dict[str, dict[str, Any]] = {}
     fetch_errors: dict[str, str] = {}
     with ThreadPoolExecutor(max_workers=12) as executor:
-        futures = {executor.submit(fetch_tcgdex, url): url for url in tcgdex_urls}
+        refresh = "--refresh-cache" in sys.argv
+        futures = {executor.submit(fetch_tcgdex, url, refresh): url for url in tcgdex_urls}
         for future in as_completed(futures):
             url, payload, error = future.result()
             if payload is not None:
@@ -949,6 +1055,13 @@ def main() -> None:
         f"{counts['withUnresolvedProductMapping']}"
     )
     print(f"TCGdex: {len(tcgdex_data)}/{len(tcgdex_urls)} fetched; errors={len(fetch_errors)}")
+    if fetch_errors:
+        for url, reason in sorted(fetch_errors.items())[:10]:
+            print(f"  unreachable: {url} — {reason}", file=sys.stderr)
+        # The artifacts written above are still internally consistent; what is missing is upstream
+        # evidence nobody could reach. Exit 2 says "try again later" rather than "this is wrong".
+        return 2
+    return 0
 
 
 def reproject() -> None:
@@ -1037,5 +1150,8 @@ def reproject() -> None:
 if __name__ == "__main__":
     if "--reproject" in sys.argv:
         reproject()
-    else:
-        main()
+        sys.exit(0)
+    # Same contract as verification/verify_finish_sources.py, for the same reason: a caller has to
+    # be able to tell "the source said something unexpected" from "the source could not be
+    # reached". 2 means unreachable — retry later; the committed artifacts are not at fault (#35).
+    sys.exit(main() or 0)

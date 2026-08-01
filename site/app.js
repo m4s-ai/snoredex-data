@@ -414,12 +414,37 @@
       "</span></td>";
   }
 
+  /* How strong the evidence behind a confirmed language is (#32). Confirmed is not one thing:
+     an official database entry and an uncorroborated owner attestation are both "present" and a
+     reader deciding whether to trust a row needs to be able to tell them apart. Tier comes from
+     the provider registry; "checkable" means the citation is a URL a reader can follow. */
+  function evidenceNote(row, code) {
+    const ev = row.langEvidence && row.langEvidence[code];
+    if (!ev) return null;
+    const parts = [];
+    if (ev.provider) parts.push(ev.provider);
+    if (ev.tier) parts.push("tier " + ev.tier);
+    parts.push(ev.corroborated ? "corroborated" : "single source");
+    if (!ev.checkable) parts.push("no public URL");
+    return { text: parts.join(", "), tier: ev.tier || 0,
+             weak: !ev.checkable && !ev.corroborated };
+  }
+
   function rowHTML(row) {
     const langCells = LANGS.map((lang) => {
       const has = row.langCodes.includes(lang.code);
       const state = has ? "present" : "absent";
-      return '<td class="langcell ' + (has ? "yes" : "no") + '" data-state="' + state +
-        '" aria-label="' + escapeHTML(lang.name + ": " + state) + '">' +
+      const note = has ? evidenceNote(row, lang.code) : null;
+      // aria-label stays the bare state. It is what a screen reader announces for every one of
+      // 17 columns on every row, so the evidence detail goes in title instead: discoverable on
+      // hover, and summarised for everyone by the legend and the underline below.
+      const label = lang.name + ": " + state;
+      const attrs = note
+        ? ' data-tier="' + note.tier + '"' + (note.weak ? ' data-unverifiable="true"' : "")
+        : "";
+      return '<td class="langcell ' + (has ? "yes" : "no") + '" data-state="' + state + '"' +
+        attrs + ' title="' + escapeHTML(note ? label + " — " + note.text : label) +
+        '" aria-label="' + escapeHTML(label) + '">' +
         '<span aria-hidden="true">' + (has ? "✓" : "—") + "</span></td>";
     }).join("");
     const finishPills = row.finishDisplay.map((f) => pill(f.label, f.status)).join("");
