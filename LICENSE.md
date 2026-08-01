@@ -40,8 +40,8 @@ Covers the parts of the data that are this project's own intellectual contributi
   the finish/pattern/marking/distribution/size decomposition, the edition model;
 - the **verification annotations** — status verdicts, evidence strings, source grading,
   contradiction findings, completeness judgements;
-- the **documentation and site copy** — `README.md`, `HANDOVER.md`, `verification/*.md`,
-  generated page prose.
+- the **documentation and site copy** — `README.md`, `HANDOVER.md`, `CLAUDE.md`, `AGENTS.md`,
+  `CONTRIBUTING.md`, `verification/*.md`, generated page prose.
 
 Full text: `LICENSES/CC-BY-NC-SA-4.0.md` ·
 canonical source <https://creativecommons.org/licenses/by-nc-sa/4.0/>

@@ -3,6 +3,9 @@
 Read this first if you are taking over cold. It is the single entry point; two deeper docs
 back it up and are cited where relevant:
 
+- **`CLAUDE.md`** — the condensed operating rules for an agent working here: the
+  non-negotiables, the data-model traps, the command order and the git conventions, all pointing
+  back at this file for detail. `AGENTS.md` is a pointer to it.
 - **`README.md`** — the dataset spec, the findings (language drift, shared art, variants), and
   data caveats. Read before *using* the data.
 - **`verification/RESUME.md`** — the verification playbook: every hard-won source technique,
@@ -81,10 +84,17 @@ verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
                               articles often carry both enrelease and jarelease; never select by
                               article title alone. Recheck with audit_bulbapedia_release_dates.py.
-scripts/                      Build pipeline, in run order:
-                                mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes
-                              plus editions.py (edition classification) and
-                              confirmed_releases.py (chronological table/CSV generator).
+scripts/                      Generators, in run order (§7 has the full command list):
+                                finishes -> language_status -> confirmed_releases -> source_registry
+                                -> checklist -> readme_stats -> issue_templates -> site
+                              plus editions.py (edition classification) and publish.py (assembles
+                              and verifies the Pages artifact). All Python, stdlib only. Five take
+                              --check; see §7 for which, and how the gate covers the rest.
+                              mkunits/build/join/getimages/finalize/analyze .ps1 are the original
+                              harvest stages. They are DORMANT history: their _chunk*/_cards_stage*
+                              inputs are not in the repository, so the committed dataset is the
+                              input of record. They join the archive once #28 captures their data
+                              flow.
 verification/
   units.json                  THE STATE STORE. One row per card×language×variant with status,
                               sourceUrl, sourceType, evidence, checkedAt.
@@ -104,15 +114,30 @@ verification/
   FINISH_REVIEW.json / .csv   The remaining finish, pattern and product-mapping review queue.
   RESUME.md                   The verification playbook (read before editing evidence).
   state.json                  Last completed phase.
+  source_registry.json        Generated provider/evidence index. Counts live in README's
+                              generated block; don't restate them here.
   report.py                   Regenerates coverage + all export files.
   audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.py          (Re)tags structurally undocumentable units.
   verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
-  review_integrity.py         27 structural checks — run after every write pass.
-  archive/passes/             ~65 completed one-shot verification scripts. Each closed a batch
-                              and is named by what it did. Paths derive from each script's location,
-                              so passes can be run from any checkout or working directory.
-  cache/                      Raw API dumps (gitignored — reproducible via fetch_* scripts).
+                              Replayable offline against fixtures/tcgcsv_finish_sources.json.
+  review_integrity.py         27 structural checks WITHIN each store — run after every write pass.
+  review_findings.py          Cross-artifact consistency BETWEEN the stores and what consumers
+                              read, plus publication readiness. Stdlib only, no network.
+  checks.py                   The check protocol shared by the two suites above. Counts are
+                              reported, never asserted (see §7).
+  publication_gate.py         Blocks deployment until publication-decisions.json records the
+                              approvals; the Pages workflow feeds it the real repo visibility.
+  test_site.py                Browser acceptance tests (playwright + chromium).
+  parity.py                   Differential runner from the PowerShell->Python migration (#50).
+                              Runs a script and its twin in throwaway trees and compares bytes.
+  fixtures/                   Recorded responses so networked checks stay testable offline.
+  archive/passes/             63 completed one-shot passes. Each closed a batch and is named by
+                              what it did. NEVER rerun and NEVER edited: check X3 hashes every
+                              file here against archive/MANIFEST.json and fails on any change.
+                              Paths derive from each script's location.
+  cache/                      Raw API dumps (gitignored — reproducible via the archived fetch_*
+                              passes).
 ```
 
 `.gitignore` excludes `verification/cache/` (13 MB reproducible API dumps) and
@@ -200,20 +225,24 @@ Brazilian Prize Pack confirmations were obtained.
    The same rule applies to finishes: TCGdex `true` confirms a printing; `false` is not used to
    prove that a finish is unavailable because its variant data is still incomplete.
 4. **Run `audit_evidence.py` and `review_integrity.py` after every write pass.** Silent data
-   corruption has happened here (see next point) and only the audit caught it.
-5. **PowerShell is case-insensitive** — this bit FOUR times. `$R`/`$r` and `$EV`/`$ev` are the
-   same variable (declaring the log array silently wiped the evidence text); `-match '^x'` also
-   matched `XY-P`/`XY2`/`XYPR`. Use **distinct variable names** and **`-cmatch`**. None of these
-   threw an error; they produced wrong data.
-6. **Write findings via a new new Python pass under `verification/`**, then run report +
-   audit + integrity. Don't hand-edit `units.json`.
+   corruption has happened here (see the historical note below) and only the audit caught it.
+5. **Write findings via a new Python pass under `verification/`**, then run report + audit +
+   integrity. Don't hand-edit `units.json` or `finish_units.json`.
+6. **Never hand-edit a generated file.** Each carries a header saying so. Regenerate it.
+
+Historical note, kept because it explains the shape of the archived passes: the toolchain used to
+be PowerShell, and **PowerShell's case-insensitivity bit four times**. `$R`/`$r` and `$EV`/`$ev`
+are the same variable — declaring a log array silently wiped the evidence text — and `-match '^x'`
+also matched `XY-P`/`XY2`/`XYPR`. None of it threw an error; it produced wrong data, and only the
+audit caught it. The recurring toolchain is Python now (#50), so the rule no longer applies to
+anything you will write; the reason rule 4 exists does.
 
 ## 7. How to resume / continue
 
-```powershell
+```console
 # Run from the repository root.
 python verification/review_integrity.py     # confirm clean starting state
-python verification/review_findings.py           # cross-artifact consistency (no pwsh needed)
+python verification/review_findings.py           # cross-artifact consistency (stdlib, no network)
 python verification/report.py               # regenerate exports if needed
 # ... do verification work in a new Python pass under verification/ ...
 python verification/audit_evidence.py       # after any write
@@ -234,30 +263,36 @@ python verification/verify_finish_sources.py # recheck machine-readable TCGCSV a
 
 Order matters, and it is the order above: `finishes.py` writes the card finish summaries,
 `language_status.py` writes the card language verdicts, `confirmed_releases.py` reads both and
-writes the chronological rows, and `checklist.py` and `site.py` read those. Every generator has a
-`--check` mode that fails instead of writing, which is what the release gate runs. `finishes.py --reproject` redoes
-only the card projection from the committed finish store and needs no network, which is the fast
-path when a projection rule changes.
+writes the chronological rows, and `checklist.py` and `site.py` read those. Five generators take a
+`--check` mode that fails instead of writing — `checklist`, `readme_stats`, `issue_templates`,
+`site`, `source_registry` — and the release gate runs those with `--check`, runs `finishes.py
+--reproject`, `language_status.py` and `confirmed_releases.py` for real, then asserts
+`git diff --exit-code`. Either way a generator whose output would move fails the build.
+`publish.py` takes `--verify`. `finishes.py --reproject` redoes only the card projection from the
+committed finish store and needs no network, which is the fast path when a projection rule changes.
 
 **The integrity suite no longer asserts counts.** Unit totals, coverage and queue depths are
 reported as drift against a baseline, because closing an open unit is the goal, not a regression;
 only a count going *backwards* is flagged. Structural facts still fail the run. Do not "fix" a
 rising number by editing the baseline — that is the habit the split exists to prevent.
 
-All scripts derive paths from their own location: `$PSScriptRoot` in PowerShell and
-`Path(__file__)` in Python. Keep that convention in new scripts.
+All scripts derive paths from their own location — `Path(__file__)`. Keep that convention in new
+scripts; CI runs them from more than one working directory.
 
 `index.html` is the single public page; `verification/confirmed-releases.html` is a redirect to
 it, so there is no second page to keep in step. Commit + push:
 
 ```bash
-git add -A && git commit -m "..." && git push origin main
+git checkout -b <branch>
+git add -A && git commit -m "..."
+git push -u origin <branch>
 ```
 
-Git: repo is `github.com/m4s-ai/snoredex-data`, branch `main`, remote `origin`, credentials
-already configured (pushes have been working). End commit messages with the
-`Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>` trailer. LF→CRLF warnings on commit are
-normal on Windows and harmless.
+Git: repo is `github.com/m4s-ai/snoredex-data`, remote `origin`, credentials already configured.
+Work lands on a **feature branch via pull request** — do not push to `main`. The release gate runs
+on pull requests across Ubuntu and Windows; merging never publishes, because Pages deployment is a
+separate manual `workflow_dispatch` run. End commit messages with the
+`Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` trailer.
 
 ## 8. Immediate next actions (in priority order)
 

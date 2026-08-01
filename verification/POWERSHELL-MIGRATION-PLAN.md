@@ -1,7 +1,16 @@
 # Consolidating the toolchain on Python — plan
 
-Status: **plan only.** No migration work has been done. Nothing in this document has been
-executed; it exists to be argued with before any code moves.
+Status: **executed, one item open.** Waves 0–3 and most of Wave 4 shipped in #52–#56. All five
+live `.ps1` scripts are ported and deleted, CI is cut over — no `pwsh` step remains in either
+workflow — the archive moved to `verification/archive/passes/` and is hash-pinned by check `X3`,
+the Windows leg is trimmed, and `P7` no longer depends on how the runner checked out the tree.
+
+The one remaining item is Wave 4's last bullet: moving the six dormant `scripts/*.ps1` harvest
+scripts into the archive, which waits on #28 capturing their data flow first.
+
+The rest of this document is left as written, before any code moved. It is the record of what was
+argued and decided, not a description of the current tree — read §10 for the five decisions that
+shaped the work.
 
 ## Objective
 

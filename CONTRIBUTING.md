@@ -88,11 +88,13 @@ invariant; it runs on the standard library alone and needs no network access.
 
 ## Licensing of contributions
 
-The project's licence grants are **not yet in force** — see [`LICENSE.md`](LICENSE.md) and
-[`publication-decisions.json`](publication-decisions.json). By filing a correction you are
-providing factual information about physical cards and agreeing that it may be recorded in this
-dataset under whichever licence the project ultimately adopts. Please do not paste text or images
-you do not have the right to share; a link to the source is always better than a copy of it.
+The project's licence grants are **in force**, granted by `M4S.Collection` on 2026-07-26 — see
+[`LICENSE.md`](LICENSE.md) and [`publication-decisions.json`](publication-decisions.json). This is
+a mixed work: PolyForm Noncommercial 1.0.0 covers the code, CC BY-NC-SA 4.0 covers the data
+selection, arrangement and annotation. By filing a correction you are providing factual
+information about physical cards and agreeing that it may be recorded in this dataset under those
+grants. Please do not paste text or images you do not have the right to share; a link to the
+source is always better than a copy of it.
 
 ## Conduct
 
