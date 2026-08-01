@@ -1,5 +1,24 @@
 # Open-issue status check — 2026-07-31
 
+> **Partly superseded.** The PowerShell-to-Python consolidation (#50, merged as #52–#56 on
+> 2026-08-01) landed after this snapshot and moves four of the findings below:
+>
+> - **#29** and **#35** — the pass scripts they describe, including `fetch_full.ps1` and
+>   `fetch_tcgdex.ps1`, are now under `verification/archive/passes/`, hash-locked by
+>   `MANIFEST.json` and explicitly never rerun. Both sets of findings still describe those
+>   scripts accurately, but they no longer describe anything in the live toolchain. Both issues
+>   need rescoping onto whatever replaces the passes rather than fixing as written.
+> - **#36** — the integrity suite is now Python (`review_integrity.py`, `audit_evidence.py`,
+>   `report.py`, `classify_manual.py`, `verify_finish_sources.py`), the check count moved from 66
+>   to 65, and checks X1–X5 are new. PowerShell is no longer a prerequisite for anything.
+> - **#28** — the portability finding is narrower now that the recurring toolchain is Python.
+>
+> Re-confirmed unchanged against `origin/main` at `574f2f9`: **#31** (the language-count heuristic
+> is still at `scripts/analyze.ps1:17`), **#32** (30 owner-attestation confirmed units, 35 non-URL
+> `sourceUrl`), **#34** (143 JPEG + 55 PNG, all named `.jpg`), and **#37** (`open-items.html` still
+> hand-maintained, the generation date still hardcoded, and `HANDOVER.md:107` still overstating
+> what the renamed `report.py` produces). **#33** is fixed in the commit that follows this note.
+
 Re-verification of every open issue (#28–#38) against the tree at `1bcfd8b`. Each claim in each
 issue was re-run against the current data and scripts rather than taken from the issue text.
 
