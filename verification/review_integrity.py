@@ -21,6 +21,7 @@ from __future__ import annotations
 import json
 import sys
 
+import checks
 from checks import (ROOT, STATUSES as KNOWN_STATUSES, VERIFICATION, Check, Metric,
                     Suite, read_json)
 
@@ -162,11 +163,17 @@ def main() -> int:
     # --- 10. remaining work is exactly as documented ---
     pending = [u for u in units if u.get("status") == "pending"]
     manual = [u for u in units if u.get("status") == "needs-manual-review"]
-    suite.report("pending units", len(pending), 9,
+    # Queue depths, so down is progress and the baseline is the low-water mark rather than the
+    # starting point (#69). Anchoring these at their old 9 and 5 would let the queue climb back to
+    # 8 and 4 unremarked, which is the failure the baseline exists to catch. Re-anchoring downward
+    # is the opposite of the move CLAUDE.md forbids: that one raises a baseline to hide a rise.
+    suite.report("pending units", len(pending), 0,
                  "; ".join(f"{u.get('setCode')} {u.get('number')} {u.get('language')}"
-                           for u in pending))
-    suite.report("manual-review units", len(manual), 5,
-                 "; ".join(f"{u.get('setCode')} {u.get('variant')}" for u in manual))
+                           for u in pending),
+                 direction=checks.DOWN_IS_PROGRESS)
+    suite.report("manual-review units", len(manual), 0,
+                 "; ".join(f"{u.get('setCode')} {u.get('variant')}" for u in manual),
+                 direction=checks.DOWN_IS_PROGRESS)
 
     # --- 11. finish-verification layer ---
     suite.report("finish units", len(finish_units), 637)
@@ -336,13 +343,21 @@ def main() -> int:
 
     suite.render(emit)
     print()
-    if suite.regressed:
-        print(f"!!! COUNTS WENT BACKWARDS: {', '.join(suite.regressed)}")
     if suite.failed:
         print(f"=== REVIEW FAILED: {', '.join(suite.failed)} ===")
         return 1
+    # A count moving the wrong way now fails the run. It always printed a banner and then exited 0,
+    # so a genuine loss — units vanishing from the store, the silent corruption CLAUDE.md says has
+    # happened here — looked exactly like the permanent false alarm the old polarity produced, and
+    # CI went green through both (#69). Reporting rather than asserting still holds: nothing here
+    # fails for a count being the wrong *size*, only for moving in the losing direction.
+    if suite.regressed:
+        print(f"=== COUNTS WENT BACKWARDS: {', '.join(suite.regressed)} ===")
+        print("A metric moved in the losing direction. That is data loss or a reopened queue, not")
+        print("a stale baseline: find what changed rather than editing the number it is held to.")
+        return 1
     print("=== ALL STRUCTURAL CHECKS PASSED ===")
-    print("Counts above are reported, not asserted: rising numbers are verification progress.")
+    print("Counts above are reported, not asserted: only a move in the losing direction fails.")
     print("Run 'python verification/review_findings.py' for cross-artifact consistency checks.")
     return 0
 

@@ -215,16 +215,26 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
   validates invariants *within* each store, `review_findings.py` validates consistency *between*
   the stores and the artifacts consumers read.
 
-## Counts are reported, never asserted
+## Counts are reported, never asserted — but a losing move fails
 
-The integrity suites do not fail on unit totals, coverage or queue depth. Closing an open unit is
-the goal, not a regression, so counts are reported as drift against a baseline and only a count
-moving **backwards** — the direction that signals data loss — is a finding. Structural facts still
-fail the run.
+Nothing fails because a count is the wrong *size*. Counts are reported as drift against a baseline,
+and only a move in the **losing direction** is a finding. Since #69 that finding fails the run:
+before it, a genuine loss printed a banner and exited 0. Structural facts still fail the run.
 
-Do not "fix" a rising number by editing the baseline. That is the exact habit this split exists to
-prevent: a gate that reddens when the project makes progress is a gate people learn to edit rather
-than read.
+Each metric declares which way losing is:
+
+- **`up-is-progress`** (the default) — units, artist coverage, finish rows. These measure work that
+  exists, so a fall means something was lost.
+- **`down-is-progress`** — `pending units`, `manual-review units`. These measure work left to do,
+  and their baseline is the **low-water mark**, so a queue climbing back is caught immediately.
+
+Do not "fix" a losing move by editing the baseline; find what changed. Re-anchoring a queue's
+baseline *downward* after closing it is the opposite move and is correct — it tightens the check.
+The habit this rule exists to prevent is raising a baseline to silence a rise, because a gate that
+reddens when the project makes progress is a gate people learn to edit rather than read. That is
+not hypothetical: closing the language review queue drove `pending units` to 0 and the suite
+printed `!!! COUNTS WENT BACKWARDS` on every clean run afterwards, permanently, for the best
+possible reason.
 
 ## Git and publication
 

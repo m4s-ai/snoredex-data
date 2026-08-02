@@ -377,10 +377,19 @@ days, and are never written for a failed or implausible response. Transient fail
 with backoff; a 404 is an answer and is not. `--refresh-cache` forces a refetch, and exit 2 means
 a source could not be reached rather than that the data is wrong (#35).
 
-**The integrity suite no longer asserts counts.** Unit totals, coverage and queue depths are
-reported as drift against a baseline, because closing an open unit is the goal, not a regression;
-only a count going *backwards* is flagged. Structural facts still fail the run. Do not "fix" a
-rising number by editing the baseline — that is the habit the split exists to prevent.
+**The integrity suite reports counts rather than asserting them, and fails on a losing move.**
+Nothing fails because a count is the wrong size. Each metric declares its direction: unit totals,
+artist coverage and finish rows are `up-is-progress`, so a fall means loss; `pending units` and
+`manual-review units` are `down-is-progress`, and their baselines are the low-water mark so a
+refilling queue is caught. Since #69 a losing move exits non-zero — it used to print
+`!!! COUNTS WENT BACKWARDS` and return 0, which meant a real loss looked exactly like the permanent
+false alarm that closing the language queue produced, and CI went green through both. Structural
+facts still fail the run.
+
+Do not "fix" a losing move by editing the baseline; find what changed. Re-anchoring a queue
+*downward* after closing it is the opposite move and tightens the check. Raising a baseline to
+silence a rise is the habit this rule exists to prevent.
+`verification/test_metric_polarity.py` pins the behaviour.
 
 All scripts derive paths from their own location — `Path(__file__)`. Keep that convention in new
 scripts; CI runs them from more than one working directory.
