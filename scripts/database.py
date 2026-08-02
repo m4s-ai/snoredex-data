@@ -95,6 +95,20 @@ def file_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def sqlite_dump(path: Path) -> str:
+    """Return a portable logical dump for cross-platform rebuild checks.
+
+    SQLite page layouts can differ between the Windows and Linux SQLite builds even when every
+    schema object and row is identical. Comparing the logical dump keeps the determinism check
+    meaningful without requiring consumers to use a platform-specific binary.
+    """
+    connection = sqlite3.connect(f"file:{path.as_posix()}?mode=ro", uri=True)
+    try:
+        return "\n".join(connection.iterdump())
+    finally:
+        connection.close()
+
+
 def variant(value) -> str:
     return value or "base"
 
@@ -1007,8 +1021,8 @@ def validate_database(target: Path) -> list[str]:
         rebuilt = target.with_name(target.name + ".check")
         try:
             build_database(rebuilt)
-            if file_hash(target) != file_hash(rebuilt):
-                problems.append("database bytes differ from a fresh deterministic rebuild")
+            if sqlite_dump(target) != sqlite_dump(rebuilt):
+                problems.append("database contents differ from a fresh deterministic rebuild")
         finally:
             rebuilt.unlink(missing_ok=True)
             rebuilt.with_name(rebuilt.name + ".tmp").unlink(missing_ok=True)

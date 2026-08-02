@@ -119,6 +119,15 @@ def file_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def sqlite_dump(path: Path) -> str:
+    """Return a portable logical dump for cross-platform rebuild checks."""
+    connection = sqlite3.connect(f"file:{path.as_posix()}?mode=ro", uri=True)
+    try:
+        return "\n".join(connection.iterdump())
+    finally:
+        connection.close()
+
+
 def catalog_rows(catalog: Path) -> list[tuple]:
     connection = sqlite3.connect(f"file:{catalog.as_posix()}?mode=ro", uri=True)
     try:
@@ -315,8 +324,8 @@ def check_template(template: Path, catalog: Path) -> list[str]:
         rebuilt = template.with_name(template.name + ".check")
         try:
             build_tracker(rebuilt, catalog)
-            if file_hash(template) != file_hash(rebuilt):
-                problems.append("tracker template bytes differ from a fresh deterministic rebuild")
+            if sqlite_dump(template) != sqlite_dump(rebuilt):
+                problems.append("tracker template contents differ from a fresh deterministic rebuild")
         finally:
             rebuilt.unlink(missing_ok=True)
             rebuilt.with_name(rebuilt.name + ".tmp").unlink(missing_ok=True)
