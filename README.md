@@ -136,12 +136,16 @@ must cite a source; `verification/audit_evidence.py` fails the build if it does 
 **Every source is ranked.** `providerId` names it, `corroborated` says whether a second provider
 agreed independently, and `verification/source_registry.json` records the authority tier:
 
+<!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Tier | Sources |
 |---|---|
-| 1 | photographed specimen · official database |
-| 2 | open database · owner attestation · high-authority Elite Fourum reference |
-| 3 | fan wiki · marketplace listing |
-| 4 | other collector community |
+| 1 | Photographed physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
+| 2 | Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 3 | Bulbapedia · LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 5 | Cardmarket · Internal derivation from a sibling record |
+
+Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
+<!-- /generated:authority-tiers -->
 
 **A single source may carry a claim, and usually does.** The rule check `E3` enforces is
 *checkable or strong*: evidence with **no URL** — the owner's word, a card inspected in hand — must

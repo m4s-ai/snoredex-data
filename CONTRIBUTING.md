@@ -36,21 +36,32 @@ nothing to correct unless you have actually seen it.
 
 ## How your report is graded
 
-Evidence is ranked, and the ranking is public:
-[`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) describes the source ladder and
-why absence is treated the way it is. Roughly, from strongest:
+Evidence is ranked, and the ranking is public. This is the same table the tooling uses, generated
+from [`verification/source_registry.json`](verification/source_registry.json):
 
-1. A complete official manifest — the source class that can establish that something is *absent*
-   within its stated scope. A final collection-owner adjudication may also resolve an absence
-   after reviewing all cited claims, but it is recorded separately and is not credited to a single
-   provider.
-2. An official publisher listing or set checklist.
-3. An independent database or catalogue outside the marketplace the claim came from.
-4. A photographed specimen or an owner attestation.
-5. A marketplace claim — the weakest, and the thing this project exists to check.
+<!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
+| Tier | Sources |
+|---|---|
+| 1 | Photographed physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
+| 2 | Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 3 | Bulbapedia · LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 5 | Cardmarket · Internal derivation from a sibling record |
 
-A correction does not need to reach the top of that ladder to be worth filing. Specimen reports
-have already overturned three databases at once here.
+Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
+<!-- /generated:authority-tiers -->
+
+**A card in your hand is tier 1.** A photograph of the actual card ranks alongside an official
+publisher database and above every independent catalogue — this page used to say the opposite, and
+it was wrong. Specimen reports have already overturned three databases at once here: TCGdex,
+pokumon and Bulbapedia all recorded `XYPR 179` as English-only until photographs of the German,
+Italian, Spanish and Portuguese cards proved otherwise.
+
+Absence is the one thing this ladder does not settle by rank. Only a **complete official manifest**
+can show something was not printed, and only inside its own stated scope; any other final absence
+decision is recorded separately as a collection-owner adjudication and is never credited to a
+single provider. [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) explains why.
+
+A correction does not need to reach the top of the ladder to be worth filing.
 
 ## What happens next
 
