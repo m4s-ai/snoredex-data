@@ -546,6 +546,55 @@ check(
     f"data has {attestation_only} attestation-only units; {disagreeing}",
 )
 
+# E7 — how much rests on one source, held to the data wherever a document says it (#65)
+# --------------------------------------------------------------------------- #
+# README claimed "a single *weaker* source may not [stand alone], and a check enforces it". E3
+# enforces something looser — checkable *or* strong — so a tier-3 page with a URL may carry a claim
+# alone, and 252 do. Correcting that prose meant writing the real figures down, and a figure in
+# prose is a figure that drifts, which is the habit E4 exists to break. So the replacements are
+# checked from the moment they are written rather than after someone notices.
+#
+# The README states this split as a generated block instead, which is why it is not listed here:
+# readme_stats.py --check already fails when that block goes stale.
+
+single_source_units = [u for u in resolved_units if not u.get("corroborated")]
+weak_single = [u for u in single_source_units
+               if provider_by_id.get(u.get("providerId"), {}).get("authorityTier", 99) > 2]
+corroborated_units = [u for u in resolved_units if u.get("corroborated")]
+
+# Each entry: the sentence a document may state, and the number it has to agree with.
+stated_figures = [
+    (r"(\d+) of \d+ resolved units\*{0,2} do", len(weak_single)),
+    (r"\*{0,2}(\d+) of \d+ resolved claims rest on one provider", len(single_source_units)),
+    (r"only (\d+) are corroborated", len(corroborated_units)),
+    (r"it\s+covers (\d+) of \d+ units", len(corroborated_units)),
+    (r"(\d+) resolved units do", len(weak_single)),
+]
+figure_drift = {}
+for name, text in policy_docs.items():
+    for pattern, expected in stated_figures:
+        found = re.search(pattern, text)
+        if found and int(found.group(1)) != expected:
+            figure_drift[f"{name}: {pattern}"] = f"says {found.group(1)}, data says {expected}"
+check(
+    "E7",
+    "Documented single-source exposure matches the data",
+    "FAIL",
+    not figure_drift,
+    f"{len(figure_drift)} stated figure(s) have drifted: {figure_drift}",
+)
+
+check(
+    "I5",
+    "Evidence strength",
+    "INFO",
+    True,
+    f"{len(single_source_units)} of {len(resolved_units)} resolved claims rest on a single "
+    f"provider ({len(corroborated_units)} corroborated); {len(weak_single)} of those single "
+    f"sources are tier 3, every one carrying a URL. E3 permits this — it requires an "
+    f"uncorroborated claim to be checkable or strong, not both.",
+)
+
 # The log is a journal, not a projection of the store: it records what was observed and when, and
 # replaying it does not reconstruct state. What it must do is account for every resolved unit.
 logged = set()

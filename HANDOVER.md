@@ -283,9 +283,17 @@ Brazilian Prize Pack confirmations were obtained.
    on a photographed specimen alone, all queryable as
    `corroborated == false and providerId in {owner-attestation, photographed-specimen}`. The
    owner physically holds these cards and no database records them, so the alternative is not
-   better evidence but a false "open" count. What is not acceptable is a single *weaker* source:
-   `review_findings.py` check E3 fails if anything below tier 2 confirms a unit uncorroborated,
-   and E4 fails if the number above stops matching the data. Prefer corroboration where it exists.
+   better evidence but a false "open" count.
+
+   **What E3 actually enforces is *checkable or strong*.** It fails only when an uncorroborated
+   claim is both unlinkable and weak — no `sourceUrl` and below tier 2. A tier-3 source with a URL
+   may stand alone, and **252 of 719 resolved units** do (247 Bulbapedia, 3 pokumon, 2
+   LigaPokemon), every one with an `https` reference across 65 distinct pages. This section used to
+   say a single weaker source "is not acceptable" and that E3 enforced it; it does not, and the
+   overstatement made the data look better sourced than it is (#65). The real shape: **680 of 719
+   resolved claims rest on one provider** and only 39 are corroborated, which is why the README
+   publishes that split as a generated block rather than a sentence anyone can leave behind.
+   E4 fails if the attestation count stops matching the data.
 
    **A claim is graded by what it rests on, not by the strongest source near it.** The attestation
    figure read 16 until #64: fourteen `PPS7`/`PPS8 JTG 117` units carried

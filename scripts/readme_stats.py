@@ -60,6 +60,45 @@ def finish_coverage_block(counts: dict[str, int], finish_units: list[dict[str, A
     return "\n".join(lines)
 
 
+def evidence_strength_block(units: list[dict[str, Any]], sources: dict[str, Any]) -> str:
+    """How much of the data rests on a single source, and how strong that source is (#65).
+
+    The README used to claim "a single *weaker* source may not [stand alone], and a check enforces
+    it". No check enforced that: `E3` requires an uncorroborated claim to be *checkable* or
+    *strong*, so a tier-3 source with a URL may carry a claim alone — and hundreds do. Stating the
+    stricter rule made the data look better sourced than it is.
+
+    The honest version is a count, so it is generated rather than typed. It is deliberately
+    unflattering: corroboration is preferred everywhere in the documentation and is in fact rare,
+    and a reader deciding how far to trust `languagesConfirmed` needs that in front of them rather
+    than reachable by writing their own query.
+    """
+    tier = {p["providerId"]: p["authorityTier"] for p in sources["providers"]}
+    resolved = [u for u in units if u["status"] in ("confirmed", "contradicted")]
+    corroborated = [u for u in resolved if u.get("corroborated")]
+    single = [u for u in resolved if not u.get("corroborated")]
+    strong = [u for u in single if tier.get(u["providerId"], 99) <= 2]
+    weak = [u for u in single if tier.get(u["providerId"], 99) > 2]
+    unlinkable = [u for u in single if not u.get("sourceUrl")]
+
+    rows = (
+        ("Corroborated by a second provider", len(corroborated)),
+        ("Single tier 1-2 source", len(strong)),
+        ("Single tier 3 source", len(weak)),
+    )
+    lines = ["| How the claim is sourced | Resolved claims |", "|---|---:|"]
+    lines += [f"| {label} | {value} |" for label, value in rows]
+    lines.append("")
+    lines.append(
+        f"{len(single)} of {len(resolved)} resolved claims rest on one provider. Check `E3` does "
+        f"not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so "
+        f"a tier-3 page anyone can open may carry one alone, and {len(weak)} do. What it forbids "
+        f"is a claim that is neither — all {len(unlinkable)} claims with no URL come from tier 1 "
+        f"or 2, where the evidence is the owner's own cards."
+    )
+    return "\n".join(lines)
+
+
 def badges_block(dataset: dict[str, Any], checklist: dict[str, Any],
                  decisions: dict[str, Any]) -> str:
     cards = dataset["meta"]["singlesCaptured"]
@@ -242,6 +281,9 @@ def main() -> int:
         updated,
         "current-state",
         current_state_block(dataset, units, finish_doc, checklist, sources, decisions),
+    )
+    updated = replace_block(
+        updated, "evidence-strength", evidence_strength_block(units, sources)
     )
     updated = replace_block(
         updated, "finish-coverage", finish_coverage_block(counts, finish_doc["units"])
