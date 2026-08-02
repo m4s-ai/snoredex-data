@@ -958,11 +958,23 @@ def main() -> None:
         for unit in finish_units
         if unit["unresolved"]
     ]
+    # The queue's shape by language, generated rather than written down (#71). Working
+    # FINISH_REVIEW.csv top to bottom re-derives the same source decision on every row, because
+    # what can answer "which finishes exist" depends almost entirely on the language: TCGdex has no
+    # Simplified Chinese at all and one Korean URL in the whole store, so a third of this queue is
+    # not waiting to be asked, it is waiting for a different kind of source. See FINISH_SOURCES.md.
+    pending_by_language = Counter(
+        unit["language"] for unit in finish_units
+        if unit["applicabilityStatus"] == "applicable"
+        and unit["availabilityStatus"] == "pending"
+    )
     review_document = {
         "meta": {
             "description": "Finish units that still need finish, pattern, marking, size, or Cardmarket-product mapping evidence.",
             "generated": date.today().isoformat(),
             "count": len(review_rows),
+            "pendingByLanguage": dict(sorted(pending_by_language.items(),
+                                             key=lambda kv: (-kv[1], kv[0]))),
         },
         "units": review_rows,
     }

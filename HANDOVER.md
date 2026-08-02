@@ -411,10 +411,28 @@ separate manual `workflow_dispatch` run. End commit messages with the
 
 ## 8. Immediate next actions (in priority order)
 
-1. **Finish review** — read `verification/FINISH_SOURCES.md`, then work the 233 rows in
-   `verification/FINISH_REVIEW.csv`: first the 138 applicable units with no positive finish
-   evidence, then the 175 units whose logical finish is not mapped to every Cardmarket product
-   (the queues overlap). Put durable facts and source metadata in `finish_overrides.json`, rerun
+1. **Finish review — work it by language, not down the file.** Read
+   `verification/FINISH_SOURCES.md` first; its per-language table is the plan. What can establish a
+   finish depends almost entirely on the language, so working `verification/FINISH_REVIEW.csv` from
+   the top re-derives the same source decision on every row. The live split is
+   `meta.pendingByLanguage` in `FINISH_REVIEW.json`.
+
+   Two structural facts decide the order (#71):
+
+   - **The generator cannot close most of this queue.** `finishes.py` reuses the TCGdex URL that a
+     card's *language* unit cited, and the overwhelming majority of pending rows have no TCGdex URL
+     at all — their language claims came from Bulbapedia, the Japanese official database or the
+     Asia site. `--reproject` asks a source that was never consulted for those cards.
+   - **Korean and Simplified Chinese are the largest block and are unreachable.** TCGdex has no
+     `zh-cn` locale and exactly one `ko` URL in the whole store. These are specimen-led; ask the
+     owner which cards would close the most rows rather than waiting on a scrape.
+
+   Japanese looks like the easy tranche and is not: its language claims come from
+   `pokemon-card.com/card-search/details.php`, which records card text and illustrator and carries
+   **no finish vocabulary at all**. The Japanese route is the official *product* page, one per
+   product — that is how `xm2a 136`'s mirror treatments were established.
+
+   Put durable facts and source metadata in `finish_overrides.json`, rerun
    `python scripts/finishes.py`, then run integrity. Do not convert positive-only source omissions
    into negative claims. The 64 fully contradicted language groups are already `not-applicable` and
    are intentionally absent from this queue.

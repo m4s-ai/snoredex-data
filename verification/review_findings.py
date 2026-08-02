@@ -782,6 +782,45 @@ except ImportError as error:  # pragma: no cover - the generator is always prese
     check("S15", "The stored provider and the registry's inference agree", "FAIL", False,
           f"could not import scripts/source_registry.py: {error}")
 
+# R7 — the finish store keeps up with the language store (#71)
+# --------------------------------------------------------------------------- #
+# A finish unit is `not-applicable` when every Cardmarket product claim behind it is contradicted:
+# no physical printing is left to have a finish. That is decided by a *full* finishes.py run, and
+# the release gate runs `finishes.py --reproject`, which redoes only the card projection from the
+# committed store. So when the language review closed and moved fifteen claims to contradicted,
+# twelve finish units should have become not-applicable and did not. The artifacts disagreed with
+# units.json for two days and every check stayed green.
+#
+# R1 and review_integrity's "finish units exactly cover claim groups" both passed throughout,
+# because they check key coverage: the right rows existed, carrying the wrong verdict. This checks
+# the verdict.
+finish_units_doc = load("verification/finish_units.json")["units"]
+claims_by_group: dict[tuple[str, str, str], list[str]] = {}
+for unit in units:
+    key = (str(unit.get("setCode") or ""), norm_number(unit.get("number")), unit["language"])
+    claims_by_group.setdefault(key, []).append(unit["status"])
+
+stale_applicability = []
+for finish_unit in finish_units_doc:
+    key = (str(finish_unit["setCode"]), norm_number(finish_unit.get("number")),
+           finish_unit["language"])
+    statuses = claims_by_group.get(key)
+    if not statuses:
+        continue
+    expected = "not-applicable" if all(s == "contradicted" for s in statuses) else "applicable"
+    if finish_unit["applicabilityStatus"] != expected:
+        stale_applicability.append(
+            f"{finish_unit['finishUnitId']} {key[0]} {key[1]} {key[2]}: "
+            f"{finish_unit['applicabilityStatus']}, expected {expected}")
+check(
+    "R7",
+    "Finish applicability agrees with the language store",
+    "FAIL",
+    not stale_applicability,
+    f"{len(stale_applicability)} finish unit(s) are stale against units.json — this needs a full "
+    f"`python scripts/finishes.py`, not --reproject: {stale_applicability[:5]}",
+)
+
 check(
     "I5",
     "Evidence strength",
