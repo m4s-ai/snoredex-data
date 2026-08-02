@@ -143,11 +143,29 @@ agreed independently, and `verification/source_registry.json` records the author
 | 3 | fan wiki · marketplace listing |
 | 4 | other collector community |
 
-A single tier-1 or tier-2 source may stand alone — the owner holds cards that no database records,
-and refusing that evidence would buy a falsely "open" count rather than better evidence. A single
-*weaker* source may not, and a check enforces it. The physical cards behind those claims have
-stable ids in [`verification/specimens.json`](verification/specimens.json) and are cited, never
-re-described in prose.
+**A single source may carry a claim, and usually does.** The rule check `E3` enforces is
+*checkable or strong*: evidence with **no URL** — the owner's word, a card inspected in hand — must
+come from tier 1 or 2, because nobody else can go and look at it. A tier-3 page anyone can open may
+stand alone, and hundreds of claims do. That line is deliberate: a Bulbapedia set list is weaker
+than an official database but it is not unverifiable, whereas an unlinkable claim from a weak source
+is neither strong nor checkable.
+
+So read the tier beside a claim rather than assuming corroboration. Corroboration is preferred
+throughout this project and is genuinely uncommon:
+
+<!-- generated:evidence-strength — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
+| How the claim is sourced | Resolved claims |
+|---|---:|
+| Corroborated by a second provider | 39 |
+| Single tier 1-2 source | 428 |
+| Single tier 3 source | 252 |
+
+680 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 252 do. What it forbids is a claim that is neither — all 35 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+<!-- /generated:evidence-strength -->
+
+The physical cards behind the non-URL claims have stable ids in
+[`verification/specimens.json`](verification/specimens.json) and are cited, never re-described in
+prose — and only a *cited* specimen may claim specimen authority (check `S14`).
 
 **Language truth and finish truth are separate layers.** `units.json` answers "was this printed in
 this language?"; `finish_units.json` answers "which finishes exist for this set number and

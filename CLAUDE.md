@@ -40,10 +40,15 @@ correction already made here, and reading it is how you avoid repeating one.
 
    A single non-URL source may confirm a unit: **30 units rest on owner attestation alone** and 5
    on a photographed specimen alone. The owner holds those cards and no database records them, so
-   refusing the evidence buys a false "open" count rather than better evidence. What is not
-   allowed is a single *weaker* source — check `E3` fails if anything below tier 2 confirms a unit
-   uncorroborated, and `E4` fails when that number stops matching the data. Prefer corroboration
-   where it exists.
+   refusing the evidence buys a false "open" count rather than better evidence.
+
+   **`E3` enforces *checkable or strong*, not tier alone.** It fails when an uncorroborated claim
+   is both: no `sourceUrl` *and* below tier 2. A tier-3 page with a URL may carry a claim by
+   itself, and 252 resolved units do — do not read a lone tier-3 source as a rule violation, and
+   do not tell a reader the tiers are stricter than that. This paragraph used to say a weaker
+   source "may not" stand alone and that a check enforced it; neither was true (#65). `E4` fails
+   when the attestation count stops matching the data. Prefer corroboration where it exists — it
+   covers 39 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in
