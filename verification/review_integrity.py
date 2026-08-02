@@ -215,17 +215,29 @@ def main() -> int:
     not_applicable = [u for u in finish_units if u.get("applicabilityStatus") == "not-applicable"]
     review_not_applicable = [u for u in (finish_review.get("units") or [])
                              if u.get("availabilityStatus") == "not-applicable"]
+    # Structure only. This check used to also assert `not-applicable == 64`, `complete-manifest
+    # == 4` and `review count == 233`, which is the one thing this suite says it never does — and
+    # it had teeth: those three numbers pinned the *stale* finish store in place, so the full
+    # `finishes.py` run that brought it back into agreement with units.json failed here (#71).
+    # A check that makes correct data illegal teaches people to revert the data.
+    #
+    # What is still asserted is structural: every status is a known value, a not-applicable unit
+    # really is empty, and the review queue never contains a not-applicable row. The counts move to
+    # metrics below, where a losing move fails and progress does not.
+    review_count = finish_review.get("meta", {}).get("count")
     state_ok = (
         not bad_state
-        and len(not_applicable) == 64
-        and sum(1 for u in finish_units if u.get("completenessStatus") == "complete-manifest") == 4
-        and finish_review.get("meta", {}).get("count") == 233
-        and len(finish_review.get("units") or []) == 233
         and not review_not_applicable
+        and review_count == len(finish_review.get("units") or [])
     )
     suite.check("finish taxonomy, applicability, and review queue valid", state_ok,
                 f"bad={len(bad_state)}, not-applicable={len(not_applicable)}, "
-                f"review={finish_review.get('meta', {}).get('count')}")
+                f"review={review_count}")
+    suite.report("finish units covered by a complete manifest",
+                 sum(1 for u in finish_units
+                     if u.get("completenessStatus") == "complete-manifest"), 4)
+    suite.report("finish review queue", len(finish_review.get("units") or []), 222,
+                 direction=checks.DOWN_IS_PROGRESS)
 
     printing_ids = [p.get("printingId")
                     for u in finish_units for p in (u.get("printings") or [])]

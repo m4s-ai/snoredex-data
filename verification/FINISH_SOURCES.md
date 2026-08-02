@@ -20,6 +20,50 @@ population report, or catalogue omission does not prove that a version does not 
 | Identified physical scan | Visible finish, pattern, marking, and size on that specimen | No |
 | Owner attestation | A review lead, or corroboration when recorded with a scan | No |
 
+## Which source can answer, by language — read before working the queue
+
+The queue is not one backlog. What can establish a finish depends almost entirely on the
+**language**, and working `FINISH_REVIEW.csv` from the top re-derives that decision on every row.
+The live split is `meta.pendingByLanguage` in
+[`FINISH_REVIEW.json`](FINISH_REVIEW.json); the structural facts behind it are these.
+
+| Language | Finish source that can answer | Notes |
+|---|---|---|
+| English, French, German, Italian, Spanish, Portuguese | TCGdex `variants`, official checklist PDFs, TCGCSV subtypes | The only languages with all three. Official checklists are the one class that can establish absence. |
+| Japanese | **Official product pages** (`pokemon-card.com/ex/<set>/index.html`) | **Not** the card database — see below. |
+| Traditional Chinese | `asia.pokemon-card.com`, TCGdex `zh-tw` | Only 12 TCGdex `zh-tw` URLs exist in the store, so most rows need the Asia site. |
+| Indonesian, Thai | `asia.pokemon-card.com`, TCGdex `id` / `th` | Thin coverage: 3 `id` and 4 `th` URLs in the whole store. |
+| Korean | No scriptable finish source | TCGdex has **one** `ko` URL across all 719 units. Needs pokumon, Elite Fourum, or a specimen. |
+| Simplified Chinese | No scriptable finish source | TCGdex has **no** `zh-cn` locale. Needs a specimen or a collector database. |
+
+Two consequences worth internalising before planning work:
+
+- **`finishes.py --reproject` will never close most of this queue.** The generator reuses the
+  TCGdex URL that the card's *language* unit cited, and the overwhelming majority of pending rows
+  have no TCGdex URL at all — their language claims were confirmed by Bulbapedia, the Japanese
+  official database, or the Asia site. Re-running the generator asks a source that was never
+  consulted for those cards.
+- **Korean and Simplified Chinese together are the largest block, and the pipeline cannot reach
+  them.** They are not neglected rows; they are rows whose answer does not exist in any source the
+  toolchain currently speaks to. Treat them as specimen-led, and tell the owner which cards would
+  close the most rows rather than waiting on a scrape.
+
+### The Japanese card database records text, not finish
+
+This is the trap that makes Japanese look like the easy tranche. Most pending Japanese rows had
+their *language* confirmed by `pokemon-card.com/card-search/details.php`, an official tier-1
+database — so the source looks both authoritative and already scripted.
+
+Those pages carry the card name, collector number, Pokédex line, illustrator, attacks and set. They
+contain **no finish vocabulary at all**: no キラ, no ホロ, no ミラー, no 仕様, not even レアリティ.
+Fetching one and grepping for every one of those terms returns zero hits. A tier-1 source that does
+not record the field cannot confirm it, and its silence is not absence evidence either — the rule
+at the top of this file applies to official databases exactly as it does to catalogues.
+
+The Japanese route is the **product page**, not the card page. `pokemon-card.com/ex/m2a/index.html`
+does carry ミラー仕様 and レアリティ, which is how `xm2a 136`'s two mirror treatments were
+established. One page per product, read for the treatments it names.
+
 `supportsAbsence` is therefore true only for complete official manifests in the source registry.
 TCGdex `variants=false`, TCGCSV subtype absence, and PSA population absence remain non-evidence.
 The generator marks a unit `completenessStatus=complete-manifest` only when the source explicitly
