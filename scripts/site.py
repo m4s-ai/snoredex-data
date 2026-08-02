@@ -725,6 +725,9 @@ def main() -> int:
   fallback, and linked dates in the table open the exact source page used.</p>
   <h3>Data downloads</h3>
   <ul>
+    <li><a href="snoredex.sqlite">snoredex.sqlite</a> — normalized current-state application database</li>
+    <li><a href="snoredex-tracker-template.sqlite">snoredex-tracker-template.sqlite</a> — blank have/have-not tracker</li>
+    <li><a href="DATABASE.md">DATABASE.md</a> — schema, status rules and example queries</li>
     <li><a href="snorlax_cards.json">snorlax_cards.json</a> — main dataset</li>
     <li><a href="analysis_checklist.json">analysis_checklist.json</a> — canonical checklist items</li>
     <li><a href="analysis_confirmed_releases.json">analysis_confirmed_releases.json</a> — chronological rows</li>

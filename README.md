@@ -36,8 +36,9 @@ over-claiming is itself a finding, so it is preserved rather than quietly correc
 Two rules hold everywhere in the data, the tooling and the site copy:
 
 1. **Positive evidence only.** A source that fails to list a printing has a *gap*; it has not
-   proved the printing does not exist. Only a complete official manifest can establish absence, and
-   only inside its own stated scope.
+   proved the printing does not exist. Only a complete official manifest or an owner-designated
+   complete Elite Fourum reference table can establish absence, and only inside its own stated
+   scope.
 2. **`pending` means not yet established — never proven absent.** The same goes for `unmapped` and
    `other-product` on the finish side. Nothing here claims non-existence by silence.
 
@@ -58,6 +59,8 @@ Then visit <http://localhost:8000/>. `index.html` is the whole site; nothing els
 
 | You want | Read | Watch out for |
 |---|---|---|
+| A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite) / [`DATABASE.md`](DATABASE.md) | Start from the `app_*` views. Historical `contradicted` rows become app-safe `disputed` unless their evidence is explicitly absence-capable. |
+| A personal have/have-not tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Copy the blank template or use `scripts/tracker.py`; catalogue sync preserves ownership state. |
 | The Cardmarket product view — identity, rarity, art, artist, editions | [`snorlax_cards.json`](snorlax_cards.json) | Use `languagesConfirmed` / `languagesContradicted` / `languagesUnresolved`. The raw `languages` field is the marketplace claim, kept deliberately. |
 | A stable list of physical things to collect | [`analysis_checklist.json`](analysis_checklist.json) | One record per documented printing *or* per explicitly unresolved one — placeholders are items too. |
 | Which languages a card exists in, and on whose word | [`verification/units.json`](verification/units.json) | Keyed by `(setCode, number, variant, language)`. |
@@ -103,7 +106,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-08-02**, after the database review and release-readiness work merged to `main`.
+Status snapshot: **2026-08-02**, after the database review and release-readiness audit of the current repository state.
 
 | Area | Current state |
 |---|---|
@@ -111,7 +114,7 @@ Status snapshot: **2026-08-02**, after the database review and release-readiness
 | Language verification | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Physical checklist | **838 items** across 174 cards and 15 languages: 663 documented printings plus 175 explicit unresolved placeholders. |
 | Finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
-| Evidence registry | **18 providers**, 883 evidence records, 876 unique URLs, and 2,791 attributed claims. Only complete official manifests may establish absence. |
+| Evidence registry | **18 providers**, 883 evidence records, 876 unique URLs, and 2,791 attributed claims. Complete official manifests and owner-designated complete Elite Fourum reference tables may establish absence within scope. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -134,9 +137,9 @@ agreed independently, and `verification/source_registry.json` records the author
 | Tier | Sources |
 |---|---|
 | 1 | photographed specimen · official database |
-| 2 | open database · owner attestation |
+| 2 | open database · owner attestation · owner-designated complete Elite Fourum reference tables |
 | 3 | fan wiki · marketplace listing |
-| 4 | collector community |
+| 4 | other collector community |
 
 A single tier-1 or tier-2 source may stand alone — the owner holds cards that no database records,
 and refusing that evidence would buy a falsely "open" count rather than better evidence. A single
@@ -180,6 +183,8 @@ python scripts/checklist.py
 python scripts/readme_stats.py
 python scripts/issue_templates.py
 python scripts/open_items.py
+python scripts/database.py
+python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 python scripts/site.py
 ```
 
@@ -288,6 +293,8 @@ All paths are relative to the repository root.
 | Path | Purpose |
 |---|---|
 | [`snorlax_cards.json`](snorlax_cards.json) | Main product dataset — one record per Cardmarket single. |
+| [`snoredex.sqlite`](snoredex.sqlite) · [`DATABASE.md`](DATABASE.md) | Normalized current-state application handoff, with no evidence journal or migration history. |
+| [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Blank, refreshable ownership tracker with `have`, `wanted`, quantity and notes. |
 | [`analysis_checklist.json`](analysis_checklist.json) | Canonical physical checklist, documented printings and explicit placeholders alike. |
 | [`index.html`](index.html) | The generated collection browser. The only public page; `verification/confirmed-releases.html` redirects to it. |
 | [`images/`](images/) | Third-party card images used for identification; excluded from this project's licence grants. |

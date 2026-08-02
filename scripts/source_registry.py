@@ -44,8 +44,9 @@ MARKDOWN_PATH = ROOT / "verification" / "SOURCES.md"
 #
 # `authorityTier` ranks how much weight a source carries, and `supportsAbsence` records the one
 # thing that actually matters for this project's discipline: whether a missing row in that source
-# is evidence of anything. Only a complete official manifest may say "not printed"; everything
-# else is positive-only, which is why every other provider is false.
+# is evidence of anything. Complete official manifests and the explicitly designated complete
+# Elite Fourum reference tables may say "not printed" within their stated scope; everything else
+# is positive-only.
 # --------------------------------------------------------------------------------------------
 
 PROVIDERS: list[dict[str, Any]] = [
@@ -177,12 +178,12 @@ PROVIDERS: list[dict[str, Any]] = [
         "hosts": ["elitefourum.com", "www.elitefourum.com"],
         "licenseOrTerms": "Forum terms; community-contributed content.",
         "category": "collector-community",
-        "authorityTier": 4,
-        "coverage": "promo language tables and the 1st-edition timeline",
-        "supportsAbsence": False,
+        "authorityTier": 2,
+        "coverage": "complete promo language tables and the 1st-edition timeline within their stated scope",
+        "supportsAbsence": True,
         "usedFor": ["language", "edition"],
         "attribution": "Collector-community reference tables from Elite Fourum.",
-        "notes": "Community-maintained; corroborate where it carries a claim alone.",
+        "notes": "Owner-designated high-authority community reference. Its named complete tables and timeline may establish absence within their stated scope; the collection owner's own attestation remains the final project authority.",
     },
     {
         "providerId": "ligapokemon",
@@ -517,7 +518,7 @@ def main() -> int:
             "generated": date.today().isoformat(),
             "policy": [
                 "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
-                "supportsAbsence is true only for complete official manifests, and only within their stated scope.",
+                "supportsAbsence is true for complete official manifests and the owner-designated complete Elite Fourum reference tables, only within their stated scope.",
                 "Non-URL evidence is a named evidence class, never a fabricated hyperlink.",
                 "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there.",
             ],
@@ -578,8 +579,9 @@ def render_markdown(document: dict[str, Any]) -> str:
         f"({document['meta']['counts']['uniqueUrls']} unique URLs and "
         f"{document['meta']['counts']['nonUrlEvidenceClasses']} non-URL evidence classes).",
         "",
-        "**`supportsAbsence` is the column that matters.** Only a complete official manifest may",
-        "establish that a printing or finish does *not* exist, and only within its stated scope.",
+        "**`supportsAbsence` is the column that matters.** A complete official manifest or the",
+        "owner-designated complete Elite Fourum reference tables may establish that a printing",
+        "does *not* exist, and only within the source's stated scope.",
         "For every other provider a missing row is a coverage gap, never a finding.",
         "",
         "| Provider | Category | Tier | Absence? | Sources | Claims | Used for |",
