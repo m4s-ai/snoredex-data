@@ -222,6 +222,12 @@ publishes, and Pages deployment stays a manual, gated workflow run.
   field is preserved because the over-claiming is the finding; the verdict lives beside it in
   `languagesConfirmed` / `languagesContradicted` / `languagesUnresolved`. See
   [`verification/CONTRADICTED.json`](verification/CONTRADICTED.json).
+- **A contradicted language is not automatically a proven absence.** `languagesContradicted`
+  splits into `languagesNotPrinted` — where an explicit owner adjudication or a complete official
+  manifest settled the question — and `languagesDisputed`, where a source disagrees and nothing
+  has settled it. **12 are settled; 73 are disputed.** Both are excluded from the checklist, so
+  that nobody is sent hunting a printing the evidence points away from, but only the first is a
+  claim that the card does not exist. A photograph would overturn a disputed row.
 - **"Spanish" means European Spanish only.** From Journey Together (2025), LATAM-ES is a
   physically distinct edition for regular sets — different attack translations, set name and set
   code (specimen-verified on `SVP 184`). Cardmarket does not carry it, so it is out of scope here.

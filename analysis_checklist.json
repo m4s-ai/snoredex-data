@@ -6,6 +6,7 @@
   "description": "One record per documented physical collectible item, or per explicitly unresolved one. Collector-facing finishFamily groups technical reverse-holo and mirror-holo treatments without collapsing their physical printing records.",
   "rules": [
    "Only confirmed language claims enter; contradicted and unresolved languages and code cards are excluded.",
+   "Exclusion is not a claim of non-existence. A contradicted language is left out so that nobody is sent hunting a printing the evidence points away from, but only the languagesNotPrinted subset is settled; languagesDisputed is one source's disagreement, and excludedDisputedLanguages counts what that removed.",
    "Expansion follows logical printings[], never group-level finish booleans.",
    "Editions expand only where the edition model supports that edition for that language.",
    "When multiple editions are supported, concrete finishes require an explicit edition mapping; otherwise each edition receives one unresolved placeholder.",
@@ -19,6 +20,8 @@
    "items": 838,
    "documentedPrintings": 663,
    "unresolvedPlaceholders": 175,
+   "excludedNotPrintedLanguages": 12,
+   "excludedDisputedLanguages": 73,
    "firstEditionItems": 24,
    "firstEditionWithEditionAgnosticEvidence": 0,
    "completeManifestItems": 6,

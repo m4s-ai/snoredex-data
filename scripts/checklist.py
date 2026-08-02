@@ -257,6 +257,7 @@ def main() -> int:
             ),
             "rules": [
                 "Only confirmed language claims enter; contradicted and unresolved languages and code cards are excluded.",
+                "Exclusion is not a claim of non-existence. A contradicted language is left out so that nobody is sent hunting a printing the evidence points away from, but only the languagesNotPrinted subset is settled; languagesDisputed is one source's disagreement, and excludedDisputedLanguages counts what that removed.",
                 "Expansion follows logical printings[], never group-level finish booleans.",
                 "Editions expand only where the edition model supports that edition for that language.",
                 "When multiple editions are supported, concrete finishes require an explicit edition mapping; otherwise each edition receives one unresolved placeholder.",
@@ -273,6 +274,15 @@ def main() -> int:
                 "items": len(items),
                 "documentedPrintings": len(resolved),
                 "unresolvedPlaceholders": len(unresolved_items),
+                # What the confirmed-only rule removed, split by whether anything actually settled
+                # it (#66). Silently dropping both kinds made a one-source disagreement look as
+                # final as an owner adjudication, in the artifact a collector shops from.
+                "excludedNotPrintedLanguages": sum(
+                    len(card.get("languagesNotPrinted") or []) for card in cards
+                ),
+                "excludedDisputedLanguages": sum(
+                    len(card.get("languagesDisputed") or []) for card in cards
+                ),
                 "firstEditionItems": len(first_edition),
                 "firstEditionWithEditionAgnosticEvidence": len(agnostic),
                 "completeManifestItems": sum(

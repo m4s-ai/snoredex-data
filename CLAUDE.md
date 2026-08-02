@@ -97,6 +97,15 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   `reverse-holo-treatment` (EX-era set logos that are part of the reverse design — `DF 10` is the
   worked example), `distribution-promo` (prerelease, Staff, retailer, Pokémon Center marks —
   these do **not** imply a reverse holo).
+- **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
+  outside source disagrees with Cardmarket. Only two things settle it: a complete official manifest
+  within its scope, or an explicit owner adjudication. Everything else is **disputed** — currently
+  **12 settled and 73 disputed** — and `DATABASE.md` is right that an application must not read
+  disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every generator;
+  cards carry `languagesNotPrinted` and `languagesDisputed` beside `languagesContradicted`, and
+  checks `E8`/`E9`/`E10` keep the split honest. Both are excluded from the checklist, because the
+  README's whole promise is that nobody hunts a card that was never made — exclusion is not the
+  same as asserting absence, and `analysis_checklist.json` counts what it left out.
 - **`cardKey` = same card text, not same artwork.** It is Cardmarket's own grouping by name plus
   attack names.
 - **"Spanish" is European Spanish only.** LATAM-ES is a physically distinct edition, out of scope.

@@ -584,6 +584,117 @@ check(
     f"{len(figure_drift)} stated figure(s) have drifted: {figure_drift}",
 )
 
+# E8 — absence is settled by someone taking responsibility, never by provider rank (#66)
+# --------------------------------------------------------------------------- #
+# `contradicted` says a source disagrees. `not-printed` says the question is closed, and rule 4
+# allows only two ways to close it: a complete official manifest, within its stated scope, or an
+# explicit collection-owner adjudication after reviewing every cited claim. Everything else stays
+# `disputed`, which DATABASE.md tells applications not to read as "does not exist".
+#
+# Nothing violated this when it was written — the guard was a property of the data rather than a
+# rule, because every scoped-source row happened to carry an adjudication too. A rule that holds by
+# coincidence is one nobody notices breaking.
+
+adjudicated_units = {d["unitId"] for d in
+                     load("verification/owner_adjudications.json")["decisions"]}
+manifest_scopes = {url.rstrip("/") for provider in registry["providers"]
+                   if provider.get("supportsAbsence")
+                   for url in provider.get("absenceScopes") or []}
+def settles_absence(unit: dict) -> bool:
+    return (unit["unitId"] in adjudicated_units
+            or str(unit.get("sourceUrl") or "").rstrip("/") in manifest_scopes)
+
+
+# Checking the derivation against itself would be vacuous, so this checks what consumers are told:
+# every language a card publishes as not-printed must trace back to a unit that something actually
+# settled, and the two published lists must partition the contradicted set exactly. A generator
+# that widened `languagesNotPrinted` — or quietly dropped a disputed language from both lists —
+# fails here rather than on someone's collection plan.
+absence_backing: list[str] = []
+for card in cards:
+    if card.get("isCodeCard"):
+        continue
+    identity = (str(card.get("setCode") or ""), norm_number(card.get("number")),
+                str(card.get("variantToken") or "base"))
+    for language in card.get("languagesNotPrinted") or []:
+        backing = [u for u in resolved_units
+                   if (str(u.get("setCode") or ""), norm_number(u.get("number")),
+                       str(u.get("variant") or "base")) == identity
+                   and u["language"] == language and u["status"] == "contradicted"]
+        if not backing or not all(settles_absence(u) for u in backing):
+            absence_backing.append(f"{identity[0]} {identity[1]} {identity[2]} {language}")
+check(
+    "E8",
+    "Every published not-printed language rests on an adjudication or a complete manifest",
+    "FAIL",
+    not absence_backing,
+    f"{len(absence_backing)} card-language(s) are published as settled absences with neither an "
+    f"owner adjudication nor a manifest-scoped source: {absence_backing[:5]}",
+)
+
+mispartitioned = [
+    f"{card.get('setCode')} {card.get('number')} {card.get('variantToken') or 'base'}"
+    for card in cards if not card.get("isCodeCard")
+    and sorted((card.get("languagesNotPrinted") or []) + (card.get("languagesDisputed") or []))
+    != sorted(card.get("languagesContradicted") or [])
+]
+check(
+    "E10",
+    "not-printed and disputed partition the contradicted set exactly",
+    "FAIL",
+    not mispartitioned,
+    f"{len(mispartitioned)} card(s) where the split does not reconstruct languagesContradicted: "
+    f"{mispartitioned[:5]}",
+)
+
+# Reported, not failed. #66 proposed requiring every absence scope to be an official manifest,
+# which would withdraw Elite Fourum's — a Discourse thread is not a manifest, however carefully
+# compiled, and rule 4 admits only a manifest or an owner adjudication. But
+# verification/test_owner_adjudications.py asserts the opposite in as many words ("Elite Fourum
+# must retain scoped absence capability"), so the two readings of rule 4 are a policy question for
+# the collection owner, not something a check should decide by failing. Nothing turns on it today:
+# every unit citing that thread also carries an owner adjudication, so the scope changes no row's
+# status. Surfaced here so the disagreement stays visible instead of being settled by whoever
+# edits last.
+non_official_scopes = sorted(
+    f"{provider['providerId']}: {url}"
+    for provider in registry["providers"] if provider.get("supportsAbsence")
+    for url in provider.get("absenceScopes") or []
+    if provider["providerId"] not in ("pokemon-official", "play-pokemon")
+)
+check(
+    "E9",
+    "Absence scopes outside official manifests",
+    "INFO",
+    True,
+    f"{len(non_official_scopes)} scope(s) rest on a provider that does not publish official "
+    f"manifests: {non_official_scopes or 'none'}. Open question for the owner (#66).",
+)
+
+# The split is stated in prose in three documents, so it is held to the data the same way the
+# attestation count is (E4) and the single-source exposure is (E7). Writing a number down without
+# a check is how RESUME.md came to say 0 when the answer was 30.
+settled_count = sum(len(c.get("languagesNotPrinted") or []) for c in cards)
+disputed_count = sum(len(c.get("languagesDisputed") or []) for c in cards)
+split_docs = dict(policy_docs)
+split_docs["README.md"] = (ROOT / "README.md").read_text(encoding="utf-8")
+split_drift = {}
+for name, text in split_docs.items():
+    for pattern, expected in ((r"\*{0,2}(\d+) are settled", settled_count),
+                              (r"(\d+) are disputed", disputed_count),
+                              (r"\*{0,2}(\d+) settled and \d+ disputed", settled_count),
+                              (r"\d+ settled and \*{0,2}(\d+) disputed", disputed_count)):
+        found = re.search(pattern, text)
+        if found and int(found.group(1)) != expected:
+            split_drift[f"{name}: {pattern}"] = f"says {found.group(1)}, data says {expected}"
+check(
+    "E11",
+    "Documented not-printed / disputed split matches the data",
+    "FAIL",
+    not split_drift,
+    f"{len(split_drift)} stated figure(s) have drifted: {split_drift}",
+)
+
 check(
     "I5",
     "Evidence strength",
