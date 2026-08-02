@@ -29,7 +29,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
 
 INPUTS = [
     "snorlax_cards.json",
@@ -40,6 +40,7 @@ INPUTS = [
     "verification/finish_units.json",
     "verification/source_registry.json",
     "verification/specimens.json",
+    "verification/owner_adjudications.json",
 ]
 
 LANGUAGES = [
@@ -156,7 +157,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10000;
+PRAGMA user_version = 10001;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -184,6 +185,17 @@ CREATE TABLE providers (
     attribution TEXT NOT NULL,
     notes TEXT NOT NULL,
     hosts_json TEXT NOT NULL
+) WITHOUT ROWID;
+
+CREATE TABLE owner_adjudications (
+    adjudication_id TEXT PRIMARY KEY,
+    unit_id TEXT NOT NULL UNIQUE,
+    decision TEXT NOT NULL CHECK (decision = 'not-printed'),
+    authority TEXT NOT NULL CHECK (authority = 'collection-owner'),
+    basis TEXT NOT NULL CHECK (basis = 'multi-source-adjudication'),
+    decided_at TEXT NOT NULL,
+    rationale TEXT NOT NULL,
+    evidence_refs_json TEXT NOT NULL
 ) WITHOUT ROWID;
 
 CREATE TABLE products (
@@ -239,6 +251,7 @@ CREATE TABLE product_languages (
         'exists', 'not-printed', 'disputed', 'unresolved', 'out-of-scope'
     )),
     absence_supported INTEGER NOT NULL CHECK (absence_supported IN (0, 1)),
+    adjudication_id TEXT REFERENCES owner_adjudications(adjudication_id),
     unit_id TEXT,
     provider_id TEXT REFERENCES providers(provider_id),
     corroborated INTEGER CHECK (corroborated IN (0, 1)),
@@ -446,6 +459,23 @@ SELECT
     pl.verification_status AS repository_verdict,
     pl.application_status,
     pl.absence_supported,
+    pl.absence_supported AS source_absence_supported,
+    pl.adjudication_id,
+    CASE
+        WHEN oa.adjudication_id IS NOT NULL THEN oa.authority
+        WHEN pl.application_status = 'not-printed' AND pl.absence_supported = 1
+            THEN 'source-scope'
+        ELSE NULL
+    END AS decision_authority,
+    CASE
+        WHEN oa.adjudication_id IS NOT NULL THEN oa.basis
+        WHEN pl.application_status = 'not-printed' AND pl.absence_supported = 1
+            THEN 'scoped-source'
+        ELSE NULL
+    END AS decision_basis,
+    oa.decided_at AS decision_decided_at,
+    oa.rationale AS decision_rationale,
+    oa.evidence_refs_json AS decision_evidence_refs_json,
     pl.provider_id,
     pr.display_name AS provider,
     pr.authority_tier,
@@ -458,7 +488,8 @@ SELECT
 FROM product_languages pl
 JOIN products p USING(product_id)
 JOIN languages l USING(language_code)
-LEFT JOIN providers pr USING(provider_id);
+LEFT JOIN providers pr USING(provider_id)
+LEFT JOIN owner_adjudications oa USING(adjudication_id);
 
 CREATE VIEW app_checklist AS
 SELECT
@@ -530,6 +561,10 @@ def build_database(target: Path) -> dict[str, int | str]:
     registry = load("verification/source_registry.json")
     providers = registry["providers"]
     specimens_doc = load("verification/specimens.json")
+    owner_adjudications_doc = load("verification/owner_adjudications.json")
+    owner_adjudications = owner_adjudications_doc["decisions"]
+    if owner_adjudications_doc.get("meta", {}).get("schemaVersion") != "1.0.0":
+        raise ValueError("owner adjudications schemaVersion must be 1.0.0")
 
     temporary = target.with_name(target.name + ".tmp")
     if temporary.exists():
@@ -554,10 +589,12 @@ def build_database(target: Path) -> dict[str, int | str]:
         "history_included": "false",
         "scope": "All 198 Cardmarket product rows; code cards retained but marked out-of-scope.",
         "application_status_policy": (
-            "confirmed=exists; contradicted becomes not-printed only when its provider explicitly "
-            "supports absence, otherwise disputed; pending/manual=unresolved; code cards=out-of-scope"
+            "confirmed=exists; contradicted becomes not-printed only when its source is explicitly "
+            "absence-capable within scope or an explicit collection-owner adjudication exists, "
+            "otherwise disputed; pending/manual=unresolved; code cards=out-of-scope"
         ),
         "checklist_schema_version": checklist_doc["meta"]["schemaVersion"],
+        "owner_adjudications_schema_version": owner_adjudications_doc["meta"]["schemaVersion"],
         "generator_sha256": file_hash(Path(__file__)),
     }
     for relative, digest in input_hashes().items():
@@ -566,6 +603,11 @@ def build_database(target: Path) -> dict[str, int | str]:
     cursor.executemany("INSERT INTO languages VALUES (?, ?, ?, ?, ?)", LANGUAGES)
 
     provider_by_id = {item["providerId"]: item for item in providers}
+    absence_source_urls = {
+        (item.get("canonicalUrl") or "").rstrip("/")
+        for item in registry.get("evidence", [])
+        if item.get("canonicalUrl") and item.get("supportsAbsence")
+    }
     cursor.executemany(
         "INSERT INTO providers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
@@ -578,6 +620,29 @@ def build_database(target: Path) -> dict[str, int | str]:
             for item in providers
         ],
     )
+
+    owner_by_unit: dict[str, dict] = {}
+    for decision in owner_adjudications:
+        unit_id = decision.get("unitId")
+        if not unit_id or unit_id in owner_by_unit:
+            raise ValueError(f"owner adjudication has missing or duplicate unitId: {unit_id!r}")
+        if decision.get("decision") != "not-printed":
+            raise ValueError(f"owner adjudication {decision.get('adjudicationId')} is not not-printed")
+        if decision.get("authority") != "collection-owner":
+            raise ValueError(f"owner adjudication {decision.get('adjudicationId')} has invalid authority")
+        if decision.get("basis") != "multi-source-adjudication":
+            raise ValueError(f"owner adjudication {decision.get('adjudicationId')} has invalid basis")
+        if not decision.get("rationale") or not decision.get("evidenceRefs"):
+            raise ValueError(f"owner adjudication {decision.get('adjudicationId')} lacks rationale/evidence")
+        owner_by_unit[unit_id] = decision
+        cursor.execute(
+            "INSERT INTO owner_adjudications VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (
+                decision["adjudicationId"], decision["unitId"], decision["decision"],
+                decision["authority"], decision["basis"], decision["decidedAt"],
+                decision["rationale"], compact(decision["evidenceRefs"]),
+            ),
+        )
 
     product_by_url: dict[str, int] = {}
     product_by_identity: dict[tuple[str, str, str], int] = {}
@@ -621,23 +686,44 @@ def build_database(target: Path) -> dict[str, int | str]:
         if pid is None:
             raise ValueError(f"language unit {unit['unitId']} has no collectible product {identity}")
         provider = provider_by_id[unit["providerId"]]
-        absence_supported = int(provider["supportsAbsence"])
+        source_url = unit.get("sourceUrl")
+        absence_supported = int(
+            bool(source_url) and source_url.rstrip("/") in absence_source_urls
+        )
+        adjudication = owner_by_unit.get(unit["unitId"])
+        if adjudication and unit["status"] != "contradicted":
+            raise ValueError(
+                f"owner adjudication {adjudication['adjudicationId']} targets non-contradicted "
+                f"unit {unit['unitId']}"
+            )
         if unit["status"] == "confirmed":
             app_status = "exists"
             established_languages.add((pid, LANGUAGE_CODE[unit["language"]]))
         elif unit["status"] == "contradicted":
-            app_status = "not-printed" if absence_supported else "disputed"
+            app_status = (
+                "not-printed"
+                if adjudication or absence_supported
+                else "disputed"
+            )
         else:
             app_status = "unresolved"
         language_application_status[(pid, LANGUAGE_CODE[unit["language"]])] = app_status
         cursor.execute(
-            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 pid, LANGUAGE_CODE[unit["language"]], 1, unit["status"], app_status,
-                absence_supported, unit["unitId"], unit["providerId"],
-                int(unit["corroborated"]), unit.get("sourceUrl"), unit.get("sourceRef"),
+                absence_supported, adjudication["adjudicationId"] if adjudication else None,
+                unit["unitId"], unit["providerId"],
+                int(unit["corroborated"]), source_url, unit.get("sourceRef"),
                 unit.get("sourceType"), unit.get("evidence"), unit.get("checkedAt"),
             ),
+        )
+
+    unit_by_id = {unit["unitId"]: unit for unit in units}
+    unknown_adjudications = sorted(set(owner_by_unit) - set(unit_by_id))
+    if unknown_adjudications:
+        raise ValueError(
+            "owner adjudications reference unknown units: " + ", ".join(unknown_adjudications)
         )
 
     for unit in excluded:
@@ -645,10 +731,10 @@ def build_database(target: Path) -> dict[str, int | str]:
         if pid is None:
             raise ValueError(f"excluded unit {unit['unitId']} has no product URL match")
         cursor.execute(
-            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 pid, LANGUAGE_CODE[unit["language"]], 1, "out-of-scope", "out-of-scope", 0,
-                unit["unitId"], None, None, None, None, None, None, None,
+                None, unit["unitId"], None, None, None, None, None, None, None,
             ),
         )
 
@@ -817,11 +903,22 @@ def build_database(target: Path) -> dict[str, int | str]:
 
     for unit in units:
         provider = provider_by_id[unit["providerId"]]
-        if unit["status"] == "contradicted" and not provider["supportsAbsence"]:
+        adjudication = owner_by_unit.get(unit["unitId"])
+        source_absence_supported = bool(
+            unit.get("sourceUrl")
+            and unit["sourceUrl"].rstrip("/") in absence_source_urls
+        )
+        if adjudication:
+            issue(
+                "information", "owner-adjudicated-absence", "language-unit", unit["unitId"],
+                "The collection owner adopted not-printed after reviewing the cited claims and "
+                "evidence; no single provider is treated as proving absence.",
+            )
+        elif unit["status"] == "contradicted" and not source_absence_supported:
             issue(
                 "warning", "unsupported-negative-language-claim", "language-unit", unit["unitId"],
-                f"Repository verdict is contradicted, but provider {unit['providerId']} declares "
-                "supportsAbsence=false. App status is conservatively disputed.",
+                f"Repository verdict is contradicted, but source {unit.get('sourceUrl') or unit['providerId']} "
+                "is not marked as an absence-capable complete scope. App status is conservatively disputed.",
             )
     for pid, language_code, edition, category in suppressed_edition_claims:
         if category == "suppressed-absent-edition":
@@ -900,6 +997,7 @@ def database_stats(target: Path) -> dict[str, int | str]:
         "products": scalar("SELECT COUNT(*) FROM products"),
         "collectible_products": scalar("SELECT COUNT(*) FROM products WHERE is_code_card=0"),
         "code_cards": scalar("SELECT COUNT(*) FROM products WHERE is_code_card=1"),
+        "owner_adjudications": scalar("SELECT COUNT(*) FROM owner_adjudications"),
         "language_claims": scalar("SELECT COUNT(*) FROM product_languages"),
         "language_confirmed": scalar(
             "SELECT COUNT(*) FROM product_languages WHERE verification_status='confirmed'"
@@ -912,6 +1010,13 @@ def database_stats(target: Path) -> dict[str, int | str]:
         ),
         "language_not_printed": scalar(
             "SELECT COUNT(*) FROM product_languages WHERE application_status='not-printed'"
+        ),
+        "language_owner_adjudicated": scalar(
+            "SELECT COUNT(*) FROM product_languages WHERE adjudication_id IS NOT NULL"
+        ),
+        "language_source_scoped_absence": scalar(
+            "SELECT COUNT(*) FROM product_languages WHERE application_status='not-printed' "
+            "AND absence_supported=1 AND adjudication_id IS NULL"
         ),
         "language_out_of_scope": scalar(
             "SELECT COUNT(*) FROM product_languages WHERE application_status='out-of-scope'"
@@ -972,14 +1077,20 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10000:
-            problems.append("database PRAGMA user_version is not 10000")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != 10001:
+            problems.append("database PRAGMA user_version is not 10001")
+        owner_schema = connection.execute(
+            "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
+        ).fetchone()
+        if not owner_schema or owner_schema[0] != "1.0.0":
+            problems.append("owner adjudications schema version is missing or unsupported")
         expected = {
             "products": len(load("snorlax_cards.json")["cards"]),
             "product_languages": (
                 len(load("verification/units.json"))
                 + len(load("verification/excluded_codecards.json"))
             ),
+            "owner_adjudications": len(load("verification/owner_adjudications.json")["decisions"]),
             "finish_units": len(load("verification/finish_units.json")["units"]),
             "checklist_items": len(load("analysis_checklist.json")["items"]),
         }
@@ -989,16 +1100,21 @@ def validate_database(target: Path) -> list[str]:
                 problems.append(f"{table}: expected {count}, found {actual}")
         hard_negatives = connection.execute(
             "SELECT COUNT(*) FROM product_languages "
-            "WHERE application_status='not-printed' AND absence_supported=0"
+            "WHERE application_status='not-printed' AND absence_supported=0 "
+            "AND adjudication_id IS NULL"
         ).fetchone()[0]
         if hard_negatives:
-            problems.append(f"{hard_negatives} hard negatives lack absence-capable evidence")
+            problems.append(
+                f"{hard_negatives} hard negatives lack scoped source evidence or owner adjudication"
+            )
         invalid_statuses = connection.execute(
             "SELECT COUNT(*) FROM product_languages WHERE "
             "(verification_status='confirmed' AND application_status<>'exists') OR "
-            "(verification_status='contradicted' AND absence_supported=1 "
+            "(verification_status='contradicted' AND adjudication_id IS NOT NULL "
             " AND application_status<>'not-printed') OR "
-            "(verification_status='contradicted' AND absence_supported=0 "
+            "(verification_status='contradicted' AND adjudication_id IS NULL AND absence_supported=1 "
+            " AND application_status<>'not-printed') OR "
+            "(verification_status='contradicted' AND adjudication_id IS NULL AND absence_supported=0 "
             " AND application_status<>'disputed') OR "
             "(verification_status IN ('pending','needs-manual-review') "
             " AND application_status<>'unresolved') OR "
@@ -1006,6 +1122,33 @@ def validate_database(target: Path) -> list[str]:
         ).fetchone()[0]
         if invalid_statuses:
             problems.append(f"{invalid_statuses} product-language application statuses are inconsistent")
+        owner_rows = connection.execute(
+            "SELECT adjudication_id, unit_id, decision, authority, basis "
+            "FROM owner_adjudications"
+        ).fetchall()
+        owner_decisions = load("verification/owner_adjudications.json")["decisions"]
+        expected_owner_ids = {item["adjudicationId"] for item in owner_decisions}
+        actual_owner_ids = {row[0] for row in owner_rows}
+        if actual_owner_ids != expected_owner_ids:
+            problems.append("owner adjudication ids do not match verification/owner_adjudications.json")
+        raw_units = {
+            item["unitId"]: item for item in load("verification/units.json")
+        }
+        for adjudication_id, unit_id, decision, authority, basis in owner_rows:
+            raw_unit = raw_units.get(unit_id)
+            if raw_unit is None:
+                problems.append(f"owner adjudication {adjudication_id} references unknown unit {unit_id}")
+                continue
+            if raw_unit["status"] != "contradicted":
+                problems.append(f"owner adjudication {adjudication_id} targets non-contradicted unit {unit_id}")
+            row = connection.execute(
+                "SELECT application_status, adjudication_id FROM product_languages WHERE unit_id=?",
+                (unit_id,),
+            ).fetchone()
+            if not row or row[0] != decision or row[1] != adjudication_id:
+                problems.append(f"owner adjudication {adjudication_id} is not applied to {unit_id}")
+            if decision != "not-printed" or authority != "collection-owner" or basis != "multi-source-adjudication":
+                problems.append(f"owner adjudication {adjudication_id} has invalid decision metadata")
         unverified_editions = connection.execute(
             "SELECT COUNT(*) FROM product_editions pe JOIN product_languages pl "
             "USING(product_id, language_code) WHERE pl.application_status<>'exists'"
@@ -1050,7 +1193,7 @@ normalized current-state projection. It contains no evidence journal and no migr
 | Cardmarket products | {stats['products']} ({stats['collectible_products']} collectible, {stats['code_cards']} code cards) |
 | Raw product-language claims | {stats['language_claims']} ({stats['language_out_of_scope']} code-card claims out of scope) |
 | Repository language verdicts | {stats['language_confirmed']} confirmed · {stats['language_contradicted']} contradicted |
-| App language statuses | {stats['language_not_printed']} not-printed · {stats['language_disputed']} disputed |
+| App language statuses | {stats['language_not_printed']} not-printed · {stats['language_disputed']} disputed ({stats['language_owner_adjudicated']} owner-adjudicated) |
 | Established product-edition rows | {stats['product_editions']} ({stats['suppressed_absent_editions']} absent-language and {stats['suppressed_unverified_editions']} unverified-language projections suppressed) |
 | Finish units / logical printings | {stats['finish_units']} / {stats['printings']} |
 | Physical checklist | {stats['checklist_items']} ({stats['documented_items']} documented · {stats['unresolved_items']} unresolved placeholders) |
@@ -1060,18 +1203,19 @@ normalized current-state projection. It contains no evidence journal and no migr
 
 ## The challenged data point
 
-The database preserves the original `repository_verdict='contradicted'` while applying the source
-registry's current absence policy. **{stats['language_not_printed']}** rows cite an explicitly
-absence-capable provider (currently the owner-designated Elite Fourum reference tables) and are
-exported as `application_status='not-printed'`. The remaining **{stats['language_disputed']}** rows
-cite providers whose registry says `supportsAbsence=false` and are exported as
-`application_status='disputed'` rather than hard negatives.
+The database preserves the original `repository_verdict='contradicted'` while recording the final
+application decision separately. **{stats['language_owner_adjudicated']}** rows are linked to
+`owner_adjudications`: the collection owner reviewed all cited claims and evidence and adopted
+`application_status='not-printed'`. This is deliberately not attributed to Elite Fourum or any
+other single provider. **{stats['language_source_scoped_absence']}** rows, if any, would instead be
+not-printed because their source is explicitly complete within a named scope. The remaining
+**{stats['language_disputed']}** rows stay `application_status='disputed'` because neither a
+scoped absence source nor an owner adjudication exists.
 
-The owner-designated Elite Fourum tables are treated as complete within their named scope, just
-below the collection owner's own attestation. Their caveats remain in the evidence text; the
-database does not erase or rewrite the research verdict. The Portuguese `xPRE 076` rows, for
-example, remain disputed because their provider is a retailer listing, not an absence-capable
-reference.
+The owner decision and its rationale are queryable in `owner_adjudications` and through the
+`app_language_availability` view. The raw evidence and repository verdict remain unchanged, so a
+consumer can distinguish source capability from the collection owner's final adjudication. The
+Portuguese `xPRE 076` rows, for example, remain disputed because no owner adjudication exists.
 
 ## Other field decisions
 

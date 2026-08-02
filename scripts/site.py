@@ -535,7 +535,8 @@ def main() -> int:
   printing actually exists?</em></p>
   <p>The goal is to let a collector tell three things apart that catalogues routinely blur:
   <strong>documented printings</strong>, <strong>unresolved claims</strong>, and
-  <strong>confirmed absences</strong> — and to keep every one of them auditable back to a source.</p>
+  <strong>final application absence decisions</strong> — and to keep every one of them auditable
+  back to its evidence and decision authority.</p>
 
   <div class="stats">
     {"".join(f'<div class="stat"><span class="n">{n}</span><span class="k">{html.escape(k)}</span></div>' for n, k in stats)}
@@ -701,7 +702,9 @@ def main() -> int:
     once it is shown to cover that category. This rule exists because an absence argument once
     produced a false contradiction here, which had to be reverted.</li>
     <li>Only a complete official checklist may establish that an alternative does <em>not</em>
-    exist, and only within its stated scope.</li>
+    exist, and only within its stated scope. Other final absence decisions are explicit
+    collection-owner adjudications after reviewing all cited claims; they are not attributed to a
+    single provider.</li>
   </ul>
   <h3>Finish family, treatment, marking, distribution and size are separate dimensions</h3>
   <p>The collector-facing <strong>Reverse Holo</strong> family includes technical
@@ -734,6 +737,7 @@ def main() -> int:
     <li><a href="analysis_confirmed_releases.csv">analysis_confirmed_releases.csv</a> — spreadsheet export</li>
     <li><a href="verification/finish_units.json">verification/finish_units.json</a> — finish state store</li>
     <li><a href="verification/units.json">verification/units.json</a> — language state store</li>
+    <li><a href="verification/owner_adjudications.json">verification/owner_adjudications.json</a> — collection-owner application decisions</li>
     <li><a href="verification/bulbapedia_release_dates.json">verification/bulbapedia_release_dates.json</a> — reviewed release-date sources</li>
     <li><a href="verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md">verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md</a> — full date-difference audit</li>
     <li><a href="verification/source_registry.json">verification/source_registry.json</a> — source registry</li>

@@ -145,8 +145,7 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         f"{source_counts['evidenceRecords']} evidence records, "
         f"{source_counts['uniqueUrls']} unique URLs, and "
         f"{source_counts['claimsAttributed']:,} attributed claims. Complete official manifests "
-        "and owner-designated complete Elite Fourum reference tables may establish absence "
-        "within scope. |",
+        "and the separate owner-adjudication store records final cross-source absence decisions. |",
         "| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact "
         "consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |",
         f"| Site and publication | The repository is {repository_visibility}. The interactive site "

@@ -62,6 +62,7 @@ FILES = [
     "verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md",
     "verification/finish_units.json",
     "verification/units.json",
+    "verification/owner_adjudications.json",
     "verification/CONTRADICTED.json",
     "verification/UNCONFIRMED.json",
     "verification/RESUME.md",

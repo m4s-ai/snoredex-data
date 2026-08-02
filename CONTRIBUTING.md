@@ -40,8 +40,10 @@ Evidence is ranked, and the ranking is public:
 [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) describes the source ladder and
 why absence is treated the way it is. Roughly, from strongest:
 
-1. A complete official manifest or an owner-designated complete Elite Fourum reference table —
-   the source classes that can establish that something is *absent* within their stated scope.
+1. A complete official manifest — the source class that can establish that something is *absent*
+   within its stated scope. A final collection-owner adjudication may also resolve an absence
+   after reviewing all cited claims, but it is recorded separately and is not credited to a single
+   provider.
 2. An official publisher listing or set checklist.
 3. An independent database or catalogue outside the marketplace the claim came from.
 4. A photographed specimen or an owner attestation.

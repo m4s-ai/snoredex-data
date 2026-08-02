@@ -4,7 +4,7 @@
   "generated": "2026-08-02",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
-   "supportsAbsence is true for complete official manifests and the owner-designated complete Elite Fourum reference tables, only within their stated scope.",
+   "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
    "Non-URL evidence is a named evidence class, never a fabricated hyperlink.",
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
@@ -30,6 +30,12 @@
    "usedFor": [
     "finish",
     "product"
+   ],
+   "absenceScopes": [
+    "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
    ],
    "attribution": "Official product checklists © The Pokémon Company International.",
    "notes": "The only source permitted to establish that a finish is absent, and only inside its stated scope.",
@@ -209,14 +215,17 @@
    "licenseOrTerms": "Forum terms; community-contributed content.",
    "category": "collector-community",
    "authorityTier": 2,
-   "coverage": "complete promo language tables and the 1st-edition timeline within their stated scope",
+   "coverage": "promo language tables and the 1st-edition timeline within their stated scope",
    "supportsAbsence": true,
    "usedFor": [
     "language",
     "edition"
    ],
+   "absenceScopes": [
+    "https://www.elitefourum.com/t/black-star-promos-languages/36573"
+   ],
    "attribution": "Collector-community reference tables from Elite Fourum.",
-   "notes": "Owner-designated high-authority community reference. Its named complete tables and timeline may establish absence within their stated scope; the collection owner's own attestation remains the final project authority.",
+   "notes": "High-authority community reference, just below collection-owner authority. Its designated complete table is absence-capable within scope; other final absence decisions require a collection-owner adjudication.",
    "hosts": [
     "elitefourum.com",
     "www.elitefourum.com"
@@ -330,6 +339,9 @@
    "usedFor": [
     "finish",
     "product"
+   ],
+   "absenceScopes": [
+    "https://play.pokemon.com/en-us/rewards/gallery?filter=series7"
    ],
    "attribution": "Prize Pack contents © The Pokémon Company International.",
    "notes": "Official gallery of Prize Pack series contents; one of the few complete manifests here.",
@@ -9888,7 +9900,8 @@
     "U0501"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 5
+   "usageCount": 5,
+   "supportsAbsence": true
   },
   {
    "canonicalUrl": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
@@ -10135,7 +10148,8 @@
     "override:play-prize-pack-gallery"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 7
+   "usageCount": 7,
+   "supportsAbsence": true
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045",
@@ -11138,7 +11152,8 @@
     "override:dragon-frontiers-official-checklist"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 5
+   "usageCount": 5,
+   "supportsAbsence": true
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
@@ -11157,7 +11172,8 @@
     "override:prize-pack-series-7-checklist"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 2
+   "usageCount": 2,
+   "supportsAbsence": true
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
@@ -11177,7 +11193,8 @@
     "override:prize-pack-series-8-checklist"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 3
+   "usageCount": 3,
+   "supportsAbsence": true
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",
@@ -11196,7 +11213,8 @@
     "override:prize-pack-series-3-checklist"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 2
+   "usageCount": 2,
+   "supportsAbsence": true
   },
   {
    "canonicalUrl": null,

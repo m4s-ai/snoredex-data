@@ -35,7 +35,7 @@ correction already made here, and reading it is how you avoid repeating one.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
    *photographed specimen* (1) / *official DB* (1) > *owner attestation* (2) /
-   *owner-designated Elite Fourum reference tables* (2) > *open database* (2) /
+   *high-authority Elite Fourum reference* (2) > *open database* (2) /
    *fan wiki* (3) / *marketplace listing* (3) > other *collector community* (4).
 
    A single non-URL source may confirm a unit: **16 units rest on owner attestation alone** and 5
@@ -49,9 +49,10 @@ correction already made here, and reading it is how you avoid repeating one.
    lists Korean promos, so a missing Korean row there is meaningful; its West coverage is one
    lumped "English" row, so its silence on French means nothing. This rule exists because an
    absence argument produced a false contradiction (`XY-P 149`) that had to be reverted.
-4. **A complete official manifest or an owner-designated complete Elite Fourum reference table
-   may establish absence,** and only within its stated scope. TCGdex `true` confirms a printing;
-   TCGdex `false` does not refute one.
+4. **A complete official manifest may establish absence,** and only within its stated scope.
+   Other final absence decisions must be explicit collection-owner adjudications after reviewing
+   all cited claims; they are stored separately and are not attributed to a single provider.
+   TCGdex `true` confirms a printing; TCGdex `false` does not refute one.
 5. **`pending` means not yet established, never proven absent.** This holds in the data, the
    site copy, and anything you write.
 6. **Write findings as a new Python pass under `verification/`,** then run report + audit +
@@ -106,6 +107,7 @@ python verification/review_findings.py      # cross-artifact consistency
 # ... do the work in a new Python pass under verification/ ...
 
 python verification/audit_evidence.py       # after any write
+python verification/test_owner_adjudications.py  # owner decision/store projection regression
 python verification/report.py               # regenerate exports
 python scripts/editions.py                  # if edition data changed
 python scripts/finishes.py                  # finish units/review + main summaries

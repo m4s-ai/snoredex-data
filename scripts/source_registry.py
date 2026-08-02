@@ -42,11 +42,10 @@ MARKDOWN_PATH = ROOT / "verification" / "SOURCES.md"
 # --------------------------------------------------------------------------------------------
 # Provider definitions
 #
-# `authorityTier` ranks how much weight a source carries, and `supportsAbsence` records the one
-# thing that actually matters for this project's discipline: whether a missing row in that source
-# is evidence of anything. Complete official manifests and the explicitly designated complete
-# Elite Fourum reference tables may say "not printed" within their stated scope; everything else
-# is positive-only.
+# `authorityTier` ranks how much weight a source carries. `supportsAbsence` says that a provider
+# has one or more explicitly complete scopes; `absenceScopes` names the exact URLs that qualify.
+# Provider authority is not itself an absence decision: the collection owner's final cross-source
+# adjudications live in `verification/owner_adjudications.json` and are projected into the database.
 # --------------------------------------------------------------------------------------------
 
 PROVIDERS: list[dict[str, Any]] = [
@@ -62,6 +61,12 @@ PROVIDERS: list[dict[str, Any]] = [
         "coverage": "complete-manifest within the stated set or Prize Pack scope",
         "supportsAbsence": True,
         "usedFor": ["finish", "product"],
+        "absenceScopes": [
+            "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+            "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+            "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+            "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",
+        ],
         "attribution": "Official product checklists © The Pokémon Company International.",
         "notes": "The only source permitted to establish that a finish is absent, and only inside its stated scope.",
     },
@@ -179,11 +184,14 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Forum terms; community-contributed content.",
         "category": "collector-community",
         "authorityTier": 2,
-        "coverage": "complete promo language tables and the 1st-edition timeline within their stated scope",
+        "coverage": "promo language tables and the 1st-edition timeline within their stated scope",
         "supportsAbsence": True,
         "usedFor": ["language", "edition"],
+        "absenceScopes": [
+            "https://www.elitefourum.com/t/black-star-promos-languages/36573",
+        ],
         "attribution": "Collector-community reference tables from Elite Fourum.",
-        "notes": "Owner-designated high-authority community reference. Its named complete tables and timeline may establish absence within their stated scope; the collection owner's own attestation remains the final project authority.",
+        "notes": "High-authority community reference, just below collection-owner authority. Its designated complete table is absence-capable within scope; other final absence decisions require a collection-owner adjudication.",
     },
     {
         "providerId": "ligapokemon",
@@ -259,6 +267,9 @@ PROVIDERS: list[dict[str, Any]] = [
         "coverage": "complete-manifest for the Prize Pack series it lists",
         "supportsAbsence": True,
         "usedFor": ["finish", "product"],
+        "absenceScopes": [
+            "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
+        ],
         "attribution": "Prize Pack contents © The Pokémon Company International.",
         "notes": "Official gallery of Prize Pack series contents; one of the few complete manifests here.",
     },
@@ -482,7 +493,7 @@ def main() -> int:
 
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):
-        rows.append({
+        row = {
             "canonicalUrl": entry["canonicalUrl"],
             "nonUrlEvidenceId": entry["nonUrlEvidenceId"],
             "providerId": entry["providerId"],
@@ -492,7 +503,39 @@ def main() -> int:
             "stableIds": sorted(entry["stableIds"])[:50],
             "retrievedAt": entry["retrievedAt"],
             "usageCount": entry["usageCount"],
-        })
+        }
+        if entry["canonicalUrl"] and entry["canonicalUrl"] in {
+            canonical_url(scope)
+            for scope in PROVIDER_BY_ID[entry["providerId"]].get("absenceScopes", [])
+        }:
+            row["supportsAbsence"] = True
+        rows.append(row)
+
+    evidence_urls = {row["canonicalUrl"] for row in rows if row["canonicalUrl"]}
+    missing_scopes = {
+        provider["providerId"]: sorted(
+            canonical_url(scope)
+            for scope in provider.get("absenceScopes", [])
+            if canonical_url(scope) not in evidence_urls
+        )
+        for provider in PROVIDERS
+        if provider.get("supportsAbsence") and provider.get("absenceScopes")
+    }
+    missing_scopes = {provider: scopes for provider, scopes in missing_scopes.items() if scopes}
+    if missing_scopes:
+        print(f"ERROR: absence scopes are not present in the evidence index: {missing_scopes}", file=sys.stderr)
+        return 1
+    unscopeable = [
+        provider["providerId"] for provider in PROVIDERS
+        if provider.get("supportsAbsence") and not provider.get("absenceScopes")
+    ]
+    if unscopeable:
+        print(
+            "ERROR: absence-capable providers must declare absenceScopes: "
+            + ", ".join(unscopeable),
+            file=sys.stderr,
+        )
+        return 1
 
     usage_by_provider = Counter(row["providerId"] for row in rows)
     urls_by_provider: dict[str, int] = defaultdict(int)
@@ -518,7 +561,7 @@ def main() -> int:
             "generated": date.today().isoformat(),
             "policy": [
                 "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
-                "supportsAbsence is true for complete official manifests and the owner-designated complete Elite Fourum reference tables, only within their stated scope.",
+                "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
                 "Non-URL evidence is a named evidence class, never a fabricated hyperlink.",
                 "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there.",
             ],
@@ -579,10 +622,12 @@ def render_markdown(document: dict[str, Any]) -> str:
         f"({document['meta']['counts']['uniqueUrls']} unique URLs and "
         f"{document['meta']['counts']['nonUrlEvidenceClasses']} non-URL evidence classes).",
         "",
-        "**`supportsAbsence` is the column that matters.** A complete official manifest or the",
-        "owner-designated complete Elite Fourum reference tables may establish that a printing",
-        "does *not* exist, and only within the source's stated scope.",
-        "For every other provider a missing row is a coverage gap, never a finding.",
+        "**`supportsAbsence` describes source capability, not a final application decision.** A",
+        "complete official manifest may establish that a printing does *not* exist within its",
+        "stated scope. The collection owner's cross-source decisions are stored separately in",
+        "`verification/owner_adjudications.json`; an evidence row is absence-capable only when its",
+        "own `supportsAbsence` flag is true. For every other source a missing row is a coverage",
+        "gap, never a finding.",
         "",
         "| Provider | Category | Tier | Absence? | Sources | Claims | Used for |",
         "|---|---|---:|:---:|---:|---:|---|",
@@ -603,6 +648,9 @@ def render_markdown(document: dict[str, Any]) -> str:
             f"- **Terms:** {provider['licenseOrTerms']}",
             f"- **Coverage:** {provider['coverage']}",
             f"- **Can establish absence:** {'yes, within its stated scope' if provider['supportsAbsence'] else 'no — positive evidence only'}",
+            *(["- **Absence-capable source scopes:** " + ", ".join(
+                f"<{scope}>" for scope in provider.get("absenceScopes", [])
+            )] if provider.get("absenceScopes") else []),
             f"- **Attribution:** {provider['attribution']}",
             f"- **Notes:** {provider['notes']}",
             "",

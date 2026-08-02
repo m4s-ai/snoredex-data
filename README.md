@@ -36,9 +36,10 @@ over-claiming is itself a finding, so it is preserved rather than quietly correc
 Two rules hold everywhere in the data, the tooling and the site copy:
 
 1. **Positive evidence only.** A source that fails to list a printing has a *gap*; it has not
-   proved the printing does not exist. Only a complete official manifest or an owner-designated
-   complete Elite Fourum reference table can establish absence, and only inside its own stated
-   scope.
+   proved the printing does not exist. A complete official manifest can establish absence only
+   inside its stated scope. Other final absence decisions are explicit collection-owner
+   adjudications recorded in `verification/owner_adjudications.json` after reviewing all cited
+   claims; they are not attributed to a single provider.
 2. **`pending` means not yet established — never proven absent.** The same goes for `unmapped` and
    `other-product` on the finish side. Nothing here claims non-existence by silence.
 
@@ -59,11 +60,12 @@ Then visit <http://localhost:8000/>. `index.html` is the whole site; nothing els
 
 | You want | Read | Watch out for |
 |---|---|---|
-| A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite) / [`DATABASE.md`](DATABASE.md) | Start from the `app_*` views. Historical `contradicted` rows become app-safe `disputed` unless their evidence is explicitly absence-capable. |
+| A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite) / [`DATABASE.md`](DATABASE.md) | Start from the `app_*` views. Historical `contradicted` rows become `disputed` unless a scoped source or explicit owner adjudication resolves them. |
 | A personal have/have-not tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Copy the blank template or use `scripts/tracker.py`; catalogue sync preserves ownership state. |
 | The Cardmarket product view — identity, rarity, art, artist, editions | [`snorlax_cards.json`](snorlax_cards.json) | Use `languagesConfirmed` / `languagesContradicted` / `languagesUnresolved`. The raw `languages` field is the marketplace claim, kept deliberately. |
 | A stable list of physical things to collect | [`analysis_checklist.json`](analysis_checklist.json) | One record per documented printing *or* per explicitly unresolved one — placeholders are items too. |
 | Which languages a card exists in, and on whose word | [`verification/units.json`](verification/units.json) | Keyed by `(setCode, number, variant, language)`. |
+| Final owner decisions on disputed claims | [`verification/owner_adjudications.json`](verification/owner_adjudications.json) | Explicit cross-source application decisions; they do not rewrite `units.json` or credit a single provider. |
 | Which finishes a card exists in | [`verification/finish_units.json`](verification/finish_units.json) | Keyed by `(setCode, number, language)` — deliberately *not* by variant token. |
 | Release chronology | [`analysis_confirmed_releases.json`](analysis_confirmed_releases.json) / [`.csv`](analysis_confirmed_releases.csv) | Dates follow the matching market inside a shared Bulbapedia article. |
 | Who said what, and how strong it is | [`verification/SOURCES.md`](verification/SOURCES.md), [`verification/source_registry.json`](verification/source_registry.json) | Every claim names a provider and an authority tier. |
@@ -114,7 +116,7 @@ Status snapshot: **2026-08-02**, after the database review and release-readiness
 | Language verification | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Physical checklist | **838 items** across 174 cards and 15 languages: 663 documented printings plus 175 explicit unresolved placeholders. |
 | Finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
-| Evidence registry | **18 providers**, 883 evidence records, 876 unique URLs, and 2,791 attributed claims. Complete official manifests and owner-designated complete Elite Fourum reference tables may establish absence within scope. |
+| Evidence registry | **18 providers**, 883 evidence records, 876 unique URLs, and 2,791 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -137,7 +139,7 @@ agreed independently, and `verification/source_registry.json` records the author
 | Tier | Sources |
 |---|---|
 | 1 | photographed specimen · official database |
-| 2 | open database · owner attestation · owner-designated complete Elite Fourum reference tables |
+| 2 | open database · owner attestation · high-authority Elite Fourum reference |
 | 3 | fan wiki · marketplace listing |
 | 4 | other collector community |
 

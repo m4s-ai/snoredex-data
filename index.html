@@ -58,7 +58,8 @@
   printing actually exists?</em></p>
   <p>The goal is to let a collector tell three things apart that catalogues routinely blur:
   <strong>documented printings</strong>, <strong>unresolved claims</strong>, and
-  <strong>confirmed absences</strong> — and to keep every one of them auditable back to a source.</p>
+  <strong>final application absence decisions</strong> — and to keep every one of them auditable
+  back to its evidence and decision authority.</p>
 
   <div class="stats">
     <div class="stat"><span class="n">204</span><span class="k">card-variant rows</span></div><div class="stat"><span class="n">634</span><span class="k">confirmed language claims</span></div><div class="stat"><span class="n">85</span><span class="k">refuted claims</span></div><div class="stat"><span class="n">637</span><span class="k">finish units</span></div><div class="stat"><span class="n">332</span><span class="k">externally confirmed finishes</span></div><div class="stat"><span class="n">838</span><span class="k">checklist items</span></div><div class="stat"><span class="n">883</span><span class="k">distinct sources</span></div><div class="stat"><span class="n">634</span><span class="k">confirmed card×language pairs</span></div>
@@ -224,7 +225,9 @@
     once it is shown to cover that category. This rule exists because an absence argument once
     produced a false contradiction here, which had to be reverted.</li>
     <li>Only a complete official checklist may establish that an alternative does <em>not</em>
-    exist, and only within its stated scope.</li>
+    exist, and only within its stated scope. Other final absence decisions are explicit
+    collection-owner adjudications after reviewing all cited claims; they are not attributed to a
+    single provider.</li>
   </ul>
   <h3>Finish family, treatment, marking, distribution and size are separate dimensions</h3>
   <p>The collector-facing <strong>Reverse Holo</strong> family includes technical
@@ -257,6 +260,7 @@
     <li><a href="analysis_confirmed_releases.csv">analysis_confirmed_releases.csv</a> — spreadsheet export</li>
     <li><a href="verification/finish_units.json">verification/finish_units.json</a> — finish state store</li>
     <li><a href="verification/units.json">verification/units.json</a> — language state store</li>
+    <li><a href="verification/owner_adjudications.json">verification/owner_adjudications.json</a> — collection-owner application decisions</li>
     <li><a href="verification/bulbapedia_release_dates.json">verification/bulbapedia_release_dates.json</a> — reviewed release-date sources</li>
     <li><a href="verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md">verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md</a> — full date-difference audit</li>
     <li><a href="verification/source_registry.json">verification/source_registry.json</a> — source registry</li>
@@ -318,7 +322,7 @@
 <tr><td><strong>Pokémon Card official database (Japan)</strong></td><td>official-publisher</td><td>1</td><td>no</td><td>37</td><td>83</td><td>Japanese-market cards and illustrators</td></tr>
 <tr><td><strong>The Pokémon Company official checklists</strong></td><td>official-publisher</td><td>1</td><td>yes</td><td>4</td><td>12</td><td>complete-manifest within the stated set or Prize Pack scope</td></tr>
 <tr><td><strong>Collection owner attestation</strong></td><td>non-url-evidence</td><td>2</td><td>no</td><td>1</td><td>54</td><td>specimens physically held or inspected by the collection owner</td></tr>
-<tr><td><strong>Elite Fourum</strong></td><td>collector-community</td><td>2</td><td>yes</td><td>3</td><td>13</td><td>complete promo language tables and the 1st-edition timeline within their stated scope</td></tr>
+<tr><td><strong>Elite Fourum</strong></td><td>collector-community</td><td>2</td><td>yes</td><td>3</td><td>13</td><td>promo language tables and the 1st-edition timeline within their stated scope</td></tr>
 <tr><td><strong>PSA certification and registry</strong></td><td>grading-registry</td><td>2</td><td>no</td><td>1</td><td>2</td><td>named grading varieties for graded specimens</td></tr>
 <tr><td><strong>TCGdex</strong></td><td>open-database</td><td>2</td><td>no</td><td>309</td><td>747</td><td>card existence per language; positive normal/holo/reverse flags</td></tr>
 <tr><td><strong>pokemontcg.io</strong></td><td>open-database</td><td>2</td><td>no</td><td>1</td><td>123</td><td>English-market illustrator credits and exact set release dates</td></tr>
