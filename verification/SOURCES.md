@@ -18,8 +18,8 @@ gap, never a finding.
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 17 | 17 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
 | **The Pokémon Company official checklists** | official-publisher | 1 | yes | 4 | 12 | finish, product |
-| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 54 | language, finish, edition |
-| **Elite Fourum** | collector-community | 2 | yes | 3 | 13 | language, edition |
+| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 51 | language, finish, edition |
+| **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | no | 1 | 2 | finish |
 | **TCGdex** | open-database | 2 | no | 309 | 747 | language, finish |
 | **pokemontcg.io** | open-database | 2 | no | 1 | 123 | artist, date |

@@ -397,6 +397,20 @@ def canonical_url(url: str) -> str:
 
 
 def resolve_provider(url: str | None, source_type: str | None) -> str | None:
+    """Infer the provider for a record that does not carry one.
+
+    A `sourceType` often names more than one source — "Elite Fourum collector-group confirmation
+    corroborated by archived official Copag announcements and owner attestation" names two. This
+    used to return whichever pattern sat earliest in `SOURCE_TYPE_PATTERNS`, so position in a
+    hand-ordered list decided which source got the credit: three contradictions were attributed to
+    the collection owner rather than to Elite Fourum, because "owner attestation" is listed five
+    places above "elite ?fourum" (#73).
+
+    The tie-break is now where each source is *named in the text*, earliest first, which matches how
+    these strings are written — the source carrying the claim leads, and what corroborates it
+    follows. Across all 719 units that agrees with the stored `providerId` every time; the previous
+    rule disagreed three times. Check `S15` holds it there.
+    """
     if url:
         host = urlsplit(url).netloc.lower()
         if host in HOST_TO_PROVIDER:
@@ -404,10 +418,16 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
         for known_host, provider_id in HOST_TO_PROVIDER.items():
             if host.endswith("." + known_host) or host == known_host:
                 return provider_id
-    for pattern, provider_id in SOURCE_TYPE_PATTERNS:
-        if source_type and pattern.search(source_type):
-            return provider_id
-    return None
+    if not source_type:
+        return None
+    named: list[tuple[int, int, str]] = []
+    for order, (pattern, provider_id) in enumerate(SOURCE_TYPE_PATTERNS):
+        found = pattern.search(source_type)
+        if found:
+            # List order stays the tie-break for two sources named at the same offset, so the
+            # result is deterministic rather than dependent on dict or set iteration.
+            named.append((found.start(), order, provider_id))
+    return min(named)[2] if named else None
 
 
 def main() -> int:
@@ -424,8 +444,11 @@ def main() -> int:
     unresolved: list[str] = []
 
     def record(url: str | None, source_type: str | None, dimension: str, stable_id: str,
-               retrieved: str | None = None) -> None:
-        provider_id = resolve_provider(url, source_type)
+               retrieved: str | None = None, provider_id: str | None = None) -> None:
+        # A language unit already names its provider; inferring one from prose that the unit could
+        # simply be asked is how the registry came to disagree with the store (#73). Inference is
+        # for the records that carry no provider — finish sources, artist credits, release dates.
+        provider_id = provider_id or resolve_provider(url, source_type)
         if provider_id is None:
             unresolved.append(f"{dimension}:{stable_id} url={url!r} sourceType={source_type!r}")
             return
@@ -457,7 +480,8 @@ def main() -> int:
     for unit in units:
         if unit.get("status") in {"confirmed", "contradicted"}:
             record(unit.get("sourceUrl"), unit.get("sourceType"), "language",
-                   unit["unitId"], (unit.get("checkedAt") or "")[:10] or None)
+                   unit["unitId"], (unit.get("checkedAt") or "")[:10] or None,
+                   provider_id=unit.get("providerId"))
 
     for unit in finish_units:
         for printing in unit["printings"]:
