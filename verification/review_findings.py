@@ -728,6 +728,39 @@ check(
     f"{phantom_tiers}",
 )
 
+# S15 — the store and the registry name the same source (#73)
+# --------------------------------------------------------------------------- #
+# scripts/source_registry.py can infer a provider from `sourceType` prose, and for records that
+# carry no provider it still must. Where a unit *does* name one, the two answers have to agree —
+# and for a long time they did not, with nothing looking. Fourteen units were the #64 data defect;
+# three more were the resolver preferring whichever pattern sat earliest in its list over the
+# source actually named first in the text.
+#
+# This is the check that would have surfaced #64 the day it landed, so it is worth more than either
+# fix: it makes a whole class of provenance drift loud instead of latent.
+sys.path.insert(0, str(ROOT / "scripts"))
+try:
+    from source_registry import resolve_provider  # noqa: E402
+
+    provider_disagreements = [
+        f"{u['unitId']}: stored {u.get('providerId')} vs resolved "
+        f"{resolve_provider(u.get('sourceUrl'), u.get('sourceType'))}"
+        for u in resolved_units
+        if resolve_provider(u.get("sourceUrl"), u.get("sourceType")) != u.get("providerId")
+    ]
+    check(
+        "S15",
+        "The stored provider and the registry's inference agree",
+        "FAIL",
+        not provider_disagreements,
+        f"{len(provider_disagreements)} unit(s) would be credited to a different source in "
+        f"verification/source_registry.json than units.json records: "
+        f"{provider_disagreements[:5]}",
+    )
+except ImportError as error:  # pragma: no cover - the generator is always present in a checkout
+    check("S15", "The stored provider and the registry's inference agree", "FAIL", False,
+          f"could not import scripts/source_registry.py: {error}")
+
 check(
     "I5",
     "Evidence strength",
