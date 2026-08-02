@@ -71,6 +71,9 @@ is recorded in `verification/passes/close_language_review.py` and in each unit's
 Elite Fourum matrix limits the stamped Battle Academy 2020 Mewtwo/Charizard Deck cards to English,
 French, German and Italian; Bulbapedia and regional manufacturer/retailer checks found no Spanish
 or Portuguese BA20 MWT Snorlax printing. The finish-verification queue remains a separate layer.
+The clean application handoff records the collection owner's final not-printed decisions separately
+in `verification/owner_adjudications.json`; the underlying contradicted verdicts and evidence stay
+unchanged.
 
 ## 3. Repository layout
 
@@ -82,7 +85,8 @@ snorlax_cards.json            MAIN dataset: 198 singles, one object each. Fields
                               meta{}.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
-                              No evidence journal or pass history. See DATABASE.md.
+                              No evidence journal or pass history. Owner adjudications are linked
+                              separately for final application decisions. See DATABASE.md.
 snoredex-tracker-template.sqlite
                               Blank separate collection state keyed by checklistId. Copy it or use
                               scripts/tracker.py; sync preserves have/wanted/quantity/notes.
@@ -127,6 +131,9 @@ scripts/                      Two halves; only the second can be re-run (#28).
 verification/
   units.json                  THE STATE STORE. One row per card×language×variant with status,
                               sourceUrl, sourceType, evidence, checkedAt.
+  owner_adjudications.json    COLLECTION-OWNER DECISIONS. Explicit final application decisions
+                              after reviewing all cited claims; never rewrites units.json or
+                              attributes absence to a single provider.
   evidence.jsonl              Append-only journal of what was observed, and when. NOT a
                               projection of units.json and not replayable into one: entries are
                               appended as observations happen, corrections are appended rather
@@ -268,9 +275,9 @@ Brazilian Prize Pack confirmations were obtained.
 2. **Grade evidence.** `providerId` names the source, `corroborated` says whether more than one
    provider agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
    *photographed specimen* (1) > *official DB* (1) > *open database* (2) / *owner attestation* (2)
-   > *fan wiki* (3) / *marketplace listing* (3) > other *collector community* (4). The owner-
-   > designated complete Elite Fourum reference tables are tier 2 and may establish absence
-   > within their stated scope.
+   > *fan wiki* (3) / *marketplace listing* (3) > other *collector community* (4). Elite Fourum
+   > remains a high-authority tier-2 reference, but its authority does not by itself establish
+   > absence; explicit collection-owner adjudications record final cross-source decisions.
 
    A single non-URL source may confirm a unit. **16 units rest on owner attestation alone** and 5
    on a photographed specimen alone, all queryable as

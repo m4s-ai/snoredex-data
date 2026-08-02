@@ -83,6 +83,9 @@ jobs:
       - name: JP illustrator parser tests
         run: python verification/test_jp_parser.py
 
+      - name: Owner adjudication regression tests
+        run: python verification/test_owner_adjudications.py
+
       - name: Evidence audit
         run: python verification/audit_evidence.py
 
