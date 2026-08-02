@@ -34,9 +34,17 @@ correction already made here, and reading it is how you avoid repeating one.
    evidence. A seller's *photo* of the physical card is.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
-   *photographed specimen* (1) / *official DB* (1) > *owner attestation* (2) /
-   *high-authority Elite Fourum reference* (2) > *open database* (2) /
-   *fan wiki* (3) / *marketplace listing* (3) > other *collector community* (4).
+
+<!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
+| Tier | Sources |
+|---|---|
+| 1 | Photographed physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
+| 2 | Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 3 | Bulbapedia · LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 5 | Cardmarket · Internal derivation from a sibling record |
+
+Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
+<!-- /generated:authority-tiers -->
 
    A single non-URL source may confirm a unit: **30 units rest on owner attestation alone** and 5
    on a photographed specimen alone. The owner holds those cards and no database records them, so
