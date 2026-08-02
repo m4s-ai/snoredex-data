@@ -80,6 +80,12 @@ snorlax_cards.json            MAIN dataset: 198 singles, one object each. Fields
                               variantToken (V1/V2/V3), variantName (+source), variantAxes,
                               cardKey, artist(+source), editions{}, finishAvailability{}, market,
                               meta{}.
+snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
+                              releases, finishes, checklist and providers in one SQLite database.
+                              No evidence journal or pass history. See DATABASE.md.
+snoredex-tracker-template.sqlite
+                              Blank separate collection state keyed by checklistId. Copy it or use
+                              scripts/tracker.py; sync preserves have/wanted/quantity/notes.
 images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg or .png — the
                               extension states the actual format; 55 are PNG, see #34).
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
@@ -94,9 +100,9 @@ scripts/                      Two halves; only the second can be re-run (#28).
                               LIVE generators, in run order (§7 has the full command list):
                                 analyze -> finishes -> language_status -> confirmed_releases
                                 -> source_registry -> checklist -> readme_stats -> issue_templates
-                                -> open_items -> site
+                                -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). Seven take --check; see §7.
+                              and verifies the Pages artifact). Eight take --check; see §7.
                               analyze.py is the SOLE producer of analysis_artists,
                               _shared_cards, _variants and _language_drift, and reads
                               snorlax_cards.json only — the single canonical node (#30). Its
@@ -262,7 +268,9 @@ Brazilian Prize Pack confirmations were obtained.
 2. **Grade evidence.** `providerId` names the source, `corroborated` says whether more than one
    provider agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
    *photographed specimen* (1) > *official DB* (1) > *open database* (2) / *owner attestation* (2)
-   > *fan wiki* (3) / *marketplace listing* (3) > *collector community* (4).
+   > *fan wiki* (3) / *marketplace listing* (3) > other *collector community* (4). The owner-
+   > designated complete Elite Fourum reference tables are tier 2 and may establish absence
+   > within their stated scope.
 
    A single non-URL source may confirm a unit. **16 units rest on owner attestation alone** and 5
    on a photographed specimen alone, all queryable as
@@ -306,6 +314,9 @@ python scripts/source_registry.py                # rebuild provider/evidence reg
 python scripts/checklist.py                      # rebuild canonical checklist items
 python scripts/readme_stats.py                   # refresh generated README blocks
 python scripts/issue_templates.py                # rebuild the community correction form
+python scripts/open_items.py                     # rebuild verification/open-items.html
+python scripts/database.py                       # normalized current-state SQLite + handoff audit
+python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 python scripts/site.py                           # rebuild index.html + the alias redirect
 python verification/review_integrity.py     # after any write
 python verification/review_findings.py           # after any write
@@ -315,10 +326,11 @@ python verification/verify_finish_sources.py # recheck machine-readable TCGCSV a
 
 Order matters, and it is the order above: `finishes.py` writes the card finish summaries,
 `language_status.py` writes the card language verdicts, `confirmed_releases.py` reads both and
-writes the chronological rows, and `checklist.py` and `site.py` read those. Five generators take a
-`--check` mode that fails instead of writing — `checklist`, `readme_stats`, `issue_templates`,
-`site`, `source_registry`, `open_items`, `analyze` — and the release gate runs those with `--check`, runs `finishes.py
---reproject`, `language_status.py` and `confirmed_releases.py` for real, then asserts
+writes the chronological rows, and `checklist.py`, `database.py` and `site.py` read those. Eight
+generators take a `--check` mode that fails instead of writing — `checklist`, `readme_stats`,
+`issue_templates`, `site`, `source_registry`, `open_items`, `analyze`, `database` — and the release
+gate runs those with `--check`, validates the blank tracker template, runs `finishes.py --reproject`,
+`language_status.py` and `confirmed_releases.py` for real, then asserts
 `git diff --exit-code`. Either way a generator whose output would move fails the build.
 `publish.py` takes `--verify`. `finishes.py --reproject` redoes only the card projection from the
 committed finish store and needs no network, which is the fast path when a projection rule changes.

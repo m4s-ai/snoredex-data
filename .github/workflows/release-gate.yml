@@ -106,6 +106,8 @@ jobs:
           python scripts/readme_stats.py --check
           python scripts/issue_templates.py --check
           python scripts/open_items.py --check
+          python scripts/database.py --check
+          python scripts/tracker.py check-template
           python scripts/site.py --check
           git diff --exit-code || {
               echo "::error::Regenerating produced different output than what is committed."

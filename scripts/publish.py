@@ -34,10 +34,13 @@ MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 FILES = [
     "index.html",
     "README.md",
+    "DATABASE.md",
     "FINDINGS.md",
     "LICENSE.md",
     "THIRD_PARTY_NOTICES.md",
     "snorlax_cards.json",
+    "snoredex.sqlite",
+    "snoredex-tracker-template.sqlite",
     "analysis_checklist.json",
     "analysis_confirmed_releases.json",
     "analysis_confirmed_releases.csv",
@@ -64,6 +67,7 @@ FILES = [
     "verification/RESUME.md",
     "verification/FINISH_SOURCES.md",
     "verification/PUBLIC-READINESS-AUDIT.md",
+    "verification/DATA-HANDOFF-AUDIT.md",
 ]
 
 # Whole directories, restricted by extension so a stray file cannot ride along.

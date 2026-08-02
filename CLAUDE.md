@@ -34,8 +34,9 @@ correction already made here, and reading it is how you avoid repeating one.
    evidence. A seller's *photo* of the physical card is.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
-   *photographed specimen* (1) / *official DB* (1) > *open database* (2) / *owner attestation* (2)
-   > *fan wiki* (3) / *marketplace listing* (3) > *collector community* (4).
+   *photographed specimen* (1) / *official DB* (1) > *owner attestation* (2) /
+   *owner-designated Elite Fourum reference tables* (2) > *open database* (2) /
+   *fan wiki* (3) / *marketplace listing* (3) > other *collector community* (4).
 
    A single non-URL source may confirm a unit: **16 units rest on owner attestation alone** and 5
    on a photographed specimen alone. The owner holds those cards and no database records them, so
@@ -48,8 +49,9 @@ correction already made here, and reading it is how you avoid repeating one.
    lists Korean promos, so a missing Korean row there is meaningful; its West coverage is one
    lumped "English" row, so its silence on French means nothing. This rule exists because an
    absence argument produced a false contradiction (`XY-P 149`) that had to be reverted.
-4. **Only a complete official manifest may establish absence,** and only within its stated scope.
-   TCGdex `true` confirms a printing; TCGdex `false` does not refute one.
+4. **A complete official manifest or an owner-designated complete Elite Fourum reference table
+   may establish absence,** and only within its stated scope. TCGdex `true` confirms a printing;
+   TCGdex `false` does not refute one.
 5. **`pending` means not yet established, never proven absent.** This holds in the data, the
    site copy, and anything you write.
 6. **Write findings as a new Python pass under `verification/`,** then run report + audit +
@@ -114,14 +116,17 @@ python scripts/checklist.py                 # canonical checklist items
 python scripts/readme_stats.py              # generated README blocks
 python scripts/issue_templates.py           # community correction form
 python scripts/open_items.py                # verification/open-items.html
+python scripts/database.py                  # current-state application database + audit
+python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 python scripts/site.py                      # index.html + alias redirect
 
 python verification/review_integrity.py     # after any write
 python verification/review_findings.py      # after any write
 ```
 
-Seven generators take `--check`, which fails instead of writing: `checklist`, `readme_stats`,
-`issue_templates`, `site`, `source_registry`, `open_items`, `analyze`. The gate runs those with `--check`, runs
+Eight generators take `--check`, which fails instead of writing: `checklist`, `readme_stats`,
+`issue_templates`, `site`, `source_registry`, `open_items`, `analyze`, `database`. The gate runs
+those with `--check`, validates the blank tracker template, runs
 `finishes.py --reproject`, `language_status.py` and `confirmed_releases.py` for real, and then
 asserts `git diff --exit-code` — so a generator whose output would move fails the build either
 way. `publish.py` takes `--verify` rather than `--check`.
