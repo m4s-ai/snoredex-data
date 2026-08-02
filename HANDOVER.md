@@ -279,13 +279,24 @@ Brazilian Prize Pack confirmations were obtained.
    > remains a high-authority tier-2 reference, but its authority does not by itself establish
    > absence; explicit collection-owner adjudications record final cross-source decisions.
 
-   A single non-URL source may confirm a unit. **16 units rest on owner attestation alone** and 5
+   A single non-URL source may confirm a unit. **30 units rest on owner attestation alone** and 5
    on a photographed specimen alone, all queryable as
    `corroborated == false and providerId in {owner-attestation, photographed-specimen}`. The
    owner physically holds these cards and no database records them, so the alternative is not
    better evidence but a false "open" count. What is not acceptable is a single *weaker* source:
    `review_findings.py` check E3 fails if anything below tier 2 confirms a unit uncorroborated,
    and E4 fails if the number above stops matching the data. Prefer corroboration where it exists.
+
+   **A claim is graded by what it rests on, not by the strongest source near it.** The attestation
+   figure read 16 until #64: fourteen `PPS7`/`PPS8 JTG 117` units carried
+   `providerId: photographed-specimen` — tier 1, above an official database — while their evidence
+   said "Owner (domain expert) confirms". One German holo specimen (`SPEC-0001`) and one Portuguese
+   LigaPokemon listing covered *neighbouring* units of the same product, and the label had drifted
+   onto all of them. `scripts/source_registry.py`, which resolves a provider from `sourceType`
+   text rather than from the stored field, had been reporting `owner-attestation` for those units
+   the whole time — the two computations disagreed and nothing compared them. Checks `S13` and
+   `S14` close it: `sourceRef` holds a reference or nothing, and specimen authority requires a
+   cited specimen.
 3. **Never contradict on bare absence.** First prove the source *covers the category* (e.g.
    pokumon lists Korean promos, so a missing Korean row is meaningful). This rule exists because
    an absence-argument produced a false contradiction that had to be reverted (`XY-P 149`).

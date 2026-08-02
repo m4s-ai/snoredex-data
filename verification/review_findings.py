@@ -523,11 +523,16 @@ check(
     f"e.g. {unverifiable[:5]}",
 )
 
-# Both documents state this number, and both are read by someone deciding whether owner evidence
-# is acceptable — HANDOVER by a human, CLAUDE.md by an agent. A number stated twice drifts twice.
+# Three documents state this number, and each is read by someone deciding whether owner evidence
+# is acceptable — HANDOVER by a human, CLAUDE.md by an agent, RESUME by whoever is about to add a
+# confirmation. A number stated three times drifts three times, and this one did: RESUME.md said
+# "currently 0" while the other two said 16 and the data said 30 (#64). It is only in this check
+# that the sentence stays true, so every document that states it has to be inside the check.
 attestation_only = by_provider.get("owner-attestation", 0)
 policy_docs = {"HANDOVER.md": handover,
-               "CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8")}
+               "CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8"),
+               "verification/RESUME.md": (ROOT / "verification" / "RESUME.md")
+               .read_text(encoding="utf-8")}
 disagreeing = {}
 for name, text in policy_docs.items():
     found = re.search(r"\*?\*?(\d+) units rest on owner attestation alone", text)
@@ -664,6 +669,42 @@ check(
     True,
     f"{len(declared_photos)} of {len(specimens)} inspected specimens have their photograph "
     f"committed; the rest rest on the recorded inspection alone until one is supplied.",
+)
+
+# S13-S14 — the provenance fields say what the claim rests on, not what is nearby (#64)
+# --------------------------------------------------------------------------- #
+# Fourteen Prize Pack units were stored as `photographed-specimen` — tier 1, above an official
+# database — on evidence that opened "Owner (domain expert) confirms". Their `sourceRef` held the
+# sentence "(owner attestation, corroborated by LigaPokemon + photographed specimens)", which
+# names the confusion outright: the field had been set to the strongest item in the corroboration
+# mix rather than to the source the claim rests on. Nothing caught it, because S8 only inspects
+# references that already look like references, and E3/E4 read `providerId` — the field that moved.
+
+prose_refs = [f"{u['unitId']}: {u['sourceRef']!r}" for u in resolved_units
+              if u.get("sourceRef") and not str(u["sourceRef"]).startswith("specimen:")]
+check(
+    "S13",
+    "A reference field holds a reference, never prose",
+    "FAIL",
+    not prose_refs,
+    f"{len(prose_refs)} unit(s) put a sentence in sourceRef; it belongs in evidence. "
+    f"e.g. {prose_refs[:3]}",
+)
+
+# The converse of S8. S8 proves a citation points at the right printing; this proves the strongest
+# provider in the registry cannot be claimed without one. A specimen is the only tier-1 class whose
+# evidence lives entirely inside this repository, so it is the only one a writer can assert by
+# typing it.
+uncited_specimen_claims = [u["unitId"] for u in resolved_units
+                           if u.get("providerId") == "photographed-specimen"
+                           and not str(u.get("sourceRef") or "").startswith("specimen:")]
+check(
+    "S14",
+    "A claim attributed to a photographed specimen cites one",
+    "FAIL",
+    not uncited_specimen_claims,
+    f"{len(uncited_specimen_claims)} unit(s) claim tier-1 specimen authority with no specimen "
+    f"reference. e.g. {uncited_specimen_claims[:5]}",
 )
 
 # --------------------------------------------------------------------------- #
