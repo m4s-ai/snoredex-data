@@ -38,12 +38,20 @@ correction already made here, and reading it is how you avoid repeating one.
    *high-authority Elite Fourum reference* (2) > *open database* (2) /
    *fan wiki* (3) / *marketplace listing* (3) > other *collector community* (4).
 
-   A single non-URL source may confirm a unit: **16 units rest on owner attestation alone** and 5
+   A single non-URL source may confirm a unit: **30 units rest on owner attestation alone** and 5
    on a photographed specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence. What is not
    allowed is a single *weaker* source — check `E3` fails if anything below tier 2 confirms a unit
    uncorroborated, and `E4` fails when that number stops matching the data. Prefer corroboration
    where it exists.
+
+   **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
+   the source the unit would fall over without; corroboration from a neighbouring unit belongs in
+   `evidence`, and `corroborated` means a second provider agreed about *this* unit. Fourteen Prize
+   Pack units were once filed as tier-1 photographed specimens on the owner's word because one
+   German specimen and one Portuguese listing sat nearby (#64). Checks `S13` and `S14` now hold the
+   line: `sourceRef` carries a reference or nothing, and only a cited specimen may claim specimen
+   authority.
 3. **Never contradict on bare absence.** A source that fails to list a printing has a gap; it has
    not proved the printing does not exist. First prove the source *covers the category* — pokumon
    lists Korean promos, so a missing Korean row there is meaningful; its West coverage is one
