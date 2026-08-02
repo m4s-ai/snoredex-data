@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-01",
+  "generated": "2026-08-02",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence is true only for complete official manifests, and only within their stated scope.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 18,
-   "evidenceRecords": 878,
-   "uniqueUrls": 871,
+   "evidenceRecords": 883,
+   "uniqueUrls": 876,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2777
+   "claimsAttributed": 2791
   }
  },
  "providers": [
@@ -131,8 +131,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 86,
-   "claimsSupported": 692
+   "uniqueSources": 88,
+   "claimsSupported": 697
   },
   {
    "providerId": "tcgcsv",
@@ -221,8 +221,8 @@
     "elitefourum.com",
     "www.elitefourum.com"
    ],
-   "uniqueSources": 2,
-   "claimsSupported": 9
+   "uniqueSources": 3,
+   "claimsSupported": 13
   },
   {
    "providerId": "ligapokemon",
@@ -363,8 +363,8 @@
     "www.pokeca.net",
     "www.ebay.de"
    ],
-   "uniqueSources": 5,
-   "claimsSupported": 31
+   "uniqueSources": 6,
+   "claimsSupported": 33
   },
   {
    "providerId": "internal-derivation",
@@ -404,7 +404,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 51
+   "claimsSupported": 54
   },
   {
    "providerId": "photographed-specimen",
@@ -1515,19 +1515,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list",
-    "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field"
+    "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field",
+    "Bulbapedia Battle Academy release field and Simplified Chinese set-code note"
    ],
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "U0646",
     "U0647",
-    "U0648"
+    "U0648",
+    "U0649"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 3
+   "retrievedAt": "2026-08-02",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
@@ -1822,13 +1824,12 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "U0674",
     "U0678"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/SVP_Black_Star_Promos_(TCG)",
@@ -2075,6 +2076,24 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_CoroCiao_Version_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia exhaustive product release field and card list; official CoroCiao product page"
+   ],
+   "dimensions": [
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "U0673",
+    "U0674"
+   ],
+   "retrievedAt": "2026-08-02",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -2208,6 +2227,24 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/V_Starter_Sets_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia V Starter Sets product article and deck list"
+   ],
+   "dimensions": [
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "U0610",
+    "U0611"
+   ],
+   "retrievedAt": "2026-08-02",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -2231,17 +2268,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list"
+    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list",
+    "Bulbapedia product release field and set list"
    ],
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "U0466"
+    "U0466",
+    "U0467"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-08-02",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)",
@@ -9852,24 +9891,45 @@
    "usageCount": 5
   },
   {
-   "canonicalUrl": "https://www.elitefourum.com/t/modern-world-championships-decks-languages/55804",
+   "canonicalUrl": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
    "nonUrlEvidenceId": null,
    "providerId": "elitefourum",
    "sourceTypes": [
-    "Elite Fourum (collector community) + localized retail listings"
+    "Elite Fourum collector guide + Bulbapedia + manufacturer/regional catalog cross-check"
    ],
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 2,
+   "stableIds": [
+    "U0296",
+    "U0298"
+   ],
+   "retrievedAt": "2026-08-02",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.elitefourum.com/t/modern-world-championships-decks-languages/55804",
+   "nonUrlEvidenceId": null,
+   "providerId": "elitefourum",
+   "sourceTypes": [
+    "Elite Fourum (collector community) + localized retail listings",
+    "Elite Fourum collector community + localized retail listings"
+   ],
+   "dimensions": [
+    "language"
+   ],
+   "stableIdCount": 6,
    "stableIds": [
     "U0432",
     "U0433",
     "U0434",
-    "U0436"
+    "U0435",
+    "U0436",
+    "U0437"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 4
+   "retrievedAt": "2026-08-02",
+   "usageCount": 6
   },
   {
    "canonicalUrl": null,
@@ -10011,6 +10071,25 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 51
+  },
+  {
+   "canonicalUrl": "https://www.facebook.com/groups/389018291429685/posts/2416439302020897",
+   "nonUrlEvidenceId": null,
+   "providerId": "owner-attestation",
+   "sourceTypes": [
+    "Elite Fourum collector-group confirmation corroborated by archived official Copag announcements and owner attestation"
+   ],
+   "dimensions": [
+    "language"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "U0377",
+    "U0539",
+    "U0598"
+   ],
+   "retrievedAt": "2026-08-02",
+   "usageCount": 3
   },
   {
    "canonicalUrl": null,
@@ -11349,6 +11428,24 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://www.copagloja.com.br/pokemon",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listings and Copag official catalog/store checks + Portuguese marketplace research (user-directed closure)"
+   ],
+   "dimensions": [
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "U0101",
+    "U0315"
+   ],
+   "retrievedAt": "2026-08-02",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.ebay.de/itm/167623600843",

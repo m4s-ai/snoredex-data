@@ -15,10 +15,10 @@ root.
 |---|---|
 | Total units (card × language × variant) | **719** |
 | Confirmed with external source | **634** — 88.2 % of all, **88.8 % of what is resolvable** |
-| **Contradicted** — Cardmarket claims the language, source says no | **71** |
-| **Needs manual review** | **5** — all the same question: does a Portuguese printing exist? (`xPRE 076` V1/V2, `PPS1 VIV 131` V1/V2, `PPS3 LOR 143`) |
-| Still open | **9** — `BA20`/`WCD23` ES+PT, `sA 10` KO+TC, `mP1 012` KO, `svG 021` TC, `svIba 046` TC |
-| Card-variants fully resolved | **180 / 191** |
+| **Contradicted** — Cardmarket claims the language, source says no | **85** |
+| **Needs manual review** | **0** |
+| Still open | **0** |
+| Card-variants fully resolved | **191 / 191** |
 | Finish units (set number × language) | **637** |
 | Finish units with externally confirmed finish | **332** |
 | Finish units with marketplace-only positive claim | **103** |
@@ -32,6 +32,11 @@ Run `verification/review_integrity.py` after any write pass — 27 structural ch
 claims, cards, images, evidence, finish units, printing IDs, product mappings, and stamp roles.
 
 Open items are also published as a browsable page: `verification/open-items.html`.
+
+The language/product queue is closed. The final 14 closures moved the five Portuguese
+Additionals/Prize Pack questions and the nine pending BA20, WCD23, sA, mP1, svG and svIba claims
+to source-backed `confirmed` or `contradicted` states. BA20 Spanish/Portuguese evidence is recorded
+in `verification/passes/close_language_review.py` and in the two BA20 unit rows.
 
 ### Finish verification is a separate positive-evidence layer
 
@@ -209,7 +214,7 @@ https://www.elitefourum.com/t/<topicId>.json
 Two threads settled cases that had no wiki route at all:
 
 - **`Black Star Promos - languages` (36573)** — a per-card table of the Wizards promos with language flags. Row *49 Snorlax* carries **only the US flag**, which contradicts Cardmarket's five European languages. Crucially the reading is verifiable: rows *8 Mew* and *20 Psyduck* both show `us/de/fr/it/es/pt`, so a lone US flag is a positive statement rather than a gap. Always sanity-check a table like this against a row you can independently confirm before trusting its blanks.
-- **`Modern World Championships Decks languages` (55804)** — establishes that Worlds decks were English-only historically and gained French/Italian/German from 2022. Combined with localized 2023 retail listings this closed EN/DE/FR/IT; Spanish and Portuguese are called "less likely" there and stay open.
+- **`Modern World Championships Decks languages` (55804)** — establishes that Worlds decks were English-only historically and gained French/Italian/German from 2022. Combined with localized 2023 retail listings this closed EN/DE/FR/IT; Spanish and Portuguese were subsequently contradicted after no localized Colorless Lugia listings were found.
 
 Note the table is emoji-based: parse `title=":xx:"` out of the flag `<img>` tags, not the visible text.
 
@@ -278,19 +283,21 @@ Resolved from that:
 | `xm2a 136` V1/V2 | Poké Ball mirror holo; Hop's Snorlax is a Trainer's Pokémon, which the set gives a regular Poké Ball mirror | `MEGA Dream ex (TCG)` |
 | `xJTG 117` V1/V2/V3 | Exactly three stamped printings: "Journey Together" (MY/PH/SG), "GameStop" (US/CA), "EBGames" (AU/NZ) — all English-language retail. Confirmed EN, **contradicted FR/DE/IT/ES/PT** | `Journey Together (TCG)` set list |
 | `xPRE 076` V1/V2 | Special Collection exclusive with "Prismatic Evolutions" stamp; V2 is the Jumbo printing | `Prismatic Evolutions (TCG)` set list |
-| `PPS1`, `PPS3` | Series articles carry official localized product names (fr/de/it/es) — evidence of distribution in those languages. Portuguese absent, left **open** not contradicted | Prize Pack Series articles |
+| `PPS1`, `PPS3` | Series articles carry official localized product names (fr/de/it/es). Portuguese Snorlax is **contradicted** by the collector confirmation plus archived Copag announcements; Series Three packs were English and localized packs began with Series Four | Prize Pack Series articles + Copag research |
 
-### `needs-manual-review` — handed to the user
+### `needs-manual-review` — cleared
 
-At this checkpoint, 51 units remained genuinely undocumentable: Prize Pack Series Seven and
-Eight had no "In other languages" table (categorized only as *English promotional cards*), and
-Portuguese was absent from the Series One/Three tables.
+At the historical checkpoint, 51 units remained genuinely undocumentable. The current manual-review
+queue is empty: `MANUAL_REVIEW.csv`, `MANUAL_REVIEW.json` and `UNCONFIRMED.json` now contain no
+remaining language/product claims. The Portuguese xPRE/PPS units were closed as contradicted with
+the source-specific findings described above.
 
 Deliverables for hand-checking: **`MANUAL_REVIEW.csv`** (flat, one row per unit, with empty `verdict` / `yourSource` columns) and **`MANUAL_REVIEW.json`** (grouped per card-variant, showing which languages are already confirmed for the same card). Fill `verdict` with `confirmed` or `false`.
 
 **Thai needs its Thai-script keyword.** `asia.pokemon-card.com/th` returns nothing for `Snorlax` but 25 records for `คาบิกอน` (`asia_fetch_th.ps1`). Traditional Chinese likewise needs `卡比獸`; only Indonesian answers to the English name.
 
-Yield per action is now 1–3 units. All bulk sources are exhausted; what remains needs one lookup per card.
+Yield per action is now 1–3 units. All bulk sources are exhausted; future additions will need one
+lookup per card.
 
 ### Correction applied — read this before adding contradictions
 

@@ -1,7 +1,7 @@
 {
  "schema": "snoredex-confirmed-releases",
  "schemaVersion": "1.0.0",
- "generated": "2026-07-31",
+ "generated": "2026-08-02",
  "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
@@ -15477,7 +15477,8 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending"
+    "Japanese": "pending",
+    "Korean": "pending"
    },
    "languageEvidence": {
     "Japanese": {
@@ -15486,12 +15487,20 @@
      "authorityTier": 1,
      "corroborated": false,
      "checkable": true
+    },
+    "Korean": {
+     "providerId": "bulbapedia",
+     "provider": "Bulbapedia",
+     "authorityTier": 3,
+     "corroborated": false,
+     "checkable": true
     }
    },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
-    "Japanese"
+    "Japanese",
+    "Korean"
    ],
    "rowId": "sa-10-base-none",
    "datePrecision": "day",
@@ -37958,8 +37967,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending",
-    "T-Chinese": "pending"
+    "Japanese": "pending"
    },
    "languageEvidence": {
     "Japanese": {
@@ -37968,20 +37976,12 @@
      "authorityTier": 1,
      "corroborated": false,
      "checkable": true
-    },
-    "T-Chinese": {
-     "providerId": "bulbapedia",
-     "provider": "Bulbapedia",
-     "authorityTier": 3,
-     "corroborated": true,
-     "checkable": true
     }
    },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
-    "Japanese",
-    "T-Chinese"
+    "Japanese"
    ],
    "rowId": "mp1-012-base-none",
    "datePrecision": "day",

@@ -189,31 +189,32 @@
 
   <header class="masthead">
     <div class="eyebrow">Cardmarket · Snorlax · source verification</div>
-    <h1>What still needs a source</h1>
+    <h1>Verification status</h1>
     <p class="lede">
       Every claim is one card × one language × one variant, and each needs a confirmation
-      from outside Cardmarket. 719 such claims exist. These are the ones still standing open.
+      Every claim is one card × one language × one variant, and each was checked against a source
+      outside Cardmarket. All 719 language/product claims are now resolved.
     </p>
   </header>
 
   <dl class="totals">
     <div class="tot is-have"><dt>Confirmed</dt><dd>634</dd></div>
-    <div class="tot"><dt>Contradicted</dt><dd>71</dd></div>
-    <div class="tot"><dt>Your call</dt><dd>5</dd></div>
-    <div class="tot is-gap"><dt>Open</dt><dd>9</dd></div>
+    <div class="tot"><dt>Contradicted</dt><dd>85</dd></div>
+    <div class="tot"><dt>Your call</dt><dd>0</dd></div>
+    <div class="tot is-gap"><dt>Open</dt><dd>0</dd></div>
   </dl>
 
-  <div class="meter" role="img" aria-label="634 confirmed, 71 contradicted, 5 awaiting your decision, 9 open, of 719 claims">
+  <div class="meter" role="img" aria-label="634 confirmed, 85 contradicted, 0 awaiting your decision, 0 open, of 719 claims">
     <span class="m-have" style="width:88.2%"></span>
-    <span class="m-contra" style="width:9.9%"></span>
-    <span class="m-manual" style="width:0.7%"></span>
-    <span class="m-open" style="width:1.3%"></span>
+    <span class="m-contra" style="width:11.8%"></span>
+    <span class="m-manual" style="width:0%"></span>
+    <span class="m-open" style="width:0%"></span>
   </div>
   <p class="meter-key">
     <span><i class="dot" style="background:var(--have)"></i><b>634 confirmed</b> — external source found</span>
-    <span><i class="dot" style="background:var(--accent)"></i><b>71 contradicted</b> — source says the language does not exist</span>
-    <span><i class="dot" style="background:var(--ink-faint)"></i><b>5 your call</b></span>
-    <span><i class="dot" style="background:var(--gap)"></i><b>9 open</b></span>
+    <span><i class="dot" style="background:var(--accent)"></i><b>85 contradicted</b> — source says the language does not exist</span>
+    <span><i class="dot" style="background:var(--ink-faint)"></i><b>0 your call</b></span>
+    <span><i class="dot" style="background:var(--gap)"></i><b>0 open</b></span>
   </p>
 
   <div class="filters">
@@ -230,12 +231,12 @@
   </div>
 
   <section>
-    <h2>Western sets — Spanish and Portuguese</h2>
+    <h2>Western sets — resolved</h2>
     <p class="sec-note">
-      The product articles list localized names for French, German and Italian but stop there.
-      A missing entry in a name table is not proof of non-release, so these stay open rather than
-      contradicted — and the <code>XY179</code> promo showed why: no database carried its German,
-      Italian or Spanish printings, yet physical copies of all three exist.
+      The final BA20 MWT Spanish and Portuguese claims are contradicted. The Elite Fourum collector
+      guide limits the stamped Battle Academy 2020 Mewtwo/Charizard Deck cards to English, French,
+      German and Italian; Bulbapedia and Spanish/Portuguese manufacturer and retailer checks found
+      no qualifying localized BA20 MWT Snorlax printing.
     </p>
     <div class="rows" id="sec-west"></div>
   </section>
@@ -255,22 +256,19 @@
   <section>
     <h2>Japanese decks and collection products</h2>
     <p class="sec-note">
-      Most of this block closed once the infobox <code>release</code> field was checked — deck
-      products list their per-language release dates there rather than in a language table.
-      What remains are products whose release field names only one market. Main expansions are a
-      separate case and are all resolved: the Asian markets never received translations of them,
-      so the printing turns up under a catch-up set instead. For the rest, a sealed product listing
-      from a seller in that market is often the only evidence that exists.
+      All deck and collection language claims are now resolved. The final Japanese-only and
+      Simplified-versus-Traditional Chinese findings are documented in the unit evidence and their
+      dedicated verification passes.
     </p>
     <div class="rows" id="sec-deck"></div>
   </section>
 
   <section class="manual">
-    <h2>Awaiting your decision</h2>
+    <h2>Manual review — cleared</h2>
     <p class="sec-note">
-      Down to five, and all of them are the same question: does a <strong>Portuguese</strong>
-      printing exist for these Prize Pack / Additionals cards? Every other language on them is
-      resolved. LigaPokemon (Brazilian market) is the natural next check.
+      No manual-review or pending claims remain. The Portuguese Prize Pack and Additionals claims
+      were moved to <code>contradicted</code> after Copag/catalog, marketplace and collector evidence
+      checks. The finish-verification layer remains separate.
       ("Spanish" throughout means Cardmarket's European Spanish; Latin-American Spanish became a
       separate edition from Journey Together on but isn't listed as its own language here.)
     </p>
@@ -279,10 +277,10 @@
 
   <footer>
     <!-- generated:footer — regenerate with `python scripts/open_items.py`; do not hand-edit -->
-    Generated 31 July 2026 from <code>verification/units.json</code>.
+    Generated 2 August 2026 from <code>verification/units.json</code>.
     Full evidence per claim in <code>confirmed_sources.json</code>,
     refuted claims in <code>CONTRADICTED.json</code>.
-    180 of 191 card variants are now fully resolved across all their languages.
+    191 of 191 card variants are now fully resolved across all their languages.
     <!-- /generated:footer -->
   </footer>
 </div>
@@ -290,22 +288,13 @@
 <script>
   <!-- generated:open — regenerate with `python scripts/open_items.py`; do not hand-edit -->
   const OPEN = [
-    {n:"Snorlax", c:"BA20 MWT", s:"Battle Academy 2020", r:"Fixed", g:["Portuguese","Spanish"], h:["English","French","German","Italian"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Academy-2020/Snorlax-HIF50", sec:"sec-west"},
-    {n:"Snorlax", c:"WCD23 · LOR 143", s:"WCD 2023", r:"World Championship Deck", g:["Portuguese","Spanish"], h:["English","French","German","Italian"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/WCD-2023/Snorlax-WCD23LOR-143", sec:"sec-west"},
-    {n:"Snorlax", c:"mP1 012", s:"MEGA Start Deck 100 Battle Collection Corociao Version", r:"Fixed", g:["Korean"], h:["Japanese","T-Chinese"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection-Corociao-Version/Snorlax-mP1012", sec:"sec-deck"},
-    {n:"Snorlax", c:"sA 10", s:"Sword & Shield Starter Decks", r:"Fixed", g:["Korean","T-Chinese"], h:["Japanese"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Starter-Decks/Snorlax-sA10", sec:"sec-deck"},
-    {n:"Snorlax", c:"svG 021", s:"Venusaur & Charizard & Blastoise Special Deck Set ex", r:"Fixed", g:["T-Chinese"], h:["Japanese","Korean"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Venusaur-Charizard-Blastoise-Special-Deck-Set-ex/Snorlax-svG021", sec:"sec-deck"},
-    {n:"Snorlax", c:"svIba 046", s:"Scarlet & Violet Battle Academy", r:"Fixed", g:["T-Chinese"], h:["Japanese","Korean","S-Chinese"], u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Battle-Academy/Snorlax-svIba046", sec:"sec-deck"}
+
   ];
   <!-- /generated:open -->
 
   <!-- generated:manual — regenerate with `python scripts/open_items.py`; do not hand-edit -->
   const MANUAL = [
-    {n:"Snorlax", c:"PPS1 · VIV 131", v:"V1", s:"Play! Pokémon Prize Pack Series One", r:"Prize Pack Series", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Play! Pokemon Prize Pack - the card is documented, but no source records distribution languages", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V1-PPS1VIV-131"},
-    {n:"Snorlax", c:"PPS1 · VIV 131", v:"V2", s:"Play! Pokémon Prize Pack Series One", r:"Prize Pack Series", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Play! Pokemon Prize Pack - the card is documented, but no source records distribution languages", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V2-PPS1VIV-131"},
-    {n:"Snorlax", c:"PPS3 · LOR 143", s:"Play! Pokémon Prize Pack Series Three", r:"Prize Pack Series", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Play! Pokemon Prize Pack - the card is documented, but no source records distribution languages", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Three/Snorlax-PPS3LOR-143"},
-    {n:"Snorlax ex", c:"xPRE 076", v:"V1", s:"Prismatic Evolutions: Additionals", r:"Promo", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Cardmarket \"Additionals\" grouping - not a publisher product, absent from every card database", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V1-xPRE076"},
-    {n:"Snorlax ex", c:"xPRE 076", v:"V2", s:"Prismatic Evolutions: Additionals", r:"Oversized", g:["Portuguese"], h:["English","French","German","Italian","Spanish"], why:"Cardmarket \"Additionals\" grouping - not a publisher product, absent from every card database", u:"https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V2-xPRE076"}
+
   ];
   <!-- /generated:manual -->
 
