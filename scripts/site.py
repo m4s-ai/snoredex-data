@@ -415,6 +415,13 @@ def main() -> int:
     rows = build_rows(releases_doc["variants"])
     checklist = build_checklist(checklist_doc["items"])
     verification = dataset["meta"]["verification"]
+    # A refuted claim is not automatically a settled absence, and the page used to present all of
+    # them as one block of "refuted claims" (#66). Only an owner adjudication or a complete
+    # official manifest settles the question; the rest are one source's disagreement, and
+    # DATABASE.md tells applications not to read those as "does not exist". Counted from the cards
+    # rather than restated, so the two numbers cannot drift apart from the store.
+    not_printed = sum(len(c.get("languagesNotPrinted") or []) for c in dataset["cards"])
+    disputed = sum(len(c.get("languagesDisputed") or []) for c in dataset["cards"])
     # The page is a projection of committed inputs. A wall-clock date made an unchanged checkout
     # stale as soon as CI ran in a different timezone or on the next day. Reuse the checklist
     # snapshot date so identical inputs always produce identical bytes.
@@ -426,7 +433,8 @@ def main() -> int:
     stats = [
         (f"{len(rows)}", "card-variant rows"),
         (f"{verification['confirmed']}", "confirmed language claims"),
-        (f"{verification['contradicted']}", "refuted claims"),
+        (f"{not_printed}", "adjudicated not printed"),
+        (f"{disputed}", "disputed claims"),
         (f"{finish_counts['totalFinishUnits']}", "finish units"),
         (f"{finish_counts['withConfirmedFinish']}", "externally confirmed finishes"),
         (f"{checklist_doc['meta']['counts']['items']}", "checklist items"),
@@ -547,8 +555,15 @@ def main() -> int:
     <ul>
       <li><strong>Physical cards only.</strong> Online and live code cards are excluded.</li>
       <li><strong>A marketplace filter is not a print manifest.</strong> Cardmarket's language
-      filter over-claims: {verification['contradicted']} claims here are refuted by outside sources.
-      The clearest is <code>KSS 26</code>, advertised in 17 languages for an expansion printed in 7.</li>
+      filter over-claims: {verification['contradicted']} claims here are contradicted by outside
+      sources. The clearest is <code>KSS 26</code>, advertised in 17 languages for an expansion
+      printed in 7.</li>
+      <li><strong>Contradicted is not the same as proven absent.</strong> Only
+      {not_printed} of those claims are settled — by an explicit collection-owner adjudication or a
+      complete official manifest. The other {disputed} are <strong>disputed</strong>: a source
+      disagrees and nothing has settled it. They are excluded from the checklist so that nobody
+      hunts a card the evidence points away from, but they are not a claim that the card does not
+      exist, and a photograph of one would overturn the row.</li>
       <li><strong>Pending means unresolved, never absent.</strong> No finish is ever marked
       unavailable because a catalogue failed to list it.</li>
       <li><strong>Finish evidence is positive-only</strong> except under a complete official

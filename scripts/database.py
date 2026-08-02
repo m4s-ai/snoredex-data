@@ -26,6 +26,9 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from absence_model import absence_decision, absence_scope_urls  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
@@ -603,11 +606,10 @@ def build_database(target: Path) -> dict[str, int | str]:
     cursor.executemany("INSERT INTO languages VALUES (?, ?, ?, ?, ?)", LANGUAGES)
 
     provider_by_id = {item["providerId"]: item for item in providers}
-    absence_source_urls = {
-        (item.get("canonicalUrl") or "").rstrip("/")
-        for item in registry.get("evidence", [])
-        if item.get("canonicalUrl") and item.get("supportsAbsence")
-    }
+    # The declared complete manifests, read from the provider config rather than from the evidence
+    # index, so this and scripts/language_status.py apply one rule from one place (#66). The two
+    # sets are identical today; deriving them separately is how they would stop being.
+    absence_source_urls = absence_scope_urls(providers)
     cursor.executemany(
         "INSERT INTO providers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
@@ -696,17 +698,11 @@ def build_database(target: Path) -> dict[str, int | str]:
                 f"owner adjudication {adjudication['adjudicationId']} targets non-contradicted "
                 f"unit {unit['unitId']}"
             )
-        if unit["status"] == "confirmed":
-            app_status = "exists"
+        app_status = absence_decision(
+            unit["status"], source_url, absence_source_urls, bool(adjudication)
+        )
+        if app_status == "exists":
             established_languages.add((pid, LANGUAGE_CODE[unit["language"]]))
-        elif unit["status"] == "contradicted":
-            app_status = (
-                "not-printed"
-                if adjudication or absence_supported
-                else "disputed"
-            )
-        else:
-            app_status = "unresolved"
         language_application_status[(pid, LANGUAGE_CODE[unit["language"]])] = app_status
         cursor.execute(
             "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",

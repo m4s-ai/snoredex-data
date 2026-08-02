@@ -191,7 +191,7 @@ PROVIDERS: list[dict[str, Any]] = [
             "https://www.elitefourum.com/t/black-star-promos-languages/36573",
         ],
         "attribution": "Collector-community reference tables from Elite Fourum.",
-        "notes": "High-authority community reference, just below collection-owner authority. Its designated complete table is absence-capable within scope; other final absence decisions require a collection-owner adjudication.",
+        "notes": "High-authority community reference, just below collection-owner authority. Its designated complete table is absence-capable within scope; other final absence decisions require a collection-owner adjudication. This capability is deliberate and pinned by verification/test_owner_adjudications.py; #66 questioned whether it sits well with rule 4, which admits only a complete official manifest, and left the decision with the owner. Nothing currently depends on it either way: all five units citing that thread also carry owner adjudications, so withdrawing it would move no row off not-printed.",
     },
     {
         "providerId": "ligapokemon",
