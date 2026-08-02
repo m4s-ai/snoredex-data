@@ -28,7 +28,7 @@ root.
 | Finish units covered by a complete official manifest | **4** — English `DF 10`, `PPS3 LOR 143`, `PPS7 JTG 117`, `PPS8 JTG 117` |
 | Finish units with unresolved product mapping | **175** |
 
-Run `verification/review_integrity.py` after any write pass — 27 structural checks over language
+Run `verification/review_integrity.py` after any write pass — structural checks over language
 claims, cards, images, evidence, finish units, printing IDs, product mappings, and stamp roles.
 
 Open items are also published as a browsable page: `verification/open-items.html`.

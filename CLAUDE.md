@@ -200,12 +200,13 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
   committed data came to be. Its files are never rerun and never edited; check `X3` hashes them
   against `verification/archive/MANIFEST.json` and fails on any change. A translated pass is not
   the script that produced the record.
-- The five remaining `scripts/*.ps1` are **dormant history** — `build`, `join`, `getimages`,
-  `finalize` and `mkunits`. Their `_chunk*`/`_cards_stage*` inputs are not in the repository and
-  are not reproducible (a 2026-07-21 scrape of a live marketplace), so `snorlax_cards.json` is the
-  input of record rather than an output. #28 captured that data flow, so they can join the archive.
-  `mkunits` is additionally destructive: it rebuilds `units.json` with fresh ids and discards the
-  verification state. Never run it.
+- **`scripts/` holds only runnable things.** The five harvest scripts — `build`, `join`,
+  `getimages`, `finalize` and `mkunits` — moved to `verification/archive/passes/` in #68, once
+  #28 had captured their data flow. Their `_chunk*`/`_cards_stage*` inputs are not in the
+  repository and are not reproducible (a 2026-07-21 scrape of a live marketplace), so
+  `snorlax_cards.json` is the input of record rather than an output. `mkunits` is additionally
+  destructive: it rebuilds `units.json` with fresh ids and discards the verification state.
+  Never run it. Check `B1` keeps all five out of `scripts/`.
 - **`scripts/analyze.py`** produces `analysis_artists.json`, `analysis_shared_cards.json`,
   `analysis_variants.json` and `analysis_language_drift.json` — nothing else generates them. It
   reads `snorlax_cards.json` only, which is #30's single canonical node. Its PowerShell

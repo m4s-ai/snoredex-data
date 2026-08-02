@@ -1,5 +1,6 @@
 # Raw third-party API dumps — bulky (TCGdex full multi-language card lists, ~13 MB)
-# and reproducible with verification/fetch_full.ps1, fetch_tcgdex.ps1, jp_fetch.ps1, asia_fetch.ps1
+# and reproducible by rerunning the archived fetch passes under verification/archive/passes/
+# (fetch_full, fetch_tcgdex, jp_fetch, asia_fetch) against the same endpoints.
 verification/cache/
 
 # Intermediate upscaled image crops used once to read the xm2a mirror-foil variants
@@ -9,7 +10,8 @@ verification/zoom/
 # result pages; _cards_stage1..3.json are what build/join/getimages hand along before finalize
 # writes snorlax_cards.json. None are reproducible — the chunks are a scrape of a live marketplace
 # — so they are ignored rather than committed or regenerated. Anyone who recovers a copy can drop
-# it in without dirtying the tree, and analyze.ps1 will prefer it over snorlax_cards.json.
+# it in without dirtying the tree. Nothing reads them any more: analyze.py takes
+# snorlax_cards.json and nothing else, which is what made it the single canonical node (#30).
 _chunk*.json
 _cards_stage*.json
 

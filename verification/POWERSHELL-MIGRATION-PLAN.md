@@ -1,5 +1,8 @@
 # Consolidating the toolchain on Python — plan
 
+> [!NOTE]
+> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree as it was on the date above. For what is true now see `HANDOVER.md`, `CLAUDE.md` and the check suites.
+
 Status: **executed, one item open.** Waves 0–3 and most of Wave 4 shipped in #52–#56. All five
 live `.ps1` scripts are ported and deleted, CI is cut over — no `pwsh` step remains in either
 workflow — the archive moved to `verification/archive/passes/` and is hash-pinned by check `X3`,
