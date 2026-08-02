@@ -32,17 +32,17 @@ The owner (`Scarrty` in git; addressed as the domain expert throughout) directs 
 supplies physical specimens. **Owner statements are authoritative** but graded explicitly as
 evidence (see §6).
 
-## 2. Current state (2026-07-31)
+## 2. Current state (2026-08-02)
 
 | | |
 |---|---|
 | Cardmarket products harvested | 242 (198 singles + 44 accessories) |
 | Verification units (card × language × variant) | **719** |
 | **Confirmed** with external source | **634** (88.2%) |
-| **Contradicted** (Cardmarket claims it, source says no) | **71** |
-| **Needs manual review** | **5** — all the same question: *does a Portuguese printing exist?* |
-| **Still open** | **9** |
-| Card-variants with every language resolved | 180 / 191 |
+| **Contradicted** (Cardmarket claims it, source says no) | **85** |
+| **Needs manual review** | **0** |
+| **Still open** | **0** |
+| Card-variants with every language resolved | 191 / 191 |
 | Artist coverage in main dataset | 116 / 198 |
 | Finish units (set number × language) | **637** |
 | Finish units with an externally confirmed finish | **332** |
@@ -61,14 +61,16 @@ The language/product claim backlog and the finish backlog are separate. Language
 `verification/units.json`; finish truth lives in `verification/finish_units.json`. Never infer a
 physical finish from a confirmed language claim alone.
 
-### The exact remaining work
+### Language/product review is closed
 
-**Open (9)** — genuinely undocumented, need a new source:
-`BA20 MWT` ES+PT · `WCD23 LOR 143` ES+PT · `sA 10` KO+TC · `mP1 012` KO · `svG 021` TC · `svIba 046` TC.
-
-**Manual review (5)** — all Portuguese Prize Pack / Additionals:
-`xPRE 076` V1/V2 · `PPS1 VIV 131` V1/V2 · `PPS3 LOR 143`.
-Next step for these: LigaPokemon (Brazilian marketplace) — see §5 for the Cloudflare workaround.
+All 719 language/product claims are now resolved: **634 confirmed, 85 contradicted, 0 manual-review,
+0 pending**. The final closure moved Portuguese `xPRE 076` V1/V2 and Portuguese `PPS1`/`PPS3`
+Snorlax claims to contradicted after Copag/catalog and collector evidence. It also resolved the
+remaining BA20, WCD23, sA, svG, svIba and mP1 language claims. The BA20 Spanish/Portuguese finding
+is recorded in `verification/passes/close_language_review.py` and in each unit's evidence: the
+Elite Fourum matrix limits the stamped Battle Academy 2020 Mewtwo/Charizard Deck cards to English,
+French, German and Italian; Bulbapedia and regional manufacturer/retailer checks found no Spanish
+or Portuguese BA20 MWT Snorlax printing. The finish-verification queue remains a separate layer.
 
 ## 3. Repository layout
 
@@ -136,7 +138,7 @@ verification/
                               cover it; publish.py already allowlists the directory and LICENSE.md
                               decision 4 covers the category, so no approval is needed per image.
   confirmed_sources.json      Export of all confirmed units.
-  CONTRADICTED.json           The 71 refuted claims.
+  CONTRADICTED.json           The 85 refuted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
   UNCONFIRMED.json            The open units, grouped by card.
   open-items.html             Browsable page of open + manual-review items (an Artifact).
@@ -359,11 +361,8 @@ separate manual `workflow_dispatch` run. End commit messages with the
    `python scripts/finishes.py`, then run integrity. Do not convert positive-only source omissions
    into negative claims. The 64 fully contradicted language groups are already `not-applicable` and
    are intentionally absent from this queue.
-2. **The 5 Portuguese manual-review units** — check LigaPokemon via the user's Chrome for
-   `PPS1 VIV 131` and `PPS3 LOR 143`. (`xPRE` is an Additionals product that may not appear on a
-   marketplace as its own entry.)
-3. **The 9 open units** — `BA20`/`WCD23` ES+PT want a photo or a localized retail listing; the
-   four Asian deck products (`sA`, `mP1`, `svG`, `svIba`) want a sealed product listing from a
-   seller in that market.
-4. Anything the owner supplies next (they have been feeding specimens and corrections card by
+2. **Language/product claims are closed** — no pending or manual-review units remain. Keep the
+   source-specific evidence in `verification/units.json` and `verification/evidence.jsonl`; do not
+   infer a new contradiction from a bare catalogue absence.
+3. Anything the owner supplies next (they have been feeding specimens and corrections card by
    card; expect more).
