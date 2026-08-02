@@ -482,6 +482,14 @@ def main() -> int:
     )
 
     open_units = sum(1 for u in units if u["status"] in ("pending", "needs-manual-review"))
+    # A scope limit is a warning about what the reader must not assume. With the language queue
+    # closed this rendered as "0 claims remain open. They are shown as unresolved rather than
+    # quietly dropped." — a caveat about nothing, in the list a reader is told to read first (#68).
+    # It returns by itself if a claim is ever reopened, which is when it means something again.
+    open_claims_note = (
+        f"<li><strong>{open_units} claims remain open.</strong> They are shown as unresolved "
+        f"rather than quietly dropped.</li>" if open_units else ""
+    )
 
     page = f"""<!doctype html>
 <html lang="en">
@@ -570,8 +578,7 @@ def main() -> int:
       manifest — currently {finish_counts['withCompleteManifest']} units.</li>
       <li><strong>&ldquo;Spanish&rdquo; means European Spanish.</strong> Latin-American Spanish is a
       physically distinct edition from Journey Together (2025) onward and is out of scope here.</li>
-      <li><strong>{open_units} claims remain open.</strong> They are shown as unresolved rather than
-      quietly dropped.</li>
+      {open_claims_note}
     </ul>
   </div>
 </section>

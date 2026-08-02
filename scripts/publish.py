@@ -250,8 +250,12 @@ def main() -> int:
         return verify(out)
 
     wanted = build(out)
-    size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
-    print(f"assembled {len(wanted)} files into {out.relative_to(ROOT)} ({size // 1024} KB)")
+    # Count what is on disk, not what the allowlist asked for: build() also writes .nojekyll, so
+    # the two lines disagreed by one and read as a discrepancy in an artifact whose whole point is
+    # that its contents are known exactly (#68).
+    present = [p for p in out.rglob("*") if p.is_file()]
+    size = sum(p.stat().st_size for p in present)
+    print(f"assembled {len(present)} files into {out.relative_to(ROOT)} ({size // 1024} KB)")
     return 0
 
 

@@ -55,7 +55,7 @@ evidence (see §6).
 
 Numbers live in `verification/units.json` (the state store) and are echoed in
 `snorlax_cards.json` → `meta.verification`. **After any change, run
-`verification/review_integrity.py`** (27 structural checks) — it is the truth test.
+`verification/review_integrity.py`** — it is the truth test.
 
 The language/product claim backlog and the finish backlog are separate. Language truth lives in
 `verification/units.json`; finish truth lives in `verification/finish_units.json`. Never infer a
@@ -177,7 +177,7 @@ verification/
   classify_manual.py          (Re)tags structurally undocumentable units.
   verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
                               Replayable offline against fixtures/tcgcsv_finish_sources.json.
-  review_integrity.py         27 structural checks WITHIN each store — run after every write pass.
+  review_integrity.py         Structural checks WITHIN each store — run after every write pass.
   review_findings.py          Cross-artifact consistency BETWEEN the stores and what consumers
                               read, plus publication readiness. Stdlib only, no network.
   checks.py                   The check protocol shared by the two suites above. Counts are

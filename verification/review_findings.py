@@ -318,14 +318,24 @@ LIVE_STEPS = {
     "open_items.py", "site.py", "editions.py", "publish.py",
 }
 
-missing_steps = sorted(s for s in LIVE_STEPS | HARVEST_STEPS | {"mkunits.ps1"}
-                       if not (ROOT / "scripts" / s).is_file())
+# The harvest steps and `mkunits` moved to verification/archive/passes/ once #28 had captured the
+# data flow they encode (#68). They are still documented, so they must still exist and this check
+# must still find them — the point is that a named step is never a dangling reference — but the
+# archive is where a script that must never run belongs, and X3 hash-locks it there.
+ARCHIVED_STEPS = HARVEST_STEPS | {"mkunits.ps1"}
+missing_steps = sorted(
+    [f"scripts/{s}" for s in LIVE_STEPS if not (ROOT / "scripts" / s).is_file()]
+    + [f"archive/passes/{s}" for s in ARCHIVED_STEPS
+       if not (ROOT / "verification" / "archive" / "passes" / s).is_file()]
+)
+# A step that must never run must not sit where the runnable ones do.
+stray_harvest = sorted(s for s in ARCHIVED_STEPS if (ROOT / "scripts" / s).is_file())
 check(
     "B1",
-    "Every documented build step exists",
+    "Every documented build step exists, and the unrunnable ones live in the archive",
     "FAIL",
-    not missing_steps,
-    f"scripts/ is missing {missing_steps}",
+    not missing_steps and not stray_harvest,
+    f"missing {missing_steps}; still in scripts/ {stray_harvest}",
 )
 
 # A live step must not depend on an input the harvest was supposed to leave behind.
@@ -533,55 +543,76 @@ policy_docs = {"HANDOVER.md": handover,
                "CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8"),
                "verification/RESUME.md": (ROOT / "verification" / "RESUME.md")
                .read_text(encoding="utf-8")}
-disagreeing = {}
-for name, text in policy_docs.items():
-    found = re.search(r"\*?\*?(\d+) units rest on owner attestation alone", text)
-    if not found or int(found.group(1)) != attestation_only:
-        disagreeing[name] = found.group(1) if found else "no such statement"
-check(
-    "E4",
-    "Every document stating the attestation-only count states the real one",
-    "FAIL",
-    not disagreeing,
-    f"data has {attestation_only} attestation-only units; {disagreeing}",
-)
-
-# E7 — how much rests on one source, held to the data wherever a document says it (#65)
-# --------------------------------------------------------------------------- #
-# README claimed "a single *weaker* source may not [stand alone], and a check enforces it". E3
-# enforces something looser — checkable *or* strong — so a tier-3 page with a URL may carry a claim
-# alone, and 252 do. Correcting that prose meant writing the real figures down, and a figure in
-# prose is a figure that drifts, which is the habit E4 exists to break. So the replacements are
-# checked from the moment they are written rather than after someone notices.
-#
-# The README states this split as a generated block instead, which is why it is not listed here:
-# readme_stats.py --check already fails when that block goes stale.
+figure_docs = dict(policy_docs)
+figure_docs["README.md"] = (ROOT / "README.md").read_text(encoding="utf-8")
 
 single_source_units = [u for u in resolved_units if not u.get("corroborated")]
 weak_single = [u for u in single_source_units
                if provider_by_id.get(u.get("providerId"), {}).get("authorityTier", 99) > 2]
 corroborated_units = [u for u in resolved_units if u.get("corroborated")]
 
-# Each entry: the sentence a document may state, and the number it has to agree with.
-stated_figures = [
-    (r"(\d+) of \d+ resolved units\*{0,2} do", len(weak_single)),
-    (r"\*{0,2}(\d+) of \d+ resolved claims rest on one provider", len(single_source_units)),
-    (r"only (\d+) are corroborated", len(corroborated_units)),
-    (r"it\s+covers (\d+) of \d+ units", len(corroborated_units)),
-    (r"(\d+) resolved units do", len(weak_single)),
-]
-figure_drift = {}
-for name, text in policy_docs.items():
-    for pattern, expected in stated_figures:
-        found = re.search(pattern, text)
-        if found and int(found.group(1)) != expected:
-            figure_drift[f"{name}: {pattern}"] = f"says {found.group(1)}, data says {expected}"
-check(
-    "E7",
-    "Documented single-source exposure matches the data",
-    "FAIL",
-    not figure_drift,
-    f"{len(figure_drift)} stated figure(s) have drifted: {figure_drift}",
+
+def figure_drift(patterns: list[str], expected: int, *, required: bool = False,
+                 docs: dict[str, str] | None = None) -> dict[str, str]:
+    """Find every document whose stated figure disagrees with `expected`.
+
+    `required` marks a sentence a document must actually contain — the attestation count is
+    published policy, and a document dropping it is as much a defect as one restating it wrongly.
+    Everything else is checked only where it appears, because these are prose figures and not every
+    document mentions every one.
+    """
+    drift: dict[str, str] = {}
+    for name, text in (docs or figure_docs).items():
+        matches = [re.search(pattern, text) for pattern in patterns]
+        found = [m for m in matches if m]
+        if required and not found:
+            drift[name] = "no such statement"
+        for match in found:
+            if int(match.group(1)) != expected:
+                drift[f"{name}: {match.group(0)!r}"] = (
+                    f"says {match.group(1)}, data says {expected}")
+    return drift
+
+
+def documented_figures(ident: str, title: str,
+                       figures: list[tuple[list[str], int]], *,
+                       required: bool = False, docs: dict[str, str] | None = None) -> None:
+    """Declare one check over several published figures.
+
+    E4, E7 and E11 were three hand-rolled copies of the same loop, added one issue at a time
+    (#64, #65, #66). They stay three checks — CLAUDE.md and HANDOVER.md name them, and each covers
+    a distinct claim — but there is now one implementation, so the next figure someone writes into
+    a document is a row rather than a fourth copy (#68).
+
+    Emitted at each check's own position rather than from one table at the top of the file: the
+    suites' output order is part of their contract, and the values these depend on are computed at
+    different points.
+    """
+    drift: dict[str, str] = {}
+    for patterns, expected in figures:
+        drift.update(figure_drift(patterns, expected, required=required, docs=docs))
+    check(ident, title, "FAIL", not drift,
+          f"{len(drift)} stated figure(s) disagree with the data: {drift}")
+
+
+documented_figures(
+    "E4", "Every document stating the attestation-only count states the real one",
+    [([r"\*?\*?(\d+) units rest on owner attestation alone"], attestation_only)],
+    required=True, docs=policy_docs,
+)
+
+# E7 — how much rests on one source, held to the data wherever a document says it (#65)
+# --------------------------------------------------------------------------- #
+# README claimed "a single *weaker* source may not [stand alone], and a check enforces it". E3
+# enforces something looser — checkable *or* strong — so a tier-3 page with a URL may carry a claim
+# alone, and hundreds do. Correcting that prose meant writing the real figures down, and a figure
+# in prose is a figure that drifts, which is the habit E4 exists to break.
+documented_figures(
+    "E7", "Documented single-source exposure matches the data",
+    [([r"(\d+) of \d+ resolved units\*{0,2} do", r"(\d+) resolved units do"], len(weak_single)),
+     ([r"\*{0,2}(\d+) of \d+ resolved claims rest on one provider"], len(single_source_units)),
+     ([r"only (\d+) are corroborated", r"it\s+covers (\d+) of \d+ units"],
+      len(corroborated_units))],
 )
 
 # E8 — absence is settled by someone taking responsibility, never by provider rank (#66)
@@ -678,21 +709,11 @@ settled_count = sum(len(c.get("languagesNotPrinted") or []) for c in cards)
 disputed_count = sum(len(c.get("languagesDisputed") or []) for c in cards)
 split_docs = dict(policy_docs)
 split_docs["README.md"] = (ROOT / "README.md").read_text(encoding="utf-8")
-split_drift = {}
-for name, text in split_docs.items():
-    for pattern, expected in ((r"\*{0,2}(\d+) are settled", settled_count),
-                              (r"(\d+) are disputed", disputed_count),
-                              (r"\*{0,2}(\d+) settled and \d+ disputed", settled_count),
-                              (r"\d+ settled and \*{0,2}(\d+) disputed", disputed_count)):
-        found = re.search(pattern, text)
-        if found and int(found.group(1)) != expected:
-            split_drift[f"{name}: {pattern}"] = f"says {found.group(1)}, data says {expected}"
-check(
-    "E11",
-    "Documented not-printed / disputed split matches the data",
-    "FAIL",
-    not split_drift,
-    f"{len(split_drift)} stated figure(s) have drifted: {split_drift}",
+documented_figures(
+    "E11", "Documented not-printed / disputed split matches the data",
+    [([r"\*{0,2}(\d+) are settled", r"\*{0,2}(\d+) settled and \d+ disputed"], settled_count),
+     ([r"(\d+) are disputed", r"\d+ settled and \*{0,2}(\d+) disputed"], disputed_count)],
+    docs=split_docs,
 )
 
 # E12 — one ladder, four readers (#67)
