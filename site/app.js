@@ -348,10 +348,7 @@
     document.addEventListener("click", (event) => {
       const button = event.target.closest && event.target.closest("button.sort");
       if (!button) return;
-      const key = button.dataset.key;
-      if (sortKey === key) sortDir = -sortDir;
-      else { sortKey = key; sortDir = 1; }
-      render();
+      activateSort(button.dataset.key);
     });
   }
 
@@ -367,6 +364,13 @@
       const select = document.getElementById("f-lang-" + lang.code);
       if (select) select.value = state.lang[lang.code] || "";
     });
+  }
+
+  function activateSort(key) {
+    if (!Object.prototype.hasOwnProperty.call(SORTERS, key)) return;
+    if (sortKey === key) sortDir = -sortDir;
+    else { sortKey = key; sortDir = 1; }
+    render();
   }
 
   function renderChips() {
@@ -402,6 +406,7 @@
   /* ---------------------------------------------------------------- render */
 
   let visibleRows = [];
+  let refreshLanguageEvidence = () => {};
 
   function pill(text, cls) {
     return '<span class="pill ' + escapeHTML(cls) + '">' + escapeHTML(text) + "</span>";
@@ -435,17 +440,22 @@
       const has = row.langCodes.includes(lang.code);
       const state = has ? "present" : "absent";
       const note = has ? evidenceNote(row, lang.code) : null;
-      // aria-label stays the bare state. It is what a screen reader announces for every one of
-      // 17 columns on every row, so the evidence detail goes in title instead: discoverable on
-      // hover, and summarised for everyone by the legend and the underline below.
+      // Keep the cell label to the compact state used across the 17-column matrix. The evidence
+      // control carries the full accessible label and opens a touch/keyboard detail popover.
       const label = lang.name + ": " + state;
       const attrs = note
         ? ' data-tier="' + note.tier + '"' + (note.weak ? ' data-unverifiable="true"' : "")
         : "";
+      const symbol = note
+        ? '<button type="button" class="lang-evidence-trigger" aria-expanded="false" ' +
+          'aria-label="' + escapeHTML(label + " — " + note.text) + '" ' +
+          'data-label="' + escapeHTML(label) + '" data-evidence="' + escapeHTML(note.text) + '">' +
+          '<span aria-hidden="true">✓</span></button>'
+        : '<span aria-hidden="true">' + (has ? "✓" : "—") + "</span>";
       return '<td class="langcell ' + (has ? "yes" : "no") + '" data-state="' + state + '"' +
         attrs + ' title="' + escapeHTML(note ? label + " — " + note.text : label) +
         '" aria-label="' + escapeHTML(label) + '">' +
-        '<span aria-hidden="true">' + (has ? "✓" : "—") + "</span></td>";
+        symbol + "</td>";
     }).join("");
     const finishPills = row.finishDisplay.map((f) => pill(f.label, f.status)).join("");
     const variant = row.variant + (row.variantName ? " — " + row.variantName : "");
@@ -533,6 +543,7 @@
       refreshTableOverflow();
       refreshClippedCells();
       refreshStickyHeader();
+      refreshLanguageEvidence();
     });
   }
 
@@ -613,6 +624,100 @@
     return update;
   }
 
+  /* ------------------------------------------------ language evidence detail */
+
+  function initLanguageEvidence() {
+    const popover = document.createElement("div");
+    popover.id = "collection-language-evidence";
+    popover.className = "lang-evidence-popover";
+    popover.hidden = true;
+    popover.setAttribute("aria-hidden", "true");
+    popover.setAttribute("role", "status");
+    popover.setAttribute("aria-live", "polite");
+    document.body.appendChild(popover);
+
+    let active = null;
+
+    const position = () => {
+      if (!active || popover.hidden) return;
+      const anchor = active.getBoundingClientRect();
+      const box = popover.getBoundingClientRect();
+      const gap = 10;
+      const margin = 12;
+      let left;
+      let top;
+
+      if (window.innerWidth <= 720) {
+        left = (window.innerWidth - box.width) / 2;
+        top = (window.innerHeight - box.height) / 2;
+      } else {
+        left = anchor.left;
+        top = anchor.bottom + gap;
+        if (left + box.width > window.innerWidth - margin) left = anchor.right - box.width;
+        if (top + box.height > window.innerHeight - margin) top = anchor.top - box.height - gap;
+      }
+
+      popover.style.left = Math.round(Math.max(margin,
+        Math.min(left, window.innerWidth - box.width - margin))) + "px";
+      popover.style.top = Math.round(Math.max(margin,
+        Math.min(top, window.innerHeight - box.height - margin))) + "px";
+    };
+
+    const hide = () => {
+      if (active) {
+        active.setAttribute("aria-expanded", "false");
+        active.removeAttribute("aria-describedby");
+      }
+      active = null;
+      popover.hidden = true;
+      popover.setAttribute("aria-hidden", "true");
+    };
+
+    const show = (trigger) => {
+      if (active && active !== trigger) {
+        active.setAttribute("aria-expanded", "false");
+        active.removeAttribute("aria-describedby");
+      }
+      active = trigger;
+      popover.textContent = trigger.dataset.label + " — " + trigger.dataset.evidence;
+      popover.hidden = false;
+      popover.setAttribute("aria-hidden", "false");
+      trigger.setAttribute("aria-expanded", "true");
+      trigger.setAttribute("aria-describedby", popover.id);
+      window.requestAnimationFrame(position);
+    };
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest && event.target.closest(".lang-evidence-trigger");
+      if (trigger) {
+        if (active === trigger) hide();
+        else show(trigger);
+        return;
+      }
+      if (active) hide();
+    });
+    document.addEventListener("focusout", (event) => {
+      const trigger = event.target.closest && event.target.closest(".lang-evidence-trigger");
+      if (!trigger) return;
+      window.setTimeout(() => {
+        if (active === trigger && document.activeElement !== trigger) hide();
+      }, 0);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !active) return;
+      const trigger = active;
+      hide();
+      trigger.focus();
+    });
+    window.addEventListener("resize", position);
+    window.addEventListener("scroll", position, { passive: true });
+
+    return () => {
+      if (active && !active.isConnected) hide();
+      else position();
+    };
+  }
+
   /* ------------------------------------------ horizontal table affordance */
 
   let refreshTableOverflow = () => {};
@@ -677,7 +782,12 @@
     const cloneTable = document.createElement("table");
     const colgroup = document.createElement("colgroup");
     const cloneHead = sourceHead.cloneNode(true);
-    $$("button", cloneHead).forEach((button) => { button.tabIndex = -1; });
+    $$("button.sort", cloneHead).forEach((button) => {
+      const label = document.createElement("span");
+      label.className = "sort-clone-label";
+      label.textContent = button.textContent;
+      button.replaceWith(label);
+    });
     cloneTable.append(colgroup, cloneHead);
 
     const correction = document.createElement("div");
@@ -732,11 +842,15 @@
     };
 
     // The overlay covers the real heading, so it has to answer for the interactions it hides.
-    // Its sort buttons work through the delegated handler; a click that misses one must stop here
+    // Its visual sort labels activate the same sort routine; a click that misses one must stop here
     // rather than fall through to whichever row happens to be scrolling past underneath.
     overlay.addEventListener("mousedown", (event) => {
       // Focus stays out of an aria-hidden subtree; the real heading remains the keyboard target.
       event.preventDefault();
+    });
+    overlay.addEventListener("click", (event) => {
+      const heading = event.target.closest && event.target.closest("th[data-key]");
+      if (heading) activateSort(heading.dataset.key);
     });
     overlay.addEventListener("wheel", (event) => {
       if (!event.deltaX) return;
@@ -1045,6 +1159,7 @@
   refreshTableOverflow = initTableOverflow();
   refreshClippedCells = initClippedCells();
   refreshStickyHeader = initStickyTableHeader();
+  refreshLanguageEvidence = initLanguageEvidence();
   initCardPreview();
   syncControls();
   render();
