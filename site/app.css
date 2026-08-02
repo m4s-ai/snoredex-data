@@ -236,9 +236,15 @@ th button.sort {
   background: none; border: 0; color: inherit; font: inherit; font-weight: 650;
   cursor: pointer; padding: 0; display: inline-flex; gap: 4px; align-items: center;
 }
+.table-sticky-header .sort-clone-label {
+  display: inline-flex; gap: 4px; align-items: center; font-weight: 650; cursor: pointer;
+}
 th[aria-sort="ascending"] button.sort::after { content: "\2191"; }
 th[aria-sort="descending"] button.sort::after { content: "\2193"; }
 th[aria-sort="none"] button.sort::after { content: "\2195"; opacity: .35; }
+.table-sticky-header th[aria-sort="ascending"] .sort-clone-label::after { content: "\2191"; }
+.table-sticky-header th[aria-sort="descending"] .sort-clone-label::after { content: "\2193"; }
+.table-sticky-header th[aria-sort="none"] .sort-clone-label::after { content: "\2195"; opacity: .35; }
 
 tbody tr:hover { background: var(--panel); }
 tr.yearsep td {
@@ -343,21 +349,35 @@ tbody tr:hover td.corr { background: var(--panel); }
 }
 .langcell { min-width: 1.8rem; width: 1.8rem; padding-inline: 2px; text-align: center; font-weight: 650; }
 .langcell button.sort { gap: 1px; }
+.lang-evidence-trigger {
+  display: inline-grid; place-items: center; padding: 0; border: 0; background: transparent;
+  color: inherit; font: inherit; font-weight: inherit; line-height: 1; cursor: help;
+}
+.lang-evidence-trigger:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .langcount { text-align: center; font-weight: 650; }
 .langcell.yes { color: var(--confirmed); }
 .langcell.no { color: var(--absent); }
 
 /* Evidence strength behind a confirmed language (#32). "Confirmed" is not one thing: an official
-   database entry and an uncorroborated owner attestation are both a tick. The full provider, tier
-   and corroboration state are in each cell's title and aria-label; this marks the one case a
-   reader most needs to notice — a claim with no public URL and no second source, which nobody can
-   re-check by following a link. Deliberately an underline rather than a colour change, so it
-   carries no contrast burden and stays visible to anyone who cannot distinguish the colours. */
+   database entry and an uncorroborated owner attestation are both a tick. The provider, tier and
+   corroboration state are available from the cell title, the evidence control's accessible label,
+   and its touch/keyboard popover; this marks the one case a reader most needs to notice — a claim
+   with no public URL and no second source, which nobody can re-check by following a link.
+   Deliberately an underline rather than a colour change, so it carries no contrast burden and
+   stays visible to anyone who cannot distinguish the colours. */
 .legend-unverifiable,
+.langcell.yes[data-unverifiable="true"] .lang-evidence-trigger > span,
 .langcell.yes[data-unverifiable="true"] > span {
   border-bottom: 2px dotted currentColor;
   padding-bottom: 1px;
 }
+.lang-evidence-popover {
+  position: fixed; z-index: 110; width: min(320px, calc(100vw - 24px));
+  margin: 0; padding: 9px 11px; border: 1px solid var(--control-line); border-radius: 8px;
+  background: var(--bg); color: var(--fg); box-shadow: 0 16px 42px -14px rgba(0, 0, 0, .65);
+  font-size: 13px; line-height: 1.4; pointer-events: none;
+}
+.lang-evidence-popover[hidden] { display: none; }
 .language-legend {
   display: flex; flex-wrap: wrap; align-items: center; gap: 5px 12px;
   margin: 8px 0; color: var(--muted); font-size: 12px;
@@ -415,7 +435,7 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
    * the interactive furniture, leaving a legible chronological summary. The full matrix stays
    * available on screen and in the downloadable checklist. */
   nav.sections, .theme-toggle, .controls, .builder, .stats, details, .table-scroll-tools,
-  .table-sticky-header, .table-edge, .card-preview, .language-legend,
+  .table-sticky-header, .table-edge, .card-preview, .lang-evidence-popover, .language-legend,
   td.corr, th.corr, .langcell, .secondary, td.img, th.img { display: none !important; }
 
   body { background: #fff; color: #000; font-size: 9pt; }

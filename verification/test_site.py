@@ -501,6 +501,17 @@ def main() -> int:
               "-500" in sticky_scroll["transform"]
               and abs(sticky_scroll["reportRight"] - sticky_scroll["overlayRight"]) <= 1,
               str(sticky_scroll))
+        hidden_clone = page.evaluate("""() => {
+          const overlay = document.querySelector('#collection-sticky-header');
+          return {
+            hidden: overlay.getAttribute('aria-hidden') === 'true',
+            focusable: [...overlay.querySelectorAll('button, a, input, select, textarea, [tabindex]')]
+              .filter((element) => element.tabIndex >= 0).length,
+          };
+        }""")
+        check("sticky header clone has no focusable controls in its hidden tree",
+              hidden_clone["hidden"] and hidden_clone["focusable"] == 0,
+              str(hidden_clone))
         page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
         page.wait_for_timeout(80)
 
@@ -509,7 +520,7 @@ def main() -> int:
         # otherwise aiming at a column heading expands a cell or opens a card preview instead.
         sticky_sort = page.evaluate("""() => {
           const overlay = document.querySelector('#collection-sticky-header');
-          const button = overlay.querySelector('th[data-key="name"] button.sort');
+          const button = overlay.querySelector('th[data-key="name"] .sort-clone-label');
           const box = button.getBoundingClientRect();
           const point = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
           return {
@@ -567,6 +578,14 @@ def main() -> int:
 
         count_text = page.text_content("#count")
         check("shown/total count is displayed", str(EXPECTED_ROWS) in (count_text or ""), count_text or "")
+        count_status = page.evaluate("""() => {
+          const count = document.querySelector('#count');
+          return {role: count.getAttribute('role'), live: count.getAttribute('aria-live'),
+                  atomic: count.getAttribute('aria-atomic')};
+        }""")
+        check("filter result count is announced to assistive technology",
+              count_status == {"role": "status", "live": "polite", "atomic": "true"},
+              str(count_status))
 
         sourced_dates = page.evaluate("""() => {
           const rows = JSON.parse(document.getElementById('data-rows').textContent);
@@ -699,6 +718,26 @@ def main() -> int:
               "✓ present" in language_accessibility["legend"]
               and "— absent" in language_accessibility["legend"],
               language_accessibility["legend"])
+
+        evidence_trigger = page.locator(".lang-evidence-trigger").first
+        evidence_label = evidence_trigger.get_attribute("aria-label") or ""
+        evidence_trigger.click()
+        page.wait_for_timeout(80)
+        evidence_popover = page.evaluate("""() => {
+          const popover = document.querySelector('#collection-language-evidence');
+          const trigger = document.querySelector('.lang-evidence-trigger[aria-expanded="true"]');
+          return {hidden: popover.hidden, text: popover.textContent,
+                  describedBy: trigger && trigger.getAttribute('aria-describedby')};
+        }""")
+        check("language evidence opens from a keyboard/touch-capable control",
+              not evidence_popover["hidden"]
+              and evidence_label.split(" — ", 1)[-1] in evidence_popover["text"]
+              and evidence_popover["describedBy"] == "collection-language-evidence",
+              str(evidence_popover))
+        page.keyboard.press("Escape")
+        check("language evidence detail closes with Escape",
+              page.locator("#collection-language-evidence").evaluate("element => element.hidden"),
+              "language evidence popover remained open")
 
         # --- no-results state ---
         page.fill("#f-q", "zzzzzznotacard")
