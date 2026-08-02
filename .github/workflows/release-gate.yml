@@ -92,6 +92,11 @@ jobs:
       - name: Metric polarity regression tests
         run: python verification/test_metric_polarity.py
 
+      # Harness properties: importing the findings suite must stay free of side effects, and a
+      # crash mid-collection must still render the checks that ran (#70).
+      - name: Findings harness regression tests
+        run: python verification/test_findings_harness.py
+
       - name: Evidence audit
         run: python verification/audit_evidence.py
 
