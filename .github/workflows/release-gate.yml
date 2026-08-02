@@ -7,9 +7,10 @@ name: Release gate
 #
 #  * Generators run and their output is compared against what is committed. A generated artifact
 #    that disagrees with its inputs fails here rather than being published.
-#  * Counts are never asserted. review_integrity.py reports them as drift, because closing an
-#    open verification unit is the project's goal, and a gate that blocks on progress is a gate
-#    people learn to bypass.
+#  * Counts are never asserted by size. review_integrity.py reports them as drift, because closing
+#    an open verification unit is the project's goal, and a gate that blocks on progress is a gate
+#    people learn to bypass. A move in the losing direction does fail: each metric declares whether
+#    up or down is progress, so an emptying queue is quiet and a refilling one is not (#69).
 
 on:
   workflow_call:
@@ -85,6 +86,11 @@ jobs:
 
       - name: Owner adjudication regression tests
         run: python verification/test_owner_adjudications.py
+
+      # Drift-metric polarity. A queue emptying is progress and a queue refilling is not, and the
+      # suite could express neither until #69 — nor fail on either.
+      - name: Metric polarity regression tests
+        run: python verification/test_metric_polarity.py
 
       - name: Evidence audit
         run: python verification/audit_evidence.py

@@ -12,10 +12,12 @@ process exits non-zero. What is not shared is how the lines look: each suite kee
 readers and its regression history already know, so a consolidation cannot quietly change a
 verdict. Rendering is therefore a parameter, not a policy.
 
-Counts are reported, never asserted. `review_integrity` established that rule and it is preserved
-here deliberately: a gate that reddens when the project makes progress is a gate people learn to
-edit rather than read. Only a count moving *backwards* — the direction that signals data loss —
-is a finding.
+Counts are reported, never asserted *by size*. `review_integrity` established that rule and it is
+preserved here deliberately: a gate that reddens when the project makes progress is a gate people
+learn to edit rather than read. Only a move in the losing direction is a finding, and since #69
+each metric declares which direction that is — most count work that exists, where a fall is loss;
+queue depths count work left to do, where a rise is. A losing move now fails the run, which it
+never did: the banner printed and the process exited 0.
 """
 
 from __future__ import annotations
@@ -142,14 +144,27 @@ class Note:
     detail: str = ""
 
 
+# Which way a metric is allowed to move. Most counts here measure work that exists — units,
+# confirmed artists, finish rows — and a fall means something was lost. Queue depths measure work
+# left to do, and a fall is the entire point of the project (#69).
+#
+# Getting this wrong is not cosmetic. Closing the language review queue drove `pending units` to 0
+# and the suite began printing "!!! COUNTS WENT BACKWARDS" on every clean run, permanently, for the
+# best possible reason. That is precisely the failure this module's docstring warns about: a gate
+# that reddens on progress is a gate people learn to edit rather than read.
+UP_IS_PROGRESS = "up-is-progress"
+DOWN_IS_PROGRESS = "down-is-progress"
+
+
 @dataclass
 class Metric:
-    """A count, reported against a baseline. Only a fall is a finding."""
+    """A count, reported against a baseline. Only a move in the losing direction is a finding."""
 
     name: str
     value: int
     baseline: int
     detail: str = ""
+    direction: str = UP_IS_PROGRESS
 
     @property
     def drift(self) -> int:
@@ -157,7 +172,13 @@ class Metric:
 
     @property
     def regressed(self) -> bool:
+        if self.direction == DOWN_IS_PROGRESS:
+            return self.drift > 0
         return self.drift < 0
+
+    @property
+    def improved(self) -> bool:
+        return self.drift != 0 and not self.regressed
 
 
 @dataclass
@@ -173,8 +194,9 @@ class Suite:
     def check(self, name: str, ok: bool, detail: str = "", ident: str = "") -> None:
         self.results.append(Check(name, bool(ok), detail, ident))
 
-    def report(self, name: str, value: int, baseline: int, detail: str = "") -> None:
-        self.results.append(Metric(name, value, baseline, detail))
+    def report(self, name: str, value: int, baseline: int, detail: str = "",
+               direction: str = UP_IS_PROGRESS) -> None:
+        self.results.append(Metric(name, value, baseline, detail, direction))
 
     def note(self, ident: str, name: str, detail: str = "") -> None:
         self.results.append(Note(ident, name, detail))
@@ -189,7 +211,8 @@ class Suite:
 
     @property
     def regressed(self) -> list[str]:
-        return [f"{r.name} ({r.value} < {r.baseline})"
+        return [f"{r.name} ({r.value} {'>' if r.direction == DOWN_IS_PROGRESS else '<'} "
+                f"{r.baseline})"
                 for r in self.results if isinstance(r, Metric) and r.regressed]
 
     def render(self, line: Callable[[Check | Metric | Note], None]) -> None:
