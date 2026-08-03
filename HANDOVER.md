@@ -423,9 +423,13 @@ separate manual `workflow_dispatch` run. End commit messages with the
      card's *language* unit cited, and the overwhelming majority of pending rows have no TCGdex URL
      at all — their language claims came from Bulbapedia, the Japanese official database or the
      Asia site. `--reproject` asks a source that was never consulted for those cards.
-   - **Korean and Simplified Chinese are the largest block and are unreachable.** TCGdex has no
-     `zh-cn` locale and exactly one `ko` URL in the whole store. These are specimen-led; ask the
-     owner which cards would close the most rows rather than waiting on a scrape.
+   - **Korean and Simplified Chinese are the largest block, and no source can answer them.**
+     Searched exhaustively on 2026-08-02 — TCGdex serves both locales but holds **0** Simplified
+     Chinese and **1** Korean Snorlax record (and that one is a Trainer item), and no web
+     marketplace indexes those markets by set and card number the way LigaPokemon does for
+     Portuguese. `FINISH_SOURCES.md` records what was tried so nobody repeats it. These 54 rows
+     close only by inspecting a physical card, and the queue is flat — 52 distinct cards, only two
+     worth more than one row — so there is nothing to prioritise.
 
    Japanese looks like the easy tranche and is not: its language claims come from
    `pokemon-card.com/card-search/details.php`, which records card text and illustrator and carries
