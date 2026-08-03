@@ -143,9 +143,13 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in
   `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. To add
-  its photograph: file into `verification/specimens/`, set `photograph` to the filename, rerun
-  `review_findings.py`. Never write a new prose description of a specimen — that is what the ids
-  replaced.
+  its photograph: `python verification/fetch_attachment.py --specimen SPEC-0002 --from <path>`,
+  then `review_findings.py` and `scripts/database.py`. Never write a new prose description of a
+  specimen — that is what the ids replaced. A photograph attached to a GitHub issue cannot be
+  fetched from an agent session — the proxy refuses the whole `assets` namespace on `github.com`,
+  repository-scoped form included — so the bytes have to arrive by commit, release asset or a
+  `githubusercontent` URL. Record the attachment URL as `photographSource`; it is provenance, not
+  a place the image will still be.
 
 ## Commands
 

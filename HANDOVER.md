@@ -146,10 +146,24 @@ verification/
                               instead of describing it in prose. `photograph` is null until the
                               image is supplied; the claim rests on the recorded inspection either
                               way, and the file is what lets a third party re-check it.
-                              TO ADD A PHOTOGRAPH: drop the file in verification/specimens/, set
-                              `photograph` to its filename, run review_findings.py. Checks S7-S12
-                              cover it; publish.py already allowlists the directory and LICENSE.md
+                              TO ADD A PHOTOGRAPH: run fetch_attachment.py, which writes the file
+                              as SPEC-nnnn.png/.jpg and sets `photograph` plus the optional
+                              `photographSource` (where the bytes came from — keep the original
+                              GitHub attachment URL here, since that URL outlives nothing). Then
+                              run review_findings.py and scripts/database.py. Checks S7-S12 cover
+                              it; publish.py already allowlists the directory and LICENSE.md
                               decision 4 covers the category, so no approval is needed per image.
+                              PNG and JPEG only: publish.py also allowlists .webp, but
+                              `image_format` in review_findings.py knows PNG and JPEG magic
+                              alone, so a committed .webp would fail S9.
+                              A photograph the owner attached to a GitHub issue CANNOT be fetched
+                              here — the agent proxy refuses github.com/user-attachments/assets/
+                              and the older github.com/{owner}/{repo}/assets/ form alike, so
+                              adding the repo to the path is not a workaround. It is not a
+                              permission problem; the repository is public and the image opens in
+                              a browser. Commit the bytes to a branch and point `--from` at the
+                              path. Release downloads and every githubusercontent host are
+                              reachable if a URL is easier.
   confirmed_sources.json      Export of all confirmed units.
   CONTRADICTED.json           The 85 refuted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
@@ -175,6 +189,10 @@ verification/
                               scripts/finishes.py.
   audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.py          (Re)tags structurally undocumentable units.
+  fetch_attachment.py         Files a card photograph into verification/specimens/ against a
+                              SPEC id, from a local path or a reachable URL. Validates format,
+                              truncation and size before writing, so S9/S10 cannot be handed a
+                              broken file. `--list` shows which specimens still lack one.
   verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
                               Replayable offline against fixtures/tcgcsv_finish_sources.json.
   review_integrity.py         Structural checks WITHIN each store — run after every write pass.
