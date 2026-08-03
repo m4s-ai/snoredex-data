@@ -13,17 +13,18 @@ gap, never a finding.
 
 | Provider | Category | Tier | Absence? | Sources | Claims | Used for |
 |---|---|---:|:---:|---:|---:|---|
-| **Photographed physical specimen** | non-url-evidence | 1 | no | 1 | 5 | language, finish |
+| **Inspected physical specimen** | non-url-evidence | 1 | no | 1 | 5 | language, finish |
 | **Play! Pokémon rewards gallery** | official-publisher | 1 | yes | 1 | 7 | finish, product |
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 17 | 17 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
 | **The Pokémon Company official checklists** | official-publisher | 1 | yes | 4 | 12 | finish, product |
+| **Bulbapedia** | fan-wiki | 2 | no | 88 | 697 | language, edition, date, finish |
+| **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 0 | 0 | language, finish |
 | **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 51 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | no | 1 | 2 | finish |
 | **TCGdex** | open-database | 2 | no | 309 | 747 | language, finish |
 | **pokemontcg.io** | open-database | 2 | no | 1 | 123 | artist, date |
-| **Bulbapedia** | fan-wiki | 3 | no | 88 | 697 | language, edition, date, finish |
 | **LigaPokemon** | marketplace | 3 | no | 2 | 3 | language, finish |
 | **Limitless TCG** | open-database | 3 | no | 0 | 0 | artist |
 | **Retailer and specialist card listings** | retail-listing | 3 | no | 6 | 31 | finish, product, language |
@@ -34,14 +35,14 @@ gap, never a finding.
 
 ## Provider detail
 
-### Photographed physical specimen
+### Inspected physical specimen
 
 - **Organization:** not applicable (evidence class)
 - **Terms:** Photographs of physical cards; depicted artwork remains the rights holders'.
 - **Coverage:** individual cards whose text and markings were read from a photograph
 - **Can establish absence:** no — positive evidence only
-- **Attribution:** Physical card, photographed specimen.
-- **Notes:** The strongest evidence class here: it defeated three databases at once on XYPR 179.
+- **Attribution:** Physical card, inspected specimen.
+- **Notes:** The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.
 
 ### Play! Pokémon rewards gallery — <https://play.pokemon.com>
 
@@ -80,6 +81,24 @@ gap, never a finding.
 - **Absence-capable source scopes:** <https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf>, <https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf>, <https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf>, <https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf>
 - **Attribution:** Official product checklists © The Pokémon Company International.
 - **Notes:** The only source permitted to establish that a finish is absent, and only inside its stated scope.
+
+### Bulbapedia — <https://bulbapedia.bulbagarden.net>
+
+- **Organization:** Bulbagarden
+- **Terms:** CC BY-NC-SA 2.5 — attribution and ShareAlike apply to derived content.
+- **Coverage:** set lists, release fields, per-language articles, promo series
+- **Can establish absence:** no — positive evidence only
+- **Attribution:** Content from Bulbapedia, licensed CC BY-NC-SA 2.5.
+- **Notes:** Tier 2 by owner decision, 2026-08-03. It sat at tier 3 beside retailer listings while carrying 247 of the 252 claims that rested on a single tier-3 source — more of this dataset than anything but TCGdex. The tier is meant to record dependability, and its contributors are dedicated researchers, so the rank now says what the project actually does with their work. Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.
+
+### Cardmarket seller listing photograph — <https://www.cardmarket.com>
+
+- **Organization:** Cardmarket (Sammelkartenmarkt GmbH & Co. KG)
+- **Terms:** Seller photographs remain the seller's; depicted artwork remains the rights holders'.
+- **Coverage:** individual cards whose text and markings were read from a seller's listing photograph
+- **Can establish absence:** no — positive evidence only
+- **Attribution:** Seller listing photograph via Cardmarket.
+- **Notes:** Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.
 
 ### Collection owner attestation
 
@@ -126,15 +145,6 @@ gap, never a finding.
 - **Can establish absence:** no — positive evidence only
 - **Attribution:** Illustrator and release data from pokemontcg.io.
 - **Notes:** English-market only.
-
-### Bulbapedia — <https://bulbapedia.bulbagarden.net>
-
-- **Organization:** Bulbagarden
-- **Terms:** CC BY-NC-SA 2.5 — attribution and ShareAlike apply to derived content.
-- **Coverage:** set lists, release fields, per-language articles, promo series
-- **Can establish absence:** no — positive evidence only
-- **Attribution:** Content from Bulbapedia, licensed CC BY-NC-SA 2.5.
-- **Notes:** Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.
 
 ### LigaPokemon — <https://www.ligapokemon.com.br>
 

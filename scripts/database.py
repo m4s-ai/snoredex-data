@@ -142,7 +142,8 @@ def provider_for_source(source: dict, providers: list[dict]) -> str | None:
     label = (source.get("sourceType") or "").lower()
     for provider_id, token in [
         ("owner-attestation", "owner attestation"),
-        ("photographed-specimen", "photographed specimen"),
+        ("cardmarket-listing-photo", "seller listing photograph"),
+        ("inspected-specimen", "photograph"),
         ("bulbapedia", "bulbapedia"),
         ("tcgdex", "tcgdex"),
         ("tcgcsv", "tcgcsv"),

@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-02",
+  "generated": "2026-08-03",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -9,7 +9,7 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 18,
+   "providers": 19,
    "evidenceRecords": 883,
    "uniqueUrls": 876,
    "nonUrlEvidenceClasses": 7,
@@ -123,7 +123,7 @@
    "homepage": "https://bulbapedia.bulbagarden.net",
    "licenseOrTerms": "CC BY-NC-SA 2.5 — attribution and ShareAlike apply to derived content.",
    "category": "fan-wiki",
-   "authorityTier": 3,
+   "authorityTier": 2,
    "coverage": "set lists, release fields, per-language articles, promo series",
    "supportsAbsence": false,
    "usedFor": [
@@ -133,7 +133,7 @@
     "finish"
    ],
    "attribution": "Content from Bulbapedia, licensed CC BY-NC-SA 2.5.",
-   "notes": "Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
+   "notes": "Tier 2 by owner decision, 2026-08-03. It sat at tier 3 beside retailer listings while carrying 247 of the 252 claims that rested on a single tier-3 source — more of this dataset than anything but TCGdex. The tier is meant to record dependability, and its contributors are dedicated researchers, so the rank now says what the project actually does with their work. Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
@@ -419,8 +419,8 @@
    "claimsSupported": 51
   },
   {
-   "providerId": "photographed-specimen",
-   "displayName": "Photographed physical specimen",
+   "providerId": "inspected-specimen",
+   "displayName": "Inspected physical specimen",
    "organization": null,
    "homepage": null,
    "licenseOrTerms": "Photographs of physical cards; depicted artwork remains the rights holders'.",
@@ -432,11 +432,31 @@
     "language",
     "finish"
    ],
-   "attribution": "Physical card, photographed specimen.",
-   "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179.",
+   "attribution": "Physical card, inspected specimen.",
+   "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
    "uniqueSources": 1,
    "claimsSupported": 5
+  },
+  {
+   "providerId": "cardmarket-listing-photo",
+   "displayName": "Cardmarket seller listing photograph",
+   "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
+   "homepage": "https://www.cardmarket.com",
+   "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
+   "category": "marketplace-photo",
+   "authorityTier": 2,
+   "coverage": "individual cards whose text and markings were read from a seller's listing photograph",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "finish"
+   ],
+   "attribution": "Seller listing photograph via Cardmarket.",
+   "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
+   "hosts": [],
+   "uniqueSources": 0,
+   "claimsSupported": 0
   }
  ],
  "evidence": [
@@ -9963,6 +9983,28 @@
   },
   {
    "canonicalUrl": null,
+   "nonUrlEvidenceId": "evidence:inspected-specimen",
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Physical card, photographed holo specimen",
+    "Physical card, photographed specimen"
+   ],
+   "dimensions": [
+    "language"
+   ],
+   "stableIdCount": 5,
+   "stableIds": [
+    "U0189",
+    "U0228",
+    "U0229",
+    "U0230",
+    "U0231"
+   ],
+   "retrievedAt": "2026-07-23",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": null,
    "nonUrlEvidenceId": "evidence:internal-derivation",
    "providerId": "internal-derivation",
    "sourceTypes": [
@@ -10101,28 +10143,6 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 51
-  },
-  {
-   "canonicalUrl": null,
-   "nonUrlEvidenceId": "evidence:photographed-specimen",
-   "providerId": "photographed-specimen",
-   "sourceTypes": [
-    "Physical card, photographed holo specimen",
-    "Physical card, photographed specimen"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 5,
-   "stableIds": [
-    "U0189",
-    "U0228",
-    "U0229",
-    "U0230",
-    "U0231"
-   ],
-   "retrievedAt": "2026-07-23",
-   "usageCount": 5
   },
   {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",

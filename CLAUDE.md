@@ -32,27 +32,36 @@ correction already made here, and reading it is how you avoid repeating one.
 
 1. **Evidence outside Cardmarket only.** A product's *language filter* on Cardmarket is not
    evidence. A seller's *photo* of the physical card is.
+
+   Both halves are now recordable. `cardmarket` is tier 5 — the catalogue this project exists to
+   check, never verification — and `cardmarket-listing-photo` is tier 2, for a card whose text you
+   read off a seller's photograph. Until 2026-08-03 only the first existed, so the second half of
+   this rule had nowhere to be written down. File a listing photograph as a `SPEC-nnnn` record with
+   `heldBy: "third-party seller"` and the listing URL, never as a bare link: listings are deleted
+   and the observation has to outlive them. Tier 2 rather than 1 because you cannot re-examine it
+   and the seller may have mislabelled the language. There is no open API; collection is by hand or
+   a browser session, and the rolling ~55-request quota returns HTTP 429.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
 
 <!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Tier | Sources |
 |---|---|
-| 1 | Photographed physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
-| 3 | Bulbapedia · LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
+| 2 | Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
 Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
 <!-- /generated:authority-tiers -->
 
    A single non-URL source may confirm a unit: **30 units rest on owner attestation alone** and 5
-   on a photographed specimen alone. The owner holds those cards and no database records them, so
+   on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 
    **`E3` enforces *checkable or strong*, not tier alone.** It fails when an uncorroborated claim
    is both: no `sourceUrl` *and* below tier 2. A tier-3 page with a URL may carry a claim by
-   itself, and 252 resolved units do — do not read a lone tier-3 source as a rule violation, and
+   itself, and 5 resolved units do — do not read a lone tier-3 source as a rule violation, and
    do not tell a reader the tiers are stricter than that. This paragraph used to say a weaker
    source "may not" stand alone and that a check enforced it; neither was true (#65). `E4` fails
    when the attestation count stops matching the data. Prefer corroboration where it exists — it
@@ -61,7 +70,7 @@ Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker r
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in
    `evidence`, and `corroborated` means a second provider agreed about *this* unit. Fourteen Prize
-   Pack units were once filed as tier-1 photographed specimens on the owner's word because one
+   Pack units were once filed as tier-1 inspected specimens on the owner's word because one
    German specimen and one Portuguese listing sat nearby (#64). Checks `S13` and `S14` now hold the
    line: `sourceRef` carries a reference or nothing, and only a cited specimen may claim specimen
    authority.
@@ -70,9 +79,23 @@ Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker r
    lists Korean promos, so a missing Korean row there is meaningful; its West coverage is one
    lumped "English" row, so its silence on French means nothing. This rule exists because an
    absence argument produced a false contradiction (`XY-P 149`) that had to be reverted.
-4. **A complete official manifest may establish absence,** and only within its stated scope.
-   Other final absence decisions must be explicit collection-owner adjudications after reviewing
-   all cited claims; they are stored separately and are not attributed to a single provider.
+4. **Only a collection-owner adjudication settles an absence.** Not a source — any source.
+   Converging evidence from dependable sources is *Indizien*: it is the material the owner weighs,
+   and deciding which way it points is the collector's job, not a property a page can assert.
+   Adjudications are stored separately in `verification/owner_adjudications.json` and are never
+   attributed to a single provider.
+
+   A provider may declare `absenceScopes` — specific pages that state a closed list rather than
+   merely failing to mention something, like Elite Fourum's Black Star Promos language table or the
+   Kalos Starter Set article. That is **recorded rationale, never a mechanism**: it strengthens the
+   case, and `E9` checks each scope is declared and justified, but a scoped source alone leaves the
+   claim `disputed`. Dependability decides whether a source may carry that weight, not whether it
+   is a manufacturer — Bulbapedia and Elite Fourum qualify, and this rule said "complete official
+   manifest" until 2026-08-03, which was narrower than intended.
+
+   **`not-printed` means no regular release.** A proof copy or an error card is a different
+   category and does not falsify the decision.
+
    TCGdex `true` confirms a printing; TCGdex `false` does not refute one.
 5. **`pending` means not yet established, never proven absent.** This holds in the data, the
    site copy, and anything you write.
