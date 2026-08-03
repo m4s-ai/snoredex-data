@@ -55,7 +55,7 @@ correction already made here, and reading it is how you avoid repeating one.
 Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
 <!-- /generated:authority-tiers -->
 
-   A single non-URL source may confirm a unit: **31 units rest on owner attestation alone** and 5
+   A single non-URL source may confirm a unit: **30 units rest on owner attestation alone** and 6
    on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 

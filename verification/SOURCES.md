@@ -13,14 +13,14 @@ gap, never a finding.
 
 | Provider | Category | Tier | Absence? | Sources | Claims | Used for |
 |---|---|---:|:---:|---:|---:|---|
-| **Inspected physical specimen** | non-url-evidence | 1 | no | 1 | 5 | language, finish |
+| **Inspected physical specimen** | non-url-evidence | 1 | no | 1 | 6 | language, finish |
 | **Play! Pokémon rewards gallery** | official-publisher | 1 | yes | 1 | 7 | finish, product |
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 17 | 17 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
 | **The Pokémon Company official checklists** | official-publisher | 1 | yes | 4 | 12 | finish, product |
 | **Bulbapedia** | fan-wiki | 2 | no | 88 | 696 | language, edition, date, finish |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 0 | 0 | language, finish |
-| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 52 | language, finish, edition |
+| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 51 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | no | 1 | 2 | finish |
 | **TCGdex** | open-database | 2 | no | 309 | 747 | language, finish |

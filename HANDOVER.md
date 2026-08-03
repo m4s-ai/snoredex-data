@@ -307,7 +307,7 @@ Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker r
    Elite Fourum is a high-authority tier-2 reference; its authority does not by itself establish
    absence, and explicit collection-owner adjudications record final cross-source decisions.
 
-   A single non-URL source may confirm a unit. **31 units rest on owner attestation alone** and 5
+   A single non-URL source may confirm a unit. **30 units rest on owner attestation alone** and 6
    on an inspected specimen alone, all queryable as
    `corroborated == false and providerId in {owner-attestation, inspected-specimen}`. The
    owner physically holds these cards and no database records them, so the alternative is not

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; the record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 15,
+  "count": 18,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -188,7 +188,7 @@
       "inspectedFrom": "photograph",
       "photograph": "SPEC-0013.png",
       "photographSource": "https://github.com/user-attachments/assets/bb31756e-3e3b-49db-8e7a-1a20297fdee0",
-      "observed": "Two sealed Indonesian \"117/SV-P\" Snorlax promos photographed side by side by the owner. The left copy is non-holo; the right copy carries a Poké Ball mirror foil pattern across the whole card face, the pattern plainly visible over the text box and the lower border. Same card text as SPEC-0012 (Ability \"Kemaruk\", \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, ©2024). This image is the direct evidence that the Indonesian Poké Ball mirror exists as an SV-P promo.",
+      "observed": "Two sealed Indonesian \"117/SV-P\" Snorlax promos photographed side by side by the owner, both carrying a mirror foil pattern. The owner identifies them: \"left is Pokeball very faint reverse holo, right is master ball (shape of ball is different) reverse holo\". The left pattern is faint enough to read as a non-holo card at a glance, which is how this record first described it; the ball silhouettes distinguish the two. Card text as SPEC-0012 (Ability \"Kemaruk\", \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, ©2024). This single image is therefore the direct observation behind both Indonesian decisions - the Poké Ball mirror (U0782) and the Master Ball mirror (U0777) - each existing as an SV-P promo rather than as an xsv2a 143 printing. \"Reverse holo\" is the owner's wording; the technical finish value here is mirror-holo, which finishFamily presents as \"Reverse Holo\".",
       "recordedAt": "2026-08-03",
       "citedBy": []
     },
@@ -218,6 +218,50 @@
       "photographSource": "https://github.com/user-attachments/assets/25528966-476a-4a82-bcaf-d9e1f76e8584",
       "observed": "Traditional Chinese Snorlax photographed front and back by the owner on a dark surface, the reverse showing a standard Pokémon card back: \"卡比獸\", HP 140, Basic, SINGLE STRIKE 一擊 marker, attacks 「巴掌撲擊」 30 and 「一擊衝撞」 120, Illus. Yuya Oka, \"111/159\", regulation mark E, ©2021. Same card text and illustrator as the Korean S-P 101 record (SPEC-0014). The card number is legible; the set glyph is not — it reads as a two-or-three character code ending in F and is deliberately not asserted here. Note this is a numbered set card, not a promo, so it is not an S-P printing under a different number.",
       "recordedAt": "2026-08-03",
+      "citedBy": []
+    },
+    {
+      "specimenId": "SPEC-0016",
+      "setCode": "xJTG",
+      "number": "117",
+      "variant": "V2",
+      "language": "French",
+      "heldBy": "collection owner",
+      "inspectedFrom": "photograph",
+      "photograph": "SPEC-0016.png",
+      "photographSource": "https://github.com/user-attachments/assets/c4e46460-12c0-4e05-aaf9-22c0c26b77c5",
+      "observed": "French GameStop-stamped Hop's Snorlax, sealed in its promo wrapper, photographed by the owner: \"Ronflex de Nabil\", PV 150, Basic, Talent \"Portions Supplémentaires\" (attacks by your Pokémon inflict 30 extra damage on the Active Pokémon, before Weakness and Resistance, not cumulative), attack \"Pression Dynamique\" 140 with 80 recoil, \"N° 0143 Pokémon Ronfleur, Taille 2,1 m, Poids 460,0 kg\", Illus. GOSSAN, \"JTG\" \"117/159\", holo. The GameStop logo is stamped in red over the lower left of the illustration. French-language text throughout. This is the card behind the overturn of U0452: the contradiction had reasoned that every documented printing went to an English-language retail market, and GameStop trades in bilingual Canada.",
+      "recordedAt": "2026-08-04",
+      "citedBy": [
+        "U0452"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0017",
+      "setCode": "HXY",
+      "number": "026",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "photograph",
+      "photograph": "SPEC-0017.png",
+      "photographSource": "https://github.com/user-attachments/assets/d8637185-7227-45f4-9104-d19d7b39c723",
+      "observed": "Japanese Snorlax from the XY Beginning Set: \"カビゴン\", HP 120, Colorless, Basic, attacks 「いわだき」 10+ (flip a coin, +30 on heads) and 「かいりき」 70, Illus. Naoki Saito, \"026/039\", with the set's magazine-style circular mark at the lower right of the card. Japanese-language text throughout. The owner supplies this against #86 to show that the Kalos Starter Set card exists in Japanese as its own product under the HXY code rather than as a KSS 26 language.",
+      "recordedAt": "2026-08-04",
+      "citedBy": []
+    },
+    {
+      "specimenId": "SPEC-0018",
+      "setCode": "HXY",
+      "number": "026",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "collection owner",
+      "inspectedFrom": "photograph",
+      "photograph": "SPEC-0018.png",
+      "photographSource": "supplied directly by the collection owner (IMG_6129.WEBP, transcoded to PNG)",
+      "observed": "Korean counterpart of the same card: \"잠만보\", HP 120, Colorless, Basic, attacks 「바위깨기」 10+ and 「괴력」 70, numbered \"026/039\" to match the Japanese printing. Korean-language text throughout. Supplied against #86 alongside SPEC-0017; the owner states the Korean edition carries the code FXY where the Japanese carries HXY, and the set glyph is not legible at the supplied resolution, so the FXY code is the owner's identification rather than something read off this image. Filed under the catalogue's HXY 026 identity, which is how this project groups the printing.",
+      "recordedAt": "2026-08-04",
       "citedBy": []
     }
   ]
