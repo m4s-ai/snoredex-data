@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-08-02",
+    "generated": "2026-08-03",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -54,16 +54,16 @@
       "totalFinishUnits": 637,
       "withConfirmedFinish": 331,
       "withOnlyMarketplaceClaim": 103,
-      "pendingFinish": 127,
-      "notApplicableFinish": 76,
+      "pendingFinish": 128,
+      "notApplicableFinish": 75,
       "withCompleteManifest": 4,
       "withNonHolo": 270,
       "withHolo": 144,
       "withReverseHolo": 234,
       "withMirrorHolo": 8,
       "withBothNonHoloAndHolo": 18,
-      "withUnresolvedProductMapping": 164,
-      "withAnyUnresolvedDetail": 222,
+      "withUnresolvedProductMapping": 165,
+      "withAnyUnresolvedDetail": 223,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -40401,7 +40401,7 @@
         },
         {
           "variant": "V2",
-          "claimStatus": "contradicted",
+          "claimStatus": "confirmed",
           "rarity": "Promo",
           "variantName": "\"GameStop\" stamp (gift with purchase, USA/Canada)",
           "variantNameSource": "Bulbapedia set list + stamp read off the downloaded scan",
@@ -40415,18 +40415,22 @@
       ],
       "availableFinishes": [],
       "finishStatus": {
-        "non-holo": "not-applicable",
-        "holo": "not-applicable",
-        "reverse-holo": "not-applicable",
-        "mirror-holo": "not-applicable"
+        "non-holo": "pending",
+        "holo": "pending",
+        "reverse-holo": "pending",
+        "mirror-holo": "pending"
       },
-      "applicabilityStatus": "not-applicable",
-      "availabilityStatus": "not-applicable",
-      "completenessStatus": "not-applicable",
-      "productMappingStatus": "not-applicable",
+      "applicabilityStatus": "applicable",
+      "availabilityStatus": "pending",
+      "completenessStatus": "pending",
+      "productMappingStatus": "pending",
       "patternStatus": "not-applicable",
       "printings": [],
-      "unresolved": []
+      "unresolved": [
+        "No positive finish evidence has been recorded for this set-number-language unit.",
+        "One or more Cardmarket product variants are not mapped to a logical printing: V2",
+        "The underlying Cardmarket language claim is contradicted for at least one product variant."
+      ]
     },
     {
       "finishUnitId": "F0599",

@@ -9,7 +9,7 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 19,
+   "providers": 20,
    "evidenceRecords": 883,
    "uniqueUrls": 876,
    "nonUrlEvidenceClasses": 7,
@@ -138,7 +138,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 88,
-   "claimsSupported": 697
+   "claimsSupported": 696
   },
   {
    "providerId": "tcgcsv",
@@ -206,6 +206,29 @@
    ],
    "uniqueSources": 2,
    "claimsSupported": 3
+  },
+  {
+   "providerId": "koreanpokemoncards",
+   "displayName": "koreanpokemoncards.com",
+   "organization": "koreanpokemoncards.com",
+   "homepage": "http://www.koreanpokemoncards.com",
+   "licenseOrTerms": "Site terms.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "Korean-market set and promo listings",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "finish"
+   ],
+   "attribution": "Korean printing data from koreanpokemoncards.com.",
+   "notes": "Declared before any claim cites it, so the research it is meant to start has a place to land. Prove it covers a category before reading its silence as evidence: rule 3 applies here as it does to pokumon, whose Western coverage is one lumped English row.",
+   "hosts": [
+    "koreanpokemoncards.com",
+    "www.koreanpokemoncards.com"
+   ],
+   "uniqueSources": 0,
+   "claimsSupported": 0
   },
   {
    "providerId": "elitefourum",
@@ -416,7 +439,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 51
+   "claimsSupported": 52
   },
   {
    "providerId": "inspected-specimen",
@@ -1166,10 +1189,9 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 13,
+   "stableIdCount": 12,
    "stableIds": [
     "U0451",
-    "U0452",
     "U0453",
     "U0454",
     "U0455",
@@ -1183,7 +1205,7 @@
     "U0530"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 13
+   "usageCount": 12
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
@@ -10080,6 +10102,7 @@
    "sourceTypes": [
     "Owner attestation (domain expert)",
     "Owner attestation (domain expert) + set release schedule",
+    "Owner attestation (domain expert); GameStop bilingual Canadian distribution",
     "Owner attestation (domain expert); German and Portuguese units of the same product independently sourced",
     "Owner attestation plus downloaded scan review"
    ],
@@ -10088,7 +10111,7 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 51,
+   "stableIdCount": 52,
    "stableIds": [
     "F0289-P02",
     "F0597-P01",
@@ -10132,17 +10155,17 @@
     "U0326",
     "U0327",
     "U0328",
+    "U0452",
     "U0785",
     "U0786",
     "U0787",
     "U0788",
     "U0790",
     "U0791",
-    "U0792",
-    "U0793"
+    "U0792"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 51
+   "usageCount": 52
   },
   {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",

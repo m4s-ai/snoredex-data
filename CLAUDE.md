@@ -49,13 +49,13 @@ correction already made here, and reading it is how you avoid repeating one.
 |---|---|
 | 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
 | 2 | Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
-| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · koreanpokemoncards.com · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
 Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
 <!-- /generated:authority-tiers -->
 
-   A single non-URL source may confirm a unit: **30 units rest on owner attestation alone** and 5
+   A single non-URL source may confirm a unit: **31 units rest on owner attestation alone** and 5
    on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 
@@ -131,7 +131,7 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
 - **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
   outside source disagrees with Cardmarket. Only two things settle it: a complete official manifest
   within its scope, or an explicit owner adjudication. Everything else is **disputed** — currently
-  **12 settled and 73 disputed** — and `DATABASE.md` is right that an application must not read
+  **47 settled and 37 disputed** — and `DATABASE.md` is right that an application must not read
   disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every generator;
   cards carry `languagesNotPrinted` and `languagesDisputed` beside `languagesContradicted`, and
   checks `E8`/`E9`/`E10` keep the split honest. Both are excluded from the checklist, because the

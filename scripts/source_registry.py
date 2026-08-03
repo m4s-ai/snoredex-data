@@ -176,6 +176,25 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Indexes English names only. Absence never contradicts a Western language.",
     },
     {
+        # Added on the owner's recommendation (#88): "add this site as source - use it as starting
+        # point for further research of korean pokemon cards." Korean is the market the toolchain
+        # reaches worst — TCGdex serves a `ko` locale but holds one Snorlax-family record, and it
+        # is a Trainer item — so a Korean-first catalogue is the gap this fills.
+        "providerId": "koreanpokemoncards",
+        "displayName": "koreanpokemoncards.com",
+        "organization": "koreanpokemoncards.com",
+        "homepage": "http://www.koreanpokemoncards.com",
+        "hosts": ["koreanpokemoncards.com", "www.koreanpokemoncards.com"],
+        "licenseOrTerms": "Site terms.",
+        "category": "collector-database",
+        "authorityTier": 3,
+        "coverage": "Korean-market set and promo listings",
+        "supportsAbsence": False,
+        "usedFor": ["language", "finish"],
+        "attribution": "Korean printing data from koreanpokemoncards.com.",
+        "notes": "Declared before any claim cites it, so the research it is meant to start has a place to land. Prove it covers a category before reading its silence as evidence: rule 3 applies here as it does to pokumon, whose Western coverage is one lumped English row.",
+    },
+    {
         "providerId": "elitefourum",
         "displayName": "Elite Fourum",
         "organization": "Elite Fourum community",

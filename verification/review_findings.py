@@ -1678,14 +1678,19 @@ def collect() -> None:
                   "meta.schema and meta.schemaVersion are required for a canonical export")
 
             # No contradicted language may enter, and no code card.
+            #
+            # Keyed by variant, because a variant is what a contradiction is about: a unit is
+            # (setCode, number, variant, language). xJTG 117 French is confirmed on the GameStop
+            # stamp and not-printed on the Journey Together stamp, and both are correct. Collapsing
+            # to (setCode, number, language) reported the confirmed one as refuted.
             refuted = {
-                (card["setCode"], norm_number(card.get("number")), language)
+                (card["setCode"], norm_number(card.get("number")), card.get("variantToken"), language)
                 for card in cards
                 for language in card.get("languagesContradicted") or []
             }
             leaked = [
                 i["checklistId"] for i in items
-                if (i["setCode"], i["number"], i["language"]) in refuted
+                if (i["setCode"], i["number"], i.get("cardmarketVariant"), i["language"]) in refuted
             ]
             check("C3", "No contradicted language enters the checklist", "FAIL", not leaked,
                   f"{len(leaked)} items rest on a refuted language claim: {leaked[:5]}")

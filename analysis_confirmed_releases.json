@@ -35730,14 +35730,14 @@
       "mirror-holo": "not-applicable"
      },
      "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
      },
      "status": "not-applicable",
      "finishUnitId": "F0598",
-     "productMappingStatus": "not-applicable",
+     "productMappingStatus": "pending",
      "printings": []
     },
     {
@@ -35914,24 +35914,24 @@
     },
     {
      "language": "French",
-     "claimStatus": "contradicted",
+     "claimStatus": "confirmed",
      "availableFinishes": [],
      "unitAvailableFinishes": [],
      "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
      },
-     "status": "not-applicable",
+     "status": "pending",
      "finishUnitId": "F0598",
-     "productMappingStatus": "not-applicable",
+     "productMappingStatus": "pending",
      "printings": []
     },
     {
@@ -36024,7 +36024,8 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "English": "positive-evidence-only"
+    "English": "positive-evidence-only",
+    "French": "pending"
    },
    "languageEvidence": {
     "English": {
@@ -36033,12 +36034,20 @@
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
+    },
+    "French": {
+     "providerId": "owner-attestation",
+     "provider": "Collection owner attestation",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": false
     }
    },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
-    "English"
+    "English",
+    "French"
    ],
    "rowId": "xjtg-117-v2-none",
    "datePrecision": "month",

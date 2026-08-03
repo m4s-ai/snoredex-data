@@ -18,9 +18,9 @@ gap, never a finding.
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 17 | 17 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
 | **The Pokémon Company official checklists** | official-publisher | 1 | yes | 4 | 12 | finish, product |
-| **Bulbapedia** | fan-wiki | 2 | no | 88 | 697 | language, edition, date, finish |
+| **Bulbapedia** | fan-wiki | 2 | no | 88 | 696 | language, edition, date, finish |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 0 | 0 | language, finish |
-| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 51 | language, finish, edition |
+| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 52 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | no | 1 | 2 | finish |
 | **TCGdex** | open-database | 2 | no | 309 | 747 | language, finish |
@@ -29,6 +29,7 @@ gap, never a finding.
 | **Limitless TCG** | open-database | 3 | no | 0 | 0 | artist |
 | **Retailer and specialist card listings** | retail-listing | 3 | no | 6 | 31 | finish, product, language |
 | **TCGCSV (TCGplayer product data)** | marketplace-catalogue | 3 | no | 7 | 44 | finish, product |
+| **koreanpokemoncards.com** | collector-database | 3 | no | 0 | 0 | language, finish |
 | **pokumon.com** | collector-database | 3 | no | 2 | 3 | language |
 | **Cardmarket** | marketplace-catalogue | 5 | no | 397 | 931 | product, image, finish |
 | **Internal derivation from a sibling record** | internal | 5 | no | 1 | 13 | artist |
@@ -181,6 +182,15 @@ gap, never a finding.
 - **Can establish absence:** no — positive evidence only
 - **Attribution:** Product data via TCGCSV, sourced from TCGplayer.
 - **Notes:** Subtype omission is a catalogue gap, not proof a finish does not exist.
+
+### koreanpokemoncards.com — <http://www.koreanpokemoncards.com>
+
+- **Organization:** koreanpokemoncards.com
+- **Terms:** Site terms.
+- **Coverage:** Korean-market set and promo listings
+- **Can establish absence:** no — positive evidence only
+- **Attribution:** Korean printing data from koreanpokemoncards.com.
+- **Notes:** Declared before any claim cites it, so the research it is meant to start has a place to land. Prove it covers a category before reading its silence as evidence: rule 3 applies here as it does to pokumon, whose Western coverage is one lumped English row.
 
 ### pokumon.com — <https://pokumon.com>
 
