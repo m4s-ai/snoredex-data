@@ -106,20 +106,31 @@ def collect() -> None:
     # Load stores and derived artifacts
     # --------------------------------------------------------------------------- #
 
-    units = load("verification/units.json")
-    finish_doc = load("verification/finish_units.json")
-    finish_units = finish_doc["units"]
-    dataset = load("snorlax_cards.json")
-    cards = dataset["cards"]
-    releases = load("analysis_confirmed_releases.json")["variants"]
-    bulbapedia_release_dates = load("verification/bulbapedia_release_dates.json")["records"]
-    finish_analysis = load("analysis_finishes.json")
+    # Guarded like every other phase, and split in two, because they fail differently (#82 review).
+    # Reading a file is all-or-nothing: a missing or unparseable store leaves nothing to check, and
+    # every later section will say so. Indexing it is per-row, and a single malformed row must not
+    # cost the sections that never touch the index.
+    #
+    # This was unguarded in the first cut, on the reasoning that a load failure is fatal anyway.
+    # It is not: deleting `setCode` from one finish row raised while building `finish_by_key`,
+    # before the first guard, and the run reported 0/1 — every verdict lost, which is the exact
+    # failure this change exists to prevent.
+    with guarded("G0", "loading the committed stores"):
+        units = load("verification/units.json")
+        finish_doc = load("verification/finish_units.json")
+        finish_units = finish_doc["units"]
+        dataset = load("snorlax_cards.json")
+        cards = dataset["cards"]
+        releases = load("analysis_confirmed_releases.json")["variants"]
+        bulbapedia_release_dates = load("verification/bulbapedia_release_dates.json")["records"]
+        finish_analysis = load("analysis_finishes.json")
 
-    finish_by_id = {unit["finishUnitId"]: unit for unit in finish_units}
-    finish_by_key = {
-        (unit["setCode"], norm_number(unit["number"]), unit["language"]): unit
-        for unit in finish_units
-    }
+    with guarded("G0b", "indexing the finish store"):
+        finish_by_id = {unit["finishUnitId"]: unit for unit in finish_units}
+        finish_by_key = {
+            (unit["setCode"], norm_number(unit["number"]), unit["language"]): unit
+            for unit in finish_units
+        }
 
 
     with guarded("G1", "product view, pending semantics, public prose and AI declaration"):

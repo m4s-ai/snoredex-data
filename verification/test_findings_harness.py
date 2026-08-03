@@ -84,6 +84,18 @@ def main() -> int:
     expect("later sections still run", ran_after, True)
     expect("and a passing section emits nothing", rf.suite.checks[-1].ident, "GX")
 
+    # The shared setup phase is guarded too, and split (#82 review). The first cut left it bare on
+    # the reasoning that a load failure is fatal anyway — it is not. Reading a file is
+    # all-or-nothing; indexing it is per-row, and a single malformed row raised before any guard was
+    # entered, so the run reported 0/1 and lost every verdict. G0 covers the reads, G0b the indexes.
+    setup = [c.ident for c in rf.suite.checks if c.ident in ("G0", "G0b")]
+    expect("setup emits nothing when it succeeds", setup, [])
+    source = (Path(__file__).resolve().parent / "review_findings.py").read_text(encoding="utf-8")
+    expect("the reads are guarded", 'with guarded("G0", ' in source, True)
+    expect("the indexes are guarded separately", 'with guarded("G0b", ' in source, True)
+    expect("and nothing is built before the first guard",
+           source.index('with guarded("G0"') < source.index("finish_by_key = {"), True)
+
     if FAILURES:
         for failure in FAILURES:
             print(f"FAIL {failure}")
