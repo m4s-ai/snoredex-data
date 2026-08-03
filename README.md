@@ -36,10 +36,11 @@ over-claiming is itself a finding, so it is preserved rather than quietly correc
 Two rules hold everywhere in the data, the tooling and the site copy:
 
 1. **Positive evidence only.** A source that fails to list a printing has a *gap*; it has not
-   proved the printing does not exist. A complete official manifest can establish absence only
-   inside its stated scope. Other final absence decisions are explicit collection-owner
-   adjudications recorded in `verification/owner_adjudications.json` after reviewing all cited
-   claims; they are not attributed to a single provider.
+   proved the printing does not exist — and no source settles an absence at any tier. Converging
+   evidence from dependable sources is what the collection owner weighs; the decision is theirs,
+   recorded in `verification/owner_adjudications.json` and never attributed to a single provider.
+   `not-printed` means **no regular release**: a proof copy or an error card is a separate
+   category and does not falsify the decision.
 2. **`pending` means not yet established — never proven absent.** The same goes for `unmapped` and
    `other-product` on the finish side. Nothing here claims non-existence by silence.
 
@@ -108,7 +109,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-08-02**, after the database review and release-readiness audit of the current repository state.
+Status snapshot: **2026-08-03**, after the database review and release-readiness audit of the current repository state.
 
 | Area | Current state |
 |---|---|
@@ -116,7 +117,7 @@ Status snapshot: **2026-08-02**, after the database review and release-readiness
 | Language verification | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Physical checklist | **838 items** across 174 cards and 15 languages: 663 documented printings plus 175 explicit unresolved placeholders. |
 | Finish evidence | **637 card-number × language units**: 331 externally confirmed, 103 marketplace-only positives, 127 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 222 units. |
-| Evidence registry | **18 providers**, 883 evidence records, 876 unique URLs, and 2,785 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
+| Evidence registry | **19 providers**, 883 evidence records, 876 unique URLs, and 2,785 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -139,9 +140,9 @@ agreed independently, and `verification/source_registry.json` records the author
 <!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Tier | Sources |
 |---|---|
-| 1 | Photographed physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
-| 3 | Bulbapedia · LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
+| 2 | Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
 Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
@@ -161,10 +162,10 @@ throughout this project and is genuinely uncommon:
 | How the claim is sourced | Resolved claims |
 |---|---:|
 | Corroborated by a second provider | 39 |
-| Single tier 1-2 source | 428 |
-| Single tier 3 source | 252 |
+| Single tier 1-2 source | 675 |
+| Single tier 3 source | 5 |
 
-680 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 252 do. What it forbids is a claim that is neither — all 35 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+680 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 35 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in

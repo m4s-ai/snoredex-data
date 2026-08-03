@@ -123,12 +123,12 @@ PROVIDERS: list[dict[str, Any]] = [
         "hosts": ["bulbapedia.bulbagarden.net"],
         "licenseOrTerms": "CC BY-NC-SA 2.5 — attribution and ShareAlike apply to derived content.",
         "category": "fan-wiki",
-        "authorityTier": 3,
+        "authorityTier": 2,
         "coverage": "set lists, release fields, per-language articles, promo series",
         "supportsAbsence": False,
         "usedFor": ["language", "edition", "date", "finish"],
         "attribution": "Content from Bulbapedia, licensed CC BY-NC-SA 2.5.",
-        "notes": "Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
+        "notes": "Tier 2 by owner decision, 2026-08-03. It sat at tier 3 beside retailer listings while carrying 247 of the 252 claims that rested on a single tier-3 source — more of this dataset than anything but TCGdex. The tier is meant to record dependability, and its contributors are dedicated researchers, so the rank now says what the project actually does with their work. Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
     },
     {
         "providerId": "tcgcsv",
@@ -331,8 +331,8 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
     },
     {
-        "providerId": "photographed-specimen",
-        "displayName": "Photographed physical specimen",
+        "providerId": "inspected-specimen",
+        "displayName": "Inspected physical specimen",
         "organization": None,
         "homepage": None,
         "hosts": [],
@@ -342,8 +342,27 @@ PROVIDERS: list[dict[str, Any]] = [
         "coverage": "individual cards whose text and markings were read from a photograph",
         "supportsAbsence": False,
         "usedFor": ["language", "finish"],
-        "attribution": "Physical card, photographed specimen.",
-        "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179.",
+        "attribution": "Physical card, inspected specimen.",
+        "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
+    },
+    {
+        # Cardmarket appears twice on purpose. The catalogue above is tier 5 — the thing this
+        # project exists to check. A seller's photograph of the physical card is evidence, and rule
+        # 1 has always said so; there was simply no provider to record it under, so the rule was
+        # unusable (owner decision, 2026-08-03).
+        "providerId": "cardmarket-listing-photo",
+        "displayName": "Cardmarket seller listing photograph",
+        "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
+        "homepage": "https://www.cardmarket.com",
+        "hosts": [],
+        "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
+        "category": "marketplace-photo",
+        "authorityTier": 2,
+        "coverage": "individual cards whose text and markings were read from a seller's listing photograph",
+        "supportsAbsence": False,
+        "usedFor": ["language", "finish"],
+        "attribution": "Seller listing photograph via Cardmarket.",
+        "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
     },
 ]
 
@@ -354,7 +373,13 @@ HOST_TO_PROVIDER = {
 
 # Fallback matching for non-URL evidence, keyed on the wording the stores already use.
 SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
-    (re.compile(r"photograph", re.I), "photographed-specimen"),
+    # Ahead of both `photograph` and `cardmarket`: a seller's listing photograph is evidence and
+    # the catalogue it sits on is not, so the two must never collapse onto one provider. The
+    # tie-break is earliest mention, and "Cardmarket seller ..." starts at the same offset as the
+    # bare catalogue pattern, so list order decides it here.
+    (re.compile(r"cardmarket seller|seller listing photograph|listing photograph", re.I),
+     "cardmarket-listing-photo"),
+    (re.compile(r"photograph", re.I), "inspected-specimen"),
     (re.compile(r"owner attestation", re.I), "owner-attestation"),
     (re.compile(r"bulbapedia", re.I), "bulbapedia"),
     (re.compile(r"tcgdex", re.I), "tcgdex"),

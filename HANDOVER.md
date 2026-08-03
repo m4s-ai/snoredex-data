@@ -278,9 +278,9 @@ Brazilian Prize Pack confirmations were obtained.
 <!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Tier | Sources |
 |---|---|
-| 1 | Photographed physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
-| 3 | Bulbapedia · LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
+| 2 | Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
 Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
@@ -290,20 +290,21 @@ Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker r
    absence, and explicit collection-owner adjudications record final cross-source decisions.
 
    A single non-URL source may confirm a unit. **30 units rest on owner attestation alone** and 5
-   on a photographed specimen alone, all queryable as
-   `corroborated == false and providerId in {owner-attestation, photographed-specimen}`. The
+   on an inspected specimen alone, all queryable as
+   `corroborated == false and providerId in {owner-attestation, inspected-specimen}`. The
    owner physically holds these cards and no database records them, so the alternative is not
    better evidence but a false "open" count.
 
    **What E3 actually enforces is *checkable or strong*.** It fails only when an uncorroborated
    claim is both unlinkable and weak — no `sourceUrl` and below tier 2. A tier-3 source with a URL
-   may stand alone, and **252 of 719 resolved units** do (247 Bulbapedia, 3 pokumon, 2
-   LigaPokemon), every one with an `https` reference across 65 distinct pages. This section used to
-   say a single weaker source "is not acceptable" and that E3 enforced it; it does not, and the
-   overstatement made the data look better sourced than it is (#65). The real shape: **680 of 719
-   resolved claims rest on one provider** and only 39 are corroborated, which is why the README
-   publishes that split as a generated block rather than a sentence anyone can leave behind.
-   E4 fails if the attestation count stops matching the data.
+   may stand alone, and **5 of 719 resolved units** do (3 pokumon, 2 LigaPokemon), each with an
+   `https` reference. That figure was 252 until Bulbapedia moved to tier 2 on 2026-08-03: it was
+   ranked beside retailer listings while carrying 247 of those 252 claims, and the tier is meant to
+   record dependability. This section used to say a single weaker source "is not acceptable" and
+   that E3 enforced it; it does not, and the overstatement made the data look better sourced than
+   it is (#65). The real shape: **680 of 719 resolved claims rest on one provider** and only 39 are
+   corroborated, which is why the README publishes that split as a generated block rather than a
+   sentence anyone can leave behind. E4 fails if the attestation count stops matching the data.
 
    **A claim is graded by what it rests on, not by the strongest source near it.** The attestation
    figure read 16 until #64: fourteen `PPS7`/`PPS8 JTG 117` units carried

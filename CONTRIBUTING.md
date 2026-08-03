@@ -42,9 +42,9 @@ from [`verification/source_registry.json`](verification/source_registry.json):
 <!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Tier | Sources |
 |---|---|
-| 1 | Photographed physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
-| 3 | Bulbapedia · LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
+| 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
+| 2 | Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
 Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
@@ -56,10 +56,15 @@ it was wrong. Specimen reports have already overturned three databases at once h
 pokumon and Bulbapedia all recorded `XYPR 179` as English-only until photographs of the German,
 Italian, Spanish and Portuguese cards proved otherwise.
 
-Absence is the one thing this ladder does not settle by rank. Only a **complete official manifest**
-can show something was not printed, and only inside its own stated scope; any other final absence
-decision is recorded separately as a collection-owner adjudication and is never credited to a
-single provider. [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) explains why.
+Absence is the one thing this ladder does not settle by rank — **no source settles it, at any
+tier**. Converging evidence from dependable sources is what the collection owner weighs, and
+deciding which way it points is their call, recorded separately as an adjudication and never
+credited to a single provider. So *"it isn't listed anywhere"* is not a correction, however many
+places you looked. [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) explains why.
+
+One consequence worth knowing: **"not printed" here means no regular release.** A proof copy or an
+error card is a different category, so finding one does not overturn a decision — but it is still
+worth telling us about.
 
 A correction does not need to reach the top of the ladder to be worth filing.
 

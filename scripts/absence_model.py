@@ -53,15 +53,24 @@ def absence_decision(status: str, source_url: str | None, scope_urls: set[str],
                      adjudicated: bool) -> str:
     """Classify one resolved language unit for consumers.
 
-    Returns `exists`, `not-printed`, `disputed` or `unresolved`. `not-printed` is deliberately the
-    narrow case: it requires someone to have taken responsibility for the decision — the collection
-    owner in writing, or a publisher's own complete manifest — because absence is the one claim
-    this project treats as harder to make than presence.
+    Returns `exists`, `not-printed`, `disputed` or `unresolved`.
+
+    `not-printed` requires an explicit collection-owner adjudication — always, with no exception
+    (owner decision, 2026-08-03). A declared absence scope is recorded rationale, never a
+    mechanism: it strengthens the case the owner weighs, and `source_settles_absence` remains so
+    consumers can see which claims had one, but it cannot settle anything by itself.
+
+    The reasoning is the owner's: converging evidence from dependable sources is *Indizien*, and
+    deciding which way it points — printed, or not printed — is the collector's job rather than a
+    property any single page can assert. This is stricter than the rule it replaces, which settled
+    a claim on a scoped source alone. No row moves: every scoped-source row already carries an
+    adjudication.
+
+    `not-printed` means **no regular release**. A proof copy or an error card is a different
+    category and does not falsify the decision.
     """
     if status == "confirmed":
         return "exists"
     if status == "contradicted":
-        if adjudicated or source_settles_absence(source_url, scope_urls):
-            return "not-printed"
-        return "disputed"
+        return "not-printed" if adjudicated else "disputed"
     return "unresolved"

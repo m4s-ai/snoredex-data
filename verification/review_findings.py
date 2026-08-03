@@ -644,8 +644,9 @@ def collect() -> None:
                        if provider.get("supportsAbsence")
                        for url in provider.get("absenceScopes") or []}
     def settles_absence(unit: dict) -> bool:
-        return (unit["unitId"] in adjudicated_units
-                or str(unit.get("sourceUrl") or "").rstrip("/") in manifest_scopes)
+        # Only an adjudication settles anything (owner decision, 2026-08-03). A declared scope is
+        # recorded rationale, checked by E9, and deliberately not consulted here.
+        return unit["unitId"] in adjudicated_units
 
 
     # Checking the derivation against itself would be vacuous, so this checks what consumers are told:
@@ -668,7 +669,7 @@ def collect() -> None:
                 absence_backing.append(f"{identity[0]} {identity[1]} {identity[2]} {language}")
     check(
         "E8",
-        "Every published not-printed language rests on an adjudication or a complete manifest",
+        "Every published not-printed language rests on an owner adjudication",
         "FAIL",
         not absence_backing,
         f"{len(absence_backing)} card-language(s) are published as settled absences with neither an "
@@ -690,28 +691,35 @@ def collect() -> None:
         f"{mispartitioned[:5]}",
     )
 
-    # Reported, not failed. #66 proposed requiring every absence scope to be an official manifest,
-    # which would withdraw Elite Fourum's — a Discourse thread is not a manifest, however carefully
-    # compiled, and rule 4 admits only a manifest or an owner adjudication. But
-    # verification/test_owner_adjudications.py asserts the opposite in as many words ("Elite Fourum
-    # must retain scoped absence capability"), so the two readings of rule 4 are a policy question for
-    # the collection owner, not something a check should decide by failing. Nothing turns on it today:
-    # every unit citing that thread also carries an owner adjudication, so the scope changes no row's
-    # status. Surfaced here so the disagreement stays visible instead of being settled by whoever
-    # edits last.
-    non_official_scopes = sorted(
-        f"{provider['providerId']}: {url}"
-        for provider in registry["providers"] if provider.get("supportsAbsence")
-        for url in provider.get("absenceScopes") or []
-        if provider["providerId"] not in ("pokemon-official", "play-pokemon")
-    )
+    # #66 left this reporting because two readings of rule 4 disagreed and the choice was the
+    # owner's. It was settled on 2026-08-03: dependability decides whether a source may carry an
+    # absence scope, not whether it is a manufacturer — so Elite Fourum keeps its Black Star Promos
+    # table and the rule stops saying "complete official manifest".
+    #
+    # What a scope may never do is settle a claim on its own; that is always an adjudication
+    # (absence_model.absence_decision enforces it, and E8 checks the result). So the thing worth
+    # checking is no longer *who* declared a scope but whether the declaration is honest: a scope
+    # must name specific pages and the provider must say why they are exhaustive, because a blanket
+    # "this source is absence-capable" is exactly the claim rule 4 refuses.
+    unjustified_scopes = []
+    for provider in registry["providers"]:
+        if not provider.get("supportsAbsence"):
+            continue
+        scopes = provider.get("absenceScopes") or []
+        if not scopes:
+            unjustified_scopes.append(f"{provider['providerId']}: supportsAbsence with no scope")
+            continue
+        if not any(word in (provider.get("notes") or "").lower()
+                   for word in ("scope", "complete", "exhaustive", "manifest", "checklist")):
+            unjustified_scopes.append(
+                f"{provider['providerId']}: {len(scopes)} scope(s), notes do not say why")
     check(
         "E9",
-        "Absence scopes outside official manifests",
-        "INFO",
-        True,
-        f"{len(non_official_scopes)} scope(s) rest on a provider that does not publish official "
-        f"manifests: {non_official_scopes or 'none'}. Open question for the owner (#66).",
+        "Every absence scope names its pages and says why they are complete",
+        "FAIL",
+        not unjustified_scopes,
+        f"{len(unjustified_scopes)} provider(s) claim absence capability without a justified "
+        f"scope: {unjustified_scopes}",
     )
 
     # The split is stated in prose in three documents, so it is held to the data the same way the
@@ -994,11 +1002,12 @@ def collect() -> None:
     # evidence lives entirely inside this repository, so it is the only one a writer can assert by
     # typing it.
     uncited_specimen_claims = [u["unitId"] for u in resolved_units
-                               if u.get("providerId") == "photographed-specimen"
+                               if u.get("providerId") in ("inspected-specimen",
+                                                          "cardmarket-listing-photo")
                                and not str(u.get("sourceRef") or "").startswith("specimen:")]
     check(
         "S14",
-        "A claim attributed to a photographed specimen cites one",
+        "A claim read off a card cites the specimen record",
         "FAIL",
         not uncited_specimen_claims,
         f"{len(uncited_specimen_claims)} unit(s) claim tier-1 specimen authority with no specimen "
