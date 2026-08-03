@@ -33,8 +33,8 @@ The live split is `meta.pendingByLanguage` in
 | Japanese | **Official product pages** (`pokemon-card.com/ex/<set>/index.html`) | **Not** the card database — see below. |
 | Traditional Chinese | `asia.pokemon-card.com`, TCGdex `zh-tw` | Only 12 TCGdex `zh-tw` URLs exist in the store, so most rows need the Asia site. |
 | Indonesian, Thai | `asia.pokemon-card.com`, TCGdex `id` / `th` | Thin coverage: 3 `id` and 4 `th` URLs in the whole store. |
-| Korean | No scriptable finish source | TCGdex has **one** `ko` URL across all 719 units. Needs pokumon, Elite Fourum, or a specimen. |
-| Simplified Chinese | No scriptable finish source | TCGdex has **no** `zh-cn` locale. Needs a specimen or a collector database. |
+| Korean | No source found | TCGdex serves `ko`, but see below. Needs pokumon, Elite Fourum, or an inspected card. |
+| Simplified Chinese | No source found | TCGdex serves `zh-cn`, but see below. Needs an inspected card. |
 
 Two consequences worth internalising before planning work:
 
@@ -47,6 +47,40 @@ Two consequences worth internalising before planning work:
   them.** They are not neglected rows; they are rows whose answer does not exist in any source the
   toolchain currently speaks to. Treat them as specimen-led, and tell the owner which cards would
   close the most rows rather than waiting on a scrape.
+
+### Korean and Simplified Chinese: searched, and there is nothing to use
+
+Do not repeat this search. Every avenue below was tried on 2026-08-02 and none of it answers a
+finish question for these 54 units.
+
+**TCGdex serves both locales — the coverage is the problem, not the locale.** An earlier version of
+this file said TCGdex "has no `zh-cn` locale", which is wrong: `/v2/zh-cn/sets` returns 57 sets and
+`/v2/ko/sets` returns 95. What they do not return is cards.
+
+| Locale | Cards declared across its sets | Card records actually served | Snorlax cards |
+|---|---:|---:|---:|
+| `zh-cn` | 6 962 | 877 | **0** |
+| `ko` | 7 933 | 239 | **1** |
+| `zh-tw` | — | 7 436 | (populated) |
+| `ja` | — | 8 159 | (populated) |
+
+The sets are catalogued with names and counts; the per-card records behind them are 3 % populated
+for Korean and 13 % for Simplified Chinese. The single Korean hit is `SV4K-060` **잠만보인형** —
+*Snorlax Doll*, a Trainer item, not a Snorlax card. Where records do exist they carry the usual
+`variants` flags, so the API shape is fine; there is simply nothing there for these cards.
+
+**No marketplace equivalent of LigaPokemon exists for either market.** LigaPokemon works because it
+is a web catalogue keyed by set and card number, so a listing can be cited per printing.
+`jihuanshe.com` (集换社), the main Chinese TCG marketplace, is now an **app-only landing page** —
+8 KB, four links, no search and no card catalogue. Korean general marketplaces (Bunjang, Naver
+Shopping, 11st) are reachable but index listings, not cards: nothing there is addressable by set
+code and collector number, so a citation could not be re-checked by a third party.
+
+**What that leaves.** These 54 units are not neglected work — they are a limit of what is knowable
+from any source this project can reach. `pending` already means *not established, never absent*, so
+the model states this correctly. Closing them needs a physical card inspected, and the queue is
+flat: 54 rows across 52 distinct cards, only two of which close more than one row. There is no
+high-yield card to chase.
 
 ### The Japanese card database records text, not finish
 
