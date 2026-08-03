@@ -131,7 +131,7 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
 - **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
   outside source disagrees with Cardmarket. Only two things settle it: a complete official manifest
   within its scope, or an explicit owner adjudication. Everything else is **disputed** — currently
-  **47 settled and 37 disputed** — and `DATABASE.md` is right that an application must not read
+  **49 settled and 35 disputed** — and `DATABASE.md` is right that an application must not read
   disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every generator;
   cards carry `languagesNotPrinted` and `languagesDisputed` beside `languagesContradicted`, and
   checks `E8`/`E9`/`E10` keep the split honest. Both are excluded from the checklist, because the

@@ -18,6 +18,11 @@ Four patterns run through the answers, and three of them are the same shape:
   * **Market or era out of scope.** `UNP` predates both Asian markets; `WP 49` is English only;
     Fates Collide and Generations have no Russian run; the stamped store promos had no European
     localisation beyond the one below.
+  * **The treatment does not exist in that run.** The Thai `xsv2a 143` rows are the one place where
+    nothing exists under another code either: the Thai 151 print run has no mirror foils at all.
+    Both sources say so positively rather than by omission, and the Thai retailer listing names the
+    Poké Ball and Master Ball patterns individually — its 5-cards-per-pack figure reproduces
+    Bulbapedia's account of the same run from an unrelated direction.
 
 The fourth is the exception, and it is why asking was worth it.
 
@@ -48,9 +53,17 @@ VERIFICATION = ROOT / "verification"
 DECIDED_AT = "2026-08-03"
 ISSUE = "https://github.com/m4s-ai/snoredex-data/issues"
 
-# unitIds -> (issue number, rationale). One entry per decision the owner actually made; the
-# clusters they have not answered yet are deliberately absent.
-NOT_PRINTED: list[tuple[list[str], int, str]] = [
+OJAMACARD = (
+    "http://ojamacard.com/product/32413/"
+    "pok%C3%A9mon-tcg-scarlet-violet-%E0%B8%AA%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8"
+    "%A5%E0%B9%87%E0%B8%95-%E0%B9%84%E0%B8%A7%E0%B9%82%E0%B8%AD%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8"
+    "%95-%E2%80%94-pok%C3%A9mon-151-%E0%B9%82%E0%B8%9B%E0%B9%80%E0%B8%81%E0%B8%A1%E0%B8%AD%E0%B8"
+    "%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%94-151-sv2at%E3%80%8C1-box%E3%80%8D"
+)
+
+# unitIds -> (issue number, rationale, extra evidence refs). One entry per decision the owner
+# actually made; the clusters they have not answered yet are deliberately absent.
+NOT_PRINTED: list[tuple[list[str], int, str] | tuple[list[str], int, str, list[str]]] = [
     (["U0453", "U0454", "U0455", "U0456", "U0460", "U0461", "U0462", "U0463", "U0464"], 85,
      "The collection owner ruled that the stamped Journey Together store promos had no European "
      "localisation beyond French: \"All other Euro Languages were not released for stamped store "
@@ -87,6 +100,19 @@ NOT_PRINTED: list[tuple[list[str], int, str]] = [
      "\"Indonesian 151 Masterball/Pokeball was released as Promos.\" Cardmarket claims Indonesian "
      "against xsv2a 143, and against that product the claim is wrong. Reference: "
      "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(ITCG)"),
+    (["U0778", "U0783"], 89,
+     "The collection owner ruled the Thai mirror holos not printed. Unlike the Indonesian rows "
+     "there is no equivalent under another product: the treatment does not exist in the Thai run "
+     "at all. Two independent sources say so, and the Thai-market one names both patterns "
+     "explicitly rather than omitting them — ojamacard's listing for the Thai 151 booster box "
+     "[SV2AT] states \"สินค้านี้ ไม่มีการ์ดฟอยล์มิเรอร์แบบพิเศษ ที่เป็นลวดลายมอนสเตอร์บอลหรือลวดลายมาสเตอร์บอล\" "
+     "(\"this product does not contain special mirror foil cards with the Monster Ball pattern or "
+     "the Master Ball pattern\"; มอนสเตอร์บอล is the Poké Ball). Its stated 5-cards-per-pack "
+     "configuration independently reproduces Bulbapedia's description of the Thai print run, "
+     "against 7 for Japanese sv2a — two unrelated sources describing the same run identically. "
+     "A retailer listing is tier 3 and corroborates rather than outranks; the decision is the "
+     "owner's.",
+     [OJAMACARD, "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)"]),
     (["U0101", "U0315"], 90,
      "The collection owner searched and found nothing: \"Can not find any evidence that this box "
      "set with stamp was released in Portuguese on manufacturer (Copaq) and leading Marketplaces "
@@ -166,7 +192,9 @@ def main() -> None:
     known = {d["unitId"] for d in document["decisions"]}
 
     added = 0
-    for unit_ids, issue, rationale in NOT_PRINTED:
+    for entry in NOT_PRINTED:
+        unit_ids, issue, rationale = entry[0], entry[1], entry[2]
+        extra_refs = entry[3] if len(entry) > 3 else []
         for unit_id in unit_ids:
             unit = by_id.get(unit_id)
             if unit is None:
@@ -185,7 +213,7 @@ def main() -> None:
                 "basis": "multi-source-adjudication",
                 "decidedAt": DECIDED_AT,
                 "rationale": rationale,
-                "evidenceRefs": [f"{ISSUE}/{issue}", f"unit:{unit_id}"],
+                "evidenceRefs": [f"{ISSUE}/{issue}", f"unit:{unit_id}", *extra_refs],
             })
             known.add(unit_id)
             added += 1
