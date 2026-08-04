@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-03",
+  "generated": "2026-08-04",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -138,7 +138,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 88,
-   "claimsSupported": 696
+   "claimsSupported": 694
   },
   {
    "providerId": "tcgcsv",
@@ -459,7 +459,7 @@
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 6
+   "claimsSupported": 8
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -1841,15 +1841,13 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 2,
    "stableIds": [
     "U0687",
-    "U0752",
-    "U0772",
     "U0773"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 4
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(SCTCG)",
@@ -10010,22 +10008,25 @@
    "sourceTypes": [
     "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
     "Physical card, photographed holo specimen",
+    "Physical card, photographed sealed specimen",
     "Physical card, photographed specimen"
    ],
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 8,
    "stableIds": [
     "U0189",
     "U0228",
     "U0229",
     "U0230",
     "U0231",
-    "U0452"
+    "U0452",
+    "U0752",
+    "U0772"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": null,

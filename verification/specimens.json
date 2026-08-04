@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; the record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 18,
+  "count": 20,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -188,7 +188,7 @@
       "inspectedFrom": "photograph",
       "photograph": "SPEC-0013.png",
       "photographSource": "https://github.com/user-attachments/assets/bb31756e-3e3b-49db-8e7a-1a20297fdee0",
-      "observed": "Two sealed Indonesian \"117/SV-P\" Snorlax promos photographed side by side by the owner, both carrying a mirror foil pattern. The owner identifies them: \"left is Pokeball very faint reverse holo, right is master ball (shape of ball is different) reverse holo\". The left pattern is faint enough to read as a non-holo card at a glance, which is how this record first described it; the ball silhouettes distinguish the two. Card text as SPEC-0012 (Ability \"Kemaruk\", \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, ©2024). This single image is therefore the direct observation behind both Indonesian decisions - the Poké Ball mirror (U0782) and the Master Ball mirror (U0777) - each existing as an SV-P promo rather than as an xsv2a 143 printing. \"Reverse holo\" is the owner's wording; the technical finish value here is mirror-holo, which finishFamily presents as \"Reverse Holo\". Catalogue identity: this is SV-P/ID 117, \"Scarlet & Violet Indonesian Promos\", which the catalogue carries as two confirmed units - U0752 (V1) and U0772 (V2). An earlier version of this record said the product was absent from the dataset; that was wrong, and came from testing for a set code equal to \"SV-P\" rather than searching. Which V-token denotes which ball pattern is not established: neither unit records a variantName and both cite the same Bulbapedia row, so no unit cites this specimen yet.",
+      "observed": "Two sealed Indonesian \"117/SV-P\" Snorlax promos photographed side by side by the owner, both carrying a mirror foil pattern. The owner identifies them: \"left is Pokeball very faint reverse holo, right is master ball (shape of ball is different) reverse holo\". The left pattern is faint enough to read as a non-holo card at a glance, which is how this record first described it; the ball silhouettes distinguish the two. Card text as SPEC-0012 (Ability \"Kemaruk\", \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, ©2024). This single image is therefore the direct observation behind both Indonesian decisions - the Poké Ball mirror (U0782) and the Master Ball mirror (U0777) - each existing as an SV-P promo rather than as an xsv2a 143 printing. \"Reverse holo\" is the owner's wording; the technical finish value here is mirror-holo, which finishFamily presents as \"Reverse Holo\". Catalogue identity: this is SV-P/ID 117, \"Scarlet & Violet Indonesian Promos\", which the catalogue carries as two confirmed units - U0752 (V1) and U0772 (V2). An earlier version of this record said the product was absent from the dataset; that was wrong, and came from testing for a set code equal to \"SV-P\" rather than searching. Which V-token denotes which ball pattern is not established: neither unit records a variantName and both cite the same Bulbapedia row, so no unit cites this specimen yet. The owner has since identified the patterns against Cardmarket's tokens - V1 is the Poké Ball, V2 the Master Ball - and this frame is cut into per-card records SPEC-0019 (left, V1) and SPEC-0020 (right, V2), which the two units cite. This uncut original is kept so those crops can be checked against it.",
       "recordedAt": "2026-08-03",
       "citedBy": []
     },
@@ -263,6 +263,38 @@
       "observed": "Korean counterpart of the same card: \"잠만보\", HP 120, Colorless, Basic, attacks 「바위깨기」 10+ and 「괴력」 70, numbered \"026/039\" to match the Japanese printing. Korean-language text throughout. Supplied against #86 alongside SPEC-0017; the owner states the Korean edition carries the code FXY where the Japanese carries HXY, and the set glyph is not legible at the supplied resolution, so the FXY code is the owner's identification rather than something read off this image. Filed under the catalogue's HXY 026 identity, which is how this project groups the printing.",
       "recordedAt": "2026-08-04",
       "citedBy": []
+    },
+    {
+      "specimenId": "SPEC-0019",
+      "setCode": "SV-P/ID",
+      "number": "117",
+      "variant": "V1",
+      "language": "Indonesian",
+      "heldBy": "collection owner",
+      "inspectedFrom": "photograph",
+      "photograph": "SPEC-0019.png",
+      "photographSource": "cropped from SPEC-0013 (left card), supplied by the collection owner",
+      "observed": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\"",
+      "recordedAt": "2026-08-04",
+      "citedBy": [
+        "U0752"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0020",
+      "setCode": "SV-P/ID",
+      "number": "117",
+      "variant": "V2",
+      "language": "Indonesian",
+      "heldBy": "collection owner",
+      "inspectedFrom": "photograph",
+      "photograph": "SPEC-0020.png",
+      "photographSource": "cropped from SPEC-0013 (right card), supplied by the collection owner",
+      "observed": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2.",
+      "recordedAt": "2026-08-04",
+      "citedBy": [
+        "U0772"
+      ]
     }
   ]
 }

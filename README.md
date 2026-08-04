@@ -109,7 +109,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-08-03**, after the database review and release-readiness audit of the current repository state.
+Status snapshot: **2026-08-04**, after the database review and release-readiness audit of the current repository state.
 
 | Area | Current state |
 |---|---|
@@ -165,7 +165,7 @@ throughout this project and is genuinely uncommon:
 | Single tier 1-2 source | 675 |
 | Single tier 3 source | 5 |
 
-680 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 36 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+680 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 38 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in
