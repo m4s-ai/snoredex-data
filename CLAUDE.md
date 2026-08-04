@@ -1,8 +1,10 @@
 <!-- doc: role=operating rules and data-model traps; stage=auto -->
 # CLAUDE.md — working instructions for this repository
 
-The operating rules for an agent working here. It is deliberately short: the detail lives in the
-documents linked below, and duplicating it would create a second copy to keep in step.
+The operating rules for an agent working here, and the traps that make them make sense. It is short
+*relative to what it points at*: the detail lives in the documents linked below, and duplicating it
+would create a second copy to keep in step. [`LESSONS.md`](LESSONS.md) carries the incident behind
+each trap — read it when a rule looks arbitrary.
 
 ## What this project is
 
@@ -60,26 +62,26 @@ Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker r
    on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 
-   **`E3` enforces *checkable or strong*, not tier alone.** It fails when an uncorroborated claim
-   is both: no `sourceUrl` *and* below tier 2. A tier-3 page with a URL may carry a claim by
-   itself, and 5 resolved units do — do not read a lone tier-3 source as a rule violation, and
-   do not tell a reader the tiers are stricter than that. This paragraph used to say a weaker
-   source "may not" stand alone and that a check enforced it; neither was true (#65). `E4` fails
-   when the attestation count stops matching the data. Prefer corroboration where it exists — it
-   covers 39 of 719 units, so it usually does not.
+   **`E3` enforces *checkable or strong*, not tier alone.** It fails only when an uncorroborated
+   claim is both: no `sourceUrl` *and* below tier 2. A tier-3 page with a URL may carry a claim by
+   itself, and 5 resolved units do — never report a lone tier-3 source as a rule violation, and
+   never state the tiers more strictly than this ([LESSONS](LESSONS.md#a-rule-stated-more-strictly-than-the-check-enforces)).
+   `E4` fails when the attestation count stops matching the data. Prefer corroboration where it
+   exists — it covers 39 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in
-   `evidence`, and `corroborated` means a second provider agreed about *this* unit. Fourteen Prize
-   Pack units were once filed as tier-1 inspected specimens on the owner's word because one
-   German specimen and one Portuguese listing sat nearby (#64). Checks `S13` and `S14` now hold the
-   line: `sourceRef` carries a reference or nothing, and only a cited specimen may claim specimen
-   authority.
+   `evidence`, and `corroborated` means a second provider agreed about *this* unit. Fourteen units
+   once claimed specimen authority because a specimen sat nearby
+   ([LESSONS](LESSONS.md#the-neighbours-evidence-is-not-this-units-evidence)). `S13` and `S14` hold
+   the line: `sourceRef` carries a reference or nothing, and only a cited specimen may claim
+   specimen authority.
 3. **Never contradict on bare absence.** A source that fails to list a printing has a gap; it has
    not proved the printing does not exist. First prove the source *covers the category* — pokumon
    lists Korean promos, so a missing Korean row there is meaningful; its West coverage is one
    lumped "English" row, so its silence on French means nothing. This rule exists because an
-   absence argument produced a false contradiction (`XY-P 149`) that had to be reverted.
+   absence argument produced a false contradiction (`XY-P 149`) that had to be reverted
+   ([LESSONS](LESSONS.md#an-absence-argument-that-produced-a-false-contradiction)).
 4. **Only a collection-owner adjudication settles an absence.** Not a source — any source.
    Converging evidence from dependable sources is *Indizien*: it is the material the owner weighs,
    and deciding which way it points is the collector's job, not a property a page can assert.
@@ -91,8 +93,8 @@ Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker r
    Kalos Starter Set article. That is **recorded rationale, never a mechanism**: it strengthens the
    case, and `E9` checks each scope is declared and justified, but a scoped source alone leaves the
    claim `disputed`. Dependability decides whether a source may carry that weight, not whether it
-   is a manufacturer — Bulbapedia and Elite Fourum qualify, and this rule said "complete official
-   manifest" until 2026-08-03, which was narrower than intended.
+   is a manufacturer — Bulbapedia and Elite Fourum qualify
+   ([LESSONS](LESSONS.md#complete-official-manifest-was-narrower-than-intended)).
 
    **`not-printed` means no regular release.** A proof copy or an error card is a different
    category and does not falsify the decision.
@@ -120,7 +122,9 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   a physical finish from a confirmed language claim.**
 - **V-tokens are opaque and set-specific.** `xsv2a` V1 = Poké Ball mirror / V2 = Master Ball
   mirror, but `xm2a` flips that order; `PPS8` V1 = Non-Holo / V2 = Holo; `xJTG` V1/V2/V3 are
-  stamps. Never assume a V-token means the same thing across sets — read `variantName`.
+  stamps. Never assume a V-token means the same thing across sets — read `variantName`. Inferring
+  one set's order from another has already been right by luck, which is not the same as evidence
+  ([LESSONS](LESSONS.md#v-tokens-are-set-specific-and-the-guess-is-sometimes-right)).
 - **Technical `finish` vs collector `finishFamily`.** `finish` stays the auditable
   non-holo/holo/reverse-holo/mirror-holo value. `finishFamily` is the presentation layer, where
   reverse-holo and mirror-holo both appear as "Reverse Holo". Never collapse the technical value
@@ -154,53 +158,40 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
 
 ## Commands
 
-Run from the repository root. **Order matters** and it is this order: `finishes.py` writes the
-card finish summaries, `language_status.py` writes the language verdicts, `confirmed_releases.py`
-reads both, and `checklist.py` / `site.py` read those.
+Run from the repository root. **Both suites run before and after every write pass** — before to
+confirm a clean starting state, after to catch what the pass broke. `review_integrity.py` validates
+invariants *within* each store, `review_findings.py` *between* the stores and the artifacts
+consumers read.
+
+**Order matters** in the middle block: `finishes.py` writes the card finish summaries,
+`language_status.py` the language verdicts, `confirmed_releases.py` reads both, and
+`checklist.py` / `site.py` read those.
 
 ```console
-python verification/review_integrity.py     # confirm a clean starting state
-python verification/review_findings.py      # cross-artifact consistency
+python verification/review_integrity.py
+python verification/review_findings.py
 
 # ... do the work in a new Python pass under verification/ ...
 
-python verification/audit_evidence.py       # after any write
-python verification/test_owner_adjudications.py  # owner decision/store projection regression
-python verification/report.py               # regenerate exports
-python scripts/editions.py                  # if edition data changed
-python scripts/finishes.py                  # finish units/review + main summaries
-python scripts/language_status.py           # per-card language verdicts
-python scripts/confirmed_releases.py        # chronological JSON + CSV
-python scripts/source_registry.py           # provider/evidence registry
-python scripts/checklist.py                 # canonical checklist items
-python scripts/readme_stats.py              # generated README blocks
-python scripts/issue_templates.py           # community correction form
-python scripts/open_items.py                # verification/open-items.html
-python scripts/database.py                  # current-state application database + audit
+python verification/audit_evidence.py            # evidence usability
+python verification/test_owner_adjudications.py  # owner decision/store projection
+python verification/report.py                    # regenerate exports
+python scripts/editions.py                       # if edition data changed
+python scripts/finishes.py                       # finish units/review + summaries
+python scripts/language_status.py                # per-card language verdicts
+python scripts/confirmed_releases.py             # chronological JSON + CSV
+python scripts/source_registry.py                # provider/evidence registry
+python scripts/checklist.py                      # canonical checklist items
+python scripts/readme_stats.py                   # generated markdown blocks
+python scripts/issue_templates.py                # community correction form
+python scripts/open_items.py                     # verification/open-items.html
+python scripts/database.py                       # application database + audit
 python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
-python scripts/site.py                      # index.html + alias redirect
+python scripts/site.py                           # index.html + alias redirect
 
-python verification/review_integrity.py     # after any write
-python verification/review_findings.py      # after any write
+python verification/review_integrity.py
+python verification/review_findings.py
 ```
-
-Eight generators take `--check`, which fails instead of writing: `checklist`, `readme_stats`,
-`issue_templates`, `site`, `source_registry`, `open_items`, `analyze`, `database`. The gate runs
-those with `--check`, validates the blank tracker template, runs
-`finishes.py --reproject`, `language_status.py` and `confirmed_releases.py` for real, and then
-asserts `git diff --exit-code` — so a generator whose output would move fails the build either
-way. `publish.py` takes `--verify` rather than `--check`.
-
-`python scripts/finishes.py --reproject` redoes only the card projection from the committed store
-and needs no network; it is the fast path when a projection rule changes.
-
-A full `finishes.py` run reads TCGdex through a cache under `verification/cache/finish-tcgdex/`.
-Entries carry their URL, fetch time, HTTP status, content hash and item count, expire after 30
-days, and are never written for a failed or implausible response — an empty body, a non-object, or
-anything without an `id` is an error, not an answer. Transient failures (timeouts, 429, 5xx) are
-retried with backoff; a 404 is an answer and is not. `--refresh-cache` forces a refetch. Exit 2
-means a source could not be reached, matching `verify_finish_sources.py`: the artifacts are not
-wrong, the upstream evidence is missing, so retry rather than investigate.
 
 The pre-PR gate, matching CI:
 
@@ -208,14 +199,42 @@ The pre-PR gate, matching CI:
 pip install -r requirements.txt
 python -m playwright install chromium
 
-python verification/review_findings.py      # stdlib only, no network — quickest invariant check
-python scripts/site.py --check
-python verification/test_site.py            # browser acceptance tests
-python verification/verify_finish_sources.py  # live TCGCSV assertions
+python verification/review_integrity.py
+python verification/review_findings.py           # stdlib only, no network — quickest check
+for g in checklist readme_stats issue_templates site source_registry open_items analyze database
+do python scripts/$g.py --check; done            # fail instead of writing
+python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
+python verification/test_site.py                 # browser acceptance tests
+python verification/verify_finish_sources.py     # live TCGCSV assertions
+python scripts/publish.py --verify               # --verify, not --check
+git diff --exit-code                             # a generator whose output moves fails here
 ```
+
+**`tracker.py check-template` prints its failure and exits 0.** Wrapping it in `|| echo FAIL`
+stays silent; CI catches it only by running it as its own step under `-e`. Check its output, not its
+status ([LESSONS](LESSONS.md#the-eight-generator-loop-is-not-the-gate)).
+
+`P6` scans full git history, so it fails on a shallow clone regardless of the tree. `git fetch
+--unshallow` once, and it becomes a real check locally instead of expected noise.
+
+`python scripts/finishes.py --reproject` redoes only the card projection from the committed store
+and needs no network; it is the fast path when a projection rule changes.
+
+A full `finishes.py` run reads TCGdex through a cache under `verification/cache/finish-tcgdex/`;
+`--refresh-cache` forces a refetch. **Exit 2 means a source could not be reached** — the artifacts
+are not wrong, the upstream evidence is missing, so retry rather than investigate. The cache's
+validity rules are in [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md), which you
+read before touching finishes anyway.
 
 Serve the site locally with `python -m http.server 8000`, then open <http://localhost:8000/>.
 `index.html` is the single public page; `verification/confirmed-releases.html` redirects to it.
+
+### Check codes
+
+Codes are cited beside the rules they enforce, above and throughout. For the full list, read the
+`check(` calls in `verification/review_integrity.py` and `verification/review_findings.py` —
+`verification/checks.py` holds the protocol both share. Looking a code up is an on-demand act, so
+the index lives in the code rather than here.
 
 ## Conventions
 
@@ -259,11 +278,10 @@ Each metric declares which way losing is:
 
 Do not "fix" a losing move by editing the baseline; find what changed. Re-anchoring a queue's
 baseline *downward* after closing it is the opposite move and is correct — it tightens the check.
-The habit this rule exists to prevent is raising a baseline to silence a rise, because a gate that
-reddens when the project makes progress is a gate people learn to edit rather than read. That is
-not hypothetical: closing the language review queue drove `pending units` to 0 and the suite
-printed `!!! COUNTS WENT BACKWARDS` on every clean run afterwards, permanently, for the best
-possible reason.
+Never raise one to silence a rise: a gate that reddens when the project improves is a gate people
+learn to edit rather than read, and this project has run one
+([LESSONS](LESSONS.md#a-gate-that-reddens-when-the-project-improves)). When a queue grows because
+the corpus grew, record the cause beside the number.
 
 ## Git and publication
 
