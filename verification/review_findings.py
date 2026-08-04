@@ -45,6 +45,16 @@ RESERVED_DROPDOWN_OPTIONS = {"none"}
 # Documentation roles (#100). The stage is the design constraint, not a label: `auto` is paid for
 # on every task because CLAUDE.md and AGENTS.md are injected at session start, so only what changes
 # behaviour before an agent acts belongs there. Everything else is opened deliberately.
+# Files that quote the sensitive-expression patterns themselves, so P4 and P6 would otherwise
+# match on the check's own vocabulary. Both paths of the readiness audit are listed on purpose:
+# P6 walks *history*, where blobs carry the path the file had at the time, and #102 moved it to
+# verification/history/. Rewriting the old path out is what broke P6 in that PR.
+SENSITIVE_SCAN_EXEMPT = frozenset({
+    "verification/PUBLIC-READINESS-AUDIT.md",          # pre-#102 path, still in history
+    "verification/history/PUBLIC-READINESS-AUDIT.md",  # current path
+    "verification/review_findings.py",
+})
+
 DOC_STAGES = ("auto", "task", "reference", "public", "generated", "history")
 DOC_HEADER = re.compile(r"<!--\s*doc:\s*role=(?P<role>[^;]+);\s*stage=(?P<stage>[^\s>]+)\s*-->")
 
@@ -1370,7 +1380,7 @@ def collect() -> None:
                 continue
             relative = raw_name.decode("utf-8", errors="surrogateescape")
             path = ROOT / relative
-            if relative in {"verification/history/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+            if relative in SENSITIVE_SCAN_EXEMPT:
                 continue  # These files quote the expressions and known historical finding.
             try:
                 data = path.read_bytes()
@@ -1418,7 +1428,7 @@ def collect() -> None:
                 process.stdout.read(1)  # protocol newline
                 if object_type != "blob" or size > 5_000_000:
                     continue
-                if path in {"verification/history/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+                if path in SENSITIVE_SCAN_EXEMPT:
                     continue
                 scanned_blobs += 1
                 history_hits.extend(sensitive_matches(data, f"{sha[:10]}:{path or '(unknown path)'}"))
