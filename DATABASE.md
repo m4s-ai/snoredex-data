@@ -1,3 +1,4 @@
+<!-- doc: role=application database and tracker contract; stage=reference -->
 # Application database and collection tracker
 
 [`snoredex.sqlite`](snoredex.sqlite) is the clean current-state handoff for applications. It joins

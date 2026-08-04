@@ -1,3 +1,4 @@
+<!-- doc: role=open-issue status snapshot; stage=history -->
 # Open-issue status check — 2026-07-31
 
 > [!NOTE]

@@ -1,3 +1,4 @@
+<!-- doc: role=public-readiness audit snapshot; stage=history -->
 # Public-readiness audit
 
 > [!NOTE]

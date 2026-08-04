@@ -9,6 +9,7 @@ processes:
   review: copilot
   deployment: copilot
 ---
+<!-- doc: role=AI authorship declaration; stage=reference -->
 
 This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/0.1.2/).
 

@@ -1,3 +1,4 @@
+<!-- doc: role=verification playbook and research log; stage=task -->
 # Verification — state and how to resume
 
 Goal: every **card × language × variant** gets at least one confirmed source **outside Cardmarket**,

@@ -1,3 +1,4 @@
+<!-- doc: role=pointer to the agent instructions; stage=auto -->
 # AGENTS.md
 
 The agent instructions for this repository live in **[`CLAUDE.md`](CLAUDE.md)**. Read that file —

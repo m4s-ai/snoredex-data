@@ -1,3 +1,4 @@
+<!-- doc: role=cold-start orientation and repository layout; stage=task -->
 # HANDOVER — Snorlax Cardmarket dataset & source verification
 
 Read this first if you are taking over cold. It is the single entry point; two deeper docs

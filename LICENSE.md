@@ -1,3 +1,4 @@
+<!-- doc: role=licensing scope; stage=reference -->
 # Licensing scope
 
 This repository is a **mixed work**. No single licence covers all of it, and presenting one as if

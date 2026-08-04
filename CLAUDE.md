@@ -1,3 +1,4 @@
+<!-- doc: role=operating rules and data-model traps; stage=auto -->
 # CLAUDE.md — working instructions for this repository
 
 The operating rules for an agent working here. It is deliberately short: the detail lives in the

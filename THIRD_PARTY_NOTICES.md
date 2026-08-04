@@ -1,3 +1,4 @@
+<!-- doc: role=third-party attribution; stage=reference -->
 # Third-party notices
 
 This project's own licences (see `LICENSE.md`) cover only its original software, data selection
