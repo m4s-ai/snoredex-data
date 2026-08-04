@@ -31,7 +31,8 @@ README_PATH = ROOT / "README.md"
 FINDINGS_PATH = ROOT / "FINDINGS.md"
 # The evidence ladder is published in four places and had drifted in all four (#67). Each keeps
 # its own framing around the table; the table itself comes from source_registry.json.
-LADDER_PATHS = (README_PATH, ROOT / "CLAUDE.md", ROOT / "HANDOVER.md", ROOT / "CONTRIBUTING.md")
+# HANDOVER.md is orientation only since #103 — the ladder lives with the rules that use it.
+LADDER_PATHS = (README_PATH, ROOT / "CLAUDE.md", ROOT / "CONTRIBUTING.md")
 ANALYSIS_PATH = ROOT / "analysis_finishes.json"
 DATASET_PATH = ROOT / "snorlax_cards.json"
 UNITS_PATH = ROOT / "verification" / "units.json"

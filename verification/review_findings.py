@@ -631,8 +631,9 @@ def collect() -> None:
         # "currently 0" while the other two said 16 and the data said 30 (#64). It is only in this check
         # that the sentence stays true, so every document that states it has to be inside the check.
         attestation_only = by_provider.get("owner-attestation", 0)
-        policy_docs = {"HANDOVER.md": handover,
-                       "CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8"),
+        # HANDOVER.md left this set in #103: it is orientation now, and no longer states the figure.
+        # The rule is unchanged — every document that *does* state it stays inside the check.
+        policy_docs = {"CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8"),
                        "verification/RESUME.md": (ROOT / "verification" / "RESUME.md")
                        .read_text(encoding="utf-8")}
         figure_docs = dict(policy_docs)
@@ -827,8 +828,10 @@ def collect() -> None:
         # readme_stats.py --check already fails when a block goes stale, so this checks the thing that
         # check cannot see: that no document has grown a *second*, hand-written ladder beside the
         # generated one, which is how the first four came to disagree.
+        # Must track scripts/readme_stats.py LADDER_PATHS. HANDOVER.md dropped out in #103 when it
+        # became orientation only; the ladder belongs with the rules that apply it.
         ladder_docs = {name: (ROOT / name).read_text(encoding="utf-8")
-                       for name in ("README.md", "CLAUDE.md", "HANDOVER.md", "CONTRIBUTING.md")}
+                       for name in ("README.md", "CLAUDE.md", "CONTRIBUTING.md")}
         declared_tiers = {int(p["authorityTier"]) for p in registry["providers"]}
         phantom_tiers = {}
         for name, text in ladder_docs.items():
@@ -2145,8 +2148,8 @@ def collect() -> None:
         #
         # Each lands as INFO and is promoted to FAIL by the phase that clears its backlog, so the
         # gate is never red on main while the work is in flight. Reporting first and failing once
-        # clean is how #69 handled metric drift. D2 and D3 were promoted in #102; D4 stays INFO
-        # until #103 retires the duplicated headings.
+        # clean is how #69 handled metric drift. D2 and D3 were promoted in #102, D4 in #103,
+        # so all four now enforce.
         docs = documentation_inventory()
 
         undeclared = sorted(
@@ -2225,7 +2228,7 @@ def collect() -> None:
         check(
             "D4",
             "No section heading is maintained in two loadable documents",
-            "INFO",
+            "FAIL",
             not shared,
             f"{len(shared)} heading(s) duplicated across auto/task documents: {shared[:6]} (#103).",
         )

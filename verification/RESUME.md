@@ -10,34 +10,19 @@ This file is both the current verification playbook and a chronological research
 checkpoints unless explicitly marked current. Paths and commands are relative to the repository
 root.
 
-## Current state
+## What this file is
 
-| | |
-|---|---|
-| Total units (card × language × variant) | **719** |
-| Confirmed with external source | **634** — 88.2 % of all, **88.8 % of what is resolvable** |
-| **Contradicted** — Cardmarket claims the language, source says no | **85** |
-| **Needs manual review** | **0** |
-| Still open | **0** |
-| Card-variants fully resolved | **191 / 191** |
-| Finish units (set number × language) | **637** |
-| Finish units with externally confirmed finish | **332** |
-| Finish units with marketplace-only positive claim | **103** |
-| Applicable finish units with no positive finish evidence | **138** |
-| Finish units not applicable because all product-language claims are contradicted | **64** |
-| Finish units in the remaining review queue | **233** |
-| Finish units covered by a complete official manifest | **4** — English `DF 10`, `PPS3 LOR 143`, `PPS7 JTG 117`, `PPS8 JTG 117` |
-| Finish units with unresolved product mapping | **175** |
+The verification playbook and the research log behind it: every source technique that worked, every
+dead end, every methodology correction. Read it before adding or changing a confirmation or a
+contradiction.
 
-Run `verification/review_integrity.py` after any write pass — structural checks over language
-claims, cards, images, evidence, finish units, printing IDs, product mappings, and stamp roles.
+**It does not state current figures.** Counts of units, finishes and queues are generated from the
+stores into [`DATA-HANDOFF-AUDIT.md`](DATA-HANDOFF-AUDIT.md) by `python scripts/database.py`, and
+open items into `verification/open-items.html`. A table typed here would be a second copy that
+drifts — the one this replaced claimed 634 confirmed and 85 contradicted, against a real 635 and 84.
 
-Open items are also published as a browsable page: `verification/open-items.html`.
+Run `verification/review_integrity.py` after any write pass.
 
-The language/product queue is closed. The final 14 closures moved the five Portuguese
-Additionals/Prize Pack questions and the nine pending BA20, WCD23, sA, mP1, svG and svIba claims
-to source-backed `confirmed` or `contradicted` states. BA20 Spanish/Portuguese evidence is recorded
-in `verification/passes/close_language_review.py` and in the two BA20 unit rows.
 
 ### Finish verification is a separate positive-evidence layer
 
@@ -426,6 +411,32 @@ Rare-language checks turned up something more useful than a gap: for 7 units an 
 Everything is checkpointed, and passes were designed to be idempotent: confirmed units are
 skipped, caches are reused, and nothing is re-fetched. Scripts derive paths from their own
 location and can be rerun from any checkout or working directory.
+
+## Source landscape — what works, what's blocked
+
+Moved here from `HANDOVER.md` in #103; the detail below is this file's job.
+
+| Source | Access | Use for |
+|---|---|---|
+| **TCGdex API** `api.tcgdex.net` | scriptable | en/fr/de/es/it/pt/ja/zh-tw/id/th card existence; positive normal/holo/reverse flags |
+| **Official Pokemon checklists** `assets.pokemon.com` / `d1wx537rtdixyy.cloudfront.net` | scriptable PDFs | complete set and Prize Pack finish manifests; the only current finish source allowed to establish absence within its stated scope |
+| **TCGCSV** `tcgcsv.com` | scriptable JSON | reproducible TCGplayer product identity plus positive Normal/Holofoil/Reverse Holofoil subtypes; positive-only marketplace evidence |
+| **PSA cert/spec/registry** `psacard.com` | scriptable | exact named grading varieties; never use population counts or omissions as negative evidence |
+| **Bulbapedia** | scriptable **only via in-app browser** + MediaWiki API (`/w/api.php?action=parse&prop=wikitext&redirects=1`) — plain fetch is 403 | set lists, `release=` infobox fields, `ko=`/`pt_br=` langtable lines, per-language articles (`(KTCG)`/`(TCTCG)`/`(ITCG)`/`(ATCG)`/`(SCTCG)` suffixes) |
+| **Official JP** `pokemon-card.com` | scriptable (`resultAPI.php`, param `regulation_sidebar_form=all`, page param is `page` not `pg`) | Japanese cards + illustrators |
+| **Official Asia** `asia.pokemon-card.com` | scriptable | tw/id/th recent cards |
+| **pokumon.com** | WebFetch | per-market promo printings (one row per Asian printing; **West is one lumped "English" row — never use its absence to contradict a Western language**) |
+| **Elite Fourum** `elitefourum.com` | scriptable (Discourse JSON: `/search.json`, `/t/<id>.json`) | collector-community facts (promo languages, 1st-edition timeline) |
+| **LigaPokemon** `ligapokemon.com.br` | **datacenter IPs banned (Cloudflare 1008)** — use the user's real Chrome (`claude-in-chrome` tools) | Brazilian/Portuguese marketplace listings |
+| **Cardmarket** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | seller photos of physical cards (a real photo of a card in language X is valid; the language *filter* is not) |
+
+Dead ends (do not retry): `pokemonkorea.co.kr` / `pokemoncard.co.kr` (HTTP 410, gone),
+`ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts), `namu.wiki` (JS-rendered),
+`krystalkollectz.com` (a shop, not a database).
+
+**Key trick**: when a source (Bulbapedia, LigaPokemon) blocks datacenter IPs, drive the user's
+own Chrome via the `claude-in-chrome` MCP tools — it uses their residential IP. This is how the
+Brazilian Prize Pack confirmations were obtained.
 
 ## Files
 
