@@ -12,6 +12,7 @@ are not restated here — a second copy is a copy that goes stale.
 | What should I work on? | The [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) |
 | How do I add or change evidence? | [`verification/RESUME.md`](verification/RESUME.md) — read it before touching a confirmation or contradiction |
 | How do I *use* the data? | [`README.md`](README.md), with [`FINDINGS.md`](FINDINGS.md) for what fell out of building it |
+| Why does this rule exist? | [`LESSONS.md`](LESSONS.md) — the incident behind each trap |
 
 ---
 
@@ -32,6 +33,15 @@ snoredex-tracker-template.sqlite
                               scripts/tracker.py; sync preserves have/wanted/quantity/notes.
 images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg or .png — the
                               extension states the actual format; 55 are PNG, see #34).
+README.md / CONTRIBUTING.md   The public pair: how to use the data, and how to report a
+                              correction. Written for people, not agents.
+DATABASE.md                   The contract snoredex.sqlite offers an application.
+LICENSE.md / LICENSES/        The mixed-work licence structure plus verbatim publisher texts;
+THIRD_PARTY_NOTICES.md        upstream attribution. AI-DECLARATION.md states the AI transparency
+AI-DECLARATION.md             level, and check A1 holds it to the 0.1.2 specification.
+LESSONS.md                    The incident behind each trap CLAUDE.md states: what went wrong,
+                              what it cost, which check holds the line now. Read it when a rule
+                              looks arbitrary. Deliberately not auto-loaded.
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
                               finishes, confirmed_releases (chronological). Plus CSV exports.
 artists_pokemontcgio.json     57 English cards with illustrator + exact release dates.
@@ -146,6 +156,12 @@ verification/
   parity.py                   Differential runner from the PowerShell->Python migration (#50).
                               Runs a script and its twin in throwaway trees and compares bytes.
   fixtures/                   Recorded responses so networked checks stay testable offline.
+  specimens/                  Photographs of cited specimens, one file per SPEC-nnnn record in
+                              specimens.json. Filed by fetch_attachment.py; S9/S10 hold the
+                              registry and the directory to each other.
+  history/                    Frozen snapshots — launch runbook, migration plan, dated reviews.
+                              Each carries a "Historical record" banner and is not maintained;
+                              check D3 enforces the banner (#102).
   archive/passes/             63 completed one-shot passes. Each closed a batch and is named by
                               what it did. NEVER rerun and NEVER edited: check X3 hashes every
                               file here against archive/MANIFEST.json and fails on any change.
