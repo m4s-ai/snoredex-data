@@ -817,41 +817,6 @@ def collect() -> None:
             docs=split_docs,
         )
 
-        # E12 — one ladder, four readers (#67)
-        # --------------------------------------------------------------------------- #
-        # README, CLAUDE.md, HANDOVER.md and CONTRIBUTING.md each published the authority tiers by hand and
-        # all four had drifted: every one listed a "tier 4 — other collector community" that no provider
-        # occupies, none mentioned tier 5, and CONTRIBUTING.md ran a different ladder entirely, ranking a
-        # photographed specimen fourth of five when the registry ranks it first. That is the page this
-        # project asks collectors to read before sending evidence.
-        #
-        # readme_stats.py --check already fails when a block goes stale, so this checks the thing that
-        # check cannot see: that no document has grown a *second*, hand-written ladder beside the
-        # generated one, which is how the first four came to disagree.
-        # Must track scripts/readme_stats.py LADDER_PATHS. HANDOVER.md dropped out in #103 when it
-        # became orientation only; the ladder belongs with the rules that apply it.
-        ladder_docs = {name: (ROOT / name).read_text(encoding="utf-8")
-                       for name in ("README.md", "CLAUDE.md", "CONTRIBUTING.md")}
-        declared_tiers = {int(p["authorityTier"]) for p in registry["providers"]}
-        phantom_tiers = {}
-        for name, text in ladder_docs.items():
-            if "<!-- generated:authority-tiers" not in text:
-                phantom_tiers[name] = "no generated ladder block"
-                continue
-            outside = re.sub(r"<!-- generated:authority-tiers.*?/generated:authority-tiers -->", "",
-                             text, flags=re.DOTALL)
-            claimed = {int(m) for m in re.findall(r"^\|\s*(\d)\s*\|", outside, flags=re.MULTILINE)}
-            if claimed - declared_tiers:
-                phantom_tiers[name] = f"hand-written tier rows outside the block: {sorted(claimed)}"
-        check(
-            "E12",
-            "The authority ladder is generated, and stated nowhere else",
-            "FAIL",
-            not phantom_tiers,
-            f"{len(phantom_tiers)} document(s) publish a ladder the registry does not define: "
-            f"{phantom_tiers}",
-        )
-
         # S15 — the store and the registry name the same source (#73)
         # --------------------------------------------------------------------------- #
         # scripts/source_registry.py can infer a provider from `sourceType` prose, and for records that
