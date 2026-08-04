@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-08-04** · SQLite schema: **1.1.0** · source fingerprint:
-`e2f85555648696c3…`
+`43a9a76708b248bf…`
 
 ## Outcome
 
@@ -17,8 +17,8 @@ normalized current-state projection. It contains no evidence journal and no migr
 | Cardmarket products | 198 (191 collectible, 7 code cards) |
 | Raw product-language claims | 794 (75 code-card claims out of scope) |
 | Repository language verdicts | 635 confirmed · 84 contradicted |
-| App language statuses | 49 not-printed · 35 disputed (49 owner-adjudicated) |
-| Established product-edition rows | 659 (49 absent-language and 35 unverified-language projections suppressed) |
+| App language statuses | 57 not-printed · 27 disputed (57 owner-adjudicated) |
+| Established product-edition rows | 659 (57 absent-language and 27 unverified-language projections suppressed) |
 | Finish units / logical printings | 637 / 690 |
 | Physical checklist | 839 (663 documented · 176 unresolved placeholders) |
 | Release rows without row-level source | 142 / 203 |
@@ -28,12 +28,12 @@ normalized current-state projection. It contains no evidence journal and no migr
 ## The challenged data point
 
 The database preserves the original `repository_verdict='contradicted'` while recording the final
-application decision separately. **49** rows are linked to
+application decision separately. **57** rows are linked to
 `owner_adjudications`: the collection owner reviewed all cited claims and evidence and adopted
 `application_status='not-printed'`. This is deliberately not attributed to Elite Fourum or any
 other single provider. **0** rows, if any, would instead be
 not-printed because their source is explicitly complete within a named scope. The remaining
-**35** rows stay `application_status='disputed'` because neither a
+**27** rows stay `application_status='disputed'` because neither a
 scoped absence source nor an owner adjudication exists.
 
 The owner decision and its rationale are queryable in `owner_adjudications` and through the
@@ -51,8 +51,8 @@ Portuguese `xPRE 076` rows, for example, remain disputed because no owner adjudi
 - Language codes are BCP 47 tags. Repository scope defines Cardmarket's Spanish row as European
   Spanish, so the application code is `es-ES`; Portuguese remains the source's unqualified `pt`.
 - Edition rows exist only for positively established product languages. The source projection's
-  49 rows for explicitly absent languages and
-  35 rows for unverified languages are recorded as quality
+  57 rows for explicitly absent languages and
+  27 rows for unverified languages are recorded as quality
   issues, not exported as facts.
 - Code cards remain queryable but are `out-of-scope` and never enter the physical checklist.
 - Missing artists, missing date sources, opaque variants and unresolved finishes stay null or
