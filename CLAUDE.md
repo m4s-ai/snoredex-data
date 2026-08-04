@@ -45,18 +45,10 @@ correction already made here, and reading it is how you avoid repeating one.
    and the seller may have mislabelled the language. There is no open API; collection is by hand or
    a browser session, and the rolling ~55-request quota returns HTTP 429.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
-   agreed, and `verification/source_registry.json` ranks each provider by `authorityTier`:
-
-<!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-| Tier | Sources |
-|---|---|
-| 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
-| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · koreanpokemoncards.com · pokumon.com |
-| 5 | Cardmarket · Internal derivation from a sibling record |
-
-Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
-<!-- /generated:authority-tiers -->
+   agreed, and `verification/source_registry.json` ranks each provider by `authorityTier` —
+   the evidence ladder in [`README.md`](README.md#how-a-claim-becomes-a-fact), generated from that
+   registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
+   external evidence. There is deliberately no tier 4.
 
    A single non-URL source may confirm a unit: **30 units rest on owner attestation alone** and 6
    on an inspected specimen alone. The owner holds those cards and no database records them, so

@@ -37,19 +37,10 @@ nothing to correct unless you have actually seen it.
 
 ## How your report is graded
 
-Evidence is ranked, and the ranking is public. This is the same table the tooling uses, generated
-from [`verification/source_registry.json`](verification/source_registry.json):
-
-<!-- generated:authority-tiers — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-| Tier | Sources |
-|---|---|
-| 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
-| 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · koreanpokemoncards.com · pokumon.com |
-| 5 | Cardmarket · Internal derivation from a sibling record |
-
-Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
-<!-- /generated:authority-tiers -->
+Evidence is ranked, and the ranking is public: see
+[the ladder in `README.md`](README.md#how-a-claim-becomes-a-fact), generated from
+[`verification/source_registry.json`](verification/source_registry.json). Tiers 1-3 grade external
+evidence, strongest first; tier 5 marks what is *not* external evidence.
 
 **A card in your hand is tier 1.** A photograph of the actual card ranks alongside an official
 publisher database and above every independent catalogue — this page used to say the opposite, and
