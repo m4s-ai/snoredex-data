@@ -262,7 +262,7 @@ Japanese sets rename too — resolve them via `redirects=1` rather than guessing
 
 ### Market-history rule — the highest-yield technique for Asian languages
 
-Bulbapedia's country articles carry a TCG section that dates when a language market opened. That settles whole eras at once instead of one set at a time (`verify_market_history.ps1`):
+Bulbapedia's country articles carry a TCG section that dates when a language market opened. That settles whole eras at once instead of one set at a time (`verification/verification/archive/passes/verify_market_history.ps1`, an archived one-shot — never rerun it):
 
 - **Traditional Chinese** launched **October 2019** with *All Stars Collection*. Before the Sun & Moon era only Base Set plus EX Legend Maker / EX Trainer Kit 2 were ever printed in Traditional Chinese; between 2006 and 2019 Taiwan received English-language product. Any Japanese set older than Oct 2019 therefore has **no** Traditional Chinese printing.
 - **Korean**: before the DP era only Base Set and ADV Expansion Pack (plus the Treecko/Torchic/Mudkip decks) were printed in Korean. From DP through HGSS, Korean sets were *unique recombinations* — "none of the sets themselves corresponding to existing sets". Only from Black & White do Korean sets track the Japanese ones.
@@ -295,7 +295,7 @@ the source-specific findings described above.
 
 Deliverables for hand-checking: **`MANUAL_REVIEW.csv`** (flat, one row per unit, with empty `verdict` / `yourSource` columns) and **`MANUAL_REVIEW.json`** (grouped per card-variant, showing which languages are already confirmed for the same card). Fill `verdict` with `confirmed` or `false`.
 
-**Thai needs its Thai-script keyword.** `asia.pokemon-card.com/th` returns nothing for `Snorlax` but 25 records for `คาบิกอน` (`asia_fetch_th.ps1`). Traditional Chinese likewise needs `卡比獸`; only Indonesian answers to the English name.
+**Thai needs its Thai-script keyword.** `asia.pokemon-card.com/th` returns nothing for `Snorlax` but 25 records for `คาบิกอน` (`verification/verification/archive/passes/asia_fetch_th.ps1`, an archived one-shot — never rerun it). Traditional Chinese likewise needs `卡比獸`; only Indonesian answers to the English name.
 
 Yield per action is now 1–3 units. All bulk sources are exhausted; future additions will need one
 lookup per card.
@@ -309,7 +309,7 @@ The cross-language index uses **two different table shapes**:
 | Sword & Shield era and later | Japanese, English, Traditional Chinese, Indonesian, Thai, Korean |
 | Sun & Moon era and earlier | Japanese, English, **Korean only** |
 
-An earlier pass read a missing Traditional Chinese cell in an *older* section as proof of non-release. The column does not exist there at all. **7 contradictions were wrong and have been reverted to `pending`** (Tag Bolt ×3, Double Blaze, Wild Blaze, Plasma Gale, Awakening Psychic King) — see `fix_asia_setlevel.ps1`.
+An earlier pass read a missing Traditional Chinese cell in an *older* section as proof of non-release. The column does not exist there at all. **7 contradictions were wrong and have been reverted to `pending`** (Tag Bolt ×3, Double Blaze, Wild Blaze, Plasma Gale, Awakening Psychic King) — see `verification/verification/archive/passes/fix_asia_setlevel.ps1`, an archived one-shot — never rerun it.
 
 The rule now enforced: only an **explicit em-dash** (usually `colspan=3 | —`) counts as evidence of non-release. Shield (`s1H`) and Rebellion Crash (`s2`) carry that em-dash, so those contradictions stand. Verified positive rows, read from raw wikitext:
 
@@ -353,7 +353,7 @@ Fully closed: Cardmarket advertises **17 languages**, the expansion article stat
 
 Simplified-Chinese-exclusive products have their own Bulbapedia articles with the suffix **`(ATCG)`**, e.g. `Dynamax_Clash_(ATCG)`, `Collection_151_(ATCG)`, `Shining_Synergy_(ATCG)`. These carry full set lists and are the correct source.
 
-The blocker is **extraction truncation**: these set lists are long, and the fetch returns the head of the table only. `Collection 151` confirmed 143/151 but cut off before 169; `Shining Synergy` truncated before any Snorlax row. Add new findings to `archive/passes/verify_manual.ps1`, which applies hand-verified rows.
+The blocker is **extraction truncation**: these set lists are long, and the fetch returns the head of the table only. `Collection 151` confirmed 143/151 but cut off before 169; `Shining Synergy` truncated before any Snorlax row. Add new findings to `verification/archive/passes/verify_manual.ps1`, which applies hand-verified rows.
 
 Dead ends, do not retry: `pokemonkorea.co.kr` (410 to scripts), `pokemon.cardmon.com` (host gone), `ptcg.cn` (a Magic: The Gathering site, not Pokémon), `pokeos.com` (JS-driven). **52poke wiki** is scriptable via `wiki.52poke.com/api.php` but names card pages by *Japanese* set code (`卡比兽（S1H）`), so it evidences the card, not a Simplified Chinese printing.
 
@@ -370,7 +370,7 @@ not print reality. Thirty T-Chinese units on old sets were still open at that st
 
 Side benefit at this stage: the official Japanese database also publishes illustrators, so artist
 coverage in the **main dataset rose from 79/198 to 108/198**. See `artists_official_jp.json` and
-`backfill_artists.ps1`.
+`verification/verification/archive/passes/backfill_artists.ps1`, an archived one-shot — never rerun it.
 
 ### Official Japanese API — hard-won details
 
@@ -445,20 +445,11 @@ location and can be rerun from any checkout or working directory.
 
 ## Resume procedure
 
-```powershell
-# Run from the repository root.
-python verification/review_integrity.py      # confirm the canonical state is coherent
-python verification/review_findings.py            # cross-artifact and publication checks
-python verification/verify_finish_sources.py # validate exact live TCGCSV IDs/subtypes
+The command order lives in `CLAUDE.md` — one copy, kept beside the rules that depend on it.
+This file no longer restates it.
 
-# Layout: verification/*.ps1 are the five recurring tools (report, audit_evidence,
-# classify_manual, verify_finish_sources, review_integrity). verification/archive/passes/ holds every
-# completed one-shot pass in chronological naming; do not rerun those archived passes. All
-# PowerShell paths derive from $PSScriptRoot. The dataset build
-# pipeline lives in scripts/ (mkunits -> build -> join -> getimages -> finalize -> analyze -> finishes).
-```
-
-Safe to interrupt at any point — `units.json` is rewritten only after a full pass, and `evidence.jsonl` is appended per confirmation.
+Safe to interrupt at any point: `units.json` is rewritten only after a full pass, and
+`evidence.jsonl` is appended per confirmation.
 
 ## Sources used so far
 

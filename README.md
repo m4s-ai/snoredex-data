@@ -17,7 +17,7 @@ against a source outside Cardmarket — and the disagreements kept on the record
 > [!IMPORTANT]
 > The licence grants are **in force**, granted by `M4S.Collection`. Publication was approved on 2026-07-31: the repository is **public** and the site may be deployed. Deployment stays a manual workflow run — merging never publishes. See
 > [`publication-decisions.json`](publication-decisions.json), [`LICENSE.md`](LICENSE.md), and
-> [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md).
+> [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md).
 <!-- /generated:status -->
 
 ## Why this exists
@@ -266,7 +266,7 @@ publishes, and Pages deployment stays a manual, gated workflow run.
   [`verification/bulbapedia_release_dates.json`](verification/bulbapedia_release_dates.json) take
   precedence over the generic API fallback, and where a field lists several regional waves the
   chronological row uses the first and records that choice. The full set-by-set review is
-  [`verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md`](verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md).
+  [`verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md`](verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md).
 - **Code cards are excluded from the checklist** and flagged in the dataset —
   [`verification/excluded_codecards.json`](verification/excluded_codecards.json).
 
@@ -337,7 +337,7 @@ All paths are relative to the repository root.
 | [`HANDOVER.md`](HANDOVER.md) | Cold-start guide and prioritised backlog. |
 | [`verification/RESUME.md`](verification/RESUME.md) | Verification playbook — source techniques, corrections, dead ends. |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a correction and how it is graded. |
-| [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md) | Ordered steps to take the site public, and what each approval attests. |
+| [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md) | Ordered steps to take the site public, and what each approval attests. |
 
 ## Licence, attribution and AI transparency
 

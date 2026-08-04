@@ -139,8 +139,8 @@ A stamp and a finish are separate fields.
 Commands work from any current directory because scripts resolve the repository from their own
 locations. The examples below assume the repository root only for readability.
 
-```powershell
-python scripts\finishes.py
+```console
+python scripts/finishes.py
 python verification/verify_finish_sources.py
 python verification/audit_evidence.py
 python verification/review_integrity.py

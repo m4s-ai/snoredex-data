@@ -5,7 +5,7 @@ Complements `verification/review_integrity.py`. That script validates invariants
 *within* each store; this one validates consistency *between* the state stores and
 the derived artifacts that consumers and the future public site actually read.
 
-Most checks correspond to a finding in `verification/REVIEW-2026-07-25.md`; later checks protect
+Most checks correspond to a finding in `verification/history/REVIEW-2026-07-25.md`; later checks protect
 the release, portability, and transparency contracts added during remediation. Run it after any
 write pass, and re-run it to confirm a fix:
 
@@ -1336,9 +1336,9 @@ def collect() -> None:
             f"SHA-256 values: {required_licences}",
         )
 
-        for doc in ("LICENSE.md", "THIRD_PARTY_NOTICES.md", "verification/PUBLIC-READINESS-AUDIT.md"):
+        for doc in ("LICENSE.md", "THIRD_PARTY_NOTICES.md", "verification/history/PUBLIC-READINESS-AUDIT.md"):
             check(
-                f"P{1 + list(('LICENSE.md', 'THIRD_PARTY_NOTICES.md', 'verification/PUBLIC-READINESS-AUDIT.md')).index(doc)}",
+                f"P{1 + list(('LICENSE.md', 'THIRD_PARTY_NOTICES.md', 'verification/history/PUBLIC-READINESS-AUDIT.md')).index(doc)}",
                 f"{doc} exists",
                 "FAIL",
                 (ROOT / doc).exists(),
@@ -1370,7 +1370,7 @@ def collect() -> None:
                 continue
             relative = raw_name.decode("utf-8", errors="surrogateescape")
             path = ROOT / relative
-            if relative in {"verification/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+            if relative in {"verification/history/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
                 continue  # These files quote the expressions and known historical finding.
             try:
                 data = path.read_bytes()
@@ -1418,7 +1418,7 @@ def collect() -> None:
                 process.stdout.read(1)  # protocol newline
                 if object_type != "blob" or size > 5_000_000:
                     continue
-                if path in {"verification/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+                if path in {"verification/history/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
                     continue
                 scanned_blobs += 1
                 history_hits.extend(sensitive_matches(data, f"{sha[:10]}:{path or '(unknown path)'}"))
@@ -2133,9 +2133,10 @@ def collect() -> None:
         # five harvest scripts a whole migration after they moved to the archive (#68). These four
         # report that class of drift.
         #
-        # They land as INFO and are promoted to FAIL by the phase that clears each backlog — #102
-        # for D2/D3, #103 for D4 — so the gate is never red on main while the work is in flight.
-        # Reporting first, failing once clean, is how #69 handled metric drift.
+        # Each lands as INFO and is promoted to FAIL by the phase that clears its backlog, so the
+        # gate is never red on main while the work is in flight. Reporting first and failing once
+        # clean is how #69 handled metric drift. D2 and D3 were promoted in #102; D4 stays INFO
+        # until #103 retires the duplicated headings.
         docs = documentation_inventory()
 
         undeclared = sorted(
@@ -2149,7 +2150,7 @@ def collect() -> None:
         check(
             "D1",
             "Every tracked document declares a role and a load stage",
-            "INFO",
+            "FAIL",
             not undeclared and not bad_stage,
             f"{len(docs)} documents in scope; {len(undeclared)} undeclared {undeclared[:5]}; "
             f"{len(bad_stage)} with an unknown stage {bad_stage[:3]}. "
@@ -2171,7 +2172,7 @@ def collect() -> None:
         check(
             "D2",
             "No live document describes tooling that has been archived",
-            "INFO",
+            "FAIL",
             not dead_tooling,
             f"{len(dead_tooling)} reference(s) to .ps1 tooling outside an archive path: "
             f"{dead_tooling[:6]}. Rewrite each to point into verification/archive/passes/ and say "
@@ -2189,7 +2190,7 @@ def collect() -> None:
         check(
             "D3",
             "Frozen and generated documents say so in their own text",
-            "INFO",
+            "FAIL",
             not missing_banner and not missing_generated,
             f"{len(missing_banner)} history document(s) without the 'Historical record' banner "
             f"{missing_banner}; {len(missing_generated)} generated document(s) without a "

@@ -113,12 +113,12 @@ any deployment.
    repository's issue tracker, so publishing the site for public review requires the repository to
    be public too, and `publication_gate.py` enforces that the two are decided together. The
    historical local paths that previously blocked public visibility were redacted on 2026-07-26;
-   see `verification/PUBLIC-READINESS-AUDIT.md` and `verification/LAUNCH-RUNBOOK.md`.
+   see `verification/history/PUBLIC-READINESS-AUDIT.md` and `verification/history/LAUNCH-RUNBOOK.md`.
 
 The licence grants above are in force and do not depend on decision 5. Merging code does not
 deploy the site: the Pages workflow is manual and calls the publication gate before any upload.
 
-See issue #5 and `verification/PUBLIC-READINESS-AUDIT.md`.
+See issue #5 and `verification/history/PUBLIC-READINESS-AUDIT.md`.
 
 ## Licensor
 
