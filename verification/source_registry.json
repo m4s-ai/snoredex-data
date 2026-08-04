@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-03",
+  "generated": "2026-08-04",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -9,7 +9,7 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 19,
+   "providers": 20,
    "evidenceRecords": 883,
    "uniqueUrls": 876,
    "nonUrlEvidenceClasses": 7,
@@ -138,7 +138,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 88,
-   "claimsSupported": 697
+   "claimsSupported": 694
   },
   {
    "providerId": "tcgcsv",
@@ -206,6 +206,29 @@
    ],
    "uniqueSources": 2,
    "claimsSupported": 3
+  },
+  {
+   "providerId": "koreanpokemoncards",
+   "displayName": "koreanpokemoncards.com",
+   "organization": "koreanpokemoncards.com",
+   "homepage": "http://www.koreanpokemoncards.com",
+   "licenseOrTerms": "Site terms.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "Korean-market set and promo listings",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "finish"
+   ],
+   "attribution": "Korean printing data from koreanpokemoncards.com.",
+   "notes": "Declared before any claim cites it, so the research it is meant to start has a place to land. Prove it covers a category before reading its silence as evidence: rule 3 applies here as it does to pokumon, whose Western coverage is one lumped English row.",
+   "hosts": [
+    "koreanpokemoncards.com",
+    "www.koreanpokemoncards.com"
+   ],
+   "uniqueSources": 0,
+   "claimsSupported": 0
   },
   {
    "providerId": "elitefourum",
@@ -436,7 +459,7 @@
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 5
+   "claimsSupported": 8
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -1166,10 +1189,9 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 13,
+   "stableIdCount": 12,
    "stableIds": [
     "U0451",
-    "U0452",
     "U0453",
     "U0454",
     "U0455",
@@ -1183,7 +1205,7 @@
     "U0530"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 13
+   "usageCount": 12
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
@@ -1819,15 +1841,13 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 2,
    "stableIds": [
     "U0687",
-    "U0752",
-    "U0772",
     "U0773"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 4
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(SCTCG)",
@@ -9986,22 +10006,27 @@
    "nonUrlEvidenceId": "evidence:inspected-specimen",
    "providerId": "inspected-specimen",
    "sourceTypes": [
+    "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
     "Physical card, photographed holo specimen",
+    "Physical card, photographed sealed specimen",
     "Physical card, photographed specimen"
    ],
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 8,
    "stableIds": [
     "U0189",
     "U0228",
     "U0229",
     "U0230",
-    "U0231"
+    "U0231",
+    "U0452",
+    "U0752",
+    "U0772"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 5
+   "usageCount": 8
   },
   {
    "canonicalUrl": null,

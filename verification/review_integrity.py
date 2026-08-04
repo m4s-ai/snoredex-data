@@ -236,7 +236,10 @@ def main() -> int:
     suite.report("finish units covered by a complete manifest",
                  sum(1 for u in finish_units
                      if u.get("completenessStatus") == "complete-manifest"), 4)
-    suite.report("finish review queue", len(finish_review.get("units") or []), 222,
+    # 222 -> 223 on 2026-08-03: the owner's GameStop/Canada adjudication overturned U0452, so
+    # xJTG 117 French became a confirmed language and F0598 became an applicable finish unit.
+    # The queue grew because the corpus grew, not because finish work was lost or reopened.
+    suite.report("finish review queue", len(finish_review.get("units") or []), 223,
                  direction=checks.DOWN_IS_PROGRESS)
 
     printing_ids = [p.get("printingId")
