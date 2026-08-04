@@ -193,6 +193,16 @@ python -m playwright install chromium
 
 python verification/review_integrity.py
 python verification/review_findings.py           # stdlib only, no network — quickest check
+
+# The gate regenerates these FOR REAL, so run them before checking anything downstream.
+# --check on the eight below is not the whole generator set, and twice now that gap has
+# turned CI red on work that passed locally.
+python verification/report.py && python scripts/editions.py
+python scripts/finishes.py --reproject
+python scripts/language_status.py && python scripts/confirmed_releases.py
+python scripts/database.py
+python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
+
 for g in checklist readme_stats issue_templates site source_registry open_items analyze database
 do python scripts/$g.py --check; done            # fail instead of writing
 python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
