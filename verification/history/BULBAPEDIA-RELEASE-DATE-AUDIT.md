@@ -1,6 +1,10 @@
 <!-- doc: role=release-date audit snapshot; stage=history -->
 # Bulbapedia release-date audit — 2026-07-31
 
+> [!NOTE]
+> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree as it was on the date above. For what is true now see `HANDOVER.md`, `CLAUDE.md` and the check suites.
+
+
 The read-only audit fetched all 214 pages in Bulbapedia's Pokémon TCG expansion category, then
 added the product and Asian-language pages already cited by this repository. It compared 133
 represented set-code/name pairs by article title, `setname`, `transsetname`, and reviewed aliases.

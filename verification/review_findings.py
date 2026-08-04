@@ -5,7 +5,7 @@ Complements `verification/review_integrity.py`. That script validates invariants
 *within* each store; this one validates consistency *between* the state stores and
 the derived artifacts that consumers and the future public site actually read.
 
-Most checks correspond to a finding in `verification/REVIEW-2026-07-25.md`; later checks protect
+Most checks correspond to a finding in `verification/history/REVIEW-2026-07-25.md`; later checks protect
 the release, portability, and transparency contracts added during remediation. Run it after any
 write pass, and re-run it to confirm a fix:
 
@@ -45,6 +45,16 @@ RESERVED_DROPDOWN_OPTIONS = {"none"}
 # Documentation roles (#100). The stage is the design constraint, not a label: `auto` is paid for
 # on every task because CLAUDE.md and AGENTS.md are injected at session start, so only what changes
 # behaviour before an agent acts belongs there. Everything else is opened deliberately.
+# Files that quote the sensitive-expression patterns themselves, so P4 and P6 would otherwise
+# match on the check's own vocabulary. Both paths of the readiness audit are listed on purpose:
+# P6 walks *history*, where blobs carry the path the file had at the time, and #102 moved it to
+# verification/history/. Rewriting the old path out is what broke P6 in that PR.
+SENSITIVE_SCAN_EXEMPT = frozenset({
+    "verification/PUBLIC-READINESS-AUDIT.md",          # pre-#102 path, still in history
+    "verification/history/PUBLIC-READINESS-AUDIT.md",  # current path
+    "verification/review_findings.py",
+})
+
 DOC_STAGES = ("auto", "task", "reference", "public", "generated", "history")
 DOC_HEADER = re.compile(r"<!--\s*doc:\s*role=(?P<role>[^;]+);\s*stage=(?P<stage>[^\s>]+)\s*-->")
 
@@ -1336,9 +1346,9 @@ def collect() -> None:
             f"SHA-256 values: {required_licences}",
         )
 
-        for doc in ("LICENSE.md", "THIRD_PARTY_NOTICES.md", "verification/PUBLIC-READINESS-AUDIT.md"):
+        for doc in ("LICENSE.md", "THIRD_PARTY_NOTICES.md", "verification/history/PUBLIC-READINESS-AUDIT.md"):
             check(
-                f"P{1 + list(('LICENSE.md', 'THIRD_PARTY_NOTICES.md', 'verification/PUBLIC-READINESS-AUDIT.md')).index(doc)}",
+                f"P{1 + list(('LICENSE.md', 'THIRD_PARTY_NOTICES.md', 'verification/history/PUBLIC-READINESS-AUDIT.md')).index(doc)}",
                 f"{doc} exists",
                 "FAIL",
                 (ROOT / doc).exists(),
@@ -1370,7 +1380,7 @@ def collect() -> None:
                 continue
             relative = raw_name.decode("utf-8", errors="surrogateescape")
             path = ROOT / relative
-            if relative in {"verification/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+            if relative in SENSITIVE_SCAN_EXEMPT:
                 continue  # These files quote the expressions and known historical finding.
             try:
                 data = path.read_bytes()
@@ -1418,7 +1428,7 @@ def collect() -> None:
                 process.stdout.read(1)  # protocol newline
                 if object_type != "blob" or size > 5_000_000:
                     continue
-                if path in {"verification/PUBLIC-READINESS-AUDIT.md", "verification/review_findings.py"}:
+                if path in SENSITIVE_SCAN_EXEMPT:
                     continue
                 scanned_blobs += 1
                 history_hits.extend(sensitive_matches(data, f"{sha[:10]}:{path or '(unknown path)'}"))
@@ -2133,9 +2143,10 @@ def collect() -> None:
         # five harvest scripts a whole migration after they moved to the archive (#68). These four
         # report that class of drift.
         #
-        # They land as INFO and are promoted to FAIL by the phase that clears each backlog — #102
-        # for D2/D3, #103 for D4 — so the gate is never red on main while the work is in flight.
-        # Reporting first, failing once clean, is how #69 handled metric drift.
+        # Each lands as INFO and is promoted to FAIL by the phase that clears its backlog, so the
+        # gate is never red on main while the work is in flight. Reporting first and failing once
+        # clean is how #69 handled metric drift. D2 and D3 were promoted in #102; D4 stays INFO
+        # until #103 retires the duplicated headings.
         docs = documentation_inventory()
 
         undeclared = sorted(
@@ -2149,7 +2160,7 @@ def collect() -> None:
         check(
             "D1",
             "Every tracked document declares a role and a load stage",
-            "INFO",
+            "FAIL",
             not undeclared and not bad_stage,
             f"{len(docs)} documents in scope; {len(undeclared)} undeclared {undeclared[:5]}; "
             f"{len(bad_stage)} with an unknown stage {bad_stage[:3]}. "
@@ -2171,7 +2182,7 @@ def collect() -> None:
         check(
             "D2",
             "No live document describes tooling that has been archived",
-            "INFO",
+            "FAIL",
             not dead_tooling,
             f"{len(dead_tooling)} reference(s) to .ps1 tooling outside an archive path: "
             f"{dead_tooling[:6]}. Rewrite each to point into verification/archive/passes/ and say "
@@ -2189,7 +2200,7 @@ def collect() -> None:
         check(
             "D3",
             "Frozen and generated documents say so in their own text",
-            "INFO",
+            "FAIL",
             not missing_banner and not missing_generated,
             f"{len(missing_banner)} history document(s) without the 'Historical record' banner "
             f"{missing_banner}; {len(missing_generated)} generated document(s) without a "

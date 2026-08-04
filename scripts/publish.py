@@ -59,7 +59,7 @@ FILES = [
     "verification/source_registry.json",
     "verification/SOURCES.md",
     "verification/bulbapedia_release_dates.json",
-    "verification/BULBAPEDIA-RELEASE-DATE-AUDIT.md",
+    "verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md",
     "verification/finish_units.json",
     "verification/units.json",
     "verification/owner_adjudications.json",
@@ -67,7 +67,7 @@ FILES = [
     "verification/UNCONFIRMED.json",
     "verification/RESUME.md",
     "verification/FINISH_SOURCES.md",
-    "verification/PUBLIC-READINESS-AUDIT.md",
+    "verification/history/PUBLIC-READINESS-AUDIT.md",
     "verification/DATA-HANDOFF-AUDIT.md",
 ]
 

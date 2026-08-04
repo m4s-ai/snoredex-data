@@ -300,7 +300,7 @@ def status_block(decisions: dict[str, Any]) -> str:
         f"> {licence} {publication} See",
         "> [`publication-decisions.json`](publication-decisions.json), "
         "[`LICENSE.md`](LICENSE.md), and",
-        "> [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md).",
+        "> [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md).",
     ])
 
 
