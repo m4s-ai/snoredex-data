@@ -1,3 +1,4 @@
+<!-- doc: role=record of the Python migration; stage=history -->
 # Consolidating the toolchain on Python — plan
 
 > [!NOTE]

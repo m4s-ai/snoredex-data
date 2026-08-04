@@ -1,3 +1,4 @@
+<!-- doc: role=release-date audit snapshot; stage=history -->
 # Bulbapedia release-date audit — 2026-07-31
 
 The read-only audit fetched all 214 pages in Bulbapedia's Pokémon TCG expansion category, then

@@ -1,3 +1,4 @@
+<!-- doc: role=record of the public launch; stage=history -->
 # Launch runbook
 
 Everything that has to happen to take the site public, in order. Written to be followed once, by

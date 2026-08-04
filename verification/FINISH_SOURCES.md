@@ -1,3 +1,4 @@
+<!-- doc: role=finish evidence guide; stage=task -->
 # Finish evidence guide
 
 Read this with [`RESUME.md`](RESUME.md) before changing finish evidence. The authoritative state is

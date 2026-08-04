@@ -1,3 +1,4 @@
+<!-- doc: role=readings of the generated analyses; stage=reference -->
 # Findings
 
 What fell out of building the dataset: where Cardmarket's language coverage departs from what the

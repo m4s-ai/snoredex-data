@@ -1,3 +1,4 @@
+<!-- doc: role=how to report a correction; stage=public -->
 # Contributing
 
 This project is asking for one specific kind of help: **tell us where the data is wrong.**

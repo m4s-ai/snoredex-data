@@ -42,6 +42,12 @@ STRENGTH = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confir
 # compared case-insensitively. Learned from GitHub's own validator, not from any published schema.
 RESERVED_DROPDOWN_OPTIONS = {"none"}
 
+# Documentation roles (#100). The stage is the design constraint, not a label: `auto` is paid for
+# on every task because CLAUDE.md and AGENTS.md are injected at session start, so only what changes
+# behaviour before an agent acts belongs there. Everything else is opened deliberately.
+DOC_STAGES = ("auto", "task", "reference", "public", "generated", "history")
+DOC_HEADER = re.compile(r"<!--\s*doc:\s*role=(?P<role>[^;]+);\s*stage=(?P<stage>[^\s>]+)\s*-->")
+
 # The check protocol is shared with `review_integrity.py` — one implementation of how a check is
 # declared and when the process exits non-zero. The output format below stays this suite's own.
 suite = Suite()
@@ -50,6 +56,28 @@ suite = Suite()
 def load(rel: str) -> Any:
     with open(ROOT / rel, encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def documentation_inventory() -> dict[str, dict[str, Any]]:
+    """Every tracked markdown document, with the role and stage it declares for itself.
+
+    Two directories are out of scope and stay that way. `LICENSES/` holds verbatim upstream licence
+    text — editing it to add a header would make it no longer the licence. `verification/archive/`
+    is hashed against MANIFEST.json by check X3, so a header there fails the build.
+    """
+    inventory: dict[str, dict[str, Any]] = {}
+    for path in sorted(ROOT.rglob("*.md")):
+        rel = path.relative_to(ROOT).as_posix()
+        if rel.startswith(("LICENSES/", "verification/archive/", "_site/", "node_modules/")):
+            continue
+        text = path.read_text(encoding="utf-8")
+        found = DOC_HEADER.search(text)
+        inventory[rel] = {
+            "text": text,
+            "role": found.group("role").strip() if found else None,
+            "stage": found.group("stage").strip() if found else None,
+        }
+    return inventory
 
 
 def check(check_id: str, title: str, severity: str, ok: bool, detail: str = "") -> None:
@@ -2094,6 +2122,101 @@ def collect() -> None:
             f"{counts['pendingFinish']} pending, {counts['notApplicableFinish']} not-applicable of "
             f"{counts['totalFinishUnits']} finish units; {counts['withUnresolvedProductMapping']} with "
             f"unresolved product mapping",
+        )
+
+
+    with guarded("G14", "documentation roles and load stages"):
+        # --------------------------------------------------------------------------- #
+        # D1-D4 — one job per document, loaded at the stage it is needed (#100)
+        # --------------------------------------------------------------------------- #
+        # Nothing read prose, so prose drifted: RESUME.md still described a PowerShell toolchain and
+        # five harvest scripts a whole migration after they moved to the archive (#68). These four
+        # report that class of drift.
+        #
+        # They land as INFO and are promoted to FAIL by the phase that clears each backlog — #102
+        # for D2/D3, #103 for D4 — so the gate is never red on main while the work is in flight.
+        # Reporting first, failing once clean, is how #69 handled metric drift.
+        docs = documentation_inventory()
+
+        undeclared = sorted(
+            rel for rel, doc in docs.items() if doc["role"] is None or doc["stage"] is None
+        )
+        bad_stage = sorted(
+            f"{rel} declares stage={doc['stage']!r}"
+            for rel, doc in docs.items()
+            if doc["stage"] is not None and doc["stage"] not in DOC_STAGES
+        )
+        check(
+            "D1",
+            "Every tracked document declares a role and a load stage",
+            "INFO",
+            not undeclared and not bad_stage,
+            f"{len(docs)} documents in scope; {len(undeclared)} undeclared {undeclared[:5]}; "
+            f"{len(bad_stage)} with an unknown stage {bad_stage[:3]}. "
+            f"Exempt: LICENSES/ is verbatim upstream text, verification/archive/ is hashed by X3.",
+        )
+
+        # A live document must not describe tooling that no longer exists. A reference is allowed
+        # when the same line says where the script actually lives now — that is provenance, not
+        # instruction.
+        dead_tooling = []
+        for rel, doc in docs.items():
+            if doc["stage"] not in ("auto", "task", "reference", "public"):
+                continue
+            for number, line in enumerate(doc["text"].splitlines(), 1):
+                lowered = line.lower()
+                hit = ".ps1" in lowered or "```powershell" in lowered
+                if hit and "archive/" not in lowered:
+                    dead_tooling.append(f"{rel}:{number}")
+        check(
+            "D2",
+            "No live document describes tooling that has been archived",
+            "INFO",
+            not dead_tooling,
+            f"{len(dead_tooling)} reference(s) to .ps1 tooling outside an archive path: "
+            f"{dead_tooling[:6]}. Rewrite each to point into verification/archive/passes/ and say "
+            f"it is a one-shot that must not be rerun (#102).",
+        )
+
+        missing_banner = sorted(
+            rel for rel, doc in docs.items()
+            if doc["stage"] == "history" and "Historical record" not in doc["text"]
+        )
+        missing_generated = sorted(
+            rel for rel, doc in docs.items()
+            if doc["stage"] == "generated" and "do not hand-edit" not in doc["text"].lower()
+        )
+        check(
+            "D3",
+            "Frozen and generated documents say so in their own text",
+            "INFO",
+            not missing_banner and not missing_generated,
+            f"{len(missing_banner)} history document(s) without the 'Historical record' banner "
+            f"{missing_banner}; {len(missing_generated)} generated document(s) without a "
+            f"do-not-hand-edit header {missing_generated}.",
+        )
+
+        # "One job per document", stated mechanically: a heading that appears in two documents an
+        # agent may load is a fact maintained twice.
+        headings: dict[str, list[str]] = {}
+        for rel, doc in docs.items():
+            if doc["stage"] not in ("auto", "task"):
+                continue
+            for line in doc["text"].splitlines():
+                if line.startswith("## "):
+                    key = re.sub(r"[^a-z ]", "", line[3:].lower()).split("  ")[0].strip()
+                    # Numbered HANDOVER headings ("## 2. Current state") normalise to the same key.
+                    headings.setdefault(key, []).append(rel)
+        shared = sorted(
+            f"{key!r} in {sorted(set(where))}"
+            for key, where in headings.items() if len(set(where)) > 1
+        )
+        check(
+            "D4",
+            "No section heading is maintained in two loadable documents",
+            "INFO",
+            not shared,
+            f"{len(shared)} heading(s) duplicated across auto/task documents: {shared[:6]} (#103).",
         )
 
 

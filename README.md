@@ -1,3 +1,4 @@
+<!-- doc: role=public entry point for using the data; stage=public -->
 # Snoredex Data
 
 **Every Snorlax Pokémon TCG product on Cardmarket, with each language and finish claim re-checked
