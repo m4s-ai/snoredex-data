@@ -18,6 +18,10 @@
   const CHECKLIST = readJSON("data-checklist");
   const META = readJSON("data-meta");
   const LANGS = META.languages;
+  // 18 fixed columns from scripts/site.py's COLUMNS, the language matrix, then the narrow-screen
+  // disclosure column and the correction column. Named because three call sites need it and the
+  // literal drifted the moment #121 added a column.
+  const DETAIL_SPAN = 18 + LANGS.length + 2;
 
   const FINISH_LABELS = {
     "non-holo": "Non-Holo",
@@ -435,7 +439,36 @@
              weak: !ev.checkable && !ev.corroborated };
   }
 
-  function rowHTML(row) {
+  /* Values the narrow breakpoint takes off screen, restated for the per-row disclosure (#121).
+   * Built from the same row object the cells use, so the panel cannot drift out of step with the
+   * table it stands in for. Languages are summarised as the confirmed list: the 17-column matrix
+   * conveys presence by position, which a stacked panel cannot reproduce, and the confirmed names
+   * are what that position was being read for. */
+  function rowDetailHTML(row) {
+    const variant = row.variant + (row.variantName ? " — " + row.variantName : "");
+    const entries = [
+      ["Release", escapeHTML(row.dateDisplay)],
+      ["Expansion", escapeHTML(row.setName || "—")],
+      ["Variant", escapeHTML(variant)],
+      ["Rarity", escapeHTML(row.rarity || "—")],
+      ["Artist", escapeHTML(row.artist || "—")],
+      ["Edition", escapeHTML(row.edition)],
+      ["Pattern", escapeHTML(row.patterns.join(", ") || "—")],
+      ["Stamp / marking", escapeHTML(row.markings.join(", ") || "—")],
+      ["Marking role", escapeHTML(row.markingRoles.join(", ") || "—")],
+      ["Size", escapeHTML(row.sizes.join(", ") || "—")],
+      ["Distribution", escapeHTML(row.distributions.join(", ") || "—")],
+      ["Confirmed languages", row.confirmedLanguages.length
+        ? escapeHTML(row.confirmedLanguages.join(", ")) +
+          ' <span class="detail-count">(' + row.confirmedLanguages.length + ")</span>"
+        : "—"],
+    ];
+    return '<dl class="rowdetail-list">' + entries
+      .map(([term, value]) => "<dt>" + term + "</dt><dd>" + value + "</dd>").join("") + "</dl>";
+  }
+
+  function rowHTML(row, index) {
+    const detailId = "rowdetail-" + index;
     const langCells = LANGS.map((lang) => {
       const has = row.langCodes.includes(lang.code);
       const state = has ? "present" : "absent";
@@ -487,8 +520,8 @@
       clippedCell(variant, "col-variant") +
       clippedCell(row.rarity || "—", "col-rarity") +
       clippedCell(row.artist || "—", "col-artist") +
-      "<td>" + escapeHTML(row.edition) + "</td>" +
-      "<td>" + (finishPills || '<span class="pill pending">no evidence</span>') + "</td>" +
+      '<td class="col-edition">' + escapeHTML(row.edition) + "</td>" +
+      '<td class="col-finish">' + (finishPills || '<span class="pill pending">no evidence</span>') + "</td>" +
       clippedCell(row.patterns.join(", ") || "—", "col-pattern", patternBadges || "—") +
       clippedCell(row.markings.join(", ") || "—", "col-marking") +
       clippedCell(row.markingRoles.join(", ") || "—", "col-marking-role") +
@@ -497,6 +530,12 @@
       clippedCell(evidence, "col-evidence", row.evidence.map((e) => pill(e, e)).join("") || "—") +
       '<td class="langcount">' + row.confirmedLanguages.length + "</td>" +
       langCells +
+      '<td class="col-more">' +
+      '<button type="button" class="rowmore" aria-expanded="false" aria-controls="' + detailId + '" ' +
+      'data-row-id="' + escapeHTML(row.rowId) + '" data-detail-id="' + detailId + '" ' +
+      'aria-label="More details for ' +
+      escapeHTML(row.name + " " + row.setCode + " " + (row.number || "")) + '">More info</button>' +
+      "</td>" +
       '<td class="corr"><a href="' + escapeHTML(row.correctionUrl) + '" target="_blank" rel="noopener" ' +
       'aria-label="Report a correction for ' + escapeHTML(row.name + " " + row.setCode + " " + (row.number || "")) +
       '">Correction?</a></td>' +
@@ -514,7 +553,7 @@
 
     const body = $("#rows");
     if (!visibleRows.length) {
-      body.innerHTML = '<tr><td class="empty" colspan="' + (18 + LANGS.length + 1) +
+      body.innerHTML = '<tr><td class="empty" colspan="' + DETAIL_SPAN +
         '">No rows match these filters. Use <strong>Reset all</strong> to start over.</td></tr>';
     } else {
       // Year separators are only meaningful in chronological order. Under any other sort they
@@ -528,11 +567,11 @@
           const year = row.dateSort.slice(0, 4);
           if (year !== previousYear) {
             previousYear = year;
-            parts.push('<tr class="yearsep"><td colspan="' + (18 + LANGS.length + 1) + '">' +
+            parts.push('<tr class="yearsep"><td colspan="' + DETAIL_SPAN + '">' +
               (year === "9999" ? "Undated" : year) + "</td></tr>");
           }
         }
-        parts.push(rowHTML(row));
+        parts.push(rowHTML(row, parts.length));
       });
       body.innerHTML = parts.join("");
     }
@@ -1184,10 +1223,105 @@
     sync();
   }
 
+  /* Per-row disclosure for the narrow breakpoint (#121).
+   *
+   * Delegated from the tbody rather than bound per row, because render() replaces the whole body on
+   * every filter and sort — per-row listeners would be rebound hundreds of times and any open panel
+   * would be lost. The rows are re-rendered collapsed, which is intended: after a re-sort the panel
+   * would otherwise belong to whichever row happened to land in that position. */
+  function initRowDetails() {
+    const body = $("#rows");
+    if (!body) return;
+    const byRowId = new Map(ROWS.map((row) => [row.rowId, row]));
+
+    body.addEventListener("click", (event) => {
+      const button = event.target.closest(".rowmore");
+      if (!button) return;
+      const detailId = button.dataset.detailId;
+      let panel = document.getElementById(detailId);
+
+      // Built on first use rather than with every row. Emitting all of them up front added a
+      // second <tr> per printing that a reader above the breakpoint never sees — 204 spare rows
+      // in the DOM, and enough of them to make the row-counting checks read double.
+      if (!panel) {
+        const row = byRowId.get(button.dataset.rowId);
+        if (!row) return;
+        panel = document.createElement("tr");
+        panel.className = "rowdetail";
+        panel.id = detailId;
+        panel.hidden = true;
+        const cell = document.createElement("td");
+        cell.colSpan = DETAIL_SPAN;
+        cell.innerHTML = rowDetailHTML(row);
+        panel.appendChild(cell);
+        button.closest("tr").after(panel);
+      }
+
+      const open = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", open ? "false" : "true");
+      button.textContent = open ? "More info" : "Less";
+      panel.hidden = open;
+    });
+  }
+
+  /* Raw export of the current view (#125).
+   *
+   * TSV rather than CSV on purpose: the values here carry commas routinely — evidence lists, artist
+   * names, "Stamp / marking" — and every one of those would need quoting and escaping in CSV. Tabs
+   * do not occur in the data, so a tab-separated file needs no quoting rules at all and pastes
+   * straight into a spreadsheet. Newlines and stray tabs are still collapsed defensively, because a
+   * single one would silently break the row structure of the whole file.
+   *
+   * Exports what the reader is looking at — current filters, current sort order — since that is the
+   * view they asked for. The language matrix becomes one column per language holding yes/no, which
+   * is the same information the ticks carry, in a form a spreadsheet can filter. */
+  function initExport() {
+    const button = $("#export-tsv");
+    if (!button) return;
+    const clean = (value) => String(value == null ? "" : value).replace(/[\t\r\n]+/g, " ").trim();
+
+    button.addEventListener("click", () => {
+      // visibleRows is what render() last produced — already filtered and in the displayed sort
+      // order — so the file and the table cannot disagree about what "the current view" means.
+      const rows = visibleRows;
+      const header = [
+        "Release", "Card", "Set", "No.", "Expansion", "Variant", "Variant name", "Rarity",
+        "Artist", "Edition", "Finish", "Pattern", "Stamp / marking", "Marking role", "Size",
+        "Distribution", "Evidence", "Confirmed languages", "Language count",
+      ].concat(LANGS.map((lang) => lang.name));
+
+      const body = rows.map((row) => [
+        row.dateDisplay, row.name, row.setCode, row.number || "", row.setName || "",
+        row.variant || "", row.variantName || "", row.rarity || "", row.artist || "",
+        row.edition || "", (row.finishes || []).map(finishLabel).join("; "),
+        (row.patterns || []).map(patternLabel).join("; "), (row.markings || []).join("; "),
+        (row.markingRoles || []).join("; "), (row.sizes || []).join("; "),
+        (row.distributions || []).join("; "), (row.evidence || []).join("; "),
+        row.confirmedLanguages.join("; "), row.confirmedLanguages.length,
+      ].concat(LANGS.map((lang) => (row.langCodes.includes(lang.code) ? "yes" : "no")))
+        .map(clean).join("\t"));
+
+      // A BOM so a spreadsheet opening this by double-click reads it as UTF-8 rather than as the
+      // local 8-bit codepage, which mangles the accented card and artist names.
+      const text = "﻿" + [header.join("\t")].concat(body).join("\r\n") + "\r\n";
+      const blob = new Blob([text], { type: "text/tab-separated-values;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "snoredex-collection-" + new Date().toISOString().slice(0, 10) + ".tsv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    });
+  }
+
   /* ------------------------------------------------------------------ boot */
 
   initTheme();
   initSectionNav();
+  initRowDetails();
+  initExport();
   readURL();
   buildControls();
   initChecklist();

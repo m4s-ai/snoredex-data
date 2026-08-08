@@ -365,7 +365,15 @@ def main() -> int:
         # needed 3,711px. A wide display must now be used, and the compact column treatment should
         # fit the complete matrix at 2560px without manufacturing a horizontal-scroll problem.
         page.set_viewport_size({"width": 2560, "height": 1000})
-        page.wait_for_timeout(120)
+        # Wait for the toolbar to agree with the layout rather than for a fixed 120ms. The script
+        # sets `hidden` from a resize handler, so a measurement taken mid-relayout could catch the
+        # flag still describing the previous width — an intermittent "overflow=0 toolsHidden=False".
+        # This waits for consistency only; what the check asserts is unchanged.
+        page.wait_for_function("""() => {
+          const scroller = document.querySelector('#collection-table-scroll');
+          const tools = document.querySelector('#collection-scroll-tools');
+          return tools.hidden === !((scroller.scrollWidth - scroller.clientWidth) > 2);
+        }""", timeout=5000)
         wide_layout = page.evaluate("""() => {
           const wrap = document.querySelector('.wrap');
           const scroller = document.querySelector('#collection-table-scroll');
@@ -1160,6 +1168,60 @@ def main() -> int:
               page.locator(".card-preview").evaluate("element => element.hidden"),
               "preview remained open after the second tap")
 
+        # --- #121: the narrow breakpoint reduces the matrix and restates the rest per row ---
+        narrow_columns = page.evaluate("""() => {
+          const shown = (sel) => {
+            const cell = document.querySelector('#rows tr:not(.rowdetail) ' + sel);
+            return cell ? getComputedStyle(cell).display !== 'none' : null;
+          };
+          return {
+            core: ['td.img', '.col-card', '.col-set', '.col-number', '.col-variant',
+                   '.col-finish', '.col-evidence'].map(shown),
+            withdrawn: ['.col-release', '.col-expansion', '.col-rarity', '.col-artist',
+                        '.col-edition', '.col-pattern', '.col-marking', '.col-marking-role',
+                        '.col-size', '.col-distribution', '.langcount', '.langcell'].map(shown),
+            more: shown('.col-more'),
+            detailRows: document.querySelectorAll('#rows tr.rowdetail').length,
+          };
+        }""")
+        check("narrow viewport keeps only the core identity and evidence columns",
+              all(narrow_columns["core"]) and not any(narrow_columns["withdrawn"])
+              and narrow_columns["more"], str(narrow_columns))
+        # Built on demand: a panel per row would double the table's rows for every reader.
+        check("row detail panels are not rendered until they are opened",
+              narrow_columns["detailRows"] == 0,
+              f"{narrow_columns['detailRows']} detail rows existed before any disclosure was used")
+
+        first_more = page.locator("#rows .rowmore").first
+        first_more.click()
+        page.wait_for_timeout(120)
+        detail_open = page.evaluate("""() => {
+          const button = document.querySelector('#rows .rowmore');
+          const panel = document.getElementById(button.getAttribute('aria-controls'));
+          const terms = panel ? [...panel.querySelectorAll('dt')].map((dt) => dt.textContent) : [];
+          return {
+            expanded: button.getAttribute('aria-expanded'),
+            visible: panel ? !panel.hidden && getComputedStyle(panel).display !== 'none' : false,
+            terms: terms,
+            hasLanguages: terms.includes('Confirmed languages'),
+            rowAfter: panel ? panel.previousElementSibling.contains(button) : false,
+          };
+        }""")
+        check("opening a row disclosure reveals the withdrawn values beneath that row",
+              detail_open["expanded"] == "true" and detail_open["visible"]
+              and detail_open["hasLanguages"] and detail_open["rowAfter"]
+              and len(detail_open["terms"]) >= 10, str(detail_open))
+
+        first_more.click()
+        page.wait_for_timeout(120)
+        check("closing a row disclosure hides it again",
+              page.evaluate("""() => {
+                const button = document.querySelector('#rows .rowmore');
+                return button.getAttribute('aria-expanded') === 'false'
+                  && document.getElementById(button.getAttribute('aria-controls')).hidden;
+              }"""),
+              "the panel stayed open after the second press")
+
         # --- #122: the filter row and the scroll tools each get their own narrow layout ---
         page.evaluate("scrollTo(0, 0)")
         page.wait_for_timeout(120)
@@ -1227,6 +1289,39 @@ def main() -> int:
         check("a wide viewport restores the full section navigation",
               not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["links"] == 7,
               str(nav_wide))
+
+        # --- #125: raw export of the current view ---
+        page.evaluate("""() => {
+          document.querySelector('#f-q').value = 'Jungle';
+          document.querySelector('#f-q').dispatchEvent(new Event('input', {bubbles: true}));
+        }""")
+        page.wait_for_timeout(200)
+        with page.expect_download() as download_info:
+            page.locator("#export-tsv").click()
+        download = download_info.value
+        export_path = scratch / "export.tsv"
+        download.save_as(export_path)
+        exported = export_path.read_text(encoding="utf-8-sig")
+        export_lines = [line for line in exported.splitlines() if line.strip()]
+        export_header = export_lines[0].split("\t") if export_lines else []
+        visible_after_filter = page.evaluate(
+            "() => document.querySelectorAll('#rows tr:not(.yearsep):not(.rowdetail)').length")
+        check("the export downloads a dated TSV of the filtered view",
+              download.suggested_filename.startswith("snoredex-collection-")
+              and download.suggested_filename.endswith(".tsv")
+              and len(export_lines) - 1 == visible_after_filter,
+              f"{download.suggested_filename}, {len(export_lines) - 1} data lines "
+              f"for {visible_after_filter} visible rows")
+        # Tabs are the whole reason this is TSV rather than CSV; a value containing one would
+        # silently shift every later column of that row.
+        check("the export is tab-separated with one column per language and no ragged rows",
+              export_header[:4] == ["Release", "Card", "Set", "No."]
+              and all(name in export_header for name in ("English", "Japanese"))
+              and all(len(line.split("\t")) == len(export_header) for line in export_lines[1:]),
+              f"header={export_header[:6]}… width={len(export_header)}")
+        check("the export starts with a UTF-8 BOM so spreadsheets read the accents",
+              export_path.read_bytes().startswith(b"\xef\xbb\xbf"),
+              "no BOM; a double-clicked file falls back to the local codepage")
 
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
