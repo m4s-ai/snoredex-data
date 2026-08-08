@@ -53,9 +53,14 @@ FINISH_LABEL = {
 # `secondary` columns are dropped when printing: 34 columns cannot fit A4 or US Letter, and a
 # print stylesheet that lets the table overflow silently truncates the right-hand side.
 COLUMNS = [
-    ("", None, "img"), ("Release", "release", ""), ("Card", "name", ""),
-    ("Set", "setCode", ""), ("Expansion", "setName", "secondary col-expansion"),
-    ("No.", "number", ""), ("Variant", "variant", "secondary col-variant"),
+    # Identity block first and contiguous: app.css pins these five to the left edge while the rest
+    # scrolls, and a sticky column can only start from the left edge with every column before it
+    # pinned too. "No." used to sit behind "Expansion", which would have forced the 10rem expansion
+    # column into the frozen pane to reach it. Set and number belong together anyway (#124).
+    ("", None, "img"), ("Release", "release", "col-release"), ("Card", "name", "col-card"),
+    ("Set", "setCode", "col-set"), ("No.", "number", "col-number"),
+    ("Expansion", "setName", "secondary col-expansion"),
+    ("Variant", "variant", "secondary col-variant"),
     ("Rarity", "rarity", "secondary col-rarity"),
     ("Artist", "artist", "secondary col-artist"),
     ("Edition", "edition", ""), ("Finish", "finish", ""),

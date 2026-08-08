@@ -1083,6 +1083,11 @@ def main() -> int:
               str(narrow_mobile))
 
         page.set_viewport_size({"width": 390, "height": 844})
+        # The scroll indication below describes a table the reader has not scrolled yet, so start it
+        # there. Earlier cases in this suite leave a horizontal offset behind, and the assertion used
+        # to pass only because that leftover happened to clamp to zero at this width — a column-order
+        # change in #124 was enough to land it mid-table and read "both sides" instead.
+        page.evaluate("() => { document.querySelector('#collection-table-scroll').scrollLeft = 0; }")
         page.wait_for_timeout(120)
         body_overflow = page.evaluate(
             "() => document.body.scrollWidth - document.body.clientWidth")

@@ -476,12 +476,14 @@
       : escapeHTML(row.dateDisplay);
     return (
       "<tr>" +
+      // Identity block, in the order and with the classes scripts/site.py emits for the header —
+      // app.css pins exactly these five columns, so the two must not drift apart (#124).
       '<td class="img">' + image + "</td>" +
-      "<td>" + release + "</td>" +
-      "<td>" + escapeHTML(row.name) + "</td>" +
-      "<td>" + escapeHTML(row.setCode) + "</td>" +
+      '<td class="col-release">' + release + "</td>" +
+      '<td class="col-card">' + escapeHTML(row.name) + "</td>" +
+      '<td class="col-set">' + escapeHTML(row.setCode) + "</td>" +
+      '<td class="col-number">' + escapeHTML(row.number || "—") + "</td>" +
       clippedCell(row.setName, "col-expansion") +
-      "<td>" + escapeHTML(row.number || "—") + "</td>" +
       clippedCell(variant, "col-variant") +
       clippedCell(row.rarity || "—", "col-rarity") +
       clippedCell(row.artist || "—", "col-artist") +

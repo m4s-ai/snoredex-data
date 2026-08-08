@@ -296,7 +296,55 @@ tr.yearsep td {
   overflow: visible; text-overflow: clip; white-space: normal; cursor: zoom-out;
 }
 
+/* Frozen identity pane (#124). Scrolling a 34-column table sideways used to carry the card's
+ * identity off the left edge, leaving a screen of finish and evidence values with nothing saying
+ * which printing they belong to. These five columns stay put instead.
+ *
+ * They need explicit widths because each `left` is the sum of the widths before it — that is also
+ * why they have to be the first five columns, and why scripts/site.py moved "No." up beside "Set".
+ * The widths are declared once here and consumed by the offsets directly below.
+ *
+ * From 1024px only: the pane costs 458px, which is affordable on a laptop and absurd on a phone,
+ * where the narrow-breakpoint work carries the layout instead. The edge and shadow match the
+ * already-pinned correction column on the right, so both frozen panes read the same way. */
+@media (min-width: 1024px) {
+  /* The pane totals 392px. It has to stay within what the matrix already had to spare: the suite
+   * asserts the whole 34-column table still fits a 2560px viewport, and a first attempt at 458px
+   * broke that by 49px. */
+  th.img, td.img { width: 48px; min-width: 48px; }
+  .col-release { width: 80px; min-width: 80px; }
+  .col-card { width: 152px; min-width: 152px; }
+  .col-set { width: 60px; min-width: 60px; }
+  .col-number { width: 52px; min-width: 52px; }
+
+  th.img, td.img, .col-release, .col-card, .col-set, .col-number {
+    position: sticky; z-index: 3; background: var(--bg);
+  }
+  thead th.img, thead .col-release, thead .col-card, thead .col-set, thead .col-number {
+    z-index: 4; background: var(--panel);
+  }
+  tbody tr:hover td.img, tbody tr:hover .col-release, tbody tr:hover .col-card,
+  tbody tr:hover .col-set, tbody tr:hover .col-number { background: var(--panel); }
+
+  th.img, td.img { left: 0; }
+  .col-release { left: 48px; }
+  .col-card { left: 128px; }
+  .col-set { left: 280px; }
+  .col-number { left: 340px; }
+
+  .col-number { border-right: 1px solid var(--control-line); box-shadow: 7px 0 8px -7px rgba(0, 0, 0, .3); }
+
+  /* The year separator spans every column, so it must not slide under the frozen pane. */
+  tr.yearsep td { position: static; }
+}
+
 @media (min-width: 2800px) {
+  /* Cap the line length rather than only widening columns further: past roughly this width the
+   * table stretched to the full viewport and the eye lost the row it was following. Left-aligned
+   * deliberately — centring would offset the table inside the scrollport while the pinned columns
+   * above stay anchored to that scrollport's left edge, and the two would separate. */
+  #collection-table { max-width: 2400px; }
+
   .col-expansion { width: calc(13rem + 10px); min-width: calc(13rem + 10px); }
   .col-variant { width: calc(11rem + 10px); min-width: calc(11rem + 10px); }
   .col-rarity { width: calc(8rem + 10px); min-width: calc(8rem + 10px); }
