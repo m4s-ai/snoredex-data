@@ -35,8 +35,13 @@
         <span class="theme-toggle-text">Theme</span>
       </button>
     </div>
-    <nav class="sections" aria-label="Sections">
-      <ul>
+    <nav class="sections" id="section-nav" aria-label="Sections">
+      <button type="button" class="nav-toggle" id="nav-toggle"
+        aria-expanded="false" aria-controls="section-nav-list">
+        <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+        <span class="nav-toggle-text">Sections</span>
+      </button>
+      <ul id="section-nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#collection">Collection</a></li>
         <li><a href="#checklist">Checklist</a></li>

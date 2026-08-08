@@ -1155,6 +1155,74 @@ def main() -> int:
               page.locator(".card-preview").evaluate("element => element.hidden"),
               "preview remained open after the second tap")
 
+        # --- #122: the filter row and the scroll tools each get their own narrow layout ---
+        page.evaluate("scrollTo(0, 0)")
+        page.wait_for_timeout(120)
+        narrow_controls = page.evaluate("""() => {
+          const fields = [...document.querySelectorAll('#collection .controls .row > .field')];
+          const boxes = fields.map((field) => field.getBoundingClientRect());
+          const tools = document.querySelector('#collection-scroll-tools').getBoundingClientRect();
+          const hint = document.querySelector('#collection-scroll-hint').getBoundingClientRect();
+          const actions = document.querySelector('#collection .scroll-actions').getBoundingClientRect();
+          return {
+            fields: boxes.length,
+            // Stacked means every field starts at the same x and none share a line.
+            sameLeft: boxes.every((box) => Math.abs(box.left - boxes[0].left) <= 1),
+            distinctRows: new Set(boxes.map((box) => Math.round(box.top))).size === boxes.length,
+            hintBottom: Math.round(hint.bottom), actionsTop: Math.round(actions.top),
+            toolsHeight: Math.round(tools.height),
+          };
+        }""")
+        check("narrow viewport stacks the collection filter fields",
+              narrow_controls["fields"] > 1 and narrow_controls["sameLeft"]
+              and narrow_controls["distinctRows"], str(narrow_controls))
+        # The overlap this replaced put the hint and the buttons on one 38px line at top:0.
+        check("narrow viewport gives the scroll hint and its buttons separate rows",
+              narrow_controls["actionsTop"] >= narrow_controls["hintBottom"] - 1
+              and narrow_controls["toolsHeight"] > 38, str(narrow_controls))
+
+        # --- #123: section navigation collapses behind a disclosure on a phone ---
+        nav_collapsed = page.evaluate("""() => ({
+          toggleShown: getComputedStyle(document.querySelector('#nav-toggle')).display !== 'none',
+          listShown: getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none',
+          expanded: document.querySelector('#nav-toggle').getAttribute('aria-expanded'),
+          controls: document.querySelector('#nav-toggle').getAttribute('aria-controls'),
+        })""")
+        check("narrow viewport collapses the section navigation behind a toggle",
+              nav_collapsed["toggleShown"] and not nav_collapsed["listShown"]
+              and nav_collapsed["expanded"] == "false"
+              and nav_collapsed["controls"] == "section-nav-list", str(nav_collapsed))
+
+        page.locator("#nav-toggle").click()
+        page.wait_for_timeout(80)
+        nav_opened = page.evaluate("""() => ({
+          listShown: getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none',
+          expanded: document.querySelector('#nav-toggle').getAttribute('aria-expanded'),
+        })""")
+        check("the section-navigation toggle opens the list and reports its state",
+              nav_opened["listShown"] and nav_opened["expanded"] == "true", str(nav_opened))
+
+        page.locator('#section-nav-list a[href="#checklist"]').click()
+        page.wait_for_timeout(80)
+        check("following a section link closes the navigation again",
+              page.evaluate(
+                  "() => document.querySelector('#nav-toggle').getAttribute('aria-expanded')")
+              == "false",
+              "the panel stayed open, so the target scrolled under it")
+
+        # Leaving the breakpoint must restore the plain list — the toggle is display:none there and
+        # could not undo a collapsed state.
+        page.set_viewport_size({"width": 1280, "height": 900})
+        page.wait_for_timeout(120)
+        nav_wide = page.evaluate("""() => ({
+          toggleShown: getComputedStyle(document.querySelector('#nav-toggle')).display !== 'none',
+          listShown: getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none',
+          links: document.querySelectorAll('#section-nav-list a').length,
+        })""")
+        check("a wide viewport restores the full section navigation",
+              not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["links"] == 7,
+              str(nav_wide))
+
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 

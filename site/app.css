@@ -111,6 +111,23 @@ nav.sections a {
 }
 nav.sections a:hover { border-bottom-color: var(--accent); }
 
+/* Overflow navigation (#123). Seven links wrap into a multi-line text stack at ~360px, which reads
+ * as body copy rather than as navigation. Collapsing them behind a disclosure keeps the masthead
+ * one line tall on a phone.
+ *
+ * Progressive enhancement, deliberately: the collapse only applies once the script has marked the
+ * nav with `js`. With JavaScript unavailable the links stay exactly as they are today — wrapped but
+ * complete — because a nav that hides itself and then cannot reopen is worse than a tall one. The
+ * button carries aria-expanded and the list keeps its own id so the relationship survives for
+ * assistive technology at every width. */
+.nav-toggle {
+  display: none; align-items: center; gap: 8px;
+  padding: 8px 12px; border: 1px solid var(--control-line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; font-weight: 600; cursor: pointer;
+}
+.nav-toggle:hover { border-color: var(--accent); }
+.nav-toggle-icon { font-size: 15px; line-height: 1; }
+
 section { scroll-margin-top: 12px; padding-top: 28px; }
 h2 { font-size: 20px; margin: 0 0 10px; }
 h3 { font-size: 16px; margin: 20px 0 8px; }
@@ -413,6 +430,35 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
   .scroll-hint { font-size: 11px; }
   .card-preview-trigger img { width: 34px; max-height: 48px; }
   .field input, .field select { min-width: 110px; }
+
+  /* #123 — only once the script has taken over the disclosure; see the note above .nav-toggle. */
+  nav.sections.js .nav-toggle { display: inline-flex; }
+  nav.sections.js ul { display: none; }
+  nav.sections.js.is-open ul { display: flex; flex-direction: column; gap: 0; margin-top: 6px; }
+  nav.sections.js.is-open a { padding: 10px 4px; border-bottom: 1px solid var(--line); }
+}
+
+/* Dedicated narrow breakpoint (#122). Below ~480px the filter row's flex-wrap leaves controls at
+ * inconsistent widths, and the scroll tools — hint on the left, buttons pushed right by
+ * margin-left:auto — no longer fit one 38px line. */
+@media (max-width: 480px) {
+  .controls .row, .builder .row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .field { width: 100%; }
+  .field input, .field select { width: 100%; min-width: 0; }
+  .field input[type="number"] { width: 100%; }
+  .field select[multiple] { width: 100%; }
+  .langgrid { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
+
+  /* Hint and buttons take a row each rather than competing for one 38px line.
+   *
+   * This is the whole fix for the top:0 overlap. Offsetting the table's own `thead` to sit below
+   * the tools was tried and reverted: the visible sticky heading is the fixed `.table-sticky-header`
+   * overlay, which app.js already positions at the measured tool height, so the native thead is
+   * covered anyway. Pushing it down only made it overhang the first body row and swallow the taps
+   * meant for that row's card-preview button. */
+  .table-scroll-tools { flex-wrap: wrap; row-gap: 4px; }
+  .scroll-hint { flex: 1 0 100%; }
+  .scroll-actions { margin-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
