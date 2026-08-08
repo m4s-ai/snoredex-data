@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-04",
+  "generated": "2026-08-05",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -9,7 +9,7 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 20,
+   "providers": 21,
    "evidenceRecords": 883,
    "uniqueUrls": 876,
    "nonUrlEvidenceClasses": 7,
@@ -206,6 +206,32 @@
    ],
    "uniqueSources": 2,
    "claimsSupported": 3
+  },
+  {
+   "providerId": "52poke",
+   "displayName": "52poke (Wiki)",
+   "organization": "52Poké (神奇宝贝百科)",
+   "homepage": "https://wiki.52poke.com",
+   "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.",
+   "category": "collector-database",
+   "authorityTier": 2,
+   "coverage": "Traditional-Chinese / Simplified-Chinese market card and set data (卡比獸/Munchlax-family and set composition)",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "artist",
+    "edition",
+    "finish"
+   ],
+   "attribution": "T-Chinese/S-Chinese card data from 52poke Wiki.",
+   "notes": "Added on the owner's recommendation (#84, 2026-08-04) as the trustworthy source for T-Chinese products. Category coverage: dedicated Chinese-market wiki. Absence-capable scopes are NOT declared, so silence here never contradicts a T-Chinese claim on its own — positive evidence only. Static image host s1.52poke.com is reachable without bot protection; the wiki pages themselves sit behind a JS challenge.",
+   "hosts": [
+    "wiki.52poke.com",
+    "s1.52poke.com",
+    "s2.52poke.com"
+   ],
+   "uniqueSources": 0,
+   "claimsSupported": 0
   },
   {
    "providerId": "koreanpokemoncards",
