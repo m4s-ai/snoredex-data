@@ -188,3 +188,38 @@ and exits 0.** A `|| echo FAIL` wrapper around it stays silent. The workflow cat
 it runs as its own step under `-e`.
 
 *PR #106.*
+
+---
+
+## The gate asked for a byte match SQLite cannot give
+
+**Trap:** *`git diff --exit-code` in the documented gate excludes `*.sqlite`, and must keep doing so.*
+
+The pre-PR gate in `CLAUDE.md` regenerated `snoredex.sqlite` and the tracker template for real and
+then byte-diffed the whole tree. On a clean `main` that reported drift in both files — not because
+anything was stale, but because a SQLite file stores the version number of the library that wrote it
+in its own header. Two environments on different SQLite builds cannot produce the same bytes from
+the same data.
+
+Measured, rather than assumed: the committed database carried `SQLITE_VERSION_NUMBER` 3053001 and a
+local rebuild wrote 3045001, and **128,107 of 2,600,960 bytes differed while `iterdump()` matched
+line for line**. Three consecutive rebuilds in one environment were byte-identical, so the
+generators are deterministic; they simply cannot be deterministic across versions, and `VACUUM`
+does not change that — the header field is written regardless.
+
+The defect was in the document, not the pipeline — and the pipeline had known all along. The
+docstring on `sqlite_dump()` in `scripts/database.py` says page layouts differ between the Windows
+and Linux SQLite builds "even when every schema object and row is identical", which is why `--check`
+compares the logical dump rather than a file hash. CI has only ever run `database.py --check` and
+`tracker.py check-template` on these two artifacts, so it never saw the drift and never could.
+
+That is the part worth remembering: this was not a gap in what the project knew, it was a fact that
+lived in one generator's docstring and never reached the document telling people what to run. The
+mirror of [the eight-generator loop](#the-eight-generator-loop-is-not-the-gate) — there the document
+was looser than CI and work reached main unchecked, here it was stricter and reported a defect that
+did not exist. Both came from the document and the workflow describing different steps.
+
+**Now guarded by** `D5`, which fails if the documented gate byte-diffs those artifacts again. Their
+content stays covered by the two `--check` steps, which is the property that can actually hold.
+
+*PR #130.*
