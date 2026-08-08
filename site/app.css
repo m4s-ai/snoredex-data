@@ -111,6 +111,23 @@ nav.sections a {
 }
 nav.sections a:hover { border-bottom-color: var(--accent); }
 
+/* Overflow navigation (#123). Seven links wrap into a multi-line text stack at ~360px, which reads
+ * as body copy rather than as navigation. Collapsing them behind a disclosure keeps the masthead
+ * one line tall on a phone.
+ *
+ * Progressive enhancement, deliberately: the collapse only applies once the script has marked the
+ * nav with `js`. With JavaScript unavailable the links stay exactly as they are today — wrapped but
+ * complete — because a nav that hides itself and then cannot reopen is worse than a tall one. The
+ * button carries aria-expanded and the list keeps its own id so the relationship survives for
+ * assistive technology at every width. */
+.nav-toggle {
+  display: none; align-items: center; gap: 8px;
+  padding: 8px 12px; border: 1px solid var(--control-line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; font-weight: 600; cursor: pointer;
+}
+.nav-toggle:hover { border-color: var(--accent); }
+.nav-toggle-icon { font-size: 15px; line-height: 1; }
+
 section { scroll-margin-top: 12px; padding-top: 28px; }
 h2 { font-size: 20px; margin: 0 0 10px; }
 h3 { font-size: 16px; margin: 20px 0 8px; }
@@ -279,7 +296,55 @@ tr.yearsep td {
   overflow: visible; text-overflow: clip; white-space: normal; cursor: zoom-out;
 }
 
+/* Frozen identity pane (#124). Scrolling a 34-column table sideways used to carry the card's
+ * identity off the left edge, leaving a screen of finish and evidence values with nothing saying
+ * which printing they belong to. These five columns stay put instead.
+ *
+ * They need explicit widths because each `left` is the sum of the widths before it — that is also
+ * why they have to be the first five columns, and why scripts/site.py moved "No." up beside "Set".
+ * The widths are declared once here and consumed by the offsets directly below.
+ *
+ * From 1024px only: the pane costs 458px, which is affordable on a laptop and absurd on a phone,
+ * where the narrow-breakpoint work carries the layout instead. The edge and shadow match the
+ * already-pinned correction column on the right, so both frozen panes read the same way. */
+@media (min-width: 1024px) {
+  /* The pane totals 392px. It has to stay within what the matrix already had to spare: the suite
+   * asserts the whole 34-column table still fits a 2560px viewport, and a first attempt at 458px
+   * broke that by 49px. */
+  th.img, td.img { width: 48px; min-width: 48px; }
+  .col-release { width: 80px; min-width: 80px; }
+  .col-card { width: 152px; min-width: 152px; }
+  .col-set { width: 60px; min-width: 60px; }
+  .col-number { width: 52px; min-width: 52px; }
+
+  th.img, td.img, .col-release, .col-card, .col-set, .col-number {
+    position: sticky; z-index: 3; background: var(--bg);
+  }
+  thead th.img, thead .col-release, thead .col-card, thead .col-set, thead .col-number {
+    z-index: 4; background: var(--panel);
+  }
+  tbody tr:hover td.img, tbody tr:hover .col-release, tbody tr:hover .col-card,
+  tbody tr:hover .col-set, tbody tr:hover .col-number { background: var(--panel); }
+
+  th.img, td.img { left: 0; }
+  .col-release { left: 48px; }
+  .col-card { left: 128px; }
+  .col-set { left: 280px; }
+  .col-number { left: 340px; }
+
+  .col-number { border-right: 1px solid var(--control-line); box-shadow: 7px 0 8px -7px rgba(0, 0, 0, .3); }
+
+  /* The year separator spans every column, so it must not slide under the frozen pane. */
+  tr.yearsep td { position: static; }
+}
+
 @media (min-width: 2800px) {
+  /* Cap the line length rather than only widening columns further: past roughly this width the
+   * table stretched to the full viewport and the eye lost the row it was following. Left-aligned
+   * deliberately — centring would offset the table inside the scrollport while the pinned columns
+   * above stay anchored to that scrollport's left edge, and the two would separate. */
+  #collection-table { max-width: 2400px; }
+
   .col-expansion { width: calc(13rem + 10px); min-width: calc(13rem + 10px); }
   .col-variant { width: calc(11rem + 10px); min-width: calc(11rem + 10px); }
   .col-rarity { width: calc(8rem + 10px); min-width: calc(8rem + 10px); }
@@ -403,6 +468,23 @@ details.sourcelist li { margin-bottom: 3px; word-break: break-all; }
 #methodology a { overflow-wrap: anywhere; }
 footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 16px; color: var(--muted); font-size: 13px; }
 
+/* Narrow-screen column reduction (#121). Above the breakpoint the disclosure column and its panels
+ * are not rendered at all — every value they carry is already a column on screen. */
+.col-more, tr.rowdetail { display: none; }
+.rowmore {
+  padding: 4px 8px; border: 1px solid var(--control-line); border-radius: 5px;
+  background: var(--bg); color: var(--fg); font: inherit; font-size: 11px; font-weight: 600;
+  white-space: nowrap; cursor: pointer;
+}
+.rowmore:hover { border-color: var(--accent); color: var(--accent); }
+.rowdetail-list {
+  display: grid; grid-template-columns: minmax(7.5rem, auto) 1fr;
+  gap: 2px 10px; margin: 0; padding: 4px 2px; font-size: 12px;
+}
+.rowdetail-list dt { color: var(--muted); font-weight: 600; }
+.rowdetail-list dd { margin: 0; white-space: normal; overflow-wrap: anywhere; }
+.rowdetail-list .detail-count { color: var(--muted); }
+
 @media (max-width: 720px) {
   .wrap { padding: 0 10px 48px; }
   .masthead-row { align-items: flex-start; gap: 10px; }
@@ -413,6 +495,53 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
   .scroll-hint { font-size: 11px; }
   .card-preview-trigger img { width: 34px; max-height: 48px; }
   .field input, .field select { min-width: 110px; }
+
+  /* #121 — the 34-column matrix reduced to what identifies a printing and what the page is read
+   * for. Everything withdrawn here is restated by the per-row panel, so nothing becomes
+   * unreachable; the language matrix in particular conveys presence by column position, which a
+   * phone cannot show, and the panel names the confirmed languages instead. */
+  .col-release, .col-expansion, .col-rarity, .col-artist, .col-edition,
+  .col-pattern, .col-marking, .col-marking-role, .col-size, .col-distribution,
+  .langcount, .langcell { display: none; }
+  .col-more { display: table-cell; }
+  tr.rowdetail:not([hidden]) { display: table-row; }
+  tr.rowdetail > td { white-space: normal; background: var(--panel); }
+  /* The retained columns keep the fixed widths meant for a 34-column desktop matrix, which alone
+   * overflowed a phone by ~530px. Here they wrap to the space available instead. */
+  .col-card, .col-variant, .col-evidence, .col-finish {
+    width: auto; min-width: 0; white-space: normal;
+  }
+  .col-evidence { max-width: 11rem; }
+  .col-more { width: 1%; }
+
+  /* #123 — only once the script has taken over the disclosure; see the note above .nav-toggle. */
+  nav.sections.js .nav-toggle { display: inline-flex; }
+  nav.sections.js ul { display: none; }
+  nav.sections.js.is-open ul { display: flex; flex-direction: column; gap: 0; margin-top: 6px; }
+  nav.sections.js.is-open a { padding: 10px 4px; border-bottom: 1px solid var(--line); }
+}
+
+/* Dedicated narrow breakpoint (#122). Below ~480px the filter row's flex-wrap leaves controls at
+ * inconsistent widths, and the scroll tools — hint on the left, buttons pushed right by
+ * margin-left:auto — no longer fit one 38px line. */
+@media (max-width: 480px) {
+  .controls .row, .builder .row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .field { width: 100%; }
+  .field input, .field select { width: 100%; min-width: 0; }
+  .field input[type="number"] { width: 100%; }
+  .field select[multiple] { width: 100%; }
+  .langgrid { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
+
+  /* Hint and buttons take a row each rather than competing for one 38px line.
+   *
+   * This is the whole fix for the top:0 overlap. Offsetting the table's own `thead` to sit below
+   * the tools was tried and reverted: the visible sticky heading is the fixed `.table-sticky-header`
+   * overlay, which app.js already positions at the measured tool height, so the native thead is
+   * covered anyway. Pushing it down only made it overhang the first body row and swallow the taps
+   * meant for that row's card-preview button. */
+  .table-scroll-tools { flex-wrap: wrap; row-gap: 4px; }
+  .scroll-hint { flex: 1 0 100%; }
+  .scroll-actions { margin-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -53,12 +53,17 @@ FINISH_LABEL = {
 # `secondary` columns are dropped when printing: 34 columns cannot fit A4 or US Letter, and a
 # print stylesheet that lets the table overflow silently truncates the right-hand side.
 COLUMNS = [
-    ("", None, "img"), ("Release", "release", ""), ("Card", "name", ""),
-    ("Set", "setCode", ""), ("Expansion", "setName", "secondary col-expansion"),
-    ("No.", "number", ""), ("Variant", "variant", "secondary col-variant"),
+    # Identity block first and contiguous: app.css pins these five to the left edge while the rest
+    # scrolls, and a sticky column can only start from the left edge with every column before it
+    # pinned too. "No." used to sit behind "Expansion", which would have forced the 10rem expansion
+    # column into the frozen pane to reach it. Set and number belong together anyway (#124).
+    ("", None, "img"), ("Release", "release", "col-release"), ("Card", "name", "col-card"),
+    ("Set", "setCode", "col-set"), ("No.", "number", "col-number"),
+    ("Expansion", "setName", "secondary col-expansion"),
+    ("Variant", "variant", "secondary col-variant"),
     ("Rarity", "rarity", "secondary col-rarity"),
     ("Artist", "artist", "secondary col-artist"),
-    ("Edition", "edition", ""), ("Finish", "finish", ""),
+    ("Edition", "edition", "col-edition"), ("Finish", "finish", "col-finish"),
     ("Pattern", "pattern", "secondary col-pattern"),
     ("Stamp / marking", "marking", "secondary col-marking"),
     ("Marking role", "markingRole", "secondary col-marking-role"),
@@ -460,6 +465,9 @@ def main() -> int:
             f'<button type="button" class="sort" data-key="lang-{LANG_CODE[lang]}" '
             f'aria-label="Sort by {html.escape(lang)} availability">{LANG_CODE[lang]}</button></th>'
         )
+    # Narrow-screen disclosure column (#121). Hidden above the narrow breakpoint, where every column
+    # it stands in for is on screen already.
+    head_cells.append('<th scope="col" class="col-more"><span class="sr">Details</span></th>')
     head_cells.append('<th scope="col" class="corr">Report</th>')
 
     providers_rows = "\n".join(
@@ -528,8 +536,13 @@ def main() -> int:
         <span class="theme-toggle-text">Theme</span>
       </button>
     </div>
-    <nav class="sections" aria-label="Sections">
-      <ul>
+    <nav class="sections" id="section-nav" aria-label="Sections">
+      <button type="button" class="nav-toggle" id="nav-toggle"
+        aria-expanded="false" aria-controls="section-nav-list">
+        <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+        <span class="nav-toggle-text">Sections</span>
+      </button>
+      <ul id="section-nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#collection">Collection</a></li>
         <li><a href="#checklist">Checklist</a></li>
@@ -600,6 +613,7 @@ def main() -> int:
       <div class="field"><label for="f-langMin">Min langs</label><input id="f-langMin" type="number" min="0" max="17"></div>
       <div class="field"><label for="f-langMax">Max langs</label><input id="f-langMax" type="number" min="0" max="17"></div>
       <button type="button" class="ghost" id="reset">Reset all</button>
+      <button type="button" class="ghost" id="export-tsv">Export TSV</button>
     </div>
     <details class="morefilters">
       <summary>Column filters</summary>
