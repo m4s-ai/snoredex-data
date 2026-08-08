@@ -2228,6 +2228,37 @@ def collect() -> None:
             f"{len(shared)} heading(s) duplicated across auto/task documents: {shared[:6]} (#103).",
         )
 
+        # D5 — the documented gate may not demand a byte match SQLite cannot give (#127)
+        # --------------------------------------------------------------------------- #
+        # A SQLite file records the version number of the library that wrote it in its own header,
+        # so two environments on different builds produce different bytes from identical data. The
+        # documented gate regenerated both .sqlite artifacts for real and then byte-diffed the whole
+        # tree, which reported drift on a clean main every time the local SQLite differed from the
+        # one that last wrote them. CI never saw it: it runs `database.py --check` and
+        # `tracker.py check-template`, which compare content.
+        #
+        # Checked as an absence, which is unusual here and deliberate. The property worth holding is
+        # that nobody restores a bare `git diff --exit-code`, and it is the restoring that has to
+        # fail — not some artifact of how the exclusion happens to be spelled today.
+        # Command lines only. Prose elsewhere in the document names the step while describing what
+        # the Windows leg covers, and a sentence about the gate is not the gate.
+        gate_diffs = [
+            line.strip() for line in (ROOT / "CLAUDE.md").read_text(encoding="utf-8").splitlines()
+            if line.strip().startswith("git diff --exit-code")
+        ]
+        unscoped = [line for line in gate_diffs if "sqlite" not in line]
+        check(
+            "D5",
+            "The documented gate never byte-diffs the SQLite artifacts",
+            "FAIL",
+            bool(gate_diffs) and not unscoped,
+            f"{len(unscoped)} documented `git diff --exit-code` line(s) do not exclude *.sqlite: "
+            f"{unscoped}. Those files cannot reproduce byte-for-byte across SQLite versions; their "
+            f"content is covered by `database.py --check` and `tracker.py check-template` instead."
+            if unscoped else
+            "CLAUDE.md states no gate diff at all, so the gate it documents cannot be run.",
+        )
+
 
 # --------------------------------------------------------------------------- #
 # Report

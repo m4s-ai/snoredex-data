@@ -210,8 +210,19 @@ python verification/test_site.py                 # browser acceptance tests
 python verification/verify_finish_sources.py     # live TCGCSV assertions
 python scripts/publish.py --out _site             # build the artifact, THEN verify it
 python scripts/publish.py --out _site --verify    # --verify, not --check; exits 1 without --out
-git diff --exit-code                             # a generator whose output moves fails here
+git diff --exit-code -- . ':(exclude)*.sqlite'   # a generator whose output moves fails here
 ```
+
+**The `.sqlite` files are excluded from that diff, and always must be.** A SQLite file records the
+version number of the library that wrote it in its own header, so two environments running different
+SQLite builds produce different bytes from identical data — measured here as 128,107 differing bytes
+between SQLite 3.53.1 and 3.45.1 whose `iterdump()` output was identical line for line. Regeneration
+is deterministic *within* one version and cannot be made deterministic *across* versions, `VACUUM`
+included. `scripts/database.py` has always known this — `sqlite_dump()` exists precisely so `--check`
+compares the logical dump instead of a file hash — and CI has only ever run `database.py --check` and
+`tracker.py check-template` on these two. This line is what makes the documented gate agree with the
+pipeline it describes ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
+Their content is still covered, by those two checks, against what is committed.
 
 **`tracker.py check-template` prints its failure and exits 0.** Wrapping it in `|| echo FAIL`
 stays silent; CI catches it only by running it as its own step under `-e`. Check its output, not its
