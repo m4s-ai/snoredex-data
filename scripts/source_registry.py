@@ -176,6 +176,21 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Indexes English names only. Absence never contradicts a Western language.",
     },
     {
+        "providerId": "52poke",
+        "displayName": "52poke (Wiki)",
+        "organization": "52Poké (神奇宝贝百科)",
+        "homepage": "https://wiki.52poke.com",
+        "hosts": ["wiki.52poke.com", "s1.52poke.com", "s2.52poke.com"],
+        "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.",
+        "category": "collector-database",
+        "authorityTier": 2,
+        "coverage": "Traditional-Chinese / Simplified-Chinese market card and set data (卡比獸/Munchlax-family and set composition)",
+        "supportsAbsence": False,
+        "usedFor": ["language", "artist", "edition", "finish"],
+        "attribution": "T-Chinese/S-Chinese card data from 52poke Wiki.",
+        "notes": "Added on the owner's recommendation (#84, 2026-08-04) as the trustworthy source for T-Chinese products. Category coverage: dedicated Chinese-market wiki. Absence-capable scopes are NOT declared, so silence here never contradicts a T-Chinese claim on its own — positive evidence only. Static image host s1.52poke.com is reachable without bot protection; the wiki pages themselves sit behind a JS challenge.",
+    },
+    {
         # Added on the owner's recommendation (#88): "add this site as source - use it as starting
         # point for further research of korean pokemon cards." Korean is the market the toolchain
         # reaches worst — TCGdex serves a `ko` locale but holds one Snorlax-family record, and it
@@ -401,6 +416,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"photograph", re.I), "inspected-specimen"),
     (re.compile(r"owner attestation", re.I), "owner-attestation"),
     (re.compile(r"bulbapedia", re.I), "bulbapedia"),
+    (re.compile(r"52poke|51poke|s1\\.52poke\\.com|s2\\.52poke\\.com", re.I), "52poke"),
     (re.compile(r"tcgdex", re.I), "tcgdex"),
     (re.compile(r"pokemon-card\.com|official pokemon japan", re.I), "pokemon-card-jp"),
     (re.compile(r"asia\.pokemon-card|official pokemon asia", re.I), "pokemon-card-asia"),

@@ -19,6 +19,7 @@ gap, never a finding.
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 17 | 17 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
 | **The Pokémon Company official checklists** | official-publisher | 1 | yes | 4 | 12 | finish, product |
+| **52poke (Wiki)** | collector-database | 2 | no | 0 | 0 | language, artist, edition, finish |
 | **Bulbapedia** | fan-wiki | 2 | no | 88 | 694 | language, edition, date, finish |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 0 | 0 | language, finish |
 | **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 50 | language, finish, edition |
@@ -83,6 +84,15 @@ gap, never a finding.
 - **Absence-capable source scopes:** <https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf>, <https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf>, <https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf>, <https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf>
 - **Attribution:** Official product checklists © The Pokémon Company International.
 - **Notes:** The only source permitted to establish that a finish is absent, and only inside its stated scope.
+
+### 52poke (Wiki) — <https://wiki.52poke.com>
+
+- **Organization:** 52Poké (神奇宝贝百科)
+- **Terms:** Wiki content; attribution per CC BY-NC-SA.
+- **Coverage:** Traditional-Chinese / Simplified-Chinese market card and set data (卡比獸/Munchlax-family and set composition)
+- **Can establish absence:** no — positive evidence only
+- **Attribution:** T-Chinese/S-Chinese card data from 52poke Wiki.
+- **Notes:** Added on the owner's recommendation (#84, 2026-08-04) as the trustworthy source for T-Chinese products. Category coverage: dedicated Chinese-market wiki. Absence-capable scopes are NOT declared, so silence here never contradicts a T-Chinese claim on its own — positive evidence only. Static image host s1.52poke.com is reachable without bot protection; the wiki pages themselves sit behind a JS challenge.
 
 ### Bulbapedia — <https://bulbapedia.bulbagarden.net>
 
