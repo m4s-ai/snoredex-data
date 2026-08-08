@@ -116,9 +116,9 @@ Status snapshot: **2026-08-08**, after the database review and release-readiness
 |---|---|
 | Cardmarket catalogue | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Language verification | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Physical checklist | **839 items** across 174 cards and 15 languages: 665 documented printings plus 174 explicit unresolved placeholders. |
-| Finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 126 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 221 units. |
-| Evidence registry | **21 providers**, 883 evidence records, 876 unique URLs, and 2,787 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
+| Physical checklist | **839 items** across 174 cards and 15 languages: 666 documented printings plus 173 explicit unresolved placeholders. |
+| Finish evidence | **637 card-number × language units**: 333 externally confirmed, 103 marketplace-only positives, 125 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 220 units. |
+| Evidence registry | **22 providers**, 884 evidence records, 877 unique URLs, and 2,789 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -142,7 +142,7 @@ agreed independently, and `verification/source_registry.json` records the author
 | Tier | Sources |
 |---|---|
 | 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | 52poke (Wiki) · Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · TCGdex · pokemontcg.io |
+| 2 | 52poke (Wiki) · Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · TCGdex · pokemontcg.io |
 | 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · koreanpokemoncards.com · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
@@ -280,7 +280,7 @@ complete official manifest — which a handful of English units have — may say
 <!-- generated:finish-coverage — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Known available finish | Set-number-language units |
 |---|---:|
-| Non-Holo | 270 |
+| Non-Holo | 271 |
 | Holo | 144 |
 | Reverse Holo family | 243 |
 | Both Non-Holo and Holo | 18 |

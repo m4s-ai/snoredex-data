@@ -176,6 +176,34 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Indexes English names only. Absence never contradicts a Western language.",
     },
     {
+        # Added on the owner's evidence in #119: a Japanese secondhand marketplace whose listings
+        # photograph the actual card rather than reusing a stock image. That is the whole value —
+        # for a fixed-deck Japanese product neither TCGdex nor the official card database records a
+        # finish (FINISH_SOURCES.md: the JP card page carries no finish vocabulary at all), so a
+        # photograph of the card face is the only route to one.
+        #
+        # Tier 2 for the same reason cardmarket-listing-photo is: the card text is legible and the
+        # printing identifiable, but the listing cannot be re-examined once it sells, and the seller
+        # may have mislabelled it. Filed as a SPEC record so the observation outlives the listing.
+        "providerId": "snkrdunk",
+        "displayName": "SNKRDUNK",
+        "organization": "SODA Inc.",
+        "homepage": "https://snkrdunk.com",
+        "hosts": ["snkrdunk.com", "cdn.snkrdunk.com"],
+        "licenseOrTerms": "Marketplace listing content; listing photographs are the seller's.",
+        "category": "marketplace",
+        "authorityTier": 2,
+        "coverage": "individual Japanese-market cards whose finish and card text were read from a "
+                    "seller's listing photograph",
+        "supportsAbsence": False,
+        "usedFor": ["finish", "language"],
+        "attribution": "Card photographs from SNKRDUNK marketplace listings.",
+        "notes": "Positive evidence only, and no absence scopes are declared: a card missing from "
+                 "this marketplace says nothing about whether it was printed. Listings are removed "
+                 "once sold, so every use must be recorded as a SPEC-nnnn specimen with the listing "
+                 "URL and the image bytes committed, never as a bare link.",
+    },
+    {
         "providerId": "52poke",
         "displayName": "52poke (Wiki)",
         "organization": "52Poké (神奇宝贝百科)",

@@ -52,18 +52,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 332,
+      "withConfirmedFinish": 333,
       "withOnlyMarketplaceClaim": 103,
-      "pendingFinish": 126,
+      "pendingFinish": 125,
       "notApplicableFinish": 76,
       "withCompleteManifest": 4,
-      "withNonHolo": 270,
+      "withNonHolo": 271,
       "withHolo": 144,
       "withReverseHolo": 234,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 18,
-      "withUnresolvedProductMapping": 163,
-      "withAnyUnresolvedDetail": 221,
+      "withUnresolvedProductMapping": 162,
+      "withAnyUnresolvedDetail": 220,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -16008,23 +16008,45 @@
           "image": "images/mP1_012_Snorlax_864080.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": {
+            "kind": "fixed-deck",
+            "text": "Start Deck 100 Battle Collection CoroCiao Version"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
+              "sourceType": "SNKRDUNK marketplace listing photograph (identified physical printing)",
+              "evidence": "Seller listing \"[A]Snorlax [MP1 012/23](The Start Deck 100 \\\"Battle Collection Coro Ciao Ver.\\\")\" photographs the card face: mP1 012/023, Illus. Ounishi, regulation mark H, and a uniformly matte surface with no foil pattern. Recorded as specimen SPEC-0025 so the observation outlives the listing."
+            }
+          ],
+          "printingId": "F0231-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0232",

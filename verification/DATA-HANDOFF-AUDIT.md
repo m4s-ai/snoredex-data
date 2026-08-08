@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-08-08** · SQLite schema: **1.1.0** · source fingerprint:
-`831724f16e2dfe2a…`
+`6bb30b11cd457799…`
 
 ## Outcome
 
@@ -19,8 +19,8 @@ normalized current-state projection. It contains no evidence journal and no migr
 | Repository language verdicts | 634 confirmed · 85 contradicted |
 | App language statuses | 58 not-printed · 27 disputed (58 owner-adjudicated) |
 | Established product-edition rows | 658 (58 absent-language and 27 unverified-language projections suppressed) |
-| Finish units / logical printings | 637 / 692 |
-| Physical checklist | 839 (665 documented · 174 unresolved placeholders) |
+| Finish units / logical printings | 637 / 693 |
+| Physical checklist | 839 (666 documented · 173 unresolved placeholders) |
 | Release rows without row-level source | 142 / 203 |
 | Products without established artist | 82 |
 | Opaque V-token products without a physical variant name | 59 |
