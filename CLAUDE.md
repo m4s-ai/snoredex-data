@@ -59,7 +59,7 @@ correction already made here, and reading it is how you avoid repeating one.
    itself, and 5 resolved units do — never report a lone tier-3 source as a rule violation, and
    never state the tiers more strictly than this ([LESSONS](LESSONS.md#a-rule-stated-more-strictly-than-the-check-enforces)).
    `E4` fails when the attestation count stops matching the data. Prefer corroboration where it
-   exists — it covers 39 of 719 units, so it usually does not.
+   exists — it covers 38 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in
@@ -128,7 +128,7 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
 - **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
   outside source disagrees with Cardmarket. Only two things settle it: a complete official manifest
   within its scope, or an explicit owner adjudication. Everything else is **disputed** — currently
-  **57 settled and 27 disputed** — and `DATABASE.md` is right that an application must not read
+  **57 settled and 28 disputed** — and `DATABASE.md` is right that an application must not read
   disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every generator;
   cards carry `languagesNotPrinted` and `languagesDisputed` beside `languagesContradicted`, and
   checks `E8`/`E9`/`E10` keep the split honest. Both are excluded from the checklist, because the

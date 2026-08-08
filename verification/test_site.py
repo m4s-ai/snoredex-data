@@ -658,10 +658,20 @@ def main() -> int:
         technical_mirror_rows = page.evaluate("""() => JSON.parse(
           document.getElementById('data-rows').textContent
         ).filter(r => r.technicalFinishes.includes('mirror-holo'))""")
+        # The property, not the tally. This asserted `== 4` and broke the moment TCGdex began
+        # reporting a mirror finish for SV-P/ID 117 Indonesian — genuine new evidence, arriving at a
+        # check that treated the then-current count as the specification. Nothing about the
+        # behaviour had moved: all six rows kept the technical value and presented Reverse Holo.
+        # The named sets stay pinned, because losing *those* would be the real regression.
+        mirror_row_ids = {row["rowId"] for row in technical_mirror_rows}
+        known_mirror_rows = {
+            "xsv2a-143-v1-none", "xsv2a-143-v2-none", "xm2a-136-v1-none", "xm2a-136-v2-none",
+        }
         check("technical mirror-holo evidence remains in the embedded audit projection",
-              len(technical_mirror_rows) == 4
+              known_mirror_rows <= mirror_row_ids
               and all("reverse-holo" in row["finishes"] and "mirror-holo" not in row["finishes"]
                       for row in technical_mirror_rows),
+              f"missing={sorted(known_mirror_rows - mirror_row_ids)}; "
               f"technical mirror rows: {[(r['rowId'], r['finishes']) for r in technical_mirror_rows]}")
 
         page.select_option("#f-finish", ["reverse-holo"])

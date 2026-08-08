@@ -21,12 +21,12 @@
     ],
     "verification": {
       "description": "Every card x language x variant claim was checked against sources outside Cardmarket. See verification/RESUME.md.",
-      "confirmed": 635,
-      "contradicted": 84,
+      "confirmed": 634,
+      "contradicted": 85,
       "needsManualReview": 0,
       "open": 0,
       "totalUnits": 719,
-      "lastUpdated": "2026-08-03"
+      "lastUpdated": "2026-08-08"
     },
     "editionRuleset": {
       "westernFirstEdition": "Base Set through Neo Destiny except Base Set 2 (WOTC, English+European)",
@@ -37,20 +37,20 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-08-03",
+      "lastUpdated": "2026-08-08",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 331,
+      "withConfirmedFinish": 332,
       "withOnlyMarketplaceClaim": 103,
-      "pendingFinish": 128,
-      "notApplicableFinish": 75,
+      "pendingFinish": 126,
+      "notApplicableFinish": 76,
       "withCompleteManifest": 4,
       "withNonHolo": 270,
       "withHolo": 144,
       "withReverseHolo": 234,
-      "withMirrorHolo": 8,
+      "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 18,
-      "withUnresolvedProductMapping": 165,
-      "withAnyUnresolvedDetail": 223,
+      "withUnresolvedProductMapping": 163,
+      "withAnyUnresolvedDetail": 221,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     }
@@ -39438,47 +39438,50 @@
           },
           {
             "language": "T-Chinese",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [],
             "finishStatus": {
-              "non-holo": "pending",
-              "holo": "pending",
-              "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
-              "holo": "pending",
-              "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0501",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "not-applicable",
             "printings": []
           }
         ]
       },
       "languagesConfirmed": [
         "Japanese",
-        "Korean",
+        "Korean"
+      ],
+      "languagesContradicted": [
         "T-Chinese"
       ],
-      "languagesContradicted": [],
       "languagesUnresolved": [],
       "languageVerification": {
         "status": "resolved",
         "claimed": 3,
-        "confirmed": 3,
-        "contradicted": 0,
+        "confirmed": 2,
+        "contradicted": 1,
         "notPrinted": 0,
-        "disputed": 0,
+        "disputed": 1,
         "unresolved": 0,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for printings backed by an outside source. An unresolved language is not yet established, never proven absent. languagesContradicted splits into languagesNotPrinted, where an owner adjudication or a complete official manifest settled the question, and languagesDisputed, where a source disagrees and nothing has settled it — do not read disputed as 'does not exist'."
       },
       "languagesNotPrinted": [],
-      "languagesDisputed": []
+      "languagesDisputed": [
+        "T-Chinese"
+      ]
     },
     {
       "name": "Snorlax",
@@ -40679,31 +40682,50 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "confirmed",
+        "availableFinishes": [
+          "mirror-holo"
+        ],
+        "unitAvailableFinishes": [
+          "mirror-holo"
+        ],
         "byLanguage": [
           {
             "language": "Indonesian",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "mirror-holo"
+            ],
+            "unitAvailableFinishes": [
+              "mirror-holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
               "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0457",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0457-P02",
+                "finish": "mirror-holo",
+                "foilPattern": "poke-ball",
+                "markings": null,
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              }
+            ]
           }
         ]
       },
@@ -41842,31 +41864,50 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "confirmed",
+        "availableFinishes": [
+          "mirror-holo"
+        ],
+        "unitAvailableFinishes": [
+          "mirror-holo"
+        ],
         "byLanguage": [
           {
             "language": "Indonesian",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "mirror-holo"
+            ],
+            "unitAvailableFinishes": [
+              "mirror-holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
               "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0457",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0457-P01",
+                "finish": "mirror-holo",
+                "foilPattern": "master-ball",
+                "markings": null,
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              }
+            ]
           }
         ]
       },

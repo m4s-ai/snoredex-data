@@ -110,15 +110,15 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-08-05**, after the database review and release-readiness audit of the current repository state.
+Status snapshot: **2026-08-08**, after the database review and release-readiness audit of the current repository state.
 
 | Area | Current state |
 |---|---|
 | Cardmarket catalogue | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
-| Language verification | **719 claims**: 635 externally confirmed, 84 contradicted, 0 awaiting manual review, and 0 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Physical checklist | **839 items** across 174 cards and 15 languages: 663 documented printings plus 176 explicit unresolved placeholders. |
-| Finish evidence | **637 card-number × language units**: 331 externally confirmed, 103 marketplace-only positives, 128 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 223 units. |
-| Evidence registry | **21 providers**, 883 evidence records, 876 unique URLs, and 2,785 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
+| Language verification | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
+| Physical checklist | **839 items** across 174 cards and 15 languages: 665 documented printings plus 174 explicit unresolved placeholders. |
+| Finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 126 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 221 units. |
+| Evidence registry | **21 providers**, 883 evidence records, 876 unique URLs, and 2,787 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -162,11 +162,11 @@ throughout this project and is genuinely uncommon:
 <!-- generated:evidence-strength — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | How the claim is sourced | Resolved claims |
 |---|---:|
-| Corroborated by a second provider | 39 |
-| Single tier 1-2 source | 675 |
+| Corroborated by a second provider | 38 |
+| Single tier 1-2 source | 676 |
 | Single tier 3 source | 5 |
 
-680 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 38 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+681 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 38 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in
@@ -231,7 +231,7 @@ publishes, and Pages deployment stays a manual, gated workflow run.
 - **A contradicted language is not automatically a proven absence.** `languagesContradicted`
   splits into `languagesNotPrinted` — where an explicit owner adjudication or a complete official
   manifest settled the question — and `languagesDisputed`, where a source disagrees and nothing
-  has settled it. **57 are settled; 27 are disputed.** Both are excluded from the checklist, so
+  has settled it. **57 are settled; 28 are disputed.** Both are excluded from the checklist, so
   that nobody is sent hunting a printing the evidence points away from, but only the first is a
   claim that the card does not exist. A photograph would overturn a disputed row.
 - **"Spanish" means European Spanish only.** From Journey Together (2025), LATAM-ES is a
@@ -282,7 +282,7 @@ complete official manifest — which a handful of English units have — may say
 |---|---:|
 | Non-Holo | 270 |
 | Holo | 144 |
-| Reverse Holo family | 242 |
+| Reverse Holo family | 243 |
 | Both Non-Holo and Holo | 18 |
 <!-- /generated:finish-coverage -->
 

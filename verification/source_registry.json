@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-05",
+  "generated": "2026-08-08",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -13,7 +13,7 @@
    "evidenceRecords": 883,
    "uniqueUrls": 876,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2785
+   "claimsAttributed": 2787
   }
  },
  "providers": [
@@ -328,7 +328,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 397,
-   "claimsSupported": 931
+   "claimsSupported": 933
   },
   {
    "providerId": "pokemontcgio",
@@ -1897,7 +1897,7 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Traditional Chinese promo series article + marketplace listing"
+    "Bulbapedia (fan wiki), Traditional Chinese promo series article and starter-set article"
    ],
    "dimensions": [
     "language"
@@ -1906,7 +1906,7 @@
    "stableIds": [
     "U0678"
    ],
-   "retrievedAt": "2026-07-22",
+   "retrievedAt": "2026-08-08",
    "usageCount": 1
   },
   {
@@ -8691,34 +8691,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "user"
    ],
    "dimensions": [
+    "finish",
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0457-P02",
     "SV-P/ID 117 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "user"
    ],
    "dimensions": [
+    "finish",
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0457-P01",
     "SV-P/ID 117 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Products/Live-Code-Card-Snorlax-ex-Blissey-ex-Special-Collection-PKMSV",
