@@ -208,7 +208,8 @@ do python scripts/$g.py --check; done            # fail instead of writing
 python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
 python verification/test_site.py                 # browser acceptance tests
 python verification/verify_finish_sources.py     # live TCGCSV assertions
-python scripts/publish.py --verify               # --verify, not --check
+python scripts/publish.py --out _site             # build the artifact, THEN verify it
+python scripts/publish.py --out _site --verify    # --verify, not --check; exits 1 without --out
 git diff --exit-code                             # a generator whose output moves fails here
 ```
 

@@ -817,6 +817,36 @@ def collect() -> None:
             docs=split_docs,
         )
 
+        # E12 — HANDOVER states figures too, and nothing was reading them
+        # --------------------------------------------------------------------------- #
+        # E4, E7 and E11 hold the figures in CLAUDE.md, RESUME.md and README.md. HANDOVER.md was in
+        # none of those sets, which left the one document a cold-start agent is told to read first as
+        # the only loadable document whose numbers no check reads. Both of its drift-capable figures
+        # had in fact drifted, and each drifted through a commit that was tidying documentation:
+        #
+        #   "the 85 refuted claims"          written 2026-08-02; the overturn in the 2026-08-03
+        #                                    adjudication pass took CONTRADICTED.json to 84, and the
+        #                                    2026-08-04 rewrite that removed HANDOVER's duplicated
+        #                                    state copied this line through unchanged.
+        #   "63 completed one-shot passes"   written 2026-08-01 by the commit that corrected the
+        #                                    stale docs, and invalidated the next day by 191083e —
+        #                                    "Stop stating numbers no check reads" — which moved the
+        #                                    five harvest scripts in and made it 68.
+        #
+        # Both figures describe things this suite can count, so they become rows here rather than a
+        # standing instruction to remember. The pass count is deliberately derived from the directory
+        # rather than from archive/MANIFEST.json: the manifest also covers archive/scripts/, and the
+        # sentence is about passes/.
+        handover_docs = {"HANDOVER.md": (ROOT / "HANDOVER.md").read_text(encoding="utf-8")}
+        archived_passes = sum(1 for path in (ROOT / "verification" / "archive" / "passes").iterdir()
+                              if path.suffix in {".ps1", ".py"})
+        documented_figures(
+            "E12", "Documented archive and export figures match the repository",
+            [([r"The (\d+) refuted claims"], len(load("verification/CONTRADICTED.json"))),
+             ([r"(\d+) completed one-shot passes"], archived_passes)],
+            docs=handover_docs,
+        )
+
         # S15 — the store and the registry name the same source (#73)
         # --------------------------------------------------------------------------- #
         # scripts/source_registry.py can infer a provider from `sourceType` prose, and for records that

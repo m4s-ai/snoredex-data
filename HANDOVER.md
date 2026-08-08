@@ -115,7 +115,7 @@ verification/
                               path. Release downloads and every githubusercontent host are
                               reachable if a URL is easier.
   confirmed_sources.json      Export of all confirmed units.
-  CONTRADICTED.json           The 85 refuted claims.
+  CONTRADICTED.json           The 84 refuted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
   UNCONFIRMED.json            The open units, grouped by card.
   open-items.html             Browsable page of open + manual-review items (an Artifact).
@@ -162,7 +162,7 @@ verification/
   history/                    Frozen snapshots — launch runbook, migration plan, dated reviews.
                               Each carries a "Historical record" banner and is not maintained;
                               check D3 enforces the banner (#102).
-  archive/passes/             63 completed one-shot passes. Each closed a batch and is named by
+  archive/passes/             68 completed one-shot passes. Each closed a batch and is named by
                               what it did. NEVER rerun and NEVER edited: check X3 hashes every
                               file here against archive/MANIFEST.json and fails on any change.
                               Paths derive from each script's location.
