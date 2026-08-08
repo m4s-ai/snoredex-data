@@ -920,6 +920,50 @@ def collect() -> None:
             f"`python scripts/finishes.py`, not --reproject: {stale_applicability[:5]}",
         )
 
+        # E13 — the finish half of rule 4, held to the same line as the language half (#119)
+        # --------------------------------------------------------------------------- #
+        # `owner-adjudicated` closes a unit's finish list on the collection owner's authority, which
+        # is the only route to completeness for products no manifest covers. Three things keep it
+        # from becoming a way to assert finishes rather than close a list:
+        #
+        #   * every such unit traces to a recorded decision, so the ruling is citable;
+        #   * the decision names exactly the finishes the evidence already found, so it can never
+        #     introduce one;
+        #   * it never applies to a unit with no printings at all, which would be an absence
+        #     argument wearing the owner's name rather than a decision about known evidence.
+        #
+        # `complete-manifest` stays source-derived and separate: E9 and the finish generator's own
+        # policy keep it that way, and a consumer that trusts only manufacturer manifests must be
+        # able to tell the two apart.
+        finish_decisions = {
+            (d["setCode"], d["number"], d["language"]): d
+            for d in load("verification/owner_adjudications.json").get("finishDecisions", [])
+        }
+        adjudicated_finish_problems: list[str] = []
+        for unit in finish_units:
+            key = (unit["setCode"], unit["number"], unit["language"])
+            decision = finish_decisions.get(key)
+            if unit.get("completenessStatus") == "owner-adjudicated":
+                if not decision:
+                    adjudicated_finish_problems.append(
+                        f"{unit['finishUnitId']} {key}: owner-adjudicated with no recorded decision")
+                elif sorted(decision.get("availableFinishes") or []) != sorted(
+                        unit.get("availableFinishes") or []):
+                    adjudicated_finish_problems.append(
+                        f"{unit['finishUnitId']} {key}: decision names "
+                        f"{sorted(decision.get('availableFinishes') or [])}, unit has "
+                        f"{sorted(unit.get('availableFinishes') or [])}")
+            if decision and not (unit.get("printings") or []):
+                adjudicated_finish_problems.append(
+                    f"{unit['finishUnitId']} {key}: adjudicated with no printing evidence at all")
+        check(
+            "E13",
+            "Every owner-adjudicated finish closes a list the evidence already established",
+            "FAIL",
+            not adjudicated_finish_problems,
+            f"{len(adjudicated_finish_problems)} problem(s): {adjudicated_finish_problems[:5]}",
+        )
+
         check(
             "I5",
             "Evidence strength",

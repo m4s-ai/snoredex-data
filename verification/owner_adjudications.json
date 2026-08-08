@@ -1,15 +1,179 @@
 {
   "meta": {
     "schema": "owner-adjudications",
-    "schemaVersion": "1.0.0",
+    "schemaVersion": "1.1.0",
     "generated": "2026-08-04",
     "policy": [
       "The collection owner records the final application decision after reviewing all cited claims and evidence.",
       "An owner adjudication does not attribute the absence decision to any single provider or source.",
-      "The raw repository verdict and source evidence remain unchanged in verification/units.json."
+      "The raw repository verdict and source evidence remain unchanged in verification/units.json.",
+      "A finish decision closes the finish list for one set-number-language unit. It never asserts a finish: every finish it names must already rest on positive evidence, and the decision only states that no others exist. It projects to completenessStatus=owner-adjudicated, which is deliberately distinct from complete-manifest so a consumer can tell a collector's ruling from a manufacturer's."
     ]
   },
   "decisions": [
+    {
+      "adjudicationId": "OA-20260802-U0296",
+      "unitId": "U0296",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum matrix, the corroborating manufacturer and regional catalog evidence, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
+        "unit:U0296"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0298",
+      "unitId": "U0298",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum matrix, the corroborating manufacturer and regional catalog evidence, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
+        "unit:U0298"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0377",
+      "unitId": "U0377",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum collector discussion, the archived Copag announcement, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.facebook.com/groups/389018291429685/posts/2416439302020897/",
+        "https://www.elitefourum.com/t/how-to-research-copag-portuguese-cards/60133",
+        "unit:U0377"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0435",
+      "unitId": "U0435",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum discussion, localized retail references, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. The source discussion itself says Spanish is less likely; this decision is not attributed to a single source.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/modern-world-championships-decks-languages/55804",
+        "https://www.miraicards.com/en/products/pokemon-2023-world-championships-deck-colorless-lugia",
+        "https://mycomics.it/shop/pokemon-mazzo-colorless-lugia-dei-campionati-mondiali-world-championship-2023-gabriel-fernandez/",
+        "unit:U0435"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0437",
+      "unitId": "U0437",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum discussion, localized retail references, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. The source discussion itself says Portuguese is less likely; this decision is not attributed to a single source.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/modern-world-championships-decks-languages/55804",
+        "https://www.miraicards.com/en/products/pokemon-2023-world-championships-deck-colorless-lugia",
+        "https://mycomics.it/shop/pokemon-mazzo-colorless-lugia-dei-campionati-mondiali-world-championship-2023-gabriel-fernandez/",
+        "unit:U0437"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0497",
+      "unitId": "U0497",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
+        "unit:U0497"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0498",
+      "unitId": "U0498",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
+        "unit:U0498"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0499",
+      "unitId": "U0499",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
+        "unit:U0499"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0500",
+      "unitId": "U0500",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
+        "unit:U0500"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0501",
+      "unitId": "U0501",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
+        "unit:U0501"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0539",
+      "unitId": "U0539",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum collector discussion, the Copag announcement and research record, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.facebook.com/groups/389018291429685/posts/2416439302020897/",
+        "https://www.elitefourum.com/t/how-to-research-copag-portuguese-cards/60133",
+        "unit:U0539"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260802-U0598",
+      "unitId": "U0598",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-02",
+      "rationale": "After reviewing the Elite Fourum collector discussion, the Copag announcement and research record, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
+      "evidenceRefs": [
+        "https://www.facebook.com/groups/389018291429685/posts/2416439302020897/",
+        "https://www.elitefourum.com/t/how-to-research-copag-portuguese-cards/60133",
+        "unit:U0598"
+      ]
+    },
     {
       "adjudicationId": "OA-20260803-U0101",
       "unitId": "U0101",
@@ -63,32 +227,6 @@
       ]
     },
     {
-      "adjudicationId": "OA-20260802-U0296",
-      "unitId": "U0296",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum matrix, the corroborating manufacturer and regional catalog evidence, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
-        "unit:U0296"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0298",
-      "unitId": "U0298",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum matrix, the corroborating manufacturer and regional catalog evidence, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
-        "unit:U0298"
-      ]
-    },
-    {
       "adjudicationId": "OA-20260803-U0315",
       "unitId": "U0315",
       "decision": "not-printed",
@@ -99,50 +237,6 @@
       "evidenceRefs": [
         "https://github.com/m4s-ai/snoredex-data/issues/90",
         "unit:U0315"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0377",
-      "unitId": "U0377",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum collector discussion, the archived Copag announcement, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.facebook.com/groups/389018291429685/posts/2416439302020897/",
-        "https://www.elitefourum.com/t/how-to-research-copag-portuguese-cards/60133",
-        "unit:U0377"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0435",
-      "unitId": "U0435",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum discussion, localized retail references, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. The source discussion itself says Spanish is less likely; this decision is not attributed to a single source.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/modern-world-championships-decks-languages/55804",
-        "https://www.miraicards.com/en/products/pokemon-2023-world-championships-deck-colorless-lugia",
-        "https://mycomics.it/shop/pokemon-mazzo-colorless-lugia-dei-campionati-mondiali-world-championship-2023-gabriel-fernandez/",
-        "unit:U0435"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0437",
-      "unitId": "U0437",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum discussion, localized retail references, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. The source discussion itself says Portuguese is less likely; this decision is not attributed to a single source.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/modern-world-championships-decks-languages/55804",
-        "https://www.miraicards.com/en/products/pokemon-2023-world-championships-deck-colorless-lugia",
-        "https://mycomics.it/shop/pokemon-mazzo-colorless-lugia-dei-campionati-mondiali-world-championship-2023-gabriel-fernandez/",
-        "unit:U0437"
       ]
     },
     {
@@ -276,20 +370,6 @@
       ]
     },
     {
-      "adjudicationId": "OA-20260804-U0484",
-      "unitId": "U0484",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0484"
-      ]
-    },
-    {
       "adjudicationId": "OA-20260803-U0485",
       "unitId": "U0485",
       "decision": "not-printed",
@@ -313,169 +393,6 @@
       "evidenceRefs": [
         "https://github.com/m4s-ai/snoredex-data/issues/86",
         "unit:U0488"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260804-U0489",
-      "unitId": "U0489",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0489"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260804-U0490",
-      "unitId": "U0490",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0490"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260804-U0491",
-      "unitId": "U0491",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0491"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260804-U0492",
-      "unitId": "U0492",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0492"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260804-U0493",
-      "unitId": "U0493",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0493"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260804-U0494",
-      "unitId": "U0494",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0494"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260804-U0495",
-      "unitId": "U0495",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-04",
-      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
-      "evidenceRefs": [
-        "https://github.com/m4s-ai/snoredex-data/issues/86",
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "unit:U0495"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0497",
-      "unitId": "U0497",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
-        "unit:U0497"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0498",
-      "unitId": "U0498",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
-        "unit:U0498"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0499",
-      "unitId": "U0499",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
-        "unit:U0499"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0500",
-      "unitId": "U0500",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
-        "unit:U0500"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0501",
-      "unitId": "U0501",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum language table, its per-card comparison rows, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.elitefourum.com/t/black-star-promos-languages/36573",
-        "unit:U0501"
       ]
     },
     {
@@ -583,20 +500,6 @@
       ]
     },
     {
-      "adjudicationId": "OA-20260802-U0539",
-      "unitId": "U0539",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum collector discussion, the Copag announcement and research record, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.facebook.com/groups/389018291429685/posts/2416439302020897/",
-        "https://www.elitefourum.com/t/how-to-research-copag-portuguese-cards/60133",
-        "unit:U0539"
-      ]
-    },
-    {
       "adjudicationId": "OA-20260803-U0549",
       "unitId": "U0549",
       "decision": "not-printed",
@@ -620,20 +523,6 @@
       "evidenceRefs": [
         "https://github.com/m4s-ai/snoredex-data/issues/93",
         "unit:U0576"
-      ]
-    },
-    {
-      "adjudicationId": "OA-20260802-U0598",
-      "unitId": "U0598",
-      "decision": "not-printed",
-      "authority": "collection-owner",
-      "basis": "multi-source-adjudication",
-      "decidedAt": "2026-08-02",
-      "rationale": "After reviewing the Elite Fourum collector discussion, the Copag announcement and research record, and the recorded contradiction, the collection owner adopted not-printed as the final application decision. No single source is treated as an exhaustive manifest.",
-      "evidenceRefs": [
-        "https://www.facebook.com/groups/389018291429685/posts/2416439302020897/",
-        "https://www.elitefourum.com/t/how-to-research-copag-portuguese-cards/60133",
-        "unit:U0598"
       ]
     },
     {
@@ -772,6 +661,152 @@
         "unit:U0783",
         "http://ojamacard.com/product/32413/pok%C3%A9mon-tcg-scarlet-violet-%E0%B8%AA%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%95-%E0%B9%84%E0%B8%A7%E0%B9%82%E0%B8%AD%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%95-%E2%80%94-pok%C3%A9mon-151-%E0%B9%82%E0%B8%9B%E0%B9%80%E0%B8%81%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%94-151-sv2at%E3%80%8C1-box%E3%80%8D",
         "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0484",
+      "unitId": "U0484",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0484"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0489",
+      "unitId": "U0489",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0489"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0490",
+      "unitId": "U0490",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0490"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0491",
+      "unitId": "U0491",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0491"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0492",
+      "unitId": "U0492",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0492"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0493",
+      "unitId": "U0493",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0493"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0494",
+      "unitId": "U0494",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0494"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260804-U0495",
+      "unitId": "U0495",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-04",
+      "rationale": "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All other languages were not printed.\" This is the second half of the #86 decision and carries a different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own products under the HXY and FXY codes, whereas these eight were not printed at all. That matches Bulbapedia's article, which states the print languages as a closed list of seven — English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers only Diamond & Pearl and Mysterious Treasures.",
+      "evidenceRefs": [
+        "https://github.com/m4s-ai/snoredex-data/issues/86",
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "unit:U0495"
+      ]
+    },
+    {
+      "adjudicationId": "OA-20260808-U0678",
+      "unitId": "U0678",
+      "decision": "not-printed",
+      "authority": "collection-owner",
+      "basis": "multi-source-adjudication",
+      "decidedAt": "2026-08-08",
+      "rationale": "The collection owner reviewed the cited claims and ruled: \"svLN 010 und mP1 012 sind die gleiche Karte nur aus unterschiedlichen japanischen Prints, zu sehen aus dem Set Code und Nummerierung; auf T-Chinese gibt es diese Karte bisher nur einmal als Promo.\" No Traditional Chinese edition of this Japanese starter set was released; the Traditional Chinese printing of this card is the standalone promo SV-P 215 (2025 Taiwan Lantern Festival), a different product that Cardmarket does not list. Matches the adjudication already recorded for the sibling product mP1 012 (U0674), which was refuted on identical grounds.",
+      "evidenceRefs": [
+        "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(TCTCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_(TCG)",
+        "https://github.com/m4s-ai/snoredex-data/issues/119"
+      ]
+    }
+  ],
+  "finishDecisions": [
+    {
+      "adjudicationId": "OAF-20260808-mP1-012-ja",
+      "setCode": "mP1",
+      "number": "012",
+      "language": "Japanese",
+      "decision": "finish-complete",
+      "availableFinishes": [
+        "non-holo"
+      ],
+      "authority": "collection-owner",
+      "basis": "owner-adjudication",
+      "decidedAt": "2026-08-08",
+      "rationale": "The collection owner ruled that this printing exists in non-holo only: \"Es gibt keine offizielle Quelle die das explizit nennt, hier müssen wir auch auf owner adjudikation setzen.\" Non-holo itself is documented from SPEC-0025, a SNKRDUNK listing photograph showing a uniformly matte card face. No official manifest exists to close the list: pokemon-card.com publishes no /ex/ page for this magazine-bonus fixed deck, its card page carries no finish vocabulary, and the CoroCiao page is an event page — probed 2026-08-08 with /ex/m2a/ as a working control. Recorded as an owner decision rather than as a manifest, and never attributed to a provider.",
+      "evidenceRefs": [
+        "specimen:SPEC-0025",
+        "https://github.com/m4s-ai/snoredex-data/issues/119"
       ]
     }
   ]

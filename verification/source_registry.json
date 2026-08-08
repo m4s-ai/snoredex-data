@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-05",
+  "generated": "2026-08-08",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 21,
-   "evidenceRecords": 883,
-   "uniqueUrls": 876,
+   "providers": 22,
+   "evidenceRecords": 884,
+   "uniqueUrls": 877,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2785
+   "claimsAttributed": 2789
   }
  },
  "providers": [
@@ -208,6 +208,29 @@
    "claimsSupported": 3
   },
   {
+   "providerId": "snkrdunk",
+   "displayName": "SNKRDUNK",
+   "organization": "SODA Inc.",
+   "homepage": "https://snkrdunk.com",
+   "licenseOrTerms": "Marketplace listing content; listing photographs are the seller's.",
+   "category": "marketplace",
+   "authorityTier": 2,
+   "coverage": "individual Japanese-market cards whose finish and card text were read from a seller's listing photograph",
+   "supportsAbsence": false,
+   "usedFor": [
+    "finish",
+    "language"
+   ],
+   "attribution": "Card photographs from SNKRDUNK marketplace listings.",
+   "notes": "Positive evidence only, and no absence scopes are declared: a card missing from this marketplace says nothing about whether it was printed. Listings are removed once sold, so every use must be recorded as a SPEC-nnnn specimen with the listing URL and the image bytes committed, never as a bare link.",
+   "hosts": [
+    "snkrdunk.com",
+    "cdn.snkrdunk.com"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 2
+  },
+  {
    "providerId": "52poke",
    "displayName": "52poke (Wiki)",
    "organization": "52Poké (神奇宝贝百科)",
@@ -328,7 +351,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 397,
-   "claimsSupported": 931
+   "claimsSupported": 933
   },
   {
    "providerId": "pokemontcgio",
@@ -1897,7 +1920,7 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Traditional Chinese promo series article + marketplace listing"
+    "Bulbapedia (fan wiki), Traditional Chinese promo series article and starter-set article"
    ],
    "dimensions": [
     "language"
@@ -1906,7 +1929,7 @@
    "stableIds": [
     "U0678"
    ],
-   "retrievedAt": "2026-07-22",
+   "retrievedAt": "2026-08-08",
    "usageCount": 1
   },
   {
@@ -8691,34 +8714,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "user"
    ],
    "dimensions": [
+    "finish",
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0457-P02",
     "SV-P/ID 117 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "user"
    ],
    "dimensions": [
+    "finish",
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0457-P01",
     "SV-P/ID 117 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Products/Live-Code-Card-Snorlax-ex-Blissey-ex-Special-Collection-PKMSV",
@@ -11604,6 +11633,25 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 11
+  },
+  {
+   "canonicalUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
+   "nonUrlEvidenceId": null,
+   "providerId": "snkrdunk",
+   "sourceTypes": [
+    "SNKRDUNK marketplace listing photograph (identified physical printing)"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0231-P01",
+    "override:snkrdunk-mp1-012"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://tcgcsv.com/docs",

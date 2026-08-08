@@ -104,6 +104,42 @@ TCGdex `variants=false`, TCGCSV subtype absence, and PSA population absence rema
 The generator marks a unit `completenessStatus=complete-manifest` only when the source explicitly
 covers that unit's language; currently this applies to four English units.
 
+#### The product-page route does not exist for magazine-bonus decks — probed, do not repeat
+
+`/ex/` pages are published for expansions, not for every product. Probed on 2026-08-08 for `mP1`
+(Start Deck 100 Battle Collection CoroCiao Version) while trying to raise `F0231` from
+positive-evidence-only to a manifest:
+
+| Page | Result |
+|---|---|
+| `pokemon-card.com/ex/mP1/`, `/ex/mp1/`, `/products/detail/mP1.html` | 404 |
+| `pokemon-card.com/card-search/…/card/49598` (the card page) | 200, and **zero** hits for キラ, ホロ, ミラー, 仕様, レアリティ |
+| `corocoro.jp/corociao` (the official product page named in U0674) | 200, an event page: no finish vocabulary, no card list, no カビゴン |
+| `pokemon-card.com/ex/m2a/` (control) | 200, ミラー仕様 ×3, レアリティ ×2 |
+
+The control is the point: the same probe finds the vocabulary where it exists, so the 404s are the
+absence of a page rather than the absence of a technique. A magazine-bonus fixed deck gets no `/ex/`
+page, and the official card page carries the card data only — exactly as the section above says.
+
+So a Japanese fixed-deck product has **no** route to `complete-manifest`, and none is coming: the
+page is not published for this class of product.
+
+That is what opened the finish layer to rule 4. Owner attestation still cannot *establish* a finish
+— it stays in the row above — but the collection owner may now **close the list** of finishes a unit
+already has evidence for, exactly as they may settle a language absence. The decision is recorded in
+`owner_adjudications.json` under `finishDecisions` and projects to a distinct status:
+
+| completenessStatus | set by |
+|---|---|
+| `complete-manifest` | a source that explicitly covers the unit's language — four English units |
+| `owner-adjudicated` | a collection-owner decision, where no such source exists |
+| `positive-evidence-only` | finishes found; others unevidenced, **not** excluded |
+
+The two top rows stay separate on purpose, so a consumer trusting only manufacturer manifests can
+still tell a collector's ruling from one. `E13` holds the decision to what it may do: it must name
+exactly the finishes the evidence already found, so it can never introduce one, and it may not apply
+to a unit with no printings at all — that would be an absence argument wearing the owner's name.
+
 ## Confirmed and narrowed cases
 
 | Card/product | Result | Strongest evidence |

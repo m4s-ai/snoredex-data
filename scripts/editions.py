@@ -96,8 +96,16 @@ data["meta"]["editionRuleset"] = {
     "note": "Cardmarket's First Edition filter axis was NOT used (unreliable: present on 83/198 incl. modern cards). Starter/beginning products had no 1st-edition run. Lost Link and BREAK Starter Pack are on the Elite Fourum omitted list. Jungle 1st edition existed in all seven Western languages including Brazilian Portuguese (owner-confirmed).",
     "source": "Bulbapedia + Elite Fourum '1st Edition Timeline' (t/16054), verified 2026-07-23",
 }
-json.dump(data, io.open(os.path.join(B, "snorlax_cards.json"), "w", encoding="utf-8"),
-          ensure_ascii=False, indent=2)
+# The trailing newline matters, and this was the only writer of this file omitting it. Every other
+# generator that touches snorlax_cards.json ends it with one, so the file's final byte depended on
+# which generator happened to run last — and CI's determinism step does not run this script, so its
+# rebuild always ended with a newline while a local run following the documented order might not.
+# That is a one-byte diff that fails `database.py --check` through the source fingerprint, with a
+# message about canonical inputs that says nothing about a newline. Writing it here makes the
+# generator order irrelevant.
+with io.open(os.path.join(B, "snorlax_cards.json"), "w", encoding="utf-8", newline="\n") as handle:
+    json.dump(data, handle, ensure_ascii=False, indent=2)
+    handle.write("\n")
 
 for k, v in summary.items():
     print(f"\n{k} ({len(v)}):")

@@ -567,8 +567,12 @@ def build_database(target: Path) -> dict[str, int | str]:
     specimens_doc = load("verification/specimens.json")
     owner_adjudications_doc = load("verification/owner_adjudications.json")
     owner_adjudications = owner_adjudications_doc["decisions"]
-    if owner_adjudications_doc.get("meta", {}).get("schemaVersion") != "1.0.0":
-        raise ValueError("owner adjudications schemaVersion must be 1.0.0")
+    # 1.1.0 added `finishDecisions` (#119): rule 4 extended to the finish layer. The language
+    # decisions read here are unchanged, and the finish half needs no table of its own — its whole
+    # effect reaches the database through `finish_units.completeness_status`, which already has a
+    # column. The guard is pinned rather than ranged so a future field addition stops here again.
+    if owner_adjudications_doc.get("meta", {}).get("schemaVersion") != "1.1.0":
+        raise ValueError("owner adjudications schemaVersion must be 1.1.0")
 
     temporary = target.with_name(target.name + ".tmp")
     if temporary.exists():
@@ -1079,7 +1083,7 @@ def validate_database(target: Path) -> list[str]:
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()
-        if not owner_schema or owner_schema[0] != "1.0.0":
+        if not owner_schema or owner_schema[0] != "1.1.0":
             problems.append("owner adjudications schema version is missing or unsupported")
         expected = {
             "products": len(load("snorlax_cards.json")["cards"]),

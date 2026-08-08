@@ -35,7 +35,11 @@ ALLOWED_AVAILABILITY = ("confirmed", "owner-attested", "marketplace-claimed", "p
 ALLOWED_PRINTING = ("confirmed", "owner-attested", "marketplace-claimed", "pending")
 ALLOWED_MAPPING = ("confirmed", "partial", "pending", "not-applicable")
 ALLOWED_PATTERN = ("confirmed", "partial", "pending", "not-applicable")
-ALLOWED_COMPLETENESS = ("complete-manifest", "positive-evidence-only", "pending", "not-applicable")
+# "owner-adjudicated" is rule 4 applied to finishes (#119): the collection owner closing a list
+# the evidence already established, where no manifest covers the product. Kept separate from
+# "complete-manifest", which stays source-derived; E13 holds the decision to what it may do.
+ALLOWED_COMPLETENESS = ("complete-manifest", "owner-adjudicated", "positive-evidence-only",
+                        "pending", "not-applicable")
 ALLOWED_MARKING_ROLES = ("print-identity", "reverse-holo-treatment", "distribution-promo")
 
 

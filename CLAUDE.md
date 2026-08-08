@@ -59,7 +59,7 @@ correction already made here, and reading it is how you avoid repeating one.
    itself, and 5 resolved units do — never report a lone tier-3 source as a rule violation, and
    never state the tiers more strictly than this ([LESSONS](LESSONS.md#a-rule-stated-more-strictly-than-the-check-enforces)).
    `E4` fails when the attestation count stops matching the data. Prefer corroboration where it
-   exists — it covers 39 of 719 units, so it usually does not.
+   exists — it covers 38 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in
@@ -87,6 +87,18 @@ correction already made here, and reading it is how you avoid repeating one.
    claim `disputed`. Dependability decides whether a source may carry that weight, not whether it
    is a manufacturer — Bulbapedia and Elite Fourum qualify
    ([LESSONS](LESSONS.md#complete-official-manifest-was-narrower-than-intended)).
+
+   **The finish layer has the same mechanism since #119.** `owner_adjudications.json` carries a
+   second array, `finishDecisions`, and a decision there closes the list of finishes for one
+   set-number-language unit — `completenessStatus=owner-adjudicated`, kept deliberately distinct
+   from the source-derived `complete-manifest` so a consumer can tell a collector's ruling from a
+   manufacturer's. It exists because some products have no manifest to find: `/ex/` product pages
+   are not published for magazine-bonus decks, and the official card page carries no finish
+   vocabulary at all (`FINISH_SOURCES.md` records the probe, with a working control).
+
+   A finish decision **closes a list, it never asserts a finish.** `E13` enforces both halves: it
+   must name exactly the finishes the evidence already found, and it may not apply to a unit with no
+   printings — that would be an absence argument wearing the owner's name.
 
    **`not-printed` means no regular release.** A proof copy or an error card is a different
    category and does not falsify the decision.
@@ -128,7 +140,7 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
 - **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
   outside source disagrees with Cardmarket. Only two things settle it: a complete official manifest
   within its scope, or an explicit owner adjudication. Everything else is **disputed** — currently
-  **57 settled and 27 disputed** — and `DATABASE.md` is right that an application must not read
+  **58 settled and 27 disputed** — and `DATABASE.md` is right that an application must not read
   disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every generator;
   cards carry `languagesNotPrinted` and `languagesDisputed` beside `languagesContradicted`, and
   checks `E8`/`E9`/`E10` keep the split honest. Both are excluded from the checklist, because the

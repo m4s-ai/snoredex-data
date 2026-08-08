@@ -30,6 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CARDS_PATH = ROOT / "snorlax_cards.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
 OVERRIDES_PATH = ROOT / "verification" / "finish_overrides.json"
+ADJUDICATIONS_PATH = ROOT / "verification" / "owner_adjudications.json"
 OUTPUT_PATH = ROOT / "verification" / "finish_units.json"
 REVIEW_JSON_PATH = ROOT / "verification" / "FINISH_REVIEW.json"
 REVIEW_CSV_PATH = ROOT / "verification" / "FINISH_REVIEW.csv"
@@ -431,6 +432,12 @@ def main() -> None:
     cards = cards_document["cards"]
     units = read_json(UNITS_PATH)
     overrides_document = read_json(OVERRIDES_PATH)
+    # Rule 4 owner decisions, finish half (#119). Keyed by (setCode, number, language) rather
+    # than by finishUnitId, because the F-numbers are positional and would silently retarget.
+    owner_finish_decisions = {
+        (d["setCode"], d["number"], d["language"]): d
+        for d in read_json(ADJUDICATIONS_PATH).get("finishDecisions", [])
+    }
     source_registry = overrides_document["sources"]
 
     cards_by_product: dict[tuple[str, str, str], dict[str, Any]] = {}
@@ -779,6 +786,15 @@ def main() -> None:
             completeness_status = "not-applicable"
         elif complete_manifest:
             completeness_status = "complete-manifest"
+        elif known_printings and (set_code, number, language) in owner_finish_decisions:
+            # Rule 4's owner adjudication, extended to finishes (#119). Kept as its own value rather
+            # than folded into complete-manifest so a consumer can still tell a collector's ruling
+            # from a manufacturer's — the same separation units.json keeps between the repository
+            # verdict and the application status.
+            #
+            # Only reachable with positive evidence already in hand: closing the finish list for a
+            # unit nothing is known about would be an absence argument wearing the owner's name.
+            completeness_status = "owner-adjudicated"
         elif known_printings:
             completeness_status = "positive-evidence-only"
         else:
@@ -911,6 +927,7 @@ def main() -> None:
                 "Only positive availability is asserted. pending means not yet established, never proven absent.",
                 "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
                 "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest can set completenessStatus=complete-manifest.",
+                "A collection-owner finish adjudication sets completenessStatus=owner-adjudicated, which never asserts a finish and is deliberately distinct from complete-manifest.",
                 "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
                 "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
                 "Cardmarket Reverse Holo axes and rarity labels are retained as marketplace-claimed hints, not external confirmation.",
@@ -922,7 +939,7 @@ def main() -> None:
                 "availabilityStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending", "not-applicable"],
                 "cardSize": ["standard", "jumbo", "unknown"],
                 "markingRoles": ["print-identity", "reverse-holo-treatment", "distribution-promo"],
-                "completenessStatus": ["complete-manifest", "positive-evidence-only", "pending", "not-applicable"],
+                "completenessStatus": ["complete-manifest", "owner-adjudicated", "positive-evidence-only", "pending", "not-applicable"],
             },
             "counts": counts,
             "fetchErrors": fetch_errors,

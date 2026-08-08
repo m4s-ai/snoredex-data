@@ -1,12 +1,13 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-08-03",
+    "generated": "2026-08-08",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
       "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
       "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest can set completenessStatus=complete-manifest.",
+      "A collection-owner finish adjudication sets completenessStatus=owner-adjudicated, which never asserts a finish and is deliberately distinct from complete-manifest.",
       "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
       "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
       "Cardmarket Reverse Holo axes and rarity labels are retained as marketplace-claimed hints, not external confirmation.",
@@ -45,6 +46,7 @@
       ],
       "completenessStatus": [
         "complete-manifest",
+        "owner-adjudicated",
         "positive-evidence-only",
         "pending",
         "not-applicable"
@@ -52,18 +54,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 331,
+      "withConfirmedFinish": 333,
       "withOnlyMarketplaceClaim": 103,
-      "pendingFinish": 128,
-      "notApplicableFinish": 75,
+      "pendingFinish": 125,
+      "notApplicableFinish": 76,
       "withCompleteManifest": 4,
-      "withNonHolo": 270,
+      "withNonHolo": 271,
       "withHolo": 144,
       "withReverseHolo": 234,
-      "withMirrorHolo": 8,
+      "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 18,
-      "withUnresolvedProductMapping": 165,
-      "withAnyUnresolvedDetail": 223,
+      "withUnresolvedProductMapping": 162,
+      "withAnyUnresolvedDetail": 220,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -16008,23 +16010,45 @@
           "image": "images/mP1_012_Snorlax_864080.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "owner-adjudicated",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": {
+            "kind": "fixed-deck",
+            "text": "Start Deck 100 Battle Collection CoroCiao Version"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
+              "sourceType": "SNKRDUNK marketplace listing photograph (identified physical printing)",
+              "evidence": "Seller listing \"[A]Snorlax [MP1 012/23](The Start Deck 100 \\\"Battle Collection Coro Ciao Ver.\\\")\" photographs the card face: mP1 012/023, Illus. Ounishi, regulation mark H, and a uniformly matte surface with no foil pattern. Recorded as specimen SPEC-0025 so the observation outlives the listing."
+            }
+          ],
+          "printingId": "F0231-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0232",
@@ -31465,8 +31489,8 @@
           "variant": "V1",
           "claimStatus": "confirmed",
           "rarity": "Promo",
-          "variantName": null,
-          "variantNameSource": null,
+          "variantName": "Poké Ball mirror holo",
+          "variantNameSource": "user",
           "cardmarketHints": {
             "reverseHoloAxis": false,
             "firstEditionAxis": false
@@ -31478,8 +31502,8 @@
           "variant": "V2",
           "claimStatus": "confirmed",
           "rarity": "Promo",
-          "variantName": null,
-          "variantNameSource": null,
+          "variantName": "Master Ball mirror holo",
+          "variantNameSource": "user",
           "cardmarketHints": {
             "reverseHoloAxis": false,
             "firstEditionAxis": false
@@ -31488,23 +31512,61 @@
           "image": "images/SV-P_ID_117_Snorlax_V2_825132.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "mirror-holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
         "reverse-holo": "pending",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
-      "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V2"
-      ]
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
+      "patternStatus": "confirmed",
+      "printings": [
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "master-ball",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Master Ball mirror holo"
+            }
+          ],
+          "printingId": "F0457-P01"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "poke-ball",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Poké Ball mirror holo"
+            }
+          ],
+          "printingId": "F0457-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0458",
@@ -33856,7 +33918,7 @@
       "products": [
         {
           "variant": "base",
-          "claimStatus": "confirmed",
+          "claimStatus": "contradicted",
           "rarity": "Fixed",
           "variantName": null,
           "variantNameSource": null,
@@ -33870,21 +33932,18 @@
       ],
       "availableFinishes": [],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "pending"
+        "non-holo": "not-applicable",
+        "holo": "not-applicable",
+        "reverse-holo": "not-applicable",
+        "mirror-holo": "not-applicable"
       },
-      "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "applicabilityStatus": "not-applicable",
+      "availabilityStatus": "not-applicable",
+      "completenessStatus": "not-applicable",
+      "productMappingStatus": "not-applicable",
       "patternStatus": "not-applicable",
       "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0502",
