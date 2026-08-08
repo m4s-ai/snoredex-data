@@ -1,12 +1,13 @@
 {
   "meta": {
     "schema": "owner-adjudications",
-    "schemaVersion": "1.0.0",
+    "schemaVersion": "1.1.0",
     "generated": "2026-08-04",
     "policy": [
       "The collection owner records the final application decision after reviewing all cited claims and evidence.",
       "An owner adjudication does not attribute the absence decision to any single provider or source.",
-      "The raw repository verdict and source evidence remain unchanged in verification/units.json."
+      "The raw repository verdict and source evidence remain unchanged in verification/units.json.",
+      "A finish decision closes the finish list for one set-number-language unit. It never asserts a finish: every finish it names must already rest on positive evidence, and the decision only states that no others exist. It projects to completenessStatus=owner-adjudicated, which is deliberately distinct from complete-manifest so a consumer can tell a collector's ruling from a manufacturer's."
     ]
   },
   "decisions": [
@@ -785,6 +786,26 @@
       "evidenceRefs": [
         "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(TCTCG)",
         "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_(TCG)",
+        "https://github.com/m4s-ai/snoredex-data/issues/119"
+      ]
+    }
+  ],
+  "finishDecisions": [
+    {
+      "adjudicationId": "OAF-20260808-mP1-012-ja",
+      "setCode": "mP1",
+      "number": "012",
+      "language": "Japanese",
+      "decision": "finish-complete",
+      "availableFinishes": [
+        "non-holo"
+      ],
+      "authority": "collection-owner",
+      "basis": "owner-adjudication",
+      "decidedAt": "2026-08-08",
+      "rationale": "The collection owner ruled that this printing exists in non-holo only: \"Es gibt keine offizielle Quelle die das explizit nennt, hier müssen wir auch auf owner adjudikation setzen.\" Non-holo itself is documented from SPEC-0025, a SNKRDUNK listing photograph showing a uniformly matte card face. No official manifest exists to close the list: pokemon-card.com publishes no /ex/ page for this magazine-bonus fixed deck, its card page carries no finish vocabulary, and the CoroCiao page is an event page — probed 2026-08-08 with /ex/m2a/ as a working control. Recorded as an owner decision rather than as a manifest, and never attributed to a provider.",
+      "evidenceRefs": [
+        "specimen:SPEC-0025",
         "https://github.com/m4s-ai/snoredex-data/issues/119"
       ]
     }

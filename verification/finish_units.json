@@ -7,6 +7,7 @@
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
       "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
       "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest can set completenessStatus=complete-manifest.",
+      "A collection-owner finish adjudication sets completenessStatus=owner-adjudicated, which never asserts a finish and is deliberately distinct from complete-manifest.",
       "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
       "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
       "Cardmarket Reverse Holo axes and rarity labels are retained as marketplace-claimed hints, not external confirmation.",
@@ -45,6 +46,7 @@
       ],
       "completenessStatus": [
         "complete-manifest",
+        "owner-adjudicated",
         "positive-evidence-only",
         "pending",
         "not-applicable"
@@ -16019,7 +16021,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [

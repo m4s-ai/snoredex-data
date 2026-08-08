@@ -88,6 +88,18 @@ correction already made here, and reading it is how you avoid repeating one.
    is a manufacturer — Bulbapedia and Elite Fourum qualify
    ([LESSONS](LESSONS.md#complete-official-manifest-was-narrower-than-intended)).
 
+   **The finish layer has the same mechanism since #119.** `owner_adjudications.json` carries a
+   second array, `finishDecisions`, and a decision there closes the list of finishes for one
+   set-number-language unit — `completenessStatus=owner-adjudicated`, kept deliberately distinct
+   from the source-derived `complete-manifest` so a consumer can tell a collector's ruling from a
+   manufacturer's. It exists because some products have no manifest to find: `/ex/` product pages
+   are not published for magazine-bonus decks, and the official card page carries no finish
+   vocabulary at all (`FINISH_SOURCES.md` records the probe, with a working control).
+
+   A finish decision **closes a list, it never asserts a finish.** `E13` enforces both halves: it
+   must name exactly the finishes the evidence already found, and it may not apply to a unit with no
+   printings — that would be an absence argument wearing the owner's name.
+
    **`not-printed` means no regular release.** A proof copy or an error card is a different
    category and does not falsify the decision.
 

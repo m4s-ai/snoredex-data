@@ -121,10 +121,24 @@ The control is the point: the same probe finds the vocabulary where it exists, s
 absence of a page rather than the absence of a technique. A magazine-bonus fixed deck gets no `/ex/`
 page, and the official card page carries the card data only — exactly as the section above says.
 
-So a Japanese fixed-deck product currently has **no** route to `complete-manifest`. An owner ruling
-that a printing exists in one finish only cannot be recorded, because owner attestation sits in the
-row above that cannot establish absence. Such units stay `positive-evidence-only`, which says the
-finishes found exist and the others are unevidenced — not that they were ruled out.
+So a Japanese fixed-deck product has **no** route to `complete-manifest`, and none is coming: the
+page is not published for this class of product.
+
+That is what opened the finish layer to rule 4. Owner attestation still cannot *establish* a finish
+— it stays in the row above — but the collection owner may now **close the list** of finishes a unit
+already has evidence for, exactly as they may settle a language absence. The decision is recorded in
+`owner_adjudications.json` under `finishDecisions` and projects to a distinct status:
+
+| completenessStatus | set by |
+|---|---|
+| `complete-manifest` | a source that explicitly covers the unit's language — four English units |
+| `owner-adjudicated` | a collection-owner decision, where no such source exists |
+| `positive-evidence-only` | finishes found; others unevidenced, **not** excluded |
+
+The two top rows stay separate on purpose, so a consumer trusting only manufacturer manifests can
+still tell a collector's ruling from one. `E13` holds the decision to what it may do: it must name
+exactly the finishes the evidence already found, so it can never introduce one, and it may not apply
+to a unit with no printings at all — that would be an absence argument wearing the owner's name.
 
 ## Confirmed and narrowed cases
 
