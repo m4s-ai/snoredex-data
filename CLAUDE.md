@@ -5,9 +5,12 @@ documents linked below, and duplicating it would create a second copy to keep in
 
 ## What this project is
 
-A complete catalogue of every **Snorlax** Pokémon TCG product on Cardmarket, plus an independent
-**source-verification layer**: for each card × language × variant, does a source *outside
-Cardmarket* confirm that printing actually exists?
+The current data is a **legacy Cardmarket-derived candidate universe** captured on 2026-07-21,
+plus an independent **source-verification layer**: for each inherited card × language × variant,
+does a source *outside Cardmarket* confirm that printing actually exists? It is not a complete
+all-locality catalogue; the immutable boundary is recorded in
+[`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json), and source-first expansion is
+tracked in #132.
 
 The layer exists because Cardmarket's language filter reports **marketplace availability, not a
 print manifest**, and it over-claims. The worked example is `KSS 26`: advertised in 17 languages,
@@ -103,6 +106,7 @@ reads both, and `checklist.py` / `site.py` read those.
 ```console
 python verification/review_integrity.py     # confirm a clean starting state
 python verification/review_findings.py      # cross-artifact consistency
+python scripts/legacy_baseline.py --check   # immutable legacy scope + claim guard
 
 # ... do the work in a new Python pass under verification/ ...
 
@@ -163,6 +167,8 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
 
 - **Python 3.11, standard library only** for the generators. `requirements.txt` is
   verification-only: `playwright` (browser tests) and `PyYAML` (issue-form schema check).
+- **Use Python on every platform, including Escalon.** If Python is unavailable, install it; never
+  substitute PowerShell for a repository workflow or implementation pass.
 - The recurring toolchain is **entirely Python**. PowerShell is not a prerequisite for anything.
 - **All scripts derive paths from their own location** — `Path(__file__)`. Keep this in new
   scripts; CI runs them from more than one working directory.

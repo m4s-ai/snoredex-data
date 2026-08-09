@@ -397,6 +397,7 @@ def main() -> int:
     checklist_doc = read_json(ROOT / "analysis_checklist.json")
     finish_counts = read_json(ROOT / "analysis_finishes.json")["counts"]
     dataset = read_json(ROOT / "snorlax_cards.json")
+    baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
     registry = read_json(ROOT / "verification" / "source_registry.json")
     units = read_json(ROOT / "verification" / "units.json")
     # The licensor is an owner decision, so the page reads it rather than hardcoding a name that
@@ -424,15 +425,23 @@ def main() -> int:
                           if r["edition"] != "1st Edition")
 
     stats = [
-        (f"{len(rows)}", "card-variant rows"),
-        (f"{verification['confirmed']}", "confirmed language claims"),
-        (f"{verification['contradicted']}", "refuted claims"),
-        (f"{finish_counts['totalFinishUnits']}", "finish units"),
-        (f"{finish_counts['withConfirmedFinish']}", "externally confirmed finishes"),
-        (f"{checklist_doc['meta']['counts']['items']}", "checklist items"),
+        (f"{len(rows)}", "current-known card-variant rows"),
+        (f"{verification['confirmed']}", "confirmed legacy language claims"),
+        (f"{verification['contradicted']}", "refuted legacy claims"),
+        (f"{finish_counts['totalFinishUnits']}", "current-known finish units"),
+        (f"{finish_counts['withConfirmedFinish']}", "current-known confirmed finishes"),
+        (f"{checklist_doc['meta']['counts']['items']}", "current-known checklist items"),
         (f"{registry['meta']['counts']['evidenceRecords']}", "distinct sources"),
-        (f"{confirmed_pairs}", "confirmed card×language pairs"),
+        (f"{confirmed_pairs}", "confirmed legacy card×language pairs"),
     ]
+
+    coverage = {
+        "candidateUniverseId": baseline["meta"]["baselineId"],
+        "candidateUniverseType": "historical-marketplace-search",
+        "manifest": "legacy-cardmarket-baseline.json",
+        "scopeStatus": "legacy-not-all-locality-complete",
+        "sourceCommit": baseline["meta"]["sourceCommit"],
+    }
 
     languages_meta = [{"code": LANG_CODE[l], "name": l} for l in LANG_ORDER]
 
@@ -481,7 +490,7 @@ def main() -> int:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Snoredex — documented Snorlax TCG printings</title>
-<meta name="description" content="An auditable catalogue of physical Snorlax Pokemon TCG printings across variants, editions, languages, finishes, patterns, stamps, distribution and card size. Every claim carries an external source.">
+<meta name="description" content="An auditable view of current-known physical Snorlax Pokemon TCG printings descended from a historical Cardmarket candidate universe. It is not an all-locality print manifest.">
 <script>
 (function () {{
   var root = document.documentElement;
@@ -530,8 +539,10 @@ def main() -> int:
 
 <section id="about">
   <h2>What this is</h2>
-  <p>A complete catalogue of every Snorlax product listed on Cardmarket, plus a verification layer
-  that answers a different question for each one: <em>does a source outside Cardmarket confirm this
+  <p>This view projects the historical Cardmarket candidate universe frozen as
+  <a href="legacy-cardmarket-baseline.json"><code>{html.escape(baseline['meta']['baselineId'])}</code></a>,
+  plus its verification layer. <strong>It is not a complete all-locality catalogue.</strong> For each
+  legacy claim it answers a narrower question: <em>does a source outside Cardmarket confirm this
   printing actually exists?</em></p>
   <p>The goal is to let a collector tell three things apart that catalogues routinely blur:
   <strong>documented printings</strong>, <strong>unresolved claims</strong>, and
@@ -545,6 +556,10 @@ def main() -> int:
   <div class="callout">
     <strong>Scope limits — read these before relying on anything here.</strong>
     <ul>
+      <li><strong>Legacy candidate universe.</strong> Every current row descends from one historical
+      Cardmarket search captured on {html.escape(baseline['source']['retrieved'])}. Cardmarket is a
+      provider, not the discovery boundary; source-first expansion is tracked in
+      <a href="https://github.com/m4s-ai/snoredex-data/issues/132">issue #132</a>.</li>
       <li><strong>Physical cards only.</strong> Online and live code cards are excluded.</li>
       <li><strong>A marketplace filter is not a print manifest.</strong> Cardmarket's language
       filter over-claims: {verification['contradicted']} claims here are refuted by outside sources.
@@ -555,8 +570,8 @@ def main() -> int:
       manifest — currently {finish_counts['withCompleteManifest']} units.</li>
       <li><strong>&ldquo;Spanish&rdquo; means European Spanish.</strong> Latin-American Spanish is a
       physically distinct edition from Journey Together (2025) onward and is out of scope here.</li>
-      <li><strong>{open_units} claims remain open.</strong> They are shown as unresolved rather than
-      quietly dropped.</li>
+      <li><strong>{open_units} legacy claims remain open.</strong> This is a queue depth within the
+      frozen candidate universe, not a count of undiscovered local printings.</li>
     </ul>
   </div>
 </section>
@@ -731,6 +746,7 @@ def main() -> int:
     <li><a href="snoredex.sqlite">snoredex.sqlite</a> — normalized current-state application database</li>
     <li><a href="snoredex-tracker-template.sqlite">snoredex-tracker-template.sqlite</a> — blank have/have-not tracker</li>
     <li><a href="DATABASE.md">DATABASE.md</a> — schema, status rules and example queries</li>
+    <li><a href="legacy-cardmarket-baseline.json">legacy-cardmarket-baseline.json</a> — immutable historical candidate universe and provenance</li>
     <li><a href="snorlax_cards.json">snorlax_cards.json</a> — main dataset</li>
     <li><a href="analysis_checklist.json">analysis_checklist.json</a> — canonical checklist items</li>
     <li><a href="analysis_confirmed_releases.json">analysis_confirmed_releases.json</a> — chronological rows</li>
@@ -835,14 +851,16 @@ def main() -> int:
 </section>
 
 <footer class="sitefoot">
-  <p>Generated {generated} from the repository data. No analytics, no cookies, no trackers, no
-  runtime API dependency — this page works offline once loaded.</p>
+  <p>Generated {generated} from the current-known repository data under legacy baseline
+  <code>{html.escape(baseline['meta']['baselineId'])}</code>. No analytics, no cookies, no trackers,
+  no runtime API dependency — this page works offline once loaded.</p>
 </footer>
 
 </main>
 
 {json_block("data-rows", rows)}
 {json_block("data-checklist", checklist)}
+{json_block("data-coverage", coverage)}
 {json_block("data-meta", {"languages": languages_meta, "generated": generated})}
 <script src="site/app.js"></script>
 </body>

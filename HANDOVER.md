@@ -19,9 +19,11 @@ back it up and are cited where relevant:
 
 ## 1. What this project is
 
-A complete catalogue of every **Snorlax** Pokémon TCG product on [Cardmarket](https://www.cardmarket.com),
-plus a rigorous **source-verification layer**: for each card × language × variant, does an
-**external source (outside Cardmarket)** confirm that printing actually exists?
+A **legacy Cardmarket-derived candidate universe** captured on 2026-07-21, plus a rigorous
+**source-verification layer**: for each inherited card × language × variant, does an **external
+source (outside Cardmarket)** confirm that printing actually exists? This is not a complete
+all-locality catalogue. [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json)
+freezes the exact pre-migration rows and source commit; #132 tracks source-first expansion.
 
 Why the verification exists: Cardmarket's language filter is *marketplace availability, not a
 print manifest*. It over-claims — the worked example is `KSS 26`, advertised in 17 languages,
@@ -36,12 +38,12 @@ evidence (see §6).
 
 | | |
 |---|---|
-| Cardmarket products harvested | 242 (198 singles + 44 accessories) |
-| Verification units (card × language × variant) | **719** |
+| Legacy Cardmarket products harvested | 242 (198 singles + 44 accessories) |
+| Legacy verification units (card × language × variant) | **719** |
 | **Confirmed** with external source | **634** (88.2%) |
 | **Contradicted** (Cardmarket claims it, source says no) | **85** |
 | **Needs manual review** | **0** |
-| **Still open** | **0** |
+| **Still open within the legacy claim universe** | **0** |
 | Card-variants with every language resolved | 191 / 191 |
 | Artist coverage in main dataset | 116 / 198 |
 | Finish units (set number × language) | **637** |
@@ -61,10 +63,11 @@ The language/product claim backlog and the finish backlog are separate. Language
 `verification/units.json`; finish truth lives in `verification/finish_units.json`. Never infer a
 physical finish from a confirmed language claim alone.
 
-### Language/product review is closed
+### Legacy language/product review is closed
 
-All 719 language/product claims are now resolved: **634 confirmed, 85 contradicted, 0 manual-review,
-0 pending**. The final closure moved Portuguese `xPRE 076` V1/V2 and Portuguese `PPS1`/`PPS3`
+All 719 inherited Cardmarket language/product claims are now resolved: **634 confirmed, 85
+contradicted, 0 manual-review, 0 pending**. This does not claim that every locality was discovered.
+The final closure moved Portuguese `xPRE 076` V1/V2 and Portuguese `PPS1`/`PPS3`
 Snorlax claims to contradicted after Copag/catalog and collector evidence. It also resolved the
 remaining BA20, WCD23, sA, svG, svIba and mP1 language claims. The BA20 Spanish/Portuguese finding
 is recorded in `verification/passes/close_language_review.py` and in each unit's evidence: the
@@ -83,6 +86,10 @@ snorlax_cards.json            MAIN dataset: 198 singles, one object each. Fields
                               variantToken (V1/V2/V3), variantName (+source), variantAxes,
                               cardKey, artist(+source), editions{}, finishAvailability{}, market,
                               meta{}.
+legacy-cardmarket-baseline.json
+                              IMMUTABLE LEGACY BOUNDARY: source commit, file hashes, counts and
+                              membership of every inherited Cardmarket card/language unit. It is
+                              provenance, not the current catalogue and never expands with it.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
@@ -310,6 +317,7 @@ anything you will write; the reason rule 4 exists does.
 # Run from the repository root.
 python verification/review_integrity.py     # confirm clean starting state
 python verification/review_findings.py           # cross-artifact consistency (stdlib, no network)
+python scripts/legacy_baseline.py --check        # reconstruct + scope-claim guard
 python verification/report.py               # regenerate exports if needed
 # ... do verification work in a new Python pass under verification/ ...
 python verification/audit_evidence.py       # after any write
@@ -356,6 +364,9 @@ rising number by editing the baseline — that is the habit the split exists to 
 All scripts derive paths from their own location — `Path(__file__)`. Keep that convention in new
 scripts; CI runs them from more than one working directory.
 
+Use Python on every platform, including Escalon. If Python is absent, install it rather than
+substituting PowerShell for a repository workflow or implementation pass.
+
 `index.html` is the single public page; `verification/confirmed-releases.html` is a redirect to
 it, so there is no second page to keep in step. Commit + push:
 
@@ -380,8 +391,9 @@ separate manual `workflow_dispatch` run. End commit messages with the
    `python scripts/finishes.py`, then run integrity. Do not convert positive-only source omissions
    into negative claims. The 64 fully contradicted language groups are already `not-applicable` and
    are intentionally absent from this queue.
-2. **Language/product claims are closed** — no pending or manual-review units remain. Keep the
-   source-specific evidence in `verification/units.json` and `verification/evidence.jsonl`; do not
-   infer a new contradiction from a bare catalogue absence.
+2. **Legacy language/product claims are closed** — no pending or manual-review units remain inside
+   the inherited Cardmarket candidate universe. This is not an all-locality discovery result. Keep
+   the source-specific evidence in `verification/units.json` and `verification/evidence.jsonl`;
+   do not infer a new contradiction from a bare catalogue absence.
 3. Anything the owner supplies next (they have been feeding specimens and corrections card by
    card; expect more).

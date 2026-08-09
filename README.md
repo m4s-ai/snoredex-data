@@ -1,12 +1,13 @@
 # Snoredex Data
 
-**Every Snorlax Pokémon TCG product on Cardmarket, with each language and finish claim re-checked
-against a source outside Cardmarket — and the disagreements kept on the record.**
+**A frozen 2026-07-21 Cardmarket-derived Snorlax candidate universe, with each inherited language
+and finish claim re-checked against a source outside Cardmarket — not a complete all-locality
+catalogue.**
 
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
-[![Cards](https://img.shields.io/badge/cards-198-2563eb)](snorlax_cards.json)
-[![Checklist](https://img.shields.io/badge/checklist-838_items-2563eb)](analysis_checklist.json)
+[![Legacy cards](https://img.shields.io/badge/legacy_cards-198-2563eb)](legacy-cardmarket-baseline.json)
+[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-838_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
@@ -17,6 +18,8 @@ against a source outside Cardmarket — and the disagreements kept on the record
 > The licence grants are **in force**, granted by `M4S.Collection`. Publication was approved on 2026-07-31: the repository is **public** and the site may be deployed. Deployment stays a manual workflow run — merging never publishes. See
 > [`publication-decisions.json`](publication-decisions.json), [`LICENSE.md`](LICENSE.md), and
 > [`verification/LAUNCH-RUNBOOK.md`](verification/LAUNCH-RUNBOOK.md).
+>
+> **Data coverage:** `cardmarket-search-2026-07-21` is a frozen historical Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. Current totals describe only known rows descended from that baseline. The source-first rebuild is tracked in [#132](https://github.com/m4s-ai/snoredex-data/issues/132).
 <!-- /generated:status -->
 
 ## Why this exists
@@ -60,10 +63,11 @@ Then visit <http://localhost:8000/>. `index.html` is the whole site; nothing els
 
 | You want | Read | Watch out for |
 |---|---|---|
+| The immutable pre-migration candidate universe | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) | It records the historical Cardmarket boundary and every inherited card/unit; it is provenance, not an all-locality manifest. |
 | A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite) / [`DATABASE.md`](DATABASE.md) | Start from the `app_*` views. Historical `contradicted` rows become `disputed` unless a scoped source or explicit owner adjudication resolves them. |
 | A personal have/have-not tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Copy the blank template or use `scripts/tracker.py`; catalogue sync preserves ownership state. |
 | The Cardmarket product view — identity, rarity, art, artist, editions | [`snorlax_cards.json`](snorlax_cards.json) | Use `languagesConfirmed` / `languagesContradicted` / `languagesUnresolved`. The raw `languages` field is the marketplace claim, kept deliberately. |
-| A stable list of physical things to collect | [`analysis_checklist.json`](analysis_checklist.json) | One record per documented printing *or* per explicitly unresolved one — placeholders are items too. |
+| The current-known list of physical things to collect | [`analysis_checklist.json`](analysis_checklist.json) | One record per documented printing *or* per explicitly unresolved one within current coverage — placeholders are items too. |
 | Which languages a card exists in, and on whose word | [`verification/units.json`](verification/units.json) | Keyed by `(setCode, number, variant, language)`. |
 | Final owner decisions on disputed claims | [`verification/owner_adjudications.json`](verification/owner_adjudications.json) | Explicit cross-source application decisions; they do not rewrite `units.json` or credit a single provider. |
 | Which finishes a card exists in | [`verification/finish_units.json`](verification/finish_units.json) | Keyed by `(setCode, number, language)` — deliberately *not* by variant token. |
@@ -88,7 +92,8 @@ See rule 1 above.
 
 Python 3.11, standard library only for the generators. `requirements.txt` is verification-only —
 Playwright for the browser suite, PyYAML for the issue-form schema check. PowerShell is not needed
-for anything.
+for anything. Use Python on every platform, including Escalon; if it is missing, install it rather
+than substituting PowerShell.
 
 ```console
 python -m pip install -r requirements.txt
@@ -96,6 +101,7 @@ python -m playwright install chromium
 
 python verification/review_integrity.py     # structural invariants inside each store
 python verification/review_findings.py      # consistency between stores and published artifacts
+python scripts/legacy_baseline.py --check   # immutable historical boundary + scope wording
 python verification/audit_evidence.py       # every resolved unit cites something
 python verification/test_site.py            # browser acceptance tests
 ```
@@ -108,14 +114,14 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Status snapshot: **2026-08-02**, after the database review and release-readiness audit of the current repository state.
+Current-known status snapshot: **2026-08-09**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
-| Cardmarket catalogue | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
-| Language verification | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Physical checklist | **838 items** across 174 cards and 15 languages: 663 documented printings plus 175 explicit unresolved placeholders. |
-| Finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
+| Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
+| Legacy language-claim review | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
+| Current-known physical checklist | **838 items** across 174 cards and 15 languages: 663 documented printings plus 175 explicit unresolved placeholders. |
+| Current-known finish evidence | **637 card-number × language units**: 332 externally confirmed, 103 marketplace-only positives, 138 without positive finish evidence, and 64 not applicable. The remaining detail/mapping queue contains 233 units. |
 | Evidence registry | **18 providers**, 883 evidence records, 876 unique URLs, and 2,791 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
@@ -172,6 +178,12 @@ maintained here. `mkunits` is in the same category and destructive besides: it r
 `verification/units.json` with fresh ids, discarding every verification verdict. It is not part of
 any rebuild.
 
+[`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) freezes that candidate
+universe with its source commit, file hashes, counts and every inherited card/unit membership. It
+never expands with the current catalogue. Cardmarket is therefore one historical provider, not the
+discovery boundary; the source-first rebuild is tracked in
+[#132](https://github.com/m4s-ai/snoredex-data/issues/132).
+
 **Everything downstream regenerates from what is committed**, in this order, and the release gate
 proves it by running the generators and failing if the tree moves:
 
@@ -206,7 +218,8 @@ publishes, and Pages deployment stays a manual, gated workflow run.
   [`verification/CONTRADICTED.json`](verification/CONTRADICTED.json).
 - **"Spanish" means European Spanish only.** From Journey Together (2025), LATAM-ES is a
   physically distinct edition for regular sets — different attack translations, set name and set
-  code (specimen-verified on `SVP 184`). Cardmarket does not carry it, so it is out of scope here.
+  code (specimen-verified on `SVP 184`). Cardmarket does not carry it, so it is absent from this
+  legacy candidate universe; that absence is not evidence that the printing does not exist.
 - **`cardKey` groups the same *card*, not the same *artwork*.** It is Cardmarket's own grouping by
   card name plus attack names, so a reprint with brand-new art shares the key. Useful — it is how
   the re-illustrated reprints were found — but never read it as art identity.
@@ -294,6 +307,7 @@ All paths are relative to the repository root.
 
 | Path | Purpose |
 |---|---|
+| [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) | Immutable source commit, hashes, counts and membership of the historical Cardmarket candidate universe. |
 | [`snorlax_cards.json`](snorlax_cards.json) | Main product dataset — one record per Cardmarket single. |
 | [`snoredex.sqlite`](snoredex.sqlite) · [`DATABASE.md`](DATABASE.md) | Normalized current-state application handoff, with no evidence journal or migration history. |
 | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Blank, refreshable ownership tracker with `have`, `wanted`, quantity and notes. |

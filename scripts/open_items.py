@@ -23,7 +23,7 @@ from __future__ import annotations
 import json
 import re
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -117,6 +117,7 @@ def replace_block(text: str, name: str, body: str) -> str:
 
 def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
+    baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     by_card = {(c["setCode"], str(c.get("number") or ""),
                 c.get("variantToken") or "base"): c for c in cards}
@@ -128,6 +129,38 @@ def main() -> int:
 
     open_groups = group(units, "pending")
     manual_groups = group(units, "needs-manual-review")
+    counts = Counter(unit["status"] for unit in units)
+    total_claims = len(units)
+    percentages = {
+        status: (100 * counts[status] / total_claims if total_claims else 0)
+        for status in ("confirmed", "contradicted", "needs-manual-review", "pending")
+    }
+
+    status_body = f"""  <p class="lede">
+      This page reports review status only inside the frozen legacy Cardmarket candidate universe
+      <code>{baseline['meta']['baselineId']}</code>. All {total_claims} inherited language/product
+      claims are resolved; that is not a claim that every locality or printing was discovered.
+    </p>
+
+  <dl class="totals">
+    <div class="tot is-have"><dt>Confirmed legacy claims</dt><dd>{counts['confirmed']}</dd></div>
+    <div class="tot"><dt>Contradicted legacy claims</dt><dd>{counts['contradicted']}</dd></div>
+    <div class="tot"><dt>Legacy claims needing your call</dt><dd>{counts['needs-manual-review']}</dd></div>
+    <div class="tot is-gap"><dt>Open legacy claims</dt><dd>{counts['pending']}</dd></div>
+  </dl>
+
+  <div class="meter" role="img" aria-label="{counts['confirmed']} confirmed, {counts['contradicted']} contradicted, {counts['needs-manual-review']} awaiting your decision, {counts['pending']} open, of {total_claims} legacy Cardmarket claims">
+    <span class="m-have" style="width:{percentages['confirmed']:.1f}%"></span>
+    <span class="m-contra" style="width:{percentages['contradicted']:.1f}%"></span>
+    <span class="m-manual" style="width:{percentages['needs-manual-review']:.1f}%"></span>
+    <span class="m-open" style="width:{percentages['pending']:.1f}%"></span>
+  </div>
+  <p class="meter-key">
+    <span><i class="dot" style="background:var(--have)"></i><b>{counts['confirmed']} confirmed legacy claims</b> — external source found</span>
+    <span><i class="dot" style="background:var(--accent)"></i><b>{counts['contradicted']} contradicted legacy claims</b> — outside evidence conflicts with the raw marketplace claim</span>
+    <span><i class="dot" style="background:var(--ink-faint)"></i><b>{counts['needs-manual-review']} legacy claims need your call</b></span>
+    <span><i class="dot" style="background:var(--gap)"></i><b>{counts['pending']} open legacy claims</b></span>
+  </p>"""
 
     open_body = ("  const OPEN = [\n"
                  + ",\n".join(row_literal(g, card_for(g), False) for g in open_groups)
@@ -153,11 +186,13 @@ def main() -> int:
         f"    Generated {day} {MONTHS[month - 1]} {year} from <code>verification/units.json</code>.\n"
         f"    Full evidence per claim in <code>confirmed_sources.json</code>,\n"
         f"    refuted claims in <code>CONTRADICTED.json</code>.\n"
-        f"    {resolved} of {total} card variants are now fully resolved across all their languages."
+        f"    {resolved} of {total} legacy card variants are resolved across all languages "
+        f"claimed by the frozen Cardmarket candidate universe."
     )
 
     original = PAGE.read_text(encoding="utf-8")
-    updated = replace_block(original, "open", open_body)
+    updated = replace_block(original, "scope-status", status_body)
+    updated = replace_block(updated, "open", open_body)
     updated = replace_block(updated, "manual", manual_body)
     updated = replace_block(updated, "footer", footer_body)
 

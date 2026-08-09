@@ -77,6 +77,9 @@ jobs:
       - name: Structural integrity
         run: python verification/review_integrity.py
 
+      - name: Legacy candidate-universe contract
+        run: python scripts/legacy_baseline.py --check
+
       # Parser regression fixtures. The illustrator credit used to be read from the flattened page
       # text, which absorbed the adjacent stage label (#33); these fixtures are the page shapes that
       # broke it.

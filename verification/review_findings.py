@@ -315,7 +315,7 @@ HARVEST_STEPS = {"build.ps1", "join.ps1", "getimages.ps1", "finalize.ps1"}
 LIVE_STEPS = {
     "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
     "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
-    "open_items.py", "site.py", "editions.py", "publish.py",
+    "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
 }
 
 missing_steps = sorted(s for s in LIVE_STEPS | HARVEST_STEPS | {"mkunits.ps1"}
@@ -370,6 +370,35 @@ check(
     "FAIL",
     all(re.search(r"not reproducible|nicht reproduzierbar", text) for text in rebuild_docs.values()),
     "README and HANDOVER must both say the harvest cannot be re-run, or the next reader will try.",
+)
+
+# #133 freezes the marketplace-seeded candidate universe without pretending that it is a global
+# discovery manifest.  One validator owns both halves: reconstruction of the exact historical
+# source commit and a narrow guard against the unqualified completeness phrases that caused the
+# scope failure.  Future candidates may change the live stores without changing this artifact.
+try:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import legacy_baseline
+
+    baseline_manifest_problems = legacy_baseline.manifest_problems()
+    baseline_scope_problems = legacy_baseline.scope_claim_problems()
+except (ImportError, OSError, ValueError) as error:  # pragma: no cover - diagnostic path
+    baseline_manifest_problems = [str(error)]
+    baseline_scope_problems = [str(error)]
+
+check(
+    "B5",
+    "Legacy candidate universe is immutable and reconstructible",
+    "FAIL",
+    not baseline_manifest_problems,
+    f"baseline problems: {baseline_manifest_problems[:4]}",
+)
+check(
+    "B6",
+    "Live and public surfaces qualify the legacy scope",
+    "FAIL",
+    not baseline_scope_problems,
+    f"scope problems: {baseline_scope_problems[:6]}",
 )
 
 # --------------------------------------------------------------------------- #

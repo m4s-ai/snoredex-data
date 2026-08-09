@@ -190,32 +190,35 @@
   <header class="masthead">
     <div class="eyebrow">Cardmarket · Snorlax · source verification</div>
     <h1>Verification status</h1>
-    <p class="lede">
-      Every claim is one card × one language × one variant, and each needs a confirmation
-      Every claim is one card × one language × one variant, and each was checked against a source
-      outside Cardmarket. All 719 language/product claims are now resolved.
-    </p>
   </header>
 
+  <!-- generated:scope-status — regenerate with `python scripts/open_items.py`; do not hand-edit -->
+  <p class="lede">
+      This page reports review status only inside the frozen legacy Cardmarket candidate universe
+      <code>cardmarket-search-2026-07-21</code>. All 719 inherited language/product
+      claims are resolved; that is not a claim that every locality or printing was discovered.
+    </p>
+
   <dl class="totals">
-    <div class="tot is-have"><dt>Confirmed</dt><dd>634</dd></div>
-    <div class="tot"><dt>Contradicted</dt><dd>85</dd></div>
-    <div class="tot"><dt>Your call</dt><dd>0</dd></div>
-    <div class="tot is-gap"><dt>Open</dt><dd>0</dd></div>
+    <div class="tot is-have"><dt>Confirmed legacy claims</dt><dd>634</dd></div>
+    <div class="tot"><dt>Contradicted legacy claims</dt><dd>85</dd></div>
+    <div class="tot"><dt>Legacy claims needing your call</dt><dd>0</dd></div>
+    <div class="tot is-gap"><dt>Open legacy claims</dt><dd>0</dd></div>
   </dl>
 
-  <div class="meter" role="img" aria-label="634 confirmed, 85 contradicted, 0 awaiting your decision, 0 open, of 719 claims">
+  <div class="meter" role="img" aria-label="634 confirmed, 85 contradicted, 0 awaiting your decision, 0 open, of 719 legacy Cardmarket claims">
     <span class="m-have" style="width:88.2%"></span>
     <span class="m-contra" style="width:11.8%"></span>
-    <span class="m-manual" style="width:0%"></span>
-    <span class="m-open" style="width:0%"></span>
+    <span class="m-manual" style="width:0.0%"></span>
+    <span class="m-open" style="width:0.0%"></span>
   </div>
   <p class="meter-key">
-    <span><i class="dot" style="background:var(--have)"></i><b>634 confirmed</b> — external source found</span>
-    <span><i class="dot" style="background:var(--accent)"></i><b>85 contradicted</b> — source says the language does not exist</span>
-    <span><i class="dot" style="background:var(--ink-faint)"></i><b>0 your call</b></span>
-    <span><i class="dot" style="background:var(--gap)"></i><b>0 open</b></span>
+    <span><i class="dot" style="background:var(--have)"></i><b>634 confirmed legacy claims</b> — external source found</span>
+    <span><i class="dot" style="background:var(--accent)"></i><b>85 contradicted legacy claims</b> — outside evidence conflicts with the raw marketplace claim</span>
+    <span><i class="dot" style="background:var(--ink-faint)"></i><b>0 legacy claims need your call</b></span>
+    <span><i class="dot" style="background:var(--gap)"></i><b>0 open legacy claims</b></span>
   </p>
+  <!-- /generated:scope-status -->
 
   <div class="filters">
     <span class="label">Filter</span>
@@ -280,7 +283,7 @@
     Generated 2 August 2026 from <code>verification/units.json</code>.
     Full evidence per claim in <code>confirmed_sources.json</code>,
     refuted claims in <code>CONTRADICTED.json</code>.
-    191 of 191 card variants are now fully resolved across all their languages.
+    191 of 191 legacy card variants are resolved across all languages claimed by the frozen Cardmarket candidate universe.
     <!-- /generated:footer -->
   </footer>
 </div>

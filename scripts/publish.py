@@ -38,6 +38,7 @@ FILES = [
     "FINDINGS.md",
     "LICENSE.md",
     "THIRD_PARTY_NOTICES.md",
+    "legacy-cardmarket-baseline.json",
     "snorlax_cards.json",
     "snoredex.sqlite",
     "snoredex-tracker-template.sqlite",

@@ -32,6 +32,7 @@ AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
 SCHEMA_VERSION = "1.1.0"
 
 INPUTS = [
+    "legacy-cardmarket-baseline.json",
     "snorlax_cards.json",
     "analysis_checklist.json",
     "analysis_confirmed_releases.json",
@@ -549,6 +550,7 @@ GROUP BY severity, category;
 
 
 def build_database(target: Path) -> dict[str, int | str]:
+    baseline = load("legacy-cardmarket-baseline.json")
     cards_doc = load("snorlax_cards.json")
     cards = cards_doc["cards"]
     checklist_doc = load("analysis_checklist.json")
@@ -587,7 +589,15 @@ def build_database(target: Path) -> dict[str, int | str]:
         "generated": snapshot_date,
         "source_fingerprint_sha256": fingerprint,
         "history_included": "false",
-        "scope": "All 198 Cardmarket product rows; code cards retained but marked out-of-scope.",
+        "candidate_universe_id": baseline["meta"]["baselineId"],
+        "candidate_universe_type": "historical-marketplace-search",
+        "candidate_universe_manifest": "legacy-cardmarket-baseline.json",
+        "candidate_universe_scope_status": "legacy-not-all-locality-complete",
+        "legacy_source_commit": baseline["meta"]["sourceCommit"],
+        "scope": (
+            "Current-known projection of the immutable legacy Cardmarket candidate universe; "
+            "not a complete all-locality catalogue. Code cards are retained but out-of-scope."
+        ),
         "application_status_policy": (
             "confirmed=exists; contradicted becomes not-printed only when its source is explicitly "
             "absence-capable within scope or an explicit collection-owner adjudication exists, "
@@ -1186,17 +1196,19 @@ Snapshot date: **{stats['generated']}** · SQLite schema: **{SCHEMA_VERSION}** �
 The research stores are internally consistent, but they are not a clean application boundary on
 their own: a consumer otherwise has to join product, language, edition, release, finish, source and
 checklist JSON while remembering which fields are raw marketplace claims. `snoredex.sqlite` is the
-normalized current-state projection. It contains no evidence journal and no migration history.
+normalized current-known projection of the immutable legacy Cardmarket candidate universe recorded
+in `legacy-cardmarket-baseline.json`. It is not a complete all-locality catalogue and contains no
+evidence journal or migration history.
 
 | Area | Audited current state |
 |---|---:|
-| Cardmarket products | {stats['products']} ({stats['collectible_products']} collectible, {stats['code_cards']} code cards) |
-| Raw product-language claims | {stats['language_claims']} ({stats['language_out_of_scope']} code-card claims out of scope) |
+| Legacy Cardmarket products | {stats['products']} ({stats['collectible_products']} collectible, {stats['code_cards']} code cards) |
+| Legacy raw product-language claims | {stats['language_claims']} ({stats['language_out_of_scope']} code-card claims out of scope) |
 | Repository language verdicts | {stats['language_confirmed']} confirmed · {stats['language_contradicted']} contradicted |
 | App language statuses | {stats['language_not_printed']} not-printed · {stats['language_disputed']} disputed ({stats['language_owner_adjudicated']} owner-adjudicated) |
 | Established product-edition rows | {stats['product_editions']} ({stats['suppressed_absent_editions']} absent-language and {stats['suppressed_unverified_editions']} unverified-language projections suppressed) |
 | Finish units / logical printings | {stats['finish_units']} / {stats['printings']} |
-| Physical checklist | {stats['checklist_items']} ({stats['documented_items']} documented · {stats['unresolved_items']} unresolved placeholders) |
+| Current-known physical checklist | {stats['checklist_items']} ({stats['documented_items']} documented · {stats['unresolved_items']} unresolved placeholders) |
 | Release rows without row-level source | {stats['release_rows_without_source']} / {stats['release_rows']} |
 | Products without established artist | {stats['missing_artists']} |
 | Opaque V-token products without a physical variant name | {stats['opaque_variants']} |
