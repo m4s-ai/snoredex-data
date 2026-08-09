@@ -1,0 +1,340 @@
+{
+  "schema": "snoredex-source-adapter-run",
+  "schemaVersion": "1.0.0",
+  "runId": "20260809T155355Z",
+  "coverageVersion": "1.0.0",
+  "startedAt": "2026-08-09T15:53:55Z",
+  "completedAt": "2026-08-09T15:53:55Z",
+  "status": "complete",
+  "contract": "verification/source_adapters.json",
+  "contractHash": "sha256:4a633256e97bfde027c431025ffa4f36458f755821022a8ac502b098c87f2239",
+  "capabilityGraph": "verification/source_capability_graph.json",
+  "capabilityGraphHash": "sha256:b7c4740d94b944d09fcb66194887b03341626e59388d60d70ad505cdd6393464",
+  "requests": [
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-de-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/de/sets",
+      "queryParameters": {
+        "rawLocale": "de",
+        "resource": "sets"
+      },
+      "rawLocale": "de",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-de-sets.json",
+      "responseHash": "sha256:74078c18aa1b9e6b8f191f0fa6c67eaaf81361b9624085faa03e19d01885716f",
+      "recordCount": 153,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-en-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/en/sets",
+      "queryParameters": {
+        "rawLocale": "en",
+        "resource": "sets"
+      },
+      "rawLocale": "en",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-en-sets.json",
+      "responseHash": "sha256:cf02b6d58d46bdedd9450ae938bc29cb33e80d99f38b54dbd5f780c64c7ae011",
+      "recordCount": 218,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-es-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/es/sets",
+      "queryParameters": {
+        "rawLocale": "es",
+        "resource": "sets"
+      },
+      "rawLocale": "es",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-es-sets.json",
+      "responseHash": "sha256:7a5fcfed517bbe63e9a8262ccd22427d5a809c0a7c07226aa88bee625dfcd650",
+      "recordCount": 154,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-fr-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/fr/sets",
+      "queryParameters": {
+        "rawLocale": "fr",
+        "resource": "sets"
+      },
+      "rawLocale": "fr",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-fr-sets.json",
+      "responseHash": "sha256:289ef438a04aff9faaf2925bf00f89b68178a400eb3394541af4cb154b4207da",
+      "recordCount": 200,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-id-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/id/sets",
+      "queryParameters": {
+        "rawLocale": "id",
+        "resource": "sets"
+      },
+      "rawLocale": "id",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-id-sets.json",
+      "responseHash": "sha256:115667ac4606f02cee530dbae8c3e5c4e87250fdd37e96d1dc401146d60ac237",
+      "recordCount": 70,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-it-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/it/sets",
+      "queryParameters": {
+        "rawLocale": "it",
+        "resource": "sets"
+      },
+      "rawLocale": "it",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-it-sets.json",
+      "responseHash": "sha256:876d1b12c981f6d5da38b87f3485c2b645d92a892adf6b421a5021fb9f7f6af1",
+      "recordCount": 190,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-ja-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/ja/sets",
+      "queryParameters": {
+        "rawLocale": "ja",
+        "resource": "sets"
+      },
+      "rawLocale": "ja",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-ja-sets.json",
+      "responseHash": "sha256:5d7f46e8eaa710276021fc79b09ee104ee6ba9cafc47b7dcae5fc7cd5ffacf57",
+      "recordCount": 177,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-ko-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/ko/sets",
+      "queryParameters": {
+        "rawLocale": "ko",
+        "resource": "sets"
+      },
+      "rawLocale": "ko",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-ko-sets.json",
+      "responseHash": "sha256:b8b87aacb27290038a3f13cbf34633435d743f3c072ecedf7fd876c2d30e4dfa",
+      "recordCount": 95,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-pt-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/pt/sets",
+      "queryParameters": {
+        "rawLocale": "pt",
+        "resource": "sets"
+      },
+      "rawLocale": "pt",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-pt-sets.json",
+      "responseHash": "sha256:57f17b460f8e94ce9da2df1ecc9fce83b4e7d3cda79475eeaf96f4ac3595355d",
+      "recordCount": 123,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-th-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/th/sets",
+      "queryParameters": {
+        "rawLocale": "th",
+        "resource": "sets"
+      },
+      "rawLocale": "th",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-th-sets.json",
+      "responseHash": "sha256:231e98e7e3c637321ea6573a2099205d5b7e5c813ba31c5ae84557bba70d8800",
+      "recordCount": 72,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-zh-cn-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/zh-cn/sets",
+      "queryParameters": {
+        "rawLocale": "zh-cn",
+        "resource": "sets"
+      },
+      "rawLocale": "zh-cn",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-zh-cn-sets.json",
+      "responseHash": "sha256:69170515af0564d353d0400905ccbb759ee402455a88021f433453fe23f056da",
+      "recordCount": 57,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260809T155355Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tcgdex-zh-tw-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/zh-tw/sets",
+      "queryParameters": {
+        "rawLocale": "zh-tw",
+        "resource": "sets"
+      },
+      "rawLocale": "zh-tw",
+      "retrievedAt": "2026-08-09T15:53:55Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-zh-tw-sets.json",
+      "responseHash": "sha256:06790ef53153231dff8e872415e75cb474fd71ab5f92ec6bb0bec5cbe49ba358",
+      "recordCount": 98,
+      "pageCount": 1,
+      "error": null
+    }
+  ],
+  "failures": []
+}

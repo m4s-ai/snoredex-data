@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "schema": "snoredex-source-adapter-contract",
+    "schemaVersion": "1.0.0",
+    "coverageVersion": "1.0.0",
+    "reviewedAt": "2026-08-09",
+    "policies": [
+      "Enumeration starts from provider-native catalogue endpoints and never from legacy set codes, known Snorlax rows, cards, units, or verdict stores.",
+      "A complete slice means every record returned by that bounded request was retained and accounted for; it never means the provider or Pokemon set universe is complete.",
+      "Every raw record enters exactly one bucket: mapped, new-candidate, ambiguous/needs-evidence, or positively-excluded.",
+      "Empty catalogues, pagination failures, blocked requests, parse failures and unparsed finish clauses are run errors or needs-evidence states, never negative evidence.",
+      "Raw identifiers, names, scripts, suffixes, source-native prose and date precision survive normalization; cross-locale equivalence requires an explicit later mapping.",
+      "Adapter output is staging input for #136 and cannot mutate confirmation, contradiction, physical-printing, set-edition or release-event verdicts."
+    ]
+  },
+  "rawRecordContract": {
+    "requiredProvenance": [
+      "providerId",
+      "surfaceId",
+      "coverageEdgeId",
+      "endpoint",
+      "queryParameters",
+      "rawProviderId",
+      "rawLocale",
+      "retrievedAt",
+      "responseHash",
+      "recordHash",
+      "runId"
+    ],
+    "rawFields": [
+      "localName",
+      "localCode",
+      "category",
+      "language",
+      "script",
+      "cardCount",
+      "releaseDate",
+      "releaseStatus",
+      "market",
+      "finishProfileText"
+    ],
+    "buckets": ["mapped", "new-candidate", "ambiguous/needs-evidence", "positively-excluded"],
+    "terminalStates": ["complete", "needs-evidence", "blocked-by-source"]
+  },
+  "adapters": [
+    {
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.0.0",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "state": "active",
+      "endpointTemplate": "https://api.tcgdex.net/v2/{rawLocale}/sets",
+      "category": "set",
+      "sourceFirst": true,
+      "slices": [
+        {"sliceId": "tcgdex-en-sets", "coverageEdgeId": "tcgdex-west-positive", "rawLocale": "en", "locality": "WEST", "language": "English", "script": "Latn"},
+        {"sliceId": "tcgdex-fr-sets", "coverageEdgeId": "tcgdex-west-positive", "rawLocale": "fr", "locality": "WEST", "language": "French", "script": "Latn"},
+        {"sliceId": "tcgdex-de-sets", "coverageEdgeId": "tcgdex-west-positive", "rawLocale": "de", "locality": "WEST", "language": "German", "script": "Latn"},
+        {"sliceId": "tcgdex-it-sets", "coverageEdgeId": "tcgdex-west-positive", "rawLocale": "it", "locality": "WEST", "language": "Italian", "script": "Latn"},
+        {"sliceId": "tcgdex-es-sets", "coverageEdgeId": "tcgdex-west-positive", "rawLocale": "es", "locality": "WEST", "language": "Spanish", "script": "Latn"},
+        {"sliceId": "tcgdex-pt-sets", "coverageEdgeId": "tcgdex-west-positive", "rawLocale": "pt", "locality": "WEST", "language": "Portuguese", "script": "Latn"},
+        {"sliceId": "tcgdex-ja-sets", "coverageEdgeId": "tcgdex-asia-thin-positive", "rawLocale": "ja", "locality": "JP", "language": "Japanese", "script": "Jpan"},
+        {"sliceId": "tcgdex-zh-tw-sets", "coverageEdgeId": "tcgdex-asia-thin-positive", "rawLocale": "zh-tw", "locality": "TW", "language": "T-Chinese", "script": "Hant"},
+        {"sliceId": "tcgdex-id-sets", "coverageEdgeId": "tcgdex-asia-thin-positive", "rawLocale": "id", "locality": "ID", "language": "Indonesian", "script": "Latn"},
+        {"sliceId": "tcgdex-th-sets", "coverageEdgeId": "tcgdex-asia-thin-positive", "rawLocale": "th", "locality": "TH", "language": "Thai", "script": "Thai"},
+        {"sliceId": "tcgdex-ko-sets", "coverageEdgeId": "tcgdex-asia-thin-positive", "rawLocale": "ko", "locality": "KR", "language": "Korean", "script": "Hang"},
+        {"sliceId": "tcgdex-zh-cn-sets", "coverageEdgeId": "tcgdex-asia-thin-positive", "rawLocale": "zh-cn", "locality": "CN", "language": "S-Chinese", "script": "Hans"}
+      ]
+    }
+  ],
+  "explicitMappings": [],
+  "gaps": [
+    {
+      "gapId": "official-western-catalogue-index",
+      "track": "official Western set/product catalogue",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "terminalState": "needs-evidence",
+      "reason": "The retained official surface is four exact checklist documents, not an empty-start expansion or product index.",
+      "retryCondition": "Activate only after a provider-native enumerable catalogue endpoint and its pagination boundary are retained."
+    },
+    {
+      "gapId": "official-japanese-product-index",
+      "track": "official Japanese sets, decks, promos and products",
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-product-pages",
+      "terminalState": "needs-evidence",
+      "reason": "Known product paths are directly fetchable, but the capability graph does not yet retain an exhaustive empty-start index and older products may have no page.",
+      "retryCondition": "Retain and challenge an official index or sitemap before adding an enumeration adapter."
+    },
+    {
+      "gapId": "official-japanese-card-search-not-set-catalogue",
+      "track": "official Japanese card-search derived set identifiers",
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "terminalState": "needs-evidence",
+      "reason": "The card search has known omissions and is a card surface, so deriving a closed set catalogue from it would turn missing cards into missing sets.",
+      "retryCondition": "Use it in #136 for positive card records; activate here only if a separate provider-native set list is exposed."
+    },
+    {
+      "gapId": "official-asia-product-index",
+      "track": "official TW, ID, TH and SEA-English sets/products",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "terminalState": "needs-evidence",
+      "reason": "The retained surface is recent card search with locale-varying historical depth, not a bounded historical product catalogue.",
+      "retryCondition": "Retain locale-native product indexes and pagination rules without seeding known cards."
+    },
+    {
+      "gapId": "official-cn-kr-product-index",
+      "track": "official Simplified-Chinese and Korean sets/products",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": null,
+      "terminalState": "needs-evidence",
+      "reason": "No technically and legally reviewed official CN/KR enumerable product surface exists in the capability graph.",
+      "retryCondition": "Add the provider surface, retention terms, known-positive fixture and boundary challenge before an adapter."
+    },
+    {
+      "gapId": "bulbapedia-wikitext-catalogue",
+      "track": "secondary historical set/release and source-native rarity catalogue",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "terminalState": "blocked-by-source",
+      "reason": "The required MediaWiki wikitext API is browser-blocked in the current scripted environment; rendered DOM must not replace wikitext because Rare and Rare Holo are distinct.",
+      "retryCondition": "Resume with action=parse, prop=wikitext, retained revision and section when browser API capture is available."
+    },
+    {
+      "gapId": "tcgcsv-unseeded-groups",
+      "track": "secondary TCGplayer group/product catalogue",
+      "providerId": "tcgcsv",
+      "surfaceId": "tcgcsv-api",
+      "terminalState": "needs-evidence",
+      "reason": "Product enumeration currently requires category and group identifiers whose empty-start discovery path is not yet retained.",
+      "retryCondition": "Retain the category-to-group enumeration chain and licence-compatible raw fixtures."
+    },
+    {
+      "gapId": "historical-specialist-catalogues",
+      "track": "bounded specialist catalogues for historical gaps",
+      "providerId": "pokumon",
+      "surfaceId": "pokumon-search",
+      "terminalState": "needs-evidence",
+      "reason": "Current specialist capabilities are positive search/listing records, not reviewed empty-start set catalogues; other specialist failure states remain in the capability graph.",
+      "retryCondition": "Add one bounded adapter per specialist only after its source-native index, terms, and pagination are retained."
+    },
+    {
+      "gapId": "cardmarket-market-catalogue",
+      "track": "market catalogue and locality disagreement capture",
+      "providerId": "cardmarket",
+      "surfaceId": "cardmarket-products",
+      "terminalState": "blocked-by-source",
+      "reason": "The surface is rate-limited and a market listing locality must remain separate from printing locality; neither can be silently merged.",
+      "retryCondition": "Resume with a rate-safe snapshot and explicit provider-claim disagreement model."
+    },
+    {
+      "gapId": "non-expansion-capability-edges",
+      "track": "decks, promos, catch-up products and other non-expansions",
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-product-pages",
+      "terminalState": "needs-evidence",
+      "reason": "No active empty-start adapter reaches these categories; treating expansion-only results as complete would strand valid local products.",
+      "retryCondition": "Add explicit product-category edges and challenge fixtures before marking any category slice complete."
+    }
+  ]
+}

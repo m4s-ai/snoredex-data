@@ -95,6 +95,9 @@ jobs:
       - name: Owner adjudication regression tests
         run: python verification/test_owner_adjudications.py
 
+      - name: Source-first adapter regression tests
+        run: python verification/test_source_adapters.py
+
       # Drift-metric polarity. A queue emptying is progress and a queue refilling is not, and the
       # suite could express neither until #69 — nor fail on either.
       - name: Metric polarity regression tests
@@ -125,6 +128,7 @@ jobs:
           python scripts/confirmed_releases.py
           python scripts/source_registry.py --check
           python scripts/source_capabilities.py --check
+          python scripts/source_adapters.py --check
           python scripts/checklist.py --check
           python scripts/readme_stats.py --check
           python scripts/issue_templates.py --check
