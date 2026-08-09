@@ -45,6 +45,7 @@ INPUTS = [
     "verification/source_registry.json",
     "verification/specimens.json",
     "verification/owner_adjudications.json",
+    "verification/evidence_semantics.json",
 ]
 
 LANGUAGES = [
@@ -264,6 +265,13 @@ CREATE TABLE product_languages (
     source_ref TEXT,
     source_type TEXT,
     evidence TEXT,
+    -- What the verdict rests on, from verification/evidence_semantics.json (#137). A consumer
+    -- reading `exists` cannot otherwise tell a card record from an inference off the set's
+    -- language list, and 83 of the 634 are the latter on cards outside the numbered run.
+    evidence_granularity TEXT CHECK (evidence_granularity IN (
+        'specimen-or-card', 'product-or-set', 'market-or-era', 'sibling-derived'
+    )),
+    evidence_inference TEXT,
     checked_at TEXT,
     PRIMARY KEY (product_id, language_code)
 ) WITHOUT ROWID;
@@ -489,6 +497,8 @@ SELECT
     pl.source_ref,
     pl.source_type,
     pl.evidence,
+    pl.evidence_granularity,
+    pl.evidence_inference,
     pl.checked_at
 FROM product_languages pl
 JOIN products p USING(product_id)
@@ -555,6 +565,11 @@ GROUP BY severity, category;
 
 def build_database(target: Path) -> dict[str, int | str]:
     baseline = load("legacy-cardmarket-baseline.json")
+    # #137's inventory. Read-only here: the database exposes what a verdict rests on, it does not
+    # decide anything from it.
+    evidence_semantics = {
+        row["unitId"]: row for row in load("verification/evidence_semantics.json")["units"]
+    }
     cards_doc = load("snorlax_cards.json")
     cards = cards_doc["cards"]
     checklist_doc = load("analysis_checklist.json")
@@ -720,13 +735,16 @@ def build_database(target: Path) -> dict[str, int | str]:
             established_languages.add((pid, LANGUAGE_CODE[unit["language"]]))
         language_application_status[(pid, LANGUAGE_CODE[unit["language"]])] = app_status
         cursor.execute(
-            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 pid, LANGUAGE_CODE[unit["language"]], 1, unit["status"], app_status,
                 absence_supported, adjudication["adjudicationId"] if adjudication else None,
                 unit["unitId"], unit["providerId"],
                 int(unit["corroborated"]), source_url, unit.get("sourceRef"),
-                unit.get("sourceType"), unit.get("evidence"), unit.get("checkedAt"),
+                unit.get("sourceType"), unit.get("evidence"),
+                (evidence_semantics.get(unit["unitId"]) or {}).get("granularity"),
+                (evidence_semantics.get(unit["unitId"]) or {}).get("inference"),
+                unit.get("checkedAt"),
             ),
         )
 
@@ -742,10 +760,10 @@ def build_database(target: Path) -> dict[str, int | str]:
         if pid is None:
             raise ValueError(f"excluded unit {unit['unitId']} has no product URL match")
         cursor.execute(
-            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 pid, LANGUAGE_CODE[unit["language"]], 1, "out-of-scope", "out-of-scope", 0,
-                None, unit["unitId"], None, None, None, None, None, None, None,
+                None, unit["unitId"], None, None, None, None, None, None, None, None, None,
             ),
         )
 

@@ -34,6 +34,25 @@ The useful status split is:
 - `providers.supports_absence` means that a provider has at least one such scope; the row-level
   `source_absence_supported` field identifies whether this exact source URL is in one. Provider
   authority alone is never enough.
+
+`exists` is not one thing, and two columns say which kind it is (#137). `evidence_granularity`
+records what the evidence was actually about, and `evidence_inference` records whether the step
+from that evidence to this card holds:
+
+| granularity | inference | rows | what it means |
+|---|---|---:|---|
+| `specimen-or-card` | — | 469 | a record about this card in this language |
+| `product-or-set` | `carries` | 60 | inferred from the set's language release, and the card is inside the numbered run, so it follows |
+| `product-or-set` | `does-not-carry` | **83** | inferred from the set's language release for a promo, deck-fixed or secret-numbered card, which the run never reached |
+| `sibling-derived` | — | 22 | the evidence of a neighbouring unit |
+
+An application that needs card-level evidence should filter on `evidence_granularity` rather than
+trusting `exists` alone. The 83 are not wrong — they are unproven at this granularity, and
+`pending` semantics apply: not yet established, never proven absent.
+
+The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated`, none
+is source-derived, which is rule 4 visible in the data. Every `disputed` row is
+`market-or-era` + `unscoped-absence`.
 - `owner_adjudications` records the collection owner's final decision after reviewing all cited
   claims and evidence. It is not a claim that any one provider proved absence.
 - `application_status='disputed'` preserves a repository contradiction with neither a scoped
@@ -106,6 +125,16 @@ ORDER BY release_date, set_code, collector_number;
 SELECT language, provider, authority_tier, source_url
 FROM app_language_availability
 WHERE product_id = 720390 AND application_status = 'exists';
+
+-- Confirmed languages that rest on a card record rather than on the set's language list
+SELECT language, provider, authority_tier, evidence_granularity, evidence_inference
+FROM app_language_availability
+WHERE application_status = 'exists' AND evidence_granularity = 'specimen-or-card';
+
+-- The confirmations whose set-level inference does not reach the card (#137)
+SELECT set_code, collector_number, language, evidence_granularity, source_type
+FROM app_language_availability
+WHERE evidence_inference = 'does-not-carry';
 
 -- Distinguish owner decisions from source-scoped absence
 SELECT unit_id, language, repository_verdict, application_status,
