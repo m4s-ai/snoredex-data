@@ -405,7 +405,7 @@ def collect() -> None:
         # Runnable from what is committed. The gate regenerates these and diffs the result.
         LIVE_STEPS = {
             "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
-            "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
+            "source_registry.py", "source_capabilities.py", "checklist.py", "readme_stats.py",
             "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
             "print_identity_dryrun.py", "set_catalogue_dryrun.py",
         }
@@ -2290,6 +2290,126 @@ def collect() -> None:
                 not missing_attribution,
                 f"providers missing required fields: {missing_attribution}",
             )
+
+            capability_paths = [
+                ROOT / "verification" / "source_capability_schema.json",
+                ROOT / "verification" / "source_capabilities.json",
+                ROOT / "verification" / "source_capability_graph.json",
+            ]
+            missing_capability_files = [
+                str(path.relative_to(ROOT)) for path in capability_paths if not path.exists()
+            ]
+            if not missing_capability_files:
+                capability_schema = load("verification/source_capability_schema.json")
+                capability_manifest = load("verification/source_capabilities.json")
+                capability_graph = load("verification/source_capability_graph.json")
+                graph_providers = {
+                    provider["providerId"] for provider in capability_graph["providers"]
+                }
+                graph_surfaces = {
+                    surface["surfaceId"]: surface for surface in capability_graph["surfaces"]
+                }
+                graph_edges = {
+                    edge["edgeId"]: edge for edge in capability_graph["coverageEdges"]
+                }
+                expected_source_keys = {
+                    row.get("canonicalUrl") or row.get("nonUrlEvidenceId")
+                    for row in registry["evidence"]
+                }
+                resolved_source_keys = [
+                    row["sourceKey"] for row in capability_graph["sourceResolution"]
+                ]
+                bad_routes = [
+                    row["sourceKey"] for row in capability_graph["sourceResolution"]
+                    if row["providerId"] not in graph_providers
+                    or row["surfaceId"] not in graph_surfaces
+                    or graph_surfaces[row["surfaceId"]]["providerId"] != row["providerId"]
+                    or not row["capabilityEdgeIds"]
+                    or any(edge_id not in graph_edges for edge_id in row["capabilityEdgeIds"])
+                ]
+                capability_contract_ok = (
+                    capability_schema.get("properties", {}).get("meta", {})
+                    .get("properties", {}).get("schema", {}).get("const")
+                    == capability_manifest.get("meta", {}).get("schema")
+                    and capability_graph.get("meta", {}).get("schemaVersion")
+                    == capability_manifest.get("meta", {}).get("schemaVersion")
+                    and graph_providers == declared
+                    and len(resolved_source_keys) == len(set(resolved_source_keys))
+                    and set(resolved_source_keys) == expected_source_keys
+                    and not bad_routes
+                )
+                check(
+                    "S5",
+                    "Every verdict source resolves through the versioned capability graph",
+                    "FAIL",
+                    capability_contract_ok,
+                    f"missing={missing_capability_files}; bad routes={bad_routes[:5]}; "
+                    f"registry/provider sets agree={graph_providers == declared}; "
+                    f"resolved={len(resolved_source_keys)} expected={len(expected_source_keys)}",
+                )
+
+                observations = {
+                    row["observationId"]: row for row in capability_graph["observations"]
+                }
+                bad_hashes = []
+                for observation in observations.values():
+                    canonical = json.dumps(
+                        observation["rawRecord"], ensure_ascii=False, sort_keys=True,
+                        separators=(",", ":"),
+                    ).encode("utf-8")
+                    expected_hash = "sha256:" + hashlib.sha256(canonical).hexdigest()
+                    if observation.get("rawRecordHash") != expected_hash:
+                        bad_hashes.append(observation["observationId"])
+                edge_contract_errors = []
+                manifest_absence_scopes = set()
+                for edge_id, edge in graph_edges.items():
+                    positive = observations.get(edge.get("knownPositiveObservationId"))
+                    if (not positive or positive.get("kind") != "known-positive"
+                            or edge_id not in positive.get("validatesEdges", [])):
+                        edge_contract_errors.append(f"{edge_id}: no positive fixture")
+                    absence = edge["absenceCapability"]
+                    if absence["enabled"]:
+                        challenge = observations.get(
+                            edge.get("outOfScopeChallengeObservationId"))
+                        if (not edge["exhaustive"] or not absence["exactScopes"]
+                                or edge["boundary"]["zeroResultMeans"] != "bounded-absence"
+                                or not challenge
+                                or challenge.get("kind") != "out-of-scope-challenge"):
+                            edge_contract_errors.append(f"{edge_id}: unbounded absence")
+                        manifest_absence_scopes.update(absence["exactScopes"])
+                    elif (edge["exhaustive"] or absence["exactScopes"]
+                          or edge["boundary"]["zeroResultMeans"] != "unknown"):
+                        edge_contract_errors.append(f"{edge_id}: silence promoted to absence")
+                    surface = graph_surfaces[edge["surfaceId"]]
+                    if ("finish" in edge["positiveEvidenceCapabilities"]
+                            and surface["finishCapability"]["mode"] == "none"):
+                        edge_contract_errors.append(f"{edge_id}: finish inherited from card scope")
+                    if (edge["providerId"] in {"psa", "cgc", "inspected-specimen"}
+                            and absence["enabled"]):
+                        edge_contract_errors.append(f"{edge_id}: specimen registry closes absence")
+                registry_absence_scopes = {
+                    scope for provider in registry["providers"]
+                    if provider.get("supportsAbsence")
+                    for scope in provider.get("absenceScopes") or []
+                }
+                check(
+                    "S6",
+                    "Coverage edges keep positive fixtures, hashes, finish scope and absence boundaries",
+                    "FAIL",
+                    not bad_hashes and not edge_contract_errors
+                    and manifest_absence_scopes == registry_absence_scopes,
+                    f"bad hashes={bad_hashes[:5]}; edge errors={edge_contract_errors[:5]}; "
+                    f"absence scope drift={sorted(manifest_absence_scopes ^ registry_absence_scopes)[:5]}",
+                )
+            else:
+                check(
+                    "S5", "Every verdict source resolves through the versioned capability graph",
+                    "FAIL", False, f"missing {missing_capability_files}",
+                )
+                check(
+                    "S6", "Coverage edges keep positive fixtures, hashes, finish scope and absence boundaries",
+                    "FAIL", False, f"missing {missing_capability_files}",
+                )
         else:
             check("S1", "Source registry exists", "FAIL", False,
                   "verification/source_registry.json is missing; run python scripts/source_registry.py")

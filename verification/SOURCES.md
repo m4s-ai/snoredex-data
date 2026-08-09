@@ -21,6 +21,7 @@ gap, never a finding.
 | **The Pokémon Company official checklists** | official-publisher | 1 | yes | 4 | 12 | finish, product |
 | **52poke (Wiki)** | collector-database | 2 | no | 0 | 0 | language, artist, edition, finish |
 | **Bulbapedia** | fan-wiki | 2 | no | 88 | 694 | language, edition, date, finish |
+| **CGC certification and registry** | grading-registry | 2 | no | 0 | 0 | finish, language |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 0 | 0 | language, finish |
 | **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 50 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
@@ -103,6 +104,15 @@ gap, never a finding.
 - **Can establish absence:** no — positive evidence only
 - **Attribution:** Content from Bulbapedia, licensed CC BY-NC-SA 2.5.
 - **Notes:** Tier 2 by owner decision, 2026-08-03. It sat at tier 3 beside retailer listings while carrying 247 of the 252 claims that rested on a single tier-3 source — more of this dataset than anything but TCGdex. The tier is meant to record dependability, and its contributors are dedicated researchers, so the rank now says what the project actually does with their work. Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.
+
+### CGC certification and registry — <https://www.cgccards.com>
+
+- **Organization:** Certified Guaranty Company
+- **Terms:** Site terms; used for identification only.
+- **Coverage:** named certifications and concrete collector-registry specimens
+- **Can establish absence:** no — positive evidence only
+- **Attribution:** Certification and registry variety names from CGC.
+- **Notes:** A certification or collector-registry row is positive specimen evidence only. Personal sets, population counts and omissions are never negative evidence.
 
 ### Cardmarket seller listing photograph — <https://www.cardmarket.com>
 

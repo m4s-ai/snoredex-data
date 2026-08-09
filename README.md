@@ -124,7 +124,7 @@ Current-known status snapshot: **2026-08-09**. Its candidate denominator is the 
 | Legacy language-claim review | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Current-known physical checklist | **839 items** across 174 cards and 15 languages: 666 documented printings plus 173 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 333 externally confirmed, 103 marketplace-only positives, 125 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 220 units. |
-| Evidence registry | **22 providers**, 884 evidence records, 877 unique URLs, and 2,789 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
+| Evidence registry | **23 providers**, 884 evidence records, 877 unique URLs, and 2,789 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -148,7 +148,7 @@ agreed independently, and `verification/source_registry.json` records the author
 | Tier | Sources |
 |---|---|
 | 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · The Pokémon Company official checklists |
-| 2 | 52poke (Wiki) · Bulbapedia · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · TCGdex · pokemontcg.io |
+| 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · TCGdex · pokemontcg.io |
 | 3 | LigaPokemon · Limitless TCG · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · koreanpokemoncards.com · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 

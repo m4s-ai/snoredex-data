@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/m4s-ai/snoredex-data/verification/source_capability_schema.json",
+  "title": "Snoredex source capability manifest",
+  "description": "Versioned contract for provider surfaces and their bounded source-to-coverage edges. Provider authority never implies absence capability.",
+  "type": "object",
+  "required": ["meta", "providers", "surfaces", "observations"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["schema", "schemaVersion", "reviewedAt", "policies"],
+      "additionalProperties": false,
+      "properties": {
+        "schema": {"const": "snoredex-source-capability-manifest"},
+        "schemaVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "reviewedAt": {"type": "string", "format": "date"},
+        "policies": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    },
+    "providers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["providerId", "operator", "authorityTier", "licenseOrTerms", "rawRetention"],
+        "additionalProperties": false,
+        "properties": {
+          "providerId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "operator": {"type": "string", "minLength": 1},
+          "authorityTier": {"type": "integer", "minimum": 1, "maximum": 5},
+          "licenseOrTerms": {"type": "string", "minLength": 1},
+          "rawRetention": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/surface"}
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/observation"}
+    }
+  },
+  "$defs": {
+    "query": {
+      "type": "object",
+      "required": ["method", "endpoint", "parameters", "pagination", "expectedIdentifiers"],
+      "additionalProperties": false,
+      "properties": {
+        "method": {"enum": ["GET", "POST", "MANUAL", "NON_URL", "NONE"]},
+        "endpoint": {"type": ["string", "null"]},
+        "parameters": {"type": "array", "items": {"type": "string"}},
+        "pagination": {"type": "string", "minLength": 1},
+        "expectedIdentifiers": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "finishCapability": {
+      "type": "object",
+      "required": ["mode", "vocabulary", "publicationForm", "closedWithinScope"],
+      "additionalProperties": false,
+      "properties": {
+        "mode": {"enum": ["none", "card-flags", "set-profile", "source-native-rarity", "named-variety", "specimen-observation", "attested-observation", "product-subtype"]},
+        "vocabulary": {"type": "array", "items": {"type": "string"}},
+        "publicationForm": {"type": "string", "minLength": 1},
+        "closedWithinScope": {"type": "boolean"}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["localities", "languages", "scripts", "productCategories", "timeRange"],
+      "additionalProperties": false,
+      "properties": {
+        "localities": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "languages": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "scripts": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "productCategories": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "timeRange": {
+          "type": "object",
+          "required": ["start", "end", "basis"],
+          "additionalProperties": false,
+          "properties": {
+            "start": {"type": ["string", "null"]},
+            "end": {"type": ["string", "null"]},
+            "basis": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "absenceCapability": {
+      "type": "object",
+      "required": ["enabled", "dimensions", "exactScopes", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "dimensions": {"type": "array", "items": {"type": "string"}},
+        "exactScopes": {"type": "array", "items": {"type": "string"}},
+        "rationale": {"type": "string", "minLength": 1}
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": ["outsideScope", "zeroResultMeans", "challenge"],
+      "additionalProperties": false,
+      "properties": {
+        "outsideScope": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "zeroResultMeans": {"enum": ["unknown", "bounded-absence"]},
+        "challenge": {"type": "string", "minLength": 1}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "required": ["edgeId", "coverage", "positiveEvidenceCapabilities", "exhaustive", "absenceCapability", "knownPositiveObservationId", "boundary"],
+      "additionalProperties": false,
+      "properties": {
+        "edgeId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "coverage": {"$ref": "#/$defs/coverage"},
+        "positiveEvidenceCapabilities": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "exhaustive": {"type": "boolean"},
+        "absenceCapability": {"$ref": "#/$defs/absenceCapability"},
+        "knownPositiveObservationId": {"type": "string"},
+        "outOfScopeChallengeObservationId": {"type": "string"},
+        "boundary": {"$ref": "#/$defs/boundary"}
+      }
+    },
+    "surface": {
+      "type": "object",
+      "required": ["surfaceId", "providerId", "label", "state", "failureState", "accessMode", "adapterState", "lastCheckedAt", "freshnessPolicy", "query", "finishCapability", "coverageEdges"],
+      "additionalProperties": false,
+      "properties": {
+        "surfaceId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "providerId": {"type": "string"},
+        "label": {"type": "string", "minLength": 1},
+        "match": {
+          "type": "object",
+          "required": ["urlPrefixes", "nonUrlEvidenceIds"],
+          "additionalProperties": false,
+          "properties": {
+            "urlPrefixes": {"type": "array", "items": {"type": "string"}},
+            "nonUrlEvidenceIds": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "state": {"enum": ["active", "incomplete", "rate-limited", "blocked-by-browser", "unavailable", "needs-evidence", "non-url", "internal"]},
+        "failureState": {"type": ["string", "null"]},
+        "accessMode": {"enum": ["scriptable", "direct-download", "browser", "manual", "non-url", "internal", "none"]},
+        "adapterState": {"enum": ["active", "planned", "not-applicable"]},
+        "lastCheckedAt": {"type": "string", "format": "date"},
+        "freshnessPolicy": {"type": "string", "minLength": 1},
+        "query": {"$ref": "#/$defs/query"},
+        "finishCapability": {"$ref": "#/$defs/finishCapability"},
+        "coverageEdges": {"type": "array", "items": {"$ref": "#/$defs/edge"}}
+      }
+    },
+    "fixtureRef": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "providerId", "recordKey"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {"const": "source-registry-evidence"},
+            "providerId": {"type": "string"},
+            "recordKey": {"type": "string"}
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "record"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {"const": "inline-record"},
+            "record": {"type": "object"}
+          }
+        }
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "required": ["observationId", "surfaceId", "kind", "queryUrl", "queryParameters", "retrievedAt", "fixtureRef", "expectedIdentifiers", "validatesEdges", "outcome"],
+      "additionalProperties": false,
+      "properties": {
+        "observationId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "surfaceId": {"type": "string"},
+        "kind": {"enum": ["known-positive", "out-of-scope-challenge"]},
+        "queryUrl": {"type": ["string", "null"]},
+        "queryParameters": {"type": "object"},
+        "retrievedAt": {"type": "string", "format": "date"},
+        "fixtureRef": {"$ref": "#/$defs/fixtureRef"},
+        "expectedIdentifiers": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "validatesEdges": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "outcome": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

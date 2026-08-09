@@ -197,6 +197,7 @@ python scripts/finishes.py                       # finish units/review + summari
 python scripts/language_status.py                # per-card language verdicts
 python scripts/confirmed_releases.py             # chronological JSON + CSV
 python scripts/source_registry.py                # provider/evidence registry
+python scripts/source_capabilities.py            # bounded source/coverage graph (#135)
 python scripts/checklist.py                      # canonical checklist items
 python scripts/readme_stats.py                   # generated markdown blocks
 python scripts/issue_templates.py                # community correction form
@@ -227,8 +228,8 @@ python scripts/language_status.py && python scripts/confirmed_releases.py
 python scripts/database.py
 python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 
-for g in checklist readme_stats issue_templates site source_registry open_items analyze database \
-         print_identity_dryrun set_catalogue_dryrun
+for g in checklist readme_stats issue_templates site source_registry source_capabilities open_items \
+         analyze database print_identity_dryrun set_catalogue_dryrun
 do python scripts/$g.py --check; done            # fail instead of writing
 python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
 python verification/test_site.py                 # browser acceptance tests
