@@ -86,6 +86,11 @@ jobs:
       - name: Print identity dry run
         run: python scripts/print_identity_dryrun.py --check
 
+      # The evidence-granularity inventory (#137). Report-only, but it must not go stale: its
+      # baselines are what catch a pass writing a verdict on evidence that cannot reach the card.
+      - name: Evidence semantics inventory
+        run: python scripts/evidence_semantics.py --check
+
       # Parser regression fixtures. The illustrator credit used to be read from the flattened page
       # text, which absorbed the adjacent stage label (#33); these fixtures are the page shapes that
       # broke it.
