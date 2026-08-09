@@ -407,7 +407,7 @@ def collect() -> None:
             "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
             "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
             "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
-            "print_identity_dryrun.py",
+            "print_identity_dryrun.py", "set_catalogue_dryrun.py",
         }
 
         # The harvest steps and `mkunits` moved to verification/archive/passes/ once #28 had captured the
@@ -793,6 +793,156 @@ def collect() -> None:
             not guessed,
             f"{len(guessed)} held entr(ies) carry a set code with no recorded reason it is "
             f"unconfirmed: {guessed[:5]}",
+        )
+
+        # N8-N11 — local sets, editions, events, finish profiles and rarity claims (#146)
+        # --------------------------------------------------------------------------- #
+        # Set discovery has its own immutable provider registry. ADR-0001 is consulted only for
+        # already established editions/releases, never to decide whether a provider set exists.
+        set_sources = load("verification/set_catalogue_sources.json")
+        set_graph = load("verification/set_catalogue_dryrun.json")
+        source_rows = set_sources["sourceRecords"]
+        graph_sources = set_graph["sourceRecords"]
+        source_ids = {row["sourceRecordId"] for row in source_rows}
+        graph_source_ids = {row["sourceRecordId"] for row in graph_sources}
+        dispositions = set_graph["sourceDispositions"]
+        disposition_ids = [row["sourceRecordId"] for row in dispositions]
+
+        legacy_profiles = {
+            (card["market"], card["setCode"], card["setName"])
+            for card in cards_doc["cards"]
+        }
+        stored_legacy_profiles = {
+            (row["raw"]["market"], row["raw"]["localCode"], row["raw"]["localName"])
+            for row in source_rows
+            if row["sourceKind"] == "legacy-cardmarket-set-profile"
+        }
+        source_first_profiles = {
+            (entry["locality"], entry["localSetCode"])
+            for entry in source_first["prints"]
+        }
+        stored_source_first = {
+            (row["raw"]["locality"], row["raw"]["localCode"])
+            for row in source_rows
+            if row["sourceKind"] == "source-first-local-set-profile"
+        }
+        date_rows = load("verification/bulbapedia_release_dates.json")["records"]
+        availability_rows = load("verification/rarity_catalogue.json")["editionAvailability"]
+        source_accounting_faults = []
+        if legacy_profiles != stored_legacy_profiles:
+            source_accounting_faults.append(
+                f"legacy profiles {len(stored_legacy_profiles)}/{len(legacy_profiles)}")
+        if source_first_profiles != stored_source_first:
+            source_accounting_faults.append(
+                f"source-first profiles {len(stored_source_first)}/{len(source_first_profiles)}")
+        if sum(row["sourceKind"] == "release-date-record" for row in source_rows) != len(date_rows):
+            source_accounting_faults.append("release-date registry does not match its reviewed seed")
+        if sum(row["sourceKind"] == "edition-availability-record" for row in source_rows) \
+                != len(availability_rows):
+            source_accounting_faults.append("edition-availability registry does not match its seed")
+        if source_ids != graph_source_ids or set(disposition_ids) != source_ids \
+                or len(disposition_ids) != len(set(disposition_ids)):
+            source_accounting_faults.append("source ids do not round-trip through one disposition")
+        check(
+            "N8",
+            "The independent set registry accounts for every seed provider record exactly once",
+            "FAIL",
+            not source_accounting_faults and set_graph["reports"]["accounting"]["balanced"],
+            f"{len(source_accounting_faults)} accounting fault(s): {source_accounting_faults[:5]}",
+        )
+
+        local_sets_by_id = {row["localSetId"]: row for row in set_graph["localSets"]}
+        set_editions_by_id = {row["setEditionId"]: row for row in set_graph["setEditions"]}
+        event_faults = [
+            event["releaseEventId"] for event in set_graph["releaseEvents"]
+            if event["localSetId"] not in local_sets_by_id
+            or not event.get("setEditionIds") or not event.get("marketScopes")
+            or not event.get("datePrecision") or not event.get("sourceRecordId")
+            or any(edition_id not in set_editions_by_id
+                   for edition_id in event.get("setEditionIds", []))
+        ]
+        edition_faults = [
+            edition["setEditionId"] for edition in set_graph["setEditions"]
+            if edition["localSetId"] not in local_sets_by_id
+            or edition["locality"] != local_sets_by_id[edition["localSetId"]]["locality"]
+            or not edition.get("language") or len(edition.get("script", "")) != 4
+        ]
+        alias_faults = [
+            alias["aliasAssertionId"] for alias in set_graph["aliasAssertions"]
+            if alias["sourceRecordId"] not in source_ids
+            or alias.get("localSetId") not in local_sets_by_id
+            or alias.get("reversibleProjection") is not True
+            or not alias.get("rawIdentifier")
+        ]
+        fixture_faults = [fixture["fixtureId"] for fixture in set_graph["fixtures"]
+                          if not fixture["passed"]]
+        sqlite_faults = set_graph["reports"]["sqliteValidation"]["foreignKeyViolations"]
+        check(
+            "N9",
+            "Set editions, release events and aliases survive the constrained graph round-trip",
+            "FAIL",
+            not edition_faults and not event_faults and not alias_faults
+            and not fixture_faults and sqlite_faults == 0,
+            f"edition={edition_faults[:3]}, event={event_faults[:3]}, alias={alias_faults[:3]}, "
+            f"fixtures={fixture_faults}, sqlite={sqlite_faults}",
+        )
+
+        # Availability may decorate a card release ADR-0001 already established. It cannot invent a
+        # collector-number slot, so both reference and projected-finish sets must be strict subsets.
+        identity_release_ids = {row["cardReleaseId"] for row in dryrun["cardReleases"]}
+        catalogue_release_ids = {row["cardReleaseId"] for row in set_graph["cardReleaseRefs"]}
+        profile_release_ids = {
+            row["cardReleaseId"] for row in set_graph["profileFinishClaims"]
+        }
+        minted = sorted(catalogue_release_ids - identity_release_ids)
+        unreachable_profile_claims = sorted(profile_release_ids - catalogue_release_ids)
+        duplicate_refs = len(catalogue_release_ids) != len(set_graph["cardReleaseRefs"])
+        concept_card_claims = [
+            assertion["sourceAssertionId"] for assertion in set_graph["sourceAssertions"]
+            if assertion.get("assertionKind") in ("asserts-card-release", "confirms-card-from-concept")
+        ]
+        check(
+            "N10",
+            "Set availability and set concepts cannot create card-release nodes",
+            "FAIL",
+            not minted and not unreachable_profile_claims and not duplicate_refs
+            and not concept_card_claims,
+            f"minted={minted[:3]}, unreachable-profile={unreachable_profile_claims[:3]}, "
+            f"duplicateRefs={duplicate_refs}, conceptClaims={concept_card_claims[:3]}",
+        )
+
+        source_by_id = {row["sourceRecordId"]: row for row in graph_sources}
+        release_ref_by_id = {
+            row["cardReleaseId"]: row for row in set_graph["cardReleaseRefs"]
+        }
+        rarity_faults = []
+        for claim in set_graph["rarityClaims"]:
+            release = release_ref_by_id.get(claim["cardReleaseId"])
+            source = source_by_id.get(claim["sourceRecordId"])
+            edition = set_editions_by_id.get(release["setEditionId"]) if release else None
+            if not source or not edition or source["raw"].get("locality") != edition["locality"] \
+                    or not claim.get("sourceNativeValue") or not claim.get("sourceVocabulary"):
+                rarity_faults.append(claim["rarityClaimId"])
+        profile_faults = [
+            profile["finishProfileId"] for profile in set_graph["finishProfiles"]
+            if not profile.get("languageScope") or not profile.get("rules")
+            or not profile.get("sourceRecordId")
+            or (profile.get("closedWithinScope")
+                and not (profile.get("closureScope") and profile.get("closureAuthority")))
+        ]
+        overclosed = [
+            row["profileFinishClaimId"] for row in set_graph["profileFinishClaims"]
+            if row.get("closesCompleteFinishList") is not False
+        ]
+        check(
+            "N11",
+            "Rarity and finish claims retain source, locality, rule scope and closure precision",
+            "FAIL",
+            not rarity_faults and not profile_faults and not overclosed,
+            f"rarity={rarity_faults[:3]}, profiles={profile_faults[:3]}, "
+            f"overclosed={overclosed[:3]}; "
+            f"{len(set_graph['reports']['crossLocalityRarityHeld'])} cross-locality rarity "
+            f"claim(s) held for a local source",
         )
 
     with guarded("G3", "image formats"):

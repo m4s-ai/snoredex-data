@@ -43,6 +43,13 @@ verification/ADR-0001-locality-aware-print-identity.md
                               marketplace-only claims create no existence-bearing node. Schema in
                               print_identity_schema.json; measured consequences in
                               print_identity_dryrun.json. Nothing is keyed by it yet.
+verification/ADR-0002-local-set-edition-release-events.md
+                              PROPOSED catalogue model (#146): locality-bearing local sets,
+                              language/script editions, market/wave release events, scoped finish
+                              profiles and source-native rarity claims. The independent raw registry
+                              is set_catalogue_sources.json; executable constraints are in
+                              set_catalogue_schema.sql; set_catalogue_dryrun.json is the measured
+                              graph. Nothing is keyed by it yet.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
@@ -75,7 +82,8 @@ scripts/                      Two halves; only the second can be re-run (#28).
                                 -> source_registry -> checklist -> readme_stats -> issue_templates
                                 -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). Eight take --check; see §7.
+                              and verifies the Pages artifact). print_identity_dryrun.py and
+                              set_catalogue_dryrun.py rebuild the proposed ADR graphs. See §7.
                               analyze.py is the SOLE producer of analysis_artists,
                               _shared_cards, _variants and _language_drift, and reads
                               snorlax_cards.json only — the single canonical node (#30). Its
@@ -116,6 +124,15 @@ verification/
                               Reference data — it claims nothing about any card here. Rarity
                               belongs to a card release, not a work: the same card can be Common
                               in Japanese and Uncommon in English.
+  set_catalogue_sources.json  INDEPENDENT SET DISCOVERY REGISTRY: immutable provider records for
+                              local sets/products, dates and edition availability. A record does not
+                              need a matching Snorlax. Extend it through reviewed passes; mapping and
+                              unresolved states belong to the dry-run, not this raw store.
+  set_catalogue_schema.sql    Executable SQLite constraint contract for ADR-0002. The dry-run loads
+                              it into an empty in-memory database; #140 owns any real DB migration.
+  set_catalogue_dryrun.json   GENERATED ADR-0002 graph and reports. Rebuilt from the independent
+                              source registry plus ADR-0001 existence-bearing references; it never
+                              creates a card release from set availability.
   specimens.json              Physical cards the owner holds and inspected, each with a stable
                               SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
                               instead of describing it in prose. `photograph` is null until the
