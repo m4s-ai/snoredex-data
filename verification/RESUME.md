@@ -229,6 +229,39 @@ Titles that cost a search to find: the Battle Academy article is a disambiguatio
 
 **JP promo pages need exact-name matching**, not substring: `カビゴンGX` is contained in `イーブイ&カビゴンGX`, so a `-like` match makes both SM-P promos look ambiguous and silently skips them.
 
+### TCGdex answers 200 for languages and eras it holds no cards for
+
+Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.
+The attempt failed, and the reason is worth more than the attempt: **TCGdex never says "I do not
+cover this"**, and three of the four signals you would reach for are wrong.
+
+| Request | Response | What it actually means |
+|---|---|---|
+| `ru/sets/xy2` | **HTTP 200**, `cardCount.total` **106**, `cards[]` **empty** | TCGdex serves no Russian at all |
+| `it/sets/pl2` | HTTP 200, `cardCount.total` **111**, `cards[]` **empty** | the Italian set is registered; no card records exist |
+| `pt/sets/ex7` | HTTP 200, `cardCount.total` **109**, `cards[]` **empty** | same |
+| `pt/sets/pl2` | HTTP **404** | the same kind of gap, answered differently |
+| `it/cards/pl2-33` | HTTP 404 | a data gap, **not** an absent card |
+
+Neither the status code nor `cardCount.total` indicates coverage — `cardCount.total` is carried over
+from the set record and is reported in full for a language holding zero cards. **Only a non-empty
+`cards[]`, or a card endpoint answering 200, shows coverage.** Note the last two rows: two identical
+gaps, one answered 200 and one 404, so even the inconsistency is not a signal.
+
+Controls run in the same session, so the negatives are not a broken URL pattern or a dead locale:
+`en/cards/svp-051` 200, `it/cards/svp-051` 200, `en/cards/pl2-33` 200 (Snorlax), `it/cards/swsh4-131`
+200 — that last returning `set.name` = *Voltaggio Sfolgorante*, so it is a real Italian record and
+not an English fallback.
+
+The boundary is by **era**, not by language. Italian and Portuguese are fully populated for `xy2`
+(2014, 110 cards) and `swsh4` (2020, 203) and empty for `pl2` (2009) and `col1` (2011). Before
+treating any TCGdex miss as anything at all, fetch the *set* in that language and check whether
+`cards[]` has entries.
+
+This is what the rule "TCGdex `true` confirms a printing; TCGdex `false` does not refute one" is
+protecting. Reading `ru/sets/xy2` → 200 → "covered, and the card is not in it" would have produced a
+false contradiction of exactly the shape the `XY-P 149` incident already cost.
+
 ### Cardmarket ↔ Bulbapedia set-name mismatches (Simplified Chinese)
 
 Cardmarket's Chinese set names are translations of the Chinese titles; Bulbapedia uses its own English renderings. None of these are guessable — find them via the ATCG category search, not by name similarity:
