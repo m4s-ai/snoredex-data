@@ -22,6 +22,7 @@ from scripts.legacy_set_reconciliation import (  # noqa: E402
     MIXED_STATUS_PAIRS,
     OUTPUT_PATH,
     build,
+    portable_file_hash,
     read_json,
     render_json,
     value_hash,
@@ -44,6 +45,10 @@ def main() -> int:
     require(compat_json == second_compat_json, "two JSON compatibility builds differ")
     require(compat_csv == second_compat_csv, "two CSV compatibility builds differ")
     require(first["meta"]["coverageVersion"] == COVERAGE_VERSION, "coverage version missing")
+    require(
+        portable_file_hash(b"one\r\ntwo\r\n") == portable_file_hash(b"one\ntwo\n"),
+        "tracked-text hashes depend on CRLF versus LF checkout policy",
+    )
 
     require(
         len(first["legacyAliases"]) == EXPECTED_DENOMINATORS["aliases"],

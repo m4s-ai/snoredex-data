@@ -57,8 +57,14 @@ def value_hash(value: Any) -> str:
     return "sha256:" + hashlib.sha256(canonical(value).encode("utf-8")).hexdigest()
 
 
+def portable_file_hash(data: bytes) -> str:
+    """Hash tracked text as Git stores it, independent of checkout line endings."""
+    normalized = data.replace(b"\r\n", b"\n")
+    return "sha256:" + hashlib.sha256(normalized).hexdigest()
+
+
 def file_hash(path: Path) -> str:
-    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+    return portable_file_hash(path.read_bytes())
 
 
 def stable_id(prefix: str, *parts: str) -> str:
