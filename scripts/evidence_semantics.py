@@ -39,6 +39,26 @@ to a language table naming the French, German, Italian and Spanish products. A P
 closed list distributed as a whole, structurally the same as an expansion, so the inference carries
 for the same reason. Rarity was a poor proxy; what matters is whether the source lists the card.
 
+WHERE THE RARITY PROXY LEAKS, AND WHAT IT IS NOW ALLOWED TO SAY
+
+Rarity remained the proxy for run membership, and it has since been wrong twice more. Both are
+recorded here because the queue this report produces is read as a work list, and a row on it for a
+bad reason costs someone the same time as a real one.
+
+* **A rarity belongs to a card, not to a collector number.** The lookup was keyed by
+  `(setCode, number)` while a unit is keyed by variant as well. Seventeen pairs carry more than one
+  card and eight differ in rarity — always a base printing beside a promo variant sharing a number —
+  so `RR 33 V1`, a Rare inside the numbered run, read as the `V2` Promo next to it.
+* **"Ultra Rare" is era-dependent and cannot answer alone.** It covers the modern Full Art, which is
+  secret in some locales, and the EX-era `ex` and DP-era LV.X cards, which were numbered inside the
+  set. The fact that decides between them is the set's printed size, and this project records it
+  nowhere. Those rows now report `needs-set-size` rather than an answer; the fix belongs in the set
+  database (#146), not in another rarity special case.
+
+A third state is therefore deliberate. `carries` and `does-not-carry` are claims about the
+inference; `needs-set-size` is the report declining to make one, and it is not a quieter way of
+saying the inference fails.
+
     python scripts/evidence_semantics.py
     python scripts/evidence_semantics.py --check
 """
@@ -98,7 +118,14 @@ RUN_MEMBERSHIP = {
     "Illustration Rare": (False, "presence and rarity assignment differ between locales"),
     "Special Illustration Rare": (False, "presence and rarity assignment differ between locales"),
     "Triple Rare": (False, "secret-numbered class; presence varies by locale"),
-    "Ultra Rare": (False, "Full Art and equivalent cards are secret in some locales and not others"),
+    # Era-dependent, and the only rarity in this table that is. Cardmarket's "Ultra Rare" covers
+    # both the modern Full Art — secret in some locales and not others — and the EX-era `ex` and
+    # DP-era LV.X cards, which were numbered inside the set (`TRR 104` of 109, `RR 111` of 111).
+    # One word, two opposite answers, and the deciding fact is the set's printed size, which this
+    # project does not yet record anywhere. Asserting "does not carry" from the word alone was
+    # wrong; `None` reports the gap instead of guessing past it. Set size belongs in the set
+    # database — filed on #146.
+    "Ultra Rare": (None, "run membership depends on the set's printed size, which is not recorded"),
     "Oversized": (False, "jumbo product insert, not part of any numbered run"),
     "World Championship Deck": (False, "event product, not an expansion run"),
     "Online Code Card": (False, "not a physical collectible card"),
@@ -125,7 +152,14 @@ def granularity(unit: dict[str, Any]) -> str:
 
 def build(units: list[dict], cards: list[dict], registry: dict,
           capabilities: dict, adjudications: dict) -> dict[str, Any]:
-    by_number = {(c["setCode"], str(c.get("number") or "")): c for c in cards}
+    # Keyed by the variant token too, not just set and number. Seventeen (setCode, number) pairs
+    # carry more than one card and eight of those differ in rarity, always the same way: a base
+    # printing and a promo variant sharing a collector number. Keying without the token kept
+    # whichever card came last, so `RR 33 V1` — a Rare, inside the numbered run — read as the
+    # `V2` Promo beside it and was reported as an unsound inference. That is the neighbour's
+    # evidence problem in a new place: judge a row by its own record.
+    by_key = {(c["setCode"], str(c.get("number") or ""), c.get("variantToken") or "base"): c
+              for c in cards}
 
     # Which providers may carry absence at all. Both stores are consulted and must agree; they do
     # today, and a disagreement is worth seeing rather than silently preferring one.
@@ -148,7 +182,8 @@ def build(units: list[dict], cards: list[dict], registry: dict,
     rows: list[dict[str, Any]] = []
     for unit in units:
         grain = granularity(unit)
-        card = by_number.get((unit["setCode"], str(unit.get("number") or "")))
+        card = by_key.get((unit["setCode"], str(unit.get("number") or ""),
+                           unit.get("variant") or "base"))
         rarity = card["rarity"] if card else None
         inside_run, run_reason = RUN_MEMBERSHIP.get(rarity, (None, "rarity not classified"))
 
@@ -159,6 +194,11 @@ def build(units: list[dict], cards: list[dict], registry: dict,
                 inference = "carries"
             elif inside_run is False:
                 inference = "does-not-carry"
+            elif rarity in RUN_MEMBERSHIP:
+                # The rarity is known and the table declines to answer: the fact that would decide
+                # it is missing, not the classification. Kept apart from `unknown-rarity` so the
+                # queue says which of the two a reader is looking at.
+                inference = "needs-set-size"
             else:
                 inference = "unknown-rarity"
         if unit["status"] == "contradicted":
@@ -173,6 +213,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "unitId": unit["unitId"],
             "setCode": unit["setCode"],
             "number": str(unit.get("number") or ""),
+            "variant": unit.get("variant") or "base",
             "language": unit["language"],
             "status": unit["status"],
             "providerId": unit["providerId"],
@@ -190,6 +231,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
 
     unsound = [r for r in rows if r["inference"] == "does-not-carry"]
     unscoped = [r for r in rows if r["inference"] == "unscoped-absence"]
+    needs_size = [r for r in rows if r["inference"] == "needs-set-size"]
 
     return {
         "meta": {
@@ -219,11 +261,13 @@ def build(units: list[dict], cards: list[dict], registry: dict,
                 1 for r in rows if r["status"] == "confirmed" and r["granularity"] == "product-or-set"),
             "setLevelConfirmationsThatCarry": sum(1 for r in rows if r["inference"] == "carries"),
             "setLevelConfirmationsThatDoNotCarry": len(unsound),
+            "setLevelConfirmationsNeedingSetSize": len(needs_size),
             "contradictionsByBacking": dict(Counter(
                 r["inference"] for r in rows if r["status"] == "contradicted")),
             "unsoundByRarity": dict(Counter(r["rarity"] for r in unsound).most_common()),
         },
         "setLevelConfirmationsThatDoNotCarry": sorted(unsound, key=lambda r: r["unitId"]),
+        "setLevelConfirmationsNeedingSetSize": sorted(needs_size, key=lambda r: r["unitId"]),
         "unscopedAbsenceContradictions": sorted(unscoped, key=lambda r: r["unitId"]),
         "units": rows,
     }
@@ -262,7 +306,8 @@ def main() -> int:
         print(f"  {grain:18} {statuses}")
     print(f"  set-level confirmations: {counts['setLevelConfirmations']} "
           f"({counts['setLevelConfirmationsThatCarry']} carry, "
-          f"{counts['setLevelConfirmationsThatDoNotCarry']} do not)")
+          f"{counts['setLevelConfirmationsThatDoNotCarry']} do not, "
+          f"{counts['setLevelConfirmationsNeedingSetSize']} undecidable without a set size)")
     print(f"  contradictions by backing: {counts['contradictionsByBacking']}")
     return 0
 

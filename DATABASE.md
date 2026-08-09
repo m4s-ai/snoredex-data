@@ -41,14 +41,20 @@ from that evidence to this card holds:
 
 | granularity | inference | rows | what it means |
 |---|---|---:|---|
-| `specimen-or-card` | — | 469 | a record about this card in this language |
-| `product-or-set` | `carries` | 75 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
-| `product-or-set` | `does-not-carry` | **68** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
+| `specimen-or-card` | — | 472 | a record about this card in this language |
+| `product-or-set` | `carries` | 78 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
+| `product-or-set` | `does-not-carry` | **56** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
+| `product-or-set` | `needs-set-size` | 6 | undecidable here: the card's rarity is era-dependent and the set's printed size is not recorded |
 | `sibling-derived` | — | 22 | the evidence of a neighbouring unit |
 
 An application that needs card-level evidence should filter on `evidence_granularity` rather than
-trusting `exists` alone. The 68 are not wrong — they are unproven at this granularity, and
+trusting `exists` alone. The 56 are not wrong — they are unproven at this granularity, and
 `pending` semantics apply: not yet established, never proven absent.
+
+`needs-set-size` is a third answer, not a softer `does-not-carry`. Cardmarket's `Ultra Rare` covers
+both the modern Full Art, secret in some locales, and the EX-era `ex` and DP-era LV.X cards, which
+were numbered inside the set; only the set's printed size separates them, and no store here carries
+it yet (#146). Treat those rows as unclassified rather than as either answer.
 
 The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated`, none
 is source-derived, which is rule 4 visible in the data. Every `disputed` row is

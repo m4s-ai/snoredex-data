@@ -755,7 +755,18 @@ def collect() -> None:
         # Low-water marks. Both are queues: a rise means a new verdict was written on evidence
         # that cannot carry it, which is the losing direction. Never raise these to silence a
         # rise — find the pass that wrote the row.
-        UNSOUND_SET_LEVEL_BASELINE = 68
+        # Re-anchored 68 -> 56 across three corrections, each lowering a down-is-progress
+        # baseline after the queue actually shrank, which is the move that tightens the check:
+        #   -3  the report keyed its rarity lookup by (setCode, number) while a unit is keyed by
+        #       variant too, so `RR 33 V1` — a Rare, inside the numbered run — read as the `V2`
+        #       Promo sharing its collector number. Those rows were never unsound.
+        #   -6  Cardmarket's "Ultra Rare" is era-dependent: modern Full Arts are secret, EX-era
+        #       `ex` and DP-era LV.X cards are numbered inside the set. The deciding fact is the
+        #       set's printed size, which nothing here records, so those rows now report
+        #       `needs-set-size` instead of asserting an answer.
+        #   -3  the Battle Academy 2020 article carries a half-deck list containing the card; the
+        #       rows cited only its language table.
+        UNSOUND_SET_LEVEL_BASELINE = 56
         UNSCOPED_ABSENCE_BASELINE = 27
         unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
