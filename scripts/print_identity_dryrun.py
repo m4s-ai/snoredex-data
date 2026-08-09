@@ -421,6 +421,82 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
                     "establishingClaimId": claim_id,
                 }
 
+    # An identified physical scan is the third claim grain, and the one the ladder ranks highest.
+    # FINISH_SOURCES.md always allowed it — "Identified physical scan | Visible finish, pattern,
+    # marking, and size on that specimen" — and until #150 a specimen had no field to say it in, so
+    # every physical printing came from the finish store. A specimen that records what it saw may
+    # now establish one; a specimen that records nothing still says nothing.
+    specimen_printings = 0
+    specimen_corroborations = 0
+    for specimen in specimens:
+        observation = specimen.get("physicalObservation")
+        if not observation:
+            continue
+        specimen_id = specimen["specimenId"]
+        claim_id = f"CLAIM:specimen:{specimen_id}"
+        proposed_id = f"PHYSICAL:specimen:{specimen_id}"
+        key = (specimen["setCode"], str(specimen.get("number") or ""), specimen["language"])
+        release_ids = sorted(set(releases_by_finish_key.get(key, [])))
+
+        # One image of two cards cannot establish *a* printing. SPEC-0013 photographs the sealed
+        # Indonesian pair; its per-card crops are the records that establish.
+        covers_many = bool(observation.get("coversMultipleCards"))
+        # Does the finish store already carry this exact printing? Then the specimen corroborates
+        # it rather than adding a second node for the same physical object.
+        duplicate_of = next(
+            (pid for pid, existing in physical_printings.items()
+             if existing["cardReleaseId"] in release_ids
+             and existing.get("finish") == observation.get("finish")
+             and (existing.get("foilPattern") or None) == (observation.get("foilPattern") or None)),
+            None,
+        )
+        can_materialize = len(release_ids) == 1 and not covers_many and duplicate_of is None
+
+        if covers_many:
+            reason = "observation depicts more than one card; the per-card crops establish"
+        elif len(release_ids) != 1:
+            reason = "specimen does not resolve to exactly one card release"
+            unresolved_physical.append({
+                "printingId": proposed_id,
+                "releaseCandidates": release_ids,
+                "reason": "specimen observation does not resolve to exactly one card release",
+            })
+        elif duplicate_of is not None:
+            reason = f"corroborates {duplicate_of}, already established from the finish store"
+            specimen_corroborations += 1
+        else:
+            reason = "finish observed on an identified physical scan"
+
+        candidate_claims[claim_id] = {
+            "claimId": claim_id,
+            "claimKind": "physical-printing",
+            "sourceKind": "specimen-observation",
+            "sourceId": specimen_id,
+            "evidenceStatus": "observed",
+            "disposition": "established-and-mapped" if can_materialize else "candidate-needs-evidence",
+            "proposedTargetId": proposed_id,
+            "materializedTargetId": proposed_id if can_materialize else None,
+            "reason": reason,
+        }
+        if can_materialize:
+            specimen_printings += 1
+            physical_printings[proposed_id] = {
+                "physicalPrintingId": proposed_id,
+                "cardReleaseId": release_ids[0],
+                "finish": observation.get("finish"),
+                "foilPattern": observation.get("foilPattern"),
+                "markings": observation.get("markings"),
+                "distribution": None,
+                "cardSize": observation.get("cardSize"),
+                "errorClass": None,
+                "classificationState": "classified-from-inspected-specimen",
+                "sourceFinishUnitId": None,
+                "sourcePrintingId": None,
+                "establishingClaimId": claim_id,
+                "establishingSpecimenId": specimen_id,
+                "basis": observation.get("basis"),
+            }
+
     # Exclusions are candidate claims with a positive product-scope disposition, not missing rows.
     for unit in excluded:
         claim_id = f"CLAIM:excluded:{unit['unitId']}"
@@ -583,6 +659,11 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
             "cardReleaseNodesIdentified": len(card_releases) - len(needs_identifier),
             "cardReleaseNodesNeedingLocalIdentifier": len(needs_identifier),
             "physicalPrintingNodes": len(physical_printings),
+            "physicalPrintingsByEvidenceClass": {
+                "finish-store": len(physical_printings) - specimen_printings,
+                "inspected-specimen": specimen_printings,
+            },
+            "specimenObservationsCorroboratingFinishStore": specimen_corroborations,
             "contradictedOnlyCardReleaseProposals": len(contradicted_only),
             "mixedStatusCardReleaseProposals": len(mixed_status),
             "multiVariantCardReleases": len(multi_variant),

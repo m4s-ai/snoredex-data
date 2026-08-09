@@ -555,8 +555,13 @@ def collect() -> None:
                 f"products missing={len(expected_products - actual_products)}, "
                 f"extra={len(actual_products - expected_products)}")
         finish_printings = sum(len(unit.get("printings", [])) for unit in finish_doc["units"])
+        # #150 added a third physical-claim grain: an identified physical scan. Every specimen that
+        # records what it saw is a claim, whether or not it establishes a node.
+        specimen_doc_dry = load("verification/specimens.json")
+        specimen_observations = {s["specimenId"] for s in specimen_doc_dry["specimens"]
+                                 if s.get("physicalObservation")}
         expected_claims = len(units_doc) + len(excluded_doc) + len(source_first["prints"]) \
-            + finish_printings
+            + finish_printings + len(specimen_observations)
         claims = dryrun["candidateClaims"]
         claim_ids = [claim["claimId"] for claim in claims]
         if len(claims) != expected_claims or len(set(claim_ids)) != len(claim_ids):
@@ -571,6 +576,7 @@ def collect() -> None:
                 for unit in finish_doc["units"]
                 for printing in unit.get("printings", [])
             },
+            "specimen-observation": specimen_observations,
         }
         actual_sources = {
             kind: {claim["sourceId"] for claim in claims if claim["sourceKind"] == kind}
@@ -628,9 +634,15 @@ def collect() -> None:
                    != release["cardReleaseId"]
                    for claim_id in release["establishingClaimIds"])
         ]
+        # Which evidence states may establish a physical printing. `confirmed` is the finish
+        # store's verdict; `observed` is #150's — someone looked at the card. They are kept as
+        # separate words because they are separate acts, and widening this set is the one edit
+        # that would let a weaker claim mint a printing, so it is spelled out rather than implied.
+        ESTABLISHING_PHYSICAL_STATES = {"confirmed", "observed"}
         ungrounded_physical = [
             printing["physicalPrintingId"] for printing in dryrun["physicalPrintings"]
-            if claims_by_id[printing["establishingClaimId"]].get("evidenceStatus") != "confirmed"
+            if claims_by_id[printing["establishingClaimId"]].get("evidenceStatus")
+            not in ESTABLISHING_PHYSICAL_STATES
         ]
         release_ids = {release["cardReleaseId"] for release in dryrun["cardReleases"]}
         physical_ids = {
@@ -720,6 +732,22 @@ def collect() -> None:
         # exactly that reason, and holding them is the check passing, not failing.
         guessed = [entry["specimenId"] for entry in source_first["held"]
                    if entry.get("proposedSetCode") and not entry.get("blockedBy")]
+        # A printing that rests on a card someone examined must name the card. Without this the
+        # highest rung of the ladder becomes the least traceable one, which is the failure
+        # `S13`/`S14` already guard for language claims (#150).
+        unnamed = [p["physicalPrintingId"] for p in dryrun.get("physicalPrintings", [])
+                   if p.get("classificationState") == "classified-from-inspected-specimen"
+                   and not (p.get("establishingSpecimenId") and p.get("basis"))]
+        by_class = dryrun["counts"].get("physicalPrintingsByEvidenceClass", {})
+        check(
+            "N6",
+            "A specimen-established printing names its specimen and quotes its basis",
+            "FAIL",
+            not unnamed,
+            f"{len(unnamed)} printing(s) claim specimen authority without naming one: "
+            f"{unnamed[:5]}. Evidence-class split: {by_class}.",
+        )
+
         check(
             "N5",
             "A held print does not smuggle in the set code its evidence refuses to assert",
@@ -1393,6 +1421,53 @@ def collect() -> None:
             not uncited_specimen_claims,
             f"{len(uncited_specimen_claims)} unit(s) claim tier-1 specimen authority with no specimen "
             f"reference. e.g. {uncited_specimen_claims[:5]}",
+        )
+
+        # S16-S17 — a recorded finish quotes the record it came from (#150)
+        # --------------------------------------------------------------------------- #
+        # `FINISH_SOURCES.md` has always allowed an identified physical scan to establish "visible
+        # finish, pattern, marking, and size on that specimen", and until #150 there was no field
+        # to put it in. The risk the field introduces is the one this project keeps meeting: a
+        # finish that nobody observed, arrived at from a rarity label or from the language claim
+        # beside it. `basis` is what makes an assignment checkable — it quotes the record's own
+        # words — so a block without one is an assertion with no author.
+        SPECIMEN_FINISHES = {"non-holo", "holo", "reverse-holo", "mirror-holo"}
+        SPECIMEN_MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
+        malformed = []
+        for specimen in specimens:
+            observation = specimen.get("physicalObservation")
+            if observation is None:
+                continue
+            sid = specimen["specimenId"]
+            if observation.get("finish") not in SPECIMEN_FINISHES:
+                malformed.append(f"{sid}: finish {observation.get('finish')!r}")
+            if not str(observation.get("basis") or "").strip():
+                malformed.append(f"{sid}: no basis quoted")
+            role = observation.get("markingRole")
+            if role is not None and role not in SPECIMEN_MARKING_ROLES:
+                malformed.append(f"{sid}: markingRole {role!r}")
+            if observation.get("markings") and role is None:
+                malformed.append(f"{sid}: marking recorded with no role")
+        check(
+            "S16",
+            "A specimen's recorded finish uses the technical vocabulary and quotes its basis",
+            "FAIL",
+            not malformed,
+            f"{len(malformed)} malformed physical observation(s): {malformed[:5]}. Finish is one "
+            f"of {sorted(SPECIMEN_FINISHES)}; markings.role is the trichotomy CLAUDE.md states.",
+        )
+
+        # Absence stays absence. A specimen with no observation says nothing about the card's
+        # finish, and nothing may read the missing block as a negative.
+        observed_finishes = [s for s in specimens if s.get("physicalObservation")]
+        check(
+            "S17",
+            "Specimens carrying an observed finish",
+            "INFO",
+            True,
+            f"{len(observed_finishes)} of {len(specimens)} specimens record a finish; the other "
+            f"{len(specimens) - len(observed_finishes)} state nothing about finish, which is not "
+            f"evidence that they are non-holo",
         )
 
     with guarded("G7", "dataset identity and typed fields"):
