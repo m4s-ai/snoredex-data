@@ -161,6 +161,21 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Population counts and omissions are never used as negative evidence.",
     },
     {
+        "providerId": "cgc",
+        "displayName": "CGC certification and registry",
+        "organization": "Certified Guaranty Company",
+        "homepage": "https://www.cgccards.com",
+        "hosts": ["www.cgccards.com", "cgccards.com"],
+        "licenseOrTerms": "Site terms; used for identification only.",
+        "category": "grading-registry",
+        "authorityTier": 2,
+        "coverage": "named certifications and concrete collector-registry specimens",
+        "supportsAbsence": False,
+        "usedFor": ["finish", "language"],
+        "attribution": "Certification and registry variety names from CGC.",
+        "notes": "A certification or collector-registry row is positive specimen evidence only. Personal sets, population counts and omissions are never negative evidence.",
+    },
+    {
         "providerId": "pokumon",
         "displayName": "pokumon.com",
         "organization": "pokumon.com",
@@ -699,7 +714,12 @@ def main() -> int:
 
     if "--check" in sys.argv:
         stale = []
-        if not REGISTRY_PATH.exists() or json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))["evidence"] != rows:
+        current_registry = (
+            json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+            if REGISTRY_PATH.exists() else {}
+        )
+        if (current_registry.get("evidence") != rows
+                or current_registry.get("providers") != providers_out):
             stale.append(str(REGISTRY_PATH.relative_to(ROOT)))
         if not MARKDOWN_PATH.exists() or MARKDOWN_PATH.read_text(encoding="utf-8") != markdown:
             stale.append(str(MARKDOWN_PATH.relative_to(ROOT)))

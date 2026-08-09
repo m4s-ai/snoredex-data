@@ -49,7 +49,12 @@ verification/ADR-0002-local-set-edition-release-events.md
                               profiles and source-native rarity claims. The independent raw registry
                               is set_catalogue_sources.json; executable constraints are in
                               set_catalogue_schema.sql; set_catalogue_dryrun.json is the measured
-                              graph. Nothing is keyed by it yet.
+                               graph. Nothing is keyed by it yet.
+verification/ADR-0003-source-capability-coverage.md
+                              ACCEPTED evidence-routing boundary (#135): provider surfaces point
+                              through explicit locality/category/time coverage edges. Every claimed
+                              edge has a positive fixture and a boundary; only exact exhaustive
+                              edges may carry absence. PSA/CGC and specimens are positive-only.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
@@ -79,7 +84,8 @@ scripts/                      Two halves; only the second can be re-run (#28).
 
                               LIVE generators, in run order (§7 has the full command list):
                                 analyze -> finishes -> language_status -> confirmed_releases
-                                -> source_registry -> checklist -> readme_stats -> issue_templates
+                                -> source_registry -> source_capabilities -> checklist -> readme_stats
+                                -> issue_templates
                                 -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
                               and verifies the Pages artifact). print_identity_dryrun.py and
@@ -176,7 +182,16 @@ verification/
   RESUME.md                   The verification playbook (read before editing evidence).
   state.json                  Last completed phase.
   source_registry.json        Generated provider/evidence index. Counts live in README's
-                              generated block; don't restate them here.
+                               generated block; don't restate them here.
+  source_capability_schema.json
+                              Versioned JSON Schema for the reviewed source capability manifest.
+  source_capabilities.json    REVIEWED MANIFEST: provider operators, access/failure/freshness state,
+                              query and pagination contracts, independent finish capability and
+                              bounded locality/language/category/time coverage edges.
+  source_capability_graph.json
+                              GENERATED GRAPH: flattened coverage edges, hashed positive/boundary
+                              observations and one capability-surface resolution for every source
+                              currently used by a verdict. Rebuild with source_capabilities.py.
   report.py                   Prints coverage and rewrites exactly three exports:
                               confirmed_sources.json, CONTRADICTED.json, UNCONFIRMED.json.
                               NOT "all exports" — MANUAL_REVIEW.* comes from classify_manual.py,

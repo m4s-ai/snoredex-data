@@ -9,7 +9,7 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 22,
+   "providers": 23,
    "evidenceRecords": 884,
    "uniqueUrls": 877,
    "nonUrlEvidenceClasses": 7,
@@ -184,6 +184,29 @@
    ],
    "uniqueSources": 1,
    "claimsSupported": 2
+  },
+  {
+   "providerId": "cgc",
+   "displayName": "CGC certification and registry",
+   "organization": "Certified Guaranty Company",
+   "homepage": "https://www.cgccards.com",
+   "licenseOrTerms": "Site terms; used for identification only.",
+   "category": "grading-registry",
+   "authorityTier": 2,
+   "coverage": "named certifications and concrete collector-registry specimens",
+   "supportsAbsence": false,
+   "usedFor": [
+    "finish",
+    "language"
+   ],
+   "attribution": "Certification and registry variety names from CGC.",
+   "notes": "A certification or collector-registry row is positive specimen evidence only. Personal sets, population counts and omissions are never negative evidence.",
+   "hosts": [
+    "www.cgccards.com",
+    "cgccards.com"
+   ],
+   "uniqueSources": 0,
+   "claimsSupported": 0
   },
   {
    "providerId": "pokumon",

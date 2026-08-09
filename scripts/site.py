@@ -795,6 +795,9 @@ def main() -> int:
     <li><a href="verification/bulbapedia_release_dates.json">verification/bulbapedia_release_dates.json</a> — reviewed release-date sources</li>
     <li><a href="verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md">verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md</a> — full date-difference audit</li>
     <li><a href="verification/source_registry.json">verification/source_registry.json</a> — source registry</li>
+    <li><a href="verification/source_capability_graph.json">verification/source_capability_graph.json</a> — bounded provider/surface coverage graph with hashed fixtures</li>
+    <li><a href="verification/source_capabilities.json">verification/source_capabilities.json</a> — reviewed source capability manifest</li>
+    <li><a href="verification/source_capability_schema.json">verification/source_capability_schema.json</a> — versioned manifest schema</li>
   </ul>
   <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
   <a href="https://github.com/m4s-ai/snoredex-data/issues">Issue tracker</a> ·
