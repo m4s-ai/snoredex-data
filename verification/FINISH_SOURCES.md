@@ -21,6 +21,37 @@ population report, or catalogue omission does not prove that a version does not 
 | Identified physical scan | Visible finish, pattern, marking, and size on that specimen | No |
 | Owner attestation | A review lead, or corroboration when recorded with a scan | No |
 
+### Recording what a scan shows (#150)
+
+The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record
+had no finish field, so what the photograph showed could only be written as prose that no check
+reads. A specimen may now carry an optional `physicalObservation`:
+
+```json
+"physicalObservation": {
+  "finish": "mirror-holo",
+  "foilPattern": "Master Ball mirror",
+  "markings": null,
+  "markingRole": null,
+  "cardSize": "standard",
+  "basis": "\"carrying a Master Ball mirror foil pattern\"; \"The pattern is strong…\""
+}
+```
+
+`basis` quotes the record's own words and check `S16` requires it, so an assignment can be checked
+against its source instead of taken on trust. `finish` is the technical vocabulary only —
+`finishFamily` is presentation and is not stored here.
+
+**The block is optional and is never back-filled.** 7 of 25 specimens carry one; the other 18 say
+nothing about finish, and that silence is not evidence of non-holo. Read the record before adding
+one: a keyword scan over this corpus would have recorded a finish for `SPEC-0015`, whose "reverse"
+is the card's back, and for `SPEC-0008`/`SPEC-0010`, which state a rarity rather than a finish.
+
+A specimen that records a finish may establish a `physical_printing` in the identity dry run
+(check `N6`), which is what makes the specimen-led languages workable: Korean and Simplified
+Chinese are **68 of the 201** units with no positive finish evidence, and the table above says no
+source can reach them.
+
 ## Which source can answer, by language — read before working the queue
 
 The queue is not one backlog. What can establish a finish depends almost entirely on the

@@ -115,6 +115,10 @@ verification/
                               instead of describing it in prose. `photograph` is null until the
                               image is supplied; the claim rests on the recorded inspection either
                               way, and the file is what lets a third party re-check it.
+                              An optional `physicalObservation` records what the scan shows —
+                              finish, foil pattern, marking, size — and quotes its `basis` from
+                              the record. Optional and never back-filled: a specimen without one
+                              says nothing about finish. See FINISH_SOURCES.md (#150).
                               TO ADD A PHOTOGRAPH: run fetch_attachment.py, which writes the file
                               as SPEC-nnnn.png/.jpg and sets `photograph` plus the optional
                               `photographSource` (where the bytes came from — keep the original
