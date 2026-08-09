@@ -39,7 +39,7 @@ The dry run measures how much of the catalogue that is:
 | — Thai | 19 |
 | — Simplified Chinese | 6 |
 | — Japanese | 1 |
-| Specimens the owner holds with no catalogue node at all | **8** |
+| Specimens the owner holds with no catalogue node at all | **8** → **2** since D1 |
 
 172 of 358 print nodes are printings this project has evidence for and cannot name. 112 of the
 underlying claims are `confirmed` — positive outside evidence that the printing exists — so this
@@ -55,7 +55,8 @@ Indonesian  claim -> node sv2a 181 (Japanese market), url Snorlax-V2-sv2a181
 Thai        claim -> node sv2a 181 (Japanese market), url Snorlax-V2-sv2a181
 ```
 
-And eight physical cards the owner has photographed have no node whatsoever:
+And eight physical cards the owner has photographed had no node whatsoever. Decision D1 below
+admits six of them; the two that remain are held for a stated reason:
 
 ```
 SPEC-0007  sc1b F   120/153   T-Chinese      SPEC-0011  sc1a F   127/154   T-Chinese
@@ -157,8 +158,38 @@ orphans.
 Codes without their own specimen (the Simplified-Chinese `sc1a`/`sc1b` rows reachable through
 52poke) are **not** admitted by this decision and stay per-code questions.
 
-*Lands in:* a data pass adding the products, their units and their evidence. Not this ADR — see
-"What this decision does not do", below.
+**Executed** by `verification/passes/admit_catchup_prints_20260809.py` into
+[`source_first_prints.json`](source_first_prints.json): **six admitted, two held.** These are the
+first rows in this repository that did not come from the harvest.
+
+They are keyed by the print identity above and deliberately **not** added to `snorlax_cards.json`.
+That store's identity is a Cardmarket product — `database.py` derives a numeric product id from the
+image URL and raises without one — so putting `AS5a 142` there means inventing a Cardmarket id for
+a card Cardmarket never listed, which is the conflation this ADR exists to end. `CATCHUP-SETS.md`
+asked for a "`snorlax_cards.json`-*adjacent* entry requiring a machine identity per code"; this is
+that entry.
+
+Two are held, and the reason is in the specimens' own words rather than in a judgement made here:
+
+| Specimen | Proposed | Why it is held |
+|---|---|---|
+| `SPEC-0011` | `sc1a F 127/154` | "the set glyph is not fully legible … treat the set code as **unconfirmed**" |
+| `SPEC-0015` | `?? 111/159` | "the set glyph … is **deliberately not asserted** here" |
+
+A print is keyed by its local set code. Admitting these two means choosing one the evidence
+refuses to state, which is exactly what I7 forbids. `SPEC-0015` is the sharper case: it is the one
+specimen the owner photographed personally, so the card is not in doubt — only its set is. Both
+wait for a legible glyph or an owner ruling on the code, and `N5` holds the line meanwhile.
+
+Two admitted entries carry a caveat rather than a clean bill:
+
+- **`sc1b F 119/153`** rests on an image bearing a SAMPLE overlay — a database sample, not a
+  photograph of a printed card. The `sc1b F` set is established by three sibling specimens; what
+  this record supports is the slot within it. The caveat travels in the evidence string.
+- **`S-P 101`** is admitted as a *printing* while its *work* mapping stays open: `units.json`
+  records for `S-P 156` say `S-P 101` is a different card, and the owner presents it as the Korean
+  counterpart. That disagreement is about which work the print realizes, and I5 requires an
+  explicit decision for it. None is made.
 
 ### D2 — The 172 unidentified printings are visible immediately
 
@@ -201,8 +232,13 @@ mechanism the finish decisions have used since #119.
 
 ## What this decision does not do
 
-D1, D2 and D4 describe rows that do not exist yet. This change records the decisions and rewrites
-the model; it adds no product, no unit and no verdict. The catch-up products (D1) are a data pass
-of their own, the checklist projection (D2) belongs to #140, and #115 is resolved under D4 when
-someone works it. Recording a decision and executing it are separate acts here on purpose — the
-gap between them is visible in the issue tracker rather than hidden in a large commit.
+D1 is executed; D2 and D4 are not, and neither adds a row yet.
+
+The six admitted prints are recorded, cited and countable. They are **not** in the checklist, the
+site or the SQLite handoff, because every one of those is generated from `snorlax_cards.json` and
+these printings have no product row there by design. D2 is what makes them collector-visible, and
+D2 lands with the migration in #140. #115 is resolved under D4 when someone works it.
+
+So the eight orphan specimens are down to two, and the two that remain are held for a stated
+reason rather than for want of a model. Recording a decision and executing it stay separate acts
+here on purpose — the gap is visible in the tracker rather than buried in a large commit.

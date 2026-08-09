@@ -53,9 +53,23 @@ catch-up reprint `not-printed`, and the correct model is a separate product/unit
   host `s1.52poke.com` is reachable without bot protection; the wiki pages sit behind a JS
   challenge. Positive-evidence only.
 
+## Owner decision, 2026-08-09 (D1)
+
+The owner chose option 1 for every code backed by a physical specimen. `AS5a 142`,
+`sc1b F 119`/`120`/`165`/`177` and `S-P 101` are admitted as prints of their own in
+[`source_first_prints.json`](source_first_prints.json), keyed by the machine identity this
+document asked for and [`ADR-0001`](ADR-0001-locality-aware-print-identity.md) defines.
+
+`sc1a F 127/154` (SPEC-0011) and `?? 111/159` (SPEC-0015) are **held**: their own specimen records
+decline to assert the set glyph, and a print is keyed by its local set code. They still need
+either a legible glyph or a per-code ruling.
+
+Codes with no specimen of their own — the Simplified-Chinese `sc1a`/`sc1b` rows reachable through
+52poke, and `FXY` — were not covered by D1 and remain open below.
+
 ## Open owner decisions (per code)
 
-For each code above, the owner decides whether to:
+For the codes not settled by D1, the owner decides whether to:
 1. **Add it as its own product** (new `snorlax_cards.json`-adjacent entry + units + checklist),
    which is a real data-model expansion requiring a machine identity per code; or
 2. **Adjudicate per unit** (record `exists under its own code` in `owner_adjudications.json`

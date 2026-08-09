@@ -597,6 +597,43 @@ def collect() -> None:
             f"localities; {dryrun_counts['orphanSpecimens']} specimen(s) have no catalogue node",
         )
 
+        # N4-N5 — source-first prints admitted on their own evidence (ADR-0001 D1)
+        # --------------------------------------------------------------------------- #
+        # These are printings Cardmarket never listed, so they have no product row and cannot get
+        # one: database.py derives a product id from a Cardmarket image URL. They are keyed by the
+        # ADR identity instead, and they are the first rows in this repository that did not come
+        # from the harvest.
+        source_first = load("verification/source_first_prints.json")
+        admitted = source_first["prints"]
+
+        ungrounded = [
+            entry["printId"] for entry in admitted
+            if not entry.get("specimenId") or not entry.get("evidence")
+            or not entry.get("localSetCode") or not entry.get("localNumber")
+        ]
+        check(
+            "N4",
+            "Every admitted source-first print cites a specimen and names its own identifiers",
+            "FAIL",
+            not ungrounded,
+            f"{len(ungrounded)} print(s) admitted without a specimen, evidence or a complete local "
+            f"identifier: {ungrounded[:5]}",
+        )
+
+        # The other half of I7, on real data rather than on the projection: a printing whose set
+        # code the evidence declines to state may not be admitted with one. Two are held for
+        # exactly that reason, and holding them is the check passing, not failing.
+        guessed = [entry["specimenId"] for entry in source_first["held"]
+                   if entry.get("proposedSetCode") and not entry.get("blockedBy")]
+        check(
+            "N5",
+            "A held print does not smuggle in the set code its evidence refuses to assert",
+            "FAIL",
+            not guessed,
+            f"{len(guessed)} held entr(ies) carry a set code with no recorded reason it is "
+            f"unconfirmed: {guessed[:5]}",
+        )
+
     with guarded("G3", "image formats"):
         # --------------------------------------------------------------------------- #
         # M — every referenced image is the format its name claims, and decodes

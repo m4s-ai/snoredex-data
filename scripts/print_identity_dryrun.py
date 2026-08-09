@@ -118,7 +118,7 @@ def print_key(locality: str, set_code: str, number: str, variant: str,
 
 
 def build(cards: list[dict], units: list[dict], excluded: list[dict],
-          specimens: list[dict], baseline: dict) -> dict[str, Any]:
+          specimens: list[dict], baseline: dict, source_first: dict) -> dict[str, Any]:
     by_key = {(c["setCode"], str(c.get("number") or ""), c.get("variantToken") or "base"): c
               for c in cards}
 
@@ -215,18 +215,26 @@ def build(cards: list[dict], units: list[dict], excluded: list[dict],
     # Evidence that has nowhere to live: a specimen the owner holds whose set code and number match
     # no product node. SPEC-0024 (AS5a 142, T-Chinese) is the worked case and the reason
     # CATCHUP-SETS.md exists.
+    # A specimen is only an orphan if nothing anywhere carries its identifiers. Since D1 the
+    # source-first prints do, for six of them (#134).
     product_codes = {(c["setCode"], str(c.get("number") or "")) for c in cards}
+    admitted_specimens = {entry["specimenId"] for entry in source_first.get("prints", [])}
+    held_specimens = {entry["specimenId"] for entry in source_first.get("held", [])}
     orphan_specimens = []
     for spec in specimens:
         code = str(spec.get("setCode") or "")
         # Specimen set codes carry the locality inline for regional promos ("SV-P/ID 117").
         base_code = code.split("/")[0].strip()
         number = str(spec.get("number") or "")
+        if spec.get("specimenId") in admitted_specimens:
+            continue
         if (code, number) not in product_codes and (base_code, number) not in product_codes:
             orphan_specimens.append({
                 "specimenId": spec.get("specimenId"), "setCode": code, "number": number,
                 "language": spec.get("language"),
-                "reason": "no product node carries this set code and number",
+                "reason": ("held: the specimen declines to assert a set code, and a print is keyed "
+                           "by one" if spec.get("specimenId") in held_specimens
+                           else "no product node carries this set code and number"),
             })
 
     split_products = {k: v for k, v in prints_per_product.items() if len(v) > 1}
@@ -262,6 +270,8 @@ def build(cards: list[dict], units: list[dict], excluded: list[dict],
             "identityCollisions": sum(1 for v in identity_collisions.values() if len(v) > 1),
             "unresolvedUnits": len(unresolved),
             "orphanSpecimens": len(orphan_specimens),
+            "sourceFirstPrintsAdmitted": len(source_first.get("prints", [])),
+            "sourceFirstPrintsHeld": len(source_first.get("held", [])),
             "printNodesByLocality": dict(sorted(by_locality.items(), key=lambda kv: -kv[1])),
             "needsLocalIdentifierByLocality": dict(
                 sorted(unknown_by_locality.items(), key=lambda kv: -kv[1])),
@@ -305,8 +315,9 @@ def main() -> int:
     specimen_doc = read_json(ROOT / "verification" / "specimens.json")
     specimens = specimen_doc["specimens"] if isinstance(specimen_doc, dict) else specimen_doc
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
+    source_first = read_json(ROOT / "verification" / "source_first_prints.json")
 
-    document = build(cards, units, excluded, specimens, baseline)
+    document = build(cards, units, excluded, specimens, baseline, source_first)
 
     if args.check:
         if not OUTPUT_PATH.is_file():
@@ -330,6 +341,7 @@ def main() -> int:
     print(f"  {counts['productsSplitAcrossLocalities']} products split across localities; "
           f"{counts['identityCollisions']} identity collision(s); "
           f"{counts['orphanSpecimens']} orphan specimen(s); "
+          f"{counts['sourceFirstPrintsAdmitted']} source-first print(s) admitted; "
           f"{counts['unresolvedUnits']} unresolved unit(s)")
     return 0
 
