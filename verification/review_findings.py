@@ -407,6 +407,7 @@ def collect() -> None:
             "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
             "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
             "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
+            "print_identity_dryrun.py",
         }
 
         # The harvest steps and `mkunits` moved to verification/archive/passes/ once #28 had captured the
@@ -528,6 +529,109 @@ def collect() -> None:
             True,
             f"+{added.get('cardsAdded', 0)} cards, +{added.get('unitsAdded', 0)} language units "
             f"beyond the frozen baseline",
+        )
+
+    with guarded("G2c", "print identity dry run"):
+        # --------------------------------------------------------------------------- #
+        # N1-N3 — the identity dry run accounts for every legacy row (#134)
+        # --------------------------------------------------------------------------- #
+        # ADR-0001 proposes keying a printing by (locality, localSetCode, localNumber, variant)
+        # instead of by the Cardmarket product it happened to be sold under. The dry run maps the
+        # legacy rows onto it and migrates nothing. #134's exit condition is not "the script ran";
+        # it is that no legacy record fell out of the mapping, so that is what N1 asserts.
+        dryrun = load("verification/print_identity_dryrun.json")
+        cards_doc = load("snorlax_cards.json")
+        units_doc = load("verification/units.json")
+        excluded_doc = load("verification/excluded_codecards.json")
+        dispositions = dryrun["dispositions"]
+
+        unaccounted = []
+        if len(dispositions["cards"]) != len(cards_doc["cards"]):
+            unaccounted.append(f"cards {len(dispositions['cards'])}/{len(cards_doc['cards'])}")
+        if len(dispositions["languageUnits"]) != len(units_doc):
+            unaccounted.append(f"units {len(dispositions['languageUnits'])}/{len(units_doc)}")
+        if len(dispositions["excludedCodeCardUnits"]) != len(excluded_doc):
+            unaccounted.append(
+                f"excluded {len(dispositions['excludedCodeCardUnits'])}/{len(excluded_doc)}")
+        blank = sorted(k for k, v in dispositions["languageUnits"].items()
+                       if v.get("disposition") not in ("carried", "split", "aliased", "queued"))
+        check(
+            "N1",
+            "The identity dry run accounts for every legacy record",
+            "FAIL",
+            not unaccounted and not blank,
+            f"unaccounted: {unaccounted}; {len(blank)} unit(s) with no disposition {blank[:5]}",
+        )
+
+        # Invariant I7. The shortcut this forbids is letting a Korean printing inherit the Japanese
+        # slot's set code because that is where the claim was found — which manufactures a Korean
+        # identifier that does not exist and cannot later be told from a real one.
+        inherited = [p["printId"] for p in dryrun["prints"]
+                     if not p["localIdentifierKnown"]
+                     and (p["localSetCode"] is not None or p["localNumber"] is not None)]
+        check(
+            "N2",
+            "A print with unknown local identifiers claims none",
+            "FAIL",
+            not inherited,
+            f"{len(inherited)} print(s) carry a local identifier they inherited from the slot they "
+            f"were sold under: {inherited[:5]}",
+        )
+
+        # The discovery queue #138 works, and the physical cards with nowhere to live. Reported:
+        # these are findings about the world, not defects in the tree.
+        #
+        # Named dryrun_counts, not counts: `guarded` is a `with` block and does not open a scope,
+        # so a generic name here overwrites the one a later section reads. A bare `counts` shadowed
+        # the finish counts and took out the regression guards two sections down.
+        dryrun_counts = dryrun["counts"]
+        check(
+            "N3",
+            "Printings known to exist whose own identifiers are unrecorded",
+            "INFO",
+            True,
+            f"{dryrun_counts['printNodesNeedingLocalIdentifier']} of "
+            f"{dryrun_counts['printNodes']} print nodes need a local identifier "
+            f"{dryrun_counts['needsLocalIdentifierByLocality']}; "
+            f"{dryrun_counts['productsSplitAcrossLocalities']} legacy products split across "
+            f"localities; {dryrun_counts['orphanSpecimens']} specimen(s) have no catalogue node",
+        )
+
+        # N4-N5 — source-first prints admitted on their own evidence (ADR-0001 D1)
+        # --------------------------------------------------------------------------- #
+        # These are printings Cardmarket never listed, so they have no product row and cannot get
+        # one: database.py derives a product id from a Cardmarket image URL. They are keyed by the
+        # ADR identity instead, and they are the first rows in this repository that did not come
+        # from the harvest.
+        source_first = load("verification/source_first_prints.json")
+        admitted = source_first["prints"]
+
+        ungrounded = [
+            entry["printId"] for entry in admitted
+            if not entry.get("specimenId") or not entry.get("evidence")
+            or not entry.get("localSetCode") or not entry.get("localNumber")
+        ]
+        check(
+            "N4",
+            "Every admitted source-first print cites a specimen and names its own identifiers",
+            "FAIL",
+            not ungrounded,
+            f"{len(ungrounded)} print(s) admitted without a specimen, evidence or a complete local "
+            f"identifier: {ungrounded[:5]}",
+        )
+
+        # The other half of I7, on real data rather than on the projection: a printing whose set
+        # code the evidence declines to state may not be admitted with one. Two are held for
+        # exactly that reason, and holding them is the check passing, not failing.
+        guessed = [entry["specimenId"] for entry in source_first["held"]
+                   if entry.get("proposedSetCode") and not entry.get("blockedBy")]
+        check(
+            "N5",
+            "A held print does not smuggle in the set code its evidence refuses to assert",
+            "FAIL",
+            not guessed,
+            f"{len(guessed)} held entr(ies) carry a set code with no recorded reason it is "
+            f"unconfirmed: {guessed[:5]}",
         )
 
     with guarded("G3", "image formats"):
