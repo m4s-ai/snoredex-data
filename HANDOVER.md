@@ -63,6 +63,10 @@ verification/ADR-0005-legacy-set-reconciliation.md
                               ACCEPTED bounded backfill (#148): all 135 aliases, 203 release rows
                               and 637 finish units project into the identity graph or an explicit
                               needs-evidence/blocked-by-source state. Coverage is versioned and lossless.
+verification/ADR-0006-source-first-card-discovery.md
+                              ACCEPTED card-level discovery loop (#136): localized provider queries
+                              retain list/detail responses before matching and route every card into
+                              a visible, non-verdict staging bucket.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
@@ -97,6 +101,7 @@ scripts/                      Two halves; only the second can be re-run (#28).
                               LIVE generators, in run order (§7 has the full command list):
                                 analyze -> finishes -> language_status -> confirmed_releases
                                 -> source_registry -> source_capabilities -> source_adapters
+                                -> card_discovery
                                 -> legacy_set_reconciliation
                                 -> checklist -> readme_stats
                                 -> issue_templates
@@ -104,7 +109,8 @@ scripts/                      Two halves; only the second can be re-run (#28).
                               plus editions.py (edition classification) and publish.py (assembles
                               and verifies the Pages artifact). print_identity_dryrun.py and
                               set_catalogue_dryrun.py rebuilds the ADR-0002 graph;
-                              source_adapters.py checks/reprojects retained ADR-0004 runs; and
+                              source_adapters.py checks/reprojects retained ADR-0004 set runs;
+                              card_discovery.py checks/reprojects retained ADR-0006 card runs; and
                               legacy_set_reconciliation.py rebuilds the bounded ADR-0005 ledger and
                               compatibility pair. See §7.
                               analyze.py is the SOLE producer of analysis_artists,
@@ -220,10 +226,20 @@ verification/
                                still needs-evidence or blocked-by-source.
   runs/source-adapters/        IMMUTABLE RAW RUNS: exact provider response bytes, hashes,
                                request/checkpoint manifest and inputs for reproducible run diffs.
-  source_adapter_staging.json  GENERATED #136 GRAPH SUMMARY: exact accounting, run errors, explicit
+  source_adapter_staging.json  GENERATED #147 GRAPH SUMMARY: exact accounting, run errors, explicit
                                gaps, record hash and added/changed/disappeared/re-key diffs.
-  source_adapter_records.jsonl GENERATED #136 RECORD FEED: one locality-aware set proposal per line.
+  source_adapter_records.jsonl GENERATED #147 RECORD FEED: one locality-aware set proposal per line.
                                Neither file can mutate set, card, finish or verification verdicts.
+  card_discovery_schema.json   Versioned contract for source-first card queries, buckets, additive
+                               set-code assertions, explicit mappings and terminal gap states.
+  card_discovery_adapters.json REVIEWED #136 ADAPTER/GAP INVENTORY: native-name slices plus the
+                               locality tracks that remain needs-evidence or blocked-by-source.
+  runs/card-discovery/         IMMUTABLE RAW RUNS: exact list pages, detail pages, symbol assets,
+                               hashes and resumable checkpoints.
+  card_discovery_staging.json  GENERATED #136 GRAPH SUMMARY: exact detail/bucket accounting, run
+                               errors, gaps and added/changed/disappeared/re-key diffs.
+  card_discovery_records.jsonl GENERATED #136 RECORD FEED: one locality-aware card proposal per line.
+                               Raw identifiers survive and no row may mutate a verdict.
   report.py                   Prints coverage and rewrites exactly three exports:
                               confirmed_sources.json, CONTRADICTED.json, UNCONFIRMED.json.
                               NOT "all exports" — MANUAL_REVIEW.* comes from classify_manual.py,

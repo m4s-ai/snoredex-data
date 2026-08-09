@@ -187,6 +187,7 @@ python scripts/legacy_baseline.py --check   # legacy universe contract + claim g
 python scripts/print_identity_dryrun.py --check  # ADR-0001 claim/release/print mapping (#134/#145)
 python scripts/set_catalogue_dryrun.py --check   # ADR-0002 set/edition/event mapping (#146)
 python scripts/source_adapters.py --check        # ADR-0004 source-first catalogue runs (#147)
+python scripts/card_discovery.py --check         # ADR-0006 source-first card runs (#136)
 
 # ... do the work in a new Python pass under verification/ ...
 
@@ -200,6 +201,7 @@ python scripts/confirmed_releases.py             # chronological JSON + CSV
 python scripts/source_registry.py                # provider/evidence registry
 python scripts/source_capabilities.py            # bounded source/coverage graph (#135)
 python scripts/source_adapters.py                 # reproject latest retained catalogue run (#147)
+python scripts/card_discovery.py                  # reproject latest retained card run (#136)
 python scripts/checklist.py                      # canonical checklist items
 python scripts/readme_stats.py                   # generated markdown blocks
 python scripts/issue_templates.py                # community correction form
@@ -231,9 +233,11 @@ python scripts/database.py
 python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 
 for g in checklist readme_stats issue_templates site source_registry source_capabilities \
-         source_adapters open_items analyze database print_identity_dryrun set_catalogue_dryrun
+         source_adapters card_discovery open_items analyze database print_identity_dryrun \
+         set_catalogue_dryrun
 do python scripts/$g.py --check; done            # fail instead of writing
 python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
+python verification/test_card_discovery.py       # source-first card-loop regressions
 python verification/test_site.py                 # browser acceptance tests
 python verification/verify_finish_sources.py     # live TCGCSV assertions
 python scripts/publish.py --out _site             # build the artifact, THEN verify it

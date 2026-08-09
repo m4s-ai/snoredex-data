@@ -1,0 +1,480 @@
+{
+  "schema": "snoredex-card-discovery-run",
+  "schemaVersion": "1.0.0",
+  "runId": "20260809T181000Z",
+  "coverageVersion": "1.0.0",
+  "startedAt": "2026-08-09T18:10:00Z",
+  "completedAt": "2026-08-09T18:10:00Z",
+  "status": "complete",
+  "contract": "verification/card_discovery_adapters.json",
+  "contractHash": "sha256:9817c506bf5fa4666018271761fb9e5ff9f8fdc07329892c8a04f86f2e3d9c86",
+  "capabilityGraph": "verification/source_capability_graph.json",
+  "capabilityGraphHash": "sha256:b7c4740d94b944d09fcb66194887b03341626e59388d60d70ad505cdd6393464",
+  "requests": [
+    {
+      "runId": "20260809T181000Z",
+      "adapterId": "pokemon-asia-native-name",
+      "adapterVersion": "1.0.0",
+      "sliceId": "pokemon-asia-tw-snorlax",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "coverageEdgeId": "asia-card-search-positive",
+      "rawLocale": "tw",
+      "endpoint": "https://asia.pokemon-card.com/tw/card-search/list/",
+      "queryParameters": {
+        "nameQueries": [
+          "卡比獸"
+        ],
+        "cardType": "all",
+        "regulation": "all",
+        "pageParameter": "pageNo"
+      },
+      "retrievedAt": "2026-08-09T18:10:00Z",
+      "pages": [
+        {
+          "query": "卡比獸",
+          "pageNo": 1,
+          "url": "https://asia.pokemon-card.com/tw/card-search/list/?pageNo=1&keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&cardType=all&regulation=all",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/query-1/page-1.html",
+          "responseHash": "sha256:7003df0e37f4924ca074d965710c7e69a0488b5b8031aa798bf478fd3fdab8ca",
+          "resultCount": 43,
+          "totalPages": 3,
+          "detailIds": [
+            "18039",
+            "17038",
+            "17039",
+            "18292",
+            "17040",
+            "14796",
+            "16453",
+            "16454",
+            "13148",
+            "12537",
+            "12164",
+            "11337",
+            "10298",
+            "9173",
+            "9339",
+            "8943",
+            "8266",
+            "14986",
+            "8304",
+            "12268"
+          ]
+        },
+        {
+          "query": "卡比獸",
+          "pageNo": 2,
+          "url": "https://asia.pokemon-card.com/tw/card-search/list/?pageNo=2&keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&cardType=all&regulation=all",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/query-1/page-2.html",
+          "responseHash": "sha256:4d3f56ab49962669dadea998bdf1431904001d8343f49b6a05e5a561ee9045a3",
+          "resultCount": 43,
+          "totalPages": 3,
+          "detailIds": [
+            "5618",
+            "7016",
+            "6589",
+            "6424",
+            "5968",
+            "5969",
+            "5314",
+            "2220",
+            "2051",
+            "1474",
+            "375",
+            "2395",
+            "2541",
+            "2542",
+            "7426",
+            "2707",
+            "2708",
+            "2856",
+            "2880",
+            "2881"
+          ]
+        },
+        {
+          "query": "卡比獸",
+          "pageNo": 3,
+          "url": "https://asia.pokemon-card.com/tw/card-search/list/?pageNo=3&keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&cardType=all&regulation=all",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/query-1/page-3.html",
+          "responseHash": "sha256:8177203ef27d52f94421542d5df8437b91f282745310fff587c366369d7ef632",
+          "resultCount": 43,
+          "totalPages": 3,
+          "detailIds": [
+            "3553",
+            "3569",
+            "4244"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "375",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/375/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/375.html",
+          "responseHash": "sha256:e828e73565bb6a92b0518a6c3ee67789fd448769745f49d07daa681e0dd72b39",
+          "parsedRecordHash": "sha256:dc421ce9f529beb91cd828bf7ab05473f77eaad62a7f34411f5962ddb38e8aad"
+        },
+        {
+          "rawProviderId": "1474",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/1474/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/1474.html",
+          "responseHash": "sha256:2cfdddb07f958f426c6fb0073530306844aff3077bc2d70727428d88966335e5",
+          "parsedRecordHash": "sha256:87b0bbc7f54cee46cafb84c6d17463776d1e55e841a2c73f61424cea36671583"
+        },
+        {
+          "rawProviderId": "2051",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2051/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2051.html",
+          "responseHash": "sha256:befc293db93841e943ab721bfd22b099440d9cb3a501aff7518d8d1652717fc3",
+          "parsedRecordHash": "sha256:2f39fdb4bc5bb9d3e4f1a650237de1ee00dbcd55441fe9a6668719002e78649e"
+        },
+        {
+          "rawProviderId": "2220",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2220/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2220.html",
+          "responseHash": "sha256:0fc67bf7f3a5a7ae1e0ed488a987b71b58300f239b8ff24eaaf9722db70a3423",
+          "parsedRecordHash": "sha256:eb992b0234c5c0af0ab4f38c4a7d97bdb7d621f08ca9e92f1c579da66baf7df2"
+        },
+        {
+          "rawProviderId": "2395",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2395/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2395.html",
+          "responseHash": "sha256:fa5915665464f62fe237afc6e508f278b7f215b7e2889be4831096d22d2b0fdf",
+          "parsedRecordHash": "sha256:d0f005d224d21f7f8631288d814f5b56fb6194a605c467994b96c2c205cd21ba"
+        },
+        {
+          "rawProviderId": "2541",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2541/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2541.html",
+          "responseHash": "sha256:8acac50b4a846f339dbeaaa6a8eb4879aa4266a3b8b59d5130882579acac8382",
+          "parsedRecordHash": "sha256:dac203b09c6bc1eb303a9363b14c868b0a2c24c028b8e71ee8302ce4e5030f03"
+        },
+        {
+          "rawProviderId": "2542",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2542/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2542.html",
+          "responseHash": "sha256:f19a6cd20676cbb1c14e645a20b3787d7abf25e94f83ecdeff0cf4190c351ee4",
+          "parsedRecordHash": "sha256:4db33629860b508b28fcd7d7bbc320fc05568c12d15a2d6f034c03dfd36085cf"
+        },
+        {
+          "rawProviderId": "2707",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2707/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2707.html",
+          "responseHash": "sha256:35f51a9fa7f7cacee9d9a5efa1f9abfdf53320c006c46e90192d424e2f5b9550",
+          "parsedRecordHash": "sha256:20ff244a74a4b11f282822bc71d5a6340f50238352f3f483d6e6b12c7ed11095"
+        },
+        {
+          "rawProviderId": "2708",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2708/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2708.html",
+          "responseHash": "sha256:31ce49eb6b0d745feca41d93b7c5caa43d64d20a85d41b1fe0fcc313f0e5bb4b",
+          "parsedRecordHash": "sha256:2ea846baa77f7b60565ade24f242201a88d2065933c8b0a93e5b4355544e99bf"
+        },
+        {
+          "rawProviderId": "2856",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2856/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2856.html",
+          "responseHash": "sha256:7676187dc3174489900969ac0b2ce57cd5db373d22deab053099767cc4303814",
+          "parsedRecordHash": "sha256:a0b5ab411eef30a582695e60b15655d5b15916676ac00e23c13624e33d32becf"
+        },
+        {
+          "rawProviderId": "2880",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2880/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2880.html",
+          "responseHash": "sha256:3d028ebbdeb3c7439eb3be17db1e1612f7529694c6adcb8cf47e9d548289dc44",
+          "parsedRecordHash": "sha256:03ee8e0fa68eb0ab6d5d8cfce9827e6b4bb69b9b1b1115edfabecf5cac2d08a1"
+        },
+        {
+          "rawProviderId": "2881",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2881/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2881.html",
+          "responseHash": "sha256:bf2671ca17ca6fdb1c9b12247e6a137db8041d0188c0111a353f9fb8455658ae",
+          "parsedRecordHash": "sha256:394a33a967d015cb97519e08a2f924d90b7d0c8645c6d1e1023e37e24f3a0ca1"
+        },
+        {
+          "rawProviderId": "3553",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/3553/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/3553.html",
+          "responseHash": "sha256:a555b48b057a322f95823cee41f2dbd4ca3d699b9a003967752def57d28983e3",
+          "parsedRecordHash": "sha256:01a857f9fcf3deddd2afc39b681b84afc6ed1aac1b7d0ec83cfb76dc4f9b7bc6"
+        },
+        {
+          "rawProviderId": "3569",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/3569/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/3569.html",
+          "responseHash": "sha256:b13103f8efa6bef11d8fe89aa9bb2e430438d75eb1a70be6e95b1d9b456322fb",
+          "parsedRecordHash": "sha256:ac22e0b9178b156fa524059ffdc455fe028105c066d03b0dc6deb116ff043fff"
+        },
+        {
+          "rawProviderId": "4244",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/4244/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/4244.html",
+          "responseHash": "sha256:c8123e94ed675c4b6aa5757cd9b350c6babb925ea923d0df1c8dcf67c114b997",
+          "parsedRecordHash": "sha256:eeaec204e11c517e16379bbf3972b1fed389cd915b7d228b625db837cefafcbc"
+        },
+        {
+          "rawProviderId": "5314",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5314/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5314.html",
+          "responseHash": "sha256:aef00e063977e9081446fa61883698c5d4be6c47e66ca14b3cfea8ab6b9d45c2",
+          "parsedRecordHash": "sha256:6985670d60038b165037469f23d726c384feeed72d2e0715eda435f2b781f4e7"
+        },
+        {
+          "rawProviderId": "5618",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5618/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5618.html",
+          "responseHash": "sha256:390e794e222857f37e08f6c9f05868e08119ba1ff55b2d612a97c982fe6b400c",
+          "parsedRecordHash": "sha256:24d1f1abdb55a507191791853b287320c3700f680ab2ec171d7b444ca26fab7f"
+        },
+        {
+          "rawProviderId": "5968",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5968/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5968.html",
+          "responseHash": "sha256:ab2b3de1f7311623ca83de1309582ff69932662813e8dc8c7e18642d3eb71d8f",
+          "parsedRecordHash": "sha256:4e78e981ca75435255a5aa902d4d47031063d625a2420f5ef22265df3caed536"
+        },
+        {
+          "rawProviderId": "5969",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5969/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5969.html",
+          "responseHash": "sha256:0f9d10f30c6ded1ddd54b267289db21bc7f5659778789623a6110025239381f4",
+          "parsedRecordHash": "sha256:ca79e089c1da30f0ff4bacb68597c261d72f768ca33ebe67bc4be6f6fedbaf6f"
+        },
+        {
+          "rawProviderId": "6424",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/6424/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/6424.html",
+          "responseHash": "sha256:16cd50ae973dab57d6078adbf557985882cc6c53c377bcf9f449d9bc1dfb5bed",
+          "parsedRecordHash": "sha256:a115444c1bf3daf7dc545f74cb4fbe42b97d960bf191623123819d86865f3e2a"
+        },
+        {
+          "rawProviderId": "6589",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/6589/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/6589.html",
+          "responseHash": "sha256:3152e8b35f164ec70537a9da15d18c667fe9c3d3f987db9d2f1a0b16df89c232",
+          "parsedRecordHash": "sha256:b3ee9a79a1dfbe4066d1f933a898c2a322c1a3ab0f7c6e225de65132565fefe9"
+        },
+        {
+          "rawProviderId": "7016",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/7016/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/7016.html",
+          "responseHash": "sha256:2b97cc65fd70acd38af7140fd5088240b6d9da11412fd101bb47601a5becef7d",
+          "parsedRecordHash": "sha256:9c10b065ed3b62eec6254544ddf33a15f96c770e0d045aa6a25d48abc4a2b7e7"
+        },
+        {
+          "rawProviderId": "7426",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/7426/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/7426.html",
+          "responseHash": "sha256:e7091a135d73073984e62128bac1e17a8cd937481c524121d0ed90e33a015740",
+          "parsedRecordHash": "sha256:972bf77e80fe6cadd7a6772b91928fedf0828bb9326e376fd3b472497a5158ad"
+        },
+        {
+          "rawProviderId": "8266",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/8266/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/8266.html",
+          "responseHash": "sha256:567a9fea274f1a83274ae87fb121dabf568bad3989281c7b5d649d5c746c007e",
+          "parsedRecordHash": "sha256:925dc36b13655d11474f6755f393589f79fe41b73f254a5d3956ae851337d3dd"
+        },
+        {
+          "rawProviderId": "8304",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/8304/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/8304.html",
+          "responseHash": "sha256:b8ed52bc3a005974902e58c23c64e11c1537c83a7e367d5688c97ffd7cff4118",
+          "parsedRecordHash": "sha256:ec9fd31015e36ac5b7158d3315fd7c49aba79fbfda644dd64d5e41a520f7c5dd"
+        },
+        {
+          "rawProviderId": "8943",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/8943/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/8943.html",
+          "responseHash": "sha256:25b209b6d6a6c7025d5f7eb2087f3395afae938c33f8f2bf05e1a717cdaa5bb0",
+          "parsedRecordHash": "sha256:a35a785b58a66d55de26c745e10b096a073ee8629aad4209f6976363091d6319"
+        },
+        {
+          "rawProviderId": "9173",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/9173/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/9173.html",
+          "responseHash": "sha256:a5950a48c482c2d2b4980f3964501b8005fb798a42b5b29aebba82a634b2a120",
+          "parsedRecordHash": "sha256:e8197b9e76f453bcb0f8f6e1f1871868e06887c622fb0972ed63e0b8168345f6"
+        },
+        {
+          "rawProviderId": "9339",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/9339/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/9339.html",
+          "responseHash": "sha256:1b45474b69eb27556149597bec3c3b7009176774e5d12e6e602c8073146fe187",
+          "parsedRecordHash": "sha256:2835ecd0ef79e98b7d0fb5ddbfc833f6c2770cfb46372c58e280f4df32cf9530"
+        },
+        {
+          "rawProviderId": "10298",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/10298/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/10298.html",
+          "responseHash": "sha256:a9d4d06a9c458254c196a49729e8bdf915385857d56b2f3fe2c53ddca0765a59",
+          "parsedRecordHash": "sha256:c0fcc2eddb1d704a3b2f4dc88efc2ee00d015417aea2c99e127ed0960604ce1b"
+        },
+        {
+          "rawProviderId": "11337",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/11337/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/11337.html",
+          "responseHash": "sha256:7e484c9741dae264817d04afb515ec8de6bef80277ddc7c14b06dd892e360e82",
+          "parsedRecordHash": "sha256:ba4e5c845f0549cd7ee252c103a1ca4bbe313752078a040eda68b0a2022ac53e"
+        },
+        {
+          "rawProviderId": "12164",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/12164/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/12164.html",
+          "responseHash": "sha256:4c0202cfc543ef7856a62280e4e2e0087504ec907c5afb1f2cd2ec56218a70fc",
+          "parsedRecordHash": "sha256:2b5032078341c186f62c72fc01f0bfdd0fc48d9ce263ca184d330e42bab4f75c"
+        },
+        {
+          "rawProviderId": "12268",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/12268/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/12268.html",
+          "responseHash": "sha256:02e0184d7767255194920e891c8a458c6570ae9bb8a090d097c5cca4e7de9b02",
+          "parsedRecordHash": "sha256:1efb2cefd4eb90abdbdcb2dceb96fcf91f6e0da554c2bb3ecb62b1c91a5b2ac4"
+        },
+        {
+          "rawProviderId": "12537",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/12537/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/12537.html",
+          "responseHash": "sha256:52af2749dbca2884cc6f5129566f213b67131c65ff88bb708db4a9185be767a1",
+          "parsedRecordHash": "sha256:78c6bfe123d8544e6142c4263728d78e1e83397e40394432b36cbde9325e3829"
+        },
+        {
+          "rawProviderId": "13148",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/13148/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/13148.html",
+          "responseHash": "sha256:2fbd506d5988ca3fb2ef348bfe136055e826dc56bddfddd080e838f09202a280",
+          "parsedRecordHash": "sha256:db668a345329725ca2dc7e3f3fae2dce693ad37015a8c6262f5529f2ef3705c9"
+        },
+        {
+          "rawProviderId": "14796",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/14796/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/14796.html",
+          "responseHash": "sha256:d7f0240d2c099db15b690325efac68b1d4e321d3c7bf61d912be83b7bf65738b",
+          "parsedRecordHash": "sha256:095a6c48ae9ad1e985b9406c3c88a506fd724191d8de8a77ea8d18ae7b3916a5"
+        },
+        {
+          "rawProviderId": "14986",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/14986/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/14986.html",
+          "responseHash": "sha256:7bc3a49af3e7ffa670c1aa827b4bfff778bfe059abecf475b8dc3baeaed6a791",
+          "parsedRecordHash": "sha256:23eb2c2d000bc36c4776731d77b84ff204bc861efde9cb4adefaa6f926ddcba0"
+        },
+        {
+          "rawProviderId": "16453",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/16453/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/16453.html",
+          "responseHash": "sha256:d13c5112e7185e48753c3b13d66417bcab0f8dbc1498a90b9e5c57807cd52fc7",
+          "parsedRecordHash": "sha256:3700ff9daafa1a1e28a1e6513729f3dc84eca052a792b11d6f3ae4c6461db96d"
+        },
+        {
+          "rawProviderId": "16454",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/16454/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/16454.html",
+          "responseHash": "sha256:56e0e98c34df84910bdbb3c4bb558b047758f0279212f25868f0dcfc3dd88846",
+          "parsedRecordHash": "sha256:5fe0165a39daf07a63c73c1bed01d3469c67f81301bbea230d909151fb00cee6"
+        },
+        {
+          "rawProviderId": "17038",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/17038/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/17038.html",
+          "responseHash": "sha256:b1eacb00d2da75a6e10fdd319eec8e134dd7213ca30bea83657a5b93f2cd27b2",
+          "parsedRecordHash": "sha256:2aff97adcc4cc5eb0ac04af895cd3b8d366a6cc68196359149545b552844c71d"
+        },
+        {
+          "rawProviderId": "17039",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/17039/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/17039.html",
+          "responseHash": "sha256:856979efdf24edf741f5d841ee8081c1c9f8ab3c7add818f3d2662ba991784f6",
+          "parsedRecordHash": "sha256:00e059c233fabbd4698f33a3c06937a97fe4ce22cd89682abaed3c877ea1dc11"
+        },
+        {
+          "rawProviderId": "17040",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/17040/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/17040.html",
+          "responseHash": "sha256:9e83b24ba6906930b4970a2446e7ec914402a4063eaee0aed3e148dd223d6af8",
+          "parsedRecordHash": "sha256:2bbcc3bb925a4a501c6a2b96eec80d9b3d46de0c44838906a94b79c48674910b"
+        },
+        {
+          "rawProviderId": "18039",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/18039/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/18039.html",
+          "responseHash": "sha256:e0d5e5b42aeeb6e7a7fe5df8531f3e3fa60b1f217f685e141a9c90d2338f0f75",
+          "parsedRecordHash": "sha256:e7572aefc57bb9d8779852e987611ee30ab347ecc3fad7a63d30dea3fcef5ea5"
+        },
+        {
+          "rawProviderId": "18292",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/18292/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/18292.html",
+          "responseHash": "sha256:deb574a99aa3533d998393814e18c79809d79d2a124290f63699a38f0d695664",
+          "parsedRecordHash": "sha256:5c60d67ee63e10cf8dfa8d814dece265581e800e0b6ca6b9e13c9baa588058ee"
+        }
+      ],
+      "assets": [
+        {
+          "rawSetCode": "SVQP",
+          "url": "https://asia.pokemon-card.com/tw/card-img/mark/twhk_exp_SVQP.png",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/assets/SVQP.png",
+          "responseHash": "sha256:99bad27dc155e7ac1a6c0b63244192d76a4a1696fbead948d8577238697c19a5"
+        }
+      ],
+      "checkpoint": {
+        "completedPages": [
+          "卡比獸:1",
+          "卡比獸:2",
+          "卡比獸:3"
+        ],
+        "completedDetailIds": [
+          "375",
+          "1474",
+          "2051",
+          "2220",
+          "2395",
+          "2541",
+          "2542",
+          "2707",
+          "2708",
+          "2856",
+          "2880",
+          "2881",
+          "3553",
+          "3569",
+          "4244",
+          "5314",
+          "5618",
+          "5968",
+          "5969",
+          "6424",
+          "6589",
+          "7016",
+          "7426",
+          "8266",
+          "8304",
+          "8943",
+          "9173",
+          "9339",
+          "10298",
+          "11337",
+          "12164",
+          "12268",
+          "12537",
+          "13148",
+          "14796",
+          "14986",
+          "16453",
+          "16454",
+          "17038",
+          "17039",
+          "17040",
+          "18039",
+          "18292"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    }
+  ],
+  "failures": []
+}

@@ -10,5 +10,9 @@
 # so the fixture keeps reproducing the page shape it was captured for.
 verification/fixtures/** -text
 
+# Immutable provider responses are hash-verified byte-for-byte. Some official HTML pages use
+# CRLF while neighbouring pages use LF, so Git must not normalize the retained response bytes.
+verification/runs/card-discovery/**/raw/** -text -whitespace
+
 # Preserve the publisher's exact legalcode bytes, including its intentional final blank line.
 LICENSES/CC-BY-NC-SA-4.0.md whitespace=-blank-at-eof

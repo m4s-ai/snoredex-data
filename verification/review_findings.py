@@ -408,6 +408,7 @@ def collect() -> None:
             "source_registry.py", "source_capabilities.py", "checklist.py", "readme_stats.py",
             "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
             "print_identity_dryrun.py", "set_catalogue_dryrun.py", "source_adapters.py",
+            "card_discovery.py",
         }
 
         # The harvest steps and `mkunits` moved to verification/archive/passes/ once #28 had captured the
@@ -1057,6 +1058,133 @@ def collect() -> None:
                     for row in adapter_stage["gaps"]),
             f"provenance={provenance_faults[:3]}, preservation={preservation_faults[:3]}, "
             f"collapsedLocales={collapsed_locales[:3]}, missingGapTerms={missing_gap_terms}",
+        )
+
+        # N14-N15 — card discovery starts outside the candidate store and stops at staging (#136)
+        card_contract = load("verification/card_discovery_adapters.json")
+        card_stage = load("verification/card_discovery_staging.json")
+        card_run_id = card_stage["meta"]["generatedFromRun"]
+        card_run_root = ROOT / "verification" / "runs" / "card-discovery" / card_run_id
+        card_manifest = load(f"verification/runs/card-discovery/{card_run_id}/manifest.json")
+        card_records_path = ROOT / card_stage["recordsPath"]
+        card_records_bytes = card_records_path.read_bytes()
+        card_records = [
+            json.loads(line) for line in card_records_bytes.decode("utf-8").splitlines()
+            if line.strip()
+        ]
+        card_raw_hash_faults = []
+        discovered_by_slice = {}
+        for request in card_manifest["requests"]:
+            discovered = set()
+            for response in request["pages"] + request["details"] + request.get("assets", []):
+                raw_path = card_run_root / response["rawPath"]
+                actual = "sha256:" + hashlib.sha256(raw_path.read_bytes()).hexdigest()
+                if actual != response["responseHash"]:
+                    card_raw_hash_faults.append(response["rawPath"])
+            for page in request["pages"]:
+                discovered.update(page["detailIds"])
+            detail_ids = {row["rawProviderId"] for row in request["details"]}
+            if discovered != detail_ids:
+                card_raw_hash_faults.append(f"{request['sliceId']}: list/detail accounting")
+            discovered_by_slice[request["sliceId"]] = discovered
+        card_bucket_counts = Counter(row.get("bucket") for row in card_records)
+        expected_card_buckets = {
+            "matched": card_stage["meta"]["counts"]["matched"],
+            "ambiguous": card_stage["meta"]["counts"]["ambiguous"],
+            "new-candidate": card_stage["meta"]["counts"]["newCandidate"],
+            "positively-excluded": card_stage["meta"]["counts"]["positivelyExcluded"],
+            "needs-evidence": card_stage["meta"]["counts"]["needsEvidence"],
+        }
+        card_slice_faults = [
+            row["sliceId"] for row in card_stage["slices"]
+            if row["accounting"]["fetched"] != row["accounting"]["accounted"]
+            or row["accounting"]["accounted"] != sum(
+                row["accounting"][field] for field in (
+                    "matched", "ambiguous", "newCandidate", "positivelyExcluded",
+                    "needsEvidence",
+                )
+            )
+            or row["accounting"]["fetched"] != len(discovered_by_slice[row["sliceId"]])
+        ]
+        allowed_query_fields = {"nameQueries", "cardType", "regulation", "pageParameter"}
+        query_seed_faults = [
+            request["sliceId"] for request in card_manifest["requests"]
+            if set(request["queryParameters"]) != allowed_query_fields
+            or not request["queryParameters"]["nameQueries"]
+        ]
+        card_ids = [row["recordId"] for row in card_records]
+        card_keys = [row["stableKey"] for row in card_records]
+        check(
+            "N14",
+            "Card discovery retains and accounts for every provider-native detail before matching",
+            "FAIL",
+            not card_raw_hash_faults and not card_slice_faults and not query_seed_faults
+            and card_manifest["status"] == "complete"
+            and not card_manifest["failures"] and not card_stage["runErrors"]
+            and card_stage["meta"]["sourceFirst"] is True
+            and card_stage["meta"]["verdictMutationAllowed"] is False
+            and len(card_ids) == len(set(card_ids))
+            and len(card_keys) == len(set(card_keys))
+            and len(card_records) == card_stage["meta"]["counts"]["records"]
+            and "sha256:" + hashlib.sha256(card_records_bytes).hexdigest()
+                == card_stage["recordsHash"]
+            and all(card_bucket_counts[name] == count
+                    for name, count in expected_card_buckets.items())
+            and sum(expected_card_buckets.values()) == len(card_records),
+            f"raw={card_raw_hash_faults[:3]}, accounting={card_slice_faults[:3]}, "
+            f"querySeeds={query_seed_faults}, runErrors={card_stage['runErrors'][:3]}",
+        )
+
+        required_card_provenance = set(card_contract["rawRecordContract"]["requiredProvenance"])
+        card_provenance_faults = [
+            row.get("recordId") for row in card_records
+            if not required_card_provenance.issubset(row)
+        ]
+        card_preservation_faults = [
+            row["recordId"] for row in card_records
+            if row["raw"]["localName"] != row["sourceRecord"].get("localName")
+            or row["raw"]["rawSetCode"] != row["sourceRecord"].get("rawSetCode")
+            or row["raw"]["localCollectorNumber"]
+                != row["sourceRecord"].get("localCollectorNumber")
+            or row["normalizationProposal"]["destructiveMergeAllowed"] is not False
+            or row["normalizationProposal"]["verdictMutationAllowed"] is not False
+        ]
+        svqp_rows = [
+            row for row in card_records
+            if row["rawLocale"] == "tw" and row["rawProviderId"] == "13148"
+        ]
+        svqp_ok = len(svqp_rows) == 1 and (
+            svqp_rows[0]["bucket"] == "new-candidate"
+            and svqp_rows[0]["raw"]["rawSetCode"] == "SVQP"
+            and svqp_rows[0]["raw"]["localCollectorNumber"] == "012/023"
+            and svqp_rows[0]["normalizationProposal"]["assertedLocalSetCode"] == "svQP F"
+            and svqp_rows[0]["normalizationProposal"]["targetCardReleaseId"] is None
+        )
+        munchlax_faults = [
+            row["recordId"] for row in card_records
+            if row["raw"]["localName"].startswith("小卡比獸")
+            and row["bucket"] != "positively-excluded"
+        ]
+        card_gap_text = " ".join(
+            f"{row['track']} {row['reason']}" for row in card_contract["gaps"]
+        ).lower()
+        required_card_gaps = ("japanese", "indonesian", "thai", "korean", "simplified-chinese",
+                              "western", "latam", "specialist", "pocket")
+        missing_card_gaps = [term for term in required_card_gaps if term not in card_gap_text]
+        card_source = (ROOT / "scripts" / "card_discovery.py").read_text(encoding="utf-8")
+        check(
+            "N15",
+            "Local card identifiers, unmatched queues, failure states and non-destructive proposals survive",
+            "FAIL",
+            not card_provenance_faults and not card_preservation_faults
+            and svqp_ok and not munchlax_faults and not missing_card_gaps
+            and "--resume" in card_source and "source-failed" in card_source
+            and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
+                    for row in card_stage["slices"])
+            and all(row["terminalState"] in {"needs-evidence", "blocked-by-source"}
+                    for row in card_stage["gaps"]),
+            f"provenance={card_provenance_faults[:3]}, preservation={card_preservation_faults[:3]}, "
+            f"svqp={svqp_ok}, munchlax={munchlax_faults[:3]}, missingGaps={missing_card_gaps}",
         )
 
     with guarded("G3", "image formats"):
@@ -2089,7 +2217,23 @@ def collect() -> None:
             found_hits = []
             for match in secret_pattern.finditer(text):
                 found = match.group(0)
-                if "noreply" not in found.lower():
+                preceding = text[match.start() - 1:match.start()]
+                recent_url_start = text.rfind("https://", max(0, match.start() - 300), match.start())
+                recent_url_prefix = (
+                    text[recent_url_start:match.start()] if recent_url_start >= 0 else ""
+                )
+                inside_source_url = bool(recent_url_prefix) and not any(
+                    delimiter in recent_url_prefix for delimiter in ('"', "'", "\n", "\r")
+                )
+                # Official source assets use names such as `S10a_F@4x.png`. In a URL path the
+                # segment resembles an email syntactically but is an image-density filename, not
+                # contact data. `SV2a F@4x.png` even contains a source-native space, so retain a
+                # short URL-context check as well as the ordinary path-boundary check.
+                source_asset_name = (
+                    (preceding in {"/", "\\"} or inside_source_url)
+                    and found.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))
+                )
+                if "noreply" not in found.lower() and not source_asset_name:
                     found_hits.append(f"{label}: {found[:80]}")
             return found_hits
 

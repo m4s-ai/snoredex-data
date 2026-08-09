@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://snoredex.example/schema/card-discovery-contract-1.0.0.json",
+  "title": "Snoredex source-first card discovery contract",
+  "type": "object",
+  "required": ["meta", "rawRecordContract", "adapters", "setCodeAssertions", "explicitMappings", "gaps"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["schema", "schemaVersion", "coverageVersion", "reviewedAt", "policies"],
+      "additionalProperties": false,
+      "properties": {
+        "schema": {"const": "snoredex-card-discovery-contract"},
+        "schemaVersion": {"const": "1.0.0"},
+        "coverageVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "reviewedAt": {"type": "string", "format": "date"},
+        "policies": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "rawRecordContract": {
+      "type": "object",
+      "required": ["requiredProvenance", "rawFields", "buckets", "terminalStates"],
+      "additionalProperties": false,
+      "properties": {
+        "requiredProvenance": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "rawFields": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "buckets": {
+          "type": "array",
+          "minItems": 5,
+          "items": {"enum": ["matched", "ambiguous", "new-candidate", "positively-excluded", "needs-evidence"]}
+        },
+        "terminalStates": {
+          "type": "array",
+          "minItems": 3,
+          "items": {"enum": ["complete", "needs-evidence", "blocked-by-source"]}
+        }
+      }
+    },
+    "adapters": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["adapterId", "adapterVersion", "providerId", "surfaceId", "state", "listEndpointTemplate", "detailEndpointTemplate", "category", "sourceFirst", "pageParameter", "pageSize", "slices"],
+        "additionalProperties": false,
+        "properties": {
+          "adapterId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "adapterVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+          "providerId": {"type": "string"},
+          "surfaceId": {"type": "string"},
+          "state": {"const": "active"},
+          "listEndpointTemplate": {"type": "string", "pattern": "^https://"},
+          "detailEndpointTemplate": {"type": "string", "pattern": "^https://"},
+          "category": {"const": "card"},
+          "sourceFirst": {"const": true},
+          "pageParameter": {"type": "string", "minLength": 1},
+          "pageSize": {"type": "integer", "minimum": 1},
+          "slices": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["sliceId", "coverageEdgeId", "rawLocale", "locality", "language", "script", "nameQueries", "positiveNameExclusions"],
+              "additionalProperties": false,
+              "properties": {
+                "sliceId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+                "coverageEdgeId": {"type": "string"},
+                "rawLocale": {"type": "string"},
+                "locality": {"type": "string"},
+                "language": {"type": "string"},
+                "script": {"type": "string"},
+                "nameQueries": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+                "positiveNameExclusions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["prefix", "identity", "reason"],
+                    "additionalProperties": false,
+                    "properties": {
+                      "prefix": {"type": "string", "minLength": 1},
+                      "identity": {"type": "string", "minLength": 1},
+                      "reason": {"type": "string", "minLength": 1}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "setCodeAssertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["providerId", "surfaceId", "rawLocale", "rawSetCode", "assertedLocalSetCode", "assetUrl", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "providerId": {"type": "string"},
+          "surfaceId": {"type": "string"},
+          "rawLocale": {"type": "string"},
+          "rawSetCode": {"type": "string", "minLength": 1},
+          "assertedLocalSetCode": {"type": "string", "minLength": 1},
+          "assetUrl": {"type": "string", "pattern": "^https://"},
+          "evidence": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "explicitMappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["providerId", "surfaceId", "rawLocale", "rawProviderId", "mode", "targetCardReleaseId", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "providerId": {"type": "string"},
+          "surfaceId": {"type": "string"},
+          "rawLocale": {"type": "string"},
+          "rawProviderId": {"type": "string"},
+          "mode": {"enum": ["exact-match", "equivalence-proposal"]},
+          "targetCardReleaseId": {"type": "string", "minLength": 1},
+          "evidence": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["gapId", "track", "providerId", "surfaceId", "terminalState", "reason", "retryCondition"],
+        "additionalProperties": false,
+        "properties": {
+          "gapId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "track": {"type": "string", "minLength": 1},
+          "providerId": {"type": "string"},
+          "surfaceId": {"type": ["string", "null"]},
+          "terminalState": {"enum": ["needs-evidence", "blocked-by-source"]},
+          "reason": {"type": "string", "minLength": 1},
+          "retryCondition": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
