@@ -732,6 +732,44 @@ def collect() -> None:
         # exactly that reason, and holding them is the check passing, not failing.
         guessed = [entry["specimenId"] for entry in source_first["held"]
                    if entry.get("proposedSetCode") and not entry.get("blockedBy")]
+        # N7 — the migration contract's back-projection rule, enforced rather than asserted
+        # --------------------------------------------------------------------------- #
+        # print_identity_schema.json states "A back-projection reproduces the legacy/source
+        # identifiers and statuses" and nothing checked it. It is the property #140 depends on
+        # most: if the graph cannot rebuild the inputs it was built from, the mapping lost
+        # something, and the mapping is wrong rather than the old store obsolete.
+        source_truth = {
+            "legacy-language-unit": {u["unitId"]: u["status"] for u in units_doc},
+            "legacy-code-card-unit": {u["unitId"]: None for u in excluded_doc},
+            "source-first-record": {e["printId"]: None for e in source_first["prints"]},
+            "finish-printing-record": {
+                printing["printingId"]: printing.get("verificationStatus")
+                for unit in finish_doc["units"] for printing in unit.get("printings", [])
+            },
+        }
+        projected: dict[str, dict[str, Any]] = {}
+        for claim in claims:
+            projected.setdefault(claim["sourceKind"], {})[claim["sourceId"]] = claim
+        projection_faults = []
+        for kind, truth in source_truth.items():
+            got = projected.get(kind, {})
+            missing = sorted(set(truth) - set(got))
+            if missing:
+                projection_faults.append(f"{kind}: {len(missing)} unreachable e.g. {missing[:3]}")
+            drifted = sorted(sid for sid, status in truth.items()
+                             if status is not None
+                             and got.get(sid, {}).get("evidenceStatus") != status)
+            if drifted:
+                projection_faults.append(
+                    f"{kind}: {len(drifted)} status(es) not reproduced e.g. {drifted[:3]}")
+        check(
+            "N7",
+            "The graph back-projects to every source identifier and status it was built from",
+            "FAIL",
+            not projection_faults,
+            f"{len(projection_faults)} projection fault(s): {projection_faults[:4]}",
+        )
+
         # A printing that rests on a card someone examined must name the card. Without this the
         # highest rung of the ladder becomes the least traceable one, which is the failure
         # `S13`/`S14` already guard for language claims (#150).
