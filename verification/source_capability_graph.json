@@ -355,23 +355,25 @@
       "providerId": "tcgdex",
       "label": "Localized TCGdex REST API",
       "state": "incomplete",
-      "failureState": "Upstream card population and variant flags are incomplete, especially for KR/CN and older Asian releases.",
+      "failureState": "Upstream card and set population and variant flags are incomplete, especially for older Asian releases.",
       "accessMode": "scriptable",
-      "adapterState": "planned",
+      "adapterState": "active",
       "lastCheckedAt": "2026-08-09",
       "freshnessPolicy": "Store every locale response and re-check upstream coverage notes before interpreting fields.",
       "query": {
         "method": "GET",
-        "endpoint": "https://api.tcgdex.net/v2/{locale}/cards/{id}",
+        "endpoint": "https://api.tcgdex.net/v2/{locale}/{resource}",
         "parameters": [
           "locale",
-          "id"
+          "resource",
+          "id when requesting a detail record"
         ],
-        "pagination": "list endpoints must retain all returned rows; no returned list is treated as exhaustive",
+        "pagination": "the localized sets list is a single returned array; retain every row and never treat provider population as exhaustive",
         "expectedIdentifiers": [
           "id",
-          "localId",
-          "set.id"
+          "name",
+          "cardCount for set lists",
+          "localId and set.id for card details"
         ]
       },
       "finishCapability": {

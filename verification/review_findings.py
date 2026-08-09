@@ -407,7 +407,7 @@ def collect() -> None:
             "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
             "source_registry.py", "source_capabilities.py", "checklist.py", "readme_stats.py",
             "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
-            "print_identity_dryrun.py", "set_catalogue_dryrun.py",
+            "print_identity_dryrun.py", "set_catalogue_dryrun.py", "source_adapters.py",
         }
 
         # The harvest steps and `mkunits` moved to verification/archive/passes/ once #28 had captured the
@@ -943,6 +943,120 @@ def collect() -> None:
             f"overclosed={overclosed[:3]}; "
             f"{len(set_graph['reports']['crossLocalityRarityHeld'])} cross-locality rarity "
             f"claim(s) held for a local source",
+        )
+
+        # N12-N13 — provider-native catalogue runs remain staging, not verdicts (#147)
+        adapter_contract = load("verification/source_adapters.json")
+        adapter_stage = load("verification/source_adapter_staging.json")
+        adapter_run_id = adapter_stage["meta"]["generatedFromRun"]
+        adapter_run_root = ROOT / "verification" / "runs" / "source-adapters" / adapter_run_id
+        adapter_manifest = load(
+            f"verification/runs/source-adapters/{adapter_run_id}/manifest.json"
+        )
+        adapter_records_path = ROOT / adapter_stage["recordsPath"]
+        adapter_records_bytes = adapter_records_path.read_bytes()
+        adapter_records = [
+            json.loads(line) for line in adapter_records_bytes.decode("utf-8").splitlines()
+            if line.strip()
+        ]
+        adapter_buckets = Counter(row.get("bucket") for row in adapter_records)
+        expected_bucket_counts = {
+            "mapped": adapter_stage["meta"]["counts"]["mapped"],
+            "new-candidate": adapter_stage["meta"]["counts"]["newCandidate"],
+            "ambiguous/needs-evidence":
+                adapter_stage["meta"]["counts"]["ambiguousNeedsEvidence"],
+            "positively-excluded": adapter_stage["meta"]["counts"]["positivelyExcluded"],
+        }
+        raw_hash_faults = []
+        for request in adapter_manifest["requests"]:
+            if request.get("error") is not None:
+                raw_hash_faults.append(f"{request['sliceId']}: request error")
+                continue
+            raw_path = adapter_run_root / request["rawPath"]
+            actual = "sha256:" + hashlib.sha256(raw_path.read_bytes()).hexdigest()
+            if actual != request["responseHash"]:
+                raw_hash_faults.append(f"{request['sliceId']}: response hash")
+        slice_accounting_faults = [
+            row["sliceId"] for row in adapter_stage["slices"]
+            if row["accounting"]["fetched"] != row["accounting"]["accounted"]
+            or row["accounting"]["accounted"] != sum(
+                row["accounting"][field] for field in (
+                    "mapped", "newCandidate", "ambiguousNeedsEvidence", "positivelyExcluded"
+                )
+            )
+        ]
+        record_ids = [row["recordId"] for row in adapter_records]
+        stable_keys = [row["stableKey"] for row in adapter_records]
+        adapter_source = (ROOT / "scripts" / "source_adapters.py").read_text(encoding="utf-8")
+        forbidden_seeds = [
+            value for value in (
+                "snorlax_cards.json", "units.json", "set_catalogue_sources.json",
+                "set_catalogue_dryrun.json", "print_identity_dryrun.json",
+            )
+            if value in adapter_source
+        ]
+        check(
+            "N12",
+            "Source-first runs are immutable, exactly accounted and unable to mutate verdicts",
+            "FAIL",
+            not raw_hash_faults and not slice_accounting_faults and not forbidden_seeds
+            and adapter_manifest["status"] == "complete"
+            and not adapter_stage["runErrors"]
+            and adapter_stage["meta"]["sourceFirst"] is True
+            and adapter_stage["meta"]["verdictMutationAllowed"] is False
+            and len(record_ids) == len(set(record_ids))
+            and len(stable_keys) == len(set(stable_keys))
+            and len(adapter_records) == adapter_stage["meta"]["counts"]["records"]
+            and "sha256:" + hashlib.sha256(adapter_records_bytes).hexdigest()
+                == adapter_stage["recordsHash"]
+            and all(adapter_buckets[name] == count
+                    for name, count in expected_bucket_counts.items())
+            and sum(expected_bucket_counts.values()) == len(adapter_records),
+            f"raw={raw_hash_faults[:3]}, accounting={slice_accounting_faults[:3]}, "
+            f"forbiddenSeeds={forbidden_seeds}, runErrors={adapter_stage['runErrors'][:3]}",
+        )
+
+        required_provenance = set(adapter_contract["rawRecordContract"]["requiredProvenance"])
+        provenance_faults = [
+            row.get("recordId") for row in adapter_records
+            if not required_provenance.issubset(row)
+        ]
+        preservation_faults = [
+            row["recordId"] for row in adapter_records
+            if row["raw"]["localCode"] != row["rawProviderId"]
+            or row["raw"]["localName"] != row["sourceRecord"].get("name")
+            or row["normalizationProposal"]["crossLocaleMerge"] is not False
+            or (row["raw"].get("finishProfileText") is not None
+                and row["normalizationProposal"]["finishProfile"]["verbatim"]
+                != row["raw"]["finishProfileText"])
+        ]
+        same_id_locales: dict[tuple[str, str], set[str]] = {}
+        same_id_keys: dict[tuple[str, str], set[str]] = {}
+        for row in adapter_records:
+            key = (row["providerId"], str(row["rawProviderId"]))
+            same_id_locales.setdefault(key, set()).add(row["rawLocale"])
+            same_id_keys.setdefault(key, set()).add(row["stableKey"])
+        collapsed_locales = [
+            key for key, locales in same_id_locales.items()
+            if len(locales) > 1 and len(same_id_keys[key]) < len(locales)
+        ]
+        gap_text = " ".join(
+            f"{row['track']} {row['reason']}" for row in adapter_contract["gaps"]
+        ).lower()
+        required_gap_terms = ("western", "japanese", "tw", "cn", "kr", "specialist", "non-expansion")
+        missing_gap_terms = [term for term in required_gap_terms if term not in gap_text]
+        check(
+            "N13",
+            "Local ids, locale boundaries, finish prose and unresolved catalogue tracks survive",
+            "FAIL",
+            not provenance_faults and not preservation_faults and not collapsed_locales
+            and not missing_gap_terms
+            and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
+                    for row in adapter_stage["slices"])
+            and all(row["terminalState"] in {"needs-evidence", "blocked-by-source"}
+                    for row in adapter_stage["gaps"]),
+            f"provenance={provenance_faults[:3]}, preservation={preservation_faults[:3]}, "
+            f"collapsedLocales={collapsed_locales[:3]}, missingGapTerms={missing_gap_terms}",
         )
 
     with guarded("G3", "image formats"):

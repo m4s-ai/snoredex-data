@@ -84,12 +84,14 @@ scripts/                      Two halves; only the second can be re-run (#28).
 
                               LIVE generators, in run order (§7 has the full command list):
                                 analyze -> finishes -> language_status -> confirmed_releases
-                                -> source_registry -> source_capabilities -> checklist -> readme_stats
+                                -> source_registry -> source_capabilities -> source_adapters
+                                -> checklist -> readme_stats
                                 -> issue_templates
                                 -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
                               and verifies the Pages artifact). print_identity_dryrun.py and
-                              set_catalogue_dryrun.py rebuild the proposed ADR graphs. See §7.
+                              set_catalogue_dryrun.py rebuilds the ADR-0002 graph;
+                              source_adapters.py checks/reprojects retained ADR-0004 runs. See §7.
                               analyze.py is the SOLE producer of analysis_artists,
                               _shared_cards, _variants and _language_drift, and reads
                               snorlax_cards.json only — the single canonical node (#30). Its
@@ -192,6 +194,17 @@ verification/
                               GENERATED GRAPH: flattened coverage edges, hashed positive/boundary
                               observations and one capability-surface resolution for every source
                               currently used by a verdict. Rebuild with source_capabilities.py.
+  source_adapter_schema.json   Versioned contract for source-first adapter slices, raw fields,
+                               accounting buckets, explicit mappings and terminal gap states.
+  source_adapters.json         REVIEWED ADAPTER/GAP INVENTORY: provider-native empty-start
+                               catalogue slices plus the official and specialist tracks that are
+                               still needs-evidence or blocked-by-source.
+  runs/source-adapters/        IMMUTABLE RAW RUNS: exact provider response bytes, hashes,
+                               request/checkpoint manifest and inputs for reproducible run diffs.
+  source_adapter_staging.json  GENERATED #136 GRAPH SUMMARY: exact accounting, run errors, explicit
+                               gaps, record hash and added/changed/disappeared/re-key diffs.
+  source_adapter_records.jsonl GENERATED #136 RECORD FEED: one locality-aware set proposal per line.
+                               Neither file can mutate set, card, finish or verification verdicts.
   report.py                   Prints coverage and rewrites exactly three exports:
                               confirmed_sources.json, CONTRADICTED.json, UNCONFIRMED.json.
                               NOT "all exports" — MANUAL_REVIEW.* comes from classify_manual.py,

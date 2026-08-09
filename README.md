@@ -347,6 +347,7 @@ All paths are relative to the repository root.
 | [`index.html`](index.html) | The generated collection browser. The only public page; `verification/confirmed-releases.html` redirects to it. |
 | [`images/`](images/) | Third-party card images used for identification; excluded from this project's licence grants. |
 | [`verification/`](verification/) | The evidence layer: state stores (`units.json`, `finish_units.json`), specimens, the check suites, and the write passes that produced the data. |
+| [`verification/source_adapter_staging.json`](verification/source_adapter_staging.json) | Source-first local-set staging feed: 12 locale slices, raw provenance/accounting and explicit unresolved source tracks; proposals only, never verdicts. |
 | [`scripts/`](scripts/) | The generators — data, finish model, checklist, chronology, issue templates, site and publication artifact. |
 | [`site/`](site/) | Source CSS and JavaScript for the generated site. |
 | [`CLAUDE.md`](CLAUDE.md) · [`AGENTS.md`](AGENTS.md) | Working rules for an agent: non-negotiables, data-model traps, command order. |
