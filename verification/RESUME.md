@@ -1,9 +1,11 @@
 <!-- doc: role=verification playbook and research log; stage=task -->
 # Verification — state and how to resume
 
-Goal: every **card × language × variant** gets at least one confirmed source **outside Cardmarket**,
-and every physical **set number × language** gets a positive-evidence finish inventory with any
-Cardmarket-product mappings kept explicit.
+Current legacy goal: every **card × language × variant** inherited from the frozen
+**legacy Cardmarket candidate universe** gets at least one confirmed source **outside Cardmarket**,
+and every inherited physical **set number × language** gets a positive-evidence finish inventory
+with any Cardmarket-product mappings kept explicit. This playbook does not establish all-locality
+discovery completeness; #132 tracks that source-first rebuild.
 
 This file is both the current verification playbook and a chronological research log. Use the
 **Current state** section below for authoritative totals; later counts describe historical
@@ -471,10 +473,14 @@ Safe to interrupt at any point: `units.json` is rewritten only after a full pass
 | pokemontcg.io | yes | English artists (main dataset) | — |
 | LimitlessTCG | via WebFetch | artist backfill | — |
 
-### Source limits found by probing — do not re-litigate these
+### Historical source-probing limits — not completeness boundaries
 
-- **TCGdex is exhausted, not mis-matched.** It lists sets it has no cards for (e.g. `S1H` = Shield: 0 cards). Korean has 239 cards total, Simplified Chinese 877, and nl/pl/ru are entirely empty. Further matcher tuning yields nothing.
-- **The official Asia DB only carries recent-era cards.** The `tw` search returns 43 Snorlax records, mostly Scarlet & Violet onward; older Traditional-Chinese releases are absent. Thai returns nothing for `Snorlax` and needs a Thai-script keyword.
+- **The archived TCGdex pass exhausted its then-current queries, not the locality universe.** It
+  lists sets it has no cards for (e.g. `S1H` = Shield: 0 cards), and its locale coverage is uneven.
+  A zero result is a source gap unless exact exhaustive scope has been established.
+- **The archived official-Asia pass was query-limited.** Its `tw` query returned 43 records and the
+  English Thai keyword returned none; neither result establishes database coverage. Native-name,
+  product-type and locality enumeration belongs to the source-first work in #138.
 - **HTTP 403 to scripts:** Bulbapedia, tcgcollector, eBay. Browser tool only.
 - **Working but unintegrated:** `pokellector` (incl. `jp.` subdomain), `yuyu-tei` (JP shop listings), `pokemon-card.com` detail pages (JS-driven search, but direct `details.php/card/{id}` works), serebii, pkmncards.
 

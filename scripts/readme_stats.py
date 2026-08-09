@@ -41,6 +41,7 @@ FINISH_UNITS_PATH = ROOT / "verification" / "finish_units.json"
 CHECKLIST_PATH = ROOT / "analysis_checklist.json"
 SOURCE_REGISTRY_PATH = ROOT / "verification" / "source_registry.json"
 DECISIONS_PATH = ROOT / "publication-decisions.json"
+LEGACY_BASELINE_PATH = ROOT / "legacy-cardmarket-baseline.json"
 
 
 def read_json(path: Path) -> Any:
@@ -153,8 +154,10 @@ def badges_block(dataset: dict[str, Any], checklist: dict[str, Any],
         "[![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/"
         "release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/"
         "workflows/release-gate.yml)",
-        f"[![Cards](https://img.shields.io/badge/cards-{cards}-2563eb)](snorlax_cards.json)",
-        f"[![Checklist](https://img.shields.io/badge/checklist-{items}_items-2563eb)]"
+        f"[![Legacy cards](https://img.shields.io/badge/legacy_cards-{cards}-2563eb)]"
+        "(legacy-cardmarket-baseline.json)",
+        f"[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-"
+        f"{items}_items-2563eb)]"
         "(analysis_checklist.json)",
         f"[![Publication](https://img.shields.io/badge/publication-{publication}-"
         f"{publication_color})](publication-decisions.json)",
@@ -168,7 +171,8 @@ def badges_block(dataset: dict[str, Any], checklist: dict[str, Any],
 
 def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
                         finish_doc: dict[str, Any], checklist: dict[str, Any],
-                        sources: dict[str, Any], decisions: dict[str, Any]) -> str:
+                        sources: dict[str, Any], decisions: dict[str, Any],
+                        baseline: dict[str, Any]) -> str:
     meta = dataset["meta"]
     verification = Counter(unit["status"] for unit in units)
     finishes = finish_doc["meta"]["counts"]
@@ -196,25 +200,27 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         else "inactive pending owner approval and licensor selection"
     )
     lines = [
-        f"Status snapshot: **{snapshot}**, after the database review and release-readiness audit "
-        "of the current repository state.",
+        f"Current-known status snapshot: **{snapshot}**. Its candidate denominator is the immutable "
+        f"legacy baseline `{baseline['meta']['baselineId']}`; these totals do not claim all-locality "
+        "discovery completeness.",
         "",
         "| Area | Current state |",
         "|---|---|",
-        f"| Cardmarket catalogue | **{meta['totalProductsOnCardmarket']} products** harvested: "
+        f"| Legacy Cardmarket baseline | **{meta['totalProductsOnCardmarket']} products** harvested: "
         f"**{meta['singlesCaptured']} singles** retained and {meta['nonCardProductsExcluded']} "
         f"accessories excluded. {code_cards} retained products are code cards and are explicitly "
         "flagged. |",
-        f"| Language verification | **{len(units)} claims**: {verification['confirmed']} externally "
+        f"| Legacy language-claim review | **{len(units)} claims**: {verification['confirmed']} externally "
         f"confirmed, {verification['contradicted']} contradicted, "
         f"{verification['needs-manual-review']} awaiting manual review, and "
-        f"{verification['pending']} still open. Raw Cardmarket languages remain preserved beside "
+        f"{verification['pending']} still open within the legacy candidate universe. Raw Cardmarket "
+        "languages remain preserved beside "
         "their verdicts. |",
-        f"| Physical checklist | **{checklist_counts['items']} items** across "
+        f"| Current-known physical checklist | **{checklist_counts['items']} items** across "
         f"{checklist_counts['cards']} cards and {checklist_counts['languages']} languages: "
         f"{checklist_counts['documentedPrintings']} documented printings plus "
         f"{checklist_counts['unresolvedPlaceholders']} explicit unresolved placeholders. |",
-        f"| Finish evidence | **{finishes['totalFinishUnits']} card-number × language units**: "
+        f"| Current-known finish evidence | **{finishes['totalFinishUnits']} card-number × language units**: "
         f"{finishes['withConfirmedFinish']} externally confirmed, "
         f"{finishes['withOnlyMarketplaceClaim']} marketplace-only positives, "
         f"{finishes['pendingFinish']} without positive finish evidence, and "
@@ -250,7 +256,7 @@ def market_split_block(dataset: dict[str, Any]) -> str:
     counts = Counter(card["market"] for card in dataset["cards"])
     parts = " · ".join(f"{market} {n}" for market, n in
                        sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
-    return f"The market split across all {len(dataset['cards'])}: {parts}."
+    return f"The market split across all {len(dataset['cards'])} legacy Cardmarket singles: {parts}."
 
 
 def replace_block(text: str, name: str, body: str, where: str = "README.md") -> str:
@@ -263,7 +269,7 @@ def replace_block(text: str, name: str, body: str, where: str = "README.md") -> 
     return pattern.sub(lambda m: m.group(1) + body + m.group(2), text)
 
 
-def status_block(decisions: dict[str, Any]) -> str:
+def status_block(decisions: dict[str, Any], baseline: dict[str, Any]) -> str:
     """The front-page status callout.
 
     This was hand-written and went stale twice — once claiming the licence grants were not in
@@ -303,6 +309,11 @@ def status_block(decisions: dict[str, Any]) -> str:
         "> [`publication-decisions.json`](publication-decisions.json), "
         "[`LICENSE.md`](LICENSE.md), and",
         "> [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md).",
+        ">",
+        f"> **Data coverage:** `{baseline['meta']['baselineId']}` is a frozen historical "
+        "Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. "
+        "Current totals describe only known rows descended from that baseline. The source-first "
+        "rebuild is tracked in [#132](https://github.com/m4s-ai/snoredex-data/issues/132).",
     ])
 
 
@@ -314,13 +325,14 @@ def main() -> int:
     checklist = read_json(CHECKLIST_PATH)
     sources = read_json(SOURCE_REGISTRY_PATH)
     decisions = read_json(DECISIONS_PATH)
+    baseline = read_json(LEGACY_BASELINE_PATH)
     original = README_PATH.read_text(encoding="utf-8")
     updated = replace_block(original, "badges", badges_block(dataset, checklist, decisions))
-    updated = replace_block(updated, "status", status_block(decisions))
+    updated = replace_block(updated, "status", status_block(decisions, baseline))
     updated = replace_block(
         updated,
         "current-state",
-        current_state_block(dataset, units, finish_doc, checklist, sources, decisions),
+        current_state_block(dataset, units, finish_doc, checklist, sources, decisions, baseline),
     )
     updated = replace_block(
         updated, "evidence-strength", evidence_strength_block(units, sources)

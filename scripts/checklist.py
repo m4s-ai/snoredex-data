@@ -49,7 +49,7 @@ FINISH_FAMILY = {
     "mirror-holo": "reverse-holo",
     "unresolved": "unresolved",
 }
-SCHEMA_VERSION = "1.4.0"
+SCHEMA_VERSION = "1.5.0"
 
 
 def read_json(path: Path) -> Any:
@@ -129,6 +129,7 @@ def printing_editions(printing: dict[str, Any]) -> set[str]:
 
 def main() -> int:
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
+    baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
     finish_units = read_json(ROOT / "verification" / "finish_units.json")["units"]
     releases = read_json(ROOT / "analysis_confirmed_releases.json")["variants"]
 
@@ -250,6 +251,12 @@ def main() -> int:
             "schema": "snoredex-checklist",
             "schemaVersion": SCHEMA_VERSION,
             "generated": date.today().isoformat(),
+            "candidateUniverse": {
+                "id": baseline["meta"]["baselineId"],
+                "type": "historical-marketplace-search",
+                "manifest": "legacy-cardmarket-baseline.json",
+                "scopeStatus": "legacy-not-all-locality-complete",
+            },
             "description": (
                 "One record per documented physical collectible item, or per explicitly unresolved "
                 "one. Collector-facing finishFamily groups technical reverse-holo and mirror-holo "
@@ -307,7 +314,10 @@ def main() -> int:
             print("analysis_checklist.json missing; run python scripts/checklist.py")
             return 1
         existing = read_json(OUTPUT_PATH)
-        if existing["items"] != items:
+        if (existing["items"] != items
+                or existing.get("meta", {}).get("schemaVersion") != SCHEMA_VERSION
+                or existing.get("meta", {}).get("candidateUniverse")
+                != document["meta"]["candidateUniverse"]):
             print("analysis_checklist.json is stale; run python scripts/checklist.py")
             return 1
         print(f"checklist is current ({len(items)} items)")
