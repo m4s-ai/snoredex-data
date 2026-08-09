@@ -184,7 +184,7 @@ consumers read.
 python verification/review_integrity.py
 python verification/review_findings.py
 python scripts/legacy_baseline.py --check   # legacy universe contract + claim guard
-python scripts/print_identity_dryrun.py --check  # ADR-0001 identity mapping (proposed, #134)
+python scripts/print_identity_dryrun.py --check  # ADR-0001 claim/release/print mapping (#134/#145)
 
 # ... do the work in a new Python pass under verification/ ...
 

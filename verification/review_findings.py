@@ -533,53 +533,147 @@ def collect() -> None:
 
     with guarded("G2c", "print identity dry run"):
         # --------------------------------------------------------------------------- #
-        # N1-N3 — the identity dry run accounts for every legacy row (#134)
+        # N1-N3 — claims, card releases and physical printings stay separate (#134/#145)
         # --------------------------------------------------------------------------- #
-        # ADR-0001 proposes keying a printing by (locality, localSetCode, localNumber, variant)
-        # instead of by the Cardmarket product it happened to be sold under. The dry run maps the
-        # legacy rows onto it and migrates nothing. #134's exit condition is not "the script ran";
-        # it is that no legacy record fell out of the mapping, so that is what N1 asserts.
+        # Every legacy/source input first becomes a candidate claim. Positive card-level evidence
+        # may establish a language-bearing card release; positive finish evidence may then establish
+        # a manufactured physical printing. Contradicted and marketplace-only inputs remain claims.
+        # The dry run changes no store, so its useful exit condition is complete accounting plus no
+        # claim-to-entity promotion across that boundary.
         dryrun = load("verification/print_identity_dryrun.json")
         cards_doc = load("snorlax_cards.json")
         units_doc = load("verification/units.json")
+        finish_doc = load("verification/finish_units.json")
         excluded_doc = load("verification/excluded_codecards.json")
-        dispositions = dryrun["dispositions"]
-
+        source_first = load("verification/source_first_prints.json")
         unaccounted = []
-        if len(dispositions["cards"]) != len(cards_doc["cards"]):
-            unaccounted.append(f"cards {len(dispositions['cards'])}/{len(cards_doc['cards'])}")
-        if len(dispositions["languageUnits"]) != len(units_doc):
-            unaccounted.append(f"units {len(dispositions['languageUnits'])}/{len(units_doc)}")
-        if len(dispositions["excludedCodeCardUnits"]) != len(excluded_doc):
+        product_dispositions = dryrun["legacyProductDispositions"]
+        expected_products = {card["productUrl"] for card in cards_doc["cards"]}
+        actual_products = set(product_dispositions)
+        if actual_products != expected_products:
             unaccounted.append(
-                f"excluded {len(dispositions['excludedCodeCardUnits'])}/{len(excluded_doc)}")
-        blank = sorted(k for k, v in dispositions["languageUnits"].items()
-                       if v.get("disposition") not in ("carried", "split", "aliased", "queued"))
+                f"products missing={len(expected_products - actual_products)}, "
+                f"extra={len(actual_products - expected_products)}")
+        finish_printings = sum(len(unit.get("printings", [])) for unit in finish_doc["units"])
+        expected_claims = len(units_doc) + len(excluded_doc) + len(source_first["prints"]) \
+            + finish_printings
+        claims = dryrun["candidateClaims"]
+        claim_ids = [claim["claimId"] for claim in claims]
+        if len(claims) != expected_claims or len(set(claim_ids)) != len(claim_ids):
+            unaccounted.append(
+                f"claims {len(claims)}/{expected_claims}, unique={len(set(claim_ids))}")
+        expected_sources = {
+            "legacy-language-unit": {unit["unitId"] for unit in units_doc},
+            "legacy-code-card-unit": {unit["unitId"] for unit in excluded_doc},
+            "source-first-record": {entry["printId"] for entry in source_first["prints"]},
+            "finish-printing-record": {
+                printing["printingId"]
+                for unit in finish_doc["units"]
+                for printing in unit.get("printings", [])
+            },
+        }
+        actual_sources = {
+            kind: {claim["sourceId"] for claim in claims if claim["sourceKind"] == kind}
+            for kind in expected_sources
+        }
+        for kind, expected in expected_sources.items():
+            if actual_sources[kind] != expected:
+                unaccounted.append(
+                    f"{kind} missing={len(expected - actual_sources[kind])}, "
+                    f"extra={len(actual_sources[kind] - expected)}")
+        blank = sorted(
+            claim["claimId"] for claim in claims
+            if claim.get("disposition") not in
+            ("established-and-mapped", "candidate-needs-evidence",
+             "bounded-contradicted", "positively-excluded")
+        )
         check(
             "N1",
-            "The identity dry run accounts for every legacy record",
+            "The identity dry run accounts for every legacy and source claim",
             "FAIL",
             not unaccounted and not blank,
-            f"unaccounted: {unaccounted}; {len(blank)} unit(s) with no disposition {blank[:5]}",
+            f"unaccounted: {unaccounted}; {len(blank)} claim(s) with no disposition {blank[:5]}",
         )
 
-        # Invariant I7. The shortcut this forbids is letting a Korean printing inherit the Japanese
-        # slot's set code because that is where the claim was found — which manufactures a Korean
-        # identifier that does not exist and cannot later be told from a real one.
-        inherited = [p["printId"] for p in dryrun["prints"]
-                     if not p["localIdentifierKnown"]
-                     and (p["localSetCode"] is not None or p["localNumber"] is not None)]
+        claims_by_id = {claim["claimId"]: claim for claim in claims}
+        editions_by_id = {edition["setEditionId"]: edition for edition in dryrun["setEditions"]}
+        inherited = [release["cardReleaseId"] for release in dryrun["cardReleases"]
+                     if not release["localIdentifierKnown"]
+                     and (release["localSetCode"] is not None
+                          or release["localNumber"] is not None)]
+        inherited += [edition["setEditionId"] for edition in dryrun["setEditions"]
+                      if not edition["localIdentifierKnown"]
+                      and edition["localSetCode"] is not None]
+        bad_release_grain = [
+            release["cardReleaseId"] for release in dryrun["cardReleases"]
+            if release["setEditionId"] not in editions_by_id
+            or editions_by_id[release["setEditionId"]]["language"] != release["language"]
+            or editions_by_id[release["setEditionId"]]["locality"] != release["locality"]
+            or not isinstance(release.get("language"), str)
+            or not release.get("language")
+            or not isinstance(release.get("script"), str)
+            or not release.get("script")
+        ]
+        illicit_promotions = [
+            claim["claimId"] for claim in claims
+            if claim.get("materializedTargetId") is not None
+            and claim.get("disposition") != "established-and-mapped"
+        ]
+        ungrounded_releases = [
+            release["cardReleaseId"] for release in dryrun["cardReleases"]
+            if not release.get("establishingClaimIds")
+            or any(claims_by_id[claim_id].get("evidenceStatus") != "confirmed"
+                   for claim_id in release["establishingClaimIds"])
+            or any(claims_by_id[claim_id].get("materializedTargetId")
+                   != release["cardReleaseId"]
+                   for claim_id in release["establishingClaimIds"])
+        ]
+        ungrounded_physical = [
+            printing["physicalPrintingId"] for printing in dryrun["physicalPrintings"]
+            if claims_by_id[printing["establishingClaimId"]].get("evidenceStatus") != "confirmed"
+        ]
+        release_ids = {release["cardReleaseId"] for release in dryrun["cardReleases"]}
+        physical_ids = {
+            printing["physicalPrintingId"] for printing in dryrun["physicalPrintings"]
+        }
+        dangling_promotions = [
+            claim["claimId"] for claim in claims
+            if claim.get("disposition") == "established-and-mapped"
+            and claim.get("materializedTargetId") not in
+            (release_ids if claim.get("claimKind") == "card-release" else physical_ids)
+        ]
+        bad_physical_edges = [
+            printing["physicalPrintingId"] for printing in dryrun["physicalPrintings"]
+            if printing["cardReleaseId"] not in release_ids
+            or claims_by_id[printing["establishingClaimId"]].get("materializedTargetId")
+            != printing["physicalPrintingId"]
+        ]
+        materialized_contradicted_only = [
+            item["proposedCardReleaseId"]
+            for item in dryrun["reports"]["contradictedOnlyCardReleaseProposals"]
+            if item["materialized"]
+        ]
+        identity_errors = (inherited + bad_release_grain + illicit_promotions
+                           + dangling_promotions + ungrounded_releases
+                           + ungrounded_physical + bad_physical_edges
+                           + materialized_contradicted_only
+                           + dryrun["reports"]["crossLanguageIdentityMerges"]
+                           + [item["legacyProduct"]
+                              for item in dryrun["reports"]["unexplainedProductSplits"]])
         check(
             "N2",
-            "A print with unknown local identifiers claims none",
+            "Claims cannot mint entities or merge languages across the identity boundary",
             "FAIL",
-            not inherited,
-            f"{len(inherited)} print(s) carry a local identifier they inherited from the slot they "
-            f"were sold under: {inherited[:5]}",
+            not identity_errors,
+            f"{len(identity_errors)} identity/promotion error(s): "
+            f"inherited={inherited[:3]}, release-grain={bad_release_grain[:3]}, "
+            f"claim-promotions={illicit_promotions[:3]}, releases={ungrounded_releases[:3]}, "
+            f"dangling={dangling_promotions[:3]}, physical={ungrounded_physical[:3]}, "
+            f"physical-edges={bad_physical_edges[:3]}, "
+            f"contradicted-only={materialized_contradicted_only[:3]}",
         )
 
-        # The discovery queue #138 works, and the physical cards with nowhere to live. Reported:
-        # these are findings about the world, not defects in the tree.
+        # The discovery queues are findings about the world, not defects in the tree.
         #
         # Named dryrun_counts, not counts: `guarded` is a `with` block and does not open a scope,
         # so a generic name here overwrites the one a later section reads. A bare `counts` shadowed
@@ -587,14 +681,16 @@ def collect() -> None:
         dryrun_counts = dryrun["counts"]
         check(
             "N3",
-            "Printings known to exist whose own identifiers are unrecorded",
+            "Identity dry-run migration queues",
             "INFO",
             True,
-            f"{dryrun_counts['printNodesNeedingLocalIdentifier']} of "
-            f"{dryrun_counts['printNodes']} print nodes need a local identifier "
-            f"{dryrun_counts['needsLocalIdentifierByLocality']}; "
-            f"{dryrun_counts['productsSplitAcrossLocalities']} legacy products split across "
-            f"localities; {dryrun_counts['orphanSpecimens']} specimen(s) have no catalogue node",
+            f"{dryrun_counts['candidateClaims']} claims -> "
+            f"{dryrun_counts['cardReleaseNodes']} card releases + "
+            f"{dryrun_counts['physicalPrintingNodes']} physical printings; "
+            f"{dryrun_counts['cardReleaseNodesNeedingLocalIdentifier']} releases need a local "
+            f"identifier {dryrun_counts['needsLocalIdentifierByLocality']}; "
+            f"{dryrun_counts['contradictedOnlyCardReleaseProposals']} contradicted-only release "
+            f"proposals stay candidates; {dryrun_counts['orphanSpecimens']} orphan specimen(s)",
         )
 
         # N4-N5 — source-first prints admitted on their own evidence (ADR-0001 D1)
@@ -603,7 +699,6 @@ def collect() -> None:
         # one: database.py derives a product id from a Cardmarket image URL. They are keyed by the
         # ADR identity instead, and they are the first rows in this repository that did not come
         # from the harvest.
-        source_first = load("verification/source_first_prints.json")
         admitted = source_first["prints"]
 
         ungrounded = [
