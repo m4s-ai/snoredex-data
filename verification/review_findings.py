@@ -740,17 +740,22 @@ def collect() -> None:
         # granularity, then inventory the verdicts derived from set-level or absence-based logic.
         # `scripts/evidence_semantics.py` produces it and changes nothing.
         #
-        # The number that matters is not "confirmations resting on a set release" — a normally
-        # numbered expansion is printed as a whole, so inferring a card from its set's language
-        # release is sound. It is the remainder: promos, deck-fixed cards and secret-numbered
-        # cards, whose presence varies by locale and which the set's language list never reached.
+        # The number that matters is not "confirmations resting on a set release". The step to the
+        # card holds when the card is inside the set's numbered run, and also when the cited source
+        # carries a closed card list containing it — a Prize Pack article lists the card row beside
+        # its language table, and a closed list distributed as a whole reaches the card the same
+        # way a numbered run does. The remainder is the finding: a container-level statement about
+        # a promo, deck-fixed or secret-numbered card that no list reached.
+        #
+        # The baseline moved 83 -> 68 when the closed-list rule was added. Re-anchoring downward
+        # after tightening a rule is the correct direction; never raise it to silence a rise.
         semantics = load("verification/evidence_semantics.json")
         semantic_counts = semantics["counts"]
 
         # Low-water marks. Both are queues: a rise means a new verdict was written on evidence
         # that cannot carry it, which is the losing direction. Never raise these to silence a
         # rise — find the pass that wrote the row.
-        UNSOUND_SET_LEVEL_BASELINE = 83
+        UNSOUND_SET_LEVEL_BASELINE = 68
         UNSCOPED_ABSENCE_BASELINE = 27
         unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)

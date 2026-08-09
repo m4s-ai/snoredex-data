@@ -25,8 +25,19 @@ secret-numbered card above the set size. Bulbapedia's own Rarity article is expl
 vary by locale: "Full Art cards were notably only considered 'secret' in Japan", and "the rarity
 of a card may vary between Japanese and other-language releases".
 
-So the inventory splits set-level confirmations by whether the card sits inside the numbered run,
-and only the remainder is a finding.
+So the inventory splits set-level confirmations by whether the step from the source to the card
+holds, and only the remainder is a finding. Two things make it hold:
+
+* the card sits inside the set's **numbered run**, which is printed as a whole per language; or
+* the cited source carries a **closed card list** containing this card, beside its statement about
+  which languages the product exists in.
+
+The second was missed on the first pass, and the miss is instructive. A rarity-only rule flagged
+the fifteen Play! Pokémon Prize Pack rows as unsound because "Prize Pack Series" is not an
+expansion rarity. But the Prize Pack Series article carries the card row — `Snorlax 131/185` — next
+to a language table naming the French, German, Italian and Spanish products. A Prize Pack is a
+closed list distributed as a whole, structurally the same as an expansion, so the inference carries
+for the same reason. Rarity was a poor proxy; what matters is whether the source lists the card.
 
     python scripts/evidence_semantics.py
     python scripts/evidence_semantics.py --check
@@ -61,6 +72,12 @@ CARD_LEVEL = re.compile(
 SET_LEVEL = re.compile(
     r"expansion index|expansion article|set article|In other languages|release. field|"
     r"Prize Pack Series article|Languages this set|product article|set-code note", re.IGNORECASE)
+
+# Sources whose page carries a closed card list containing the card, not merely a statement about
+# the container. A list plus a language statement reaches the card the same way an expansion's
+# numbered run does.
+CLOSED_LIST_SOURCE = re.compile(r"set list|deck list|card list|Prize Pack Series article",
+                                re.IGNORECASE)
 
 # Does a card of this harvest rarity sit inside the set's numbered run? Only then does "the set
 # was released in language L" reach the card. The vocabulary is Cardmarket's, because that is what
@@ -135,10 +152,15 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         rarity = card["rarity"] if card else None
         inside_run, run_reason = RUN_MEMBERSHIP.get(rarity, (None, "rarity not classified"))
 
+        closed_list = bool(CLOSED_LIST_SOURCE.search(unit.get("sourceType") or ""))
         inference = None
         if unit["status"] == "confirmed" and grain == "product-or-set":
-            inference = "carries" if inside_run else (
-                "does-not-carry" if inside_run is False else "unknown-rarity")
+            if inside_run or closed_list:
+                inference = "carries"
+            elif inside_run is False:
+                inference = "does-not-carry"
+            else:
+                inference = "unknown-rarity"
         if unit["status"] == "contradicted":
             if unit["unitId"] in settled_units:
                 inference = "owner-adjudicated"
@@ -158,6 +180,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "rarity": rarity,
             "insideNumberedRun": inside_run,
             "runMembershipReason": run_reason,
+            "sourceCarriesCardList": closed_list,
             "inference": inference,
         })
 
