@@ -1,27 +1,24 @@
 #!/usr/bin/env python3
-"""Dry-run the locality-aware print identity against the legacy rows (#134).
+"""Dry-run the claim -> card release -> physical printing boundary (#145).
 
-`ADR-0001` proposes replacing the Cardmarket product identity — `(setCode, number, variantToken)`
-with language as an attribute — with a graph where a **print** is one physical localized printing
-keyed by `(locality, localSetCode, localNumber, variant)`. This script is the dry run the ADR is
-not allowed to skip: it maps every legacy row onto that model and reports what happens, without
-touching a single store.
+The legacy stores mix three different questions:
 
-It writes `verification/print_identity_dryrun.json` and changes nothing else. Migration is #140.
+* a language unit is a claim that a localized card release exists;
+* a localized card release is one numbered card in one language-bearing set edition; and
+* a physical printing is a positively evidenced manufactured finish/treatment of that release.
 
-The finding it exists to make measurable: a language claim on a Japanese product is very often not
-a language of that product at all. A Korean Snorlax in `sv2a 181` is its own printing, with a
-Korean set code and a Korean collector number that this repository has never recorded — because
-the model had nowhere to put them. Those become print nodes with `localIdentifier: null` and a
-`needs-local-identifier` state, which is the honest representation and doubles as the discovery
-queue for #138.
+This dry-run separates those grains without changing an authoritative store. Every legacy unit,
+source-first record, finish-printing claim and excluded code-card claim becomes a candidate-claim
+node. Only positive evidence is allowed to materialize an existence-bearing target:
+
+* ``units.json`` status ``confirmed`` may establish a card release;
+* ``finish_units.json`` verificationStatus ``confirmed`` may establish a physical printing;
+* contradicted and marketplace-only claims remain visible candidates.
+
+The report is deliberately a migration plan. #140, not this script, changes consumer identities.
 
     python scripts/print_identity_dryrun.py
-    python scripts/print_identity_dryrun.py --check    # fail if the report is stale
-
-Every legacy member gets exactly one disposition — `carried`, `split`, `aliased` or `queued` — and
-check `N1` fails if any member has none. "The script ran" is not the exit condition; accounting for
-every row is.
+    python scripts/print_identity_dryrun.py --check
 """
 
 from __future__ import annotations
@@ -36,10 +33,8 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "verification" / "print_identity_dryrun.json"
-SCHEMA_VERSION = "0.1.0"
+SCHEMA_VERSION = "0.2.0"
 
-# Locality is a market/distribution territory. It is deliberately not a language: European and
-# Latin-American Spanish are one language across two of these, which is the case `SVP 184` makes.
 LOCALITIES = {
     "WEST": "Western distribution (EU/NA)",
     "LATAM": "Latin-American distribution",
@@ -52,8 +47,6 @@ LOCALITIES = {
     "SEA": "South-East Asian regional promo distribution",
 }
 
-# The locality a Cardmarket market label implies for the product's own identifiers. A product's set
-# code and collector number are the *local* identifiers of exactly this locality and no other.
 MARKET_LOCALITY = {
     "Western": "WEST",
     "Japanese": "JP",
@@ -62,7 +55,6 @@ MARKET_LOCALITY = {
     "SEA promo": "SEA",
 }
 
-# Languages that name their locality on their own.
 LANGUAGE_LOCALITY = {
     "Japanese": "JP",
     "Korean": "KR",
@@ -72,8 +64,15 @@ LANGUAGE_LOCALITY = {
     "Indonesian": "ID",
 }
 
-# Languages printed for Western distribution. "Spanish" is European Spanish here, per the project's
-# standing scope rule; LATAM-ES is a distinct locality and out of the legacy universe entirely.
+LANGUAGE_SCRIPT = {
+    "Japanese": "Jpan",
+    "Korean": "Hang",
+    "T-Chinese": "Hant",
+    "S-Chinese": "Hans",
+    "Thai": "Thai",
+    "Russian": "Cyrl",
+}
+
 WESTERN_LANGUAGES = {
     "English", "French", "German", "Italian", "Spanish", "Portuguese",
     "Russian", "Dutch", "Polish", "Czech", "Hungarian",
@@ -86,144 +85,398 @@ def read_json(path: Path) -> Any:
 
 
 def resolve_locality(language: str, market: str) -> tuple[str | None, str]:
-    """Which locality does a printing in this language, sold under this market, belong to?
-
-    Returns the locality and the rule that produced it, because a mapping nobody can audit is how
-    a language label quietly becomes a locality again.
-    """
+    """Resolve a locality while retaining the rule that made the proposal."""
     if language in LANGUAGE_LOCALITY:
         return LANGUAGE_LOCALITY[language], "language names its locality"
     if language in WESTERN_LANGUAGES:
-        # English is the ambiguous one: the same language is printed for Western distribution and
-        # for SEA regional promos. The market disambiguates it today, and the model must keep
-        # asking rather than assume, because a SEA English promo is a different physical print.
         if market == "SEA promo":
             return "SEA", "Western language under SEA regional distribution"
         return "WEST", "Western language under Western distribution"
     return None, "no locality rule for this language"
 
 
-def print_key(locality: str, set_code: str, number: str, variant: str,
-              identifier_known: bool) -> str:
-    """The proposed print id.
+def resolve_script(language: str) -> str:
+    return LANGUAGE_SCRIPT.get(language, "Latn")
 
-    While the local identifier is unknown the key is anchored to the legacy slot it was found on,
-    marked so that nobody mistakes it for a real local code. #138 replaces the anchor with the
-    printing's own set code and number; the alias edge back to this key is what makes that
-    replacement traceable rather than a new row appearing from nowhere.
-    """
+
+def set_edition_id(locality: str, language: str, set_code: str,
+                   identifier_known: bool) -> str:
     if identifier_known:
-        return f"{locality}:{set_code}:{number}:{variant}"
-    return f"{locality}:via-{set_code}:{number}:{variant}:unknown-local-id"
+        return f"EDITION:{locality}:{language}:{set_code}"
+    return f"EDITION:{locality}:{language}:via-{set_code}:unknown-local-set"
 
 
-def build(cards: list[dict], units: list[dict], excluded: list[dict],
-          specimens: list[dict], baseline: dict, source_first: dict) -> dict[str, Any]:
-    by_key = {(c["setCode"], str(c.get("number") or ""), c.get("variantToken") or "base"): c
-              for c in cards}
+def card_release_id(edition_id: str, number: str, work: str,
+                    identifier_known: bool) -> str:
+    edition_tail = edition_id.removeprefix("EDITION:")
+    if identifier_known:
+        return f"RELEASE:{edition_tail}:{number or 'unnumbered'}:{work}"
+    return f"RELEASE:{edition_tail}:via-{number or 'unnumbered'}:{work}:unknown-local-id"
 
-    prints: dict[str, dict[str, Any]] = {}
-    unit_disposition: dict[str, dict[str, Any]] = {}
-    unresolved: list[dict[str, Any]] = []
 
+def target_for_legacy(unit: dict, card: dict) -> dict[str, Any]:
+    market = card["market"]
+    locality, rule = resolve_locality(unit["language"], market)
+    if locality is None:
+        return {"locality": None, "localityRule": rule}
+    identifier_known = locality == MARKET_LOCALITY.get(market)
+    edition_id = set_edition_id(locality, unit["language"], unit["setCode"],
+                                identifier_known)
+    release_id = card_release_id(
+        edition_id,
+        str(unit.get("number") or ""),
+        unit["cardKey"],
+        identifier_known,
+    )
+    return {
+        "locality": locality,
+        "localityRule": rule,
+        "language": unit["language"],
+        "script": resolve_script(unit["language"]),
+        "localIdentifierKnown": identifier_known,
+        "setEditionId": edition_id,
+        "cardReleaseId": release_id,
+        "localSetCode": unit["setCode"] if identifier_known else None,
+        "localNumber": str(unit.get("number") or "") if identifier_known else None,
+        "viaLegacySetCode": unit["setCode"],
+        "viaLegacyNumber": str(unit.get("number") or ""),
+        "work": unit["cardKey"],
+        "workMappingState": "mapped",
+    }
+
+
+def target_for_source_first(entry: dict) -> dict[str, Any]:
+    language = entry["language"]
+    locality = entry["locality"]
+    edition_id = set_edition_id(locality, language, entry["localSetCode"], True)
+    # source_first_prints.json intentionally preserves prose equivalence proposals. Until an
+    # explicit edge is accepted, each specimen has an unmapped work anchor rather than a guessed
+    # work id. The physical local release itself is still positively established.
+    work_anchor = f"unmapped-work:{entry['specimenId']}"
+    return {
+        "locality": locality,
+        "localityRule": "source-first record names its locality",
+        "language": language,
+        "script": entry["script"],
+        "localIdentifierKnown": True,
+        "setEditionId": edition_id,
+        "cardReleaseId": card_release_id(
+            edition_id, str(entry["localNumber"]), work_anchor, True),
+        "localSetCode": entry["localSetCode"],
+        "localNumber": str(entry["localNumber"]),
+        "viaLegacySetCode": None,
+        "viaLegacyNumber": None,
+        "work": None,
+        "workMappingState": "needs-explicit-equivalence",
+    }
+
+
+def build(cards: list[dict], units: list[dict], finish_units: list[dict],
+          excluded: list[dict], specimens: list[dict], baseline: dict,
+          source_first: dict) -> dict[str, Any]:
+    cards_by_key: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
+    for card in cards:
+        key = (card["setCode"], str(card.get("number") or ""),
+               card.get("variantToken") or "base")
+        cards_by_key[key].append(card)
+
+    candidate_claims: dict[str, dict[str, Any]] = {}
+    set_editions: dict[str, dict[str, Any]] = {}
+    card_releases: dict[str, dict[str, Any]] = {}
+    physical_printings: dict[str, dict[str, Any]] = {}
+    unresolved_units: list[dict[str, Any]] = []
+    unresolved_physical: list[dict[str, Any]] = []
+
+    proposed_release_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    product_claims: dict[str, list[str]] = defaultdict(list)
+    product_releases: dict[str, set[str]] = defaultdict(set)
+
+    def register_edition(target: dict[str, Any], claim_id: str) -> None:
+        eid = target["setEditionId"]
+        edition = set_editions.setdefault(eid, {
+            "setEditionId": eid,
+            "locality": target["locality"],
+            "language": target["language"],
+            "script": target["script"],
+            "localSetCode": target["localSetCode"],
+            "localIdentifierKnown": target["localIdentifierKnown"],
+            "state": ("identified" if target["localIdentifierKnown"]
+                      else "needs-local-identifier"),
+            "viaLegacySetCodes": set(),
+            "establishingClaimIds": [],
+        })
+        if target.get("viaLegacySetCode"):
+            edition["viaLegacySetCodes"].add(target["viaLegacySetCode"])
+        if claim_id not in edition["establishingClaimIds"]:
+            edition["establishingClaimIds"].append(claim_id)
+
+    # Every language unit becomes a claim first. No entity is created in this pass.
     for unit in units:
-        key = (unit["setCode"], str(unit.get("number") or ""), unit.get("variant") or "base")
-        card = by_key.get(key)
-        market = card["market"] if card else None
-        locality, rule = resolve_locality(unit["language"], market or "")
-
-        if card is None or locality is None:
-            unresolved.append({
-                "unitId": unit["unitId"], "language": unit["language"],
-                "reason": "no product node for the unit" if card is None else rule,
-            })
-            unit_disposition[unit["unitId"]] = {"disposition": "queued", "printId": None,
-                                                "reason": rule if card else "orphan unit"}
+        key = (unit["setCode"], str(unit.get("number") or ""),
+               unit.get("variant") or "base")
+        matched_cards = cards_by_key.get(key, [])
+        claim_id = f"CLAIM:legacy:{unit['unitId']}"
+        if len(matched_cards) != 1:
+            reason = ("no product node for the unit" if not matched_cards
+                      else "legacy identity tuple resolves to multiple products")
+            candidate_claims[claim_id] = {
+                "claimId": claim_id,
+                "claimKind": "card-release",
+                "sourceKind": "legacy-language-unit",
+                "sourceId": unit["unitId"],
+                "evidenceStatus": unit["status"],
+                "disposition": ("bounded-contradicted"
+                                if unit["status"] == "contradicted"
+                                else "candidate-needs-evidence"),
+                "proposedTargetId": None,
+                "materializedTargetId": None,
+                "reason": reason,
+            }
+            unresolved_units.append({"unitId": unit["unitId"], "reason": reason})
             continue
 
-        product_locality = MARKET_LOCALITY.get(market)
-        identifier_known = locality == product_locality
-        pid = print_key(locality, key[0], key[1], key[2], identifier_known)
+        card = matched_cards[0]
+        target = target_for_legacy(unit, card)
+        if target["locality"] is None:
+            reason = target["localityRule"]
+            candidate_claims[claim_id] = {
+                "claimId": claim_id,
+                "claimKind": "card-release",
+                "sourceKind": "legacy-language-unit",
+                "sourceId": unit["unitId"],
+                "evidenceStatus": unit["status"],
+                "disposition": ("bounded-contradicted"
+                                if unit["status"] == "contradicted"
+                                else "candidate-needs-evidence"),
+                "proposedTargetId": None,
+                "materializedTargetId": None,
+                "reason": reason,
+            }
+            unresolved_units.append({"unitId": unit["unitId"], "reason": reason})
+            continue
 
-        record = prints.setdefault(pid, {
-            "printId": pid,
-            "locality": locality,
-            "localityRule": rule,
-            "localSetCode": key[0] if identifier_known else None,
-            "localNumber": key[1] if identifier_known else None,
-            "variant": key[2],
-            "localIdentifierKnown": identifier_known,
-            "state": "identified" if identifier_known else "needs-local-identifier",
-            "work": card["cardKey"],
-            "languages": [],
-            "legacyProduct": {"setCode": key[0], "number": key[1], "variant": key[2],
-                              "market": market, "sourceRecord": card["productUrl"]},
-            "unitIds": [],
+        disposition = ("established-and-mapped" if unit["status"] == "confirmed"
+                       else "bounded-contradicted")
+        candidate_claims[claim_id] = {
+            "claimId": claim_id,
+            "claimKind": "card-release",
+            "sourceKind": "legacy-language-unit",
+            "sourceId": unit["unitId"],
+            "sourceRecord": unit.get("sourceUrl"),
+            "evidenceStatus": unit["status"],
+            "disposition": disposition,
+            "proposedTargetId": target["cardReleaseId"],
+            "materializedTargetId": None,
+            "reason": target["localityRule"],
+        }
+        proposed_release_groups[target["cardReleaseId"]].append({
+            "claimId": claim_id, "unit": unit, "card": card, "target": target,
         })
-        if unit["language"] not in record["languages"]:
-            record["languages"].append(unit["language"])
-        record["unitIds"].append(unit["unitId"])
-        unit_disposition[unit["unitId"]] = {"disposition": "carried", "printId": pid,
-                                            "reason": rule}
+        product_claims[card["productUrl"]].append(claim_id)
 
-    # A legacy product carries one print if all its claims land in one locality, several if not.
-    prints_per_product: dict[tuple, list[str]] = defaultdict(list)
-    for pid, record in prints.items():
-        legacy = record["legacyProduct"]
-        prints_per_product[(legacy["setCode"], legacy["number"], legacy["variant"])].append(pid)
+    # A card release exists only when at least one claim positively establishes it. Claims in
+    # another language cannot share a release id because language is part of setEditionId.
+    for release_id, members in proposed_release_groups.items():
+        confirmed = [m for m in members if m["unit"]["status"] == "confirmed"]
+        if not confirmed:
+            for member in members:
+                candidate_claims[member["claimId"]]["reason"] = (
+                    "recorded contradiction remains a claim and cannot establish a release")
+            continue
 
-    # Keyed by productUrl, which is unique, rather than by the identity tuple, which is not: three
-    # PKM code-card products share ('PKM', '', 'base') because they are unnumbered. Keying the
-    # disposition table by the tuple silently dropped two of the 198 rows — the first collision the
-    # new model has to answer for, and a good argument for it.
-    identity_collisions = defaultdict(list)
+        target = confirmed[0]["target"]
+        for member in confirmed:
+            register_edition(member["target"], member["claimId"])
+        release = {
+            "cardReleaseId": release_id,
+            "setEditionId": target["setEditionId"],
+            "locality": target["locality"],
+            "language": target["language"],
+            "script": target["script"],
+            "localSetCode": target["localSetCode"],
+            "localNumber": target["localNumber"],
+            "localIdentifierKnown": target["localIdentifierKnown"],
+            "state": ("identified" if target["localIdentifierKnown"]
+                      else "needs-local-identifier"),
+            "work": target["work"],
+            "workMappingState": target["workMappingState"],
+            "viaLegacySetCode": target["viaLegacySetCode"],
+            "viaLegacyNumber": target["viaLegacyNumber"],
+            "claimIds": sorted(m["claimId"] for m in members),
+            "establishingClaimIds": sorted(m["claimId"] for m in confirmed),
+            "nonEstablishingClaimIds": sorted(
+                m["claimId"] for m in members if m not in confirmed),
+            "legacyVariants": sorted({m["unit"].get("variant") or "base" for m in members}),
+            "legacyProducts": sorted({m["card"]["productUrl"] for m in members}),
+        }
+        card_releases[release_id] = release
+        for member in members:
+            claim = candidate_claims[member["claimId"]]
+            unit = member["unit"]
+            if unit["status"] == "confirmed":
+                claim["materializedTargetId"] = release_id
+            else:
+                claim["reason"] = (
+                    "candidate remains non-establishing; another confirmed claim establishes "
+                    "the release without transferring status")
+            product_releases[member["card"]["productUrl"]].add(release_id)
+
+    # Source-first records are positive card-release claims with their own identifiers. Their raw
+    # printId survives in source_first_prints.json as a legacy alias; this dry run does not rewrite
+    # that evidence record or guess its work equivalence.
+    for entry in source_first.get("prints", []):
+        claim_id = f"CLAIM:source-first:{entry['printId']}"
+        target = target_for_source_first(entry)
+        register_edition(target, claim_id)
+        release_id = target["cardReleaseId"]
+        card_releases[release_id] = {
+            "cardReleaseId": release_id,
+            "setEditionId": target["setEditionId"],
+            "locality": target["locality"],
+            "language": target["language"],
+            "script": target["script"],
+            "localSetCode": target["localSetCode"],
+            "localNumber": target["localNumber"],
+            "localIdentifierKnown": True,
+            "state": "identified",
+            "work": None,
+            "workMappingState": target["workMappingState"],
+            "viaLegacySetCode": None,
+            "viaLegacyNumber": None,
+            "claimIds": [claim_id],
+            "establishingClaimIds": [claim_id],
+            "nonEstablishingClaimIds": [],
+            "legacyVariants": [],
+            "legacyProducts": [],
+            "sourceFirstRecordId": entry["printId"],
+        }
+        candidate_claims[claim_id] = {
+            "claimId": claim_id,
+            "claimKind": "card-release",
+            "sourceKind": "source-first-record",
+            "sourceId": entry["printId"],
+            "sourceRecord": entry.get("sourceUrl"),
+            "evidenceStatus": "confirmed",
+            "disposition": "established-and-mapped",
+            "proposedTargetId": release_id,
+            "materializedTargetId": release_id,
+            "reason": "positive source-first specimen/card record",
+        }
+    # A finish-store printing is a second claim grain. Only externally confirmed rows become a
+    # physical-printing entity; Cardmarket catalogue hints remain candidate claims.
+    releases_by_finish_key: dict[tuple[str, str, str], list[str]] = defaultdict(list)
+    for release_id, release in card_releases.items():
+        if release["viaLegacySetCode"] is None:
+            continue
+        key = (release["viaLegacySetCode"], release["viaLegacyNumber"], release["language"])
+        releases_by_finish_key[key].append(release_id)
+
+    for finish_unit in finish_units:
+        key = (finish_unit["setCode"], str(finish_unit.get("number") or ""),
+               finish_unit["language"])
+        release_ids = sorted(set(releases_by_finish_key.get(key, [])))
+        for printing in finish_unit.get("printings", []):
+            source_printing_id = printing["printingId"]
+            claim_id = f"CLAIM:finish:{source_printing_id}"
+            proposed_id = f"PHYSICAL:{source_printing_id}"
+            confirmed = printing.get("verificationStatus") == "confirmed"
+            can_materialize = confirmed and len(release_ids) == 1
+            if confirmed and len(release_ids) != 1:
+                unresolved_physical.append({
+                    "printingId": source_printing_id,
+                    "releaseCandidates": release_ids,
+                    "reason": "confirmed physical claim does not resolve to exactly one card release",
+                })
+            disposition = ("established-and-mapped" if can_materialize
+                           else "candidate-needs-evidence")
+            reason = (
+                "externally confirmed finish/treatment claim"
+                if can_materialize else
+                "marketplace-only or unresolved physical classification cannot establish a node"
+            )
+            candidate_claims[claim_id] = {
+                "claimId": claim_id,
+                "claimKind": "physical-printing",
+                "sourceKind": "finish-printing-record",
+                "sourceId": source_printing_id,
+                "evidenceStatus": printing.get("verificationStatus"),
+                "disposition": disposition,
+                "proposedTargetId": proposed_id,
+                "materializedTargetId": proposed_id if can_materialize else None,
+                "reason": reason,
+            }
+            if can_materialize:
+                physical_printings[proposed_id] = {
+                    "physicalPrintingId": proposed_id,
+                    "cardReleaseId": release_ids[0],
+                    "finish": printing.get("finish"),
+                    "foilPattern": printing.get("foilPattern"),
+                    "markings": printing.get("markings"),
+                    "distribution": printing.get("distribution"),
+                    "cardSize": printing.get("cardSize"),
+                    "errorClass": None,
+                    "classificationState": "classified-from-positive-evidence",
+                    "sourceFinishUnitId": finish_unit["finishUnitId"],
+                    "sourcePrintingId": source_printing_id,
+                    "establishingClaimId": claim_id,
+                }
+
+    # Exclusions are candidate claims with a positive product-scope disposition, not missing rows.
+    for unit in excluded:
+        claim_id = f"CLAIM:excluded:{unit['unitId']}"
+        candidate_claims[claim_id] = {
+            "claimId": claim_id,
+            "claimKind": "card-release",
+            "sourceKind": "legacy-code-card-unit",
+            "sourceId": unit["unitId"],
+            "evidenceStatus": "out-of-scope-product",
+            "disposition": "positively-excluded",
+            "proposedTargetId": None,
+            "materializedTargetId": None,
+            "reason": "code card, excluded from the physical-card catalogue",
+        }
+    identity_collisions: dict[tuple[str, str, str], list[str]] = defaultdict(list)
     for card in cards:
-        key = (card["setCode"], str(card.get("number") or ""), card.get("variantToken") or "base")
+        key = (card["setCode"], str(card.get("number") or ""),
+               card.get("variantToken") or "base")
         identity_collisions[key].append(card["productUrl"])
 
     card_disposition = {}
     for card in cards:
-        key = (card["setCode"], str(card.get("number") or ""), card.get("variantToken") or "base")
-        produced = sorted(prints_per_product.get(key, []))
-        shared = len(identity_collisions[key]) > 1
-        if shared:
-            card_disposition[card["productUrl"]] = {
-                "disposition": "queued", "printIds": produced,
-                "reason": (f"identity tuple {key} is shared by "
-                           f"{len(identity_collisions[key])} products; needs a distinguishing "
-                           f"local identifier before it can become a print"),
-            }
-        elif not produced:
-            card_disposition[card["productUrl"]] = {
-                "disposition": "queued", "printIds": [],
-                "reason": "no language claim in the legacy store, so no print can be derived yet",
-            }
+        claims = sorted(product_claims.get(card["productUrl"], []))
+        releases = sorted(product_releases.get(card["productUrl"], set()))
+        key = (card["setCode"], str(card.get("number") or ""),
+               card.get("variantToken") or "base")
+        if card.get("isCodeCard"):
+            disposition = "positively-excluded"
+            reason = "code-card product is outside the physical-card catalogue"
+        elif len(identity_collisions[key]) > 1:
+            disposition = "candidate-needs-evidence"
+            reason = "legacy identity tuple is shared by multiple products"
+        elif not claims:
+            disposition = "candidate-needs-evidence"
+            reason = "no language claim in the legacy store"
+        elif not releases:
+            disposition = "candidate-needs-evidence"
+            reason = "no positive language claim establishes a release"
         else:
-            card_disposition[card["productUrl"]] = {
-                "disposition": "split" if len(produced) > 1 else "carried",
-                "printIds": produced,
-                "reason": f"{len(produced)} locality track(s) on one product",
-            }
+            disposition = "split" if len(releases) > 1 else "carried"
+            reason = f"{len(releases)} established language-bearing card release(s)"
+        card_disposition[card["productUrl"]] = {
+            "disposition": disposition,
+            "claimIds": claims,
+            "cardReleaseIds": releases,
+            "reason": reason,
+        }
 
-    # Code-card claims stay excluded and keep their identifiers; they are aliased, never dropped.
-    excluded_disposition = {
-        unit["unitId"]: {"disposition": "aliased", "printId": None,
-                         "reason": "code card, excluded from the physical catalogue"}
-        for unit in excluded
-    }
-
-    # Evidence that has nowhere to live: a specimen the owner holds whose set code and number match
-    # no product node. SPEC-0024 (AS5a 142, T-Chinese) is the worked case and the reason
-    # CATCHUP-SETS.md exists.
-    # A specimen is only an orphan if nothing anywhere carries its identifiers. Since D1 the
-    # source-first prints do, for six of them (#134).
+    # Specimen reachability is retained from the accepted D1 decision. A source-first record gives
+    # the specimen a card-release claim even when its work equivalence remains unresolved.
     product_codes = {(c["setCode"], str(c.get("number") or "")) for c in cards}
     admitted_specimens = {entry["specimenId"] for entry in source_first.get("prints", [])}
     held_specimens = {entry["specimenId"] for entry in source_first.get("held", [])}
     orphan_specimens = []
     for spec in specimens:
         code = str(spec.get("setCode") or "")
-        # Specimen set codes carry the locality inline for regional promos ("SV-P/ID 117").
         base_code = code.split("/")[0].strip()
         number = str(spec.get("number") or "")
         if spec.get("specimenId") in admitted_specimens:
@@ -232,16 +485,74 @@ def build(cards: list[dict], units: list[dict], excluded: list[dict],
             orphan_specimens.append({
                 "specimenId": spec.get("specimenId"), "setCode": code, "number": number,
                 "language": spec.get("language"),
-                "reason": ("held: the specimen declines to assert a set code, and a print is keyed "
-                           "by one" if spec.get("specimenId") in held_specimens
-                           else "no product node carries this set code and number"),
+                "reason": ("held pending a positively identified set code"
+                           if spec.get("specimenId") in held_specimens
+                           else "no product or source-first release carries these identifiers"),
             })
 
-    split_products = {k: v for k, v in prints_per_product.items() if len(v) > 1}
-    needs_identifier = [p for p in prints.values() if not p["localIdentifierKnown"]]
+    contradicted_only = []
+    mixed_status = []
+    for release_id, members in proposed_release_groups.items():
+        statuses = {member["unit"]["status"] for member in members}
+        item = {
+            "proposedCardReleaseId": release_id,
+            "locality": members[0]["target"]["locality"],
+            "language": members[0]["unit"]["language"],
+            "unitIds": sorted(member["unit"]["unitId"] for member in members),
+            "statuses": sorted(statuses),
+            "materialized": release_id in card_releases,
+        }
+        if statuses == {"contradicted"}:
+            contradicted_only.append(item)
+        elif len(statuses) > 1:
+            mixed_status.append(item)
 
-    by_locality = Counter(p["locality"] for p in prints.values())
-    unknown_by_locality = Counter(p["locality"] for p in needs_identifier)
+    multi_variant = [
+        {
+            "cardReleaseId": release["cardReleaseId"],
+            "language": release["language"],
+            "legacyVariants": release["legacyVariants"],
+            "claimIds": release["claimIds"],
+        }
+        for release in card_releases.values() if len(release["legacyVariants"]) > 1
+    ]
+    needs_identifier = [
+        release for release in card_releases.values()
+        if not release["localIdentifierKnown"]
+    ]
+    legacy_language_by_claim = {
+        f"CLAIM:legacy:{unit['unitId']}": unit["language"] for unit in units
+    }
+    cross_language_merges = [
+        release["cardReleaseId"] for release in card_releases.values()
+        if len({legacy_language_by_claim[claim_id]
+                for claim_id in release["claimIds"]
+                if claim_id in legacy_language_by_claim}) > 1
+    ]
+    unexplained_splits = []
+    for product_url, disposition in card_disposition.items():
+        by_edition_profile: dict[tuple[str, str], list[str]] = defaultdict(list)
+        for release_id in disposition["cardReleaseIds"]:
+            release = card_releases[release_id]
+            by_edition_profile[(release["locality"], release["language"])].append(release_id)
+        duplicate_profiles = {
+            f"{locality}/{language}": sorted(release_ids)
+            for (locality, language), release_ids in by_edition_profile.items()
+            if len(release_ids) > 1
+        }
+        if duplicate_profiles:
+            unexplained_splits.append({
+                "legacyProduct": product_url,
+                "duplicateEditionProfiles": duplicate_profiles,
+            })
+
+    for edition in set_editions.values():
+        edition["viaLegacySetCodes"] = sorted(edition["viaLegacySetCodes"])
+        edition["establishingClaimIds"].sort()
+
+    release_by_locality = Counter(r["locality"] for r in card_releases.values())
+    unknown_by_locality = Counter(r["locality"] for r in needs_identifier)
+    claim_dispositions = Counter(c["disposition"] for c in candidate_claims.values())
 
     return {
         "meta": {
@@ -249,58 +560,83 @@ def build(cards: list[dict], units: list[dict], excluded: list[dict],
             "schemaVersion": SCHEMA_VERSION,
             "generated": date.today().isoformat(),
             "adr": "verification/ADR-0001-locality-aware-print-identity.md",
-            "status": "dry-run — proposes nothing to the stores, migrates nothing",
+            "status": "dry-run — proposes nothing to authoritative stores, migrates nothing",
             "baselineId": baseline["meta"]["baselineId"],
             "description": (
-                "Maps every legacy row onto the proposed locality-aware print model and reports "
-                "what the migration would have to account for. A print with "
-                "localIdentifierKnown=false is a printing this repository has evidence for and no "
-                "local set code or collector number to name it by."
+                "Maps claims onto language-bearing card releases and positively evidenced "
+                "physical printings. Candidate-only claims remain visible and cannot mint an "
+                "existence-bearing node."
             ),
         },
         "localities": LOCALITIES,
         "counts": {
-            "legacyProducts": len(by_key),
+            "legacyProducts": len(cards),
+            "legacyProductIdentityTuples": len(cards_by_key),
             "legacyLanguageUnits": len(units),
             "legacyExcludedCodeCardUnits": len(excluded),
-            "printNodes": len(prints),
-            "printNodesIdentified": len(prints) - len(needs_identifier),
-            "printNodesNeedingLocalIdentifier": len(needs_identifier),
-            "productsSplitAcrossLocalities": len(split_products),
+            "sourceFirstRecords": len(source_first.get("prints", [])),
+            "finishPrintingClaims": sum(len(u.get("printings", [])) for u in finish_units),
+            "candidateClaims": len(candidate_claims),
+            "candidateClaimDispositions": dict(sorted(claim_dispositions.items())),
+            "setEditionNodes": len(set_editions),
+            "cardReleaseNodes": len(card_releases),
+            "cardReleaseNodesIdentified": len(card_releases) - len(needs_identifier),
+            "cardReleaseNodesNeedingLocalIdentifier": len(needs_identifier),
+            "physicalPrintingNodes": len(physical_printings),
+            "contradictedOnlyCardReleaseProposals": len(contradicted_only),
+            "mixedStatusCardReleaseProposals": len(mixed_status),
+            "multiVariantCardReleases": len(multi_variant),
+            "crossLanguageIdentityMerges": len(cross_language_merges),
+            "unexplainedProductSplits": len(unexplained_splits),
             "identityCollisions": sum(1 for v in identity_collisions.values() if len(v) > 1),
-            "unresolvedUnits": len(unresolved),
+            "unresolvedUnits": len(unresolved_units),
+            "unresolvedPhysicalClaims": len(unresolved_physical),
             "orphanSpecimens": len(orphan_specimens),
             "sourceFirstPrintsAdmitted": len(source_first.get("prints", [])),
             "sourceFirstPrintsHeld": len(source_first.get("held", [])),
-            "printNodesByLocality": dict(sorted(by_locality.items(), key=lambda kv: -kv[1])),
+            "cardReleaseNodesByLocality": dict(
+                sorted(release_by_locality.items(), key=lambda kv: -kv[1])),
             "needsLocalIdentifierByLocality": dict(
                 sorted(unknown_by_locality.items(), key=lambda kv: -kv[1])),
         },
-        "dispositions": {
-            "cards": dict(sorted(card_disposition.items())),
-            "languageUnits": dict(sorted(unit_disposition.items())),
-            "excludedCodeCardUnits": dict(sorted(excluded_disposition.items())),
-        },
+        "legacyProductDispositions": dict(sorted(card_disposition.items())),
         "reports": {
-            "splitProducts": [
-                {"setCode": k[0], "number": k[1], "variant": k[2], "printIds": sorted(v)}
-                for k, v in sorted(split_products.items())
-            ],
+            "contradictedOnlyCardReleaseProposals": sorted(
+                contradicted_only, key=lambda item: item["proposedCardReleaseId"]),
+            "mixedStatusCardReleaseProposals": sorted(
+                mixed_status, key=lambda item: item["proposedCardReleaseId"]),
+            "multiVariantCardReleases": sorted(
+                multi_variant, key=lambda item: item["cardReleaseId"]),
             "needsLocalIdentifier": sorted(
-                ({"printId": p["printId"], "locality": p["locality"],
-                  "languages": sorted(p["languages"]), "viaProduct": p["legacyProduct"]["setCode"]
-                  + " " + p["legacyProduct"]["number"], "unitIds": sorted(p["unitIds"])}
-                 for p in needs_identifier),
-                key=lambda item: (item["locality"], item["viaProduct"]),
+                ({
+                    "cardReleaseId": r["cardReleaseId"],
+                    "locality": r["locality"],
+                    "language": r["language"],
+                    "viaProduct": f"{r['viaLegacySetCode']} {r['viaLegacyNumber']}",
+                    "claimIds": r["claimIds"],
+                } for r in needs_identifier),
+                key=lambda item: (item["locality"], item["language"], item["viaProduct"]),
             ),
+            "crossLanguageIdentityMerges": sorted(cross_language_merges),
+            "unexplainedProductSplits": sorted(
+                unexplained_splits, key=lambda item: item["legacyProduct"]),
             "identityCollisions": [
-                {"setCode": k[0], "number": k[1], "variant": k[2], "sourceRecords": sorted(v)}
+                {"setCode": k[0], "number": k[1], "variant": k[2],
+                 "sourceRecords": sorted(v)}
                 for k, v in sorted(identity_collisions.items()) if len(v) > 1
             ],
-            "unresolvedUnits": sorted(unresolved, key=lambda item: item["unitId"]),
-            "orphanSpecimens": sorted(orphan_specimens, key=lambda item: str(item["specimenId"])),
+            "unresolvedUnits": sorted(unresolved_units, key=lambda item: item["unitId"]),
+            "unresolvedPhysicalClaims": sorted(
+                unresolved_physical, key=lambda item: item["printingId"]),
+            "orphanSpecimens": sorted(
+                orphan_specimens, key=lambda item: str(item["specimenId"])),
         },
-        "prints": [prints[pid] for pid in sorted(prints)],
+        "candidateClaims": [candidate_claims[cid] for cid in sorted(candidate_claims)],
+        "setEditions": [set_editions[eid] for eid in sorted(set_editions)],
+        "cardReleases": [card_releases[rid] for rid in sorted(card_releases)],
+        "physicalPrintings": [
+            physical_printings[pid] for pid in sorted(physical_printings)
+        ],
     }
 
 
@@ -311,13 +647,14 @@ def main() -> int:
 
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     units = read_json(ROOT / "verification" / "units.json")
+    finish_units = read_json(ROOT / "verification" / "finish_units.json")["units"]
     excluded = read_json(ROOT / "verification" / "excluded_codecards.json")
     specimen_doc = read_json(ROOT / "verification" / "specimens.json")
     specimens = specimen_doc["specimens"] if isinstance(specimen_doc, dict) else specimen_doc
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
     source_first = read_json(ROOT / "verification" / "source_first_prints.json")
 
-    document = build(cards, units, excluded, specimens, baseline, source_first)
+    document = build(cards, units, finish_units, excluded, specimens, baseline, source_first)
 
     if args.check:
         if not OUTPUT_PATH.is_file():
@@ -328,21 +665,28 @@ def main() -> int:
         if {k: v for k, v in existing.items() if k != "meta"} != comparable:
             print("print_identity_dryrun.json is stale; run python scripts/print_identity_dryrun.py")
             return 1
-        print(f"print identity dry run is current "
-              f"({document['counts']['printNodes']} print nodes)")
+        counts = document["counts"]
+        print(
+            "print identity dry run is current "
+            f"({counts['cardReleaseNodes']} card releases, "
+            f"{counts['physicalPrintingNodes']} physical printings)"
+        )
         return 0
 
-    body = json.dumps(document, indent=2, ensure_ascii=False) + "\n"
-    OUTPUT_PATH.write_text(body, encoding="utf-8")
+    OUTPUT_PATH.write_text(
+        json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     counts = document["counts"]
-    print(f"{OUTPUT_PATH.relative_to(ROOT)}: {counts['legacyProducts']} legacy products -> "
-          f"{counts['printNodes']} print nodes "
-          f"({counts['printNodesNeedingLocalIdentifier']} need a local identifier)")
-    print(f"  {counts['productsSplitAcrossLocalities']} products split across localities; "
-          f"{counts['identityCollisions']} identity collision(s); "
-          f"{counts['orphanSpecimens']} orphan specimen(s); "
-          f"{counts['sourceFirstPrintsAdmitted']} source-first print(s) admitted; "
-          f"{counts['unresolvedUnits']} unresolved unit(s)")
+    print(
+        f"{OUTPUT_PATH.relative_to(ROOT)}: {counts['candidateClaims']} claims -> "
+        f"{counts['cardReleaseNodes']} card releases + "
+        f"{counts['physicalPrintingNodes']} physical printings"
+    )
+    print(
+        f"  {counts['contradictedOnlyCardReleaseProposals']} contradicted-only release "
+        f"proposal(s) remain candidates; {counts['crossLanguageIdentityMerges']} "
+        f"cross-language merge(s); {counts['unresolvedUnits']} unresolved unit(s); "
+        f"{counts['unresolvedPhysicalClaims']} unresolved confirmed physical claim(s)"
+    )
     return 0
 
 

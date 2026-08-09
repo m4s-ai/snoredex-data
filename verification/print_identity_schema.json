@@ -1,16 +1,45 @@
 {
   "meta": {
     "schema": "snoredex-print-identity",
-    "schemaVersion": "0.1.0",
-    "status": "accepted — owner decisions recorded 2026-08-09; not in force until #140",
+    "schemaVersion": "0.2.0",
+    "status": "accepted design refined by #145; not in force until #140",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
-    "issue": "https://github.com/m4s-ai/snoredex-data/issues/134",
-    "description": "Node, edge and invariant definitions for the locality-aware physical print identity. Accepted as a design, not in force: no store is keyed by this yet. The dry run in verification/print_identity_dryrun.json maps every legacy row onto it.",
-    "notAnEvidenceChange": "Authority tiers, providerId, corroboration, absence scopes and owner adjudications are untouched. This schema changes what a claim is about, never what makes it true."
+    "issues": [
+      "https://github.com/m4s-ai/snoredex-data/issues/134",
+      "https://github.com/m4s-ai/snoredex-data/issues/145"
+    ],
+    "description": "Separates candidate assertions, language-bearing card releases, and positively evidenced manufactured printings. The dry run maps every legacy/source input onto this boundary without changing an authoritative store.",
+    "notAnEvidenceChange": "Authority tiers, providerId, corroboration, absence scopes and owner adjudications are untouched. This schema controls when an assertion may create an existence-bearing node; #137 controls evidence inference."
   },
   "nodes": {
+    "candidate_claim": {
+      "grain": "one assertion from one legacy or source record about a proposed card release or physical printing",
+      "idPattern": "CLAIM:<source-kind>:<source-id>",
+      "fields": [
+        "claimId",
+        "claimKind",
+        "sourceKind",
+        "sourceId",
+        "evidenceStatus",
+        "disposition",
+        "proposedTargetId",
+        "materializedTargetId",
+        "reason"
+      ],
+      "claimKinds": [
+        "card-release",
+        "physical-printing"
+      ],
+      "dispositions": {
+        "established-and-mapped": "positive evidence permits the proposed target to exist",
+        "candidate-needs-evidence": "the assertion remains visible but cannot create a target",
+        "bounded-contradicted": "preserves an existing contradicted verdict as a non-materializing claim; #137 governs any future inference",
+        "positively-excluded": "the source record is outside the physical-card product scope for a stated reason"
+      },
+      "note": "A candidate claim is not a weak entity. It is the durable record that a question was asked, including contradicted and marketplace-only inputs."
+    },
     "work": {
-      "grain": "one card text and artwork identity, independent of where it was printed",
+      "grain": "one shared card text/artwork identity independent of a local release",
       "idPattern": "WORK-nnnn",
       "fields": [
         "workId",
@@ -18,35 +47,79 @@
         "cardKey",
         "artist"
       ],
-      "note": "cardKey is Cardmarket's grouping by name plus attack names. It groups the same card text, not the same artwork, and stays that way."
+      "note": "The legacy cardKey groups name plus attacks and does not prove artwork equivalence. Source-first records may leave the work edge unresolved."
     },
-    "print": {
-      "grain": "one physical localized printing",
-      "idPattern": "PRINT-nnnn",
-      "key": [
-        "locality",
-        "localSetCode",
-        "localNumber",
-        "variant"
-      ],
+    "set_edition": {
+      "grain": "one local set/product edition with one explicit locality and printed-language/script profile",
+      "idPattern": "EDITION:<locality>:<language>:<local-code-or-migration-anchor>",
       "fields": [
-        "printId",
-        "workId",
+        "setEditionId",
         "locality",
-        "localSetCode",
-        "localNumber",
-        "variant",
         "language",
         "script",
+        "localSetCode",
         "localIdentifierKnown",
         "state"
       ],
       "states": {
-        "identified": "the local set code and collector number are known and recorded",
-        "needs-local-identifier": "evidence says this printing exists; its own set code and number are not yet recorded",
-        "queued": "cannot be placed without further evidence, and stays visible until it can"
+        "identified": "the local set code is positively identified",
+        "needs-local-identifier": "a card release establishes that an edition exists but its local code is not recorded"
       },
-      "note": "localSetCode and localNumber are null exactly when localIdentifierKnown is false. A null is a stated gap, never an inherited value from the slot the printing was sold under."
+      "note": "This is the minimum identity boundary required by #145. #146 adds set concepts, release events, market waves and complete catalogue semantics."
+    },
+    "card_release": {
+      "grain": "one card-number slot in one set edition, before finish/stamp/error manufacturing distinctions",
+      "idPattern": "RELEASE:<set-edition>:<local-number-or-anchor>:<work-or-unmapped-anchor>",
+      "key": [
+        "setEditionId",
+        "localNumber",
+        "work"
+      ],
+      "fields": [
+        "cardReleaseId",
+        "setEditionId",
+        "locality",
+        "language",
+        "script",
+        "localSetCode",
+        "localNumber",
+        "localIdentifierKnown",
+        "state",
+        "work",
+        "workMappingState",
+        "establishingClaimIds"
+      ],
+      "states": {
+        "identified": "local set code and collector number are known",
+        "needs-local-identifier": "positive evidence establishes the localized release but its own local identifiers are not recorded"
+      },
+      "note": "Variant tokens do not belong in this identity. Several positively evidenced finishes or Cardmarket variants may realize one language-bearing card release."
+    },
+    "physical_printing": {
+      "grain": "one positively evidenced manufactured finish/treatment/distribution/error realization of a card release",
+      "idPattern": "PHYSICAL:<stable-source-printing-id>",
+      "key": [
+        "cardReleaseId",
+        "finish",
+        "foilPattern",
+        "markings",
+        "distribution",
+        "cardSize",
+        "errorClass"
+      ],
+      "fields": [
+        "physicalPrintingId",
+        "cardReleaseId",
+        "finish",
+        "foilPattern",
+        "markings",
+        "distribution",
+        "cardSize",
+        "errorClass",
+        "classificationState",
+        "establishingClaimId"
+      ],
+      "note": "A language confirmation alone establishes at most a card release. A physical-printing node requires positive evidence for the manufactured classification."
     },
     "locality": {
       "grain": "one market or distribution territory",
@@ -55,7 +128,7 @@
       ],
       "values": {
         "WEST": "Western distribution (EU/NA)",
-        "LATAM": "Latin-American distribution — in scope since 2026-08-09 (owner decision D3); no rows recorded yet, discovery tracked in #139",
+        "LATAM": "Latin-American distribution",
         "JP": "Japan",
         "KR": "South Korea",
         "TW": "Taiwan / Traditional-Chinese distribution",
@@ -67,12 +140,13 @@
     },
     "language": {
       "grain": "one printed language",
-      "note": "A dimension of its own. Spanish spans WEST and LATAM and both are in scope; English spans WEST and SEA. Neither may be collapsed into a locality."
+      "note": "Language is part of set-edition identity. Spanish spans WEST and LATAM; English spans WEST and SEA."
     },
     "script": {
       "grain": "writing system",
       "values": [
         "Latn",
+        "Cyrl",
         "Jpan",
         "Hang",
         "Hans",
@@ -80,183 +154,179 @@
         "Thai"
       ]
     },
-    "local_set": {
-      "grain": "one set or product as released in one locality",
-      "key": [
-        "locality",
-        "localSetCode"
-      ],
-      "note": "AS5a is a Traditional-Chinese local set. It is not a translation of sm10; it is its own release with its own numbering."
-    },
     "source_record": {
-      "grain": "one retrieved external record",
-      "note": "Existing evidence ids and provider registry entries. Unchanged by this schema."
+      "grain": "one immutable legacy, provider, specimen, or finish record",
+      "note": "Existing evidence ids and provider records remain the inputs of record."
     },
-    "alias": {
-      "grain": "an asserted equivalence between a local identifier and a print",
+    "evidence_observation": {
+      "grain": "one immutable positive observation or contradiction supported by a named bounded-exhaustive surface",
       "fields": [
-        "aliasType",
-        "rawIdentifier",
-        "printId",
+        "observationId",
+        "providerId",
+        "sourceRecordId",
+        "observedAt",
+        "evidence"
+      ],
+      "note": "This model does not re-adjudicate observations. Existing unit, specimen and finish evidence back-projects unchanged; #137 owns evidence inference."
+    },
+    "alias_or_equivalence_assertion": {
+      "grain": "one provenance-bearing relationship between a raw identifier and a graph node, or between two graph nodes",
+      "fields": [
+        "assertionType",
+        "fromId",
+        "toId",
         "assertedBy",
         "evidence"
       ],
-      "aliasTypes": [
-        "cardmarket-product",
-        "local-code-variant",
-        "catalogue-alias"
-      ],
-      "note": "The Cardmarket product is an alias onto a print, not the print's name. svQP and svQPF are two raw identifiers and both survive on the edge."
+      "assertionTypes": [
+        "cardmarket-product-alias",
+        "legacy-print-id-alias",
+        "local-code-alias",
+        "catalogue-alias",
+        "same-work-proposal",
+        "same-release-proposal"
+      ]
     }
   },
   "edges": {
-    "print--is-a-printing-of-->work": {
-      "cardinality": "many-to-one",
-      "required": true
-    },
-    "print--printed-in-->locality": {
-      "cardinality": "many-to-one",
-      "required": true
-    },
-    "print--printed-in-->language": {
-      "cardinality": "many-to-one",
-      "required": true
-    },
-    "print--belongs-to-->local_set": {
-      "cardinality": "many-to-one",
+    "candidate_claim--proposes-->card_release": {
+      "cardinality": "many-to-zero-or-one",
       "required": false
     },
-    "print--evidenced-by-->source_record": {
+    "candidate_claim--proposes-->physical_printing": {
+      "cardinality": "many-to-zero-or-one",
+      "required": false
+    },
+    "candidate_claim--materializes-->target": {
+      "cardinality": "many-to-zero-or-one",
+      "required": false,
+      "guard": "only a permitted positive evidenceStatus may populate materializedTargetId"
+    },
+    "card_release--belongs-to-->set_edition": {
+      "cardinality": "many-to-one",
+      "required": true
+    },
+    "card_release--implements-->work": {
+      "cardinality": "many-to-zero-or-one",
+      "required": false,
+      "note": "zero is an explicit needs-equivalence state, never a guessed edge"
+    },
+    "physical_printing--realizes-->card_release": {
+      "cardinality": "many-to-one",
+      "required": true
+    },
+    "candidate_claim--comes-from-->source_record": {
+      "cardinality": "many-to-one",
+      "required": true
+    },
+    "evidence_observation--supports-or-contradicts-->claim-or-node": {
       "cardinality": "many-to-many",
-      "required": false
+      "required": true,
+      "provenanceBearing": true
     },
-    "alias--identifies-->print": {
-      "cardinality": "many-to-one",
+    "alias_or_equivalence_assertion--relates-->node": {
+      "cardinality": "many-to-many",
       "required": true,
       "provenanceBearing": true
     }
   },
   "invariants": {
     "I1": {
-      "rule": "language is not locality",
-      "detail": "No consumer may derive a locality from a language label. European and Latin-American Spanish are one language across two localities; SVP 184 is the worked case.",
-      "enforcedBy": "pending — review_integrity.py once the model is in force"
+      "rule": "language is not locality, and both are explicit on a set edition",
+      "detail": "No consumer derives either dimension from the other."
     },
     "I2": {
-      "rule": "a print has exactly one (locality, localSetCode, localNumber) within its local set",
-      "enforcedBy": "pending"
+      "rule": "a contradicted, unresolved, excluded, or marketplace-only claim cannot mint an existence-bearing target",
+      "enforcedBy": "scripts/print_identity_dryrun.py and review_findings.py N2"
     },
     "I3": {
-      "rule": "prints sharing a work are still distinct prints",
-      "detail": "Japanese sm10 076 and Traditional-Chinese AS5a 142 share a work edge and are two print nodes.",
-      "enforcedBy": "pending"
+      "rule": "one card release belongs to exactly one language-bearing set edition",
+      "detail": "BKT 118 in seven confirmed languages is seven card releases, not one WEST print with a languages array.",
+      "enforcedBy": "scripts/print_identity_dryrun.py and review_findings.py N2"
     },
     "I4": {
-      "rule": "an alias never erases a raw local identifier",
-      "enforcedBy": "pending"
+      "rule": "manufacturing classifications specialize a card release rather than changing its set identity",
+      "detail": "Finish, pattern, stamp, size, distribution and explicit error class live on physical_printing."
     },
     "I5": {
-      "rule": "two records merge only through an explicit, provenance-bearing equivalence decision",
-      "detail": "There is no automatic merge on matching name, number or artwork.",
-      "enforcedBy": "pending"
+      "rule": "card releases sharing a work remain distinct releases",
+      "detail": "Japanese sm10 076 and Traditional-Chinese AS5a 142 may share a work edge and are different card releases."
     },
     "I6": {
-      "rule": "an error printing is its own print node, and no classification may create or erase one implicitly",
-      "detail": "Owner decision D4: a no-symbol Jungle (#115) is separately collectible and gets its own row. A finish or variant pass may never mint an error print as a side effect; only positive evidence plus an explicit error classification may. Where error and variant are hard to tell apart, an owner adjudication draws the line, on the mechanism the finish decisions have used since #119.",
-      "enforcedBy": "pending"
+      "rule": "aliases and equivalence proposals never erase raw identifiers and never merge automatically"
     },
     "I7": {
+      "rule": "an error printing requires positive evidence plus an explicit error classification",
+      "detail": "A finish or variant pass cannot mint an error node as a side effect."
+    },
+    "I8": {
       "rule": "localSetCode and localNumber are null exactly when localIdentifierKnown is false",
-      "detail": "A printing whose local identifiers are unknown must say so rather than inherit the identifiers of the slot it was sold under.",
-      "enforcedBy": "scripts/print_identity_dryrun.py"
+      "detail": "Migration anchors remain in viaLegacy fields and cannot masquerade as local identifiers.",
+      "enforcedBy": "scripts/print_identity_dryrun.py and review_findings.py N2"
+    },
+    "I9": {
+      "rule": "release dates and set availability are context only and cannot establish a card release",
+      "detail": "Existence-bearing nodes require a permitted evidence observation; temporal catalogue metadata is never a promotion trigger."
     }
   },
+  "futureDatabaseConstraints": [
+    "candidate_claim.materializedTargetId is null unless disposition is established-and-mapped",
+    "card_release.setEditionId is a required foreign key",
+    "card_release has exactly one non-empty language and script through its set edition",
+    "card_release local identifiers are both null or both identified according to localIdentifierKnown",
+    "physical_printing.cardReleaseId and establishingClaimId are required foreign keys",
+    "physical_printing establishing claim has permitted positive evidence",
+    "errorClass is null unless an explicit error-classification assertion exists",
+    "raw aliases and migration anchors are retained under uniqueness constraints"
+  ],
   "migrationContract": {
     "dispositions": {
-      "carried": "one legacy row becomes one print",
-      "split": "one legacy row becomes several prints, one per locality track",
-      "aliased": "the legacy identifier becomes an alias edge onto a print",
-      "queued": "cannot be placed yet; stays visible and is never dropped"
+      "carried": "one legacy product maps to one established release",
+      "split": "one legacy product maps to several language-bearing releases",
+      "established-and-mapped": "a positive claim maps to an established target",
+      "candidate-needs-evidence": "a claim remains visible without creating a target",
+      "bounded-contradicted": "an existing contradicted verdict remains visible and cannot create a target; #137 owns future inference",
+      "positively-excluded": "an input is outside physical-card scope for a stated reason"
     },
     "rules": [
-      "Every legacy member carries exactly one disposition. A member with none fails the dry run.",
-      "A back-projection must reproduce the legacy shape from the graph; if it cannot, the mapping lost something.",
-      "Every legacy baseline member (#133) must resolve to a print or to a recorded disposition. Disappearing is not a disposition.",
-      "Existing verdicts and their evidence migrate as they are. Nothing is re-derived."
+      "Every legacy/source input carries exactly one disposition.",
+      "A back-projection reproduces the legacy/source identifiers and statuses.",
+      "Existing verdicts and evidence migrate as recorded and are never re-derived here.",
+      "No absence or marketplace hint creates an existence-bearing node.",
+      "Migration anchors are replaceable by explicit aliases when local identifiers are discovered."
     ]
   },
   "acceptanceFixtures": [
     {
-      "fixture": "svQP F 012/023",
-      "tests": "a printing with no Cardmarket slot at all",
-      "inLegacyData": false
+      "fixture": "BKT 118",
+      "tests": "seven confirmed WEST languages remain seven card releases"
     },
     {
-      "fixture": "JP sm10 076 <-> T-CHN AS5a 142",
-      "tests": "shared work, distinct prints",
-      "inLegacyData": "partial — sm10 076 only; AS5a 142 is specimen SPEC-0024"
+      "fixture": "55 coarse contradicted-only print groups on c301933",
+      "tests": "all underlying contradicted claims remain candidates and create no card release"
     },
     {
-      "fixture": "T-CHN SV-P 215 vs svLN 010",
-      "tests": "a Traditional-Chinese print behind a Japanese slot",
-      "inLegacyData": "partial — svLN 010 only"
+      "fixture": "xJTG 117 French",
+      "tests": "one confirmed and one contradicted variant share a release without transferring status"
     },
     {
-      "fixture": "S-CHN SV9-075",
-      "tests": "Simplified-Chinese local numbering",
-      "inLegacyData": false
+      "fixture": "svQP F 012/023 and AS5a 142",
+      "tests": "source-first local releases have their own edition/release identity"
     },
     {
-      "fixture": "ID SV9s-109, SV4s-118, SV6s-136",
-      "tests": "Indonesian local numbering",
-      "inLegacyData": false
-    },
-    {
-      "fixture": "EU vs LATAM SVP 184",
-      "tests": "one language across two localities",
-      "inLegacyData": "partial — European only"
+      "fixture": "EU versus LATAM SVP 184",
+      "tests": "one language across two localities cannot share a set-edition identity"
     },
     {
       "fixture": "Jungle no-symbol error (#115)",
-      "tests": "an error category that must not mint a print",
-      "inLegacyData": false
+      "tests": "schema can represent an explicit error physical printing and generic finish passes cannot mint one"
     }
   ],
   "ownerDecisions": {
     "decidedOn": "2026-08-09",
-    "D1": {
-      "question": "Do catch-up codes enter the catalogue now or wait for a per-code adjudication?",
-      "decision": "Every catch-up code backed by a physical specimen enters now",
-      "admits": [
-        "AS5a 142",
-        "sc1a F 127/154",
-        "sc1b F 119",
-        "sc1b F 120",
-        "sc1b F 165",
-        "sc1b F 177",
-        "S-P 101",
-        "sc?? F 111/159"
-      ],
-      "excludes": "codes without their own specimen, which stay per-code questions",
-      "landsIn": "a data pass adding the products, units and evidence — not this schema"
-    },
-    "D2": {
-      "question": "Are printings with unknown local identifiers visible to collectors?",
-      "decision": "Visible immediately, marked unresolved",
-      "landsIn": "#140 — needs-local-identifier prints project into the checklist, not out of it"
-    },
-    "D3": {
-      "question": "Is Latin-American Spanish in scope?",
-      "decision": "In scope. European Spanish and LATAM-ES are two localities of one language",
-      "reverses": "the standing 'Spanish means European Spanish only' scope rule",
-      "note": "Cardmarket does not carry LATAM, so the frozen legacy baseline is unaffected and every LATAM row will be a source-first discovery",
-      "landsIn": "scope wording immediately; rows are #139"
-    },
-    "D4": {
-      "question": "Is an error printing its own print, or an attribute of one?",
-      "decision": "Its own print node",
-      "note": "The error/variant boundary is a collector judgement and is drawn by owner adjudication",
-      "landsIn": "invariant I6; #115 is resolved against it"
-    }
+    "D1": "Every catch-up code backed by a physical specimen enters as a local release; raw source_first_prints printId values remain aliases until #140.",
+    "D2": "Established releases with unknown local identifiers remain visible as needs-local-identifier.",
+    "D3": "European Spanish and LATAM Spanish are distinct localities of one language and both are in scope.",
+    "D4": "A positively evidenced and explicitly classified error is its own physical-printing node."
   }
 }

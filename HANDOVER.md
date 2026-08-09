@@ -37,9 +37,10 @@ legacy-cardmarket-baseline.json
                               added to those stores, never to this file. It records no verification
                               state, deliberately.
 verification/ADR-0001-locality-aware-print-identity.md
-                              PROPOSED identity model (#134): a print is one physical localized
-                              printing keyed by (locality, localSetCode, localNumber, variant),
-                              not a language of a Cardmarket product. Schema in
+                              PROPOSED identity model (#134/#145): immutable candidate claims may
+                              establish language-bearing card releases, which positively evidenced
+                              finishes/treatments realize as physical printings. Contradicted and
+                              marketplace-only claims create no existence-bearing node. Schema in
                               print_identity_schema.json; measured consequences in
                               print_identity_dryrun.json. Nothing is keyed by it yet.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
