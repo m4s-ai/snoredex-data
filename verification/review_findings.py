@@ -1423,6 +1423,51 @@ def collect() -> None:
             f"reference. e.g. {uncited_specimen_claims[:5]}",
         )
 
+        # S18-S19 — the rarity catalogue is reference data with a source, not a lookup (#146)
+        # --------------------------------------------------------------------------- #
+        # Rarity was read three ways and written down none: Cardmarket's label per product,
+        # Bulbapedia's per set, and Japan's letter codes. The catalogue records which vocabulary is
+        # speaking. Two things must stay true of it, because both are how a rarity quietly becomes
+        # a finish or crosses a locality it does not hold in.
+        rarity_catalogue = load("verification/rarity_catalogue.json")
+        RARITY_FINISHES = {"non-holo", "holo", "reverse-holo", "mirror-holo"}
+        rarity_problems = []
+        seen_rarity_ids = set()
+        for entry in rarity_catalogue["rarities"]:
+            rid = entry.get("rarityId")
+            if not rid or rid in seen_rarity_ids:
+                rarity_problems.append(f"duplicate or missing rarityId {rid!r}")
+            seen_rarity_ids.add(rid)
+            if not str(entry.get("basis") or "").strip():
+                rarity_problems.append(f"{rid}: no basis quoted")
+            implied = entry.get("impliesFinish")
+            if implied is not None and implied not in RARITY_FINISHES:
+                rarity_problems.append(f"{rid}: impliesFinish {implied!r}")
+        check(
+            "S18",
+            "Every rarity in the catalogue quotes its source and names a real finish or none",
+            "FAIL",
+            not rarity_problems,
+            f"{len(rarity_problems)} problem(s): {rarity_problems[:5]}",
+        )
+
+        # A rarity that merely tends to be foil must not carry a finish. The article says "Ultra
+        # Rare … typically marked as Rare Holofoil cards", which describes the marker; promoting
+        # that to a finish is the same move as reading SPEC-0008's "rainbow rare" as holo.
+        unquoted_finish = [
+            entry["rarityId"] for entry in rarity_catalogue["rarities"]
+            if entry.get("impliesFinish")
+            and entry["impliesFinish"].split("-")[0].lower() not in entry.get("basis", "").lower()
+        ]
+        check(
+            "S19",
+            "A rarity naming a finish says so in the sentence it quotes",
+            "FAIL",
+            not unquoted_finish,
+            f"{len(unquoted_finish)} rarit(ies) claim a finish their own quotation does not state: "
+            f"{unquoted_finish[:5]}",
+        )
+
         # S16-S17 — a recorded finish quotes the record it came from (#150)
         # --------------------------------------------------------------------------- #
         # `FINISH_SOURCES.md` has always allowed an identified physical scan to establish "visible

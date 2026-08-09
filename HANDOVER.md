@@ -110,6 +110,12 @@ verification/
                               matches its current row. units.json is the state; this is the
                               record of how it was reached. check E5 requires every resolved
                               unit to appear here, which is the property it can actually offer.
+  rarity_catalogue.json       CENTRAL RARITY REFERENCE: one entry per rarity with its locale
+                              codes (Illustration Rare = AR), whether it names a finish, and the
+                              Bulbapedia sentence that says so, plus per-set rarity availability.
+                              Reference data — it claims nothing about any card here. Rarity
+                              belongs to a card release, not a work: the same card can be Common
+                              in Japanese and Uncommon in English.
   specimens.json              Physical cards the owner holds and inspected, each with a stable
                               SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
                               instead of describing it in prose. `photograph` is null until the
