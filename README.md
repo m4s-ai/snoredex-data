@@ -74,6 +74,7 @@ Then visit <http://localhost:8000/>. `index.html` is the whole site; nothing els
 | Final owner decisions on disputed claims | [`verification/owner_adjudications.json`](verification/owner_adjudications.json) | Explicit cross-source application decisions; they do not rewrite `units.json` or credit a single provider. |
 | Which finishes a card exists in | [`verification/finish_units.json`](verification/finish_units.json) | Keyed by `(setCode, number, language)` — deliberately *not* by variant token. |
 | Release chronology | [`analysis_confirmed_releases.json`](analysis_confirmed_releases.json) / [`.csv`](analysis_confirmed_releases.csv) | Dates follow the matching market inside a shared Bulbapedia article. |
+| The coverage-versioned release migration | [`analysis_confirmed_releases_reconciled.json`](analysis_confirmed_releases_reconciled.json) / [`.csv`](analysis_confirmed_releases_reconciled.csv) | Preserves all 203 legacy rows while separating positive edition events from visible `needs-evidence` language/date links. |
 | Who said what, and how strong it is | [`verification/SOURCES.md`](verification/SOURCES.md), [`verification/source_registry.json`](verification/source_registry.json) | Every claim names a provider and an authority tier. |
 
 Then read [Scope and caveats](#scope-and-caveats--read-before-using) below. Several fields mean
@@ -216,6 +217,7 @@ python scripts/analyze.py          # analysis_artists, _shared_cards, _variants,
 python scripts/finishes.py --reproject
 python scripts/language_status.py
 python scripts/confirmed_releases.py
+python scripts/legacy_set_reconciliation.py
 python scripts/source_registry.py
 python scripts/checklist.py
 python scripts/readme_stats.py
