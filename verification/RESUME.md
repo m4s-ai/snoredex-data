@@ -389,7 +389,10 @@ support LATAM-ES at all** (owner) — its filter collapses both editions into on
 LATAM-ES cannot be sourced from the harvest and every "Spanish" confirmation strictly means the
 European print.
 
-**If LATAM-ES is ever added as a dimension** (owner guidance):
+**LATAM-ES is in scope since 2026-08-09** — owner decision D3 in
+[`ADR-0001`](ADR-0001-locality-aware-print-identity.md), which makes it a locality of its own
+rather than a footnote on Spanish. No row exists yet; #139 is the discovery work, and this is the
+plan it starts from (owner guidance, written before the decision):
 
 - Source: the **official public Pokémon site**, not Cardmarket. Probed: `pokemon.com/latam`
   responds to scripts (HTTP 200); the LATAM card database would hang off that locale.

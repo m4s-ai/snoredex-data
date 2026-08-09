@@ -1,7 +1,8 @@
 <!-- doc: role=architecture decision record for physical print identity; stage=reference -->
 # ADR-0001 — Locality-aware physical print identity
 
-**Status:** proposed · **Issue:** [#134](https://github.com/m4s-ai/snoredex-data/issues/134) ·
+**Status:** accepted — owner decisions recorded 2026-08-09, migration still pending #140 ·
+**Issue:** [#134](https://github.com/m4s-ai/snoredex-data/issues/134) ·
 **Parent:** [#132](https://github.com/m4s-ai/snoredex-data/issues/132) ·
 **Depends on:** [#133](https://github.com/m4s-ai/snoredex-data/issues/133)
 
@@ -93,7 +94,9 @@ Nodes are `work`, `print`, `locality`, `language`, `script`, `local_set`, `sourc
 4. An alias never erases a raw local identifier. `svQP` and `svQPF` both survive on the edge.
 5. Records merge only through an explicit, provenance-bearing equivalence decision. Never on
    matching name, number or artwork.
-6. Finish, variant and error classification may not create or erase a regular print identity.
+6. An error printing is its own print node (owner decision D4), and no classification may create
+   or erase one **implicitly**. A finish or variant pass may never mint an error print as a side
+   effect; only positive evidence plus an explicit error classification may.
 7. **`localSetCode` and `localNumber` are null exactly when `localIdentifierKnown` is false.**
 
 Seven is the one that keeps this honest, and it is enforced by the dry run today. The tempting
@@ -138,12 +141,68 @@ dry run are what that issue needs before it can start.
   asked to infer locality from a language label, which is #134's closing condition.
 - Eight orphan specimens get somewhere to live, which is the first thing the owner will notice.
 
-## Open questions for the owner
+## Owner decisions (2026-08-09)
 
-These are the collector's call, not the schema's, and `CATCHUP-SETS.md` already lists them per
-code: whether each catch-up code (`AS5a`, `sc1a`/`sc1b`, `FXY`, `S-P`, `SV-P`) enters the catalogue
-as its own product now, or waits for a per-code adjudication.
+Four questions were the collector's call rather than the schema's. All four are answered; two went
+against the recommendation in the draft, and both are recorded as given.
 
-The schema represents either outcome without a rewrite, because an absent print is an absent node
-rather than a false one. The decision changes when the rows appear, not whether the model can hold
-them.
+### D1 — Catch-up codes with a specimen enter the catalogue now
+
+Every catch-up code backed by a physical specimen becomes its own product immediately:
+`AS5a 142`, `sc1a F 127/154`, `sc1b F 119`/`120`/`165`/`177`, `S-P 101` and `sc?? F 111/159`.
+That is the threshold this project applies everywhere else — positive evidence, and here the
+evidence is a card the owner holds and has photographed. The eight orphan specimens stop being
+orphans.
+
+Codes without their own specimen (the Simplified-Chinese `sc1a`/`sc1b` rows reachable through
+52poke) are **not** admitted by this decision and stay per-code questions.
+
+*Lands in:* a data pass adding the products, their units and their evidence. Not this ADR — see
+"What this decision does not do", below.
+
+### D2 — The 172 unidentified printings are visible immediately
+
+They become checklist rows the moment the model is in force, stating plainly that the printing
+exists and its local name is not yet recorded. This is the project's standing posture — an
+unresolved thing is shown rather than quietly dropped — applied to a queue that would otherwise be
+invisible to the people who could help close it.
+
+*Lands in:* #140, which must project `needs-local-identifier` prints into the checklist rather
+than filtering them out.
+
+### D3 — Latin-American Spanish becomes in-scope
+
+**This reverses a standing scope rule.** "Spanish means European Spanish only, LATAM-ES is out of
+scope" has been a documented boundary in `CLAUDE.md`, `README.md` and the site's scope callout
+since the beginning; `SVP 184` is the specimen-verified case that established LATAM-ES as a
+physically distinct edition. The owner directs scope, and the rule is now: **European Spanish and
+LATAM-ES are two localities of one language, and both are in scope.**
+
+What that costs, stated plainly: LATAM is a whole distribution track with its own set codes, its
+own print runs and a source landscape this repository has never touched. Cardmarket does not carry
+it, so the legacy universe contains none of it and the frozen baseline is unaffected — every LATAM
+row will be a source-first discovery. It is the first locality admitted on evidence rather than
+inherited from the harvest, which is precisely what #132 was built to make possible.
+
+*Lands in:* the scope wording, immediately, in this change. The rows themselves are #139.
+
+### D4 — An error printing is its own print node
+
+A no-symbol Jungle (#115) is a separately collectible object with its own row, not an attribute of
+the regular print. Invariant I6 is rewritten accordingly, and it keeps the protection that made it
+worth stating: a finish or variant pass may never mint an error print as a side effect. Only
+positive evidence plus an explicit error classification may.
+
+Someone still has to draw the line between an error and a variant. That line is a collector
+judgement, so it goes where the other collector judgements go — an owner adjudication, on the same
+mechanism the finish decisions have used since #119.
+
+*Lands in:* the schema, immediately; #115 can be resolved against it.
+
+## What this decision does not do
+
+D1, D2 and D4 describe rows that do not exist yet. This change records the decisions and rewrites
+the model; it adds no product, no unit and no verdict. The catch-up products (D1) are a data pass
+of their own, the checklist projection (D2) belongs to #140, and #115 is resolved under D4 when
+someone works it. Recording a decision and executing it are separate acts here on purpose — the
+gap between them is visible in the issue tracker rather than hidden in a large commit.

@@ -246,10 +246,12 @@ publishes, and Pages deployment stays a manual, gated workflow run.
   has settled it. **58 are settled; 27 are disputed.** Both are excluded from the checklist, so
   that nobody is sent hunting a printing the evidence points away from, but only the first is a
   claim that the card does not exist. A photograph would overturn a disputed row.
-- **"Spanish" means European Spanish only.** From Journey Together (2025), LATAM-ES is a
-  physically distinct edition for regular sets — different attack translations, set name and set
+- **Every "Spanish" claim here means European Spanish.** From Journey Together (2025), LATAM-ES is
+  a physically distinct edition for regular sets — different attack translations, set name and set
   code (specimen-verified on `SVP 184`). Cardmarket does not carry it, so it is absent from this
   legacy candidate universe; that absence is not evidence that the printing does not exist.
+  LATAM-ES came **into scope on 2026-08-09** as its own locality and no rows are recorded yet —
+  the discovery work is [#139](https://github.com/m4s-ai/snoredex-data/issues/139).
 - **`cardKey` groups the same *card*, not the same *artwork*.** It is Cardmarket's own grouping by
   card name plus attack names, so a reprint with brand-new art shares the key. Useful — it is how
   the re-illustrated reprints were found — but never read it as art identity.

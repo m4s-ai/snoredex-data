@@ -151,7 +151,13 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   same as asserting absence, and `analysis_checklist.json` counts what it left out.
 - **`cardKey` = same card text, not same artwork.** It is Cardmarket's own grouping by name plus
   attack names.
-- **"Spanish" is European Spanish only.** LATAM-ES is a physically distinct edition, out of scope.
+- **"Spanish" is one language across two localities.** European Spanish and LATAM-ES are
+  physically distinct editions, and **both are in scope since 2026-08-09** (owner decision D3 in
+  [`ADR-0001`](verification/ADR-0001-locality-aware-print-identity.md)). Every existing "Spanish"
+  confirmation means the European print and nothing else: Cardmarket collapses both editions into
+  one filter and does not carry LATAM at all, so no LATAM row can come from the harvest. The plan
+  is already written — `RESUME.md` has the source, the scope and the four in-scope cards — and the
+  rows are #139. Never read a European confirmation as covering LATAM.
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in
   `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. To add

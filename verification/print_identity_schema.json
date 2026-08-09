@@ -2,26 +2,44 @@
   "meta": {
     "schema": "snoredex-print-identity",
     "schemaVersion": "0.1.0",
-    "status": "proposed",
+    "status": "accepted — owner decisions recorded 2026-08-09; not in force until #140",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "issue": "https://github.com/m4s-ai/snoredex-data/issues/134",
-    "description": "Node, edge and invariant definitions for the locality-aware physical print identity. Proposed, not in force: no store is keyed by this yet. The dry run in verification/print_identity_dryrun.json maps every legacy row onto it.",
+    "description": "Node, edge and invariant definitions for the locality-aware physical print identity. Accepted as a design, not in force: no store is keyed by this yet. The dry run in verification/print_identity_dryrun.json maps every legacy row onto it.",
     "notAnEvidenceChange": "Authority tiers, providerId, corroboration, absence scopes and owner adjudications are untouched. This schema changes what a claim is about, never what makes it true."
   },
   "nodes": {
     "work": {
       "grain": "one card text and artwork identity, independent of where it was printed",
       "idPattern": "WORK-nnnn",
-      "fields": ["workId", "name", "cardKey", "artist"],
+      "fields": [
+        "workId",
+        "name",
+        "cardKey",
+        "artist"
+      ],
       "note": "cardKey is Cardmarket's grouping by name plus attack names. It groups the same card text, not the same artwork, and stays that way."
     },
     "print": {
       "grain": "one physical localized printing",
       "idPattern": "PRINT-nnnn",
-      "key": ["locality", "localSetCode", "localNumber", "variant"],
+      "key": [
+        "locality",
+        "localSetCode",
+        "localNumber",
+        "variant"
+      ],
       "fields": [
-        "printId", "workId", "locality", "localSetCode", "localNumber", "variant",
-        "language", "script", "localIdentifierKnown", "state"
+        "printId",
+        "workId",
+        "locality",
+        "localSetCode",
+        "localNumber",
+        "variant",
+        "language",
+        "script",
+        "localIdentifierKnown",
+        "state"
       ],
       "states": {
         "identified": "the local set code and collector number are known and recorded",
@@ -32,10 +50,12 @@
     },
     "locality": {
       "grain": "one market or distribution territory",
-      "key": ["localityCode"],
+      "key": [
+        "localityCode"
+      ],
       "values": {
         "WEST": "Western distribution (EU/NA)",
-        "LATAM": "Latin-American distribution",
+        "LATAM": "Latin-American distribution — in scope since 2026-08-09 (owner decision D3); no rows recorded yet, discovery tracked in #139",
         "JP": "Japan",
         "KR": "South Korea",
         "TW": "Taiwan / Traditional-Chinese distribution",
@@ -47,15 +67,25 @@
     },
     "language": {
       "grain": "one printed language",
-      "note": "A dimension of its own. Spanish spans WEST and LATAM; English spans WEST and SEA. Neither may be collapsed into a locality."
+      "note": "A dimension of its own. Spanish spans WEST and LATAM and both are in scope; English spans WEST and SEA. Neither may be collapsed into a locality."
     },
     "script": {
       "grain": "writing system",
-      "values": ["Latn", "Jpan", "Hang", "Hans", "Hant", "Thai"]
+      "values": [
+        "Latn",
+        "Jpan",
+        "Hang",
+        "Hans",
+        "Hant",
+        "Thai"
+      ]
     },
     "local_set": {
       "grain": "one set or product as released in one locality",
-      "key": ["locality", "localSetCode"],
+      "key": [
+        "locality",
+        "localSetCode"
+      ],
       "note": "AS5a is a Traditional-Chinese local set. It is not a translation of sm10; it is its own release with its own numbering."
     },
     "source_record": {
@@ -64,7 +94,13 @@
     },
     "alias": {
       "grain": "an asserted equivalence between a local identifier and a print",
-      "fields": ["aliasType", "rawIdentifier", "printId", "assertedBy", "evidence"],
+      "fields": [
+        "aliasType",
+        "rawIdentifier",
+        "printId",
+        "assertedBy",
+        "evidence"
+      ],
       "aliasTypes": [
         "cardmarket-product",
         "local-code-variant",
@@ -74,12 +110,31 @@
     }
   },
   "edges": {
-    "print--is-a-printing-of-->work": {"cardinality": "many-to-one", "required": true},
-    "print--printed-in-->locality": {"cardinality": "many-to-one", "required": true},
-    "print--printed-in-->language": {"cardinality": "many-to-one", "required": true},
-    "print--belongs-to-->local_set": {"cardinality": "many-to-one", "required": false},
-    "print--evidenced-by-->source_record": {"cardinality": "many-to-many", "required": false},
-    "alias--identifies-->print": {"cardinality": "many-to-one", "required": true, "provenanceBearing": true}
+    "print--is-a-printing-of-->work": {
+      "cardinality": "many-to-one",
+      "required": true
+    },
+    "print--printed-in-->locality": {
+      "cardinality": "many-to-one",
+      "required": true
+    },
+    "print--printed-in-->language": {
+      "cardinality": "many-to-one",
+      "required": true
+    },
+    "print--belongs-to-->local_set": {
+      "cardinality": "many-to-one",
+      "required": false
+    },
+    "print--evidenced-by-->source_record": {
+      "cardinality": "many-to-many",
+      "required": false
+    },
+    "alias--identifies-->print": {
+      "cardinality": "many-to-one",
+      "required": true,
+      "provenanceBearing": true
+    }
   },
   "invariants": {
     "I1": {
@@ -106,8 +161,8 @@
       "enforcedBy": "pending"
     },
     "I6": {
-      "rule": "finish, variant and error classification may not create or erase a regular print identity",
-      "detail": "A no-symbol Jungle error is an attribute of a print unless the owner adjudicates otherwise.",
+      "rule": "an error printing is its own print node, and no classification may create or erase one implicitly",
+      "detail": "Owner decision D4: a no-symbol Jungle (#115) is separately collectible and gets its own row. A finish or variant pass may never mint an error print as a side effect; only positive evidence plus an explicit error classification may. Where error and variant are hard to tell apart, an owner adjudication draws the line, on the mechanism the finish decisions have used since #119.",
       "enforcedBy": "pending"
     },
     "I7": {
@@ -131,12 +186,77 @@
     ]
   },
   "acceptanceFixtures": [
-    {"fixture": "svQP F 012/023", "tests": "a printing with no Cardmarket slot at all", "inLegacyData": false},
-    {"fixture": "JP sm10 076 <-> T-CHN AS5a 142", "tests": "shared work, distinct prints", "inLegacyData": "partial — sm10 076 only; AS5a 142 is specimen SPEC-0024"},
-    {"fixture": "T-CHN SV-P 215 vs svLN 010", "tests": "a Traditional-Chinese print behind a Japanese slot", "inLegacyData": "partial — svLN 010 only"},
-    {"fixture": "S-CHN SV9-075", "tests": "Simplified-Chinese local numbering", "inLegacyData": false},
-    {"fixture": "ID SV9s-109, SV4s-118, SV6s-136", "tests": "Indonesian local numbering", "inLegacyData": false},
-    {"fixture": "EU vs LATAM SVP 184", "tests": "one language across two localities", "inLegacyData": "partial — European only"},
-    {"fixture": "Jungle no-symbol error (#115)", "tests": "an error category that must not mint a print", "inLegacyData": false}
-  ]
+    {
+      "fixture": "svQP F 012/023",
+      "tests": "a printing with no Cardmarket slot at all",
+      "inLegacyData": false
+    },
+    {
+      "fixture": "JP sm10 076 <-> T-CHN AS5a 142",
+      "tests": "shared work, distinct prints",
+      "inLegacyData": "partial — sm10 076 only; AS5a 142 is specimen SPEC-0024"
+    },
+    {
+      "fixture": "T-CHN SV-P 215 vs svLN 010",
+      "tests": "a Traditional-Chinese print behind a Japanese slot",
+      "inLegacyData": "partial — svLN 010 only"
+    },
+    {
+      "fixture": "S-CHN SV9-075",
+      "tests": "Simplified-Chinese local numbering",
+      "inLegacyData": false
+    },
+    {
+      "fixture": "ID SV9s-109, SV4s-118, SV6s-136",
+      "tests": "Indonesian local numbering",
+      "inLegacyData": false
+    },
+    {
+      "fixture": "EU vs LATAM SVP 184",
+      "tests": "one language across two localities",
+      "inLegacyData": "partial — European only"
+    },
+    {
+      "fixture": "Jungle no-symbol error (#115)",
+      "tests": "an error category that must not mint a print",
+      "inLegacyData": false
+    }
+  ],
+  "ownerDecisions": {
+    "decidedOn": "2026-08-09",
+    "D1": {
+      "question": "Do catch-up codes enter the catalogue now or wait for a per-code adjudication?",
+      "decision": "Every catch-up code backed by a physical specimen enters now",
+      "admits": [
+        "AS5a 142",
+        "sc1a F 127/154",
+        "sc1b F 119",
+        "sc1b F 120",
+        "sc1b F 165",
+        "sc1b F 177",
+        "S-P 101",
+        "sc?? F 111/159"
+      ],
+      "excludes": "codes without their own specimen, which stay per-code questions",
+      "landsIn": "a data pass adding the products, units and evidence — not this schema"
+    },
+    "D2": {
+      "question": "Are printings with unknown local identifiers visible to collectors?",
+      "decision": "Visible immediately, marked unresolved",
+      "landsIn": "#140 — needs-local-identifier prints project into the checklist, not out of it"
+    },
+    "D3": {
+      "question": "Is Latin-American Spanish in scope?",
+      "decision": "In scope. European Spanish and LATAM-ES are two localities of one language",
+      "reverses": "the standing 'Spanish means European Spanish only' scope rule",
+      "note": "Cardmarket does not carry LATAM, so the frozen legacy baseline is unaffected and every LATAM row will be a source-first discovery",
+      "landsIn": "scope wording immediately; rows are #139"
+    },
+    "D4": {
+      "question": "Is an error printing its own print, or an attribute of one?",
+      "decision": "Its own print node",
+      "note": "The error/variant boundary is a collector judgement and is drawn by owner adjudication",
+      "landsIn": "invariant I6; #115 is resolved against it"
+    }
+  }
 }

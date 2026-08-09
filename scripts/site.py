@@ -605,8 +605,9 @@ def main() -> int:
       unavailable because a catalogue failed to list it.</li>
       <li><strong>Finish evidence is positive-only</strong> except under a complete official
       manifest — currently {finish_counts['withCompleteManifest']} units.</li>
-      <li><strong>&ldquo;Spanish&rdquo; means European Spanish.</strong> Latin-American Spanish is a
-      physically distinct edition from Journey Together (2025) onward and is out of scope here.</li>
+      <li><strong>Every &ldquo;Spanish&rdquo; row here is European Spanish.</strong> Latin-American
+      Spanish is a physically distinct edition from Journey Together (2025) onward. It came into
+      scope on 2026-08-09 and nothing is recorded yet, so read no row here as covering it.</li>
       {open_claims_note}
     </ul>
   </div>
