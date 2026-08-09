@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "schema": "snoredex-print-identity",
+    "schemaVersion": "0.1.0",
+    "status": "proposed",
+    "adr": "verification/ADR-0001-locality-aware-print-identity.md",
+    "issue": "https://github.com/m4s-ai/snoredex-data/issues/134",
+    "description": "Node, edge and invariant definitions for the locality-aware physical print identity. Proposed, not in force: no store is keyed by this yet. The dry run in verification/print_identity_dryrun.json maps every legacy row onto it.",
+    "notAnEvidenceChange": "Authority tiers, providerId, corroboration, absence scopes and owner adjudications are untouched. This schema changes what a claim is about, never what makes it true."
+  },
+  "nodes": {
+    "work": {
+      "grain": "one card text and artwork identity, independent of where it was printed",
+      "idPattern": "WORK-nnnn",
+      "fields": ["workId", "name", "cardKey", "artist"],
+      "note": "cardKey is Cardmarket's grouping by name plus attack names. It groups the same card text, not the same artwork, and stays that way."
+    },
+    "print": {
+      "grain": "one physical localized printing",
+      "idPattern": "PRINT-nnnn",
+      "key": ["locality", "localSetCode", "localNumber", "variant"],
+      "fields": [
+        "printId", "workId", "locality", "localSetCode", "localNumber", "variant",
+        "language", "script", "localIdentifierKnown", "state"
+      ],
+      "states": {
+        "identified": "the local set code and collector number are known and recorded",
+        "needs-local-identifier": "evidence says this printing exists; its own set code and number are not yet recorded",
+        "queued": "cannot be placed without further evidence, and stays visible until it can"
+      },
+      "note": "localSetCode and localNumber are null exactly when localIdentifierKnown is false. A null is a stated gap, never an inherited value from the slot the printing was sold under."
+    },
+    "locality": {
+      "grain": "one market or distribution territory",
+      "key": ["localityCode"],
+      "values": {
+        "WEST": "Western distribution (EU/NA)",
+        "LATAM": "Latin-American distribution",
+        "JP": "Japan",
+        "KR": "South Korea",
+        "TW": "Taiwan / Traditional-Chinese distribution",
+        "CN": "Mainland China / Simplified-Chinese distribution",
+        "ID": "Indonesia",
+        "TH": "Thailand",
+        "SEA": "South-East Asian regional promo distribution"
+      }
+    },
+    "language": {
+      "grain": "one printed language",
+      "note": "A dimension of its own. Spanish spans WEST and LATAM; English spans WEST and SEA. Neither may be collapsed into a locality."
+    },
+    "script": {
+      "grain": "writing system",
+      "values": ["Latn", "Jpan", "Hang", "Hans", "Hant", "Thai"]
+    },
+    "local_set": {
+      "grain": "one set or product as released in one locality",
+      "key": ["locality", "localSetCode"],
+      "note": "AS5a is a Traditional-Chinese local set. It is not a translation of sm10; it is its own release with its own numbering."
+    },
+    "source_record": {
+      "grain": "one retrieved external record",
+      "note": "Existing evidence ids and provider registry entries. Unchanged by this schema."
+    },
+    "alias": {
+      "grain": "an asserted equivalence between a local identifier and a print",
+      "fields": ["aliasType", "rawIdentifier", "printId", "assertedBy", "evidence"],
+      "aliasTypes": [
+        "cardmarket-product",
+        "local-code-variant",
+        "catalogue-alias"
+      ],
+      "note": "The Cardmarket product is an alias onto a print, not the print's name. svQP and svQPF are two raw identifiers and both survive on the edge."
+    }
+  },
+  "edges": {
+    "print--is-a-printing-of-->work": {"cardinality": "many-to-one", "required": true},
+    "print--printed-in-->locality": {"cardinality": "many-to-one", "required": true},
+    "print--printed-in-->language": {"cardinality": "many-to-one", "required": true},
+    "print--belongs-to-->local_set": {"cardinality": "many-to-one", "required": false},
+    "print--evidenced-by-->source_record": {"cardinality": "many-to-many", "required": false},
+    "alias--identifies-->print": {"cardinality": "many-to-one", "required": true, "provenanceBearing": true}
+  },
+  "invariants": {
+    "I1": {
+      "rule": "language is not locality",
+      "detail": "No consumer may derive a locality from a language label. European and Latin-American Spanish are one language across two localities; SVP 184 is the worked case.",
+      "enforcedBy": "pending — review_integrity.py once the model is in force"
+    },
+    "I2": {
+      "rule": "a print has exactly one (locality, localSetCode, localNumber) within its local set",
+      "enforcedBy": "pending"
+    },
+    "I3": {
+      "rule": "prints sharing a work are still distinct prints",
+      "detail": "Japanese sm10 076 and Traditional-Chinese AS5a 142 share a work edge and are two print nodes.",
+      "enforcedBy": "pending"
+    },
+    "I4": {
+      "rule": "an alias never erases a raw local identifier",
+      "enforcedBy": "pending"
+    },
+    "I5": {
+      "rule": "two records merge only through an explicit, provenance-bearing equivalence decision",
+      "detail": "There is no automatic merge on matching name, number or artwork.",
+      "enforcedBy": "pending"
+    },
+    "I6": {
+      "rule": "finish, variant and error classification may not create or erase a regular print identity",
+      "detail": "A no-symbol Jungle error is an attribute of a print unless the owner adjudicates otherwise.",
+      "enforcedBy": "pending"
+    },
+    "I7": {
+      "rule": "localSetCode and localNumber are null exactly when localIdentifierKnown is false",
+      "detail": "A printing whose local identifiers are unknown must say so rather than inherit the identifiers of the slot it was sold under.",
+      "enforcedBy": "scripts/print_identity_dryrun.py"
+    }
+  },
+  "migrationContract": {
+    "dispositions": {
+      "carried": "one legacy row becomes one print",
+      "split": "one legacy row becomes several prints, one per locality track",
+      "aliased": "the legacy identifier becomes an alias edge onto a print",
+      "queued": "cannot be placed yet; stays visible and is never dropped"
+    },
+    "rules": [
+      "Every legacy member carries exactly one disposition. A member with none fails the dry run.",
+      "A back-projection must reproduce the legacy shape from the graph; if it cannot, the mapping lost something.",
+      "Every legacy baseline member (#133) must resolve to a print or to a recorded disposition. Disappearing is not a disposition.",
+      "Existing verdicts and their evidence migrate as they are. Nothing is re-derived."
+    ]
+  },
+  "acceptanceFixtures": [
+    {"fixture": "svQP F 012/023", "tests": "a printing with no Cardmarket slot at all", "inLegacyData": false},
+    {"fixture": "JP sm10 076 <-> T-CHN AS5a 142", "tests": "shared work, distinct prints", "inLegacyData": "partial — sm10 076 only; AS5a 142 is specimen SPEC-0024"},
+    {"fixture": "T-CHN SV-P 215 vs svLN 010", "tests": "a Traditional-Chinese print behind a Japanese slot", "inLegacyData": "partial — svLN 010 only"},
+    {"fixture": "S-CHN SV9-075", "tests": "Simplified-Chinese local numbering", "inLegacyData": false},
+    {"fixture": "ID SV9s-109, SV4s-118, SV6s-136", "tests": "Indonesian local numbering", "inLegacyData": false},
+    {"fixture": "EU vs LATAM SVP 184", "tests": "one language across two localities", "inLegacyData": "partial — European only"},
+    {"fixture": "Jungle no-symbol error (#115)", "tests": "an error category that must not mint a print", "inLegacyData": false}
+  ]
+}
