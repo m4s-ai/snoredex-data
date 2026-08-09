@@ -55,6 +55,14 @@ verification/ADR-0003-source-capability-coverage.md
                               through explicit locality/category/time coverage edges. Every claimed
                               edge has a positive fixture and a boundary; only exact exhaustive
                               edges may carry absence. PSA/CGC and specimens are positive-only.
+verification/ADR-0004-source-first-adapter-runs.md
+                              ACCEPTED source-first enumeration loop (#147): retained provider runs
+                              start outside the Snorlax/legacy candidate universe, preserve raw
+                              locale records and park every unmapped identity as a visible candidate.
+verification/ADR-0005-legacy-set-reconciliation.md
+                              ACCEPTED bounded backfill (#148): all 135 aliases, 203 release rows
+                              and 637 finish units project into the identity graph or an explicit
+                              needs-evidence/blocked-by-source state. Coverage is versioned and lossless.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
@@ -75,6 +83,10 @@ LESSONS.md                    The incident behind each trap CLAUDE.md states: wh
                               looks arbitrary. Deliberately not auto-loaded.
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
                               finishes, confirmed_releases (chronological). Plus CSV exports.
+analysis_confirmed_releases_reconciled.json / .csv
+                              GENERATED #148 compatibility pair: preserves every legacy release
+                              row/CSV column and appends edition-event migration state and loss
+                              diagnostics under coverage version legacy-set-reconciliation-v1.
 artists_pokemontcgio.json     57 English cards with illustrator + exact release dates.
 verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
@@ -85,13 +97,16 @@ scripts/                      Two halves; only the second can be re-run (#28).
                               LIVE generators, in run order (§7 has the full command list):
                                 analyze -> finishes -> language_status -> confirmed_releases
                                 -> source_registry -> source_capabilities -> source_adapters
+                                -> legacy_set_reconciliation
                                 -> checklist -> readme_stats
                                 -> issue_templates
                                 -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
                               and verifies the Pages artifact). print_identity_dryrun.py and
                               set_catalogue_dryrun.py rebuilds the ADR-0002 graph;
-                              source_adapters.py checks/reprojects retained ADR-0004 runs. See §7.
+                              source_adapters.py checks/reprojects retained ADR-0004 runs; and
+                              legacy_set_reconciliation.py rebuilds the bounded ADR-0005 ledger and
+                              compatibility pair. See §7.
                               analyze.py is the SOLE producer of analysis_artists,
                               _shared_cards, _variants and _language_drift, and reads
                               snorlax_cards.json only — the single canonical node (#30). Its
@@ -141,6 +156,10 @@ verification/
   set_catalogue_dryrun.json   GENERATED ADR-0002 graph and reports. Rebuilt from the independent
                               source registry plus ADR-0001 existence-bearing references; it never
                               creates a card release from set availability.
+  legacy_set_reconciliation.json
+                              GENERATED ADR-0005 migration ledger. It embeds every legacy finish
+                              unit exactly, keeps scalar release dates as raw history, links only
+                              positive edition events, and balances all bounded accounting buckets.
   specimens.json              Physical cards the owner holds and inspected, each with a stable
                               SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
                               instead of describing it in prose. `photograph` is null until the
