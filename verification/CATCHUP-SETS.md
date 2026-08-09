@@ -60,9 +60,15 @@ The owner chose option 1 for every code backed by a physical specimen. `AS5a 142
 [`source_first_prints.json`](source_first_prints.json), keyed by the machine identity this
 document asked for and [`ADR-0001`](ADR-0001-locality-aware-print-identity.md) defines.
 
-`sc1a F 127/154` (SPEC-0011) and `?? 111/159` (SPEC-0015) are **held**: their own specimen records
-decline to assert the set glyph, and a print is keyed by its local set code. They still need
-either a legible glyph or a per-code ruling.
+`sc1a F 127/154` (SPEC-0011) and `scD F 111/159` (SPEC-0015) were held the same day and resolved
+the same day, from owner-supplied cross-checks. Bulbapedia hides Asian set codes in the set symbol
+*image* — `Set A.png` renders `sc1a F`, `Set B.png` renders `sc1b F`, and the Strength V Starter
+Deck's renders `scD F` — and each matches its specimen on number, set size, rarity and regulation
+mark. **All eight specimens are admitted; none is an orphan.** The technique is in
+[`RESUME.md`](RESUME.md).
+
+The trailing `F` marks the Traditional Chinese release of a code that also appears in other
+languages (owner), so it is part of the identifier rather than decoration.
 
 Codes with no specimen of their own — the Simplified-Chinese `sc1a`/`sc1b` rows reachable through
 52poke, and `FXY` — were not covered by D1 and remain open below.

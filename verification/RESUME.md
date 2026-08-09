@@ -247,6 +247,38 @@ Cardmarket's Chinese set names are translations of the Chinese titles; Bulbapedi
 
 Japanese sets rename too — resolve them via `redirects=1` rather than guessing: Tag Bolt → *Team Up*, Matchless Fighters → *Peerless Fighters*, **Shocking Volt Tackle → *Amazing Volt Tackle***, Challenge from the Darkness → *Gym Challenge*, XY Beginning Set → *Kalos Starter Set*, BREAK Starter Pack → *Generations*.
 
+### The Asian set code is in the set symbol *image*, never in the page text
+
+Bulbapedia does not write Asian set codes anywhere in its wikitext. `Sword & Shield (ATCG)`
+contains the string `sc1` exactly zero times: it calls the two halves **Set A** and **Set B**, and
+the code lives in the set symbol image the setlist header points at. Fetch and read the image.
+
+```console
+curl -sG https://bulbapedia.bulbagarden.net/w/api.php \
+  --data-urlencode "action=query" --data-urlencode "prop=imageinfo" \
+  --data-urlencode "iiprop=url" --data-urlencode "format=json" \
+  --data-urlencode "titles=File:SetSymbolSword Shield Set A.png"
+```
+
+Confirmed this way on 2026-08-09: `Set A.png` → **`sc1a F`**, `Set B.png` → **`sc1b F`**,
+`SetSymbolStrength V Starter Deck Chinese.png` → **`scD F`**. The images are tiny (48×28 to
+120×68) — upscale before reading, and composite onto white first because they are RGBA with a
+transparent ground.
+
+The trailing **`F`** marks the Traditional Chinese release of a code that also appears in other
+languages (owner, 2026-08-09) — so `scD` and `scD F` are different things and the F is part of the
+identifier, not decoration.
+
+Two corroborations that were otherwise unreachable came from this: `sc1a F 127/154` (SPEC-0011,
+whose own record said to treat the code as unconfirmed) and `scD F 111/159` (SPEC-0015, whose
+record declined to assert the glyph at all). Match on **number, set size, rarity and regulation
+mark** together — Bulbapedia's setlist entries carry all four, so a match on all four is a real
+identification rather than a coincidence of numbering.
+
+Related trap: a card's own glyph may look illegible at the resolution you happen to be viewing.
+SPEC-0015's photograph is 3508×2480 and reads `scD F` cleanly once cropped to the corner. Check
+the stored resolution before recording a glyph as unreadable.
+
 ### Market-history rule — the highest-yield technique for Asian languages
 
 Bulbapedia's country articles carry a TCG section that dates when a language market opened. That settles whole eras at once instead of one set at a time (`verification/verification/archive/passes/verify_market_history.ps1`, an archived one-shot — never rerun it):

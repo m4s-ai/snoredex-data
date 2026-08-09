@@ -169,17 +169,21 @@ a card Cardmarket never listed, which is the conflation this ADR exists to end. 
 asked for a "`snorlax_cards.json`-*adjacent* entry requiring a machine identity per code"; this is
 that entry.
 
-Two are held, and the reason is in the specimens' own words rather than in a judgement made here:
+Both entries that were held on 2026-08-09 were resolved the same day, from cross-checks the owner
+supplied. `SPEC-0011` is `sc1a F 127/154` and `SPEC-0015` is `scD F 111/159`, so **all eight
+specimens are admitted and none is an orphan.**
 
-| Specimen | Proposed | Why it is held |
-|---|---|---|
-| `SPEC-0011` | `sc1a F 127/154` | "the set glyph is not fully legible … treat the set code as **unconfirmed**" |
-| `SPEC-0015` | `?? 111/159` | "the set glyph … is **deliberately not asserted** here" |
+Neither code was guessed. Bulbapedia writes Asian set codes nowhere in its page text — the string
+`sc1` does not occur in `Sword & Shield (ATCG)` at all — and puts them in the set symbol image the
+setlist header points at. Read those images and `Set A.png` renders `sc1a F`, `Set B.png` renders
+`sc1b F`, and the Strength V Starter Deck's renders `scD F`. Each matches its specimen on number,
+set size, rarity and regulation mark together. The technique is recorded in
+[`RESUME.md`](RESUME.md); it is the reachable route to an Asian set code and nothing in the page
+text will ever give it to you.
 
-A print is keyed by its local set code. Admitting these two means choosing one the evidence
-refuses to state, which is exactly what I7 forbids. `SPEC-0015` is the sharper case: it is the one
-specimen the owner photographed personally, so the card is not in doubt — only its set is. Both
-wait for a legible glyph or an owner ruling on the code, and `N5` holds the line meanwhile.
+`SPEC-0015` carried a second lesson worth keeping: its record called the glyph illegible, but the
+stored photograph is 3508×2480 and reads cleanly once cropped. The limit was the view, not the
+image.
 
 Two admitted entries carry a caveat rather than a clean bill:
 

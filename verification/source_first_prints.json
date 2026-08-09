@@ -8,11 +8,28 @@
     "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
     "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
     "counts": {
-      "admitted": 6,
-      "held": 2
+      "admitted": 8,
+      "held": 0
     }
   },
   "prints": [
+    {
+      "printId": "KR:S-P:101:base",
+      "locality": "KR",
+      "localSetCode": "S-P",
+      "localNumber": "101",
+      "variant": "base",
+      "language": "Korean",
+      "script": "Hang",
+      "name": "잠만보",
+      "cardName": "Snorlax",
+      "catchUpOf": null,
+      "specimenId": "SPEC-0014",
+      "providerId": "owner-attestation",
+      "sourceUrl": "https://github.com/user-attachments/assets/7302c36e-1046-458a-a397-4e594916f682",
+      "corroborated": false,
+      "evidence": "Korean Snorlax on a database scan: HP 140, Basic, Single Strike (일격) marker, attacks 「뺨때리기」 30 and 「일격태클」 120, Illus. Yuya Oka, \"101/S-P\", PROMO, regulation mark D, ©2021. The printing and its identifiers are what this record establishes. OPEN: units.json records for S-P 156 state that S-P 101 is a different card, and the owner presents it as the Korean counterpart. That is an equivalence assertion about which work this print realizes; invariant I5 requires an explicit decision for it and none is made here."
+    },
     {
       "printId": "TW:AS5a:142:base",
       "locality": "TW",
@@ -31,6 +48,23 @@
       "evidence": "Traditional Chinese Snorlax on the 52poke wiki card image: HP 150, Basic, Ability 「吃食不專」, attack 「大反擊」60+, Illus. kawayoo, card number 142 with the AS5a set glyph. The owner confirms in #84 that this is the Traditional Chinese catch-up-set printing existing under its own AS5a 142 code rather than as an sm10 language, so a second provider agrees about this printing."
     },
     {
+      "printId": "TW:sc1a F:127/154:base",
+      "locality": "TW",
+      "localSetCode": "sc1a F",
+      "localNumber": "127/154",
+      "variant": "base",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "name": "卡比獸",
+      "cardName": "Snorlax",
+      "catchUpOf": "the Japanese s2 77 printing, per the owner's identification",
+      "specimenId": "SPEC-0011",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_(ATCG)",
+      "corroborated": true,
+      "evidence": "Traditional Chinese Snorlax, HP 150, Basic, attacks 「呼喚」 (draw 2) and 「倒下」 120, Illus. Eri Yamaki, 127/154, rarity U, regulation mark D, ©2020. Bulbapedia's Sword & Shield (ATCG) set list carries 127/154 Snorlax, Colorless, rarity U, regulation mark D. The set code is not text on that page — Bulbapedia names the halves Set A and Set B and encodes the code in the set symbol image, and https://archives.bulbagarden.net/media/upload/5/5c/SetSymbolSword_Shield_Set_A.png renders \"sc1a F\". The badge on the card (SPEC-0011) is that same glyph. Two providers agree about this printing: the Bulbapedia set list and the seller's photograph of the card."
+    },
+    {
       "printId": "TW:sc1b F:119/153:base",
       "locality": "TW",
       "localSetCode": "sc1b F",
@@ -44,8 +78,8 @@
       "specimenId": "SPEC-0009",
       "providerId": "retailer-listing",
       "sourceUrl": "https://github.com/user-attachments/assets/aaa33550-cdd4-49e8-95ab-8c07cf67a0dd",
-      "corroborated": false,
-      "evidence": "Traditional Chinese Snorlax V: HP 220, attacks 「吞下」 60 and 「摔下」 170, Illus. Masakazu Fukuda, \"sc1b F\" with regulation mark D, \"119/153\", rarity RR, ©2020. CAVEAT carried from SPEC-0009: the image bears a SAMPLE overlay, so it is a pre-release or database sample rather than a photograph of a printed card. The sc1b F set is established by SPEC-0007, SPEC-0008 and SPEC-0010; what this record supports is the 119/153 slot within it."
+      "corroborated": true,
+      "evidence": "Traditional Chinese Snorlax V: HP 220, attacks 「吞下」 60 and 「摔下」 170, Illus. Masakazu Fukuda, \"sc1b F\" with regulation mark D, \"119/153\", rarity RR, ©2020. CAVEAT carried from SPEC-0009: the image bears a SAMPLE overlay, so it is a pre-release or database sample rather than a photograph of a printed card. The sc1b F set is established by SPEC-0007, SPEC-0008 and SPEC-0010; what this record supports is the 119/153 slot within it. CORROBORATED 2026-08-09: Bulbapedia's Sword & Shield (ATCG) Set B list carries 119/153 Snorlax V, Colorless, rarity RR, matching this record, and the Set B symbol image (https://archives.bulbagarden.net/media/upload/5/5b/SetSymbolSword_Shield_Set_B.png) renders the code \"sc1b F\"."
     },
     {
       "printId": "TW:sc1b F:120/153:base",
@@ -61,8 +95,8 @@
       "specimenId": "SPEC-0007",
       "providerId": "retailer-listing",
       "sourceUrl": "https://github.com/user-attachments/assets/5052ddbb-276c-4734-baa2-a0a3c2dd74d7",
-      "corroborated": false,
-      "evidence": "Traditional Chinese Snorlax VMAX read off a seller's listing image (watermark 佛系工作室 / FOSI TCG STUDIO): HP 340, Colorless, evolves from 卡比獸V, attack 「超極巨自由墜落」 60+, Illus. aky CG Works, \"sc1b F\" with regulation mark D, \"120/153\", rarity RRR, ©2020."
+      "corroborated": true,
+      "evidence": "Traditional Chinese Snorlax VMAX read off a seller's listing image (watermark 佛系工作室 / FOSI TCG STUDIO): HP 340, Colorless, evolves from 卡比獸V, attack 「超極巨自由墜落」 60+, Illus. aky CG Works, \"sc1b F\" with regulation mark D, \"120/153\", rarity RRR, ©2020. CORROBORATED 2026-08-09: Bulbapedia's Sword & Shield (ATCG) Set B list carries 120/153 Snorlax VMAX, Colorless, rarity RRR, matching this record, and the Set B symbol image (https://archives.bulbagarden.net/media/upload/5/5b/SetSymbolSword_Shield_Set_B.png) renders the code \"sc1b F\"."
     },
     {
       "printId": "TW:sc1b F:165/153:base",
@@ -78,8 +112,8 @@
       "specimenId": "SPEC-0010",
       "providerId": "retailer-listing",
       "sourceUrl": "https://github.com/user-attachments/assets/0766a589-2407-486b-8cf5-438a612b8d66",
-      "corroborated": false,
-      "evidence": "Traditional Chinese Snorlax V full art read off a watermarked seller's listing image: HP 220, attacks 「吞下」 60 and 「摔下」 170, Illus. aky CG Works, \"sc1b F\" with regulation mark D, \"165/153\", rarity SR, ©2020. Secret-numbered above the 153-card set size."
+      "corroborated": true,
+      "evidence": "Traditional Chinese Snorlax V full art read off a watermarked seller's listing image: HP 220, attacks 「吞下」 60 and 「摔下」 170, Illus. aky CG Works, \"sc1b F\" with regulation mark D, \"165/153\", rarity SR, ©2020. Secret-numbered above the 153-card set size. CORROBORATED 2026-08-09: Bulbapedia's Sword & Shield (ATCG) Set B list carries 165/153 Snorlax V, Colorless, rarity SR, matching this record, and the Set B symbol image (https://archives.bulbagarden.net/media/upload/5/5b/SetSymbolSword_Shield_Set_B.png) renders the code \"sc1b F\"."
     },
     {
       "printId": "TW:sc1b F:177/153:base",
@@ -95,43 +129,26 @@
       "specimenId": "SPEC-0008",
       "providerId": "retailer-listing",
       "sourceUrl": "https://github.com/user-attachments/assets/65ea5eff-7441-47a4-8750-47c03822f3d8",
-      "corroborated": false,
-      "evidence": "Traditional Chinese Snorlax VMAX rainbow rare read off a watermarked seller's listing image: HP 340, attack 「超極巨自由墜落」 60+, Illus. aky CG Works, \"sc1b F\" with regulation mark D, \"177/153\", rarity HR, ©2020. Secret-numbered above the 153-card set size, the hyper-rare slot."
+      "corroborated": true,
+      "evidence": "Traditional Chinese Snorlax VMAX rainbow rare read off a watermarked seller's listing image: HP 340, attack 「超極巨自由墜落」 60+, Illus. aky CG Works, \"sc1b F\" with regulation mark D, \"177/153\", rarity HR, ©2020. Secret-numbered above the 153-card set size, the hyper-rare slot. CORROBORATED 2026-08-09: Bulbapedia's Sword & Shield (ATCG) Set B list carries 177/153 Snorlax VMAX, Colorless, rarity HR, matching this record, and the Set B symbol image (https://archives.bulbagarden.net/media/upload/5/5b/SetSymbolSword_Shield_Set_B.png) renders the code \"sc1b F\"."
     },
     {
-      "printId": "KR:S-P:101:base",
-      "locality": "KR",
-      "localSetCode": "S-P",
-      "localNumber": "101",
+      "printId": "TW:scD F:111/159:base",
+      "locality": "TW",
+      "localSetCode": "scD F",
+      "localNumber": "111/159",
       "variant": "base",
-      "language": "Korean",
-      "script": "Hang",
-      "name": "잠만보",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "name": "卡比獸",
       "cardName": "Snorlax",
       "catchUpOf": null,
-      "specimenId": "SPEC-0014",
-      "providerId": "owner-attestation",
-      "sourceUrl": "https://github.com/user-attachments/assets/7302c36e-1046-458a-a397-4e594916f682",
-      "corroborated": false,
-      "evidence": "Korean Snorlax on a database scan: HP 140, Basic, Single Strike (일격) marker, attacks 「뺨때리기」 30 and 「일격태클」 120, Illus. Yuya Oka, \"101/S-P\", PROMO, regulation mark D, ©2021. The printing and its identifiers are what this record establishes. OPEN: units.json records for S-P 156 state that S-P 101 is a different card, and the owner presents it as the Korean counterpart. That is an equivalence assertion about which work this print realizes; invariant I5 requires an explicit decision for it and none is made here."
+      "specimenId": "SPEC-0015",
+      "providerId": "inspected-specimen",
+      "sourceUrl": "https://github.com/user-attachments/assets/25528966-476a-4a82-bcaf-d9e1f76e8584",
+      "corroborated": true,
+      "evidence": "Traditional Chinese Snorlax photographed front and back by the owner: HP 140, Basic, SINGLE STRIKE 一擊 marker, attacks 「巴掌撲擊」 30 and 「一擊衝撞」 120, Illus. Yuya Oka, ©2021. The lower-left corner reads \"scD F\", regulation mark E, \"111/159\" at full resolution — the earlier record's \"glyph not legible\" described a downscaled view. The owner confirms the trailing F marks the Traditional Chinese release of a set code that also appears in other languages. Bulbapedia's Strength V Starter Deck (ATCG) corroborates it: the deck list carries 111/159 Snorlax, Colorless, regulation mark E, its Traditional Chinese release is October 2021 against the card's ©2021, and its set symbol image (https://archives.bulbagarden.net/media/upload/6/67/SetSymbolStrength_V_Starter_Deck_Chinese.png) renders \"scD F\". Two providers agree about this printing: the owner's card and the Bulbapedia deck list."
     }
   ],
-  "held": [
-    {
-      "specimenId": "SPEC-0011",
-      "proposedSetCode": "sc1a F",
-      "localNumber": "127/154",
-      "language": "T-Chinese",
-      "blockedBy": "the set glyph is not fully legible at this resolution and is recorded as sc1a F on the owner's identification — treat the set code as unconfirmed",
-      "reason": "A print is keyed by its local set code. Admitting this one means asserting a set code the specimen explicitly declines to assert, which invariant I7 forbids."
-    },
-    {
-      "specimenId": "SPEC-0015",
-      "proposedSetCode": null,
-      "localNumber": "111/159",
-      "language": "T-Chinese",
-      "blockedBy": "the set glyph is not legible — it reads as a two-or-three character code ending in F and is deliberately not asserted",
-      "reason": "The number is established and the set code is unknown. This is the one specimen the owner photographed personally, so the card is not in doubt; only its set is. It waits for a legible glyph or an owner ruling on the code."
-    }
-  ]
+  "held": []
 }
