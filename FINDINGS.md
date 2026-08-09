@@ -52,7 +52,7 @@ Two genuine outliers, both worth knowing about:
   distribution — a real drift case, not a data error.
 
 <!-- generated:market-split — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-The market split across all 198: Western 87 · Japanese 68 · Simplified Chinese 37 · SEA promo 5 · Traditional Chinese 1.
+The market split across all 198 legacy Cardmarket singles: Western 87 · Japanese 68 · Simplified Chinese 37 · SEA promo 5 · Traditional Chinese 1.
 <!-- /generated:market-split -->
 
 `market` records which regional catalogue Cardmarket lists a product in — a marketplace claim, like

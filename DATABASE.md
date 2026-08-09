@@ -1,10 +1,12 @@
 <!-- doc: role=application database and tracker contract; stage=reference -->
 # Application database and collection tracker
 
-[`snoredex.sqlite`](snoredex.sqlite) is the clean current-state handoff for applications. It joins
-the repository's product catalogue, language verdicts, editions, release dates, finish model,
-physical checklist and provider metadata. It deliberately excludes the append-only evidence
-journal and migration/pass history.
+[`snoredex.sqlite`](snoredex.sqlite) is the clean current-known handoff for applications. It joins
+the repository's legacy Cardmarket-derived products, language verdicts, editions, release dates,
+finish model, physical checklist and provider metadata. Its candidate denominator is recorded in
+[`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json); it is not a complete
+all-locality catalogue. The database deliberately excludes the append-only evidence journal and
+migration/pass history.
 
 The source JSON files remain authoritative. Regenerate and validate the database with:
 
@@ -46,7 +48,7 @@ negative printing claim.
 
 | Table | Grain |
 |---|---|
-| `products` | Cardmarket product id. All 198 ids are explicit and unique. |
+| `products` | Legacy Cardmarket product id. All 198 baseline ids are explicit and unique. |
 | `product_market_state` | Exactly one dated current marketplace availability snapshot per product; not timeless card identity and not a history table. |
 | `product_languages` | Product × raw Cardmarket language claim, with current evidence verdict. |
 | `owner_adjudications` | One explicit collection-owner application decision per adjudicated language unit, with rationale and evidence references. |

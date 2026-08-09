@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import importlib.util
 import os
 import re
 import contextlib
@@ -405,7 +406,7 @@ def collect() -> None:
         LIVE_STEPS = {
             "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
             "source_registry.py", "checklist.py", "readme_stats.py", "issue_templates.py",
-            "open_items.py", "site.py", "editions.py", "publish.py",
+            "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
         }
 
         # The harvest steps and `mkunits` moved to verification/archive/passes/ once #28 had captured the
@@ -470,6 +471,63 @@ def collect() -> None:
             "FAIL",
             all(re.search(r"not reproducible|nicht reproduzierbar", text) for text in rebuild_docs.values()),
             "README and HANDOVER must both say the harvest cannot be re-run, or the next reader will try.",
+        )
+
+    with guarded("G2b", "legacy candidate universe"):
+        # --------------------------------------------------------------------------- #
+        # B5-B7 — the harvest is a boundary, and the boundary is a contract (#133)
+        # --------------------------------------------------------------------------- #
+        # The candidate universe was one 2026-07-21 Cardmarket search. Verification can check what
+        # that search returned and nothing else, so a closed queue is not a discovered catalogue —
+        # the missing Traditional Chinese svQP F 012/023 is the worked case, and #132 is the fix.
+        #
+        # Loaded by path rather than by prepending scripts/ to sys.path: that directory holds a
+        # `database`, a `site` and a `checklist` module, and putting it first shadows names for
+        # every import after this one.
+        spec = importlib.util.spec_from_file_location(
+            "legacy_baseline", ROOT / "scripts" / "legacy_baseline.py")
+        legacy_baseline = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(legacy_baseline)
+
+        baseline_problems, reconstructed = legacy_baseline.manifest_problems()
+        membership, added = legacy_baseline.membership_problems()
+        scope_problems = legacy_baseline.scope_claim_problems()
+
+        # Reconstruction reads git history, which a shallow clone does not have — the same
+        # condition P6 reports. A clone that cannot answer the question has not answered it, so it
+        # says so rather than passing quietly.
+        check(
+            "B5",
+            "Legacy candidate universe still matches the files at its pinned commit",
+            "FAIL" if reconstructed else "INFO",
+            not baseline_problems,
+            f"baseline problems: {baseline_problems[:4]}" if reconstructed
+            else "shallow clone: reconstruction skipped, like P6. git fetch --unshallow to run it.",
+        )
+        # The one that earns the artifact. Without it the manifest verifies only itself, and a pass
+        # could drop a legacy row, regenerate everything coherently and stay green everywhere.
+        check(
+            "B6",
+            "Every frozen legacy member is still present in the live stores",
+            "FAIL",
+            not membership,
+            f"membership problems: {membership[:4]}",
+        )
+        check(
+            "B7",
+            "Live and public surfaces qualify the legacy scope",
+            "FAIL",
+            not scope_problems,
+            f"scope problems: {scope_problems[:6]}",
+        )
+        # Growth is the point of #132, so it is reported and never faulted.
+        check(
+            "B8",
+            "Candidate rows added since the freeze",
+            "INFO",
+            True,
+            f"+{added.get('cardsAdded', 0)} cards, +{added.get('unitsAdded', 0)} language units "
+            f"beyond the frozen baseline",
         )
 
     with guarded("G3", "image formats"):

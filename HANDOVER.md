@@ -13,6 +13,12 @@ are not restated here — a second copy is a copy that goes stale.
 | How do I add or change evidence? | [`verification/RESUME.md`](verification/RESUME.md) — read it before touching a confirmation or contradiction |
 | How do I *use* the data? | [`README.md`](README.md), with [`FINDINGS.md`](FINDINGS.md) for what fell out of building it |
 | Why does this rule exist? | [`LESSONS.md`](LESSONS.md) — the incident behind each trap |
+| What is the data's scope, and what is it *not*? | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) — the frozen boundary, below |
+
+The data here descends from a **legacy Cardmarket-derived candidate universe**: one marketplace
+search captured on 2026-07-21. Verification can check what that search returned; it cannot discover
+a printing Cardmarket never listed, which is why a resolved queue is not a finished catalogue. The
+source-first rebuild is [#132](https://github.com/m4s-ai/snoredex-data/issues/132).
 
 ---
 
@@ -24,6 +30,12 @@ snorlax_cards.json            MAIN dataset: 198 singles, one object each. Fields
                               variantToken (V1/V2/V3), variantName (+source), variantAxes,
                               cardKey, artist(+source), editions{}, finishAvailability{}, market,
                               meta{}.
+legacy-cardmarket-baseline.json
+                              IMMUTABLE LEGACY BOUNDARY: source commit, file hashes and the
+                              membership of the 2026-07-21 harvest. Membership is a floor — every
+                              member must still exist in the live stores, and new candidates are
+                              added to those stores, never to this file. It records no verification
+                              state, deliberately.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
