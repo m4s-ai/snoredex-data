@@ -733,6 +733,49 @@ def collect() -> None:
         # exactly that reason, and holding them is the check passing, not failing.
         guessed = [entry["specimenId"] for entry in source_first["held"]
                    if entry.get("proposedSetCode") and not entry.get("blockedBy")]
+        # N16 — a contradiction may not deny a printing another store establishes (#137)
+        # --------------------------------------------------------------------------- #
+        # #137's first named failure: a pass "contradicts a card because a cross-language
+        # expansion index has no entry". Five units concluded "no T-Chinese printing of this card
+        # should exist" from index silence, while a corroborated Traditional Chinese printing of
+        # each sat in source_first_prints.json under its own catch-up code.
+        #
+        # The verdicts were right about the Japanese slot and wrong in the sentence they wrote, so
+        # the repair narrowed the inference rather than flipping the verdict. This keeps the
+        # narrowing: a contradiction that denies a card in a language, while an admitted print
+        # establishes that card in that language, has to say which of the two it means.
+        established_langs = {(p["cardName"], p["language"]) for p in source_first["prints"]}
+        counterpart_langs = set()
+        for entry in source_first["prints"]:
+            catch_up = str(entry.get("catchUpOf") or "")
+            match = re.search(r"\b([A-Za-z][A-Za-z0-9-]*)\s+0*(\d+)\b", catch_up)
+            if match:
+                counterpart_langs.add((match.group(1), str(int(match.group(2))),
+                                       entry["language"]))
+        CARD_LEVEL_ABSENCE = re.compile(
+            r"no [^.]{0,30}printing of this card|this card [^.]{0,25}(?:does not|should not) exist",
+            re.IGNORECASE)
+        denies = []
+        for unit in units:
+            if unit["status"] != "contradicted":
+                continue
+            evidence = unit.get("evidence") or ""
+            if not CARD_LEVEL_ABSENCE.search(evidence):
+                continue
+            number = str(unit.get("number") or "").lstrip("0") or "0"
+            if (unit["setCode"], number, unit["language"]) in counterpart_langs \
+                    and "SCOPE CORRECTION" not in evidence:
+                denies.append(unit["unitId"])
+        check(
+            "N16",
+            "No contradiction denies a printing that an admitted record establishes",
+            "FAIL",
+            not denies,
+            f"{len(denies)} contradiction(s) claim this card has no printing in a language where "
+            f"source_first_prints.json establishes one, with no scope correction: {denies[:5]}. "
+            f"Narrow the inference to the slot the source covers; do not flip the verdict.",
+        )
+
         # N7 — the migration contract's back-projection rule, enforced rather than asserted
         # --------------------------------------------------------------------------- #
         # print_identity_schema.json states "A back-projection reproduces the legacy/source
