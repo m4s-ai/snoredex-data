@@ -1,0 +1,4992 @@
+{
+  "meta": {
+    "schema": "snoredex-set-catalogue-sources",
+    "schemaVersion": "0.1.0",
+    "generated": "2026-08-09",
+    "status": "authoritative immutable source-record registry; extend through reviewed passes",
+    "decision": "ADR-0002 D1",
+    "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in set_catalogue_dryrun.json.",
+    "counts": {
+      "sourceRecords": 187,
+      "legacySetProfiles": 135,
+      "sourceFirstLocalSets": 5,
+      "releaseDateRecords": 45,
+      "editionAvailabilityRecords": 2
+    }
+  },
+  "sourceRecords": [
+    {
+      "sourceRecordId": "SET-SRC-BP-AVAIL-1E3BBC48CFC6",
+      "sourceKind": "edition-availability-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Skyridge (TCG)",
+      "retrieved": "2026-08-09",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Skyridge_(TCG)",
+      "raw": {
+        "localCode": "SK",
+        "page": "Skyridge (TCG)",
+        "languages": [
+          "English",
+          "German",
+          "Italian"
+        ],
+        "rarities": {
+          "Common": 150,
+          "Rare Holo": 76,
+          "Uncommon": 71,
+          "Rare": 67
+        },
+        "basis": "Counted from the page's setlist entries on 2026-08-09.",
+        "finishProfile": {
+          "statement": "\"The Skyridge set is released in English, German, and Italian, with all cards except the \\\"H/32\\\" cards also available as Reverse Holos. In a change from Aquapolis, the secret rare cards are also available as Reverse Holos.\"",
+          "scope": "the three languages named, excepting the H/32 subset",
+          "closedWithinScope": true
+        }
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-AVAIL-59E64A118763",
+      "sourceKind": "edition-availability-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Gym Challenge (TCG)",
+      "retrieved": "2026-08-09",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Gym_Challenge_(TCG)",
+      "raw": {
+        "localCode": null,
+        "page": "Gym Challenge (TCG)",
+        "languages": null,
+        "rarities": {
+          "Common": 75,
+          "Uncommon": 74,
+          "Rare": 37,
+          "Rare Holo": 36,
+          "None": 6,
+          "W Promo": 1,
+          "SuperRare": 1
+        },
+        "basis": "Counted from the page's setlist entries on 2026-08-09. Recorded as the worked example for the Rare versus Rare Holo marker; no Snorlax is in this set.",
+        "finishProfile": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-04918A893A9C",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Kalos Starter Set (TCG)#jarelease:HXY",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "HXY",
+        "page": "Kalos Starter Set (TCG)",
+        "field": "jarelease",
+        "date": "2013-11-08",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": "First standard Beginning Set release; the DX versions followed on November 15."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-08C8C544FA2D",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Blade Awakening (ATCG)#release:CSV7C",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSV7C",
+        "page": "Blade Awakening (ATCG)",
+        "field": "release",
+        "date": "2026-01-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-145279686365",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Gym Challenge (TCG)#jarelease:G2",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "G2",
+        "page": "Gym Challenge (TCG)",
+        "field": "jarelease",
+        "date": "1999-06-25",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-1663BE889889",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Vivid Portrayals (ATCG)#release:CS2aC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CS2aC",
+        "page": "Vivid Portrayals (ATCG)",
+        "field": "release",
+        "date": "2023-08-18",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-19933051D116",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Battle Party Set (ATCG)#release:CSMPC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSMPC",
+        "page": "Battle Party Set (ATCG)",
+        "field": "release",
+        "date": "2023-04-15",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-1BB2DB79A1C2",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "EX Dragon Frontiers (TCG)#enrelease:DF",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "DF",
+        "page": "EX Dragon Frontiers (TCG)",
+        "field": "enrelease",
+        "date": "2006-11-08",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "WEST",
+        "languageScope": "English",
+        "marketScopes": [
+          "WEST"
+        ],
+        "marketScopeBasis": "provider field enrelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-22E5715594C4",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Pokémon Card Display Set Gift Box Vol. 3 (ATCG)#release:CSUC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSUC",
+        "page": "Pokémon Card Display Set Gift Box Vol. 3 (ATCG)",
+        "field": "release",
+        "date": "2024-10-26",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-2AC19BA9E6B1",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Gallant Galaxy (ATCG)#release:CS5aC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CS5aC",
+        "page": "Gallant Galaxy (ATCG)",
+        "field": "release",
+        "date": "2024-06-18",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-2B18162E4B87",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Start Deck 100 Battle Collection (TCG)#release:mC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "mC",
+        "page": "Start Deck 100 Battle Collection (TCG)",
+        "field": "release",
+        "date": "2025-12-19",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-2B8BBAACE896",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Lost Link (TCG)#date:LL",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "LL",
+        "page": "Lost Link (TCG)",
+        "field": "date",
+        "date": "2010-04-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-43F82BFE00C5",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Skyridge (TCG)#jarelease:EC5",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "EC5",
+        "page": "Skyridge (TCG)",
+        "field": "jarelease",
+        "date": "2002-10-04",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": "Mysterious Mountains is the second of the two Japanese component sets listed in this field."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-4B2C2AA78201",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Flashfire (TCG)#jarelease:XY2",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "XY2",
+        "page": "Flashfire (TCG)",
+        "field": "jarelease",
+        "date": "2014-03-15",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-51F1B740554D",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Plasma Storm (TCG)#jarelease:BW7",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "BW7",
+        "page": "Plasma Storm (TCG)",
+        "field": "jarelease",
+        "date": "2012-09-14",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-54C51EA13E7F",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Marine Shadow (ATCG)#release:CS6bC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CS6bC",
+        "page": "Marine Shadow (ATCG)",
+        "field": "release",
+        "date": "2024-09-20",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-5B172C6DAA3E",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Pikachu & Clefairy & Turtwig & Gimmighoul Happy Set (ATCG)#release:CSVH1C",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSVH1C",
+        "page": "Pikachu & Clefairy & Turtwig & Gimmighoul Happy Set (ATCG)",
+        "field": "release",
+        "date": "2025-01-17",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-5BCD5B09A575",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Nihil Zero (TCG)#jarelease:m3",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "m3",
+        "page": "Nihil Zero (TCG)",
+        "field": "jarelease",
+        "date": "2026-01-23",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-5CAF502EA702",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "EX Team Rocket Returns (TCG)#jarelease:PCG3",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "PCG3",
+        "page": "EX Team Rocket Returns (TCG)",
+        "field": "jarelease",
+        "date": "2004-10-15",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-5F03AAED72A5",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Peripheral Collection Gift Box: Variety Treasure Box (ATCG)#release:CSZC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSZC",
+        "page": "Peripheral Collection Gift Box: Variety Treasure Box (ATCG)",
+        "field": "release",
+        "date": "2024-11-15",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-62786B18076B",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Jungle (TCG)#jarelease:PJU",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "PJU",
+        "page": "Jungle (TCG)",
+        "field": "jarelease",
+        "date": "1997-03-05",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-641EF40B0382",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "EX Team Rocket Returns (TCG)#enrelease:TRR",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "TRR",
+        "page": "EX Team Rocket Returns (TCG)",
+        "field": "enrelease",
+        "date": "2004-11-08",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "WEST",
+        "languageScope": "English",
+        "marketScopes": [
+          "WEST"
+        ],
+        "marketScopeBasis": "provider field enrelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-644A97FCB759",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Dynamax Clash Deck Building Gift Box (ATCG)#release:CSAC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSAC",
+        "page": "Dynamax Clash Deck Building Gift Box (ATCG)",
+        "field": "release",
+        "date": "2023-05-19",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-678F6966A72A",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Rising Rivals (TCG)#jarelease:Pt2",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "Pt2",
+        "page": "Rising Rivals (TCG)",
+        "field": "jarelease",
+        "date": "2008-12-26",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-6B6414EE501D",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Battle Academy 2020 (TCG)#release:BA20",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "BA20",
+        "page": "Battle Academy 2020 (TCG)",
+        "field": "release",
+        "date": "2020-06-21",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "WEST",
+        "languageScope": "English",
+        "marketScopes": [
+          "US"
+        ],
+        "marketScopeBasis": "source note says earliest US release",
+        "note": "Earliest US release; the international release followed on July 31."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-6B7E4329CF80",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Shining Synergy GX Starter Deck (ATCG)#release:CSM2DC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSM2DC",
+        "page": "Shining Synergy GX Starter Deck (ATCG)",
+        "field": "release",
+        "date": "2023-01-18",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-7428C9F53DAA",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Dynamax Clash V Starter Deck (ATCG)#release:CS1DC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CS1DC",
+        "page": "Dynamax Clash V Starter Deck (ATCG)",
+        "field": "release",
+        "date": "2023-05-19",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-7D4F97250224",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "National Beginning Set (TCG)#release:HSZ",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "HSZ",
+        "page": "National Beginning Set (TCG)",
+        "field": "release",
+        "date": "2012-04-20",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-7E11FEBAE7C1",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Primordial Arts V Starter Deck (ATCG)#release:CS3DC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CS3DC",
+        "page": "Primordial Arts V Starter Deck (ATCG)",
+        "field": "release",
+        "date": "2023-11-17",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-9A89A862F14C",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "EX FireRed & LeafGreen (TCG)#enrelease:FL",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "FL",
+        "page": "EX FireRed & LeafGreen (TCG)",
+        "field": "enrelease",
+        "date": "2004-08-30",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "WEST",
+        "languageScope": "English",
+        "marketScopes": [
+          "WEST"
+        ],
+        "marketScopeBasis": "provider field enrelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-9CE5112BBAA2",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Diamond & Pearl (TCG)#jarelease:DP1",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "DP1",
+        "page": "Diamond & Pearl (TCG)",
+        "field": "jarelease",
+        "date": "2006-11-30",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-AFB7C2128F00",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Shining Synergy (ATCG)#release:CSM2bC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSM2bC",
+        "page": "Shining Synergy (ATCG)",
+        "field": "release",
+        "date": "2023-01-18",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-B042B037FFBD",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Generations (TCG)#jarelease:20th",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "20th",
+        "page": "Generations (TCG)",
+        "field": "jarelease",
+        "date": "2016-02-27",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-B55D35690D8F",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "EX Dragon Frontiers (TCG)#jarelease:PCG9",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "PCG9",
+        "page": "EX Dragon Frontiers (TCG)",
+        "field": "jarelease",
+        "date": "2006-06-29",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-B7ADE9CF4868",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "EX FireRed & LeafGreen (TCG)#jarelease:PCG1",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "PCG1",
+        "page": "EX FireRed & LeafGreen (TCG)",
+        "field": "jarelease",
+        "date": "2004-04-09",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-B89AC04101B7",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Together in Pursuit of Glory (ATCG)#release:CSV10C",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSV10C",
+        "page": "Together in Pursuit of Glory (ATCG)",
+        "field": "release",
+        "date": "2026-07-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-C266C8A2842E",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Decidueye & Melmetal & Koraidon & Miraidon Happy Set (ATCG)#release:CSVH4C",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSVH4C",
+        "page": "Decidueye & Melmetal & Koraidon & Miraidon Happy Set (ATCG)",
+        "field": "release",
+        "date": "2026-04-10",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-DA3DC1D6019A",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Stellar Tera Type Starter Sets (TCG)#release:svLN",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "svLN",
+        "page": "Stellar Tera Type Starter Sets (TCG)",
+        "field": "release",
+        "date": "2024-08-30",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-DC17692669A8",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Journey Theme Pack (ATCG)#release:CSVL1C",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSVL1C",
+        "page": "Journey Theme Pack (ATCG)",
+        "field": "release",
+        "date": "2025-06-13",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-E1139D5C3F34",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Golden Energy (ATCG)#date:CSM2.1C",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSM2.1C",
+        "page": "Golden Energy (ATCG)",
+        "field": "date",
+        "date": "2023-09-09",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-E2104ABD6305",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Gallant Galaxy V Starter Deck (ATCG)#release:CS5DC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CS5DC",
+        "page": "Gallant Galaxy V Starter Deck (ATCG)",
+        "field": "release",
+        "date": "2024-06-18",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-E629C64EE849",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Fates Collide (TCG)#jarelease:XY10",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "XY10",
+        "page": "Fates Collide (TCG)",
+        "field": "jarelease",
+        "date": "2016-03-18",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "provider field jarelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-EBE9ED05D099",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Sun & Moon Family Pokémon Card Game (TCG)#release:smL",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "smL",
+        "page": "Sun & Moon Family Pokémon Card Game (TCG)",
+        "field": "release",
+        "date": "2019-03-15",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "JP",
+        "languageScope": "Japanese",
+        "marketScopes": [
+          "JP"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-F0B9DF07FF1E",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Diamond & Pearl (TCG)#enrelease:DP",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "DP",
+        "page": "Diamond & Pearl (TCG)",
+        "field": "enrelease",
+        "date": "2007-05-23",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "WEST",
+        "languageScope": "English",
+        "marketScopes": [
+          "WEST"
+        ],
+        "marketScopeBasis": "provider field enrelease",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-FD7A8D45DBCC",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Shining Synergy (ATCG)#release:CSM2cC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSM2cC",
+        "page": "Shining Synergy (ATCG)",
+        "field": "release",
+        "date": "2023-01-18",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-FEC0A71D3B09",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Storming Emergence (ATCG)#release:CSM1cC",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSM1cC",
+        "page": "Storming Emergence (ATCG)",
+        "field": "release",
+        "date": "2022-10-28",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-FFA626271A99",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Ardent Obsidian (ATCG)#release:CSV5C",
+      "retrieved": "2026-07-31",
+      "raw": {
+        "localCode": "CSV5C",
+        "page": "Ardent Obsidian (ATCG)",
+        "field": "release",
+        "date": "2025-09-12",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "single frozen provider context for this raw code",
+        "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-0243DE5FBFC0",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPLS\u001fPlasma Storm",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PLS",
+        "localName": "Plasma Storm",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Storm/Snorlax-PLS101",
+            "collectorNumber": "101",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-07B825EDA891",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fXY2\u001fWild Blaze",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "XY2",
+        "localName": "Wild Blaze",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
+            "collectorNumber": "066",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-09A382735D63",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "SEA\u001fSV-P/ID\u001fScarlet & Violet Indonesian Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SV-P/ID",
+        "localName": "Scarlet & Violet Indonesian Promos",
+        "market": "SEA promo",
+        "locality": "SEA",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID278",
+            "collectorNumber": "278",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "SEA promo",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID286",
+            "collectorNumber": "286",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "SEA promo",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
+            "collectorNumber": "117",
+            "variantToken": "V1",
+            "rarity": "Promo",
+            "market": "SEA promo",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
+            "collectorNumber": "117",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "SEA promo",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-09F26080EAD9",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fxm2a\u001fMEGA Dream ex: Additionals",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "xm2a",
+        "localName": "MEGA Dream ex: Additionals",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+            "collectorNumber": "136",
+            "variantToken": "V1",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+            "collectorNumber": "136",
+            "variantToken": "V2",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-0AA75A0F8A92",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fGEN\u001fGenerations",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "GEN",
+        "localName": "Generations",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+            "collectorNumber": "58",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-0DECA0527861",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPGO\u001fPokémon GO",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PGO",
+        "localName": "Pokémon GO",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Live-Code-Card-Snorlax-Tin-PGO",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Online Code Card",
+            "market": "Western",
+            "isCodeCard": true
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+            "collectorNumber": "055",
+            "variantToken": "V1",
+            "rarity": "Holo Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V2-PGO055",
+            "collectorNumber": "055",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-0F62B93ECCC9",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fJTG\u001fJourney Together",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "JTG",
+        "localName": "Journey Together",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Snorlax-JTG117",
+            "collectorNumber": "117",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-0FFFBD6235A9",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsv9\u001fBattle Partners",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sv9",
+        "localName": "Battle Partners",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Partners/Hops-Snorlax-sv9075",
+            "collectorNumber": "075",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-11EBDDA13FF4",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fxJTG\u001fJourney Together: Additionals",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "xJTG",
+        "localName": "Journey Together: Additionals",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together-Additionals/Hops-Snorlax-V1-xJTG117",
+            "collectorNumber": "117",
+            "variantToken": "V1",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together-Additionals/Hops-Snorlax-V2-xJTG117",
+            "collectorNumber": "117",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together-Additionals/Hops-Snorlax-V3-xJTG117",
+            "collectorNumber": "117",
+            "variantToken": "V3",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-132D89E14F5B",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "TW\u001fPKMTCH S-P\u001fTraditional Chinese Products",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PKMTCH S-P",
+        "localName": "Traditional Chinese Products",
+        "market": "Traditional Chinese",
+        "locality": "TW",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Traditional-Chinese-Products/Snorlax-PKMTCHS-P-145",
+            "collectorNumber": "S-P 145",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Traditional Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-157260C6CD64",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fLL\u001fLost Link",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "LL",
+        "localName": "Lost Link",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Lost-Link/Snorlax-LL028",
+            "collectorNumber": "028",
+            "variantToken": "base",
+            "rarity": "Holo Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-171D8A46DFF2",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSAC\u001fDynamax Clash Deck Building Box",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSAC",
+        "localName": "Dynamax Clash Deck Building Box",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Deck-Building-Box/Snorlax-V-CSAC009",
+            "collectorNumber": "009",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-17A967BCC7B6",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fHSZ\u001fNational Pokédex Beginning Set",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "HSZ",
+        "localName": "National Pokédex Beginning Set",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/National-Pokedex-Beginning-Set/Snorlax",
+            "collectorNumber": "027",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1863F957E20B",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fG2\u001fChallenge from the Darkness",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "G2",
+        "localName": "Challenge from the Darkness",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Challenge-from-the-Darkness/Rockets-Snorlax-CFTD",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1A46F17CFA59",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCS5DC\u001fBrave Stars V Starter Deck",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CS5DC",
+        "localName": "Brave Stars V Starter Deck",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-V-Starter-Deck/Snorlax-V1-CS5DC097",
+            "collectorNumber": "097",
+            "variantToken": "V1",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-V-Starter-Deck/Snorlax-V2-CS5DC098",
+            "collectorNumber": "098",
+            "variantToken": "V2",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1B4E284FCE4D",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fWP\u001fWizards Black Star Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "WP",
+        "localName": "Wizards Black Star Promos",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wizards-Black-Star-Promos/Snorlax-WP49",
+            "collectorNumber": "49",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1D4965F5B7E7",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSVH1C\u001fHappy Set Pikachu & Clefairy & Turtwig & Gimmighoul",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSVH1C",
+        "localName": "Happy Set Pikachu & Clefairy & Turtwig & Gimmighoul",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Pikachu-Clefairy-Turtwig-Gimmighoul/Snorlax-CSVH1Ca001",
+            "collectorNumber": "a001",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1E70E6FA2D06",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fB2\u001fBase Set 2",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "B2",
+        "localName": "Base Set 2",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Base-Set-2/Snorlax-B230",
+            "collectorNumber": "30",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1EDC9AA3D4B9",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fKSS\u001fXY Kalos Starter Set",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "KSS",
+        "localName": "XY Kalos Starter Set",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
+            "collectorNumber": "26",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1F0BD1EAA34F",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPKMSV\u001fScarlet & Violet Products",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PKMSV",
+        "localName": "Scarlet & Violet Products",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "code-card-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Products/Live-Code-Card-Snorlax-ex-Blissey-ex-Special-Collection-PKMSV",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Online Code Card",
+            "market": "Western",
+            "isCodeCard": true
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-1F995ADE63EC",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fm2a\u001fMEGA Dream ex",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "m2a",
+        "localName": "MEGA Dream ex",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex/Hops-Snorlax-m2a136",
+            "collectorNumber": "136",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-207E16C86D01",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPKM\u001fPokémon Products",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PKM",
+        "localName": "Pokémon Products",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "code-card-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Products/Online-Code-Card-Snorlax-GX-Box-PKM",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Online Code Card",
+            "market": "Western",
+            "isCodeCard": true
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Products/Online-Code-Card-Snorlax-Pin-Collection-PKM",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Online Code Card",
+            "market": "Western",
+            "isCodeCard": true
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Products/Online-Code-Card-Tag-Team-Tins-Eevee-Snorlax-GX-Tin-PKM",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Online Code Card",
+            "market": "Western",
+            "isCodeCard": true
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-20BE4963CE70",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fXYPR\u001fXY Black Star Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "XYPR",
+        "localName": "XY Black Star Promos",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Black-Star-Promos/Snorlax-XYPR179",
+            "collectorNumber": "179",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-233670192634",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsvG\u001fVenusaur & Charizard & Blastoise Special Deck Set ex",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "svG",
+        "localName": "Venusaur & Charizard & Blastoise Special Deck Set ex",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Venusaur-Charizard-Blastoise-Special-Deck-Set-ex/Snorlax-svG021",
+            "collectorNumber": "021",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-2616C9BC3356",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fSVP\u001fSV Black Star Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SVP",
+        "localName": "SV Black Star Promos",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SV-Black-Star-Promos/Hops-Snorlax-V1-SVP184",
+            "collectorNumber": "184",
+            "variantToken": "V1",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SV-Black-Star-Promos/Hops-Snorlax-V2-SVP184",
+            "collectorNumber": "184",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SV-Black-Star-Promos/Snorlax-SVP122",
+            "collectorNumber": "122",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SV-Black-Star-Promos/Snorlax-V1-SVP051",
+            "collectorNumber": "051",
+            "variantToken": "V1",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SV-Black-Star-Promos/Snorlax-V2-SVP051",
+            "collectorNumber": "051",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-265CCF5ED4E2",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fBW-P\u001fBW Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "BW-P",
+        "localName": "BW Promos",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BW-Promos/Snorlax-BW-P207",
+            "collectorNumber": "207",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-27DFD88227BD",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCS1aC\u001fDynamax Clash - Thunder",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CS1aC",
+        "localName": "Dynamax Clash - Thunder",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Thunder/Snorlax-CS1aC110",
+            "collectorNumber": "110",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Thunder/Snorlax-V-V1-CS1aC111",
+            "collectorNumber": "111",
+            "variantToken": "V1",
+            "rarity": "Double Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Thunder/Snorlax-V-V2-CS1aC188",
+            "collectorNumber": "188",
+            "variantToken": "V2",
+            "rarity": "Ultra Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Thunder/Snorlax-VMAX-V1-CS1aC112",
+            "collectorNumber": "112",
+            "variantToken": "V1",
+            "rarity": "Triple Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Thunder/Snorlax-VMAX-V2-CS1aC207",
+            "collectorNumber": "207",
+            "variantToken": "V2",
+            "rarity": "Rainbow Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-27F022DC824F",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001f20th\u001fBREAK Starter Pack",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "20th",
+        "localName": "BREAK Starter Pack",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAK-Starter-Pack/Snorlax-20th047",
+            "collectorNumber": "047",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-2812EDE4DC1B",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fCRZ\u001fCrown Zenith",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CRZ",
+        "localName": "Crown Zenith",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Crown-Zenith/Snorlax-CRZ109",
+            "collectorNumber": "109",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-284EAAB29D5A",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSV7C\u001fBlade Awakening",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSV7C",
+        "localName": "Blade Awakening",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
+            "collectorNumber": "158",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-2BB7E8B25AAF",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fSSP\u001fSurging Sparks",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SSP",
+        "localName": "Surging Sparks",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Snorlax-SSP144",
+            "collectorNumber": "144",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-2C5C0893E83A",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsvLN\u001fStellar Tera Type Starter Set Sylveon ex",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "svLN",
+        "localName": "Stellar Tera Type Starter Set Sylveon ex",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Tera-Type-Starter-Set-Sylveon-ex/Snorlax-svLN010",
+            "collectorNumber": "010",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-34CB84964AE4",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSVE1C\u001fBattle Party Dream Together",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSVE1C",
+        "localName": "Battle Party Dream Together",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Party-Dream-Together/Snorlax-CSVE1C093",
+            "collectorNumber": "093",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-3662C4218AE9",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPRE\u001fPrismatic Evolutions",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PRE",
+        "localName": "Prismatic Evolutions",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Snorlax-ex-PRE076",
+            "collectorNumber": "076",
+            "variantToken": "base",
+            "rarity": "Double Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-36FF4052BC98",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsv4a\u001fShiny Treasure ex",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sv4a",
+        "localName": "Shiny Treasure ex",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+            "collectorNumber": "145",
+            "variantToken": "V1",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V2-sv4a310",
+            "collectorNumber": "310",
+            "variantToken": "V2",
+            "rarity": "Shiny Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-37E67B70EA2A",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fHXY\u001fXY Beginning Set",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "HXY",
+        "localName": "XY Beginning Set",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Beginning-Set/Snorlax",
+            "collectorNumber": "026",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-380C9644C2CB",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSV5C\u001fDark Crystal Blaze",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSV5C",
+        "localName": "Dark Crystal Blaze",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Crystal-Blaze/Snorlax-Doll-CSV5C115",
+            "collectorNumber": "115",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-387CE0A2A6DE",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fSV-P/CS\u001fScarlet & Violet Simplified Chinese Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SV-P/CS",
+        "localName": "Scarlet & Violet Simplified Chinese Promos",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Simplified-Chinese-Promos/Snorlax-SV-PCS277",
+            "collectorNumber": "277",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-3AE8F867F382",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSM1cC\u001fStorming Emergence - Abundant",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSM1cC",
+        "localName": "Storming Emergence - Abundant",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Storming-Emergence-Abundant/Snorlax-GX-CSM1cC102",
+            "collectorNumber": "102",
+            "variantToken": "base",
+            "rarity": "Double Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-3B1D9449A5F2",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSVH4C\u001fHappy Set Decidueye & Melmetal & Koraidon & Miraidon",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSVH4C",
+        "localName": "Happy Set Decidueye & Melmetal & Koraidon & Miraidon",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003",
+            "collectorNumber": "a003",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-ex-CSVH4Cp006",
+            "collectorNumber": "p006",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-3B4EF566502F",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fEXS\u001fExpansion Sheet",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "EXS",
+        "localName": "Expansion Sheet",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Expansion-Sheet/Snorlax-EXS",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-3E34E0247D42",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsv4K\u001fAncient Roar",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sv4K",
+        "localName": "Ancient Roar",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
+            "collectorNumber": "059",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-4292AD3F72F4",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsvM\u001fGenerations Start Decks",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "svM",
+        "localName": "Generations Start Decks",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations-Start-Decks/Snorlax-ex-svM094",
+            "collectorNumber": "094",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-48A40A4DC0EE",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "SEA\u001fSV-P/TH\u001fScarlet & Violet Thai Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SV-P/TH",
+        "localName": "Scarlet & Violet Thai Promos",
+        "market": "SEA promo",
+        "locality": "SEA",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Thai-Promos/Snorlax-SV-PTH082",
+            "collectorNumber": "082",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "SEA promo",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-4A5F8ABDC972",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsH\u001fSword & Shield Family Pokémon Card Game",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sH",
+        "localName": "Sword & Shield Family Pokémon Card Game",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Family-Pokemon-Card-Game/Snorlax",
+            "collectorNumber": "038",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-4A6AF078EBB7",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fXY10\u001fAwakening Psychic King",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "XY10",
+        "localName": "Awakening Psychic King",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+            "collectorNumber": "057",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-4F05F64D53D2",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fBKT\u001fBREAKthrough",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "BKT",
+        "localName": "BREAKthrough",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAKthrough/Snorlax-BKT118",
+            "collectorNumber": "118",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-520A6EF20CAE",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fBW7\u001fPlasma Gale",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "BW7",
+        "localName": "Plasma Gale",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+            "collectorNumber": "055",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-55EBF80475F0",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSM2cC\u001fShining Synergy - Summon",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSM2cC",
+        "localName": "Shining Synergy - Summon",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V1-CSM2cC103",
+            "collectorNumber": "103",
+            "variantToken": "V1",
+            "rarity": "Double Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V2-CSM2cC170",
+            "collectorNumber": "170",
+            "variantToken": "V2",
+            "rarity": "Ultra Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Summon/Eevee-Snorlax-GX-V3-CSM2cC171",
+            "collectorNumber": "171",
+            "variantToken": "V3",
+            "rarity": "Special Illustration Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-5651BA296863",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSMPC\u001fBattle Party Set",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSMPC",
+        "localName": "Battle Party Set",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Party-Set/Snorlax-CSMPCh009",
+            "collectorNumber": "h009",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-5905BAB1C6D3",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSVE2C\u001fBattle Party Shining Dream",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSVE2C",
+        "localName": "Battle Party Shining Dream",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Party-Shining-Dream/Snorlax-CSVE2C122",
+            "collectorNumber": "122",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-5C1C07CD1675",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fBA20\u001fBattle Academy 2020",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "BA20",
+        "localName": "Battle Academy 2020",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Academy-2020/Snorlax-HIF50",
+            "collectorNumber": "MWT",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-5C53B1167004",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPOR\u001fPerfect Order",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "POR",
+        "localName": "Perfect Order",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Snorlax-POR063",
+            "collectorNumber": "063",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-5CF6B95DAE34",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fFCO\u001fFates Collide",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "FCO",
+        "localName": "Fates Collide",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Fates-Collide/Snorlax-FCO77",
+            "collectorNumber": "77",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-6029CA2F8F86",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fmP1\u001fMEGA Start Deck 100 Battle Collection Corociao Version",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "mP1",
+        "localName": "MEGA Start Deck 100 Battle Collection Corociao Version",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection-Corociao-Version/Snorlax-mP1012",
+            "collectorNumber": "012",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-69E5E763165C",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fDP1\u001fSpace-Time Creation",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "DP1",
+        "localName": "Space-Time Creation",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-6B8FA57CF2DB",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fDP-P\u001fDP Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "DP-P",
+        "localName": "DP Promos",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/DP-Promos/Snorlax-Lv37",
+            "collectorNumber": "126",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/DP-Promos/Snorlax-LvX",
+            "collectorNumber": "127",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-70ADB9DF19AE",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsm9\u001fTag Bolt",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sm9",
+        "localName": "Tag Bolt",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Tag-Bolt/Eevee-Snorlax-GX-V1-sm9066",
+            "collectorNumber": "066",
+            "variantToken": "V1",
+            "rarity": "Double Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Tag-Bolt/Eevee-Snorlax-GX-V2-sm9106",
+            "collectorNumber": "106",
+            "variantToken": "V2",
+            "rarity": "Ultra Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Tag-Bolt/Eevee-Snorlax-GX-V3-sm9115",
+            "collectorNumber": "115",
+            "variantToken": "V3",
+            "rarity": "Rainbow Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-70C3896AC1AA",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fPCG3\u001fRocket Gang Strikes Back",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PCG3",
+        "localName": "Rocket Gang Strikes Back",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rocket-Gang-Strikes-Back/Rockets-Snorlax-ex-PCG3062",
+            "collectorNumber": "062",
+            "variantToken": "base",
+            "rarity": "Ultra Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-7215D0D95DB5",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fs2\u001fRebellion Crash",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "s2",
+        "localName": "Rebellion Crash",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277",
+            "collectorNumber": "77",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-7727B587D252",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fm3\u001fNihil Zero",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "m3",
+        "localName": "Nihil Zero",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
+            "collectorNumber": "062",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-7BD8B3CB927A",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fUNP\u001fUnnumbered Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "UNP",
+        "localName": "Unnumbered Promos",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unnumbered-Promos/Hungry-Snorlax",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-7CC6A582E880",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fs10b\u001fPokémon GO Enhanced Expansion Pack",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "s10b",
+        "localName": "Pokémon GO Enhanced Expansion Pack",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO-Enhanced-Expansion-Pack/Snorlax-s10b056",
+            "collectorNumber": "056",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-83E973620046",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fVIV\u001fVivid Voltage",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "VIV",
+        "localName": "Vivid Voltage",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+            "collectorNumber": "131",
+            "variantToken": "V1",
+            "rarity": "Holo Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V2-VIV131",
+            "collectorNumber": "131",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-853AF2436495",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fCLV\u001fPokémon Trading Card Game Classic: Venusaur & Lugia ex Deck",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CLV",
+        "localName": "Pokémon Trading Card Game Classic: Venusaur & Lugia ex Deck",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Trading-Card-Game-Classic-Venusaur-Lugia-ex-Deck/Snorlax-CLV016",
+            "collectorNumber": "016",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-85B2E5603098",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSM2bC\u001fShining Synergy - Supreme",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSM2bC",
+        "localName": "Shining Synergy - Supreme",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Supreme/Snorlax-CSM2bC124",
+            "collectorNumber": "124",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-8AF4F826F384",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fFL\u001fEX FireRed & LeafGreen",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "FL",
+        "localName": "EX FireRed & LeafGreen",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-FireRed-LeafGreen/Snorlax-FL15",
+            "collectorNumber": "15",
+            "variantToken": "base",
+            "rarity": "Holo Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-8B65346E36C2",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fHIF\u001fHidden Fates",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "HIF",
+        "localName": "Hidden Fates",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
+            "collectorNumber": "50",
+            "variantToken": "V1",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-8E2F219F57E6",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fLC\u001fLegendary Collection",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "LC",
+        "localName": "Legendary Collection",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Legendary-Collection/Snorlax-LC64",
+            "collectorNumber": "64",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-928AEFC98B3C",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fDF\u001fEX Dragon Frontiers",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "DF",
+        "localName": "EX Dragon Frontiers",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Dragon-Frontiers/Snorlax-Delta-Species-DF10",
+            "collectorNumber": "10",
+            "variantToken": "base",
+            "rarity": "Holo Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-93C78A153D0C",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsI100\u001fStart Deck 100",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sI100",
+        "localName": "Start Deck 100",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341",
+            "collectorNumber": "341",
+            "variantToken": "V1",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V2-sI100342",
+            "collectorNumber": "342",
+            "variantToken": "V2",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-96FEBB4F3F2C",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fPt2\u001fBonds to the End of Time",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "Pt2",
+        "localName": "Bonds to the End of Time",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
+            "collectorNumber": "070",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-9C603EAE0B8F",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCS6bC\u001fAzure Shadow - Pursuit",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CS6bC",
+        "localName": "Azure Shadow - Pursuit",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Azure-Shadow-Pursuit/Snorlax-CS6bC113",
+            "collectorNumber": "113",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-9E83E7AB8A34",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCS5aC\u001fBrave Stars - Charm",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CS5aC",
+        "localName": "Brave Stars - Charm",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-Charm/Snorlax-PKMSCHCS5aC-093",
+            "collectorNumber": "093",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-A280DA7B25CD",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fxPRE\u001fPrismatic Evolutions: Additionals",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "xPRE",
+        "localName": "Prismatic Evolutions: Additionals",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V1-xPRE076",
+            "collectorNumber": "076",
+            "variantToken": "V1",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions-Additionals/Snorlax-ex-V2-xPRE076",
+            "collectorNumber": "076",
+            "variantToken": "V2",
+            "rarity": "Oversized",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-A391A2B4CDE0",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fRCL\u001fRebel Clash",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "RCL",
+        "localName": "Rebel Clash",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebel-Clash/Snorlax-RCL141",
+            "collectorNumber": "141",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-A5AD8CAA9137",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fTRR\u001fEX Team Rocket Returns",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "TRR",
+        "localName": "EX Team Rocket Returns",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Team-Rocket-Returns/Rockets-Snorlax-ex-TRR104",
+            "collectorNumber": "104",
+            "variantToken": "base",
+            "rarity": "Ultra Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-A89856411220",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001f151C\u001fCollect 151",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "151C",
+        "localName": "Collect 151",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V1-151C143",
+            "collectorNumber": "143",
+            "variantToken": "V1",
+            "rarity": "Uncommon",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V2-151C169",
+            "collectorNumber": "169",
+            "variantToken": "V2",
+            "rarity": "Shiny Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-A91E1D423906",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsmL\u001fSun & Moon Family Pokémon Card Game",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "smL",
+        "localName": "Sun & Moon Family Pokémon Card Game",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Family-Pokemon-Card-Game/Snorlax",
+            "collectorNumber": "038",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-A9F90D49882D",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fCL\u001fCall of Legends",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CL",
+        "localName": "Call of Legends",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Call-of-Legends/Snorlax-V1-CL33",
+            "collectorNumber": "33",
+            "variantToken": "V1",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Call-of-Legends/Snorlax-V2-CL000",
+            "collectorNumber": "33",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-AA832868A44F",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fWCD23 LOR\u001fWCD 2023",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "WCD23 LOR",
+        "localName": "WCD 2023",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/WCD-2023/Snorlax-WCD23LOR-143",
+            "collectorNumber": "LOR 143",
+            "variantToken": "base",
+            "rarity": "World Championship Deck",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-AC0209653658",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fLOR\u001fLost Origin",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "LOR",
+        "localName": "Lost Origin",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Lost-Origin/Snorlax-LORTG10",
+            "collectorNumber": "TG10",
+            "variantToken": "base",
+            "rarity": "Illustration Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Lost-Origin/Snorlax-V1-LOR143",
+            "collectorNumber": "143",
+            "variantToken": "V1",
+            "rarity": "Holo Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-AD2A13ABF090",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fPCG1\u001fFlight of Legends",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PCG1",
+        "localName": "Flight of Legends",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flight-of-Legends/Snorlax-PCG1074",
+            "collectorNumber": "074",
+            "variantToken": "base",
+            "rarity": "Holo Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-AF2B2742F18A",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fTWM\u001fTwilight Masquerade",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "TWM",
+        "localName": "Twilight Masquerade",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Live-Code-Card-Snorlax-Blister-TWM",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Online Code Card",
+            "market": "Western",
+            "isCodeCard": true
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Snorlax-TWM136",
+            "collectorNumber": "136",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-AF6BF12516EF",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSM2DC\u001fShining Synergy GX Starter Deck",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSM2DC",
+        "localName": "Shining Synergy GX Starter Deck",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-GX-Starter-Deck/Snorlax-CSM2DC213",
+            "collectorNumber": "213",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-B2100D6FE637",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fSM-P\u001fSun & Moon Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SM-P",
+        "localName": "Sun & Moon Promos",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Promos/Eevee-Snorlax-GX-SM-P297",
+            "collectorNumber": "297",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Promos/Snorlax-GX-SM-P1",
+            "collectorNumber": "1",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-B2F3147A28BA",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fUNB\u001fUnbroken Bonds",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "UNB",
+        "localName": "Unbroken Bonds",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
+            "collectorNumber": "158",
+            "variantToken": "base",
+            "rarity": "Holo Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-B3A3268E4B8D",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPAR\u001fParadox Rift",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PAR",
+        "localName": "Paradox Rift",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Paradox-Rift/Snorlax-Doll-PAR175",
+            "collectorNumber": "175",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-B412E38F9787",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fXY-P\u001fXY Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "XY-P",
+        "localName": "XY Promos",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149",
+            "collectorNumber": "149",
+            "variantToken": "V1",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V2-XY-P261",
+            "collectorNumber": "261",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-B721AF866C29",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCS1DC\u001fDynamax Clash V Starter Deck",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CS1DC",
+        "localName": "Dynamax Clash V Starter Deck",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-V-Starter-Deck/Snorlax-CS1DC152",
+            "collectorNumber": "152",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-B7356122C850",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fs8b\u001fVMAX Climax",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "s8b",
+        "localName": "VMAX Climax",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax",
+            "collectorNumber": "126",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-B9A99FEF995E",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fFLF\u001fFlashfire",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "FLF",
+        "localName": "Flashfire",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+            "collectorNumber": "80",
+            "variantToken": "V1",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V2-FLF1",
+            "collectorNumber": "80",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-BB3CC93D0F5F",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPPS7 JTG\u001fPlay! Pokémon Prize Pack Series Seven",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PPS7 JTG",
+        "localName": "Play! Pokémon Prize Pack Series Seven",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Seven/Hops-Snorlax-PPS7JTG-117",
+            "collectorNumber": "JTG 117",
+            "variantToken": "base",
+            "rarity": "Prize Pack Series",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-BD272E2D94D5",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fPCG9\u001fOffense and Defense of the Furthest Ends",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PCG9",
+        "localName": "Offense and Defense of the Furthest Ends",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Offense-and-Defense-of-the-Furthest-Ends/Snorlax-Delta-Species-PCG9001",
+            "collectorNumber": "001",
+            "variantToken": "base",
+            "rarity": "Holo Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-C073D43FB58C",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fTEU\u001fTeam Up",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "TEU",
+        "localName": "Team Up",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Team-Up/Eevee-Snorlax-GX-V1-TEU120",
+            "collectorNumber": "120",
+            "variantToken": "V1",
+            "rarity": "Ultra Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Team-Up/Eevee-Snorlax-GX-V2-TEU171",
+            "collectorNumber": "171",
+            "variantToken": "V2",
+            "rarity": "Ultra Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Team-Up/Eevee-Snorlax-GX-V3-TEU191",
+            "collectorNumber": "191",
+            "variantToken": "V3",
+            "rarity": "Rainbow Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-C29AA84B1945",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fFST\u001fFusion Strike",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "FST",
+        "localName": "Fusion Strike",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Fusion-Strike/Snorlax",
+            "collectorNumber": "206",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-C660EF0BC8AC",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fs5a\u001fMatchless Fighters",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "s5a",
+        "localName": "Matchless Fighters",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Matchless-Fighter/Snorlax-s5a93",
+            "collectorNumber": "93",
+            "variantToken": "base",
+            "rarity": "Secret Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-C6F463A2B684",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fSSH\u001fSword & Shield",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SSH",
+        "localName": "Sword & Shield",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-SSH140",
+            "collectorNumber": "140",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-V-V1-SSH141",
+            "collectorNumber": "141",
+            "variantToken": "V1",
+            "rarity": "Ultra Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-V-V2-SSH197",
+            "collectorNumber": "197",
+            "variantToken": "V2",
+            "rarity": "Ultra Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-VMAX-V1-SSH142",
+            "collectorNumber": "142",
+            "variantToken": "V1",
+            "rarity": "Ultra Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-VMAX-V2-SSH206",
+            "collectorNumber": "206",
+            "variantToken": "V2",
+            "rarity": "Rainbow Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-VMAX-V3-SSH142",
+            "collectorNumber": "142",
+            "variantToken": "V3",
+            "rarity": "Oversized",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-CA74C4C61BF7",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPPS1 VIV\u001fPlay! Pokémon Prize Pack Series One",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PPS1 VIV",
+        "localName": "Play! Pokémon Prize Pack Series One",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V1-PPS1VIV-131",
+            "collectorNumber": "VIV 131",
+            "variantToken": "V1",
+            "rarity": "Prize Pack Series",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V2-PPS1VIV-131",
+            "collectorNumber": "VIV 131",
+            "variantToken": "V2",
+            "rarity": "Prize Pack Series",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-CB592A1F9AD7",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsm10\u001fDouble Blaze",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sm10",
+        "localName": "Double Blaze",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Double-Blaze/Snorlax-sm10076",
+            "collectorNumber": "076",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-CD42BDB8C862",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPPS3 LOR\u001fPlay! Pokémon Prize Pack Series Three",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PPS3 LOR",
+        "localName": "Play! Pokémon Prize Pack Series Three",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Three/Snorlax-PPS3LOR-143",
+            "collectorNumber": "LOR 143",
+            "variantToken": "base",
+            "rarity": "Prize Pack Series",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-CD68D4AD65B1",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fEC5\u001fMysterious Mountains",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "EC5",
+        "localName": "Mysterious Mountains",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
+            "collectorNumber": "062",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D1EEABFB6D9D",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSM2.1C\u001fGolden Energy",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSM2.1C",
+        "localName": "Golden Energy",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Golden-Energy/Eevee-Snorlax-GX-CSM21C054",
+            "collectorNumber": "054",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D26587CB7CB8",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fmC\u001fMEGA Start Deck 100 Battle Collection",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "mC",
+        "localName": "MEGA Start Deck 100 Battle Collection",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Hops-Snorlax-mC569",
+            "collectorNumber": "569",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC567",
+            "collectorNumber": "567",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC568",
+            "collectorNumber": "568",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D2FEFB332CA8",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsvIba\u001fScarlet & Violet Battle Academy",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "svIba",
+        "localName": "Scarlet & Violet Battle Academy",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Battle-Academy/Snorlax-svIba046",
+            "collectorNumber": "046",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D36A40D0940D",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsv2a\u001fPokémon Card 151",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sv2a",
+        "localName": "Pokémon Card 151",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143",
+            "collectorNumber": "143",
+            "variantToken": "V1",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V2-sv2a181",
+            "collectorNumber": "181",
+            "variantToken": "V2",
+            "rarity": "Illustration Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D42CB71D56A2",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fRR\u001fRising Rivals",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "RR",
+        "localName": "Rising Rivals",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-LVX-RR111",
+            "collectorNumber": "111",
+            "variantToken": "base",
+            "rarity": "Ultra Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
+            "collectorNumber": "33",
+            "variantToken": "V1",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V2-RR33",
+            "collectorNumber": "33",
+            "variantToken": "V2",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv40-RR81",
+            "collectorNumber": "81",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D5010A2A5394",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fCLF\u001fPokémon Card Game Classic: Venusaur & Lugia ex Deck",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CLF",
+        "localName": "Pokémon Card Game Classic: Venusaur & Lugia ex Deck",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-Game-Classic-Venusaur-Lugia-ex-Deck/Snorlax-CLF016",
+            "collectorNumber": "016",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D5C061E910AE",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSV10C\u001fChasing Glory Together",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSV10C",
+        "localName": "Chasing Glory Together",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chasing-Glory-Together/Hops-Snorlax-CSV10C175",
+            "collectorNumber": "175",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D6E5CEDE26CA",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fS-P/CS\u001fSword & Shield Simplified Chinese Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "S-P/CS",
+        "localName": "Sword & Shield Simplified Chinese Promos",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Simplified-Chinese-Promos/Snorlax-S-PCS061",
+            "collectorNumber": "061",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D77E51845233",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSUC\u001fDisplay Set Gift Box Gengar",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSUC",
+        "localName": "Display Set Gift Box Gengar",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Display-Set-Gift-Box-Gengar/Snorlax-CSDC010",
+            "collectorNumber": "010",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-D7A944CF2BDF",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fs10a\u001fDark Phantasma",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "s10a",
+        "localName": "Dark Phantasma",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058",
+            "collectorNumber": "058",
+            "variantToken": "V1",
+            "rarity": "Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V2-s10a077",
+            "collectorNumber": "077",
+            "variantToken": "V2",
+            "rarity": "Character Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-DA4B7F480C10",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fSK\u001fSkyridge",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SK",
+        "localName": "Skyridge",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Skyridge/Snorlax-SK100",
+            "collectorNumber": "100",
+            "variantToken": "base",
+            "rarity": "Common",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-DA876FCA6465",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fPJU\u001fPokémon Jungle",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PJU",
+        "localName": "Pokémon Jungle",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Jungle/Snorlax",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Holo Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-DE8C1EA307D4",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fSWSH\u001fSWSH Black Star Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SWSH",
+        "localName": "SWSH Black Star Promos",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SWSH-Black-Star-Promos/Snorlax-SWSH068",
+            "collectorNumber": "068",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SWSH-Black-Star-Promos/Snorlax-SWSH32",
+            "collectorNumber": "032",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SWSH-Black-Star-Promos/Snorlax-V3",
+            "collectorNumber": "119",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-DFA4BE4F76FD",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCS2aC\u001fVivid Portrayals - Obsidian",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CS2aC",
+        "localName": "Vivid Portrayals - Obsidian",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
+            "collectorNumber": "086",
+            "variantToken": "V1",
+            "rarity": "Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V2-CS2aC142",
+            "collectorNumber": "142",
+            "variantToken": "V2",
+            "rarity": "Secret Rare",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-E1F7302D2348",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSVL1C\u001fAdventure Special Pack",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSVL1C",
+        "localName": "Adventure Special Pack",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Adventure-Special-Pack/Snorlax-CSVL1C109",
+            "collectorNumber": "109",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-E471CE2F476C",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fGH\u001fGym Heroes",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "GH",
+        "localName": "Gym Heroes",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Gym-Heroes/Rockets-Snorlax-GH33",
+            "collectorNumber": "33",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-E57B8449EAC9",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsv5a\u001fCrimson Haze",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sv5a",
+        "localName": "Crimson Haze",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Crimson-Haze/Snorlax-sv5a051",
+            "collectorNumber": "051",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-EA2A3538153F",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fs4\u001fShocking Volt Tackle",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "s4",
+        "localName": "Shocking Volt Tackle",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shocking-Volt-Tackle/Snorlax-s484",
+            "collectorNumber": "84",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-EBEEA9877663",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fJU\u001fJungle",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "JU",
+        "localName": "Jungle",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
+            "collectorNumber": "11",
+            "variantToken": "V1",
+            "rarity": "Holo Rare",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
+            "collectorNumber": "27",
+            "variantToken": "V2",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-EBF34DE63108",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fS-P\u001fSword & Shield Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "S-P",
+        "localName": "Sword & Shield Promos",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Promos/Snorlax-S-P156",
+            "collectorNumber": "156",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-EE61C01A5DA4",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPAF\u001fPaldean Fates",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PAF",
+        "localName": "Paldean Fates",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Paldean-Fates/Snorlax-PAF202",
+            "collectorNumber": "202",
+            "variantToken": "base",
+            "rarity": "Shiny Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-EE900016661E",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fDP\u001fDiamond & Pearl",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "DP",
+        "localName": "Diamond & Pearl",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
+            "collectorNumber": "37",
+            "variantToken": "base",
+            "rarity": "Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-F128D0026080",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCSZC\u001fVariety Treasure Box",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CSZC",
+        "localName": "Variety Treasure Box",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Variety-Treasure-Box/Snorlax-CSZC018",
+            "collectorNumber": "018",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-F513EB2955D0",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsA\u001fSword & Shield Starter Decks",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sA",
+        "localName": "Sword & Shield Starter Decks",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Starter-Decks/Snorlax-sA10",
+            "collectorNumber": "10",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-F576A647E66C",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fs1H\u001fShield",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "s1H",
+        "localName": "Shield",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shield/Snorlax-V-V1-s1H45",
+            "collectorNumber": "45",
+            "variantToken": "V1",
+            "rarity": "Double Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shield/Snorlax-V-V2-s1H66",
+            "collectorNumber": "66",
+            "variantToken": "V2",
+            "rarity": "Ultra Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shield/Snorlax-VMAX-V1-s1H46",
+            "collectorNumber": "46",
+            "variantToken": "V1",
+            "rarity": "Triple Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shield/Snorlax-VMAX-V2-s1H70",
+            "collectorNumber": "70",
+            "variantToken": "V2",
+            "rarity": "Rainbow Rare",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-F747C628A406",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fBCR\u001fBoundaries Crossed",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "BCR",
+        "localName": "Boundaries Crossed",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Boundaries-Crossed/Snorlax-BCR109",
+            "collectorNumber": "109",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-F85AC3A4050D",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "CN\u001fCS3DC\u001fPrimordial Arts V Starter Deck",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CS3DC",
+        "localName": "Primordial Arts V Starter Deck",
+        "market": "Simplified Chinese",
+        "locality": "CN",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Primordial-Arts-V-Starter-Deck/Snorlax-CS3DC117",
+            "collectorNumber": "117",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Simplified Chinese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-F897DAD83659",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fPPS8 JTG\u001fPlay! Pokémon Prize Pack Series Eight",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "PPS8 JTG",
+        "localName": "Play! Pokémon Prize Pack Series Eight",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
+            "collectorNumber": "JTG 117",
+            "variantToken": "V1",
+            "rarity": "Prize Pack Series",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
+            "collectorNumber": "JTG 117",
+            "variantToken": "V2",
+            "rarity": "Prize Pack Series",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-FAA5611C94F8",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fsN\u001fStart Deck 100 CoroCoro Comic Version",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "sN",
+        "localName": "Start Deck 100 CoroCoro Comic Version",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100-CoroCoro-Comic-Version/Snorlax-sN008",
+            "collectorNumber": "008",
+            "variantToken": "base",
+            "rarity": "Fixed",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-FAE77CDE9B8D",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fSM\u001fSM Black Star Promos",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "SM",
+        "localName": "SM Black Star Promos",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SM-Black-Star-Promos/Eevee-Snorlax-GX-SM169",
+            "collectorNumber": "169",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SM-Black-Star-Promos/Snorlax-GX-SM05",
+            "collectorNumber": "05",
+            "variantToken": "base",
+            "rarity": "Promo",
+            "market": "Western",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SM-Black-Star-Promos/Snorlax-GX-V2-SM05",
+            "collectorNumber": "05",
+            "variantToken": "V2",
+            "rarity": "Oversized",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-FAEC32E23C53",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fCRE\u001fChilling Reign",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "CRE",
+        "localName": "Chilling Reign",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chilling-Reign/Online-Code-Card-Snorlax-Blister",
+            "collectorNumber": "",
+            "variantToken": "base",
+            "rarity": "Online Code Card",
+            "market": "Western",
+            "isCodeCard": true
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chilling-Reign/Snorlax",
+            "collectorNumber": "224",
+            "variantToken": "base",
+            "rarity": "Secret Rare",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-FB22EE070A55",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "JP\u001fxsv2a\u001fPokémon Card 151: Additionals",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "xsv2a",
+        "localName": "Pokémon Card 151: Additionals",
+        "market": "Japanese",
+        "locality": "JP",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+            "collectorNumber": "143",
+            "variantToken": "V1",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          },
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+            "collectorNumber": "143",
+            "variantToken": "V2",
+            "rarity": "Uncommon",
+            "market": "Japanese",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-CM-FBE1F9094A45",
+      "sourceKind": "legacy-cardmarket-set-profile",
+      "provider": "cardmarket",
+      "providerRecordKey": "WEST\u001fMEW\u001f151",
+      "retrieved": "2026-07-21",
+      "raw": {
+        "localCode": "MEW",
+        "localName": "151",
+        "market": "Western",
+        "locality": "WEST",
+        "productKind": "physical-card-set-or-product",
+        "products": [
+          {
+            "productUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/151/Snorlax-MEW143",
+            "collectorNumber": "143",
+            "variantToken": "base",
+            "rarity": "Uncommon",
+            "market": "Western",
+            "isCodeCard": false
+          }
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-0CE6692294C3",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "KR\u001fS-P",
+      "retrieved": "2026-08-09",
+      "raw": {
+        "localCode": "S-P",
+        "localName": null,
+        "locality": "KR",
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "printIds": [
+          "KR:S-P:101:base"
+        ],
+        "providers": [
+          "owner-attestation"
+        ],
+        "sourceUrls": [
+          "https://github.com/user-attachments/assets/7302c36e-1046-458a-a397-4e594916f682"
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-6F4D7B4C5D7B",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "TW\u001fscD F",
+      "retrieved": "2026-08-09",
+      "raw": {
+        "localCode": "scD F",
+        "localName": null,
+        "locality": "TW",
+        "languages": [
+          "T-Chinese"
+        ],
+        "scripts": [
+          "Hant"
+        ],
+        "printIds": [
+          "TW:scD F:111/159:base"
+        ],
+        "providers": [
+          "inspected-specimen"
+        ],
+        "sourceUrls": [
+          "https://github.com/user-attachments/assets/25528966-476a-4a82-bcaf-d9e1f76e8584"
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-90614DEFF918",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "TW\u001fsc1b F",
+      "retrieved": "2026-08-09",
+      "raw": {
+        "localCode": "sc1b F",
+        "localName": null,
+        "locality": "TW",
+        "languages": [
+          "T-Chinese"
+        ],
+        "scripts": [
+          "Hant"
+        ],
+        "printIds": [
+          "TW:sc1b F:119/153:base",
+          "TW:sc1b F:120/153:base",
+          "TW:sc1b F:165/153:base",
+          "TW:sc1b F:177/153:base"
+        ],
+        "providers": [
+          "retailer-listing"
+        ],
+        "sourceUrls": [
+          "https://github.com/user-attachments/assets/0766a589-2407-486b-8cf5-438a612b8d66",
+          "https://github.com/user-attachments/assets/5052ddbb-276c-4734-baa2-a0a3c2dd74d7",
+          "https://github.com/user-attachments/assets/65ea5eff-7441-47a4-8750-47c03822f3d8",
+          "https://github.com/user-attachments/assets/aaa33550-cdd4-49e8-95ab-8c07cf67a0dd"
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-CDBFB934EB83",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "TW\u001fsc1a F",
+      "retrieved": "2026-08-09",
+      "raw": {
+        "localCode": "sc1a F",
+        "localName": null,
+        "locality": "TW",
+        "languages": [
+          "T-Chinese"
+        ],
+        "scripts": [
+          "Hant"
+        ],
+        "printIds": [
+          "TW:sc1a F:127/154:base"
+        ],
+        "providers": [
+          "bulbapedia"
+        ],
+        "sourceUrls": [
+          "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_(ATCG)"
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-D96C620721A4",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "TW\u001fAS5a",
+      "retrieved": "2026-08-09",
+      "raw": {
+        "localCode": "AS5a",
+        "localName": null,
+        "locality": "TW",
+        "languages": [
+          "T-Chinese"
+        ],
+        "scripts": [
+          "Hant"
+        ],
+        "printIds": [
+          "TW:AS5a:142:base"
+        ],
+        "providers": [
+          "52poke"
+        ],
+        "sourceUrls": [
+          "https://s1.52poke.com/wiki/7/7b/AS5a142.png"
+        ]
+      }
+    }
+  ]
+}

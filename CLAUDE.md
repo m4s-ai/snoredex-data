@@ -185,6 +185,7 @@ python verification/review_integrity.py
 python verification/review_findings.py
 python scripts/legacy_baseline.py --check   # legacy universe contract + claim guard
 python scripts/print_identity_dryrun.py --check  # ADR-0001 claim/release/print mapping (#134/#145)
+python scripts/set_catalogue_dryrun.py --check   # ADR-0002 set/edition/event mapping (#146)
 
 # ... do the work in a new Python pass under verification/ ...
 
@@ -218,7 +219,7 @@ python verification/review_integrity.py
 python verification/review_findings.py           # stdlib only, no network — quickest check
 
 # The gate regenerates these FOR REAL, so run them before checking anything downstream.
-# --check on the eight below is not the whole generator set, and twice now that gap has
+# --check on only a subset below is not the whole generator set, and twice now that gap has
 # turned CI red on work that passed locally.
 python verification/report.py && python scripts/editions.py
 python scripts/finishes.py --reproject
@@ -227,7 +228,7 @@ python scripts/database.py
 python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 
 for g in checklist readme_stats issue_templates site source_registry open_items analyze database \
-         print_identity_dryrun
+         print_identity_dryrun set_catalogue_dryrun
 do python scripts/$g.py --check; done            # fail instead of writing
 python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
 python verification/test_site.py                 # browser acceptance tests
