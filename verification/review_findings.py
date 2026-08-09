@@ -407,7 +407,8 @@ def collect() -> None:
             "analyze.py", "finishes.py", "language_status.py", "confirmed_releases.py",
             "source_registry.py", "source_capabilities.py", "checklist.py", "readme_stats.py",
             "open_items.py", "site.py", "editions.py", "publish.py", "legacy_baseline.py",
-            "print_identity_dryrun.py", "set_catalogue_dryrun.py", "source_adapters.py",
+            "print_identity_dryrun.py",
+            "evidence_semantics.py", "set_catalogue_dryrun.py", "source_adapters.py",
             "card_discovery.py",
         }
 
@@ -733,6 +734,51 @@ def collect() -> None:
         # exactly that reason, and holding them is the check passing, not failing.
         guessed = [entry["specimenId"] for entry in source_first["held"]
                    if entry.get("proposedSetCode") and not entry.get("blockedBy")]
+        # N17-N18 — what each verdict rests on, inventoried and held (#137)
+        # --------------------------------------------------------------------------- #
+        # #137 asks for the inventory before the repair: classify every evidence record by
+        # granularity, then inventory the verdicts derived from set-level or absence-based logic.
+        # `scripts/evidence_semantics.py` produces it and changes nothing.
+        #
+        # The number that matters is not "confirmations resting on a set release" — a normally
+        # numbered expansion is printed as a whole, so inferring a card from its set's language
+        # release is sound. It is the remainder: promos, deck-fixed cards and secret-numbered
+        # cards, whose presence varies by locale and which the set's language list never reached.
+        semantics = load("verification/evidence_semantics.json")
+        semantic_counts = semantics["counts"]
+
+        # Low-water marks. Both are queues: a rise means a new verdict was written on evidence
+        # that cannot carry it, which is the losing direction. Never raise these to silence a
+        # rise — find the pass that wrote the row.
+        UNSOUND_SET_LEVEL_BASELINE = 83
+        UNSCOPED_ABSENCE_BASELINE = 27
+        unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
+        unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
+        check(
+            "N17",
+            "No new verdict rests on evidence that cannot reach the card",
+            "FAIL",
+            unsound_now <= UNSOUND_SET_LEVEL_BASELINE
+            and unscoped_now <= UNSCOPED_ABSENCE_BASELINE,
+            f"set-level confirmations that do not carry: {unsound_now} "
+            f"(baseline {UNSOUND_SET_LEVEL_BASELINE}); unscoped-absence contradictions: "
+            f"{unscoped_now} (baseline {UNSCOPED_ABSENCE_BASELINE}). A rise means a pass wrote a "
+            f"verdict on set-level or unscoped-absence reasoning.",
+        )
+
+        # The two stores that say which providers may carry absence at all must agree. They do
+        # today — pokemon-official, elitefourum, play-pokemon — and a silent divergence would let
+        # a contradiction claim backing from whichever store was consulted.
+        absence_meta = semantics["meta"]["absenceCapableProviders"]
+        check(
+            "N18",
+            "The source registry and the capability graph agree on who may carry absence",
+            "FAIL",
+            absence_meta["agree"],
+            f"source_registry: {absence_meta['sourceRegistry']}; "
+            f"capability graph: {absence_meta['capabilityGraph']}",
+        )
+
         # N16 — a contradiction may not deny a printing another store establishes (#137)
         # --------------------------------------------------------------------------- #
         # #137's first named failure: a pass "contradicts a card because a cross-language
