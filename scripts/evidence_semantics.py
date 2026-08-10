@@ -83,7 +83,8 @@ SCHEMA_VERSION = "0.1.0"
 MARKET_ERA = re.compile(r"Pok[eé]mon in |market-history", re.IGNORECASE)
 SIBLING = re.compile(r"units of the same product|set release schedule", re.IGNORECASE)
 CARD_LEVEL = re.compile(
-    r"card database|TCGdex|photographed|specimen|set list|card article|promo search|"
+    r"card database|TCGdex|photographed|specimen|set list|card article|card page|"
+    r"locale card archive|promo search|"
     r"promo series article|card list|deck list|"
     # An owner speaking about a card, a collector community naming its languages, and a listing
     # of the card itself are all statements about this card rather than about its set.

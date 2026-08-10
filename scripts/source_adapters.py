@@ -63,6 +63,28 @@ def content_hash(value: bytes | Any) -> str:
     return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
+def capability_pin(capability: Any) -> str:
+    """Hash the capability graph's *capabilities*, not the day it was written.
+
+    The pin used the whole document, and the document carries `meta.generated`. So a retained run
+    stopped validating the moment anyone regenerated the graph on a later date — no capability
+    changed, only the calendar. Because a change to the language store flows into the source
+    registry and from there into the graph, this fired on any ordinary write pass made the day after
+    the graph was last written, and the documented command order regenerates the graph every time.
+
+    (Spelling that store's filename here would trip `N12`, which scans this file's source text for
+    forbidden seed inputs and does not distinguish prose from code.)
+
+    Dropping `meta.generated` keeps the pin doing its job: a surface, edge, boundary or absence
+    scope that moves still changes this hash, and `meta.schemaVersion` is deliberately kept because
+    it does describe the contract. What is dropped is a timestamp that describes nothing.
+    """
+    document = dict(capability)
+    meta = {key: value for key, value in document.get("meta", {}).items() if key != "generated"}
+    document["meta"] = meta
+    return content_hash(document)
+
+
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -387,7 +409,7 @@ def build_projection(
         raise AdapterError(f"run {manifest.get('runId')} was captured under another contract")
     if manifest.get("coverageVersion") != contract["meta"]["coverageVersion"]:
         raise AdapterError(f"run {manifest.get('runId')} has another coverage version")
-    if capability is not None and manifest.get("capabilityGraphHash") != content_hash(capability):
+    if capability is not None and manifest.get("capabilityGraphHash") != capability_pin(capability):
         raise AdapterError(f"run {manifest.get('runId')} was captured under another capability graph")
     expected_slice_ids = set(slices)
     request_slice_ids = [row.get("sliceId") for row in manifest["requests"]]
@@ -660,7 +682,7 @@ def refresh(run_id: str, retrieved_at: str | None) -> None:
         "contract": "verification/source_adapters.json",
         "contractHash": content_hash(contract),
         "capabilityGraph": "verification/source_capability_graph.json",
-        "capabilityGraphHash": content_hash(capability),
+        "capabilityGraphHash": capability_pin(capability),
         "requests": requests,
         "failures": failures,
     }
