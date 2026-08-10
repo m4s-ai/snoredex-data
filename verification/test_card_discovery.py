@@ -181,7 +181,7 @@ class CardDiscoveryTests(unittest.TestCase):
             "runId": "20260809T000000Z",
             "coverageVersion": "test",
             "contractHash": discovery.content_hash(contract),
-            "capabilityGraphHash": discovery.content_hash(capability),
+            "capabilityGraphHash": discovery.capability_pin(capability),
             "failures": [],
             "requests": [{
                 "runId": "20260809T000000Z",

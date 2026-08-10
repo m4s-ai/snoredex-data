@@ -740,17 +740,42 @@ def collect() -> None:
         # granularity, then inventory the verdicts derived from set-level or absence-based logic.
         # `scripts/evidence_semantics.py` produces it and changes nothing.
         #
-        # The number that matters is not "confirmations resting on a set release" — a normally
-        # numbered expansion is printed as a whole, so inferring a card from its set's language
-        # release is sound. It is the remainder: promos, deck-fixed cards and secret-numbered
-        # cards, whose presence varies by locale and which the set's language list never reached.
+        # The number that matters is not "confirmations resting on a set release". The step to the
+        # card holds when the card is inside the set's numbered run, and also when the cited source
+        # carries a closed card list containing it — a Prize Pack article lists the card row beside
+        # its language table, and a closed list distributed as a whole reaches the card the same
+        # way a numbered run does. The remainder is the finding: a container-level statement about
+        # a promo, deck-fixed or secret-numbered card that no list reached.
+        #
+        # The baseline moved 83 -> 68 when the closed-list rule was added. Re-anchoring downward
+        # after tightening a rule is the correct direction; never raise it to silence a rise.
         semantics = load("verification/evidence_semantics.json")
         semantic_counts = semantics["counts"]
 
         # Low-water marks. Both are queues: a rise means a new verdict was written on evidence
         # that cannot carry it, which is the losing direction. Never raise these to silence a
         # rise — find the pass that wrote the row.
-        UNSOUND_SET_LEVEL_BASELINE = 83
+        # Re-anchored 68 -> 56 across three corrections, each lowering a down-is-progress
+        # baseline after the queue actually shrank, which is the move that tightens the check:
+        #   -3  the report keyed its rarity lookup by (setCode, number) while a unit is keyed by
+        #       variant too, so `RR 33 V1` — a Rare, inside the numbered run — read as the `V2`
+        #       Promo sharing its collector number. Those rows were never unsound.
+        #   -6  Cardmarket's "Ultra Rare" is era-dependent: modern Full Arts are secret, EX-era
+        #       `ex` and DP-era LV.X cards are numbered inside the set. The deciding fact is the
+        #       set's printed size, which nothing here records, so those rows now report
+        #       `needs-set-size` instead of asserting an answer.
+        #   -3  the Battle Academy 2020 article carries a half-deck list containing the card; the
+        #       rows cited only its language table.
+        #  -32  the same miss, at scale: thirty-two rows cited a product or set article whose page
+        #       carries a closed card list containing the card, and in most cases the unit's own
+        #       evidence already quoted the row. Only `sourceType` — the field this report reads —
+        #       named the container alone. Twenty-one are Simplified Chinese set articles, where
+        #       the list is the claimed edition's own; eleven are fixed products whose article
+        #       states its language editions separately.
+        #
+        # The 24 left all cite the cross-language expansion index, which carries no card list at
+        # all. That is the honest residue rather than a backlog of bookkeeping.
+        UNSOUND_SET_LEVEL_BASELINE = 24
         UNSCOPED_ABSENCE_BASELINE = 27
         unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
