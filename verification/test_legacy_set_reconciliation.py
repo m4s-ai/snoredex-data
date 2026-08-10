@@ -186,11 +186,11 @@ def main() -> int:
         and not boundaries["svQP F"]["localSetIds"],
         "svQP F must stay guarded without a manufactured identity",
     )
-    # 6 -> 25 on 2026-08-10: ADR-0001 D5 admitted nineteen Thai and Indonesian catch-up prints
+    # 6 -> 26 on 2026-08-10: ADR-0001 D5 admitted twenty Thai and Indonesian catch-up prints
     # from the publisher's Asia card database, and each carries a catchUpOf note. The pin stays
     # exact rather than becoming a minimum — its job is to catch an edge appearing or vanishing
     # without a decision behind it, and a floor would not do that.
-    require(len(first["catchUpRelations"]) == 25, "catch-up edge count changed")
+    require(len(first["catchUpRelations"]) == 26, "catch-up edge count changed")
     # Terminal states are pinned per state, not asserted uniformly. The six specimen-backed edges
     # resolve to a card release and stay `complete`. The nineteen D5 edges do not, and should not:
     # their `catchUpOf` says which Traditional Chinese print or set family they answer, which is a
@@ -198,7 +198,7 @@ def main() -> int:
     # equivalence becomes a resolved edge. `needs-evidence` is the honest state for them, so the
     # guard checks the split rather than demanding a completeness nobody established.
     states = Counter(edge["terminalState"] for edge in first["catchUpRelations"])
-    require(states == Counter({"complete": 6, "needs-evidence": 19}),
+    require(states == Counter({"complete": 6, "needs-evidence": 20}),
             f"catch-up terminal states changed: {dict(states)}")
     for edge in first["catchUpRelations"]:
         require(not edge["setMergeAllowed"], "catch-up edge merges sets")

@@ -192,17 +192,35 @@ each card page carries:
 | — | — | `SM_expantion_mark_ac3Dout` | 120/172 | Eevee & Snorlax GX |
 | — | — | *(promo mark)* | 030/S-P, 052/S-P, 100/S-P, 356/S-P | Snorlax V, Snorlax ×3 |
 
-Two warnings about that table. **The mark filename is not always the set code** — two Thai marks are
-named `アセット 11` and `アセット 12`, CMS placeholders, and their sets come from the denominator plus
-the Indonesian sibling at the same number. And **the filename's code is not always the Japanese
-one**: `136/193` is `m2a` in Traditional Chinese (`twhk_m2a_exp`) but `ma3` in Thai and Indonesian
-(`th_ma3t_exp`, `idn_ma3i_exp`) for what the number, card name and regulation mark all say is one
-card. Identify by number + denominator + card name + regulation mark, and treat the filename as a
-hint.
+**Never take the set code from the mark asset's filename. Render the badge, or read the card.**
+This cost a round of wrong data and the owner caught it. The filenames say `Sc1a.png`, `SCA.png`,
+`S_mark_Indonesia_SC1D.png`; the badges they render say **`sc1a T`**, **`scA T`**, **`sc1D I`** —
+wrong case, and missing the locale letter the card itself prints. The suffix rule is not decoration:
+Thai takes `T` and Indonesian takes `I` inside the badge exactly as Traditional Chinese takes `F` in
+`sc1a F`. Only the Sun & Moon-era Indonesian codes carry no suffix — `AS1b`, `AS1D`, `AC3a`, `AC3D`,
+uppercase, matching the Thailand article's own table, because there the `A` prefix is the locale
+marker.
 
-None of these are admitted as printings yet: ADR-0001 **D1 covers catch-up codes backed by a
-physical specimen**, and these rest on the publisher's own database instead. Extending D1 to a
-tier-1 publisher record is an owner decision, raised on #138.
+The mark assets are fetchable and legible: `https://asia.pokemon-card.com/<locale>/card-img/mark/
+<file>.png`, a few hundred pixels, upscale ×4 and read it. The card artwork is at
+`/<locale>/card-img/<locale>NNNNNNNN.png` and carries the code in its lower-left corner beside the
+regulation mark and collector number.
+
+**The general rule, which is the part worth keeping: when a structured field is missing or looks
+like a placeholder, check whether the image carries it before recording an absence.** Thai `111/159`
+was held back as "set code not asserted" purely because its mark asset is named `アセット 12` — while
+the card image reads `scD T`, regulation mark E, `111/159`, Illus. Yuya Oka, ©2021. That was not
+caution; it was declining to look. It applies to any source that serves an image beside its
+metadata.
+
+One more filename trap, which the badge does not fix: **the code is not always the Japanese one**.
+`136/193` is `m2a` in Traditional Chinese (`twhk_m2a_exp`) but `ma3` in Thai and Indonesian
+(`th_ma3t_exp`, `idn_ma3i_exp`) for what the number, card name and regulation mark all say is one
+card. Identify by number + denominator + card name + regulation mark.
+
+Twenty of these are admitted as printings under ADR-0001 **D5** (owner, 2026-08-10), which extends
+D1 to a catch-up code evidenced by a tier-1 publisher record, for language and identity only.
+Finish stays `pending`: a database page cannot be turned over.
 
 ### Two page types worth reaching for earlier next time
 
