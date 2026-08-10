@@ -225,8 +225,11 @@ python verification/review_integrity.py
 python verification/review_findings.py           # stdlib only, no network — quickest check
 
 # The gate regenerates these FOR REAL, so run them before checking anything downstream.
-# --check on only a subset below is not the whole generator set, and twice now that gap has
-# turned CI red on work that passed locally.
+# --check on only a subset below is not the whole generator set, and three times now that gap has
+# turned CI red on work that passed locally. The third was `legacy_set_reconciliation`, which this
+# block did not name at all: it reads the language store and its ledger goes stale on any write
+# pass. Compare against `.github/workflows/release-gate.yml` when adding a generator or a suite —
+# that file is the gate, this block only describes it.
 python verification/report.py && python scripts/editions.py
 python scripts/finishes.py --reproject
 python scripts/language_status.py && python scripts/confirmed_releases.py
@@ -234,11 +237,20 @@ python scripts/database.py
 python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 
 for g in checklist readme_stats issue_templates site source_registry source_capabilities \
-         source_adapters card_discovery open_items analyze database print_identity_dryrun \
-         set_catalogue_dryrun evidence_semantics
+         source_adapters card_discovery legacy_set_reconciliation open_items analyze database \
+         print_identity_dryrun set_catalogue_dryrun evidence_semantics
 do python scripts/$g.py --check; done            # fail instead of writing
 python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
+
+# Every regression suite CI runs. Missing one from this list is how work passes locally and
+# reddens CI, which has now happened three times — see the note under the block.
+python verification/test_jp_parser.py            # JP illustrator parsing
+python verification/test_owner_adjudications.py  # owner decision/store projection
+python verification/test_source_adapters.py      # source-first catalogue regressions
 python verification/test_card_discovery.py       # source-first card-loop regressions
+python verification/test_legacy_set_reconciliation.py  # bounded reconciliation ledger
+python verification/test_metric_polarity.py      # which way losing is, per metric
+python verification/test_findings_harness.py     # the check protocol itself
 python verification/test_site.py                 # browser acceptance tests
 python verification/verify_finish_sources.py     # live TCGCSV assertions
 python scripts/publish.py --out _site             # build the artifact, THEN verify it
