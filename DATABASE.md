@@ -48,11 +48,12 @@ from that evidence to this card holds:
 | `sibling-derived` | — | 22 | the evidence of a neighbouring unit |
 
 An application that needs card-level evidence should filter on `evidence_granularity` rather than
-trusting `exists` alone. The 19 are not wrong — they are unproven at this granularity, and
-`pending` semantics apply: not yet established, never proven absent. All 19 cite one source, the
+trusting `exists` alone. The 21 are not wrong — they are unproven at this granularity, and
+`pending` semantics apply: not yet established, never proven absent. Nineteen cite one source, the
 cross-language expansion index, which carries no card list at all, for cards no locale catalogue
-here indexes; the rows whose page did carry a list, and the rows the publisher's own locale
-databases answer, have been recorded as card-level.
+here indexes; two are secret-numbered rows the recorded set size decided against. The rows whose
+page did carry a list, and the rows the publisher's own locale databases answer, have been recorded
+as card-level.
 
 `needs-set-size` is a third answer, not a softer `does-not-carry`: it is the report declining to
 classify. It stands at 0 because the set database now records `printedSetSize` — the denominator
