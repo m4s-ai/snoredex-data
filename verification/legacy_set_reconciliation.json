@@ -19,6 +19,24 @@
       "rightSourceRecordId": "SET-SRC-SF-B14D72EA4DA2"
     },
     {
+      "aliasRelationId": "ALIASREL:3f5051ddf078923a",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:JP:SM-P"
+      ],
+      "leftLocality": "JP",
+      "leftSourceRecordId": "SET-SRC-CM-B2100D6FE637",
+      "mergeAllowed": false,
+      "rawIdentifier": "SM-P",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:KR:SM-P"
+      ],
+      "rightLocality": "KR",
+      "rightSourceRecordId": "SET-SRC-SF-3F07705BCB4E"
+    },
+    {
       "aliasRelationId": "ALIASREL:517c7aeeccaf2fa9",
       "basis": "positive provider records identify different localities",
       "equivalent": false,
@@ -35,6 +53,24 @@
       ],
       "rightLocality": "KR",
       "rightSourceRecordId": "SET-SRC-SF-0CE6692294C3"
+    },
+    {
+      "aliasRelationId": "ALIASREL:52ccecddba2af0ff",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:JP:S-P"
+      ],
+      "leftLocality": "JP",
+      "leftSourceRecordId": "SET-SRC-CM-EBF34DE63108",
+      "mergeAllowed": false,
+      "rawIdentifier": "S-P",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:TW:S-P"
+      ],
+      "rightLocality": "TW",
+      "rightSourceRecordId": "SET-SRC-SF-70206B0A1EE8"
     },
     {
       "aliasRelationId": "ALIASREL:6d31bfc4455cd31a",
@@ -71,6 +107,42 @@
       ],
       "rightLocality": "ID",
       "rightSourceRecordId": "SET-SRC-SF-966729E67AE5"
+    },
+    {
+      "aliasRelationId": "ALIASREL:da6fe2399b13e49e",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:JP:XY-P"
+      ],
+      "leftLocality": "JP",
+      "leftSourceRecordId": "SET-SRC-CM-B412E38F9787",
+      "mergeAllowed": false,
+      "rawIdentifier": "XY-P",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:KR:XY-P"
+      ],
+      "rightLocality": "KR",
+      "rightSourceRecordId": "SET-SRC-SF-91431172F7D6"
+    },
+    {
+      "aliasRelationId": "ALIASREL:f0a7d435c727d071",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:JP:SM-P"
+      ],
+      "leftLocality": "JP",
+      "leftSourceRecordId": "SET-SRC-CM-B2100D6FE637",
+      "mergeAllowed": false,
+      "rawIdentifier": "SM-P",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:TW:SM-P"
+      ],
+      "rightLocality": "TW",
+      "rightSourceRecordId": "SET-SRC-SF-9C8B8E872651"
     }
   ],
   "catchUpRelations": [
@@ -5667,7 +5739,9 @@
       "rawProductKind": "physical-card-set-or-product",
       "rawRecordHash": "sha256:f9607a4491cd1838c40f3bf2d6c2c0a48a9002017ad5167f9a67ada025b4a915",
       "relatedAliasRelationIds": [
+        "ALIASREL:3f5051ddf078923a",
         "ALIASREL:907e22f6caa7a530",
+        "ALIASREL:f0a7d435c727d071",
         "ALIASREL:6d31bfc4455cd31a"
       ],
       "retrieved": "2026-07-21",
@@ -5911,7 +5985,7 @@
       "localSetIds": [
         "LOCALSET:JP:XY-P"
       ],
-      "migrationDisposition": "mapped",
+      "migrationDisposition": "split-related",
       "provider": "cardmarket",
       "rawIdentifier": "XY-P",
       "rawLocality": "JP",
@@ -5919,7 +5993,9 @@
       "rawName": "XY Promos",
       "rawProductKind": "physical-card-set-or-product",
       "rawRecordHash": "sha256:5959746f3de83654bccfa1df96993194fbe6290f2249ffd6ab53256ff5a92a47",
-      "relatedAliasRelationIds": [],
+      "relatedAliasRelationIds": [
+        "ALIASREL:da6fe2399b13e49e"
+      ],
       "retrieved": "2026-07-21",
       "setEditionIds": [
         "EDITION:JP:Japanese:XY-P"
@@ -8043,6 +8119,7 @@
       "rawRecordHash": "sha256:4b08a23c4fd9941768539d4ea596d4e45d567fed0ab3ec8f0cfc72479b45efb1",
       "relatedAliasRelationIds": [
         "ALIASREL:517c7aeeccaf2fa9",
+        "ALIASREL:52ccecddba2af0ff",
         "ALIASREL:188a110e857dd6f3"
       ],
       "retrieved": "2026-07-21",
@@ -63835,7 +63912,7 @@
     }
   ],
   "meta": {
-    "buildHash": "sha256:fe9b0bff18f708f5a71b3255ee336301abebbf09726793aaaf9f701a9cfd83e3",
+    "buildHash": "sha256:06b28b011790f952882d221fba660e88b2a2718cb779533f446cb26e7f746c57",
     "coverageVersion": "legacy-set-reconciliation-v1",
     "denominators": {
       "aliases": 135,
@@ -63848,10 +63925,10 @@
       "analysis_confirmed_releases.csv": "sha256:3f79df9a074eecdf65aa5404ffdd8a98fe932a4d87a461235a7150b7d3bc9b6a",
       "analysis_confirmed_releases.json": "sha256:857e64bac68745f6944e042b3c2af22d208d272897530a2b45609317a7ae7b8b",
       "finish_units.json": "sha256:0ea02a978c3c0f7317b7c37fe3baa224b0486ca5386ab2040ae42458fe8935ad",
-      "print_identity_dryrun.json": "sha256:6e56638d2266194a763c5edac4524f143bdaa753466627c530fe49b1b0543440",
-      "set_catalogue_dryrun.json": "sha256:d44f938e4b85d3ede779a4b25975833a7fbdcf4be182dfa795e169381d9261e1",
-      "set_catalogue_sources.json": "sha256:4ede0e14c268225dda06a1037a1fda74b60f6db12f09df1d948675f61510f171",
-      "source_first_prints.json": "sha256:afa07e764b52f3692c69c6e5df15277e40816c1ef31cbd15a14967dfb4ebff36"
+      "print_identity_dryrun.json": "sha256:84ad36e97ae6c82381c7531a8ed7891f5eea30ed9341070cae9e14e737246657",
+      "set_catalogue_dryrun.json": "sha256:1680eeab0a4b6a2dda0acce847f23b2c3d25b714673a94f8bec5cf19f9dd6189",
+      "set_catalogue_sources.json": "sha256:c514132bd437f04c9cea0e2ecb179eb88a1faf5677f261fbfaae77a2f1a732fa",
+      "source_first_prints.json": "sha256:f5ba741f6fb3c8c652e99a5bb03100a3d589ae87bca5a52b03327a9794bb0ef8"
     },
     "issue": 148,
     "schema": "snoredex-legacy-set-reconciliation",
@@ -63936,10 +64013,10 @@
       "accounted": 135,
       "balanced": true,
       "buckets": {
-        "mapped": 131,
+        "mapped": 130,
         "needs-evidence": 0,
         "positively-retained-legacy": 2,
-        "split-related": 2
+        "split-related": 3
       },
       "coverageVersion": "legacy-set-reconciliation-v1",
       "denominator": 135
@@ -64001,7 +64078,7 @@
     },
     "relationDiagnostics": {
       "aliasMerges": 0,
-      "aliasSplitsOrRelations": 4,
+      "aliasSplitsOrRelations": 8,
       "countDelta": 0,
       "orphanReleaseRows": 0,
       "releaseLanguageLinks": {

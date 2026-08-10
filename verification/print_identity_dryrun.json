@@ -24,18 +24,18 @@
     "legacyProductIdentityTuples": 196,
     "legacyLanguageUnits": 719,
     "legacyExcludedCodeCardUnits": 75,
-    "sourceFirstRecords": 34,
+    "sourceFirstRecords": 39,
     "finishPrintingClaims": 693,
-    "candidateClaims": 1528,
+    "candidateClaims": 1534,
     "candidateClaimDispositions": {
       "bounded-contradicted": 85,
-      "candidate-needs-evidence": 227,
-      "established-and-mapped": 1141,
+      "candidate-needs-evidence": 228,
+      "established-and-mapped": 1146,
       "positively-excluded": 75
     },
-    "setEditionNodes": 447,
-    "cardReleaseNodes": 595,
-    "cardReleaseNodesIdentified": 485,
+    "setEditionNodes": 452,
+    "cardReleaseNodes": 600,
+    "cardReleaseNodesIdentified": 490,
     "cardReleaseNodesNeedingLocalIdentifier": 110,
     "physicalPrintingNodes": 473,
     "physicalPrintingsByEvidenceClass": {
@@ -50,16 +50,16 @@
     "unexplainedProductSplits": 0,
     "identityCollisions": 1,
     "unresolvedUnits": 0,
-    "unresolvedPhysicalClaims": 0,
+    "unresolvedPhysicalClaims": 1,
     "orphanSpecimens": 0,
-    "sourceFirstPrintsAdmitted": 34,
-    "sourceFirstPrintsHeld": 3,
+    "sourceFirstPrintsAdmitted": 39,
+    "sourceFirstPrintsHeld": 0,
     "cardReleaseNodesByLocality": {
       "WEST": 347,
       "JP": 66,
-      "KR": 50,
+      "KR": 52,
       "CN": 42,
-      "TW": 34,
+      "TW": 37,
       "ID": 32,
       "TH": 24
     },
@@ -5830,7 +5830,13 @@
       }
     ],
     "unresolvedUnits": [],
-    "unresolvedPhysicalClaims": [],
+    "unresolvedPhysicalClaims": [
+      {
+        "printingId": "PHYSICAL:specimen:SPEC-0030",
+        "releaseCandidates": [],
+        "reason": "specimen observation does not resolve to exactly one card release"
+      }
+    ],
     "orphanSpecimens": []
   },
   "candidateClaims": [
@@ -23127,6 +23133,30 @@
       "reason": "positive source-first specimen/card record"
     },
     {
+      "claimId": "CLAIM:source-first:KR:SM-P:140:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "KR:SM-P:140:base",
+      "sourceRecord": null,
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
+      "materializedTargetId": "RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:KR:XY-P:167:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "KR:XY-P:167:base",
+      "sourceRecord": null,
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
+      "materializedTargetId": "RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
       "claimId": "CLAIM:source-first:TH:SM-P:083:base",
       "claimKind": "card-release",
       "sourceKind": "source-first-record",
@@ -23244,6 +23274,42 @@
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:unmapped-work:SPEC-0024",
       "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:unmapped-work:SPEC-0024",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TW:S-P:145:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TW:S-P:145:base",
+      "sourceRecord": null,
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
+      "materializedTargetId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TW:SM-P:053:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TW:SM-P:053:base",
+      "sourceRecord": null,
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "materializedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TW:SV-P:215:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TW:SV-P:215:base",
+      "sourceRecord": null,
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TW:T-Chinese:SV-P:215:unmapped-work:SPEC-0032",
+      "materializedTargetId": "RELEASE:TW:T-Chinese:SV-P:215:unmapped-work:SPEC-0032",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -23394,6 +23460,17 @@
       "proposedTargetId": "PHYSICAL:specimen:SPEC-0025",
       "materializedTargetId": null,
       "reason": "corroborates PHYSICAL:F0231-P01, already established from the finish store"
+    },
+    {
+      "claimId": "CLAIM:specimen:SPEC-0030",
+      "claimKind": "physical-printing",
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0030",
+      "evidenceStatus": "observed",
+      "disposition": "candidate-needs-evidence",
+      "proposedTargetId": "PHYSICAL:specimen:SPEC-0030",
+      "materializedTargetId": null,
+      "reason": "specimen does not resolve to exactly one card release"
     }
   ],
   "setEditions": [
@@ -25001,6 +25078,32 @@
       ]
     },
     {
+      "setEditionId": "EDITION:KR:Korean:SM-P",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "SM-P",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:SM-P:140:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:KR:Korean:XY-P",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "XY-P",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:XY-P:167:base"
+      ]
+    },
+    {
       "setEditionId": "EDITION:KR:Korean:via-20th:unknown-local-set",
       "locality": "KR",
       "language": "Korean",
@@ -25872,6 +25975,45 @@
       ],
       "establishingClaimIds": [
         "CLAIM:legacy:U0625"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TW:T-Chinese:S-P",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": "S-P",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TW:S-P:145:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TW:T-Chinese:SM-P",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": "SM-P",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TW:SM-P:053:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TW:T-Chinese:SV-P",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": "SV-P",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TW:SV-P:215:base"
       ]
     },
     {
@@ -34188,6 +34330,56 @@
       "sourceFirstRecordId": "KR:S-P:101:base"
     },
     {
+      "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
+      "setEditionId": "EDITION:KR:Korean:SM-P",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "SM-P",
+      "localNumber": "140",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:KR:SM-P:140:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:SM-P:140:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "KR:SM-P:140:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
+      "setEditionId": "EDITION:KR:Korean:XY-P",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "XY-P",
+      "localNumber": "167",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:KR:XY-P:167:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:XY-P:167:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "KR:XY-P:167:base"
+    },
+    {
       "cardReleaseId": "RELEASE:KR:Korean:via-20th:unknown-local-set:via-047:Snorlax-Stir-and-Snooze-Sleepy-Press:unknown-local-id",
       "setEditionId": "EDITION:KR:Korean:via-20th:unknown-local-set",
       "locality": "KR",
@@ -36268,6 +36460,81 @@
       "legacyProducts": [
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Traditional-Chinese-Products/Snorlax-PKMTCHS-P-145"
       ]
+    },
+    {
+      "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
+      "setEditionId": "EDITION:TW:T-Chinese:S-P",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": "S-P",
+      "localNumber": "145",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TW:S-P:145:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TW:S-P:145:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TW:S-P:145:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "setEditionId": "EDITION:TW:T-Chinese:SM-P",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": "SM-P",
+      "localNumber": "053",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TW:SM-P:053:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TW:SM-P:053:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TW:SM-P:053:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TW:T-Chinese:SV-P:215:unmapped-work:SPEC-0032",
+      "setEditionId": "EDITION:TW:T-Chinese:SV-P",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": "SV-P",
+      "localNumber": "215",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TW:SV-P:215:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TW:SV-P:215:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TW:SV-P:215:base"
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:sc1a F:127/154:unmapped-work:SPEC-0011",
