@@ -797,12 +797,22 @@ def collect() -> None:
         #   -5  the publisher's own Asia card database answers five Thai/Indonesian rows at card
         #       level, replacing a statement about the set with a record of the card.
         #
-        # The 19 left cite the cross-language expansion index, which carries no card list at all,
-        # for cards no locale catalogue here indexes. That is the honest residue rather than a
-        # backlog of bookkeeping.
-        UNSOUND_SET_LEVEL_BASELINE = 19
+        #   -4  printed set sizes recorded in the set database (#146) decide the six rows that
+        #       Cardmarket's era-dependent "Ultra Rare" could not: two are inside their numbered
+        #       run and carry, four are secret-numbered and do not.
+        #
+        # The baseline tracks the AGGREGATE — rows whose inference does not reach the card, whether
+        # because it demonstrably fails or because the report cannot yet say. Two counters for one
+        # queue is how a real improvement reads as a loss: resolving an undecidable row into a
+        # failing one lowers `needs-set-size` and raises `does-not-carry`, and a gate watching only
+        # the second would redden while the queue shrank. That is the shape of gate this repository
+        # has already learned to stop building.
+        #
+        # The 21 left are the honest residue: 19 cite the cross-language expansion index, which
+        # carries no card list at all, and 2 are secret-numbered rows the size decided against.
+        UNSOUND_SET_LEVEL_BASELINE = 21
         UNSCOPED_ABSENCE_BASELINE = 27
-        unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
+        unsound_now = semantic_counts["setLevelConfirmationsNotReachingTheCard"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
         check(
             "N17",
@@ -810,7 +820,7 @@ def collect() -> None:
             "FAIL",
             unsound_now <= UNSOUND_SET_LEVEL_BASELINE
             and unscoped_now <= UNSCOPED_ABSENCE_BASELINE,
-            f"set-level confirmations that do not carry: {unsound_now} "
+            f"set-level confirmations not reaching the card: {unsound_now} "
             f"(baseline {UNSOUND_SET_LEVEL_BASELINE}); unscoped-absence contradictions: "
             f"{unscoped_now} (baseline {UNSCOPED_ABSENCE_BASELINE}). A rise means a pass wrote a "
             f"verdict on set-level or unscoped-absence reasoning.",

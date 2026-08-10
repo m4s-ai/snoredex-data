@@ -151,8 +151,23 @@ def granularity(unit: dict[str, Any]) -> str:
     return "unclassified"
 
 
+def printed_set_sizes(set_sources: dict) -> dict[str, int]:
+    """The denominator printed beside the collector number, per set, from the set database.
+
+    This is what separates the two things Cardmarket's `Ultra Rare` means. A card is inside the
+    numbered run when its number is within the set's printed size, and once that number is
+    recorded, run membership is computed from data rather than inferred from a rarity word — which
+    is the requirement filed on #146 and the reason the `needs-set-size` state existed.
+    """
+    return {
+        row["raw"]["legacySetCode"]: row["raw"]["printedSetSize"]
+        for row in set_sources["sourceRecords"]
+        if row["sourceKind"] == "printed-set-size-record"
+    }
+
+
 def build(units: list[dict], cards: list[dict], registry: dict,
-          capabilities: dict, adjudications: dict) -> dict[str, Any]:
+          capabilities: dict, adjudications: dict, set_sources: dict) -> dict[str, Any]:
     # Keyed by the variant token too, not just set and number. Seventeen (setCode, number) pairs
     # carry more than one card and eight of those differ in rarity, always the same way: a base
     # printing and a promo variant sharing a collector number. Keying without the token kept
@@ -161,6 +176,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
     # evidence problem in a new place: judge a row by its own record.
     by_key = {(c["setCode"], str(c.get("number") or ""), c.get("variantToken") or "base"): c
               for c in cards}
+    sizes = printed_set_sizes(set_sources)
 
     # Which providers may carry absence at all. Both stores are consulted and must agree; they do
     # today, and a disagreement is worth seeing rather than silently preferring one.
@@ -187,6 +203,18 @@ def build(units: list[dict], cards: list[dict], registry: dict,
                            unit.get("variant") or "base"))
         rarity = card["rarity"] if card else None
         inside_run, run_reason = RUN_MEMBERSHIP.get(rarity, (None, "rarity not classified"))
+        # A recorded set size outranks the rarity word in both directions. It is the fact the word
+        # was standing in for, so it settles the era-dependent rarities and corrects any other
+        # classification that disagrees with the printed denominator.
+        size = sizes.get(unit["setCode"])
+        number_text = str(unit.get("number") or "")
+        if size is not None and number_text.isdigit():
+            inside_run = int(number_text) <= size
+            run_reason = (
+                f"collector number {int(number_text)} against the set's printed size {size}, "
+                f"recorded in the set database: "
+                + ("inside the numbered run" if inside_run else "numbered above the printed size")
+            )
 
         closed_list = bool(CLOSED_LIST_SOURCE.search(unit.get("sourceType") or ""))
         inference = None
@@ -263,6 +291,10 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "setLevelConfirmationsThatCarry": sum(1 for r in rows if r["inference"] == "carries"),
             "setLevelConfirmationsThatDoNotCarry": len(unsound),
             "setLevelConfirmationsNeedingSetSize": len(needs_size),
+            # One queue, reported as one number. Splitting "the inference fails" from "this report
+            # cannot say" is useful to a reader and misleading to a gate: resolving an undecidable
+            # row into a failing one moves both counters and reads as a regression on either half.
+            "setLevelConfirmationsNotReachingTheCard": len(unsound) + len(needs_size),
             "contradictionsByBacking": dict(Counter(
                 r["inference"] for r in rows if r["status"] == "contradicted")),
             "unsoundByRarity": dict(Counter(r["rarity"] for r in unsound).most_common()),
@@ -285,6 +317,7 @@ def main() -> int:
         read_json(ROOT / "verification" / "source_registry.json"),
         read_json(ROOT / "verification" / "source_capabilities.json"),
         read_json(ROOT / "verification" / "owner_adjudications.json"),
+        read_json(ROOT / "verification" / "set_catalogue_sources.json"),
     )
 
     if args.check:

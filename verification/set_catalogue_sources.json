@@ -7,12 +7,13 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in set_catalogue_dryrun.json.",
     "counts": {
-      "sourceRecords": 323,
+      "sourceRecords": 329,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 29,
       "releaseDateRecords": 45,
       "editionAvailabilityRecords": 2,
-      "localitySetIndexRecords": 112
+      "localitySetIndexRecords": 112,
+      "printedSetSizeRecords": 6
     }
   },
   "sourceRecords": [
@@ -8577,6 +8578,90 @@
         "cardImageUrls": [
           "https://asia.pokemon-card.com/id/card-img/id00003466.png"
         ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SIZE-099BDAFEE0A2",
+      "sourceKind": "printed-set-size-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "s1H",
+      "retrieved": "2026-08-10",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_(TCG)",
+      "raw": {
+        "legacySetCode": "s1H",
+        "printedSetSize": 60,
+        "numbering": "japanese",
+        "basis": "The denominator printed beside the collector number, read from the article's set list: the Japanese Shield half of the Sword & Shield pair; the English SSH set is 202. Not inferred from a rarity, a name or a card count — a card is inside the numbered run when its number is within this size in its own numbering, and Bulbapedia carries both numberings on one page."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SIZE-3C14AE104A81",
+      "sourceKind": "printed-set-size-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "CSM2cC",
+      "retrieved": "2026-08-10",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_(ATCG)",
+      "raw": {
+        "legacySetCode": "CSM2cC",
+        "printedSetSize": 150,
+        "numbering": "simplified-chinese",
+        "basis": "The denominator printed beside the collector number, read from the article's set list: the Simplified Chinese set list numbers every row out of 150. Not inferred from a rarity, a name or a card count — a card is inside the numbered run when its number is within this size in its own numbering, and Bulbapedia carries both numberings on one page."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SIZE-66BE5A521557",
+      "sourceKind": "printed-set-size-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "TRR",
+      "retrieved": "2026-08-10",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/EX_Team_Rocket_Returns_(TCG)",
+      "raw": {
+        "legacySetCode": "TRR",
+        "printedSetSize": 109,
+        "numbering": "western",
+        "basis": "The denominator printed beside the collector number, read from the article's set list: 109 in the English numbering the Setlist/nmentry rows use; 84 in the Japanese rows. Not inferred from a rarity, a name or a card count — a card is inside the numbered run when its number is within this size in its own numbering, and Bulbapedia carries both numberings on one page."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SIZE-C009435C2CF1",
+      "sourceKind": "printed-set-size-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "CS1aC",
+      "retrieved": "2026-08-10",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_(ATCG)",
+      "raw": {
+        "legacySetCode": "CS1aC",
+        "printedSetSize": 135,
+        "numbering": "simplified-chinese",
+        "basis": "The denominator printed beside the collector number, read from the article's set list: the Simplified Chinese set list numbers every row out of 135. Not inferred from a rarity, a name or a card count — a card is inside the numbered run when its number is within this size in its own numbering, and Bulbapedia carries both numberings on one page."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SIZE-E6C5AF58DDA1",
+      "sourceKind": "printed-set-size-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "RR",
+      "retrieved": "2026-08-10",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Rising_Rivals_(TCG)",
+      "raw": {
+        "legacySetCode": "RR",
+        "printedSetSize": 111,
+        "numbering": "western",
+        "basis": "The denominator printed beside the collector number, read from the article's set list: the set list runs to 111/111; the Japanese Bonds to the End of Time half is 90. Not inferred from a rarity, a name or a card count — a card is inside the numbered run when its number is within this size in its own numbering, and Bulbapedia carries both numberings on one page."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SIZE-E97F5C11A767",
+      "sourceKind": "printed-set-size-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "sm9",
+      "retrieved": "2026-08-10",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Team_Up_(TCG)",
+      "raw": {
+        "legacySetCode": "sm9",
+        "printedSetSize": 95,
+        "numbering": "japanese",
+        "basis": "The denominator printed beside the collector number, read from the article's set list: Tag Bolt in the Japanese numbering; the English Team Up set is 181. Not inferred from a rarity, a name or a card count — a card is inside the numbered run when its number is within this size in its own numbering, and Bulbapedia carries both numberings on one page."
       }
     }
   ]
