@@ -548,8 +548,14 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
     # Specimen reachability is retained from the accepted D1 decision. A source-first record gives
     # the specimen a card-release claim even when its work equivalence remains unresolved.
     product_codes = {(c["setCode"], str(c.get("number") or "")) for c in cards}
-    admitted_specimens = {entry["specimenId"] for entry in source_first.get("prints", [])}
-    held_specimens = {entry["specimenId"] for entry in source_first.get("held", [])}
+    # `.get`, not `[...]`, and None filtered out: since ADR-0001 D5 a print may rest on a tier-1
+    # publisher record instead of a specimen, and those carry no specimen id to collect. A missing
+    # id here is a record grounded another way, never a record grounded in nothing — `N4` is what
+    # enforces that a print has a ground at all.
+    admitted_specimens = {
+        entry.get("specimenId") for entry in source_first.get("prints", [])} - {None}
+    held_specimens = {
+        entry.get("specimenId") for entry in source_first.get("held", [])} - {None}
     orphan_specimens = []
     for spec in specimens:
         code = str(spec.get("setCode") or "")

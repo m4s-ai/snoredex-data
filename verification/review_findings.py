@@ -715,18 +715,39 @@ def collect() -> None:
         # from the harvest.
         admitted = source_first["prints"]
 
+        # What may ground an admitted print. D1 said a physical specimen and nothing else; D5
+        # (owner, 2026-08-10) added a tier-1 publisher record, for language and identity only.
+        # The two are spelled out as separate words because they are separate acts, and widening
+        # this set is the one edit that lets a weaker claim mint a printing.
+        #
+        # Tier is read from the registry rather than hardcoded, so a provider that is re-graded
+        # cannot keep grounding prints on a rank it no longer holds.
+        # Named print_ground_registry, not registry: `guarded` is a `with` block and opens no
+        # scope, and a later section binds `registry` to the same file. A bare name here would be
+        # read by whichever section ran last, which is how the finish counts were clobbered once.
+        print_ground_registry = load("verification/source_registry.json")
+        tier_by_provider = {
+            row["providerId"]: row["authorityTier"]
+            for row in print_ground_registry["providers"]
+        }
         ungrounded = [
             entry["printId"] for entry in admitted
-            if not entry.get("specimenId") or not entry.get("evidence")
+            if not entry.get("evidence")
             or not entry.get("localSetCode") or not entry.get("localNumber")
+            or not (
+                entry.get("specimenId")
+                or (tier_by_provider.get(entry.get("providerId")) == 1
+                    and entry.get("sourceUrl"))
+            )
         ]
         check(
             "N4",
-            "Every admitted source-first print cites a specimen and names its own identifiers",
+            "Every admitted source-first print is grounded and names its own identifiers",
             "FAIL",
             not ungrounded,
-            f"{len(ungrounded)} print(s) admitted without a specimen, evidence or a complete local "
-            f"identifier: {ungrounded[:5]}",
+            f"{len(ungrounded)} print(s) admitted without evidence, a complete local identifier, "
+            f"or a ground — a cited specimen (D1) or a tier-1 publisher record with a URL (D5): "
+            f"{ungrounded[:5]}",
         )
 
         # The other half of I7, on real data rather than on the projection: a printing whose set
@@ -773,9 +794,13 @@ def collect() -> None:
         #       the list is the claimed edition's own; eleven are fixed products whose article
         #       states its language editions separately.
         #
-        # The 24 left all cite the cross-language expansion index, which carries no card list at
-        # all. That is the honest residue rather than a backlog of bookkeeping.
-        UNSOUND_SET_LEVEL_BASELINE = 24
+        #   -5  the publisher's own Asia card database answers five Thai/Indonesian rows at card
+        #       level, replacing a statement about the set with a record of the card.
+        #
+        # The 19 left cite the cross-language expansion index, which carries no card list at all,
+        # for cards no locale catalogue here indexes. That is the honest residue rather than a
+        # backlog of bookkeeping.
+        UNSOUND_SET_LEVEL_BASELINE = 19
         UNSCOPED_ABSENCE_BASELINE = 27
         unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)

@@ -835,8 +835,21 @@ def build(documents: dict[str, Any] | None = None) -> tuple[dict[str, Any], dict
             },
             {
                 "fixtureId": "catch-up-is-edge-not-set-merge",
+                # Tests its own basis and nothing more. It used to also demand
+                # terminalState == "complete", which is a different and stronger property: an
+                # unresolved edge is still an edge that does not merge sets. Since ADR-0001 D5 the
+                # publisher-record catch-ups are honestly `needs-evidence` — their catchUpOf names
+                # a card work, and I5 wants an explicit decision before that becomes a resolved
+                # equivalence — so conflating the two would have failed a fixture for telling the
+                # truth. What must hold is that no edge merges sets and that a resolved edge names
+                # exactly one card release while an unresolved one names none.
                 "passed": bool(catch_up_edges) and all(
-                    not edge["setMergeAllowed"] and edge["terminalState"] == "complete"
+                    not edge["setMergeAllowed"]
+                    and (
+                        len(edge["sourceCardReleaseIds"]) == 1
+                        if edge["terminalState"] == "complete"
+                        else not edge["sourceCardReleaseIds"]
+                    )
                     for edge in catch_up_edges
                 ),
                 "basis": "source-first catch-up records point to card releases, never alias or merge sets",

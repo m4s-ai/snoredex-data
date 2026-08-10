@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-print-identity-dryrun",
     "schemaVersion": "0.2.0",
-    "generated": "2026-08-09",
+    "generated": "2026-08-10",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "status": "dry-run — proposes nothing to authoritative stores, migrates nothing",
     "baselineId": "cardmarket-search-2026-07-21",
@@ -24,18 +24,18 @@
     "legacyProductIdentityTuples": 196,
     "legacyLanguageUnits": 719,
     "legacyExcludedCodeCardUnits": 75,
-    "sourceFirstRecords": 8,
+    "sourceFirstRecords": 28,
     "finishPrintingClaims": 693,
-    "candidateClaims": 1502,
+    "candidateClaims": 1522,
     "candidateClaimDispositions": {
       "bounded-contradicted": 85,
       "candidate-needs-evidence": 227,
-      "established-and-mapped": 1115,
+      "established-and-mapped": 1135,
       "positively-excluded": 75
     },
-    "setEditionNodes": 428,
-    "cardReleaseNodes": 569,
-    "cardReleaseNodesIdentified": 459,
+    "setEditionNodes": 444,
+    "cardReleaseNodes": 589,
+    "cardReleaseNodesIdentified": 479,
     "cardReleaseNodesNeedingLocalIdentifier": 110,
     "physicalPrintingNodes": 473,
     "physicalPrintingsByEvidenceClass": {
@@ -52,7 +52,7 @@
     "unresolvedUnits": 0,
     "unresolvedPhysicalClaims": 0,
     "orphanSpecimens": 0,
-    "sourceFirstPrintsAdmitted": 8,
+    "sourceFirstPrintsAdmitted": 28,
     "sourceFirstPrintsHeld": 0,
     "cardReleaseNodesByLocality": {
       "WEST": 347,
@@ -60,8 +60,8 @@
       "KR": 50,
       "CN": 42,
       "TW": 34,
-      "ID": 15,
-      "TH": 15
+      "ID": 27,
+      "TH": 23
     },
     "needsLocalIdentifierByLocality": {
       "KR": 49,
@@ -15835,7 +15835,7 @@
       "claimKind": "card-release",
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0129",
-      "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/17374/",
       "evidenceStatus": "confirmed",
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
@@ -15847,7 +15847,7 @@
       "claimKind": "card-release",
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0130",
-      "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/13046/",
       "evidenceStatus": "confirmed",
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:TH:Thai:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
@@ -16399,7 +16399,7 @@
       "claimKind": "card-release",
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0176",
-      "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/2468/",
       "evidenceStatus": "confirmed",
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:TH:Thai:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
@@ -17995,7 +17995,7 @@
       "claimKind": "card-release",
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0309",
-      "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/7755/",
       "evidenceStatus": "confirmed",
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:TH:Thai:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
@@ -18931,7 +18931,7 @@
       "claimKind": "card-release",
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0387",
-      "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/8631/",
       "evidenceStatus": "confirmed",
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:TH:Thai:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
@@ -22911,6 +22911,150 @@
       "reason": "language names its locality"
     },
     {
+      "claimId": "CLAIM:source-first:ID:AC3D:120/172:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:AC3D:120/172:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/2501/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:AC3D:120/172:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:AC3D:120/172:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:AC3a:145/205:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:AC3a:145/205:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/2129/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:AC3a:145/205:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:AC3a:145/205:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:AS1D:108/140:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:AS1D:108/140:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/3466/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:AS1D:108/140:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:AS1D:108/140:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:AS1b:112/150:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:AS1b:112/150:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/1605/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:AS1b:112/150:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:AS1b:112/150:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:sc1D I:132/164:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:sc1D I:132/164:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/764/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:sc1D I:132/164:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:sc1D I:132/164:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:sc1D I:133/164:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:sc1D I:133/164:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/765/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:sc1D I:133/164:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:sc1D I:133/164:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:sc1a I:127/154:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:sc1a I:127/154:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/454/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:sc1a I:127/154:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:sc1a I:127/154:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:sc1b I:119/153:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:sc1b I:119/153:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/600/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:sc1b I:119/153:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:sc1b I:119/153:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:sc1b I:120/153:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:sc1b I:120/153:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/601/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:sc1b I:120/153:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:sc1b I:120/153:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:sc3b I:126/158:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:sc3b I:126/158:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/3982/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:sc3b I:126/158:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:sc3b I:126/158:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:scA I:084/135:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:scA I:084/135:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/2796/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:scA I:084/135:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:scA I:084/135:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:scD I:111/159:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:scD I:111/159:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/4527/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:scD I:111/159:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:scD I:111/159:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
       "claimId": "CLAIM:source-first:KR:S-P:101:base",
       "claimKind": "card-release",
       "sourceKind": "source-first-record",
@@ -22920,6 +23064,102 @@
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
       "materializedTargetId": "RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:sc1D T:132/164:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:sc1D T:132/164:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/439/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:sc1D T:132/164:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:sc1D T:132/164:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:sc1D T:133/164:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:sc1D T:133/164:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/440/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:sc1D T:133/164:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:sc1D T:133/164:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:sc1a T:127/154:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:sc1a T:127/154:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/127/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:sc1a T:127/154:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:sc1a T:127/154:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:sc1b T:119/153:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:sc1b T:119/153:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/273/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:sc1b T:119/153:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:sc1b T:119/153:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:sc1b T:120/153:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:sc1b T:120/153:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/274/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:sc1b T:120/153:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:sc1b T:120/153:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:sc3b T:126/158:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:sc3b T:126/158:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/1006/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:sc3b T:126/158:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:sc3b T:126/158:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:scA T:084/135:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:scA T:084/135:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/1806/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:scA T:084/135:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:scA T:084/135:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:TH:scD T:111/159:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:scD T:111/159:base",
+      "sourceRecord": "https://asia.pokemon-card.com/th/card-search/detail/2297/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TH:Thai:scD T:111/159:unmapped-work:None",
+      "materializedTargetId": "RELEASE:TH:Thai:scD T:111/159:unmapped-work:None",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -23559,6 +23799,138 @@
       ],
       "establishingClaimIds": [
         "CLAIM:legacy:U0646"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:AC3D",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AC3D",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AC3D:120/172:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:AC3a",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AC3a",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AC3a:145/205:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:AS1D",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AS1D",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AS1D:108/140:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:AS1b",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AS1b",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AS1b:112/150:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:sc1D I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1D I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1D I:132/164:base",
+        "CLAIM:source-first:ID:sc1D I:133/164:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:sc1a I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1a I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1a I:127/154:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:sc1b I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1b I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1b I:119/153:base",
+        "CLAIM:source-first:ID:sc1b I:120/153:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:sc3b I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc3b I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc3b I:126/158:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:scA I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "scA I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:scA I:084/135:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:scD I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "scD I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:scD I:111/159:base"
       ]
     },
     {
@@ -25094,6 +25466,86 @@
       "establishingClaimIds": [
         "CLAIM:legacy:U0775",
         "CLAIM:legacy:U0780"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:sc1D T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1D T",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1D T:132/164:base",
+        "CLAIM:source-first:TH:sc1D T:133/164:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:sc1a T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1a T",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1a T:127/154:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:sc1b T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1b T",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1b T:119/153:base",
+        "CLAIM:source-first:TH:sc1b T:120/153:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:sc3b T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc3b T",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc3b T:126/158:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:scA T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "scA T",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:scA T:084/135:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:scD T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "scD T",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:scD T:111/159:base"
       ]
     },
     {
@@ -30888,6 +31340,306 @@
       ]
     },
     {
+      "cardReleaseId": "RELEASE:ID:Indonesian:AC3D:120/172:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:AC3D",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AC3D",
+      "localNumber": "120/172",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:AC3D:120/172:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AC3D:120/172:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:AC3D:120/172:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:AC3a:145/205:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:AC3a",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AC3a",
+      "localNumber": "145/205",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:AC3a:145/205:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AC3a:145/205:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:AC3a:145/205:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:AS1D:108/140:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:AS1D",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AS1D",
+      "localNumber": "108/140",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:AS1D:108/140:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AS1D:108/140:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:AS1D:108/140:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:AS1b:112/150:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:AS1b",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "AS1b",
+      "localNumber": "112/150",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:AS1b:112/150:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:AS1b:112/150:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:AS1b:112/150:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:sc1D I:132/164:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:sc1D I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1D I",
+      "localNumber": "132/164",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:sc1D I:132/164:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1D I:132/164:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:sc1D I:132/164:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:sc1D I:133/164:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:sc1D I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1D I",
+      "localNumber": "133/164",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:sc1D I:133/164:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1D I:133/164:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:sc1D I:133/164:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:sc1a I:127/154:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:sc1a I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1a I",
+      "localNumber": "127/154",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:sc1a I:127/154:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1a I:127/154:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:sc1a I:127/154:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:sc1b I:119/153:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:sc1b I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1b I",
+      "localNumber": "119/153",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:sc1b I:119/153:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1b I:119/153:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:sc1b I:119/153:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:sc1b I:120/153:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:sc1b I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc1b I",
+      "localNumber": "120/153",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:sc1b I:120/153:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc1b I:120/153:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:sc1b I:120/153:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:sc3b I:126/158:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:sc3b I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "sc3b I",
+      "localNumber": "126/158",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:sc3b I:126/158:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:sc3b I:126/158:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:sc3b I:126/158:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:scA I:084/135:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:scA I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "scA I",
+      "localNumber": "084/135",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:scA I:084/135:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:scA I:084/135:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:scA I:084/135:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:scD I:111/159:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:scD I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "scD I",
+      "localNumber": "111/159",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:scD I:111/159:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:scD I:111/159:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "ID:scD I:111/159:base"
+    },
+    {
       "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
       "setEditionId": "EDITION:ID:Indonesian:via-SV-P/ID:unknown-local-set",
       "locality": "ID",
@@ -34575,6 +35327,206 @@
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143"
       ]
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:sc1D T:132/164:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:sc1D T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1D T",
+      "localNumber": "132/164",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:sc1D T:132/164:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1D T:132/164:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:sc1D T:132/164:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:sc1D T:133/164:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:sc1D T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1D T",
+      "localNumber": "133/164",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:sc1D T:133/164:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1D T:133/164:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:sc1D T:133/164:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:sc1a T:127/154:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:sc1a T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1a T",
+      "localNumber": "127/154",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:sc1a T:127/154:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1a T:127/154:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:sc1a T:127/154:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:sc1b T:119/153:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:sc1b T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1b T",
+      "localNumber": "119/153",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:sc1b T:119/153:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1b T:119/153:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:sc1b T:119/153:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:sc1b T:120/153:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:sc1b T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc1b T",
+      "localNumber": "120/153",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:sc1b T:120/153:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc1b T:120/153:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:sc1b T:120/153:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:sc3b T:126/158:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:sc3b T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "sc3b T",
+      "localNumber": "126/158",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:sc3b T:126/158:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:sc3b T:126/158:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:sc3b T:126/158:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:scA T:084/135:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:scA T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "scA T",
+      "localNumber": "084/135",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:scA T:084/135:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:scA T:084/135:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:scA T:084/135:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:scD T:111/159:unmapped-work:None",
+      "setEditionId": "EDITION:TH:Thai:scD T",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localSetCode": "scD T",
+      "localNumber": "111/159",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TH:scD T:111/159:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TH:scD T:111/159:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceFirstRecordId": "TH:scD T:111/159:base"
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:via-SV-P/TH:unknown-local-set:via-082:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",

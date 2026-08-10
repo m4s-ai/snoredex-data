@@ -75,13 +75,22 @@ def capability_pin(capability: Any) -> str:
     (Spelling that store's filename here would trip `N12`, which scans this file's source text for
     forbidden seed inputs and does not distinguish prose from code.)
 
-    Dropping `meta.generated` keeps the pin doing its job: a surface, edge, boundary or absence
-    scope that moves still changes this hash, and `meta.schemaVersion` is deliberately kept because
-    it does describe the contract. What is dropped is a timestamp that describes nothing.
+    Two things are dropped, and both are dropped for the same reason: they are not capabilities.
+
+    `meta.generated` is the day the file was written. `sourceResolution` is the routing of whatever
+    evidence rows the source registry happens to hold right now — one row per URL — so adding a
+    single citation to any unit rewrote it and expired every retained run. A run was captured under
+    a set of capabilities; which URLs exist today is not part of that set, and pinning it made
+    ordinary evidence work impossible rather than making provenance stronger.
+
+    What remains pinned is the contract itself: providers, surfaces, coverage edges, observations,
+    and `meta.schemaVersion`. A surface, edge, boundary or absence scope that moves still changes
+    this hash, which is the whole point of having one.
     """
-    document = dict(capability)
-    meta = {key: value for key, value in document.get("meta", {}).items() if key != "generated"}
-    document["meta"] = meta
+    document = {key: value for key, value in capability.items() if key != "sourceResolution"}
+    document["meta"] = {
+        key: value for key, value in document.get("meta", {}).items() if key != "generated"
+    }
     return content_hash(document)
 
 

@@ -141,6 +141,87 @@ all *additional* language claims on cards that were otherwise evidenced.
 
 `svLN 010` and `mP1 012` are Japanese deck products; their Traditional Chinese printing is not a TC edition of those decks but the standalone promo **SV-P 215** (2025 Taiwan Lantern Festival). Identity was established via the shared Cardmarket `cardKey` `Snorlax-Spike-Draw-Mega-Punch`, which also covers Surging Sparks 144 — the card the TCTCG article names as the source of 215/SV-P. When a language looks impossible for a product, check whether the card exists in that language under another set.
 
+### Thai and Indonesian do the same thing, at scale — and the codes say so
+
+The Traditional Chinese catch-up sets are not a Taiwanese peculiarity. Bulbapedia's
+`Pokémon in Thailand` states the mechanism outright: the game was localized into Thai in January
+2019, and "to help catch Thai players up with the game, **Thai-exclusive sets of currently legal,
+already-released cards were made**". Indonesia has the same shape. So a card that looks impossible
+in Thai or Indonesian because its Japanese set predates the market may exist there under a local
+set code and a different collector number, exactly as `sc1a F 127/154` does for Traditional Chinese.
+
+**The set codes carry the locality.** Later codes take a suffix the way Traditional Chinese takes
+`F`: **`T` for Thai, `I` for Indonesian** — `SV2a T`, `S10a_T`, `SC1D I`. Earlier Sun & Moon-era
+codes take an `A` prefix instead (`AS1a`, `AS1b`, `AS1D`, `AS2a`, `AS2D`, `AS3D`, `AC3a`, `AC3D`).
+And **one code can name two products**: the Thailand table lists `AS2D` twice, as the *Legends
+Awakened GX Starter Deck Set A* and *Set B*, differing only in a word of the set name. Never treat
+one of these codes as resolving to a single product without checking.
+
+What the official Asia database returned for those two locales on 2026-08-10 — a keyword search, not
+a manifest, so read it as what was found rather than as what exists — with the expansion-mark image
+each card page carries:
+
+| Mark (th) | Number | Mark (id) | Number | Card |
+|---|---|---|---|---|
+| `Sc1a` | 127/154 | `S_mark_Indonesia_SC1a` | 127/154 | Snorlax |
+| `Sc1b` | 119/153 | `S_mark_Indonesia_SC1b` | 119/153 | Snorlax V |
+| `Sc1b` | 120/153 | `S_mark_Indonesia_SC1b` | 120/153 | Snorlax VMAX |
+| `SC1D` | 132/164 | `S_mark_Indonesia_SC1D` | 132/164 | Snorlax |
+| `SC1D` | 133/164 | `S_mark_Indonesia_SC1D` | 133/164 | Snorlax V |
+| `Sc3b` | 126/158 | `S_mark_Indonesia_SC3b` | 126/158 | Snorlax |
+| `SCA` | 084/135 | `S_mark_Indonesia_SCA` | 084/135 | Snorlax |
+| *(placeholder)* | 111/159 | `S_mark_Indonesia_SCD` | 111/159 | Snorlax |
+| *(placeholder)* | 126/184 | `S_mark_Indonesia_S8b` | 126/184 | Snorlax |
+| `S10a_T` | 058/071 | `S10a_I` | 058/071 | Snorlax |
+| `S10bT` | 056/071 | `S_mark_Indonesia_S10b` | 056/071 | Snorlax |
+| `SH` | 026/038 | — | — | Snorlax |
+| `SV2a T` | 143/165 | `SV2a I` | 143/165 | Snorlax |
+| `SV2a T` | 181/165 | `SV2a I` | 181/165 | Snorlax |
+| `sv4a_th` | 145/190 | `sv4a_id` | 145/190 | Snorlax |
+| `sv4a_th` | 310/190 | `sv4a_id` | 310/190 | Snorlax |
+| `exp_sv5a_t` | 051/066 | — | — | Snorlax |
+| `th_SV4K_exp` | 059/066 | `IDN_SV4s_exp` | 118/132 | Snorlax Doll |
+| `SVMT_exp` | 094/175 | `IDN_SVMI_exp` | 094/175 | Snorlax ex |
+| `th_ma3t_exp` | 136/193 | `idn_ma3i_exp` | 136/193 | Hop's Snorlax |
+| `th_ma4t_exp` | 091/123 | `idn_MA4_exp` | 091/123 | Snorlax |
+| `th_SV9s_exp` | 109/139 | `idn_SV9s_exp` | 109/139 | Hop's Snorlax |
+| — | — | `exp_SV6s_I` | 136/167 | Snorlax |
+| — | — | `SM_expantion_mark_as1b` | 112/150 | Snorlax GX |
+| — | — | `SM_expantion_mark_as1D` | 108/140 | Snorlax GX |
+| — | — | `SM_expantion_mark_aC3aOUT` | 145/205 | Snorlax |
+| — | — | `SM_expantion_mark_ac3Dout` | 120/172 | Eevee & Snorlax GX |
+| — | — | *(promo mark)* | 030/S-P, 052/S-P, 100/S-P, 356/S-P | Snorlax V, Snorlax ×3 |
+
+**Never take the set code from the mark asset's filename. Render the badge, or read the card.**
+This cost a round of wrong data and the owner caught it. The filenames say `Sc1a.png`, `SCA.png`,
+`S_mark_Indonesia_SC1D.png`; the badges they render say **`sc1a T`**, **`scA T`**, **`sc1D I`** —
+wrong case, and missing the locale letter the card itself prints. The suffix rule is not decoration:
+Thai takes `T` and Indonesian takes `I` inside the badge exactly as Traditional Chinese takes `F` in
+`sc1a F`. Only the Sun & Moon-era Indonesian codes carry no suffix — `AS1b`, `AS1D`, `AC3a`, `AC3D`,
+uppercase, matching the Thailand article's own table, because there the `A` prefix is the locale
+marker.
+
+The mark assets are fetchable and legible: `https://asia.pokemon-card.com/<locale>/card-img/mark/
+<file>.png`, a few hundred pixels, upscale ×4 and read it. The card artwork is at
+`/<locale>/card-img/<locale>NNNNNNNN.png` and carries the code in its lower-left corner beside the
+regulation mark and collector number.
+
+**The general rule, which is the part worth keeping: when a structured field is missing or looks
+like a placeholder, check whether the image carries it before recording an absence.** Thai `111/159`
+was held back as "set code not asserted" purely because its mark asset is named `アセット 12` — while
+the card image reads `scD T`, regulation mark E, `111/159`, Illus. Yuya Oka, ©2021. That was not
+caution; it was declining to look. It applies to any source that serves an image beside its
+metadata.
+
+One more filename trap, which the badge does not fix: **the code is not always the Japanese one**.
+`136/193` is `m2a` in Traditional Chinese (`twhk_m2a_exp`) but `ma3` in Thai and Indonesian
+(`th_ma3t_exp`, `idn_ma3i_exp`) for what the number, card name and regulation mark all say is one
+card. Identify by number + denominator + card name + regulation mark.
+
+Twenty of these are admitted as printings under ADR-0001 **D5** (owner, 2026-08-10), which extends
+D1 to a catch-up code evidenced by a tier-1 publisher record, for language and identity only.
+Finish stays `pending`: a database page cannot be turned over.
+
 ### Two page types worth reaching for earlier next time
 
 - **`Snorlax (TCG)`** — a master list for the species, one block per card with every release as `jpset=` / `enset=` pairs. It resolves Japanese↔English correspondence for all 40 cards in one fetch. It does **not** carry Korean or Chinese, so it only helps Japanese units.
