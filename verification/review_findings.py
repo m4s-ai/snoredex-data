@@ -854,13 +854,19 @@ def collect() -> None:
         #
         #   27  unscoped absence — a contradiction with neither an exhaustive coverage edge nor an
         #       owner adjudication. 26 rest on a market-history article (#84/#88, the owner's call).
-        #   22  a granularity that cannot support a confirmation at all. All 22 carry
-        #       `owner-attestation` as their provider and name a sibling or a release schedule in
-        #       `sourceType`, which is what the classifier matches on — so this count is currently
-        #       measuring the classifier's precedence as much as the evidence. Worth reading the
-        #       rows before treating it as 22 weak claims.
+        #   14  a granularity that cannot support a confirmation at all — the Prize Pack rows,
+        #       whose own evidence says the unit "rests on the owner attestation plus the uniform
+        #       per-region Prize Pack distribution the corroborated languages demonstrate". That
+        #       names other units as part of the basis, so `sibling-derived` is what they are.
+        #
+        #       This was 22, and the first reading of it was wrong in a way worth recording. All
+        #       22 opened with an owner attestation, so the classifier looked like it was matching
+        #       trailing context in every case. It was not: eight `xm2a 136` rows named a *set
+        #       release schedule*, which is a fact about the set and not another unit's record, and
+        #       those eight were genuinely card-level. The fourteen here name other units. A
+        #       pattern being wrong about part of a group is not a reason to move the group.
         #   17  a product-level statement whose step to the card does not hold, the N17 queue.
-        BEYOND_GRANULARITY_BASELINE = 66
+        BEYOND_GRANULARITY_BASELINE = 58
         beyond_now = semantic_counts["verdictsBeyondTheirGranularity"]
         check(
             "N19",

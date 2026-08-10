@@ -81,7 +81,20 @@ SCHEMA_VERSION = "0.1.0"
 # Matched against `sourceType`, most specific first. A market-history article and a sibling
 # inference both mention things the card-level pattern would otherwise catch.
 MARKET_ERA = re.compile(r"Pok[eé]mon in |market-history", re.IGNORECASE)
-SIBLING = re.compile(r"units of the same product|set release schedule", re.IGNORECASE)
+# A sibling-derived row rests on **another unit's record**. That is what makes it unable to support
+# a confirmation: the neighbour's evidence is not this unit's evidence.
+#
+# `set release schedule` was in this pattern and is not a sibling. It is a fact about the set, and
+# it sat in `sourceType` after an owner attestation naming this exact card in this exact language —
+# "Owner (domain expert) confirms the MEGA Dream ex mirror-holo Hop's Snorlax variants exist in
+# Korean". Because this pattern is tested before `CARD_LEVEL`, the trailing context decided the
+# granularity and eight `xm2a 136` rows were filed as though a neighbour carried them.
+#
+# The fourteen Prize Pack rows that remain here are *correctly* classified, and the distinction is
+# worth keeping in view: their own evidence says the unit "rests on the owner attestation plus the
+# uniform per-region Prize Pack distribution the corroborated languages demonstrate". That names
+# other units as part of the basis. A release schedule names nobody.
+SIBLING = re.compile(r"units of the same product", re.IGNORECASE)
 CARD_LEVEL = re.compile(
     r"card database|TCGdex|photographed|specimen|set list|card article|card page|"
     r"locale card archive|promo search|"
