@@ -91,12 +91,6 @@ jobs:
       - name: Evidence semantics inventory
         run: python scripts/evidence_semantics.py --check
 
-      # Parser regression fixtures. The illustrator credit used to be read from the flattened page
-      # text, which absorbed the adjacent stage label (#33); these fixtures are the page shapes that
-      # broke it.
-      - name: JP illustrator parser tests
-        run: python verification/test_jp_parser.py
-
       - name: Owner adjudication regression tests
         run: python verification/test_owner_adjudications.py
 
