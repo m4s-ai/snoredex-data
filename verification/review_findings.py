@@ -773,9 +773,13 @@ def collect() -> None:
         #       the list is the claimed edition's own; eleven are fixed products whose article
         #       states its language editions separately.
         #
-        # The 24 left all cite the cross-language expansion index, which carries no card list at
-        # all. That is the honest residue rather than a backlog of bookkeeping.
-        UNSOUND_SET_LEVEL_BASELINE = 24
+        #   -5  the publisher's own Asia card database answers five Thai/Indonesian rows at card
+        #       level, replacing a statement about the set with a record of the card.
+        #
+        # The 19 left cite the cross-language expansion index, which carries no card list at all,
+        # for cards no locale catalogue here indexes. That is the honest residue rather than a
+        # backlog of bookkeeping.
+        UNSOUND_SET_LEVEL_BASELINE = 19
         UNSCOPED_ABSENCE_BASELINE = 27
         unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)

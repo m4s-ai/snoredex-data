@@ -41,17 +41,18 @@ from that evidence to this card holds:
 
 | granularity | inference | rows | what it means |
 |---|---|---:|---|
-| `specimen-or-card` | — | 504 | a record about this card in this language |
+| `specimen-or-card` | — | 509 | a record about this card in this language |
 | `product-or-set` | `carries` | 78 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
-| `product-or-set` | `does-not-carry` | **24** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
+| `product-or-set` | `does-not-carry` | **19** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
 | `product-or-set` | `needs-set-size` | 6 | undecidable here: the card's rarity is era-dependent and the set's printed size is not recorded |
 | `sibling-derived` | — | 22 | the evidence of a neighbouring unit |
 
 An application that needs card-level evidence should filter on `evidence_granularity` rather than
-trusting `exists` alone. The 24 are not wrong — they are unproven at this granularity, and
-`pending` semantics apply: not yet established, never proven absent. All 24 now cite one source, the
-cross-language expansion index, which carries no card list at all; the rows whose page did carry one
-have been recorded as card-level.
+trusting `exists` alone. The 19 are not wrong — they are unproven at this granularity, and
+`pending` semantics apply: not yet established, never proven absent. All 19 cite one source, the
+cross-language expansion index, which carries no card list at all, for cards no locale catalogue
+here indexes; the rows whose page did carry a list, and the rows the publisher's own locale
+databases answer, have been recorded as card-level.
 
 `needs-set-size` is a third answer, not a softer `does-not-carry`. Cardmarket's `Ultra Rare` covers
 both the modern Full Art, secret in some locales, and the EX-era `ex` and DP-era LV.X cards, which
