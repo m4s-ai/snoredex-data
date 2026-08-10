@@ -376,15 +376,28 @@ path matches the set you asked for.** Everything else is silence. When this is w
 archive's URLs must stay *out* of `pokemon-official`'s `absenceScopes`, even though the provider is
 absence-capable for its published checklists.
 
-**It is not wired up yet, and the blocker is worth knowing before you try.** Citing an archive URL
-needs the `language` capability declared on a `pokemon-official` surface, and declaring a new
-surface changes `source_capability_graph.json`. Every retained run under `verification/runs/`
-records a `capabilityGraphHash` and `build_latest` re-validates *all* of them against the current
-graph, so one added surface makes both `source_adapters.py` and `card_discovery.py` fail with
-`captured under another capability graph`. `--refresh-tcgdex` does not escape it: it validates the
-existing runs first. The graph cannot grow without discarding history, which is a defect in the
-run-pinning rule rather than in the source — see #147/#135. `U0368` carries the finding in its
-evidence text meanwhile, still cited to the set-level index it will eventually replace.
+**It is not wired up yet. The run-pinning blocker that used to stop it is fixed; one real
+requirement remains.** Citing an archive URL needs the `language` capability declared on a
+`pokemon-official` surface, and declaring a new surface changes `source_capability_graph.json`.
+
+Until 2026-08-10 that was fatal: every retained run under `verification/runs/` recorded a
+`capabilityGraphHash` covering the **whole** graph, so one added surface made both
+`source_adapters.py` and `card_discovery.py` fail with `captured under another capability graph` —
+even though the set-adapter run had only ever fetched `tcgdex` and the card-discovery run only
+`pokemon-card-asia`. The pin is now computed over the surfaces a run actually used, recorded in the
+manifest as `capabilityGraphSurfaces`, so the graph can grow without discarding history. A surface a
+run *did* use still expires it, which is the property worth keeping.
+
+What still stands, and is not a defect: **`pokemon-official` currently has one surface, so its
+evidence rows route to it implicitly.** Adding a second means every surface on that provider needs a
+`match` block (`urlPrefixes` / `nonUrlEvidenceIds`) and every existing row must match exactly one —
+otherwise `source_capabilities.py` fails with `registry source … resolves to 0 surfaces`. There are
+four `pokemon-official` rows today (a Dragon Frontiers checklist PDF and three Prize Pack lists), so
+this is small and mechanical, but it is a required part of the change rather than an afterthought.
+The new edge also needs its own known-positive observation and boundary, per ADR-0003.
+
+`U0368` carries the finding in its evidence text meanwhile, still cited to the set-level index it
+will eventually replace.
 
 ### TCGdex answers 200 for languages and eras it holds no cards for
 

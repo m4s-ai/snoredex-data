@@ -198,5 +198,91 @@ class SourceAdapterTests(unittest.TestCase):
         self.assertIn("incomplete-pagination", {row["code"] for row in projection["runErrors"]})
 
 
+class CapabilityPinScope(unittest.TestCase):
+    """The pin covers the surfaces a run used, and only those (#147).
+
+    Pinning the whole graph made it unable to grow: declaring a surface on a provider a run had
+    never fetched from expired that run. These hold the fix in both directions, because a pin that
+    stops discriminating is worse than the coupling it replaced.
+    """
+
+    GRAPH = {
+        "meta": {"schema": "s", "schemaVersion": "1.0.0", "generated": "2026-08-10",
+                 "counts": {"surfaces": 2}},
+        "providers": [{"providerId": "used"}, {"providerId": "other"}],
+        "surfaces": [{"surfaceId": "used-surface", "providerId": "used"},
+                     {"surfaceId": "other-surface", "providerId": "other"}],
+        "coverageEdges": [{"edgeId": "used-edge", "surfaceId": "used-surface"},
+                          {"edgeId": "other-edge", "surfaceId": "other-surface"}],
+        "observations": [{"observationId": "used-obs", "surfaceId": "used-surface"},
+                         {"observationId": "other-obs", "surfaceId": "other-surface"}],
+        "sourceResolution": [{"sourceKey": "anything"}],
+    }
+
+    def grown(self) -> dict:
+        graph = json.loads(json.dumps(self.GRAPH))
+        graph["surfaces"].append({"surfaceId": "new-surface", "providerId": "other"})
+        graph["coverageEdges"].append({"edgeId": "new-edge", "surfaceId": "new-surface"})
+        graph["observations"].append({"observationId": "new-obs", "surfaceId": "new-surface"})
+        graph["meta"]["counts"] = {"surfaces": 3}
+        return graph
+
+    def test_an_unrelated_surface_does_not_expire_a_run(self):
+        self.assertEqual(
+            adapters.capability_pin(self.GRAPH, ["used-surface"]),
+            adapters.capability_pin(self.grown(), ["used-surface"]),
+        )
+
+    def test_global_tallies_do_not_leak_into_a_scoped_pin(self):
+        # meta.counts moves whenever any provider gains a surface. If it reached the pin, the
+        # coupling would survive by a quieter route: identical rows, different hash.
+        moved = json.loads(json.dumps(self.GRAPH))
+        moved["meta"]["counts"] = {"surfaces": 99}
+        self.assertEqual(
+            adapters.capability_pin(self.GRAPH, ["used-surface"]),
+            adapters.capability_pin(moved, ["used-surface"]),
+        )
+
+    def test_a_surface_the_run_used_still_expires_it(self):
+        moved = json.loads(json.dumps(self.GRAPH))
+        moved["surfaces"][0]["freshnessPolicy"] = "changed"
+        self.assertNotEqual(
+            adapters.capability_pin(self.GRAPH, ["used-surface"]),
+            adapters.capability_pin(moved, ["used-surface"]),
+        )
+
+    def test_an_edge_on_a_used_surface_still_expires_it(self):
+        moved = json.loads(json.dumps(self.GRAPH))
+        moved["coverageEdges"][0]["exhaustive"] = True
+        self.assertNotEqual(
+            adapters.capability_pin(self.GRAPH, ["used-surface"]),
+            adapters.capability_pin(moved, ["used-surface"]),
+        )
+
+    def test_the_slice_carries_only_the_named_surface(self):
+        sliced = adapters.capability_slice(self.GRAPH, ["used-surface"])
+        self.assertEqual([row["surfaceId"] for row in sliced["surfaces"]], ["used-surface"])
+        self.assertEqual([row["providerId"] for row in sliced["providers"]], ["used"])
+        self.assertEqual([row["edgeId"] for row in sliced["coverageEdges"]], ["used-edge"])
+        self.assertEqual(
+            [row["observationId"] for row in sliced["observations"]], ["used-obs"])
+        self.assertNotIn("sourceResolution", sliced)
+
+    def test_a_run_citing_an_undeclared_surface_is_an_error(self):
+        with self.assertRaises(adapters.AdapterError):
+            adapters.capability_slice(self.GRAPH, ["surface-that-was-withdrawn"])
+
+    def test_surfaces_used_reads_the_requests(self):
+        self.assertEqual(
+            adapters.surfaces_used([{"surfaceId": "b"}, {"surfaceId": "a"}, {"surfaceId": "b"}]),
+            ["a", "b"],
+        )
+
+    def test_a_manifest_without_the_field_keeps_the_whole_graph_reading(self):
+        self.assertIsNone(adapters.manifest_surfaces({"runId": "x"}))
+        self.assertEqual(adapters.manifest_surfaces({"capabilityGraphSurfaces": ["b", "a"]}),
+                         ["a", "b"])
+
+
 if __name__ == "__main__":
     unittest.main()

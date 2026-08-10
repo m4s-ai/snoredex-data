@@ -26,7 +26,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 from source_capabilities import schema_errors
 
@@ -160,7 +160,7 @@ def content_hash(value: bytes | Any) -> str:
     return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
-def capability_pin(capability: Any) -> str:
+def capability_pin(capability: Any, surface_ids: Iterable[str] | None = None) -> str:
     """Hash the capability graph's *capabilities*, not the day it was written.
 
     The pin used the whole document, and the document carries `meta.generated`. So a retained run
@@ -181,11 +181,70 @@ def capability_pin(capability: Any) -> str:
     and `meta.schemaVersion`. A surface, edge, boundary or absence scope that moves still changes
     this hash, which is the whole point of having one.
     """
+    document = capability_slice(capability, surface_ids)
+    return content_hash(document)
+
+
+def capability_slice(capability: Any, surface_ids: Iterable[str] | None) -> dict[str, Any]:
+    """The part of the capability graph a run depends on.
+
+    `surface_ids` of `None` means the whole graph, which is what the pin meant before it was
+    scoped. It is kept so a manifest written under the old rule can still be read and explained,
+    never so a new run can be written that way.
+    """
     document = {key: value for key, value in capability.items() if key != "sourceResolution"}
     document["meta"] = {
         key: value for key, value in document.get("meta", {}).items() if key != "generated"
     }
-    return content_hash(document)
+    if surface_ids is None:
+        return document
+
+    # `meta` carries global tallies — `counts`, `surfaceStates` — that move whenever any provider
+    # gains a surface. Keeping them would have re-introduced the very coupling this scoping removes,
+    # by a quieter route: the slice's own rows would be identical and the hash would still change.
+    # Only the contract's identity survives into a scoped pin.
+    document["meta"] = {
+        key: value for key, value in document.get("meta", {}).items()
+        if key in ("schema", "schemaVersion")
+    }
+
+    wanted = set(surface_ids)
+    surfaces = [row for row in document.get("surfaces", []) if row["surfaceId"] in wanted]
+    missing = wanted - {row["surfaceId"] for row in surfaces}
+    if missing:
+        raise DiscoveryError(
+            f"run cites surfaces the capability graph does not declare: {sorted(missing)}"
+        )
+    providers = {row["providerId"] for row in surfaces}
+    document["surfaces"] = surfaces
+    document["providers"] = [
+        row for row in document.get("providers", []) if row["providerId"] in providers
+    ]
+    document["coverageEdges"] = [
+        row for row in document.get("coverageEdges", []) if row["surfaceId"] in wanted
+    ]
+    document["observations"] = [
+        row for row in document.get("observations", []) if row["surfaceId"] in wanted
+    ]
+    return document
+
+
+def manifest_surfaces(manifest: dict[str, Any]) -> list[str] | None:
+    """Which surfaces a manifest was pinned against.
+
+    Recorded explicitly since the pin was scoped. A manifest without the field predates the change
+    and was pinned against the whole graph; `None` preserves that reading rather than silently
+    re-scoping a hash somebody else computed.
+    """
+    recorded = manifest.get("capabilityGraphSurfaces")
+    if recorded is None:
+        return None
+    return sorted(recorded)
+
+
+def surfaces_used(requests: Iterable[dict[str, Any]]) -> list[str]:
+    return sorted({row["surfaceId"] for row in requests if row.get("surfaceId")})
+
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -541,7 +600,8 @@ def build_projection(
     }
     if manifest.get("contractHash") != content_hash(contract):
         raise DiscoveryError(f"run {manifest.get('runId')} was captured under another contract")
-    if manifest.get("capabilityGraphHash") != capability_pin(capability):
+    if manifest.get("capabilityGraphHash") != capability_pin(
+            capability, manifest_surfaces(manifest)):
         raise DiscoveryError(f"run {manifest.get('runId')} was captured under another capability graph")
     if manifest.get("coverageVersion") != contract["meta"]["coverageVersion"]:
         raise DiscoveryError(f"run {manifest.get('runId')} has another coverage version")
@@ -806,7 +866,8 @@ def new_manifest(
         "contract": "verification/card_discovery_adapters.json",
         "contractHash": content_hash(contract),
         "capabilityGraph": "verification/source_capability_graph.json",
-        "capabilityGraphHash": capability_pin(capability),
+        "capabilityGraphHash": capability_pin(capability, surfaces_used(requests)),
+        "capabilityGraphSurfaces": surfaces_used(requests),
         "requests": requests,
         "failures": [],
     }

@@ -15,6 +15,43 @@ Newest first.
 
 ---
 
+## A pin so wide the thing it protected could not grow
+
+**Trap:** *A run is pinned to the capabilities it used, not to the whole capability graph.*
+
+Every retained run under `verification/runs/` records a `capabilityGraphHash`, and reprojection
+re-validates it. That is right: a run captured under one set of capabilities must not be silently
+reinterpreted under another.
+
+The hash covered the entire graph. So declaring one surface on `pokemon-official` expired the
+set-adapter run, which had only ever fetched `tcgdex`, and the card-discovery run, which had only
+ever fetched `pokemon-card-asia`. Neither had touched a byte from that provider. The graph could not
+gain a source without discarding run history, and the cost was concrete: it is why the publisher's
+per-locale card archive — the best Western card-level route found — sat unwired while seventeen
+set-level rows stayed unresolved.
+
+The runs already knew better. Every request records `providerId`, `surfaceId` and `coverageEdgeId`,
+so the slice a run depends on was always derivable; it simply was not used.
+
+Two things made the fix non-obvious. The first is that **the failure did not reproduce on the first
+three attempts** — the graph generator rejected each probe for an unrelated reason (a duplicate edge
+id, a schema violation, a provider missing from the registry), which reads exactly like "the pin is
+fine". It only reproduced once the probe was a *valid* addition. A defect you cannot reproduce is
+not absent; it may be behind a different error.
+
+The second is that scoping the rows was not enough. `meta` carries global tallies — `counts`,
+`surfaceStates` — that move whenever any provider gains a surface, so the first scoped pin still
+expired: identical rows, different hash. The coupling had a quieter second route, and only the
+contract's identity may survive into a scoped pin.
+
+**Now guarded by** `CapabilityPinScope` in `test_source_adapters.py`, which holds both directions —
+an unrelated surface must not change a pin, a used surface must — and the tally case that caused the
+false start.
+
+*Issue #147.*
+
+---
+
 ## A better fact overruled a rule it was never about
 
 **Trap:** *A recorded set size decides run membership — except for a distribution rarity, which is
