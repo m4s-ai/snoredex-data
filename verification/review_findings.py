@@ -766,7 +766,16 @@ def collect() -> None:
         #       `needs-set-size` instead of asserting an answer.
         #   -3  the Battle Academy 2020 article carries a half-deck list containing the card; the
         #       rows cited only its language table.
-        UNSOUND_SET_LEVEL_BASELINE = 56
+        #  -32  the same miss, at scale: thirty-two rows cited a product or set article whose page
+        #       carries a closed card list containing the card, and in most cases the unit's own
+        #       evidence already quoted the row. Only `sourceType` — the field this report reads —
+        #       named the container alone. Twenty-one are Simplified Chinese set articles, where
+        #       the list is the claimed edition's own; eleven are fixed products whose article
+        #       states its language editions separately.
+        #
+        # The 24 left all cite the cross-language expansion index, which carries no card list at
+        # all. That is the honest residue rather than a backlog of bookkeeping.
+        UNSOUND_SET_LEVEL_BASELINE = 24
         UNSCOPED_ABSENCE_BASELINE = 27
         unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
