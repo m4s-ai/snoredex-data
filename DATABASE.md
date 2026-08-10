@@ -42,9 +42,9 @@ from that evidence to this card holds:
 | granularity | inference | rows | what it means |
 |---|---|---:|---|
 | `specimen-or-card` | — | 509 | a record about this card in this language |
-| `product-or-set` | `carries` | 78 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
-| `product-or-set` | `does-not-carry` | **19** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
-| `product-or-set` | `needs-set-size` | 6 | undecidable here: the card's rarity is era-dependent and the set's printed size is not recorded |
+| `product-or-set` | `carries` | 82 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
+| `product-or-set` | `does-not-carry` | **21** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
+| `product-or-set` | `needs-set-size` | 0 | was: undecidable without a printed set size. The set database records those sizes now (#146), so run membership is computed rather than inferred from a rarity word |
 | `sibling-derived` | — | 22 | the evidence of a neighbouring unit |
 
 An application that needs card-level evidence should filter on `evidence_granularity` rather than
@@ -54,10 +54,13 @@ cross-language expansion index, which carries no card list at all, for cards no 
 here indexes; the rows whose page did carry a list, and the rows the publisher's own locale
 databases answer, have been recorded as card-level.
 
-`needs-set-size` is a third answer, not a softer `does-not-carry`. Cardmarket's `Ultra Rare` covers
-both the modern Full Art, secret in some locales, and the EX-era `ex` and DP-era LV.X cards, which
-were numbered inside the set; only the set's printed size separates them, and no store here carries
-it yet (#146). Treat those rows as unclassified rather than as either answer.
+`needs-set-size` is a third answer, not a softer `does-not-carry`: it is the report declining to
+classify. It stands at 0 because the set database now records `printedSetSize` — the denominator
+printed beside the collector number — so a card is inside the numbered run when its number is
+within that size, in its own numbering. That fact outranks the rarity word in both directions,
+which is what Cardmarket's era-dependent `Ultra Rare` needed: the same word covers the modern Full
+Art, secret in some locales, and the EX-era `ex` and DP-era LV.X cards numbered inside the set.
+The state is kept because a set whose size is not yet recorded still lands there.
 
 The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated`, none
 is source-derived, which is rule 4 visible in the data. Every `disputed` row is

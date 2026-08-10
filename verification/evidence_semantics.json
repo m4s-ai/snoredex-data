@@ -117,21 +117,22 @@
       }
     },
     "setLevelConfirmations": 103,
-    "setLevelConfirmationsThatCarry": 78,
-    "setLevelConfirmationsThatDoNotCarry": 19,
-    "setLevelConfirmationsNeedingSetSize": 6,
+    "setLevelConfirmationsThatCarry": 82,
+    "setLevelConfirmationsThatDoNotCarry": 21,
+    "setLevelConfirmationsNeedingSetSize": 0,
+    "setLevelConfirmationsNotReachingTheCard": 21,
     "contradictionsByBacking": {
       "owner-adjudicated": 58,
       "unscoped-absence": 27
     },
     "unsoundByRarity": {
       "Character Rare": 4,
+      "Ultra Rare": 4,
       "Secret Rare": 4,
       "Fixed": 3,
-      "Promo": 3,
+      "Promo": 2,
       "Rainbow Rare": 2,
       "Illustration Rare": 1,
-      "Triple Rare": 1,
       "Shiny Rare": 1
     }
   },
@@ -242,21 +243,6 @@
       "inference": "does-not-carry"
     },
     {
-      "unitId": "U0287",
-      "setCode": "s1H",
-      "number": "46",
-      "variant": "V1",
-      "language": "Korean",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Triple Rare",
-      "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
-      "sourceCarriesCardList": false,
-      "inference": "does-not-carry"
-    },
-    {
       "unitId": "U0306",
       "setCode": "sv4a",
       "number": "145",
@@ -302,21 +288,6 @@
       "inference": "does-not-carry"
     },
     {
-      "unitId": "U0475",
-      "setCode": "RR",
-      "number": "33",
-      "variant": "V2",
-      "language": "Italian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "does-not-carry"
-    },
-    {
       "unitId": "U0508",
       "setCode": "s1H",
       "number": "70",
@@ -327,7 +298,22 @@
       "granularity": "product-or-set",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 70 against the set's printed size 60, recorded in the set database: numbered above the printed size",
+      "sourceCarriesCardList": false,
+      "inference": "does-not-carry"
+    },
+    {
+      "unitId": "U0548",
+      "setCode": "s1H",
+      "number": "66",
+      "variant": "V2",
+      "language": "Korean",
+      "status": "confirmed",
+      "providerId": "bulbapedia",
+      "granularity": "product-or-set",
+      "rarity": "Ultra Rare",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 66 against the set's printed size 60, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "does-not-carry"
     },
@@ -342,7 +328,7 @@
       "granularity": "product-or-set",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "does-not-carry"
     },
@@ -407,6 +393,21 @@
       "inference": "does-not-carry"
     },
     {
+      "unitId": "U0608",
+      "setCode": "CS1aC",
+      "number": "188",
+      "variant": "V2",
+      "language": "S-Chinese",
+      "status": "confirmed",
+      "providerId": "bulbapedia",
+      "granularity": "product-or-set",
+      "rarity": "Ultra Rare",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 188 against the set's printed size 135, recorded in the set database: numbered above the printed size",
+      "sourceCarriesCardList": false,
+      "inference": "does-not-carry"
+    },
+    {
       "unitId": "U0621",
       "setCode": "FLF",
       "number": "80",
@@ -420,68 +421,6 @@
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
       "inference": "does-not-carry"
-    }
-  ],
-  "setLevelConfirmationsNeedingSetSize": [
-    {
-      "unitId": "U0368",
-      "setCode": "RR",
-      "number": "111",
-      "variant": "base",
-      "language": "Italian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
-      "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
-    },
-    {
-      "unitId": "U0548",
-      "setCode": "s1H",
-      "number": "66",
-      "variant": "V2",
-      "language": "Korean",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
-      "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
-    },
-    {
-      "unitId": "U0608",
-      "setCode": "CS1aC",
-      "number": "188",
-      "variant": "V2",
-      "language": "S-Chinese",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
-      "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
-    },
-    {
-      "unitId": "U0630",
-      "setCode": "TRR",
-      "number": "104",
-      "variant": "base",
-      "language": "Portuguese",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
-      "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
     },
     {
       "unitId": "U0633",
@@ -493,10 +432,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "does-not-carry"
     },
     {
       "unitId": "U0635",
@@ -508,12 +447,13 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 170 against the set's printed size 150, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "does-not-carry"
     }
   ],
+  "setLevelConfirmationsNeedingSetSize": [],
   "unscopedAbsenceContradictions": [
     {
       "unitId": "U0265",
@@ -571,7 +511,7 @@
       "granularity": "market-or-era",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "unscoped-absence"
     },
@@ -691,7 +631,7 @@
       "granularity": "market-or-era",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "unscoped-absence"
     },
@@ -825,8 +765,8 @@
       "providerId": "bulbapedia",
       "granularity": "market-or-era",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "unscoped-absence"
     },
@@ -4473,7 +4413,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Common",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 81 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -4488,7 +4428,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Common",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 81 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -4503,7 +4443,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Common",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 81 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -4518,7 +4458,7 @@
       "granularity": "product-or-set",
       "rarity": "Common",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 81 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "carries"
     },
@@ -4547,8 +4487,8 @@
       "providerId": "bulbapedia",
       "granularity": "specimen-or-card",
       "rarity": "Triple Rare",
-      "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 112 against the set's printed size 135, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": true,
       "inference": null
     },
@@ -5222,8 +5162,8 @@
       "providerId": "pokemon-card-jp",
       "granularity": "specimen-or-card",
       "rarity": "Triple Rare",
-      "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 46 against the set's printed size 60, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -5237,10 +5177,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Triple Rare",
-      "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 46 against the set's printed size 60, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "does-not-carry"
+      "inference": "carries"
     },
     {
       "unitId": "U0288",
@@ -5252,8 +5192,8 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Triple Rare",
-      "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 46 against the set's printed size 60, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "owner-adjudicated"
     },
@@ -6243,7 +6183,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -6258,7 +6198,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -6273,7 +6213,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -6288,7 +6228,7 @@
       "granularity": "product-or-set",
       "rarity": "Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "carries"
     },
@@ -6407,8 +6347,8 @@
       "providerId": "tcgdex",
       "granularity": "specimen-or-card",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 111 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -6422,8 +6362,8 @@
       "providerId": "tcgdex",
       "granularity": "specimen-or-card",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 111 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -6437,8 +6377,8 @@
       "providerId": "tcgdex",
       "granularity": "specimen-or-card",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 111 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -6452,10 +6392,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 111 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "carries"
     },
     {
       "unitId": "U0369",
@@ -7113,7 +7053,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -7128,7 +7068,7 @@
       "granularity": "product-or-set",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "carries"
     },
@@ -7143,7 +7083,7 @@
       "granularity": "market-or-era",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "unscoped-absence"
     },
@@ -7383,7 +7323,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Special Illustration Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "presence and rarity assignment differ between locales",
+      "runMembershipReason": "collector number 171 against the set's printed size 150, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": true,
       "inference": null
     },
@@ -7623,7 +7563,7 @@
       "granularity": "product-or-set",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 111 against the set's printed size 135, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "carries"
     },
@@ -7788,7 +7728,7 @@
       "granularity": "product-or-set",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 103 against the set's printed size 150, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "carries"
     },
@@ -8012,8 +7952,8 @@
       "providerId": "tcgdex",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -8027,8 +7967,8 @@
       "providerId": "tcgdex",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -8042,8 +7982,8 @@
       "providerId": "tcgdex",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -8057,10 +7997,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 33 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "does-not-carry"
+      "inference": "carries"
     },
     {
       "unitId": "U0476",
@@ -8538,7 +8478,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 70 against the set's printed size 60, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -8553,7 +8493,7 @@
       "granularity": "product-or-set",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 70 against the set's printed size 60, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "does-not-carry"
     },
@@ -8568,7 +8508,7 @@
       "granularity": "product-or-set",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 70 against the set's printed size 60, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "owner-adjudicated"
     },
@@ -8583,7 +8523,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 45 against the set's printed size 60, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -8598,7 +8538,7 @@
       "granularity": "product-or-set",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 45 against the set's printed size 60, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "carries"
     },
@@ -8613,7 +8553,7 @@
       "granularity": "product-or-set",
       "rarity": "Double Rare",
       "insideNumberedRun": true,
-      "runMembershipReason": "Scarlet & Violet run rarity, inside the printed set size",
+      "runMembershipReason": "collector number 45 against the set's printed size 60, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "owner-adjudicated"
     },
@@ -9078,7 +9018,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 207 against the set's printed size 135, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": true,
       "inference": null
     },
@@ -9137,8 +9077,8 @@
       "providerId": "pokemon-card-jp",
       "granularity": "specimen-or-card",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 66 against the set's printed size 60, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -9152,10 +9092,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 66 against the set's printed size 60, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "does-not-carry"
     },
     {
       "unitId": "U0549",
@@ -9167,8 +9107,8 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 66 against the set's printed size 60, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "owner-adjudicated"
     },
@@ -9273,7 +9213,7 @@
       "granularity": "specimen-or-card",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": true,
       "inference": null
     },
@@ -9288,7 +9228,7 @@
       "granularity": "product-or-set",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "does-not-carry"
     },
@@ -9303,7 +9243,7 @@
       "granularity": "market-or-era",
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "unscoped-absence"
     },
@@ -9828,7 +9768,7 @@
       "granularity": "product-or-set",
       "rarity": "Uncommon",
       "insideNumberedRun": true,
-      "runMembershipReason": "part of the numbered run",
+      "runMembershipReason": "collector number 110 against the set's printed size 135, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "carries"
     },
@@ -9962,10 +9902,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 188 against the set's printed size 135, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "does-not-carry"
     },
     {
       "unitId": "U0609",
@@ -10277,8 +10217,8 @@
       "providerId": "tcgdex",
       "granularity": "specimen-or-card",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 104 against the set's printed size 109, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -10292,10 +10232,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": true,
+      "runMembershipReason": "collector number 104 against the set's printed size 109, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "carries"
     },
     {
       "unitId": "U0631",
@@ -10322,8 +10262,8 @@
       "providerId": "pokemon-card-jp",
       "granularity": "specimen-or-card",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": null
     },
@@ -10337,10 +10277,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "does-not-carry"
     },
     {
       "unitId": "U0634",
@@ -10352,8 +10292,8 @@
       "providerId": "bulbapedia",
       "granularity": "market-or-era",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "unscoped-absence"
     },
@@ -10367,10 +10307,10 @@
       "providerId": "bulbapedia",
       "granularity": "product-or-set",
       "rarity": "Ultra Rare",
-      "insideNumberedRun": null,
-      "runMembershipReason": "run membership depends on the set's printed size, which is not recorded",
+      "insideNumberedRun": false,
+      "runMembershipReason": "collector number 170 against the set's printed size 150, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "needs-set-size"
+      "inference": "does-not-carry"
     },
     {
       "unitId": "U0636",
