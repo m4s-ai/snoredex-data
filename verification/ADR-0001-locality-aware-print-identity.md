@@ -192,6 +192,19 @@ were resolved later on 2026-08-09.
   scope.
 - **D4:** a positively evidenced and explicitly classified error is its own physical-printing
   node.
+- **D5 (owner, 2026-08-10):** D1 extends to a catch-up code evidenced by a **tier-1 publisher
+  record**, and the extension is **for language and identity only** — which set, which number,
+  which language. Finish stays `pending`, exactly as it does for every other language claim.
+
+  The asymmetry is the point. For identity, the publisher's own card database is at least as good
+  as a specimen and better than the retailer listings four of the first eight admitted prints rest
+  on: it states the collector number, the denominator, the card name and the regulation mark
+  directly. For finish it is weaker and not a substitute at all — a specimen can be turned over and
+  examined, a database page cannot, so nothing here may assert a foil treatment.
+
+  D5 is what makes source-first enumeration of the Asian localities a method rather than a plan
+  (#138). It does not widen what counts as tier 1, and it does not touch rule 3: a publisher
+  database that fails to list a printing still has a gap, not a proof.
 
 ## Consequences
 
