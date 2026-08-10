@@ -96,7 +96,18 @@ HELD: list[dict[str, Any]] = [
             "rather than promos. Held rather than admitted because pokumon is a single tier-3 "
             "source for this printing and ADR-0001 admits on a specimen (D1) or a tier-1 publisher "
             "record (D5); it is neither. Recorded so the lead is not lost: it is the Thai "
-            "counterpart of the Indonesian 166/SM-P held below, and the two were found together."
+            "counterpart of the Indonesian 166/SM-P held below, and the two were found together. "
+            "PHOTOGRAPH READ 2026-08-10: the owner supplied a photograph of the physical card "
+            "hours after the lead was recorded, and it carries every identifier — "
+            "\"อีวุย&คาบิกอน GX\", พื้นฐาน (Basic), TAG TEAM, HP 270, Colorless; attacks "
+            "\"เชียร์\" (1 Colorless), \"ดัมป์เพรส\" 120+ and \"เมกะตันเฟรนส์ GX\" 210; "
+            "weakness Fighting x2, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, "
+            "\"083/SM-P\", ©2020 Pokémon. The artwork carries a POKÉMON TCG GYM stamp, not the "
+            "Indomaret logo its Indonesian sibling bears — the same card distributed through a "
+            "different channel per market, which is a markings.role of distribution-promo and "
+            "implies no finish. Held for the filing reason only: no SPEC-nnnn record exists "
+            "because the photograph arrived in conversation rather than by a route this session "
+            "can fetch bytes from."
         ),
     },
     {
