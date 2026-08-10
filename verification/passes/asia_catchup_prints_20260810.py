@@ -62,6 +62,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from urllib.parse import quote
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent.parent
@@ -160,6 +161,9 @@ def main() -> int:
             "providerId": "pokemon-card-asia",
             "sourceUrl": f"{BASE}/{locale}/card-search/detail/{detail_id}/",
             "corroborated": False,
+            # The image the set code was read off, stored so nobody re-derives it from a filename.
+            "markAssetUrl": f"{BASE}/{locale}/card-img/mark/{quote(mark)}.png",
+            "cardImageUrl": f"{BASE}/{locale}/card-img/{locale}{int(detail_id):08d}.png",
             "evidence": (
                 f"The Pokémon Company's Asia card database serves this card at "
                 f"/{locale}/card-search/detail/{detail_id}/, carrying the collector number "
