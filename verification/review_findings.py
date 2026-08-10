@@ -1744,9 +1744,8 @@ def collect() -> None:
         # twelve finish units should have become not-applicable and did not. The artifacts disagreed with
         # units.json for two days and every check stayed green.
         #
-        # R1 and review_integrity's "finish units exactly cover claim groups" both passed throughout,
-        # because they check key coverage: the right rows existed, carrying the wrong verdict. This checks
-        # the verdict.
+        # review_integrity's identity and key-coverage checks both passed throughout because the right
+        # rows existed, carrying the wrong verdict. This checks the verdict.
         finish_units_doc = load("verification/finish_units.json")["units"]
         claims_by_group: dict[tuple[str, str, str], list[str]] = {}
         for unit in units:
@@ -2998,13 +2997,23 @@ def collect() -> None:
         form_path = ROOT / ".github" / "ISSUE_TEMPLATE" / "printing-correction.yml"
         if form_path.exists():
             form = form_path.read_text(encoding="utf-8")
+            schema_problems: list[str] = []
+            try:
+                form_doc = json.loads(form)
+            except json.JSONDecodeError as error:
+                form_doc = None
+                schema_problems.append(f"form is not valid JSON/YAML: {error}")
 
             required_ids = [
                 "row-id", "card-name", "set-code", "card-number", "current-state",
                 "correction-type", "finishes", "foil-pattern", "stamp", "language",
                 "edition", "card-size", "description", "evidence", "acknowledgement",
             ]
-            missing_ids = [i for i in required_ids if f"id: {i}\n" not in form]
+            present_ids = {
+                element.get("id") for element in (form_doc or {}).get("body", [])
+                if isinstance(element, dict)
+            }
+            missing_ids = [field_id for field_id in required_ids if field_id not in present_ids]
             check("T1", "Correction form defines every required field", "FAIL", not missing_ids,
                   f"missing field ids: {missing_ids}")
 
@@ -3041,38 +3050,34 @@ def collect() -> None:
                 check("T2b", "Correction form covers every pattern and stamp in the store", "FAIL",
                       not missing_vocab, f"absent from the form: {sorted(missing_vocab)[:6]}")
                 check("T2c", "Correction form exposes one Reverse Holo collector family", "FAIL",
-                      'label: "Reverse Holo"' in form and 'label: "Mirror Holo"' not in form
+                      '"label": "Reverse Holo"' in form and '"label": "Mirror Holo"' not in form
                       and "Reverse Holo includes patterned reverse and mirror treatments" in form,
                       "the form must group technical reverse-holo and mirror-holo treatments for reporters")
             except ImportError as error:  # pragma: no cover
                 check("T2", "Correction form generator is importable", "FAIL", False, str(error))
 
             # The project's central discipline has to survive contact with the public.
+            form_body = (form_doc or {}).get("body", [])
+            evidence_fields = [
+                element for element in form_body
+                if isinstance(element, dict) and element.get("id") == "evidence"
+            ]
+            markdown_text = " ".join(
+                str((element.get("attributes") or {}).get("value") or "")
+                for element in form_body
+                if isinstance(element, dict) and element.get("type") == "markdown"
+            )
             check("T3", "Correction form requires positive evidence and warns against absence arguments",
                   "FAIL",
-                  "id: evidence" in form and "required: true" in form
-                  and "not evidence of absence" in form.replace("\n", " ").replace("  ", " ")
-                  or "gap in that source" in form,
+                  len(evidence_fields) == 1
+                  and (evidence_fields[0].get("validations") or {}).get("required") is True
+                  and ("not evidence of absence" in markdown_text or "gap in that source" in markdown_text),
                   "the form must ask for evidence and state that an absence is not a finding")
 
             # GitHub validates the form against its own schema and rejects the whole file when any
             # attribute fails, silently serving a blank issue instead. Nothing here could see that: the
             # form existed, was current, and every link pointed at it, so T1-T4 all passed while the
             # correction loop was dead in the browser. An empty `description: ""` was the actual cause.
-            schema_problems: list[str] = []
-            yaml_available = True
-            try:
-                import yaml  # type: ignore
-
-                form_doc = yaml.safe_load(form)
-            except ImportError:
-                # Never pass silently. A check that quietly does nothing is how the empty attribute
-                # survived in the first place.
-                form_doc, yaml_available = None, False
-                schema_problems = ["PyYAML is not installed, so the form could not be validated"]
-            except yaml.YAMLError as error:  # type: ignore[name-defined]
-                form_doc, schema_problems = None, [f"form is not valid YAML: {error}"]
-
             if form_doc is not None:
                 for key in ("name", "description", "body"):
                     if not form_doc.get(key):
@@ -3119,7 +3124,7 @@ def collect() -> None:
                             schema_problems.append(f"{where}: missing id, so it cannot be prefilled")
 
             check("T7", "Correction form satisfies GitHub's issue-form schema",
-                  "FAIL" if yaml_available else "INFO",
+                  "FAIL",
                   not schema_problems,
                   f"{len(schema_problems)} violations; GitHub rejects the whole form and serves a blank "
                   f"issue instead: {schema_problems[:4]}")
@@ -3166,17 +3171,6 @@ def collect() -> None:
         # --------------------------------------------------------------------------- #
 
         check(
-            "R1",
-            "finishUnitId, unitId and printingId are unique",
-            "FAIL",
-            len({u["unitId"] for u in units}) == len(units)
-            and len(finish_by_id) == len(finish_units)
-            and len({p["printingId"] for u in finish_units for p in u["printings"]})
-            == sum(len(u["printings"]) for u in finish_units),
-            "",
-        )
-
-        check(
             "R2",
             "availableFinishes agrees with finishStatus in every finish unit",
             "FAIL",
@@ -3186,32 +3180,6 @@ def collect() -> None:
                 if set(u["availableFinishes"])
                 != {f for f in FINISHES if u["finishStatus"].get(f) in
                     ("confirmed", "owner-attested", "marketplace-claimed")}
-            ],
-            "",
-        )
-
-        check(
-            "R3",
-            "Every resolved language unit has a non-trivial evidence string and a sourceType",
-            "FAIL",
-            not [
-                u["unitId"]
-                for u in units
-                if u["status"] in ("confirmed", "contradicted")
-                and (len(u.get("evidence") or "") < 12 or not u.get("sourceType"))
-            ],
-            "",
-        )
-
-        check(
-            "R4",
-            "Every confirmed printing cites at least one source",
-            "FAIL",
-            not [
-                p["printingId"]
-                for u in finish_units
-                for p in u["printings"]
-                if p["verificationStatus"] == "confirmed" and not p.get("sources")
             ],
             "",
         )

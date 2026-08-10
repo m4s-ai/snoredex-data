@@ -209,7 +209,6 @@ locations. The examples below assume the repository root only for readability.
 ```console
 python scripts/finishes.py
 python verification/verify_finish_sources.py
-python verification/audit_evidence.py
 python verification/review_integrity.py
 ```
 
@@ -222,8 +221,8 @@ For a curated case:
 3. Keep `finish`, `foilPattern`, `markings`, `distribution`, and `cardSize` separate.
 4. Regenerate; never hand-edit `finish_units.json`, `FINISH_REVIEW.*`, `analysis_finishes.json`, or
    `snorlax_cards.json` finish summaries.
-5. Inspect the affected printing IDs, recheck the live source assertions, and run the evidence and
-   integrity audits.
+5. Inspect the affected printing IDs, recheck the live source assertions, and run the integrity
+   checks.
 
 `verify_finish_sources.py` reads the exact product IDs and expected positive subtypes from the
 source registry, fetches the current TCGCSV product and price exports, and fails if any assertion no

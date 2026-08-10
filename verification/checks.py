@@ -185,8 +185,7 @@ class Metric:
 class Suite:
     """Collects results in declaration order and decides the exit code.
 
-    Order matters: the suites are compared against their PowerShell predecessors line by line by
-    `verification/parity.py`, so a reordered check is a difference like any other.
+    Order matters because readers and tests expect stable section ordering.
     """
 
     results: list[Check | Metric | Note] = field(default_factory=list)

@@ -94,7 +94,7 @@ See rule 1 above.
 ### Work on the repository
 
 Python 3.11, standard library only for the generators. `requirements.txt` is verification-only —
-Playwright for the browser suite, PyYAML for the issue-form schema check. PowerShell is not needed
+Playwright is used for the browser suite. PowerShell is not needed
 for anything. Use Python on every platform; if it is missing, install it rather than
 substituting PowerShell.
 
@@ -105,7 +105,6 @@ python -m playwright install chromium
 python verification/review_integrity.py     # structural invariants inside each store
 python verification/review_findings.py      # consistency between stores and published artifacts
 python scripts/legacy_baseline.py --check   # immutable historical boundary + scope wording
-python verification/audit_evidence.py       # every resolved unit cites something
 python verification/test_site.py            # browser acceptance tests
 ```
 
@@ -140,7 +139,7 @@ a number moves *backwards*.
 
 **One unit, one verdict.** A language unit is `(setCode, number, variant, language)` and carries
 exactly one of `confirmed`, `contradicted`, `needs-manual-review` or `pending`. Anything resolved
-must cite a source; `verification/audit_evidence.py` fails the build if it does not.
+must cite a source; `verification/review_integrity.py` fails the build if it does not.
 
 **Every source is ranked.** `providerId` names it, `corroborated` says whether a second provider
 agreed independently, and `verification/source_registry.json` records the authority tier:

@@ -246,7 +246,6 @@ verification/
                               open-items.html from scripts/open_items.py, SOURCES.md from
                               scripts/source_registry.py, and the FINISH_* queue from
                               scripts/finishes.py.
-  audit_evidence.py           Checks every resolved unit has a non-trivial evidence string.
   classify_manual.py          (Re)tags structurally undocumentable units.
   fetch_attachment.py         Files a card photograph into verification/specimens/ against a
                               SPEC id, from a local path or a reachable URL. Validates format,
@@ -262,8 +261,6 @@ verification/
   publication_gate.py         Blocks deployment until publication-decisions.json records the
                               approvals; the Pages workflow feeds it the real repo visibility.
   test_site.py                Browser acceptance tests (playwright + chromium).
-  parity.py                   Differential runner from the PowerShell->Python migration (#50).
-                              Runs a script and its twin in throwaway trees and compares bytes.
   fixtures/                   Recorded responses so networked checks stay testable offline.
   specimens/                  Photographs of cited specimens, one file per SPEC-nnnn record in
                               specimens.json. Filed by fetch_attachment.py; S9/S10 hold the

@@ -135,7 +135,7 @@ all *additional* language claims on cards that were otherwise evidenced.
 
 `$EV` (evidence text) and `$ev` (log array) are **the same variable**. Declaring `$ev=@()` after `$EV='...'` silently wipes the text, and units get written with an empty or array-typed `evidence` while still being marked `confirmed`. It does not throw. Same class of bug as `$R`/`$r` earlier.
 
-`audit_evidence.py` checks every resolved unit for a non-trivial string evidence field — **run it after every write pass**. It caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier.
+`review_integrity.py` checks every resolved unit for a non-trivial string evidence field — **run it after every write pass**. This invariant caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier.
 
 ### Traditional Chinese prints can live under a different set entirely
 

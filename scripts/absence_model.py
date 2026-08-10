@@ -5,9 +5,8 @@
 language claim. It does *not* mean the printing has been shown not to exist, and the two are
 different enough that consumers must be able to tell them apart:
 
-    not-printed   an explicit collection-owner adjudication, or a source whose scope is a complete
-                  official manifest, has settled the question within that scope
-    disputed      a source disagrees and nothing has settled it
+    not-printed   an explicit collection-owner adjudication has settled the question
+    disputed      a source disagrees and no adjudication has settled it
 
 `scripts/database.py` has drawn that line correctly since the clean-handoff work, and `DATABASE.md`
 tells applications "do not turn [disputed] into a hard 'does not exist'". But the line lived only
@@ -20,9 +19,10 @@ implemented twice and left to drift. Two independent computations of one fact is
 of #64, where `providerId` and `source_registry.py` disagreed for weeks with nothing comparing them.
 
 The absence scopes come from `verification/source_registry.json`, where a provider may declare
-`absenceScopes` — specific URLs whose contents are complete manifests. Authority tier alone is
-never enough: a tier-1 provider's blog post proves nothing about absence, while a tier-1 provider's
-published set checklist does, and only within its own scope.
+`absenceScopes` — specific URLs whose contents are complete manifests. They record evidence the
+owner may weigh; they never settle a claim by themselves. Authority tier alone is never enough: a
+tier-1 provider's blog post proves nothing about absence, while a published set checklist can
+support an adjudication only within its own scope.
 """
 
 from __future__ import annotations
@@ -40,25 +40,15 @@ def absence_scope_urls(providers: Iterable[dict[str, Any]]) -> set[str]:
     }
 
 
-def source_settles_absence(source_url: str | None, scope_urls: set[str]) -> bool:
-    """True when this exact source is one of the declared complete manifests.
-
-    Keyed on the URL, not the provider. A provider "supporting absence" means it has published at
-    least one complete manifest somewhere, which says nothing about the page a given claim cites.
-    """
-    return bool(source_url) and source_url.rstrip("/") in scope_urls
-
-
-def absence_decision(status: str, source_url: str | None, scope_urls: set[str],
-                     adjudicated: bool) -> str:
+def absence_decision(status: str, adjudicated: bool) -> str:
     """Classify one resolved language unit for consumers.
 
     Returns `exists`, `not-printed`, `disputed` or `unresolved`.
 
     `not-printed` requires an explicit collection-owner adjudication — always, with no exception
     (owner decision, 2026-08-03). A declared absence scope is recorded rationale, never a
-    mechanism: it strengthens the case the owner weighs, and `source_settles_absence` remains so
-    consumers can see which claims had one, but it cannot settle anything by itself.
+    mechanism: it strengthens the case the owner weighs, and consumers expose that capability
+    separately, but it cannot settle anything by itself.
 
     The reasoning is the owner's: converging evidence from dependable sources is *Indizien*, and
     deciding which way it points — printed, or not printed — is the collector's job rather than a
