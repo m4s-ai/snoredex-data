@@ -808,9 +808,20 @@ def collect() -> None:
         # the second would redden while the queue shrank. That is the shape of gate this repository
         # has already learned to stop building.
         #
-        # The 21 left are the honest residue: 19 cite the cross-language expansion index, which
-        # carries no card list at all, and 2 are secret-numbered rows the size decided against.
-        UNSOUND_SET_LEVEL_BASELINE = 21
+        #   -4  eight more printed set sizes, for the sets the queue was still judging by rarity,
+        #       plus the guard that makes recording them safe. Three rows carrying the harvest
+        #       rarity `Fixed` sit inside their set's main set list — `m2a 136` of 193, `s8b 126`
+        #       of 184, `sv4a 145` of 190 — and two Simplified Chinese rows are reached by their
+        #       own edition's card list rather than by a denominator. Against that, `RR 33 V2`
+        #       returns to the queue: it is the Rival Season promo, and it had left only because a
+        #       recorded size was allowed to overrule a distribution rarity. A promo's collector
+        #       number is the number of the run card it reprints, so the size now yields to the
+        #       exclusion and the three promo rows — `RR 33 V2`, `CL 33 V2`, `FLF 80 V2` — agree
+        #       again.
+        #
+        # The 17 left cite the cross-language expansion index, which carries no card list at all,
+        # for cards no locale catalogue here indexes, plus the three promo printings above.
+        UNSOUND_SET_LEVEL_BASELINE = 17
         UNSCOPED_ABSENCE_BASELINE = 27
         unsound_now = semantic_counts["setLevelConfirmationsNotReachingTheCard"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
