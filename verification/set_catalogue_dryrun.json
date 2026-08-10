@@ -10,19 +10,19 @@
     "description": "Locality-bearing sets, language/script editions, sourced release events, finish profiles and source-native rarity claims rebuilt from independent source records."
   },
   "counts": {
-    "sourceRecords": 294,
-    "sourceDispositions": 294,
-    "localSets": 154,
+    "sourceRecords": 295,
+    "sourceDispositions": 295,
+    "localSets": 155,
     "setConcepts": 0,
-    "setEditions": 361,
+    "setEditions": 362,
     "editionCandidates": 83,
     "releaseEvents": 45,
     "finishProfiles": 1,
-    "cardReleaseRefs": 479,
+    "cardReleaseRefs": 483,
     "rarityClaims": 518,
     "profileFinishClaims": 3,
-    "aliasAssertions": 200,
-    "sourceAssertions": 766
+    "aliasAssertions": 201,
+    "sourceAssertions": 767
   },
   "sourceRecords": [
     {
@@ -7604,6 +7604,56 @@
       }
     },
     {
+      "sourceRecordId": "SET-SRC-SF-B14D72EA4DA2",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "ID\u001fS-P",
+      "retrieved": "2026-08-10",
+      "raw": {
+        "localCode": "S-P",
+        "localName": null,
+        "locality": "ID",
+        "languages": [
+          "Indonesian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "printIds": [
+          "ID:S-P:030:base",
+          "ID:S-P:052:base",
+          "ID:S-P:100:base",
+          "ID:S-P:356:base"
+        ],
+        "providers": [
+          "pokemon-card-asia"
+        ],
+        "sourceUrls": [
+          "https://asia.pokemon-card.com/id/card-search/detail/5067/",
+          "https://asia.pokemon-card.com/id/card-search/detail/5089/",
+          "https://asia.pokemon-card.com/id/card-search/detail/5137/",
+          "https://asia.pokemon-card.com/id/card-search/detail/6671/"
+        ],
+        "printedSetSize": null,
+        "printedSetSizeBasis": "observed denominators disagree: []",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "030",
+          "052",
+          "100",
+          "356"
+        ],
+        "observedCoverage": "cards returned by a Snorlax search, not an enumeration of the set",
+        "markAssetUrls": [],
+        "cardImageUrls": [
+          "https://asia.pokemon-card.com/id/card-img/id00005067.png",
+          "https://asia.pokemon-card.com/id/card-img/id00005089.png",
+          "https://asia.pokemon-card.com/id/card-img/id00005137.png",
+          "https://asia.pokemon-card.com/id/card-img/id00006671.png"
+        ]
+      }
+    },
+    {
       "sourceRecordId": "SET-SRC-SF-B78559005615",
       "sourceKind": "source-first-local-set-profile",
       "provider": "mixed-positive-evidence",
@@ -9532,6 +9582,12 @@
       "reason": "provider locality and raw local code identify this local-set node"
     },
     {
+      "sourceRecordId": "SET-SRC-SF-B14D72EA4DA2",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:ID:S-P",
+      "reason": "provider locality and raw local code identify this local-set node"
+    },
+    {
       "sourceRecordId": "SET-SRC-SF-B78559005615",
       "disposition": "mapped",
       "targetRef": "LOCALSET:ID:scD%20I",
@@ -9927,6 +9983,16 @@
       "productKind": "physical-card-set-or-product",
       "sourceRecordIds": [
         "SET-SRC-SF-1AF6D0A81179"
+      ]
+    },
+    {
+      "localSetId": "LOCALSET:ID:S-P",
+      "locality": "ID",
+      "localCode": "S-P",
+      "observedNames": [],
+      "productKind": "physical-card-set-or-product",
+      "sourceRecordIds": [
+        "SET-SRC-SF-B14D72EA4DA2"
       ]
     },
     {
@@ -11774,6 +11840,21 @@
       "state": "identified",
       "establishingEvidenceIds": [
         "CLAIM:source-first:ID:AS1b:112/150:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:S-P",
+      "localSetId": "LOCALSET:ID:S-P",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localCode": "S-P",
+      "state": "identified",
+      "establishingEvidenceIds": [
+        "CLAIM:source-first:ID:S-P:030:base",
+        "CLAIM:source-first:ID:S-P:052:base",
+        "CLAIM:source-first:ID:S-P:100:base",
+        "CLAIM:source-first:ID:S-P:356:base"
       ]
     },
     {
@@ -17550,6 +17631,30 @@
       "cardReleaseId": "RELEASE:ID:Indonesian:AS1b:112/150:unmapped-work:None",
       "setEditionId": "EDITION:ID:Indonesian:AS1b",
       "collectorNumber": "112/150",
+      "origin": "print-identity-dryrun"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:S-P:030:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:S-P",
+      "collectorNumber": "030",
+      "origin": "print-identity-dryrun"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:S-P:052:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:S-P",
+      "collectorNumber": "052",
+      "origin": "print-identity-dryrun"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:S-P:100:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:S-P",
+      "collectorNumber": "100",
+      "origin": "print-identity-dryrun"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:S-P:356:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:S-P",
+      "collectorNumber": "356",
       "origin": "print-identity-dryrun"
     },
     {
@@ -26953,6 +27058,17 @@
       "reversibleProjection": true
     },
     {
+      "aliasAssertionId": "ALIAS:ad75dd24ed388e9a",
+      "sourceRecordId": "SET-SRC-SF-B14D72EA4DA2",
+      "provider": "mixed-positive-evidence",
+      "rawIdentifier": "S-P",
+      "targetType": "local-set",
+      "localSetId": "LOCALSET:ID:S-P",
+      "setEditionId": null,
+      "relationship": "identifies",
+      "reversibleProjection": true
+    },
+    {
       "aliasAssertionId": "ALIAS:aff30da8641b0012",
       "sourceRecordId": "SET-SRC-CM-DA4B7F480C10",
       "provider": "cardmarket",
@@ -31187,6 +31303,12 @@
       "rarityClaimId": "RARITYCLAIM:5a9b7bb847143941"
     },
     {
+      "sourceAssertionId": "SOURCEASSERTION:ca9fc82b574102ba",
+      "sourceRecordId": "SET-SRC-SF-B14D72EA4DA2",
+      "assertionKind": "asserts-local-set",
+      "localSetId": "LOCALSET:ID:S-P"
+    },
+    {
       "sourceAssertionId": "SOURCEASSERTION:cac583089de21514",
       "sourceRecordId": "SET-SRC-CM-3E34E0247D42",
       "assertionKind": "asserts-local-set",
@@ -32191,9 +32313,9 @@
   ],
   "reports": {
     "accounting": {
-      "sourceRecords": 294,
+      "sourceRecords": 295,
       "dispositions": {
-        "mapped": 200,
+        "mapped": 201,
         "needs-evidence": 92,
         "positively-excluded": 2
       },
@@ -32203,6 +32325,7 @@
       {
         "rawCode": "S-P",
         "localSetIds": [
+          "LOCALSET:ID:S-P",
           "LOCALSET:JP:S-P",
           "LOCALSET:KR:S-P"
         ],
@@ -32214,6 +32337,7 @@
       {
         "rawCode": "S-P",
         "localSetIds": [
+          "LOCALSET:ID:S-P",
           "LOCALSET:JP:S-P",
           "LOCALSET:KR:S-P"
         ],
@@ -34697,11 +34821,11 @@
     "sqliteValidation": {
       "foreignKeyViolations": 0,
       "tableCounts": {
-        "source_record": 294,
+        "source_record": 295,
         "set_concept": 0,
-        "local_set": 154,
+        "local_set": 155,
         "local_set_concept": 0,
-        "set_edition": 361,
+        "set_edition": 362,
         "edition_relation": 0,
         "release_event": 45,
         "release_event_market": 45,
@@ -34709,11 +34833,11 @@
         "finish_profile": 1,
         "finish_profile_edition": 3,
         "finish_profile_rule": 3,
-        "card_release_ref": 479,
+        "card_release_ref": 483,
         "rarity_claim": 518,
-        "alias_assertion": 200,
-        "source_assertion": 766,
-        "record_disposition": 294
+        "alias_assertion": 201,
+        "source_assertion": 767,
+        "record_disposition": 295
       }
     }
   },

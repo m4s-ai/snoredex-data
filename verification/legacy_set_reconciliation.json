@@ -1,6 +1,24 @@
 {
   "aliasRelations": [
     {
+      "aliasRelationId": "ALIASREL:188a110e857dd6f3",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:JP:S-P"
+      ],
+      "leftLocality": "JP",
+      "leftSourceRecordId": "SET-SRC-CM-EBF34DE63108",
+      "mergeAllowed": false,
+      "rawIdentifier": "S-P",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:ID:S-P"
+      ],
+      "rightLocality": "ID",
+      "rightSourceRecordId": "SET-SRC-SF-B14D72EA4DA2"
+    },
+    {
       "aliasRelationId": "ALIASREL:517c7aeeccaf2fa9",
       "basis": "positive provider records identify different localities",
       "equivalent": false,
@@ -7985,7 +8003,8 @@
       "rawProductKind": "physical-card-set-or-product",
       "rawRecordHash": "sha256:4b08a23c4fd9941768539d4ea596d4e45d567fed0ab3ec8f0cfc72479b45efb1",
       "relatedAliasRelationIds": [
-        "ALIASREL:517c7aeeccaf2fa9"
+        "ALIASREL:517c7aeeccaf2fa9",
+        "ALIASREL:188a110e857dd6f3"
       ],
       "retrieved": "2026-07-21",
       "setEditionIds": [
@@ -63777,7 +63796,7 @@
     }
   ],
   "meta": {
-    "buildHash": "sha256:1aa9ab71d13442d9e8d5c0ff62eaca14dbec6509fec436f05185abc1dd3ebfe4",
+    "buildHash": "sha256:8c348c7b2c265a5a7ff7ada6c4b6d9a7c6b87a942b1aebf8c340ac775bb53eef",
     "coverageVersion": "legacy-set-reconciliation-v1",
     "denominators": {
       "aliases": 135,
@@ -63790,10 +63809,10 @@
       "analysis_confirmed_releases.csv": "sha256:3f79df9a074eecdf65aa5404ffdd8a98fe932a4d87a461235a7150b7d3bc9b6a",
       "analysis_confirmed_releases.json": "sha256:857e64bac68745f6944e042b3c2af22d208d272897530a2b45609317a7ae7b8b",
       "finish_units.json": "sha256:0ea02a978c3c0f7317b7c37fe3baa224b0486ca5386ab2040ae42458fe8935ad",
-      "print_identity_dryrun.json": "sha256:50b409eb5c082e2691b954ade0dc93bd74cae4253f57fd10c5e9aed0d061fd33",
-      "set_catalogue_dryrun.json": "sha256:0085975642088a1b224d94b4b8f65a3dcd48bfc0767fa73c31693846440050b2",
-      "set_catalogue_sources.json": "sha256:ca94ab5bed0ec9c75abdfcea17f34ee2bba43210f97c22c06e80c4d7c7575b69",
-      "source_first_prints.json": "sha256:47389a3d58c9839937361b5bbf5fba2c8f3a6b26c30f8881ddd5debd8bcaf28f"
+      "print_identity_dryrun.json": "sha256:cb283c6db8c180bb42136ed79e8de36f0247f2b8c40689d57b26ad3816de273a",
+      "set_catalogue_dryrun.json": "sha256:585741cec2f5cd8e44d3ef8c8e611fdc6e3b13ffa75228b0af4e0f44d7162020",
+      "set_catalogue_sources.json": "sha256:ec49b4dcd7d3ad22dfb402a8e924967cc190838d8095cfa9a36f4f67dc0b8f0e",
+      "source_first_prints.json": "sha256:83c9c9bb6e4bf67655e4e95953e4238b409e35a2de573d1bcf5cdd41cece214f"
     },
     "issue": 148,
     "schema": "snoredex-legacy-set-reconciliation",
@@ -63943,7 +63962,7 @@
     },
     "relationDiagnostics": {
       "aliasMerges": 0,
-      "aliasSplitsOrRelations": 1,
+      "aliasSplitsOrRelations": 2,
       "countDelta": 0,
       "orphanReleaseRows": 0,
       "releaseLanguageLinks": {

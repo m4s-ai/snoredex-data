@@ -7,9 +7,9 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in set_catalogue_dryrun.json.",
     "counts": {
-      "sourceRecords": 294,
+      "sourceRecords": 295,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 21,
+      "sourceFirstLocalSets": 22,
       "releaseDateRecords": 45,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 91
@@ -7591,6 +7591,56 @@
         "cardImageUrls": [
           "https://asia.pokemon-card.com/id/card-img/id00000764.png",
           "https://asia.pokemon-card.com/id/card-img/id00000765.png"
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-B14D72EA4DA2",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "ID\u001fS-P",
+      "retrieved": "2026-08-10",
+      "raw": {
+        "localCode": "S-P",
+        "localName": null,
+        "locality": "ID",
+        "languages": [
+          "Indonesian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "printIds": [
+          "ID:S-P:030:base",
+          "ID:S-P:052:base",
+          "ID:S-P:100:base",
+          "ID:S-P:356:base"
+        ],
+        "providers": [
+          "pokemon-card-asia"
+        ],
+        "sourceUrls": [
+          "https://asia.pokemon-card.com/id/card-search/detail/5067/",
+          "https://asia.pokemon-card.com/id/card-search/detail/5089/",
+          "https://asia.pokemon-card.com/id/card-search/detail/5137/",
+          "https://asia.pokemon-card.com/id/card-search/detail/6671/"
+        ],
+        "printedSetSize": null,
+        "printedSetSizeBasis": "observed denominators disagree: []",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "030",
+          "052",
+          "100",
+          "356"
+        ],
+        "observedCoverage": "cards returned by a Snorlax search, not an enumeration of the set",
+        "markAssetUrls": [],
+        "cardImageUrls": [
+          "https://asia.pokemon-card.com/id/card-img/id00005067.png",
+          "https://asia.pokemon-card.com/id/card-img/id00005089.png",
+          "https://asia.pokemon-card.com/id/card-img/id00005137.png",
+          "https://asia.pokemon-card.com/id/card-img/id00006671.png"
         ]
       }
     },
