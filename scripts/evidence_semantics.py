@@ -132,6 +132,27 @@ RUN_MEMBERSHIP = {
     "Online Code Card": (False, "not a physical collectible card"),
 }
 
+# Rarities that name how a card was *distributed*, not where it sits in a set. A recorded set size
+# outranks the rarity word — but not these, and the difference is not a nicety.
+#
+# A promo's collector number is the number of the run card it reprints. `RR 33 V2` is the Rival
+# Season promo printing of `RR 33 V1`, an ordinary Rare; `CL 33 V2` and `FLF 80 V2` are the same
+# shape. Comparing 33 against a 111-card run therefore answers a question nobody asked: it says the
+# *number* is inside the run, which was never in doubt, and concludes that a language release of the
+# set reaches a promo distributed separately from it.
+#
+# This is not hypothetical. When `RR` gained a size and `CL`/`FLF` had not yet, `RR 33 V2` moved to
+# `carries` while its two identical siblings stayed on the queue — one promo judged sound and two
+# unsound, by nothing but which set had been measured first. So the exclusion is checked before the
+# size, and a distribution rarity is outside every numbered run whatever its number says.
+DISTRIBUTION_RARITIES = {
+    "Promo",
+    "Prize Pack Series",
+    "Oversized",
+    "World Championship Deck",
+    "Online Code Card",
+}
+
 
 def read_json(path: Path) -> Any:
     with path.open(encoding="utf-8-sig") as handle:
@@ -203,13 +224,21 @@ def build(units: list[dict], cards: list[dict], registry: dict,
                            unit.get("variant") or "base"))
         rarity = card["rarity"] if card else None
         inside_run, run_reason = RUN_MEMBERSHIP.get(rarity, (None, "rarity not classified"))
+        run_basis = "rarity-table"
         # A recorded set size outranks the rarity word in both directions. It is the fact the word
         # was standing in for, so it settles the era-dependent rarities and corrects any other
         # classification that disagrees with the printed denominator.
+        #
+        # A distribution rarity is the exception, and it is checked first: that row is a promo,
+        # prize-pack, jumbo, Worlds-deck or code-card printing, whose collector number belongs to
+        # the run card it reprints rather than to itself. See DISTRIBUTION_RARITIES.
         size = sizes.get(unit["setCode"])
         number_text = str(unit.get("number") or "")
-        if size is not None and number_text.isdigit():
+        if rarity in DISTRIBUTION_RARITIES:
+            run_basis = "distribution-rarity"
+        elif size is not None and number_text.isdigit():
             inside_run = int(number_text) <= size
+            run_basis = "printed-set-size"
             run_reason = (
                 f"collector number {int(number_text)} against the set's printed size {size}, "
                 f"recorded in the set database: "
@@ -249,6 +278,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "granularity": grain,
             "rarity": rarity,
             "insideNumberedRun": inside_run,
+            "runMembershipBasis": run_basis,
             "runMembershipReason": run_reason,
             "sourceCarriesCardList": closed_list,
             "inference": inference,
@@ -297,6 +327,9 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "setLevelConfirmationsNotReachingTheCard": len(unsound) + len(needs_size),
             "contradictionsByBacking": dict(Counter(
                 r["inference"] for r in rows if r["status"] == "contradicted")),
+            "setLevelConfirmationsByRunBasis": dict(Counter(
+                r["runMembershipBasis"] for r in rows
+                if r["status"] == "confirmed" and r["granularity"] == "product-or-set")),
             "unsoundByRarity": dict(Counter(r["rarity"] for r in unsound).most_common()),
         },
         "setLevelConfirmationsThatDoNotCarry": sorted(unsound, key=lambda r: r["unitId"]),

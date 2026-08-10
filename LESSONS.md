@@ -15,6 +15,65 @@ Newest first.
 
 ---
 
+## A better fact overruled a rule it was never about
+
+**Trap:** *A recorded set size decides run membership — except for a distribution rarity, which is
+outside every run whatever its collector number says.*
+
+Recording the printed set size was right, and replacing the rarity word with it was right: the
+denominator is the fact, and the word was standing in for it. The override was written to win in
+both directions, which is what a fact should do against a proxy.
+
+It won one it should have lost. `RR 33 V2` is the Rival Season promo printing of `RR 33 V1`, an
+ordinary Rare — the promo carries the number of the run card it reprints. Comparing 33 against a
+111-card run answers a question nobody asked: it establishes that the *number* is inside the run,
+which was never in doubt, and from there concludes that a language release of the set reaches a
+promo distributed separately from it. The row moved from `does-not-carry` to `carries`.
+
+What made it visible was the inconsistency, not the reasoning. `CL 33 V2` and `FLF 80 V2` are the
+same shape, and they stayed on the queue — only because their sets had no recorded size yet. One
+promo judged sound and two unsound, decided by which set happened to be measured first. Recording
+those two sizes would have quietly moved them too.
+
+The lesson is not "be careful with overrides". It is that a set size and a distribution rarity
+answer **different questions** — *where is this number in the run?* and *was this printing part of
+the run at all?* — and the second is not a weaker version of the first, so no amount of precision on
+the first can settle it.
+
+**Now guarded by** `DISTRIBUTION_RARITIES` in `evidence_semantics.py`, checked before the size, and
+by `runMembershipBasis` on every row, which names which of the three rules answered so a reader can
+see a promo being excluded rather than measured.
+
+*Issue #137, correcting the size override landed in PR #177.*
+
+---
+
+## The gate ran before the thing it was checking
+
+**Trap:** *`P6` and `P7` read git history, so `review_findings.py` has to run again after the commit
+and the push.*
+
+The pre-PR gate was run in full and passed 124/124. The commit made straight afterwards turned CI
+red on `P7`, which forbids any author or committer address without `noreply` in it — the commit
+carried a personal one.
+
+Nothing was wrong with the gate, and nothing was wrong with the run. Every other check reads the
+working tree, so running them before committing is exactly right. `P6` and `P7` read *history*, and
+at the moment the gate ran the offending commit did not exist. A green gate before a commit says
+nothing about that commit.
+
+The recovery has a second half worth stating, because the obvious fix looks like it failed.
+Amending the commit locally left `P7` still red: it scans every published ref, and the pushed branch
+still reached the old commit. The amend only takes effect once the branch is force-pushed and the
+old commit stops being reachable.
+
+**Now guarded by** a line in `CLAUDE.md`'s gate block: run `review_findings.py` before the commit
+for the tree, and again after the push for the history.
+
+*Found by CI on PR #178.*
+
+---
+
 ## The neighbour's evidence is not this unit's evidence
 
 **Trap:** *Grade a claim by what it rests on, never by the strongest thing beside it.*
