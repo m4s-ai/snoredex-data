@@ -310,6 +310,30 @@ Titles that cost a search to find: the Battle Academy article is a disambiguatio
 
 **JP promo pages need exact-name matching**, not substring: `カビゴンGX` is contained in `イーブイ&カビゴンGX`, so a `-like` match makes both SM-P promos look ambiguous and silently skips them.
 
+### A GitHub issue attachment IS reachable — through the issue's own HTML page
+
+`fetch_attachment.py` documents the block correctly: the proxy refuses
+`github.com/user-attachments/assets/<uuid>` with a 403, in the repository-scoped form too. What it
+did not have was the way round, and there is one.
+
+**Fetch the issue's HTML page** — `github.com/{owner}/{repo}/issues/{n}` is reachable and returns
+200 — and the rendered markup contains the *resolved* asset URLs on
+`private-user-images.githubusercontent.com`, a host the same file already lists as reaching origin.
+Those carry a signed `jwt` query and download without further help.
+
+Two escaping traps cost a round each, so unescape properly rather than slicing the match:
+
+* the URL arrives HTML-escaped, `&amp;` for `&` — `html.unescape` it;
+* it can arrive with a trailing `\` and embedded `\u0026` from the JSON payload the page inlines.
+  Strip both, or the request 404s on a URL that looks right in the log.
+
+This is how `SPEC-0026` and `SPEC-0027` — the Thai `083/SM-P` and Indonesian `166/SM-P` Eevee &
+Snorlax-GX — went from "held, photograph unreachable" to admitted prints in one pass. The owner
+uploads to an issue, which is the natural thing to do; nothing about that workflow had to change.
+
+Commit the bytes anyway. The attachment URL stays as `photographSource` provenance and the
+repository keeps the image, because a signed URL and the issue behind it are both perishable.
+
 ### The publisher's own per-locale card archive — the best Western route found
 
 Reach for this **before** TCGdex or a wiki for any Western language. The Pokémon Company runs a card
