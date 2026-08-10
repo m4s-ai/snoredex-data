@@ -837,6 +837,42 @@ def collect() -> None:
             f"verdict on set-level or unscoped-absence reasoning.",
         )
 
+        # N19 — one rule over the three queues above (#137)
+        # --------------------------------------------------------------------------- #
+        # #137 asks for the rules, not only the counts: "define which verdict transitions each
+        # granularity may support". Until they were declared they lived in `evidence_semantics.py`'s
+        # branching, so a reader could see what the report concluded but not what it was entitled
+        # to conclude, and the residue was three ad-hoc counters that no single number covered.
+        #
+        # `VERDICT_TRANSITIONS` states them and every row is tested against them. This holds the
+        # result. It is deliberately a superset of N17: a row can sit outside its granularity
+        # without appearing on any one of the three queues, and 22 of the 66 do exactly that.
+        #
+        # The 66 are not data errors and nothing downgrades them here — the observation stays as
+        # recorded and only the inference drawn from it is marked unsupported, which is the split
+        # #137 asks for and the disposition #140 acts on.
+        #
+        #   27  unscoped absence — a contradiction with neither an exhaustive coverage edge nor an
+        #       owner adjudication. 26 rest on a market-history article (#84/#88, the owner's call).
+        #   22  a granularity that cannot support a confirmation at all. All 22 carry
+        #       `owner-attestation` as their provider and name a sibling or a release schedule in
+        #       `sourceType`, which is what the classifier matches on — so this count is currently
+        #       measuring the classifier's precedence as much as the evidence. Worth reading the
+        #       rows before treating it as 22 weak claims.
+        #   17  a product-level statement whose step to the card does not hold, the N17 queue.
+        BEYOND_GRANULARITY_BASELINE = 66
+        beyond_now = semantic_counts["verdictsBeyondTheirGranularity"]
+        check(
+            "N19",
+            "Every verdict sits within what its evidence's granularity may support",
+            "FAIL",
+            beyond_now <= BEYOND_GRANULARITY_BASELINE,
+            f"verdicts beyond their granularity: {beyond_now} "
+            f"(baseline {BEYOND_GRANULARITY_BASELINE}) — "
+            f"{semantic_counts['verdictsBeyondTheirGranularityByRule']}. A rise means a pass wrote "
+            f"a verdict its evidence's granularity does not support.",
+        )
+
         # The two stores that say which providers may carry absence at all must agree. They do
         # today — pokemon-official, elitefourum, play-pokemon — and a silent divergence would let
         # a contradiction claim backing from whichever store was consulted.

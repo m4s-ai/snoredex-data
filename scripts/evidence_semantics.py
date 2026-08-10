@@ -154,6 +154,101 @@ DISTRIBUTION_RARITIES = {
 }
 
 
+# WHICH VERDICT EACH GRANULARITY MAY SUPPORT
+#
+# #137's second work item, and the one #140 needs before it can downgrade anything: the rules were
+# implicit in this file's branching, so a reader could see what the report concluded but not what it
+# was entitled to conclude. Declaring them makes the residue one queue under one rule instead of
+# three ad-hoc counters.
+#
+# `alone` is the operative word throughout. Every row here asks what a granularity establishes **by
+# itself**; corroboration and owner adjudication are separate mechanisms layered on top, and the
+# owner adjudication in particular settles a contradiction whatever the evidence's granularity,
+# because rule 4 makes it the only thing that can.
+VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
+    "specimen-or-card": {
+        "confirmed": {
+            "support": "always",
+            "rule": "A record of this exact card in this exact language establishes the printing. "
+                    "This is the granularity every other one is trying to reach.",
+        },
+        "contradicted": {
+            "support": "only-within-an-exhaustive-absence-edge",
+            "rule": "A card-level source may deny a printing only where #135 proves it exhaustive "
+                    "for that locality, category and period. Otherwise its silence is a gap.",
+        },
+    },
+    "product-or-set": {
+        "confirmed": {
+            "support": "only-when-the-step-to-the-card-holds",
+            "rule": "A statement about the product reaches the card when the card sits inside the "
+                    "set's numbered run, or when the cited page carries a closed card list "
+                    "containing it — and never when the row is a distribution printing.",
+        },
+        "contradicted": {
+            "support": "never",
+            "rule": "A product-level source that does not list a card has a gap, not a finding. "
+                    "This is #137's named failure: contradicting a card because a cross-language "
+                    "expansion index has no entry for it.",
+        },
+    },
+    "market-or-era": {
+        "confirmed": {
+            "support": "never",
+            "rule": "That a market existed, or received a set, never establishes a particular "
+                    "card in a particular language.",
+        },
+        "contradicted": {
+            "support": "never",
+            "rule": "An era argument is Indizien: it is the material the owner weighs, not a "
+                    "verdict a page can assert. Only an owner adjudication settles it.",
+        },
+    },
+    "sibling-derived": {
+        "confirmed": {
+            "support": "never",
+            "rule": "The neighbour's evidence is not this unit's evidence. A row whose only basis "
+                    "is a sibling's record establishes nothing about itself.",
+        },
+        "contradicted": {
+            "support": "never",
+            "rule": "Same reason, in the other direction.",
+        },
+    },
+}
+
+# An owner adjudication settles a contradiction whatever the granularity beneath it, because rule 4
+# makes it the only mechanism that can settle an absence at all. It is recorded separately in
+# owner_adjudications.json and never attributed to a provider, so it is a layer over this table
+# rather than a row in it.
+ADJUDICATED = "owner-adjudicated"
+SCOPED_ABSENCE = "provider-holds-an-absence-edge"
+
+
+def transition_support(grain: str, status: str, inference: str | None) -> tuple[bool, str]:
+    """Does this unit's verdict sit within what its evidence's granularity may support?
+
+    Returns (within, the rule that decided it). A verdict outside its granularity is not a data
+    error and nothing here rewrites it: it is a row whose recorded observation stays exactly as it
+    is while the inference drawn from it is marked as unsupported, which is what #137 asks for and
+    what #140 acts on.
+    """
+    if status not in ("confirmed", "contradicted"):
+        return True, "not-an-existence-verdict"
+    if status == "contradicted":
+        if inference == ADJUDICATED:
+            return True, "owner-adjudication"
+        if inference == SCOPED_ABSENCE:
+            allowed = VERDICT_TRANSITIONS.get(grain, {}).get("contradicted", {}).get("support")
+            return allowed == "only-within-an-exhaustive-absence-edge", "exhaustive-absence-edge"
+        return False, "unscoped-absence"
+    if grain == "specimen-or-card":
+        return True, "card-level-record"
+    if grain == "product-or-set":
+        return inference == "carries", "step-from-product-to-card"
+    return False, "granularity-cannot-support-a-confirmation"
+
+
 def read_json(path: Path) -> Any:
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
@@ -283,6 +378,9 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "sourceCarriesCardList": closed_list,
             "inference": inference,
         })
+        within, rule = transition_support(grain, unit["status"], inference)
+        rows[-1]["verdictWithinGranularity"] = within
+        rows[-1]["verdictTransitionRule"] = rule
 
     by_grain: dict[str, Counter] = defaultdict(Counter)
     for row in rows:
@@ -291,6 +389,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
     unsound = [r for r in rows if r["inference"] == "does-not-carry"]
     unscoped = [r for r in rows if r["inference"] == "unscoped-absence"]
     needs_size = [r for r in rows if r["inference"] == "needs-set-size"]
+    beyond = [r for r in rows if not r["verdictWithinGranularity"]]
 
     return {
         "meta": {
@@ -313,6 +412,14 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             rarity: {"insideNumberedRun": inside, "reason": reason}
             for rarity, (inside, reason) in sorted(RUN_MEMBERSHIP.items())
         },
+        "verdictTransitions": {
+            "description": (
+                "Which verdict each granularity may support on its own. An owner adjudication "
+                "settles a contradiction whatever the granularity beneath it, because it is the "
+                "only mechanism that can settle an absence at all."
+            ),
+            "byGranularity": VERDICT_TRANSITIONS,
+        },
         "counts": {
             "units": len(rows),
             "byGranularity": {k: dict(v) for k, v in sorted(by_grain.items())},
@@ -331,7 +438,14 @@ def build(units: list[dict], cards: list[dict], registry: dict,
                 r["runMembershipBasis"] for r in rows
                 if r["status"] == "confirmed" and r["granularity"] == "product-or-set")),
             "unsoundByRarity": dict(Counter(r["rarity"] for r in unsound).most_common()),
+            # The same residue the three queues above describe, counted once under one rule. It is
+            # what #140 has to disposition, and it is deliberately a superset: a row can fail the
+            # transition test without appearing on any single one of them.
+            "verdictsBeyondTheirGranularity": len(beyond),
+            "verdictsBeyondTheirGranularityByRule": dict(Counter(
+                r["verdictTransitionRule"] for r in beyond).most_common()),
         },
+        "verdictsBeyondTheirGranularity": sorted(beyond, key=lambda r: r["unitId"]),
         "setLevelConfirmationsThatDoNotCarry": sorted(unsound, key=lambda r: r["unitId"]),
         "setLevelConfirmationsNeedingSetSize": sorted(needs_size, key=lambda r: r["unitId"]),
         "unscopedAbsenceContradictions": sorted(unscoped, key=lambda r: r["unitId"]),
@@ -376,6 +490,8 @@ def main() -> int:
           f"{counts['setLevelConfirmationsThatDoNotCarry']} do not, "
           f"{counts['setLevelConfirmationsNeedingSetSize']} undecidable without a set size)")
     print(f"  contradictions by backing: {counts['contradictionsByBacking']}")
+    print(f"  verdicts beyond their granularity: {counts['verdictsBeyondTheirGranularity']} "
+          f"{counts['verdictsBeyondTheirGranularityByRule']}")
     return 0
 
 
