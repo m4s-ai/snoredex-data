@@ -254,7 +254,6 @@ python scripts/tracker.py check-template         # SEE BELOW — prints failure 
 
 # Every regression suite CI runs. Missing one from this list is how work passes locally and
 # reddens CI, which has now happened three times — see the note under the block.
-python verification/test_jp_parser.py            # JP illustrator parsing
 python verification/test_owner_adjudications.py  # owner decision/store projection
 python verification/test_source_adapters.py      # source-first catalogue regressions
 python verification/test_card_discovery.py       # source-first card-loop regressions

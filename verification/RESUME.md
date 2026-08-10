@@ -606,6 +606,19 @@ https://www.pokemon-card.com/card-search/resultAPI.php
 - The search matches fuzzily and returns ゴンベ (Munchlax) alongside カビゴン; filter by name.
 - Detail page `details.php/card/<id>/regu/all` yields collector number, set code (from the card image path) and illustrator.
 
+**Read the illustrator out of the anchor, never out of the flattened page text.** The credit sits in
+its own field — `<div class="author">` containing an `<a>` whose text is the name — and the anchor is
+the whole answer. The original JP fetch stripped every tag and matched the credit out of the
+resulting run-on text, cutting it at the first of a list of following labels. That cannot work:
+flattening glues the credit to whatever the layout puts next to it, and a real credit may itself
+contain spaces and Latin punctuation, so `Shizurow レベルアップ LV. X` is indistinguishable from a
+four-word artist name. Two corrupted credits reached the committed data that way — `aky CG Works
+V進化` and the Shizurow one above, where `V進化` and `レベルアップ LV. X` are evolution-stage labels —
+and widening the terminator list would only have moved the failure to the next stage label. The
+values were corrected; `verification/history/REVIEW-2026-07-31-ISSUE-STATUS.md` records them as
+found. A parser doing this correctly lived at `verification/jp_parse.py` until #172 retired it as
+uncalled; `git log -- verification/jp_parse.py` has it if a JP illustrator fetch is ever built.
+
 ### Language scope: Spanish — a documented blind spot, proven by specimen
 
 "Spanish" throughout this dataset is Cardmarket's single Spanish filter. Latin-American Spanish
