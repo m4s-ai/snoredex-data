@@ -35,6 +35,42 @@
       ],
       "rightLocality": "KR",
       "rightSourceRecordId": "SET-SRC-SF-0CE6692294C3"
+    },
+    {
+      "aliasRelationId": "ALIASREL:6d31bfc4455cd31a",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:JP:SM-P"
+      ],
+      "leftLocality": "JP",
+      "leftSourceRecordId": "SET-SRC-CM-B2100D6FE637",
+      "mergeAllowed": false,
+      "rawIdentifier": "SM-P",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:TH:SM-P"
+      ],
+      "rightLocality": "TH",
+      "rightSourceRecordId": "SET-SRC-SF-DC6F76EDE3F8"
+    },
+    {
+      "aliasRelationId": "ALIASREL:907e22f6caa7a530",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:JP:SM-P"
+      ],
+      "leftLocality": "JP",
+      "leftSourceRecordId": "SET-SRC-CM-B2100D6FE637",
+      "mergeAllowed": false,
+      "rawIdentifier": "SM-P",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:ID:SM-P"
+      ],
+      "rightLocality": "ID",
+      "rightSourceRecordId": "SET-SRC-SF-966729E67AE5"
     }
   ],
   "catchUpRelations": [
@@ -5622,7 +5658,7 @@
       "localSetIds": [
         "LOCALSET:JP:SM-P"
       ],
-      "migrationDisposition": "mapped",
+      "migrationDisposition": "split-related",
       "provider": "cardmarket",
       "rawIdentifier": "SM-P",
       "rawLocality": "JP",
@@ -5630,7 +5666,10 @@
       "rawName": "Sun & Moon Promos",
       "rawProductKind": "physical-card-set-or-product",
       "rawRecordHash": "sha256:f9607a4491cd1838c40f3bf2d6c2c0a48a9002017ad5167f9a67ada025b4a915",
-      "relatedAliasRelationIds": [],
+      "relatedAliasRelationIds": [
+        "ALIASREL:907e22f6caa7a530",
+        "ALIASREL:6d31bfc4455cd31a"
+      ],
       "retrieved": "2026-07-21",
       "setEditionIds": [
         "EDITION:JP:Japanese:SM-P"
@@ -63796,7 +63835,7 @@
     }
   ],
   "meta": {
-    "buildHash": "sha256:0aeffd7bb7f767bb22e591f0ba04446f54d95caa70a9fe1ed742eefe834a986c",
+    "buildHash": "sha256:fe9b0bff18f708f5a71b3255ee336301abebbf09726793aaaf9f701a9cfd83e3",
     "coverageVersion": "legacy-set-reconciliation-v1",
     "denominators": {
       "aliases": 135,
@@ -63809,10 +63848,10 @@
       "analysis_confirmed_releases.csv": "sha256:3f79df9a074eecdf65aa5404ffdd8a98fe932a4d87a461235a7150b7d3bc9b6a",
       "analysis_confirmed_releases.json": "sha256:857e64bac68745f6944e042b3c2af22d208d272897530a2b45609317a7ae7b8b",
       "finish_units.json": "sha256:0ea02a978c3c0f7317b7c37fe3baa224b0486ca5386ab2040ae42458fe8935ad",
-      "print_identity_dryrun.json": "sha256:15e578e6bd22ab790d48fd4f02bdb335029a52ca3fd76773d4c53d27c4ebc3f8",
-      "set_catalogue_dryrun.json": "sha256:585741cec2f5cd8e44d3ef8c8e611fdc6e3b13ffa75228b0af4e0f44d7162020",
-      "set_catalogue_sources.json": "sha256:ec49b4dcd7d3ad22dfb402a8e924967cc190838d8095cfa9a36f4f67dc0b8f0e",
-      "source_first_prints.json": "sha256:6696a9c00c4f54bac9fb84086b4fcedbb550c92485daf2c1450c13f75b2a05dc"
+      "print_identity_dryrun.json": "sha256:6e56638d2266194a763c5edac4524f143bdaa753466627c530fe49b1b0543440",
+      "set_catalogue_dryrun.json": "sha256:d44f938e4b85d3ede779a4b25975833a7fbdcf4be182dfa795e169381d9261e1",
+      "set_catalogue_sources.json": "sha256:4ede0e14c268225dda06a1037a1fda74b60f6db12f09df1d948675f61510f171",
+      "source_first_prints.json": "sha256:afa07e764b52f3692c69c6e5df15277e40816c1ef31cbd15a14967dfb4ebff36"
     },
     "issue": 148,
     "schema": "snoredex-legacy-set-reconciliation",
@@ -63897,10 +63936,10 @@
       "accounted": 135,
       "balanced": true,
       "buckets": {
-        "mapped": 132,
+        "mapped": 131,
         "needs-evidence": 0,
         "positively-retained-legacy": 2,
-        "split-related": 1
+        "split-related": 2
       },
       "coverageVersion": "legacy-set-reconciliation-v1",
       "denominator": 135
@@ -63962,7 +64001,7 @@
     },
     "relationDiagnostics": {
       "aliasMerges": 0,
-      "aliasSplitsOrRelations": 2,
+      "aliasSplitsOrRelations": 4,
       "countDelta": 0,
       "orphanReleaseRows": 0,
       "releaseLanguageLinks": {

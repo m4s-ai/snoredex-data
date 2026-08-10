@@ -78,71 +78,18 @@ ADMIT = [
 ]
 
 HELD: list[dict[str, Any]] = [
-    {
-        "locality": "TH",
-        "language": "Thai",
-        "localSetCode": "SM-P",
-        "localNumber": "083",
-        "specimenId": None,
-        "cardName": "Eevee & Snorlax-GX",
-        "sourceUrl": "https://pokumon.com/card/eevee-snorlax-tag-team-gx-083-sm-p-thai-promo/",
-        "providerId": "pokumon",
-        "reason": (
-            "Found through the owner's cross-language pokumon filter on 2026-08-10: pokumon "
-            "carries \"Eevee & Snorlax TAG TEAM-GX 083/SM-P Thai Promo\" as its own entry, and "
-            "its structure is one entry per market printing naming that printing's language. "
-            "Nothing else here records a Thai SM-P Snorlax — the publisher's Asia database does "
-            "not return it, and the Thai country article's tables cover boosters and starter decks "
-            "rather than promos. Held rather than admitted because pokumon is a single tier-3 "
-            "source for this printing and ADR-0001 admits on a specimen (D1) or a tier-1 publisher "
-            "record (D5); it is neither. Recorded so the lead is not lost: it is the Thai "
-            "counterpart of the Indonesian 166/SM-P held below, and the two were found together. "
-            "PHOTOGRAPH READ 2026-08-10: the owner supplied a photograph of the physical card "
-            "hours after the lead was recorded, and it carries every identifier — "
-            "\"อีวุย&คาบิกอน GX\", พื้นฐาน (Basic), TAG TEAM, HP 270, Colorless; attacks "
-            "\"เชียร์\" (1 Colorless), \"ดัมป์เพรส\" 120+ and \"เมกะตันเฟรนส์ GX\" 210; "
-            "weakness Fighting x2, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, "
-            "\"083/SM-P\", ©2020 Pokémon. The artwork carries a POKÉMON TCG GYM stamp, not the "
-            "Indomaret logo its Indonesian sibling bears — the same card distributed through a "
-            "different channel per market, which is a markings.role of distribution-promo and "
-            "implies no finish. Held for the filing reason only: no SPEC-nnnn record exists "
-            "because the photograph arrived in conversation rather than by a route this session "
-            "can fetch bytes from."
-        ),
-    },
-    {
-        "locality": "ID",
-        "language": "Indonesian",
-        "localSetCode": "SM-P",
-        "localNumber": "166",
-        "specimenId": None,
-        "cardName": "Eevee & Snorlax-GX",
-        "sourceUrl": BULBA_SMP,
-        "providerId": "bulbapedia",
-        "reason": (
-            "Bulbapedia's SM-P Promotional cards (ITCG) set list carries "
-            "\"166/SM-P … Eevee & Snorlax-GX … Indomaret booster pack purchase "
-            "(July 25-August 31, 2020)\", regulation mark C. That is a card-level row naming the "
-            "card, the number and its distribution campaign, and the publisher's Asia database "
-            "does not index it under any of five keywords. Bulbapedia is tier 2 and ADR-0001 D5 "
-            "admits on a tier-1 publisher record, so the wiki row alone cannot admit it. "
-            "PHOTOGRAPH READ 2026-08-10: the owner supplied a photograph of the physical card and "
-            "every identifier on it agrees with the wiki row — \"Eevee&Snorlax GX\", TAG TEAM, "
-            "BASIC, HP 270, Colorless; the Indomaret logo stamped on the artwork, matching the "
-            "campaign the row names; Indonesian text throughout, ability \"Penyemangat\" "
-            "(\"Kenakan 1 Energi dari Kartu Pegangan sendiri pada Pokémon sendiri\"), attacks "
-            "\"Dump Truck Press\" 120+ and \"Teman Megaton GX\" 210; weakness Fighting x2, no "
-            "resistance, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, "
-            "\"166/SM-P\", ©2020 Pokémon. This is the printing, read off the card rather than "
-            "off a catalogue. It is still held, and for a mechanical reason rather than an "
-            "evidential one: D1 admits a specimen-backed code, S14 lets only a cited specimen "
-            "claim specimen authority, and no SPEC-nnnn record exists yet because the photograph "
-            "arrived in conversation rather than by a route this session can fetch bytes from. "
-            "Admission needs the image filed via fetch_attachment.py and a heldBy — owner-held "
-            "makes it an inspected specimen at tier 1, a seller's photograph makes it "
-            "cardmarket-listing-photo at tier 2. Either settles it; neither is guessed here."
-        ),
-    },
+]
+
+
+# Admitted under D1 once the owner filed the photographs through issue #166: a specimen-backed
+# catch-up code, which is what D1 has always allowed. The block was never evidential — it was that
+# no SPEC-nnnn existed, because the attachment namespace is unreachable from an agent session. The
+# route that resolved it is in RESUME.md.
+SPECIMEN_ADMIT = [
+    ("TH", "Thai", "Thai", "SM-P", "083", "อีวุย&คาบิกอน GX", "Eevee & Snorlax-GX", "SPEC-0026",
+     "POKÉMON TCG GYM stamp"),
+    ("ID", "Indonesian", "Latn", "SM-P", "166", "Eevee&Snorlax GX", "Eevee & Snorlax-GX",
+     "SPEC-0027", "Indomaret logo"),
 ]
 
 
@@ -183,6 +130,42 @@ def main() -> int:
                 f"printing rather than about a neighbouring one. Admitted under ADR-0001 D5 for "
                 f"language and identity only; no finish is asserted. Retrieved 2026-08-10. "
                 f"{BULBA_SP}"
+            ),
+        })
+        added += 1
+
+    for locality, language, script, set_code, number, local_name, card_name, spec, stamp in \
+            SPECIMEN_ADMIT:
+        print_id = f"{locality}:{set_code}:{number}:base"
+        if print_id in existing:
+            continue
+        document["prints"].append({
+            "printId": print_id,
+            "locality": locality,
+            "localSetCode": set_code,
+            "localNumber": number,
+            "variant": "base",
+            "language": language,
+            "script": script,
+            "name": local_name,
+            "cardName": card_name,
+            "catchUpOf": None,
+            "specimenId": spec,
+            "providerId": "inspected-specimen",
+            "sourceUrl": None,
+            "corroborated": True,
+            "markAssetUrl": None,
+            "cardImageUrl": None,
+            "evidence": (
+                f"Photographed by the owner and filed as {spec}: the card reads regulation mark C, "
+                f"\"{number}/SM-P\", Illus. Mitsuhiro Arita, ©2020 Pokémon, with the artwork "
+                f"carrying a {stamp} — a distribution marking, markings.role distribution-promo, "
+                f"which implies no finish and none is asserted. Corroborated about this printing "
+                f"rather than about a neighbour: pokumon carries it as its own per-language entry, "
+                f"and the Indonesian half additionally has a Bulbapedia set-list row naming the "
+                f"same campaign. Admitted under ADR-0001 D1, which has always allowed a "
+                f"specimen-backed catch-up code; what was missing until issue #166 was the "
+                f"photograph, not the evidence."
             ),
         })
         added += 1

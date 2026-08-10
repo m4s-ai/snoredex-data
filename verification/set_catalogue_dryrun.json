@@ -10,19 +10,19 @@
     "description": "Locality-bearing sets, language/script editions, sourced release events, finish profiles and source-native rarity claims rebuilt from independent source records."
   },
   "counts": {
-    "sourceRecords": 295,
-    "sourceDispositions": 295,
-    "localSets": 155,
+    "sourceRecords": 297,
+    "sourceDispositions": 297,
+    "localSets": 157,
     "setConcepts": 0,
-    "setEditions": 362,
+    "setEditions": 364,
     "editionCandidates": 83,
     "releaseEvents": 45,
     "finishProfiles": 1,
-    "cardReleaseRefs": 483,
+    "cardReleaseRefs": 485,
     "rarityClaims": 518,
     "profileFinishClaims": 3,
-    "aliasAssertions": 201,
-    "sourceAssertions": 767
+    "aliasAssertions": 203,
+    "sourceAssertions": 769
   },
   "sourceRecords": [
     {
@@ -7476,6 +7476,42 @@
       }
     },
     {
+      "sourceRecordId": "SET-SRC-SF-966729E67AE5",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "ID\u001fSM-P",
+      "retrieved": "2026-08-10",
+      "raw": {
+        "localCode": "SM-P",
+        "localName": null,
+        "locality": "ID",
+        "languages": [
+          "Indonesian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "printIds": [
+          "ID:SM-P:166:base"
+        ],
+        "providers": [
+          "inspected-specimen"
+        ],
+        "sourceUrls": [
+          null
+        ],
+        "printedSetSize": null,
+        "printedSetSizeBasis": "observed denominators disagree: []",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "166"
+        ],
+        "observedCoverage": "cards returned by a Snorlax search, not an enumeration of the set",
+        "markAssetUrls": [],
+        "cardImageUrls": []
+      }
+    },
+    {
       "sourceRecordId": "SET-SRC-SF-9AAED2B2DA1E",
       "sourceKind": "source-first-local-set-profile",
       "provider": "mixed-positive-evidence",
@@ -7759,6 +7795,42 @@
         "localeSuffix": null,
         "observedCollectorNumbers": [
           "142"
+        ],
+        "observedCoverage": "cards returned by a Snorlax search, not an enumeration of the set",
+        "markAssetUrls": [],
+        "cardImageUrls": []
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-DC6F76EDE3F8",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "TH\u001fSM-P",
+      "retrieved": "2026-08-10",
+      "raw": {
+        "localCode": "SM-P",
+        "localName": null,
+        "locality": "TH",
+        "languages": [
+          "Thai"
+        ],
+        "scripts": [
+          "Thai"
+        ],
+        "printIds": [
+          "TH:SM-P:083:base"
+        ],
+        "providers": [
+          "inspected-specimen"
+        ],
+        "sourceUrls": [
+          null
+        ],
+        "printedSetSize": null,
+        "printedSetSizeBasis": "observed denominators disagree: []",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "083"
         ],
         "observedCoverage": "cards returned by a Snorlax search, not an enumeration of the set",
         "markAssetUrls": [],
@@ -9564,6 +9636,12 @@
       "reason": "provider locality and raw local code identify this local-set node"
     },
     {
+      "sourceRecordId": "SET-SRC-SF-966729E67AE5",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:ID:SM-P",
+      "reason": "provider locality and raw local code identify this local-set node"
+    },
+    {
       "sourceRecordId": "SET-SRC-SF-9AAED2B2DA1E",
       "disposition": "mapped",
       "targetRef": "LOCALSET:TH:scA%20T",
@@ -9603,6 +9681,12 @@
       "sourceRecordId": "SET-SRC-SF-D96C620721A4",
       "disposition": "mapped",
       "targetRef": "LOCALSET:TW:AS5a",
+      "reason": "provider locality and raw local code identify this local-set node"
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-DC6F76EDE3F8",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:SM-P",
       "reason": "provider locality and raw local code identify this local-set node"
     },
     {
@@ -9993,6 +10077,16 @@
       "productKind": "physical-card-set-or-product",
       "sourceRecordIds": [
         "SET-SRC-SF-B14D72EA4DA2"
+      ]
+    },
+    {
+      "localSetId": "LOCALSET:ID:SM-P",
+      "locality": "ID",
+      "localCode": "SM-P",
+      "observedNames": [],
+      "productKind": "physical-card-set-or-product",
+      "sourceRecordIds": [
+        "SET-SRC-SF-966729E67AE5"
       ]
     },
     {
@@ -10711,6 +10805,16 @@
       "productKind": "physical-card-set-or-product",
       "sourceRecordIds": [
         "SET-SRC-CM-48A40A4DC0EE"
+      ]
+    },
+    {
+      "localSetId": "LOCALSET:TH:SM-P",
+      "locality": "TH",
+      "localCode": "SM-P",
+      "observedNames": [],
+      "productKind": "physical-card-set-or-product",
+      "sourceRecordIds": [
+        "SET-SRC-SF-DC6F76EDE3F8"
       ]
     },
     {
@@ -11858,6 +11962,18 @@
       ]
     },
     {
+      "setEditionId": "EDITION:ID:Indonesian:SM-P",
+      "localSetId": "LOCALSET:ID:SM-P",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localCode": "SM-P",
+      "state": "identified",
+      "establishingEvidenceIds": [
+        "CLAIM:source-first:ID:SM-P:166:base"
+      ]
+    },
+    {
       "setEditionId": "EDITION:ID:Indonesian:sc1D I",
       "localSetId": "LOCALSET:ID:sc1D%20I",
       "locality": "ID",
@@ -12600,6 +12716,18 @@
       "state": "identified",
       "establishingEvidenceIds": [
         "CLAIM:source-first:KR:S-P:101:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:SM-P",
+      "localSetId": "LOCALSET:TH:SM-P",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "localCode": "SM-P",
+      "state": "identified",
+      "establishingEvidenceIds": [
+        "CLAIM:source-first:TH:SM-P:083:base"
       ]
     },
     {
@@ -17658,6 +17786,12 @@
       "origin": "print-identity-dryrun"
     },
     {
+      "cardReleaseId": "RELEASE:ID:Indonesian:SM-P:166:unmapped-work:SPEC-0027",
+      "setEditionId": "EDITION:ID:Indonesian:SM-P",
+      "collectorNumber": "166",
+      "origin": "print-identity-dryrun"
+    },
+    {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc1D I:132/164:unmapped-work:None",
       "setEditionId": "EDITION:ID:Indonesian:sc1D I",
       "collectorNumber": "132/164",
@@ -18105,6 +18239,12 @@
       "cardReleaseId": "RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
       "setEditionId": "EDITION:KR:Korean:S-P",
       "collectorNumber": "101",
+      "origin": "print-identity-dryrun"
+    },
+    {
+      "cardReleaseId": "RELEASE:TH:Thai:SM-P:083:unmapped-work:SPEC-0026",
+      "setEditionId": "EDITION:TH:Thai:SM-P",
+      "collectorNumber": "083",
       "origin": "print-identity-dryrun"
     },
     {
@@ -25925,6 +26065,17 @@
       "reversibleProjection": true
     },
     {
+      "aliasAssertionId": "ALIAS:3264d1be96109df4",
+      "sourceRecordId": "SET-SRC-SF-966729E67AE5",
+      "provider": "mixed-positive-evidence",
+      "rawIdentifier": "SM-P",
+      "targetType": "local-set",
+      "localSetId": "LOCALSET:ID:SM-P",
+      "setEditionId": null,
+      "relationship": "identifies",
+      "reversibleProjection": true
+    },
+    {
       "aliasAssertionId": "ALIAS:343b6d8ec504f75a",
       "sourceRecordId": "SET-SRC-BP-DATE-4B2C2AA78201",
       "provider": "bulbapedia",
@@ -27443,6 +27594,17 @@
       "reversibleProjection": true
     },
     {
+      "aliasAssertionId": "ALIAS:dbb2811df2b56a41",
+      "sourceRecordId": "SET-SRC-SF-DC6F76EDE3F8",
+      "provider": "mixed-positive-evidence",
+      "rawIdentifier": "SM-P",
+      "targetType": "local-set",
+      "localSetId": "LOCALSET:TH:SM-P",
+      "setEditionId": null,
+      "relationship": "identifies",
+      "reversibleProjection": true
+    },
+    {
       "aliasAssertionId": "ALIAS:dd6f6794ed0c6ca2",
       "sourceRecordId": "SET-SRC-SF-0CE6692294C3",
       "provider": "mixed-positive-evidence",
@@ -27911,6 +28073,12 @@
       "sourceRecordId": "SET-SRC-CM-0DECA0527861",
       "assertionKind": "asserts-rarity-claim",
       "rarityClaimId": "RARITYCLAIM:86f692a84be97c95"
+    },
+    {
+      "sourceAssertionId": "SOURCEASSERTION:0ae2f38c7aa5de2a",
+      "sourceRecordId": "SET-SRC-SF-DC6F76EDE3F8",
+      "assertionKind": "asserts-local-set",
+      "localSetId": "LOCALSET:TH:SM-P"
     },
     {
       "sourceAssertionId": "SOURCEASSERTION:0b63b00a6aa0c415",
@@ -31207,6 +31375,12 @@
       "rarityClaimId": "RARITYCLAIM:7b74069cdadeacfc"
     },
     {
+      "sourceAssertionId": "SOURCEASSERTION:c4146ec36d0ef5af",
+      "sourceRecordId": "SET-SRC-SF-966729E67AE5",
+      "assertionKind": "asserts-local-set",
+      "localSetId": "LOCALSET:ID:SM-P"
+    },
+    {
       "sourceAssertionId": "SOURCEASSERTION:c4307c2178a5f82f",
       "sourceRecordId": "SET-SRC-CM-D42CB71D56A2",
       "assertionKind": "asserts-rarity-claim",
@@ -32313,9 +32487,9 @@
   ],
   "reports": {
     "accounting": {
-      "sourceRecords": 295,
+      "sourceRecords": 297,
       "dispositions": {
-        "mapped": 201,
+        "mapped": 203,
         "needs-evidence": 92,
         "positively-excluded": 2
       },
@@ -32330,6 +32504,15 @@
           "LOCALSET:KR:S-P"
         ],
         "resolution": "kept distinct by locality; alias equivalence requires evidence"
+      },
+      {
+        "rawCode": "SM-P",
+        "localSetIds": [
+          "LOCALSET:ID:SM-P",
+          "LOCALSET:JP:SM-P",
+          "LOCALSET:TH:SM-P"
+        ],
+        "resolution": "kept distinct by locality; alias equivalence requires evidence"
       }
     ],
     "localNameCollisions": [],
@@ -32340,6 +32523,15 @@
           "LOCALSET:ID:S-P",
           "LOCALSET:JP:S-P",
           "LOCALSET:KR:S-P"
+        ],
+        "resolution": "kept distinct by locality; alias equivalence requires evidence"
+      },
+      {
+        "rawCode": "SM-P",
+        "localSetIds": [
+          "LOCALSET:ID:SM-P",
+          "LOCALSET:JP:SM-P",
+          "LOCALSET:TH:SM-P"
         ],
         "resolution": "kept distinct by locality; alias equivalence requires evidence"
       }
@@ -34821,11 +35013,11 @@
     "sqliteValidation": {
       "foreignKeyViolations": 0,
       "tableCounts": {
-        "source_record": 295,
+        "source_record": 297,
         "set_concept": 0,
-        "local_set": 155,
+        "local_set": 157,
         "local_set_concept": 0,
-        "set_edition": 362,
+        "set_edition": 364,
         "edition_relation": 0,
         "release_event": 45,
         "release_event_market": 45,
@@ -34833,11 +35025,11 @@
         "finish_profile": 1,
         "finish_profile_edition": 3,
         "finish_profile_rule": 3,
-        "card_release_ref": 483,
+        "card_release_ref": 485,
         "rarity_claim": 518,
-        "alias_assertion": 201,
-        "source_assertion": 767,
-        "record_disposition": 295
+        "alias_assertion": 203,
+        "source_assertion": 769,
+        "record_disposition": 297
       }
     }
   },
