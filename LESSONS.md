@@ -15,6 +15,42 @@ Newest first.
 
 ---
 
+## A pattern wrong about part of a group is not a reason to move the group
+
+**Trap:** *`sibling-derived` means another unit's record is part of the basis. A fact about the set
+is not a sibling.*
+
+`granularity()` tests its patterns in order, and `SIBLING` ran before `CARD_LEVEL`. Twenty-two rows
+opened with an owner attestation and were filed as sibling-derived because of a clause further along
+in `sourceType`. Reading two of them, the classifier looked plainly wrong in every case, and the
+conclusion drawn — recorded in a PR body, which is how it survives to be corrected — was that all
+twenty-two were misclassified and the count "measures the classifier's precedence as much as the
+evidence".
+
+Reading all twenty-two showed two different groups.
+
+Eight `xm2a 136` rows say *"Owner (domain expert) confirms the MEGA Dream ex mirror-holo Hop's
+Snorlax variants exist in Korean"* and then name a **set release schedule**. That is a fact about the
+set, not another unit's record, and the attestation names this exact card in this exact language.
+Those eight were genuinely card-level.
+
+Fourteen Prize Pack rows say the unit *"rests on the owner attestation plus the uniform per-region
+Prize Pack distribution the corroborated languages demonstrate"*. That names other units as part of
+the basis, in the row's own words. `sibling-derived` is exactly right for them, and moving them
+would have been the neighbour's-evidence trap run in reverse — inflating a claim by discarding the
+part of its own text that says what it leans on.
+
+So the fix was to the pattern, not the precedence: `set release schedule` left `SIBLING`, and the
+ordering stayed. Eight rows moved, fourteen stayed, and the residue went 66 to 58.
+
+**The general shape:** two rows sampled from a group of twenty-two agreed with each other and with
+a plausible theory, and the theory was still wrong for two thirds of the group. Read the whole group
+before restating what it measures — especially when the theory makes a number look better.
+
+*Issue #137.*
+
+---
+
 ## A pin so wide the thing it protected could not grow
 
 **Trap:** *A run is pinned to the capabilities it used, not to the whole capability graph.*

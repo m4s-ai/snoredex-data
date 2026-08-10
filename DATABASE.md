@@ -41,11 +41,11 @@ from that evidence to this card holds:
 
 | granularity | inference | rows | what it means |
 |---|---|---:|---|
-| `specimen-or-card` | — | 511 | a record about this card in this language |
+| `specimen-or-card` | — | 519 | a record about this card in this language |
 | `product-or-set` | `carries` | 84 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
 | `product-or-set` | `does-not-carry` | **17** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
 | `product-or-set` | `needs-set-size` | 0 | was: undecidable without a printed set size. The set database records those sizes now (#146), so run membership is computed rather than inferred from a rarity word |
-| `sibling-derived` | — | 22 | the evidence of a neighbouring unit |
+| `sibling-derived` | — | 14 | the evidence of a neighbouring unit |
 
 An application that needs card-level evidence should filter on `evidence_granularity` rather than
 trusting `exists` alone. The 17 are not wrong — they are unproven at this granularity, and
@@ -61,7 +61,7 @@ establishes a printing, and may deny one only inside a coverage edge proven exha
 product-level statement reaches the card only when the step above holds, and never denies one; an
 era argument and a sibling's record establish nothing on their own. An owner adjudication settles a
 contradiction whatever sits beneath it, because it is the only mechanism that can settle an absence.
-`verdictsBeyondTheirGranularity` counts the rows outside that rule — **66** today, held by check
+`verdictsBeyondTheirGranularity` counts the rows outside that rule — **58** today, held by check
 `N19`. They are a queue for #140 to disposition, not errors: the recorded observation stands and
 only the inference drawn from it is marked unsupported.
 
