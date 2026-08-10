@@ -42,7 +42,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from absence_model import absence_decision, absence_scope_urls  # noqa: E402
+from absence_model import absence_decision  # noqa: E402
 # Imported from the generator rather than read from verification/source_registry.json: this script
 # runs *before* source_registry.py in the documented order, so reading the generated file would
 # take provider config one run out of date every time that config changed. PROVIDERS is the
@@ -90,7 +90,6 @@ def ordered(languages: set[str]) -> list[str]:
 def main() -> None:
     cards_document = read_json(CARDS_PATH)
     units = read_json(UNITS_PATH)
-    scope_urls = absence_scope_urls(PROVIDERS)
     adjudicated = {
         decision["unitId"] for decision in read_json(ADJUDICATIONS_PATH)["decisions"]
     }
@@ -107,10 +106,7 @@ def main() -> None:
         field = STATUS_FIELD.get(unit["status"])
         if field:
             verdicts[key][field].add(unit["language"])
-        decision = absence_decision(
-            unit["status"], unit.get("sourceUrl"), scope_urls,
-            unit["unitId"] in adjudicated,
-        )
+        decision = absence_decision(unit["status"], unit["unitId"] in adjudicated)
         if decision in ("not-printed", "disputed"):
             verdicts[key][ABSENCE_FIELD[decision]].add(unit["language"])
 

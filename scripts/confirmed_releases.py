@@ -23,7 +23,6 @@ finish_document = json.load(
     io.open(os.path.join(B, "verification", "finish_units.json"), encoding="utf-8")
 )
 finish_units = finish_document["units"]
-finish_counts = finish_document["meta"]["counts"]
 finish_lookup = {
     (u["setCode"], str(u.get("number") or ""), u["language"]): u for u in finish_units
 }
@@ -339,7 +338,6 @@ LANG_CODE = {"English":"EN","French":"FR","German":"DE","Italian":"IT","Spanish"
 LANG_COLS = [LANG_CODE[l] for l in LANG_ORDER]
 # canonical count: each confirmed card x language once (Unlimited / no-edition rows carry all langs)
 total_langs = sum(len(r["confirmedLanguages"]) for r in rows if r["edition"] != "1st Edition")
-fe_langs = sum(len(r["confirmedLanguages"]) for r in rows if r["edition"] == "1st Edition")
 
 # --- CSV (Excel-friendly matrix: one column per language, X = confirmed) ---
 import csv

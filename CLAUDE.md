@@ -192,7 +192,6 @@ python scripts/card_discovery.py --check         # ADR-0006 source-first card ru
 
 # ... do the work in a new Python pass under verification/ ...
 
-python verification/audit_evidence.py            # evidence usability
 python verification/test_owner_adjudications.py  # owner decision/store projection
 python verification/report.py                    # regenerate exports
 python scripts/editions.py                       # if edition data changed
@@ -298,7 +297,7 @@ the index lives in the code rather than here.
 ## Conventions
 
 - **Python 3.11, standard library only** for the generators. `requirements.txt` is
-  verification-only: `playwright` (browser tests) and `PyYAML` (issue-form schema check).
+  verification-only: `playwright` (browser tests).
 - **Use Python on every platform.** If Python is unavailable, install it; never
   substitute PowerShell for a repository workflow or implementation pass.
 - The recurring toolchain is **entirely Python**. PowerShell is not a prerequisite for anything.

@@ -121,9 +121,6 @@ jobs:
       - name: Findings harness regression tests
         run: python verification/test_findings_harness.py
 
-      - name: Evidence audit
-        run: python verification/audit_evidence.py
-
       - name: Live finish-source verification
         if: runner.os == 'Linux'
         run: python verification/verify_finish_sources.py

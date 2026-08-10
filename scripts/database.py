@@ -728,9 +728,7 @@ def build_database(target: Path) -> dict[str, int | str]:
                 f"owner adjudication {adjudication['adjudicationId']} targets non-contradicted "
                 f"unit {unit['unitId']}"
             )
-        app_status = absence_decision(
-            unit["status"], source_url, absence_source_urls, bool(adjudication)
-        )
+        app_status = absence_decision(unit["status"], bool(adjudication))
         if app_status == "exists":
             established_languages.add((pid, LANGUAGE_CODE[unit["language"]]))
         language_application_status[(pid, LANGUAGE_CODE[unit["language"]])] = app_status

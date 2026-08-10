@@ -44,8 +44,8 @@ def main() -> int:
     for ident in ("E3", "E4", "R7", "S15", "X3"):
         expect(f"{ident} is declared", ident in checks, True)
 
-    # Ordering is part of the contract: parity.py compares these suites line by line, and the
-    # sections depend on values computed earlier, so a reordered check is a behaviour change.
+    # Ordering is part of the contract: sections depend on values computed earlier, so a reordered
+    # check is a behaviour change.
     idents = [c.ident for c in rf.suite.checks]
     expect("E3 precedes E4", idents.index("E3") < idents.index("E4"), True)
 
