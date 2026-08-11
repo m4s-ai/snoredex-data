@@ -428,6 +428,8 @@ def main() -> int:
     # rather than restated, so the two numbers cannot drift apart from the store.
     not_printed = sum(len(c.get("languagesNotPrinted") or []) for c in dataset["cards"])
     disputed = sum(len(c.get("languagesDisputed") or []) for c in dataset["cards"])
+    established = sum(len(c.get("languagesConfirmed") or []) for c in dataset["cards"])
+    needs_evidence = sum(len(c.get("languagesNeedsEvidence") or []) for c in dataset["cards"])
     # The page is a projection of committed inputs. A wall-clock date made an unchanged checkout
     # stale as soon as CI ran in a different timezone or on the next day. Reuse the checklist
     # snapshot date so identical inputs always produce identical bytes.
@@ -438,7 +440,8 @@ def main() -> int:
 
     stats = [
         (f"{len(rows)}", "current-known card-variant rows"),
-        (f"{verification['confirmed']}", "confirmed legacy language claims"),
+        (f"{established}", "established legacy language claims"),
+        (f"{needs_evidence}", "language claims needing evidence"),
         (f"{not_printed}", "adjudicated not printed"),
         (f"{disputed}", "disputed claims"),
         (f"{finish_counts['totalFinishUnits']}", "current-known finish units"),
@@ -604,6 +607,11 @@ def main() -> int:
       filter over-claims: {verification['contradicted']} claims here are contradicted by outside
       sources. The clearest is <code>KSS 26</code>, advertised in 17 languages for an expansion
       printed in 7.</li>
+      <li><strong>A raw confirmation is not automatically a card record.</strong>
+      {needs_evidence} repository-confirmed claims rest only on a product/set statement or a
+      sibling printing whose evidence cannot reach this exact card. Their observations stay in the
+      data as <code>needs-evidence</code>, but they do not enter this table or the checklist. The
+      remaining {established} claims are established within the permitted evidence granularity.</li>
       <li><strong>Contradicted is not the same as proven absent.</strong> Only
       {not_printed} of those claims are settled — by an explicit collection-owner adjudication or a
       complete official manifest. The other {disputed} are <strong>disputed</strong>: a source

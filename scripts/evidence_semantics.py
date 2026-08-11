@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Classify what each verdict actually rests on, and which inferences carry (#137).
 
-#137's first two work items are an inventory: "Classify every evidence record by granularity"
-and "Inventory all current verdicts derived from set-level or absence-based logic". This produces
-that inventory and changes no verdict. Downgrading a row is an owner-facing decision and belongs
-to #140's migration, not to a report.
+#137 first inventories what every verdict rests on, then derives the conservative application
+status from that inventory. The raw verdict and observation never change: an unsupported
+confirmation becomes ``needs-evidence`` only on consumer projections, and an unsupported
+contradiction becomes ``disputed``.
 
 FOUR GRANULARITIES, FROM THE ISSUE
 
@@ -76,7 +76,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "verification" / "evidence_semantics.json"
-SCHEMA_VERSION = "0.1.0"
+SCHEMA_VERSION = "0.2.0"
 
 # Matched against `sourceType`, most specific first. A market-history article and a sibling
 # inference both mention things the card-level pattern would otherwise catch.
@@ -241,10 +241,9 @@ SCOPED_ABSENCE = "provider-holds-an-absence-edge"
 def transition_support(grain: str, status: str, inference: str | None) -> tuple[bool, str]:
     """Does this unit's verdict sit within what its evidence's granularity may support?
 
-    Returns (within, the rule that decided it). A verdict outside its granularity is not a data
-    error and nothing here rewrites it: it is a row whose recorded observation stays exactly as it
-    is while the inference drawn from it is marked as unsupported, which is what #137 asks for and
-    what #140 acts on.
+    Returns (within, the rule that decided it). A verdict outside its granularity is not a damaged
+    observation: the raw row stays exactly as recorded while its application status becomes
+    needs-evidence or disputed.
     """
     if status not in ("confirmed", "contradicted"):
         return True, "not-an-existence-verdict"
@@ -260,6 +259,18 @@ def transition_support(grain: str, status: str, inference: str | None) -> tuple[
     if grain == "product-or-set":
         return inference == "carries", "step-from-product-to-card"
     return False, "granularity-cannot-support-a-confirmation"
+
+
+def application_status(status: str, within: bool, inference: str | None) -> str:
+    """Project a raw repository verdict without overstating what its evidence establishes."""
+    if status == "confirmed":
+        return "exists" if within else "needs-evidence"
+    if status == "contradicted":
+        # The collection owner's explicit decision is the only mechanism that publishes a hard
+        # absence. An exact exhaustive source edge permits the raw contradiction, but remains
+        # disputed at the application boundary until the owner adjudicates it.
+        return "not-printed" if inference == ADJUDICATED else "disputed"
+    return "unresolved"
 
 
 def read_json(path: Path) -> Any:
@@ -316,6 +327,24 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         for edge in surface.get("coverageEdges", [])
         if edge.get("exhaustive") and (edge.get("absenceCapability") or {}).get("enabled")
     }
+    registry_absence_scopes = {
+        (provider["providerId"], url.rstrip("/"))
+        for provider in registry["providers"]
+        if provider.get("supportsAbsence")
+        for url in provider.get("absenceScopes") or []
+    }
+    graph_language_absence_scopes = {
+        (surface["providerId"], url.rstrip("/"))
+        for surface in capabilities["surfaces"]
+        for edge in surface.get("coverageEdges", [])
+        if edge.get("exhaustive")
+        for absence in [edge.get("absenceCapability") or {}]
+        if absence.get("enabled") and "language" in (absence.get("dimensions") or [])
+        for url in absence.get("exactScopes") or []
+    }
+    bounded_language_absence_scopes = (
+        registry_absence_scopes & graph_language_absence_scopes
+    )
     settled_units = set()
     for decision in adjudications["decisions"]:
         for key in ("unitId", "unitIds"):
@@ -370,7 +399,9 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         if unit["status"] == "contradicted":
             if unit["unitId"] in settled_units:
                 inference = "owner-adjudicated"
-            elif unit["providerId"] in (registry_absence & graph_absence):
+            elif (
+                unit["providerId"], str(unit.get("sourceUrl") or "").rstrip("/")
+            ) in bounded_language_absence_scopes:
                 inference = "provider-holds-an-absence-edge"
             else:
                 inference = "unscoped-absence"
@@ -394,6 +425,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         within, rule = transition_support(grain, unit["status"], inference)
         rows[-1]["verdictWithinGranularity"] = within
         rows[-1]["verdictTransitionRule"] = rule
+        rows[-1]["applicationStatus"] = application_status(unit["status"], within, inference)
 
     by_grain: dict[str, Counter] = defaultdict(Counter)
     for row in rows:
@@ -410,16 +442,21 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "schemaVersion": SCHEMA_VERSION,
             "generated": date.today().isoformat(),
             "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
-            "status": "inventory only — no verdict is changed by this report",
+            "status": "active application policy — raw verdicts remain unchanged",
             "description": (
                 "Every unit classified by the granularity of the evidence it rests on, and, for "
-                "set-level confirmations, whether the inference from set to card carries."
+                "set-level confirmations, whether the inference from set to card carries. "
+                "applicationStatus is the conservative consumer projection."
             ),
             "absenceCapableProviders": {
                 "sourceRegistry": sorted(registry_absence),
                 "capabilityGraph": sorted(graph_absence),
                 "agree": sorted(registry_absence) == sorted(graph_absence),
             },
+            "boundedLanguageAbsenceScopes": [
+                {"providerId": provider, "url": url}
+                for provider, url in sorted(bounded_language_absence_scopes)
+            ],
         },
         "runMembershipRules": {
             rarity: {"insideNumberedRun": inside, "reason": reason}
@@ -457,6 +494,8 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "verdictsBeyondTheirGranularity": len(beyond),
             "verdictsBeyondTheirGranularityByRule": dict(Counter(
                 r["verdictTransitionRule"] for r in beyond).most_common()),
+            "applicationStatuses": dict(Counter(
+                r["applicationStatus"] for r in rows).most_common()),
         },
         "verdictsBeyondTheirGranularity": sorted(beyond, key=lambda r: r["unitId"]),
         "setLevelConfirmationsThatDoNotCarry": sorted(unsound, key=lambda r: r["unitId"]),

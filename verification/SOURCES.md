@@ -18,12 +18,12 @@ gap, never a finding.
 | **Play! Pokémon rewards gallery** | official-publisher | 1 | yes | 1 | 7 | finish, product |
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 22 | 22 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
-| **The Pokémon Company official cards and checklists** | official-publisher | 1 | yes | 9 | 19 | language, finish, product |
+| **The Pokémon Company official cards and checklists** | official-publisher | 1 | yes | 9 | 22 | language, finish, product |
 | **52poke (Wiki)** | collector-database | 2 | no | 0 | 0 | language, artist, edition, finish |
 | **Bulbapedia** | fan-wiki | 2 | no | 88 | 688 | language, edition, date, finish |
 | **CGC certification and registry** | grading-registry | 2 | no | 0 | 0 | finish, language |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 0 | 0 | language, finish |
-| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 50 | language, finish, edition |
+| **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 47 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | no | 1 | 2 | finish |
 | **SNKRDUNK** | marketplace | 2 | no | 1 | 2 | finish, language |

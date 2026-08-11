@@ -193,8 +193,21 @@ def main() -> int:
             seen_editions.setdefault(name, source)
 
         reference = confirming[0]
-        # Rule 2: logical printings, already deduped by physical signature in the store.
-        printings = [p for p in unit["printings"] if p["finish"] in FINISHES]
+        # Rule 2: logical printings, already deduped by physical signature in the store. A finish
+        # unit is grouped at set/number/language, but its physical rows may map to separate
+        # Cardmarket variants. Do not let an established sibling variant pull a needs-evidence
+        # variant into the checklist.
+        confirming_variants = {
+            product.get("variantToken") or "base" for product in confirming
+        }
+        printings = [
+            printing for printing in unit["printings"]
+            if printing["finish"] in FINISHES
+            and (
+                not printing.get("mappedVariants")
+                or confirming_variants & set(printing["mappedVariants"])
+            )
+        ]
 
         multiple_editions = len(seen_editions) > 1
         for edition, edition_source in seen_editions.items():
@@ -263,8 +276,9 @@ def main() -> int:
                 "treatments without collapsing their physical printing records."
             ),
             "rules": [
-                "Only confirmed language claims enter; contradicted and unresolved languages and code cards are excluded.",
+                "Only application-confirmed language claims enter; contradicted, needs-evidence and unresolved languages and code cards are excluded.",
                 "Exclusion is not a claim of non-existence. A contradicted language is left out so that nobody is sent hunting a printing the evidence points away from, but only the languagesNotPrinted subset is settled; languagesDisputed is one source's disagreement, and excludedDisputedLanguages counts what that removed.",
+                "A raw confirmed verdict whose evidence cannot reach the exact card remains in languagesRepositoryConfirmed but is excluded here as languagesNeedsEvidence.",
                 "Expansion follows logical printings[], never group-level finish booleans.",
                 "Editions expand only where the edition model supports that edition for that language.",
                 "When multiple editions are supported, concrete finishes require an explicit edition mapping; otherwise each edition receives one unresolved placeholder.",
@@ -289,6 +303,9 @@ def main() -> int:
                 ),
                 "excludedDisputedLanguages": sum(
                     len(card.get("languagesDisputed") or []) for card in cards
+                ),
+                "excludedNeedsEvidenceLanguages": sum(
+                    len(card.get("languagesNeedsEvidence") or []) for card in cards
                 ),
                 "firstEditionItems": len(first_edition),
                 "firstEditionWithEditionAgnosticEvidence": len(agnostic),

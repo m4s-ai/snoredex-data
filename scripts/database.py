@@ -27,12 +27,12 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from absence_model import absence_decision, absence_scope_urls  # noqa: E402
+from absence_model import absence_scope_urls  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.1.0"
+SCHEMA_VERSION = "1.2.0"
 
 INPUTS = [
     "legacy-cardmarket-baseline.json",
@@ -163,7 +163,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10001;
+PRAGMA user_version = 10002;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -254,7 +254,7 @@ CREATE TABLE product_languages (
         'confirmed', 'contradicted', 'needs-manual-review', 'pending', 'out-of-scope'
     )),
     application_status TEXT NOT NULL CHECK (application_status IN (
-        'exists', 'not-printed', 'disputed', 'unresolved', 'out-of-scope'
+        'exists', 'not-printed', 'disputed', 'needs-evidence', 'unresolved', 'out-of-scope'
     )),
     absence_supported INTEGER NOT NULL CHECK (absence_supported IN (0, 1)),
     adjudication_id TEXT REFERENCES owner_adjudications(adjudication_id),
@@ -266,8 +266,8 @@ CREATE TABLE product_languages (
     source_type TEXT,
     evidence TEXT,
     -- What the verdict rests on, from verification/evidence_semantics.json (#137). A consumer
-    -- reading `exists` cannot otherwise tell a card record from an inference off the set's
-    -- language list, and 83 of the 634 are the latter on cards outside the numbered run.
+    -- reading a raw `confirmed` verdict cannot otherwise tell a card record from an inference off
+    -- the set's language list. Unsupported inferences are `needs-evidence`, never `exists`.
     evidence_granularity TEXT CHECK (evidence_granularity IN (
         'specimen-or-card', 'product-or-set', 'market-or-era', 'sibling-derived'
     )),
@@ -565,8 +565,8 @@ GROUP BY severity, category;
 
 def build_database(target: Path) -> dict[str, int | str]:
     baseline = load("legacy-cardmarket-baseline.json")
-    # #137's inventory. Read-only here: the database exposes what a verdict rests on, it does not
-    # decide anything from it.
+    # #137's generated application policy. The raw unit verdict remains in verification_status;
+    # applicationStatus is the conservative inference permitted by its evidence granularity.
     evidence_semantics = {
         row["unitId"]: row for row in load("verification/evidence_semantics.json")["units"]
     }
@@ -576,6 +576,8 @@ def build_database(target: Path) -> dict[str, int | str]:
     checklist = checklist_doc["items"]
     releases = load("analysis_confirmed_releases.json")["variants"]
     units = load("verification/units.json")
+    if set(evidence_semantics) != {unit["unitId"] for unit in units}:
+        raise ValueError("evidence semantics must classify every language unit exactly once")
     excluded = load("verification/excluded_codecards.json")
     finishes_doc = load("verification/finish_units.json")
     finish_units = finishes_doc["units"]
@@ -622,9 +624,9 @@ def build_database(target: Path) -> dict[str, int | str]:
             "not a complete all-locality catalogue. Code cards are retained but out-of-scope."
         ),
         "application_status_policy": (
-            "confirmed=exists; contradicted becomes not-printed only when its source is explicitly "
-            "absence-capable within scope or an explicit collection-owner adjudication exists, "
-            "otherwise disputed; pending/manual=unresolved; code cards=out-of-scope"
+            "confirmed=exists only when its evidence granularity reaches the exact card, otherwise "
+            "needs-evidence; contradicted becomes not-printed only after an explicit collection-owner "
+            "adjudication, otherwise disputed; pending/manual=unresolved; code cards=out-of-scope"
         ),
         "checklist_schema_version": checklist_doc["meta"]["schemaVersion"],
         "owner_adjudications_schema_version": owner_adjudications_doc["meta"]["schemaVersion"],
@@ -728,7 +730,8 @@ def build_database(target: Path) -> dict[str, int | str]:
                 f"owner adjudication {adjudication['adjudicationId']} targets non-contradicted "
                 f"unit {unit['unitId']}"
             )
-        app_status = absence_decision(unit["status"], bool(adjudication))
+        semantic = evidence_semantics[unit["unitId"]]
+        app_status = semantic["applicationStatus"]
         if app_status == "exists":
             established_languages.add((pid, LANGUAGE_CODE[unit["language"]]))
         language_application_status[(pid, LANGUAGE_CODE[unit["language"]])] = app_status
@@ -740,8 +743,7 @@ def build_database(target: Path) -> dict[str, int | str]:
                 unit["unitId"], unit["providerId"],
                 int(unit["corroborated"]), source_url, unit.get("sourceRef"),
                 unit.get("sourceType"), unit.get("evidence"),
-                (evidence_semantics.get(unit["unitId"]) or {}).get("granularity"),
-                (evidence_semantics.get(unit["unitId"]) or {}).get("inference"),
+                semantic.get("granularity"), semantic.get("inference"),
                 unit.get("checkedAt"),
             ),
         )
@@ -1029,11 +1031,17 @@ def database_stats(target: Path) -> dict[str, int | str]:
         "language_confirmed": scalar(
             "SELECT COUNT(*) FROM product_languages WHERE verification_status='confirmed'"
         ),
+        "language_exists": scalar(
+            "SELECT COUNT(*) FROM product_languages WHERE application_status='exists'"
+        ),
         "language_contradicted": scalar(
             "SELECT COUNT(*) FROM product_languages WHERE verification_status='contradicted'"
         ),
         "language_disputed": scalar(
             "SELECT COUNT(*) FROM product_languages WHERE application_status='disputed'"
+        ),
+        "language_needs_evidence": scalar(
+            "SELECT COUNT(*) FROM product_languages WHERE application_status='needs-evidence'"
         ),
         "language_not_printed": scalar(
             "SELECT COUNT(*) FROM product_languages WHERE application_status='not-printed'"
@@ -1104,8 +1112,8 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10001:
-            problems.append("database PRAGMA user_version is not 10001")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != 10002:
+            problems.append("database PRAGMA user_version is not 10002")
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()
@@ -1134,19 +1142,17 @@ def validate_database(target: Path) -> list[str]:
             problems.append(
                 f"{hard_negatives} hard negatives lack scoped source evidence or owner adjudication"
             )
-        invalid_statuses = connection.execute(
-            "SELECT COUNT(*) FROM product_languages WHERE "
-            "(verification_status='confirmed' AND application_status<>'exists') OR "
-            "(verification_status='contradicted' AND adjudication_id IS NOT NULL "
-            " AND application_status<>'not-printed') OR "
-            "(verification_status='contradicted' AND adjudication_id IS NULL AND absence_supported=1 "
-            " AND application_status<>'not-printed') OR "
-            "(verification_status='contradicted' AND adjudication_id IS NULL AND absence_supported=0 "
-            " AND application_status<>'disputed') OR "
-            "(verification_status IN ('pending','needs-manual-review') "
-            " AND application_status<>'unresolved') OR "
-            "(verification_status='out-of-scope' AND application_status<>'out-of-scope')"
-        ).fetchone()[0]
+        semantic_status = {
+            row["unitId"]: row["applicationStatus"]
+            for row in load("verification/evidence_semantics.json")["units"]
+        }
+        invalid_statuses = sum(
+            1 for unit_id, app_status in connection.execute(
+                "SELECT unit_id, application_status FROM product_languages "
+                "WHERE verification_status<>'out-of-scope'"
+            )
+            if semantic_status.get(unit_id) != app_status
+        )
         if invalid_statuses:
             problems.append(f"{invalid_statuses} product-language application statuses are inconsistent")
         owner_rows = connection.execute(
@@ -1223,7 +1229,7 @@ evidence journal or migration history.
 | Legacy Cardmarket products | {stats['products']} ({stats['collectible_products']} collectible, {stats['code_cards']} code cards) |
 | Legacy raw product-language claims | {stats['language_claims']} ({stats['language_out_of_scope']} code-card claims out of scope) |
 | Repository language verdicts | {stats['language_confirmed']} confirmed · {stats['language_contradicted']} contradicted |
-| App language statuses | {stats['language_not_printed']} not-printed · {stats['language_disputed']} disputed ({stats['language_owner_adjudicated']} owner-adjudicated) |
+| App language statuses | {stats['language_exists']} exists · {stats['language_needs_evidence']} needs-evidence · {stats['language_not_printed']} not-printed · {stats['language_disputed']} disputed ({stats['language_owner_adjudicated']} owner-adjudicated) |
 | Established product-edition rows | {stats['product_editions']} ({stats['suppressed_absent_editions']} absent-language and {stats['suppressed_unverified_editions']} unverified-language projections suppressed) |
 | Finish units / logical printings | {stats['finish_units']} / {stats['printings']} |
 | Current-known physical checklist | {stats['checklist_items']} ({stats['documented_items']} documented · {stats['unresolved_items']} unresolved placeholders) |
@@ -1231,16 +1237,21 @@ evidence journal or migration history.
 | Products without established artist | {stats['missing_artists']} |
 | Opaque V-token products without a physical variant name | {stats['opaque_variants']} |
 
-## The challenged data point
+## The challenged data points
+
+The database preserves all **{stats['language_confirmed']}** raw
+`repository_verdict='confirmed'` rows. Only **{stats['language_exists']}** have evidence whose
+granularity may establish the exact card. The remaining **{stats['language_needs_evidence']}** are
+`application_status='needs-evidence'`: their set/product or sibling observation remains queryable,
+but it cannot materialize a card printing or enter the release/checklist projections.
 
 The database preserves the original `repository_verdict='contradicted'` while recording the final
 application decision separately. **{stats['language_owner_adjudicated']}** rows are linked to
 `owner_adjudications`: the collection owner reviewed all cited claims and evidence and adopted
 `application_status='not-printed'`. This is deliberately not attributed to Elite Fourum or any
-other single provider. **{stats['language_source_scoped_absence']}** rows, if any, would instead be
-not-printed because their source is explicitly complete within a named scope. The remaining
-**{stats['language_disputed']}** rows stay `application_status='disputed'` because neither a
-scoped absence source nor an owner adjudication exists.
+other single provider. The remaining **{stats['language_disputed']}** rows stay
+`application_status='disputed'` because no owner adjudication settles them. Exact exhaustive source
+edges may support the recorded contradiction, but do not become a final collection decision.
 
 The owner decision and its rationale are queryable in `owner_adjudications` and through the
 `app_language_availability` view. The raw evidence and repository verdict remain unchanged, so a

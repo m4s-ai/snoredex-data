@@ -18,6 +18,14 @@ from urllib.parse import quote, urlencode
 B = Path(__file__).resolve().parent.parent
 cards = json.load(io.open(os.path.join(B, "snorlax_cards.json"), encoding="utf-8"))["cards"]
 units = json.load(io.open(os.path.join(B, "verification", "units.json"), encoding="utf-8"))
+evidence_semantics = {
+    row["unitId"]: row
+    for row in json.load(io.open(
+        os.path.join(B, "verification", "evidence_semantics.json"), encoding="utf-8"
+    ))["units"]
+}
+if set(evidence_semantics) != {unit["unitId"] for unit in units}:
+    raise SystemExit("evidence semantics must classify every language unit exactly once")
 artists = json.load(io.open(os.path.join(B, "artists_pokemontcgio.json"), encoding="utf-8"))
 finish_document = json.load(
     io.open(os.path.join(B, "verification", "finish_units.json"), encoding="utf-8")
@@ -185,7 +193,7 @@ NAME_BY_PROVIDER = {p["providerId"]: p["displayName"] for p in source_registry["
 conf = {}
 strength = {}
 for u in units:
-    if u["status"] != "confirmed":
+    if evidence_semantics[u["unitId"]]["applicationStatus"] != "exists":
         continue
     key = (u["setCode"], str(u.get("number") or ""), u.get("variant") or "base")
     conf.setdefault(key, []).append(u["language"])

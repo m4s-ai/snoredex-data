@@ -86,10 +86,13 @@ jobs:
       - name: Print identity dry run
         run: python scripts/print_identity_dryrun.py --check
 
-      # The evidence-granularity inventory (#137). Report-only, but it must not go stale: its
-      # baselines are what catch a pass writing a verdict on evidence that cannot reach the card.
+      # The evidence-granularity inventory and conservative application policy (#137). It must not
+      # go stale: every consumer projection reads its per-unit application status.
       - name: Evidence semantics inventory
         run: python scripts/evidence_semantics.py --check
+
+      - name: Evidence application regression tests
+        run: python verification/test_evidence_application.py
 
       - name: Owner adjudication regression tests
         run: python verification/test_owner_adjudications.py

@@ -28,9 +28,10 @@ python scripts/database.py --check
 The useful status split is:
 
 - `repository_verdict` preserves the research store exactly.
-- `application_status='exists'` has positive evidence.
-- `application_status='not-printed'` is reserved for an explicitly absence-capable source scope or
-  an entry in `owner_adjudications`.
+- `application_status='exists'` has positive evidence that reaches this exact card.
+- `application_status='needs-evidence'` preserves a confirmation whose set/product or sibling
+  observation cannot establish this exact card.
+- `application_status='not-printed'` is reserved for an entry in `owner_adjudications`.
 - `providers.supports_absence` means that a provider has at least one such scope; the row-level
   `source_absence_supported` field identifies whether this exact source URL is in one. Provider
   authority alone is never enough.
@@ -43,13 +44,14 @@ from that evidence to this card holds:
 |---|---|---:|---|
 | `specimen-or-card` | — | 520 | a record about this card in this language |
 | `product-or-set` | `carries` | 83 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
-| `product-or-set` | `does-not-carry` | **17** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
+| `product-or-set` | `does-not-carry` | **17** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached; application status is `needs-evidence` |
 | `product-or-set` | `needs-set-size` | 0 | was: undecidable without a printed set size. The set database records those sizes now (#146), so run membership is computed rather than inferred from a rarity word |
-| `sibling-derived` | — | 14 | the evidence of a neighbouring unit |
+| `sibling-derived` | — | 14 | the evidence of a neighbouring unit; application status is `needs-evidence` |
 
-An application that needs card-level evidence should filter on `evidence_granularity` rather than
-trusting `exists` alone. The 17 are not wrong — they are unproven at this granularity, and
-`pending` semantics apply: not yet established, never proven absent. Fourteen cite one source, the
+Applications may use `application_status='exists'` directly: all 31 unsupported confirmations are
+now `needs-evidence`, while `repository_verdict='confirmed'` and the original observation remain
+unchanged. The 17 product/set rows are not wrong — they are unproven at this granularity, and
+unresolved semantics apply: not yet established, never proven absent. Fourteen cite one source, the
 cross-language expansion index, which carries no card list at all, for cards no locale catalogue
 here indexes; three are promo printings, whose collector number is the number of the run card they
 reprint, so the set's printed size cannot reach them. The rows whose page did carry a list, and the
@@ -61,9 +63,10 @@ establishes a printing, and may deny one only inside a coverage edge proven exha
 product-level statement reaches the card only when the step above holds, and never denies one; an
 era argument and a sibling's record establish nothing on their own. An owner adjudication settles a
 contradiction whatever sits beneath it, because it is the only mechanism that can settle an absence.
-`verdictsBeyondTheirGranularity` counts the rows outside that rule — **58** today, held by check
-`N19`. They are a queue for #140 to disposition, not errors: the recorded observation stands and
-only the inference drawn from it is marked unsupported.
+`verdictsBeyondTheirGranularity` counts the raw rows outside that rule — **58** today, held by check
+`N19`. The raw observations remain historical inputs: their application statuses are 31
+`needs-evidence` confirmations and 27 `disputed` contradictions, so none materializes an existence
+or absence claim.
 
 `needs-set-size` is a third answer, not a softer `does-not-carry`: it is the report declining to
 classify. It stands at 0 because the set database now records `printedSetSize` — the denominator
@@ -80,6 +83,7 @@ is source-derived, which is rule 4 visible in the data. Every `disputed` row is
   claims and evidence. It is not a claim that any one provider proved absence.
 - `application_status='disputed'` preserves a repository contradiction with neither a scoped
   absence source nor an owner adjudication. Do not turn it into a hard “does not exist.”
+- `application_status='needs-evidence'` is a raw confirmation whose evidence cannot reach the card.
 - `application_status='unresolved'` means not yet established.
 - `application_status='out-of-scope'` is a code card.
 
@@ -170,6 +174,6 @@ WHERE application_status = 'not-printed';
 SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
-The database is UTF-8 SQLite, schema version `1.1.0`, with `PRAGMA user_version=10001`. Every build
+The database is UTF-8 SQLite, schema version `1.2.0`, with `PRAGMA user_version=10002`. Every build
 stores SHA-256 hashes of its canonical inputs in `metadata`; `scripts/database.py --check` fails if
 any source artifact changes without a database refresh.

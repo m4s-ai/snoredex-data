@@ -40,6 +40,7 @@ UNITS_PATH = ROOT / "verification" / "units.json"
 FINISH_UNITS_PATH = ROOT / "verification" / "finish_units.json"
 CHECKLIST_PATH = ROOT / "analysis_checklist.json"
 SOURCE_REGISTRY_PATH = ROOT / "verification" / "source_registry.json"
+EVIDENCE_SEMANTICS_PATH = ROOT / "verification" / "evidence_semantics.json"
 DECISIONS_PATH = ROOT / "publication-decisions.json"
 LEGACY_BASELINE_PATH = ROOT / "legacy-cardmarket-baseline.json"
 
@@ -172,7 +173,7 @@ def badges_block(dataset: dict[str, Any], checklist: dict[str, Any],
 def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
                         finish_doc: dict[str, Any], checklist: dict[str, Any],
                         sources: dict[str, Any], decisions: dict[str, Any],
-                        baseline: dict[str, Any]) -> str:
+                        baseline: dict[str, Any], semantics: dict[str, Any]) -> str:
     meta = dataset["meta"]
     verification = Counter(unit["status"] for unit in units)
     finishes = finish_doc["meta"]["counts"]
@@ -180,6 +181,7 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
     checklist_counts = checklist_meta["counts"]
     source_meta = sources["meta"]
     source_counts = source_meta["counts"]
+    application = semantics["counts"]["applicationStatuses"]
     dates = [
         meta["verification"]["lastUpdated"],
         finish_doc["meta"]["generated"],
@@ -216,6 +218,11 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         f"{verification['pending']} still open within the legacy candidate universe. Raw Cardmarket "
         "languages remain preserved beside "
         "their verdicts. |",
+        f"| Evidence-safe application status | **{application.get('exists', 0)} established**, "
+        f"**{application.get('needs-evidence', 0)} needs evidence**, "
+        f"**{application.get('not-printed', 0)} owner-adjudicated not printed**, and "
+        f"**{application.get('disputed', 0)} disputed**. Raw verdicts and observations stay "
+        "queryable; unsupported confirmation does not mint a printing. |",
         f"| Current-known physical checklist | **{checklist_counts['items']} items** across "
         f"{checklist_counts['cards']} cards and {checklist_counts['languages']} languages: "
         f"{checklist_counts['documentedPrintings']} documented printings plus "
@@ -324,6 +331,7 @@ def main() -> int:
     finish_doc = read_json(FINISH_UNITS_PATH)
     checklist = read_json(CHECKLIST_PATH)
     sources = read_json(SOURCE_REGISTRY_PATH)
+    semantics = read_json(EVIDENCE_SEMANTICS_PATH)
     decisions = read_json(DECISIONS_PATH)
     baseline = read_json(LEGACY_BASELINE_PATH)
     original = README_PATH.read_text(encoding="utf-8")
@@ -332,7 +340,9 @@ def main() -> int:
     updated = replace_block(
         updated,
         "current-state",
-        current_state_block(dataset, units, finish_doc, checklist, sources, decisions, baseline),
+        current_state_block(
+            dataset, units, finish_doc, checklist, sources, decisions, baseline, semantics
+        ),
     )
     updated = replace_block(
         updated, "evidence-strength", evidence_strength_block(units, sources)
