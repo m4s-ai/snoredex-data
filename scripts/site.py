@@ -479,6 +479,15 @@ def main() -> int:
     head_cells.append('<th scope="col" class="col-more"><span class="sr">Details</span></th>')
     head_cells.append('<th scope="col" class="corr">Report</th>')
 
+    mobile_sort_options = "".join(
+        f'<option value="{html.escape(key)}"{(" selected" if key == "release" else "")}>'
+        f'{html.escape(label)}</option>'
+        for label, key, _ in COLUMNS if key is not None
+    ) + "".join(
+        f'<option value="lang-{LANG_CODE[lang]}">{html.escape(lang)} availability</option>'
+        for lang in LANG_ORDER
+    )
+
     providers_rows = "\n".join(
         f"<tr><td><strong>{html.escape(p['displayName'])}</strong></td>"
         f"<td>{html.escape(p['category'])}</td><td>{p['authorityTier']}</td>"
@@ -660,6 +669,14 @@ def main() -> int:
     </details>
     <div class="chips" id="chips"></div>
     <div class="count" id="count" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="mobile-sort" id="collection-mobile-sort">
+      <div class="field">
+        <label for="mobile-sort-key">Sort cards by</label>
+        <select id="mobile-sort-key">{mobile_sort_options}</select>
+      </div>
+      <button type="button" class="ghost" id="mobile-sort-direction"
+        aria-label="Sort ascending">&#8593; Ascending</button>
+    </div>
   </div>
 
   <p class="language-legend" id="collection-table-legend">

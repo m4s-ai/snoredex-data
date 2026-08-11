@@ -334,6 +334,17 @@
       });
     });
 
+    $("#mobile-sort-key").addEventListener("change", (event) => {
+      if (!Object.prototype.hasOwnProperty.call(SORTERS, event.target.value)) return;
+      sortKey = event.target.value;
+      sortDir = 1;
+      render();
+    });
+    $("#mobile-sort-direction").addEventListener("click", () => {
+      sortDir = -sortDir;
+      render();
+    });
+
     $("#f-q").addEventListener("input", (event) => { state.q = event.target.value; render(); });
     ["yearFrom", "yearTo", "langMin", "langMax"].forEach((field) => {
       $("#f-" + field).addEventListener("input", (event) => { state[field] = event.target.value; render(); });
@@ -356,6 +367,14 @@
     });
   }
 
+  function syncSortControls() {
+    $("#mobile-sort-key").value = sortKey;
+    const direction = $("#mobile-sort-direction");
+    const ascending = sortDir > 0;
+    direction.textContent = ascending ? "↑ Ascending" : "↓ Descending";
+    direction.setAttribute("aria-label", ascending ? "Sort ascending" : "Sort descending");
+  }
+
   function syncControls() {
     $("#f-q").value = state.q;
     MULTI.forEach((field) => {
@@ -368,6 +387,7 @@
       const select = document.getElementById("f-lang-" + lang.code);
       if (select) select.value = state.lang[lang.code] || "";
     });
+    syncSortControls();
   }
 
   function activateSort(key) {
@@ -545,6 +565,8 @@
 
   function render() {
     visibleRows = sortRows(ROWS.filter(matches));
+
+    syncSortControls();
 
     $$("thead th[data-key]").forEach((th) => {
       th.setAttribute("aria-sort",

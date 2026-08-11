@@ -484,6 +484,7 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
 .rowdetail-list dt { color: var(--muted); font-weight: 600; }
 .rowdetail-list dd { margin: 0; white-space: normal; overflow-wrap: anywhere; }
 .rowdetail-list .detail-count { color: var(--muted); }
+.mobile-sort { display: none; }
 
 @media (max-width: 720px) {
   .wrap { padding: 0 10px 48px; }
@@ -532,16 +533,69 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
   .field select[multiple] { width: 100%; }
   .langgrid { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
 
-  /* Hint and buttons take a row each rather than competing for one 38px line.
-   *
-   * This is the whole fix for the top:0 overlap. Offsetting the table's own `thead` to sit below
-   * the tools was tried and reverted: the visible sticky heading is the fixed `.table-sticky-header`
-   * overlay, which app.js already positions at the measured tool height, so the native thead is
-   * covered anyway. Pushing it down only made it overhang the first body row and swallow the taps
-   * meant for that row's card-preview button. */
-  .table-scroll-tools { flex-wrap: wrap; row-gap: 4px; }
-  .scroll-hint { flex: 1 0 100%; }
-  .scroll-actions { margin-left: 0; }
+  /* #128 — on a phone the reduced table becomes one card per physical printing. The existing row
+   * remains the only DOM/data surface: rearranging its cells keeps sorting, correction links,
+   * checklist scope and lazy detail panels on the same stable row IDs. */
+  .mobile-sort { display: flex; align-items: flex-end; gap: 8px; margin-top: 10px; }
+  .mobile-sort .field { flex: 1 1 auto; }
+  .mobile-sort .ghost { flex: 0 0 auto; min-height: 38px; }
+  .table-scroll-tools, .table-edge, .table-sticky-header { display: none !important; }
+  .tableframe.is-overflowing #collection-table-scroll, #collection-table-scroll {
+    overflow: visible; border: 0; border-radius: 0;
+  }
+  #collection-table, #collection-table tbody { display: block; width: 100%; }
+  #collection-table thead { display: none; }
+  #rows > tr:not(.yearsep):not(.rowdetail) {
+    display: grid;
+    grid-template-columns: 50px minmax(0, auto) minmax(0, 1fr);
+    grid-template-areas:
+      "image card card"
+      "image set number"
+      "variant variant variant"
+      "finish finish finish"
+      "evidence evidence evidence"
+      "more report report";
+    gap: 3px 8px; margin: 0 0 10px; padding: 10px;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
+  }
+  #rows > tr:not(.yearsep):not(.rowdetail):hover { background: var(--panel); }
+  #rows > tr:not(.yearsep):not(.rowdetail) > td {
+    padding: 0; border: 0; white-space: normal; background: transparent;
+  }
+  #rows td.img { display: block; grid-area: image; }
+  #rows .col-card {
+    display: block; grid-area: card; font-size: 14px; font-weight: 750; line-height: 1.25;
+  }
+  #rows .col-set { display: block; grid-area: set; color: var(--muted); font-weight: 650; }
+  #rows .col-number { display: block; grid-area: number; color: var(--muted); }
+  #rows .col-number::before { content: "No. "; font-weight: 650; }
+  #rows .col-variant { display: block; grid-area: variant; margin-top: 4px; }
+  #rows .col-finish { display: block; grid-area: finish; }
+  #rows .col-evidence { display: block; grid-area: evidence; max-width: none; }
+  #rows .col-finish::before, #rows .col-evidence::before {
+    display: block; margin: 3px 0 1px; color: var(--muted); font-size: 10px;
+    font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  }
+  #rows .col-finish::before { content: "Finish"; }
+  #rows .col-evidence::before { content: "Evidence"; }
+  #rows .col-more { display: block; grid-area: more; margin-top: 5px; }
+  #rows td.corr {
+    display: block; grid-area: report; position: static; margin-top: 5px;
+    border: 0; box-shadow: none; text-align: right;
+  }
+  #rows .card-preview-trigger img { width: 46px; max-height: 66px; }
+  #rows .cell-clip { contain: none; overflow: visible; text-overflow: clip; white-space: normal; }
+  #rows .cell-clip[data-clipped="true"] { cursor: auto; }
+  #rows .cell-clip[data-clipped="true"]:hover { text-decoration: none; }
+  #rows tr.yearsep { display: block; }
+  #rows tr.yearsep td { display: block; padding: 8px 2px 5px; border: 0; position: static; }
+  #rows tr.rowdetail:not([hidden]) {
+    display: block; margin: -10px 0 10px; padding: 0 10px 10px;
+    border: 1px solid var(--line); border-top: 0; border-radius: 0 0 8px 8px;
+    background: var(--panel);
+  }
+  #rows tr.rowdetail > td { display: block; padding: 8px 0 0; border: 0; }
+  #rows .empty { display: block; grid-area: 1 / 1 / -1 / -1; padding: 22px 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
