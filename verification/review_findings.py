@@ -1318,6 +1318,10 @@ def collect() -> None:
             "confirmed-source-json": {
                 "nameQueries", "retainedUnitIds", "sourceRecord", "pagination",
             },
+            "bulbapedia-historical-json": {
+                "nameQueries", "retainedUnitIds", "retainedSetNames", "sourceRecord",
+                "pageTitle", "revisionId", "languageColumn", "pagination",
+            },
             "source-first-print-json": {
                 "nameQueries", "retainedPrintIds", "sourceRecord", "pagination",
             },
@@ -1350,6 +1354,15 @@ def collect() -> None:
                         != "verification/confirmed_sources.json"
                     or request["queryParameters"].get("pagination")
                         != "exact-reviewed-positive-frontier"
+                )
+            )
+            or (
+                card_adapters[request["adapterId"]].get("responseFormat")
+                    == "bulbapedia-historical-json"
+                and (
+                    request["queryParameters"].get("revisionId") != 4567865
+                    or request["queryParameters"].get("pagination")
+                        != "single-revision-positive-frontier"
                 )
             )
             or (

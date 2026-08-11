@@ -1,0 +1,3910 @@
+{
+  "schema": "snoredex-card-discovery-run",
+  "schemaVersion": "1.0.0",
+  "runId": "20260811T144357Z",
+  "coverageVersion": "1.6.0",
+  "startedAt": "2026-08-11T14:43:57Z",
+  "completedAt": "2026-08-11T14:46:18Z",
+  "status": "complete",
+  "contract": "verification/card_discovery_adapters.json",
+  "contractHash": "sha256:7856e7180b61c037d6ef3c820724bbb5708767de6c7e56fcde731f411c053f0d",
+  "capabilityGraph": "verification/source_capability_graph.json",
+  "capabilityGraphHash": "sha256:ff205219fa19fd4f928bc96a27e1ea5a3726499d3a7481aa36161b4d5f09da4c",
+  "capabilityGraphSurfaces": [
+    "asia-card-search",
+    "bulbapedia-mediawiki",
+    "ligapokemon-catalogue",
+    "tcgdex-api",
+    "tpci-latam-spanish-card-assets",
+    "tpci-localized-card-archive"
+  ],
+  "requests": [
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "pokemon-asia-native-name",
+      "adapterVersion": "1.0.0",
+      "sliceId": "pokemon-asia-tw-snorlax",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "coverageEdgeId": "asia-card-search-positive",
+      "rawLocale": "tw",
+      "endpoint": "https://asia.pokemon-card.com/tw/card-search/list/",
+      "queryParameters": {
+        "nameQueries": [
+          "卡比獸"
+        ],
+        "cardType": "all",
+        "regulation": "all",
+        "pageParameter": "pageNo"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "卡比獸",
+          "pageNo": 1,
+          "url": "https://asia.pokemon-card.com/tw/card-search/list/?pageNo=1&keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&cardType=all&regulation=all",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/query-1/page-1.html",
+          "responseHash": "sha256:7003df0e37f4924ca074d965710c7e69a0488b5b8031aa798bf478fd3fdab8ca",
+          "resultCount": 43,
+          "totalPages": 3,
+          "detailIds": [
+            "18039",
+            "17038",
+            "17039",
+            "18292",
+            "17040",
+            "14796",
+            "16453",
+            "16454",
+            "13148",
+            "12537",
+            "12164",
+            "11337",
+            "10298",
+            "9173",
+            "9339",
+            "8943",
+            "8266",
+            "14986",
+            "8304",
+            "12268"
+          ]
+        },
+        {
+          "query": "卡比獸",
+          "pageNo": 2,
+          "url": "https://asia.pokemon-card.com/tw/card-search/list/?pageNo=2&keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&cardType=all&regulation=all",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/query-1/page-2.html",
+          "responseHash": "sha256:4d3f56ab49962669dadea998bdf1431904001d8343f49b6a05e5a561ee9045a3",
+          "resultCount": 43,
+          "totalPages": 3,
+          "detailIds": [
+            "5618",
+            "7016",
+            "6589",
+            "6424",
+            "5968",
+            "5969",
+            "5314",
+            "2220",
+            "2051",
+            "1474",
+            "375",
+            "2395",
+            "2541",
+            "2542",
+            "7426",
+            "2707",
+            "2708",
+            "2856",
+            "2880",
+            "2881"
+          ]
+        },
+        {
+          "query": "卡比獸",
+          "pageNo": 3,
+          "url": "https://asia.pokemon-card.com/tw/card-search/list/?pageNo=3&keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&cardType=all&regulation=all",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/query-1/page-3.html",
+          "responseHash": "sha256:8177203ef27d52f94421542d5df8437b91f282745310fff587c366369d7ef632",
+          "resultCount": 43,
+          "totalPages": 3,
+          "detailIds": [
+            "3553",
+            "3569",
+            "4244"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "10298",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/10298/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/10298.html",
+          "responseHash": "sha256:a9d4d06a9c458254c196a49729e8bdf915385857d56b2f3fe2c53ddca0765a59",
+          "parsedRecordHash": "sha256:c0fcc2eddb1d704a3b2f4dc88efc2ee00d015417aea2c99e127ed0960604ce1b"
+        },
+        {
+          "rawProviderId": "11337",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/11337/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/11337.html",
+          "responseHash": "sha256:7e484c9741dae264817d04afb515ec8de6bef80277ddc7c14b06dd892e360e82",
+          "parsedRecordHash": "sha256:ba4e5c845f0549cd7ee252c103a1ca4bbe313752078a040eda68b0a2022ac53e"
+        },
+        {
+          "rawProviderId": "12164",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/12164/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/12164.html",
+          "responseHash": "sha256:4c0202cfc543ef7856a62280e4e2e0087504ec907c5afb1f2cd2ec56218a70fc",
+          "parsedRecordHash": "sha256:2b5032078341c186f62c72fc01f0bfdd0fc48d9ce263ca184d330e42bab4f75c"
+        },
+        {
+          "rawProviderId": "12268",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/12268/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/12268.html",
+          "responseHash": "sha256:02e0184d7767255194920e891c8a458c6570ae9bb8a090d097c5cca4e7de9b02",
+          "parsedRecordHash": "sha256:1efb2cefd4eb90abdbdcb2dceb96fcf91f6e0da554c2bb3ecb62b1c91a5b2ac4"
+        },
+        {
+          "rawProviderId": "12537",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/12537/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/12537.html",
+          "responseHash": "sha256:52af2749dbca2884cc6f5129566f213b67131c65ff88bb708db4a9185be767a1",
+          "parsedRecordHash": "sha256:78c6bfe123d8544e6142c4263728d78e1e83397e40394432b36cbde9325e3829"
+        },
+        {
+          "rawProviderId": "13148",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/13148/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/13148.html",
+          "responseHash": "sha256:2fbd506d5988ca3fb2ef348bfe136055e826dc56bddfddd080e838f09202a280",
+          "parsedRecordHash": "sha256:db668a345329725ca2dc7e3f3fae2dce693ad37015a8c6262f5529f2ef3705c9"
+        },
+        {
+          "rawProviderId": "1474",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/1474/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/1474.html",
+          "responseHash": "sha256:2cfdddb07f958f426c6fb0073530306844aff3077bc2d70727428d88966335e5",
+          "parsedRecordHash": "sha256:87b0bbc7f54cee46cafb84c6d17463776d1e55e841a2c73f61424cea36671583"
+        },
+        {
+          "rawProviderId": "14796",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/14796/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/14796.html",
+          "responseHash": "sha256:d7f0240d2c099db15b690325efac68b1d4e321d3c7bf61d912be83b7bf65738b",
+          "parsedRecordHash": "sha256:095a6c48ae9ad1e985b9406c3c88a506fd724191d8de8a77ea8d18ae7b3916a5"
+        },
+        {
+          "rawProviderId": "14986",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/14986/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/14986.html",
+          "responseHash": "sha256:7bc3a49af3e7ffa670c1aa827b4bfff778bfe059abecf475b8dc3baeaed6a791",
+          "parsedRecordHash": "sha256:23eb2c2d000bc36c4776731d77b84ff204bc861efde9cb4adefaa6f926ddcba0"
+        },
+        {
+          "rawProviderId": "16453",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/16453/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/16453.html",
+          "responseHash": "sha256:d13c5112e7185e48753c3b13d66417bcab0f8dbc1498a90b9e5c57807cd52fc7",
+          "parsedRecordHash": "sha256:3700ff9daafa1a1e28a1e6513729f3dc84eca052a792b11d6f3ae4c6461db96d"
+        },
+        {
+          "rawProviderId": "16454",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/16454/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/16454.html",
+          "responseHash": "sha256:56e0e98c34df84910bdbb3c4bb558b047758f0279212f25868f0dcfc3dd88846",
+          "parsedRecordHash": "sha256:5fe0165a39daf07a63c73c1bed01d3469c67f81301bbea230d909151fb00cee6"
+        },
+        {
+          "rawProviderId": "17038",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/17038/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/17038.html",
+          "responseHash": "sha256:b1eacb00d2da75a6e10fdd319eec8e134dd7213ca30bea83657a5b93f2cd27b2",
+          "parsedRecordHash": "sha256:2aff97adcc4cc5eb0ac04af895cd3b8d366a6cc68196359149545b552844c71d"
+        },
+        {
+          "rawProviderId": "17039",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/17039/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/17039.html",
+          "responseHash": "sha256:856979efdf24edf741f5d841ee8081c1c9f8ab3c7add818f3d2662ba991784f6",
+          "parsedRecordHash": "sha256:00e059c233fabbd4698f33a3c06937a97fe4ce22cd89682abaed3c877ea1dc11"
+        },
+        {
+          "rawProviderId": "17040",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/17040/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/17040.html",
+          "responseHash": "sha256:9e83b24ba6906930b4970a2446e7ec914402a4063eaee0aed3e148dd223d6af8",
+          "parsedRecordHash": "sha256:2bbcc3bb925a4a501c6a2b96eec80d9b3d46de0c44838906a94b79c48674910b"
+        },
+        {
+          "rawProviderId": "18039",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/18039/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/18039.html",
+          "responseHash": "sha256:e0d5e5b42aeeb6e7a7fe5df8531f3e3fa60b1f217f685e141a9c90d2338f0f75",
+          "parsedRecordHash": "sha256:e7572aefc57bb9d8779852e987611ee30ab347ecc3fad7a63d30dea3fcef5ea5"
+        },
+        {
+          "rawProviderId": "18292",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/18292/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/18292.html",
+          "responseHash": "sha256:deb574a99aa3533d998393814e18c79809d79d2a124290f63699a38f0d695664",
+          "parsedRecordHash": "sha256:5c60d67ee63e10cf8dfa8d814dece265581e800e0b6ca6b9e13c9baa588058ee"
+        },
+        {
+          "rawProviderId": "2051",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2051/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2051.html",
+          "responseHash": "sha256:befc293db93841e943ab721bfd22b099440d9cb3a501aff7518d8d1652717fc3",
+          "parsedRecordHash": "sha256:2f39fdb4bc5bb9d3e4f1a650237de1ee00dbcd55441fe9a6668719002e78649e"
+        },
+        {
+          "rawProviderId": "2220",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2220/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2220.html",
+          "responseHash": "sha256:0fc67bf7f3a5a7ae1e0ed488a987b71b58300f239b8ff24eaaf9722db70a3423",
+          "parsedRecordHash": "sha256:eb992b0234c5c0af0ab4f38c4a7d97bdb7d621f08ca9e92f1c579da66baf7df2"
+        },
+        {
+          "rawProviderId": "2395",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2395/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2395.html",
+          "responseHash": "sha256:fa5915665464f62fe237afc6e508f278b7f215b7e2889be4831096d22d2b0fdf",
+          "parsedRecordHash": "sha256:d0f005d224d21f7f8631288d814f5b56fb6194a605c467994b96c2c205cd21ba"
+        },
+        {
+          "rawProviderId": "2541",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2541/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2541.html",
+          "responseHash": "sha256:8acac50b4a846f339dbeaaa6a8eb4879aa4266a3b8b59d5130882579acac8382",
+          "parsedRecordHash": "sha256:dac203b09c6bc1eb303a9363b14c868b0a2c24c028b8e71ee8302ce4e5030f03"
+        },
+        {
+          "rawProviderId": "2542",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2542/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2542.html",
+          "responseHash": "sha256:f19a6cd20676cbb1c14e645a20b3787d7abf25e94f83ecdeff0cf4190c351ee4",
+          "parsedRecordHash": "sha256:4db33629860b508b28fcd7d7bbc320fc05568c12d15a2d6f034c03dfd36085cf"
+        },
+        {
+          "rawProviderId": "2707",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2707/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2707.html",
+          "responseHash": "sha256:35f51a9fa7f7cacee9d9a5efa1f9abfdf53320c006c46e90192d424e2f5b9550",
+          "parsedRecordHash": "sha256:20ff244a74a4b11f282822bc71d5a6340f50238352f3f483d6e6b12c7ed11095"
+        },
+        {
+          "rawProviderId": "2708",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2708/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2708.html",
+          "responseHash": "sha256:31ce49eb6b0d745feca41d93b7c5caa43d64d20a85d41b1fe0fcc313f0e5bb4b",
+          "parsedRecordHash": "sha256:2ea846baa77f7b60565ade24f242201a88d2065933c8b0a93e5b4355544e99bf"
+        },
+        {
+          "rawProviderId": "2856",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2856/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2856.html",
+          "responseHash": "sha256:7676187dc3174489900969ac0b2ce57cd5db373d22deab053099767cc4303814",
+          "parsedRecordHash": "sha256:a0b5ab411eef30a582695e60b15655d5b15916676ac00e23c13624e33d32becf"
+        },
+        {
+          "rawProviderId": "2880",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2880/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2880.html",
+          "responseHash": "sha256:3d028ebbdeb3c7439eb3be17db1e1612f7529694c6adcb8cf47e9d548289dc44",
+          "parsedRecordHash": "sha256:03ee8e0fa68eb0ab6d5d8cfce9827e6b4bb69b9b1b1115edfabecf5cac2d08a1"
+        },
+        {
+          "rawProviderId": "2881",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/2881/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/2881.html",
+          "responseHash": "sha256:bf2671ca17ca6fdb1c9b12247e6a137db8041d0188c0111a353f9fb8455658ae",
+          "parsedRecordHash": "sha256:394a33a967d015cb97519e08a2f924d90b7d0c8645c6d1e1023e37e24f3a0ca1"
+        },
+        {
+          "rawProviderId": "3553",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/3553/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/3553.html",
+          "responseHash": "sha256:a555b48b057a322f95823cee41f2dbd4ca3d699b9a003967752def57d28983e3",
+          "parsedRecordHash": "sha256:01a857f9fcf3deddd2afc39b681b84afc6ed1aac1b7d0ec83cfb76dc4f9b7bc6"
+        },
+        {
+          "rawProviderId": "3569",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/3569/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/3569.html",
+          "responseHash": "sha256:b13103f8efa6bef11d8fe89aa9bb2e430438d75eb1a70be6e95b1d9b456322fb",
+          "parsedRecordHash": "sha256:ac22e0b9178b156fa524059ffdc455fe028105c066d03b0dc6deb116ff043fff"
+        },
+        {
+          "rawProviderId": "375",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/375/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/375.html",
+          "responseHash": "sha256:e828e73565bb6a92b0518a6c3ee67789fd448769745f49d07daa681e0dd72b39",
+          "parsedRecordHash": "sha256:dc421ce9f529beb91cd828bf7ab05473f77eaad62a7f34411f5962ddb38e8aad"
+        },
+        {
+          "rawProviderId": "4244",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/4244/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/4244.html",
+          "responseHash": "sha256:c8123e94ed675c4b6aa5757cd9b350c6babb925ea923d0df1c8dcf67c114b997",
+          "parsedRecordHash": "sha256:eeaec204e11c517e16379bbf3972b1fed389cd915b7d228b625db837cefafcbc"
+        },
+        {
+          "rawProviderId": "5314",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5314/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5314.html",
+          "responseHash": "sha256:aef00e063977e9081446fa61883698c5d4be6c47e66ca14b3cfea8ab6b9d45c2",
+          "parsedRecordHash": "sha256:6985670d60038b165037469f23d726c384feeed72d2e0715eda435f2b781f4e7"
+        },
+        {
+          "rawProviderId": "5618",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5618/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5618.html",
+          "responseHash": "sha256:390e794e222857f37e08f6c9f05868e08119ba1ff55b2d612a97c982fe6b400c",
+          "parsedRecordHash": "sha256:24d1f1abdb55a507191791853b287320c3700f680ab2ec171d7b444ca26fab7f"
+        },
+        {
+          "rawProviderId": "5968",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5968/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5968.html",
+          "responseHash": "sha256:ab2b3de1f7311623ca83de1309582ff69932662813e8dc8c7e18642d3eb71d8f",
+          "parsedRecordHash": "sha256:4e78e981ca75435255a5aa902d4d47031063d625a2420f5ef22265df3caed536"
+        },
+        {
+          "rawProviderId": "5969",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/5969/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/5969.html",
+          "responseHash": "sha256:0f9d10f30c6ded1ddd54b267289db21bc7f5659778789623a6110025239381f4",
+          "parsedRecordHash": "sha256:ca79e089c1da30f0ff4bacb68597c261d72f768ca33ebe67bc4be6f6fedbaf6f"
+        },
+        {
+          "rawProviderId": "6424",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/6424/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/6424.html",
+          "responseHash": "sha256:16cd50ae973dab57d6078adbf557985882cc6c53c377bcf9f449d9bc1dfb5bed",
+          "parsedRecordHash": "sha256:a115444c1bf3daf7dc545f74cb4fbe42b97d960bf191623123819d86865f3e2a"
+        },
+        {
+          "rawProviderId": "6589",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/6589/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/6589.html",
+          "responseHash": "sha256:3152e8b35f164ec70537a9da15d18c667fe9c3d3f987db9d2f1a0b16df89c232",
+          "parsedRecordHash": "sha256:b3ee9a79a1dfbe4066d1f933a898c2a322c1a3ab0f7c6e225de65132565fefe9"
+        },
+        {
+          "rawProviderId": "7016",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/7016/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/7016.html",
+          "responseHash": "sha256:2b97cc65fd70acd38af7140fd5088240b6d9da11412fd101bb47601a5becef7d",
+          "parsedRecordHash": "sha256:9c10b065ed3b62eec6254544ddf33a15f96c770e0d045aa6a25d48abc4a2b7e7"
+        },
+        {
+          "rawProviderId": "7426",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/7426/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/7426.html",
+          "responseHash": "sha256:e7091a135d73073984e62128bac1e17a8cd937481c524121d0ed90e33a015740",
+          "parsedRecordHash": "sha256:972bf77e80fe6cadd7a6772b91928fedf0828bb9326e376fd3b472497a5158ad"
+        },
+        {
+          "rawProviderId": "8266",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/8266/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/8266.html",
+          "responseHash": "sha256:567a9fea274f1a83274ae87fb121dabf568bad3989281c7b5d649d5c746c007e",
+          "parsedRecordHash": "sha256:925dc36b13655d11474f6755f393589f79fe41b73f254a5d3956ae851337d3dd"
+        },
+        {
+          "rawProviderId": "8304",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/8304/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/8304.html",
+          "responseHash": "sha256:b8ed52bc3a005974902e58c23c64e11c1537c83a7e367d5688c97ffd7cff4118",
+          "parsedRecordHash": "sha256:ec9fd31015e36ac5b7158d3315fd7c49aba79fbfda644dd64d5e41a520f7c5dd"
+        },
+        {
+          "rawProviderId": "8943",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/8943/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/8943.html",
+          "responseHash": "sha256:25b209b6d6a6c7025d5f7eb2087f3395afae938c33f8f2bf05e1a717cdaa5bb0",
+          "parsedRecordHash": "sha256:a35a785b58a66d55de26c745e10b096a073ee8629aad4209f6976363091d6319"
+        },
+        {
+          "rawProviderId": "9173",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/9173/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/9173.html",
+          "responseHash": "sha256:a5950a48c482c2d2b4980f3964501b8005fb798a42b5b29aebba82a634b2a120",
+          "parsedRecordHash": "sha256:e8197b9e76f453bcb0f8f6e1f1871868e06887c622fb0972ed63e0b8168345f6"
+        },
+        {
+          "rawProviderId": "9339",
+          "url": "https://asia.pokemon-card.com/tw/card-search/detail/9339/",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/details/9339.html",
+          "responseHash": "sha256:1b45474b69eb27556149597bec3c3b7009176774e5d12e6e602c8073146fe187",
+          "parsedRecordHash": "sha256:2835ecd0ef79e98b7d0fb5ddbfc833f6c2770cfb46372c58e280f4df32cf9530"
+        }
+      ],
+      "sets": [],
+      "assets": [
+        {
+          "rawSetCode": "SVQP",
+          "url": "https://asia.pokemon-card.com/tw/card-img/mark/twhk_exp_SVQP.png",
+          "rawPath": "raw/pokemon-asia-tw-snorlax/assets/SVQP.png",
+          "responseHash": "sha256:99bad27dc155e7ac1a6c0b63244192d76a4a1696fbead948d8577238697c19a5"
+        }
+      ],
+      "checkpoint": {
+        "completedPages": [
+          "卡比獸:1",
+          "卡比獸:2",
+          "卡比獸:3"
+        ],
+        "completedDetailIds": [
+          "10298",
+          "11337",
+          "12164",
+          "12268",
+          "12537",
+          "13148",
+          "1474",
+          "14796",
+          "14986",
+          "16453",
+          "16454",
+          "17038",
+          "17039",
+          "17040",
+          "18039",
+          "18292",
+          "2051",
+          "2220",
+          "2395",
+          "2541",
+          "2542",
+          "2707",
+          "2708",
+          "2856",
+          "2880",
+          "2881",
+          "3553",
+          "3569",
+          "375",
+          "4244",
+          "5314",
+          "5618",
+          "5968",
+          "5969",
+          "6424",
+          "6589",
+          "7016",
+          "7426",
+          "8266",
+          "8304",
+          "8943",
+          "9173",
+          "9339"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tcgdex-exact-name",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-en-snorlax",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "rawLocale": "en",
+      "endpoint": "https://api.tcgdex.net/v2/en/cards",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "nameFilter": "strict-equality",
+        "pagination": "disabled-provider-default"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://api.tcgdex.net/v2/en/cards?name=eq%3ASnorlax",
+          "rawPath": "raw/tcgdex-en-snorlax/query-1.json",
+          "responseHash": "sha256:2f6e2834979133a42ebc4cb926142b6e4e8cb8aa2a68926a8b7545504b6c9240",
+          "resultCount": 45,
+          "totalPages": 1,
+          "detailIds": [
+            "base2-11",
+            "ex6-15",
+            "xy0-26",
+            "base2-27",
+            "base4-30",
+            "col1-33",
+            "pl2-33",
+            "dp1-37",
+            "basep-49",
+            "P-A-049",
+            "sm115-50",
+            "svp-051",
+            "swsh10.5-055",
+            "g1-58",
+            "me03-063",
+            "A2a-063",
+            "lc-64",
+            "xy10-77",
+            "xy2-80",
+            "pl2-81",
+            "ecard3-100",
+            "bw8-101",
+            "swsh12.5-109",
+            "bw7-109",
+            "pl2-111",
+            "xy8-118",
+            "svp-122",
+            "swsh4-131",
+            "sv06-136",
+            "swsh1-140",
+            "swsh2-141",
+            "sv03.5-143",
+            "swsh11-143",
+            "sv08-144",
+            "sm10-158",
+            "sv04.5-202",
+            "swsh8-206",
+            "A1-211",
+            "swsh6-224",
+            "A1-250",
+            "swshp-SWSH032",
+            "swshp-SWSH068",
+            "swshp-SWSH119",
+            "swsh11.5tg-TG10",
+            "xyp-XY179"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "A1-211",
+          "url": "https://api.tcgdex.net/v2/en/cards/A1-211",
+          "rawPath": "raw/tcgdex-en-snorlax/details/A1-211.json",
+          "responseHash": "sha256:70f668f4b353cbe7b3055c7ba30ddbc3acdc4b0d7bdc1d3b7becb372453aa2c9",
+          "parsedRecordHash": "sha256:0a18795162f111c21e27c031457555d0118760ad90b8fdfd96fbc542e415f119"
+        },
+        {
+          "rawProviderId": "A1-250",
+          "url": "https://api.tcgdex.net/v2/en/cards/A1-250",
+          "rawPath": "raw/tcgdex-en-snorlax/details/A1-250.json",
+          "responseHash": "sha256:fde01962c876e0ca2a75266d6955e55b5f733e3c580942bb847ea0d1aa012afc",
+          "parsedRecordHash": "sha256:3f1a297f4ea3840bcf739240908385ac91d25e9f6844070ec4236adcf620571b"
+        },
+        {
+          "rawProviderId": "A2a-063",
+          "url": "https://api.tcgdex.net/v2/en/cards/A2a-063",
+          "rawPath": "raw/tcgdex-en-snorlax/details/A2a-063.json",
+          "responseHash": "sha256:3e89d1c9a1edaca9f7df235d8701bc536e9bed4f9120c9e1e1d508894a01b12c",
+          "parsedRecordHash": "sha256:a55ea6b3bad9797e469173aea6daeb50ab16583bb3460b6cd55d49c41aea6df2"
+        },
+        {
+          "rawProviderId": "P-A-049",
+          "url": "https://api.tcgdex.net/v2/en/cards/P-A-049",
+          "rawPath": "raw/tcgdex-en-snorlax/details/P-A-049.json",
+          "responseHash": "sha256:42c833aac8a50da07d53fedbe0672eae2b928020cfe18f12d199234e159e4ca2",
+          "parsedRecordHash": "sha256:d3b435c1dff74d5ad81806dea4a750515b6a9f03ec401c7fbae6207058c2389e"
+        },
+        {
+          "rawProviderId": "base2-11",
+          "url": "https://api.tcgdex.net/v2/en/cards/base2-11",
+          "rawPath": "raw/tcgdex-en-snorlax/details/base2-11.json",
+          "responseHash": "sha256:bd8bd2e933a9780c473af2cca026078b0a68a92cde21d64e167834afc991f1d4",
+          "parsedRecordHash": "sha256:bc70564944aea92bb0602b55c41ce7bbf7b38912d2b360daede2987e0f6e174e"
+        },
+        {
+          "rawProviderId": "base2-27",
+          "url": "https://api.tcgdex.net/v2/en/cards/base2-27",
+          "rawPath": "raw/tcgdex-en-snorlax/details/base2-27.json",
+          "responseHash": "sha256:298481fd0bb95ee2cdaad922ac890154bd11392b354125399866de792073d274",
+          "parsedRecordHash": "sha256:cf38037ada59c8b2c272bb1748c14c30780d8bb3bc76e768ce485ef8b8b4be0a"
+        },
+        {
+          "rawProviderId": "base4-30",
+          "url": "https://api.tcgdex.net/v2/en/cards/base4-30",
+          "rawPath": "raw/tcgdex-en-snorlax/details/base4-30.json",
+          "responseHash": "sha256:b8f841abd64eb4d8fc57534b6d8489bec78eb06fe8028c4334adaa720555ea82",
+          "parsedRecordHash": "sha256:02a56db6e6ee5948ab2c33e13dc4f5b6c1565f77f208b77e03b012abede5cb5b"
+        },
+        {
+          "rawProviderId": "basep-49",
+          "url": "https://api.tcgdex.net/v2/en/cards/basep-49",
+          "rawPath": "raw/tcgdex-en-snorlax/details/basep-49.json",
+          "responseHash": "sha256:3bc8d0a8667eb8b72bac2869181e6b42eb4de1ef5d0070e3a70aabfd2d5f6530",
+          "parsedRecordHash": "sha256:96feeac3660dabaab23594d4f1cc1f9d80bac614e7785ec9b97d434b87c13a8f"
+        },
+        {
+          "rawProviderId": "bw7-109",
+          "url": "https://api.tcgdex.net/v2/en/cards/bw7-109",
+          "rawPath": "raw/tcgdex-en-snorlax/details/bw7-109.json",
+          "responseHash": "sha256:4b26cfc1744b8dba9c80fffc39470bc4dbd4e416f6fa163588cf53f75eb4338e",
+          "parsedRecordHash": "sha256:298190e420ed619b8f3c65dc67273835b5f4ac29127684583c19edc5fa4fdc58"
+        },
+        {
+          "rawProviderId": "bw8-101",
+          "url": "https://api.tcgdex.net/v2/en/cards/bw8-101",
+          "rawPath": "raw/tcgdex-en-snorlax/details/bw8-101.json",
+          "responseHash": "sha256:ce8431eff5d31c89d87ff352f05dbc44d606c1311445104de27b35881e4b6fd8",
+          "parsedRecordHash": "sha256:b5348daa371ac68d1393ae4585c320d439a4200717ff9264dc3c0d2dce03106e"
+        },
+        {
+          "rawProviderId": "col1-33",
+          "url": "https://api.tcgdex.net/v2/en/cards/col1-33",
+          "rawPath": "raw/tcgdex-en-snorlax/details/col1-33.json",
+          "responseHash": "sha256:2d9aa46fc7ea138977b2f8d1a771bd103ab1e0697303f5f7ba44efc766b5809e",
+          "parsedRecordHash": "sha256:05e47a3ff972a5150acd619b1a9dc0b57067d789abb618f9d13f48f5088fb775"
+        },
+        {
+          "rawProviderId": "dp1-37",
+          "url": "https://api.tcgdex.net/v2/en/cards/dp1-37",
+          "rawPath": "raw/tcgdex-en-snorlax/details/dp1-37.json",
+          "responseHash": "sha256:68737814fefdcfb6f7cd7c354b78e69db77967f9039386a6e428464e84df5f7d",
+          "parsedRecordHash": "sha256:20d9ab4f27754a3690603952423fc9e42817301e58ae970f106b849db6cfe017"
+        },
+        {
+          "rawProviderId": "ecard3-100",
+          "url": "https://api.tcgdex.net/v2/en/cards/ecard3-100",
+          "rawPath": "raw/tcgdex-en-snorlax/details/ecard3-100.json",
+          "responseHash": "sha256:99773d007f2082842f331b3a38f85a7b00a11419fce9a3a335dfcaca4ff17bd8",
+          "parsedRecordHash": "sha256:32e37bd28b4d9ec6d37b2edf1aef4fb158a923e008adcd2e25259058b03c8b35"
+        },
+        {
+          "rawProviderId": "ex6-15",
+          "url": "https://api.tcgdex.net/v2/en/cards/ex6-15",
+          "rawPath": "raw/tcgdex-en-snorlax/details/ex6-15.json",
+          "responseHash": "sha256:7b86d8dd0a2d518c045f66d2123cc1f02e65e6dfeac0010cdf53cba64855cb82",
+          "parsedRecordHash": "sha256:758b9f5aa5aac70b53c5a58da263bfdb926c3a792d600b70a24cb3a4a223f50f"
+        },
+        {
+          "rawProviderId": "g1-58",
+          "url": "https://api.tcgdex.net/v2/en/cards/g1-58",
+          "rawPath": "raw/tcgdex-en-snorlax/details/g1-58.json",
+          "responseHash": "sha256:af1afd913f0ff0c109ed2c1569b9dbb8489946575e555c132003455c1706e549",
+          "parsedRecordHash": "sha256:17197dbc1dd5bf92c150c83e05fd6686e61cf058e97b8f5a72fc9dcd722e6636"
+        },
+        {
+          "rawProviderId": "lc-64",
+          "url": "https://api.tcgdex.net/v2/en/cards/lc-64",
+          "rawPath": "raw/tcgdex-en-snorlax/details/lc-64.json",
+          "responseHash": "sha256:fe3b93f0c5eb122660e24a82689d17a8f7554f3fcdbd7228bfe14cc506465953",
+          "parsedRecordHash": "sha256:11c7e824571377f6da9fb20857b030696e9a5613dd73610c0ad8ffbef1092192"
+        },
+        {
+          "rawProviderId": "me03-063",
+          "url": "https://api.tcgdex.net/v2/en/cards/me03-063",
+          "rawPath": "raw/tcgdex-en-snorlax/details/me03-063.json",
+          "responseHash": "sha256:b711521fca5f7cdabaa9c5476520ceb9886e3975484ffbe3170f478b3e34ecfd",
+          "parsedRecordHash": "sha256:e0e67ce0b86bc95cc23740aec74409db91246d8cefd0bb675777aeb824974628"
+        },
+        {
+          "rawProviderId": "pl2-111",
+          "url": "https://api.tcgdex.net/v2/en/cards/pl2-111",
+          "rawPath": "raw/tcgdex-en-snorlax/details/pl2-111.json",
+          "responseHash": "sha256:66caee5a9167b3b456a7ee37ea763812dca2a5a52214cf7ed75f74fde70925bf",
+          "parsedRecordHash": "sha256:3bdeb069d5382e5bac4d97cbc1b2c2d778ebd72421a711472e353dd8b4a9579b"
+        },
+        {
+          "rawProviderId": "pl2-33",
+          "url": "https://api.tcgdex.net/v2/en/cards/pl2-33",
+          "rawPath": "raw/tcgdex-en-snorlax/details/pl2-33.json",
+          "responseHash": "sha256:213500472dbd4ce06259e0ded11e680630eae6b2fe63e755b6b64095f40fe325",
+          "parsedRecordHash": "sha256:a7cf45abaaba38c80d3b1b6b3c9199cdcc8a26d3c8c7230dc21af075e7431fa4"
+        },
+        {
+          "rawProviderId": "pl2-81",
+          "url": "https://api.tcgdex.net/v2/en/cards/pl2-81",
+          "rawPath": "raw/tcgdex-en-snorlax/details/pl2-81.json",
+          "responseHash": "sha256:90c08d988a017bb7595cbb114e18c2c6166f25f76525d40baee352bac4774b6e",
+          "parsedRecordHash": "sha256:c7ed7ee5249affec3967e5d5ccad75b29ecd13212f5f625784c6a00ceda12286"
+        },
+        {
+          "rawProviderId": "sm10-158",
+          "url": "https://api.tcgdex.net/v2/en/cards/sm10-158",
+          "rawPath": "raw/tcgdex-en-snorlax/details/sm10-158.json",
+          "responseHash": "sha256:aed5ac5db27323df7594e84616b8383212ca97adca70223d89e5f821bb80e147",
+          "parsedRecordHash": "sha256:e4d8c4a8fdac40e97c4d885d60bc999f7f6dcef6725947855bbeaf3a708ee48d"
+        },
+        {
+          "rawProviderId": "sm115-50",
+          "url": "https://api.tcgdex.net/v2/en/cards/sm115-50",
+          "rawPath": "raw/tcgdex-en-snorlax/details/sm115-50.json",
+          "responseHash": "sha256:386f0fedba8361f49345d18260fd97d8396dd7025b5858490a7afb1a47452e97",
+          "parsedRecordHash": "sha256:f83c98538cea97c6a52a47448d1d6252da284fd06256dc524744dea17f52ac7c"
+        },
+        {
+          "rawProviderId": "sv03.5-143",
+          "url": "https://api.tcgdex.net/v2/en/cards/sv03.5-143",
+          "rawPath": "raw/tcgdex-en-snorlax/details/sv03.5-143.json",
+          "responseHash": "sha256:050e1e97ef7ed3aadc4aaba31142571c90dc01e737486927a70a03f57f55ce90",
+          "parsedRecordHash": "sha256:b4c99f535e2670891cefa70c614e65fc561bd70d51ef154b1ec0794a3dc5ca32"
+        },
+        {
+          "rawProviderId": "sv04.5-202",
+          "url": "https://api.tcgdex.net/v2/en/cards/sv04.5-202",
+          "rawPath": "raw/tcgdex-en-snorlax/details/sv04.5-202.json",
+          "responseHash": "sha256:b172a47eff2c3ec97e9165806cc02e380c4af5a836e9f8b0e4291902f4a1d573",
+          "parsedRecordHash": "sha256:a098e1eb7e9f6e472634ab18d2eb228071f10e1922f3142548c17473b211fabe"
+        },
+        {
+          "rawProviderId": "sv06-136",
+          "url": "https://api.tcgdex.net/v2/en/cards/sv06-136",
+          "rawPath": "raw/tcgdex-en-snorlax/details/sv06-136.json",
+          "responseHash": "sha256:2aba09519579652927d8ebd1fa8aaab40463ca739e2f9fcd6986707702c0de06",
+          "parsedRecordHash": "sha256:2ab02624b2383967cadc16b9878814eb67f62b036eef9fec9c2a754b8ee0b29f"
+        },
+        {
+          "rawProviderId": "sv08-144",
+          "url": "https://api.tcgdex.net/v2/en/cards/sv08-144",
+          "rawPath": "raw/tcgdex-en-snorlax/details/sv08-144.json",
+          "responseHash": "sha256:726f727969a42348d4343eaca2a64a500a049996f76c95eb26c5926af8b1117a",
+          "parsedRecordHash": "sha256:9aa5a7c875718c9269a906424452c4f8435c8c8d1905c9378428fac9fbc1ad7f"
+        },
+        {
+          "rawProviderId": "svp-051",
+          "url": "https://api.tcgdex.net/v2/en/cards/svp-051",
+          "rawPath": "raw/tcgdex-en-snorlax/details/svp-051.json",
+          "responseHash": "sha256:4685d37001d4c42e48701362064fb434a1d379cea59acbdc129df0e48f811546",
+          "parsedRecordHash": "sha256:a3bd29d01b23108b803eaa6b6990f7e638f09d57a404674aceedb407899fa3ba"
+        },
+        {
+          "rawProviderId": "svp-122",
+          "url": "https://api.tcgdex.net/v2/en/cards/svp-122",
+          "rawPath": "raw/tcgdex-en-snorlax/details/svp-122.json",
+          "responseHash": "sha256:90d31589c8cb315884644067a0a2acd5f398b6560991e303dbdb373bca191698",
+          "parsedRecordHash": "sha256:54e4eae864dec7e394c95f2f20de4667da53817dee32a64972aaae54e01d5d92"
+        },
+        {
+          "rawProviderId": "swsh1-140",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh1-140",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh1-140.json",
+          "responseHash": "sha256:bdecfb971d39271b14a441023a9b050d1404c509397fd11699610aea28e8658b",
+          "parsedRecordHash": "sha256:abca0e73f80bd72df51d80c12f9d47cb9c9c7759d7dcb904a7f0a8ca5089da5e"
+        },
+        {
+          "rawProviderId": "swsh10.5-055",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh10.5-055",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh10.5-055.json",
+          "responseHash": "sha256:dd96bce45238e361893fff7263ceebea1b90c21c4d59157ed255cc1336f0b142",
+          "parsedRecordHash": "sha256:5ba84a3fa156ba3f510410ed40236d5d4736299d3a0d366acfc202ed65ddabc4"
+        },
+        {
+          "rawProviderId": "swsh11-143",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh11-143",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh11-143.json",
+          "responseHash": "sha256:c3cc581e575292f32dbbc2fc9d95750f3098704e285119ef07e5c899dd213e42",
+          "parsedRecordHash": "sha256:21811a64a53107b5ccf4226bdd9d5b502c648d2d806c08348e4294e10bac2d45"
+        },
+        {
+          "rawProviderId": "swsh11.5tg-TG10",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh11.5tg-TG10",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh11.5tg-TG10.json",
+          "responseHash": "sha256:8e54c0f80fb7149d89eaca981648c0338e6eea4cfec5e46f4a7859d7f08e5abb",
+          "parsedRecordHash": "sha256:5832aee1f02327e907031b44332425b5d03bf88ab141887509c2cf59700fe013"
+        },
+        {
+          "rawProviderId": "swsh12.5-109",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh12.5-109",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh12.5-109.json",
+          "responseHash": "sha256:97cdd4a66fd4df7e65d24bb40131b79963cedde0b8a88dc4e18d3afc9bcd76e6",
+          "parsedRecordHash": "sha256:d65819ee068f6bdd3acec74c5c47921b959e48fa9f9dbe04d016bfab558addce"
+        },
+        {
+          "rawProviderId": "swsh2-141",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh2-141",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh2-141.json",
+          "responseHash": "sha256:b9ee9a18f29749d11c1ba3a29b0d1aaf7608b5a0dc360246fd95334c7849b79e",
+          "parsedRecordHash": "sha256:96c7b6ce770d23d3205a0cb03265101aac66f3690e8de95347081fad5489da92"
+        },
+        {
+          "rawProviderId": "swsh4-131",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh4-131",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh4-131.json",
+          "responseHash": "sha256:7d5bae0acabb7b8bb00448225a00c8d8891851b691a3dd0dd4c9b691d24b1ea1",
+          "parsedRecordHash": "sha256:1841153b6fef4722710a7013e054e74cfa2393d46797e56c6970c9238bc4ef2c"
+        },
+        {
+          "rawProviderId": "swsh6-224",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh6-224",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh6-224.json",
+          "responseHash": "sha256:35fbf5e6fea0a5273bee349c9189ba0e6387b64409cdb3380d9e46098684921d",
+          "parsedRecordHash": "sha256:1b6c1cae7c55d838454c99ad75622b1331cec49bcc5316c6d3ac9ceb61048034"
+        },
+        {
+          "rawProviderId": "swsh8-206",
+          "url": "https://api.tcgdex.net/v2/en/cards/swsh8-206",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swsh8-206.json",
+          "responseHash": "sha256:4e7cc5bcce76c1c99ab2564a6f281ceaf86e0c431f99796d221303e5442c4f17",
+          "parsedRecordHash": "sha256:c004ac9288424c6afa405f1d1d324d3588d1aab4759d771deb61ead20880275e"
+        },
+        {
+          "rawProviderId": "swshp-SWSH032",
+          "url": "https://api.tcgdex.net/v2/en/cards/swshp-SWSH032",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swshp-SWSH032.json",
+          "responseHash": "sha256:db82e8629ab515fd66f0fa0fdee680d7cbefb3d03edfba4d7eefd8788ec05174",
+          "parsedRecordHash": "sha256:14e6347a0b5591678491c26c7194a27eb0192dd9d53ae5a85f533a9249fd413f"
+        },
+        {
+          "rawProviderId": "swshp-SWSH068",
+          "url": "https://api.tcgdex.net/v2/en/cards/swshp-SWSH068",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swshp-SWSH068.json",
+          "responseHash": "sha256:e2354c1acee18aa44542bf61d04932f7c745e9311c2fca60cd51e015ad76ae88",
+          "parsedRecordHash": "sha256:b0259cb03e4d5ec5c6c096cf6d1a4970a0a28c6d14d818eb3eda8818ff86c9bb"
+        },
+        {
+          "rawProviderId": "swshp-SWSH119",
+          "url": "https://api.tcgdex.net/v2/en/cards/swshp-SWSH119",
+          "rawPath": "raw/tcgdex-en-snorlax/details/swshp-SWSH119.json",
+          "responseHash": "sha256:3e7958838d63bdaa93acb8dd83b6d255fd25045c5f297d491becf68ed24c5391",
+          "parsedRecordHash": "sha256:2c7da462d89c30a91d7fb3a7a04546d1adf39b5259b84afcce2ea0487e43a565"
+        },
+        {
+          "rawProviderId": "xy0-26",
+          "url": "https://api.tcgdex.net/v2/en/cards/xy0-26",
+          "rawPath": "raw/tcgdex-en-snorlax/details/xy0-26.json",
+          "responseHash": "sha256:af4967fac433457d6d138e1346aee73838424eebcd2de51488edc8b4bf6a9901",
+          "parsedRecordHash": "sha256:8271948491a276d932a4c7c9d203cbed73fee6d931f0285130bc629a7909a8cb"
+        },
+        {
+          "rawProviderId": "xy10-77",
+          "url": "https://api.tcgdex.net/v2/en/cards/xy10-77",
+          "rawPath": "raw/tcgdex-en-snorlax/details/xy10-77.json",
+          "responseHash": "sha256:81bfd319a3fabaaf59c069a7e3c3924214a450585faaa99fa9a2b11051e0c0b6",
+          "parsedRecordHash": "sha256:133c732840a16c59d662282cdaa781122e6d4b96bc70b1b9a00ded88d46e9770"
+        },
+        {
+          "rawProviderId": "xy2-80",
+          "url": "https://api.tcgdex.net/v2/en/cards/xy2-80",
+          "rawPath": "raw/tcgdex-en-snorlax/details/xy2-80.json",
+          "responseHash": "sha256:f161fd12e39262097d9d2b4ed0e27210001b78c3bf5ed186318ea833270de449",
+          "parsedRecordHash": "sha256:e20c36a1a7915aaa2c4a614c882f1ae1a47b21c79d33a46bfd63906d0d4f900c"
+        },
+        {
+          "rawProviderId": "xy8-118",
+          "url": "https://api.tcgdex.net/v2/en/cards/xy8-118",
+          "rawPath": "raw/tcgdex-en-snorlax/details/xy8-118.json",
+          "responseHash": "sha256:70fdc0d273d2c2ee6efd85702edd4cb1f032b31e448c5f287df65cbfd2ea692d",
+          "parsedRecordHash": "sha256:c86f777f9b37d7bb9735b978a272ee3131a57992d1804b86880967f2fadf292b"
+        },
+        {
+          "rawProviderId": "xyp-XY179",
+          "url": "https://api.tcgdex.net/v2/en/cards/xyp-XY179",
+          "rawPath": "raw/tcgdex-en-snorlax/details/xyp-XY179.json",
+          "responseHash": "sha256:484abd938ef3e64b455006857c330447ac2b55eba4fe294707531ebe13648254",
+          "parsedRecordHash": "sha256:582f30a2f860eb66891c83add6b2be10a3b9b8ab0a6ac908680ec6c0458ca906"
+        }
+      ],
+      "sets": [
+        {
+          "rawSetCode": "A1",
+          "url": "https://api.tcgdex.net/v2/en/sets/A1",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/A1.json",
+          "responseHash": "sha256:75e72566ec51263b9dfd1a717380769bbcd921844dba85cc1ce91468b810a505"
+        },
+        {
+          "rawSetCode": "A2a",
+          "url": "https://api.tcgdex.net/v2/en/sets/A2a",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/A2a.json",
+          "responseHash": "sha256:531905d0a1d7f5f19b7359e3f6b9bcc33653da541a0ae9798590ce8027657e18"
+        },
+        {
+          "rawSetCode": "P-A",
+          "url": "https://api.tcgdex.net/v2/en/sets/P-A",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/P-A.json",
+          "responseHash": "sha256:4a9d5d3b5b21b6484f3ab1659b00ff818755647fb825344d209c859b0fc66536"
+        },
+        {
+          "rawSetCode": "base2",
+          "url": "https://api.tcgdex.net/v2/en/sets/base2",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/base2.json",
+          "responseHash": "sha256:76a1f05e69eebc18fcd8cd6dacfe65dfe652c2f3d58b816b25e0d80e1a442525"
+        },
+        {
+          "rawSetCode": "base4",
+          "url": "https://api.tcgdex.net/v2/en/sets/base4",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/base4.json",
+          "responseHash": "sha256:c9d3f074215b8dcae7986965c3e6ac329d1fc0f23ea13d39df973b4706a80a4f"
+        },
+        {
+          "rawSetCode": "basep",
+          "url": "https://api.tcgdex.net/v2/en/sets/basep",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/basep.json",
+          "responseHash": "sha256:4ec8f811f9d76130064c36223a158207276fc7e4e5243155b43d75b9cf21c148"
+        },
+        {
+          "rawSetCode": "bw7",
+          "url": "https://api.tcgdex.net/v2/en/sets/bw7",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/bw7.json",
+          "responseHash": "sha256:442f431419e03419de64b7dc00ab8271dd998535a7d0cdbd6dbd4316e72f91f8"
+        },
+        {
+          "rawSetCode": "bw8",
+          "url": "https://api.tcgdex.net/v2/en/sets/bw8",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/bw8.json",
+          "responseHash": "sha256:c03430bbbb2c5968700093af81abd079d51ab5741f8b7ede7156fd0d0cc4605d"
+        },
+        {
+          "rawSetCode": "col1",
+          "url": "https://api.tcgdex.net/v2/en/sets/col1",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/col1.json",
+          "responseHash": "sha256:c71f8829c8810ca16829746a93394928f27c3ec675d10c0ce9c49f4131b90fe0"
+        },
+        {
+          "rawSetCode": "dp1",
+          "url": "https://api.tcgdex.net/v2/en/sets/dp1",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/dp1.json",
+          "responseHash": "sha256:3120cb1d0f6c68f2e708313f3d14caef5998e1c7d10a12459772a1cd16b04a2d"
+        },
+        {
+          "rawSetCode": "ecard3",
+          "url": "https://api.tcgdex.net/v2/en/sets/ecard3",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/ecard3.json",
+          "responseHash": "sha256:22bcd24a3de053c179055aa9b47547e2a56436df707b7c92c1a0fbd5fac1b03e"
+        },
+        {
+          "rawSetCode": "ex6",
+          "url": "https://api.tcgdex.net/v2/en/sets/ex6",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/ex6.json",
+          "responseHash": "sha256:7c88e8c74b298f691797c7f0d771cc0dbcc4b61f97b201ea33abe3a8d63a0cf6"
+        },
+        {
+          "rawSetCode": "g1",
+          "url": "https://api.tcgdex.net/v2/en/sets/g1",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/g1.json",
+          "responseHash": "sha256:bb4884eb9b08dc926d6e5ff6ab6f02be695e1fde3ad8c5954dc5a00dee112415"
+        },
+        {
+          "rawSetCode": "lc",
+          "url": "https://api.tcgdex.net/v2/en/sets/lc",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/lc.json",
+          "responseHash": "sha256:7c538df8a800d757e2dbcf1d60653064284bb53fc29ba8eec1c400b0cf7a230a"
+        },
+        {
+          "rawSetCode": "me03",
+          "url": "https://api.tcgdex.net/v2/en/sets/me03",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/me03.json",
+          "responseHash": "sha256:a9975b29a74632e31b66517586a22061522f03180c88d078d6e3b20e45c605c8"
+        },
+        {
+          "rawSetCode": "pl2",
+          "url": "https://api.tcgdex.net/v2/en/sets/pl2",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/pl2.json",
+          "responseHash": "sha256:338b2c0a015f6a01d0617f9b4a83ac1e69c0f112226bbcc1ef3b6dd3d3eda264"
+        },
+        {
+          "rawSetCode": "sm10",
+          "url": "https://api.tcgdex.net/v2/en/sets/sm10",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/sm10.json",
+          "responseHash": "sha256:2a0e941ee661739c3a361ffe0c8fbd707be29e0cd35736ff2143171645a66be9"
+        },
+        {
+          "rawSetCode": "sm115",
+          "url": "https://api.tcgdex.net/v2/en/sets/sm115",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/sm115.json",
+          "responseHash": "sha256:5411818bdb0c5be0524dc2c6d1768f7fcf19113bd9664e57081b0ba4360a3dff"
+        },
+        {
+          "rawSetCode": "sv03.5",
+          "url": "https://api.tcgdex.net/v2/en/sets/sv03.5",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/sv03.5.json",
+          "responseHash": "sha256:c08470d9f287a71176ed0d5c8a32c719e1e247d4985ad9da9cc3e1d05f541364"
+        },
+        {
+          "rawSetCode": "sv04.5",
+          "url": "https://api.tcgdex.net/v2/en/sets/sv04.5",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/sv04.5.json",
+          "responseHash": "sha256:429f62604858881666a70d50375989bbf0ac68c5e69376c9076da4c4809ae868"
+        },
+        {
+          "rawSetCode": "sv06",
+          "url": "https://api.tcgdex.net/v2/en/sets/sv06",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/sv06.json",
+          "responseHash": "sha256:491bd25eda1d3cba14a6d91802643744daf64a89eecde80ce7809cebe20e2523"
+        },
+        {
+          "rawSetCode": "sv08",
+          "url": "https://api.tcgdex.net/v2/en/sets/sv08",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/sv08.json",
+          "responseHash": "sha256:663fc4d87f856bbc8cc2e5140b68f5f0c1262608cb5f5552797f0704c1254d57"
+        },
+        {
+          "rawSetCode": "svp",
+          "url": "https://api.tcgdex.net/v2/en/sets/svp",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/svp.json",
+          "responseHash": "sha256:5438ba9c3073e944d847c235bc06a41a3f0b306816c62bfcecbcbdf7f451e71a"
+        },
+        {
+          "rawSetCode": "swsh1",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh1",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh1.json",
+          "responseHash": "sha256:46eb712ca5b4c33eaec52077fc3705c3474a812de8c60edc8ee381441ee6fcc6"
+        },
+        {
+          "rawSetCode": "swsh10.5",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh10.5",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh10.5.json",
+          "responseHash": "sha256:8ff2e03be51224987df3546bcfbe4b2c4443efa47178cfee0d33ef4ae873d4ad"
+        },
+        {
+          "rawSetCode": "swsh11",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh11",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh11.json",
+          "responseHash": "sha256:cc47da9874d6faa9b51df1230abee4100fff24e7f36e82d63977a5826a67d567"
+        },
+        {
+          "rawSetCode": "swsh11.5tg",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh11.5tg",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh11.5tg.json",
+          "responseHash": "sha256:e5a790e30e8154f7da65c76cb161f23c66fd917aa1e54047d92ac44fc88bbd00"
+        },
+        {
+          "rawSetCode": "swsh12.5",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh12.5",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh12.5.json",
+          "responseHash": "sha256:421c75cf6facfd86c1d0d8013487506ec7fd369dc6328ff572b9a843dcee4a99"
+        },
+        {
+          "rawSetCode": "swsh2",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh2",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh2.json",
+          "responseHash": "sha256:986637cab63cd1c5c34aeae0cd6f35c0dabf178b24bb88b8a707480fab7a9cae"
+        },
+        {
+          "rawSetCode": "swsh4",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh4",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh4.json",
+          "responseHash": "sha256:e6bfe9d499883a3ca407942624a091046d8382fcd1feff4603513b5c723ca2cb"
+        },
+        {
+          "rawSetCode": "swsh6",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh6",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh6.json",
+          "responseHash": "sha256:8f44f2a58eea974c34e1cab9d51361e47a9681fca234b1373a1cf0318992a73f"
+        },
+        {
+          "rawSetCode": "swsh8",
+          "url": "https://api.tcgdex.net/v2/en/sets/swsh8",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swsh8.json",
+          "responseHash": "sha256:0a2d685da7885201de954d1c2383a15120d334d32af91596d3f098cd61846e54"
+        },
+        {
+          "rawSetCode": "swshp",
+          "url": "https://api.tcgdex.net/v2/en/sets/swshp",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/swshp.json",
+          "responseHash": "sha256:0c49f56a8e679d93ec86ca614ed3244377510170b5c253fec3a5935f4553d99f"
+        },
+        {
+          "rawSetCode": "xy0",
+          "url": "https://api.tcgdex.net/v2/en/sets/xy0",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/xy0.json",
+          "responseHash": "sha256:37af9f842b26963c7f2bfa33e5f9731a3f353734a231c8ba0ff9441073423aa8"
+        },
+        {
+          "rawSetCode": "xy10",
+          "url": "https://api.tcgdex.net/v2/en/sets/xy10",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/xy10.json",
+          "responseHash": "sha256:7176551e268c78bff89dc1146178d586f3b0ed6b72ef23947684092e19ffbbdd"
+        },
+        {
+          "rawSetCode": "xy2",
+          "url": "https://api.tcgdex.net/v2/en/sets/xy2",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/xy2.json",
+          "responseHash": "sha256:ba682b5c0d6911ccf5a2728a4f0c9f827a829b3852e97dff7ba17a8c57883719"
+        },
+        {
+          "rawSetCode": "xy8",
+          "url": "https://api.tcgdex.net/v2/en/sets/xy8",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/xy8.json",
+          "responseHash": "sha256:dc0a7d7d412918ff7e5fda07bc6a56c2817993ac943b1395874148170cdd02f4"
+        },
+        {
+          "rawSetCode": "xyp",
+          "url": "https://api.tcgdex.net/v2/en/sets/xyp",
+          "rawPath": "raw/tcgdex-en-snorlax/sets/xyp.json",
+          "responseHash": "sha256:3b9c0c79f6504d156f3c8f7aa0d7f6c9e76c9d720887ff06f206a8dfc240b644"
+        }
+      ],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "A1-211",
+          "A1-250",
+          "A2a-063",
+          "P-A-049",
+          "base2-11",
+          "base2-27",
+          "base4-30",
+          "basep-49",
+          "bw7-109",
+          "bw8-101",
+          "col1-33",
+          "dp1-37",
+          "ecard3-100",
+          "ex6-15",
+          "g1-58",
+          "lc-64",
+          "me03-063",
+          "pl2-111",
+          "pl2-33",
+          "pl2-81",
+          "sm10-158",
+          "sm115-50",
+          "sv03.5-143",
+          "sv04.5-202",
+          "sv06-136",
+          "sv08-144",
+          "svp-051",
+          "svp-122",
+          "swsh1-140",
+          "swsh10.5-055",
+          "swsh11-143",
+          "swsh11.5tg-TG10",
+          "swsh12.5-109",
+          "swsh2-141",
+          "swsh4-131",
+          "swsh6-224",
+          "swsh8-206",
+          "swshp-SWSH032",
+          "swshp-SWSH068",
+          "swshp-SWSH119",
+          "xy0-26",
+          "xy10-77",
+          "xy2-80",
+          "xy8-118",
+          "xyp-XY179"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tcgdex-exact-name",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-fr-snorlax",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "rawLocale": "fr",
+      "endpoint": "https://api.tcgdex.net/v2/fr/cards",
+      "queryParameters": {
+        "nameQueries": [
+          "Ronflex"
+        ],
+        "nameFilter": "strict-equality",
+        "pagination": "disabled-provider-default"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Ronflex",
+          "pageNo": 1,
+          "url": "https://api.tcgdex.net/v2/fr/cards?name=eq%3ARonflex",
+          "rawPath": "raw/tcgdex-fr-snorlax/query-1.json",
+          "responseHash": "sha256:b28d9f1c9c5d64918c49e4dc8ae1505f940a6732abe60c9d41bd6d178c62de8a",
+          "resultCount": 38,
+          "totalPages": 1,
+          "detailIds": [
+            "base2-11",
+            "ex6-15",
+            "xy0-26",
+            "base2-27",
+            "col1-33",
+            "dp1-37",
+            "P-A-049",
+            "sm115-50",
+            "svp-051",
+            "swsh10.5-055",
+            "g1-58",
+            "me03-063",
+            "A2a-063",
+            "xy10-77",
+            "xy2-80",
+            "bw8-101",
+            "swsh12.5-109",
+            "bw7-109",
+            "xy8-118",
+            "svp-122",
+            "swsh4-131",
+            "sv06-136",
+            "swsh1-140",
+            "swsh2-141",
+            "sv03.5-143",
+            "swsh11-143",
+            "sv08-144",
+            "sm10-158",
+            "sv04.5-202",
+            "swsh8-206",
+            "A1-211",
+            "swsh6-224",
+            "A1-250",
+            "swshp-SWSH032",
+            "swshp-SWSH068",
+            "swshp-SWSH119",
+            "swsh11.5tg-TG10",
+            "xyp-XY179"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "A1-211",
+          "url": "https://api.tcgdex.net/v2/fr/cards/A1-211",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/A1-211.json",
+          "responseHash": "sha256:8fef2828d466a8f7a1b7f796637f31fa0785db02b9b0e9795871637a851b4fca",
+          "parsedRecordHash": "sha256:1a467fd61e3a657e4b46ca66ab82a4d7f31e881a19ffc2ad03fea98d5b13b058"
+        },
+        {
+          "rawProviderId": "A1-250",
+          "url": "https://api.tcgdex.net/v2/fr/cards/A1-250",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/A1-250.json",
+          "responseHash": "sha256:518d95c3a70d28e6a86994ad8c6fbc2642b1e853de9e3757f01891da1f9d37be",
+          "parsedRecordHash": "sha256:3d4cff63c972487f6d8b1db40efdf6be7d817188ba34c7e2744880938809cf99"
+        },
+        {
+          "rawProviderId": "A2a-063",
+          "url": "https://api.tcgdex.net/v2/fr/cards/A2a-063",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/A2a-063.json",
+          "responseHash": "sha256:43aee2187baa9d76e7920be3917c308c2524f78d438d1c0018e52f913a986f24",
+          "parsedRecordHash": "sha256:3ce96d5981c2b5982f8354bbcce0879a97dd04f0243e61b2519ca3a928ea536a"
+        },
+        {
+          "rawProviderId": "P-A-049",
+          "url": "https://api.tcgdex.net/v2/fr/cards/P-A-049",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/P-A-049.json",
+          "responseHash": "sha256:c8f72b5a720c0ed0320d83f8ea7af196f427668af8288163afcc0024c65f9c4b",
+          "parsedRecordHash": "sha256:9c3e852a2f2c60360cca5e1f6bbe8e18b72a3ac4022bf1913ff9b9ebd87b9c13"
+        },
+        {
+          "rawProviderId": "base2-11",
+          "url": "https://api.tcgdex.net/v2/fr/cards/base2-11",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/base2-11.json",
+          "responseHash": "sha256:0fdc128c045f0490bcd9bdf15a46820f766ab23b8e0aae3060878ab14e5bbef8",
+          "parsedRecordHash": "sha256:77d87aab35a3dacab3c5094b71271abf7557addb8f2a4d6a988e0219d0188d62"
+        },
+        {
+          "rawProviderId": "base2-27",
+          "url": "https://api.tcgdex.net/v2/fr/cards/base2-27",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/base2-27.json",
+          "responseHash": "sha256:333116a78f2e6e67c549ce19fe480747a3495f7489c5cf419433a9283a3d7bf7",
+          "parsedRecordHash": "sha256:c4a4a6cd9d3348445e229c516d415d8ab1b3133b57f578fe73716b91fa498341"
+        },
+        {
+          "rawProviderId": "bw7-109",
+          "url": "https://api.tcgdex.net/v2/fr/cards/bw7-109",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/bw7-109.json",
+          "responseHash": "sha256:77c1a48789e4c42bcd6cefabc0f541e766114aad1c0073a37e5424f4434ad8aa",
+          "parsedRecordHash": "sha256:5e5e0ced5db77d9e94c094d7b9308b99a078f00e505d84f7649deccdb386b4ae"
+        },
+        {
+          "rawProviderId": "bw8-101",
+          "url": "https://api.tcgdex.net/v2/fr/cards/bw8-101",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/bw8-101.json",
+          "responseHash": "sha256:5af75f2628205594f950b1800cfba251f31847185cd83aab69f1631da494fe9e",
+          "parsedRecordHash": "sha256:180d05e7782eb1c49f7c62922f0e82e40876aa5adfc2d71f8ae5eb9068bb0283"
+        },
+        {
+          "rawProviderId": "col1-33",
+          "url": "https://api.tcgdex.net/v2/fr/cards/col1-33",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/col1-33.json",
+          "responseHash": "sha256:27c8383ed0c41b1bcf3ac81b5e0947fc68b02e70858c7b8f97bf4e1dfc325b08",
+          "parsedRecordHash": "sha256:4c614581111f8212dcffbbf82c0eb19e98553993eac45194db790a11a87929d9"
+        },
+        {
+          "rawProviderId": "dp1-37",
+          "url": "https://api.tcgdex.net/v2/fr/cards/dp1-37",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/dp1-37.json",
+          "responseHash": "sha256:be860ca51e76e8c83cc6e41326403a851b95a23e8f8ec31875c397e87ba4faab",
+          "parsedRecordHash": "sha256:78ab8fafdf482ffa55f658e12e6c78eeb1645f61c9215bd31aa20d3bb6a3ec91"
+        },
+        {
+          "rawProviderId": "ex6-15",
+          "url": "https://api.tcgdex.net/v2/fr/cards/ex6-15",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/ex6-15.json",
+          "responseHash": "sha256:59cd009c680dbf25fc2202ee4651f59afd9c7aa0342ff47e59699fc7c0a841f1",
+          "parsedRecordHash": "sha256:a35e4a52831291208d043a364ebc40baacbd0c11f74cd77ee7d0f3f9d55c80c2"
+        },
+        {
+          "rawProviderId": "g1-58",
+          "url": "https://api.tcgdex.net/v2/fr/cards/g1-58",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/g1-58.json",
+          "responseHash": "sha256:850b4e762845373b05edd52dae3a19be514f79853b85340174b23ebe49973bf0",
+          "parsedRecordHash": "sha256:5052943ac35008c65f9a1c24e4eaf457ba14e7f06e2e25443abf96d2fee82297"
+        },
+        {
+          "rawProviderId": "me03-063",
+          "url": "https://api.tcgdex.net/v2/fr/cards/me03-063",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/me03-063.json",
+          "responseHash": "sha256:af0ae59127185cbf362cfd520690a226f0509ddde6344fc8c1cb2f49b8938f3e",
+          "parsedRecordHash": "sha256:c01083c7f09b39c6f9f9e7d85129c6b5f8a90b7fa8232f68ff61a9f907c561c9"
+        },
+        {
+          "rawProviderId": "sm10-158",
+          "url": "https://api.tcgdex.net/v2/fr/cards/sm10-158",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/sm10-158.json",
+          "responseHash": "sha256:91c4c4f52a938a6b36ff566537121e55b94242b534c92b9d5e9a3699d5f94ea9",
+          "parsedRecordHash": "sha256:9da1796cf2f1d68480fa36040140a53b3e12fac7042270fe7158ab9db16f04f8"
+        },
+        {
+          "rawProviderId": "sm115-50",
+          "url": "https://api.tcgdex.net/v2/fr/cards/sm115-50",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/sm115-50.json",
+          "responseHash": "sha256:c657d1fdfba5c741c7025c178c92eda41a35016ee46f76c6da6a12a1723768a8",
+          "parsedRecordHash": "sha256:8a2d99a57bd9da43b843d7929bbb193e64783c16f727535d4181cce2559bdd82"
+        },
+        {
+          "rawProviderId": "sv03.5-143",
+          "url": "https://api.tcgdex.net/v2/fr/cards/sv03.5-143",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/sv03.5-143.json",
+          "responseHash": "sha256:a29ee2860bd3897d6913f51af00637f37f2d0563aedb76c028ffdc8ea283194e",
+          "parsedRecordHash": "sha256:dccb3ab52561495cded34390f59aef25288df826359b7d20f87ba9cf858012ce"
+        },
+        {
+          "rawProviderId": "sv04.5-202",
+          "url": "https://api.tcgdex.net/v2/fr/cards/sv04.5-202",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/sv04.5-202.json",
+          "responseHash": "sha256:c49ea2c066b99bed22ed1248d5739c37deee6a2e29315a5f24f2ac398ebbd420",
+          "parsedRecordHash": "sha256:dc4e79cb63d494605d64cd464c6d2119d67727c48ad90e453d05f9daa0ef9d42"
+        },
+        {
+          "rawProviderId": "sv06-136",
+          "url": "https://api.tcgdex.net/v2/fr/cards/sv06-136",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/sv06-136.json",
+          "responseHash": "sha256:56ba942d1e65b581d2c8dd012a1944e2abf1aaf640a56ec2db9d167f33426e62",
+          "parsedRecordHash": "sha256:b34657a93051551d3f6f5a2a0138cfce94a2c3a75829eb56a848ee1175f4b6a4"
+        },
+        {
+          "rawProviderId": "sv08-144",
+          "url": "https://api.tcgdex.net/v2/fr/cards/sv08-144",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/sv08-144.json",
+          "responseHash": "sha256:d347da70751a28597c04bd8afb3d6cc011229afbc36db83d1c7f8602531455fb",
+          "parsedRecordHash": "sha256:b81a1589dc976a29cde0e5f85146a0cf662324c4111f608662284b501760ac69"
+        },
+        {
+          "rawProviderId": "svp-051",
+          "url": "https://api.tcgdex.net/v2/fr/cards/svp-051",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/svp-051.json",
+          "responseHash": "sha256:cb710aa48623b69525f6e3279f459d67c2832dcbc4637c5dfe598bcc5d690ffe",
+          "parsedRecordHash": "sha256:7dfdf48a8610fa4a4fd961a6cd32b70e1e8721065b540ea45307f46763651bf7"
+        },
+        {
+          "rawProviderId": "svp-122",
+          "url": "https://api.tcgdex.net/v2/fr/cards/svp-122",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/svp-122.json",
+          "responseHash": "sha256:c8c697510151b1d98af2c5a0803660b203144d06ae27b21bf79ddeda8e9c65fb",
+          "parsedRecordHash": "sha256:518348389950bdaf6d3defd8b9c08694187485936f1596ee6417f80da401912f"
+        },
+        {
+          "rawProviderId": "swsh1-140",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh1-140",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh1-140.json",
+          "responseHash": "sha256:6e76533603765461606152ce2b2bc4ca7cf6636e19a3285590d1ad9d19bd6fc4",
+          "parsedRecordHash": "sha256:fe6e6d6127083db8e87f74a8cf9a3f09f823fb3703cc71e1ab3e3779871dec06"
+        },
+        {
+          "rawProviderId": "swsh10.5-055",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh10.5-055",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh10.5-055.json",
+          "responseHash": "sha256:0672f4bfdfb373c67ebb4bb89d1ebe62c4a522ab95e5bcf7564390442dc056f3",
+          "parsedRecordHash": "sha256:82045f6161b13708eefce5192cb6d977214dd714ea27a1e66dc9a22cbb5c70aa"
+        },
+        {
+          "rawProviderId": "swsh11-143",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh11-143",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh11-143.json",
+          "responseHash": "sha256:3e0decdcf6d2bd3fc2a5ee6acc6ee2f1cbdd3714c339228991be84e9f4a62b72",
+          "parsedRecordHash": "sha256:bddca4f11fcc23753897bd714ed4c126cdfeed5b67b33a0f182c9eec1a389f29"
+        },
+        {
+          "rawProviderId": "swsh11.5tg-TG10",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh11.5tg-TG10",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh11.5tg-TG10.json",
+          "responseHash": "sha256:7fe7dce46ed2dea3dfe36ede4ba1fb4ce310fc28ed3a940211188fc5665cb8f8",
+          "parsedRecordHash": "sha256:6d4b5fb843c8a4941c7ba1c66fc78afacbf9bd6df6b7e77804b7f611e91b7799"
+        },
+        {
+          "rawProviderId": "swsh12.5-109",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh12.5-109",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh12.5-109.json",
+          "responseHash": "sha256:6e8ad2677020a4a01fdaecf536136596221c7c47ed8905b66e933ba82176cf75",
+          "parsedRecordHash": "sha256:508efeb3e9e3e765e891bc791e328f8324707b8be0152abaccbfe12ddc2b8da2"
+        },
+        {
+          "rawProviderId": "swsh2-141",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh2-141",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh2-141.json",
+          "responseHash": "sha256:0a92e5a40d24caba70244b2d6d58af16de1660ea28b349faa6f478d772b874a2",
+          "parsedRecordHash": "sha256:2fa962b335ff2650084996d5b91d3968e5ace6fd412936d8a9994c289ff07bd1"
+        },
+        {
+          "rawProviderId": "swsh4-131",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh4-131",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh4-131.json",
+          "responseHash": "sha256:6fc80ee3e246c0374ddd8597f438f4c0f5dcfa2563fd1939dec07cfd1df326fe",
+          "parsedRecordHash": "sha256:c689679fc6d8dbd8d10f11ffce51ca3003fde1763a6e2f782b4bda4a75a1bee2"
+        },
+        {
+          "rawProviderId": "swsh6-224",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh6-224",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh6-224.json",
+          "responseHash": "sha256:aabf7fa26f5d3bb7fdc7db9fed333bfd846453edb6abee69eeb8c5484ee3446a",
+          "parsedRecordHash": "sha256:38f3dc2f4282fea82a6141c7aae7dfc62a5fd39a1ac79d1d7a503f4bbe9d6659"
+        },
+        {
+          "rawProviderId": "swsh8-206",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swsh8-206",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swsh8-206.json",
+          "responseHash": "sha256:d8e694f3bf7b72a2e891091e78036971c5edf8e0cac81f3fab41ecbea3c6ed89",
+          "parsedRecordHash": "sha256:1450e50bb0ee20c50df625e917fd69365552cc3dfc2aaef4594e1473368deb28"
+        },
+        {
+          "rawProviderId": "swshp-SWSH032",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swshp-SWSH032",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swshp-SWSH032.json",
+          "responseHash": "sha256:52dcc3e2afe1eb3ae29abca041982b68fbac41bb44e64bdfba72821d74de98c4",
+          "parsedRecordHash": "sha256:a12194da879ae968be5060b6cb3d2b97ce6ae7896690929c8fd7207ca65257df"
+        },
+        {
+          "rawProviderId": "swshp-SWSH068",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swshp-SWSH068",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swshp-SWSH068.json",
+          "responseHash": "sha256:2c0e7c47553e4db674bb363639ac274f9eeef4a037bbe3e5174b794e6e2bf7c3",
+          "parsedRecordHash": "sha256:ee8e0025649b491e1e16677a8ce4fe5e14871ad593e5a8c3a9e383b3ded2c27e"
+        },
+        {
+          "rawProviderId": "swshp-SWSH119",
+          "url": "https://api.tcgdex.net/v2/fr/cards/swshp-SWSH119",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/swshp-SWSH119.json",
+          "responseHash": "sha256:882b4adc4e7f4c6977b03addc3d28dbc35bcfc6bcd940e38aaeb7257b4ae23ad",
+          "parsedRecordHash": "sha256:e644d3d9c9f0d74f3bc906fea18593379f2595bd5ee45fd5b067550f9d3e6931"
+        },
+        {
+          "rawProviderId": "xy0-26",
+          "url": "https://api.tcgdex.net/v2/fr/cards/xy0-26",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/xy0-26.json",
+          "responseHash": "sha256:59dc362ee6ae1a7903deac1e7d836eb4a255d75b104ce33c15d965980d47e771",
+          "parsedRecordHash": "sha256:f72052aa92ee6b8523ebcd6e5f62483ba02f834645796ab5782a5f56291601f2"
+        },
+        {
+          "rawProviderId": "xy10-77",
+          "url": "https://api.tcgdex.net/v2/fr/cards/xy10-77",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/xy10-77.json",
+          "responseHash": "sha256:71a310823fa784a22085d01ad1ecaa30081bb003a2b769ff4d96d034715b7d8d",
+          "parsedRecordHash": "sha256:fbc43a5d7efa459de1cf3045a6237c18dd9e2ac550fb8a2f7cbb3e47266e521b"
+        },
+        {
+          "rawProviderId": "xy2-80",
+          "url": "https://api.tcgdex.net/v2/fr/cards/xy2-80",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/xy2-80.json",
+          "responseHash": "sha256:430796cb735835ece5b1eaa7241313d09e4622e538a5ec0b67468d7688643b6f",
+          "parsedRecordHash": "sha256:dd5e5e3bcf9582a1a3c172ae13124341718c9a39f9d28d9c54eee95882a001ad"
+        },
+        {
+          "rawProviderId": "xy8-118",
+          "url": "https://api.tcgdex.net/v2/fr/cards/xy8-118",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/xy8-118.json",
+          "responseHash": "sha256:ffd6daa6e197b474eee823ecb487da32256e4885ef428eb712b7bbc5d61b0081",
+          "parsedRecordHash": "sha256:424f40d50c578f5912d39626cb941687b8f932b435b16fe9c3834884510c8917"
+        },
+        {
+          "rawProviderId": "xyp-XY179",
+          "url": "https://api.tcgdex.net/v2/fr/cards/xyp-XY179",
+          "rawPath": "raw/tcgdex-fr-snorlax/details/xyp-XY179.json",
+          "responseHash": "sha256:3a141c2906aa3a2fd8331b3e9476d79eda8c5408761b28fbbd0b2936e9cf687d",
+          "parsedRecordHash": "sha256:7e8a95176d9fb8c3f6395f4ad4d46ba26f91a00ce676d728cddab729b98f816a"
+        }
+      ],
+      "sets": [
+        {
+          "rawSetCode": "A1",
+          "url": "https://api.tcgdex.net/v2/fr/sets/A1",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/A1.json",
+          "responseHash": "sha256:590cbdc6df41baf2d628e87e65dd0eab6553b1539f58eb8c15a52026ce2e39dc"
+        },
+        {
+          "rawSetCode": "A2a",
+          "url": "https://api.tcgdex.net/v2/fr/sets/A2a",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/A2a.json",
+          "responseHash": "sha256:a29c41afb0d873eb503d0950bd03ceec2a2a15f034ed4323240212c5da1a0fef"
+        },
+        {
+          "rawSetCode": "P-A",
+          "url": "https://api.tcgdex.net/v2/fr/sets/P-A",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/P-A.json",
+          "responseHash": "sha256:88fbb4c891865d56cda35a1d7d88e20b0960c7ea32b079cd2df4501a99508b65"
+        },
+        {
+          "rawSetCode": "base2",
+          "url": "https://api.tcgdex.net/v2/fr/sets/base2",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/base2.json",
+          "responseHash": "sha256:edd34e4099cfdb8abf6deb94da7ca0e076c8a9c19c92e18b382a8019c44b465f"
+        },
+        {
+          "rawSetCode": "bw7",
+          "url": "https://api.tcgdex.net/v2/fr/sets/bw7",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/bw7.json",
+          "responseHash": "sha256:ec936d9aeaa4360c7e5240ccfc21b1efd3cb1b4ef6d4c27584c8178d28d191ba"
+        },
+        {
+          "rawSetCode": "bw8",
+          "url": "https://api.tcgdex.net/v2/fr/sets/bw8",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/bw8.json",
+          "responseHash": "sha256:78ca0a33c028eeb7516ace383c7d2e3dd8757d983f9b7a80803b0642c372176b"
+        },
+        {
+          "rawSetCode": "col1",
+          "url": "https://api.tcgdex.net/v2/fr/sets/col1",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/col1.json",
+          "responseHash": "sha256:cc75edf8ed98e961f6560fde6a1e5207c72624e14479bbf9df3449b16614387d"
+        },
+        {
+          "rawSetCode": "dp1",
+          "url": "https://api.tcgdex.net/v2/fr/sets/dp1",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/dp1.json",
+          "responseHash": "sha256:9aed5a0ddb67c9185476112507496ae42ff15dd9976cd27b9d8038b2912a9cda"
+        },
+        {
+          "rawSetCode": "ex6",
+          "url": "https://api.tcgdex.net/v2/fr/sets/ex6",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/ex6.json",
+          "responseHash": "sha256:cddb4375c7a28d9bc2ab879cf8c5c6b14888dcef04a44980e4a46a6ea993aef1"
+        },
+        {
+          "rawSetCode": "g1",
+          "url": "https://api.tcgdex.net/v2/fr/sets/g1",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/g1.json",
+          "responseHash": "sha256:610bb34d7d17ff24526624781e743e2dda2988a4e5d4106469a390479cfcf0a2"
+        },
+        {
+          "rawSetCode": "me03",
+          "url": "https://api.tcgdex.net/v2/fr/sets/me03",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/me03.json",
+          "responseHash": "sha256:26c7e64d574a2c8a4ae22dd873202b3bcf240a2a8c6449fa5807e7f7285e7c92"
+        },
+        {
+          "rawSetCode": "sm10",
+          "url": "https://api.tcgdex.net/v2/fr/sets/sm10",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/sm10.json",
+          "responseHash": "sha256:d1de550a4c2adb9f83871e8395f55bed1eb2176cb80660ee4e6c561f9eed2301"
+        },
+        {
+          "rawSetCode": "sm115",
+          "url": "https://api.tcgdex.net/v2/fr/sets/sm115",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/sm115.json",
+          "responseHash": "sha256:358e3804c6dfd125d30bc8f035a27de90ac938a51854bc6b35a38c494a613b57"
+        },
+        {
+          "rawSetCode": "sv03.5",
+          "url": "https://api.tcgdex.net/v2/fr/sets/sv03.5",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/sv03.5.json",
+          "responseHash": "sha256:cce3f8d6733ca120af66dbbb5feb2da728df94a43ce57c150de1419d5ddf393b"
+        },
+        {
+          "rawSetCode": "sv04.5",
+          "url": "https://api.tcgdex.net/v2/fr/sets/sv04.5",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/sv04.5.json",
+          "responseHash": "sha256:e63bdd7fde33493d370d0782dadd6a619da93e7c60adf073a2d98b0d0f4bbc25"
+        },
+        {
+          "rawSetCode": "sv06",
+          "url": "https://api.tcgdex.net/v2/fr/sets/sv06",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/sv06.json",
+          "responseHash": "sha256:a4a6d8081c73cc453a6db0c9d1136e787c0ae7769d8f3fbb2438178e38bb36af"
+        },
+        {
+          "rawSetCode": "sv08",
+          "url": "https://api.tcgdex.net/v2/fr/sets/sv08",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/sv08.json",
+          "responseHash": "sha256:a20dfa3e12cc361135efec0fda5f6eb4997c5bb461c7853c75728d6a738df0c8"
+        },
+        {
+          "rawSetCode": "svp",
+          "url": "https://api.tcgdex.net/v2/fr/sets/svp",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/svp.json",
+          "responseHash": "sha256:396162bc56514e8baf34f41d51e5109c801ebd23417591cc5fd54015b30ae7b8"
+        },
+        {
+          "rawSetCode": "swsh1",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh1",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh1.json",
+          "responseHash": "sha256:03eb4eb9a9307f4758657a37377d9f4cd99a74136077bd19d832d2871c14db54"
+        },
+        {
+          "rawSetCode": "swsh10.5",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh10.5",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh10.5.json",
+          "responseHash": "sha256:731fe201aa8ff6abb126e6ac95e074325d2606a08a447b24605d291cb5a5ed29"
+        },
+        {
+          "rawSetCode": "swsh11",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh11",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh11.json",
+          "responseHash": "sha256:a17e18e3aa5b9cd07a56b690b397e69fc93631f9ec5f94716d77e5ffabe66f0a"
+        },
+        {
+          "rawSetCode": "swsh11.5tg",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh11.5tg",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh11.5tg.json",
+          "responseHash": "sha256:361a2fc24ba0945c6cc22a3227cd135345369c0c60e794b3e2b49b3e69374b76"
+        },
+        {
+          "rawSetCode": "swsh12.5",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh12.5",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh12.5.json",
+          "responseHash": "sha256:bab084da72e758a0295638160f7b896a0751d9f482c11a1336d007d7b7cc20b1"
+        },
+        {
+          "rawSetCode": "swsh2",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh2",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh2.json",
+          "responseHash": "sha256:ca2d1076fb2401045530627c1ae022ae9186fb1add2ebe83e7c69a8d17fdaf27"
+        },
+        {
+          "rawSetCode": "swsh4",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh4",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh4.json",
+          "responseHash": "sha256:e58922b791b3f0f68a818fc61560efdee057bff61185584517298abb937a2504"
+        },
+        {
+          "rawSetCode": "swsh6",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh6",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh6.json",
+          "responseHash": "sha256:f9c4cd656a4a37ef61d1b9b7eb0f4eb5dbd738f70ad17ee00c22a7a7f75dd8e6"
+        },
+        {
+          "rawSetCode": "swsh8",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swsh8",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swsh8.json",
+          "responseHash": "sha256:58d9fd96ea86cf97f0d1b061ac6cc194631f661f213700fa865f3cda65925d50"
+        },
+        {
+          "rawSetCode": "swshp",
+          "url": "https://api.tcgdex.net/v2/fr/sets/swshp",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/swshp.json",
+          "responseHash": "sha256:79927707b8d289591c06aaaf1243e0f4c8745ee1c58d01de6edbb90bab20c5de"
+        },
+        {
+          "rawSetCode": "xy0",
+          "url": "https://api.tcgdex.net/v2/fr/sets/xy0",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/xy0.json",
+          "responseHash": "sha256:b683cacd5d9ef317883a8564e8c522d22ac4bfde352026ccbe4b00c176c2c9f0"
+        },
+        {
+          "rawSetCode": "xy10",
+          "url": "https://api.tcgdex.net/v2/fr/sets/xy10",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/xy10.json",
+          "responseHash": "sha256:d9bc3c33570774e4f549f821bb5c7dd5985a413ab8ef6205efcf248a8b0644c9"
+        },
+        {
+          "rawSetCode": "xy2",
+          "url": "https://api.tcgdex.net/v2/fr/sets/xy2",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/xy2.json",
+          "responseHash": "sha256:15000ca128fd5a42e1acd20ef71103330e25bd1aa5b55be4d069497685ef22ed"
+        },
+        {
+          "rawSetCode": "xy8",
+          "url": "https://api.tcgdex.net/v2/fr/sets/xy8",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/xy8.json",
+          "responseHash": "sha256:d0a7f8d0a00cd23d72c853f7af22b596dd89b5e1bcfbc57e59a7b6e3974f6b76"
+        },
+        {
+          "rawSetCode": "xyp",
+          "url": "https://api.tcgdex.net/v2/fr/sets/xyp",
+          "rawPath": "raw/tcgdex-fr-snorlax/sets/xyp.json",
+          "responseHash": "sha256:ad4feee57b153cfed7c7518eadba0817ee4beedd8c277a3596b73947b6792d38"
+        }
+      ],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Ronflex:1"
+        ],
+        "completedDetailIds": [
+          "A1-211",
+          "A1-250",
+          "A2a-063",
+          "P-A-049",
+          "base2-11",
+          "base2-27",
+          "bw7-109",
+          "bw8-101",
+          "col1-33",
+          "dp1-37",
+          "ex6-15",
+          "g1-58",
+          "me03-063",
+          "sm10-158",
+          "sm115-50",
+          "sv03.5-143",
+          "sv04.5-202",
+          "sv06-136",
+          "sv08-144",
+          "svp-051",
+          "svp-122",
+          "swsh1-140",
+          "swsh10.5-055",
+          "swsh11-143",
+          "swsh11.5tg-TG10",
+          "swsh12.5-109",
+          "swsh2-141",
+          "swsh4-131",
+          "swsh6-224",
+          "swsh8-206",
+          "swshp-SWSH032",
+          "swshp-SWSH068",
+          "swshp-SWSH119",
+          "xy0-26",
+          "xy10-77",
+          "xy2-80",
+          "xy8-118",
+          "xyp-XY179"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tcgdex-exact-name",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-de-snorlax",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "rawLocale": "de",
+      "endpoint": "https://api.tcgdex.net/v2/de/cards",
+      "queryParameters": {
+        "nameQueries": [
+          "Relaxo"
+        ],
+        "nameFilter": "strict-equality",
+        "pagination": "disabled-provider-default"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Relaxo",
+          "pageNo": 1,
+          "url": "https://api.tcgdex.net/v2/de/cards?name=eq%3ARelaxo",
+          "rawPath": "raw/tcgdex-de-snorlax/query-1.json",
+          "responseHash": "sha256:3428f36e8c0ac45b91f970a34d993f5343395f28802bc798822e5ed2f91680f9",
+          "resultCount": 40,
+          "totalPages": 1,
+          "detailIds": [
+            "ex15-10",
+            "base2-11",
+            "ex6-15",
+            "xy0-26",
+            "base2-27",
+            "col1-33",
+            "pl2-33",
+            "dp1-37",
+            "P-A-049",
+            "svp-051",
+            "swsh10.5-055",
+            "me03-063",
+            "A2a-063",
+            "xy10-77",
+            "xy2-80",
+            "pl2-81",
+            "ecard3-100",
+            "bw8-101",
+            "swsh12.5-109",
+            "bw7-109",
+            "pl2-111",
+            "xy8-118",
+            "svp-122",
+            "swsh4-131",
+            "sv06-136",
+            "swsh1-140",
+            "swsh2-141",
+            "sv03.5-143",
+            "swsh11-143",
+            "sv08-144",
+            "sm10-158",
+            "sv04.5-202",
+            "swsh8-206",
+            "A1-211",
+            "swsh6-224",
+            "A1-250",
+            "swshp-SWSH032",
+            "swshp-SWSH068",
+            "swshp-SWSH119",
+            "swsh11.5tg-TG10"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "A1-211",
+          "url": "https://api.tcgdex.net/v2/de/cards/A1-211",
+          "rawPath": "raw/tcgdex-de-snorlax/details/A1-211.json",
+          "responseHash": "sha256:caf83db61ec5b261ef46300eb2b33db34bdba34c4748c206911c748e57b0d7a6",
+          "parsedRecordHash": "sha256:05d8240f8adb743a4f185c8b51de7b916029d7ba9599ed32c4515b382f265911"
+        },
+        {
+          "rawProviderId": "A1-250",
+          "url": "https://api.tcgdex.net/v2/de/cards/A1-250",
+          "rawPath": "raw/tcgdex-de-snorlax/details/A1-250.json",
+          "responseHash": "sha256:49453d6f63413e76784d9c24199c81493b42194ceede253fc282d06f106acb5b",
+          "parsedRecordHash": "sha256:c6296e079f0c025bdfbd72e472c35af9d51faf62abaa73ebeda0f49487fffd71"
+        },
+        {
+          "rawProviderId": "A2a-063",
+          "url": "https://api.tcgdex.net/v2/de/cards/A2a-063",
+          "rawPath": "raw/tcgdex-de-snorlax/details/A2a-063.json",
+          "responseHash": "sha256:85a36e8ce4c3d1cb824aded566f35fbb5647c1a043d258f6605836b01809aa13",
+          "parsedRecordHash": "sha256:b3432e1d52ea32dc75a12ff126e5bbffad47dfe01d05a3acba4808a534f3d26a"
+        },
+        {
+          "rawProviderId": "P-A-049",
+          "url": "https://api.tcgdex.net/v2/de/cards/P-A-049",
+          "rawPath": "raw/tcgdex-de-snorlax/details/P-A-049.json",
+          "responseHash": "sha256:e33576a33637cae02b647e6bd6d45073434857b2ba927404f2dd42d4ac44dfb9",
+          "parsedRecordHash": "sha256:6d456e0390ae08880e2c04c66ebe2407a3efe2274d26fdb8f605f115917fe029"
+        },
+        {
+          "rawProviderId": "base2-11",
+          "url": "https://api.tcgdex.net/v2/de/cards/base2-11",
+          "rawPath": "raw/tcgdex-de-snorlax/details/base2-11.json",
+          "responseHash": "sha256:9a8b64fc5d6d08ac156657d679bd56b1b68b7496b5edfd228cd2037fe28e871f",
+          "parsedRecordHash": "sha256:4b9e19c8fc05b48147d370f56f5bd47f8471898f91659e0b5a6c49a7fb1b447c"
+        },
+        {
+          "rawProviderId": "base2-27",
+          "url": "https://api.tcgdex.net/v2/de/cards/base2-27",
+          "rawPath": "raw/tcgdex-de-snorlax/details/base2-27.json",
+          "responseHash": "sha256:ca68239dd33ba5660503b6ad61cde94da819083c84425ec77d1a56e75ac29be6",
+          "parsedRecordHash": "sha256:5beaaf1c2c71a92d5e7547de0c4c772a27b278157e2dc735ca60798c2bdb2b81"
+        },
+        {
+          "rawProviderId": "bw7-109",
+          "url": "https://api.tcgdex.net/v2/de/cards/bw7-109",
+          "rawPath": "raw/tcgdex-de-snorlax/details/bw7-109.json",
+          "responseHash": "sha256:5a0db300185af1b059ea185053787642c1f5c5de279cd7a1acb7a54a3aef998b",
+          "parsedRecordHash": "sha256:7a96a5d7a6e9c60709d3cb0188d317f463a4e4a2d24ba70b7207c43c11bfedf7"
+        },
+        {
+          "rawProviderId": "bw8-101",
+          "url": "https://api.tcgdex.net/v2/de/cards/bw8-101",
+          "rawPath": "raw/tcgdex-de-snorlax/details/bw8-101.json",
+          "responseHash": "sha256:1057318663a5090a7eabdfad917dffd045249422a2aaec744fc4048409eaabc8",
+          "parsedRecordHash": "sha256:a8e710af953e4822a3514fc4a0438e6465362dd8e5ae692b650d629ef0484289"
+        },
+        {
+          "rawProviderId": "col1-33",
+          "url": "https://api.tcgdex.net/v2/de/cards/col1-33",
+          "rawPath": "raw/tcgdex-de-snorlax/details/col1-33.json",
+          "responseHash": "sha256:c91d348abe81c2b16cdfdeec2f4d08ac01dba716ace2095ffadf03a22f1f5e8f",
+          "parsedRecordHash": "sha256:73744a00b77ac4d9fe7b3330225870ac57a99d10c326a9eadaa490e11191f8e2"
+        },
+        {
+          "rawProviderId": "dp1-37",
+          "url": "https://api.tcgdex.net/v2/de/cards/dp1-37",
+          "rawPath": "raw/tcgdex-de-snorlax/details/dp1-37.json",
+          "responseHash": "sha256:2b2733ab86620b572f3cfdf9aaf49117fe66307e0f080b8279dff439c8a1e7a7",
+          "parsedRecordHash": "sha256:c9328fad31407ac119fb3cb53e5f13ec25f9c1e8caea2ca358aa33fe777dbe86"
+        },
+        {
+          "rawProviderId": "ecard3-100",
+          "url": "https://api.tcgdex.net/v2/de/cards/ecard3-100",
+          "rawPath": "raw/tcgdex-de-snorlax/details/ecard3-100.json",
+          "responseHash": "sha256:1425727173a55154cf048a317ec0c69590b6174f8a1be6eebe6c4bece3a4ca40",
+          "parsedRecordHash": "sha256:9f3870b87750fbe3b49d21d4751b48692fa62e2b99a71dab6bc4b2dadd2c0be0"
+        },
+        {
+          "rawProviderId": "ex15-10",
+          "url": "https://api.tcgdex.net/v2/de/cards/ex15-10",
+          "rawPath": "raw/tcgdex-de-snorlax/details/ex15-10.json",
+          "responseHash": "sha256:04e20dfc356b74db6d2d4dbe6e2178ef1e9cf2c4823407f7c5613b2d5eaeb59b",
+          "parsedRecordHash": "sha256:b4b326c64e5828b5ac720b9e54316ad44c51f9f7903fa5fc67508ae9b88c2ad4"
+        },
+        {
+          "rawProviderId": "ex6-15",
+          "url": "https://api.tcgdex.net/v2/de/cards/ex6-15",
+          "rawPath": "raw/tcgdex-de-snorlax/details/ex6-15.json",
+          "responseHash": "sha256:1606f17f9b3fb8ac01b06c0b50d54bd21e2f8bf69e793d182e6c803ea2b1e07b",
+          "parsedRecordHash": "sha256:41dbad6a4fe3e5d60e8a860322bc1363a3d72c8534e1f5eebcb319777d2a1795"
+        },
+        {
+          "rawProviderId": "me03-063",
+          "url": "https://api.tcgdex.net/v2/de/cards/me03-063",
+          "rawPath": "raw/tcgdex-de-snorlax/details/me03-063.json",
+          "responseHash": "sha256:b26ed28bfe60a9e7df34ea0b5db37aa1ebbab3e0b68e4b5628f4357b39678d58",
+          "parsedRecordHash": "sha256:e887bb0cffe7d665f6da5653dce8dabc33a476333d4864c41b110bd656af80d0"
+        },
+        {
+          "rawProviderId": "pl2-111",
+          "url": "https://api.tcgdex.net/v2/de/cards/pl2-111",
+          "rawPath": "raw/tcgdex-de-snorlax/details/pl2-111.json",
+          "responseHash": "sha256:7665ebb810b09d7fd34588c460ce791b28e02e93247dc02a3fd5b403bc410665",
+          "parsedRecordHash": "sha256:0c5ef810ae6a3fcb9def1c81fc48d337df5b255e49d1cf86749fe8398bcaa75e"
+        },
+        {
+          "rawProviderId": "pl2-33",
+          "url": "https://api.tcgdex.net/v2/de/cards/pl2-33",
+          "rawPath": "raw/tcgdex-de-snorlax/details/pl2-33.json",
+          "responseHash": "sha256:ddfbcaa0a3b4430044e7ecab026dbcb99b064c413ac221ad7b30afcb8a277bb9",
+          "parsedRecordHash": "sha256:68003c3508d8098f2daa5fbaff5c2a8e7c4222f6924fea9b3d6ce955a613b913"
+        },
+        {
+          "rawProviderId": "pl2-81",
+          "url": "https://api.tcgdex.net/v2/de/cards/pl2-81",
+          "rawPath": "raw/tcgdex-de-snorlax/details/pl2-81.json",
+          "responseHash": "sha256:3a08c0a1d80263f95d7aac534af5214e194b49d726c606c58a930ec8e77e0e2e",
+          "parsedRecordHash": "sha256:a9196022c09da5530e8fd9a84fc584a5e8efb329cb7392d3b656cfce375865d4"
+        },
+        {
+          "rawProviderId": "sm10-158",
+          "url": "https://api.tcgdex.net/v2/de/cards/sm10-158",
+          "rawPath": "raw/tcgdex-de-snorlax/details/sm10-158.json",
+          "responseHash": "sha256:6b121d9abc137b8572a72d970cc9e47d94a25afabf6f28e34a65699f7a952264",
+          "parsedRecordHash": "sha256:959ad9c4073ece19970e4c47f4c913717f11013143d8f58f525b05c90a2eb80d"
+        },
+        {
+          "rawProviderId": "sv03.5-143",
+          "url": "https://api.tcgdex.net/v2/de/cards/sv03.5-143",
+          "rawPath": "raw/tcgdex-de-snorlax/details/sv03.5-143.json",
+          "responseHash": "sha256:32880b9744723186c5687a1d318f1ea84b1696b54f332f67143401bd69b5eceb",
+          "parsedRecordHash": "sha256:abf37beb64fca1eb25e7b7be97f38d98edc31b8b622536385a25939d88978903"
+        },
+        {
+          "rawProviderId": "sv04.5-202",
+          "url": "https://api.tcgdex.net/v2/de/cards/sv04.5-202",
+          "rawPath": "raw/tcgdex-de-snorlax/details/sv04.5-202.json",
+          "responseHash": "sha256:5ea3ed1abd0862a792b24decd560c172f956af19a2ba33fe278db788bd3cf0a3",
+          "parsedRecordHash": "sha256:6a017b7fdcf149ba1692b4015d88555c149027bee8278718ce33acdb986f8a44"
+        },
+        {
+          "rawProviderId": "sv06-136",
+          "url": "https://api.tcgdex.net/v2/de/cards/sv06-136",
+          "rawPath": "raw/tcgdex-de-snorlax/details/sv06-136.json",
+          "responseHash": "sha256:a325b7b2d86da309e8e62370c85bedebf6f48f0fb9666e6418bb04e6f3685b40",
+          "parsedRecordHash": "sha256:c124e63d6d54d44a70855232a98f186c6477decce2724f5f678ea20056baa135"
+        },
+        {
+          "rawProviderId": "sv08-144",
+          "url": "https://api.tcgdex.net/v2/de/cards/sv08-144",
+          "rawPath": "raw/tcgdex-de-snorlax/details/sv08-144.json",
+          "responseHash": "sha256:03bd66c2c810b59f1041ab8d540fa1c18bb595bc5eab4f9dd07bf4897fa4f0f6",
+          "parsedRecordHash": "sha256:00eda0a4ae8a2172cff1b31ab4a56e95ff2d140acd5defda4f36ef9785c09bb2"
+        },
+        {
+          "rawProviderId": "svp-051",
+          "url": "https://api.tcgdex.net/v2/de/cards/svp-051",
+          "rawPath": "raw/tcgdex-de-snorlax/details/svp-051.json",
+          "responseHash": "sha256:8199230e2611d12b8bc64e7ff5efa231527bda9b7e02c1fb2f4a479de2280170",
+          "parsedRecordHash": "sha256:9e28d9a1559be6c2add457c71cfc12dbb190944b4ab223df0bc0b5cfbabd8454"
+        },
+        {
+          "rawProviderId": "svp-122",
+          "url": "https://api.tcgdex.net/v2/de/cards/svp-122",
+          "rawPath": "raw/tcgdex-de-snorlax/details/svp-122.json",
+          "responseHash": "sha256:4fd9c8884b55aa2bbe03781e2c6bde214fe48abd97dcd810977335ca7cc47c0a",
+          "parsedRecordHash": "sha256:b7acba8ff4d8d149b26e2adb07c4142da9f9dbce56e187e10f2d26e9d4550c69"
+        },
+        {
+          "rawProviderId": "swsh1-140",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh1-140",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh1-140.json",
+          "responseHash": "sha256:bf40d2a902fdde806d414bf232b6d2092c50f13265454703206f9ca168a8a4ad",
+          "parsedRecordHash": "sha256:5306cda4ba8a2d3c6331ed7a8bf818aaf4ee242320c7074b6416c1327a6be6e1"
+        },
+        {
+          "rawProviderId": "swsh10.5-055",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh10.5-055",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh10.5-055.json",
+          "responseHash": "sha256:e6b368367e4b0da8012034e559062d2859bb2636d023d8c71670f0ffdec3efd9",
+          "parsedRecordHash": "sha256:7c3f4fb593888e80609ce272048d3f0cc7b033cda3d4b4e5e52d2cee6937a49e"
+        },
+        {
+          "rawProviderId": "swsh11-143",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh11-143",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh11-143.json",
+          "responseHash": "sha256:05526e42f99271fd0c1ea7fb2cffdf93797a74c3ab0db4b84c992b70a8b08101",
+          "parsedRecordHash": "sha256:629f94c102eef0c4816a7963c41cfa4224f06d96342dc7911da1d60f477240fe"
+        },
+        {
+          "rawProviderId": "swsh11.5tg-TG10",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh11.5tg-TG10",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh11.5tg-TG10.json",
+          "responseHash": "sha256:9528a07785b33f0cb4cdbfe34318fe0cc51bf97d091383ade74b576299e4c92f",
+          "parsedRecordHash": "sha256:5d211f58d7a0096e2a04bae143b790cb8ed9f138ce15f5303590d6a8fd543151"
+        },
+        {
+          "rawProviderId": "swsh12.5-109",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh12.5-109",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh12.5-109.json",
+          "responseHash": "sha256:fc1f7ba3e61edd0159d74ce783155d7d0dce3eb04082e0865c94a73916006b19",
+          "parsedRecordHash": "sha256:333c1549de449031f654917c5d922c94ccf44d4124dd30a512763ced2126f246"
+        },
+        {
+          "rawProviderId": "swsh2-141",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh2-141",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh2-141.json",
+          "responseHash": "sha256:9f8c0a027946e0332578e28bee8d75581dbf7356c6d2556ab9796bb7ac53951a",
+          "parsedRecordHash": "sha256:c9af11e4bbf6c2c2ccf777df0f076230c47d3555f261810f748aea3be8c82340"
+        },
+        {
+          "rawProviderId": "swsh4-131",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh4-131",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh4-131.json",
+          "responseHash": "sha256:d1d0624974640a5ebe41c798848bb535765100a7dc08f1d1be6122cc419e2602",
+          "parsedRecordHash": "sha256:a1b6d14f3ac08b6d2108be53589dec8942ef71ac359de631a2bfd3b15bbbfe1d"
+        },
+        {
+          "rawProviderId": "swsh6-224",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh6-224",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh6-224.json",
+          "responseHash": "sha256:53b4e8670c4b0ebb6737f4e629c573b3bf9cf6a8ad7a93363dbb0a1d79dc4e39",
+          "parsedRecordHash": "sha256:63c54f3e5d513d7e9e0607258697371f5a7716e9e704498024588244b207fae4"
+        },
+        {
+          "rawProviderId": "swsh8-206",
+          "url": "https://api.tcgdex.net/v2/de/cards/swsh8-206",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swsh8-206.json",
+          "responseHash": "sha256:620dcdd70f8c9ed356e01cdd8b81c818d8be041775b88163d9b8203181121d67",
+          "parsedRecordHash": "sha256:0e24f3905d8fc88f7e1ef3f6b16a194edabb5e44bf8a759b90d7163af8dc94ba"
+        },
+        {
+          "rawProviderId": "swshp-SWSH032",
+          "url": "https://api.tcgdex.net/v2/de/cards/swshp-SWSH032",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swshp-SWSH032.json",
+          "responseHash": "sha256:736daabe8eab9590c3a0e282b3515378b16faa5345daa5aa387c01c64d747dcc",
+          "parsedRecordHash": "sha256:79915b90bf1346895444b5f54ae6e494c13c5305f2af49f6708cd9ceb5b6a3ed"
+        },
+        {
+          "rawProviderId": "swshp-SWSH068",
+          "url": "https://api.tcgdex.net/v2/de/cards/swshp-SWSH068",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swshp-SWSH068.json",
+          "responseHash": "sha256:3f8a094bd5265c0d07b052592997e8ae7edff93008b271583ded7c69b8775f49",
+          "parsedRecordHash": "sha256:5eee91d14265bf35b4ebe9e89493d098012e6e642c15fdf9adf70d8f7b801a16"
+        },
+        {
+          "rawProviderId": "swshp-SWSH119",
+          "url": "https://api.tcgdex.net/v2/de/cards/swshp-SWSH119",
+          "rawPath": "raw/tcgdex-de-snorlax/details/swshp-SWSH119.json",
+          "responseHash": "sha256:3ab6a69072a1d7b9a8fc26f6209563d72169da7ccde3f730c3e3a8950dddbe25",
+          "parsedRecordHash": "sha256:5f3107193221bdf7099927aac8c29f25d6e73a74844f1211deeb3b10e649a374"
+        },
+        {
+          "rawProviderId": "xy0-26",
+          "url": "https://api.tcgdex.net/v2/de/cards/xy0-26",
+          "rawPath": "raw/tcgdex-de-snorlax/details/xy0-26.json",
+          "responseHash": "sha256:5493fcdf300956eeadfd3e82548f1eae72c6cd08332451cf8c496703d6a36d62",
+          "parsedRecordHash": "sha256:1bdef8486e3a333beb2a9f60b4c915cefe2306ff4fcc116e4b287a2d44b34b9a"
+        },
+        {
+          "rawProviderId": "xy10-77",
+          "url": "https://api.tcgdex.net/v2/de/cards/xy10-77",
+          "rawPath": "raw/tcgdex-de-snorlax/details/xy10-77.json",
+          "responseHash": "sha256:b40b550c701f8990d6df5380a5b43a11dc41c14c9e4c9ae77f46471964deead3",
+          "parsedRecordHash": "sha256:aae08f3537ecde6f0617f040d9db376f903f578ac4d28592dc6c911e9437b42f"
+        },
+        {
+          "rawProviderId": "xy2-80",
+          "url": "https://api.tcgdex.net/v2/de/cards/xy2-80",
+          "rawPath": "raw/tcgdex-de-snorlax/details/xy2-80.json",
+          "responseHash": "sha256:57ce3ec7142b9db6d7c4881de83abf1d932d874002b7b7ae8577b83ccefabe10",
+          "parsedRecordHash": "sha256:b855bb55eac867ecd32552ff467ab26ea46ad58b67e1cc803058f78395e7031a"
+        },
+        {
+          "rawProviderId": "xy8-118",
+          "url": "https://api.tcgdex.net/v2/de/cards/xy8-118",
+          "rawPath": "raw/tcgdex-de-snorlax/details/xy8-118.json",
+          "responseHash": "sha256:dbded273b4e6e01de1bafb4d2dd16199c9ac76814898e82b1c076fe5874f04b7",
+          "parsedRecordHash": "sha256:d236e19d85e6900b8ac6139d57932f0d568485bbe615ffe32d5b04d31f1543ae"
+        }
+      ],
+      "sets": [
+        {
+          "rawSetCode": "A1",
+          "url": "https://api.tcgdex.net/v2/de/sets/A1",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/A1.json",
+          "responseHash": "sha256:11fbcc6d7bffc14f33c8399d771a7a90c05416636f81eba26d91688f95ce422b"
+        },
+        {
+          "rawSetCode": "A2a",
+          "url": "https://api.tcgdex.net/v2/de/sets/A2a",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/A2a.json",
+          "responseHash": "sha256:831a6253f03671ec35b592b91cd22aaf8e6f238553e28afc0f57364b96cdfc36"
+        },
+        {
+          "rawSetCode": "P-A",
+          "url": "https://api.tcgdex.net/v2/de/sets/P-A",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/P-A.json",
+          "responseHash": "sha256:163006bee179bb79328c3662dc7c0699f0f0e4f742a90a7ea66acb5fc2823e45"
+        },
+        {
+          "rawSetCode": "base2",
+          "url": "https://api.tcgdex.net/v2/de/sets/base2",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/base2.json",
+          "responseHash": "sha256:b22ccd6bb064ec2c18258a286a280924b635d8c2fe3de3fb936058d874f50cdd"
+        },
+        {
+          "rawSetCode": "bw7",
+          "url": "https://api.tcgdex.net/v2/de/sets/bw7",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/bw7.json",
+          "responseHash": "sha256:497497ade793fa79994e5cf3f13c8313315e076b37ccf64bd8692ff6bbb4ccfc"
+        },
+        {
+          "rawSetCode": "bw8",
+          "url": "https://api.tcgdex.net/v2/de/sets/bw8",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/bw8.json",
+          "responseHash": "sha256:76f2b070e4fa636835a80ea14cd487be0119643fdd82185e60f5f8a5ae83395e"
+        },
+        {
+          "rawSetCode": "col1",
+          "url": "https://api.tcgdex.net/v2/de/sets/col1",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/col1.json",
+          "responseHash": "sha256:66b5cb5985389e4953a2e25f447038c576dfc545dd5230856bc98974b1fb92a5"
+        },
+        {
+          "rawSetCode": "dp1",
+          "url": "https://api.tcgdex.net/v2/de/sets/dp1",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/dp1.json",
+          "responseHash": "sha256:9df66ba877c184db12ec0e0e886d8fb181de603e6b9cab1dc05627f4068f41ad"
+        },
+        {
+          "rawSetCode": "ecard3",
+          "url": "https://api.tcgdex.net/v2/de/sets/ecard3",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/ecard3.json",
+          "responseHash": "sha256:180f1203b87e001d8460b8bc407f72276e7f39dba701ca52c6ad3e2f6460bb2a"
+        },
+        {
+          "rawSetCode": "ex15",
+          "url": "https://api.tcgdex.net/v2/de/sets/ex15",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/ex15.json",
+          "responseHash": "sha256:117f8fd67d4a6fe188839bbceb1fdc62e6f1549c3e5c906f70523d2fe19c6e22"
+        },
+        {
+          "rawSetCode": "ex6",
+          "url": "https://api.tcgdex.net/v2/de/sets/ex6",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/ex6.json",
+          "responseHash": "sha256:14fce967af16edf01d04f7265a89852b5773060f2acf82b5fd6d49a1ea92de01"
+        },
+        {
+          "rawSetCode": "me03",
+          "url": "https://api.tcgdex.net/v2/de/sets/me03",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/me03.json",
+          "responseHash": "sha256:2c14a951fb4595608cac35a16c708e53e078a902ea0f623685c10ca86c71b737"
+        },
+        {
+          "rawSetCode": "pl2",
+          "url": "https://api.tcgdex.net/v2/de/sets/pl2",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/pl2.json",
+          "responseHash": "sha256:98d7175978a1a5b5b03f454bc39141b4e7bb147d5bf1df025c8a1c11a647b3bf"
+        },
+        {
+          "rawSetCode": "sm10",
+          "url": "https://api.tcgdex.net/v2/de/sets/sm10",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/sm10.json",
+          "responseHash": "sha256:3e4a260750d6a669b32449ae289ad43b660b401345635af13a3b9d494522d2b6"
+        },
+        {
+          "rawSetCode": "sv03.5",
+          "url": "https://api.tcgdex.net/v2/de/sets/sv03.5",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/sv03.5.json",
+          "responseHash": "sha256:8af489fb4267cf3a6144439d517f29f32925a14afa549efb5d98f7db9a50bd35"
+        },
+        {
+          "rawSetCode": "sv04.5",
+          "url": "https://api.tcgdex.net/v2/de/sets/sv04.5",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/sv04.5.json",
+          "responseHash": "sha256:3640fa412fb9286d53b845b726f36b47ae64ed93a79139b919b934450873cf9b"
+        },
+        {
+          "rawSetCode": "sv06",
+          "url": "https://api.tcgdex.net/v2/de/sets/sv06",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/sv06.json",
+          "responseHash": "sha256:a9e2db168f2a206989a25188fa6c60eee5a983fa29486b5a89dc936e0023baf7"
+        },
+        {
+          "rawSetCode": "sv08",
+          "url": "https://api.tcgdex.net/v2/de/sets/sv08",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/sv08.json",
+          "responseHash": "sha256:9341b08cfac3049d75077a571209f92cb26711ac6b5cb7e7a90aa2536807bb17"
+        },
+        {
+          "rawSetCode": "svp",
+          "url": "https://api.tcgdex.net/v2/de/sets/svp",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/svp.json",
+          "responseHash": "sha256:a3f798fdcfdf01363c88b70773b881edd4cbb7e4b5d289eff1d8cc1f102dec4f"
+        },
+        {
+          "rawSetCode": "swsh1",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh1",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh1.json",
+          "responseHash": "sha256:21bd94513144d2b8a58cb0b4e64c8f364315afb5838e1d1dd4745082b7428d14"
+        },
+        {
+          "rawSetCode": "swsh10.5",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh10.5",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh10.5.json",
+          "responseHash": "sha256:79b6057e694793bfd7b45fb99255f4073b7733df1590684a1ac9979d24149138"
+        },
+        {
+          "rawSetCode": "swsh11",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh11",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh11.json",
+          "responseHash": "sha256:093b9a2953523faffa00d8ce1d189310d891b8222ae9ae6d7639252e45342e89"
+        },
+        {
+          "rawSetCode": "swsh11.5tg",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh11.5tg",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh11.5tg.json",
+          "responseHash": "sha256:6bd15fc451157251e84d5dd717a8f4df2b6dd866719ff1f7eb0a621703d6526b"
+        },
+        {
+          "rawSetCode": "swsh12.5",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh12.5",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh12.5.json",
+          "responseHash": "sha256:fdcdb5cb95591c8e978481394e53ec27982a41d869dacb31362399209451b7f1"
+        },
+        {
+          "rawSetCode": "swsh2",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh2",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh2.json",
+          "responseHash": "sha256:ee1c104c7bfff79bccaabcdd6c27d5e240eabe2cd4c698b45f1fab1f2125f9dc"
+        },
+        {
+          "rawSetCode": "swsh4",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh4",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh4.json",
+          "responseHash": "sha256:8de33e3aa85b9b17e39c4f86908dfbe1c6d2e6808e802dac647590a91cd370a3"
+        },
+        {
+          "rawSetCode": "swsh6",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh6",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh6.json",
+          "responseHash": "sha256:37aab4cda56ba0130fcd6a06f588d7c38dc258bcb0b64852a9ac393706f336d8"
+        },
+        {
+          "rawSetCode": "swsh8",
+          "url": "https://api.tcgdex.net/v2/de/sets/swsh8",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swsh8.json",
+          "responseHash": "sha256:2e321e0bcc47f50847459335f3753735f49d2bed84d5b400b527ef6bcc55f989"
+        },
+        {
+          "rawSetCode": "swshp",
+          "url": "https://api.tcgdex.net/v2/de/sets/swshp",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/swshp.json",
+          "responseHash": "sha256:9dfe103744944df7c6f1451e864664f323bc075f024cc59696bdf33280456120"
+        },
+        {
+          "rawSetCode": "xy0",
+          "url": "https://api.tcgdex.net/v2/de/sets/xy0",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/xy0.json",
+          "responseHash": "sha256:ea118175a237adc3b9007e438bdc5dc4644d5cbad0b0b59c17f1464bd23b9ed4"
+        },
+        {
+          "rawSetCode": "xy10",
+          "url": "https://api.tcgdex.net/v2/de/sets/xy10",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/xy10.json",
+          "responseHash": "sha256:8614d10f49df215ecea72d402da62a93fba065f22cbe80ee90bd36dfd0791c84"
+        },
+        {
+          "rawSetCode": "xy2",
+          "url": "https://api.tcgdex.net/v2/de/sets/xy2",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/xy2.json",
+          "responseHash": "sha256:12367f93833cf1e9d7e35a1e779ff70196fb1e516b1d2cbc36109b9071eeee1b"
+        },
+        {
+          "rawSetCode": "xy8",
+          "url": "https://api.tcgdex.net/v2/de/sets/xy8",
+          "rawPath": "raw/tcgdex-de-snorlax/sets/xy8.json",
+          "responseHash": "sha256:aa3ec9cb6cb2aee4e1157938a447739b6b2dd6fe9b71869d82d85c71f5e50d00"
+        }
+      ],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Relaxo:1"
+        ],
+        "completedDetailIds": [
+          "A1-211",
+          "A1-250",
+          "A2a-063",
+          "P-A-049",
+          "base2-11",
+          "base2-27",
+          "bw7-109",
+          "bw8-101",
+          "col1-33",
+          "dp1-37",
+          "ecard3-100",
+          "ex15-10",
+          "ex6-15",
+          "me03-063",
+          "pl2-111",
+          "pl2-33",
+          "pl2-81",
+          "sm10-158",
+          "sv03.5-143",
+          "sv04.5-202",
+          "sv06-136",
+          "sv08-144",
+          "svp-051",
+          "svp-122",
+          "swsh1-140",
+          "swsh10.5-055",
+          "swsh11-143",
+          "swsh11.5tg-TG10",
+          "swsh12.5-109",
+          "swsh2-141",
+          "swsh4-131",
+          "swsh6-224",
+          "swsh8-206",
+          "swshp-SWSH032",
+          "swshp-SWSH068",
+          "swshp-SWSH119",
+          "xy0-26",
+          "xy10-77",
+          "xy2-80",
+          "xy8-118"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tcgdex-exact-name",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-es-eu-snorlax",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "rawLocale": "es",
+      "endpoint": "https://api.tcgdex.net/v2/es/cards",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "nameFilter": "strict-equality",
+        "pagination": "disabled-provider-default"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://api.tcgdex.net/v2/es/cards?name=eq%3ASnorlax",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/query-1.json",
+          "responseHash": "sha256:78cd0bd1fddee9f3d9b50e08d952b27d9cdda488323b100c06a4bca2cbefa827",
+          "resultCount": 29,
+          "totalPages": 1,
+          "detailIds": [
+            "P-A-049",
+            "svp-051",
+            "swsh10.5-055",
+            "me03-063",
+            "A2a-063",
+            "xy10-77",
+            "xy2-80",
+            "bw8-101",
+            "swsh12.5-109",
+            "bw7-109",
+            "xy8-118",
+            "svp-122",
+            "swsh4-131",
+            "sv06-136",
+            "swsh1-140",
+            "swsh2-141",
+            "sv03.5-143",
+            "swsh11-143",
+            "sv08-144",
+            "sm10-158",
+            "sv04.5-202",
+            "swsh8-206",
+            "A1-211",
+            "swsh6-224",
+            "A1-250",
+            "swshp-SWSH032",
+            "swshp-SWSH068",
+            "swshp-SWSH119",
+            "swsh11.5tg-TG10"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "A1-211",
+          "url": "https://api.tcgdex.net/v2/es/cards/A1-211",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/A1-211.json",
+          "responseHash": "sha256:519e3ea408a95f1717e23663f76cd89be512c1fb03d79e79d587db4b2eebcb80",
+          "parsedRecordHash": "sha256:bfedadcaa563762660c37ef236275bab0298d92079c37eff7db0b19914d41c58"
+        },
+        {
+          "rawProviderId": "A1-250",
+          "url": "https://api.tcgdex.net/v2/es/cards/A1-250",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/A1-250.json",
+          "responseHash": "sha256:d0d383ffbb855fbe5293e39e393c37c6a0e5480adf25b53cfa50e1b9fb0bd3c1",
+          "parsedRecordHash": "sha256:547650a8dac189bb5d04335cd8bc827134b71dd926dcecb48436e46ab6a88c43"
+        },
+        {
+          "rawProviderId": "A2a-063",
+          "url": "https://api.tcgdex.net/v2/es/cards/A2a-063",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/A2a-063.json",
+          "responseHash": "sha256:bf70ea0f209b63c9f6f4b7e9ab94ddafa8d624a811ca16446487e8c69c172db7",
+          "parsedRecordHash": "sha256:f58451b3aec294e02481a761e08e37b921e91dcbc731fe32e127371d6f217097"
+        },
+        {
+          "rawProviderId": "P-A-049",
+          "url": "https://api.tcgdex.net/v2/es/cards/P-A-049",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/P-A-049.json",
+          "responseHash": "sha256:8b2be9e9f33a804487f7936f726b9b96efff026e2c56efb98d148dbccc3ceda9",
+          "parsedRecordHash": "sha256:9a63602e832d7b40afe3ed5bd570c040950252feee41f3be4d7490e38fda4263"
+        },
+        {
+          "rawProviderId": "bw7-109",
+          "url": "https://api.tcgdex.net/v2/es/cards/bw7-109",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/bw7-109.json",
+          "responseHash": "sha256:e85f378baa5d2f318e3c8d1644cbe3b0e868e9c3c6f5b3b11a2547ebfa2e5738",
+          "parsedRecordHash": "sha256:29d31a293ced7e462bb870c1a20e3d521f65eafd31ba1e35c2f2033e4858a16d"
+        },
+        {
+          "rawProviderId": "bw8-101",
+          "url": "https://api.tcgdex.net/v2/es/cards/bw8-101",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/bw8-101.json",
+          "responseHash": "sha256:b540a4f61133aa2b16aa932252e8005615a886604308ed0d2176da7065a186d5",
+          "parsedRecordHash": "sha256:050f3986ef33d5d8fe38275b041cf2e5606315bccf9607e58781613406335478"
+        },
+        {
+          "rawProviderId": "me03-063",
+          "url": "https://api.tcgdex.net/v2/es/cards/me03-063",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/me03-063.json",
+          "responseHash": "sha256:d3f841a824a554b16c161ffb95f53bfae884e501b8c91bf0d99cd1dbef4242b5",
+          "parsedRecordHash": "sha256:203a46c512eeb5828fd897f2d2d17ebbf611908140514aaa9e515587b201fd22"
+        },
+        {
+          "rawProviderId": "sm10-158",
+          "url": "https://api.tcgdex.net/v2/es/cards/sm10-158",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/sm10-158.json",
+          "responseHash": "sha256:ffe45e6e0df7cb12d6cf5465f0644697634e434a091d3c144d05d4919baeda07",
+          "parsedRecordHash": "sha256:ceb600bd65ac15b78a68c92c928c487fb4fd634b38ccb0dd8790adc4fa8bbfed"
+        },
+        {
+          "rawProviderId": "sv03.5-143",
+          "url": "https://api.tcgdex.net/v2/es/cards/sv03.5-143",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/sv03.5-143.json",
+          "responseHash": "sha256:41230d4e9d4a852d69c3ad3c3954619a6f5c38443a166266094ce3c6e6bb19e3",
+          "parsedRecordHash": "sha256:9318f3898715d8c9cec383177363aaafc2bc45c144b0f417b085013710fe1eff"
+        },
+        {
+          "rawProviderId": "sv04.5-202",
+          "url": "https://api.tcgdex.net/v2/es/cards/sv04.5-202",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/sv04.5-202.json",
+          "responseHash": "sha256:36a634a651b45d71f46c6b0a82f63c758be95926ffae3eed4fe248ffe5342c6c",
+          "parsedRecordHash": "sha256:517d687362b933fa26b3ac7b20281926e5074c9a46360b73fed3b3255b39203e"
+        },
+        {
+          "rawProviderId": "sv06-136",
+          "url": "https://api.tcgdex.net/v2/es/cards/sv06-136",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/sv06-136.json",
+          "responseHash": "sha256:dc84b407d9a091a9cf91e12f82fd4d7a2a4726d7501c467d165e80baa13a3403",
+          "parsedRecordHash": "sha256:6a717d5a905236f6b31553d3a9f2d6df27a5553c66b9dd99d46c49d03ada01ce"
+        },
+        {
+          "rawProviderId": "sv08-144",
+          "url": "https://api.tcgdex.net/v2/es/cards/sv08-144",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/sv08-144.json",
+          "responseHash": "sha256:026b1066df0a5a6653d59f5342b7c3bb5f1a7f9ceca46a43f2d79cbd5c8fd7f7",
+          "parsedRecordHash": "sha256:da5d315edead3e719a46fe9484d9e9268c1c615ae7733d4bd2aca63b78348e1e"
+        },
+        {
+          "rawProviderId": "svp-051",
+          "url": "https://api.tcgdex.net/v2/es/cards/svp-051",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/svp-051.json",
+          "responseHash": "sha256:6c257fbd34cbd404477dbf72c67afd98078109e6f1e2809ae0f8a9744a345585",
+          "parsedRecordHash": "sha256:e742dd63b017403f76dadcd1fca96ea04b9599f070b25ea81d819d2eb7ad882d"
+        },
+        {
+          "rawProviderId": "svp-122",
+          "url": "https://api.tcgdex.net/v2/es/cards/svp-122",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/svp-122.json",
+          "responseHash": "sha256:6ac114d24ba1ff584f20b16e59d84e948267594e7a68e42b0393149055ac717a",
+          "parsedRecordHash": "sha256:243203b044bf6b2801c54f00371e946d44a47134581834b61ebf8179183926c3"
+        },
+        {
+          "rawProviderId": "swsh1-140",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh1-140",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh1-140.json",
+          "responseHash": "sha256:c7341e43e164fe40b08425aefe1def33dd50bb36c27b01846a03797bb44bc97a",
+          "parsedRecordHash": "sha256:2a30251810674b68dbc7493c494e7dd834f01b3d786a1d1d958b2b530bb838ed"
+        },
+        {
+          "rawProviderId": "swsh10.5-055",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh10.5-055",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh10.5-055.json",
+          "responseHash": "sha256:e7acec4d489d21e96faac20d34999c6f90226711e54954282fae6fcf8fade7f5",
+          "parsedRecordHash": "sha256:537ec135ac097914a621a14b94461a0d5cfff0ef92d6a2579fc380d1d1c8a038"
+        },
+        {
+          "rawProviderId": "swsh11-143",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh11-143",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh11-143.json",
+          "responseHash": "sha256:5782850a19ecf67a539654b61bf303019065175c721a66b3c5b3ec4bff2ab4b5",
+          "parsedRecordHash": "sha256:a75e6d1b121b0458e9358b2153b1565a6163531e6300e5cd74164c4968d39e6f"
+        },
+        {
+          "rawProviderId": "swsh11.5tg-TG10",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh11.5tg-TG10",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh11.5tg-TG10.json",
+          "responseHash": "sha256:d54281cf5fddece94948a179b36e04395584fe30622a533dfc89d82f2830cd8f",
+          "parsedRecordHash": "sha256:2a4282ba6074e57cb0e1f90c067e2556917fa19cf5a11ab278ac884dad9dc445"
+        },
+        {
+          "rawProviderId": "swsh12.5-109",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh12.5-109",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh12.5-109.json",
+          "responseHash": "sha256:f1f1d3729a14399944f1a5036700eb26f1c9f8a7c81e97792fd12974bc3cd306",
+          "parsedRecordHash": "sha256:51c9ca48897590188e76bb3b56c7e9e2afcdcf8ddfe095c07b20c02714e857b2"
+        },
+        {
+          "rawProviderId": "swsh2-141",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh2-141",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh2-141.json",
+          "responseHash": "sha256:67c92f7810ef074e303cf9befe2e11c9c6327dc15b717249cf569c94c54249a9",
+          "parsedRecordHash": "sha256:c3468d0b221142693d8c647126f8a69c1763800d6fd3e77bd64d6b4c119193a3"
+        },
+        {
+          "rawProviderId": "swsh4-131",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh4-131",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh4-131.json",
+          "responseHash": "sha256:e3b2969a07b82def23f16ad002bede5743582b054441a93288961808739da45b",
+          "parsedRecordHash": "sha256:ddb5442bf5eff12f0b316b411907c22ee42e7b1b359f4e065cadb9e2531e2a27"
+        },
+        {
+          "rawProviderId": "swsh6-224",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh6-224",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh6-224.json",
+          "responseHash": "sha256:d6813d7cb514c26a31de9c9c4b6d2c150ca4aa4c47f9a3a93c698c0cb3b81eec",
+          "parsedRecordHash": "sha256:afe0b7851af7257862a937a2ce88eac857ddd0b80501815b60781215c1a08d2a"
+        },
+        {
+          "rawProviderId": "swsh8-206",
+          "url": "https://api.tcgdex.net/v2/es/cards/swsh8-206",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swsh8-206.json",
+          "responseHash": "sha256:24bfdfdb3a80f825bdef63cdcf371bdf71513b8df8638a2bd88004e2f44870a9",
+          "parsedRecordHash": "sha256:68aef073428e38eef31dd1eddcd9bbe6a37dcd3152a99f309515517b84578ab9"
+        },
+        {
+          "rawProviderId": "swshp-SWSH032",
+          "url": "https://api.tcgdex.net/v2/es/cards/swshp-SWSH032",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swshp-SWSH032.json",
+          "responseHash": "sha256:1a46ffeb2c7946393c4eaafbb128a5c0506676cb02dee88dd3d3ae9959f84aaf",
+          "parsedRecordHash": "sha256:567ffde9aac2976525f1547e7a551cbd460f6aebb69abb83a8ab707ef45016e9"
+        },
+        {
+          "rawProviderId": "swshp-SWSH068",
+          "url": "https://api.tcgdex.net/v2/es/cards/swshp-SWSH068",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swshp-SWSH068.json",
+          "responseHash": "sha256:9500b159be863bda7824c40f0cd4378cd8c95dd83d711af3b00f28a1de357c51",
+          "parsedRecordHash": "sha256:7c261050a0695b38824da27ec647be06644e9938a595bd7d954cba6f26536a33"
+        },
+        {
+          "rawProviderId": "swshp-SWSH119",
+          "url": "https://api.tcgdex.net/v2/es/cards/swshp-SWSH119",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/swshp-SWSH119.json",
+          "responseHash": "sha256:49578108d1848b79ed9e1da3006d789013bece3005b7304202db14453674c810",
+          "parsedRecordHash": "sha256:01985ad44002f8f7d3c6681e56919e805e88b8900dfb299dd9d4ec1d4fd65be0"
+        },
+        {
+          "rawProviderId": "xy10-77",
+          "url": "https://api.tcgdex.net/v2/es/cards/xy10-77",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/xy10-77.json",
+          "responseHash": "sha256:f17c61821339b619a9ec9f3a145cf599a736265a09478aefb621630dbcd53af2",
+          "parsedRecordHash": "sha256:ca84305ad49e7641fd0308f265ba8281912a6665209e64f863bc44f0f08181f8"
+        },
+        {
+          "rawProviderId": "xy2-80",
+          "url": "https://api.tcgdex.net/v2/es/cards/xy2-80",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/xy2-80.json",
+          "responseHash": "sha256:ac9211042246dbee516a296962afc1200cae4b04d5d0519b3fcb42e4dc2dc590",
+          "parsedRecordHash": "sha256:1fe54e2b087b5bece544ca6fdd496b05029455b8c38830e53980f15e81ae8183"
+        },
+        {
+          "rawProviderId": "xy8-118",
+          "url": "https://api.tcgdex.net/v2/es/cards/xy8-118",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/details/xy8-118.json",
+          "responseHash": "sha256:7aa4065518617db6d15fc6a15c8ff5fcf149098e83fa5dd8735a028aac7801c0",
+          "parsedRecordHash": "sha256:f9e1db90d454fbd7e615704762f2a2114a8693556687dc5ececfe8386333083e"
+        }
+      ],
+      "sets": [
+        {
+          "rawSetCode": "A1",
+          "url": "https://api.tcgdex.net/v2/es/sets/A1",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/A1.json",
+          "responseHash": "sha256:972deafb0827269dd4cb1b74fe5399d2773088ed08a720d749a7da9385faa337"
+        },
+        {
+          "rawSetCode": "A2a",
+          "url": "https://api.tcgdex.net/v2/es/sets/A2a",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/A2a.json",
+          "responseHash": "sha256:df80a3387c1130202eff2c863a05bb0f8f46ab484a49d63f9eaf1c35e95127cc"
+        },
+        {
+          "rawSetCode": "P-A",
+          "url": "https://api.tcgdex.net/v2/es/sets/P-A",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/P-A.json",
+          "responseHash": "sha256:0a4a8f52b8a48bda4795f3494e0d3ba4b8dd9e26d97eadcd4c5ca1fa978e8eec"
+        },
+        {
+          "rawSetCode": "bw7",
+          "url": "https://api.tcgdex.net/v2/es/sets/bw7",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/bw7.json",
+          "responseHash": "sha256:e347334ef290d8b7c9f2566e1df79076873461f95b85d53c6b24970992446726"
+        },
+        {
+          "rawSetCode": "bw8",
+          "url": "https://api.tcgdex.net/v2/es/sets/bw8",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/bw8.json",
+          "responseHash": "sha256:53da9a1b5a1aee711d1aa2ce5fac1065a4176c9c15662539e7d19121faa419b1"
+        },
+        {
+          "rawSetCode": "me03",
+          "url": "https://api.tcgdex.net/v2/es/sets/me03",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/me03.json",
+          "responseHash": "sha256:c8cd00754548af495a56caf13e37e28f8ddc5f239309b87bcd0d0345851968f9"
+        },
+        {
+          "rawSetCode": "sm10",
+          "url": "https://api.tcgdex.net/v2/es/sets/sm10",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/sm10.json",
+          "responseHash": "sha256:1b45634baa2249224ddf40b548a67f02687216e03e7d1bf28c1433d805e31bb6"
+        },
+        {
+          "rawSetCode": "sv03.5",
+          "url": "https://api.tcgdex.net/v2/es/sets/sv03.5",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/sv03.5.json",
+          "responseHash": "sha256:f52c47a4614157024a06aa1bb92716f3a061af85c3204320b664b89eea7d6fc1"
+        },
+        {
+          "rawSetCode": "sv04.5",
+          "url": "https://api.tcgdex.net/v2/es/sets/sv04.5",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/sv04.5.json",
+          "responseHash": "sha256:05a36c6daca0d512cbc39e7197bcbd3facb1d7db1f1f3e3e787b129da565f4b1"
+        },
+        {
+          "rawSetCode": "sv06",
+          "url": "https://api.tcgdex.net/v2/es/sets/sv06",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/sv06.json",
+          "responseHash": "sha256:957f20b9d8fb9917e2108455ea35a44ea49f321409fb6596e0e50fd046990d4d"
+        },
+        {
+          "rawSetCode": "sv08",
+          "url": "https://api.tcgdex.net/v2/es/sets/sv08",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/sv08.json",
+          "responseHash": "sha256:0b62d2f376cc388a6c0ba7b02e8a5284d4508bdd38050d9af375cd3e42eae13c"
+        },
+        {
+          "rawSetCode": "svp",
+          "url": "https://api.tcgdex.net/v2/es/sets/svp",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/svp.json",
+          "responseHash": "sha256:0547f58a2f9d8d71d59744a1ed6fd9eddfd862bd1dde1eb6a7ba0321901baeed"
+        },
+        {
+          "rawSetCode": "swsh1",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh1",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh1.json",
+          "responseHash": "sha256:c40da8b501d8851a2438486e5f6e848ad1bd8f8968582b99e12b92d0a0c534f0"
+        },
+        {
+          "rawSetCode": "swsh10.5",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh10.5",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh10.5.json",
+          "responseHash": "sha256:15733914af9db5fc81ababf97808ebf23ae82bc4be799e4d8123f16ad36efcf2"
+        },
+        {
+          "rawSetCode": "swsh11",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh11",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh11.json",
+          "responseHash": "sha256:f0fe2a185ba3a3d3eebfa75f9e3f7609857392396abfc052e569d0c038c4a896"
+        },
+        {
+          "rawSetCode": "swsh11.5tg",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh11.5tg",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh11.5tg.json",
+          "responseHash": "sha256:fbcc48b359f7d6ef582d1fe7284ca1bdd51851699b9cb82bbe80c22f4b3cb04c"
+        },
+        {
+          "rawSetCode": "swsh12.5",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh12.5",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh12.5.json",
+          "responseHash": "sha256:a532a34446005a07dcac6b95b83de362e070d95d41ae3c0c6fa8e0feca0b676a"
+        },
+        {
+          "rawSetCode": "swsh2",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh2",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh2.json",
+          "responseHash": "sha256:ee2d257279e4774735053a4d33d7bf818baf45dcfde27588fafd65de615343f0"
+        },
+        {
+          "rawSetCode": "swsh4",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh4",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh4.json",
+          "responseHash": "sha256:010976298274660cfcf40e3987878be5d8e7e41dcf636113e3a981f3c54b0abd"
+        },
+        {
+          "rawSetCode": "swsh6",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh6",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh6.json",
+          "responseHash": "sha256:e90c0cd6f49e4cbedcac76b7e2965b4ce09f17cbb35d9d98407d4974892ae6c9"
+        },
+        {
+          "rawSetCode": "swsh8",
+          "url": "https://api.tcgdex.net/v2/es/sets/swsh8",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swsh8.json",
+          "responseHash": "sha256:33a00b8088427596f5bd5e5aa3d8f03f5e30c01d682c79d822f2e6d7fe13599d"
+        },
+        {
+          "rawSetCode": "swshp",
+          "url": "https://api.tcgdex.net/v2/es/sets/swshp",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/swshp.json",
+          "responseHash": "sha256:f8bea95edd8608a1ec37e430dce0a954cf5787a488ce267dd4ac8c426e1b84ed"
+        },
+        {
+          "rawSetCode": "xy10",
+          "url": "https://api.tcgdex.net/v2/es/sets/xy10",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/xy10.json",
+          "responseHash": "sha256:724f10dd7ccace7bd6e566616ca7bb1a164044c613debf2fbbc526a3a722a0dc"
+        },
+        {
+          "rawSetCode": "xy2",
+          "url": "https://api.tcgdex.net/v2/es/sets/xy2",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/xy2.json",
+          "responseHash": "sha256:edb72ffcfdddf447717906915dec501395f993147c4d6f0560d86a59afb105f7"
+        },
+        {
+          "rawSetCode": "xy8",
+          "url": "https://api.tcgdex.net/v2/es/sets/xy8",
+          "rawPath": "raw/tcgdex-es-eu-snorlax/sets/xy8.json",
+          "responseHash": "sha256:657d41570ec74a5cd341ea7cccfbd8f4971d1b5a1b2c3ad936ed3dfd11333f36"
+        }
+      ],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "A1-211",
+          "A1-250",
+          "A2a-063",
+          "P-A-049",
+          "bw7-109",
+          "bw8-101",
+          "me03-063",
+          "sm10-158",
+          "sv03.5-143",
+          "sv04.5-202",
+          "sv06-136",
+          "sv08-144",
+          "svp-051",
+          "svp-122",
+          "swsh1-140",
+          "swsh10.5-055",
+          "swsh11-143",
+          "swsh11.5tg-TG10",
+          "swsh12.5-109",
+          "swsh2-141",
+          "swsh4-131",
+          "swsh6-224",
+          "swsh8-206",
+          "swshp-SWSH032",
+          "swshp-SWSH068",
+          "swshp-SWSH119",
+          "xy10-77",
+          "xy2-80",
+          "xy8-118"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tcgdex-exact-name",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-pt-unqualified-snorlax",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "rawLocale": "pt",
+      "endpoint": "https://api.tcgdex.net/v2/pt/cards",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "nameFilter": "strict-equality",
+        "pagination": "disabled-provider-default"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://api.tcgdex.net/v2/pt/cards?name=eq%3ASnorlax",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/query-1.json",
+          "responseHash": "sha256:9d76c7f5dd06b3db87c031e715f18ae12f99208cb66f9752dd06d3c1782f1c9a",
+          "resultCount": 26,
+          "totalPages": 1,
+          "detailIds": [
+            "xy0-26",
+            "svp-051",
+            "swsh10.5-055",
+            "me03-063",
+            "xy10-77",
+            "xy2-80",
+            "bw8-101",
+            "swsh12.5-109",
+            "bw7-109",
+            "xy8-118",
+            "svp-122",
+            "swsh4-131",
+            "sv06-136",
+            "swsh1-140",
+            "swsh2-141",
+            "sv03.5-143",
+            "swsh11-143",
+            "sv08-144",
+            "sm10-158",
+            "sv04.5-202",
+            "swsh8-206",
+            "swsh6-224",
+            "swshp-SWSH032",
+            "swshp-SWSH068",
+            "swshp-SWSH119",
+            "swsh11.5tg-TG10"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "bw7-109",
+          "url": "https://api.tcgdex.net/v2/pt/cards/bw7-109",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/bw7-109.json",
+          "responseHash": "sha256:bac6995677a71ca80032bbfd10713c452834dea3d160d6899af556a2976c123a",
+          "parsedRecordHash": "sha256:3f6546a3a90ce858e7571d194ff69e1f18c03da3cec338dcb6594f0efc9059e4"
+        },
+        {
+          "rawProviderId": "bw8-101",
+          "url": "https://api.tcgdex.net/v2/pt/cards/bw8-101",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/bw8-101.json",
+          "responseHash": "sha256:cd51b3b705dbdded5e1f7840aef46f2f9b8891890539d073953e26895c552878",
+          "parsedRecordHash": "sha256:5bb04c33858f6d2b5ae461b8804f52e8cd00901eb6a9972ce02fc36d468ae334"
+        },
+        {
+          "rawProviderId": "me03-063",
+          "url": "https://api.tcgdex.net/v2/pt/cards/me03-063",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/me03-063.json",
+          "responseHash": "sha256:b7cae09873baab1b639e788e4eaf1a68a81469b067656074bdf51e53c2c15f0d",
+          "parsedRecordHash": "sha256:404a3ac969022ef6faa7d0f93418c1e652b41791fef0b572ca08645f2423c067"
+        },
+        {
+          "rawProviderId": "sm10-158",
+          "url": "https://api.tcgdex.net/v2/pt/cards/sm10-158",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/sm10-158.json",
+          "responseHash": "sha256:ce7033324599d3ed8c672ca2e825c98eb253fb4bd18177e7abb8fc0ed62ecaa2",
+          "parsedRecordHash": "sha256:c9f2ec0d6401f1f5f68836995692f602f9baec46416be096c8bc860ae3094020"
+        },
+        {
+          "rawProviderId": "sv03.5-143",
+          "url": "https://api.tcgdex.net/v2/pt/cards/sv03.5-143",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/sv03.5-143.json",
+          "responseHash": "sha256:f13fb331222cd2bdc0683b2e528d4a5e6a2a7dcac0ad606da9f8c828be3de248",
+          "parsedRecordHash": "sha256:b45eb0ff8bd5080a7936ca21082aeac93bf2d0fdfe0ac9ca6cfd797c27d19422"
+        },
+        {
+          "rawProviderId": "sv04.5-202",
+          "url": "https://api.tcgdex.net/v2/pt/cards/sv04.5-202",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/sv04.5-202.json",
+          "responseHash": "sha256:2b871d8b7e45121dc3939c6c3ad37193f390623299d5d34dbd0bb9822ca3a4cd",
+          "parsedRecordHash": "sha256:97d68e92d8288a197c4ef1dc81b10261b7f2588856332bd6411af782b029ddd6"
+        },
+        {
+          "rawProviderId": "sv06-136",
+          "url": "https://api.tcgdex.net/v2/pt/cards/sv06-136",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/sv06-136.json",
+          "responseHash": "sha256:e441baefc09828fd0c745732cd873990e5dfe422adf0bcfe37ac15a1206fc3c8",
+          "parsedRecordHash": "sha256:a8a2c9dd7767fd7988eb15c9d90bb83458c67317dc60329703231e84780aee8e"
+        },
+        {
+          "rawProviderId": "sv08-144",
+          "url": "https://api.tcgdex.net/v2/pt/cards/sv08-144",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/sv08-144.json",
+          "responseHash": "sha256:4235e3f0e2442dab3b90a1fd95724571c7e06c10b3b5e09ee238ae96d466b96e",
+          "parsedRecordHash": "sha256:ee20ade20970c18d3f7cba5f149a9040ac197bcdd4fc4d0f8fe9c7f9a9225fc8"
+        },
+        {
+          "rawProviderId": "svp-051",
+          "url": "https://api.tcgdex.net/v2/pt/cards/svp-051",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/svp-051.json",
+          "responseHash": "sha256:77f3896cadb4f00f18c60091a25d033380dc9d023ed9329a1a4240d76ddab182",
+          "parsedRecordHash": "sha256:35d9b260400ce0d7f231156a15be482f8cf0c95db2f415dbc8d51d551fbd7fe9"
+        },
+        {
+          "rawProviderId": "svp-122",
+          "url": "https://api.tcgdex.net/v2/pt/cards/svp-122",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/svp-122.json",
+          "responseHash": "sha256:ac805540524aac181330be0c9b4b96c262d8419efde2c4670e78cfd6608417fc",
+          "parsedRecordHash": "sha256:b35890581b6a25b63fa19b1bca6ebe00e9e3321494a51b62c6f9fdff1ae5342c"
+        },
+        {
+          "rawProviderId": "swsh1-140",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh1-140",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh1-140.json",
+          "responseHash": "sha256:65579fc3f04c3fa08e327230bcd2968e88e893294dab8f35247e7e64cbaeb82b",
+          "parsedRecordHash": "sha256:5bccf3daac1001622529dc6c2bba2e5b9c3d06aa6267871eda158afb7accde7f"
+        },
+        {
+          "rawProviderId": "swsh10.5-055",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh10.5-055",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh10.5-055.json",
+          "responseHash": "sha256:3ded10ea24dd27f501c58742198d4d116c13ab33868b7d85ebe9f9f1de31c5ac",
+          "parsedRecordHash": "sha256:66a2d4f33ff37226b477eeb1c3b313a95a52a91dc05f793160b7ba82df0e6b26"
+        },
+        {
+          "rawProviderId": "swsh11-143",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh11-143",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh11-143.json",
+          "responseHash": "sha256:31dd752635ed0d6fd8af0cc0759ca8bb8300bbb64786f51514a662678475bc18",
+          "parsedRecordHash": "sha256:193291617e96c24c87daf3797df0cad3597f4b33a118240ff126de29998d58fe"
+        },
+        {
+          "rawProviderId": "swsh11.5tg-TG10",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh11.5tg-TG10",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh11.5tg-TG10.json",
+          "responseHash": "sha256:10141c658c967576083b955a7fefbabff6943ded7c1ad6df5161dccf378510a2",
+          "parsedRecordHash": "sha256:2d0b16687d0b5fe4f853faedb9b24222bf901cb4ba455d165fe22e173c2667e2"
+        },
+        {
+          "rawProviderId": "swsh12.5-109",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh12.5-109",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh12.5-109.json",
+          "responseHash": "sha256:d2d34a73bb50dbf46c67ee10bb3f78966631b6fdc52e8535389acb54f36f7131",
+          "parsedRecordHash": "sha256:81b17a4371297826d935b3073fc29540f6d73345f7c590fa9c32d8cc4447445e"
+        },
+        {
+          "rawProviderId": "swsh2-141",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh2-141",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh2-141.json",
+          "responseHash": "sha256:9bb3b15cd26ec2df202cb3b8b68296ddcab6024a0004e0ce273e096c88bd60f5",
+          "parsedRecordHash": "sha256:95c648b991fc005503c3c75d5066067f4bd6d119fb9f38683b424883d4165702"
+        },
+        {
+          "rawProviderId": "swsh4-131",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh4-131",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh4-131.json",
+          "responseHash": "sha256:53c80bd3fcaea19d7f8781d0c61fc6da05714eb31fd0e75c1797d8e7775f83e2",
+          "parsedRecordHash": "sha256:9f0af97ead78bdb7bc3b10b640e248d511d96ed6001ec41bc1844332fd605d88"
+        },
+        {
+          "rawProviderId": "swsh6-224",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh6-224",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh6-224.json",
+          "responseHash": "sha256:cbf3b52bc8859af5f5a6d9990fe5e7f6ab7a7b67cd22954792e3b0f6b7c20124",
+          "parsedRecordHash": "sha256:d5c69e82efc798050255fc18900e839ccb9e20a5e0f41ce2bdc3abfef02d8706"
+        },
+        {
+          "rawProviderId": "swsh8-206",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swsh8-206",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swsh8-206.json",
+          "responseHash": "sha256:1f9629fe3ff87912f9455a840223090b644c7f42c73103b0bdccec229114d050",
+          "parsedRecordHash": "sha256:7ae7e9582231e5dab338634fc4b69c64fb4684040736fe85a5a436c7fec8d9d9"
+        },
+        {
+          "rawProviderId": "swshp-SWSH032",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swshp-SWSH032",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swshp-SWSH032.json",
+          "responseHash": "sha256:abe48bcc82e8ebac7339b030bd15af567502ceb14324cfef7bbaed37102bffd3",
+          "parsedRecordHash": "sha256:30aa5ebb97208bfab5d5ef201426468fc849884fde31fa67b1f220e07e03e22c"
+        },
+        {
+          "rawProviderId": "swshp-SWSH068",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swshp-SWSH068",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swshp-SWSH068.json",
+          "responseHash": "sha256:a311e32eafb00c113c865789bf8a8bebea0111785093697d9ac812090adde9e2",
+          "parsedRecordHash": "sha256:01558ee79c5a601e30b47e2b52520691d765d9e2f9664388aff37178a901a6b9"
+        },
+        {
+          "rawProviderId": "swshp-SWSH119",
+          "url": "https://api.tcgdex.net/v2/pt/cards/swshp-SWSH119",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/swshp-SWSH119.json",
+          "responseHash": "sha256:14d7253dfa3fdad7f78180794a9b92bf22b6d26f8325ed28bddf9d414f2878ba",
+          "parsedRecordHash": "sha256:9c592c29bf2d0f69e5e9f4fcf0545c563dfefc63d961dbfac020750321f55e53"
+        },
+        {
+          "rawProviderId": "xy0-26",
+          "url": "https://api.tcgdex.net/v2/pt/cards/xy0-26",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/xy0-26.json",
+          "responseHash": "sha256:38c10efac6cb8354543649cac1f077454c6413770d1e72959aaaa53a588a3fa8",
+          "parsedRecordHash": "sha256:98b5f28473780d4fbe0e9e1d19ce2506f7f543e6f013096df2bbfc88655b04f1"
+        },
+        {
+          "rawProviderId": "xy10-77",
+          "url": "https://api.tcgdex.net/v2/pt/cards/xy10-77",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/xy10-77.json",
+          "responseHash": "sha256:d5c8d4ea9f27c0232b57aae0589d2ae019c41af4743c07a2dd79f4f4a8af6bcb",
+          "parsedRecordHash": "sha256:260765397d5208c642c86aa51dc0239127b56ce6fd7250a4f60fef71ba3ae92b"
+        },
+        {
+          "rawProviderId": "xy2-80",
+          "url": "https://api.tcgdex.net/v2/pt/cards/xy2-80",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/xy2-80.json",
+          "responseHash": "sha256:52b6dcb6ddc4767e2e0c60cbee03fccc42cd7103b9226cb8b5f0f8a84acfad8a",
+          "parsedRecordHash": "sha256:3ed4cbdca9ebc79f737e8716916d62cd1af6cbb1d0fe29f9b39e9bb323169e44"
+        },
+        {
+          "rawProviderId": "xy8-118",
+          "url": "https://api.tcgdex.net/v2/pt/cards/xy8-118",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/details/xy8-118.json",
+          "responseHash": "sha256:7e1ea4a5eccbfa5d1953d603097cbbf651420f887a81e0bacc2cdad0538b39b0",
+          "parsedRecordHash": "sha256:44b8725379b6f96827ba0b1e83b732f0d7f7a68e9a8ed8fd5706b7025da4d982"
+        }
+      ],
+      "sets": [
+        {
+          "rawSetCode": "bw7",
+          "url": "https://api.tcgdex.net/v2/pt/sets/bw7",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/bw7.json",
+          "responseHash": "sha256:672f72e283dd19874acbc06194d66f5267ff1d22aad844efcc15082825df96b3"
+        },
+        {
+          "rawSetCode": "bw8",
+          "url": "https://api.tcgdex.net/v2/pt/sets/bw8",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/bw8.json",
+          "responseHash": "sha256:0d6418d8b32bb6c3d1e2676140dc309defc27ae757215f8e341a374dec93860b"
+        },
+        {
+          "rawSetCode": "me03",
+          "url": "https://api.tcgdex.net/v2/pt/sets/me03",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/me03.json",
+          "responseHash": "sha256:75b9d06f9fe8d8aa7ca24238a1b5f34559759d7eff3b60895e722aacb81e1050"
+        },
+        {
+          "rawSetCode": "sm10",
+          "url": "https://api.tcgdex.net/v2/pt/sets/sm10",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/sm10.json",
+          "responseHash": "sha256:b4d1b552e240c145d96562c0f200fb3d286bf1c342cf8800f890d07cf547f8e3"
+        },
+        {
+          "rawSetCode": "sv03.5",
+          "url": "https://api.tcgdex.net/v2/pt/sets/sv03.5",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/sv03.5.json",
+          "responseHash": "sha256:0fbad683eea6c98dc22ba4e9456ed06381ec261c18319a5bfbe285bf6401f796"
+        },
+        {
+          "rawSetCode": "sv04.5",
+          "url": "https://api.tcgdex.net/v2/pt/sets/sv04.5",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/sv04.5.json",
+          "responseHash": "sha256:475b5eadd09c24e8e7228dcc51c4abef0c48e02f7d375ea74079e3c58f57caa3"
+        },
+        {
+          "rawSetCode": "sv06",
+          "url": "https://api.tcgdex.net/v2/pt/sets/sv06",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/sv06.json",
+          "responseHash": "sha256:9a5caf0872475d39df32df934fe89cfda10f9e978a5eb64217e2089e853f272d"
+        },
+        {
+          "rawSetCode": "sv08",
+          "url": "https://api.tcgdex.net/v2/pt/sets/sv08",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/sv08.json",
+          "responseHash": "sha256:86d7793a72af2458e79033ee76990e98d9933b7a18bb14d2d423ea4bfe145514"
+        },
+        {
+          "rawSetCode": "svp",
+          "url": "https://api.tcgdex.net/v2/pt/sets/svp",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/svp.json",
+          "responseHash": "sha256:881294a935e2eabe4833a80089067fdba5d3c30500fb0340863b72d2b4dd2f78"
+        },
+        {
+          "rawSetCode": "swsh1",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh1",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh1.json",
+          "responseHash": "sha256:39d2c76deecbadc6c7db46287ead7cae32e74e6d9baa5ef05d69c36c8d3b6140"
+        },
+        {
+          "rawSetCode": "swsh10.5",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh10.5",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh10.5.json",
+          "responseHash": "sha256:73e9f3e0249a2fd75d4d71ec4a2a42f42ce338e59471b4a7688bb0f0d754e810"
+        },
+        {
+          "rawSetCode": "swsh11",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh11",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh11.json",
+          "responseHash": "sha256:3a034817982b0053f098c8a26c696636bf0fdb087e43a8cdd8bdfea2cea1074e"
+        },
+        {
+          "rawSetCode": "swsh11.5tg",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh11.5tg",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh11.5tg.json",
+          "responseHash": "sha256:202f0544c2c967b17f4074dcbf69d5d0e6f7d9eb914be130d1bfbf1f016d5920"
+        },
+        {
+          "rawSetCode": "swsh12.5",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh12.5",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh12.5.json",
+          "responseHash": "sha256:197e78176d2c92f8e93cbbda75d937f7133fed85d6bb6571320c5c759b285386"
+        },
+        {
+          "rawSetCode": "swsh2",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh2",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh2.json",
+          "responseHash": "sha256:55cbc222ec27513654b010cd986d6d5a74b634d7de75d3a6eb842b6bc5f743d9"
+        },
+        {
+          "rawSetCode": "swsh4",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh4",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh4.json",
+          "responseHash": "sha256:9cb30694fe48748c57c4b1377e2724961bf4ab8477e7b3303c09514724488217"
+        },
+        {
+          "rawSetCode": "swsh6",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh6",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh6.json",
+          "responseHash": "sha256:4b5ceda5a553a24c5863fe5708bd1eaea84cfb75eb3b0571953d4ad281dd3896"
+        },
+        {
+          "rawSetCode": "swsh8",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swsh8",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swsh8.json",
+          "responseHash": "sha256:c529c84bfd0c731b2c538348bb8a374310aeb5df4f0cc397174f6f7b9af7c415"
+        },
+        {
+          "rawSetCode": "swshp",
+          "url": "https://api.tcgdex.net/v2/pt/sets/swshp",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/swshp.json",
+          "responseHash": "sha256:638d7574964788f5840c2213fcbbb194b45ff9ce21220ddcf1615e88b2945128"
+        },
+        {
+          "rawSetCode": "xy0",
+          "url": "https://api.tcgdex.net/v2/pt/sets/xy0",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/xy0.json",
+          "responseHash": "sha256:a5f56784efda4874a8a96a7457e5e9253ca0b9c1f284e76e4ae6fbd31d073e4f"
+        },
+        {
+          "rawSetCode": "xy10",
+          "url": "https://api.tcgdex.net/v2/pt/sets/xy10",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/xy10.json",
+          "responseHash": "sha256:bf8d7d08e04856fab7c6afc31a56e1e87f59efe397d306071d2178365410ec3c"
+        },
+        {
+          "rawSetCode": "xy2",
+          "url": "https://api.tcgdex.net/v2/pt/sets/xy2",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/xy2.json",
+          "responseHash": "sha256:98940ebd8d1a33c85e2a0241b18b9fe80582d4a105c3cdbd2316b4e03e0c7db4"
+        },
+        {
+          "rawSetCode": "xy8",
+          "url": "https://api.tcgdex.net/v2/pt/sets/xy8",
+          "rawPath": "raw/tcgdex-pt-unqualified-snorlax/sets/xy8.json",
+          "responseHash": "sha256:0027008964de47f4c4a4ca6b35701b2168f3e52d996b6ce4c99bed4870e0271f"
+        }
+      ],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "bw7-109",
+          "bw8-101",
+          "me03-063",
+          "sm10-158",
+          "sv03.5-143",
+          "sv04.5-202",
+          "sv06-136",
+          "sv08-144",
+          "svp-051",
+          "svp-122",
+          "swsh1-140",
+          "swsh10.5-055",
+          "swsh11-143",
+          "swsh11.5tg-TG10",
+          "swsh12.5-109",
+          "swsh2-141",
+          "swsh4-131",
+          "swsh6-224",
+          "swsh8-206",
+          "swshp-SWSH032",
+          "swshp-SWSH068",
+          "swshp-SWSH119",
+          "xy0-26",
+          "xy10-77",
+          "xy2-80",
+          "xy8-118"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "ligapokemon-confirmed-positive",
+      "adapterVersion": "1.0.0",
+      "sliceId": "ligapokemon-pt-br-positive-frontier",
+      "providerId": "ligapokemon",
+      "surfaceId": "ligapokemon-catalogue",
+      "coverageEdgeId": "ligapokemon-latam-positive",
+      "rawLocale": "br-market",
+      "endpoint": "https://www.ligapokemon.com.br/?view=cards/card",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax do Lupo"
+        ],
+        "retainedUnitIds": [
+          "U0192",
+          "U0219",
+          "U0329"
+        ],
+        "sourceRecord": "verification/confirmed_sources.json",
+        "pagination": "exact-reviewed-positive-frontier"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax do Lupo",
+          "pageNo": 1,
+          "url": "https://www.ligapokemon.com.br/?view=cards/card&snoredexRetained=U0192%2CU0219%2CU0329",
+          "rawPath": "raw/ligapokemon-pt-br-positive-frontier/query-1.json",
+          "responseHash": "sha256:900014aa2b5a0b71b7868b818f43baf5ab033b607f22ab495abcadf80bcbab10",
+          "resultCount": 3,
+          "totalPages": 1,
+          "detailIds": [
+            "U0192",
+            "U0219",
+            "U0329"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "U0192",
+          "url": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117b%2F90)&ed=PPPS8&num=117b",
+          "rawPath": "raw/ligapokemon-pt-br-positive-frontier/details/U0192.json",
+          "responseHash": "sha256:d59c78e660fe9d25396a0ffe3ae08c332b7bd85cba6e11b59b1c493e99201136",
+          "recordSource": "confirmed-positive-frontier",
+          "parsedRecordHash": "sha256:d59c78e660fe9d25396a0ffe3ae08c332b7bd85cba6e11b59b1c493e99201136"
+        },
+        {
+          "rawProviderId": "U0219",
+          "url": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117b%2F90)&ed=PPPS8&num=117b",
+          "rawPath": "raw/ligapokemon-pt-br-positive-frontier/details/U0219.json",
+          "responseHash": "sha256:c47f9b75c3a5c040b8c1da3952ea3875c1b4fac14616d20700790e465f309dc4",
+          "recordSource": "confirmed-positive-frontier",
+          "parsedRecordHash": "sha256:c47f9b75c3a5c040b8c1da3952ea3875c1b4fac14616d20700790e465f309dc4"
+        },
+        {
+          "rawProviderId": "U0329",
+          "url": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117%2F096)&ed=PPPS7&num=117",
+          "rawPath": "raw/ligapokemon-pt-br-positive-frontier/details/U0329.json",
+          "responseHash": "sha256:3eb5ab766573c3912d2ebfb2c505e75475f98aea95696e2068507cd82793edc7",
+          "recordSource": "confirmed-positive-frontier",
+          "parsedRecordHash": "sha256:3eb5ab766573c3912d2ebfb2c505e75475f98aea95696e2068507cd82793edc7"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax do Lupo:1"
+        ],
+        "completedDetailIds": [
+          "U0192",
+          "U0219",
+          "U0329"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tpci-localized-name",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tpci-it-snorlax",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "coverageEdgeId": "tpci-it-card-archive-positive",
+      "rawLocale": "it",
+      "endpoint": "https://www.pokemon.com/it/gcc/archivio-carte/",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "nameFilter": "provider-name-search",
+        "format": "unlimited",
+        "pagination": "single-retained-response-no-archive-closure",
+        "cacheKeyParameter": "snoredexRun"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/?cardName=Snorlax&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=400&retreatCostMin=0&retreatCostMax=5&snoredexRun=20260811T144357Z",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "resultCount": 12,
+          "totalPages": 1,
+          "detailIds": [
+            "svp/51",
+            "svp/122",
+            "svp/184",
+            "smp/SM169",
+            "swshp/SWSH032",
+            "swshp/SWSH068",
+            "swshp/SWSH119",
+            "xy0/26",
+            "swsh1/140",
+            "swsh1/141",
+            "swsh1/142",
+            "swsh1/197"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "smp/SM169",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/smp/SM169/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:a6591e7e4eb7bd1d47cf1537459c20c61bafeccfb8dcefe41d09d26edcbbdfb9"
+        },
+        {
+          "rawProviderId": "svp/122",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/svp/122/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:4f52b352e377877037996bdfb8eb12726113fa11537e2f43032c70fc45abac5c"
+        },
+        {
+          "rawProviderId": "svp/184",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/svp/184/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:02f3c58130b403dc665e6b3089e92798e8fcc6669d2f4fa1a6345e0f3e3f4c9d"
+        },
+        {
+          "rawProviderId": "svp/51",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/svp/51/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:4183b5daec5909bf58467d3617fbbc94fce72d2af0d5a682642b64121823ce61"
+        },
+        {
+          "rawProviderId": "swsh1/140",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/swsh1/140/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:11170a4ee1a99b0ac1faa845ee715a5818239629c7852d9f34f80fbc38b344bd"
+        },
+        {
+          "rawProviderId": "swsh1/141",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/swsh1/141/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:bb333821e172714bc7ef207a2ad34f1d4a091f6bd57cddb0800d9b73487762f8"
+        },
+        {
+          "rawProviderId": "swsh1/142",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/swsh1/142/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:fadfda8fe0445d56fd8a7f95acecb8a8465a6fe070d44357d907116a01559a03"
+        },
+        {
+          "rawProviderId": "swsh1/197",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/swsh1/197/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:cc55155c9068946491444b19db1a2d004038e6523359c7d8043477cc83e0a7fa"
+        },
+        {
+          "rawProviderId": "swshp/SWSH032",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/swshp/SWSH032/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:ca8ecdeee326a1a995ef6ece306dca11f20fd018bf23c45f73a2aa9afa1a88d9"
+        },
+        {
+          "rawProviderId": "swshp/SWSH068",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/swshp/SWSH068/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:236fb3663c6933c1d5cf69e9c4da5323f6eef7eee775acba7de085d4fccca4f8"
+        },
+        {
+          "rawProviderId": "swshp/SWSH119",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/swshp/SWSH119/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:61f86797a73e5cd13774ca6302fac5debca20fce5627d2760b03b67c9e9cbc7f"
+        },
+        {
+          "rawProviderId": "xy0/26",
+          "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/xy0/26/",
+          "rawPath": "raw/tpci-it-snorlax/query-1.html",
+          "responseHash": "sha256:780362a8e326cd37ada5e7e26c4e44c84e1462310717a6fb0d9e42f6bdeddfdb",
+          "recordSource": "localized-archive-list-entry",
+          "parsedRecordHash": "sha256:9cbed013a6fc5bb43a6066526a44b70ab42cb4644cf974c4248c41357c99f130"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "smp/SM169",
+          "svp/122",
+          "svp/184",
+          "svp/51",
+          "swsh1/140",
+          "swsh1/141",
+          "swsh1/142",
+          "swsh1/197",
+          "swshp/SWSH032",
+          "swshp/SWSH068",
+          "swshp/SWSH119",
+          "xy0/26"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tpci-spanish-card-assets",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tpci-latam-jtg-positive",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+      "rawLocale": "es-419",
+      "endpoint": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax de Paul"
+        ],
+        "retainedPrintIds": [
+          "LATAM:JTG LA:117/159:base"
+        ],
+        "sourceRecord": "verification/source_first_prints.json",
+        "pagination": "exact-reviewed-positive-frontier"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax de Paul",
+          "pageNo": 1,
+          "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/?snoredexRetained=LATAM%3AJTG+LA%3A117%2F159%3Abase",
+          "rawPath": "raw/tpci-latam-jtg-positive/query-1.json",
+          "responseHash": "sha256:791fb70721b9e0ac8c55daa477fc7d316d6a2666966c33197f82e0ae032cde86",
+          "resultCount": 1,
+          "totalPages": 1,
+          "detailIds": [
+            "LATAM:JTG LA:117/159:base"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "LATAM:JTG LA:117/159:base",
+          "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png",
+          "rawPath": "raw/tpci-latam-jtg-positive/details/LATAM_JTG_LA_117_159_base.json",
+          "responseHash": "sha256:627469fdaafed731901d0c78119df20cf1c8ab4ead28a841f2e71c2b846ec7da",
+          "recordSource": "source-first-positive-frontier",
+          "parsedRecordHash": "sha256:627469fdaafed731901d0c78119df20cf1c8ab4ead28a841f2e71c2b846ec7da"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax de Paul:1"
+        ],
+        "completedDetailIds": [
+          "LATAM:JTG LA:117/159:base"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tpci-spanish-card-assets",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tpci-latam-svp184-positive",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+      "rawLocale": "es-419",
+      "endpoint": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax de Paul"
+        ],
+        "retainedPrintIds": [
+          "LATAM:SVP LA:184:base"
+        ],
+        "sourceRecord": "verification/source_first_prints.json",
+        "pagination": "exact-reviewed-positive-frontier"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax de Paul",
+          "pageNo": 1,
+          "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/?snoredexRetained=LATAM%3ASVP+LA%3A184%3Abase",
+          "rawPath": "raw/tpci-latam-svp184-positive/query-1.json",
+          "responseHash": "sha256:90ddbaa8fef6b3c86dd1c940a4975dcf022367412286876ede9f25f089d51533",
+          "resultCount": 1,
+          "totalPages": 1,
+          "detailIds": [
+            "LATAM:SVP LA:184:base"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "LATAM:SVP LA:184:base",
+          "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+          "rawPath": "raw/tpci-latam-svp184-positive/details/LATAM_SVP_LA_184_base.json",
+          "responseHash": "sha256:8ed427ba6bf61cb71d48ee2f8b4e02c502961790d8b7ecbec273c51586f6a113",
+          "recordSource": "source-first-positive-frontier",
+          "parsedRecordHash": "sha256:8ed427ba6bf61cb71d48ee2f8b4e02c502961790d8b7ecbec273c51586f6a113"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax de Paul:1"
+        ],
+        "completedDetailIds": [
+          "LATAM:SVP LA:184:base"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "tpci-spanish-card-assets",
+      "adapterVersion": "1.0.0",
+      "sliceId": "tpci-latam-por063-positive",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+      "rawLocale": "es-419",
+      "endpoint": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "retainedPrintIds": [
+          "LATAM:POR LA:063/088:base"
+        ],
+        "sourceRecord": "verification/source_first_prints.json",
+        "pagination": "exact-reviewed-positive-frontier"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/?snoredexRetained=LATAM%3APOR+LA%3A063%2F088%3Abase",
+          "rawPath": "raw/tpci-latam-por063-positive/query-1.json",
+          "responseHash": "sha256:0ed6d58f5fdb90347c8e5cde17a3cd4d7be7ee369d13d7463544fab6b73cb4ba",
+          "resultCount": 1,
+          "totalPages": 1,
+          "detailIds": [
+            "LATAM:POR LA:063/088:base"
+          ]
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "LATAM:POR LA:063/088:base",
+          "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png",
+          "rawPath": "raw/tpci-latam-por063-positive/details/LATAM_POR_LA_063_088_base.json",
+          "responseHash": "sha256:82f8c6e1a9cb05c3a3a8c91f68f3a2633e1011daf8f0e294aa69e1773c99bf52",
+          "recordSource": "source-first-positive-frontier",
+          "parsedRecordHash": "sha256:82f8c6e1a9cb05c3a3a8c91f68f3a2633e1011daf8f0e294aa69e1773c99bf52"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "LATAM:POR LA:063/088:base"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "bulbapedia-historical-card-frontiers",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-nl-snorlax",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "rawLocale": "nl",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "retainedUnitIds": [
+          "U0095",
+          "U0125"
+        ],
+        "retainedSetNames": {
+          "U0095": "Jungle",
+          "U0125": "Jungle"
+        },
+        "sourceRecord": "verification/confirmed_sources.json",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865,
+        "languageColumn": "Dutch",
+        "pagination": "single-revision-positive-frontier"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+          "rawPath": "raw/bulbapedia-historical-nl-snorlax/index-revision-4567865.json",
+          "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+          "resultCount": 2,
+          "totalPages": 1,
+          "detailIds": [
+            "U0095",
+            "U0125"
+          ],
+          "parsedPositiveSetCount": 3
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "U0095",
+          "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages&oldid=4567865",
+          "rawPath": "raw/bulbapedia-historical-nl-snorlax/details/U0095.json",
+          "responseHash": "sha256:ed62ee95be2571601736d679bb89387f410f3cf3cd87d120075dbeea53e0fe08",
+          "recordSource": "revision-pinned-historical-positive-frontier",
+          "parsedRecordHash": "sha256:ed62ee95be2571601736d679bb89387f410f3cf3cd87d120075dbeea53e0fe08"
+        },
+        {
+          "rawProviderId": "U0125",
+          "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages&oldid=4567865",
+          "rawPath": "raw/bulbapedia-historical-nl-snorlax/details/U0125.json",
+          "responseHash": "sha256:88bbe6c94037c67572738fabd1aec49f1b9d5c81a1d2b9a8552d00ea7fdd657b",
+          "recordSource": "revision-pinned-historical-positive-frontier",
+          "parsedRecordHash": "sha256:88bbe6c94037c67572738fabd1aec49f1b9d5c81a1d2b9a8552d00ea7fdd657b"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "U0095",
+          "U0125"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "bulbapedia-historical-card-frontiers",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-pl-snorlax",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "rawLocale": "pl",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "retainedUnitIds": [
+          "U0364"
+        ],
+        "retainedSetNames": {
+          "U0364": "Diamond & Pearl"
+        },
+        "sourceRecord": "verification/confirmed_sources.json",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865,
+        "languageColumn": "Polish",
+        "pagination": "single-revision-positive-frontier"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+          "rawPath": "raw/bulbapedia-historical-pl-snorlax/index-revision-4567865.json",
+          "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+          "resultCount": 1,
+          "totalPages": 1,
+          "detailIds": [
+            "U0364"
+          ],
+          "parsedPositiveSetCount": 2
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "U0364",
+          "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages&oldid=4567865",
+          "rawPath": "raw/bulbapedia-historical-pl-snorlax/details/U0364.json",
+          "responseHash": "sha256:48b01c51a461da2244aa6daec0a167d52ed1f52ef19f1173009735c862f96319",
+          "recordSource": "revision-pinned-historical-positive-frontier",
+          "parsedRecordHash": "sha256:48b01c51a461da2244aa6daec0a167d52ed1f52ef19f1173009735c862f96319"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "U0364"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    },
+    {
+      "runId": "20260811T144357Z",
+      "adapterId": "bulbapedia-historical-card-frontiers",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-ru-snorlax",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "rawLocale": "ru",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "nameQueries": [
+          "Snorlax"
+        ],
+        "retainedUnitIds": [
+          "U0212",
+          "U0336",
+          "U0487",
+          "U0621"
+        ],
+        "retainedSetNames": {
+          "U0212": "BREAKthrough",
+          "U0336": "Flashfire",
+          "U0487": "Kalos Starter Set",
+          "U0621": "Flashfire"
+        },
+        "sourceRecord": "verification/confirmed_sources.json",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865,
+        "languageColumn": "Russian",
+        "pagination": "single-revision-positive-frontier"
+      },
+      "retrievedAt": "2026-08-11T14:43:57Z",
+      "pages": [
+        {
+          "query": "Snorlax",
+          "pageNo": 1,
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+          "rawPath": "raw/bulbapedia-historical-ru-snorlax/index-revision-4567865.json",
+          "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+          "resultCount": 4,
+          "totalPages": 1,
+          "detailIds": [
+            "U0212",
+            "U0336",
+            "U0487",
+            "U0621"
+          ],
+          "parsedPositiveSetCount": 9
+        }
+      ],
+      "details": [
+        {
+          "rawProviderId": "U0212",
+          "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages&oldid=4567865",
+          "rawPath": "raw/bulbapedia-historical-ru-snorlax/details/U0212.json",
+          "responseHash": "sha256:af926c5264217a3263a41d15c8a4aef66bd1ae61978144b82bb6cf81687402f6",
+          "recordSource": "revision-pinned-historical-positive-frontier",
+          "parsedRecordHash": "sha256:af926c5264217a3263a41d15c8a4aef66bd1ae61978144b82bb6cf81687402f6"
+        },
+        {
+          "rawProviderId": "U0336",
+          "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages&oldid=4567865",
+          "rawPath": "raw/bulbapedia-historical-ru-snorlax/details/U0336.json",
+          "responseHash": "sha256:0db78ba6565c1643e3d5569325fe601a38c84f5e057388e4d02beb4e3f1145b7",
+          "recordSource": "revision-pinned-historical-positive-frontier",
+          "parsedRecordHash": "sha256:0db78ba6565c1643e3d5569325fe601a38c84f5e057388e4d02beb4e3f1145b7"
+        },
+        {
+          "rawProviderId": "U0487",
+          "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages&oldid=4567865",
+          "rawPath": "raw/bulbapedia-historical-ru-snorlax/details/U0487.json",
+          "responseHash": "sha256:021540eca77117b88b366d45ad7759d06c935473068437e8d5d674fc2a0f721c",
+          "recordSource": "revision-pinned-historical-positive-frontier",
+          "parsedRecordHash": "sha256:021540eca77117b88b366d45ad7759d06c935473068437e8d5d674fc2a0f721c"
+        },
+        {
+          "rawProviderId": "U0621",
+          "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages&oldid=4567865",
+          "rawPath": "raw/bulbapedia-historical-ru-snorlax/details/U0621.json",
+          "responseHash": "sha256:b89740cb3193fb5748fe205ffe19e5dc26c5f664ce45437f6fe3cb0ac0c19d74",
+          "recordSource": "revision-pinned-historical-positive-frontier",
+          "parsedRecordHash": "sha256:b89740cb3193fb5748fe205ffe19e5dc26c5f664ce45437f6fe3cb0ac0c19d74"
+        }
+      ],
+      "sets": [],
+      "assets": [],
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "U0212",
+          "U0336",
+          "U0487",
+          "U0621"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "error": null
+    }
+  ],
+  "failures": []
+}

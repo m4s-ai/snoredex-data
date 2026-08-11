@@ -28,6 +28,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Iterable
 
+from bulbapedia_historical import HistoricalIndexError, parse_historical_index
 from source_capabilities import schema_errors
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -401,7 +402,9 @@ def parse_detail(
     response_format: str = "pokemon-asia-html",
     set_record: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    if response_format in {"confirmed-source-json", "source-first-print-json"}:
+    if response_format in {
+        "bulbapedia-historical-json", "confirmed-source-json", "source-first-print-json"
+    }:
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, dict) or value.get("detailId") != raw_provider_id:
             raise DiscoveryError(f"confirmed-source detail id differs: {raw_provider_id}")
@@ -494,12 +497,17 @@ def validate_contract(
         seen_adapters.add(adapter_id)
         response_format = adapter.get("responseFormat", "pokemon-asia-html")
         if response_format not in {
-            "confirmed-source-json", "pokemon-asia-html",
+            "bulbapedia-historical-json", "confirmed-source-json", "pokemon-asia-html",
             "pokemon-official-localized-html", "source-first-print-json", "tcgdex-json",
         }:
             raise DiscoveryError(f"adapter {adapter_id} has an unsupported response format")
         if response_format == "tcgdex-json" and not adapter.get("setEndpointTemplate"):
             raise DiscoveryError(f"adapter {adapter_id} requires a set detail endpoint")
+        if response_format == "bulbapedia-historical-json" and (
+            not isinstance(adapter.get("revisionId"), int)
+            or not isinstance(adapter.get("pageTitle"), str)
+        ):
+            raise DiscoveryError(f"adapter {adapter_id} lacks its page title or revision id")
         if adapter["providerId"] not in providers:
             raise DiscoveryError(f"adapter {adapter_id} names unknown provider")
         surface = surfaces.get(adapter["surfaceId"])
@@ -523,7 +531,7 @@ def validate_contract(
             seen_slices.add(slice_id)
             retained_unit_ids = slice_row.get("retainedUnitIds", [])
             retained_print_ids = slice_row.get("retainedPrintIds", [])
-            if response_format == "confirmed-source-json":
+            if response_format in {"bulbapedia-historical-json", "confirmed-source-json"}:
                 if len(slice_row["nameQueries"]) != 1 or not retained_unit_ids:
                     raise DiscoveryError(
                         f"slice {slice_id} needs one name query and retained unit ids"
@@ -542,6 +550,12 @@ def validate_contract(
                     raise DiscoveryError(
                         f"slice {slice_id} names unknown confirmed units: {sorted(missing_units)}"
                     )
+                if response_format == "bulbapedia-historical-json":
+                    set_names = slice_row.get("retainedSetNames", {})
+                    if set(set_names) != set(retained_unit_ids):
+                        raise DiscoveryError(
+                            f"slice {slice_id} must map every retained unit to an index set name"
+                        )
             elif response_format == "source-first-print-json":
                 if len(slice_row["nameQueries"]) != 1 or not retained_print_ids:
                     raise DiscoveryError(
@@ -577,10 +591,20 @@ def validate_contract(
             ):
                 if value not in coverage[field] and "MULTIPLE" not in coverage[field]:
                     raise DiscoveryError(f"slice {slice_id} exceeds edge {field}: {value}")
-            if "card" not in coverage["productCategories"]:
-                raise DiscoveryError(f"slice {slice_id} does not resolve to card coverage")
-            if "card-existence" not in edge["positiveEvidenceCapabilities"]:
-                raise DiscoveryError(f"slice {slice_id} lacks positive card capability")
+            if response_format == "bulbapedia-historical-json":
+                if "set" not in coverage["productCategories"]:
+                    raise DiscoveryError(
+                        f"historical replay slice {slice_id} lacks bounded set coverage"
+                    )
+                if "set-existence" not in edge["positiveEvidenceCapabilities"]:
+                    raise DiscoveryError(
+                        f"historical replay slice {slice_id} lacks positive set capability"
+                    )
+            else:
+                if "card" not in coverage["productCategories"]:
+                    raise DiscoveryError(f"slice {slice_id} does not resolve to card coverage")
+                if "card-existence" not in edge["positiveEvidenceCapabilities"]:
+                    raise DiscoveryError(f"slice {slice_id} lacks positive card capability")
 
     assertion_keys: set[str] = set()
     for assertion in contract["setCodeAssertions"]:
@@ -931,7 +955,27 @@ def build_projection(
                 raw = checked_raw_path(run_dir, page["rawPath"]).read_bytes()
                 if content_hash(raw) != page["responseHash"]:
                     raise DiscoveryError(f"list response hash mismatch: {page['rawPath']}")
-                parsed = parse_list(raw, response_format, slice_row["rawLocale"])
+                if response_format == "bulbapedia-historical-json":
+                    try:
+                        positive_sets = parse_historical_index(
+                            raw,
+                            slice_row["language"],
+                            expected_revision=adapter["revisionId"],
+                            expected_title=adapter["pageTitle"],
+                        )
+                    except HistoricalIndexError as error:
+                        raise DiscoveryError(str(error)) from error
+                    parsed = {
+                        "resultCount": len(slice_row["retainedUnitIds"]),
+                        "totalPages": 1,
+                        "detailIds": slice_row["retainedUnitIds"],
+                    }
+                    if page.get("parsedPositiveSetCount") != len(positive_sets):
+                        raise DiscoveryError(
+                            f"historical set accounting drift: {page['rawPath']}"
+                        )
+                else:
+                    parsed = parse_list(raw, response_format, slice_row["rawLocale"])
                 if parsed != {
                     "resultCount": page["resultCount"],
                     "totalPages": page["totalPages"],
@@ -1048,6 +1092,9 @@ def build_projection(
                     "was replayed and accounted; marketplace or provider-universe completeness "
                     "is not claimed"
                     if response_format == "confirmed-source-json" else
+                    "every card frontier backed by the pinned historical language index was "
+                    "replayed and accounted; non-expansion products and absence are not claimed"
+                    if response_format == "bulbapedia-historical-json" else
                     "every reviewed retained positive source-first print was replayed and "
                     "accounted; neighbouring cards, variants, products and era completeness "
                     "are not claimed"
@@ -1194,6 +1241,16 @@ def new_manifest(
                     "retainedUnitIds": slice_row["retainedUnitIds"],
                     "sourceRecord": "verification/confirmed_sources.json",
                     "pagination": "exact-reviewed-positive-frontier",
+                })
+            elif response_format == "bulbapedia-historical-json":
+                query_parameters.update({
+                    "retainedUnitIds": slice_row["retainedUnitIds"],
+                    "retainedSetNames": slice_row["retainedSetNames"],
+                    "sourceRecord": "verification/confirmed_sources.json",
+                    "pageTitle": adapter["pageTitle"],
+                    "revisionId": adapter["revisionId"],
+                    "languageColumn": slice_row["language"],
+                    "pagination": "single-revision-positive-frontier",
                 })
             elif response_format == "source-first-print-json":
                 query_parameters.update({
@@ -1621,6 +1678,114 @@ def refresh_source_first_print_request(
         save_manifest(run_dir, manifest)
 
 
+def refresh_bulbapedia_historical_request(
+    run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
+    adapter: dict[str, Any], slice_row: dict[str, Any],
+) -> None:
+    """Retain one pinned index revision, then replay its reviewed card frontiers."""
+    confirmed_by_id = {
+        row["unitId"]: row for row in read_json(CONFIRMED_SOURCES_PATH)
+    }
+    if request["pages"]:
+        if len(request["pages"]) != 1:
+            raise DiscoveryError(
+                f"historical slice {request['sliceId']} retained more than one index page"
+            )
+        retained_page = request["pages"][0]
+        raw = checked_raw_path(run_dir, retained_page["rawPath"]).read_bytes()
+        if content_hash(raw) != retained_page["responseHash"]:
+            raise DiscoveryError(
+                f"historical index response hash mismatch: {retained_page['rawPath']}"
+            )
+    else:
+        raw = fetch_bytes(request["endpoint"])
+    try:
+        set_rows = parse_historical_index(
+            raw,
+            slice_row["language"],
+            expected_revision=adapter["revisionId"],
+            expected_title=adapter["pageTitle"],
+        )
+    except HistoricalIndexError as error:
+        raise DiscoveryError(str(error)) from error
+    sets_by_name = {row["englishSetName"]: row for row in set_rows}
+    source_records = []
+    for unit_id in slice_row["retainedUnitIds"]:
+        retained = confirmed_by_id[unit_id]
+        index_name = slice_row["retainedSetNames"][unit_id]
+        if index_name not in sets_by_name:
+            raise DiscoveryError(
+                f"pinned index lacks {slice_row['language']} {index_name} for {unit_id}"
+            )
+        source_records.append({
+            "detailId": unit_id,
+            "localName": retained["cardName"],
+            "rawSetCode": retained["setCode"],
+            "localCollectorNumber": retained["number"],
+            "cardImageUrl": None,
+            "setSymbolUrl": None,
+            "productScope": "physical-tcg",
+            "sourceUrl": (
+                "https://bulbapedia.bulbagarden.net/w/index.php?title="
+                "List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
+                f"&oldid={adapter['revisionId']}"
+            ),
+            "sourceType": retained.get("sourceType"),
+            "variant": retained.get("variant"),
+            "checkedAt": retained.get("checkedAt"),
+            "historicalCatalogueRecord": sets_by_name[index_name],
+            "providerRecord": retained,
+        })
+
+    query = slice_row["nameQueries"][0]
+    relative = f"raw/{request['sliceId']}/index-revision-{adapter['revisionId']}.json"
+    page = {
+        "query": query,
+        "pageNo": 1,
+        "url": request["endpoint"],
+        "rawPath": relative,
+        "responseHash": retain_response(run_dir, relative, raw),
+        "resultCount": len(source_records),
+        "totalPages": 1,
+        "detailIds": [row["detailId"] for row in source_records],
+        "parsedPositiveSetCount": len(set_rows),
+    }
+    if request["pages"]:
+        if request["pages"][0] != page:
+            raise DiscoveryError(
+                f"historical index accounting drift: {request['sliceId']}"
+            )
+    else:
+        request["pages"].append(page)
+    request["checkpoint"]["completedPages"] = [f"{query}:1"]
+    existing_details = {
+        row["rawProviderId"]: row for row in request["details"]
+    }
+    for source_record in source_records:
+        unit_id = source_record["detailId"]
+        detail_raw = canonical_bytes(source_record)
+        detail_relative = f"raw/{request['sliceId']}/details/{unit_id}.json"
+        detail = {
+            "rawProviderId": unit_id,
+            "url": source_record["sourceUrl"],
+            "rawPath": detail_relative,
+            "responseHash": content_hash(detail_raw),
+            "recordSource": "revision-pinned-historical-positive-frontier",
+            "parsedRecordHash": content_hash(source_record),
+        }
+        if unit_id in existing_details:
+            if existing_details[unit_id] != detail:
+                raise DiscoveryError(f"historical detail accounting drift: {unit_id}")
+            retained_raw = checked_raw_path(run_dir, detail_relative).read_bytes()
+            if content_hash(retained_raw) != detail["responseHash"]:
+                raise DiscoveryError(f"historical detail response hash mismatch: {unit_id}")
+        else:
+            retain_response(run_dir, detail_relative, detail_raw)
+            request["details"].append(detail)
+    request["checkpoint"]["completedDetailIds"] = sorted(page["detailIds"])
+    save_manifest(run_dir, manifest)
+
+
 def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
     if not RUN_ID_PATTERN.fullmatch(run_id):
         raise DiscoveryError("--run-id must use YYYYMMDDTHHMMSSZ")
@@ -1682,6 +1847,10 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
             elif response_format == "source-first-print-json":
                 refresh_source_first_print_request(
                     run_dir, manifest, request, slice_row
+                )
+            elif response_format == "bulbapedia-historical-json":
+                refresh_bulbapedia_historical_request(
+                    run_dir, manifest, request, adapter, slice_row
                 )
             else:
                 raise DiscoveryError(f"unsupported card response format: {response_format}")

@@ -25,6 +25,9 @@ from collections import Counter
 
 from checks import VERIFICATION, format_table, read_json, write_json
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 RESOLVED = ("confirmed", "contradicted")
 SETTLED = ("confirmed", "contradicted", "needs-manual-review")
 

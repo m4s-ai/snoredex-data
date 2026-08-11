@@ -2,21 +2,21 @@
   "meta": {
     "schema": "snoredex-card-discovery-staging",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.5.0",
-    "generatedFromRun": "20260811T133423Z",
-    "previousRun": "20260811T121312Z",
+    "coverageVersion": "1.6.0",
+    "generatedFromRun": "20260811T144357Z",
+    "previousRun": "20260811T133423Z",
     "contract": "verification/card_discovery_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "identityGraph": "verification/print_identity_dryrun.json",
-    "contractHash": "sha256:7a6ee4953ec10e3ae313675b970057a16283b18c0e91fc0041964911ba2b67b1",
-    "capabilityGraphHash": "sha256:c74cd7812ea1d18282e4fcc9b843958647a27d4c3347852c24f0c5a681bee9e8",
+    "contractHash": "sha256:7856e7180b61c037d6ef3c820724bbb5708767de6c7e56fcde731f411c053f0d",
+    "capabilityGraphHash": "sha256:ff205219fa19fd4f928bc96a27e1ea5a3726499d3a7481aa36161b4d5f09da4c",
     "identityGraphHash": "sha256:b108bfe08e99a1b09fb1352de32ad1d0647d3260bb44011287e5bee734b1fe41",
     "sourceFirst": true,
     "verdictMutationAllowed": false,
     "counts": {
-      "slices": 11,
-      "records": 239,
-      "matched": 160,
+      "slices": 14,
+      "records": 246,
+      "matched": 167,
       "ambiguous": 0,
       "newCandidate": 32,
       "positivelyExcluded": 18,
@@ -26,6 +26,88 @@
     }
   },
   "slices": [
+    {
+      "sliceId": "bulbapedia-historical-nl-snorlax",
+      "adapterId": "bulbapedia-historical-card-frontiers",
+      "terminalState": "complete",
+      "sourceFailureState": null,
+      "terminalMeaning": "every card frontier backed by the pinned historical language index was replayed and accounted; non-expansion products and absence are not claimed",
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "U0095",
+          "U0125"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "accounting": {
+        "fetched": 2,
+        "matched": 2,
+        "ambiguous": 0,
+        "newCandidate": 0,
+        "positivelyExcluded": 0,
+        "needsEvidence": 0,
+        "accounted": 2
+      }
+    },
+    {
+      "sliceId": "bulbapedia-historical-pl-snorlax",
+      "adapterId": "bulbapedia-historical-card-frontiers",
+      "terminalState": "complete",
+      "sourceFailureState": null,
+      "terminalMeaning": "every card frontier backed by the pinned historical language index was replayed and accounted; non-expansion products and absence are not claimed",
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "U0364"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "accounting": {
+        "fetched": 1,
+        "matched": 1,
+        "ambiguous": 0,
+        "newCandidate": 0,
+        "positivelyExcluded": 0,
+        "needsEvidence": 0,
+        "accounted": 1
+      }
+    },
+    {
+      "sliceId": "bulbapedia-historical-ru-snorlax",
+      "adapterId": "bulbapedia-historical-card-frontiers",
+      "terminalState": "complete",
+      "sourceFailureState": null,
+      "terminalMeaning": "every card frontier backed by the pinned historical language index was replayed and accounted; non-expansion products and absence are not claimed",
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1"
+        ],
+        "completedDetailIds": [
+          "U0212",
+          "U0336",
+          "U0487",
+          "U0621"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "accounting": {
+        "fetched": 4,
+        "matched": 4,
+        "ambiguous": 0,
+        "newCandidate": 0,
+        "positivelyExcluded": 0,
+        "needsEvidence": 0,
+        "accounted": 4
+      }
+    },
     {
       "sliceId": "ligapokemon-pt-br-positive-frontier",
       "adapterId": "ligapokemon-confirmed-positive",
@@ -546,9 +628,13 @@
   "runErrors": [],
   "diff": {
     "added": [
-      "pokemon-official|tpci-latam-spanish-card-assets|es-419|LATAM:JTG LA:117/159:base",
-      "pokemon-official|tpci-latam-spanish-card-assets|es-419|LATAM:POR LA:063/088:base",
-      "pokemon-official|tpci-latam-spanish-card-assets|es-419|LATAM:SVP LA:184:base"
+      "bulbapedia|bulbapedia-mediawiki|nl|U0095",
+      "bulbapedia|bulbapedia-mediawiki|nl|U0125",
+      "bulbapedia|bulbapedia-mediawiki|pl|U0364",
+      "bulbapedia|bulbapedia-mediawiki|ru|U0212",
+      "bulbapedia|bulbapedia-mediawiki|ru|U0336",
+      "bulbapedia|bulbapedia-mediawiki|ru|U0487",
+      "bulbapedia|bulbapedia-mediawiki|ru|U0621"
     ],
     "changed": [
       "tcgdex|tcgdex-api|de|base2-11",
@@ -561,9 +647,10 @@
       "tcgdex|tcgdex-api|de|ex15-10",
       "tcgdex|tcgdex-api|de|ex6-15",
       "tcgdex|tcgdex-api|de|me03-063",
+      "tcgdex|tcgdex-api|de|pl2-111",
       "tcgdex|tcgdex-api|de|pl2-33",
-      "tcgdex|tcgdex-api|de|pl2-81",
       "tcgdex|tcgdex-api|de|sm10-158",
+      "tcgdex|tcgdex-api|de|sv03.5-143",
       "tcgdex|tcgdex-api|de|sv04.5-202",
       "tcgdex|tcgdex-api|de|sv06-136",
       "tcgdex|tcgdex-api|de|svp-051",
@@ -579,6 +666,7 @@
       "tcgdex|tcgdex-api|de|swshp-SWSH032",
       "tcgdex|tcgdex-api|de|swshp-SWSH068",
       "tcgdex|tcgdex-api|de|swshp-SWSH119",
+      "tcgdex|tcgdex-api|de|xy0-26",
       "tcgdex|tcgdex-api|de|xy10-77",
       "tcgdex|tcgdex-api|de|xy2-80",
       "tcgdex|tcgdex-api|en|base2-11",
@@ -589,7 +677,12 @@
       "tcgdex|tcgdex-api|en|col1-33",
       "tcgdex|tcgdex-api|en|dp1-37",
       "tcgdex|tcgdex-api|en|ecard3-100",
+      "tcgdex|tcgdex-api|en|ex6-15",
+      "tcgdex|tcgdex-api|en|g1-58",
+      "tcgdex|tcgdex-api|en|lc-64",
+      "tcgdex|tcgdex-api|en|pl2-111",
       "tcgdex|tcgdex-api|en|pl2-33",
+      "tcgdex|tcgdex-api|en|pl2-81",
       "tcgdex|tcgdex-api|en|sm10-158",
       "tcgdex|tcgdex-api|en|sm115-50",
       "tcgdex|tcgdex-api|en|sv03.5-143",
@@ -600,7 +693,11 @@
       "tcgdex|tcgdex-api|en|svp-122",
       "tcgdex|tcgdex-api|en|swsh1-140",
       "tcgdex|tcgdex-api|en|swsh10.5-055",
+      "tcgdex|tcgdex-api|en|swsh11-143",
+      "tcgdex|tcgdex-api|en|swsh11.5tg-TG10",
       "tcgdex|tcgdex-api|en|swsh12.5-109",
+      "tcgdex|tcgdex-api|en|swsh2-141",
+      "tcgdex|tcgdex-api|en|swsh4-131",
       "tcgdex|tcgdex-api|en|swsh6-224",
       "tcgdex|tcgdex-api|en|swsh8-206",
       "tcgdex|tcgdex-api|en|swshp-SWSH032",
@@ -618,9 +715,8 @@
       "tcgdex|tcgdex-api|es|sv03.5-143",
       "tcgdex|tcgdex-api|es|sv04.5-202",
       "tcgdex|tcgdex-api|es|sv06-136",
+      "tcgdex|tcgdex-api|es|sv08-144",
       "tcgdex|tcgdex-api|es|svp-051",
-      "tcgdex|tcgdex-api|es|svp-122",
-      "tcgdex|tcgdex-api|es|swsh1-140",
       "tcgdex|tcgdex-api|es|swsh10.5-055",
       "tcgdex|tcgdex-api|es|swsh11-143",
       "tcgdex|tcgdex-api|es|swsh11.5tg-TG10",
@@ -637,6 +733,8 @@
       "tcgdex|tcgdex-api|es|xy8-118",
       "tcgdex|tcgdex-api|fr|base2-11",
       "tcgdex|tcgdex-api|fr|base2-27",
+      "tcgdex|tcgdex-api|fr|bw7-109",
+      "tcgdex|tcgdex-api|fr|bw8-101",
       "tcgdex|tcgdex-api|fr|col1-33",
       "tcgdex|tcgdex-api|fr|dp1-37",
       "tcgdex|tcgdex-api|fr|ex6-15",
@@ -644,19 +742,13 @@
       "tcgdex|tcgdex-api|fr|sm115-50",
       "tcgdex|tcgdex-api|fr|sv03.5-143",
       "tcgdex|tcgdex-api|fr|sv04.5-202",
-      "tcgdex|tcgdex-api|fr|sv06-136",
       "tcgdex|tcgdex-api|fr|sv08-144",
       "tcgdex|tcgdex-api|fr|svp-051",
       "tcgdex|tcgdex-api|fr|svp-122",
-      "tcgdex|tcgdex-api|fr|swsh1-140",
       "tcgdex|tcgdex-api|fr|swsh10.5-055",
       "tcgdex|tcgdex-api|fr|swsh11-143",
-      "tcgdex|tcgdex-api|fr|swsh11.5tg-TG10",
-      "tcgdex|tcgdex-api|fr|swsh12.5-109",
-      "tcgdex|tcgdex-api|fr|swsh2-141",
       "tcgdex|tcgdex-api|fr|swsh4-131",
       "tcgdex|tcgdex-api|fr|swsh6-224",
-      "tcgdex|tcgdex-api|fr|swsh8-206",
       "tcgdex|tcgdex-api|fr|swshp-SWSH032",
       "tcgdex|tcgdex-api|fr|swshp-SWSH068",
       "tcgdex|tcgdex-api|fr|swshp-SWSH119",
@@ -677,6 +769,7 @@
       "tcgdex|tcgdex-api|pt|swsh1-140",
       "tcgdex|tcgdex-api|pt|swsh10.5-055",
       "tcgdex|tcgdex-api|pt|swsh11-143",
+      "tcgdex|tcgdex-api|pt|swsh11.5tg-TG10",
       "tcgdex|tcgdex-api|pt|swsh12.5-109",
       "tcgdex|tcgdex-api|pt|swsh2-141",
       "tcgdex|tcgdex-api|pt|swsh4-131",
@@ -687,15 +780,14 @@
       "tcgdex|tcgdex-api|pt|swshp-SWSH119",
       "tcgdex|tcgdex-api|pt|xy0-26",
       "tcgdex|tcgdex-api|pt|xy10-77",
-      "tcgdex|tcgdex-api|pt|xy2-80",
       "tcgdex|tcgdex-api|pt|xy8-118"
     ],
     "disappeared": [],
     "rekeyedCandidates": [],
     "localityDeltas": [],
     "counts": {
-      "added": 3,
-      "changed": 138,
+      "added": 7,
+      "changed": 144,
       "disappeared": 0,
       "rekeyedCandidates": 0,
       "localityDeltas": 0
@@ -802,15 +894,15 @@
       "retryCondition": "Add any further regional split only from a positive physical marking, printed modifier or distribution record."
     },
     {
-      "gapId": "specialist-historical-card-discovery",
-      "track": "Historical and specialist catalogue discovery",
+      "gapId": "historical-non-expansion-card-discovery",
+      "track": "specialist historical promos, decks and category-specific card discovery",
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "terminalState": "needs-evidence",
-      "reason": "Rendered pages can collapse source-native rarity and identifier detail; no general card adapter is reviewed.",
-      "retryCondition": "Use revision-pinned wikitext and account for every parsed or parked clause before activation."
+      "reason": "The shared index positively scopes expansion language rows. KSS deck identity and the Russian FLF V2 legacy promo survive replay, but the index does not enumerate all decks or promo printings.",
+      "retryCondition": "Activate category-specific revision-pinned lists or positive specimens; do not inherit expansion coverage into promos and decks."
     }
   ],
   "recordsPath": "verification/card_discovery_records.jsonl",
-  "recordsHash": "sha256:90489378d7174578cc50bf55d8fd021935c02e3c8b15d346428da99dfe5571bb"
+  "recordsHash": "sha256:4a6fbc0a9f7e5ed1f820e7c444ee722c19ffd60fba5646898534d7b375bb030f"
 }

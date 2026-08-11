@@ -12,229 +12,3125 @@
     ]
   },
   "providers": [
-    {"providerId": "pokemon-official", "operator": "The Pokémon Company International", "authorityTier": 1, "licenseOrTerms": "Publisher's own terms; used for identification and verification only.", "rawRetention": "Retain exact localized card-page fields or checklist bytes, canonical URL, locale, retrieval date and SHA-256."},
-    {"providerId": "pokemon-card-jp", "operator": "The Pokémon Company", "authorityTier": 1, "licenseOrTerms": "Publisher's own terms.", "rawRetention": "Retain the raw response or page section, query parameters, retrieval date and SHA-256."},
-    {"providerId": "pokemon-card-asia", "operator": "The Pokémon Company", "authorityTier": 1, "licenseOrTerms": "Publisher's own terms.", "rawRetention": "Retain the raw response, locale, query parameters, retrieval date and SHA-256."},
-    {"providerId": "tcgdex", "operator": "TCGdex", "authorityTier": 2, "licenseOrTerms": "Open card database; see https://tcgdex.dev.", "rawRetention": "Retain the JSON response, locale, request URL, retrieval date and SHA-256."},
-    {"providerId": "bulbapedia", "operator": "Bulbagarden", "authorityTier": 2, "licenseOrTerms": "CC BY-NC-SA 2.5 — attribution and ShareAlike apply to derived content.", "rawRetention": "Retain MediaWiki wikitext, revision id, section, request parameters, retrieval date and SHA-256."},
-    {"providerId": "tcgcsv", "operator": "TCGCSV", "authorityTier": 3, "licenseOrTerms": "Redistributed TCGplayer catalogue data; see https://tcgcsv.com.", "rawRetention": "Retain raw product rows, group/category ids, request parameters, retrieval date and SHA-256."},
-    {"providerId": "psa", "operator": "Professional Sports Authenticator", "authorityTier": 2, "licenseOrTerms": "Site terms; used for identification only.", "rawRetention": "Retain registry/certification id, captured record or scan, retrieval date and SHA-256."},
-    {"providerId": "cgc", "operator": "Certified Guaranty Company", "authorityTier": 2, "licenseOrTerms": "Site terms; used for identification only.", "rawRetention": "Retain registry/certification id, collector-set owner, captured record or scan, retrieval date and SHA-256."},
-    {"providerId": "pokumon", "operator": "pokumon.com", "authorityTier": 3, "licenseOrTerms": "Site terms.", "rawRetention": "Retain captured result rows, query URL, retrieval date and SHA-256."},
-    {"providerId": "snkrdunk", "operator": "SODA Inc.", "authorityTier": 2, "licenseOrTerms": "Marketplace listing content; listing photographs are the seller's.", "rawRetention": "Retain listing id, original specimen images, query URL, retrieval date and SHA-256."},
-    {"providerId": "52poke", "operator": "52Poké (神奇宝贝百科)", "authorityTier": 2, "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.", "rawRetention": "Retain wikitext or original image, page/revision identifiers, retrieval date and SHA-256."},
-    {"providerId": "koreanpokemoncards", "operator": "koreanpokemoncards.com", "authorityTier": 3, "licenseOrTerms": "Site terms.", "rawRetention": "If the surface becomes usable, retain the captured page, URL, retrieval date and SHA-256."},
-    {"providerId": "elitefourum", "operator": "Elite Fourum community", "authorityTier": 2, "licenseOrTerms": "Forum terms; community-contributed content.", "rawRetention": "Retain topic URL, relevant table/section, post timestamp, retrieval date and SHA-256."},
-    {"providerId": "ligapokemon", "operator": "Liga Pokémon", "authorityTier": 3, "licenseOrTerms": "Marketplace site terms.", "rawRetention": "Retain listing id, browser-captured page/image, retrieval date and SHA-256."},
-    {"providerId": "cardmarket", "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)", "authorityTier": 5, "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.", "rawRetention": "Retain product URL/id, captured product fields or image, retrieval date and SHA-256."},
-    {"providerId": "pokemontcgio", "operator": "Pokémon TCG Developers", "authorityTier": 2, "licenseOrTerms": "Open API; see https://pokemontcg.io.", "rawRetention": "Retain JSON response, request URL/parameters, retrieval date and SHA-256."},
-    {"providerId": "limitlesstcg", "operator": "Limitless", "authorityTier": 3, "licenseOrTerms": "Site terms.", "rawRetention": "If activated, retain the response, request parameters, retrieval date and SHA-256."},
-    {"providerId": "play-pokemon", "operator": "The Pokémon Company International", "authorityTier": 1, "licenseOrTerms": "Publisher's own terms.", "rawRetention": "Retain exact gallery response/assets, filter parameters, retrieval date and SHA-256."},
-    {"providerId": "retailer-listing", "operator": "Various independent retailers", "authorityTier": 3, "licenseOrTerms": "Individual retailer site terms; used for identification only.", "rawRetention": "Retain retailer, listing URL/id, original specimen image, retrieval date and SHA-256."},
-    {"providerId": "internal-derivation", "operator": "Snoredex Data", "authorityTier": 5, "licenseOrTerms": "This project's own inference; covered by the project data licence.", "rawRetention": "Retain input stable ids, rule version, output record and SHA-256."},
-    {"providerId": "owner-attestation", "operator": "Collection owner", "authorityTier": 2, "licenseOrTerms": "Contributed to this project; published as an anonymous evidence class.", "rawRetention": "Retain attestation id, exact statement, reviewer/date, cited images and SHA-256."},
-    {"providerId": "inspected-specimen", "operator": "Named specimen holder or reviewer", "authorityTier": 1, "licenseOrTerms": "Photographs of physical cards; depicted artwork remains the rights holders'.", "rawRetention": "Retain specimen id, custody/holder, original images, inspection date and SHA-256."},
-    {"providerId": "cardmarket-listing-photo", "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)", "authorityTier": 2, "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.", "rawRetention": "Retain listing id, seller image, capture date and SHA-256 when a stable specimen is accepted."}
+    {
+      "providerId": "pokemon-official",
+      "operator": "The Pokémon Company International",
+      "authorityTier": 1,
+      "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
+      "rawRetention": "Retain exact localized card-page fields or checklist bytes, canonical URL, locale, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "operator": "The Pokémon Company",
+      "authorityTier": 1,
+      "licenseOrTerms": "Publisher's own terms.",
+      "rawRetention": "Retain the raw response or page section, query parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "pokemon-card-asia",
+      "operator": "The Pokémon Company",
+      "authorityTier": 1,
+      "licenseOrTerms": "Publisher's own terms.",
+      "rawRetention": "Retain the raw response, locale, query parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "tcgdex",
+      "operator": "TCGdex",
+      "authorityTier": 2,
+      "licenseOrTerms": "Open card database; see https://tcgdex.dev.",
+      "rawRetention": "Retain the JSON response, locale, request URL, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "bulbapedia",
+      "operator": "Bulbagarden",
+      "authorityTier": 2,
+      "licenseOrTerms": "CC BY-NC-SA 2.5 — attribution and ShareAlike apply to derived content.",
+      "rawRetention": "Retain MediaWiki wikitext, revision id, section, request parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "tcgcsv",
+      "operator": "TCGCSV",
+      "authorityTier": 3,
+      "licenseOrTerms": "Redistributed TCGplayer catalogue data; see https://tcgcsv.com.",
+      "rawRetention": "Retain raw product rows, group/category ids, request parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "psa",
+      "operator": "Professional Sports Authenticator",
+      "authorityTier": 2,
+      "licenseOrTerms": "Site terms; used for identification only.",
+      "rawRetention": "Retain registry/certification id, captured record or scan, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "cgc",
+      "operator": "Certified Guaranty Company",
+      "authorityTier": 2,
+      "licenseOrTerms": "Site terms; used for identification only.",
+      "rawRetention": "Retain registry/certification id, collector-set owner, captured record or scan, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "pokumon",
+      "operator": "pokumon.com",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms.",
+      "rawRetention": "Retain captured result rows, query URL, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "snkrdunk",
+      "operator": "SODA Inc.",
+      "authorityTier": 2,
+      "licenseOrTerms": "Marketplace listing content; listing photographs are the seller's.",
+      "rawRetention": "Retain listing id, original specimen images, query URL, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "52poke",
+      "operator": "52Poké (神奇宝贝百科)",
+      "authorityTier": 2,
+      "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.",
+      "rawRetention": "Retain wikitext or original image, page/revision identifiers, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "koreanpokemoncards",
+      "operator": "koreanpokemoncards.com",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms.",
+      "rawRetention": "If the surface becomes usable, retain the captured page, URL, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "elitefourum",
+      "operator": "Elite Fourum community",
+      "authorityTier": 2,
+      "licenseOrTerms": "Forum terms; community-contributed content.",
+      "rawRetention": "Retain topic URL, relevant table/section, post timestamp, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "ligapokemon",
+      "operator": "Liga Pokémon",
+      "authorityTier": 3,
+      "licenseOrTerms": "Marketplace site terms.",
+      "rawRetention": "Retain listing id, browser-captured page/image, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "cardmarket",
+      "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
+      "authorityTier": 5,
+      "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+      "rawRetention": "Retain product URL/id, captured product fields or image, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "pokemontcgio",
+      "operator": "Pokémon TCG Developers",
+      "authorityTier": 2,
+      "licenseOrTerms": "Open API; see https://pokemontcg.io.",
+      "rawRetention": "Retain JSON response, request URL/parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "limitlesstcg",
+      "operator": "Limitless",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms.",
+      "rawRetention": "If activated, retain the response, request parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "play-pokemon",
+      "operator": "The Pokémon Company International",
+      "authorityTier": 1,
+      "licenseOrTerms": "Publisher's own terms.",
+      "rawRetention": "Retain exact gallery response/assets, filter parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "retailer-listing",
+      "operator": "Various independent retailers",
+      "authorityTier": 3,
+      "licenseOrTerms": "Individual retailer site terms; used for identification only.",
+      "rawRetention": "Retain retailer, listing URL/id, original specimen image, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "internal-derivation",
+      "operator": "Snoredex Data",
+      "authorityTier": 5,
+      "licenseOrTerms": "This project's own inference; covered by the project data licence.",
+      "rawRetention": "Retain input stable ids, rule version, output record and SHA-256."
+    },
+    {
+      "providerId": "owner-attestation",
+      "operator": "Collection owner",
+      "authorityTier": 2,
+      "licenseOrTerms": "Contributed to this project; published as an anonymous evidence class.",
+      "rawRetention": "Retain attestation id, exact statement, reviewer/date, cited images and SHA-256."
+    },
+    {
+      "providerId": "inspected-specimen",
+      "operator": "Named specimen holder or reviewer",
+      "authorityTier": 1,
+      "licenseOrTerms": "Photographs of physical cards; depicted artwork remains the rights holders'.",
+      "rawRetention": "Retain specimen id, custody/holder, original images, inspection date and SHA-256."
+    },
+    {
+      "providerId": "cardmarket-listing-photo",
+      "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
+      "authorityTier": 2,
+      "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
+      "rawRetention": "Retain listing id, seller image, capture date and SHA-256 when a stable specimen is accepted."
+    }
   ],
   "surfaces": [
     {
-      "surfaceId": "tpci-checklists", "providerId": "pokemon-official", "label": "Exact official checklist documents", "match": {"urlPrefixes": ["https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf", "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf", "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf", "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"], "nonUrlEvidenceIds": []}, "state": "active", "failureState": null, "accessMode": "direct-download", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Re-download and hash each exact document before a new absence adjudication.",
-      "query": {"method": "GET", "endpoint": "exact URL from absenceCapability.exactScopes", "parameters": [], "pagination": "not paginated; completeness belongs only to the named document", "expectedIdentifiers": ["checklist URL", "set or series label", "collector number"]},
-      "finishCapability": {"mode": "set-profile", "vocabulary": ["document-native finish columns and legends"], "publicationForm": "complete official checklist legend/columns", "closedWithinScope": true},
-      "coverageEdges": [{
-        "edgeId": "tpci-exact-checklist-finish", "coverage": {"localities": ["WEST"], "languages": ["English"], "scripts": ["Latn"], "productCategories": ["set-checklist", "prize-pack-series"], "timeRange": {"start": null, "end": null, "basis": "only the four exact documents named below"}}, "positiveEvidenceCapabilities": ["finish", "product"], "exhaustive": true,
-        "absenceCapability": {"enabled": true, "dimensions": ["finish"], "exactScopes": ["https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf", "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf", "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf", "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"], "rationale": "The exact official checklist is complete for its own labelled product and finish columns; no neighbouring product inherits closure."},
-        "knownPositiveObservationId": "obs-tpci-checklist", "outOfScopeChallengeObservationId": "obs-tpci-outside-checklist", "boundary": {"outsideScope": ["any other set, language, product, web search or official page"], "zeroResultMeans": "bounded-absence", "challenge": "A general official card page outside the four URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."}
-      }]
-    },
-    {
-      "surfaceId": "tpci-localized-card-archive", "providerId": "pokemon-official", "label": "Official localized card archive", "match": {"urlPrefixes": ["https://www.pokemon.com/it/gcc/archivio-carte/"], "nonUrlEvidenceIds": []}, "state": "active", "failureState": null, "accessMode": "scriptable", "adapterState": "active", "lastCheckedAt": "2026-08-11", "freshnessPolicy": "Retain each localized filter response, exact detail path and CMS image identity; re-check locale routes before a harvest.",
-      "query": {"method": "GET", "endpoint": "https://www.pokemon.com/{locale}/gcc/archivio-carte/?cardName={localized name}", "parameters": ["locale", "localized card name", "format=unlimited"], "pagination": "one retained server response closes only that bounded response; known-positive pl2/111 demonstrates that the filter does not close archive history", "expectedIdentifiers": ["localized card name", "exact detail path", "collector number", "locale-specific CMS image"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "no closed finish field", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "tpci-it-card-archive-positive", "coverage": {"localities": ["WEST"], "languages": ["Italian"], "scripts": ["Latn"], "productCategories": ["card"], "timeRange": {"start": null, "end": null, "basis": "positive Italian locale detail pages only"}}, "positiveEvidenceCapabilities": ["language", "card-existence", "local-card-identifier"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "A returned localized card page establishes that card; filters, missing pages and other locale routes are not a manifest."}, "knownPositiveObservationId": "obs-tpci-it-card-archive", "boundary": {"outsideScope": ["missing archive rows", "other locale routes", "regional distribution inside a language", "finish/treatment"], "zeroResultMeans": "unknown", "challenge": "The archive can ignore filters or omit eras, so only a positively returned matching detail page carries evidence."}}]
-    },
-    {
-      "surfaceId": "tpci-latam-spanish-card-assets", "providerId": "pokemon-official", "label": "Official Latin-American-Spanish card assets", "match": {"urlPrefixes": ["https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/"], "nonUrlEvidenceIds": []}, "state": "active", "failureState": null, "accessMode": "direct-download", "adapterState": "active", "lastCheckedAt": "2026-08-11", "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
-      "query": {"method": "GET", "endpoint": "exact official card-asset URL", "parameters": ["publisher locale path", "set asset key", "card number"], "pagination": "not paginated; each retained image establishes only itself", "expectedIdentifiers": ["printed local set code including LA modifier", "collector number", "localized card text"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "publisher card render; no physical finish closure", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "tpci-latam-spanish-card-asset-positive", "coverage": {"localities": ["LATAM"], "languages": ["Spanish"], "scripts": ["Latn"], "productCategories": ["card"], "timeRange": {"start": "2025-03", "end": null, "basis": "retained positive es-xl card assets with a printed LA modifier only"}}, "positiveEvidenceCapabilities": ["language", "card-existence", "card-release", "local-card-identifier", "physical-locality"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "One official LA card image establishes that printed LATAM release only; missing asset paths and neighbouring cards remain unknown."}, "knownPositiveObservationId": "obs-tpci-latam-svp184", "boundary": {"outsideScope": ["unretained LATAM cards", "xJTG", "Prize Packs", "finish/treatment", "complete set or era"], "zeroResultMeans": "unknown", "challenge": "A missing asset path cannot refute a LATAM card, set, variant or finish."}}]
-    },
-    {
-      "surfaceId": "tpci-eu-spanish-card-assets", "providerId": "pokemon-official", "label": "Official European-Spanish card assets", "match": {"urlPrefixes": ["https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/"], "nonUrlEvidenceIds": []}, "state": "active", "failureState": null, "accessMode": "direct-download", "adapterState": "planned", "lastCheckedAt": "2026-08-11", "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
-      "query": {"method": "GET", "endpoint": "exact official card-asset URL", "parameters": ["publisher locale path", "set asset key", "card number"], "pagination": "not paginated; each retained image establishes only itself", "expectedIdentifiers": ["printed local set code including ES modifier", "collector number", "localized card text"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "publisher card render; no physical finish closure", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "tpci-eu-spanish-card-asset-positive", "coverage": {"localities": ["WEST"], "languages": ["Spanish"], "scripts": ["Latn"], "productCategories": ["card"], "timeRange": {"start": "2025-03", "end": null, "basis": "retained positive es-es card assets with a printed ES modifier only"}}, "positiveEvidenceCapabilities": ["language", "card-existence", "card-release", "local-card-identifier", "physical-locality"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "One official ES card image establishes that printed European-Spanish release only; missing asset paths and neighbouring cards remain unknown."}, "knownPositiveObservationId": "obs-tpci-eu-svp184", "boundary": {"outsideScope": ["unretained European-Spanish cards", "finish/treatment", "complete set or era"], "zeroResultMeans": "unknown", "challenge": "The European asset is a positive comparison and supplies no absence rule for either regional catalogue."}}]
-    },
-    {
-      "surfaceId": "jp-card-search", "providerId": "pokemon-card-jp", "label": "Japanese official card search", "match": {"urlPrefixes": ["https://www.pokemon-card.com/card-search/", "https://pokemon-card.com/card-search/"], "nonUrlEvidenceIds": ["evidence:pokemon-card-jp"]}, "state": "incomplete", "failureState": "Known omission of Japanese secret and rainbow prints from returned results.", "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Re-check endpoint fields and pagination before every harvest; retain omissions as unknown.",
-      "query": {"method": "GET", "endpoint": "https://www.pokemon-card.com/card-search/index.php", "parameters": ["keyword", "regulation_sidebar_form=all", "page"], "pagination": "follow page until the provider returns no further result page; that closes only the captured response, not the card universe", "expectedIdentifiers": ["card detail id", "collector number", "expansion mark"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "no reliable finish field", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "jp-card-search-positive", "coverage": {"localities": ["JP"], "languages": ["Japanese"], "scripts": ["Jpan"], "productCategories": ["card"], "timeRange": {"start": null, "end": null, "basis": "positive returned records only"}}, "positiveEvidenceCapabilities": ["language", "artist", "date", "card-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Known omissions make silence unsafe."}, "knownPositiveObservationId": "obs-jp-card-search", "boundary": {"outsideScope": ["secret/rainbow prints", "finish/treatment", "other localities"], "zeroResultMeans": "unknown", "challenge": "A missing search row is retained as unknown because positively known secret prints can be absent from this surface."}}]
-    },
-    {
-      "surfaceId": "jp-product-pages", "providerId": "pokemon-card-jp", "label": "Japanese official expansion and product pages", "match": {"urlPrefixes": ["https://www.pokemon-card.com/ex/", "https://pokemon-card.com/ex/"], "nonUrlEvidenceIds": []}, "state": "incomplete", "failureState": "Product pages exist only for some releases; magazine decks and older products may have no page.", "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Capture exact prose, section and page revision before using a finish rule.",
-      "query": {"method": "GET", "endpoint": "https://www.pokemon-card.com/ex/{product}/", "parameters": ["product path"], "pagination": "not paginated; each product page is independent", "expectedIdentifiers": ["product code", "product heading", "card/rarity section"]},
-      "finishCapability": {"mode": "set-profile", "vocabulary": ["source-native Japanese finish and rarity prose"], "publicationForm": "prose or product-table section", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "jp-product-page-positive", "coverage": {"localities": ["JP"], "languages": ["Japanese"], "scripts": ["Jpan"], "productCategories": ["set", "deck", "product"], "timeRange": {"start": null, "end": null, "basis": "products with an explicit retained page only"}}, "positiveEvidenceCapabilities": ["finish", "rarity", "product", "release-event"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "A product page establishes only its explicit statements; missing prose or a missing page is unknown."}, "knownPositiveObservationId": "obs-jp-product-page", "boundary": {"outsideScope": ["products without an official page", "card-search finish", "other localities"], "zeroResultMeans": "unknown", "challenge": "A product without a page remains needs-evidence and cannot inherit another product's finish profile."}}]
-    },
-    {
-      "surfaceId": "asia-card-search", "providerId": "pokemon-card-asia", "label": "Official Asia localized card search", "state": "incomplete", "failureState": "Recent releases only; historical depth and query closure vary by locale.", "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Re-check locale route, category filters and pagination before every harvest.",
-      "query": {"method": "GET", "endpoint": "https://asia.pokemon-card.com/{locale}/card-search/", "parameters": ["locale", "keyword", "page", "category"], "pagination": "follow locale-specific pagination; zero rows never close historical coverage", "expectedIdentifiers": ["detail id", "collector number", "set symbol/code"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "no reliable closed finish field", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "asia-card-search-positive", "coverage": {"localities": ["TW", "ID", "TH"], "languages": ["T-Chinese", "Indonesian", "Thai"], "scripts": ["Hant", "Latn", "Thai"], "productCategories": ["card"], "timeRange": {"start": null, "end": null, "basis": "positive recent locale records only"}}, "positiveEvidenceCapabilities": ["language", "card-existence", "local-set-identifier"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "The official surface is recent and query-limited; its silence is not historical coverage."}, "knownPositiveObservationId": "obs-asia-card-search", "boundary": {"outsideScope": ["older Asian releases", "KR", "CN", "finish/treatment"], "zeroResultMeans": "unknown", "challenge": "An older known Asian printing outside the returned window prevents zero results from becoming absence."}}]
-    },
-    {
-      "surfaceId": "tcgdex-api", "providerId": "tcgdex", "label": "Localized TCGdex REST API", "state": "incomplete", "failureState": "Upstream card and set population and variant flags are incomplete, especially for older Asian releases.", "accessMode": "scriptable", "adapterState": "active", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Store every locale response and re-check upstream coverage notes before interpreting fields.",
-      "query": {"method": "GET", "endpoint": "https://api.tcgdex.net/v2/{locale}/{resource}", "parameters": ["locale", "resource", "id when requesting a detail record"], "pagination": "the localized sets list is a single returned array; retain every row and never treat provider population as exhaustive", "expectedIdentifiers": ["id", "name", "cardCount for set lists", "localId and set.id for card details"]},
-      "finishCapability": {"mode": "card-flags", "vocabulary": ["normal", "holo", "reverse"], "publicationForm": "structured variant flags", "closedWithinScope": false},
+      "surfaceId": "tpci-checklists",
+      "providerId": "pokemon-official",
+      "label": "Exact official checklist documents",
+      "match": {
+        "urlPrefixes": [
+          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Re-download and hash each exact document before a new absence adjudication.",
+      "query": {
+        "method": "GET",
+        "endpoint": "exact URL from absenceCapability.exactScopes",
+        "parameters": [],
+        "pagination": "not paginated; completeness belongs only to the named document",
+        "expectedIdentifiers": [
+          "checklist URL",
+          "set or series label",
+          "collector number"
+        ]
+      },
+      "finishCapability": {
+        "mode": "set-profile",
+        "vocabulary": [
+          "document-native finish columns and legends"
+        ],
+        "publicationForm": "complete official checklist legend/columns",
+        "closedWithinScope": true
+      },
       "coverageEdges": [
-        {"edgeId": "tcgdex-west-positive", "coverage": {"localities": ["WEST"], "languages": ["English", "French", "German", "Italian", "Spanish", "Portuguese"], "scripts": ["Latn"], "productCategories": ["card", "set"], "timeRange": {"start": null, "end": null, "basis": "positive localized records only"}}, "positiveEvidenceCapabilities": ["language", "finish", "card-existence", "set-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "False/missing flags and missing cards are documented catalogue gaps."}, "knownPositiveObservationId": "obs-tcgdex-west", "boundary": {"outsideScope": ["unreturned cards", "unlisted languages", "finish values not positively flagged"], "zeroResultMeans": "unknown", "challenge": "A false or missing variant flag never refutes an observed physical finish."}},
-        {"edgeId": "tcgdex-asia-thin-positive", "coverage": {"localities": ["JP", "TW", "ID", "TH", "KR", "CN"], "languages": ["Japanese", "T-Chinese", "Indonesian", "Thai", "Korean", "S-Chinese"], "scripts": ["Jpan", "Hant", "Latn", "Thai", "Hang", "Hans"], "productCategories": ["card", "set"], "timeRange": {"start": null, "end": null, "basis": "positive localized records only; population is explicitly thin"}}, "positiveEvidenceCapabilities": ["language", "finish", "card-existence", "set-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Thin Asian locale populations make both missing records and false flags unsafe."}, "knownPositiveObservationId": "obs-tcgdex-asia", "boundary": {"outsideScope": ["any Asian card not returned", "complete KR/CN set coverage", "finish closure"], "zeroResultMeans": "unknown", "challenge": "Known physical Korean and Chinese printings may be absent even when the locale endpoint returns zero rows."}}
+        {
+          "edgeId": "tpci-exact-checklist-finish",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "set-checklist",
+              "prize-pack-series"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "only the four exact documents named below"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "product"
+          ],
+          "exhaustive": true,
+          "absenceCapability": {
+            "enabled": true,
+            "dimensions": [
+              "finish"
+            ],
+            "exactScopes": [
+              "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
+            ],
+            "rationale": "The exact official checklist is complete for its own labelled product and finish columns; no neighbouring product inherits closure."
+          },
+          "knownPositiveObservationId": "obs-tpci-checklist",
+          "outOfScopeChallengeObservationId": "obs-tpci-outside-checklist",
+          "boundary": {
+            "outsideScope": [
+              "any other set, language, product, web search or official page"
+            ],
+            "zeroResultMeans": "bounded-absence",
+            "challenge": "A general official card page outside the four URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."
+          }
+        }
       ]
     },
     {
-      "surfaceId": "bulbapedia-mediawiki", "providerId": "bulbapedia", "label": "Bulbapedia MediaWiki wikitext and revision API", "state": "blocked-by-browser", "failureState": "Plain scripted requests may return 403; browser MediaWiki API access is required. Several Korean/Chinese promo pages are explicitly incomplete.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain revision id and exact wikitext section; re-fetch on revision change.",
-      "query": {"method": "GET", "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php", "parameters": ["action=parse", "prop=wikitext", "redirects=1", "page"], "pagination": "MediaWiki continuation must be followed where list modules are used; parsed pages are revision-bound", "expectedIdentifiers": ["page title", "revision id", "section", "source-native rarity"]},
-      "finishCapability": {"mode": "source-native-rarity", "vocabulary": ["Rare Holo", "Rare", "article-native finish prose"], "publicationForm": "wikitext fields/tables; rendered rarity marker alone is insufficient", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "bulbapedia-positive", "coverage": {"localities": ["WEST", "JP", "KR", "TW", "CN", "ID", "TH", "SEA"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["card", "set", "promo-series", "release-event"], "timeRange": {"start": null, "end": null, "basis": "positive fields in a retained revision only"}}, "positiveEvidenceCapabilities": ["language", "edition", "date", "artist", "finish", "rarity", "set-existence", "release-event"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Blank fields, incomplete-tagged pages and missing articles are not absence."}, "knownPositiveObservationId": "obs-bulbapedia", "boundary": {"outsideScope": ["blank edition fields", "incomplete-tagged Korean/Chinese promo pages", "rendered rarity icons without wikitext"], "zeroResultMeans": "unknown", "challenge": "A blank language field or missing article remains unknown unless a separate exact closed table is reviewed."}}]
-    },
-    {
-      "surfaceId": "tcgcsv-api", "providerId": "tcgcsv", "label": "TCGCSV/TCGplayer catalogue rows", "state": "active", "failureState": null, "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain group/category query and raw product row for every accepted product.",
-      "query": {"method": "GET", "endpoint": "https://tcgcsv.com/tcgplayer/{category}/{group}/products", "parameters": ["category", "group"], "pagination": "retain the complete response for the requested group; group completeness does not imply printing completeness", "expectedIdentifiers": ["groupId", "productId", "name", "extendedData"]},
-      "finishCapability": {"mode": "product-subtype", "vocabulary": ["Normal", "Holofoil", "Reverse Holofoil"], "publicationForm": "positive product/subtype rows", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "tcgcsv-positive", "coverage": {"localities": ["WEST"], "languages": ["English"], "scripts": ["Latn"], "productCategories": ["marketplace-product"], "timeRange": {"start": null, "end": null, "basis": "positive group/product rows only"}}, "positiveEvidenceCapabilities": ["finish", "product", "card-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Catalogue subtype omission is a gap, not a refutation."}, "knownPositiveObservationId": "obs-tcgcsv", "boundary": {"outsideScope": ["unlisted products", "non-English/local products", "finish closure"], "zeroResultMeans": "unknown", "challenge": "A physical subtype absent from the catalogue remains possible."}}]
-    },
-    {
-      "surfaceId": "psa-registry", "providerId": "psa", "label": "PSA certification and named variety records", "state": "active", "failureState": null, "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Capture certification/registry id and compare a scan when the concrete specimen is promoted.",
-      "query": {"method": "GET", "endpoint": "https://www.psacard.com/psacert/{certificationId}", "parameters": ["certificationId"], "pagination": "registry/set pages may paginate; every accepted claim remains tied to one named row or certification", "expectedIdentifiers": ["certification id", "set/year", "card number", "variety"]},
-      "finishCapability": {"mode": "named-variety", "vocabulary": ["registry-native variety name"], "publicationForm": "certification or registry row", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "psa-positive-specimen", "coverage": {"localities": ["GLOBAL"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["graded-specimen"], "timeRange": {"start": null, "end": null, "basis": "named certification/registry records only"}}, "positiveEvidenceCapabilities": ["finish", "specimen-existence", "named-variety"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Population counts and registry omissions never establish non-existence."}, "knownPositiveObservationId": "obs-psa", "boundary": {"outsideScope": ["ungraded cards", "missing registry rows", "varieties not named by the concrete record"], "zeroResultMeans": "unknown", "challenge": "A missing PSA entry says only that no matching retained registry record was found."}}]
-    },
-    {
-      "surfaceId": "cgc-registry", "providerId": "cgc", "label": "CGC certification and personal competitive registry sets", "state": "blocked-by-browser", "failureState": "Certification lookup may return 403/rate limits to scripts; personal competitive sets are collector-owned and non-exhaustive.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Capture registry/certification id, owner and scan; re-check the concrete row before promotion.",
-      "query": {"method": "GET", "endpoint": "https://www.cgccards.com/registry/trading-cards/competitive-sets/{setId}/", "parameters": ["setId", "certificationId when available"], "pagination": "capture every page used, but a collector's set is never treated as catalogue closure", "expectedIdentifiers": ["registry set id", "owner", "card slot", "certification id when present"]},
-      "finishCapability": {"mode": "named-variety", "vocabulary": ["registry-native label or variety"], "publicationForm": "certification/collector registry row plus scan when available", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "cgc-positive-specimen", "coverage": {"localities": ["GLOBAL"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["graded-specimen", "collector-registry-set"], "timeRange": {"start": null, "end": null, "basis": "concrete retained registry rows only"}}, "positiveEvidenceCapabilities": ["finish", "language", "specimen-existence", "named-variety"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "A personal set or certification index records submissions, not the printing universe."}, "knownPositiveObservationId": "obs-cgc", "boundary": {"outsideScope": ["empty collector slots", "ungraded cards", "missing certification records", "all cards not owned by that collector"], "zeroResultMeans": "unknown", "challenge": "Registry set 102462 proves only retained specimens; an empty slot cannot refute a language or finish."}}]
-    },
-    {
-      "surfaceId": "pokumon-search", "providerId": "pokumon", "label": "pokumon promo/card search", "state": "incomplete", "failureState": "Asian rows are per market while Western printings are lumped into an English row.", "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain each result row and never infer Western language coverage from its English label.",
-      "query": {"method": "GET", "endpoint": "https://pokumon.com/", "parameters": ["s"], "pagination": "follow result pages where present; no query result closes another market", "expectedIdentifiers": ["card/set label", "market row", "image or article URL"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "no closed finish field", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "pokumon-asian-positive", "coverage": {"localities": ["JP", "KR", "TW", "CN", "ID", "TH", "SEA"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["card", "promo"], "timeRange": {"start": null, "end": null, "basis": "positive per-market Asian rows only"}}, "positiveEvidenceCapabilities": ["language", "card-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Western rows collapse language and all omissions are catalogue gaps."}, "knownPositiveObservationId": "obs-pokumon", "boundary": {"outsideScope": ["Western language availability", "missing market rows", "finish/treatment"], "zeroResultMeans": "unknown", "challenge": "The provider's single Western English row cannot refute French, German or other Western printings."}}]
-    },
-    {
-      "surfaceId": "snkrdunk-listings", "providerId": "snkrdunk", "label": "SNKRDUNK photographed marketplace listings", "state": "blocked-by-browser", "failureState": "Listing availability and browser access are unstable.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain the original listing images and id at inspection time.",
-      "query": {"method": "GET", "endpoint": "https://snkrdunk.com/en/trading-cards/used/listings/{listingId}", "parameters": ["listingId"], "pagination": "not applicable to a retained listing", "expectedIdentifiers": ["listing id", "specimen images"]},
-      "finishCapability": {"mode": "specimen-observation", "vocabulary": ["visible finish/pattern/marking"], "publicationForm": "photograph of the concrete card", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "snkrdunk-positive-specimen", "coverage": {"localities": ["JP"], "languages": ["Japanese"], "scripts": ["Jpan"], "productCategories": ["marketplace-specimen"], "timeRange": {"start": null, "end": null, "basis": "retained photographed listings only"}}, "positiveEvidenceCapabilities": ["finish", "language", "specimen-existence", "image"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Marketplace inventory is transient and never exhaustive."}, "knownPositiveObservationId": "obs-snkrdunk", "boundary": {"outsideScope": ["other listings", "sold/removed stock", "unphotographed variants"], "zeroResultMeans": "unknown", "challenge": "A removed listing cannot refute the photographed specimen or any other printing."}}]
-    },
-    {
-      "surfaceId": "52poke-wiki", "providerId": "52poke", "label": "52Poké Chinese wiki pages and original images", "state": "incomplete", "failureState": "Coverage and field completeness vary by article; current retained fixture is image-level only.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain original image or wikitext with revision/page identity before accepting a claim.",
-      "query": {"method": "GET", "endpoint": "https://wiki.52poke.com/wiki/{page}", "parameters": ["page", "revision or image path"], "pagination": "follow category/API continuation when used; one article never closes a set", "expectedIdentifiers": ["page or image id", "local set code", "collector number"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "no currently validated closed finish surface; images may become specimen observations", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "52poke-positive-record", "coverage": {"localities": ["TW", "CN"], "languages": ["T-Chinese", "S-Chinese"], "scripts": ["Hant", "Hans"], "productCategories": ["card", "wiki-image"], "timeRange": {"start": null, "end": null, "basis": "retained positive page/image records only"}}, "positiveEvidenceCapabilities": ["language", "card-existence", "image", "local-set-identifier"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Article or image absence is not catalogue closure."}, "knownPositiveObservationId": "obs-52poke", "boundary": {"outsideScope": ["missing pages/images", "unverified finish fields", "complete CN/TW set enumeration"], "zeroResultMeans": "unknown", "challenge": "The retained AS5a image proves that card only; it cannot close the surrounding set or another locality."}}]
-    },
-    {
-      "surfaceId": "koreanpokemoncards-site", "providerId": "koreanpokemoncards", "label": "Korean collector catalogue", "state": "needs-evidence", "failureState": "No usable retained positive fixture or validated finish surface is currently available.", "accessMode": "none", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Do not activate an edge until a raw positive fixture and boundary review are committed.",
-      "query": {"method": "NONE", "endpoint": null, "parameters": [], "pagination": "unknown until the surface is re-audited", "expectedIdentifiers": []},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "none validated", "closedWithinScope": false}, "coverageEdges": []
-    },
-    {
-      "surfaceId": "elitefourum-topics", "providerId": "elitefourum", "label": "Named collector-research topics", "state": "active", "failureState": null, "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain exact topic/table/post context and re-check edits before a new adjudication.",
-      "query": {"method": "GET", "endpoint": "exact retained topic URL", "parameters": [], "pagination": "capture every post/page used; only a reviewed table may claim closure", "expectedIdentifiers": ["topic id", "post/table context", "market or language row"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "no validated finish closure", "closedWithinScope": false},
+      "surfaceId": "tpci-localized-card-archive",
+      "providerId": "pokemon-official",
+      "label": "Official localized card archive",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon.com/it/gcc/archivio-carte/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain each localized filter response, exact detail path and CMS image identity; re-check locale routes before a harvest.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.pokemon.com/{locale}/gcc/archivio-carte/?cardName={localized name}",
+        "parameters": [
+          "locale",
+          "localized card name",
+          "format=unlimited"
+        ],
+        "pagination": "one retained server response closes only that bounded response; known-positive pl2/111 demonstrates that the filter does not close archive history",
+        "expectedIdentifiers": [
+          "localized card name",
+          "exact detail path",
+          "collector number",
+          "locale-specific CMS image"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
       "coverageEdges": [
-        {"edgeId": "elitefourum-positive-research", "coverage": {"localities": ["GLOBAL"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["collector-research"], "timeRange": {"start": null, "end": null, "basis": "positive claims in the exact retained topic/table"}}, "positiveEvidenceCapabilities": ["language", "edition"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "A community topic is not globally exhaustive."}, "knownPositiveObservationId": "obs-elitefourum", "boundary": {"outsideScope": ["other products/topics", "uncited replies", "finish/treatment"], "zeroResultMeans": "unknown", "challenge": "A topic that discusses one product cannot refute a different release."}},
-        {"edgeId": "elitefourum-black-star-language-table", "coverage": {"localities": ["GLOBAL"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["black-star-promo-language-table"], "timeRange": {"start": null, "end": null, "basis": "exact reviewed table at the named topic URL"}}, "positiveEvidenceCapabilities": ["language", "edition"], "exhaustive": true, "absenceCapability": {"enabled": true, "dimensions": ["language"], "exactScopes": ["https://www.elitefourum.com/t/black-star-promos-languages/36573"], "rationale": "Owner-reviewed closed language table for the exact Black Star Promo rows; closure does not extend to any other topic or product."}, "knownPositiveObservationId": "obs-elitefourum", "outOfScopeChallengeObservationId": "obs-elitefourum-outside-table", "boundary": {"outsideScope": ["every other Elite Fourum topic", "products outside the named rows", "finish/treatment"], "zeroResultMeans": "bounded-absence", "challenge": "The Eevee collector guide is retained as a positive, out-of-scope topic that cannot inherit the Black Star table's closure."}}
+        {
+          "edgeId": "tpci-it-card-archive-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "Italian"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive Italian locale detail pages only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "local-card-identifier"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A returned localized card page establishes that card; filters, missing pages and other locale routes are not a manifest."
+          },
+          "knownPositiveObservationId": "obs-tpci-it-card-archive",
+          "boundary": {
+            "outsideScope": [
+              "missing archive rows",
+              "other locale routes",
+              "regional distribution inside a language",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The archive can ignore filters or omit eras, so only a positively returned matching detail page carries evidence."
+          }
+        }
       ]
     },
     {
-      "surfaceId": "ligapokemon-catalogue", "providerId": "ligapokemon", "label": "LigaPokemon marketplace catalogue", "state": "blocked-by-browser", "failureState": "Datacenter/script access is blocked; user-browser capture is required.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Re-capture the concrete listing in a browser and retain its card/edition parameters.",
-      "query": {"method": "GET", "endpoint": "https://www.ligapokemon.com.br/?view=cards/card", "parameters": ["card", "ed", "num"], "pagination": "not applicable to one listing; search inventory is never closed", "expectedIdentifiers": ["edition code", "collector number", "localized listing title"]},
-      "finishCapability": {"mode": "specimen-observation", "vocabulary": ["visible or explicitly named finish"], "publicationForm": "concrete marketplace listing/image", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "ligapokemon-latam-positive", "coverage": {"localities": ["LATAM"], "languages": ["Portuguese", "Spanish"], "scripts": ["Latn"], "productCategories": ["card", "marketplace-card"], "timeRange": {"start": null, "end": null, "basis": "positive retained listings only"}}, "positiveEvidenceCapabilities": ["language", "finish", "card-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Marketplace inventory and browser failure are not catalogue absence."}, "knownPositiveObservationId": "obs-ligapokemon", "boundary": {"outsideScope": ["unlisted LATAM cards", "other regional Spanish", "browser-blocked results"], "zeroResultMeans": "unknown", "challenge": "A blocked or empty search says nothing about a LATAM release."}}]
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "providerId": "pokemon-official",
+      "label": "Official Latin-American-Spanish card assets",
+      "match": {
+        "urlPrefixes": [
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
+      "query": {
+        "method": "GET",
+        "endpoint": "exact official card-asset URL",
+        "parameters": [
+          "publisher locale path",
+          "set asset key",
+          "card number"
+        ],
+        "pagination": "not paginated; each retained image establishes only itself",
+        "expectedIdentifiers": [
+          "printed local set code including LA modifier",
+          "collector number",
+          "localized card text"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; no physical finish closure",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "tpci-latam-spanish-card-asset-positive",
+          "coverage": {
+            "localities": [
+              "LATAM"
+            ],
+            "languages": [
+              "Spanish"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": "2025-03",
+              "end": null,
+              "basis": "retained positive es-xl card assets with a printed LA modifier only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "card-release",
+            "local-card-identifier",
+            "physical-locality"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "One official LA card image establishes that printed LATAM release only; missing asset paths and neighbouring cards remain unknown."
+          },
+          "knownPositiveObservationId": "obs-tpci-latam-svp184",
+          "boundary": {
+            "outsideScope": [
+              "unretained LATAM cards",
+              "xJTG",
+              "Prize Packs",
+              "finish/treatment",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing asset path cannot refute a LATAM card, set, variant or finish."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "cardmarket-products", "providerId": "cardmarket", "label": "Cardmarket product pages and images", "state": "rate-limited", "failureState": "Rolling rate limits and seller/inventory changes make scripted coverage unstable.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain exact product/listing id and image; re-check only within rate-limit policy.",
-      "query": {"method": "GET", "endpoint": "https://www.cardmarket.com/en/Pokemon/Products/Singles/{set}/{product}", "parameters": ["set slug", "product slug", "listing id when specimen-backed"], "pagination": "product pages and seller listings are retained separately; language filters never close availability", "expectedIdentifiers": ["product URL", "set slug", "collector number", "variant token"]},
-      "finishCapability": {"mode": "product-subtype", "vocabulary": ["product/listing-native rarity or finish label"], "publicationForm": "catalogue product field or retained seller photo", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "cardmarket-positive", "coverage": {"localities": ["WEST", "JP", "CN"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["marketplace-product", "marketplace-image"], "timeRange": {"start": null, "end": null, "basis": "positive retained product/listing records only"}}, "positiveEvidenceCapabilities": ["product", "image", "finish", "card-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Product taxonomy, seller stock and language filters are not exhaustive."}, "knownPositiveObservationId": "obs-cardmarket", "boundary": {"outsideScope": ["language-filter silence", "missing products", "seller inventory", "other localities"], "zeroResultMeans": "unknown", "challenge": "A missing listing or product filter result cannot refute a printing."}}]
+      "surfaceId": "tpci-eu-spanish-card-assets",
+      "providerId": "pokemon-official",
+      "label": "Official European-Spanish card assets",
+      "match": {
+        "urlPrefixes": [
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
+      "query": {
+        "method": "GET",
+        "endpoint": "exact official card-asset URL",
+        "parameters": [
+          "publisher locale path",
+          "set asset key",
+          "card number"
+        ],
+        "pagination": "not paginated; each retained image establishes only itself",
+        "expectedIdentifiers": [
+          "printed local set code including ES modifier",
+          "collector number",
+          "localized card text"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; no physical finish closure",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "tpci-eu-spanish-card-asset-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "Spanish"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": "2025-03",
+              "end": null,
+              "basis": "retained positive es-es card assets with a printed ES modifier only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "card-release",
+            "local-card-identifier",
+            "physical-locality"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "One official ES card image establishes that printed European-Spanish release only; missing asset paths and neighbouring cards remain unknown."
+          },
+          "knownPositiveObservationId": "obs-tpci-eu-svp184",
+          "boundary": {
+            "outsideScope": [
+              "unretained European-Spanish cards",
+              "finish/treatment",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The European asset is a positive comparison and supplies no absence rule for either regional catalogue."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "pokemontcgio-api", "providerId": "pokemontcgio", "label": "pokemontcg.io v2 API", "state": "active", "failureState": null, "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain exact query and JSON card row; use only positively returned attribution/date fields.",
-      "query": {"method": "GET", "endpoint": "https://api.pokemontcg.io/v2/cards", "parameters": ["q", "page", "pageSize"], "pagination": "follow page/pageSize and totalCount for the exact query; no other locality inherits coverage", "expectedIdentifiers": ["id", "number", "set.id", "artist"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "no accepted finish capability", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "pokemontcgio-positive", "coverage": {"localities": ["WEST"], "languages": ["English"], "scripts": ["Latn"], "productCategories": ["card"], "timeRange": {"start": null, "end": null, "basis": "positive API rows only"}}, "positiveEvidenceCapabilities": ["artist", "date", "card-existence"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "The API is used for positive English attribution/date fields, not absence."}, "knownPositiveObservationId": "obs-pokemontcgio", "boundary": {"outsideScope": ["non-English releases", "missing rows", "finish/treatment"], "zeroResultMeans": "unknown", "challenge": "An absent API row cannot refute a localized or otherwise uncatalogued card."}}]
+      "surfaceId": "jp-card-search",
+      "providerId": "pokemon-card-jp",
+      "label": "Japanese official card search",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon-card.com/card-search/",
+          "https://pokemon-card.com/card-search/"
+        ],
+        "nonUrlEvidenceIds": [
+          "evidence:pokemon-card-jp"
+        ]
+      },
+      "state": "incomplete",
+      "failureState": "Known omission of Japanese secret and rainbow prints from returned results.",
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Re-check endpoint fields and pagination before every harvest; retain omissions as unknown.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.pokemon-card.com/card-search/index.php",
+        "parameters": [
+          "keyword",
+          "regulation_sidebar_form=all",
+          "page"
+        ],
+        "pagination": "follow page until the provider returns no further result page; that closes only the captured response, not the card universe",
+        "expectedIdentifiers": [
+          "card detail id",
+          "collector number",
+          "expansion mark"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no reliable finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "jp-card-search-positive",
+          "coverage": {
+            "localities": [
+              "JP"
+            ],
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive returned records only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "artist",
+            "date",
+            "card-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Known omissions make silence unsafe."
+          },
+          "knownPositiveObservationId": "obs-jp-card-search",
+          "boundary": {
+            "outsideScope": [
+              "secret/rainbow prints",
+              "finish/treatment",
+              "other localities"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing search row is retained as unknown because positively known secret prints can be absent from this surface."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "limitlesstcg-cards", "providerId": "limitlesstcg", "label": "Limitless TCG card data", "state": "needs-evidence", "failureState": "No retained positive fixture is currently used by the verdict store.", "accessMode": "none", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Do not activate until a raw fixture, query contract and boundary review are committed.",
-      "query": {"method": "NONE", "endpoint": null, "parameters": [], "pagination": "unknown until re-audited", "expectedIdentifiers": []},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "none validated", "closedWithinScope": false}, "coverageEdges": []
+      "surfaceId": "jp-product-pages",
+      "providerId": "pokemon-card-jp",
+      "label": "Japanese official expansion and product pages",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon-card.com/ex/",
+          "https://pokemon-card.com/ex/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Product pages exist only for some releases; magazine decks and older products may have no page.",
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Capture exact prose, section and page revision before using a finish rule.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.pokemon-card.com/ex/{product}/",
+        "parameters": [
+          "product path"
+        ],
+        "pagination": "not paginated; each product page is independent",
+        "expectedIdentifiers": [
+          "product code",
+          "product heading",
+          "card/rarity section"
+        ]
+      },
+      "finishCapability": {
+        "mode": "set-profile",
+        "vocabulary": [
+          "source-native Japanese finish and rarity prose"
+        ],
+        "publicationForm": "prose or product-table section",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "jp-product-page-positive",
+          "coverage": {
+            "localities": [
+              "JP"
+            ],
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "productCategories": [
+              "set",
+              "deck",
+              "product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "products with an explicit retained page only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "rarity",
+            "product",
+            "release-event"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A product page establishes only its explicit statements; missing prose or a missing page is unknown."
+          },
+          "knownPositiveObservationId": "obs-jp-product-page",
+          "boundary": {
+            "outsideScope": [
+              "products without an official page",
+              "card-search finish",
+              "other localities"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A product without a page remains needs-evidence and cannot inherit another product's finish profile."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "play-pokemon-gallery", "providerId": "play-pokemon", "label": "Official Play! Pokémon reward gallery", "state": "active", "failureState": null, "accessMode": "scriptable", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Capture exact series filter and gallery response before an adjudication.",
-      "query": {"method": "GET", "endpoint": "https://play.pokemon.com/en-us/rewards/gallery", "parameters": ["filter"], "pagination": "capture the complete filtered gallery response; closure is filter-specific", "expectedIdentifiers": ["series filter", "card/product identity", "gallery finish presentation"]},
-      "finishCapability": {"mode": "set-profile", "vocabulary": ["official gallery-native treatment"], "publicationForm": "complete filtered official gallery", "closedWithinScope": true},
-      "coverageEdges": [{"edgeId": "play-series7-gallery", "coverage": {"localities": ["WEST"], "languages": ["English"], "scripts": ["Latn"], "productCategories": ["prize-pack-series-7"], "timeRange": {"start": null, "end": null, "basis": "exact Series 7 filtered gallery"}}, "positiveEvidenceCapabilities": ["finish", "product"], "exhaustive": true, "absenceCapability": {"enabled": true, "dimensions": ["finish"], "exactScopes": ["https://play.pokemon.com/en-us/rewards/gallery?filter=series7"], "rationale": "The owner-reviewed official filtered gallery is closed only for Series 7."}, "knownPositiveObservationId": "obs-play-series7", "outOfScopeChallengeObservationId": "obs-play-outside-series7", "boundary": {"outsideScope": ["every other series/filter", "other localities", "unfiltered search"], "zeroResultMeans": "bounded-absence", "challenge": "The Series 8 filter is retained as an out-of-scope counterexample and cannot inherit Series 7 closure."}}]
+      "surfaceId": "asia-card-search",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Asia localized card search",
+      "state": "incomplete",
+      "failureState": "Recent releases only; historical depth and query closure vary by locale.",
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Re-check locale route, category filters and pagination before every harvest.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/{locale}/card-search/",
+        "parameters": [
+          "locale",
+          "keyword",
+          "page",
+          "category"
+        ],
+        "pagination": "follow locale-specific pagination; zero rows never close historical coverage",
+        "expectedIdentifiers": [
+          "detail id",
+          "collector number",
+          "set symbol/code"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no reliable closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "asia-card-search-positive",
+          "coverage": {
+            "localities": [
+              "TW",
+              "ID",
+              "TH"
+            ],
+            "languages": [
+              "T-Chinese",
+              "Indonesian",
+              "Thai"
+            ],
+            "scripts": [
+              "Hant",
+              "Latn",
+              "Thai"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive recent locale records only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "local-set-identifier"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The official surface is recent and query-limited; its silence is not historical coverage."
+          },
+          "knownPositiveObservationId": "obs-asia-card-search",
+          "boundary": {
+            "outsideScope": [
+              "older Asian releases",
+              "KR",
+              "CN",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "An older known Asian printing outside the returned window prevents zero results from becoming absence."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "retailer-listings", "providerId": "retailer-listing", "label": "Named retailer product/specimen listings", "state": "incomplete", "failureState": "Listings are one-off, mutable and not catalogue-complete.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain retailer, exact listing URL and original identified image at review time.",
-      "query": {"method": "GET", "endpoint": "exact retailer listing URL", "parameters": [], "pagination": "not applicable to one accepted listing", "expectedIdentifiers": ["retailer", "listing/product id", "identified specimen"]},
-      "finishCapability": {"mode": "specimen-observation", "vocabulary": ["visible or explicitly named finish"], "publicationForm": "one identified listing/image", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "retailer-positive-specimen", "coverage": {"localities": ["WEST", "TW"], "languages": ["MULTIPLE"], "scripts": ["Latn", "Hant"], "productCategories": ["retailer-product", "retailer-specimen"], "timeRange": {"start": null, "end": null, "basis": "positive retained listings only"}}, "positiveEvidenceCapabilities": ["finish", "product", "language", "specimen-existence", "image"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "Retail inventory and listing removal are never absence evidence."}, "knownPositiveObservationId": "obs-retailer", "boundary": {"outsideScope": ["other retailers", "out-of-stock products", "unpictured variants"], "zeroResultMeans": "unknown", "challenge": "A missing retailer listing does not refute a physical card."}}]
+      "surfaceId": "tcgdex-api",
+      "providerId": "tcgdex",
+      "label": "Localized TCGdex REST API",
+      "state": "incomplete",
+      "failureState": "Upstream card and set population and variant flags are incomplete, especially for older Asian releases.",
+      "accessMode": "scriptable",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Store every locale response and re-check upstream coverage notes before interpreting fields.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://api.tcgdex.net/v2/{locale}/{resource}",
+        "parameters": [
+          "locale",
+          "resource",
+          "id when requesting a detail record"
+        ],
+        "pagination": "the localized sets list is a single returned array; retain every row and never treat provider population as exhaustive",
+        "expectedIdentifiers": [
+          "id",
+          "name",
+          "cardCount for set lists",
+          "localId and set.id for card details"
+        ]
+      },
+      "finishCapability": {
+        "mode": "card-flags",
+        "vocabulary": [
+          "normal",
+          "holo",
+          "reverse"
+        ],
+        "publicationForm": "structured variant flags",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "tcgdex-west-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English",
+              "French",
+              "German",
+              "Italian",
+              "Spanish",
+              "Portuguese"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card",
+              "set"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive localized records only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "finish",
+            "card-existence",
+            "set-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "False/missing flags and missing cards are documented catalogue gaps."
+          },
+          "knownPositiveObservationId": "obs-tcgdex-west",
+          "boundary": {
+            "outsideScope": [
+              "unreturned cards",
+              "unlisted languages",
+              "finish values not positively flagged"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A false or missing variant flag never refutes an observed physical finish."
+          }
+        },
+        {
+          "edgeId": "tcgdex-asia-thin-positive",
+          "coverage": {
+            "localities": [
+              "JP",
+              "TW",
+              "ID",
+              "TH",
+              "KR",
+              "CN"
+            ],
+            "languages": [
+              "Japanese",
+              "T-Chinese",
+              "Indonesian",
+              "Thai",
+              "Korean",
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Jpan",
+              "Hant",
+              "Latn",
+              "Thai",
+              "Hang",
+              "Hans"
+            ],
+            "productCategories": [
+              "card",
+              "set"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive localized records only; population is explicitly thin"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "finish",
+            "card-existence",
+            "set-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Thin Asian locale populations make both missing records and false flags unsafe."
+          },
+          "knownPositiveObservationId": "obs-tcgdex-asia",
+          "boundary": {
+            "outsideScope": [
+              "any Asian card not returned",
+              "complete KR/CN set coverage",
+              "finish closure"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Known physical Korean and Chinese printings may be absent even when the locale endpoint returns zero rows."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "internal-derivations", "providerId": "internal-derivation", "label": "Versioned project derivations", "state": "internal", "failureState": null, "accessMode": "internal", "adapterState": "not-applicable", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Recompute when any cited input or derivation rule changes.",
-      "query": {"method": "NON_URL", "endpoint": null, "parameters": ["input stable ids", "rule version"], "pagination": "not applicable", "expectedIdentifiers": ["input stable ids", "derivation rule", "output stable id"]},
-      "finishCapability": {"mode": "none", "vocabulary": [], "publicationForm": "derivations cannot create finish evidence", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "internal-derivation-positive", "coverage": {"localities": ["GLOBAL"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["derived-attribution"], "timeRange": {"start": null, "end": null, "basis": "explicit retained input/output identities only"}}, "positiveEvidenceCapabilities": ["artist"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "A derivation inherits positive inputs and can never manufacture absence."}, "knownPositiveObservationId": "obs-internal-derivation", "boundary": {"outsideScope": ["unmapped reprints", "changed artwork", "finish/treatment"], "zeroResultMeans": "unknown", "challenge": "No matching derivation rule leaves the attribution unresolved."}}]
+      "surfaceId": "bulbapedia-mediawiki",
+      "providerId": "bulbapedia",
+      "label": "Bulbapedia MediaWiki wikitext and revision API",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain page title, exact revision id and wikitext section; a newer revision is a new comparison run, never an in-place replacement.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php",
+        "parameters": [
+          "action=parse",
+          "prop=wikitext",
+          "redirects=1",
+          "oldid",
+          "format=json",
+          "formatversion=2"
+        ],
+        "pagination": "The pinned parse response is one page; list modules still require continuation.",
+        "expectedIdentifiers": [
+          "page title",
+          "revision id",
+          "section",
+          "source-native table cells"
+        ]
+      },
+      "finishCapability": {
+        "mode": "source-native-rarity",
+        "vocabulary": [
+          "Rare Holo",
+          "Rare",
+          "article-native finish prose"
+        ],
+        "publicationForm": "wikitext fields/tables; rendered rarity marker alone is insufficient",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "bulbapedia-positive",
+          "coverage": {
+            "localities": [
+              "WEST",
+              "JP",
+              "KR",
+              "TW",
+              "CN",
+              "ID",
+              "TH",
+              "SEA"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "card",
+              "set",
+              "promo-series",
+              "release-event"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive fields in a retained revision only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "edition",
+            "date",
+            "artist",
+            "finish",
+            "rarity",
+            "set-existence",
+            "release-event"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Blank fields, incomplete-tagged pages and missing articles are not absence."
+          },
+          "knownPositiveObservationId": "obs-bulbapedia",
+          "boundary": {
+            "outsideScope": [
+              "blank edition fields",
+              "incomplete-tagged Korean/Chinese promo pages",
+              "rendered rarity icons without wikitext"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A blank language field or missing article remains unknown unless a separate exact closed table is reviewed."
+          }
+        },
+        {
+          "edgeId": "bulbapedia-historical-index-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "Dutch",
+              "Polish",
+              "Russian"
+            ],
+            "scripts": [
+              "Latn",
+              "Cyrl"
+            ],
+            "productCategories": [
+              "set"
+            ],
+            "timeRange": {
+              "start": "Original Series",
+              "end": "XY Series",
+              "basis": "positive cells in revision 4567865 only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "edition",
+            "set-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Only non-dash cells are positive evidence; dashes, omitted columns and non-expansion products remain unknown."
+          },
+          "knownPositiveObservationId": "obs-bulbapedia-historical-index",
+          "boundary": {
+            "outsideScope": [
+              "promos and decks not enumerated by the English-set tables",
+              "blank or dash cells",
+              "cards not already reached by their own positive card-list or unit evidence",
+              "newer page revisions"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Kalos Starter Set is explicitly a partial theme-deck release, and the Russian FLF promotional variant is not independently enumerated by this set index."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "owner-attestations", "providerId": "owner-attestation", "label": "Recorded collection-owner attestations", "state": "non-url", "failureState": null, "accessMode": "non-url", "adapterState": "not-applicable", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain the exact statement, date and reviewer; corroborate or re-review before widening it.",
-      "query": {"method": "NON_URL", "endpoint": null, "parameters": ["attestation id", "reviewer", "date"], "pagination": "not applicable", "expectedIdentifiers": ["attestation id", "claim stable id"]},
-      "finishCapability": {"mode": "attested-observation", "vocabulary": ["exact owner-described finish"], "publicationForm": "recorded statement plus cited image where available", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "owner-attestation-positive", "coverage": {"localities": ["GLOBAL"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["attested-card", "attested-specimen"], "timeRange": {"start": null, "end": null, "basis": "exact claims named by the attestation"}}, "positiveEvidenceCapabilities": ["language", "finish", "edition"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "An attestation is positive claim evidence; absence is a separate owner adjudication process."}, "knownPositiveObservationId": "obs-owner-attestation", "boundary": {"outsideScope": ["cards not named", "unstated finishes/languages", "collection completeness"], "zeroResultMeans": "unknown", "challenge": "Silence in an attestation cannot be read as a negative claim."}}]
+      "surfaceId": "tcgcsv-api",
+      "providerId": "tcgcsv",
+      "label": "TCGCSV/TCGplayer catalogue rows",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain group/category query and raw product row for every accepted product.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://tcgcsv.com/tcgplayer/{category}/{group}/products",
+        "parameters": [
+          "category",
+          "group"
+        ],
+        "pagination": "retain the complete response for the requested group; group completeness does not imply printing completeness",
+        "expectedIdentifiers": [
+          "groupId",
+          "productId",
+          "name",
+          "extendedData"
+        ]
+      },
+      "finishCapability": {
+        "mode": "product-subtype",
+        "vocabulary": [
+          "Normal",
+          "Holofoil",
+          "Reverse Holofoil"
+        ],
+        "publicationForm": "positive product/subtype rows",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "tcgcsv-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "marketplace-product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive group/product rows only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "product",
+            "card-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Catalogue subtype omission is a gap, not a refutation."
+          },
+          "knownPositiveObservationId": "obs-tcgcsv",
+          "boundary": {
+            "outsideScope": [
+              "unlisted products",
+              "non-English/local products",
+              "finish closure"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A physical subtype absent from the catalogue remains possible."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "inspected-specimens", "providerId": "inspected-specimen", "label": "Identified physical specimens and scans", "state": "non-url", "failureState": null, "accessMode": "non-url", "adapterState": "not-applicable", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Retain custody, original images, inspection date and identity comparison for every specimen.",
-      "query": {"method": "NON_URL", "endpoint": null, "parameters": ["specimen id", "holder", "inspection date"], "pagination": "not applicable", "expectedIdentifiers": ["specimen id", "card identity", "image hash"]},
-      "finishCapability": {"mode": "specimen-observation", "vocabulary": ["visible finish", "foil pattern", "marking", "card size"], "publicationForm": "identified physical scan or photograph", "closedWithinScope": false},
-      "coverageEdges": [{"edgeId": "inspected-specimen-positive", "coverage": {"localities": ["GLOBAL"], "languages": ["MULTIPLE"], "scripts": ["MULTIPLE"], "productCategories": ["physical-specimen"], "timeRange": {"start": null, "end": null, "basis": "the concrete inspected specimen only"}}, "positiveEvidenceCapabilities": ["language", "finish", "specimen-existence", "image"], "exhaustive": false, "absenceCapability": {"enabled": false, "dimensions": [], "exactScopes": [], "rationale": "One specimen proves its visible properties and nothing about unobserved printings."}, "knownPositiveObservationId": "obs-inspected-specimen", "boundary": {"outsideScope": ["other copies", "unseen back/angle", "unobserved finishes", "complete set"], "zeroResultMeans": "unknown", "challenge": "A photographed specimen cannot prove that no other treatment exists."}}]
+      "surfaceId": "psa-registry",
+      "providerId": "psa",
+      "label": "PSA certification and named variety records",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Capture certification/registry id and compare a scan when the concrete specimen is promoted.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.psacard.com/psacert/{certificationId}",
+        "parameters": [
+          "certificationId"
+        ],
+        "pagination": "registry/set pages may paginate; every accepted claim remains tied to one named row or certification",
+        "expectedIdentifiers": [
+          "certification id",
+          "set/year",
+          "card number",
+          "variety"
+        ]
+      },
+      "finishCapability": {
+        "mode": "named-variety",
+        "vocabulary": [
+          "registry-native variety name"
+        ],
+        "publicationForm": "certification or registry row",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "psa-positive-specimen",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "graded-specimen"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "named certification/registry records only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "specimen-existence",
+            "named-variety"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Population counts and registry omissions never establish non-existence."
+          },
+          "knownPositiveObservationId": "obs-psa",
+          "boundary": {
+            "outsideScope": [
+              "ungraded cards",
+              "missing registry rows",
+              "varieties not named by the concrete record"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing PSA entry says only that no matching retained registry record was found."
+          }
+        }
+      ]
     },
     {
-      "surfaceId": "cardmarket-listing-photos", "providerId": "cardmarket-listing-photo", "label": "Stable seller listing photographs", "state": "needs-evidence", "failureState": "No accepted stable seller-photo fixture is currently used by a verdict.", "accessMode": "browser", "adapterState": "planned", "lastCheckedAt": "2026-08-09", "freshnessPolicy": "Activate only with listing id, seller photo, capture date and specimen identity review.",
-      "query": {"method": "MANUAL", "endpoint": "Cardmarket listing URL when retained", "parameters": ["listing id"], "pagination": "not applicable to one retained seller listing", "expectedIdentifiers": ["listing id", "seller image", "card identity"]},
-      "finishCapability": {"mode": "specimen-observation", "vocabulary": ["visible finish/pattern/marking"], "publicationForm": "seller photograph of one identified card", "closedWithinScope": false}, "coverageEdges": []
+      "surfaceId": "cgc-registry",
+      "providerId": "cgc",
+      "label": "CGC certification and personal competitive registry sets",
+      "state": "blocked-by-browser",
+      "failureState": "Certification lookup may return 403/rate limits to scripts; personal competitive sets are collector-owned and non-exhaustive.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Capture registry/certification id, owner and scan; re-check the concrete row before promotion.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.cgccards.com/registry/trading-cards/competitive-sets/{setId}/",
+        "parameters": [
+          "setId",
+          "certificationId when available"
+        ],
+        "pagination": "capture every page used, but a collector's set is never treated as catalogue closure",
+        "expectedIdentifiers": [
+          "registry set id",
+          "owner",
+          "card slot",
+          "certification id when present"
+        ]
+      },
+      "finishCapability": {
+        "mode": "named-variety",
+        "vocabulary": [
+          "registry-native label or variety"
+        ],
+        "publicationForm": "certification/collector registry row plus scan when available",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "cgc-positive-specimen",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "graded-specimen",
+              "collector-registry-set"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "concrete retained registry rows only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "language",
+            "specimen-existence",
+            "named-variety"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A personal set or certification index records submissions, not the printing universe."
+          },
+          "knownPositiveObservationId": "obs-cgc",
+          "boundary": {
+            "outsideScope": [
+              "empty collector slots",
+              "ungraded cards",
+              "missing certification records",
+              "all cards not owned by that collector"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Registry set 102462 proves only retained specimens; an empty slot cannot refute a language or finish."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "pokumon-search",
+      "providerId": "pokumon",
+      "label": "pokumon promo/card search",
+      "state": "incomplete",
+      "failureState": "Asian rows are per market while Western printings are lumped into an English row.",
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain each result row and never infer Western language coverage from its English label.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokumon.com/",
+        "parameters": [
+          "s"
+        ],
+        "pagination": "follow result pages where present; no query result closes another market",
+        "expectedIdentifiers": [
+          "card/set label",
+          "market row",
+          "image or article URL"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokumon-asian-positive",
+          "coverage": {
+            "localities": [
+              "JP",
+              "KR",
+              "TW",
+              "CN",
+              "ID",
+              "TH",
+              "SEA"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "card",
+              "promo"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive per-market Asian rows only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Western rows collapse language and all omissions are catalogue gaps."
+          },
+          "knownPositiveObservationId": "obs-pokumon",
+          "boundary": {
+            "outsideScope": [
+              "Western language availability",
+              "missing market rows",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The provider's single Western English row cannot refute French, German or other Western printings."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "snkrdunk-listings",
+      "providerId": "snkrdunk",
+      "label": "SNKRDUNK photographed marketplace listings",
+      "state": "blocked-by-browser",
+      "failureState": "Listing availability and browser access are unstable.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain the original listing images and id at inspection time.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://snkrdunk.com/en/trading-cards/used/listings/{listingId}",
+        "parameters": [
+          "listingId"
+        ],
+        "pagination": "not applicable to a retained listing",
+        "expectedIdentifiers": [
+          "listing id",
+          "specimen images"
+        ]
+      },
+      "finishCapability": {
+        "mode": "specimen-observation",
+        "vocabulary": [
+          "visible finish/pattern/marking"
+        ],
+        "publicationForm": "photograph of the concrete card",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "snkrdunk-positive-specimen",
+          "coverage": {
+            "localities": [
+              "JP"
+            ],
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "productCategories": [
+              "marketplace-specimen"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "retained photographed listings only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "language",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Marketplace inventory is transient and never exhaustive."
+          },
+          "knownPositiveObservationId": "obs-snkrdunk",
+          "boundary": {
+            "outsideScope": [
+              "other listings",
+              "sold/removed stock",
+              "unphotographed variants"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A removed listing cannot refute the photographed specimen or any other printing."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "52poke-wiki",
+      "providerId": "52poke",
+      "label": "52Poké Chinese wiki pages and original images",
+      "state": "incomplete",
+      "failureState": "Coverage and field completeness vary by article; current retained fixture is image-level only.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain original image or wikitext with revision/page identity before accepting a claim.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://wiki.52poke.com/wiki/{page}",
+        "parameters": [
+          "page",
+          "revision or image path"
+        ],
+        "pagination": "follow category/API continuation when used; one article never closes a set",
+        "expectedIdentifiers": [
+          "page or image id",
+          "local set code",
+          "collector number"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no currently validated closed finish surface; images may become specimen observations",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "52poke-positive-record",
+          "coverage": {
+            "localities": [
+              "TW",
+              "CN"
+            ],
+            "languages": [
+              "T-Chinese",
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hant",
+              "Hans"
+            ],
+            "productCategories": [
+              "card",
+              "wiki-image"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "retained positive page/image records only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "image",
+            "local-set-identifier"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Article or image absence is not catalogue closure."
+          },
+          "knownPositiveObservationId": "obs-52poke",
+          "boundary": {
+            "outsideScope": [
+              "missing pages/images",
+              "unverified finish fields",
+              "complete CN/TW set enumeration"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained AS5a image proves that card only; it cannot close the surrounding set or another locality."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "koreanpokemoncards-site",
+      "providerId": "koreanpokemoncards",
+      "label": "Korean collector catalogue",
+      "state": "needs-evidence",
+      "failureState": "No usable retained positive fixture or validated finish surface is currently available.",
+      "accessMode": "none",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Do not activate an edge until a raw positive fixture and boundary review are committed.",
+      "query": {
+        "method": "NONE",
+        "endpoint": null,
+        "parameters": [],
+        "pagination": "unknown until the surface is re-audited",
+        "expectedIdentifiers": []
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "none validated",
+        "closedWithinScope": false
+      },
+      "coverageEdges": []
+    },
+    {
+      "surfaceId": "elitefourum-topics",
+      "providerId": "elitefourum",
+      "label": "Named collector-research topics",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain exact topic/table/post context and re-check edits before a new adjudication.",
+      "query": {
+        "method": "GET",
+        "endpoint": "exact retained topic URL",
+        "parameters": [],
+        "pagination": "capture every post/page used; only a reviewed table may claim closure",
+        "expectedIdentifiers": [
+          "topic id",
+          "post/table context",
+          "market or language row"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no validated finish closure",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "elitefourum-positive-research",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "collector-research"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive claims in the exact retained topic/table"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "edition"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A community topic is not globally exhaustive."
+          },
+          "knownPositiveObservationId": "obs-elitefourum",
+          "boundary": {
+            "outsideScope": [
+              "other products/topics",
+              "uncited replies",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A topic that discusses one product cannot refute a different release."
+          }
+        },
+        {
+          "edgeId": "elitefourum-black-star-language-table",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "black-star-promo-language-table"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "exact reviewed table at the named topic URL"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "edition"
+          ],
+          "exhaustive": true,
+          "absenceCapability": {
+            "enabled": true,
+            "dimensions": [
+              "language"
+            ],
+            "exactScopes": [
+              "https://www.elitefourum.com/t/black-star-promos-languages/36573"
+            ],
+            "rationale": "Owner-reviewed closed language table for the exact Black Star Promo rows; closure does not extend to any other topic or product."
+          },
+          "knownPositiveObservationId": "obs-elitefourum",
+          "outOfScopeChallengeObservationId": "obs-elitefourum-outside-table",
+          "boundary": {
+            "outsideScope": [
+              "every other Elite Fourum topic",
+              "products outside the named rows",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "bounded-absence",
+            "challenge": "The Eevee collector guide is retained as a positive, out-of-scope topic that cannot inherit the Black Star table's closure."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "ligapokemon-catalogue",
+      "providerId": "ligapokemon",
+      "label": "LigaPokemon marketplace catalogue",
+      "state": "blocked-by-browser",
+      "failureState": "Datacenter/script access is blocked; user-browser capture is required.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Re-capture the concrete listing in a browser and retain its card/edition parameters.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.ligapokemon.com.br/?view=cards/card",
+        "parameters": [
+          "card",
+          "ed",
+          "num"
+        ],
+        "pagination": "not applicable to one listing; search inventory is never closed",
+        "expectedIdentifiers": [
+          "edition code",
+          "collector number",
+          "localized listing title"
+        ]
+      },
+      "finishCapability": {
+        "mode": "specimen-observation",
+        "vocabulary": [
+          "visible or explicitly named finish"
+        ],
+        "publicationForm": "concrete marketplace listing/image",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "ligapokemon-latam-positive",
+          "coverage": {
+            "localities": [
+              "LATAM"
+            ],
+            "languages": [
+              "Portuguese",
+              "Spanish"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card",
+              "marketplace-card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive retained listings only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "finish",
+            "card-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Marketplace inventory and browser failure are not catalogue absence."
+          },
+          "knownPositiveObservationId": "obs-ligapokemon",
+          "boundary": {
+            "outsideScope": [
+              "unlisted LATAM cards",
+              "other regional Spanish",
+              "browser-blocked results"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A blocked or empty search says nothing about a LATAM release."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "cardmarket-products",
+      "providerId": "cardmarket",
+      "label": "Cardmarket product pages and images",
+      "state": "rate-limited",
+      "failureState": "Rolling rate limits and seller/inventory changes make scripted coverage unstable.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain exact product/listing id and image; re-check only within rate-limit policy.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.cardmarket.com/en/Pokemon/Products/Singles/{set}/{product}",
+        "parameters": [
+          "set slug",
+          "product slug",
+          "listing id when specimen-backed"
+        ],
+        "pagination": "product pages and seller listings are retained separately; language filters never close availability",
+        "expectedIdentifiers": [
+          "product URL",
+          "set slug",
+          "collector number",
+          "variant token"
+        ]
+      },
+      "finishCapability": {
+        "mode": "product-subtype",
+        "vocabulary": [
+          "product/listing-native rarity or finish label"
+        ],
+        "publicationForm": "catalogue product field or retained seller photo",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "cardmarket-positive",
+          "coverage": {
+            "localities": [
+              "WEST",
+              "JP",
+              "CN"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "marketplace-product",
+              "marketplace-image"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive retained product/listing records only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "product",
+            "image",
+            "finish",
+            "card-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Product taxonomy, seller stock and language filters are not exhaustive."
+          },
+          "knownPositiveObservationId": "obs-cardmarket",
+          "boundary": {
+            "outsideScope": [
+              "language-filter silence",
+              "missing products",
+              "seller inventory",
+              "other localities"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing listing or product filter result cannot refute a printing."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "pokemontcgio-api",
+      "providerId": "pokemontcgio",
+      "label": "pokemontcg.io v2 API",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain exact query and JSON card row; use only positively returned attribution/date fields.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://api.pokemontcg.io/v2/cards",
+        "parameters": [
+          "q",
+          "page",
+          "pageSize"
+        ],
+        "pagination": "follow page/pageSize and totalCount for the exact query; no other locality inherits coverage",
+        "expectedIdentifiers": [
+          "id",
+          "number",
+          "set.id",
+          "artist"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no accepted finish capability",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokemontcgio-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive API rows only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "artist",
+            "date",
+            "card-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The API is used for positive English attribution/date fields, not absence."
+          },
+          "knownPositiveObservationId": "obs-pokemontcgio",
+          "boundary": {
+            "outsideScope": [
+              "non-English releases",
+              "missing rows",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "An absent API row cannot refute a localized or otherwise uncatalogued card."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "limitlesstcg-cards",
+      "providerId": "limitlesstcg",
+      "label": "Limitless TCG card data",
+      "state": "needs-evidence",
+      "failureState": "No retained positive fixture is currently used by the verdict store.",
+      "accessMode": "none",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Do not activate until a raw fixture, query contract and boundary review are committed.",
+      "query": {
+        "method": "NONE",
+        "endpoint": null,
+        "parameters": [],
+        "pagination": "unknown until re-audited",
+        "expectedIdentifiers": []
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "none validated",
+        "closedWithinScope": false
+      },
+      "coverageEdges": []
+    },
+    {
+      "surfaceId": "play-pokemon-gallery",
+      "providerId": "play-pokemon",
+      "label": "Official Play! Pokémon reward gallery",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Capture exact series filter and gallery response before an adjudication.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://play.pokemon.com/en-us/rewards/gallery",
+        "parameters": [
+          "filter"
+        ],
+        "pagination": "capture the complete filtered gallery response; closure is filter-specific",
+        "expectedIdentifiers": [
+          "series filter",
+          "card/product identity",
+          "gallery finish presentation"
+        ]
+      },
+      "finishCapability": {
+        "mode": "set-profile",
+        "vocabulary": [
+          "official gallery-native treatment"
+        ],
+        "publicationForm": "complete filtered official gallery",
+        "closedWithinScope": true
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "play-series7-gallery",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "prize-pack-series-7"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "exact Series 7 filtered gallery"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "product"
+          ],
+          "exhaustive": true,
+          "absenceCapability": {
+            "enabled": true,
+            "dimensions": [
+              "finish"
+            ],
+            "exactScopes": [
+              "https://play.pokemon.com/en-us/rewards/gallery?filter=series7"
+            ],
+            "rationale": "The owner-reviewed official filtered gallery is closed only for Series 7."
+          },
+          "knownPositiveObservationId": "obs-play-series7",
+          "outOfScopeChallengeObservationId": "obs-play-outside-series7",
+          "boundary": {
+            "outsideScope": [
+              "every other series/filter",
+              "other localities",
+              "unfiltered search"
+            ],
+            "zeroResultMeans": "bounded-absence",
+            "challenge": "The Series 8 filter is retained as an out-of-scope counterexample and cannot inherit Series 7 closure."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "retailer-listings",
+      "providerId": "retailer-listing",
+      "label": "Named retailer product/specimen listings",
+      "state": "incomplete",
+      "failureState": "Listings are one-off, mutable and not catalogue-complete.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain retailer, exact listing URL and original identified image at review time.",
+      "query": {
+        "method": "GET",
+        "endpoint": "exact retailer listing URL",
+        "parameters": [],
+        "pagination": "not applicable to one accepted listing",
+        "expectedIdentifiers": [
+          "retailer",
+          "listing/product id",
+          "identified specimen"
+        ]
+      },
+      "finishCapability": {
+        "mode": "specimen-observation",
+        "vocabulary": [
+          "visible or explicitly named finish"
+        ],
+        "publicationForm": "one identified listing/image",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "retailer-positive-specimen",
+          "coverage": {
+            "localities": [
+              "WEST",
+              "TW"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "Latn",
+              "Hant"
+            ],
+            "productCategories": [
+              "retailer-product",
+              "retailer-specimen"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "positive retained listings only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish",
+            "product",
+            "language",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Retail inventory and listing removal are never absence evidence."
+          },
+          "knownPositiveObservationId": "obs-retailer",
+          "boundary": {
+            "outsideScope": [
+              "other retailers",
+              "out-of-stock products",
+              "unpictured variants"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing retailer listing does not refute a physical card."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "internal-derivations",
+      "providerId": "internal-derivation",
+      "label": "Versioned project derivations",
+      "state": "internal",
+      "failureState": null,
+      "accessMode": "internal",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Recompute when any cited input or derivation rule changes.",
+      "query": {
+        "method": "NON_URL",
+        "endpoint": null,
+        "parameters": [
+          "input stable ids",
+          "rule version"
+        ],
+        "pagination": "not applicable",
+        "expectedIdentifiers": [
+          "input stable ids",
+          "derivation rule",
+          "output stable id"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "derivations cannot create finish evidence",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "internal-derivation-positive",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "derived-attribution"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "explicit retained input/output identities only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "artist"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A derivation inherits positive inputs and can never manufacture absence."
+          },
+          "knownPositiveObservationId": "obs-internal-derivation",
+          "boundary": {
+            "outsideScope": [
+              "unmapped reprints",
+              "changed artwork",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "No matching derivation rule leaves the attribution unresolved."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "owner-attestations",
+      "providerId": "owner-attestation",
+      "label": "Recorded collection-owner attestations",
+      "state": "non-url",
+      "failureState": null,
+      "accessMode": "non-url",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain the exact statement, date and reviewer; corroborate or re-review before widening it.",
+      "query": {
+        "method": "NON_URL",
+        "endpoint": null,
+        "parameters": [
+          "attestation id",
+          "reviewer",
+          "date"
+        ],
+        "pagination": "not applicable",
+        "expectedIdentifiers": [
+          "attestation id",
+          "claim stable id"
+        ]
+      },
+      "finishCapability": {
+        "mode": "attested-observation",
+        "vocabulary": [
+          "exact owner-described finish"
+        ],
+        "publicationForm": "recorded statement plus cited image where available",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "owner-attestation-positive",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "attested-card",
+              "attested-specimen"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "exact claims named by the attestation"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "finish",
+            "edition"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An attestation is positive claim evidence; absence is a separate owner adjudication process."
+          },
+          "knownPositiveObservationId": "obs-owner-attestation",
+          "boundary": {
+            "outsideScope": [
+              "cards not named",
+              "unstated finishes/languages",
+              "collection completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Silence in an attestation cannot be read as a negative claim."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "inspected-specimens",
+      "providerId": "inspected-specimen",
+      "label": "Identified physical specimens and scans",
+      "state": "non-url",
+      "failureState": null,
+      "accessMode": "non-url",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Retain custody, original images, inspection date and identity comparison for every specimen.",
+      "query": {
+        "method": "NON_URL",
+        "endpoint": null,
+        "parameters": [
+          "specimen id",
+          "holder",
+          "inspection date"
+        ],
+        "pagination": "not applicable",
+        "expectedIdentifiers": [
+          "specimen id",
+          "card identity",
+          "image hash"
+        ]
+      },
+      "finishCapability": {
+        "mode": "specimen-observation",
+        "vocabulary": [
+          "visible finish",
+          "foil pattern",
+          "marking",
+          "card size"
+        ],
+        "publicationForm": "identified physical scan or photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "inspected-specimen-positive",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "physical-specimen"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the concrete inspected specimen only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "finish",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "One specimen proves its visible properties and nothing about unobserved printings."
+          },
+          "knownPositiveObservationId": "obs-inspected-specimen",
+          "boundary": {
+            "outsideScope": [
+              "other copies",
+              "unseen back/angle",
+              "unobserved finishes",
+              "complete set"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A photographed specimen cannot prove that no other treatment exists."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "cardmarket-listing-photos",
+      "providerId": "cardmarket-listing-photo",
+      "label": "Stable seller listing photographs",
+      "state": "needs-evidence",
+      "failureState": "No accepted stable seller-photo fixture is currently used by a verdict.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-09",
+      "freshnessPolicy": "Activate only with listing id, seller photo, capture date and specimen identity review.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "Cardmarket listing URL when retained",
+        "parameters": [
+          "listing id"
+        ],
+        "pagination": "not applicable to one retained seller listing",
+        "expectedIdentifiers": [
+          "listing id",
+          "seller image",
+          "card identity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "specimen-observation",
+        "vocabulary": [
+          "visible finish/pattern/marking"
+        ],
+        "publicationForm": "seller photograph of one identified card",
+        "closedWithinScope": false
+      },
+      "coverageEdges": []
     }
   ],
   "observations": [
-    {"observationId": "obs-tpci-checklist", "surfaceId": "tpci-checklists", "kind": "known-positive", "queryUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf", "queryParameters": {}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokemon-official", "recordKey": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf"}, "expectedIdentifiers": ["F0084-P01"], "validatesEdges": ["tpci-exact-checklist-finish"], "outcome": "Exact official checklist positively records the product's finish rows."},
-    {"observationId": "obs-tpci-outside-checklist", "surfaceId": "tpci-checklists", "kind": "out-of-scope-challenge", "queryUrl": "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/", "queryParameters": {}, "retrievedAt": "2026-08-09", "fixtureRef": {"kind": "inline-record", "record": {"recordClass": "official-page-outside-exact-checklists", "url": "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/", "absenceCapability": false}}, "expectedIdentifiers": ["official-page-outside-exact-checklists"], "validatesEdges": ["tpci-exact-checklist-finish"], "outcome": "Provider identity does not transfer checklist closure to this different surface."},
-    {"observationId": "obs-tpci-it-card-archive", "surfaceId": "tpci-localized-card-archive", "kind": "known-positive", "queryUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/", "queryParameters": {"locale": "it", "set": "pl2", "collectorNumber": "111"}, "retrievedAt": "2026-08-11", "fixtureRef": {"kind": "inline-record", "record": {"recordClass": "localized-card-detail", "canonicalUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/", "contentLanguage": "it", "cardName": "Snorlax", "setName": "Platino - L’Ascesa dei Rivali", "cardType": "Pokémon LIV.X", "cmsImage": "PL2_IT_111.png", "sourceUnitId": "U0368", "absenceCapability": false, "finishCapability": false}}, "expectedIdentifiers": ["U0368", "PL2_IT_111.png", "Pokémon LIV.X"], "validatesEdges": ["tpci-it-card-archive-positive"], "outcome": "The Italian locale detail page positively identifies RR 111 as an Italian Snorlax card without supplying finish or absence closure."},
-    {"observationId": "obs-tpci-latam-svp184", "surfaceId": "tpci-latam-spanish-card-assets", "kind": "known-positive", "queryUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png", "queryParameters": {"publisherLocale": "es-xl", "asset": "SVP_LA_184.png"}, "retrievedAt": "2026-08-11", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokemon-official", "recordKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png"}, "expectedIdentifiers": ["SVP LA 184", "Plancha Dinámica", "Aventuras Compartidas"], "validatesEdges": ["tpci-latam-spanish-card-asset-positive"], "outcome": "The retained official Latin-American asset visibly identifies the LATAM/es-419 release by its printed LA modifier, translation and branding."},
-    {"observationId": "obs-tpci-eu-svp184", "surfaceId": "tpci-eu-spanish-card-assets", "kind": "known-positive", "queryUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png", "queryParameters": {"publisherLocale": "es-es", "asset": "SVP_ES_184.png"}, "retrievedAt": "2026-08-11", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokemon-official", "recordKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png"}, "expectedIdentifiers": ["SVP ES 184", "Presión Dinámica", "Juntos de Aventuras"], "validatesEdges": ["tpci-eu-spanish-card-asset-positive"], "outcome": "The retained official European-Spanish comparison visibly identifies a different printed ES code, translation and branding."},
-    {"observationId": "obs-jp-card-search", "surfaceId": "jp-card-search", "kind": "known-positive", "queryUrl": "https://www.pokemon-card.com/card-search/details.php/card/1082/regu/all", "queryParameters": {"card": "1082", "regu": "all"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokemon-card-jp", "recordKey": "https://www.pokemon-card.com/card-search/details.php/card/1082/regu/all"}, "expectedIdentifiers": ["card/1082"], "validatesEdges": ["jp-card-search-positive"], "outcome": "A returned official detail record is positive card/language evidence."},
-    {"observationId": "obs-jp-product-page", "surfaceId": "jp-product-pages", "kind": "known-positive", "queryUrl": "https://www.pokemon-card.com/ex/m2a/index.html", "queryParameters": {"product": "m2a"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokemon-card-jp", "recordKey": "https://www.pokemon-card.com/ex/m2a/index.html"}, "expectedIdentifiers": ["m2a"], "validatesEdges": ["jp-product-page-positive"], "outcome": "Retained official product prose positively supports the named finish rule."},
-    {"observationId": "obs-asia-card-search", "surfaceId": "asia-card-search", "kind": "known-positive", "queryUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045", "queryParameters": {"locale": "id", "detail": "10045"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokemon-card-asia", "recordKey": "https://asia.pokemon-card.com/id/card-search/detail/10045"}, "expectedIdentifiers": ["detail/10045"], "validatesEdges": ["asia-card-search-positive"], "outcome": "The Indonesian locale detail is positive localized card evidence."},
-    {"observationId": "obs-tcgdex-west", "surfaceId": "tcgdex-api", "kind": "known-positive", "queryUrl": "https://api.tcgdex.net/v2/en/cards/base2-11", "queryParameters": {"locale": "en", "id": "base2-11"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "tcgdex", "recordKey": "https://api.tcgdex.net/v2/en/cards/base2-11"}, "expectedIdentifiers": ["base2-11"], "validatesEdges": ["tcgdex-west-positive"], "outcome": "A localized API row positively establishes the returned card and positive flags."},
-    {"observationId": "obs-tcgdex-asia", "surfaceId": "tcgdex-api", "kind": "known-positive", "queryUrl": "https://api.tcgdex.net/v2/id/cards/SV2a-143", "queryParameters": {"locale": "id", "id": "SV2a-143"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "tcgdex", "recordKey": "https://api.tcgdex.net/v2/id/cards/SV2a-143"}, "expectedIdentifiers": ["SV2a-143"], "validatesEdges": ["tcgdex-asia-thin-positive"], "outcome": "A positive Indonesian row demonstrates locale capability without claiming complete Asian population."},
-    {"observationId": "obs-bulbapedia", "surfaceId": "bulbapedia-mediawiki", "kind": "known-positive", "queryUrl": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "queryParameters": {"page": "151 (TCG)", "prop": "wikitext"}, "retrievedAt": "2026-07-31", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "bulbapedia", "recordKey": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)"}, "expectedIdentifiers": ["151 (TCG)"], "validatesEdges": ["bulbapedia-positive"], "outcome": "A retained article/revision supplies positive set, release or rarity fields only."},
-    {"observationId": "obs-tcgcsv", "surfaceId": "tcgcsv-api", "kind": "known-positive", "queryUrl": "https://tcgcsv.com/docs", "queryParameters": {}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "tcgcsv", "recordKey": "https://tcgcsv.com/docs"}, "expectedIdentifiers": ["TCGCSV documentation"], "validatesEdges": ["tcgcsv-positive"], "outcome": "The documented product/subtype surface supports positive catalogue rows."},
-    {"observationId": "obs-psa", "surfaceId": "psa-registry", "kind": "known-positive", "queryUrl": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636", "queryParameters": {"composition": "21636"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "psa", "recordKey": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636"}, "expectedIdentifiers": ["composition/21636", "F0525-P01"], "validatesEdges": ["psa-positive-specimen"], "outcome": "Named PSA registry varieties are strong positive specimen evidence only."},
-    {"observationId": "obs-cgc", "surfaceId": "cgc-registry", "kind": "known-positive", "queryUrl": "https://www.cgccards.com/registry/trading-cards/competitive-sets/102462/", "queryParameters": {"setId": "102462"}, "retrievedAt": "2026-08-05", "fixtureRef": {"kind": "inline-record", "record": {"registrySetId": "102462", "title": "Snorlax – Jungle Holo – 11/64 – All Languages Master Set", "owner": "SnorlaxCollective", "recordClass": "personal-competitive-registry-set", "sourceIssue": 117, "absenceCapability": false}}, "expectedIdentifiers": ["registrySetId=102462", "owner=SnorlaxCollective"], "validatesEdges": ["cgc-positive-specimen"], "outcome": "The personal CGC registry set establishes concrete retained specimens, not collection or catalogue closure."},
-    {"observationId": "obs-pokumon", "surfaceId": "pokumon-search", "kind": "known-positive", "queryUrl": "https://pokumon.com/?s=snorlax+s-p", "queryParameters": {"s": "snorlax s-p"}, "retrievedAt": "2026-07-22", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokumon", "recordKey": "https://pokumon.com/?s=snorlax+s-p"}, "expectedIdentifiers": ["snorlax s-p", "U0523"], "validatesEdges": ["pokumon-asian-positive"], "outcome": "A per-market promo row is positive evidence for that returned printing."},
-    {"observationId": "obs-snkrdunk", "surfaceId": "snkrdunk-listings", "kind": "known-positive", "queryUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN", "queryParameters": {"listingId": "01KEKJJGWGHJHMN4EV1C2J8CXN"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "snkrdunk", "recordKey": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN"}, "expectedIdentifiers": ["01KEKJJGWGHJHMN4EV1C2J8CXN", "F0231-P01"], "validatesEdges": ["snkrdunk-positive-specimen"], "outcome": "The retained listing photograph establishes visible properties of that specimen."},
-    {"observationId": "obs-52poke", "surfaceId": "52poke-wiki", "kind": "known-positive", "queryUrl": "https://s1.52poke.com/wiki/7/7b/AS5a142.png", "queryParameters": {"image": "AS5a142.png"}, "retrievedAt": "2026-08-09", "fixtureRef": {"kind": "inline-record", "record": {"imageUrl": "https://s1.52poke.com/wiki/7/7b/AS5a142.png", "locality": "TW", "language": "T-Chinese", "localSetCode": "AS5a", "collectorNumber": "142", "sourceRecord": "verification/source_first_prints.json"}}, "expectedIdentifiers": ["AS5a", "142"], "validatesEdges": ["52poke-positive-record"], "outcome": "The retained original image positively identifies one Traditional-Chinese card record."},
-    {"observationId": "obs-elitefourum", "surfaceId": "elitefourum-topics", "kind": "known-positive", "queryUrl": "https://www.elitefourum.com/t/black-star-promos-languages/36573", "queryParameters": {}, "retrievedAt": "2026-07-22", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "elitefourum", "recordKey": "https://www.elitefourum.com/t/black-star-promos-languages/36573"}, "expectedIdentifiers": ["topic/36573", "U0497"], "validatesEdges": ["elitefourum-positive-research", "elitefourum-black-star-language-table"], "outcome": "The exact reviewed table provides positive language rows and bounded closure only for those rows."},
-    {"observationId": "obs-elitefourum-outside-table", "surfaceId": "elitefourum-topics", "kind": "out-of-scope-challenge", "queryUrl": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616", "queryParameters": {}, "retrievedAt": "2026-08-02", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "elitefourum", "recordKey": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616"}, "expectedIdentifiers": ["topic/62616"], "validatesEdges": ["elitefourum-black-star-language-table"], "outcome": "A different positive topic is outside the Black Star table and inherits no absence capability."},
-    {"observationId": "obs-ligapokemon", "surfaceId": "ligapokemon-catalogue", "kind": "known-positive", "queryUrl": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117%2F096)&ed=PPPS7&num=117", "queryParameters": {"ed": "PPPS7", "num": "117"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "ligapokemon", "recordKey": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117%2F096)&ed=PPPS7&num=117"}, "expectedIdentifiers": ["PPPS7", "117", "U0329"], "validatesEdges": ["ligapokemon-latam-positive"], "outcome": "The retained Brazilian listing is positive Portuguese-market evidence."},
-    {"observationId": "obs-cardmarket", "surfaceId": "cardmarket-products", "kind": "known-positive", "queryUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/151/Snorlax-MEW143", "queryParameters": {"set": "151", "product": "Snorlax-MEW143"}, "retrievedAt": "2026-07-21", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "cardmarket", "recordKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/151/Snorlax-MEW143"}, "expectedIdentifiers": ["MEW143"], "validatesEdges": ["cardmarket-positive"], "outcome": "The canonical product page is positive catalogue identity evidence only."},
-    {"observationId": "obs-pokemontcgio", "surfaceId": "pokemontcgio-api", "kind": "known-positive", "queryUrl": "https://api.pokemontcg.io/v2/cards", "queryParameters": {"source": "committed artist/date records"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "pokemontcgio", "recordKey": "https://api.pokemontcg.io/v2/cards"}, "expectedIdentifiers": ["API v2 cards", "artist"], "validatesEdges": ["pokemontcgio-positive"], "outcome": "Returned English API fields positively support artist and date attribution."},
-    {"observationId": "obs-play-series7", "surfaceId": "play-pokemon-gallery", "kind": "known-positive", "queryUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7", "queryParameters": {"filter": "series7"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "play-pokemon", "recordKey": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7"}, "expectedIdentifiers": ["series7", "F0271-P01"], "validatesEdges": ["play-series7-gallery"], "outcome": "The exact filtered official gallery supplies bounded Series 7 finish rows."},
-    {"observationId": "obs-play-outside-series7", "surfaceId": "play-pokemon-gallery", "kind": "out-of-scope-challenge", "queryUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series8", "queryParameters": {"filter": "series8"}, "retrievedAt": "2026-08-09", "fixtureRef": {"kind": "inline-record", "record": {"surface": "official-gallery", "filter": "series8", "outsideAbsenceScope": "series7", "absenceCapabilityInherited": false}}, "expectedIdentifiers": ["filter=series8"], "validatesEdges": ["play-series7-gallery"], "outcome": "A different series filter is outside the exact closure edge."},
-    {"observationId": "obs-retailer", "surfaceId": "retailer-listings", "kind": "known-positive", "queryUrl": "https://exorgames.com/products/snorlax-10-101-delta-species-stamped-ex-dragon-frontiers", "queryParameters": {}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "retailer-listing", "recordKey": "https://exorgames.com/products/snorlax-10-101-delta-species-stamped-ex-dragon-frontiers"}, "expectedIdentifiers": ["10/101", "F0084-P02"], "validatesEdges": ["retailer-positive-specimen"], "outcome": "The identified retailer specimen is positive finish evidence for that printing."},
-    {"observationId": "obs-internal-derivation", "surfaceId": "internal-derivations", "kind": "known-positive", "queryUrl": null, "queryParameters": {"evidenceClass": "evidence:internal-derivation"}, "retrievedAt": "2026-08-09", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "internal-derivation", "recordKey": "evidence:internal-derivation"}, "expectedIdentifiers": ["evidence:internal-derivation"], "validatesEdges": ["internal-derivation-positive"], "outcome": "Versioned reprint rules retain their input identities and positive artist attribution."},
-    {"observationId": "obs-owner-attestation", "surfaceId": "owner-attestations", "kind": "known-positive", "queryUrl": null, "queryParameters": {"evidenceClass": "evidence:owner-attestation"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "owner-attestation", "recordKey": "evidence:owner-attestation"}, "expectedIdentifiers": ["evidence:owner-attestation", "U0097"], "validatesEdges": ["owner-attestation-positive"], "outcome": "Recorded owner statements positively support only their named claims."},
-    {"observationId": "obs-inspected-specimen", "surfaceId": "inspected-specimens", "kind": "known-positive", "queryUrl": null, "queryParameters": {"evidenceClass": "evidence:inspected-specimen"}, "retrievedAt": "2026-07-23", "fixtureRef": {"kind": "source-registry-evidence", "providerId": "inspected-specimen", "recordKey": "evidence:inspected-specimen"}, "expectedIdentifiers": ["evidence:inspected-specimen", "U0100"], "validatesEdges": ["inspected-specimen-positive"], "outcome": "A retained physical photograph establishes visible properties of its identified specimen."}
+    {
+      "observationId": "obs-tpci-checklist",
+      "surfaceId": "tpci-checklists",
+      "kind": "known-positive",
+      "queryUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+      "queryParameters": {},
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-official",
+        "recordKey": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf"
+      },
+      "expectedIdentifiers": [
+        "F0084-P01"
+      ],
+      "validatesEdges": [
+        "tpci-exact-checklist-finish"
+      ],
+      "outcome": "Exact official checklist positively records the product's finish rows."
+    },
+    {
+      "observationId": "obs-tpci-outside-checklist",
+      "surfaceId": "tpci-checklists",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/",
+      "queryParameters": {},
+      "retrievedAt": "2026-08-09",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "recordClass": "official-page-outside-exact-checklists",
+          "url": "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/",
+          "absenceCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "official-page-outside-exact-checklists"
+      ],
+      "validatesEdges": [
+        "tpci-exact-checklist-finish"
+      ],
+      "outcome": "Provider identity does not transfer checklist closure to this different surface."
+    },
+    {
+      "observationId": "obs-tpci-it-card-archive",
+      "surfaceId": "tpci-localized-card-archive",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/",
+      "queryParameters": {
+        "locale": "it",
+        "set": "pl2",
+        "collectorNumber": "111"
+      },
+      "retrievedAt": "2026-08-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "recordClass": "localized-card-detail",
+          "canonicalUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/",
+          "contentLanguage": "it",
+          "cardName": "Snorlax",
+          "setName": "Platino - L’Ascesa dei Rivali",
+          "cardType": "Pokémon LIV.X",
+          "cmsImage": "PL2_IT_111.png",
+          "sourceUnitId": "U0368",
+          "absenceCapability": false,
+          "finishCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "U0368",
+        "PL2_IT_111.png",
+        "Pokémon LIV.X"
+      ],
+      "validatesEdges": [
+        "tpci-it-card-archive-positive"
+      ],
+      "outcome": "The Italian locale detail page positively identifies RR 111 as an Italian Snorlax card without supplying finish or absence closure."
+    },
+    {
+      "observationId": "obs-tpci-latam-svp184",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "kind": "known-positive",
+      "queryUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+      "queryParameters": {
+        "publisherLocale": "es-xl",
+        "asset": "SVP_LA_184.png"
+      },
+      "retrievedAt": "2026-08-11",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-official",
+        "recordKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png"
+      },
+      "expectedIdentifiers": [
+        "SVP LA 184",
+        "Plancha Dinámica",
+        "Aventuras Compartidas"
+      ],
+      "validatesEdges": [
+        "tpci-latam-spanish-card-asset-positive"
+      ],
+      "outcome": "The retained official Latin-American asset visibly identifies the LATAM/es-419 release by its printed LA modifier, translation and branding."
+    },
+    {
+      "observationId": "obs-tpci-eu-svp184",
+      "surfaceId": "tpci-eu-spanish-card-assets",
+      "kind": "known-positive",
+      "queryUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+      "queryParameters": {
+        "publisherLocale": "es-es",
+        "asset": "SVP_ES_184.png"
+      },
+      "retrievedAt": "2026-08-11",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-official",
+        "recordKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png"
+      },
+      "expectedIdentifiers": [
+        "SVP ES 184",
+        "Presión Dinámica",
+        "Juntos de Aventuras"
+      ],
+      "validatesEdges": [
+        "tpci-eu-spanish-card-asset-positive"
+      ],
+      "outcome": "The retained official European-Spanish comparison visibly identifies a different printed ES code, translation and branding."
+    },
+    {
+      "observationId": "obs-jp-card-search",
+      "surfaceId": "jp-card-search",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon-card.com/card-search/details.php/card/1082/regu/all",
+      "queryParameters": {
+        "card": "1082",
+        "regu": "all"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-card-jp",
+        "recordKey": "https://www.pokemon-card.com/card-search/details.php/card/1082/regu/all"
+      },
+      "expectedIdentifiers": [
+        "card/1082"
+      ],
+      "validatesEdges": [
+        "jp-card-search-positive"
+      ],
+      "outcome": "A returned official detail record is positive card/language evidence."
+    },
+    {
+      "observationId": "obs-jp-product-page",
+      "surfaceId": "jp-product-pages",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon-card.com/ex/m2a/index.html",
+      "queryParameters": {
+        "product": "m2a"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-card-jp",
+        "recordKey": "https://www.pokemon-card.com/ex/m2a/index.html"
+      },
+      "expectedIdentifiers": [
+        "m2a"
+      ],
+      "validatesEdges": [
+        "jp-product-page-positive"
+      ],
+      "outcome": "Retained official product prose positively supports the named finish rule."
+    },
+    {
+      "observationId": "obs-asia-card-search",
+      "surfaceId": "asia-card-search",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045",
+      "queryParameters": {
+        "locale": "id",
+        "detail": "10045"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-card-asia",
+        "recordKey": "https://asia.pokemon-card.com/id/card-search/detail/10045"
+      },
+      "expectedIdentifiers": [
+        "detail/10045"
+      ],
+      "validatesEdges": [
+        "asia-card-search-positive"
+      ],
+      "outcome": "The Indonesian locale detail is positive localized card evidence."
+    },
+    {
+      "observationId": "obs-tcgdex-west",
+      "surfaceId": "tcgdex-api",
+      "kind": "known-positive",
+      "queryUrl": "https://api.tcgdex.net/v2/en/cards/base2-11",
+      "queryParameters": {
+        "locale": "en",
+        "id": "base2-11"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "tcgdex",
+        "recordKey": "https://api.tcgdex.net/v2/en/cards/base2-11"
+      },
+      "expectedIdentifiers": [
+        "base2-11"
+      ],
+      "validatesEdges": [
+        "tcgdex-west-positive"
+      ],
+      "outcome": "A localized API row positively establishes the returned card and positive flags."
+    },
+    {
+      "observationId": "obs-tcgdex-asia",
+      "surfaceId": "tcgdex-api",
+      "kind": "known-positive",
+      "queryUrl": "https://api.tcgdex.net/v2/id/cards/SV2a-143",
+      "queryParameters": {
+        "locale": "id",
+        "id": "SV2a-143"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "tcgdex",
+        "recordKey": "https://api.tcgdex.net/v2/id/cards/SV2a-143"
+      },
+      "expectedIdentifiers": [
+        "SV2a-143"
+      ],
+      "validatesEdges": [
+        "tcgdex-asia-thin-positive"
+      ],
+      "outcome": "A positive Indonesian row demonstrates locale capability without claiming complete Asian population."
+    },
+    {
+      "observationId": "obs-bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "kind": "known-positive",
+      "queryUrl": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)",
+      "queryParameters": {
+        "page": "151 (TCG)",
+        "prop": "wikitext"
+      },
+      "retrievedAt": "2026-07-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "bulbapedia",
+        "recordKey": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)"
+      },
+      "expectedIdentifiers": [
+        "151 (TCG)"
+      ],
+      "validatesEdges": [
+        "bulbapedia-positive"
+      ],
+      "outcome": "A retained article/revision supplies positive set, release or rarity fields only."
+    },
+    {
+      "observationId": "obs-tcgcsv",
+      "surfaceId": "tcgcsv-api",
+      "kind": "known-positive",
+      "queryUrl": "https://tcgcsv.com/docs",
+      "queryParameters": {},
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "tcgcsv",
+        "recordKey": "https://tcgcsv.com/docs"
+      },
+      "expectedIdentifiers": [
+        "TCGCSV documentation"
+      ],
+      "validatesEdges": [
+        "tcgcsv-positive"
+      ],
+      "outcome": "The documented product/subtype surface supports positive catalogue rows."
+    },
+    {
+      "observationId": "obs-psa",
+      "surfaceId": "psa-registry",
+      "kind": "known-positive",
+      "queryUrl": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636",
+      "queryParameters": {
+        "composition": "21636"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "psa",
+        "recordKey": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636"
+      },
+      "expectedIdentifiers": [
+        "composition/21636",
+        "F0525-P01"
+      ],
+      "validatesEdges": [
+        "psa-positive-specimen"
+      ],
+      "outcome": "Named PSA registry varieties are strong positive specimen evidence only."
+    },
+    {
+      "observationId": "obs-cgc",
+      "surfaceId": "cgc-registry",
+      "kind": "known-positive",
+      "queryUrl": "https://www.cgccards.com/registry/trading-cards/competitive-sets/102462/",
+      "queryParameters": {
+        "setId": "102462"
+      },
+      "retrievedAt": "2026-08-05",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "registrySetId": "102462",
+          "title": "Snorlax – Jungle Holo – 11/64 – All Languages Master Set",
+          "owner": "SnorlaxCollective",
+          "recordClass": "personal-competitive-registry-set",
+          "sourceIssue": 117,
+          "absenceCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "registrySetId=102462",
+        "owner=SnorlaxCollective"
+      ],
+      "validatesEdges": [
+        "cgc-positive-specimen"
+      ],
+      "outcome": "The personal CGC registry set establishes concrete retained specimens, not collection or catalogue closure."
+    },
+    {
+      "observationId": "obs-pokumon",
+      "surfaceId": "pokumon-search",
+      "kind": "known-positive",
+      "queryUrl": "https://pokumon.com/?s=snorlax+s-p",
+      "queryParameters": {
+        "s": "snorlax s-p"
+      },
+      "retrievedAt": "2026-07-22",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokumon",
+        "recordKey": "https://pokumon.com/?s=snorlax+s-p"
+      },
+      "expectedIdentifiers": [
+        "snorlax s-p",
+        "U0523"
+      ],
+      "validatesEdges": [
+        "pokumon-asian-positive"
+      ],
+      "outcome": "A per-market promo row is positive evidence for that returned printing."
+    },
+    {
+      "observationId": "obs-snkrdunk",
+      "surfaceId": "snkrdunk-listings",
+      "kind": "known-positive",
+      "queryUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
+      "queryParameters": {
+        "listingId": "01KEKJJGWGHJHMN4EV1C2J8CXN"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "snkrdunk",
+        "recordKey": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN"
+      },
+      "expectedIdentifiers": [
+        "01KEKJJGWGHJHMN4EV1C2J8CXN",
+        "F0231-P01"
+      ],
+      "validatesEdges": [
+        "snkrdunk-positive-specimen"
+      ],
+      "outcome": "The retained listing photograph establishes visible properties of that specimen."
+    },
+    {
+      "observationId": "obs-52poke",
+      "surfaceId": "52poke-wiki",
+      "kind": "known-positive",
+      "queryUrl": "https://s1.52poke.com/wiki/7/7b/AS5a142.png",
+      "queryParameters": {
+        "image": "AS5a142.png"
+      },
+      "retrievedAt": "2026-08-09",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "imageUrl": "https://s1.52poke.com/wiki/7/7b/AS5a142.png",
+          "locality": "TW",
+          "language": "T-Chinese",
+          "localSetCode": "AS5a",
+          "collectorNumber": "142",
+          "sourceRecord": "verification/source_first_prints.json"
+        }
+      },
+      "expectedIdentifiers": [
+        "AS5a",
+        "142"
+      ],
+      "validatesEdges": [
+        "52poke-positive-record"
+      ],
+      "outcome": "The retained original image positively identifies one Traditional-Chinese card record."
+    },
+    {
+      "observationId": "obs-elitefourum",
+      "surfaceId": "elitefourum-topics",
+      "kind": "known-positive",
+      "queryUrl": "https://www.elitefourum.com/t/black-star-promos-languages/36573",
+      "queryParameters": {},
+      "retrievedAt": "2026-07-22",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "elitefourum",
+        "recordKey": "https://www.elitefourum.com/t/black-star-promos-languages/36573"
+      },
+      "expectedIdentifiers": [
+        "topic/36573",
+        "U0497"
+      ],
+      "validatesEdges": [
+        "elitefourum-positive-research",
+        "elitefourum-black-star-language-table"
+      ],
+      "outcome": "The exact reviewed table provides positive language rows and bounded closure only for those rows."
+    },
+    {
+      "observationId": "obs-elitefourum-outside-table",
+      "surfaceId": "elitefourum-topics",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
+      "queryParameters": {},
+      "retrievedAt": "2026-08-02",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "elitefourum",
+        "recordKey": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616"
+      },
+      "expectedIdentifiers": [
+        "topic/62616"
+      ],
+      "validatesEdges": [
+        "elitefourum-black-star-language-table"
+      ],
+      "outcome": "A different positive topic is outside the Black Star table and inherits no absence capability."
+    },
+    {
+      "observationId": "obs-ligapokemon",
+      "surfaceId": "ligapokemon-catalogue",
+      "kind": "known-positive",
+      "queryUrl": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117%2F096)&ed=PPPS7&num=117",
+      "queryParameters": {
+        "ed": "PPPS7",
+        "num": "117"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "ligapokemon",
+        "recordKey": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117%2F096)&ed=PPPS7&num=117"
+      },
+      "expectedIdentifiers": [
+        "PPPS7",
+        "117",
+        "U0329"
+      ],
+      "validatesEdges": [
+        "ligapokemon-latam-positive"
+      ],
+      "outcome": "The retained Brazilian listing is positive Portuguese-market evidence."
+    },
+    {
+      "observationId": "obs-cardmarket",
+      "surfaceId": "cardmarket-products",
+      "kind": "known-positive",
+      "queryUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/151/Snorlax-MEW143",
+      "queryParameters": {
+        "set": "151",
+        "product": "Snorlax-MEW143"
+      },
+      "retrievedAt": "2026-07-21",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "cardmarket",
+        "recordKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/151/Snorlax-MEW143"
+      },
+      "expectedIdentifiers": [
+        "MEW143"
+      ],
+      "validatesEdges": [
+        "cardmarket-positive"
+      ],
+      "outcome": "The canonical product page is positive catalogue identity evidence only."
+    },
+    {
+      "observationId": "obs-pokemontcgio",
+      "surfaceId": "pokemontcgio-api",
+      "kind": "known-positive",
+      "queryUrl": "https://api.pokemontcg.io/v2/cards",
+      "queryParameters": {
+        "source": "committed artist/date records"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemontcgio",
+        "recordKey": "https://api.pokemontcg.io/v2/cards"
+      },
+      "expectedIdentifiers": [
+        "API v2 cards",
+        "artist"
+      ],
+      "validatesEdges": [
+        "pokemontcgio-positive"
+      ],
+      "outcome": "Returned English API fields positively support artist and date attribution."
+    },
+    {
+      "observationId": "obs-play-series7",
+      "surfaceId": "play-pokemon-gallery",
+      "kind": "known-positive",
+      "queryUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
+      "queryParameters": {
+        "filter": "series7"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "play-pokemon",
+        "recordKey": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7"
+      },
+      "expectedIdentifiers": [
+        "series7",
+        "F0271-P01"
+      ],
+      "validatesEdges": [
+        "play-series7-gallery"
+      ],
+      "outcome": "The exact filtered official gallery supplies bounded Series 7 finish rows."
+    },
+    {
+      "observationId": "obs-play-outside-series7",
+      "surfaceId": "play-pokemon-gallery",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series8",
+      "queryParameters": {
+        "filter": "series8"
+      },
+      "retrievedAt": "2026-08-09",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "surface": "official-gallery",
+          "filter": "series8",
+          "outsideAbsenceScope": "series7",
+          "absenceCapabilityInherited": false
+        }
+      },
+      "expectedIdentifiers": [
+        "filter=series8"
+      ],
+      "validatesEdges": [
+        "play-series7-gallery"
+      ],
+      "outcome": "A different series filter is outside the exact closure edge."
+    },
+    {
+      "observationId": "obs-retailer",
+      "surfaceId": "retailer-listings",
+      "kind": "known-positive",
+      "queryUrl": "https://exorgames.com/products/snorlax-10-101-delta-species-stamped-ex-dragon-frontiers",
+      "queryParameters": {},
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "retailer-listing",
+        "recordKey": "https://exorgames.com/products/snorlax-10-101-delta-species-stamped-ex-dragon-frontiers"
+      },
+      "expectedIdentifiers": [
+        "10/101",
+        "F0084-P02"
+      ],
+      "validatesEdges": [
+        "retailer-positive-specimen"
+      ],
+      "outcome": "The identified retailer specimen is positive finish evidence for that printing."
+    },
+    {
+      "observationId": "obs-internal-derivation",
+      "surfaceId": "internal-derivations",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:internal-derivation"
+      },
+      "retrievedAt": "2026-08-09",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "internal-derivation",
+        "recordKey": "evidence:internal-derivation"
+      },
+      "expectedIdentifiers": [
+        "evidence:internal-derivation"
+      ],
+      "validatesEdges": [
+        "internal-derivation-positive"
+      ],
+      "outcome": "Versioned reprint rules retain their input identities and positive artist attribution."
+    },
+    {
+      "observationId": "obs-owner-attestation",
+      "surfaceId": "owner-attestations",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:owner-attestation"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "owner-attestation",
+        "recordKey": "evidence:owner-attestation"
+      },
+      "expectedIdentifiers": [
+        "evidence:owner-attestation",
+        "U0097"
+      ],
+      "validatesEdges": [
+        "owner-attestation-positive"
+      ],
+      "outcome": "Recorded owner statements positively support only their named claims."
+    },
+    {
+      "observationId": "obs-inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:inspected-specimen"
+      },
+      "retrievedAt": "2026-07-23",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "inspected-specimen",
+        "recordKey": "evidence:inspected-specimen"
+      },
+      "expectedIdentifiers": [
+        "evidence:inspected-specimen",
+        "U0100"
+      ],
+      "validatesEdges": [
+        "inspected-specimen-positive"
+      ],
+      "outcome": "A retained physical photograph establishes visible properties of its identified specimen."
+    },
+    {
+      "observationId": "obs-bulbapedia-historical-index",
+      "surfaceId": "bulbapedia-mediawiki",
+      "kind": "known-positive",
+      "queryUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "action": "parse",
+        "prop": "wikitext",
+        "oldid": 4567865,
+        "format": "json",
+        "formatversion": 2
+      },
+      "retrievedAt": "2026-08-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+          "revisionId": 4567865,
+          "section": "English sets",
+          "positiveRows": {
+            "Dutch": 3,
+            "Polish": 2,
+            "Russian": 9
+          },
+          "absenceCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "revisionId=4567865",
+        "Dutch=3",
+        "Polish=2",
+        "Russian=9"
+      ],
+      "validatesEdges": [
+        "bulbapedia-historical-index-positive"
+      ],
+      "outcome": "The retained revision exposes three Dutch, two Polish and nine Russian positive physical-set cells; every one is staged without interpreting dashes as absence."
+    }
   ]
 }

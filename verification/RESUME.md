@@ -467,6 +467,24 @@ search results and the European catalogue carry no negative evidence for LATAM. 
 Hungarian remain the already-contradicted legacy claims outside the locality universe; this work
 does not create tracks for either.
 
+Issue #193 activates one shared, revision-pinned historical adapter for Dutch, Polish and Russian.
+Bulbapedia MediaWiki revision `4567865` is retained as raw wikitext and parsed only inside its
+`English sets` section. Source-adapter run `20260811T144120Z` accounts for every positive target
+cell: three Dutch sets (*Basis Set*, *Jungle*, *Fossiel*), two Polish sets (*Diament i Perła*,
+*Tajemne Skarby*), and nine Russian sets from *Стартовый Набор Калоса* through *Турбо Импульс*.
+The run contains 1,621 rows across all active source slices, with no request or accounting error.
+Malformed colspans in unrelated language tables are ignored; every table containing a target
+language must still have an exact row width. The page's dashes and omitted product categories are
+unknown, never absence evidence.
+
+Card-discovery run `20260811T144357Z` then replays only seven already-confirmed units inside those
+positive set rows: Dutch Jungle 11 and 27, Polish DP 37, and Russian KSS 26, FLF 80 V1/V2 and BKT
+118. This is deliberately not a Bulbapedia `card-existence` claim: the index proves the physical
+language set row, while the retained unit source preserves the card, collector number, set code,
+variant and deck identity. The complete run accounts for 246 card records across fourteen slices,
+with no run error and no verdict mutation. Promos, decks beyond the retained KSS identity, later
+Russian history and every unlisted product remain explicit specialist gaps.
+
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
 Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.

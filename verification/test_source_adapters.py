@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import source_adapters as adapters  # noqa: E402
+from bulbapedia_historical import parse_historical_index  # noqa: E402
 
 
 ADAPTER = {
@@ -196,6 +197,71 @@ class SourceAdapterTests(unittest.TestCase):
             projection = adapters.build_projection(contract, manifest, run_dir, None)
         self.assertEqual(projection["slices"][0]["terminalState"], "needs-evidence")
         self.assertIn("incomplete-pagination", {row["code"] for row in projection["runErrors"]})
+
+    def test_historical_wikitext_expands_colspans_and_keeps_local_branding(self):
+        raw = json.dumps({"parse": {
+            "title": "Historical index",
+            "revid": 4567865,
+            "wikitext": """==English sets==
+===Original Series===
+{|
+|-
+! Symbol
+! English
+! Dutch
+! French
+|-
+| symbol
+| {{TCG|Jungle}}
+| colspan=2 | Jungle
+|}
+===Diamond & Pearl Series===
+{|
+|-
+! Symbol
+! English
+! Polish
+|-
+| symbol
+| {{TCG|Diamond & Pearl}}
+| Diament i Perła
+|}
+==Japanese sets==""",
+        }}, ensure_ascii=False).encode("utf-8")
+        dutch = parse_historical_index(
+            raw, "Dutch", expected_revision=4567865, expected_title="Historical index"
+        )
+        polish = parse_historical_index(
+            raw, "Polish", expected_revision=4567865, expected_title="Historical index"
+        )
+        self.assertEqual([(row["id"], row["name"]) for row in dutch], [("Jungle", "Jungle")])
+        self.assertEqual(
+            [(row["id"], row["name"]) for row in polish],
+            [("Diamond & Pearl", "Diament i Perła")],
+        )
+
+    def test_retained_historical_run_accounts_all_three_language_columns(self):
+        staging = json.loads(
+            (ROOT / "verification" / "source_adapter_staging.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        slices = {row["sliceId"]: row for row in staging["slices"]}
+        self.assertEqual(
+            {
+                key: slices[key]["accounting"]["fetched"]
+                for key in (
+                    "bulbapedia-historical-nl-sets",
+                    "bulbapedia-historical-pl-sets",
+                    "bulbapedia-historical-ru-sets",
+                )
+            },
+            {
+                "bulbapedia-historical-nl-sets": 3,
+                "bulbapedia-historical-pl-sets": 2,
+                "bulbapedia-historical-ru-sets": 9,
+            },
+        )
 
 
 class CapabilityPinScope(unittest.TestCase):
