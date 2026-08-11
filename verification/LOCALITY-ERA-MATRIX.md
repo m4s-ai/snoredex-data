@@ -22,7 +22,7 @@ issue unless new positive physical-card evidence overturns the recorded decision
 | `west-en` Western English and regional distribution | established-positive | `WEST` / English (`en`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#188](https://github.com/m4s-ai/snoredex-data/issues/188) | 80 confirmed / 0 contradicted |
 | `west-fr` Western French | established-positive | `WEST` / French (`fr`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 2 contradicted |
 | `west-de` Western German | established-positive | `WEST` / German (`de`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 3 contradicted |
-| `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | ready-for-child | [#189](https://github.com/m4s-ai/snoredex-data/issues/189) | 70 confirmed / 3 contradicted |
+| `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | complete-positive-slice | [#189](https://github.com/m4s-ai/snoredex-data/issues/189) | 70 confirmed / 3 contradicted |
 | `west-es-eu` European Spanish | established-positive | `WEST` / Spanish (`es-ES`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 59 confirmed / 5 contradicted |
 | `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | ready-for-child | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | 55 confirmed / 10 contradicted |
 | `latam-es` Latin-American Spanish | owner-scoped | `LATAM` / Spanish (`es-419`) | journey-together-forward: owner-scoped | needs-evidence | [#192](https://github.com/m4s-ai/snoredex-data/issues/192) | not represented |
@@ -78,10 +78,10 @@ Era segments:
 
 - **Scope:** Italian-language physical cards, with the official localized detail archive as a card-level route.
 - **Identity boundary:** The Italian archive proves only the exact returned card; it inherits no finish or absence closure from official checklist surfaces.
-- **Discovery:** `ready-for-child` — Activate Italian card discovery with exact returned detail paths and retain every filter mismatch as a source gap, never a negative.
+- **Discovery:** `complete-positive-slice` — The retained Italian filter slice accounts for every returned path; use positive official or specialist routes for the demonstrated historical archive gap.
 - **Execution issue:** [#189](https://github.com/m4s-ai/snoredex-data/issues/189)
-- **Evidence:** `unit:U0368`, `observation:obs-tpci-it-card-archive`, `slice:tcgdex-it-sets`
-- **Open:** Which archive eras return matching card details, and which require specialist positive sources?
+- **Evidence:** `unit:U0368`, `observation:obs-tpci-it-card-archive`, `slice:tcgdex-it-sets`, `card-slice:tpci-it-snorlax`
+- **Open:** Which positive sources cover the historical cards omitted by the official name filter?
 
 Era segments:
 

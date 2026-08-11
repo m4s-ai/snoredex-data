@@ -161,13 +161,13 @@
         }
       ],
       "discovery": {
-        "state": "ready-for-child",
-        "sourceRefs": ["slice:tcgdex-it-sets", "edge:tcgdex-west-positive", "surface:tpci-localized-card-archive", "edge:tpci-it-card-archive-positive", "observation:obs-tpci-it-card-archive"],
-        "gapRefs": ["card-gap:western-locality-card-discovery"],
-        "retryCondition": "Activate Italian card discovery with exact returned detail paths and retain every filter mismatch as a source gap, never a negative."
+        "state": "complete-positive-slice",
+        "sourceRefs": ["slice:tcgdex-it-sets", "edge:tcgdex-west-positive", "surface:tpci-localized-card-archive", "edge:tpci-it-card-archive-positive", "observation:obs-tpci-it-card-archive", "card-slice:tpci-it-snorlax"],
+        "gapRefs": ["card-gap:official-italian-archive-filter-coverage"],
+        "retryCondition": "The retained Italian filter slice accounts for every returned path; use positive official or specialist routes for the demonstrated historical archive gap."
       },
-      "evidenceRefs": ["unit:U0368", "observation:obs-tpci-it-card-archive", "slice:tcgdex-it-sets"],
-      "openQuestions": ["Which archive eras return matching card details, and which require specialist positive sources?"],
+      "evidenceRefs": ["unit:U0368", "observation:obs-tpci-it-card-archive", "slice:tcgdex-it-sets", "card-slice:tpci-it-snorlax"],
+      "openQuestions": ["Which positive sources cover the historical cards omitted by the official name filter?"],
       "childIssue": 189
     },
     {

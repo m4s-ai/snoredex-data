@@ -376,10 +376,19 @@ path matches the set you asked for.** Everything else is silence. When this is w
 archive's URLs must stay *out* of `pokemon-official`'s `absenceScopes`, even though the provider is
 absence-capable for its published checklists.
 
-**The first archive route is wired up.** The Italian detail surface is declared as positive-only
-card/language evidence, and `U0368` (`RR 111`) now cites the exact publisher page instead of the
-set-level index. The other locale routes still need their own retained positive observations and
-edges before use; one working Italian page does not establish their coverage or era boundaries.
+**The first archive route is wired up.** The Italian surface is declared as positive-only
+card/language evidence, and `U0368` (`RR 111`) cites the exact publisher page instead of the
+set-level index. Card-discovery run `20260811T105030Z` also retains the publisher's bounded
+`cardName=Snorlax` response: twelve exact result paths, localized names and `cms2-it-it` images,
+all matched to existing Italian releases. The other locale routes still need their own retained
+positive observations and edges before use; one working Italian slice does not establish their
+coverage or era boundaries.
+
+The Italian filter itself is demonstrably incomplete: its twelve entries omit the independently
+reachable `pl2/111` page. This is stored as the explicit
+`official-italian-archive-filter-coverage` gap. The retained response is complete only as one
+provider slice; the missing row is evidence about the filter's limitation, never evidence that a
+card or era was not printed.
 
 Until 2026-08-10 that was fatal: every retained run under `verification/runs/` recorded a
 `capabilityGraphHash` covering the **whole** graph, so one added surface made both
@@ -418,6 +427,12 @@ Pokémon TCG Pocket exclusions. It yields no US/Canada, Europe, or Australia/New
 distribution discriminator, so the `west-en` track is terminal as a complete positive slice without
 inventing a regional split. A future split still requires a positive physical marking or
 distribution record.
+
+The second child loop, #189, is retained in run `20260811T105030Z`: the official Italian name
+filter accounts for twelve positive rows, all matched. The `west-it` track is now a complete
+positive slice, while the exact `pl2/111` counterexample keeps historical filter coverage open.
+Across all three active card adapters the run accounts for 100 records: 62 matched, 32 new
+candidates and six positive exclusions, with no run error.
 
 ### TCGdex answers 200 for languages and eras it holds no cards for
 

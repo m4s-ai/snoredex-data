@@ -72,6 +72,40 @@ TCGDEX_REQUEST = {
     "queryParameters": {"nameQueries": ["Snorlax"], "nameFilter": "strict-equality"},
     "details": [{"rawProviderId": "base2-11", "responseHash": "sha256:detail"}],
 }
+OFFICIAL_ADAPTER = {
+    **ADAPTER,
+    "adapterId": "fixture-tpci",
+    "providerId": "pokemon-official",
+    "surfaceId": "tpci-localized-card-archive",
+    "responseFormat": "pokemon-official-localized-html",
+    "listEndpointTemplate": "https://www.pokemon.com/{rawLocale}/gcc/archivio-carte/",
+    "detailEndpointTemplate": (
+        "https://www.pokemon.com/{rawLocale}/gcc/archivio-carte/series/{rawProviderId}/"
+    ),
+}
+OFFICIAL_SLICE = {
+    **SLICE_TW,
+    "sliceId": "fixture-it",
+    "coverageEdgeId": "tpci-it-card-archive-positive",
+    "rawLocale": "it",
+    "locality": "WEST",
+    "language": "Italian",
+    "script": "Latn",
+    "nameQueries": ["Snorlax"],
+    "positiveNameExclusions": [],
+}
+OFFICIAL_LIST = b"""
+<html lang="it"><body>
+<form id="filters"><input id="cardName" name="cardName" value="Snorlax"></form>
+<ul class="cards-grid" id="cardResults">
+  <li><a href="/it/gcc/archivio-carte/series/svp/51/">
+    <img src="https://assets.pokemon.com/cms2-it-it/img/cards/web/SVP/SVP_IT_51.png"
+         alt="Snorlax"></a></li>
+  <li><a href="/it/gcc/archivio-carte/series/svp/184/">
+    <img src="https://assets.pokemon.com/cms2-it-it/img/cards/web/SVP/SVP_IT_184.png"
+         alt="Snorlax di Hop"></a></li>
+</ul></body></html>
+"""
 SVQP_ASSERTION = {
     "providerId": "fixture-provider",
     "surfaceId": "fixture-surface",
@@ -201,6 +235,58 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertEqual(parsed["productScope"], "digital-pocket")
         self.assertEqual(parsed["setSeries"]["id"], "tcgp")
 
+    def test_official_italian_filter_retains_exact_paths_names_and_images(self):
+        query, entries = discovery.parse_official_localized_entries(OFFICIAL_LIST, "it")
+        self.assertEqual(query, "Snorlax")
+        self.assertEqual([row["detailId"] for row in entries], ["svp/51", "svp/184"])
+        self.assertEqual(entries[1]["localName"], "Snorlax di Hop")
+        self.assertEqual(entries[0]["localCollectorNumber"], "51")
+        self.assertTrue(entries[0]["cardImageUrl"].endswith("SVP_IT_51.png"))
+        self.assertEqual(entries[0]["recordSource"], "localized-archive-list-entry")
+        parsed = discovery.parse_list(
+            OFFICIAL_LIST, "pokemon-official-localized-html", "it"
+        )
+        self.assertEqual(parsed["resultCount"], 2)
+        self.assertEqual(parsed["totalPages"], 1)
+
+    def test_official_italian_filter_challenge_is_a_source_failure(self):
+        with self.assertRaisesRegex(discovery.DiscoveryError, "access challenge"):
+            discovery.parse_official_localized_entries(
+                b"<html><title>Pardon Our Interruption</title></html>", "it"
+            )
+
+    def test_official_italian_entry_matches_only_through_reviewed_mapping(self):
+        source = discovery.parse_detail(
+            OFFICIAL_LIST, "svp/51", "pokemon-official-localized-html"
+        )
+        target = "RELEASE:WEST:Italian:SVP:051:work"
+        request = {
+            **REQUEST,
+            "queryParameters": {"nameQueries": ["Snorlax"]},
+            "pages": [{"responseHash": "sha256:list"}],
+            "details": [{"rawProviderId": "svp/51", "responseHash": "sha256:list"}],
+        }
+        mapping_key = discovery.raw_key(
+            "pokemon-official", "tpci-localized-card-archive", "it", "svp/51"
+        )
+        row = discovery.normalize_record(
+            OFFICIAL_ADAPTER, OFFICIAL_SLICE, request, source,
+            [{
+                "cardReleaseId": target, "locality": "WEST", "language": "Italian",
+                "localSetCode": "SVP", "localNumber": "051", "sourceRecords": [],
+            }],
+            {mapping_key: {
+                "mode": "exact-match", "targetCardReleaseId": target,
+                "evidence": "reviewed official path and CMS identity",
+            }},
+            {},
+        )
+        self.assertEqual(row["bucket"], "matched")
+        self.assertEqual(row["sourceUrl"], (
+            "https://www.pokemon.com/it/gcc/archivio-carte/series/svp/51/"
+        ))
+        self.assertEqual(row["normalizationProposal"]["targetCardReleaseId"], target)
+
     def test_exact_provider_url_matches_one_existing_release(self):
         source = source_record(
             detailId="base2-11", localName="Snorlax", rawSetCode="base2",
@@ -236,6 +322,37 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertTrue(all(row["sourceRecord"]["setSeries"]["id"] == "tcgp" for row in excluded))
         self.assertTrue(all(row["locality"] == "WEST" for row in english))
         self.assertTrue(all("distributionRegion" not in row["sourceRecord"] for row in english))
+
+    def test_committed_italian_slice_accounts_for_filter_without_claiming_history(self):
+        records = [
+            json.loads(line) for line in (ROOT / "verification" / "card_discovery_records.jsonl")
+            .read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+        italian = [
+            row for row in records
+            if row["stableKey"].startswith(
+                "pokemon-official|tpci-localized-card-archive|it|"
+            )
+        ]
+        self.assertEqual(len(italian), 12)
+        self.assertTrue(all(row["bucket"] == "matched" for row in italian))
+        self.assertTrue(all(
+            row["sourceRecord"]["recordSource"] == "localized-archive-list-entry"
+            for row in italian
+        ))
+        self.assertNotIn("pl2/111", {row["rawProviderId"] for row in italian})
+        contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        gap = next(
+            row for row in contract["gaps"]
+            if row["gapId"] == "official-italian-archive-filter-coverage"
+        )
+        self.assertIn("pl2/111", gap["reason"])
+        self.assertEqual(gap["terminalState"], "needs-evidence")
 
     def test_native_name_false_positive_is_excluded_by_positive_identity(self):
         row = self.normalize(record=source_record(localName="小卡比獸"))
