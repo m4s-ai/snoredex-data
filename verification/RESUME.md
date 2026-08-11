@@ -376,9 +376,10 @@ path matches the set you asked for.** Everything else is silence. When this is w
 archive's URLs must stay *out* of `pokemon-official`'s `absenceScopes`, even though the provider is
 absence-capable for its published checklists.
 
-**It is not wired up yet. The run-pinning blocker that used to stop it is fixed; one real
-requirement remains.** Citing an archive URL needs the `language` capability declared on a
-`pokemon-official` surface, and declaring a new surface changes `source_capability_graph.json`.
+**The first archive route is wired up.** The Italian detail surface is declared as positive-only
+card/language evidence, and `U0368` (`RR 111`) now cites the exact publisher page instead of the
+set-level index. The other locale routes still need their own retained positive observations and
+edges before use; one working Italian page does not establish their coverage or era boundaries.
 
 Until 2026-08-10 that was fatal: every retained run under `verification/runs/` recorded a
 `capabilityGraphHash` covering the **whole** graph, so one added surface made both
@@ -388,16 +389,10 @@ even though the set-adapter run had only ever fetched `tcgdex` and the card-disc
 manifest as `capabilityGraphSurfaces`, so the graph can grow without discarding history. A surface a
 run *did* use still expires it, which is the property worth keeping.
 
-What still stands, and is not a defect: **`pokemon-official` currently has one surface, so its
-evidence rows route to it implicitly.** Adding a second means every surface on that provider needs a
-`match` block (`urlPrefixes` / `nonUrlEvidenceIds`) and every existing row must match exactly one —
-otherwise `source_capabilities.py` fails with `registry source … resolves to 0 surfaces`. There are
-four `pokemon-official` rows today (a Dragon Frontiers checklist PDF and three Prize Pack lists), so
-this is small and mechanical, but it is a required part of the change rather than an afterthought.
-The new edge also needs its own known-positive observation and boundary, per ADR-0003.
-
-`U0368` carries the finding in its evidence text meanwhile, still cited to the set-level index it
-will eventually replace.
+The multi-surface routing requirement is now enforced in the manifest: the four exact checklist
+URLs resolve only to `tpci-checklists`, while Italian archive detail URLs resolve only to
+`tpci-localized-card-archive`. Each surface retains its own boundary. In particular, the archive
+inherits none of the checklist surface's absence or finish closure.
 
 ### TCGdex answers 200 for languages and eras it holds no cards for
 

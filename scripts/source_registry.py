@@ -51,24 +51,25 @@ MARKDOWN_PATH = ROOT / "verification" / "SOURCES.md"
 PROVIDERS: list[dict[str, Any]] = [
     {
         "providerId": "pokemon-official",
-        "displayName": "The Pokémon Company official checklists",
+        "displayName": "The Pokémon Company official cards and checklists",
         "organization": "The Pokémon Company International",
         "homepage": "https://www.pokemon.com",
         "hosts": ["assets.pokemon.com", "d1wx537rtdixyy.cloudfront.net", "www.pokemon.com"],
         "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "complete-manifest within the stated set or Prize Pack scope",
+        "coverage": "positive localized card pages; complete manifests only within named checklists",
         "supportsAbsence": True,
-        "usedFor": ["finish", "product"],
+        "usedFor": ["language", "finish", "product"],
         "absenceScopes": [
             "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
             "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
             "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
             "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",
         ],
-        "attribution": "Official product checklists © The Pokémon Company International.",
-        "notes": "The only source permitted to establish that a finish is absent, and only inside its stated scope.",
+        "attribution": "Official card pages and product checklists © The Pokémon Company International.",
+        "notes": ("Localized card pages provide positive card/language evidence only. Exact "
+                  "checklists may establish finish absence only inside their stated scope."),
     },
     {
         "providerId": "pokemon-card-jp",
