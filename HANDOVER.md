@@ -71,6 +71,11 @@ verification/ADR-0007-embedded-artwork-review-ui.md
                               ACCEPTED UI boundary (#120): embed the future artwork/detection review
                               view in this static data repo, emit reviewed structured proposals rather
                               than direct writes, and wait for #140's authoritative graph outputs.
+verification/ADR-0008-reviewed-catalogue-basis-lists.md
+                              ACCEPTED canonical-data boundary (#187): languages, local sets,
+                              editions/events, typed set relations, artwork identities/appearances
+                              and physical printings are manually reviewed registries. Generators
+                              emit disposable hashed views and never write truth back into them.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
