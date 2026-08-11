@@ -24,9 +24,9 @@ issue unless new positive physical-card evidence overturns the recorded decision
 | `west-de` Western German | established-positive | `WEST` / German (`de`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 3 contradicted |
 | `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | complete-positive-slice | [#189](https://github.com/m4s-ai/snoredex-data/issues/189) | 70 confirmed / 3 contradicted |
 | `west-es-eu` European Spanish | established-positive | `WEST` / Spanish (`es-ES`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 59 confirmed / 5 contradicted |
-| `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | ready-for-child | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | 55 confirmed / 10 contradicted |
+| `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | complete-positive-slice | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | 55 confirmed / 10 contradicted |
 | `latam-es` Latin-American Spanish | owner-scoped | `LATAM` / Spanish (`es-419`) | journey-together-forward: owner-scoped | needs-evidence | [#192](https://github.com/m4s-ai/snoredex-data/issues/192) | not represented |
-| `latam-pt-br` Brazilian Portuguese | established-positive | `LATAM` / Portuguese (`pt-BR`) | positive-listing-unbounded: positive-observations-only | needs-evidence | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | not represented |
+| `latam-pt-br` Brazilian Portuguese | established-positive | `LATAM` / Portuguese (`pt-BR`) | positive-listing-unbounded: positive-observations-only | complete-positive-slice | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | not represented |
 | `west-nl` Historical Dutch | established-positive | `WEST` / Dutch (`nl`) | jungle-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 2 confirmed / 2 contradicted |
 | `west-pl` Historical Polish | established-positive | `WEST` / Polish (`pl`) | diamond-pearl-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 1 confirmed / 1 contradicted |
 | `west-ru` Historical Russian | established-positive | `WEST` / Russian (`ru`) | positive-through-breakthrough: owner-bounded-end; other-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 4 confirmed / 2 contradicted |
@@ -105,14 +105,14 @@ Era segments:
 
 - **Scope:** The current legacy Portuguese projection pending reconciliation into Brazilian or another evidenced physical edition.
 - **Identity boundary:** A Portuguese language field and the TCGdex pt locale do not identify Brazil, Portugal, or another distribution region.
-- **Discovery:** `ready-for-child` — Start from positive pt records and assign a physical region only when branding, legal line, set code, official locale, or specimen evidence identifies it.
+- **Discovery:** `complete-positive-slice` — Rerun the exact-name pt slice for deltas; assign a physical region only when branding, legal line, set code, official locale, or specimen evidence identifies it.
 - **Execution issue:** [#191](https://github.com/m4s-ai/snoredex-data/issues/191)
-- **Evidence:** `unit:U0005`, `slice:tcgdex-pt-sets`, `edge:tcgdex-west-positive`
+- **Evidence:** `unit:U0005`, `slice:tcgdex-pt-sets`, `card-slice:tcgdex-pt-unqualified-snorlax`, `edge:tcgdex-west-positive`
 - **Open:** Which legacy Portuguese rows are Brazilian, Portuguese-European, or another edition?
 
 Era segments:
 
-- `provider-observed-unbounded` (open → open; `needs-evidence`): The retained pt set slice is positive for language records but supplies no physical regional boundary. Evidence: `slice:tcgdex-pt-sets`, `edge:tcgdex-west-positive`, `unit:U0005`.
+- `provider-observed-unbounded` (open → open; `needs-evidence`): The retained pt set slice and bounded exact-name card slice are positive for Portuguese records but supply no physical regional boundary. Evidence: `slice:tcgdex-pt-sets`, `card-slice:tcgdex-pt-unqualified-snorlax`, `edge:tcgdex-west-positive`, `unit:U0005`.
 
 ### Latin-American Spanish (`latam-es`)
 
@@ -130,17 +130,17 @@ Era segments:
 
 ### Brazilian Portuguese (`latam-pt-br`)
 
-- **Scope:** Brazilian Portuguese physical cards identified by a Brazilian source record; no claim is made for all Portuguese cards or eras.
-- **Identity boundary:** A Brazilian listing or official br detail can identify pt-BR, but an unqualified pt provider record cannot.
-- **Discovery:** `needs-evidence` — Retain an official br archive detail and activate positive card slices without treating blocked or empty marketplace searches as absence.
+- **Scope:** Positive Brazilian-market Portuguese records; a distinct Brazilian physical-card identity is created only when printed or official regional evidence supports it, and no claim is made for all Portuguese cards or eras.
+- **Identity boundary:** A Brazilian listing identifies market context but not by itself a distinct printed pt-BR edition; an official br detail or physical regional discriminator may support that split, while an unqualified pt provider record cannot.
+- **Discovery:** `complete-positive-slice` — Add an official br archive detail or printed physical-region discriminator; never treat blocked or empty marketplace searches as absence.
 - **Execution issue:** [#191](https://github.com/m4s-ai/snoredex-data/issues/191)
-- **Evidence:** `observation:obs-ligapokemon`, `unit:U0329`, `edge:ligapokemon-latam-positive`
+- **Evidence:** `card-slice:ligapokemon-pt-br-positive-frontier`, `observation:obs-ligapokemon`, `unit:U0192`, `unit:U0219`, `unit:U0329`, `edge:ligapokemon-latam-positive`
 - **Distribution regions to split:** Brazil
-- **Open:** Which unqualified legacy Portuguese units map to pt-BR after physical-region review?
+- **Open:** Which unqualified legacy Portuguese units map to pt-BR after physical-region review?; Do PPPS7/PPPS8 Portuguese cards carry any printed or official distribution discriminator that separates a Brazilian physical edition from European Portuguese?
 
 Era segments:
 
-- `positive-listing-unbounded` (open → open; `positive-observations-only`): The retained LigaPokemon PPPS7 listing establishes one Portuguese-market Brazilian record and nothing about unlisted eras. Evidence: `edge:ligapokemon-latam-positive`, `observation:obs-ligapokemon`, `unit:U0329`.
+- `positive-listing-unbounded` (open → open; `positive-observations-only`): The retained LigaPokemon PPPS7 and PPPS8 records establish three Portuguese-language Brazilian-market observations and nothing about a distinct printed Brazilian edition or unlisted eras. Evidence: `card-slice:ligapokemon-pt-br-positive-frontier`, `edge:ligapokemon-latam-positive`, `observation:obs-ligapokemon`, `unit:U0192`, `unit:U0219`, `unit:U0329`.
 
 ### Historical Dutch (`west-nl`)
 

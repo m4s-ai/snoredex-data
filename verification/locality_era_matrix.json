@@ -221,18 +221,18 @@
           "start": null,
           "end": null,
           "state": "needs-evidence",
-          "basis": "The retained pt set slice is positive for language records but supplies no physical regional boundary.",
-          "evidenceRefs": ["slice:tcgdex-pt-sets", "edge:tcgdex-west-positive", "unit:U0005"],
+          "basis": "The retained pt set slice and bounded exact-name card slice are positive for Portuguese records but supply no physical regional boundary.",
+          "evidenceRefs": ["slice:tcgdex-pt-sets", "card-slice:tcgdex-pt-unqualified-snorlax", "edge:tcgdex-west-positive", "unit:U0005"],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "ready-for-child",
-        "sourceRefs": ["slice:tcgdex-pt-sets", "edge:tcgdex-west-positive"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
-        "retryCondition": "Start from positive pt records and assign a physical region only when branding, legal line, set code, official locale, or specimen evidence identifies it."
+        "state": "complete-positive-slice",
+        "sourceRefs": ["slice:tcgdex-pt-sets", "card-slice:tcgdex-pt-unqualified-snorlax", "edge:tcgdex-west-positive"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-portuguese-physical-locality"],
+        "retryCondition": "Rerun the exact-name pt slice for deltas; assign a physical region only when branding, legal line, set code, official locale, or specimen evidence identifies it."
       },
-      "evidenceRefs": ["unit:U0005", "slice:tcgdex-pt-sets", "edge:tcgdex-west-positive"],
+      "evidenceRefs": ["unit:U0005", "slice:tcgdex-pt-sets", "card-slice:tcgdex-pt-unqualified-snorlax", "edge:tcgdex-west-positive"],
       "openQuestions": ["Which legacy Portuguese rows are Brazilian, Portuguese-European, or another edition?"],
       "childIssue": 191
     },
@@ -278,8 +278,8 @@
       "bcp47": "pt-BR",
       "script": "Latn",
       "universeStatus": "established-positive",
-      "scope": "Brazilian Portuguese physical cards identified by a Brazilian source record; no claim is made for all Portuguese cards or eras.",
-      "identityBoundary": "A Brazilian listing or official br detail can identify pt-BR, but an unqualified pt provider record cannot.",
+      "scope": "Positive Brazilian-market Portuguese records; a distinct Brazilian physical-card identity is created only when printed or official regional evidence supports it, and no claim is made for all Portuguese cards or eras.",
+      "identityBoundary": "A Brazilian listing identifies market context but not by itself a distinct printed pt-BR edition; an official br detail or physical regional discriminator may support that split, while an unqualified pt provider record cannot.",
       "absencePolicy": "positive-only",
       "legacyUnitScope": {"include": false},
       "distributionRegions": ["Brazil"],
@@ -289,19 +289,19 @@
           "start": null,
           "end": null,
           "state": "positive-observations-only",
-          "basis": "The retained LigaPokemon PPPS7 listing establishes one Portuguese-market Brazilian record and nothing about unlisted eras.",
-          "evidenceRefs": ["edge:ligapokemon-latam-positive", "observation:obs-ligapokemon", "unit:U0329"],
+          "basis": "The retained LigaPokemon PPPS7 and PPPS8 records establish three Portuguese-language Brazilian-market observations and nothing about a distinct printed Brazilian edition or unlisted eras.",
+          "evidenceRefs": ["card-slice:ligapokemon-pt-br-positive-frontier", "edge:ligapokemon-latam-positive", "observation:obs-ligapokemon", "unit:U0192", "unit:U0219", "unit:U0329"],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "needs-evidence",
-        "sourceRefs": ["surface:ligapokemon-catalogue", "edge:ligapokemon-latam-positive", "observation:obs-ligapokemon"],
-        "gapRefs": ["card-gap:western-locality-card-discovery"],
-        "retryCondition": "Retain an official br archive detail and activate positive card slices without treating blocked or empty marketplace searches as absence."
+        "state": "complete-positive-slice",
+        "sourceRefs": ["card-slice:ligapokemon-pt-br-positive-frontier", "surface:ligapokemon-catalogue", "edge:ligapokemon-latam-positive", "observation:obs-ligapokemon"],
+        "gapRefs": ["card-gap:official-brazilian-card-archive"],
+        "retryCondition": "Add an official br archive detail or printed physical-region discriminator; never treat blocked or empty marketplace searches as absence."
       },
-      "evidenceRefs": ["observation:obs-ligapokemon", "unit:U0329", "edge:ligapokemon-latam-positive"],
-      "openQuestions": ["Which unqualified legacy Portuguese units map to pt-BR after physical-region review?"],
+      "evidenceRefs": ["card-slice:ligapokemon-pt-br-positive-frontier", "observation:obs-ligapokemon", "unit:U0192", "unit:U0219", "unit:U0329", "edge:ligapokemon-latam-positive"],
+      "openQuestions": ["Which unqualified legacy Portuguese units map to pt-BR after physical-region review?", "Do PPPS7/PPPS8 Portuguese cards carry any printed or official distribution discriminator that separates a Brazilian physical edition from European Portuguese?"],
       "childIssue": 191
     },
     {
