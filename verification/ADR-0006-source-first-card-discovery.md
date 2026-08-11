@@ -85,18 +85,41 @@ Official detail `13148` is the mandatory counterexample: raw expansion key `SVQP
 therefore a visible `new-candidate`, not an inferred match to Japanese `mP1 012/023` and not a
 Traditional-Chinese contradiction.
 
-The remaining Japanese, Indonesian, Thai, Korean, Simplified-Chinese, Western/LATAM, specialist,
-and mixed Pocket tracks remain explicit `needs-evidence` or `blocked-by-source` gaps. #138/#139 own
+The remaining Japanese, Indonesian, Thai, Korean, Simplified-Chinese, non-English Western/LATAM,
+and specialist tracks remain explicit `needs-evidence` or `blocked-by-source` gaps. #138/#139 own
 their locality slices and reconciliation decisions; adding them extends this contract and reruns
 the same accounting loop.
+
+## Western-English run result
+
+Run `20260811T100924Z` adds one exact-name TCGdex English slice. Its list request uses the
+source's strict-equality `name=eq:Snorlax` filter without pagination; [TCGdex documents](https://tcgdex.dev/rest/filtering-sorting-pagination)
+that array endpoints are unpaginated unless pagination parameters are supplied. The run retains
+that complete response, all 45 referenced card details, and all 38 referenced set details.
+
+Every English row is accounted: 41 physical TCG records match one existing ADR-0001 release, and
+four records (`A1-211`, `A1-250`, `A2a-063`, and `P-A-049`) are positively excluded because their
+retained set details identify series `tcgp`, named Pokémon TCG Pocket. There are no English new,
+ambiguous, or needs-evidence records. The adapter does not infer Pocket from an id pattern.
+
+TCGdex's `en` records contain no source-native US/Canada, Europe, or Australia/New Zealand physical
+distribution discriminator. The run therefore admits no regional split. That unresolved dimension
+stays an explicit positive-evidence gap: packaging or marketplace geography alone cannot create a
+new physical-card identity.
+
+The same run refreshes the Taiwan slice, producing 88 accounted records overall: 50 matched, 32
+new candidates, six positively excluded, and zero run errors. Historical runs now retain their
+contract snapshots so later adapter versions can replay every checkpoint under its own immutable
+contract before computing deltas.
 
 ## Consequences
 
 The repository can now discover a positive official card record absent from the Cardmarket-derived
-candidate universe, reproduce the run without network access, resume a partial refresh, and expose
-new/ambiguous records without changing evidence verdicts. The 41-candidate queue is intentionally
-not auto-merged: resolving local set-symbol aliases, local collector-number equivalence, TW/HK
-relationships, and shared works belongs to the locality reconciliation loops.
+candidate universe, reproduce each versioned run without network access, resume a partial refresh,
+and expose new/ambiguous records without changing evidence verdicts. The remaining 32-candidate
+Taiwan queue is intentionally not auto-merged: resolving local set-symbol aliases, local
+collector-number equivalence, TW/HK relationships, and shared works belongs to the locality
+reconciliation loops.
 
 `scripts/card_discovery.py --check`, its regression tests, independent review checks N14/N15, and
 the cross-platform release gate enforce raw hashes, page/detail accounting, native identifier

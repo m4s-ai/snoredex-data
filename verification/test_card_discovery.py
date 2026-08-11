@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import tempfile
 import sys
 import unittest
@@ -44,6 +45,32 @@ REQUEST = {
     "queryParameters": {"nameQueries": ["卡比獸"]},
     "pages": [{"responseHash": "sha256:list"}],
     "details": [{"rawProviderId": "13148", "responseHash": "sha256:detail"}],
+}
+TCGDEX_ADAPTER = {
+    **ADAPTER,
+    "adapterId": "fixture-tcgdex",
+    "providerId": "tcgdex",
+    "surfaceId": "tcgdex-api",
+    "responseFormat": "tcgdex-json",
+    "listEndpointTemplate": "https://api.tcgdex.net/v2/{rawLocale}/cards",
+    "detailEndpointTemplate": "https://api.tcgdex.net/v2/{rawLocale}/cards/{rawProviderId}",
+    "setEndpointTemplate": "https://api.tcgdex.net/v2/{rawLocale}/sets/{rawSetCode}",
+}
+TCGDEX_SLICE = {
+    **SLICE_TW,
+    "sliceId": "fixture-en",
+    "coverageEdgeId": "tcgdex-west-positive",
+    "rawLocale": "en",
+    "locality": "WEST",
+    "language": "English",
+    "script": "Latn",
+    "nameQueries": ["Snorlax"],
+    "positiveNameExclusions": [],
+}
+TCGDEX_REQUEST = {
+    **REQUEST,
+    "queryParameters": {"nameQueries": ["Snorlax"], "nameFilter": "strict-equality"},
+    "details": [{"rawProviderId": "base2-11", "responseHash": "sha256:detail"}],
 }
 SVQP_ASSERTION = {
     "providerId": "fixture-provider",
@@ -160,6 +187,55 @@ class CardDiscoveryTests(unittest.TestCase):
         row = self.normalize(record=source_record(productScope="digital-pocket"))
         self.assertEqual(row["bucket"], "positively-excluded")
         self.assertIn("Pocket", row["bucketBasis"])
+
+    def test_tcgdex_json_uses_set_series_as_the_pocket_discriminator(self):
+        listing = b'[{"id":"A1-211","localId":"211","name":"Snorlax"}]'
+        self.assertEqual(
+            discovery.parse_list(listing, "tcgdex-json")["detailIds"], ["A1-211"]
+        )
+        detail = b'{"id":"A1-211","localId":"211","name":"Snorlax","set":{"id":"A1","name":"Genetic Apex"}}'
+        parsed = discovery.parse_detail(
+            detail, "A1-211", "tcgdex-json",
+            {"id": "A1", "name": "Genetic Apex", "serie": {"id": "tcgp", "name": "Pok\u00e9mon TCG Pocket"}},
+        )
+        self.assertEqual(parsed["productScope"], "digital-pocket")
+        self.assertEqual(parsed["setSeries"]["id"], "tcgp")
+
+    def test_exact_provider_url_matches_one_existing_release(self):
+        source = source_record(
+            detailId="base2-11", localName="Snorlax", rawSetCode="base2",
+            localCollectorNumber="11", productScope="physical-tcg",
+        )
+        release = {
+            "cardReleaseId": "RELEASE:WEST:English:JU:11:work",
+            "locality": "WEST", "language": "English",
+            "localSetCode": "JU", "localNumber": "11",
+            "sourceRecords": ["https://api.tcgdex.net/v2/en/cards/base2-11"],
+        }
+        row = discovery.normalize_record(
+            TCGDEX_ADAPTER, TCGDEX_SLICE, TCGDEX_REQUEST,
+            source, [release], {}, {},
+        )
+        self.assertEqual(row["bucket"], "matched")
+        self.assertEqual(row["normalizationProposal"]["targetCardReleaseId"], release["cardReleaseId"])
+
+    def test_committed_english_slice_is_fully_accounted_without_regional_invention(self):
+        records = [
+            json.loads(line) for line in (ROOT / "verification" / "card_discovery_records.jsonl")
+            .read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+        english = [row for row in records if row["stableKey"].startswith("tcgdex|tcgdex-api|en|")]
+        self.assertEqual(len(english), 45)
+        self.assertEqual(sum(row["bucket"] == "matched" for row in english), 41)
+        excluded = [row for row in english if row["bucket"] == "positively-excluded"]
+        self.assertEqual(
+            {row["rawProviderId"] for row in excluded},
+            {"A1-211", "A1-250", "A2a-063", "P-A-049"},
+        )
+        self.assertTrue(all(row["sourceRecord"]["setSeries"]["id"] == "tcgp" for row in excluded))
+        self.assertTrue(all(row["locality"] == "WEST" for row in english))
+        self.assertTrue(all("distributionRegion" not in row["sourceRecord"] for row in english))
 
     def test_native_name_false_positive_is_excluded_by_positive_identity(self):
         row = self.normalize(record=source_record(localName="小卡比獸"))

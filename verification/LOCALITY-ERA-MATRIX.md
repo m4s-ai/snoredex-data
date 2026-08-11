@@ -19,7 +19,7 @@ issue unless new positive physical-card evidence overturns the recorded decision
 
 | Track | Universe state | Locality / language | Era state | Discovery | Child | Legacy audit |
 |---|---|---|---|---|---|---|
-| `west-en` Western English and regional distribution | established-positive | `WEST` / English (`en`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#188](https://github.com/m4s-ai/snoredex-data/issues/188) | 80 confirmed / 0 contradicted |
+| `west-en` Western English and regional distribution | established-positive | `WEST` / English (`en`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#188](https://github.com/m4s-ai/snoredex-data/issues/188) | 80 confirmed / 0 contradicted |
 | `west-fr` Western French | established-positive | `WEST` / French (`fr`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 2 contradicted |
 | `west-de` Western German | established-positive | `WEST` / German (`de`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 3 contradicted |
 | `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | ready-for-child | [#189](https://github.com/m4s-ai/snoredex-data/issues/189) | 70 confirmed / 3 contradicted |
@@ -38,15 +38,15 @@ issue unless new positive physical-card evidence overturns the recorded decision
 
 - **Scope:** English-language physical cards distributed in Western markets; region-specific products and stamps remain separate distribution identities.
 - **Identity boundary:** English text does not merge US/Canada, Europe, Australia/New Zealand, or later SEA distribution products when the physical card differs.
-- **Discovery:** `ready-for-child` — Activate an English card slice with positive detail fixtures, then split regional products only when their physical markings or distribution evidence differ.
+- **Discovery:** `complete-positive-slice` — Rerun the exact-name slice for deltas; split regional products only when a positive physical marking or distribution record distinguishes them.
 - **Execution issue:** [#188](https://github.com/m4s-ai/snoredex-data/issues/188)
-- **Evidence:** `unit:U0000`, `slice:tcgdex-en-sets`, `edge:tcgdex-west-positive`
+- **Evidence:** `unit:U0000`, `slice:tcgdex-en-sets`, `card-slice:tcgdex-en-snorlax`, `edge:tcgdex-west-positive`
 - **Distribution regions to split:** US/Canada, Europe, Australia/New Zealand
-- **Open:** Which regular cards differ by Western distribution region rather than only by packaging?
+- **Open:** No regional split is admitted by the current source: which positive physical marking or distribution record distinguishes US/Canada, Europe, or Australia/New Zealand?
 
 Era segments:
 
-- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained English TCGdex set slice accounts for every returned row, while provider population and regional distribution remain open. Evidence: `slice:tcgdex-en-sets`, `edge:tcgdex-west-positive`, `observation:obs-tcgdex-west`.
+- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained English TCGdex set slice and exact-name Snorlax card slice account for every returned row, while provider population and regional distribution remain open. Evidence: `slice:tcgdex-en-sets`, `card-slice:tcgdex-en-snorlax`, `edge:tcgdex-west-positive`, `observation:obs-tcgdex-west`.
 
 ### Western French (`west-fr`)
 

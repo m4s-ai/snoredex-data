@@ -308,6 +308,9 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
                 m["claimId"] for m in members if m not in confirmed),
             "legacyVariants": sorted({m["unit"].get("variant") or "base" for m in members}),
             "legacyProducts": sorted({m["card"]["productUrl"] for m in members}),
+            "sourceRecords": sorted({
+                m["unit"]["sourceUrl"] for m in confirmed if m["unit"].get("sourceUrl")
+            }),
         }
         card_releases[release_id] = release
         for member in members:
@@ -348,6 +351,7 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
             "nonEstablishingClaimIds": [],
             "legacyVariants": [],
             "legacyProducts": [],
+            "sourceRecords": [entry["sourceUrl"]] if entry.get("sourceUrl") else [],
             "sourceFirstRecordId": entry["printId"],
         }
         candidate_claims[claim_id] = {
@@ -760,8 +764,8 @@ def main() -> int:
         )
         return 0
 
-    OUTPUT_PATH.write_text(
-        json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUTPUT_PATH.write_bytes(
+        (json.dumps(document, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
     counts = document["counts"]
     print(
         f"{OUTPUT_PATH.relative_to(ROOT)}: {counts['candidateClaims']} claims -> "
