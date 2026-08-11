@@ -394,6 +394,24 @@ URLs resolve only to `tpci-checklists`, while Italian archive detail URLs resolv
 `tpci-localized-card-archive`. Each surface retains its own boundary. In particular, the archive
 inherits none of the checklist surface's absence or finish closure.
 
+### The #139 locality/era matrix is now the discovery boundary
+
+[`locality_era_matrix.json`](locality_era_matrix.json) is the reviewed matrix and
+[`LOCALITY-ERA-MATRIX.md`](LOCALITY-ERA-MATRIX.md) its generated readable projection. It keeps 12
+tracks separate: the six legacy Western languages, Brazilian Portuguese, LATAM Spanish, Dutch,
+Polish, Russian, and SEA English coordinated with #138. Czech and Hungarian are explicitly
+retained as contradicted legacy language claims outside the locality universe, not as tracks. A track is
+explicitly `established-positive`, `owner-scoped`, `provisional-legacy`,
+`candidate-needs-evidence`, or `coordinated`; candidate tracks are not silently admitted to the
+locality universe.
+
+Every era segment cites a retained capability edge, observation, adapter slice, unit, owner
+decision or explicit source gap. The generator validates those references and renders the current
+legacy audit counts. Its most important rule is the same one as the capability graph: a complete
+adapter slice accounts for one provider response, not an era or locality universe, and zero rows
+remain unknown. The matrix is the decomposition input for #139 child issues, not a replacement for
+their per-locality discovery loops.
+
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
 Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.

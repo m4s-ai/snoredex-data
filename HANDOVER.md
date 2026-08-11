@@ -244,6 +244,11 @@ verification/
                                errors, gaps and added/changed/disappeared/re-key diffs.
   card_discovery_records.jsonl GENERATED #136 RECORD FEED: one locality-aware card proposal per line.
                                Raw identifiers survive and no row may mutate a verdict.
+  locality_era_matrix.json     REVIEWED #139 MATRIX: established, provisional, candidate and
+                               #138-coordinated non-Asian locality tracks, each with explicit era
+                               evidence, positive-only policy, source/gap references and child state.
+  LOCALITY-ERA-MATRIX.md       GENERATED readable projection of the #139 matrix plus current legacy
+                               audit counts. Rebuild with scripts/locality_matrix.py.
   report.py                   Prints coverage and rewrites exactly three exports:
                               confirmed_sources.json, CONTRADICTED.json, UNCONFIRMED.json.
                               NOT "all exports" — MANUAL_REVIEW.* comes from classify_manual.py,

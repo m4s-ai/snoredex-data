@@ -200,6 +200,7 @@ python scripts/evidence_semantics.py --check     # what each verdict rests on (#
 python scripts/set_catalogue_dryrun.py --check   # ADR-0002 set/edition/event mapping (#146)
 python scripts/source_adapters.py --check        # ADR-0004 source-first catalogue runs (#147)
 python scripts/card_discovery.py --check         # ADR-0006 source-first card runs (#136)
+python scripts/locality_matrix.py --check         # evidenced non-Asian locality/era tracks (#139)
 
 # ... do the work in a new Python pass under verification/ ...
 
@@ -213,6 +214,7 @@ python scripts/source_registry.py                # provider/evidence registry
 python scripts/source_capabilities.py            # bounded source/coverage graph (#135)
 python scripts/source_adapters.py                 # reproject latest retained catalogue run (#147)
 python scripts/card_discovery.py                  # reproject latest retained card run (#136)
+python scripts/locality_matrix.py                 # reviewed locality/era matrix projection (#139)
 python scripts/checklist.py                      # canonical checklist items
 python scripts/readme_stats.py                   # generated markdown blocks
 python scripts/issue_templates.py                # community correction form
@@ -247,7 +249,7 @@ python scripts/database.py
 python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
 
 for g in checklist readme_stats issue_templates site source_registry source_capabilities \
-         source_adapters card_discovery legacy_set_reconciliation open_items analyze database \
+         source_adapters card_discovery locality_matrix legacy_set_reconciliation open_items analyze database \
          print_identity_dryrun set_catalogue_dryrun evidence_semantics
 do python scripts/$g.py --check; done            # fail instead of writing
 python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
