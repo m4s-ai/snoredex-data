@@ -205,6 +205,7 @@ python scripts/locality_matrix.py --check         # evidenced non-Asian locality
 # ... do the work in a new Python pass under verification/ ...
 
 python verification/test_evidence_application.py # raw verdict/application projection boundary
+python verification/test_database_portability.py # LF/CRLF-neutral database input fingerprints
 python verification/test_owner_adjudications.py  # owner decision/store projection
 python verification/report.py                    # regenerate exports
 python scripts/editions.py                       # if edition data changed

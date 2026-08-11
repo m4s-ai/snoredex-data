@@ -175,5 +175,6 @@ SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
 The database is UTF-8 SQLite, schema version `1.2.0`, with `PRAGMA user_version=10002`. Every build
-stores SHA-256 hashes of its canonical inputs in `metadata`; `scripts/database.py --check` fails if
+stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`;
+`scripts/database.py --check` fails if
 any source artifact changes without a database refresh.

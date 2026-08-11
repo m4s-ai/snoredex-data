@@ -94,6 +94,9 @@ jobs:
       - name: Evidence application regression tests
         run: python verification/test_evidence_application.py
 
+      - name: Database fingerprint portability regression test
+        run: python verification/test_database_portability.py
+
       - name: Owner adjudication regression tests
         run: python verification/test_owner_adjudications.py
 

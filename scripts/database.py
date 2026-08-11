@@ -80,10 +80,16 @@ def compact(value) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
+def canonical_input_bytes(relative: str) -> bytes:
+    """Return text input bytes with repository LF line endings on every platform."""
+    text = (ROOT / relative).read_text(encoding="utf-8")
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+
 def source_fingerprint() -> str:
     digest = hashlib.sha256()
     for relative in INPUTS:
-        payload = (ROOT / relative).read_bytes()
+        payload = canonical_input_bytes(relative)
         digest.update(relative.encode("utf-8"))
         digest.update(b"\0")
         digest.update(hashlib.sha256(payload).digest())
@@ -92,7 +98,7 @@ def source_fingerprint() -> str:
 
 def input_hashes() -> dict[str, str]:
     return {
-        relative: hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+        relative: hashlib.sha256(canonical_input_bytes(relative)).hexdigest()
         for relative in INPUTS
     }
 
