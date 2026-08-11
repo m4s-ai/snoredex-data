@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "1.0.0",
-    "generated": "2026-08-10",
+    "generated": "2026-08-11",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -15,14 +15,14 @@
     ],
     "counts": {
       "providers": 23,
-      "surfaces": 24,
-      "coverageEdges": 23,
+      "surfaces": 25,
+      "coverageEdges": 24,
       "absenceEdges": 3,
-      "observations": 25,
-      "resolvedVerdictSources": 889
+      "observations": 26,
+      "resolvedVerdictSources": 890
     },
     "surfaceStates": {
-      "active": 6,
+      "active": 7,
       "blocked-by-browser": 4,
       "incomplete": 7,
       "internal": 1,
@@ -37,7 +37,7 @@
       "operator": "The Pokémon Company International",
       "authorityTier": 1,
       "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
-      "rawRetention": "Retain the exact checklist bytes, canonical URL, retrieval date and SHA-256."
+      "rawRetention": "Retain exact localized card-page fields or checklist bytes, canonical URL, locale, retrieval date and SHA-256."
     },
     {
       "providerId": "pokemon-card-jp",
@@ -199,6 +199,15 @@
       "surfaceId": "tpci-checklists",
       "providerId": "pokemon-official",
       "label": "Exact official checklist documents",
+      "match": {
+        "urlPrefixes": [
+          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
+        ],
+        "nonUrlEvidenceIds": []
+      },
       "state": "active",
       "failureState": null,
       "accessMode": "direct-download",
@@ -226,6 +235,48 @@
       },
       "coverageEdgeIds": [
         "tpci-exact-checklist-finish"
+      ]
+    },
+    {
+      "surfaceId": "tpci-localized-card-archive",
+      "providerId": "pokemon-official",
+      "label": "Official localized card archive",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon.com/it/gcc/archivio-carte/series/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain each localized detail page and CMS image identity; re-check locale routes before a harvest.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.pokemon.com/{locale}/{localized-card-archive}/series/{set}/{number}/",
+        "parameters": [
+          "locale",
+          "set",
+          "collector number"
+        ],
+        "pagination": "not used for a cited detail page; catalogue pagination is not yet an accepted coverage boundary",
+        "expectedIdentifiers": [
+          "localized card name",
+          "series/set path",
+          "collector number",
+          "locale-specific CMS image"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "tpci-it-card-archive-positive"
       ]
     },
     {
@@ -1101,6 +1152,53 @@
         ],
         "zeroResultMeans": "bounded-absence",
         "challenge": "A general official card page outside the four URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."
+      }
+    },
+    {
+      "edgeId": "tpci-it-card-archive-positive",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "Italian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "positive Italian locale detail pages only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "card-existence",
+        "local-card-identifier"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A returned localized card page establishes that card; filters, missing pages and other locale routes are not a manifest."
+      },
+      "knownPositiveObservationId": "obs-tpci-it-card-archive",
+      "boundary": {
+        "outsideScope": [
+          "missing archive rows",
+          "other locale routes",
+          "regional distribution inside a language",
+          "finish/treatment"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The archive can ignore filters or omit eras, so only a positively returned matching detail page carries evidence."
       }
     },
     {
@@ -2261,6 +2359,41 @@
         "recordClass": "official-page-outside-exact-checklists",
         "url": "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/",
         "absenceCapability": false
+      }
+    },
+    {
+      "observationId": "obs-tpci-it-card-archive",
+      "surfaceId": "tpci-localized-card-archive",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/",
+      "queryParameters": {
+        "locale": "it",
+        "set": "pl2",
+        "collectorNumber": "111"
+      },
+      "retrievedAt": "2026-08-11",
+      "expectedIdentifiers": [
+        "U0368",
+        "PL2_IT_111.png",
+        "Pokémon LIV.X"
+      ],
+      "validatesEdges": [
+        "tpci-it-card-archive-positive"
+      ],
+      "outcome": "The Italian locale detail page positively identifies RR 111 as an Italian Snorlax card without supplying finish or absence closure.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:f51641d44327511d42e9258ae404a97ae64821bc2736fbe7d8ccbab2513e13e6",
+      "rawRecord": {
+        "recordClass": "localized-card-detail",
+        "canonicalUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/",
+        "contentLanguage": "it",
+        "cardName": "Snorlax",
+        "setName": "Platino - L’Ascesa dei Rivali",
+        "cardType": "Pokémon LIV.X",
+        "cmsImage": "PL2_IT_111.png",
+        "sourceUnitId": "U0368",
+        "absenceCapability": false,
+        "finishCapability": false
       }
     },
     {
@@ -10188,6 +10321,18 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "capabilityEdgeIds": [
+        "tpci-it-card-archive-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "language"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-10",
+  "generated": "2026-08-11",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -10,8 +10,8 @@
   ],
   "counts": {
    "providers": 23,
-   "evidenceRecords": 889,
-   "uniqueUrls": 882,
+   "evidenceRecords": 890,
+   "uniqueUrls": 883,
    "nonUrlEvidenceClasses": 7,
    "claimsAttributed": 2789
   }
@@ -19,15 +19,16 @@
  "providers": [
   {
    "providerId": "pokemon-official",
-   "displayName": "The Pokémon Company official checklists",
+   "displayName": "The Pokémon Company official cards and checklists",
    "organization": "The Pokémon Company International",
    "homepage": "https://www.pokemon.com",
    "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "complete-manifest within the stated set or Prize Pack scope",
+   "coverage": "positive localized card pages; complete manifests only within named checklists",
    "supportsAbsence": true,
    "usedFor": [
+    "language",
     "finish",
     "product"
    ],
@@ -37,15 +38,15 @@
     "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
     "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
    ],
-   "attribution": "Official product checklists © The Pokémon Company International.",
-   "notes": "The only source permitted to establish that a finish is absent, and only inside its stated scope.",
+   "attribution": "Official card pages and product checklists © The Pokémon Company International.",
+   "notes": "Localized card pages provide positive card/language evidence only. Exact checklists may establish finish absence only inside their stated scope.",
    "hosts": [
     "assets.pokemon.com",
     "d1wx537rtdixyy.cloudfront.net",
     "www.pokemon.com"
    ],
-   "uniqueSources": 4,
-   "claimsSupported": 12
+   "uniqueSources": 5,
+   "claimsSupported": 13
   },
   {
    "providerId": "pokemon-card-jp",
@@ -138,7 +139,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 88,
-   "claimsSupported": 689
+   "claimsSupported": 688
   },
   {
    "providerId": "tcgcsv",
@@ -1349,7 +1350,7 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 67,
+   "stableIdCount": 66,
    "stableIds": [
     "U0049",
     "U0085",
@@ -1388,7 +1389,6 @@
     "U0362",
     "U0363",
     "U0364",
-    "U0368",
     "U0370",
     "U0384",
     "U0413",
@@ -1400,10 +1400,11 @@
     "U0502",
     "U0508",
     "U0509",
-    "U0511"
+    "U0511",
+    "U0512"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 67
+   "usageCount": 66
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Lost_Link_(TCG)",
@@ -11410,6 +11411,23 @@
    "retrievedAt": "2026-07-23",
    "usageCount": 3,
    "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "The Pokémon Company official Italian locale card archive, card page"
+   ],
+   "dimensions": [
+    "language"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "U0368"
+   ],
+   "retrievedAt": "2026-08-11",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",

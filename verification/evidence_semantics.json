@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-evidence-semantics",
     "schemaVersion": "0.1.0",
-    "generated": "2026-08-10",
+    "generated": "2026-08-11",
     "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
     "status": "inventory only — no verdict is changed by this report",
     "description": "Every unit classified by the granularity of the evidence it rests on, and, for set-level confirmations, whether the inference from set to card carries.",
@@ -150,19 +150,19 @@
         "contradicted": 28
       },
       "product-or-set": {
-        "confirmed": 101,
+        "confirmed": 100,
         "contradicted": 23
       },
       "sibling-derived": {
         "confirmed": 14
       },
       "specimen-or-card": {
-        "confirmed": 519,
+        "confirmed": 520,
         "contradicted": 34
       }
     },
-    "setLevelConfirmations": 101,
-    "setLevelConfirmationsThatCarry": 84,
+    "setLevelConfirmations": 100,
+    "setLevelConfirmationsThatCarry": 83,
     "setLevelConfirmationsThatDoNotCarry": 17,
     "setLevelConfirmationsNeedingSetSize": 0,
     "setLevelConfirmationsNotReachingTheCard": 17,
@@ -171,7 +171,7 @@
       "unscoped-absence": 27
     },
     "setLevelConfirmationsByRunBasis": {
-      "printed-set-size": 32,
+      "printed-set-size": 31,
       "rarity-table": 51,
       "distribution-rarity": 18
     },
@@ -8666,16 +8666,16 @@
       "variant": "base",
       "language": "Italian",
       "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
+      "providerId": "pokemon-official",
+      "granularity": "specimen-or-card",
       "rarity": "Ultra Rare",
       "insideNumberedRun": true,
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 111 against the set's printed size 111, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "carries",
+      "inference": null,
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "step-from-product-to-card"
+      "verdictTransitionRule": "card-level-record"
     },
     {
       "unitId": "U0369",

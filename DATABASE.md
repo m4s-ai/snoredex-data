@@ -41,8 +41,8 @@ from that evidence to this card holds:
 
 | granularity | inference | rows | what it means |
 |---|---|---:|---|
-| `specimen-or-card` | — | 519 | a record about this card in this language |
-| `product-or-set` | `carries` | 84 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
+| `specimen-or-card` | — | 520 | a record about this card in this language |
+| `product-or-set` | `carries` | 83 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
 | `product-or-set` | `does-not-carry` | **17** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
 | `product-or-set` | `needs-set-size` | 0 | was: undecidable without a printed set size. The set database records those sizes now (#146), so run membership is computed rather than inferred from a rarity word |
 | `sibling-derived` | — | 14 | the evidence of a neighbouring unit |
