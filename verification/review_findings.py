@@ -1278,7 +1278,10 @@ def collect() -> None:
         discovered_by_slice = {}
         for request in card_manifest["requests"]:
             discovered = set()
-            for response in request["pages"] + request["details"] + request.get("assets", []):
+            for response in (
+                request["pages"] + request["details"]
+                + request.get("sets", []) + request.get("assets", [])
+            ):
                 raw_path = card_run_root / response["rawPath"]
                 actual = "sha256:" + hashlib.sha256(raw_path.read_bytes()).hexdigest()
                 if actual != response["responseHash"]:
@@ -1308,11 +1311,23 @@ def collect() -> None:
             )
             or row["accounting"]["fetched"] != len(discovered_by_slice[row["sliceId"]])
         ]
-        allowed_query_fields = {"nameQueries", "cardType", "regulation", "pageParameter"}
+        card_adapters = {row["adapterId"]: row for row in card_contract["adapters"]}
         query_seed_faults = [
             request["sliceId"] for request in card_manifest["requests"]
-            if set(request["queryParameters"]) != allowed_query_fields
+            if set(request["queryParameters"]) != (
+                {"nameQueries", "nameFilter", "pagination"}
+                if card_adapters[request["adapterId"]].get("responseFormat") == "tcgdex-json"
+                else {"nameQueries", "cardType", "regulation", "pageParameter"}
+            )
             or not request["queryParameters"]["nameQueries"]
+            or (
+                card_adapters[request["adapterId"]].get("responseFormat") == "tcgdex-json"
+                and (
+                    request["queryParameters"].get("nameFilter") != "strict-equality"
+                    or request["queryParameters"].get("pagination")
+                        != "disabled-provider-default"
+                )
+            )
         ]
         card_ids = [row["recordId"] for row in card_records]
         card_keys = [row["stableKey"] for row in card_records]
@@ -1367,11 +1382,21 @@ def collect() -> None:
             if row["raw"]["localName"].startswith("小卡比獸")
             and row["bucket"] != "positively-excluded"
         ]
+        pocket_rows = [
+            row for row in card_records
+            if row["sourceRecord"].get("productScope") == "digital-pocket"
+        ]
+        pocket_faults = [
+            row["recordId"] for row in pocket_rows
+            if row["bucket"] != "positively-excluded"
+            or row["sourceRecord"].get("setSeries", {}).get("id") != "tcgp"
+            or not row.get("setResponseHash")
+        ]
         card_gap_text = " ".join(
             f"{row['track']} {row['reason']}" for row in card_contract["gaps"]
         ).lower()
         required_card_gaps = ("japanese", "indonesian", "thai", "korean", "simplified-chinese",
-                              "western", "latam", "specialist", "pocket")
+                              "western", "latam", "specialist")
         missing_card_gaps = [term for term in required_card_gaps if term not in card_gap_text]
         card_source = (ROOT / "scripts" / "card_discovery.py").read_text(encoding="utf-8")
         check(
@@ -1379,14 +1404,17 @@ def collect() -> None:
             "Local card identifiers, unmatched queues, failure states and non-destructive proposals survive",
             "FAIL",
             not card_provenance_faults and not card_preservation_faults
-            and svqp_ok and not munchlax_faults and not missing_card_gaps
+            and svqp_ok and not munchlax_faults and pocket_rows and not pocket_faults
+            and not missing_card_gaps
             and "--resume" in card_source and "source-failed" in card_source
             and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
                     for row in card_stage["slices"])
             and all(row["terminalState"] in {"needs-evidence", "blocked-by-source"}
                     for row in card_stage["gaps"]),
             f"provenance={card_provenance_faults[:3]}, preservation={card_preservation_faults[:3]}, "
-            f"svqp={svqp_ok}, munchlax={munchlax_faults[:3]}, missingGaps={missing_card_gaps}",
+            f"svqp={svqp_ok}, munchlax={munchlax_faults[:3]}, "
+            f"pocket={pocket_faults[:3] if pocket_rows else ['missing-positive-exclusion']}, "
+            f"missingGaps={missing_card_gaps}",
         )
 
     with guarded("G3", "image formats"):

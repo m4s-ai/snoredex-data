@@ -412,6 +412,13 @@ adapter slice accounts for one provider response, not an era or locality univers
 remain unknown. The matrix is the decomposition input for #139 child issues, not a replacement for
 their per-locality discovery loops.
 
+The first child loop, #188, is retained as card-discovery run `20260811T100924Z`: the exact English
+TCGdex query accounts for 45 rows as 41 matched physical releases and four source-identified
+Pokémon TCG Pocket exclusions. It yields no US/Canada, Europe, or Australia/New Zealand physical
+distribution discriminator, so the `west-en` track is terminal as a complete positive slice without
+inventing a regional split. A future split still requires a positive physical marking or
+distribution record.
+
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
 Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.

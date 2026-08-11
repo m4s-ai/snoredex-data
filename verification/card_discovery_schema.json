@@ -47,11 +47,13 @@
         "properties": {
           "adapterId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
           "adapterVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+          "responseFormat": {"enum": ["pokemon-asia-html", "tcgdex-json"]},
           "providerId": {"type": "string"},
           "surfaceId": {"type": "string"},
           "state": {"const": "active"},
           "listEndpointTemplate": {"type": "string", "pattern": "^https://"},
           "detailEndpointTemplate": {"type": "string", "pattern": "^https://"},
+          "setEndpointTemplate": {"type": "string", "pattern": "^https://"},
           "category": {"const": "card"},
           "sourceFirst": {"const": true},
           "pageParameter": {"type": "string", "minLength": 1},

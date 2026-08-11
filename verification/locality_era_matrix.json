@@ -47,19 +47,19 @@
           "start": null,
           "end": null,
           "state": "positive-observations-only",
-          "basis": "The retained English TCGdex set slice accounts for every returned row, while provider population and regional distribution remain open.",
-          "evidenceRefs": ["slice:tcgdex-en-sets", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
+          "basis": "The retained English TCGdex set slice and exact-name Snorlax card slice account for every returned row, while provider population and regional distribution remain open.",
+          "evidenceRefs": ["slice:tcgdex-en-sets", "card-slice:tcgdex-en-snorlax", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "ready-for-child",
-        "sourceRefs": ["slice:tcgdex-en-sets", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
+        "state": "complete-positive-slice",
+        "sourceRefs": ["slice:tcgdex-en-sets", "card-slice:tcgdex-en-snorlax", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
         "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
-        "retryCondition": "Activate an English card slice with positive detail fixtures, then split regional products only when their physical markings or distribution evidence differ."
+        "retryCondition": "Rerun the exact-name slice for deltas; split regional products only when a positive physical marking or distribution record distinguishes them."
       },
-      "evidenceRefs": ["unit:U0000", "slice:tcgdex-en-sets", "edge:tcgdex-west-positive"],
-      "openQuestions": ["Which regular cards differ by Western distribution region rather than only by packaging?"],
+      "evidenceRefs": ["unit:U0000", "slice:tcgdex-en-sets", "card-slice:tcgdex-en-snorlax", "edge:tcgdex-west-positive"],
+      "openQuestions": ["No regional split is admitted by the current source: which positive physical marking or distribution record distinguishes US/Canada, Europe, or Australia/New Zealand?"],
       "childIssue": 188
     },
     {

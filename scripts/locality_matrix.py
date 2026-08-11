@@ -33,7 +33,8 @@ UNIVERSE_STATES = {
     "candidate-needs-evidence", "coordinated",
 }
 DISCOVERY_STATES = {
-    "ready-for-child", "needs-evidence", "blocked-by-source", "coordinated",
+    "ready-for-child", "complete-positive-slice", "needs-evidence",
+    "blocked-by-source", "coordinated",
 }
 ERA_STATES = {
     "positive-observations-only", "owner-scoped", "owner-bounded-end",
@@ -77,6 +78,7 @@ def reference_indexes() -> dict[str, Any]:
         for item in read_json(ROOT / "verification" / "source_adapter_staging.json")["slices"]
     }
     card_discovery = read_json(ROOT / "verification" / "card_discovery_adapters.json")
+    card_staging = read_json(ROOT / "verification" / "card_discovery_staging.json")
     return {
         "surface": surfaces,
         "edge": edges,
@@ -85,6 +87,7 @@ def reference_indexes() -> dict[str, Any]:
         "retained-slice": retained_slices,
         "source-gap": {item["gapId"]: item for item in source_adapters["gaps"]},
         "card-gap": {item["gapId"]: item for item in card_discovery["gaps"]},
+        "card-slice": {item["sliceId"]: item for item in card_staging["slices"]},
         "unit": {item["unitId"]: item for item in read_json(ROOT / "verification" / "units.json")},
         "adjudication": {
             item["adjudicationId"]: item
@@ -122,6 +125,21 @@ def validate_reference(reference: str, track: dict[str, Any], indexes: dict[str,
             errors.append(f"{track['trackId']}: slice {identifier} has no retained run")
         if item["locality"] != track["locality"] or item["language"] != track["language"]:
             errors.append(f"{track['trackId']}: slice {identifier} has another locality/language")
+    elif kind == "card-slice":
+        contract_slices = {
+            item["sliceId"]: item
+            for adapter in read_json(ROOT / "verification" / "card_discovery_adapters.json")["adapters"]
+            for item in adapter["slices"]
+        }
+        contract_slice = contract_slices.get(identifier)
+        if not contract_slice:
+            errors.append(f"{track['trackId']}: card slice {identifier} has no contract")
+        elif (contract_slice["locality"], contract_slice["language"]) != (
+            track["locality"], track["language"]
+        ):
+            errors.append(f"{track['trackId']}: card slice {identifier} has another locality/language")
+        if item.get("terminalState") != "complete":
+            errors.append(f"{track['trackId']}: card slice {identifier} is not complete")
     elif kind == "unit" and item["language"] != track["language"]:
         errors.append(f"{track['trackId']}: unit {identifier} is {item['language']}, not {track['language']}")
     return errors

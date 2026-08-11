@@ -2,12 +2,12 @@
 """Discover and reconcile provider-native card records without a legacy seed (#136).
 
 The reviewed contract is ``verification/card_discovery_adapters.json``. Network access occurs
-only with ``--refresh-asia``. Normal generation and CI checks replay committed immutable HTML
-responses, then match the resulting positive card records against ADR-0001 identities without
-mutating any verdict store.
+only with ``--refresh``. Normal generation and CI checks replay committed immutable responses,
+then match the resulting positive card records against ADR-0001 identities without mutating any
+verdict store.
 
-    python scripts/card_discovery.py --refresh-asia --run-id 20260809T180000Z
-    python scripts/card_discovery.py --refresh-asia --run-id 20260809T180000Z --resume
+    python scripts/card_discovery.py --refresh --run-id 20260809T180000Z
+    python scripts/card_discovery.py --refresh --run-id 20260809T180000Z --resume
     python scripts/card_discovery.py
     python scripts/card_discovery.py --check
 """
@@ -249,7 +249,8 @@ def surfaces_used(requests: Iterable[dict[str, Any]]) -> list[str]:
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
 def render_projection(projection: dict[str, Any]) -> tuple[str, str]:
@@ -267,7 +268,23 @@ def raw_key(provider_id: str, surface_id: str, raw_locale: str, raw_provider_id:
     return "|".join((provider_id, surface_id, raw_locale, raw_provider_id))
 
 
-def parse_list(raw: bytes) -> dict[str, Any]:
+def parse_list(raw: bytes, response_format: str = "pokemon-asia-html") -> dict[str, Any]:
+    if response_format == "tcgdex-json":
+        value = json.loads(raw.decode("utf-8-sig"))
+        if not isinstance(value, list):
+            raise DiscoveryError("TCGdex card search did not return an array")
+        detail_ids = []
+        for item in value:
+            if not isinstance(item, dict) or not isinstance(item.get("id"), str):
+                raise DiscoveryError("TCGdex card search row lacks a string id")
+            detail_ids.append(item["id"])
+        return {
+            "resultCount": len(value),
+            "totalPages": 1,
+            "detailIds": list(dict.fromkeys(detail_ids)),
+        }
+    if response_format != "pokemon-asia-html":
+        raise DiscoveryError(f"unsupported card response format: {response_format}")
     parser = AsiaListParser()
     parser.feed(raw.decode("utf-8-sig"))
     detail_ids = list(dict.fromkeys(parser.detail_ids))
@@ -280,7 +297,47 @@ def parse_list(raw: bytes) -> dict[str, Any]:
     }
 
 
-def parse_detail(raw: bytes, raw_provider_id: str) -> dict[str, Any]:
+def parse_detail(
+    raw: bytes,
+    raw_provider_id: str,
+    response_format: str = "pokemon-asia-html",
+    set_record: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    if response_format == "tcgdex-json":
+        value = json.loads(raw.decode("utf-8-sig"))
+        if not isinstance(value, dict) or value.get("id") != raw_provider_id:
+            raise DiscoveryError(f"TCGdex detail id differs: {raw_provider_id}")
+        set_brief = value.get("set")
+        if not isinstance(set_brief, dict) or not isinstance(set_brief.get("id"), str):
+            raise DiscoveryError(f"TCGdex detail lacks a set id: {raw_provider_id}")
+        if not isinstance(set_record, dict) or set_record.get("id") != set_brief["id"]:
+            raise DiscoveryError(f"TCGdex detail lacks its retained set record: {raw_provider_id}")
+        series = set_record.get("serie")
+        if not isinstance(series, dict) or not isinstance(series.get("id"), str):
+            raise DiscoveryError(f"TCGdex set lacks a series identity: {set_brief['id']}")
+        product_scope = (
+            "digital-pocket" if series["id"] == "tcgp" else "physical-tcg"
+        )
+        return {
+            "detailId": raw_provider_id,
+            "localName": value.get("name"),
+            "rawSetCode": set_brief["id"],
+            "localCollectorNumber": value.get("localId"),
+            "cardImageUrl": value.get("image"),
+            "setSymbolUrl": set_brief.get("symbol"),
+            "productScope": product_scope,
+            "setName": set_brief.get("name"),
+            "setSeries": {"id": series["id"], "name": series.get("name")},
+            "providerRecord": value,
+            "providerSetIdentity": {
+                "id": set_record["id"],
+                "name": set_record.get("name"),
+                "serie": {"id": series["id"], "name": series.get("name")},
+                "releaseDate": set_record.get("releaseDate"),
+            },
+        }
+    if response_format != "pokemon-asia-html":
+        raise DiscoveryError(f"unsupported card response format: {response_format}")
     parser = AsiaDetailParser()
     parser.feed(raw.decode("utf-8-sig"))
     raw_set_code = parser.expansion_code
@@ -322,6 +379,11 @@ def validate_contract(
         if adapter_id in seen_adapters:
             raise DiscoveryError(f"duplicate adapterId {adapter_id}")
         seen_adapters.add(adapter_id)
+        response_format = adapter.get("responseFormat", "pokemon-asia-html")
+        if response_format not in {"pokemon-asia-html", "tcgdex-json"}:
+            raise DiscoveryError(f"adapter {adapter_id} has an unsupported response format")
+        if response_format == "tcgdex-json" and not adapter.get("setEndpointTemplate"):
+            raise DiscoveryError(f"adapter {adapter_id} requires a set detail endpoint")
         if adapter["providerId"] not in providers:
             raise DiscoveryError(f"adapter {adapter_id} names unknown provider")
         surface = surfaces.get(adapter["surfaceId"])
@@ -425,6 +487,9 @@ def normalize_record(
         assertion["assertedLocalSetCode"] if assertion is not None else raw_set_code
     )
     mapping = mappings.get(stable_key)
+    source_url = adapter["detailEndpointTemplate"].format(
+        rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
+    )
     exclusions = [
         row for row in slice_row["positiveNameExclusions"]
         if isinstance(local_name, str) and local_name.startswith(row["prefix"])
@@ -435,6 +500,10 @@ def normalize_record(
         and row.get("language") == slice_row["language"]
         and row.get("localSetCode") == proposed_set_code
         and row.get("localNumber") == local_number
+    ]
+    source_matches = [
+        row for row in identity_releases
+        if source_url in row.get("sourceRecords", [])
     ]
     missing = [
         field for field, value in (
@@ -466,6 +535,18 @@ def normalize_record(
         bucket = "matched"
         bucket_basis = mapping["evidence"]
         target = mapping["targetCardReleaseId"]
+    elif len(source_matches) == 1:
+        bucket = "matched"
+        bucket_basis = "exact provider detail URL already establishes one ADR-0001 card release"
+        target = source_matches[0]["cardReleaseId"]
+    elif len(source_matches) > 1:
+        bucket = "ambiguous"
+        bucket_basis = "one provider detail URL establishes more than one ADR-0001 card release"
+        equivalence_proposals.extend({
+            "targetCardReleaseId": row["cardReleaseId"],
+            "evidence": bucket_basis,
+            "destructiveMergeAllowed": False,
+        } for row in source_matches)
     elif len(exact_matches) == 1:
         bucket = "matched"
         bucket_basis = "exact locality, language, asserted local set code, and collector number tuple"
@@ -486,8 +567,9 @@ def normalize_record(
     detail = next(
         row for row in request["details"] if row["rawProviderId"] == raw_provider_id
     )
-    source_url = adapter["detailEndpointTemplate"].format(
-        rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
+    retained_set = next(
+        (row for row in request.get("sets", []) if row["rawSetCode"] == raw_set_code),
+        None,
     )
     return {
         "recordId": record_id,
@@ -508,6 +590,7 @@ def normalize_record(
         "retrievedAt": request["retrievedAt"],
         "listResponseHashes": list_hashes,
         "detailResponseHash": detail["responseHash"],
+        "setResponseHash": None if retained_set is None else retained_set["responseHash"],
         "recordHash": content_hash(source_record),
         "runId": request["runId"],
         "raw": {
@@ -622,6 +705,7 @@ def build_projection(
         if not pair or not adapter or pair[0]["adapterId"] != request["adapterId"]:
             raise DiscoveryError(f"run request has unknown slice {request['sliceId']}")
         slice_row = pair[1]
+        response_format = adapter.get("responseFormat", "pokemon-asia-html")
         expected_list = adapter["listEndpointTemplate"].format(rawLocale=slice_row["rawLocale"])
         if request.get("endpoint") != expected_list:
             raise DiscoveryError(f"run request endpoint differs for {request['sliceId']}")
@@ -637,7 +721,7 @@ def build_projection(
                 raw = checked_raw_path(run_dir, page["rawPath"]).read_bytes()
                 if content_hash(raw) != page["responseHash"]:
                     raise DiscoveryError(f"list response hash mismatch: {page['rawPath']}")
-                parsed = parse_list(raw)
+                parsed = parse_list(raw, response_format)
                 if parsed != {
                     "resultCount": page["resultCount"],
                     "totalPages": page["totalPages"],
@@ -656,16 +740,41 @@ def build_projection(
                         "code": "incomplete-pagination", "sliceId": request["sliceId"],
                         "query": query, "meaning": "needs-evidence; never a closed catalogue",
                     })
-            discovered_unique = sorted(set(discovered_ids), key=lambda value: int(value))
+            discovered_unique = sorted(
+                set(discovered_ids),
+                key=(lambda value: int(value))
+                if response_format == "pokemon-asia-html" else None,
+            )
             details = {row["rawProviderId"]: row for row in request["details"]}
             if set(details) != set(discovered_unique):
                 raise DiscoveryError(f"detail accounting differs for {request['sliceId']}")
+            retained_sets: dict[str, dict[str, Any]] = {}
+            for retained_set in request.get("sets", []):
+                raw = checked_raw_path(run_dir, retained_set["rawPath"]).read_bytes()
+                if content_hash(raw) != retained_set["responseHash"]:
+                    raise DiscoveryError(f"set response hash mismatch: {retained_set['rawPath']}")
+                value = json.loads(raw.decode("utf-8-sig"))
+                if not isinstance(value, dict) or value.get("id") != retained_set["rawSetCode"]:
+                    raise DiscoveryError(f"set parse drift: {retained_set['rawPath']}")
+                retained_sets[retained_set["rawSetCode"]] = value
+            discovered_set_codes: set[str] = set()
             for raw_provider_id in discovered_unique:
                 detail = details[raw_provider_id]
                 raw = checked_raw_path(run_dir, detail["rawPath"]).read_bytes()
                 if content_hash(raw) != detail["responseHash"]:
                     raise DiscoveryError(f"detail response hash mismatch: {detail['rawPath']}")
-                source_record = parse_detail(raw, raw_provider_id)
+                set_record = None
+                if response_format == "tcgdex-json":
+                    value = json.loads(raw.decode("utf-8-sig"))
+                    set_brief = value.get("set") if isinstance(value, dict) else None
+                    raw_set_code = set_brief.get("id") if isinstance(set_brief, dict) else None
+                    if not isinstance(raw_set_code, str):
+                        raise DiscoveryError(f"TCGdex detail lacks a set id: {raw_provider_id}")
+                    discovered_set_codes.add(raw_set_code)
+                    set_record = retained_sets.get(raw_set_code)
+                source_record = parse_detail(
+                    raw, raw_provider_id, response_format, set_record
+                )
                 record = normalize_record(
                     adapter, slice_row, request, source_record, identity["cardReleases"],
                     mappings, assertions,
@@ -675,6 +784,9 @@ def build_projection(
                 seen_keys.add(record["stableKey"])
                 slice_records.append(record)
                 records.append(record)
+
+            if response_format == "tcgdex-json" and set(retained_sets) != discovered_set_codes:
+                raise DiscoveryError(f"set accounting differs for {request['sliceId']}")
 
             used_assertions = {
                 row["normalizationProposal"]["rawSetCode"]
@@ -721,7 +833,7 @@ def build_projection(
             "terminalState": terminal_state,
             "sourceFailureState": source_failure_state,
             "terminalMeaning": (
-                "every positive detail returned by the bounded native-name query was retained and accounted; historical or provider-universe completeness is not claimed"
+                "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed"
                 if terminal_state == "complete" else
                 "source access, pagination, parsing, or positive content needs evidence; no absence is inferred"
             ),
@@ -792,8 +904,19 @@ def build_latest(
         manifest = read_json(run_dir / "manifest.json")
         if manifest.get("runId") != run_dir.name:
             raise DiscoveryError(f"run directory and manifest id differ: {run_dir.name}")
+        run_contract = contract
+        if manifest.get("contractHash") != content_hash(contract):
+            snapshot_path = run_dir / "contract.json"
+            if not snapshot_path.is_file():
+                raise DiscoveryError(
+                    f"historical run {run_dir.name} needs its immutable contract snapshot"
+                )
+            run_contract = read_json(snapshot_path)
+            if manifest.get("contractHash") != content_hash(run_contract):
+                raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
+            validate_contract(run_contract, capability, identity)
         previous = build_projection(
-            contract, capability, identity, manifest, run_dir, previous
+            run_contract, capability, identity, manifest, run_dir, previous
         )
     return previous, directories[-1]
 
@@ -830,6 +953,17 @@ def new_manifest(
     requests = []
     for adapter in contract["adapters"]:
         for slice_row in adapter["slices"]:
+            query_parameters = {"nameQueries": slice_row["nameQueries"]}
+            if adapter.get("responseFormat", "pokemon-asia-html") == "pokemon-asia-html":
+                query_parameters.update({
+                    "cardType": "all", "regulation": "all",
+                    "pageParameter": adapter["pageParameter"],
+                })
+            else:
+                query_parameters.update({
+                    "nameFilter": "strict-equality",
+                    "pagination": "disabled-provider-default",
+                })
             requests.append({
                 "runId": run_id,
                 "adapterId": adapter["adapterId"],
@@ -842,13 +976,9 @@ def new_manifest(
                 "endpoint": adapter["listEndpointTemplate"].format(
                     rawLocale=slice_row["rawLocale"]
                 ),
-                "queryParameters": {
-                    "nameQueries": slice_row["nameQueries"],
-                    "cardType": "all", "regulation": "all",
-                    "pageParameter": adapter["pageParameter"],
-                },
+                "queryParameters": query_parameters,
                 "retrievedAt": timestamp,
-                "pages": [], "details": [], "assets": [],
+                "pages": [], "details": [], "sets": [], "assets": [],
                 "checkpoint": {
                     "completedPages": [], "completedDetailIds": [],
                     "nextPage": 1, "complete": False,
@@ -873,6 +1003,164 @@ def new_manifest(
     }
 
 
+def refresh_asia_request(
+    run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
+    adapter: dict[str, Any], slice_row: dict[str, Any],
+    assertion_by_code: dict[tuple[str, str, str, str], dict[str, Any]],
+) -> None:
+    pages_by_pair = {(row["query"], row["pageNo"]): row for row in request["pages"]}
+    for query_index, query in enumerate(slice_row["nameQueries"], start=1):
+        page_no = 1
+        total_pages = None
+        while total_pages is None or page_no <= total_pages:
+            pair = (query, page_no)
+            page = pages_by_pair.get(pair)
+            if page is None:
+                parameters = {
+                    "pageNo": page_no, "keyword": query,
+                    "cardType": "all", "regulation": "all",
+                }
+                url = request["endpoint"] + "?" + urllib.parse.urlencode(parameters)
+                raw = fetch_bytes(url)
+                parsed = parse_list(raw, "pokemon-asia-html")
+                relative = f"raw/{request['sliceId']}/query-{query_index}/page-{page_no}.html"
+                page = {
+                    "query": query, "pageNo": page_no, "url": url,
+                    "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
+                    **parsed,
+                }
+                request["pages"].append(page)
+                pages_by_pair[pair] = page
+                request["checkpoint"]["completedPages"] = sorted(
+                    f"{row['query']}:{row['pageNo']}" for row in request["pages"]
+                )
+                request["checkpoint"]["nextPage"] = page_no + 1
+                save_manifest(run_dir, manifest)
+            total_pages = page["totalPages"]
+            page_no += 1
+
+    discovered_ids = sorted({
+        raw_id for page in request["pages"] for raw_id in page["detailIds"]
+    }, key=lambda value: int(value))
+    details = {row["rawProviderId"]: row for row in request["details"]}
+    for raw_provider_id in discovered_ids:
+        if raw_provider_id not in details:
+            url = adapter["detailEndpointTemplate"].format(
+                rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
+            )
+            raw = fetch_bytes(url)
+            parsed = parse_detail(raw, raw_provider_id, "pokemon-asia-html")
+            relative = f"raw/{request['sliceId']}/details/{raw_provider_id}.html"
+            detail = {
+                "rawProviderId": raw_provider_id, "url": url,
+                "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
+                "parsedRecordHash": content_hash(parsed),
+            }
+            request["details"].append(detail)
+            details[raw_provider_id] = detail
+            request["checkpoint"]["completedDetailIds"] = sorted(
+                details, key=lambda value: int(value)
+            )
+            save_manifest(run_dir, manifest)
+
+    assets = {row["rawSetCode"]: row for row in request["assets"]}
+    for raw_provider_id in discovered_ids:
+        detail = details[raw_provider_id]
+        raw = checked_raw_path(run_dir, detail["rawPath"]).read_bytes()
+        source_record = parse_detail(raw, raw_provider_id, "pokemon-asia-html")
+        assertion = assertion_by_code.get((
+            adapter["providerId"], adapter["surfaceId"], slice_row["rawLocale"],
+            source_record.get("rawSetCode"),
+        ))
+        if assertion is not None and assertion["rawSetCode"] not in assets:
+            asset_raw = fetch_bytes(assertion["assetUrl"])
+            extension = Path(urllib.parse.urlparse(assertion["assetUrl"]).path).suffix or ".bin"
+            relative = f"raw/{request['sliceId']}/assets/{assertion['rawSetCode']}{extension}"
+            asset = {
+                "rawSetCode": assertion["rawSetCode"], "url": assertion["assetUrl"],
+                "rawPath": relative,
+                "responseHash": retain_response(run_dir, relative, asset_raw),
+            }
+            request["assets"].append(asset)
+            assets[assertion["rawSetCode"]] = asset
+            save_manifest(run_dir, manifest)
+
+
+def refresh_tcgdex_request(
+    run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
+    adapter: dict[str, Any], slice_row: dict[str, Any],
+) -> None:
+    pages_by_query = {row["query"]: row for row in request["pages"]}
+    for query_index, query in enumerate(slice_row["nameQueries"], start=1):
+        if query not in pages_by_query:
+            url = request["endpoint"] + "?" + urllib.parse.urlencode({"name": f"eq:{query}"})
+            raw = fetch_bytes(url)
+            parsed = parse_list(raw, "tcgdex-json")
+            relative = f"raw/{request['sliceId']}/query-{query_index}.json"
+            page = {
+                "query": query, "pageNo": 1, "url": url,
+                "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
+                **parsed,
+            }
+            request["pages"].append(page)
+            pages_by_query[query] = page
+            request["checkpoint"]["completedPages"] = sorted(
+                f"{row['query']}:{row['pageNo']}" for row in request["pages"]
+            )
+            save_manifest(run_dir, manifest)
+
+    discovered_ids = sorted({
+        raw_id for page in request["pages"] for raw_id in page["detailIds"]
+    })
+    details = {row["rawProviderId"]: row for row in request["details"]}
+    for raw_provider_id in discovered_ids:
+        if raw_provider_id not in details:
+            url = adapter["detailEndpointTemplate"].format(
+                rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
+            )
+            raw = fetch_bytes(url)
+            value = json.loads(raw.decode("utf-8-sig"))
+            if not isinstance(value, dict) or value.get("id") != raw_provider_id:
+                raise DiscoveryError(f"TCGdex detail id differs: {raw_provider_id}")
+            relative = f"raw/{request['sliceId']}/details/{raw_provider_id}.json"
+            detail = {
+                "rawProviderId": raw_provider_id, "url": url,
+                "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
+                "parsedRecordHash": content_hash(value),
+            }
+            request["details"].append(detail)
+            details[raw_provider_id] = detail
+            request["checkpoint"]["completedDetailIds"] = sorted(details)
+            save_manifest(run_dir, manifest)
+
+    sets = {row["rawSetCode"]: row for row in request["sets"]}
+    for raw_provider_id in discovered_ids:
+        detail = details[raw_provider_id]
+        value = json.loads(checked_raw_path(run_dir, detail["rawPath"]).read_text(
+            encoding="utf-8-sig"
+        ))
+        set_brief = value.get("set") if isinstance(value, dict) else None
+        raw_set_code = set_brief.get("id") if isinstance(set_brief, dict) else None
+        if not isinstance(raw_set_code, str):
+            raise DiscoveryError(f"TCGdex detail lacks a set id: {raw_provider_id}")
+        if raw_set_code not in sets:
+            url = adapter["setEndpointTemplate"].format(
+                rawLocale=slice_row["rawLocale"], rawSetCode=raw_set_code
+            )
+            raw = fetch_bytes(url)
+            set_value = json.loads(raw.decode("utf-8-sig"))
+            if not isinstance(set_value, dict) or set_value.get("id") != raw_set_code:
+                raise DiscoveryError(f"TCGdex set id differs: {raw_set_code}")
+            relative = f"raw/{request['sliceId']}/sets/{raw_set_code}.json"
+            retained_set = {
+                "rawSetCode": raw_set_code, "url": url,
+                "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
+            }
+            request["sets"].append(retained_set)
+            sets[raw_set_code] = retained_set
+            save_manifest(run_dir, manifest)
+
+
 def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
     if not RUN_ID_PATTERN.fullmatch(run_id):
         raise DiscoveryError("--run-id must use YYYYMMDDTHHMMSSZ")
@@ -889,12 +1177,15 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
             raise DiscoveryError(f"immutable completed run cannot be resumed: {run_id}")
         if manifest.get("contractHash") != content_hash(contract) or manifest.get(
             "capabilityGraphHash"
-        ) != content_hash(capability):
+        ) != capability_pin(capability, manifest_surfaces(manifest)):
             raise DiscoveryError("resume inputs differ from the retained run")
+        if content_hash(read_json(run_dir / "contract.json")) != content_hash(contract):
+            raise DiscoveryError("resume contract snapshot differs from the retained run")
     else:
         if resume:
             raise DiscoveryError(f"cannot resume missing run: {run_id}")
         run_dir.mkdir(parents=True)
+        write_json(run_dir / "contract.json", contract)
         manifest = new_manifest(contract, capability, run_id, timestamp)
         save_manifest(run_dir, manifest)
 
@@ -913,89 +1204,19 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
             adapter = adapters[request["adapterId"]]
             slice_row = slices[request["sliceId"]]
             request["error"] = None
-            pages_by_pair = {(row["query"], row["pageNo"]): row for row in request["pages"]}
-            for query_index, query in enumerate(slice_row["nameQueries"], start=1):
-                page_no = 1
-                total_pages = None
-                while total_pages is None or page_no <= total_pages:
-                    pair = (query, page_no)
-                    page = pages_by_pair.get(pair)
-                    if page is None:
-                        parameters = {
-                            "pageNo": page_no, "keyword": query,
-                            "cardType": "all", "regulation": "all",
-                        }
-                        url = request["endpoint"] + "?" + urllib.parse.urlencode(parameters)
-                        raw = fetch_bytes(url)
-                        parsed = parse_list(raw)
-                        relative = (
-                            f"raw/{request['sliceId']}/query-{query_index}/page-{page_no}.html"
-                        )
-                        page = {
-                            "query": query, "pageNo": page_no, "url": url,
-                            "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
-                            **parsed,
-                        }
-                        request["pages"].append(page)
-                        pages_by_pair[pair] = page
-                        request["checkpoint"]["completedPages"] = sorted(
-                            f"{row['query']}:{row['pageNo']}" for row in request["pages"]
-                        )
-                        request["checkpoint"]["nextPage"] = page_no + 1
-                        save_manifest(run_dir, manifest)
-                    total_pages = page["totalPages"]
-                    page_no += 1
-
-            discovered_ids = sorted({
-                raw_id for page in request["pages"] for raw_id in page["detailIds"]
-            }, key=lambda value: int(value))
-            details = {row["rawProviderId"]: row for row in request["details"]}
-            for raw_provider_id in discovered_ids:
-                if raw_provider_id not in details:
-                    url = adapter["detailEndpointTemplate"].format(
-                        rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
-                    )
-                    raw = fetch_bytes(url)
-                    parsed = parse_detail(raw, raw_provider_id)
-                    relative = f"raw/{request['sliceId']}/details/{raw_provider_id}.html"
-                    detail = {
-                        "rawProviderId": raw_provider_id, "url": url,
-                        "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
-                        "parsedRecordHash": content_hash(parsed),
-                    }
-                    request["details"].append(detail)
-                    details[raw_provider_id] = detail
-                    request["checkpoint"]["completedDetailIds"] = sorted(
-                        details, key=lambda value: int(value)
-                    )
-                    save_manifest(run_dir, manifest)
-
-            assets = {row["rawSetCode"]: row for row in request["assets"]}
-            for raw_provider_id in discovered_ids:
-                detail = details[raw_provider_id]
-                raw = checked_raw_path(run_dir, detail["rawPath"]).read_bytes()
-                source_record = parse_detail(raw, raw_provider_id)
-                assertion = assertion_by_code.get((
-                    adapter["providerId"], adapter["surfaceId"], slice_row["rawLocale"],
-                    source_record.get("rawSetCode"),
-                ))
-                if assertion is not None and assertion["rawSetCode"] not in assets:
-                    asset_raw = fetch_bytes(assertion["assetUrl"])
-                    extension = Path(urllib.parse.urlparse(assertion["assetUrl"]).path).suffix or ".bin"
-                    relative = (
-                        f"raw/{request['sliceId']}/assets/{assertion['rawSetCode']}{extension}"
-                    )
-                    asset = {
-                        "rawSetCode": assertion["rawSetCode"], "url": assertion["assetUrl"],
-                        "rawPath": relative,
-                        "responseHash": retain_response(run_dir, relative, asset_raw),
-                    }
-                    request["assets"].append(asset)
-                    assets[assertion["rawSetCode"]] = asset
-                    save_manifest(run_dir, manifest)
+            response_format = adapter.get("responseFormat", "pokemon-asia-html")
+            if response_format == "pokemon-asia-html":
+                refresh_asia_request(
+                    run_dir, manifest, request, adapter, slice_row, assertion_by_code
+                )
+            elif response_format == "tcgdex-json":
+                refresh_tcgdex_request(run_dir, manifest, request, adapter, slice_row)
+            else:
+                raise DiscoveryError(f"unsupported card response format: {response_format}")
 
             request["pages"].sort(key=lambda row: (row["query"], row["pageNo"]))
-            request["details"].sort(key=lambda row: int(row["rawProviderId"]))
+            request["details"].sort(key=lambda row: row["rawProviderId"])
+            request["sets"].sort(key=lambda row: row["rawSetCode"])
             request["assets"].sort(key=lambda row: row["rawSetCode"])
             request["checkpoint"] = {
                 "completedPages": [
@@ -1006,7 +1227,8 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
                 "complete": True,
             }
             save_manifest(run_dir, manifest)
-    except (DiscoveryError, urllib.error.URLError, TimeoutError, UnicodeError) as error:
+    except (DiscoveryError, urllib.error.URLError, TimeoutError, UnicodeError,
+            json.JSONDecodeError) as error:
         request["error"] = {"code": "fetch-or-parse-failure", "message": str(error)}
         manifest["failures"] = [{
             "code": "request-failure", "sliceId": request["sliceId"],
@@ -1020,7 +1242,7 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
     save_manifest(run_dir, manifest)
     projection, _ = build_latest(contract, capability, identity)
     summary_text, records_text = render_projection(projection)
-    OUTPUT_PATH.write_text(summary_text, encoding="utf-8")
+    OUTPUT_PATH.write_bytes(summary_text.encode("utf-8"))
     RECORDS_PATH.write_bytes(records_text.encode("utf-8"))
     counts = projection["meta"]["counts"]
     print(
@@ -1032,19 +1254,22 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate immutable runs and projections")
-    parser.add_argument("--refresh-asia", action="store_true", help="create or resume an official Asia run")
+    parser.add_argument(
+        "--refresh", "--refresh-asia", dest="refresh", action="store_true",
+        help="create or resume one immutable run across all active card adapters",
+    )
     parser.add_argument("--resume", action="store_true", help="resume the named incomplete run")
     parser.add_argument("--run-id", help="immutable run id in YYYYMMDDTHHMMSSZ form")
     parser.add_argument("--retrieved-at", help="explicit ISO-8601 retrieval timestamp for a run")
     args = parser.parse_args()
     try:
-        if args.refresh_asia:
+        if args.refresh:
             if not args.run_id:
-                raise DiscoveryError("--refresh-asia requires --run-id")
+                raise DiscoveryError("--refresh requires --run-id")
             refresh(args.run_id, args.retrieved_at, args.resume)
             return 0
         if args.resume:
-            raise DiscoveryError("--resume requires --refresh-asia")
+            raise DiscoveryError("--resume requires --refresh")
         contract, capability, identity = load_inputs()
         projection, run_dir = build_latest(contract, capability, identity)
         rendered, records_rendered = render_projection(projection)
@@ -1066,7 +1291,7 @@ def main() -> int:
                 f"{counts['slices']} accounted slices; {counts['gaps']} explicit gaps"
             )
             return 0
-        OUTPUT_PATH.write_text(rendered, encoding="utf-8")
+        OUTPUT_PATH.write_bytes(rendered.encode("utf-8"))
         RECORDS_PATH.write_bytes(records_rendered.encode("utf-8"))
         print(f"wrote {OUTPUT_PATH.relative_to(ROOT)} from immutable run {run_dir.name}")
         return 0
