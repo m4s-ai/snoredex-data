@@ -1,0 +1,469 @@
+{
+  "meta": {
+    "schema": "snoredex-locality-era-matrix",
+    "schemaVersion": "1.0.0",
+    "reviewedAt": "2026-08-11",
+    "issue": 139,
+    "decompositionState": "matrix-first; child issues are created only after this reviewed matrix lands",
+    "policies": [
+      "A candidate track is not an established locality-universe node until positive evidence admits it.",
+      "A positive record establishes only the returned locality, language, identifiers and era point; it does not fill the intervals around it.",
+      "A complete adapter slice accounts for the provider response, not the provider population or physical TCG universe.",
+      "Zero rows, missing pages, filters and catalogue silence remain unknown unless an exact exhaustive scope says otherwise.",
+      "Legacy unit counts audit the frozen Cardmarket-derived universe and never define a locality or era boundary.",
+      "Every existing Spanish legacy unit is WEST / es-ES; LATAM / es-419 has no legacy projection.",
+      "Every track remains positive-only for discovery; owner-adjudicated product decisions do not become general automated absence rules."
+    ]
+  },
+  "excludedLegacyClaims": [
+    {
+      "unitId": "U0492",
+      "language": "Czech",
+      "reason": "The only legacy Czech claim is contradicted; prior review established that it is a marketplace language artefact, not a locality track."
+    },
+    {
+      "unitId": "U0493",
+      "language": "Hungarian",
+      "reason": "The only legacy Hungarian claim is contradicted; prior review established that it is a marketplace language artefact, not a locality track."
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "west-en",
+      "label": "Western English and regional distribution",
+      "locality": "WEST",
+      "language": "English",
+      "bcp47": "en",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "English-language physical cards distributed in Western markets; region-specific products and stamps remain separate distribution identities.",
+      "identityBoundary": "English text does not merge US/Canada, Europe, Australia/New Zealand, or later SEA distribution products when the physical card differs.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "distributionRegions": ["US/Canada", "Europe", "Australia/New Zealand"],
+      "eraSegments": [
+        {
+          "eraId": "provider-observed-unbounded",
+          "start": null,
+          "end": null,
+          "state": "positive-observations-only",
+          "basis": "The retained English TCGdex set slice accounts for every returned row, while provider population and regional distribution remain open.",
+          "evidenceRefs": ["slice:tcgdex-en-sets", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "ready-for-child",
+        "sourceRefs": ["slice:tcgdex-en-sets", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Activate an English card slice with positive detail fixtures, then split regional products only when their physical markings or distribution evidence differ."
+      },
+      "evidenceRefs": ["unit:U0000", "slice:tcgdex-en-sets", "edge:tcgdex-west-positive"],
+      "openQuestions": ["Which regular cards differ by Western distribution region rather than only by packaging?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-fr",
+      "label": "Western French",
+      "locality": "WEST",
+      "language": "French",
+      "bcp47": "fr",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "French-language physical cards in the current Western identity model.",
+      "identityBoundary": "French card releases remain language-bearing editions; marketplace availability and another locale's archive never establish them.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "provider-observed-unbounded",
+          "start": null,
+          "end": null,
+          "state": "positive-observations-only",
+          "basis": "The retained French TCGdex set slice is a positive set-name frontier with no historical completeness claim.",
+          "evidenceRefs": ["slice:tcgdex-fr-sets", "edge:tcgdex-west-positive"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "ready-for-child",
+        "sourceRefs": ["slice:tcgdex-fr-sets", "edge:tcgdex-west-positive"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Retain a French official archive detail fixture before adding that route; TCGdex card rows stay positive-only."
+      },
+      "evidenceRefs": ["unit:U0001", "slice:tcgdex-fr-sets", "edge:tcgdex-west-positive"],
+      "openQuestions": ["Which historical and promotional eras are absent from each positive catalogue surface?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-de",
+      "label": "Western German",
+      "locality": "WEST",
+      "language": "German",
+      "bcp47": "de",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "German-language physical cards in the current Western identity model.",
+      "identityBoundary": "German local set branding and collector identifiers survive even when artwork and card role match another language.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "provider-observed-unbounded",
+          "start": null,
+          "end": null,
+          "state": "positive-observations-only",
+          "basis": "The retained German TCGdex set slice is fully accounted but does not close missing eras or cards.",
+          "evidenceRefs": ["slice:tcgdex-de-sets", "edge:tcgdex-west-positive"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "ready-for-child",
+        "sourceRefs": ["slice:tcgdex-de-sets", "edge:tcgdex-west-positive"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Retain a German official archive detail fixture and activate a bounded positive card slice."
+      },
+      "evidenceRefs": ["unit:U0002", "slice:tcgdex-de-sets", "edge:tcgdex-west-positive"],
+      "openQuestions": ["Which product-only and stamped releases fall outside expansion card archives?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-it",
+      "label": "Western Italian",
+      "locality": "WEST",
+      "language": "Italian",
+      "bcp47": "it",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "Italian-language physical cards, with the official localized detail archive as a card-level route.",
+      "identityBoundary": "The Italian archive proves only the exact returned card; it inherits no finish or absence closure from official checklist surfaces.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "provider-observed-unbounded",
+          "start": null,
+          "end": null,
+          "state": "positive-observations-only",
+          "basis": "The Italian TCGdex set slice is a positive frontier and can contain set rows with no localized cards.",
+          "evidenceRefs": ["slice:tcgdex-it-sets", "edge:tcgdex-west-positive"],
+          "absenceAllowed": false
+        },
+        {
+          "eraId": "platinum-card-positive",
+          "start": "Platinum era",
+          "end": "Platinum era",
+          "state": "positive-observations-only",
+          "basis": "The exact official Italian pl2/111 detail positively establishes one historical Italian card without implying continuous archive coverage.",
+          "evidenceRefs": ["edge:tpci-it-card-archive-positive", "observation:obs-tpci-it-card-archive", "unit:U0368"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "ready-for-child",
+        "sourceRefs": ["slice:tcgdex-it-sets", "edge:tcgdex-west-positive", "surface:tpci-localized-card-archive", "edge:tpci-it-card-archive-positive", "observation:obs-tpci-it-card-archive"],
+        "gapRefs": ["card-gap:western-locality-card-discovery"],
+        "retryCondition": "Activate Italian card discovery with exact returned detail paths and retain every filter mismatch as a source gap, never a negative."
+      },
+      "evidenceRefs": ["unit:U0368", "observation:obs-tpci-it-card-archive", "slice:tcgdex-it-sets"],
+      "openQuestions": ["Which archive eras return matching card details, and which require specialist positive sources?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-es-eu",
+      "label": "European Spanish",
+      "locality": "WEST",
+      "language": "Spanish",
+      "bcp47": "es-ES",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "European-Spanish physical cards represented by every existing legacy Spanish unit.",
+      "identityBoundary": "WEST/es-ES and LATAM/es-419 are distinct physical editions even when both are called Spanish.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "provider-observed-unbounded",
+          "start": null,
+          "end": null,
+          "state": "positive-observations-only",
+          "basis": "The retained Spanish TCGdex slice does not identify same-language regional printings, so it is routed only to the established European legacy track.",
+          "evidenceRefs": ["slice:tcgdex-es-sets", "edge:tcgdex-west-positive", "decision:D3"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "ready-for-child",
+        "sourceRefs": ["slice:tcgdex-es-sets", "edge:tcgdex-west-positive", "decision:D3"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Activate an es-ES slice with a European positive fixture and reject any automatic reuse for LATAM."
+      },
+      "evidenceRefs": ["unit:U0003", "slice:tcgdex-es-sets", "decision:D3"],
+      "openQuestions": ["Which product pages distinguish European distribution from LATAM after March 2025?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-pt-unqualified",
+      "label": "Legacy unqualified Portuguese",
+      "locality": "WEST",
+      "language": "Portuguese",
+      "bcp47": "pt",
+      "script": "Latn",
+      "universeStatus": "provisional-legacy",
+      "scope": "The current legacy Portuguese projection pending reconciliation into Brazilian or another evidenced physical edition.",
+      "identityBoundary": "A Portuguese language field and the TCGdex pt locale do not identify Brazil, Portugal, or another distribution region.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "provider-observed-unbounded",
+          "start": null,
+          "end": null,
+          "state": "needs-evidence",
+          "basis": "The retained pt set slice is positive for language records but supplies no physical regional boundary.",
+          "evidenceRefs": ["slice:tcgdex-pt-sets", "edge:tcgdex-west-positive", "unit:U0005"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "ready-for-child",
+        "sourceRefs": ["slice:tcgdex-pt-sets", "edge:tcgdex-west-positive"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Start from positive pt records and assign a physical region only when branding, legal line, set code, official locale, or specimen evidence identifies it."
+      },
+      "evidenceRefs": ["unit:U0005", "slice:tcgdex-pt-sets", "edge:tcgdex-west-positive"],
+      "openQuestions": ["Which legacy Portuguese rows are Brazilian, Portuguese-European, or another edition?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "latam-es",
+      "label": "Latin-American Spanish",
+      "locality": "LATAM",
+      "language": "Spanish",
+      "bcp47": "es-419",
+      "script": "Latn",
+      "universeStatus": "owner-scoped",
+      "scope": "Regular sets from Journey Together (March 2025) onward; Prize Packs remain outside this owner-defined discovery scope until positive evidence changes it.",
+      "identityBoundary": "LATAM translation, set branding and local code create a separate edition from European Spanish; no legacy Cardmarket row can populate it.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": false},
+      "distributionRegions": ["Latin America"],
+      "eraSegments": [
+        {
+          "eraId": "journey-together-forward",
+          "start": "March 2025",
+          "end": null,
+          "state": "owner-scoped",
+          "basis": "Owner decision D3 admits a distinct LATAM edition; RESUME records the discovery start and the specimen-proven SVP 184 comparison, whose photograph still needs a stable specimen record before row admission.",
+          "evidenceRefs": ["decision:D3", "document:verification/RESUME.md"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "needs-evidence",
+        "sourceRefs": ["surface:ligapokemon-catalogue", "edge:ligapokemon-latam-positive", "decision:D3", "document:verification/RESUME.md"],
+        "gapRefs": ["card-gap:western-locality-card-discovery"],
+        "retryCondition": "Retain one LATAM-Spanish official or specimen detail and its local code before activating JTG, xJTG, SVP 184, and POR 063 card slices."
+      },
+      "evidenceRefs": ["decision:D3", "document:verification/RESUME.md"],
+      "openQuestions": ["The side-by-side SVP 184 photograph needs a stable specimen id and committed bytes.", "The official LATAM card archive route has not yet been retained as a capability surface."],
+      "childIssue": null
+    },
+    {
+      "trackId": "latam-pt-br",
+      "label": "Brazilian Portuguese",
+      "locality": "LATAM",
+      "language": "Portuguese",
+      "bcp47": "pt-BR",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "Brazilian Portuguese physical cards identified by a Brazilian source record; no claim is made for all Portuguese cards or eras.",
+      "identityBoundary": "A Brazilian listing or official br detail can identify pt-BR, but an unqualified pt provider record cannot.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": false},
+      "distributionRegions": ["Brazil"],
+      "eraSegments": [
+        {
+          "eraId": "positive-listing-unbounded",
+          "start": null,
+          "end": null,
+          "state": "positive-observations-only",
+          "basis": "The retained LigaPokemon PPPS7 listing establishes one Portuguese-market Brazilian record and nothing about unlisted eras.",
+          "evidenceRefs": ["edge:ligapokemon-latam-positive", "observation:obs-ligapokemon", "unit:U0329"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "needs-evidence",
+        "sourceRefs": ["surface:ligapokemon-catalogue", "edge:ligapokemon-latam-positive", "observation:obs-ligapokemon"],
+        "gapRefs": ["card-gap:western-locality-card-discovery"],
+        "retryCondition": "Retain an official br archive detail and activate positive card slices without treating blocked or empty marketplace searches as absence."
+      },
+      "evidenceRefs": ["observation:obs-ligapokemon", "unit:U0329", "edge:ligapokemon-latam-positive"],
+      "openQuestions": ["Which unqualified legacy Portuguese units map to pt-BR after physical-region review?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-nl",
+      "label": "Historical Dutch",
+      "locality": "WEST",
+      "language": "Dutch",
+      "bcp47": "nl",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "Positively established Dutch historical cards; the complete market era remains unknown.",
+      "identityBoundary": "A positive Dutch card does not make a neighbouring set, promo, or era Dutch.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "jungle-positive-point",
+          "start": "Jungle",
+          "end": "Jungle",
+          "state": "positive-observations-only",
+          "basis": "Confirmed Dutch Jungle unit U0095 is a positive historical point, not a continuous era range.",
+          "evidenceRefs": ["unit:U0095", "edge:bulbapedia-positive"],
+          "absenceAllowed": false
+        },
+        {
+          "eraId": "remaining-history",
+          "start": null,
+          "end": null,
+          "state": "blocked-by-source",
+          "basis": "The retained general historical catalogue surface is blocked for revision-pinned scripted enumeration.",
+          "evidenceRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "blocked-by-source",
+        "sourceRefs": ["edge:bulbapedia-positive", "observation:obs-bulbapedia"],
+        "gapRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
+        "retryCondition": "Resume with revision-pinned wikitext or another bounded historical catalogue and account every returned Dutch record."
+      },
+      "evidenceRefs": ["unit:U0095", "edge:bulbapedia-positive"],
+      "openQuestions": ["What are the exact Dutch start/end eras and promo exceptions?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-pl",
+      "label": "Historical Polish",
+      "locality": "WEST",
+      "language": "Polish",
+      "bcp47": "pl",
+      "script": "Latn",
+      "universeStatus": "established-positive",
+      "scope": "Positively established Polish historical cards; no continuous market era is asserted.",
+      "identityBoundary": "A confirmed Polish Diamond & Pearl card is one era point and cannot close other sets.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "diamond-pearl-positive-point",
+          "start": "Diamond & Pearl",
+          "end": "Diamond & Pearl",
+          "state": "positive-observations-only",
+          "basis": "Confirmed Polish unit U0364 establishes one Diamond & Pearl card only.",
+          "evidenceRefs": ["unit:U0364", "edge:bulbapedia-positive"],
+          "absenceAllowed": false
+        },
+        {
+          "eraId": "remaining-history",
+          "start": null,
+          "end": null,
+          "state": "blocked-by-source",
+          "basis": "No active empty-start Polish card catalogue exists in the capability graph.",
+          "evidenceRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "blocked-by-source",
+        "sourceRefs": ["edge:bulbapedia-positive", "observation:obs-bulbapedia"],
+        "gapRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
+        "retryCondition": "Activate only from a bounded historical source or specimen-backed card loop."
+      },
+      "evidenceRefs": ["unit:U0364", "edge:bulbapedia-positive"],
+      "openQuestions": ["What are the exact Polish product categories and era boundaries?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "west-ru",
+      "label": "Historical Russian",
+      "locality": "WEST",
+      "language": "Russian",
+      "bcp47": "ru",
+      "script": "Cyrl",
+      "universeStatus": "established-positive",
+      "scope": "Positively established Russian cards through the owner-reviewed XY market boundary; no official localized archive exists.",
+      "identityBoundary": "The owner-adjudicated end of the Russian XY run guides review but is not a provider-wide automatic absence rule.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": true, "market": "Western"},
+      "eraSegments": [
+        {
+          "eraId": "positive-through-breakthrough",
+          "start": null,
+          "end": "BREAKthrough",
+          "state": "owner-bounded-end",
+          "basis": "Confirmed Russian BKT 118 supplies the positive endpoint; owner adjudications settle the two later challenged products without creating a general manifest.",
+          "evidenceRefs": ["unit:U0212", "adjudication:OA-20260803-U0200", "adjudication:OA-20260803-U0248"],
+          "absenceAllowed": false
+        },
+        {
+          "eraId": "other-history",
+          "start": null,
+          "end": null,
+          "state": "blocked-by-source",
+          "basis": "There is no official Russian archive and the historical wikitext catalogue route is currently blocked.",
+          "evidenceRefs": ["document:verification/RESUME.md", "source-gap:bulbapedia-wikitext-catalogue"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "blocked-by-source",
+        "sourceRefs": ["edge:bulbapedia-positive", "observation:obs-bulbapedia"],
+        "gapRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
+        "retryCondition": "Resume with a bounded Russian historical source or positive specimens; never use TCGdex ru HTTP status or empty cards arrays as coverage."
+      },
+      "evidenceRefs": ["unit:U0212", "adjudication:OA-20260803-U0200", "adjudication:OA-20260803-U0248"],
+      "openQuestions": ["Which promos and decks sit outside the expansion run ending at BREAKthrough?"],
+      "childIssue": null
+    },
+    {
+      "trackId": "sea-en-coordinated",
+      "label": "Southeast-Asian English coordination boundary",
+      "locality": "SEA",
+      "language": "English",
+      "bcp47": "en-035",
+      "script": "Latn",
+      "universeStatus": "coordinated",
+      "scope": "English-language physical products distributed in Southeast Asia, coordinated with the Asian locality tracker #138.",
+      "identityBoundary": "SEA English cannot collapse into WEST English when local distribution marks or product identity differ.",
+      "absencePolicy": "positive-only",
+      "legacyUnitScope": {"include": false},
+      "distributionRegions": ["Malaysia", "Philippines", "Singapore"],
+      "coordinationIssue": 138,
+      "eraSegments": [
+        {
+          "eraId": "coordinated-unbounded",
+          "start": null,
+          "end": null,
+          "state": "coordinated",
+          "basis": "ADR-0001 preserves SEA English as a separate locality; source-first enumeration and era closure remain owned by #138.",
+          "evidenceRefs": ["document:verification/ADR-0001-locality-aware-print-identity.md", "edge:bulbapedia-positive"],
+          "absenceAllowed": false
+        }
+      ],
+      "discovery": {
+        "state": "coordinated",
+        "sourceRefs": ["document:verification/ADR-0001-locality-aware-print-identity.md", "edge:bulbapedia-positive"],
+        "gapRefs": [],
+        "retryCondition": "Consume the terminal SEA-English result from #138 and preserve any physical distribution identity separately from WEST."
+      },
+      "evidenceRefs": ["document:verification/ADR-0001-locality-aware-print-identity.md", "document:verification/RESUME.md"],
+      "openQuestions": ["Which SEA-English set/product indexes can enumerate independently of known cards?"],
+      "childIssue": null
+    }
+  ]
+}

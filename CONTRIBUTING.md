@@ -70,8 +70,9 @@ unattributed edit.
 ## Scope
 
 - **Physical cards only.** Online and live code cards are deliberately excluded.
-- **European Spanish.** From *Journey Together* (2025) onward, Latin-American Spanish is a
-  physically distinct edition and is out of scope.
+- **Spanish locality is required.** From *Journey Together* (2025) onward, Latin-American Spanish
+  is a physically distinct edition and is in scope, but it has no rows in the legacy Cardmarket
+  universe. State `WEST / es-ES` or `LATAM / es-419`; never submit an unqualified Spanish claim.
 - Before reporting, it is worth skimming
   [Scope and caveats](README.md#scope-and-caveats--read-before-using) — some surprising values are
   documented limitations rather than errors.
