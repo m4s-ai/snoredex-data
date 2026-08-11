@@ -518,20 +518,23 @@ def build_catch_up_edges(documents: dict[str, Any]) -> list[dict[str, Any]]:
         if not printing.get("catchUpOf"):
             continue
         reference = source_reference(printing["catchUpOf"])
-        source_ids = sorted(source_release_by_key.get(reference, [])) if reference else []
+        candidate_source_ids = (
+            sorted(source_release_by_key.get(reference, [])) if reference else []
+        )
         target_edition = edition_by_key.get((
             printing["locality"], printing["localSetCode"], printing["language"]
         ))
+        relation_complete = len(candidate_source_ids) == 1 and bool(target_edition)
         edges.append({
             "catchUpRelationId": stable_id("CATCHUP", printing["printId"]),
             "relationship": "source-material-catch-up-of-card-release",
-            "sourceCardReleaseIds": source_ids,
+            "sourceCardReleaseIds": candidate_source_ids if relation_complete else [],
             "rawSourceReference": printing["catchUpOf"],
             "targetSourceFirstPrintId": printing["printId"],
             "targetSetEditionId": target_edition,
             "equivalenceScope": "card-work-only",
             "setMergeAllowed": False,
-            "terminalState": "complete" if len(source_ids) == 1 and target_edition else "needs-evidence",
+            "terminalState": "complete" if relation_complete else "needs-evidence",
             "evidence": {
                 "providerId": printing["providerId"],
                 "sourceUrl": printing["sourceUrl"],

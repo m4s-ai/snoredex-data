@@ -25,7 +25,7 @@ issue unless new positive physical-card evidence overturns the recorded decision
 | `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | complete-positive-slice | [#189](https://github.com/m4s-ai/snoredex-data/issues/189) | 70 confirmed / 3 contradicted |
 | `west-es-eu` European Spanish | established-positive | `WEST` / Spanish (`es-ES`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 59 confirmed / 5 contradicted |
 | `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | complete-positive-slice | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | 55 confirmed / 10 contradicted |
-| `latam-es` Latin-American Spanish | owner-scoped | `LATAM` / Spanish (`es-419`) | journey-together-forward: owner-scoped | needs-evidence | [#192](https://github.com/m4s-ai/snoredex-data/issues/192) | not represented |
+| `latam-es` Latin-American Spanish | established-positive | `LATAM` / Spanish (`es-419`) | journey-together-forward: positive-observations-only | complete-positive-slice | [#192](https://github.com/m4s-ai/snoredex-data/issues/192) | not represented |
 | `latam-pt-br` Brazilian Portuguese | established-positive | `LATAM` / Portuguese (`pt-BR`) | positive-listing-unbounded: positive-observations-only | complete-positive-slice | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | not represented |
 | `west-nl` Historical Dutch | established-positive | `WEST` / Dutch (`nl`) | jungle-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 2 confirmed / 2 contradicted |
 | `west-pl` Historical Polish | established-positive | `WEST` / Polish (`pl`) | diamond-pearl-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 1 confirmed / 1 contradicted |
@@ -117,16 +117,16 @@ Era segments:
 ### Latin-American Spanish (`latam-es`)
 
 - **Scope:** Regular sets from Journey Together (March 2025) onward; Prize Packs remain outside this owner-defined discovery scope until positive evidence changes it.
-- **Identity boundary:** LATAM translation, set branding and local code create a separate edition from European Spanish; no legacy Cardmarket row can populate it.
-- **Discovery:** `needs-evidence` — Retain one LATAM-Spanish official or specimen detail and its local code before activating JTG, xJTG, SVP 184, and POR 063 card slices.
+- **Identity boundary:** The complete printed LA modifier, LATAM translation and regional branding create a separate edition from European Spanish's printed ES code; no legacy Cardmarket row can populate it.
+- **Discovery:** `complete-positive-slice` — Add xJTG only from a positive LATAM card or distribution record carrying its own printed identity; expand other cards without treating a missing asset as absence.
 - **Execution issue:** [#192](https://github.com/m4s-ai/snoredex-data/issues/192)
-- **Evidence:** `decision:D3`, `document:verification/RESUME.md`
+- **Evidence:** `card-slice:tpci-latam-jtg-positive`, `card-slice:tpci-latam-svp184-positive`, `card-slice:tpci-latam-por063-positive`, `edge:tpci-latam-spanish-card-asset-positive`, `observation:obs-tpci-latam-svp184`, `decision:D3`, `document:verification/RESUME.md`
 - **Distribution regions to split:** Latin America
-- **Open:** The side-by-side SVP 184 photograph needs a stable specimen id and committed bytes.; The official LATAM card archive route has not yet been retained as a capability surface.
+- **Open:** Which positive LATAM record establishes xJTG independently from base JTG and WEST distribution printings?
 
 Era segments:
 
-- `journey-together-forward` (March 2025 → open; `owner-scoped`): Owner decision D3 admits a distinct LATAM edition; RESUME records the discovery start and the specimen-proven SVP 184 comparison, whose photograph still needs a stable specimen record before row admission. Evidence: `decision:D3`, `document:verification/RESUME.md`.
+- `journey-together-forward` (March 2025 → open; `positive-observations-only`): Official retained assets positively establish JTG LA 117/159, SVP LA 184 and POR LA 063/088. The paired SVP ES 184 asset preserves the European comparison; these named cards do not close neighbouring sets, variants or the era. Evidence: `card-slice:tpci-latam-jtg-positive`, `card-slice:tpci-latam-svp184-positive`, `card-slice:tpci-latam-por063-positive`, `edge:tpci-latam-spanish-card-asset-positive`, `observation:obs-tpci-latam-svp184`.
 
 ### Brazilian Portuguese (`latam-pt-br`)
 

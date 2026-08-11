@@ -1,0 +1,563 @@
+{
+  "meta": {
+    "schema": "snoredex-card-discovery-contract",
+    "schemaVersion": "1.0.0",
+    "coverageVersion": "1.5.0",
+    "reviewedAt": "2026-08-11",
+    "policies": [
+      "Discovery starts from provider-native localized name queries and never from snorlax_cards.json, units.json, or the legacy Cardmarket candidate list.",
+      "Every fetched detail record is retained before identity matching and reaches exactly one visible accounting bucket.",
+      "Raw set codes and collector numbers remain unchanged; a reviewed symbol reading is an additive assertion, never a rewrite.",
+      "A changed identifier creates an equivalence proposal and cannot overwrite or merge a physical-print identity.",
+      "Zero results, incomplete pagination, rate limits, and parse failures are source failures or needs-evidence states, never evidence of absence.",
+      "No discovery adapter may write a confirmation, contradiction, finish verdict, or owner adjudication.",
+      "A language-only locale or marketplace geography remains needs-evidence until a positive printed or official physical-locality discriminator exists."
+    ]
+  },
+  "rawRecordContract": {
+    "requiredProvenance": [
+      "recordId",
+      "stableKey",
+      "providerId",
+      "surfaceId",
+      "coverageEdgeId",
+      "sourceUrl",
+      "rawProviderId",
+      "rawLocale",
+      "locality",
+      "retrievedAt",
+      "listResponseHashes",
+      "detailResponseHash",
+      "recordHash",
+      "runId",
+      "sourceRecord",
+      "bucket"
+    ],
+    "rawFields": [
+      "localName",
+      "rawSetCode",
+      "localCollectorNumber",
+      "cardImageUrl",
+      "setSymbolUrl"
+    ],
+    "buckets": [
+      "matched",
+      "ambiguous",
+      "new-candidate",
+      "positively-excluded",
+      "needs-evidence"
+    ],
+    "terminalStates": [
+      "complete",
+      "needs-evidence",
+      "blocked-by-source"
+    ]
+  },
+  "adapters": [
+    {
+      "adapterId": "pokemon-asia-native-name",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "pokemon-asia-html",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "state": "active",
+      "listEndpointTemplate": "https://asia.pokemon-card.com/{rawLocale}/card-search/list/",
+      "detailEndpointTemplate": "https://asia.pokemon-card.com/{rawLocale}/card-search/detail/{rawProviderId}/",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "pageNo",
+      "pageSize": 20,
+      "slices": [
+        {
+          "sliceId": "pokemon-asia-tw-snorlax",
+          "coverageEdgeId": "asia-card-search-positive",
+          "rawLocale": "tw",
+          "locality": "TW",
+          "language": "T-Chinese",
+          "script": "Hant",
+          "nameQueries": [
+            "卡比獸"
+          ],
+          "positiveNameExclusions": [
+            {
+              "prefix": "小卡比獸",
+              "identity": "Munchlax",
+              "reason": "The official source-native name identifies Munchlax, a different Pokémon whose localized name contains the Snorlax query token."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "adapterId": "tcgdex-exact-name",
+      "adapterVersion": "1.1.0",
+      "responseFormat": "tcgdex-json",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "state": "active",
+      "listEndpointTemplate": "https://api.tcgdex.net/v2/{rawLocale}/cards",
+      "detailEndpointTemplate": "https://api.tcgdex.net/v2/{rawLocale}/cards/{rawProviderId}",
+      "setEndpointTemplate": "https://api.tcgdex.net/v2/{rawLocale}/sets/{rawSetCode}",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "pagination:page",
+      "pageSize": 100,
+      "slices": [
+        {
+          "sliceId": "tcgdex-en-snorlax",
+          "coverageEdgeId": "tcgdex-west-positive",
+          "rawLocale": "en",
+          "locality": "WEST",
+          "language": "English",
+          "script": "Latn",
+          "nameQueries": [
+            "Snorlax"
+          ],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tcgdex-fr-snorlax",
+          "coverageEdgeId": "tcgdex-west-positive",
+          "rawLocale": "fr",
+          "locality": "WEST",
+          "language": "French",
+          "script": "Latn",
+          "nameQueries": [
+            "Ronflex"
+          ],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tcgdex-de-snorlax",
+          "coverageEdgeId": "tcgdex-west-positive",
+          "rawLocale": "de",
+          "locality": "WEST",
+          "language": "German",
+          "script": "Latn",
+          "nameQueries": [
+            "Relaxo"
+          ],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tcgdex-es-eu-snorlax",
+          "coverageEdgeId": "tcgdex-west-positive",
+          "rawLocale": "es",
+          "locality": "WEST",
+          "language": "Spanish",
+          "script": "Latn",
+          "nameQueries": [
+            "Snorlax"
+          ],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tcgdex-pt-unqualified-snorlax",
+          "coverageEdgeId": "tcgdex-west-positive",
+          "rawLocale": "pt",
+          "locality": "WEST",
+          "language": "Portuguese",
+          "script": "Latn",
+          "localityEvidenceMode": "unqualified-language",
+          "nameQueries": [
+            "Snorlax"
+          ],
+          "positiveNameExclusions": []
+        }
+      ]
+    },
+    {
+      "adapterId": "ligapokemon-confirmed-positive",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "confirmed-source-json",
+      "providerId": "ligapokemon",
+      "surfaceId": "ligapokemon-catalogue",
+      "state": "active",
+      "listEndpointTemplate": "https://www.ligapokemon.com.br/?view=cards/card",
+      "detailEndpointTemplate": "https://www.ligapokemon.com.br/?view=cards/card&record={rawProviderId}",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "retained-unit-id",
+      "pageSize": 3,
+      "slices": [
+        {
+          "sliceId": "ligapokemon-pt-br-positive-frontier",
+          "coverageEdgeId": "ligapokemon-latam-positive",
+          "rawLocale": "br-market",
+          "locality": "LATAM",
+          "language": "Portuguese",
+          "script": "Latn",
+          "localityEvidenceMode": "market-only",
+          "nameQueries": [
+            "Snorlax do Lupo"
+          ],
+          "retainedUnitIds": [
+            "U0192",
+            "U0219",
+            "U0329"
+          ],
+          "positiveNameExclusions": []
+        }
+      ]
+    },
+    {
+      "adapterId": "tpci-localized-name",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "pokemon-official-localized-html",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "state": "active",
+      "listEndpointTemplate": "https://www.pokemon.com/{rawLocale}/gcc/archivio-carte/",
+      "detailEndpointTemplate": "https://www.pokemon.com/{rawLocale}/gcc/archivio-carte/series/{rawProviderId}/",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "single-response",
+      "pageSize": 100,
+      "slices": [
+        {
+          "sliceId": "tpci-it-snorlax",
+          "coverageEdgeId": "tpci-it-card-archive-positive",
+          "rawLocale": "it",
+          "locality": "WEST",
+          "language": "Italian",
+          "script": "Latn",
+          "nameQueries": [
+            "Snorlax"
+          ],
+          "positiveNameExclusions": []
+        }
+      ]
+    },
+    {
+      "adapterId": "tpci-spanish-card-assets",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "source-first-print-json",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "state": "active",
+      "listEndpointTemplate": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/",
+      "detailEndpointTemplate": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/{rawProviderId}",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "retained-print-id",
+      "pageSize": 3,
+      "slices": [
+        {
+          "sliceId": "tpci-latam-jtg-positive",
+          "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+          "rawLocale": "es-419",
+          "locality": "LATAM",
+          "language": "Spanish",
+          "script": "Latn",
+          "localityEvidenceMode": "physical-locality",
+          "nameQueries": [
+            "Snorlax de Paul"
+          ],
+          "retainedPrintIds": [
+            "LATAM:JTG LA:117/159:base"
+          ],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tpci-latam-svp184-positive",
+          "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+          "rawLocale": "es-419",
+          "locality": "LATAM",
+          "language": "Spanish",
+          "script": "Latn",
+          "localityEvidenceMode": "physical-locality",
+          "nameQueries": [
+            "Snorlax de Paul"
+          ],
+          "retainedPrintIds": [
+            "LATAM:SVP LA:184:base"
+          ],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tpci-latam-por063-positive",
+          "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+          "rawLocale": "es-419",
+          "locality": "LATAM",
+          "language": "Spanish",
+          "script": "Latn",
+          "localityEvidenceMode": "physical-locality",
+          "nameQueries": [
+            "Snorlax"
+          ],
+          "retainedPrintIds": [
+            "LATAM:POR LA:063/088:base"
+          ],
+          "positiveNameExclusions": []
+        }
+      ]
+    }
+  ],
+  "setCodeAssertions": [
+    {
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "rawLocale": "tw",
+      "rawSetCode": "SVQP",
+      "assertedLocalSetCode": "svQP F",
+      "assetUrl": "https://asia.pokemon-card.com/tw/card-img/mark/twhk_exp_SVQP.png",
+      "evidence": "The official set-symbol asset referenced by the official card detail visibly reads 'svQP F'; the HTML expansion key SVQP is retained separately."
+    }
+  ],
+  "explicitMappings": [
+    {
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "rawLocale": "en",
+      "rawProviderId": "swsh11.5tg-TG10",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:English:LOR:TG10:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "evidence": "The retained TCGdex detail identifies Snorlax TG10 in Lost Origin Trainer Gallery; this is the existing WEST/English LOR/TG10 card release."
+    },
+    {
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "rawLocale": "fr",
+      "rawProviderId": "swsh11.5tg-TG10",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:French:LOR:TG10:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "evidence": "The retained French detail identifies Ronflex TG10 in Origine Perdue Galerie de Dresseurs and preserves its French translation; this is the existing WEST/French LOR/TG10 card release."
+    },
+    {
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "rawLocale": "de",
+      "rawProviderId": "swsh11.5tg-TG10",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:German:LOR:TG10:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "evidence": "The retained German detail identifies Relaxo TG10 in Verlorener Ursprung Trainer-Galerie and preserves its German translation; this is the existing WEST/German LOR/TG10 card release."
+    },
+    {
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "rawLocale": "es",
+      "rawProviderId": "swsh11.5tg-TG10",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Spanish:LOR:TG10:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "evidence": "The retained Spanish detail identifies Snorlax TG10 in Origen Perdido Galería de Entrenador and preserves its Spanish translation; it maps only to the pre-existing WEST/es-ES LOR/TG10 card release and never to LATAM/es-419."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "svp/51",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+      "evidence": "The retained official Italian result identifies Snorlax at svp/51 with CMS image SVP_IT_51.png; this is the existing Italian SVP 051 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "svp/122",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SVP:122:Snorlax-Lazy-Press",
+      "evidence": "The retained official Italian result identifies Snorlax at svp/122 with CMS image SVP_IT_122.png; this is the existing Italian SVP 122 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "svp/184",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "evidence": "The retained official Italian result identifies Snorlax di Hop at svp/184 with CMS image SVP_IT_184.png; this is the existing Italian SVP 184 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "smp/SM169",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SM:169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "evidence": "The retained official Italian result identifies Eevee e Snorlax-GX at smp/SM169 with CMS image SMP_IT_SM169.png; this is the existing Italian SM 169 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "swshp/SWSH032",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
+      "evidence": "The retained official Italian result identifies Snorlax at swshp/SWSH032 with CMS image SWSHP_IT_SWSH032.png; this is the existing Italian SWSH 032 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "swshp/SWSH068",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SWSH:068:Snorlax-Gormandize-Body-Slam",
+      "evidence": "The retained official Italian result identifies Snorlax at swshp/SWSH068 with CMS image SWSHP_IT_SWSH068.png; this is the existing Italian SWSH 068 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "swshp/SWSH119",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SWSH:119:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "evidence": "The retained official Italian result identifies Snorlax at swshp/SWSH119 with CMS image SWSHP_IT_SWSH119.png; this is the existing Italian SWSH 119 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "xy0/26",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:KSS:26:Snorlax-Rock-Smash-Strength",
+      "evidence": "The retained official Italian result identifies Snorlax at xy0/26 with CMS image XY0_IT_26.png; this is the existing Italian KSS 26 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "swsh1/140",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SSH:140:Snorlax-Rolling-Tackle-Heavy-Impact",
+      "evidence": "The retained official Italian result identifies Snorlax at swsh1/140 with CMS image SWSH1_IT_140.png; this is the existing Italian SSH 140 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "swsh1/141",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SSH:141:Snorlax-V-Swallow-Falling-Down",
+      "evidence": "The retained official Italian result identifies Snorlax-V at swsh1/141 with CMS image SWSH1_IT_141.png; this is the existing Italian SSH 141 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "swsh1/142",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SSH:142:Snorlax-VMAX-G-Max-Fall",
+      "evidence": "The retained official Italian result identifies Snorlax-VMAX at swsh1/142 with CMS image SWSH1_IT_142.png; this is the existing Italian SSH 142 release."
+    },
+    {
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "rawLocale": "it",
+      "rawProviderId": "swsh1/197",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:WEST:Italian:SSH:197:Snorlax-V-Swallow-Falling-Down",
+      "evidence": "The retained official Italian result identifies Snorlax-V at swsh1/197 with CMS image SWSH1_IT_197.png; this is the existing Italian SSH 197 release."
+    }
+  ],
+  "gaps": [
+    {
+      "gapId": "official-japanese-card-search",
+      "track": "Japanese official card discovery",
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "terminalState": "needs-evidence",
+      "reason": "The known omission of secret and rainbow records needs a parser-specific accounting design before activation.",
+      "retryCondition": "Activate a Japanese slice after retained pagination fixtures and omission-preserving tests exist."
+    },
+    {
+      "gapId": "official-asia-id-th",
+      "track": "Indonesian and Thai official card discovery",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "terminalState": "needs-evidence",
+      "reason": "The shared official surface is usable, but native-name, pagination, and local-code fixtures are not yet reviewed for ID and TH.",
+      "retryCondition": "Add one bounded slice per locale with native-name controls and a known positive detail."
+    },
+    {
+      "gapId": "official-asia-kr-cn",
+      "track": "Korean and Simplified-Chinese card discovery",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "terminalState": "blocked-by-source",
+      "reason": "The official Asia card-search capability does not cover KR or CN.",
+      "retryCondition": "Activate only after a provider-native official or bounded specialist surface is registered in the capability graph."
+    },
+    {
+      "gapId": "official-italian-archive-filter-coverage",
+      "track": "Italian official archive historical coverage",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-localized-card-archive",
+      "terminalState": "needs-evidence",
+      "reason": "The bounded Italian Snorlax filter positively returns twelve detail paths, but it omits the independently reachable known-positive pl2/111 card page; the filter therefore cannot close historical archive coverage.",
+      "retryCondition": "Use additional official positive routes or retained specialist records for omitted eras; never convert a missing filter row into absence."
+    },
+    {
+      "gapId": "official-french-card-archive",
+      "track": "French official card archive",
+      "providerId": "pokemon-official",
+      "surfaceId": null,
+      "terminalState": "needs-evidence",
+      "reason": "The shared TCGdex French slice is positive-only; no bounded official French archive route has been retained or registered for historical coverage.",
+      "retryCondition": "Register and retain an official French positive route before making any archive-coverage statement."
+    },
+    {
+      "gapId": "official-german-card-archive",
+      "track": "German official card archive",
+      "providerId": "pokemon-official",
+      "surfaceId": null,
+      "terminalState": "needs-evidence",
+      "reason": "The shared TCGdex German slice is positive-only; no bounded official German archive route has been retained or registered for historical coverage.",
+      "retryCondition": "Register and retain an official German positive route before making any archive-coverage statement."
+    },
+    {
+      "gapId": "official-european-spanish-card-archive",
+      "track": "European-Spanish official card archive",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-eu-spanish-card-assets",
+      "terminalState": "needs-evidence",
+      "reason": "The retained official SVP ES 184 asset is a positive European-Spanish comparison with a printed ES modifier, but one image does not establish historical archive coverage.",
+      "retryCondition": "Add further positive European-Spanish assets as needed; never reuse WEST/es-ES records for LATAM/es-419 or infer absence from an unretained path."
+    },
+    {
+      "gapId": "official-portuguese-physical-locality",
+      "track": "Portuguese physical-locality attribution",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "terminalState": "needs-evidence",
+      "reason": "The bounded TCGdex pt slice positively identifies Portuguese card records but exposes no Brazil-versus-Portugal or other printed physical-locality discriminator.",
+      "retryCondition": "Use a positive official locale, printed legal line, region-specific branding, set code, or retained physical specimen before assigning any pt row to a regional release."
+    },
+    {
+      "gapId": "official-brazilian-card-archive",
+      "track": "Brazilian-Portuguese official card archive",
+      "providerId": "ligapokemon",
+      "surfaceId": "ligapokemon-catalogue",
+      "terminalState": "needs-evidence",
+      "reason": "Three retained LigaPokemon records establish a Brazilian marketplace frontier, but marketplace geography and Portuguese language do not establish a distinct printed Brazilian physical edition or a bounded official archive.",
+      "retryCondition": "Register a bounded official Brazilian route or a positive printed physical-region discriminator; blocked and empty marketplace results remain unknown."
+    },
+    {
+      "gapId": "official-latam-xjtg-positive-record",
+      "track": "LATAM-Spanish xJTG discovery",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "terminalState": "needs-evidence",
+      "reason": "JTG LA 117/159, SVP LA 184 and POR LA 063/088 are retained positive cards, but no independent LATAM xJTG printing or distribution record has been retained; base JTG and WEST xJTG cannot be inherited.",
+      "retryCondition": "Add xJTG only from a positive LATAM card or distribution record carrying its own printed identity; Prize Packs remain outside issue #192 scope."
+    },
+    {
+      "gapId": "western-locality-card-discovery",
+      "track": "Remaining Western/LATAM locality and English regional-distribution discovery",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "terminalState": "needs-evidence",
+      "reason": "The English, French, German, Italian, Portuguese and broad historical Spanish slices remain positive-only; official ES/LA card assets now establish the 2025 Spanish split for named cards, while older and other regional-distribution boundaries remain unresolved.",
+      "retryCondition": "Add any further regional split only from a positive physical marking, printed modifier or distribution record."
+    },
+    {
+      "gapId": "specialist-historical-card-discovery",
+      "track": "Historical and specialist catalogue discovery",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "terminalState": "needs-evidence",
+      "reason": "Rendered pages can collapse source-native rarity and identifier detail; no general card adapter is reviewed.",
+      "retryCondition": "Use revision-pinned wikitext and account for every parsed or parked clause before activation."
+    }
+  ]
+}

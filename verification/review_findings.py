@@ -1318,6 +1318,9 @@ def collect() -> None:
             "confirmed-source-json": {
                 "nameQueries", "retainedUnitIds", "sourceRecord", "pagination",
             },
+            "source-first-print-json": {
+                "nameQueries", "retainedPrintIds", "sourceRecord", "pagination",
+            },
             "pokemon-official-localized-html": {
                 "nameQueries", "nameFilter", "format", "pagination", "cacheKeyParameter",
             },
@@ -1360,6 +1363,17 @@ def collect() -> None:
                         != "single-retained-response-no-archive-closure"
                     or request["queryParameters"].get("cacheKeyParameter")
                         != "snoredexRun"
+                )
+            )
+            or (
+                card_adapters[request["adapterId"]].get("responseFormat")
+                    == "source-first-print-json"
+                and (
+                    not request["queryParameters"].get("retainedPrintIds")
+                    or request["queryParameters"].get("sourceRecord")
+                        != "verification/source_first_prints.json"
+                    or request["queryParameters"].get("pagination")
+                        != "exact-reviewed-positive-frontier"
                 )
             )
         ]

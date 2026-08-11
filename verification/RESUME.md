@@ -451,6 +451,22 @@ therefore constrained to pre-existing `WEST/es-ES` releases and cannot create or
 `needs-evidence` gaps. `west-fr`, `west-de`, and `west-es-eu` are terminal only as complete
 positive slices, never as complete historical catalogues.
 
+Issue #192 closes the named LATAM-Spanish frontier with official publisher assets rather than the
+unqualified TCGdex `es` locale. The retained cards read the complete printed codes **`JTG LA
+117/159`**, **`SVP LA 184`**, and **`POR LA 063/088`**. The paired official promo scan reads
+**`SVP ES 184`**, not merely `SVP 184`: it also uses *Presión Dinámica* and the *Juntos de
+Aventuras* stamp, while the LATAM card uses *Plancha Dinámica* and *Aventuras Compartidas*. The
+language modifier is therefore part of the local set code, not metadata inferred from a website
+locale. `SPEC-0033` through `SPEC-0036` retain the official bytes, and the card-discovery slices
+replay only the three `LA` records into `LATAM/es-419`.
+
+This is a complete positive slice, not a complete catalogue or era. `xJTG` remains an explicit
+needs-evidence gap because neither base `JTG LA` nor any WEST distribution printing may be
+inherited. Prize Packs remain outside #192's owner-defined scope. Missing asset paths, absent
+search results and the European catalogue carry no negative evidence for LATAM. Czech and
+Hungarian remain the already-contradicted legacy claims outside the locality universe; this work
+does not create tracks for either.
+
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
 Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.

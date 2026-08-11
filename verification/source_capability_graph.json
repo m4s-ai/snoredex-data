@@ -15,14 +15,14 @@
     ],
     "counts": {
       "providers": 23,
-      "surfaces": 25,
-      "coverageEdges": 24,
+      "surfaces": 27,
+      "coverageEdges": 26,
       "absenceEdges": 3,
-      "observations": 26,
-      "resolvedVerdictSources": 890
+      "observations": 28,
+      "resolvedVerdictSources": 894
     },
     "surfaceStates": {
-      "active": 7,
+      "active": 9,
       "blocked-by-browser": 4,
       "incomplete": 7,
       "internal": 1,
@@ -277,6 +277,88 @@
       },
       "coverageEdgeIds": [
         "tpci-it-card-archive-positive"
+      ]
+    },
+    {
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "providerId": "pokemon-official",
+      "label": "Official Latin-American-Spanish card assets",
+      "match": {
+        "urlPrefixes": [
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
+      "query": {
+        "method": "GET",
+        "endpoint": "exact official card-asset URL",
+        "parameters": [
+          "publisher locale path",
+          "set asset key",
+          "card number"
+        ],
+        "pagination": "not paginated; each retained image establishes only itself",
+        "expectedIdentifiers": [
+          "printed local set code including LA modifier",
+          "collector number",
+          "localized card text"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; no physical finish closure",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "tpci-latam-spanish-card-asset-positive"
+      ]
+    },
+    {
+      "surfaceId": "tpci-eu-spanish-card-assets",
+      "providerId": "pokemon-official",
+      "label": "Official European-Spanish card assets",
+      "match": {
+        "urlPrefixes": [
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
+      "query": {
+        "method": "GET",
+        "endpoint": "exact official card-asset URL",
+        "parameters": [
+          "publisher locale path",
+          "set asset key",
+          "card number"
+        ],
+        "pagination": "not paginated; each retained image establishes only itself",
+        "expectedIdentifiers": [
+          "printed local set code including ES modifier",
+          "collector number",
+          "localized card text"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; no physical finish closure",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "tpci-eu-spanish-card-asset-positive"
       ]
     },
     {
@@ -1199,6 +1281,104 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "The archive can ignore filters or omit eras, so only a positively returned matching detail page carries evidence."
+      }
+    },
+    {
+      "edgeId": "tpci-latam-spanish-card-asset-positive",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "coverage": {
+        "localities": [
+          "LATAM"
+        ],
+        "languages": [
+          "Spanish"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": "2025-03",
+          "end": null,
+          "basis": "retained positive es-xl card assets with a printed LA modifier only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "card-existence",
+        "card-release",
+        "local-card-identifier",
+        "physical-locality"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "One official LA card image establishes that printed LATAM release only; missing asset paths and neighbouring cards remain unknown."
+      },
+      "knownPositiveObservationId": "obs-tpci-latam-svp184",
+      "boundary": {
+        "outsideScope": [
+          "unretained LATAM cards",
+          "xJTG",
+          "Prize Packs",
+          "finish/treatment",
+          "complete set or era"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A missing asset path cannot refute a LATAM card, set, variant or finish."
+      }
+    },
+    {
+      "edgeId": "tpci-eu-spanish-card-asset-positive",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-eu-spanish-card-assets",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "Spanish"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": "2025-03",
+          "end": null,
+          "basis": "retained positive es-es card assets with a printed ES modifier only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "card-existence",
+        "card-release",
+        "local-card-identifier",
+        "physical-locality"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "One official ES card image establishes that printed European-Spanish release only; missing asset paths and neighbouring cards remain unknown."
+      },
+      "knownPositiveObservationId": "obs-tpci-eu-svp184",
+      "boundary": {
+        "outsideScope": [
+          "unretained European-Spanish cards",
+          "finish/treatment",
+          "complete set or era"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The European asset is a positive comparison and supplies no absence rule for either regional catalogue."
       }
     },
     {
@@ -2395,6 +2575,86 @@
         "sourceUnitId": "U0368",
         "absenceCapability": false,
         "finishCapability": false
+      }
+    },
+    {
+      "observationId": "obs-tpci-latam-svp184",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "kind": "known-positive",
+      "queryUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+      "queryParameters": {
+        "publisherLocale": "es-xl",
+        "asset": "SVP_LA_184.png"
+      },
+      "retrievedAt": "2026-08-11",
+      "expectedIdentifiers": [
+        "SVP LA 184",
+        "Plancha Dinámica",
+        "Aventuras Compartidas"
+      ],
+      "validatesEdges": [
+        "tpci-latam-spanish-card-asset-positive"
+      ],
+      "outcome": "The retained official Latin-American asset visibly identifies the LATAM/es-419 release by its printed LA modifier, translation and branding.",
+      "rawRecordRef": "verification/source_registry.json:https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+      "rawRecordHash": "sha256:6f2c09c6e119616125253edad290b775436a7a060e20704f7c02103166044b44",
+      "rawRecord": {
+        "canonicalUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+        "nonUrlEvidenceId": null,
+        "providerId": "pokemon-official",
+        "sourceTypes": [
+          "Positive source-first card record"
+        ],
+        "dimensions": [
+          "card-release"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "LATAM:SVP LA:184:base",
+          "WEST:SVP ES:184:base"
+        ],
+        "retrievedAt": null,
+        "usageCount": 2
+      }
+    },
+    {
+      "observationId": "obs-tpci-eu-svp184",
+      "surfaceId": "tpci-eu-spanish-card-assets",
+      "kind": "known-positive",
+      "queryUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+      "queryParameters": {
+        "publisherLocale": "es-es",
+        "asset": "SVP_ES_184.png"
+      },
+      "retrievedAt": "2026-08-11",
+      "expectedIdentifiers": [
+        "SVP ES 184",
+        "Presión Dinámica",
+        "Juntos de Aventuras"
+      ],
+      "validatesEdges": [
+        "tpci-eu-spanish-card-asset-positive"
+      ],
+      "outcome": "The retained official European-Spanish comparison visibly identifies a different printed ES code, translation and branding.",
+      "rawRecordRef": "verification/source_registry.json:https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+      "rawRecordHash": "sha256:0f94224cb9f41235d9a4cc9a8c318b577eea8ed327aa4dc14d19a7c1433f8f39",
+      "rawRecord": {
+        "canonicalUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+        "nonUrlEvidenceId": null,
+        "providerId": "pokemon-official",
+        "sourceTypes": [
+          "Positive source-first card record"
+        ],
+        "dimensions": [
+          "card-release"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "LATAM:SVP LA:184:base",
+          "WEST:SVP ES:184:base"
+        ],
+        "retrievedAt": null,
+        "usageCount": 2
       }
     },
     {
@@ -10292,6 +10552,54 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-eu-spanish-card-assets",
+      "capabilityEdgeIds": [
+        "tpci-eu-spanish-card-asset-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-release"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "capabilityEdgeIds": [
+        "tpci-latam-spanish-card-asset-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-release"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "capabilityEdgeIds": [
+        "tpci-latam-spanish-card-asset-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-release"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "capabilityEdgeIds": [
+        "tpci-latam-spanish-card-asset-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-release"
       ]
     },
     {
