@@ -16,14 +16,14 @@
     "counts": {
       "providers": 23,
       "surfaces": 27,
-      "coverageEdges": 26,
+      "coverageEdges": 27,
       "absenceEdges": 3,
-      "observations": 28,
+      "observations": 29,
       "resolvedVerdictSources": 894
     },
     "surfaceStates": {
-      "active": 9,
-      "blocked-by-browser": 4,
+      "active": 10,
+      "blocked-by-browser": 3,
       "incomplete": 7,
       "internal": 1,
       "needs-evidence": 3,
@@ -528,12 +528,12 @@
       "surfaceId": "bulbapedia-mediawiki",
       "providerId": "bulbapedia",
       "label": "Bulbapedia MediaWiki wikitext and revision API",
-      "state": "blocked-by-browser",
-      "failureState": "Plain scripted requests may return 403; browser MediaWiki API access is required. Several Korean/Chinese promo pages are explicitly incomplete.",
-      "accessMode": "browser",
-      "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Retain revision id and exact wikitext section; re-fetch on revision change.",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-08-11",
+      "freshnessPolicy": "Retain page title, exact revision id and wikitext section; a newer revision is a new comparison run, never an in-place replacement.",
       "query": {
         "method": "GET",
         "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php",
@@ -541,14 +541,16 @@
           "action=parse",
           "prop=wikitext",
           "redirects=1",
-          "page"
+          "oldid",
+          "format=json",
+          "formatversion=2"
         ],
-        "pagination": "MediaWiki continuation must be followed where list modules are used; parsed pages are revision-bound",
+        "pagination": "The pinned parse response is one page; list modules still require continuation.",
         "expectedIdentifiers": [
           "page title",
           "revision id",
           "section",
-          "source-native rarity"
+          "source-native table cells"
         ]
       },
       "finishCapability": {
@@ -562,7 +564,8 @@
         "closedWithinScope": false
       },
       "coverageEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ]
     },
     {
@@ -1705,6 +1708,56 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "A blank language field or missing article remains unknown unless a separate exact closed table is reviewed."
+      }
+    },
+    {
+      "edgeId": "bulbapedia-historical-index-positive",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "Dutch",
+          "Polish",
+          "Russian"
+        ],
+        "scripts": [
+          "Latn",
+          "Cyrl"
+        ],
+        "productCategories": [
+          "set"
+        ],
+        "timeRange": {
+          "start": "Original Series",
+          "end": "XY Series",
+          "basis": "positive cells in revision 4567865 only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "edition",
+        "set-existence"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Only non-dash cells are positive evidence; dashes, omitted columns and non-expansion products remain unknown."
+      },
+      "knownPositiveObservationId": "obs-bulbapedia-historical-index",
+      "boundary": {
+        "outsideScope": [
+          "promos and decks not enumerated by the English-set tables",
+          "blank or dash cells",
+          "cards not already reached by their own positive card-list or unit evidence",
+          "newer page revisions"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "Kalos Starter Set is explicitly a partial theme-deck release, and the Russian FLF promotional variant is not independently enumerated by this set index."
       }
     },
     {
@@ -3684,6 +3737,43 @@
         "retrievedAt": "2026-07-23",
         "usageCount": 9
       }
+    },
+    {
+      "observationId": "obs-bulbapedia-historical-index",
+      "surfaceId": "bulbapedia-mediawiki",
+      "kind": "known-positive",
+      "queryUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "action": "parse",
+        "prop": "wikitext",
+        "oldid": 4567865,
+        "format": "json",
+        "formatversion": 2
+      },
+      "retrievedAt": "2026-08-11",
+      "expectedIdentifiers": [
+        "revisionId=4567865",
+        "Dutch=3",
+        "Polish=2",
+        "Russian=9"
+      ],
+      "validatesEdges": [
+        "bulbapedia-historical-index-positive"
+      ],
+      "outcome": "The retained revision exposes three Dutch, two Polish and nine Russian positive physical-set cells; every one is staged without interpreting dashes as absence.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:00eade9c29b9092938c7d580f140aad29261da18fa9463a620d81bfabf8fd8c8",
+      "rawRecord": {
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865,
+        "section": "English sets",
+        "positiveRows": {
+          "Dutch": 3,
+          "Polish": 2,
+          "Russian": 9
+        },
+        "absenceCapability": false
+      }
     }
   ],
   "sourceResolution": [
@@ -3692,7 +3782,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3705,7 +3796,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3717,7 +3809,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3730,7 +3823,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3742,7 +3836,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3757,7 +3852,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3769,7 +3865,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3781,7 +3878,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3794,7 +3892,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3806,7 +3905,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3819,7 +3919,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3831,7 +3932,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3843,7 +3945,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3856,7 +3959,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3868,7 +3972,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3880,7 +3985,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3893,7 +3999,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3906,7 +4013,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3918,7 +4026,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3930,7 +4039,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3942,7 +4052,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3954,7 +4065,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3966,7 +4078,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3979,7 +4092,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -3992,7 +4106,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4005,7 +4120,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4018,7 +4134,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4031,7 +4148,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4043,7 +4161,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4056,7 +4175,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4068,7 +4188,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4081,7 +4202,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4093,7 +4215,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4106,7 +4229,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4119,7 +4243,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4131,7 +4256,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4143,7 +4269,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4155,7 +4282,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4168,7 +4296,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4181,7 +4310,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4193,7 +4323,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4205,7 +4336,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4218,7 +4350,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4231,7 +4364,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4243,7 +4377,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4255,7 +4390,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4267,7 +4403,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4280,7 +4417,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4292,7 +4430,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4304,7 +4443,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4316,7 +4456,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4328,7 +4469,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4340,7 +4482,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4353,7 +4496,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4365,7 +4509,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4378,7 +4523,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4390,7 +4536,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4402,7 +4549,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4414,7 +4562,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4427,7 +4576,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4439,7 +4589,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4451,7 +4602,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4463,7 +4615,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4475,7 +4628,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4488,7 +4642,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4501,7 +4656,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4514,7 +4670,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4527,7 +4684,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4540,7 +4698,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4552,7 +4711,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4565,7 +4725,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4578,7 +4739,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4592,7 +4754,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4604,7 +4767,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4616,7 +4780,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4629,7 +4794,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4641,7 +4807,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4653,7 +4820,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4666,7 +4834,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4679,7 +4848,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4692,7 +4862,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4704,7 +4875,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4716,7 +4888,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4729,7 +4902,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4741,7 +4915,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4754,7 +4929,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4766,7 +4942,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4779,7 +4956,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -4791,7 +4969,8 @@
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
       "capabilityEdgeIds": [
-        "bulbapedia-positive"
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [

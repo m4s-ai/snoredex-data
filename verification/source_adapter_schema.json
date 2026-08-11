@@ -47,10 +47,13 @@
         "properties": {
           "adapterId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
           "adapterVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+          "responseFormat": {"enum": ["json-array", "bulbapedia-historical-wikitext"]},
           "providerId": {"type": "string"},
           "surfaceId": {"type": "string"},
           "state": {"const": "active"},
           "endpointTemplate": {"type": "string", "pattern": "^https://"},
+          "pageTitle": {"type": "string", "minLength": 1},
+          "revisionId": {"type": "integer", "minimum": 1},
           "category": {"enum": ["set", "deck", "promo-series", "product", "release-event"]},
           "sourceFirst": {"const": true},
           "slices": {

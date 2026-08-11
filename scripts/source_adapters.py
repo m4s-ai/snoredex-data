@@ -2,11 +2,11 @@
 """Fetch and project source-first local-set catalogue runs (#147).
 
 The reviewed adapter contract is ``verification/source_adapters.json``. Network access occurs
-only with ``--refresh-tcgdex``; normal generation and CI checks read committed immutable run
+only with ``--refresh``; normal generation and CI checks read committed immutable run
 responses. Enumeration inputs are provider-native endpoints, never legacy set codes, known cards,
 units, or verdict stores.
 
-    python scripts/source_adapters.py --refresh-tcgdex --run-id 20260809T120000Z
+    python scripts/source_adapters.py --refresh --run-id 20260809T120000Z
     python scripts/source_adapters.py
     python scripts/source_adapters.py --check
 """
@@ -26,6 +26,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
+from bulbapedia_historical import HistoricalIndexError, parse_historical_index
 from source_capabilities import schema_errors
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -210,6 +211,14 @@ def validate_contract(contract: dict[str, Any], capability: dict[str, Any]) -> N
         seen_adapters.add(adapter_id)
         if adapter["providerId"] not in providers:
             raise AdapterError(f"adapter {adapter_id} names unknown provider")
+        response_format = adapter.get("responseFormat", "json-array")
+        if response_format not in {"json-array", "bulbapedia-historical-wikitext"}:
+            raise AdapterError(f"adapter {adapter_id} has an unsupported response format")
+        if response_format == "bulbapedia-historical-wikitext" and (
+            not isinstance(adapter.get("revisionId"), int)
+            or not isinstance(adapter.get("pageTitle"), str)
+        ):
+            raise AdapterError(f"adapter {adapter_id} lacks its page title or revision id")
         surface = surfaces.get(adapter["surfaceId"])
         if not surface or surface["providerId"] != adapter["providerId"]:
             raise AdapterError(f"adapter {adapter_id} does not resolve to its provider surface")
@@ -265,6 +274,26 @@ def load_inputs() -> tuple[dict[str, Any], dict[str, Any]]:
     capability = read_json(CAPABILITY_PATH)
     validate_contract(contract, capability)
     return contract, capability
+
+
+def parse_response(
+    adapter: dict[str, Any], slice_row: dict[str, Any], raw: bytes
+) -> list[dict[str, Any]]:
+    response_format = adapter.get("responseFormat", "json-array")
+    if response_format == "bulbapedia-historical-wikitext":
+        try:
+            return parse_historical_index(
+                raw,
+                slice_row["language"],
+                expected_revision=adapter["revisionId"],
+                expected_title=adapter["pageTitle"],
+            )
+        except HistoricalIndexError as error:
+            raise AdapterError(str(error)) from error
+    payload = json.loads(raw.decode("utf-8-sig"))
+    if not isinstance(payload, list):
+        raise AdapterError("response root is not an array")
+    return payload
 
 
 def date_precision(value: Any) -> str | None:
@@ -537,9 +566,7 @@ def build_projection(
             raw_bytes = raw_path.read_bytes()
             if content_hash(raw_bytes) != request["responseHash"]:
                 raise AdapterError(f"raw response hash mismatch: {request['rawPath']}")
-            payload = json.loads(raw_bytes.decode("utf-8-sig"))
-            if not isinstance(payload, list):
-                raise AdapterError(f"set-list response is not an array: {request['rawPath']}")
+            payload = parse_response(adapter, slice_row, raw_bytes)
             if len(payload) != request["recordCount"]:
                 raise AdapterError(f"record count mismatch: {request['rawPath']}")
             if not payload:
@@ -664,7 +691,20 @@ def build_latest(
         manifest = read_json(run_dir / "manifest.json")
         if manifest.get("runId") != run_dir.name:
             raise AdapterError(f"run directory and manifest id differ: {run_dir.name}")
-        previous = build_projection(contract, manifest, run_dir, previous, capability)
+        run_contract = contract
+        if manifest.get("contractHash") != content_hash(contract):
+            snapshot_path = run_dir / "contract.json"
+            if not snapshot_path.is_file():
+                raise AdapterError(
+                    f"historical run {run_dir.name} needs its immutable contract snapshot"
+                )
+            run_contract = read_json(snapshot_path)
+            if manifest.get("contractHash") != content_hash(run_contract):
+                raise AdapterError(f"contract snapshot hash mismatch: {run_dir.name}")
+            validate_contract(run_contract, capability)
+        previous = build_projection(
+            run_contract, manifest, run_dir, previous, capability
+        )
     return previous, directories[-1]
 
 
@@ -685,7 +725,16 @@ def fetch_one(
         "surfaceId": adapter["surfaceId"],
         "coverageEdgeId": slice_row["coverageEdgeId"],
         "endpoint": endpoint,
-        "queryParameters": {"rawLocale": slice_row["rawLocale"], "resource": "sets"},
+        "queryParameters": (
+            {
+                "rawLocale": slice_row["rawLocale"],
+                "resource": "English-set language column",
+                "pageTitle": adapter["pageTitle"],
+                "revisionId": adapter["revisionId"],
+            }
+            if adapter.get("responseFormat") == "bulbapedia-historical-wikitext"
+            else {"rawLocale": slice_row["rawLocale"], "resource": "sets"}
+        ),
         "rawLocale": slice_row["rawLocale"],
         "retrievedAt": retrieved_at,
         "checkpoint": {"page": 1, "nextCursor": None, "complete": False},
@@ -694,9 +743,7 @@ def fetch_one(
         with urllib.request.urlopen(request, timeout=45) as response:
             raw = response.read()
             status = response.status
-        payload = json.loads(raw.decode("utf-8-sig"))
-        if not isinstance(payload, list):
-            raise AdapterError("response root is not an array")
+        payload = parse_response(adapter, slice_row, raw)
         return ({
             **base,
             "httpStatus": status,
@@ -744,6 +791,7 @@ def refresh(run_id: str, retrieved_at: str | None) -> None:
             results.append(future.result())
 
     run_dir.mkdir(parents=True)
+    write_json(run_dir / "contract.json", contract)
     requests = []
     for request, raw in sorted(results, key=lambda pair: pair[0]["sliceId"]):
         requests.append(request)
@@ -785,14 +833,15 @@ def refresh(run_id: str, retrieved_at: str | None) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate immutable runs and projections")
-    parser.add_argument("--refresh-tcgdex", action="store_true", help="create a new immutable live run")
+    parser.add_argument("--refresh", action="store_true", help="create a new immutable live run")
+    parser.add_argument("--refresh-tcgdex", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--run-id", help="immutable run id in YYYYMMDDTHHMMSSZ form")
     parser.add_argument("--retrieved-at", help="explicit ISO-8601 retrieval timestamp for a run")
     args = parser.parse_args()
     try:
-        if args.refresh_tcgdex:
+        if args.refresh or args.refresh_tcgdex:
             if not args.run_id:
-                raise AdapterError("--refresh-tcgdex requires --run-id")
+                raise AdapterError("--refresh requires --run-id")
             refresh(args.run_id, args.retrieved_at)
             return 0
         contract, capability = load_inputs()

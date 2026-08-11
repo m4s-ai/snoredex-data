@@ -27,9 +27,9 @@ issue unless new positive physical-card evidence overturns the recorded decision
 | `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | complete-positive-slice | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | 55 confirmed / 10 contradicted |
 | `latam-es` Latin-American Spanish | established-positive | `LATAM` / Spanish (`es-419`) | journey-together-forward: positive-observations-only | complete-positive-slice | [#192](https://github.com/m4s-ai/snoredex-data/issues/192) | not represented |
 | `latam-pt-br` Brazilian Portuguese | established-positive | `LATAM` / Portuguese (`pt-BR`) | positive-listing-unbounded: positive-observations-only | complete-positive-slice | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | not represented |
-| `west-nl` Historical Dutch | established-positive | `WEST` / Dutch (`nl`) | jungle-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 2 confirmed / 2 contradicted |
-| `west-pl` Historical Polish | established-positive | `WEST` / Polish (`pl`) | diamond-pearl-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 1 confirmed / 1 contradicted |
-| `west-ru` Historical Russian | established-positive | `WEST` / Russian (`ru`) | positive-through-breakthrough: owner-bounded-end; other-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 4 confirmed / 2 contradicted |
+| `west-nl` Historical Dutch | established-positive | `WEST` / Dutch (`nl`) | revision-4567865-positive-frontier: positive-observations-only; non-expansion-and-unlisted-history: needs-evidence | complete-positive-slice | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 2 confirmed / 2 contradicted |
+| `west-pl` Historical Polish | established-positive | `WEST` / Polish (`pl`) | revision-4567865-positive-frontier: positive-observations-only; non-expansion-and-unlisted-history: needs-evidence | complete-positive-slice | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 1 confirmed / 1 contradicted |
+| `west-ru` Historical Russian | established-positive | `WEST` / Russian (`ru`) | revision-4567865-positive-frontier: positive-observations-only; non-expansion-and-unlisted-history: needs-evidence | complete-positive-slice | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 4 confirmed / 2 contradicted |
 | `sea-en-coordinated` Southeast-Asian English coordination boundary | coordinated | `SEA` / English (`en-035`) | coordinated-unbounded: coordinated | coordinated | [#138](https://github.com/m4s-ai/snoredex-data/issues/138) | not represented |
 
 ## Track detail
@@ -146,43 +146,43 @@ Era segments:
 
 - **Scope:** Positively established Dutch historical cards; the complete market era remains unknown.
 - **Identity boundary:** A positive Dutch card does not make a neighbouring set, promo, or era Dutch.
-- **Discovery:** `blocked-by-source` — Resume with revision-pinned wikitext or another bounded historical catalogue and account every returned Dutch record.
+- **Discovery:** `complete-positive-slice` — Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources.
 - **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
-- **Evidence:** `unit:U0095`, `edge:bulbapedia-positive`
-- **Open:** What are the exact Dutch start/end eras and promo exceptions?
+- **Evidence:** `slice:bulbapedia-historical-nl-sets`, `card-slice:bulbapedia-historical-nl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0095`, `unit:U0125`
+- **Open:** Which Dutch promos, decks and products sit outside the three indexed expansions?
 
 Era segments:
 
-- `jungle-positive-point` (Jungle → Jungle; `positive-observations-only`): Confirmed Dutch Jungle unit U0095 is a positive historical point, not a continuous era range. Evidence: `unit:U0095`, `edge:bulbapedia-positive`.
-- `remaining-history` (open → open; `blocked-by-source`): The retained general historical catalogue surface is blocked for revision-pinned scripted enumeration. Evidence: `source-gap:bulbapedia-wikitext-catalogue`, `card-gap:specialist-historical-card-discovery`.
+- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for three positive Dutch expansion rows (Base Set, Jungle, Fossil); the card frontier matches both Jungle Snorlax numbers. Evidence: `slice:bulbapedia-historical-nl-sets`, `card-slice:bulbapedia-historical-nl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0095`, `unit:U0125`.
+- `non-expansion-and-unlisted-history` (open → open; `needs-evidence`): The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown. Evidence: `source-gap:bulbapedia-non-expansion-catalogue`, `card-gap:historical-non-expansion-card-discovery`.
 
 ### Historical Polish (`west-pl`)
 
 - **Scope:** Positively established Polish historical cards; no continuous market era is asserted.
 - **Identity boundary:** A confirmed Polish Diamond & Pearl card is one era point and cannot close other sets.
-- **Discovery:** `blocked-by-source` — Activate only from a bounded historical source or specimen-backed card loop.
+- **Discovery:** `complete-positive-slice` — Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources.
 - **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
-- **Evidence:** `unit:U0364`, `edge:bulbapedia-positive`
-- **Open:** What are the exact Polish product categories and era boundaries?
+- **Evidence:** `slice:bulbapedia-historical-pl-sets`, `card-slice:bulbapedia-historical-pl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0364`
+- **Open:** Which Polish promos, decks and products sit outside the two indexed expansions?
 
 Era segments:
 
-- `diamond-pearl-positive-point` (Diamond & Pearl → Diamond & Pearl; `positive-observations-only`): Confirmed Polish unit U0364 establishes one Diamond & Pearl card only. Evidence: `unit:U0364`, `edge:bulbapedia-positive`.
-- `remaining-history` (open → open; `blocked-by-source`): No active empty-start Polish card catalogue exists in the capability graph. Evidence: `source-gap:bulbapedia-wikitext-catalogue`, `card-gap:specialist-historical-card-discovery`.
+- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for two positive Polish expansion rows (Diamond & Pearl, Mysterious Treasures); the card frontier matches DP 37. Evidence: `slice:bulbapedia-historical-pl-sets`, `card-slice:bulbapedia-historical-pl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0364`.
+- `non-expansion-and-unlisted-history` (open → open; `needs-evidence`): The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown. Evidence: `source-gap:bulbapedia-non-expansion-catalogue`, `card-gap:historical-non-expansion-card-discovery`.
 
 ### Historical Russian (`west-ru`)
 
 - **Scope:** Positively established Russian cards through the owner-reviewed XY market boundary; no official localized archive exists.
 - **Identity boundary:** The owner-adjudicated end of the Russian XY run guides review but is not a provider-wide automatic absence rule.
-- **Discovery:** `blocked-by-source` — Resume with a bounded Russian historical source or positive specimens; never use TCGdex ru HTTP status or empty cards arrays as coverage.
+- **Discovery:** `complete-positive-slice` — Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources.
 - **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
-- **Evidence:** `unit:U0212`, `adjudication:OA-20260803-U0200`, `adjudication:OA-20260803-U0248`
-- **Open:** Which promos and decks sit outside the expansion run ending at BREAKthrough?
+- **Evidence:** `slice:bulbapedia-historical-ru-sets`, `card-slice:bulbapedia-historical-ru-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0212`, `unit:U0336`, `unit:U0487`, `unit:U0621`
+- **Open:** Which Russian promos and decks lie outside the nine indexed set rows?
 
 Era segments:
 
-- `positive-through-breakthrough` (open → BREAKthrough; `owner-bounded-end`): Confirmed Russian BKT 118 supplies the positive endpoint; owner adjudications settle the two later challenged products without creating a general manifest. Evidence: `unit:U0212`, `adjudication:OA-20260803-U0200`, `adjudication:OA-20260803-U0248`.
-- `other-history` (open → open; `blocked-by-source`): There is no official Russian archive and the historical wikitext catalogue route is currently blocked. Evidence: `document:verification/RESUME.md`, `source-gap:bulbapedia-wikitext-catalogue`.
+- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for nine positive Russian rows from Kalos Starter Set/XY through BREAKthrough; the card frontier preserves KSS 26, FLF 80 V1/V2 and BKT 118. The later dash cells are not absence evidence. Evidence: `slice:bulbapedia-historical-ru-sets`, `card-slice:bulbapedia-historical-ru-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0212`, `unit:U0336`, `unit:U0487`, `unit:U0621`.
+- `non-expansion-and-unlisted-history` (open → open; `needs-evidence`): The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown. Evidence: `source-gap:bulbapedia-non-expansion-catalogue`, `card-gap:historical-non-expansion-card-discovery`.
 
 ### Southeast-Asian English coordination boundary (`sea-en-coordinated`)
 

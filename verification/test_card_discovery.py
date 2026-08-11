@@ -570,6 +570,50 @@ class CardDiscoveryTests(unittest.TestCase):
             "xJTG must remain a positive-evidence gap",
         )
 
+    def test_historical_frontiers_preserve_numbers_variants_and_deck_identity(self):
+        rows = [
+            json.loads(line)
+            for line in (
+                ROOT / "verification" / "card_discovery_records.jsonl"
+            ).read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+        historical = {
+            row["rawProviderId"]: row
+            for row in rows
+            if row["providerId"] == "bulbapedia"
+            and row["surfaceId"] == "bulbapedia-mediawiki"
+        }
+        self.assertEqual(set(historical), {
+            "U0095", "U0125", "U0212", "U0336", "U0364", "U0487", "U0621",
+        })
+        self.assertTrue(all(row["bucket"] == "matched" for row in historical.values()))
+        self.assertEqual(historical["U0095"]["raw"]["localCollectorNumber"], "27")
+        self.assertEqual(historical["U0125"]["raw"]["localCollectorNumber"], "11")
+        self.assertEqual(historical["U0487"]["raw"]["rawSetCode"], "KSS")
+        self.assertEqual(
+            {
+                historical["U0336"]["sourceRecord"]["variant"],
+                historical["U0621"]["sourceRecord"]["variant"],
+            },
+            {"V1", "V2"},
+        )
+        self.assertTrue(all(
+            row["queryParameters"]["revisionId"] == 4567865
+            for row in historical.values()
+        ))
+        capability = json.loads(
+            (ROOT / "verification" / "source_capability_graph.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        edge = next(
+            row for row in capability["coverageEdges"]
+            if row["edgeId"] == "bulbapedia-historical-index-positive"
+        )
+        self.assertEqual(edge["coverage"]["productCategories"], ["set"])
+        self.assertNotIn("card-existence", edge["positiveEvidenceCapabilities"])
+
     def test_zero_result_is_source_failure_not_absence(self):
         raw = b"""
         <p class="resultNumber">0</p>

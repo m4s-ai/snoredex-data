@@ -39,8 +39,15 @@
       "scope": "English-language physical cards distributed in Western markets; region-specific products and stamps remain separate distribution identities.",
       "identityBoundary": "English text does not merge US/Canada, Europe, Australia/New Zealand, or later SEA distribution products when the physical card differs.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
-      "distributionRegions": ["US/Canada", "Europe", "Australia/New Zealand"],
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
+      "distributionRegions": [
+        "US/Canada",
+        "Europe",
+        "Australia/New Zealand"
+      ],
       "eraSegments": [
         {
           "eraId": "provider-observed-unbounded",
@@ -48,18 +55,38 @@
           "end": null,
           "state": "positive-observations-only",
           "basis": "The retained English TCGdex set slice and exact-name Snorlax card slice account for every returned row, while provider population and regional distribution remain open.",
-          "evidenceRefs": ["slice:tcgdex-en-sets", "card-slice:tcgdex-en-snorlax", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
+          "evidenceRefs": [
+            "slice:tcgdex-en-sets",
+            "card-slice:tcgdex-en-snorlax",
+            "edge:tcgdex-west-positive",
+            "observation:obs-tcgdex-west"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["slice:tcgdex-en-sets", "card-slice:tcgdex-en-snorlax", "edge:tcgdex-west-positive", "observation:obs-tcgdex-west"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
+        "sourceRefs": [
+          "slice:tcgdex-en-sets",
+          "card-slice:tcgdex-en-snorlax",
+          "edge:tcgdex-west-positive",
+          "observation:obs-tcgdex-west"
+        ],
+        "gapRefs": [
+          "source-gap:official-western-catalogue-index",
+          "card-gap:western-locality-card-discovery"
+        ],
         "retryCondition": "Rerun the exact-name slice for deltas; split regional products only when a positive physical marking or distribution record distinguishes them."
       },
-      "evidenceRefs": ["unit:U0000", "slice:tcgdex-en-sets", "card-slice:tcgdex-en-snorlax", "edge:tcgdex-west-positive"],
-      "openQuestions": ["No regional split is admitted by the current source: which positive physical marking or distribution record distinguishes US/Canada, Europe, or Australia/New Zealand?"],
+      "evidenceRefs": [
+        "unit:U0000",
+        "slice:tcgdex-en-sets",
+        "card-slice:tcgdex-en-snorlax",
+        "edge:tcgdex-west-positive"
+      ],
+      "openQuestions": [
+        "No regional split is admitted by the current source: which positive physical marking or distribution record distinguishes US/Canada, Europe, or Australia/New Zealand?"
+      ],
       "childIssue": 188
     },
     {
@@ -73,7 +100,10 @@
       "scope": "French-language physical cards in the current Western identity model.",
       "identityBoundary": "French card releases remain language-bearing editions; marketplace availability and another locale's archive never establish them.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
           "eraId": "provider-observed-unbounded",
@@ -81,18 +111,37 @@
           "end": null,
           "state": "positive-observations-only",
           "basis": "The retained French TCGdex set slice and exact-name Ronflex card slice are positive frontiers with no historical completeness claim.",
-          "evidenceRefs": ["slice:tcgdex-fr-sets", "card-slice:tcgdex-fr-snorlax", "edge:tcgdex-west-positive"],
+          "evidenceRefs": [
+            "slice:tcgdex-fr-sets",
+            "card-slice:tcgdex-fr-snorlax",
+            "edge:tcgdex-west-positive"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["slice:tcgdex-fr-sets", "card-slice:tcgdex-fr-snorlax", "edge:tcgdex-west-positive"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-french-card-archive", "card-gap:western-locality-card-discovery"],
+        "sourceRefs": [
+          "slice:tcgdex-fr-sets",
+          "card-slice:tcgdex-fr-snorlax",
+          "edge:tcgdex-west-positive"
+        ],
+        "gapRefs": [
+          "source-gap:official-western-catalogue-index",
+          "card-gap:official-french-card-archive",
+          "card-gap:western-locality-card-discovery"
+        ],
         "retryCondition": "Rerun the exact-name French slice for deltas and register a bounded official French route before making any historical-coverage claim."
       },
-      "evidenceRefs": ["unit:U0001", "slice:tcgdex-fr-sets", "card-slice:tcgdex-fr-snorlax", "edge:tcgdex-west-positive"],
-      "openQuestions": ["Which historical and promotional eras are absent from each positive catalogue surface?"],
+      "evidenceRefs": [
+        "unit:U0001",
+        "slice:tcgdex-fr-sets",
+        "card-slice:tcgdex-fr-snorlax",
+        "edge:tcgdex-west-positive"
+      ],
+      "openQuestions": [
+        "Which historical and promotional eras are absent from each positive catalogue surface?"
+      ],
       "childIssue": 190
     },
     {
@@ -106,7 +155,10 @@
       "scope": "German-language physical cards in the current Western identity model.",
       "identityBoundary": "German local set branding and collector identifiers survive even when artwork and card role match another language.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
           "eraId": "provider-observed-unbounded",
@@ -114,18 +166,37 @@
           "end": null,
           "state": "positive-observations-only",
           "basis": "The retained German TCGdex set slice and exact-name Relaxo card slice are fully accounted but do not close missing eras or cards.",
-          "evidenceRefs": ["slice:tcgdex-de-sets", "card-slice:tcgdex-de-snorlax", "edge:tcgdex-west-positive"],
+          "evidenceRefs": [
+            "slice:tcgdex-de-sets",
+            "card-slice:tcgdex-de-snorlax",
+            "edge:tcgdex-west-positive"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["slice:tcgdex-de-sets", "card-slice:tcgdex-de-snorlax", "edge:tcgdex-west-positive"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-german-card-archive", "card-gap:western-locality-card-discovery"],
+        "sourceRefs": [
+          "slice:tcgdex-de-sets",
+          "card-slice:tcgdex-de-snorlax",
+          "edge:tcgdex-west-positive"
+        ],
+        "gapRefs": [
+          "source-gap:official-western-catalogue-index",
+          "card-gap:official-german-card-archive",
+          "card-gap:western-locality-card-discovery"
+        ],
         "retryCondition": "Rerun the exact-name German slice for deltas and register a bounded official German route before making any historical-coverage claim."
       },
-      "evidenceRefs": ["unit:U0002", "slice:tcgdex-de-sets", "card-slice:tcgdex-de-snorlax", "edge:tcgdex-west-positive"],
-      "openQuestions": ["Which product-only and stamped releases fall outside expansion card archives?"],
+      "evidenceRefs": [
+        "unit:U0002",
+        "slice:tcgdex-de-sets",
+        "card-slice:tcgdex-de-snorlax",
+        "edge:tcgdex-west-positive"
+      ],
+      "openQuestions": [
+        "Which product-only and stamped releases fall outside expansion card archives?"
+      ],
       "childIssue": 190
     },
     {
@@ -139,7 +210,10 @@
       "scope": "Italian-language physical cards, with the official localized detail archive as a card-level route.",
       "identityBoundary": "The Italian archive proves only the exact returned card; it inherits no finish or absence closure from official checklist surfaces.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
           "eraId": "provider-observed-unbounded",
@@ -147,7 +221,10 @@
           "end": null,
           "state": "positive-observations-only",
           "basis": "The Italian TCGdex set slice is a positive frontier and can contain set rows with no localized cards.",
-          "evidenceRefs": ["slice:tcgdex-it-sets", "edge:tcgdex-west-positive"],
+          "evidenceRefs": [
+            "slice:tcgdex-it-sets",
+            "edge:tcgdex-west-positive"
+          ],
           "absenceAllowed": false
         },
         {
@@ -156,18 +233,38 @@
           "end": "Platinum era",
           "state": "positive-observations-only",
           "basis": "The exact official Italian pl2/111 detail positively establishes one historical Italian card without implying continuous archive coverage.",
-          "evidenceRefs": ["edge:tpci-it-card-archive-positive", "observation:obs-tpci-it-card-archive", "unit:U0368"],
+          "evidenceRefs": [
+            "edge:tpci-it-card-archive-positive",
+            "observation:obs-tpci-it-card-archive",
+            "unit:U0368"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["slice:tcgdex-it-sets", "edge:tcgdex-west-positive", "surface:tpci-localized-card-archive", "edge:tpci-it-card-archive-positive", "observation:obs-tpci-it-card-archive", "card-slice:tpci-it-snorlax"],
-        "gapRefs": ["card-gap:official-italian-archive-filter-coverage"],
+        "sourceRefs": [
+          "slice:tcgdex-it-sets",
+          "edge:tcgdex-west-positive",
+          "surface:tpci-localized-card-archive",
+          "edge:tpci-it-card-archive-positive",
+          "observation:obs-tpci-it-card-archive",
+          "card-slice:tpci-it-snorlax"
+        ],
+        "gapRefs": [
+          "card-gap:official-italian-archive-filter-coverage"
+        ],
         "retryCondition": "The retained Italian filter slice accounts for every returned path; use positive official or specialist routes for the demonstrated historical archive gap."
       },
-      "evidenceRefs": ["unit:U0368", "observation:obs-tpci-it-card-archive", "slice:tcgdex-it-sets", "card-slice:tpci-it-snorlax"],
-      "openQuestions": ["Which positive sources cover the historical cards omitted by the official name filter?"],
+      "evidenceRefs": [
+        "unit:U0368",
+        "observation:obs-tpci-it-card-archive",
+        "slice:tcgdex-it-sets",
+        "card-slice:tpci-it-snorlax"
+      ],
+      "openQuestions": [
+        "Which positive sources cover the historical cards omitted by the official name filter?"
+      ],
       "childIssue": 189
     },
     {
@@ -181,7 +278,10 @@
       "scope": "European-Spanish physical cards represented by every existing legacy Spanish unit.",
       "identityBoundary": "WEST/es-ES and LATAM/es-419 are distinct physical editions even when both are called Spanish.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
           "eraId": "provider-observed-unbounded",
@@ -189,18 +289,39 @@
           "end": null,
           "state": "positive-observations-only",
           "basis": "The retained Spanish TCGdex set and exact-name card slices do not identify same-language regional printings, so matches are routed only to pre-existing European legacy identities and never to LATAM.",
-          "evidenceRefs": ["slice:tcgdex-es-sets", "card-slice:tcgdex-es-eu-snorlax", "edge:tcgdex-west-positive", "decision:D3"],
+          "evidenceRefs": [
+            "slice:tcgdex-es-sets",
+            "card-slice:tcgdex-es-eu-snorlax",
+            "edge:tcgdex-west-positive",
+            "decision:D3"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["slice:tcgdex-es-sets", "card-slice:tcgdex-es-eu-snorlax", "edge:tcgdex-west-positive", "decision:D3"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-european-spanish-card-archive", "card-gap:western-locality-card-discovery"],
+        "sourceRefs": [
+          "slice:tcgdex-es-sets",
+          "card-slice:tcgdex-es-eu-snorlax",
+          "edge:tcgdex-west-positive",
+          "decision:D3"
+        ],
+        "gapRefs": [
+          "source-gap:official-western-catalogue-index",
+          "card-gap:official-european-spanish-card-archive",
+          "card-gap:western-locality-card-discovery"
+        ],
         "retryCondition": "Rerun the exact-name es slice for deltas; admit only matches to pre-existing WEST/es-ES identities and require a positive regional record for any LATAM/es-419 row."
       },
-      "evidenceRefs": ["unit:U0003", "slice:tcgdex-es-sets", "card-slice:tcgdex-es-eu-snorlax", "decision:D3"],
-      "openQuestions": ["Which product pages distinguish European distribution from LATAM after March 2025?"],
+      "evidenceRefs": [
+        "unit:U0003",
+        "slice:tcgdex-es-sets",
+        "card-slice:tcgdex-es-eu-snorlax",
+        "decision:D3"
+      ],
+      "openQuestions": [
+        "Which product pages distinguish European distribution from LATAM after March 2025?"
+      ],
       "childIssue": 190
     },
     {
@@ -214,7 +335,10 @@
       "scope": "The current legacy Portuguese projection pending reconciliation into Brazilian or another evidenced physical edition.",
       "identityBoundary": "A Portuguese language field and the TCGdex pt locale do not identify Brazil, Portugal, or another distribution region.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
           "eraId": "provider-observed-unbounded",
@@ -222,18 +346,37 @@
           "end": null,
           "state": "needs-evidence",
           "basis": "The retained pt set slice and bounded exact-name card slice are positive for Portuguese records but supply no physical regional boundary.",
-          "evidenceRefs": ["slice:tcgdex-pt-sets", "card-slice:tcgdex-pt-unqualified-snorlax", "edge:tcgdex-west-positive", "unit:U0005"],
+          "evidenceRefs": [
+            "slice:tcgdex-pt-sets",
+            "card-slice:tcgdex-pt-unqualified-snorlax",
+            "edge:tcgdex-west-positive",
+            "unit:U0005"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["slice:tcgdex-pt-sets", "card-slice:tcgdex-pt-unqualified-snorlax", "edge:tcgdex-west-positive"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-portuguese-physical-locality"],
+        "sourceRefs": [
+          "slice:tcgdex-pt-sets",
+          "card-slice:tcgdex-pt-unqualified-snorlax",
+          "edge:tcgdex-west-positive"
+        ],
+        "gapRefs": [
+          "source-gap:official-western-catalogue-index",
+          "card-gap:official-portuguese-physical-locality"
+        ],
         "retryCondition": "Rerun the exact-name pt slice for deltas; assign a physical region only when branding, legal line, set code, official locale, or specimen evidence identifies it."
       },
-      "evidenceRefs": ["unit:U0005", "slice:tcgdex-pt-sets", "card-slice:tcgdex-pt-unqualified-snorlax", "edge:tcgdex-west-positive"],
-      "openQuestions": ["Which legacy Portuguese rows are Brazilian, Portuguese-European, or another edition?"],
+      "evidenceRefs": [
+        "unit:U0005",
+        "slice:tcgdex-pt-sets",
+        "card-slice:tcgdex-pt-unqualified-snorlax",
+        "edge:tcgdex-west-positive"
+      ],
+      "openQuestions": [
+        "Which legacy Portuguese rows are Brazilian, Portuguese-European, or another edition?"
+      ],
       "childIssue": 191
     },
     {
@@ -247,8 +390,12 @@
       "scope": "Regular sets from Journey Together (March 2025) onward; Prize Packs remain outside this owner-defined discovery scope until positive evidence changes it.",
       "identityBoundary": "The complete printed LA modifier, LATAM translation and regional branding create a separate edition from European Spanish's printed ES code; no legacy Cardmarket row can populate it.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": false},
-      "distributionRegions": ["Latin America"],
+      "legacyUnitScope": {
+        "include": false
+      },
+      "distributionRegions": [
+        "Latin America"
+      ],
       "eraSegments": [
         {
           "eraId": "journey-together-forward",
@@ -256,18 +403,43 @@
           "end": null,
           "state": "positive-observations-only",
           "basis": "Official retained assets positively establish JTG LA 117/159, SVP LA 184 and POR LA 063/088. The paired SVP ES 184 asset preserves the European comparison; these named cards do not close neighbouring sets, variants or the era.",
-          "evidenceRefs": ["card-slice:tpci-latam-jtg-positive", "card-slice:tpci-latam-svp184-positive", "card-slice:tpci-latam-por063-positive", "edge:tpci-latam-spanish-card-asset-positive", "observation:obs-tpci-latam-svp184"],
+          "evidenceRefs": [
+            "card-slice:tpci-latam-jtg-positive",
+            "card-slice:tpci-latam-svp184-positive",
+            "card-slice:tpci-latam-por063-positive",
+            "edge:tpci-latam-spanish-card-asset-positive",
+            "observation:obs-tpci-latam-svp184"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["card-slice:tpci-latam-jtg-positive", "card-slice:tpci-latam-svp184-positive", "card-slice:tpci-latam-por063-positive", "surface:tpci-latam-spanish-card-assets", "edge:tpci-latam-spanish-card-asset-positive", "observation:obs-tpci-latam-svp184"],
-        "gapRefs": ["card-gap:official-latam-xjtg-positive-record"],
+        "sourceRefs": [
+          "card-slice:tpci-latam-jtg-positive",
+          "card-slice:tpci-latam-svp184-positive",
+          "card-slice:tpci-latam-por063-positive",
+          "surface:tpci-latam-spanish-card-assets",
+          "edge:tpci-latam-spanish-card-asset-positive",
+          "observation:obs-tpci-latam-svp184"
+        ],
+        "gapRefs": [
+          "card-gap:official-latam-xjtg-positive-record"
+        ],
         "retryCondition": "Add xJTG only from a positive LATAM card or distribution record carrying its own printed identity; expand other cards without treating a missing asset as absence."
       },
-      "evidenceRefs": ["card-slice:tpci-latam-jtg-positive", "card-slice:tpci-latam-svp184-positive", "card-slice:tpci-latam-por063-positive", "edge:tpci-latam-spanish-card-asset-positive", "observation:obs-tpci-latam-svp184", "decision:D3", "document:verification/RESUME.md"],
-      "openQuestions": ["Which positive LATAM record establishes xJTG independently from base JTG and WEST distribution printings?"],
+      "evidenceRefs": [
+        "card-slice:tpci-latam-jtg-positive",
+        "card-slice:tpci-latam-svp184-positive",
+        "card-slice:tpci-latam-por063-positive",
+        "edge:tpci-latam-spanish-card-asset-positive",
+        "observation:obs-tpci-latam-svp184",
+        "decision:D3",
+        "document:verification/RESUME.md"
+      ],
+      "openQuestions": [
+        "Which positive LATAM record establishes xJTG independently from base JTG and WEST distribution printings?"
+      ],
       "childIssue": 192
     },
     {
@@ -281,8 +453,12 @@
       "scope": "Positive Brazilian-market Portuguese records; a distinct Brazilian physical-card identity is created only when printed or official regional evidence supports it, and no claim is made for all Portuguese cards or eras.",
       "identityBoundary": "A Brazilian listing identifies market context but not by itself a distinct printed pt-BR edition; an official br detail or physical regional discriminator may support that split, while an unqualified pt provider record cannot.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": false},
-      "distributionRegions": ["Brazil"],
+      "legacyUnitScope": {
+        "include": false
+      },
+      "distributionRegions": [
+        "Brazil"
+      ],
       "eraSegments": [
         {
           "eraId": "positive-listing-unbounded",
@@ -290,18 +466,42 @@
           "end": null,
           "state": "positive-observations-only",
           "basis": "The retained LigaPokemon PPPS7 and PPPS8 records establish three Portuguese-language Brazilian-market observations and nothing about a distinct printed Brazilian edition or unlisted eras.",
-          "evidenceRefs": ["card-slice:ligapokemon-pt-br-positive-frontier", "edge:ligapokemon-latam-positive", "observation:obs-ligapokemon", "unit:U0192", "unit:U0219", "unit:U0329"],
+          "evidenceRefs": [
+            "card-slice:ligapokemon-pt-br-positive-frontier",
+            "edge:ligapokemon-latam-positive",
+            "observation:obs-ligapokemon",
+            "unit:U0192",
+            "unit:U0219",
+            "unit:U0329"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "complete-positive-slice",
-        "sourceRefs": ["card-slice:ligapokemon-pt-br-positive-frontier", "surface:ligapokemon-catalogue", "edge:ligapokemon-latam-positive", "observation:obs-ligapokemon"],
-        "gapRefs": ["card-gap:official-brazilian-card-archive"],
+        "sourceRefs": [
+          "card-slice:ligapokemon-pt-br-positive-frontier",
+          "surface:ligapokemon-catalogue",
+          "edge:ligapokemon-latam-positive",
+          "observation:obs-ligapokemon"
+        ],
+        "gapRefs": [
+          "card-gap:official-brazilian-card-archive"
+        ],
         "retryCondition": "Add an official br archive detail or printed physical-region discriminator; never treat blocked or empty marketplace searches as absence."
       },
-      "evidenceRefs": ["card-slice:ligapokemon-pt-br-positive-frontier", "observation:obs-ligapokemon", "unit:U0192", "unit:U0219", "unit:U0329", "edge:ligapokemon-latam-positive"],
-      "openQuestions": ["Which unqualified legacy Portuguese units map to pt-BR after physical-region review?", "Do PPPS7/PPPS8 Portuguese cards carry any printed or official distribution discriminator that separates a Brazilian physical edition from European Portuguese?"],
+      "evidenceRefs": [
+        "card-slice:ligapokemon-pt-br-positive-frontier",
+        "observation:obs-ligapokemon",
+        "unit:U0192",
+        "unit:U0219",
+        "unit:U0329",
+        "edge:ligapokemon-latam-positive"
+      ],
+      "openQuestions": [
+        "Which unqualified legacy Portuguese units map to pt-BR after physical-region review?",
+        "Do PPPS7/PPPS8 Portuguese cards carry any printed or official distribution discriminator that separates a Brazilian physical edition from European Portuguese?"
+      ],
       "childIssue": 191
     },
     {
@@ -315,35 +515,67 @@
       "scope": "Positively established Dutch historical cards; the complete market era remains unknown.",
       "identityBoundary": "A positive Dutch card does not make a neighbouring set, promo, or era Dutch.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
-          "eraId": "jungle-positive-point",
-          "start": "Jungle",
-          "end": "Jungle",
+          "eraId": "revision-4567865-positive-frontier",
+          "start": null,
+          "end": null,
           "state": "positive-observations-only",
-          "basis": "Confirmed Dutch Jungle unit U0095 is a positive historical point, not a continuous era range.",
-          "evidenceRefs": ["unit:U0095", "edge:bulbapedia-positive"],
+          "basis": "Revision 4567865 accounts for three positive Dutch expansion rows (Base Set, Jungle, Fossil); the card frontier matches both Jungle Snorlax numbers.",
+          "evidenceRefs": [
+            "slice:bulbapedia-historical-nl-sets",
+            "card-slice:bulbapedia-historical-nl-snorlax",
+            "edge:bulbapedia-historical-index-positive",
+            "observation:obs-bulbapedia-historical-index",
+            "unit:U0095",
+            "unit:U0125"
+          ],
           "absenceAllowed": false
         },
         {
-          "eraId": "remaining-history",
+          "eraId": "non-expansion-and-unlisted-history",
           "start": null,
           "end": null,
-          "state": "blocked-by-source",
-          "basis": "The retained general historical catalogue surface is blocked for revision-pinned scripted enumeration.",
-          "evidenceRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
+          "state": "needs-evidence",
+          "basis": "The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown.",
+          "evidenceRefs": [
+            "source-gap:bulbapedia-non-expansion-catalogue",
+            "card-gap:historical-non-expansion-card-discovery"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "blocked-by-source",
-        "sourceRefs": ["edge:bulbapedia-positive", "observation:obs-bulbapedia"],
-        "gapRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
-        "retryCondition": "Resume with revision-pinned wikitext or another bounded historical catalogue and account every returned Dutch record."
+        "state": "complete-positive-slice",
+        "sourceRefs": [
+          "slice:bulbapedia-historical-nl-sets",
+          "card-slice:bulbapedia-historical-nl-snorlax",
+          "edge:bulbapedia-historical-index-positive",
+          "observation:obs-bulbapedia-historical-index",
+          "unit:U0095",
+          "unit:U0125"
+        ],
+        "gapRefs": [
+          "source-gap:bulbapedia-non-expansion-catalogue",
+          "card-gap:historical-non-expansion-card-discovery"
+        ],
+        "retryCondition": "Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources."
       },
-      "evidenceRefs": ["unit:U0095", "edge:bulbapedia-positive"],
-      "openQuestions": ["What are the exact Dutch start/end eras and promo exceptions?"],
+      "evidenceRefs": [
+        "slice:bulbapedia-historical-nl-sets",
+        "card-slice:bulbapedia-historical-nl-snorlax",
+        "edge:bulbapedia-historical-index-positive",
+        "observation:obs-bulbapedia-historical-index",
+        "unit:U0095",
+        "unit:U0125"
+      ],
+      "openQuestions": [
+        "Which Dutch promos, decks and products sit outside the three indexed expansions?"
+      ],
       "childIssue": 193
     },
     {
@@ -357,35 +589,64 @@
       "scope": "Positively established Polish historical cards; no continuous market era is asserted.",
       "identityBoundary": "A confirmed Polish Diamond & Pearl card is one era point and cannot close other sets.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
-          "eraId": "diamond-pearl-positive-point",
-          "start": "Diamond & Pearl",
-          "end": "Diamond & Pearl",
+          "eraId": "revision-4567865-positive-frontier",
+          "start": null,
+          "end": null,
           "state": "positive-observations-only",
-          "basis": "Confirmed Polish unit U0364 establishes one Diamond & Pearl card only.",
-          "evidenceRefs": ["unit:U0364", "edge:bulbapedia-positive"],
+          "basis": "Revision 4567865 accounts for two positive Polish expansion rows (Diamond & Pearl, Mysterious Treasures); the card frontier matches DP 37.",
+          "evidenceRefs": [
+            "slice:bulbapedia-historical-pl-sets",
+            "card-slice:bulbapedia-historical-pl-snorlax",
+            "edge:bulbapedia-historical-index-positive",
+            "observation:obs-bulbapedia-historical-index",
+            "unit:U0364"
+          ],
           "absenceAllowed": false
         },
         {
-          "eraId": "remaining-history",
+          "eraId": "non-expansion-and-unlisted-history",
           "start": null,
           "end": null,
-          "state": "blocked-by-source",
-          "basis": "No active empty-start Polish card catalogue exists in the capability graph.",
-          "evidenceRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
+          "state": "needs-evidence",
+          "basis": "The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown.",
+          "evidenceRefs": [
+            "source-gap:bulbapedia-non-expansion-catalogue",
+            "card-gap:historical-non-expansion-card-discovery"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "blocked-by-source",
-        "sourceRefs": ["edge:bulbapedia-positive", "observation:obs-bulbapedia"],
-        "gapRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
-        "retryCondition": "Activate only from a bounded historical source or specimen-backed card loop."
+        "state": "complete-positive-slice",
+        "sourceRefs": [
+          "slice:bulbapedia-historical-pl-sets",
+          "card-slice:bulbapedia-historical-pl-snorlax",
+          "edge:bulbapedia-historical-index-positive",
+          "observation:obs-bulbapedia-historical-index",
+          "unit:U0364"
+        ],
+        "gapRefs": [
+          "source-gap:bulbapedia-non-expansion-catalogue",
+          "card-gap:historical-non-expansion-card-discovery"
+        ],
+        "retryCondition": "Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources."
       },
-      "evidenceRefs": ["unit:U0364", "edge:bulbapedia-positive"],
-      "openQuestions": ["What are the exact Polish product categories and era boundaries?"],
+      "evidenceRefs": [
+        "slice:bulbapedia-historical-pl-sets",
+        "card-slice:bulbapedia-historical-pl-snorlax",
+        "edge:bulbapedia-historical-index-positive",
+        "observation:obs-bulbapedia-historical-index",
+        "unit:U0364"
+      ],
+      "openQuestions": [
+        "Which Polish promos, decks and products sit outside the two indexed expansions?"
+      ],
       "childIssue": 193
     },
     {
@@ -399,35 +660,73 @@
       "scope": "Positively established Russian cards through the owner-reviewed XY market boundary; no official localized archive exists.",
       "identityBoundary": "The owner-adjudicated end of the Russian XY run guides review but is not a provider-wide automatic absence rule.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": true, "market": "Western"},
+      "legacyUnitScope": {
+        "include": true,
+        "market": "Western"
+      },
       "eraSegments": [
         {
-          "eraId": "positive-through-breakthrough",
+          "eraId": "revision-4567865-positive-frontier",
           "start": null,
-          "end": "BREAKthrough",
-          "state": "owner-bounded-end",
-          "basis": "Confirmed Russian BKT 118 supplies the positive endpoint; owner adjudications settle the two later challenged products without creating a general manifest.",
-          "evidenceRefs": ["unit:U0212", "adjudication:OA-20260803-U0200", "adjudication:OA-20260803-U0248"],
+          "end": null,
+          "state": "positive-observations-only",
+          "basis": "Revision 4567865 accounts for nine positive Russian rows from Kalos Starter Set/XY through BREAKthrough; the card frontier preserves KSS 26, FLF 80 V1/V2 and BKT 118. The later dash cells are not absence evidence.",
+          "evidenceRefs": [
+            "slice:bulbapedia-historical-ru-sets",
+            "card-slice:bulbapedia-historical-ru-snorlax",
+            "edge:bulbapedia-historical-index-positive",
+            "observation:obs-bulbapedia-historical-index",
+            "unit:U0212",
+            "unit:U0336",
+            "unit:U0487",
+            "unit:U0621"
+          ],
           "absenceAllowed": false
         },
         {
-          "eraId": "other-history",
+          "eraId": "non-expansion-and-unlisted-history",
           "start": null,
           "end": null,
-          "state": "blocked-by-source",
-          "basis": "There is no official Russian archive and the historical wikitext catalogue route is currently blocked.",
-          "evidenceRefs": ["document:verification/RESUME.md", "source-gap:bulbapedia-wikitext-catalogue"],
+          "state": "needs-evidence",
+          "basis": "The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown.",
+          "evidenceRefs": [
+            "source-gap:bulbapedia-non-expansion-catalogue",
+            "card-gap:historical-non-expansion-card-discovery"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "blocked-by-source",
-        "sourceRefs": ["edge:bulbapedia-positive", "observation:obs-bulbapedia"],
-        "gapRefs": ["source-gap:bulbapedia-wikitext-catalogue", "card-gap:specialist-historical-card-discovery"],
-        "retryCondition": "Resume with a bounded Russian historical source or positive specimens; never use TCGdex ru HTTP status or empty cards arrays as coverage."
+        "state": "complete-positive-slice",
+        "sourceRefs": [
+          "slice:bulbapedia-historical-ru-sets",
+          "card-slice:bulbapedia-historical-ru-snorlax",
+          "edge:bulbapedia-historical-index-positive",
+          "observation:obs-bulbapedia-historical-index",
+          "unit:U0212",
+          "unit:U0336",
+          "unit:U0487",
+          "unit:U0621"
+        ],
+        "gapRefs": [
+          "source-gap:bulbapedia-non-expansion-catalogue",
+          "card-gap:historical-non-expansion-card-discovery"
+        ],
+        "retryCondition": "Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources."
       },
-      "evidenceRefs": ["unit:U0212", "adjudication:OA-20260803-U0200", "adjudication:OA-20260803-U0248"],
-      "openQuestions": ["Which promos and decks sit outside the expansion run ending at BREAKthrough?"],
+      "evidenceRefs": [
+        "slice:bulbapedia-historical-ru-sets",
+        "card-slice:bulbapedia-historical-ru-snorlax",
+        "edge:bulbapedia-historical-index-positive",
+        "observation:obs-bulbapedia-historical-index",
+        "unit:U0212",
+        "unit:U0336",
+        "unit:U0487",
+        "unit:U0621"
+      ],
+      "openQuestions": [
+        "Which Russian promos and decks lie outside the nine indexed set rows?"
+      ],
       "childIssue": 193
     },
     {
@@ -441,8 +740,14 @@
       "scope": "English-language physical products distributed in Southeast Asia, coordinated with the Asian locality tracker #138.",
       "identityBoundary": "SEA English cannot collapse into WEST English when local distribution marks or product identity differ.",
       "absencePolicy": "positive-only",
-      "legacyUnitScope": {"include": false},
-      "distributionRegions": ["Malaysia", "Philippines", "Singapore"],
+      "legacyUnitScope": {
+        "include": false
+      },
+      "distributionRegions": [
+        "Malaysia",
+        "Philippines",
+        "Singapore"
+      ],
       "coordinationIssue": 138,
       "eraSegments": [
         {
@@ -451,18 +756,29 @@
           "end": null,
           "state": "coordinated",
           "basis": "ADR-0001 preserves SEA English as a separate locality; source-first enumeration and era closure remain owned by #138.",
-          "evidenceRefs": ["document:verification/ADR-0001-locality-aware-print-identity.md", "edge:bulbapedia-positive"],
+          "evidenceRefs": [
+            "document:verification/ADR-0001-locality-aware-print-identity.md",
+            "edge:bulbapedia-positive"
+          ],
           "absenceAllowed": false
         }
       ],
       "discovery": {
         "state": "coordinated",
-        "sourceRefs": ["document:verification/ADR-0001-locality-aware-print-identity.md", "edge:bulbapedia-positive"],
+        "sourceRefs": [
+          "document:verification/ADR-0001-locality-aware-print-identity.md",
+          "edge:bulbapedia-positive"
+        ],
         "gapRefs": [],
         "retryCondition": "Consume the terminal SEA-English result from #138 and preserve any physical distribution identity separately from WEST."
       },
-      "evidenceRefs": ["document:verification/ADR-0001-locality-aware-print-identity.md", "document:verification/RESUME.md"],
-      "openQuestions": ["Which SEA-English set/product indexes can enumerate independently of known cards?"],
+      "evidenceRefs": [
+        "document:verification/ADR-0001-locality-aware-print-identity.md",
+        "document:verification/RESUME.md"
+      ],
+      "openQuestions": [
+        "Which SEA-English set/product indexes can enumerate independently of known cards?"
+      ],
       "childIssue": 138
     }
   ]
