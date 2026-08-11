@@ -81,7 +81,20 @@ SCHEMA_VERSION = "0.1.0"
 # Matched against `sourceType`, most specific first. A market-history article and a sibling
 # inference both mention things the card-level pattern would otherwise catch.
 MARKET_ERA = re.compile(r"Pok[eé]mon in |market-history", re.IGNORECASE)
-SIBLING = re.compile(r"units of the same product|set release schedule", re.IGNORECASE)
+# A sibling-derived row rests on **another unit's record**. That is what makes it unable to support
+# a confirmation: the neighbour's evidence is not this unit's evidence.
+#
+# `set release schedule` was in this pattern and is not a sibling. It is a fact about the set, and
+# it sat in `sourceType` after an owner attestation naming this exact card in this exact language —
+# "Owner (domain expert) confirms the MEGA Dream ex mirror-holo Hop's Snorlax variants exist in
+# Korean". Because this pattern is tested before `CARD_LEVEL`, the trailing context decided the
+# granularity and eight `xm2a 136` rows were filed as though a neighbour carried them.
+#
+# The fourteen Prize Pack rows that remain here are *correctly* classified, and the distinction is
+# worth keeping in view: their own evidence says the unit "rests on the owner attestation plus the
+# uniform per-region Prize Pack distribution the corroborated languages demonstrate". That names
+# other units as part of the basis. A release schedule names nobody.
+SIBLING = re.compile(r"units of the same product", re.IGNORECASE)
 CARD_LEVEL = re.compile(
     r"card database|TCGdex|photographed|specimen|set list|card article|card page|"
     r"locale card archive|promo search|"
@@ -132,6 +145,122 @@ RUN_MEMBERSHIP = {
     "Online Code Card": (False, "not a physical collectible card"),
 }
 
+# Rarities that name how a card was *distributed*, not where it sits in a set. A recorded set size
+# outranks the rarity word — but not these, and the difference is not a nicety.
+#
+# A promo's collector number is the number of the run card it reprints. `RR 33 V2` is the Rival
+# Season promo printing of `RR 33 V1`, an ordinary Rare; `CL 33 V2` and `FLF 80 V2` are the same
+# shape. Comparing 33 against a 111-card run therefore answers a question nobody asked: it says the
+# *number* is inside the run, which was never in doubt, and concludes that a language release of the
+# set reaches a promo distributed separately from it.
+#
+# This is not hypothetical. When `RR` gained a size and `CL`/`FLF` had not yet, `RR 33 V2` moved to
+# `carries` while its two identical siblings stayed on the queue — one promo judged sound and two
+# unsound, by nothing but which set had been measured first. So the exclusion is checked before the
+# size, and a distribution rarity is outside every numbered run whatever its number says.
+DISTRIBUTION_RARITIES = {
+    "Promo",
+    "Prize Pack Series",
+    "Oversized",
+    "World Championship Deck",
+    "Online Code Card",
+}
+
+
+# WHICH VERDICT EACH GRANULARITY MAY SUPPORT
+#
+# #137's second work item, and the one #140 needs before it can downgrade anything: the rules were
+# implicit in this file's branching, so a reader could see what the report concluded but not what it
+# was entitled to conclude. Declaring them makes the residue one queue under one rule instead of
+# three ad-hoc counters.
+#
+# `alone` is the operative word throughout. Every row here asks what a granularity establishes **by
+# itself**; corroboration and owner adjudication are separate mechanisms layered on top, and the
+# owner adjudication in particular settles a contradiction whatever the evidence's granularity,
+# because rule 4 makes it the only thing that can.
+VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
+    "specimen-or-card": {
+        "confirmed": {
+            "support": "always",
+            "rule": "A record of this exact card in this exact language establishes the printing. "
+                    "This is the granularity every other one is trying to reach.",
+        },
+        "contradicted": {
+            "support": "only-within-an-exhaustive-absence-edge",
+            "rule": "A card-level source may deny a printing only where #135 proves it exhaustive "
+                    "for that locality, category and period. Otherwise its silence is a gap.",
+        },
+    },
+    "product-or-set": {
+        "confirmed": {
+            "support": "only-when-the-step-to-the-card-holds",
+            "rule": "A statement about the product reaches the card when the card sits inside the "
+                    "set's numbered run, or when the cited page carries a closed card list "
+                    "containing it — and never when the row is a distribution printing.",
+        },
+        "contradicted": {
+            "support": "never",
+            "rule": "A product-level source that does not list a card has a gap, not a finding. "
+                    "This is #137's named failure: contradicting a card because a cross-language "
+                    "expansion index has no entry for it.",
+        },
+    },
+    "market-or-era": {
+        "confirmed": {
+            "support": "never",
+            "rule": "That a market existed, or received a set, never establishes a particular "
+                    "card in a particular language.",
+        },
+        "contradicted": {
+            "support": "never",
+            "rule": "An era argument is Indizien: it is the material the owner weighs, not a "
+                    "verdict a page can assert. Only an owner adjudication settles it.",
+        },
+    },
+    "sibling-derived": {
+        "confirmed": {
+            "support": "never",
+            "rule": "The neighbour's evidence is not this unit's evidence. A row whose only basis "
+                    "is a sibling's record establishes nothing about itself.",
+        },
+        "contradicted": {
+            "support": "never",
+            "rule": "Same reason, in the other direction.",
+        },
+    },
+}
+
+# An owner adjudication settles a contradiction whatever the granularity beneath it, because rule 4
+# makes it the only mechanism that can settle an absence at all. It is recorded separately in
+# owner_adjudications.json and never attributed to a provider, so it is a layer over this table
+# rather than a row in it.
+ADJUDICATED = "owner-adjudicated"
+SCOPED_ABSENCE = "provider-holds-an-absence-edge"
+
+
+def transition_support(grain: str, status: str, inference: str | None) -> tuple[bool, str]:
+    """Does this unit's verdict sit within what its evidence's granularity may support?
+
+    Returns (within, the rule that decided it). A verdict outside its granularity is not a data
+    error and nothing here rewrites it: it is a row whose recorded observation stays exactly as it
+    is while the inference drawn from it is marked as unsupported, which is what #137 asks for and
+    what #140 acts on.
+    """
+    if status not in ("confirmed", "contradicted"):
+        return True, "not-an-existence-verdict"
+    if status == "contradicted":
+        if inference == ADJUDICATED:
+            return True, "owner-adjudication"
+        if inference == SCOPED_ABSENCE:
+            allowed = VERDICT_TRANSITIONS.get(grain, {}).get("contradicted", {}).get("support")
+            return allowed == "only-within-an-exhaustive-absence-edge", "exhaustive-absence-edge"
+        return False, "unscoped-absence"
+    if grain == "specimen-or-card":
+        return True, "card-level-record"
+    if grain == "product-or-set":
+        return inference == "carries", "step-from-product-to-card"
+    return False, "granularity-cannot-support-a-confirmation"
+
 
 def read_json(path: Path) -> Any:
     with path.open(encoding="utf-8-sig") as handle:
@@ -151,8 +280,23 @@ def granularity(unit: dict[str, Any]) -> str:
     return "unclassified"
 
 
+def printed_set_sizes(set_sources: dict) -> dict[str, int]:
+    """The denominator printed beside the collector number, per set, from the set database.
+
+    This is what separates the two things Cardmarket's `Ultra Rare` means. A card is inside the
+    numbered run when its number is within the set's printed size, and once that number is
+    recorded, run membership is computed from data rather than inferred from a rarity word — which
+    is the requirement filed on #146 and the reason the `needs-set-size` state existed.
+    """
+    return {
+        row["raw"]["legacySetCode"]: row["raw"]["printedSetSize"]
+        for row in set_sources["sourceRecords"]
+        if row["sourceKind"] == "printed-set-size-record"
+    }
+
+
 def build(units: list[dict], cards: list[dict], registry: dict,
-          capabilities: dict, adjudications: dict) -> dict[str, Any]:
+          capabilities: dict, adjudications: dict, set_sources: dict) -> dict[str, Any]:
     # Keyed by the variant token too, not just set and number. Seventeen (setCode, number) pairs
     # carry more than one card and eight of those differ in rarity, always the same way: a base
     # printing and a promo variant sharing a collector number. Keying without the token kept
@@ -161,6 +305,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
     # evidence problem in a new place: judge a row by its own record.
     by_key = {(c["setCode"], str(c.get("number") or ""), c.get("variantToken") or "base"): c
               for c in cards}
+    sizes = printed_set_sizes(set_sources)
 
     # Which providers may carry absence at all. Both stores are consulted and must agree; they do
     # today, and a disagreement is worth seeing rather than silently preferring one.
@@ -187,6 +332,26 @@ def build(units: list[dict], cards: list[dict], registry: dict,
                            unit.get("variant") or "base"))
         rarity = card["rarity"] if card else None
         inside_run, run_reason = RUN_MEMBERSHIP.get(rarity, (None, "rarity not classified"))
+        run_basis = "rarity-table"
+        # A recorded set size outranks the rarity word in both directions. It is the fact the word
+        # was standing in for, so it settles the era-dependent rarities and corrects any other
+        # classification that disagrees with the printed denominator.
+        #
+        # A distribution rarity is the exception, and it is checked first: that row is a promo,
+        # prize-pack, jumbo, Worlds-deck or code-card printing, whose collector number belongs to
+        # the run card it reprints rather than to itself. See DISTRIBUTION_RARITIES.
+        size = sizes.get(unit["setCode"])
+        number_text = str(unit.get("number") or "")
+        if rarity in DISTRIBUTION_RARITIES:
+            run_basis = "distribution-rarity"
+        elif size is not None and number_text.isdigit():
+            inside_run = int(number_text) <= size
+            run_basis = "printed-set-size"
+            run_reason = (
+                f"collector number {int(number_text)} against the set's printed size {size}, "
+                f"recorded in the set database: "
+                + ("inside the numbered run" if inside_run else "numbered above the printed size")
+            )
 
         closed_list = bool(CLOSED_LIST_SOURCE.search(unit.get("sourceType") or ""))
         inference = None
@@ -221,10 +386,14 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "granularity": grain,
             "rarity": rarity,
             "insideNumberedRun": inside_run,
+            "runMembershipBasis": run_basis,
             "runMembershipReason": run_reason,
             "sourceCarriesCardList": closed_list,
             "inference": inference,
         })
+        within, rule = transition_support(grain, unit["status"], inference)
+        rows[-1]["verdictWithinGranularity"] = within
+        rows[-1]["verdictTransitionRule"] = rule
 
     by_grain: dict[str, Counter] = defaultdict(Counter)
     for row in rows:
@@ -233,6 +402,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
     unsound = [r for r in rows if r["inference"] == "does-not-carry"]
     unscoped = [r for r in rows if r["inference"] == "unscoped-absence"]
     needs_size = [r for r in rows if r["inference"] == "needs-set-size"]
+    beyond = [r for r in rows if not r["verdictWithinGranularity"]]
 
     return {
         "meta": {
@@ -255,6 +425,14 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             rarity: {"insideNumberedRun": inside, "reason": reason}
             for rarity, (inside, reason) in sorted(RUN_MEMBERSHIP.items())
         },
+        "verdictTransitions": {
+            "description": (
+                "Which verdict each granularity may support on its own. An owner adjudication "
+                "settles a contradiction whatever the granularity beneath it, because it is the "
+                "only mechanism that can settle an absence at all."
+            ),
+            "byGranularity": VERDICT_TRANSITIONS,
+        },
         "counts": {
             "units": len(rows),
             "byGranularity": {k: dict(v) for k, v in sorted(by_grain.items())},
@@ -263,10 +441,24 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "setLevelConfirmationsThatCarry": sum(1 for r in rows if r["inference"] == "carries"),
             "setLevelConfirmationsThatDoNotCarry": len(unsound),
             "setLevelConfirmationsNeedingSetSize": len(needs_size),
+            # One queue, reported as one number. Splitting "the inference fails" from "this report
+            # cannot say" is useful to a reader and misleading to a gate: resolving an undecidable
+            # row into a failing one moves both counters and reads as a regression on either half.
+            "setLevelConfirmationsNotReachingTheCard": len(unsound) + len(needs_size),
             "contradictionsByBacking": dict(Counter(
                 r["inference"] for r in rows if r["status"] == "contradicted")),
+            "setLevelConfirmationsByRunBasis": dict(Counter(
+                r["runMembershipBasis"] for r in rows
+                if r["status"] == "confirmed" and r["granularity"] == "product-or-set")),
             "unsoundByRarity": dict(Counter(r["rarity"] for r in unsound).most_common()),
+            # The same residue the three queues above describe, counted once under one rule. It is
+            # what #140 has to disposition, and it is deliberately a superset: a row can fail the
+            # transition test without appearing on any single one of them.
+            "verdictsBeyondTheirGranularity": len(beyond),
+            "verdictsBeyondTheirGranularityByRule": dict(Counter(
+                r["verdictTransitionRule"] for r in beyond).most_common()),
         },
+        "verdictsBeyondTheirGranularity": sorted(beyond, key=lambda r: r["unitId"]),
         "setLevelConfirmationsThatDoNotCarry": sorted(unsound, key=lambda r: r["unitId"]),
         "setLevelConfirmationsNeedingSetSize": sorted(needs_size, key=lambda r: r["unitId"]),
         "unscopedAbsenceContradictions": sorted(unscoped, key=lambda r: r["unitId"]),
@@ -285,6 +477,7 @@ def main() -> int:
         read_json(ROOT / "verification" / "source_registry.json"),
         read_json(ROOT / "verification" / "source_capabilities.json"),
         read_json(ROOT / "verification" / "owner_adjudications.json"),
+        read_json(ROOT / "verification" / "set_catalogue_sources.json"),
     )
 
     if args.check:
@@ -310,6 +503,8 @@ def main() -> int:
           f"{counts['setLevelConfirmationsThatDoNotCarry']} do not, "
           f"{counts['setLevelConfirmationsNeedingSetSize']} undecidable without a set size)")
     print(f"  contradictions by backing: {counts['contradictionsByBacking']}")
+    print(f"  verdicts beyond their granularity: {counts['verdictsBeyondTheirGranularity']} "
+          f"{counts['verdictsBeyondTheirGranularityByRule']}")
     return 0
 
 

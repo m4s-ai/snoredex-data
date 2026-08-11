@@ -797,12 +797,33 @@ def collect() -> None:
         #   -5  the publisher's own Asia card database answers five Thai/Indonesian rows at card
         #       level, replacing a statement about the set with a record of the card.
         #
-        # The 19 left cite the cross-language expansion index, which carries no card list at all,
-        # for cards no locale catalogue here indexes. That is the honest residue rather than a
-        # backlog of bookkeeping.
-        UNSOUND_SET_LEVEL_BASELINE = 19
+        #   -4  printed set sizes recorded in the set database (#146) decide the six rows that
+        #       Cardmarket's era-dependent "Ultra Rare" could not: two are inside their numbered
+        #       run and carry, four are secret-numbered and do not.
+        #
+        # The baseline tracks the AGGREGATE — rows whose inference does not reach the card, whether
+        # because it demonstrably fails or because the report cannot yet say. Two counters for one
+        # queue is how a real improvement reads as a loss: resolving an undecidable row into a
+        # failing one lowers `needs-set-size` and raises `does-not-carry`, and a gate watching only
+        # the second would redden while the queue shrank. That is the shape of gate this repository
+        # has already learned to stop building.
+        #
+        #   -4  eight more printed set sizes, for the sets the queue was still judging by rarity,
+        #       plus the guard that makes recording them safe. Three rows carrying the harvest
+        #       rarity `Fixed` sit inside their set's main set list — `m2a 136` of 193, `s8b 126`
+        #       of 184, `sv4a 145` of 190 — and two Simplified Chinese rows are reached by their
+        #       own edition's card list rather than by a denominator. Against that, `RR 33 V2`
+        #       returns to the queue: it is the Rival Season promo, and it had left only because a
+        #       recorded size was allowed to overrule a distribution rarity. A promo's collector
+        #       number is the number of the run card it reprints, so the size now yields to the
+        #       exclusion and the three promo rows — `RR 33 V2`, `CL 33 V2`, `FLF 80 V2` — agree
+        #       again.
+        #
+        # The 17 left cite the cross-language expansion index, which carries no card list at all,
+        # for cards no locale catalogue here indexes, plus the three promo printings above.
+        UNSOUND_SET_LEVEL_BASELINE = 17
         UNSCOPED_ABSENCE_BASELINE = 27
-        unsound_now = semantic_counts["setLevelConfirmationsThatDoNotCarry"]
+        unsound_now = semantic_counts["setLevelConfirmationsNotReachingTheCard"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
         check(
             "N17",
@@ -810,10 +831,52 @@ def collect() -> None:
             "FAIL",
             unsound_now <= UNSOUND_SET_LEVEL_BASELINE
             and unscoped_now <= UNSCOPED_ABSENCE_BASELINE,
-            f"set-level confirmations that do not carry: {unsound_now} "
+            f"set-level confirmations not reaching the card: {unsound_now} "
             f"(baseline {UNSOUND_SET_LEVEL_BASELINE}); unscoped-absence contradictions: "
             f"{unscoped_now} (baseline {UNSCOPED_ABSENCE_BASELINE}). A rise means a pass wrote a "
             f"verdict on set-level or unscoped-absence reasoning.",
+        )
+
+        # N19 — one rule over the three queues above (#137)
+        # --------------------------------------------------------------------------- #
+        # #137 asks for the rules, not only the counts: "define which verdict transitions each
+        # granularity may support". Until they were declared they lived in `evidence_semantics.py`'s
+        # branching, so a reader could see what the report concluded but not what it was entitled
+        # to conclude, and the residue was three ad-hoc counters that no single number covered.
+        #
+        # `VERDICT_TRANSITIONS` states them and every row is tested against them. This holds the
+        # result. It is deliberately a superset of N17: a row can sit outside its granularity
+        # without appearing on any one of the three queues, and 22 of the 66 do exactly that.
+        #
+        # The 66 are not data errors and nothing downgrades them here — the observation stays as
+        # recorded and only the inference drawn from it is marked unsupported, which is the split
+        # #137 asks for and the disposition #140 acts on.
+        #
+        #   27  unscoped absence — a contradiction with neither an exhaustive coverage edge nor an
+        #       owner adjudication. 26 rest on a market-history article (#84/#88, the owner's call).
+        #   14  a granularity that cannot support a confirmation at all — the Prize Pack rows,
+        #       whose own evidence says the unit "rests on the owner attestation plus the uniform
+        #       per-region Prize Pack distribution the corroborated languages demonstrate". That
+        #       names other units as part of the basis, so `sibling-derived` is what they are.
+        #
+        #       This was 22, and the first reading of it was wrong in a way worth recording. All
+        #       22 opened with an owner attestation, so the classifier looked like it was matching
+        #       trailing context in every case. It was not: eight `xm2a 136` rows named a *set
+        #       release schedule*, which is a fact about the set and not another unit's record, and
+        #       those eight were genuinely card-level. The fourteen here name other units. A
+        #       pattern being wrong about part of a group is not a reason to move the group.
+        #   17  a product-level statement whose step to the card does not hold, the N17 queue.
+        BEYOND_GRANULARITY_BASELINE = 58
+        beyond_now = semantic_counts["verdictsBeyondTheirGranularity"]
+        check(
+            "N19",
+            "Every verdict sits within what its evidence's granularity may support",
+            "FAIL",
+            beyond_now <= BEYOND_GRANULARITY_BASELINE,
+            f"verdicts beyond their granularity: {beyond_now} "
+            f"(baseline {BEYOND_GRANULARITY_BASELINE}) — "
+            f"{semantic_counts['verdictsBeyondTheirGranularityByRule']}. A rise means a pass wrote "
+            f"a verdict its evidence's granularity does not support.",
         )
 
         # The two stores that say which providers may carry absence at all must agree. They do

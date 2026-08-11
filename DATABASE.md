@@ -41,23 +41,37 @@ from that evidence to this card holds:
 
 | granularity | inference | rows | what it means |
 |---|---|---:|---|
-| `specimen-or-card` | — | 509 | a record about this card in this language |
-| `product-or-set` | `carries` | 78 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
-| `product-or-set` | `does-not-carry` | **19** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
-| `product-or-set` | `needs-set-size` | 6 | undecidable here: the card's rarity is era-dependent and the set's printed size is not recorded |
-| `sibling-derived` | — | 22 | the evidence of a neighbouring unit |
+| `specimen-or-card` | — | 519 | a record about this card in this language |
+| `product-or-set` | `carries` | 84 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
+| `product-or-set` | `does-not-carry` | **17** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached |
+| `product-or-set` | `needs-set-size` | 0 | was: undecidable without a printed set size. The set database records those sizes now (#146), so run membership is computed rather than inferred from a rarity word |
+| `sibling-derived` | — | 14 | the evidence of a neighbouring unit |
 
 An application that needs card-level evidence should filter on `evidence_granularity` rather than
-trusting `exists` alone. The 19 are not wrong — they are unproven at this granularity, and
-`pending` semantics apply: not yet established, never proven absent. All 19 cite one source, the
+trusting `exists` alone. The 17 are not wrong — they are unproven at this granularity, and
+`pending` semantics apply: not yet established, never proven absent. Fourteen cite one source, the
 cross-language expansion index, which carries no card list at all, for cards no locale catalogue
-here indexes; the rows whose page did carry a list, and the rows the publisher's own locale
-databases answer, have been recorded as card-level.
+here indexes; three are promo printings, whose collector number is the number of the run card they
+reprint, so the set's printed size cannot reach them. The rows whose page did carry a list, and the
+rows the publisher's own locale databases answer, have been recorded as card-level.
 
-`needs-set-size` is a third answer, not a softer `does-not-carry`. Cardmarket's `Ultra Rare` covers
-both the modern Full Art, secret in some locales, and the EX-era `ex` and DP-era LV.X cards, which
-were numbered inside the set; only the set's printed size separates them, and no store here carries
-it yet (#146). Treat those rows as unclassified rather than as either answer.
+Which verdict each granularity may support on its own is now declared rather than implied, in
+`verdictTransitions` in `verification/evidence_semantics.json`. In short: a card-level record
+establishes a printing, and may deny one only inside a coverage edge proven exhaustive; a
+product-level statement reaches the card only when the step above holds, and never denies one; an
+era argument and a sibling's record establish nothing on their own. An owner adjudication settles a
+contradiction whatever sits beneath it, because it is the only mechanism that can settle an absence.
+`verdictsBeyondTheirGranularity` counts the rows outside that rule — **58** today, held by check
+`N19`. They are a queue for #140 to disposition, not errors: the recorded observation stands and
+only the inference drawn from it is marked unsupported.
+
+`needs-set-size` is a third answer, not a softer `does-not-carry`: it is the report declining to
+classify. It stands at 0 because the set database now records `printedSetSize` — the denominator
+printed beside the collector number — so a card is inside the numbered run when its number is
+within that size, in its own numbering. That fact outranks the rarity word in both directions,
+which is what Cardmarket's era-dependent `Ultra Rare` needed: the same word covers the modern Full
+Art, secret in some locales, and the EX-era `ex` and DP-era LV.X cards numbered inside the set.
+The state is kept because a set whose size is not yet recorded still lands there.
 
 The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated`, none
 is source-derived, which is rule 4 visible in the data. Every `disputed` row is

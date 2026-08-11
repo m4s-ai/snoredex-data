@@ -376,15 +376,28 @@ path matches the set you asked for.** Everything else is silence. When this is w
 archive's URLs must stay *out* of `pokemon-official`'s `absenceScopes`, even though the provider is
 absence-capable for its published checklists.
 
-**It is not wired up yet, and the blocker is worth knowing before you try.** Citing an archive URL
-needs the `language` capability declared on a `pokemon-official` surface, and declaring a new
-surface changes `source_capability_graph.json`. Every retained run under `verification/runs/`
-records a `capabilityGraphHash` and `build_latest` re-validates *all* of them against the current
-graph, so one added surface makes both `source_adapters.py` and `card_discovery.py` fail with
-`captured under another capability graph`. `--refresh-tcgdex` does not escape it: it validates the
-existing runs first. The graph cannot grow without discarding history, which is a defect in the
-run-pinning rule rather than in the source — see #147/#135. `U0368` carries the finding in its
-evidence text meanwhile, still cited to the set-level index it will eventually replace.
+**It is not wired up yet. The run-pinning blocker that used to stop it is fixed; one real
+requirement remains.** Citing an archive URL needs the `language` capability declared on a
+`pokemon-official` surface, and declaring a new surface changes `source_capability_graph.json`.
+
+Until 2026-08-10 that was fatal: every retained run under `verification/runs/` recorded a
+`capabilityGraphHash` covering the **whole** graph, so one added surface made both
+`source_adapters.py` and `card_discovery.py` fail with `captured under another capability graph` —
+even though the set-adapter run had only ever fetched `tcgdex` and the card-discovery run only
+`pokemon-card-asia`. The pin is now computed over the surfaces a run actually used, recorded in the
+manifest as `capabilityGraphSurfaces`, so the graph can grow without discarding history. A surface a
+run *did* use still expires it, which is the property worth keeping.
+
+What still stands, and is not a defect: **`pokemon-official` currently has one surface, so its
+evidence rows route to it implicitly.** Adding a second means every surface on that provider needs a
+`match` block (`urlPrefixes` / `nonUrlEvidenceIds`) and every existing row must match exactly one —
+otherwise `source_capabilities.py` fails with `registry source … resolves to 0 surfaces`. There are
+four `pokemon-official` rows today (a Dragon Frontiers checklist PDF and three Prize Pack lists), so
+this is small and mechanical, but it is a required part of the change rather than an afterthought.
+The new edge also needs its own known-positive observation and boundary, per ADR-0003.
+
+`U0368` carries the finding in its evidence text meanwhile, still cited to the set-level index it
+will eventually replace.
 
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
@@ -592,6 +605,19 @@ https://www.pokemon-card.com/card-search/resultAPI.php
 - The page parameter is **`page`**, not `pg`. `pg=1` returns zero hits — it looks like pagination but is not.
 - The search matches fuzzily and returns ゴンベ (Munchlax) alongside カビゴン; filter by name.
 - Detail page `details.php/card/<id>/regu/all` yields collector number, set code (from the card image path) and illustrator.
+
+**Read the illustrator out of the anchor, never out of the flattened page text.** The credit sits in
+its own field — `<div class="author">` containing an `<a>` whose text is the name — and the anchor is
+the whole answer. The original JP fetch stripped every tag and matched the credit out of the
+resulting run-on text, cutting it at the first of a list of following labels. That cannot work:
+flattening glues the credit to whatever the layout puts next to it, and a real credit may itself
+contain spaces and Latin punctuation, so `Shizurow レベルアップ LV. X` is indistinguishable from a
+four-word artist name. Two corrupted credits reached the committed data that way — `aky CG Works
+V進化` and the Shizurow one above, where `V進化` and `レベルアップ LV. X` are evolution-stage labels —
+and widening the terminator list would only have moved the failure to the next stage label. The
+values were corrected; `verification/history/REVIEW-2026-07-31-ISSUE-STATUS.md` records them as
+found. A parser doing this correctly lived at `verification/jp_parse.py` until #172 retired it as
+uncalled; `git log -- verification/jp_parse.py` has it if a JP illustrator fetch is ever built.
 
 ### Language scope: Spanish — a documented blind spot, proven by specimen
 

@@ -15,6 +15,138 @@ Newest first.
 
 ---
 
+## A pattern wrong about part of a group is not a reason to move the group
+
+**Trap:** *`sibling-derived` means another unit's record is part of the basis. A fact about the set
+is not a sibling.*
+
+`granularity()` tests its patterns in order, and `SIBLING` ran before `CARD_LEVEL`. Twenty-two rows
+opened with an owner attestation and were filed as sibling-derived because of a clause further along
+in `sourceType`. Reading two of them, the classifier looked plainly wrong in every case, and the
+conclusion drawn — recorded in a PR body, which is how it survives to be corrected — was that all
+twenty-two were misclassified and the count "measures the classifier's precedence as much as the
+evidence".
+
+Reading all twenty-two showed two different groups.
+
+Eight `xm2a 136` rows say *"Owner (domain expert) confirms the MEGA Dream ex mirror-holo Hop's
+Snorlax variants exist in Korean"* and then name a **set release schedule**. That is a fact about the
+set, not another unit's record, and the attestation names this exact card in this exact language.
+Those eight were genuinely card-level.
+
+Fourteen Prize Pack rows say the unit *"rests on the owner attestation plus the uniform per-region
+Prize Pack distribution the corroborated languages demonstrate"*. That names other units as part of
+the basis, in the row's own words. `sibling-derived` is exactly right for them, and moving them
+would have been the neighbour's-evidence trap run in reverse — inflating a claim by discarding the
+part of its own text that says what it leans on.
+
+So the fix was to the pattern, not the precedence: `set release schedule` left `SIBLING`, and the
+ordering stayed. Eight rows moved, fourteen stayed, and the residue went 66 to 58.
+
+**The general shape:** two rows sampled from a group of twenty-two agreed with each other and with
+a plausible theory, and the theory was still wrong for two thirds of the group. Read the whole group
+before restating what it measures — especially when the theory makes a number look better.
+
+*Issue #137.*
+
+---
+
+## A pin so wide the thing it protected could not grow
+
+**Trap:** *A run is pinned to the capabilities it used, not to the whole capability graph.*
+
+Every retained run under `verification/runs/` records a `capabilityGraphHash`, and reprojection
+re-validates it. That is right: a run captured under one set of capabilities must not be silently
+reinterpreted under another.
+
+The hash covered the entire graph. So declaring one surface on `pokemon-official` expired the
+set-adapter run, which had only ever fetched `tcgdex`, and the card-discovery run, which had only
+ever fetched `pokemon-card-asia`. Neither had touched a byte from that provider. The graph could not
+gain a source without discarding run history, and the cost was concrete: it is why the publisher's
+per-locale card archive — the best Western card-level route found — sat unwired while seventeen
+set-level rows stayed unresolved.
+
+The runs already knew better. Every request records `providerId`, `surfaceId` and `coverageEdgeId`,
+so the slice a run depends on was always derivable; it simply was not used.
+
+Two things made the fix non-obvious. The first is that **the failure did not reproduce on the first
+three attempts** — the graph generator rejected each probe for an unrelated reason (a duplicate edge
+id, a schema violation, a provider missing from the registry), which reads exactly like "the pin is
+fine". It only reproduced once the probe was a *valid* addition. A defect you cannot reproduce is
+not absent; it may be behind a different error.
+
+The second is that scoping the rows was not enough. `meta` carries global tallies — `counts`,
+`surfaceStates` — that move whenever any provider gains a surface, so the first scoped pin still
+expired: identical rows, different hash. The coupling had a quieter second route, and only the
+contract's identity may survive into a scoped pin.
+
+**Now guarded by** `CapabilityPinScope` in `test_source_adapters.py`, which holds both directions —
+an unrelated surface must not change a pin, a used surface must — and the tally case that caused the
+false start.
+
+*Issue #147.*
+
+---
+
+## A better fact overruled a rule it was never about
+
+**Trap:** *A recorded set size decides run membership — except for a distribution rarity, which is
+outside every run whatever its collector number says.*
+
+Recording the printed set size was right, and replacing the rarity word with it was right: the
+denominator is the fact, and the word was standing in for it. The override was written to win in
+both directions, which is what a fact should do against a proxy.
+
+It won one it should have lost. `RR 33 V2` is the Rival Season promo printing of `RR 33 V1`, an
+ordinary Rare — the promo carries the number of the run card it reprints. Comparing 33 against a
+111-card run answers a question nobody asked: it establishes that the *number* is inside the run,
+which was never in doubt, and from there concludes that a language release of the set reaches a
+promo distributed separately from it. The row moved from `does-not-carry` to `carries`.
+
+What made it visible was the inconsistency, not the reasoning. `CL 33 V2` and `FLF 80 V2` are the
+same shape, and they stayed on the queue — only because their sets had no recorded size yet. One
+promo judged sound and two unsound, decided by which set happened to be measured first. Recording
+those two sizes would have quietly moved them too.
+
+The lesson is not "be careful with overrides". It is that a set size and a distribution rarity
+answer **different questions** — *where is this number in the run?* and *was this printing part of
+the run at all?* — and the second is not a weaker version of the first, so no amount of precision on
+the first can settle it.
+
+**Now guarded by** `DISTRIBUTION_RARITIES` in `evidence_semantics.py`, checked before the size, and
+by `runMembershipBasis` on every row, which names which of the three rules answered so a reader can
+see a promo being excluded rather than measured.
+
+*Issue #137, correcting the size override landed in PR #177.*
+
+---
+
+## The gate ran before the thing it was checking
+
+**Trap:** *`P6` and `P7` read git history, so `review_findings.py` has to run again after the commit
+and the push.*
+
+The pre-PR gate was run in full and passed 124/124. The commit made straight afterwards turned CI
+red on `P7`, which forbids any author or committer address without `noreply` in it — the commit
+carried a personal one.
+
+Nothing was wrong with the gate, and nothing was wrong with the run. Every other check reads the
+working tree, so running them before committing is exactly right. `P6` and `P7` read *history*, and
+at the moment the gate ran the offending commit did not exist. A green gate before a commit says
+nothing about that commit.
+
+The recovery has a second half worth stating, because the obvious fix looks like it failed.
+Amending the commit locally left `P7` still red: it scans every published ref, and the pushed branch
+still reached the old commit. The amend only takes effect once the branch is force-pushed and the
+old commit stops being reachable.
+
+**Now guarded by** a line in `CLAUDE.md`'s gate block: run `review_findings.py` before the commit
+for the tree, and again after the push for the history.
+
+*Found by CI on PR #178.*
+
+---
+
 ## The neighbour's evidence is not this unit's evidence
 
 **Trap:** *Grade a claim by what it rests on, never by the strongest thing beside it.*

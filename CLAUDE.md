@@ -132,6 +132,17 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   stamps. Never assume a V-token means the same thing across sets — read `variantName`. Inferring
   one set's order from another has already been right by luck, which is not the same as evidence
   ([LESSONS](LESSONS.md#v-tokens-are-set-specific-and-the-guess-is-sometimes-right)).
+- **Run membership is decided by the printed set size — except for a distribution rarity.** Whether
+  "the set was released in language L" reaches a card depends on the card sitting inside the set's
+  numbered run, and the fact that says so is the denominator printed on it. Sizes live in
+  `set_catalogue_sources.json` as `printed-set-size-record`, and a recorded size outranks the
+  harvest rarity in both directions. It must **not** outrank a `Promo`, `Prize Pack Series`,
+  `Oversized`, `World Championship Deck` or `Online Code Card` row: a promo's collector number is
+  the number of the run card it reprints, so the comparison answers the wrong question and once
+  moved `RR 33 V2` off the queue while its identical siblings stayed on it
+  ([LESSONS](LESSONS.md#a-better-fact-overruled-a-rule-it-was-never-about)). Read the numbering that
+  belongs to the set code, too — a shared article carries `{{Setlist/entry}}` (Japanese) and
+  `{{Setlist/nmentry}}` (English) side by side.
 - **Technical `finish` vs collector `finishFamily`.** `finish` stays the auditable
   non-holo/holo/reverse-holo/mirror-holo value. `finishFamily` is the presentation layer, where
   reverse-holo and mirror-holo both appear as "Reverse Holo". Never collapse the technical value
@@ -243,7 +254,6 @@ python scripts/tracker.py check-template         # SEE BELOW — prints failure 
 
 # Every regression suite CI runs. Missing one from this list is how work passes locally and
 # reddens CI, which has now happened three times — see the note under the block.
-python verification/test_jp_parser.py            # JP illustrator parsing
 python verification/test_owner_adjudications.py  # owner decision/store projection
 python verification/test_source_adapters.py      # source-first catalogue regressions
 python verification/test_card_discovery.py       # source-first card-loop regressions
@@ -274,6 +284,14 @@ status ([LESSONS](LESSONS.md#the-eight-generator-loop-is-not-the-gate)).
 
 `P6` scans full git history, so it fails on a shallow clone regardless of the tree. `git fetch
 --unshallow` once, and it becomes a real check locally instead of expected noise.
+
+**`P6` and `P7` read git history, so run `review_findings.py` once more after committing and
+pushing.** Everything else in this gate reads the working tree, and a green run before the commit
+says nothing about the commit itself: `P7` fails on any author or committer address without
+`noreply` in it, and it cannot see yours until the commit exists — nor the old one until the pushed
+ref stops reaching it, so an amend needs a force-push before it re-passes. Run it before the commit
+for the tree, and again after the push for the history
+([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).
 
 `python scripts/finishes.py --reproject` redoes only the card projection from the committed store
 and needs no network; it is the fast path when a projection rule changes.

@@ -24,7 +24,7 @@ from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 from source_capabilities import schema_errors
 
@@ -63,7 +63,7 @@ def content_hash(value: bytes | Any) -> str:
     return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
-def capability_pin(capability: Any) -> str:
+def capability_pin(capability: Any, surface_ids: Iterable[str] | None = None) -> str:
     """Hash the capability graph's *capabilities*, not the day it was written.
 
     The pin used the whole document, and the document carries `meta.generated`. So a retained run
@@ -86,12 +86,86 @@ def capability_pin(capability: Any) -> str:
     What remains pinned is the contract itself: providers, surfaces, coverage edges, observations,
     and `meta.schemaVersion`. A surface, edge, boundary or absence scope that moves still changes
     this hash, which is the whole point of having one.
+
+    THE PIN COVERS THE SURFACES THE RUN USED, NOT THE WHOLE GRAPH
+
+    Pinning every provider made the graph unable to grow. This run touched `tcgdex` and nothing
+    else, yet declaring an unrelated surface on `pokemon-official` — a different provider, no shared
+    edge — changed the hash and expired it. Measured: adding a locale-archive surface takes the
+    graph from 23 edges to 24, and both retained runs then fail with "captured under another
+    capability graph" despite neither having fetched a single byte from that provider.
+
+    That is not provenance, it is a coupling. A run was captured under the capabilities **it used**,
+    and those are recorded per request: `providerId`, `surfaceId`, `coverageEdgeId`. So the pin is
+    computed over exactly that slice, and a manifest records which surfaces it covers so validation
+    reconstructs the same slice rather than guessing.
+
+    A surface the run used still cannot move without expiring it, which is the property worth
+    keeping. A surface it never touched no longer can, which is the defect.
+    """
+    document = capability_slice(capability, surface_ids)
+    return content_hash(document)
+
+
+def capability_slice(capability: Any, surface_ids: Iterable[str] | None) -> dict[str, Any]:
+    """The part of the capability graph a run depends on.
+
+    `surface_ids` of `None` means the whole graph, which is what the pin meant before it was
+    scoped. It is kept so a manifest written under the old rule can still be read and explained,
+    never so a new run can be written that way.
     """
     document = {key: value for key, value in capability.items() if key != "sourceResolution"}
     document["meta"] = {
         key: value for key, value in document.get("meta", {}).items() if key != "generated"
     }
-    return content_hash(document)
+    if surface_ids is None:
+        return document
+
+    # `meta` carries global tallies — `counts`, `surfaceStates` — that move whenever any provider
+    # gains a surface. Keeping them would have re-introduced the very coupling this scoping removes,
+    # by a quieter route: the slice's own rows would be identical and the hash would still change.
+    # Only the contract's identity survives into a scoped pin.
+    document["meta"] = {
+        key: value for key, value in document.get("meta", {}).items()
+        if key in ("schema", "schemaVersion")
+    }
+
+    wanted = set(surface_ids)
+    surfaces = [row for row in document.get("surfaces", []) if row["surfaceId"] in wanted]
+    missing = wanted - {row["surfaceId"] for row in surfaces}
+    if missing:
+        raise AdapterError(
+            f"run cites surfaces the capability graph does not declare: {sorted(missing)}"
+        )
+    providers = {row["providerId"] for row in surfaces}
+    document["surfaces"] = surfaces
+    document["providers"] = [
+        row for row in document.get("providers", []) if row["providerId"] in providers
+    ]
+    document["coverageEdges"] = [
+        row for row in document.get("coverageEdges", []) if row["surfaceId"] in wanted
+    ]
+    document["observations"] = [
+        row for row in document.get("observations", []) if row["surfaceId"] in wanted
+    ]
+    return document
+
+
+def manifest_surfaces(manifest: dict[str, Any]) -> list[str] | None:
+    """Which surfaces a manifest was pinned against.
+
+    Recorded explicitly since the pin was scoped. A manifest without the field predates the change
+    and was pinned against the whole graph; `None` preserves that reading rather than silently
+    re-scoping a hash somebody else computed.
+    """
+    recorded = manifest.get("capabilityGraphSurfaces")
+    if recorded is None:
+        return None
+    return sorted(recorded)
+
+
+def surfaces_used(requests: Iterable[dict[str, Any]]) -> list[str]:
+    return sorted({row["surfaceId"] for row in requests if row.get("surfaceId")})
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -418,7 +492,8 @@ def build_projection(
         raise AdapterError(f"run {manifest.get('runId')} was captured under another contract")
     if manifest.get("coverageVersion") != contract["meta"]["coverageVersion"]:
         raise AdapterError(f"run {manifest.get('runId')} has another coverage version")
-    if capability is not None and manifest.get("capabilityGraphHash") != capability_pin(capability):
+    if capability is not None and manifest.get("capabilityGraphHash") != capability_pin(
+            capability, manifest_surfaces(manifest)):
         raise AdapterError(f"run {manifest.get('runId')} was captured under another capability graph")
     expected_slice_ids = set(slices)
     request_slice_ids = [row.get("sliceId") for row in manifest["requests"]]
@@ -691,7 +766,8 @@ def refresh(run_id: str, retrieved_at: str | None) -> None:
         "contract": "verification/source_adapters.json",
         "contractHash": content_hash(contract),
         "capabilityGraph": "verification/source_capability_graph.json",
-        "capabilityGraphHash": capability_pin(capability),
+        "capabilityGraphHash": capability_pin(capability, surfaces_used(requests)),
+        "capabilityGraphSurfaces": surfaces_used(requests),
         "requests": requests,
         "failures": failures,
     }

@@ -9,7 +9,7 @@
   "contract": "verification/card_discovery_adapters.json",
   "contractHash": "sha256:9817c506bf5fa4666018271761fb9e5ff9f8fdc07329892c8a04f86f2e3d9c86",
   "capabilityGraph": "verification/source_capability_graph.json",
-  "capabilityGraphHash": "sha256:002aa3aa2dca6ddc68610cd3f841a84c89f00dbba93f17648732776df9c12988",
+  "capabilityGraphHash": "sha256:b364e2a471296026954af6f4896628e86b8341d0d1d76c75bafc088e91f5c597",
   "requests": [
     {
       "runId": "20260809T181000Z",
@@ -477,5 +477,8 @@
     }
   ],
   "failures": [],
-  "capabilityGraphHashBasis": "capability contract only — providers, surfaces, coverage edges, observations and meta.schemaVersion; meta.generated and sourceResolution are excluded because neither is a capability, and pinning them expired the run on a date change or a single new citation"
+  "capabilityGraphHashBasis": "capability contract for the surfaces this run used — their providers, surfaces, coverage edges, observations and meta.schemaVersion. meta.generated and sourceResolution are excluded because neither is a capability, and pinning them expired the run on a date change or a single new citation. The slice is scoped to capabilityGraphSurfaces because pinning the whole graph expired a run whenever an unrelated provider gained a surface, which made the graph unable to grow without discarding history.",
+  "capabilityGraphSurfaces": [
+    "asia-card-search"
+  ]
 }
