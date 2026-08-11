@@ -1081,6 +1081,19 @@ def main() -> int:
         page.set_viewport_size({"width": 1280, "height": 900})
 
         # --- mobile layout ---
+        page.set_viewport_size({"width": 481, "height": 800})
+        page.wait_for_timeout(120)
+        breakpoint_edge = page.evaluate("""() => ({
+          rowDisplay: getComputedStyle(document.querySelector('#rows tr:not(.yearsep)')).display,
+          sortDisplay: getComputedStyle(document.querySelector('#collection-mobile-sort')).display,
+          overflow: document.querySelector('#collection-table-scroll').scrollWidth
+            - document.querySelector('#collection-table-scroll').clientWidth,
+        })""")
+        check("the reduced table remains active above the 480px card breakpoint",
+              breakpoint_edge["rowDisplay"] == "table-row"
+              and breakpoint_edge["sortDisplay"] == "none"
+              and breakpoint_edge["overflow"] > 0, str(breakpoint_edge))
+
         page.set_viewport_size({"width": 320, "height": 700})
         page.wait_for_timeout(120)
         narrow_mobile = page.evaluate("""() => ({
@@ -1089,13 +1102,17 @@ def main() -> int:
           tableOverflow: document.querySelector('#collection-table-scroll').scrollWidth
             - document.querySelector('#collection-table-scroll').clientWidth,
           toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
+          cardDisplay: getComputedStyle(document.querySelector('#rows tr:not(.yearsep)')).display,
+          sortDisplay: getComputedStyle(document.querySelector('#collection-mobile-sort')).display,
           toggleWidth: document.querySelector('#theme-toggle').getBoundingClientRect().width,
           toggleHeight: document.querySelector('#theme-toggle').getBoundingClientRect().height,
         })""")
-        check("320px layout reflows without body overflow and retains table affordances",
+        check("320px layout replaces the table with cards without horizontal overflow",
               narrow_mobile["bodyOverflow"] <= 1
-              and narrow_mobile["tableOverflow"] > 0
-              and not narrow_mobile["toolsHidden"]
+              and narrow_mobile["tableOverflow"] <= 1
+              and narrow_mobile["toolsHidden"]
+              and narrow_mobile["cardDisplay"] == "grid"
+              and narrow_mobile["sortDisplay"] == "flex"
               and narrow_mobile["toggleWidth"] >= 44
               and narrow_mobile["toggleHeight"] >= 44,
               str(narrow_mobile))
@@ -1128,38 +1145,40 @@ def main() -> int:
         check("mobile layout does not scroll the page body horizontally", body_overflow <= 1,
               f"body overflow {body_overflow}px at 390px wide; offenders={mobile_offenders}")
 
-        mobile_overflow = page.evaluate("""() => ({
-          overflow: document.querySelector('#collection-table-scroll').scrollWidth
-            - document.querySelector('#collection-table-scroll').clientWidth,
-          toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
-          hint: document.querySelector('.scroll-hint-text').textContent,
-        })""")
-        check("mobile users receive the horizontal-scroll indication",
-              mobile_overflow["overflow"] > 0 and not mobile_overflow["toolsHidden"]
-              and "right" in mobile_overflow["hint"], str(mobile_overflow))
-
-        mobile_table_start = page.eval_on_selector(
-            "#collection-table-frame", "element => element.getBoundingClientRect().top + scrollY"
-        )
-        page.evaluate("position => scrollTo(0, position + 180)", mobile_table_start)
-        page.wait_for_timeout(120)
-        mobile_sticky = page.evaluate("""() => {
-          const overlay = document.querySelector('#collection-sticky-header').getBoundingClientRect();
-          const toolbar = document.querySelector('#collection-scroll-tools').getBoundingClientRect();
+        mobile_cards = page.evaluate("""() => {
+          const card = document.querySelector('#rows tr:not(.yearsep)');
+          const image = card.querySelector('td.img').getBoundingClientRect();
+          const name = card.querySelector('.col-card').getBoundingClientRect();
+          const finish = card.querySelector('.col-finish').getBoundingClientRect();
+          const evidence = card.querySelector('.col-evidence').getBoundingClientRect();
           return {
-            visible: getComputedStyle(document.querySelector('#collection-sticky-header')).display
-              !== 'none',
-            top: overlay.top,
-            toolbarBottom: toolbar.bottom,
-            release: document.querySelector('#collection-sticky-header th:nth-child(2)')
-              .innerText.trim(),
+            cardRight: card.getBoundingClientRect().right,
+            viewportRight: document.documentElement.clientWidth,
+            imageLeftOfName: image.right <= name.left + 1,
+            finishBelowIdentity: finish.top >= name.bottom,
+            evidenceBelowFinish: evidence.top >= finish.bottom,
           };
         }""")
-        check("sticky collection headings remain visible on mobile",
-              mobile_sticky["visible"]
-              and abs(mobile_sticky["top"] - mobile_sticky["toolbarBottom"]) <= 1
-              and mobile_sticky["release"] == "Release",
-              str(mobile_sticky))
+        check("mobile cards place image, identity, finish and evidence in reading order",
+              mobile_cards["cardRight"] <= mobile_cards["viewportRight"] + 1
+              and mobile_cards["imageLeftOfName"]
+              and mobile_cards["finishBelowIdentity"]
+              and mobile_cards["evidenceBelowFinish"], str(mobile_cards))
+
+        page.select_option("#mobile-sort-key", "name")
+        mobile_names = page.locator("#rows tr:not(.yearsep):not(.rowdetail) .col-card").all_text_contents()
+        check("the mobile sort control replaces sortable column headings",
+              mobile_names == sorted(mobile_names, key=str.lower)
+              and page.locator("#mobile-sort-direction").get_attribute("aria-label") == "Sort ascending",
+              str(mobile_names[:5]))
+        page.click("#mobile-sort-direction")
+        mobile_names_desc = page.locator(
+            "#rows tr:not(.yearsep):not(.rowdetail) .col-card").all_text_contents()
+        check("the mobile sort control changes direction",
+              mobile_names_desc == sorted(mobile_names_desc, key=str.lower, reverse=True)
+              and page.locator("#mobile-sort-direction").get_attribute("aria-label") == "Sort descending",
+              str(mobile_names_desc[:5]))
+        page.select_option("#mobile-sort-key", "release")
 
         mobile_trigger = page.locator(".card-preview-trigger").first
         mobile_trigger.click()
@@ -1178,7 +1197,7 @@ def main() -> int:
               page.locator(".card-preview").evaluate("element => element.hidden"),
               "preview remained open after the second tap")
 
-        # --- #121: the narrow breakpoint reduces the matrix and restates the rest per row ---
+        # --- #121/#128: the card keeps the core cells and restates the rest per row ---
         narrow_columns = page.evaluate("""() => {
           const shown = (sel) => {
             const cell = document.querySelector('#rows tr:not(.rowdetail) ' + sel);
@@ -1194,7 +1213,7 @@ def main() -> int:
             detailRows: document.querySelectorAll('#rows tr.rowdetail').length,
           };
         }""")
-        check("narrow viewport keeps only the core identity and evidence columns",
+        check("mobile cards keep only the core identity and evidence cells",
               all(narrow_columns["core"]) and not any(narrow_columns["withdrawn"])
               and narrow_columns["more"], str(narrow_columns))
         # Built on demand: a panel per row would double the table's rows for every reader.
@@ -1232,31 +1251,25 @@ def main() -> int:
               }"""),
               "the panel stayed open after the second press")
 
-        # --- #122: the filter row and the scroll tools each get their own narrow layout ---
+        # --- #122/#128: filters stack; the card layout no longer needs scroll tools ---
         page.evaluate("scrollTo(0, 0)")
         page.wait_for_timeout(120)
         narrow_controls = page.evaluate("""() => {
           const fields = [...document.querySelectorAll('#collection .controls .row > .field')];
           const boxes = fields.map((field) => field.getBoundingClientRect());
-          const tools = document.querySelector('#collection-scroll-tools').getBoundingClientRect();
-          const hint = document.querySelector('#collection-scroll-hint').getBoundingClientRect();
-          const actions = document.querySelector('#collection .scroll-actions').getBoundingClientRect();
           return {
             fields: boxes.length,
             // Stacked means every field starts at the same x and none share a line.
             sameLeft: boxes.every((box) => Math.abs(box.left - boxes[0].left) <= 1),
             distinctRows: new Set(boxes.map((box) => Math.round(box.top))).size === boxes.length,
-            hintBottom: Math.round(hint.bottom), actionsTop: Math.round(actions.top),
-            toolsHeight: Math.round(tools.height),
+            toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
           };
         }""")
         check("narrow viewport stacks the collection filter fields",
               narrow_controls["fields"] > 1 and narrow_controls["sameLeft"]
               and narrow_controls["distinctRows"], str(narrow_controls))
-        # The overlap this replaced put the hint and the buttons on one 38px line at top:0.
-        check("narrow viewport gives the scroll hint and its buttons separate rows",
-              narrow_controls["actionsTop"] >= narrow_controls["hintBottom"] - 1
-              and narrow_controls["toolsHeight"] > 38, str(narrow_controls))
+        check("mobile cards do not expose obsolete horizontal-scroll controls",
+              narrow_controls["toolsHidden"], str(narrow_controls))
 
         # --- #123: section navigation collapses behind a disclosure on a phone ---
         nav_collapsed = page.evaluate("""() => ({

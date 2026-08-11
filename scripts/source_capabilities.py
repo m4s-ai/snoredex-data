@@ -448,11 +448,16 @@ def main() -> int:
         return 1
 
     if args.check:
-        current = OUTPUT_PATH.read_text(encoding="utf-8") if OUTPUT_PATH.exists() else ""
-        if current != rendered:
+        current = read_json(OUTPUT_PATH) if OUTPUT_PATH.exists() else {}
+        expected = json.loads(rendered)
+        # The write date is provenance, not input-derived graph content. Comparing it made every
+        # unchanged checkout stale at midnight; source_registry.py applies the same boundary.
+        current.get("meta", {}).pop("generated", None)
+        expected.get("meta", {}).pop("generated", None)
+        if current != expected:
             print(f"[FAIL] {OUTPUT_PATH.relative_to(ROOT)} is stale")
             return 1
-        graph = json.loads(rendered)
+        graph = expected
         counts = graph["meta"]["counts"]
         print(
             f"[ ok ] source capability graph: {counts['providers']} providers, "
