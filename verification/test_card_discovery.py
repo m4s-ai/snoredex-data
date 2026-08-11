@@ -173,6 +173,52 @@ class CardDiscoveryTests(unittest.TestCase):
         )
         self.assertIsNone(row["normalizationProposal"]["targetCardReleaseId"])
 
+    def test_unqualified_language_never_inherits_a_legacy_west_locality(self):
+        source_url = "https://example.invalid/pt/cards/13148"
+        row = self.normalize(
+            record=source_record(sourceUrl=source_url),
+            releases=[{
+                "cardReleaseId": "RELEASE:WEST:Portuguese:SVQP:012/023:work",
+                "locality": "WEST", "language": "Portuguese",
+                "localSetCode": "svQP F", "localNumber": "012/023",
+                "sourceRecords": [source_url],
+            }],
+            slice_row={
+                **SLICE_TW, "locality": "WEST", "language": "Portuguese",
+                "localityEvidenceMode": "unqualified-language",
+            },
+        )
+        self.assertEqual(row["bucket"], "needs-evidence")
+        self.assertIsNone(row["normalizationProposal"]["targetCardReleaseId"])
+        self.assertIn("physical locality remains unresolved", row["bucketBasis"])
+
+    def test_brazilian_market_record_does_not_create_a_physical_locality(self):
+        row = self.normalize(
+            slice_row={
+                **SLICE_TW, "locality": "LATAM", "language": "Portuguese",
+                "localityEvidenceMode": "market-only",
+            }
+        )
+        self.assertEqual(row["bucket"], "needs-evidence")
+        self.assertIsNone(row["normalizationProposal"]["targetCardReleaseId"])
+        self.assertIn("market record", row["bucketBasis"])
+
+    def test_diff_reports_locality_evidence_mode_changes(self):
+        previous = [{
+            "stableKey": "provider|surface|pt|1", "recordHash": "sha256:old",
+            "identityHintHash": "sha256:hint", "locality": "WEST",
+        }]
+        current = [{
+            "stableKey": "provider|surface|pt|1", "recordHash": "sha256:new",
+            "identityHintHash": "sha256:hint", "locality": "WEST",
+            "localityEvidenceMode": "unqualified-language",
+        }]
+        delta = discovery.diff_records(current, previous)
+        self.assertEqual(delta["counts"]["localityDeltas"], 1)
+        self.assertEqual(
+            delta["localityDeltas"][0]["toEvidenceMode"], "unqualified-language"
+        )
+
     def test_exact_local_tuple_matches_without_an_equivalence_merge(self):
         release = {
             "cardReleaseId": "RELEASE:TW:T-Chinese:svQP F:012/023:work",
@@ -421,6 +467,54 @@ class CardDiscoveryTests(unittest.TestCase):
         )
         self.assertIn("pl2/111", gap["reason"])
         self.assertEqual(gap["terminalState"], "needs-evidence")
+
+    def test_committed_portuguese_slices_never_infer_a_physical_region(self):
+        records = [
+            json.loads(line) for line in (ROOT / "verification" / "card_discovery_records.jsonl")
+            .read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+        unqualified = [
+            row for row in records
+            if row["providerId"] == "tcgdex" and row["rawLocale"] == "pt"
+        ]
+        self.assertEqual(len(unqualified), 26)
+        self.assertTrue(all(row["bucket"] == "needs-evidence" for row in unqualified))
+        self.assertTrue(all(
+            row["localityEvidenceMode"] == "unqualified-language"
+            and row["normalizationProposal"]["targetCardReleaseId"] is None
+            for row in unqualified
+        ))
+
+        brazilian_frontier = [
+            row for row in records if row["providerId"] == "ligapokemon"
+        ]
+        self.assertEqual(
+            {
+                (row["rawProviderId"], row["raw"]["rawSetCode"],
+                 row["raw"]["localCollectorNumber"])
+                for row in brazilian_frontier
+            },
+            {
+                ("U0192", "PPPS8", "117b"),
+                ("U0219", "PPPS8", "117b"),
+                ("U0329", "PPPS7", "117"),
+            },
+        )
+        self.assertTrue(all(
+            row["bucket"] == "needs-evidence"
+            and row["localityEvidenceMode"] == "market-only"
+            and row["normalizationProposal"]["targetCardReleaseId"] is None
+            for row in brazilian_frontier
+        ))
+
+        staging = json.loads(
+            (ROOT / "verification" / "card_discovery_staging.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertIn("localityDeltas", staging["diff"])
+        self.assertIn("localityDeltas", staging["diff"]["counts"])
 
     def test_native_name_false_positive_is_excluded_by_positive_identity(self):
         row = self.normalize(record=source_record(localName="小卡比獸"))

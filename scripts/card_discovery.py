@@ -35,6 +35,7 @@ CONTRACT_PATH = ROOT / "verification" / "card_discovery_adapters.json"
 SCHEMA_PATH = ROOT / "verification" / "card_discovery_schema.json"
 CAPABILITY_PATH = ROOT / "verification" / "source_capability_graph.json"
 IDENTITY_PATH = ROOT / "verification" / "print_identity_dryrun.json"
+CONFIRMED_SOURCES_PATH = ROOT / "verification" / "confirmed_sources.json"
 RUNS_DIR = ROOT / "verification" / "runs" / "card-discovery"
 OUTPUT_PATH = ROOT / "verification" / "card_discovery_staging.json"
 RECORDS_PATH = ROOT / "verification" / "card_discovery_records.jsonl"
@@ -344,6 +345,20 @@ def parse_official_localized_entries(
 def parse_list(
     raw: bytes, response_format: str = "pokemon-asia-html", raw_locale: str = "it"
 ) -> dict[str, Any]:
+    if response_format == "confirmed-source-json":
+        value = json.loads(raw.decode("utf-8-sig"))
+        if not isinstance(value, list):
+            raise DiscoveryError("confirmed-source card list did not return an array")
+        detail_ids = []
+        for item in value:
+            if not isinstance(item, dict) or not isinstance(item.get("detailId"), str):
+                raise DiscoveryError("confirmed-source card row lacks a string detailId")
+            detail_ids.append(item["detailId"])
+        return {
+            "resultCount": len(value),
+            "totalPages": 1,
+            "detailIds": list(dict.fromkeys(detail_ids)),
+        }
     if response_format == "tcgdex-json":
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, list):
@@ -385,6 +400,11 @@ def parse_detail(
     response_format: str = "pokemon-asia-html",
     set_record: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    if response_format == "confirmed-source-json":
+        value = json.loads(raw.decode("utf-8-sig"))
+        if not isinstance(value, dict) or value.get("detailId") != raw_provider_id:
+            raise DiscoveryError(f"confirmed-source detail id differs: {raw_provider_id}")
+        return value
     if response_format == "tcgdex-json":
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, dict) or value.get("id") != raw_provider_id:
@@ -462,6 +482,7 @@ def validate_contract(
     releases = {row["cardReleaseId"] for row in identity["cardReleases"]}
     seen_adapters: set[str] = set()
     seen_slices: set[str] = set()
+    seen_retained_units: set[str] = set()
     active_surfaces: set[str] = set()
 
     for adapter in contract["adapters"]:
@@ -471,7 +492,8 @@ def validate_contract(
         seen_adapters.add(adapter_id)
         response_format = adapter.get("responseFormat", "pokemon-asia-html")
         if response_format not in {
-            "pokemon-asia-html", "pokemon-official-localized-html", "tcgdex-json"
+            "confirmed-source-json", "pokemon-asia-html",
+            "pokemon-official-localized-html", "tcgdex-json",
         }:
             raise DiscoveryError(f"adapter {adapter_id} has an unsupported response format")
         if response_format == "tcgdex-json" and not adapter.get("setEndpointTemplate"):
@@ -481,7 +503,10 @@ def validate_contract(
         surface = surfaces.get(adapter["surfaceId"])
         if not surface or surface["providerId"] != adapter["providerId"]:
             raise DiscoveryError(f"adapter {adapter_id} does not resolve to its provider surface")
-        if surface["state"] not in {"active", "incomplete"}:
+        retained_replay = response_format == "confirmed-source-json"
+        if surface["state"] not in {"active", "incomplete"} and not (
+            retained_replay and surface["state"] == "blocked-by-browser"
+        ):
             raise DiscoveryError(
                 f"adapter {adapter_id} requires a usable registered surface {adapter['surfaceId']}"
             )
@@ -491,6 +516,30 @@ def validate_contract(
             if slice_id in seen_slices:
                 raise DiscoveryError(f"duplicate sliceId {slice_id}")
             seen_slices.add(slice_id)
+            retained_unit_ids = slice_row.get("retainedUnitIds", [])
+            if retained_replay:
+                if len(slice_row["nameQueries"]) != 1 or not retained_unit_ids:
+                    raise DiscoveryError(
+                        f"slice {slice_id} needs one name query and retained unit ids"
+                    )
+                duplicates = seen_retained_units.intersection(retained_unit_ids)
+                if duplicates:
+                    raise DiscoveryError(
+                        f"retained units occur in more than one slice: {sorted(duplicates)}"
+                    )
+                seen_retained_units.update(retained_unit_ids)
+                confirmed_ids = {
+                    row["unitId"] for row in read_json(CONFIRMED_SOURCES_PATH)
+                }
+                missing_units = set(retained_unit_ids) - confirmed_ids
+                if missing_units:
+                    raise DiscoveryError(
+                        f"slice {slice_id} names unknown confirmed units: {sorted(missing_units)}"
+                    )
+            elif retained_unit_ids:
+                raise DiscoveryError(
+                    f"slice {slice_id} may use retainedUnitIds only with confirmed-source-json"
+                )
             edge = edges.get(slice_row["coverageEdgeId"])
             if not edge or edge["surfaceId"] != adapter["surfaceId"]:
                 raise DiscoveryError(f"slice {slice_id} does not resolve to its surface edge")
@@ -579,8 +628,13 @@ def normalize_record(
         assertion["assertedLocalSetCode"] if assertion is not None else raw_set_code
     )
     mapping = mappings.get(stable_key)
-    source_url = adapter["detailEndpointTemplate"].format(
-        rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
+    source_url = source_record.get("sourceUrl")
+    if not isinstance(source_url, str) or not source_url.startswith("https://"):
+        source_url = adapter["detailEndpointTemplate"].format(
+            rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
+        )
+    locality_evidence_mode = slice_row.get(
+        "localityEvidenceMode", "physical-locality"
     )
     exclusions = [
         row for row in slice_row["positiveNameExclusions"]
@@ -615,6 +669,18 @@ def normalize_record(
     elif missing:
         bucket = "needs-evidence"
         bucket_basis = "required source-native identity field is missing: " + ", ".join(missing)
+    elif locality_evidence_mode == "unqualified-language":
+        bucket = "needs-evidence"
+        bucket_basis = (
+            "the provider locale establishes Portuguese language only; physical locality "
+            "remains unresolved"
+        )
+    elif locality_evidence_mode == "market-only":
+        bucket = "needs-evidence"
+        bucket_basis = (
+            "the retained Brazilian market record establishes a positive listing, not a "
+            "distinct printed Brazilian physical locality"
+        )
     elif mapping and mapping["mode"] == "equivalence-proposal":
         bucket = "ambiguous"
         bucket_basis = mapping["evidence"]
@@ -679,6 +745,7 @@ def normalize_record(
         "rawProviderId": raw_provider_id,
         "rawLocale": slice_row["rawLocale"],
         "locality": slice_row["locality"],
+        "localityEvidenceMode": locality_evidence_mode,
         "retrievedAt": request["retrievedAt"],
         "listResponseHashes": list_hashes,
         "detailResponseHash": detail["responseHash"],
@@ -698,6 +765,7 @@ def normalize_record(
         "normalizationProposal": {
             "entityType": "card-release",
             "locality": slice_row["locality"],
+            "localityEvidenceMode": locality_evidence_mode,
             "language": slice_row["language"],
             "script": slice_row["script"],
             "localName": local_name,
@@ -737,14 +805,38 @@ def diff_records(current: list[dict[str, Any]], previous: list[dict[str, Any]]) 
             rekeyed.append({"from": old_key, "to": new_key, "identityHintHash": hint})
             disappeared.remove(old_key)
             added.remove(new_key)
+    locality_deltas = [
+        {
+            "stableKey": key,
+            "from": previous_by_key[key].get("locality"),
+            "to": current_by_key[key].get("locality"),
+            "fromEvidenceMode": previous_by_key[key].get(
+                "localityEvidenceMode", "physical-locality"
+            ),
+            "toEvidenceMode": current_by_key[key].get(
+                "localityEvidenceMode", "physical-locality"
+            ),
+        }
+        for key in sorted(set(current_by_key) & set(previous_by_key))
+        if (
+            previous_by_key[key].get("locality") != current_by_key[key].get("locality")
+            or previous_by_key[key].get(
+                "localityEvidenceMode", "physical-locality"
+            ) != current_by_key[key].get(
+                "localityEvidenceMode", "physical-locality"
+            )
+        )
+    ]
     return {
         "added": sorted(added),
         "changed": changed,
         "disappeared": sorted(disappeared),
         "rekeyedCandidates": rekeyed,
+        "localityDeltas": locality_deltas,
         "counts": {
             "added": len(added), "changed": len(changed),
             "disappeared": len(disappeared), "rekeyedCandidates": len(rekeyed),
+            "localityDeltas": len(locality_deltas),
         },
     }
 
@@ -925,7 +1017,15 @@ def build_projection(
             "terminalState": terminal_state,
             "sourceFailureState": source_failure_state,
             "terminalMeaning": (
-                "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed"
+                (
+                    "every reviewed retained positive record in this browser-blocked frontier "
+                    "was replayed and accounted; marketplace or provider-universe completeness "
+                    "is not claimed"
+                    if response_format == "confirmed-source-json" else
+                    "every positive detail returned by the bounded provider-native name query "
+                    "was retained and accounted; historical or provider-universe completeness "
+                    "is not claimed"
+                )
                 if terminal_state == "complete" else
                 "source access, pagination, parsing, or positive content needs evidence; no absence is inferred"
             ),
@@ -1058,6 +1158,12 @@ def new_manifest(
                 query_parameters.update({
                     "nameFilter": "strict-equality",
                     "pagination": "disabled-provider-default",
+                })
+            elif response_format == "confirmed-source-json":
+                query_parameters.update({
+                    "retainedUnitIds": slice_row["retainedUnitIds"],
+                    "sourceRecord": "verification/confirmed_sources.json",
+                    "pagination": "exact-reviewed-positive-frontier",
                 })
             else:
                 query_parameters.update({
@@ -1263,6 +1369,81 @@ def refresh_tcgdex_request(
             save_manifest(run_dir, manifest)
 
 
+def refresh_confirmed_source_request(
+    run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
+    slice_row: dict[str, Any],
+) -> None:
+    """Replay only exact reviewed positive records from a browser-blocked source frontier."""
+    confirmed_by_id = {
+        row["unitId"]: row for row in read_json(CONFIRMED_SOURCES_PATH)
+    }
+    source_records = []
+    for unit_id in slice_row["retainedUnitIds"]:
+        retained = confirmed_by_id[unit_id]
+        source_url = retained.get("sourceUrl")
+        if not isinstance(source_url, str) or not source_url.startswith("https://"):
+            raise DiscoveryError(f"confirmed unit {unit_id} lacks an HTTPS source URL")
+        parameters = urllib.parse.parse_qs(urllib.parse.urlparse(source_url).query)
+        raw_set_code = parameters.get("ed", [None])[0]
+        local_number = parameters.get("num", [None])[0]
+        if not isinstance(raw_set_code, str) or not isinstance(local_number, str):
+            raise DiscoveryError(
+                f"confirmed unit {unit_id} lacks source-native edition/number parameters"
+            )
+        source_records.append({
+            "detailId": unit_id,
+            "localName": slice_row["nameQueries"][0],
+            "rawSetCode": raw_set_code,
+            "localCollectorNumber": local_number,
+            "cardImageUrl": None,
+            "setSymbolUrl": None,
+            "productScope": "physical-tcg",
+            "sourceUrl": source_url,
+            "sourceType": retained.get("sourceType"),
+            "variant": retained.get("variant"),
+            "checkedAt": retained.get("checkedAt"),
+            "providerRecord": retained,
+        })
+
+    query = slice_row["nameQueries"][0]
+    if not request["pages"]:
+        raw = canonical_bytes(source_records)
+        relative = f"raw/{request['sliceId']}/query-1.json"
+        separator = "&" if "?" in request["endpoint"] else "?"
+        url = request["endpoint"] + separator + urllib.parse.urlencode({
+            "snoredexRetained": ",".join(slice_row["retainedUnitIds"])
+        })
+        parsed = parse_list(raw, "confirmed-source-json")
+        request["pages"].append({
+            "query": query, "pageNo": 1, "url": url,
+            "rawPath": relative,
+            "responseHash": retain_response(run_dir, relative, raw),
+            **parsed,
+        })
+        request["checkpoint"]["completedPages"] = [f"{query}:1"]
+        save_manifest(run_dir, manifest)
+
+    details = {row["rawProviderId"]: row for row in request["details"]}
+    for source_record in source_records:
+        unit_id = source_record["detailId"]
+        if unit_id in details:
+            continue
+        raw = canonical_bytes(source_record)
+        relative = f"raw/{request['sliceId']}/details/{unit_id}.json"
+        detail = {
+            "rawProviderId": unit_id,
+            "url": source_record["sourceUrl"],
+            "rawPath": relative,
+            "responseHash": retain_response(run_dir, relative, raw),
+            "recordSource": "confirmed-positive-frontier",
+            "parsedRecordHash": content_hash(source_record),
+        }
+        request["details"].append(detail)
+        details[unit_id] = detail
+        request["checkpoint"]["completedDetailIds"] = sorted(details)
+        save_manifest(run_dir, manifest)
+
+
 def refresh_official_localized_request(
     run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
     adapter: dict[str, Any], slice_row: dict[str, Any],
@@ -1397,6 +1578,10 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
                 )
             elif response_format == "tcgdex-json":
                 refresh_tcgdex_request(run_dir, manifest, request, adapter, slice_row)
+            elif response_format == "confirmed-source-json":
+                refresh_confirmed_source_request(
+                    run_dir, manifest, request, slice_row
+                )
             else:
                 raise DiscoveryError(f"unsupported card response format: {response_format}")
 

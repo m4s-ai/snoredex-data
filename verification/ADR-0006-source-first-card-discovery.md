@@ -26,7 +26,7 @@ provenance.
 
 Adopt [`card_discovery_adapters.json`](card_discovery_adapters.json) as the reviewed adapter/gap
 contract, [`card_discovery_schema.json`](card_discovery_schema.json) as its versioned schema,
-immutable network runs below `verification/runs/card-discovery/`,
+immutable retained-response runs below `verification/runs/card-discovery/`,
 [`card_discovery_staging.json`](card_discovery_staging.json) as the generated graph summary, and
 [`card_discovery_records.jsonl`](card_discovery_records.jsonl) as the one-record-per-line review
 feed.
@@ -160,6 +160,29 @@ source-record changes, zero disappeared, and zero rekey candidates. `west-fr`, `
 `west-es-eu` are terminal as
 `complete-positive-slice`; their official-archive and regional-distribution gaps stay open.
 
+## Portuguese locality run result
+
+Run `20260811T121312Z` adds two deliberately different Portuguese slices. The strict-equality
+TCGdex `pt` slice retains 26 positive card details and their set records. All 26 enter
+`needs-evidence`: the provider locale establishes Portuguese language, but no Brazil, Portugal, or
+other physical distribution region. Existing legacy `WEST/Portuguese` source URLs are therefore
+not allowed to auto-match these rows.
+
+The LigaPokemon slice replays exactly three already reviewed positive records (`U0192`, `U0219`,
+and `U0329`) from the browser-blocked Brazilian marketplace frontier. Their source-native edition
+and number parameters remain `PPPS8/117b`, `PPPS8/117b`, and `PPPS7/117`. All three also remain
+`needs-evidence`: a `.com.br` listing and Portuguese-language filter identify a Brazilian market
+observation, not a distinct printed Brazilian physical edition. The replay does not query or close
+the marketplace inventory.
+
+The complete run accounts for 236 records overall: 157 matched, 32 Taiwan candidates, eighteen
+positively excluded, 29 needs-evidence, zero ambiguous, and zero run errors. Its deterministic
+delta is 29 added, 53 changed provider records, zero disappeared, zero rekey candidates, and zero
+locality changes; locality changes remain an explicit diff dimension for future reruns. Both
+Portuguese matrix tracks are terminal as `complete-positive-slice`, while the official Portuguese
+physical-locality and Brazilian-archive gaps remain open. Czech and Hungarian remain contradicted
+legacy exclusions and are not locality tracks.
+
 ## Consequences
 
 The repository can now discover a positive official card record absent from the Cardmarket-derived
@@ -167,11 +190,12 @@ candidate universe, reproduce each versioned run without network access, resume 
 and expose new/ambiguous records without changing evidence verdicts. The remaining 32-candidate
 Taiwan queue is intentionally not auto-merged: resolving local set-symbol aliases, local
 collector-number equivalence, TW/HK relationships, and shared works belongs to the locality
-reconciliation loops. Likewise, the Italian filter's twelve matches and the three shared Western
-locale slices cannot close eras or official archives that their retained responses do not cover.
+reconciliation loops. Likewise, the Italian filter's twelve matches, the shared Western locale
+slices, and the Portuguese positive frontiers cannot close eras, physical regions, or official
+archives that their retained responses do not cover.
 
 `scripts/card_discovery.py --check`, its regression tests, independent review checks N14/N15, and
 the cross-platform release gate enforce raw hashes, page/detail accounting, native identifier
 preservation, the `svQP F` regression, positive Munchlax/Pocket exclusion, checkpoint semantics,
-same-language Western matching, the WEST/es-ES versus LATAM/es-419 boundary, and the
-verdict-mutation boundary.
+same-language Western matching, the WEST/es-ES versus LATAM/es-419 boundary, the unqualified-pt
+versus Brazilian-market boundary, locality-delta reporting, and the verdict-mutation boundary.

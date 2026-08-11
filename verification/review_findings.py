@@ -1315,6 +1315,9 @@ def collect() -> None:
         expected_query_fields = {
             "pokemon-asia-html": {"nameQueries", "cardType", "regulation", "pageParameter"},
             "tcgdex-json": {"nameQueries", "nameFilter", "pagination"},
+            "confirmed-source-json": {
+                "nameQueries", "retainedUnitIds", "sourceRecord", "pagination",
+            },
             "pokemon-official-localized-html": {
                 "nameQueries", "nameFilter", "format", "pagination", "cacheKeyParameter",
             },
@@ -1333,6 +1336,17 @@ def collect() -> None:
                     request["queryParameters"].get("nameFilter") != "strict-equality"
                     or request["queryParameters"].get("pagination")
                         != "disabled-provider-default"
+                )
+            )
+            or (
+                card_adapters[request["adapterId"]].get("responseFormat")
+                    == "confirmed-source-json"
+                and (
+                    not request["queryParameters"].get("retainedUnitIds")
+                    or request["queryParameters"].get("sourceRecord")
+                        != "verification/confirmed_sources.json"
+                    or request["queryParameters"].get("pagination")
+                        != "exact-reviewed-positive-frontier"
                 )
             )
             or (
@@ -1493,6 +1507,58 @@ def collect() -> None:
             for row in western_archive_gaps.values()
         ):
             western_locale_faults.append("official-archive-gaps")
+        portuguese_faults = []
+        pt_rows = [
+            row for row in card_records
+            if row["providerId"] == "tcgdex" and row["rawLocale"] == "pt"
+        ]
+        if (
+            len(pt_rows) != 26
+            or any(row["bucket"] != "needs-evidence" for row in pt_rows)
+            or any(row.get("localityEvidenceMode") != "unqualified-language"
+                   for row in pt_rows)
+            or any(row["normalizationProposal"].get("targetCardReleaseId") is not None
+                   for row in pt_rows)
+            or any(row["normalizationProposal"].get("localityEvidenceMode")
+                   != "unqualified-language" for row in pt_rows)
+        ):
+            portuguese_faults.append("unqualified-pt")
+        liga_rows = [
+            row for row in card_records if row["providerId"] == "ligapokemon"
+        ]
+        expected_liga_identity = {
+            ("U0192", "PPPS8", "117b"),
+            ("U0219", "PPPS8", "117b"),
+            ("U0329", "PPPS7", "117"),
+        }
+        if (
+            {(row["rawProviderId"], row["raw"]["rawSetCode"],
+              row["raw"]["localCollectorNumber"]) for row in liga_rows}
+                != expected_liga_identity
+            or any(row["bucket"] != "needs-evidence" for row in liga_rows)
+            or any(row.get("localityEvidenceMode") != "market-only" for row in liga_rows)
+            or any(row["normalizationProposal"].get("targetCardReleaseId") is not None
+                   for row in liga_rows)
+            or any(row["locality"] != "LATAM" for row in liga_rows)
+            or any(not row["sourceUrl"].startswith("https://www.ligapokemon.com.br/")
+                   for row in liga_rows)
+        ):
+            portuguese_faults.append("brazilian-positive-frontier")
+        portuguese_gaps = {
+            row["gapId"]: row for row in card_contract["gaps"]
+            if row["gapId"] in {
+                "official-portuguese-physical-locality",
+                "official-brazilian-card-archive",
+            }
+        }
+        if (
+            len(portuguese_gaps) != 2
+            or any(row["terminalState"] != "needs-evidence"
+                   for row in portuguese_gaps.values())
+            or "localityDeltas" not in card_stage["diff"]
+            or "localityDeltas" not in card_stage["diff"]["counts"]
+        ):
+            portuguese_faults.append("locality-gaps-or-delta")
         italian_rows = [
             row for row in card_records
             if row["providerId"] == "pokemon-official" and row["rawLocale"] == "it"
@@ -1539,7 +1605,7 @@ def collect() -> None:
             "FAIL",
             not card_provenance_faults and not card_preservation_faults
             and svqp_ok and not munchlax_faults and pocket_rows and not pocket_faults
-            and not western_locale_faults and italian_slice_ok
+            and not western_locale_faults and not portuguese_faults and italian_slice_ok
             and not missing_card_gaps
             and "--resume" in card_source and "source-failed" in card_source
             and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
@@ -1550,6 +1616,7 @@ def collect() -> None:
             f"svqp={svqp_ok}, munchlax={munchlax_faults[:3]}, "
             f"pocket={pocket_faults[:3] if pocket_rows else ['missing-positive-exclusion']}, "
             f"westernLocales={western_locale_faults[:3]}, "
+            f"portuguese={portuguese_faults[:3]}, "
             f"italian={italian_faults[:3] if italian_rows else ['missing-positive-slice']}, "
             f"missingGaps={missing_card_gaps}",
         )
