@@ -4,7 +4,7 @@
     "schemaVersion": "1.0.0",
     "reviewedAt": "2026-08-11",
     "issue": 139,
-    "decompositionState": "matrix-first; child issues are created only after this reviewed matrix lands",
+    "decompositionState": "decomposed; every track links to a child issue or the existing coordination issue",
     "policies": [
       "A candidate track is not an established locality-universe node until positive evidence admits it.",
       "A positive record establishes only the returned locality, language, identifiers and era point; it does not fill the intervals around it.",
@@ -60,7 +60,7 @@
       },
       "evidenceRefs": ["unit:U0000", "slice:tcgdex-en-sets", "edge:tcgdex-west-positive"],
       "openQuestions": ["Which regular cards differ by Western distribution region rather than only by packaging?"],
-      "childIssue": null
+      "childIssue": 188
     },
     {
       "trackId": "west-fr",
@@ -93,7 +93,7 @@
       },
       "evidenceRefs": ["unit:U0001", "slice:tcgdex-fr-sets", "edge:tcgdex-west-positive"],
       "openQuestions": ["Which historical and promotional eras are absent from each positive catalogue surface?"],
-      "childIssue": null
+      "childIssue": 190
     },
     {
       "trackId": "west-de",
@@ -126,7 +126,7 @@
       },
       "evidenceRefs": ["unit:U0002", "slice:tcgdex-de-sets", "edge:tcgdex-west-positive"],
       "openQuestions": ["Which product-only and stamped releases fall outside expansion card archives?"],
-      "childIssue": null
+      "childIssue": 190
     },
     {
       "trackId": "west-it",
@@ -168,7 +168,7 @@
       },
       "evidenceRefs": ["unit:U0368", "observation:obs-tpci-it-card-archive", "slice:tcgdex-it-sets"],
       "openQuestions": ["Which archive eras return matching card details, and which require specialist positive sources?"],
-      "childIssue": null
+      "childIssue": 189
     },
     {
       "trackId": "west-es-eu",
@@ -201,7 +201,7 @@
       },
       "evidenceRefs": ["unit:U0003", "slice:tcgdex-es-sets", "decision:D3"],
       "openQuestions": ["Which product pages distinguish European distribution from LATAM after March 2025?"],
-      "childIssue": null
+      "childIssue": 190
     },
     {
       "trackId": "west-pt-unqualified",
@@ -234,7 +234,7 @@
       },
       "evidenceRefs": ["unit:U0005", "slice:tcgdex-pt-sets", "edge:tcgdex-west-positive"],
       "openQuestions": ["Which legacy Portuguese rows are Brazilian, Portuguese-European, or another edition?"],
-      "childIssue": null
+      "childIssue": 191
     },
     {
       "trackId": "latam-es",
@@ -268,7 +268,7 @@
       },
       "evidenceRefs": ["decision:D3", "document:verification/RESUME.md"],
       "openQuestions": ["The side-by-side SVP 184 photograph needs a stable specimen id and committed bytes.", "The official LATAM card archive route has not yet been retained as a capability surface."],
-      "childIssue": null
+      "childIssue": 192
     },
     {
       "trackId": "latam-pt-br",
@@ -302,7 +302,7 @@
       },
       "evidenceRefs": ["observation:obs-ligapokemon", "unit:U0329", "edge:ligapokemon-latam-positive"],
       "openQuestions": ["Which unqualified legacy Portuguese units map to pt-BR after physical-region review?"],
-      "childIssue": null
+      "childIssue": 191
     },
     {
       "trackId": "west-nl",
@@ -344,7 +344,7 @@
       },
       "evidenceRefs": ["unit:U0095", "edge:bulbapedia-positive"],
       "openQuestions": ["What are the exact Dutch start/end eras and promo exceptions?"],
-      "childIssue": null
+      "childIssue": 193
     },
     {
       "trackId": "west-pl",
@@ -386,7 +386,7 @@
       },
       "evidenceRefs": ["unit:U0364", "edge:bulbapedia-positive"],
       "openQuestions": ["What are the exact Polish product categories and era boundaries?"],
-      "childIssue": null
+      "childIssue": 193
     },
     {
       "trackId": "west-ru",
@@ -428,7 +428,7 @@
       },
       "evidenceRefs": ["unit:U0212", "adjudication:OA-20260803-U0200", "adjudication:OA-20260803-U0248"],
       "openQuestions": ["Which promos and decks sit outside the expansion run ending at BREAKthrough?"],
-      "childIssue": null
+      "childIssue": 193
     },
     {
       "trackId": "sea-en-coordinated",
@@ -463,7 +463,7 @@
       },
       "evidenceRefs": ["document:verification/ADR-0001-locality-aware-print-identity.md", "document:verification/RESUME.md"],
       "openQuestions": ["Which SEA-English set/product indexes can enumerate independently of known cards?"],
-      "childIssue": null
+      "childIssue": 138
     }
   ]
 }

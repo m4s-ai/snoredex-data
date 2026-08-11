@@ -186,6 +186,11 @@ def validate(manifest: dict[str, Any], indexes: dict[str, Any]) -> list[str]:
         identity_pairs.add(pair)
         if track.get("absencePolicy") != "positive-only":
             errors.append(f"{track_id}: locality discovery must remain positive-only")
+        child_issue = track["childIssue"]
+        if not isinstance(child_issue, int) or isinstance(child_issue, bool) or child_issue < 1:
+            errors.append(f"{track_id}: childIssue must be a positive GitHub issue number")
+        if track.get("coordinationIssue") and child_issue != track["coordinationIssue"]:
+            errors.append(f"{track_id}: coordinated track must link its coordination issue")
 
         discovery = track["discovery"]
         state = discovery.get("state")
@@ -285,8 +290,8 @@ def render(manifest: dict[str, Any], indexes: dict[str, Any]) -> str:
         )
     lines += [
         "",
-        "| Track | Universe state | Locality / language | Era state | Discovery | Legacy audit |",
-        "|---|---|---|---|---|---|",
+        "| Track | Universe state | Locality / language | Era state | Discovery | Child | Legacy audit |",
+        "|---|---|---|---|---|---|---|",
     ]
     for track in tracks:
         era_state = "; ".join(
@@ -296,6 +301,7 @@ def render(manifest: dict[str, Any], indexes: dict[str, Any]) -> str:
             f"| `{md(track['trackId'])}` {md(track['label'])} | {md(track['universeStatus'])} | "
             f"`{md(track['locality'])}` / {md(track['language'])} (`{md(track['bcp47'])}`) | "
             f"{md(era_state)} | {md(track['discovery']['state'])} | "
+            f"[#{track['childIssue']}](https://github.com/m4s-ai/snoredex-data/issues/{track['childIssue']}) | "
             f"{md(legacy_counts(track, indexes['unit']))} |"
         )
 
@@ -307,6 +313,7 @@ def render(manifest: dict[str, Any], indexes: dict[str, Any]) -> str:
             f"- **Scope:** {track['scope']}",
             f"- **Identity boundary:** {track['identityBoundary']}",
             f"- **Discovery:** `{track['discovery']['state']}` — {track['discovery']['retryCondition']}",
+            f"- **Execution issue:** [#{track['childIssue']}](https://github.com/m4s-ai/snoredex-data/issues/{track['childIssue']})",
             f"- **Evidence:** {', '.join(f'`{item}`' for item in track['evidenceRefs']) or 'none'}",
         ]
         if track.get("distributionRegions"):

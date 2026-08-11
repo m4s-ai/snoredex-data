@@ -17,20 +17,20 @@ issue unless new positive physical-card evidence overturns the recorded decision
 - `U0492` / **Czech** — The only legacy Czech claim is contradicted; prior review established that it is a marketplace language artefact, not a locality track.
 - `U0493` / **Hungarian** — The only legacy Hungarian claim is contradicted; prior review established that it is a marketplace language artefact, not a locality track.
 
-| Track | Universe state | Locality / language | Era state | Discovery | Legacy audit |
-|---|---|---|---|---|---|
-| `west-en` Western English and regional distribution | established-positive | `WEST` / English (`en`) | provider-observed-unbounded: positive-observations-only | ready-for-child | 80 confirmed / 0 contradicted |
-| `west-fr` Western French | established-positive | `WEST` / French (`fr`) | provider-observed-unbounded: positive-observations-only | ready-for-child | 70 confirmed / 2 contradicted |
-| `west-de` Western German | established-positive | `WEST` / German (`de`) | provider-observed-unbounded: positive-observations-only | ready-for-child | 70 confirmed / 3 contradicted |
-| `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | ready-for-child | 70 confirmed / 3 contradicted |
-| `west-es-eu` European Spanish | established-positive | `WEST` / Spanish (`es-ES`) | provider-observed-unbounded: positive-observations-only | ready-for-child | 59 confirmed / 5 contradicted |
-| `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | ready-for-child | 55 confirmed / 10 contradicted |
-| `latam-es` Latin-American Spanish | owner-scoped | `LATAM` / Spanish (`es-419`) | journey-together-forward: owner-scoped | needs-evidence | not represented |
-| `latam-pt-br` Brazilian Portuguese | established-positive | `LATAM` / Portuguese (`pt-BR`) | positive-listing-unbounded: positive-observations-only | needs-evidence | not represented |
-| `west-nl` Historical Dutch | established-positive | `WEST` / Dutch (`nl`) | jungle-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | 2 confirmed / 2 contradicted |
-| `west-pl` Historical Polish | established-positive | `WEST` / Polish (`pl`) | diamond-pearl-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | 1 confirmed / 1 contradicted |
-| `west-ru` Historical Russian | established-positive | `WEST` / Russian (`ru`) | positive-through-breakthrough: owner-bounded-end; other-history: blocked-by-source | blocked-by-source | 4 confirmed / 2 contradicted |
-| `sea-en-coordinated` Southeast-Asian English coordination boundary | coordinated | `SEA` / English (`en-035`) | coordinated-unbounded: coordinated | coordinated | not represented |
+| Track | Universe state | Locality / language | Era state | Discovery | Child | Legacy audit |
+|---|---|---|---|---|---|---|
+| `west-en` Western English and regional distribution | established-positive | `WEST` / English (`en`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#188](https://github.com/m4s-ai/snoredex-data/issues/188) | 80 confirmed / 0 contradicted |
+| `west-fr` Western French | established-positive | `WEST` / French (`fr`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 2 contradicted |
+| `west-de` Western German | established-positive | `WEST` / German (`de`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 3 contradicted |
+| `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | ready-for-child | [#189](https://github.com/m4s-ai/snoredex-data/issues/189) | 70 confirmed / 3 contradicted |
+| `west-es-eu` European Spanish | established-positive | `WEST` / Spanish (`es-ES`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 59 confirmed / 5 contradicted |
+| `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | ready-for-child | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | 55 confirmed / 10 contradicted |
+| `latam-es` Latin-American Spanish | owner-scoped | `LATAM` / Spanish (`es-419`) | journey-together-forward: owner-scoped | needs-evidence | [#192](https://github.com/m4s-ai/snoredex-data/issues/192) | not represented |
+| `latam-pt-br` Brazilian Portuguese | established-positive | `LATAM` / Portuguese (`pt-BR`) | positive-listing-unbounded: positive-observations-only | needs-evidence | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | not represented |
+| `west-nl` Historical Dutch | established-positive | `WEST` / Dutch (`nl`) | jungle-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 2 confirmed / 2 contradicted |
+| `west-pl` Historical Polish | established-positive | `WEST` / Polish (`pl`) | diamond-pearl-positive-point: positive-observations-only; remaining-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 1 confirmed / 1 contradicted |
+| `west-ru` Historical Russian | established-positive | `WEST` / Russian (`ru`) | positive-through-breakthrough: owner-bounded-end; other-history: blocked-by-source | blocked-by-source | [#193](https://github.com/m4s-ai/snoredex-data/issues/193) | 4 confirmed / 2 contradicted |
+| `sea-en-coordinated` Southeast-Asian English coordination boundary | coordinated | `SEA` / English (`en-035`) | coordinated-unbounded: coordinated | coordinated | [#138](https://github.com/m4s-ai/snoredex-data/issues/138) | not represented |
 
 ## Track detail
 
@@ -39,6 +39,7 @@ issue unless new positive physical-card evidence overturns the recorded decision
 - **Scope:** English-language physical cards distributed in Western markets; region-specific products and stamps remain separate distribution identities.
 - **Identity boundary:** English text does not merge US/Canada, Europe, Australia/New Zealand, or later SEA distribution products when the physical card differs.
 - **Discovery:** `ready-for-child` — Activate an English card slice with positive detail fixtures, then split regional products only when their physical markings or distribution evidence differ.
+- **Execution issue:** [#188](https://github.com/m4s-ai/snoredex-data/issues/188)
 - **Evidence:** `unit:U0000`, `slice:tcgdex-en-sets`, `edge:tcgdex-west-positive`
 - **Distribution regions to split:** US/Canada, Europe, Australia/New Zealand
 - **Open:** Which regular cards differ by Western distribution region rather than only by packaging?
@@ -52,6 +53,7 @@ Era segments:
 - **Scope:** French-language physical cards in the current Western identity model.
 - **Identity boundary:** French card releases remain language-bearing editions; marketplace availability and another locale's archive never establish them.
 - **Discovery:** `ready-for-child` — Retain a French official archive detail fixture before adding that route; TCGdex card rows stay positive-only.
+- **Execution issue:** [#190](https://github.com/m4s-ai/snoredex-data/issues/190)
 - **Evidence:** `unit:U0001`, `slice:tcgdex-fr-sets`, `edge:tcgdex-west-positive`
 - **Open:** Which historical and promotional eras are absent from each positive catalogue surface?
 
@@ -64,6 +66,7 @@ Era segments:
 - **Scope:** German-language physical cards in the current Western identity model.
 - **Identity boundary:** German local set branding and collector identifiers survive even when artwork and card role match another language.
 - **Discovery:** `ready-for-child` — Retain a German official archive detail fixture and activate a bounded positive card slice.
+- **Execution issue:** [#190](https://github.com/m4s-ai/snoredex-data/issues/190)
 - **Evidence:** `unit:U0002`, `slice:tcgdex-de-sets`, `edge:tcgdex-west-positive`
 - **Open:** Which product-only and stamped releases fall outside expansion card archives?
 
@@ -76,6 +79,7 @@ Era segments:
 - **Scope:** Italian-language physical cards, with the official localized detail archive as a card-level route.
 - **Identity boundary:** The Italian archive proves only the exact returned card; it inherits no finish or absence closure from official checklist surfaces.
 - **Discovery:** `ready-for-child` — Activate Italian card discovery with exact returned detail paths and retain every filter mismatch as a source gap, never a negative.
+- **Execution issue:** [#189](https://github.com/m4s-ai/snoredex-data/issues/189)
 - **Evidence:** `unit:U0368`, `observation:obs-tpci-it-card-archive`, `slice:tcgdex-it-sets`
 - **Open:** Which archive eras return matching card details, and which require specialist positive sources?
 
@@ -89,6 +93,7 @@ Era segments:
 - **Scope:** European-Spanish physical cards represented by every existing legacy Spanish unit.
 - **Identity boundary:** WEST/es-ES and LATAM/es-419 are distinct physical editions even when both are called Spanish.
 - **Discovery:** `ready-for-child` — Activate an es-ES slice with a European positive fixture and reject any automatic reuse for LATAM.
+- **Execution issue:** [#190](https://github.com/m4s-ai/snoredex-data/issues/190)
 - **Evidence:** `unit:U0003`, `slice:tcgdex-es-sets`, `decision:D3`
 - **Open:** Which product pages distinguish European distribution from LATAM after March 2025?
 
@@ -101,6 +106,7 @@ Era segments:
 - **Scope:** The current legacy Portuguese projection pending reconciliation into Brazilian or another evidenced physical edition.
 - **Identity boundary:** A Portuguese language field and the TCGdex pt locale do not identify Brazil, Portugal, or another distribution region.
 - **Discovery:** `ready-for-child` — Start from positive pt records and assign a physical region only when branding, legal line, set code, official locale, or specimen evidence identifies it.
+- **Execution issue:** [#191](https://github.com/m4s-ai/snoredex-data/issues/191)
 - **Evidence:** `unit:U0005`, `slice:tcgdex-pt-sets`, `edge:tcgdex-west-positive`
 - **Open:** Which legacy Portuguese rows are Brazilian, Portuguese-European, or another edition?
 
@@ -113,6 +119,7 @@ Era segments:
 - **Scope:** Regular sets from Journey Together (March 2025) onward; Prize Packs remain outside this owner-defined discovery scope until positive evidence changes it.
 - **Identity boundary:** LATAM translation, set branding and local code create a separate edition from European Spanish; no legacy Cardmarket row can populate it.
 - **Discovery:** `needs-evidence` — Retain one LATAM-Spanish official or specimen detail and its local code before activating JTG, xJTG, SVP 184, and POR 063 card slices.
+- **Execution issue:** [#192](https://github.com/m4s-ai/snoredex-data/issues/192)
 - **Evidence:** `decision:D3`, `document:verification/RESUME.md`
 - **Distribution regions to split:** Latin America
 - **Open:** The side-by-side SVP 184 photograph needs a stable specimen id and committed bytes.; The official LATAM card archive route has not yet been retained as a capability surface.
@@ -126,6 +133,7 @@ Era segments:
 - **Scope:** Brazilian Portuguese physical cards identified by a Brazilian source record; no claim is made for all Portuguese cards or eras.
 - **Identity boundary:** A Brazilian listing or official br detail can identify pt-BR, but an unqualified pt provider record cannot.
 - **Discovery:** `needs-evidence` — Retain an official br archive detail and activate positive card slices without treating blocked or empty marketplace searches as absence.
+- **Execution issue:** [#191](https://github.com/m4s-ai/snoredex-data/issues/191)
 - **Evidence:** `observation:obs-ligapokemon`, `unit:U0329`, `edge:ligapokemon-latam-positive`
 - **Distribution regions to split:** Brazil
 - **Open:** Which unqualified legacy Portuguese units map to pt-BR after physical-region review?
@@ -139,6 +147,7 @@ Era segments:
 - **Scope:** Positively established Dutch historical cards; the complete market era remains unknown.
 - **Identity boundary:** A positive Dutch card does not make a neighbouring set, promo, or era Dutch.
 - **Discovery:** `blocked-by-source` — Resume with revision-pinned wikitext or another bounded historical catalogue and account every returned Dutch record.
+- **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
 - **Evidence:** `unit:U0095`, `edge:bulbapedia-positive`
 - **Open:** What are the exact Dutch start/end eras and promo exceptions?
 
@@ -152,6 +161,7 @@ Era segments:
 - **Scope:** Positively established Polish historical cards; no continuous market era is asserted.
 - **Identity boundary:** A confirmed Polish Diamond & Pearl card is one era point and cannot close other sets.
 - **Discovery:** `blocked-by-source` — Activate only from a bounded historical source or specimen-backed card loop.
+- **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
 - **Evidence:** `unit:U0364`, `edge:bulbapedia-positive`
 - **Open:** What are the exact Polish product categories and era boundaries?
 
@@ -165,6 +175,7 @@ Era segments:
 - **Scope:** Positively established Russian cards through the owner-reviewed XY market boundary; no official localized archive exists.
 - **Identity boundary:** The owner-adjudicated end of the Russian XY run guides review but is not a provider-wide automatic absence rule.
 - **Discovery:** `blocked-by-source` — Resume with a bounded Russian historical source or positive specimens; never use TCGdex ru HTTP status or empty cards arrays as coverage.
+- **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
 - **Evidence:** `unit:U0212`, `adjudication:OA-20260803-U0200`, `adjudication:OA-20260803-U0248`
 - **Open:** Which promos and decks sit outside the expansion run ending at BREAKthrough?
 
@@ -178,6 +189,7 @@ Era segments:
 - **Scope:** English-language physical products distributed in Southeast Asia, coordinated with the Asian locality tracker #138.
 - **Identity boundary:** SEA English cannot collapse into WEST English when local distribution marks or product identity differ.
 - **Discovery:** `coordinated` — Consume the terminal SEA-English result from #138 and preserve any physical distribution identity separately from WEST.
+- **Execution issue:** [#138](https://github.com/m4s-ai/snoredex-data/issues/138)
 - **Evidence:** `document:verification/ADR-0001-locality-aware-print-identity.md`, `document:verification/RESUME.md`
 - **Distribution regions to split:** Malaysia, Philippines, Singapore
 - **Coordination:** #138
