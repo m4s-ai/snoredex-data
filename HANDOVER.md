@@ -67,6 +67,10 @@ verification/ADR-0006-source-first-card-discovery.md
                               ACCEPTED card-level discovery loop (#136): localized provider queries
                               retain list/detail responses before matching and route every card into
                               a visible, non-verdict staging bucket.
+verification/ADR-0007-embedded-artwork-review-ui.md
+                              ACCEPTED UI boundary (#120): embed the future artwork/detection review
+                              view in this static data repo, emit reviewed structured proposals rather
+                              than direct writes, and wait for #140's authoritative graph outputs.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
