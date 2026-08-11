@@ -53,7 +53,7 @@ correction already made here, and reading it is how you avoid repeating one.
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **29 units rest on owner attestation alone** and 9
+   A single non-URL source may confirm a unit: **26 units rest on owner attestation alone** and 9
    on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 
@@ -196,7 +196,7 @@ python verification/review_integrity.py
 python verification/review_findings.py
 python scripts/legacy_baseline.py --check   # legacy universe contract + claim guard
 python scripts/print_identity_dryrun.py --check  # ADR-0001 claim/release/print mapping (#134/#145)
-python scripts/evidence_semantics.py --check     # what each verdict rests on (#137)
+python scripts/evidence_semantics.py --check     # evidence granularity + application status (#137)
 python scripts/set_catalogue_dryrun.py --check   # ADR-0002 set/edition/event mapping (#146)
 python scripts/source_adapters.py --check        # ADR-0004 source-first catalogue runs (#147)
 python scripts/card_discovery.py --check         # ADR-0006 source-first card runs (#136)
@@ -204,6 +204,8 @@ python scripts/locality_matrix.py --check         # evidenced non-Asian locality
 
 # ... do the work in a new Python pass under verification/ ...
 
+python verification/test_evidence_application.py # raw verdict/application projection boundary
+python verification/test_database_portability.py # LF/CRLF-neutral database input fingerprints
 python verification/test_owner_adjudications.py  # owner decision/store projection
 python verification/report.py                    # regenerate exports
 python scripts/editions.py                       # if edition data changed
@@ -256,6 +258,7 @@ python scripts/tracker.py check-template         # SEE BELOW — prints failure 
 
 # Every regression suite CI runs. Missing one from this list is how work passes locally and
 # reddens CI, which has now happened three times — see the note under the block.
+python verification/test_evidence_application.py # raw verdict/application projection boundary
 python verification/test_owner_adjudications.py  # owner decision/store projection
 python verification/test_source_adapters.py      # source-first catalogue regressions
 python verification/test_card_discovery.py       # source-first card-loop regressions

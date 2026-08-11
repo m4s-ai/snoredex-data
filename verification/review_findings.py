@@ -759,7 +759,8 @@ def collect() -> None:
         # --------------------------------------------------------------------------- #
         # #137 asks for the inventory before the repair: classify every evidence record by
         # granularity, then inventory the verdicts derived from set-level or absence-based logic.
-        # `scripts/evidence_semantics.py` produces it and changes nothing.
+        # `scripts/evidence_semantics.py` produces it and derives a conservative application status
+        # without rewriting the raw observation or repository verdict.
         #
         # The number that matters is not "confirmations resting on a set release". The step to the
         # card holds when the card is inside the set's numbered run, and also when the cited source
@@ -848,9 +849,9 @@ def collect() -> None:
         # result. It is deliberately a superset of N17: a row can sit outside its granularity
         # without appearing on any one of the three queues, and 22 of the 66 do exactly that.
         #
-        # The 66 are not data errors and nothing downgrades them here — the observation stays as
-        # recorded and only the inference drawn from it is marked unsupported, which is the split
-        # #137 asks for and the disposition #140 acts on.
+        # These are not damaged observations. The raw row stays as recorded, while #137's generated
+        # application policy downgrades unsupported confirmations to needs-evidence and unsupported
+        # contradictions to disputed.
         #
         #   27  unscoped absence — a contradiction with neither an exhaustive coverage edge nor an
         #       owner adjudication. 26 rest on a market-history article (#84/#88, the owner's call).
@@ -870,13 +871,32 @@ def collect() -> None:
         beyond_now = semantic_counts["verdictsBeyondTheirGranularity"]
         check(
             "N19",
-            "Every verdict sits within what its evidence's granularity may support",
+            "Raw out-of-granularity verdicts do not grow",
             "FAIL",
             beyond_now <= BEYOND_GRANULARITY_BASELINE,
             f"verdicts beyond their granularity: {beyond_now} "
             f"(baseline {BEYOND_GRANULARITY_BASELINE}) — "
             f"{semantic_counts['verdictsBeyondTheirGranularityByRule']}. A rise means a pass wrote "
             f"a verdict its evidence's granularity does not support.",
+        )
+        unsafe_application = []
+        for row in semantics["units"]:
+            expected = (
+                ("exists" if row["verdictWithinGranularity"] else "needs-evidence")
+                if row["status"] == "confirmed"
+                else ("not-printed" if row["inference"] == "owner-adjudicated" else "disputed")
+                if row["status"] == "contradicted"
+                else "unresolved"
+            )
+            if row.get("applicationStatus") != expected:
+                unsafe_application.append((row["unitId"], row.get("applicationStatus"), expected))
+        check(
+            "N20",
+            "Unsupported verdicts cannot materialize existence or absence",
+            "FAIL",
+            not unsafe_application,
+            f"{len(unsafe_application)} application status(es) overstate their evidence: "
+            f"{unsafe_application[:5]}",
         )
 
         # The two stores that say which providers may carry absence at all must agree. They do

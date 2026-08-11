@@ -1213,7 +1213,8 @@
       },
       "positiveEvidenceCapabilities": [
         "finish",
-        "product"
+        "product",
+        "language"
       ],
       "exhaustive": true,
       "absenceCapability": {
@@ -2546,7 +2547,7 @@
       "validatesEdges": [
         "tpci-exact-checklist-finish"
       ],
-      "outcome": "Exact official checklist positively records the product's finish rows.",
+      "outcome": "Exact official English checklist positively records the card row, its printed language and its finish rows.",
       "rawRecordRef": "verification/source_registry.json:https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
       "rawRecordHash": "sha256:e8424ba6ad7cb3b5a66b6d73608cdd390d2fbb4b6744b65ee82d74a6b3f9ce00",
       "rawRecord": {
@@ -3615,7 +3616,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:c9eaa7e6c8b08ebe93afd513b21eb991600823e0d9b1d4b9e447b3fa3ee06ade",
+      "rawRecordHash": "sha256:d04d2724ca85a3d70afd4c840db6b09402e41d924515c729a17cc354a30afb3d",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -3632,7 +3633,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 50,
+        "stableIdCount": 47,
         "stableIds": [
           "F0289-P02",
           "F0597-P01",
@@ -3657,11 +3658,9 @@
           "U0097",
           "U0098",
           "U0099",
-          "U0187",
           "U0188",
           "U0190",
           "U0191",
-          "U0214",
           "U0215",
           "U0216",
           "U0217",
@@ -3670,7 +3669,6 @@
           "U0312",
           "U0313",
           "U0314",
-          "U0324",
           "U0325",
           "U0326",
           "U0327",
@@ -3686,7 +3684,7 @@
           "override:owner-scan-review"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 50
+        "usageCount": 47
       }
     },
     {
@@ -10793,7 +10791,8 @@
       ],
       "dimensions": [
         "finish",
-        "finish-override"
+        "finish-override",
+        "language"
       ]
     },
     {
@@ -10808,7 +10807,8 @@
       ],
       "dimensions": [
         "finish",
-        "finish-override"
+        "finish-override",
+        "language"
       ]
     },
     {

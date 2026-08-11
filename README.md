@@ -8,7 +8,7 @@ catalogue.**
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
 [![Legacy cards](https://img.shields.io/badge/legacy_cards-198-2563eb)](legacy-cardmarket-baseline.json)
-[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-839_items-2563eb)](analysis_checklist.json)
+[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-814_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
@@ -68,7 +68,7 @@ Then visit <http://localhost:8000/>. `index.html` is the whole site; nothing els
 | The immutable pre-migration candidate universe | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) | It records the historical Cardmarket boundary and every inherited card/unit; it is provenance, not an all-locality manifest. |
 | A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite) / [`DATABASE.md`](DATABASE.md) | Start from the `app_*` views. Historical `contradicted` rows become `disputed` unless a scoped source or explicit owner adjudication resolves them. |
 | A personal have/have-not tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Copy the blank template or use `scripts/tracker.py`; catalogue sync preserves ownership state. |
-| The Cardmarket product view — identity, rarity, art, artist, editions | [`snorlax_cards.json`](snorlax_cards.json) | Use `languagesConfirmed` / `languagesContradicted` / `languagesUnresolved`. The raw `languages` field is the marketplace claim, kept deliberately. |
+| The Cardmarket product view — identity, rarity, art, artist, editions | [`snorlax_cards.json`](snorlax_cards.json) | Use `languagesConfirmed` for established prints and `languagesNeedsEvidence` / `languagesDisputed` for open questions. `languagesRepositoryConfirmed`, `languagesContradicted`, and raw `languages` preserve the research inputs. |
 | The current-known list of physical things to collect | [`analysis_checklist.json`](analysis_checklist.json) | One record per documented printing *or* per explicitly unresolved one within current coverage — placeholders are items too. |
 | The evidenced locality/era discovery frontier | [`LOCALITY-ERA-MATRIX.md`](verification/LOCALITY-ERA-MATRIX.md) / [`locality_era_matrix.json`](verification/locality_era_matrix.json) | Established, provisional and candidate tracks stay distinct; provider slices are positive frontiers, not complete print manifests. |
 | Which languages a card exists in, and on whose word | [`verification/units.json`](verification/units.json) | Keyed by `(setCode, number, variant, language)`. |
@@ -106,6 +106,7 @@ python -m playwright install chromium
 python verification/review_integrity.py     # structural invariants inside each store
 python verification/review_findings.py      # consistency between stores and published artifacts
 python scripts/legacy_baseline.py --check   # immutable historical boundary + scope wording
+python verification/test_evidence_application.py  # raw verdict/application boundary
 python verification/test_site.py            # browser acceptance tests
 ```
 
@@ -123,7 +124,8 @@ Current-known status snapshot: **2026-08-11**. Its candidate denominator is the 
 |---|---|
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Current-known physical checklist | **839 items** across 174 cards and 15 languages: 666 documented printings plus 173 explicit unresolved placeholders. |
+| Evidence-safe application status | **606 established**, **28 needs evidence**, **58 owner-adjudicated not printed**, and **27 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
+| Current-known physical checklist | **814 items** across 174 cards and 15 languages: 655 documented printings plus 159 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 333 externally confirmed, 103 marketplace-only positives, 125 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 220 units. |
 | Evidence registry | **23 providers**, 894 evidence records, 887 unique URLs, and 2,795 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
@@ -173,7 +175,7 @@ throughout this project and is genuinely uncommon:
 | Single tier 1-2 source | 676 |
 | Single tier 3 source | 5 |
 
-681 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 38 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+681 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 35 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in
@@ -239,9 +241,14 @@ publishes, and Pages deployment stays a manual, gated workflow run.
 - **`languages` is marketplace availability, not a print manifest — proven, not suspected.**
   Cross-checking every card × language against outside sources produced contradictions: cases where
   Cardmarket offers a language for which no printing exists, `KSS 26` being the clearest. The raw
-  field is preserved because the over-claiming is the finding; the verdict lives beside it in
-  `languagesConfirmed` / `languagesContradicted` / `languagesUnresolved`. See
+  field is preserved because the over-claiming is the finding; the repository verdict lives beside
+  it in `languagesRepositoryConfirmed` / `languagesContradicted`, while the evidence-safe
+  application view uses `languagesConfirmed` / `languagesNeedsEvidence`. See
   [`verification/CONTRADICTED.json`](verification/CONTRADICTED.json).
+- **A repository confirmation may still need card-level evidence.** A set/product release or a
+  sibling printing is retained as an observation but cannot establish this exact card unless the
+  step to the card is positively supported. Those rows are `languagesNeedsEvidence`, are also in
+  `languagesUnresolved`, and do not enter chronological or checklist outputs.
 - **A contradicted language is not automatically a proven absence.** `languagesContradicted`
   splits into `languagesNotPrinted` — where an explicit owner adjudication or a complete official
   manifest settled the question — and `languagesDisputed`, where a source disagrees and nothing

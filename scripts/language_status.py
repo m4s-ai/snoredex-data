@@ -12,9 +12,11 @@ in prose, and prose does not survive a `json.load`.
 `languages` is deliberately left untouched — it is a faithful record of the Cardmarket claim,
 and that record is itself evidence. The verdict travels beside it instead:
 
-    languagesConfirmed     externally verified printings
+    languagesRepositoryConfirmed  preserved raw confirmed verdicts
+    languagesConfirmed     printings whose evidence may establish the exact card
     languagesContradicted  claims an outside source refutes
-    languagesUnresolved    pending or awaiting manual review
+    languagesNeedsEvidence confirmed claims whose evidence cannot reach the exact card
+    languagesUnresolved    the needs-evidence subset plus pending/manual-review claims
 
 A refutation is not automatically a settled absence, and the two used to be indistinguishable
 here (#66). `languagesContradicted` stays as it was — the union, so existing consumers are
@@ -23,10 +25,9 @@ unaffected — and the split travels beside it:
     languagesNotPrinted    an owner adjudication or a complete official manifest settled it
     languagesDisputed      a source disagrees and nothing has settled it
 
-73 of the 85 are `disputed`. `scripts/database.py` has drawn that line since the clean handoff and
-`DATABASE.md` tells applications not to read `disputed` as "does not exist"; the line simply never
-reached the artifacts above the database. Both generators now derive it from
-`scripts/absence_model.py` so there is one rule rather than two implementations.
+The application status is read from `verification/evidence_semantics.json`, the one generated
+classification of evidence granularity. This keeps the JSON, chronological export, checklist and
+database from each independently deciding whether a set-level observation reaches the card.
 
 Run after any verification write pass, before regenerating the chronological exports:
 
@@ -36,23 +37,14 @@ Run after any verification write pass, before regenerating the chronological exp
 from __future__ import annotations
 
 import json
-import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from absence_model import absence_decision  # noqa: E402
-# Imported from the generator rather than read from verification/source_registry.json: this script
-# runs *before* source_registry.py in the documented order, so reading the generated file would
-# take provider config one run out of date every time that config changed. PROVIDERS is the
-# definition; the JSON is a projection of it.
-from source_registry import PROVIDERS  # noqa: E402
-
 ROOT = Path(__file__).resolve().parent.parent
 CARDS_PATH = ROOT / "snorlax_cards.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
-ADJUDICATIONS_PATH = ROOT / "verification" / "owner_adjudications.json"
+SEMANTICS_PATH = ROOT / "verification" / "evidence_semantics.json"
 
 LANG_ORDER = (
     "English", "French", "German", "Italian", "Spanish", "Portuguese", "Dutch", "Polish",
@@ -61,19 +53,12 @@ LANG_ORDER = (
 )
 LANG_RANK = {language: index for index, language in enumerate(LANG_ORDER)}
 
-STATUS_FIELD = {
-    "confirmed": "languagesConfirmed",
-    "contradicted": "languagesContradicted",
-    "pending": "languagesUnresolved",
-    "needs-manual-review": "languagesUnresolved",
-}
-
-# The split inside languagesContradicted. Kept separate from STATUS_FIELD because these are not a
-# fourth status: every language here is also in languagesContradicted, and consumers that only
-# understand the three original lists keep working unchanged.
-ABSENCE_FIELD = {
+APPLICATION_FIELD = {
+    "exists": "languagesConfirmed",
     "not-printed": "languagesNotPrinted",
     "disputed": "languagesDisputed",
+    "needs-evidence": "languagesNeedsEvidence",
+    "unresolved": "languagesUnresolved",
 }
 
 
@@ -90,9 +75,12 @@ def ordered(languages: set[str]) -> list[str]:
 def main() -> None:
     cards_document = read_json(CARDS_PATH)
     units = read_json(UNITS_PATH)
-    adjudicated = {
-        decision["unitId"] for decision in read_json(ADJUDICATIONS_PATH)["decisions"]
+    semantics = {
+        row["unitId"]: row for row in read_json(SEMANTICS_PATH)["units"]
     }
+    unit_ids = {unit["unitId"] for unit in units}
+    if set(semantics) != unit_ids:
+        raise ValueError("evidence semantics must classify every language unit exactly once")
 
     verdicts: dict[tuple[str, str, str], dict[str, set[str]]] = defaultdict(
         lambda: defaultdict(set)
@@ -103,12 +91,18 @@ def main() -> None:
             str(unit.get("number") or ""),
             str(unit.get("variant") or "base"),
         )
-        field = STATUS_FIELD.get(unit["status"])
-        if field:
-            verdicts[key][field].add(unit["language"])
-        decision = absence_decision(unit["status"], unit["unitId"] in adjudicated)
-        if decision in ("not-printed", "disputed"):
-            verdicts[key][ABSENCE_FIELD[decision]].add(unit["language"])
+        status = unit["status"]
+        app_status = semantics[unit["unitId"]]["applicationStatus"]
+        if status == "confirmed":
+            verdicts[key]["languagesRepositoryConfirmed"].add(unit["language"])
+        elif status == "contradicted":
+            verdicts[key]["languagesContradicted"].add(unit["language"])
+        if app_status in APPLICATION_FIELD:
+            verdicts[key][APPLICATION_FIELD[app_status]].add(unit["language"])
+        if app_status == "needs-evidence":
+            # Backward-compatible union: every needs-evidence row is unresolved, while the named
+            # subset lets consumers distinguish it from an untouched pending/manual queue.
+            verdicts[key]["languagesUnresolved"].add(unit["language"])
 
     annotated = 0
     for card in cards_document["cards"]:
@@ -120,9 +114,11 @@ def main() -> None:
                 "reason": "Online/live code cards are excluded from language verification.",
             }
             card.pop("languagesConfirmed", None)
+            card.pop("languagesRepositoryConfirmed", None)
             card.pop("languagesContradicted", None)
             card.pop("languagesNotPrinted", None)
             card.pop("languagesDisputed", None)
+            card.pop("languagesNeedsEvidence", None)
             card.pop("languagesUnresolved", None)
             continue
         key = (
@@ -131,31 +127,38 @@ def main() -> None:
             str(card.get("variantToken") or "base"),
         )
         verdict = verdicts.get(key, {})
+        repository_confirmed = ordered(verdict.get("languagesRepositoryConfirmed", set()))
         confirmed = ordered(verdict.get("languagesConfirmed", set()))
         contradicted = ordered(verdict.get("languagesContradicted", set()))
+        needs_evidence = ordered(verdict.get("languagesNeedsEvidence", set()))
         unresolved = ordered(verdict.get("languagesUnresolved", set()))
         not_printed = ordered(verdict.get("languagesNotPrinted", set()))
         disputed = ordered(verdict.get("languagesDisputed", set()))
+        card["languagesRepositoryConfirmed"] = repository_confirmed
         card["languagesConfirmed"] = confirmed
         card["languagesContradicted"] = contradicted
         card["languagesNotPrinted"] = not_printed
         card["languagesDisputed"] = disputed
+        card["languagesNeedsEvidence"] = needs_evidence
         card["languagesUnresolved"] = unresolved
         card["languageVerification"] = {
             "status": "resolved" if not unresolved else "partial",
             "claimed": len(card.get("languages") or []),
+            "repositoryConfirmed": len(repository_confirmed),
             "confirmed": len(confirmed),
             "contradicted": len(contradicted),
             "notPrinted": len(not_printed),
             "disputed": len(disputed),
+            "needsEvidence": len(needs_evidence),
             "unresolved": len(unresolved),
             "note": (
                 "languages is the raw Cardmarket claim and is not a print manifest. Use "
-                "languagesConfirmed for printings backed by an outside source. An unresolved "
-                "language is not yet established, never proven absent. languagesContradicted "
-                "splits into languagesNotPrinted, where an owner adjudication or a complete "
-                "official manifest settled the question, and languagesDisputed, where a source "
-                "disagrees and nothing has settled it — do not read disputed as 'does not exist'."
+                "languagesConfirmed for exact printings established within the permitted evidence "
+                "granularity. languagesRepositoryConfirmed preserves the raw verdict; its "
+                "languagesNeedsEvidence subset cannot yet establish the exact card and is also in "
+                "languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where "
+                "an owner adjudication settled the question, and languagesDisputed, where a source "
+                "disagrees and nothing has settled it. Unresolved and disputed never mean absent."
             ),
         }
         annotated += 1
@@ -163,12 +166,13 @@ def main() -> None:
     notes = [
         note
         for note in cards_document["meta"].get("notes", [])
-        if not str(note).startswith("languagesConfirmed")
+        if not str(note).startswith(("languagesConfirmed", "languagesRepositoryConfirmed"))
     ]
     notes.append(
-        "languagesConfirmed / languagesContradicted / languagesUnresolved carry the external "
-        "verification verdict for each Cardmarket language claim. languages itself is left as the "
-        "raw marketplace claim, which over-claims: see verification/CONTRADICTED.json."
+        "languagesRepositoryConfirmed / languagesContradicted preserve the external repository "
+        "verdict. languagesConfirmed contains only claims whose evidence may establish the exact "
+        "card; languagesNeedsEvidence is the unsupported subset and is also unresolved. languages "
+        "itself remains the raw marketplace claim: see verification/evidence_semantics.json."
     )
     cards_document["meta"]["notes"] = notes
 

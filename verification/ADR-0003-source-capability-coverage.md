@@ -68,9 +68,10 @@ The first accepted graph is deliberately conservative.
   finish surface. Korean collector sources remain present as `needs-evidence` with no claimed edge.
 - LigaPokemon is a positive LATAM listing surface blocked to scripted/datacenter access. Cardmarket
   is rate-limited and product-positive only. Neither inventory can establish absence.
-- Complete official checklists, the reviewed Black Star Promo language table and the exact official
-  Play! Pokémon Series 7 gallery are the only absence-capable edges. Their closure is URL/scope
-  specific and cannot be inherited by another page from the same provider.
+- Complete official checklists positively establish the exact English card rows they name and
+  their documented finish columns. Together with the reviewed Black Star Promo language table and
+  the exact official Play! Pokémon Series 7 gallery, they are the only absence-capable edges. Their
+  closure is URL/scope specific and cannot be inherited by another page from the same provider.
 - PSA and CGC named varieties or registry rows establish concrete graded specimens. CGC personal
   registry set 102462 is retained as the #117 positive fixture, while its empty slots and the
   collector's missing cards remain unknown.
