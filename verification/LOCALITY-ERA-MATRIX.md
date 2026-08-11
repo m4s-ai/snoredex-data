@@ -20,10 +20,10 @@ issue unless new positive physical-card evidence overturns the recorded decision
 | Track | Universe state | Locality / language | Era state | Discovery | Child | Legacy audit |
 |---|---|---|---|---|---|---|
 | `west-en` Western English and regional distribution | established-positive | `WEST` / English (`en`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#188](https://github.com/m4s-ai/snoredex-data/issues/188) | 80 confirmed / 0 contradicted |
-| `west-fr` Western French | established-positive | `WEST` / French (`fr`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 2 contradicted |
-| `west-de` Western German | established-positive | `WEST` / German (`de`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 3 contradicted |
+| `west-fr` Western French | established-positive | `WEST` / French (`fr`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 2 contradicted |
+| `west-de` Western German | established-positive | `WEST` / German (`de`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 70 confirmed / 3 contradicted |
 | `west-it` Western Italian | established-positive | `WEST` / Italian (`it`) | provider-observed-unbounded: positive-observations-only; platinum-card-positive: positive-observations-only | complete-positive-slice | [#189](https://github.com/m4s-ai/snoredex-data/issues/189) | 70 confirmed / 3 contradicted |
-| `west-es-eu` European Spanish | established-positive | `WEST` / Spanish (`es-ES`) | provider-observed-unbounded: positive-observations-only | ready-for-child | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 59 confirmed / 5 contradicted |
+| `west-es-eu` European Spanish | established-positive | `WEST` / Spanish (`es-ES`) | provider-observed-unbounded: positive-observations-only | complete-positive-slice | [#190](https://github.com/m4s-ai/snoredex-data/issues/190) | 59 confirmed / 5 contradicted |
 | `west-pt-unqualified` Legacy unqualified Portuguese | provisional-legacy | `WEST` / Portuguese (`pt`) | provider-observed-unbounded: needs-evidence | ready-for-child | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | 55 confirmed / 10 contradicted |
 | `latam-es` Latin-American Spanish | owner-scoped | `LATAM` / Spanish (`es-419`) | journey-together-forward: owner-scoped | needs-evidence | [#192](https://github.com/m4s-ai/snoredex-data/issues/192) | not represented |
 | `latam-pt-br` Brazilian Portuguese | established-positive | `LATAM` / Portuguese (`pt-BR`) | positive-listing-unbounded: positive-observations-only | needs-evidence | [#191](https://github.com/m4s-ai/snoredex-data/issues/191) | not represented |
@@ -52,27 +52,27 @@ Era segments:
 
 - **Scope:** French-language physical cards in the current Western identity model.
 - **Identity boundary:** French card releases remain language-bearing editions; marketplace availability and another locale's archive never establish them.
-- **Discovery:** `ready-for-child` — Retain a French official archive detail fixture before adding that route; TCGdex card rows stay positive-only.
+- **Discovery:** `complete-positive-slice` — Rerun the exact-name French slice for deltas and register a bounded official French route before making any historical-coverage claim.
 - **Execution issue:** [#190](https://github.com/m4s-ai/snoredex-data/issues/190)
-- **Evidence:** `unit:U0001`, `slice:tcgdex-fr-sets`, `edge:tcgdex-west-positive`
+- **Evidence:** `unit:U0001`, `slice:tcgdex-fr-sets`, `card-slice:tcgdex-fr-snorlax`, `edge:tcgdex-west-positive`
 - **Open:** Which historical and promotional eras are absent from each positive catalogue surface?
 
 Era segments:
 
-- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained French TCGdex set slice is a positive set-name frontier with no historical completeness claim. Evidence: `slice:tcgdex-fr-sets`, `edge:tcgdex-west-positive`.
+- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained French TCGdex set slice and exact-name Ronflex card slice are positive frontiers with no historical completeness claim. Evidence: `slice:tcgdex-fr-sets`, `card-slice:tcgdex-fr-snorlax`, `edge:tcgdex-west-positive`.
 
 ### Western German (`west-de`)
 
 - **Scope:** German-language physical cards in the current Western identity model.
 - **Identity boundary:** German local set branding and collector identifiers survive even when artwork and card role match another language.
-- **Discovery:** `ready-for-child` — Retain a German official archive detail fixture and activate a bounded positive card slice.
+- **Discovery:** `complete-positive-slice` — Rerun the exact-name German slice for deltas and register a bounded official German route before making any historical-coverage claim.
 - **Execution issue:** [#190](https://github.com/m4s-ai/snoredex-data/issues/190)
-- **Evidence:** `unit:U0002`, `slice:tcgdex-de-sets`, `edge:tcgdex-west-positive`
+- **Evidence:** `unit:U0002`, `slice:tcgdex-de-sets`, `card-slice:tcgdex-de-snorlax`, `edge:tcgdex-west-positive`
 - **Open:** Which product-only and stamped releases fall outside expansion card archives?
 
 Era segments:
 
-- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained German TCGdex set slice is fully accounted but does not close missing eras or cards. Evidence: `slice:tcgdex-de-sets`, `edge:tcgdex-west-positive`.
+- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained German TCGdex set slice and exact-name Relaxo card slice are fully accounted but do not close missing eras or cards. Evidence: `slice:tcgdex-de-sets`, `card-slice:tcgdex-de-snorlax`, `edge:tcgdex-west-positive`.
 
 ### Western Italian (`west-it`)
 
@@ -92,14 +92,14 @@ Era segments:
 
 - **Scope:** European-Spanish physical cards represented by every existing legacy Spanish unit.
 - **Identity boundary:** WEST/es-ES and LATAM/es-419 are distinct physical editions even when both are called Spanish.
-- **Discovery:** `ready-for-child` — Activate an es-ES slice with a European positive fixture and reject any automatic reuse for LATAM.
+- **Discovery:** `complete-positive-slice` — Rerun the exact-name es slice for deltas; admit only matches to pre-existing WEST/es-ES identities and require a positive regional record for any LATAM/es-419 row.
 - **Execution issue:** [#190](https://github.com/m4s-ai/snoredex-data/issues/190)
-- **Evidence:** `unit:U0003`, `slice:tcgdex-es-sets`, `decision:D3`
+- **Evidence:** `unit:U0003`, `slice:tcgdex-es-sets`, `card-slice:tcgdex-es-eu-snorlax`, `decision:D3`
 - **Open:** Which product pages distinguish European distribution from LATAM after March 2025?
 
 Era segments:
 
-- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained Spanish TCGdex slice does not identify same-language regional printings, so it is routed only to the established European legacy track. Evidence: `slice:tcgdex-es-sets`, `edge:tcgdex-west-positive`, `decision:D3`.
+- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained Spanish TCGdex set and exact-name card slices do not identify same-language regional printings, so matches are routed only to pre-existing European legacy identities and never to LATAM. Evidence: `slice:tcgdex-es-sets`, `card-slice:tcgdex-es-eu-snorlax`, `edge:tcgdex-west-positive`, `decision:D3`.
 
 ### Legacy unqualified Portuguese (`west-pt-unqualified`)
 
