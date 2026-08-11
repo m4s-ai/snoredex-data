@@ -540,6 +540,7 @@ def main() -> int:
     overrides = read_json(ROOT / "verification" / "finish_overrides.json")
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     artists = read_json(ROOT / "artists_pokemontcgio.json")
+    source_first = read_json(ROOT / "verification" / "source_first_prints.json")
     bulbapedia_dates = read_json(
         ROOT / "verification" / "bulbapedia_release_dates.json"
     )
@@ -586,6 +587,18 @@ def main() -> int:
             record(unit.get("sourceUrl"), unit.get("sourceType"), "language",
                    unit["unitId"], (unit.get("checkedAt") or "")[:10] or None,
                    provider_id=unit.get("providerId"))
+
+    for entry in source_first["prints"]:
+        if entry.get("providerId") != "pokemon-official":
+            continue
+        for url in {
+            entry.get("sourceUrl"), entry.get("cardImageUrl"),
+            entry.get("comparisonAssetUrl"),
+        } - {None}:
+            record(
+                url, "Positive source-first card record", "card-release",
+                entry["printId"], provider_id=entry["providerId"],
+            )
 
     for unit in finish_units:
         for printing in unit["printings"]:

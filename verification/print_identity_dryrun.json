@@ -24,18 +24,18 @@
     "legacyProductIdentityTuples": 196,
     "legacyLanguageUnits": 719,
     "legacyExcludedCodeCardUnits": 75,
-    "sourceFirstRecords": 39,
+    "sourceFirstRecords": 43,
     "finishPrintingClaims": 693,
-    "candidateClaims": 1534,
+    "candidateClaims": 1538,
     "candidateClaimDispositions": {
       "bounded-contradicted": 85,
       "candidate-needs-evidence": 228,
-      "established-and-mapped": 1146,
+      "established-and-mapped": 1150,
       "positively-excluded": 75
     },
-    "setEditionNodes": 452,
-    "cardReleaseNodes": 600,
-    "cardReleaseNodesIdentified": 490,
+    "setEditionNodes": 456,
+    "cardReleaseNodes": 604,
+    "cardReleaseNodesIdentified": 494,
     "cardReleaseNodesNeedingLocalIdentifier": 110,
     "physicalPrintingNodes": 473,
     "physicalPrintingsByEvidenceClass": {
@@ -52,16 +52,17 @@
     "unresolvedUnits": 0,
     "unresolvedPhysicalClaims": 1,
     "orphanSpecimens": 0,
-    "sourceFirstPrintsAdmitted": 39,
+    "sourceFirstPrintsAdmitted": 43,
     "sourceFirstPrintsHeld": 0,
     "cardReleaseNodesByLocality": {
-      "WEST": 347,
+      "WEST": 348,
       "JP": 66,
       "KR": 52,
       "CN": 42,
       "TW": 37,
       "ID": 32,
-      "TH": 24
+      "TH": 24,
+      "LATAM": 3
     },
     "needsLocalIdentifierByLocality": {
       "KR": 49,
@@ -23157,6 +23158,42 @@
       "reason": "positive source-first specimen/card record"
     },
     {
+      "claimId": "CLAIM:source-first:LATAM:JTG LA:117/159:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "LATAM:JTG LA:117/159:base",
+      "sourceRecord": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:LATAM:Spanish:JTG LA:117/159:unmapped-work:SPEC-0035",
+      "materializedTargetId": "RELEASE:LATAM:Spanish:JTG LA:117/159:unmapped-work:SPEC-0035",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:LATAM:POR LA:063/088:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "LATAM:POR LA:063/088:base",
+      "sourceRecord": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:LATAM:Spanish:POR LA:063/088:unmapped-work:SPEC-0036",
+      "materializedTargetId": "RELEASE:LATAM:Spanish:POR LA:063/088:unmapped-work:SPEC-0036",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:LATAM:SVP LA:184:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "LATAM:SVP LA:184:base",
+      "sourceRecord": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+      "materializedTargetId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
       "claimId": "CLAIM:source-first:TH:SM-P:083:base",
       "claimKind": "card-release",
       "sourceKind": "source-first-record",
@@ -23382,6 +23419,18 @@
       "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:TW:T-Chinese:scD F:111/159:unmapped-work:SPEC-0015",
       "materializedTargetId": "RELEASE:TW:T-Chinese:scD F:111/159:unmapped-work:SPEC-0015",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:WEST:SVP ES:184:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "WEST:SVP ES:184:base",
+      "sourceRecord": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:WEST:Spanish:SVP ES:184:unmapped-work:SPEC-0034",
+      "materializedTargetId": "RELEASE:WEST:Spanish:SVP ES:184:unmapped-work:SPEC-0034",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -25670,6 +25719,45 @@
       "establishingClaimIds": [
         "CLAIM:legacy:U0775",
         "CLAIM:legacy:U0780"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:LATAM:Spanish:JTG LA",
+      "locality": "LATAM",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "JTG LA",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:LATAM:JTG LA:117/159:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:LATAM:Spanish:POR LA",
+      "locality": "LATAM",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "POR LA",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:LATAM:POR LA:063/088:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:LATAM:Spanish:SVP LA",
+      "locality": "LATAM",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "SVP LA",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:LATAM:SVP LA:184:base"
       ]
     },
     {
@@ -30304,6 +30392,19 @@
         "CLAIM:legacy:U0074",
         "CLAIM:legacy:U0282",
         "CLAIM:legacy:U0319"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:WEST:Spanish:SVP ES",
+      "locality": "WEST",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "SVP ES",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:WEST:SVP ES:184:base"
       ]
     },
     {
@@ -36322,6 +36423,90 @@
       "sourceRecords": [
         "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)"
       ]
+    },
+    {
+      "cardReleaseId": "RELEASE:LATAM:Spanish:JTG LA:117/159:unmapped-work:SPEC-0035",
+      "setEditionId": "EDITION:LATAM:Spanish:JTG LA",
+      "locality": "LATAM",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "JTG LA",
+      "localNumber": "117/159",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:LATAM:JTG LA:117/159:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:LATAM:JTG LA:117/159:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png"
+      ],
+      "sourceFirstRecordId": "LATAM:JTG LA:117/159:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:LATAM:Spanish:POR LA:063/088:unmapped-work:SPEC-0036",
+      "setEditionId": "EDITION:LATAM:Spanish:POR LA",
+      "locality": "LATAM",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "POR LA",
+      "localNumber": "063/088",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:LATAM:POR LA:063/088:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:LATAM:POR LA:063/088:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png"
+      ],
+      "sourceFirstRecordId": "LATAM:POR LA:063/088:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+      "setEditionId": "EDITION:LATAM:Spanish:SVP LA",
+      "locality": "LATAM",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "SVP LA",
+      "localNumber": "184",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:LATAM:SVP LA:184:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:LATAM:SVP LA:184:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png"
+      ],
+      "sourceFirstRecordId": "LATAM:SVP LA:184:base"
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:SM-P:083:unmapped-work:SPEC-0026",
@@ -48694,6 +48879,34 @@
       "sourceRecords": [
         "https://api.tcgdex.net/v2/es/cards/sv08-144"
       ]
+    },
+    {
+      "cardReleaseId": "RELEASE:WEST:Spanish:SVP ES:184:unmapped-work:SPEC-0034",
+      "setEditionId": "EDITION:WEST:Spanish:SVP ES",
+      "locality": "WEST",
+      "language": "Spanish",
+      "script": "Latn",
+      "localSetCode": "SVP ES",
+      "localNumber": "184",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:WEST:SVP ES:184:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:WEST:SVP ES:184:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png"
+      ],
+      "sourceFirstRecordId": "WEST:SVP ES:184:base"
     },
     {
       "cardReleaseId": "RELEASE:WEST:Spanish:SVP:051:Snorlax-Voraciousness-Thudding-Press",

@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-card-discovery-contract",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.4.0",
+    "coverageVersion": "1.5.0",
     "reviewedAt": "2026-08-11",
     "policies": [
       "Discovery starts from provider-native localized name queries and never from snorlax_cards.json, units.json, or the legacy Cardmarket candidate list.",
@@ -227,6 +227,58 @@
           "positiveNameExclusions": []
         }
       ]
+    },
+    {
+      "adapterId": "tpci-spanish-card-assets",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "source-first-print-json",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "state": "active",
+      "listEndpointTemplate": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/",
+      "detailEndpointTemplate": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/{rawProviderId}",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "retained-print-id",
+      "pageSize": 3,
+      "slices": [
+        {
+          "sliceId": "tpci-latam-jtg-positive",
+          "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+          "rawLocale": "es-419",
+          "locality": "LATAM",
+          "language": "Spanish",
+          "script": "Latn",
+          "localityEvidenceMode": "physical-locality",
+          "nameQueries": ["Snorlax de Paul"],
+          "retainedPrintIds": ["LATAM:JTG LA:117/159:base"],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tpci-latam-svp184-positive",
+          "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+          "rawLocale": "es-419",
+          "locality": "LATAM",
+          "language": "Spanish",
+          "script": "Latn",
+          "localityEvidenceMode": "physical-locality",
+          "nameQueries": ["Snorlax de Paul"],
+          "retainedPrintIds": ["LATAM:SVP LA:184:base"],
+          "positiveNameExclusions": []
+        },
+        {
+          "sliceId": "tpci-latam-por063-positive",
+          "coverageEdgeId": "tpci-latam-spanish-card-asset-positive",
+          "rawLocale": "es-419",
+          "locality": "LATAM",
+          "language": "Spanish",
+          "script": "Latn",
+          "localityEvidenceMode": "physical-locality",
+          "nameQueries": ["Snorlax"],
+          "retainedPrintIds": ["LATAM:POR LA:063/088:base"],
+          "positiveNameExclusions": []
+        }
+      ]
     }
   ],
   "setCodeAssertions": [
@@ -445,10 +497,10 @@
       "gapId": "official-european-spanish-card-archive",
       "track": "European-Spanish official card archive",
       "providerId": "pokemon-official",
-      "surfaceId": null,
+      "surfaceId": "tpci-eu-spanish-card-assets",
       "terminalState": "needs-evidence",
-      "reason": "The TCGdex es locale does not expose a physical Europe-versus-LATAM discriminator, and no bounded official European-Spanish archive route has been retained.",
-      "retryCondition": "Register a positively European official route or physical distribution record; never reuse this WEST slice for LATAM/es-419."
+      "reason": "The retained official SVP ES 184 asset is a positive European-Spanish comparison with a printed ES modifier, but one image does not establish historical archive coverage.",
+      "retryCondition": "Add further positive European-Spanish assets as needed; never reuse WEST/es-ES records for LATAM/es-419 or infer absence from an unretained path."
     },
     {
       "gapId": "official-portuguese-physical-locality",
@@ -469,13 +521,22 @@
       "retryCondition": "Register a bounded official Brazilian route or a positive printed physical-region discriminator; blocked and empty marketplace results remain unknown."
     },
     {
+      "gapId": "official-latam-xjtg-positive-record",
+      "track": "LATAM-Spanish xJTG discovery",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-latam-spanish-card-assets",
+      "terminalState": "needs-evidence",
+      "reason": "JTG LA 117/159, SVP LA 184 and POR LA 063/088 are retained positive cards, but no independent LATAM xJTG printing or distribution record has been retained; base JTG and WEST xJTG cannot be inherited.",
+      "retryCondition": "Add xJTG only from a positive LATAM card or distribution record carrying its own printed identity; Prize Packs remain outside issue #192 scope."
+    },
+    {
       "gapId": "western-locality-card-discovery",
       "track": "Remaining Western/LATAM locality and English regional-distribution discovery",
       "providerId": "tcgdex",
       "surfaceId": "tcgdex-api",
       "terminalState": "needs-evidence",
-      "reason": "The English, French, German, European-Spanish, Italian, and Portuguese card slices are active, but TCGdex exposes no source-native physical regional-distribution discriminator; LATAM-Spanish and English regional discovery remain owned by #192 and later #139 children.",
-      "retryCondition": "Add a regional split only from a positive physical marking or distribution record, and activate the remaining LATAM-Spanish and English regional slices in their linked #139 child issues."
+      "reason": "The English, French, German, Italian, Portuguese and broad historical Spanish slices remain positive-only; official ES/LA card assets now establish the 2025 Spanish split for named cards, while older and other regional-distribution boundaries remain unresolved.",
+      "retryCondition": "Add any further regional split only from a positive physical marking, printed modifier or distribution record."
     },
     {
       "gapId": "specialist-historical-card-discovery",

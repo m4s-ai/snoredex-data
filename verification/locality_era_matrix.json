@@ -243,9 +243,9 @@
       "language": "Spanish",
       "bcp47": "es-419",
       "script": "Latn",
-      "universeStatus": "owner-scoped",
+      "universeStatus": "established-positive",
       "scope": "Regular sets from Journey Together (March 2025) onward; Prize Packs remain outside this owner-defined discovery scope until positive evidence changes it.",
-      "identityBoundary": "LATAM translation, set branding and local code create a separate edition from European Spanish; no legacy Cardmarket row can populate it.",
+      "identityBoundary": "The complete printed LA modifier, LATAM translation and regional branding create a separate edition from European Spanish's printed ES code; no legacy Cardmarket row can populate it.",
       "absencePolicy": "positive-only",
       "legacyUnitScope": {"include": false},
       "distributionRegions": ["Latin America"],
@@ -254,20 +254,20 @@
           "eraId": "journey-together-forward",
           "start": "March 2025",
           "end": null,
-          "state": "owner-scoped",
-          "basis": "Owner decision D3 admits a distinct LATAM edition; RESUME records the discovery start and the specimen-proven SVP 184 comparison, whose photograph still needs a stable specimen record before row admission.",
-          "evidenceRefs": ["decision:D3", "document:verification/RESUME.md"],
+          "state": "positive-observations-only",
+          "basis": "Official retained assets positively establish JTG LA 117/159, SVP LA 184 and POR LA 063/088. The paired SVP ES 184 asset preserves the European comparison; these named cards do not close neighbouring sets, variants or the era.",
+          "evidenceRefs": ["card-slice:tpci-latam-jtg-positive", "card-slice:tpci-latam-svp184-positive", "card-slice:tpci-latam-por063-positive", "edge:tpci-latam-spanish-card-asset-positive", "observation:obs-tpci-latam-svp184"],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "needs-evidence",
-        "sourceRefs": ["surface:ligapokemon-catalogue", "edge:ligapokemon-latam-positive", "decision:D3", "document:verification/RESUME.md"],
-        "gapRefs": ["card-gap:western-locality-card-discovery"],
-        "retryCondition": "Retain one LATAM-Spanish official or specimen detail and its local code before activating JTG, xJTG, SVP 184, and POR 063 card slices."
+        "state": "complete-positive-slice",
+        "sourceRefs": ["card-slice:tpci-latam-jtg-positive", "card-slice:tpci-latam-svp184-positive", "card-slice:tpci-latam-por063-positive", "surface:tpci-latam-spanish-card-assets", "edge:tpci-latam-spanish-card-asset-positive", "observation:obs-tpci-latam-svp184"],
+        "gapRefs": ["card-gap:official-latam-xjtg-positive-record"],
+        "retryCondition": "Add xJTG only from a positive LATAM card or distribution record carrying its own printed identity; expand other cards without treating a missing asset as absence."
       },
-      "evidenceRefs": ["decision:D3", "document:verification/RESUME.md"],
-      "openQuestions": ["The side-by-side SVP 184 photograph needs a stable specimen id and committed bytes.", "The official LATAM card archive route has not yet been retained as a capability surface."],
+      "evidenceRefs": ["card-slice:tpci-latam-jtg-positive", "card-slice:tpci-latam-svp184-positive", "card-slice:tpci-latam-por063-positive", "edge:tpci-latam-spanish-card-asset-positive", "observation:obs-tpci-latam-svp184", "decision:D3", "document:verification/RESUME.md"],
+      "openQuestions": ["Which positive LATAM record establishes xJTG independently from base JTG and WEST distribution printings?"],
       "childIssue": 192
     },
     {

@@ -521,6 +521,55 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertEqual(row["bucket"], "positively-excluded")
         self.assertIn("Munchlax", row["bucketBasis"])
 
+    def test_source_first_json_preserves_printed_language_modifier(self):
+        record = {
+            "detailId": "LATAM:SVP LA:184:base",
+            "localName": "Snorlax de Paul",
+            "rawSetCode": "SVP LA",
+            "localCollectorNumber": "184",
+            "cardImageUrl": "https://assets.pokemon.com/SVP_LA_184.png",
+            "setSymbolUrl": None,
+            "productScope": "physical-tcg",
+            "sourceUrl": "https://assets.pokemon.com/SVP_LA_184.png",
+            "providerRecord": {"printId": "LATAM:SVP LA:184:base"},
+        }
+        raw = discovery.canonical_bytes([record])
+        parsed = discovery.parse_list(raw, "source-first-print-json")
+        self.assertEqual(parsed["detailIds"], ["LATAM:SVP LA:184:base"])
+        self.assertEqual(
+            discovery.parse_detail(
+                discovery.canonical_bytes(record),
+                "LATAM:SVP LA:184:base",
+                "source-first-print-json",
+            )["rawSetCode"],
+            "SVP LA",
+        )
+
+    def test_latam_source_records_keep_la_and_es_as_different_codes(self):
+        document = json.loads(
+            (ROOT / "verification" / "source_first_prints.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        records = {row["printId"]: row for row in document["prints"]}
+        self.assertEqual(
+            records["LATAM:SVP LA:184:base"]["localSetCode"], "SVP LA"
+        )
+        self.assertEqual(
+            records["WEST:SVP ES:184:base"]["localSetCode"], "SVP ES"
+        )
+        self.assertEqual(
+            {
+                records["LATAM:JTG LA:117/159:base"]["localSetCode"],
+                records["LATAM:POR LA:063/088:base"]["localSetCode"],
+            },
+            {"JTG LA", "POR LA"},
+        )
+        self.assertNotIn(
+            "LATAM:xJTG LA:117/159:base", records,
+            "xJTG must remain a positive-evidence gap",
+        )
+
     def test_zero_result_is_source_failure_not_absence(self):
         raw = b"""
         <p class="resultNumber">0</p>

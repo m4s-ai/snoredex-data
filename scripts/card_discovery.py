@@ -36,6 +36,7 @@ SCHEMA_PATH = ROOT / "verification" / "card_discovery_schema.json"
 CAPABILITY_PATH = ROOT / "verification" / "source_capability_graph.json"
 IDENTITY_PATH = ROOT / "verification" / "print_identity_dryrun.json"
 CONFIRMED_SOURCES_PATH = ROOT / "verification" / "confirmed_sources.json"
+SOURCE_FIRST_PRINTS_PATH = ROOT / "verification" / "source_first_prints.json"
 RUNS_DIR = ROOT / "verification" / "runs" / "card-discovery"
 OUTPUT_PATH = ROOT / "verification" / "card_discovery_staging.json"
 RECORDS_PATH = ROOT / "verification" / "card_discovery_records.jsonl"
@@ -345,7 +346,7 @@ def parse_official_localized_entries(
 def parse_list(
     raw: bytes, response_format: str = "pokemon-asia-html", raw_locale: str = "it"
 ) -> dict[str, Any]:
-    if response_format == "confirmed-source-json":
+    if response_format in {"confirmed-source-json", "source-first-print-json"}:
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, list):
             raise DiscoveryError("confirmed-source card list did not return an array")
@@ -400,7 +401,7 @@ def parse_detail(
     response_format: str = "pokemon-asia-html",
     set_record: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    if response_format == "confirmed-source-json":
+    if response_format in {"confirmed-source-json", "source-first-print-json"}:
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, dict) or value.get("detailId") != raw_provider_id:
             raise DiscoveryError(f"confirmed-source detail id differs: {raw_provider_id}")
@@ -483,6 +484,7 @@ def validate_contract(
     seen_adapters: set[str] = set()
     seen_slices: set[str] = set()
     seen_retained_units: set[str] = set()
+    seen_retained_prints: set[str] = set()
     active_surfaces: set[str] = set()
 
     for adapter in contract["adapters"]:
@@ -493,7 +495,7 @@ def validate_contract(
         response_format = adapter.get("responseFormat", "pokemon-asia-html")
         if response_format not in {
             "confirmed-source-json", "pokemon-asia-html",
-            "pokemon-official-localized-html", "tcgdex-json",
+            "pokemon-official-localized-html", "source-first-print-json", "tcgdex-json",
         }:
             raise DiscoveryError(f"adapter {adapter_id} has an unsupported response format")
         if response_format == "tcgdex-json" and not adapter.get("setEndpointTemplate"):
@@ -503,9 +505,12 @@ def validate_contract(
         surface = surfaces.get(adapter["surfaceId"])
         if not surface or surface["providerId"] != adapter["providerId"]:
             raise DiscoveryError(f"adapter {adapter_id} does not resolve to its provider surface")
-        retained_replay = response_format == "confirmed-source-json"
+        blocked_replay = (
+            response_format == "confirmed-source-json"
+            and surface["state"] == "blocked-by-browser"
+        )
         if surface["state"] not in {"active", "incomplete"} and not (
-            retained_replay and surface["state"] == "blocked-by-browser"
+            blocked_replay
         ):
             raise DiscoveryError(
                 f"adapter {adapter_id} requires a usable registered surface {adapter['surfaceId']}"
@@ -517,7 +522,8 @@ def validate_contract(
                 raise DiscoveryError(f"duplicate sliceId {slice_id}")
             seen_slices.add(slice_id)
             retained_unit_ids = slice_row.get("retainedUnitIds", [])
-            if retained_replay:
+            retained_print_ids = slice_row.get("retainedPrintIds", [])
+            if response_format == "confirmed-source-json":
                 if len(slice_row["nameQueries"]) != 1 or not retained_unit_ids:
                     raise DiscoveryError(
                         f"slice {slice_id} needs one name query and retained unit ids"
@@ -536,9 +542,29 @@ def validate_contract(
                     raise DiscoveryError(
                         f"slice {slice_id} names unknown confirmed units: {sorted(missing_units)}"
                     )
-            elif retained_unit_ids:
+            elif response_format == "source-first-print-json":
+                if len(slice_row["nameQueries"]) != 1 or not retained_print_ids:
+                    raise DiscoveryError(
+                        f"slice {slice_id} needs one name query and retained print ids"
+                    )
+                duplicates = seen_retained_prints.intersection(retained_print_ids)
+                if duplicates:
+                    raise DiscoveryError(
+                        f"retained prints occur in more than one slice: {sorted(duplicates)}"
+                    )
+                seen_retained_prints.update(retained_print_ids)
+                known_prints = {
+                    row["printId"] for row in read_json(SOURCE_FIRST_PRINTS_PATH)["prints"]
+                }
+                missing_prints = set(retained_print_ids) - known_prints
+                if missing_prints:
+                    raise DiscoveryError(
+                        f"slice {slice_id} names unknown source-first prints: "
+                        f"{sorted(missing_prints)}"
+                    )
+            elif retained_unit_ids or retained_print_ids:
                 raise DiscoveryError(
-                    f"slice {slice_id} may use retainedUnitIds only with confirmed-source-json"
+                    f"slice {slice_id} uses retained ids with a live-response adapter"
                 )
             edge = edges.get(slice_row["coverageEdgeId"])
             if not edge or edge["surfaceId"] != adapter["surfaceId"]:
@@ -1022,6 +1048,10 @@ def build_projection(
                     "was replayed and accounted; marketplace or provider-universe completeness "
                     "is not claimed"
                     if response_format == "confirmed-source-json" else
+                    "every reviewed retained positive source-first print was replayed and "
+                    "accounted; neighbouring cards, variants, products and era completeness "
+                    "are not claimed"
+                    if response_format == "source-first-print-json" else
                     "every positive detail returned by the bounded provider-native name query "
                     "was retained and accounted; historical or provider-universe completeness "
                     "is not claimed"
@@ -1163,6 +1193,12 @@ def new_manifest(
                 query_parameters.update({
                     "retainedUnitIds": slice_row["retainedUnitIds"],
                     "sourceRecord": "verification/confirmed_sources.json",
+                    "pagination": "exact-reviewed-positive-frontier",
+                })
+            elif response_format == "source-first-print-json":
+                query_parameters.update({
+                    "retainedPrintIds": slice_row["retainedPrintIds"],
+                    "sourceRecord": "verification/source_first_prints.json",
                     "pagination": "exact-reviewed-positive-frontier",
                 })
             else:
@@ -1524,6 +1560,67 @@ def refresh_official_localized_request(
             save_manifest(run_dir, manifest)
 
 
+def refresh_source_first_print_request(
+    run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
+    slice_row: dict[str, Any],
+) -> None:
+    """Replay exact source-first print records without re-fetching their evidence assets."""
+    prints_by_id = {
+        row["printId"]: row for row in read_json(SOURCE_FIRST_PRINTS_PATH)["prints"]
+    }
+    source_records = []
+    for print_id in slice_row["retainedPrintIds"]:
+        retained = prints_by_id[print_id]
+        source_records.append({
+            "detailId": print_id,
+            "localName": retained["name"],
+            "rawSetCode": retained["localSetCode"],
+            "localCollectorNumber": retained["localNumber"],
+            "cardImageUrl": retained.get("cardImageUrl") or retained.get("sourceUrl"),
+            "setSymbolUrl": None,
+            "productScope": "physical-tcg",
+            "sourceUrl": retained["sourceUrl"],
+            "providerRecord": retained,
+        })
+
+    query = slice_row["nameQueries"][0]
+    if not request["pages"]:
+        raw = canonical_bytes(source_records)
+        relative = f"raw/{request['sliceId']}/query-1.json"
+        url = request["endpoint"] + "?" + urllib.parse.urlencode({
+            "snoredexRetained": ",".join(slice_row["retainedPrintIds"])
+        })
+        request["pages"].append({
+            "query": query, "pageNo": 1, "url": url,
+            "rawPath": relative,
+            "responseHash": retain_response(run_dir, relative, raw),
+            **parse_list(raw, "source-first-print-json"),
+        })
+        request["checkpoint"]["completedPages"] = [f"{query}:1"]
+        save_manifest(run_dir, manifest)
+
+    details = {row["rawProviderId"]: row for row in request["details"]}
+    for source_record in source_records:
+        print_id = source_record["detailId"]
+        if print_id in details:
+            continue
+        raw = canonical_bytes(source_record)
+        safe_print_id = re.sub(r"[^A-Za-z0-9._-]+", "_", print_id)
+        relative = f"raw/{request['sliceId']}/details/{safe_print_id}.json"
+        detail = {
+            "rawProviderId": print_id,
+            "url": source_record["sourceUrl"],
+            "rawPath": relative,
+            "responseHash": retain_response(run_dir, relative, raw),
+            "recordSource": "source-first-positive-frontier",
+            "parsedRecordHash": content_hash(source_record),
+        }
+        request["details"].append(detail)
+        details[print_id] = detail
+        request["checkpoint"]["completedDetailIds"] = sorted(details)
+        save_manifest(run_dir, manifest)
+
+
 def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
     if not RUN_ID_PATTERN.fullmatch(run_id):
         raise DiscoveryError("--run-id must use YYYYMMDDTHHMMSSZ")
@@ -1580,6 +1677,10 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
                 refresh_tcgdex_request(run_dir, manifest, request, adapter, slice_row)
             elif response_format == "confirmed-source-json":
                 refresh_confirmed_source_request(
+                    run_dir, manifest, request, slice_row
+                )
+            elif response_format == "source-first-print-json":
+                refresh_source_first_print_request(
                     run_dir, manifest, request, slice_row
                 )
             else:
