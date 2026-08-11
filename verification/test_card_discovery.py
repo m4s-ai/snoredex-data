@@ -323,6 +323,74 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertTrue(all(row["locality"] == "WEST" for row in english))
         self.assertTrue(all("distributionRegion" not in row["sourceRecord"] for row in english))
 
+    def test_committed_shared_western_slices_preserve_locale_identity(self):
+        records = [
+            json.loads(line) for line in (ROOT / "verification" / "card_discovery_records.jsonl")
+            .read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+        expected = {
+            "fr": ("French", "Ronflex", 38, 34),
+            "de": ("German", "Relaxo", 40, 36),
+            "es": ("Spanish", "Snorlax", 29, 25),
+        }
+        for locale, (language, local_name, total, physical_total) in expected.items():
+            rows = [
+                row for row in records
+                if row["stableKey"].startswith(f"tcgdex|tcgdex-api|{locale}|")
+            ]
+            physical = [
+                row for row in rows
+                if row["sourceRecord"]["productScope"] == "physical-tcg"
+            ]
+            pocket = [
+                row for row in rows
+                if row["sourceRecord"]["productScope"] == "digital-pocket"
+            ]
+            self.assertEqual(len(rows), total)
+            self.assertEqual(len(physical), physical_total)
+            self.assertEqual(len(pocket), 4)
+            self.assertTrue(all(row["raw"]["localName"] == local_name for row in rows))
+            self.assertTrue(all(row["bucket"] == "matched" for row in physical))
+            self.assertTrue(all(row["bucket"] == "positively-excluded" for row in pocket))
+            self.assertTrue(all(row["sourceRecord"]["setName"] for row in rows))
+            self.assertTrue(all(
+                set(row["sourceRecord"]["providerRecord"]["legal"])
+                == {"standard", "expanded"}
+                for row in rows
+            ))
+            self.assertTrue(all(
+                row["sourceUrl"].startswith(f"https://api.tcgdex.net/v2/{locale}/cards/")
+                for row in rows
+            ))
+            self.assertTrue(all(
+                row["normalizationProposal"]["targetCardReleaseId"].startswith(
+                    f"RELEASE:WEST:{language}:"
+                )
+                for row in physical
+            ))
+
+        tg10 = {
+            row["rawLocale"]: row for row in records
+            if row["rawProviderId"] == "swsh11.5tg-TG10"
+            and row["rawLocale"] in expected
+        }
+        self.assertEqual(
+            {
+                locale: (
+                    row["sourceRecord"]["setName"],
+                    row["sourceRecord"]["providerRecord"]["attacks"][0]["name"],
+                )
+                for locale, row in tg10.items()
+            },
+            {
+                "fr": ("Origine Perdue Galerie de Dresseurs", "Ronflement Retentissant"),
+                "de": ("Verlorener Ursprung Trainer-Galerie", "Dumpfes Geschnarche"),
+                "es": ("Origen Perdido Galería de Entrenador", "Ronquido Descomunal"),
+            },
+        )
+        self.assertNotIn("LATAM", tg10["es"]["normalizationProposal"]["targetCardReleaseId"])
+
     def test_committed_italian_slice_accounts_for_filter_without_claiming_history(self):
         records = [
             json.loads(line) for line in (ROOT / "verification" / "card_discovery_records.jsonl")

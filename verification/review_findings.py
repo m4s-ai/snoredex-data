@@ -1412,6 +1412,87 @@ def collect() -> None:
             or row["sourceRecord"].get("setSeries", {}).get("id") != "tcgp"
             or not row.get("setResponseHash")
         ]
+        western_locale_expectations = {
+            "fr": ("French", "Ronflex", 38, 34),
+            "de": ("German", "Relaxo", 40, 36),
+            "es": ("Spanish", "Snorlax", 29, 25),
+        }
+        western_locale_faults = []
+        for locale, (language, local_name, total, physical_total) in (
+            western_locale_expectations.items()
+        ):
+            rows = [
+                row for row in card_records
+                if row["providerId"] == "tcgdex" and row["rawLocale"] == locale
+            ]
+            physical = [
+                row for row in rows
+                if row["sourceRecord"].get("productScope") == "physical-tcg"
+            ]
+            excluded = [row for row in rows if row["bucket"] == "positively-excluded"]
+            if (
+                len(rows) != total or len(physical) != physical_total or len(excluded) != 4
+                or any(row["raw"].get("localName") != local_name for row in rows)
+                or any(not row["sourceRecord"].get("setName") for row in rows)
+                or any(
+                    set(row["sourceRecord"].get("providerRecord", {}).get("legal", {}))
+                    != {"standard", "expanded"}
+                    for row in rows
+                )
+                or any(row["bucket"] != "matched" for row in physical)
+                or any(
+                    not (row["normalizationProposal"].get("targetCardReleaseId") or "").startswith(
+                        f"RELEASE:WEST:{language}:"
+                    )
+                    for row in physical
+                )
+                or any(
+                    not row["sourceUrl"].startswith(
+                        f"https://api.tcgdex.net/v2/{locale}/cards/"
+                    )
+                    for row in rows
+                )
+            ):
+                western_locale_faults.append(locale)
+        spanish_targets = [
+            row["normalizationProposal"].get("targetCardReleaseId") or ""
+            for row in card_records
+            if row["providerId"] == "tcgdex" and row["rawLocale"] == "es"
+        ]
+        if any("LATAM" in target for target in spanish_targets):
+            western_locale_faults.append("es-cross-locality")
+        expected_tg10 = {
+            "fr": ("Origine Perdue Galerie de Dresseurs", "Ronflement Retentissant"),
+            "de": ("Verlorener Ursprung Trainer-Galerie", "Dumpfes Geschnarche"),
+            "es": ("Origen Perdido Galería de Entrenador", "Ronquido Descomunal"),
+        }
+        tg10_rows = {
+            row["rawLocale"]: row for row in card_records
+            if row["rawProviderId"] == "swsh11.5tg-TG10"
+            and row["rawLocale"] in expected_tg10
+        }
+        if {
+            locale: (
+                row["sourceRecord"].get("setName"),
+                (row["sourceRecord"].get("providerRecord", {}).get("attacks") or [{}])[0]
+                    .get("name"),
+            )
+            for locale, row in tg10_rows.items()
+        } != expected_tg10:
+            western_locale_faults.append("localized-tg10")
+        western_archive_gaps = {
+            row["gapId"]: row for row in card_contract["gaps"]
+            if row["gapId"] in {
+                "official-french-card-archive",
+                "official-german-card-archive",
+                "official-european-spanish-card-archive",
+            }
+        }
+        if len(western_archive_gaps) != 3 or any(
+            row["terminalState"] != "needs-evidence"
+            for row in western_archive_gaps.values()
+        ):
+            western_locale_faults.append("official-archive-gaps")
         italian_rows = [
             row for row in card_records
             if row["providerId"] == "pokemon-official" and row["rawLocale"] == "it"
@@ -1458,7 +1539,7 @@ def collect() -> None:
             "FAIL",
             not card_provenance_faults and not card_preservation_faults
             and svqp_ok and not munchlax_faults and pocket_rows and not pocket_faults
-            and italian_slice_ok
+            and not western_locale_faults and italian_slice_ok
             and not missing_card_gaps
             and "--resume" in card_source and "source-failed" in card_source
             and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
@@ -1468,6 +1549,7 @@ def collect() -> None:
             f"provenance={card_provenance_faults[:3]}, preservation={card_preservation_faults[:3]}, "
             f"svqp={svqp_ok}, munchlax={munchlax_faults[:3]}, "
             f"pocket={pocket_faults[:3] if pocket_rows else ['missing-positive-exclusion']}, "
+            f"westernLocales={western_locale_faults[:3]}, "
             f"italian={italian_faults[:3] if italian_rows else ['missing-positive-slice']}, "
             f"missingGaps={missing_card_gaps}",
         )

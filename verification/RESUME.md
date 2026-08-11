@@ -434,6 +434,23 @@ positive slice, while the exact `pl2/111` counterexample keeps historical filter
 Across all three active card adapters the run accounts for 100 records: 62 matched, 32 new
 candidates and six positive exclusions, with no run error.
 
+The third child loop, #190, uses the shared strict-equality TCGdex route for French `Ronflex`,
+German `Relaxo`, and Spanish `Snorlax`. The retained responses account for 38 French, 40 German,
+and 29 Spanish rows, with every referenced card and set detail preserved. The localized detail
+objects keep source paths, collector numbers, local set branding, translations, the provider's
+tournament-legality object, and series identity. That `legal` object is not the printed
+copyright/legal line and cannot distinguish Europe from LATAM; the missing physical discriminator
+remains an explicit gap. All physical rows match an existing same-language ADR-0001 release after
+the three reviewed TG10 mappings; four source-identified Pokémon TCG Pocket rows per locale are
+positively excluded. Across all six active slices final run `20260811T113148Z` accounts for 207
+records: 157 matched, 32 Taiwan candidates and eighteen positive exclusions, with no run error.
+
+The TCGdex `es` locale carries no physical Europe-versus-LATAM discriminator. Its matches are
+therefore constrained to pre-existing `WEST/es-ES` releases and cannot create or populate
+`LATAM/es-419`. The French, German, and European-Spanish official archive routes remain explicit
+`needs-evidence` gaps. `west-fr`, `west-de`, and `west-es-eu` are terminal only as complete
+positive slices, never as complete historical catalogues.
+
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
 Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.

@@ -133,6 +133,33 @@ candidates, six positively excluded, zero ambiguous or needs-evidence records, a
 errors. The `west-it` matrix track is terminal as `complete-positive-slice` while historical gaps
 remain explicit.
 
+## Shared French, German, and European-Spanish run result
+
+Run `20260811T113148Z` activates the same strict-equality TCGdex adapter for French `Ronflex`,
+German `Relaxo`, and Spanish `Snorlax`. It retains 38 French, 40 German, and 29 Spanish list rows,
+every referenced detail, and every referenced set detail. The complete checkpoints account for
+those three responses only; they do not describe the provider's historical population.
+
+The retained details preserve each locale's source URL, name, collector number, localized set
+branding, translations, source-reported tournament-legality object, and source-native set/series
+identity. TCGdex does not expose the physical card's printed copyright/legal line, so that regional
+discriminator stays in the explicit Western gap. After three reviewed TG10 mappings, every
+physical record in the new slices matches one existing same-language ADR-0001 release. Four
+Pokémon TCG Pocket rows per locale are positively excluded from the physical-card population
+through their retained `tcgp` set-series identity.
+
+TCGdex's `es` locale contains no physical Europe-versus-LATAM discriminator. Its rows therefore
+match only pre-existing `WEST/es-ES` identities; the slice cannot create or populate a
+`LATAM/es-419` release. Missing official French, German, and European-Spanish archive routes remain
+three explicit `needs-evidence` gaps, and no omitted record or era becomes a negative verdict.
+
+Under the reviewed mappings it accounts for 207 records overall: 157 matched, 32 Taiwan
+candidates, eighteen positively excluded, zero ambiguous or needs-evidence records, and zero run
+errors. Against published run `20260811T105030Z`, the deterministic record delta is 107 added, 40
+source-record changes, zero disappeared, and zero rekey candidates. `west-fr`, `west-de`, and
+`west-es-eu` are terminal as
+`complete-positive-slice`; their official-archive and regional-distribution gaps stay open.
+
 ## Consequences
 
 The repository can now discover a positive official card record absent from the Cardmarket-derived
@@ -140,10 +167,11 @@ candidate universe, reproduce each versioned run without network access, resume 
 and expose new/ambiguous records without changing evidence verdicts. The remaining 32-candidate
 Taiwan queue is intentionally not auto-merged: resolving local set-symbol aliases, local
 collector-number equivalence, TW/HK relationships, and shared works belongs to the locality
-reconciliation loops. Likewise, the Italian filter's twelve matches cannot close eras that the
-publisher response demonstrably omits.
+reconciliation loops. Likewise, the Italian filter's twelve matches and the three shared Western
+locale slices cannot close eras or official archives that their retained responses do not cover.
 
 `scripts/card_discovery.py --check`, its regression tests, independent review checks N14/N15, and
 the cross-platform release gate enforce raw hashes, page/detail accounting, native identifier
 preservation, the `svQP F` regression, positive Munchlax/Pocket exclusion, checkpoint semantics,
-and the verdict-mutation boundary.
+same-language Western matching, the WEST/es-ES versus LATAM/es-419 boundary, and the
+verdict-mutation boundary.

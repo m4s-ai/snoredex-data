@@ -80,18 +80,18 @@
           "start": null,
           "end": null,
           "state": "positive-observations-only",
-          "basis": "The retained French TCGdex set slice is a positive set-name frontier with no historical completeness claim.",
-          "evidenceRefs": ["slice:tcgdex-fr-sets", "edge:tcgdex-west-positive"],
+          "basis": "The retained French TCGdex set slice and exact-name Ronflex card slice are positive frontiers with no historical completeness claim.",
+          "evidenceRefs": ["slice:tcgdex-fr-sets", "card-slice:tcgdex-fr-snorlax", "edge:tcgdex-west-positive"],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "ready-for-child",
-        "sourceRefs": ["slice:tcgdex-fr-sets", "edge:tcgdex-west-positive"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
-        "retryCondition": "Retain a French official archive detail fixture before adding that route; TCGdex card rows stay positive-only."
+        "state": "complete-positive-slice",
+        "sourceRefs": ["slice:tcgdex-fr-sets", "card-slice:tcgdex-fr-snorlax", "edge:tcgdex-west-positive"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-french-card-archive", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Rerun the exact-name French slice for deltas and register a bounded official French route before making any historical-coverage claim."
       },
-      "evidenceRefs": ["unit:U0001", "slice:tcgdex-fr-sets", "edge:tcgdex-west-positive"],
+      "evidenceRefs": ["unit:U0001", "slice:tcgdex-fr-sets", "card-slice:tcgdex-fr-snorlax", "edge:tcgdex-west-positive"],
       "openQuestions": ["Which historical and promotional eras are absent from each positive catalogue surface?"],
       "childIssue": 190
     },
@@ -113,18 +113,18 @@
           "start": null,
           "end": null,
           "state": "positive-observations-only",
-          "basis": "The retained German TCGdex set slice is fully accounted but does not close missing eras or cards.",
-          "evidenceRefs": ["slice:tcgdex-de-sets", "edge:tcgdex-west-positive"],
+          "basis": "The retained German TCGdex set slice and exact-name Relaxo card slice are fully accounted but do not close missing eras or cards.",
+          "evidenceRefs": ["slice:tcgdex-de-sets", "card-slice:tcgdex-de-snorlax", "edge:tcgdex-west-positive"],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "ready-for-child",
-        "sourceRefs": ["slice:tcgdex-de-sets", "edge:tcgdex-west-positive"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
-        "retryCondition": "Retain a German official archive detail fixture and activate a bounded positive card slice."
+        "state": "complete-positive-slice",
+        "sourceRefs": ["slice:tcgdex-de-sets", "card-slice:tcgdex-de-snorlax", "edge:tcgdex-west-positive"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-german-card-archive", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Rerun the exact-name German slice for deltas and register a bounded official German route before making any historical-coverage claim."
       },
-      "evidenceRefs": ["unit:U0002", "slice:tcgdex-de-sets", "edge:tcgdex-west-positive"],
+      "evidenceRefs": ["unit:U0002", "slice:tcgdex-de-sets", "card-slice:tcgdex-de-snorlax", "edge:tcgdex-west-positive"],
       "openQuestions": ["Which product-only and stamped releases fall outside expansion card archives?"],
       "childIssue": 190
     },
@@ -188,18 +188,18 @@
           "start": null,
           "end": null,
           "state": "positive-observations-only",
-          "basis": "The retained Spanish TCGdex slice does not identify same-language regional printings, so it is routed only to the established European legacy track.",
-          "evidenceRefs": ["slice:tcgdex-es-sets", "edge:tcgdex-west-positive", "decision:D3"],
+          "basis": "The retained Spanish TCGdex set and exact-name card slices do not identify same-language regional printings, so matches are routed only to pre-existing European legacy identities and never to LATAM.",
+          "evidenceRefs": ["slice:tcgdex-es-sets", "card-slice:tcgdex-es-eu-snorlax", "edge:tcgdex-west-positive", "decision:D3"],
           "absenceAllowed": false
         }
       ],
       "discovery": {
-        "state": "ready-for-child",
-        "sourceRefs": ["slice:tcgdex-es-sets", "edge:tcgdex-west-positive", "decision:D3"],
-        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:western-locality-card-discovery"],
-        "retryCondition": "Activate an es-ES slice with a European positive fixture and reject any automatic reuse for LATAM."
+        "state": "complete-positive-slice",
+        "sourceRefs": ["slice:tcgdex-es-sets", "card-slice:tcgdex-es-eu-snorlax", "edge:tcgdex-west-positive", "decision:D3"],
+        "gapRefs": ["source-gap:official-western-catalogue-index", "card-gap:official-european-spanish-card-archive", "card-gap:western-locality-card-discovery"],
+        "retryCondition": "Rerun the exact-name es slice for deltas; admit only matches to pre-existing WEST/es-ES identities and require a positive regional record for any LATAM/es-419 row."
       },
-      "evidenceRefs": ["unit:U0003", "slice:tcgdex-es-sets", "decision:D3"],
+      "evidenceRefs": ["unit:U0003", "slice:tcgdex-es-sets", "card-slice:tcgdex-es-eu-snorlax", "decision:D3"],
       "openQuestions": ["Which product pages distinguish European distribution from LATAM after March 2025?"],
       "childIssue": 190
     },
