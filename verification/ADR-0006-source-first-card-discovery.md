@@ -112,6 +112,27 @@ new candidates, six positively excluded, and zero run errors. Historical runs no
 contract snapshots so later adapter versions can replay every checkpoint under its own immutable
 contract before computing deltas.
 
+## Italian official-archive run result
+
+Run `20260811T105030Z` adds the publisher's Italian `cardName=Snorlax` filter as a bounded
+positive-only slice. The one retained server response exposes twelve exact localized detail paths,
+Italian card names and `cms2-it-it` card images. All twelve records match reviewed ADR-0001 Italian
+releases; no verdict or finish state changes.
+
+This adapter deliberately treats each result entry as the provider-native record. The complete
+checkpoint means only that all twelve entries in that retained response were parsed and accounted.
+It does not walk guessed detail paths or turn the filter into a historical manifest.
+
+That boundary has a concrete positive counterexample: the independently reachable official
+`pl2/111` page establishes Italian RR 111, but the same official Snorlax filter does not return its
+path. The omission is therefore recorded as `official-italian-archive-filter-coverage`, a
+`needs-evidence` gap. It proves the filter is incomplete; it says nothing negative about any card.
+
+The run refreshes all active slices and accounts for 100 records overall: 62 matched, 32 new
+candidates, six positively excluded, zero ambiguous or needs-evidence records, and zero run
+errors. The `west-it` matrix track is terminal as `complete-positive-slice` while historical gaps
+remain explicit.
+
 ## Consequences
 
 The repository can now discover a positive official card record absent from the Cardmarket-derived
@@ -119,7 +140,8 @@ candidate universe, reproduce each versioned run without network access, resume 
 and expose new/ambiguous records without changing evidence verdicts. The remaining 32-candidate
 Taiwan queue is intentionally not auto-merged: resolving local set-symbol aliases, local
 collector-number equivalence, TW/HK relationships, and shared works belongs to the locality
-reconciliation loops.
+reconciliation loops. Likewise, the Italian filter's twelve matches cannot close eras that the
+publisher response demonstrably omits.
 
 `scripts/card_discovery.py --check`, its regression tests, independent review checks N14/N15, and
 the cross-platform release gate enforce raw hashes, page/detail accounting, native identifier

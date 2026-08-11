@@ -1312,13 +1312,20 @@ def collect() -> None:
             or row["accounting"]["fetched"] != len(discovered_by_slice[row["sliceId"]])
         ]
         card_adapters = {row["adapterId"]: row for row in card_contract["adapters"]}
+        expected_query_fields = {
+            "pokemon-asia-html": {"nameQueries", "cardType", "regulation", "pageParameter"},
+            "tcgdex-json": {"nameQueries", "nameFilter", "pagination"},
+            "pokemon-official-localized-html": {
+                "nameQueries", "nameFilter", "format", "pagination", "cacheKeyParameter",
+            },
+        }
         query_seed_faults = [
             request["sliceId"] for request in card_manifest["requests"]
-            if set(request["queryParameters"]) != (
-                {"nameQueries", "nameFilter", "pagination"}
-                if card_adapters[request["adapterId"]].get("responseFormat") == "tcgdex-json"
-                else {"nameQueries", "cardType", "regulation", "pageParameter"}
-            )
+            if set(request["queryParameters"]) != expected_query_fields[
+                card_adapters[request["adapterId"]].get(
+                    "responseFormat", "pokemon-asia-html"
+                )
+            ]
             or not request["queryParameters"]["nameQueries"]
             or (
                 card_adapters[request["adapterId"]].get("responseFormat") == "tcgdex-json"
@@ -1328,12 +1335,25 @@ def collect() -> None:
                         != "disabled-provider-default"
                 )
             )
+            or (
+                card_adapters[request["adapterId"]].get("responseFormat")
+                    == "pokemon-official-localized-html"
+                and (
+                    request["queryParameters"].get("nameFilter")
+                        != "provider-name-search"
+                    or request["queryParameters"].get("format") != "unlimited"
+                    or request["queryParameters"].get("pagination")
+                        != "single-retained-response-no-archive-closure"
+                    or request["queryParameters"].get("cacheKeyParameter")
+                        != "snoredexRun"
+                )
+            )
         ]
         card_ids = [row["recordId"] for row in card_records]
         card_keys = [row["stableKey"] for row in card_records]
         check(
             "N14",
-            "Card discovery retains and accounts for every provider-native detail before matching",
+            "Card discovery retains and accounts for every provider-native record before matching",
             "FAIL",
             not card_raw_hash_faults and not card_slice_faults and not query_seed_faults
             and card_manifest["status"] == "complete"
@@ -1392,6 +1412,39 @@ def collect() -> None:
             or row["sourceRecord"].get("setSeries", {}).get("id") != "tcgp"
             or not row.get("setResponseHash")
         ]
+        italian_rows = [
+            row for row in card_records
+            if row["providerId"] == "pokemon-official" and row["rawLocale"] == "it"
+        ]
+        expected_italian_ids = {
+            "svp/51", "svp/122", "svp/184", "smp/SM169",
+            "swshp/SWSH032", "swshp/SWSH068", "swshp/SWSH119", "xy0/26",
+            "swsh1/140", "swsh1/141", "swsh1/142", "swsh1/197",
+        }
+        italian_faults = [
+            row["recordId"] for row in italian_rows
+            if row["bucket"] != "matched"
+            or row["sourceRecord"].get("recordSource")
+                != "localized-archive-list-entry"
+            or not row["sourceRecord"].get("detailPath", "").startswith(
+                "/it/gcc/archivio-carte/series/"
+            )
+            or "cms2-it-it/img/cards/" not in row["raw"].get("cardImageUrl", "")
+            or row["detailResponseHash"] not in row["listResponseHashes"]
+        ]
+        italian_gap = next(
+            (row for row in card_contract["gaps"]
+             if row["gapId"] == "official-italian-archive-filter-coverage"),
+            None,
+        )
+        italian_slice_ok = (
+            {row["rawProviderId"] for row in italian_rows} == expected_italian_ids
+            and not italian_faults
+            and all(row["rawProviderId"] != "pl2/111" for row in italian_rows)
+            and italian_gap is not None
+            and "pl2/111" in italian_gap["reason"]
+            and italian_gap["terminalState"] == "needs-evidence"
+        )
         card_gap_text = " ".join(
             f"{row['track']} {row['reason']}" for row in card_contract["gaps"]
         ).lower()
@@ -1405,6 +1458,7 @@ def collect() -> None:
             "FAIL",
             not card_provenance_faults and not card_preservation_faults
             and svqp_ok and not munchlax_faults and pocket_rows and not pocket_faults
+            and italian_slice_ok
             and not missing_card_gaps
             and "--resume" in card_source and "source-failed" in card_source
             and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
@@ -1414,6 +1468,7 @@ def collect() -> None:
             f"provenance={card_provenance_faults[:3]}, preservation={card_preservation_faults[:3]}, "
             f"svqp={svqp_ok}, munchlax={munchlax_faults[:3]}, "
             f"pocket={pocket_faults[:3] if pocket_rows else ['missing-positive-exclusion']}, "
+            f"italian={italian_faults[:3] if italian_rows else ['missing-positive-slice']}, "
             f"missingGaps={missing_card_gaps}",
         )
 
@@ -2436,7 +2491,7 @@ def collect() -> None:
         secret_pattern = re.compile(
             r"(?:api[_-]?key|passwd|password|Bearer\s+[A-Za-z0-9._-]{8,}|Authorization:|Cookie:)"
             r"|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}"
-            r"|C:\\Users\\|/Users/[a-z]|/home/[a-z]+/",
+            r"|C:\\Users\\|(?<![A-Za-z0-9._-])/(?:Users/[a-z]|home/[a-z]+/)",
             re.IGNORECASE,
         )
         def sensitive_matches(data: bytes, label: str) -> list[str]:

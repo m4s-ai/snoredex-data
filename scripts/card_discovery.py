@@ -41,6 +41,11 @@ RECORDS_PATH = ROOT / "verification" / "card_discovery_records.jsonl"
 RUN_ID_PATTERN = re.compile(r"^[0-9]{8}T[0-9]{6}Z$")
 DETAIL_PATH_PATTERN = re.compile(r"/card-search/detail/([0-9]+)/?")
 SET_SYMBOL_PATTERN = re.compile(r"_exp_([^./]+)\.(?:png|jpe?g|webp)$", re.IGNORECASE)
+OFFICIAL_ARCHIVE_PATH_PATTERN = re.compile(
+    r"^/(?P<locale>[a-z]{2})/gcc/archivio-carte/series/"
+    r"(?P<set>[^/]+)/(?P<number>[^/]+)/?$",
+    re.IGNORECASE,
+)
 
 
 class DiscoveryError(ValueError):
@@ -142,6 +147,58 @@ class AsiaDetailParser(HTMLParser):
     def handle_data(self, data: str) -> None:
         if self._capture is not None and not self._inside_evolve_marker and data.strip():
             self._buffer.append(data.strip())
+
+
+class OfficialLocalizedListParser(HTMLParser):
+    """Retain provider-native Italian archive result entries without claiming archive closure."""
+
+    def __init__(self, raw_locale: str = "it") -> None:
+        super().__init__(convert_charrefs=True)
+        self.raw_locale = raw_locale
+        self.query_echo: str | None = None
+        self.entries: list[dict[str, Any]] = []
+        self.has_results_container = False
+        self._inside_results = False
+        self._current: dict[str, Any] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        if tag == "input" and values.get("id") == "cardName":
+            self.query_echo = values.get("value")
+        if tag == "ul" and values.get("id") == "cardResults":
+            self.has_results_container = True
+            self._inside_results = True
+            return
+        if not self._inside_results:
+            return
+        if tag == "a" and values.get("href"):
+            href = values["href"] or ""
+            path = urllib.parse.urlparse(href).path
+            match = OFFICIAL_ARCHIVE_PATH_PATTERN.fullmatch(path)
+            if match and match.group("locale").lower() == self.raw_locale.lower():
+                raw_set_code = match.group("set")
+                collector_number = match.group("number")
+                self._current = {
+                    "detailId": f"{raw_set_code}/{collector_number}",
+                    "localName": None,
+                    "rawSetCode": raw_set_code,
+                    "localCollectorNumber": collector_number,
+                    "cardImageUrl": None,
+                    "setSymbolUrl": None,
+                    "productScope": "physical-tcg",
+                    "detailPath": path,
+                    "recordSource": "localized-archive-list-entry",
+                }
+        elif tag == "img" and self._current is not None:
+            self._current["cardImageUrl"] = values.get("src")
+            self._current["localName"] = values.get("alt")
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "a" and self._current is not None:
+            self.entries.append(self._current)
+            self._current = None
+        elif tag == "ul" and self._inside_results:
+            self._inside_results = False
 
 
 def read_json(path: Path) -> Any:
@@ -268,7 +325,25 @@ def raw_key(provider_id: str, surface_id: str, raw_locale: str, raw_provider_id:
     return "|".join((provider_id, surface_id, raw_locale, raw_provider_id))
 
 
-def parse_list(raw: bytes, response_format: str = "pokemon-asia-html") -> dict[str, Any]:
+def parse_official_localized_entries(
+    raw: bytes, raw_locale: str = "it"
+) -> tuple[str | None, list[dict[str, Any]]]:
+    text = raw.decode("utf-8-sig")
+    if "Pardon Our Interruption" in text:
+        raise DiscoveryError("official localized archive returned an access challenge")
+    parser = OfficialLocalizedListParser(raw_locale)
+    parser.feed(text)
+    if not parser.has_results_container:
+        raise DiscoveryError("official localized archive lacks its card result container")
+    keys = [row["detailId"] for row in parser.entries]
+    if len(keys) != len(set(keys)):
+        raise DiscoveryError("official localized archive returned duplicate detail paths")
+    return parser.query_echo, parser.entries
+
+
+def parse_list(
+    raw: bytes, response_format: str = "pokemon-asia-html", raw_locale: str = "it"
+) -> dict[str, Any]:
     if response_format == "tcgdex-json":
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, list):
@@ -282,6 +357,13 @@ def parse_list(raw: bytes, response_format: str = "pokemon-asia-html") -> dict[s
             "resultCount": len(value),
             "totalPages": 1,
             "detailIds": list(dict.fromkeys(detail_ids)),
+        }
+    if response_format == "pokemon-official-localized-html":
+        _, entries = parse_official_localized_entries(raw, raw_locale)
+        return {
+            "resultCount": len(entries),
+            "totalPages": 1,
+            "detailIds": [row["detailId"] for row in entries],
         }
     if response_format != "pokemon-asia-html":
         raise DiscoveryError(f"unsupported card response format: {response_format}")
@@ -336,6 +418,14 @@ def parse_detail(
                 "releaseDate": set_record.get("releaseDate"),
             },
         }
+    if response_format == "pokemon-official-localized-html":
+        _, entries = parse_official_localized_entries(raw)
+        matches = [row for row in entries if row["detailId"] == raw_provider_id]
+        if len(matches) != 1:
+            raise DiscoveryError(
+                f"official localized list does not contain one {raw_provider_id} entry"
+            )
+        return matches[0]
     if response_format != "pokemon-asia-html":
         raise DiscoveryError(f"unsupported card response format: {response_format}")
     parser = AsiaDetailParser()
@@ -380,7 +470,9 @@ def validate_contract(
             raise DiscoveryError(f"duplicate adapterId {adapter_id}")
         seen_adapters.add(adapter_id)
         response_format = adapter.get("responseFormat", "pokemon-asia-html")
-        if response_format not in {"pokemon-asia-html", "tcgdex-json"}:
+        if response_format not in {
+            "pokemon-asia-html", "pokemon-official-localized-html", "tcgdex-json"
+        }:
             raise DiscoveryError(f"adapter {adapter_id} has an unsupported response format")
         if response_format == "tcgdex-json" and not adapter.get("setEndpointTemplate"):
             raise DiscoveryError(f"adapter {adapter_id} requires a set detail endpoint")
@@ -721,7 +813,7 @@ def build_projection(
                 raw = checked_raw_path(run_dir, page["rawPath"]).read_bytes()
                 if content_hash(raw) != page["responseHash"]:
                     raise DiscoveryError(f"list response hash mismatch: {page['rawPath']}")
-                parsed = parse_list(raw, response_format)
+                parsed = parse_list(raw, response_format, slice_row["rawLocale"])
                 if parsed != {
                     "resultCount": page["resultCount"],
                     "totalPages": page["totalPages"],
@@ -921,10 +1013,12 @@ def build_latest(
     return previous, directories[-1]
 
 
-def fetch_bytes(url: str) -> bytes:
-    request = urllib.request.Request(
-        url, headers={"User-Agent": "Snoredex-Data/1.0 source-first card discovery"}
-    )
+def fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
+    request_headers = {
+        "User-Agent": "Snoredex-Data/1.0 source-first card discovery"
+    }
+    request_headers.update(headers or {})
+    request = urllib.request.Request(url, headers=request_headers)
     with urllib.request.urlopen(request, timeout=45) as response:
         if response.status != 200:
             raise DiscoveryError(f"HTTP {response.status}: {url}")
@@ -954,15 +1048,23 @@ def new_manifest(
     for adapter in contract["adapters"]:
         for slice_row in adapter["slices"]:
             query_parameters = {"nameQueries": slice_row["nameQueries"]}
-            if adapter.get("responseFormat", "pokemon-asia-html") == "pokemon-asia-html":
+            response_format = adapter.get("responseFormat", "pokemon-asia-html")
+            if response_format == "pokemon-asia-html":
                 query_parameters.update({
                     "cardType": "all", "regulation": "all",
                     "pageParameter": adapter["pageParameter"],
                 })
-            else:
+            elif response_format == "tcgdex-json":
                 query_parameters.update({
                     "nameFilter": "strict-equality",
                     "pagination": "disabled-provider-default",
+                })
+            else:
+                query_parameters.update({
+                    "nameFilter": "provider-name-search",
+                    "format": "unlimited",
+                    "pagination": "single-retained-response-no-archive-closure",
+                    "cacheKeyParameter": "snoredexRun",
                 })
             requests.append({
                 "runId": run_id,
@@ -1161,6 +1263,86 @@ def refresh_tcgdex_request(
             save_manifest(run_dir, manifest)
 
 
+def refresh_official_localized_request(
+    run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
+    adapter: dict[str, Any], slice_row: dict[str, Any],
+) -> None:
+    """Retain one publisher filter response and its exact positive result entries.
+
+    The archive itself exposes each result's localized name, exact detail path and locale-specific
+    CMS image. Individual detail pages are not walked here: the known-positive ``pl2/111`` page is
+    absent from this filter response, so treating detail-path traversal as catalogue pagination
+    would hide the source's demonstrated omission. The complete checkpoint covers this one
+    response only.
+    """
+    pages_by_query = {row["query"]: row for row in request["pages"]}
+    for query_index, query in enumerate(slice_row["nameQueries"], start=1):
+        if query not in pages_by_query:
+            parameters = {
+                "cardName": query,
+                "cardText": "",
+                "evolvesFrom": "",
+                "simpleSubmit": "",
+                "format": "unlimited",
+                "hitPointsMin": 0,
+                "hitPointsMax": 400,
+                "retreatCostMin": 0,
+                "retreatCostMax": 5,
+                "snoredexRun": manifest["runId"],
+            }
+            url = request["endpoint"] + "?" + urllib.parse.urlencode(parameters)
+            raw = fetch_bytes(url, headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/139.0.0.0 Safari/537.36 Snoredex-Data/1.0"
+                ),
+                "Accept-Language": f"{slice_row['rawLocale']}-{slice_row['rawLocale'].upper()},"
+                                   f"{slice_row['rawLocale']};q=0.9,en;q=0.8",
+            })
+            query_echo, entries = parse_official_localized_entries(
+                raw, slice_row["rawLocale"]
+            )
+            if query_echo != query:
+                raise DiscoveryError(
+                    f"official localized archive did not echo the requested name {query!r}"
+                )
+            relative = f"raw/{request['sliceId']}/query-{query_index}.html"
+            page = {
+                "query": query, "pageNo": 1, "url": url,
+                "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
+                "resultCount": len(entries), "totalPages": 1,
+                "detailIds": [row["detailId"] for row in entries],
+            }
+            request["pages"].append(page)
+            pages_by_query[query] = page
+            request["checkpoint"]["completedPages"] = [f"{query}:1"]
+            save_manifest(run_dir, manifest)
+
+    details = {row["rawProviderId"]: row for row in request["details"]}
+    for page in request["pages"]:
+        raw = checked_raw_path(run_dir, page["rawPath"]).read_bytes()
+        _, entries = parse_official_localized_entries(raw, slice_row["rawLocale"])
+        for source_record in entries:
+            raw_provider_id = source_record["detailId"]
+            if raw_provider_id in details:
+                continue
+            detail = {
+                "rawProviderId": raw_provider_id,
+                "url": adapter["detailEndpointTemplate"].format(
+                    rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
+                ),
+                "rawPath": page["rawPath"],
+                "responseHash": page["responseHash"],
+                "recordSource": "localized-archive-list-entry",
+                "parsedRecordHash": content_hash(source_record),
+            }
+            request["details"].append(detail)
+            details[raw_provider_id] = detail
+            request["checkpoint"]["completedDetailIds"] = sorted(details)
+            save_manifest(run_dir, manifest)
+
+
 def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
     if not RUN_ID_PATTERN.fullmatch(run_id):
         raise DiscoveryError("--run-id must use YYYYMMDDTHHMMSSZ")
@@ -1208,6 +1390,10 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
             if response_format == "pokemon-asia-html":
                 refresh_asia_request(
                     run_dir, manifest, request, adapter, slice_row, assertion_by_code
+                )
+            elif response_format == "pokemon-official-localized-html":
+                refresh_official_localized_request(
+                    run_dir, manifest, request, adapter, slice_row
                 )
             elif response_format == "tcgdex-json":
                 refresh_tcgdex_request(run_dir, manifest, request, adapter, slice_row)

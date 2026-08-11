@@ -243,28 +243,28 @@
       "label": "Official localized card archive",
       "match": {
         "urlPrefixes": [
-          "https://www.pokemon.com/it/gcc/archivio-carte/series/"
+          "https://www.pokemon.com/it/gcc/archivio-carte/"
         ],
         "nonUrlEvidenceIds": []
       },
       "state": "active",
       "failureState": null,
       "accessMode": "scriptable",
-      "adapterState": "planned",
+      "adapterState": "active",
       "lastCheckedAt": "2026-08-11",
-      "freshnessPolicy": "Retain each localized detail page and CMS image identity; re-check locale routes before a harvest.",
+      "freshnessPolicy": "Retain each localized filter response, exact detail path and CMS image identity; re-check locale routes before a harvest.",
       "query": {
         "method": "GET",
-        "endpoint": "https://www.pokemon.com/{locale}/{localized-card-archive}/series/{set}/{number}/",
+        "endpoint": "https://www.pokemon.com/{locale}/gcc/archivio-carte/?cardName={localized name}",
         "parameters": [
           "locale",
-          "set",
-          "collector number"
+          "localized card name",
+          "format=unlimited"
         ],
-        "pagination": "not used for a cited detail page; catalogue pagination is not yet an accepted coverage boundary",
+        "pagination": "one retained server response closes only that bounded response; known-positive pl2/111 demonstrates that the filter does not close archive history",
         "expectedIdentifiers": [
           "localized card name",
-          "series/set path",
+          "exact detail path",
           "collector number",
           "locale-specific CMS image"
         ]
