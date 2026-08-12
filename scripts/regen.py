@@ -47,10 +47,13 @@ REGEN = [
     ["scripts/source_registry.py"],
     ["scripts/source_capabilities.py"],
     ["scripts/source_adapters.py"],
-    ["scripts/card_discovery.py"],
-    ["scripts/locality_matrix.py"],
+    # print-identity and set-catalogue dry-runs feed card_discovery (it reads
+    # print_identity_dryrun.json + source_capability_graph.json), so they must
+    # regenerate BEFORE it.
     ["scripts/set_catalogue_dryrun.py"],
     ["scripts/print_identity_dryrun.py"],
+    ["scripts/card_discovery.py"],
+    ["scripts/locality_matrix.py"],
     # legacy reconciliation & downstream projections
     ["scripts/legacy_set_reconciliation.py"],
     ["scripts/checklist.py"],
