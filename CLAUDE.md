@@ -241,22 +241,13 @@ python verification/review_integrity.py
 python verification/review_findings.py           # stdlib only, no network — quickest check
 
 # The gate regenerates these FOR REAL, so run them before checking anything downstream.
-# --check on only a subset below is not the whole generator set, and three times now that gap has
-# turned CI red on work that passed locally. The third was `legacy_set_reconciliation`, which this
-# block did not name at all: it reads the language store and its ledger goes stale on any write
-# pass. Compare against `.github/workflows/release-gate.yml` when adding a generator or a suite —
-# that file is the gate, this block only describes it.
-python verification/report.py && python scripts/editions.py
-python scripts/finishes.py --reproject
-python scripts/language_status.py && python scripts/confirmed_releases.py
-python scripts/database.py
-python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
-
-for g in checklist readme_stats issue_templates site source_registry source_capabilities \
-         source_adapters card_discovery locality_matrix legacy_set_reconciliation open_items analyze database \
-         print_identity_dryrun set_catalogue_dryrun evidence_semantics
-do python scripts/$g.py --check; done            # fail instead of writing
-python scripts/tracker.py check-template         # SEE BELOW — prints failure but exits 0
+# Don't maintain this list by hand here: `python scripts/regen.py` (and `--check`) IS the
+# whole generator + determinism + regression suite in dependency order (#213). It replaced
+# this block because a hand-maintained subset drifted from the gate three times — the last
+# was `legacy_set_reconciliation`, which this block did not name at all: it reads the
+# language store and its ledger goes stale on any write pass. If you add a generator or a
+# suite, add it to scripts/regen.py (and the gate's call of it), not to a prose list.
+python scripts/regen.py --check                  # regenerate (or verify) everything; what CI calls
 
 # Every regression suite CI runs. Missing one from this list is how work passes locally and
 # reddens CI, which has now happened three times — see the note under the block.

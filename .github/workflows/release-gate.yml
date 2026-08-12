@@ -128,31 +128,14 @@ jobs:
       - name: Cross-artifact consistency and publication readiness
         run: python verification/review_findings.py
 
-      # --- determinism: committed artifacts must match what the generators produce ---
+      # --- determinism: committed artifacts must match what the generators produce (#213) ---
+      # One entrypoint, not a hand-maintained list: scripts/regen.py --check runs the
+      # same regeneration + verification suite an author runs before opening a PR, so
+      # the local command and the gate can never drift apart.
       - name: Generated artifacts match their inputs
         shell: bash
         run: |
-          python scripts/analyze.py --check
-          python scripts/finishes.py --reproject
-          python scripts/language_status.py
-          python scripts/confirmed_releases.py
-          python scripts/source_registry.py --check
-          python scripts/source_capabilities.py --check
-          python scripts/source_adapters.py --check
-          python scripts/card_discovery.py --check
-          python scripts/locality_matrix.py --check
-          python scripts/legacy_set_reconciliation.py --check
-          python scripts/checklist.py --check
-          python scripts/readme_stats.py --check
-          python scripts/issue_templates.py --check
-          python scripts/open_items.py --check
-          python scripts/database.py --check
-          python scripts/tracker.py check-template
-          python scripts/site.py --check
-          git diff --exit-code || {
-              echo "::error::Regenerating produced different output than what is committed."
-              exit 1
-            }
+          python scripts/regen.py --check
 
       # --- behaviour: the page has to actually work ---
       - name: Browser tests
