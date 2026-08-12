@@ -168,6 +168,30 @@ def main() -> int:
         status: count for status, count in sorted(counts.items(), key=lambda item: -item[1]) if count
     }:
         raise AssertionError("reported application-status counts are stale")
+
+    # #210 — a direct owner attestation must stay card-level even when trailing corroboration
+    # names neighbouring units. The Prize Pack rows carry providerId `owner-attestation` and
+    # sourceType "Owner attestation (domain expert); ... units of the same product ..."; the
+    # attestation is the basis, the sibling phrase is context.
+    prize_pack_regression = [
+        unit for unit in units
+        if unit.get("providerId") == "owner-attestation"
+        and (unit.get("sourceType") or "").startswith("Owner attestation")
+        and "units of the same product" in (unit.get("sourceType") or "")
+    ]
+    for unit in prize_pack_regression:
+        semantic = semantics[unit["unitId"]]
+        if semantic["granularity"] != "specimen-or-card":
+            raise AssertionError(
+                f"direct owner attestation demoted by trailing corroboration: {unit['unitId']}"
+            )
+        if semantic["applicationStatus"] != "exists":
+            raise AssertionError(
+                f"direct owner attestation lost its supported confirmation: {unit['unitId']}"
+            )
+    if not prize_pack_regression:
+        raise AssertionError("#210 regression fixture lost — no direct-attestation rows found")
+
     print(f"evidence application regressions passed: {counts}")
     return 0
 

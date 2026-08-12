@@ -8,7 +8,7 @@ catalogue.**
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
 [![Legacy cards](https://img.shields.io/badge/legacy_cards-198-2563eb)](legacy-cardmarket-baseline.json)
-[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-814_items-2563eb)](analysis_checklist.json)
+[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-825_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
@@ -118,14 +118,14 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-08-11**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
+Current-known status snapshot: **2026-08-12**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Evidence-safe application status | **606 established**, **28 needs evidence**, **58 owner-adjudicated not printed**, and **27 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
-| Current-known physical checklist | **814 items** across 174 cards and 15 languages: 655 documented printings plus 159 explicit unresolved placeholders. |
+| Evidence-safe application status | **617 established**, **17 needs evidence**, **58 owner-adjudicated not printed**, and **27 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
+| Current-known physical checklist | **825 items** across 174 cards and 15 languages: 662 documented printings plus 163 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 333 externally confirmed, 103 marketplace-only positives, 125 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 220 units. |
 | Evidence registry | **23 providers**, 894 evidence records, 887 unique URLs, and 2,795 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
