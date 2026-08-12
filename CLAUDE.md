@@ -363,6 +363,18 @@ the corpus grew, record the cause beside the number.
 
 - Repository is `github.com/m4s-ai/snoredex-data`. Work lands on a **feature branch via pull
   request** — do not push to `main`.
+- **Sync `main` before starting any task.** Begin by `git fetch origin` and, from a clean
+  `main`, `git pull` (or `git reset --hard origin/main`) so the branch you cut is based on the
+  latest commit, not a stale local copy. Never start work on a branch whose base is older than
+  `origin/main` — that is how parallel agents' work silently collides and how stale artifacts
+  sneak back in.
+- **One isolated branch per issue.** Give each issue its own branch (e.g. `fix/<n>-<slug>`),
+  cut fresh from the current `origin/main`, never shared with another in-flight task. This lets
+  two or three agents work different issues in parallel against the same base; when a branch
+  falls behind `origin/main`, reconcile by rebasing it onto the new `origin/main` (regenerate
+  via `python scripts/regen.py` after, per the block above) rather than restarting from scratch.
+  Do not stack unrelated tasks on one branch, and do not reuse an old branch from a previous
+  issue.
 - End commit messages with the trailer
   `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
 - The release gate runs on pull requests across Ubuntu and Windows. The Windows leg keeps the
