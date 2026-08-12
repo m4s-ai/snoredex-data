@@ -823,7 +823,7 @@ def collect() -> None:
         # The 17 left cite the cross-language expansion index, which carries no card list at all,
         # for cards no locale catalogue here indexes, plus the three promo printings above.
         UNSOUND_SET_LEVEL_BASELINE = 17
-        UNSCOPED_ABSENCE_BASELINE = 27
+        UNSCOPED_ABSENCE_BASELINE = 21
         unsound_now = semantic_counts["setLevelConfirmationsNotReachingTheCard"]
         unscoped_now = semantic_counts["contradictionsByBacking"].get("unscoped-absence", 0)
         check(
@@ -853,15 +853,15 @@ def collect() -> None:
         # application policy downgrades unsupported confirmations to needs-evidence and unsupported
         # contradictions to disputed.
         #
-        #   27  unscoped absence — a contradiction with neither an exhaustive coverage edge nor an
-        #       owner adjudication. 26 rest on a market-history article (#84/#88, the owner's call).
+        #   21  unscoped absence — a contradiction with neither an exhaustive coverage edge nor an
+        #       owner adjudication. The #88 adjudication settled six (27 -> 21).
         #   0   a granularity that cannot support a confirmation at all. Was 14 — the Prize Pack
         #       rows — until #210: their sourceType is a direct owner attestation (providerId
         #       `owner-attestation`) whose trailing corroboration names other units ("units of the
         #       same product"). The claim rests on the attestation, so the corroboration is context,
         #       not a demotion; they are `specimen-or-card` and support their confirmations.
         #   17  a product-level statement whose step to the card does not hold, the N17 queue.
-        BEYOND_GRANULARITY_BASELINE = 44
+        BEYOND_GRANULARITY_BASELINE = 38
         beyond_now = semantic_counts["verdictsBeyondTheirGranularity"]
         check(
             "N19",

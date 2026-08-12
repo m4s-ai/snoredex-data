@@ -124,7 +124,7 @@ Current-known status snapshot: **2026-08-12**. Its candidate denominator is the 
 |---|---|
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 634 externally confirmed, 85 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Evidence-safe application status | **617 established**, **17 needs evidence**, **58 owner-adjudicated not printed**, and **27 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
+| Evidence-safe application status | **617 established**, **17 needs evidence**, **64 owner-adjudicated not printed**, and **21 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **825 items** across 174 cards and 15 languages: 662 documented printings plus 163 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 333 externally confirmed, 103 marketplace-only positives, 125 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 220 units. |
 | Evidence registry | **23 providers**, 894 evidence records, 887 unique URLs, and 2,795 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
@@ -252,7 +252,7 @@ publishes, and Pages deployment stays a manual, gated workflow run.
 - **A contradicted language is not automatically a proven absence.** `languagesContradicted`
   splits into `languagesNotPrinted` — where an explicit owner adjudication or a complete official
   manifest settled the question — and `languagesDisputed`, where a source disagrees and nothing
-  has settled it. **58 are settled; 27 are disputed.** Both are excluded from the checklist, so
+  has settled it. **64 are settled; 21 are disputed.** Both are excluded from the checklist, so
   that nobody is sent hunting a printing the evidence points away from, but only the first is a
   claim that the card does not exist. A photograph would overturn a disputed row.
 - **Every "Spanish" claim here means European Spanish.** From Journey Together (2025), LATAM-ES is
