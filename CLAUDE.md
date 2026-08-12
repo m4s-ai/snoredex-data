@@ -153,13 +153,15 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   these do **not** imply a reverse holo).
 - **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
   outside source disagrees with Cardmarket. Only two things settle it: a complete official manifest
-  within its scope, or an explicit owner adjudication. Everything else is **disputed** — currently
-  **58 settled and 27 disputed** — and `DATABASE.md` is right that an application must not read
-  disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every generator;
-  cards carry `languagesNotPrinted` and `languagesDisputed` beside `languagesContradicted`, and
-  checks `E8`/`E9`/`E10` keep the split honest. Both are excluded from the checklist, because the
-  README's whole promise is that nobody hunts a card that was never made — exclusion is not the
-  same as asserting absence, and `analysis_checklist.json` counts what it left out.
+  within its scope, or an explicit owner adjudication. Everything else is **disputed** — the current
+  settled/disputed counts are generated figures, read them from `verification/evidence_semantics.json`
+  (or the README), never from this file — and `DATABASE.md` is right that an application must not
+  read disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every
+  generator; cards carry `languagesNotPrinted` and `languagesDisputed` beside
+  `languagesContradicted`, and checks `E8`/`E9`/`E10` keep the split honest. Both are excluded from
+  the checklist, because the README's whole promise is that nobody hunts a card that was never
+  made — exclusion is not the same as asserting absence, and `analysis_checklist.json` counts what
+  it left out.
 - **`cardKey` = same card text, not same artwork.** It is Cardmarket's own grouping by name plus
   attack names.
 - **"Spanish" is one language across two localities.** European Spanish and LATAM-ES are
