@@ -90,11 +90,18 @@ MARKET_ERA = re.compile(r"Pok[eé]mon in |market-history", re.IGNORECASE)
 # Korean". Because this pattern is tested before `CARD_LEVEL`, the trailing context decided the
 # granularity and eight `xm2a 136` rows were filed as though a neighbour carried them.
 #
-# The fourteen Prize Pack rows that remain here are *correctly* classified, and the distinction is
-# worth keeping in view: their own evidence says the unit "rests on the owner attestation plus the
-# uniform per-region Prize Pack distribution the corroborated languages demonstrate". That names
-# other units as part of the basis. A release schedule names nobody.
+# The same precedence trap remains for Prize Pack rows whose sourceType is a direct owner
+# attestation followed by corroboration that names other units ("units of the same product"):
+# `providerId` is `owner-attestation`, so the claim rests on that attestation, and the trailing
+# prose is corroborating context, not the basis (#210). The direct-attestation guard in
+# `granularity()` runs before this pattern so the primary source is never downgraded by the
+# corroboration that follows it.
 SIBLING = re.compile(r"units of the same product", re.IGNORECASE)
+# A direct owner attestation — `providerId == "owner-attestation"` — names this exact card in this
+# exact language. It is graded as card-level evidence by the rule that grades a claim by what it
+# rests on (CLAUDE.md rule 2), even when the sourceType trails corroboration about neighbouring
+# units after the attestation. Checked before SIBLING so the trailing context cannot demote it.
+DIRECT_OWNER_ATTESTATION = re.compile(r"^Owner attestation", re.IGNORECASE)
 CARD_LEVEL = re.compile(
     r"card database|TCGdex|photographed|specimen|set list|card article|card page|"
     r"locale card archive|promo search|"
@@ -282,6 +289,13 @@ def granularity(unit: dict[str, Any]) -> str:
     source_type = unit.get("sourceType") or ""
     if MARKET_ERA.search(source_type):
         return "market-or-era"
+    # A direct owner attestation is this unit's own card-level evidence, whatever corroboration
+    # trails it. `providerId` is the source the claim rests on; corroborating prose about
+    # neighbouring units is context, never a demotion (#210). This guard must run before SIBLING:
+    # `owner-attestation` rows carry "units of the same product" in their trailing corroboration,
+    # and the substring test would otherwise demote the attestation it follows.
+    if unit.get("providerId") == "owner-attestation" and DIRECT_OWNER_ATTESTATION.match(source_type):
+        return "specimen-or-card"
     if SIBLING.search(source_type):
         return "sibling-derived"
     if CARD_LEVEL.search(source_type):

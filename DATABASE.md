@@ -42,13 +42,13 @@ from that evidence to this card holds:
 
 | granularity | inference | rows | what it means |
 |---|---|---:|---|
-| `specimen-or-card` | — | 520 | a record about this card in this language |
+| `specimen-or-card` | — | 534 | a record about this card in this language |
 | `product-or-set` | `carries` | 83 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
 | `product-or-set` | `does-not-carry` | **17** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached; application status is `needs-evidence` |
 | `product-or-set` | `needs-set-size` | 0 | was: undecidable without a printed set size. The set database records those sizes now (#146), so run membership is computed rather than inferred from a rarity word |
-| `sibling-derived` | — | 14 | the evidence of a neighbouring unit; application status is `needs-evidence` |
+| `sibling-derived` | — | 0 | the evidence of a neighbouring unit; application status is `needs-evidence` |
 
-Applications may use `application_status='exists'` directly: all 31 unsupported confirmations are
+Applications may use `application_status='exists'` directly: all 17 unsupported confirmations are
 now `needs-evidence`, while `repository_verdict='confirmed'` and the original observation remain
 unchanged. The 17 product/set rows are not wrong — they are unproven at this granularity, and
 unresolved semantics apply: not yet established, never proven absent. Fourteen cite one source, the
@@ -63,8 +63,8 @@ establishes a printing, and may deny one only inside a coverage edge proven exha
 product-level statement reaches the card only when the step above holds, and never denies one; an
 era argument and a sibling's record establish nothing on their own. An owner adjudication settles a
 contradiction whatever sits beneath it, because it is the only mechanism that can settle an absence.
-`verdictsBeyondTheirGranularity` counts the raw rows outside that rule — **58** today, held by check
-`N19`. The raw observations remain historical inputs: their application statuses are 31
+`verdictsBeyondTheirGranularity` counts the raw rows outside that rule — **44** today, held by check
+`N19`. The raw observations remain historical inputs: their application statuses are 17
 `needs-evidence` confirmations and 27 `disputed` contradictions, so none materializes an existence
 or absence claim.
 
