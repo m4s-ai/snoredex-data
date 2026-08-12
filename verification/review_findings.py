@@ -861,7 +861,7 @@ def collect() -> None:
         #       same product"). The claim rests on the attestation, so the corroboration is context,
         #       not a demotion; they are `specimen-or-card` and support their confirmations.
         #   17  a product-level statement whose step to the card does not hold, the N17 queue.
-        BEYOND_GRANULARITY_BASELINE = 58
+        BEYOND_GRANULARITY_BASELINE = 44
         beyond_now = semantic_counts["verdictsBeyondTheirGranularity"]
         check(
             "N19",
