@@ -32,7 +32,12 @@ def write(path: Path, payload: dict) -> None:
 
 
 def reconcile(rows: list[dict], expected: list[dict], key: str, check: bool) -> bool:
-    by_id = {row[key]: row for row in rows}
+    by_id: dict[str, dict] = {}
+    for row in rows:
+        identifier = row[key]
+        if identifier in by_id:
+            raise SystemExit(f"duplicate {key} {identifier}")
+        by_id[identifier] = row
     changed = False
     for wanted in expected:
         identifier = wanted[key]
