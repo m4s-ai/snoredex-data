@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import json
+import copy
 import tempfile
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -221,6 +223,85 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertEqual(
             delta["localityDeltas"][0]["toEvidenceMode"], "unqualified-language"
         )
+
+    def test_mapping_only_contract_change_preserves_acquisition_contract(self):
+        contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        previous = copy.deepcopy(contract)
+        previous["meta"]["coverageVersion"] = "1.12.0"
+        previous["explicitMappings"].append({"retired": "projection-only"})
+        self.assertEqual(
+            discovery.acquisition_contract(previous),
+            discovery.acquisition_contract(contract),
+        )
+        previous["adapters"][0]["pageSize"] += 1
+        self.assertNotEqual(
+            discovery.acquisition_contract(previous),
+            discovery.acquisition_contract(contract),
+        )
+
+    def test_replay_destination_must_sort_after_every_retained_run(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            (runs_dir / "20260813T135800Z").mkdir()
+            with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
+                with self.assertRaisesRegex(
+                    discovery.DiscoveryError,
+                    "must sort after every retained run",
+                ):
+                    discovery.replay_run(
+                        "20260813T135800Z", "20260813T135700Z", None
+                    )
+
+    def test_replay_source_must_be_newest_compatible_complete_run(self):
+        contract = {
+            "meta": {
+                "coverageVersion": "current",
+                "reviewedAt": "2026-08-13",
+            },
+            "adapters": [],
+            "explicitMappings": [],
+        }
+        previous_contract = copy.deepcopy(contract)
+        previous_contract["meta"]["coverageVersion"] = "previous"
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            for run_id, snapshot in (
+                ("20260813T135800Z", previous_contract),
+                ("20260813T140000Z", contract),
+            ):
+                run_dir = runs_dir / run_id
+                run_dir.mkdir()
+                (run_dir / "contract.json").write_text(
+                    json.dumps(snapshot), encoding="utf-8"
+                )
+                (run_dir / "manifest.json").write_text(
+                    json.dumps({
+                        "runId": run_id,
+                        "status": "complete",
+                        "contractHash": discovery.content_hash(snapshot),
+                    }),
+                    encoding="utf-8",
+                )
+            with (
+                mock.patch.object(discovery, "RUNS_DIR", runs_dir),
+                mock.patch.object(
+                    discovery,
+                    "load_inputs",
+                    return_value=(contract, {}, {}),
+                ),
+                mock.patch.object(discovery, "validate_contract"),
+            ):
+                with self.assertRaisesRegex(
+                    discovery.DiscoveryError,
+                    "must be the newest compatible complete run",
+                ):
+                    discovery.replay_run(
+                        "20260813T135800Z", "20260813T150000Z", None
+                    )
 
     def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
         old = [
@@ -524,6 +605,21 @@ class CardDiscoveryTests(unittest.TestCase):
         me03 = next(row for row in spanish if row["rawProviderId"] == "me03-063")
         self.assertIsNone(me03["normalizationProposal"]["targetCardReleaseId"])
         self.assertIn("Spanish language only", me03["bucketBasis"])
+        tg10 = next(
+            row for row in spanish if row["rawProviderId"] == "swsh11.5tg-TG10"
+        )
+        self.assertEqual(tg10["bucket"], "needs-evidence")
+        self.assertIsNone(tg10["normalizationProposal"]["targetCardReleaseId"])
+
+        contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertFalse(any(
+            mapping["providerId"] == "tcgdex" and mapping["rawLocale"] == "es"
+            for mapping in contract["explicitMappings"]
+        ))
 
     def test_committed_italian_slice_accounts_for_filter_without_claiming_history(self):
         records = [
