@@ -1352,7 +1352,8 @@ def collect() -> None:
             "pokemon-asia-html": {"nameQueries", "cardType", "regulation", "pageParameter"},
             "tcgdex-json": {"nameQueries", "nameFilter", "pagination"},
             "confirmed-source-json": {
-                "nameQueries", "retainedUnitIds", "sourceRecord", "pagination",
+                "nameQueries", "retainedUnitIds", "providerIdentity", "sourceRecord",
+                "pagination",
             },
             "bulbapedia-historical-json": {
                 "nameQueries", "retainedUnitIds", "retainedSetNames", "sourceRecord",
@@ -1389,6 +1390,8 @@ def collect() -> None:
                     == "confirmed-source-json"
                 and (
                     not request["queryParameters"].get("retainedUnitIds")
+                    or request["queryParameters"].get("providerIdentity")
+                        != "canonical-card-ed-num-query"
                     or request["queryParameters"].get("sourceRecord")
                         != "verification/confirmed_sources.json"
                     or request["queryParameters"].get("pagination")
@@ -1603,15 +1606,15 @@ def collect() -> None:
         liga_rows = [
             row for row in card_records if row["providerId"] == "ligapokemon"
         ]
-        expected_liga_identity = {
-            ("U0192", "PPPS8", "117b"),
-            ("U0219", "PPPS8", "117b"),
-            ("U0329", "PPPS7", "117"),
-        }
+        expected_liga_identity = {("PPPS8", "117b"), ("PPPS7", "117")}
         if (
-            {(row["rawProviderId"], row["raw"]["rawSetCode"],
-              row["raw"]["localCollectorNumber"]) for row in liga_rows}
+            {(row["raw"]["rawSetCode"], row["raw"]["localCollectorNumber"])
+             for row in liga_rows}
                 != expected_liga_identity
+            or len(liga_rows) != 2
+            or {observation["unitId"] for row in liga_rows
+                for observation in row["sourceRecord"].get("observations", [])}
+                != {"U0192", "U0219", "U0329"}
             or any(row["bucket"] != "needs-evidence" for row in liga_rows)
             or any(row.get("localityEvidenceMode") != "market-only" for row in liga_rows)
             or any(row["normalizationProposal"].get("targetCardReleaseId") is not None

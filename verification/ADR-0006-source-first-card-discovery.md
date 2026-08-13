@@ -168,12 +168,12 @@ TCGdex `pt` slice retains 26 positive card details and their set records. All 26
 other physical distribution region. Existing legacy `WEST/Portuguese` source URLs are therefore
 not allowed to auto-match these rows.
 
-The LigaPokemon slice replays exactly three already reviewed positive records (`U0192`, `U0219`,
-and `U0329`) from the browser-blocked Brazilian marketplace frontier. Their source-native edition
-and number parameters remain `PPPS8/117b`, `PPPS8/117b`, and `PPPS7/117`. All three also remain
-`needs-evidence`: a `.com.br` listing and Portuguese-language filter identify a Brazilian market
-observation, not a distinct printed Brazilian physical edition. The replay does not query or close
-the marketplace inventory.
+The LigaPokemon slice replays exactly two already reviewed positive provider listings from the
+browser-blocked Brazilian marketplace frontier. `U0192` and `U0219` share the `PPPS8/117b`
+listing while retaining their holo and non-holo observations; `U0329` remains the separate
+`PPPS7/117` listing. Both listings remain `needs-evidence`: a `.com.br` listing and
+Portuguese-language filter identify a Brazilian market observation, not a distinct printed
+Brazilian physical edition. The replay does not query or close the marketplace inventory.
 
 The complete run accounts for 236 records overall: 157 matched, 32 Taiwan candidates, eighteen
 positively excluded, 29 needs-evidence, zero ambiguous, and zero run errors. Its deterministic

@@ -489,17 +489,19 @@ class CardDiscoveryTests(unittest.TestCase):
         brazilian_frontier = [
             row for row in records if row["providerId"] == "ligapokemon"
         ]
+        self.assertEqual(len(brazilian_frontier), 2)
+        by_identity = {
+            (row["raw"]["rawSetCode"], row["raw"]["localCollectorNumber"]): row
+            for row in brazilian_frontier
+        }
+        self.assertEqual(set(by_identity), {("PPPS8", "117b"), ("PPPS7", "117")})
         self.assertEqual(
-            {
-                (row["rawProviderId"], row["raw"]["rawSetCode"],
-                 row["raw"]["localCollectorNumber"])
-                for row in brazilian_frontier
-            },
-            {
-                ("U0192", "PPPS8", "117b"),
-                ("U0219", "PPPS8", "117b"),
-                ("U0329", "PPPS7", "117"),
-            },
+            {row["unitId"] for row in by_identity[("PPPS8", "117b")]["sourceRecord"]["observations"]},
+            {"U0192", "U0219"},
+        )
+        self.assertEqual(
+            {row["variant"] for row in by_identity[("PPPS8", "117b")]["sourceRecord"]["observations"]},
+            {"V1", "V2"},
         )
         self.assertTrue(all(
             row["bucket"] == "needs-evidence"
@@ -515,6 +517,29 @@ class CardDiscoveryTests(unittest.TestCase):
         )
         self.assertIn("localityDeltas", staging["diff"])
         self.assertIn("localityDeltas", staging["diff"]["counts"])
+
+    def test_confirmed_source_groups_unit_observations_by_provider_listing(self):
+        source_url = (
+            "https://www.ligapokemon.com.br/?view=cards/card&"
+            "card=Hop%27s%20Snorlax%20%28117b%2F90%29&ed=PPPS8&num=117b"
+        )
+        retained = [
+            {"unitId": "U0192", "sourceUrl": source_url, "variant": "V2"},
+            {"unitId": "U0219", "sourceUrl": source_url, "variant": "V1"},
+            {"unitId": "U0329", "sourceUrl": source_url.replace("PPPS8", "PPPS7")
+             .replace("117b", "117"), "variant": "base"},
+        ]
+        records = discovery.confirmed_source_records(retained, {
+            "retainedUnitIds": ["U0192", "U0219", "U0329"],
+            "nameQueries": ["Snorlax do Lupo"],
+        })
+
+        self.assertEqual(len(records), 2)
+        shared = next(row for row in records if row["rawSetCode"] == "PPPS8")
+        self.assertEqual(
+            [(row["unitId"], row["variant"]) for row in shared["observations"]],
+            [("U0192", "V2"), ("U0219", "V1")],
+        )
 
     def test_native_name_false_positive_is_excluded_by_positive_identity(self):
         row = self.normalize(record=source_record(localName="小卡比獸"))
