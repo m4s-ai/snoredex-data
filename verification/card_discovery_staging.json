@@ -2,13 +2,13 @@
   "meta": {
     "schema": "snoredex-card-discovery-staging",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.9.0",
-    "generatedFromRun": "20260813T110116Z",
-    "previousRun": "20260813T091300Z",
+    "coverageVersion": "1.10.0",
+    "generatedFromRun": "20260813T115958Z",
+    "previousRun": "20260813T110116Z",
     "contract": "verification/card_discovery_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "identityGraph": "verification/print_identity_dryrun.json",
-    "contractHash": "sha256:a885c55107daefd1c93125ab61fa510beeff82f83833b0ba4482a31db23d3a0c",
+    "contractHash": "sha256:9f7a06bff1081fc4f184bfe941d1cef52cfab3788d5459270c42bbfd130fd891",
     "capabilityGraphHash": "sha256:28da36acb95eae7ac86f7c04e78631e383daa32632692bdd5f4f096d695474ae",
     "identityGraphHash": "sha256:d8bd3902478112ae0184e864d62f1570375064dc892e8f6c90ec3dcb7006dcaf",
     "sourceFirst": true,
@@ -16,11 +16,11 @@
     "counts": {
       "slices": 12,
       "records": 250,
-      "matched": 161,
+      "matched": 136,
       "ambiguous": 0,
       "newCandidate": 43,
       "positivelyExcluded": 18,
-      "needsEvidence": 28,
+      "needsEvidence": 53,
       "runErrors": 0,
       "gaps": 12
     }
@@ -341,11 +341,11 @@
       },
       "accounting": {
         "fetched": 29,
-        "matched": 25,
+        "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
         "positivelyExcluded": 4,
-        "needsEvidence": 0,
+        "needsEvidence": 25,
         "accounted": 29
       }
     },
@@ -585,132 +585,333 @@
     "changed": [
       "tcgdex|tcgdex-api|de|base2-11",
       "tcgdex|tcgdex-api|de|base2-27",
+      "tcgdex|tcgdex-api|de|bw7-109",
       "tcgdex|tcgdex-api|de|bw8-101",
       "tcgdex|tcgdex-api|de|col1-33",
       "tcgdex|tcgdex-api|de|dp1-37",
       "tcgdex|tcgdex-api|de|ecard3-100",
+      "tcgdex|tcgdex-api|de|ex15-10",
       "tcgdex|tcgdex-api|de|me03-063",
       "tcgdex|tcgdex-api|de|pl2-111",
-      "tcgdex|tcgdex-api|de|pl2-81",
-      "tcgdex|tcgdex-api|de|sv03.5-143",
       "tcgdex|tcgdex-api|de|sv06-136",
       "tcgdex|tcgdex-api|de|sv08-144",
-      "tcgdex|tcgdex-api|de|svp-051",
       "tcgdex|tcgdex-api|de|svp-122",
-      "tcgdex|tcgdex-api|de|swsh1-140",
-      "tcgdex|tcgdex-api|de|swsh10.5-055",
-      "tcgdex|tcgdex-api|de|swsh11.5tg-TG10",
-      "tcgdex|tcgdex-api|de|swsh6-224",
-      "tcgdex|tcgdex-api|de|swsh8-206",
       "tcgdex|tcgdex-api|de|swshp-SWSH032",
+      "tcgdex|tcgdex-api|de|swshp-SWSH068",
+      "tcgdex|tcgdex-api|de|swshp-SWSH119",
+      "tcgdex|tcgdex-api|de|xy0-26",
       "tcgdex|tcgdex-api|de|xy10-77",
       "tcgdex|tcgdex-api|de|xy2-80",
       "tcgdex|tcgdex-api|de|xy8-118",
       "tcgdex|tcgdex-api|en|base2-11",
-      "tcgdex|tcgdex-api|en|base2-27",
       "tcgdex|tcgdex-api|en|base4-30",
       "tcgdex|tcgdex-api|en|bw7-109",
       "tcgdex|tcgdex-api|en|bw8-101",
       "tcgdex|tcgdex-api|en|col1-33",
       "tcgdex|tcgdex-api|en|dp1-37",
+      "tcgdex|tcgdex-api|en|ecard3-100",
       "tcgdex|tcgdex-api|en|ex6-15",
-      "tcgdex|tcgdex-api|en|g1-58",
-      "tcgdex|tcgdex-api|en|lc-64",
+      "tcgdex|tcgdex-api|en|me03-063",
       "tcgdex|tcgdex-api|en|pl2-111",
       "tcgdex|tcgdex-api|en|pl2-33",
       "tcgdex|tcgdex-api|en|pl2-81",
       "tcgdex|tcgdex-api|en|sm10-158",
       "tcgdex|tcgdex-api|en|sm115-50",
-      "tcgdex|tcgdex-api|en|sv03.5-143",
-      "tcgdex|tcgdex-api|en|sv04.5-202",
       "tcgdex|tcgdex-api|en|sv06-136",
-      "tcgdex|tcgdex-api|en|sv08-144",
-      "tcgdex|tcgdex-api|en|svp-051",
       "tcgdex|tcgdex-api|en|svp-122",
       "tcgdex|tcgdex-api|en|swsh1-140",
       "tcgdex|tcgdex-api|en|swsh10.5-055",
-      "tcgdex|tcgdex-api|en|swsh11-143",
-      "tcgdex|tcgdex-api|en|swsh11.5tg-TG10",
       "tcgdex|tcgdex-api|en|swsh12.5-109",
+      "tcgdex|tcgdex-api|en|swsh2-141",
       "tcgdex|tcgdex-api|en|swsh4-131",
       "tcgdex|tcgdex-api|en|swshp-SWSH032",
+      "tcgdex|tcgdex-api|en|swshp-SWSH068",
+      "tcgdex|tcgdex-api|en|swshp-SWSH119",
       "tcgdex|tcgdex-api|en|xy0-26",
       "tcgdex|tcgdex-api|en|xy10-77",
       "tcgdex|tcgdex-api|en|xy2-80",
+      "tcgdex|tcgdex-api|en|xy8-118",
       "tcgdex|tcgdex-api|en|xyp-XY179",
+      "tcgdex|tcgdex-api|es|bw7-109",
+      "tcgdex|tcgdex-api|es|bw8-101",
       "tcgdex|tcgdex-api|es|me03-063",
       "tcgdex|tcgdex-api|es|sm10-158",
+      "tcgdex|tcgdex-api|es|sv03.5-143",
+      "tcgdex|tcgdex-api|es|sv04.5-202",
       "tcgdex|tcgdex-api|es|sv06-136",
+      "tcgdex|tcgdex-api|es|sv08-144",
+      "tcgdex|tcgdex-api|es|svp-051",
       "tcgdex|tcgdex-api|es|svp-122",
+      "tcgdex|tcgdex-api|es|swsh1-140",
       "tcgdex|tcgdex-api|es|swsh10.5-055",
       "tcgdex|tcgdex-api|es|swsh11-143",
+      "tcgdex|tcgdex-api|es|swsh11.5tg-TG10",
       "tcgdex|tcgdex-api|es|swsh12.5-109",
+      "tcgdex|tcgdex-api|es|swsh2-141",
       "tcgdex|tcgdex-api|es|swsh4-131",
       "tcgdex|tcgdex-api|es|swsh6-224",
+      "tcgdex|tcgdex-api|es|swsh8-206",
       "tcgdex|tcgdex-api|es|swshp-SWSH032",
-      "tcgdex|tcgdex-api|es|swshp-SWSH068",
-      "tcgdex|tcgdex-api|es|swshp-SWSH119",
       "tcgdex|tcgdex-api|es|xy8-118",
       "tcgdex|tcgdex-api|fr|base2-11",
-      "tcgdex|tcgdex-api|fr|base2-27",
-      "tcgdex|tcgdex-api|fr|bw7-109",
       "tcgdex|tcgdex-api|fr|dp1-37",
-      "tcgdex|tcgdex-api|fr|me03-063",
+      "tcgdex|tcgdex-api|fr|g1-58",
+      "tcgdex|tcgdex-api|fr|sm10-158",
+      "tcgdex|tcgdex-api|fr|sm115-50",
+      "tcgdex|tcgdex-api|fr|sv03.5-143",
       "tcgdex|tcgdex-api|fr|sv04.5-202",
       "tcgdex|tcgdex-api|fr|sv06-136",
-      "tcgdex|tcgdex-api|fr|swsh10.5-055",
-      "tcgdex|tcgdex-api|fr|swsh11-143",
-      "tcgdex|tcgdex-api|fr|swsh11.5tg-TG10",
+      "tcgdex|tcgdex-api|fr|swsh12.5-109",
+      "tcgdex|tcgdex-api|fr|swsh2-141",
       "tcgdex|tcgdex-api|fr|swsh4-131",
       "tcgdex|tcgdex-api|fr|swsh6-224",
       "tcgdex|tcgdex-api|fr|swsh8-206",
       "tcgdex|tcgdex-api|fr|swshp-SWSH032",
-      "tcgdex|tcgdex-api|fr|swshp-SWSH119",
+      "tcgdex|tcgdex-api|fr|swshp-SWSH068",
       "tcgdex|tcgdex-api|fr|xy0-26",
       "tcgdex|tcgdex-api|fr|xy10-77",
       "tcgdex|tcgdex-api|fr|xy2-80",
-      "tcgdex|tcgdex-api|fr|xy8-118",
       "tcgdex|tcgdex-api|fr|xyp-XY179",
+      "tcgdex|tcgdex-api|pt|bw7-109",
       "tcgdex|tcgdex-api|pt|bw8-101",
+      "tcgdex|tcgdex-api|pt|me03-063",
+      "tcgdex|tcgdex-api|pt|sm10-158",
       "tcgdex|tcgdex-api|pt|sv03.5-143",
+      "tcgdex|tcgdex-api|pt|sv04.5-202",
+      "tcgdex|tcgdex-api|pt|sv06-136",
       "tcgdex|tcgdex-api|pt|sv08-144",
       "tcgdex|tcgdex-api|pt|svp-051",
       "tcgdex|tcgdex-api|pt|svp-122",
+      "tcgdex|tcgdex-api|pt|swsh1-140",
       "tcgdex|tcgdex-api|pt|swsh10.5-055",
       "tcgdex|tcgdex-api|pt|swsh11-143",
       "tcgdex|tcgdex-api|pt|swsh11.5tg-TG10",
+      "tcgdex|tcgdex-api|pt|swsh12.5-109",
       "tcgdex|tcgdex-api|pt|swsh2-141",
+      "tcgdex|tcgdex-api|pt|swsh4-131",
       "tcgdex|tcgdex-api|pt|swsh6-224",
+      "tcgdex|tcgdex-api|pt|swsh8-206",
       "tcgdex|tcgdex-api|pt|swshp-SWSH032",
       "tcgdex|tcgdex-api|pt|swshp-SWSH068",
+      "tcgdex|tcgdex-api|pt|swshp-SWSH119",
       "tcgdex|tcgdex-api|pt|xy0-26",
-      "tcgdex|tcgdex-api|pt|xy2-80"
+      "tcgdex|tcgdex-api|pt|xy10-77",
+      "tcgdex|tcgdex-api|pt|xy2-80",
+      "tcgdex|tcgdex-api|pt|xy8-118"
     ],
     "disappeared": [],
-    "rekeyedCandidates": [
+    "rekeyedCandidates": [],
+    "localityDeltas": [
       {
-        "from": "ligapokemon|ligapokemon-catalogue|br-market|U0192",
-        "to": "ligapokemon|ligapokemon-catalogue|br-market|card=Hop%27s%20Snorlax%20%28117b%2F90%29&ed=PPPS8&num=117b",
-        "identityHintHash": "sha256:51feab29dd123a8d4ae5528c48010a7eaf0740234c6ee9834f284097afd8ec9f"
+        "stableKey": "tcgdex|tcgdex-api|es|A1-211",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
       },
       {
-        "from": "ligapokemon|ligapokemon-catalogue|br-market|U0219",
-        "to": "ligapokemon|ligapokemon-catalogue|br-market|card=Hop%27s%20Snorlax%20%28117b%2F90%29&ed=PPPS8&num=117b",
-        "identityHintHash": "sha256:51feab29dd123a8d4ae5528c48010a7eaf0740234c6ee9834f284097afd8ec9f"
+        "stableKey": "tcgdex|tcgdex-api|es|A1-250",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
       },
       {
-        "from": "ligapokemon|ligapokemon-catalogue|br-market|U0329",
-        "to": "ligapokemon|ligapokemon-catalogue|br-market|card=Hop%27s%20Snorlax%20%28117%2F096%29&ed=PPPS7&num=117",
-        "identityHintHash": "sha256:cbebabd3fac9066a78f0c6ce62df717748a9d5ffdcef6c51b95ae42abb4b22f4"
+        "stableKey": "tcgdex|tcgdex-api|es|A2a-063",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|P-A-049",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|bw7-109",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|bw8-101",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|me03-063",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|sm10-158",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|sv03.5-143",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|sv04.5-202",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|sv06-136",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|sv08-144",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|svp-051",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|svp-122",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh1-140",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh10.5-055",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh11-143",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh11.5tg-TG10",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh12.5-109",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh2-141",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh4-131",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh6-224",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swsh8-206",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swshp-SWSH032",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swshp-SWSH068",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|swshp-SWSH119",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|xy10-77",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|xy2-80",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
+      },
+      {
+        "stableKey": "tcgdex|tcgdex-api|es|xy8-118",
+        "from": "WEST",
+        "to": "WEST",
+        "fromEvidenceMode": "physical-locality",
+        "toEvidenceMode": "unqualified-language"
       }
     ],
-    "localityDeltas": [],
     "counts": {
       "added": 0,
-      "changed": 102,
+      "changed": 115,
       "disappeared": 0,
-      "rekeyedCandidates": 3,
-      "localityDeltas": 0
+      "rekeyedCandidates": 0,
+      "localityDeltas": 29
     }
   },
   "gaps": [
@@ -824,5 +1025,5 @@
     }
   ],
   "recordsPath": "verification/card_discovery_records.jsonl",
-  "recordsHash": "sha256:2fc7952194e262f42d6a4338ea5357ba5f14713ac487ee6ba8384f89041c401c"
+  "recordsHash": "sha256:67e48e0dd7b22d30327f67a2b3e0bed33557f4e8bfcd92bdfa41dc36ff365c82"
 }

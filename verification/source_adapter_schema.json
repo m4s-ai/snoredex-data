@@ -68,6 +68,7 @@
                 "coverageEdgeId": {"type": "string"},
                 "rawLocale": {"type": "string"},
                 "locality": {"type": "string"},
+                "localityEvidenceMode": {"enum": ["physical-locality", "unqualified-language"]},
                 "language": {"type": "string"},
                 "script": {"type": "string"}
               }

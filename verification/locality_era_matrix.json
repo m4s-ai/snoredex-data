@@ -288,7 +288,7 @@
           "start": null,
           "end": null,
           "state": "positive-observations-only",
-          "basis": "The retained Spanish TCGdex set and exact-name card slices do not identify same-language regional printings, so matches are routed only to pre-existing European legacy identities and never to LATAM.",
+          "basis": "The retained generic Spanish TCGdex set and exact-name card slices establish Spanish language only; they remain locality-unresolved and cannot select either WEST or LATAM identities.",
           "evidenceRefs": [
             "slice:tcgdex-es-sets",
             "card-slice:tcgdex-es-eu-snorlax",
@@ -311,7 +311,7 @@
           "card-gap:official-european-spanish-card-archive",
           "card-gap:western-locality-card-discovery"
         ],
-        "retryCondition": "Rerun the exact-name es slice for deltas; admit only matches to pre-existing WEST/es-ES identities and require a positive regional record for any LATAM/es-419 row."
+        "retryCondition": "Rerun the exact-name es slice for deltas; keep generic es rows locality-unresolved and require a positive ES or LA physical identifier before selecting a regional identity."
       },
       "evidenceRefs": [
         "unit:U0003",

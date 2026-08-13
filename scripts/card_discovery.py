@@ -787,8 +787,8 @@ def normalize_record(
     elif locality_evidence_mode == "unqualified-language":
         bucket = "needs-evidence"
         bucket_basis = (
-            "the provider locale establishes Portuguese language only; physical locality "
-            "remains unresolved"
+            f"the provider locale establishes {slice_row['language']} language only; physical "
+            "locality remains unresolved"
         )
     elif locality_evidence_mode == "market-only":
         bucket = "needs-evidence"

@@ -92,14 +92,14 @@ Era segments:
 
 - **Scope:** European-Spanish physical cards represented by every existing legacy Spanish unit.
 - **Identity boundary:** WEST/es-ES and LATAM/es-419 are distinct physical editions even when both are called Spanish.
-- **Discovery:** `complete-positive-slice` — Rerun the exact-name es slice for deltas; admit only matches to pre-existing WEST/es-ES identities and require a positive regional record for any LATAM/es-419 row.
+- **Discovery:** `complete-positive-slice` — Rerun the exact-name es slice for deltas; keep generic es rows locality-unresolved and require a positive ES or LA physical identifier before selecting a regional identity.
 - **Execution issue:** [#190](https://github.com/m4s-ai/snoredex-data/issues/190)
 - **Evidence:** `unit:U0003`, `slice:tcgdex-es-sets`, `card-slice:tcgdex-es-eu-snorlax`, `decision:D3`
 - **Open:** Which product pages distinguish European distribution from LATAM after March 2025?
 
 Era segments:
 
-- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained Spanish TCGdex set and exact-name card slices do not identify same-language regional printings, so matches are routed only to pre-existing European legacy identities and never to LATAM. Evidence: `slice:tcgdex-es-sets`, `card-slice:tcgdex-es-eu-snorlax`, `edge:tcgdex-west-positive`, `decision:D3`.
+- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained generic Spanish TCGdex set and exact-name card slices establish Spanish language only; they remain locality-unresolved and cannot select either WEST or LATAM identities. Evidence: `slice:tcgdex-es-sets`, `card-slice:tcgdex-es-eu-snorlax`, `edge:tcgdex-west-positive`, `decision:D3`.
 
 ### Legacy unqualified Portuguese (`west-pt-unqualified`)
 
