@@ -256,6 +256,53 @@ class CardDiscoveryTests(unittest.TestCase):
                         "20260813T135800Z", "20260813T135700Z", None
                     )
 
+    def test_replay_source_must_be_newest_compatible_complete_run(self):
+        contract = {
+            "meta": {
+                "coverageVersion": "current",
+                "reviewedAt": "2026-08-13",
+            },
+            "adapters": [],
+            "explicitMappings": [],
+        }
+        previous_contract = copy.deepcopy(contract)
+        previous_contract["meta"]["coverageVersion"] = "previous"
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            for run_id, snapshot in (
+                ("20260813T135800Z", previous_contract),
+                ("20260813T140000Z", contract),
+            ):
+                run_dir = runs_dir / run_id
+                run_dir.mkdir()
+                (run_dir / "contract.json").write_text(
+                    json.dumps(snapshot), encoding="utf-8"
+                )
+                (run_dir / "manifest.json").write_text(
+                    json.dumps({
+                        "runId": run_id,
+                        "status": "complete",
+                        "contractHash": discovery.content_hash(snapshot),
+                    }),
+                    encoding="utf-8",
+                )
+            with (
+                mock.patch.object(discovery, "RUNS_DIR", runs_dir),
+                mock.patch.object(
+                    discovery,
+                    "load_inputs",
+                    return_value=(contract, {}, {}),
+                ),
+                mock.patch.object(discovery, "validate_contract"),
+            ):
+                with self.assertRaisesRegex(
+                    discovery.DiscoveryError,
+                    "must be the newest compatible complete run",
+                ):
+                    discovery.replay_run(
+                        "20260813T135800Z", "20260813T150000Z", None
+                    )
+
     def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
         old = [
             {"stableKey": f"old-{unit}", "recordHash": unit,

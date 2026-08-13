@@ -1307,6 +1307,26 @@ def run_directories() -> list[Path]:
     )
 
 
+def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
+    """Return the newest complete run with the same acquisition contract."""
+    compatible = []
+    for run_dir in run_directories():
+        manifest = read_json(run_dir / "manifest.json")
+        if manifest.get("status") != "complete":
+            continue
+        snapshot_path = run_dir / "contract.json"
+        if not snapshot_path.is_file():
+            raise DiscoveryError(
+                f"complete run lacks its immutable contract snapshot: {run_dir.name}"
+            )
+        run_contract = read_json(snapshot_path)
+        if manifest.get("contractHash") != content_hash(run_contract):
+            raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
+        if acquisition_contract(run_contract) == acquisition_contract(contract):
+            compatible.append(run_dir.name)
+    return max(compatible, default=None)
+
+
 def build_latest(
     contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any]
 ) -> tuple[dict[str, Any], Path]:
@@ -2223,6 +2243,12 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
     validate_contract(source_contract, capability, identity)
     if acquisition_contract(source_contract) != acquisition_contract(contract):
         raise DiscoveryError("replay source differs in its provider acquisition contract")
+    newest_source_run_id = newest_compatible_complete_run(contract)
+    if source_run_id != newest_source_run_id:
+        raise DiscoveryError(
+            "replay source must be the newest compatible complete run: "
+            f"{source_run_id} != {newest_source_run_id}"
+        )
 
     timestamp = replayed_at or datetime.now(timezone.utc).replace(
         microsecond=0
