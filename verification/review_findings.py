@@ -1094,14 +1094,36 @@ def collect() -> None:
         fixture_faults = [fixture["fixtureId"] for fixture in set_graph["fixtures"]
                           if not fixture["passed"]]
         sqlite_faults = set_graph["reports"]["sqliteValidation"]["foreignKeyViolations"]
+        basis_editions = set_graph.get("basisViews", {}).get("setEditions", [])
+        basis_event_links = set_graph.get("basisViews", {}).get(
+            "editionReleaseEvents", [])
+        basis_faults = []
+        if {row["setEditionId"] for row in basis_editions} != set(set_editions_by_id):
+            basis_faults.append("set-edition basis view drops established editions")
+        expected_event_links = {
+            (edition_id, event["releaseEventId"])
+            for event in set_graph["releaseEvents"]
+            for edition_id in event["setEditionIds"]
+        }
+        if {(row["setEditionId"], row["releaseEventId"])
+                for row in basis_event_links} != expected_event_links:
+            basis_faults.append("edition/event basis links do not round-trip")
+        if not any(
+            row["setEditionId"] not in {link[0] for link in expected_event_links}
+            for row in basis_editions
+        ):
+            basis_faults.append("event-optional edition fixture disappeared")
+        if not set_graph["reports"]["sqliteValidation"].get(
+                "localSetLocalityGuardPassed"):
+            basis_faults.append("schema accepted edition locality outside local_set")
         check(
             "N9",
             "Set editions, release events and aliases survive the constrained graph round-trip",
             "FAIL",
             not edition_faults and not event_faults and not alias_faults
-            and not fixture_faults and sqlite_faults == 0,
+            and not fixture_faults and not basis_faults and sqlite_faults == 0,
             f"edition={edition_faults[:3]}, event={event_faults[:3]}, alias={alias_faults[:3]}, "
-            f"fixtures={fixture_faults}, sqlite={sqlite_faults}",
+            f"fixtures={fixture_faults}, basis={basis_faults}, sqlite={sqlite_faults}",
         )
 
         # Availability may decorate a card release ADR-0001 already established. It cannot invent a

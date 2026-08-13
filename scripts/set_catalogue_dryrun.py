@@ -32,7 +32,7 @@ IDENTITY_PATH = ROOT / "verification" / "print_identity_dryrun.json"
 RARITY_PATH = ROOT / "verification" / "rarity_catalogue.json"
 SCHEMA_PATH = ROOT / "verification" / "set_catalogue_schema.sql"
 OUTPUT_PATH = ROOT / "verification" / "set_catalogue_dryrun.json"
-SCHEMA_VERSION = "0.1.0"
+SCHEMA_VERSION = "0.2.0"
 
 LANGUAGE_SCRIPT = {
     "English": "Latn",
@@ -580,8 +580,35 @@ def build(source_doc: dict[str, Any], identity: dict[str, Any],
     ]
 
     events_by_set: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    events_by_edition: dict[str, list[str]] = defaultdict(list)
     for event in release_events:
         events_by_set[event["localSetId"]].append(event)
+        for edition_id in event["setEditionIds"]:
+            events_by_edition[edition_id].append(event["releaseEventId"])
+    basis_set_editions = [
+        {
+            "setEditionId": edition["setEditionId"],
+            "localSetId": edition["localSetId"],
+            "locality": local_sets[edition["localSetId"]]["locality"],
+            "localCode": local_sets[edition["localSetId"]]["localCode"],
+            "language": edition["language"],
+            "script": edition["script"],
+            "state": edition["state"],
+        }
+        for edition in edition_list
+    ]
+    basis_edition_events = sorted(
+        (
+            {
+                "setEditionId": edition_id,
+                "releaseEventId": event["releaseEventId"],
+                "linkBasis": event["linkBasis"],
+            }
+            for event in release_events
+            for edition_id in event["setEditionIds"]
+        ),
+        key=lambda item: (item["setEditionId"], item["releaseEventId"]),
+    )
     scalar_date_losses = []
     for node_id, events in sorted(events_by_set.items()):
         if len(events) > 1:
@@ -649,6 +676,20 @@ def build(source_doc: dict[str, Any], identity: dict[str, Any],
                 "releaseEventId": "EVENT:fixture:shared-multilingual-launch",
                 "editionEdges": ["fixture-English", "fixture-German", "fixture-Italian"],
                 "basis": "explicit provider statement, never inferred from a language list",
+            },
+        },
+        {
+            "fixtureId": "event-optional-set-editions",
+            "passed": len(basis_set_editions) == len(edition_list)
+            and any(not events_by_edition[row["setEditionId"]]
+                    for row in basis_set_editions),
+            "detail": {
+                "setEditions": len(basis_set_editions),
+                "editionReleaseEventLinks": len(basis_edition_events),
+                "editionsWithoutEvents": sum(
+                    not events_by_edition[row["setEditionId"]]
+                    for row in basis_set_editions
+                ),
             },
         },
         {
@@ -728,6 +769,10 @@ def build(source_doc: dict[str, Any], identity: dict[str, Any],
         "rarityClaims": rarity_claims,
         "profileFinishClaims": profile_finish_claims,
         "aliasAssertions": alias_assertions,
+        "basisViews": {
+            "setEditions": basis_set_editions,
+            "editionReleaseEvents": basis_edition_events,
+        },
         "sourceAssertions": sorted(
             assertions.values(), key=lambda item: item["sourceAssertionId"]),
         "reports": {
@@ -870,6 +915,19 @@ def validate_sqlite(model: dict[str, Any]) -> dict[str, Any]:
         cursor.execute("INSERT INTO record_disposition VALUES (?, ?, ?, ?)", (
             row["sourceRecordId"], row["disposition"], row["targetRef"], row["reason"]))
 
+    locality_guard_passed = False
+    guard_parent = model["localSets"][0]
+    try:
+        cursor.execute("INSERT INTO set_edition VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (
+            "EDITION:fixture:bad-locality", guard_parent["localSetId"],
+            "NOT-THE-PARENT-LOCALITY", "fixture-language", "Latn",
+            guard_parent["localCode"], "identified", "[]",
+        ))
+    except sqlite3.IntegrityError:
+        locality_guard_passed = True
+    if not locality_guard_passed:
+        raise ValueError("set_edition accepted locality outside its canonical local_set")
+
     violations = cursor.execute("PRAGMA foreign_key_check").fetchall()
     if violations:
         raise ValueError(f"SQLite foreign-key violations: {violations[:5]}")
@@ -898,7 +956,11 @@ def validate_sqlite(model: dict[str, Any]) -> dict[str, Any]:
         for table in tables
     }
     connection.close()
-    return {"foreignKeyViolations": 0, "tableCounts": counts}
+    return {
+        "foreignKeyViolations": 0,
+        "localSetLocalityGuardPassed": locality_guard_passed,
+        "tableCounts": counts,
+    }
 
 
 def render() -> str:

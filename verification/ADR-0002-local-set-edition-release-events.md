@@ -30,12 +30,14 @@ set would make the catalogue unable to discover what it was built to find.
 
 - `source_record` is an immutable provider row with its raw identifier and values.
 - `set_concept` is an optional editorial relationship. It is never a card-identity shortcut.
-- `local_set` is one set, deck, promo series or product family in one locality. Its provider code
-  is unique only with that locality.
+- `local_set` is one set, deck, promo series or product family in one locality. It is the canonical
+  owner of locality and local code; its provider code is unique only with that locality.
 - `set_edition` is one printed language/script edition of a local set. Language, script and market
-  locality remain separate values.
+  locality remain separate values. Repeated locality/code fields are validated projections of the
+  parent local set, not independent authority.
 - `release_event` carries date value, precision, approximation, status, timezone and explicit
-  market scope. Editions link to events; dates never live on a set concept.
+  distribution-market scope. Editions link to zero or more events; dates never live on a set
+  concept, and an event cannot override its local set's locality.
 - `finish_profile` carries language-bearing edition links, sourced rules, conditions, exceptions,
   precision and any justified closure scope.
 - `card_release_ref` points only to a release already established by ADR-0001. Set availability,

@@ -1,9 +1,9 @@
--- Snoredex local set catalogue schema 0.1.0 (#146).
+-- Snoredex local set catalogue schema 0.2.0 (#146/#209).
 -- This is the executable constraint contract for ADR-0002. The dry-run loads it into an
 -- in-memory SQLite database on every build; #140 decides whether/when it enters snoredex.sqlite.
 
 PRAGMA foreign_keys = ON;
-PRAGMA user_version = 1;
+PRAGMA user_version = 2;
 
 CREATE TABLE source_record (
     source_record_id TEXT PRIMARY KEY,
@@ -41,6 +41,13 @@ CREATE TABLE local_set (
     UNIQUE (locality, local_code)
 ) STRICT;
 
+-- locality/local_code form the stable local-set identity and cannot be rewritten beneath editions.
+CREATE TRIGGER local_set_identity_no_update
+BEFORE UPDATE OF locality, local_code ON local_set
+WHEN NEW.locality <> OLD.locality OR NEW.local_code <> OLD.local_code BEGIN
+    SELECT RAISE(ABORT, 'local_set owns immutable locality and local_code');
+END;
+
 CREATE TABLE local_set_concept (
     local_set_id TEXT NOT NULL REFERENCES local_set(local_set_id),
     set_concept_id TEXT NOT NULL REFERENCES set_concept(set_concept_id),
@@ -61,6 +68,29 @@ CREATE TABLE set_edition (
     UNIQUE (local_set_id, language, script),
     CHECK (locality <> '' AND language <> '' AND local_code <> '')
 ) STRICT;
+
+-- The repeated fields are compatibility projections. local_set remains their sole authority.
+CREATE TRIGGER set_edition_parent_identity_insert
+BEFORE INSERT ON set_edition
+WHEN NOT EXISTS (
+    SELECT 1 FROM local_set
+    WHERE local_set_id = NEW.local_set_id
+      AND locality = NEW.locality
+      AND local_code = NEW.local_code
+) BEGIN
+    SELECT RAISE(ABORT, 'set_edition locality/code must match its local_set');
+END;
+
+CREATE TRIGGER set_edition_parent_identity_update
+BEFORE UPDATE OF local_set_id, locality, local_code ON set_edition
+WHEN NOT EXISTS (
+    SELECT 1 FROM local_set
+    WHERE local_set_id = NEW.local_set_id
+      AND locality = NEW.locality
+      AND local_code = NEW.local_code
+) BEGIN
+    SELECT RAISE(ABORT, 'set_edition locality/code must match its local_set');
+END;
 
 CREATE TABLE edition_relation (
     edition_relation_id TEXT PRIMARY KEY,
@@ -96,6 +126,8 @@ CREATE TABLE release_event_market (
     market_scope TEXT NOT NULL,
     PRIMARY KEY (release_event_id, market_scope)
 ) STRICT;
+
+-- market_scope is distribution metadata; release_event.local_set_id owns physical locality.
 
 CREATE TABLE edition_release_event (
     set_edition_id TEXT NOT NULL REFERENCES set_edition(set_edition_id),
