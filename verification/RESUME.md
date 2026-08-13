@@ -481,6 +481,12 @@ search results and the European catalogue carry no negative evidence for LATAM. 
 Hungarian remain the already-contradicted legacy claims outside the locality universe; this work
 does not create tracks for either.
 
+Card-discovery run `20260813T110116Z` corrects the LigaPokemon replay boundary from three internal
+units to two provider-native listings. `U0192`/V2 and `U0219`/V1 remain separate observations under
+the shared `PPPS8/117b` listing; `U0329`/base remains the separate `PPPS7/117` listing. The slice
+therefore reports two fetched and two accounted provider details without changing its
+`market-only` locality status or inferring a Brazilian physical edition.
+
 The canonical write path is
 `python verification/passes/admit_latam_spanish_prints_20260811.py`. It replays the four print
 admissions, SPEC-0033 through SPEC-0036 and their four locality-bearing set profiles from the

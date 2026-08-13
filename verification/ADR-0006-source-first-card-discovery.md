@@ -183,6 +183,11 @@ Portuguese matrix tracks are terminal as `complete-positive-slice`, while the of
 physical-locality and Brazilian-archive gaps remain open. Czech and Hungarian remain contradicted
 legacy exclusions and are not locality tracks.
 
+Run `20260813T110116Z` corrects that replay boundary to two provider-native listings. `U0192` and
+`U0219` survive as holo/non-holo observations under the shared `PPPS8/117b` listing, while `U0329`
+remains the separate `PPPS7/117` listing. Both listings stay `needs-evidence`; the correction changes
+provider-detail accounting, not physical-locality attribution.
+
 ## Consequences
 
 The repository can now discover a positive official card record absent from the Cardmarket-derived

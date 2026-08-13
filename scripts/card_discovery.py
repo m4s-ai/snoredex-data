@@ -916,10 +916,18 @@ def diff_records(current: list[dict[str, Any]], previous: list[dict[str, Any]]) 
         new_hints[current_by_key[key]["identityHintHash"]].append(key)
     rekeyed = []
     for hint in sorted(set(old_hints) & set(new_hints)):
-        for old_key, new_key in zip(sorted(old_hints[hint]), sorted(new_hints[hint])):
+        old_keys = sorted(old_hints[hint])
+        new_keys = sorted(new_hints[hint])
+        pairs = (
+            [(old_key, new_keys[0]) for old_key in old_keys]
+            if len(new_keys) == 1 else zip(old_keys, new_keys)
+        )
+        used_new_keys = set()
+        for old_key, new_key in pairs:
             rekeyed.append({"from": old_key, "to": new_key, "identityHintHash": hint})
             disappeared.remove(old_key)
-            added.remove(new_key)
+            used_new_keys.add(new_key)
+        added.difference_update(used_new_keys)
     locality_deltas = [
         {
             "stableKey": key,
@@ -1307,6 +1315,7 @@ def new_manifest(
             elif response_format == "confirmed-source-json":
                 query_parameters.update({
                     "retainedUnitIds": slice_row["retainedUnitIds"],
+                    "providerIdentity": "canonical-card-ed-num-query",
                     "sourceRecord": "verification/confirmed_sources.json",
                     "pagination": "exact-reviewed-positive-frontier",
                 })
@@ -1541,36 +1550,7 @@ def refresh_confirmed_source_request(
     slice_row: dict[str, Any],
 ) -> None:
     """Replay only exact reviewed positive records from a browser-blocked source frontier."""
-    confirmed_by_id = {
-        row["unitId"]: row for row in read_json(CONFIRMED_SOURCES_PATH)
-    }
-    source_records = []
-    for unit_id in slice_row["retainedUnitIds"]:
-        retained = confirmed_by_id[unit_id]
-        source_url = retained.get("sourceUrl")
-        if not isinstance(source_url, str) or not source_url.startswith("https://"):
-            raise DiscoveryError(f"confirmed unit {unit_id} lacks an HTTPS source URL")
-        parameters = urllib.parse.parse_qs(urllib.parse.urlparse(source_url).query)
-        raw_set_code = parameters.get("ed", [None])[0]
-        local_number = parameters.get("num", [None])[0]
-        if not isinstance(raw_set_code, str) or not isinstance(local_number, str):
-            raise DiscoveryError(
-                f"confirmed unit {unit_id} lacks source-native edition/number parameters"
-            )
-        source_records.append({
-            "detailId": unit_id,
-            "localName": slice_row["nameQueries"][0],
-            "rawSetCode": raw_set_code,
-            "localCollectorNumber": local_number,
-            "cardImageUrl": None,
-            "setSymbolUrl": None,
-            "productScope": "physical-tcg",
-            "sourceUrl": source_url,
-            "sourceType": retained.get("sourceType"),
-            "variant": retained.get("variant"),
-            "checkedAt": retained.get("checkedAt"),
-            "providerRecord": retained,
-        })
+    source_records = confirmed_source_records(read_json(CONFIRMED_SOURCES_PATH), slice_row)
 
     query = slice_row["nameQueries"][0]
     if not request["pages"]:
@@ -1592,13 +1572,13 @@ def refresh_confirmed_source_request(
 
     details = {row["rawProviderId"]: row for row in request["details"]}
     for source_record in source_records:
-        unit_id = source_record["detailId"]
-        if unit_id in details:
+        listing_key = source_record["detailId"]
+        if listing_key in details:
             continue
         raw = canonical_bytes(source_record)
-        relative = f"raw/{request['sliceId']}/details/{unit_id}.json"
+        relative = f"raw/{request['sliceId']}/details/{listing_key}.json"
         detail = {
-            "rawProviderId": unit_id,
+            "rawProviderId": listing_key,
             "url": source_record["sourceUrl"],
             "rawPath": relative,
             "responseHash": retain_response(run_dir, relative, raw),
@@ -1606,9 +1586,75 @@ def refresh_confirmed_source_request(
             "parsedRecordHash": content_hash(source_record),
         }
         request["details"].append(detail)
-        details[unit_id] = detail
+        details[listing_key] = detail
         request["checkpoint"]["completedDetailIds"] = sorted(details)
         save_manifest(run_dir, manifest)
+
+
+def confirmed_source_records(
+    confirmed_sources: list[dict[str, Any]], slice_row: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Group repository observations by the provider-native LigaPokemon listing identity."""
+    confirmed_by_id: dict[str, dict[str, Any]] = {}
+    for row in confirmed_sources:
+        unit_id = row["unitId"]
+        if unit_id in confirmed_by_id:
+            raise DiscoveryError(f"duplicate confirmed unit {unit_id}")
+        confirmed_by_id[unit_id] = row
+    records_by_listing: dict[str, dict[str, Any]] = {}
+    for unit_id in slice_row["retainedUnitIds"]:
+        retained = confirmed_by_id[unit_id]
+        source_url = retained.get("sourceUrl")
+        if not isinstance(source_url, str) or not source_url.startswith("https://"):
+            raise DiscoveryError(f"confirmed unit {unit_id} lacks an HTTPS source URL")
+        parsed_url = urllib.parse.urlparse(source_url)
+        parameters = urllib.parse.parse_qs(parsed_url.query)
+        card = parameters.get("card", [None])[0]
+        raw_set_code = parameters.get("ed", [None])[0]
+        local_number = parameters.get("num", [None])[0]
+        if (
+            parsed_url.netloc.lower() != "www.ligapokemon.com.br"
+            or parameters.get("view") != ["cards/card"]
+            or not all(isinstance(value, str) and value for value in (
+                card, raw_set_code, local_number
+            ))
+        ):
+            raise DiscoveryError(
+                f"confirmed unit {unit_id} lacks a LigaPokemon card/edition/number identity"
+            )
+        listing_key = urllib.parse.urlencode(
+            (("card", card), ("ed", raw_set_code), ("num", local_number)),
+            quote_via=urllib.parse.quote,
+        )
+        identity = {
+            "localName": slice_row["nameQueries"][0],
+            "rawSetCode": raw_set_code,
+            "localCollectorNumber": local_number,
+        }
+        source_record = records_by_listing.get(listing_key)
+        if source_record is None:
+            source_record = {
+                "detailId": listing_key,
+                "providerListingKey": listing_key,
+                **identity,
+                "sourceUrl": source_url,
+                "cardImageUrl": None,
+                "setSymbolUrl": None,
+                "productScope": "physical-tcg",
+                "observations": [],
+            }
+            records_by_listing[listing_key] = source_record
+        elif any(source_record[field] != value for field, value in identity.items()):
+            raise DiscoveryError(f"LigaPokemon listing identity drift for {unit_id}")
+        source_record["observations"].append({
+            "unitId": unit_id,
+            "variant": retained.get("variant"),
+            "sourceType": retained.get("sourceType"),
+            "checkedAt": retained.get("checkedAt"),
+            "providerRecord": retained,
+        })
+
+    return list(records_by_listing.values())
 
 
 def refresh_official_localized_request(
