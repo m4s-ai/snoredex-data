@@ -31,8 +31,8 @@ as the same grains and foreign keys survive.
 | `languages` | one printed language vocabulary used by the catalogue | opaque `languageId` |
 | `localities` | one physical publication/distribution locality | opaque `localityId` |
 | `localSets` | one set, deck, promo series, or product family in one locality | opaque `localSetId` |
-| `setEditions` | one language/script edition of a local set | opaque `setEditionId` |
-| `releaseEvents` | one dated or explicitly undated market/wave event | opaque `releaseEventId` |
+| `setEditions` | one language/script edition of a locality-owning local set | opaque `setEditionId` |
+| `releaseEvents` | one dated or explicitly undated market/wave event for a local set | opaque `releaseEventId` |
 | `setRelations` | one reviewed, typed relationship between two local sets | opaque `setRelationId` |
 | `artworks` | one reviewed illustration identity independent of frame, language, or finish | opaque `artworkId` |
 | `artworkAppearances` | one card release displaying an artwork | opaque `appearanceId` |
@@ -46,16 +46,19 @@ provider identifier remains an alias with provenance; it is not a canonical prim
 A language is not a locality. Spanish may have WEST and LATAM editions; English may have WEST and
 SEA distributions. Czech and Hungarian can remain observed legacy language claims without becoming
 established locality-universe nodes. A language registry row therefore records its display name,
-BCP-47-compatible tag or explicit unresolved tag, default script, and catalogue state. Physical
-locality lives on the set edition and release event, never as a property inferred from the language
-name.
+BCP-47-compatible tag or explicit unresolved tag, default script, and catalogue state. `localSet`
+is the single canonical owner of physical locality. A set edition and release event reach locality
+through their `localSetId`; any repeated locality/code fields in a compatibility view are derived
+validation values and may not disagree with that parent. A release event's market scopes describe
+distribution inside the local set's locality; they never override or mint a physical locality.
 
 ### Sets, editions, and release dates
 
 `localSet` owns locality, local code, reviewed names, and product kind. `setEdition` links exactly
-one language and script to that local set. The same visible name and code may occur in more than one
-locality, and one edition may have several release events. Dates therefore live only on
-`releaseEvent`, with precision, approximation, status, timezone, market scope, and source.
+one language and script to that local set, whether or not any release event has been established.
+The same visible name and code may occur in more than one locality, and one edition may have several
+release events. Dates therefore live only on `releaseEvent`, with precision, approximation, status,
+timezone, distribution-market scope, and source.
 
 This prevents the two common destructive shortcuts: one scalar set date overwriting a later local
 wave, and one shared code turning several physical editions into a `languages[]` field.
@@ -108,10 +111,11 @@ Consumers receive deterministic, disposable views rather than editing the regist
 
 1. `languages` — catalogue languages and their scripts/states;
 2. `sets` — local sets, names, codes, editions, and release events;
-3. `setLanguages` — one row per set edition/event, preserving different dates;
-4. `siblingSets` — typed reviewed relationships with no inherited facts;
-5. `artworkTimeline` — stable artwork ids plus derived chronological ordinals;
-6. `artworkVariations` — every positively established physical variation grouped under its artwork.
+3. `setEditions` — exactly one row per established edition, including editions with no event;
+4. `editionReleaseEvents` — zero or more event links per edition, preserving separate dates/waves;
+5. `siblingSets` — typed reviewed relationships with no inherited facts;
+6. `artworkTimeline` — stable artwork ids plus derived chronological ordinals;
+7. `artworkVariations` — every positively established physical variation grouped under its artwork.
 
 Every view declares the exact canonical input hashes used to build it. Regeneration replaces a
 view atomically and is byte-deterministic for unchanged registries. A generated view is never an
