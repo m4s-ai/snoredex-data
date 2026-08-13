@@ -570,7 +570,7 @@ class CardDiscoveryTests(unittest.TestCase):
             "xJTG must remain a positive-evidence gap",
         )
 
-    def test_historical_frontiers_preserve_numbers_variants_and_deck_identity(self):
+    def test_historical_set_index_never_becomes_card_discovery(self):
         rows = [
             json.loads(line)
             for line in (
@@ -578,30 +578,31 @@ class CardDiscoveryTests(unittest.TestCase):
             ).read_text(encoding="utf-8").splitlines()
             if line
         ]
-        historical = {
-            row["rawProviderId"]: row
-            for row in rows
-            if row["providerId"] == "bulbapedia"
+        self.assertFalse(any(
+            row["providerId"] == "bulbapedia"
             and row["surfaceId"] == "bulbapedia-mediawiki"
-        }
-        self.assertEqual(set(historical), {
-            "U0095", "U0125", "U0212", "U0336", "U0364", "U0487", "U0621",
-        })
-        self.assertTrue(all(row["bucket"] == "matched" for row in historical.values()))
-        self.assertEqual(historical["U0095"]["raw"]["localCollectorNumber"], "27")
-        self.assertEqual(historical["U0125"]["raw"]["localCollectorNumber"], "11")
-        self.assertEqual(historical["U0487"]["raw"]["rawSetCode"], "KSS")
-        self.assertEqual(
-            {
-                historical["U0336"]["sourceRecord"]["variant"],
-                historical["U0621"]["sourceRecord"]["variant"],
-            },
-            {"V1", "V2"},
-        )
-        self.assertTrue(all(
-            row["queryParameters"]["revisionId"] == 4567865
-            for row in historical.values()
+            for row in rows
         ))
+        card_contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertNotIn(
+            "bulbapedia-historical-card-frontiers",
+            {row["adapterId"] for row in card_contract["adapters"]},
+        )
+        set_contract = json.loads(
+            (ROOT / "verification" / "source_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        set_adapter = next(
+            row for row in set_contract["adapters"]
+            if row["adapterId"] == "bulbapedia-historical-language-index"
+        )
+        self.assertEqual(set_adapter["category"], "set")
+        self.assertEqual(len(set_adapter["slices"]), 3)
         capability = json.loads(
             (ROOT / "verification" / "source_capability_graph.json").read_text(
                 encoding="utf-8"
@@ -613,6 +614,27 @@ class CardDiscoveryTests(unittest.TestCase):
         )
         self.assertEqual(edge["coverage"]["productCategories"], ["set"])
         self.assertNotIn("card-existence", edge["positiveEvidenceCapabilities"])
+
+        locality_matrix = json.loads(
+            (ROOT / "verification" / "locality_era_matrix.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        historical_tracks = {
+            track["trackId"]: track
+            for track in locality_matrix["tracks"]
+            if track["trackId"] in {"west-nl", "west-pl", "west-ru"}
+        }
+        self.assertEqual(set(historical_tracks), {"west-nl", "west-pl", "west-ru"})
+        for track in historical_tracks.values():
+            refs = list(track["evidenceRefs"])
+            refs.extend(track["discovery"]["sourceRefs"])
+            for era in track["eraSegments"]:
+                refs.extend(era["evidenceRefs"])
+            self.assertFalse(
+                any(ref.startswith("card-slice:bulbapedia-historical-") for ref in refs),
+                f"{track['trackId']} must not promote a set-only index to card discovery",
+            )
 
     def test_issue84_52poke_frontier_keeps_only_reviewed_numbered_rows(self):
         records = discovery.issue84_52poke_records()
