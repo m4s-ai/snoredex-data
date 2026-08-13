@@ -435,12 +435,15 @@ adapter slice accounts for one provider response, not an era or locality univers
 remain unknown. The matrix is the decomposition input for #139 child issues, not a replacement for
 their per-locality discovery loops.
 
-The first child loop, #188, is retained as card-discovery run `20260811T100924Z`: the exact English
-TCGdex query accounts for 45 rows as 41 matched physical releases and four source-identified
-Pokémon TCG Pocket exclusions. It yields no US/Canada, Europe, or Australia/New Zealand physical
-distribution discriminator, so the `west-en` track is terminal as a complete positive slice without
-inventing a regional split. A future split still requires a positive physical marking or
-distribution record.
+The first child loop, #188, began with exact-name card-discovery run `20260811T100924Z`. Issue #203
+extends that same English slice in run `20260813T135800Z` with TCGdex's bounded
+`name=like:Snorlax` filter. The retained response has 64 unique details: 57 match existing physical
+releases and seven source-identified Pokémon TCG Pocket records are positively excluded. Qualified
+names now include the three reviewed witnesses `swsh1-141` (Snorlax V), `sv09-117` (Hop's Snorlax),
+and `sv04-175` (Snorlax Doll). All 64 are accounted and the run has no request error. It still yields
+no US/Canada, Europe, or Australia/New Zealand physical distribution discriminator, so `west-en`
+remains a complete positive slice without inventing a regional split. A future split still requires
+a positive physical marking or distribution record.
 
 The second child loop, #189, is retained in run `20260811T105030Z`: the official Italian name
 filter accounts for twelve positive rows, all matched. The `west-it` track is now a complete

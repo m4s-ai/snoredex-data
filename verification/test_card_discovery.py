@@ -396,14 +396,32 @@ class CardDiscoveryTests(unittest.TestCase):
             if line
         ]
         english = [row for row in records if row["stableKey"].startswith("tcgdex|tcgdex-api|en|")]
-        self.assertEqual(len(english), 45)
-        self.assertEqual(sum(row["bucket"] == "matched" for row in english), 41)
+        self.assertEqual(len(english), 64)
+        self.assertEqual(sum(row["bucket"] == "matched" for row in english), 57)
         excluded = [row for row in english if row["bucket"] == "positively-excluded"]
         self.assertEqual(
             {row["rawProviderId"] for row in excluded},
-            {"A1-211", "A1-250", "A2a-063", "P-A-049"},
+            {"A1-211", "A1-250", "A2a-063", "A3b-057", "A3b-084", "A3b-091", "P-A-049"},
         )
         self.assertTrue(all(row["sourceRecord"]["setSeries"]["id"] == "tcgp" for row in excluded))
+        by_id = {row["rawProviderId"]: row for row in english}
+        self.assertEqual(
+            {raw_id: by_id[raw_id]["raw"]["localName"] for raw_id in (
+                "swsh1-141", "sv09-117", "sv04-175",
+            )},
+            {
+                "swsh1-141": "Snorlax V",
+                "sv09-117": "Hop's Snorlax",
+                "sv04-175": "Snorlax Doll",
+            },
+        )
+        self.assertTrue(all(
+            by_id[raw_id]["bucket"] == "matched"
+            for raw_id in ("swsh1-141", "sv09-117", "sv04-175")
+        ))
+        self.assertEqual(
+            by_id["swsh1-141"]["queryParameters"]["nameFilter"], "substring"
+        )
         self.assertTrue(all(row["locality"] == "WEST" for row in english))
         self.assertTrue(all("distributionRegion" not in row["sourceRecord"] for row in english))
 

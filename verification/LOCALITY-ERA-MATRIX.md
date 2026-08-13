@@ -38,7 +38,7 @@ issue unless new positive physical-card evidence overturns the recorded decision
 
 - **Scope:** English-language physical cards distributed in Western markets; region-specific products and stamps remain separate distribution identities.
 - **Identity boundary:** English text does not merge US/Canada, Europe, Australia/New Zealand, or later SEA distribution products when the physical card differs.
-- **Discovery:** `complete-positive-slice` — Rerun the exact-name slice for deltas; split regional products only when a positive physical marking or distribution record distinguishes them.
+- **Discovery:** `complete-positive-slice` — Rerun the bounded substring-name slice for deltas; split regional products only when a positive physical marking or distribution record distinguishes them.
 - **Execution issue:** [#188](https://github.com/m4s-ai/snoredex-data/issues/188)
 - **Evidence:** `unit:U0000`, `slice:tcgdex-en-sets`, `card-slice:tcgdex-en-snorlax`, `edge:tcgdex-west-positive`
 - **Distribution regions to split:** US/Canada, Europe, Australia/New Zealand
@@ -46,7 +46,7 @@ issue unless new positive physical-card evidence overturns the recorded decision
 
 Era segments:
 
-- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained English TCGdex set slice and exact-name Snorlax card slice account for every returned row, while provider population and regional distribution remain open. Evidence: `slice:tcgdex-en-sets`, `card-slice:tcgdex-en-snorlax`, `edge:tcgdex-west-positive`, `observation:obs-tcgdex-west`.
+- `provider-observed-unbounded` (open → open; `positive-observations-only`): The retained English TCGdex set slice and bounded substring-name Snorlax card slice account for every returned row, including qualified names, while provider population and regional distribution remain open. Evidence: `slice:tcgdex-en-sets`, `card-slice:tcgdex-en-snorlax`, `edge:tcgdex-west-positive`, `observation:obs-tcgdex-west`.
 
 ### Western French (`west-fr`)
 
