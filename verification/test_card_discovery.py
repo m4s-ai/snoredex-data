@@ -9,6 +9,7 @@ import tempfile
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -241,6 +242,20 @@ class CardDiscoveryTests(unittest.TestCase):
             discovery.acquisition_contract(previous),
             discovery.acquisition_contract(contract),
         )
+
+    def test_replay_destination_must_sort_after_every_retained_run(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            (runs_dir / "20260813T135800Z").mkdir()
+            with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
+                with self.assertRaisesRegex(
+                    discovery.DiscoveryError,
+                    "must sort after every retained run",
+                ):
+                    discovery.replay_run(
+                        "20260813T135800Z", "20260813T135700Z", None
+                    )
+
     def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
         old = [
             {"stableKey": f"old-{unit}", "recordHash": unit,

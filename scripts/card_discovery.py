@@ -2203,6 +2203,15 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
         raise DiscoveryError(f"replay source run does not exist: {source_run_id}")
     if run_dir.exists():
         raise DiscoveryError(f"replay destination run already exists: {run_id}")
+    retained_run_ids = [
+        path.name for path in RUNS_DIR.iterdir()
+        if path.is_dir() and RUN_ID_PATTERN.fullmatch(path.name)
+    ]
+    if retained_run_ids and run_id <= max(retained_run_ids):
+        raise DiscoveryError(
+            "replay destination run must sort after every retained run: "
+            f"{run_id} <= {max(retained_run_ids)}"
+        )
 
     contract, capability, identity = load_inputs()
     source_manifest = read_json(source_dir / "manifest.json")
