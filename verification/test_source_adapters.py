@@ -69,6 +69,30 @@ class SourceAdapterTests(unittest.TestCase):
         self.assertFalse(english["normalizationProposal"]["crossLocaleMerge"])
         self.assertIsNone(english["normalizationProposal"]["target"])
 
+    def test_unqualified_language_cannot_propose_a_physical_locality(self):
+        spanish_slice = {
+            **SLICE_EN,
+            "sliceId": "fixture-es",
+            "rawLocale": "es",
+            "language": "Spanish",
+            "localityEvidenceMode": "unqualified-language",
+        }
+        row, errors = self.normalize(
+            {"id": "ME03", "name": "Megaevolución—Ascenso Heroico"}, spanish_slice
+        )
+        self.assertEqual(row["localityEvidenceMode"], "unqualified-language")
+        self.assertIsNone(row["locality"])
+        self.assertIsNone(row["raw"]["market"])
+        self.assertEqual(row["bucket"], "ambiguous/needs-evidence")
+        self.assertIn("Spanish language only", row["bucketBasis"])
+        self.assertIsNone(row["normalizationProposal"]["locality"])
+        self.assertEqual(
+            row["normalizationProposal"]["localityEvidenceMode"],
+            "unqualified-language",
+        )
+        self.assertIsNone(row["normalizationProposal"]["target"])
+        self.assertEqual(errors, [])
+
     def test_same_locale_provider_id_collision_is_parked_but_not_dropped(self):
         first, first_errors = self.normalize(
             {"id": "CSV1C", "name": "亘古开来"}, duplicate_occurrence=1

@@ -1269,6 +1269,21 @@ def collect() -> None:
                 and row["normalizationProposal"]["finishProfile"]["verbatim"]
                 != row["raw"]["finishProfileText"])
         ]
+        generic_spanish_sets = [
+            row for row in adapter_records
+            if row["providerId"] == "tcgdex" and row["rawLocale"] == "es"
+        ]
+        spanish_locality_faults = [
+            row["recordId"] for row in generic_spanish_sets
+            if row.get("locality") is not None
+            or row.get("localityEvidenceMode") != "unqualified-language"
+            or row["raw"].get("market") is not None
+            or row["bucket"] != "ambiguous/needs-evidence"
+            or row["normalizationProposal"].get("locality") is not None
+            or row["normalizationProposal"].get("localityEvidenceMode")
+                != "unqualified-language"
+            or row["normalizationProposal"].get("target") is not None
+        ]
         same_id_locales: dict[tuple[str, str], set[str]] = {}
         same_id_keys: dict[tuple[str, str], set[str]] = {}
         for row in adapter_records:
@@ -1288,13 +1303,15 @@ def collect() -> None:
             "N13",
             "Local ids, locale boundaries, finish prose and unresolved catalogue tracks survive",
             "FAIL",
-            not provenance_faults and not preservation_faults and not collapsed_locales
+            not provenance_faults and not preservation_faults and not spanish_locality_faults
+            and generic_spanish_sets and not collapsed_locales
             and not missing_gap_terms
             and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
                     for row in adapter_stage["slices"])
             and all(row["terminalState"] in {"needs-evidence", "blocked-by-source"}
                     for row in adapter_stage["gaps"]),
             f"provenance={provenance_faults[:3]}, preservation={preservation_faults[:3]}, "
+            f"spanishLocality={spanish_locality_faults[:3]}, "
             f"collapsedLocales={collapsed_locales[:3]}, missingGapTerms={missing_gap_terms}",
         )
 

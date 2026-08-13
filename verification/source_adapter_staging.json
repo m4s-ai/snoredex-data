@@ -2,12 +2,12 @@
   "meta": {
     "schema": "snoredex-source-adapter-staging",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.1.0",
-    "generatedFromRun": "20260811T144120Z",
-    "previousRun": "20260809T155355Z",
+    "coverageVersion": "1.2.0",
+    "generatedFromRun": "20260813T122130Z",
+    "previousRun": "20260811T144120Z",
     "contract": "verification/source_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
-    "contractHash": "sha256:67933ca723db009f63959f382d6a56c0d3da9bbca2e9db9c292321c84cf9f05d",
+    "contractHash": "sha256:b5ac6c982efe67b28c2ced2a0428cf1d2939c6314c78a57a04145c03042554c3",
     "capabilityGraphHash": "sha256:440b60db0b71f6687c1acf9852a38e23e53cae84fcaec103afcba212601d8791",
     "sourceFirst": true,
     "verdictMutationAllowed": false,
@@ -15,8 +15,8 @@
       "slices": 15,
       "records": 1621,
       "mapped": 5,
-      "newCandidate": 1614,
-      "ambiguousNeedsEvidence": 2,
+      "newCandidate": 1460,
+      "ambiguousNeedsEvidence": 156,
       "positivelyExcluded": 0,
       "runErrors": 0,
       "gaps": 10
@@ -131,8 +131,8 @@
       "accounting": {
         "fetched": 154,
         "mapped": 0,
-        "newCandidate": 154,
-        "ambiguousNeedsEvidence": 0,
+        "newCandidate": 0,
+        "ambiguousNeedsEvidence": 154,
         "positivelyExcluded": 0,
         "accounted": 154
       }
@@ -311,27 +311,12 @@
   ],
   "runErrors": [],
   "diff": {
-    "added": [
-      "bulbapedia|bulbapedia-mediawiki|nl|Base Set",
-      "bulbapedia|bulbapedia-mediawiki|nl|Fossil",
-      "bulbapedia|bulbapedia-mediawiki|nl|Jungle",
-      "bulbapedia|bulbapedia-mediawiki|pl|Diamond & Pearl",
-      "bulbapedia|bulbapedia-mediawiki|pl|Mysterious Treasures",
-      "bulbapedia|bulbapedia-mediawiki|ru|Ancient Origins",
-      "bulbapedia|bulbapedia-mediawiki|ru|BREAKthrough",
-      "bulbapedia|bulbapedia-mediawiki|ru|Flashfire",
-      "bulbapedia|bulbapedia-mediawiki|ru|Furious Fists",
-      "bulbapedia|bulbapedia-mediawiki|ru|Kalos Starter Set",
-      "bulbapedia|bulbapedia-mediawiki|ru|Phantom Forces",
-      "bulbapedia|bulbapedia-mediawiki|ru|Primal Clash",
-      "bulbapedia|bulbapedia-mediawiki|ru|Roaring Skies",
-      "bulbapedia|bulbapedia-mediawiki|ru|XY"
-    ],
+    "added": [],
     "changed": [],
     "disappeared": [],
     "rekeyedCandidates": [],
     "counts": {
-      "added": 14,
+      "added": 0,
       "changed": 0,
       "disappeared": 0,
       "rekeyedCandidates": 0
@@ -430,5 +415,5 @@
     }
   ],
   "recordsPath": "verification/source_adapter_records.jsonl",
-  "recordsHash": "sha256:39012acc6567ddad7db5c33fffc44498a18f6b184862071d3e0d57e57224e25b"
+  "recordsHash": "sha256:4ea0d924da92f42239c86e55f75bfb0e6521cc7cd1d53386ee7b9927d795c78e"
 }

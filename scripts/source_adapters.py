@@ -374,6 +374,12 @@ def normalize_record(
     )
     stable_id = "raw:" + hashlib.sha256(key.encode("utf-8")).hexdigest()[:24]
     mapping = mappings.get(key)
+    locality_evidence_mode = slice_row.get(
+        "localityEvidenceMode", "physical-locality"
+    )
+    physical_locality = (
+        None if locality_evidence_mode == "unqualified-language" else slice_row["locality"]
+    )
     profile, finish_parked = finish_profile(source_record, stable_id, run_errors)
     excluded = source_record.get("isDigitalOnly") is True
     ambiguous = duplicate_occurrence is not None or not isinstance(
@@ -392,6 +398,12 @@ def normalize_record(
             if duplicate_occurrence is not None else
             "required identity field or finish-profile parse needs evidence"
         )
+    elif locality_evidence_mode == "unqualified-language":
+        bucket = "ambiguous/needs-evidence"
+        bucket_basis = (
+            f"the provider locale establishes {slice_row['language']} language only; physical "
+            "locality remains unresolved"
+        )
     elif mapping:
         bucket = "mapped"
         bucket_basis = mapping["evidence"]
@@ -409,7 +421,7 @@ def normalize_record(
         "cardCount": source_record.get("cardCount"),
         "releaseDate": release_date,
         "releaseStatus": source_record.get("releaseStatus"),
-        "market": slice_row["locality"],
+        "market": physical_locality,
         "finishProfileText": source_record.get("finishProfileText"),
     }
     record_hash = content_hash(source_record)
@@ -433,7 +445,8 @@ def normalize_record(
         "rawProviderId": provider_id,
         "rawProviderIdOccurrence": duplicate_occurrence,
         "rawLocale": slice_row["rawLocale"],
-        "locality": slice_row["locality"],
+        "locality": physical_locality,
+        "localityEvidenceMode": locality_evidence_mode,
         "retrievedAt": request["retrievedAt"],
         "responseHash": request["responseHash"],
         "recordHash": record_hash,
@@ -446,12 +459,13 @@ def normalize_record(
             "entityType": "local-set",
             "localName": local_name,
             "localCode": local_code,
-            "locality": slice_row["locality"],
+            "locality": physical_locality,
+            "localityEvidenceMode": locality_evidence_mode,
             "language": slice_row["language"],
             "script": slice_row["script"],
             "releaseDate": release_date,
             "releaseDatePrecision": date_precision(release_date),
-            "target": None if mapping is None else {
+            "target": None if mapping is None or physical_locality is None else {
                 "targetType": mapping["targetType"], "targetId": mapping["targetId"]
             },
             "crossLocaleMerge": False,

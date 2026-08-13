@@ -44,8 +44,8 @@ Every row enters exactly one accounting bucket:
 
 - `mapped` only when `explicitMappings` names a target and positive mapping evidence;
 - `new-candidate` for a parseable positive source record with no explicit mapping;
-- `ambiguous/needs-evidence` for identity collisions, incomplete identity fields or parked finish
-  clauses; or
+- `ambiguous/needs-evidence` for identity collisions, incomplete identity fields, unresolved
+  physical locality or parked finish clauses; or
 - `positively-excluded` only when the source record itself establishes the exclusion, such as an
   explicit digital-only flag.
 
@@ -53,6 +53,11 @@ There is no automatic cross-locale merge. Raw suffixes, scripts and date precisi
 same raw id in two locales creates two keys. Reused ids inside one locale retain every occurrence
 and park them for evidence rather than overwriting either row. Diffs report added, changed,
 disappeared and re-key candidates; the last is a review queue, not an alias assertion.
+
+TCGdex's generic `es` locale establishes Spanish language but does not distinguish European from
+LATAM distribution. Those set rows therefore carry `localityEvidenceMode=unqualified-language`,
+have no physical locality or normalization target, and remain in `ambiguous/needs-evidence` until
+positive evidence supplies an `ES` or `LA` physical identifier.
 
 ## Loop and terminal states
 
@@ -90,7 +95,7 @@ disagreement; it may not resolve it by conflating identities.
 
 ## Consequences
 
-The committed run contributes 1,607 positive local-set candidates across twelve request slices.
+The initial committed run contributed 1,607 positive local-set candidates across twelve request slices.
 Two Simplified-Chinese records sharing raw id `CSV1C` are separately retained and parked, so the
 total remains exactly accounted. No mapping into ADR-0002 is asserted in this issue; the staging
 feed is ready for #136 and later explicit reconciliation.
