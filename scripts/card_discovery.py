@@ -247,9 +247,13 @@ def pagination_complete(pages: list[dict[str, Any]]) -> bool:
         return False
     ordered = sorted(pages, key=lambda row: row["pageNo"])
     total_pages = ordered[0]["totalPages"]
+    detail_ids = [
+        detail_id for page in ordered for detail_id in page.get("detailIds", [])
+    ]
     return (
         [row["pageNo"] for row in ordered] == list(range(1, total_pages + 1))
         and all(row["totalPages"] == total_pages for row in ordered)
+        and len(detail_ids) == len(set(detail_ids))
     )
 
 
@@ -1073,6 +1077,7 @@ def build_projection(
             discovered_ids: list[str] = []
             list_hashes: set[str] = set()
             pages_by_query: dict[str, list[dict[str, Any]]] = defaultdict(list)
+            pagination_failed = False
             for page in request["pages"]:
                 raw = checked_raw_path(run_dir, page["rawPath"]).read_bytes()
                 if content_hash(raw) != page["responseHash"]:
@@ -1113,6 +1118,7 @@ def build_projection(
             for query in slice_row["nameQueries"]:
                 pages = pages_by_query.get(query, [])
                 if not pagination_complete(pages):
+                    pagination_failed = True
                     run_errors.append({
                         "code": "incomplete-pagination", "sliceId": request["sliceId"],
                         "query": query, "meaning": "needs-evidence; never a closed catalogue",
@@ -1183,7 +1189,10 @@ def build_projection(
                 if asset["url"] != assertion["assetUrl"]:
                     raise DiscoveryError(f"set-symbol URL differs for {asset['rawSetCode']}")
 
-            if not slice_records:
+            if pagination_failed:
+                terminal_state = "needs-evidence"
+                source_failure_state = "source-failed"
+            elif not slice_records:
                 run_errors.append({
                     "code": "zero-result", "sliceId": request["sliceId"],
                     "meaning": "source-failed/needs-evidence; never negative evidence",
@@ -1815,6 +1824,13 @@ def refresh_official_localized_request(
             save_manifest(run_dir, manifest)
             total_pages = parsed_total_pages
             page_no += 1
+
+    for query in slice_row["nameQueries"]:
+        pages = [row for row in request["pages"] if row["query"] == query]
+        if not pagination_complete(pages):
+            raise DiscoveryError(
+                f"official localized pagination is incomplete or duplicates a detail path for {query!r}"
+            )
 
     details = {row["rawProviderId"]: row for row in request["details"]}
     for page in request["pages"]:
