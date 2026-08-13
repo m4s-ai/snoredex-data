@@ -487,6 +487,12 @@ the shared `PPPS8/117b` listing; `U0329`/base remains the separate `PPPS7/117` l
 therefore reports two fetched and two accounted provider details without changing its
 `market-only` locality status or inferring a Brazilian physical edition.
 
+Card-discovery run `20260813T115958Z` makes the generic TCGdex `es` locale an
+`unqualified-language` frontier. Its 29 rows remain fully accounted (25 physical rows in
+`needs-evidence`, four positively excluded Pocket rows) and may not select WEST or LATAM releases
+without an independent regional physical identifier. Official source-first records with complete
+`ES` or `LA` printed modifiers remain separate and retain their physical-locality authority.
+
 The canonical write path is
 `python verification/passes/admit_latam_spanish_prints_20260811.py`. It replays the four print
 admissions, SPEC-0033 through SPEC-0036 and their four locality-bearing set profiles from the

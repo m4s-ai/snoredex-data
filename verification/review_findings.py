@@ -1509,7 +1509,6 @@ def collect() -> None:
         western_locale_expectations = {
             "fr": ("French", "Ronflex", 38, 34),
             "de": ("German", "Relaxo", 40, 36),
-            "es": ("Spanish", "Snorlax", 29, 25),
         }
         western_locale_faults = []
         for locale, (language, local_name, total, physical_total) in (
@@ -1548,17 +1547,29 @@ def collect() -> None:
                 )
             ):
                 western_locale_faults.append(locale)
-        spanish_targets = [
-            row["normalizationProposal"].get("targetCardReleaseId") or ""
+        spanish_rows = [
+            row
             for row in card_records
             if row["providerId"] == "tcgdex" and row["rawLocale"] == "es"
         ]
-        if any("LATAM" in target for target in spanish_targets):
-            western_locale_faults.append("es-cross-locality")
+        spanish_physical = [
+            row for row in spanish_rows
+            if row["sourceRecord"].get("productScope") == "physical-tcg"
+        ]
+        if (
+            len(spanish_rows) != 29 or len(spanish_physical) != 25
+            or any(row["bucket"] != "needs-evidence" for row in spanish_physical)
+            or any(row.get("localityEvidenceMode") != "unqualified-language"
+                   for row in spanish_physical)
+            or any(row["normalizationProposal"].get("targetCardReleaseId") is not None
+                   for row in spanish_physical)
+            or any(row["normalizationProposal"].get("localityEvidenceMode")
+                   != "unqualified-language" for row in spanish_physical)
+        ):
+            western_locale_faults.append("unqualified-es")
         expected_tg10 = {
             "fr": ("Origine Perdue Galerie de Dresseurs", "Ronflement Retentissant"),
             "de": ("Verlorener Ursprung Trainer-Galerie", "Dumpfes Geschnarche"),
-            "es": ("Origen Perdido Galería de Entrenador", "Ronquido Descomunal"),
         }
         tg10_rows = {
             row["rawLocale"]: row for row in card_records

@@ -401,7 +401,6 @@ class CardDiscoveryTests(unittest.TestCase):
         expected = {
             "fr": ("French", "Ronflex", 38, 34),
             "de": ("German", "Relaxo", 40, 36),
-            "es": ("Spanish", "Snorlax", 29, 25),
         }
         for locale, (language, local_name, total, physical_total) in expected.items():
             rows = [
@@ -455,10 +454,28 @@ class CardDiscoveryTests(unittest.TestCase):
             {
                 "fr": ("Origine Perdue Galerie de Dresseurs", "Ronflement Retentissant"),
                 "de": ("Verlorener Ursprung Trainer-Galerie", "Dumpfes Geschnarche"),
-                "es": ("Origen Perdido Galería de Entrenador", "Ronquido Descomunal"),
             },
         )
-        self.assertNotIn("LATAM", tg10["es"]["normalizationProposal"]["targetCardReleaseId"])
+
+        spanish = [
+            row for row in records
+            if row["providerId"] == "tcgdex" and row["rawLocale"] == "es"
+        ]
+        spanish_physical = [
+            row for row in spanish
+            if row["sourceRecord"]["productScope"] == "physical-tcg"
+        ]
+        self.assertEqual(len(spanish), 29)
+        self.assertEqual(len(spanish_physical), 25)
+        self.assertTrue(all(
+            row["bucket"] == "needs-evidence"
+            and row["localityEvidenceMode"] == "unqualified-language"
+            and row["normalizationProposal"]["targetCardReleaseId"] is None
+            for row in spanish_physical
+        ))
+        me03 = next(row for row in spanish if row["rawProviderId"] == "me03-063")
+        self.assertIsNone(me03["normalizationProposal"]["targetCardReleaseId"])
+        self.assertIn("Spanish language only", me03["bucketBasis"])
 
     def test_committed_italian_slice_accounts_for_filter_without_claiming_history(self):
         records = [

@@ -149,15 +149,16 @@ Pokémon TCG Pocket rows per locale are positively excluded from the physical-ca
 through their retained `tcgp` set-series identity.
 
 TCGdex's `es` locale contains no physical Europe-versus-LATAM discriminator. Its rows therefore
-match only pre-existing `WEST/es-ES` identities; the slice cannot create or populate a
-`LATAM/es-419` release. Missing official French, German, and European-Spanish archive routes remain
-three explicit `needs-evidence` gaps, and no omitted record or era becomes a negative verdict.
+remain `unqualified-language` observations in `needs-evidence` and cannot select or populate either
+`WEST/es-ES` or `LATAM/es-419`. Explicit regional records keep their printed `ES` or `LA` modifier.
+Missing official French, German, and European-Spanish archive routes remain three explicit
+`needs-evidence` gaps, and no omitted record or era becomes a negative verdict.
 
-Under the reviewed mappings it accounts for 207 records overall: 157 matched, 32 Taiwan
-candidates, eighteen positively excluded, zero ambiguous or needs-evidence records, and zero run
-errors. Against published run `20260811T105030Z`, the deterministic record delta is 107 added, 40
-source-record changes, zero disappeared, and zero rekey candidates. `west-fr`, `west-de`, and
-`west-es-eu` are terminal as
+The historical run under the reviewed mappings accounts for 207 records overall: 157 matched, 32
+Taiwan candidates, eighteen positively excluded, zero ambiguous or needs-evidence records, and zero
+run errors. Against published run `20260811T105030Z`, its deterministic record delta is 107 added,
+40 source-record changes, zero disappeared, and zero rekey candidates. Later runs apply the
+corrected unqualified Spanish scope. `west-fr`, `west-de`, and `west-es-eu` are terminal as
 `complete-positive-slice`; their official-archive and regional-distribution gaps stay open.
 
 ## Portuguese locality run result
