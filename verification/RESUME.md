@@ -12,6 +12,20 @@ This file is both the current verification playbook and a chronological research
 checkpoints unless explicitly marked current. Paths and commands are relative to the repository
 root.
 
+## Before opening a PR: one command (#213)
+
+After any change to source data, run the single entrypoint instead of guessing which
+generator each change needs:
+
+    python scripts/regen.py          # regenerate every derived artifact, then verify
+    python scripts/regen.py --check  # skip the write phase and verify (what CI calls)
+
+`regen.py` runs all generators in dependency order, then the determinism check, the cross-artifact
+gate, and every core regression suite. Browser, live-source and publish canaries stay in CI because
+they are environment checks, not regeneration. A stale artifact fails before CI sees the PR — that is
+the point: no more red gates from a forgotten `print_identity_dryrun.json` or
+`card_discovery_staging.json`.
+
 ## What this file is
 
 The verification playbook and the research log behind it: every source technique that worked, every

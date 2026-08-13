@@ -26,6 +26,8 @@ jobs:
     env:
       # Keep the checkout artifact-clean while generators import sibling modules.
       PYTHONDONTWRITEBYTECODE: "1"
+      # Windows defaults redirected Python output to cp1252; card data includes δ and other Unicode.
+      PYTHONUTF8: "1"
     strategy:
       fail-fast: false
       matrix:
@@ -74,85 +76,14 @@ jobs:
               sys.exit("\n".join(bad))
           PY
 
-      # --- integrity: structural invariants, in both suites ---
-      - name: Structural integrity
-        run: python verification/review_integrity.py
-
-      - name: Legacy candidate-universe contract
-        run: python scripts/legacy_baseline.py --check
-
-      # ADR-0001 is proposed, not in force, but its dry run must keep accounting for every legacy
-      # row — a mapping that silently drops one is how a migration loses data later (#134).
-      - name: Print identity dry run
-        run: python scripts/print_identity_dryrun.py --check
-
-      # The evidence-granularity inventory and conservative application policy (#137). It must not
-      # go stale: every consumer projection reads its per-unit application status.
-      - name: Evidence semantics inventory
-        run: python scripts/evidence_semantics.py --check
-
-      - name: Evidence application regression tests
-        run: python verification/test_evidence_application.py
-
-      - name: Database fingerprint portability regression test
-        run: python verification/test_database_portability.py
-
-      - name: Owner adjudication regression tests
-        run: python verification/test_owner_adjudications.py
-
-      - name: Source-first adapter regression tests
-        run: python verification/test_source_adapters.py
-
-      - name: Source-first card discovery regression tests
-        run: python verification/test_card_discovery.py
-
-      # The bounded #148 backfill must account for every legacy alias, release row, language/date
-      # relationship and finish unit without turning an absence into a set-level assertion.
-      - name: Legacy set reconciliation regression tests
-        run: python verification/test_legacy_set_reconciliation.py
-
-      # Drift-metric polarity. A queue emptying is progress and a queue refilling is not, and the
-      # suite could express neither until #69 — nor fail on either.
-      - name: Metric polarity regression tests
-        run: python verification/test_metric_polarity.py
-
-      # Harness properties: importing the findings suite must stay free of side effects, and a
-      # crash mid-collection must still render the checks that ran (#70).
-      - name: Findings harness regression tests
-        run: python verification/test_findings_harness.py
+      # --- core gate: integrity, regressions and generator determinism (#213) ---
+      # The script owns this list so local readiness and CI cannot drift apart.
+      - name: Generated artifacts and core regressions
+        run: python scripts/regen.py --check
 
       - name: Live finish-source verification
         if: runner.os == 'Linux'
         run: python verification/verify_finish_sources.py
-
-      - name: Cross-artifact consistency and publication readiness
-        run: python verification/review_findings.py
-
-      # --- determinism: committed artifacts must match what the generators produce ---
-      - name: Generated artifacts match their inputs
-        shell: bash
-        run: |
-          python scripts/analyze.py --check
-          python scripts/finishes.py --reproject
-          python scripts/language_status.py
-          python scripts/confirmed_releases.py
-          python scripts/source_registry.py --check
-          python scripts/source_capabilities.py --check
-          python scripts/source_adapters.py --check
-          python scripts/card_discovery.py --check
-          python scripts/locality_matrix.py --check
-          python scripts/legacy_set_reconciliation.py --check
-          python scripts/checklist.py --check
-          python scripts/readme_stats.py --check
-          python scripts/issue_templates.py --check
-          python scripts/open_items.py --check
-          python scripts/database.py --check
-          python scripts/tracker.py check-template
-          python scripts/site.py --check
-          git diff --exit-code || {
-              echo "::error::Regenerating produced different output than what is committed."
-              exit 1
-            }
 
       # --- behaviour: the page has to actually work ---
       - name: Browser tests
