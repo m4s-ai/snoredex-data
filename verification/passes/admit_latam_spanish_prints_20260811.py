@@ -48,6 +48,24 @@ def reconcile(rows: list[dict], expected: list[dict], key: str, check: bool) -> 
     return changed
 
 
+def reconcile_set_profiles(rows: list[dict], expected: list[dict], check: bool) -> bool:
+    natural_fields = ("provider", "providerRecordKey", "retrieved")
+    wanted_keys = {tuple(row[field] for field in natural_fields) for row in expected}
+    by_natural: dict[tuple[str, str, str], list[dict]] = {}
+    for row in rows:
+        natural_key = tuple(row.get(field) for field in natural_fields)
+        if natural_key in wanted_keys:
+            by_natural.setdefault(natural_key, []).append(row)
+    for wanted in expected:
+        natural_key = tuple(wanted[field] for field in natural_fields)
+        matches = by_natural.get(natural_key, [])
+        if len(matches) > 1 or (
+            matches and matches[0].get("sourceRecordId") != wanted["sourceRecordId"]
+        ):
+            raise SystemExit(f"drift in set-profile natural key {natural_key!r}")
+    return reconcile(rows, expected, "sourceRecordId", check)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -85,7 +103,7 @@ def main() -> int:
     specimens_doc["count"] = specimens_count
 
     records = sets_doc["sourceRecords"]
-    sets_changed = reconcile(records, DATA["setProfiles"], "sourceRecordId", args.check)
+    sets_changed = reconcile_set_profiles(records, DATA["setProfiles"], args.check)
     if sets_changed:
         wanted_ids = {row["sourceRecordId"] for row in DATA["setProfiles"]}
         records[:] = [row for row in records if row["sourceRecordId"] not in wanted_ids]
