@@ -78,7 +78,7 @@ Era segments:
 
 - **Scope:** Italian-language physical cards, with the official localized detail archive as a card-level route.
 - **Identity boundary:** The Italian archive proves only the exact returned card; it inherits no finish or absence closure from official checklist surfaces.
-- **Discovery:** `complete-positive-slice` — The retained Italian filter slice accounts for every returned path; use positive official or specialist routes for the demonstrated historical archive gap.
+- **Discovery:** `complete-positive-slice` — The retained Italian filter slice accounts for all four declared result pages and 42 unique returned paths; use positive official or specialist routes for the demonstrated historical archive gap.
 - **Execution issue:** [#189](https://github.com/m4s-ai/snoredex-data/issues/189)
 - **Evidence:** `unit:U0368`, `observation:obs-tpci-it-card-archive`, `slice:tcgdex-it-sets`, `card-slice:tpci-it-snorlax`
 - **Open:** Which positive sources cover the historical cards omitted by the official name filter?

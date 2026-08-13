@@ -392,16 +392,16 @@ absence-capable for its published checklists.
 
 **The first archive route is wired up.** The Italian surface is declared as positive-only
 card/language evidence, and `U0368` (`RR 111`) cites the exact publisher page instead of the
-set-level index. Card-discovery run `20260811T105030Z` also retains the publisher's bounded
-`cardName=Snorlax` response: twelve exact result paths, localized names and `cms2-it-it` images,
-all matched to existing Italian releases. The other locale routes still need their own retained
-positive observations and edges before use; one working Italian slice does not establish their
-coverage or era boundaries.
+set-level index. Card-discovery run `20260813T130659Z` retains all four pages declared by the
+publisher's bounded `cardName=Snorlax` response: 42 unique result paths with localized names and
+`cms2-it-it` images. Twelve retain reviewed exact mappings and 30 remain non-destructive new
+candidates. The other locale routes still need their own retained positive observations and edges
+before use; one working Italian slice does not establish their coverage or era boundaries.
 
-The Italian filter itself is demonstrably incomplete: its twelve entries omit the independently
+The Italian filter itself is demonstrably incomplete: its 42 entries still omit the independently
 reachable `pl2/111` page. This is stored as the explicit
 `official-italian-archive-filter-coverage` gap. The retained response is complete only as one
-provider slice; the missing row is evidence about the filter's limitation, never evidence that a
+four-page provider slice; the missing row is evidence about the filter's limitation, never evidence that a
 card or era was not printed.
 
 Until 2026-08-10 that was fatal: every retained run under `verification/runs/` recorded a

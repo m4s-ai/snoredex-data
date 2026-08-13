@@ -104,7 +104,10 @@ OFFICIAL_LIST = b"""
   <li><a href="/it/gcc/archivio-carte/series/svp/184/">
     <img src="https://assets.pokemon.com/cms2-it-it/img/cards/web/SVP/SVP_IT_184.png"
          alt="Snorlax di Hop"></a></li>
-</ul></body></html>
+</ul>
+<div id="cards-load-more"><div><span>1 di 4</span>
+  <a href="/it/gcc/archivio-carte?cardName=Snorlax&amp;page=2">next</a>
+</div></div></body></html>
 """
 SVQP_ASSERTION = {
     "providerId": "fixture-provider",
@@ -316,7 +319,19 @@ class CardDiscoveryTests(unittest.TestCase):
             OFFICIAL_LIST, "pokemon-official-localized-html", "it"
         )
         self.assertEqual(parsed["resultCount"], 2)
-        self.assertEqual(parsed["totalPages"], 1)
+        self.assertEqual(parsed["totalPages"], 4)
+
+    def test_official_declared_result_page_cannot_be_skipped(self):
+        parsed = discovery.parse_list(
+            OFFICIAL_LIST, "pokemon-official-localized-html", "it"
+        )
+        retained_pages = [{"pageNo": 1, "totalPages": parsed["totalPages"]}]
+        self.assertFalse(discovery.pagination_complete(retained_pages))
+        retained_pages.extend(
+            {"pageNo": page_no, "totalPages": parsed["totalPages"]}
+            for page_no in (2, 3, 4)
+        )
+        self.assertTrue(discovery.pagination_complete(retained_pages))
 
     def test_official_italian_filter_challenge_is_a_source_failure(self):
         with self.assertRaisesRegex(discovery.DiscoveryError, "access challenge"):
@@ -489,13 +504,29 @@ class CardDiscoveryTests(unittest.TestCase):
                 "pokemon-official|tpci-localized-card-archive|it|"
             )
         ]
-        self.assertEqual(len(italian), 12)
-        self.assertTrue(all(row["bucket"] == "matched" for row in italian))
+        self.assertEqual(len(italian), 42)
+        self.assertEqual(
+            {bucket: sum(row["bucket"] == bucket for row in italian)
+             for bucket in {row["bucket"] for row in italian}},
+            {"matched": 12, "new-candidate": 30},
+        )
         self.assertTrue(all(
             row["sourceRecord"]["recordSource"] == "localized-archive-list-entry"
             for row in italian
         ))
         self.assertNotIn("pl2/111", {row["rawProviderId"] for row in italian})
+        stage = json.loads(
+            (ROOT / "verification" / "card_discovery_staging.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        retained_slice = next(
+            row for row in stage["slices"] if row["sliceId"] == "tpci-it-snorlax"
+        )
+        self.assertEqual(retained_slice["checkpoint"]["completedPages"], [
+            "Snorlax:1", "Snorlax:2", "Snorlax:3", "Snorlax:4",
+        ])
+        self.assertEqual(retained_slice["accounting"]["fetched"], 42)
         contract = json.loads(
             (ROOT / "verification" / "card_discovery_adapters.json").read_text(
                 encoding="utf-8"

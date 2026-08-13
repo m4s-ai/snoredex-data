@@ -2,23 +2,23 @@
   "meta": {
     "schema": "snoredex-card-discovery-staging",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.10.0",
-    "generatedFromRun": "20260813T115958Z",
-    "previousRun": "20260813T110116Z",
+    "coverageVersion": "1.11.0",
+    "generatedFromRun": "20260813T130659Z",
+    "previousRun": "20260813T115958Z",
     "contract": "verification/card_discovery_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "identityGraph": "verification/print_identity_dryrun.json",
-    "contractHash": "sha256:9f7a06bff1081fc4f184bfe941d1cef52cfab3788d5459270c42bbfd130fd891",
+    "contractHash": "sha256:13381ef4e639e61dcee1fac8db49ddd655e7f3393084076f7381c384c779d006",
     "capabilityGraphHash": "sha256:28da36acb95eae7ac86f7c04e78631e383daa32632692bdd5f4f096d695474ae",
     "identityGraphHash": "sha256:d8bd3902478112ae0184e864d62f1570375064dc892e8f6c90ec3dcb7006dcaf",
     "sourceFirst": true,
     "verdictMutationAllowed": false,
     "counts": {
       "slices": 12,
-      "records": 250,
+      "records": 280,
       "matched": 136,
       "ambiguous": 0,
-      "newCandidate": 43,
+      "newCandidate": 73,
       "positivelyExcluded": 18,
       "needsEvidence": 53,
       "runErrors": 0,
@@ -471,10 +471,32 @@
       "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
       "checkpoint": {
         "completedPages": [
-          "Snorlax:1"
+          "Snorlax:1",
+          "Snorlax:2",
+          "Snorlax:3",
+          "Snorlax:4"
         ],
         "completedDetailIds": [
+          "bw7/109",
+          "bw8/101",
+          "col1/33",
+          "dp1/37",
+          "g1/58",
+          "me03/63",
+          "pgo/55",
+          "sm10/158",
+          "sm115/50",
+          "sm9/120",
+          "sm9/171",
+          "sm9/191",
           "smp/SM169",
+          "sv04/175",
+          "sv06/136",
+          "sv08/144",
+          "sv09/117",
+          "sv3pt5/143",
+          "sv4pt5/202",
+          "sv8pt5/76",
           "svp/122",
           "svp/184",
           "svp/51",
@@ -482,22 +504,33 @@
           "swsh1/141",
           "swsh1/142",
           "swsh1/197",
+          "swsh1/206",
+          "swsh11/143",
+          "swsh11tg/TG10",
+          "swsh12pt5/109",
+          "swsh2/141",
+          "swsh4/131",
+          "swsh6/224",
+          "swsh8/206",
           "swshp/SWSH032",
           "swshp/SWSH068",
           "swshp/SWSH119",
-          "xy0/26"
+          "xy0/26",
+          "xy10/77",
+          "xy2/80",
+          "xy8/118"
         ],
         "nextPage": null,
         "complete": true
       },
       "accounting": {
-        "fetched": 12,
+        "fetched": 42,
         "matched": 12,
         "ambiguous": 0,
-        "newCandidate": 0,
+        "newCandidate": 30,
         "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 12
+        "accounted": 42
       }
     },
     {
@@ -581,7 +614,38 @@
   ],
   "runErrors": [],
   "diff": {
-    "added": [],
+    "added": [
+      "pokemon-official|tpci-localized-card-archive|it|bw7/109",
+      "pokemon-official|tpci-localized-card-archive|it|bw8/101",
+      "pokemon-official|tpci-localized-card-archive|it|col1/33",
+      "pokemon-official|tpci-localized-card-archive|it|dp1/37",
+      "pokemon-official|tpci-localized-card-archive|it|g1/58",
+      "pokemon-official|tpci-localized-card-archive|it|me03/63",
+      "pokemon-official|tpci-localized-card-archive|it|pgo/55",
+      "pokemon-official|tpci-localized-card-archive|it|sm10/158",
+      "pokemon-official|tpci-localized-card-archive|it|sm115/50",
+      "pokemon-official|tpci-localized-card-archive|it|sm9/120",
+      "pokemon-official|tpci-localized-card-archive|it|sm9/171",
+      "pokemon-official|tpci-localized-card-archive|it|sm9/191",
+      "pokemon-official|tpci-localized-card-archive|it|sv04/175",
+      "pokemon-official|tpci-localized-card-archive|it|sv06/136",
+      "pokemon-official|tpci-localized-card-archive|it|sv08/144",
+      "pokemon-official|tpci-localized-card-archive|it|sv09/117",
+      "pokemon-official|tpci-localized-card-archive|it|sv3pt5/143",
+      "pokemon-official|tpci-localized-card-archive|it|sv4pt5/202",
+      "pokemon-official|tpci-localized-card-archive|it|sv8pt5/76",
+      "pokemon-official|tpci-localized-card-archive|it|swsh1/206",
+      "pokemon-official|tpci-localized-card-archive|it|swsh11/143",
+      "pokemon-official|tpci-localized-card-archive|it|swsh11tg/TG10",
+      "pokemon-official|tpci-localized-card-archive|it|swsh12pt5/109",
+      "pokemon-official|tpci-localized-card-archive|it|swsh2/141",
+      "pokemon-official|tpci-localized-card-archive|it|swsh4/131",
+      "pokemon-official|tpci-localized-card-archive|it|swsh6/224",
+      "pokemon-official|tpci-localized-card-archive|it|swsh8/206",
+      "pokemon-official|tpci-localized-card-archive|it|xy10/77",
+      "pokemon-official|tpci-localized-card-archive|it|xy2/80",
+      "pokemon-official|tpci-localized-card-archive|it|xy8/118"
+    ],
     "changed": [
       "tcgdex|tcgdex-api|de|base2-11",
       "tcgdex|tcgdex-api|de|base2-27",
@@ -591,6 +655,7 @@
       "tcgdex|tcgdex-api|de|dp1-37",
       "tcgdex|tcgdex-api|de|ecard3-100",
       "tcgdex|tcgdex-api|de|ex15-10",
+      "tcgdex|tcgdex-api|de|ex6-15",
       "tcgdex|tcgdex-api|de|me03-063",
       "tcgdex|tcgdex-api|de|pl2-111",
       "tcgdex|tcgdex-api|de|sv06-136",
@@ -604,7 +669,6 @@
       "tcgdex|tcgdex-api|de|xy2-80",
       "tcgdex|tcgdex-api|de|xy8-118",
       "tcgdex|tcgdex-api|en|base2-11",
-      "tcgdex|tcgdex-api|en|base4-30",
       "tcgdex|tcgdex-api|en|bw7-109",
       "tcgdex|tcgdex-api|en|bw8-101",
       "tcgdex|tcgdex-api|en|col1-33",
@@ -653,7 +717,6 @@
       "tcgdex|tcgdex-api|es|swsh8-206",
       "tcgdex|tcgdex-api|es|swshp-SWSH032",
       "tcgdex|tcgdex-api|es|xy8-118",
-      "tcgdex|tcgdex-api|fr|base2-11",
       "tcgdex|tcgdex-api|fr|dp1-37",
       "tcgdex|tcgdex-api|fr|g1-58",
       "tcgdex|tcgdex-api|fr|sm10-158",
@@ -701,217 +764,13 @@
     ],
     "disappeared": [],
     "rekeyedCandidates": [],
-    "localityDeltas": [
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|A1-211",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|A1-250",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|A2a-063",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|P-A-049",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|bw7-109",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|bw8-101",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|me03-063",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|sm10-158",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|sv03.5-143",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|sv04.5-202",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|sv06-136",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|sv08-144",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|svp-051",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|svp-122",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh1-140",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh10.5-055",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh11-143",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh11.5tg-TG10",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh12.5-109",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh2-141",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh4-131",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh6-224",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swsh8-206",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swshp-SWSH032",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swshp-SWSH068",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|swshp-SWSH119",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|xy10-77",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|xy2-80",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      },
-      {
-        "stableKey": "tcgdex|tcgdex-api|es|xy8-118",
-        "from": "WEST",
-        "to": "WEST",
-        "fromEvidenceMode": "physical-locality",
-        "toEvidenceMode": "unqualified-language"
-      }
-    ],
+    "localityDeltas": [],
     "counts": {
-      "added": 0,
-      "changed": 115,
+      "added": 30,
+      "changed": 114,
       "disappeared": 0,
       "rekeyedCandidates": 0,
-      "localityDeltas": 29
+      "localityDeltas": 0
     }
   },
   "gaps": [
@@ -948,7 +807,7 @@
       "providerId": "pokemon-official",
       "surfaceId": "tpci-localized-card-archive",
       "terminalState": "needs-evidence",
-      "reason": "The bounded Italian Snorlax filter positively returns twelve detail paths, but it omits the independently reachable known-positive pl2/111 card page; the filter therefore cannot close historical archive coverage.",
+      "reason": "The bounded four-page Italian Snorlax filter positively returns 42 unique detail paths, but it omits the independently reachable known-positive pl2/111 card page; the filter therefore cannot close historical archive coverage.",
       "retryCondition": "Use additional official positive routes or retained specialist records for omitted eras; never convert a missing filter row into absence."
     },
     {
@@ -1025,5 +884,5 @@
     }
   ],
   "recordsPath": "verification/card_discovery_records.jsonl",
-  "recordsHash": "sha256:67e48e0dd7b22d30327f67a2b3e0bed33557f4e8bfcd92bdfa41dc36ff365c82"
+  "recordsHash": "sha256:ef1bb82cf213203b320262b46ef5c5641a877f11a0dbd926edd96247a19f4bba"
 }
