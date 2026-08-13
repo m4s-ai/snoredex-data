@@ -237,48 +237,31 @@ The pre-PR gate, matching CI:
 pip install -r requirements.txt
 python -m playwright install chromium
 
-python verification/review_integrity.py
-python verification/review_findings.py           # stdlib only, no network — quickest check
+python scripts/regen.py                          # write every derived artifact, then run the core gate
+python scripts/regen.py --check                  # skip the write phase; this is what CI calls
 
-# The gate regenerates these FOR REAL, so run them before checking anything downstream.
-# Don't maintain this list by hand here: `python scripts/regen.py` (and `--check`) IS the
-# whole generator + determinism + regression suite in dependency order (#213). It replaced
-# this block because a hand-maintained subset drifted from the gate three times — the last
-# was `legacy_set_reconciliation`, which this block did not name at all: it reads the
-# language store and its ledger goes stale on any write pass. If you add a generator or a
-# suite, add it to scripts/regen.py (and the gate's call of it), not to a prose list.
-python scripts/regen.py --check                  # regenerate (or verify) everything; what CI calls
-
-# Every regression suite CI runs. Missing one from this list is how work passes locally and
-# reddens CI, which has now happened three times — see the note under the block.
-python verification/test_evidence_application.py # raw verdict/application projection boundary
-python verification/test_owner_adjudications.py  # owner decision/store projection
-python verification/test_source_adapters.py      # source-first catalogue regressions
-python verification/test_card_discovery.py       # source-first card-loop regressions
-python verification/test_legacy_set_reconciliation.py  # bounded reconciliation ledger
-python verification/test_metric_polarity.py      # which way losing is, per metric
-python verification/test_findings_harness.py     # the check protocol itself
+# These environment canaries deliberately stay outside regen.py.
 python verification/test_site.py                 # browser acceptance tests
 python verification/verify_finish_sources.py     # live TCGCSV assertions
 python scripts/publish.py --out _site             # build the artifact, THEN verify it
 python scripts/publish.py --out _site --verify    # --verify, not --check; exits 1 without --out
-git diff --exit-code -- . ':(exclude)*.sqlite'   # a generator whose output moves fails here
+git diff --exit-code -- . ':(exclude)*.sqlite'   # equivalent scope enforced inside regen.py
 ```
 
-**The `.sqlite` files are excluded from that diff, and always must be.** A SQLite file records the
+Do not maintain a second generator or regression list here: `scripts/regen.py` owns the dependency
+order and core suite, and the workflow calls it directly. The hand-maintained predecessor drifted
+from CI three times; the last omission was `legacy_set_reconciliation`.
+
+**The `.sqlite` files are excluded from regen.py's byte diff, and always must be.** A SQLite file records the
 version number of the library that wrote it in its own header, so two environments running different
 SQLite builds produce different bytes from identical data — measured here as 128,107 differing bytes
 between SQLite 3.53.1 and 3.45.1 whose `iterdump()` output was identical line for line. Regeneration
 is deterministic *within* one version and cannot be made deterministic *across* versions, `VACUUM`
 included. `scripts/database.py` has always known this — `sqlite_dump()` exists precisely so `--check`
-compares the logical dump instead of a file hash — and CI has only ever run `database.py --check` and
-`tracker.py check-template` on these two. This line is what makes the documented gate agree with the
-pipeline it describes ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
+compares the logical dump instead of a file hash. `database.py --check` and
+`tracker.py check-template` cover their content instead
+([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
 Their content is still covered, by those two checks, against what is committed.
-
-**`tracker.py check-template` prints its failure and exits 0.** Wrapping it in `|| echo FAIL`
-stays silent; CI catches it only by running it as its own step under `-e`. Check its output, not its
-status ([LESSONS](LESSONS.md#the-eight-generator-loop-is-not-the-gate)).
 
 `P6` scans full git history, so it fails on a shallow clone regardless of the tree. `git fetch
 --unshallow` once, and it becomes a real check locally instead of expected noise.
@@ -364,7 +347,7 @@ the corpus grew, record the cause beside the number.
 - Repository is `github.com/m4s-ai/snoredex-data`. Work lands on a **feature branch via pull
   request** — do not push to `main`.
 - **Sync `main` before starting any task.** Begin by `git fetch origin` and, from a clean
-  `main`, `git pull` (or `git reset --hard origin/main`) so the branch you cut is based on the
+  `main`, `git pull --ff-only origin main` so the branch you cut is based on the
   latest commit, not a stale local copy. Never start work on a branch whose base is older than
   `origin/main` — that is how parallel agents' work silently collides and how stale artifacts
   sneak back in.

@@ -21,7 +21,7 @@ TARGET = ROOT / "verification" / "evidence_semantics.json"
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess:
-    return subprocess.run(cmd, cwd=ROOT, text=True,
+    return subprocess.run(cmd, cwd=ROOT, text=True, encoding="utf-8",
                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
@@ -30,24 +30,26 @@ def main() -> int:
         print(f"SKIP: {TARGET} missing")
         return 0
 
-    original = TARGET.read_text(encoding="utf-8")
+    original = TARGET.read_bytes()
     try:
         # Corrupt the committed artifact: bump the units count so the --check
         # determinism step must notice the committed file differs from a fresh
         # regeneration.
-        corrupted = original.replace('"units": ', '"units": 999999, "stale": ', 1)
+        corrupted = original.replace(b'"units": ', b'"units": 999999, "stale": ', 1)
         if corrupted == original:
             print("SKIP: could not find marker to corrupt")
             return 0
-        TARGET.write_text(corrupted, encoding="utf-8")
+        TARGET.write_bytes(corrupted)
         proc = run([sys.executable, str(REGEN), "--check"])
-        if proc.returncode == 0:
-            print("FAIL: regen.py --check passed despite a stale artifact")
+        expected = "FAILED determinism scripts/evidence_semantics.py --check"
+        if proc.returncode == 0 or expected not in proc.stdout:
+            print("FAIL: regen.py --check did not identify the stale artifact")
+            print(proc.stdout)
             return 1
         print(f"OK: regen.py --check rejected stale artifact (exit {proc.returncode})")
         return 0
     finally:
-        TARGET.write_text(original, encoding="utf-8")
+        TARGET.write_bytes(original)
 
 
 if __name__ == "__main__":

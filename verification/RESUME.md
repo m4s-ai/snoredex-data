@@ -18,10 +18,11 @@ After any change to source data, run the single entrypoint instead of guessing w
 generator each change needs:
 
     python scripts/regen.py          # regenerate every derived artifact, then verify
-    python scripts/regen.py --check  # verify committed artifacts only (what CI calls)
+    python scripts/regen.py --check  # skip the write phase and verify (what CI calls)
 
-`regen.py` runs all generators in dependency order, then the determinism diff, the cross-artifact
-gate, and every regression suite. A stale artifact fails it before CI ever sees the PR — that is
+`regen.py` runs all generators in dependency order, then the determinism check, the cross-artifact
+gate, and every core regression suite. Browser, live-source and publish canaries stay in CI because
+they are environment checks, not regeneration. A stale artifact fails before CI sees the PR — that is
 the point: no more red gates from a forgotten `print_identity_dryrun.json` or
 `card_discovery_staging.json`.
 
