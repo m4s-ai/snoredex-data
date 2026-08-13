@@ -189,6 +189,23 @@ class SourceAdapterTests(unittest.TestCase):
         self.assertEqual(diff["rekeyedCandidates"][0]["from"], old["stableKey"])
         self.assertEqual(diff["rekeyedCandidates"][0]["to"], new["stableKey"])
 
+    def test_diff_surfaces_normalization_only_locality_changes(self):
+        spanish_slice = {
+            **SLICE_EN,
+            "sliceId": "fixture-es",
+            "rawLocale": "es",
+            "language": "Spanish",
+        }
+        source_record = {"id": "ME03", "name": "Megaevolución—Ascenso Heroico"}
+        old, _ = self.normalize(source_record, spanish_slice)
+        new, _ = self.normalize(
+            source_record,
+            {**spanish_slice, "localityEvidenceMode": "unqualified-language"},
+        )
+        diff = adapters.diff_records([new], [old])
+        self.assertEqual(diff["changed"], [new["stableKey"]])
+        self.assertEqual(diff["counts"]["changed"], 1)
+
     def test_incomplete_pagination_is_a_run_error(self):
         contract = {
             "meta": {"coverageVersion": "test"},

@@ -497,7 +497,9 @@ Source-adapter run `20260813T122130Z` applies the same boundary to TCGdex's gene
 catalogue. All 154 `es` rows are retained and accounted in `ambiguous/needs-evidence`; record,
 raw-market and normalization-proposal locality are null, every row carries
 `localityEvidenceMode=unqualified-language`, and no row has a normalization target. The complete
-run still accounts for 1,621 rows across fifteen slices with no request or run error.
+run still accounts for 1,621 rows across fifteen slices with no request or run error; its staged
+diff explicitly reports the 154 normalization changes even though the retained provider bytes did
+not change.
 
 The canonical write path is
 `python verification/passes/admit_latam_spanish_prints_20260811.py`. It replays the four print

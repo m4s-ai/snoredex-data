@@ -479,9 +479,22 @@ def diff_records(current: list[dict[str, Any]], previous: list[dict[str, Any]]) 
     previous_by_key = {row["stableKey"]: row for row in previous}
     added = set(current_by_key) - set(previous_by_key)
     disappeared = set(previous_by_key) - set(current_by_key)
+
+    def diff_signature(row: dict[str, Any]) -> tuple[Any, ...]:
+        proposal = row["normalizationProposal"]
+        return (
+            row["recordHash"],
+            row.get("locality"),
+            row.get("localityEvidenceMode", "physical-locality"),
+            row["bucket"],
+            proposal.get("locality"),
+            proposal.get("localityEvidenceMode", "physical-locality"),
+            proposal.get("target"),
+        )
+
     changed = sorted(
         key for key in set(current_by_key) & set(previous_by_key)
-        if current_by_key[key]["recordHash"] != previous_by_key[key]["recordHash"]
+        if diff_signature(current_by_key[key]) != diff_signature(previous_by_key[key])
     )
 
     old_hints: dict[str, list[str]] = defaultdict(list)
