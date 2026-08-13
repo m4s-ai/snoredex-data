@@ -148,12 +148,12 @@ Era segments:
 - **Identity boundary:** A positive Dutch card does not make a neighbouring set, promo, or era Dutch.
 - **Discovery:** `complete-positive-slice` — Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources.
 - **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
-- **Evidence:** `slice:bulbapedia-historical-nl-sets`, `card-slice:bulbapedia-historical-nl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0095`, `unit:U0125`
+- **Evidence:** `slice:bulbapedia-historical-nl-sets`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0095`, `unit:U0125`
 - **Open:** Which Dutch promos, decks and products sit outside the three indexed expansions?
 
 Era segments:
 
-- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for three positive Dutch expansion rows (Base Set, Jungle, Fossil); the card frontier matches both Jungle Snorlax numbers. Evidence: `slice:bulbapedia-historical-nl-sets`, `card-slice:bulbapedia-historical-nl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0095`, `unit:U0125`.
+- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for three positive Dutch expansion rows (Base Set, Jungle, Fossil) at set grain only. The referenced Jungle Snorlax units remain separately evidenced card records and are not derived from that index. Evidence: `slice:bulbapedia-historical-nl-sets`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0095`, `unit:U0125`.
 - `non-expansion-and-unlisted-history` (open → open; `needs-evidence`): The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown. Evidence: `source-gap:bulbapedia-non-expansion-catalogue`, `card-gap:historical-non-expansion-card-discovery`.
 
 ### Historical Polish (`west-pl`)
@@ -162,12 +162,12 @@ Era segments:
 - **Identity boundary:** A confirmed Polish Diamond & Pearl card is one era point and cannot close other sets.
 - **Discovery:** `complete-positive-slice` — Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources.
 - **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
-- **Evidence:** `slice:bulbapedia-historical-pl-sets`, `card-slice:bulbapedia-historical-pl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0364`
+- **Evidence:** `slice:bulbapedia-historical-pl-sets`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0364`
 - **Open:** Which Polish promos, decks and products sit outside the two indexed expansions?
 
 Era segments:
 
-- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for two positive Polish expansion rows (Diamond & Pearl, Mysterious Treasures); the card frontier matches DP 37. Evidence: `slice:bulbapedia-historical-pl-sets`, `card-slice:bulbapedia-historical-pl-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0364`.
+- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for two positive Polish expansion rows (Diamond & Pearl, Mysterious Treasures) at set grain only. The referenced DP 37 unit remains a separately evidenced card record and is not derived from that index. Evidence: `slice:bulbapedia-historical-pl-sets`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0364`.
 - `non-expansion-and-unlisted-history` (open → open; `needs-evidence`): The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown. Evidence: `source-gap:bulbapedia-non-expansion-catalogue`, `card-gap:historical-non-expansion-card-discovery`.
 
 ### Historical Russian (`west-ru`)
@@ -176,12 +176,12 @@ Era segments:
 - **Identity boundary:** The owner-adjudicated end of the Russian XY run guides review but is not a provider-wide automatic absence rule.
 - **Discovery:** `complete-positive-slice` — Rerun only as a new pinned revision comparison; add promos and decks through their own bounded category sources.
 - **Execution issue:** [#193](https://github.com/m4s-ai/snoredex-data/issues/193)
-- **Evidence:** `slice:bulbapedia-historical-ru-sets`, `card-slice:bulbapedia-historical-ru-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0212`, `unit:U0336`, `unit:U0487`, `unit:U0621`
+- **Evidence:** `slice:bulbapedia-historical-ru-sets`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0212`, `unit:U0336`, `unit:U0487`, `unit:U0621`
 - **Open:** Which Russian promos and decks lie outside the nine indexed set rows?
 
 Era segments:
 
-- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for nine positive Russian rows from Kalos Starter Set/XY through BREAKthrough; the card frontier preserves KSS 26, FLF 80 V1/V2 and BKT 118. The later dash cells are not absence evidence. Evidence: `slice:bulbapedia-historical-ru-sets`, `card-slice:bulbapedia-historical-ru-snorlax`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0212`, `unit:U0336`, `unit:U0487`, `unit:U0621`.
+- `revision-4567865-positive-frontier` (open → open; `positive-observations-only`): Revision 4567865 accounts for nine positive Russian set rows from Kalos Starter Set/XY through BREAKthrough at set grain only. The referenced KSS 26, FLF 80 V1/V2 and BKT 118 units remain separately evidenced card records and are not derived from that index. The later dash cells are not absence evidence. Evidence: `slice:bulbapedia-historical-ru-sets`, `edge:bulbapedia-historical-index-positive`, `observation:obs-bulbapedia-historical-index`, `unit:U0212`, `unit:U0336`, `unit:U0487`, `unit:U0621`.
 - `non-expansion-and-unlisted-history` (open → open; `needs-evidence`): The pinned expansion table does not enumerate historical promos, decks or other product categories, and its dash cells remain unknown. Evidence: `source-gap:bulbapedia-non-expansion-catalogue`, `card-gap:historical-non-expansion-card-discovery`.
 
 ### Southeast-Asian English coordination boundary (`sea-en-coordinated`)
