@@ -74,6 +74,10 @@ under the same contract and capability hashes; it refuses to overwrite retained 
 run is immutable. A failed request is `source-failed` for the run and `blocked-by-source` for the
 slice. Zero returned records and incomplete pagination are `needs-evidence`, never absence.
 
+When only explicit mappings or contract version metadata change, `--replay-from-run` may create a
+new immutable projection from an older complete run. It preserves the original retrieval times and
+bytes, records the source run, and refuses any adapter, slice, query, or other acquisition change.
+
 ## First run result
 
 Run `20260809T181000Z` retained three official list pages, 43 detail pages, and the exact `SVQP`

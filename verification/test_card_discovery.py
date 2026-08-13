@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import tempfile
 import sys
 import unittest
@@ -222,6 +223,24 @@ class CardDiscoveryTests(unittest.TestCase):
             delta["localityDeltas"][0]["toEvidenceMode"], "unqualified-language"
         )
 
+    def test_mapping_only_contract_change_preserves_acquisition_contract(self):
+        contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        previous = copy.deepcopy(contract)
+        previous["meta"]["coverageVersion"] = "1.12.0"
+        previous["explicitMappings"].append({"retired": "projection-only"})
+        self.assertEqual(
+            discovery.acquisition_contract(previous),
+            discovery.acquisition_contract(contract),
+        )
+        previous["adapters"][0]["pageSize"] += 1
+        self.assertNotEqual(
+            discovery.acquisition_contract(previous),
+            discovery.acquisition_contract(contract),
+        )
     def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
         old = [
             {"stableKey": f"old-{unit}", "recordHash": unit,
@@ -524,6 +543,21 @@ class CardDiscoveryTests(unittest.TestCase):
         me03 = next(row for row in spanish if row["rawProviderId"] == "me03-063")
         self.assertIsNone(me03["normalizationProposal"]["targetCardReleaseId"])
         self.assertIn("Spanish language only", me03["bucketBasis"])
+        tg10 = next(
+            row for row in spanish if row["rawProviderId"] == "swsh11.5tg-TG10"
+        )
+        self.assertEqual(tg10["bucket"], "needs-evidence")
+        self.assertIsNone(tg10["normalizationProposal"]["targetCardReleaseId"])
+
+        contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertFalse(any(
+            mapping["providerId"] == "tcgdex" and mapping["rawLocale"] == "es"
+            for mapping in contract["explicitMappings"]
+        ))
 
     def test_committed_italian_slice_accounts_for_filter_without_claiming_history(self):
         records = [

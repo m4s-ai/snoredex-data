@@ -19,6 +19,7 @@ import gzip
 import hashlib
 import json
 import re
+import shutil
 import sys
 import urllib.error
 import urllib.parse
@@ -769,6 +770,15 @@ def load_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     identity = read_json(IDENTITY_PATH)
     validate_contract(contract, capability, identity)
     return contract, capability, identity
+
+
+def acquisition_contract(contract: dict[str, Any]) -> dict[str, Any]:
+    """Return only the contract fields that can change retained provider bytes."""
+    value = json.loads(json.dumps(contract))
+    value["meta"].pop("coverageVersion")
+    value["meta"].pop("reviewedAt")
+    value["explicitMappings"] = []
+    return value
 
 
 def normalize_record(
@@ -2183,6 +2193,81 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
     )
 
 
+def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None:
+    """Reproject immutable responses when only mappings or contract metadata changed."""
+    if not RUN_ID_PATTERN.fullmatch(source_run_id) or not RUN_ID_PATTERN.fullmatch(run_id):
+        raise DiscoveryError("replay run ids must use YYYYMMDDTHHMMSSZ form")
+    source_dir = RUNS_DIR / source_run_id
+    run_dir = RUNS_DIR / run_id
+    if not source_dir.is_dir():
+        raise DiscoveryError(f"replay source run does not exist: {source_run_id}")
+    if run_dir.exists():
+        raise DiscoveryError(f"replay destination run already exists: {run_id}")
+
+    contract, capability, identity = load_inputs()
+    source_manifest = read_json(source_dir / "manifest.json")
+    source_contract = read_json(source_dir / "contract.json")
+    if source_manifest.get("status") != "complete":
+        raise DiscoveryError(f"replay source run is not complete: {source_run_id}")
+    if source_manifest.get("contractHash") != content_hash(source_contract):
+        raise DiscoveryError(f"replay source contract hash differs: {source_run_id}")
+    validate_contract(source_contract, capability, identity)
+    if acquisition_contract(source_contract) != acquisition_contract(contract):
+        raise DiscoveryError("replay source differs in its provider acquisition contract")
+
+    timestamp = replayed_at or datetime.now(timezone.utc).replace(
+        microsecond=0
+    ).isoformat().replace("+00:00", "Z")
+    expected = new_manifest(contract, capability, run_id, timestamp)
+    acquisition_fields = {
+        "adapterId", "adapterVersion", "sliceId", "providerId", "surfaceId",
+        "coverageEdgeId", "rawLocale", "endpoint", "queryParameters",
+    }
+    expected_requests = {
+        row["sliceId"]: {key: row[key] for key in acquisition_fields}
+        for row in expected["requests"]
+    }
+    source_requests = {
+        row["sliceId"]: {key: row[key] for key in acquisition_fields}
+        for row in source_manifest["requests"]
+    }
+    if source_requests != expected_requests:
+        raise DiscoveryError("replay request acquisition inputs differ")
+
+    manifest = json.loads(json.dumps(source_manifest))
+    manifest.update({
+        "runId": run_id,
+        "coverageVersion": contract["meta"]["coverageVersion"],
+        "startedAt": timestamp,
+        "completedAt": None,
+        "status": "incomplete",
+        "contractHash": content_hash(contract),
+        "replayedFromRun": source_run_id,
+    })
+    for request in manifest["requests"]:
+        request["runId"] = run_id
+        request["replayedFromRun"] = source_run_id
+
+    run_dir.mkdir(parents=True)
+    write_json(run_dir / "contract.json", contract)
+    shutil.copytree(source_dir / "raw", run_dir / "raw")
+    save_manifest(run_dir, manifest)
+    build_projection(contract, capability, identity, manifest, run_dir, None)
+    manifest["status"] = "complete"
+    manifest["completedAt"] = timestamp
+    save_manifest(run_dir, manifest)
+
+    projection, _ = build_latest(contract, capability, identity)
+    summary_text, records_text = render_projection(projection)
+    OUTPUT_PATH.write_bytes(summary_text.encode("utf-8"))
+    RECORDS_PATH.write_bytes(records_text.encode("utf-8"))
+    counts = projection["meta"]["counts"]
+    print(
+        f"replayed {source_run_id} as {run_id}: {counts['records']} card records, "
+        f"{counts['newCandidate']} new candidates, {counts['runErrors']} run errors"
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate immutable runs and projections")
@@ -2191,10 +2276,19 @@ def main() -> int:
         help="create or resume one immutable run across all active card adapters",
     )
     parser.add_argument("--resume", action="store_true", help="resume the named incomplete run")
+    parser.add_argument(
+        "--replay-from-run",
+        help="reuse a complete immutable run when provider acquisition inputs are unchanged",
+    )
     parser.add_argument("--run-id", help="immutable run id in YYYYMMDDTHHMMSSZ form")
     parser.add_argument("--retrieved-at", help="explicit ISO-8601 retrieval timestamp for a run")
     args = parser.parse_args()
     try:
+        if args.replay_from_run:
+            if args.refresh or args.resume or not args.run_id:
+                raise DiscoveryError("--replay-from-run requires only --run-id")
+            replay_run(args.replay_from_run, args.run_id, args.retrieved_at)
+            return 0
         if args.refresh:
             if not args.run_id:
                 raise DiscoveryError("--refresh requires --run-id")
