@@ -1,7 +1,7 @@
 {
  "schema": "snoredex-confirmed-releases",
  "schemaVersion": "1.0.0",
- "generated": "2026-08-11",
+ "generated": "2026-08-13",
  "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
@@ -29718,30 +29718,31 @@
     },
     {
      "language": "T-Chinese",
-     "claimStatus": "contradicted",
+     "claimStatus": "confirmed",
      "availableFinishes": [],
      "unitAvailableFinishes": [],
      "finishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "not-applicable",
-      "holo": "not-applicable",
-      "reverse-holo": "not-applicable",
-      "mirror-holo": "not-applicable"
+      "non-holo": "pending",
+      "holo": "pending",
+      "reverse-holo": "pending",
+      "mirror-holo": "pending"
      },
-     "status": "not-applicable",
+     "status": "pending",
      "finishUnitId": "F0494",
-     "productMappingStatus": "not-applicable",
+     "productMappingStatus": "pending",
      "printings": []
     }
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "pending",
-    "Korean": "pending"
+    "Korean": "pending",
+    "T-Chinese": "pending"
    },
    "languageEvidence": {
     "Japanese": {
@@ -29757,13 +29758,21 @@
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "52poke",
+     "provider": "52poke (Wiki)",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
     }
    },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
     "Japanese",
-    "Korean"
+    "Korean",
+    "T-Chinese"
    ],
    "rowId": "svg-021-base-none",
    "datePrecision": "day",

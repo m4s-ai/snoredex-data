@@ -47,7 +47,7 @@
         "properties": {
           "adapterId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
           "adapterVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
-          "responseFormat": {"enum": ["bulbapedia-historical-json", "confirmed-source-json", "pokemon-asia-html", "pokemon-official-localized-html", "source-first-print-json", "tcgdex-json"]},
+          "responseFormat": {"enum": ["52poke-scan-json", "bulbapedia-historical-json", "confirmed-source-json", "pokemon-asia-html", "pokemon-official-localized-html", "source-first-print-json", "tcgdex-json"]},
           "providerId": {"type": "string"},
           "surfaceId": {"type": "string"},
           "state": {"const": "active"},
@@ -78,6 +78,7 @@
                 "nameQueries": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
                 "retainedUnitIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^U[0-9]{4}$"}},
                 "retainedPrintIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "retainedRecordIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
                 "retainedSetNames": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}},
                 "positiveNameExclusions": {
                   "type": "array",

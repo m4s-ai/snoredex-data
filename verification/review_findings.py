@@ -1339,6 +1339,9 @@ def collect() -> None:
             "source-first-print-json": {
                 "nameQueries", "retainedPrintIds", "sourceRecord", "pagination",
             },
+            "52poke-scan-json": {
+                "nameQueries", "retainedRecordIds", "sourceRecord", "pagination",
+            },
             "pokemon-official-localized-html": {
                 "nameQueries", "nameFilter", "format", "pagination", "cacheKeyParameter",
             },
@@ -1399,6 +1402,17 @@ def collect() -> None:
                     not request["queryParameters"].get("retainedPrintIds")
                     or request["queryParameters"].get("sourceRecord")
                         != "verification/source_first_prints.json"
+                    or request["queryParameters"].get("pagination")
+                        != "exact-reviewed-positive-frontier"
+                )
+            )
+            or (
+                card_adapters[request["adapterId"]].get("responseFormat")
+                    == "52poke-scan-json"
+                and (
+                    not request["queryParameters"].get("retainedRecordIds")
+                    or request["queryParameters"].get("sourceRecord")
+                        != "verification/evidence/issue-84-snorlax-alle-zh.json"
                     or request["queryParameters"].get("pagination")
                         != "exact-reviewed-positive-frontier"
                 )

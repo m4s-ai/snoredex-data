@@ -38,6 +38,9 @@ CAPABILITY_PATH = ROOT / "verification" / "source_capability_graph.json"
 IDENTITY_PATH = ROOT / "verification" / "print_identity_dryrun.json"
 CONFIRMED_SOURCES_PATH = ROOT / "verification" / "confirmed_sources.json"
 SOURCE_FIRST_PRINTS_PATH = ROOT / "verification" / "source_first_prints.json"
+ISSUE84_52POKE_PATH = (
+    ROOT / "verification" / "evidence" / "issue-84-snorlax-alle-zh.json"
+)
 RUNS_DIR = ROOT / "verification" / "runs" / "card-discovery"
 OUTPUT_PATH = ROOT / "verification" / "card_discovery_staging.json"
 RECORDS_PATH = ROOT / "verification" / "card_discovery_records.jsonl"
@@ -347,7 +350,9 @@ def parse_official_localized_entries(
 def parse_list(
     raw: bytes, response_format: str = "pokemon-asia-html", raw_locale: str = "it"
 ) -> dict[str, Any]:
-    if response_format in {"confirmed-source-json", "source-first-print-json"}:
+    if response_format in {
+        "52poke-scan-json", "confirmed-source-json", "source-first-print-json"
+    }:
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, list):
             raise DiscoveryError("confirmed-source card list did not return an array")
@@ -403,7 +408,8 @@ def parse_detail(
     set_record: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if response_format in {
-        "bulbapedia-historical-json", "confirmed-source-json", "source-first-print-json"
+        "52poke-scan-json", "bulbapedia-historical-json", "confirmed-source-json",
+        "source-first-print-json",
     }:
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, dict) or value.get("detailId") != raw_provider_id:
@@ -470,6 +476,45 @@ def parse_detail(
     }
 
 
+def issue84_52poke_records() -> dict[str, dict[str, Any]]:
+    """Parse the reviewed positive T-Chinese rows retained from issue #84."""
+    document = read_json(ISSUE84_52POKE_PATH)
+    records: dict[str, dict[str, Any]] = {}
+    for page_key, page in document.items():
+        if not isinstance(page, dict) or not isinstance(page.get("url"), str):
+            raise DiscoveryError(f"invalid 52poke scan page: {page_key}")
+        for row in page.get("tchn", []):
+            if not isinstance(row, dict):
+                raise DiscoveryError(f"invalid 52poke T-Chinese row: {page_key}")
+            set_code = row.get("setcode")
+            number = row.get("num")
+            if (
+                not isinstance(set_code, str)
+                or not set_code.strip()
+                or not isinstance(number, str)
+                or not re.fullmatch(r"\d+/\d+", number)
+            ):
+                continue
+            detail_id = "|".join((page_key, set_code, number))
+            if detail_id in records:
+                raise DiscoveryError(f"duplicate 52poke scan identity: {detail_id}")
+            records[detail_id] = {
+                "detailId": detail_id,
+                "localName": "卡比獸",
+                "rawSetCode": set_code,
+                "localCollectorNumber": number,
+                "cardImageUrl": None,
+                "setSymbolUrl": None,
+                "productScope": "physical-tcg",
+                "sourceUrl": page["url"],
+                "sourcePageKey": page_key,
+                "releaseDate": row.get("date") or None,
+                "rarity": row.get("rarity") or None,
+                "providerRecord": row,
+            }
+    return records
+
+
 def validate_contract(
     contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any]
 ) -> None:
@@ -488,6 +533,7 @@ def validate_contract(
     seen_slices: set[str] = set()
     seen_retained_units: set[str] = set()
     seen_retained_prints: set[str] = set()
+    seen_retained_records: set[str] = set()
     active_surfaces: set[str] = set()
 
     for adapter in contract["adapters"]:
@@ -497,8 +543,9 @@ def validate_contract(
         seen_adapters.add(adapter_id)
         response_format = adapter.get("responseFormat", "pokemon-asia-html")
         if response_format not in {
-            "bulbapedia-historical-json", "confirmed-source-json", "pokemon-asia-html",
-            "pokemon-official-localized-html", "source-first-print-json", "tcgdex-json",
+            "52poke-scan-json", "bulbapedia-historical-json", "confirmed-source-json",
+            "pokemon-asia-html", "pokemon-official-localized-html",
+            "source-first-print-json", "tcgdex-json",
         }:
             raise DiscoveryError(f"adapter {adapter_id} has an unsupported response format")
         if response_format == "tcgdex-json" and not adapter.get("setEndpointTemplate"):
@@ -531,6 +578,7 @@ def validate_contract(
             seen_slices.add(slice_id)
             retained_unit_ids = slice_row.get("retainedUnitIds", [])
             retained_print_ids = slice_row.get("retainedPrintIds", [])
+            retained_record_ids = slice_row.get("retainedRecordIds", [])
             if response_format in {"bulbapedia-historical-json", "confirmed-source-json"}:
                 if len(slice_row["nameQueries"]) != 1 or not retained_unit_ids:
                     raise DiscoveryError(
@@ -576,7 +624,24 @@ def validate_contract(
                         f"slice {slice_id} names unknown source-first prints: "
                         f"{sorted(missing_prints)}"
                     )
-            elif retained_unit_ids or retained_print_ids:
+            elif response_format == "52poke-scan-json":
+                if len(slice_row["nameQueries"]) != 1 or not retained_record_ids:
+                    raise DiscoveryError(
+                        f"slice {slice_id} needs one name query and retained record ids"
+                    )
+                duplicates = seen_retained_records.intersection(retained_record_ids)
+                if duplicates:
+                    raise DiscoveryError(
+                        f"retained records occur in more than one slice: {sorted(duplicates)}"
+                    )
+                seen_retained_records.update(retained_record_ids)
+                missing_records = set(retained_record_ids) - set(issue84_52poke_records())
+                if missing_records:
+                    raise DiscoveryError(
+                        f"slice {slice_id} names unknown 52poke records: "
+                        f"{sorted(missing_records)}"
+                    )
+            elif retained_unit_ids or retained_print_ids or retained_record_ids:
                 raise DiscoveryError(
                     f"slice {slice_id} uses retained ids with a live-response adapter"
                 )
@@ -1099,6 +1164,9 @@ def build_projection(
                     "accounted; neighbouring cards, variants, products and era completeness "
                     "are not claimed"
                     if response_format == "source-first-print-json" else
+                    "every reviewed numbered T-Chinese row in the retained issue #84 scan "
+                    "was replayed and accounted; omitted or ambiguous rows carry no absence claim"
+                    if response_format == "52poke-scan-json" else
                     "every positive detail returned by the bounded provider-native name query "
                     "was retained and accounted; historical or provider-universe completeness "
                     "is not claimed"
@@ -1256,6 +1324,12 @@ def new_manifest(
                 query_parameters.update({
                     "retainedPrintIds": slice_row["retainedPrintIds"],
                     "sourceRecord": "verification/source_first_prints.json",
+                    "pagination": "exact-reviewed-positive-frontier",
+                })
+            elif response_format == "52poke-scan-json":
+                query_parameters.update({
+                    "retainedRecordIds": slice_row["retainedRecordIds"],
+                    "sourceRecord": "verification/evidence/issue-84-snorlax-alle-zh.json",
                     "pagination": "exact-reviewed-positive-frontier",
                 })
             else:
@@ -1678,6 +1752,50 @@ def refresh_source_first_print_request(
         save_manifest(run_dir, manifest)
 
 
+def refresh_52poke_scan_request(
+    run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
+    slice_row: dict[str, Any],
+) -> None:
+    """Replay only the numbered T-Chinese rows reviewed in issue #84."""
+    available = issue84_52poke_records()
+    source_records = [available[record_id] for record_id in slice_row["retainedRecordIds"]]
+    query = slice_row["nameQueries"][0]
+    if not request["pages"]:
+        raw = canonical_bytes(source_records)
+        relative = f"raw/{request['sliceId']}/query-1.json"
+        request["pages"].append({
+            "query": query,
+            "pageNo": 1,
+            "url": "https://github.com/m4s-ai/snoredex-data/issues/84",
+            "rawPath": relative,
+            "responseHash": retain_response(run_dir, relative, raw),
+            **parse_list(raw, "52poke-scan-json"),
+        })
+        request["checkpoint"]["completedPages"] = [f"{query}:1"]
+        save_manifest(run_dir, manifest)
+
+    details = {row["rawProviderId"]: row for row in request["details"]}
+    for source_record in source_records:
+        record_id = source_record["detailId"]
+        if record_id in details:
+            continue
+        raw = canonical_bytes(source_record)
+        safe_record_id = re.sub(r"[^A-Za-z0-9._-]+", "_", record_id)
+        relative = f"raw/{request['sliceId']}/details/{safe_record_id}.json"
+        detail = {
+            "rawProviderId": record_id,
+            "url": source_record["sourceUrl"],
+            "rawPath": relative,
+            "responseHash": retain_response(run_dir, relative, raw),
+            "recordSource": "issue-84-reviewed-52poke-frontier",
+            "parsedRecordHash": content_hash(source_record),
+        }
+        request["details"].append(detail)
+        details[record_id] = detail
+        request["checkpoint"]["completedDetailIds"] = sorted(details)
+        save_manifest(run_dir, manifest)
+
+
 def refresh_bulbapedia_historical_request(
     run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
     adapter: dict[str, Any], slice_row: dict[str, Any],
@@ -1846,6 +1964,10 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
                 )
             elif response_format == "source-first-print-json":
                 refresh_source_first_print_request(
+                    run_dir, manifest, request, slice_row
+                )
+            elif response_format == "52poke-scan-json":
+                refresh_52poke_scan_request(
                     run_dir, manifest, request, slice_row
                 )
             elif response_format == "bulbapedia-historical-json":

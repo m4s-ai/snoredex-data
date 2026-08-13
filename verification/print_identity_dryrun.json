@@ -28,22 +28,22 @@
     "finishPrintingClaims": 693,
     "candidateClaims": 1538,
     "candidateClaimDispositions": {
-      "bounded-contradicted": 85,
+      "bounded-contradicted": 84,
       "candidate-needs-evidence": 228,
-      "established-and-mapped": 1150,
+      "established-and-mapped": 1151,
       "positively-excluded": 75
     },
-    "setEditionNodes": 456,
-    "cardReleaseNodes": 604,
+    "setEditionNodes": 457,
+    "cardReleaseNodes": 605,
     "cardReleaseNodesIdentified": 494,
-    "cardReleaseNodesNeedingLocalIdentifier": 110,
+    "cardReleaseNodesNeedingLocalIdentifier": 111,
     "physicalPrintingNodes": 473,
     "physicalPrintingsByEvidenceClass": {
       "finish-store": 468,
       "inspected-specimen": 5
     },
     "specimenObservationsCorroboratingFinishStore": 1,
-    "contradictedOnlyCardReleaseProposals": 76,
+    "contradictedOnlyCardReleaseProposals": 75,
     "mixedStatusCardReleaseProposals": 1,
     "multiVariantCardReleases": 73,
     "crossLanguageIdentityMerges": 0,
@@ -59,14 +59,14 @@
       "JP": 66,
       "KR": 52,
       "CN": 42,
-      "TW": 37,
+      "TW": 38,
       "ID": 32,
       "TH": 24,
       "LATAM": 3
     },
     "needsLocalIdentifierByLocality": {
       "KR": 49,
-      "TW": 26,
+      "TW": 27,
       "ID": 15,
       "TH": 15,
       "CN": 5
@@ -2796,9 +2796,10 @@
       ],
       "cardReleaseIds": [
         "RELEASE:JP:Japanese:svG:021:Snorlax-Unfazed-Fat-Thumping-Snore",
-        "RELEASE:KR:Korean:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id"
+        "RELEASE:KR:Korean:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+        "RELEASE:TW:T-Chinese:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id"
       ],
-      "reason": "2 established language-bearing card release(s)"
+      "reason": "3 established language-bearing card release(s)"
     },
     "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086": {
       "disposition": "carried",
@@ -3596,18 +3597,6 @@
         "language": "T-Chinese",
         "unitIds": [
           "U0584"
-        ],
-        "statuses": [
-          "contradicted"
-        ],
-        "materialized": false
-      },
-      {
-        "proposedCardReleaseId": "RELEASE:TW:T-Chinese:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-        "locality": "TW",
-        "language": "T-Chinese",
-        "unitIds": [
-          "U0467"
         ],
         "statuses": [
           "contradicted"
@@ -5784,6 +5773,15 @@
         "viaProduct": "sv9 075",
         "claimIds": [
           "CLAIM:legacy:U0371"
+        ]
+      },
+      {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+        "locality": "TW",
+        "language": "T-Chinese",
+        "viaProduct": "svG 021",
+        "claimIds": [
+          "CLAIM:legacy:U0467"
         ]
       },
       {
@@ -19906,12 +19904,12 @@
       "claimKind": "card-release",
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0467",
-      "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/Venusaur_%26_Charizard_%26_Blastoise_Special_Deck_Set_ex_(TCG)",
-      "evidenceStatus": "contradicted",
-      "disposition": "bounded-contradicted",
+      "sourceRecord": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
       "proposedTargetId": "RELEASE:TW:T-Chinese:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "materializedTargetId": null,
-      "reason": "recorded contradiction remains a claim and cannot establish a release"
+      "materializedTargetId": "RELEASE:TW:T-Chinese:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+      "reason": "language names its locality"
     },
     {
       "claimId": "CLAIM:legacy:U0468",
@@ -26413,6 +26411,21 @@
       ],
       "establishingClaimIds": [
         "CLAIM:legacy:U0371"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:TW:T-Chinese:via-svG:unknown-local-set",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": null,
+      "localIdentifierKnown": false,
+      "state": "needs-local-identifier",
+      "viaLegacySetCodes": [
+        "svG"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:legacy:U0467"
       ]
     },
     {
@@ -38249,6 +38262,37 @@
       ],
       "sourceRecords": [
         "https://api.tcgdex.net/v2/zh-tw/cards/SV9-075"
+      ]
+    },
+    {
+      "cardReleaseId": "RELEASE:TW:T-Chinese:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+      "setEditionId": "EDITION:TW:T-Chinese:via-svG:unknown-local-set",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": null,
+      "localNumber": null,
+      "localIdentifierKnown": false,
+      "state": "needs-local-identifier",
+      "work": "Snorlax-Unfazed-Fat-Thumping-Snore",
+      "workMappingState": "mapped",
+      "viaLegacySetCode": "svG",
+      "viaLegacyNumber": "021",
+      "claimIds": [
+        "CLAIM:legacy:U0467"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:legacy:U0467"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [
+        "base"
+      ],
+      "legacyProducts": [
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Venusaur-Charizard-Blastoise-Special-Deck-Set-ex/Snorlax-svG021"
+      ],
+      "sourceRecords": [
+        "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89"
       ]
     },
     {

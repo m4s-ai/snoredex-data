@@ -19,7 +19,7 @@
       "coverageEdges": 27,
       "absenceEdges": 3,
       "observations": 29,
-      "resolvedVerdictSources": 894
+      "resolvedVerdictSources": 895
     },
     "surfaceStates": {
       "active": 10,
@@ -752,10 +752,10 @@
       "providerId": "52poke",
       "label": "52Poké Chinese wiki pages and original images",
       "state": "incomplete",
-      "failureState": "Coverage and field completeness vary by article; current retained fixture is image-level only.",
+      "failureState": "Coverage and field completeness vary by article; the issue #84 scan is a reviewed positive slice, not a complete catalogue.",
       "accessMode": "browser",
-      "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-08-13",
       "freshnessPolicy": "Retain original image or wikitext with revision/page identity before accepting a claim.",
       "query": {
         "method": "GET",
@@ -3775,6 +3775,18 @@
     }
   ],
   "sourceResolution": [
+    {
+      "sourceKey": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89",
+      "providerId": "52poke",
+      "surfaceId": "52poke-wiki",
+      "capabilityEdgeIds": [
+        "52poke-positive-record"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "language"
+      ]
+    },
     {
       "sourceKey": "evidence:bulbapedia",
       "providerId": "bulbapedia",
