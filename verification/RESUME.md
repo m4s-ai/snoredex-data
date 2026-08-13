@@ -481,6 +481,12 @@ search results and the European catalogue carry no negative evidence for LATAM. 
 Hungarian remain the already-contradicted legacy claims outside the locality universe; this work
 does not create tracks for either.
 
+The canonical write path is
+`python verification/passes/admit_latam_spanish_prints_20260811.py`. It replays the four print
+admissions, SPEC-0033 through SPEC-0036 and their four locality-bearing set profiles from the
+retained positive assets. `--check` validates the current tree without writing. Existing exact
+rows are idempotent; a conflicting row or changed retained image hash is drift and stops the pass.
+
 Issue #193 activates one shared, revision-pinned historical adapter for Dutch, Polish and Russian.
 Bulbapedia MediaWiki revision `4567865` is retained as raw wikitext and parsed only inside its
 `English sets` section. Source-adapter run `20260811T144120Z` accounts for every positive target
