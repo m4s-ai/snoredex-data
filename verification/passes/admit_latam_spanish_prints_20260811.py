@@ -60,34 +60,33 @@ def main() -> int:
             raise SystemExit(f"retained asset missing or changed: {name}")
 
     prints_path = VERIFY / "source_first_prints.json"
-    prints_doc = read(prints_path)
-    changed = reconcile(prints_doc["prints"], DATA["prints"], "printId", args.check)
-    expected_count = len(prints_doc["prints"])
-    count_changed = prints_doc["meta"]["counts"].get("admitted") != expected_count
-    if args.check and count_changed:
-        raise SystemExit("source-first admitted count drift")
-    if changed or count_changed:
-        prints_doc["meta"]["counts"]["admitted"] = expected_count
-        if changed:
-            prints_doc["meta"]["generated"] = "2026-08-11"
-        write(prints_path, prints_doc)
-
     specimens_path = VERIFY / "specimens.json"
-    specimens_doc = read(specimens_path)
-    changed = reconcile(specimens_doc["specimens"], DATA["specimens"], "specimenId", args.check)
-    expected_count = len(specimens_doc["specimens"])
-    count_changed = specimens_doc.get("count") != expected_count
-    if args.check and count_changed:
-        raise SystemExit("specimen count drift")
-    if changed or count_changed:
-        specimens_doc["count"] = expected_count
-        write(specimens_path, specimens_doc)
-
     sets_path = VERIFY / "set_catalogue_sources.json"
+    prints_doc = read(prints_path)
+    specimens_doc = read(specimens_path)
     sets_doc = read(sets_path)
+
+    prints_changed = reconcile(prints_doc["prints"], DATA["prints"], "printId", args.check)
+    prints_count = len(prints_doc["prints"])
+    prints_count_changed = prints_doc["meta"]["counts"].get("admitted") != prints_count
+    if args.check and prints_count_changed:
+        raise SystemExit("source-first admitted count drift")
+    prints_doc["meta"]["counts"]["admitted"] = prints_count
+    if prints_changed:
+        prints_doc["meta"]["generated"] = "2026-08-11"
+
+    specimens_changed = reconcile(
+        specimens_doc["specimens"], DATA["specimens"], "specimenId", args.check
+    )
+    specimens_count = len(specimens_doc["specimens"])
+    specimens_count_changed = specimens_doc.get("count") != specimens_count
+    if args.check and specimens_count_changed:
+        raise SystemExit("specimen count drift")
+    specimens_doc["count"] = specimens_count
+
     records = sets_doc["sourceRecords"]
-    changed = reconcile(records, DATA["setProfiles"], "sourceRecordId", args.check)
-    if changed:
+    sets_changed = reconcile(records, DATA["setProfiles"], "sourceRecordId", args.check)
+    if sets_changed:
         wanted_ids = {row["sourceRecordId"] for row in DATA["setProfiles"]}
         records[:] = [row for row in records if row["sourceRecordId"] not in wanted_ids]
         insert_at = next((i for i, row in enumerate(records)
@@ -97,14 +96,20 @@ def main() -> int:
     expected_total = len(records)
     expected_profiles = sum(row["sourceKind"] == "source-first-local-set-profile"
                             for row in records)
-    count_changed = (counts.get("sourceRecords") != expected_total or
-                     counts.get("sourceFirstLocalSets") != expected_profiles)
-    if args.check and count_changed:
+    sets_count_changed = (counts.get("sourceRecords") != expected_total or
+                          counts.get("sourceFirstLocalSets") != expected_profiles)
+    if args.check and sets_count_changed:
         raise SystemExit("set-catalogue source count drift")
-    if changed or count_changed:
-        counts["sourceRecords"] = expected_total
-        counts["sourceFirstLocalSets"] = expected_profiles
-        write(sets_path, sets_doc)
+    counts["sourceRecords"] = expected_total
+    counts["sourceFirstLocalSets"] = expected_profiles
+
+    if not args.check:
+        if prints_changed or prints_count_changed:
+            write(prints_path, prints_doc)
+        if specimens_changed or specimens_count_changed:
+            write(specimens_path, specimens_doc)
+        if sets_changed or sets_count_changed:
+            write(sets_path, sets_doc)
 
     print(("validated" if args.check else "replayed") +
           " 4 source-first prints, 4 specimens and 4 local-set profiles")
