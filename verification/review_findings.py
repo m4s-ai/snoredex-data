@@ -1383,7 +1383,8 @@ def collect() -> None:
                 "nameQueries", "retainedRecordIds", "sourceRecord", "pagination",
             },
             "pokemon-official-localized-html": {
-                "nameQueries", "nameFilter", "format", "pagination", "cacheKeyParameter",
+                "nameQueries", "nameFilter", "format", "pageParameter", "pagination",
+                "cacheKeyParameter",
             },
         }
         query_seed_faults = [
@@ -1432,7 +1433,8 @@ def collect() -> None:
                         != "provider-name-search"
                     or request["queryParameters"].get("format") != "unlimited"
                     or request["queryParameters"].get("pagination")
-                        != "single-retained-response-no-archive-closure"
+                        != "all-declared-result-pages"
+                    or request["queryParameters"].get("pageParameter") != "page"
                     or request["queryParameters"].get("cacheKeyParameter")
                         != "snoredexRun"
                 )
@@ -1675,10 +1677,16 @@ def collect() -> None:
             "svp/51", "svp/122", "svp/184", "smp/SM169",
             "swshp/SWSH032", "swshp/SWSH068", "swshp/SWSH119", "xy0/26",
             "swsh1/140", "swsh1/141", "swsh1/142", "swsh1/197",
+            "bw7/109", "bw8/101", "col1/33", "dp1/37", "g1/58", "me03/63",
+            "pgo/55", "sm10/158", "sm115/50", "sm9/120", "sm9/171", "sm9/191",
+            "sv04/175", "sv06/136", "sv08/144", "sv09/117", "sv3pt5/143",
+            "sv4pt5/202", "sv8pt5/76", "swsh1/206", "swsh11/143",
+            "swsh11tg/TG10", "swsh12pt5/109", "swsh2/141", "swsh4/131",
+            "swsh6/224", "swsh8/206", "xy10/77", "xy2/80", "xy8/118",
         }
         italian_faults = [
             row["recordId"] for row in italian_rows
-            if row["bucket"] != "matched"
+            if row["bucket"] not in {"matched", "new-candidate"}
             or row["sourceRecord"].get("recordSource")
                 != "localized-archive-list-entry"
             or not row["sourceRecord"].get("detailPath", "").startswith(
@@ -1695,6 +1703,8 @@ def collect() -> None:
         italian_slice_ok = (
             {row["rawProviderId"] for row in italian_rows} == expected_italian_ids
             and not italian_faults
+            and Counter(row["bucket"] for row in italian_rows)
+                == {"matched": 12, "new-candidate": 30}
             and all(row["rawProviderId"] != "pl2/111" for row in italian_rows)
             and italian_gap is not None
             and "pl2/111" in italian_gap["reason"]

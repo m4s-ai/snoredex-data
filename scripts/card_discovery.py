@@ -15,6 +15,7 @@ verdict store.
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import re
@@ -22,6 +23,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+import zlib
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from html.parser import HTMLParser
@@ -164,13 +166,20 @@ class OfficialLocalizedListParser(HTMLParser):
         self.query_echo: str | None = None
         self.entries: list[dict[str, Any]] = []
         self.has_results_container = False
+        self.current_page: int | None = None
+        self.total_pages: int | None = None
         self._inside_results = False
         self._current: dict[str, Any] | None = None
+        self._pagination_depth = 0
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = dict(attrs)
         if tag == "input" and values.get("id") == "cardName":
             self.query_echo = values.get("value")
+        if tag == "div" and values.get("id") == "cards-load-more":
+            self._pagination_depth = 1
+        elif tag == "div" and self._pagination_depth:
+            self._pagination_depth += 1
         if tag == "ul" and values.get("id") == "cardResults":
             self.has_results_container = True
             self._inside_results = True
@@ -205,6 +214,16 @@ class OfficialLocalizedListParser(HTMLParser):
             self._current = None
         elif tag == "ul" and self._inside_results:
             self._inside_results = False
+        if tag == "div" and self._pagination_depth:
+            self._pagination_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if not self._pagination_depth:
+            return
+        match = re.fullmatch(r"\s*([0-9]+)\s+di\s+([0-9]+)\s*", data)
+        if match:
+            self.current_page = int(match.group(1))
+            self.total_pages = int(match.group(2))
 
 
 def read_json(path: Path) -> Any:
@@ -221,6 +240,17 @@ def canonical_bytes(value: Any) -> bytes:
 def content_hash(value: bytes | Any) -> str:
     raw = value if isinstance(value, bytes) else canonical_bytes(value)
     return "sha256:" + hashlib.sha256(raw).hexdigest()
+
+
+def pagination_complete(pages: list[dict[str, Any]]) -> bool:
+    if not pages:
+        return False
+    ordered = sorted(pages, key=lambda row: row["pageNo"])
+    total_pages = ordered[0]["totalPages"]
+    return (
+        [row["pageNo"] for row in ordered] == list(range(1, total_pages + 1))
+        and all(row["totalPages"] == total_pages for row in ordered)
+    )
 
 
 def capability_pin(capability: Any, surface_ids: Iterable[str] | None = None) -> str:
@@ -347,8 +377,27 @@ def parse_official_localized_entries(
     return parser.query_echo, parser.entries
 
 
+def parse_official_localized_page(
+    raw: bytes, raw_locale: str = "it"
+) -> tuple[str | None, list[dict[str, Any]], int, int]:
+    text = raw.decode("utf-8-sig")
+    if "Pardon Our Interruption" in text:
+        raise DiscoveryError("official localized archive returned an access challenge")
+    parser = OfficialLocalizedListParser(raw_locale)
+    parser.feed(text)
+    if not parser.has_results_container:
+        raise DiscoveryError("official localized archive lacks its card result container")
+    keys = [row["detailId"] for row in parser.entries]
+    if len(keys) != len(set(keys)):
+        raise DiscoveryError("official localized archive returned duplicate detail paths")
+    if parser.current_page is None or parser.total_pages is None:
+        raise DiscoveryError("official localized archive lacks pagination metadata")
+    return parser.query_echo, parser.entries, parser.current_page, parser.total_pages
+
+
 def parse_list(
-    raw: bytes, response_format: str = "pokemon-asia-html", raw_locale: str = "it"
+    raw: bytes, response_format: str = "pokemon-asia-html", raw_locale: str = "it",
+    adapter_version: str | None = None,
 ) -> dict[str, Any]:
     if response_format in {
         "52poke-scan-json", "confirmed-source-json", "source-first-print-json"
@@ -381,10 +430,10 @@ def parse_list(
             "detailIds": list(dict.fromkeys(detail_ids)),
         }
     if response_format == "pokemon-official-localized-html":
-        _, entries = parse_official_localized_entries(raw, raw_locale)
+        _, entries, _, total_pages = parse_official_localized_page(raw, raw_locale)
         return {
             "resultCount": len(entries),
-            "totalPages": 1,
+            "totalPages": 1 if adapter_version == "1.0.0" else total_pages,
             "detailIds": [row["detailId"] for row in entries],
         }
     if response_format != "pokemon-asia-html":
@@ -1048,7 +1097,10 @@ def build_projection(
                             f"historical set accounting drift: {page['rawPath']}"
                         )
                 else:
-                    parsed = parse_list(raw, response_format, slice_row["rawLocale"])
+                    parsed = parse_list(
+                        raw, response_format, slice_row["rawLocale"],
+                        adapter.get("adapterVersion"),
+                    )
                 if parsed != {
                     "resultCount": page["resultCount"],
                     "totalPages": page["totalPages"],
@@ -1059,10 +1111,8 @@ def build_projection(
                 discovered_ids.extend(page["detailIds"])
                 pages_by_query[page["query"]].append(page)
             for query in slice_row["nameQueries"]:
-                pages = sorted(pages_by_query.get(query, []), key=lambda row: row["pageNo"])
-                if not pages or [row["pageNo"] for row in pages] != list(
-                    range(1, pages[0]["totalPages"] + 1)
-                ) or any(row["totalPages"] != pages[0]["totalPages"] for row in pages):
+                pages = pages_by_query.get(query, [])
+                if not pagination_complete(pages):
                     run_errors.append({
                         "code": "incomplete-pagination", "sliceId": request["sliceId"],
                         "query": query, "meaning": "needs-evidence; never a closed catalogue",
@@ -1275,7 +1325,13 @@ def fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
     with urllib.request.urlopen(request, timeout=45) as response:
         if response.status != 200:
             raise DiscoveryError(f"HTTP {response.status}: {url}")
-        return response.read()
+        raw = response.read()
+        encoding = response.headers.get("Content-Encoding")
+        if encoding == "gzip":
+            return gzip.decompress(raw)
+        if encoding == "deflate":
+            return zlib.decompress(raw)
+        return raw
 
 
 def save_manifest(run_dir: Path, manifest: dict[str, Any]) -> None:
@@ -1340,6 +1396,14 @@ def new_manifest(
                     "retainedRecordIds": slice_row["retainedRecordIds"],
                     "sourceRecord": "verification/evidence/issue-84-snorlax-alle-zh.json",
                     "pagination": "exact-reviewed-positive-frontier",
+                })
+            elif response_format == "pokemon-official-localized-html":
+                query_parameters.update({
+                    "nameFilter": "provider-name-search",
+                    "format": "unlimited",
+                    "pageParameter": adapter["pageParameter"],
+                    "pagination": "all-declared-result-pages",
+                    "cacheKeyParameter": "snoredexRun",
                 })
             else:
                 query_parameters.update({
@@ -1661,17 +1725,24 @@ def refresh_official_localized_request(
     run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
     adapter: dict[str, Any], slice_row: dict[str, Any],
 ) -> None:
-    """Retain one publisher filter response and its exact positive result entries.
+    """Retain every declared publisher filter page and its exact positive result entries.
 
     The archive itself exposes each result's localized name, exact detail path and locale-specific
     CMS image. Individual detail pages are not walked here: the known-positive ``pl2/111`` page is
-    absent from this filter response, so treating detail-path traversal as catalogue pagination
-    would hide the source's demonstrated omission. The complete checkpoint covers this one
-    response only.
+    absent from this filter response, so following result pagination still does not make the
+    filter a historical manifest.
     """
-    pages_by_query = {row["query"]: row for row in request["pages"]}
+    pages_by_pair = {(row["query"], row["pageNo"]): row for row in request["pages"]}
     for query_index, query in enumerate(slice_row["nameQueries"], start=1):
-        if query not in pages_by_query:
+        page_no = 1
+        total_pages = None
+        while total_pages is None or page_no <= total_pages:
+            pair = (query, page_no)
+            page = pages_by_pair.get(pair)
+            if page is not None:
+                total_pages = page["totalPages"]
+                page_no += 1
+                continue
             parameters = {
                 "cardName": query,
                 "cardText": "",
@@ -1684,39 +1755,66 @@ def refresh_official_localized_request(
                 "retreatCostMax": 5,
                 "snoredexRun": manifest["runId"],
             }
+            if page_no > 1:
+                parameters[adapter["pageParameter"]] = page_no
             url = request["endpoint"] + "?" + urllib.parse.urlencode(parameters)
-            raw = fetch_bytes(url, headers={
-                "User-Agent": (
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/139.0.0.0 Safari/537.36 Snoredex-Data/1.0"
-                ),
-                "Accept-Language": f"{slice_row['rawLocale']}-{slice_row['rawLocale'].upper()},"
-                                   f"{slice_row['rawLocale']};q=0.9,en;q=0.8",
-            })
-            query_echo, entries = parse_official_localized_entries(
+            relative = (
+                f"raw/{request['sliceId']}/query-{query_index}/page-{page_no}.html"
+            )
+            retained_path = checked_raw_path(run_dir, relative)
+            if retained_path.exists():
+                raw = retained_path.read_bytes()
+            else:
+                headers = {
+                    "User-Agent": (
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/139.0.0.0 Safari/537.36 Snoredex-Data/1.0"
+                    ),
+                    "Accept-Language": (
+                        f"{slice_row['rawLocale']}-{slice_row['rawLocale'].upper()},"
+                        f"{slice_row['rawLocale']};q=0.9,en;q=0.8"
+                    ),
+                    "Accept-Encoding": "gzip, deflate",
+                }
+                if page_no > 1:
+                    headers["Referer"] = pages_by_pair[(query, page_no - 1)]["url"]
+                raw = fetch_bytes(url, headers=headers)
+            query_echo, entries, parsed_page, parsed_total_pages = parse_official_localized_page(
                 raw, slice_row["rawLocale"]
             )
             if query_echo != query:
                 raise DiscoveryError(
                     f"official localized archive did not echo the requested name {query!r}"
                 )
-            relative = f"raw/{request['sliceId']}/query-{query_index}.html"
+            if parsed_page != page_no:
+                raise DiscoveryError(
+                    f"official localized archive returned page {parsed_page} for requested page {page_no}"
+                )
             page = {
-                "query": query, "pageNo": 1, "url": url,
+                "query": query, "pageNo": page_no, "url": url,
                 "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
-                "resultCount": len(entries), "totalPages": 1,
+                "resultCount": len(entries), "totalPages": parsed_total_pages,
                 "detailIds": [row["detailId"] for row in entries],
             }
             request["pages"].append(page)
-            pages_by_query[query] = page
-            request["checkpoint"]["completedPages"] = [f"{query}:1"]
+            pages_by_pair[pair] = page
+            request["checkpoint"]["completedPages"] = sorted(
+                f"{row['query']}:{row['pageNo']}" for row in request["pages"]
+            )
+            request["checkpoint"]["nextPage"] = page_no + 1
             save_manifest(run_dir, manifest)
+            total_pages = parsed_total_pages
+            page_no += 1
 
     details = {row["rawProviderId"]: row for row in request["details"]}
     for page in request["pages"]:
         raw = checked_raw_path(run_dir, page["rawPath"]).read_bytes()
-        _, entries = parse_official_localized_entries(raw, slice_row["rawLocale"])
+        _, entries, parsed_page, parsed_total_pages = parse_official_localized_page(
+            raw, slice_row["rawLocale"]
+        )
+        if parsed_page != page["pageNo"] or parsed_total_pages != page["totalPages"]:
+            raise DiscoveryError(f"official localized pagination drift: {page['rawPath']}")
         for source_record in entries:
             raw_provider_id = source_record["detailId"]
             if raw_provider_id in details:

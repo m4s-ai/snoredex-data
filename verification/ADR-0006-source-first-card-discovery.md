@@ -133,6 +133,13 @@ candidates, six positively excluded, zero ambiguous or needs-evidence records, a
 errors. The `west-it` matrix track is terminal as `complete-positive-slice` while historical gaps
 remain explicit.
 
+Run `20260813T130659Z` corrects that initial checkpoint by following all four result pages declared
+by the retained Italian HTML. It retains and deduplicates 42 exact detail paths (12 per page on the
+first three pages and six on the fourth): twelve preserve their reviewed mappings and 30 remain
+non-destructive new candidates. The independently reachable `pl2/111` page is still absent, so the
+historical-coverage gap remains `needs-evidence`; complete pagination closes only the bounded
+filter response, never an era or absence claim.
+
 ## Shared French, German, and European-Spanish run result
 
 Run `20260811T113148Z` activates the same strict-equality TCGdex adapter for French `Ronflex`,
