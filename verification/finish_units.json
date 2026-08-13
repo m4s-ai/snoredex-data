@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-08-11",
+    "generated": "2026-08-13",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -56,16 +56,16 @@
       "totalFinishUnits": 637,
       "withConfirmedFinish": 333,
       "withOnlyMarketplaceClaim": 103,
-      "pendingFinish": 125,
-      "notApplicableFinish": 76,
+      "pendingFinish": 126,
+      "notApplicableFinish": 75,
       "withCompleteManifest": 4,
       "withNonHolo": 271,
       "withHolo": 144,
       "withReverseHolo": 234,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 18,
-      "withUnresolvedProductMapping": 162,
-      "withAnyUnresolvedDetail": 220,
+      "withUnresolvedProductMapping": 163,
+      "withAnyUnresolvedDetail": 221,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -33625,7 +33625,7 @@
       "products": [
         {
           "variant": "base",
-          "claimStatus": "contradicted",
+          "claimStatus": "confirmed",
           "rarity": "Fixed",
           "variantName": null,
           "variantNameSource": null,
@@ -33639,18 +33639,21 @@
       ],
       "availableFinishes": [],
       "finishStatus": {
-        "non-holo": "not-applicable",
-        "holo": "not-applicable",
-        "reverse-holo": "not-applicable",
-        "mirror-holo": "not-applicable"
+        "non-holo": "pending",
+        "holo": "pending",
+        "reverse-holo": "pending",
+        "mirror-holo": "pending"
       },
-      "applicabilityStatus": "not-applicable",
-      "availabilityStatus": "not-applicable",
-      "completenessStatus": "not-applicable",
-      "productMappingStatus": "not-applicable",
+      "applicabilityStatus": "applicable",
+      "availabilityStatus": "pending",
+      "completenessStatus": "pending",
+      "productMappingStatus": "pending",
       "patternStatus": "not-applicable",
       "printings": [],
-      "unresolved": []
+      "unresolved": [
+        "No positive finish evidence has been recorded for this set-number-language unit.",
+        "One or more Cardmarket product variants are not mapped to a logical printing: base"
+      ]
     },
     {
       "finishUnitId": "F0495",

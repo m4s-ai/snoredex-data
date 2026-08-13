@@ -163,6 +163,14 @@ def main() -> int:
     if set(legacy_regressions.values()) - {"disputed", "not-printed"}:
         raise AssertionError(f"alternate-local-identity regression was presented as absence: {legacy_regressions}")
 
+    issue84_correction = by_id["U0467"]
+    if (
+        issue84_correction["status"] != "confirmed"
+        or issue84_correction.get("providerId") != "52poke"
+        or semantics["U0467"]["applicationStatus"] != "exists"
+    ):
+        raise AssertionError("#84 positive SVG 021/049 evidence no longer corrects U0467")
+
     counts = {status: len(unit_ids) for status, unit_ids in expected.items()}
     if semantics_doc["counts"]["applicationStatuses"] != {
         status: count for status, count in sorted(counts.items(), key=lambda item: -item[1]) if count

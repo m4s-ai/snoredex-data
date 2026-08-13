@@ -7,21 +7,21 @@
       "coverageVersion": "legacy-set-reconciliation-v1",
       "droppedLanguageRelationships": 0,
       "droppedSetCodeLanguagePairs": 0,
-      "legacyLanguageRelationships": 641,
+      "legacyLanguageRelationships": 642,
       "legacyRows": 203,
       "legacyScalarDatesOverwritten": 0,
       "legacySetCodeLanguagePairs": 490,
-      "preservedLanguageRelationships": 641,
+      "preservedLanguageRelationships": 642,
       "preservedSetCodeLanguagePairs": 490,
       "projectedRows": 203,
       "rowCountDelta": 0,
       "supportedEventRelationships": 61,
       "unsourcedPresentedAsReviewedExact": 0,
-      "visibleNeedsEvidenceRelationships": 580
+      "visibleNeedsEvidenceRelationships": 581
     }
   },
   "coverageVersion": "legacy-set-reconciliation-v1",
-  "generated": "2026-08-11",
+  "generated": "2026-08-13",
   "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
   "schema": "snoredex-confirmed-releases",
   "schemaVersion": "1.0.0",
@@ -31849,7 +31849,8 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Venusaur-Charizard-Blastoise-Special-Deck-Set-ex/Snorlax-svG021",
       "confirmedLanguages": [
         "Japanese",
-        "Korean"
+        "Korean",
+        "T-Chinese"
       ],
       "date": "2023-11-10",
       "dateApproximate": false,
@@ -31906,30 +31907,31 @@
         },
         {
           "availableFinishes": [],
-          "claimStatus": "contradicted",
+          "claimStatus": "confirmed",
           "finishStatus": {
-            "holo": "not-applicable",
-            "mirror-holo": "not-applicable",
-            "non-holo": "not-applicable",
-            "reverse-holo": "not-applicable"
+            "holo": "pending",
+            "mirror-holo": "pending",
+            "non-holo": "pending",
+            "reverse-holo": "pending"
           },
           "finishUnitId": "F0494",
           "language": "T-Chinese",
           "printings": [],
-          "productMappingStatus": "not-applicable",
-          "status": "not-applicable",
+          "productMappingStatus": "pending",
+          "status": "pending",
           "unitAvailableFinishes": [],
           "unitFinishStatus": {
-            "holo": "not-applicable",
-            "mirror-holo": "not-applicable",
-            "non-holo": "not-applicable",
-            "reverse-holo": "not-applicable"
+            "holo": "pending",
+            "mirror-holo": "pending",
+            "non-holo": "pending",
+            "reverse-holo": "pending"
           }
         }
       ],
       "finishCompletenessByLanguage": {
         "Japanese": "pending",
-        "Korean": "pending"
+        "Korean": "pending",
+        "T-Chinese": "pending"
       },
       "image": "images/svG_021_Snorlax_744984.jpg",
       "languageEvidence": {
@@ -31946,6 +31948,13 @@
           "corroborated": false,
           "provider": "Bulbapedia",
           "providerId": "bulbapedia"
+        },
+        "T-Chinese": {
+          "authorityTier": 2,
+          "checkable": true,
+          "corroborated": false,
+          "provider": "52poke (Wiki)",
+          "providerId": "52poke"
         }
       },
       "name": "Snorlax",
@@ -31953,11 +31962,12 @@
       "rarity": "Fixed",
       "reconciliation": {
         "dateProvenanceDisposition": "inherited-legacy-estimate-with-warning",
-        "legacyRowHash": "sha256:625810cceb56a9168be184c3c8e105aba236058bc7ee626e14c5dfe2caed6949",
+        "legacyRowHash": "sha256:06f73390e4f45ece560ba34ed4ca5976b1c1811113d74d2c8304bc425f0876f5",
         "migrationDisposition": "needs-evidence",
         "needsEvidenceDateLanguages": [
           "Japanese",
-          "Korean"
+          "Korean",
+          "T-Chinese"
         ],
         "releaseEventIds": [],
         "supportedDateLanguages": [],

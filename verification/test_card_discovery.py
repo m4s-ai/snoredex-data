@@ -614,6 +614,25 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertEqual(edge["coverage"]["productCategories"], ["set"])
         self.assertNotIn("card-existence", edge["positiveEvidenceCapabilities"])
 
+    def test_issue84_52poke_frontier_keeps_only_reviewed_numbered_rows(self):
+        records = discovery.issue84_52poke_records()
+        contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        adapter = next(
+            row for row in contract["adapters"]
+            if row["adapterId"] == "52poke-issue84-positive"
+        )
+        retained = set(adapter["slices"][0]["retainedRecordIds"])
+        self.assertEqual(len(retained), 12)
+        self.assertTrue(retained <= set(records))
+        self.assertNotIn("DP1|DP1|", records)
+        self.assertEqual(
+            records["S10a|SVG|021/049"]["sourcePageKey"], "S10a"
+        )
+
     def test_zero_result_is_source_failure_not_absence(self):
         raw = b"""
         <p class="resultNumber">0</p>
