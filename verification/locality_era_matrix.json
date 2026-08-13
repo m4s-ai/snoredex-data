@@ -54,7 +54,7 @@
           "start": null,
           "end": null,
           "state": "positive-observations-only",
-          "basis": "The retained English TCGdex set slice and exact-name Snorlax card slice account for every returned row, while provider population and regional distribution remain open.",
+          "basis": "The retained English TCGdex set slice and bounded substring-name Snorlax card slice account for every returned row, including qualified names, while provider population and regional distribution remain open.",
           "evidenceRefs": [
             "slice:tcgdex-en-sets",
             "card-slice:tcgdex-en-snorlax",
@@ -76,7 +76,7 @@
           "source-gap:official-western-catalogue-index",
           "card-gap:western-locality-card-discovery"
         ],
-        "retryCondition": "Rerun the exact-name slice for deltas; split regional products only when a positive physical marking or distribution record distinguishes them."
+        "retryCondition": "Rerun the bounded substring-name slice for deltas; split regional products only when a positive physical marking or distribution record distinguishes them."
       },
       "evidenceRefs": [
         "unit:U0000",

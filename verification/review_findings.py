@@ -1365,6 +1365,10 @@ def collect() -> None:
             or row["accounting"]["fetched"] != len(discovered_by_slice[row["sliceId"]])
         ]
         card_adapters = {row["adapterId"]: row for row in card_contract["adapters"]}
+        card_slices = {
+            row["sliceId"]: row
+            for adapter in card_contract["adapters"] for row in adapter["slices"]
+        }
         expected_query_fields = {
             "pokemon-asia-html": {"nameQueries", "cardType", "regulation", "pageParameter"},
             "tcgdex-json": {"nameQueries", "nameFilter", "pagination"},
@@ -1398,7 +1402,10 @@ def collect() -> None:
             or (
                 card_adapters[request["adapterId"]].get("responseFormat") == "tcgdex-json"
                 and (
-                    request["queryParameters"].get("nameFilter") != "strict-equality"
+                    request["queryParameters"].get("nameFilter")
+                        != card_slices[request["sliceId"]].get(
+                            "nameFilter", "strict-equality"
+                        )
                     or request["queryParameters"].get("pagination")
                         != "disabled-provider-default"
                 )

@@ -1365,7 +1365,7 @@ def new_manifest(
                 })
             elif response_format == "tcgdex-json":
                 query_parameters.update({
-                    "nameFilter": "strict-equality",
+                    "nameFilter": slice_row.get("nameFilter", "strict-equality"),
                     "pagination": "disabled-provider-default",
                 })
             elif response_format == "confirmed-source-json":
@@ -1538,10 +1538,19 @@ def refresh_tcgdex_request(
     run_dir: Path, manifest: dict[str, Any], request: dict[str, Any],
     adapter: dict[str, Any], slice_row: dict[str, Any],
 ) -> None:
+    name_filter = slice_row.get("nameFilter", "strict-equality")
+    filter_operator = {
+        "strict-equality": "eq",
+        "substring": "like",
+    }.get(name_filter)
+    if filter_operator is None:
+        raise DiscoveryError(f"unsupported TCGdex name filter: {name_filter}")
     pages_by_query = {row["query"]: row for row in request["pages"]}
     for query_index, query in enumerate(slice_row["nameQueries"], start=1):
         if query not in pages_by_query:
-            url = request["endpoint"] + "?" + urllib.parse.urlencode({"name": f"eq:{query}"})
+            url = request["endpoint"] + "?" + urllib.parse.urlencode({
+                "name": f"{filter_operator}:{query}"
+            })
             raw = fetch_bytes(url)
             parsed = parse_list(raw, "tcgdex-json")
             relative = f"raw/{request['sliceId']}/query-{query_index}.json"

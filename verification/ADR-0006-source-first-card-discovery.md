@@ -107,6 +107,14 @@ distribution discriminator. The run therefore admits no regional split. That unr
 stays an explicit positive-evidence gap: packaging or marketplace geography alone cannot create a
 new physical-card identity.
 
+Issue #203 broadens only the English slice to TCGdex's bounded `name=like:Snorlax` route. This
+provider-native filter retains qualified names such as `Snorlax V`, `Hop's Snorlax`, and `Snorlax
+Doll` without using the legacy candidate universe as a seed. Exact-name slices for other locales
+remain unchanged. Run `20260813T135800Z` retains 64 unique English details and accounts for all of
+them: 57 match existing physical releases and seven source-identified Pokémon TCG Pocket records
+are positively excluded. The three #203 witnesses `swsh1-141`, `sv09-117`, and `sv04-175` are
+present and matched; the run has no request or accounting error.
+
 The same run refreshes the Taiwan slice, producing 88 accounted records overall: 50 matched, 32
 new candidates, six positively excluded, and zero run errors. Historical runs now retain their
 contract snapshots so later adapter versions can replay every checkpoint under its own immutable
