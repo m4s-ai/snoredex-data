@@ -916,10 +916,18 @@ def diff_records(current: list[dict[str, Any]], previous: list[dict[str, Any]]) 
         new_hints[current_by_key[key]["identityHintHash"]].append(key)
     rekeyed = []
     for hint in sorted(set(old_hints) & set(new_hints)):
-        for old_key, new_key in zip(sorted(old_hints[hint]), sorted(new_hints[hint])):
+        old_keys = sorted(old_hints[hint])
+        new_keys = sorted(new_hints[hint])
+        pairs = (
+            [(old_key, new_keys[0]) for old_key in old_keys]
+            if len(new_keys) == 1 else zip(old_keys, new_keys)
+        )
+        used_new_keys = set()
+        for old_key, new_key in pairs:
             rekeyed.append({"from": old_key, "to": new_key, "identityHintHash": hint})
             disappeared.remove(old_key)
-            added.remove(new_key)
+            used_new_keys.add(new_key)
+        added.difference_update(used_new_keys)
     locality_deltas = [
         {
             "stableKey": key,

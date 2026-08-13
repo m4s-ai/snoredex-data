@@ -219,6 +219,29 @@ class CardDiscoveryTests(unittest.TestCase):
             delta["localityDeltas"][0]["toEvidenceMode"], "unqualified-language"
         )
 
+    def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
+        old = [
+            {"stableKey": f"old-{unit}", "recordHash": unit,
+             "identityHintHash": "shared", "locality": "LATAM"}
+            for unit in ("U0192", "U0219")
+        ]
+        new = [{
+            "stableKey": "listing-PPPS8-117b", "recordHash": "listing",
+            "identityHintHash": "shared", "locality": "LATAM",
+        }]
+
+        delta = discovery.diff_records(new, old)
+
+        self.assertEqual(delta["disappeared"], [])
+        self.assertEqual(delta["added"], [])
+        self.assertEqual(
+            {(row["from"], row["to"]) for row in delta["rekeyedCandidates"]},
+            {
+                ("old-U0192", "listing-PPPS8-117b"),
+                ("old-U0219", "listing-PPPS8-117b"),
+            },
+        )
+
     def test_exact_local_tuple_matches_without_an_equivalence_merge(self):
         release = {
             "cardReleaseId": "RELEASE:TW:T-Chinese:svQP F:012/023:work",
