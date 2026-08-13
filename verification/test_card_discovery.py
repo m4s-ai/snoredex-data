@@ -333,6 +333,21 @@ class CardDiscoveryTests(unittest.TestCase):
         )
         self.assertTrue(discovery.pagination_complete(retained_pages))
 
+    def test_official_result_path_cannot_cross_a_page_boundary_twice(self):
+        retained_pages = [
+            {
+                "pageNo": 1, "totalPages": 2,
+                "detailIds": ["svp/51", "svp/184"],
+            },
+            {
+                "pageNo": 2, "totalPages": 2,
+                "detailIds": ["svp/184", "sv4/123"],
+            },
+        ]
+        self.assertFalse(discovery.pagination_complete(retained_pages))
+        retained_pages[1]["detailIds"][0] = "sv3/202"
+        self.assertTrue(discovery.pagination_complete(retained_pages))
+
     def test_official_italian_filter_challenge_is_a_source_failure(self):
         with self.assertRaisesRegex(discovery.DiscoveryError, "access challenge"):
             discovery.parse_official_localized_entries(
