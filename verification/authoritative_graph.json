@@ -154760,7 +154760,7 @@
       "fromType": "equivalence-assertion",
       "fromId": "ASSERT:same-work:U0265:TW:AS5a:142:base",
       "relation": "relates",
-      "toType": "node",
+      "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "provenance": {
         "assertionId": "ASSERT:same-work:U0265:TW:AS5a:142:base",
@@ -154780,7 +154780,7 @@
       "fromType": "equivalence-assertion",
       "fromId": "ASSERT:same-work:U0265:TW:AS5a:142:base",
       "relation": "relates",
-      "toType": "node",
+      "toType": "work",
       "toId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
       "provenance": {
         "assertionId": "ASSERT:same-work:U0265:TW:AS5a:142:base",
@@ -154795,6 +154795,54 @@
         "evidence": "The owner identifies AS5a 142 as the Traditional-Chinese printing of the work represented by legacy Japanese sm10 076 and supplies the 52poke record and card image. Both local release identities remain distinct.",
         "destructiveMergeAllowed": false
       }
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:c5409001913b9c35",
+      "relation": "scoped-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:WEST:SK",
+      "provenance": {
+        "scopePrecision": "exact"
+      }
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:c5409001913b9c35",
+      "relation": "scoped-to",
+      "toType": "set-edition",
+      "toId": "EDITION:WEST:English:SK",
+      "provenance": {
+        "scopePrecision": "exact"
+      }
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:c5409001913b9c35",
+      "relation": "scoped-to",
+      "toType": "set-edition",
+      "toId": "EDITION:WEST:German:SK",
+      "provenance": {
+        "scopePrecision": "exact"
+      }
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:c5409001913b9c35",
+      "relation": "scoped-to",
+      "toType": "set-edition",
+      "toId": "EDITION:WEST:Italian:SK",
+      "provenance": {
+        "scopePrecision": "exact"
+      }
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:c5409001913b9c35",
+      "relation": "supported-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-BP-AVAIL-1E3BBC48CFC6",
+      "provenance": {}
     },
     {
       "fromType": "legacy-cardmarket-product",
@@ -213216,7 +213264,7 @@
   ],
   "summary": {
     "entities": 6330,
-    "edges": 8922,
+    "edges": 8927,
     "migrationInputs": 2106,
     "migrationDispositions": {
       "bounded-contradicted": 84,

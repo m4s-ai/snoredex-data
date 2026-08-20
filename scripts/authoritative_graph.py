@@ -119,8 +119,14 @@ def build() -> dict:
              "candidate-claim", row["establishingClaimId"])
     for row in identity["equivalenceAssertions"]:
         add_entity(entities, "equivalence-assertion", row["assertionId"], row, INPUTS[0])
-        edge(edges, "equivalence-assertion", row["assertionId"], "relates", "node", row["fromId"], row)
-        edge(edges, "equivalence-assertion", row["assertionId"], "relates", "node", row["toId"], row)
+        for target_id in (row["fromId"], row["toId"]):
+            target_types = [entity_type for entity_type, entity_id in entities if entity_id == target_id]
+            if len(target_types) != 1:
+                raise ValueError(
+                    f"equivalence target {target_id!r} resolves to {target_types}, expected one graph entity"
+                )
+            edge(edges, "equivalence-assertion", row["assertionId"], "relates",
+                 target_types[0], target_id, row)
 
     for row in catalogue["sourceRecords"]:
         add_entity(entities, "set-source-record", row["sourceRecordId"], row, INPUTS[1])
@@ -146,7 +152,15 @@ def build() -> dict:
         for edition_id in row.get("setEditionIds", []):
             edge(edges, "release-event", row["releaseEventId"], "supports", "set-edition", edition_id)
     for row in catalogue["finishProfiles"]:
-        add_entity(entities, "finish-profile", row["finishProfileId"], row, INPUTS[1])
+        profile_id = row["finishProfileId"]
+        add_entity(entities, "finish-profile", profile_id, row, INPUTS[1])
+        edge(edges, "finish-profile", profile_id, "scoped-to", "local-set", row["localSetId"],
+             {"scopePrecision": row.get("scopePrecision")})
+        for edition_id in row.get("setEditionIds", []):
+            edge(edges, "finish-profile", profile_id, "scoped-to", "set-edition", edition_id,
+                 {"scopePrecision": row.get("scopePrecision")})
+        edge(edges, "finish-profile", profile_id, "supported-by", "set-source-record",
+             row["sourceRecordId"])
     for row in catalogue["cardReleaseRefs"]:
         ref_id = row["cardReleaseId"]
         add_entity(entities, "catalogue-card-release-ref", ref_id, row, INPUTS[1])

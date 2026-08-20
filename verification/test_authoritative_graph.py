@@ -29,6 +29,7 @@ def main() -> None:
         assert (row["fromType"], row["fromId"]) in entities
         if row["toType"] != "node":
             assert (row["toType"], row["toId"]) in entities
+    assert not any(row["toType"] == "node" for row in edges)
 
     dispositions = graph["migrationDispositions"]
     keys = [(row["sourceKind"], row["sourceId"]) for row in dispositions]
@@ -75,6 +76,12 @@ def main() -> None:
         key = ("profile-finish-claim", row["profileFinishClaimId"])
         assert (key[0], key[1], "uses-profile", "finish-profile", row["finishProfileId"]) in edge_keys
         assert (key[0], key[1], "asserts-finish-for", "card-release", row["cardReleaseId"]) in edge_keys
+    for row in catalogue["finishProfiles"]:
+        key = ("finish-profile", row["finishProfileId"])
+        assert (key[0], key[1], "scoped-to", "local-set", row["localSetId"]) in edge_keys
+        assert (key[0], key[1], "supported-by", "set-source-record", row["sourceRecordId"]) in edge_keys
+        for edition_id in row.get("setEditionIds", []):
+            assert (key[0], key[1], "scoped-to", "set-edition", edition_id) in edge_keys
     for row in catalogue["aliasAssertions"]:
         key = ("catalogue-alias-assertion", row["aliasAssertionId"])
         assert (key[0], key[1], "asserted-by", "set-source-record", row["sourceRecordId"]) in edge_keys
