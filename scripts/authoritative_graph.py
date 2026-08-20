@@ -147,15 +147,66 @@ def build() -> dict:
             edge(edges, "release-event", row["releaseEventId"], "supports", "set-edition", edition_id)
     for row in catalogue["finishProfiles"]:
         add_entity(entities, "finish-profile", row["finishProfileId"], row, INPUTS[1])
-    for key, rows, id_key, entity_type in (
-        ("cardReleaseRefs", catalogue["cardReleaseRefs"], "cardReleaseId", "catalogue-card-release-ref"),
-        ("rarityClaims", catalogue["rarityClaims"], "rarityClaimId", "rarity-claim"),
-        ("profileFinishClaims", catalogue["profileFinishClaims"], "profileFinishClaimId", "profile-finish-claim"),
-        ("aliasAssertions", catalogue["aliasAssertions"], "aliasAssertionId", "catalogue-alias-assertion"),
-        ("sourceAssertions", catalogue["sourceAssertions"], "sourceAssertionId", "source-assertion"),
-    ):
-        for row in rows:
-            add_entity(entities, entity_type, row[id_key], row, INPUTS[1])
+    for row in catalogue["cardReleaseRefs"]:
+        ref_id = row["cardReleaseId"]
+        add_entity(entities, "catalogue-card-release-ref", ref_id, row, INPUTS[1])
+        edge(edges, "catalogue-card-release-ref", ref_id, "references",
+             "card-release", row["cardReleaseId"])
+        edge(edges, "catalogue-card-release-ref", ref_id, "belongs-to",
+             "set-edition", row["setEditionId"])
+    for row in catalogue["rarityClaims"]:
+        claim_id = row["rarityClaimId"]
+        add_entity(entities, "rarity-claim", claim_id, row, INPUTS[1])
+        edge(edges, "rarity-claim", claim_id, "asserts-rarity-for",
+             "card-release", row["cardReleaseId"])
+        edge(edges, "rarity-claim", claim_id, "observed-by",
+             "set-source-record", row["sourceRecordId"])
+    for row in catalogue["profileFinishClaims"]:
+        claim_id = row["profileFinishClaimId"]
+        add_entity(entities, "profile-finish-claim", claim_id, row, INPUTS[1])
+        edge(edges, "profile-finish-claim", claim_id, "uses-profile",
+             "finish-profile", row["finishProfileId"])
+        edge(edges, "profile-finish-claim", claim_id, "asserts-finish-for",
+             "card-release", row["cardReleaseId"])
+    for row in catalogue["aliasAssertions"]:
+        assertion_id = row["aliasAssertionId"]
+        add_entity(entities, "catalogue-alias-assertion", assertion_id, row, INPUTS[1])
+        edge(edges, "catalogue-alias-assertion", assertion_id, "asserted-by",
+             "set-source-record", row["sourceRecordId"])
+        if row.get("localSetId"):
+            edge(edges, "catalogue-alias-assertion", assertion_id, row["relationship"],
+                 "local-set", row["localSetId"])
+        if row.get("setEditionId"):
+            edge(edges, "catalogue-alias-assertion", assertion_id, row["relationship"],
+                 "set-edition", row["setEditionId"])
+    source_targets = (
+        ("rarityClaimId", "rarity-claim"),
+        ("localSetId", "local-set"),
+        ("releaseEventId", "release-event"),
+        ("setEditionId", "set-edition"),
+        ("finishProfileId", "finish-profile"),
+    )
+    for row in catalogue["sourceAssertions"]:
+        assertion_id = row["sourceAssertionId"]
+        add_entity(entities, "source-assertion", assertion_id, row, INPUTS[1])
+        edge(edges, "source-assertion", assertion_id, "asserted-by",
+             "set-source-record", row["sourceRecordId"])
+        for field, target_type in source_targets:
+            if row.get(field):
+                edge(edges, "source-assertion", assertion_id, row["assertionKind"],
+                     target_type, row[field])
+                break
+
+    for source_id, record in sorted(identity["legacyProductDispositions"].items()):
+        product_id = f"LEGACYPRODUCT:{source_id}"
+        targets = list(record.get("cardReleaseIds") or [])
+        add_entity(
+            entities, "legacy-cardmarket-product", product_id,
+            {**record, "sourceId": source_id, "cardReleaseIds": targets}, INPUTS[0],
+        )
+        for target in targets:
+            edge(edges, "legacy-cardmarket-product", product_id, "maps-to",
+                 "card-release", target, {"disposition": record["disposition"]})
 
     migration: list[dict] = []
     for row in identity["candidateClaims"]:
@@ -171,10 +222,12 @@ def build() -> dict:
             "reason": row["reason"],
         })
     for source_id, record in sorted(identity["legacyProductDispositions"].items()):
+        targets = list(record.get("cardReleaseIds") or [])
         migration.append({
             "sourceKind": "legacy-cardmarket-product", "sourceId": source_id,
             "disposition": record["disposition"],
-            "targetRef": (record.get("cardReleaseIds") or [None])[0],
+            "targetRef": targets[0] if targets else None,
+            "targetRefs": targets,
             "reason": record.get("reason") or "legacy product migration disposition",
         })
     for report in identity["reports"].get("legacyIssueRekeys", []):
@@ -196,8 +249,7 @@ def build() -> dict:
     entity_keys = {(row["entityType"], row["entityId"]) for row in entity_rows}
     missing_targets = [
         row for row in edge_rows
-        if row["relation"] in {"belongs-to", "implements", "realizes", "established-by", "materializes"}
-        and row["toType"] != "node"
+        if row["toType"] != "node"
         and (row["toType"], row["toId"]) not in entity_keys
     ]
     if missing_targets:

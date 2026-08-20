@@ -110,7 +110,7 @@ negative printing claim.
 | `checklist_evidence_refs` | Ordered evidence URLs or prose references. These are deliberately references, not falsely advertised as stable source IDs. |
 | `quality_issues` | One queryable record per warning or intentional null. |
 | `graph_entities` / `graph_edges` | Authoritative #140 locality-aware nodes and provenance-bearing typed edges. |
-| `graph_migration_dispositions` | One reversible terminal disposition for every migrated input. |
+| `graph_migration_dispositions` | One reversible disposition for every migrated input; `target_ref` is the compatibility scalar and `target_refs_json` preserves every mapped release. |
 | `graph_source_records` | Immutable raw set/product source records retained by the graph migration. |
 
 All relationships have foreign keys. JSON is retained only for naturally nested details such as a
@@ -179,7 +179,7 @@ WHERE application_status = 'not-printed';
 SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
-The database is UTF-8 SQLite, schema version `1.3.0`, with `PRAGMA user_version=10003`. Every build
+The database is UTF-8 SQLite, schema version `1.4.0`, with `PRAGMA user_version=10004`. Every build
 stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`;
 `scripts/database.py --check` fails if
 any source artifact changes without a database refresh.

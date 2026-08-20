@@ -32,7 +32,7 @@ from absence_model import absence_scope_urls  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.3.0"
+SCHEMA_VERSION = "1.4.0"
 GRAPH_SCHEMA_VERSION = "1.0.0"
 
 INPUTS = [
@@ -171,7 +171,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10003;
+PRAGMA user_version = 10004;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -488,6 +488,7 @@ CREATE TABLE graph_migration_dispositions (
     source_id TEXT NOT NULL,
     disposition TEXT NOT NULL,
     target_ref TEXT,
+    target_refs_json TEXT NOT NULL CHECK (json_valid(target_refs_json)),
     reason TEXT NOT NULL,
     PRIMARY KEY (source_kind, source_id)
 ) WITHOUT ROWID;
@@ -764,10 +765,11 @@ def build_database(target: Path) -> dict[str, int | str]:
         ],
     )
     cursor.executemany(
-        "INSERT INTO graph_migration_dispositions VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO graph_migration_dispositions VALUES (?, ?, ?, ?, ?, ?)",
         [
             (
                 row["sourceKind"], row["sourceId"], row["disposition"], row.get("targetRef"),
+                compact(row.get("targetRefs") or ([] if row.get("targetRef") is None else [row["targetRef"]])),
                 row["reason"],
             )
             for row in graph_doc["migrationDispositions"]
@@ -1248,8 +1250,8 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10003:
-            problems.append("database PRAGMA user_version is not 10003")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != 10004:
+            problems.append("database PRAGMA user_version is not 10004")
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()
