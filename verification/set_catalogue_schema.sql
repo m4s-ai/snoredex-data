@@ -1,6 +1,7 @@
 -- Snoredex local set catalogue schema 0.2.0 (#146/#209).
 -- This is the executable constraint contract for ADR-0002. The dry-run loads it into an
--- in-memory SQLite database on every build; #140 decides whether/when it enters snoredex.sqlite.
+-- in-memory SQLite database on every build; #140 materializes the reviewed result in
+-- snoredex.sqlite's graph_* tables.
 
 PRAGMA foreign_keys = ON;
 PRAGMA user_version = 2;

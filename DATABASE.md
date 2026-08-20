@@ -8,7 +8,9 @@ finish model, physical checklist and provider metadata. Its candidate denominato
 all-locality catalogue. The database deliberately excludes the append-only evidence journal and
 migration/pass history.
 
-The source JSON files remain authoritative. Regenerate and validate the database with:
+The source JSON files remain authoritative for observations. The migrated locality graph in
+`graph_entities` / `graph_edges` is the canonical identity and migration surface for new
+consumers. Regenerate and validate the database with:
 
 ```console
 python scripts/database.py
@@ -107,6 +109,9 @@ negative printing claim.
 | `providers` / `printing_sources` | Current source metadata and finish evidence; no historical observations. |
 | `checklist_evidence_refs` | Ordered evidence URLs or prose references. These are deliberately references, not falsely advertised as stable source IDs. |
 | `quality_issues` | One queryable record per warning or intentional null. |
+| `graph_entities` / `graph_edges` | Authoritative #140 locality-aware nodes and provenance-bearing typed edges. |
+| `graph_migration_dispositions` | One reversible disposition for every migrated input; `target_ref` is the compatibility scalar and `target_refs_json` preserves every mapped release. |
+| `graph_source_records` | Immutable raw set/product source records retained by the graph migration. |
 
 All relationships have foreign keys. JSON is retained only for naturally nested details such as a
 marking list or the source's original structured payload; application identity and filter fields
@@ -174,7 +179,7 @@ WHERE application_status = 'not-printed';
 SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
-The database is UTF-8 SQLite, schema version `1.2.0`, with `PRAGMA user_version=10002`. Every build
+The database is UTF-8 SQLite, schema version `1.4.0`, with `PRAGMA user_version=10004`. Every build
 stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`;
 `scripts/database.py --check` fails if
 any source artifact changes without a database refresh.

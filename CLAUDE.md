@@ -200,6 +200,7 @@ python scripts/legacy_baseline.py --check   # legacy universe contract + claim g
 python scripts/print_identity_dryrun.py --check  # ADR-0001 claim/release/print mapping (#134/#145)
 python scripts/evidence_semantics.py --check     # evidence granularity + application status (#137)
 python scripts/set_catalogue_dryrun.py --check   # ADR-0002 set/edition/event mapping (#146)
+python scripts/authoritative_graph.py --check    # reviewed locality graph migration (#140)
 python scripts/source_adapters.py --check        # ADR-0004 source-first catalogue runs (#147)
 python scripts/card_discovery.py --check         # ADR-0006 source-first card runs (#136)
 python scripts/locality_matrix.py --check         # evidenced non-Asian locality/era tracks (#139)
