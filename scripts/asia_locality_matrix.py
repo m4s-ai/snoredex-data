@@ -23,6 +23,7 @@ REQUIRED_REGRESSIONS = {
     "id-sv9s-i-109", "id-sv4s-i-118", "id-sv6s-i-136",
     "kr-renumbered-positive-printings", "kr-spec-0037-positive",
 }
+REQUIRED_SAME_WORK_REGRESSIONS = {"cn-sv9-075"}
 TERMINAL_STATES = {"complete", "needs-evidence", "blocked-by-source"}
 DISPOSITIONS = {"positive-node", "positive-candidate", "needs-evidence", "held-positive"}
 
@@ -58,6 +59,12 @@ def indexes(manifest: dict[str, Any]) -> dict[str, Any]:
         for release in dryrun["cardReleases"]
         for source_id in release.get("sourceFirstRecordIds", [])
     }
+    unit_claims: dict[str, list[dict[str, Any]]] = {}
+    for claim in dryrun["candidateClaims"]:
+        if (claim.get("claimKind"), claim.get("sourceKind")) != (
+                "card-release", "legacy-language-unit"):
+            continue
+        unit_claims.setdefault(claim["sourceId"], []).append(claim)
     adapter_gaps = {item["gapId"]: item for item in adapter["gaps"]}
     local_gap_rows = manifest.get("localGaps", [])
     local_gaps = {item["gapId"]: item for item in local_gap_rows}
@@ -78,6 +85,8 @@ def indexes(manifest: dict[str, Any]) -> dict[str, Any]:
         "card-record-context": record_context,
         "legacy-rekey": rekeys,
         "release-by-source": releases_by_source,
+        "release": {item["cardReleaseId"]: item for item in dryrun["cardReleases"]},
+        "unit-claim": unit_claims,
         "specimen": {
             item["specimenId"]: item
             for item in read_json(ROOT / "verification" / "specimens.json")["specimens"]
@@ -126,6 +135,39 @@ def print_identity(kind: str, item: dict[str, Any], data: dict[str, Any]) -> dic
             "localNumber": specimen["number"],
         }
     raise ValueError(f"{kind} is not a printing evidence kind")
+
+
+def validate_unit_materialization(
+        label: str, unit: dict[str, Any], data: dict[str, Any], errors: list[str],
+        *, expected_target: str | None = None, expected_work: str | None = None,
+) -> None:
+    unit_id = unit["unitId"]
+    claims = data["unit-claim"].get(unit_id, [])
+    if len(claims) != 1:
+        errors.append(f"{label}: unit:{unit_id} resolves to {len(claims)} card-release claims")
+        return
+    claim = claims[0]
+    target = claim.get("materializedTargetId")
+    if (claim.get("evidenceStatus"), claim.get("disposition")) != (
+            "confirmed", "established-and-mapped") or not target:
+        errors.append(f"{label}: unit:{unit_id} does not materialize an established release")
+        return
+    if expected_target is not None and target != expected_target:
+        errors.append(
+            f"{label}: unit:{unit_id} materializes {target!r}, not {expected_target!r}")
+    release = data["release"].get(target)
+    if release is None:
+        errors.append(f"{label}: unit:{unit_id} materialized release {target!r} is missing")
+        return
+    if claim["claimId"] not in release.get("establishingClaimIds", []):
+        errors.append(f"{label}: unit:{unit_id} is not bound to release {target!r}")
+    if expected_work is not None:
+        if unit.get("cardKey") != expected_work:
+            errors.append(
+                f"{label}: unit:{unit_id} cardKey differs from expected work {expected_work!r}")
+        if release.get("work") != expected_work:
+            errors.append(
+                f"{label}: unit:{unit_id} release work differs from {expected_work!r}")
 
 
 def validate(manifest: dict[str, Any], data: dict[str, Any]) -> list[str]:
@@ -220,6 +262,7 @@ def validate(manifest: dict[str, Any], data: dict[str, Any]) -> list[str]:
                     errors.append(f"{track_id}: {reference} has another locality/language")
                 if item.get("status") != "confirmed" or not item.get("sourceUrl"):
                     errors.append(f"{track_id}: {reference} lacks positive source evidence")
+                validate_unit_materialization(track_id, item, data, errors)
             elif kind == "card-record" and (
                     item["locality"] != track["locality"]):
                 errors.append(f"{track_id}: {reference} has another locality")
@@ -275,6 +318,8 @@ def validate(manifest: dict[str, Any], data: dict[str, Any]) -> list[str]:
             elif kind == "unit" and (
                     item.get("status") != "confirmed" or not item.get("sourceUrl")):
                 errors.append(f"{regression_id}: {reference} lacks positive source evidence")
+            if kind == "unit":
+                validate_unit_materialization(regression_id, item, data, errors)
         if not kinds & required_kind[disposition]:
             errors.append(f"{regression_id}: {disposition} lacks its required evidence kind")
         printing_refs = {
@@ -298,7 +343,10 @@ def validate(manifest: dict[str, Any], data: dict[str, Any]) -> list[str]:
                 errors.append(f"{regression_id}: {reference} is not printing evidence")
                 continue
             required_fields = {"locality", "language", "localSetCode", "localNumber"}
-            if set(expected) != required_fields | {"reference"}:
+            expected_fields = required_fields | {"reference"}
+            if kind == "unit":
+                expected_fields.add("materializedTargetId")
+            if set(expected) != expected_fields:
                 errors.append(f"{regression_id}: {reference} has incomplete expected identity")
                 continue
             actual = print_identity(kind, item, data)
@@ -307,6 +355,36 @@ def validate(manifest: dict[str, Any], data: dict[str, Any]) -> list[str]:
                 errors.append(
                     f"{regression_id}: {reference} identity differs: "
                     f"expected={declared}, actual={actual}")
+            if kind == "unit":
+                validate_unit_materialization(
+                    regression_id, item, data, errors,
+                    expected_target=expected["materializedTargetId"],
+                )
+        expected_same_work = regression.get("expectedSameWork")
+        if regression_id in REQUIRED_SAME_WORK_REGRESSIONS:
+            if (not isinstance(expected_same_work, dict) or
+                    set(expected_same_work) != {"cardKey", "counterpartUnitIds"} or
+                    not isinstance(expected_same_work.get("cardKey"), str) or
+                    not expected_same_work["cardKey"] or
+                    not isinstance(expected_same_work.get("counterpartUnitIds"), list) or
+                    not expected_same_work["counterpartUnitIds"]):
+                errors.append(f"{regression_id}: expectedSameWork contract is incomplete")
+            else:
+                work = expected_same_work["cardKey"]
+                unit_ids = [reference.split(":", 1)[1] for reference in refs
+                            if reference.startswith("unit:")]
+                unit_ids += expected_same_work["counterpartUnitIds"]
+                if len(unit_ids) != len(set(unit_ids)):
+                    errors.append(f"{regression_id}: same-work units contain duplicates")
+                for unit_id in unit_ids:
+                    unit = data["unit"].get(unit_id)
+                    if unit is None:
+                        errors.append(f"{regression_id}: unresolved same-work unit {unit_id}")
+                        continue
+                    validate_unit_materialization(
+                        regression_id, unit, data, errors, expected_work=work)
+        elif expected_same_work is not None:
+            errors.append(f"{regression_id}: unexpected expectedSameWork contract")
         rekey_refs = {
             reference for reference in refs
             if reference.split(":", 1)[0] == "legacy-rekey"
