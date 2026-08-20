@@ -249,6 +249,10 @@ verification/
                                errors, gaps and added/changed/disappeared/re-key diffs.
   card_discovery_records.jsonl GENERATED #136 RECORD FEED: one locality-aware card proposal per line.
                                Raw identifiers survive and no row may mutate a verdict.
+  asia_locality_matrix.json    REVIEWED #238 MATRIX: the eight #138 Asian locality tracks, bounded
+                               positive-slice references, terminal gaps and minimum regressions.
+  ASIA-LOCALITY-MATRIX.md      GENERATED readable projection of the #238 Asia terminal matrix.
+                               Rebuild with scripts/asia_locality_matrix.py.
   locality_era_matrix.json     REVIEWED #139 MATRIX: established, provisional, candidate and
                                #138-coordinated non-Asian locality tracks, each with explicit era
                                evidence, positive-only policy, source/gap references and child state.

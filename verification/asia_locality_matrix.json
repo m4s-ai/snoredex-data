@@ -1,0 +1,219 @@
+{
+  "meta": {
+    "schema": "snoredex-asia-locality-terminal-matrix",
+    "schemaVersion": "1.0.0",
+    "reviewedAt": "2026-08-20",
+    "issue": 238,
+    "parentIssue": 138,
+    "rule": "A complete track means only that its bounded positive slice balances. Silence, zero results and omitted categories never establish absence or historical completeness."
+  },
+  "localGaps": [
+    {
+      "gapId": "official-asia-hk-market-provenance",
+      "terminalState": "needs-evidence",
+      "reason": "The retained tw-locale results and TWHK set-symbol assets establish Traditional-Chinese card identities but do not distinguish Taiwan from Hong Kong distribution records.",
+      "retryCondition": "Register a positive Hong Kong product, distribution, or specimen record before assigning market provenance separately from the shared Traditional-Chinese edition."
+    },
+    {
+      "gapId": "official-sea-english-card-discovery",
+      "terminalState": "needs-evidence",
+      "reason": "No retained source-first card or product index independently enumerates English-language physical products distributed in Southeast Asia.",
+      "retryCondition": "Register a bounded SEA-English source carrying positive physical product or distribution identifiers; never reuse WEST English rows by language alone."
+    }
+  ],
+  "tracks": [
+    {
+      "trackId": "asia-jp",
+      "label": "Japan",
+      "locality": "JP",
+      "language": "Japanese",
+      "terminalState": "needs-evidence",
+      "scope": "Official Japanese card discovery, including categories omitted by the current search surface.",
+      "cardSliceIds": [],
+      "gapIds": ["official-japanese-card-search"],
+      "evidenceRefs": [],
+      "retryCondition": "Activate a retained positive slice only after pagination fixtures and omission-preserving tests cover the known secret/rainbow gap."
+    },
+    {
+      "trackId": "asia-tw",
+      "label": "Traditional Chinese — Taiwan catalogue surface",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "terminalState": "complete",
+      "scope": "The bounded official native-name and reviewed 52poke positive slices; this is not a complete historical Traditional-Chinese universe.",
+      "cardSliceIds": ["pokemon-asia-tw-snorlax", "52poke-tw-issue84-snorlax"],
+      "gapIds": [],
+      "evidenceRefs": ["source-first:TW:AS5a:142:base", "source-first:TW:SV-P:215:base", "card-record:raw-card:68199fe53d096ca857ed285d"],
+      "retryCondition": "Rerun bounded positive slices for deltas and retain unmatched rows; do not infer missing cards or Hong Kong provenance."
+    },
+    {
+      "trackId": "asia-hk",
+      "label": "Traditional Chinese — Hong Kong provenance",
+      "locality": "HK",
+      "language": "T-Chinese",
+      "terminalState": "needs-evidence",
+      "scope": "Hong Kong distribution provenance for shared Traditional-Chinese card identities.",
+      "cardSliceIds": [],
+      "gapIds": ["official-asia-hk-market-provenance"],
+      "evidenceRefs": [],
+      "retryCondition": "Add only positive Hong Kong product, distribution, or specimen records; a TWHK asset alone does not select a market."
+    },
+    {
+      "trackId": "asia-cn",
+      "label": "Simplified Chinese — mainland China",
+      "locality": "CN",
+      "language": "S-Chinese",
+      "terminalState": "blocked-by-source",
+      "scope": "Provider-native Simplified-Chinese card discovery and local identifiers.",
+      "cardSliceIds": [],
+      "gapIds": ["official-asia-kr-cn"],
+      "evidenceRefs": ["unit:U0761"],
+      "retryCondition": "Activate a provider-native official or bounded specialist surface before admitting or excluding records."
+    },
+    {
+      "trackId": "asia-kr",
+      "label": "Korean",
+      "locality": "KR",
+      "language": "Korean",
+      "terminalState": "blocked-by-source",
+      "scope": "Provider-native Korean enumeration plus retained positive specimen identities.",
+      "cardSliceIds": [],
+      "gapIds": ["official-asia-kr-cn"],
+      "evidenceRefs": ["source-first:KR:S-P:101:base", "source-first:KR:SM-P:140:base", "source-first:KR:XY-P:167:base", "held:SPEC-0037"],
+      "retryCondition": "Register a bounded Korean catalogue; keep SPEC-0037 held until a source-native Korean set code is positively recorded."
+    },
+    {
+      "trackId": "asia-id",
+      "label": "Indonesian",
+      "locality": "ID",
+      "language": "Indonesian",
+      "terminalState": "complete",
+      "scope": "The bounded official Indonesian native-name slice and its visible candidate queue.",
+      "cardSliceIds": ["pokemon-asia-id-snorlax"],
+      "gapIds": [],
+      "evidenceRefs": ["source-first:ID:SV9s I:109/139:base", "source-first:ID:SV4s I:118/132:base", "source-first:ID:SV6s I:136/167:base"],
+      "retryCondition": "Rerun the two-page native-name slice for deltas and preserve every new candidate without auto-merging work identities."
+    },
+    {
+      "trackId": "asia-th",
+      "label": "Thai",
+      "locality": "TH",
+      "language": "Thai",
+      "terminalState": "complete",
+      "scope": "The bounded official Thai native-name slice and its visible candidate queue.",
+      "cardSliceIds": ["pokemon-asia-th-snorlax"],
+      "gapIds": [],
+      "evidenceRefs": [],
+      "retryCondition": "Rerun the two-page native-name slice for deltas and preserve every new candidate without inferring finishes or cross-language identity."
+    },
+    {
+      "trackId": "asia-sea-en",
+      "label": "Southeast-Asian English",
+      "locality": "SEA",
+      "language": "English",
+      "terminalState": "needs-evidence",
+      "scope": "English-language physical products distributed in Southeast Asia, kept distinct from WEST English.",
+      "cardSliceIds": [],
+      "gapIds": ["official-sea-english-card-discovery"],
+      "evidenceRefs": [],
+      "retryCondition": "Register a bounded positive SEA-English product or card index carrying physical distribution identity."
+    }
+  ],
+  "minimumRegressions": [
+    {
+      "regressionId": "tw-svqp-f-012",
+      "label": "T-Chinese svQP F 012/023",
+      "disposition": "positive-candidate",
+      "evidenceRefs": ["card-record:raw-card:68199fe53d096ca857ed285d"],
+      "expectedPrints": [
+        {"reference": "card-record:raw-card:68199fe53d096ca857ed285d", "locality": "TW", "language": "T-Chinese", "localSetCode": "svQP F", "localNumber": "012/023"}
+      ],
+      "note": "The official detail and set-symbol asset are retained; no work equivalence or finish is inferred."
+    },
+    {
+      "regressionId": "tw-sv-p-215",
+      "label": "T-Chinese SV-P 215",
+      "disposition": "positive-node",
+      "evidenceRefs": ["source-first:TW:SV-P:215:base"],
+      "expectedPrints": [
+        {"reference": "source-first:TW:SV-P:215:base", "locality": "TW", "language": "T-Chinese", "localSetCode": "SV-P", "localNumber": "215"}
+      ],
+      "note": "The specimen-backed local release is materialized in the dry-run graph."
+    },
+    {
+      "regressionId": "tw-as5a-142",
+      "label": "T-Chinese AS5a 142 linked to U0265",
+      "disposition": "positive-node",
+      "evidenceRefs": ["source-first:TW:AS5a:142:base", "legacy-rekey:84/U0265"],
+      "expectedPrints": [
+        {"reference": "source-first:TW:AS5a:142:base", "locality": "TW", "language": "T-Chinese", "localSetCode": "AS5a", "localNumber": "142"}
+      ],
+      "expectedRekeys": [
+        {"reference": "legacy-rekey:84/U0265", "legacyUnitId": "U0265", "sourceFirstRecordId": "TW:AS5a:142:base"}
+      ],
+      "note": "The reviewed same-work decision retains the legacy and local identities separately."
+    },
+    {
+      "regressionId": "cn-sv9-075",
+      "label": "S-Chinese counterpart to legacy SV9-075",
+      "disposition": "positive-node",
+      "evidenceRefs": ["unit:U0761"],
+      "expectedPrints": [
+        {"reference": "unit:U0761", "locality": "CN", "language": "S-Chinese", "localSetCode": "CSV10C", "localNumber": "175"}
+      ],
+      "note": "The existing zh-tw SV9 075 row is Traditional Chinese; the retained positive S-Chinese counterpart is the same Hop's Snorlax work under its own local identity CSV10C 175."
+    },
+    {
+      "regressionId": "id-sv9s-i-109",
+      "label": "Indonesian SV9s I 109/139",
+      "disposition": "positive-node",
+      "evidenceRefs": ["source-first:ID:SV9s I:109/139:base"],
+      "expectedPrints": [
+        {"reference": "source-first:ID:SV9s I:109/139:base", "locality": "ID", "language": "Indonesian", "localSetCode": "SV9s I", "localNumber": "109/139"}
+      ],
+      "note": "Official card detail plus the Indonesian locality set index establish the local identity."
+    },
+    {
+      "regressionId": "id-sv4s-i-118",
+      "label": "Indonesian SV4s I 118/132",
+      "disposition": "positive-node",
+      "evidenceRefs": ["source-first:ID:SV4s I:118/132:base"],
+      "expectedPrints": [
+        {"reference": "source-first:ID:SV4s I:118/132:base", "locality": "ID", "language": "Indonesian", "localSetCode": "SV4s I", "localNumber": "118/132"}
+      ],
+      "note": "Official card detail plus the Indonesian locality set index establish the local identity."
+    },
+    {
+      "regressionId": "id-sv6s-i-136",
+      "label": "Indonesian SV6s I 136/167",
+      "disposition": "positive-node",
+      "evidenceRefs": ["source-first:ID:SV6s I:136/167:base"],
+      "expectedPrints": [
+        {"reference": "source-first:ID:SV6s I:136/167:base", "locality": "ID", "language": "Indonesian", "localSetCode": "SV6s I", "localNumber": "136/167"}
+      ],
+      "note": "Official card detail plus the Indonesian locality set index establish the local identity."
+    },
+    {
+      "regressionId": "kr-renumbered-positive-printings",
+      "label": "Reviewed Korean renumbering and alternate-product positives",
+      "disposition": "positive-node",
+      "evidenceRefs": ["source-first:KR:S-P:101:base", "source-first:KR:SM-P:140:base", "source-first:KR:XY-P:167:base"],
+      "expectedPrints": [
+        {"reference": "source-first:KR:S-P:101:base", "locality": "KR", "language": "Korean", "localSetCode": "S-P", "localNumber": "101"},
+        {"reference": "source-first:KR:SM-P:140:base", "locality": "KR", "language": "Korean", "localSetCode": "SM-P", "localNumber": "140"},
+        {"reference": "source-first:KR:XY-P:167:base", "locality": "KR", "language": "Korean", "localSetCode": "XY-P", "localNumber": "167"}
+      ],
+      "note": "The local print identities are retained; unresolved cross-work equivalence is not inferred."
+    },
+    {
+      "regressionId": "kr-spec-0037-held",
+      "label": "Korean Burning Confrontation Series 2 30/40",
+      "disposition": "held-positive",
+      "evidenceRefs": ["held:SPEC-0037"],
+      "expectedPrints": [
+        {"reference": "held:SPEC-0037", "locality": "KR", "language": "Korean", "localSetCode": null, "localNumber": "30/40"}
+      ],
+      "note": "The card and number are positive; the source-native Korean set code is still missing."
+    }
+  ]
+}
