@@ -569,6 +569,7 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
     held_specimens = {
         entry.get("specimenId") for entry in source_first.get("held", [])} - {None}
     orphan_specimens = []
+    held_specimen_dispositions = []
     for spec in specimens:
         code = str(spec.get("setCode") or "")
         base_code = code.split("/")[0].strip()
@@ -576,13 +577,16 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
         if spec.get("specimenId") in admitted_specimens:
             continue
         if (code, number) not in product_codes and (base_code, number) not in product_codes:
-            orphan_specimens.append({
+            report = {
                 "specimenId": spec.get("specimenId"), "setCode": code, "number": number,
                 "language": spec.get("language"),
-                "reason": ("held pending a positively identified set code"
-                           if spec.get("specimenId") in held_specimens
-                           else "no product or source-first release carries these identifiers"),
-            })
+            }
+            if spec.get("specimenId") in held_specimens:
+                report["reason"] = "held pending a positively identified source-native set code"
+                held_specimen_dispositions.append(report)
+            else:
+                report["reason"] = "no product or source-first release carries these identifiers"
+                orphan_specimens.append(report)
 
     contradicted_only = []
     mixed_status = []
@@ -692,6 +696,7 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
             "unresolvedUnits": len(unresolved_units),
             "unresolvedPhysicalClaims": len(unresolved_physical),
             "orphanSpecimens": len(orphan_specimens),
+            "heldSpecimenDispositions": len(held_specimen_dispositions),
             "sourceFirstPrintsAdmitted": len(source_first.get("prints", [])),
             "sourceFirstPrintsHeld": len(source_first.get("held", [])),
             "cardReleaseNodesByLocality": dict(
@@ -736,6 +741,8 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
                 unresolved_physical, key=lambda item: item["printingId"]),
             "orphanSpecimens": sorted(
                 orphan_specimens, key=lambda item: str(item["specimenId"])),
+            "heldSpecimenDispositions": sorted(
+                held_specimen_dispositions, key=lambda item: str(item["specimenId"])),
         },
         "candidateClaims": [candidate_claims[cid] for cid in sorted(candidate_claims)],
         "setEditions": [set_editions[eid] for eid in sorted(set_editions)],

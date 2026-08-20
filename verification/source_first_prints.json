@@ -8,8 +8,8 @@
     "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
     "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
     "counts": {
-      "admitted": 47,
-      "held": 0
+      "admitted": 46,
+      "held": 1
     }
   },
   "prints": [
@@ -878,26 +878,16 @@
       "markAssetUrl": "https://asia.pokemon-card.com/id/card-img/mark/idn_SV9s_exp.png",
       "cardImageUrl": "https://asia.pokemon-card.com/id/card-img/id00015784.png",
       "evidence": "Immutable card-discovery run 20260820T122400Z retains the publisher's Indonesian detail 15784: Snorlax <Hop>, collector number 109/139, raw expansion code SV9s, card image and set-mark asset. The independently retained Indonesian locality set index names the physical product code SV9s I. Together they establish this Indonesian language-and-identity node under ADR-0001 D5. No finish or cross-language work equivalence is asserted. Retrieved 2026-08-20."
-    },
-    {
-      "printId": "KR:BCR:30/40:base",
-      "locality": "KR",
-      "localSetCode": "BCR",
-      "localNumber": "30/40",
-      "variant": "base",
-      "language": "Korean",
-      "script": "Hang",
-      "name": "잠만보",
-      "cardName": "Snorlax Lv.35",
-      "catchUpOf": "the legacy Japanese DP1 Snorlax Lv.35 work; equivalence is not admitted here",
-      "specimenId": "SPEC-0037",
-      "providerId": "inspected-specimen",
-      "sourceUrl": "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1",
-      "corroborated": true,
-      "markAssetUrl": null,
-      "cardImageUrl": null,
-      "evidence": "The owner photographed and identified SPEC-0037 in issue #88 as the Korean Series 2 Burning Confrontation Snorlax Lv.35, number 30/40. The cwtcg listing cited in the same thread independently names 잠만보 and Burning Confrontation 30/40. The low-resolution photograph does not support a finish claim. This record establishes only the Korean local release and its identifiers; equivalence to the Japanese DP1 work remains unadmitted under ADR-0001 I5."
     }
   ],
-  "held": []
+  "held": [
+    {
+      "specimenId": "SPEC-0037",
+      "proposedSetCode": null,
+      "localNumber": "30/40",
+      "language": "Korean",
+      "blockedBy": "the retained owner photograph and retailer reference establish Burning Confrontation Series 2 and 30/40, but do not state a source-native Korean local set code",
+      "reason": "BCR was an internal abbreviation and already identifies the unrelated Western Boundaries Crossed set. Positive evidence does not permit using it as the Korean raw identifier; hold until a source-native code is recorded."
+    }
+  ]
 }

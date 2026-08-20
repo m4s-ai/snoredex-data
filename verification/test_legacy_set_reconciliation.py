@@ -189,22 +189,9 @@ def main() -> int:
     # 6 -> 26 on 2026-08-10: ADR-0001 D5 admitted twenty Thai and Indonesian catch-up
     # prints. 26 -> 30 on 2026-08-11: issue #192 added three LATAM Spanish prints and
     # the SVP ES comparison, all with the complete printed language modifier preserved.
-    # 30 -> 31 on 2026-08-20: #233 admitted the specimen-backed Korean Burning
-    # Confrontation 30/40 print while keeping its DP1 work equivalence unresolved.
     # The pin stays exact rather than becoming a minimum — its job is to catch an edge
     # appearing or vanishing without a decision behind it, and a floor would not do that.
-    require(len(first["catchUpRelations"]) == 31, "catch-up edge count changed")
-    korean_bcr = [
-        edge for edge in first["catchUpRelations"]
-        if edge["targetSourceFirstPrintId"] == "KR:BCR:30/40:base"
-    ]
-    require(
-        len(korean_bcr) == 1
-        and korean_bcr[0]["terminalState"] == "needs-evidence"
-        and korean_bcr[0]["evidence"]["specimenId"] == "SPEC-0037"
-        and not korean_bcr[0]["setMergeAllowed"],
-        "Korean Burning Confrontation relation is not specimen-grounded and unresolved",
-    )
+    require(len(first["catchUpRelations"]) == 30, "catch-up edge count changed")
     official_spanish_targets = {
         edge["targetSourceFirstPrintId"]
         for edge in first["catchUpRelations"]
@@ -226,7 +213,7 @@ def main() -> int:
     # equivalence becomes a resolved edge. `needs-evidence` is the honest state for them, so the
     # guard checks the split rather than demanding a completeness nobody established.
     states = Counter(edge["terminalState"] for edge in first["catchUpRelations"])
-    require(states == Counter({"complete": 6, "needs-evidence": 25}),
+    require(states == Counter({"complete": 6, "needs-evidence": 24}),
             f"catch-up terminal states changed: {dict(states)}")
     for edge in first["catchUpRelations"]:
         require(not edge["setMergeAllowed"], "catch-up edge merges sets")

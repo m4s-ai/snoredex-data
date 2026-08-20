@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Admit the Korean Burning Confrontation 30/40 specimen from issue #88 (#233).
+"""Disposition the Korean Burning Confrontation 30/40 specimen from issue #88 (#233).
 
 The owner identified SPEC-0037 as the Korean Series 2 Burning Confrontation Snorlax Lv.35,
 number 30/40.  That positive local identity already supports the U0477 adjudication, but the
-specimen was never admitted as its own source-first release and therefore remained an orphan in
-the #140 migration dry-run.
+specimen remained an orphan in the #140 migration dry-run. The retained evidence does not state a
+source-native local set code: `BCR` was an internal abbreviation and also names the unrelated
+Western Boundaries Crossed set. The specimen therefore enters the explicit held queue instead of
+minting an identity from that abbreviation.
 
-This pass records only the Korean local release.  It does not assert a finish and leaves the work
-equivalence to Japanese DP1 unresolved, as required by ADR-0001 I5.
+This pass preserves the positively identified Korean set name and number without asserting a local
+set code, finish, or work equivalence to Japanese DP1.
 
     python verification/passes/admit_korean_burning_confrontation_20260820.py
 """
@@ -24,7 +26,7 @@ PRINTS = ROOT / "verification" / "source_first_prints.json"
 SPECIMENS = ROOT / "verification" / "specimens.json"
 SETS = ROOT / "verification" / "set_catalogue_sources.json"
 
-ENTRY = {
+RETRACTED_ENTRY = {
     "printId": "KR:BCR:30/40:base",
     "locality": "KR",
     "localSetCode": "BCR",
@@ -69,9 +71,9 @@ SET_PROFILE = {
         "locality": "KR",
         "languages": ["Korean"],
         "scripts": ["Hang"],
-        "printIds": [ENTRY["printId"]],
+        "printIds": [RETRACTED_ENTRY["printId"]],
         "providers": ["inspected-specimen"],
-        "sourceUrls": [ENTRY["sourceUrl"]],
+        "sourceUrls": [RETRACTED_ENTRY["sourceUrl"]],
         "printedSetSize": 40,
         "printedSetSizeBasis": "the denominator in the positively identified 30/40 card number",
         "localeSuffix": None,
@@ -84,29 +86,62 @@ SET_PROFILE = {
     },
 }
 
+HELD_ENTRY = {
+    "specimenId": "SPEC-0037",
+    "proposedSetCode": None,
+    "localNumber": "30/40",
+    "language": "Korean",
+    "blockedBy": (
+        "the retained owner photograph and retailer reference establish Burning Confrontation "
+        "Series 2 and 30/40, but do not state a source-native Korean local set code"
+    ),
+    "reason": (
+        "BCR was an internal abbreviation and already identifies the unrelated Western "
+        "Boundaries Crossed set. Positive evidence does not permit using it as the Korean raw "
+        "identifier; hold until a source-native code is recorded."
+    ),
+}
+
 
 def main() -> int:
-    specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
+    specimen_document = json.loads(SPECIMENS.read_text(encoding="utf-8"))
+    specimens = specimen_document["specimens"]
     specimen = next((row for row in specimens if row["specimenId"] == "SPEC-0037"), None)
-    expected_specimen_key = ("BCR", "30/40", "base", "Korean")
+    expected_specimen_keys = {
+        ("BCR", "30/40", "base", "Korean"),
+        ("", "30/40", "base", "Korean"),
+    }
     actual_specimen_key = None if specimen is None else (
         specimen["setCode"], str(specimen["number"]), specimen["variant"], specimen["language"]
     )
-    if actual_specimen_key != expected_specimen_key:
+    if actual_specimen_key not in expected_specimen_keys:
         raise ValueError(
-            f"SPEC-0037 identity drift: expected {expected_specimen_key}, got {actual_specimen_key}"
+            f"SPEC-0037 identity drift: expected one of {expected_specimen_keys}, "
+            f"got {actual_specimen_key}"
         )
+    specimen["setCode"] = ""
 
     document = json.loads(PRINTS.read_text(encoding="utf-8"))
-    matches = [row for row in document["prints"] if row["printId"] == ENTRY["printId"]]
+    matches = [
+        row for row in document["prints"]
+        if row["printId"] == RETRACTED_ENTRY["printId"]
+    ]
     if len(matches) > 1:
-        raise ValueError(f"duplicate source-first print {ENTRY['printId']}")
-    if matches and matches[0] != ENTRY:
-        raise ValueError(f"existing source-first print drifted: {ENTRY['printId']}")
+        raise ValueError(f"duplicate source-first print {RETRACTED_ENTRY['printId']}")
+    if matches and matches[0] != RETRACTED_ENTRY:
+        raise ValueError(f"retracted source-first print drifted: {RETRACTED_ENTRY['printId']}")
+    if matches:
+        document["prints"].remove(matches[0])
 
-    added = not matches
-    if added:
-        document["prints"].append(ENTRY)
+    held_matches = [
+        row for row in document.get("held", []) if row["specimenId"] == HELD_ENTRY["specimenId"]
+    ]
+    if len(held_matches) > 1:
+        raise ValueError(f"duplicate held specimen {HELD_ENTRY['specimenId']}")
+    if held_matches and held_matches[0] != HELD_ENTRY:
+        raise ValueError(f"held specimen drifted: {HELD_ENTRY['specimenId']}")
+    if not held_matches:
+        document.setdefault("held", []).append(HELD_ENTRY)
     document["meta"]["generated"] = "2026-08-20"
     document["meta"]["counts"] = {
         "admitted": len(document["prints"]),
@@ -121,9 +156,8 @@ def main() -> int:
         raise ValueError(f"duplicate local-set profile {SET_PROFILE['providerRecordKey']!r}")
     if set_matches and set_matches[0] != SET_PROFILE:
         raise ValueError(f"existing local-set profile drifted: {SET_PROFILE['providerRecordKey']!r}")
-    profile_added = not set_matches
-    if profile_added:
-        set_document["sourceRecords"].append(SET_PROFILE)
+    if set_matches:
+        set_document["sourceRecords"].remove(set_matches[0])
     set_document["meta"]["counts"]["sourceRecords"] = len(set_document["sourceRecords"])
     set_document["meta"]["counts"]["sourceFirstLocalSets"] = sum(
         row["sourceKind"] == "source-first-local-set-profile"
@@ -135,9 +169,12 @@ def main() -> int:
     SETS.write_text(
         json.dumps(set_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
+    specimen_document["count"] = len(specimens)
+    SPECIMENS.write_text(
+        json.dumps(specimen_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     print(
-        f"{'admitted' if added else 'validated'} {ENTRY['printId']}; "
-        f"{'added' if profile_added else 'validated'} KR/BCR set profile; "
+        f"held {HELD_ENTRY['specimenId']} with its local set code unresolved; "
         f"store now {document['meta']['counts']}"
     )
     return 0
