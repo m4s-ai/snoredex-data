@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "schema": "snoredex-reviewed-card-evidence",
+    "schemaVersion": "1.0.0",
+    "issue": 240,
+    "reviewedAt": "2026-08-20",
+    "rule": "Positive observations are retained separately; a provider identifier, human catalogue code, set name, collector number and specimen are not interchangeable."
+  },
+  "identity": {
+    "locality": "KR",
+    "language": "Korean",
+    "script": "Hang",
+    "localSetCode": "BS2",
+    "officialProviderSetId": "BS2010002",
+    "catalogueSetId": "BS2010002-kr",
+    "localSetName": "불꽃 튀는 대결",
+    "setOrdinal": 2,
+    "localNumber": "30/40",
+    "officialCardRecordId": "BS2010002030",
+    "specimenId": "SPEC-0037"
+  },
+  "observations": [
+    {
+      "observationId": "KR-OFFICIAL-CARD-BS2010002030",
+      "providerId": "pokemon-card-korea",
+      "authorityTier": 1,
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "captureMethod": "retained search-index result for the exact publisher URL; the live historical endpoint returned HTTP 410 at review time",
+      "observed": {
+        "providerRecordId": "BS2010002030",
+        "name": "잠만보 Lv. 35",
+        "localNumber": "30/40",
+        "rarity": "U",
+        "hp": 100,
+        "illustrator": "Ken Sugimori",
+        "localSetName": "불꽃 튀는 대결"
+      },
+      "establishes": [
+        "Korean card identity",
+        "collector number 30/40",
+        "membership in 불꽃 튀는 대결"
+      ],
+      "doesNotEstablish": [
+        "printed finish",
+        "human local set code BS2 by itself",
+        "same-work equivalence to Japanese DP1"
+      ]
+    },
+    {
+      "observationId": "KR-OFFICIAL-RULES-EXPANSION-2",
+      "providerId": "pokemon-card-korea",
+      "authorityTier": 1,
+      "sourceUrl": "https://pokemonkorea.co.kr/templates/default/special_site/Wcs2014/battle_p.pdf",
+      "captureMethod": "publisher PDF, page 4 in the rendered document (PDF index page 3)",
+      "observed": {
+        "statement": "포켓몬 카드 게임 확장팩 제 2 탄 「불꽃 튀는 대결」",
+        "localSetName": "불꽃 튀는 대결",
+        "setOrdinal": 2
+      },
+      "establishes": [
+        "the publisher calls 불꽃 튀는 대결 expansion pack number 2"
+      ],
+      "doesNotEstablish": [
+        "card 30/40 by itself",
+        "printed finish"
+      ]
+    },
+    {
+      "observationId": "KR-DALDAGURY-BS2-30",
+      "providerId": "retailer-listing",
+      "authorityTier": 3,
+      "sourceUrl": "https://daldagury.com/tcg/pokemon/card/8473",
+      "captureMethod": "bounded Korean card-catalogue detail",
+      "observed": {
+        "name": "잠만보",
+        "localSetCode": "BS2",
+        "localNumber": "30",
+        "rarity": "U",
+        "localSetName": "불꽃 튀는 대결"
+      },
+      "establishes": [
+        "the Korean catalogue code BS2 is attached to this exact card and set"
+      ],
+      "doesNotEstablish": [
+        "printed finish",
+        "provider-wide Korean catalogue completeness"
+      ]
+    },
+    {
+      "observationId": "KR-COLLECTORY-BS2010002-30",
+      "providerId": "retailer-listing",
+      "authorityTier": 3,
+      "sourceUrl": "https://collectory.cc/cards/d097dd94-c89c-4c3f-b3b6-d4d3b7baca79?lang=en",
+      "captureMethod": "bounded Korean card-catalogue detail",
+      "observed": {
+        "name": "잠만보",
+        "catalogueSetId": "BS2010002-kr",
+        "localNumber": "30/40",
+        "rarity": "U",
+        "localSetName": "불꽃 튀는 대결"
+      },
+      "establishes": [
+        "the independent catalogue binds 30/40 and 불꽃 튀는 대결 to BS2010002-kr"
+      ],
+      "doesNotEstablish": [
+        "printed finish",
+        "official meaning of the catalogue suffix -kr"
+      ]
+    },
+    {
+      "observationId": "KR-OWNER-SPEC-0037",
+      "providerId": "inspected-specimen",
+      "authorityTier": 1,
+      "sourceUrl": "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1",
+      "captureMethod": "owner photograph retained at verification/specimens/SPEC-0037.png",
+      "observed": {
+        "specimenId": "SPEC-0037",
+        "language": "Korean",
+        "localNumber": "30/40",
+        "localSetName": "불꽃 튀는 대결"
+      },
+      "establishes": [
+        "a physical Korean 30/40 specimen exists and remains attributable to issue #88"
+      ],
+      "doesNotEstablish": [
+        "printed finish",
+        "legible set glyph from the low-resolution photograph",
+        "same-work equivalence to Japanese DP1"
+      ]
+    }
+  ]
+}

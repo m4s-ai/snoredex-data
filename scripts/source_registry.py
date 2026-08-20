@@ -102,6 +102,23 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Recent releases only; older printings are out of coverage.",
     },
     {
+        "providerId": "pokemon-card-korea",
+        "displayName": "Pokémon Card official database and rules (Korea)",
+        "organization": "Pokémon Korea",
+        "homepage": "https://pokemoncard.co.kr",
+        "hosts": ["pokemoncard.co.kr", "www.pokemoncard.co.kr", "pokemonkorea.co.kr",
+                  "www.pokemonkorea.co.kr"],
+        "licenseOrTerms": "Publisher's own terms.",
+        "category": "official-publisher",
+        "authorityTier": 1,
+        "coverage": "positive historical Korean card details and official product/rules documents",
+        "supportsAbsence": False,
+        "usedFor": ["language", "product"],
+        "attribution": "Korean card and product data © Pokémon Korea.",
+        "notes": ("Historical card-detail endpoints may return HTTP 410; retained exact positive "
+                  "observations remain card evidence, while endpoint silence proves nothing."),
+    },
+    {
         "providerId": "tcgdex",
         "displayName": "TCGdex",
         "organization": "TCGdex",
@@ -464,6 +481,8 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"tcgdex", re.I), "tcgdex"),
     (re.compile(r"pokemon-card\.com|official pokemon japan", re.I), "pokemon-card-jp"),
     (re.compile(r"asia\.pokemon-card|official pokemon asia", re.I), "pokemon-card-asia"),
+    (re.compile(r"pokemoncard\.co\.kr|pokemonkorea\.co\.kr|official pokemon korea", re.I),
+     "pokemon-card-korea"),
     (re.compile(r"elite ?fourum", re.I), "elitefourum"),
     (re.compile(r"pokumon", re.I), "pokumon"),
     (re.compile(r"ligapokemon", re.I), "ligapokemon"),
@@ -589,7 +608,7 @@ def main() -> int:
                    provider_id=unit.get("providerId"))
 
     for entry in source_first["prints"]:
-        if entry.get("providerId") != "pokemon-official":
+        if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea"}:
             continue
         for url in {
             entry.get("sourceUrl"), entry.get("cardImageUrl"),

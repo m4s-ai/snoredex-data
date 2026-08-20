@@ -79,8 +79,8 @@
       "scope": "Provider-native Korean enumeration plus retained positive specimen identities.",
       "cardSliceIds": [],
       "gapIds": ["official-asia-kr-cn"],
-      "evidenceRefs": ["source-first:KR:S-P:101:base", "source-first:KR:SM-P:140:base", "source-first:KR:XY-P:167:base", "held:SPEC-0037"],
-      "retryCondition": "Register a bounded Korean catalogue; keep SPEC-0037 held until a source-native Korean set code is positively recorded."
+      "evidenceRefs": ["source-first:KR:S-P:101:base", "source-first:KR:SM-P:140:base", "source-first:KR:XY-P:167:base", "source-first:KR:BS2:30/40:base"],
+      "retryCondition": "Register a bounded provider-native Korean enumeration; the positively resolved SPEC-0037 card does not close that wider source gap."
     },
     {
       "trackId": "asia-id",
@@ -206,14 +206,14 @@
       "note": "The local print identities are retained; unresolved cross-work equivalence is not inferred."
     },
     {
-      "regressionId": "kr-spec-0037-held",
+      "regressionId": "kr-spec-0037-positive",
       "label": "Korean Burning Confrontation Series 2 30/40",
-      "disposition": "held-positive",
-      "evidenceRefs": ["held:SPEC-0037"],
+      "disposition": "positive-node",
+      "evidenceRefs": ["source-first:KR:BS2:30/40:base"],
       "expectedPrints": [
-        {"reference": "held:SPEC-0037", "locality": "KR", "language": "Korean", "localSetCode": null, "localNumber": "30/40"}
+        {"reference": "source-first:KR:BS2:30/40:base", "locality": "KR", "language": "Korean", "localSetCode": "BS2", "localNumber": "30/40"}
       ],
-      "note": "The card and number are positive; the source-native Korean set code is still missing."
+      "note": "Pokémon Korea record BS2010002030, official expansion ordinal 2, catalogue code BS2, catalogue id BS2010002-kr and SPEC-0037 are retained separately; no finish or Japanese DP1 equivalence is inferred."
     }
   ]
 }

@@ -14,17 +14,17 @@
       "Unavailable, incomplete, rate-limited, and browser-blocked surfaces remain visible graph nodes; their failure state must not be converted into a negative verdict."
     ],
     "counts": {
-      "providers": 23,
-      "surfaces": 27,
-      "coverageEdges": 27,
+      "providers": 24,
+      "surfaces": 28,
+      "coverageEdges": 28,
       "absenceEdges": 3,
-      "observations": 29,
-      "resolvedVerdictSources": 895
+      "observations": 30,
+      "resolvedVerdictSources": 896
     },
     "surfaceStates": {
       "active": 10,
       "blocked-by-browser": 3,
-      "incomplete": 7,
+      "incomplete": 8,
       "internal": 1,
       "needs-evidence": 3,
       "non-url": 2,
@@ -52,6 +52,13 @@
       "authorityTier": 1,
       "licenseOrTerms": "Publisher's own terms.",
       "rawRetention": "Retain the raw response, locale, query parameters, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "pokemon-card-korea",
+      "operator": "Pokémon Korea",
+      "authorityTier": 1,
+      "licenseOrTerms": "Publisher's own terms.",
+      "rawRetention": "Retain the exact positive card fields or rules statement, canonical URL, retrieval date and SHA-256; a later HTTP 410 is access state, not negative evidence."
     },
     {
       "providerId": "tcgdex",
@@ -481,6 +488,39 @@
       },
       "coverageEdgeIds": [
         "asia-card-search-positive"
+      ]
+    },
+    {
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "providerId": "pokemon-card-korea",
+      "label": "Pokémon Korea historical card details and official rules",
+      "state": "incomplete",
+      "failureState": "Historical card-detail endpoints currently return HTTP 410; only retained exact positive observations are usable.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-20",
+      "freshnessPolicy": "Preserve the exact indexed publisher fields and official rules statement; re-check access before adding another card, never reinterpret HTTP 410 as absence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokemoncard.co.kr/cards/detail/{providerRecordId}",
+        "parameters": [
+          "providerRecordId"
+        ],
+        "pagination": "not established; one retained exact detail is not a catalogue enumeration",
+        "expectedIdentifiers": [
+          "opaque provider card record id",
+          "collector number",
+          "Korean card and set name"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "historical publisher card detail; no physical finish closure",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "pokemon-card-korea-bs2010002030-positive"
       ]
     },
     {
@@ -1532,6 +1572,55 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "An older known Asian printing outside the returned window prevents zero results from becoming absence."
+      }
+    },
+    {
+      "edgeId": "pokemon-card-korea-bs2010002030-positive",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "one retained exact historical publisher card observation"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "card-existence",
+        "card-release",
+        "collector-number",
+        "set-membership"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "The retained record establishes only BS2010002030; HTTP 410 and unobserved records are unknown."
+      },
+      "knownPositiveObservationId": "obs-pokemon-card-korea-bs2010002030",
+      "boundary": {
+        "outsideScope": [
+          "all other Korean cards",
+          "provider-wide enumeration",
+          "printed finish",
+          "cross-language work equivalence"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The live historical endpoint is gone while the exact retained positive record remains independently corroborated."
       }
     },
     {
@@ -2829,6 +2918,45 @@
           "U0308"
         ],
         "retrievedAt": "2026-07-21",
+        "usageCount": 1
+      }
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-bs2010002030",
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "queryParameters": {
+        "providerRecordId": "BS2010002030"
+      },
+      "retrievedAt": "2026-08-20",
+      "expectedIdentifiers": [
+        "BS2010002030",
+        "잠만보 Lv. 35",
+        "30/40",
+        "불꽃 튀는 대결"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-bs2010002030-positive"
+      ],
+      "outcome": "The exact indexed Pokémon Korea record positively identifies the Korean 30/40 card and its named set; current HTTP 410 state proves nothing beyond access loss.",
+      "rawRecordRef": "verification/source_registry.json:https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "rawRecordHash": "sha256:b3f51222a176d69d205017a8275e9afcd98fca0dd7caa846154b5338e872f5af",
+      "rawRecord": {
+        "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+        "nonUrlEvidenceId": null,
+        "providerId": "pokemon-card-korea",
+        "sourceTypes": [
+          "Positive source-first card record"
+        ],
+        "dimensions": [
+          "card-release"
+        ],
+        "stableIdCount": 1,
+        "stableIds": [
+          "KR:BS2:30/40:base"
+        ],
+        "retrievedAt": null,
         "usageCount": 1
       }
     },
@@ -10726,6 +10854,18 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "capabilityEdgeIds": [
+        "pokemon-card-korea-bs2010002030-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-release"
       ]
     },
     {

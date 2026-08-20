@@ -117,6 +117,7 @@ TESTS = [
     ["verification/test_metric_polarity.py"],
     ["verification/test_print_identity_rekeys.py"],
     ["verification/test_asia_locality_matrix.py"],
+    ["verification/test_korean_burning_confrontation.py"],
     ["verification/test_findings_harness.py"],
     ["verification/review_findings.py"],          # cross-artifact + publication
     ["verification/test_regen_readiness.py"],

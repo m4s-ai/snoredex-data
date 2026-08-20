@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 23,
-   "evidenceRecords": 895,
-   "uniqueUrls": 888,
+   "providers": 24,
+   "evidenceRecords": 896,
+   "uniqueUrls": 889,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2795
+   "claimsAttributed": 2796
   }
  },
  "providers": [
@@ -92,6 +92,31 @@
    ],
    "uniqueSources": 22,
    "claimsSupported": 22
+  },
+  {
+   "providerId": "pokemon-card-korea",
+   "displayName": "Pokémon Card official database and rules (Korea)",
+   "organization": "Pokémon Korea",
+   "homepage": "https://pokemoncard.co.kr",
+   "licenseOrTerms": "Publisher's own terms.",
+   "category": "official-publisher",
+   "authorityTier": 1,
+   "coverage": "positive historical Korean card details and official product/rules documents",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "product"
+   ],
+   "attribution": "Korean card and product data © Pokémon Korea.",
+   "notes": "Historical card-detail endpoints may return HTTP 410; retained exact positive observations remain card evidence, while endpoint silence proves nothing.",
+   "hosts": [
+    "pokemoncard.co.kr",
+    "www.pokemoncard.co.kr",
+    "pokemonkorea.co.kr",
+    "www.pokemonkorea.co.kr"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
   },
   {
    "providerId": "tcgdex",
@@ -11359,6 +11384,23 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 11
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:BS2:30/40:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",

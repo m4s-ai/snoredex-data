@@ -21,7 +21,7 @@ REQUIRED_TRACKS = {
 REQUIRED_REGRESSIONS = {
     "tw-svqp-f-012", "tw-sv-p-215", "tw-as5a-142", "cn-sv9-075",
     "id-sv9s-i-109", "id-sv4s-i-118", "id-sv6s-i-136",
-    "kr-renumbered-positive-printings", "kr-spec-0037-held",
+    "kr-renumbered-positive-printings", "kr-spec-0037-positive",
 }
 TERMINAL_STATES = {"complete", "needs-evidence", "blocked-by-source"}
 DISPOSITIONS = {"positive-node", "positive-candidate", "needs-evidence", "held-positive"}

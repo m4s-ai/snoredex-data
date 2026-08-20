@@ -30,8 +30,8 @@ A complete track means only that its bounded positive slice balances. Silence, z
 | `id-sv4s-i-118` Indonesian SV4s I 118/132 | `positive-node` | `source-first:ID:SV4s I:118/132:base` — Official card detail plus the Indonesian locality set index establish the local identity. |
 | `id-sv6s-i-136` Indonesian SV6s I 136/167 | `positive-node` | `source-first:ID:SV6s I:136/167:base` — Official card detail plus the Indonesian locality set index establish the local identity. |
 | `kr-renumbered-positive-printings` Reviewed Korean renumbering and alternate-product positives | `positive-node` | `source-first:KR:S-P:101:base`, `source-first:KR:SM-P:140:base`, `source-first:KR:XY-P:167:base` — The local print identities are retained; unresolved cross-work equivalence is not inferred. |
-| `kr-spec-0037-held` Korean Burning Confrontation Series 2 30/40 | `held-positive` | `held:SPEC-0037` — The card and number are positive; the source-native Korean set code is still missing. |
+| `kr-spec-0037-positive` Korean Burning Confrontation Series 2 30/40 | `positive-node` | `source-first:KR:BS2:30/40:base` — Pokémon Korea record BS2010002030, official expansion ordinal 2, catalogue code BS2, catalogue id BS2010002-kr and SPEC-0037 are retained separately; no finish or Japanese DP1 equivalence is inferred. |
 
 ## Residual blockers
 
-- `kr-spec-0037-held` — The card and number are positive; the source-native Korean set code is still missing.
+- None.

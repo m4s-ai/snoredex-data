@@ -558,6 +558,28 @@ therefore carries forward only four exact unchanged requests from complete run
 resume command accepts this only when every acquisition field matches exactly and the source run
 is complete with a valid immutable contract hash.
 
+## Korean Burning Confrontation 30/40 — exact identity despite dead live card pages
+
+Issue #240 resolves the held SPEC-0037 card through a reviewed positive chain retained in
+`verification/evidence/issue-240-korean-burning-confrontation.json`. The identifiers are related,
+but deliberately not collapsed:
+
+- Pokémon Korea's exact historical card URL ends in **`BS2010002030`** and its indexed publisher
+  result names `잠만보 Lv. 35`, `30/40` and `DP 확장팩 불꽃 튀는 대결`.
+- Pokémon Korea's official rules PDF calls `불꽃 튀는 대결` expansion pack **number 2**.
+- Daldagury displays the human Korean catalogue code **`BS2`** on that exact 30 card.
+- Collectory retains its own set identifier **`BS2010002-kr`** for the same named set and `30/40`.
+- SPEC-0037 remains the owner photograph. Its low resolution does not make the set glyph or finish
+  legible, so neither is read from the image.
+
+The source-first identity is therefore `KR:BS2:30/40:base`. `BS2010002` remains an opaque official
+provider-set identifier inside the evidence snapshot, and `BS2010002-kr` remains a catalogue id;
+neither is rewritten as the printed/local code. Synthetic `BCR`, guessed `DP2`, finish and Japanese
+`DP1` work equivalence remain forbidden. The historical publisher card endpoint returned HTTP 410
+when rechecked, so the retained exact positive observation is evidence while the current endpoint
+state is only an access limitation. This one card does not establish provider-wide Korean catalogue
+coverage; the Korean locality track remains `blocked-by-source` for enumeration.
+
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
 Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.

@@ -8,8 +8,8 @@
     "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
     "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
     "counts": {
-      "admitted": 46,
-      "held": 1
+      "admitted": 47,
+      "held": 0
     }
   },
   "prints": [
@@ -878,16 +878,37 @@
       "markAssetUrl": "https://asia.pokemon-card.com/id/card-img/mark/idn_SV9s_exp.png",
       "cardImageUrl": "https://asia.pokemon-card.com/id/card-img/id00015784.png",
       "evidence": "Immutable card-discovery run 20260820T122400Z retains the publisher's Indonesian detail 15784: Snorlax <Hop>, collector number 109/139, raw expansion code SV9s, card image and set-mark asset. The independently retained Indonesian locality set index names the physical product code SV9s I. Together they establish this Indonesian language-and-identity node under ADR-0001 D5. No finish or cross-language work equivalence is asserted. Retrieved 2026-08-20."
+    },
+    {
+      "printId": "KR:BS2:30/40:base",
+      "locality": "KR",
+      "localSetCode": "BS2",
+      "localNumber": "30/40",
+      "variant": "base",
+      "language": "Korean",
+      "script": "Hang",
+      "name": "잠만보",
+      "cardName": "Snorlax Lv.35",
+      "catchUpOf": null,
+      "specimenId": "SPEC-0037",
+      "providerId": "pokemon-card-korea",
+      "providerRecordId": "BS2010002030",
+      "providerSetId": "BS2010002",
+      "catalogueSetId": "BS2010002-kr",
+      "localSetName": "불꽃 튀는 대결",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "corroborated": true,
+      "markAssetUrl": null,
+      "cardImageUrl": null,
+      "evidenceSnapshot": "verification/evidence/issue-240-korean-burning-confrontation.json",
+      "corroboratingSourceUrls": [
+        "https://pokemonkorea.co.kr/templates/default/special_site/Wcs2014/battle_p.pdf",
+        "https://daldagury.com/tcg/pokemon/card/8473",
+        "https://collectory.cc/cards/d097dd94-c89c-4c3f-b3b6-d4d3b7baca79?lang=en",
+        "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1"
+      ],
+      "evidence": "The retained exact Pokémon Korea card observation BS2010002030 identifies Korean 잠만보 Lv.35, 30/40, rarity U, in DP 확장팩 불꽃 튀는 대결. The publisher rules call 불꽃 튀는 대결 expansion pack number 2; Daldagury displays the same card as BS2 30; Collectory retains the distinct catalogue set id BS2010002-kr; and the owner photograph remains SPEC-0037. BS2 is the human catalogue code, BS2010002 is the opaque official provider set id, and BS2010002-kr is a separate catalogue id. This record establishes only Korean language and local card identity. The low-resolution specimen establishes no finish, and no same-work equivalence to the Japanese DP1 product is asserted. Reviewed 2026-08-20."
     }
   ],
-  "held": [
-    {
-      "specimenId": "SPEC-0037",
-      "proposedSetCode": null,
-      "localNumber": "30/40",
-      "language": "Korean",
-      "blockedBy": "the retained owner photograph and retailer reference establish Burning Confrontation Series 2 and 30/40, but do not state a source-native Korean local set code",
-      "reason": "BCR was an internal abbreviation and already identifies the unrelated Western Boundaries Crossed set. Positive evidence does not permit using it as the Korean raw identifier; hold until a source-native code is recorded."
-    }
-  ]
+  "held": []
 }
