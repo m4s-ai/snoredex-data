@@ -28,7 +28,7 @@ import contextlib
 import subprocess
 import sys
 import traceback
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -548,6 +548,7 @@ def collect() -> None:
         finish_doc = load("verification/finish_units.json")
         excluded_doc = load("verification/excluded_codecards.json")
         source_first = load("verification/source_first_prints.json")
+        rekeys_doc = load("verification/legacy_issue_rekeys.json")
         unaccounted = []
         product_dispositions = dryrun["legacyProductDispositions"]
         expected_products = {card["productUrl"] for card in cards_doc["cards"]}
@@ -1003,6 +1004,90 @@ def collect() -> None:
             "FAIL",
             not projection_faults,
             f"{len(projection_faults)} projection fault(s): {projection_faults[:4]}",
+        )
+
+        # N22 — open legacy questions are re-keyed only by reviewed positive relationships (#236)
+        # --------------------------------------------------------------------------- #
+        # #84 contains questions against Japanese product slots, not a Traditional-Chinese
+        # catalogue. One owner-backed relationship maps sm10 076 to the independently established
+        # AS5a 142 local release. The other rows stay visible without an inferred local identity;
+        # an empty lookup is never promoted into either a mapping or an absence decision.
+        units_by_id = {unit["unitId"]: unit for unit in units_doc}
+        releases_by_source_first = {
+            source_id: release
+            for release in dryrun["cardReleases"]
+            for source_id in release.get("sourceFirstRecordIds", [])
+        }
+        assertions_by_id = {
+            assertion["assertionId"]: assertion
+            for assertion in dryrun.get("equivalenceAssertions", [])
+        }
+        reports_by_issue = {
+            report["issueNumber"]: report
+            for report in dryrun["reports"].get("legacyIssueRekeys", [])
+        }
+        rekey_faults = []
+        for question_set in rekeys_doc.get("questionSets", []):
+            issue_number = question_set["issueNumber"]
+            expected_ids = set(question_set["legacyUnitIds"])
+            mappings_by_unit: dict[str, list[dict[str, Any]]] = defaultdict(list)
+            for mapping in question_set.get("mappings", []):
+                mappings_by_unit[mapping["legacyUnitId"]].append(mapping)
+            report = reports_by_issue.get(issue_number, {})
+            rows = report.get("rows", [])
+            if {row["legacyUnitId"] for row in rows} != expected_ids \
+                    or len(rows) != len(expected_ids):
+                rekey_faults.append(f"#{issue_number}: incomplete unit accounting")
+                continue
+            for row in rows:
+                unit_id = row["legacyUnitId"]
+                unit = units_by_id[unit_id]
+                claim = claims_by_id.get(f"CLAIM:legacy:{unit_id}", {})
+                mappings = mappings_by_unit.get(unit_id, [])
+                if claim.get("evidenceStatus") != unit["status"] \
+                        or claim.get("materializedTargetId") is not None:
+                    rekey_faults.append(f"{unit_id}: legacy verdict was promoted or changed")
+                if not mappings:
+                    if row.get("disposition") != question_set["defaultDisposition"] \
+                            or any(row.get(field) for field in
+                                   ("sourceFirstRecordIds", "localCardReleaseIds", "assertionIds")):
+                        rekey_faults.append(f"{unit_id}: missing evidence invented an identity")
+                    continue
+                expected_sources = {mapping["sourceFirstRecordId"] for mapping in mappings}
+                expected_releases = {
+                    releases_by_source_first[source_id]["cardReleaseId"]
+                    for source_id in expected_sources
+                }
+                expected_assertions = {
+                    f"ASSERT:same-work:{unit_id}:{source_id}" for source_id in expected_sources
+                }
+                relationship_fault = (
+                    set(row.get("sourceFirstRecordIds", [])) != expected_sources
+                    or set(row.get("localCardReleaseIds", [])) != expected_releases
+                    or set(row.get("assertionIds", [])) != expected_assertions
+                )
+                for mapping in mappings:
+                    source_id = mapping["sourceFirstRecordId"]
+                    release = releases_by_source_first.get(source_id, {})
+                    assertion_id = f"ASSERT:same-work:{unit_id}:{source_id}"
+                    assertion = assertions_by_id.get(assertion_id, {})
+                    relationship_fault |= (
+                        release.get("work") != unit["cardKey"]
+                        or release.get("workMappingState")
+                        != "mapped-by-explicit-equivalence"
+                        or assertion.get("legacyUnitId") != unit_id
+                        or assertion.get("sourceFirstRecordId") != source_id
+                        or assertion.get("destructiveMergeAllowed") is not False
+                    )
+                if row.get("disposition") != "linked-local-counterpart" \
+                        or relationship_fault:
+                    rekey_faults.append(f"{unit_id}: reviewed relationship did not round-trip")
+        check(
+            "N22",
+            "Legacy issue re-keys preserve verdicts and require positive reviewed relationships",
+            "FAIL",
+            not rekey_faults,
+            f"{len(rekey_faults)} re-key fault(s): {rekey_faults[:5]}",
         )
 
         # A printing that rests on a card someone examined must name the card. Without this the

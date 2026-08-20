@@ -33,7 +33,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "verification" / "print_identity_dryrun.json"
-SCHEMA_VERSION = "0.2.0"
+SCHEMA_VERSION = "0.3.0"
 
 LOCALITIES = {
     "WEST": "Western distribution (EU/NA)",
@@ -145,14 +145,14 @@ def target_for_legacy(unit: dict, card: dict) -> dict[str, Any]:
     }
 
 
-def target_for_source_first(entry: dict) -> dict[str, Any]:
+def target_for_source_first(entry: dict, work: str | None = None) -> dict[str, Any]:
     language = entry["language"]
     locality = entry["locality"]
     edition_id = set_edition_id(locality, language, entry["localSetCode"], True)
     # source_first_prints.json intentionally preserves prose equivalence proposals. Until an
     # explicit edge is accepted, each specimen has an unmapped work anchor rather than a guessed
     # work id. The physical local release itself is still positively established.
-    work_anchor = f"unmapped-work:{entry['specimenId']}"
+    work_anchor = work or f"unmapped-work:{entry['specimenId']}"
     return {
         "locality": locality,
         "localityRule": "source-first record names its locality",
@@ -166,14 +166,15 @@ def target_for_source_first(entry: dict) -> dict[str, Any]:
         "localNumber": str(entry["localNumber"]),
         "viaLegacySetCode": None,
         "viaLegacyNumber": None,
-        "work": None,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": work,
+        "workMappingState": ("mapped-by-explicit-equivalence"
+                             if work else "needs-explicit-equivalence"),
     }
 
 
 def build(cards: list[dict], units: list[dict], finish_units: list[dict],
           excluded: list[dict], specimens: list[dict], baseline: dict,
-          source_first: dict) -> dict[str, Any]:
+          source_first: dict, rekeys: dict) -> dict[str, Any]:
     cards_by_key: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
     for card in cards:
         key = (card["setCode"], str(card.get("number") or ""),
@@ -186,10 +187,49 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
     physical_printings: dict[str, dict[str, Any]] = {}
     unresolved_units: list[dict[str, Any]] = []
     unresolved_physical: list[dict[str, Any]] = []
+    equivalence_assertions: list[dict[str, Any]] = []
+    legacy_issue_rekeys: list[dict[str, Any]] = []
 
     proposed_release_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
     product_claims: dict[str, list[str]] = defaultdict(list)
     product_releases: dict[str, set[str]] = defaultdict(set)
+
+    units_by_id = {unit["unitId"]: unit for unit in units}
+    source_first_by_id = {
+        entry["printId"]: entry for entry in source_first.get("prints", [])
+    }
+    mappings_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    mappings_by_unit: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    mapping_pairs: set[tuple[str, str]] = set()
+    for question_set in rekeys.get("questionSets", []):
+        scope = question_set["legacyUnitIds"]
+        if len(scope) != len(set(scope)):
+            raise ValueError(f"issue #{question_set['issueNumber']} repeats a legacy unit")
+        for unit_id in scope:
+            unit = units_by_id.get(unit_id)
+            if unit is None or unit["language"] != question_set["language"]:
+                raise ValueError(f"issue #{question_set['issueNumber']} has invalid unit {unit_id}")
+        for mapping in question_set.get("mappings", []):
+            unit_id = mapping["legacyUnitId"]
+            print_id = mapping["sourceFirstRecordId"]
+            if mapping.get("assertionType") != "same-work-decision":
+                raise ValueError(
+                    f"re-key mapping is not a reviewed decision: {unit_id} -> {print_id}")
+            if not str(mapping.get("evidence") or "").strip():
+                raise ValueError(
+                    f"re-key mapping lacks positive evidence: {unit_id} -> {print_id}")
+            if unit_id not in scope or print_id not in source_first_by_id:
+                raise ValueError(f"invalid re-key mapping {unit_id} -> {print_id}")
+            pair = (unit_id, print_id)
+            if pair in mapping_pairs:
+                raise ValueError(f"duplicate re-key mapping {unit_id} -> {print_id}")
+            entry = source_first_by_id[print_id]
+            if entry["locality"] != question_set["locality"] \
+                    or entry["language"] != question_set["language"]:
+                raise ValueError(f"re-key mapping crosses locality/language: {unit_id} -> {print_id}")
+            mapping_pairs.add(pair)
+            mappings_by_unit[unit_id].append(mapping)
+            mappings_by_source[print_id].append(mapping)
 
     def register_edition(target: dict[str, Any], claim_id: str) -> None:
         eid = target["setEditionId"]
@@ -329,31 +369,55 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
     # that evidence record or guess its work equivalence.
     for entry in source_first.get("prints", []):
         claim_id = f"CLAIM:source-first:{entry['printId']}"
-        target = target_for_source_first(entry)
+        mappings = mappings_by_source.get(entry["printId"], [])
+        mapped_units = [units_by_id[mapping["legacyUnitId"]] for mapping in mappings]
+        mapped_works = {unit["cardKey"] for unit in mapped_units}
+        if len(mapped_works) > 1:
+            raise ValueError(f"re-key mappings assign multiple works to {entry['printId']}")
+        mapped_work = next(iter(mapped_works), None)
+        target = target_for_source_first(entry, mapped_work)
         register_edition(target, claim_id)
         release_id = target["cardReleaseId"]
-        card_releases[release_id] = {
-            "cardReleaseId": release_id,
-            "setEditionId": target["setEditionId"],
-            "locality": target["locality"],
-            "language": target["language"],
-            "script": target["script"],
-            "localSetCode": target["localSetCode"],
-            "localNumber": target["localNumber"],
-            "localIdentifierKnown": True,
-            "state": "identified",
-            "work": None,
-            "workMappingState": target["workMappingState"],
-            "viaLegacySetCode": None,
-            "viaLegacyNumber": None,
-            "claimIds": [claim_id],
-            "establishingClaimIds": [claim_id],
-            "nonEstablishingClaimIds": [],
-            "legacyVariants": [],
-            "legacyProducts": [],
-            "sourceRecords": [entry["sourceUrl"]] if entry.get("sourceUrl") else [],
-            "sourceFirstRecordId": entry["printId"],
-        }
+        release = card_releases.get(release_id)
+        if release is None:
+            release = {
+                "cardReleaseId": release_id,
+                "setEditionId": target["setEditionId"],
+                "locality": target["locality"],
+                "language": target["language"],
+                "script": target["script"],
+                "localSetCode": target["localSetCode"],
+                "localNumber": target["localNumber"],
+                "localIdentifierKnown": True,
+                "state": "identified",
+                "work": target["work"],
+                "workMappingState": target["workMappingState"],
+                "viaLegacySetCode": None,
+                "viaLegacyNumber": None,
+                "claimIds": [],
+                "establishingClaimIds": [],
+                "nonEstablishingClaimIds": [],
+                "legacyVariants": [],
+                "legacyProducts": [],
+                "sourceRecords": [],
+                "sourceFirstRecordIds": [],
+            }
+            card_releases[release_id] = release
+        elif any(release[field] != target[field] for field in
+                 ("setEditionId", "locality", "language", "script",
+                  "localSetCode", "localNumber", "work")):
+            raise ValueError(f"source-first records collide across release grain: {release_id}")
+
+        release.setdefault("sourceFirstRecordIds", [])
+        release["claimIds"].append(claim_id)
+        release["establishingClaimIds"].append(claim_id)
+        release["sourceFirstRecordIds"].append(entry["printId"])
+        if entry.get("sourceUrl") and entry["sourceUrl"] not in release["sourceRecords"]:
+            release["sourceRecords"].append(entry["sourceUrl"])
+        if mapped_units:
+            release["legacyCounterpartUnitIds"] = sorted(
+                set(release.get("legacyCounterpartUnitIds", []))
+                | {unit["unitId"] for unit in mapped_units})
         candidate_claims[claim_id] = {
             "claimId": claim_id,
             "claimKind": "card-release",
@@ -366,6 +430,59 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
             "materializedTargetId": release_id,
             "reason": "positive source-first specimen/card record",
         }
+        for mapping in mappings:
+            mapped_unit = units_by_id[mapping["legacyUnitId"]]
+            equivalence_assertions.append({
+                "assertionId": f"ASSERT:same-work:{mapping['legacyUnitId']}:{entry['printId']}",
+                "assertionType": mapping["assertionType"],
+                "fromId": release_id,
+                "toId": f"WORK:{mapped_unit['cardKey']}",
+                "legacyUnitId": mapping["legacyUnitId"],
+                "sourceFirstRecordId": entry["printId"],
+                "assertedBy": mapping["assertedBy"],
+                "assertedAt": mapping["assertedAt"],
+                "evidenceUrl": mapping["evidenceUrl"],
+                "evidence": mapping["evidence"],
+                "destructiveMergeAllowed": False,
+            })
+
+    release_by_source_first = {
+        source_id: release["cardReleaseId"]
+        for release in card_releases.values()
+        for source_id in release.get("sourceFirstRecordIds", [])
+    }
+    for question_set in rekeys.get("questionSets", []):
+        rows = []
+        for unit_id in question_set["legacyUnitIds"]:
+            unit = units_by_id[unit_id]
+            mappings = mappings_by_unit.get(unit_id, [])
+            source_ids = sorted(mapping["sourceFirstRecordId"] for mapping in mappings)
+            rows.append({
+                "legacyUnitId": unit_id,
+                "legacyClaimId": f"CLAIM:legacy:{unit_id}",
+                "legacyStatus": unit["status"],
+                "legacyProduct": f"{unit['setCode']} {unit.get('number') or 'unnumbered'}",
+                "disposition": ("linked-local-counterpart" if mappings
+                                else question_set["defaultDisposition"]),
+                "sourceFirstRecordIds": source_ids,
+                "localCardReleaseIds": [
+                    release_by_source_first[print_id] for print_id in source_ids
+                ],
+                "assertionIds": [
+                    f"ASSERT:same-work:{unit_id}:{print_id}" for print_id in source_ids
+                ],
+            })
+        legacy_issue_rekeys.append({
+            "issueNumber": question_set["issueNumber"],
+            "locality": question_set["locality"],
+            "language": question_set["language"],
+            "accountedLegacyUnits": len(rows),
+            "linkedLocalCounterparts": sum(
+                row["disposition"] == "linked-local-counterpart" for row in rows),
+            "needsPositiveLocalIdentity": sum(
+                row["disposition"] == "needs-positive-local-identity" for row in rows),
+            "rows": rows,
+        })
     # A finish-store printing is a second claim grain. Only externally confirmed rows become a
     # physical-printing entity; Cardmarket catalogue hints remain candidate claims.
     releases_by_finish_key: dict[tuple[str, str, str], list[str]] = defaultdict(list)
@@ -699,6 +816,8 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
             "heldSpecimenDispositions": len(held_specimen_dispositions),
             "sourceFirstPrintsAdmitted": len(source_first.get("prints", [])),
             "sourceFirstPrintsHeld": len(source_first.get("held", [])),
+            "equivalenceAssertions": len(equivalence_assertions),
+            "legacyIssueRekeySets": len(legacy_issue_rekeys),
             "cardReleaseNodesByLocality": dict(
                 sorted(release_by_locality.items(), key=lambda kv: -kv[1])),
             "needsLocalIdentifierByLocality": dict(
@@ -743,7 +862,10 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
                 orphan_specimens, key=lambda item: str(item["specimenId"])),
             "heldSpecimenDispositions": sorted(
                 held_specimen_dispositions, key=lambda item: str(item["specimenId"])),
+            "legacyIssueRekeys": legacy_issue_rekeys,
         },
+        "equivalenceAssertions": sorted(
+            equivalence_assertions, key=lambda item: item["assertionId"]),
         "candidateClaims": [candidate_claims[cid] for cid in sorted(candidate_claims)],
         "setEditions": [set_editions[eid] for eid in sorted(set_editions)],
         "cardReleases": [card_releases[rid] for rid in sorted(card_releases)],
@@ -766,8 +888,10 @@ def main() -> int:
     specimens = specimen_doc["specimens"] if isinstance(specimen_doc, dict) else specimen_doc
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
     source_first = read_json(ROOT / "verification" / "source_first_prints.json")
+    rekeys = read_json(ROOT / "verification" / "legacy_issue_rekeys.json")
 
-    document = build(cards, units, finish_units, excluded, specimens, baseline, source_first)
+    document = build(
+        cards, units, finish_units, excluded, specimens, baseline, source_first, rekeys)
 
     if args.check:
         if not OUTPUT_PATH.is_file():

@@ -179,6 +179,12 @@ Their work equivalence stays explicit. `S-P 101`, for example, establishes a Kor
 while its relationship to the work currently represented by `S-P 156` remains unresolved. The
 model no longer forces a work guess merely to record the physical local card.
 
+Reviewed migration decisions live separately in `legacy_issue_rekeys.json`. A
+`same-work-decision` may attach a source-first local release to an existing work while keeping both
+local release identities and both raw identifiers intact. The first accepted edge is the owner-
+identified `sm10 076` / `TW:AS5a:142` relationship from #84; the other twenty #84 questions remain
+explicitly `needs-positive-local-identity`, which is not an absence conclusion.
+
 All eight cited specimens have a release claim, so the orphan count is zero. This corrects the
 stale intermediate wording in the original ADR that still said two records were held after both
 were resolved later on 2026-08-09.
