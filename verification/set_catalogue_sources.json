@@ -7,9 +7,9 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in set_catalogue_dryrun.json.",
     "counts": {
-      "sourceRecords": 344,
+      "sourceRecords": 345,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 36,
+      "sourceFirstLocalSets": 37,
       "releaseDateRecords": 45,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 112,
@@ -9046,6 +9046,54 @@
         "cardImageUrls": [
           "https://asia.pokemon-card.com/id/card-img/id00015784.png"
         ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-5398FFDCABCD",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "KR\u001fBS2",
+      "retrieved": "2026-08-20",
+      "raw": {
+        "localCode": "BS2",
+        "localName": "불꽃 튀는 대결",
+        "locality": "KR",
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "printIds": [
+          "KR:BS2:30/40:base"
+        ],
+        "providers": [
+          "pokemon-card-korea",
+          "retailer-listing",
+          "inspected-specimen"
+        ],
+        "sourceUrls": [
+          "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+          "https://pokemonkorea.co.kr/templates/default/special_site/Wcs2014/battle_p.pdf",
+          "https://daldagury.com/tcg/pokemon/card/8473",
+          "https://collectory.cc/cards/d097dd94-c89c-4c3f-b3b6-d4d3b7baca79?lang=en",
+          "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1"
+        ],
+        "printedSetSize": 40,
+        "printedSetSizeBasis": "the official card observation and two Korean catalogues identify 30/40; the Collectory bounded set page lists 40 cards",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "30/40"
+        ],
+        "observedCoverage": "one exact publisher card record plus bounded nomenclature corroboration, not a provider-wide Korean enumeration",
+        "markAssetUrls": [],
+        "cardImageUrls": [],
+        "providerIdentifiers": {
+          "officialCardRecordId": "BS2010002030",
+          "catalogueSetId": "BS2010002-kr",
+          "humanCatalogueCode": "BS2"
+        },
+        "evidenceSnapshot": "verification/evidence/issue-240-korean-burning-confrontation.json"
       }
     }
   ]

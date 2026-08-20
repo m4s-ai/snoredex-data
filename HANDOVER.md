@@ -156,6 +156,10 @@ verification/
                               matches its current row. units.json is the state; this is the
                               record of how it was reached. check E5 requires every resolved
                               unit to appear here, which is the property it can actually offer.
+  evidence/issue-240-korean-burning-confrontation.json
+                              REVIEWED positive Korean identity inputs for SPEC-0037: official
+                              card record BS2010002030, expansion ordinal 2, catalogue code BS2,
+                              catalogue id BS2010002-kr and the owner specimen remain distinct.
   rarity_catalogue.json       CENTRAL RARITY REFERENCE: one entry per rarity with its locale
                               codes (Illustration Rare = AR), whether it names a finish, and the
                               Bulbapedia sentence that says so, plus per-set rarity availability.

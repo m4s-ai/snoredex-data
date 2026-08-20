@@ -24,18 +24,18 @@
     "legacyProductIdentityTuples": 196,
     "legacyLanguageUnits": 719,
     "legacyExcludedCodeCardUnits": 75,
-    "sourceFirstRecords": 46,
+    "sourceFirstRecords": 47,
     "finishPrintingClaims": 693,
-    "candidateClaims": 1541,
+    "candidateClaims": 1542,
     "candidateClaimDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 227,
-      "established-and-mapped": 1155,
+      "established-and-mapped": 1156,
       "positively-excluded": 75
     },
-    "setEditionNodes": 460,
-    "cardReleaseNodes": 608,
-    "cardReleaseNodesIdentified": 497,
+    "setEditionNodes": 461,
+    "cardReleaseNodes": 609,
+    "cardReleaseNodesIdentified": 498,
     "cardReleaseNodesNeedingLocalIdentifier": 111,
     "physicalPrintingNodes": 474,
     "physicalPrintingsByEvidenceClass": {
@@ -53,15 +53,15 @@
     "unresolvedUnits": 0,
     "unresolvedPhysicalClaims": 0,
     "orphanSpecimens": 0,
-    "heldSpecimenDispositions": 1,
-    "sourceFirstPrintsAdmitted": 46,
-    "sourceFirstPrintsHeld": 1,
+    "heldSpecimenDispositions": 0,
+    "sourceFirstPrintsAdmitted": 47,
+    "sourceFirstPrintsHeld": 0,
     "equivalenceAssertions": 1,
     "legacyIssueRekeySets": 1,
     "cardReleaseNodesByLocality": {
       "WEST": 348,
       "JP": 66,
-      "KR": 52,
+      "KR": 53,
       "CN": 42,
       "TW": 38,
       "ID": 35,
@@ -5837,15 +5837,7 @@
     "unresolvedUnits": [],
     "unresolvedPhysicalClaims": [],
     "orphanSpecimens": [],
-    "heldSpecimenDispositions": [
-      {
-        "specimenId": "SPEC-0037",
-        "setCode": "",
-        "number": "30/40",
-        "language": "Korean",
-        "reason": "held pending a positively identified source-native set code"
-      }
-    ],
+    "heldSpecimenDispositions": [],
     "legacyIssueRekeys": [
       {
         "issueNumber": 84,
@@ -23408,6 +23400,18 @@
       "reason": "positive source-first specimen/card record"
     },
     {
+      "claimId": "CLAIM:source-first:KR:BS2:30/40:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "KR:BS2:30/40:base",
+      "sourceRecord": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
+      "materializedTargetId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
       "claimId": "CLAIM:source-first:KR:S-P:101:base",
       "claimKind": "card-release",
       "sourceKind": "source-first-record",
@@ -25436,6 +25440,19 @@
       "establishingClaimIds": [
         "CLAIM:legacy:U0774",
         "CLAIM:legacy:U0779"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:KR:Korean:BS2",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "BS2",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:BS2:30/40:base"
       ]
     },
     {
@@ -35281,6 +35298,36 @@
       ],
       "sourceRecords": [
         "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)"
+      ]
+    },
+    {
+      "cardReleaseId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
+      "setEditionId": "EDITION:KR:Korean:BS2",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "BS2",
+      "localNumber": "30/40",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:KR:BS2:30/40:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:BS2:30/40:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://pokemoncard.co.kr/cards/detail/BS2010002030"
+      ],
+      "sourceFirstRecordIds": [
+        "KR:BS2:30/40:base"
       ]
     },
     {

@@ -10,19 +10,19 @@
     "description": "Locality-bearing sets, language/script editions, sourced release events, finish profiles and source-native rarity claims rebuilt from independent source records."
   },
   "counts": {
-    "sourceRecords": 344,
-    "sourceDispositions": 344,
-    "localSets": 169,
+    "sourceRecords": 345,
+    "sourceDispositions": 345,
+    "localSets": 170,
     "setConcepts": 0,
-    "setEditions": 376,
+    "setEditions": 377,
     "editionCandidates": 84,
     "releaseEvents": 45,
     "finishProfiles": 1,
-    "cardReleaseRefs": 497,
+    "cardReleaseRefs": 498,
     "rarityClaims": 518,
     "profileFinishClaims": 3,
-    "aliasAssertions": 215,
-    "sourceAssertions": 781
+    "aliasAssertions": 216,
+    "sourceAssertions": 782
   },
   "sourceRecords": [
     {
@@ -9055,6 +9055,54 @@
           "https://asia.pokemon-card.com/id/card-img/id00015784.png"
         ]
       }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-5398FFDCABCD",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "KR\u001fBS2",
+      "retrieved": "2026-08-20",
+      "raw": {
+        "localCode": "BS2",
+        "localName": "불꽃 튀는 대결",
+        "locality": "KR",
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "printIds": [
+          "KR:BS2:30/40:base"
+        ],
+        "providers": [
+          "pokemon-card-korea",
+          "retailer-listing",
+          "inspected-specimen"
+        ],
+        "sourceUrls": [
+          "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+          "https://pokemonkorea.co.kr/templates/default/special_site/Wcs2014/battle_p.pdf",
+          "https://daldagury.com/tcg/pokemon/card/8473",
+          "https://collectory.cc/cards/d097dd94-c89c-4c3f-b3b6-d4d3b7baca79?lang=en",
+          "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1"
+        ],
+        "printedSetSize": 40,
+        "printedSetSizeBasis": "the official card observation and two Korean catalogues identify 30/40; the Collectory bounded set page lists 40 cards",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "30/40"
+        ],
+        "observedCoverage": "one exact publisher card record plus bounded nomenclature corroboration, not a provider-wide Korean enumeration",
+        "markAssetUrls": [],
+        "cardImageUrls": [],
+        "providerIdentifiers": {
+          "officialCardRecordId": "BS2010002030",
+          "catalogueSetId": "BS2010002-kr",
+          "humanCatalogueCode": "BS2"
+        },
+        "evidenceSnapshot": "verification/evidence/issue-240-korean-burning-confrontation.json"
+      }
     }
   ],
   "sourceDispositions": [
@@ -10895,6 +10943,12 @@
       "reason": "provider locality and raw local code identify this local-set node"
     },
     {
+      "sourceRecordId": "SET-SRC-SF-5398FFDCABCD",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:KR:BS2",
+      "reason": "provider locality and raw local code identify this local-set node"
+    },
+    {
       "sourceRecordId": "SET-SRC-SF-5C7F4B605B9B",
       "disposition": "mapped",
       "targetRef": "LOCALSET:TH:scD%20T",
@@ -12222,6 +12276,18 @@
       "productKind": "physical-card-set-or-product",
       "sourceRecordIds": [
         "SET-SRC-CM-FB22EE070A55"
+      ]
+    },
+    {
+      "localSetId": "LOCALSET:KR:BS2",
+      "locality": "KR",
+      "localCode": "BS2",
+      "observedNames": [
+        "불꽃 튀는 대결"
+      ],
+      "productKind": "physical-card-set-or-product",
+      "sourceRecordIds": [
+        "SET-SRC-SF-5398FFDCABCD"
       ]
     },
     {
@@ -14281,6 +14347,18 @@
       "establishingEvidenceIds": [
         "CLAIM:legacy:U0774",
         "CLAIM:legacy:U0779"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:KR:Korean:BS2",
+      "localSetId": "LOCALSET:KR:BS2",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localCode": "BS2",
+      "state": "identified",
+      "establishingEvidenceIds": [
+        "CLAIM:source-first:KR:BS2:30/40:base"
       ]
     },
     {
@@ -19941,6 +20019,12 @@
       "cardReleaseId": "RELEASE:JP:Japanese:xsv2a:143:Snorlax-Voraciousness-Thudding-Press",
       "setEditionId": "EDITION:JP:Japanese:xsv2a",
       "collectorNumber": "143",
+      "origin": "print-identity-dryrun"
+    },
+    {
+      "cardReleaseId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
+      "setEditionId": "EDITION:KR:Korean:BS2",
+      "collectorNumber": "30/40",
       "origin": "print-identity-dryrun"
     },
     {
@@ -28828,6 +28912,17 @@
       "reversibleProjection": true
     },
     {
+      "aliasAssertionId": "ALIAS:958acfb3d24a021d",
+      "sourceRecordId": "SET-SRC-SF-5398FFDCABCD",
+      "provider": "mixed-positive-evidence",
+      "rawIdentifier": "BS2",
+      "targetType": "local-set",
+      "localSetId": "LOCALSET:KR:BS2",
+      "setEditionId": null,
+      "relationship": "identifies",
+      "reversibleProjection": true
+    },
+    {
       "aliasAssertionId": "ALIAS:961a0b7c89531b66",
       "sourceRecordId": "SET-SRC-CM-DA876FCA6465",
       "provider": "cardmarket",
@@ -30609,6 +30704,15 @@
         "localCode": "xsv2a",
         "language": "Japanese",
         "script": "Jpan",
+        "state": "identified"
+      },
+      {
+        "setEditionId": "EDITION:KR:Korean:BS2",
+        "localSetId": "LOCALSET:KR:BS2",
+        "locality": "KR",
+        "localCode": "BS2",
+        "language": "Korean",
+        "script": "Hang",
         "state": "identified"
       },
       {
@@ -34364,6 +34468,12 @@
       "setEditionId": "EDITION:CN:S-Chinese:CS6bC"
     },
     {
+      "sourceAssertionId": "SOURCEASSERTION:38d2117900cd2fe7",
+      "sourceRecordId": "SET-SRC-SF-5398FFDCABCD",
+      "assertionKind": "asserts-local-set",
+      "localSetId": "LOCALSET:KR:BS2"
+    },
+    {
       "sourceAssertionId": "SOURCEASSERTION:395564b6989cb7c5",
       "sourceRecordId": "SET-SRC-CM-5651BA296863",
       "assertionKind": "asserts-rarity-claim",
@@ -38068,9 +38178,9 @@
   ],
   "reports": {
     "accounting": {
-      "sourceRecords": 344,
+      "sourceRecords": 345,
       "dispositions": {
-        "mapped": 215,
+        "mapped": 216,
         "needs-evidence": 127,
         "positively-excluded": 2
       },
@@ -40846,11 +40956,11 @@
       "foreignKeyViolations": 0,
       "localSetLocalityGuardPassed": true,
       "tableCounts": {
-        "source_record": 344,
+        "source_record": 345,
         "set_concept": 0,
-        "local_set": 169,
+        "local_set": 170,
         "local_set_concept": 0,
-        "set_edition": 376,
+        "set_edition": 377,
         "edition_relation": 0,
         "release_event": 45,
         "release_event_market": 45,
@@ -40858,11 +40968,11 @@
         "finish_profile": 1,
         "finish_profile_edition": 3,
         "finish_profile_rule": 3,
-        "card_release_ref": 497,
+        "card_release_ref": 498,
         "rarity_claim": 518,
-        "alias_assertion": 215,
-        "source_assertion": 781,
-        "record_disposition": 344
+        "alias_assertion": 216,
+        "source_assertion": 782,
+        "record_disposition": 345
       }
     }
   },
@@ -40936,9 +41046,9 @@
       "fixtureId": "event-optional-set-editions",
       "passed": true,
       "detail": {
-        "setEditions": 376,
+        "setEditions": 377,
         "editionReleaseEventLinks": 45,
-        "editionsWithoutEvents": 331
+        "editionsWithoutEvents": 332
       }
     },
     {
