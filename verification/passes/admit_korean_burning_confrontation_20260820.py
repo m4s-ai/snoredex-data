@@ -45,7 +45,6 @@ IDENTITY = {
     "language": "Korean",
     "script": "Hang",
     "localSetCode": "BS2",
-    "officialProviderSetId": "BS2010002",
     "catalogueSetId": "BS2010002-kr",
     "localSetName": "불꽃 튀는 대결",
     "setOrdinal": 2,
@@ -117,8 +116,8 @@ ADMITTED_ENTRY = {
     "localNumber": "30/40", "variant": "base", "language": "Korean", "script": "Hang",
     "name": "잠만보", "cardName": "Snorlax Lv.35", "catchUpOf": None,
     "specimenId": "SPEC-0037", "providerId": "pokemon-card-korea",
-    "providerRecordId": "BS2010002030", "providerSetId": "BS2010002",
-    "catalogueSetId": "BS2010002-kr", "localSetName": "불꽃 튀는 대결",
+    "providerRecordId": "BS2010002030", "catalogueSetId": "BS2010002-kr",
+    "localSetName": "불꽃 튀는 대결",
     "sourceUrl": OFFICIAL_CARD_URL, "corroborated": True, "markAssetUrl": None,
     "cardImageUrl": None,
     "evidenceSnapshot": "verification/evidence/issue-240-korean-burning-confrontation.json",
@@ -128,8 +127,8 @@ ADMITTED_ENTRY = {
         "잠만보 Lv.35, 30/40, rarity U, in DP 확장팩 불꽃 튀는 대결. The publisher rules call "
         "불꽃 튀는 대결 expansion pack number 2; Daldagury displays the same card as BS2 30; "
         "Collectory retains the distinct catalogue set id BS2010002-kr; and the owner photograph "
-        "remains SPEC-0037. BS2 is the human catalogue code, BS2010002 is the opaque official "
-        "provider set id, and BS2010002-kr is a separate catalogue id. This record establishes "
+        "remains SPEC-0037. BS2 is the human catalogue code and BS2010002-kr is a separate "
+        "catalogue id. This record establishes "
         "only Korean language and local card identity. The low-resolution specimen establishes no "
         "finish, and no same-work equivalence to the Japanese DP1 product is asserted. Reviewed "
         "2026-08-20."
@@ -183,7 +182,6 @@ SET_PROFILE = {
                              "corroboration, not a provider-wide Korean enumeration"),
         "markAssetUrls": [], "cardImageUrls": [],
         "providerIdentifiers": {"officialCardRecordId": "BS2010002030",
-                                "officialProviderSetId": "BS2010002",
                                 "catalogueSetId": "BS2010002-kr",
                                 "humanCatalogueCode": "BS2"},
         "evidenceSnapshot": ADMITTED_ENTRY["evidenceSnapshot"],
@@ -192,8 +190,8 @@ SET_PROFILE = {
 
 SPECIMEN_NOTE = (
     " RESOLVED 2026-08-20 (#240): the reviewed positive evidence snapshot binds this exact "
-    "Korean 30/40 card to local catalogue code BS2, official record BS2010002030, official "
-    "provider set id BS2010002 and catalogue id BS2010002-kr. These identifiers remain distinct. "
+    "Korean 30/40 card to local catalogue code BS2, official card record BS2010002030 and "
+    "catalogue id BS2010002-kr. These identifiers remain distinct. "
     "The photograph still establishes no finish and no Japanese DP1 work equivalence."
 )
 

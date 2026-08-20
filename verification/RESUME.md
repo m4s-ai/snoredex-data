@@ -572,10 +572,10 @@ but deliberately not collapsed:
 - SPEC-0037 remains the owner photograph. Its low resolution does not make the set glyph or finish
   legible, so neither is read from the image.
 
-The source-first identity is therefore `KR:BS2:30/40:base`. `BS2010002` remains an opaque official
-provider-set identifier inside the evidence snapshot, and `BS2010002-kr` remains a catalogue id;
-neither is rewritten as the printed/local code. Synthetic `BCR`, guessed `DP2`, finish and Japanese
-`DP1` work equivalence remain forbidden. The historical publisher card endpoint returned HTTP 410
+The source-first identity is therefore `KR:BS2:30/40:base`. `BS2010002-kr` remains a catalogue id
+and is not rewritten as the printed/local code. No official provider-set identifier is asserted.
+Synthetic `BCR`, guessed `DP2`, finish and Japanese `DP1` work equivalence remain forbidden. The
+historical publisher card endpoint returned HTTP 410
 when rechecked, so the retained exact positive observation is evidence while the current endpoint
 state is only an access limitation. This one card does not establish provider-wide Korean catalogue
 coverage; the Korean locality track remains `blocked-by-source` for enumeration.

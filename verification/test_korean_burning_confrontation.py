@@ -20,6 +20,7 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
     def test_reviewed_snapshot_is_exact(self) -> None:
         snapshot = korean.read_evidence()
         self.assertEqual(snapshot["identity"], korean.IDENTITY)
+        self.assertNotIn("officialProviderSetId", snapshot["identity"])
 
     def test_catalogue_code_drift_is_rejected(self) -> None:
         snapshot = korean.read_evidence()
@@ -33,6 +34,22 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "observed drifted"):
                 korean.read_evidence(path)
 
+    def test_capability_fixture_retains_the_indexed_publisher_fields(self) -> None:
+        manifest = json.loads(
+            (ROOT / "verification" / "source_capabilities.json").read_text(encoding="utf-8")
+        )
+        observation = next(row for row in manifest["observations"]
+                           if row["observationId"] ==
+                           "obs-pokemon-card-korea-bs2010002030")
+        self.assertEqual(observation["fixtureRef"]["kind"], "inline-record")
+        record = observation["fixtureRef"]["record"]
+        self.assertEqual(record["providerRecordId"], "BS2010002030")
+        self.assertEqual(record["cardName"], "잠만보 Lv. 35")
+        self.assertEqual(record["collectorNumber"], "30/40")
+        self.assertEqual(record["localSetName"], "불꽃 튀는 대결")
+        self.assertFalse(record["absenceCapability"])
+        self.assertFalse(record["finishCapability"])
+
     def test_store_has_one_resolved_specimen_release(self) -> None:
         source_first = json.loads(korean.PRINTS.read_text(encoding="utf-8"))
         matches = [row for row in source_first["prints"]
@@ -44,6 +61,7 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
         specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0037")
         self.assertEqual(specimen["setCode"], "BS2")
         self.assertNotIn("finish", korean.ADMITTED_ENTRY)
+        self.assertNotIn("providerSetId", korean.ADMITTED_ENTRY)
         self.assertIsNone(korean.ADMITTED_ENTRY["catchUpOf"])
 
 
