@@ -8,6 +8,8 @@ verdict store.
 
     python scripts/card_discovery.py --refresh --run-id 20260809T180000Z
     python scripts/card_discovery.py --refresh --run-id 20260809T180000Z --resume
+    python scripts/card_discovery.py --refresh --run-id 20260809T180000Z --resume \
+        --reuse-unfinished-from-run 20260808T180000Z
     python scripts/card_discovery.py
     python scripts/card_discovery.py --check
 """
@@ -48,6 +50,10 @@ RUNS_DIR = ROOT / "verification" / "runs" / "card-discovery"
 OUTPUT_PATH = ROOT / "verification" / "card_discovery_staging.json"
 RECORDS_PATH = ROOT / "verification" / "card_discovery_records.jsonl"
 RUN_ID_PATTERN = re.compile(r"^[0-9]{8}T[0-9]{6}Z$")
+REQUEST_ACQUISITION_FIELDS = {
+    "adapterId", "adapterVersion", "sliceId", "providerId", "surfaceId",
+    "coverageEdgeId", "rawLocale", "endpoint", "queryParameters",
+}
 DETAIL_PATH_PATTERN = re.compile(r"/card-search/detail/([0-9]+)/?")
 SET_SYMBOL_PATTERN = re.compile(r"_exp_([^./]+)\.(?:png|jpe?g|webp)$", re.IGNORECASE)
 OFFICIAL_ARCHIVE_PATH_PATTERN = re.compile(
@@ -2103,7 +2109,63 @@ def refresh_bulbapedia_historical_request(
     save_manifest(run_dir, manifest)
 
 
-def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
+def reuse_unfinished_requests(
+    run_dir: Path, manifest: dict[str, Any], source_run_id: str
+) -> None:
+    """Carry forward exact unchanged requests when another provider blocks a refresh."""
+    if not RUN_ID_PATTERN.fullmatch(source_run_id):
+        raise DiscoveryError("--reuse-unfinished-from-run must use YYYYMMDDTHHMMSSZ")
+    source_dir = RUNS_DIR / source_run_id
+    if not source_dir.is_dir():
+        raise DiscoveryError(f"reuse source run does not exist: {source_run_id}")
+    source_manifest = read_json(source_dir / "manifest.json")
+    source_contract_path = source_dir / "contract.json"
+    if source_manifest.get("runId") != source_run_id:
+        raise DiscoveryError(f"reuse source run id differs: {source_run_id}")
+    if source_manifest.get("status") != "complete":
+        raise DiscoveryError(f"reuse source run is not complete: {source_run_id}")
+    if not source_contract_path.is_file() or source_manifest.get(
+        "contractHash"
+    ) != content_hash(read_json(source_contract_path)):
+        raise DiscoveryError(f"reuse source contract hash differs: {source_run_id}")
+
+    source_requests = {row["sliceId"]: row for row in source_manifest["requests"]}
+    reused: list[str] = []
+    for index, request in enumerate(manifest["requests"]):
+        if request["checkpoint"].get("complete"):
+            continue
+        source_request = source_requests.get(request["sliceId"])
+        if source_request is None or any(
+            request[field] != source_request[field]
+            for field in REQUEST_ACQUISITION_FIELDS
+        ):
+            continue
+        target_raw = run_dir / "raw" / request["sliceId"]
+        if target_raw.exists():
+            raise DiscoveryError(
+                f"reuse target already contains raw responses: {request['sliceId']}"
+            )
+        shutil.copytree(source_dir / "raw" / request["sliceId"], target_raw)
+        carried = json.loads(json.dumps(source_request))
+        carried["runId"] = manifest["runId"]
+        carried["replayedFromRun"] = source_run_id
+        manifest["requests"][index] = carried
+        reused.append(request["sliceId"])
+
+    if not reused:
+        raise DiscoveryError(
+            f"reuse source has no exact unfinished request match: {source_run_id}"
+        )
+    manifest["failures"] = [
+        row for row in manifest["failures"] if row.get("sliceId") not in reused
+    ]
+    save_manifest(run_dir, manifest)
+
+
+def refresh(
+    run_id: str, retrieved_at: str | None, resume: bool,
+    reuse_unfinished_from_run: str | None = None,
+) -> None:
     if not RUN_ID_PATTERN.fullmatch(run_id):
         raise DiscoveryError("--run-id must use YYYYMMDDTHHMMSSZ")
     contract, capability, identity = load_inputs()
@@ -2130,6 +2192,11 @@ def refresh(run_id: str, retrieved_at: str | None, resume: bool) -> None:
         write_json(run_dir / "contract.json", contract)
         manifest = new_manifest(contract, capability, run_id, timestamp)
         save_manifest(run_dir, manifest)
+
+    if reuse_unfinished_from_run is not None:
+        if not resume:
+            raise DiscoveryError("--reuse-unfinished-from-run requires --resume")
+        reuse_unfinished_requests(run_dir, manifest, reuse_unfinished_from_run)
 
     adapters = {row["adapterId"]: row for row in contract["adapters"]}
     slices = {
@@ -2254,16 +2321,12 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
         microsecond=0
     ).isoformat().replace("+00:00", "Z")
     expected = new_manifest(contract, capability, run_id, timestamp)
-    acquisition_fields = {
-        "adapterId", "adapterVersion", "sliceId", "providerId", "surfaceId",
-        "coverageEdgeId", "rawLocale", "endpoint", "queryParameters",
-    }
     expected_requests = {
-        row["sliceId"]: {key: row[key] for key in acquisition_fields}
+        row["sliceId"]: {key: row[key] for key in REQUEST_ACQUISITION_FIELDS}
         for row in expected["requests"]
     }
     source_requests = {
-        row["sliceId"]: {key: row[key] for key in acquisition_fields}
+        row["sliceId"]: {key: row[key] for key in REQUEST_ACQUISITION_FIELDS}
         for row in source_manifest["requests"]
     }
     if source_requests != expected_requests:
@@ -2312,6 +2375,10 @@ def main() -> int:
     )
     parser.add_argument("--resume", action="store_true", help="resume the named incomplete run")
     parser.add_argument(
+        "--reuse-unfinished-from-run",
+        help="on resume, carry forward exact unchanged unfinished requests from a complete run",
+    )
+    parser.add_argument(
         "--replay-from-run",
         help="reuse a complete immutable run when provider acquisition inputs are unchanged",
     )
@@ -2320,15 +2387,23 @@ def main() -> int:
     args = parser.parse_args()
     try:
         if args.replay_from_run:
-            if args.refresh or args.resume or not args.run_id:
+            if (
+                args.refresh or args.resume or args.reuse_unfinished_from_run
+                or not args.run_id
+            ):
                 raise DiscoveryError("--replay-from-run requires only --run-id")
             replay_run(args.replay_from_run, args.run_id, args.retrieved_at)
             return 0
         if args.refresh:
             if not args.run_id:
                 raise DiscoveryError("--refresh requires --run-id")
-            refresh(args.run_id, args.retrieved_at, args.resume)
+            refresh(
+                args.run_id, args.retrieved_at, args.resume,
+                args.reuse_unfinished_from_run,
+            )
             return 0
+        if args.reuse_unfinished_from_run:
+            raise DiscoveryError("--reuse-unfinished-from-run requires --refresh --resume")
         if args.resume:
             raise DiscoveryError("--resume requires --refresh")
         contract, capability, identity = load_inputs()

@@ -528,6 +528,36 @@ variant and deck identity. The complete run accounts for 246 card records across
 with no run error and no verdict mutation. Promos, decks beyond the retained KSS identity, later
 Russian history and every unlisted product remain explicit specialist gaps.
 
+## Indonesian and Thai official card-discovery result
+
+Run `20260820T122400Z` activates the shared publisher adapter for the native Indonesian `Snorlax`
+and Thai `คาบิกอน` queries. The official source declares two pages for each locale. The retained
+run accounts for all 31 Indonesian and all 25 Thai details with no duplicate id, pagination gap,
+parse failure, or silent loss. The bounded responses are terminal `complete`; they are positive
+frontiers, not complete promo, product, or historical catalogues.
+
+The Indonesian response positively rediscovers the three #138 minimum regressions: `SV6s I
+136/167`, `SV9s I 109/139`, and `SV4s I 118/132`. Pass
+`admit_indonesia_minimum_regressions_20260820.py` promotes those exact retained details to local
+physical-print nodes. The publisher detail establishes the card and number; the independent
+Indonesian locality set index supplies the printed `I`-bearing product code. Finish and
+cross-language work equivalence remain unresolved. Replay `20260820T124000Z` maps the three raw
+details to those nodes, leaving six Indonesian and ten Thai positive records as visible new
+candidates rather than silently merging them.
+
+The same live run exposes two TCGdex identifier deltas. Trainer Gallery TG10 changed from
+`swsh11.5tg-TG10` to `swsh11tg-TG10` in English, French, and German; exact reviewed mappings retain
+the same three local releases under both historical and current provider keys. German `ex15-10`
+disappeared from the response. It remains known from the earlier immutable run, and the current
+provider omission is not a contradiction or absence claim.
+
+The live Italian archive returned `Pardon Our Interruption` during this refresh. The completed run
+therefore carries forward only four exact unchanged requests from complete run
+`20260813T150337Z`: the Italian filter and three LATAM asset slices. Each request keeps its original
+`retrievedAt` and names `replayedFromRun`; no old response is presented as freshly fetched. The
+resume command accepts this only when every acquisition field matches exactly and the source run
+is complete with a valid immutable contract hash.
+
 ### TCGdex answers 200 for languages and eras it holds no cards for
 
 Probed 2026-08-09 while trying to raise the Western set-level confirmations of #137 to card level.

@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-print-identity-dryrun",
     "schemaVersion": "0.2.0",
-    "generated": "2026-08-13",
+    "generated": "2026-08-20",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "status": "dry-run — proposes nothing to authoritative stores, migrates nothing",
     "baselineId": "cardmarket-search-2026-07-21",
@@ -24,18 +24,18 @@
     "legacyProductIdentityTuples": 196,
     "legacyLanguageUnits": 719,
     "legacyExcludedCodeCardUnits": 75,
-    "sourceFirstRecords": 43,
+    "sourceFirstRecords": 46,
     "finishPrintingClaims": 693,
-    "candidateClaims": 1538,
+    "candidateClaims": 1541,
     "candidateClaimDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 228,
-      "established-and-mapped": 1151,
+      "established-and-mapped": 1154,
       "positively-excluded": 75
     },
-    "setEditionNodes": 457,
-    "cardReleaseNodes": 605,
-    "cardReleaseNodesIdentified": 494,
+    "setEditionNodes": 460,
+    "cardReleaseNodes": 608,
+    "cardReleaseNodesIdentified": 497,
     "cardReleaseNodesNeedingLocalIdentifier": 111,
     "physicalPrintingNodes": 473,
     "physicalPrintingsByEvidenceClass": {
@@ -52,7 +52,7 @@
     "unresolvedUnits": 0,
     "unresolvedPhysicalClaims": 1,
     "orphanSpecimens": 1,
-    "sourceFirstPrintsAdmitted": 43,
+    "sourceFirstPrintsAdmitted": 46,
     "sourceFirstPrintsHeld": 0,
     "cardReleaseNodesByLocality": {
       "WEST": 348,
@@ -60,7 +60,7 @@
       "KR": 52,
       "CN": 42,
       "TW": 38,
-      "ID": 32,
+      "ID": 35,
       "TH": 24,
       "LATAM": 3
     },
@@ -23032,6 +23032,42 @@
       "reason": "positive source-first specimen/card record"
     },
     {
+      "claimId": "CLAIM:source-first:ID:SV4s I:118/132:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:SV4s I:118/132:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/9774/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:SV4s I:118/132:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:SV4s I:118/132:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:SV6s I:136/167:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:SV6s I:136/167:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/13757/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:SV6s I:136/167:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:SV6s I:136/167:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "claimId": "CLAIM:source-first:ID:SV9s I:109/139:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:SV9s I:109/139:base",
+      "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/15784/",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:ID:Indonesian:SV9s I:109/139:unmapped-work:None",
+      "materializedTargetId": "RELEASE:ID:Indonesian:SV9s I:109/139:unmapped-work:None",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
       "claimId": "CLAIM:source-first:ID:sc1D I:132/164:base",
       "claimKind": "card-release",
       "sourceKind": "source-first-record",
@@ -24084,6 +24120,45 @@
       "viaLegacySetCodes": [],
       "establishingClaimIds": [
         "CLAIM:source-first:ID:SM-P:166:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:SV4s I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "SV4s I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:SV4s I:118/132:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:SV6s I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "SV6s I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:SV6s I:136/167:base"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:ID:Indonesian:SV9s I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "SV9s I",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:SV9s I:109/139:base"
       ]
     },
     {
@@ -32092,6 +32167,90 @@
       "legacyProducts": [],
       "sourceRecords": [],
       "sourceFirstRecordId": "ID:SM-P:166:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:SV4s I:118/132:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:SV4s I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "SV4s I",
+      "localNumber": "118/132",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:SV4s I:118/132:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:SV4s I:118/132:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://asia.pokemon-card.com/id/card-search/detail/9774/"
+      ],
+      "sourceFirstRecordId": "ID:SV4s I:118/132:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:SV6s I:136/167:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:SV6s I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "SV6s I",
+      "localNumber": "136/167",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:SV6s I:136/167:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:SV6s I:136/167:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://asia.pokemon-card.com/id/card-search/detail/13757/"
+      ],
+      "sourceFirstRecordId": "ID:SV6s I:136/167:base"
+    },
+    {
+      "cardReleaseId": "RELEASE:ID:Indonesian:SV9s I:109/139:unmapped-work:None",
+      "setEditionId": "EDITION:ID:Indonesian:SV9s I",
+      "locality": "ID",
+      "language": "Indonesian",
+      "script": "Latn",
+      "localSetCode": "SV9s I",
+      "localNumber": "109/139",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:ID:SV9s I:109/139:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:ID:SV9s I:109/139:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://asia.pokemon-card.com/id/card-search/detail/15784/"
+      ],
+      "sourceFirstRecordId": "ID:SV9s I:109/139:base"
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc1D I:132/164:unmapped-work:None",
