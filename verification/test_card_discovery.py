@@ -376,13 +376,24 @@ class CardDiscoveryTests(unittest.TestCase):
 
             newer_id = "20260813T160000Z"
             newer_dir = runs_dir / newer_id
-            newer_raw = newer_dir / "raw" / "fixture-slice"
+            second_source_request = copy.deepcopy(source_request)
+            second_source_request["sliceId"] = "fixture-slice-2"
+            second_source_raw = source_dir / "raw" / "fixture-slice-2"
+            second_source_raw.mkdir()
+            (second_source_raw / "page.html").write_text("second", encoding="utf-8")
+            (source_dir / "manifest.json").write_text(json.dumps({
+                "runId": source_id,
+                "status": "complete",
+                "contractHash": discovery.content_hash(contract),
+                "requests": [source_request, second_source_request],
+            }), encoding="utf-8")
+            newer_raw = newer_dir / "raw" / "fixture-slice-2"
             newer_raw.mkdir(parents=True)
             (newer_raw / "page.html").write_text("newer", encoding="utf-8")
             (newer_dir / "contract.json").write_text(
                 json.dumps(contract), encoding="utf-8"
             )
-            newer_request = copy.deepcopy(source_request)
+            newer_request = copy.deepcopy(second_source_request)
             newer_request["runId"] = newer_id
             newer_request["retrievedAt"] = "2026-08-13T16:00:00Z"
             (newer_dir / "manifest.json").write_text(json.dumps({
@@ -397,6 +408,9 @@ class CardDiscoveryTests(unittest.TestCase):
             stale_manifest["runId"] = "20260820T130000Z"
             stale_manifest["requests"][0]["runId"] = "20260820T130000Z"
             stale_manifest["requests"][0]["checkpoint"] = {"complete": False}
+            second_target_request = copy.deepcopy(stale_manifest["requests"][0])
+            second_target_request["sliceId"] = "fixture-slice-2"
+            stale_manifest["requests"].append(second_target_request)
             (stale_target_dir / "manifest.json").write_text(
                 json.dumps({**stale_manifest, "status": "incomplete"}), encoding="utf-8"
             )
@@ -408,6 +422,9 @@ class CardDiscoveryTests(unittest.TestCase):
                     discovery.reuse_unfinished_requests(
                         stale_target_dir, stale_manifest, source_id
                     )
+            self.assertFalse(
+                (stale_target_dir / "raw" / "fixture-slice").exists()
+            )
 
     def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
         old = [

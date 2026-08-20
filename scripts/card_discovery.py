@@ -2130,7 +2130,7 @@ def reuse_unfinished_requests(
         raise DiscoveryError(f"reuse source contract hash differs: {source_run_id}")
 
     source_requests = {row["sliceId"]: row for row in source_manifest["requests"]}
-    reused: list[str] = []
+    reusable: list[tuple[int, dict[str, Any], dict[str, Any], Path]] = []
     for index, request in enumerate(manifest["requests"]):
         if request["checkpoint"].get("complete"):
             continue
@@ -2180,17 +2180,21 @@ def reuse_unfinished_requests(
             raise DiscoveryError(
                 f"reuse target already contains raw responses: {request['sliceId']}"
             )
+        reusable.append((index, request, source_request, target_raw))
+
+    if not reusable:
+        raise DiscoveryError(
+            f"reuse source has no exact unfinished request match: {source_run_id}"
+        )
+
+    reused: list[str] = []
+    for index, request, source_request, target_raw in reusable:
         shutil.copytree(source_dir / "raw" / request["sliceId"], target_raw)
         carried = json.loads(json.dumps(source_request))
         carried["runId"] = manifest["runId"]
         carried["replayedFromRun"] = source_run_id
         manifest["requests"][index] = carried
         reused.append(request["sliceId"])
-
-    if not reused:
-        raise DiscoveryError(
-            f"reuse source has no exact unfinished request match: {source_run_id}"
-        )
     manifest["failures"] = [
         row for row in manifest["failures"] if row.get("sliceId") not in reused
     ]
