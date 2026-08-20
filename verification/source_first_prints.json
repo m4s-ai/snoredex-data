@@ -2,14 +2,14 @@
   "meta": {
     "schema": "snoredex-source-first-prints",
     "schemaVersion": "0.1.0",
-    "generated": "2026-08-11",
+    "generated": "2026-08-20",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "decision": "ADR-0001 D1 (owner, 2026-08-09) for specimen-backed codes; ADR-0001 D5 (owner, 2026-08-10) for codes backed by a tier-1 publisher record, language and identity only",
     "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
     "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
     "counts": {
       "admitted": 46,
-      "held": 0
+      "held": 1
     }
   },
   "prints": [
@@ -880,5 +880,14 @@
       "evidence": "Immutable card-discovery run 20260820T122400Z retains the publisher's Indonesian detail 15784: Snorlax <Hop>, collector number 109/139, raw expansion code SV9s, card image and set-mark asset. The independently retained Indonesian locality set index names the physical product code SV9s I. Together they establish this Indonesian language-and-identity node under ADR-0001 D5. No finish or cross-language work equivalence is asserted. Retrieved 2026-08-20."
     }
   ],
-  "held": []
+  "held": [
+    {
+      "specimenId": "SPEC-0037",
+      "proposedSetCode": null,
+      "localNumber": "30/40",
+      "language": "Korean",
+      "blockedBy": "the retained owner photograph and retailer reference establish Burning Confrontation Series 2 and 30/40, but do not state a source-native Korean local set code",
+      "reason": "BCR was an internal abbreviation and already identifies the unrelated Western Boundaries Crossed set. Positive evidence does not permit using it as the Korean raw identifier; hold until a source-native code is recorded."
+    }
+  ]
 }

@@ -704,7 +704,25 @@ def collect() -> None:
             f"{dryrun_counts['cardReleaseNodesNeedingLocalIdentifier']} releases need a local "
             f"identifier {dryrun_counts['needsLocalIdentifierByLocality']}; "
             f"{dryrun_counts['contradictedOnlyCardReleaseProposals']} contradicted-only release "
-            f"proposals stay candidates; {dryrun_counts['orphanSpecimens']} orphan specimen(s)",
+            f"proposals stay candidates; {dryrun_counts['orphanSpecimens']} orphan specimen(s); "
+            f"{dryrun_counts['heldSpecimenDispositions']} specimen(s) explicitly held",
+        )
+        migration_exceptions = (
+            dryrun_counts["identityCollisions"]
+            + dryrun_counts["unresolvedPhysicalClaims"]
+            + dryrun_counts["orphanSpecimens"]
+        )
+        check(
+            "N21",
+            "Pre-migration identity exceptions are fully dispositioned",
+            "FAIL",
+            migration_exceptions == 0,
+            f"unexplained collisions={dryrun_counts['identityCollisions']}, "
+            f"unresolved physical claims={dryrun_counts['unresolvedPhysicalClaims']}, "
+            f"orphan specimens={dryrun_counts['orphanSpecimens']}; "
+            f"explicitly held specimens={dryrun_counts['heldSpecimenDispositions']}; "
+            f"explained code-card collisions="
+            f"{dryrun_counts['positivelyExcludedIdentityCollisions']}",
         )
 
         # N4-N5 — source-first prints admitted on their own evidence (ADR-0001 D1)
