@@ -478,6 +478,8 @@ CREATE TABLE graph_edges (
     provenance_json TEXT NOT NULL CHECK (json_valid(provenance_json)),
     PRIMARY KEY (from_type, from_id, relation, to_type, to_id),
     FOREIGN KEY (from_type, from_id)
+        REFERENCES graph_entities(entity_type, entity_id) ON DELETE CASCADE,
+    FOREIGN KEY (to_type, to_id)
         REFERENCES graph_entities(entity_type, entity_id) ON DELETE CASCADE
 ) WITHOUT ROWID;
 
