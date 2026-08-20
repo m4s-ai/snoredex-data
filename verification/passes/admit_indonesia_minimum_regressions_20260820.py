@@ -58,7 +58,12 @@ def main() -> int:
         and row["raw"].get("locality") == "ID"
     }
     print_document = json.loads(PRINTS.read_text(encoding="utf-8"))
-    existing_prints = {row["printId"] for row in print_document["prints"]}
+    existing_prints = {}
+    for row in print_document["prints"]:
+        print_id = row["printId"]
+        if print_id in existing_prints:
+            raise SystemExit(f"duplicate source-first print: {print_id}")
+        existing_prints[print_id] = row
     existing_profiles = {
         row["providerRecordKey"]
         for row in set_rows
@@ -87,36 +92,40 @@ def main() -> int:
 
         print_id = f"ID:{local_code}:{number}:base"
         source_url = f"https://asia.pokemon-card.com/id/card-search/detail/{detail_id}/"
-        if print_id not in existing_prints:
-            print_document["prints"].append({
-                "printId": print_id,
-                "locality": "ID",
-                "localSetCode": local_code,
-                "localNumber": number,
-                "variant": "base",
-                "language": "Indonesian",
-                "script": "Latn",
-                "name": local_name,
-                "cardName": card_name,
-                "catchUpOf": None,
-                "specimenId": None,
-                "providerId": "pokemon-card-asia",
-                "sourceUrl": source_url,
-                "corroborated": False,
-                "markAssetUrl": source["setSymbolUrl"],
-                "cardImageUrl": source["cardImageUrl"],
-                "evidence": (
-                    f"Immutable card-discovery run {RUN_ID} retains the publisher's Indonesian "
-                    f"detail {detail_id}: {local_name}, collector number {number}, raw expansion "
-                    f"code {raw_code}, card image and set-mark asset. The independently retained "
-                    f"Indonesian locality set index names the physical product code {local_code}. "
-                    "Together they establish this Indonesian language-and-identity node under "
-                    "ADR-0001 D5. No finish or cross-language work equivalence is asserted. "
-                    "Retrieved 2026-08-20."
-                ),
-            })
-            existing_prints.add(print_id)
+        expected_print = {
+            "printId": print_id,
+            "locality": "ID",
+            "localSetCode": local_code,
+            "localNumber": number,
+            "variant": "base",
+            "language": "Indonesian",
+            "script": "Latn",
+            "name": local_name,
+            "cardName": card_name,
+            "catchUpOf": None,
+            "specimenId": None,
+            "providerId": "pokemon-card-asia",
+            "sourceUrl": source_url,
+            "corroborated": False,
+            "markAssetUrl": source["setSymbolUrl"],
+            "cardImageUrl": source["cardImageUrl"],
+            "evidence": (
+                f"Immutable card-discovery run {RUN_ID} retains the publisher's Indonesian "
+                f"detail {detail_id}: {local_name}, collector number {number}, raw expansion "
+                f"code {raw_code}, card image and set-mark asset. The independently retained "
+                f"Indonesian locality set index names the physical product code {local_code}. "
+                "Together they establish this Indonesian language-and-identity node under "
+                "ADR-0001 D5. No finish or cross-language work equivalence is asserted. "
+                "Retrieved 2026-08-20."
+            ),
+        }
+        existing_print = existing_prints.get(print_id)
+        if existing_print is None:
+            print_document["prints"].append(expected_print)
+            existing_prints[print_id] = expected_print
             added_prints += 1
+        elif existing_print != expected_print:
+            raise SystemExit(f"existing Indonesian source-first print drift: {print_id}")
 
         profile_key = f"ID\x1f{local_code}"
         if profile_key not in existing_profiles:
