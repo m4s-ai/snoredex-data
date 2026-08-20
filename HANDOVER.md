@@ -37,19 +37,20 @@ legacy-cardmarket-baseline.json
                               added to those stores, never to this file. It records no verification
                               state, deliberately.
 verification/ADR-0001-locality-aware-print-identity.md
-                              PROPOSED identity model (#134/#145): immutable candidate claims may
+                              ACCEPTED identity model (#134/#145/#140): immutable candidate claims may
                               establish language-bearing card releases, which positively evidenced
                               finishes/treatments realize as physical printings. Contradicted and
                               marketplace-only claims create no existence-bearing node. Schema in
                               print_identity_schema.json; measured consequences in
-                              print_identity_dryrun.json. Nothing is keyed by it yet.
+                              print_identity_dryrun.json; the migrated graph is materialized in
+                              snoredex.sqlite's graph_* tables.
 verification/ADR-0002-local-set-edition-release-events.md
-                              PROPOSED catalogue model (#146): locality-bearing local sets,
+                              ACCEPTED catalogue model (#146/#140): locality-bearing local sets,
                               language/script editions, market/wave release events, scoped finish
                               profiles and source-native rarity claims. The independent raw registry
                               is set_catalogue_sources.json; executable constraints are in
                               set_catalogue_schema.sql; set_catalogue_dryrun.json is the measured
-                               graph. Nothing is keyed by it yet.
+                              graph, materialized into snoredex.sqlite by #140.
 verification/ADR-0003-source-capability-coverage.md
                               ACCEPTED evidence-routing boundary (#135): provider surfaces point
                               through explicit locality/category/time coverage edges. Every claimed
@@ -117,7 +118,9 @@ scripts/                      Two halves; only the second can be re-run (#28).
                                 -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
                               and verifies the Pages artifact). print_identity_dryrun.py and
-                              set_catalogue_dryrun.py rebuilds the ADR-0002 graph;
+                              set_catalogue_dryrun.py rebuild the review graphs;
+                              authoritative_graph.py materializes the reviewed #140 locality graph
+                              into the application database;
                               source_adapters.py checks/reprojects retained ADR-0004 set runs;
                               card_discovery.py checks/reprojects retained ADR-0006 card runs; and
                               legacy_set_reconciliation.py rebuilds the bounded ADR-0005 ledger and
@@ -175,6 +178,9 @@ verification/
   set_catalogue_dryrun.json   GENERATED ADR-0002 graph and reports. Rebuilt from the independent
                               source registry plus ADR-0001 existence-bearing references; it never
                               creates a card release from set availability.
+  authoritative_graph.json   GENERATED #140 canonical locality graph snapshot: reviewed identity
+                              and catalogue entities, typed provenance edges, raw set records and
+                              one reversible migration disposition for every input.
   legacy_set_reconciliation.json
                               GENERATED ADR-0005 migration ledger. It embeds every legacy finish
                               unit exactly, keeps scalar release dates as raw history, links only

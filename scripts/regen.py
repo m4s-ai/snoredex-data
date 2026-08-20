@@ -55,6 +55,7 @@ REGEN = [
     # regenerate BEFORE it.
     ["scripts/print_identity_dryrun.py"],
     ["scripts/set_catalogue_dryrun.py"],
+    ["scripts/authoritative_graph.py"],
     ["scripts/card_discovery.py"],
     ["scripts/asia_locality_matrix.py"],
     ["scripts/locality_matrix.py"],
@@ -89,6 +90,7 @@ CHECK = [
     ["scripts/source_adapters.py", "--check"],
     ["scripts/print_identity_dryrun.py", "--check"],
     ["scripts/set_catalogue_dryrun.py", "--check"],
+    ["scripts/authoritative_graph.py", "--check"],
     ["scripts/card_discovery.py", "--check"],
     ["scripts/asia_locality_matrix.py", "--check"],
     ["scripts/locality_matrix.py", "--check"],
@@ -117,6 +119,7 @@ TESTS = [
     ["verification/test_metric_polarity.py"],
     ["verification/test_print_identity_rekeys.py"],
     ["verification/test_asia_locality_matrix.py"],
+    ["verification/test_authoritative_graph.py"],
     ["verification/test_korean_burning_confrontation.py"],
     ["verification/test_findings_harness.py"],
     ["verification/review_findings.py"],          # cross-artifact + publication

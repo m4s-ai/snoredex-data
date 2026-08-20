@@ -9,9 +9,9 @@ the append-only history:
     python scripts/database.py
     python scripts/database.py --check
 
-The source JSON files remain authoritative.  The SQLite file is a deterministic projection with a
-source fingerprint, foreign keys, stable Cardmarket product ids, conservative application statuses
-and explicit quality findings.
+The source JSON files remain authoritative for observations.  The SQLite file is a deterministic
+projection with a source fingerprint, foreign keys, stable Cardmarket product ids, conservative
+application statuses and an authoritative locality graph migrated from the reviewed graph inputs.
 """
 
 from __future__ import annotations
@@ -32,7 +32,8 @@ from absence_model import absence_scope_urls  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.2.0"
+SCHEMA_VERSION = "1.3.0"
+GRAPH_SCHEMA_VERSION = "1.0.0"
 
 INPUTS = [
     "legacy-cardmarket-baseline.json",
@@ -46,6 +47,7 @@ INPUTS = [
     "verification/specimens.json",
     "verification/owner_adjudications.json",
     "verification/evidence_semantics.json",
+    "verification/authoritative_graph.json",
 ]
 
 LANGUAGES = [
@@ -169,7 +171,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10002;
+PRAGMA user_version = 10003;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -453,6 +455,70 @@ CREATE TABLE quality_issues (
 
 CREATE INDEX quality_issues_category ON quality_issues(category, severity);
 
+-- #140 authoritative locality graph.  The payload columns retain the reviewed source shape;
+-- typed edges make the identity boundary queryable without forcing applications to parse the
+-- generated dry-run documents.  Raw observations remain immutable inputs; migration dispositions
+-- are the reversible boundary between those inputs and the graph nodes.
+CREATE TABLE graph_entities (
+    entity_type TEXT NOT NULL,
+    entity_id TEXT NOT NULL,
+    origin TEXT NOT NULL,
+    payload_json TEXT NOT NULL CHECK (json_valid(payload_json)),
+    PRIMARY KEY (entity_type, entity_id)
+) WITHOUT ROWID;
+
+CREATE INDEX graph_entities_id ON graph_entities(entity_id);
+
+CREATE TABLE graph_edges (
+    from_type TEXT NOT NULL,
+    from_id TEXT NOT NULL,
+    relation TEXT NOT NULL,
+    to_type TEXT NOT NULL,
+    to_id TEXT NOT NULL,
+    provenance_json TEXT NOT NULL CHECK (json_valid(provenance_json)),
+    PRIMARY KEY (from_type, from_id, relation, to_type, to_id),
+    FOREIGN KEY (from_type, from_id)
+        REFERENCES graph_entities(entity_type, entity_id) ON DELETE CASCADE
+) WITHOUT ROWID;
+
+CREATE INDEX graph_edges_target ON graph_edges(to_type, to_id, relation);
+
+CREATE TABLE graph_migration_dispositions (
+    source_kind TEXT NOT NULL,
+    source_id TEXT NOT NULL,
+    disposition TEXT NOT NULL,
+    target_ref TEXT,
+    reason TEXT NOT NULL,
+    PRIMARY KEY (source_kind, source_id)
+) WITHOUT ROWID;
+
+CREATE TABLE graph_source_records (
+    source_record_id TEXT PRIMARY KEY,
+    source_kind TEXT NOT NULL,
+    provider TEXT NOT NULL,
+    provider_record_key TEXT NOT NULL,
+    retrieved TEXT NOT NULL,
+    source_url TEXT,
+    raw_json TEXT NOT NULL CHECK (json_valid(raw_json))
+) WITHOUT ROWID;
+
+CREATE VIEW graph_card_releases AS
+SELECT entity_id AS card_release_id, payload_json
+FROM graph_entities WHERE entity_type = 'card-release';
+
+CREATE VIEW graph_physical_printings AS
+SELECT entity_id AS physical_printing_id, payload_json
+FROM graph_entities WHERE entity_type = 'physical-printing';
+
+CREATE VIEW graph_candidate_claims AS
+SELECT entity_id AS claim_id, payload_json
+FROM graph_entities WHERE entity_type = 'candidate-claim';
+
+CREATE VIEW graph_migration_summary AS
+SELECT source_kind, disposition, COUNT(*) AS input_count
+FROM graph_migration_dispositions
+GROUP BY source_kind, disposition;
+
 CREATE VIEW app_products AS
 SELECT
     p.*,
@@ -592,6 +658,11 @@ def build_database(target: Path) -> dict[str, int | str]:
     specimens_doc = load("verification/specimens.json")
     owner_adjudications_doc = load("verification/owner_adjudications.json")
     owner_adjudications = owner_adjudications_doc["decisions"]
+    graph_doc = load("verification/authoritative_graph.json")
+    if graph_doc.get("meta", {}).get("schemaVersion") != GRAPH_SCHEMA_VERSION:
+        raise ValueError("authoritative graph schema version is missing or unsupported")
+    if graph_doc.get("meta", {}).get("status") != "authoritative-migrated":
+        raise ValueError("authoritative graph is not in migrated state")
     # 1.1.0 added `finishDecisions` (#119): rule 4 extended to the finish layer. The language
     # decisions read here are unchanged, and the finish half needs no table of its own — its whole
     # effect reaches the database through `finish_units.completeness_status`, which already has a
@@ -617,6 +688,13 @@ def build_database(target: Path) -> dict[str, int | str]:
     metadata = {
         "schema": "snoredex-current-state",
         "schema_version": SCHEMA_VERSION,
+        "graph_schema_version": GRAPH_SCHEMA_VERSION,
+        "graph_status": graph_doc["meta"]["status"],
+        "graph_generated": graph_doc["meta"]["generated"],
+        "graph_entity_count": str(graph_doc["summary"]["entities"]),
+        "graph_edge_count": str(graph_doc["summary"]["edges"]),
+        "graph_migration_input_count": str(graph_doc["summary"]["migrationInputs"]),
+        "graph_source": "verification/authoritative_graph.json",
         "generated": snapshot_date,
         "source_fingerprint_sha256": fingerprint,
         "history_included": "false",
@@ -626,8 +704,9 @@ def build_database(target: Path) -> dict[str, int | str]:
         "candidate_universe_scope_status": "legacy-not-all-locality-complete",
         "legacy_source_commit": baseline["meta"]["sourceCommit"],
         "scope": (
-            "Current-known projection of the immutable legacy Cardmarket candidate universe; "
-            "not a complete all-locality catalogue. Code cards are retained but out-of-scope."
+            "Current-known application projection plus an authoritative migrated locality graph. "
+            "The graph is source-first but not a universal all-locality completeness claim. "
+            "Code cards are retained but out-of-scope."
         ),
         "application_status_policy": (
             "confirmed=exists only when its evidence granularity reaches the exact card, otherwise "
@@ -660,6 +739,53 @@ def build_database(target: Path) -> dict[str, int | str]:
             for item in providers
         ],
     )
+
+    # Materialize the reviewed #140 graph before the legacy compatibility projection.  The
+    # compatibility tables below remain useful to existing applications, while these rows are the
+    # canonical locality-aware identity and migration surface for new consumers.
+    graph_entities = graph_doc["entities"]
+    cursor.executemany(
+        "INSERT INTO graph_entities VALUES (?, ?, ?, ?)",
+        [
+            (
+                row["entityType"], row["entityId"], row["origin"], compact(row["payload"]),
+            )
+            for row in graph_entities
+        ],
+    )
+    cursor.executemany(
+        "INSERT INTO graph_edges VALUES (?, ?, ?, ?, ?, ?)",
+        [
+            (
+                row["fromType"], row["fromId"], row["relation"], row["toType"], row["toId"],
+                compact(row.get("provenance") or {}),
+            )
+            for row in graph_doc["edges"]
+        ],
+    )
+    cursor.executemany(
+        "INSERT INTO graph_migration_dispositions VALUES (?, ?, ?, ?, ?)",
+        [
+            (
+                row["sourceKind"], row["sourceId"], row["disposition"], row.get("targetRef"),
+                row["reason"],
+            )
+            for row in graph_doc["migrationDispositions"]
+        ],
+    )
+    source_rows = []
+    for row in graph_entities:
+        if row["entityType"] != "set-source-record":
+            continue
+        payload = row["payload"]
+        source_rows.append(
+            (
+                row["entityId"], payload["sourceKind"], payload["provider"],
+                payload["providerRecordKey"], payload["retrieved"], payload.get("sourceUrl"),
+                compact(payload.get("raw") or {}),
+            )
+        )
+    cursor.executemany("INSERT INTO graph_source_records VALUES (?, ?, ?, ?, ?, ?, ?)", source_rows)
 
     owner_by_unit: dict[str, dict] = {}
     for decision in owner_adjudications:
@@ -1091,6 +1217,10 @@ def database_stats(target: Path) -> dict[str, int | str]:
             "SELECT COUNT(*) FROM products WHERE variant_token <> 'base' AND variant_name IS NULL"
         ),
         "quality_issues": scalar("SELECT COUNT(*) FROM quality_issues"),
+        "graph_entities": scalar("SELECT COUNT(*) FROM graph_entities"),
+        "graph_edges": scalar("SELECT COUNT(*) FROM graph_edges"),
+        "graph_migration_inputs": scalar("SELECT COUNT(*) FROM graph_migration_dispositions"),
+        "graph_source_records": scalar("SELECT COUNT(*) FROM graph_source_records"),
     }
     connection.close()
     return stats
@@ -1118,8 +1248,8 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10002:
-            problems.append("database PRAGMA user_version is not 10002")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != 10003:
+            problems.append("database PRAGMA user_version is not 10003")
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()
@@ -1139,6 +1269,34 @@ def validate_database(target: Path) -> list[str]:
             actual = connection.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
             if actual != count:
                 problems.append(f"{table}: expected {count}, found {actual}")
+        graph_doc = load("verification/authoritative_graph.json")
+        graph_expected = {
+            "graph_entities": graph_doc["summary"]["entities"],
+            "graph_edges": graph_doc["summary"]["edges"],
+            "graph_migration_dispositions": graph_doc["summary"]["migrationInputs"],
+            "graph_source_records": graph_doc["summary"]["setSourceRecords"],
+        }
+        for table, count in graph_expected.items():
+            actual = connection.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
+            if actual != count:
+                problems.append(f"{table}: expected {count}, found {actual}")
+        graph_meta = {
+            row[0]: row[1] for row in connection.execute(
+                "SELECT key, value FROM metadata WHERE key LIKE 'graph_%'"
+            )
+        }
+        if graph_meta.get("graph_schema_version") != GRAPH_SCHEMA_VERSION:
+            problems.append("database graph schema version is missing or unsupported")
+        if graph_meta.get("graph_status") != "authoritative-migrated":
+            problems.append("database graph is not marked authoritative-migrated")
+        invalid_graph_edges = connection.execute(
+            """SELECT COUNT(*) FROM graph_edges e
+               LEFT JOIN graph_entities n
+                 ON n.entity_type=e.from_type AND n.entity_id=e.from_id
+               WHERE n.entity_id IS NULL"""
+        ).fetchone()[0]
+        if invalid_graph_edges:
+            problems.append(f"{invalid_graph_edges} graph edge source(s) are not materialized")
         hard_negatives = connection.execute(
             "SELECT COUNT(*) FROM product_languages "
             "WHERE application_status='not-printed' AND absence_supported=0 "
@@ -1227,8 +1385,8 @@ The research stores are internally consistent, but they are not a clean applicat
 their own: a consumer otherwise has to join product, language, edition, release, finish, source and
 checklist JSON while remembering which fields are raw marketplace claims. `snoredex.sqlite` is the
 normalized current-known projection of the immutable legacy Cardmarket candidate universe recorded
-in `legacy-cardmarket-baseline.json`. It is not a complete all-locality catalogue and contains no
-evidence journal or migration history.
+in `legacy-cardmarket-baseline.json`, plus the authoritative locality graph migrated by #140. It is
+not a universal all-locality completeness claim and contains no append-only evidence journal.
 
 | Area | Audited current state |
 |---|---:|
@@ -1242,6 +1400,8 @@ evidence journal or migration history.
 | Release rows without row-level source | {stats['release_rows_without_source']} / {stats['release_rows']} |
 | Products without established artist | {stats['missing_artists']} |
 | Opaque V-token products without a physical variant name | {stats['opaque_variants']} |
+| Authoritative graph entities / typed edges | {stats['graph_entities']} / {stats['graph_edges']} |
+| Graph migration inputs with dispositions | {stats['graph_migration_inputs']} ({stats['graph_source_records']} raw set records) |
 
 ## The challenged data points
 
@@ -1284,7 +1444,10 @@ Portuguese `xPRE 076` rows, for example, remain disputed because no owner adjudi
 
 ## Handoff rule
 
-Apps should start from `app_checklist`, `app_products`, and `app_language_availability`. Collection
+New locality-aware consumers should start from `graph_entities`, `graph_edges` and
+`graph_migration_dispositions`; the compatibility views `graph_card_releases`,
+`graph_physical_printings` and `graph_candidate_claims` expose the common nodes. Existing apps may
+continue using `app_checklist`, `app_products`, and `app_language_availability`. Collection
 ownership is deliberately separate; `scripts/tracker.py` creates or refreshes a tracker with
 stable `checklist_id` keys and `have` / `wanted` fields without overwriting user state.
 """
