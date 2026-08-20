@@ -369,11 +369,14 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
     # A finish-store printing is a second claim grain. Only externally confirmed rows become a
     # physical-printing entity; Cardmarket catalogue hints remain candidate claims.
     releases_by_finish_key: dict[tuple[str, str, str], list[str]] = defaultdict(list)
+    releases_by_specimen_key: dict[tuple[str, str, str], list[str]] = defaultdict(list)
     for release_id, release in card_releases.items():
-        if release["viaLegacySetCode"] is None:
-            continue
-        key = (release["viaLegacySetCode"], release["viaLegacyNumber"], release["language"])
-        releases_by_finish_key[key].append(release_id)
+        if release["viaLegacySetCode"] is not None:
+            key = (release["viaLegacySetCode"], release["viaLegacyNumber"], release["language"])
+            releases_by_finish_key[key].append(release_id)
+        else:
+            key = (release["localSetCode"], release["localNumber"], release["language"])
+        releases_by_specimen_key[key].append(release_id)
 
     for finish_unit in finish_units:
         key = (finish_unit["setCode"], str(finish_unit.get("number") or ""),
@@ -440,7 +443,7 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
         claim_id = f"CLAIM:specimen:{specimen_id}"
         proposed_id = f"PHYSICAL:specimen:{specimen_id}"
         key = (specimen["setCode"], str(specimen.get("number") or ""), specimen["language"])
-        release_ids = sorted(set(releases_by_finish_key.get(key, [])))
+        release_ids = sorted(set(releases_by_specimen_key.get(key, [])))
 
         # One image of two cards cannot establish *a* printing. SPEC-0013 photographs the sealed
         # Indonesian pair; its per-card crops are the records that establish.
@@ -520,6 +523,11 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
         key = (card["setCode"], str(card.get("number") or ""),
                card.get("variantToken") or "base")
         identity_collisions[key].append(card["productUrl"])
+    collision_keys = {key for key, urls in identity_collisions.items() if len(urls) > 1}
+    positively_excluded_collision_keys = {
+        key for key in collision_keys if all(card.get("isCodeCard") for card in cards_by_key[key])
+    }
+    unexplained_collision_keys = collision_keys - positively_excluded_collision_keys
 
     card_disposition = {}
     for card in cards:
@@ -679,7 +687,8 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
             "multiVariantCardReleases": len(multi_variant),
             "crossLanguageIdentityMerges": len(cross_language_merges),
             "unexplainedProductSplits": len(unexplained_splits),
-            "identityCollisions": sum(1 for v in identity_collisions.values() if len(v) > 1),
+            "identityCollisions": len(unexplained_collision_keys),
+            "positivelyExcludedIdentityCollisions": len(positively_excluded_collision_keys),
             "unresolvedUnits": len(unresolved_units),
             "unresolvedPhysicalClaims": len(unresolved_physical),
             "orphanSpecimens": len(orphan_specimens),
@@ -714,7 +723,13 @@ def build(cards: list[dict], units: list[dict], finish_units: list[dict],
             "identityCollisions": [
                 {"setCode": k[0], "number": k[1], "variant": k[2],
                  "sourceRecords": sorted(v)}
-                for k, v in sorted(identity_collisions.items()) if len(v) > 1
+                for k, v in sorted(identity_collisions.items()) if k in unexplained_collision_keys
+            ],
+            "positivelyExcludedIdentityCollisions": [
+                {"setCode": k[0], "number": k[1], "variant": k[2],
+                 "sourceRecords": sorted(identity_collisions[k]),
+                 "reason": "all colliding records are code-card products outside the physical-card catalogue"}
+                for k in sorted(positively_excluded_collision_keys)
             ],
             "unresolvedUnits": sorted(unresolved_units, key=lambda item: item["unitId"]),
             "unresolvedPhysicalClaims": sorted(

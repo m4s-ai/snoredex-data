@@ -37,6 +37,24 @@
       "rightSourceRecordId": "SET-SRC-SF-3F07705BCB4E"
     },
     {
+      "aliasRelationId": "ALIASREL:452a8746fc47d2eb",
+      "basis": "positive provider records identify different localities",
+      "equivalent": false,
+      "leftLocalSetIds": [
+        "LOCALSET:WEST:BCR"
+      ],
+      "leftLocality": "WEST",
+      "leftSourceRecordId": "SET-SRC-CM-F747C628A406",
+      "mergeAllowed": false,
+      "rawIdentifier": "BCR",
+      "relationship": "same-raw-code-cross-locality",
+      "rightLocalSetIds": [
+        "LOCALSET:KR:BCR"
+      ],
+      "rightLocality": "KR",
+      "rightSourceRecordId": "SET-SRC-SF-1610F7031B7F"
+    },
+    {
       "aliasRelationId": "ALIASREL:517c7aeeccaf2fa9",
       "basis": "positive provider records identify different localities",
       "equivalent": false,
@@ -179,6 +197,22 @@
       "targetSetEditionId": "EDITION:TW:T-Chinese:sc1b F",
       "targetSourceFirstPrintId": "TW:sc1b F:165/153:base",
       "terminalState": "complete"
+    },
+    {
+      "catchUpRelationId": "CATCHUP:0be22a3d01344e19",
+      "equivalenceScope": "card-work-only",
+      "evidence": {
+        "providerId": "inspected-specimen",
+        "sourceUrl": "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1",
+        "specimenId": "SPEC-0037"
+      },
+      "rawSourceReference": "the legacy Japanese DP1 Snorlax Lv.35 work; equivalence is not admitted here",
+      "relationship": "source-material-catch-up-of-card-release",
+      "setMergeAllowed": false,
+      "sourceCardReleaseIds": [],
+      "targetSetEditionId": "EDITION:KR:Korean:BCR",
+      "targetSourceFirstPrintId": "KR:BCR:30/40:base",
+      "terminalState": "needs-evidence"
     },
     {
       "catchUpRelationId": "CATCHUP:0dc12ab8eb331002",
@@ -8627,7 +8661,7 @@
       "localSetIds": [
         "LOCALSET:WEST:BCR"
       ],
-      "migrationDisposition": "mapped",
+      "migrationDisposition": "split-related",
       "provider": "cardmarket",
       "rawIdentifier": "BCR",
       "rawLocality": "WEST",
@@ -8635,7 +8669,9 @@
       "rawName": "Boundaries Crossed",
       "rawProductKind": "physical-card-set-or-product",
       "rawRecordHash": "sha256:22af7019fbfd18e6e34b3f4a5360c07fa2547f8efd54849a57fa56b9028d4e79",
-      "relatedAliasRelationIds": [],
+      "relatedAliasRelationIds": [
+        "ALIASREL:452a8746fc47d2eb"
+      ],
       "retrieved": "2026-07-21",
       "setEditionIds": [
         "EDITION:WEST:English:BCR",
@@ -63829,7 +63865,7 @@
     }
   ],
   "meta": {
-    "buildHash": "sha256:17ec28ba2f07044df9f352b63c17a39ee5590caf5ffcd71f7dc6332e82bfb5d8",
+    "buildHash": "sha256:4769c53f6668c17bc3e8888806cdfaa59bcebd7b6ee9c3b829811ffb4086f980",
     "coverageVersion": "legacy-set-reconciliation-v1",
     "denominators": {
       "aliases": 135,
@@ -63842,10 +63878,10 @@
       "analysis_confirmed_releases.csv": "sha256:6e12f91aaf02d09006f922964d50b6ad449286c1505d9bff28d61e26dfc585b4",
       "analysis_confirmed_releases.json": "sha256:0f33a52e3bfb0974523c06a3fe864002bd9ee764b5dc2fa3f54cb4f616e7da35",
       "finish_units.json": "sha256:fb452b678e28ea4a74b01b5b12f7c76bcf1427a21875e13991a780e42058e57c",
-      "print_identity_dryrun.json": "sha256:847f2be19fe46e1e3e89bf679f1c7356b9b1296ebf080873da51dbddcb76ed7a",
-      "set_catalogue_dryrun.json": "sha256:cac5096dea2dadf6b794891592d4282eb19403ca7aebdf90ab5f779435ecfbba",
-      "set_catalogue_sources.json": "sha256:12bf0e3ff3eb9cda58425808272778bca438ac7fcc7c3ead4dcb386466d64d28",
-      "source_first_prints.json": "sha256:96faf2c2653e9c2da39076f6440f489928a655727a8309dca7ae784b714430ed"
+      "print_identity_dryrun.json": "sha256:12c09d0c9209a87129b089c13bd29a07eb92dc5e035404fcd7fea52f91235d6a",
+      "set_catalogue_dryrun.json": "sha256:946ebdd26f4d8d2cc6058f14c1e7e5b8083864cb93b374bb02f40fffb92b332e",
+      "set_catalogue_sources.json": "sha256:1fec6d43e79c61a25bbb862b7832962c08ef7ab225a6c0685488b2a0f6af3026",
+      "source_first_prints.json": "sha256:74bc92ca757111d7f657c2c1fd8b8b045c42b9102d9dbb34308f503e3661a0cd"
     },
     "issue": 148,
     "schema": "snoredex-legacy-set-reconciliation",
@@ -63930,10 +63966,10 @@
       "accounted": 135,
       "balanced": true,
       "buckets": {
-        "mapped": 130,
+        "mapped": 129,
         "needs-evidence": 0,
         "positively-retained-legacy": 2,
-        "split-related": 3
+        "split-related": 4
       },
       "coverageVersion": "legacy-set-reconciliation-v1",
       "denominator": 135
@@ -63995,7 +64031,7 @@
     },
     "relationDiagnostics": {
       "aliasMerges": 0,
-      "aliasSplitsOrRelations": 8,
+      "aliasSplitsOrRelations": 9,
       "countDelta": 0,
       "orphanReleaseRows": 0,
       "releaseLanguageLinks": {
@@ -64029,7 +64065,7 @@
     "terminalStates": {
       "blocked-by-source": 1,
       "complete": 567,
-      "needs-evidence": 442
+      "needs-evidence": 443
     }
   }
 }

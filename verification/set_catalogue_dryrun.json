@@ -10,19 +10,19 @@
     "description": "Locality-bearing sets, language/script editions, sourced release events, finish profiles and source-native rarity claims rebuilt from independent source records."
   },
   "counts": {
-    "sourceRecords": 344,
-    "sourceDispositions": 344,
-    "localSets": 169,
+    "sourceRecords": 345,
+    "sourceDispositions": 345,
+    "localSets": 170,
     "setConcepts": 0,
-    "setEditions": 376,
+    "setEditions": 377,
     "editionCandidates": 84,
     "releaseEvents": 45,
     "finishProfiles": 1,
-    "cardReleaseRefs": 497,
+    "cardReleaseRefs": 498,
     "rarityClaims": 518,
     "profileFinishClaims": 3,
-    "aliasAssertions": 215,
-    "sourceAssertions": 781
+    "aliasAssertions": 216,
+    "sourceAssertions": 782
   },
   "sourceRecords": [
     {
@@ -9055,6 +9055,42 @@
           "https://asia.pokemon-card.com/id/card-img/id00015784.png"
         ]
       }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-1610F7031B7F",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "KR\u001fBCR",
+      "retrieved": "2026-08-20",
+      "raw": {
+        "localCode": "BCR",
+        "localName": null,
+        "locality": "KR",
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "printIds": [
+          "KR:BCR:30/40:base"
+        ],
+        "providers": [
+          "inspected-specimen"
+        ],
+        "sourceUrls": [
+          "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1"
+        ],
+        "printedSetSize": 40,
+        "printedSetSizeBasis": "the denominator in the positively identified 30/40 card number",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "30/40"
+        ],
+        "observedCoverage": "one owner specimen and its referenced Korean retailer listing, not a set enumeration",
+        "markAssetUrls": [],
+        "cardImageUrls": []
+      }
     }
   ],
   "sourceDispositions": [
@@ -10859,6 +10895,12 @@
       "reason": "provider locality and raw local code identify this local-set node"
     },
     {
+      "sourceRecordId": "SET-SRC-SF-1610F7031B7F",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:KR:BCR",
+      "reason": "provider locality and raw local code identify this local-set node"
+    },
+    {
       "sourceRecordId": "SET-SRC-SF-1AB58D3D1969",
       "disposition": "mapped",
       "targetRef": "LOCALSET:ID:sc1b%20I",
@@ -12222,6 +12264,16 @@
       "productKind": "physical-card-set-or-product",
       "sourceRecordIds": [
         "SET-SRC-CM-FB22EE070A55"
+      ]
+    },
+    {
+      "localSetId": "LOCALSET:KR:BCR",
+      "locality": "KR",
+      "localCode": "BCR",
+      "observedNames": [],
+      "productKind": "physical-card-set-or-product",
+      "sourceRecordIds": [
+        "SET-SRC-SF-1610F7031B7F"
       ]
     },
     {
@@ -14281,6 +14333,18 @@
       "establishingEvidenceIds": [
         "CLAIM:legacy:U0774",
         "CLAIM:legacy:U0779"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:KR:Korean:BCR",
+      "localSetId": "LOCALSET:KR:BCR",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localCode": "BCR",
+      "state": "identified",
+      "establishingEvidenceIds": [
+        "CLAIM:source-first:KR:BCR:30/40:base"
       ]
     },
     {
@@ -19941,6 +20005,12 @@
       "cardReleaseId": "RELEASE:JP:Japanese:xsv2a:143:Snorlax-Voraciousness-Thudding-Press",
       "setEditionId": "EDITION:JP:Japanese:xsv2a",
       "collectorNumber": "143",
+      "origin": "print-identity-dryrun"
+    },
+    {
+      "cardReleaseId": "RELEASE:KR:Korean:BCR:30/40:unmapped-work:SPEC-0037",
+      "setEditionId": "EDITION:KR:Korean:BCR",
+      "collectorNumber": "30/40",
       "origin": "print-identity-dryrun"
     },
     {
@@ -27904,6 +27974,17 @@
       "reversibleProjection": true
     },
     {
+      "aliasAssertionId": "ALIAS:356f1661ab15f9de",
+      "sourceRecordId": "SET-SRC-SF-1610F7031B7F",
+      "provider": "mixed-positive-evidence",
+      "rawIdentifier": "BCR",
+      "targetType": "local-set",
+      "localSetId": "LOCALSET:KR:BCR",
+      "setEditionId": null,
+      "relationship": "identifies",
+      "reversibleProjection": true
+    },
+    {
       "aliasAssertionId": "ALIAS:36aace5715ce9961",
       "sourceRecordId": "SET-SRC-CM-D7A944CF2BDF",
       "provider": "cardmarket",
@@ -30609,6 +30690,15 @@
         "localCode": "xsv2a",
         "language": "Japanese",
         "script": "Jpan",
+        "state": "identified"
+      },
+      {
+        "setEditionId": "EDITION:KR:Korean:BCR",
+        "localSetId": "LOCALSET:KR:BCR",
+        "locality": "KR",
+        "localCode": "BCR",
+        "language": "Korean",
+        "script": "Hang",
         "state": "identified"
       },
       {
@@ -34628,6 +34718,12 @@
       "localSetId": "LOCALSET:CN:CSZC"
     },
     {
+      "sourceAssertionId": "SOURCEASSERTION:4299f6ca76599e67",
+      "sourceRecordId": "SET-SRC-SF-1610F7031B7F",
+      "assertionKind": "asserts-local-set",
+      "localSetId": "LOCALSET:KR:BCR"
+    },
+    {
       "sourceAssertionId": "SOURCEASSERTION:430157543c011948",
       "sourceRecordId": "SET-SRC-CM-D42CB71D56A2",
       "assertionKind": "asserts-rarity-claim",
@@ -38068,15 +38164,23 @@
   ],
   "reports": {
     "accounting": {
-      "sourceRecords": 344,
+      "sourceRecords": 345,
       "dispositions": {
-        "mapped": 215,
+        "mapped": 216,
         "needs-evidence": 127,
         "positively-excluded": 2
       },
       "balanced": true
     },
     "rawCodeCollisions": [
+      {
+        "rawCode": "BCR",
+        "localSetIds": [
+          "LOCALSET:KR:BCR",
+          "LOCALSET:WEST:BCR"
+        ],
+        "resolution": "kept distinct by locality; alias equivalence requires evidence"
+      },
       {
         "rawCode": "S-P",
         "localSetIds": [
@@ -38109,6 +38213,14 @@
     ],
     "localNameCollisions": [],
     "falseMergeCandidates": [
+      {
+        "rawCode": "BCR",
+        "localSetIds": [
+          "LOCALSET:KR:BCR",
+          "LOCALSET:WEST:BCR"
+        ],
+        "resolution": "kept distinct by locality; alias equivalence requires evidence"
+      },
       {
         "rawCode": "S-P",
         "localSetIds": [
@@ -40846,11 +40958,11 @@
       "foreignKeyViolations": 0,
       "localSetLocalityGuardPassed": true,
       "tableCounts": {
-        "source_record": 344,
+        "source_record": 345,
         "set_concept": 0,
-        "local_set": 169,
+        "local_set": 170,
         "local_set_concept": 0,
-        "set_edition": 376,
+        "set_edition": 377,
         "edition_relation": 0,
         "release_event": 45,
         "release_event_market": 45,
@@ -40858,11 +40970,11 @@
         "finish_profile": 1,
         "finish_profile_edition": 3,
         "finish_profile_rule": 3,
-        "card_release_ref": 497,
+        "card_release_ref": 498,
         "rarity_claim": 518,
-        "alias_assertion": 215,
-        "source_assertion": 781,
-        "record_disposition": 344
+        "alias_assertion": 216,
+        "source_assertion": 782,
+        "record_disposition": 345
       }
     }
   },
@@ -40936,9 +41048,9 @@
       "fixtureId": "event-optional-set-editions",
       "passed": true,
       "detail": {
-        "setEditions": 376,
+        "setEditions": 377,
         "editionReleaseEventLinks": 45,
-        "editionsWithoutEvents": 331
+        "editionsWithoutEvents": 332
       }
     },
     {

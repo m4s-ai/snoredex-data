@@ -24,23 +24,23 @@
     "legacyProductIdentityTuples": 196,
     "legacyLanguageUnits": 719,
     "legacyExcludedCodeCardUnits": 75,
-    "sourceFirstRecords": 46,
+    "sourceFirstRecords": 47,
     "finishPrintingClaims": 693,
-    "candidateClaims": 1541,
+    "candidateClaims": 1542,
     "candidateClaimDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 228,
-      "established-and-mapped": 1154,
+      "candidate-needs-evidence": 227,
+      "established-and-mapped": 1156,
       "positively-excluded": 75
     },
-    "setEditionNodes": 460,
-    "cardReleaseNodes": 608,
-    "cardReleaseNodesIdentified": 497,
+    "setEditionNodes": 461,
+    "cardReleaseNodes": 609,
+    "cardReleaseNodesIdentified": 498,
     "cardReleaseNodesNeedingLocalIdentifier": 111,
-    "physicalPrintingNodes": 473,
+    "physicalPrintingNodes": 474,
     "physicalPrintingsByEvidenceClass": {
       "finish-store": 468,
-      "inspected-specimen": 5
+      "inspected-specimen": 6
     },
     "specimenObservationsCorroboratingFinishStore": 1,
     "contradictedOnlyCardReleaseProposals": 75,
@@ -48,16 +48,17 @@
     "multiVariantCardReleases": 73,
     "crossLanguageIdentityMerges": 0,
     "unexplainedProductSplits": 0,
-    "identityCollisions": 1,
+    "identityCollisions": 0,
+    "positivelyExcludedIdentityCollisions": 1,
     "unresolvedUnits": 0,
-    "unresolvedPhysicalClaims": 1,
-    "orphanSpecimens": 1,
-    "sourceFirstPrintsAdmitted": 46,
+    "unresolvedPhysicalClaims": 0,
+    "orphanSpecimens": 0,
+    "sourceFirstPrintsAdmitted": 47,
     "sourceFirstPrintsHeld": 0,
     "cardReleaseNodesByLocality": {
       "WEST": 348,
       "JP": 66,
-      "KR": 52,
+      "KR": 53,
       "CN": 42,
       "TW": 38,
       "ID": 35,
@@ -5816,7 +5817,8 @@
     ],
     "crossLanguageIdentityMerges": [],
     "unexplainedProductSplits": [],
-    "identityCollisions": [
+    "identityCollisions": [],
+    "positivelyExcludedIdentityCollisions": [
       {
         "setCode": "PKM",
         "number": "",
@@ -5825,26 +5827,13 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Products/Online-Code-Card-Snorlax-GX-Box-PKM",
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Products/Online-Code-Card-Snorlax-Pin-Collection-PKM",
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Products/Online-Code-Card-Tag-Team-Tins-Eevee-Snorlax-GX-Tin-PKM"
-        ]
+        ],
+        "reason": "all colliding records are code-card products outside the physical-card catalogue"
       }
     ],
     "unresolvedUnits": [],
-    "unresolvedPhysicalClaims": [
-      {
-        "printingId": "PHYSICAL:specimen:SPEC-0030",
-        "releaseCandidates": [],
-        "reason": "specimen observation does not resolve to exactly one card release"
-      }
-    ],
-    "orphanSpecimens": [
-      {
-        "specimenId": "SPEC-0037",
-        "setCode": "BCR",
-        "number": "30/40",
-        "language": "Korean",
-        "reason": "no product or source-first release carries these identifiers"
-      }
-    ]
+    "unresolvedPhysicalClaims": [],
+    "orphanSpecimens": []
   },
   "candidateClaims": [
     {
@@ -23164,6 +23153,18 @@
       "reason": "positive source-first specimen/card record"
     },
     {
+      "claimId": "CLAIM:source-first:KR:BCR:30/40:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "KR:BCR:30/40:base",
+      "sourceRecord": "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:KR:Korean:BCR:30/40:unmapped-work:SPEC-0037",
+      "materializedTargetId": "RELEASE:KR:Korean:BCR:30/40:unmapped-work:SPEC-0037",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
       "claimId": "CLAIM:source-first:KR:S-P:101:base",
       "claimKind": "card-release",
       "sourceKind": "source-first-record",
@@ -23558,10 +23559,10 @@
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0030",
       "evidenceStatus": "observed",
-      "disposition": "candidate-needs-evidence",
+      "disposition": "established-and-mapped",
       "proposedTargetId": "PHYSICAL:specimen:SPEC-0030",
-      "materializedTargetId": null,
-      "reason": "specimen does not resolve to exactly one card release"
+      "materializedTargetId": "PHYSICAL:specimen:SPEC-0030",
+      "reason": "finish observed on an identified physical scan"
     }
   ],
   "setEditions": [
@@ -25192,6 +25193,19 @@
       "establishingClaimIds": [
         "CLAIM:legacy:U0774",
         "CLAIM:legacy:U0779"
+      ]
+    },
+    {
+      "setEditionId": "EDITION:KR:Korean:BCR",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "BCR",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "viaLegacySetCodes": [],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:BCR:30/40:base"
       ]
     },
     {
@@ -34998,6 +35012,34 @@
       "sourceRecords": [
         "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)"
       ]
+    },
+    {
+      "cardReleaseId": "RELEASE:KR:Korean:BCR:30/40:unmapped-work:SPEC-0037",
+      "setEditionId": "EDITION:KR:Korean:BCR",
+      "locality": "KR",
+      "language": "Korean",
+      "script": "Hang",
+      "localSetCode": "BCR",
+      "localNumber": "30/40",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:KR:BCR:30/40:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:KR:BCR:30/40:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1"
+      ],
+      "sourceFirstRecordId": "KR:BCR:30/40:base"
     },
     {
       "cardReleaseId": "RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
@@ -56483,6 +56525,22 @@
       "establishingClaimId": "CLAIM:specimen:SPEC-0020",
       "establishingSpecimenId": "SPEC-0020",
       "basis": "\"carrying a Master Ball mirror foil pattern\"; \"The pattern is strong and covers the whole face\"."
+    },
+    {
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0030",
+      "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
+      "finish": "mirror-holo",
+      "foilPattern": null,
+      "markings": null,
+      "distribution": null,
+      "cardSize": "standard",
+      "errorClass": null,
+      "classificationState": "classified-from-inspected-specimen",
+      "sourceFinishUnitId": null,
+      "sourcePrintingId": null,
+      "establishingClaimId": "CLAIM:specimen:SPEC-0030",
+      "establishingSpecimenId": "SPEC-0030",
+      "basis": "The owner labelled this photograph \"Mirror Finish\" when supplying it in issue #166, and the card face shows a textured foil across its whole surface including the artwork window. Recorded as the technical finish mirror-holo on the owner's identification; no foil pattern is named because none is legible from the photograph."
     }
   ]
 }
