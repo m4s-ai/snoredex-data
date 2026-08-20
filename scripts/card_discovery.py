@@ -2140,6 +2140,41 @@ def reuse_unfinished_requests(
             for field in REQUEST_ACQUISITION_FIELDS
         ):
             continue
+        newer_source_run_ids = []
+        for candidate_dir in run_directories():
+            if candidate_dir.name <= source_run_id:
+                continue
+            candidate_manifest = read_json(candidate_dir / "manifest.json")
+            if candidate_manifest.get("status") != "complete":
+                continue
+            candidate_contract_path = candidate_dir / "contract.json"
+            if not candidate_contract_path.is_file() or candidate_manifest.get(
+                "contractHash"
+            ) != content_hash(read_json(candidate_contract_path)):
+                raise DiscoveryError(
+                    f"reuse candidate contract hash differs: {candidate_dir.name}"
+                )
+            candidate_request = next(
+                (
+                    row for row in candidate_manifest["requests"]
+                    if row["sliceId"] == request["sliceId"]
+                ),
+                None,
+            )
+            if (
+                candidate_request is not None
+                and candidate_request["checkpoint"].get("complete")
+                and all(
+                    request[field] == candidate_request[field]
+                    for field in REQUEST_ACQUISITION_FIELDS
+                )
+            ):
+                newer_source_run_ids.append(candidate_dir.name)
+        if newer_source_run_ids:
+            raise DiscoveryError(
+                "reuse source is not the newest compatible complete request for "
+                f"{request['sliceId']}: {max(newer_source_run_ids)}"
+            )
         target_raw = run_dir / "raw" / request["sliceId"]
         if target_raw.exists():
             raise DiscoveryError(

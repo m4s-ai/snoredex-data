@@ -356,6 +356,9 @@ class CardDiscoveryTests(unittest.TestCase):
                 }],
                 "failures": [{"sliceId": "fixture-slice"}],
             }
+            (current_dir / "manifest.json").write_text(
+                json.dumps({**manifest, "status": "incomplete"}), encoding="utf-8"
+            )
             with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
                 discovery.reuse_unfinished_requests(current_dir, manifest, source_id)
 
@@ -370,6 +373,41 @@ class CardDiscoveryTests(unittest.TestCase):
                 ),
                 "retained",
             )
+
+            newer_id = "20260813T160000Z"
+            newer_dir = runs_dir / newer_id
+            newer_raw = newer_dir / "raw" / "fixture-slice"
+            newer_raw.mkdir(parents=True)
+            (newer_raw / "page.html").write_text("newer", encoding="utf-8")
+            (newer_dir / "contract.json").write_text(
+                json.dumps(contract), encoding="utf-8"
+            )
+            newer_request = copy.deepcopy(source_request)
+            newer_request["runId"] = newer_id
+            newer_request["retrievedAt"] = "2026-08-13T16:00:00Z"
+            (newer_dir / "manifest.json").write_text(json.dumps({
+                "runId": newer_id,
+                "status": "complete",
+                "contractHash": discovery.content_hash(contract),
+                "requests": [newer_request],
+            }), encoding="utf-8")
+            stale_target_dir = runs_dir / "20260820T130000Z"
+            stale_target_dir.mkdir()
+            stale_manifest = copy.deepcopy(manifest)
+            stale_manifest["runId"] = "20260820T130000Z"
+            stale_manifest["requests"][0]["runId"] = "20260820T130000Z"
+            stale_manifest["requests"][0]["checkpoint"] = {"complete": False}
+            (stale_target_dir / "manifest.json").write_text(
+                json.dumps({**stale_manifest, "status": "incomplete"}), encoding="utf-8"
+            )
+            with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
+                with self.assertRaisesRegex(
+                    discovery.DiscoveryError,
+                    "not the newest compatible complete request",
+                ):
+                    discovery.reuse_unfinished_requests(
+                        stale_target_dir, stale_manifest, source_id
+                    )
 
     def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
         old = [

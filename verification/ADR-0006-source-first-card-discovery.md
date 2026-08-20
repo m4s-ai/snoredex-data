@@ -217,8 +217,8 @@ candidate universe, reproduce each versioned run without network access, resume 
 and expose new/ambiguous records without changing evidence verdicts. If one unrelated provider
 blocks a resumed refresh, `--reuse-unfinished-from-run` may carry forward only exact unchanged
 requests from a complete immutable run. The carried request keeps its original retrieval timestamp
-and records its source run; changed acquisition fields, partial raw data, and incomplete source runs
-are rejected. The remaining 32-candidate
+and records its source run; changed acquisition fields, partial raw data, incomplete source runs,
+and a source superseded by a newer exact complete request are rejected. The remaining 32-candidate
 Taiwan queue is intentionally not auto-merged: resolving local set-symbol aliases, local
 collector-number equivalence, TW/HK relationships, and shared works belongs to the locality
 reconciliation loops. Likewise, the Italian filter's twelve matches, the shared Western locale
