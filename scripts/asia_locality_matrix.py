@@ -367,13 +367,18 @@ def validate(manifest: dict[str, Any], data: dict[str, Any]) -> list[str]:
                     not isinstance(expected_same_work.get("cardKey"), str) or
                     not expected_same_work["cardKey"] or
                     not isinstance(expected_same_work.get("counterpartUnitIds"), list) or
-                    not expected_same_work["counterpartUnitIds"]):
+                    not expected_same_work["counterpartUnitIds"] or
+                    any(not isinstance(unit_id, str) or not unit_id
+                        for unit_id in expected_same_work["counterpartUnitIds"])):
                 errors.append(f"{regression_id}: expectedSameWork contract is incomplete")
             else:
                 work = expected_same_work["cardKey"]
-                unit_ids = [reference.split(":", 1)[1] for reference in refs
-                            if reference.startswith("unit:")]
-                unit_ids += expected_same_work["counterpartUnitIds"]
+                primary_unit_ids = [reference.split(":", 1)[1] for reference in refs
+                                    if reference.startswith("unit:")]
+                if not primary_unit_ids:
+                    errors.append(
+                        f"{regression_id}: expectedSameWork requires a unit evidence reference")
+                unit_ids = primary_unit_ids + expected_same_work["counterpartUnitIds"]
                 if len(unit_ids) != len(set(unit_ids)):
                     errors.append(f"{regression_id}: same-work units contain duplicates")
                 for unit_id in unit_ids:

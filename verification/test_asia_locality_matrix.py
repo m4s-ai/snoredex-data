@@ -111,6 +111,23 @@ class AsiaLocalityMatrixTests(unittest.TestCase):
                     for error in matrix.validate(self.manifest, data)
                 ))
 
+    def test_same_work_requires_primary_unit_evidence(self) -> None:
+        mutated = copy.deepcopy(self.manifest)
+        regression = next(
+            item for item in mutated["minimumRegressions"]
+            if item["regressionId"] == "cn-sv9-075"
+        )
+        source_first_ref = "source-first:TW:SV-P:215:base"
+        regression["evidenceRefs"] = [source_first_ref]
+        regression["expectedPrints"] = [{
+            "reference": source_first_ref, "locality": "TW", "language": "T-Chinese",
+            "localSetCode": "SV-P", "localNumber": "215",
+        }]
+        self.assertTrue(any(
+            "expectedSameWork requires a unit evidence reference" in error
+            for error in matrix.validate(mutated, matrix.indexes(mutated))
+        ))
+
     def test_rekey_must_match_declared_relationship(self) -> None:
         mutated = copy.deepcopy(self.manifest)
         regression = next(
