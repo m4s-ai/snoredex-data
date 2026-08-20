@@ -1,12 +1,13 @@
 {
   "meta": {
     "schema": "snoredex-print-identity",
-    "schemaVersion": "0.2.0",
+    "schemaVersion": "0.3.0",
     "status": "accepted design refined by #145; not in force until #140",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "issues": [
       "https://github.com/m4s-ai/snoredex-data/issues/134",
-      "https://github.com/m4s-ai/snoredex-data/issues/145"
+      "https://github.com/m4s-ai/snoredex-data/issues/145",
+      "https://github.com/m4s-ai/snoredex-data/issues/236"
     ],
     "description": "Separates candidate assertions, language-bearing card releases, and positively evidenced manufactured printings. The dry run maps every legacy/source input onto this boundary without changing an authoritative store.",
     "notAnEvidenceChange": "Authority tiers, providerId, corroboration, absence scopes and owner adjudications are untouched. This schema controls when an assertion may create an existence-bearing node; #137 controls evidence inference."
@@ -87,7 +88,9 @@
         "state",
         "work",
         "workMappingState",
-        "establishingClaimIds"
+        "establishingClaimIds",
+        "sourceFirstRecordIds",
+        "legacyCounterpartUnitIds"
       ],
       "states": {
         "identified": "local set code and collector number are known",
@@ -184,6 +187,7 @@
         "local-code-alias",
         "catalogue-alias",
         "same-work-proposal",
+        "same-work-decision",
         "same-release-proposal"
       ]
     }

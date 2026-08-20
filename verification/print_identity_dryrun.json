@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema": "snoredex-print-identity-dryrun",
-    "schemaVersion": "0.2.0",
+    "schemaVersion": "0.3.0",
     "generated": "2026-08-20",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "status": "dry-run — proposes nothing to authoritative stores, migrates nothing",
@@ -56,6 +56,8 @@
     "heldSpecimenDispositions": 1,
     "sourceFirstPrintsAdmitted": 46,
     "sourceFirstPrintsHeld": 1,
+    "equivalenceAssertions": 1,
+    "legacyIssueRekeySets": 1,
     "cardReleaseNodesByLocality": {
       "WEST": 348,
       "JP": 66,
@@ -5843,8 +5845,251 @@
         "language": "Korean",
         "reason": "held pending a positively identified source-native set code"
       }
+    ],
+    "legacyIssueRekeys": [
+      {
+        "issueNumber": 84,
+        "locality": "TW",
+        "language": "T-Chinese",
+        "accountedLegacyUnits": 21,
+        "linkedLocalCounterparts": 1,
+        "needsPositiveLocalIdentity": 20,
+        "rows": [
+          {
+            "legacyUnitId": "U0265",
+            "legacyClaimId": "CLAIM:legacy:U0265",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "sm10 076",
+            "disposition": "linked-local-counterpart",
+            "sourceFirstRecordIds": [
+              "TW:AS5a:142:base"
+            ],
+            "localCardReleaseIds": [
+              "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter"
+            ],
+            "assertionIds": [
+              "ASSERT:same-work:U0265:TW:AS5a:142:base"
+            ]
+          },
+          {
+            "legacyUnitId": "U0382",
+            "legacyClaimId": "CLAIM:legacy:U0382",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "PJU unnumbered",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0414",
+            "legacyClaimId": "CLAIM:legacy:U0414",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "sm9 066",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0429",
+            "legacyClaimId": "CLAIM:legacy:U0429",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "G2 unnumbered",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0478",
+            "legacyClaimId": "CLAIM:legacy:U0478",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "DP1 unnumbered",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0542",
+            "legacyClaimId": "CLAIM:legacy:U0542",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "XY10 057",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0546",
+            "legacyClaimId": "CLAIM:legacy:U0546",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "LL 028",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0558",
+            "legacyClaimId": "CLAIM:legacy:U0558",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "sm9 115",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0562",
+            "legacyClaimId": "CLAIM:legacy:U0562",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "XY2 066",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0577",
+            "legacyClaimId": "CLAIM:legacy:U0577",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "BW-P 207",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0580",
+            "legacyClaimId": "CLAIM:legacy:U0580",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "BW7 055",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0584",
+            "legacyClaimId": "CLAIM:legacy:U0584",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "smL 038",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0587",
+            "legacyClaimId": "CLAIM:legacy:U0587",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "HXY 026",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0607",
+            "legacyClaimId": "CLAIM:legacy:U0607",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "EC5 062",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0624",
+            "legacyClaimId": "CLAIM:legacy:U0624",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "DP-P 127",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0634",
+            "legacyClaimId": "CLAIM:legacy:U0634",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "sm9 106",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0638",
+            "legacyClaimId": "CLAIM:legacy:U0638",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "DP-P 126",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0645",
+            "legacyClaimId": "CLAIM:legacy:U0645",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "HSZ 027",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0662",
+            "legacyClaimId": "CLAIM:legacy:U0662",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "XY-P 149",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0665",
+            "legacyClaimId": "CLAIM:legacy:U0665",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "XY-P 261",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          },
+          {
+            "legacyUnitId": "U0681",
+            "legacyClaimId": "CLAIM:legacy:U0681",
+            "legacyStatus": "contradicted",
+            "legacyProduct": "20th 047",
+            "disposition": "needs-positive-local-identity",
+            "sourceFirstRecordIds": [],
+            "localCardReleaseIds": [],
+            "assertionIds": []
+          }
+        ]
+      }
     ]
   },
+  "equivalenceAssertions": [
+    {
+      "assertionId": "ASSERT:same-work:U0265:TW:AS5a:142:base",
+      "assertionType": "same-work-decision",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+      "toId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
+      "legacyUnitId": "U0265",
+      "sourceFirstRecordId": "TW:AS5a:142:base",
+      "assertedBy": "Scarrty",
+      "assertedAt": "2026-08-04",
+      "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5184898868",
+      "evidence": "The owner identifies AS5a 142 as the Traditional-Chinese printing of the work represented by legacy Japanese sm10 076 and supplies the 52poke record and card image. Both local release identities remain distinct.",
+      "destructiveMergeAllowed": false
+    }
+  ],
   "candidateClaims": [
     {
       "claimId": "CLAIM:excluded:U0563",
@@ -23350,8 +23595,8 @@
       "sourceRecord": "https://s1.52poke.com/wiki/7/7b/AS5a142.png",
       "evidenceStatus": "confirmed",
       "disposition": "established-and-mapped",
-      "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:unmapped-work:SPEC-0024",
-      "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:unmapped-work:SPEC-0024",
+      "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+      "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -31943,7 +32188,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/2501/"
       ],
-      "sourceFirstRecordId": "ID:AC3D:120/172:base"
+      "sourceFirstRecordIds": [
+        "ID:AC3D:120/172:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:AC3a:145/205:unmapped-work:None",
@@ -31971,7 +32218,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/2129/"
       ],
-      "sourceFirstRecordId": "ID:AC3a:145/205:base"
+      "sourceFirstRecordIds": [
+        "ID:AC3a:145/205:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:AS1D:108/140:unmapped-work:None",
@@ -31999,7 +32248,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/3466/"
       ],
-      "sourceFirstRecordId": "ID:AS1D:108/140:base"
+      "sourceFirstRecordIds": [
+        "ID:AS1D:108/140:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:AS1b:112/150:unmapped-work:None",
@@ -32027,7 +32278,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/1605/"
       ],
-      "sourceFirstRecordId": "ID:AS1b:112/150:base"
+      "sourceFirstRecordIds": [
+        "ID:AS1b:112/150:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:S-P:030:unmapped-work:None",
@@ -32055,7 +32308,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/5067/"
       ],
-      "sourceFirstRecordId": "ID:S-P:030:base"
+      "sourceFirstRecordIds": [
+        "ID:S-P:030:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:S-P:052:unmapped-work:None",
@@ -32083,7 +32338,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/5089/"
       ],
-      "sourceFirstRecordId": "ID:S-P:052:base"
+      "sourceFirstRecordIds": [
+        "ID:S-P:052:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:S-P:100:unmapped-work:None",
@@ -32111,7 +32368,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/5137/"
       ],
-      "sourceFirstRecordId": "ID:S-P:100:base"
+      "sourceFirstRecordIds": [
+        "ID:S-P:100:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:S-P:356:unmapped-work:None",
@@ -32139,7 +32398,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/6671/"
       ],
-      "sourceFirstRecordId": "ID:S-P:356:base"
+      "sourceFirstRecordIds": [
+        "ID:S-P:356:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:SM-P:166:unmapped-work:SPEC-0027",
@@ -32165,7 +32426,9 @@
       "legacyVariants": [],
       "legacyProducts": [],
       "sourceRecords": [],
-      "sourceFirstRecordId": "ID:SM-P:166:base"
+      "sourceFirstRecordIds": [
+        "ID:SM-P:166:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:SV4s I:118/132:unmapped-work:None",
@@ -32193,7 +32456,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/9774/"
       ],
-      "sourceFirstRecordId": "ID:SV4s I:118/132:base"
+      "sourceFirstRecordIds": [
+        "ID:SV4s I:118/132:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:SV6s I:136/167:unmapped-work:None",
@@ -32221,7 +32486,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/13757/"
       ],
-      "sourceFirstRecordId": "ID:SV6s I:136/167:base"
+      "sourceFirstRecordIds": [
+        "ID:SV6s I:136/167:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:SV9s I:109/139:unmapped-work:None",
@@ -32249,7 +32516,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/15784/"
       ],
-      "sourceFirstRecordId": "ID:SV9s I:109/139:base"
+      "sourceFirstRecordIds": [
+        "ID:SV9s I:109/139:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc1D I:132/164:unmapped-work:None",
@@ -32277,7 +32546,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/764/"
       ],
-      "sourceFirstRecordId": "ID:sc1D I:132/164:base"
+      "sourceFirstRecordIds": [
+        "ID:sc1D I:132/164:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc1D I:133/164:unmapped-work:None",
@@ -32305,7 +32576,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/765/"
       ],
-      "sourceFirstRecordId": "ID:sc1D I:133/164:base"
+      "sourceFirstRecordIds": [
+        "ID:sc1D I:133/164:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc1a I:127/154:unmapped-work:None",
@@ -32333,7 +32606,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/454/"
       ],
-      "sourceFirstRecordId": "ID:sc1a I:127/154:base"
+      "sourceFirstRecordIds": [
+        "ID:sc1a I:127/154:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc1b I:119/153:unmapped-work:None",
@@ -32361,7 +32636,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/600/"
       ],
-      "sourceFirstRecordId": "ID:sc1b I:119/153:base"
+      "sourceFirstRecordIds": [
+        "ID:sc1b I:119/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc1b I:120/153:unmapped-work:None",
@@ -32389,7 +32666,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/601/"
       ],
-      "sourceFirstRecordId": "ID:sc1b I:120/153:base"
+      "sourceFirstRecordIds": [
+        "ID:sc1b I:120/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:sc3b I:126/158:unmapped-work:None",
@@ -32417,7 +32696,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/3982/"
       ],
-      "sourceFirstRecordId": "ID:sc3b I:126/158:base"
+      "sourceFirstRecordIds": [
+        "ID:sc3b I:126/158:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:scA I:084/135:unmapped-work:None",
@@ -32445,7 +32726,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/2796/"
       ],
-      "sourceFirstRecordId": "ID:scA I:084/135:base"
+      "sourceFirstRecordIds": [
+        "ID:scA I:084/135:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:scD I:111/159:unmapped-work:None",
@@ -32473,7 +32756,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/id/card-search/detail/4527/"
       ],
-      "sourceFirstRecordId": "ID:scD I:111/159:base"
+      "sourceFirstRecordIds": [
+        "ID:scD I:111/159:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
@@ -35024,7 +35309,9 @@
       "sourceRecords": [
         "https://github.com/user-attachments/assets/7302c36e-1046-458a-a397-4e594916f682"
       ],
-      "sourceFirstRecordId": "KR:S-P:101:base"
+      "sourceFirstRecordIds": [
+        "KR:S-P:101:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
@@ -35050,7 +35337,9 @@
       "legacyVariants": [],
       "legacyProducts": [],
       "sourceRecords": [],
-      "sourceFirstRecordId": "KR:SM-P:140:base"
+      "sourceFirstRecordIds": [
+        "KR:SM-P:140:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
@@ -35076,7 +35365,9 @@
       "legacyVariants": [],
       "legacyProducts": [],
       "sourceRecords": [],
-      "sourceFirstRecordId": "KR:XY-P:167:base"
+      "sourceFirstRecordIds": [
+        "KR:XY-P:167:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:KR:Korean:via-20th:unknown-local-set:via-047:Snorlax-Stir-and-Snooze-Sleepy-Press:unknown-local-id",
@@ -36629,7 +36920,9 @@
       "sourceRecords": [
         "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png"
       ],
-      "sourceFirstRecordId": "LATAM:JTG LA:117/159:base"
+      "sourceFirstRecordIds": [
+        "LATAM:JTG LA:117/159:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:LATAM:Spanish:POR LA:063/088:unmapped-work:SPEC-0036",
@@ -36657,7 +36950,9 @@
       "sourceRecords": [
         "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png"
       ],
-      "sourceFirstRecordId": "LATAM:POR LA:063/088:base"
+      "sourceFirstRecordIds": [
+        "LATAM:POR LA:063/088:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
@@ -36685,7 +36980,9 @@
       "sourceRecords": [
         "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png"
       ],
-      "sourceFirstRecordId": "LATAM:SVP LA:184:base"
+      "sourceFirstRecordIds": [
+        "LATAM:SVP LA:184:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:SM-P:083:unmapped-work:SPEC-0026",
@@ -36711,7 +37008,9 @@
       "legacyVariants": [],
       "legacyProducts": [],
       "sourceRecords": [],
-      "sourceFirstRecordId": "TH:SM-P:083:base"
+      "sourceFirstRecordIds": [
+        "TH:SM-P:083:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:sc1D T:132/164:unmapped-work:None",
@@ -36739,7 +37038,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/439/"
       ],
-      "sourceFirstRecordId": "TH:sc1D T:132/164:base"
+      "sourceFirstRecordIds": [
+        "TH:sc1D T:132/164:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:sc1D T:133/164:unmapped-work:None",
@@ -36767,7 +37068,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/440/"
       ],
-      "sourceFirstRecordId": "TH:sc1D T:133/164:base"
+      "sourceFirstRecordIds": [
+        "TH:sc1D T:133/164:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:sc1a T:127/154:unmapped-work:None",
@@ -36795,7 +37098,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/127/"
       ],
-      "sourceFirstRecordId": "TH:sc1a T:127/154:base"
+      "sourceFirstRecordIds": [
+        "TH:sc1a T:127/154:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:sc1b T:119/153:unmapped-work:None",
@@ -36823,7 +37128,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/273/"
       ],
-      "sourceFirstRecordId": "TH:sc1b T:119/153:base"
+      "sourceFirstRecordIds": [
+        "TH:sc1b T:119/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:sc1b T:120/153:unmapped-work:None",
@@ -36851,7 +37158,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/274/"
       ],
-      "sourceFirstRecordId": "TH:sc1b T:120/153:base"
+      "sourceFirstRecordIds": [
+        "TH:sc1b T:120/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:sc3b T:126/158:unmapped-work:None",
@@ -36879,7 +37188,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/1006/"
       ],
-      "sourceFirstRecordId": "TH:sc3b T:126/158:base"
+      "sourceFirstRecordIds": [
+        "TH:sc3b T:126/158:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:scA T:084/135:unmapped-work:None",
@@ -36907,7 +37218,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/1806/"
       ],
-      "sourceFirstRecordId": "TH:scA T:084/135:base"
+      "sourceFirstRecordIds": [
+        "TH:scA T:084/135:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:scD T:111/159:unmapped-work:None",
@@ -36935,7 +37248,9 @@
       "sourceRecords": [
         "https://asia.pokemon-card.com/th/card-search/detail/2297/"
       ],
-      "sourceFirstRecordId": "TH:scD T:111/159:base"
+      "sourceFirstRecordIds": [
+        "TH:scD T:111/159:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TH:Thai:via-SV-P/TH:unknown-local-set:via-082:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
@@ -37405,7 +37720,7 @@
       "sourceRecords": []
     },
     {
-      "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:142:unmapped-work:SPEC-0024",
+      "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "setEditionId": "EDITION:TW:T-Chinese:AS5a",
       "locality": "TW",
       "language": "T-Chinese",
@@ -37414,8 +37729,8 @@
       "localNumber": "142",
       "localIdentifierKnown": true,
       "state": "identified",
-      "work": null,
-      "workMappingState": "needs-explicit-equivalence",
+      "work": "Snorlax-Lazy-Eating-Big-Counter",
+      "workMappingState": "mapped-by-explicit-equivalence",
       "viaLegacySetCode": null,
       "viaLegacyNumber": null,
       "claimIds": [
@@ -37430,7 +37745,12 @@
       "sourceRecords": [
         "https://s1.52poke.com/wiki/7/7b/AS5a142.png"
       ],
-      "sourceFirstRecordId": "TW:AS5a:142:base"
+      "sourceFirstRecordIds": [
+        "TW:AS5a:142:base"
+      ],
+      "legacyCounterpartUnitIds": [
+        "U0265"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:PKMTCH S-P:S-P 145:Snorlax-Rolling-Tackle-Heavy-Impact",
@@ -37487,7 +37807,9 @@
       "legacyVariants": [],
       "legacyProducts": [],
       "sourceRecords": [],
-      "sourceFirstRecordId": "TW:S-P:145:base"
+      "sourceFirstRecordIds": [
+        "TW:S-P:145:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
@@ -37513,7 +37835,9 @@
       "legacyVariants": [],
       "legacyProducts": [],
       "sourceRecords": [],
-      "sourceFirstRecordId": "TW:SM-P:053:base"
+      "sourceFirstRecordIds": [
+        "TW:SM-P:053:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:SV-P:215:unmapped-work:SPEC-0032",
@@ -37539,7 +37863,9 @@
       "legacyVariants": [],
       "legacyProducts": [],
       "sourceRecords": [],
-      "sourceFirstRecordId": "TW:SV-P:215:base"
+      "sourceFirstRecordIds": [
+        "TW:SV-P:215:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:sc1a F:127/154:unmapped-work:SPEC-0011",
@@ -37567,7 +37893,9 @@
       "sourceRecords": [
         "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_(ATCG)"
       ],
-      "sourceFirstRecordId": "TW:sc1a F:127/154:base"
+      "sourceFirstRecordIds": [
+        "TW:sc1a F:127/154:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:119/153:unmapped-work:SPEC-0009",
@@ -37595,7 +37923,9 @@
       "sourceRecords": [
         "https://github.com/user-attachments/assets/aaa33550-cdd4-49e8-95ab-8c07cf67a0dd"
       ],
-      "sourceFirstRecordId": "TW:sc1b F:119/153:base"
+      "sourceFirstRecordIds": [
+        "TW:sc1b F:119/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:120/153:unmapped-work:SPEC-0007",
@@ -37623,7 +37953,9 @@
       "sourceRecords": [
         "https://github.com/user-attachments/assets/5052ddbb-276c-4734-baa2-a0a3c2dd74d7"
       ],
-      "sourceFirstRecordId": "TW:sc1b F:120/153:base"
+      "sourceFirstRecordIds": [
+        "TW:sc1b F:120/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:165/153:unmapped-work:SPEC-0010",
@@ -37651,7 +37983,9 @@
       "sourceRecords": [
         "https://github.com/user-attachments/assets/0766a589-2407-486b-8cf5-438a612b8d66"
       ],
-      "sourceFirstRecordId": "TW:sc1b F:165/153:base"
+      "sourceFirstRecordIds": [
+        "TW:sc1b F:165/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:177/153:unmapped-work:SPEC-0008",
@@ -37679,7 +38013,9 @@
       "sourceRecords": [
         "https://github.com/user-attachments/assets/65ea5eff-7441-47a4-8750-47c03822f3d8"
       ],
-      "sourceFirstRecordId": "TW:sc1b F:177/153:base"
+      "sourceFirstRecordIds": [
+        "TW:sc1b F:177/153:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:scD F:111/159:unmapped-work:SPEC-0015",
@@ -37707,7 +38043,9 @@
       "sourceRecords": [
         "https://github.com/user-attachments/assets/25528966-476a-4a82-bcaf-d9e1f76e8584"
       ],
-      "sourceFirstRecordId": "TW:scD F:111/159:base"
+      "sourceFirstRecordIds": [
+        "TW:scD F:111/159:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:TW:T-Chinese:via-CLF:unknown-local-set:via-016:Snorlax-Collect-Collapse:unknown-local-id",
@@ -49120,7 +49458,9 @@
       "sourceRecords": [
         "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png"
       ],
-      "sourceFirstRecordId": "WEST:SVP ES:184:base"
+      "sourceFirstRecordIds": [
+        "WEST:SVP ES:184:base"
+      ]
     },
     {
       "cardReleaseId": "RELEASE:WEST:Spanish:SVP:051:Snorlax-Voraciousness-Thudding-Press",
