@@ -1534,7 +1534,7 @@ def collect() -> None:
         ]
         western_locale_expectations = {
             "fr": ("French", "Ronflex", 38, 34),
-            "de": ("German", "Relaxo", 40, 36),
+            "de": ("German", "Relaxo", 39, 35),
         }
         western_locale_faults = []
         for locale, (language, local_name, total, physical_total) in (
@@ -1599,7 +1599,7 @@ def collect() -> None:
         }
         tg10_rows = {
             row["rawLocale"]: row for row in card_records
-            if row["rawProviderId"] == "swsh11.5tg-TG10"
+            if row["rawProviderId"] == "swsh11tg-TG10"
             and row["rawLocale"] in expected_tg10
         }
         if {
@@ -1717,11 +1717,60 @@ def collect() -> None:
             and "pl2/111" in italian_gap["reason"]
             and italian_gap["terminalState"] == "needs-evidence"
         )
+        asia_slice_expectations = {
+            "pokemon-asia-id-snorlax": ("id", "ID", "Indonesian", "Snorlax", 31),
+            "pokemon-asia-th-snorlax": ("th", "TH", "Thai", "คาบิกอน", 25),
+        }
+        stage_slices = {row["sliceId"]: row for row in card_stage["slices"]}
+        asia_slice_faults = []
+        for slice_id, (locale, locality, language, query, total) in (
+            asia_slice_expectations.items()
+        ):
+            contract_slice = card_slices.get(slice_id)
+            stage_slice = stage_slices.get(slice_id)
+            rows = [
+                row for row in card_records
+                if row["providerId"] == "pokemon-card-asia"
+                and row["rawLocale"] == locale
+            ]
+            if (
+                contract_slice is None or stage_slice is None
+                or contract_slice.get("locality") != locality
+                or contract_slice.get("language") != language
+                or contract_slice.get("nameQueries") != [query]
+                or stage_slice.get("terminalState") != "complete"
+                or stage_slice.get("accounting", {}).get("fetched") != total
+                or stage_slice.get("accounting", {}).get("accounted") != total
+                or len(rows) != total
+                or any(row["locality"] != locality for row in rows)
+            ):
+                asia_slice_faults.append(slice_id)
+        indonesian_minimum = {
+            "13757": "RELEASE:ID:Indonesian:SV6s I:136/167:",
+            "15784": "RELEASE:ID:Indonesian:SV9s I:109/139:",
+            "9774": "RELEASE:ID:Indonesian:SV4s I:118/132:",
+        }
+        by_indonesian_detail = {
+            row["rawProviderId"]: row for row in card_records
+            if row["providerId"] == "pokemon-card-asia" and row["rawLocale"] == "id"
+        }
+        if any(
+            detail_id not in by_indonesian_detail
+            or by_indonesian_detail[detail_id]["bucket"] != "matched"
+            or not (
+                by_indonesian_detail[detail_id]["normalizationProposal"].get(
+                    "targetCardReleaseId"
+                ) or ""
+            ).startswith(target_prefix)
+            for detail_id, target_prefix in indonesian_minimum.items()
+        ):
+            asia_slice_faults.append("indonesian-minimum-regressions")
         card_gap_text = " ".join(
             f"{row['track']} {row['reason']}" for row in card_contract["gaps"]
         ).lower()
-        required_card_gaps = ("japanese", "indonesian", "thai", "korean", "simplified-chinese",
-                              "western", "latam", "specialist")
+        required_card_gaps = (
+            "japanese", "korean", "simplified-chinese", "western", "latam", "specialist"
+        )
         missing_card_gaps = [term for term in required_card_gaps if term not in card_gap_text]
         card_source = (ROOT / "scripts" / "card_discovery.py").read_text(encoding="utf-8")
         check(
@@ -1731,7 +1780,7 @@ def collect() -> None:
             not card_provenance_faults and not card_preservation_faults
             and svqp_ok and not munchlax_faults and pocket_rows and not pocket_faults
             and not western_locale_faults and not portuguese_faults and italian_slice_ok
-            and not missing_card_gaps
+            and not asia_slice_faults and not missing_card_gaps
             and "--resume" in card_source and "source-failed" in card_source
             and all(row["terminalState"] in {"complete", "needs-evidence", "blocked-by-source"}
                     for row in card_stage["slices"])
@@ -1743,6 +1792,7 @@ def collect() -> None:
             f"westernLocales={western_locale_faults[:3]}, "
             f"portuguese={portuguese_faults[:3]}, "
             f"italian={italian_faults[:3] if italian_rows else ['missing-positive-slice']}, "
+            f"asia={asia_slice_faults[:3]}, "
             f"missingGaps={missing_card_gaps}",
         )
 

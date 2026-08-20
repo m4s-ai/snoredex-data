@@ -303,6 +303,129 @@ class CardDiscoveryTests(unittest.TestCase):
                         "20260813T135800Z", "20260813T150000Z", None
                     )
 
+    def test_resume_can_reuse_only_an_exact_unfinished_request(self):
+        acquisition = {
+            "adapterId": "fixture-adapter",
+            "adapterVersion": "1.0.0",
+            "sliceId": "fixture-slice",
+            "providerId": "fixture-provider",
+            "surfaceId": "fixture-surface",
+            "coverageEdgeId": "fixture-edge",
+            "rawLocale": "it",
+            "endpoint": "https://example.invalid/it/cards",
+            "queryParameters": {"nameQueries": ["Snorlax"]},
+        }
+        contract = {"fixture": True}
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            source_id = "20260813T150337Z"
+            source_dir = runs_dir / source_id
+            source_raw = source_dir / "raw" / "fixture-slice"
+            source_raw.mkdir(parents=True)
+            (source_raw / "page.html").write_text("retained", encoding="utf-8")
+            (source_dir / "contract.json").write_text(
+                json.dumps(contract), encoding="utf-8"
+            )
+            source_request = {
+                **acquisition,
+                "runId": source_id,
+                "retrievedAt": "2026-08-13T15:03:37Z",
+                "pages": [{"rawPath": "raw/fixture-slice/page.html"}],
+                "details": [], "sets": [], "assets": [], "error": None,
+                "checkpoint": {"complete": True},
+            }
+            (source_dir / "manifest.json").write_text(json.dumps({
+                "runId": source_id,
+                "status": "complete",
+                "contractHash": discovery.content_hash(contract),
+                "requests": [source_request],
+            }), encoding="utf-8")
+
+            current_id = "20260820T122400Z"
+            current_dir = runs_dir / current_id
+            current_dir.mkdir()
+            manifest = {
+                "runId": current_id,
+                "requests": [{
+                    **acquisition,
+                    "runId": current_id,
+                    "retrievedAt": "2026-08-20T12:24:00Z",
+                    "pages": [], "details": [], "sets": [], "assets": [],
+                    "error": {"code": "blocked"},
+                    "checkpoint": {"complete": False},
+                }],
+                "failures": [{"sliceId": "fixture-slice"}],
+            }
+            (current_dir / "manifest.json").write_text(
+                json.dumps({**manifest, "status": "incomplete"}), encoding="utf-8"
+            )
+            with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
+                discovery.reuse_unfinished_requests(current_dir, manifest, source_id)
+
+            carried = manifest["requests"][0]
+            self.assertEqual(carried["runId"], current_id)
+            self.assertEqual(carried["replayedFromRun"], source_id)
+            self.assertEqual(carried["retrievedAt"], "2026-08-13T15:03:37Z")
+            self.assertEqual(manifest["failures"], [])
+            self.assertEqual(
+                (current_dir / "raw" / "fixture-slice" / "page.html").read_text(
+                    encoding="utf-8"
+                ),
+                "retained",
+            )
+
+            newer_id = "20260813T160000Z"
+            newer_dir = runs_dir / newer_id
+            second_source_request = copy.deepcopy(source_request)
+            second_source_request["sliceId"] = "fixture-slice-2"
+            second_source_raw = source_dir / "raw" / "fixture-slice-2"
+            second_source_raw.mkdir()
+            (second_source_raw / "page.html").write_text("second", encoding="utf-8")
+            (source_dir / "manifest.json").write_text(json.dumps({
+                "runId": source_id,
+                "status": "complete",
+                "contractHash": discovery.content_hash(contract),
+                "requests": [source_request, second_source_request],
+            }), encoding="utf-8")
+            newer_raw = newer_dir / "raw" / "fixture-slice-2"
+            newer_raw.mkdir(parents=True)
+            (newer_raw / "page.html").write_text("newer", encoding="utf-8")
+            (newer_dir / "contract.json").write_text(
+                json.dumps(contract), encoding="utf-8"
+            )
+            newer_request = copy.deepcopy(second_source_request)
+            newer_request["runId"] = newer_id
+            newer_request["retrievedAt"] = "2026-08-13T16:00:00Z"
+            (newer_dir / "manifest.json").write_text(json.dumps({
+                "runId": newer_id,
+                "status": "complete",
+                "contractHash": discovery.content_hash(contract),
+                "requests": [newer_request],
+            }), encoding="utf-8")
+            stale_target_dir = runs_dir / "20260820T130000Z"
+            stale_target_dir.mkdir()
+            stale_manifest = copy.deepcopy(manifest)
+            stale_manifest["runId"] = "20260820T130000Z"
+            stale_manifest["requests"][0]["runId"] = "20260820T130000Z"
+            stale_manifest["requests"][0]["checkpoint"] = {"complete": False}
+            second_target_request = copy.deepcopy(stale_manifest["requests"][0])
+            second_target_request["sliceId"] = "fixture-slice-2"
+            stale_manifest["requests"].append(second_target_request)
+            (stale_target_dir / "manifest.json").write_text(
+                json.dumps({**stale_manifest, "status": "incomplete"}), encoding="utf-8"
+            )
+            with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
+                with self.assertRaisesRegex(
+                    discovery.DiscoveryError,
+                    "not the newest compatible complete request",
+                ):
+                    discovery.reuse_unfinished_requests(
+                        stale_target_dir, stale_manifest, source_id
+                    )
+            self.assertFalse(
+                (stale_target_dir / "raw" / "fixture-slice").exists()
+            )
+
     def test_diff_rekeys_every_old_observation_into_one_provider_listing(self):
         old = [
             {"stableKey": f"old-{unit}", "recordHash": unit,
@@ -529,7 +652,7 @@ class CardDiscoveryTests(unittest.TestCase):
         ]
         expected = {
             "fr": ("French", "Ronflex", 38, 34),
-            "de": ("German", "Relaxo", 40, 36),
+            "de": ("German", "Relaxo", 39, 35),
         }
         for locale, (language, local_name, total, physical_total) in expected.items():
             rows = [
@@ -569,7 +692,7 @@ class CardDiscoveryTests(unittest.TestCase):
 
         tg10 = {
             row["rawLocale"]: row for row in records
-            if row["rawProviderId"] == "swsh11.5tg-TG10"
+            if row["rawProviderId"] == "swsh11tg-TG10"
             and row["rawLocale"] in expected
         }
         self.assertEqual(
@@ -606,7 +729,7 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertIsNone(me03["normalizationProposal"]["targetCardReleaseId"])
         self.assertIn("Spanish language only", me03["bucketBasis"])
         tg10 = next(
-            row for row in spanish if row["rawProviderId"] == "swsh11.5tg-TG10"
+            row for row in spanish if row["rawProviderId"] == "swsh11tg-TG10"
         )
         self.assertEqual(tg10["bucket"], "needs-evidence")
         self.assertIsNone(tg10["normalizationProposal"]["targetCardReleaseId"])

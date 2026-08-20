@@ -2,27 +2,27 @@
   "meta": {
     "schema": "snoredex-card-discovery-staging",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.13.0",
-    "generatedFromRun": "20260813T150337Z",
-    "previousRun": "20260813T135800Z",
+    "coverageVersion": "1.16.0",
+    "generatedFromRun": "20260820T125000Z",
+    "previousRun": "20260820T122400Z",
     "contract": "verification/card_discovery_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "identityGraph": "verification/print_identity_dryrun.json",
-    "contractHash": "sha256:998cc743ef04ad5a178e54f35fdf85b993d7a236370f7be6d1a3a81e49792234",
+    "contractHash": "sha256:6659f077969b976a61caa9403294704f170a78c6c1972b25503258dbb521ae35",
     "capabilityGraphHash": "sha256:28da36acb95eae7ac86f7c04e78631e383daa32632692bdd5f4f096d695474ae",
-    "identityGraphHash": "sha256:d8bd3902478112ae0184e864d62f1570375064dc892e8f6c90ec3dcb7006dcaf",
+    "identityGraphHash": "sha256:1b8aca6ff5f4805e38cdee1d4d87ae25710ebf53df5bcbd249e0f79c1e87812b",
     "sourceFirst": true,
     "verdictMutationAllowed": false,
     "counts": {
-      "slices": 12,
-      "records": 299,
-      "matched": 152,
+      "slices": 14,
+      "records": 354,
+      "matched": 191,
       "ambiguous": 0,
-      "newCandidate": 73,
+      "newCandidate": 89,
       "positivelyExcluded": 21,
       "needsEvidence": 53,
       "runErrors": 0,
-      "gaps": 12
+      "gaps": 11
     }
   },
   "slices": [
@@ -88,6 +88,114 @@
         "positivelyExcluded": 0,
         "needsEvidence": 2,
         "accounted": 2
+      }
+    },
+    {
+      "sliceId": "pokemon-asia-id-snorlax",
+      "adapterId": "pokemon-asia-native-name",
+      "terminalState": "complete",
+      "sourceFailureState": null,
+      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "checkpoint": {
+        "completedPages": [
+          "Snorlax:1",
+          "Snorlax:2"
+        ],
+        "completedDetailIds": [
+          "10045",
+          "10239",
+          "13757",
+          "15253",
+          "15784",
+          "1605",
+          "17374",
+          "17792",
+          "17793",
+          "18362",
+          "2129",
+          "2501",
+          "2796",
+          "3466",
+          "3982",
+          "4527",
+          "454",
+          "4795",
+          "5067",
+          "5089",
+          "5137",
+          "5772",
+          "600",
+          "6007",
+          "601",
+          "6671",
+          "764",
+          "765",
+          "8554",
+          "8760",
+          "9774"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "accounting": {
+        "fetched": 31,
+        "matched": 25,
+        "ambiguous": 0,
+        "newCandidate": 6,
+        "positivelyExcluded": 0,
+        "needsEvidence": 0,
+        "accounted": 31
+      }
+    },
+    {
+      "sliceId": "pokemon-asia-th-snorlax",
+      "adapterId": "pokemon-asia-native-name",
+      "terminalState": "complete",
+      "sourceFailureState": null,
+      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "checkpoint": {
+        "completedPages": [
+          "คาบิกอน:1",
+          "คาบิกอน:2"
+        ],
+        "completedDetailIds": [
+          "1006",
+          "10595",
+          "11193",
+          "127",
+          "13046",
+          "13749",
+          "13750",
+          "13857",
+          "1806",
+          "2297",
+          "2468",
+          "273",
+          "274",
+          "3281",
+          "3343",
+          "3495",
+          "439",
+          "440",
+          "6241",
+          "6363",
+          "6835",
+          "7440",
+          "7755",
+          "8167",
+          "8631"
+        ],
+        "nextPage": null,
+        "complete": true
+      },
+      "accounting": {
+        "fetched": 25,
+        "matched": 15,
+        "ambiguous": 0,
+        "newCandidate": 10,
+        "positivelyExcluded": 0,
+        "needsEvidence": 0,
+        "accounted": 25
       }
     },
     {
@@ -182,7 +290,6 @@
           "col1-33",
           "dp1-37",
           "ecard3-100",
-          "ex15-10",
           "ex6-15",
           "me03-063",
           "pl2-111",
@@ -198,7 +305,7 @@
           "swsh1-140",
           "swsh10.5-055",
           "swsh11-143",
-          "swsh11.5tg-TG10",
+          "swsh11tg-TG10",
           "swsh12.5-109",
           "swsh2-141",
           "swsh4-131",
@@ -216,13 +323,13 @@
         "complete": true
       },
       "accounting": {
-        "fetched": 40,
-        "matched": 36,
+        "fetched": 39,
+        "matched": 35,
         "ambiguous": 0,
         "newCandidate": 0,
         "positivelyExcluded": 4,
         "needsEvidence": 0,
-        "accounted": 40
+        "accounted": 39
       }
     },
     {
@@ -286,7 +393,7 @@
           "swsh1-206",
           "swsh10.5-055",
           "swsh11-143",
-          "swsh11.5tg-TG10",
+          "swsh11tg-TG10",
           "swsh12.5-109",
           "swsh2-141",
           "swsh4-131",
@@ -342,7 +449,7 @@
           "swsh1-140",
           "swsh10.5-055",
           "swsh11-143",
-          "swsh11.5tg-TG10",
+          "swsh11tg-TG10",
           "swsh12.5-109",
           "swsh2-141",
           "swsh4-131",
@@ -403,7 +510,7 @@
           "swsh1-140",
           "swsh10.5-055",
           "swsh11-143",
-          "swsh11.5tg-TG10",
+          "swsh11tg-TG10",
           "swsh12.5-109",
           "swsh2-141",
           "swsh4-131",
@@ -455,7 +562,7 @@
           "swsh1-140",
           "swsh10.5-055",
           "swsh11-143",
-          "swsh11.5tg-TG10",
+          "swsh11tg-TG10",
           "swsh12.5-109",
           "swsh2-141",
           "swsh4-131",
@@ -657,15 +764,6 @@
       "retryCondition": "Activate a Japanese slice after retained pagination fixtures and omission-preserving tests exist."
     },
     {
-      "gapId": "official-asia-id-th",
-      "track": "Indonesian and Thai official card discovery",
-      "providerId": "pokemon-card-asia",
-      "surfaceId": "asia-card-search",
-      "terminalState": "needs-evidence",
-      "reason": "The shared official surface is usable, but native-name, pagination, and local-code fixtures are not yet reviewed for ID and TH.",
-      "retryCondition": "Add one bounded slice per locale with native-name controls and a known positive detail."
-    },
-    {
       "gapId": "official-asia-kr-cn",
       "track": "Korean and Simplified-Chinese card discovery",
       "providerId": "pokemon-card-asia",
@@ -757,5 +855,5 @@
     }
   ],
   "recordsPath": "verification/card_discovery_records.jsonl",
-  "recordsHash": "sha256:8ba6459ce59e5b0446d39ff3123abd83741c4cb09f99e4f26042ff128b183a65"
+  "recordsHash": "sha256:3f6ad1e68338d9482322e8881b27fdc344f20550747b45f79caa8dce0a46ed1b"
 }
