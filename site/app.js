@@ -1529,7 +1529,7 @@
   }
 
   /* Section navigation (#123): native details owns the disclosure; this only syncs its initial
-   * responsive state and closes it after a section link is followed. */
+   * responsive state and closes it after a narrow-screen section link is followed. */
   function initSectionNav() {
     const details = $("#section-nav-disclosure");
     if (!details) return;
@@ -1538,7 +1538,7 @@
     sync();
     narrow.addEventListener("change", sync);
     details.addEventListener("click", (event) => {
-      if (event.target.closest("a")) details.open = false;
+      if (event.target.closest("a") && narrow.matches) details.open = false;
     });
   }
 

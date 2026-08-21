@@ -1479,6 +1479,16 @@ def main() -> int:
               and nav_wide["links"] == 8,
               str(nav_wide))
 
+        page.locator('#section-nav-list a[href="#about"]').click()
+        page.wait_for_timeout(80)
+        check("a desktop section link keeps the navigation open",
+              page.evaluate("""() => {
+                const disclosure = document.querySelector('#section-nav-disclosure');
+                return disclosure.open
+                  && getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none';
+              }"""),
+              "the desktop section link closed the always-visible navigation")
+
         # --- #125: raw export of the current view ---
         page.evaluate("""() => {
           document.querySelector('#f-q').value = 'Jungle';
