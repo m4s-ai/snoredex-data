@@ -40,7 +40,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CONTRACT_PATH = ROOT / "verification" / "card_discovery_adapters.json"
 SCHEMA_PATH = ROOT / "verification" / "card_discovery_schema.json"
 CAPABILITY_PATH = ROOT / "verification" / "source_capability_graph.json"
-IDENTITY_PATH = ROOT / "verification" / "print_identity_dryrun.json"
+GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
 CONFIRMED_SOURCES_PATH = ROOT / "verification" / "confirmed_sources.json"
 SOURCE_FIRST_PRINTS_PATH = ROOT / "verification" / "source_first_prints.json"
 ISSUE84_52POKE_PATH = (
@@ -771,9 +771,11 @@ def validate_contract(
 
 
 def load_inputs() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    from authoritative_graph import identity_view
+
     contract = read_json(CONTRACT_PATH)
     capability = read_json(CAPABILITY_PATH)
-    identity = read_json(IDENTITY_PATH)
+    identity = identity_view(read_json(GRAPH_PATH))
     validate_contract(contract, capability, identity)
     return contract, capability, identity
 
@@ -1281,10 +1283,10 @@ def build_projection(
             "previousRun": None if previous is None else previous["meta"]["generatedFromRun"],
             "contract": "verification/card_discovery_adapters.json",
             "capabilityGraph": "verification/source_capability_graph.json",
-            "identityGraph": "verification/print_identity_dryrun.json",
+            "authoritativeGraph": "verification/authoritative_graph.json",
             "contractHash": manifest["contractHash"],
             "capabilityGraphHash": manifest["capabilityGraphHash"],
-            "identityGraphHash": content_hash(identity),
+            "authoritativeGraphHash": identity.get("authoritativeGraphHash", content_hash(identity)),
             "sourceFirst": True,
             "verdictMutationAllowed": False,
             "counts": {

@@ -5,75 +5,134 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import sys
+from copy import deepcopy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+from authoritative_graph import identity_view, validate  # noqa: E402
 
 
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
+    assert not validate(graph)
     meta = graph["meta"]
     assert meta["schema"] == "snoredex-authoritative-locality-graph"
     assert meta["schemaVersion"] == "1.0.0"
     assert meta["status"] == "authoritative-migrated"
+    assert "inputs" not in meta
 
     entities = {(row["entityType"], row["entityId"]): row for row in graph["entities"]}
-    assert len(entities) == graph["summary"]["entities"]
     edges = graph["edges"]
     edge_keys = {
         (row["fromType"], row["fromId"], row["relation"], row["toType"], row["toId"])
         for row in edges
     }
-    assert len({(row["fromType"], row["fromId"], row["relation"], row["toType"], row["toId"])
-                for row in edges}) == len(edges)
-    for row in edges:
-        assert (row["fromType"], row["fromId"]) in entities
-        if row["toType"] != "node":
-            assert (row["toType"], row["toId"]) in entities
-    assert not any(row["toType"] == "node" for row in edges)
-
-    dispositions = graph["migrationDispositions"]
-    keys = [(row["sourceKind"], row["sourceId"]) for row in dispositions]
-    assert len(keys) == len(set(keys)) == graph["summary"]["migrationInputs"]
-    assert all(row["disposition"] and row["reason"] for row in dispositions)
+    assert len(entities) == graph["summary"]["entities"]
+    assert len(edge_keys) == len(edges)
     assert graph["summary"]["candidateClaims"] > 0
     assert graph["summary"]["cardReleases"] > 0
     assert graph["summary"]["physicalPrintings"] > 0
     assert graph["summary"]["setSourceRecords"] == graph["summary"]["setSourceDispositions"]
 
-    identity = json.loads(
-        (ROOT / "verification/print_identity_dryrun.json").read_text(encoding="utf-8")
+    # A contradicted claim must not be promotable merely by changing its disposition
+    # and pointing it at an existing release.
+    tampered = deepcopy(graph)
+    tampered_claim = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("evidenceStatus") == "contradicted"
     )
-    migrations = {
-        (row["sourceKind"], row["sourceId"]): row for row in dispositions
+    release_id = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+    )
+    tampered_claim["disposition"] = "established-and-mapped"
+    tampered_claim["proposedTargetId"] = release_id
+    tampered_claim["materializedTargetId"] = release_id
+    assert any("positive evidence" in error for error in validate(tampered))
+
+    # Appending to the raw registry without adding graph nodes/dispositions must fail
+    # the cross-store accounting check.
+    registry = json.loads((ROOT / "verification/set_catalogue_sources.json").read_text(encoding="utf-8"))
+    extra = deepcopy(registry["sourceRecords"][0])
+    extra["sourceRecordId"] = "SET-SRC-TEST-UNACCOUNTED"
+    registry["sourceRecords"].append(extra)
+    assert any("source records" in error for error in validate(graph, registry))
+
+    # The other append-only identity stores are covered by the same graph boundary.
+    identity_inputs = {
+        "source_first": json.loads(
+            (ROOT / "verification/source_first_prints.json").read_text(encoding="utf-8")
+        ),
     }
-    for source_id, record in identity["legacyProductDispositions"].items():
-        targets = list(record.get("cardReleaseIds") or [])
-        migration = migrations[("legacy-cardmarket-product", source_id)]
-        assert migration["targetRefs"] == targets
-        assert migration["targetRef"] == (targets[0] if targets else None)
-        product_id = f"LEGACYPRODUCT:{source_id}"
-        assert ("legacy-cardmarket-product", product_id) in entities
-        mapped = {
-            row["toId"] for row in edges
-            if row["fromType"] == "legacy-cardmarket-product"
-            and row["fromId"] == product_id and row["relation"] == "maps-to"
-        }
-        assert mapped == set(targets)
+    identity_inputs["source_first"]["prints"].append(
+        {**identity_inputs["source_first"]["prints"][0], "printId": "TEST-UNACCOUNTED"}
+    )
+    assert any("identity input claims" in error for error in validate(graph, identity_inputs=identity_inputs))
 
-    for report in identity["reports"].get("legacyIssueRekeys", []):
-        for row in report.get("rows", []):
-            targets = list(row.get("localCardReleaseIds") or [])
-            migration = migrations[("legacy-issue-rekey", row["legacyUnitId"])]
-            assert migration["targetRefs"] == targets
-            assert migration["targetRef"] == (targets[0] if targets else None)
+    # Closed finish profiles require an explicit scope and closure authority.
+    tampered = deepcopy(graph)
+    next(row["payload"] for row in tampered["entities"] if row["entityType"] == "finish-profile")[
+        "closureAuthority"
+    ] = None
+    assert any("closure scope/authority" in error for error in validate(tampered))
 
+    # Rarity observations must stay in the locality of the release they describe.
+    tampered = deepcopy(graph)
+    rarity = next(row["payload"] for row in tampered["entities"] if row["entityType"] == "rarity-claim")
+    release = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["entityId"] == rarity["cardReleaseId"]
+    )
+    other_source = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "set-source-record"
+        and (row["payload"].get("raw") or {}).get("locality")
+        and (row["payload"].get("raw") or {}).get("locality") != release["locality"]
+    )
+    rarity["sourceRecordId"] = other_source["sourceRecordId"]
+    rarity["sourceProvider"] = other_source["provider"]
+    assert any("rarity claim source locality mismatch" in error for error in validate(tampered))
+
+    # Re-key decisions must round-trip into both equivalence assertions and migration
+    # targetRefs, including one-to-many decisions such as U0414.
+    rekeys = json.loads(
+        (ROOT / "verification/legacy_issue_rekeys.json").read_text(encoding="utf-8")
+    )
+    rekeys["questionSets"][0]["mappings"][0]["sourceFirstRecordId"] = "TW:AS5a:117/184:base"
+    assert any("re-key" in error for error in validate(graph, identity_inputs={"rekeys": rekeys}))
+
+    # A specimen observation must remain attached to a release with the same local
+    # set, number and language, not merely to a printing with matching finish fields.
+    tampered = deepcopy(graph)
+    specimen_printing = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "physical-printing"
+        and row["entityId"] == "PHYSICAL:specimen:SPEC-0001"
+    )
+    specimen_printing["cardReleaseId"] = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["entityId"] != specimen_printing["cardReleaseId"]
+    )
+    assert any("specimen release identity is stale" in error for error in validate(tampered))
+
+    identity = identity_view(graph)
+    migrations = {
+        (row["sourceKind"], row["sourceId"]): row
+        for row in graph["migrationDispositions"]
+    }
     u0414 = migrations[("legacy-issue-rekey", "U0414")]
     assert u0414["targetRefs"] == [
         "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
     ]
     assert u0414["targetRef"] == u0414["targetRefs"][0]
+    rekey = next(row for row in identity["reports"]["legacyIssueRekeys"][0]["rows"]
+                 if row["legacyUnitId"] == "U0414")
+    assert rekey["localCardReleaseIds"] == u0414["targetRefs"]
 
     with sqlite3.connect(ROOT / "snoredex.sqlite") as connection:
         target_ref, target_refs_json = connection.execute(
@@ -83,52 +142,10 @@ def main() -> None:
         ).fetchone()
     assert target_ref == u0414["targetRef"]
     assert json.loads(target_refs_json) == u0414["targetRefs"]
-
-    catalogue = json.loads(
-        (ROOT / "verification/set_catalogue_dryrun.json").read_text(encoding="utf-8")
-    )
-    for row in catalogue["cardReleaseRefs"]:
-        key = ("catalogue-card-release-ref", row["cardReleaseId"])
-        assert key in entities
-        assert (key[0], key[1], "references", "card-release", row["cardReleaseId"]) in edge_keys
-        assert (key[0], key[1], "belongs-to", "set-edition", row["setEditionId"]) in edge_keys
-    for row in catalogue["rarityClaims"]:
-        key = ("rarity-claim", row["rarityClaimId"])
-        assert (key[0], key[1], "asserts-rarity-for", "card-release", row["cardReleaseId"]) in edge_keys
-        assert (key[0], key[1], "observed-by", "set-source-record", row["sourceRecordId"]) in edge_keys
-    for row in catalogue["profileFinishClaims"]:
-        key = ("profile-finish-claim", row["profileFinishClaimId"])
-        assert (key[0], key[1], "uses-profile", "finish-profile", row["finishProfileId"]) in edge_keys
-        assert (key[0], key[1], "asserts-finish-for", "card-release", row["cardReleaseId"]) in edge_keys
-    for row in catalogue["finishProfiles"]:
-        key = ("finish-profile", row["finishProfileId"])
-        assert (key[0], key[1], "scoped-to", "local-set", row["localSetId"]) in edge_keys
-        assert (key[0], key[1], "supported-by", "set-source-record", row["sourceRecordId"]) in edge_keys
-        for edition_id in row.get("setEditionIds", []):
-            assert (key[0], key[1], "scoped-to", "set-edition", edition_id) in edge_keys
-    for row in catalogue["aliasAssertions"]:
-        key = ("catalogue-alias-assertion", row["aliasAssertionId"])
-        assert (key[0], key[1], "asserted-by", "set-source-record", row["sourceRecordId"]) in edge_keys
-        target_type = "local-set" if row.get("localSetId") else "set-edition"
-        target_id = row.get("localSetId") or row.get("setEditionId")
-        assert target_id
-        assert (key[0], key[1], row["relationship"], target_type, target_id) in edge_keys
-    source_target_fields = (
-        ("rarityClaimId", "rarity-claim"),
-        ("localSetId", "local-set"),
-        ("releaseEventId", "release-event"),
-        ("setEditionId", "set-edition"),
-        ("finishProfileId", "finish-profile"),
-    )
-    for row in catalogue["sourceAssertions"]:
-        key = ("source-assertion", row["sourceAssertionId"])
-        assert (key[0], key[1], "asserted-by", "set-source-record", row["sourceRecordId"]) in edge_keys
-        field, target_type = next((item for item in source_target_fields if row.get(item[0])), (None, None))
-        assert field
-        assert (key[0], key[1], row["assertionKind"], target_type, row[field]) in edge_keys
     print(
         "authoritative graph regression passed: "
-        f"{len(entities)} entities, {len(edges)} edges, {len(dispositions)} dispositions"
+        f"{len(entities)} entities, {len(edges)} edges, "
+        f"{len(graph['migrationDispositions'])} dispositions"
     )
 
 

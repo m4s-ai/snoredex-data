@@ -197,9 +197,7 @@ consumers read.
 python verification/review_integrity.py
 python verification/review_findings.py
 python scripts/legacy_baseline.py --check   # legacy universe contract + claim guard
-python scripts/print_identity_dryrun.py --check  # ADR-0001 claim/release/print mapping (#134/#145)
 python scripts/evidence_semantics.py --check     # evidence granularity + application status (#137)
-python scripts/set_catalogue_dryrun.py --check   # ADR-0002 set/edition/event mapping (#146)
 python scripts/authoritative_graph.py --check    # reviewed locality graph migration (#140)
 python scripts/source_adapters.py --check        # ADR-0004 source-first catalogue runs (#147)
 python scripts/card_discovery.py --check         # ADR-0006 source-first card runs (#136)
@@ -253,7 +251,7 @@ git diff --exit-code -- . ':(exclude)*.sqlite'   # equivalent scope enforced ins
 
 Do not maintain a second generator or regression list here: `scripts/regen.py` owns the dependency
 order and core suite, and the workflow calls it directly. The hand-maintained predecessor drifted
-from CI three times; the last omission was `legacy_set_reconciliation`.
+from CI three times; the current list is intentionally centralized here and in `scripts/regen.py`.
 
 **The `.sqlite` files are excluded from regen.py's byte diff, and always must be.** A SQLite file records the
 version number of the library that wrote it in its own header, so two environments running different

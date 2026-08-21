@@ -23,7 +23,7 @@ generator each change needs:
 `regen.py` runs all generators in dependency order, then the determinism check, the cross-artifact
 gate, and every core regression suite. Browser, live-source and publish canaries stay in CI because
 they are environment checks, not regeneration. A stale artifact fails before CI sees the PR — that is
-the point: no more red gates from a forgotten `print_identity_dryrun.json` or
+the point: no more red gates from a forgotten compatibility projection or
 `card_discovery_staging.json`.
 
 ## What this file is

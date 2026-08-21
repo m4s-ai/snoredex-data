@@ -34,11 +34,13 @@ def read_json(path: Path) -> Any:
 
 
 def indexes(manifest: dict[str, Any]) -> dict[str, Any]:
+    from authoritative_graph import identity_view
+
     adapter = read_json(ROOT / "verification" / "card_discovery_adapters.json")
     staging = read_json(ROOT / "verification" / "card_discovery_staging.json")
     source_first = read_json(ROOT / "verification" / "source_first_prints.json")
     units = read_json(ROOT / "verification" / "units.json")
-    dryrun = read_json(ROOT / "verification" / "print_identity_dryrun.json")
+    identity = identity_view(read_json(ROOT / "verification" / "authoritative_graph.json"))
     records: dict[str, Any] = {}
     with (ROOT / "verification" / "card_discovery_records.jsonl").open(encoding="utf-8") as handle:
         for line in handle:
@@ -51,16 +53,16 @@ def indexes(manifest: dict[str, Any]) -> dict[str, Any]:
     }
     rekeys = {
         f"{report['issueNumber']}/{row['legacyUnitId']}": row
-        for report in dryrun["reports"]["legacyIssueRekeys"]
+        for report in identity["reports"]["legacyIssueRekeys"]
         for row in report["rows"]
     }
     releases_by_source = {
         source_id: release
-        for release in dryrun["cardReleases"]
+        for release in identity["cardReleases"]
         for source_id in release.get("sourceFirstRecordIds", [])
     }
     unit_claims: dict[str, list[dict[str, Any]]] = {}
-    for claim in dryrun["candidateClaims"]:
+    for claim in identity["candidateClaims"]:
         if (claim.get("claimKind"), claim.get("sourceKind")) != (
                 "card-release", "legacy-language-unit"):
             continue
@@ -85,7 +87,7 @@ def indexes(manifest: dict[str, Any]) -> dict[str, Any]:
         "card-record-context": record_context,
         "legacy-rekey": rekeys,
         "release-by-source": releases_by_source,
-        "release": {item["cardReleaseId"]: item for item in dryrun["cardReleases"]},
+        "release": {item["cardReleaseId"]: item for item in identity["cardReleases"]},
         "unit-claim": unit_claims,
         "specimen": {
             item["specimenId"]: item

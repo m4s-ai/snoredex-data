@@ -202,7 +202,7 @@ def main() -> None:
             "decision": "ADR-0002 D1",
             "description": (
                 "Provider records exist independently of Snorlax membership. Raw values are "
-                "preserved here; mapping and disposition live in set_catalogue_dryrun.json."
+                "preserved here; mapping and disposition live in the authoritative locality graph."
             ),
             "counts": {
                 "sourceRecords": len(records),

@@ -41,16 +41,15 @@ verification/ADR-0001-locality-aware-print-identity.md
                               establish language-bearing card releases, which positively evidenced
                               finishes/treatments realize as physical printings. Contradicted and
                               marketplace-only claims create no existence-bearing node. Schema in
-                              print_identity_schema.json; measured consequences in
-                              print_identity_dryrun.json; the migrated graph is materialized in
-                              snoredex.sqlite's graph_* tables.
+                              print_identity_schema.json; the authoritative migration snapshot is
+                              materialized in snoredex.sqlite's graph_* tables.
 verification/ADR-0002-local-set-edition-release-events.md
                               ACCEPTED catalogue model (#146/#140): locality-bearing local sets,
                               language/script editions, market/wave release events, scoped finish
                               profiles and source-native rarity claims. The independent raw registry
                               is set_catalogue_sources.json; executable constraints are in
-                              set_catalogue_schema.sql; set_catalogue_dryrun.json is the measured
-                              graph, materialized into snoredex.sqlite by #140.
+                              set_catalogue_schema.sql; the reviewed graph snapshot is materialized
+                              into snoredex.sqlite by #140.
 verification/ADR-0003-source-capability-coverage.md
                               ACCEPTED evidence-routing boundary (#135): provider surfaces point
                               through explicit locality/category/time coverage edges. Every claimed
@@ -97,10 +96,6 @@ LESSONS.md                    The incident behind each trap CLAUDE.md states: wh
                               looks arbitrary. Deliberately not auto-loaded.
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
                               finishes, confirmed_releases (chronological). Plus CSV exports.
-analysis_confirmed_releases_reconciled.json / .csv
-                              GENERATED #148 compatibility pair: preserves every legacy release
-                              row/CSV column and appends edition-event migration state and loss
-                              diagnostics under coverage version legacy-set-reconciliation-v1.
 artists_pokemontcgio.json     57 English cards with illustrator + exact release dates.
 verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
@@ -112,23 +107,19 @@ scripts/                      Two halves; only the second can be re-run (#28).
                                 analyze -> finishes -> language_status -> confirmed_releases
                                 -> source_registry -> source_capabilities -> source_adapters
                                 -> card_discovery
-                                -> legacy_set_reconciliation
                                 -> checklist -> readme_stats
                                 -> issue_templates
                                 -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). print_identity_dryrun.py and
-                              set_catalogue_dryrun.py rebuild the review graphs;
-                              authoritative_graph.py materializes the reviewed #140 locality graph
+                              and verifies the Pages artifact). authoritative_graph.py validates the
+                              reviewed #140 locality graph snapshot and consumers read it directly;
                               into the application database;
                               artwork_review.py builds the #120 graph-backed browser projection;
                               source_adapters.py checks/reprojects retained ADR-0004 set runs;
                               card_discovery.py checks/reprojects retained ADR-0006 card runs; and
                               completeness_gate.py validates both immutable loops and writes the
                               bounded #141 release summary; discovery_cycle.py is the explicit
-                              refresh/check wrapper for scheduled or manual reruns; and
-                              legacy_set_reconciliation.py rebuilds the bounded ADR-0005 ledger and
-                              compatibility pair. See §7.
+                              refresh/check wrapper for scheduled or manual reruns. See §7.
                               analyze.py is the SOLE producer of analysis_artists,
                               _shared_cards, _variants and _language_drift, and reads
                               snorlax_cards.json only — the single canonical node (#30). Its
@@ -176,12 +167,10 @@ verification/
   set_catalogue_sources.json  INDEPENDENT SET DISCOVERY REGISTRY: immutable provider records for
                               local sets/products, dates and edition availability. A record does not
                               need a matching Snorlax. Extend it through reviewed passes; mapping and
-                              unresolved states belong to the dry-run, not this raw store.
-  set_catalogue_schema.sql    Executable SQLite constraint contract for ADR-0002. The dry-run loads
-                              it into an empty in-memory database; #140 owns any real DB migration.
-  set_catalogue_dryrun.json   GENERATED ADR-0002 graph and reports. Rebuilt from the independent
-                              source registry plus ADR-0001 existence-bearing references; it never
-                              creates a card release from set availability.
+                              unresolved states are preserved in the authoritative graph.
+  set_catalogue_schema.sql    Executable SQLite constraint contract for ADR-0002. The historical
+                              migration pass loaded it into an empty in-memory database; #140 owns
+                              the real DB migration.
   authoritative_graph.json   GENERATED #140 canonical locality graph snapshot: reviewed identity
                               and catalogue entities, typed provenance edges, raw set records and
                               one reversible migration disposition for every input.
@@ -189,10 +178,6 @@ verification/
                               GENERATED #120 client-side review projection: graph-backed artwork/work
                               groups, local releases, images, observations and hashes. Browser edits
                               are proposals only and never write catalogue truth directly.
-  legacy_set_reconciliation.json
-                              GENERATED ADR-0005 migration ledger. It embeds every legacy finish
-                              unit exactly, keeps scalar release dates as raw history, links only
-                              positive edition events, and balances all bounded accounting buckets.
   specimens.json              Physical cards the owner holds and inspected, each with a stable
                               SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
                               instead of describing it in prose. `photograph` is null until the

@@ -45,8 +45,6 @@ FILES = [
     "analysis_checklist.json",
     "analysis_confirmed_releases.json",
     "analysis_confirmed_releases.csv",
-    "analysis_confirmed_releases_reconciled.json",
-    "analysis_confirmed_releases_reconciled.csv",
     "analysis_finishes.json",
     "analysis_artists.json",
     "analysis_variants.json",
