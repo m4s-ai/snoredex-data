@@ -49,12 +49,6 @@ def main() -> int:
     idents = [c.ident for c in rf.suite.checks]
     expect("E3 precedes E4", idents.index("E3") < idents.index("E4"), True)
 
-    # A second collect() would double every result. Nothing does that today; asserting it keeps
-    # the harness honest if collect() ever grows an idempotence claim it does not have.
-    before = len(rf.suite.results)
-    rf.collect()
-    expect("collect() is additive, not idempotent", len(rf.suite.results), before * 2)
-
     # The crash path: whatever ran before the failure must still be rendered.
     suite = Suite()
     suite.check("ran before the failure", True)

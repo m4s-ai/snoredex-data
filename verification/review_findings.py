@@ -27,6 +27,7 @@ import re
 import contextlib
 import subprocess
 import sys
+import threading
 import traceback
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -2915,18 +2916,46 @@ def collect() -> None:
                 f"{doc} is required before publication (#5)",
             )
 
-        secret_pattern = re.compile(
+        non_email_pattern = re.compile(
             r"(?:api[_-]?key|passwd|password|Bearer\s+[A-Za-z0-9._-]{8,}|Authorization:|Cookie:)"
-            r"|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}"
             r"|C:\\Users\\|(?<![A-Za-z0-9._-])/(?:Users/[a-z]|home/[a-z]+/)",
             re.IGNORECASE,
+        )
+        email_pattern = re.compile(
+            r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}", re.IGNORECASE
+        )
+        email_local_chars = frozenset(
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._%+-"
+        )
+        non_email_markers = (
+            b"api_key", b"api-key", b"apikey", b"passwd", b"password", b"bearer",
+            b"authorization:", b"cookie:", b"c:\\users\\", b"/users/", b"/home/",
         )
         def sensitive_matches(data: bytes, label: str) -> list[str]:
             if b"\0" in data:
                 return []
+
+            lowered = data.lower()
+            has_email_candidate = b"@" in data
+            has_other_candidate = any(marker in lowered for marker in non_email_markers)
+            if not has_email_candidate and not has_other_candidate:
+                return []
+
             text = data.decode("utf-8", errors="ignore")
+            matches = list(non_email_pattern.finditer(text)) if has_other_candidate else []
+            if has_email_candidate:
+                at = text.find("@")
+                while at >= 0:
+                    start = at
+                    while start and text[start - 1] in email_local_chars:
+                        start -= 1
+                    match = email_pattern.match(text, start)
+                    if match is not None and match.start() <= at < match.end():
+                        matches.append(match)
+                    at = text.find("@", at + 1)
+
             found_hits = []
-            for match in secret_pattern.finditer(text):
+            for match in sorted(matches, key=lambda row: row.start()):
                 found = match.group(0)
                 preceding = text[match.start() - 1:match.start()]
                 recent_url_start = text.rfind("https://", max(0, match.start() - 300), match.start())
@@ -2990,12 +3019,27 @@ def collect() -> None:
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE,
             )
             assert process.stdin is not None and process.stdout is not None
+
+            # Keep git fed while this thread scans the previous blob. Writing one SHA and then
+            # waiting for its response turned 3,900 tiny pipe round-trips into minutes on Windows;
+            # the producer keeps the same constant-memory protocol busy in both directions.
+            def feed_objects() -> None:
+                try:
+                    process.stdin.writelines(
+                        (entry.partition(" ")[0] + "\n").encode("ascii")
+                        for entry in objects
+                    )
+                except BrokenPipeError:
+                    pass  # The return-code check below reports a failed git process.
+                finally:
+                    process.stdin.close()
+
+            writer = threading.Thread(target=feed_objects)
+            writer.start()
             history_hits: list[str] = []
             scanned_blobs = 0
             for entry in objects:
                 sha, _, path = entry.partition(" ")
-                process.stdin.write((sha + "\n").encode("ascii"))
-                process.stdin.flush()
                 header = process.stdout.readline().decode("ascii", errors="replace").strip().split()
                 if len(header) < 3 or header[1] == "missing":
                     continue
@@ -3008,8 +3052,9 @@ def collect() -> None:
                     continue
                 scanned_blobs += 1
                 history_hits.extend(sensitive_matches(data, f"{sha[:10]}:{path or '(unknown path)'}"))
-            process.stdin.close()
-            process.wait(timeout=10)
+            writer.join()
+            if process.wait(timeout=10) != 0:
+                return True, 0, ["Git history could not be read"]
             return shallow, scanned_blobs, sorted(set(history_hits))
 
 
