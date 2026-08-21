@@ -61,6 +61,41 @@ def main() -> None:
     registry["sourceRecords"].append(extra)
     assert any("source records" in error for error in validate(graph, registry))
 
+    # The other append-only identity stores are covered by the same graph boundary.
+    identity_inputs = {
+        "source_first": json.loads(
+            (ROOT / "verification/source_first_prints.json").read_text(encoding="utf-8")
+        ),
+    }
+    identity_inputs["source_first"]["prints"].append(
+        {**identity_inputs["source_first"]["prints"][0], "printId": "TEST-UNACCOUNTED"}
+    )
+    assert any("identity input claims" in error for error in validate(graph, identity_inputs=identity_inputs))
+
+    # Closed finish profiles require an explicit scope and closure authority.
+    tampered = deepcopy(graph)
+    next(row["payload"] for row in tampered["entities"] if row["entityType"] == "finish-profile")[
+        "closureAuthority"
+    ] = None
+    assert any("closure scope/authority" in error for error in validate(tampered))
+
+    # Rarity observations must stay in the locality of the release they describe.
+    tampered = deepcopy(graph)
+    rarity = next(row["payload"] for row in tampered["entities"] if row["entityType"] == "rarity-claim")
+    release = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["entityId"] == rarity["cardReleaseId"]
+    )
+    other_source = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "set-source-record"
+        and (row["payload"].get("raw") or {}).get("locality")
+        and (row["payload"].get("raw") or {}).get("locality") != release["locality"]
+    )
+    rarity["sourceRecordId"] = other_source["sourceRecordId"]
+    rarity["sourceProvider"] = other_source["provider"]
+    assert any("rarity claim source locality mismatch" in error for error in validate(tampered))
+
     identity = identity_view(graph)
     migrations = {
         (row["sourceKind"], row["sourceId"]): row

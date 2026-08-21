@@ -102,6 +102,7 @@ def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:
 def validate(
     graph: dict[str, Any],
     source_registry: dict[str, Any] | None = None,
+    identity_inputs: dict[str, Any] | None = None,
 ) -> list[str]:
     """Validate graph structure and the evidence/promotion invariants it carries.
 
@@ -283,6 +284,159 @@ def validate(
         if any(ref not in releases for ref in refs):
             errors.append(f"migration targetRefs contain unknown release: {migration.get('sourceId')}")
 
+    # Candidate claims are projections of several append-only identity stores.  Keep
+    # their keys and promotion-relevant fields accounted for here so a new confirmed
+    # unit, finish printing, source-first record, or specimen cannot vanish while the
+    # committed graph still passes its own summary checks.
+    identity_inputs = identity_inputs or {}
+
+    def read_identity_input(key: str, relative: str, fallback: Any) -> Any:
+        if key in identity_inputs:
+            return identity_inputs[key]
+        try:
+            return json.loads((ROOT / relative).read_text(encoding="utf-8"))
+        except (OSError, ValueError) as error:
+            errors.append(f"cannot read identity input {relative}: {error}")
+            return fallback
+
+    units_raw = read_identity_input("units", "verification/units.json", [])
+    codecards_raw = read_identity_input("codecards", "verification/excluded_codecards.json", [])
+    finishes_raw = read_identity_input("finishes", "verification/finish_units.json", {"units": []})
+    source_first_raw = read_identity_input(
+        "source_first", "verification/source_first_prints.json", {"prints": []}
+    )
+    specimens_raw = read_identity_input("specimens", "verification/specimens.json", {"specimens": []})
+    units = units_raw if isinstance(units_raw, list) else []
+    codecards = codecards_raw if isinstance(codecards_raw, list) else []
+    finish_units = finishes_raw.get("units", []) if isinstance(finishes_raw, dict) else []
+    source_first = source_first_raw.get("prints", []) if isinstance(source_first_raw, dict) else []
+    specimens = specimens_raw.get("specimens", []) if isinstance(specimens_raw, dict) else []
+    claims_by_source = {(row.get("sourceKind"), row.get("sourceId")): row for row in claims.values()}
+    expected_claims: dict[tuple[str, str], tuple[str, str | None, str | None]] = {}
+
+    def expect_claim(
+        source_kind: str,
+        source_id: Any,
+        evidence_status: str,
+        disposition: str | None,
+        source_record: str | None,
+    ) -> None:
+        key = (source_kind, str(source_id))
+        if key in expected_claims:
+            errors.append(f"duplicate identity input claim: {source_kind}:{source_id}")
+        expected_claims[key] = (evidence_status, disposition, source_record)
+
+    for unit in units:
+        status = unit.get("status")
+        disposition = {
+            "confirmed": "established-and-mapped",
+            "contradicted": "bounded-contradicted",
+        }.get(status)
+        expect_claim("legacy-language-unit", unit.get("unitId"), status, disposition, unit.get("sourceUrl"))
+    for unit in codecards:
+        expect_claim("legacy-code-card-unit", unit.get("unitId"), "out-of-scope-product",
+                     "positively-excluded", None)
+
+    finish_printings: dict[str, tuple[dict[str, Any], str]] = {}
+    for finish_unit in finish_units:
+        finish_unit_id = finish_unit.get("finishUnitId")
+        for printing in finish_unit.get("printings", []):
+            printing_id = printing.get("printingId")
+            finish_printings[str(printing_id)] = (printing, str(finish_unit_id))
+            status = printing.get("verificationStatus")
+            disposition = "established-and-mapped" if status == "confirmed" else "candidate-needs-evidence"
+            expect_claim("finish-printing-record", printing_id, status, disposition, None)
+    source_first_prints = {str(row.get("printId")): row for row in source_first}
+    for row in source_first:
+        expect_claim("source-first-record", row.get("printId"), "confirmed",
+                     "established-and-mapped", row.get("sourceUrl"))
+    observed_specimens = {
+        str(row.get("specimenId")): row for row in specimens if row.get("physicalObservation")
+    }
+    for row in observed_specimens.values():
+        expect_claim("specimen-observation", row.get("specimenId"), "observed", None, None)
+
+    actual_claim_keys = set(claims_by_source)
+    if actual_claim_keys != set(expected_claims):
+        errors.append("identity input claims and graph candidate claims differ")
+    for key, (expected_status, expected_disposition, expected_source_record) in expected_claims.items():
+        claim = claims_by_source.get(key)
+        if not claim:
+            continue
+        if claim.get("evidenceStatus") != expected_status:
+            errors.append(f"identity claim evidence is stale: {key[0]}:{key[1]}")
+        if expected_disposition is not None and claim.get("disposition") != expected_disposition:
+            errors.append(f"identity claim disposition is stale: {key[0]}:{key[1]}")
+        if expected_source_record != claim.get("sourceRecord"):
+            errors.append(f"identity claim source is stale: {key[0]}:{key[1]}")
+
+    def normalized(value: Any) -> str:
+        return "" if value is None else str(value)
+
+    units_by_id = {str(row.get("unitId")): row for row in units}
+    for unit_id, unit in units_by_id.items():
+        claim = claims_by_source.get(("legacy-language-unit", unit_id))
+        target_id = claim.get("materializedTargetId") if claim else None
+        if not target_id:
+            continue
+        release = releases.get(target_id)
+        if not release:
+            errors.append(f"identity claim target release is missing: {unit_id}")
+            continue
+        set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
+        number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
+        for input_field, release_field in (
+            ("language", "language"), ("setCode", set_field), ("number", number_field),
+            ("cardKey", "work"),
+        ):
+            if normalized(unit.get(input_field)) != normalized(release.get(release_field)):
+                errors.append(f"identity release is stale: {unit_id}:{input_field}")
+
+    for print_id, (printing, finish_unit_id) in finish_printings.items():
+        claim = claims_by_source.get(("finish-printing-record", print_id))
+        if not claim or not claim.get("materializedTargetId"):
+            continue
+        physical = printings.get(claim["materializedTargetId"])
+        if not physical:
+            errors.append(f"finish printing target is missing: {print_id}")
+            continue
+        for field in ("finish", "foilPattern", "markings", "distribution", "cardSize"):
+            if physical.get(field) != printing.get(field):
+                errors.append(f"finish printing is stale: {print_id}:{field}")
+        if physical.get("sourceFinishUnitId") != finish_unit_id or physical.get("sourcePrintingId") != print_id:
+            errors.append(f"finish printing provenance is stale: {print_id}")
+
+    for print_id, row in source_first_prints.items():
+        claim = claims_by_source.get(("source-first-record", print_id))
+        target_id = claim.get("materializedTargetId") if claim else None
+        release = releases.get(target_id)
+        if not release:
+            errors.append(f"source-first release target is missing: {print_id}")
+            continue
+        for input_field, release_field in (
+            ("locality", "locality"), ("language", "language"), ("script", "script"),
+            ("localSetCode", "localSetCode"), ("localNumber", "localNumber"),
+        ):
+            if normalized(row.get(input_field)) != normalized(release.get(release_field)):
+                errors.append(f"source-first release is stale: {print_id}:{input_field}")
+
+    for specimen_id, specimen in observed_specimens.items():
+        claim = claims_by_source.get(("specimen-observation", specimen_id))
+        if not claim or not claim.get("materializedTargetId"):
+            if specimen.get("physicalObservation", {}).get("coversMultipleCards"):
+                continue
+            continue
+        physical = printings.get(claim["materializedTargetId"])
+        observation = specimen.get("physicalObservation", {})
+        if not physical:
+            errors.append(f"specimen printing target is missing: {specimen_id}")
+            continue
+        for field in ("finish", "foilPattern", "markings", "cardSize"):
+            if physical.get(field) != observation.get(field):
+                errors.append(f"specimen printing is stale: {specimen_id}:{field}")
+        if physical.get("basis") != observation.get("basis"):
+            errors.append(f"specimen basis is stale: {specimen_id}")
+
     # The raw catalogue registry is append-only.  Every raw record must have exactly
     # one graph source node and one disposition, and the graph node must preserve the
     # raw record byte-for-byte as parsed JSON.
@@ -307,6 +461,161 @@ def validate(
         disposition = graph_source_dispositions.get(source_id)
         if disposition and disposition.get("sourceRecordId") != source_id:
             errors.append(f"graph source disposition key mismatch: {source_id}")
+
+    # Catalogue entities retain the old N9-N11 safety boundary: availability and
+    # aliases decorate established identities, while source, locality and closure
+    # semantics remain checked before the graph reaches SQLite consumers.
+    local_sets = by_type["local-set"]
+    events = by_type["release-event"]
+    profiles = by_type["finish-profile"]
+    refs = by_type["catalogue-card-release-ref"]
+    rarities = by_type["rarity-claim"]
+    profile_claims = by_type["profile-finish-claim"]
+    aliases = by_type["catalogue-alias-assertion"]
+    source_assertions = by_type["source-assertion"]
+
+    for local_set_id, local_set in local_sets.items():
+        if local_set.get("localSetId") != local_set_id or not local_set.get("locality") \
+                or not local_set.get("localCode") or not local_set.get("sourceRecordIds"):
+            errors.append(f"local set identity is incomplete: {local_set_id}")
+        for source_id in local_set.get("sourceRecordIds") or []:
+            if source_id not in graph_sources:
+                errors.append(f"local set source is missing: {local_set_id} -> {source_id}")
+            if ("set-source-record", source_id) not in relations[("local-set", local_set_id, "observed-by")]:
+                errors.append(f"local set source edge is missing: {local_set_id} -> {source_id}")
+
+    for edition_id, edition in editions.items():
+        identity = edition.get("identity") if isinstance(edition.get("identity"), dict) else edition
+        catalogue = edition.get("catalogue") if isinstance(edition.get("catalogue"), dict) else None
+        if edition.get("setEditionId") != edition_id or not identity.get("locality") \
+                or not identity.get("language") or len(identity.get("script", "")) != 4:
+            errors.append(f"set edition identity is incomplete: {edition_id}")
+        if catalogue is None:
+            # Identity-only unresolved editions intentionally have no local-set node.
+            continue
+        local_set_id = catalogue.get("localSetId")
+        local_set = local_sets.get(local_set_id)
+        if not local_set or catalogue.get("setEditionId") != edition_id \
+                or identity.get("locality") != catalogue.get("locality") \
+                or identity.get("language") != catalogue.get("language") \
+                or identity.get("script") != catalogue.get("script") \
+                or identity.get("localSetCode") != catalogue.get("localCode") \
+                or local_set.get("locality") != identity.get("locality"):
+            errors.append(f"set edition catalogue locality/identity mismatch: {edition_id}")
+        if relations[("set-edition", edition_id, "belongs-to")] != [("local-set", local_set_id)]:
+            errors.append(f"set edition local-set edge is missing or non-unique: {edition_id}")
+
+    for event_id, event in events.items():
+        local_set_id = event.get("localSetId")
+        source_id = event.get("sourceRecordId")
+        if event.get("releaseEventId") != event_id or local_set_id not in local_sets \
+                or not event.get("setEditionIds") or not event.get("marketScopes") \
+                or not event.get("datePrecision") or source_id not in graph_sources:
+            errors.append(f"release event is incomplete: {event_id}")
+        else:
+            local_set = local_sets[local_set_id]
+            raw_locality = (graph_sources[source_id].get("raw") or {}).get("locality")
+            if raw_locality and raw_locality != local_set.get("locality"):
+                errors.append(f"release event source locality mismatch: {event_id}")
+            if relations[("release-event", event_id, "belongs-to")] != [("local-set", local_set_id)]:
+                errors.append(f"release event local-set edge is missing or non-unique: {event_id}")
+            for edition_id in event.get("setEditionIds", []):
+                if edition_id not in editions:
+                    errors.append(f"release event edition is missing: {event_id} -> {edition_id}")
+                if ("set-edition", edition_id) not in relations[("release-event", event_id, "supports")]:
+                    errors.append(f"release event edition edge is missing: {event_id} -> {edition_id}")
+
+    for profile_id, profile in profiles.items():
+        source_id = profile.get("sourceRecordId")
+        if profile.get("finishProfileId") != profile_id or profile.get("localSetId") not in local_sets \
+                or not profile.get("languageScope") or not profile.get("rules") \
+                or source_id not in graph_sources:
+            errors.append(f"finish profile is incomplete: {profile_id}")
+        if profile.get("closedWithinScope") and not (
+            profile.get("closureScope") and profile.get("closureAuthority")
+        ):
+            errors.append(f"closed finish profile lacks closure scope/authority: {profile_id}")
+        if ("set-source-record", source_id) not in relations[("finish-profile", profile_id, "supported-by")]:
+            errors.append(f"finish profile source edge is missing: {profile_id}")
+        for edition_id in profile.get("setEditionIds", []):
+            if edition_id not in editions:
+                errors.append(f"finish profile edition is missing: {profile_id} -> {edition_id}")
+            if ("set-edition", edition_id) not in relations[("finish-profile", profile_id, "scoped-to")]:
+                errors.append(f"finish profile edition edge is missing: {profile_id} -> {edition_id}")
+        for rule in profile.get("rules", []):
+            if not rule.get("finishProfileRuleId") or not rule.get("effect") \
+                    or not rule.get("finish") or rule.get("sourceRecordId") != source_id \
+                    or rule.get("sourceRecordId") not in graph_sources:
+                errors.append(f"finish profile rule is incomplete: {profile_id}")
+
+    for ref_id, ref in refs.items():
+        card_release_id = ref.get("cardReleaseId")
+        set_edition_id = ref.get("setEditionId")
+        release = releases.get(card_release_id)
+        if ref_id != card_release_id or not release or set_edition_id not in editions \
+                or release.get("setEditionId") != set_edition_id:
+            errors.append(f"catalogue release reference is invalid: {ref_id}")
+        if ("card-release", card_release_id) not in relations[("catalogue-card-release-ref", ref_id, "references")]:
+            errors.append(f"catalogue release reference edge is missing: {ref_id}")
+        if ("set-edition", set_edition_id) not in relations[("catalogue-card-release-ref", ref_id, "belongs-to")]:
+            errors.append(f"catalogue release edition edge is missing: {ref_id}")
+
+    for rarity_id, rarity in rarities.items():
+        source_id = rarity.get("sourceRecordId")
+        release = releases.get(rarity.get("cardReleaseId"))
+        source = graph_sources.get(source_id)
+        if rarity.get("rarityClaimId") != rarity_id or not release or not source \
+                or not rarity.get("sourceNativeValue") or not rarity.get("sourceVocabulary") \
+                or rarity.get("sourceProvider") != source.get("provider"):
+            errors.append(f"rarity claim is incomplete: {rarity_id}")
+        elif (source.get("raw") or {}).get("locality") != release.get("locality"):
+            errors.append(f"rarity claim source locality mismatch: {rarity_id}")
+        if ("card-release", rarity.get("cardReleaseId")) not in relations[("rarity-claim", rarity_id, "asserts-rarity-for")]:
+            errors.append(f"rarity claim release edge is missing: {rarity_id}")
+        if ("set-source-record", source_id) not in relations[("rarity-claim", rarity_id, "observed-by")]:
+            errors.append(f"rarity claim source edge is missing: {rarity_id}")
+
+    for claim_id, claim in profile_claims.items():
+        profile_id = claim.get("finishProfileId")
+        card_release_id = claim.get("cardReleaseId")
+        if claim.get("profileFinishClaimId") != claim_id or profile_id not in profiles \
+                or card_release_id not in refs or not claim.get("finish") \
+                or claim.get("closesCompleteFinishList") is not False:
+            errors.append(f"profile finish claim is incomplete: {claim_id}")
+        if ("finish-profile", profile_id) not in relations[("profile-finish-claim", claim_id, "uses-profile")]:
+            errors.append(f"profile finish profile edge is missing: {claim_id}")
+        if ("card-release", card_release_id) not in relations[("profile-finish-claim", claim_id, "asserts-finish-for")]:
+            errors.append(f"profile finish release edge is missing: {claim_id}")
+
+    for alias_id, alias in aliases.items():
+        local_set_id = alias.get("localSetId")
+        if alias.get("aliasAssertionId") != alias_id or alias.get("sourceRecordId") not in graph_sources \
+                or local_set_id not in local_sets or not alias.get("rawIdentifier") \
+                or alias.get("reversibleProjection") is not True:
+            errors.append(f"catalogue alias is incomplete: {alias_id}")
+        if ("set-source-record", alias.get("sourceRecordId")) not in relations[("catalogue-alias-assertion", alias_id, "asserted-by")]:
+            errors.append(f"catalogue alias source edge is missing: {alias_id}")
+        if ("local-set", local_set_id) not in relations[("catalogue-alias-assertion", alias_id, "identifies")]:
+            errors.append(f"catalogue alias target edge is missing: {alias_id}")
+
+    assertion_targets = {
+        "asserts-rarity-claim": ("rarityClaimId", "rarity-claim"),
+        "asserts-local-set": ("localSetId", "local-set"),
+        "asserts-set-edition": ("setEditionId", "set-edition"),
+        "asserts-release-event": ("releaseEventId", "release-event"),
+        "asserts-finish-profile": ("finishProfileId", "finish-profile"),
+    }
+    for assertion_id, assertion in source_assertions.items():
+        kind = assertion.get("assertionKind")
+        target_field, target_type = assertion_targets.get(kind, (None, None))
+        target_id = assertion.get(target_field) if target_field else None
+        if assertion.get("sourceAssertionId") != assertion_id or assertion.get("sourceRecordId") not in graph_sources \
+                or not target_field or target_id not in by_type[target_type]:
+            errors.append(f"source assertion is incomplete: {assertion_id}")
+        if ("set-source-record", assertion.get("sourceRecordId")) not in relations[("source-assertion", assertion_id, "asserted-by")]:
+            errors.append(f"source assertion source edge is missing: {assertion_id}")
+        if (target_type, target_id) not in relations[("source-assertion", assertion_id, kind)]:
+            errors.append(f"source assertion target edge is missing: {assertion_id}")
     summary = graph.get("summary", {})
     if summary.get("entities") != len(entities) or summary.get("edges") != len(edges):
         errors.append("graph summary does not match entity/edge counts")
