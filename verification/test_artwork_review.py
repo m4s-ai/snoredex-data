@@ -24,7 +24,7 @@ def main() -> int:
     projection = json.loads(path.read_text(encoding="utf-8"))
     if projection != artwork_review.build():
         fail("projection is stale; run python scripts/artwork_review.py")
-    if projection.get("schemaVersion") != "1.0.0" or projection.get("proposalSchemaVersion") != "1.0.0":
+    if projection.get("schemaVersion") != "1.1.0" or projection.get("proposalSchemaVersion") != "1.1.0":
         fail("unexpected projection or proposal schema version")
 
     groups = projection.get("groups") or []
@@ -36,10 +36,21 @@ def main() -> int:
         fail("summary card-release count does not match the projection")
     if sum(len(member.get("physicalPrintings") or []) for member in members) != projection["summary"]["physicalPrintings"]:
         fail("physical-printing accounting drift")
+    if not projection.get("appearanceIdentity"):
+        fail("appearance identity policy is missing")
+    if any(member.get("appearanceId") != group.get("groupId")
+           for group in groups for member in group.get("members") or []):
+        fail("release appearance identity does not match its review group")
+    if any(group.get("groupId", "").startswith("WORK:")
+           for group in groups):
+        fail("review groups still use work ids as artwork identity")
 
     for member in members:
         if not member.get("cardReleaseId") or not member.get("locality") or not member.get("language"):
             fail(f"incomplete stable identity: {member}")
+        if member.get("appearanceIdentityState") == "verified-image-match" and not any(
+                image.get("reviewable") and image.get("contentHash") for image in member.get("images") or []):
+            fail(f"verified appearance has no pinned image: {member['cardReleaseId']}")
         if member.get("workId") and member["workId"] not in member["cardReleaseId"] and member["workMappingState"] == "mapped":
             # The work id is allowed to be unrelated text; this branch only protects accidental
             # empty values while keeping the assertion readable for the graph-backed mapping.

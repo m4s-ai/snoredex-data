@@ -199,7 +199,8 @@ def main() -> int:
         check("artwork review embeds the authoritative projection",
               artwork_projection["schema"] == "snoredex-artwork-review"
               and artwork_projection["summary"]["cardReleases"] >= 600
-              and artwork_projection["summary"]["mappedWorks"] >= 30,
+              and artwork_projection["summary"]["mappedWorks"] >= 30
+              and artwork_projection["summary"]["mappedAppearances"] > 0,
               str(artwork_projection.get("summary")))
         check("artwork review renders a mapped group and a stable release id",
               page.locator("#artwork-review").count() == 1
@@ -230,7 +231,7 @@ def main() -> int:
 
         multi_image_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
+            const member = group.members.find(candidate => group.groupKind === 'mapped-appearance'
               && candidate.images && candidate.images.length > 1);
             if (member) return {id: member.cardReleaseId, count: member.images.length};
           }
@@ -251,7 +252,7 @@ def main() -> int:
 
         structured_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
+            const member = group.members.find(candidate => group.groupKind === 'mapped-appearance'
               && candidate.images && candidate.images.length && candidate.physicalPrintings
               && candidate.physicalPrintings.length);
             if (member) return {id: member.cardReleaseId,
@@ -278,18 +279,33 @@ def main() -> int:
                   structured_saved is not None
                   and structured_saved["proposedAfter"]["detection"]["cardName"] == "Structured corrected name"
                   and structured_saved["proposedAfter"]["detection"]["variant"] == "reviewed-variant"
+                  and structured_saved["proposedAfter"]["clearDetectionFields"] == []
                   and structured_saved["affectedPhysicalPrintingIds"] == structured_member["printingIds"],
                   str(structured_saved))
+            structured_card.locator(".ar-proposed-artist").fill("")
+            structured_card.locator(".ar-save").click()
+            page.wait_for_timeout(80)
+            cleared_saved = page.evaluate("""(releaseId) => {
+              const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+              const saved = raw ? JSON.parse(raw) : {};
+              return saved[releaseId] || null;
+            }""", structured_member["id"])
+            check("artwork correction encodes explicit field clearing",
+                  cleared_saved is not None
+                  and "artist" not in cleared_saved["proposedAfter"]["detection"]
+                  and "artist" in cleared_saved["proposedAfter"]["clearDetectionFields"],
+                  str(cleared_saved))
             page.fill("#ar-search", "")
             page.wait_for_timeout(80)
         else:
             check("artwork correction saves structured values and physical targets", False,
                   "projection has no mapped member with image and physical printing")
 
+        page.select_option("#ar-scope", "all")
+        page.wait_for_timeout(80)
         no_image_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
-              && (!candidate.images || !candidate.images.length));
+            const member = group.members.find(candidate => !candidate.images || !candidate.images.length);
             if (member) return member.cardReleaseId;
           }
           return null;
@@ -322,8 +338,8 @@ def main() -> int:
 
         unverified_image_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
-              && candidate.images && candidate.images.some(image => !image.reviewable || !image.contentHash));
+            const member = group.members.find(candidate => candidate.images
+              && candidate.images.some(image => !image.reviewable || !image.contentHash));
             if (member) return {id: member.cardReleaseId, count: member.images.length};
           }
           return null;

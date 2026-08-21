@@ -165,6 +165,8 @@ def build() -> dict[str, Any]:
         payload = entity["payload"]
         release_id = entity["entityId"]
         work_id = release_to_work.get(release_id) or payload.get("work")
+        work_entity = entities.get(work_id)
+        card_key = (work_entity or {}).get("payload", {}).get("cardKey")
         images: list[dict[str, Any]] = []
         observations: list[dict[str, Any]] = []
         detection = {
@@ -276,10 +278,25 @@ def build() -> dict[str, Any]:
 
         for key in ("finish", "foilPattern", "markings"):
             detection[key] = sorted({value for value in detection[key] if value})
+        verified_image_hashes = sorted({
+            image["contentHash"] for image in images
+            if image.get("reviewable") and image.get("contentHash")
+        })
+        if verified_image_hashes:
+            appearance_id = f"APPEARANCE:IMAGE:{digest(verified_image_hashes)[:24]}"
+            appearance_state = "verified-image-match"
+        else:
+            # No pinned bytes means no positive artwork equivalence. Keep the release reviewable,
+            # but isolate it until a reviewer supplies explicit appearance evidence.
+            appearance_id = f"APPEARANCE:RELEASE:{release_id}"
+            appearance_state = "unresolved-release"
         unique_observations = {item["observationId"]: item for item in observations}
         return {
             "cardReleaseId": release_id,
             "workId": work_id,
+            "cardKey": card_key,
+            "appearanceId": appearance_id,
+            "appearanceIdentityState": appearance_state,
             "locality": payload.get("locality"),
             "language": payload.get("language"),
             "script": payload.get("script"),
@@ -301,46 +318,56 @@ def build() -> dict[str, Any]:
     releases_projection.sort(key=lambda item: item["cardReleaseId"])
 
     groups: dict[str, dict[str, Any]] = {}
-    work_entities = {entity["entityId"]: entity for entity in by_type.get("work", [])}
     for member in releases_projection:
-        group_id = member["workId"] or f"UNMAPPED:{member['cardReleaseId']}"
+        group_id = member["appearanceId"]
         if group_id not in groups:
-            work = work_entities.get(group_id)
-            card_key = (work or {}).get("payload", {}).get("cardKey") if work else None
             groups[group_id] = {
                 "groupId": group_id,
-                "groupKind": "mapped-work" if work else "unmapped-release",
-                "workId": group_id if work else None,
-                "cardKey": card_key,
-                "label": card_key or "Unmapped source-first release",
+                "groupKind": "mapped-appearance" if member["appearanceIdentityState"] == "verified-image-match" else "unmapped-release",
+                "appearanceId": group_id,
+                "appearanceIdentityState": member["appearanceIdentityState"],
+                "workIds": [],
+                "cardKeys": [],
+                "label": member.get("cardKey") or "Unresolved artwork appearance",
                 "members": [],
             }
+        if member.get("workId"):
+            groups[group_id]["workIds"].append(member["workId"])
+        if member.get("cardKey"):
+            groups[group_id]["cardKeys"].append(member["cardKey"])
         groups[group_id]["members"].append(member)
+
+    for group in groups.values():
+        group["workIds"] = sorted(set(group["workIds"]))
+        group["cardKeys"] = sorted(set(group["cardKeys"]))
 
     projection = {
         "schema": "snoredex-artwork-review",
-        "schemaVersion": "1.0.0",
+        "schemaVersion": "1.1.0",
         "proposalSchema": "snoredex-artwork-review-proposal",
-        "proposalSchemaVersion": "1.0.0",
+        "proposalSchemaVersion": "1.1.0",
         "generated": graph["meta"].get("generated"),
         "projectionVersion": digest({
             "graph": graph["meta"].get("inputs"),
             "graphSchemaVersion": graph["meta"].get("schemaVersion"),
+            "appearanceIdentitySchemaVersion": "1.1.0",
             "units": digest(units),
             "finishes": digest(finishes),
             "sourceFirst": digest(source_first),
         }),
         "identitySource": "verification/authoritative_graph.json",
+        "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
         "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
         "summary": {
             "groups": len(groups),
-            "mappedWorks": sum(1 for group in groups.values() if group["groupKind"] == "mapped-work"),
+            "mappedWorks": len({member["workId"] for member in releases_projection if member.get("workId") and member.get("workMappingState") == "mapped"}),
+            "mappedAppearances": sum(1 for group in groups.values() if group["groupKind"] == "mapped-appearance"),
             "unmappedReleases": sum(1 for group in groups.values() if group["groupKind"] == "unmapped-release"),
             "cardReleases": len(releases_projection),
             "physicalPrintings": sum(len(member["physicalPrintings"]) for member in releases_projection),
             "sourceObservations": sum(len(member["observations"]) for member in releases_projection),
         },
-        "groups": sorted(groups.values(), key=lambda group: (group["groupKind"], group["label"], group["groupId"])),
+        "groups": sorted(groups.values(), key=lambda group: ({"mapped-appearance": 0, "unmapped-release": 1}[group["groupKind"]], group["label"], group["groupId"])),
     }
     return projection
 

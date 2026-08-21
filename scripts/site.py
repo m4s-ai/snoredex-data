@@ -747,7 +747,7 @@ def main() -> int:
         </div>
         <div class="field"><label for="ar-scope">Show</label>
           <select id="ar-scope">
-            <option value="mapped">Mapped artwork groups</option>
+            <option value="mapped">Verified artwork appearances</option>
             <option value="all">All groups</option>
             <option value="unmapped">Unmapped releases</option>
           </select>
