@@ -560,7 +560,7 @@ def main() -> int:
       </button>
     </div>
     <nav class="sections" id="section-nav" aria-label="Sections">
-      <details id="section-nav-disclosure">
+      <details id="section-nav-disclosure" open>
         <summary class="nav-toggle" id="nav-toggle">
         <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
         <span class="nav-toggle-text">Sections</span>

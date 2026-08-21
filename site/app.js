@@ -1528,11 +1528,15 @@
     render();
   }
 
-  /* Section navigation (#123): native details owns the responsive disclosure; this only closes it
-   * after a section link is followed. */
+  /* Section navigation (#123): native details owns the disclosure; this only syncs its initial
+   * responsive state and closes it after a section link is followed. */
   function initSectionNav() {
     const details = $("#section-nav-disclosure");
     if (!details) return;
+    const narrow = window.matchMedia("(max-width: 720px)");
+    const sync = () => { details.open = !narrow.matches; };
+    sync();
+    narrow.addEventListener("change", sync);
     details.addEventListener("click", (event) => {
       if (event.target.closest("a")) details.open = false;
     });

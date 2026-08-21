@@ -1471,10 +1471,12 @@ def main() -> int:
         nav_wide = page.evaluate("""() => ({
           toggleShown: getComputedStyle(document.querySelector('#nav-toggle')).display !== 'none',
           listShown: getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none',
+          open: document.querySelector('#section-nav-disclosure').open,
           links: document.querySelectorAll('#section-nav-list a').length,
         })""")
         check("a wide viewport restores the full section navigation",
-              not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["links"] == 8,
+              not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["open"]
+              and nav_wide["links"] == 8,
               str(nav_wide))
 
         # --- #125: raw export of the current view ---
