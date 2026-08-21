@@ -466,9 +466,10 @@ tbody tr:hover td.corr { background: var(--panel); }
 .artwork-group header p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
 .artwork-members { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-top: 12px; }
 .artwork-member { display: grid; grid-template-columns: 92px 1fr; gap: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 10px; background: var(--bg); min-width: 0; }
-.artwork-image { text-align: center; color: var(--muted); font-size: 11px; }
+.artwork-images { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+.artwork-image { width: 82px; margin: 0; text-align: center; color: var(--muted); font-size: 11px; }
 .artwork-image img { display: block; width: 82px; max-height: 116px; object-fit: contain; margin: 0 auto 4px; border-radius: 4px; }
-.artwork-image small { display: block; overflow-wrap: anywhere; }
+.artwork-image figcaption { overflow-wrap: anywhere; }
 .artwork-image.missing { min-height: 116px; display: grid; place-items: center; border: 1px dashed var(--line); padding: 6px; }
 .artwork-member-body { min-width: 0; }
 .artwork-member h4 { margin: 0 0 4px; font-size: 15px; overflow-wrap: anywhere; }
@@ -487,6 +488,13 @@ tbody tr:hover td.corr { background: var(--panel); }
 .artwork-decision label { display: grid; gap: 3px; font-size: 12px; color: var(--muted); }
 .artwork-decision select, .artwork-decision input, .artwork-decision textarea { width: 100%; font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--control-line); border-radius: 4px; padding: 5px 6px; }
 .artwork-decision textarea { resize: vertical; }
+.ar-structured-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px; margin: 8px 0; padding: 8px; border: 1px solid var(--line); border-radius: 4px; }
+.ar-structured-fields p { grid-column: 1 / -1; margin: 0; }
+.ar-structured-fields label, .ar-physical-targets label { display: grid; gap: 3px; font-size: 12px; color: var(--muted); }
+.ar-structured-fields input { width: 100%; font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--control-line); border-radius: 4px; padding: 5px 6px; }
+.ar-physical-targets { display: grid; gap: 4px; margin: 8px 0; padding: 8px; border: 1px solid var(--line); border-radius: 4px; }
+.ar-physical-targets legend { padding: 0 4px; font-size: 12px; color: var(--muted); }
+.ar-physical-targets input { width: auto; }
 .artwork-save-status { min-height: 1.2em; color: var(--muted); font-size: 12px; }
 .artwork-muted { color: var(--muted); }
 
@@ -617,6 +625,7 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
   }
   #rows .card-preview-trigger img { width: 46px; max-height: 66px; }
   .artwork-member { grid-template-columns: 64px 1fr; padding: 8px; gap: 8px; }
+  .artwork-image { width: 58px; }
   .artwork-image img { width: 58px; max-height: 84px; }
   .artwork-image.missing { min-height: 84px; }
   .artwork-group { padding: 10px; }

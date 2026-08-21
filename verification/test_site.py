@@ -184,6 +184,7 @@ def main() -> int:
         page.on("pageerror", lambda e: console_errors.append(str(e)))
         page.goto(url)
         page.wait_for_selector("#rows tr")
+        page.evaluate("localStorage.removeItem('snoredex-artwork-review-proposals-v1')")
         # Column and language filters live in collapsed <details>; open them as a user would.
         page.eval_on_selector_all("details.morefilters", "els => els.forEach(d => d.open = true)")
 
@@ -226,6 +227,98 @@ def main() -> int:
         check("artwork review downloads structured proposals",
               artwork_download.value.suggested_filename == "snoredex-artwork-review-proposals.json",
               artwork_download.value.suggested_filename)
+
+        multi_image_member = page.evaluate("""() => {
+          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
+              && candidate.images && candidate.images.length > 1);
+            if (member) return {id: member.cardReleaseId, count: member.images.length};
+          }
+          return null;
+        }""")
+        if multi_image_member:
+            page.fill("#ar-search", multi_image_member["id"])
+            page.wait_for_timeout(80)
+            multi_card = page.locator("#ar-groups .artwork-member").filter(
+                has_text=multi_image_member["id"]).first
+            check("artwork review renders every associated image",
+                  multi_card.locator(".artwork-images img").count() == multi_image_member["count"],
+                  f"expected {multi_image_member['count']} images")
+            page.fill("#ar-search", "")
+            page.wait_for_timeout(80)
+        else:
+            check("artwork review renders every associated image", False, "projection has no multi-image member")
+
+        structured_member = page.evaluate("""() => {
+          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
+              && candidate.images && candidate.images.length && candidate.physicalPrintings
+              && candidate.physicalPrintings.length);
+            if (member) return {id: member.cardReleaseId,
+              printingIds: member.physicalPrintings.map(item => item.physicalPrintingId)};
+          }
+          return null;
+        }""")
+        if structured_member:
+            page.fill("#ar-search", structured_member["id"])
+            page.wait_for_timeout(80)
+            structured_card = page.locator("#ar-groups .artwork-member").filter(
+                has_text=structured_member["id"]).first
+            structured_card.locator(".ar-action").select_option("correct")
+            structured_card.locator(".ar-proposed-name").fill("Structured corrected name")
+            structured_card.locator(".ar-proposed-variant").fill("reviewed-variant")
+            structured_card.locator(".ar-save").click()
+            page.wait_for_timeout(80)
+            structured_saved = page.evaluate("""(releaseId) => {
+              const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+              const saved = raw ? JSON.parse(raw) : {};
+              return saved[releaseId] || null;
+            }""", structured_member["id"])
+            check("artwork correction saves structured values and physical targets",
+                  structured_saved is not None
+                  and structured_saved["proposedAfter"]["detection"]["cardName"] == "Structured corrected name"
+                  and structured_saved["proposedAfter"]["detection"]["variant"] == "reviewed-variant"
+                  and structured_saved["affectedPhysicalPrintingIds"] == structured_member["printingIds"],
+                  str(structured_saved))
+            page.fill("#ar-search", "")
+            page.wait_for_timeout(80)
+        else:
+            check("artwork correction saves structured values and physical targets", False,
+                  "projection has no mapped member with image and physical printing")
+
+        no_image_member = page.evaluate("""() => {
+          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
+              && (!candidate.images || !candidate.images.length));
+            if (member) return member.cardReleaseId;
+          }
+          return null;
+        }""")
+        if no_image_member:
+            page.fill("#ar-search", no_image_member)
+            page.wait_for_timeout(80)
+            no_image_card = page.locator("#ar-groups .artwork-member").filter(has_text=no_image_member).first
+            check("artwork review blocks image-dependent actions without an image",
+                  no_image_card.locator(".artwork-images .missing").count() == 1
+                  and no_image_card.locator("option[value='confirm']").get_attribute("disabled") is not None
+                  and no_image_card.locator("option[value='unclear']").get_attribute("disabled") is None,
+                  "missing-image action guard not rendered")
+            no_image_card.locator(".ar-action").select_option("unclear")
+            no_image_card.locator(".ar-save").click()
+            page.wait_for_timeout(80)
+            unclear_saved = page.evaluate("""(releaseId) => {
+              const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+              const saved = raw ? JSON.parse(raw) : {};
+              return saved[releaseId] || null;
+            }""", no_image_member)
+            check("artwork review permits only an unclear proposal without an image",
+                  unclear_saved is not None and unclear_saved["action"] == "unclear"
+                  and unclear_saved["imageHashes"] == [], str(unclear_saved))
+        else:
+            check("artwork review blocks image-dependent actions without an image", False,
+                  "projection has no mapped member without an image")
+            check("artwork review permits only an unclear proposal without an image", False,
+                  "projection has no mapped member without an image")
 
         exs_rows = page.evaluate("""() => JSON.parse(
           document.getElementById('data-rows').textContent

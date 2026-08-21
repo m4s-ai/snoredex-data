@@ -1257,13 +1257,18 @@
       unclear: "Mark unclear",
       "propose-variant": "Propose new variant",
     }[action] || action);
+    const imageDependentActions = new Set(["confirm", "correct", "reassign", "split", "propose-variant"]);
+    const structuredActions = new Set(["correct", "propose-variant"]);
 
     const imageHTML = (member) => {
-      const image = member.images && member.images[0];
-      if (!image) return '<div class="artwork-image missing">No recorded image</div>';
-      return '<div class="artwork-image"><img loading="lazy" src="' + escapeHTML(image.src) +
-        '" alt="' + escapeHTML(member.detection.cardName || member.cardReleaseId) +
-        '"><small>' + escapeHTML(image.label) + '</small></div>';
+      const images = (member.images || []).filter((image) => image && image.src);
+      if (!images.length) return '<div class="artwork-images"><div class="artwork-image missing">No reviewable image recorded</div></div>';
+      return '<div class="artwork-images">' + images.map((image, index) =>
+        '<figure class="artwork-image"><img loading="lazy" src="' + escapeHTML(image.src) +
+        '" alt="' + escapeHTML((member.detection && member.detection.cardName) || member.cardReleaseId) +
+        ' — image ' + (index + 1) + '"><figcaption>' + escapeHTML(image.label || 'source image') +
+        (image.contentHash ? '<br><code>' + escapeHTML(image.contentHash) + '</code>' : '') +
+        '</figcaption></figure>').join('') + '</div>';
     };
 
     const evidenceHTML = (member) => {
@@ -1288,13 +1293,40 @@
       const physical = member.physicalPrintings || [];
       const images = member.images || [];
       const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
-      const observations = member.observations || [];
+      const physicalIds = physical.map((item) => item.physicalPrintingId).filter(Boolean);
+      const selectedPhysicalIds = new Set(
+        draft && Array.isArray(draft.affectedPhysicalPrintingIds)
+          ? draft.affectedPhysicalPrintingIds : physicalIds,
+      );
+      const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
       const selectedAction = draft ? draft.action : "";
+      const imageReviewable = images.some((image) => image && image.src);
       const actionOptions = ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
         .map((action) => '<option value="' + escapeHTML(action) + '"' +
+          (imageDependentActions.has(action) && !imageReviewable ? ' disabled' : '') +
           (selectedAction === action ? ' selected' : '') + '>' +
           escapeHTML(action ? actionLabel(action) : 'Choose a review action') + '</option>').join('');
       const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
+      const value = (key) => escapeHTML(proposed[key] || "");
+      const structuredFields = '<div class="ar-structured-fields"' +
+        (structuredActions.has(selectedAction) ? '' : ' hidden') + '>' +
+        '<p class="artwork-muted">Structured values are required for correction and variant proposals.</p>' +
+        '<label>Card name<input class="ar-proposed-name" value="' + value('cardName') + '" placeholder="Corrected card name"></label>' +
+        '<label>Artist<input class="ar-proposed-artist" value="' + value('artist') + '" placeholder="Corrected artist"></label>' +
+        '<label>Variant identity<input class="ar-proposed-variant" value="' + value('variant') + '" placeholder="e.g. V2"></label>' +
+        '<label>Local set code<input class="ar-proposed-set" value="' + value('localSetCode') + '" placeholder="Set code for a new variant"></label>' +
+        '<label>Local number<input class="ar-proposed-number" value="' + value('localNumber') + '" placeholder="Collector number for a new variant"></label>' +
+        '<label>Finish<input class="ar-proposed-finish" value="' + value('finish') + '" placeholder="Finish"></label>' +
+        '<label>Foil pattern<input class="ar-proposed-foil" value="' + value('foilPattern') + '" placeholder="Foil pattern"></label>' +
+        '<label>Markings<input class="ar-proposed-markings" value="' + value('markings') + '" placeholder="Stamp or marking"></label></div>';
+      const physicalInputs = physicalIds.length
+        ? '<fieldset class="ar-physical-targets"><legend>Affected physical printings</legend>' +
+          physical.map((item) => '<label><input class="ar-physical" type="checkbox" value="' +
+            escapeHTML(item.physicalPrintingId) + '"' +
+            (selectedPhysicalIds.has(item.physicalPrintingId) ? ' checked' : '') + '> <code>' +
+            escapeHTML(item.physicalPrintingId) + '</code> · ' + escapeHTML(item.finish || 'printing') +
+            '</label>').join('') + '</fieldset>'
+        : '<p class="artwork-muted">No physical-printing identity is linked.</p>';
       return '<article class="artwork-member" data-release-id="' + escapeHTML(member.cardReleaseId) + '">' +
         imageHTML(member) +
         '<div class="artwork-member-body"><h4>' + escapeHTML(detection.cardName || member.cardReleaseId) +
@@ -1311,6 +1343,7 @@
         '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(imageHashes[0] || 'not available') +
         '</code></dd></dl>' +
         evidenceHTML(member) +
+        physicalInputs + structuredFields +
         '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
         escapeHTML(member.cardReleaseId) + '">' + actionOptions + '</select></label>' +
         '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(target) +
@@ -1318,6 +1351,7 @@
         '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
         escapeHTML(draft && draft.note || '') + '</textarea></label>' +
         '<button type="button" class="ghost ar-save">Save proposal</button>' +
+        (!imageReviewable ? '<span class="artwork-muted">No image available; only “Mark unclear” can be proposed.</span>' : '') +
         '<span class="artwork-save-status" role="status"></span></div></div></article>';
     };
 
@@ -1368,11 +1402,36 @@
       const note = $(".ar-note", card).value.trim();
       const name = reviewer.value.trim();
       const status = $(".artwork-save-status", card);
+      const imageReviewable = (member.images || []).some((image) => image && image.src);
       if (!name) { status.textContent = "Reviewer name required."; reviewer.focus(); return; }
       if (!action) { status.textContent = "Choose an action first."; return; }
+      if (!imageReviewable && imageDependentActions.has(action)) {
+        status.textContent = "A reviewable image is required for this action; choose Mark unclear.";
+        return;
+      }
       if (action === "reassign" && !targetGroupId) { status.textContent = "Target group required."; return; }
+      const structured = {
+        cardName: $(".ar-proposed-name", card)?.value.trim() || null,
+        artist: $(".ar-proposed-artist", card)?.value.trim() || null,
+        variant: $(".ar-proposed-variant", card)?.value.trim() || null,
+        localSetCode: $(".ar-proposed-set", card)?.value.trim() || null,
+        localNumber: $(".ar-proposed-number", card)?.value.trim() || null,
+        finish: $(".ar-proposed-finish", card)?.value.trim() || null,
+        foilPattern: $(".ar-proposed-foil", card)?.value.trim() || null,
+        markings: $(".ar-proposed-markings", card)?.value.trim() || null,
+      };
+      if (action === "correct" && !Object.values(structured).some(Boolean)) {
+        status.textContent = "Enter at least one structured corrected value.";
+        return;
+      }
+      if (action === "propose-variant" && !structured.variant) {
+        status.textContent = "Variant identity is required for a new variant proposal.";
+        return;
+      }
       const observationIds = (member.observations || []).map((item) => item.observationId);
       const sourceHashes = (member.observations || []).map((item) => item.contentHash);
+      const affectedPhysicalPrintingIds = Array.from(card.querySelectorAll(".ar-physical:checked"))
+        .map((input) => input.value);
       drafts[member.cardReleaseId] = {
         proposalId: "PROPOSAL:" + member.cardReleaseId + ":" + Date.now(),
         schema: ARTWORK_REVIEW.proposalSchema,
@@ -1386,8 +1445,14 @@
         sourceObservationIds: observationIds,
         sourceContentHashes: sourceHashes,
         imageHashes: (member.images || []).map((item) => item.contentHash).filter(Boolean),
+        affectedPhysicalPrintingIds,
         before: { groupId: group.groupId, workId: member.workId, detection: member.detection },
-        proposedAfter: { action, targetGroupId: targetGroupId || null, note },
+        proposedAfter: {
+          action,
+          targetGroupId: targetGroupId || null,
+          detection: structuredActions.has(action) ? structured : null,
+          note,
+        },
         note,
         createdAt: new Date().toISOString(),
       };
@@ -1403,6 +1468,11 @@
       const member = memberById.get(card && card.dataset.releaseId);
       const group = groupById.get(button.closest(".artwork-group").dataset.groupId);
       if (member && group) makeProposal(member, group, card);
+    });
+    root.addEventListener("change", (event) => {
+      if (!event.target.matches || !event.target.matches(".ar-action")) return;
+      const fields = event.target.closest(".artwork-member").querySelector(".ar-structured-fields");
+      if (fields) fields.hidden = !structuredActions.has(event.target.value);
     });
     [search, scope, proposalFilter].forEach((control) => control.addEventListener("input", render));
     [scope, proposalFilter].forEach((control) => control.addEventListener("change", render));
