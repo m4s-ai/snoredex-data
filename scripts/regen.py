@@ -51,19 +51,14 @@ REGEN = [
     ["scripts/source_registry.py"],
     ["scripts/source_capabilities.py"],
     ["scripts/source_adapters.py"],
-    # print-identity and set-catalogue dry-runs feed card_discovery (it reads
-    # print_identity_dryrun.json + source_capability_graph.json), so they must
-    # regenerate BEFORE it.
-    ["scripts/print_identity_dryrun.py"],
-    ["scripts/set_catalogue_dryrun.py"],
-    ["scripts/authoritative_graph.py"],
+    # The authoritative locality graph is a committed migration input. Discovery reads
+    # it directly; `--check` below validates its structural contract.
     ["scripts/artwork_review.py"],
     ["scripts/card_discovery.py"],
     ["scripts/asia_locality_matrix.py"],
     ["scripts/locality_matrix.py"],
     ["scripts/completeness_gate.py"],
-    # legacy reconciliation & downstream projections
-    ["scripts/legacy_set_reconciliation.py"],
+    # downstream projections
     ["scripts/checklist.py"],
     ["scripts/readme_stats.py"],
     ["scripts/issue_templates.py"],
@@ -91,15 +86,12 @@ CHECK = [
     ["scripts/source_registry.py", "--check"],
     ["scripts/source_capabilities.py", "--check"],
     ["scripts/source_adapters.py", "--check"],
-    ["scripts/print_identity_dryrun.py", "--check"],
-    ["scripts/set_catalogue_dryrun.py", "--check"],
     ["scripts/authoritative_graph.py", "--check"],
     ["scripts/artwork_review.py", "--check"],
     ["scripts/card_discovery.py", "--check"],
     ["scripts/asia_locality_matrix.py", "--check"],
     ["scripts/locality_matrix.py", "--check"],
     ["scripts/completeness_gate.py", "--check"],
-    ["scripts/legacy_set_reconciliation.py", "--check"],
     ["scripts/checklist.py", "--check"],
     ["scripts/readme_stats.py", "--check"],
     ["scripts/issue_templates.py", "--check"],
@@ -120,11 +112,10 @@ TESTS = [
     ["verification/test_owner_adjudications.py"],
     ["verification/test_source_adapters.py"],
     ["verification/test_card_discovery.py"],
-    ["verification/test_legacy_set_reconciliation.py"],
     ["verification/test_metric_polarity.py"],
-    ["verification/test_print_identity_rekeys.py"],
     ["verification/test_asia_locality_matrix.py"],
     ["verification/test_authoritative_graph.py"],
+    ["verification/test_retired_projections.py"],
     ["verification/test_artwork_review.py"],
     ["verification/test_korean_burning_confrontation.py"],
     ["verification/test_completeness_gate.py"],

@@ -1,7 +1,7 @@
 <!-- doc: role=architecture decision record for the bounded legacy set reconciliation; stage=reference -->
 # ADR-0005: bounded legacy set, release and finish reconciliation
 
-- **Status:** Accepted
+- **Status:** Accepted; historical migration record (retired after #140)
 - **Date:** 2026-08-09
 - **Issue:** #148
 - **Depends on:** ADR-0001 print identity (#134), ADR-0002 set identity (#146), and ADR-0004
@@ -24,11 +24,10 @@ agreement among card finish rows into a set rule would invent a completeness cla
 
 ## Decision
 
-Adopt [`legacy_set_reconciliation.json`](legacy_set_reconciliation.json) as the generated,
-reversible migration ledger and `legacy-set-reconciliation-v1` as its bounded coverage version.
-[`scripts/legacy_set_reconciliation.py`](../scripts/legacy_set_reconciliation.py) always starts from
-empty collections and reads the legacy release/finish stores plus the accepted ADR-0001 and
-ADR-0002 graph projections. It does not fetch sources, change verdicts or discover sets.
+The bounded migration ledger was consumed by #140 and is retained here as history. Its durable
+successor is [`authoritative_graph.json`](authoritative_graph.json), which stores the reviewed
+entities, provenance edges and one reversible migration disposition for every input. No retired
+compatibility projection is a live source of truth.
 
 Every one of the 135 aliases enters exactly one bucket:
 
@@ -76,15 +75,11 @@ record from which an identity node could be created.
 The mixed `DP-P`/Korean, `XY-P`/Korean and `xJTG`/French claims remain individual confirmed or
 contradicted card claims. Their report deliberately has no set-edition verdict.
 
-## Compatibility and loss diagnostics
+## Historical compatibility and loss diagnostics
 
-[`analysis_confirmed_releases_reconciled.json`](../analysis_confirmed_releases_reconciled.json) and
-[`analysis_confirmed_releases_reconciled.csv`](../analysis_confirmed_releases_reconciled.csv) retain
-all 203 legacy rows and append the reconciliation state. The JSON preserves every legacy field
-unchanged; the CSV preserves every original column as an exact prefix. Both expose the coverage
-version and row identity. Diagnostics count row deltas, language relationships, supported event
-links, visible needs-evidence links, overwritten scalar dates and unsourced values presented as
-reviewed exact dates.
+The migration retained all 203 legacy rows, their source fields, and the reconciliation state
+before the compatibility exports were retired. The authoritative graph and its SQLite tables
+retain the durable identities, provenance, and visible `needs-evidence` dispositions.
 
 Changing any bounded denominator requires a reviewed input change and a new coverage version. The
 generator rejects silent drift rather than stretching `v1` around a different population.
@@ -98,9 +93,8 @@ Each reconciliation run follows one loop:
 3. attach positive release events and finish evidence at their narrowest scopes;
 4. render split, merge, orphan, unsourced, precision, language and count-delta reports;
 5. place every record in exactly one accounting bucket;
-6. generate lossless JSON/CSV compatibility projections;
-7. rebuild from empty collections and compare committed bytes; and
-8. expose `complete`, `needs-evidence`, and `blocked-by-source` terminal states.
+6. materialize the reviewed graph and compare its logical contents; and
+7. expose `complete`, `needs-evidence`, and `blocked-by-source` terminal states.
 
 `complete` means the bounded legacy record is accounted and its positive graph links are explicit.
 It does not mean the set universe, language availability or finish list is complete.
@@ -110,11 +104,11 @@ evidence in all three states.
 
 ## Enforcement
 
-`scripts/legacy_set_reconciliation.py --check`,
-`verification/test_legacy_set_reconciliation.py`, and the cross-platform release gate enforce:
+The authoritative graph validator, database logical-dump check, and cross-platform release gate
+enforce:
 
 - exact 135 + 203 + 637 accounting;
-- deterministic empty rebuilds and coverage-versioned compatibility output;
+- deterministic graph-backed rebuilds;
 - zero dropped rows, language relationships or overwritten scalar dates;
 - explicit event locality, market, precision, status and evidence;
 - exact finish-unit retention and preservation of all five closed lists;

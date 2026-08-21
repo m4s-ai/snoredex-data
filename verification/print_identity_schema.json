@@ -241,12 +241,12 @@
     },
     "I2": {
       "rule": "a contradicted, unresolved, excluded, or marketplace-only claim cannot mint an existence-bearing target",
-      "enforcedBy": "scripts/print_identity_dryrun.py and review_findings.py N2"
+      "enforcedBy": "scripts/authoritative_graph.py and the database graph checks"
     },
     "I3": {
       "rule": "one card release belongs to exactly one language-bearing set edition",
       "detail": "BKT 118 in seven confirmed languages is seven card releases, not one WEST print with a languages array.",
-      "enforcedBy": "scripts/print_identity_dryrun.py and review_findings.py N2"
+      "enforcedBy": "scripts/authoritative_graph.py and the database graph checks"
     },
     "I4": {
       "rule": "manufacturing classifications specialize a card release rather than changing its set identity",
@@ -266,7 +266,7 @@
     "I8": {
       "rule": "localSetCode and localNumber are null exactly when localIdentifierKnown is false",
       "detail": "Migration anchors remain in viaLegacy fields and cannot masquerade as local identifiers.",
-      "enforcedBy": "scripts/print_identity_dryrun.py and review_findings.py N2"
+      "enforcedBy": "scripts/authoritative_graph.py and the database graph checks"
     },
     "I9": {
       "rule": "release dates and set availability are context only and cannot establish a card release",
