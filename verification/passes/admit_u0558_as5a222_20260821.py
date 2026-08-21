@@ -20,6 +20,7 @@ REKEYS = ROOT / "verification" / "legacy_issue_rekeys.json"
 SPECIMENS = ROOT / "verification" / "specimens.json"
 
 ISSUE_COMMENT = "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5367641859"
+PHOTO_URL = "https://raw.githubusercontent.com/m4s-ai/snoredex-data/e8fdc2d8cdf3017b1f4ff6436546dcc63930e378/verification/specimens/SPEC-0038.png"
 CARD_PAGE = "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
 SET_PAGE = "https://wiki.52poke.com/wiki/AS5a"
 PRINT_ID = "TW:AS5a:222/184:base"
@@ -84,6 +85,8 @@ def main() -> int:
         "AS5a", "222", "T-Chinese"
     ):
         raise SystemExit("SPEC-0038 identity drifted")
+    if specimen.get("photographSource") != PHOTO_URL:
+        raise SystemExit("SPEC-0038 photograph provenance drifted")
 
     prints = read(PRINTS)
     existing = {row["printId"]: row for row in prints["prints"]}
