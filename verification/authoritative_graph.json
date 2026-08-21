@@ -5,8 +5,8 @@
     "status": "authoritative-migrated",
     "generated": "2026-08-21",
     "inputs": {
-      "verification/print_identity_dryrun.json": "8b138d5f9308685505c124115c2a529c94a84ad53e5cea520392386e7a1f282a",
-      "verification/set_catalogue_dryrun.json": "9d805bf62e43811c377501efc2c97852d3a025c6f82e4206ff7bc874e6e71283"
+      "verification/print_identity_dryrun.json": "1f714a4b018c0fd3f4970e34ff0666dc5f9b354816e09ee7dc095e0da6a5ba80",
+      "verification/set_catalogue_dryrun.json": "b786fb4407f1809bbbb3cdedf6a33a6e9b401610660d2087e02b8dc3c21520cc"
     },
     "identitySource": "snoredex-print-identity-dryrun",
     "catalogueSource": "snoredex-set-catalogue-dryrun",
@@ -25233,8 +25233,8 @@
         "sourceRecord": null,
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
-        "materializedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+        "proposedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "materializedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "reason": "positive source-first specimen/card record"
       }
     },
@@ -33729,10 +33729,10 @@
     },
     {
       "entityType": "card-release",
-      "entityId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "entityId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "origin": "verification/print_identity_dryrun.json",
       "payload": {
-        "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "setEditionId": "EDITION:TW:T-Chinese:SM-P",
         "locality": "TW",
         "language": "T-Chinese",
@@ -33741,8 +33741,8 @@
         "localNumber": "053",
         "localIdentifierKnown": true,
         "state": "identified",
-        "work": null,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "workMappingState": "mapped-by-explicit-equivalence",
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
@@ -33757,6 +33757,9 @@
         "sourceRecords": [],
         "sourceFirstRecordIds": [
           "TW:SM-P:053:base"
+        ],
+        "legacyCounterpartUnitIds": [
+          "U0414"
         ]
       }
     },
@@ -52788,10 +52791,10 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
-      "entityId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "entityId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "origin": "verification/set_catalogue_dryrun.json",
       "payload": {
-        "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "setEditionId": "EDITION:TW:T-Chinese:SM-P",
         "collectorNumber": "053",
         "origin": "print-identity-dryrun"
@@ -57575,6 +57578,24 @@
         "assertedAt": "2026-08-21",
         "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366842409",
         "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 117/184, and the official Taiwan record plus AS5a checklist corroborate that local release. It is the AS5a counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "entityType": "equivalence-assertion",
+      "entityId": "ASSERT:same-work:U0414:TW:SM-P:053:base",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "assertionId": "ASSERT:same-work:U0414:TW:SM-P:053:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0414",
+        "sourceFirstRecordId": "TW:SM-P:053:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366944279",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX promo as 053/SM-P, and the Bulbapedia, 52poke and Pokumon records cited in the issue confirm that local identity. The repository already retains the owner-backed source-first print TW:SM-P:053:base (SPEC-0029). It is a second local counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
         "destructiveMergeAllowed": false
       }
     },
@@ -133053,7 +133074,7 @@
       "fromId": "CLAIM:source-first:TW:SM-P:053:base",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "toId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -136912,11 +136933,21 @@
     },
     {
       "fromType": "card-release",
-      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "relation": "belongs-to",
       "toType": "set-edition",
       "toId": "EDITION:TW:T-Chinese:SM-P",
       "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "state": "mapped-by-explicit-equivalence"
+      }
     },
     {
       "fromType": "card-release",
@@ -149452,7 +149483,7 @@
     },
     {
       "fromType": "catalogue-card-release-ref",
-      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "relation": "belongs-to",
       "toType": "set-edition",
       "toId": "EDITION:TW:T-Chinese:SM-P",
@@ -149460,10 +149491,10 @@
     },
     {
       "fromType": "catalogue-card-release-ref",
-      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "relation": "references",
       "toType": "card-release",
-      "toId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "toId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {}
     },
     {
@@ -155223,6 +155254,46 @@
         "assertedAt": "2026-08-21",
         "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366842409",
         "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 117/184, and the official Taiwan record plus AS5a checklist corroborate that local release. It is the AS5a counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0414:TW:SM-P:053:base",
+      "relation": "relates",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0414:TW:SM-P:053:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0414",
+        "sourceFirstRecordId": "TW:SM-P:053:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366944279",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX promo as 053/SM-P, and the Bulbapedia, 52poke and Pokumon records cited in the issue confirm that local identity. The repository already retains the owner-backed source-first print TW:SM-P:053:base (SPEC-0029). It is a second local counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0414:TW:SM-P:053:base",
+      "relation": "relates",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0414:TW:SM-P:053:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0414",
+        "sourceFirstRecordId": "TW:SM-P:053:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366944279",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX promo as 053/SM-P, and the Bulbapedia, 52poke and Pokumon records cited in the issue confirm that local identity. The repository already retains the owner-backed source-first print TW:SM-P:053:base (SPEC-0029). It is a second local counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
         "destructiveMergeAllowed": false
       }
     },
@@ -208704,7 +208775,7 @@
       "sourceKind": "source-first-record",
       "sourceId": "TW:SM-P:053:base",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "targetRef": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -213794,8 +213865,8 @@
     }
   ],
   "summary": {
-    "entities": 6342,
-    "edges": 8948,
+    "entities": 6343,
+    "edges": 8951,
     "migrationInputs": 2109,
     "migrationDispositions": {
       "bounded-contradicted": 84,

@@ -56,7 +56,7 @@
     "heldSpecimenDispositions": 0,
     "sourceFirstPrintsAdmitted": 50,
     "sourceFirstPrintsHeld": 0,
-    "equivalenceAssertions": 4,
+    "equivalenceAssertions": 5,
     "legacyIssueRekeySets": 1,
     "cardReleaseNodesByLocality": {
       "WEST": 348,
@@ -5880,13 +5880,16 @@
             "legacyProduct": "sm9 066",
             "disposition": "linked-local-counterpart",
             "sourceFirstRecordIds": [
-              "TW:AS5a:117/184:base"
+              "TW:AS5a:117/184:base",
+              "TW:SM-P:053:base"
             ],
             "localCardReleaseIds": [
-              "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+              "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
             ],
             "assertionIds": [
-              "ASSERT:same-work:U0414:TW:AS5a:117/184:base"
+              "ASSERT:same-work:U0414:TW:AS5a:117/184:base",
+              "ASSERT:same-work:U0414:TW:SM-P:053:base"
             ]
           },
           {
@@ -6110,6 +6113,19 @@
       "assertedAt": "2026-08-21",
       "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366842409",
       "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 117/184, and the official Taiwan record plus AS5a checklist corroborate that local release. It is the AS5a counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
+      "destructiveMergeAllowed": false
+    },
+    {
+      "assertionId": "ASSERT:same-work:U0414:TW:SM-P:053:base",
+      "assertionType": "same-work-decision",
+      "fromId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "legacyUnitId": "U0414",
+      "sourceFirstRecordId": "TW:SM-P:053:base",
+      "assertedBy": "Scarrty",
+      "assertedAt": "2026-08-21",
+      "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366944279",
+      "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX promo as 053/SM-P, and the Bulbapedia, 52poke and Pokumon records cited in the issue confirm that local identity. The repository already retains the owner-backed source-first print TW:SM-P:053:base (SPEC-0029). It is a second local counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
       "destructiveMergeAllowed": false
     },
     {
@@ -23716,8 +23732,8 @@
       "sourceRecord": null,
       "evidenceStatus": "confirmed",
       "disposition": "established-and-mapped",
-      "proposedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
-      "materializedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "proposedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "materializedTargetId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -38054,7 +38070,7 @@
       ]
     },
     {
-      "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:unmapped-work:SPEC-0029",
+      "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "setEditionId": "EDITION:TW:T-Chinese:SM-P",
       "locality": "TW",
       "language": "T-Chinese",
@@ -38063,8 +38079,8 @@
       "localNumber": "053",
       "localIdentifierKnown": true,
       "state": "identified",
-      "work": null,
-      "workMappingState": "needs-explicit-equivalence",
+      "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "workMappingState": "mapped-by-explicit-equivalence",
       "viaLegacySetCode": null,
       "viaLegacyNumber": null,
       "claimIds": [
@@ -38079,6 +38095,9 @@
       "sourceRecords": [],
       "sourceFirstRecordIds": [
         "TW:SM-P:053:base"
+      ],
+      "legacyCounterpartUnitIds": [
+        "U0414"
       ]
     },
     {
