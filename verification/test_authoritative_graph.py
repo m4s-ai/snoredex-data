@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import sqlite3
 import sys
+from copy import deepcopy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,6 +35,31 @@ def main() -> None:
     assert graph["summary"]["cardReleases"] > 0
     assert graph["summary"]["physicalPrintings"] > 0
     assert graph["summary"]["setSourceRecords"] == graph["summary"]["setSourceDispositions"]
+
+    # A contradicted claim must not be promotable merely by changing its disposition
+    # and pointing it at an existing release.
+    tampered = deepcopy(graph)
+    tampered_claim = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("evidenceStatus") == "contradicted"
+    )
+    release_id = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+    )
+    tampered_claim["disposition"] = "established-and-mapped"
+    tampered_claim["proposedTargetId"] = release_id
+    tampered_claim["materializedTargetId"] = release_id
+    assert any("positive evidence" in error for error in validate(tampered))
+
+    # Appending to the raw registry without adding graph nodes/dispositions must fail
+    # the cross-store accounting check.
+    registry = json.loads((ROOT / "verification/set_catalogue_sources.json").read_text(encoding="utf-8"))
+    extra = deepcopy(registry["sourceRecords"][0])
+    extra["sourceRecordId"] = "SET-SRC-TEST-UNACCOUNTED"
+    registry["sourceRecords"].append(extra)
+    assert any("source records" in error for error in validate(graph, registry))
 
     identity = identity_view(graph)
     migrations = {

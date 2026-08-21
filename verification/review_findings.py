@@ -2482,7 +2482,7 @@ def collect() -> None:
                 str(path.relative_to(archive)).replace("\\", "/"): hashlib.sha256(
                     path.read_bytes()).hexdigest()
                 for path in sorted(archive.rglob("*"))
-                if path.is_file() and path.name != "MANIFEST.json"
+                if path.is_file() and path.name != "MANIFEST.json" and "__pycache__" not in path.parts
             }
             archive_drift.extend(f"modified: {name}" for name, digest in present.items()
                                  if name in recorded and recorded[name] != digest)
