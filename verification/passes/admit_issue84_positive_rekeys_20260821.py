@@ -114,6 +114,21 @@ MAPPINGS_TO_ADD = [
         ),
     },
     {
+        "legacyUnitId": "U0414",
+        "sourceFirstRecordId": "TW:SM-P:053:base",
+        "assertionType": "same-work-decision",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366944279",
+        "evidence": (
+            "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX promo as "
+            "053/SM-P, and the Bulbapedia, 52poke and Pokumon records cited in the issue "
+            "confirm that local identity. The repository already retains the owner-backed "
+            "source-first print TW:SM-P:053:base (SPEC-0029). It is a second local counterpart "
+            "of legacy U0414 (sm9 066 V1); both release identities remain distinct."
+        ),
+    },
+    {
         "legacyUnitId": "U0634",
         "sourceFirstRecordId": "TW:AS5a:203/184:base",
         "assertionType": "same-work-decision",
@@ -174,14 +189,16 @@ def main() -> int:
     if question_set is None:
         raise SystemExit("issue #84 re-key question set is missing")
     mappings = question_set.setdefault("mappings", [])
-    by_unit = {row["legacyUnitId"]: row for row in mappings}
+    by_pair = {(row["legacyUnitId"], row["sourceFirstRecordId"]): row for row in mappings}
     for mapping in MAPPINGS_TO_ADD:
-        current = by_unit.get(mapping["legacyUnitId"])
+        pair = (mapping["legacyUnitId"], mapping["sourceFirstRecordId"])
+        current = by_pair.get(pair)
         if current is not None and current != mapping:
-            raise SystemExit(f"{mapping['legacyUnitId']} already has a different re-key mapping")
+            raise SystemExit(f"{pair} already has a different re-key mapping")
         if current is None:
             mappings.append(mapping)
-    mappings.sort(key=lambda row: row["legacyUnitId"])
+            by_pair[pair] = mapping
+    mappings.sort(key=lambda row: (row["legacyUnitId"], row["sourceFirstRecordId"]))
     write(REKEYS, rekeys)
     print(f"admitted {len(PRINTS_TO_ADD)} AS5a prints and mapped U0414/U0634 ({len(prints['prints'])} source-first prints)")
     return 0
