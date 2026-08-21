@@ -25,6 +25,7 @@ import os
 import pathlib
 import subprocess
 import sys
+import time
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -145,8 +146,10 @@ DIFF_PATHS = ["--", ".", ":(exclude)*.sqlite"]
 
 
 def run(cmd: list[str], label: str) -> bool:
-    print(f"\n=== {label} ===")
+    print(f"\n=== {label} ===", flush=True)
+    started = time.perf_counter()
     proc = subprocess.run(cmd, cwd=ROOT, env=CHILD_ENV)
+    print(f"--- {label}: {time.perf_counter() - started:.2f}s", flush=True)
     return proc.returncode == 0
 
 
@@ -191,9 +194,13 @@ def main() -> int:
 
     for test in TESTS:
         if test[0].endswith("review_findings.py"):
+            label = " ".join(test)
+            print(f"\n=== {label} ===", flush=True)
+            started = time.perf_counter()
             proc = subprocess.run([sys.executable, *test], cwd=ROOT, text=True,
                                   encoding="utf-8", env=CHILD_ENV,
                                   stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            print(f"--- {label}: {time.perf_counter() - started:.2f}s", flush=True)
             failed = proc.returncode != 0
             n_fail = proc.stdout.count("[FAIL]")
             p6_only = failed and n_fail == 1 and "[FAIL] P6 " in proc.stdout
