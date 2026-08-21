@@ -16,6 +16,7 @@
   const readJSON = (id) => JSON.parse(document.getElementById(id).textContent);
   const ROWS = readJSON("data-rows");
   const CHECKLIST = readJSON("data-checklist");
+  const ARTWORK_REVIEW = readJSON("data-artwork-review");
   const META = readJSON("data-meta");
   const LANGS = META.languages;
   // 18 fixed columns from scripts/site.py's COLUMNS, the language matrix, then the narrow-screen
@@ -1213,6 +1214,223 @@
     });
   }
 
+  /* --------------------------------------------- artwork/detection review (#120) */
+
+  function initArtworkReview() {
+    const root = $("#artwork-review-app");
+    if (!root || !ARTWORK_REVIEW) return;
+    const groupsBox = $("#ar-groups");
+    const summary = $("#ar-summary");
+    const search = $("#ar-search");
+    const scope = $("#ar-scope");
+    const proposalFilter = $("#ar-proposal-filter");
+    const reviewer = $("#ar-reviewer");
+    const storageKey = "snoredex-artwork-review-proposals-v1";
+    let drafts = {};
+
+    try {
+      const saved = window.localStorage.getItem(storageKey);
+      if (saved) drafts = JSON.parse(saved) || {};
+    } catch (error) { /* Offline/file:// storage may be unavailable. */ }
+
+    const persist = () => {
+      try { window.localStorage.setItem(storageKey, JSON.stringify(drafts)); }
+      catch (error) { /* The download remains available even without storage. */ }
+    };
+    const members = () => ARTWORK_REVIEW.groups.flatMap((group) => group.members);
+    const memberById = new Map(members().map((member) => [member.cardReleaseId, member]));
+    const groupById = new Map(ARTWORK_REVIEW.groups.map((group) => [group.groupId, group]));
+
+    const textFor = (member) => [
+      member.cardReleaseId, member.workId, member.locality, member.language, member.localSetCode,
+      member.localNumber, member.detection.cardName, member.detection.artist,
+      member.detection.variant, member.detection.finish.join(" "),
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    const draftFor = (member) => drafts[member.cardReleaseId] || null;
+    const draftState = (member) => draftFor(member) ? "reviewed" : "unreviewed";
+    const actionLabel = (action) => ({
+      confirm: "Confirm group",
+      correct: "Correct detection",
+      reassign: "Reassign artwork group",
+      split: "Split from group",
+      unclear: "Mark unclear",
+      "propose-variant": "Propose new variant",
+    }[action] || action);
+
+    const imageHTML = (member) => {
+      const image = member.images && member.images[0];
+      if (!image) return '<div class="artwork-image missing">No recorded image</div>';
+      return '<div class="artwork-image"><img loading="lazy" src="' + escapeHTML(image.src) +
+        '" alt="' + escapeHTML(member.detection.cardName || member.cardReleaseId) +
+        '"><small>' + escapeHTML(image.label) + '</small></div>';
+    };
+
+    const evidenceHTML = (member) => {
+      const observations = member.observations || [];
+      if (!observations.length) return '<p class="artwork-muted">No observation record linked.</p>';
+      return '<details class="artwork-evidence"><summary>Evidence (' + observations.length +
+        ' observations)</summary><ul>' + observations.map((observation) => {
+          const link = observation.url
+            ? '<a href="' + escapeHTML(observation.url) + '" target="_blank" rel="noopener nofollow">' +
+              escapeHTML(observation.url) + '</a>'
+            : '<span>' + escapeHTML(observation.observationId) + '</span>';
+          return '<li>' + link + '<br><code>' + escapeHTML(observation.observationId) +
+            '</code> <small>hash ' + escapeHTML(observation.contentHash) + '</small>' +
+            (observation.evidence ? '<p>' + escapeHTML(observation.evidence) + '</p>' : '') +
+            '</li>';
+        }).join('') + '</ul></details>';
+    };
+
+    const memberHTML = (group, member) => {
+      const draft = draftFor(member);
+      const detection = member.detection || {};
+      const physical = member.physicalPrintings || [];
+      const images = member.images || [];
+      const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
+      const observations = member.observations || [];
+      const selectedAction = draft ? draft.action : "";
+      const actionOptions = ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
+        .map((action) => '<option value="' + escapeHTML(action) + '"' +
+          (selectedAction === action ? ' selected' : '') + '>' +
+          escapeHTML(action ? actionLabel(action) : 'Choose a review action') + '</option>').join('');
+      const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
+      return '<article class="artwork-member" data-release-id="' + escapeHTML(member.cardReleaseId) + '">' +
+        imageHTML(member) +
+        '<div class="artwork-member-body"><h4>' + escapeHTML(detection.cardName || member.cardReleaseId) +
+        ' <span class="pill ' + (draft ? 'confirmed' : 'pending') + '">' +
+        escapeHTML(draft ? actionLabel(draft.action) : 'unreviewed') + '</span></h4>' +
+        '<p><strong>' + escapeHTML(member.language || '—') + '</strong> · ' +
+        escapeHTML(member.locality || '—') + ' · <code>' + escapeHTML(member.localSetCode || '—') +
+        ' ' + escapeHTML(member.localNumber || '—') + '</code><br>' +
+        '<small>' + escapeHTML(member.cardReleaseId) + '</small></p>' +
+        '<dl class="artwork-detection"><dt>Detection</dt><dd>' +
+        escapeHTML([detection.variant, detection.artist, detection.finish && detection.finish.join(', '),
+          detection.foilPattern && detection.foilPattern.join(', ')].filter(Boolean).join(' · ') || 'no fields') +
+        '</dd><dt>Physical printings</dt><dd>' + escapeHTML(String(physical.length)) +
+        '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(imageHashes[0] || 'not available') +
+        '</code></dd></dl>' +
+        evidenceHTML(member) +
+        '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
+        escapeHTML(member.cardReleaseId) + '">' + actionOptions + '</select></label>' +
+        '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(target) +
+        '" placeholder="WORK:…" aria-label="Target artwork group"></label>' +
+        '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
+        escapeHTML(draft && draft.note || '') + '</textarea></label>' +
+        '<button type="button" class="ghost ar-save">Save proposal</button>' +
+        '<span class="artwork-save-status" role="status"></span></div></div></article>';
+    };
+
+    const groupHTML = (group) => '<article class="artwork-group" data-group-id="' + escapeHTML(group.groupId) +
+      '"><header><div><h3>' + escapeHTML(group.label) + '</h3><p><code>' +
+      escapeHTML(group.groupId) + '</code> · ' + escapeHTML(group.members.length + ' local releases') +
+      '</p></div><span class="pill ' + (group.groupKind === 'mapped-work' ? 'confirmed' : 'pending') + '">' +
+      escapeHTML(group.groupKind === 'mapped-work' ? 'mapped artwork/work' : 'unmapped release') +
+      '</span></header><div class="artwork-members">' +
+      group.members.map((member) => memberHTML(group, member)).join('') + '</div></article>';
+
+    const filteredGroups = () => {
+      const needle = search.value.trim().toLowerCase();
+      const mode = scope.value;
+      const proposalMode = proposalFilter.value;
+      return ARTWORK_REVIEW.groups.filter((group) => {
+        if (mode === "mapped" && group.groupKind !== "mapped-work") return false;
+        if (mode === "unmapped" && group.groupKind !== "unmapped-release") return false;
+        const groupMatches = !needle || (group.label + " " + group.groupId).toLowerCase().includes(needle);
+        const visibleMembers = group.members.filter((member) => {
+          if (proposalMode === "reviewed" && !draftFor(member)) return false;
+          if (proposalMode === "unreviewed" && draftFor(member)) return false;
+          return !needle || groupMatches || textFor(member).includes(needle);
+        });
+        if (!visibleMembers.length) return false;
+        group.__visibleMembers = visibleMembers;
+        return true;
+      });
+    };
+
+    const render = () => {
+      const groups = filteredGroups();
+      const reviewed = members().filter((member) => draftFor(member)).length;
+      summary.textContent = groups.length + ' groups shown · ' + groups.reduce((n, group) => n + group.__visibleMembers.length, 0) +
+        ' releases · ' + reviewed + ' proposals saved locally · projection ' + ARTWORK_REVIEW.projectionVersion.slice(0, 12);
+      groupsBox.innerHTML = groups.map((group) => {
+        const original = group.members;
+        group.members = group.__visibleMembers;
+        const html = groupHTML(group);
+        group.members = original;
+        return html;
+      }).join('') || '<p class="artwork-muted">No groups match the current filters.</p>';
+    };
+
+    const makeProposal = (member, group, card) => {
+      const action = $(".ar-action", card).value;
+      const targetGroupId = $(".ar-target", card).value.trim();
+      const note = $(".ar-note", card).value.trim();
+      const name = reviewer.value.trim();
+      const status = $(".artwork-save-status", card);
+      if (!name) { status.textContent = "Reviewer name required."; reviewer.focus(); return; }
+      if (!action) { status.textContent = "Choose an action first."; return; }
+      if (action === "reassign" && !targetGroupId) { status.textContent = "Target group required."; return; }
+      const observationIds = (member.observations || []).map((item) => item.observationId);
+      const sourceHashes = (member.observations || []).map((item) => item.contentHash);
+      drafts[member.cardReleaseId] = {
+        proposalId: "PROPOSAL:" + member.cardReleaseId + ":" + Date.now(),
+        schema: ARTWORK_REVIEW.proposalSchema,
+        schemaVersion: ARTWORK_REVIEW.proposalSchemaVersion,
+        projectionVersion: ARTWORK_REVIEW.projectionVersion,
+        action,
+        groupId: group.groupId,
+        affectedCardReleaseIds: [member.cardReleaseId],
+        reviewer: name,
+        evidenceClass: "human-review",
+        sourceObservationIds: observationIds,
+        sourceContentHashes: sourceHashes,
+        imageHashes: (member.images || []).map((item) => item.contentHash).filter(Boolean),
+        before: { groupId: group.groupId, workId: member.workId, detection: member.detection },
+        proposedAfter: { action, targetGroupId: targetGroupId || null, note },
+        note,
+        createdAt: new Date().toISOString(),
+      };
+      persist();
+      status.textContent = "Saved locally.";
+      render();
+    };
+
+    root.addEventListener("click", (event) => {
+      const button = event.target.closest && event.target.closest(".ar-save");
+      if (!button) return;
+      const card = button.closest(".artwork-member");
+      const member = memberById.get(card && card.dataset.releaseId);
+      const group = groupById.get(button.closest(".artwork-group").dataset.groupId);
+      if (member && group) makeProposal(member, group, card);
+    });
+    [search, scope, proposalFilter].forEach((control) => control.addEventListener("input", render));
+    [scope, proposalFilter].forEach((control) => control.addEventListener("change", render));
+    $("#ar-clear").addEventListener("click", () => { drafts = {}; persist(); render(); });
+    $("#ar-download").addEventListener("click", () => {
+      const proposals = Object.values(drafts);
+      if (!proposals.length) { summary.textContent = "No proposals saved locally yet."; return; }
+      const payload = {
+        schema: ARTWORK_REVIEW.proposalSchema,
+        schemaVersion: ARTWORK_REVIEW.proposalSchemaVersion,
+        projectionVersion: ARTWORK_REVIEW.projectionVersion,
+        reviewer: reviewer.value.trim() || proposals[0].reviewer,
+        createdAt: new Date().toISOString(),
+        proposals,
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "snoredex-artwork-review-proposals.json";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    });
+    render();
+  }
+
   /* Section navigation (#123): seven links wrap into a text stack on a phone, so below the narrow
    * breakpoint they collapse behind a disclosure.
    *
@@ -1347,6 +1565,7 @@
   readURL();
   buildControls();
   initChecklist();
+  initArtworkReview();
   refreshTableOverflow = initTableOverflow();
   refreshClippedCells = initClippedCells();
   refreshStickyHeader = initStickyTableHeader();

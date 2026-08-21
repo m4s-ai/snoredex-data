@@ -458,6 +458,38 @@ tbody tr:hover td.corr { background: var(--panel); }
 .builder .preview { margin-top: 12px; font-size: 14px; }
 .builder .preview strong { font-size: 18px; }
 
+/* --- artwork/detection review (#120) --- */
+.artwork-review { display: grid; gap: 12px; }
+.artwork-group { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+.artwork-group > header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.artwork-group h3 { margin: 0; font-size: 18px; overflow-wrap: anywhere; }
+.artwork-group header p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+.artwork-members { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-top: 12px; }
+.artwork-member { display: grid; grid-template-columns: 92px 1fr; gap: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 10px; background: var(--bg); min-width: 0; }
+.artwork-image { text-align: center; color: var(--muted); font-size: 11px; }
+.artwork-image img { display: block; width: 82px; max-height: 116px; object-fit: contain; margin: 0 auto 4px; border-radius: 4px; }
+.artwork-image small { display: block; overflow-wrap: anywhere; }
+.artwork-image.missing { min-height: 116px; display: grid; place-items: center; border: 1px dashed var(--line); padding: 6px; }
+.artwork-member-body { min-width: 0; }
+.artwork-member h4 { margin: 0 0 4px; font-size: 15px; overflow-wrap: anywhere; }
+.artwork-member p { margin: 4px 0 8px; }
+.artwork-member code, .artwork-group code { overflow-wrap: anywhere; }
+.artwork-member small { overflow-wrap: anywhere; word-break: break-word; }
+.artwork-detection { display: grid; grid-template-columns: max-content 1fr; gap: 3px 8px; margin: 8px 0; font-size: 12px; }
+.artwork-detection dt { color: var(--muted); }
+.artwork-detection dd { margin: 0; overflow-wrap: anywhere; }
+.artwork-evidence { margin: 8px 0; font-size: 12px; }
+.artwork-evidence summary { cursor: pointer; color: var(--link); }
+.artwork-evidence ul { margin: 6px 0 0; padding-left: 18px; }
+.artwork-evidence li { margin-bottom: 8px; overflow-wrap: anywhere; }
+.artwork-evidence p { white-space: pre-wrap; color: var(--muted); }
+.artwork-decision { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 8px; }
+.artwork-decision label { display: grid; gap: 3px; font-size: 12px; color: var(--muted); }
+.artwork-decision select, .artwork-decision input, .artwork-decision textarea { width: 100%; font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--control-line); border-radius: 4px; padding: 5px 6px; }
+.artwork-decision textarea { resize: vertical; }
+.artwork-save-status { min-height: 1.2em; color: var(--muted); font-size: 12px; }
+.artwork-muted { color: var(--muted); }
+
 /* --- sources --- */
 table.sources { font-size: 13px; }
 details.sourcelist { margin-top: 12px; }
@@ -584,6 +616,11 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
     border: 0; box-shadow: none; text-align: right;
   }
   #rows .card-preview-trigger img { width: 46px; max-height: 66px; }
+  .artwork-member { grid-template-columns: 64px 1fr; padding: 8px; gap: 8px; }
+  .artwork-image img { width: 58px; max-height: 84px; }
+  .artwork-image.missing { min-height: 84px; }
+  .artwork-group { padding: 10px; }
+  .artwork-members { grid-template-columns: minmax(0, 1fr); }
   #rows .cell-clip { contain: none; overflow: visible; text-overflow: clip; white-space: normal; }
   #rows .cell-clip[data-clipped="true"] { cursor: auto; }
   #rows .cell-clip[data-clipped="true"]:hover { text-decoration: none; }
@@ -617,7 +654,7 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
    * truncate the right-hand side, print drops the language matrix, the secondary columns and
    * the interactive furniture, leaving a legible chronological summary. The full matrix stays
    * available on screen and in the downloadable checklist. */
-  nav.sections, .theme-toggle, .controls, .builder, .stats, details, .table-scroll-tools,
+  nav.sections, .theme-toggle, .controls, .builder, .artwork-review, .stats, details, .table-scroll-tools,
   .table-sticky-header, .table-edge, .card-preview, .lang-evidence-popover, .language-legend,
   td.corr, th.corr, .langcell, .secondary, td.img, th.img { display: none !important; }
 

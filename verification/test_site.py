@@ -191,6 +191,42 @@ def main() -> int:
         check("page loads with no console errors", not console_errors, "; ".join(console_errors[:3]))
         check("all rows render", total == EXPECTED_ROWS, f"data has {total} rows")
 
+        # --- graph-backed artwork/detection review (#120) ---
+        artwork_projection = page.evaluate("""() => JSON.parse(
+          document.getElementById('data-artwork-review').textContent
+        )""")
+        check("artwork review embeds the authoritative projection",
+              artwork_projection["schema"] == "snoredex-artwork-review"
+              and artwork_projection["summary"]["cardReleases"] >= 600
+              and artwork_projection["summary"]["mappedWorks"] >= 30,
+              str(artwork_projection.get("summary")))
+        check("artwork review renders a mapped group and a stable release id",
+              page.locator("#artwork-review").count() == 1
+              and page.locator("#ar-groups .artwork-group").count() > 0
+              and page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id"),
+              "review groups or release identity missing")
+        page.fill("#ar-reviewer", "Browser test reviewer")
+        first_review_member = page.locator("#ar-groups .artwork-member").first
+        first_review_member.locator(".ar-action").select_option("confirm")
+        first_review_member.locator(".ar-note").fill("Confirmed from the displayed evidence.")
+        first_review_member.locator(".ar-save").click()
+        page.wait_for_timeout(80)
+        saved_proposal = page.evaluate("""() => {
+          const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+          return raw ? Object.values(JSON.parse(raw))[0] : null;
+        }""")
+        check("artwork review saves a versioned proposal without writing catalogue data",
+              saved_proposal is not None
+              and saved_proposal["action"] == "confirm"
+              and saved_proposal["projectionVersion"] == artwork_projection["projectionVersion"]
+              and saved_proposal["sourceContentHashes"],
+              str(saved_proposal))
+        with page.expect_download() as artwork_download:
+            page.click("#ar-download")
+        check("artwork review downloads structured proposals",
+              artwork_download.value.suggested_filename == "snoredex-artwork-review-proposals.json",
+              artwork_download.value.suggested_filename)
+
         exs_rows = page.evaluate("""() => JSON.parse(
           document.getElementById('data-rows').textContent
         ).filter(r => r.setCode === 'EXS')""")
@@ -1310,7 +1346,7 @@ def main() -> int:
           links: document.querySelectorAll('#section-nav-list a').length,
         })""")
         check("a wide viewport restores the full section navigation",
-              not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["links"] == 7,
+              not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["links"] == 8,
               str(nav_wide))
 
         # --- #125: raw export of the current view ---
