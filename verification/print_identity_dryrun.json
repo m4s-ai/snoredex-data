@@ -24,18 +24,18 @@
     "legacyProductIdentityTuples": 196,
     "legacyLanguageUnits": 719,
     "legacyExcludedCodeCardUnits": 75,
-    "sourceFirstRecords": 47,
+    "sourceFirstRecords": 48,
     "finishPrintingClaims": 693,
-    "candidateClaims": 1542,
+    "candidateClaims": 1543,
     "candidateClaimDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 227,
-      "established-and-mapped": 1156,
+      "established-and-mapped": 1157,
       "positively-excluded": 75
     },
     "setEditionNodes": 461,
-    "cardReleaseNodes": 609,
-    "cardReleaseNodesIdentified": 498,
+    "cardReleaseNodes": 610,
+    "cardReleaseNodesIdentified": 499,
     "cardReleaseNodesNeedingLocalIdentifier": 111,
     "physicalPrintingNodes": 474,
     "physicalPrintingsByEvidenceClass": {
@@ -54,16 +54,16 @@
     "unresolvedPhysicalClaims": 0,
     "orphanSpecimens": 0,
     "heldSpecimenDispositions": 0,
-    "sourceFirstPrintsAdmitted": 47,
+    "sourceFirstPrintsAdmitted": 48,
     "sourceFirstPrintsHeld": 0,
-    "equivalenceAssertions": 1,
+    "equivalenceAssertions": 2,
     "legacyIssueRekeySets": 1,
     "cardReleaseNodesByLocality": {
       "WEST": 348,
       "JP": 66,
       "KR": 53,
       "CN": 42,
-      "TW": 38,
+      "TW": 39,
       "ID": 35,
       "TH": 24,
       "LATAM": 3
@@ -5844,8 +5844,8 @@
         "locality": "TW",
         "language": "T-Chinese",
         "accountedLegacyUnits": 21,
-        "linkedLocalCounterparts": 1,
-        "needsPositiveLocalIdentity": 20,
+        "linkedLocalCounterparts": 2,
+        "needsPositiveLocalIdentity": 19,
         "rows": [
           {
             "legacyUnitId": "U0265",
@@ -5928,10 +5928,16 @@
             "legacyClaimId": "CLAIM:legacy:U0558",
             "legacyStatus": "contradicted",
             "legacyProduct": "sm9 115",
-            "disposition": "needs-positive-local-identity",
-            "sourceFirstRecordIds": [],
-            "localCardReleaseIds": [],
-            "assertionIds": []
+            "disposition": "linked-local-counterpart",
+            "sourceFirstRecordIds": [
+              "TW:AS5a:222/184:base"
+            ],
+            "localCardReleaseIds": [
+              "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+            ],
+            "assertionIds": [
+              "ASSERT:same-work:U0558:TW:AS5a:222/184:base"
+            ]
           },
           {
             "legacyUnitId": "U0562",
@@ -6079,6 +6085,19 @@
       "assertedAt": "2026-08-04",
       "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5184898868",
       "evidence": "The owner identifies AS5a 142 as the Traditional-Chinese printing of the work represented by legacy Japanese sm10 076 and supplies the 52poke record and card image. Both local release identities remain distinct.",
+      "destructiveMergeAllowed": false
+    },
+    {
+      "assertionId": "ASSERT:same-work:U0558:TW:AS5a:222/184:base",
+      "assertionType": "same-work-decision",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "legacyUnitId": "U0558",
+      "sourceFirstRecordId": "TW:AS5a:222/184:base",
+      "assertedBy": "Scarrty",
+      "assertedAt": "2026-08-21",
+      "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5367641859",
+      "evidence": "The owner identifies the photographed Traditional-Chinese Eevee & Snorlax-GX as AS5a 222/184 HR, and the 52poke card record independently lists that same local printing. It is the AS5a counterpart of legacy U0558 (sm9 115 V3); both release identities remain distinct.",
       "destructiveMergeAllowed": false
     }
   ],
@@ -23604,6 +23623,18 @@
       "reason": "positive source-first specimen/card record"
     },
     {
+      "claimId": "CLAIM:source-first:TW:AS5a:222/184:base",
+      "claimKind": "card-release",
+      "sourceKind": "source-first-record",
+      "sourceId": "TW:AS5a:222/184:base",
+      "sourceRecord": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89",
+      "evidenceStatus": "confirmed",
+      "disposition": "established-and-mapped",
+      "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
       "claimId": "CLAIM:source-first:TW:S-P:145:base",
       "claimKind": "card-release",
       "sourceKind": "source-first-record",
@@ -26389,7 +26420,8 @@
       "state": "identified",
       "viaLegacySetCodes": [],
       "establishingClaimIds": [
-        "CLAIM:source-first:TW:AS5a:142:base"
+        "CLAIM:source-first:TW:AS5a:142:base",
+        "CLAIM:source-first:TW:AS5a:222/184:base"
       ]
     },
     {
@@ -37797,6 +37829,39 @@
       ],
       "legacyCounterpartUnitIds": [
         "U0265"
+      ]
+    },
+    {
+      "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "localSetCode": "AS5a",
+      "localNumber": "222/184",
+      "localIdentifierKnown": true,
+      "state": "identified",
+      "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "viaLegacySetCode": null,
+      "viaLegacyNumber": null,
+      "claimIds": [
+        "CLAIM:source-first:TW:AS5a:222/184:base"
+      ],
+      "establishingClaimIds": [
+        "CLAIM:source-first:TW:AS5a:222/184:base"
+      ],
+      "nonEstablishingClaimIds": [],
+      "legacyVariants": [],
+      "legacyProducts": [],
+      "sourceRecords": [
+        "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
+      ],
+      "sourceFirstRecordIds": [
+        "TW:AS5a:222/184:base"
+      ],
+      "legacyCounterpartUnitIds": [
+        "U0558"
       ]
     },
     {
