@@ -21,7 +21,6 @@ import json
 import sqlite3
 import sys
 from collections import Counter, defaultdict
-from datetime import date
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
@@ -727,7 +726,13 @@ def build(source_doc: dict[str, Any], identity: dict[str, Any],
         "meta": {
             "schema": "snoredex-set-catalogue-dryrun",
             "schemaVersion": SCHEMA_VERSION,
-            "generated": date.today().isoformat(),
+            # A generator date made the supposedly deterministic gate stale every midnight.
+            # The input snapshots already carry their review dates; the newest one is the
+            # reproducible provenance marker for this projection.
+            "generated": max(
+                str(source_doc.get("meta", {}).get("generated", "")),
+                str(identity.get("meta", {}).get("generated", "")),
+            ),
             "adr": "verification/ADR-0002-local-set-edition-release-events.md",
             "sqliteSchema": "verification/set_catalogue_schema.sql",
             "status": "dry-run — no authoritative identity or consumer store is changed",

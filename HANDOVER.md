@@ -123,6 +123,9 @@ scripts/                      Two halves; only the second can be re-run (#28).
                               into the application database;
                               source_adapters.py checks/reprojects retained ADR-0004 set runs;
                               card_discovery.py checks/reprojects retained ADR-0006 card runs; and
+                              completeness_gate.py validates both immutable loops and writes the
+                              bounded #141 release summary; discovery_cycle.py is the explicit
+                              refresh/check wrapper for scheduled or manual reruns; and
                               legacy_set_reconciliation.py rebuilds the bounded ADR-0005 ledger and
                               compatibility pair. See §7.
                               analyze.py is the SOLE producer of analysis_artists,
@@ -268,6 +271,11 @@ verification/
                                evidence, positive-only policy, source/gap references and child state.
   LOCALITY-ERA-MATRIX.md       GENERATED readable projection of the #139 matrix plus current legacy
                                audit counts. Rebuild with scripts/locality_matrix.py.
+  completeness_gate.json      GENERATED #141 summary: independent set/card run ids and hashes,
+                               graph counts, coverage versions and explicit terminal gaps.
+                               Rebuild with scripts/completeness_gate.py.
+  RECURRENCE.md                The bounded refresh/check procedure for scheduled or manual
+                               source-first discovery cycles.
   report.py                   Prints coverage and rewrites exactly three exports:
                               confirmed_sources.json, CONTRADICTED.json, UNCONFIRMED.json.
                               NOT "all exports" — MANUAL_REVIEW.* comes from classify_manual.py,

@@ -59,6 +59,7 @@ REGEN = [
     ["scripts/card_discovery.py"],
     ["scripts/asia_locality_matrix.py"],
     ["scripts/locality_matrix.py"],
+    ["scripts/completeness_gate.py"],
     # legacy reconciliation & downstream projections
     ["scripts/legacy_set_reconciliation.py"],
     ["scripts/checklist.py"],
@@ -94,6 +95,7 @@ CHECK = [
     ["scripts/card_discovery.py", "--check"],
     ["scripts/asia_locality_matrix.py", "--check"],
     ["scripts/locality_matrix.py", "--check"],
+    ["scripts/completeness_gate.py", "--check"],
     ["scripts/legacy_set_reconciliation.py", "--check"],
     ["scripts/checklist.py", "--check"],
     ["scripts/readme_stats.py", "--check"],
@@ -121,6 +123,7 @@ TESTS = [
     ["verification/test_asia_locality_matrix.py"],
     ["verification/test_authoritative_graph.py"],
     ["verification/test_korean_burning_confrontation.py"],
+    ["verification/test_completeness_gate.py"],
     ["verification/test_findings_harness.py"],
     ["verification/review_findings.py"],          # cross-artifact + publication
     ["verification/test_regen_readiness.py"],
