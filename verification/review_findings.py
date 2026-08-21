@@ -73,15 +73,31 @@ def load(rel: str) -> Any:
 def documentation_inventory() -> dict[str, dict[str, Any]]:
     """Every tracked markdown document, with the role and stage it declares for itself.
 
-    Two directories are out of scope and stay that way. `LICENSES/` holds verbatim upstream licence
+    Read the tracked path list from Git instead of walking the working tree. A prior issue handoff
+    left nested `.work*` snapshots beside the checkout; they are useful locally but are not
+    repository documents and must not change the result of a documentation gate. Two tracked
+    directories are out of scope and stay that way. `LICENSES/` holds verbatim upstream licence
     text — editing it to add a header would make it no longer the licence. `verification/archive/`
     is hashed against MANIFEST.json by check X3, so a header there fails the build.
     """
     inventory: dict[str, dict[str, Any]] = {}
-    for path in sorted(ROOT.rglob("*.md")):
-        rel = path.relative_to(ROOT).as_posix()
+    try:
+        tracked = subprocess.check_output(
+            ["git", "ls-files", "-z", "--", "*.md"], cwd=ROOT
+        ).split(b"\0")
+        paths = [raw.decode("utf-8", errors="surrogateescape") for raw in tracked if raw]
+    except (OSError, subprocess.CalledProcessError):
+        # Keep the checker useful in a source archive without Git. The fallback still avoids
+        # descending into nested worktree snapshots and the generated publish directory.
+        paths = [
+            path.relative_to(ROOT).as_posix()
+            for path in sorted(ROOT.rglob("*.md"))
+            if not any(part.startswith(".work") for part in path.relative_to(ROOT).parts)
+        ]
+    for rel in paths:
         if rel.startswith(("LICENSES/", "verification/archive/", "_site/", "node_modules/")):
             continue
+        path = ROOT / rel
         text = path.read_text(encoding="utf-8")
         found = DOC_HEADER.search(text)
         inventory[rel] = {
