@@ -45,10 +45,15 @@ def main() -> int:
             # empty values while keeping the assertion readable for the graph-backed mapping.
             if not member["workId"].startswith("WORK:"):
                 fail(f"mapped release has an invalid work id: {member['cardReleaseId']}")
+        observation_ids = [item.get("observationId") for item in member.get("observations") or []]
+        if len(observation_ids) != len(set(observation_ids)):
+            fail(f"duplicate observation id in release: {member['cardReleaseId']}")
         for observation in member.get("observations") or []:
             if len(observation.get("contentHash", "")) != 64:
                 fail(f"observation lacks a SHA-256 content hash: {observation.get('observationId')}")
         for image in member.get("images") or []:
+            if image.get("reviewable") != bool(image.get("contentHash")):
+                fail(f"image reviewability does not match its hash: {image.get('src')}")
             if image.get("kind") == "repository":
                 image_path = ROOT / image["src"]
                 if not image_path.is_file():

@@ -1259,6 +1259,10 @@
     }[action] || action);
     const imageDependentActions = new Set(["confirm", "correct", "reassign", "split", "propose-variant"]);
     const structuredActions = new Set(["correct", "propose-variant"]);
+    const hasVerifiedImages = (member) => {
+      const images = member.images || [];
+      return images.length > 0 && images.every((image) => image && image.src && image.reviewable && image.contentHash);
+    };
 
     const imageHTML = (member) => {
       const images = (member.images || []).filter((image) => image && image.src);
@@ -1267,7 +1271,9 @@
         '<figure class="artwork-image"><img loading="lazy" src="' + escapeHTML(image.src) +
         '" alt="' + escapeHTML((member.detection && member.detection.cardName) || member.cardReleaseId) +
         ' — image ' + (index + 1) + '"><figcaption>' + escapeHTML(image.label || 'source image') +
-        (image.contentHash ? '<br><code>' + escapeHTML(image.contentHash) + '</code>' : '') +
+        (image.reviewable && image.contentHash
+          ? '<br><code>' + escapeHTML(image.contentHash) + '</code>'
+          : '<br><span class="artwork-unverified">image bytes are not pinned</span>') +
         '</figcaption></figure>').join('') + '</div>';
     };
 
@@ -1300,7 +1306,7 @@
       );
       const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
       const selectedAction = draft ? draft.action : "";
-      const imageReviewable = images.some((image) => image && image.src);
+      const imageReviewable = hasVerifiedImages(member);
       const actionOptions = ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
         .map((action) => '<option value="' + escapeHTML(action) + '"' +
           (imageDependentActions.has(action) && !imageReviewable ? ' disabled' : '') +
@@ -1351,7 +1357,7 @@
         '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
         escapeHTML(draft && draft.note || '') + '</textarea></label>' +
         '<button type="button" class="ghost ar-save">Save proposal</button>' +
-        (!imageReviewable ? '<span class="artwork-muted">No image available; only “Mark unclear” can be proposed.</span>' : '') +
+        (!imageReviewable ? '<span class="artwork-muted">No verified image hash; only “Mark unclear” can be proposed.</span>' : '') +
         '<span class="artwork-save-status" role="status"></span></div></div></article>';
     };
 
@@ -1402,7 +1408,7 @@
       const note = $(".ar-note", card).value.trim();
       const name = reviewer.value.trim();
       const status = $(".artwork-save-status", card);
-      const imageReviewable = (member.images || []).some((image) => image && image.src);
+      const imageReviewable = hasVerifiedImages(member);
       if (!name) { status.textContent = "Reviewer name required."; reviewer.focus(); return; }
       if (!action) { status.textContent = "Choose an action first."; return; }
       if (!imageReviewable && imageDependentActions.has(action)) {

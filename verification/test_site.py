@@ -320,6 +320,27 @@ def main() -> int:
             check("artwork review permits only an unclear proposal without an image", False,
                   "projection has no mapped member without an image")
 
+        unverified_image_member = page.evaluate("""() => {
+          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+            const member = group.members.find(candidate => group.groupKind === 'mapped-work'
+              && candidate.images && candidate.images.some(image => !image.reviewable || !image.contentHash));
+            if (member) return {id: member.cardReleaseId, count: member.images.length};
+          }
+          return null;
+        }""")
+        if unverified_image_member:
+            page.fill("#ar-search", unverified_image_member["id"])
+            page.wait_for_timeout(80)
+            unverified_card = page.locator("#ar-groups .artwork-member").filter(
+                has_text=unverified_image_member["id"]).first
+            check("artwork review blocks remote images without pinned hashes",
+                  unverified_card.locator(".artwork-images img").count() == unverified_image_member["count"]
+                  and unverified_card.locator("option[value='confirm']").get_attribute("disabled") is not None,
+                  "unverified image action guard not rendered")
+        else:
+            check("artwork review blocks remote images without pinned hashes", False,
+                  "projection has no unverified image member")
+
         exs_rows = page.evaluate("""() => JSON.parse(
           document.getElementById('data-rows').textContent
         ).filter(r => r.setCode === 'EXS')""")

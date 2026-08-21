@@ -129,12 +129,14 @@ def build() -> dict[str, Any]:
         if any(item["src"] == src for item in images):
             return
         local = ROOT / src if not re.match(r"^https?://", src) else None
+        content_hash = file_digest(local) if local else None
         images.append({
             "src": src,
             "label": label,
             "observationId": observation_id,
-            "contentHash": file_digest(local) if local else None,
+            "contentHash": content_hash,
             "kind": "repository" if local else "source-url",
+            "reviewable": bool(content_hash),
         })
 
     def unit_candidates(payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -256,9 +258,10 @@ def build() -> dict[str, Any]:
                 finish_unit = finish_source["finishUnit"]
                 source_printing = finish_source["printing"]
                 printing["sources"] = source_printing.get("sources") or []
-                for source in printing["sources"]:
+                for source_index, source in enumerate(printing["sources"]):
+                    source_tag = f"{source_index}:{digest(source)[:16]}"
                     observations.append(source_observation(
-                        "finish", printing.get("sourcePrintingId") or physical_id,
+                        "finish", f"{printing.get('sourcePrintingId') or physical_id}:{source_tag}",
                         {"finishUnitId": finish_unit.get("finishUnitId"), "printing": source_printing, "source": source},
                         url=source.get("url"), evidence=source.get("evidence"), provider=source.get("sourceType"),
                     ))
