@@ -250,6 +250,7 @@ def build() -> dict:
                 "sourceKind": "legacy-issue-rekey", "sourceId": row["legacyUnitId"],
                 "disposition": row["disposition"],
                 "targetRef": (row.get("localCardReleaseIds") or [None])[0],
+                "targetRefs": list(row.get("localCardReleaseIds") or []),
                 "reason": row.get("reason") or f"issue #{report['issueNumber']} re-key",
             })
     migration_keys = [(row["sourceKind"], row["sourceId"]) for row in migration]
