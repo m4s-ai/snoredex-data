@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import sqlite3
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -59,6 +60,29 @@ def main() -> None:
             and row["fromId"] == product_id and row["relation"] == "maps-to"
         }
         assert mapped == set(targets)
+
+    for report in identity["reports"].get("legacyIssueRekeys", []):
+        for row in report.get("rows", []):
+            targets = list(row.get("localCardReleaseIds") or [])
+            migration = migrations[("legacy-issue-rekey", row["legacyUnitId"])]
+            assert migration["targetRefs"] == targets
+            assert migration["targetRef"] == (targets[0] if targets else None)
+
+    u0414 = migrations[("legacy-issue-rekey", "U0414")]
+    assert u0414["targetRefs"] == [
+        "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+    ]
+    assert u0414["targetRef"] == u0414["targetRefs"][0]
+
+    with sqlite3.connect(ROOT / "snoredex.sqlite") as connection:
+        target_ref, target_refs_json = connection.execute(
+            "SELECT target_ref, target_refs_json "
+            "FROM graph_migration_dispositions "
+            "WHERE source_kind = 'legacy-issue-rekey' AND source_id = 'U0414'"
+        ).fetchone()
+    assert target_ref == u0414["targetRef"]
+    assert json.loads(target_refs_json) == u0414["targetRefs"]
 
     catalogue = json.loads(
         (ROOT / "verification/set_catalogue_dryrun.json").read_text(encoding="utf-8")
