@@ -560,12 +560,12 @@ def main() -> int:
       </button>
     </div>
     <nav class="sections" id="section-nav" aria-label="Sections">
-      <button type="button" class="nav-toggle" id="nav-toggle"
-        aria-expanded="false" aria-controls="section-nav-list">
+      <details id="section-nav-disclosure" open>
+        <summary class="nav-toggle" id="nav-toggle">
         <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
         <span class="nav-toggle-text">Sections</span>
-      </button>
-      <ul id="section-nav-list">
+        </summary>
+        <ul id="section-nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#collection">Collection</a></li>
         <li><a href="#artwork-review">Artwork review</a></li>
@@ -574,7 +574,8 @@ def main() -> int:
         <li><a href="#contribute">Help correct this</a></li>
         <li><a href="#sources">Sources</a></li>
         <li><a href="#license">License</a></li>
-      </ul>
+        </ul>
+      </details>
     </nav>
   </div>
 </header>

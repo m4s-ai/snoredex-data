@@ -1441,29 +1441,27 @@ def main() -> int:
         nav_collapsed = page.evaluate("""() => ({
           toggleShown: getComputedStyle(document.querySelector('#nav-toggle')).display !== 'none',
           listShown: getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none',
-          expanded: document.querySelector('#nav-toggle').getAttribute('aria-expanded'),
-          controls: document.querySelector('#nav-toggle').getAttribute('aria-controls'),
+          open: document.querySelector('#section-nav-disclosure').open,
         })""")
         check("narrow viewport collapses the section navigation behind a toggle",
               nav_collapsed["toggleShown"] and not nav_collapsed["listShown"]
-              and nav_collapsed["expanded"] == "false"
-              and nav_collapsed["controls"] == "section-nav-list", str(nav_collapsed))
+              and not nav_collapsed["open"], str(nav_collapsed))
 
         page.locator("#nav-toggle").click()
         page.wait_for_timeout(80)
         nav_opened = page.evaluate("""() => ({
           listShown: getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none',
-          expanded: document.querySelector('#nav-toggle').getAttribute('aria-expanded'),
+          open: document.querySelector('#section-nav-disclosure').open,
         })""")
         check("the section-navigation toggle opens the list and reports its state",
-              nav_opened["listShown"] and nav_opened["expanded"] == "true", str(nav_opened))
+              nav_opened["listShown"] and nav_opened["open"], str(nav_opened))
 
         page.locator('#section-nav-list a[href="#checklist"]').click()
         page.wait_for_timeout(80)
         check("following a section link closes the navigation again",
               page.evaluate(
-                  "() => document.querySelector('#nav-toggle').getAttribute('aria-expanded')")
-              == "false",
+                  "() => document.querySelector('#section-nav-disclosure').open")
+              is False,
               "the panel stayed open, so the target scrolled under it")
 
         # Leaving the breakpoint must restore the plain list — the toggle is display:none there and
@@ -1473,11 +1471,23 @@ def main() -> int:
         nav_wide = page.evaluate("""() => ({
           toggleShown: getComputedStyle(document.querySelector('#nav-toggle')).display !== 'none',
           listShown: getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none',
+          open: document.querySelector('#section-nav-disclosure').open,
           links: document.querySelectorAll('#section-nav-list a').length,
         })""")
         check("a wide viewport restores the full section navigation",
-              not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["links"] == 8,
+              not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["open"]
+              and nav_wide["links"] == 8,
               str(nav_wide))
+
+        page.locator('#section-nav-list a[href="#about"]').click()
+        page.wait_for_timeout(80)
+        check("a desktop section link keeps the navigation open",
+              page.evaluate("""() => {
+                const disclosure = document.querySelector('#section-nav-disclosure');
+                return disclosure.open
+                  && getComputedStyle(document.querySelector('#section-nav-list')).display !== 'none';
+              }"""),
+              "the desktop section link closed the always-visible navigation")
 
         # --- #125: raw export of the current view ---
         page.evaluate("""() => {

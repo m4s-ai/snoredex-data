@@ -1528,36 +1528,18 @@
     render();
   }
 
-  /* Section navigation (#123): seven links wrap into a text stack on a phone, so below the narrow
-   * breakpoint they collapse behind a disclosure.
-   *
-   * The `js` class is what activates the collapse in app.css, and it is added here rather than
-   * written into the markup on purpose — without this script the links must stay visible, since a
-   * nav that hides itself and cannot reopen is worse than a tall one. Following a link closes the
-   * panel again, because the target scrolls under a still-open menu otherwise. */
+  /* Section navigation (#123): native details owns the disclosure; this only syncs its initial
+   * responsive state and closes it after a narrow-screen section link is followed. */
   function initSectionNav() {
-    const nav = $("#section-nav");
-    const button = $("#nav-toggle");
-    if (!nav || !button) return;
-    nav.classList.add("js");
-
-    const setOpen = (open) => {
-      nav.classList.toggle("is-open", open);
-      button.setAttribute("aria-expanded", open ? "true" : "false");
-    };
-
-    button.addEventListener("click", () => {
-      setOpen(button.getAttribute("aria-expanded") !== "true");
-    });
-    nav.addEventListener("click", (event) => {
-      if (event.target.closest("a")) setOpen(false);
-    });
-    // Leaving the breakpoint must not strand the collapsed state on a wide screen, where the
-    // toggle is display:none and could no longer undo it.
-    const wide = window.matchMedia("(min-width: 721px)");
-    const sync = () => { if (wide.matches) setOpen(false); };
-    wide.addEventListener("change", sync);
+    const details = $("#section-nav-disclosure");
+    if (!details) return;
+    const narrow = window.matchMedia("(max-width: 720px)");
+    const sync = () => { details.open = !narrow.matches; };
     sync();
+    narrow.addEventListener("change", sync);
+    details.addEventListener("click", (event) => {
+      if (event.target.closest("a") && narrow.matches) details.open = false;
+    });
   }
 
   /* Per-row disclosure for the narrow breakpoint (#121).

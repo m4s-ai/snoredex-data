@@ -30,6 +30,12 @@ __pycache__/
 # Generated Pages artifact (rebuilt by scripts/publish.py)
 _site/
 
+# Local issue handoff snapshots and Git bundles. These are nested worktrees, not repository
+# documents; keeping them ignored prevents accidental staging and keeps verification focused on
+# the checkout's tracked files.
+.work*/
+.work*.bundle
+
 # Personal collection state. The blank, reproducible template remains tracked.
 snoredex-tracker.sqlite
 snoredex-tracker.sqlite-shm
