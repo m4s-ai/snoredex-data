@@ -82,7 +82,7 @@ def main() -> int:
     if specimen is None:
         raise SystemExit("SPEC-0038 is required before admitting the print")
     if (specimen["setCode"], str(specimen["number"]), specimen["language"]) != (
-        "AS5a", "222", "T-Chinese"
+        "AS5a", "222/184", "T-Chinese"
     ):
         raise SystemExit("SPEC-0038 identity drifted")
     if specimen.get("photographSource") != PHOTO_URL:
