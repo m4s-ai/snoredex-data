@@ -189,9 +189,12 @@ def main() -> int:
     # 6 -> 26 on 2026-08-10: ADR-0001 D5 admitted twenty Thai and Indonesian catch-up
     # prints. 26 -> 30 on 2026-08-11: issue #192 added three LATAM Spanish prints and
     # the SVP ES comparison, all with the complete printed language modifier preserved.
+    # 30 -> 31 on 2026-08-21: issue #84 admitted U0558's owner-backed AS5a 222/184 HR.
+    # 31 -> 33 on 2026-08-21: issue #84 admitted U0414's AS5a 117/184 and U0634's
+    # AS5a 203/184 positive same-work mappings.
     # The pin stays exact rather than becoming a minimum — its job is to catch an edge
     # appearing or vanishing without a decision behind it, and a floor would not do that.
-    require(len(first["catchUpRelations"]) == 30, "catch-up edge count changed")
+    require(len(first["catchUpRelations"]) == 33, "catch-up edge count changed")
     official_spanish_targets = {
         edge["targetSourceFirstPrintId"]
         for edge in first["catchUpRelations"]
@@ -206,14 +209,14 @@ def main() -> int:
         },
         "Spanish printed-code catch-up inventory changed",
     )
-    # Terminal states are pinned per state, not asserted uniformly. The six specimen-backed edges
-    # resolve to a card release and stay `complete`. The twenty D5 edges do not, and should not:
+    # Terminal states are pinned per state, not asserted uniformly. The nine positive local edges
+    # resolve to a card release and stay `complete`. The remaining edges do not, and should not:
     # their `catchUpOf` says which Traditional Chinese print or set family they answer, which is a
     # statement about the *card work*, and ADR-0001's I5 wants an explicit decision before an
     # equivalence becomes a resolved edge. `needs-evidence` is the honest state for them, so the
     # guard checks the split rather than demanding a completeness nobody established.
     states = Counter(edge["terminalState"] for edge in first["catchUpRelations"])
-    require(states == Counter({"complete": 6, "needs-evidence": 24}),
+    require(states == Counter({"complete": 9, "needs-evidence": 24}),
             f"catch-up terminal states changed: {dict(states)}")
     for edge in first["catchUpRelations"]:
         require(not edge["setMergeAllowed"], "catch-up edge merges sets")

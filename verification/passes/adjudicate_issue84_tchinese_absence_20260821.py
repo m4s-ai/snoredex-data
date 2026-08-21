@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Record the owner's explicit Traditional-Chinese absence decisions for issue #84.
 
-The owner has now answered these sixteen legacy Cardmarket product questions directly: none
+The owner has now answered these seventeen legacy Cardmarket product questions directly: none
 has a Traditional-Chinese printing.  This is an application decision, not a conclusion drawn
 from a source's silence.  The raw ``contradicted`` rows remain unchanged in ``units.json``;
 the separate owner-adjudication store projects them as ``not-printed``.
 
 The known catch-up/local counterparts are deliberately not included here.  In particular,
-U0265, U0414 and U0634 have positive local identities, while U0558 and U0584 still need
-positive local evidence.
+U0265, U0414, U0558 and U0634 have positive local identities; U0584 is explicitly included
+below as an owner absence decision, not as a search-absence inference.
 
 Idempotent: re-running adds no duplicate decisions.
 """
@@ -24,11 +24,14 @@ DECIDED_AT = "2026-08-21"
 ISSUE_COMMENT = (
     "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5367191536"
 )
+U0584_COMMENT = (
+    "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5368263159"
+)
 
 UNIT_IDS = [
     "U0382", "U0429", "U0478", "U0542", "U0546", "U0577", "U0562",
     "U0580", "U0587", "U0607", "U0624", "U0638", "U0645", "U0662",
-    "U0665", "U0681",
+    "U0665", "U0681", "U0584",
 ]
 
 RATIONALE = (
@@ -74,7 +77,7 @@ def main() -> None:
             "basis": "multi-source-adjudication",
             "decidedAt": DECIDED_AT,
             "rationale": RATIONALE,
-            "evidenceRefs": [ISSUE_COMMENT, f"unit:{unit_id}"],
+            "evidenceRefs": [U0584_COMMENT if unit_id == "U0584" else ISSUE_COMMENT, f"unit:{unit_id}"],
         })
         known.add(unit_id)
 

@@ -5,8 +5,8 @@
     "status": "authoritative-migrated",
     "generated": "2026-08-21",
     "inputs": {
-      "verification/print_identity_dryrun.json": "0057e0f9da185ff68589351f13a84e2d39d9983acdaed34320dc67ecab88291e",
-      "verification/set_catalogue_dryrun.json": "b0deaf02398f3bc8e0ff88922d6d64f6c7fdb9439425f36537cfb8315f3f6e96"
+      "verification/print_identity_dryrun.json": "8b138d5f9308685505c124115c2a529c94a84ad53e5cea520392386e7a1f282a",
+      "verification/set_catalogue_dryrun.json": "9d805bf62e43811c377501efc2c97852d3a025c6f82e4206ff7bc874e6e71283"
     },
     "identitySource": "snoredex-print-identity-dryrun",
     "catalogueSource": "snoredex-set-catalogue-dryrun",
@@ -25138,6 +25138,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TW:AS5a:117/184:base",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "claimId": "CLAIM:source-first:TW:AS5a:117/184:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TW:AS5a:117/184:base",
+        "sourceRecord": "https://asia.pokemon-card.com/tw/card-search/detail/2856/",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "reason": "positive source-first specimen/card record"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:TW:AS5a:142:base",
       "origin": "verification/print_identity_dryrun.json",
       "payload": {
@@ -25150,6 +25167,40 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
         "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+        "reason": "positive source-first specimen/card record"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TW:AS5a:203/184:base",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "claimId": "CLAIM:source-first:TW:AS5a:203/184:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TW:AS5a:203/184:base",
+        "sourceRecord": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "reason": "positive source-first specimen/card record"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TW:AS5a:222/184:base",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "claimId": "CLAIM:source-first:TW:AS5a:222/184:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TW:AS5a:222/184:base",
+        "sourceRecord": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "reason": "positive source-first specimen/card record"
       }
     },
@@ -33457,6 +33508,44 @@
     },
     {
       "entityType": "card-release",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "locality": "TW",
+        "language": "T-Chinese",
+        "script": "Hant",
+        "localSetCode": "AS5a",
+        "localNumber": "117/184",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "workMappingState": "mapped-by-explicit-equivalence",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:TW:AS5a:117/184:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:TW:AS5a:117/184:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://asia.pokemon-card.com/tw/card-search/detail/2856/"
+        ],
+        "sourceFirstRecordIds": [
+          "TW:AS5a:117/184:base"
+        ],
+        "legacyCounterpartUnitIds": [
+          "U0414"
+        ]
+      }
+    },
+    {
+      "entityType": "card-release",
       "entityId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "origin": "verification/print_identity_dryrun.json",
       "payload": {
@@ -33490,6 +33579,82 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0265"
+        ]
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "locality": "TW",
+        "language": "T-Chinese",
+        "script": "Hant",
+        "localSetCode": "AS5a",
+        "localNumber": "203/184",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "workMappingState": "mapped-by-explicit-equivalence",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:TW:AS5a:203/184:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:TW:AS5a:203/184:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
+        ],
+        "sourceFirstRecordIds": [
+          "TW:AS5a:203/184:base"
+        ],
+        "legacyCounterpartUnitIds": [
+          "U0634"
+        ]
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "locality": "TW",
+        "language": "T-Chinese",
+        "script": "Hant",
+        "localSetCode": "AS5a",
+        "localNumber": "222/184",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "workMappingState": "mapped-by-explicit-equivalence",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:TW:AS5a:222/184:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:TW:AS5a:222/184:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
+        ],
+        "sourceFirstRecordIds": [
+          "TW:AS5a:222/184:base"
+        ],
+        "legacyCounterpartUnitIds": [
+          "U0558"
         ]
       }
     },
@@ -52557,12 +52722,45 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "verification/set_catalogue_dryrun.json",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "collectorNumber": "117/184",
+        "origin": "print-identity-dryrun"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "origin": "verification/set_catalogue_dryrun.json",
       "payload": {
         "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
         "setEditionId": "EDITION:TW:T-Chinese:AS5a",
         "collectorNumber": "142",
+        "origin": "print-identity-dryrun"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "verification/set_catalogue_dryrun.json",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "collectorNumber": "203/184",
+        "origin": "print-identity-dryrun"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "verification/set_catalogue_dryrun.json",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "collectorNumber": "222/184",
         "origin": "print-identity-dryrun"
       }
     },
@@ -57359,6 +57557,60 @@
         "assertedAt": "2026-08-04",
         "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5184898868",
         "evidence": "The owner identifies AS5a 142 as the Traditional-Chinese printing of the work represented by legacy Japanese sm10 076 and supplies the 52poke record and card image. Both local release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "entityType": "equivalence-assertion",
+      "entityId": "ASSERT:same-work:U0414:TW:AS5a:117/184:base",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "assertionId": "ASSERT:same-work:U0414:TW:AS5a:117/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0414",
+        "sourceFirstRecordId": "TW:AS5a:117/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366842409",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 117/184, and the official Taiwan record plus AS5a checklist corroborate that local release. It is the AS5a counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "entityType": "equivalence-assertion",
+      "entityId": "ASSERT:same-work:U0558:TW:AS5a:222/184:base",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "assertionId": "ASSERT:same-work:U0558:TW:AS5a:222/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0558",
+        "sourceFirstRecordId": "TW:AS5a:222/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5367641859",
+        "evidence": "The owner identifies the photographed Traditional-Chinese Eevee & Snorlax-GX as AS5a 222/184 HR, and the 52poke card record independently lists that same local printing. It is the AS5a counterpart of legacy U0558 (sm9 115 V3); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "entityType": "equivalence-assertion",
+      "entityId": "ASSERT:same-work:U0634:TW:AS5a:203/184:base",
+      "origin": "verification/print_identity_dryrun.json",
+      "payload": {
+        "assertionId": "ASSERT:same-work:U0634:TW:AS5a:203/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0634",
+        "sourceFirstRecordId": "TW:AS5a:203/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366877127",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 203/184, and 52poke independently lists that local SR printing. It is the AS5a counterpart of legacy U0634 (sm9 106 V2); both release identities remain distinct.",
         "destructiveMergeAllowed": false
       }
     },
@@ -87678,7 +87930,10 @@
           "state": "identified",
           "viaLegacySetCodes": [],
           "establishingClaimIds": [
-            "CLAIM:source-first:TW:AS5a:142:base"
+            "CLAIM:source-first:TW:AS5a:117/184:base",
+            "CLAIM:source-first:TW:AS5a:142:base",
+            "CLAIM:source-first:TW:AS5a:203/184:base",
+            "CLAIM:source-first:TW:AS5a:222/184:base"
           ]
         },
         "catalogue": {
@@ -87690,7 +87945,10 @@
           "localCode": "AS5a",
           "state": "identified",
           "establishingEvidenceIds": [
-            "CLAIM:source-first:TW:AS5a:142:base"
+            "CLAIM:source-first:TW:AS5a:117/184:base",
+            "CLAIM:source-first:TW:AS5a:142:base",
+            "CLAIM:source-first:TW:AS5a:203/184:base",
+            "CLAIM:source-first:TW:AS5a:222/184:base"
           ]
         }
       }
@@ -132742,10 +133000,40 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TW:AS5a:117/184:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:TW:AS5a:142:base",
       "relation": "materializes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TW:AS5a:203/184:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TW:AS5a:222/184:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -136526,6 +136814,24 @@
     },
     {
       "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "state": "mapped-by-explicit-equivalence"
+      }
+    },
+    {
+      "fromType": "card-release",
       "fromId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -136538,6 +136844,42 @@
       "relation": "implements",
       "toType": "work",
       "toId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {
+        "state": "mapped-by-explicit-equivalence"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "state": "mapped-by-explicit-equivalence"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {
         "state": "mapped-by-explicit-equivalence"
       }
@@ -149014,6 +149356,22 @@
     },
     {
       "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
       "fromId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -149026,6 +149384,38 @@
       "relation": "references",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {}
     },
     {
@@ -154793,6 +155183,126 @@
         "assertedAt": "2026-08-04",
         "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5184898868",
         "evidence": "The owner identifies AS5a 142 as the Traditional-Chinese printing of the work represented by legacy Japanese sm10 076 and supplies the 52poke record and card image. Both local release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0414:TW:AS5a:117/184:base",
+      "relation": "relates",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0414:TW:AS5a:117/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0414",
+        "sourceFirstRecordId": "TW:AS5a:117/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366842409",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 117/184, and the official Taiwan record plus AS5a checklist corroborate that local release. It is the AS5a counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0414:TW:AS5a:117/184:base",
+      "relation": "relates",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0414:TW:AS5a:117/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0414",
+        "sourceFirstRecordId": "TW:AS5a:117/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366842409",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 117/184, and the official Taiwan record plus AS5a checklist corroborate that local release. It is the AS5a counterpart of legacy U0414 (sm9 066 V1); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0558:TW:AS5a:222/184:base",
+      "relation": "relates",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0558:TW:AS5a:222/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0558",
+        "sourceFirstRecordId": "TW:AS5a:222/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5367641859",
+        "evidence": "The owner identifies the photographed Traditional-Chinese Eevee & Snorlax-GX as AS5a 222/184 HR, and the 52poke card record independently lists that same local printing. It is the AS5a counterpart of legacy U0558 (sm9 115 V3); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0558:TW:AS5a:222/184:base",
+      "relation": "relates",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0558:TW:AS5a:222/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0558",
+        "sourceFirstRecordId": "TW:AS5a:222/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5367641859",
+        "evidence": "The owner identifies the photographed Traditional-Chinese Eevee & Snorlax-GX as AS5a 222/184 HR, and the 52poke card record independently lists that same local printing. It is the AS5a counterpart of legacy U0558 (sm9 115 V3); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0634:TW:AS5a:203/184:base",
+      "relation": "relates",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0634:TW:AS5a:203/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0634",
+        "sourceFirstRecordId": "TW:AS5a:203/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366877127",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 203/184, and 52poke independently lists that local SR printing. It is the AS5a counterpart of legacy U0634 (sm9 106 V2); both release identities remain distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0634:TW:AS5a:203/184:base",
+      "relation": "relates",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0634:TW:AS5a:203/184:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "legacyUnitId": "U0634",
+        "sourceFirstRecordId": "TW:AS5a:203/184:base",
+        "assertedBy": "Scarrty",
+        "assertedAt": "2026-08-21",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/84#issuecomment-5366877127",
+        "evidence": "The owner identifies the Traditional-Chinese Eevee & Snorlax-GX as AS5a 203/184, and 52poke independently lists that local SR printing. It is the AS5a counterpart of legacy U0634 (sm9 106 V2); both release identities remain distinct.",
         "destructiveMergeAllowed": false
       }
     },
@@ -208157,9 +208667,30 @@
     },
     {
       "sourceKind": "source-first-record",
+      "sourceId": "TW:AS5a:117/184:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
       "sourceId": "TW:AS5a:142:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "TW:AS5a:203/184:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "TW:AS5a:222/184:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -213131,8 +213662,8 @@
     {
       "sourceKind": "legacy-issue-rekey",
       "sourceId": "U0414",
-      "disposition": "needs-positive-local-identity",
-      "targetRef": null,
+      "disposition": "linked-local-counterpart",
+      "targetRef": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "reason": "issue #84 re-key"
     },
     {
@@ -213166,8 +213697,8 @@
     {
       "sourceKind": "legacy-issue-rekey",
       "sourceId": "U0558",
-      "disposition": "needs-positive-local-identity",
-      "targetRef": null,
+      "disposition": "linked-local-counterpart",
+      "targetRef": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "reason": "issue #84 re-key"
     },
     {
@@ -213222,8 +213753,8 @@
     {
       "sourceKind": "legacy-issue-rekey",
       "sourceId": "U0634",
-      "disposition": "needs-positive-local-identity",
-      "targetRef": null,
+      "disposition": "linked-local-counterpart",
+      "targetRef": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "reason": "issue #84 re-key"
     },
     {
@@ -213263,23 +213794,23 @@
     }
   ],
   "summary": {
-    "entities": 6330,
-    "edges": 8927,
-    "migrationInputs": 2106,
+    "entities": 6342,
+    "edges": 8948,
+    "migrationInputs": 2109,
     "migrationDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 227,
       "carried": 67,
-      "established-and-mapped": 1156,
-      "linked-local-counterpart": 1,
+      "established-and-mapped": 1159,
+      "linked-local-counterpart": 4,
       "mapped": 216,
       "needs-evidence": 127,
-      "needs-positive-local-identity": 20,
+      "needs-positive-local-identity": 17,
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1542,
-    "cardReleases": 609,
+    "candidateClaims": 1545,
+    "cardReleases": 612,
     "physicalPrintings": 474,
     "setSourceRecords": 345,
     "setSourceDispositions": 345
