@@ -306,6 +306,9 @@ def validate(
         "source_first", "verification/source_first_prints.json", {"prints": []}
     )
     specimens_raw = read_identity_input("specimens", "verification/specimens.json", {"specimens": []})
+    rekeys_raw = read_identity_input(
+        "rekeys", "verification/legacy_issue_rekeys.json", {"questionSets": []}
+    )
     units = units_raw if isinstance(units_raw, list) else []
     codecards = codecards_raw if isinstance(codecards_raw, list) else []
     finish_units = finishes_raw.get("units", []) if isinstance(finishes_raw, dict) else []
@@ -420,6 +423,71 @@ def validate(
             if normalized(row.get(input_field)) != normalized(release.get(release_field)):
                 errors.append(f"source-first release is stale: {print_id}:{input_field}")
 
+    # Same-work/re-key decisions are another reviewed identity input.  They drive both
+    # equivalence assertions and the one-to-many migration targetRefs contract.
+    question_sets = rekeys_raw.get("questionSets", []) if isinstance(rekeys_raw, dict) else []
+    expected_assertions: dict[str, dict[str, Any]] = {}
+    expected_rekeys: dict[str, dict[str, Any]] = {}
+    for question_set in question_sets:
+        issue_number = question_set.get("issueNumber")
+        default_disposition = question_set.get("defaultDisposition")
+        legacy_ids = {str(unit_id) for unit_id in question_set.get("legacyUnitIds", [])}
+        for legacy_id in legacy_ids:
+            if legacy_id in expected_rekeys:
+                errors.append(f"duplicate re-key question scope: {legacy_id}")
+            expected_rekeys[legacy_id] = {
+                "issueNumber": issue_number,
+                "defaultDisposition": default_disposition,
+                "targets": [],
+            }
+        for mapping in question_set.get("mappings", []):
+            legacy_id = str(mapping.get("legacyUnitId"))
+            source_id = str(mapping.get("sourceFirstRecordId"))
+            if legacy_id not in legacy_ids:
+                errors.append(f"re-key mapping is outside its question scope: {legacy_id}")
+                continue
+            claim = claims_by_source.get(("source-first-record", source_id))
+            target_id = claim.get("materializedTargetId") if claim else None
+            release = releases.get(target_id)
+            if not release or not target_id:
+                errors.append(f"re-key source-first target is missing: {legacy_id}:{source_id}")
+                continue
+            expected_rekeys[legacy_id]["targets"].append(target_id)
+            assertion_id = f"ASSERT:same-work:{legacy_id}:{source_id}"
+            expected_assertions[assertion_id] = {
+                "assertionId": assertion_id,
+                "assertionType": mapping.get("assertionType"),
+                "fromId": target_id,
+                "toId": f"WORK:{release.get('work')}" if release.get("work") else None,
+                "legacyUnitId": legacy_id,
+                "sourceFirstRecordId": source_id,
+                "assertedBy": mapping.get("assertedBy"),
+                "assertedAt": mapping.get("assertedAt"),
+                "evidenceUrl": mapping.get("evidenceUrl"),
+                "evidence": mapping.get("evidence"),
+                "destructiveMergeAllowed": False,
+            }
+    graph_assertions = by_type["equivalence-assertion"]
+    if set(graph_assertions) != set(expected_assertions):
+        errors.append("re-key decisions and graph equivalence assertions differ")
+    for assertion_id, expected in expected_assertions.items():
+        assertion = graph_assertions.get(assertion_id)
+        if not assertion:
+            continue
+        if any(assertion.get(field) != value for field, value in expected.items()):
+            errors.append(f"re-key equivalence assertion is stale: {assertion_id}")
+        if assertion.get("fromId") not in releases or assertion.get("toId") not in by_type["work"]:
+            errors.append(f"re-key equivalence target is invalid: {assertion_id}")
+    for legacy_id, expected in expected_rekeys.items():
+        migration = migration_by_key.get(("legacy-issue-rekey", legacy_id))
+        targets = expected["targets"]
+        expected_disposition = "linked-local-counterpart" if targets else expected["defaultDisposition"]
+        if not migration or migration.get("disposition") != expected_disposition \
+                or migration.get("targetRefs") != targets \
+                or migration.get("targetRef") != (targets[0] if targets else None) \
+                or migration.get("reason") != f"issue #{expected['issueNumber']} re-key":
+            errors.append(f"re-key migration disposition is stale: {legacy_id}")
+
     for specimen_id, specimen in observed_specimens.items():
         claim = claims_by_source.get(("specimen-observation", specimen_id))
         if not claim or not claim.get("materializedTargetId"):
@@ -436,6 +504,16 @@ def validate(
                 errors.append(f"specimen printing is stale: {specimen_id}:{field}")
         if physical.get("basis") != observation.get("basis"):
             errors.append(f"specimen basis is stale: {specimen_id}")
+        release = releases.get(physical.get("cardReleaseId"))
+        if not release:
+            continue
+        set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
+        number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
+        for input_field, release_field in (
+            ("language", "language"), ("setCode", set_field), ("number", number_field),
+        ):
+            if normalized(specimen.get(input_field)) != normalized(release.get(release_field)):
+                errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
 
     # The raw catalogue registry is append-only.  Every raw record must have exactly
     # one graph source node and one disposition, and the graph node must preserve the

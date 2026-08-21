@@ -96,6 +96,29 @@ def main() -> None:
     rarity["sourceProvider"] = other_source["provider"]
     assert any("rarity claim source locality mismatch" in error for error in validate(tampered))
 
+    # Re-key decisions must round-trip into both equivalence assertions and migration
+    # targetRefs, including one-to-many decisions such as U0414.
+    rekeys = json.loads(
+        (ROOT / "verification/legacy_issue_rekeys.json").read_text(encoding="utf-8")
+    )
+    rekeys["questionSets"][0]["mappings"][0]["sourceFirstRecordId"] = "TW:AS5a:117/184:base"
+    assert any("re-key" in error for error in validate(graph, identity_inputs={"rekeys": rekeys}))
+
+    # A specimen observation must remain attached to a release with the same local
+    # set, number and language, not merely to a printing with matching finish fields.
+    tampered = deepcopy(graph)
+    specimen_printing = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "physical-printing"
+        and row["entityId"] == "PHYSICAL:specimen:SPEC-0001"
+    )
+    specimen_printing["cardReleaseId"] = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["entityId"] != specimen_printing["cardReleaseId"]
+    )
+    assert any("specimen release identity is stale" in error for error in validate(tampered))
+
     identity = identity_view(graph)
     migrations = {
         (row["sourceKind"], row["sourceId"]): row
