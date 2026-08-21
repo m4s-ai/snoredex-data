@@ -204,6 +204,7 @@ python scripts/authoritative_graph.py --check    # reviewed locality graph migra
 python scripts/source_adapters.py --check        # ADR-0004 source-first catalogue runs (#147)
 python scripts/card_discovery.py --check         # ADR-0006 source-first card runs (#136)
 python scripts/locality_matrix.py --check         # evidenced non-Asian locality/era tracks (#139)
+python scripts/completeness_gate.py --check       # bounded two-loop graph/accounting gate (#141)
 
 # ... do the work in a new Python pass under verification/ ...
 
@@ -220,6 +221,7 @@ python scripts/source_capabilities.py            # bounded source/coverage graph
 python scripts/source_adapters.py                 # reproject latest retained catalogue run (#147)
 python scripts/card_discovery.py                  # reproject latest retained card run (#136)
 python scripts/locality_matrix.py                 # reviewed locality/era matrix projection (#139)
+python scripts/completeness_gate.py               # write the bounded release-gate summary (#141)
 python scripts/checklist.py                      # canonical checklist items
 python scripts/readme_stats.py                   # generated markdown blocks
 python scripts/issue_templates.py                # community correction form

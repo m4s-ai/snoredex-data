@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "schema": "snoredex-completeness-gate",
+    "schemaVersion": "1.0.0",
+    "coverageVersion": {
+      "setDiscovery": "1.2.0",
+      "cardDiscovery": "1.16.0",
+      "asia": "1.0.0",
+      "locality": "1.0.0",
+      "graph": "2026-08-20"
+    },
+    "setDiscoveryRun": "20260813T122130Z",
+    "cardDiscoveryRun": "20260820T125000Z",
+    "previousSetDiscoveryRun": "20260811T144120Z",
+    "previousCardDiscoveryRun": "20260820T122400Z",
+    "setDiscoveryRecordsHash": "sha256:4ea0d924da92f42239c86e55f75bfb0e6521cc7cd1d53386ee7b9927d795c78e",
+    "cardDiscoveryRecordsHash": "sha256:3f6ad1e68338d9482322e8881b27fdc344f20550747b45f79caa8dce0a46ed1b",
+    "terminalState": "complete",
+    "terminalMeaning": "Both bounded discovery loops and the authoritative graph are accounted; needs-evidence and blocked-by-source gaps remain explicit and are not absence claims."
+  },
+  "counts": {
+    "setDiscoverySlices": 15,
+    "setDiscoveryRecords": 1621,
+    "cardDiscoverySlices": 14,
+    "cardDiscoveryRecords": 354,
+    "graphEntities": 6330,
+    "graphEdges": 8927,
+    "asiaTracks": 8,
+    "localityTracks": 12
+  },
+  "gaps": [
+    {
+      "id": "official-asia-hk-market-provenance",
+      "state": "needs-evidence",
+      "reason": "The retained tw-locale results and TWHK set-symbol assets establish Traditional-Chinese card identities but do not distinguish Taiwan from Hong Kong distribution records."
+    },
+    {
+      "id": "official-sea-english-card-discovery",
+      "state": "needs-evidence",
+      "reason": "No retained source-first card or product index independently enumerates English-language physical products distributed in Southeast Asia."
+    },
+    {
+      "id": "official-japanese-card-search",
+      "state": "needs-evidence",
+      "reason": "Official Japanese card discovery, including categories omitted by the current search surface."
+    },
+    {
+      "id": "official-asia-kr-cn",
+      "state": "blocked-by-source",
+      "reason": "Provider-native Simplified-Chinese card discovery and local identifiers."
+    }
+  ],
+  "mutationChecks": [
+    "missing source-first regression",
+    "collapsed LATAM-ES locality boundary",
+    "set-only card confirmation",
+    "zero-result provider slice"
+  ]
+}
