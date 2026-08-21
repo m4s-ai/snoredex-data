@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; the record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 37,
+  "count": 39,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -647,6 +647,22 @@
       "recordedAt": "2026-08-21",
       "citedBy": [
         "TW:AS5a:222/184:base"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0039",
+      "setCode": "AS5a",
+      "number": "203/184",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "collection owner",
+      "inspectedFrom": "owner photograph",
+      "photograph": "SPEC-0039.png",
+      "photographSource": "https://raw.githubusercontent.com/m4s-ai/snoredex-data/e300898c854f4dba71eaff7ec5a4ac192bf7be85/verification/specimens/SPEC-0039.png",
+      "observed": "Traditional Chinese Eevee & Snorlax-GX photographed by the owner and supplied through issue #84: the card reads 伊布&卡比獸GX, carries the AS5a set mark and collector number 203/184, and is the SR local counterpart of legacy U0634.",
+      "recordedAt": "2026-08-21",
+      "citedBy": [
+        "TW:AS5a:203/184:base"
       ]
     }
   ]

@@ -252,7 +252,7 @@ publishes, and Pages deployment stays a manual, gated workflow run.
 - **A contradicted language is not automatically a proven absence.** `languagesContradicted`
   splits into `languagesNotPrinted` — where an explicit owner adjudication or a complete official
   manifest settled the question — and `languagesDisputed`, where a source disagrees and nothing
-  has settled it. **79 are settled; 5 are disputed.** Both are excluded from the checklist, so
+  has settled it. **80 are settled; 4 are disputed.** Both are excluded from the checklist, so
   that nobody is sent hunting a printing the evidence points away from, but only the first is a
   claim that the card does not exist. A photograph would overturn a disputed row.
 - **Every "Spanish" claim here means European Spanish.** From Journey Together (2025), LATAM-ES is
