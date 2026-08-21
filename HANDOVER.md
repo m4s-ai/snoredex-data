@@ -121,6 +121,7 @@ scripts/                      Two halves; only the second can be re-run (#28).
                               set_catalogue_dryrun.py rebuild the review graphs;
                               authoritative_graph.py materializes the reviewed #140 locality graph
                               into the application database;
+                              artwork_review.py builds the #120 graph-backed browser projection;
                               source_adapters.py checks/reprojects retained ADR-0004 set runs;
                               card_discovery.py checks/reprojects retained ADR-0006 card runs; and
                               completeness_gate.py validates both immutable loops and writes the
@@ -184,6 +185,10 @@ verification/
   authoritative_graph.json   GENERATED #140 canonical locality graph snapshot: reviewed identity
                               and catalogue entities, typed provenance edges, raw set records and
                               one reversible migration disposition for every input.
+  artwork_review_projection.json
+                              GENERATED #120 client-side review projection: graph-backed artwork/work
+                              groups, local releases, images, observations and hashes. Browser edits
+                              are proposals only and never write catalogue truth directly.
   legacy_set_reconciliation.json
                               GENERATED ADR-0005 migration ledger. It embeds every legacy finish
                               unit exactly, keeps scalar release dates as raw history, links only

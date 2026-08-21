@@ -400,6 +400,7 @@ def multiselect(field: str, label: str) -> str:
 def main() -> int:
     releases_doc = read_json(ROOT / "analysis_confirmed_releases.json")
     checklist_doc = read_json(ROOT / "analysis_checklist.json")
+    artwork_review = read_json(ROOT / "verification" / "artwork_review_projection.json")
     finish_counts = read_json(ROOT / "analysis_finishes.json")["counts"]
     dataset = read_json(ROOT / "snorlax_cards.json")
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
@@ -567,6 +568,7 @@ def main() -> int:
       <ul id="section-nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#collection">Collection</a></li>
+        <li><a href="#artwork-review">Artwork review</a></li>
         <li><a href="#checklist">Checklist</a></li>
         <li><a href="#methodology">Methodology</a></li>
         <li><a href="#contribute">Help correct this</a></li>
@@ -721,6 +723,55 @@ def main() -> int:
   </div>
 </section>
 
+<section id="artwork-review">
+  <h2>Artwork &amp; detection review</h2>
+  <p>This client-side review surface reads the generated projection of the authoritative locality
+  graph. It keeps a shared work/artwork group separate from each physical local release, shows the
+  current catalogue-derived detection fields beside the recorded image and evidence, and emits
+  downloadable review proposals. It never writes the catalogue from the browser.</p>
+  <div class="callout">
+    <strong>Review boundary.</strong> Proposals carry stable graph IDs, before-values, source
+    observation hashes and the projection version. A reviewed import must validate them against the
+    current graph before any generator can change catalogue truth. The projection currently covers
+    {artwork_review['summary']['cardReleases']} card releases in
+    {artwork_review['summary']['mappedWorks']} mapped artwork groups plus
+    {artwork_review['summary']['unmappedReleases']} unmapped source-first releases.
+    <a href="verification/artwork_review_projection.json">Download the projection</a>.
+  </div>
+  <div class="artwork-review" id="artwork-review-app">
+    <div class="controls">
+      <div class="row">
+        <div class="field" style="flex:1 1 260px">
+          <label for="ar-search">Search groups and releases</label>
+          <input id="ar-search" type="search" placeholder="card, set, locality, language, ID…" style="width:100%">
+        </div>
+        <div class="field"><label for="ar-scope">Show</label>
+          <select id="ar-scope">
+            <option value="mapped">Verified artwork appearances</option>
+            <option value="all">All groups</option>
+            <option value="unmapped">Unmapped releases</option>
+          </select>
+        </div>
+        <div class="field"><label for="ar-proposal-filter">Proposal state</label>
+          <select id="ar-proposal-filter">
+            <option value="all">All</option>
+            <option value="unreviewed">Unreviewed</option>
+            <option value="reviewed">Has local proposal</option>
+          </select>
+        </div>
+        <div class="field" style="flex:1 1 220px">
+          <label for="ar-reviewer">Reviewer name</label>
+          <input id="ar-reviewer" type="text" autocomplete="name" placeholder="Required for proposals" style="width:100%">
+        </div>
+        <button type="button" class="primary" id="ar-download">Download proposals</button>
+        <button type="button" class="ghost" id="ar-clear">Clear local drafts</button>
+      </div>
+      <div class="count" id="ar-summary" role="status" aria-live="polite"></div>
+    </div>
+    <div id="ar-groups"></div>
+  </div>
+</section>
+
 <section id="checklist">
   <h2>Checklist</h2>
   <p>Generate a printable ownership checklist from the canonical export. It lists what has been
@@ -823,6 +874,7 @@ def main() -> int:
     <li><a href="verification/source_capability_graph.json">verification/source_capability_graph.json</a> — bounded provider/surface coverage graph with hashed fixtures</li>
     <li><a href="verification/source_capabilities.json">verification/source_capabilities.json</a> — reviewed source capability manifest</li>
     <li><a href="verification/source_capability_schema.json">verification/source_capability_schema.json</a> — versioned manifest schema</li>
+    <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — generated graph projection for the artwork review UI</li>
   </ul>
   <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
   <a href="https://github.com/m4s-ai/snoredex-data/issues">Issue tracker</a> ·
@@ -926,6 +978,7 @@ def main() -> int:
 
 {json_block("data-rows", rows)}
 {json_block("data-checklist", checklist)}
+{json_block("data-artwork-review", artwork_review)}
 {json_block("data-coverage", coverage)}
 {json_block("data-meta", {"languages": languages_meta, "generated": generated})}
 <script src="site/app.js"></script>

@@ -16,6 +16,7 @@
   const readJSON = (id) => JSON.parse(document.getElementById(id).textContent);
   const ROWS = readJSON("data-rows");
   const CHECKLIST = readJSON("data-checklist");
+  const ARTWORK_REVIEW = readJSON("data-artwork-review");
   const META = readJSON("data-meta");
   const LANGS = META.languages;
   // 18 fixed columns from scripts/site.py's COLUMNS, the language matrix, then the narrow-screen
@@ -1213,6 +1214,320 @@
     });
   }
 
+  /* --------------------------------------------- artwork/detection review (#120) */
+
+  function initArtworkReview() {
+    const root = $("#artwork-review-app");
+    if (!root || !ARTWORK_REVIEW) return;
+    const groupsBox = $("#ar-groups");
+    const summary = $("#ar-summary");
+    const search = $("#ar-search");
+    const scope = $("#ar-scope");
+    const proposalFilter = $("#ar-proposal-filter");
+    const reviewer = $("#ar-reviewer");
+    const storageKey = "snoredex-artwork-review-proposals-v1";
+    let drafts = {};
+
+    try {
+      const saved = window.localStorage.getItem(storageKey);
+      if (saved) drafts = JSON.parse(saved) || {};
+    } catch (error) { /* Offline/file:// storage may be unavailable. */ }
+
+    const persist = () => {
+      try { window.localStorage.setItem(storageKey, JSON.stringify(drafts)); }
+      catch (error) { /* The download remains available even without storage. */ }
+    };
+    const members = () => ARTWORK_REVIEW.groups.flatMap((group) => group.members);
+    const memberById = new Map(members().map((member) => [member.cardReleaseId, member]));
+    const groupById = new Map(ARTWORK_REVIEW.groups.map((group) => [group.groupId, group]));
+
+    const textFor = (member) => [
+      member.cardReleaseId, member.workId, member.locality, member.language, member.localSetCode,
+      member.localNumber, member.detection.cardName, member.detection.artist,
+      member.detection.variant, member.detection.finish.join(" "),
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    const draftFor = (member) => drafts[member.cardReleaseId] || null;
+    const draftState = (member) => draftFor(member) ? "reviewed" : "unreviewed";
+    const actionLabel = (action) => ({
+      confirm: "Confirm group",
+      correct: "Correct detection",
+      reassign: "Reassign artwork group",
+      split: "Split from group",
+      unclear: "Mark unclear",
+      "propose-variant": "Propose new variant",
+    }[action] || action);
+    const imageDependentActions = new Set(["confirm", "correct", "reassign", "split", "propose-variant"]);
+    const structuredActions = new Set(["correct", "propose-variant"]);
+    const hasVerifiedImages = (member) => {
+      const images = member.images || [];
+      return images.length > 0 && images.every((image) => image && image.src && image.reviewable && image.contentHash);
+    };
+
+    const imageHTML = (member) => {
+      const images = (member.images || []).filter((image) => image && image.src);
+      if (!images.length) return '<div class="artwork-images"><div class="artwork-image missing">No reviewable image recorded</div></div>';
+      return '<div class="artwork-images">' + images.map((image, index) =>
+        '<figure class="artwork-image"><img loading="lazy" src="' + escapeHTML(image.src) +
+        '" alt="' + escapeHTML((member.detection && member.detection.cardName) || member.cardReleaseId) +
+        ' — image ' + (index + 1) + '"><figcaption>' + escapeHTML(image.label || 'source image') +
+        (image.reviewable && image.contentHash
+          ? '<br><code>' + escapeHTML(image.contentHash) + '</code>'
+          : '<br><span class="artwork-unverified">image bytes are not pinned</span>') +
+        '</figcaption></figure>').join('') + '</div>';
+    };
+
+    const evidenceHTML = (member) => {
+      const observations = member.observations || [];
+      if (!observations.length) return '<p class="artwork-muted">No observation record linked.</p>';
+      return '<details class="artwork-evidence"><summary>Evidence (' + observations.length +
+        ' observations)</summary><ul>' + observations.map((observation) => {
+          const link = observation.url
+            ? '<a href="' + escapeHTML(observation.url) + '" target="_blank" rel="noopener nofollow">' +
+              escapeHTML(observation.url) + '</a>'
+            : '<span>' + escapeHTML(observation.observationId) + '</span>';
+          return '<li>' + link + '<br><code>' + escapeHTML(observation.observationId) +
+            '</code> <small>hash ' + escapeHTML(observation.contentHash) + '</small>' +
+            (observation.evidence ? '<p>' + escapeHTML(observation.evidence) + '</p>' : '') +
+            '</li>';
+        }).join('') + '</ul></details>';
+    };
+
+    const memberHTML = (group, member) => {
+      const draft = draftFor(member);
+      const detection = member.detection || {};
+      const physical = member.physicalPrintings || [];
+      const images = member.images || [];
+      const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
+      const physicalIds = physical.map((item) => item.physicalPrintingId).filter(Boolean);
+      const selectedPhysicalIds = new Set(
+        draft && Array.isArray(draft.affectedPhysicalPrintingIds)
+          ? draft.affectedPhysicalPrintingIds : physicalIds,
+      );
+      const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
+      const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields || []);
+      const selectedAction = draft ? draft.action : "";
+      const imageReviewable = hasVerifiedImages(member);
+      const actionOptions = ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
+        .map((action) => '<option value="' + escapeHTML(action) + '"' +
+          (imageDependentActions.has(action) && !imageReviewable ? ' disabled' : '') +
+          (selectedAction === action ? ' selected' : '') + '>' +
+          escapeHTML(action ? actionLabel(action) : 'Choose a review action') + '</option>').join('');
+      const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
+      const existing = {
+        cardName: detection.cardName || "",
+        artist: detection.artist || "",
+        variant: detection.variant || "",
+        localSetCode: member.localSetCode || "",
+        localNumber: member.localNumber || "",
+        finish: (detection.finish || []).join(", "),
+        foilPattern: (detection.foilPattern || []).join(", "),
+        markings: (detection.markings || []).join(", "),
+      };
+      const value = (key) => escapeHTML(Object.prototype.hasOwnProperty.call(proposed, key)
+        ? proposed[key] : (cleared.has(key) ? "" : existing[key]));
+      const touched = (key) => Object.prototype.hasOwnProperty.call(proposed, key) || cleared.has(key);
+      const input = (className, key, placeholder) => '<input class="' + className + '" data-detection-field="' + key +
+        '" data-touched="' + (touched(key) ? 'true' : 'false') + '" value="' + value(key) +
+        '" placeholder="' + placeholder + '">';
+      const structuredFields = '<div class="ar-structured-fields"' +
+        (structuredActions.has(selectedAction) ? '' : ' hidden') + '>' +
+        '<p class="artwork-muted">Edit a field to set it; clear it to explicitly remove it.</p>' +
+        '<label>Card name' + input('ar-proposed-name', 'cardName', 'Corrected card name') + '</label>' +
+        '<label>Artist' + input('ar-proposed-artist', 'artist', 'Corrected artist') + '</label>' +
+        '<label>Variant identity' + input('ar-proposed-variant', 'variant', 'e.g. V2') + '</label>' +
+        '<label>Local set code' + input('ar-proposed-set', 'localSetCode', 'Set code for a new variant') + '</label>' +
+        '<label>Local number' + input('ar-proposed-number', 'localNumber', 'Collector number for a new variant') + '</label>' +
+        '<label>Finish' + input('ar-proposed-finish', 'finish', 'Finish') + '</label>' +
+        '<label>Foil pattern' + input('ar-proposed-foil', 'foilPattern', 'Foil pattern') + '</label>' +
+        '<label>Markings' + input('ar-proposed-markings', 'markings', 'Stamp or marking') + '</label></div>';
+      const physicalInputs = physicalIds.length
+        ? '<fieldset class="ar-physical-targets"><legend>Affected physical printings</legend>' +
+          physical.map((item) => '<label><input class="ar-physical" type="checkbox" value="' +
+            escapeHTML(item.physicalPrintingId) + '"' +
+            (selectedPhysicalIds.has(item.physicalPrintingId) ? ' checked' : '') + '> <code>' +
+            escapeHTML(item.physicalPrintingId) + '</code> · ' + escapeHTML(item.finish || 'printing') +
+            '</label>').join('') + '</fieldset>'
+        : '<p class="artwork-muted">No physical-printing identity is linked.</p>';
+      return '<article class="artwork-member" data-release-id="' + escapeHTML(member.cardReleaseId) + '">' +
+        imageHTML(member) +
+        '<div class="artwork-member-body"><h4>' + escapeHTML(detection.cardName || member.cardReleaseId) +
+        ' <span class="pill ' + (draft ? 'confirmed' : 'pending') + '">' +
+        escapeHTML(draft ? actionLabel(draft.action) : 'unreviewed') + '</span></h4>' +
+        '<p><strong>' + escapeHTML(member.language || '—') + '</strong> · ' +
+        escapeHTML(member.locality || '—') + ' · <code>' + escapeHTML(member.localSetCode || '—') +
+        ' ' + escapeHTML(member.localNumber || '—') + '</code><br>' +
+        '<small>' + escapeHTML(member.cardReleaseId) + '</small></p>' +
+        '<dl class="artwork-detection"><dt>Detection</dt><dd>' +
+        escapeHTML([detection.variant, detection.artist, detection.finish && detection.finish.join(', '),
+          detection.foilPattern && detection.foilPattern.join(', ')].filter(Boolean).join(' · ') || 'no fields') +
+        '</dd><dt>Physical printings</dt><dd>' + escapeHTML(String(physical.length)) +
+        '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(imageHashes[0] || 'not available') +
+        '</code></dd></dl>' +
+        evidenceHTML(member) +
+        physicalInputs + structuredFields +
+        '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
+        escapeHTML(member.cardReleaseId) + '">' + actionOptions + '</select></label>' +
+        '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(target) +
+        '" placeholder="APPEARANCE:…" aria-label="Target artwork group"></label>' +
+        '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
+        escapeHTML(draft && draft.note || '') + '</textarea></label>' +
+        '<button type="button" class="ghost ar-save">Save proposal</button>' +
+        (!imageReviewable ? '<span class="artwork-muted">No verified image hash; only “Mark unclear” can be proposed.</span>' : '') +
+        '<span class="artwork-save-status" role="status"></span></div></div></article>';
+    };
+
+    const groupHTML = (group) => '<article class="artwork-group" data-group-id="' + escapeHTML(group.groupId) +
+      '"><header><div><h3>' + escapeHTML(group.label) + '</h3><p><code>' +
+      escapeHTML(group.groupId) + '</code> · ' + escapeHTML(group.members.length + ' local releases') +
+      '</p></div><span class="pill ' + (group.groupKind === 'mapped-appearance' ? 'confirmed' : 'pending') + '">' +
+      escapeHTML(group.groupKind === 'mapped-appearance' ? 'verified artwork appearance' : 'unresolved appearance') +
+      '</span></header><div class="artwork-members">' +
+      group.members.map((member) => memberHTML(group, member)).join('') + '</div></article>';
+
+    const filteredGroups = () => {
+      const needle = search.value.trim().toLowerCase();
+      const mode = scope.value;
+      const proposalMode = proposalFilter.value;
+      return ARTWORK_REVIEW.groups.filter((group) => {
+        if (mode === "mapped" && group.groupKind !== "mapped-appearance") return false;
+        if (mode === "unmapped" && group.groupKind !== "unmapped-release") return false;
+        const groupMatches = !needle || (group.label + " " + group.groupId).toLowerCase().includes(needle);
+        const visibleMembers = group.members.filter((member) => {
+          if (proposalMode === "reviewed" && !draftFor(member)) return false;
+          if (proposalMode === "unreviewed" && draftFor(member)) return false;
+          return !needle || groupMatches || textFor(member).includes(needle);
+        });
+        if (!visibleMembers.length) return false;
+        group.__visibleMembers = visibleMembers;
+        return true;
+      });
+    };
+
+    const render = () => {
+      const groups = filteredGroups();
+      const reviewed = members().filter((member) => draftFor(member)).length;
+      summary.textContent = groups.length + ' groups shown · ' + groups.reduce((n, group) => n + group.__visibleMembers.length, 0) +
+        ' releases · ' + reviewed + ' proposals saved locally · projection ' + ARTWORK_REVIEW.projectionVersion.slice(0, 12);
+      groupsBox.innerHTML = groups.map((group) => {
+        const original = group.members;
+        group.members = group.__visibleMembers;
+        const html = groupHTML(group);
+        group.members = original;
+        return html;
+      }).join('') || '<p class="artwork-muted">No groups match the current filters.</p>';
+    };
+
+    const makeProposal = (member, group, card) => {
+      const action = $(".ar-action", card).value;
+      const targetGroupId = $(".ar-target", card).value.trim();
+      const note = $(".ar-note", card).value.trim();
+      const name = reviewer.value.trim();
+      const status = $(".artwork-save-status", card);
+      const imageReviewable = hasVerifiedImages(member);
+      if (!name) { status.textContent = "Reviewer name required."; reviewer.focus(); return; }
+      if (!action) { status.textContent = "Choose an action first."; return; }
+      if (!imageReviewable && imageDependentActions.has(action)) {
+        status.textContent = "A reviewable image is required for this action; choose Mark unclear.";
+        return;
+      }
+      if (action === "reassign" && !targetGroupId) { status.textContent = "Target group required."; return; }
+      const detection = {};
+      const clearDetectionFields = [];
+      card.querySelectorAll("[data-detection-field]").forEach((field) => {
+        if (field.dataset.touched !== "true") return;
+        const key = field.dataset.detectionField;
+        const value = field.value.trim();
+        if (value) detection[key] = value;
+        else clearDetectionFields.push(key);
+      });
+      if (action === "correct" && !Object.keys(detection).length && !clearDetectionFields.length) {
+        status.textContent = "Enter at least one structured corrected value.";
+        return;
+      }
+      if (action === "propose-variant" && !detection.variant) {
+        status.textContent = "Variant identity is required for a new variant proposal.";
+        return;
+      }
+      const observationIds = (member.observations || []).map((item) => item.observationId);
+      const sourceHashes = (member.observations || []).map((item) => item.contentHash);
+      const affectedPhysicalPrintingIds = Array.from(card.querySelectorAll(".ar-physical:checked"))
+        .map((input) => input.value);
+      drafts[member.cardReleaseId] = {
+        proposalId: "PROPOSAL:" + member.cardReleaseId + ":" + Date.now(),
+        schema: ARTWORK_REVIEW.proposalSchema,
+        schemaVersion: ARTWORK_REVIEW.proposalSchemaVersion,
+        projectionVersion: ARTWORK_REVIEW.projectionVersion,
+        action,
+        groupId: group.groupId,
+        affectedCardReleaseIds: [member.cardReleaseId],
+        reviewer: name,
+        evidenceClass: "human-review",
+        sourceObservationIds: observationIds,
+        sourceContentHashes: sourceHashes,
+        imageHashes: (member.images || []).map((item) => item.contentHash).filter(Boolean),
+        affectedPhysicalPrintingIds,
+        before: { groupId: group.groupId, workId: member.workId, detection: member.detection },
+        proposedAfter: {
+          action,
+          targetGroupId: targetGroupId || null,
+          detection: structuredActions.has(action) ? detection : null,
+          clearDetectionFields: structuredActions.has(action) ? clearDetectionFields : [],
+          note,
+        },
+        note,
+        createdAt: new Date().toISOString(),
+      };
+      persist();
+      status.textContent = "Saved locally.";
+      render();
+    };
+
+    root.addEventListener("click", (event) => {
+      const button = event.target.closest && event.target.closest(".ar-save");
+      if (!button) return;
+      const card = button.closest(".artwork-member");
+      const member = memberById.get(card && card.dataset.releaseId);
+      const group = groupById.get(button.closest(".artwork-group").dataset.groupId);
+      if (member && group) makeProposal(member, group, card);
+    });
+    root.addEventListener("change", (event) => {
+      if (!event.target.matches || !event.target.matches(".ar-action")) return;
+      const fields = event.target.closest(".artwork-member").querySelector(".ar-structured-fields");
+      if (fields) fields.hidden = !structuredActions.has(event.target.value);
+    });
+    root.addEventListener("input", (event) => {
+      if (event.target.matches && event.target.matches("[data-detection-field]")) {
+        event.target.dataset.touched = "true";
+      }
+    });
+    [search, scope, proposalFilter].forEach((control) => control.addEventListener("input", render));
+    [scope, proposalFilter].forEach((control) => control.addEventListener("change", render));
+    $("#ar-clear").addEventListener("click", () => { drafts = {}; persist(); render(); });
+    $("#ar-download").addEventListener("click", () => {
+      const proposals = Object.values(drafts);
+      if (!proposals.length) { summary.textContent = "No proposals saved locally yet."; return; }
+      const payload = {
+        schema: ARTWORK_REVIEW.proposalSchema,
+        schemaVersion: ARTWORK_REVIEW.proposalSchemaVersion,
+        projectionVersion: ARTWORK_REVIEW.projectionVersion,
+        reviewer: reviewer.value.trim() || proposals[0].reviewer,
+        createdAt: new Date().toISOString(),
+        proposals,
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "snoredex-artwork-review-proposals.json";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    });
+    render();
+  }
+
   /* Section navigation (#123): seven links wrap into a text stack on a phone, so below the narrow
    * breakpoint they collapse behind a disclosure.
    *
@@ -1347,6 +1662,7 @@
   readURL();
   buildControls();
   initChecklist();
+  initArtworkReview();
   refreshTableOverflow = initTableOverflow();
   refreshClippedCells = initClippedCells();
   refreshStickyHeader = initStickyTableHeader();
