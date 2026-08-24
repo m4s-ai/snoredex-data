@@ -41,8 +41,10 @@ def main() -> int:
             return 0
         TARGET.write_bytes(corrupted)
         proc = run([sys.executable, str(REGEN), "--check"])
-        expected = "FAILED determinism scripts/evidence_semantics.py --check"
-        if proc.returncode == 0 or expected not in proc.stdout:
+        expected_header = "FAILED determinism checks:"
+        expected_command = "scripts/evidence_semantics.py --check"
+        if proc.returncode == 0 or expected_header not in proc.stdout \
+                or expected_command not in proc.stdout:
             print("FAIL: regen.py --check did not identify the stale artifact")
             print(proc.stdout)
             return 1

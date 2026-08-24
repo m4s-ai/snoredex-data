@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Record the four photographed Dutch Jungle Snorlax printings from issue #269.
+"""Historical record of the four photographed Dutch Jungle printings from issue #269.
+
+SUPERSEDED: routine physical evidence now enters through
+``verification/fetch_attachment.py --issue ... --manifest ...`` and the canonical projectors.
+Keep this file as an auditable provenance record; do not add new issue-specific passes.
 
 The issue supplies positive physical evidence for holo 11/64 and non-holo 27/64 in
 both 1st Edition and Unlimited.  Unlimited is recorded from the collection owner's

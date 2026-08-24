@@ -163,10 +163,15 @@ def main() -> None:
     # A specimen observation must remain attached to a release with the same local
     # set, number and language, not merely to a printing with matching finish fields.
     tampered = deepcopy(graph)
+    specimen_claim = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceId") == "SPEC-0001"
+    )
     specimen_printing = next(
         row["payload"] for row in tampered["entities"]
         if row["entityType"] == "physical-printing"
-        and row["entityId"] == "PHYSICAL:specimen:SPEC-0001"
+        and row["entityId"] == specimen_claim["corroboratedTargetId"]
     )
     specimen_printing["cardReleaseId"] = next(
         row["entityId"] for row in tampered["entities"]

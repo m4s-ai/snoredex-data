@@ -43,7 +43,7 @@ REGEN = [
     ["scripts/evidence_semantics.py"],
     # Editions are written onto the card rows consumed by the remaining projections.
     ["scripts/editions.py"],
-    ["scripts/finishes.py", "--reproject"],
+    ["scripts/finishes.py", "--offline"],
     ["scripts/language_status.py"],
     ["scripts/confirmed_releases.py"],
     ["verification/report.py"],
@@ -51,8 +51,9 @@ REGEN = [
     ["scripts/source_registry.py"],
     ["scripts/source_capabilities.py"],
     ["scripts/source_adapters.py"],
-    # The authoritative locality graph is a committed migration input. Discovery reads
-    # it directly; `--check` below validates its structural contract.
+    # The migration remains the reviewed graph base; physical evidence is projected from
+    # canonical finish/specimen inputs before downstream consumers read it.
+    ["scripts/authoritative_graph.py", "--write"],
     ["scripts/artwork_review.py"],
     ["scripts/card_discovery.py"],
     ["scripts/asia_locality_matrix.py"],
@@ -80,7 +81,7 @@ CHECK = [
     ["scripts/analyze.py", "--check"],
     ["scripts/evidence_semantics.py", "--check"],
     ["scripts/editions.py"],
-    ["scripts/finishes.py", "--reproject"],
+    ["scripts/finishes.py", "--offline"],
     ["scripts/language_status.py"],
     ["scripts/confirmed_releases.py"],
     ["verification/report.py"],
@@ -117,6 +118,10 @@ TESTS = [
     ["verification/test_metric_polarity.py"],
     ["verification/test_asia_locality_matrix.py"],
     ["verification/test_authoritative_graph.py"],
+    ["verification/test_physical_evidence_workflow.py"],
+    ["verification/test_fetch_attachment.py"],
+    ["verification/test_tcgdex_snapshot.py"],
+    ["verification/fetch_attachment.py", "--evidence-check"],
     ["verification/test_collector_catalogue.py"],
     ["verification/test_retired_projections.py"],
     ["verification/test_artwork_review.py"],
@@ -178,10 +183,15 @@ def main() -> int:
     # Snapshot after the intentional write phase. The check phase may run idempotent
     # writers, but it must not change any tracked text or create a new non-SQLite file.
     before_check = tree_state()
+    determinism_failures: list[list[str]] = []
     for cmd in CHECK:
         if not run([sys.executable, *cmd], " ".join(cmd)):
-            print(f"\nFAILED determinism {' '.join(cmd)}", file=sys.stderr)
-            return 1
+            determinism_failures.append(cmd)
+    if determinism_failures:
+        print("\nFAILED determinism checks:", file=sys.stderr)
+        for cmd in determinism_failures:
+            print(f"  - {' '.join(cmd)}", file=sys.stderr)
+        return 1
 
     if tree_state() != before_check:
         print("\nStale artifacts: checking changed generated output. Run "

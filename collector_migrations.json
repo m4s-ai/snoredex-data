@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:94400b1ace429d89f11cb4884418ca4f04366e7652772b3e62143db53bb4d78e",
+    "fromFingerprint": "sha256:840ee381a76c00298ddc234242e8da44ac098e1b7674fa2df25ac1f4d3e6b092",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:fc971cc5de6d6cc8b44dfbd76b33484b17976320a359659bf40aeda2488bb1bd",
+    "toFingerprint": "sha256:2d721eb2d9a9f9e9b9bd17854636d8dc352de742bd77df95c581a1fdc8121230",
     "cumulative": true
   },
   "transitions": [
@@ -2669,9 +2669,17 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "mp1-012-japanese-none-non-holo-fixed-deck",
+      "fromItemId": "mp1-012-japanese-none-non-holo",
       "toItemIds": [
         "item-2fac5fa4-cefc-5b0c-a05d-48e6b213b01d"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "mp1-012-japanese-none-non-holo-fixed-deck",
+      "toItemIds": [
+        "item-f20ab7a7-9716-5b3a-b271-cdae25deb089"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -3391,6 +3399,14 @@
     {
       "fromItemId": "pps8-jtg-jtg-117-german-none-holo-cosmos",
       "toItemIds": [
+        "item-7d6fcb46-2400-5abf-bfd3-3bf1e401f305"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "pps8-jtg-jtg-117-german-none-holo-observed-marking-play-pok-mon-prize-pack-stamp",
+      "toItemIds": [
         "item-c3ab56a0-fd97-5bc4-8128-5527c0cd8e52"
       ],
       "changeKind": "rekey-1:1",
@@ -3422,6 +3438,14 @@
     },
     {
       "fromItemId": "pps8-jtg-jtg-117-portuguese-none-holo-cosmos",
+      "toItemIds": [
+        "item-da3ea1a7-fc11-57cb-98ce-92acd02a9be6"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "pps8-jtg-jtg-117-portuguese-none-holo-observed-marking-play-pok-mon-prize-pack-stamp",
       "toItemIds": [
         "item-02fd9369-1b57-5738-83b8-839e4a29499d"
       ],
@@ -4967,7 +4991,23 @@
     {
       "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball",
       "toItemIds": [
+        "item-ba002977-e485-515d-8bc5-483ff0765e43"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball-mirror",
+      "toItemIds": [
         "item-1db1ebf2-32e4-5faf-85c1-0ae0ca8e011c"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-pok-ball-mirror",
+      "toItemIds": [
+        "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -4975,7 +5015,7 @@
     {
       "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-poke-ball",
       "toItemIds": [
-        "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
+        "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -6261,9 +6301,9 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "xjtg-117-french-none-unresolved-unknown",
+      "fromItemId": "xjtg-117-french-none-holo-observed-marking-gamestop-logo-stamped-in-red-over-the-lower-left-of-the-illustration",
       "toItemIds": [
-        "item-5d208143-1b0d-578c-8a88-4bc109574ec9"
+        "item-dd155c60-358f-5750-b519-47d4e588f0b8"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -6619,15 +6659,6 @@
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
-    },
-    {
-      "fromItemId": "item-ecf226a4-3db6-5261-bcb6-f5710eae73d9",
-      "toItemIds": [
-        "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve",
-      "reconciliation": "one-to-one-preserve"
     }
   ],
   "graphRekeys": [
@@ -9115,10 +9146,17 @@
         ]
       },
       {
-        "legacyChecklistId": "mp1-012-japanese-none-non-holo-fixed-deck",
+        "legacyChecklistId": "mp1-012-japanese-none-non-holo",
         "disposition": "projected",
         "targetItemIds": [
           "item-2fac5fa4-cefc-5b0c-a05d-48e6b213b01d"
+        ]
+      },
+      {
+        "legacyChecklistId": "mp1-012-japanese-none-non-holo-fixed-deck",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-f20ab7a7-9716-5b3a-b271-cdae25deb089"
         ]
       },
       {
@@ -9748,6 +9786,13 @@
         "legacyChecklistId": "pps8-jtg-jtg-117-german-none-holo-cosmos",
         "disposition": "projected",
         "targetItemIds": [
+          "item-7d6fcb46-2400-5abf-bfd3-3bf1e401f305"
+        ]
+      },
+      {
+        "legacyChecklistId": "pps8-jtg-jtg-117-german-none-holo-observed-marking-play-pok-mon-prize-pack-stamp",
+        "disposition": "projected",
+        "targetItemIds": [
           "item-c3ab56a0-fd97-5bc4-8128-5527c0cd8e52"
         ]
       },
@@ -9774,6 +9819,13 @@
       },
       {
         "legacyChecklistId": "pps8-jtg-jtg-117-portuguese-none-holo-cosmos",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-da3ea1a7-fc11-57cb-98ce-92acd02a9be6"
+        ]
+      },
+      {
+        "legacyChecklistId": "pps8-jtg-jtg-117-portuguese-none-holo-observed-marking-play-pok-mon-prize-pack-stamp",
         "disposition": "projected",
         "targetItemIds": [
           "item-02fd9369-1b57-5738-83b8-839e4a29499d"
@@ -11127,14 +11179,28 @@
         "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball",
         "disposition": "projected",
         "targetItemIds": [
+          "item-ba002977-e485-515d-8bc5-483ff0765e43"
+        ]
+      },
+      {
+        "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball-mirror",
+        "disposition": "projected",
+        "targetItemIds": [
           "item-1db1ebf2-32e4-5faf-85c1-0ae0ca8e011c"
+        ]
+      },
+      {
+        "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-pok-ball-mirror",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
         ]
       },
       {
         "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-poke-ball",
         "disposition": "projected",
         "targetItemIds": [
-          "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
+          "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd"
         ]
       },
       {
@@ -12258,10 +12324,10 @@
         ]
       },
       {
-        "legacyChecklistId": "xjtg-117-french-none-unresolved-unknown",
+        "legacyChecklistId": "xjtg-117-french-none-holo-observed-marking-gamestop-logo-stamped-in-red-over-the-lower-left-of-the-illustration",
         "disposition": "projected",
         "targetItemIds": [
-          "item-5d208143-1b0d-578c-8a88-4bc109574ec9"
+          "item-dd155c60-358f-5750-b519-47d4e588f0b8"
         ]
       },
       {
@@ -13085,9 +13151,9 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-1db1ebf2-32e4-5faf-85c1-0ae0ca8e011c",
-          "item-1e2006a5-a74c-5e33-a31c-d8da2428afe3",
           "item-1e2614db-50c8-5a13-929c-0add548fc0d9",
-          "item-bb19ffcd-ce0d-5a74-992d-17378f475e2e"
+          "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd",
+          "item-ba002977-e485-515d-8bc5-483ff0765e43"
         ],
         "reason": null
       },
@@ -13472,7 +13538,8 @@
         "cardReleaseId": "RELEASE:JP:Japanese:mP1:012:Snorlax-Spike-Draw-Mega-Punch",
         "disposition": "projected",
         "targetItemIds": [
-          "item-2fac5fa4-cefc-5b0c-a05d-48e6b213b01d"
+          "item-2fac5fa4-cefc-5b0c-a05d-48e6b213b01d",
+          "item-f20ab7a7-9716-5b3a-b271-cdae25deb089"
         ],
         "reason": null
       },
@@ -14449,7 +14516,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
         "disposition": "projected",
         "targetItemIds": [
-          "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
+          "item-ecf226a4-3db6-5261-bcb6-f5710eae73d9"
         ],
         "reason": null
       },
@@ -15838,8 +15905,7 @@
         "cardReleaseId": "RELEASE:WEST:French:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "disposition": "projected",
         "targetItemIds": [
-          "item-34f22c42-8a5a-55f0-89dc-7785ff103400",
-          "item-5d208143-1b0d-578c-8a88-4bc109574ec9"
+          "item-dd155c60-358f-5750-b519-47d4e588f0b8"
         ],
         "reason": null
       },
@@ -16114,9 +16180,9 @@
         "cardReleaseId": "RELEASE:WEST:German:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "disposition": "projected",
         "targetItemIds": [
+          "item-7d6fcb46-2400-5abf-bfd3-3bf1e401f305",
           "item-a4a220f9-efb1-5f58-8d1a-1f4d22dee595",
-          "item-c3ab56a0-fd97-5bc4-8128-5527c0cd8e52",
-          "item-cb569c48-f401-55ec-abd7-d5b3e2d4688f"
+          "item-c3ab56a0-fd97-5bc4-8128-5527c0cd8e52"
         ],
         "reason": null
       },
@@ -17093,7 +17159,7 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-02fd9369-1b57-5738-83b8-839e4a29499d",
-          "item-5450e686-3f2b-5567-95ee-48811a96907b",
+          "item-da3ea1a7-fc11-57cb-98ce-92acd02a9be6",
           "item-e418ad24-9a6b-57da-902e-acc069a684b3"
         ],
         "reason": null
@@ -18557,6 +18623,11 @@
         "targetItemId": "item-2fac5fa4-cefc-5b0c-a05d-48e6b213b01d"
       },
       {
+        "physicalPrintingId": "PHYSICAL:F0231-P02",
+        "disposition": "projected",
+        "targetItemId": "item-f20ab7a7-9716-5b3a-b271-cdae25deb089"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:F0234-P01",
         "disposition": "projected",
         "targetItemId": "item-e0739322-0ec7-5ec1-8837-bf27db9f5e8a"
@@ -18867,6 +18938,11 @@
         "targetItemId": "item-c3ab56a0-fd97-5bc4-8128-5527c0cd8e52"
       },
       {
+        "physicalPrintingId": "PHYSICAL:F0291-P03",
+        "disposition": "projected",
+        "targetItemId": "item-7d6fcb46-2400-5abf-bfd3-3bf1e401f305"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:F0292-P01",
         "disposition": "projected",
         "targetItemId": "item-2e72a744-0037-5cf6-97fb-47dec2f754e2"
@@ -18895,6 +18971,11 @@
         "physicalPrintingId": "PHYSICAL:F0294-P02",
         "disposition": "projected",
         "targetItemId": "item-02fd9369-1b57-5738-83b8-839e4a29499d"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:F0294-P03",
+        "disposition": "projected",
+        "targetItemId": "item-da3ea1a7-fc11-57cb-98ce-92acd02a9be6"
       },
       {
         "physicalPrintingId": "PHYSICAL:F0295-P01",
@@ -19447,6 +19528,16 @@
         "targetItemId": "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
       },
       {
+        "physicalPrintingId": "PHYSICAL:F0457-P03",
+        "disposition": "projected",
+        "targetItemId": "item-ba002977-e485-515d-8bc5-483ff0765e43"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:F0457-P04",
+        "disposition": "projected",
+        "targetItemId": "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:F0461-P01",
         "disposition": "projected",
         "targetItemId": "item-ce832f97-02e0-58fe-9ffb-dd411b0032bf"
@@ -19987,6 +20078,11 @@
         "targetItemId": "item-466fef23-3569-5c26-b37f-a1c38c25dba6"
       },
       {
+        "physicalPrintingId": "PHYSICAL:F0598-P01",
+        "disposition": "projected",
+        "targetItemId": "item-dd155c60-358f-5750-b519-47d4e588f0b8"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:F0603-P01",
         "disposition": "projected",
         "targetItemId": "item-826fc9d5-c2ab-510c-ae34-da383a8cfd48"
@@ -20125,40 +20221,10 @@
         "physicalPrintingId": "PHYSICAL:F0632-P01",
         "disposition": "projected",
         "targetItemId": "item-46288195-eeab-54b6-90d1-eeb898be3ff7"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0001",
-        "disposition": "projected",
-        "targetItemId": "item-cb569c48-f401-55ec-abd7-d5b3e2d4688f"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0006",
-        "disposition": "projected",
-        "targetItemId": "item-5450e686-3f2b-5567-95ee-48811a96907b"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0016",
-        "disposition": "projected",
-        "targetItemId": "item-34f22c42-8a5a-55f0-89dc-7785ff103400"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0019",
-        "disposition": "projected",
-        "targetItemId": "item-bb19ffcd-ce0d-5a74-992d-17378f475e2e"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0020",
-        "disposition": "projected",
-        "targetItemId": "item-1e2006a5-a74c-5e33-a31c-d8da2428afe3"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0030",
-        "disposition": "projected",
-        "targetItemId": "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
       }
     ],
     "summary": {
-      "legacyChecklistRows": 826,
+      "legacyChecklistRows": 831,
       "cardReleases": 612,
       "physicalPrintings": 478,
       "cardReleasesWithoutCollectorItem": 0

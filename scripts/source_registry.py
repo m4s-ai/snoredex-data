@@ -540,6 +540,11 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
         return "cardmarket-listing-photo"
     if url:
         host = urlsplit(url).netloc.lower()
+        # Cardmarket's image CDN is not the catalogue itself.  A specimen URL on this
+        # host is a seller listing photograph, even when the surrounding source type only
+        # says "Inspected physical specimen photograph".
+        if host == "marketplace-article-scans.s3.cardmarket.com":
+            return "cardmarket-listing-photo"
         if host in HOST_TO_PROVIDER:
             return HOST_TO_PROVIDER[host]
         for known_host, provider_id in HOST_TO_PROVIDER.items():

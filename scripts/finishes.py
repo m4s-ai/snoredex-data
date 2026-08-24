@@ -30,12 +30,14 @@ ROOT = Path(__file__).resolve().parent.parent
 CARDS_PATH = ROOT / "snorlax_cards.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
 OVERRIDES_PATH = ROOT / "verification" / "finish_overrides.json"
+SPECIMENS_PATH = ROOT / "verification" / "specimens.json"
 ADJUDICATIONS_PATH = ROOT / "verification" / "owner_adjudications.json"
 OUTPUT_PATH = ROOT / "verification" / "finish_units.json"
 REVIEW_JSON_PATH = ROOT / "verification" / "FINISH_REVIEW.json"
 REVIEW_CSV_PATH = ROOT / "verification" / "FINISH_REVIEW.csv"
 ANALYSIS_PATH = ROOT / "analysis_finishes.json"
 CACHE_DIR = ROOT / "verification" / "cache" / "finish-tcgdex"
+SNAPSHOT_PATH = ROOT / "verification" / "finish_tcgdex_snapshot.json"
 
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
 STATUS_RANK = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confirmed": 3}
@@ -178,9 +180,36 @@ def write_cache(url: str, payload: Any, status: int, content_type: str | None) -
     })
 
 
-def fetch_tcgdex(url: str, refresh: bool = False,
+def snapshot_records() -> dict[str, Any]:
+    if not SNAPSHOT_PATH.is_file():
+        return {}
+    document = read_json(SNAPSHOT_PATH)
+    records = document.get("records") if isinstance(document, dict) else None
+    return records if isinstance(records, dict) else {}
+
+
+def snapshot_drift(previous: dict[str, Any], current: dict[str, Any]) -> tuple[list[str], list[str], list[str]]:
+    """Return changed, added, and removed upstream records by content hash."""
+    changed = sorted(
+        url for url in set(previous) & set(current)
+        if previous[url].get("contentHash") != current[url].get("contentHash")
+    )
+    added = sorted(set(current) - set(previous))
+    removed = sorted(set(previous) - set(current))
+    return changed, added, removed
+
+
+def fetch_tcgdex(url: str, refresh: bool = False, offline: bool = False,
                  max_age_days: float = CACHE_MAX_AGE_DAYS
                  ) -> tuple[str, dict[str, Any] | None, str | None]:
+    if offline:
+        record = snapshot_records().get(url)
+        payload = record.get("payload") if isinstance(record, dict) else None
+        if payload is None:
+            return url, None, "not present in versioned finish snapshot"
+        if json_hash(payload) != record.get("contentHash") or implausible(payload):
+            return url, None, "versioned finish snapshot record failed validation"
+        return url, payload, None
     payload, _reason = read_cache(url, refresh, max_age_days)
     if payload is not None:
         return url, payload, None
@@ -290,10 +319,17 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
     existing = next((item for item in printings if printing_signature(item) == signature), None)
     if existing is None:
         candidate["mappedVariants"] = sorted(set(candidate["mappedVariants"]))
+        if candidate.get("specimenIds"):
+            candidate["specimenIds"] = sorted(set(candidate["specimenIds"]))
+        else:
+            candidate.pop("specimenIds", None)
         candidate["_origin"] = candidate.get("_origin", "auto")
         printings.append(candidate)
         return
     existing["mappedVariants"] = sorted(set(existing["mappedVariants"] + candidate["mappedVariants"]))
+    if candidate.get("specimenIds"):
+        existing["specimenIds"] = sorted(set(existing.get("specimenIds") or [])
+                                          | set(candidate["specimenIds"]))
     if STATUS_RANK[candidate["verificationStatus"]] > STATUS_RANK[existing["verificationStatus"]]:
         existing["verificationStatus"] = candidate["verificationStatus"]
     seen_sources = {source_signature(source) for source in existing["sources"]}
@@ -305,6 +341,54 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
 
 def exact_source(url: str, source_type: str, evidence: str) -> dict[str, Any]:
     return {"url": url, "sourceType": source_type, "evidence": evidence}
+
+
+def specimen_number(value: object) -> str:
+    return str(value or "").split("/", 1)[0]
+
+
+def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
+    text = observation.get("markings")
+    if not text:
+        return []
+    kind = "edition-stamp" if str(text).casefold() == "editie 1" else "observed-marking"
+    return [{"kind": kind, "role": observation.get("markingRole"), "text": text}]
+
+
+def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
+    source_type = "Owner-supplied physical card photograph" \
+        if "owner" in str(specimen.get("heldBy", "")).casefold() \
+        else "Inspected physical specimen photograph"
+    return exact_source(
+        str(specimen.get("photographSource") or f"specimen:{specimen['specimenId']}"),
+        source_type,
+        f"{specimen.get('observed', '').strip()} Retained as {specimen['specimenId']}.",
+    )
+
+
+def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
+    observation = specimen.get("physicalObservation")
+    if not isinstance(observation, dict) or not observation.get("finish"):
+        return None
+    marking_values = specimen_markings(observation)
+    candidate = {
+        "finish": observation["finish"],
+        "foilPattern": observation.get("foilPattern"),
+        "markings": marking_values,
+        "distribution": observation.get("distribution"),
+        "cardSize": observation.get("cardSize", "unknown"),
+        "mappedVariants": [str(specimen.get("variant"))],
+        "verificationStatus": "confirmed",
+        "sources": [specimen_source(specimen)],
+        "_origin": "specimen",
+        "specimenIds": [specimen["specimenId"]],
+    }
+    if observation.get("edition") is not None:
+        candidate["edition"] = observation["edition"]
+    photograph = specimen.get("photograph")
+    if photograph:
+        candidate["image"] = f"verification/specimens/{photograph}"
+    return candidate
 
 
 def resolve_override_sources(
@@ -363,6 +447,8 @@ def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") 
     # public projection can make that distinction.
     if "image" in printing:
         compact["image"] = printing["image"]
+    if printing.get("specimenIds"):
+        compact["specimenIds"] = list(printing["specimenIds"])
     return compact
 
 
@@ -435,6 +521,18 @@ def main() -> None:
     cards = cards_document["cards"]
     units = read_json(UNITS_PATH)
     overrides_document = read_json(OVERRIDES_PATH)
+    specimens_document = read_json(SPECIMENS_PATH)
+    specimens_by_group: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    for specimen in specimens_document.get("specimens", []):
+        # A frame that explicitly covers multiple cards is context evidence only.  It must not
+        # become a synthetic ``base`` printing; the per-card crops/records are the canonical
+        # observations that carry the variant mapping.
+        observation = specimen.get("physicalObservation")
+        if observation and not observation.get("coversMultipleCards"):
+            specimens_by_group[
+                (str(specimen.get("setCode") or ""), specimen_number(specimen.get("number")),
+                 str(specimen.get("language") or ""))
+            ].append(specimen)
     # Rule 4 owner decisions, finish half (#119). Keyed by (setCode, number, language) rather
     # than by finishUnitId, because the F-numbers are positional and would silently retarget.
     owner_finish_decisions = {
@@ -466,15 +564,53 @@ def main() -> None:
     )
     tcgdex_data: dict[str, dict[str, Any]] = {}
     fetch_errors: dict[str, str] = {}
+    refresh = "--refresh" in sys.argv or "--refresh-cache" in sys.argv
+    # Network access is opt-in.  A bare finishes.py invocation is the same deterministic
+    # versioned build as regen.py; only --refresh (or its legacy alias) may consult TCGdex.
+    offline = "--offline" in sys.argv or not refresh
+    accept_refresh = "--accept-refresh" in sys.argv
+    if offline and refresh:
+        raise ValueError("--offline and --refresh are mutually exclusive")
+    if accept_refresh and not refresh:
+        raise ValueError("--accept-refresh requires --refresh")
     with ThreadPoolExecutor(max_workers=12) as executor:
-        refresh = "--refresh-cache" in sys.argv
-        futures = {executor.submit(fetch_tcgdex, url, refresh): url for url in tcgdex_urls}
+        futures = {
+            executor.submit(fetch_tcgdex, url, refresh, offline): url for url in tcgdex_urls
+        }
         for future in as_completed(futures):
             url, payload, error = future.result()
             if payload is not None:
                 tcgdex_data[url] = payload
             else:
                 fetch_errors[url] = error or "unknown error"
+
+    if refresh and not fetch_errors:
+        current_snapshot = {
+            url: {"contentHash": json_hash(payload), "payload": payload}
+            for url, payload in sorted(tcgdex_data.items())
+        }
+        changed, added, removed = snapshot_drift(snapshot_records(), current_snapshot)
+        print(
+            "TCGdex refresh: "
+            f"changed={len(changed)} added={len(added)} removed={len(removed)}"
+        )
+        for url in changed + added + removed:
+            print(f"  drift: {url}")
+        if not accept_refresh:
+            print("Snapshot unchanged. Review drift, then rerun with --refresh --accept-refresh.")
+            return 0
+        write_json(
+            SNAPSHOT_PATH,
+            {
+                "schema": "snoredex-tcgdex-snapshot/1",
+                "generated": date.today().isoformat(),
+                "records": current_snapshot,
+            },
+        )
+    if fetch_errors and (offline or refresh):
+        for url, reason in sorted(fetch_errors.items()):
+            print(f"unreachable: {url} — {reason}", file=sys.stderr)
+        return 2
 
     tcgdex_sibling_url: dict[tuple[str, str], str] = {}
     for unit in units:
@@ -487,6 +623,19 @@ def main() -> None:
     overrides_by_group: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for override in overrides_document["overrides"]:
         overrides_by_group[(str(override["setCode"]), str(override.get("number") or ""))].append(override)
+
+    specimen_ids = {
+        str(row.get("specimenId")) for row in specimens_document.get("specimens", [])
+    }
+    for override in overrides_document["overrides"]:
+        for manual in override.get("printings") or []:
+            refs = {str(ref) for ref in manual.get("sourceRefs") or []}
+            duplicate_refs = refs & specimen_ids
+            if duplicate_refs or any(ref.startswith("SPEC-") for ref in refs):
+                raise ValueError(
+                    "finish_overrides duplicates specimen evidence: "
+                    + ", ".join(sorted(duplicate_refs or refs))
+                )
 
     finish_units: list[dict[str, Any]] = []
     for finish_index, key in enumerate(sorted(grouped_units, key=group_sort_key)):
@@ -667,6 +816,13 @@ def main() -> None:
                             "_origin": "auto",
                         },
                     )
+
+        # Physical observations are canonical positive evidence. They enter before curated
+        # overrides so the same signature merges sources instead of creating another printing.
+        for specimen in specimens_by_group.get((set_code, number, language), []):
+            candidate = specimen_printing(specimen)
+            if candidate is not None:
+                add_printing(printings, candidate)
 
         applicable_overrides = [
             override

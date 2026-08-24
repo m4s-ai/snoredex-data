@@ -39,17 +39,17 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-08-24",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 335,
+      "withConfirmedFinish": 336,
       "withOnlyMarketplaceClaim": 101,
-      "pendingFinish": 126,
+      "pendingFinish": 125,
       "notApplicableFinish": 75,
       "withCompleteManifest": 4,
       "withNonHolo": 271,
-      "withHolo": 144,
+      "withHolo": 145,
       "withReverseHolo": 234,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 18,
-      "withUnresolvedProductMapping": 163,
+      "withUnresolvedProductMapping": 162,
       "withAnyUnresolvedDetail": 221,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
@@ -6064,8 +6064,8 @@
                 "markings": [
                   {
                     "kind": "edition-stamp",
-                    "text": "EDITIE 1",
-                    "role": "print-identity"
+                    "role": "print-identity",
+                    "text": "EDITIE 1"
                   }
                 ],
                 "distribution": null,
@@ -6073,7 +6073,11 @@
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped",
                 "edition": "1st Edition",
-                "image": "verification/specimens/SPEC-0042.jpg"
+                "image": "verification/specimens/SPEC-0042.jpg",
+                "specimenIds": [
+                  "SPEC-0042",
+                  "SPEC-0043"
+                ]
               },
               {
                 "printingId": "F0174-P02",
@@ -6085,7 +6089,10 @@
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped",
                 "edition": "Unlimited",
-                "image": "verification/specimens/SPEC-0044.png"
+                "image": "verification/specimens/SPEC-0044.png",
+                "specimenIds": [
+                  "SPEC-0044"
+                ]
               }
             ]
           }
@@ -7829,8 +7836,8 @@
                 "markings": [
                   {
                     "kind": "edition-stamp",
-                    "text": "EDITIE 1",
-                    "role": "print-identity"
+                    "role": "print-identity",
+                    "text": "EDITIE 1"
                   }
                 ],
                 "distribution": null,
@@ -7838,7 +7845,10 @@
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped",
                 "edition": "1st Edition",
-                "image": "verification/specimens/SPEC-0041.png"
+                "image": "verification/specimens/SPEC-0041.png",
+                "specimenIds": [
+                  "SPEC-0041"
+                ]
               },
               {
                 "printingId": "F0167-P02",
@@ -7850,7 +7860,10 @@
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped",
                 "edition": "Unlimited",
-                "image": "verification/specimens/SPEC-0040.png"
+                "image": "verification/specimens/SPEC-0040.png",
+                "specimenIds": [
+                  "SPEC-0040"
+                ]
               }
             ]
           }
@@ -11738,6 +11751,25 @@
               {
                 "printingId": "F0291-P02",
                 "finish": "holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "distribution-promo",
+                    "text": "Play! Pokémon Prize Pack stamp"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "specimenIds": [
+                  "SPEC-0001"
+                ]
+              },
+              {
+                "printingId": "F0291-P03",
+                "finish": "holo",
                 "foilPattern": "cosmos",
                 "markings": null,
                 "distribution": null,
@@ -11851,6 +11883,25 @@
             "printings": [
               {
                 "printingId": "F0294-P02",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "distribution-promo",
+                    "text": "Play! Pokémon Prize Pack stamp"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "specimenIds": [
+                  "SPEC-0006"
+                ]
+              },
+              {
+                "printingId": "F0294-P03",
                 "finish": "holo",
                 "foilPattern": "cosmos",
                 "markings": null,
@@ -27817,7 +27868,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -27874,24 +27925,49 @@
           {
             "language": "French",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0598",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0598-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "distribution-promo",
+                    "text": "GameStop logo stamped in red over the lower left of the illustration"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0016.png",
+                "specimenIds": [
+                  "SPEC-0016"
+                ]
+              }
+            ]
           },
           {
             "language": "German",
@@ -28393,7 +28469,9 @@
             "language": "French",
             "claimStatus": "contradicted",
             "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "not-applicable",
               "holo": "not-applicable",
@@ -28402,13 +28480,13 @@
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "not-applicable",
             "finishUnitId": "F0598",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
@@ -40660,6 +40738,20 @@
                 "finish": "non-holo",
                 "foilPattern": null,
                 "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0025.jpg",
+                "specimenIds": [
+                  "SPEC-0025"
+                ]
+              },
+              {
+                "printingId": "F0231-P02",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [],
                 "distribution": {
                   "kind": "fixed-deck",
                   "text": "Start Deck 100 Battle Collection CoroCiao Version"
@@ -42291,6 +42383,20 @@
               {
                 "printingId": "F0457-P02",
                 "finish": "mirror-holo",
+                "foilPattern": "Poké Ball mirror",
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0019.png",
+                "specimenIds": [
+                  "SPEC-0019"
+                ]
+              },
+              {
+                "printingId": "F0457-P04",
+                "finish": "mirror-holo",
                 "foilPattern": "poke-ball",
                 "markings": null,
                 "distribution": null,
@@ -43536,6 +43642,20 @@
             "printings": [
               {
                 "printingId": "F0457-P01",
+                "finish": "mirror-holo",
+                "foilPattern": "Master Ball mirror",
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0020.png",
+                "specimenIds": [
+                  "SPEC-0020"
+                ]
+              },
+              {
+                "printingId": "F0457-P03",
                 "finish": "mirror-holo",
                 "foilPattern": "master-ball",
                 "markings": null,

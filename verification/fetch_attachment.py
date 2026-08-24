@@ -3,7 +3,7 @@
 
 WHY THIS EXISTS
 
-`specimens.json` has carried `photograph: null` on all six records since #32, and
+`specimens.json` historically carried `photograph: null` on the physical records, and
 `scripts/source_registry.py` still holds a note saying the `inspected-specimen` provider can be
 renamed back to `photographed-specimen` "once images land in verification/specimens/". They have
 not landed, and the reason is transport, not policy: the owner supplies card photographs by
@@ -27,9 +27,10 @@ to the path" is not a workaround. What is reachable, verified by probe:
     github.com/{owner}/{repo}/releases/download/...  reaches origin
     github.com/{owner}/{repo}/... (HTML)      200
 
-So an attachment URL cannot be resolved here, but every channel it would have redirected *to* can.
-This script takes the bytes from whichever of those routes they arrived by — most often a file
-already committed to a branch — validates them, and records them against a specimen id.
+So a bare attachment URL cannot be resolved here, but the issue's own HTML exposes the signed
+`private-user-images` candidate. `--issue NUMBER --manifest PATH` follows that route for every
+manifest row, while the single-specimen mode takes bytes from a local file or any reachable URL.
+Both modes validate the image and record it against a stable specimen id.
 
 Committing the image is the right end state regardless of the proxy. Rule 1 in CLAUDE.md files a
 marketplace listing photograph as a SPEC record rather than a bare link because "listings are
@@ -51,6 +52,7 @@ committed `.webp` would fail S9. The narrower set is the one that passes the gat
 USAGE
 
     python verification/fetch_attachment.py --list
+    python verification/fetch_attachment.py --issue 269 --manifest verification/evidence/issue-269.json
     python verification/fetch_attachment.py --specimen SPEC-0001 --from ~/SPEC-0001.jpg \
         --attachment-url https://github.com/user-attachments/assets/<uuid>
     python verification/fetch_attachment.py --specimen SPEC-0001 --from <reachable-url> --dry-run
@@ -67,11 +69,12 @@ from __future__ import annotations
 
 import argparse
 import json
+from html.parser import HTMLParser
 import sys
 import urllib.error
 import urllib.request
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 VERIFICATION = ROOT / "verification"
@@ -160,6 +163,83 @@ def download(url: str) -> bytes:
     if not blob:
         raise SourceUnreachable(f"{url} returned an empty body")
     return blob
+
+
+def attachment_candidate(url: str) -> bool:
+    """Return true for an issue image, not avatars or decorative GitHub assets."""
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").casefold()
+    path = unquote(parsed.path).casefold()
+    if host in {"github.com", "www.github.com"}:
+        return "/user-attachments/assets/" in path or "/assets/" in path
+    if host.endswith("user-images.githubusercontent.com"):
+        return True
+    if host == "marketplace-article-scans.s3.cardmarket.com":
+        return True
+    return Path(path).suffix in {".png", ".jpg", ".jpeg"}
+
+
+class _IssueAttachmentParser(HTMLParser):
+    """Collect stable attachment links and the signed image URL beside each link."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.groups: dict[str, list[str]] = {}
+        self.active: str | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = {key: value for key, value in attrs if value}
+        if tag == "a" and values.get("href") and attachment_candidate(values["href"]):
+            stable = values["href"]
+            self.groups.setdefault(stable, [stable])
+            self.active = stable
+        if tag == "img" and values.get("src") and attachment_candidate(values["src"]):
+            image = values["src"]
+            stable = self.active or image
+            candidates = self.groups.setdefault(stable, [stable])
+            if image not in candidates:
+                candidates.append(image)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "a":
+            self.active = None
+
+
+def issue_attachments(html: str) -> list[tuple[str, list[str]]]:
+    """Return ``(stable provenance URL, download candidates)`` in document order."""
+    parser = _IssueAttachmentParser()
+    parser.feed(html)
+    return list(parser.groups.items())
+
+
+def select_issue_attachment(
+    attachments: list[tuple[str, list[str]]], selector: object, index: int
+) -> tuple[str, list[str]]:
+    """Select by one-based ordinal, stable URL, or URL basename from a manifest row."""
+    if selector is None:
+        if index < 1 or index > len(attachments):
+            fail(f"attachment index {index} is outside the issue ({len(attachments)} found)")
+        return attachments[index - 1]
+    if isinstance(selector, int) and not isinstance(selector, bool):
+        return select_issue_attachment(attachments, None, selector)
+    needle = str(selector)
+    for stable, candidates in attachments:
+        if needle == stable or needle in candidates or Path(urlparse(needle).path).name == Path(urlparse(stable).path).name:
+            return stable, candidates
+    fail(f"manifest attachment {needle!r} was not found in the issue HTML")
+
+
+def download_candidates(candidates: list[str]) -> bytes:
+    """Try the stable URL first, then its signed browser-rendered counterpart."""
+    errors: list[str] = []
+    for candidate in candidates:
+        try:
+            if is_attachment_url(candidate):
+                raise SourceUnreachable(f"{candidate} is the blocked GitHub attachment route")
+            return download(candidate)
+        except SourceUnreachable as error:
+            errors.append(str(error))
+    raise SourceUnreachable("; ".join(errors) or "no attachment download candidate")
 
 
 def acquire(source: str) -> bytes:
@@ -325,6 +405,212 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
     return 0
 
 
+def next_specimen_id(specimens: list[dict]) -> str:
+    numbers = [
+        int(str(row.get("specimenId", "")).split("-", 1)[1])
+        for row in specimens
+        if str(row.get("specimenId", "")).startswith("SPEC-")
+        and str(row.get("specimenId", ""))[5:].isdigit()
+    ]
+    return f"SPEC-{max(numbers, default=0) + 1:04d}"
+
+
+def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str) -> dict:
+    required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
+                "observed", "recordedAt")
+    missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
+    physical = item.get("physicalObservation")
+    if missing:
+        fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
+    if not isinstance(physical, dict) or not physical.get("finish"):
+        fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
+    return {
+        "specimenId": specimen_id,
+        "setCode": item["setCode"],
+        "number": item["number"],
+        "variant": item["variant"],
+        "language": item["language"],
+        "heldBy": item["heldBy"],
+        "inspectedFrom": item["inspectedFrom"],
+        "photograph": filename,
+        "photographSource": provenance,
+        "observed": item["observed"],
+        "recordedAt": item["recordedAt"],
+        "citedBy": list(item.get("citedBy") or []),
+        "physicalObservation": physical,
+    }
+
+
+def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[dict]) -> None:
+    """Commit every image and the registry together, restoring the prior state on failure."""
+    registry_before = SPECIMENS_JSON.read_bytes()
+    files_before = {
+        destination: destination.read_bytes() if destination.is_file() else None
+        for destination, _ in prepared
+    }
+    try:
+        SPECIMEN_DIR.mkdir(parents=True, exist_ok=True)
+        for destination, blob in prepared:
+            destination.write_bytes(blob)
+        by_id = {row["specimenId"]: row for row in doc["specimens"]}
+        for record in records:
+            by_id[record["specimenId"]] = record
+        doc["specimens"] = sorted(by_id.values(), key=lambda row: row["specimenId"])
+        doc["count"] = len(doc["specimens"])
+        write_registry(doc)
+    except Exception:
+        SPECIMENS_JSON.write_bytes(registry_before)
+        for destination, previous in files_before.items():
+            if previous is None:
+                if destination.exists():
+                    destination.unlink()
+            else:
+                destination.write_bytes(previous)
+        raise
+
+
+def command_issue(doc: dict, args: argparse.Namespace) -> int:
+    """Import an issue's images from one explicit observation manifest."""
+    issue_url = f"https://github.com/m4s-ai/snoredex-data/issues/{args.issue}"
+    html = (
+        Path(args.issue_html).read_text(encoding="utf-8")
+        if args.issue_html
+        else download(issue_url).decode("utf-8", errors="replace")
+    )
+    attachments = issue_attachments(html)
+    if not attachments:
+        fail(f"no image attachments found in issue #{args.issue}")
+
+    manifest = json.loads(Path(args.manifest).read_text(encoding="utf-8-sig"))
+    observations = manifest.get("observations") if isinstance(manifest, dict) else manifest
+    if not isinstance(observations, list) or not observations:
+        fail("manifest must contain a non-empty observations list")
+    if isinstance(manifest, dict) and manifest.get("issue") not in (None, args.issue):
+        fail(f"manifest is for issue #{manifest['issue']}, not #{args.issue}")
+
+    existing_by_source = {
+        row.get("photographSource"): row
+        for row in doc["specimens"]
+        if row.get("photographSource")
+    }
+    used_ids: set[str] = set()
+    prepared: list[tuple[Path, bytes]] = []
+    records: list[dict] = []
+    next_id = next_specimen_id(doc["specimens"])
+    for ordinal, item in enumerate(observations, 1):
+        if not isinstance(item, dict):
+            fail(f"manifest observation {ordinal} is not an object")
+        stable, candidates = select_issue_attachment(
+            attachments, item.get("attachment", item.get("attachmentIndex")), ordinal
+        )
+        existing = existing_by_source.get(stable)
+        specimen_id = str(item.get("specimenId") or (existing or {}).get("specimenId") or next_id)
+        if specimen_id in used_ids:
+            fail(f"manifest uses specimen {specimen_id} more than once")
+        used_ids.add(specimen_id)
+        if specimen_id == next_id:
+            next_id = f"SPEC-{int(next_id[5:]) + 1:04d}"
+
+        blob = download_candidates(candidates)
+        ext, size = validate(blob, args.allow_small)
+        filename = f"{specimen_id}.{ext}"
+        destination = SPECIMEN_DIR / filename
+        current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
+        if current and current.get("photograph") and not args.replace:
+            if current.get("photograph") == filename and destination.is_file() \
+                    and destination.read_bytes() == blob:
+                print(f"{specimen_id} already carries these exact bytes — nothing to do")
+                continue
+            fail(f"{specimen_id} already has a photograph; pass --replace to overwrite it")
+        if destination.is_file() and not current:
+            fail(f"{destination.relative_to(ROOT)} exists without a matching specimen record")
+
+        provenance = stable
+        if "private-user-images.githubusercontent.com" in (urlparse(stable).hostname or ""):
+            provenance = f"{issue_url}#attachment-{ordinal}"
+        record = build_specimen(item, specimen_id, filename, provenance)
+        if current and not args.replace:
+            existing_without_photo = {key: value for key, value in current.items()
+                                      if key not in {"photograph", "photographSource"}}
+            record_without_photo = {key: value for key, value in record.items()
+                                    if key not in {"photograph", "photographSource"}}
+            if existing_without_photo != record_without_photo:
+                fail(f"{specimen_id} metadata differs; pass --replace to update it")
+        records.append(record)
+        prepared.append((destination, blob))
+        print(f"prepared {specimen_id}: {size[0]}x{size[1]} {ext} from attachment {ordinal}")
+
+    if args.dry_run:
+        print(f"DRY RUN — would import {len(records)} specimen(s) from issue #{args.issue}")
+        return 0
+    commit_import(doc, prepared, records)
+    print(f"imported {len(records)} specimen(s) from issue #{args.issue}")
+    return 0
+
+
+def command_evidence_check() -> int:
+    """Check the evidence slice without network access or generated-output writes."""
+    errors: list[str] = []
+    specimens = load_registry().get("specimens", [])
+    observed = [
+        row for row in specimens
+        if row.get("physicalObservation") and row.get("photograph")
+        and not row["physicalObservation"].get("coversMultipleCards")
+        and not str(row.get("photographSource") or "").startswith("/tmp/")
+    ]
+    for specimen in observed:
+        photograph = specimen.get("photograph")
+        path = SPECIMEN_DIR / str(photograph or "")
+        if not path.is_file():
+            errors.append(f"{specimen['specimenId']}: photograph is missing")
+            continue
+        try:
+            validate(path.read_bytes(), allow_small=False)
+        except SystemExit as error:
+            errors.append(f"{specimen['specimenId']}: invalid photograph ({error})")
+
+    finish_document = json.loads(
+        (VERIFICATION / "finish_units.json").read_text(encoding="utf-8-sig")
+    )
+    finish_by_key = {
+        (str(unit.get("setCode")), str(unit.get("number")), str(unit.get("language"))): unit
+        for unit in finish_document.get("units", [])
+    }
+    for specimen in observed:
+        observation = specimen["physicalObservation"]
+        key = (str(specimen.get("setCode")), str(specimen.get("number", "")).split("/", 1)[0],
+               str(specimen.get("language")))
+        unit = finish_by_key.get(key)
+        if not unit:
+            errors.append(f"{specimen['specimenId']}: finish unit is missing")
+            continue
+        if not any(specimen["specimenId"] in (printing.get("specimenIds") or [])
+                   for printing in unit.get("printings", [])):
+            errors.append(f"{specimen['specimenId']}: finish projection is missing its source")
+        if not any(printing.get("finish") == observation.get("finish")
+                   for printing in unit.get("printings", [])):
+            errors.append(f"{specimen['specimenId']}: observed finish is not projected")
+
+    try:
+        import importlib.util
+        graph_module_path = ROOT / "scripts" / "authoritative_graph.py"
+        spec = importlib.util.spec_from_file_location("authoritative_graph", graph_module_path)
+        graph_module = importlib.util.module_from_spec(spec)
+        assert spec and spec.loader
+        spec.loader.exec_module(graph_module)
+        graph = json.loads((VERIFICATION / "authoritative_graph.json").read_text(encoding="utf-8"))
+        errors.extend(graph_module.validate(graph))
+    except (OSError, ValueError, KeyError, TypeError, ImportError) as error:
+        errors.append(f"authoritative graph check failed to run: {error}")
+    if errors:
+        print("physical evidence check: FAIL", file=sys.stderr)
+        for error in errors:
+            print(f"  - {error}", file=sys.stderr)
+        return 1
+    print(f"physical evidence check: OK ({len(observed)} observed specimens, offline)")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="File a card photograph into verification/specimens/ against a SPEC id.",
@@ -345,11 +631,32 @@ def main(argv: list[str] | None = None) -> int:
                         help=f"accept an image whose long edge is under {MIN_LONG_EDGE}px")
     parser.add_argument("--dry-run", action="store_true",
                         help="validate and report without writing anything")
+    parser.add_argument("--issue", type=int, metavar="NUMBER",
+                        help="import all selected images from a repository issue")
+    parser.add_argument("--manifest", metavar="PATH",
+                        help="JSON observation manifest for --issue")
+    parser.add_argument("--issue-html", metavar="PATH",
+                        help="offline issue HTML fixture (tests and dry runs)")
+    parser.add_argument("--evidence-check", action="store_true",
+                        help="check photographs, finish projection and graph without writing")
     args = parser.parse_args(argv)
 
     doc = load_registry()
     if args.list:
         return command_list(doc)
+    if args.evidence_check:
+        return command_evidence_check()
+    if args.issue:
+        if args.specimen or args.source:
+            parser.error("--issue cannot be combined with --specimen or --from")
+        if not args.manifest:
+            parser.error("--issue requires --manifest")
+        try:
+            return command_issue(doc, args)
+        except SourceUnreachable as error:
+            print(f"UNREACHABLE: {error}", file=sys.stderr)
+            print("The bytes are missing, not wrong — retry rather than investigate.", file=sys.stderr)
+            return 2
     if not args.specimen or not args.source:
         parser.error("--specimen and --from are both required (or use --list)")
 
