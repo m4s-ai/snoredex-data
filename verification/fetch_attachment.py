@@ -454,7 +454,7 @@ def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
 
 
 def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
-                   digest: str) -> dict:
+                   digest: str, *, listing_url: str | None = None) -> dict:
     required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
                 "observed", "recordedAt")
     missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
@@ -463,7 +463,7 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
     if not isinstance(physical, dict) or not physical.get("finish"):
         fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
-    return {
+    record = {
         "specimenId": specimen_id,
         "setCode": item["setCode"],
         "number": item["number"],
@@ -479,19 +479,47 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         "citedBy": list(item.get("citedBy") or []),
         "physicalObservation": physical,
     }
+    if listing_url:
+        record["listingUrl"] = listing_url
+    return record
 
 
 def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[dict]) -> None:
     """Commit every image and the registry together, restoring the prior state on failure."""
     registry_before = SPECIMENS_JSON.read_bytes()
+    prepared_destinations = {destination for destination, _ in prepared}
+    current_by_id = {row["specimenId"]: row for row in doc["specimens"]}
+    still_referenced = {
+        str(row.get("photograph"))
+        for row in doc["specimens"]
+        if row.get("photograph")
+        and row.get("specimenId") not in {record["specimenId"] for record in records}
+    }
+    superseded: set[Path] = set()
+    for record in records:
+        previous = current_by_id.get(record["specimenId"], {})
+        old_name = previous.get("photograph")
+        new_name = record.get("photograph")
+        if not old_name or not new_name or old_name == new_name:
+            continue
+        if str(old_name) in still_referenced \
+                or SPECIMEN_DIR / str(old_name) in prepared_destinations:
+            continue
+        old_path = SPECIMEN_DIR / str(old_name)
+        # Registry photographs are filenames under SPECIMEN_DIR.  Do not let a
+        # malformed legacy value turn replacement cleanup into an out-of-tree delete.
+        if old_path.parent == SPECIMEN_DIR:
+            superseded.add(old_path)
     files_before = {
-        destination: destination.read_bytes() if destination.is_file() else None
-        for destination, _ in prepared
+        path: path.read_bytes() if path.is_file() else None
+        for path in {destination for destination, _ in prepared} | superseded
     }
     try:
         SPECIMEN_DIR.mkdir(parents=True, exist_ok=True)
         for destination, blob in prepared:
             destination.write_bytes(blob)
+        for old_path in superseded:
+            old_path.unlink(missing_ok=True)
         by_id = {row["specimenId"]: row for row in doc["specimens"]}
         for record in records:
             by_id[record["specimenId"]] = record
@@ -572,7 +600,12 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
             provenance = f"{issue_url}#attachment-{ordinal}"
         digest = content_hash(blob)
         ensure_unique_photo_hash(photo_hash_owners, digest, specimen_id)
-        record = build_specimen(item, specimen_id, filename, provenance, digest)
+        listing_url = item.get("listingUrl")
+        if not isinstance(listing_url, str) or not listing_url:
+            listing_url = (current or {}).get("listingUrl")
+        record = build_specimen(
+            item, specimen_id, filename, provenance, digest, listing_url=listing_url
+        )
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()
                                       if key not in {"photograph", "photographSource", "photographSha256"}}

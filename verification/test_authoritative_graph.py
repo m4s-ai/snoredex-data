@@ -65,7 +65,9 @@ def main() -> None:
         claim = entities[("candidate-claim", f"CLAIM:specimen:{specimen_id}")]["payload"]
         assert claim["evidenceStatus"] == "observed"
         assert claim["materializedTargetId"] is None
-        assert claim["reason"].startswith("corroborates PHYSICAL:F")
+        assert claim["reason"].startswith("provides provenance for PHYSICAL:F")
+        assert claim["provenanceTargetId"].startswith("PHYSICAL:F")
+        assert "corroboratedTargetId" not in claim
 
     localizations = {
         row["payload"]["languageTag"]: row["payload"]
@@ -171,7 +173,7 @@ def main() -> None:
     specimen_printing = next(
         row["payload"] for row in tampered["entities"]
         if row["entityType"] == "physical-printing"
-        and row["entityId"] == specimen_claim["corroboratedTargetId"]
+        and row["entityId"] == specimen_claim["provenanceTargetId"]
     )
     specimen_printing["cardReleaseId"] = next(
         row["entityId"] for row in tampered["entities"]

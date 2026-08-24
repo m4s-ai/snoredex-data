@@ -93,6 +93,16 @@ def main() -> None:
         }, "SPEC-9999", "SPEC-9999.png", "issue", digest
     )
     assert record["photographSha256"] == digest
+    seller_record = fetch_attachment.build_specimen(
+        {
+            "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
+            "heldBy": "third-party seller", "inspectedFrom": "listing photograph",
+            "observed": "positive", "recordedAt": "2026-08-24",
+            "physicalObservation": {"finish": "holo"},
+        }, "SPEC-9998", "SPEC-9998.png", "issue", digest,
+        listing_url="https://seller.example/listing/11",
+    )
+    assert seller_record["listingUrl"] == "https://seller.example/listing/11"
 
     # Direct --specimen imports must reject bytes already filed under another specimen too.
     source = ROOT / ".fetch-attachment-test-card.png"
@@ -187,6 +197,35 @@ def main() -> None:
         manifest.unlink(missing_ok=True)
         registry.unlink(missing_ok=True)
         (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
+
+    # Replacing a photograph must remove the superseded extension atomically.
+    old_photo = ROOT / "SPEC-0001.jpg"
+    new_photo = ROOT / "SPEC-0001.png"
+    replace_registry = ROOT / ".fetch-attachment-test-replace.json"
+    old_photo.write_bytes(b"old image")
+    new_photo.write_bytes(b"new image")
+    replace_registry.write_text(json.dumps({
+        "count": 1,
+        "specimens": [{"specimenId": "SPEC-0001", "photograph": old_photo.name}],
+    }), encoding="utf-8")
+    original_registry = fetch_attachment.SPECIMENS_JSON
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    fetch_attachment.SPECIMENS_JSON = replace_registry
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    try:
+        fetch_attachment.commit_import(
+            {"count": 1, "specimens": [{"specimenId": "SPEC-0001", "photograph": old_photo.name}]},
+            [(new_photo, b"replacement")],
+            [{"specimenId": "SPEC-0001", "photograph": new_photo.name}],
+        )
+        assert not old_photo.exists()
+        assert new_photo.read_bytes() == b"replacement"
+    finally:
+        fetch_attachment.SPECIMENS_JSON = original_registry
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        replace_registry.unlink(missing_ok=True)
+        old_photo.unlink(missing_ok=True)
+        new_photo.unlink(missing_ok=True)
 
     print("fetch_attachment validation, hash and fallback regressions passed")
 

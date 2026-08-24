@@ -200,8 +200,11 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     for specimen_id, specimen in sorted(specimen_by_id.items()):
         target = specimen_targets.get(specimen_id)
         claim_id = f"CLAIM:specimen:{specimen_id}"
+        # A specimen listed on a finish printing is the evidence used to derive that
+        # printing, not an independent provider.  Keep the link as provenance so the
+        # graph never counts an observation as corroborating its own projection.
         reason = (
-            f"corroborates {target}, already established from the finish store"
+            f"provides provenance for {target}, already established from the finish store"
             if target else "physical observation has no matching projected printing"
         )
         claim_payload = {
@@ -216,7 +219,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             "reason": reason,
         }
         if target:
-            claim_payload["corroboratedTargetId"] = target
+            claim_payload["provenanceTargetId"] = target
         generated_entities.append(_entity("candidate-claim", claim_id, claim_payload))
         generated_dispositions.append({
             "sourceKind": "specimen-observation",
@@ -228,7 +231,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         if target:
             generated_edges.append({
                 "fromType": "candidate-claim", "fromId": claim_id,
-                "relation": "corroborates", "toType": "physical-printing", "toId": target,
+                "relation": "provenance", "toType": "physical-printing", "toId": target,
                 "provenance": {"specimenId": specimen_id},
             })
 
@@ -816,14 +819,18 @@ def validate(
         if not claim or not claim.get("materializedTargetId"):
             if specimen.get("physicalObservation", {}).get("coversMultipleCards"):
                 continue
+            provenance_target = claim.get("provenanceTargetId") if claim else None
             corroborated = claim.get("corroboratedTargetId") if claim else None
-            if corroborated:
-                physical = printings.get(corroborated)
+            target_id = provenance_target or corroborated
+            if target_id:
+                physical = printings.get(target_id)
                 if not physical:
-                    errors.append(f"specimen corroboration target is missing: {specimen_id}")
-                elif ("candidate-claim", claim["claimId"], "corroborates", "physical-printing", corroborated) \
+                    errors.append(f"specimen evidence target is missing: {specimen_id}")
+                elif ("candidate-claim", claim["claimId"],
+                      "provenance" if provenance_target else "corroborates",
+                      "physical-printing", target_id) \
                         not in edge_keys:
-                    errors.append(f"specimen corroboration edge is missing: {specimen_id}")
+                    errors.append(f"specimen evidence edge is missing: {specimen_id}")
                 else:
                     observation = specimen.get("physicalObservation", {})
                     for field in ("finish", "edition", "foilPattern", "cardSize"):
