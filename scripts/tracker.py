@@ -148,8 +148,11 @@ def catalog_rows(catalog: Path) -> list[tuple]:
 
 def one_to_one_rekeys(connection: sqlite3.Connection, rows: list[tuple]) -> list[tuple[str, str]]:
     """Match replaced checklist IDs only when the stable catalogue identity is unambiguous."""
-    existing = {
-        row[0] for row in connection.execute("SELECT checklist_id FROM catalog_items").fetchall()
+    active = {
+        row[0]
+        for row in connection.execute(
+            "SELECT checklist_id FROM catalog_items WHERE active=1"
+        ).fetchall()
     }
     incoming = {row[0] for row in rows}
     old_by_identity: dict[tuple, list[str]] = defaultdict(list)
@@ -166,7 +169,7 @@ def one_to_one_rekeys(connection: sqlite3.Connection, rows: list[tuple]) -> list
 
     new_by_identity: dict[tuple, list[str]] = defaultdict(list)
     for row in rows:
-        if row[0] not in existing:
+        if row[0] not in active:
             identity = (row[2], row[3], row[4], row[6], row[8], row[18])
             new_by_identity[identity].append(row[0])
 
@@ -218,6 +221,11 @@ def sync_database(tracker: Path, catalog: Path) -> tuple[int, int, int]:
             cardmarket_url=excluded.cardmarket_url
         """,
         rows,
+    )
+    # The active source holds the current personal state; an inactive target can be stale.
+    connection.executemany(
+        "DELETE FROM collection_state WHERE checklist_id=?",
+        [(new_id,) for _old_id, new_id in rekeys],
     )
     connection.executemany(
         "UPDATE collection_state SET checklist_id=? WHERE checklist_id=?",

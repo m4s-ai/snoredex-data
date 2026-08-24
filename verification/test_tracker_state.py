@@ -110,6 +110,53 @@ def main() -> None:
             "SELECT COUNT(*) FROM collection_state WHERE checklist_id LIKE 'ju-27-dutch-unl-%' "
             "AND checklist_id<>? AND have=0 AND quantity=0", (ambiguous_id,),
         ).fetchone() == (2,)
+        connection.execute(
+            "UPDATE collection_state SET quantity=3, notes='latest', "
+            "updated_at='2026-08-24T11:00:00Z' WHERE checklist_id=?",
+            (new_id,),
+        )
+        connection.commit()
+        connection.close()
+
+        write_catalog(catalog, [
+            item(old_id, "11"),
+            item("ju-27-dutch-unl-non-holo", "27", "non-holo"),
+            item("ju-27-dutch-unl-holo", "27", "holo"),
+        ])
+        tracker.sync_database(personal, catalog)
+
+        connection = sqlite3.connect(personal)
+        assert connection.execute(
+            "SELECT have, wanted, quantity, notes, updated_at FROM collection_state "
+            "WHERE checklist_id=?", (old_id,),
+        ).fetchone() == (1, 1, 3, "latest", "2026-08-24T11:00:00Z")
+        connection.execute(
+            "INSERT INTO collection_state(checklist_id, wanted) VALUES (?, 0)",
+            (new_id,),
+        )
+        connection.execute(
+            "UPDATE collection_state SET quantity=4, notes='newest', "
+            "updated_at='2026-08-24T12:00:00Z' WHERE checklist_id=?",
+            (old_id,),
+        )
+        connection.commit()
+        connection.close()
+
+        write_catalog(catalog, [
+            item(new_id, "11", "holo"),
+            item("ju-27-dutch-unl-non-holo", "27", "non-holo"),
+            item("ju-27-dutch-unl-holo", "27", "holo"),
+        ])
+        tracker.sync_database(personal, catalog)
+
+        connection = sqlite3.connect(personal)
+        assert connection.execute(
+            "SELECT have, wanted, quantity, notes, updated_at FROM collection_state "
+            "WHERE checklist_id=?", (new_id,),
+        ).fetchone() == (1, 1, 4, "newest", "2026-08-24T12:00:00Z")
+        assert connection.execute(
+            "SELECT COUNT(*) FROM collection_state WHERE checklist_id=?", (old_id,),
+        ).fetchone() == (0,)
         connection.close()
 
     print("tracker one-to-one state rekey regression passed")
