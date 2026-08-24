@@ -95,6 +95,12 @@ def main() -> None:
         if key != "cardSize"
     }
     assert projector.specimen_printing(omitted_size)["cardSize"] == "unknown"
+    merged_without_image = projector.specimen_printing(fixture[0])
+    merged_without_image.pop("image")
+    merged_without_image["_origin"] = "auto"
+    merged: list[dict] = [merged_without_image]
+    projector.add_printing(merged, projector.specimen_printing(fixture[0]))
+    assert merged[0]["image"] == "verification/specimens/SPEC-0040.png"
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],

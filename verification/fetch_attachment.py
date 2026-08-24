@@ -659,10 +659,16 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         source_first_releases = load_source_first_releases()
     except (OSError, ValueError, TypeError) as error:
         fail(f"cannot load canonical finish units: {error}")
-    known_specimen_ids = {str(row.get("specimenId")) for row in doc.get("specimens", [])}
+    known_observed_specimen_ids = {
+        str(row.get("specimenId"))
+        for row in doc.get("specimens", [])
+        if isinstance(row.get("physicalObservation"), dict)
+    }
     for item in observations:
         if isinstance(item, dict) and item.get("specimenId") is not None:
-            known_specimen_ids.add(validate_specimen_id(item.get("specimenId")))
+            specimen_id = validate_specimen_id(item.get("specimenId"))
+            if isinstance(item.get("physicalObservation"), dict):
+                known_observed_specimen_ids.add(specimen_id)
 
     existing_by_source = {
         row.get("photographSource"): row
@@ -696,7 +702,6 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         used_ids.add(specimen_id)
         if specimen_id == next_id:
             next_id = f"SPEC-{int(next_id[5:]) + 1:04d}"
-        known_specimen_ids.add(specimen_id)
         number = str(item.get("number") or "").split("/", 1)[0]
         finish_unit = next((unit for unit in finish_units if (
             str(unit.get("setCode")) == str(item.get("setCode"))
@@ -737,7 +742,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         record = build_specimen(
             item, specimen_id, filename, provenance, digest, listing_url=listing_url,
             allow_small=args.allow_small, cited_by=cited_by,
-            known_specimen_ids=known_specimen_ids,
+            known_specimen_ids=known_observed_specimen_ids,
         )
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()

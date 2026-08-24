@@ -347,6 +347,8 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         if source_signature(source) not in seen_sources:
             existing["sources"].append(source)
             seen_sources.add(source_signature(source))
+    if "image" not in existing and candidate.get("image"):
+        existing["image"] = candidate["image"]
 
 
 def exact_source(url: str, source_type: str, evidence: str) -> dict[str, Any]:
