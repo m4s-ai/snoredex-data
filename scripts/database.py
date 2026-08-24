@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
 SCHEMA_VERSION = "1.4.0"
-GRAPH_SCHEMA_VERSION = "1.0.0"
+GRAPH_SCHEMA_VERSION = "1.1.0"
 
 INPUTS = [
     "legacy-cardmarket-baseline.json",

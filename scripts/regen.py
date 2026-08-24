@@ -60,6 +60,7 @@ REGEN = [
     ["scripts/completeness_gate.py"],
     # downstream projections
     ["scripts/checklist.py"],
+    ["scripts/collector_catalogue.py"],
     ["scripts/readme_stats.py"],
     ["scripts/issue_templates.py"],
     ["scripts/open_items.py"],
@@ -93,6 +94,7 @@ CHECK = [
     ["scripts/locality_matrix.py", "--check"],
     ["scripts/completeness_gate.py", "--check"],
     ["scripts/checklist.py", "--check"],
+    ["scripts/collector_catalogue.py", "--check"],
     ["scripts/readme_stats.py", "--check"],
     ["scripts/issue_templates.py", "--check"],
     ["scripts/open_items.py", "--check"],
@@ -115,6 +117,7 @@ TESTS = [
     ["verification/test_metric_polarity.py"],
     ["verification/test_asia_locality_matrix.py"],
     ["verification/test_authoritative_graph.py"],
+    ["verification/test_collector_catalogue.py"],
     ["verification/test_retired_projections.py"],
     ["verification/test_artwork_review.py"],
     ["verification/test_korean_burning_confrontation.py"],

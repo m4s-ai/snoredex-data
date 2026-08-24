@@ -107,7 +107,7 @@ scripts/                      Two halves; only the second can be re-run (#28).
                                 analyze -> finishes -> language_status -> confirmed_releases
                                 -> source_registry -> source_capabilities -> source_adapters
                                 -> card_discovery
-                                -> checklist -> readme_stats
+                                -> checklist -> collector_catalogue -> readme_stats
                                 -> issue_templates
                                 -> open_items -> database -> tracker template -> site
                               plus editions.py (edition classification) and publish.py (assembles
@@ -174,6 +174,11 @@ verification/
   authoritative_graph.json   GENERATED #140 canonical locality graph snapshot: reviewed identity
                               and catalogue entities, typed provenance edges, raw set records and
                               one reversible migration disposition for every input.
+  ../collector_catalogue.json
+                              GENERATED #254 collector-app projection. Its schema, predecessor
+                              migration ledger and reconciliation fixture sit beside it. The
+                              deployment-only collector_deployment.json is emitted by Pages after
+                              the containing commit exists and is never a regen input.
   artwork_review_projection.json
                               GENERATED #120 client-side review projection: graph-backed artwork/work
                               groups, local releases, images, observations and hashes. Browser edits

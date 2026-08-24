@@ -67,6 +67,7 @@ jobs:
           python scripts/source_registry.py
           python scripts/source_capabilities.py
           python scripts/checklist.py
+          python scripts/collector_catalogue.py
           python scripts/readme_stats.py
           python scripts/issue_templates.py
           python scripts/site.py
@@ -78,8 +79,31 @@ jobs:
           echo "--- published tree ---"
           find _site -maxdepth 2 -type d | sort
 
+      # This file is intentionally generated after checkout/assembly: only now
+      # does the containing commit exist and only these exact bytes are deployable.
+      - name: Bind collector bytes to the deployment commit
+        run: |
+          set -euo pipefail
+          published_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          python scripts/collector_deployment.py \
+            --catalogue _site/collector_catalogue.json \
+            --out _site/collector_deployment.json \
+            --artifact-commit "${GITHUB_SHA}" \
+            --published-at "${published_at}"
+
       - name: Verify the assembled artifact
-        run: python scripts/publish.py --out _site --verify
+        run: |
+          set -euo pipefail
+          python scripts/publish.py --out _site --verify
+          python scripts/collector_deployment.py \
+            --check \
+            --catalogue _site/collector_catalogue.json \
+            --out _site/collector_deployment.json \
+            --artifact-commit "${GITHUB_SHA}"
+          python verification/publication_gate.py \
+            --deployment-manifest _site/collector_deployment.json \
+            --catalogue _site/collector_catalogue.json \
+            --expected-commit "${GITHUB_SHA}"
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

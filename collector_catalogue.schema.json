@@ -1,0 +1,748 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m4s-ai.github.io/snoredex-data/collector_catalogue.schema.json",
+  "title": "Snoredex collector catalogue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "localizations",
+    "localSets",
+    "setEditions",
+    "works",
+    "items",
+    "assets",
+    "qualitySummary"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "schemaVersion",
+        "datasetId",
+        "sourceRepository",
+        "dataAsOf",
+        "catalogueFingerprint",
+        "previousFingerprint",
+        "assetBaseUrl",
+        "scope",
+        "licenceRefs"
+      ],
+      "properties": {
+        "schema": {
+          "const": "snoredex-collector-catalogue"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "datasetId": {
+          "type": "string"
+        },
+        "sourceRepository": {
+          "type": "string",
+          "format": "uri"
+        },
+        "dataAsOf": {
+          "type": "string",
+          "format": "date"
+        },
+        "catalogueFingerprint": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "previousFingerprint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "assetBaseUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "policy",
+            "allLocalitiesComplete",
+            "absenceIsNotEvidence"
+          ],
+          "properties": {
+            "policy": {
+              "const": "positive-evidence/current-known"
+            },
+            "allLocalitiesComplete": {
+              "const": false
+            },
+            "absenceIsNotEvidence": {
+              "const": true
+            }
+          }
+        },
+        "licenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "localizations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/localization"
+      }
+    },
+    "localSets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/localSet"
+      }
+    },
+    "setEditions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/setEdition"
+      }
+    },
+    "works": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/work"
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "itemId",
+          "legacyChecklistIds",
+          "active",
+          "itemKind",
+          "progressClass",
+          "workId",
+          "workMappingState",
+          "setEditionId",
+          "localSetId",
+          "cardReleaseId",
+          "physicalPrintingId",
+          "sourcePrintingId",
+          "finishUnitId",
+          "sourceClaimRefs",
+          "localizationId",
+          "cardName",
+          "localCardName",
+          "localSetCode",
+          "localSetName",
+          "collectorNumber",
+          "collectorNumberDenominator",
+          "collectorNumberSortKey",
+          "edition",
+          "editionAssignmentStatus",
+          "finishVerificationStatus",
+          "finish",
+          "finishFamily",
+          "finishGroupId",
+          "foilPattern",
+          "markings",
+          "distribution",
+          "cardSize",
+          "errorClass",
+          "rarity",
+          "completenessStatus",
+          "releaseDate",
+          "releaseDatePrecision",
+          "releaseApproximate",
+          "releaseSortKey",
+          "imageAssetId",
+          "imageScope",
+          "sourceLinks",
+          "evidenceLinks",
+          "correctionLink"
+        ],
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "pattern": "^item-[0-9a-f-]{36}$"
+          },
+          "legacyChecklistIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "itemKind": {
+            "enum": [
+              "verified-printing",
+              "finish-candidate",
+              "research-placeholder"
+            ]
+          },
+          "progressClass": {
+            "enum": [
+              "current-known",
+              "research"
+            ]
+          },
+          "workId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workMappingState": {
+            "type": "string"
+          },
+          "setEditionId": {
+            "type": "string"
+          },
+          "localSetId": {
+            "type": "string"
+          },
+          "cardReleaseId": {
+            "type": "string"
+          },
+          "physicalPrintingId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sourcePrintingId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "finishUnitId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sourceClaimRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "localizationId": {
+            "type": "string"
+          },
+          "cardName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "localCardName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "localSetCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "localSetName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "collectorNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "collectorNumberDenominator": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "collectorNumberSortKey": {
+            "type": "string"
+          },
+          "edition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "editionAssignmentStatus": {
+            "enum": [
+              "assigned",
+              "not-applicable",
+              "unresolved"
+            ]
+          },
+          "finishVerificationStatus": {
+            "type": "string"
+          },
+          "finish": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "finishFamily": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "finishGroupId": {
+            "type": "string"
+          },
+          "foilPattern": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "markings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "role",
+                "text"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "distribution": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "region": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "cardSize": {
+            "type": "string"
+          },
+          "errorClass": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "rarity": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "display",
+              "normalizedId",
+              "evidenceStatus",
+              "claimRefs"
+            ],
+            "properties": {
+              "display": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "normalizedId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "evidenceStatus": {
+                "enum": [
+                  "source-backed",
+                  "marketplace-claimed",
+                  "conflicting",
+                  "unknown"
+                ]
+              },
+              "claimRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            }
+          },
+          "completenessStatus": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "releaseDatePrecision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "releaseApproximate": {
+            "type": "boolean"
+          },
+          "releaseSortKey": {
+            "type": "string"
+          },
+          "imageAssetId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "imageScope": {
+            "enum": [
+              "exact-printing",
+              "card-release",
+              "legacy-product",
+              "unknown"
+            ]
+          },
+          "sourceLinks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "uniqueItems": true
+          },
+          "evidenceLinks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "uniqueItems": true
+          },
+          "correctionLink": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    },
+    "qualitySummary": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "localization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "localizationId",
+        "locality",
+        "languageId",
+        "language",
+        "languageTag",
+        "script",
+        "displayName",
+        "displayOrder"
+      ],
+      "properties": {
+        "localizationId": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string"
+        },
+        "languageId": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "languageTag": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer"
+        }
+      }
+    },
+    "localSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "localSetId",
+        "locality",
+        "localSetCode",
+        "localSetName",
+        "productKind",
+        "identityState",
+        "sourceRefs",
+        "sortKey"
+      ],
+      "properties": {
+        "localSetId": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string"
+        },
+        "localSetCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "localSetName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "productKind": {
+          "type": "string"
+        },
+        "identityState": {
+          "type": "string"
+        },
+        "sourceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "sortKey": {
+          "type": "string"
+        }
+      }
+    },
+    "setEdition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "setEditionId",
+        "localSetId",
+        "localizationId",
+        "localSetCode",
+        "localSetName",
+        "identityState",
+        "releaseDate",
+        "releaseDatePrecision",
+        "releaseApproximate",
+        "releaseEventId",
+        "sortKey"
+      ],
+      "properties": {
+        "setEditionId": {
+          "type": "string"
+        },
+        "localSetId": {
+          "type": "string"
+        },
+        "localizationId": {
+          "type": "string"
+        },
+        "localSetCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "localSetName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identityState": {
+          "type": "string"
+        },
+        "releaseDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "releaseDatePrecision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "releaseApproximate": {
+          "type": "boolean"
+        },
+        "releaseEventId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sortKey": {
+          "type": "string"
+        }
+      }
+    },
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workId",
+        "cardKey",
+        "displayName"
+      ],
+      "properties": {
+        "workId": {
+          "type": "string"
+        },
+        "cardKey": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetId",
+        "path",
+        "url",
+        "sha256",
+        "mimeType",
+        "imageScope",
+        "altTextBasis",
+        "attribution"
+      ],
+      "properties": {
+        "assetId": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "mimeType": {
+          "enum": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ]
+        },
+        "imageScope": {
+          "enum": [
+            "exact-printing",
+            "card-release",
+            "legacy-product",
+            "unknown"
+          ]
+        },
+        "altTextBasis": {
+          "type": "string"
+        },
+        "attribution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rightsStatus",
+            "licenceRef",
+            "noticeRef"
+          ],
+          "properties": {
+            "rightsStatus": {
+              "const": "third-party-rights-excluded-from-project-grants"
+            },
+            "licenceRef": {
+              "const": "LICENSE.md"
+            },
+            "noticeRef": {
+              "const": "THIRD_PARTY_NOTICES.md"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,6 +11,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DECISIONS = ROOT / "publication-decisions.json"
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import collector_deployment  # noqa: E402
 
 # The licensor the owner selected on 2026-07-26. Pinned to one exact string rather than a list of
 # candidates: the name is what downstream CC BY-NC-SA attribution must reproduce and who a
@@ -26,6 +29,9 @@ def main() -> int:
         help="the repository's real visibility, read from the GitHub API by the deploy workflow. "
         "Without it this gate can only check what the decision file claims.",
     )
+    parser.add_argument("--deployment-manifest", type=Path)
+    parser.add_argument("--catalogue", type=Path)
+    parser.add_argument("--expected-commit")
     args = parser.parse_args()
 
     try:
@@ -81,6 +87,25 @@ def main() -> int:
                 f"repository is actually {args.actual_visibility!r}. Fix whichever is wrong "
                 f"before publishing — a public site in front of a private tracker is broken"
             )
+
+    if args.deployment_manifest:
+        if not args.catalogue or not args.expected_commit:
+            problems.append(
+                "--deployment-manifest requires --catalogue and --expected-commit"
+            )
+        else:
+            try:
+                manifest = json.loads(args.deployment_manifest.read_text(encoding="utf-8"))
+                problems.extend(
+                    "collector deployment: " + problem
+                    for problem in collector_deployment.validate_manifest(
+                        manifest, args.catalogue, args.expected_commit
+                    )
+                )
+            except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError) as error:
+                problems.append(f"collector deployment manifest unavailable: {error}")
+    elif args.catalogue or args.expected_commit:
+        problems.append("--catalogue/--expected-commit require --deployment-manifest")
 
     if problems:
         print("publication remains blocked:", file=sys.stderr)

@@ -19,6 +19,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
 GRAPH_SCHEMA = "snoredex-authoritative-locality-graph"
+GRAPH_SCHEMA_VERSION = "1.1.0"
+MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
 
 
 def read_graph() -> dict[str, Any]:
@@ -32,6 +34,17 @@ def _payloads(graph: dict[str, Any], entity_type: str) -> list[dict[str, Any]]:
 def _graph_hash(graph: dict[str, Any]) -> str:
     body = json.dumps(graph, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return "sha256:" + hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+
+def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
+    text = observation.get("markings")
+    if not text:
+        return []
+    return [{
+        "kind": "observed-marking",
+        "role": observation.get("markingRole"),
+        "text": text,
+    }]
 
 
 def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -115,7 +128,7 @@ def validate(
     meta = graph.get("meta", {})
     if meta.get("schema") != GRAPH_SCHEMA:
         errors.append("unexpected graph schema")
-    if meta.get("schemaVersion") != "1.0.0":
+    if meta.get("schemaVersion") != GRAPH_SCHEMA_VERSION:
         errors.append("unexpected graph schema version")
     if meta.get("status") != "authoritative-migrated":
         errors.append("graph is not marked authoritative")
@@ -183,6 +196,21 @@ def validate(
             permitted_evidence.add("observed")
         if claim.get("evidenceStatus") not in permitted_evidence:
             errors.append(f"claim lacks permitted positive evidence: {claim_id}")
+
+    # Collector-facing finish candidates stay non-materializing, but they must name
+    # the one release they propose a treatment for.  This prevents a consumer from
+    # repeating the lossy legacy set/number/language join.
+    for claim_id, claim in claims.items():
+        if claim.get("sourceKind") != "finish-printing-record" \
+                or claim.get("disposition") != "candidate-needs-evidence":
+            continue
+        release_id = claim.get("proposedCardReleaseId")
+        if release_id not in releases:
+            errors.append(f"finish candidate has no exact card release: {claim_id}")
+        if relations[("candidate-claim", claim_id, "proposes-for")] != [
+            ("card-release", release_id)
+        ]:
+            errors.append(f"finish candidate release edge is missing or non-unique: {claim_id}")
 
     # I3/I8: releases have one language-bearing edition and their local identifiers
     # remain explicit (legacy anchors cannot be promoted into local identifiers).
@@ -263,6 +291,18 @@ def validate(
             or claim.get("evidenceStatus") not in {"confirmed", "observed"}
         ):
             errors.append(f"physical printing establishing claim is not positive: {printing_id} -> {claim_id}")
+        markings = printing.get("markings")
+        if markings is not None and (
+            not isinstance(markings, list)
+            or any(
+                not isinstance(marking, dict)
+                or not isinstance(marking.get("kind"), str)
+                or marking.get("role") not in MARKING_ROLES
+                or not isinstance(marking.get("text"), str)
+                for marking in markings
+            )
+        ):
+            errors.append(f"physical printing markings are not role-structured: {printing_id}")
 
     # Candidate claims and legacy multi-target migrations must remain represented by
     # the migration interface, including every targetRefs entry.
@@ -499,9 +539,11 @@ def validate(
         if not physical:
             errors.append(f"specimen printing target is missing: {specimen_id}")
             continue
-        for field in ("finish", "foilPattern", "markings", "cardSize"):
+        for field in ("finish", "foilPattern", "cardSize"):
             if physical.get(field) != observation.get(field):
                 errors.append(f"specimen printing is stale: {specimen_id}:{field}")
+        if (physical.get("markings") or []) != specimen_markings(observation):
+            errors.append(f"specimen printing is stale: {specimen_id}:markings")
         if physical.get("basis") != observation.get("basis"):
             errors.append(f"specimen basis is stale: {specimen_id}")
         release = releases.get(physical.get("cardReleaseId"))
@@ -544,6 +586,7 @@ def validate(
     # aliases decorate established identities, while source, locality and closure
     # semantics remain checked before the graph reaches SQLite consumers.
     local_sets = by_type["local-set"]
+    localizations = by_type["localization"]
     events = by_type["release-event"]
     profiles = by_type["finish-profile"]
     refs = by_type["catalogue-card-release-ref"]
@@ -552,9 +595,38 @@ def validate(
     aliases = by_type["catalogue-alias-assertion"]
     source_assertions = by_type["source-assertion"]
 
+    localization_tuples: set[tuple[str, str, str]] = set()
+    for localization_id, localization in localizations.items():
+        identity = (
+            localization.get("locality"), localization.get("language"), localization.get("script")
+        )
+        if localization.get("localizationId") != localization_id \
+                or not all(isinstance(value, str) and value for value in identity) \
+                or len(localization.get("script", "")) != 4 \
+                or not localization.get("languageId") \
+                or not localization.get("languageTag") \
+                or not localization.get("displayName") \
+                or not isinstance(localization.get("displayOrder"), int) \
+                or not localization.get("reviewedAt") \
+                or not localization.get("decisionRef"):
+            errors.append(f"localization identity is incomplete: {localization_id}")
+        if identity in localization_tuples:
+            errors.append(f"duplicate locality/language/script localization: {identity}")
+        localization_tuples.add(identity)
+
     for local_set_id, local_set in local_sets.items():
+        identified = bool(local_set.get("localCode") and local_set.get("sourceRecordIds"))
+        unresolved = (
+            local_set.get("state") == "needs-local-identifier"
+            and local_set.get("localCode") is None
+            and not local_set.get("observedNames")
+            and not local_set.get("sourceRecordIds")
+            and bool(local_set.get("evidenceRefs"))
+            and bool(local_set.get("reviewedAt"))
+            and bool(local_set.get("decisionRef"))
+        )
         if local_set.get("localSetId") != local_set_id or not local_set.get("locality") \
-                or not local_set.get("localCode") or not local_set.get("sourceRecordIds"):
+                or not (identified or unresolved):
             errors.append(f"local set identity is incomplete: {local_set_id}")
         for source_id in local_set.get("sourceRecordIds") or []:
             if source_id not in graph_sources:
@@ -569,19 +641,25 @@ def validate(
                 or not identity.get("language") or len(identity.get("script", "")) != 4:
             errors.append(f"set edition identity is incomplete: {edition_id}")
         if catalogue is None:
-            # Identity-only unresolved editions intentionally have no local-set node.
+            errors.append(f"set edition has no catalogue parent: {edition_id}")
             continue
         local_set_id = catalogue.get("localSetId")
+        localization_id = identity.get("localizationId")
         local_set = local_sets.get(local_set_id)
         if not local_set or catalogue.get("setEditionId") != edition_id \
                 or identity.get("locality") != catalogue.get("locality") \
                 or identity.get("language") != catalogue.get("language") \
                 or identity.get("script") != catalogue.get("script") \
                 or identity.get("localSetCode") != catalogue.get("localCode") \
+                or catalogue.get("localizationId") != localization_id \
                 or local_set.get("locality") != identity.get("locality"):
             errors.append(f"set edition catalogue locality/identity mismatch: {edition_id}")
         if relations[("set-edition", edition_id, "belongs-to")] != [("local-set", local_set_id)]:
             errors.append(f"set edition local-set edge is missing or non-unique: {edition_id}")
+        if localization_id not in localizations or relations[
+            ("set-edition", edition_id, "localized-as")
+        ] != [("localization", localization_id)]:
+            errors.append(f"set edition localization edge is missing or non-unique: {edition_id}")
 
     for event_id, event in events.items():
         local_set_id = event.get("localSetId")
@@ -703,6 +781,7 @@ def validate(
         ("candidate-claim", "candidateClaims"),
         ("card-release", "cardReleases"),
         ("physical-printing", "physicalPrintings"),
+        ("localization", "localizations"),
         ("set-source-record", "setSourceRecords"),
         ("set-source-disposition", "setSourceDispositions"),
     ):

@@ -19,7 +19,7 @@ def main() -> None:
     assert not validate(graph)
     meta = graph["meta"]
     assert meta["schema"] == "snoredex-authoritative-locality-graph"
-    assert meta["schemaVersion"] == "1.0.0"
+    assert meta["schemaVersion"] == "1.1.0"
     assert meta["status"] == "authoritative-migrated"
     assert "inputs" not in meta
 
@@ -34,7 +34,33 @@ def main() -> None:
     assert graph["summary"]["candidateClaims"] > 0
     assert graph["summary"]["cardReleases"] > 0
     assert graph["summary"]["physicalPrintings"] > 0
+    assert graph["summary"]["localizations"] == 16
     assert graph["summary"]["setSourceRecords"] == graph["summary"]["setSourceDispositions"]
+
+    localizations = {
+        row["payload"]["languageTag"]: row["payload"]
+        for row in graph["entities"] if row["entityType"] == "localization"
+    }
+    assert localizations["es-ES"]["locality"] == "WEST"
+    assert localizations["es-419"]["locality"] == "LATAM"
+    assert localizations["pt"]["language"] == "Portuguese"
+
+    unresolved_editions = [
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "set-edition"
+        and row["payload"]["identity"]["state"] == "needs-local-identifier"
+    ]
+    assert unresolved_editions
+    assert all(row["catalogue"]["localSetId"] for row in unresolved_editions)
+
+    finish_candidate = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceKind") == "finish-printing-record"
+        and row["payload"].get("disposition") == "candidate-needs-evidence"
+    )
+    assert ("candidate-claim", finish_candidate["claimId"], "proposes-for", "card-release",
+            finish_candidate["proposedCardReleaseId"]) in edge_keys
 
     # A contradicted claim must not be promotable merely by changing its disposition
     # and pointing it at an existing release.

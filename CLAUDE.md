@@ -221,6 +221,7 @@ python scripts/card_discovery.py                  # reproject latest retained ca
 python scripts/locality_matrix.py                 # reviewed locality/era matrix projection (#139)
 python scripts/completeness_gate.py               # write the bounded release-gate summary (#141)
 python scripts/checklist.py                      # canonical checklist items
+python scripts/collector_catalogue.py            # collector contract + migrations + fixture (#254)
 python scripts/readme_stats.py                   # generated markdown blocks
 python scripts/issue_templates.py                # community correction form
 python scripts/open_items.py                     # verification/open-items.html
