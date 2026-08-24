@@ -56,6 +56,7 @@ def main() -> int:
     assert "post-push" in release and "P6/P7" in release
     assert "verification/gate_manifest.py" in release
     assert "actions/upload-artifact@v4" in release
+    assert "name: pages-artifact\n          path: _site\n          include-hidden-files: true" in release
     assert "actions/download-artifact@v4" in pages
     assert "pages-artifact" in pages
     assert "--check-dir" in pages and "--expected-gate L4" in pages
