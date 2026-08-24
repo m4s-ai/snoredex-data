@@ -581,7 +581,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             foil_pattern = None
             markings = []
             distribution = None
-            card_size = old.get("cardSize") or "unknown"
+            card_size = (old or {}).get("cardSize") or "unknown"
             error_class = None
             verification_status = "pending"
 
@@ -729,6 +729,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             kind="research-placeholder", progress="research", release_id=release_id,
             physical=None, source_printing_id=None,
             unit=unit_by_id.get(old.get("finishUnitId")), old=old, claim=None,
+        ))
+
+    represented_releases = {row["cardReleaseId"] for row in items}
+    for release_id in sorted(set(releases) - represented_releases):
+        items.append(common_item(
+            anchor="research:card-release:" + release_id,
+            kind="research-placeholder", progress="research", release_id=release_id,
+            physical=None, source_printing_id=None, unit=None, old=None, claim=None,
         ))
 
     ids = [row["itemId"] for row in items]
@@ -1091,6 +1099,10 @@ def validate_catalogue(
 
     if graph is not None and physical_item_refs != set(graph_physicals):
         errors.append("catalogue physical-printing accounting differs from the graph")
+    if graph is not None and {
+        item.get("cardReleaseId") for item in items.values()
+    } != set(graph_releases):
+        errors.append("catalogue card-release accounting differs from the graph")
 
     for aid, asset in assets.items():
         path = ROOT / str(asset.get("path") or "")
@@ -1130,6 +1142,16 @@ def validate_migrations(
     if {row.get("cardReleaseId") for row in release_accounting} != graph_releases \
             or len(release_accounting) != len(graph_releases):
         errors.append("card-release accounting differs")
+    item_release_by_id = {row["itemId"]: row["cardReleaseId"] for row in catalogue["items"]}
+    if any(
+        row.get("disposition") != "projected"
+        or not row.get("targetItemIds")
+        or row.get("reason") is not None
+        or any(item_release_by_id.get(iid) != row.get("cardReleaseId")
+               for iid in row.get("targetItemIds") or [])
+        for row in release_accounting
+    ):
+        errors.append("card-release accounting does not project every release to its items")
     if {row.get("physicalPrintingId") for row in physical_accounting} != graph_physicals \
             or len(physical_accounting) != len(graph_physicals):
         errors.append("physical-printing accounting differs")
