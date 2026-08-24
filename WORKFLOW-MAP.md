@@ -182,6 +182,7 @@ verification/review_integrity.py
   -> verification/test_pipeline_documentation.py
   -> verification/test_workflow_test_ownership.py
   -> verification/test_scoped_regen.py
+  -> verification/test_workflow_loop.py
   -> verification/test_findings_harness.py
   -> verification/review_findings.py
   -> verification/test_regen_readiness.py
@@ -217,6 +218,9 @@ The following operational scripts are intentionally outside the normal offline D
 - `scripts/scoped_regen.py` executes one lane from `verification/scoped_pipeline_manifest.json`,
   records a Run-ID, graph impact, declared writes, and skipped checks, and leaves the L3 full gate
   as the merge boundary.
+- `scripts/workflow_loop.py` evaluates the bounded evidence, discovery, TCGdex, and absence state
+  machines from `verification/workflow_loop_manifest.json`. It stops on terminal state, unchanged
+  progress, failed lane, or the cycle cap; it never promotes a missing result to an absence verdict.
 
 The measurement separates declared ownership from observation: the gate matrix supplies
 the stores and projection roots a lane declares, while the runner records only the files

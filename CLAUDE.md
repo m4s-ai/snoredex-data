@@ -216,6 +216,7 @@ python scripts/regen.py --check --check-only scripts/evidence_semantics.py
 
 # Scoped L0–L2 lane; report includes Run-ID, graph impact, and skipped checks. L3 is still required.
 python scripts/scoped_regen.py --lane physical-evidence
+python scripts/workflow_loop.py --loop evidence --max-cycles 3
 
 # These environment canaries deliberately stay outside regen.py.
 python verification/test_site.py                 # browser acceptance tests

@@ -1,0 +1,58 @@
+{
+  "schema": "snoredex-workflow-loops",
+  "version": "1.0.0",
+  "runner": "scripts/workflow_loop.py",
+  "reportRoot": "verification/cache/workflow-loops",
+  "loopContract": {
+    "bounded": "A loop stops on terminal state, unchanged progress, failed lane, or --max-cycles.",
+    "positiveEvidence": "No loop may turn an empty provider result, missing row, or skipped step into absence.",
+    "canonicalWrites": "The runner never edits truth stores; existing scoped lanes may reproject their declared outputs.",
+    "mergeBoundary": "Every loop report is partial L0-L2 evidence; scripts/regen.py --check remains the L3 merge gate."
+  },
+  "loops": [
+    {
+      "id": "evidence",
+      "title": "Evidence observation to application status",
+      "lane": "correction",
+      "impactClasses": ["claim-language", "physical-observation"],
+      "states": ["observation", "classified", "applied", "needs-evidence", "needs-adjudication", "terminal"],
+      "initial": "observation",
+      "terminal": ["terminal", "needs-evidence", "needs-adjudication"],
+      "progressMetric": "application status counts in verification/evidence_semantics.json",
+      "stopReasons": ["no unresolved application row remains", "new positive evidence or owner adjudication is required", "no metric change"]
+    },
+    {
+      "id": "discovery",
+      "title": "Retained discovery run to reconciliation boundary",
+      "lane": "source-discovery",
+      "impactClasses": ["source-discovery", "catalogue-set"],
+      "states": ["candidate", "retained", "reconciled", "needs-source", "blocked-by-source", "terminal"],
+      "initial": "candidate",
+      "terminal": ["terminal", "needs-source", "blocked-by-source"],
+      "progressMetric": "latest retained source/card run status plus explicit gap terminal states",
+      "stopReasons": ["all retained records are reconciled", "provider boundary needs a new positive source", "no metric change"]
+    },
+    {
+      "id": "tcgdex",
+      "title": "TCGdex candidate, review, acceptance, and projection",
+      "lane": "finish-refresh",
+      "impactClasses": ["snapshot-refresh", "finish-claim"],
+      "states": ["candidate", "diffed", "needs-acceptance", "accepted", "projected", "needs-refresh"],
+      "initial": "candidate",
+      "terminal": ["projected", "needs-refresh", "needs-acceptance"],
+      "progressMetric": "candidate presence, snapshot record count, and candidate diff counts",
+      "stopReasons": ["accepted snapshot is projected offline", "no candidate exists; explicit refresh is required", "owner acceptance is required", "no metric change"]
+    },
+    {
+      "id": "absence",
+      "title": "Scoped contradiction to adjudicated absence",
+      "lane": "absence",
+      "impactClasses": ["absence-adjudication", "claim-language"],
+      "states": ["scope", "contradicted", "needs-adjudication", "not-printed", "disputed", "terminal"],
+      "initial": "scope",
+      "terminal": ["terminal", "needs-adjudication", "disputed"],
+      "progressMetric": "evidence application counts and owner-adjudication count",
+      "stopReasons": ["owner decision settles the scoped contradiction", "disagreement remains disputed", "no zero-result absence inference", "no metric change"]
+    }
+  ]
+}

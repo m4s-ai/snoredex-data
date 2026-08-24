@@ -132,6 +132,7 @@ TESTS = [
     ["verification/test_pipeline_documentation.py"],
     ["verification/test_workflow_test_ownership.py"],
     ["verification/test_scoped_regen.py"],
+    ["verification/test_workflow_loop.py"],
     ["verification/test_findings_harness.py"],
     ["verification/review_findings.py"],          # cross-artifact + publication
     ["verification/test_regen_readiness.py"],

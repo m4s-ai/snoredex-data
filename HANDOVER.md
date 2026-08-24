@@ -109,6 +109,9 @@ scripts/                      Two halves; only the second can be re-run (#28). T
                               scoped_regen.py reads scoped_pipeline_manifest.json for an explicit
                               L0–L2 lane and writes an ignored Run-ID report; it never replaces
                               the full regen.py merge gate.
+                              workflow_loop.py reads workflow_loop_manifest.json for bounded
+                              evidence/discovery/TCGdex/absence cycles and stops on no progress or
+                              required owner/source input; it never infers absence from silence.
                               publish.py assembles and verifies the allowlisted Pages artifact;
                               collector_deployment.py binds it to the containing commit.
                               authoritative_graph.py validates the reviewed #140 locality graph;
