@@ -86,6 +86,33 @@ def main() -> None:
     assert len(dutch[("27", "1st Edition")]["sources"]) == 2
     assert dutch[("27", "1st Edition")]["specimenIds"] == ["SPEC-0042", "SPEC-0043"]
 
+    projector = finish_projector()
+    conflict = dict(fixture[0])
+    conflict["physicalObservation"] = {
+        **fixture[0]["physicalObservation"],
+        "conflictsWith": ["SPEC-0044"],
+    }
+    conflicted = projector.specimen_printing(conflict)
+    assert conflicted["conflictsWith"] == ["SPEC-0044"]
+    projected: list[dict] = []
+    projector.add_printing(projected, conflicted)
+    assert projected[0]["verificationStatus"] == "pending"
+    assert projected[0]["conflictsWith"] == ["SPEC-0044"]
+    projector.validate_specimen_conflicts({"specimens": [
+        {"specimenId": "SPEC-A", "physicalObservation": {"conflictsWith": ["SPEC-B"]}},
+        {"specimenId": "SPEC-B"},
+    ]})
+    try:
+        projector.validate_specimen_conflicts({
+            "specimens": [{"specimenId": "SPEC-A", "physicalObservation": {
+                "conflictsWith": ["SPEC-MISSING"]
+            }}]
+        })
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("unknown conflict target must fail closed")
+
     graph = read("authoritative_graph.json")
     physical_ids = {
         row["entityId"] for row in graph["entities"]

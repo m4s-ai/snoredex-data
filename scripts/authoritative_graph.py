@@ -123,12 +123,16 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
                 "proposedTargetId": physical_id if confirmed else None,
                 "materializedTargetId": physical_id if confirmed else None,
                 "reason": (
+                    "explicit specimen conflict requires resolution before materialization"
+                    if printing.get("conflictsWith") else
                     "canonical specimen observations and finish evidence establish the exact "
                     "finish and edition"
                     if specimen_ids else
                     "finish printing record carries positive evidence"
                 ),
             }
+            if printing.get("conflictsWith"):
+                claim_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
             if not confirmed:
                 proposal = existing_finish_proposals.get(printing_id) or release_id
                 if proposal:
@@ -170,6 +174,8 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             }
             if specimen_ids:
                 physical_payload["specimenIds"] = specimen_ids
+            if printing.get("conflictsWith"):
+                physical_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
             generated_entities.append(_entity("physical-printing", physical_id, physical_payload))
             generated_edges.extend([
                 {
@@ -427,6 +433,24 @@ def validate(
     claims = by_type["candidate-claim"]
     releases = by_type["card-release"]
     printings = by_type["physical-printing"]
+    specimen_claim_ids = {
+        str(claim.get("sourceId")) for claim in claims.values()
+        if claim.get("sourceKind") == "specimen-observation"
+    }
+    for claim_id, claim in claims.items():
+        conflicts = claim.get("conflictsWith") or []
+        if conflicts and (
+            not isinstance(conflicts, list)
+            or any(ref not in specimen_claim_ids or ref == claim.get("sourceId")
+                   for ref in conflicts)
+            or claim.get("evidenceStatus") != "pending"
+            or claim.get("materializedTargetId") is not None
+        ):
+            errors.append(f"finish conflict claim is not an unresolved explicit conflict: {claim_id}")
+    for printing_id, printing in printings.items():
+        conflicts = printing.get("conflictsWith") or []
+        if conflicts:
+            errors.append(f"conflicted printing was materialized: {printing_id}")
     for claim_id, claim in claims.items():
         target_id = claim.get("materializedTargetId")
         disposition = claim.get("disposition")

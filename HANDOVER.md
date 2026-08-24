@@ -196,7 +196,9 @@ verification/
                               as SPEC-nnnn.png/.jpg and sets `photograph` plus the optional
                               `photographSource` (where the bytes came from — keep the original
                               GitHub attachment URL here, since that URL outlives nothing). Then
-                              run review_findings.py and scripts/database.py. Checks S7-S12 cover
+                              the importer also records `photographSha256` so later checks can
+                              detect byte drift. Run review_findings.py and scripts/database.py.
+                              Checks S7-S12 cover
                               it; publish.py already allowlists the directory and LICENSE.md
                               decision 4 covers the category, so no approval is needed per image.
                               PNG and JPEG only: publish.py also allowlists .webp, but

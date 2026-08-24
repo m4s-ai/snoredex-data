@@ -60,10 +60,12 @@ python scripts/regen.py
 ```
 
 The importer parses the issue HTML, downloads the signed image candidate, validates PNG/JPEG
-bytes, writes `specimens.json` plus `verification/specimens/`, and keeps the stable issue URL as
-provenance. A second run is a no-op for identical bytes. `finishes.py` projects typed finish,
-edition, marking, size, and specimen ids; `authoritative_graph.py` then projects corroboration
-edges. Never add the same SPEC evidence again in `finish_overrides.json` or in a one-off pass.
+bytes, records `photographSha256`, writes `specimens.json` plus `verification/specimens/`, and
+keeps the stable issue URL as provenance. A second run is a no-op for identical bytes.
+`finishes.py` projects typed finish, edition, marking, size, specimen ids, and explicit
+`conflictsWith` review markers; conflicted observations remain pending until resolved.
+`authoritative_graph.py` then projects corroboration edges. Never add the same SPEC evidence again
+in `finish_overrides.json` or in a one-off pass.
 
 ## What this file is
 

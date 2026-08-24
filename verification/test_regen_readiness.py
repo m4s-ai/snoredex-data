@@ -13,11 +13,14 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REGEN = pathlib.Path("scripts/regen.py")
-# A small, deterministic artifact regen.py --check verifies and that is cheap to
-# corrupt and restore: tracker's catalogue fingerprint is a build artifact, but
-# simplest is a generated JSON meta field. Use evidence_semantics.json's keystone
-# count — touching it must fail the determinism step.
-TARGET = ROOT / "verification" / "evidence_semantics.json"
+# Two small deterministic artifacts make the aggregation guarantee observable without
+# touching SQLite or depending on a network response.
+TARGETS = [
+    (ROOT / "verification" / "evidence_semantics.json",
+     b'"units": ', b'"units": 999999, "stale": '),
+    (ROOT / "verification" / "authoritative_graph.json",
+     b'"schemaVersion": "1.1.0"', b'"schemaVersion": "0.0.0"'),
+]
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess:
@@ -26,32 +29,34 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess:
 
 
 def main() -> int:
-    if not TARGET.is_file():
-        print(f"SKIP: {TARGET} missing")
+    if not all(path.is_file() for path, _, _ in TARGETS):
+        print("SKIP: a readiness target is missing")
         return 0
 
-    original = TARGET.read_bytes()
+    originals = [(path, path.read_bytes()) for path, _, _ in TARGETS]
     try:
-        # Corrupt the committed artifact: bump the units count so the --check
-        # determinism step must notice the committed file differs from a fresh
-        # regeneration.
-        corrupted = original.replace(b'"units": ', b'"units": 999999, "stale": ', 1)
-        if corrupted == original:
-            print("SKIP: could not find marker to corrupt")
-            return 0
-        TARGET.write_bytes(corrupted)
+        for (path, marker, replacement), (_, original) in zip(TARGETS, originals):
+            corrupted = original.replace(marker, replacement, 1)
+            if corrupted == original:
+                print(f"SKIP: could not find marker in {path}")
+                return 0
+            path.write_bytes(corrupted)
         proc = run([sys.executable, str(REGEN), "--check"])
         expected_header = "FAILED determinism checks:"
-        expected_command = "scripts/evidence_semantics.py --check"
+        expected_commands = (
+            "scripts/evidence_semantics.py --check",
+            "scripts/authoritative_graph.py --check",
+        )
         if proc.returncode == 0 or expected_header not in proc.stdout \
-                or expected_command not in proc.stdout:
-            print("FAIL: regen.py --check did not identify the stale artifact")
+                or any(command not in proc.stdout for command in expected_commands):
+            print("FAIL: regen.py --check did not identify all stale artifacts")
             print(proc.stdout)
             return 1
-        print(f"OK: regen.py --check rejected stale artifact (exit {proc.returncode})")
+        print(f"OK: regen.py --check rejected both stale artifacts (exit {proc.returncode})")
         return 0
     finally:
-        TARGET.write_bytes(original)
+        for path, original in originals:
+            path.write_bytes(original)
 
 
 if __name__ == "__main__":

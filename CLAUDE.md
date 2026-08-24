@@ -178,8 +178,9 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. For
   routine issue evidence, prepare one observation manifest and run
   `python verification/fetch_attachment.py --issue NUMBER --manifest PATH`. The importer follows
-  the issue HTML's signed image candidate, validates it, and records the stable issue URL as
-  `photographSource`; it is provenance, not a place the image will still be. The direct
+  the issue HTML's signed image candidate, validates it, records its `photographSha256`, and
+  records the stable issue URL as `photographSource`; it is provenance, not a place the image
+  will still be. The direct
   `--specimen ... --from ...` form remains for a local or already reachable image. Never write a
   new prose description of a specimen — that is what the ids replaced.
 

@@ -315,6 +315,12 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
     candidate.setdefault("mappedVariants", [])
     candidate.setdefault("verificationStatus", "pending")
     candidate.setdefault("sources", [])
+    conflicts = sorted(set(candidate.get("conflictsWith") or []))
+    if conflicts:
+        candidate["conflictsWith"] = conflicts
+        candidate["verificationStatus"] = "pending"
+    else:
+        candidate.pop("conflictsWith", None)
     signature = printing_signature(candidate)
     existing = next((item for item in printings if printing_signature(item) == signature), None)
     if existing is None:
@@ -332,6 +338,10 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
                                           | set(candidate["specimenIds"]))
     if STATUS_RANK[candidate["verificationStatus"]] > STATUS_RANK[existing["verificationStatus"]]:
         existing["verificationStatus"] = candidate["verificationStatus"]
+    if conflicts:
+        existing["verificationStatus"] = "pending"
+        existing["conflictsWith"] = sorted(set(existing.get("conflictsWith") or [])
+                                             | set(conflicts))
     seen_sources = {source_signature(source) for source in existing["sources"]}
     for source in candidate["sources"]:
         if source_signature(source) not in seen_sources:
@@ -383,12 +393,28 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
         "_origin": "specimen",
         "specimenIds": [specimen["specimenId"]],
     }
+    conflicts = observation.get("conflictsWith") or []
+    if conflicts:
+        candidate["conflictsWith"] = sorted(set(str(ref) for ref in conflicts))
     if observation.get("edition") is not None:
         candidate["edition"] = observation["edition"]
     photograph = specimen.get("photograph")
     if photograph:
         candidate["image"] = f"verification/specimens/{photograph}"
     return candidate
+
+
+def validate_specimen_conflicts(specimens_document: dict[str, Any]) -> None:
+    """Validate explicit conflict references without inferring conflicts from omissions."""
+    specimens = specimens_document.get("specimens", [])
+    specimen_ids = {str(row.get("specimenId")) for row in specimens}
+    for specimen in specimens:
+        conflicts = (specimen.get("physicalObservation") or {}).get("conflictsWith") or []
+        if not isinstance(conflicts, list) or any(
+            not isinstance(ref, str) or ref == specimen.get("specimenId") or ref not in specimen_ids
+            for ref in conflicts
+        ):
+            raise ValueError(f"invalid physicalObservation.conflictsWith: {specimen.get('specimenId')}")
 
 
 def resolve_override_sources(
@@ -449,6 +475,8 @@ def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") 
         compact["image"] = printing["image"]
     if printing.get("specimenIds"):
         compact["specimenIds"] = list(printing["specimenIds"])
+    if printing.get("conflictsWith"):
+        compact["conflictsWith"] = list(printing["conflictsWith"])
     return compact
 
 
@@ -522,6 +550,7 @@ def main() -> None:
     units = read_json(UNITS_PATH)
     overrides_document = read_json(OVERRIDES_PATH)
     specimens_document = read_json(SPECIMENS_PATH)
+    validate_specimen_conflicts(specimens_document)
     specimens_by_group: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
     for specimen in specimens_document.get("specimens", []):
         # A frame that explicitly covers multiple cards is context evidence only.  It must not

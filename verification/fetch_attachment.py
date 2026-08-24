@@ -68,8 +68,10 @@ bytes are missing, so retry rather than investigate).
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from html.parser import HTMLParser
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -288,6 +290,26 @@ def image_size(data: bytes, ext: str) -> tuple[int, int] | None:
     return None
 
 
+def content_hash(data: bytes) -> str:
+    return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def ensure_unique_photo_hash(owners: dict[str, str], digest: str, specimen_id: str) -> None:
+    """Reject one committed image being filed as two independent specimens."""
+    owner = owners.get(digest)
+    if owner and owner != specimen_id:
+        fail(f"image bytes already belong to {owner}; duplicate evidence cannot create {specimen_id}")
+    owners[digest] = specimen_id
+
+
+def ensure_specimen_id_available(
+    current: dict | None, source_match: dict | None, specimen_id: str, replace: bool
+) -> None:
+    """Reject an explicit id collision unless the manifest points at that same source."""
+    if current and not source_match and not current.get("photograph") and not replace:
+        fail(f"{specimen_id} already exists for another observation; choose a new id")
+
+
 def validate(blob: bytes, allow_small: bool) -> tuple[str, tuple[int, int] | None]:
     ext = image_format(blob)
     if ext is None:
@@ -322,19 +344,20 @@ def write_registry(doc: dict) -> None:
                               encoding="utf-8", newline="\n")
 
 
-def with_photograph(specimen: dict, filename: str, provenance: str) -> dict:
-    """A copy carrying the photograph fields, with `photographSource` next to `photograph`.
+def with_photograph(specimen: dict, filename: str, provenance: str, digest: str) -> dict:
+    """A copy carrying the photograph fields, provenance, and committed bytes hash.
 
     Rebuilt rather than assigned so a first-time record does not append the provenance after
     `citedBy`, which reads as though the URL belonged to the citation list.
     """
     updated: dict = {}
     for key, value in specimen.items():
-        if key == "photographSource":
+        if key in {"photographSource", "photographSha256"}:
             continue
         updated[key] = filename if key == "photograph" else value
         if key == "photograph":
             updated["photographSource"] = provenance
+            updated["photographSha256"] = digest
     return updated
 
 
@@ -377,11 +400,13 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
         fail(f"{specimen['specimenId']} already declares {existing}; pass --replace to overwrite it")
 
     provenance = args.attachment_url or args.source
+    digest = content_hash(blob)
     if args.dry_run:
         print(f"DRY RUN — would write {destination.relative_to(ROOT)} "
               f"({len(blob):,} bytes, {size[0]}x{size[1]} {ext})")
         print(f"DRY RUN — would set {specimen['specimenId']}.photograph = {filename!r}")
         print(f"DRY RUN — would set {specimen['specimenId']}.photographSource = {provenance!r}")
+        print(f"DRY RUN — would set {specimen['specimenId']}.photographSha256 = {digest!r}")
         return 0
 
     SPECIMEN_DIR.mkdir(parents=True, exist_ok=True)
@@ -389,12 +414,13 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
 
     stale = existing and existing != filename
     index = doc["specimens"].index(specimen)
-    doc["specimens"][index] = with_photograph(specimen, filename, provenance)
+    doc["specimens"][index] = with_photograph(specimen, filename, provenance, digest)
     write_registry(doc)
 
     print(f"wrote {destination.relative_to(ROOT)} ({len(blob):,} bytes, {size[0]}x{size[1]} {ext})")
     print(f"set {specimen['specimenId']}.photograph = {filename}")
     print(f"set {specimen['specimenId']}.photographSource = {provenance}")
+    print(f"set {specimen['specimenId']}.photographSha256 = {digest}")
     if stale:
         print(f"NOTE: {existing} is now unreferenced — delete it or S10 will fail")
     print("\nnext:")
@@ -415,7 +441,8 @@ def next_specimen_id(specimens: list[dict]) -> str:
     return f"SPEC-{max(numbers, default=0) + 1:04d}"
 
 
-def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str) -> dict:
+def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
+                   digest: str) -> dict:
     required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
                 "observed", "recordedAt")
     missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
@@ -434,6 +461,7 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str)
         "inspectedFrom": item["inspectedFrom"],
         "photograph": filename,
         "photographSource": provenance,
+        "photographSha256": digest,
         "observed": item["observed"],
         "recordedAt": item["recordedAt"],
         "citedBy": list(item.get("citedBy") or []),
@@ -493,6 +521,11 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         for row in doc["specimens"]
         if row.get("photographSource")
     }
+    photo_hash_owners = {
+        row["photographSha256"]: row["specimenId"]
+        for row in doc["specimens"]
+        if row.get("photographSha256")
+    }
     used_ids: set[str] = set()
     prepared: list[tuple[Path, bytes]] = []
     records: list[dict] = []
@@ -516,6 +549,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         filename = f"{specimen_id}.{ext}"
         destination = SPECIMEN_DIR / filename
         current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
+        ensure_specimen_id_available(current, existing, specimen_id, args.replace)
         if current and current.get("photograph") and not args.replace:
             if current.get("photograph") == filename and destination.is_file() \
                     and destination.read_bytes() == blob:
@@ -528,12 +562,14 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         provenance = stable
         if "private-user-images.githubusercontent.com" in (urlparse(stable).hostname or ""):
             provenance = f"{issue_url}#attachment-{ordinal}"
-        record = build_specimen(item, specimen_id, filename, provenance)
+        digest = content_hash(blob)
+        ensure_unique_photo_hash(photo_hash_owners, digest, specimen_id)
+        record = build_specimen(item, specimen_id, filename, provenance, digest)
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()
-                                      if key not in {"photograph", "photographSource"}}
+                                      if key not in {"photograph", "photographSource", "photographSha256"}}
             record_without_photo = {key: value for key, value in record.items()
-                                    if key not in {"photograph", "photographSource"}}
+                                    if key not in {"photograph", "photographSource", "photographSha256"}}
             if existing_without_photo != record_without_photo:
                 fail(f"{specimen_id} metadata differs; pass --replace to update it")
         records.append(record)
@@ -545,7 +581,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         return 0
     commit_import(doc, prepared, records)
     print(f"imported {len(records)} specimen(s) from issue #{args.issue}")
-    return 0
+    return command_evidence_check()
 
 
 def command_evidence_check() -> int:
@@ -565,7 +601,13 @@ def command_evidence_check() -> int:
             errors.append(f"{specimen['specimenId']}: photograph is missing")
             continue
         try:
-            validate(path.read_bytes(), allow_small=False)
+            blob = path.read_bytes()
+            validate(blob, allow_small=False)
+            expected_hash = specimen.get("photographSha256")
+            if not expected_hash:
+                errors.append(f"{specimen['specimenId']}: photograph hash is missing")
+            elif expected_hash != content_hash(blob):
+                errors.append(f"{specimen['specimenId']}: photograph hash differs")
         except SystemExit as error:
             errors.append(f"{specimen['specimenId']}: invalid photograph ({error})")
 
@@ -602,6 +644,17 @@ def command_evidence_check() -> int:
         errors.extend(graph_module.validate(graph))
     except (OSError, ValueError, KeyError, TypeError, ImportError) as error:
         errors.append(f"authoritative graph check failed to run: {error}")
+    try:
+        collector = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "collector_catalogue.py"), "--check"],
+            cwd=ROOT, text=True, encoding="utf-8", stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        if collector.returncode:
+            detail = collector.stdout.strip().replace("\n", " | ")
+            errors.append(f"collector identity check failed: {detail}")
+    except OSError as error:
+        errors.append(f"collector identity check failed to run: {error}")
     if errors:
         print("physical evidence check: FAIL", file=sys.stderr)
         for error in errors:

@@ -180,6 +180,32 @@ def main() -> None:
     )
     assert any("specimen release identity is stale" in error for error in validate(tampered))
 
+    # Explicit specimen conflicts remain reviewable candidates; they never materialize
+    # a physical printing until the conflict is resolved.
+    conflict_graph = deepcopy(graph)
+    conflict_claim = next(
+        row["payload"] for row in conflict_graph["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceKind") == "finish-printing-record"
+        and row["payload"].get("disposition") == "candidate-needs-evidence"
+    )
+    conflict_claim["evidenceStatus"] = "pending"
+    conflict_claim["conflictsWith"] = ["SPEC-0040"]
+    conflicted_finishes = json.loads(
+        (ROOT / "verification/finish_units.json").read_text(encoding="utf-8")
+    )
+    conflicted_printing_id = conflict_claim["sourceId"]
+    for finish_unit in conflicted_finishes["units"]:
+        for printing in finish_unit.get("printings", []):
+            if printing.get("printingId") == conflicted_printing_id:
+                printing["verificationStatus"] = "pending"
+    assert not validate(conflict_graph, identity_inputs={"finishes": conflicted_finishes})
+    conflict_claim["conflictsWith"] = ["SPEC-NOT-RECORDED"]
+    assert any(
+        "finish conflict claim" in error
+        for error in validate(conflict_graph, identity_inputs={"finishes": conflicted_finishes})
+    )
+
     identity = identity_view(graph)
     migrations = {
         (row["sourceKind"], row["sourceId"]): row
