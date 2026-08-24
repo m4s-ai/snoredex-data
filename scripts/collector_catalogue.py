@@ -97,6 +97,20 @@ def asset_id(path: str) -> str:
     return "asset-" + str(value)
 
 
+def state_transition(from_item_id: str, to_item_ids: list[str]) -> dict[str, Any]:
+    targets = sorted(set(to_item_ids))
+    if not targets:
+        raise ContractError(f"state transition has no target: {from_item_id}")
+    split = len(targets) > 1
+    return {
+        "fromItemId": from_item_id,
+        "toItemIds": targets,
+        "changeKind": "split-1:N" if split else "rekey-1:1",
+        "automaticStateAction": "none" if split else "preserve",
+        "reconciliation": "requires-user-resolution" if split else "one-to-one-preserve",
+    }
+
+
 def natural_key(value: Any) -> str:
     return re.sub(r"\d+", lambda match: match.group(0).zfill(12), str(value or "").casefold())
 
@@ -514,6 +528,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         }
         return aid, scope
 
+    card_name_by_work: dict[str, str] = {}
+
     def item_context(release_id: str, old: dict[str, Any] | None) -> dict[str, Any]:
         release = releases[release_id]
         edition = editions[release["setEditionId"]]
@@ -526,12 +542,17 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         )
         fallback = next(iter(legacy_by_release.get(release_id, [])), None)
         reference = old or fallback
-        card_name = (reference or {}).get("cardName") or (source_first_row or {}).get("cardName") or "Snorlax"
+        work_id = work_id_by_key.get(release.get("work"))
+        card_name = (
+            (reference or {}).get("cardName")
+            or card_name_by_work.get(work_id)
+            or (source_first_row or {}).get("cardName")
+            or "Snorlax"
+        )
         local_name = (source_first_row or {}).get("name")
         local_set_name = next(iter(local_set.get("observedNames") or []), None)
         number, denominator = split_collector_number(release.get("localNumber"))
         event = event_by_edition.get(release["setEditionId"], {})
-        work_id = work_id_by_key.get(release.get("work"))
         return {
             "release": release,
             "identity": identity,
@@ -731,6 +752,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             unit=unit_by_id.get(old.get("finishUnitId")), old=old, claim=None,
         ))
 
+    for row in items:
+        work_id = row["workId"]
+        if not work_id:
+            continue
+        previous_name = card_name_by_work.setdefault(work_id, row["cardName"])
+        if previous_name != row["cardName"]:
+            raise ContractError(f"mapped work has conflicting card names: {work_id}")
+
     represented_releases = {row["cardReleaseId"] for row in items}
     for release_id in sorted(set(releases) - represented_releases):
         items.append(common_item(
@@ -836,6 +865,15 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     items_by_release: defaultdict[str, list[str]] = defaultdict(list)
     for row in items:
         items_by_release[row["cardReleaseId"]].append(row["itemId"])
+    item_ids = {row["itemId"] for row in items}
+    graph_only_transitions = [
+        state_transition(
+            item_id("research:card-release:" + release_id),
+            items_by_release[release_id],
+        )
+        for release_id in sorted(set(releases) - set(legacy_by_release))
+        if item_id("research:card-release:" + release_id) not in item_ids
+    ]
     migrations = {
         "meta": {
             "schema": "snoredex-collector-migrations",
@@ -857,7 +895,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
                 "automaticStateAction": "preserve",
             }
             for row in sorted(legacy_items, key=lambda value: value["checklistId"])
-        ],
+        ] + graph_only_transitions,
         "graphRekeys": [
             {
                 "sourceKind": row["sourceKind"], "sourceId": row["sourceId"],
@@ -1122,12 +1160,17 @@ def validate_migrations(
         errors.append("migration target fingerprint differs")
     legacy_ids = {row["checklistId"] for row in predecessor["items"]}
     transitions = migrations.get("transitions", [])
-    if {row.get("fromItemId") for row in transitions} != legacy_ids \
-            or len(transitions) != len(legacy_ids):
+    transition_by_source = {row.get("fromItemId"): row for row in transitions}
+    if len(transition_by_source) != len(transitions) or None in transition_by_source:
+        errors.append("migration transition sources are missing or duplicate")
+    legacy_transitions = {
+        source: row for source, row in transition_by_source.items() if source in legacy_ids
+    }
+    if set(legacy_transitions) != legacy_ids:
         errors.append("migration transitions do not account for every predecessor id exactly once")
     item_ids = {row["itemId"] for row in catalogue["items"]}
     if any(len(row.get("toItemIds") or []) != 1 or row["toItemIds"][0] not in item_ids
-           for row in transitions):
+           for row in legacy_transitions.values()):
         errors.append("initial 1:1 migration has an unresolved target")
 
     accounting = migrations.get("accounting", {})
@@ -1136,13 +1179,32 @@ def validate_migrations(
     legacy_accounting = accounting.get("legacyChecklistRows", [])
     release_accounting = accounting.get("cardReleases", [])
     physical_accounting = accounting.get("physicalPrintings", [])
+    item_release_by_id = {row["itemId"]: row["cardReleaseId"] for row in catalogue["items"]}
+    releases_with_legacy_rows = {
+        row["cardReleaseId"] for row in catalogue["items"] if row["legacyChecklistIds"]
+    }
+    graph_alias_by_release = {
+        release_id: item_id("research:card-release:" + release_id)
+        for release_id in graph_releases - releases_with_legacy_rows
+        if item_id("research:card-release:" + release_id) not in item_ids
+    }
+    expected_transition_sources = legacy_ids | set(graph_alias_by_release.values())
+    if set(transition_by_source) != expected_transition_sources:
+        errors.append("cumulative graph-only item transitions differ from the catalogue")
+    items_by_release: defaultdict[str, list[str]] = defaultdict(list)
+    for iid, release_id in item_release_by_id.items():
+        items_by_release[release_id].append(iid)
+    if any(
+        transition_by_source.get(alias) != state_transition(alias, items_by_release[release_id])
+        for release_id, alias in graph_alias_by_release.items()
+    ):
+        errors.append("graph-only item transition does not preserve or reconcile collection state")
     if {row.get("legacyChecklistId") for row in legacy_accounting} != legacy_ids \
             or len(legacy_accounting) != len(legacy_ids):
         errors.append("legacy checklist accounting differs")
     if {row.get("cardReleaseId") for row in release_accounting} != graph_releases \
             or len(release_accounting) != len(graph_releases):
         errors.append("card-release accounting differs")
-    item_release_by_id = {row["itemId"]: row["cardReleaseId"] for row in catalogue["items"]}
     if any(
         row.get("disposition") != "projected"
         or not row.get("targetItemIds")

@@ -77,6 +77,11 @@ def main() -> None:
         and all(marking.get("role") for marking in item["markings"])
         for item in catalogue["items"]
     )
+    names_by_work: dict[str, set[str]] = {}
+    for item in catalogue["items"]:
+        if item["workId"]:
+            names_by_work.setdefault(item["workId"], set()).add(item["cardName"])
+    assert all(len(names) == 1 for names in names_by_work.values())
 
     # Fail closed if a research candidate is silently promoted into ordinary
     # collection progress or given an invented physical printing.
@@ -113,10 +118,28 @@ def main() -> None:
     # Removing even one predecessor transition is data loss, and U0414 remains a
     # visible 1:N conflict rather than an automatic state copy.
     tampered_migrations = copy.deepcopy(migrations)
-    tampered_migrations["transitions"].pop()
+    predecessor_ids = {row["checklistId"] for row in predecessor_items}
+    predecessor_transition = next(
+        row for row in tampered_migrations["transitions"]
+        if row["fromItemId"] in predecessor_ids
+    )
+    tampered_migrations["transitions"].remove(predecessor_transition)
     assert any("predecessor" in error for error in collector.validate_migrations(
         tampered_migrations, catalogue, graph, predecessor
     ))
+
+    # A graph-only placeholder has a deterministic alias. If a later catalogue
+    # replaces it with multiple physical items, state is not copied blindly.
+    split = collector.state_transition(
+        release_placeholder["itemId"], ["future-item-b", "future-item-a"]
+    )
+    assert split == {
+        "fromItemId": release_placeholder["itemId"],
+        "toItemIds": ["future-item-a", "future-item-b"],
+        "changeKind": "split-1:N",
+        "automaticStateAction": "none",
+        "reconciliation": "requires-user-resolution",
+    }
     u0414 = next(row for row in fixture["reconciliationCases"] if row["caseId"] == "U0414-1-to-many")
     assert u0414["expectedAutomaticStateAction"] == "none"
     assert u0414["expectedResolution"] == "requires-user-resolution"

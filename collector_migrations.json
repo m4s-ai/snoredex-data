@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:cee4b1154d4309f09370c6e1f1fc1cc949ed14325364e4eb2c37449ee7ced039",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:308c524ab4a37b5002f1780d852c0bff68f0537240d9aad50e2b06970f5d70ab",
+    "toFingerprint": "sha256:b843a8d454a11679c429a29215fb95f159ca35e3c16f800bc3ed5f78339f1892",
     "cumulative": true
   },
   "transitions": [
@@ -6619,6 +6619,15 @@
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "item-ecf226a4-3db6-5261-bcb6-f5710eae73d9",
+      "toItemIds": [
+        "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
     }
   ],
   "graphRekeys": [
