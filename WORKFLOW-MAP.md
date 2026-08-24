@@ -5,14 +5,15 @@ This is the normative map for issue #285. It describes how an observation become
 reviewed claim, a graph edge, a projection, and finally a release artifact. It does not
 replace the data stores, and it does not authorize hand-editing generated projections.
 
-`scripts/regen.py` remains the executable full-build order until the scoped lanes from
-issue #290 exist. This document is the contract that later gate and impact work must use.
+`scripts/regen.py` remains the executable L3 full-build order; the scoped lanes from issue #290
+are bounded L0-L2 shortcuts and never replace it. This document is the contract that gate and
+impact work must use.
 
 The active orchestration has one executable source of truth: `scripts/regen.py` owns the ordered
 `REGEN`, `CHECK`, and `TESTS` lists. `.github/workflows/release-gate.yml` invokes its `--check`
 mode and adds only explicit environment/publication checks. `.github/workflows/pages.yml` calls
-that reusable gate first, then runs the deployment-only Pages projection listed below. README,
-CLAUDE, and HANDOVER link here instead of maintaining another command sequence.
+that reusable gate first and consumes its commit-bound artifact handoff. README, CLAUDE, and
+HANDOVER link here instead of maintaining another command sequence.
 
 ## 1. Terms and invariants
 
@@ -134,28 +135,27 @@ Every consumer must retain stable semantic identity. In particular, collector an
 rows must not use array positions as identity and must not infer a physical printing from
 a language claim or a marketplace candidate.
 
-### D. Manual Pages deployment lane (after the reusable release gate)
+### D. Manual Pages deployment lane (after the reusable L4 gate)
 
 ```text
-scripts/finishes.py --reproject
-  -> scripts/language_status.py
-  -> scripts/confirmed_releases.py
-  -> scripts/source_registry.py
-  -> scripts/source_capabilities.py
-  -> scripts/checklist.py
-  -> scripts/collector_catalogue.py
-  -> scripts/readme_stats.py
-  -> scripts/issue_templates.py
-  -> scripts/site.py
-  -> scripts/publish.py
-  -> scripts/collector_deployment.py
+release-gate.yml (workflow_call, Linux + Windows)
+  -> gate-manifest-{os}.json (commit/tree/catalogue fingerprints)
+  -> pages-artifact (allowlisted _site + collector_deployment.json)
+  -> pages.yml download-artifact
+  -> verification/gate_manifest.py --check-dir
+  -> scripts/publish.py --verify
+  -> scripts/collector_deployment.py --check
+  -> verification/publication_gate.py
+  -> upload-pages-artifact
+  -> deploy-pages
 ```
 
-This lane exists only because the deployment manifest must bind the freshly assembled artifact to
-the containing commit. It deliberately does not rerun source-of-truth discovery, graph migration,
-database/tracker generation, or the L3 suite: `.github/workflows/pages.yml` has already called the
-reusable release gate, and then verifies the allowlisted artifact plus the deployment manifest.
-The explicit list is a deployment boundary, not a second full-build order.
+The reusable gate is mode-sensitive: draft PRs skip the job, ready PRs run deterministic L3 only,
+and workflow-call/manual release paths run L4 live/browser/publication checks. A push to `main`
+runs the separate P6/P7 history audit against exactly `GITHUB_SHA`. Pages does not regenerate a
+second projection tree; it downloads the artifact produced after the L4 gate and rejects missing,
+stale, or fingerprint-disagreeing handoffs before deployment. The explicit list is a deployment
+boundary, not a second full-build order.
 
 ### E. Verification envelope
 
@@ -180,6 +180,7 @@ verification/review_integrity.py
   -> verification/test_korean_burning_confrontation.py
   -> verification/test_completeness_gate.py
   -> verification/test_pipeline_documentation.py
+  -> verification/test_gate_handoff.py
   -> verification/test_workflow_test_ownership.py
   -> verification/test_scoped_regen.py
   -> verification/test_workflow_loop.py
@@ -224,6 +225,10 @@ The following operational scripts are intentionally outside the normal offline D
   classes, and ordering-only `dependsOn` graph; dependencies never trigger another loop. It stops
   on terminal state, unchanged progress, failed lane, or the cycle cap; it never promotes a
   missing result to an absence verdict.
+- `verification/gate_manifest.py` is a runtime-only handoff contract. It binds a successful L3/L4
+  gate to the full commit/tree and collector catalogue fingerprints; `pages.yml` verifies all
+  OS manifests before deploying the uploaded artifact. It is intentionally not a canonical store
+  and never enters `regen.py`'s generated output.
 
 The measurement separates declared ownership from observation: the gate matrix supplies
 the stores and projection roots a lane declares, while the runner records only the files
@@ -269,11 +274,20 @@ Every new or changed edge must answer:
 Semantic printing identity is derived from release, finish, edition, foil pattern, markings,
 distribution, and card size. It is not derived from list order.
 
-## 6. Non-goals for #285
+## 6. Gate-mode boundaries (#292)
+
+| Event | Gate | Expensive checks | Artifact behavior |
+|---|---|---|---|
+| Draft PR | none | none | no release artifact |
+| Ready PR | L3 | offline deterministic suite on Ubuntu + Windows | gate manifest only |
+| Push to `main` | P6/P7 | full-history publication audit at `GITHUB_SHA` | no second build |
+| Manual Pages run | L4 | live finish sources, Linux browser, allowlist, publication approval | download the already verified `pages-artifact` |
+
+## 7. Non-goals for #285
 
 - No scoped execution flag is introduced here; that is #290.
 - No test suite is deleted or merged here; that is #289.
-- No Pages/CI behavior is changed here; that is #292.
+- Pages/CI behavior is owned by #292 and documented in the gate-mode table above.
 - No evidence, finish, source, or absence data is changed here.
 - No historical archive is rewritten.
 

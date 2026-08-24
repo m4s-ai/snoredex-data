@@ -217,10 +217,11 @@ store → graph → projection → gate contract is in [`WORKFLOW-MAP.md`](WORKF
 why the order matters without maintaining a second command list here.
 
 The reusable CI sequence lives in
-[`.github/workflows/release-gate.yml`](.github/workflows/release-gate.yml). It calls the same
-`regen.py --check` gate before the explicit live/browser and publication checks. Merging never
-publishes; Pages deployment remains a manual, gated workflow run and repeats only its documented
-deployment projection lane after the release gate.
+[`.github/workflows/release-gate.yml`](.github/workflows/release-gate.yml). Draft PRs skip the
+expensive job; ready PRs run deterministic L3 on Ubuntu and Windows, while the manual Pages call
+runs L4 and hands a commit-/fingerprint-bound artifact to Pages. Pushes to `main` audit P6/P7 at
+the exact pushed commit. Merging never publishes; Pages deployment remains a manual, gated
+workflow run and deploys the already verified artifact without a second projection build.
 
 ## Scope and caveats — read before using
 

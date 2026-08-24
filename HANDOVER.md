@@ -114,8 +114,11 @@ scripts/                      Two halves; only the second can be re-run (#28). T
                               cycles and stops on no progress or required owner/source input; its
                               dependency graph is ordering-only and it never infers absence from
                               silence.
-                              publish.py assembles and verifies the allowlisted Pages artifact;
-                              collector_deployment.py binds it to the containing commit.
+                              release-gate.yml assembles and verifies the allowlisted Pages
+                              artifact and emits commit/tree/catalogue gate manifests;
+                              pages.yml downloads that handoff, re-verifies it and deploys without
+                              rebuilding a second projection tree. collector_deployment.py binds
+                              the artifact to the containing commit.
                               authoritative_graph.py validates the reviewed #140 locality graph;
                               artwork_review.py builds the #120 graph-backed browser projection;
                               source_adapters.py and card_discovery.py check/reproject retained
@@ -179,8 +182,9 @@ verification/
   ../collector_catalogue.json
                               GENERATED #254 collector-app projection. Its schema, predecessor
                               migration ledger and reconciliation fixture sit beside it. The
-                              deployment-only collector_deployment.json is emitted by Pages after
-                              the containing commit exists and is never a regen input.
+                              deployment-only collector_deployment.json is emitted by the L4
+                              release gate after the containing commit exists and is never a regen
+                              input; Pages forwards the checked bytes.
   artwork_review_projection.json
                               GENERATED #120 client-side review projection: graph-backed artwork/work
                               groups, local releases, images, observations and hashes. Browser edits
@@ -300,6 +304,10 @@ verification/
                               reported, never asserted (see §7).
   publication_gate.py         Blocks deployment until publication-decisions.json records the
                               approvals; the Pages workflow feeds it the real repo visibility.
+  gate_manifest.py            Runtime-only CI/Pages handoff: binds L3/L4 success to commit/tree/
+                              catalogue fingerprints; never a canonical store or regen input.
+  test_gate_handoff.py         Regression for PR L3, push P6/P7, OS coverage and Pages artifact
+                              handoff semantics.
   test_site.py                Browser acceptance tests (playwright + chromium).
   fixtures/                   Recorded responses so networked checks stay testable offline.
   specimens/                  Photographs of cited specimens, one file per SPEC-nnnn record in

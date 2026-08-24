@@ -42,7 +42,7 @@ def main() -> int:
     assert lane_commands, "Pages lane has no commands in WORKFLOW-MAP.md"
     for command in lane_commands:
         assert f"python {command}" in pages, f"Pages workflow drifted from documented lane: {command}"
-    assert "deployment-only Pages projection lane" in pages
+    assert "verified Pages artifact" in pages
     assert "uses: ./.github/workflows/release-gate.yml" in pages
     assert "audit_evidence.py" not in "\n".join(texts.values())
 

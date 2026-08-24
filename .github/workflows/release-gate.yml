@@ -15,6 +15,8 @@ name: Release gate
 
 on:
   workflow_call:
+  push:
+    branches: [main]
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
   workflow_dispatch:
@@ -31,13 +33,14 @@ jobs:
     # Draft PRs are intentionally in the Codex review loop: avoid spending the full two-OS
     # release gate on every review-fix push. Marking the PR ready starts the gate again, and
     # workflow_dispatch remains available for an explicit check at any time.
-    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
+    if: ${{ github.event_name != 'push' && (github.event_name != 'pull_request' || !github.event.pull_request.draft) }}
     name: gate (${{ matrix.os }})
     env:
       # Keep the checkout artifact-clean while generators import sibling modules.
       PYTHONDONTWRITEBYTECODE: "1"
       # Windows defaults redirected Python output to cp1252; card data includes δ and other Unicode.
       PYTHONUTF8: "1"
+      GATE_LEVEL: ${{ github.event_name == 'pull_request' && 'L3' || 'L4' }}
     strategy:
       fail-fast: false
       matrix:
@@ -91,19 +94,74 @@ jobs:
         run: python scripts/regen.py --check
 
       - name: Live finish-source verification
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python verification/verify_finish_sources.py
 
       # --- behaviour: the page has to actually work ---
       - name: Browser tests
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python verification/test_site.py
 
       # --- artifact hygiene ---
       - name: Public artifact contains only allowlisted files
+        if: github.event_name != 'pull_request'
         run: |
           python scripts/publish.py --out _site
           python scripts/publish.py --out _site --verify
+
+      - name: Bind checked artifact to the commit
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          published_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "commit=${GITHUB_SHA} gate=${GATE_LEVEL} result=passed manifest=collector_deployment.json"
+          python scripts/collector_deployment.py \
+            --catalogue _site/collector_catalogue.json \
+            --out _site/collector_deployment.json \
+            --artifact-commit "${GITHUB_SHA}" \
+            --published-at "${published_at}"
+
+      - name: Verify checked artifact and publication decision
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/publish.py --out _site --verify
+          python scripts/collector_deployment.py \
+            --check \
+            --catalogue _site/collector_catalogue.json \
+            --out _site/collector_deployment.json \
+            --artifact-commit "${GITHUB_SHA}"
+          python verification/publication_gate.py \
+            --deployment-manifest _site/collector_deployment.json \
+            --catalogue _site/collector_catalogue.json \
+            --expected-commit "${GITHUB_SHA}"
+
+      - name: Emit successful gate manifest
+        shell: bash
+        run: |
+          python verification/gate_manifest.py \
+            --out "_gate/gate-manifest-${RUNNER_OS}.json" \
+            --gate-level "${GATE_LEVEL}" \
+            --commit "${GITHUB_SHA}"
+
+      - name: Upload gate manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-manifest-${{ matrix.os }}
+          path: _gate/gate-manifest-${{ runner.os }}.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload checked Pages artifact
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-artifact
+          path: _site
+          if-no-files-found: error
+          retention-days: 7
 
       - name: No absolute paths, secrets, or caches in the tree
         shell: bash
@@ -121,3 +179,31 @@ jobs:
               sys.exit("cache directories present in the build tree: " + ", ".join(leaked))
           print("no cache directories in the build tree")
           PY
+
+  post-push:
+    if: ${{ github.event_name == 'push' }}
+    name: post-push P6/P7 audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Audit the published commit history
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
+          echo "commit=${GITHUB_SHA} gate=P6/P7 result=running"
+          set +e
+          python verification/review_findings.py 2>&1 | tee post-push-findings.log
+          status=${PIPESTATUS[0]}
+          set -e
+          grep -F "[ ok ] P6" post-push-findings.log
+          grep -F "[ ok ] P7" post-push-findings.log
+          test "${status}" -eq 0
+          echo "commit=${GITHUB_SHA} gate=P6/P7 result=passed"

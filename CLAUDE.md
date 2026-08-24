@@ -228,9 +228,11 @@ git diff --exit-code -- . ':(exclude)*.sqlite'   # equivalent scope enforced ins
 ```
 
 `scripts/regen.py` owns the dependency order and core suite. The reusable
-`.github/workflows/release-gate.yml` calls that command directly; Pages calls the same gate before
-its deployment-only projection lane. The workflow map is the single human-readable explanation;
-this file intentionally does not maintain a second command list.
+`.github/workflows/release-gate.yml` calls that command directly: draft PRs skip it, ready PRs run
+deterministic L3 only, and the manual Pages call runs L4. A push to `main` runs the separate P6/P7
+history audit at `GITHUB_SHA`; Pages downloads and verifies the L4-produced artifact and gate
+manifests instead of rebuilding a second projection tree. The workflow map is the single
+human-readable explanation; this file intentionally does not maintain a second command list.
 
 **The `.sqlite` files are excluded from regen.py's byte diff, and always must be.** A SQLite file records the
 version number of the library that wrote it in its own header, so two environments running different
