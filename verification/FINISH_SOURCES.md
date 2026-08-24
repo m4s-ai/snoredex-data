@@ -19,8 +19,10 @@ python ../scripts/finishes.py --refresh --accept-refresh
 python ../scripts/regen.py
 ```
 
-The first command only reports changed, added, and removed records. The second is the explicit
-acceptance step; it writes the snapshot only after that drift has been reviewed.
+The first command fetches, reports changed/added/removed records, and stages the exact payloads in
+the ignored `cache/finish-tcgdex/refresh-candidate.json`. The second is the explicit acceptance
+step; it consumes and hash-validates that staged candidate without fetching again, then writes the
+versioned snapshot only after the drift has been reviewed.
 
 ## Evidence rules
 

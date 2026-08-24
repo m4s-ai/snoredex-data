@@ -292,15 +292,18 @@ There is no automatic scheduler. Review upstream drift deliberately, at least mo
 before a release or whenever TCGdex is known to have changed:
 
 ```console
-python scripts/finishes.py --refresh                         # fetch and report drift; do not write
-python scripts/finishes.py --refresh --accept-refresh         # accept the reviewed snapshot
+python scripts/finishes.py --refresh                         # fetch, stage, and report drift
+python scripts/finishes.py --refresh --accept-refresh         # accept that exact staged snapshot
 python scripts/regen.py                                      # rebuild all projections offline
 ```
 
-`--refresh` reports changed, added and removed URLs and leaves the committed snapshot untouched
-until `--accept-refresh` is supplied. **Exit 2 means a source could not be reached** — the artifacts
-are not wrong, the upstream evidence is missing, so retry rather than investigate. The evidence
-rules remain in [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md).
+`--refresh` reports changed, added and removed URLs and stages the exact payloads in the ignored
+`verification/cache/finish-tcgdex/refresh-candidate.json`; it leaves the committed snapshot and
+generated outputs untouched. `--refresh --accept-refresh` consumes that staged candidate without
+refetching, validates its hashes and source URL set, then writes the versioned snapshot. **Exit 2
+means a source could not be reached or no valid staged candidate exists** — the artifacts are not
+wrong, so retry the refresh rather than investigate absence. The evidence rules remain in
+[`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md).
 
 Serve the site locally with `python -m http.server 8000`, then open <http://localhost:8000/>.
 `index.html` is the single public page; `verification/confirmed-releases.html` redirects to it.

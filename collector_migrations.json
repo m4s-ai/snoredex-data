@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:840ee381a76c00298ddc234242e8da44ac098e1b7674fa2df25ac1f4d3e6b092",
+    "fromFingerprint": "sha256:16f9d61e75c290b1fb47a54b7d25c92472a5de1959ce0f7bdf835df084e6b602",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:5085bec353b28fae985a8e07d94b2ddfa3c9f105fc2b03bf05acee8024c6a951",
+    "toFingerprint": "sha256:8e23e9f12277848a22c280f16f01fc90e79ac08cb205bc8ba8a5939adf2c7d2d",
     "cumulative": true
   },
   "transitions": [
@@ -5023,23 +5023,7 @@
     {
       "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball",
       "toItemIds": [
-        "item-ba002977-e485-515d-8bc5-483ff0765e43"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
-      "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball-mirror",
-      "toItemIds": [
         "item-1db1ebf2-32e4-5faf-85c1-0ae0ca8e011c"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
-      "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-pok-ball-mirror",
-      "toItemIds": [
-        "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -5047,7 +5031,7 @@
     {
       "fromItemId": "sv-p-id-117-indonesian-none-mirror-holo-poke-ball",
       "toItemIds": [
-        "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd"
+        "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -11220,28 +11204,14 @@
         "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball",
         "disposition": "projected",
         "targetItemIds": [
-          "item-ba002977-e485-515d-8bc5-483ff0765e43"
-        ]
-      },
-      {
-        "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-master-ball-mirror",
-        "disposition": "projected",
-        "targetItemIds": [
           "item-1db1ebf2-32e4-5faf-85c1-0ae0ca8e011c"
-        ]
-      },
-      {
-        "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-pok-ball-mirror",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
         ]
       },
       {
         "legacyChecklistId": "sv-p-id-117-indonesian-none-mirror-holo-poke-ball",
         "disposition": "projected",
         "targetItemIds": [
-          "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd"
+          "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
         ]
       },
       {
@@ -13192,9 +13162,7 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-1db1ebf2-32e4-5faf-85c1-0ae0ca8e011c",
-          "item-1e2614db-50c8-5a13-929c-0add548fc0d9",
-          "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd",
-          "item-ba002977-e485-515d-8bc5-483ff0765e43"
+          "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
         ],
         "reason": null
       },
@@ -19569,16 +19537,6 @@
         "targetItemId": "item-1e2614db-50c8-5a13-929c-0add548fc0d9"
       },
       {
-        "physicalPrintingId": "PHYSICAL:F0457-P03",
-        "disposition": "projected",
-        "targetItemId": "item-ba002977-e485-515d-8bc5-483ff0765e43"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:F0457-P04",
-        "disposition": "projected",
-        "targetItemId": "item-44fc39be-4b6f-5a46-9ac8-857f80be45dd"
-      },
-      {
         "physicalPrintingId": "PHYSICAL:F0461-P01",
         "disposition": "projected",
         "targetItemId": "item-ce832f97-02e0-58fe-9ffb-dd411b0032bf"
@@ -20270,9 +20228,9 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 831,
+      "legacyChecklistRows": 829,
       "cardReleases": 612,
-      "physicalPrintings": 479,
+      "physicalPrintings": 477,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

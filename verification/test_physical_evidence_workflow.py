@@ -101,6 +101,18 @@ def main() -> None:
     merged: list[dict] = [merged_without_image]
     projector.add_printing(merged, projector.specimen_printing(fixture[0]))
     assert merged[0]["image"] == "verification/specimens/SPEC-0040.png"
+    patterned = dict(fixture[0])
+    patterned["physicalObservation"] = {
+        **fixture[0]["physicalObservation"], "foilPattern": "Poké Ball mirror"
+    }
+    assert projector.specimen_printing(patterned)["foilPattern"] == "poke-ball"
+    indonesian = next(unit for unit in finish_units
+                      if unit["setCode"] == "SV-P/ID" and unit["number"] == "117"
+                      and unit["language"] == "Indonesian")
+    assert len(indonesian["printings"]) == 2
+    assert {printing["foilPattern"] for printing in indonesian["printings"]} == {
+        "poke-ball", "master-ball"
+    }
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],

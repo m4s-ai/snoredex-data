@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-24",
-  "projectionVersion": "f84fe0b55018fd87619442789646dd57beec7d607824d2b8f9f1cfd60c74bd90",
+  "projectionVersion": "315b8cd8b12ea9e8805e9f4ada05ee188577f72c1af61d22cb1e6cca6c904809",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,7 +14,7 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 479,
+    "physicalPrintings": 477,
     "sourceObservations": 1624
   },
   "groups": [
@@ -54903,8 +54903,8 @@
               "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
               "finish": "mirror-holo",
               "edition": null,
-              "foilPattern": "Master Ball mirror",
-              "markings": [],
+              "foilPattern": "master-ball",
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
@@ -54917,6 +54917,11 @@
               ],
               "sources": [
                 {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Master Ball mirror holo"
+                },
+                {
                   "url": "cropped from SPEC-0013 (right card), supplied by the collection owner",
                   "sourceType": "Owner-supplied physical card photograph",
                   "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2. Retained as SPEC-0020."
@@ -54928,8 +54933,8 @@
               "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
               "finish": "mirror-holo",
               "edition": null,
-              "foilPattern": "Poké Ball mirror",
-              "markings": [],
+              "foilPattern": "poke-ball",
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
@@ -54942,53 +54947,14 @@
               ],
               "sources": [
                 {
-                  "url": "cropped from SPEC-0013 (left card), supplied by the collection owner",
-                  "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\" Retained as SPEC-0019."
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:F0457-P03",
-              "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "master-ball",
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0457",
-              "sourcePrintingId": "F0457-P03",
-              "establishingClaimId": "CLAIM:finish:F0457-P03",
-              "sources": [
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
-                  "sourceType": "user",
-                  "evidence": "Curated variant name: Master Ball mirror holo"
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:F0457-P04",
-              "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "poke-ball",
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0457",
-              "sourcePrintingId": "F0457-P04",
-              "establishingClaimId": "CLAIM:finish:F0457-P04",
-              "sources": [
-                {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
                   "sourceType": "user",
                   "evidence": "Curated variant name: Poké Ball mirror holo"
+                },
+                {
+                  "url": "cropped from SPEC-0013 (left card), supplied by the collection owner",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\" Retained as SPEC-0019."
                 }
               ]
             }
@@ -55002,8 +54968,6 @@
               "mirror-holo"
             ],
             "foilPattern": [
-              "Master Ball mirror",
-              "Poké Ball mirror",
               "master-ball",
               "poke-ball"
             ],
@@ -55047,39 +55011,39 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0457-P01:0:dbd8ea67bd14c6ac",
-              "kind": "finish",
-              "provider": "Owner-supplied physical card photograph",
-              "url": "cropped from SPEC-0013 (right card), supplied by the collection owner",
-              "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2. Retained as SPEC-0020.",
-              "contentHash": "c1f528e02a4d0cefff9e3cc4ca214cb03fb3ea2c13776acf0b36afcc9bcc5ac3",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0457-P02:0:165d9e1e4c9c822a",
-              "kind": "finish",
-              "provider": "Owner-supplied physical card photograph",
-              "url": "cropped from SPEC-0013 (left card), supplied by the collection owner",
-              "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\" Retained as SPEC-0019.",
-              "contentHash": "0c4994dff136dfc2f516503d57824e87e667070fb7f9213e2a1c862cdf782da1",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0457-P03:0:2362e3c78b7b0e5e",
+              "observationId": "finish:F0457-P01:0:2362e3c78b7b0e5e",
               "kind": "finish",
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
               "evidence": "Curated variant name: Master Ball mirror holo",
-              "contentHash": "430c8124fd5f8e82360447aa9061e14751d9abe1886d1605a193f9407df69811",
+              "contentHash": "59540c74c212f99c18f355b710f4c85cc3016aad3b12e5820a98e869b472e633",
               "image": null
             },
             {
-              "observationId": "finish:F0457-P04:0:4d3590ec9cc18300",
+              "observationId": "finish:F0457-P01:1:dbd8ea67bd14c6ac",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "cropped from SPEC-0013 (right card), supplied by the collection owner",
+              "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2. Retained as SPEC-0020.",
+              "contentHash": "fdfddbd45965c944678136ef92386c4650e238f785d750cf09ca00976c452b38",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0457-P02:0:4d3590ec9cc18300",
               "kind": "finish",
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
               "evidence": "Curated variant name: Poké Ball mirror holo",
-              "contentHash": "dfb95ef04b8e940d37d2e47dd73b653970a5ec9f1b120255fcdd1f5d544d944e",
+              "contentHash": "dbe44dc2e9250b585db8b25d2918d096cd6db62c6106601cb608419d4acae55b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0457-P02:1:165d9e1e4c9c822a",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "cropped from SPEC-0013 (left card), supplied by the collection owner",
+              "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\" Retained as SPEC-0019.",
+              "contentHash": "88ddcfe7c338bac008de982b8330019c3dbc0fbe0e90d5baec827d6ca5cd9f8f",
               "image": null
             },
             {

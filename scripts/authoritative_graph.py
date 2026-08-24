@@ -24,6 +24,10 @@ SPECIMENS = ROOT / "verification" / "specimens.json"
 GRAPH_SCHEMA = "snoredex-authoritative-locality-graph"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
+FOIL_PATTERN_ALIASES = {
+    "poke ball mirror": "poke-ball",
+    "master ball mirror": "master-ball",
+}
 
 
 def read_graph() -> dict[str, Any]:
@@ -224,7 +228,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
                 "cardReleaseId": release_id,
                 "finish": observation.get("finish"),
                 "edition": observation.get("edition"),
-                "foilPattern": observation.get("foilPattern"),
+                "foilPattern": specimen_observation_value(observation, "foilPattern"),
                 "markings": specimen_markings(observation),
                 "distribution": observation.get("distribution"),
                 "cardSize": observation.get("cardSize") or "unknown",
@@ -435,6 +439,9 @@ def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:
 def specimen_observation_value(observation: dict[str, Any], field: str) -> Any:
     """Use the finish projector's explicit default for an omitted card size."""
     value = observation.get(field)
+    if field == "foilPattern" and isinstance(value, str):
+        key = " ".join(value.casefold().replace("é", "e").split())
+        return FOIL_PATTERN_ALIASES.get(key, value)
     return value or "unknown" if field == "cardSize" else value
 
 

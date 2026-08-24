@@ -38,8 +38,14 @@ REVIEW_CSV_PATH = ROOT / "verification" / "FINISH_REVIEW.csv"
 ANALYSIS_PATH = ROOT / "analysis_finishes.json"
 CACHE_DIR = ROOT / "verification" / "cache" / "finish-tcgdex"
 SNAPSHOT_PATH = ROOT / "verification" / "finish_tcgdex_snapshot.json"
+REFRESH_CANDIDATE_PATH = CACHE_DIR / "refresh-candidate.json"
+REFRESH_CANDIDATE_SCHEMA = "snoredex-tcgdex-refresh/1"
 
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
+FOIL_PATTERN_ALIASES = {
+    "poke ball mirror": "poke-ball",
+    "master ball mirror": "master-ball",
+}
 STATUS_RANK = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confirmed": 3}
 LANG_ORDER = (
     "English",
@@ -199,6 +205,38 @@ def snapshot_drift(previous: dict[str, Any], current: dict[str, Any]) -> tuple[l
     return changed, added, removed
 
 
+def write_refresh_candidate(records: dict[str, Any]) -> None:
+    """Stage the exact payloads produced by a review refresh for later acceptance."""
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    write_json(REFRESH_CANDIDATE_PATH, {
+        "schema": REFRESH_CANDIDATE_SCHEMA,
+        "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "records": records,
+    })
+
+
+def load_refresh_candidate(expected_urls: set[str]) -> dict[str, dict[str, Any]]:
+    """Load and validate the payloads staged by the preceding non-accepting refresh."""
+    if not REFRESH_CANDIDATE_PATH.is_file():
+        raise ValueError(
+            "no staged TCGdex refresh candidate; run `python scripts/finishes.py --refresh` first"
+        )
+    document = read_json(REFRESH_CANDIDATE_PATH)
+    if not isinstance(document, dict):
+        raise ValueError("staged TCGdex refresh candidate is not an object")
+    if document.get("schema") != REFRESH_CANDIDATE_SCHEMA:
+        raise ValueError("staged TCGdex refresh candidate has an unexpected schema")
+    records = document.get("records")
+    if not isinstance(records, dict) or set(records) != expected_urls:
+        raise ValueError("staged TCGdex refresh candidate does not match current source URLs")
+    for url, record in records.items():
+        payload = record.get("payload") if isinstance(record, dict) else None
+        if (not isinstance(record, dict) or json_hash(payload) != record.get("contentHash")
+                or implausible(payload)):
+            raise ValueError(f"staged TCGdex refresh candidate failed validation: {url}")
+    return records
+
+
 def fetch_tcgdex(url: str, refresh: bool = False, offline: bool = False,
                  max_age_days: float = CACHE_MAX_AGE_DAYS
                  ) -> tuple[str, dict[str, Any] | None, str | None]:
@@ -298,8 +336,8 @@ def printing_signature(printing: dict[str, Any]) -> str:
     identity = {
         "finish": printing["finish"],
         "edition": printing.get("edition"),
-        "foilPattern": printing.get("foilPattern"),
-        "markings": printing.get("markings"),
+        "foilPattern": normalize_foil_pattern(printing.get("foilPattern")),
+        "markings": printing.get("markings") or None,
         "distribution": printing.get("distribution"),
         "releaseDate": printing.get("releaseDate"),
         "cardSize": printing.get("cardSize"),
@@ -308,6 +346,7 @@ def printing_signature(printing: dict[str, Any]) -> str:
 
 
 def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> None:
+    candidate["foilPattern"] = normalize_foil_pattern(candidate.get("foilPattern"))
     candidate.setdefault("foilPattern", None)
     candidate.setdefault("markings", None)
     candidate.setdefault("distribution", None)
@@ -359,6 +398,13 @@ def specimen_number(value: object) -> str:
     return str(value or "").split("/", 1)[0]
 
 
+def normalize_foil_pattern(value: object) -> object:
+    if not isinstance(value, str):
+        return value
+    key = " ".join(value.casefold().replace("é", "e").split())
+    return FOIL_PATTERN_ALIASES.get(key, value)
+
+
 def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
     text = observation.get("markings")
     if not text:
@@ -389,7 +435,7 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
     marking_values = specimen_markings(observation)
     candidate = {
         "finish": observation["finish"],
-        "foilPattern": observation.get("foilPattern"),
+        "foilPattern": normalize_foil_pattern(observation.get("foilPattern")),
         "markings": marking_values,
         "distribution": observation.get("distribution"),
         "cardSize": observation.get("cardSize") or "unknown",
@@ -621,18 +667,30 @@ def main() -> None:
         raise ValueError("--offline and --refresh are mutually exclusive")
     if accept_refresh and not refresh:
         raise ValueError("--accept-refresh requires --refresh")
-    with ThreadPoolExecutor(max_workers=12) as executor:
-        futures = {
-            executor.submit(fetch_tcgdex, url, refresh, offline): url for url in tcgdex_urls
+    accepted_refresh = False
+    if accept_refresh:
+        try:
+            current_snapshot = load_refresh_candidate(set(tcgdex_urls))
+        except (OSError, ValueError, TypeError, json.JSONDecodeError) as error:
+            print(f"cannot accept TCGdex refresh candidate: {error}", file=sys.stderr)
+            return 2
+        tcgdex_data = {
+            url: record["payload"] for url, record in current_snapshot.items()
         }
-        for future in as_completed(futures):
-            url, payload, error = future.result()
-            if payload is not None:
-                tcgdex_data[url] = payload
-            else:
-                fetch_errors[url] = error or "unknown error"
+        accepted_refresh = True
+    else:
+        with ThreadPoolExecutor(max_workers=12) as executor:
+            futures = {
+                executor.submit(fetch_tcgdex, url, refresh, offline): url for url in tcgdex_urls
+            }
+            for future in as_completed(futures):
+                url, payload, error = future.result()
+                if payload is not None:
+                    tcgdex_data[url] = payload
+                else:
+                    fetch_errors[url] = error or "unknown error"
 
-    if refresh and not fetch_errors:
+    if refresh and not fetch_errors and not accept_refresh:
         current_snapshot = {
             url: {"contentHash": json_hash(payload), "payload": payload}
             for url, payload in sorted(tcgdex_data.items())
@@ -644,9 +702,18 @@ def main() -> None:
         )
         for url in changed + added + removed:
             print(f"  drift: {url}")
-        if not accept_refresh:
-            print("Snapshot unchanged. Review drift, then rerun with --refresh --accept-refresh.")
-            return 0
+        write_refresh_candidate(current_snapshot)
+        print("Refresh candidate staged. Review it, then rerun with --refresh --accept-refresh.")
+        return 0
+
+    if accepted_refresh:
+        changed, added, removed = snapshot_drift(snapshot_records(), current_snapshot)
+        print(
+            "TCGdex refresh accepted: "
+            f"changed={len(changed)} added={len(added)} removed={len(removed)}"
+        )
+        for url in changed + added + removed:
+            print(f"  drift: {url}")
         write_json(
             SNAPSHOT_PATH,
             {
@@ -1302,6 +1369,8 @@ def main() -> None:
         # The artifacts written above are still internally consistent; what is missing is upstream
         # evidence nobody could reach. Exit 2 says "try again later" rather than "this is wrong".
         return 2
+    if accepted_refresh:
+        REFRESH_CANDIDATE_PATH.unlink(missing_ok=True)
     return 0
 
 

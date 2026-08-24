@@ -35,16 +35,18 @@ reviewed manually at least once per month, and additionally before a release or 
 TCGdex change is relevant to the work:
 
 ```console
-python scripts/finishes.py --refresh                         # discover and print drift only
-python scripts/finishes.py --refresh --accept-refresh         # accept the reviewed snapshot
+python scripts/finishes.py --refresh                         # stage candidate and print drift
+python scripts/finishes.py --refresh --accept-refresh         # accept that exact candidate
 python scripts/regen.py                                      # regenerate from that snapshot
 python scripts/regen.py --check                              # verify the committed result
 ```
 
-`--refresh` reports changed, added, and removed card URLs and does not write until the explicit
-`--accept-refresh` flag is present. The ignored `verification/cache/finish-tcgdex/` directory is
-only a fetch transport cache; it is never the release source of truth. A refresh failure is an
-unreachable source (retry it), not evidence that a card or finish is absent.
+`--refresh` reports changed, added, and removed card URLs and stages the exact payloads in
+`verification/cache/finish-tcgdex/refresh-candidate.json`; it does not write generated outputs or
+the committed snapshot. The accepting command consumes that candidate without refetching, checks
+its hashes and URL set, then writes the versioned snapshot. The ignored cache remains transport
+state only and is never the release source of truth. A refresh failure is an unreachable source
+(retry it), not evidence that a card or finish is absent.
 
 ### Physical-card evidence loop (#274)
 

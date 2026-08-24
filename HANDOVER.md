@@ -222,9 +222,10 @@ verification/
                               finish/pattern/marking/size, sources and Cardmarket-product mappings.
   finish_tcgdex_snapshot.json VERSIONED TCGdex input for the finish generator. Normal regeneration
                               reads it offline and validates each payload hash. It changes only on
-                              an explicit `python scripts/finishes.py --refresh --accept-refresh`
-                              after reviewing the drift reported by `--refresh`; there is no
-                              automatic updater. Review monthly and before releases.
+                              an explicit two-step refresh: `--refresh` stages the exact candidate,
+                              then `--refresh --accept-refresh` consumes that candidate without a
+                              second fetch after reviewing the drift; there is no automatic updater.
+                              Review monthly and before releases.
   finish_overrides.json       Curated special-printing facts not expressible in group-level APIs.
   FINISH_SOURCES.md           Finish evidence hierarchy, confirmed special cases, exact source
                               endpoints and the repeatable research workflow.
