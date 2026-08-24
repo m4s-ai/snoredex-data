@@ -44,7 +44,11 @@ def main() -> None:
     ) == (["same"], ["added"], ["removed"])
     candidate_path = ROOT / ".tcgdex-refresh-candidate-test.json"
     original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
+    original_cache_dir = finishes.CACHE_DIR
     finishes.REFRESH_CANDIDATE_PATH = candidate_path
+    # Keep the refresh-candidate regression out of the production fetch cache.  The release
+    # gate deliberately rejects cache directories left behind by any test or generator.
+    finishes.CACHE_DIR = candidate_path.parent
     try:
         staged = {"https://api.tcgdex.net/test": {
             "contentHash": finishes.json_hash({"id": "test-card"}),
@@ -62,6 +66,7 @@ def main() -> None:
             raise AssertionError("tampered refresh candidate must fail closed")
     finally:
         finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
+        finishes.CACHE_DIR = original_cache_dir
         candidate_path.unlink(missing_ok=True)
     print(f"tcgdex snapshot regression passed: {len(records)} hashed records, offline")
 
