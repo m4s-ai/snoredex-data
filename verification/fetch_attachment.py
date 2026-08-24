@@ -85,6 +85,8 @@ ROOT = Path(__file__).resolve().parents[1]
 VERIFICATION = ROOT / "verification"
 SPECIMENS_JSON = VERIFICATION / "specimens.json"
 SPECIMEN_DIR = VERIFICATION / "specimens"
+FINISH_UNITS = VERIFICATION / "finish_units.json"
+AUTHORITATIVE_GRAPH = VERIFICATION / "authoritative_graph.json"
 
 # Kept in step with `image_format` in review_findings.py deliberately: a format this cannot name is
 # a format check S9 will reject after the file is committed.
@@ -391,6 +393,32 @@ def load_registry() -> dict:
     return json.loads(SPECIMENS_JSON.read_text(encoding="utf-8"))
 
 
+def source_first_release_for(
+    releases: list[dict], set_code: object, number: object, language: object
+) -> dict | None:
+    key = (str(set_code), str(number or "").split("/", 1)[0], str(language))
+    matches = [
+        payload for payload in releases
+        if payload.get("state") == "identified"
+        and payload.get("sourceFirstRecordIds")
+        and (str(payload.get("localSetCode") or payload.get("viaLegacySetCode")),
+             str(payload.get("localNumber") or payload.get("viaLegacyNumber") or "").split("/", 1)[0],
+             str(payload.get("language"))) == key
+    ]
+    if len(matches) > 1:
+        fail(f"ambiguous authoritative source-first release for {key}")
+    return matches[0] if matches else None
+
+
+def load_source_first_releases() -> list[dict]:
+    graph = json.loads(AUTHORITATIVE_GRAPH.read_text(encoding="utf-8-sig"))
+    return [
+        row.get("payload") or {}
+        for row in graph.get("entities", [])
+        if row.get("entityType") == "card-release"
+    ]
+
+
 def write_registry(doc: dict) -> None:
     # indent=2, ensure_ascii=False and a trailing newline round-trip the committed file exactly, so
     # filing a photograph produces a one-record diff rather than a reformat of the whole store.
@@ -627,9 +655,8 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
     if isinstance(manifest, dict) and manifest.get("issue") not in (None, args.issue):
         fail(f"manifest is for issue #{manifest['issue']}, not #{args.issue}")
     try:
-        finish_units = json.loads(
-            (VERIFICATION / "finish_units.json").read_text(encoding="utf-8-sig")
-        ).get("units", [])
+        finish_units = json.loads(FINISH_UNITS.read_text(encoding="utf-8-sig")).get("units", [])
+        source_first_releases = load_source_first_releases()
     except (OSError, ValueError, TypeError) as error:
         fail(f"cannot load canonical finish units: {error}")
     known_specimen_ids = {str(row.get("specimenId")) for row in doc.get("specimens", [])}
@@ -676,12 +703,16 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
             and str(unit.get("number")) == number
             and str(unit.get("language")) == str(item.get("language"))
         )), None)
-        if finish_unit is None:
-            fail(f"manifest row for {specimen_id} has no canonical finish unit")
         variant = str(item.get("variant") or "base")
-        if not any(str(product.get("variant")) == variant
-                   and product.get("claimStatus") != "contradicted"
-                   for product in finish_unit.get("products", [])):
+        if finish_unit is None:
+            source_first_release = source_first_release_for(
+                source_first_releases, item.get("setCode"), number, item.get("language")
+            )
+            if source_first_release is None or variant != "base":
+                fail(f"manifest row for {specimen_id} has no canonical finish unit or source-first release")
+        elif not any(str(product.get("variant")) == variant
+                     and product.get("claimStatus") != "contradicted"
+                     for product in finish_unit.get("products", [])):
             fail(f"manifest row for {specimen_id} has no canonical product variant {variant}")
         current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
         ensure_cited_identity(current, item)
@@ -691,12 +722,6 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         filename = f"{specimen_id}.{ext}"
         destination = SPECIMEN_DIR / filename
         ensure_specimen_id_available(current, existing, specimen_id, args.replace)
-        if current and current.get("photograph") and not args.replace:
-            if current.get("photograph") == filename and destination.is_file() \
-                    and destination.read_bytes() == blob:
-                print(f"{specimen_id} already carries these exact bytes — nothing to do")
-                continue
-            fail(f"{specimen_id} already has a photograph; pass --replace to overwrite it")
         if destination.is_file() and not current:
             fail(f"{destination.relative_to(ROOT)} exists without a matching specimen record")
 
@@ -721,6 +746,12 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
                                     if key not in {"photograph", "photographSource", "photographSha256"}}
             if existing_without_photo != record_without_photo:
                 fail(f"{specimen_id} metadata differs; pass --replace to update it")
+            if current.get("photograph"):
+                if current.get("photograph") == filename and destination.is_file() \
+                        and destination.read_bytes() == blob:
+                    print(f"{specimen_id} already carries these exact bytes — nothing to do")
+                    continue
+                fail(f"{specimen_id} already has a photograph; pass --replace to overwrite it")
         records.append(record)
         prepared.append((destination, blob))
         print(f"prepared {specimen_id}: {size[0]}x{size[1]} {ext} from attachment {selected_position}")
@@ -776,9 +807,7 @@ def command_evidence_check(*, check_projection: bool = True) -> int:
         and not str(row.get("photographSource") or "").startswith("/tmp/")
     ]
 
-    finish_document = json.loads(
-        (VERIFICATION / "finish_units.json").read_text(encoding="utf-8-sig")
-    )
+    finish_document = json.loads(FINISH_UNITS.read_text(encoding="utf-8-sig"))
     finish_by_key = {
         (str(unit.get("setCode")), str(unit.get("number")), str(unit.get("language"))): unit
         for unit in finish_document.get("units", [])
@@ -789,7 +818,15 @@ def command_evidence_check(*, check_projection: bool = True) -> int:
                str(specimen.get("language")))
         unit = finish_by_key.get(key)
         if not unit:
-            errors.append(f"{specimen['specimenId']}: finish unit is missing")
+            try:
+                source_first = source_first_release_for(
+                    load_source_first_releases(), specimen.get("setCode"), key[1], specimen.get("language")
+                )
+            except (OSError, ValueError, TypeError, KeyError) as error:
+                source_first = None
+                errors.append(f"{specimen['specimenId']}: source-first identity check failed: {error}")
+            if source_first is None:
+                errors.append(f"{specimen['specimenId']}: finish unit is missing")
             continue
         if not any(specimen["specimenId"] in (printing.get("specimenIds") or [])
                    for printing in unit.get("printings", [])):

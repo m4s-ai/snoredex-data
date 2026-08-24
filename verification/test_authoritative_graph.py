@@ -6,11 +6,13 @@ from __future__ import annotations
 import json
 import sqlite3
 import sys
+import tempfile
 from copy import deepcopy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+import authoritative_graph as graph_module  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
@@ -219,6 +221,47 @@ def main() -> None:
     assert any(
         "finish conflict claim" in error
         for error in validate(conflict_graph, identity_inputs={"finishes": conflicted_finishes})
+    )
+
+    # A conflicted specimen may identify a source-first release, but it must remain pending
+    # rather than materializing through the standalone-specimen fallback.
+    with tempfile.TemporaryDirectory() as directory:
+        finish_path = Path(directory) / "finish_units.json"
+        specimens_path = Path(directory) / "specimens.json"
+        finish_copy = json.loads(
+            (ROOT / "verification/finish_units.json").read_text(encoding="utf-8")
+        )
+        conflicted_printing = next(
+            printing for unit in finish_copy["units"]
+            for printing in unit.get("printings", [])
+        )
+        conflicted_printing["verificationStatus"] = "pending"
+        conflicted_printing["specimenIds"] = ["SPEC-0030"]
+        conflicted_printing["conflictsWith"] = ["SPEC-0040"]
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        specimens_path.write_text(
+            (ROOT / "verification/specimens.json").read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+        original_finish_path = graph_module.FINISH_UNITS
+        original_specimens_path = graph_module.SPECIMENS
+        graph_module.FINISH_UNITS = finish_path
+        graph_module.SPECIMENS = specimens_path
+        try:
+            conflict_projection = project_physical_evidence(deepcopy(graph))
+        finally:
+            graph_module.FINISH_UNITS = original_finish_path
+            graph_module.SPECIMENS = original_specimens_path
+    conflict_specimen_claim = next(
+        row["payload"] for row in conflict_projection["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceId") == "SPEC-0030"
+    )
+    assert conflict_specimen_claim["disposition"] == "candidate-needs-evidence"
+    assert conflict_specimen_claim["materializedTargetId"] is None
+    assert not any(
+        row["entityId"] == "PHYSICAL:specimen:SPEC-0030"
+        for row in conflict_projection["entities"]
     )
 
     identity = identity_view(graph)

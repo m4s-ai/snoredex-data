@@ -62,6 +62,13 @@ def main() -> None:
         {"specimenId": "SPEC-9999", "photograph": None}, None, "SPEC-9999", False
     ))
     assert fetch_attachment.validate(image, allow_small=False)[0] == "png"
+    graph = json.loads(
+        (ROOT / "verification" / "authoritative_graph.json").read_text(encoding="utf-8")
+    )
+    releases = [row["payload"] for row in graph["entities"]
+                if row["entityType"] == "card-release"]
+    source_first = fetch_attachment.source_first_release_for(releases, "S-P", "145", "T-Chinese")
+    assert source_first and source_first["cardReleaseId"].startswith("RELEASE:TW:T-Chinese:S-P:145")
     expect_failure(lambda: fetch_attachment.validate(b"not an image", allow_small=False))
     expect_failure(lambda: fetch_attachment.validate(image[:-12], allow_small=False))
     expect_failure(lambda: fetch_attachment.select_issue_attachment([], None, 1))
@@ -257,6 +264,100 @@ def main() -> None:
         manifest.unlink(missing_ok=True)
         registry.unlink(missing_ok=True)
         (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
+
+    # Source-first releases without a legacy finish unit use the authoritative card-release index.
+    source_first_issue = ROOT / ".fetch-attachment-test-source-first.html"
+    source_first_issue.write_text(
+        '<a href="https://github.com/user-attachments/assets/source-first">'
+        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+    )
+    source_first_manifest = ROOT / ".fetch-attachment-test-source-first-manifest.json"
+    source_first_manifest.write_text(json.dumps({"issue": 999, "observations": [{
+        "attachmentIndex": 1, "specimenId": "SPEC-0098", "setCode": "S-P", "number": "145",
+        "variant": "base", "language": "T-Chinese", "heldBy": "owner",
+        "inspectedFrom": "photo", "observed": "positive", "recordedAt": "2026-08-24",
+        "physicalObservation": {"finish": "mirror-holo", "basis": "observed card surface"},
+    }]}), encoding="utf-8")
+    source_first_units = ROOT / ".fetch-attachment-test-source-first-units.json"
+    source_first_units.write_text(json.dumps({"units": []}), encoding="utf-8")
+    source_first_registry = ROOT / ".fetch-attachment-test-source-first-registry.json"
+    source_first_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+    original_registry = fetch_attachment.SPECIMENS_JSON
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    original_finish_units = fetch_attachment.FINISH_UNITS
+    original_download_candidates = fetch_attachment.download_candidates
+    fetch_attachment.SPECIMENS_JSON = source_first_registry
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.FINISH_UNITS = source_first_units
+    fetch_attachment.download_candidates = lambda candidates: image
+    try:
+        source_first_doc = {"count": 0, "specimens": []}
+        assert fetch_attachment.command_issue(
+            source_first_doc,
+            SimpleNamespace(
+                issue=999, issue_html=str(source_first_issue), manifest=str(source_first_manifest),
+                allow_small=False, replace=False, dry_run=False,
+            ),
+        ) == 0
+        assert source_first_doc["specimens"][0]["setCode"] == "S-P"
+    finally:
+        fetch_attachment.SPECIMENS_JSON = original_registry
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        fetch_attachment.FINISH_UNITS = original_finish_units
+        fetch_attachment.download_candidates = original_download_candidates
+        source_first_issue.unlink(missing_ok=True)
+        source_first_manifest.unlink(missing_ok=True)
+        source_first_units.unlink(missing_ok=True)
+        source_first_registry.unlink(missing_ok=True)
+        (ROOT / "SPEC-0098.png").unlink(missing_ok=True)
+
+    # Identical bytes must still surface corrected metadata instead of returning an early no-op.
+    metadata_issue = ROOT / ".fetch-attachment-test-metadata.html"
+    metadata_issue.write_text(
+        '<a href="https://github.com/user-attachments/assets/metadata">'
+        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+    )
+    metadata_manifest = ROOT / ".fetch-attachment-test-metadata-manifest.json"
+    metadata_manifest.write_text(json.dumps({"issue": 999, "observations": [{
+        "attachmentIndex": 1, "specimenId": "SPEC-0098", "setCode": "JU", "number": "11",
+        "variant": "V1", "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
+        "observed": "positive", "recordedAt": "2026-08-24",
+        "physicalObservation": {"finish": "holo", "basis": "corrected basis"},
+    }]}), encoding="utf-8")
+    metadata_registry = ROOT / ".fetch-attachment-test-metadata-registry.json"
+    metadata_registry.write_text(json.dumps({"count": 1, "specimens": [{
+        "specimenId": "SPEC-0098", "setCode": "JU", "number": "11", "variant": "V1",
+        "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo", "observed": "positive",
+        "recordedAt": "2026-08-24", "physicalObservation": {
+            "finish": "holo", "basis": "old basis",
+        }, "photograph": "SPEC-0098.png",
+        "photographSource": "https://github.com/user-attachments/assets/metadata",
+        "photographSha256": digest,
+    }]}), encoding="utf-8")
+    metadata_photo = ROOT / "SPEC-0098.png"
+    metadata_photo.write_bytes(image)
+    original_registry = fetch_attachment.SPECIMENS_JSON
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    original_download_candidates = fetch_attachment.download_candidates
+    fetch_attachment.SPECIMENS_JSON = metadata_registry
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.download_candidates = lambda candidates: image
+    try:
+        expect_failure(lambda: fetch_attachment.command_issue(
+            json.loads(metadata_registry.read_text(encoding="utf-8")),
+            SimpleNamespace(
+                issue=999, issue_html=str(metadata_issue), manifest=str(metadata_manifest),
+                allow_small=False, replace=False, dry_run=False,
+            ),
+        ))
+    finally:
+        fetch_attachment.SPECIMENS_JSON = original_registry
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        fetch_attachment.download_candidates = original_download_candidates
+        metadata_issue.unlink(missing_ok=True)
+        metadata_manifest.unlink(missing_ok=True)
+        metadata_registry.unlink(missing_ok=True)
+        metadata_photo.unlink(missing_ok=True)
 
     # Signed-only issue HTML must match the stable issue provenance from a prior run.
     signed_issue_html = ROOT / ".fetch-attachment-test-signed-only.html"

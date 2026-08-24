@@ -100,6 +100,13 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     generated_edges: list[dict[str, Any]] = []
     generated_dispositions: list[dict[str, Any]] = []
     specimen_targets: dict[str, str] = {}
+    conflicted_specimen_ids = {
+        str(specimen_id)
+        for unit in finish_units
+        for printing in unit.get("printings", [])
+        if printing.get("conflictsWith")
+        for specimen_id in printing.get("specimenIds") or []
+    }
 
     for unit in finish_units:
         unit_key = (str(unit.get("setCode") or ""), _number(unit.get("number")),
@@ -207,7 +214,9 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             str(specimen.get("language") or ""),
         ))
         standalone_target = None
-        if not target and release_id and not observation.get("coversMultipleCards"):
+        if (not target and release_id and not observation.get("coversMultipleCards")
+                and not observation.get("conflictsWith")
+                and specimen_id not in conflicted_specimen_ids):
             standalone_target = f"PHYSICAL:specimen:{specimen_id}"
             target = standalone_target
             physical_payload = {
