@@ -173,6 +173,15 @@ The following operational scripts are intentionally outside the normal offline D
 - `scripts/publish.py` assembles and verifies the allowlisted public artifact.
 - `scripts/collector_deployment.py` binds the deployment manifest to the deployed commit.
 - `scripts/absence_model.py` supplies absence/application semantics to the evidence layer.
+- `scripts/measure_workflow.py` measures the selected core/CI/Pages lanes, declared store
+  reads, observed file deltas, and graph fan-out. It writes the diagnostic baseline to
+  `verification/workflow_runtime_baseline.json`; it is never part of the merge gate.
+
+The measurement separates declared ownership from observation: the gate matrix supplies
+the stores and projection roots a lane declares, while the runner records only the files
+that changed during each subprocess. Live-network and browser steps are explicit opt-ins;
+the default report marks them `not-run` instead of treating an unavailable environment as
+a passing check.
 
 They are invoked by a use-case or release workflow, not silently by an unrelated data
 projection.
