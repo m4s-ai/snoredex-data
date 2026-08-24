@@ -66,6 +66,29 @@ def main() -> None:
     assert {row["cardReleaseId"] for row in catalogue["items"]} == graph_release_ids
     assert counts["currentKnown"] == counts["verifiedPrintings"]
     assert counts["research"] == counts["finishCandidates"] + counts["researchPlaceholders"]
+    dutch_printings = {
+        row["physicalPrintingId"]: row
+        for row in catalogue["items"]
+        if row.get("physicalPrintingId") in {
+            "PHYSICAL:F0167-P01", "PHYSICAL:F0167-P02",
+            "PHYSICAL:F0174-P01", "PHYSICAL:F0174-P02",
+        }
+    }
+    assert {
+        printing_id: (row["finish"], row["edition"])
+        for printing_id, row in dutch_printings.items()
+    } == {
+        "PHYSICAL:F0167-P01": ("holo", "1st Edition"),
+        "PHYSICAL:F0167-P02": ("holo", "Unlimited"),
+        "PHYSICAL:F0174-P01": ("non-holo", "1st Edition"),
+        "PHYSICAL:F0174-P02": ("non-holo", "Unlimited"),
+    }
+    assert all(
+        row["itemKind"] == "verified-printing"
+        and row["imageScope"] == "exact-printing"
+        and row["imageAssetId"]
+        for row in dutch_printings.values()
+    )
     assert catalogue["qualitySummary"]["candidateProgressPolicy"] == {
         "progressClass": "research",
         "status": "fail-safe-default-pending-owner-decision",

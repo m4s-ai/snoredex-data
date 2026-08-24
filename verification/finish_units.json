@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-08-13",
+    "generated": "2026-08-24",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -20,6 +20,10 @@
         "reverse-holo",
         "mirror-holo",
         "unknown"
+      ],
+      "edition": [
+        "1st Edition",
+        "Unlimited"
       ],
       "verificationStatus": [
         "confirmed",
@@ -54,8 +58,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 333,
-      "withOnlyMarketplaceClaim": 103,
+      "withConfirmedFinish": 335,
+      "withOnlyMarketplaceClaim": 101,
       "pendingFinish": 126,
       "notApplicableFinish": 75,
       "withCompleteManifest": 4,
@@ -11782,34 +11786,63 @@
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "marketplace-claimed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "edition-stamp",
+              "text": "EDITIE 1",
+              "role": "print-identity"
+            }
+          ],
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Dutch Relaxo 11/64 in a CGC holder with visible EDITIE 1 stamp, holographic art field and a 1st Edition 11/64 Holo label; retained as SPEC-0041."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "edition": "1st Edition",
+          "image": "verification/specimens/SPEC-0041.png",
           "printingId": "F0167-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Full Dutch Relaxo 11/64 card face, identified by the collection owner as Unlimited, with the holographic artwork field visible; retained as SPEC-0040."
+            }
+          ],
+          "edition": "Unlimited",
+          "image": "verification/specimens/SPEC-0040.png",
+          "printingId": "F0167-P02"
         }
       ],
       "unresolved": []
@@ -12209,35 +12242,69 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "edition-stamp",
+              "text": "EDITIE 1",
+              "role": "print-identity"
+            }
+          ],
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+              "sourceType": "Cardmarket seller listing photograph",
+              "evidence": "Complete Dutch Relaxo 27/64 card face with visible EDITIE 1 stamp and non-holo art field; retained as SPEC-0042."
+            },
+            {
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
+              "sourceType": "Cardmarket seller listing photograph",
+              "evidence": "Independent complete Dutch Relaxo 27/64 scan corroborating EDITIE 1 and the non-holo treatment; retained as SPEC-0043."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "edition": "1st Edition",
+          "image": "verification/specimens/SPEC-0042.jpg",
           "printingId": "F0174-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Full Dutch Relaxo 27/64 card face, identified by the collection owner as Unlimited, with the non-holo art field visible; retained as SPEC-0044."
+            }
+          ],
+          "edition": "Unlimited",
+          "image": "verification/specimens/SPEC-0044.png",
+          "printingId": "F0174-P02"
         }
       ],
       "unresolved": []

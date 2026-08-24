@@ -1879,6 +1879,7 @@ def collect() -> None:
         # beside it. `basis` is what makes an assignment checkable — it quotes the record's own
         # words — so a block without one is an assertion with no author.
         SPECIMEN_FINISHES = {"non-holo", "holo", "reverse-holo", "mirror-holo"}
+        SPECIMEN_EDITIONS = {"1st Edition", "Unlimited"}
         SPECIMEN_MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
         malformed = []
         for specimen in specimens:
@@ -1890,6 +1891,9 @@ def collect() -> None:
                 malformed.append(f"{sid}: finish {observation.get('finish')!r}")
             if not str(observation.get("basis") or "").strip():
                 malformed.append(f"{sid}: no basis quoted")
+            edition = observation.get("edition")
+            if edition is not None and edition not in SPECIMEN_EDITIONS:
+                malformed.append(f"{sid}: edition {edition!r}")
             role = observation.get("markingRole")
             if role is not None and role not in SPECIMEN_MARKING_ROLES:
                 malformed.append(f"{sid}: markingRole {role!r}")

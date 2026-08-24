@@ -443,7 +443,7 @@ def validate(
         if not physical:
             errors.append(f"finish printing target is missing: {print_id}")
             continue
-        for field in ("finish", "foilPattern", "markings", "distribution", "cardSize"):
+        for field in ("finish", "edition", "foilPattern", "markings", "distribution", "cardSize"):
             if physical.get(field) != printing.get(field):
                 errors.append(f"finish printing is stale: {print_id}:{field}")
         if physical.get("sourceFinishUnitId") != finish_unit_id or physical.get("sourcePrintingId") != print_id:
@@ -539,7 +539,7 @@ def validate(
         if not physical:
             errors.append(f"specimen printing target is missing: {specimen_id}")
             continue
-        for field in ("finish", "foilPattern", "cardSize"):
+        for field in ("finish", "edition", "foilPattern", "cardSize"):
             if physical.get(field) != observation.get(field):
                 errors.append(f"specimen printing is stale: {specimen_id}:{field}")
         if (physical.get("markings") or []) != specimen_markings(observation):

@@ -126,9 +126,9 @@ Current-known status snapshot: **2026-08-24**. Its candidate denominator is the 
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 635 externally confirmed, 84 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Evidence-safe application status | **618 established**, **17 needs evidence**, **80 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
-| Current-known physical checklist | **826 items** across 174 cards and 15 languages: 662 documented printings plus 164 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 333 externally confirmed, 103 marketplace-only positives, 126 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 221 units. |
-| Evidence registry | **24 providers**, 896 evidence records, 889 unique URLs, and 2,796 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
+| Current-known physical checklist | **826 items** across 174 cards and 15 languages: 666 documented printings plus 160 explicit unresolved placeholders. |
+| Current-known finish evidence | **637 card-number × language units**: 335 externally confirmed, 101 marketplace-only positives, 126 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 221 units. |
+| Evidence registry | **24 providers**, 901 evidence records, 894 unique URLs, and 2,804 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |

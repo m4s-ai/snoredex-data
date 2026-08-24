@@ -606,7 +606,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             error_class = None
             verification_status = "pending"
 
-        if old and old.get("edition") not in (None, "—"):
+        if physical and physical.get("edition"):
+            edition_value = physical["edition"]
+            edition_status = "assigned"
+        elif old and old.get("edition") not in (None, "—"):
             edition_value = old["edition"]
             edition_status = "assigned" if old.get("editionScope") != "unresolved" else "unresolved"
         elif old and old.get("editionScope") == "no-edition-system":
@@ -649,6 +652,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
 
         image_path = (old or {}).get("image")
         image_scope = "legacy-product" if image_path else "unknown"
+        if image_path and str(image_path).startswith("verification/specimens/"):
+            image_scope = "exact-printing"
         if physical and physical["physicalPrintingId"].startswith("PHYSICAL:specimen:"):
             specimen_id = physical["physicalPrintingId"].split("PHYSICAL:specimen:", 1)[1]
             photograph = specimens.get(specimen_id, {}).get("photograph")
