@@ -13,6 +13,13 @@ MANIFEST = ROOT / "verification" / "scoped_pipeline_manifest.json"
 MATRIX = ROOT / "verification" / "workflow_gate_matrix.json"
 
 
+def remove_empty(path: Path) -> None:
+    try:
+        path.rmdir()
+    except OSError:
+        pass
+
+
 def main() -> int:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     matrix = json.loads(MATRIX.read_text(encoding="utf-8"))
@@ -75,6 +82,8 @@ def main() -> int:
         assert first_report == second_report, "same pinned scoped run must be idempotent"
     finally:
         report_path.unlink(missing_ok=True)
+        remove_empty(report_path.parent)
+        remove_empty(report_path.parent.parent)
 
     print(f"scoped regen contract passed: {len(lanes)} lanes, {sum(len(lane['steps']) for lane in lanes.values())} steps")
     return 0

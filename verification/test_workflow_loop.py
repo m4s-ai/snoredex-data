@@ -13,6 +13,13 @@ MANIFEST = ROOT / "verification" / "workflow_loop_manifest.json"
 LOOP = ROOT / "scripts" / "workflow_loop.py"
 
 
+def remove_empty(path: Path) -> None:
+    try:
+        path.rmdir()
+    except OSError:
+        pass
+
+
 def main() -> int:
     document = json.loads(MANIFEST.read_text(encoding="utf-8"))
     loops = {loop["id"]: loop for loop in document["loops"]}
@@ -100,6 +107,8 @@ def main() -> int:
     finally:
         for report in reports:
             report.unlink(missing_ok=True)
+        remove_empty(reports[0].parent)
+        remove_empty(reports[0].parent.parent)
 
     print(f"workflow loop contract passed: {len(loops)} loops, bounded stop semantics and positive-evidence guard")
     return 0
