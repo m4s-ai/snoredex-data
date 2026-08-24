@@ -100,6 +100,8 @@ SPECIMEN_ID_PATTERN = re.compile(r"SPEC-\d{4}\Z")
 SPECIMEN_FINISHES = {"non-holo", "holo", "reverse-holo", "mirror-holo"}
 SPECIMEN_EDITIONS = {"1st Edition", "Unlimited"}
 SPECIMEN_MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
+SPECIMEN_CARD_SIZES = {"standard", "jumbo", "unknown"}
+DISTRIBUTION_FIELDS = {"kind", "name", "region", "date", "text"}
 
 # The one namespace the proxy refuses, in both the current and the historical form. Detected by
 # hand so the failure is a sentence a person can act on rather than an opaque 403.
@@ -359,23 +361,45 @@ def ensure_cited_identity(current: dict | None, candidate: dict) -> None:
 def validate_observation(
     physical: object, specimen_id: str, known_specimen_ids: set[str] | None = None
 ) -> dict:
-    if not isinstance(physical, dict) or not physical.get("finish"):
+    if not isinstance(physical, dict):
+        fail(f"manifest row for {specimen_id} needs physicalObservation")
+    finish = physical.get("finish")
+    if not isinstance(finish, str) or not finish:
         fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
-    if physical["finish"] not in SPECIMEN_FINISHES:
+    if finish not in SPECIMEN_FINISHES:
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.finish")
     if not isinstance(physical.get("basis"), str) or not physical["basis"].strip():
         fail(f"manifest row for {specimen_id} needs physicalObservation.basis")
     edition = physical.get("edition")
-    if edition is not None and edition not in SPECIMEN_EDITIONS:
+    if edition is not None and (not isinstance(edition, str) or edition not in SPECIMEN_EDITIONS):
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.edition")
+    foil_pattern = physical.get("foilPattern")
+    if foil_pattern is not None and not isinstance(foil_pattern, str):
+        fail(f"manifest row for {specimen_id} needs text physicalObservation.foilPattern")
     markings = physical.get("markings")
     role = physical.get("markingRole")
     if markings is not None and not isinstance(markings, str):
         fail(f"manifest row for {specimen_id} needs text physicalObservation.markings")
-    if markings and role not in SPECIMEN_MARKING_ROLES:
+    if markings and (not isinstance(role, str) or role not in SPECIMEN_MARKING_ROLES):
         fail(f"manifest row for {specimen_id} needs a valid physicalObservation.markingRole")
-    if role is not None and role not in SPECIMEN_MARKING_ROLES:
+    if role is not None and (not isinstance(role, str) or role not in SPECIMEN_MARKING_ROLES):
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.markingRole")
+    distribution = physical.get("distribution")
+    if distribution is not None and (
+        not isinstance(distribution, dict)
+        or set(distribution) - DISTRIBUTION_FIELDS
+        or any(value is not None and not isinstance(value, str)
+               for value in distribution.values())
+    ):
+        fail(f"manifest row for {specimen_id} has invalid physicalObservation.distribution")
+    card_size = physical.get("cardSize")
+    if card_size is not None and (
+        not isinstance(card_size, str) or card_size not in SPECIMEN_CARD_SIZES
+    ):
+        fail(f"manifest row for {specimen_id} has invalid physicalObservation.cardSize")
+    covers_multiple_cards = physical.get("coversMultipleCards")
+    if covers_multiple_cards is not None and not isinstance(covers_multiple_cards, bool):
+        fail(f"manifest row for {specimen_id} needs boolean physicalObservation.coversMultipleCards")
     conflicts = physical.get("conflictsWith")
     if conflicts is not None and (
         not isinstance(conflicts, list)

@@ -148,6 +148,22 @@ def main() -> None:
         "SPEC-9995"
     ))
     expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface", "foilPattern": ["poke-ball"]},
+        "SPEC-9995"
+    ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface", "distribution": "fixed-deck"},
+        "SPEC-9995"
+    ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface",
+         "distribution": {"kind": 7}}, "SPEC-9995"
+    ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface", "cardSize": 1},
+        "SPEC-9995"
+    ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
         {"finish": "holo", "basis": "observed card surface", "markings": "EDITIE 1"},
         "SPEC-9995"
     ))
