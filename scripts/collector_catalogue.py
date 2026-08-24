@@ -95,17 +95,39 @@ def printing_semantic_key(release_id: str, printing: dict[str, Any]) -> bytes:
     return canonical_bytes(payload)
 
 
+def printing_semantic_core_key(release_id: str, printing: dict[str, Any]) -> bytes:
+    """Identity fields that remain comparable when the edition is unknown on one side."""
+    payload = {
+        "scope": release_id,
+        "finish": printing.get("finish"),
+        "foilPattern": normalized_foil_pattern(printing.get("foilPattern")),
+        "markings": normalized_markings(printing.get("markings")) or None,
+        "distribution": printing.get("distribution") or None,
+        "cardSize": printing.get("cardSize") or "unknown",
+    }
+    return canonical_bytes(payload)
+
+
 def legacy_match_for_physical(
     physical: dict[str, Any],
-    source_printing_id: str | None,
-    legacy_by_printing: dict[str, dict[str, Any]],
     legacy_by_semantic: dict[bytes, dict[str, Any]],
+    legacy_by_core: dict[bytes, list[dict[str, Any]]],
 ) -> dict[str, Any] | None:
-    """Prefer semantic identity so a shifted positional source id cannot steal state."""
+    """Match predecessor state semantically; never let an ordinal id steal a row."""
     semantic = legacy_by_semantic.get(
         printing_semantic_key(str(physical.get("cardReleaseId") or ""), physical)
     )
-    return semantic or legacy_by_printing.get(source_printing_id)
+    if semantic:
+        return semantic
+    candidates = legacy_by_core.get(
+        printing_semantic_core_key(str(physical.get("cardReleaseId") or ""), physical), []
+    )
+    compatible = [
+        row for row in candidates
+        if physical.get("edition") is None
+        or row.get("edition") in (None, "—", physical.get("edition"))
+    ]
+    return compatible[0] if len(compatible) == 1 else None
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -479,8 +501,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     legacy_release = {
         row["checklistId"]: legacy_release_id(row, release_index) for row in legacy_items
     }
-    legacy_by_printing = {row["printingId"]: row for row in legacy_items if row.get("printingId")}
     legacy_by_semantic: dict[bytes, dict[str, Any]] = {}
+    legacy_by_core: defaultdict[bytes, list[dict[str, Any]]] = defaultdict(list)
     for row in legacy_items:
         if not row.get("printingId"):
             continue
@@ -492,6 +514,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
                 f"{row['checklistId']} and {previous['checklistId']}"
             )
         legacy_by_semantic[key] = row
+        legacy_by_core[printing_semantic_core_key(legacy_release[row["checklistId"]], row)].append(row)
     legacy_by_release: defaultdict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in legacy_items:
         legacy_by_release[legacy_release[row["checklistId"]]].append(row)
@@ -778,7 +801,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     for physical in physicals.values():
         source_printing_id = physical.get("sourcePrintingId")
         old = legacy_match_for_physical(
-            physical, source_printing_id, legacy_by_printing, legacy_by_semantic
+            physical, legacy_by_semantic, legacy_by_core
         )
         unit = unit_by_printing.get(source_printing_id)
         claim = claims[physical["establishingClaimId"]]
