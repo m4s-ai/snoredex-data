@@ -436,7 +436,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 1,
         "coverage": "individual cards whose text and markings were read from a photograph",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish"],
+        "usedFor": ["language", "finish", "edition"],
         "attribution": "Physical card, inspected specimen.",
         "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
     },
@@ -455,7 +455,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 2,
         "coverage": "individual cards whose text and markings were read from a seller's listing photograph",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish"],
+        "usedFor": ["language", "finish", "edition"],
         "attribution": "Seller listing photograph via Cardmarket.",
         "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
     },
@@ -534,6 +534,10 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
     follows. Across all 719 units that agrees with the stored `providerId` every time; the previous
     rule disagreed three times. Check `S15` holds it there.
     """
+    # A photograph is the evidence object even when its CDN hostname belongs to the
+    # marketplace catalogue.  Keep that narrower provider ahead of host inference.
+    if source_type and re.search(r"cardmarket.*(?:seller|listing).*photograph", source_type, re.I):
+        return "cardmarket-listing-photo"
     if url:
         host = urlsplit(url).netloc.lower()
         if host in HOST_TO_PROVIDER:

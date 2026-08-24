@@ -50,6 +50,12 @@ FINISH_FAMILY = {
     "unknown": "unknown",
 }
 IMAGE_SCOPE_RANK = {"unknown": 0, "legacy-product": 1, "card-release": 2, "exact-printing": 3}
+CUMULATIVE_CHECKLIST_REKEYS = {
+    "ju-11-dutch-1e-unresolved-unknown": "ju-11-dutch-1e-holo-edition-stamp-editie-1",
+    "ju-11-dutch-unl-unresolved-unknown": "ju-11-dutch-unl-holo",
+    "ju-27-dutch-1e-unresolved-unknown": "ju-27-dutch-1e-non-holo-edition-stamp-editie-1",
+    "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
+}
 
 
 class ContractError(ValueError):
@@ -606,7 +612,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             error_class = None
             verification_status = "pending"
 
-        if old and old.get("edition") not in (None, "—"):
+        if physical and physical.get("edition"):
+            edition_value = physical["edition"]
+            edition_status = "assigned"
+        elif old and old.get("edition") not in (None, "—"):
             edition_value = old["edition"]
             edition_status = "assigned" if old.get("editionScope") != "unresolved" else "unresolved"
         elif old and old.get("editionScope") == "no-edition-system":
@@ -649,6 +658,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
 
         image_path = (old or {}).get("image")
         image_scope = "legacy-product" if image_path else "unknown"
+        if image_path and str(image_path).startswith("verification/specimens/"):
+            image_scope = "exact-printing"
         if physical and physical["physicalPrintingId"].startswith("PHYSICAL:specimen:"):
             specimen_id = physical["physicalPrintingId"].split("PHYSICAL:specimen:", 1)[1]
             photograph = specimens.get(specimen_id, {}).get("photograph")
@@ -861,6 +872,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     }
     if set(item_by_physical) != set(physicals):
         raise ContractError("initial catalogue does not account for every graph physical printing")
+    cumulative_item_by_legacy = {
+        old_id: item_by_legacy[new_id]
+        for old_id, new_id in CUMULATIVE_CHECKLIST_REKEYS.items()
+    }
 
     items_by_release: defaultdict[str, list[str]] = defaultdict(list)
     for row in items:
@@ -889,12 +904,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         },
         "transitions": [
             {
-                "fromItemId": row["checklistId"],
-                "toItemIds": [item_by_legacy[row["checklistId"]]],
+                "fromItemId": legacy_id,
+                "toItemIds": [target_id],
                 "changeKind": "rekey-1:1",
                 "automaticStateAction": "preserve",
             }
-            for row in sorted(legacy_items, key=lambda value: value["checklistId"])
+            for legacy_id, target_id in sorted(
+                (item_by_legacy | cumulative_item_by_legacy).items()
+            )
         ] + graph_only_transitions,
         "graphRekeys": [
             {
@@ -1172,6 +1189,18 @@ def validate_migrations(
     if any(len(row.get("toItemIds") or []) != 1 or row["toItemIds"][0] not in item_ids
            for row in legacy_transitions.values()):
         errors.append("initial 1:1 migration has an unresolved target")
+    item_by_legacy = {
+        legacy_id: row["itemId"]
+        for row in catalogue["items"]
+        for legacy_id in row.get("legacyChecklistIds") or []
+    }
+    if any(
+        transition_by_source.get(old_id, {}).get("toItemIds") != [item_by_legacy.get(new_id)]
+        or transition_by_source.get(old_id, {}).get("changeKind") != "rekey-1:1"
+        or transition_by_source.get(old_id, {}).get("automaticStateAction") != "preserve"
+        for old_id, new_id in CUMULATIVE_CHECKLIST_REKEYS.items()
+    ):
+        errors.append("cumulative checklist rekeys differ from their replacement items")
 
     accounting = migrations.get("accounting", {})
     graph_releases = {row["cardReleaseId"] for row in entity_payloads(graph, "card-release")}
@@ -1188,7 +1217,9 @@ def validate_migrations(
         for release_id in graph_releases - releases_with_legacy_rows
         if item_id("research:card-release:" + release_id) not in item_ids
     }
-    expected_transition_sources = legacy_ids | set(graph_alias_by_release.values())
+    expected_transition_sources = (
+        legacy_ids | set(CUMULATIVE_CHECKLIST_REKEYS) | set(graph_alias_by_release.values())
+    )
     if set(transition_by_source) != expected_transition_sources:
         errors.append("cumulative graph-only item transitions differ from the catalogue")
     items_by_release: defaultdict[str, list[str]] = defaultdict(list)

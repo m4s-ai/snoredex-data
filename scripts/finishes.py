@@ -268,6 +268,7 @@ def source_signature(source: dict[str, Any]) -> str:
 def printing_signature(printing: dict[str, Any]) -> str:
     identity = {
         "finish": printing["finish"],
+        "edition": printing.get("edition"),
         "foilPattern": printing.get("foilPattern"),
         "markings": printing.get("markings"),
         "distribution": printing.get("distribution"),
@@ -353,6 +354,8 @@ def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") 
         "verificationStatus": printing["verificationStatus"],
         "productMapping": product_mapping,
     }
+    if printing.get("edition"):
+        compact["edition"] = printing["edition"]
     if printing.get("releaseDate"):
         compact["releaseDate"] = printing["releaseDate"]
     # An explicit null suppresses a Cardmarket product image for a physical printing whose
@@ -708,6 +711,8 @@ def main() -> None:
                     ),
                     "_origin": "manual",
                 }
+                if "edition" in manual:
+                    candidate["edition"] = manual["edition"]
                 if "releaseDate" in manual:
                     candidate["releaseDate"] = manual["releaseDate"]
                 if "image" in manual:
@@ -725,6 +730,7 @@ def main() -> None:
         printings.sort(
             key=lambda item: (
                 FINISHES.index(item["finish"]) if item["finish"] in FINISHES else 99,
+                str(item.get("edition") or ""),
                 str(item.get("releaseDate") or ""),
                 str(item.get("foilPattern") or ""),
                 json.dumps(item.get("markings"), ensure_ascii=False, sort_keys=True),
@@ -935,6 +941,7 @@ def main() -> None:
             ],
             "taxonomy": {
                 "finish": list(FINISHES) + ["unknown"],
+                "edition": ["1st Edition", "Unlimited"],
                 "verificationStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending"],
                 "availabilityStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending", "not-applicable"],
                 "cardSize": ["standard", "jumbo", "unknown"],

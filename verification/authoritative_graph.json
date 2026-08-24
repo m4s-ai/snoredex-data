@@ -4485,12 +4485,11 @@
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
         "sourceId": "F0167-P01",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:F0167-P01",
-        "materializedTargetId": null,
-        "reason": "marketplace-only or unresolved physical classification cannot establish a node",
-        "proposedCardReleaseId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam"
+        "materializedTargetId": "PHYSICAL:F0167-P01",
+        "reason": "issue #269 physical photographs confirm the exact finish and edition"
       }
     },
     {
@@ -4601,12 +4600,11 @@
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
         "sourceId": "F0174-P01",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:F0174-P01",
-        "materializedTargetId": null,
-        "reason": "marketplace-only or unresolved physical classification cannot establish a node",
-        "proposedCardReleaseId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam"
+        "materializedTargetId": "PHYSICAL:F0174-P01",
+        "reason": "issue #269 physical photographs confirm the exact finish and edition"
       }
     },
     {
@@ -125985,6 +125983,210 @@
         "reviewedAt": "2026-08-24",
         "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254"
       }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:F0167-P01",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:F0167-P01",
+        "cardReleaseId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+        "finish": "holo",
+        "edition": "1st Edition",
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "edition-stamp",
+            "text": "EDITIE 1",
+            "role": "print-identity"
+          }
+        ],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0167",
+        "sourcePrintingId": "F0167-P01",
+        "establishingClaimId": "CLAIM:finish:F0167-P01"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:F0167-P02",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "claimId": "CLAIM:finish:F0167-P02",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0167-P02",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:F0167-P02",
+        "materializedTargetId": "PHYSICAL:F0167-P02",
+        "reason": "issue #269 physical photographs confirm the exact finish and edition"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:F0167-P02",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:F0167-P02",
+        "cardReleaseId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+        "finish": "holo",
+        "edition": "Unlimited",
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0167",
+        "sourcePrintingId": "F0167-P02",
+        "establishingClaimId": "CLAIM:finish:F0167-P02"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:F0174-P01",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:F0174-P01",
+        "cardReleaseId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+        "finish": "non-holo",
+        "edition": "1st Edition",
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "edition-stamp",
+            "text": "EDITIE 1",
+            "role": "print-identity"
+          }
+        ],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0174",
+        "sourcePrintingId": "F0174-P01",
+        "establishingClaimId": "CLAIM:finish:F0174-P01"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:F0174-P02",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "claimId": "CLAIM:finish:F0174-P02",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0174-P02",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:F0174-P02",
+        "materializedTargetId": "PHYSICAL:F0174-P02",
+        "reason": "issue #269 physical photographs confirm the exact finish and edition"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:F0174-P02",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:F0174-P02",
+        "cardReleaseId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+        "finish": "non-holo",
+        "edition": "Unlimited",
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0174",
+        "sourcePrintingId": "F0174-P02",
+        "establishingClaimId": "CLAIM:finish:F0174-P02"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0040",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0040",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0040",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0040",
+        "materializedTargetId": null,
+        "reason": "corroborates PHYSICAL:F0167-P02, already established from the finish store"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0041",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0041",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0041",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0041",
+        "materializedTargetId": null,
+        "reason": "corroborates PHYSICAL:F0167-P01, already established from the finish store"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0042",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0042",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0042",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0042",
+        "materializedTargetId": null,
+        "reason": "corroborates PHYSICAL:F0174-P01, already established from the finish store"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0043",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0043",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0043",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0043",
+        "materializedTargetId": null,
+        "reason": "corroborates PHYSICAL:F0174-P01, already established from the finish store"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0044",
+      "origin": "issue-269-dutch-physical-evidence",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0044",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0044",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0044",
+        "materializedTargetId": null,
+        "reason": "corroborates PHYSICAL:F0174-P02, already established from the finish store"
+      }
     }
   ],
   "edges": [
@@ -203501,17 +203703,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0167-P01",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
-      "provenance": {
-        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
-        "reviewedAt": "2026-08-24"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:F0171-P01",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -203538,17 +203729,6 @@
       "relation": "proposes-for",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Portuguese:JU:27:Snorlax-Thick-Skinned-Body-Slam",
-      "provenance": {
-        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
-        "reviewedAt": "2026-08-24"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0174-P01",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
       "provenance": {
         "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
         "reviewedAt": "2026-08-24"
@@ -210901,6 +211081,110 @@
         "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
         "reviewedAt": "2026-08-24"
       }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:F0167-P01",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:F0167-P01",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0167-P01",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:F0167-P01",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0167-P01",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:F0167-P02",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:F0167-P02",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0167-P02",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:F0167-P02",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0167-P02",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:F0174-P01",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:F0174-P01",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0174-P01",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:F0174-P01",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0174-P01",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:F0174-P02",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:F0174-P02",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0174-P02",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:F0174-P02",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:F0174-P02",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
     }
   ],
   "migrationDispositions": [
@@ -212818,9 +213102,9 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0167-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "marketplace-only or unresolved physical classification cannot establish a node"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:F0167-P01",
+      "reason": "issue #269 physical photographs confirm the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -212867,9 +213151,9 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0174-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "marketplace-only or unresolved physical classification cannot establish a node"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:F0174-P01",
+      "reason": "issue #269 physical photographs confirm the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -226721,17 +227005,66 @@
       "targetRef": null,
       "targetRefs": [],
       "reason": "issue #84 re-key"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0167-P02",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:F0167-P02",
+      "reason": "issue #269 physical photographs confirm the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0174-P02",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:F0174-P02",
+      "reason": "issue #269 physical photographs confirm the exact finish and edition"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0040",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "corroborates PHYSICAL:F0167-P02, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0041",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "corroborates PHYSICAL:F0167-P01, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0042",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "corroborates PHYSICAL:F0174-P01, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0043",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "corroborates PHYSICAL:F0174-P01, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0044",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "corroborates PHYSICAL:F0174-P02, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 6443,
-    "edges": 9721,
-    "migrationInputs": 2109,
+    "entities": 6454,
+    "edges": 9731,
+    "migrationInputs": 2116,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 227,
+      "candidate-needs-evidence": 230,
       "carried": 67,
-      "established-and-mapped": 1159,
+      "established-and-mapped": 1163,
       "linked-local-counterpart": 4,
       "mapped": 216,
       "needs-evidence": 127,
@@ -226739,9 +227072,9 @@
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1545,
+    "candidateClaims": 1552,
     "cardReleases": 612,
-    "physicalPrintings": 474,
+    "physicalPrintings": 478,
     "setSourceRecords": 345,
     "setSourceDispositions": 345,
     "localizations": 16

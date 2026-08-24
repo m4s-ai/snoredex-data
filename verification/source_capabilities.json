@@ -2486,12 +2486,12 @@
       "surfaceId": "cardmarket-listing-photos",
       "providerId": "cardmarket-listing-photo",
       "label": "Stable seller listing photographs",
-      "state": "needs-evidence",
-      "failureState": "No accepted stable seller-photo fixture is currently used by a verdict.",
+      "state": "active",
+      "failureState": null,
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Activate only with listing id, seller photo, capture date and specimen identity review.",
+      "lastCheckedAt": "2026-08-24",
+      "freshnessPolicy": "Retain listing id, original seller image, capture date and specimen identity review for every accepted claim.",
       "query": {
         "method": "MANUAL",
         "endpoint": "Cardmarket listing URL when retained",
@@ -2513,7 +2513,55 @@
         "publicationForm": "seller photograph of one identified card",
         "closedWithinScope": false
       },
-      "coverageEdges": []
+      "coverageEdges": [
+        {
+          "edgeId": "cardmarket-listing-photo-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "marketplace-specimen"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "retained photographed listings only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "finish",
+            "edition",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Marketplace inventory is transient and each photograph proves only the visible properties of that specimen."
+          },
+          "knownPositiveObservationId": "obs-cardmarket-listing-photo",
+          "boundary": {
+            "outsideScope": [
+              "other listings",
+              "sold or removed stock",
+              "unphotographed variants",
+              "complete set"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A retained seller photograph cannot prove that no other language, edition or treatment exists."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -3217,6 +3265,29 @@
         "inspected-specimen-positive"
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen."
+    },
+    {
+      "observationId": "obs-cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "kind": "known-positive",
+      "queryUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+      "queryParameters": {
+        "listingImageId": "2122869820"
+      },
+      "retrievedAt": "2026-08-24",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "cardmarket-listing-photo",
+        "recordKey": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg"
+      },
+      "expectedIdentifiers": [
+        "2122869820",
+        "F0174-P01"
+      ],
+      "validatesEdges": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "outcome": "The retained seller photograph visibly establishes the Dutch first-edition non-holo printing of Jungle 27/64."
     },
     {
       "observationId": "obs-bulbapedia-historical-index",

@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-24",
-  "projectionVersion": "681d61651d0896398a759285d235f838e16e02c6ab0171f553be3586243a93e1",
+  "projectionVersion": "f39e95d0d65e2dd9bf2fbbfb7f69b75f438303d297b9157740b20be59a07b67d",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 474,
-    "sourceObservations": 1613
+    "physicalPrintings": 478,
+    "sourceObservations": 1618
   },
   "groups": [
     {
@@ -41201,7 +41201,63 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:F0174-P01",
+              "cardReleaseId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "non-holo",
+              "edition": "1st Edition",
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "edition-stamp",
+                  "text": "EDITIE 1",
+                  "role": "print-identity"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0174",
+              "sourcePrintingId": "F0174-P01",
+              "establishingClaimId": "CLAIM:finish:F0174-P01",
+              "sources": [
+                {
+                  "url": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+                  "sourceType": "Cardmarket seller listing photograph",
+                  "evidence": "Complete Dutch Snorlax 27/64 card face with visible EDITIE 1 stamp and non-holo art field; retained as SPEC-0042."
+                },
+                {
+                  "url": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
+                  "sourceType": "Cardmarket seller listing photograph",
+                  "evidence": "Independent complete Dutch Snorlax 27/64 scan corroborating EDITIE 1 and the non-holo treatment; retained as SPEC-0043."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:F0174-P02",
+              "cardReleaseId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "non-holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0174",
+              "sourcePrintingId": "F0174-P02",
+              "establishingClaimId": "CLAIM:finish:F0174-P02",
+              "sources": [
+                {
+                  "url": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full Dutch Snorlax 27/64 card face, identified by the collection owner as Unlimited, with the non-holo art field visible; retained as SPEC-0044."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -41211,7 +41267,9 @@
               "non-holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "EDITIE 1"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -41226,6 +41284,33 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0174-P01:0:f565cf96e63bc1df",
+              "kind": "finish",
+              "provider": "Cardmarket seller listing photograph",
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+              "evidence": "Complete Dutch Snorlax 27/64 card face with visible EDITIE 1 stamp and non-holo art field; retained as SPEC-0042.",
+              "contentHash": "c5074a2ce3bac2748f6f11d21eb736e320bf0bbc2c1aad1cada0bc7cc83b97a8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0174-P01:1:eb3212c66332304a",
+              "kind": "finish",
+              "provider": "Cardmarket seller listing photograph",
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
+              "evidence": "Independent complete Dutch Snorlax 27/64 scan corroborating EDITIE 1 and the non-holo treatment; retained as SPEC-0043.",
+              "contentHash": "76b7a052e24bf6319ca977e83febc5193d8fba0be665e66c19d41c2aa604dd14",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0174-P02:0:a53413cb07563c7d",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
+              "evidence": "Full Dutch Snorlax 27/64 card face, identified by the collection owner as Unlimited, with the non-holo art field visible; retained as SPEC-0044.",
+              "contentHash": "479a69c8c58d16e8de6686b7e7285eb536263621819c9f7ff24d010458cc5049",
+              "image": null
+            },
             {
               "observationId": "unit:U0095",
               "kind": "unit",
@@ -41736,7 +41821,58 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:F0167-P01",
+              "cardReleaseId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": "1st Edition",
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "edition-stamp",
+                  "text": "EDITIE 1",
+                  "role": "print-identity"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0167",
+              "sourcePrintingId": "F0167-P01",
+              "establishingClaimId": "CLAIM:finish:F0167-P01",
+              "sources": [
+                {
+                  "url": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Dutch Snorlax 11/64 in a CGC holder with visible EDITIE 1 stamp, holographic art field and a 1st Edition 11/64 Holo label; retained as SPEC-0041."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:F0167-P02",
+              "cardReleaseId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0167",
+              "sourcePrintingId": "F0167-P02",
+              "establishingClaimId": "CLAIM:finish:F0167-P02",
+              "sources": [
+                {
+                  "url": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full Dutch Snorlax 11/64 card face, identified by the collection owner as Unlimited, with the holographic artwork field visible; retained as SPEC-0040."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -41746,7 +41882,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "EDITIE 1"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -41761,6 +41899,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0167-P01:0:e34771845ddd1627",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
+              "evidence": "Dutch Snorlax 11/64 in a CGC holder with visible EDITIE 1 stamp, holographic art field and a 1st Edition 11/64 Holo label; retained as SPEC-0041.",
+              "contentHash": "ef8892d9b9898847212f92313a7c3db91472ccfe881b642757ca531dc433e2b4",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0167-P02:0:8fbf2cc3a6388ee0",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
+              "evidence": "Full Dutch Snorlax 11/64 card face, identified by the collection owner as Unlimited, with the holographic artwork field visible; retained as SPEC-0040.",
+              "contentHash": "546c3d79f53753f66d16c5cd63b73b81697d216cdb995429023c6e8ce8e50cfb",
+              "image": null
+            },
             {
               "observationId": "unit:U0125",
               "kind": "unit",

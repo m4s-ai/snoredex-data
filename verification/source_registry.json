@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 24,
-   "evidenceRecords": 896,
-   "uniqueUrls": 889,
+   "evidenceRecords": 901,
+   "uniqueUrls": 894,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2796
+   "claimsAttributed": 2804
   }
  },
  "providers": [
@@ -400,7 +400,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 397,
-   "claimsSupported": 933
+   "claimsSupported": 931
   },
   {
    "providerId": "pokemontcgio",
@@ -551,13 +551,14 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
-    "finish"
+    "finish",
+    "edition"
    ],
    "attribution": "Physical card, inspected specimen.",
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
-   "uniqueSources": 1,
-   "claimsSupported": 9
+   "uniqueSources": 3,
+   "claimsSupported": 15
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -571,13 +572,14 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
-    "finish"
+    "finish",
+    "edition"
    ],
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 0,
-   "claimsSupported": 0
+   "uniqueSources": 2,
+   "claimsSupported": 4
   }
  ],
  "evidence": [
@@ -7343,7 +7345,7 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 8,
+   "stableIdCount": 7,
    "stableIds": [
     "F0161-P01",
     "F0162-P01",
@@ -7351,11 +7353,10 @@
     "F0164-P01",
     "F0165-P01",
     "F0166-P01",
-    "F0167-P01",
     "JU 11 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 8
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
@@ -7369,7 +7370,7 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 8,
+   "stableIdCount": 7,
    "stableIds": [
     "F0168-P01",
     "F0169-P01",
@@ -7377,11 +7378,10 @@
     "F0171-P01",
     "F0172-P01",
     "F0173-P01",
-    "F0174-P01",
     "JU 27 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 8
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Legendary-Collection/Snorlax-LC64",
@@ -10045,6 +10045,44 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Cardmarket seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0174-P01",
+    "override:issue269-dutch-ju27-first-b"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Cardmarket seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0174-P01",
+    "override:issue269-dutch-ju27-first-a"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://www.elitefourum.com/t/black-star-promos-languages/36573",
    "nonUrlEvidenceId": null,
    "providerId": "elitefourum",
@@ -10154,6 +10192,63 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 9
+  },
+  {
+   "canonicalUrl": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0167-P02",
+    "override:issue269-dutch-ju11-unlimited"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0167-P01",
+    "override:issue269-dutch-ju11-first"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0174-P02",
+    "override:issue269-dutch-ju27-unlimited"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
   },
   {
    "canonicalUrl": null,

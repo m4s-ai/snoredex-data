@@ -16,17 +16,17 @@
     "counts": {
       "providers": 24,
       "surfaces": 28,
-      "coverageEdges": 28,
+      "coverageEdges": 29,
       "absenceEdges": 3,
-      "observations": 30,
-      "resolvedVerdictSources": 896
+      "observations": 31,
+      "resolvedVerdictSources": 901
     },
     "surfaceStates": {
-      "active": 10,
+      "active": 11,
       "blocked-by-browser": 3,
       "incomplete": 8,
       "internal": 1,
-      "needs-evidence": 3,
+      "needs-evidence": 2,
       "non-url": 2,
       "rate-limited": 1
     }
@@ -1196,12 +1196,12 @@
       "surfaceId": "cardmarket-listing-photos",
       "providerId": "cardmarket-listing-photo",
       "label": "Stable seller listing photographs",
-      "state": "needs-evidence",
-      "failureState": "No accepted stable seller-photo fixture is currently used by a verdict.",
+      "state": "active",
+      "failureState": null,
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Activate only with listing id, seller photo, capture date and specimen identity review.",
+      "lastCheckedAt": "2026-08-24",
+      "freshnessPolicy": "Retain listing id, original seller image, capture date and specimen identity review for every accepted claim.",
       "query": {
         "method": "MANUAL",
         "endpoint": "Cardmarket listing URL when retained",
@@ -1223,7 +1223,9 @@
         "publicationForm": "seller photograph of one identified card",
         "closedWithinScope": false
       },
-      "coverageEdgeIds": []
+      "coverageEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ]
     }
   ],
   "coverageEdges": [
@@ -2620,6 +2622,55 @@
         "zeroResultMeans": "unknown",
         "challenge": "A photographed specimen cannot prove that no other treatment exists."
       }
+    },
+    {
+      "edgeId": "cardmarket-listing-photo-positive",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "MULTIPLE"
+        ],
+        "scripts": [
+          "MULTIPLE"
+        ],
+        "productCategories": [
+          "marketplace-specimen"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "retained photographed listings only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "finish",
+        "edition",
+        "specimen-existence",
+        "image"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Marketplace inventory is transient and each photograph proves only the visible properties of that specimen."
+      },
+      "knownPositiveObservationId": "obs-cardmarket-listing-photo",
+      "boundary": {
+        "outsideScope": [
+          "other listings",
+          "sold or removed stock",
+          "unphotographed variants",
+          "complete set"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A retained seller photograph cannot prove that no other language, edition or treatment exists."
+      }
     }
   ],
   "observations": [
@@ -3859,6 +3910,45 @@
         ],
         "retrievedAt": "2026-07-23",
         "usageCount": 9
+      }
+    },
+    {
+      "observationId": "obs-cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "kind": "known-positive",
+      "queryUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+      "queryParameters": {
+        "listingImageId": "2122869820"
+      },
+      "retrievedAt": "2026-08-24",
+      "expectedIdentifiers": [
+        "2122869820",
+        "F0174-P01"
+      ],
+      "validatesEdges": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "outcome": "The retained seller photograph visibly establishes the Dutch first-edition non-holo printing of Jungle 27/64.",
+      "rawRecordRef": "verification/source_registry.json:https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+      "rawRecordHash": "sha256:57e5121d2b2ca66843cc2e9e50e6fdc999b130a617781fff64afd9bd8c5ef653",
+      "rawRecord": {
+        "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+        "nonUrlEvidenceId": null,
+        "providerId": "cardmarket-listing-photo",
+        "sourceTypes": [
+          "Cardmarket seller listing photograph"
+        ],
+        "dimensions": [
+          "finish",
+          "finish-override"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "F0174-P01",
+          "override:issue269-dutch-ju27-first-a"
+        ],
+        "retrievedAt": null,
+        "usageCount": 2
       }
     },
     {
@@ -10002,6 +10092,32 @@
       ]
     },
     {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://www.elitefourum.com/t/black-star-promos-languages/36573",
       "providerId": "elitefourum",
       "surfaceId": "elitefourum-topics",
@@ -10065,6 +10181,45 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
       ]
     },
     {

@@ -37,6 +37,36 @@ def main() -> None:
     assert graph["summary"]["localizations"] == 16
     assert graph["summary"]["setSourceRecords"] == graph["summary"]["setSourceDispositions"]
 
+    dutch_printings = {
+        row["entityId"]: row["payload"]
+        for row in graph["entities"]
+        if row["entityType"] == "physical-printing"
+        and row["entityId"] in {
+            "PHYSICAL:F0167-P01", "PHYSICAL:F0167-P02",
+            "PHYSICAL:F0174-P01", "PHYSICAL:F0174-P02",
+        }
+    }
+    assert {
+        printing_id: (row["finish"], row["edition"])
+        for printing_id, row in dutch_printings.items()
+    } == {
+        "PHYSICAL:F0167-P01": ("holo", "1st Edition"),
+        "PHYSICAL:F0167-P02": ("holo", "Unlimited"),
+        "PHYSICAL:F0174-P01": ("non-holo", "1st Edition"),
+        "PHYSICAL:F0174-P02": ("non-holo", "Unlimited"),
+    }
+    assert all(
+        row["markings"] == ([{
+            "kind": "edition-stamp", "text": "EDITIE 1", "role": "print-identity",
+        }] if row["edition"] == "1st Edition" else [])
+        for row in dutch_printings.values()
+    )
+    for specimen_id in ("SPEC-0040", "SPEC-0041", "SPEC-0042", "SPEC-0043", "SPEC-0044"):
+        claim = entities[("candidate-claim", f"CLAIM:specimen:{specimen_id}")]["payload"]
+        assert claim["evidenceStatus"] == "observed"
+        assert claim["materializedTargetId"] is None
+        assert claim["reason"].startswith("corroborates PHYSICAL:F")
+
     localizations = {
         row["payload"]["languageTag"]: row["payload"]
         for row in graph["entities"] if row["entityType"] == "localization"
@@ -150,6 +180,11 @@ def main() -> None:
         (row["sourceKind"], row["sourceId"]): row
         for row in graph["migrationDispositions"]
     }
+    assert all(
+        migrations[("finish-printing-record", printing_id)]["targetRef"]
+        == f"PHYSICAL:{printing_id}"
+        for printing_id in ("F0167-P01", "F0167-P02", "F0174-P01", "F0174-P02")
+    )
     u0414 = migrations[("legacy-issue-rekey", "U0414")]
     assert u0414["targetRefs"] == [
         "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",

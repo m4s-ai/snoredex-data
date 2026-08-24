@@ -41,6 +41,7 @@ ALLOWED_PATTERN = ("confirmed", "partial", "pending", "not-applicable")
 ALLOWED_COMPLETENESS = ("complete-manifest", "owner-adjudicated", "positive-evidence-only",
                         "pending", "not-applicable")
 ALLOWED_MARKING_ROLES = ("print-identity", "reverse-holo-treatment", "distribution-promo")
+ALLOWED_EDITIONS = ("1st Edition", "Unlimited")
 
 
 def first(items: list, count: int = 5) -> list:
@@ -206,7 +207,9 @@ def main() -> int:
             or unit.get("patternStatus") not in ALLOWED_PATTERN
             or unit.get("completenessStatus") not in ALLOWED_COMPLETENESS
             or any(p.get("finish") not in ALLOWED_FINISHES
-                   or p.get("verificationStatus") not in ALLOWED_PRINTING for p in printings)
+                   or p.get("verificationStatus") not in ALLOWED_PRINTING
+                   or (p.get("edition") is not None and p.get("edition") not in ALLOWED_EDITIONS)
+                   for p in printings)
             or (unit.get("applicabilityStatus") == "not-applicable" and (
                 unit.get("availabilityStatus") != "not-applicable"
                 or len(printings) != 0
