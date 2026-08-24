@@ -25765,7 +25765,7 @@
         "sourceId": "SPEC-0001",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0001",
+        "proposedTargetId": "PHYSICAL:F0291-P02",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0291-P02, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0291-P02"
@@ -25782,7 +25782,7 @@
         "sourceId": "SPEC-0006",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0006",
+        "proposedTargetId": "PHYSICAL:F0294-P02",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0294-P02, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0294-P02"
@@ -25815,7 +25815,7 @@
         "sourceId": "SPEC-0016",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0016",
+        "proposedTargetId": "PHYSICAL:F0598-P01",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0598-P01, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0598-P01"
@@ -25832,7 +25832,7 @@
         "sourceId": "SPEC-0019",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0019",
+        "proposedTargetId": "PHYSICAL:F0457-P02",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0457-P02, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0457-P02"
@@ -25849,7 +25849,7 @@
         "sourceId": "SPEC-0020",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0020",
+        "proposedTargetId": "PHYSICAL:F0457-P01",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0457-P01, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0457-P01"
@@ -25866,7 +25866,7 @@
         "sourceId": "SPEC-0025",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0025",
+        "proposedTargetId": "PHYSICAL:F0231-P01",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0231-P01, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0231-P01"
@@ -25882,10 +25882,11 @@
         "sourceKind": "specimen-observation",
         "sourceId": "SPEC-0030",
         "evidenceStatus": "observed",
-        "disposition": "candidate-needs-evidence",
+        "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:specimen:SPEC-0030",
-        "materializedTargetId": null,
-        "reason": "physical observation has no matching projected printing"
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0030",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0030"
       }
     },
     {
@@ -25899,7 +25900,7 @@
         "sourceId": "SPEC-0040",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0040",
+        "proposedTargetId": "PHYSICAL:F0167-P02",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0167-P02, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0167-P02"
@@ -25916,7 +25917,7 @@
         "sourceId": "SPEC-0041",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0041",
+        "proposedTargetId": "PHYSICAL:F0167-P01",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0167-P01, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0167-P01"
@@ -25933,7 +25934,7 @@
         "sourceId": "SPEC-0042",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0042",
+        "proposedTargetId": "PHYSICAL:F0174-P01",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0174-P01, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0174-P01"
@@ -25950,7 +25951,7 @@
         "sourceId": "SPEC-0043",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0043",
+        "proposedTargetId": "PHYSICAL:F0174-P01",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0174-P01, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0174-P01"
@@ -25967,7 +25968,7 @@
         "sourceId": "SPEC-0044",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0044",
+        "proposedTargetId": "PHYSICAL:F0174-P02",
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0174-P02, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0174-P02"
@@ -76906,6 +76907,30 @@
         "sourceFinishUnitId": "F0632",
         "sourcePrintingId": "F0632-P01",
         "establishingClaimId": "CLAIM:finish:F0632-P01"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0030",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0030",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
+        "finish": "mirror-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "The owner labelled this photograph \"Mirror Finish\" when supplying it in issue #166, and the card face shows a textured foil across its whole surface including the artwork window. Recorded as the technical finish mirror-holo on the owner's identification; no foil pattern is named because none is legible from the photograph.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0030",
+        "specimenIds": [
+          "SPEC-0030"
+        ]
       }
     },
     {
@@ -140297,6 +140322,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0030",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0030",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0040",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -177917,6 +177952,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:French:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0030",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0030",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0030",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
       "provenance": {}
     },
     {
@@ -227130,9 +227181,9 @@
     {
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0030",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "physical observation has no matching projected printing"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0030",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030"
     },
     {
       "sourceKind": "specimen-observation",
@@ -227171,14 +227222,14 @@
     }
   ],
   "summary": {
-    "entities": 6460,
-    "edges": 9742,
+    "entities": 6461,
+    "edges": 9745,
     "migrationInputs": 2122,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 236,
+      "candidate-needs-evidence": 235,
       "carried": 67,
-      "established-and-mapped": 1163,
+      "established-and-mapped": 1164,
       "linked-local-counterpart": 4,
       "mapped": 216,
       "needs-evidence": 127,
@@ -227188,7 +227239,7 @@
     },
     "candidateClaims": 1558,
     "cardReleases": 612,
-    "physicalPrintings": 478,
+    "physicalPrintings": 479,
     "setSourceRecords": 345,
     "setSourceDispositions": 345,
     "localizations": 16

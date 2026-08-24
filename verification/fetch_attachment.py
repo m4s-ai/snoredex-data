@@ -334,7 +334,9 @@ def ensure_cited_identity(current: dict | None, candidate: dict) -> None:
              "a replacement must keep its set, number, variant and language")
 
 
-def validate_observation(physical: object, specimen_id: str) -> dict:
+def validate_observation(
+    physical: object, specimen_id: str, known_specimen_ids: set[str] | None = None
+) -> dict:
     if not isinstance(physical, dict) or not physical.get("finish"):
         fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
     if physical["finish"] not in SPECIMEN_FINISHES:
@@ -352,6 +354,13 @@ def validate_observation(physical: object, specimen_id: str) -> dict:
         fail(f"manifest row for {specimen_id} needs a valid physicalObservation.markingRole")
     if role is not None and role not in SPECIMEN_MARKING_ROLES:
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.markingRole")
+    conflicts = physical.get("conflictsWith")
+    if conflicts is not None and (
+        not isinstance(conflicts, list)
+        or any(not isinstance(ref, str) or ref == specimen_id for ref in conflicts)
+        or (known_specimen_ids is not None and any(ref not in known_specimen_ids for ref in conflicts))
+    ):
+        fail(f"manifest row for {specimen_id} has invalid physicalObservation.conflictsWith")
     return physical
 
 
@@ -512,13 +521,15 @@ def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
 
 def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
                    digest: str, *, listing_url: str | None = None,
-                   allow_small: bool = False, cited_by: list | None = None) -> dict:
+                   allow_small: bool = False, cited_by: list | None = None,
+                   known_specimen_ids: set[str] | None = None) -> dict:
     required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
                 "observed", "recordedAt")
     missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
     if missing:
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
-    physical = validate_observation(item.get("physicalObservation"), specimen_id)
+    physical = validate_observation(item.get("physicalObservation"), specimen_id,
+                                    known_specimen_ids)
     if item.get("heldBy") == "third-party seller" and not listing_url:
         fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
     record = {
@@ -621,6 +632,10 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         ).get("units", [])
     except (OSError, ValueError, TypeError) as error:
         fail(f"cannot load canonical finish units: {error}")
+    known_specimen_ids = {str(row.get("specimenId")) for row in doc.get("specimens", [])}
+    for item in observations:
+        if isinstance(item, dict) and item.get("specimenId") is not None:
+            known_specimen_ids.add(validate_specimen_id(item.get("specimenId")))
 
     existing_by_source = {
         row.get("photographSource"): row
@@ -654,6 +669,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         used_ids.add(specimen_id)
         if specimen_id == next_id:
             next_id = f"SPEC-{int(next_id[5:]) + 1:04d}"
+        known_specimen_ids.add(specimen_id)
         number = str(item.get("number") or "").split("/", 1)[0]
         finish_unit = next((unit for unit in finish_units if (
             str(unit.get("setCode")) == str(item.get("setCode"))
@@ -696,6 +712,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         record = build_specimen(
             item, specimen_id, filename, provenance, digest, listing_url=listing_url,
             allow_small=args.allow_small, cited_by=cited_by,
+            known_specimen_ids=known_specimen_ids,
         )
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()

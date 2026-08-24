@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-08-24",
-    "catalogueFingerprint": "sha256:6b958494181c088fec13f009c459cae78d872526d62582fff84df15aa539ae47",
+    "catalogueFingerprint": "sha256:5085bec353b28fae985a8e07d94b2ddfa3c9f105fc2b03bf05acee8024c6a951",
     "previousFingerprint": null,
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -65778,21 +65778,22 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=data-correction.yml"
     },
     {
-      "itemId": "item-ecf226a4-3db6-5261-bcb6-f5710eae73d9",
+      "itemId": "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2",
       "legacyChecklistIds": [],
       "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
       "workId": null,
       "workMappingState": "needs-explicit-equivalence",
       "setEditionId": "EDITION:TW:T-Chinese:S-P",
       "localSetId": "LOCALSET:TW:S-P",
       "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
-      "physicalPrintingId": null,
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0030",
       "sourcePrintingId": null,
       "finishUnitId": null,
       "sourceClaimRefs": [
-        "CLAIM:source-first:TW:S-P:145:base"
+        "CLAIM:source-first:TW:S-P:145:base",
+        "CLAIM:specimen:SPEC-0030"
       ],
       "localizationId": "LOCALIZATION:TW:zh-Hant",
       "cardName": "Snorlax",
@@ -65804,14 +65805,14 @@
       "collectorNumberSortKey": "000000000145",
       "edition": null,
       "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-24c55cd7-d657-595b-a0fa-be71ca967bf7",
+      "finishVerificationStatus": "observed",
+      "finish": "mirror-holo",
+      "finishFamily": "reverse-holo",
+      "finishGroupId": "finish-group-f786c6ff-4db6-5b3d-9cc8-797fdd66411e",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
-      "cardSize": "unknown",
+      "cardSize": "standard",
       "errorClass": null,
       "rarity": {
         "display": null,
@@ -65823,9 +65824,9 @@
       "releaseDate": null,
       "releaseDatePrecision": null,
       "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:TW:zh-Hant|s-p|000000000145|research:card-release:RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
-      "imageAssetId": null,
-      "imageScope": "unknown",
+      "releaseSortKey": "9999|LOCALIZATION:TW:zh-Hant|s-p|000000000145|claim:CLAIM:specimen:SPEC-0030",
+      "imageAssetId": "asset-50232e0c-90c9-5fa0-8f96-b9d5ed8144a6",
+      "imageScope": "exact-printing",
       "sourceLinks": [],
       "evidenceLinks": [],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=data-correction.yml"
@@ -67925,6 +67926,20 @@
       }
     },
     {
+      "assetId": "asset-50232e0c-90c9-5fa0-8f96-b9d5ed8144a6",
+      "path": "verification/specimens/SPEC-0030.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0030.png",
+      "sha256": "sha256:ec92360a99665aa8f194f6a0613970a1bff22d38defe2fe9c5e90cab2761974f",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — S-P; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-5103c1ad-db1b-52b3-959f-fc83aa6c7376",
       "path": "images/CL_33_Snorlax_V2_882916.png",
       "url": "https://m4s-ai.github.io/snoredex-data/images/CL_33_Snorlax_V2_882916.png",
@@ -69732,7 +69747,7 @@
     }
   ],
   "qualitySummary": {
-    "authoritativeGraphFingerprint": "sha256:eda5cc5025bffd4c55ec3d82e1d2e815974708d2abf814cfe98f5306de0a8282",
+    "authoritativeGraphFingerprint": "sha256:eb6eb535ebee3767bb5dad939e807b0d19a3f982e90542fedf5cb261798b0420",
     "authoritativeGraphSchemaVersion": "1.1.0",
     "discoveryTerminalState": "complete",
     "setDiscoveryRun": "20260813T122130Z",
@@ -69743,12 +69758,12 @@
       "setEditions": 461,
       "works": 38,
       "items": 906,
-      "verifiedPrintings": 478,
+      "verifiedPrintings": 479,
       "finishCandidates": 205,
-      "researchPlaceholders": 223,
-      "currentKnown": 478,
-      "research": 428,
-      "assets": 198
+      "researchPlaceholders": 222,
+      "currentKnown": 479,
+      "research": 427,
+      "assets": 199
     },
     "predecessor": {
       "schema": "snoredex-checklist",
@@ -69757,7 +69772,7 @@
     },
     "graphAccounting": {
       "cardReleases": 612,
-      "physicalPrintings": 478
+      "physicalPrintings": 479
     },
     "candidateProgressPolicy": {
       "progressClass": "research",

@@ -132,6 +132,14 @@ def main() -> None:
         {"finish": "holo", "basis": "observed card surface", "markings": "EDITIE 1"},
         "SPEC-9995"
     ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface", "conflictsWith": "SPEC-0040"},
+        "SPEC-9995", {"SPEC-9995", "SPEC-0040"}
+    ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface", "conflictsWith": ["SPEC-MISSING"]},
+        "SPEC-9995", {"SPEC-9995", "SPEC-0040"}
+    ))
     expect_failure(lambda: fetch_attachment.ensure_cited_identity(
         {"specimenId": "SPEC-9994", "setCode": "JU", "number": "11/64",
          "variant": "V1", "language": "Dutch", "citedBy": ["F0167-P01"]},

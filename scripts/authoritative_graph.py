@@ -201,10 +201,58 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     for specimen_id, specimen in sorted(specimen_by_id.items()):
         target = specimen_targets.get(specimen_id)
         claim_id = f"CLAIM:specimen:{specimen_id}"
+        observation = specimen.get("physicalObservation") or {}
+        release_id = release_ids.get((
+            str(specimen.get("setCode") or ""), _number(specimen.get("number")),
+            str(specimen.get("language") or ""),
+        ))
+        standalone_target = None
+        if not target and release_id and not observation.get("coversMultipleCards"):
+            standalone_target = f"PHYSICAL:specimen:{specimen_id}"
+            target = standalone_target
+            physical_payload = {
+                "physicalPrintingId": standalone_target,
+                "cardReleaseId": release_id,
+                "finish": observation.get("finish"),
+                "edition": observation.get("edition"),
+                "foilPattern": observation.get("foilPattern"),
+                "markings": specimen_markings(observation),
+                "distribution": observation.get("distribution"),
+                "cardSize": observation.get("cardSize") or "unknown",
+                "basis": observation.get("basis"),
+                "errorClass": None,
+                "classificationState": "classified-from-positive-evidence",
+                "sourceFinishUnitId": None,
+                "sourcePrintingId": None,
+                "establishingClaimId": claim_id,
+                "specimenIds": [specimen_id],
+            }
+            generated_entities.append(_entity("physical-printing", standalone_target,
+                                              physical_payload))
+            generated_edges.extend([
+                {
+                    "fromType": "candidate-claim", "fromId": claim_id,
+                    "relation": "materializes", "toType": "physical-printing",
+                    "toId": standalone_target,
+                    "provenance": {"disposition": "established-and-mapped"},
+                },
+                {
+                    "fromType": "physical-printing", "fromId": standalone_target,
+                    "relation": "established-by", "toType": "candidate-claim",
+                    "toId": claim_id, "provenance": {},
+                },
+                {
+                    "fromType": "physical-printing", "fromId": standalone_target,
+                    "relation": "realizes", "toType": "card-release", "toId": release_id,
+                    "provenance": {},
+                },
+            ])
         # A specimen listed on a finish printing is the evidence used to derive that
         # printing, not an independent provider.  Keep the link as provenance so the
         # graph never counts an observation as corroborating its own projection.
         reason = (
+            f"physical observation establishes standalone printing for {release_id}"
+            if standalone_target else
             f"provides provenance for {target}, already established from the finish store"
             if target else "physical observation has no matching projected printing"
         )
@@ -214,9 +262,9 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             "sourceKind": "specimen-observation",
             "sourceId": specimen_id,
             "evidenceStatus": "observed",
-            "disposition": "candidate-needs-evidence",
-            "proposedTargetId": f"PHYSICAL:specimen:{specimen_id}",
-            "materializedTargetId": None,
+            "disposition": "established-and-mapped" if standalone_target else "candidate-needs-evidence",
+            "proposedTargetId": target or f"PHYSICAL:specimen:{specimen_id}",
+            "materializedTargetId": standalone_target,
             "reason": reason,
         }
         if target:
@@ -225,11 +273,11 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         generated_dispositions.append({
             "sourceKind": "specimen-observation",
             "sourceId": specimen_id,
-            "disposition": "candidate-needs-evidence",
-            "targetRef": None,
+            "disposition": "established-and-mapped" if standalone_target else "candidate-needs-evidence",
+            "targetRef": standalone_target,
             "reason": reason,
         })
-        if target:
+        if target and not standalone_target:
             generated_edges.append({
                 "fromType": "candidate-claim", "fromId": claim_id,
                 "relation": "provenance", "toType": "physical-printing", "toId": target,

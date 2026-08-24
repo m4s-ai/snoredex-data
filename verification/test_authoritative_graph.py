@@ -18,6 +18,18 @@ def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
     assert project_physical_evidence(deepcopy(graph)) == graph
+    standalone_claim = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceId") == "SPEC-0030"
+    )
+    assert standalone_claim["disposition"] == "established-and-mapped"
+    assert standalone_claim["materializedTargetId"] == "PHYSICAL:specimen:SPEC-0030"
+    assert any(
+        row["entityType"] == "physical-printing"
+        and row["entityId"] == "PHYSICAL:specimen:SPEC-0030"
+        for row in graph["entities"]
+    )
     meta = graph["meta"]
     assert meta["schema"] == "snoredex-authoritative-locality-graph"
     assert meta["schemaVersion"] == "1.1.0"

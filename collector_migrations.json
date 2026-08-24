@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:840ee381a76c00298ddc234242e8da44ac098e1b7674fa2df25ac1f4d3e6b092",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:6b958494181c088fec13f009c459cae78d872526d62582fff84df15aa539ae47",
+    "toFingerprint": "sha256:5085bec353b28fae985a8e07d94b2ddfa3c9f105fc2b03bf05acee8024c6a951",
     "cumulative": true
   },
   "transitions": [
@@ -6691,6 +6691,15 @@
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "item-ecf226a4-3db6-5261-bcb6-f5710eae73d9",
+      "toItemIds": [
+        "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
     }
   ],
   "graphRekeys": [
@@ -14548,7 +14557,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
         "disposition": "projected",
         "targetItemIds": [
-          "item-ecf226a4-3db6-5261-bcb6-f5710eae73d9"
+          "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
         ],
         "reason": null
       },
@@ -20253,12 +20262,17 @@
         "physicalPrintingId": "PHYSICAL:F0632-P01",
         "disposition": "projected",
         "targetItemId": "item-46288195-eeab-54b6-90d1-eeb898be3ff7"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0030",
+        "disposition": "projected",
+        "targetItemId": "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
       }
     ],
     "summary": {
       "legacyChecklistRows": 831,
       "cardReleases": 612,
-      "physicalPrintings": 478,
+      "physicalPrintings": 479,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
