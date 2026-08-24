@@ -162,6 +162,10 @@ The envelope has four distinct responsibilities:
 - cross-artifact and publication consistency;
 - determinism/readiness of the central build command.
 
+The normative gate/impact data for issue #286 lives in
+`verification/workflow_gate_matrix.json`. Its stdlib-only regression is
+`verification/test_workflow_gate_matrix.py`, included in `scripts/regen.py`.
+
 The following operational scripts are intentionally outside the normal offline DAG:
 
 - `scripts/discovery_cycle.py` acquires/validates a retained source-first run.

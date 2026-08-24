@@ -1,0 +1,383 @@
+{
+  "schema": "snoredex-workflow-gate-matrix",
+  "version": "1.0.0",
+  "gateLevels": {
+    "L0": {
+      "order": 0,
+      "name": "input-contract",
+      "network": false,
+      "mergeRequired": false,
+      "releaseRequired": false,
+      "purpose": "Validate syntax, schema, identity, bytes, hashes, and idempotent input handling."
+    },
+    "L1": {
+      "order": 1,
+      "name": "domain-verdict",
+      "network": false,
+      "mergeRequired": false,
+      "releaseRequired": false,
+      "purpose": "Validate the changed evidence, source, snapshot, adjudication, or discovery contract."
+    },
+    "L2": {
+      "order": 2,
+      "name": "impacted-projections",
+      "network": false,
+      "mergeRequired": false,
+      "releaseRequired": false,
+      "purpose": "Regenerate and check the graph-reachable projection subgraph affected by the change."
+    },
+    "L3": {
+      "order": 3,
+      "name": "full-pr-gate",
+      "network": false,
+      "mergeRequired": true,
+      "releaseRequired": false,
+      "purpose": "Run scripts/regen.py --check and the complete offline core regression envelope before merge."
+    },
+    "L4": {
+      "order": 4,
+      "name": "release-environment",
+      "network": true,
+      "mergeRequired": false,
+      "releaseRequired": true,
+      "purpose": "Verify live sources, browser behavior, publication allowlists, approvals, and deployment binding."
+    }
+  },
+  "impactClasses": {
+    "claim-language": {
+      "canonicalStores": [
+        "verification/evidence.jsonl",
+        "verification/units.json",
+        "verification/owner_adjudications.json"
+      ],
+      "graphEntityTypes": ["candidate-claim", "card-release", "source-assertion", "localization"],
+      "graphRelations": ["supports", "established-by", "asserted-by", "references", "scoped-to"],
+      "projectionRoots": [
+        "scripts/evidence_semantics.py",
+        "scripts/language_status.py",
+        "scripts/confirmed_releases.py",
+        "verification/report.py",
+        "scripts/database.py",
+        "scripts/site.py"
+      ],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
+    "finish-claim": {
+      "canonicalStores": [
+        "verification/finish_units.json",
+        "verification/finish_overrides.json",
+        "verification/finish_tcgdex_snapshot.json"
+      ],
+      "graphEntityTypes": ["finish-profile", "profile-finish-claim", "physical-printing", "card-release"],
+      "graphRelations": ["asserts-finish-for", "asserts-finish-profile", "uses-profile", "maps-to", "supported-by"],
+      "projectionRoots": [
+        "scripts/finishes.py",
+        "scripts/authoritative_graph.py",
+        "scripts/checklist.py",
+        "scripts/collector_catalogue.py",
+        "scripts/database.py",
+        "scripts/site.py"
+      ],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
+    "physical-observation": {
+      "canonicalStores": [
+        "verification/specimens.json",
+        "verification/specimens/",
+        "verification/evidence.jsonl",
+        "verification/finish_overrides.json"
+      ],
+      "graphEntityTypes": ["physical-printing", "finish-profile", "card-release", "source-assertion"],
+      "graphRelations": ["observed-by", "supported-by", "established-by", "provenance", "maps-to"],
+      "projectionRoots": [
+        "verification/fetch_attachment.py",
+        "scripts/finishes.py",
+        "scripts/authoritative_graph.py",
+        "scripts/collector_catalogue.py",
+        "scripts/database.py",
+        "scripts/site.py"
+      ],
+      "minimumGate": "L0",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
+    "source-discovery": {
+      "canonicalStores": [
+        "verification/runs/source-adapters/",
+        "verification/runs/card-discovery/",
+        "verification/source_adapters.json",
+        "verification/card_discovery_adapters.json",
+        "verification/set_catalogue_sources.json"
+      ],
+      "graphEntityTypes": [
+        "set-source-record",
+        "set-source-disposition",
+        "local-set",
+        "candidate-claim",
+        "card-release",
+        "source-assertion"
+      ],
+      "graphRelations": ["observed-by", "identifies", "maps-to", "scoped-to", "established-by", "provenance"],
+      "projectionRoots": [
+        "scripts/discovery_cycle.py",
+        "scripts/source_adapters.py",
+        "scripts/card_discovery.py",
+        "scripts/completeness_gate.py",
+        "scripts/source_registry.py",
+        "scripts/source_capabilities.py",
+        "scripts/authoritative_graph.py",
+        "scripts/locality_matrix.py",
+        "scripts/asia_locality_matrix.py"
+      ],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
+    "catalogue-set": {
+      "canonicalStores": ["verification/set_catalogue_sources.json", "verification/source_adapters.json"],
+      "graphEntityTypes": ["local-set", "release-event", "set-edition", "set-source-record", "card-release"],
+      "graphRelations": ["asserts-release-event", "asserts-set-edition", "observed-by", "scoped-to", "maps-to"],
+      "projectionRoots": [
+        "scripts/source_adapters.py",
+        "scripts/authoritative_graph.py",
+        "scripts/card_discovery.py",
+        "scripts/locality_matrix.py",
+        "scripts/checklist.py",
+        "scripts/collector_catalogue.py"
+      ],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
+    "market-lead": {
+      "canonicalStores": ["legacy-cardmarket-baseline.json", "verification/specimens.json"],
+      "graphEntityTypes": ["legacy-cardmarket-product", "candidate-claim", "physical-printing"],
+      "graphRelations": ["provenance", "observed-by", "supported-by"],
+      "projectionRoots": [],
+      "minimumGate": "L0",
+      "projectionGate": "L1",
+      "mergeGate": "L3"
+    },
+    "snapshot-refresh": {
+      "canonicalStores": ["verification/finish_tcgdex_snapshot.json"],
+      "graphEntityTypes": ["finish-profile", "profile-finish-claim", "source-assertion"],
+      "graphRelations": ["asserts-finish-profile", "uses-profile", "supported-by", "provenance"],
+      "projectionRoots": [
+        "scripts/finishes.py",
+        "scripts/authoritative_graph.py",
+        "scripts/checklist.py",
+        "scripts/collector_catalogue.py",
+        "scripts/database.py",
+        "scripts/site.py"
+      ],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
+    "absence-adjudication": {
+      "canonicalStores": [
+        "verification/owner_adjudications.json",
+        "verification/evidence.jsonl",
+        "verification/source_capabilities.json"
+      ],
+      "graphEntityTypes": ["candidate-claim", "source-assertion", "set-source-record", "card-release"],
+      "graphRelations": ["scoped-to", "established-by", "supported-by", "provenance"],
+      "projectionRoots": [
+        "scripts/absence_model.py",
+        "scripts/evidence_semantics.py",
+        "scripts/language_status.py",
+        "verification/report.py",
+        "scripts/authoritative_graph.py",
+        "scripts/database.py",
+        "scripts/site.py"
+      ],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
+    "artwork-projection": {
+      "canonicalStores": [
+        "verification/authoritative_graph.json",
+        "verification/set_catalogue_sources.json",
+        "images/"
+      ],
+      "graphEntityTypes": ["work", "card-release", "physical-printing", "local-set"],
+      "graphRelations": ["identifies", "realizes", "materializes", "references", "proposes-for"],
+      "projectionRoots": ["scripts/artwork_review.py", "scripts/site.py"],
+      "minimumGate": "L2",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    }
+  },
+  "workflows": [
+    {
+      "id": "known-card-confirmation",
+      "impactClass": "claim-language",
+      "entry": "reviewed evidence observation and unit update",
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": [],
+      "forbiddenShortcuts": ["language evidence implies finish", "missing source result implies absence"]
+    },
+    {
+      "id": "physical-card-image",
+      "impactClass": "physical-observation",
+      "entry": "issue manifest through verification/fetch_attachment.py",
+      "minimumGate": "L0",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": ["known-card-confirmation"],
+      "forbiddenShortcuts": ["duplicate SPEC evidence in finish_overrides", "image presence implies an unobserved finish"]
+    },
+    {
+      "id": "source-first-card-discovery",
+      "impactClass": "source-discovery",
+      "entry": "immutable retained adapter/card-discovery run",
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": [],
+      "forbiddenShortcuts": ["candidate mutates a verdict before reconciliation", "zero rows become absence"]
+    },
+    {
+      "id": "set-or-promo-announcement",
+      "impactClass": "catalogue-set",
+      "entry": "official news/product lead followed by concrete source",
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": ["source-first-card-discovery"],
+      "forbiddenShortcuts": ["news headline creates a complete card list", "set release implies every language or finish"]
+    },
+    {
+      "id": "cardmarket-lead",
+      "impactClass": "market-lead",
+      "entry": "historical baseline or positive seller photograph",
+      "minimumGate": "L0",
+      "projectionGate": "L1",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": [],
+      "forbiddenShortcuts": ["rescrape expands legacy-cardmarket-baseline", "marketplace filter proves print existence"]
+    },
+    {
+      "id": "tcgdex-refresh",
+      "impactClass": "snapshot-refresh",
+      "entry": "explicit refresh candidate and accept command",
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": true,
+      "dependsOn": [],
+      "forbiddenShortcuts": ["normal regen fetches TCGdex", "candidate snapshot is accepted without diff review"]
+    },
+    {
+      "id": "absence-adjudication",
+      "impactClass": "absence-adjudication",
+      "entry": "bounded complete source or explicit owner decision",
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": ["known-card-confirmation"],
+      "forbiddenShortcuts": ["zero result proves not-printed", "provider capability alone closes an absence claim"]
+    },
+    {
+      "id": "artwork-review",
+      "impactClass": "artwork-projection",
+      "entry": "graph-backed browser proposal",
+      "minimumGate": "L2",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": ["source-first-card-discovery"],
+      "forbiddenShortcuts": ["browser proposal writes catalogue truth", "array order becomes artwork identity"]
+    }
+  ],
+  "graphDependencies": [
+    {
+      "from": "claim-language",
+      "to": ["finish-claim", "catalogue-set", "absence-adjudication"],
+      "reason": "Language claims establish card/release context but do not establish finish or absence on their own."
+    },
+    {
+      "from": "physical-observation",
+      "to": ["finish-claim", "artwork-projection"],
+      "reason": "A cited specimen can support a typed physical observation and downstream printing projection."
+    },
+    {
+      "from": "finish-claim",
+      "to": ["artwork-projection"],
+      "reason": "Reviewed finish profiles and physical printings are consumed by the graph-backed artwork view."
+    },
+    {
+      "from": "source-discovery",
+      "to": ["catalogue-set", "artwork-projection"],
+      "reason": "Reviewed source-first identity and locality edges feed set/card graph consumers."
+    },
+    {
+      "from": "catalogue-set",
+      "to": ["finish-claim", "artwork-projection"],
+      "reason": "Set and release identity scopes finish profiles and graph-backed artwork groups."
+    },
+    {
+      "from": "snapshot-refresh",
+      "to": ["finish-claim"],
+      "reason": "TCGdex is an input candidate for finish generation, not a language or absence authority."
+    },
+    {
+      "from": "absence-adjudication",
+      "to": ["claim-language", "catalogue-set"],
+      "reason": "A bounded absence decision changes application status and the scope of downstream release claims."
+    },
+    {
+      "from": "market-lead",
+      "to": ["claim-language", "physical-observation"],
+      "reason": "A marketplace lead is routed to positive evidence or a specimen; it never mutates the frozen baseline."
+    },
+    {
+      "from": "artwork-projection",
+      "to": [],
+      "reason": "Artwork is a terminal review projection; browser proposals do not feed catalogue truth."
+    }
+  ],
+  "rules": [
+    {
+      "id": "full-merge-gate",
+      "statement": "Every mergeable change must pass L3 even when a scoped L0-L2 lane is green."
+    },
+    {
+      "id": "no-network-normal-regeneration",
+      "statement": "Normal regeneration and L0-L3 checks consume committed or retained inputs only."
+    },
+    {
+      "id": "no-zero-absence",
+      "statement": "Empty, missing, or unreachable source output is a source failure or needs-evidence state, never not-printed."
+    },
+    {
+      "id": "impact-is-additive",
+      "statement": "A workflow may add downstream graph impacts, but it may not infer an unrelated fact or reverse a provenance boundary."
+    },
+    {
+      "id": "semantic-identity",
+      "statement": "Graph and collector identity use semantic IDs and stable references, never array position."
+    }
+  ]
+}
