@@ -26,6 +26,50 @@ they are environment checks, not regeneration. A stale artifact fails before CI 
 the point: no more red gates from a forgotten compatibility projection or
 `card_discovery_staging.json`.
 
+### TCGdex is a versioned snapshot, not a hidden live dependency
+
+Every normal regeneration is offline. `scripts/regen.py` calls `scripts/finishes.py --offline`,
+which reads `verification/finish_tcgdex_snapshot.json`, validates all payload hashes, and makes no
+TCGdex request. There is currently no scheduled job that changes this file. The snapshot is
+reviewed manually at least once per month, and additionally before a release or when an upstream
+TCGdex change is relevant to the work:
+
+```console
+python scripts/finishes.py --refresh                         # stage candidate and print drift
+python scripts/finishes.py --refresh --accept-refresh         # accept that exact candidate
+python scripts/regen.py                                      # regenerate from that snapshot
+python scripts/regen.py --check                              # verify the committed result
+```
+
+`--refresh` reports changed, added, and removed card URLs and stages the exact payloads in
+`verification/cache/finish-tcgdex/refresh-candidate.json`; it does not write generated outputs or
+the committed snapshot. The accepting command consumes that candidate without refetching, checks
+its hashes and URL set, then writes the versioned snapshot. The ignored cache remains transport
+state only and is never the release source of truth. A refresh failure is an unreachable source
+(retry it), not evidence that a card or finish is absent.
+
+### Physical-card evidence loop (#274)
+
+Keep one reviewed JSON manifest per issue. Each row names `setCode`, `number`, `variant`,
+`language`, `heldBy`, `inspectedFrom`, `observed`, `recordedAt`, and
+`physicalObservation.finish` plus the quoted `physicalObservation.basis`; seller rows also need
+`listingUrl`. An optional `specimenId` must use the `SPEC-nnnn` format. You may also add
+`citedBy` and `attachment` (or `attachmentIndex`). Import it in one idempotent command:
+
+```console
+python verification/fetch_attachment.py --issue 269 --manifest path/to/issue-269.json
+python scripts/regen.py
+python verification/fetch_attachment.py --evidence-check
+```
+
+The importer parses the issue HTML, downloads the signed image candidate, validates PNG/JPEG
+bytes, records `photographSha256`, writes `specimens.json` plus `verification/specimens/`, and
+keeps the stable issue URL as provenance. A second run is a no-op for identical bytes.
+`finishes.py` projects typed finish, edition, marking, size, specimen ids, and explicit
+`conflictsWith` review markers; conflicted observations remain pending until resolved.
+`authoritative_graph.py` then projects provenance edges. Never add the same SPEC evidence again
+in `finish_overrides.json` or in a one-off pass.
+
 ## What this file is
 
 The verification playbook and the research log behind it: every source technique that worked, every

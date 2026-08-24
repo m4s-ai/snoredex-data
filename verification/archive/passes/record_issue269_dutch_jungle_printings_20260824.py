@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Record the four photographed Dutch Jungle Snorlax printings from issue #269.
+"""Historical record of the four photographed Dutch Jungle printings from issue #269.
+
+SUPERSEDED: routine physical evidence now enters through
+``verification/fetch_attachment.py --issue ... --manifest ...`` and the canonical projectors.
+Keep this file as an auditable provenance record; do not add new issue-specific passes.
 
 The issue supplies positive physical evidence for holo 11/64 and non-holo 27/64 in
 both 1st Edition and Unlimited.  Unlimited is recorded from the collection owner's
@@ -16,7 +20,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SPECIMENS = ROOT / "verification" / "specimens.json"
 OVERRIDES = ROOT / "verification" / "finish_overrides.json"
-FINISH_UNITS = ROOT / "verification" / "finish_units.json"
 GRAPH = ROOT / "verification" / "authoritative_graph.json"
 ISSUE = "https://github.com/m4s-ai/snoredex-data/issues/269"
 RECORDED_AT = "2026-08-24"
@@ -53,7 +56,7 @@ SPECIMENS_TO_ADD = [
         "observed": (
             "Dutch Jungle Snorlax 11/64 photographed as a complete physical card and "
             "explicitly identified by the collection owner as the Unlimited printing. "
-            "The printed name Snorlax, 11/64 collector number and reflective holographic "
+            "The Dutch name Relaxo, 11/64 collector number and reflective holographic "
             "art field are legible."
         ),
         "recordedAt": RECORDED_AT,
@@ -82,7 +85,7 @@ SPECIMENS_TO_ADD = [
         "inspectedFrom": "owner-supplied physical card image",
         "photograph": None,
         "observed": (
-            "Dutch Jungle Snorlax 11/64 in a CGC holder. The card face visibly carries "
+            "Dutch Jungle Relaxo 11/64 in a CGC holder. The card face visibly carries "
             "the EDITIE 1 stamp and a reflective holographic art field; the grading label "
             "independently reads 1st Edition 11/64 Holo."
         ),
@@ -112,7 +115,7 @@ SPECIMENS_TO_ADD = [
         "inspectedFrom": "Cardmarket article-scan photograph",
         "photograph": None,
         "observed": (
-            "Cardmarket article scan of a complete Dutch Jungle Snorlax 27/64 physical "
+            "Cardmarket article scan of a complete Dutch Jungle Relaxo 27/64 physical "
             "card. The card face visibly carries the EDITIE 1 stamp and the artwork field "
             "is printed non-holo."
         ),
@@ -141,7 +144,7 @@ SPECIMENS_TO_ADD = [
         "inspectedFrom": "Cardmarket article-scan photograph",
         "photograph": None,
         "observed": (
-            "Independent Cardmarket article scan corroborating the Dutch Jungle Snorlax "
+            "Independent Cardmarket article scan corroborating the Dutch Jungle Relaxo "
             "27/64 1st Edition non-holo printing. EDITIE 1 and the matte printed artwork "
             "field are visible on the complete card face."
         ),
@@ -170,7 +173,7 @@ SPECIMENS_TO_ADD = [
         "inspectedFrom": "owner-supplied physical card image",
         "photograph": None,
         "observed": (
-            "Dutch Jungle Snorlax 27/64 photographed as a complete physical card and "
+            "Dutch Jungle Relaxo 27/64 photographed as a complete physical card and "
             "explicitly identified by the collection owner as the Unlimited printing. "
             "The card number and non-holographic printed artwork field are legible."
         ),
@@ -197,7 +200,7 @@ SOURCES_TO_ADD = {
         "url": ATTACHMENT_11_UNLIMITED,
         "sourceType": "Owner-supplied physical card photograph",
         "evidence": (
-            "Full Dutch Snorlax 11/64 card face, identified by the collection owner as "
+            "Full Dutch Relaxo 11/64 card face, identified by the collection owner as "
             "Unlimited, with the holographic artwork field visible; retained as SPEC-0040."
         ),
     },
@@ -205,7 +208,7 @@ SOURCES_TO_ADD = {
         "url": ATTACHMENT_11_FIRST,
         "sourceType": "Owner-supplied physical card photograph",
         "evidence": (
-            "Dutch Snorlax 11/64 in a CGC holder with visible EDITIE 1 stamp, holographic "
+            "Dutch Relaxo 11/64 in a CGC holder with visible EDITIE 1 stamp, holographic "
             "art field and a 1st Edition 11/64 Holo label; retained as SPEC-0041."
         ),
     },
@@ -213,7 +216,7 @@ SOURCES_TO_ADD = {
         "url": CARDMARKET_27_FIRST_A,
         "sourceType": "Cardmarket seller listing photograph",
         "evidence": (
-            "Complete Dutch Snorlax 27/64 card face with visible EDITIE 1 stamp and "
+            "Complete Dutch Relaxo 27/64 card face with visible EDITIE 1 stamp and "
             "non-holo art field; retained as SPEC-0042."
         ),
     },
@@ -221,7 +224,7 @@ SOURCES_TO_ADD = {
         "url": CARDMARKET_27_FIRST_B,
         "sourceType": "Cardmarket seller listing photograph",
         "evidence": (
-            "Independent complete Dutch Snorlax 27/64 scan corroborating EDITIE 1 and "
+            "Independent complete Dutch Relaxo 27/64 scan corroborating EDITIE 1 and "
             "the non-holo treatment; retained as SPEC-0043."
         ),
     },
@@ -229,7 +232,7 @@ SOURCES_TO_ADD = {
         "url": ATTACHMENT_27_UNLIMITED,
         "sourceType": "Owner-supplied physical card photograph",
         "evidence": (
-            "Full Dutch Snorlax 27/64 card face, identified by the collection owner as "
+            "Full Dutch Relaxo 27/64 card face, identified by the collection owner as "
             "Unlimited, with the non-holo art field visible; retained as SPEC-0044."
         ),
     },
@@ -383,25 +386,6 @@ def record_finish_overrides() -> None:
             by_key[key] = expected
     document["meta"]["lastUpdated"] = RECORDED_AT
     write(OVERRIDES, document)
-
-
-def refresh_finish_unit_sources() -> None:
-    """Reproject this pass's curated source descriptions without a live TCGdex rebuild."""
-    document = read(FINISH_UNITS)
-    expected_by_url = {source["url"]: source for source in SOURCES_TO_ADD.values()}
-    found = Counter()
-    for unit in document["units"]:
-        for printing in unit.get("printings") or []:
-            for source in printing.get("sources") or []:
-                expected = expected_by_url.get(source.get("url"))
-                if expected is not None:
-                    source.clear()
-                    source.update(expected)
-                    found[expected["url"]] += 1
-    expected = Counter({url: 1 for url in expected_by_url})
-    if found != expected:
-        raise ValueError(f"issue #269 finish-source projection differs: {found} != {expected}")
-    write(FINISH_UNITS, document)
 
 
 def entity(entity_type: str, entity_id: str, payload: dict) -> dict:
@@ -590,7 +574,6 @@ def record_graph() -> None:
 def main() -> int:
     record_specimens()
     record_finish_overrides()
-    refresh_finish_unit_sources()
     record_graph()
     print("recorded 5 specimens and 4 Dutch Jungle physical printings for issue #269")
     return 0

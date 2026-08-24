@@ -1,7 +1,7 @@
 {
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
-  "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; the record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
+  "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
   "count": 44,
   "specimens": [
     {
@@ -124,7 +124,8 @@
       "recordedAt": "2026-08-03",
       "citedBy": [
         "TW:sc1b F:120/153:base"
-      ]
+      ],
+      "photographSha256": "sha256:fe4e2523562f15d4cda76cfc2056ac81a1cea2a5e17dad72465b354268a255f4"
     },
     {
       "specimenId": "SPEC-0008",
@@ -140,7 +141,8 @@
       "recordedAt": "2026-08-03",
       "citedBy": [
         "TW:sc1b F:177/153:base"
-      ]
+      ],
+      "photographSha256": "sha256:68e9013ed759f8f3d8ab1ed79c0677aca50d1670570dd26073529ff5cd526e2d"
     },
     {
       "specimenId": "SPEC-0009",
@@ -156,7 +158,8 @@
       "recordedAt": "2026-08-03",
       "citedBy": [
         "TW:sc1b F:119/153:base"
-      ]
+      ],
+      "photographSha256": "sha256:4a90804d523b9ff0900fb55935091bd6abdbee55836bfe81e7f11e8d2ffc7131"
     },
     {
       "specimenId": "SPEC-0010",
@@ -172,7 +175,8 @@
       "recordedAt": "2026-08-03",
       "citedBy": [
         "TW:sc1b F:165/153:base"
-      ]
+      ],
+      "photographSha256": "sha256:ada479ba37d9238126cbf4991140bf70f492be94e760c647edebe6c9225521d8"
     },
     {
       "specimenId": "SPEC-0011",
@@ -188,7 +192,8 @@
       "recordedAt": "2026-08-03",
       "citedBy": [
         "TW:sc1a F:127/154:base"
-      ]
+      ],
+      "photographSha256": "sha256:a1753d2092796f986efa7aa6ead49a8bd634a8567496d3f8ef05986aacf67aad"
     },
     {
       "specimenId": "SPEC-0012",
@@ -202,7 +207,8 @@
       "photographSource": "https://github.com/user-attachments/assets/b2e9df50-ce87-4ddf-b2a2-5db56b620729",
       "observed": "Indonesian Snorlax promo, still sealed in its promo wrapper, photographed by the owner: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, \"#0143 Pokémon Tidur\", Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Indonesian-language text throughout. This is the promo release the owner cites when ruling that the Indonesian 151 mirrors exist as promos rather than as xsv2a 143 printings. Catalogue identity: this is SV-P/ID 117, \"Scarlet & Violet Indonesian Promos\", which the catalogue carries as two confirmed units - U0752 (V1) and U0772 (V2). An earlier version of this record said the product was absent from the dataset; that was wrong, and came from testing for a set code equal to \"SV-P\" rather than searching. Which V-token denotes which ball pattern is not established: neither unit records a variantName and both cite the same Bulbapedia row, so no unit cites this specimen yet.",
       "recordedAt": "2026-08-03",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:e9d0c35ef6807a8eba1e285c7669804e5d9757cbf820d7bba5f06e624cc063a5"
     },
     {
       "specimenId": "SPEC-0013",
@@ -225,7 +231,8 @@
         "cardSize": "standard",
         "coversMultipleCards": true,
         "basis": "\"both carrying a mirror foil pattern\"; \"the technical finish value here is mirror-holo, which finishFamily presents as \\\"Reverse Holo\\\"\". This record photographs two cards; SPEC-0019 and SPEC-0020 are the per-card crops."
-      }
+      },
+      "photographSha256": "sha256:7833efe1900510bb7d4d8156e9383c45b84fb67ca6d701cc22c3f3854d80aaaf"
     },
     {
       "specimenId": "SPEC-0014",
@@ -241,7 +248,8 @@
       "recordedAt": "2026-08-03",
       "citedBy": [
         "KR:S-P:101:base"
-      ]
+      ],
+      "photographSha256": "sha256:77758e788cfc990cb27fb628fb13442dbc5d98f423ab4e8a90e4deb81e982d6f"
     },
     {
       "specimenId": "SPEC-0015",
@@ -257,7 +265,8 @@
       "recordedAt": "2026-08-03",
       "citedBy": [
         "TW:scD F:111/159:base"
-      ]
+      ],
+      "photographSha256": "sha256:d974ace6deb4917d12acf131f01aca11e7be902c7f369b2ed956879491c9e922"
     },
     {
       "specimenId": "SPEC-0016",
@@ -281,7 +290,8 @@
         "markingRole": "distribution-promo",
         "cardSize": "standard",
         "basis": "\"\\\"JTG\\\" \\\"117/159\\\", holo\"; \"The GameStop logo is stamped in red over the lower left of the illustration.\""
-      }
+      },
+      "photographSha256": "sha256:8318fbaf9066a488bec2f1de51bf836a586488a97ef81d12fe466ec252b7d489"
     },
     {
       "specimenId": "SPEC-0017",
@@ -295,7 +305,8 @@
       "photographSource": "https://github.com/user-attachments/assets/d8637185-7227-45f4-9104-d19d7b39c723",
       "observed": "Japanese Snorlax from the XY Beginning Set: \"カビゴン\", HP 120, Colorless, Basic, attacks 「いわだき」 10+ (flip a coin, +30 on heads) and 「かいりき」 70, Illus. Naoki Saito, \"026/039\", with the set's magazine-style circular mark at the lower right of the card. Japanese-language text throughout. The owner supplies this against #86 to show that the Kalos Starter Set card exists in Japanese as its own product under the HXY code rather than as a KSS 26 language.",
       "recordedAt": "2026-08-04",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:7d6bde487565e15803b175917a99a976e59461e8b68c598525d9c889a358a708"
     },
     {
       "specimenId": "SPEC-0018",
@@ -309,7 +320,8 @@
       "photographSource": "supplied directly by the collection owner (IMG_6129.WEBP, transcoded to PNG)",
       "observed": "Korean counterpart of the same card: \"잠만보\", HP 120, Colorless, Basic, attacks 「바위깨기」 10+ and 「괴력」 70, numbered \"026/039\" to match the Japanese printing. Korean-language text throughout. Supplied against #86 alongside SPEC-0017; the owner states the Korean edition carries the code FXY where the Japanese carries HXY, and the set glyph is not legible at the supplied resolution, so the FXY code is the owner's identification rather than something read off this image. Filed under the catalogue's HXY 026 identity, which is how this project groups the printing.",
       "recordedAt": "2026-08-04",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:525f0091405b3bbc696ac126f355ccac860da76ef71ab575e6bb1930cd572fa3"
     },
     {
       "specimenId": "SPEC-0019",
@@ -333,7 +345,8 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "\"carrying a Poké Ball mirror foil pattern\"; \"the ball outlines are legible across the text box and lower border at full resolution\"."
-      }
+      },
+      "photographSha256": "sha256:9bf869c9c1b7128fbcf1b4fa95a7f5e561bd5f96870e9bc4a9f2dba373cebe79"
     },
     {
       "specimenId": "SPEC-0020",
@@ -357,7 +370,8 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "\"carrying a Master Ball mirror foil pattern\"; \"The pattern is strong and covers the whole face\"."
-      }
+      },
+      "photographSha256": "sha256:18cdcfce515d427eed0d17b0cd3f3047f996b3c3ef9f335b8fcd1e4681256728"
     },
     {
       "specimenId": "SPEC-0021",
@@ -373,7 +387,8 @@
       "recordedAt": "2026-08-04",
       "citedBy": [
         "U0100"
-      ]
+      ],
+      "photographSha256": "sha256:3e356a372c90dd104c861e83e31b238491b26e0caafa2402be194ae78c1287ec"
     },
     {
       "specimenId": "SPEC-0022",
@@ -389,7 +404,8 @@
       "recordedAt": "2026-08-04",
       "citedBy": [
         "U0097"
-      ]
+      ],
+      "photographSha256": "sha256:0af86474f7a5280114bab818b3ce6ba0606ebb505a126aefcd171f56605257f6"
     },
     {
       "specimenId": "SPEC-0023",
@@ -405,7 +421,8 @@
       "recordedAt": "2026-08-04",
       "citedBy": [
         "U0099"
-      ]
+      ],
+      "photographSha256": "sha256:d9f798d3647dcdc3b927d5f1819d2f1e43d3669ec9c6cde9db2f591538a22837"
     },
     {
       "specimenId": "SPEC-0024",
@@ -421,7 +438,8 @@
       "recordedAt": "2026-08-05",
       "citedBy": [
         "TW:AS5a:142:base"
-      ]
+      ],
+      "photographSha256": "sha256:af1be2a72fcbe5dc668cc23ba092d07fc73ff4a2fe81f52406447827bffe2026"
     },
     {
       "specimenId": "SPEC-0025",
@@ -444,7 +462,8 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "\"The card face is uniformly matte with no foil pattern anywhere, including across the artwork window: a non-holo printing.\""
-      }
+      },
+      "photographSha256": "sha256:6d0e0c6d32d89f02f9d5f50282f7423b88341a19f11741950f3e0ad2970940c6"
     },
     {
       "specimenId": "SPEC-0026",
@@ -458,7 +477,8 @@
       "photographSource": "https://github.com/user-attachments/assets/ef4a7af0-ef2a-423f-ae92-5a585c58b97a",
       "observed": "Thai Eevee & Snorlax-GX photographed by the owner and supplied through issue #166: \"อีวุย&คาบิกอน GX\", พื้นฐาน (Basic), TAG TEAM, HP 270, Colorless; ability \"เชียร์\" for one Colorless; attacks \"ดัมป์เพรส\" 120+ and \"เมกะตันเฟรนส์ GX\" 210; weakness Fighting x2, no resistance, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, \"083/SM-P\", ©2020 Pokémon. The artwork carries a POKÉMON TCG GYM stamp — a distribution marking, markings.role distribution-promo, which implies no finish. This is the printing pokumon listed and nothing else here recorded.",
       "recordedAt": "2026-08-10",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:a4806fe287896a425654a46854b670fdf8f1e0edfaf04a7ba15f62f827290a26"
     },
     {
       "specimenId": "SPEC-0027",
@@ -472,7 +492,8 @@
       "photographSource": "https://github.com/user-attachments/assets/4ebb3154-8235-4b74-829c-4485dced8186",
       "observed": "Indonesian Eevee & Snorlax-GX photographed by the owner and supplied through issue #166: \"Eevee&Snorlax GX\", BASIC, TAG TEAM, HP 270, Colorless; ability \"Penyemangat\" (\"Kenakan 1 Energi dari Kartu Pegangan sendiri pada Pokémon sendiri\"); attacks \"Dump Truck Press\" 120+ and \"Teman Megaton GX\" 210; Kelemahan Fighting x2, no Resistansi, Mundur 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, \"166/SM-P\", ©2020 Pokémon. The artwork carries the Indomaret logo, matching the campaign Bulbapedia's set-list row names — a distribution marking that implies no finish. Its Thai sibling SPEC-0026 carries a POKÉMON TCG GYM stamp instead: one card, a different channel per market.",
       "recordedAt": "2026-08-10",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:b8edd9754ff3b11baee8c00f165f774ee1d295b4fc15737a4bb13217184630ac"
     },
     {
       "specimenId": "SPEC-0028",
@@ -486,7 +507,8 @@
       "photographSource": "/tmp/claude-0/-home-user-snoredex-data/0a38d020-3b1f-5df4-934b-61dbad7e52e9/scratchpad/c_42697078.png",
       "observed": "Korean Full Art Eevee & Snorlax-GX in a PSA holder, photographed by the owner and supplied through issue #166. The label reads \"2019 P.M. KOR. SM PROMO #140 / FA/EEVEE & SNORLAX GX / T.B/N.U. B.B.PURCHASE CP.\", GEM MT 10, cert 101016611. The card reads \"이브이&잠만보 GX\", 기본 (Basic), TAG TEAM, HP 270, Colorless; 응원, 덤프프레스 120+, 메가톤프렌즈GX 210; weakness Fighting x2, retreat 4; Illus. Tomokazu Komiya; PROMO, regulation mark C, \"140/SM-P\", ©2019 Pokémon. Note this is the Full Art by Tomokazu Komiya and dated 2019 — a different card from the Mitsuhiro Arita TAG TEAM art of the Thai 083 and Indonesian 166, which are ©2020. Same species pair, not the same printing.",
       "recordedAt": "2026-08-10",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:a79d0556f976ca0e079bf7e7bcb4f914608025bdec06505cded07d0c9643a685"
     },
     {
       "specimenId": "SPEC-0029",
@@ -500,7 +522,8 @@
       "photographSource": "/tmp/claude-0/-home-user-snoredex-data/0a38d020-3b1f-5df4-934b-61dbad7e52e9/scratchpad/c_58445291.png",
       "observed": "Traditional Chinese Eevee & Snorlax-GX photographed by the owner through issue #166: \"伊布&卡比獸 GX\", 基礎 (Basic), TAG TEAM, HP 270, Colorless; 加油, 拋擲重壓 120+, 百萬噸友情GX 210; weakness Fighting x2, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, \"053/SM-P\", ©2020 Pokémon. The artwork carries a POKÉMON TCG GYM stamp — the same distribution marking as the Thai 083/SM-P, and the same Mitsuhiro Arita artwork.",
       "recordedAt": "2026-08-10",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:48b1b4ecba6482b17501c890431243433e8ab0f1e1b2dbf0569224c06c7a38eb"
     },
     {
       "specimenId": "SPEC-0030",
@@ -522,7 +545,8 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The owner labelled this photograph \"Mirror Finish\" when supplying it in issue #166, and the card face shows a textured foil across its whole surface including the artwork window. Recorded as the technical finish mirror-holo on the owner's identification; no foil pattern is named because none is legible from the photograph."
-      }
+      },
+      "photographSha256": "sha256:ec92360a99665aa8f194f6a0613970a1bff22d38defe2fe9c5e90cab2761974f"
     },
     {
       "specimenId": "SPEC-0031",
@@ -536,7 +560,8 @@
       "photographSource": "/tmp/claude-0/-home-user-snoredex-data/0a38d020-3b1f-5df4-934b-61dbad7e52e9/scratchpad/c_7e632ba1.png",
       "observed": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on.",
       "recordedAt": "2026-08-10",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:7b1e31e3e1eee9e7ef5fb294645e50eeff47eb00dfc13a5962252fea8eebb64e"
     },
     {
       "specimenId": "SPEC-0032",
@@ -550,7 +575,8 @@
       "photographSource": "/tmp/claude-0/-home-user-snoredex-data/0a38d020-3b1f-5df4-934b-61dbad7e52e9/scratchpad/c_325c7d8b.png",
       "observed": "Traditional Chinese Snorlax in a PSA holder, photographed by the owner through issue #166. The label reads \"2025 POKEMON SV-P CT / SNORLAX / LIGHT CONNECT ALL #215\", GEM MT 10, cert 156080921. The card reads \"卡比獸\", 基礎 (Basic), HP 150; 扣殺抽出 20 and 百萬噸重拳 100; Illus. Ounishi; regulation mark H, \"215/SV-P\", ©2025. The artwork carries the 2025 Taiwan Lantern Festival stamp (2025桃園主辦台灣燈會), matching the event RESUME.md names for this printing.",
       "recordedAt": "2026-08-10",
-      "citedBy": []
+      "citedBy": [],
+      "photographSha256": "sha256:43c08ea19c19597ba303e51279af4c903262bc559c1797aad301ca3c3b3d5b16"
     },
     {
       "specimenId": "SPEC-0033",
@@ -566,7 +592,8 @@
       "recordedAt": "2026-08-11",
       "citedBy": [
         "LATAM:SVP LA:184:base"
-      ]
+      ],
+      "photographSha256": "sha256:1c34eb3ec73660374eb12ea12d8f1e94b23b7479875249a88fec845ab3d402dc"
     },
     {
       "specimenId": "SPEC-0034",
@@ -582,7 +609,8 @@
       "recordedAt": "2026-08-11",
       "citedBy": [
         "WEST:SVP ES:184:base"
-      ]
+      ],
+      "photographSha256": "sha256:a1efa806f7cc9d4750bf1537336a9fa1195a709eecdaa8e1494fd31a4a72ff67"
     },
     {
       "specimenId": "SPEC-0035",
@@ -598,7 +626,8 @@
       "recordedAt": "2026-08-11",
       "citedBy": [
         "LATAM:JTG LA:117/159:base"
-      ]
+      ],
+      "photographSha256": "sha256:c96add035a691266bd55695bfa17536037b75fdd059a5516b649b8f60cadb365"
     },
     {
       "specimenId": "SPEC-0036",
@@ -614,7 +643,8 @@
       "recordedAt": "2026-08-11",
       "citedBy": [
         "LATAM:POR LA:063/088:base"
-      ]
+      ],
+      "photographSha256": "sha256:9e5845d6bcafa4229e7f1c2d05e8925cb12c603653d7c625cd778f5f63f01f6a"
     },
     {
       "specimenId": "SPEC-0037",
@@ -631,7 +661,8 @@
       "citedBy": [
         "U0477",
         "KR:BS2:30/40:base"
-      ]
+      ],
+      "photographSha256": "sha256:2221b4be31aa4caca6a52daaa9809f607ea74be6e0d3226352e43d7a3ead9b01"
     },
     {
       "specimenId": "SPEC-0038",
@@ -647,7 +678,8 @@
       "recordedAt": "2026-08-21",
       "citedBy": [
         "TW:AS5a:222/184:base"
-      ]
+      ],
+      "photographSha256": "sha256:7cd1d1e3381e3a2a8a25bf6c6e65cb6790d90662f94a57c45f9e5448eb4b19db"
     },
     {
       "specimenId": "SPEC-0039",
@@ -663,7 +695,8 @@
       "recordedAt": "2026-08-21",
       "citedBy": [
         "TW:AS5a:203/184:base"
-      ]
+      ],
+      "photographSha256": "sha256:ae74abf7d7a9d3f45777e75232277a5f3c99ecb2c67af422415e1f4d582ea5e7"
     },
     {
       "specimenId": "SPEC-0040",
@@ -688,7 +721,8 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The collection owner explicitly identified this physical card as the Unlimited printing; the retained full-card photograph independently shows Dutch Jungle 11/64 and a reflective holographic artwork field."
-      }
+      },
+      "photographSha256": "sha256:4dd8daaa70409d31fae7d41a5d84650b3b3c318d7a351e16a78ea3ac68f5797a"
     },
     {
       "specimenId": "SPEC-0041",
@@ -713,7 +747,8 @@
         "markingRole": "print-identity",
         "cardSize": "standard",
         "basis": "The photographed Dutch 11/64 card visibly carries EDITIE 1 and a reflective holographic artwork field; the CGC label also identifies it as 1st Edition 11/64 Holo."
-      }
+      },
+      "photographSha256": "sha256:9b2506a445bf9e1b0745db54b0b774caee0f8838c21ad1f53853398fdaf8d243"
     },
     {
       "specimenId": "SPEC-0042",
@@ -723,6 +758,7 @@
       "language": "Dutch",
       "heldBy": "third-party seller",
       "inspectedFrom": "Cardmarket article-scan photograph",
+      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y",
       "photograph": "SPEC-0042.jpg",
       "photographSource": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
       "observed": "Cardmarket article scan of a complete Dutch Jungle Snorlax 27/64 physical card. The card face visibly carries the EDITIE 1 stamp and the artwork field is printed non-holo.",
@@ -738,7 +774,8 @@
         "markingRole": "print-identity",
         "cardSize": "standard",
         "basis": "The Dutch 27/64 card visibly carries EDITIE 1 and its artwork window shows the uniformly printed non-holo treatment."
-      }
+      },
+      "photographSha256": "sha256:ad7f48ec5393d4a8bee7c33c1225ad4972eaed894433cc12d0dd665310186b88"
     },
     {
       "specimenId": "SPEC-0043",
@@ -748,6 +785,7 @@
       "language": "Dutch",
       "heldBy": "third-party seller",
       "inspectedFrom": "Cardmarket article-scan photograph",
+      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y",
       "photograph": "SPEC-0043.jpg",
       "photographSource": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
       "observed": "Independent Cardmarket article scan corroborating the Dutch Jungle Snorlax 27/64 1st Edition non-holo printing. EDITIE 1 and the matte printed artwork field are visible on the complete card face.",
@@ -763,7 +801,8 @@
         "markingRole": "print-identity",
         "cardSize": "standard",
         "basis": "A second physical scan visibly carries EDITIE 1 and shows the Dutch 27/64 card with a uniformly printed non-holo artwork window."
-      }
+      },
+      "photographSha256": "sha256:a531a94c7c103810670115ef78223d9d9249bc7a4a3f84bbea0b5124e0d08590"
     },
     {
       "specimenId": "SPEC-0044",
@@ -788,7 +827,8 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The collection owner explicitly identified this physical card as the Unlimited printing; the retained full-card photograph independently shows Dutch Jungle 27/64 with a uniformly printed non-holo artwork field."
-      }
+      },
+      "photographSha256": "sha256:e272e4dab7100d3097a903cdef81201f5c6bc9d5f16020267bfbc7da4e70ac28"
     }
   ]
 }

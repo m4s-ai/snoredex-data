@@ -19,7 +19,7 @@
       "coverageEdges": 29,
       "absenceEdges": 3,
       "observations": 31,
-      "resolvedVerdictSources": 901
+      "resolvedVerdictSources": 902
     },
     "surfaceStates": {
       "active": 11,
@@ -3310,13 +3310,14 @@
       ],
       "outcome": "The retained listing photograph establishes visible properties of that specimen.",
       "rawRecordRef": "verification/source_registry.json:https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
-      "rawRecordHash": "sha256:8b499044b8ba840bdb3ca2b7f9be991ab272ff2cfaaefdbfe71edf4c3bc6bd07",
+      "rawRecordHash": "sha256:f2f06d6ff9b9dfba59646f7b21111a550c721750a4954569d4658a8844270812",
       "rawRecord": {
         "canonicalUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
         "nonUrlEvidenceId": null,
         "providerId": "snkrdunk",
         "sourceTypes": [
-          "SNKRDUNK marketplace listing photograph (identified physical printing)"
+          "SNKRDUNK marketplace listing photograph (identified physical printing)",
+          "Seller listing photograph"
         ],
         "dimensions": [
           "finish",
@@ -3328,7 +3329,7 @@
           "override:snkrdunk-mp1-012"
         ],
         "retrievedAt": null,
-        "usageCount": 2
+        "usageCount": 3
       }
     },
     {
@@ -3881,23 +3882,29 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:54ffbe95aa7d2b502c7dfa04ebc9e80d340927965193db4a2b41a34d403cbc8e",
+      "rawRecordHash": "sha256:44114ede7f4766c1068ddf12f66b12c72301e848ecf0e8f9213c07130f215801",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
         "providerId": "inspected-specimen",
         "sourceTypes": [
           "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
+          "Owner-supplied physical card photograph",
           "Physical card, photographed holo specimen",
           "Physical card, photographed sealed product",
           "Physical card, photographed sealed specimen",
           "Physical card, photographed specimen"
         ],
         "dimensions": [
+          "finish",
           "language"
         ],
-        "stableIdCount": 9,
+        "stableIdCount": 13,
         "stableIds": [
+          "F0291-P02",
+          "F0294-P02",
+          "F0457-P01",
+          "F0457-P02",
           "U0100",
           "U0189",
           "U0228",
@@ -3909,7 +3916,7 @@
           "U0772"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 9
+        "usageCount": 13
       }
     },
     {
@@ -3930,25 +3937,23 @@
       ],
       "outcome": "The retained seller photograph visibly establishes the Dutch first-edition non-holo printing of Jungle 27/64.",
       "rawRecordRef": "verification/source_registry.json:https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
-      "rawRecordHash": "sha256:57e5121d2b2ca66843cc2e9e50e6fdc999b130a617781fff64afd9bd8c5ef653",
+      "rawRecordHash": "sha256:ba4289ef9f6e1877826802162bbfdb8b74285f9310417f7bf1f63e036b95fe6f",
       "rawRecord": {
         "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
         "nonUrlEvidenceId": null,
         "providerId": "cardmarket-listing-photo",
         "sourceTypes": [
-          "Cardmarket seller listing photograph"
+          "Seller listing photograph"
         ],
         "dimensions": [
-          "finish",
-          "finish-override"
+          "finish"
         ],
-        "stableIdCount": 2,
+        "stableIdCount": 1,
         "stableIds": [
-          "F0174-P01",
-          "override:issue269-dutch-ju27-first-a"
+          "F0174-P01"
         ],
         "retrievedAt": null,
-        "usageCount": 2
+        "usageCount": 1
       }
     },
     {
@@ -5211,19 +5216,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish-override"
-      ]
-    },
-    {
-      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg",
-      "providerId": "cardmarket",
-      "surfaceId": "cardmarket-products",
-      "capabilityEdgeIds": [
-        "cardmarket-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish",
         "finish-override"
       ]
     },
@@ -10100,12 +10092,23 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
-        "finish-override"
+        "finish"
       ]
     },
     {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
       "capabilityEdgeIds": [
@@ -10180,6 +10183,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "finish",
         "language"
       ]
     },
@@ -10192,8 +10196,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
-        "finish-override"
+        "finish"
       ]
     },
     {
@@ -10205,8 +10208,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
-        "finish-override"
+        "finish"
       ]
     },
     {
@@ -10218,8 +10220,19 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
-        "finish-override"
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/user-attachments/assets/c4e46460-12c0-4e05-aaf9-22c0c26b77c5",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {

@@ -12,15 +12,23 @@ import argparse
 import hashlib
 import json
 import re
+from copy import deepcopy
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
+FINISH_UNITS = ROOT / "verification" / "finish_units.json"
+SPECIMENS = ROOT / "verification" / "specimens.json"
 GRAPH_SCHEMA = "snoredex-authoritative-locality-graph"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
+FOIL_PATTERN_ALIASES = {
+    "poke ball mirror": "poke-ball",
+    "poké ball mirror": "poke-ball",
+    "master ball mirror": "master-ball",
+}
 
 
 def read_graph() -> dict[str, Any]:
@@ -36,12 +44,395 @@ def _graph_hash(graph: dict[str, Any]) -> str:
     return "sha256:" + hashlib.sha256(body.encode("utf-8")).hexdigest()
 
 
+def _read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def _number(value: Any) -> str:
+    return str(value or "").split("/", 1)[0]
+
+
+def normalized_foil_pattern(value: Any) -> Any:
+    if not isinstance(value, str):
+        return value
+    return FOIL_PATTERN_ALIASES.get(value.strip().casefold(), value)
+
+
+def _semantic_markings(value: Any) -> list[dict[str, Any]] | None:
+    if not value:
+        return None
+    if not isinstance(value, list):
+        return value
+    return sorted(
+        (dict(row) for row in value),
+        key=lambda row: (str(row.get("kind", "")), str(row.get("role", "")), str(row.get("text", ""))),
+    )
+
+
+def printing_semantic_key(scope: Any, printing: dict[str, Any]) -> str:
+    """Canonical identity for a physical finish printing, independent of its ordinal id."""
+    payload = {
+        "scope": str(scope or ""),
+        "finish": printing.get("finish"),
+        "edition": printing.get("edition"),
+        "foilPattern": normalized_foil_pattern(printing.get("foilPattern")),
+        "markings": _semantic_markings(printing.get("markings")),
+        "distribution": printing.get("distribution") or None,
+        "cardSize": printing.get("cardSize") or "unknown",
+    }
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def stable_printing_id(semantic_key: str) -> str:
+    return "PRINTING:" + hashlib.sha256(semantic_key.encode("utf-8")).hexdigest()[:24]
+
+
+def _release_index(graph: dict[str, Any]) -> dict[tuple[str, str, str], str]:
+    """Index card releases by the typed local identity used by finish units."""
+    index: dict[tuple[str, str, str], str] = {}
+    for row in graph["entities"]:
+        if row.get("entityType") != "card-release":
+            continue
+        payload = row.get("payload") or {}
+        set_code = payload.get("localSetCode") or payload.get("viaLegacySetCode")
+        number = payload.get("localNumber") or payload.get("viaLegacyNumber")
+        language = payload.get("language")
+        if set_code is not None and number is not None and language:
+            key = (str(set_code), _number(number), str(language))
+            previous = index.get(key)
+            if previous and previous != row["entityId"]:
+                raise ValueError(f"ambiguous card release identity: {key}")
+            index[key] = row["entityId"]
+    return index
+
+
+def _entity(entity_type: str, entity_id: str, payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "entityType": entity_type,
+        "entityId": entity_id,
+        "origin": "physical-evidence-projection",
+        "payload": payload,
+    }
+
+
+def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
+    """Rebuild finish/specimen graph nodes from canonical generated inputs.
+
+    The locality migration remains the graph's reviewed base. This projection owns only the
+    physical-printing slice, so a new specimen changes one canonical input and this function
+    deterministically refreshes claims, nodes, edges and dispositions.
+    """
+    finish_document = _read_json(FINISH_UNITS)
+    specimen_document = _read_json(SPECIMENS)
+    finish_units = finish_document.get("units", [])
+    specimens = [row for row in specimen_document.get("specimens", [])
+                 if row.get("physicalObservation")]
+    release_ids = _release_index(graph)
+    specimen_by_id = {str(row["specimenId"]): row for row in specimens}
+    existing_finish_proposals = {
+        str(row.get("payload", {}).get("sourceId")): row.get("payload", {}).get("proposedCardReleaseId")
+        for row in graph["entities"]
+        if row.get("entityType") == "candidate-claim"
+        and row.get("payload", {}).get("sourceKind") == "finish-printing-record"
+    }
+    existing_finish_proposals_by_semantic = {
+        str(row.get("payload", {}).get("semanticPrintingId")): row.get("payload", {}).get("proposedCardReleaseId")
+        for row in graph["entities"]
+        if row.get("entityType") == "candidate-claim"
+        and row.get("payload", {}).get("sourceKind") == "finish-printing-record"
+        and row.get("payload", {}).get("semanticPrintingId")
+    }
+    previous_physical_by_semantic: dict[str, str] = {}
+    previous_claim_by_physical: dict[str, str] = {}
+    for row in graph["entities"]:
+        if row.get("entityType") != "physical-printing":
+            continue
+        payload = row.get("payload") or {}
+        if not payload.get("sourceFinishUnitId"):
+            continue
+        semantic_key = printing_semantic_key(payload.get("cardReleaseId"), payload)
+        previous_physical_by_semantic[semantic_key] = str(row["entityId"])
+        claim_id = payload.get("establishingClaimId")
+        if claim_id:
+            previous_claim_by_physical[str(row["entityId"])] = str(claim_id)
+
+    generated_entities: list[dict[str, Any]] = []
+    generated_edges: list[dict[str, Any]] = []
+    generated_dispositions: list[dict[str, Any]] = []
+    specimen_targets: dict[str, str] = {}
+    conflicted_specimen_ids = {
+        str(specimen_id)
+        for unit in finish_units
+        for printing in unit.get("printings", [])
+        if printing.get("conflictsWith")
+        for specimen_id in printing.get("specimenIds") or []
+    }
+
+    for unit in finish_units:
+        unit_key = (str(unit.get("setCode") or ""), _number(unit.get("number")),
+                    str(unit.get("language") or ""))
+        release_id = release_ids.get(unit_key)
+        for printing in sorted(unit.get("printings", []), key=lambda row: row.get("printingId", "")):
+            printing_id = str(printing["printingId"])
+            semantic_scope = release_id or "finish-unit:" + "|".join(unit_key)
+            semantic_key = printing_semantic_key(semantic_scope, printing)
+            semantic_id = stable_printing_id(semantic_key)
+            physical_id = previous_physical_by_semantic.get(semantic_key, f"PHYSICAL:{semantic_id}")
+            claim_id = previous_claim_by_physical.get(
+                physical_id, f"CLAIM:finish:{semantic_id}"
+            )
+            confirmed = printing.get("verificationStatus") == "confirmed"
+            if confirmed and not release_id:
+                raise ValueError(f"confirmed finish unit has no card release: {unit_key}")
+            specimen_ids = sorted({str(value) for value in printing.get("specimenIds") or []})
+            specimen_ids = [value for value in specimen_ids if value in specimen_by_id]
+            claim_payload = {
+                "claimId": claim_id,
+                "claimKind": "physical-printing",
+                "sourceKind": "finish-printing-record",
+                "sourceId": printing_id,
+                "semanticPrintingId": semantic_id,
+                "evidenceStatus": printing.get("verificationStatus", "pending"),
+                "disposition": "established-and-mapped" if confirmed else "candidate-needs-evidence",
+                "proposedTargetId": physical_id if confirmed else None,
+                "materializedTargetId": physical_id if confirmed else None,
+                "reason": (
+                    "explicit specimen conflict requires resolution before materialization"
+                    if printing.get("conflictsWith") else
+                    "canonical specimen observations and finish evidence establish the exact "
+                    "finish and edition"
+                    if specimen_ids else
+                    "finish printing record carries positive evidence"
+                ),
+            }
+            if printing.get("conflictsWith"):
+                claim_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
+            if not confirmed:
+                proposal = (
+                    release_id
+                    or existing_finish_proposals_by_semantic.get(semantic_id)
+                    or existing_finish_proposals.get(printing_id)
+                )
+                if proposal:
+                    claim_payload["proposedCardReleaseId"] = proposal
+            if specimen_ids:
+                claim_payload["specimenIds"] = specimen_ids
+            generated_entities.append(_entity("candidate-claim", claim_id, claim_payload))
+            generated_dispositions.append({
+                "sourceKind": "finish-printing-record",
+                "sourceId": printing_id,
+                "disposition": claim_payload["disposition"],
+                "targetRef": physical_id if confirmed else None,
+                "reason": claim_payload["reason"],
+            })
+            if not confirmed:
+                proposal = claim_payload.get("proposedCardReleaseId")
+                if proposal:
+                    generated_edges.append({
+                        "fromType": "candidate-claim", "fromId": claim_id,
+                        "relation": "proposes-for", "toType": "card-release", "toId": proposal,
+                        "provenance": {},
+                    })
+                continue
+
+            physical_payload = {
+                "physicalPrintingId": physical_id,
+                "semanticPrintingId": semantic_id,
+                "cardReleaseId": release_id,
+                "finish": printing["finish"],
+                "edition": printing.get("edition"),
+                "foilPattern": printing.get("foilPattern"),
+                "markings": printing.get("markings"),
+                "distribution": printing.get("distribution"),
+                "cardSize": printing.get("cardSize"),
+                "errorClass": None,
+                "classificationState": "classified-from-positive-evidence",
+                "sourceFinishUnitId": unit["finishUnitId"],
+                "sourcePrintingId": printing_id,
+                "establishingClaimId": claim_id,
+            }
+            if specimen_ids:
+                physical_payload["specimenIds"] = specimen_ids
+            if printing.get("conflictsWith"):
+                physical_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
+            generated_entities.append(_entity("physical-printing", physical_id, physical_payload))
+            generated_edges.extend([
+                {
+                    "fromType": "candidate-claim", "fromId": claim_id,
+                    "relation": "materializes", "toType": "physical-printing", "toId": physical_id,
+                    "provenance": {"disposition": "established-and-mapped"},
+                },
+                {
+                    "fromType": "physical-printing", "fromId": physical_id,
+                    "relation": "established-by", "toType": "candidate-claim", "toId": claim_id,
+                    "provenance": {},
+                },
+                {
+                    "fromType": "physical-printing", "fromId": physical_id,
+                    "relation": "realizes", "toType": "card-release", "toId": release_id,
+                    "provenance": {},
+                },
+            ])
+            for specimen_id in specimen_ids:
+                specimen_targets[specimen_id] = physical_id
+
+    for specimen_id, specimen in sorted(specimen_by_id.items()):
+        target = specimen_targets.get(specimen_id)
+        claim_id = f"CLAIM:specimen:{specimen_id}"
+        observation = specimen.get("physicalObservation") or {}
+        release_id = release_ids.get((
+            str(specimen.get("setCode") or ""), _number(specimen.get("number")),
+            str(specimen.get("language") or ""),
+        ))
+        standalone_target = None
+        if (not target and release_id and not observation.get("coversMultipleCards")
+                and not observation.get("conflictsWith")
+                and specimen_id not in conflicted_specimen_ids):
+            standalone_target = f"PHYSICAL:specimen:{specimen_id}"
+            target = standalone_target
+            physical_payload = {
+                "physicalPrintingId": standalone_target,
+                "cardReleaseId": release_id,
+                "finish": observation.get("finish"),
+                "edition": observation.get("edition"),
+                "foilPattern": specimen_observation_value(observation, "foilPattern"),
+                "markings": specimen_markings(observation),
+                "distribution": observation.get("distribution"),
+                "cardSize": observation.get("cardSize") or "unknown",
+                "basis": observation.get("basis"),
+                "errorClass": None,
+                "classificationState": "classified-from-positive-evidence",
+                "sourceFinishUnitId": None,
+                "sourcePrintingId": None,
+                "establishingClaimId": claim_id,
+                "specimenIds": [specimen_id],
+            }
+            generated_entities.append(_entity("physical-printing", standalone_target,
+                                              physical_payload))
+            generated_edges.extend([
+                {
+                    "fromType": "candidate-claim", "fromId": claim_id,
+                    "relation": "materializes", "toType": "physical-printing",
+                    "toId": standalone_target,
+                    "provenance": {"disposition": "established-and-mapped"},
+                },
+                {
+                    "fromType": "physical-printing", "fromId": standalone_target,
+                    "relation": "established-by", "toType": "candidate-claim",
+                    "toId": claim_id, "provenance": {},
+                },
+                {
+                    "fromType": "physical-printing", "fromId": standalone_target,
+                    "relation": "realizes", "toType": "card-release", "toId": release_id,
+                    "provenance": {},
+                },
+            ])
+        # A specimen listed on a finish printing is the evidence used to derive that
+        # printing, not an independent provider.  Keep the link as provenance so the
+        # graph never counts an observation as corroborating its own projection.
+        reason = (
+            f"physical observation establishes standalone printing for {release_id}"
+            if standalone_target else
+            f"provides provenance for {target}, already established from the finish store"
+            if target else "physical observation has no matching projected printing"
+        )
+        claim_payload = {
+            "claimId": claim_id,
+            "claimKind": "physical-printing",
+            "sourceKind": "specimen-observation",
+            "sourceId": specimen_id,
+            "evidenceStatus": "observed",
+            "disposition": "established-and-mapped" if standalone_target else "candidate-needs-evidence",
+            "proposedTargetId": target or f"PHYSICAL:specimen:{specimen_id}",
+            "materializedTargetId": standalone_target,
+            "reason": reason,
+        }
+        if target:
+            claim_payload["provenanceTargetId"] = target
+        generated_entities.append(_entity("candidate-claim", claim_id, claim_payload))
+        generated_dispositions.append({
+            "sourceKind": "specimen-observation",
+            "sourceId": specimen_id,
+            "disposition": "established-and-mapped" if standalone_target else "candidate-needs-evidence",
+            "targetRef": standalone_target,
+            "reason": reason,
+        })
+        if target and not standalone_target:
+            generated_edges.append({
+                "fromType": "candidate-claim", "fromId": claim_id,
+                "relation": "provenance", "toType": "physical-printing", "toId": target,
+                "provenance": {"specimenId": specimen_id},
+            })
+
+    owned_claim_ids = {
+        row["entityId"] for row in graph["entities"]
+        if row.get("entityType") == "candidate-claim"
+        and row.get("payload", {}).get("sourceKind") in {"finish-printing-record", "specimen-observation"}
+    }
+    owned_physical_ids = {
+        row["entityId"] for row in graph["entities"]
+        if row.get("entityType") == "physical-printing"
+        and (row.get("payload", {}).get("sourceFinishUnitId")
+             or str(row.get("entityId", "")).startswith("PHYSICAL:specimen:"))
+    }
+    owned_ids = owned_claim_ids | owned_physical_ids
+    graph["entities"] = [row for row in graph["entities"] if row["entityId"] not in owned_ids]
+    graph["entities"].extend(generated_entities)
+    graph["edges"] = [
+        row for row in graph["edges"]
+        if row.get("fromId") not in owned_ids and row.get("toId") not in owned_ids
+    ]
+    graph["edges"].extend(generated_edges)
+    graph["migrationDispositions"] = [
+        row for row in graph["migrationDispositions"]
+        if row.get("sourceKind") not in {"finish-printing-record", "specimen-observation"}
+    ]
+    graph["migrationDispositions"].extend(generated_dispositions)
+
+    graph["entities"].sort(key=lambda row: (row["entityType"], row["entityId"]))
+    graph["edges"].sort(key=lambda row: (
+        row["fromType"], row["fromId"], row["relation"], row["toType"], row["toId"]
+    ))
+    graph["migrationDispositions"].sort(key=lambda row: (row["sourceKind"], row["sourceId"]))
+    entity_counts = defaultdict(int)
+    for row in graph["entities"]:
+        entity_counts[row["entityType"]] += 1
+    disposition_counts = defaultdict(int)
+    for row in graph["migrationDispositions"]:
+        disposition_counts[row["disposition"]] += 1
+    graph["summary"] = {
+        "entities": len(graph["entities"]),
+        "edges": len(graph["edges"]),
+        "migrationInputs": len(graph["migrationDispositions"]),
+        "migrationDispositions": dict(sorted(disposition_counts.items())),
+        "candidateClaims": entity_counts["candidate-claim"],
+        "cardReleases": entity_counts["card-release"],
+        "physicalPrintings": entity_counts["physical-printing"],
+        "setSourceRecords": entity_counts["set-source-record"],
+        "setSourceDispositions": sum(
+            row["sourceKind"] == "set-catalogue-source"
+            for row in graph["migrationDispositions"]
+        ),
+        "localizations": entity_counts["localization"],
+    }
+    graph["meta"]["generated"] = finish_document.get("meta", {}).get(
+        "generated", graph["meta"].get("generated")
+    )
+    return graph
+
+
+def write_graph(graph: dict[str, Any]) -> None:
+    OUTPUT.write_text(json.dumps(graph, ensure_ascii=False, indent=2) + "\n",
+                      encoding="utf-8", newline="\n")
+
+
 def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
     text = observation.get("markings")
     if not text:
         return []
+    kind = "edition-stamp" if str(text).casefold() == "editie 1" else "observed-marking"
     return [{
-        "kind": "observed-marking",
+        "kind": kind,
         "role": observation.get("markingRole"),
         "text": text,
     }]
@@ -112,6 +503,15 @@ def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:
     }
 
 
+def specimen_observation_value(observation: dict[str, Any], field: str) -> Any:
+    """Use the finish projector's explicit default for an omitted card size."""
+    value = observation.get(field)
+    if field == "foilPattern" and isinstance(value, str):
+        key = " ".join(value.casefold().replace("é", "e").split())
+        return FOIL_PATTERN_ALIASES.get(key, value)
+    return value or "unknown" if field == "cardSize" else value
+
+
 def validate(
     graph: dict[str, Any],
     source_registry: dict[str, Any] | None = None,
@@ -174,6 +574,24 @@ def validate(
     claims = by_type["candidate-claim"]
     releases = by_type["card-release"]
     printings = by_type["physical-printing"]
+    specimen_claim_ids = {
+        str(claim.get("sourceId")) for claim in claims.values()
+        if claim.get("sourceKind") == "specimen-observation"
+    }
+    for claim_id, claim in claims.items():
+        conflicts = claim.get("conflictsWith") or []
+        if conflicts and (
+            not isinstance(conflicts, list)
+            or any(ref not in specimen_claim_ids or ref == claim.get("sourceId")
+                   for ref in conflicts)
+            or claim.get("evidenceStatus") != "pending"
+            or claim.get("materializedTargetId") is not None
+        ):
+            errors.append(f"finish conflict claim is not an unresolved explicit conflict: {claim_id}")
+    for printing_id, printing in printings.items():
+        conflicts = printing.get("conflictsWith") or []
+        if conflicts:
+            errors.append(f"conflicted printing was materialized: {printing_id}")
     for claim_id, claim in claims.items():
         target_id = claim.get("materializedTargetId")
         disposition = claim.get("disposition")
@@ -533,6 +951,39 @@ def validate(
         if not claim or not claim.get("materializedTargetId"):
             if specimen.get("physicalObservation", {}).get("coversMultipleCards"):
                 continue
+            provenance_target = claim.get("provenanceTargetId") if claim else None
+            corroborated = claim.get("corroboratedTargetId") if claim else None
+            target_id = provenance_target or corroborated
+            if target_id:
+                physical = printings.get(target_id)
+                if not physical:
+                    errors.append(f"specimen evidence target is missing: {specimen_id}")
+                elif ("candidate-claim", claim["claimId"],
+                      "provenance" if provenance_target else "corroborates",
+                      "physical-printing", target_id) \
+                        not in edge_keys:
+                    errors.append(f"specimen evidence edge is missing: {specimen_id}")
+                else:
+                    observation = specimen.get("physicalObservation", {})
+                    for field in ("finish", "edition", "foilPattern", "cardSize"):
+                        if physical.get(field) != specimen_observation_value(observation, field):
+                            errors.append(f"specimen printing is stale: {specimen_id}:{field}")
+                    if (physical.get("markings") or []) != specimen_markings(observation):
+                        errors.append(f"specimen printing is stale: {specimen_id}:markings")
+                    release = releases.get(physical.get("cardReleaseId"))
+                    if release:
+                        set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
+                        number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
+                        for input_field, release_field in (
+                            ("language", "language"), ("setCode", set_field),
+                            ("number", number_field),
+                        ):
+                            left = _number(specimen.get(input_field)) if input_field == "number" \
+                                else str(specimen.get(input_field) or "")
+                            right = _number(release.get(release_field)) if input_field == "number" \
+                                else str(release.get(release_field) or "")
+                            if left != right:
+                                errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
             continue
         physical = printings.get(claim["materializedTargetId"])
         observation = specimen.get("physicalObservation", {})
@@ -540,7 +991,7 @@ def validate(
             errors.append(f"specimen printing target is missing: {specimen_id}")
             continue
         for field in ("finish", "edition", "foilPattern", "cardSize"):
-            if physical.get(field) != observation.get(field):
+            if physical.get(field) != specimen_observation_value(observation, field):
                 errors.append(f"specimen printing is stale: {specimen_id}:{field}")
         if (physical.get("markings") or []) != specimen_markings(observation):
             errors.append(f"specimen printing is stale: {specimen_id}:markings")
@@ -554,7 +1005,11 @@ def validate(
         for input_field, release_field in (
             ("language", "language"), ("setCode", set_field), ("number", number_field),
         ):
-            if normalized(specimen.get(input_field)) != normalized(release.get(release_field)):
+            left = _number(specimen.get(input_field)) if input_field == "number" \
+                else normalized(specimen.get(input_field))
+            right = _number(release.get(release_field)) if input_field == "number" \
+                else normalized(release.get(release_field))
+            if left != right:
                 errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
 
     # The raw catalogue registry is append-only.  Every raw record must have exactly
@@ -793,12 +1248,24 @@ def validate(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate the committed snapshot")
-    parser.parse_args()
+    parser.add_argument("--write", action="store_true",
+                        help="project physical evidence into the committed graph snapshot")
+    args = parser.parse_args()
+    if args.check and args.write:
+        parser.error("--check and --write are mutually exclusive")
     if not OUTPUT.is_file():
         print("authoritative_graph.py: missing verification/authoritative_graph.json")
         return 1
     try:
         graph = read_graph()
+        if args.write:
+            graph = project_physical_evidence(graph)
+            write_graph(graph)
+        elif args.check:
+            projected = project_physical_evidence(deepcopy(graph))
+            if projected != graph:
+                print("authoritative_graph.py: committed snapshot differs from fresh projection")
+                return 1
         errors = validate(graph)
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f"authoritative_graph.py: invalid snapshot: {error}")

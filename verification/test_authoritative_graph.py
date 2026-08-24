@@ -6,17 +6,65 @@ from __future__ import annotations
 import json
 import sqlite3
 import sys
+import tempfile
 from copy import deepcopy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from authoritative_graph import identity_view, validate  # noqa: E402
+import authoritative_graph as graph_module  # noqa: E402
+from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    assert project_physical_evidence(deepcopy(graph)) == graph
+    # A positional printing id may change when a new printing sorts before it.  The
+    # existing physical node and claim must nevertheless follow the same semantics.
+    with tempfile.TemporaryDirectory() as directory:
+        finish_path = Path(directory) / "finish_units.json"
+        finish_copy = json.loads(
+            (ROOT / "verification" / "finish_units.json").read_text(encoding="utf-8")
+        )
+        shifted = next(
+            printing for unit in finish_copy["units"]
+            for printing in unit.get("printings", [])
+            if printing.get("printingId") == "F0167-P01"
+        )
+        shifted["printingId"] = "F0167-P99"
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        original_finish_path = graph_module.FINISH_UNITS
+        graph_module.FINISH_UNITS = finish_path
+        try:
+            shifted_projection = project_physical_evidence(deepcopy(graph))
+        finally:
+            graph_module.FINISH_UNITS = original_finish_path
+    shifted_physical = next(
+        row["payload"] for row in shifted_projection["entities"]
+        if row["entityType"] == "physical-printing"
+        and row["entityId"] == "PHYSICAL:F0167-P01"
+    )
+    assert shifted_physical["sourcePrintingId"] == "F0167-P99"
+    assert shifted_physical["establishingClaimId"] == "CLAIM:finish:F0167-P01"
+    standalone_claim = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceId") == "SPEC-0030"
+    )
+    assert standalone_claim["disposition"] == "established-and-mapped"
+    assert standalone_claim["materializedTargetId"] == "PHYSICAL:specimen:SPEC-0030"
+    assert any(
+        row["entityType"] == "physical-printing"
+        and row["entityId"] == "PHYSICAL:specimen:SPEC-0030"
+        for row in graph["entities"]
+    )
+    specimens_with_denominator = json.loads(
+        (ROOT / "verification/specimens.json").read_text(encoding="utf-8")
+    )
+    next(row for row in specimens_with_denominator["specimens"]
+         if row["specimenId"] == "SPEC-0030")["number"] = "145/999"
+    assert not validate(graph, identity_inputs={"specimens": specimens_with_denominator})
     meta = graph["meta"]
     assert meta["schema"] == "snoredex-authoritative-locality-graph"
     assert meta["schemaVersion"] == "1.1.0"
@@ -65,7 +113,9 @@ def main() -> None:
         claim = entities[("candidate-claim", f"CLAIM:specimen:{specimen_id}")]["payload"]
         assert claim["evidenceStatus"] == "observed"
         assert claim["materializedTargetId"] is None
-        assert claim["reason"].startswith("corroborates PHYSICAL:F")
+        assert claim["reason"].startswith("provides provenance for PHYSICAL:F")
+        assert claim["provenanceTargetId"].startswith("PHYSICAL:F")
+        assert "corroboratedTargetId" not in claim
 
     localizations = {
         row["payload"]["languageTag"]: row["payload"]
@@ -163,10 +213,15 @@ def main() -> None:
     # A specimen observation must remain attached to a release with the same local
     # set, number and language, not merely to a printing with matching finish fields.
     tampered = deepcopy(graph)
+    specimen_claim = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceId") == "SPEC-0001"
+    )
     specimen_printing = next(
         row["payload"] for row in tampered["entities"]
         if row["entityType"] == "physical-printing"
-        and row["entityId"] == "PHYSICAL:specimen:SPEC-0001"
+        and row["entityId"] == specimen_claim["provenanceTargetId"]
     )
     specimen_printing["cardReleaseId"] = next(
         row["entityId"] for row in tampered["entities"]
@@ -174,6 +229,73 @@ def main() -> None:
         and row["entityId"] != specimen_printing["cardReleaseId"]
     )
     assert any("specimen release identity is stale" in error for error in validate(tampered))
+
+    # Explicit specimen conflicts remain reviewable candidates; they never materialize
+    # a physical printing until the conflict is resolved.
+    conflict_graph = deepcopy(graph)
+    conflict_claim = next(
+        row["payload"] for row in conflict_graph["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceKind") == "finish-printing-record"
+        and row["payload"].get("disposition") == "candidate-needs-evidence"
+    )
+    conflict_claim["evidenceStatus"] = "pending"
+    conflict_claim["conflictsWith"] = ["SPEC-0040"]
+    conflicted_finishes = json.loads(
+        (ROOT / "verification/finish_units.json").read_text(encoding="utf-8")
+    )
+    conflicted_printing_id = conflict_claim["sourceId"]
+    for finish_unit in conflicted_finishes["units"]:
+        for printing in finish_unit.get("printings", []):
+            if printing.get("printingId") == conflicted_printing_id:
+                printing["verificationStatus"] = "pending"
+    assert not validate(conflict_graph, identity_inputs={"finishes": conflicted_finishes})
+    conflict_claim["conflictsWith"] = ["SPEC-NOT-RECORDED"]
+    assert any(
+        "finish conflict claim" in error
+        for error in validate(conflict_graph, identity_inputs={"finishes": conflicted_finishes})
+    )
+
+    # A conflicted specimen may identify a source-first release, but it must remain pending
+    # rather than materializing through the standalone-specimen fallback.
+    with tempfile.TemporaryDirectory() as directory:
+        finish_path = Path(directory) / "finish_units.json"
+        specimens_path = Path(directory) / "specimens.json"
+        finish_copy = json.loads(
+            (ROOT / "verification/finish_units.json").read_text(encoding="utf-8")
+        )
+        conflicted_printing = next(
+            printing for unit in finish_copy["units"]
+            for printing in unit.get("printings", [])
+        )
+        conflicted_printing["verificationStatus"] = "pending"
+        conflicted_printing["specimenIds"] = ["SPEC-0030"]
+        conflicted_printing["conflictsWith"] = ["SPEC-0040"]
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        specimens_path.write_text(
+            (ROOT / "verification/specimens.json").read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+        original_finish_path = graph_module.FINISH_UNITS
+        original_specimens_path = graph_module.SPECIMENS
+        graph_module.FINISH_UNITS = finish_path
+        graph_module.SPECIMENS = specimens_path
+        try:
+            conflict_projection = project_physical_evidence(deepcopy(graph))
+        finally:
+            graph_module.FINISH_UNITS = original_finish_path
+            graph_module.SPECIMENS = original_specimens_path
+    conflict_specimen_claim = next(
+        row["payload"] for row in conflict_projection["entities"]
+        if row["entityType"] == "candidate-claim"
+        and row["payload"].get("sourceId") == "SPEC-0030"
+    )
+    assert conflict_specimen_claim["disposition"] == "candidate-needs-evidence"
+    assert conflict_specimen_claim["materializedTargetId"] is None
+    assert not any(
+        row["entityId"] == "PHYSICAL:specimen:SPEC-0030"
+        for row in conflict_projection["entities"]
+    )
 
     identity = identity_view(graph)
     migrations = {

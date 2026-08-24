@@ -15,6 +15,7 @@ name: Release gate
 on:
   workflow_call:
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
   workflow_dispatch:
 
 permissions:
@@ -26,6 +27,10 @@ concurrency:
 
 jobs:
   gate:
+    # Draft PRs are intentionally in the Codex review loop: avoid spending the full two-OS
+    # release gate on every review-fix push. Marking the PR ready starts the gate again, and
+    # workflow_dispatch remains available for an explicit check at any time.
+    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
     name: gate (${{ matrix.os }})
     env:
       # Keep the checkout artifact-clean while generators import sibling modules.

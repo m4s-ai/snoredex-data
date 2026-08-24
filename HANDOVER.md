@@ -196,20 +196,21 @@ verification/
                               as SPEC-nnnn.png/.jpg and sets `photograph` plus the optional
                               `photographSource` (where the bytes came from — keep the original
                               GitHub attachment URL here, since that URL outlives nothing). Then
-                              run review_findings.py and scripts/database.py. Checks S7-S12 cover
+                              the importer also records `photographSha256` so later checks can
+                              detect byte drift. Run review_findings.py and scripts/database.py.
+                              Checks S7-S12 cover
                               it; publish.py already allowlists the directory and LICENSE.md
                               decision 4 covers the category, so no approval is needed per image.
                               PNG and JPEG only: publish.py also allowlists .webp, but
                               `image_format` in review_findings.py knows PNG and JPEG magic
                               alone, so a committed .webp would fail S9.
-                              A photograph the owner attached to a GitHub issue CANNOT be fetched
-                              here — the agent proxy refuses github.com/user-attachments/assets/
-                              and the older github.com/{owner}/{repo}/assets/ form alike, so
-                              adding the repo to the path is not a workaround. It is not a
-                              permission problem; the repository is public and the image opens in
-                              a browser. Commit the bytes to a branch and point `--from` at the
-                              path. Release downloads and every githubusercontent host are
-                              reachable if a URL is easier.
+                              A raw GitHub attachment URL is blocked by the agent proxy, but the
+                              issue HTML contains the signed private-user-images URL. The one-command
+                              route is `fetch_attachment.py --issue NUMBER --manifest PATH`; it
+                              parses that HTML, downloads the signed candidate, and stores the
+                              stable issue URL as provenance. If the HTML is unavailable, commit
+                              the bytes to a branch and point `--from` at the local path. Release
+                              downloads and githubusercontent hosts are also reachable.
   confirmed_sources.json      Export of all confirmed units.
   CONTRADICTED.json           The 84 refuted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
@@ -219,6 +220,12 @@ verification/
                               confirmed languages, finish/treatment badges and filters (an Artifact).
   finish_units.json           FINISH STATE STORE. Set number×language units with physical printings,
                               finish/pattern/marking/size, sources and Cardmarket-product mappings.
+  finish_tcgdex_snapshot.json VERSIONED TCGdex input for the finish generator. Normal regeneration
+                              reads it offline and validates each payload hash. It changes only on
+                              an explicit two-step refresh: `--refresh` stages the exact candidate,
+                              then `--refresh --accept-refresh` consumes that candidate without a
+                              second fetch after reviewing the drift; there is no automatic updater.
+                              Review monthly and before releases.
   finish_overrides.json       Curated special-printing facts not expressible in group-level APIs.
   FINISH_SOURCES.md           Finish evidence hierarchy, confirmed special cases, exact source
                               endpoints and the repeatable research workflow.
@@ -299,7 +306,7 @@ verification/
   history/                    Frozen snapshots — launch runbook, migration plan, dated reviews.
                               Each carries a "Historical record" banner and is not maintained;
                               check D3 enforces the banner (#102).
-  archive/passes/             68 completed one-shot passes. Each closed a batch and is named by
+  archive/passes/             69 completed one-shot passes. Each closed a batch and is named by
                               what it did. NEVER rerun and NEVER edited: check X3 hashes every
                               file here against archive/MANIFEST.json and fails on any change.
                               Paths derive from each script's location.

@@ -109,8 +109,10 @@ correction already made here, and reading it is how you avoid repeating one.
    TCGdex `true` confirms a printing; TCGdex `false` does not refute one.
 5. **`pending` means not yet established, never proven absent.** This holds in the data, the
    site copy, and anything you write.
-6. **Write findings as a new Python pass under `verification/`,** then run report + audit +
-   integrity. Do not hand-edit `units.json` or `finish_units.json`.
+6. **Routine physical evidence goes through the canonical manifest importer,** then the finish/
+   graph projectors and release gate. Write a new Python pass under `verification/` only for a
+   migration, bulk repair, or data-model change. Never hand-edit `units.json` or
+   `finish_units.json`.
 7. **Never hand-edit a generated file.** Each carries a header saying so, including the
    `<!-- generated:… -->` blocks in `README.md` and the whole of `index.html`. Regenerate instead.
 8. **Run the checks after every write pass** — see [Commands](#commands). Silent data corruption
@@ -173,14 +175,20 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   rows are #139. Never read a European confirmation as covering LATAM.
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in
-  `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. To add
-  its photograph: `python verification/fetch_attachment.py --specimen SPEC-0002 --from <path>`,
-  then `review_findings.py` and `scripts/database.py`. Never write a new prose description of a
-  specimen — that is what the ids replaced. A photograph attached to a GitHub issue cannot be
-  fetched from an agent session — the proxy refuses the whole `assets` namespace on `github.com`,
-  repository-scoped form included — so the bytes have to arrive by commit, release asset or a
-  `githubusercontent` URL. Record the attachment URL as `photographSource`; it is provenance, not
-  a place the image will still be.
+  `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. For
+  routine issue evidence, prepare one observation manifest and run
+  `python verification/fetch_attachment.py --issue NUMBER --manifest PATH`. The importer follows
+  the issue HTML's signed image candidate, validates it, records its `photographSha256`, and
+  records the stable issue URL as `photographSource`; it is provenance, not a place the image
+  will still be. The direct
+  `--specimen ... --from ...` form remains for a local or already reachable image. Never write a
+  new prose description of a specimen — that is what the ids replaced.
+- **Graph printing identity is semantic, not ordinal.** Finish records still carry their source
+  `printingId` for traceability, but graph claims/nodes derive a `semanticPrintingId` from the
+  release, finish, edition, foil pattern, markings, distribution, and card size. Existing graph
+  ids are retained through that semantic lookup; a new semantic printing gets a hash-based id.
+  The collector projection uses the same fingerprint when reconciling predecessor checklist rows,
+  so inserting a printing cannot silently move collection state to a neighbouring card.
 
 ## Commands
 
@@ -279,11 +287,29 @@ for the tree, and again after the push for the history
 `python scripts/finishes.py --reproject` redoes only the card projection from the committed store
 and needs no network; it is the fast path when a projection rule changes.
 
-A full `finishes.py` run reads TCGdex through a cache under `verification/cache/finish-tcgdex/`;
-`--refresh-cache` forces a refetch. **Exit 2 means a source could not be reached** — the artifacts
-are not wrong, the upstream evidence is missing, so retry rather than investigate. The cache's
-validity rules are in [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md), which you
-read before touching finishes anyway.
+The normal release path is offline: `python scripts/regen.py` runs
+`finishes.py --offline`, which reads the versioned
+[`verification/finish_tcgdex_snapshot.json`](verification/finish_tcgdex_snapshot.json) and checks
+every payload hash before use. It never calls TCGdex. The ignored directory
+`verification/cache/finish-tcgdex/` is only a transport cache for an explicit refresh and is not
+the reproducibility source.
+
+There is no automatic scheduler. Review upstream drift deliberately, at least monthly and again
+before a release or whenever TCGdex is known to have changed:
+
+```console
+python scripts/finishes.py --refresh                         # fetch, stage, and report drift
+python scripts/finishes.py --refresh --accept-refresh         # accept that exact staged snapshot
+python scripts/regen.py                                      # rebuild all projections offline
+```
+
+`--refresh` reports changed, added and removed URLs and stages the exact payloads in the ignored
+`verification/cache/finish-tcgdex/refresh-candidate.json`; it leaves the committed snapshot and
+generated outputs untouched. `--refresh --accept-refresh` consumes that staged candidate without
+refetching, validates its hashes and source URL set, then writes the versioned snapshot. **Exit 2
+means a source could not be reached or no valid staged candidate exists** — the artifacts are not
+wrong, so retry the refresh rather than investigate absence. The evidence rules remain in
+[`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md).
 
 Serve the site locally with `python -m http.server 8000`, then open <http://localhost:8000/>.
 `index.html` is the single public page; `verification/confirmed-releases.html` redirects to it.
