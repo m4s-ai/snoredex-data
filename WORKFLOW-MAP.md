@@ -218,9 +218,12 @@ The following operational scripts are intentionally outside the normal offline D
 - `scripts/scoped_regen.py` executes one lane from `verification/scoped_pipeline_manifest.json`,
   records a Run-ID, graph impact, declared writes, and skipped checks, and leaves the L3 full gate
   as the merge boundary.
-- `scripts/workflow_loop.py` evaluates the bounded evidence, discovery, TCGdex, and absence state
-  machines from `verification/workflow_loop_manifest.json`. It stops on terminal state, unchanged
-  progress, failed lane, or the cycle cap; it never promotes a missing result to an absence verdict.
+- `scripts/workflow_loop.py` evaluates the bounded physical-evidence, evidence, source-first
+  discovery, News/Promo, TCGdex, absence, and Cardmarket state machines from
+  `verification/workflow_loop_manifest.json`. The manifest records each loop's lane, impact
+  classes, and ordering-only `dependsOn` graph; dependencies never trigger another loop. It stops
+  on terminal state, unchanged progress, failed lane, or the cycle cap; it never promotes a
+  missing result to an absence verdict.
 
 The measurement separates declared ownership from observation: the gate matrix supplies
 the stores and projection roots a lane declares, while the runner records only the files

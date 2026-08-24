@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Run a bounded evidence/discovery/TCGdex/absence loop.
+"""Run bounded workflow loops for evidence, physical proof, discovery, News/Promo, TCGdex,
+absence, and Cardmarket boundaries.
 
 This is orchestration, not a second truth writer. Each cycle delegates to the scoped-lane runner
 or, for an explicit live discovery request, to the existing retained-run refresh wrapper. The
@@ -30,6 +31,9 @@ CARD_RUNS = ROOT / "verification" / "runs" / "card-discovery"
 SNAPSHOT = ROOT / "verification" / "finish_tcgdex_snapshot.json"
 CANDIDATE = ROOT / "verification" / "cache" / "finish-tcgdex" / "refresh-candidate.json"
 ADJUDICATIONS = ROOT / "verification" / "owner_adjudications.json"
+SPECIMENS = ROOT / "verification" / "specimens.json"
+SET_SOURCES = ROOT / "verification" / "set_catalogue_sources.json"
+CARDMARKET_BASELINE = ROOT / "legacy-cardmarket-baseline.json"
 RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$")
 
 
@@ -53,6 +57,28 @@ def evidence_state() -> dict[str, Any]:
     else:
         state = "terminal"
     return {"state": state, "progress": {key: counts.get(key, 0) for key in sorted(counts)}}
+
+
+def physical_state() -> dict[str, Any]:
+    specimens = read_json(SPECIMENS)["specimens"]
+    observations = sum(bool(specimen.get("physicalObservation")) for specimen in specimens)
+    photographs = sum(bool(specimen.get("photographSha256")) for specimen in specimens)
+    attachments = sum(bool(specimen.get("photograph")) for specimen in specimens)
+    if not specimens:
+        state = "issue"
+    elif observations < len(specimens):
+        state = "needs-evidence"
+    else:
+        state = "terminal"
+    return {
+        "state": state,
+        "progress": {
+            "specimenCount": len(specimens),
+            "physicalObservationCount": observations,
+            "photographHashCount": photographs,
+            "attachmentCount": attachments,
+        },
+    }
 
 
 def discovery_state() -> dict[str, Any]:
@@ -110,6 +136,44 @@ def tcgdex_state() -> dict[str, Any]:
     }
 
 
+def news_promo_state() -> dict[str, Any]:
+    records = read_json(SET_SOURCES)["sourceRecords"]
+    newsish = []
+    leads = []
+    claims = []
+    for record in records:
+        text = json.dumps(record, ensure_ascii=False).lower()
+        kind = str(record.get("sourceKind", "")).lower()
+        if any(token in text for token in ("news", "announcement", "promo")):
+            newsish.append(record)
+        if kind in {"news-lead", "promo-lead", "announcement-lead"}:
+            leads.append(record)
+        raw = record.get("raw") or {}
+        if kind in {"news-lead", "promo-lead", "announcement-lead"} and (raw.get("snorlaxPrintIds") or raw.get("cardIds")):
+            claims.append(record)
+    if not leads:
+        state = "needs-source"
+    elif leads and not newsish:
+        state = "lead"
+    elif leads and not claims:
+        state = "concrete-source"
+    elif claims:
+        state = "graph"
+    elif newsish:
+        state = "needs-source"
+    else:
+        state = "needs-source"
+    return {
+        "state": state,
+        "progress": {
+            "sourceRecordCount": len(records),
+            "newsPromoRecordCount": len(newsish),
+            "leadCount": len(leads),
+            "positiveClaimCount": len(claims),
+        },
+    }
+
+
 def absence_state() -> dict[str, Any]:
     counts = read_json(EVIDENCE)["counts"]["applicationStatuses"]
     decisions = read_json(ADJUDICATIONS)["decisions"]
@@ -130,11 +194,37 @@ def absence_state() -> dict[str, Any]:
     }
 
 
+def cardmarket_state() -> dict[str, Any]:
+    specimens = read_json(SPECIMENS)["specimens"]
+    baseline = read_json(CARDMARKET_BASELINE)
+    cards = baseline.get("members", {}).get("cards", [])
+    listings = [specimen for specimen in specimens if specimen.get("listingUrl")]
+    positive_listings = [specimen for specimen in listings if specimen.get("physicalObservation")]
+    if not cards:
+        state = "needs-evidence"
+    elif positive_listings:
+        state = "positive-observation"
+    else:
+        state = "terminal"
+    return {
+        "state": state,
+        "progress": {
+            "frozenBaselineCardCount": len(cards),
+            "listingSpecimenCount": len(listings),
+            "positiveListingCount": len(positive_listings),
+            "catalogueExpansion": 0,
+        },
+    }
+
+
 EVALUATORS = {
+    "physical": physical_state,
     "evidence": evidence_state,
     "discovery": discovery_state,
+    "news-promo": news_promo_state,
     "tcgdex": tcgdex_state,
     "absence": absence_state,
+    "cardmarket": cardmarket_state,
 }
 
 

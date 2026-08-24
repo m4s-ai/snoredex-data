@@ -16,13 +16,32 @@ LOOP = ROOT / "scripts" / "workflow_loop.py"
 def main() -> int:
     document = json.loads(MANIFEST.read_text(encoding="utf-8"))
     loops = {loop["id"]: loop for loop in document["loops"]}
-    assert set(loops) == {"evidence", "discovery", "tcgdex", "absence"}
+    assert set(loops) == {"physical", "evidence", "discovery", "news-promo", "tcgdex", "absence", "cardmarket"}
     assert document["loopContract"]["positiveEvidence"].startswith("No loop may turn")
     assert document["loopContract"]["mergeBoundary"].endswith("L3 merge gate.")
     for loop in loops.values():
         assert loop["initial"] in loop["states"]
         assert set(loop["terminal"]).issubset(loop["states"])
-        assert loop["lane"] in {"correction", "source-discovery", "finish-refresh", "absence"}
+        assert loop["lane"] in {"physical-evidence", "correction", "source-discovery", "finish-refresh", "absence"}
+        assert set(loop["dependsOn"]).issubset(loops)
+        assert loop["gateLevel"] == "L0-L2 scoped lane; L3 merge gate"
+        assert loop["retry"]
+
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(loop_id: str) -> None:
+        assert loop_id not in visiting, f"workflow-loop dependency cycle at {loop_id}"
+        if loop_id in visited:
+            return
+        visiting.add(loop_id)
+        for dependency in loops[loop_id]["dependsOn"]:
+            visit(dependency)
+        visiting.remove(loop_id)
+        visited.add(loop_id)
+
+    for loop_id in loops:
+        visit(loop_id)
 
     reports = [
         ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-evidence.json",

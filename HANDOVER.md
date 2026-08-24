@@ -110,8 +110,10 @@ scripts/                      Two halves; only the second can be re-run (#28). T
                               L0–L2 lane and writes an ignored Run-ID report; it never replaces
                               the full regen.py merge gate.
                               workflow_loop.py reads workflow_loop_manifest.json for bounded
-                              evidence/discovery/TCGdex/absence cycles and stops on no progress or
-                              required owner/source input; it never infers absence from silence.
+                              physical/evidence/discovery/News-Promo/TCGdex/absence/Cardmarket
+                              cycles and stops on no progress or required owner/source input; its
+                              dependency graph is ordering-only and it never infers absence from
+                              silence.
                               publish.py assembles and verifies the allowlisted Pages artifact;
                               collector_deployment.py binds it to the containing commit.
                               authoritative_graph.py validates the reviewed #140 locality graph;
