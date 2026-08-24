@@ -43,6 +43,13 @@ def main() -> None:
             ["https://github.com/user-attachments/assets/stable-b"],
         ),
     ]
+    signed_only = (
+        '<img src="https://private-user-images.githubusercontent.com/1/signed-only.png">'
+    )
+    assert fetch_attachment.issue_attachments(signed_only) == [(
+        "https://private-user-images.githubusercontent.com/1/signed-only.png",
+        ["https://private-user-images.githubusercontent.com/1/signed-only.png"],
+    )]
     duplicate_html = html + html.split("</a>", 1)[0] + "</a>"
     assert len(fetch_attachment.issue_attachments(duplicate_html)) == 2
     image = (ROOT / "verification" / "specimens" / "SPEC-0040.png").read_bytes()
@@ -103,6 +110,14 @@ def main() -> None:
         listing_url="https://seller.example/listing/11",
     )
     assert seller_record["listingUrl"] == "https://seller.example/listing/11"
+    expect_failure(lambda: fetch_attachment.build_specimen(
+        {
+            "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
+            "heldBy": "third-party seller", "inspectedFrom": "listing photograph",
+            "observed": "positive", "recordedAt": "2026-08-24",
+            "physicalObservation": {"finish": "holo"},
+        }, "SPEC-9997", "SPEC-9997.png", "issue", digest,
+    ))
 
     # Direct --specimen imports must reject bytes already filed under another specimen too.
     source = ROOT / ".fetch-attachment-test-card.png"
@@ -197,6 +212,50 @@ def main() -> None:
         manifest.unlink(missing_ok=True)
         registry.unlink(missing_ok=True)
         (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
+
+    # Signed-only issue HTML must match the stable issue provenance from a prior run.
+    signed_issue_html = ROOT / ".fetch-attachment-test-signed-only.html"
+    signed_issue_html.write_text(signed_only, encoding="utf-8")
+    signed_manifest = ROOT / ".fetch-attachment-test-signed-only-manifest.json"
+    signed_manifest.write_text(json.dumps({"issue": 999, "observations": [{
+        "attachmentIndex": 1, "setCode": "JU", "number": "11/64", "variant": "V1",
+        "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
+        "observed": "positive", "recordedAt": "2026-08-24",
+        "physicalObservation": {"finish": "holo"},
+    }]}), encoding="utf-8")
+    signed_registry = ROOT / ".fetch-attachment-test-signed-only-registry.json"
+    signed_registry.write_text(json.dumps({"count": 1, "specimens": [{
+        "specimenId": "SPEC-0099",
+        "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
+        "heldBy": "owner", "inspectedFrom": "photo", "observed": "positive",
+        "recordedAt": "2026-08-24", "citedBy": [],
+        "physicalObservation": {"finish": "holo"},
+        "photographSource": "https://github.com/m4s-ai/snoredex-data/issues/999#attachment-1",
+    }]}), encoding="utf-8")
+    original_registry = fetch_attachment.SPECIMENS_JSON
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    original_download_candidates = fetch_attachment.download_candidates
+    fetch_attachment.SPECIMENS_JSON = signed_registry
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.download_candidates = lambda candidates: image
+    signed_doc = json.loads(signed_registry.read_text(encoding="utf-8"))
+    try:
+        assert fetch_attachment.command_issue(
+            signed_doc,
+            SimpleNamespace(
+                issue=999, issue_html=str(signed_issue_html), manifest=str(signed_manifest),
+                allow_small=False, replace=False, dry_run=False,
+            ),
+        ) == 0
+        assert signed_doc["specimens"][0]["specimenId"] == "SPEC-0099"
+    finally:
+        fetch_attachment.SPECIMENS_JSON = original_registry
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        fetch_attachment.download_candidates = original_download_candidates
+        signed_issue_html.unlink(missing_ok=True)
+        signed_manifest.unlink(missing_ok=True)
+        signed_registry.unlink(missing_ok=True)
+        (ROOT / "SPEC-0099.png").unlink(missing_ok=True)
 
     # Replacing a photograph must remove the superseded extension atomically.
     old_photo = ROOT / "SPEC-0001.jpg"

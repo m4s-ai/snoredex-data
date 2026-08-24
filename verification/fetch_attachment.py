@@ -463,6 +463,8 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
     if not isinstance(physical, dict) or not physical.get("finish"):
         fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
+    if item.get("heldBy") == "third-party seller" and not listing_url:
+        fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
     record = {
         "specimenId": specimen_id,
         "setCode": item["setCode"],
@@ -572,7 +574,10 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         stable, candidates = select_issue_attachment(
             attachments, item.get("attachment", item.get("attachmentIndex")), ordinal
         )
-        existing = existing_by_source.get(stable)
+        provenance = stable
+        if "private-user-images.githubusercontent.com" in (urlparse(stable).hostname or ""):
+            provenance = f"{issue_url}#attachment-{ordinal}"
+        existing = existing_by_source.get(provenance) or existing_by_source.get(stable)
         specimen_id = str(item.get("specimenId") or (existing or {}).get("specimenId") or next_id)
         if specimen_id in used_ids:
             fail(f"manifest uses specimen {specimen_id} more than once")
@@ -595,9 +600,6 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         if destination.is_file() and not current:
             fail(f"{destination.relative_to(ROOT)} exists without a matching specimen record")
 
-        provenance = stable
-        if "private-user-images.githubusercontent.com" in (urlparse(stable).hostname or ""):
-            provenance = f"{issue_url}#attachment-{ordinal}"
         digest = content_hash(blob)
         ensure_unique_photo_hash(photo_hash_owners, digest, specimen_id)
         listing_url = item.get("listingUrl")

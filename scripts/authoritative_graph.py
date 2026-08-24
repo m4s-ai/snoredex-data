@@ -134,7 +134,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             if printing.get("conflictsWith"):
                 claim_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
             if not confirmed:
-                proposal = existing_finish_proposals.get(printing_id) or release_id
+                proposal = release_id or existing_finish_proposals.get(printing_id)
                 if proposal:
                     claim_payload["proposedCardReleaseId"] = proposal
             if specimen_ids:
