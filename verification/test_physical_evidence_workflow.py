@@ -102,6 +102,10 @@ def main() -> None:
     }
     conflicted = projector.specimen_printing(conflict)
     assert conflicted["conflictsWith"] == ["SPEC-0044"]
+    reverse = projector.add_reverse_specimen_conflicts(
+        projector.specimen_printing(fixture[1]), "SPEC-0041", {"SPEC-0041": {"SPEC-0040"}}
+    )
+    assert reverse["conflictsWith"] == ["SPEC-0040"]
     projected: list[dict] = []
     projector.add_printing(projected, conflicted)
     assert projected[0]["verificationStatus"] == "pending"

@@ -931,7 +931,11 @@ def validate(
         for input_field, release_field in (
             ("language", "language"), ("setCode", set_field), ("number", number_field),
         ):
-            if normalized(specimen.get(input_field)) != normalized(release.get(release_field)):
+            left = _number(specimen.get(input_field)) if input_field == "number" \
+                else normalized(specimen.get(input_field))
+            right = _number(release.get(release_field)) if input_field == "number" \
+                else normalized(release.get(release_field))
+            if left != right:
                 errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
 
     # The raw catalogue registry is append-only.  Every raw record must have exactly

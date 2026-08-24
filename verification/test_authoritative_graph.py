@@ -32,6 +32,12 @@ def main() -> None:
         and row["entityId"] == "PHYSICAL:specimen:SPEC-0030"
         for row in graph["entities"]
     )
+    specimens_with_denominator = json.loads(
+        (ROOT / "verification/specimens.json").read_text(encoding="utf-8")
+    )
+    next(row for row in specimens_with_denominator["specimens"]
+         if row["specimenId"] == "SPEC-0030")["number"] = "145/999"
+    assert not validate(graph, identity_inputs={"specimens": specimens_with_denominator})
     meta = graph["meta"]
     assert meta["schema"] == "snoredex-authoritative-locality-graph"
     assert meta["schemaVersion"] == "1.1.0"

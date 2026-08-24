@@ -408,6 +408,15 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
     return candidate
 
 
+def add_reverse_specimen_conflicts(
+    candidate: dict[str, Any], specimen_id: str, reverse_conflicts: dict[str, set[str]]
+) -> dict[str, Any]:
+    conflicts = set(candidate.get("conflictsWith") or []) | reverse_conflicts.get(specimen_id, set())
+    if conflicts:
+        candidate["conflictsWith"] = sorted(conflicts)
+    return candidate
+
+
 def validate_specimen_conflicts(specimens_document: dict[str, Any]) -> None:
     """Validate explicit conflict references without inferring conflicts from omissions."""
     specimens = specimens_document.get("specimens", [])
@@ -556,7 +565,11 @@ def main() -> None:
     specimens_document = read_json(SPECIMENS_PATH)
     validate_specimen_conflicts(specimens_document)
     specimens_by_group: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    reverse_conflicts: dict[str, set[str]] = defaultdict(set)
     for specimen in specimens_document.get("specimens", []):
+        specimen_id = str(specimen.get("specimenId"))
+        for reference in (specimen.get("physicalObservation") or {}).get("conflictsWith") or []:
+            reverse_conflicts[str(reference)].add(specimen_id)
         # A frame that explicitly covers multiple cards is context evidence only.  It must not
         # become a synthetic ``base`` printing; the per-card crops/records are the canonical
         # observations that carry the variant mapping.
@@ -855,6 +868,7 @@ def main() -> None:
         for specimen in specimens_by_group.get((set_code, number, language), []):
             candidate = specimen_printing(specimen)
             if candidate is not None:
+                add_reverse_specimen_conflicts(candidate, str(specimen["specimenId"]), reverse_conflicts)
                 add_printing(printings, candidate)
 
         applicable_overrides = [
