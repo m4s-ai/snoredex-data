@@ -211,6 +211,8 @@ python -m playwright install chromium
 
 python scripts/regen.py                          # write every derived artifact, then run the core gate
 python scripts/regen.py --check                  # skip the write phase; this is what CI calls
+# Diagnostic only: limit determinism checks for a focused meta-test; never a merge substitute.
+python scripts/regen.py --check --check-only scripts/evidence_semantics.py
 
 # These environment canaries deliberately stay outside regen.py.
 python verification/test_site.py                 # browser acceptance tests

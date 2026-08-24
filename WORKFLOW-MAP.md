@@ -180,6 +180,7 @@ verification/review_integrity.py
   -> verification/test_korean_burning_confrontation.py
   -> verification/test_completeness_gate.py
   -> verification/test_pipeline_documentation.py
+  -> verification/test_workflow_test_ownership.py
   -> verification/test_findings_harness.py
   -> verification/review_findings.py
   -> verification/test_regen_readiness.py
@@ -195,6 +196,12 @@ The envelope has four distinct responsibilities:
 The normative gate/impact data for issue #286 lives in
 `verification/workflow_gate_matrix.json`. Its stdlib-only regression is
 `verification/test_workflow_gate_matrix.py`, included in `scripts/regen.py`.
+
+Test responsibility for issue #289 is recorded in
+`verification/workflow_test_ownership.json`. It gives every core test one primary contract owner,
+names the deterministic fixtures that may be shared, and keeps import, projection,
+cross-artifact, browser, live, and publish boundaries separate. The corresponding regression is
+`verification/test_workflow_test_ownership.py`.
 
 The following operational scripts are intentionally outside the normal offline DAG:
 

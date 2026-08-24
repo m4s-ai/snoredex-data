@@ -130,6 +130,7 @@ TESTS = [
     ["verification/test_completeness_gate.py"],
     ["verification/test_workflow_gate_matrix.py"],
     ["verification/test_pipeline_documentation.py"],
+    ["verification/test_workflow_test_ownership.py"],
     ["verification/test_findings_harness.py"],
     ["verification/review_findings.py"],          # cross-artifact + publication
     ["verification/test_regen_readiness.py"],
@@ -175,7 +176,20 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true",
                     help="verify artifacts and run the core regression gate")
+    ap.add_argument("--check-only", action="append", metavar="SCRIPT",
+                    help="run only selected CHECK entries (diagnostic/test hook; repeatable)")
     args = ap.parse_args()
+
+    if args.check_only and not args.check:
+        ap.error("--check-only requires --check")
+    check_commands = CHECK
+    if args.check_only:
+        known = {cmd[0] for cmd in CHECK}
+        unknown = sorted(set(args.check_only) - known)
+        if unknown:
+            ap.error("unknown CHECK script(s): " + ", ".join(unknown))
+        wanted = set(args.check_only)
+        check_commands = [cmd for cmd in CHECK if cmd[0] in wanted]
 
     if not args.check:
         for cmd in REGEN:
@@ -187,7 +201,7 @@ def main() -> int:
     # writers, but it must not change any tracked text or create a new non-SQLite file.
     before_check = tree_state()
     determinism_failures: list[list[str]] = []
-    for cmd in CHECK:
+    for cmd in check_commands:
         if not run([sys.executable, *cmd], " ".join(cmd)):
             determinism_failures.append(cmd)
     if determinism_failures:
@@ -202,7 +216,7 @@ def main() -> int:
               file=sys.stderr)
         return 1
 
-    for test in TESTS:
+    for test in ([] if args.check_only else TESTS):
         if test[0].endswith("review_findings.py"):
             label = " ".join(test)
             print(f"\n=== {label} ===", flush=True)
@@ -233,7 +247,10 @@ def main() -> int:
     ).stdout.strip()
     if status and not args.check:
         print("\nWorking tree changes to review and commit:\n" + status)
-    print("\nregen.py: OK — generated artifacts and core regressions are current.")
+    if args.check_only:
+        print("\nregen.py: OK — selected determinism checks are current.")
+    else:
+        print("\nregen.py: OK — generated artifacts and core regressions are current.")
     return 0
 
 

@@ -2,8 +2,10 @@
 
 Regression for #213: the whole point of the single command is that a stale
 derived artifact is caught before merge, not after three CI restarts. This test
-stales a regenerated artifact, asserts `regen.py --check` exits non-zero, then
-restores it.
+stales two regenerated artifacts, asserts the selected `regen.py --check-only`
+determinism pass catches both, then restores them. The complete L3 suite is
+covered by the normal `regen.py --check` invocation; this meta-test does not
+start that suite a second time.
 """
 from __future__ import annotations
 
@@ -41,7 +43,11 @@ def main() -> int:
                 print(f"SKIP: could not find marker in {path}")
                 return 0
             path.write_bytes(corrupted)
-        proc = run([sys.executable, str(REGEN), "--check"])
+        proc = run([
+            sys.executable, str(REGEN), "--check",
+            "--check-only", "scripts/evidence_semantics.py",
+            "--check-only", "scripts/authoritative_graph.py",
+        ])
         expected_header = "FAILED determinism checks:"
         expected_commands = (
             "scripts/evidence_semantics.py --check",
