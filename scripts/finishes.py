@@ -457,6 +457,34 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
     return candidate
 
 
+def merge_curated_specimen_identity(
+    candidate: dict[str, Any], manual: dict[str, Any], source_registry: dict[str, dict[str, Any]]
+) -> bool:
+    """Carry curated optional identity onto a specimen with the same cited provenance."""
+    if candidate.get("finish") != manual.get("finish"):
+        return False
+    candidate_variants = set(candidate.get("mappedVariants") or [])
+    manual_variants = set(manual.get("mappedVariants") or [])
+    if manual_variants and not candidate_variants & manual_variants:
+        return False
+    candidate_urls = {
+        str(source.get("url")) for source in candidate.get("sources") or [] if source.get("url")
+    }
+    manual_urls = {
+        str(source_registry[ref].get("url"))
+        for ref in manual.get("sourceRefs") or []
+        if ref in source_registry and source_registry[ref].get("url")
+    }
+    if not candidate_urls & manual_urls:
+        return False
+    for field in ("edition", "foilPattern", "markings", "distribution", "releaseDate"):
+        candidate_value = candidate.get(field)
+        manual_value = manual.get(field)
+        if candidate_value in (None, [], "unknown") and manual_value not in (None, [], "unknown"):
+            candidate[field] = manual_value
+    return True
+
+
 def add_reverse_specimen_conflicts(
     candidate: dict[str, Any], specimen_id: str, reverse_conflicts: dict[str, set[str]]
 ) -> dict[str, Any]:
@@ -933,19 +961,27 @@ def main() -> None:
                         },
                     )
 
-        # Physical observations are canonical positive evidence. They enter before curated
-        # overrides so the same signature merges sources instead of creating another printing.
-        for specimen in specimens_by_group.get((set_code, number, language), []):
-            candidate = specimen_printing(specimen)
-            if candidate is not None:
-                add_reverse_specimen_conflicts(candidate, str(specimen["specimenId"]), reverse_conflicts)
-                add_printing(printings, candidate)
-
         applicable_overrides = [
             override
             for override in overrides_by_group.get((set_code, number), [])
             if not override.get("languages") or language in override["languages"]
         ]
+
+        # Physical observations are canonical positive evidence. If a curated override cites
+        # the same listing, carry its optional identity (for example distribution) onto the
+        # specimen before semantic signature matching, so one card cannot become two printings.
+        for specimen in specimens_by_group.get((set_code, number, language), []):
+            candidate = specimen_printing(specimen)
+            if candidate is not None:
+                add_reverse_specimen_conflicts(candidate, str(specimen["specimenId"]), reverse_conflicts)
+                for override in applicable_overrides:
+                    if any(
+                        merge_curated_specimen_identity(candidate, manual, source_registry)
+                        for manual in override.get("printings") or []
+                    ):
+                        break
+                add_printing(printings, candidate)
+
         for override in applicable_overrides:
             suppressed = set(override.get("suppressAutoFinishes") or [])
             if suppressed:

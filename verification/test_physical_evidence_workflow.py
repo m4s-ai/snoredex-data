@@ -106,6 +106,25 @@ def main() -> None:
         **fixture[0]["physicalObservation"], "foilPattern": "Poké Ball mirror"
     }
     assert projector.specimen_printing(patterned)["foilPattern"] == "poke-ball"
+    mp1_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0025")
+    mp1_candidate = projector.specimen_printing(mp1_specimen)
+    assert mp1_candidate is not None
+    assert projector.merge_curated_specimen_identity(
+        mp1_candidate,
+        {
+            "finish": "non-holo", "mappedVariants": ["base"],
+            "distribution": {"kind": "fixed-deck", "text": "Start Deck 100"},
+            "sourceRefs": ["snkrdunk-mp1-012"],
+        },
+        {"snkrdunk-mp1-012": {"url": mp1_specimen["photographSource"]}},
+    )
+    assert mp1_candidate["distribution"]["kind"] == "fixed-deck"
+    mp1 = next(unit for unit in finish_units
+               if unit["setCode"] == "mP1" and unit["number"] == "012"
+               and unit["language"] == "Japanese")
+    assert len(mp1["printings"]) == 1
+    assert mp1["printings"][0]["specimenIds"] == ["SPEC-0025"]
+    assert mp1["printings"][0]["distribution"]["kind"] == "fixed-deck"
     indonesian = next(unit for unit in finish_units
                       if unit["setCode"] == "SV-P/ID" and unit["number"] == "117"
                       and unit["language"] == "Indonesian")

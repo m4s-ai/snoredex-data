@@ -3895,39 +3895,22 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:F0231-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:F0231-P01",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0231-P01",
-        "semanticPrintingId": "PRINTING:bbb45c032000d9cd8cd9daa5",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:F0231-P01",
-        "materializedTargetId": "PHYSICAL:F0231-P01",
-        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
-        "specimenIds": [
-          "SPEC-0025"
-        ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:F0231-P02",
       "origin": "physical-evidence-projection",
       "payload": {
         "claimId": "CLAIM:finish:F0231-P02",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0231-P02",
+        "sourceId": "F0231-P01",
         "semanticPrintingId": "PRINTING:fe2f8dd5b76e76450f478283",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:F0231-P02",
         "materializedTargetId": "PHYSICAL:F0231-P02",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0025"
+        ]
       }
     },
     {
@@ -26533,10 +26516,10 @@
         "sourceId": "SPEC-0025",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:F0231-P01",
+        "proposedTargetId": "PHYSICAL:F0231-P02",
         "materializedTargetId": null,
-        "reason": "provides provenance for PHYSICAL:F0231-P01, already established from the finish store",
-        "provenanceTargetId": "PHYSICAL:F0231-P01"
+        "reason": "provides provenance for PHYSICAL:F0231-P02, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:F0231-P02"
       }
     },
     {
@@ -71080,30 +71063,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:F0231-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:F0231-P01",
-        "semanticPrintingId": "PRINTING:bbb45c032000d9cd8cd9daa5",
-        "cardReleaseId": "RELEASE:JP:Japanese:mP1:012:Snorlax-Spike-Draw-Mega-Punch",
-        "finish": "non-holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": [],
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0231",
-        "sourcePrintingId": "F0231-P01",
-        "establishingClaimId": "CLAIM:finish:F0231-P01",
-        "specimenIds": [
-          "SPEC-0025"
-        ]
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:F0231-P02",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -71122,8 +71081,11 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0231",
-        "sourcePrintingId": "F0231-P02",
-        "establishingClaimId": "CLAIM:finish:F0231-P02"
+        "sourcePrintingId": "F0231-P01",
+        "establishingClaimId": "CLAIM:finish:F0231-P02",
+        "specimenIds": [
+          "SPEC-0025"
+        ]
       }
     },
     {
@@ -129521,16 +129483,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0231-P01",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:F0231-P01",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:F0231-P02",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -141398,7 +141350,7 @@
       "fromId": "CLAIM:specimen:SPEC-0025",
       "relation": "provenance",
       "toType": "physical-printing",
-      "toId": "PHYSICAL:F0231-P01",
+      "toId": "PHYSICAL:F0231-P02",
       "provenance": {
         "specimenId": "SPEC-0025"
       }
@@ -173899,22 +173851,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Portuguese:MEW:143:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0231-P01",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:F0231-P01",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0231-P01",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:JP:Japanese:mP1:012:Snorlax-Spike-Draw-Mega-Punch",
       "provenance": {}
     },
     {
@@ -214270,15 +214206,8 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0231-P01",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0231-P01",
-      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0231-P02",
-      "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0231-P02",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -228213,7 +228142,7 @@
       "sourceId": "SPEC-0025",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
-      "reason": "provides provenance for PHYSICAL:F0231-P01, already established from the finish store"
+      "reason": "provides provenance for PHYSICAL:F0231-P02, already established from the finish store"
     },
     {
       "sourceKind": "specimen-observation",
@@ -228259,14 +228188,14 @@
     }
   ],
   "summary": {
-    "entities": 6457,
-    "edges": 9739,
-    "migrationInputs": 2120,
+    "entities": 6455,
+    "edges": 9736,
+    "migrationInputs": 2119,
     "migrationDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 235,
       "carried": 67,
-      "established-and-mapped": 1162,
+      "established-and-mapped": 1161,
       "linked-local-counterpart": 4,
       "mapped": 216,
       "needs-evidence": 127,
@@ -228274,9 +228203,9 @@
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1556,
+    "candidateClaims": 1555,
     "cardReleases": 612,
-    "physicalPrintings": 477,
+    "physicalPrintings": 476,
     "setSourceRecords": 345,
     "setSourceDispositions": 345,
     "localizations": 16
