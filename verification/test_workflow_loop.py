@@ -46,6 +46,8 @@ def main() -> int:
     reports = [
         ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-evidence.json",
         ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-tcgdex.json",
+        ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-physical.json",
+        ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-discovery.json",
     ]
     for report in reports:
         report.unlink(missing_ok=True)
@@ -70,6 +72,31 @@ def main() -> int:
         assert tcgdex_report["cycles"][0]["lane"]["reason"] == "dry-run"
         assert tcgdex_report["stateAfter"] == tcgdex_report["stateBefore"]
         assert "L3 merge gate" in tcgdex_report["mergeBoundary"]
+
+        physical = subprocess.run([
+            sys.executable, str(LOOP), "--loop", "physical", "--dry-run",
+            "--run-id", "test-loop-physical", "--out", str(reports[2]),
+        ], cwd=ROOT, text=True, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        assert physical.returncode == 0, physical.stdout
+        physical_report = json.loads(reports[2].read_text(encoding="utf-8"))
+        assert physical_report["stateBefore"]["progress"]["activeSpecimenCount"] > 0
+        assert physical_report["stateBefore"]["state"] == "observed"
+        assert physical_report["cycleCount"] == 1
+        assert physical_report["cycles"][0]["lane"]["reason"] == "dry-run"
+
+        discovery = subprocess.run([
+            sys.executable, str(LOOP), "--loop", "discovery", "--include-live", "--dry-run",
+            "--run-id", "test-loop-discovery", "--out", str(reports[3]),
+        ], cwd=ROOT, text=True, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        assert discovery.returncode == 0, discovery.stdout
+        discovery_report = json.loads(reports[3].read_text(encoding="utf-8"))
+        progress = discovery_report["stateBefore"]["progress"]
+        if progress["blockedGaps"] and progress["needsSourceGaps"]:
+            # A blocked provider must remain visible while an explicit live refresh can still run
+            # for unrelated refreshable gaps.
+            assert discovery_report["stateBefore"]["state"] == "blocked-by-source"
+            assert discovery_report["cycleCount"] == 1
+            assert discovery_report["cycles"][0]["lane"]["reason"] == "dry-run"
     finally:
         for report in reports:
             report.unlink(missing_ok=True)

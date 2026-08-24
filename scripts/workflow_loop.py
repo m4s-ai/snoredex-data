@@ -61,19 +61,24 @@ def evidence_state() -> dict[str, Any]:
 
 def physical_state() -> dict[str, Any]:
     specimens = read_json(SPECIMENS)["specimens"]
-    observations = sum(bool(specimen.get("physicalObservation")) for specimen in specimens)
+    active_specimens = [specimen for specimen in specimens if specimen.get("physicalObservation")]
+    observations = len(active_specimens)
     photographs = sum(bool(specimen.get("photographSha256")) for specimen in specimens)
     attachments = sum(bool(specimen.get("photograph")) for specimen in specimens)
     if not specimens:
         state = "issue"
-    elif observations < len(specimens):
-        state = "needs-evidence"
+    elif active_specimens:
+        # A positive observation is the active input for this lane. Historical specimen rows may
+        # intentionally have no observation; their absence must not block a newly observed card.
+        state = "observed"
     else:
-        state = "terminal"
+        state = "specimen"
     return {
         "state": state,
         "progress": {
             "specimenCount": len(specimens),
+            "activeSpecimenCount": len(active_specimens),
+            "historicalUnobservedCount": len(specimens) - len(active_specimens),
             "physicalObservationCount": observations,
             "photographHashCount": photographs,
             "attachmentCount": attachments,
@@ -276,7 +281,15 @@ def main() -> int:
     current = before
 
     for number in range(1, args.max_cycles + 1):
-        if current["state"] in loop["terminal"] and not (args.include_live and current["state"] in {"needs-refresh", "needs-source"}):
+        live_discovery_refresh = (
+            args.include_live
+            and args.loop == "discovery"
+            and current["progress"].get("needsSourceGaps", 0) > 0
+        )
+        if current["state"] in loop["terminal"] and not (
+            live_discovery_refresh
+            or (args.include_live and current["state"] in {"needs-refresh", "needs-source"})
+        ):
             stop_reason = f"state={current['state']} requires external input or is terminal"
             skipped.append(stop_reason)
             break
