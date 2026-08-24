@@ -73,6 +73,7 @@ import argparse
 import hashlib
 import json
 from html.parser import HTMLParser
+import re
 import subprocess
 import sys
 import urllib.error
@@ -93,6 +94,7 @@ MAX_BYTES = 25 * 1024 * 1024
 MIN_LONG_EDGE = 200  # a card photograph; an avatar or a placeholder is not one
 TIMEOUT = 30
 USER_AGENT = "snoredex-data/fetch_attachment (+https://github.com/m4s-ai/snoredex-data)"
+SPECIMEN_ID_PATTERN = re.compile(r"SPEC-\d{4}\Z")
 
 # The one namespace the proxy refuses, in both the current and the historical form. Detected by
 # hand so the failure is a sentence a person can act on rather than an opaque 403.
@@ -451,6 +453,14 @@ def next_specimen_id(specimens: list[dict]) -> str:
     return f"SPEC-{max(numbers, default=0) + 1:04d}"
 
 
+def validate_specimen_id(value: object) -> str:
+    """Return a safe stable id, rejecting values that could escape SPECIMEN_DIR."""
+    specimen_id = str(value)
+    if not SPECIMEN_ID_PATTERN.fullmatch(specimen_id):
+        fail(f"invalid specimen id {specimen_id!r}; expected SPEC-nnnn")
+    return specimen_id
+
+
 def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
     return {
         row["photographSha256"]: row["specimenId"]
@@ -593,7 +603,9 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         if "private-user-images.githubusercontent.com" in (urlparse(stable).hostname or ""):
             provenance = f"{issue_url}#attachment-{selected_position}"
         existing = existing_by_source.get(provenance) or existing_by_source.get(stable)
-        specimen_id = str(item.get("specimenId") or (existing or {}).get("specimenId") or next_id)
+        specimen_id = validate_specimen_id(
+            item.get("specimenId") or (existing or {}).get("specimenId") or next_id
+        )
         if specimen_id in used_ids:
             fail(f"manifest uses specimen {specimen_id} more than once")
         used_ids.add(specimen_id)

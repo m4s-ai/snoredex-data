@@ -50,8 +50,9 @@ unreachable source (retry it), not evidence that a card or finish is absent.
 
 Keep one reviewed JSON manifest per issue. Each row names `setCode`, `number`, `variant`,
 `language`, `heldBy`, `inspectedFrom`, `observed`, `recordedAt`, and
-`physicalObservation.finish`; optionally add `specimenId`, `citedBy`, and `attachment` (or
-`attachmentIndex`). Import it in one idempotent command:
+`physicalObservation.finish` plus the quoted `physicalObservation.basis`; seller rows also need
+`listingUrl`. An optional `specimenId` must use the `SPEC-nnnn` format. You may also add
+`citedBy` and `attachment` (or `attachmentIndex`). Import it in one idempotent command:
 
 ```console
 python verification/fetch_attachment.py --issue 269 --manifest path/to/issue-269.json
@@ -64,7 +65,7 @@ bytes, records `photographSha256`, writes `specimens.json` plus `verification/sp
 keeps the stable issue URL as provenance. A second run is a no-op for identical bytes.
 `finishes.py` projects typed finish, edition, marking, size, specimen ids, and explicit
 `conflictsWith` review markers; conflicted observations remain pending until resolved.
-`authoritative_graph.py` then projects corroboration edges. Never add the same SPEC evidence again
+`authoritative_graph.py` then projects provenance edges. Never add the same SPEC evidence again
 in `finish_overrides.json` or in a one-off pass.
 
 ## What this file is

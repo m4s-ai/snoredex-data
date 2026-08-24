@@ -129,6 +129,8 @@ def main() -> None:
             "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
         }, "SPEC-9997", "SPEC-9997.png", "issue", digest,
     ))
+    assert fetch_attachment.validate_specimen_id("SPEC-9999") == "SPEC-9999"
+    expect_failure(lambda: fetch_attachment.validate_specimen_id("../../outside"))
 
     # Direct --specimen imports must reject bytes already filed under another specimen too.
     source = ROOT / ".fetch-attachment-test-card.png"
