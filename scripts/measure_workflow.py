@@ -21,6 +21,7 @@ import json
 import os
 import pathlib
 import platform
+import re
 import subprocess
 import sys
 import tempfile
@@ -53,6 +54,25 @@ def command_path(args: list[str]) -> str:
 
 def python_command(args: list[str]) -> list[str]:
     return [sys.executable, *args]
+
+
+_MEASURE_TEMP_DIR = re.compile(r"(?:<repo>[\\/]+)?_site-measure-(?:ci|pages)-[A-Za-z0-9_-]+")
+
+
+def redact_runtime_paths(value: str) -> str:
+    """Keep persisted diagnostics portable without changing subprocess paths."""
+    redacted = value
+    for root in {str(ROOT), ROOT.as_posix()}:
+        redacted = redacted.replace(root, "<repo>")
+    return _MEASURE_TEMP_DIR.sub("<tempdir>", redacted)
+
+
+def display_command(args: list[str]) -> str:
+    return redact_runtime_paths(" ".join(args))
+
+
+def display_paths(paths: list[str] | set[str]) -> list[str]:
+    return [redact_runtime_paths(path) for path in sorted(paths)]
 
 
 def impact_metadata(command: str, matrix: dict[str, Any]) -> tuple[list[str], list[str], list[str]]:
@@ -191,16 +211,16 @@ def run_spec(spec: dict[str, Any], matrix: dict[str, Any]) -> dict[str, Any]:
     return {
         "label": spec["label"],
         "phase": spec["phase"],
-        "command": " ".join(args),
+        "command": display_command(args),
         "status": status,
         "returnCode": return_code,
         "durationMs": duration_ms,
         "impactClasses": impacts,
         "declaredReadStores": stores,
         "declaredProjectionRoots": projections,
-        "observedChangedPaths": sorted(after - before),
-        "treeDirtyAfter": sorted(after),
-        "outputTail": output[-2000:] if output else "",
+        "observedChangedPaths": display_paths(after - before),
+        "treeDirtyAfter": display_paths(after),
+        "outputTail": redact_runtime_paths(output[-2000:]) if output else "",
     }
 
 

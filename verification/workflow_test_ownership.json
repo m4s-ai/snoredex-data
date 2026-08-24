@@ -94,6 +94,7 @@
     {"id": "workflow-test-ownership", "command": ["verification/test_workflow_test_ownership.py"], "primaryOwner": "workflow-test-ownership", "boundary": "import", "gateLevel": "L0", "fixtures": []},
     {"id": "scoped-regen", "command": ["verification/test_scoped_regen.py"], "primaryOwner": "scoped-regen", "boundary": "import", "gateLevel": "L0", "fixtures": []},
     {"id": "workflow-loop", "command": ["verification/test_workflow_loop.py"], "primaryOwner": "workflow-loop", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "workflow-measurement", "command": ["verification/test_measure_workflow.py"], "primaryOwner": "workflow-measurement", "boundary": "import", "gateLevel": "L0", "fixtures": []},
     {"id": "findings-harness", "command": ["verification/test_findings_harness.py"], "primaryOwner": "findings-harness", "boundary": "cross-artifact", "gateLevel": "L1", "fixtures": []},
     {"id": "cross-artifact", "command": ["verification/review_findings.py"], "primaryOwner": "cross-artifact", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": ["canonical-stores", "authoritative-graph"]},
     {"id": "regen-readiness", "command": ["verification/test_regen_readiness.py"], "primaryOwner": "orchestration-determinism", "boundary": "import", "gateLevel": "L0", "fixtures": ["stale-artifact-markers"], "strategy": "regen.py --check-only selected CHECK entries; the full L3 suite runs once in the parent gate"}
