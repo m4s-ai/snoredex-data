@@ -11,12 +11,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from authoritative_graph import identity_view, validate  # noqa: E402
+from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    assert project_physical_evidence(deepcopy(graph)) == graph
     meta = graph["meta"]
     assert meta["schema"] == "snoredex-authoritative-locality-graph"
     assert meta["schemaVersion"] == "1.1.0"

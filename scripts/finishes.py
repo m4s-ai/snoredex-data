@@ -336,12 +336,12 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
     if candidate.get("specimenIds"):
         existing["specimenIds"] = sorted(set(existing.get("specimenIds") or [])
                                           | set(candidate["specimenIds"]))
-    if STATUS_RANK[candidate["verificationStatus"]] > STATUS_RANK[existing["verificationStatus"]]:
-        existing["verificationStatus"] = candidate["verificationStatus"]
-    if conflicts:
+    existing_conflicts = sorted(set(existing.get("conflictsWith") or []))
+    if existing_conflicts or conflicts:
         existing["verificationStatus"] = "pending"
-        existing["conflictsWith"] = sorted(set(existing.get("conflictsWith") or [])
-                                             | set(conflicts))
+        existing["conflictsWith"] = sorted(set(existing_conflicts) | set(conflicts))
+    elif STATUS_RANK[candidate["verificationStatus"]] > STATUS_RANK[existing["verificationStatus"]]:
+        existing["verificationStatus"] = candidate["verificationStatus"]
     seen_sources = {source_signature(source) for source in existing["sources"]}
     for source in candidate["sources"]:
         if source_signature(source) not in seen_sources:

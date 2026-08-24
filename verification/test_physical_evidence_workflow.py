@@ -106,6 +106,14 @@ def main() -> None:
     projector.add_printing(projected, conflicted)
     assert projected[0]["verificationStatus"] == "pending"
     assert projected[0]["conflictsWith"] == ["SPEC-0044"]
+    # A later clean candidate must not promote a printing whose earlier specimen conflict is
+    # still present; the conflict remains pending until explicitly resolved.
+    clean_candidate = dict(projected[0])
+    clean_candidate.pop("conflictsWith")
+    clean_candidate["verificationStatus"] = "confirmed"
+    projector.add_printing(projected, clean_candidate)
+    assert projected[0]["verificationStatus"] == "pending"
+    assert projected[0]["conflictsWith"] == ["SPEC-0044"]
     projector.validate_specimen_conflicts({"specimens": [
         {"specimenId": "SPEC-A", "physicalObservation": {"conflictsWith": ["SPEC-B"]}},
         {"specimenId": "SPEC-B"},

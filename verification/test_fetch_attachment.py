@@ -96,7 +96,9 @@ def main() -> None:
         {
             "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
             "heldBy": "owner", "inspectedFrom": "photo", "observed": "positive",
-            "recordedAt": "2026-08-24", "physicalObservation": {"finish": "holo"},
+            "recordedAt": "2026-08-24", "physicalObservation": {
+                "finish": "holo", "basis": "observed card surface"
+            },
         }, "SPEC-9999", "SPEC-9999.png", "issue", digest
     )
     assert record["photographSha256"] == digest
@@ -105,17 +107,26 @@ def main() -> None:
             "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
             "heldBy": "third-party seller", "inspectedFrom": "listing photograph",
             "observed": "positive", "recordedAt": "2026-08-24",
-            "physicalObservation": {"finish": "holo"},
+            "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
         }, "SPEC-9998", "SPEC-9998.png", "issue", digest,
         listing_url="https://seller.example/listing/11",
     )
     assert seller_record["listingUrl"] == "https://seller.example/listing/11"
+    allowed_small = fetch_attachment.build_specimen(
+        {
+            "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
+            "heldBy": "owner", "inspectedFrom": "photo", "observed": "positive",
+            "recordedAt": "2026-08-24",
+            "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
+        }, "SPEC-9996", "SPEC-9996.png", "issue", digest, allow_small=True
+    )
+    assert allowed_small["photographAllowSmall"] is True
     expect_failure(lambda: fetch_attachment.build_specimen(
         {
             "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
             "heldBy": "third-party seller", "inspectedFrom": "listing photograph",
             "observed": "positive", "recordedAt": "2026-08-24",
-            "physicalObservation": {"finish": "holo"},
+            "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
         }, "SPEC-9997", "SPEC-9997.png", "issue", digest,
     ))
 
@@ -149,14 +160,14 @@ def main() -> None:
         path.write_bytes(image)
     records = [
         {"specimenId": "SPEC-PLAIN", "photograph": photo_paths[0].name,
-         "photographSha256": digest},
+         "photographSha256": digest, "photographAllowSmall": True},
         {"specimenId": "SPEC-MULTIPLE", "photograph": photo_paths[1].name,
          "photographSha256": digest,
          "physicalObservation": {"finish": "holo", "coversMultipleCards": True}},
         {"specimenId": "SPEC-TMP", "photograph": photo_paths[2].name,
          "photographSha256": digest,
          "photographSource": "/tmp/old.png",
-         "physicalObservation": {"finish": "holo"}},
+         "physicalObservation": {"finish": "holo", "basis": "observed card surface"}},
     ]
     registry = ROOT / ".fetch-attachment-test-specimens.json"
     original_registry = fetch_attachment.SPECIMENS_JSON
@@ -165,10 +176,18 @@ def main() -> None:
     fetch_attachment.SPECIMEN_DIR = ROOT
     registry.write_text(json.dumps({"count": len(records), "specimens": records}), encoding="utf-8")
     try:
+        seen_allow_small = []
+        original_validate = fetch_attachment.validate
+        fetch_attachment.validate = lambda blob, allow_small: (
+            seen_allow_small.append(allow_small) or original_validate(blob, allow_small)
+        )
         assert fetch_attachment.command_evidence_check(check_projection=False) == 0
+        assert seen_allow_small == [True, False, False]
+        fetch_attachment.validate = original_validate
         photo_paths[0].write_bytes(image[:-1] + b"\x00")
         assert fetch_attachment.command_evidence_check(check_projection=False) == 1
     finally:
+        fetch_attachment.validate = original_validate
         fetch_attachment.SPECIMENS_JSON = original_registry
         fetch_attachment.SPECIMEN_DIR = original_specimen_dir
         registry.unlink(missing_ok=True)
@@ -186,7 +205,7 @@ def main() -> None:
         "attachmentIndex": 1, "setCode": "JU", "number": "11/64", "variant": "V1",
         "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
-        "physicalObservation": {"finish": "holo"},
+        "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
     }]}), encoding="utf-8")
     registry = ROOT / ".fetch-attachment-test-import.json"
     registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
@@ -215,13 +234,17 @@ def main() -> None:
 
     # Signed-only issue HTML must match the stable issue provenance from a prior run.
     signed_issue_html = ROOT / ".fetch-attachment-test-signed-only.html"
-    signed_issue_html.write_text(signed_only, encoding="utf-8")
+    signed_issue_html.write_text(
+        '<a href="https://github.com/user-attachments/assets/ordinary">'
+        '<img src="https://cdn.example.test/ordinary.png"></a>' + signed_only,
+        encoding="utf-8"
+    )
     signed_manifest = ROOT / ".fetch-attachment-test-signed-only-manifest.json"
     signed_manifest.write_text(json.dumps({"issue": 999, "observations": [{
-        "attachmentIndex": 1, "setCode": "JU", "number": "11/64", "variant": "V1",
+        "attachmentIndex": 2, "setCode": "JU", "number": "11/64", "variant": "V1",
         "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
-        "physicalObservation": {"finish": "holo"},
+        "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
     }]}), encoding="utf-8")
     signed_registry = ROOT / ".fetch-attachment-test-signed-only-registry.json"
     signed_registry.write_text(json.dumps({"count": 1, "specimens": [{
@@ -229,8 +252,8 @@ def main() -> None:
         "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
         "heldBy": "owner", "inspectedFrom": "photo", "observed": "positive",
         "recordedAt": "2026-08-24", "citedBy": [],
-        "physicalObservation": {"finish": "holo"},
-        "photographSource": "https://github.com/m4s-ai/snoredex-data/issues/999#attachment-1",
+        "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
+        "photographSource": "https://github.com/m4s-ai/snoredex-data/issues/999#attachment-2",
     }]}), encoding="utf-8")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR

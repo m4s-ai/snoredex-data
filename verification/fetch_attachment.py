@@ -346,7 +346,9 @@ def write_registry(doc: dict) -> None:
                               encoding="utf-8", newline="\n")
 
 
-def with_photograph(specimen: dict, filename: str, provenance: str, digest: str) -> dict:
+def with_photograph(
+    specimen: dict, filename: str, provenance: str, digest: str, *, allow_small: bool = False
+) -> dict:
     """A copy carrying the photograph fields, provenance, and committed bytes hash.
 
     Rebuilt rather than assigned so a first-time record does not append the provenance after
@@ -354,12 +356,14 @@ def with_photograph(specimen: dict, filename: str, provenance: str, digest: str)
     """
     updated: dict = {}
     for key, value in specimen.items():
-        if key in {"photographSource", "photographSha256"}:
+        if key in {"photographSource", "photographSha256", "photographAllowSmall"}:
             continue
         updated[key] = filename if key == "photograph" else value
         if key == "photograph":
             updated["photographSource"] = provenance
             updated["photographSha256"] = digest
+    if allow_small:
+        updated["photographAllowSmall"] = True
     return updated
 
 
@@ -418,7 +422,9 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
 
     stale = existing and existing != filename
     index = doc["specimens"].index(specimen)
-    doc["specimens"][index] = with_photograph(specimen, filename, provenance, digest)
+    doc["specimens"][index] = with_photograph(
+        specimen, filename, provenance, digest, allow_small=args.allow_small
+    )
     write_registry(doc)
 
     print(f"wrote {destination.relative_to(ROOT)} ({len(blob):,} bytes, {size[0]}x{size[1]} {ext})")
@@ -454,7 +460,8 @@ def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
 
 
 def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
-                   digest: str, *, listing_url: str | None = None) -> dict:
+                   digest: str, *, listing_url: str | None = None,
+                   allow_small: bool = False) -> dict:
     required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
                 "observed", "recordedAt")
     missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
@@ -463,6 +470,8 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
     if not isinstance(physical, dict) or not physical.get("finish"):
         fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
+    if not isinstance(physical.get("basis"), str) or not physical["basis"].strip():
+        fail(f"manifest row for {specimen_id} needs physicalObservation.basis")
     if item.get("heldBy") == "third-party seller" and not listing_url:
         fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
     record = {
@@ -483,6 +492,8 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
     }
     if listing_url:
         record["listingUrl"] = listing_url
+    if allow_small:
+        record["photographAllowSmall"] = True
     return record
 
 
@@ -575,8 +586,12 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
             attachments, item.get("attachment", item.get("attachmentIndex")), ordinal
         )
         provenance = stable
+        selected_position = next(
+            position for position, (candidate_stable, _) in enumerate(attachments, 1)
+            if candidate_stable == stable
+        )
         if "private-user-images.githubusercontent.com" in (urlparse(stable).hostname or ""):
-            provenance = f"{issue_url}#attachment-{ordinal}"
+            provenance = f"{issue_url}#attachment-{selected_position}"
         existing = existing_by_source.get(provenance) or existing_by_source.get(stable)
         specimen_id = str(item.get("specimenId") or (existing or {}).get("specimenId") or next_id)
         if specimen_id in used_ids:
@@ -606,7 +621,8 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         if not isinstance(listing_url, str) or not listing_url:
             listing_url = (current or {}).get("listingUrl")
         record = build_specimen(
-            item, specimen_id, filename, provenance, digest, listing_url=listing_url
+            item, specimen_id, filename, provenance, digest, listing_url=listing_url,
+            allow_small=args.allow_small,
         )
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()
@@ -617,7 +633,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
                 fail(f"{specimen_id} metadata differs; pass --replace to update it")
         records.append(record)
         prepared.append((destination, blob))
-        print(f"prepared {specimen_id}: {size[0]}x{size[1]} {ext} from attachment {ordinal}")
+        print(f"prepared {specimen_id}: {size[0]}x{size[1]} {ext} from attachment {selected_position}")
 
     if args.dry_run:
         print(f"DRY RUN — would import {len(records)} specimen(s) from issue #{args.issue}")
@@ -644,7 +660,7 @@ def command_evidence_check(*, check_projection: bool = True) -> int:
             continue
         try:
             blob = path.read_bytes()
-            validate(blob, allow_small=False)
+            validate(blob, allow_small=bool(specimen.get("photographAllowSmall")))
             expected_hash = specimen.get("photographSha256")
             if not expected_hash:
                 errors.append(f"{specimen['specimenId']}: photograph hash is missing")

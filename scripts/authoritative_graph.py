@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import re
+from copy import deepcopy
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -1125,6 +1126,11 @@ def main() -> int:
         if args.write:
             graph = project_physical_evidence(graph)
             write_graph(graph)
+        elif args.check:
+            projected = project_physical_evidence(deepcopy(graph))
+            if projected != graph:
+                print("authoritative_graph.py: committed snapshot differs from fresh projection")
+                return 1
         errors = validate(graph)
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f"authoritative_graph.py: invalid snapshot: {error}")
