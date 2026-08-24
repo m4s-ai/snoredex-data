@@ -121,6 +121,22 @@ def main() -> None:
         }, "SPEC-9996", "SPEC-9996.png", "issue", digest, allow_small=True
     )
     assert allowed_small["photographAllowSmall"] is True
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "Reverse Holo", "basis": "observed card surface"}, "SPEC-9995"
+    ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface", "edition": "Unlimited-ish"},
+        "SPEC-9995"
+    ))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "observed card surface", "markings": "EDITIE 1"},
+        "SPEC-9995"
+    ))
+    expect_failure(lambda: fetch_attachment.ensure_cited_identity(
+        {"specimenId": "SPEC-9994", "setCode": "JU", "number": "11/64",
+         "variant": "V1", "language": "Dutch", "citedBy": ["F0167-P01"]},
+        {"setCode": "JU", "number": "27/64", "variant": "V1", "language": "Dutch"},
+    ))
     expect_failure(lambda: fetch_attachment.build_specimen(
         {
             "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
@@ -253,7 +269,7 @@ def main() -> None:
         "specimenId": "SPEC-0099",
         "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
         "heldBy": "owner", "inspectedFrom": "photo", "observed": "positive",
-        "recordedAt": "2026-08-24", "citedBy": [],
+        "recordedAt": "2026-08-24", "citedBy": ["F0167-P01"],
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
         "photographSource": "https://github.com/m4s-ai/snoredex-data/issues/999#attachment-2",
     }]}), encoding="utf-8")
@@ -273,6 +289,7 @@ def main() -> None:
             ),
         ) == 0
         assert signed_doc["specimens"][0]["specimenId"] == "SPEC-0099"
+        assert signed_doc["specimens"][0]["citedBy"] == ["F0167-P01"]
     finally:
         fetch_attachment.SPECIMENS_JSON = original_registry
         fetch_attachment.SPECIMEN_DIR = original_specimen_dir

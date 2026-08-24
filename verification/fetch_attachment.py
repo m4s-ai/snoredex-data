@@ -95,6 +95,9 @@ MIN_LONG_EDGE = 200  # a card photograph; an avatar or a placeholder is not one
 TIMEOUT = 30
 USER_AGENT = "snoredex-data/fetch_attachment (+https://github.com/m4s-ai/snoredex-data)"
 SPECIMEN_ID_PATTERN = re.compile(r"SPEC-\d{4}\Z")
+SPECIMEN_FINISHES = {"non-holo", "holo", "reverse-holo", "mirror-holo"}
+SPECIMEN_EDITIONS = {"1st Edition", "Unlimited"}
+SPECIMEN_MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
 
 # The one namespace the proxy refuses, in both the current and the historical form. Detected by
 # hand so the failure is a sentence a person can act on rather than an opaque 403.
@@ -314,6 +317,44 @@ def ensure_specimen_id_available(
         fail(f"{specimen_id} already exists for another observation; choose a new id")
 
 
+def specimen_identity(record: dict) -> tuple[str, str, str, str]:
+    return (
+        str(record.get("setCode") or ""),
+        str(record.get("number") or "").split("/", 1)[0],
+        str(record.get("variant") or "base"),
+        str(record.get("language") or ""),
+    )
+
+
+def ensure_cited_identity(current: dict | None, candidate: dict) -> None:
+    """Do not retarget a stable specimen id that is already cited by a claim."""
+    cited_by = list((current or {}).get("citedBy") or [])
+    if current and cited_by and specimen_identity(current) != specimen_identity(candidate):
+        fail(f"{current['specimenId']} is cited by {', '.join(map(str, cited_by))}; "
+             "a replacement must keep its set, number, variant and language")
+
+
+def validate_observation(physical: object, specimen_id: str) -> dict:
+    if not isinstance(physical, dict) or not physical.get("finish"):
+        fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
+    if physical["finish"] not in SPECIMEN_FINISHES:
+        fail(f"manifest row for {specimen_id} has invalid physicalObservation.finish")
+    if not isinstance(physical.get("basis"), str) or not physical["basis"].strip():
+        fail(f"manifest row for {specimen_id} needs physicalObservation.basis")
+    edition = physical.get("edition")
+    if edition is not None and edition not in SPECIMEN_EDITIONS:
+        fail(f"manifest row for {specimen_id} has invalid physicalObservation.edition")
+    markings = physical.get("markings")
+    role = physical.get("markingRole")
+    if markings is not None and not isinstance(markings, str):
+        fail(f"manifest row for {specimen_id} needs text physicalObservation.markings")
+    if markings and role not in SPECIMEN_MARKING_ROLES:
+        fail(f"manifest row for {specimen_id} needs a valid physicalObservation.markingRole")
+    if role is not None and role not in SPECIMEN_MARKING_ROLES:
+        fail(f"manifest row for {specimen_id} has invalid physicalObservation.markingRole")
+    return physical
+
+
 def validate(blob: bytes, allow_small: bool) -> tuple[str, tuple[int, int] | None]:
     ext = image_format(blob)
     if ext is None:
@@ -471,17 +512,13 @@ def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
 
 def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
                    digest: str, *, listing_url: str | None = None,
-                   allow_small: bool = False) -> dict:
+                   allow_small: bool = False, cited_by: list | None = None) -> dict:
     required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
                 "observed", "recordedAt")
     missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
-    physical = item.get("physicalObservation")
     if missing:
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
-    if not isinstance(physical, dict) or not physical.get("finish"):
-        fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
-    if not isinstance(physical.get("basis"), str) or not physical["basis"].strip():
-        fail(f"manifest row for {specimen_id} needs physicalObservation.basis")
+    physical = validate_observation(item.get("physicalObservation"), specimen_id)
     if item.get("heldBy") == "third-party seller" and not listing_url:
         fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
     record = {
@@ -497,7 +534,7 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         "photographSha256": digest,
         "observed": item["observed"],
         "recordedAt": item["recordedAt"],
-        "citedBy": list(item.get("citedBy") or []),
+        "citedBy": list(item.get("citedBy") or []) if cited_by is None else list(cited_by),
         "physicalObservation": physical,
     }
     if listing_url:
@@ -578,6 +615,12 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         fail("manifest must contain a non-empty observations list")
     if isinstance(manifest, dict) and manifest.get("issue") not in (None, args.issue):
         fail(f"manifest is for issue #{manifest['issue']}, not #{args.issue}")
+    try:
+        finish_units = json.loads(
+            (VERIFICATION / "finish_units.json").read_text(encoding="utf-8-sig")
+        ).get("units", [])
+    except (OSError, ValueError, TypeError) as error:
+        fail(f"cannot load canonical finish units: {error}")
 
     existing_by_source = {
         row.get("photographSource"): row
@@ -611,12 +654,26 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         used_ids.add(specimen_id)
         if specimen_id == next_id:
             next_id = f"SPEC-{int(next_id[5:]) + 1:04d}"
+        number = str(item.get("number") or "").split("/", 1)[0]
+        finish_unit = next((unit for unit in finish_units if (
+            str(unit.get("setCode")) == str(item.get("setCode"))
+            and str(unit.get("number")) == number
+            and str(unit.get("language")) == str(item.get("language"))
+        )), None)
+        if finish_unit is None:
+            fail(f"manifest row for {specimen_id} has no canonical finish unit")
+        variant = str(item.get("variant") or "base")
+        if not any(str(product.get("variant")) == variant
+                   and product.get("claimStatus") != "contradicted"
+                   for product in finish_unit.get("products", [])):
+            fail(f"manifest row for {specimen_id} has no canonical product variant {variant}")
+        current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
+        ensure_cited_identity(current, item)
 
         blob = download_candidates(candidates)
         ext, size = validate(blob, args.allow_small)
         filename = f"{specimen_id}.{ext}"
         destination = SPECIMEN_DIR / filename
-        current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
         ensure_specimen_id_available(current, existing, specimen_id, args.replace)
         if current and current.get("photograph") and not args.replace:
             if current.get("photograph") == filename and destination.is_file() \
@@ -632,9 +689,13 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         listing_url = item.get("listingUrl")
         if not isinstance(listing_url, str) or not listing_url:
             listing_url = (current or {}).get("listingUrl")
+        cited_by = (
+            list(item.get("citedBy") or [])
+            if "citedBy" in item else list((current or {}).get("citedBy") or [])
+        )
         record = build_specimen(
             item, specimen_id, filename, provenance, digest, listing_url=listing_url,
-            allow_small=args.allow_small,
+            allow_small=args.allow_small, cited_by=cited_by,
         )
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()
