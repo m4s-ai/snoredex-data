@@ -366,9 +366,13 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
-    source_type = "Owner-supplied physical card photograph" \
-        if "owner" in str(specimen.get("heldBy", "")).casefold() \
-        else "Inspected physical specimen photograph"
+    holder = str(specimen.get("heldBy", "")).casefold()
+    if "third-party seller" in holder:
+        source_type = "Seller listing photograph"
+    elif "owner" in holder:
+        source_type = "Owner-supplied physical card photograph"
+    else:
+        source_type = "Inspected physical specimen photograph"
     return exact_source(
         str(specimen.get("photographSource") or f"specimen:{specimen['specimenId']}"),
         source_type,
@@ -386,7 +390,7 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
         "foilPattern": observation.get("foilPattern"),
         "markings": marking_values,
         "distribution": observation.get("distribution"),
-        "cardSize": observation.get("cardSize", "unknown"),
+        "cardSize": observation.get("cardSize") or "unknown",
         "mappedVariants": [str(specimen.get("variant"))],
         "verificationStatus": "confirmed",
         "sources": [specimen_source(specimen)],

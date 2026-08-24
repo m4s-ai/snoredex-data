@@ -87,6 +87,14 @@ def main() -> None:
     assert dutch[("27", "1st Edition")]["specimenIds"] == ["SPEC-0042", "SPEC-0043"]
 
     projector = finish_projector()
+    seller_source = projector.specimen_printing(fixture[2])["sources"][0]
+    assert seller_source["sourceType"] == "Seller listing photograph"
+    omitted_size = dict(fixture[0])
+    omitted_size["physicalObservation"] = {
+        key: value for key, value in fixture[0]["physicalObservation"].items()
+        if key != "cardSize"
+    }
+    assert projector.specimen_printing(omitted_size)["cardSize"] == "unknown"
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],

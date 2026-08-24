@@ -371,6 +371,12 @@ def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:
     }
 
 
+def specimen_observation_value(observation: dict[str, Any], field: str) -> Any:
+    """Use the finish projector's explicit default for an omitted card size."""
+    value = observation.get(field)
+    return value or "unknown" if field == "cardSize" else value
+
+
 def validate(
     graph: dict[str, Any],
     source_registry: dict[str, Any] | None = None,
@@ -821,7 +827,7 @@ def validate(
                 else:
                     observation = specimen.get("physicalObservation", {})
                     for field in ("finish", "edition", "foilPattern", "cardSize"):
-                        if physical.get(field) != observation.get(field):
+                        if physical.get(field) != specimen_observation_value(observation, field):
                             errors.append(f"specimen printing is stale: {specimen_id}:{field}")
                     if (physical.get("markings") or []) != specimen_markings(observation):
                         errors.append(f"specimen printing is stale: {specimen_id}:markings")
@@ -846,7 +852,7 @@ def validate(
             errors.append(f"specimen printing target is missing: {specimen_id}")
             continue
         for field in ("finish", "edition", "foilPattern", "cardSize"):
-            if physical.get(field) != observation.get(field):
+            if physical.get(field) != specimen_observation_value(observation, field):
                 errors.append(f"specimen printing is stale: {specimen_id}:{field}")
         if (physical.get("markings") or []) != specimen_markings(observation):
             errors.append(f"specimen printing is stale: {specimen_id}:markings")
