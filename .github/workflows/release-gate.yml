@@ -1,7 +1,8 @@
 name: Release gate
 
 # Every check that must pass before the site may be published (#11), and the same suite a
-# contributor can run locally. Called by pages.yml and runnable on its own.
+# contributor can run locally. Called by pages.yml and runnable on its own. The executable core
+# order is owned by scripts/regen.py; WORKFLOW-MAP.md is the human-readable DAG and gate reference.
 #
 # Two deliberate choices:
 #

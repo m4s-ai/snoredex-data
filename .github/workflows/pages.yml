@@ -57,8 +57,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      # Publish only freshly generated output, so the deployed site can never be a stale
-      # artifact that happens to be committed.
+      # This is the deployment-only Pages projection lane from WORKFLOW-MAP.md, not a second
+      # full pipeline: the reusable release-gate job has already run scripts/regen.py --check.
+      # Rebuild only consumer projections after checkout so the deployed site can never be a
+      # stale artifact that happens to be committed. Do not add truth-store generators here.
       - name: Regenerate site artifacts
         run: |
           python scripts/finishes.py --reproject

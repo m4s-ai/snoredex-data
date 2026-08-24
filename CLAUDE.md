@@ -192,54 +192,16 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
 
 ## Commands
 
-Run from the repository root. **Both suites run before and after every write pass** — before to
-confirm a clean starting state, after to catch what the pass broke. `review_integrity.py` validates
-invariants *within* each store, `review_findings.py` *between* the stores and the artifacts
-consumers read.
+Run from the repository root. The normative dependency order and core suite live only in
+[`scripts/regen.py`](scripts/regen.py): its `REGEN`, `CHECK`, and `TESTS` arrays are the executable
+pipeline source of truth. The graph/data boundary and the deliberate Pages lane are described in
+[`WORKFLOW-MAP.md`](WORKFLOW-MAP.md). Do not copy that list into another document or workflow.
 
-**Order matters** in the middle block: `finishes.py` writes the card finish summaries,
-`language_status.py` the language verdicts, `confirmed_releases.py` reads both, and
-`checklist.py` / `site.py` read those.
-
-```console
-python verification/review_integrity.py
-python verification/review_findings.py
-python scripts/legacy_baseline.py --check   # legacy universe contract + claim guard
-python scripts/evidence_semantics.py --check     # evidence granularity + application status (#137)
-python scripts/authoritative_graph.py --check    # reviewed locality graph migration (#140)
-python scripts/source_adapters.py --check        # ADR-0004 source-first catalogue runs (#147)
-python scripts/card_discovery.py --check         # ADR-0006 source-first card runs (#136)
-python scripts/locality_matrix.py --check         # evidenced non-Asian locality/era tracks (#139)
-python scripts/completeness_gate.py --check       # bounded two-loop graph/accounting gate (#141)
-
-# ... do the work in a new Python pass under verification/ ...
-
-python verification/test_evidence_application.py # raw verdict/application projection boundary
-python verification/test_database_portability.py # LF/CRLF-neutral database input fingerprints
-python verification/test_owner_adjudications.py  # owner decision/store projection
-python verification/report.py                    # regenerate exports
-python scripts/editions.py                       # if edition data changed
-python scripts/finishes.py                       # finish units/review + summaries
-python scripts/language_status.py                # per-card language verdicts
-python scripts/confirmed_releases.py             # chronological JSON + CSV
-python scripts/source_registry.py                # provider/evidence registry
-python scripts/source_capabilities.py            # bounded source/coverage graph (#135)
-python scripts/source_adapters.py                 # reproject latest retained catalogue run (#147)
-python scripts/card_discovery.py                  # reproject latest retained card run (#136)
-python scripts/locality_matrix.py                 # reviewed locality/era matrix projection (#139)
-python scripts/completeness_gate.py               # write the bounded release-gate summary (#141)
-python scripts/checklist.py                      # canonical checklist items
-python scripts/collector_catalogue.py            # collector contract + migrations + fixture (#254)
-python scripts/readme_stats.py                   # generated markdown blocks
-python scripts/issue_templates.py                # community correction form
-python scripts/open_items.py                     # verification/open-items.html
-python scripts/database.py                       # application database + audit
-python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
-python scripts/site.py                           # index.html + alias redirect
-
-python verification/review_integrity.py
-python verification/review_findings.py
-```
+For a data change, run `python scripts/regen.py --check` before editing to establish a clean
+baseline, make the change in its canonical store, then run `python scripts/regen.py` and review the
+diff. This runs the complete write/check/test sequence, including the within-store
+`review_integrity.py` checks and cross-artifact `review_findings.py` checks. A scoped lane may add
+cheaper L0–L2 checks, but it never replaces the L3 `regen.py --check` before merge.
 
 The pre-PR gate, matching CI:
 
@@ -258,9 +220,10 @@ python scripts/publish.py --out _site --verify    # --verify, not --check; exits
 git diff --exit-code -- . ':(exclude)*.sqlite'   # equivalent scope enforced inside regen.py
 ```
 
-Do not maintain a second generator or regression list here: `scripts/regen.py` owns the dependency
-order and core suite, and the workflow calls it directly. The hand-maintained predecessor drifted
-from CI three times; the current list is intentionally centralized here and in `scripts/regen.py`.
+`scripts/regen.py` owns the dependency order and core suite. The reusable
+`.github/workflows/release-gate.yml` calls that command directly; Pages calls the same gate before
+its deployment-only projection lane. The workflow map is the single human-readable explanation;
+this file intentionally does not maintain a second command list.
 
 **The `.sqlite` files are excluded from regen.py's byte diff, and always must be.** A SQLite file records the
 version number of the library that wrote it in its own header, so two environments running different

@@ -8,6 +8,12 @@ replace the data stores, and it does not authorize hand-editing generated projec
 `scripts/regen.py` remains the executable full-build order until the scoped lanes from
 issue #290 exist. This document is the contract that later gate and impact work must use.
 
+The active orchestration has one executable source of truth: `scripts/regen.py` owns the ordered
+`REGEN`, `CHECK`, and `TESTS` lists. `.github/workflows/release-gate.yml` invokes its `--check`
+mode and adds only explicit environment/publication checks. `.github/workflows/pages.yml` calls
+that reusable gate first, then runs the deployment-only Pages projection listed below. README,
+CLAUDE, and HANDOVER link here instead of maintaining another command sequence.
+
 ## 1. Terms and invariants
 
 | Term | Meaning | Boundary |
@@ -62,8 +68,8 @@ Their staging/record files are review surfaces. They do not write `units.json`,
 
 ## 3. Full projection DAG
 
-The full build is grouped here by contract boundary. The exact executable sequence is
-owned by `scripts/regen.py` until #288 consolidates the documentation.
+The full build is grouped here by contract boundary. The exact executable sequence is owned by
+`scripts/regen.py`; this map explains the boundaries without duplicating its command arrays.
 
 ### A. Claim and evidence foundation
 
@@ -128,7 +134,30 @@ Every consumer must retain stable semantic identity. In particular, collector an
 rows must not use array positions as identity and must not infer a physical printing from
 a language claim or a marketplace candidate.
 
-### D. Verification envelope
+### D. Manual Pages deployment lane (after the reusable release gate)
+
+```text
+scripts/finishes.py --reproject
+  -> scripts/language_status.py
+  -> scripts/confirmed_releases.py
+  -> scripts/source_registry.py
+  -> scripts/source_capabilities.py
+  -> scripts/checklist.py
+  -> scripts/collector_catalogue.py
+  -> scripts/readme_stats.py
+  -> scripts/issue_templates.py
+  -> scripts/site.py
+  -> scripts/publish.py
+  -> scripts/collector_deployment.py
+```
+
+This lane exists only because the deployment manifest must bind the freshly assembled artifact to
+the containing commit. It deliberately does not rerun source-of-truth discovery, graph migration,
+database/tracker generation, or the L3 suite: `.github/workflows/pages.yml` has already called the
+reusable release gate, and then verifies the allowlisted artifact plus the deployment manifest.
+The explicit list is a deployment boundary, not a second full-build order.
+
+### E. Verification envelope
 
 ```text
 verification/review_integrity.py
@@ -150,6 +179,7 @@ verification/review_integrity.py
   -> verification/test_artwork_review.py
   -> verification/test_korean_burning_confrontation.py
   -> verification/test_completeness_gate.py
+  -> verification/test_pipeline_documentation.py
   -> verification/test_findings_harness.py
   -> verification/review_findings.py
   -> verification/test_regen_readiness.py

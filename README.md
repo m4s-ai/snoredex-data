@@ -103,15 +103,12 @@ substituting PowerShell.
 ```console
 python -m pip install -r requirements.txt
 python -m playwright install chromium
-
-python verification/review_integrity.py     # structural invariants inside each store
-python verification/review_findings.py      # consistency between stores and published artifacts
-python scripts/legacy_baseline.py --check   # immutable historical boundary + scope wording
-python verification/test_evidence_application.py  # raw verdict/application boundary
-python verification/test_site.py            # browser acceptance tests
+python scripts/regen.py --check             # canonical deterministic PR gate
 ```
 
-Then read [`CLAUDE.md`](CLAUDE.md) for the working rules and command order,
+The reusable release workflow adds the explicit live-source, browser, and publication checks;
+those are environment gates, not a second generator list. Read [`CLAUDE.md`](CLAUDE.md) for the
+working rules,
 [`HANDOVER.md`](HANDOVER.md) for the current backlog, and
 [`verification/RESUME.md`](verification/RESUME.md) before touching a single confirmation or
 contradiction — it records the source techniques and the dead ends already paid for here.
@@ -212,29 +209,18 @@ never expands with the current catalogue. Cardmarket is therefore one historical
 discovery boundary; the source-first rebuild is tracked in
 [#132](https://github.com/m4s-ai/snoredex-data/issues/132).
 
-**Everything downstream regenerates from what is committed**, in this order, and the release gate
-proves it by running the generators and failing if the tree moves:
+**Everything downstream regenerates from what is committed.** The executable pipeline source of
+truth is [`scripts/regen.py`](scripts/regen.py), which owns the ordered `REGEN`, `CHECK`, and
+`TESTS` lists. Run `python scripts/regen.py` to rebuild and verify the derived artifacts, or
+`python scripts/regen.py --check` for the CI-equivalent deterministic gate. The complete input →
+store → graph → projection → gate contract is in [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md); it explains
+why the order matters without maintaining a second command list here.
 
-```console
-python scripts/analyze.py          # analysis_artists, _shared_cards, _variants, _language_drift
-python scripts/finishes.py --reproject
-python scripts/language_status.py
-python scripts/confirmed_releases.py
-python scripts/source_registry.py
-python scripts/checklist.py
-python scripts/readme_stats.py
-python scripts/issue_templates.py
-python scripts/open_items.py
-python scripts/database.py
-python scripts/tracker.py --tracker snoredex-tracker-template.sqlite init --force
-python scripts/site.py
-```
-
-Order matters: `finishes.py` writes the card finish summaries, `language_status.py` writes the
-language verdicts, and everything after reads both. Every script resolves the checkout from its own
-location, so any working directory works. The full CI sequence lives in
-[`.github/workflows/release-gate.yml`](.github/workflows/release-gate.yml); merging never
-publishes, and Pages deployment stays a manual, gated workflow run.
+The reusable CI sequence lives in
+[`.github/workflows/release-gate.yml`](.github/workflows/release-gate.yml). It calls the same
+`regen.py --check` gate before the explicit live/browser and publication checks. Merging never
+publishes; Pages deployment remains a manual, gated workflow run and repeats only its documented
+deployment projection lane after the release gate.
 
 ## Scope and caveats — read before using
 

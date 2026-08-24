@@ -102,25 +102,18 @@ verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
                               articles often carry both enrelease and jarelease; never select by
                               article title alone. Recheck with audit_bulbapedia_release_dates.py.
-scripts/                      Two halves; only the second can be re-run (#28).
-
-                              LIVE generators, in run order (§7 has the full command list):
-                                analyze -> finishes -> language_status -> confirmed_releases
-                                -> source_registry -> source_capabilities -> source_adapters
-                                -> card_discovery
-                                -> checklist -> collector_catalogue -> readme_stats
-                                -> issue_templates
-                                -> open_items -> database -> tracker template -> site
-                              plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). authoritative_graph.py validates the
-                              reviewed #140 locality graph snapshot and consumers read it directly;
-                              into the application database;
+scripts/                      Two halves; only the second can be re-run (#28). The executable
+                              order is owned by scripts/regen.py (REGEN/CHECK/TESTS); do not copy
+                              that list into handover prose. WORKFLOW-MAP.md is the human-readable
+                              explanation of the same DAG, gate levels, and Pages deployment lane.
+                              publish.py assembles and verifies the allowlisted Pages artifact;
+                              collector_deployment.py binds it to the containing commit.
+                              authoritative_graph.py validates the reviewed #140 locality graph;
                               artwork_review.py builds the #120 graph-backed browser projection;
-                              source_adapters.py checks/reprojects retained ADR-0004 set runs;
-                              card_discovery.py checks/reprojects retained ADR-0006 card runs; and
-                              completeness_gate.py validates both immutable loops and writes the
-                              bounded #141 release summary; discovery_cycle.py is the explicit
-                              refresh/check wrapper for scheduled or manual reruns. See §7.
+                              source_adapters.py and card_discovery.py check/reproject retained
+                              source-first runs; completeness_gate.py validates both immutable
+                              loops and writes the bounded #141 release summary; discovery_cycle.py
+                              is the explicit refresh/check wrapper for scheduled or manual reruns.
                               analyze.py is the SOLE producer of analysis_artists,
                               _shared_cards, _variants and _language_drift, and reads
                               snorlax_cards.json only — the single canonical node (#30). Its
