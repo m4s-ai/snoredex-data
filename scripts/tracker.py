@@ -20,6 +20,7 @@ import hashlib
 import os
 import sqlite3
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -145,6 +146,40 @@ def catalog_rows(catalog: Path) -> list[tuple]:
         connection.close()
 
 
+def one_to_one_rekeys(connection: sqlite3.Connection, rows: list[tuple]) -> list[tuple[str, str]]:
+    """Match replaced checklist IDs only when the stable catalogue identity is unambiguous."""
+    active = {
+        row[0]
+        for row in connection.execute(
+            "SELECT checklist_id FROM catalog_items WHERE active=1"
+        ).fetchall()
+    }
+    incoming = {row[0] for row in rows}
+    old_by_identity: dict[tuple, list[str]] = defaultdict(list)
+    for row in connection.execute(
+        """
+        SELECT checklist_id, card_name, set_code, collector_number, language_code, edition,
+               cardmarket_url
+        FROM catalog_items
+        WHERE active=1
+        """
+    ):
+        if row[0] not in incoming:
+            old_by_identity[tuple(row[1:])].append(row[0])
+
+    new_by_identity: dict[tuple, list[str]] = defaultdict(list)
+    for row in rows:
+        if row[0] not in active:
+            identity = (row[2], row[3], row[4], row[6], row[8], row[18])
+            new_by_identity[identity].append(row[0])
+
+    return sorted(
+        (old_ids[0], new_by_identity[identity][0])
+        for identity, old_ids in old_by_identity.items()
+        if len(old_ids) == 1 and len(new_by_identity.get(identity, [])) == 1
+    )
+
+
 def sync_database(tracker: Path, catalog: Path) -> tuple[int, int, int]:
     rows = catalog_rows(catalog)
     fingerprint = catalog_fingerprint(catalog)
@@ -154,6 +189,7 @@ def sync_database(tracker: Path, catalog: Path) -> tuple[int, int, int]:
         row[0] for row in connection.execute("SELECT checklist_id FROM catalog_items").fetchall()
     }
     incoming = {row[0] for row in rows}
+    rekeys = one_to_one_rekeys(connection, rows)
     connection.execute("UPDATE catalog_items SET active=0")
     connection.executemany(
         """
@@ -185,6 +221,15 @@ def sync_database(tracker: Path, catalog: Path) -> tuple[int, int, int]:
             cardmarket_url=excluded.cardmarket_url
         """,
         rows,
+    )
+    # The active source holds the current personal state; an inactive target can be stale.
+    connection.executemany(
+        "DELETE FROM collection_state WHERE checklist_id=?",
+        [(new_id,) for _old_id, new_id in rekeys],
+    )
+    connection.executemany(
+        "UPDATE collection_state SET checklist_id=? WHERE checklist_id=?",
+        [(new_id, old_id) for old_id, new_id in rekeys],
     )
     connection.executemany(
         "INSERT OR IGNORE INTO collection_state(checklist_id, wanted) VALUES (?, ?)",

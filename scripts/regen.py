@@ -112,6 +112,7 @@ TESTS = [
     ["verification/review_integrity.py"],
     ["verification/test_evidence_application.py"],
     ["verification/test_database_portability.py"],
+    ["verification/test_tracker_state.py"],
     ["verification/test_owner_adjudications.py"],
     ["verification/test_source_adapters.py"],
     ["verification/test_card_discovery.py"],
