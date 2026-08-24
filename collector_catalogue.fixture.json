@@ -1,0 +1,333 @@
+{
+  "meta": {
+    "schema": "snoredex-collector-catalogue-fixture",
+    "schemaVersion": "1.0.0"
+  },
+  "catalogue": {
+    "meta": {
+      "schema": "snoredex-collector-catalogue",
+      "schemaVersion": "1.0.0",
+      "datasetId": "fixture",
+      "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
+      "dataAsOf": "2026-08-24",
+      "catalogueFingerprint": "sha256:c1af5bb3ea5c4c64a729f4a92050e00b1a0cd1b60653f939062bc1b97c0abc30",
+      "previousFingerprint": null,
+      "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
+      "scope": {
+        "policy": "positive-evidence/current-known",
+        "allLocalitiesComplete": false,
+        "absenceIsNotEvidence": true
+      },
+      "licenceRefs": [
+        "LICENSE.md",
+        "THIRD_PARTY_NOTICES.md"
+      ]
+    },
+    "localizations": [
+      {
+        "localizationId": "fixture-loc-west-es",
+        "locality": "WEST",
+        "languageId": "LANG:Spanish",
+        "language": "Spanish",
+        "languageTag": "es-ES",
+        "script": "Latn",
+        "displayName": "Spanish (Europe)",
+        "displayOrder": 10
+      },
+      {
+        "localizationId": "fixture-loc-latam-es",
+        "locality": "LATAM",
+        "languageId": "LANG:Spanish",
+        "language": "Spanish",
+        "languageTag": "es-419",
+        "script": "Latn",
+        "displayName": "Spanish (Latin America)",
+        "displayOrder": 20
+      },
+      {
+        "localizationId": "fixture-loc-west-en",
+        "locality": "WEST",
+        "languageId": "LANG:English",
+        "language": "English",
+        "languageTag": "en",
+        "script": "Latn",
+        "displayName": "English",
+        "displayOrder": 30
+      },
+      {
+        "localizationId": "fixture-loc-west-pt",
+        "locality": "WEST",
+        "languageId": "LANG:Portuguese",
+        "language": "Portuguese",
+        "languageTag": "pt",
+        "script": "Latn",
+        "displayName": "Portuguese",
+        "displayOrder": 40
+      }
+    ],
+    "localSets": [
+      {
+        "localSetId": "fixture-set-1",
+        "locality": "WEST",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "productKind": "fixture",
+        "identityState": "identified",
+        "sourceRefs": [
+          "fixture-source"
+        ],
+        "sortKey": "1"
+      },
+      {
+        "localSetId": "fixture-set-2",
+        "locality": "LATAM",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "productKind": "fixture",
+        "identityState": "identified",
+        "sourceRefs": [
+          "fixture-source"
+        ],
+        "sortKey": "2"
+      },
+      {
+        "localSetId": "fixture-set-3",
+        "locality": "WEST",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "productKind": "fixture",
+        "identityState": "identified",
+        "sourceRefs": [
+          "fixture-source"
+        ],
+        "sortKey": "3"
+      }
+    ],
+    "setEditions": [
+      {
+        "setEditionId": "fixture-edition-1",
+        "localSetId": "fixture-set-1",
+        "localizationId": "fixture-loc-west-es",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "identityState": "identified",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseEventId": "fixture-event-1",
+        "sortKey": "1"
+      },
+      {
+        "setEditionId": "fixture-edition-2",
+        "localSetId": "fixture-set-2",
+        "localizationId": "fixture-loc-latam-es",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "identityState": "identified",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseEventId": "fixture-event-2",
+        "sortKey": "2"
+      },
+      {
+        "setEditionId": "fixture-edition-3",
+        "localSetId": "fixture-set-3",
+        "localizationId": "fixture-loc-west-en",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "identityState": "identified",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseEventId": "fixture-event-3",
+        "sortKey": "3"
+      }
+    ],
+    "works": [
+      {
+        "workId": "fixture-work",
+        "cardKey": "fixture-work",
+        "displayName": "Snorlax"
+      }
+    ],
+    "items": [
+      {
+        "itemId": "item-00000000-0000-5000-8000-000000000001",
+        "legacyChecklistIds": [],
+        "active": true,
+        "itemKind": "verified-printing",
+        "progressClass": "current-known",
+        "workId": "fixture-work",
+        "workMappingState": "mapped",
+        "setEditionId": "fixture-edition-1",
+        "localSetId": "fixture-set-1",
+        "cardReleaseId": "fixture-release-1",
+        "physicalPrintingId": "fixture-physical-1",
+        "sourcePrintingId": null,
+        "finishUnitId": null,
+        "sourceClaimRefs": [
+          "fixture-claim"
+        ],
+        "localizationId": "fixture-loc-west-es",
+        "cardName": "Snorlax",
+        "localCardName": null,
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "collectorNumber": "1",
+        "collectorNumberDenominator": "10",
+        "collectorNumberSortKey": "000000000001",
+        "edition": null,
+        "editionAssignmentStatus": "not-applicable",
+        "finishVerificationStatus": "confirmed",
+        "finish": "holo",
+        "finishFamily": "holo",
+        "finishGroupId": "fixture-group-verified-printing",
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "rarity": {
+          "display": null,
+          "normalizedId": null,
+          "evidenceStatus": "unknown",
+          "claimRefs": []
+        },
+        "completenessStatus": "positive-evidence-only",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseSortKey": "2026-01-01|fixture",
+        "imageAssetId": null,
+        "imageScope": "unknown",
+        "sourceLinks": [],
+        "evidenceLinks": [],
+        "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=data-correction.yml"
+      },
+      {
+        "itemId": "item-00000000-0000-5000-8000-000000000002",
+        "legacyChecklistIds": [],
+        "active": true,
+        "itemKind": "finish-candidate",
+        "progressClass": "research",
+        "workId": "fixture-work",
+        "workMappingState": "mapped",
+        "setEditionId": "fixture-edition-2",
+        "localSetId": "fixture-set-2",
+        "cardReleaseId": "fixture-release-2",
+        "physicalPrintingId": null,
+        "sourcePrintingId": null,
+        "finishUnitId": null,
+        "sourceClaimRefs": [
+          "fixture-claim"
+        ],
+        "localizationId": "fixture-loc-latam-es",
+        "cardName": "Snorlax",
+        "localCardName": null,
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "collectorNumber": "1",
+        "collectorNumberDenominator": "10",
+        "collectorNumberSortKey": "000000000001",
+        "edition": null,
+        "editionAssignmentStatus": "not-applicable",
+        "finishVerificationStatus": "marketplace-claimed",
+        "finish": "reverse-holo",
+        "finishFamily": "reverse-holo",
+        "finishGroupId": "fixture-group-finish-candidate",
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "rarity": {
+          "display": null,
+          "normalizedId": null,
+          "evidenceStatus": "unknown",
+          "claimRefs": []
+        },
+        "completenessStatus": "positive-evidence-only",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseSortKey": "2026-01-01|fixture",
+        "imageAssetId": null,
+        "imageScope": "unknown",
+        "sourceLinks": [],
+        "evidenceLinks": [],
+        "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=data-correction.yml"
+      },
+      {
+        "itemId": "item-00000000-0000-5000-8000-000000000003",
+        "legacyChecklistIds": [],
+        "active": true,
+        "itemKind": "research-placeholder",
+        "progressClass": "research",
+        "workId": "fixture-work",
+        "workMappingState": "mapped",
+        "setEditionId": "fixture-edition-3",
+        "localSetId": "fixture-set-3",
+        "cardReleaseId": "fixture-release-3",
+        "physicalPrintingId": null,
+        "sourcePrintingId": null,
+        "finishUnitId": null,
+        "sourceClaimRefs": [
+          "fixture-claim"
+        ],
+        "localizationId": "fixture-loc-west-en",
+        "cardName": "Snorlax",
+        "localCardName": null,
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "collectorNumber": "1",
+        "collectorNumberDenominator": "10",
+        "collectorNumberSortKey": "000000000001",
+        "edition": null,
+        "editionAssignmentStatus": "not-applicable",
+        "finishVerificationStatus": "pending",
+        "finish": null,
+        "finishFamily": null,
+        "finishGroupId": "fixture-group-research-placeholder",
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "rarity": {
+          "display": null,
+          "normalizedId": null,
+          "evidenceStatus": "unknown",
+          "claimRefs": []
+        },
+        "completenessStatus": "positive-evidence-only",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseSortKey": "2026-01-01|fixture",
+        "imageAssetId": null,
+        "imageScope": "unknown",
+        "sourceLinks": [],
+        "evidenceLinks": [],
+        "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=data-correction.yml"
+      }
+    ],
+    "assets": [],
+    "qualitySummary": {
+      "fixture": true
+    }
+  },
+  "reconciliationCases": [
+    {
+      "caseId": "U0414-1-to-many",
+      "sourceGraphRef": "legacy-issue-rekey:U0414",
+      "fromItemId": "fixture-u0414-source",
+      "toItemIds": [
+        "fixture-u0414-target-a",
+        "fixture-u0414-target-b"
+      ],
+      "expectedAutomaticStateAction": "none",
+      "expectedResolution": "requires-user-resolution"
+    }
+  ]
+}

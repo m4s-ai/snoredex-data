@@ -70,6 +70,7 @@ Then visit <http://localhost:8000/>. `index.html` is the whole site; nothing els
 | A personal have/have-not tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Copy the blank template or use `scripts/tracker.py`; catalogue sync preserves ownership state. |
 | The Cardmarket product view — identity, rarity, art, artist, editions | [`snorlax_cards.json`](snorlax_cards.json) | Use `languagesConfirmed` for established prints and `languagesNeedsEvidence` / `languagesDisputed` for open questions. `languagesRepositoryConfirmed`, `languagesContradicted`, and raw `languages` preserve the research inputs. |
 | The current-known list of physical things to collect | [`analysis_checklist.json`](analysis_checklist.json) | One record per documented printing *or* per explicitly unresolved one within current coverage — placeholders are items too. |
+| A versioned collector-app contract | [`collector_catalogue.json`](collector_catalogue.json) / [`collector_catalogue.schema.json`](collector_catalogue.schema.json) / [`collector_migrations.json`](collector_migrations.json) / [`collector_catalogue.fixture.json`](collector_catalogue.fixture.json) | The graph defines existence. Verified printings are `current-known`; finish candidates and unresolved placeholders remain `research`. A deployment additionally publishes `collector_deployment.json`, binding the exact bytes to their containing commit. |
 | The evidenced locality/era discovery frontier | [`LOCALITY-ERA-MATRIX.md`](verification/LOCALITY-ERA-MATRIX.md) / [`locality_era_matrix.json`](verification/locality_era_matrix.json) | Established, provisional and candidate tracks stay distinct; provider slices are positive frontiers, not complete print manifests. |
 | Which languages a card exists in, and on whose word | [`verification/units.json`](verification/units.json) | Keyed by `(setCode, number, variant, language)`. |
 | Final owner decisions on disputed claims | [`verification/owner_adjudications.json`](verification/owner_adjudications.json) | Explicit cross-source application decisions; they do not rewrite `units.json` or credit a single provider. |
@@ -118,7 +119,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-08-21**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
+Current-known status snapshot: **2026-08-24**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|

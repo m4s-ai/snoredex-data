@@ -43,6 +43,10 @@ FILES = [
     "snoredex.sqlite",
     "snoredex-tracker-template.sqlite",
     "analysis_checklist.json",
+    "collector_catalogue.json",
+    "collector_catalogue.schema.json",
+    "collector_migrations.json",
+    "collector_catalogue.fixture.json",
     "analysis_confirmed_releases.json",
     "analysis_confirmed_releases.csv",
     "analysis_finishes.json",
@@ -75,6 +79,10 @@ FILES = [
     "verification/history/PUBLIC-READINESS-AUDIT.md",
     "verification/DATA-HANDOFF-AUDIT.md",
 ]
+
+# Created only after the containing commit exists. It is deliberately not a
+# committed/regen artifact, but the deploy job may add it to the staged site.
+RUNTIME_FILES = {"collector_deployment.json"}
 
 # Whole directories, restricted by extension so a stray file cannot ride along.
 TREES = [
@@ -190,6 +198,7 @@ def verify(out: Path) -> int:
         print(f"{out} does not exist; run without --verify first", file=sys.stderr)
         return 1
     allowed = set(collect()) | {".nojekyll"}
+    allowed.update(name for name in RUNTIME_FILES if (out / name).is_file())
     problems: list[str] = []
     present = []
     for path in sorted(out.rglob("*")):
