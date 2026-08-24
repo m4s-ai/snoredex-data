@@ -20,6 +20,36 @@ def read(name: str) -> dict:
 
 
 def main() -> None:
+    legacy_row = {
+        "checklistId": "legacy-semantic-row",
+        "printingId": "F0167-P01",
+        "finish": "holo",
+        "edition": "1st Edition",
+        "foilPattern": "Poké Ball mirror",
+        "markings": [],
+        "distribution": None,
+        "cardSize": "standard",
+    }
+    shifted_physical = {
+        "cardReleaseId": "RELEASE:JU:Dutch:JU:11",
+        "sourcePrintingId": "F0167-P99",
+        "finish": "holo",
+        "edition": "1st Edition",
+        "foilPattern": "poke-ball",
+        "markings": None,
+        "distribution": None,
+        "cardSize": "standard",
+    }
+    assert collector.printing_semantic_key(
+        shifted_physical["cardReleaseId"], legacy_row
+    ) == collector.printing_semantic_key(
+        shifted_physical["cardReleaseId"], shifted_physical
+    )
+    assert collector.legacy_match_for_physical(
+        shifted_physical, "F0167-P99", {"F0167-P01": legacy_row},
+        {collector.printing_semantic_key(shifted_physical["cardReleaseId"], legacy_row): legacy_row},
+    ) is legacy_row
+
     graph = read("verification/authoritative_graph.json")
     catalogue = read("collector_catalogue.json")
     migrations = read("collector_migrations.json")

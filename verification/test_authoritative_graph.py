@@ -20,6 +20,33 @@ def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
     assert project_physical_evidence(deepcopy(graph)) == graph
+    # A positional printing id may change when a new printing sorts before it.  The
+    # existing physical node and claim must nevertheless follow the same semantics.
+    with tempfile.TemporaryDirectory() as directory:
+        finish_path = Path(directory) / "finish_units.json"
+        finish_copy = json.loads(
+            (ROOT / "verification" / "finish_units.json").read_text(encoding="utf-8")
+        )
+        shifted = next(
+            printing for unit in finish_copy["units"]
+            for printing in unit.get("printings", [])
+            if printing.get("printingId") == "F0167-P01"
+        )
+        shifted["printingId"] = "F0167-P99"
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        original_finish_path = graph_module.FINISH_UNITS
+        graph_module.FINISH_UNITS = finish_path
+        try:
+            shifted_projection = project_physical_evidence(deepcopy(graph))
+        finally:
+            graph_module.FINISH_UNITS = original_finish_path
+    shifted_physical = next(
+        row["payload"] for row in shifted_projection["entities"]
+        if row["entityType"] == "physical-printing"
+        and row["entityId"] == "PHYSICAL:F0167-P01"
+    )
+    assert shifted_physical["sourcePrintingId"] == "F0167-P99"
+    assert shifted_physical["establishingClaimId"] == "CLAIM:finish:F0167-P01"
     standalone_claim = next(
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "candidate-claim"

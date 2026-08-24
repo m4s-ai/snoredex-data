@@ -44,6 +44,7 @@ REFRESH_CANDIDATE_SCHEMA = "snoredex-tcgdex-refresh/1"
 FINISHES = ("non-holo", "holo", "reverse-holo", "mirror-holo")
 FOIL_PATTERN_ALIASES = {
     "poke ball mirror": "poke-ball",
+    "poké ball mirror": "poke-ball",
     "master ball mirror": "master-ball",
 }
 STATUS_RANK = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confirmed": 3}

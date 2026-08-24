@@ -50,6 +50,18 @@ def main() -> None:
         "https://private-user-images.githubusercontent.com/1/signed-only.png",
         ["https://private-user-images.githubusercontent.com/1/signed-only.png"],
     )]
+    assert fetch_attachment.canonical_issue_attachment_provenance(
+        "https://github.com/m4s-ai/snoredex-data/issues/999",
+        "https://github.com/user-attachments/assets/stable-a", 1,
+    ) == "https://github.com/m4s-ai/snoredex-data/issues/999#attachment-1"
+    assert fetch_attachment.canonical_issue_attachment_provenance(
+        "https://github.com/m4s-ai/snoredex-data/issues/999",
+        "https://private-user-images.githubusercontent.com/1/signed-only.png", 2,
+    ) == "https://github.com/m4s-ai/snoredex-data/issues/999#attachment-2"
+    assert fetch_attachment.canonical_issue_attachment_provenance(
+        "https://github.com/m4s-ai/snoredex-data/issues/999",
+        "https://cdn.example.test/card.png", 3,
+    ) == "https://cdn.example.test/card.png"
     duplicate_html = html + html.split("</a>", 1)[0] + "</a>"
     assert len(fetch_attachment.issue_attachments(duplicate_html)) == 2
     image = (ROOT / "verification" / "specimens" / "SPEC-0040.png").read_bytes()
@@ -403,12 +415,38 @@ def main() -> None:
         ) == 0
         assert signed_doc["specimens"][0]["specimenId"] == "SPEC-0099"
         assert signed_doc["specimens"][0]["citedBy"] == ["F0167-P01"]
+        # A later render may wrap the same image in a stable GitHub link.  It must
+        # resolve to the existing issue-scoped specimen, not allocate a duplicate.
+        wrapped_issue_html = ROOT / ".fetch-attachment-test-wrapped.html"
+        wrapped_issue_html.write_text(
+            '<a href="https://github.com/user-attachments/assets/ordinary">'
+            '<img src="https://cdn.example.test/ordinary.png"></a>'
+            '<a href="https://github.com/user-attachments/assets/wrapped">'
+            '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+        )
+        wrapped_manifest = ROOT / ".fetch-attachment-test-wrapped-manifest.json"
+        wrapped_manifest.write_text(json.dumps({"issue": 999, "observations": [{
+            "attachmentIndex": 2, "setCode": "JU", "number": "11/64", "variant": "V1",
+            "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
+            "observed": "positive", "recordedAt": "2026-08-24",
+            "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
+        }]}), encoding="utf-8")
+        assert fetch_attachment.command_issue(
+            signed_doc,
+            SimpleNamespace(
+                issue=999, issue_html=str(wrapped_issue_html), manifest=str(wrapped_manifest),
+                allow_small=False, replace=False, dry_run=False,
+            ),
+        ) == 0
+        assert len(signed_doc["specimens"]) == 1
     finally:
         fetch_attachment.SPECIMENS_JSON = original_registry
         fetch_attachment.SPECIMEN_DIR = original_specimen_dir
         fetch_attachment.download_candidates = original_download_candidates
         signed_issue_html.unlink(missing_ok=True)
         signed_manifest.unlink(missing_ok=True)
+        (ROOT / ".fetch-attachment-test-wrapped.html").unlink(missing_ok=True)
+        (ROOT / ".fetch-attachment-test-wrapped-manifest.json").unlink(missing_ok=True)
         signed_registry.unlink(missing_ok=True)
         (ROOT / "SPEC-0099.png").unlink(missing_ok=True)
 

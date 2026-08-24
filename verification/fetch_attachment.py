@@ -190,6 +190,26 @@ def attachment_candidate(url: str) -> bool:
     return Path(path).suffix in {".png", ".jpg", ".jpeg"}
 
 
+def canonical_issue_attachment_provenance(issue_url: str, stable: str, position: int) -> str:
+    """Use one issue-scoped key for every GitHub representation of an attachment.
+
+    GitHub issue HTML may expose the same image as a ``github.com/user-attachments``
+    link, a signed ``private-user-images`` URL, or only the latter.  Those URLs are
+    transport forms, not durable identity.  The attachment ordinal in the issue is
+    the stable identity we can retain in the specimen registry.
+    """
+    parsed = urlparse(stable)
+    host = (parsed.hostname or "").casefold()
+    path = unquote(parsed.path).casefold()
+    is_github_attachment = (
+        host in {"github.com", "www.github.com"}
+        and ("/user-attachments/assets/" in path or "/assets/" in path)
+    ) or host.endswith("user-images.githubusercontent.com")
+    if is_github_attachment:
+        return f"{issue_url}#attachment-{position}"
+    return stable
+
+
 class _IssueAttachmentParser(HTMLParser):
     """Collect stable attachment links and the signed image URL beside each link."""
 
@@ -686,13 +706,13 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         stable, candidates = select_issue_attachment(
             attachments, item.get("attachment", item.get("attachmentIndex")), ordinal
         )
-        provenance = stable
         selected_position = next(
             position for position, (candidate_stable, _) in enumerate(attachments, 1)
             if candidate_stable == stable
         )
-        if "private-user-images.githubusercontent.com" in (urlparse(stable).hostname or ""):
-            provenance = f"{issue_url}#attachment-{selected_position}"
+        provenance = canonical_issue_attachment_provenance(
+            issue_url, stable, selected_position
+        )
         existing = existing_by_source.get(provenance) or existing_by_source.get(stable)
         specimen_id = validate_specimen_id(
             item.get("specimenId") or (existing or {}).get("specimenId") or next_id

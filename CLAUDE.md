@@ -183,6 +183,12 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   will still be. The direct
   `--specimen ... --from ...` form remains for a local or already reachable image. Never write a
   new prose description of a specimen — that is what the ids replaced.
+- **Graph printing identity is semantic, not ordinal.** Finish records still carry their source
+  `printingId` for traceability, but graph claims/nodes derive a `semanticPrintingId` from the
+  release, finish, edition, foil pattern, markings, distribution, and card size. Existing graph
+  ids are retained through that semantic lookup; a new semantic printing gets a hash-based id.
+  The collector projection uses the same fingerprint when reconciling predecessor checklist rows,
+  so inserting a printing cannot silently move collection state to a neighbouring card.
 
 ## Commands
 

@@ -26,6 +26,7 @@ GRAPH_SCHEMA_VERSION = "1.1.0"
 MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
 FOIL_PATTERN_ALIASES = {
     "poke ball mirror": "poke-ball",
+    "poké ball mirror": "poke-ball",
     "master ball mirror": "master-ball",
 }
 
@@ -49,6 +50,41 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 def _number(value: Any) -> str:
     return str(value or "").split("/", 1)[0]
+
+
+def normalized_foil_pattern(value: Any) -> Any:
+    if not isinstance(value, str):
+        return value
+    return FOIL_PATTERN_ALIASES.get(value.strip().casefold(), value)
+
+
+def _semantic_markings(value: Any) -> list[dict[str, Any]] | None:
+    if not value:
+        return None
+    if not isinstance(value, list):
+        return value
+    return sorted(
+        (dict(row) for row in value),
+        key=lambda row: (str(row.get("kind", "")), str(row.get("role", "")), str(row.get("text", ""))),
+    )
+
+
+def printing_semantic_key(scope: Any, printing: dict[str, Any]) -> str:
+    """Canonical identity for a physical finish printing, independent of its ordinal id."""
+    payload = {
+        "scope": str(scope or ""),
+        "finish": printing.get("finish"),
+        "edition": printing.get("edition"),
+        "foilPattern": normalized_foil_pattern(printing.get("foilPattern")),
+        "markings": _semantic_markings(printing.get("markings")),
+        "distribution": printing.get("distribution") or None,
+        "cardSize": printing.get("cardSize") or "unknown",
+    }
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def stable_printing_id(semantic_key: str) -> str:
+    return "PRINTING:" + hashlib.sha256(semantic_key.encode("utf-8")).hexdigest()[:24]
 
 
 def _release_index(graph: dict[str, Any]) -> dict[tuple[str, str, str], str]:
@@ -99,6 +135,26 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         if row.get("entityType") == "candidate-claim"
         and row.get("payload", {}).get("sourceKind") == "finish-printing-record"
     }
+    existing_finish_proposals_by_semantic = {
+        str(row.get("payload", {}).get("semanticPrintingId")): row.get("payload", {}).get("proposedCardReleaseId")
+        for row in graph["entities"]
+        if row.get("entityType") == "candidate-claim"
+        and row.get("payload", {}).get("sourceKind") == "finish-printing-record"
+        and row.get("payload", {}).get("semanticPrintingId")
+    }
+    previous_physical_by_semantic: dict[str, str] = {}
+    previous_claim_by_physical: dict[str, str] = {}
+    for row in graph["entities"]:
+        if row.get("entityType") != "physical-printing":
+            continue
+        payload = row.get("payload") or {}
+        if not payload.get("sourceFinishUnitId"):
+            continue
+        semantic_key = printing_semantic_key(payload.get("cardReleaseId"), payload)
+        previous_physical_by_semantic[semantic_key] = str(row["entityId"])
+        claim_id = payload.get("establishingClaimId")
+        if claim_id:
+            previous_claim_by_physical[str(row["entityId"])] = str(claim_id)
 
     generated_entities: list[dict[str, Any]] = []
     generated_edges: list[dict[str, Any]] = []
@@ -118,8 +174,13 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         release_id = release_ids.get(unit_key)
         for printing in sorted(unit.get("printings", []), key=lambda row: row.get("printingId", "")):
             printing_id = str(printing["printingId"])
-            claim_id = f"CLAIM:finish:{printing_id}"
-            physical_id = f"PHYSICAL:{printing_id}"
+            semantic_scope = release_id or "finish-unit:" + "|".join(unit_key)
+            semantic_key = printing_semantic_key(semantic_scope, printing)
+            semantic_id = stable_printing_id(semantic_key)
+            physical_id = previous_physical_by_semantic.get(semantic_key, f"PHYSICAL:{semantic_id}")
+            claim_id = previous_claim_by_physical.get(
+                physical_id, f"CLAIM:finish:{semantic_id}"
+            )
             confirmed = printing.get("verificationStatus") == "confirmed"
             if confirmed and not release_id:
                 raise ValueError(f"confirmed finish unit has no card release: {unit_key}")
@@ -130,6 +191,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
                 "claimKind": "physical-printing",
                 "sourceKind": "finish-printing-record",
                 "sourceId": printing_id,
+                "semanticPrintingId": semantic_id,
                 "evidenceStatus": printing.get("verificationStatus", "pending"),
                 "disposition": "established-and-mapped" if confirmed else "candidate-needs-evidence",
                 "proposedTargetId": physical_id if confirmed else None,
@@ -146,7 +208,11 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             if printing.get("conflictsWith"):
                 claim_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
             if not confirmed:
-                proposal = release_id or existing_finish_proposals.get(printing_id)
+                proposal = (
+                    release_id
+                    or existing_finish_proposals_by_semantic.get(semantic_id)
+                    or existing_finish_proposals.get(printing_id)
+                )
                 if proposal:
                     claim_payload["proposedCardReleaseId"] = proposal
             if specimen_ids:
@@ -171,6 +237,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
 
             physical_payload = {
                 "physicalPrintingId": physical_id,
+                "semanticPrintingId": semantic_id,
                 "cardReleaseId": release_id,
                 "finish": printing["finish"],
                 "edition": printing.get("edition"),
