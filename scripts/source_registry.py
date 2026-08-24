@@ -30,7 +30,7 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
@@ -727,7 +727,7 @@ def main() -> int:
     document = {
         "meta": {
             "description": "Canonical provider registry and evidence index for every sourced claim.",
-            "generated": date.today().isoformat(),
+            "generated": datetime.now(timezone.utc).date().isoformat(),
             "policy": [
                 "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
                 "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",

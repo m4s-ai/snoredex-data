@@ -21,7 +21,7 @@ import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -747,7 +747,7 @@ def main() -> None:
             SNAPSHOT_PATH,
             {
                 "schema": "snoredex-tcgdex-snapshot/1",
-                "generated": date.today().isoformat(),
+                "generated": datetime.now(timezone.utc).date().isoformat(),
                 "records": current_snapshot,
             },
         )
@@ -1213,7 +1213,7 @@ def main() -> None:
     }
     cards_document["meta"]["finishVerification"] = {
         "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-        "lastUpdated": date.today().isoformat(),
+        "lastUpdated": datetime.now(timezone.utc).date().isoformat(),
         **counts,
     }
     notes = cards_document["meta"].setdefault("notes", [])
@@ -1236,7 +1236,7 @@ def main() -> None:
     finish_document = {
         "meta": {
             "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-            "generated": date.today().isoformat(),
+            "generated": datetime.now(timezone.utc).date().isoformat(),
             "scope": "Physical cards only; online/live code cards are excluded.",
             "sourcePolicy": [
                 "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -1304,7 +1304,7 @@ def main() -> None:
     review_document = {
         "meta": {
             "description": "Finish units that still need finish, pattern, marking, size, or Cardmarket-product mapping evidence.",
-            "generated": date.today().isoformat(),
+            "generated": datetime.now(timezone.utc).date().isoformat(),
             "count": len(review_rows),
             "pendingByLanguage": dict(sorted(pending_by_language.items(),
                                              key=lambda kv: (-kv[1], kv[0]))),
@@ -1326,7 +1326,7 @@ def main() -> None:
         for marking in (printing.get("markings") or [])
     )
     analysis = {
-        "generated": date.today().isoformat(),
+        "generated": datetime.now(timezone.utc).date().isoformat(),
         "note": "Counts are set-number-language finish units. Availability is positive-evidence-only and is not a proof of completeness.",
         "counts": counts,
         "finishCombinations": dict(sorted(combination_counts.items())),

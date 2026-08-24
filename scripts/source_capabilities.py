@@ -21,7 +21,7 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import date, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -409,7 +409,7 @@ def build() -> dict[str, Any]:
         "meta": {
             "schema": "snoredex-source-capability-graph",
             "schemaVersion": manifest["meta"]["schemaVersion"],
-            "generated": date.today().isoformat(),
+            "generated": datetime.now(timezone.utc).date().isoformat(),
             "manifest": "verification/source_capabilities.json",
             "manifestSchema": "verification/source_capability_schema.json",
             "sourceRegistry": "verification/source_registry.json",
