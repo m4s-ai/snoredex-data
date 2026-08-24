@@ -11,6 +11,7 @@ are not restated here — a second copy is a copy that goes stale.
 | What is true right now? | [`verification/DATA-HANDOFF-AUDIT.md`](verification/DATA-HANDOFF-AUDIT.md) — generated from the data, so it cannot drift |
 | What should I work on? | The [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) |
 | How do I add or change evidence? | [`verification/RESUME.md`](verification/RESUME.md) — read it before touching a confirmation or contradiction |
+| How do the workflows, graph edges, generators and gates connect? | [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md) — normative DAG and data-contract boundary |
 | How do I *use* the data? | [`README.md`](README.md), with [`FINDINGS.md`](FINDINGS.md) for what fell out of building it |
 | Why does this rule exist? | [`LESSONS.md`](LESSONS.md) — the incident behind each trap |
 | What is the data's scope, and what is it *not*? | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) — the frozen boundary, below |
