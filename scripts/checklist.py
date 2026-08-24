@@ -34,7 +34,7 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -263,7 +263,7 @@ def main() -> int:
         "meta": {
             "schema": "snoredex-checklist",
             "schemaVersion": SCHEMA_VERSION,
-            "generated": date.today().isoformat(),
+            "generated": datetime.now(timezone.utc).date().isoformat(),
             "candidateUniverse": {
                 "id": baseline["meta"]["baselineId"],
                 "type": "historical-marketplace-search",

@@ -57,43 +57,30 @@ jobs:
         with:
           python-version: "3.11"
 
-      # Publish only freshly generated output, so the deployed site can never be a stale
-      # artifact that happens to be committed.
-      - name: Regenerate site artifacts
-        run: |
-          python scripts/finishes.py --reproject
-          python scripts/language_status.py
-          python scripts/confirmed_releases.py
-          python scripts/source_registry.py
-          python scripts/source_capabilities.py
-          python scripts/checklist.py
-          python scripts/collector_catalogue.py
-          python scripts/readme_stats.py
-          python scripts/issue_templates.py
-          python scripts/site.py
+      # The reusable release-gate job has already run L3/L4 and uploaded one exact Pages artifact
+      # plus one gate manifest per OS. This job only verifies that handoff and deploys those bytes;
+      # it does not regenerate a second projection tree.
+      - name: Download verified Pages artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pages-artifact
+          path: _site
 
-      - name: Assemble the public artifact from an allowlist
+      - name: Download release gate manifests
+        uses: actions/download-artifact@v4
+        with:
+          pattern: gate-manifest-*
+          path: _gate
+          merge-multiple: true
+
+      - name: Verify checked artifact handoff
         run: |
           set -euo pipefail
-          python scripts/publish.py --out _site
-          echo "--- published tree ---"
-          find _site -maxdepth 2 -type d | sort
-
-      # This file is intentionally generated after checkout/assembly: only now
-      # does the containing commit exist and only these exact bytes are deployable.
-      - name: Bind collector bytes to the deployment commit
-        run: |
-          set -euo pipefail
-          published_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          python scripts/collector_deployment.py \
-            --catalogue _site/collector_catalogue.json \
-            --out _site/collector_deployment.json \
-            --artifact-commit "${GITHUB_SHA}" \
-            --published-at "${published_at}"
-
-      - name: Verify the assembled artifact
-        run: |
-          set -euo pipefail
+          python verification/gate_manifest.py \
+            --check-dir _gate \
+            --commit "${GITHUB_SHA}" \
+            --expected-gate L4 \
+            --minimum 2
           python scripts/publish.py --out _site --verify
           python scripts/collector_deployment.py \
             --check \

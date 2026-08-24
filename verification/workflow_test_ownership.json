@@ -1,0 +1,107 @@
+{
+  "schema": "snoredex-workflow-test-ownership",
+  "version": "1.0.0",
+  "purpose": "One primary contract owner per core test; shared fixtures are named once and reused by reference.",
+  "gateBoundaries": {
+    "import": "Input/schema/hash and importer validation; no generated projection is accepted as truth.",
+    "projection": "A canonical store is transformed into a consumer view with stable semantic identity.",
+    "cross-artifact": "Independent stores, graph edges, reports, databases, and publication views agree.",
+    "browser": "Rendered site behavior and browser-safe source text; never a truth-store writer.",
+    "live": "Explicit network refresh/assertion only; never part of offline regeneration.",
+    "publish": "Allowlisted artifact and deployment-manifest integrity after the release gate."
+  },
+  "fixtureRegistry": [
+    {
+      "id": "canonical-stores",
+      "path": "verification/{units,evidence,finish_units,owner_adjudications}.json*",
+      "owner": "store-invariants",
+      "deterministic": true,
+      "consumers": ["review-integrity", "evidence-application", "owner-adjudications"]
+    },
+    {
+      "id": "source-adapter-inline",
+      "path": "verification/test_source_adapters.py::inline records",
+      "owner": "source-adapter-contract",
+      "deterministic": true,
+      "consumers": ["source-adapters"]
+    },
+    {
+      "id": "card-discovery-inline",
+      "path": "verification/test_card_discovery.py::inline records",
+      "owner": "card-discovery-contract",
+      "deterministic": true,
+      "consumers": ["card-discovery"]
+    },
+    {
+      "id": "authoritative-graph",
+      "path": "verification/authoritative_graph.json",
+      "owner": "authoritative-graph",
+      "deterministic": true,
+      "consumers": ["authoritative-graph", "physical-evidence", "attachment-import"]
+    },
+    {
+      "id": "physical-specimens",
+      "path": "verification/specimens.json + verification/specimens/*.png",
+      "owner": "physical-evidence",
+      "deterministic": true,
+      "consumers": ["physical-evidence", "attachment-import"]
+    },
+    {
+      "id": "collector-contract",
+      "path": "collector_catalogue.fixture.json",
+      "owner": "collector-contract",
+      "deterministic": true,
+      "consumers": ["collector-contract"]
+    },
+    {
+      "id": "tcgdex-snapshot",
+      "path": "verification/finish_tcgdex_snapshot.json",
+      "owner": "tcgdex-snapshot",
+      "deterministic": true,
+      "consumers": ["tcgdex-snapshot", "finish-projection"]
+    },
+    {
+      "id": "stale-artifact-markers",
+      "path": "verification/test_regen_readiness.py::TARGETS",
+      "owner": "orchestration-determinism",
+      "deterministic": true,
+      "consumers": ["regen-readiness"]
+    }
+  ],
+  "tests": [
+    {"id": "review-integrity", "command": ["verification/review_integrity.py"], "primaryOwner": "store-invariants", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},
+    {"id": "evidence-application", "command": ["verification/test_evidence_application.py"], "primaryOwner": "evidence-application", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},
+    {"id": "database-portability", "command": ["verification/test_database_portability.py"], "primaryOwner": "database-portability", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": []},
+    {"id": "tracker-state", "command": ["verification/test_tracker_state.py"], "primaryOwner": "tracker-state", "boundary": "projection", "gateLevel": "L2", "fixtures": []},
+    {"id": "owner-adjudications", "command": ["verification/test_owner_adjudications.py"], "primaryOwner": "owner-adjudications", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},
+    {"id": "source-adapters", "command": ["verification/test_source_adapters.py"], "primaryOwner": "source-adapter-contract", "boundary": "import", "gateLevel": "L1", "fixtures": ["source-adapter-inline"]},
+    {"id": "card-discovery", "command": ["verification/test_card_discovery.py"], "primaryOwner": "card-discovery-contract", "boundary": "import", "gateLevel": "L1", "fixtures": ["card-discovery-inline"]},
+    {"id": "metric-polarity", "command": ["verification/test_metric_polarity.py"], "primaryOwner": "metric-polarity", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "asia-locality", "command": ["verification/test_asia_locality_matrix.py"], "primaryOwner": "asia-locality", "boundary": "projection", "gateLevel": "L2", "fixtures": []},
+    {"id": "authoritative-graph", "command": ["verification/test_authoritative_graph.py"], "primaryOwner": "authoritative-graph", "boundary": "projection", "gateLevel": "L2", "fixtures": ["authoritative-graph"]},
+    {"id": "physical-evidence", "command": ["verification/test_physical_evidence_workflow.py"], "primaryOwner": "physical-evidence", "boundary": "projection", "gateLevel": "L2", "fixtures": ["authoritative-graph", "physical-specimens"]},
+    {"id": "attachment-import", "command": ["verification/test_fetch_attachment.py"], "primaryOwner": "attachment-import", "boundary": "import", "gateLevel": "L0", "fixtures": ["authoritative-graph", "physical-specimens"]},
+    {"id": "tcgdex-snapshot", "command": ["verification/test_tcgdex_snapshot.py"], "primaryOwner": "tcgdex-snapshot", "boundary": "import", "gateLevel": "L1", "fixtures": ["tcgdex-snapshot"]},
+    {"id": "attachment-integrity", "command": ["verification/fetch_attachment.py", "--evidence-check"], "primaryOwner": "attachment-integrity", "boundary": "projection", "gateLevel": "L2", "fixtures": ["physical-specimens"]},
+    {"id": "collector-contract", "command": ["verification/test_collector_catalogue.py"], "primaryOwner": "collector-contract", "boundary": "projection", "gateLevel": "L2", "fixtures": ["collector-contract"]},
+    {"id": "retired-projections", "command": ["verification/test_retired_projections.py"], "primaryOwner": "retired-projections", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "artwork-projection", "command": ["verification/test_artwork_review.py"], "primaryOwner": "artwork-projection", "boundary": "projection", "gateLevel": "L2", "fixtures": ["authoritative-graph"]},
+    {"id": "korean-locality", "command": ["verification/test_korean_burning_confrontation.py"], "primaryOwner": "korean-locality", "boundary": "import", "gateLevel": "L1", "fixtures": []},
+    {"id": "completeness-gate", "command": ["verification/test_completeness_gate.py"], "primaryOwner": "completeness-gate", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": []},
+    {"id": "gate-matrix", "command": ["verification/test_workflow_gate_matrix.py"], "primaryOwner": "gate-matrix", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "pipeline-documentation", "command": ["verification/test_pipeline_documentation.py"], "primaryOwner": "pipeline-documentation", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "gate-handoff", "command": ["verification/test_gate_handoff.py"], "primaryOwner": "gate-handoff", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "workflow-test-ownership", "command": ["verification/test_workflow_test_ownership.py"], "primaryOwner": "workflow-test-ownership", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "scoped-regen", "command": ["verification/test_scoped_regen.py"], "primaryOwner": "scoped-regen", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "workflow-loop", "command": ["verification/test_workflow_loop.py"], "primaryOwner": "workflow-loop", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "workflow-measurement", "command": ["verification/test_measure_workflow.py"], "primaryOwner": "workflow-measurement", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "findings-harness", "command": ["verification/test_findings_harness.py"], "primaryOwner": "findings-harness", "boundary": "cross-artifact", "gateLevel": "L1", "fixtures": []},
+    {"id": "cross-artifact", "command": ["verification/review_findings.py"], "primaryOwner": "cross-artifact", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": ["canonical-stores", "authoritative-graph"]},
+    {"id": "regen-readiness", "command": ["verification/test_regen_readiness.py"], "primaryOwner": "orchestration-determinism", "boundary": "import", "gateLevel": "L0", "fixtures": ["stale-artifact-markers"], "strategy": "regen.py --check-only selected CHECK entries; the full L3 suite runs once in the parent gate"}
+  ],
+  "externalGates": [
+    {"id": "browser", "command": ["verification/test_site.py"], "boundary": "browser", "gateLevel": "L4", "owner": "site-browser"},
+    {"id": "live-finish", "command": ["verification/verify_finish_sources.py"], "boundary": "live", "gateLevel": "L4", "owner": "finish-source-live"},
+    {"id": "publish", "command": ["scripts/publish.py", "--verify"], "boundary": "publish", "gateLevel": "L4", "owner": "artifact-publication"}
+  ]
+}

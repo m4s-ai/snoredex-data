@@ -1,0 +1,112 @@
+{
+  "schema": "snoredex-workflow-loops",
+  "version": "1.0.0",
+  "runner": "scripts/workflow_loop.py",
+  "reportRoot": "verification/cache/workflow-loops",
+  "loopContract": {
+    "bounded": "A loop stops on terminal state, unchanged progress, failed lane, or --max-cycles.",
+    "positiveEvidence": "No loop may turn an empty provider result, missing row, or skipped step into absence.",
+    "canonicalWrites": "The runner never edits truth stores; existing scoped lanes may reproject their declared outputs.",
+    "mergeBoundary": "Every loop report is partial L0-L2 evidence; scripts/regen.py --check remains the L3 merge gate."
+  },
+  "loops": [
+    {
+      "id": "physical",
+      "title": "Issue attachment to positive physical observation",
+      "lane": "physical-evidence",
+      "impactClasses": ["physical-observation", "finish-claim"],
+      "dependsOn": [],
+      "gateLevel": "L0-L2 scoped lane; L3 merge gate",
+      "retry": "Replay the same Run-ID after a new attachment or reviewed specimen; stop after maxCycles when evidence is unchanged.",
+      "states": ["issue", "attachment-hash", "specimen", "observed", "projected", "needs-evidence", "terminal"],
+      "initial": "issue",
+      "terminal": ["terminal", "needs-evidence"],
+      "progressMetric": "specimen, physical-observation, photograph-hash, and attachment counts",
+      "stopReasons": ["all retained specimens have positive physical observations", "attachment or observation is missing", "no metric change"]
+    },
+    {
+      "id": "evidence",
+      "title": "Evidence observation to application status",
+      "lane": "correction",
+      "impactClasses": ["claim-language", "physical-observation"],
+      "dependsOn": ["physical"],
+      "gateLevel": "L0-L2 scoped lane; L3 merge gate",
+      "retry": "Replay after positive evidence or owner adjudication; never retry an unchanged application store indefinitely.",
+      "states": ["observation", "classified", "applied", "needs-evidence", "needs-adjudication", "terminal"],
+      "initial": "observation",
+      "terminal": ["terminal", "needs-evidence", "needs-adjudication"],
+      "progressMetric": "application status counts in verification/evidence_semantics.json",
+      "stopReasons": ["no unresolved application row remains", "new positive evidence or owner adjudication is required", "no metric change"]
+    },
+    {
+      "id": "discovery",
+      "title": "Retained discovery run to reconciliation boundary",
+      "lane": "source-discovery",
+      "impactClasses": ["source-discovery", "catalogue-set"],
+      "dependsOn": [],
+      "gateLevel": "L0-L2 scoped lane; L3 merge gate",
+      "retry": "Replay a retained Run-ID; use --include-live only for an explicit provider refresh, then reconcile the new positive run.",
+      "states": ["candidate", "retained", "reconciled", "needs-source", "blocked-by-source", "terminal"],
+      "initial": "candidate",
+      "terminal": ["terminal", "needs-source", "blocked-by-source"],
+      "progressMetric": "latest retained source/card run status plus explicit gap terminal states",
+      "stopReasons": ["all retained records are reconciled", "provider boundary needs a new positive source", "no metric change"]
+    },
+    {
+      "id": "news-promo",
+      "title": "News or promo lead to concrete source and graph claim",
+      "lane": "source-discovery",
+      "impactClasses": ["source-discovery", "catalogue-set"],
+      "dependsOn": ["discovery"],
+      "gateLevel": "L0-L2 scoped lane; L3 merge gate",
+      "retry": "Replay after a concrete official lead/source is recorded; News alone never retries into automatic card confirmation.",
+      "states": ["lead", "concrete-source", "positive-claim", "graph", "needs-source", "terminal"],
+      "initial": "lead",
+      "terminal": ["terminal", "graph", "needs-source"],
+      "progressMetric": "source, news/promo lead, and positive graph-claim counts",
+      "stopReasons": ["a concrete source and positive claim are reconciled", "lead lacks a positive source", "no automatic card confirmation"]
+    },
+    {
+      "id": "tcgdex",
+      "title": "TCGdex candidate, review, acceptance, and projection",
+      "lane": "finish-refresh",
+      "impactClasses": ["snapshot-refresh", "finish-claim"],
+      "dependsOn": ["discovery"],
+      "gateLevel": "L0-L2 scoped lane; L3 merge gate",
+      "retry": "Replay after an explicit candidate refresh or owner acceptance; no candidate means a bounded stop, not a polling loop.",
+      "states": ["candidate", "diffed", "needs-acceptance", "accepted", "projected", "needs-refresh"],
+      "initial": "candidate",
+      "terminal": ["projected", "needs-refresh", "needs-acceptance"],
+      "progressMetric": "candidate presence, snapshot record count, and candidate diff counts",
+      "stopReasons": ["accepted snapshot is projected offline", "no candidate exists; explicit refresh is required", "owner acceptance is required", "no metric change"]
+    },
+    {
+      "id": "absence",
+      "title": "Scoped contradiction to adjudicated absence",
+      "lane": "absence",
+      "impactClasses": ["absence-adjudication", "claim-language"],
+      "dependsOn": ["evidence"],
+      "gateLevel": "L0-L2 scoped lane; L3 merge gate",
+      "retry": "Replay after scope expansion or owner adjudication; a missing provider row remains pending/disputed.",
+      "states": ["scope", "contradicted", "needs-adjudication", "not-printed", "disputed", "terminal"],
+      "initial": "scope",
+      "terminal": ["terminal", "needs-adjudication", "disputed"],
+      "progressMetric": "evidence application counts and owner-adjudication count",
+      "stopReasons": ["owner decision settles the scoped contradiction", "disagreement remains disputed", "no zero-result absence inference", "no metric change"]
+    },
+    {
+      "id": "cardmarket",
+      "title": "Frozen Cardmarket baseline or positive listing evidence",
+      "lane": "physical-evidence",
+      "impactClasses": ["physical-observation", "source-discovery"],
+      "dependsOn": ["physical"],
+      "gateLevel": "L0-L2 scoped lane; L3 merge gate",
+      "retry": "Replay after a positive seller listing/photo; the frozen historical baseline is never rewritten or expanded by retry.",
+      "states": ["baseline", "physical-listing", "positive-observation", "terminal", "needs-evidence"],
+      "initial": "baseline",
+      "terminal": ["terminal", "positive-observation", "needs-evidence"],
+      "progressMetric": "frozen baseline, listing specimen, positive listing, and catalogue-expansion counts",
+      "stopReasons": ["historical baseline remains unchanged", "positive listing is evidence only", "missing positive listing evidence", "never auto-expand catalogue"]
+    }
+  ]
+}

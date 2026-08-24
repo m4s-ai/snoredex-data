@@ -1,0 +1,105 @@
+{
+  "schema": "snoredex-scoped-pipeline",
+  "version": "1.0.0",
+  "fullGate": ["python", "scripts/regen.py", "--check"],
+  "runContract": {
+    "runId": "UTC timestamp plus lane/manifest/commit fingerprint; caller may pin --run-id",
+    "report": "verification/cache/scoped-runs/<runId>.json",
+    "defaultNetwork": false,
+    "defaultBrowser": false,
+    "idempotence": "lane steps may rewrite only their declared projections; repeated offline runs must leave non-SQLite tree bytes unchanged",
+    "mergeBoundary": "every lane report is partial evidence; L3 fullGate remains required before merge"
+  },
+  "lanes": [
+    {
+      "id": "physical-evidence",
+      "title": "Issue manifest / attachment to physical printing",
+      "entry": "verification/fetch_attachment.py manifest or already-reviewed specimen",
+      "impactClasses": ["physical-observation", "finish-claim"],
+      "dependsOn": ["known-card-confirmation"],
+      "minimumGate": "L0",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "steps": [
+        {"id": "attachment-integrity", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": ["verification/specimens/", "verification/specimens.json"]},
+        {"id": "finish-projection", "command": ["scripts/finishes.py", "--reproject"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json"]},
+        {"id": "graph-check", "command": ["scripts/authoritative_graph.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "collector-check", "command": ["scripts/collector_catalogue.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json"]}
+      ],
+      "skippedChecks": ["full L3 regen.py gate", "browser acceptance", "live finish-source verification", "publish/deployment"]
+    },
+    {
+      "id": "source-discovery",
+      "title": "Retained source-first runs to reconciled graph",
+      "entry": "verification/runs/source-adapters or verification/runs/card-discovery",
+      "impactClasses": ["source-discovery", "catalogue-set"],
+      "dependsOn": [],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "steps": [
+        {"id": "set-adapter-check", "command": ["scripts/source_adapters.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "card-discovery-check", "command": ["scripts/card_discovery.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "completeness-check", "command": ["scripts/completeness_gate.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "graph-check", "command": ["scripts/authoritative_graph.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": []}
+      ],
+      "skippedChecks": ["live discovery refresh", "full L3 regen.py gate", "browser acceptance", "publish/deployment"]
+    },
+    {
+      "id": "finish-refresh",
+      "title": "TCGdex candidate to accepted offline finish projection",
+      "entry": "verification/cache/finish-tcgdex/refresh-candidate.json or committed snapshot",
+      "impactClasses": ["snapshot-refresh", "finish-claim"],
+      "dependsOn": [],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "steps": [
+        {"id": "snapshot-check", "command": ["verification/test_tcgdex_snapshot.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "offline-finish-check", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "refresh-candidate", "command": ["scripts/finishes.py", "--refresh"], "gateLevel": "L1", "network": true, "browser": false, "writes": ["verification/cache/finish-tcgdex/"]},
+        {"id": "finish-projection", "command": ["scripts/finishes.py", "--reproject"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json"]}
+      ],
+      "skippedChecks": ["refresh candidate is skipped without --include-live", "snapshot acceptance remains an explicit owner action", "full L3 regen.py gate", "browser acceptance", "publish/deployment"]
+    },
+    {
+      "id": "correction",
+      "title": "Claim / evidence / adjudication correction to projections",
+      "entry": "reviewed evidence, owner adjudication, or correction issue",
+      "impactClasses": ["claim-language", "physical-observation"],
+      "dependsOn": ["known-card-confirmation"],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "steps": [
+        {"id": "semantics-check", "command": ["scripts/evidence_semantics.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "application-check", "command": ["verification/test_evidence_application.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "integrity-check", "command": ["verification/review_integrity.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "cross-artifact-check", "command": ["verification/review_findings.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []}
+      ],
+      "skippedChecks": ["unrelated projection families", "full L3 regen.py gate", "browser acceptance", "live source verification", "publish/deployment"]
+    },
+    {
+      "id": "absence",
+      "title": "Scoped absence / contradiction adjudication",
+      "entry": "scoped owner adjudication plus positive bounded source evidence",
+      "impactClasses": ["absence-adjudication", "claim-language"],
+      "dependsOn": ["known-card-confirmation"],
+      "minimumGate": "L1",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "steps": [
+        {"id": "semantics-check", "command": ["scripts/evidence_semantics.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "adjudication-check", "command": ["verification/test_owner_adjudications.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "report-check", "command": ["verification/report.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/CONTRADICTED.json", "verification/UNCONFIRMED.json"]},
+        {"id": "cross-artifact-check", "command": ["verification/review_findings.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []}
+      ],
+      "skippedChecks": ["zero-result inference", "unrelated projection families", "full L3 regen.py gate", "browser acceptance", "live source verification", "publish/deployment"]
+    }
+  ]
+}

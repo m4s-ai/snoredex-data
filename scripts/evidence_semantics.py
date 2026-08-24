@@ -70,7 +70,7 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -454,7 +454,7 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         "meta": {
             "schema": "snoredex-evidence-semantics",
             "schemaVersion": SCHEMA_VERSION,
-            "generated": date.today().isoformat(),
+            "generated": datetime.now(timezone.utc).date().isoformat(),
             "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
             "status": "active application policy — raw verdicts remain unchanged",
             "description": (

@@ -11,6 +11,7 @@ are not restated here — a second copy is a copy that goes stale.
 | What is true right now? | [`verification/DATA-HANDOFF-AUDIT.md`](verification/DATA-HANDOFF-AUDIT.md) — generated from the data, so it cannot drift |
 | What should I work on? | The [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) |
 | How do I add or change evidence? | [`verification/RESUME.md`](verification/RESUME.md) — read it before touching a confirmation or contradiction |
+| How do the workflows, graph edges, generators and gates connect? | [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md) — normative DAG and data-contract boundary |
 | How do I *use* the data? | [`README.md`](README.md), with [`FINDINGS.md`](FINDINGS.md) for what fell out of building it |
 | Why does this rule exist? | [`LESSONS.md`](LESSONS.md) — the incident behind each trap |
 | What is the data's scope, and what is it *not*? | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) — the frozen boundary, below |
@@ -101,25 +102,29 @@ verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
                               articles often carry both enrelease and jarelease; never select by
                               article title alone. Recheck with audit_bulbapedia_release_dates.py.
-scripts/                      Two halves; only the second can be re-run (#28).
-
-                              LIVE generators, in run order (§7 has the full command list):
-                                analyze -> finishes -> language_status -> confirmed_releases
-                                -> source_registry -> source_capabilities -> source_adapters
-                                -> card_discovery
-                                -> checklist -> collector_catalogue -> readme_stats
-                                -> issue_templates
-                                -> open_items -> database -> tracker template -> site
-                              plus editions.py (edition classification) and publish.py (assembles
-                              and verifies the Pages artifact). authoritative_graph.py validates the
-                              reviewed #140 locality graph snapshot and consumers read it directly;
-                              into the application database;
+scripts/                      Two halves; only the second can be re-run (#28). The executable
+                              order is owned by scripts/regen.py (REGEN/CHECK/TESTS); do not copy
+                              that list into handover prose. WORKFLOW-MAP.md is the human-readable
+                              explanation of the same DAG, gate levels, and Pages deployment lane.
+                              scoped_regen.py reads scoped_pipeline_manifest.json for an explicit
+                              L0–L2 lane and writes an ignored Run-ID report; it never replaces
+                              the full regen.py merge gate.
+                              workflow_loop.py reads workflow_loop_manifest.json for bounded
+                              physical/evidence/discovery/News-Promo/TCGdex/absence/Cardmarket
+                              cycles and stops on no progress or required owner/source input; its
+                              dependency graph is ordering-only and it never infers absence from
+                              silence.
+                              release-gate.yml assembles and verifies the allowlisted Pages
+                              artifact and emits commit/tree/catalogue gate manifests;
+                              pages.yml downloads that handoff, re-verifies it and deploys without
+                              rebuilding a second projection tree. collector_deployment.py binds
+                              the artifact to the containing commit.
+                              authoritative_graph.py validates the reviewed #140 locality graph;
                               artwork_review.py builds the #120 graph-backed browser projection;
-                              source_adapters.py checks/reprojects retained ADR-0004 set runs;
-                              card_discovery.py checks/reprojects retained ADR-0006 card runs; and
-                              completeness_gate.py validates both immutable loops and writes the
-                              bounded #141 release summary; discovery_cycle.py is the explicit
-                              refresh/check wrapper for scheduled or manual reruns. See §7.
+                              source_adapters.py and card_discovery.py check/reproject retained
+                              source-first runs; completeness_gate.py validates both immutable
+                              loops and writes the bounded #141 release summary; discovery_cycle.py
+                              is the explicit refresh/check wrapper for scheduled or manual reruns.
                               analyze.py is the SOLE producer of analysis_artists,
                               _shared_cards, _variants and _language_drift, and reads
                               snorlax_cards.json only — the single canonical node (#30). Its
@@ -177,8 +182,9 @@ verification/
   ../collector_catalogue.json
                               GENERATED #254 collector-app projection. Its schema, predecessor
                               migration ledger and reconciliation fixture sit beside it. The
-                              deployment-only collector_deployment.json is emitted by Pages after
-                              the containing commit exists and is never a regen input.
+                              deployment-only collector_deployment.json is emitted by the L4
+                              release gate after the containing commit exists and is never a regen
+                              input; Pages forwards the checked bytes.
   artwork_review_projection.json
                               GENERATED #120 client-side review projection: graph-backed artwork/work
                               groups, local releases, images, observations and hashes. Browser edits
@@ -298,6 +304,10 @@ verification/
                               reported, never asserted (see §7).
   publication_gate.py         Blocks deployment until publication-decisions.json records the
                               approvals; the Pages workflow feeds it the real repo visibility.
+  gate_manifest.py            Runtime-only CI/Pages handoff: binds L3/L4 success to commit/tree/
+                              catalogue fingerprints; never a canonical store or regen input.
+  test_gate_handoff.py         Regression for PR L3, push P6/P7, OS coverage and Pages artifact
+                              handoff semantics.
   test_site.py                Browser acceptance tests (playwright + chromium).
   fixtures/                   Recorded responses so networked checks stay testable offline.
   specimens/                  Photographs of cited specimens, one file per SPEC-nnnn record in

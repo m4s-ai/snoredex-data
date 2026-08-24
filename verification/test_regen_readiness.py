@@ -2,8 +2,10 @@
 
 Regression for #213: the whole point of the single command is that a stale
 derived artifact is caught before merge, not after three CI restarts. This test
-stales a regenerated artifact, asserts `regen.py --check` exits non-zero, then
-restores it.
+stales two regenerated artifacts, asserts the selected `regen.py --check-only`
+determinism pass catches both, then restores them. The complete L3 suite is
+covered by the normal `regen.py --check` invocation; this meta-test does not
+start that suite a second time.
 """
 from __future__ import annotations
 
@@ -21,6 +23,13 @@ TARGETS = [
     (ROOT / "verification" / "authoritative_graph.json",
      b'"schemaVersion": "1.1.0"', b'"schemaVersion": "0.0.0"'),
 ]
+UTC_DATE_GENERATORS = [
+    ROOT / "scripts" / "source_registry.py",
+    ROOT / "scripts" / "source_capabilities.py",
+    ROOT / "scripts" / "evidence_semantics.py",
+    ROOT / "scripts" / "checklist.py",
+    ROOT / "scripts" / "finishes.py",
+]
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess:
@@ -29,6 +38,12 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess:
 
 
 def main() -> int:
+    utc_expression = "datetime.now(timezone.utc).date().isoformat()"
+    for path in UTC_DATE_GENERATORS:
+        source = path.read_text(encoding="utf-8")
+        if "date.today()" in source or utc_expression not in source:
+            print(f"FAIL: {path.relative_to(ROOT)} does not use the UTC snapshot date")
+            return 1
     if not all(path.is_file() for path, _, _ in TARGETS):
         print("SKIP: a readiness target is missing")
         return 0
@@ -41,7 +56,11 @@ def main() -> int:
                 print(f"SKIP: could not find marker in {path}")
                 return 0
             path.write_bytes(corrupted)
-        proc = run([sys.executable, str(REGEN), "--check"])
+        proc = run([
+            sys.executable, str(REGEN), "--check",
+            "--check-only", "scripts/evidence_semantics.py",
+            "--check-only", "scripts/authoritative_graph.py",
+        ])
         expected_header = "FAILED determinism checks:"
         expected_commands = (
             "scripts/evidence_semantics.py --check",
