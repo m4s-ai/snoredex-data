@@ -6,8 +6,8 @@ workflow. A routine physical-card addition extends the canonical specimen manife
 
 ```console
 python verification/fetch_attachment.py --issue NUMBER --manifest PATH
-python verification/fetch_attachment.py --evidence-check
 python scripts/regen.py
+python verification/fetch_attachment.py --evidence-check
 ```
 
 The maintained replacements are the manifest importer, finish projector, authoritative graph

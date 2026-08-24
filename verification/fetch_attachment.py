@@ -53,6 +53,8 @@ USAGE
 
     python verification/fetch_attachment.py --list
     python verification/fetch_attachment.py --issue 269 --manifest verification/evidence/issue-269.json
+    python scripts/regen.py
+    python verification/fetch_attachment.py --evidence-check
     python verification/fetch_attachment.py --specimen SPEC-0001 --from ~/SPEC-0001.jpg \
         --attachment-url https://github.com/user-attachments/assets/<uuid>
     python verification/fetch_attachment.py --specimen SPEC-0001 --from <reachable-url> --dry-run
@@ -401,6 +403,8 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
 
     provenance = args.attachment_url or args.source
     digest = content_hash(blob)
+    photo_hash_owners = existing_photo_hash_owners(doc)
+    ensure_unique_photo_hash(photo_hash_owners, digest, specimen["specimenId"])
     if args.dry_run:
         print(f"DRY RUN — would write {destination.relative_to(ROOT)} "
               f"({len(blob):,} bytes, {size[0]}x{size[1]} {ext})")
@@ -439,6 +443,14 @@ def next_specimen_id(specimens: list[dict]) -> str:
         and str(row.get("specimenId", ""))[5:].isdigit()
     ]
     return f"SPEC-{max(numbers, default=0) + 1:04d}"
+
+
+def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
+    return {
+        row["photographSha256"]: row["specimenId"]
+        for row in doc.get("specimens", [])
+        if row.get("photographSha256")
+    }
 
 
 def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
@@ -521,11 +533,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         for row in doc["specimens"]
         if row.get("photographSource")
     }
-    photo_hash_owners = {
-        row["photographSha256"]: row["specimenId"]
-        for row in doc["specimens"]
-        if row.get("photographSha256")
-    }
+    photo_hash_owners = existing_photo_hash_owners(doc)
     used_ids: set[str] = set()
     prepared: list[tuple[Path, bytes]] = []
     records: list[dict] = []
@@ -581,20 +589,19 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         return 0
     commit_import(doc, prepared, records)
     print(f"imported {len(records)} specimen(s) from issue #{args.issue}")
-    return command_evidence_check()
+    result = command_evidence_check(check_projection=False)
+    if result == 0:
+        print("next: python scripts/regen.py && "
+              "python verification/fetch_attachment.py --evidence-check")
+    return result
 
 
-def command_evidence_check() -> int:
+def command_evidence_check(*, check_projection: bool = True) -> int:
     """Check the evidence slice without network access or generated-output writes."""
     errors: list[str] = []
     specimens = load_registry().get("specimens", [])
-    observed = [
-        row for row in specimens
-        if row.get("physicalObservation") and row.get("photograph")
-        and not row["physicalObservation"].get("coversMultipleCards")
-        and not str(row.get("photographSource") or "").startswith("/tmp/")
-    ]
-    for specimen in observed:
+    photographed = [row for row in specimens if row.get("photograph")]
+    for specimen in photographed:
         photograph = specimen.get("photograph")
         path = SPECIMEN_DIR / str(photograph or "")
         if not path.is_file():
@@ -610,6 +617,23 @@ def command_evidence_check() -> int:
                 errors.append(f"{specimen['specimenId']}: photograph hash differs")
         except SystemExit as error:
             errors.append(f"{specimen['specimenId']}: invalid photograph ({error})")
+
+    if not check_projection:
+        if errors:
+            print("physical evidence check: FAIL", file=sys.stderr)
+            for error in errors:
+                print(f"  - {error}", file=sys.stderr)
+            return 1
+        print(f"photograph integrity check: OK "
+              f"({len(photographed)} photographed specimens, offline)")
+        return 0
+
+    observed = [
+        row for row in photographed
+        if row.get("physicalObservation")
+        and not row["physicalObservation"].get("coversMultipleCards")
+        and not str(row.get("photographSource") or "").startswith("/tmp/")
+    ]
 
     finish_document = json.loads(
         (VERIFICATION / "finish_units.json").read_text(encoding="utf-8-sig")

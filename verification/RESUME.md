@@ -55,8 +55,8 @@ Keep one reviewed JSON manifest per issue. Each row names `setCode`, `number`, `
 
 ```console
 python verification/fetch_attachment.py --issue 269 --manifest path/to/issue-269.json
-python verification/fetch_attachment.py --evidence-check
 python scripts/regen.py
+python verification/fetch_attachment.py --evidence-check
 ```
 
 The importer parses the issue HTML, downloads the signed image candidate, validates PNG/JPEG

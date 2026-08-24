@@ -3,8 +3,10 @@
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "verification"))
@@ -91,6 +93,101 @@ def main() -> None:
         }, "SPEC-9999", "SPEC-9999.png", "issue", digest
     )
     assert record["photographSha256"] == digest
+
+    # Direct --specimen imports must reject bytes already filed under another specimen too.
+    source = ROOT / ".fetch-attachment-test-card.png"
+    source.write_bytes(image)
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    try:
+        expect_failure(lambda: fetch_attachment.command_file(
+            {"specimens": [
+                {"specimenId": "SPEC-0001", "photograph": None},
+                {"specimenId": "SPEC-0002", "photographSha256": digest},
+            ]},
+            SimpleNamespace(
+                specimen="SPEC-0001", source=str(source), attachment_url=None,
+                replace=False, allow_small=False, dry_run=True,
+            ),
+        ))
+    finally:
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        source.unlink(missing_ok=True)
+
+    # Hash validation covers photographs even when they are not finish projections.
+    photo_paths = [ROOT / name for name in (
+        ".fetch-attachment-test-plain.png",
+        ".fetch-attachment-test-multiple.png",
+        ".fetch-attachment-test-tmp.png",
+    )]
+    for path in photo_paths:
+        path.write_bytes(image)
+    records = [
+        {"specimenId": "SPEC-PLAIN", "photograph": photo_paths[0].name,
+         "photographSha256": digest},
+        {"specimenId": "SPEC-MULTIPLE", "photograph": photo_paths[1].name,
+         "photographSha256": digest,
+         "physicalObservation": {"finish": "holo", "coversMultipleCards": True}},
+        {"specimenId": "SPEC-TMP", "photograph": photo_paths[2].name,
+         "photographSha256": digest,
+         "photographSource": "/tmp/old.png",
+         "physicalObservation": {"finish": "holo"}},
+    ]
+    registry = ROOT / ".fetch-attachment-test-specimens.json"
+    original_registry = fetch_attachment.SPECIMENS_JSON
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    fetch_attachment.SPECIMENS_JSON = registry
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    registry.write_text(json.dumps({"count": len(records), "specimens": records}), encoding="utf-8")
+    try:
+        assert fetch_attachment.command_evidence_check(check_projection=False) == 0
+        photo_paths[0].write_bytes(image[:-1] + b"\x00")
+        assert fetch_attachment.command_evidence_check(check_projection=False) == 1
+    finally:
+        fetch_attachment.SPECIMENS_JSON = original_registry
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        registry.unlink(missing_ok=True)
+        for path in photo_paths:
+            path.unlink(missing_ok=True)
+
+    # Issue imports validate their bytes immediately, but defer projection checks until regen.py.
+    issue_html = ROOT / ".fetch-attachment-test-issue.html"
+    issue_html.write_text(
+        '<a href="https://github.com/user-attachments/assets/stable">'
+        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+    )
+    manifest = ROOT / ".fetch-attachment-test-manifest.json"
+    manifest.write_text(json.dumps({"issue": 999, "observations": [{
+        "attachmentIndex": 1, "setCode": "JU", "number": "11/64", "variant": "V1",
+        "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
+        "observed": "positive", "recordedAt": "2026-08-24",
+        "physicalObservation": {"finish": "holo"},
+    }]}), encoding="utf-8")
+    registry = ROOT / ".fetch-attachment-test-import.json"
+    registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+    original_registry = fetch_attachment.SPECIMENS_JSON
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    original_download_candidates = fetch_attachment.download_candidates
+    fetch_attachment.SPECIMENS_JSON = registry
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.download_candidates = lambda candidates: image
+    try:
+        assert fetch_attachment.command_issue(
+            {"count": 0, "specimens": []},
+            SimpleNamespace(
+                issue=999, issue_html=str(issue_html), manifest=str(manifest),
+                allow_small=False, replace=False, dry_run=False,
+            ),
+        ) == 0
+    finally:
+        fetch_attachment.SPECIMENS_JSON = original_registry
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        fetch_attachment.download_candidates = original_download_candidates
+        issue_html.unlink(missing_ok=True)
+        manifest.unlink(missing_ok=True)
+        registry.unlink(missing_ok=True)
+        (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
+
     print("fetch_attachment validation, hash and fallback regressions passed")
 
 
