@@ -106,6 +106,9 @@ scripts/                      Two halves; only the second can be re-run (#28). T
                               order is owned by scripts/regen.py (REGEN/CHECK/TESTS); do not copy
                               that list into handover prose. WORKFLOW-MAP.md is the human-readable
                               explanation of the same DAG, gate levels, and Pages deployment lane.
+                              scoped_regen.py reads scoped_pipeline_manifest.json for an explicit
+                              L0–L2 lane and writes an ignored Run-ID report; it never replaces
+                              the full regen.py merge gate.
                               publish.py assembles and verifies the allowlisted Pages artifact;
                               collector_deployment.py binds it to the containing commit.
                               authoritative_graph.py validates the reviewed #140 locality graph;

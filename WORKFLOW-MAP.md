@@ -181,6 +181,7 @@ verification/review_integrity.py
   -> verification/test_completeness_gate.py
   -> verification/test_pipeline_documentation.py
   -> verification/test_workflow_test_ownership.py
+  -> verification/test_scoped_regen.py
   -> verification/test_findings_harness.py
   -> verification/review_findings.py
   -> verification/test_regen_readiness.py
@@ -213,6 +214,9 @@ The following operational scripts are intentionally outside the normal offline D
 - `scripts/measure_workflow.py` measures the selected core/CI/Pages lanes, declared store
   reads, observed file deltas, and graph fan-out. It writes the diagnostic baseline to
   `verification/workflow_runtime_baseline.json`; it is never part of the merge gate.
+- `scripts/scoped_regen.py` executes one lane from `verification/scoped_pipeline_manifest.json`,
+  records a Run-ID, graph impact, declared writes, and skipped checks, and leaves the L3 full gate
+  as the merge boundary.
 
 The measurement separates declared ownership from observation: the gate matrix supplies
 the stores and projection roots a lane declares, while the runner records only the files

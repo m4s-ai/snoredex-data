@@ -214,6 +214,9 @@ python scripts/regen.py --check                  # skip the write phase; this is
 # Diagnostic only: limit determinism checks for a focused meta-test; never a merge substitute.
 python scripts/regen.py --check --check-only scripts/evidence_semantics.py
 
+# Scoped L0–L2 lane; report includes Run-ID, graph impact, and skipped checks. L3 is still required.
+python scripts/scoped_regen.py --lane physical-evidence
+
 # These environment canaries deliberately stay outside regen.py.
 python verification/test_site.py                 # browser acceptance tests
 python verification/verify_finish_sources.py     # live TCGCSV assertions
