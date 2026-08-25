@@ -19,6 +19,38 @@ from authoritative_graph import identity_view, project_physical_evidence, valida
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    repaired_releases = [
+        row["payload"] for row in graph["entities"] if row["entityType"] == "card-release"
+    ]
+    assert all(
+        row["workMappingState"] in graph_module.WORK_MAPPING_STATES
+        and (
+            row["workMappingState"] in graph_module.WORK_REQUIRED_STATES
+            and isinstance(row.get("work"), str)
+            or row["workMappingState"] in graph_module.WORK_EMPTY_STATES
+            and row.get("work") is None
+        )
+        for row in repaired_releases
+    )
+    tampered = deepcopy(graph)
+    mapped_release = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["payload"]["workMappingState"] == "mapped"
+    )
+    mapped_release["work"] = None
+    assert any("mapped card release has no Work relation" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    mapped_release = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["payload"]["workMappingState"] == "mapped"
+    )
+    mapped_release["workMappingState"] = "needs-explicit-equivalence"
+    assert any("unmapped card release carries a Work relation" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    next(row["payload"] for row in tampered["entities"] if row["entityType"] == "card-release")[
+        "workMappingState"
+    ] = "future-state"
+    assert any("unknown work mapping state" in error for error in validate(tampered))
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.

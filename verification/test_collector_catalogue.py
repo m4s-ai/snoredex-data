@@ -78,6 +78,14 @@ def main() -> None:
     assert not collector.validate_catalogue(
         fixture["catalogue"], check_asset_bytes=False
     )
+    assert set(schema["properties"]["items"]["items"]["properties"]["workMappingState"]["enum"]) == collector.WORK_MAPPING_STATES
+    for case in fixture["workMappingCases"]:
+        case_catalogue = copy.deepcopy(fixture["catalogue"])
+        case_catalogue["items"][0]["workId"] = case["workId"]
+        case_catalogue["items"][0]["workMappingState"] = case["workMappingState"]
+        case_catalogue["meta"]["catalogueFingerprint"] = collector.semantic_fingerprint(case_catalogue)
+        case_errors = collector.validate_catalogue(case_catalogue, check_asset_bytes=False)
+        assert bool(case_errors) is (not case["valid"]), (case["caseId"], case_errors)
     fixture_localizations = {
         row["languageTag"]: (row["locality"], row["script"])
         for row in fixture["catalogue"]["localizations"]

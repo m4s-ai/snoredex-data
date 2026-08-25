@@ -24,6 +24,14 @@ SPECIMENS = ROOT / "verification" / "specimens.json"
 GRAPH_SCHEMA = "snoredex-authoritative-locality-graph"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
+WORK_MAPPING_STATES = {
+    "mapped",
+    "mapped-by-explicit-equivalence",
+    "needs-explicit-equivalence",
+    "unmapped",
+}
+WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
+WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
 FOIL_PATTERN_ALIASES = {
     "poke ball mirror": "poke-ball",
     "poké ball mirror": "poke-ball",
@@ -633,9 +641,37 @@ def validate(
     # I3/I8: releases have one language-bearing edition and their local identifiers
     # remain explicit (legacy anchors cannot be promoted into local identifiers).
     editions = by_type["set-edition"]
+    works = by_type["work"]
+    works_by_key: dict[str, dict[str, Any]] = {}
+    for work_id, work in works.items():
+        card_key = work.get("cardKey")
+        if not isinstance(card_key, str) or not card_key:
+            errors.append(f"work has no cardKey: {work_id}")
+        elif card_key in works_by_key and works_by_key[card_key] is not work:
+            errors.append(f"duplicate Work cardKey: {card_key}")
+        else:
+            works_by_key[card_key] = work
+    mapping_by_release: dict[str, tuple[Any, Any]] = {}
     for release_id, release in releases.items():
         if release.get("cardReleaseId") != release_id:
             errors.append(f"card-release payload id mismatch: {release_id}")
+        mapping_state = release.get("workMappingState")
+        work_key = release.get("work")
+        if mapping_state not in WORK_MAPPING_STATES:
+            errors.append(f"card release has unknown work mapping state: {release_id}")
+        elif mapping_state in WORK_REQUIRED_STATES:
+            if not isinstance(work_key, str) or not work_key:
+                errors.append(f"mapped card release has no Work relation: {release_id}")
+            elif work_key not in works_by_key:
+                errors.append(f"mapped card release Work does not resolve: {release_id}")
+        elif mapping_state in WORK_EMPTY_STATES and work_key is not None:
+            errors.append(f"unmapped card release carries a Work relation: {release_id}")
+        card_release_id = release.get("cardReleaseId")
+        previous_mapping = mapping_by_release.get(card_release_id)
+        current_mapping = (mapping_state, work_key)
+        if previous_mapping is not None and previous_mapping != current_mapping:
+            errors.append(f"card release mapping is inconsistent: {card_release_id}")
+        mapping_by_release[card_release_id] = current_mapping
         edition_id = release.get("setEditionId")
         edition = editions.get(edition_id)
         if not edition:
