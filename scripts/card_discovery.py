@@ -785,6 +785,7 @@ def acquisition_contract(contract: dict[str, Any]) -> dict[str, Any]:
     value = json.loads(json.dumps(contract))
     value["meta"].pop("coverageVersion")
     value["meta"].pop("reviewedAt")
+    value["meta"]["policies"] = []
     value["explicitMappings"] = []
     value["gaps"] = []
     return value
@@ -1046,7 +1047,9 @@ def checked_raw_path(run_dir: Path, relative: str) -> Path:
 def build_projection(
     contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any],
     manifest: dict[str, Any], run_dir: Path, previous: dict[str, Any] | None,
+    projection_contract: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    projection_contract = projection_contract or contract
     adapters = {row["adapterId"]: row for row in contract["adapters"]}
     slices = {
         row["sliceId"]: (adapter, row)
@@ -1054,7 +1057,7 @@ def build_projection(
     }
     mappings = {
         raw_key(row["providerId"], row["surfaceId"], row["rawLocale"], row["rawProviderId"]): row
-        for row in contract["explicitMappings"]
+        for row in projection_contract["explicitMappings"]
     }
     assertions = {
         raw_key(row["providerId"], row["surfaceId"], row["rawLocale"], row["rawSetCode"]): row
@@ -1279,13 +1282,13 @@ def build_projection(
         "meta": {
             "schema": "snoredex-card-discovery-staging",
             "schemaVersion": "1.0.0",
-            "coverageVersion": contract["meta"]["coverageVersion"],
+            "coverageVersion": projection_contract["meta"]["coverageVersion"],
             "generatedFromRun": manifest["runId"],
             "previousRun": None if previous is None else previous["meta"]["generatedFromRun"],
             "contract": "verification/card_discovery_adapters.json",
             "capabilityGraph": "verification/source_capability_graph.json",
             "authoritativeGraph": "verification/authoritative_graph.json",
-            "contractHash": manifest["contractHash"],
+            "contractHash": content_hash(projection_contract),
             "capabilityGraphHash": manifest["capabilityGraphHash"],
             "authoritativeGraphHash": identity.get("authoritativeGraphHash", content_hash(identity)),
             "sourceFirst": True,
@@ -1296,13 +1299,13 @@ def build_projection(
                 "newCandidate": totals["new-candidate"],
                 "positivelyExcluded": totals["positively-excluded"],
                 "needsEvidence": totals["needs-evidence"],
-                "runErrors": len(run_errors), "gaps": len(contract["gaps"]),
+                "runErrors": len(run_errors), "gaps": len(projection_contract["gaps"]),
             },
         },
         "slices": slice_rows,
         "runErrors": run_errors,
         "diff": diff_records(records, previous_records),
-        "gaps": contract["gaps"],
+        "gaps": projection_contract["gaps"],
         "records": records,
     }
 
@@ -1358,8 +1361,10 @@ def build_latest(
             if manifest.get("contractHash") != content_hash(run_contract):
                 raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
             validate_contract(run_contract, capability, identity)
+        compatible = acquisition_contract(run_contract) == acquisition_contract(contract)
         previous = build_projection(
-            run_contract, capability, identity, manifest, run_dir, previous
+            run_contract, capability, identity, manifest, run_dir, previous,
+            contract if compatible else run_contract,
         )
     return previous, directories[-1]
 

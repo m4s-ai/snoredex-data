@@ -55,6 +55,7 @@ The following invariants apply to every path:
 | `verification/finish_tcgdex_snapshot.json` | explicit refresh/accept flow | Versioned offline TCGdex input | finish candidates; never direct verdicts |
 | `verification/specimens.json` + `verification/specimens/` | `verification/fetch_attachment.py` | Stable physical cards and optional observations/photos | `observed-by`, `supported-by`, physical printing provenance |
 | `verification/set_catalogue_sources.json` | reviewed catalogue input | Set/product identity, releases, dates, edition scope | `asserts-release-event`, `asserts-set-edition`, `scoped-to` |
+| `scripts/source_registry.py` + `verification/source_capabilities.json` | reviewed provider and capability inputs | Provider authority plus bounded positive confirmation dimensions, including PokéCottage | provider/surface/coverage/observation edges |
 | `verification/source_adapters.json` | reviewed source-first adapter inventory | Provider slices, gaps, and terminal states | source/capability and candidate edges |
 | `verification/card_discovery_adapters.json` | reviewed card-discovery inventory | Locality-aware card query slices and gaps | candidate card/release edges |
 
@@ -110,6 +111,8 @@ scripts/source_registry.py
 - Source registry resolves provider/evidence identity.
 - Source capabilities records what a provider can positively establish and where its
   coverage is bounded.
+- The scoped source-discovery lane checks both before adapter and graph projections, so a
+  provider-policy change cannot bypass its registry or capability graph.
 - Source adapters and card discovery reproject retained runs; refresh acquisition belongs
   to `discovery_cycle.py`, not to normal offline regeneration.
 - `authoritative_graph.py` is the identity/provenance hub. It materializes reviewed graph

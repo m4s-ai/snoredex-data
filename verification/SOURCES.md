@@ -32,7 +32,7 @@ gap, never a finding.
 | **pokemontcg.io** | open-database | 2 | no | 1 | 123 | artist, date |
 | **LigaPokemon** | marketplace | 3 | no | 2 | 3 | language, finish |
 | **Limitless TCG** | open-database | 3 | no | 0 | 0 | artist |
-| **PokéCottage** | collector-checklist | 3 | no | 0 | 0 | product |
+| **PokéCottage** | collector-checklist | 3 | no | 0 | 0 | language, finish, product, date, artist, rarity |
 | **Retailer and specialist card listings** | retail-listing | 3 | no | 6 | 31 | finish, product, language |
 | **TCGCSV (TCGplayer product data)** | marketplace-catalogue | 3 | no | 7 | 44 | finish, product |
 | **koreanpokemoncards.com** | collector-database | 3 | no | 0 | 0 | language, finish |
@@ -211,10 +211,10 @@ gap, never a finding.
 
 - **Organization:** PokéCottage
 - **Terms:** Site terms; fan-made collector content.
-- **Coverage:** fan-made set, promo and variant checklists used for discovery leads only
+- **Coverage:** positive card, set, promo and named-variant rows for English, Japanese and Simplified Chinese, plus corroboration of explicitly matched Western releases
 - **Can establish absence:** no — positive evidence only
-- **Attribution:** Discovery leads from PokéCottage.
-- **Notes:** Inspect the Snorlax master list and matching set guides when a newly announced or released set contains Snorlax. Every row remains a candidate until an independent official page, checklist, product record or specimen verifies it. Never transfer finish, stamp, promo distribution, language/locality, release date or completeness to another Western language.
+- **Attribution:** Card, set, promo and variant confirmation from PokéCottage.
+- **Notes:** Inspect the Snorlax master list and matching set guides when a newly announced or released set contains Snorlax. An exact retained row is tier-3 positive confirmation for the card, set, promo, date, artist or named variant it states. For another Western language, carry only facts shown to belong to an already identified matching release and retain that equivalence basis. Omissions, zero results and unstated alternatives never establish absence or completeness.
 
 ### Retailer and specialist card listings
 
