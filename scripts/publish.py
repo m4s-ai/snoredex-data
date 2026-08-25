@@ -33,6 +33,7 @@ MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 # Exact files. Each is here because the site links to it or a reader needs it.
 FILES = [
     "index.html",
+    "llms.txt",
     "README.md",
     "DATABASE.md",
     "FINDINGS.md",
@@ -221,11 +222,12 @@ def verify(out: Path) -> int:
     # only index.html let the published Markdown accumulate links to files the allowlist
     # deliberately excludes, which read as broken pages to the very reviewers the site invites.
     for page in sorted(out.rglob("*")):
-        if not page.is_file() or page.suffix not in {".html", ".md"}:
+        markdown = page.suffix == ".md" or page.name == "llms.txt"
+        if not page.is_file() or (page.suffix != ".html" and not markdown):
             continue
         text = page.read_text(encoding="utf-8", errors="replace")
         targets = re.findall(r'(?:href|src)="([^"]+)"', text)
-        if page.suffix == ".md":
+        if markdown:
             targets += [match.group(2) for match in MARKDOWN_LINK.finditer(text)]
         name = page.relative_to(out).as_posix()
         for target in sorted(set(targets)):
@@ -234,7 +236,12 @@ def verify(out: Path) -> int:
             if "${" in target:
                 continue  # A client-side template placeholder, resolved only in the browser.
             target = target.split("#")[0]
-            if target and not (page.parent / target).exists():
+            target_path = page.parent / target
+            relative_target = (
+                target_path.relative_to(out).as_posix()
+                if target and target_path.is_relative_to(out) else ""
+            )
+            if target and not target_path.exists() and relative_target not in RUNTIME_FILES:
                 problems.append(f"{name} references a missing local target: {target}")
 
     if problems:
