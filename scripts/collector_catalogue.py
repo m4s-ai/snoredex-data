@@ -38,6 +38,10 @@ FIXTURE_PATH = ROOT / "collector_catalogue.fixture.json"
 
 SCHEMA_NAME = "snoredex-collector-catalogue"
 SCHEMA_VERSION = "1.0.0"
+MIGRATIONS_SCHEMA_VERSION = "1.1.0"
+PREVIOUS_CATALOGUE_FINGERPRINT = (
+    "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f"
+)
 DATASET_ID = "snoredex-data/snorlax-current-known"
 SOURCE_REPOSITORY = "https://github.com/m4s-ai/snoredex-data"
 ASSET_BASE_URL = "https://m4s-ai.github.io/snoredex-data/"
@@ -302,6 +306,16 @@ def state_transition(from_item_id: str, to_item_ids: list[str]) -> dict[str, Any
         "changeKind": "split-1:N" if split else "rekey-1:1",
         "automaticStateAction": "none" if split else "preserve",
         "reconciliation": "requires-user-resolution" if split else "one-to-one-preserve",
+    }
+
+
+def retained_state_transition(item_id: str) -> dict[str, Any]:
+    return {
+        "fromItemId": item_id,
+        "toItemIds": [item_id],
+        "changeKind": "retained",
+        "automaticStateAction": "preserve",
+        "reconciliation": "identity-retained",
     }
 
 
@@ -1036,7 +1050,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "sourceRepository": SOURCE_REPOSITORY,
             "dataAsOf": graph["meta"]["generated"],
             "catalogueFingerprint": "",
-            "previousFingerprint": None,
+            "previousFingerprint": PREVIOUS_CATALOGUE_FINGERPRINT,
             "assetBaseUrl": ASSET_BASE_URL,
             "scope": {
                 "policy": "positive-evidence/current-known",
@@ -1076,9 +1090,9 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             },
             "candidateProgressPolicy": {
                 "progressClass": "research",
-                "status": "fail-safe-default-pending-owner-decision",
-                "basis": "positive-printing-evidence-or-explicit-owner-decision-required-for-current-known",
-                "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+                "status": "owner-decision-accepted",
+                "basis": "positive-printing-evidence-or-later-dated-explicit-owner-decision-required-for-promotion",
+                "decisionRef": "https://github.com/m4s-ai/snoredex-checklist/issues/5#issuecomment-5407399741",
             },
         },
     }
@@ -1114,7 +1128,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     migrations = {
         "meta": {
             "schema": "snoredex-collector-migrations",
-            "schemaVersion": "1.0.0",
+            "schemaVersion": MIGRATIONS_SCHEMA_VERSION,
             "datasetId": DATASET_ID,
             "fromSchema": predecessor["meta"]["schema"],
             "fromSchemaVersion": predecessor["meta"]["schemaVersion"],
@@ -1124,6 +1138,20 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "toFingerprint": document["meta"]["catalogueFingerprint"],
             "cumulative": True,
         },
+        "catalogueTransitions": [
+            {
+                "fromSchema": SCHEMA_NAME,
+                "fromSchemaVersion": SCHEMA_VERSION,
+                "fromFingerprint": PREVIOUS_CATALOGUE_FINGERPRINT,
+                "toSchema": SCHEMA_NAME,
+                "toSchemaVersion": SCHEMA_VERSION,
+                "toFingerprint": document["meta"]["catalogueFingerprint"],
+                "cumulative": True,
+                "transitions": [
+                    retained_state_transition(iid) for iid in sorted(item_ids)
+                ],
+            }
+        ],
         "transitions": [
             {
                 "fromItemId": legacy_id,
@@ -1207,6 +1235,8 @@ def fixture_document() -> dict[str, Any]:
         {"localizationId": "fixture-loc-latam-es", "locality": "LATAM", "languageId": "LANG:Spanish", "language": "Spanish", "languageTag": "es-419", "script": "Latn", "displayName": "Spanish (Latin America)", "displayOrder": 20},
         {"localizationId": "fixture-loc-west-en", "locality": "WEST", "languageId": "LANG:English", "language": "English", "languageTag": "en", "script": "Latn", "displayName": "English", "displayOrder": 30},
         {"localizationId": "fixture-loc-west-pt", "locality": "WEST", "languageId": "LANG:Portuguese", "language": "Portuguese", "languageTag": "pt", "script": "Latn", "displayName": "Portuguese", "displayOrder": 40},
+        {"localizationId": "fixture-loc-cn-zh-hans", "locality": "CN", "languageId": "LANG:S-Chinese", "language": "S-Chinese", "languageTag": "zh-Hans", "script": "Hans", "displayName": "Chinese (Simplified)", "displayOrder": 50},
+        {"localizationId": "fixture-loc-tw-zh-hant", "locality": "TW", "languageId": "LANG:T-Chinese", "language": "T-Chinese", "languageTag": "zh-Hant", "script": "Hant", "displayName": "Chinese (Traditional)", "displayOrder": 60},
     ]
     sets = [
         {"localSetId": f"fixture-set-{n}", "locality": locality, "localSetCode": "FX", "localSetName": "Fixture Set", "productKind": "fixture", "identityState": "identified", "sourceRefs": ["fixture-source"], "sortKey": f"{n}"}
@@ -1238,14 +1268,92 @@ def fixture_document() -> dict[str, Any]:
     return {
         "meta": {"schema": "snoredex-collector-catalogue-fixture", "schemaVersion": "1.0.0"},
         "catalogue": catalogue,
-        "reconciliationCases": [{
-            "caseId": "U0414-1-to-many",
-            "sourceGraphRef": "legacy-issue-rekey:U0414",
-            "fromItemId": "fixture-u0414-source",
-            "toItemIds": ["fixture-u0414-target-a", "fixture-u0414-target-b"],
-            "expectedAutomaticStateAction": "none",
-            "expectedResolution": "requires-user-resolution",
-        }],
+        "reconciliationCases": [
+            {
+                "caseId": "retained-identity",
+                "fromItemId": "item-00000000-0000-5000-8000-000000000001",
+                "fromItemIds": ["item-00000000-0000-5000-8000-000000000001"],
+                "toItemIds": ["item-00000000-0000-5000-8000-000000000001"],
+                "changeKind": "retained",
+                "expectedAutomaticStateAction": "preserve",
+                "expectedResolution": "identity-retained",
+                "expectedStateDisposition": "active",
+                "expectedAdoption": "allowed-after-atomic-conservation",
+            },
+            {
+                "caseId": "safe-1-to-1",
+                "fromItemId": "item-10000000-0000-5000-8000-000000000002",
+                "fromItemIds": ["item-10000000-0000-5000-8000-000000000002"],
+                "toItemIds": ["item-00000000-0000-5000-8000-000000000002"],
+                "changeKind": "rekey-1:1",
+                "expectedAutomaticStateAction": "preserve",
+                "expectedResolution": "one-to-one-preserve",
+                "expectedStateDisposition": "migrated",
+                "expectedAdoption": "allowed-after-atomic-conservation",
+            },
+            {
+                "caseId": "retired-to-orphan",
+                "fromItemId": "item-10000000-0000-5000-8000-000000000004",
+                "fromItemIds": ["item-10000000-0000-5000-8000-000000000004"],
+                "toItemIds": [],
+                "changeKind": "retired-1:0",
+                "expectedAutomaticStateAction": "none",
+                "expectedResolution": "retire-to-orphan",
+                "expectedStateDisposition": "orphan",
+                "expectedAdoption": "allowed-after-atomic-conservation",
+            },
+            {
+                "caseId": "U0414-1-to-many",
+                "sourceGraphRef": "legacy-issue-rekey:U0414",
+                "fromItemId": "item-10000000-0000-5000-8000-000000000005",
+                "fromItemIds": ["item-10000000-0000-5000-8000-000000000005"],
+                "toItemIds": [
+                    "item-00000000-0000-5000-8000-000000000001",
+                    "item-00000000-0000-5000-8000-000000000002",
+                ],
+                "changeKind": "split-1:N",
+                "expectedAutomaticStateAction": "none",
+                "expectedResolution": "requires-user-resolution",
+                "expectedStateDisposition": "orphan-and-conflict",
+                "expectedAdoption": "allowed-after-atomic-conservation",
+            },
+            {
+                "caseId": "merge-many-to-1",
+                "fromItemId": "item-10000000-0000-5000-8000-000000000008",
+                "fromItemIds": [
+                    "item-10000000-0000-5000-8000-000000000008",
+                    "item-10000000-0000-5000-8000-000000000009",
+                ],
+                "toItemIds": ["item-00000000-0000-5000-8000-000000000003"],
+                "changeKind": "merge-N:1",
+                "expectedAutomaticStateAction": "none",
+                "expectedResolution": "requires-user-resolution",
+                "expectedStateDisposition": "orphans-and-conflict",
+                "expectedAdoption": "allowed-after-atomic-conservation",
+            },
+            {
+                "caseId": "unresolved-transition",
+                "fromItemId": "item-10000000-0000-5000-8000-000000000011",
+                "fromItemIds": ["item-10000000-0000-5000-8000-000000000011"],
+                "toItemIds": [],
+                "changeKind": "unresolved",
+                "expectedAutomaticStateAction": "none",
+                "expectedResolution": "requires-user-resolution",
+                "expectedStateDisposition": "orphan-and-conflict",
+                "expectedAdoption": "allowed-after-atomic-conservation",
+            },
+            {
+                "caseId": "missing-transition-chain",
+                "fromItemId": "item-10000000-0000-5000-8000-000000000012",
+                "fromItemIds": ["item-10000000-0000-5000-8000-000000000012"],
+                "toItemIds": [],
+                "changeKind": "missing-chain",
+                "expectedAutomaticStateAction": "none",
+                "expectedResolution": "fail-closed",
+                "expectedStateDisposition": "last-known-good",
+                "expectedAdoption": "blocked-with-stored-fingerprint-unchanged",
+            },
+        ],
     }
 
 
@@ -1411,6 +1519,30 @@ def validate_migrations(
     errors: list[str] = []
     if migrations.get("meta", {}).get("toFingerprint") != catalogue["meta"]["catalogueFingerprint"]:
         errors.append("migration target fingerprint differs")
+    if migrations.get("meta", {}).get("schemaVersion") != MIGRATIONS_SCHEMA_VERSION:
+        errors.append("migration schema version differs")
+    item_ids = {row["itemId"] for row in catalogue["items"]}
+    catalogue_routes = migrations.get("catalogueTransitions", [])
+    expected_route_meta = {
+        "fromSchema": SCHEMA_NAME,
+        "fromSchemaVersion": SCHEMA_VERSION,
+        "fromFingerprint": catalogue["meta"].get("previousFingerprint"),
+        "toSchema": SCHEMA_NAME,
+        "toSchemaVersion": SCHEMA_VERSION,
+        "toFingerprint": catalogue["meta"]["catalogueFingerprint"],
+        "cumulative": True,
+    }
+    if catalogue["meta"].get("previousFingerprint") != PREVIOUS_CATALOGUE_FINGERPRINT \
+            or len(catalogue_routes) != 1 \
+            or any(catalogue_routes[0].get(key) != value for key, value in expected_route_meta.items()):
+        errors.append("previous catalogue fingerprint route differs")
+    else:
+        route_transitions = catalogue_routes[0].get("transitions", [])
+        route_by_source = {row.get("fromItemId"): row for row in route_transitions}
+        if len(route_by_source) != len(route_transitions) \
+                or set(route_by_source) != item_ids \
+                or any(route_by_source[iid] != retained_state_transition(iid) for iid in item_ids):
+            errors.append("previous catalogue transitions do not preserve every item identity")
     legacy_ids = {row["checklistId"] for row in predecessor["items"]}
     transitions = migrations.get("transitions", [])
     transition_by_source = {row.get("fromItemId"): row for row in transitions}
@@ -1421,7 +1553,6 @@ def validate_migrations(
     }
     if set(legacy_transitions) != legacy_ids:
         errors.append("migration transitions do not account for every predecessor id exactly once")
-    item_ids = {row["itemId"] for row in catalogue["items"]}
     if any(len(row.get("toItemIds") or []) != 1 or row["toItemIds"][0] not in item_ids
            for row in legacy_transitions.values()):
         errors.append("initial 1:1 migration has an unresolved target")

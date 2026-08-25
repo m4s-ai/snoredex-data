@@ -10,7 +10,7 @@
       "datasetId": "fixture",
       "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
       "dataAsOf": "2026-08-24",
-      "catalogueFingerprint": "sha256:1c444b678a81bb407c2f917c0e3438ac0c4621f3718a214bbb770a273105ca86",
+      "catalogueFingerprint": "sha256:c9317230775c5e58a5101e0d68a4c4a10029a217e00138185d475761f61a22a3",
       "previousFingerprint": null,
       "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
       "scope": {
@@ -63,6 +63,26 @@
         "script": "Latn",
         "displayName": "Portuguese",
         "displayOrder": 40
+      },
+      {
+        "localizationId": "fixture-loc-cn-zh-hans",
+        "locality": "CN",
+        "languageId": "LANG:S-Chinese",
+        "language": "S-Chinese",
+        "languageTag": "zh-Hans",
+        "script": "Hans",
+        "displayName": "Chinese (Simplified)",
+        "displayOrder": 50
+      },
+      {
+        "localizationId": "fixture-loc-tw-zh-hant",
+        "locality": "TW",
+        "languageId": "LANG:T-Chinese",
+        "language": "T-Chinese",
+        "languageTag": "zh-Hant",
+        "script": "Hant",
+        "displayName": "Chinese (Traditional)",
+        "displayOrder": 60
       }
     ],
     "localSets": [
@@ -319,15 +339,106 @@
   },
   "reconciliationCases": [
     {
+      "caseId": "retained-identity",
+      "fromItemId": "item-00000000-0000-5000-8000-000000000001",
+      "fromItemIds": [
+        "item-00000000-0000-5000-8000-000000000001"
+      ],
+      "toItemIds": [
+        "item-00000000-0000-5000-8000-000000000001"
+      ],
+      "changeKind": "retained",
+      "expectedAutomaticStateAction": "preserve",
+      "expectedResolution": "identity-retained",
+      "expectedStateDisposition": "active",
+      "expectedAdoption": "allowed-after-atomic-conservation"
+    },
+    {
+      "caseId": "safe-1-to-1",
+      "fromItemId": "item-10000000-0000-5000-8000-000000000002",
+      "fromItemIds": [
+        "item-10000000-0000-5000-8000-000000000002"
+      ],
+      "toItemIds": [
+        "item-00000000-0000-5000-8000-000000000002"
+      ],
+      "changeKind": "rekey-1:1",
+      "expectedAutomaticStateAction": "preserve",
+      "expectedResolution": "one-to-one-preserve",
+      "expectedStateDisposition": "migrated",
+      "expectedAdoption": "allowed-after-atomic-conservation"
+    },
+    {
+      "caseId": "retired-to-orphan",
+      "fromItemId": "item-10000000-0000-5000-8000-000000000004",
+      "fromItemIds": [
+        "item-10000000-0000-5000-8000-000000000004"
+      ],
+      "toItemIds": [],
+      "changeKind": "retired-1:0",
+      "expectedAutomaticStateAction": "none",
+      "expectedResolution": "retire-to-orphan",
+      "expectedStateDisposition": "orphan",
+      "expectedAdoption": "allowed-after-atomic-conservation"
+    },
+    {
       "caseId": "U0414-1-to-many",
       "sourceGraphRef": "legacy-issue-rekey:U0414",
-      "fromItemId": "fixture-u0414-source",
-      "toItemIds": [
-        "fixture-u0414-target-a",
-        "fixture-u0414-target-b"
+      "fromItemId": "item-10000000-0000-5000-8000-000000000005",
+      "fromItemIds": [
+        "item-10000000-0000-5000-8000-000000000005"
       ],
+      "toItemIds": [
+        "item-00000000-0000-5000-8000-000000000001",
+        "item-00000000-0000-5000-8000-000000000002"
+      ],
+      "changeKind": "split-1:N",
       "expectedAutomaticStateAction": "none",
-      "expectedResolution": "requires-user-resolution"
+      "expectedResolution": "requires-user-resolution",
+      "expectedStateDisposition": "orphan-and-conflict",
+      "expectedAdoption": "allowed-after-atomic-conservation"
+    },
+    {
+      "caseId": "merge-many-to-1",
+      "fromItemId": "item-10000000-0000-5000-8000-000000000008",
+      "fromItemIds": [
+        "item-10000000-0000-5000-8000-000000000008",
+        "item-10000000-0000-5000-8000-000000000009"
+      ],
+      "toItemIds": [
+        "item-00000000-0000-5000-8000-000000000003"
+      ],
+      "changeKind": "merge-N:1",
+      "expectedAutomaticStateAction": "none",
+      "expectedResolution": "requires-user-resolution",
+      "expectedStateDisposition": "orphans-and-conflict",
+      "expectedAdoption": "allowed-after-atomic-conservation"
+    },
+    {
+      "caseId": "unresolved-transition",
+      "fromItemId": "item-10000000-0000-5000-8000-000000000011",
+      "fromItemIds": [
+        "item-10000000-0000-5000-8000-000000000011"
+      ],
+      "toItemIds": [],
+      "changeKind": "unresolved",
+      "expectedAutomaticStateAction": "none",
+      "expectedResolution": "requires-user-resolution",
+      "expectedStateDisposition": "orphan-and-conflict",
+      "expectedAdoption": "allowed-after-atomic-conservation"
+    },
+    {
+      "caseId": "missing-transition-chain",
+      "fromItemId": "item-10000000-0000-5000-8000-000000000012",
+      "fromItemIds": [
+        "item-10000000-0000-5000-8000-000000000012"
+      ],
+      "toItemIds": [],
+      "changeKind": "missing-chain",
+      "expectedAutomaticStateAction": "none",
+      "expectedResolution": "fail-closed",
+      "expectedStateDisposition": "last-known-good",
+      "expectedAdoption": "blocked-with-stored-fingerprint-unchanged"
     }
   ]
 }

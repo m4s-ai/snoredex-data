@@ -63,8 +63,32 @@ def main() -> None:
 
     assert not collector.validate_catalogue(catalogue, graph)
     assert not collector.validate_migrations(migrations, catalogue, graph, predecessor)
+    assert catalogue["meta"]["previousFingerprint"] == collector.PREVIOUS_CATALOGUE_FINGERPRINT
+    assert migrations["meta"]["schemaVersion"] == "1.1.0"
+    previous_route, = migrations["catalogueTransitions"]
+    assert previous_route["fromFingerprint"] == catalogue["meta"]["previousFingerprint"]
+    assert previous_route["toFingerprint"] == catalogue["meta"]["catalogueFingerprint"]
+    assert {
+        row["fromItemId"] for row in previous_route["transitions"]
+    } == {row["itemId"] for row in catalogue["items"]}
+    assert all(
+        row == collector.retained_state_transition(row["fromItemId"])
+        for row in previous_route["transitions"]
+    )
     assert not collector.validate_catalogue(
         fixture["catalogue"], check_asset_bytes=False
+    )
+    fixture_localizations = {
+        row["languageTag"]: (row["locality"], row["script"])
+        for row in fixture["catalogue"]["localizations"]
+    }
+    assert fixture_localizations["es-ES"] == ("WEST", "Latn")
+    assert fixture_localizations["es-419"] == ("LATAM", "Latn")
+    assert fixture_localizations["zh-Hans"] == ("CN", "Hans")
+    assert fixture_localizations["zh-Hant"] == ("TW", "Hant")
+    assert all(
+        item["imageAssetId"] is None and item["imageScope"] == "unknown"
+        for item in fixture["catalogue"]["items"]
     )
     assert schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
     assert schema["properties"]["meta"]["properties"]["schemaVersion"]["const"] == "1.0.0"
@@ -327,9 +351,9 @@ def main() -> None:
     )
     assert catalogue["qualitySummary"]["candidateProgressPolicy"] == {
         "progressClass": "research",
-        "status": "fail-safe-default-pending-owner-decision",
-        "basis": "positive-printing-evidence-or-explicit-owner-decision-required-for-current-known",
-        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "status": "owner-decision-accepted",
+        "basis": "positive-printing-evidence-or-later-dated-explicit-owner-decision-required-for-promotion",
+        "decisionRef": "https://github.com/m4s-ai/snoredex-checklist/issues/5#issuecomment-5407399741",
     }
     assert all(
         isinstance(item["markings"], list)
@@ -410,6 +434,35 @@ def main() -> None:
     u0414 = next(row for row in fixture["reconciliationCases"] if row["caseId"] == "U0414-1-to-many")
     assert u0414["expectedAutomaticStateAction"] == "none"
     assert u0414["expectedResolution"] == "requires-user-resolution"
+
+    cases = {row["caseId"]: row for row in fixture["reconciliationCases"]}
+    assert set(cases) == {
+        "retained-identity", "safe-1-to-1", "retired-to-orphan", "U0414-1-to-many",
+        "merge-many-to-1", "unresolved-transition", "missing-transition-chain",
+    }
+    assert all(row["fromItemId"] == row["fromItemIds"][0] for row in cases.values())
+    fixture_item_ids = {row["itemId"] for row in fixture["catalogue"]["items"]}
+    assert all(set(row["toItemIds"]) <= fixture_item_ids for row in cases.values())
+    assert cases["retained-identity"]["fromItemIds"] == cases["retained-identity"]["toItemIds"]
+    assert cases["safe-1-to-1"]["expectedAutomaticStateAction"] == "preserve"
+    assert cases["retired-to-orphan"]["expectedStateDisposition"] == "orphan"
+    assert len(cases["U0414-1-to-many"]["toItemIds"]) == 2
+    assert len(cases["merge-many-to-1"]["fromItemIds"]) == 2
+    assert len(cases["merge-many-to-1"]["toItemIds"]) == 1
+    for case_id in (
+        "retired-to-orphan", "U0414-1-to-many", "merge-many-to-1",
+        "unresolved-transition", "missing-transition-chain",
+    ):
+        assert cases[case_id]["expectedAutomaticStateAction"] == "none"
+    assert cases["missing-transition-chain"]["expectedResolution"] == "fail-closed"
+    assert cases["missing-transition-chain"]["expectedAdoption"] \
+        == "blocked-with-stored-fingerprint-unchanged"
+
+    tampered_migrations = copy.deepcopy(migrations)
+    tampered_migrations["catalogueTransitions"][0]["transitions"].pop()
+    assert any("previous catalogue" in error for error in collector.validate_migrations(
+        tampered_migrations, catalogue, graph, predecessor
+    ))
 
     # The semantic fingerprint excludes only its own field.
     tampered = copy.deepcopy(catalogue)
