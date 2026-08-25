@@ -159,35 +159,9 @@ boundary, not a second full-build order.
 
 ### E. Verification envelope
 
-```text
-verification/review_integrity.py
-  -> verification/test_evidence_application.py
-  -> verification/test_database_portability.py
-  -> verification/test_tracker_state.py
-  -> verification/test_owner_adjudications.py
-  -> verification/test_source_adapters.py
-  -> verification/test_card_discovery.py
-  -> verification/test_metric_polarity.py
-  -> verification/test_asia_locality_matrix.py
-  -> verification/test_authoritative_graph.py
-  -> verification/test_physical_evidence_workflow.py
-  -> verification/test_fetch_attachment.py
-  -> verification/test_tcgdex_snapshot.py
-  -> verification/fetch_attachment.py --evidence-check
-  -> verification/test_collector_catalogue.py
-  -> verification/test_retired_projections.py
-  -> verification/test_artwork_review.py
-  -> verification/test_korean_burning_confrontation.py
-  -> verification/test_completeness_gate.py
-  -> verification/test_pipeline_documentation.py
-  -> verification/test_gate_handoff.py
-  -> verification/test_workflow_test_ownership.py
-  -> verification/test_scoped_regen.py
-  -> verification/test_workflow_loop.py
-  -> verification/test_findings_harness.py
-  -> verification/review_findings.py
-  -> verification/test_regen_readiness.py
-```
+The ordered `TESTS` tuple in `scripts/regen.py` is the sole executable inventory. Do not copy that
+list into documentation: adding a test would immediately make the prose stale. The ownership and
+gate-matrix stores below map each current test to its contract and execution boundary.
 
 The envelope has four distinct responsibilities:
 
@@ -196,15 +170,12 @@ The envelope has four distinct responsibilities:
 - cross-artifact and publication consistency;
 - determinism/readiness of the central build command.
 
-The normative gate/impact data for issue #286 lives in
-`verification/workflow_gate_matrix.json`. Its stdlib-only regression is
-`verification/test_workflow_gate_matrix.py`, included in `scripts/regen.py`.
+The normative gate/impact data lives in `verification/workflow_gate_matrix.json`; its stdlib-only
+regression is owned by `scripts/regen.py`.
 
-Test responsibility for issue #289 is recorded in
-`verification/workflow_test_ownership.json`. It gives every core test one primary contract owner,
-names the deterministic fixtures that may be shared, and keeps import, projection,
-cross-artifact, browser, live, and publish boundaries separate. The corresponding regression is
-`verification/test_workflow_test_ownership.py`.
+Test responsibility is recorded in `verification/workflow_test_ownership.json`. It gives every core
+test one primary contract owner, names the deterministic fixtures that may be shared, and keeps
+import, projection, cross-artifact, browser, live, and publish boundaries separate.
 
 The following operational scripts are intentionally outside the normal offline DAG:
 
@@ -283,15 +254,15 @@ distribution, and card size. It is not derived from list order.
 | Push to `main` | P6/P7 | full-history publication audit at `GITHUB_SHA` | no second build |
 | Manual Pages run | L4 | live finish sources, Linux browser, allowlist, publication approval | download the already verified `pages-artifact` |
 
-## 7. Non-goals for #285
+## 7. Boundaries
 
-- No scoped execution flag is introduced here; that is #290.
-- No test suite is deleted or merged here; that is #289.
-- Pages/CI behavior is owned by #292 and documented in the gate-mode table above.
-- No evidence, finish, source, or absence data is changed here.
-- No historical archive is rewritten.
+- Scoped execution is an optional local optimization; it never replaces the L3 merge gate.
+- Test-suite ownership lives in the versioned ownership manifest, not a copied prose list.
+- Pages/CI behavior is documented in the gate-mode table above and enforced by the workflows.
+- This map describes evidence, finish, source and absence flows; it does not change their data.
+- Historical archives remain immutable inputs to their hash checks.
 
-## Completion evidence for #285
+## Contract evidence
 
 - The full input → store → graph → projection → gate path is documented.
 - Every active `regen.py` generator has an owner and boundary.

@@ -53,8 +53,8 @@ Every input stays visible:
 
 The permitted dispositions are `established-and-mapped`, `candidate-needs-evidence`,
 `bounded-contradicted`, and `positively-excluded`. `bounded-contradicted` preserves the 85 existing
-verdicts as non-materializing claims; this model makes no new contradiction, and #137 remains the
-owner of future evidence inference.
+verdicts as non-materializing claims; this model makes no new contradiction. Evidence-inference
+rules were implemented separately under #137.
 
 ### Card release
 

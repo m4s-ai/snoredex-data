@@ -86,16 +86,13 @@ a header saying so.
 Before opening a pull request, run the same gate CI runs:
 
 ```console
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 python -m playwright install chromium
-
-python verification/review_findings.py     # cross-artifact consistency and publication readiness
-python scripts/site.py --check             # generated artifacts match their inputs
-python verification/test_site.py           # browser acceptance tests
+python scripts/regen.py --check
 ```
 
-`verification/review_findings.py` is the quickest way to find out whether a change broke an
-invariant; it runs on the standard library alone and needs no network access.
+That is the deterministic offline merge gate. Browser, live-source, and publication checks are
+separate release-lane canaries because they depend on the environment or network.
 
 ## Licensing of contributions
 
@@ -109,6 +106,6 @@ source is always better than a copy of it.
 
 ## Conduct
 
-Be straightforward and assume good faith. Disagreements here are about evidence, and evidence
-settles them. Reports that are abusive, or that pursue a person rather than a claim, will be
-closed without discussion.
+Be straightforward and assume good faith. Disagreements here are about evidence; final absence
+decisions also require the recorded collection-owner adjudication described above. Reports that are
+abusive, or that pursue a person rather than a claim, will be closed without discussion.

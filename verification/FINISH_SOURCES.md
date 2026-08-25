@@ -60,15 +60,15 @@ reads. A specimen may now carry an optional `physicalObservation`:
 against its source instead of taken on trust. `finish` is the technical vocabulary only —
 `finishFamily` is presentation and is not stored here.
 
-**The block is optional and is never back-filled.** 7 of 25 specimens carry one; the other 18 say
-nothing about finish, and that silence is not evidence of non-holo. Read the record before adding
-one: a keyword scan over this corpus would have recorded a finish for `SPEC-0015`, whose "reverse"
-is the card's back, and for `SPEC-0008`/`SPEC-0010`, which state a rarity rather than a finish.
+**The block is optional and is never back-filled.** Current counts live in `specimens.json`; records
+without the block say nothing about finish, and that silence is not evidence of non-holo. Read the
+record before adding one: a keyword scan over this corpus would have recorded a finish for
+`SPEC-0015`, whose "reverse" is the card's back, and for `SPEC-0008`/`SPEC-0010`, which state a
+rarity rather than a finish.
 
 A specimen that records a finish may establish a `physical_printing` in the identity dry run
-(check `N6`), which is what makes the specimen-led languages workable: Korean and Simplified
-Chinese are **68 of the 201** units with no positive finish evidence, and the table above says no
-source can reach them.
+(check `N6`), which is what makes specimen-led languages workable. The live language split and
+pending total are generated into `FINISH_REVIEW.json`; do not copy those counts into this guide.
 
 ## Which source can answer, by language — read before working the queue
 
@@ -81,8 +81,8 @@ The live split is `meta.pendingByLanguage` in
 |---|---|---|
 | English, French, German, Italian, Spanish, Portuguese | TCGdex `variants`, official checklist PDFs, TCGCSV subtypes | The only languages with all three. Official checklists are the one class that can establish absence. |
 | Japanese | **Official product pages** (`pokemon-card.com/ex/<set>/index.html`) | **Not** the card database — see below. |
-| Traditional Chinese | `asia.pokemon-card.com`, TCGdex `zh-tw` | Only 12 TCGdex `zh-tw` URLs exist in the store, so most rows need the Asia site. |
-| Indonesian, Thai | `asia.pokemon-card.com`, TCGdex `id` / `th` | Thin coverage: 3 `id` and 4 `th` URLs in the whole store. |
+| Traditional Chinese | `asia.pokemon-card.com`, TCGdex `zh-tw` | TCGdex coverage is partial, so many rows need the Asia site. |
+| Indonesian, Thai | `asia.pokemon-card.com`, TCGdex `id` / `th` | Both TCGdex locale slices are thin. |
 | Korean | No source found | TCGdex serves `ko`, but see below. Needs pokumon, Elite Fourum, or an inspected card. |
 | Simplified Chinese | No source found | TCGdex serves `zh-cn`, but see below. Needs an inspected card. |
 
@@ -151,7 +151,8 @@ established. One page per product, read for the treatments it names.
 `supportsAbsence` is therefore true only for complete official manifests in the source registry.
 TCGdex `variants=false`, TCGCSV subtype absence, and PSA population absence remain non-evidence.
 The generator marks a unit `completenessStatus=complete-manifest` only when the source explicitly
-covers that unit's language; currently this applies to four English units.
+covers that unit's language. Current status counts live in `finish_units.json` and
+`analysis_finishes.json`.
 
 #### The product-page route does not exist for magazine-bonus decks — probed, do not repeat
 
@@ -180,7 +181,7 @@ already has evidence for, exactly as they may settle a language absence. The dec
 
 | completenessStatus | set by |
 |---|---|
-| `complete-manifest` | a source that explicitly covers the unit's language — four English units |
+| `complete-manifest` | a source that explicitly covers the unit's language |
 | `owner-adjudicated` | a collection-owner decision, where no such source exists |
 | `positive-evidence-only` | finishes found; others unevidenced, **not** excluded |
 
@@ -225,9 +226,8 @@ Commands work from any current directory because scripts resolve the repository 
 locations. The examples below assume the repository root only for readability.
 
 ```console
-python scripts/finishes.py
+python scripts/regen.py
 python verification/verify_finish_sources.py
-python verification/review_integrity.py
 ```
 
 For a curated case:
@@ -274,5 +274,6 @@ this order:
 5. PSA cert/spec pages for named prerelease, Staff, and other grading varieties. Use entries for
    discovery and positive confirmation only.
 
-The 64 units whose product-language claims are entirely contradicted remain in the state store as
-`not-applicable`; they are intentionally absent from the finish-review queue.
+Units whose product-language claims are entirely contradicted remain in the state store as
+`not-applicable`; they are intentionally absent from the finish-review queue. The current count is
+generated in `analysis_finishes.json`.

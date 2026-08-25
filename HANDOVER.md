@@ -19,7 +19,9 @@ are not restated here — a second copy is a copy that goes stale.
 The data here descends from a **legacy Cardmarket-derived candidate universe**: one marketplace
 search captured on 2026-07-21. Verification can check what that search returned; it cannot discover
 a printing Cardmarket never listed, which is why a resolved queue is not a finished catalogue. The
-source-first rebuild is [#132](https://github.com/m4s-ai/snoredex-data/issues/132).
+bounded source-first rebuild completed under
+[#132](https://github.com/m4s-ai/snoredex-data/issues/132); the generated completeness gate records
+its accounted inputs and explicit remaining gaps.
 
 ---
 
@@ -69,9 +71,9 @@ verification/ADR-0006-source-first-card-discovery.md
                               retain list/detail responses before matching and route every card into
                               a visible, non-verdict staging bucket.
 verification/ADR-0007-embedded-artwork-review-ui.md
-                              ACCEPTED UI boundary (#120): embed the future artwork/detection review
-                              view in this static data repo, emit reviewed structured proposals rather
-                              than direct writes, and wait for #140's authoritative graph outputs.
+                              IMPLEMENTED UI boundary (#120): the static graph-backed artwork/
+                              detection review stores versioned proposals in the browser and exports
+                              them for review; it never writes authoritative data directly.
 verification/ADR-0008-reviewed-catalogue-basis-lists.md
                               ACCEPTED canonical-data boundary (#187): languages, local sets,
                               editions/events, typed set relations, artwork identities/appearances
@@ -174,8 +176,8 @@ verification/
                               need a matching Snorlax. Extend it through reviewed passes; mapping and
                               unresolved states are preserved in the authoritative graph.
   set_catalogue_schema.sql    Executable SQLite constraint contract for ADR-0002. The historical
-                              migration pass loaded it into an empty in-memory database; #140 owns
-                              the real DB migration.
+                              migration pass loaded it into an empty in-memory database; the #140
+                              graph migration materializes the current result.
   authoritative_graph.json   GENERATED #140 canonical locality graph snapshot: reviewed identity
                               and catalogue entities, typed provenance edges, raw set records and
                               one reversible migration disposition for every input.
@@ -320,12 +322,13 @@ verification/
                               what it did. NEVER rerun and NEVER edited: check X3 hashes every
                               file here against archive/MANIFEST.json and fails on any change.
                               Paths derive from each script's location.
-  cache/                      Raw API dumps (gitignored — reproducible via the archived fetch_*
-                              passes).
+  cache/                      Gitignored transport and scratch state only. Versioned snapshots and
+                              retained immutable runs, not this directory, make current inputs
+                              reproducible.
 ```
 
-`.gitignore` excludes `verification/cache/` (13 MB reproducible API dumps) and
-`verification/zoom/` (image crops). Everything else is committed.
+`.gitignore` excludes transport/scratch data under `verification/cache/` and local image crops under
+`verification/zoom/`. Everything else is committed.
 
 
 ## 2. Where to go next
