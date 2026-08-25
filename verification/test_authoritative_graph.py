@@ -81,6 +81,31 @@ def main() -> None:
         "relation": "implements", "toType": "work", "toId": other_work_id,
     })
     assert any("unmapped card release has an implements edge" in error for error in validate(tampered))
+    # Work entity IDs are the stable relation targets.  Swapping only the
+    # payload workId values (and retargeting release edges to those values)
+    # must fail instead of silently changing collector identity grouping.
+    tampered = deepcopy(graph)
+    work_rows = [row for row in tampered["entities"] if row["entityType"] == "work"][:2]
+    first_work_id, second_work_id = (row["entityId"] for row in work_rows)
+    first_work, second_work = (row["payload"] for row in work_rows)
+    first_work["workId"], second_work["workId"] = second_work_id, first_work_id
+    for release_row in tampered["entities"]:
+        if release_row["entityType"] != "card-release":
+            continue
+        work_key = release_row["payload"].get("work")
+        target_id = second_work_id if work_key == first_work["cardKey"] else (
+            first_work_id if work_key == second_work["cardKey"] else None
+        )
+        if target_id is None:
+            continue
+        for edge in tampered["edges"]:
+            if (
+                edge["fromType"] == "card-release"
+                and edge["fromId"] == release_row["entityId"]
+                and edge["relation"] == "implements"
+            ):
+                edge["toId"] = target_id
+    assert any("work payload id mismatch" in error for error in validate(tampered))
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.

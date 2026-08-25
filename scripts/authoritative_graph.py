@@ -642,15 +642,19 @@ def validate(
     # remain explicit (legacy anchors cannot be promoted into local identifiers).
     editions = by_type["set-edition"]
     works = by_type["work"]
-    works_by_key: dict[str, dict[str, Any]] = {}
+    works_by_key: dict[str, tuple[str, dict[str, Any]]] = {}
     for work_id, work in works.items():
+        if work.get("workId") != work_id:
+            errors.append(f"work payload id mismatch: {work_id}")
         card_key = work.get("cardKey")
         if not isinstance(card_key, str) or not card_key:
             errors.append(f"work has no cardKey: {work_id}")
-        elif card_key in works_by_key and works_by_key[card_key] is not work:
+        elif card_key in works_by_key and works_by_key[card_key][1] is not work:
             errors.append(f"duplicate Work cardKey: {card_key}")
         else:
-            works_by_key[card_key] = work
+            # The entity index is authoritative for relation targets.  The
+            # payload workId is checked above but never used to derive an edge.
+            works_by_key[card_key] = (work_id, work)
     mapping_by_release: dict[str, tuple[Any, Any]] = {}
     for release_id, release in releases.items():
         if release.get("cardReleaseId") != release_id:
@@ -674,7 +678,7 @@ def validate(
         mapping_by_release[card_release_id] = current_mapping
         implements = relations[("card-release", release_id, "implements")]
         if mapping_state in WORK_REQUIRED_STATES:
-            expected_work_id = works_by_key.get(work_key, {}).get("workId") if isinstance(work_key, str) else None
+            expected_work_id = works_by_key.get(work_key, (None, {}))[0] if isinstance(work_key, str) else None
             if implements != [("work", expected_work_id)]:
                 errors.append(f"card release implements edge is missing or inconsistent: {release_id}")
         elif mapping_state in WORK_EMPTY_STATES and implements:
