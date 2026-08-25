@@ -440,5 +440,49 @@
       "expectedStateDisposition": "last-known-good",
       "expectedAdoption": "blocked-with-stored-fingerprint-unchanged"
     }
+  ],
+  "workMappingCases": [
+    {
+      "caseId": "mapped-with-work",
+      "workId": "fixture-work",
+      "workMappingState": "mapped",
+      "valid": true
+    },
+    {
+      "caseId": "mapped-by-explicit-equivalence-with-work",
+      "workId": "fixture-work",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "valid": true
+    },
+    {
+      "caseId": "needs-explicit-equivalence-without-work",
+      "workId": null,
+      "workMappingState": "needs-explicit-equivalence",
+      "valid": true
+    },
+    {
+      "caseId": "unmapped-without-work",
+      "workId": null,
+      "workMappingState": "unmapped",
+      "valid": true
+    },
+    {
+      "caseId": "mapped-without-work-rejected",
+      "workId": null,
+      "workMappingState": "mapped",
+      "valid": false
+    },
+    {
+      "caseId": "needs-explicit-equivalence-with-work-rejected",
+      "workId": "fixture-work",
+      "workMappingState": "needs-explicit-equivalence",
+      "valid": false
+    },
+    {
+      "caseId": "unknown-state-rejected",
+      "workId": "fixture-work",
+      "workMappingState": "future-state",
+      "valid": false
+    }
   ]
 }

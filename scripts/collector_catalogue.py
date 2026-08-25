@@ -60,6 +60,14 @@ FINISH_FAMILY = {
     "mirror-holo": "reverse-holo",
     "unknown": "unknown",
 }
+WORK_MAPPING_STATES = {
+    "mapped",
+    "mapped-by-explicit-equivalence",
+    "needs-explicit-equivalence",
+    "unmapped",
+}
+WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
+WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
 FOIL_PATTERN_ALIASES = {
     "poke ball mirror": "poke-ball",
     "poké ball mirror": "poke-ball",
@@ -465,7 +473,7 @@ def schema_document() -> dict[str, Any]:
         "itemKind": {"enum": ["verified-printing", "finish-candidate", "research-placeholder"]},
         "progressClass": {"enum": ["current-known", "research"]},
         "workId": nullable_string,
-        "workMappingState": {"type": "string"},
+        "workMappingState": {"enum": sorted(WORK_MAPPING_STATES)},
         "setEditionId": {"type": "string"},
         "localSetId": {"type": "string"},
         "cardReleaseId": {"type": "string"},
@@ -520,6 +528,22 @@ def schema_document() -> dict[str, Any]:
             ),
         },
     }
+    item_schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "required": list(item_properties),
+        "properties": item_properties,
+        "allOf": [
+            {
+                "if": {"properties": {"workMappingState": {"enum": sorted(WORK_REQUIRED_STATES)}}},
+                "then": {"properties": {"workId": {"type": "string"}}},
+            },
+            {
+                "if": {"properties": {"workMappingState": {"enum": sorted(WORK_EMPTY_STATES)}}},
+                "then": {"properties": {"workId": {"type": "null"}}},
+            },
+        ],
+    }
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": ASSET_BASE_URL + "collector_catalogue.schema.json",
@@ -557,7 +581,7 @@ def schema_document() -> dict[str, Any]:
             "localSets": {"type": "array", "items": {"$ref": "#/$defs/localSet"}},
             "setEditions": {"type": "array", "items": {"$ref": "#/$defs/setEdition"}},
             "works": {"type": "array", "items": {"$ref": "#/$defs/work"}},
-            "items": {"type": "array", "items": {"type": "object", "additionalProperties": False, "required": list(item_properties), "properties": item_properties}},
+            "items": {"type": "array", "items": item_schema},
             "assets": {"type": "array", "items": {"$ref": "#/$defs/asset"}},
             "qualitySummary": {"type": "object"},
         },
@@ -1354,6 +1378,50 @@ def fixture_document() -> dict[str, Any]:
                 "expectedAdoption": "blocked-with-stored-fingerprint-unchanged",
             },
         ],
+        "workMappingCases": [
+            {
+                "caseId": "mapped-with-work",
+                "workId": "fixture-work",
+                "workMappingState": "mapped",
+                "valid": True,
+            },
+            {
+                "caseId": "mapped-by-explicit-equivalence-with-work",
+                "workId": "fixture-work",
+                "workMappingState": "mapped-by-explicit-equivalence",
+                "valid": True,
+            },
+            {
+                "caseId": "needs-explicit-equivalence-without-work",
+                "workId": None,
+                "workMappingState": "needs-explicit-equivalence",
+                "valid": True,
+            },
+            {
+                "caseId": "unmapped-without-work",
+                "workId": None,
+                "workMappingState": "unmapped",
+                "valid": True,
+            },
+            {
+                "caseId": "mapped-without-work-rejected",
+                "workId": None,
+                "workMappingState": "mapped",
+                "valid": False,
+            },
+            {
+                "caseId": "needs-explicit-equivalence-with-work-rejected",
+                "workId": "fixture-work",
+                "workMappingState": "needs-explicit-equivalence",
+                "valid": False,
+            },
+            {
+                "caseId": "unknown-state-rejected",
+                "workId": "fixture-work",
+                "workMappingState": "future-state",
+                "valid": False,
+            },
+        ],
     }
 
 
@@ -1390,6 +1458,7 @@ def validate_catalogue(
     graph_releases: dict[str, dict[str, Any]] = {}
     graph_physicals: dict[str, dict[str, Any]] = {}
     graph_claims: dict[str, dict[str, Any]] = {}
+    graph_work_by_key: dict[str, str] = {}
     if graph is not None:
         graph_localization_ids = {
             row["localizationId"] for row in entity_payloads(graph, "localization")
@@ -1401,6 +1470,9 @@ def validate_catalogue(
             row["setEditionId"] for row in entity_payloads(graph, "set-edition")
         }
         graph_work_ids = {row["workId"] for row in entity_payloads(graph, "work")}
+        graph_work_by_key = {
+            row["cardKey"]: row["workId"] for row in entity_payloads(graph, "work")
+        }
         graph_releases = {
             row["cardReleaseId"]: row for row in entity_payloads(graph, "card-release")
         }
@@ -1420,7 +1492,21 @@ def validate_catalogue(
     physical_item_refs: set[str] = set()
     legacy_ids: set[str] = set()
     correction_links: set[str] = set()
+    mapping_by_release: dict[str, tuple[Any, Any]] = {}
     for iid, item in items.items():
+        mapping_state = item.get("workMappingState")
+        work_id = item.get("workId")
+        if mapping_state not in WORK_MAPPING_STATES:
+            errors.append(f"item has unknown work mapping state: {iid}")
+        elif mapping_state in WORK_REQUIRED_STATES and not isinstance(work_id, str):
+            errors.append(f"mapped item has no Work id: {iid}")
+        elif mapping_state in WORK_EMPTY_STATES and work_id is not None:
+            errors.append(f"unmapped item carries a Work id: {iid}")
+        previous_mapping = mapping_by_release.get(item.get("cardReleaseId"))
+        current_mapping = (mapping_state, work_id)
+        if previous_mapping is not None and previous_mapping != current_mapping:
+            errors.append(f"item Work mapping is inconsistent for card release: {item.get('cardReleaseId')}")
+        mapping_by_release[item.get("cardReleaseId")] = current_mapping
         link = item.get("correctionLink")
         try:
             link_params = correction_link_params(link)
@@ -1488,6 +1574,11 @@ def validate_catalogue(
             release = graph_releases.get(item.get("cardReleaseId"))
             if not release or release.get("setEditionId") != item.get("setEditionId"):
                 errors.append(f"item card release does not resolve through its edition: {iid}")
+            elif (
+                item.get("workMappingState") != release.get("workMappingState")
+                or item.get("workId") != graph_work_by_key.get(release.get("work"))
+            ):
+                errors.append(f"item Work mapping differs from its card release: {iid}")
             unresolved_claims = set(item.get("sourceClaimRefs") or []) - set(graph_claims)
             if unresolved_claims:
                 errors.append(f"item source claims do not resolve: {iid}")

@@ -24,6 +24,27 @@ SPECIMENS = ROOT / "verification" / "specimens.json"
 GRAPH_SCHEMA = "snoredex-authoritative-locality-graph"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
+WORK_MAPPING_STATES = {
+    "mapped",
+    "mapped-by-explicit-equivalence",
+    "needs-explicit-equivalence",
+    "unmapped",
+}
+WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
+WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
+# These eight releases were explicitly reviewed in producer issue #304 as
+# positive local releases whose Work identity is still unresolved.  They must
+# retain the reviewed pending state until a separate equivalence decision exists.
+ISSUE304_NEEDS_EXPLICIT_RELEASES = frozenset({
+    "RELEASE:JP:Japanese:DP-P:126:None",
+    "RELEASE:JP:Japanese:DP-P:127:None",
+    "RELEASE:JP:Japanese:UNP:unnumbered:None",
+    "RELEASE:KR:Korean:via-DP-P:unknown-local-set:via-127:None:unknown-local-id",
+    "RELEASE:WEST:English:RR:111:None",
+    "RELEASE:WEST:French:RR:111:None",
+    "RELEASE:WEST:German:RR:111:None",
+    "RELEASE:WEST:Italian:RR:111:None",
+})
 FOIL_PATTERN_ALIASES = {
     "poke ball mirror": "poke-ball",
     "poké ball mirror": "poke-ball",
@@ -633,9 +654,69 @@ def validate(
     # I3/I8: releases have one language-bearing edition and their local identifiers
     # remain explicit (legacy anchors cannot be promoted into local identifiers).
     editions = by_type["set-edition"]
+    works = by_type["work"]
+    works_by_key: dict[str, tuple[str, dict[str, Any]]] = {}
+    for work_id, work in works.items():
+        if work.get("workId") != work_id:
+            errors.append(f"work payload id mismatch: {work_id}")
+        card_key = work.get("cardKey")
+        if not isinstance(card_key, str) or not card_key:
+            errors.append(f"work has no cardKey: {work_id}")
+        elif card_key in works_by_key and works_by_key[card_key][1] is not work:
+            errors.append(f"duplicate Work cardKey: {card_key}")
+        else:
+            # The entity index is authoritative for relation targets.  The
+            # payload workId is checked above but never used to derive an edge.
+            works_by_key[card_key] = (work_id, work)
+    mapping_by_release: dict[str, tuple[Any, Any]] = {}
     for release_id, release in releases.items():
         if release.get("cardReleaseId") != release_id:
             errors.append(f"card-release payload id mismatch: {release_id}")
+        mapping_state = release.get("workMappingState")
+        work_key = release.get("work")
+        if release_id in ISSUE304_NEEDS_EXPLICIT_RELEASES \
+                and mapping_state != "needs-explicit-equivalence":
+            errors.append(f"issue #304 release has unexpected work mapping state: {release_id}")
+        if mapping_state not in WORK_MAPPING_STATES:
+            errors.append(f"card release has unknown work mapping state: {release_id}")
+        elif mapping_state in WORK_REQUIRED_STATES:
+            if not isinstance(work_key, str) or not work_key:
+                errors.append(f"mapped card release has no Work relation: {release_id}")
+            elif work_key not in works_by_key:
+                errors.append(f"mapped card release Work does not resolve: {release_id}")
+        elif mapping_state in WORK_EMPTY_STATES and work_key is not None:
+            errors.append(f"unmapped card release carries a Work relation: {release_id}")
+        card_release_id = release.get("cardReleaseId")
+        previous_mapping = mapping_by_release.get(card_release_id)
+        current_mapping = (mapping_state, work_key)
+        if previous_mapping is not None and previous_mapping != current_mapping:
+            errors.append(f"card release mapping is inconsistent: {card_release_id}")
+        mapping_by_release[card_release_id] = current_mapping
+        implements = relations[("card-release", release_id, "implements")]
+        if mapping_state in WORK_REQUIRED_STATES:
+            expected_work_id = works_by_key.get(work_key, (None, {}))[0] if isinstance(work_key, str) else None
+            if implements != [("work", expected_work_id)]:
+                errors.append(f"card release implements edge is missing or inconsistent: {release_id}")
+            if mapping_state == "mapped-by-explicit-equivalence":
+                matching_assertions = []
+                for assertion_id, assertion in by_type["equivalence-assertion"].items():
+                    if (
+                        assertion.get("fromId") != release_id
+                        or assertion.get("toId") != expected_work_id
+                    ):
+                        continue
+                    assertion_relates = relations[("equivalence-assertion", assertion_id, "relates")]
+                    if sorted(assertion_relates) == sorted([
+                        ("card-release", release_id), ("work", expected_work_id)
+                    ]):
+                        matching_assertions.append(assertion_id)
+                if len(matching_assertions) != 1:
+                    errors.append(
+                        "mapped-by-explicit-equivalence card release lacks exactly one "
+                        f"matching equivalence assertion: {release_id}"
+                    )
+        elif mapping_state in WORK_EMPTY_STATES and implements:
+            errors.append(f"unmapped card release has an implements edge: {release_id}")
         edition_id = release.get("setEditionId")
         edition = editions.get(edition_id)
         if not edition:
@@ -677,6 +758,8 @@ def validate(
         for claim_id in release.get("nonEstablishingClaimIds") or []:
             if claim_id not in claims:
                 errors.append(f"card release non-establishing claim is missing: {release_id} -> {claim_id}")
+    for release_id in ISSUE304_NEEDS_EXPLICIT_RELEASES - set(releases):
+        errors.append(f"issue #304 release is missing: {release_id}")
 
     # Every materialized card-release claim must be recorded by that release.  This
     # closes the opposite direction of the promotion invariant above.
@@ -945,11 +1028,17 @@ def validate(
                 continue
             expected_rekeys[legacy_id]["targets"].append(target_id)
             assertion_id = f"ASSERT:same-work:{legacy_id}:{source_id}"
+            legacy_unit = units_by_id.get(legacy_id)
+            expected_card_key = legacy_unit.get("cardKey") if legacy_unit else None
+            if not isinstance(expected_card_key, str) or not expected_card_key:
+                errors.append(f"re-key legacy unit has no canonical cardKey: {legacy_id}")
             expected_assertions[assertion_id] = {
                 "assertionId": assertion_id,
                 "assertionType": mapping.get("assertionType"),
                 "fromId": target_id,
-                "toId": f"WORK:{release.get('work')}" if release.get("work") else None,
+                # The legacy unit is an independent reviewed input.  Never
+                # derive the expected Work from the mutable release payload.
+                "toId": f"WORK:{expected_card_key}" if expected_card_key else None,
                 "legacyUnitId": legacy_id,
                 "sourceFirstRecordId": source_id,
                 "assertedBy": mapping.get("assertedBy"),
@@ -969,6 +1058,41 @@ def validate(
             errors.append(f"re-key equivalence assertion is stale: {assertion_id}")
         if assertion.get("fromId") not in releases or assertion.get("toId") not in by_type["work"]:
             errors.append(f"re-key equivalence target is invalid: {assertion_id}")
+    expected_equivalence_by_release: defaultdict[str, list[tuple[str, str | None]]] = defaultdict(list)
+    for assertion_id, expected in expected_assertions.items():
+        expected_equivalence_by_release[expected["fromId"]].append(
+            (assertion_id, expected.get("toId"))
+        )
+    for release_id, expected in expected_equivalence_by_release.items():
+        release = releases.get(release_id)
+        if not release:
+            continue
+        if release.get("workMappingState") != "mapped-by-explicit-equivalence":
+            errors.append(
+                "re-keyed release must retain mapped-by-explicit-equivalence state: "
+                f"{release_id}"
+            )
+    for release_id, release in releases.items():
+        if release.get("workMappingState") != "mapped-by-explicit-equivalence":
+            continue
+        expected = expected_equivalence_by_release.get(release_id, [])
+        if len(expected) != 1:
+            errors.append(
+                "mapped-by-explicit-equivalence release has no unique canonical re-key: "
+                f"{release_id}"
+            )
+            continue
+        assertion_id, expected_work_id = expected[0]
+        expected_work = by_type["work"].get(expected_work_id)
+        expected_card_key = expected_work.get("cardKey") if expected_work else None
+        if release.get("work") != expected_card_key:
+            errors.append(f"mapped-by-explicit-equivalence release Work is not canonical: {release_id}")
+        if relations[("card-release", release_id, "implements")] != [("work", expected_work_id)]:
+            errors.append(f"mapped-by-explicit-equivalence implements edge is not canonical: {release_id}")
+        if sorted(relations[("equivalence-assertion", assertion_id, "relates")]) != sorted([
+            ("card-release", release_id), ("work", expected_work_id)
+        ]):
+            errors.append(f"mapped-by-explicit-equivalence assertion edge is not canonical: {release_id}")
     for legacy_id, expected in expected_rekeys.items():
         migration = migration_by_key.get(("legacy-issue-rekey", legacy_id))
         targets = expected["targets"]

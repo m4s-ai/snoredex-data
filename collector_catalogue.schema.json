@@ -201,7 +201,12 @@
             ]
           },
           "workMappingState": {
-            "type": "string"
+            "enum": [
+              "mapped",
+              "mapped-by-explicit-equivalence",
+              "needs-explicit-equivalence",
+              "unmapped"
+            ]
           },
           "setEditionId": {
             "type": "string"
@@ -484,7 +489,47 @@
             "maxLength": 6000,
             "description": "Producer-generated deep link to printing-correction.yml. It pre-fills only template, title, row-id, card-name, set-code, card-number and current-state."
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "workMappingState": {
+                  "enum": [
+                    "mapped",
+                    "mapped-by-explicit-equivalence"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "workId": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "workMappingState": {
+                  "enum": [
+                    "needs-explicit-equivalence",
+                    "unmapped"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "workId": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "assets": {

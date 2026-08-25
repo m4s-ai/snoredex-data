@@ -19,6 +19,210 @@ from authoritative_graph import identity_view, project_physical_evidence, valida
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    repaired_releases = [
+        row["payload"] for row in graph["entities"] if row["entityType"] == "card-release"
+    ]
+    assert all(
+        row["workMappingState"] in graph_module.WORK_MAPPING_STATES
+        and (
+            row["workMappingState"] in graph_module.WORK_REQUIRED_STATES
+            and isinstance(row.get("work"), str)
+            or row["workMappingState"] in graph_module.WORK_EMPTY_STATES
+            and row.get("work") is None
+        )
+        for row in repaired_releases
+    )
+    tampered = deepcopy(graph)
+    mapped_release = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["payload"]["workMappingState"] == "mapped"
+    )
+    mapped_release["work"] = None
+    assert any("mapped card release has no Work relation" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    mapped_release = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["payload"]["workMappingState"] == "mapped"
+    )
+    mapped_release["workMappingState"] = "needs-explicit-equivalence"
+    assert any("unmapped card release carries a Work relation" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    next(row["payload"] for row in tampered["entities"] if row["entityType"] == "card-release")[
+        "workMappingState"
+    ] = "future-state"
+    assert any("unknown work mapping state" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    mapped_release_id = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["payload"]["workMappingState"] == "mapped"
+    )
+    implements_edge = next(
+        edge for edge in tampered["edges"]
+        if edge["fromType"] == "card-release"
+        and edge["fromId"] == mapped_release_id
+        and edge["relation"] == "implements"
+    )
+    other_work_id = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "work" and row["entityId"] != implements_edge["toId"]
+    )
+    implements_edge["toId"] = other_work_id
+    assert any("implements edge is missing or inconsistent" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    empty_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"]["workMappingState"] == "needs-explicit-equivalence"
+    )
+    empty_release["payload"]["workMappingState"] = "unmapped"
+    empty_release["payload"]["work"] = None
+    tampered["edges"].append({
+        "fromType": "card-release", "fromId": empty_release["entityId"],
+        "relation": "implements", "toType": "work", "toId": other_work_id,
+    })
+    assert any("unmapped card release has an implements edge" in error for error in validate(tampered))
+    # Work entity IDs are the stable relation targets.  Swapping only the
+    # payload workId values (and retargeting release edges to those values)
+    # must fail instead of silently changing collector identity grouping.
+    tampered = deepcopy(graph)
+    work_rows = [row for row in tampered["entities"] if row["entityType"] == "work"][:2]
+    first_work_id, second_work_id = (row["entityId"] for row in work_rows)
+    first_work, second_work = (row["payload"] for row in work_rows)
+    first_work["workId"], second_work["workId"] = second_work_id, first_work_id
+    for release_row in tampered["entities"]:
+        if release_row["entityType"] != "card-release":
+            continue
+        work_key = release_row["payload"].get("work")
+        target_id = second_work_id if work_key == first_work["cardKey"] else (
+            first_work_id if work_key == second_work["cardKey"] else None
+        )
+        if target_id is None:
+            continue
+        for edge in tampered["edges"]:
+            if (
+                edge["fromType"] == "card-release"
+                and edge["fromId"] == release_row["entityId"]
+                and edge["relation"] == "implements"
+            ):
+                edge["toId"] = target_id
+    assert any("work payload id mismatch" in error for error in validate(tampered))
+    # An explicit-equivalence mapping is only promotable with one reviewed
+    # assertion that names both the exact release and Work relation.
+    tampered = deepcopy(graph)
+    equivalence_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"]["workMappingState"] == "mapped-by-explicit-equivalence"
+    )
+    assertion_id = next(
+        edge["fromId"] for edge in tampered["edges"]
+        if edge["fromType"] == "equivalence-assertion"
+        and edge["relation"] == "relates"
+        and edge["toType"] == "card-release"
+        and edge["toId"] == equivalence_release["entityId"]
+    )
+    tampered["entities"] = [
+        row for row in tampered["entities"] if not (
+            row["entityType"] == "equivalence-assertion"
+            and row["entityId"] == assertion_id
+        )
+    ]
+    tampered["edges"] = [
+        edge for edge in tampered["edges"]
+        if not (edge["fromType"] == "equivalence-assertion" and edge["fromId"] == assertion_id)
+    ]
+    assert any(
+        "mapped-by-explicit-equivalence card release lacks exactly one matching equivalence assertion"
+        in error for error in validate(tampered)
+    )
+    # Retargeting the release, implements edge, assertion payload and
+    # assertion relation together must still fail against the legacy unit's
+    # independently reviewed cardKey.
+    tampered = deepcopy(graph)
+    equivalence_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"]["workMappingState"] == "mapped-by-explicit-equivalence"
+    )
+    assertion_id = next(
+        edge["fromId"] for edge in tampered["edges"]
+        if edge["fromType"] == "equivalence-assertion"
+        and edge["relation"] == "relates"
+        and edge["toType"] == "card-release"
+        and edge["toId"] == equivalence_release["entityId"]
+    )
+    alternate_work = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "work"
+        and row["entityId"] != next(
+            edge["toId"] for edge in tampered["edges"]
+            if edge["fromType"] == "card-release"
+            and edge["fromId"] == equivalence_release["entityId"]
+            and edge["relation"] == "implements"
+        )
+    )
+    equivalence_release["payload"]["work"] = alternate_work["payload"]["cardKey"]
+    for edge in tampered["edges"]:
+        if edge["fromType"] == "card-release" and edge["fromId"] == equivalence_release["entityId"] \
+                and edge["relation"] == "implements":
+            edge["toId"] = alternate_work["entityId"]
+        if edge["fromType"] == "equivalence-assertion" and edge["fromId"] == assertion_id:
+            if edge["toType"] == "work":
+                edge["toId"] = alternate_work["entityId"]
+    assertion = next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "equivalence-assertion" and row["entityId"] == assertion_id
+    )
+    assertion["toId"] = alternate_work["entityId"]
+    assert any(
+        "re-key equivalence assertion is stale" in error
+        or "mapped-by-explicit-equivalence release Work is not canonical" in error
+        for error in validate(tampered)
+    )
+    # A canonical re-key cannot silently fall back to the ordinary mapped
+    # state while changing the release's Work relation.
+    tampered = deepcopy(graph)
+    stateful_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"]["workMappingState"] == "mapped-by-explicit-equivalence"
+    )
+    current_work_id = next(
+        edge["toId"] for edge in tampered["edges"]
+        if edge["fromType"] == "card-release"
+        and edge["fromId"] == stateful_release["entityId"]
+        and edge["relation"] == "implements"
+    )
+    alternate_work = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "work" and row["entityId"] != current_work_id
+    )
+    stateful_release["payload"]["workMappingState"] = "mapped"
+    stateful_release["payload"]["work"] = alternate_work["payload"]["cardKey"]
+    next(
+        edge for edge in tampered["edges"]
+        if edge["fromType"] == "card-release"
+        and edge["fromId"] == stateful_release["entityId"]
+        and edge["relation"] == "implements"
+    )["toId"] = alternate_work["entityId"]
+    assert any(
+        "re-keyed release must retain mapped-by-explicit-equivalence state" in error
+        for error in validate(tampered)
+    )
+    # The reviewed #304 pending state is distinct from generic unmapped: a
+    # later downgrade would discard the explicit-equivalence research signal.
+    tampered = deepcopy(graph)
+    pending_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["entityId"] == "RELEASE:JP:Japanese:DP-P:126:None"
+    )
+    pending_release["payload"]["workMappingState"] = "unmapped"
+    pending_release["payload"]["work"] = None
+    assert any(
+        "issue #304 release has unexpected work mapping state" in error
+        for error in validate(tampered)
+    )
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.
