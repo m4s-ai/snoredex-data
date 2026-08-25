@@ -21,7 +21,7 @@ import uuid
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
-from urllib.parse import quote
+from urllib.parse import parse_qs, quote, urlencode, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
@@ -41,7 +41,14 @@ SCHEMA_VERSION = "1.0.0"
 DATASET_ID = "snoredex-data/snorlax-current-known"
 SOURCE_REPOSITORY = "https://github.com/m4s-ai/snoredex-data"
 ASSET_BASE_URL = "https://m4s-ai.github.io/snoredex-data/"
-CORRECTION_URL = SOURCE_REPOSITORY + "/issues/new?template=data-correction.yml"
+CORRECTION_FORM_URL = SOURCE_REPOSITORY + "/issues/new"
+CORRECTION_TEMPLATE = "printing-correction.yml"
+CORRECTION_URL_MAX_LENGTH = 6000
+CORRECTION_PREFILL_FIELDS = (
+    "template", "title", "row-id", "card-name", "set-code", "card-number", "current-state",
+)
+CORRECTION_VALUE_MAX_LENGTH = 180
+CORRECTION_STATE_MAX_LENGTH = 1200
 FINISH_FAMILY = {
     "non-holo": "non-holo",
     "holo": "holo",
@@ -65,6 +72,127 @@ CUMULATIVE_CHECKLIST_REKEYS = {
 
 class ContractError(ValueError):
     pass
+
+
+def _public_text(value: Any, *, limit: int = CORRECTION_VALUE_MAX_LENGTH) -> str:
+    """Return a bounded, deterministic representation for public form context."""
+    if value is None:
+        return "unknown"
+    text = " ".join(str(value).split())
+    if not text:
+        return "unknown"
+    if len(text) <= limit:
+        return text
+    return text[: max(1, limit - 1)] + "…"
+
+
+def _public_markings(markings: Any) -> str:
+    if not isinstance(markings, list):
+        return "unknown"
+    values: list[str] = []
+    for marking in markings:
+        if not isinstance(marking, dict):
+            continue
+        values.append("/".join(
+            _public_text(marking.get(key), limit=80)
+            for key in ("kind", "role", "text")
+        ))
+    return _public_text("; ".join(sorted(values)) if values else None)
+
+
+def _public_distribution(distribution: Any) -> str:
+    if not isinstance(distribution, dict):
+        return "unknown"
+    values = [
+        f"{key}={_public_text(distribution.get(key), limit=80)}"
+        for key in ("kind", "name", "region", "date", "text")
+        if distribution.get(key) is not None and str(distribution.get(key)).strip()
+    ]
+    return _public_text(", ".join(values) if values else None)
+
+
+def correction_state_summary(item: dict[str, Any]) -> str:
+    """Summarize only bounded public state; never include source or consumer data."""
+    lines = [
+        f"Item kind: {_public_text(item.get('itemKind'))}",
+        f"Progress: {_public_text(item.get('progressClass'))}",
+        f"Evidence state: {_public_text(item.get('finishVerificationStatus'))}",
+        f"Completeness: {_public_text(item.get('completenessStatus'))}",
+        f"Edition status: {_public_text(item.get('editionAssignmentStatus'))}",
+        f"Edition: {_public_text(item.get('edition'))}",
+        f"Finish: {_public_text(item.get('finish'))}",
+        f"Finish family: {_public_text(item.get('finishFamily'))}",
+        f"Foil pattern: {_public_text(item.get('foilPattern'))}",
+        f"Markings: {_public_markings(item.get('markings'))}",
+        f"Distribution: {_public_distribution(item.get('distribution'))}",
+        f"Card size: {_public_text(item.get('cardSize'))}",
+    ]
+    return _public_text("\n".join(lines), limit=CORRECTION_STATE_MAX_LENGTH)
+
+
+def _encode_correction_link(params: dict[str, str]) -> str:
+    return CORRECTION_FORM_URL + "?" + urlencode(params)
+
+
+def _shorten(value: str) -> str:
+    if value == "unknown" or len(value) <= 8:
+        return "unknown"
+    return value[: max(7, len(value) // 2 - 1)] + "…"
+
+
+def correction_link(item: dict[str, Any]) -> str:
+    """Build the producer-owned, prefilled printing-correction form link."""
+    item_id_value = item.get("itemId")
+    if not isinstance(item_id_value, str) or not item_id_value.strip():
+        raise ContractError("collector item has no public itemId for correction link")
+    item_id = item_id_value.strip()
+    card_name = _public_text(item.get("cardName"))
+    set_code = _public_text(item.get("localSetCode"))
+    set_name = _public_text(item.get("localSetName"))
+    set_context = set_code if set_name == "unknown" else f"{set_code} — {set_name}"
+    number = _public_text(item.get("collectorNumber"))
+    kind = _public_text(item.get("itemKind"))
+    params = {
+        "template": CORRECTION_TEMPLATE,
+        "title": _public_text(f"[Correction] {card_name} — {set_context} {number} ({kind})"),
+        "row-id": item_id,
+        "card-name": card_name,
+        "set-code": _public_text(set_context),
+        "card-number": number,
+        "current-state": correction_state_summary(item),
+    }
+    link = _encode_correction_link(params)
+    # Keep the opaque item id intact while deterministically shrinking only display context.
+    shrinkable = ("current-state", "title", "card-name", "set-code", "card-number")
+    while len(link) > CORRECTION_URL_MAX_LENGTH:
+        candidate = max(
+            shrinkable,
+            key=lambda key: (len(params[key]), -shrinkable.index(key)),
+        )
+        shortened = _shorten(params[candidate])
+        if shortened == params[candidate]:
+            raise ContractError(
+                f"correction link exceeds {CORRECTION_URL_MAX_LENGTH} characters for {item_id}"
+            )
+        params[candidate] = shortened
+        link = _encode_correction_link(params)
+    return link
+
+
+def correction_link_params(link: str) -> dict[str, str]:
+    """Parse and validate the public correction-link boundary."""
+    split = urlsplit(link)
+    if split.scheme != "https" or split.netloc != "github.com" \
+            or split.path != "/m4s-ai/snoredex-data/issues/new" \
+            or split.fragment or len(link) > CORRECTION_URL_MAX_LENGTH:
+        raise ContractError("correction link target or length is outside the producer contract")
+    parsed = parse_qs(split.query, keep_blank_values=True)
+    if set(parsed) != set(CORRECTION_PREFILL_FIELDS) or any(len(values) != 1 for values in parsed.values()):
+        raise ContractError("correction link query fields differ from the producer contract")
+    params = {key: values[0] for key, values in parsed.items()}
+    if params["template"] != CORRECTION_TEMPLATE:
+        raise ContractError("correction link does not target printing-correction.yml")
+    return params
 
 
 def read_json(path: Path) -> Any:
@@ -370,7 +498,13 @@ def schema_document() -> dict[str, Any]:
         "imageScope": {"enum": ["exact-printing", "card-release", "legacy-product", "unknown"]},
         "sourceLinks": uri_array,
         "evidenceLinks": uri_array,
-        "correctionLink": {"type": "string", "format": "uri"},
+        "correctionLink": {
+            "type": "string", "format": "uri", "maxLength": CORRECTION_URL_MAX_LENGTH,
+            "description": (
+                "Producer-generated deep link to printing-correction.yml. It pre-fills only "
+                "template, title, row-id, card-name, set-code, card-number and current-state."
+            ),
+        },
     }
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -746,7 +880,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         )
 
         iid = item_id(anchor)
-        return {
+        item = {
             "itemId": iid,
             "legacyChecklistIds": legacy_ids,
             "active": True,
@@ -794,8 +928,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "imageScope": actual_scope,
             "sourceLinks": source_links,
             "evidenceLinks": source_links,
-            "correctionLink": CORRECTION_URL,
+            "correctionLink": "",
         }
+        item["correctionLink"] = correction_link(item)
+        return item
 
     items: list[dict[str, Any]] = []
     for physical in physicals.values():
@@ -1033,7 +1169,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
 def fixture_document() -> dict[str, Any]:
     def fixture_item(iid: str, kind: str, progress: str, loc: str, set_id: str, edition_id: str,
                      release_id: str, physical_id: str | None, finish: str | None) -> dict[str, Any]:
-        return {
+        item = {
             "itemId": iid, "legacyChecklistIds": [], "active": True, "itemKind": kind,
             "progressClass": progress, "workId": "fixture-work", "workMappingState": "mapped",
             "setEditionId": edition_id, "localSetId": set_id, "cardReleaseId": release_id,
@@ -1050,8 +1186,10 @@ def fixture_document() -> dict[str, Any]:
             "completenessStatus": "positive-evidence-only", "releaseDate": "2026-01-01",
             "releaseDatePrecision": "day", "releaseApproximate": False,
             "releaseSortKey": "2026-01-01|fixture", "imageAssetId": None, "imageScope": "unknown",
-            "sourceLinks": [], "evidenceLinks": [], "correctionLink": CORRECTION_URL,
+            "sourceLinks": [], "evidenceLinks": [], "correctionLink": "",
         }
+        item["correctionLink"] = correction_link(item)
+        return item
 
     localizations = [
         {"localizationId": "fixture-loc-west-es", "locality": "WEST", "languageId": "LANG:Spanish", "language": "Spanish", "languageTag": "es-ES", "script": "Latn", "displayName": "Spanish (Europe)", "displayOrder": 10},
@@ -1162,7 +1300,19 @@ def validate_catalogue(
 
     physical_item_refs: set[str] = set()
     legacy_ids: set[str] = set()
+    correction_links: set[str] = set()
     for iid, item in items.items():
+        link = item.get("correctionLink")
+        try:
+            link_params = correction_link_params(link)
+        except (ContractError, TypeError, ValueError):
+            errors.append(f"item correction link is outside the producer contract: {iid}")
+        else:
+            if link_params.get("row-id") != iid:
+                errors.append(f"item correction link row-id differs from itemId: {iid}")
+            if link in correction_links:
+                errors.append(f"correction link is not distinct: {iid}")
+            correction_links.add(link)
         edition = editions.get(item.get("setEditionId"))
         if not edition:
             errors.append(f"item set edition does not resolve: {iid}")

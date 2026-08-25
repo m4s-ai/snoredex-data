@@ -7,6 +7,7 @@ import copy
 import json
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -67,6 +68,77 @@ def main() -> None:
     )
     assert schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
     assert schema["properties"]["meta"]["properties"]["schemaVersion"]["const"] == "1.0.0"
+    assert schema["properties"]["items"]["items"]["properties"]["correctionLink"]["maxLength"] == collector.CORRECTION_URL_MAX_LENGTH
+
+    # Correction links are producer-owned deep links. Every generated item (including
+    # all three fixture states) must carry an exact opaque item id and only the
+    # reliable issue-form prefill fields.
+    form = read(".github/ISSUE_TEMPLATE/printing-correction.yml")
+    form_ids = {
+        element.get("id") for element in form.get("body", [])
+        if isinstance(element, dict)
+    }
+    assert {"row-id", "card-name", "set-code", "card-number", "current-state"} <= form_ids
+    for document in (catalogue, fixture["catalogue"]):
+        items = document["items"]
+        links = [item["correctionLink"] for item in items]
+        assert len(links) == len(set(links))
+        assert all(len(link) <= collector.CORRECTION_URL_MAX_LENGTH for link in links)
+        for item in items:
+            params = collector.correction_link_params(item["correctionLink"])
+            assert params["row-id"] == item["itemId"]
+            assert params["card-name"] == item["cardName"]
+            assert params["card-number"] == (item["collectorNumber"] or "unknown")
+            expected_set = collector._public_text(item["localSetCode"])
+            if item["localSetName"]:
+                expected_set += " — " + item["localSetName"]
+            assert params["set-code"] == expected_set
+
+    bad_links = copy.deepcopy(catalogue)
+    bad_links["items"][0]["correctionLink"] = bad_links["items"][1]["correctionLink"]
+    assert any("correction link" in error for error in collector.validate_catalogue(
+        bad_links, check_asset_bytes=False
+    ))
+
+    # Unicode, punctuation, nulls and private producer/consumer state stay bounded
+    # and encoded without leaking into the public form context.
+    synthetic = copy.deepcopy(fixture["catalogue"]["items"][0])
+    synthetic.update({
+        "itemId": "item-00000000-0000-5000-8000-000000000099",
+        "cardName": "Café / Snorlax? & [proof]",
+        "localSetCode": "A&B",
+        "localSetName": "Set № / édition",
+        "collectorNumber": None,
+        "finish": None,
+        "foilPattern": None,
+        "markings": [{"kind": "stamp", "role": "print-identity", "text": "1st / édition?"}],
+        "distribution": {"kind": "promo", "text": "Official & public"},
+        "sourceClaimRefs": ["PRIVATE-CONSUMER-STATE"],
+        "sourceLinks": ["https://private.invalid/should-not-leak"],
+        "evidenceLinks": ["https://private.invalid/evidence"],
+    })
+    synthetic_link = collector.correction_link(synthetic)
+    synthetic_params = collector.correction_link_params(synthetic_link)
+    assert synthetic_params["row-id"] == synthetic["itemId"]
+    assert synthetic_params["card-name"] == synthetic["cardName"]
+    assert synthetic_params["card-number"] == "unknown"
+    assert "Caf%C3%A9" in synthetic_link and "%2F" in synthetic_link
+    assert "PRIVATE-CONSUMER-STATE" not in synthetic_link
+    assert "private.invalid" not in synthetic_link
+    assert "Finish%3A+unknown" in synthetic_link
+    assert len(synthetic_link) <= collector.CORRECTION_URL_MAX_LENGTH
+    assert collector.correction_link(synthetic) == synthetic_link
+
+    long_item = copy.deepcopy(synthetic)
+    long_item.update({
+        "cardName": "界" * 10_000,
+        "localSetName": "長" * 10_000,
+        "markings": [{"kind": "stamp", "role": "print-identity", "text": "!" * 10_000}],
+    })
+    long_link = collector.correction_link(long_item)
+    assert len(long_link) <= collector.CORRECTION_URL_MAX_LENGTH
+    assert collector.correction_link_params(long_link)["row-id"] == long_item["itemId"]
+    assert unquote(collector.correction_link_params(long_link)["current-state"]).startswith("Item kind:")
 
     counts = catalogue["qualitySummary"]["counts"]
     graph_printing_ids = {
