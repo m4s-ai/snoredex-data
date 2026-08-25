@@ -29,6 +29,7 @@ EXPECTED_RELEASES = frozenset({
     "RELEASE:WEST:German:RR:111:None",
     "RELEASE:WEST:Italian:RR:111:None",
 })
+EXPECTED_STATE = "needs-explicit-equivalence"
 
 
 def read_graph() -> dict:
@@ -51,6 +52,19 @@ def affected_releases(graph: dict) -> set[str]:
     }
 
 
+def reviewed_states(graph: dict) -> dict[str, tuple[str | None, object]]:
+    """Return the reviewed release state and Work payload for each target."""
+    return {
+        row["entityId"]: (
+            row.get("payload", {}).get("workMappingState"),
+            row.get("payload", {}).get("work"),
+        )
+        for row in graph.get("entities", [])
+        if row.get("entityType") == "card-release"
+        and row.get("entityId") in EXPECTED_RELEASES
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="verify the repair is applied")
@@ -59,8 +73,13 @@ def main() -> int:
     graph = read_graph()
     affected = affected_releases(graph)
     if args.check:
-        if affected:
-            raise SystemExit(f"issue #304 repair is incomplete: {sorted(affected)}")
+        expected = {release_id: (EXPECTED_STATE, None) for release_id in EXPECTED_RELEASES}
+        states = reviewed_states(graph)
+        if states != expected:
+            raise SystemExit(
+                "issue #304 repair has an unexpected reviewed state; "
+                f"expected {expected}, found {states}"
+            )
         print("issue #304 work-mapping repair: OK")
         return 0
 

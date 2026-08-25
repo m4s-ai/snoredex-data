@@ -209,6 +209,20 @@ def main() -> None:
         "re-keyed release must retain mapped-by-explicit-equivalence state" in error
         for error in validate(tampered)
     )
+    # The reviewed #304 pending state is distinct from generic unmapped: a
+    # later downgrade would discard the explicit-equivalence research signal.
+    tampered = deepcopy(graph)
+    pending_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["entityId"] == "RELEASE:JP:Japanese:DP-P:126:None"
+    )
+    pending_release["payload"]["workMappingState"] = "unmapped"
+    pending_release["payload"]["work"] = None
+    assert any(
+        "issue #304 release has unexpected work mapping state" in error
+        for error in validate(tampered)
+    )
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.

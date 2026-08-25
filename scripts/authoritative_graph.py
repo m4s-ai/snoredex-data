@@ -32,6 +32,19 @@ WORK_MAPPING_STATES = {
 }
 WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
 WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
+# These eight releases were explicitly reviewed in producer issue #304 as
+# positive local releases whose Work identity is still unresolved.  They must
+# retain the reviewed pending state until a separate equivalence decision exists.
+ISSUE304_NEEDS_EXPLICIT_RELEASES = frozenset({
+    "RELEASE:JP:Japanese:DP-P:126:None",
+    "RELEASE:JP:Japanese:DP-P:127:None",
+    "RELEASE:JP:Japanese:UNP:unnumbered:None",
+    "RELEASE:KR:Korean:via-DP-P:unknown-local-set:via-127:None:unknown-local-id",
+    "RELEASE:WEST:English:RR:111:None",
+    "RELEASE:WEST:French:RR:111:None",
+    "RELEASE:WEST:German:RR:111:None",
+    "RELEASE:WEST:Italian:RR:111:None",
+})
 FOIL_PATTERN_ALIASES = {
     "poke ball mirror": "poke-ball",
     "poké ball mirror": "poke-ball",
@@ -661,6 +674,9 @@ def validate(
             errors.append(f"card-release payload id mismatch: {release_id}")
         mapping_state = release.get("workMappingState")
         work_key = release.get("work")
+        if release_id in ISSUE304_NEEDS_EXPLICIT_RELEASES \
+                and mapping_state != "needs-explicit-equivalence":
+            errors.append(f"issue #304 release has unexpected work mapping state: {release_id}")
         if mapping_state not in WORK_MAPPING_STATES:
             errors.append(f"card release has unknown work mapping state: {release_id}")
         elif mapping_state in WORK_REQUIRED_STATES:
@@ -742,6 +758,8 @@ def validate(
         for claim_id in release.get("nonEstablishingClaimIds") or []:
             if claim_id not in claims:
                 errors.append(f"card release non-establishing claim is missing: {release_id} -> {claim_id}")
+    for release_id in ISSUE304_NEEDS_EXPLICIT_RELEASES - set(releases):
+        errors.append(f"issue #304 release is missing: {release_id}")
 
     # Every materialized card-release claim must be recorded by that release.  This
     # closes the opposite direction of the promotion invariant above.
