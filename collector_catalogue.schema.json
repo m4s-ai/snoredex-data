@@ -480,7 +480,9 @@
           },
           "correctionLink": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "maxLength": 6000,
+            "description": "Producer-generated deep link to printing-correction.yml. It pre-fills only template, title, row-id, card-name, set-code, card-number and current-state."
           }
         }
       }
