@@ -681,6 +681,24 @@ def validate(
             expected_work_id = works_by_key.get(work_key, (None, {}))[0] if isinstance(work_key, str) else None
             if implements != [("work", expected_work_id)]:
                 errors.append(f"card release implements edge is missing or inconsistent: {release_id}")
+            if mapping_state == "mapped-by-explicit-equivalence":
+                matching_assertions = []
+                for assertion_id, assertion in by_type["equivalence-assertion"].items():
+                    if (
+                        assertion.get("fromId") != release_id
+                        or assertion.get("toId") != expected_work_id
+                    ):
+                        continue
+                    assertion_relates = relations[("equivalence-assertion", assertion_id, "relates")]
+                    if sorted(assertion_relates) == sorted([
+                        ("card-release", release_id), ("work", expected_work_id)
+                    ]):
+                        matching_assertions.append(assertion_id)
+                if len(matching_assertions) != 1:
+                    errors.append(
+                        "mapped-by-explicit-equivalence card release lacks exactly one "
+                        f"matching equivalence assertion: {release_id}"
+                    )
         elif mapping_state in WORK_EMPTY_STATES and implements:
             errors.append(f"unmapped card release has an implements edge: {release_id}")
         edition_id = release.get("setEditionId")

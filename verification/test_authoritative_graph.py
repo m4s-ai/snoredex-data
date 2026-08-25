@@ -106,6 +106,35 @@ def main() -> None:
             ):
                 edge["toId"] = target_id
     assert any("work payload id mismatch" in error for error in validate(tampered))
+    # An explicit-equivalence mapping is only promotable with one reviewed
+    # assertion that names both the exact release and Work relation.
+    tampered = deepcopy(graph)
+    equivalence_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"]["workMappingState"] == "mapped-by-explicit-equivalence"
+    )
+    assertion_id = next(
+        edge["fromId"] for edge in tampered["edges"]
+        if edge["fromType"] == "equivalence-assertion"
+        and edge["relation"] == "relates"
+        and edge["toType"] == "card-release"
+        and edge["toId"] == equivalence_release["entityId"]
+    )
+    tampered["entities"] = [
+        row for row in tampered["entities"] if not (
+            row["entityType"] == "equivalence-assertion"
+            and row["entityId"] == assertion_id
+        )
+    ]
+    tampered["edges"] = [
+        edge for edge in tampered["edges"]
+        if not (edge["fromType"] == "equivalence-assertion" and edge["fromId"] == assertion_id)
+    ]
+    assert any(
+        "mapped-by-explicit-equivalence card release lacks exactly one matching equivalence assertion"
+        in error for error in validate(tampered)
+    )
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.
