@@ -209,6 +209,26 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Indexes English names only. Absence never contradicts a Western language.",
     },
     {
+        "providerId": "pokecottage",
+        "displayName": "PokéCottage",
+        "organization": "PokéCottage",
+        "homepage": "https://pokecottage.com",
+        "hosts": ["pokecottage.com", "www.pokecottage.com", "pokecottagecdn.com",
+                  "www.pokecottagecdn.com"],
+        "licenseOrTerms": "Site terms; fan-made collector content.",
+        "category": "collector-checklist",
+        "authorityTier": 3,
+        "coverage": "fan-made set, promo and variant checklists used for discovery leads only",
+        "supportsAbsence": False,
+        "usedFor": ["product"],
+        "attribution": "Discovery leads from PokéCottage.",
+        "notes": ("Inspect the Snorlax master list and matching set guides when a newly announced "
+                  "or released set contains Snorlax. Every row remains a candidate until an "
+                  "independent official page, checklist, product record or specimen verifies it. "
+                  "Never transfer finish, stamp, promo distribution, language/locality, release "
+                  "date or completeness to another Western language."),
+    },
+    {
         # Added on the owner's evidence in #119: a Japanese secondhand marketplace whose listings
         # photograph the actual card rather than reusing a stock image. That is the whole value —
         # for a fixed-deck Japanese product neither TCGdex nor the official card database records a
@@ -484,6 +504,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"pokemoncard\.co\.kr|pokemonkorea\.co\.kr|official pokemon korea", re.I),
      "pokemon-card-korea"),
     (re.compile(r"elite ?fourum", re.I), "elitefourum"),
+    (re.compile(r"pok[eé]cottage", re.I), "pokecottage"),
     (re.compile(r"pokumon", re.I), "pokumon"),
     (re.compile(r"ligapokemon", re.I), "ligapokemon"),
     (re.compile(r"tcgcsv|tcgplayer", re.I), "tcgcsv"),

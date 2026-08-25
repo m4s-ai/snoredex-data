@@ -816,6 +816,16 @@ def validate(
     }
     for row in observed_specimens.values():
         expect_claim("specimen-observation", row.get("specimenId"), "observed", None, None)
+    reviewed_source_printings: dict[str, dict[str, Any]] = {}
+    for source_id, source in by_type["set-source-record"].items():
+        evidence = (source.get("raw") or {}).get("physicalPrintingEvidence")
+        if not evidence:
+            continue
+        reviewed_source_printings[source_id] = evidence
+        expect_claim(
+            "reviewed-positive-evidence", source_id, "confirmed",
+            "established-and-mapped", evidence.get("sourceUrl"),
+        )
 
     actual_claim_keys = set(claims_by_source)
     if actual_claim_keys != set(expected_claims):
@@ -830,6 +840,29 @@ def validate(
             errors.append(f"identity claim disposition is stale: {key[0]}:{key[1]}")
         if expected_source_record != claim.get("sourceRecord"):
             errors.append(f"identity claim source is stale: {key[0]}:{key[1]}")
+
+    for source_id, evidence in reviewed_source_printings.items():
+        claim = claims_by_source.get(("reviewed-positive-evidence", source_id))
+        physical = printings.get((claim or {}).get("materializedTargetId"))
+        release = releases.get((physical or {}).get("cardReleaseId"))
+        source = by_type["set-source-record"][source_id]
+        if not physical or not release:
+            errors.append(f"reviewed physical-printing evidence is not materialized: {source_id}")
+            continue
+        for field in (
+            "cardReleaseId", "finish", "edition", "foilPattern", "markings",
+            "distribution", "cardSize", "specimenIds",
+        ):
+            if physical.get(field) != evidence.get(field):
+                errors.append(f"reviewed physical-printing evidence is stale: {source_id}:{field}")
+        if source_id not in (physical.get("sourceRecordIds") or []):
+            errors.append(f"reviewed physical printing omits its source record: {source_id}")
+        if evidence.get("positiveOnly") is not True \
+                or evidence.get("completenessClaim") is not False \
+                or not evidence.get("basis"):
+            errors.append(f"reviewed physical-printing evidence scope is incomplete: {source_id}")
+        if (source.get("raw") or {}).get("locality") != release.get("locality"):
+            errors.append(f"reviewed physical-printing evidence locality differs: {source_id}")
 
     def normalized(value: Any) -> str:
         return "" if value is None else str(value)

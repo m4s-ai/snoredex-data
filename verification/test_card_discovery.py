@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import card_discovery as discovery  # noqa: E402
+import source_registry as registry  # noqa: E402
 
 
 ADAPTER = {
@@ -233,6 +234,7 @@ class CardDiscoveryTests(unittest.TestCase):
         previous = copy.deepcopy(contract)
         previous["meta"]["coverageVersion"] = "1.12.0"
         previous["explicitMappings"].append({"retired": "projection-only"})
+        previous["gaps"].append({"retired": "workflow-only"})
         self.assertEqual(
             discovery.acquisition_contract(previous),
             discovery.acquisition_contract(contract),
@@ -242,6 +244,53 @@ class CardDiscoveryTests(unittest.TestCase):
             discovery.acquisition_contract(previous),
             discovery.acquisition_contract(contract),
         )
+
+    def test_pokecottage_is_a_discovery_lead_not_confirmation_evidence(self):
+        self.assertEqual(
+            registry.resolve_provider(None, "PokeCottage collector checklist"),
+            "pokecottage",
+        )
+        self.assertEqual(
+            registry.resolve_provider(None, "PokéCottage collector checklist"),
+            "pokecottage",
+        )
+        capability = json.loads(
+            (ROOT / "verification" / "source_capabilities.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        surface = next(
+            row for row in capability["surfaces"]
+            if row["surfaceId"] == "pokecottage-master-lists"
+        )
+        provider = next(
+            row for row in capability["providers"]
+            if row["providerId"] == "pokecottage"
+        )
+        edge = surface["coverageEdges"][0]
+        self.assertEqual(provider["authorityTier"], 3)
+        self.assertEqual(surface["providerId"], "pokecottage")
+        self.assertEqual(surface["adapterState"], "planned")
+        self.assertEqual(
+            set(edge["positiveEvidenceCapabilities"]),
+            {"discovery-lead", "card-candidate", "promo-candidate", "variant-candidate"},
+        )
+        self.assertFalse(edge["absenceCapability"]["enabled"])
+        self.assertEqual(surface["finishCapability"]["mode"], "none")
+
+        contract = json.loads(
+            (ROOT / "verification" / "card_discovery_adapters.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        gap = next(
+            row for row in contract["gaps"]
+            if row["gapId"] == "pokecottage-new-snorlax-set-review"
+        )
+        self.assertEqual(gap["terminalState"], "needs-evidence")
+        self.assertIn("newly announced or released set", gap["retryCondition"])
+        self.assertIn("independently verify", gap["retryCondition"])
+        self.assertIn("Never transfer", gap["retryCondition"])
 
     def test_replay_destination_must_sort_after_every_retained_run(self):
         with tempfile.TemporaryDirectory() as temporary:

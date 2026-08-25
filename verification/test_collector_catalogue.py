@@ -218,6 +218,129 @@ def main() -> None:
         and row["imageAssetId"]
         for row in dutch_printings.values()
     )
+    latam_svp = next(
+        row for row in catalogue["items"]
+        if row["cardReleaseId"]
+        == "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033"
+    )
+    assert {
+        "kind": latam_svp["itemKind"],
+        "progress": latam_svp["progressClass"],
+        "work": latam_svp["workId"],
+        "finish": latam_svp["finish"],
+        "rarity": latam_svp["rarity"]["normalizedId"],
+        "date": latam_svp["releaseDate"],
+        "datePrecision": latam_svp["releaseDatePrecision"],
+        "imageScope": latam_svp["imageScope"],
+    } == {
+        "kind": "verified-printing",
+        "progress": "current-known",
+        "work": "WORK:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "finish": "holo",
+        "rarity": "promo",
+        "date": "2025-03-22",
+        "datePrecision": "day",
+        "imageScope": "exact-printing",
+    }
+    assert latam_svp["imageAssetId"]
+    assert latam_svp["markings"] == [{
+        "kind": "set-logo",
+        "role": "distribution-promo",
+        "text": "Aventuras Compartidas",
+    }]
+    assert latam_svp["distribution"] == {
+        "kind": "prerelease",
+        "name": "Aventuras Compartidas Prerelease",
+        "region": "MX",
+        "date": "2025-03-22",
+    }
+    assert {
+        "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+        "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+    } <= set(latam_svp["evidenceLinks"])
+    normal_latam_expectations = {
+        "RELEASE:LATAM:Spanish:JTG LA:117/159:unmapped-work:SPEC-0035": {
+            "work": "WORK:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+            "setName": "Aventuras Compartidas",
+            "finish": "holo",
+            "rarity": "rare",
+            "date": "2025-03-28",
+            "distribution": {
+                "kind": "booster-set",
+                "name": "Aventuras Compartidas",
+                "region": "LATAM",
+                "date": "2025-03-28",
+            },
+            "sources": {
+                "https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/sv09/117/",
+                "https://www.pokemon.com/el/jcc-pokemon/escarlata-y-purpura-aventuras-compartidas",
+                "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/jtg_web_cardlist_latam.pdf",
+            },
+        },
+        "RELEASE:LATAM:Spanish:POR LA:063/088:unmapped-work:SPEC-0036": {
+            "work": "WORK:Snorlax-Gormandizer-Collapse",
+            "setName": "Equilibrio Perfecto",
+            "finish": "non-holo",
+            "rarity": "common",
+            "date": "2026-03-27",
+            "distribution": {
+                "kind": "booster-set",
+                "name": "Equilibrio Perfecto",
+                "region": "LATAM",
+                "date": "2026-03-27",
+            },
+            "sources": {
+                "https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/me03/63/",
+                "https://www.pokemon.com/el/jcc-pokemon/megaevolucion-equilibrio-perfecto",
+                "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/por_web_cardlist_latam.pdf",
+            },
+        },
+    }
+    normal_latam_rows = {
+        row["cardReleaseId"]: row for row in catalogue["items"]
+        if row["cardReleaseId"] in normal_latam_expectations
+    }
+    assert set(normal_latam_rows) == set(normal_latam_expectations)
+    for release_id, expected in normal_latam_expectations.items():
+        row = normal_latam_rows[release_id]
+        assert {
+            "kind": row["itemKind"],
+            "progress": row["progressClass"],
+            "work": row["workId"],
+            "setName": row["localSetName"],
+            "finish": row["finish"],
+            "rarity": row["rarity"]["normalizedId"],
+            "date": row["releaseDate"],
+            "datePrecision": row["releaseDatePrecision"],
+            "imageScope": row["imageScope"],
+        } == {
+            "kind": "verified-printing",
+            "progress": "current-known",
+            "work": expected["work"],
+            "setName": expected["setName"],
+            "finish": expected["finish"],
+            "rarity": expected["rarity"],
+            "date": expected["date"],
+            "datePrecision": "day",
+            "imageScope": "exact-printing",
+        }
+        assert row["imageAssetId"]
+        assert row["markings"] == []
+        assert row["distribution"] == expected["distribution"]
+        assert expected["sources"] <= set(row["evidenceLinks"])
+        prior_id = collector.item_id(f"research:card-release:{release_id}")
+        assert next(
+            transition for transition in migrations["transitions"]
+            if transition["fromItemId"] == prior_id
+        ) == collector.state_transition(prior_id, [row["itemId"]])
+    previous_placeholder = collector.item_id(
+        "research:card-release:"
+        "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033"
+    )
+    assert next(
+        row for row in migrations["transitions"]
+        if row["fromItemId"] == previous_placeholder
+    ) == collector.state_transition(previous_placeholder, [latam_svp["itemId"]])
     transition_by_source = {
         row["fromItemId"]: row for row in migrations["transitions"]
     }

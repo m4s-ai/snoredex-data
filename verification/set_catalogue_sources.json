@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 345,
+      "sourceRecords": 347,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 37,
-      "releaseDateRecords": 45,
+      "sourceFirstLocalSets": 38,
+      "releaseDateRecords": 46,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -8585,10 +8585,10 @@
       "sourceKind": "source-first-local-set-profile",
       "provider": "mixed-positive-evidence",
       "providerRecordKey": "LATAM\u001fJTG LA",
-      "retrieved": "2026-08-11",
+      "retrieved": "2026-08-25",
       "raw": {
         "localCode": "JTG LA",
-        "localName": null,
+        "localName": "Aventuras Compartidas",
         "locality": "LATAM",
         "languages": [
           "Spanish"
@@ -8603,7 +8603,10 @@
           "pokemon-official"
         ],
         "sourceUrls": [
-          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png"
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png",
+          "https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/sv09/117/",
+          "https://www.pokemon.com/el/jcc-pokemon/escarlata-y-purpura-aventuras-compartidas",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/jtg_web_cardlist_latam.pdf"
         ],
         "printedSetSize": 159,
         "printedSetSizeBasis": "the denominator printed beside the collector number on the observed official card asset",
@@ -8611,11 +8614,62 @@
         "observedCollectorNumbers": [
           "117/159"
         ],
-        "observedCoverage": "one official Snorlax card asset, not an enumeration of the set",
+        "observedCoverage": "one exact official LA card detail and checklist row; not a complete finish enumeration",
         "markAssetUrls": [],
         "cardImageUrls": [
           "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SV09/SV09_LA_117.png"
-        ]
+        ],
+        "cardDetailFacts": {
+          "cardName": "Snorlax de Paul",
+          "hp": 150,
+          "ability": "Raciones Extras",
+          "attacks": [
+            {
+              "name": "Plancha Dinámica",
+              "damage": 140
+            }
+          ],
+          "setName": "Aventuras Compartidas",
+          "collectorNumber": "117/159",
+          "rarity": "Rare",
+          "illustrator": "GOSSAN",
+          "sourceUrl": "https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/sv09/117/"
+        },
+        "releaseFacts": {
+          "date": "2025-03-28",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "sourceUrl": "https://www.pokemon.com/el/jcc-pokemon/escarlata-y-purpura-aventuras-compartidas"
+        },
+        "checklistFacts": {
+          "collectorNumber": "117/159",
+          "ordinarySetFinish": "holo",
+          "sourceUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/jtg_web_cardlist_latam.pdf",
+          "basis": "the official LA checklist marks exact row 117 with its holographic ordinary-set indicator"
+        },
+        "physicalPrintingEvidence": {
+          "cardReleaseId": "RELEASE:LATAM:Spanish:JTG LA:117/159:unmapped-work:SPEC-0035",
+          "sourceUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/jtg_web_cardlist_latam.pdf",
+          "finish": "holo",
+          "edition": null,
+          "foilPattern": null,
+          "markings": [],
+          "distribution": {
+            "kind": "booster-set",
+            "name": "Aventuras Compartidas",
+            "region": "LATAM",
+            "date": "2025-03-28"
+          },
+          "cardSize": "unknown",
+          "specimenIds": [
+            "SPEC-0035"
+          ],
+          "positiveOnly": true,
+          "completenessClaim": false,
+          "basis": "the official LA checklist marks exact row 117 with its holographic ordinary-set indicator; the linked official card detail supplies identity and the linked official expansion page supplies the launch date"
+        },
+        "scopeBoundary": "The official sources establish this ordinary printing only; no reverse-holo printing or complete finish list is inferred."
       }
     },
     {
@@ -8699,10 +8753,10 @@
       "sourceKind": "source-first-local-set-profile",
       "provider": "mixed-positive-evidence",
       "providerRecordKey": "LATAM\u001fPOR LA",
-      "retrieved": "2026-08-11",
+      "retrieved": "2026-08-25",
       "raw": {
         "localCode": "POR LA",
-        "localName": null,
+        "localName": "Equilibrio Perfecto",
         "locality": "LATAM",
         "languages": [
           "Spanish"
@@ -8717,7 +8771,10 @@
           "pokemon-official"
         ],
         "sourceUrls": [
-          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png"
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png",
+          "https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/me03/63/",
+          "https://www.pokemon.com/el/jcc-pokemon/megaevolucion-equilibrio-perfecto",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/por_web_cardlist_latam.pdf"
         ],
         "printedSetSize": 88,
         "printedSetSizeBasis": "the denominator printed beside the collector number on the observed official card asset",
@@ -8725,11 +8782,66 @@
         "observedCollectorNumbers": [
           "063/088"
         ],
-        "observedCoverage": "one official Snorlax card asset, not an enumeration of the set",
+        "observedCoverage": "one exact official LA card detail and checklist row; not a complete finish enumeration",
         "markAssetUrls": [],
         "cardImageUrls": [
           "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/ME03/ME03_LA_63.png"
-        ]
+        ],
+        "cardDetailFacts": {
+          "cardName": "Snorlax",
+          "hp": 160,
+          "ability": null,
+          "attacks": [
+            {
+              "name": "Comilona",
+              "damage": null
+            },
+            {
+              "name": "Colapso",
+              "damage": 160
+            }
+          ],
+          "setName": "Equilibrio Perfecto",
+          "collectorNumber": "063/088",
+          "rarity": "Common",
+          "illustrator": "Toshinao Aoki",
+          "sourceUrl": "https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/me03/63/"
+        },
+        "releaseFacts": {
+          "date": "2026-03-27",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "sourceUrl": "https://www.pokemon.com/el/jcc-pokemon/megaevolucion-equilibrio-perfecto"
+        },
+        "checklistFacts": {
+          "collectorNumber": "063/088",
+          "ordinarySetFinish": "non-holo",
+          "sourceUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/por_web_cardlist_latam.pdf",
+          "basis": "the official LA checklist marks exact row 063 with its non-holographic ordinary-set indicator"
+        },
+        "physicalPrintingEvidence": {
+          "cardReleaseId": "RELEASE:LATAM:Spanish:POR LA:063/088:unmapped-work:SPEC-0036",
+          "sourceUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/por_web_cardlist_latam.pdf",
+          "finish": "non-holo",
+          "edition": null,
+          "foilPattern": null,
+          "markings": [],
+          "distribution": {
+            "kind": "booster-set",
+            "name": "Equilibrio Perfecto",
+            "region": "LATAM",
+            "date": "2026-03-27"
+          },
+          "cardSize": "unknown",
+          "specimenIds": [
+            "SPEC-0036"
+          ],
+          "positiveOnly": true,
+          "completenessClaim": false,
+          "basis": "the official LA checklist marks exact row 063 with its non-holographic ordinary-set indicator; the linked official card detail supplies identity and the linked official expansion page supplies the launch date"
+        },
+        "scopeBoundary": "The official sources establish this ordinary printing only; no reverse-holo printing or complete finish list is inferred."
       }
     },
     {
@@ -9094,6 +9206,111 @@
           "humanCatalogueCode": "BS2"
         },
         "evidenceSnapshot": "verification/evidence/issue-240-korean-burning-confrontation.json"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RETAIL-DATE:23ca130aa87a707a",
+      "sourceKind": "release-date-record",
+      "provider": "retailer-listing",
+      "providerRecordKey": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/#2025-03-22",
+      "retrieved": "2026-08-25",
+      "raw": {
+        "localCode": null,
+        "page": "Pokemon TCG - Journey Together PRERELEASE",
+        "field": "event date",
+        "date": "2025-03-22",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "LATAM",
+        "languageScope": "Spanish",
+        "marketScopes": [
+          "MX"
+        ],
+        "marketScopeBasis": "the venue line identifies Culiacan, Sinaloa, Mexico",
+        "sourceUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+        "note": "The organizer lists a Journey Together prerelease on March 22, 2025 and says entry includes a kit, two boosters and a Series 5 Prize Pack. The page does not enumerate the four possible promos or state the card language."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "LATAM\u001fSVP LA\u001f184\u001f2025-03-22",
+      "retrieved": "2026-08-25",
+      "raw": {
+        "localCode": "SVP LA",
+        "localName": null,
+        "locality": "LATAM",
+        "languages": [
+          "Spanish"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "printIds": [
+          "LATAM:SVP LA:184:base"
+        ],
+        "providers": [
+          "owner-attestation",
+          "pokemon-official",
+          "retailer-listing"
+        ],
+        "sourceUrls": [
+          "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png",
+          "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early"
+        ],
+        "printedSetSize": null,
+        "printedSetSizeBasis": "the promo number has no printed denominator",
+        "localeSuffix": "LA",
+        "observedCollectorNumbers": [
+          "184"
+        ],
+        "observedCoverage": "one exact LATAM promo asset plus the publisher's named Build & Battle promo contents; not a promo-series or finish manifest",
+        "cardImageUrls": [
+          "https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png"
+        ],
+        "productFacts": {
+          "articlePublished": "2025-03-10",
+          "globalPrereleaseStart": "2025-03-15",
+          "officialSetLaunch": "2025-03-28",
+          "product": "Scarlet & Violet-Journey Together Build & Battle Box",
+          "namedCard": "Hop's Snorlax",
+          "classification": "one of four unique foil promo cards"
+        },
+        "ownerAttestation": {
+          "recordedAt": "2026-08-25",
+          "assertion": "The collection owner identifies exact printing SVP LA 184 as one of the promos distributed at the cited Mexico prerelease."
+        },
+        "physicalPrintingEvidence": {
+          "cardReleaseId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+          "sourceUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+          "finish": "holo",
+          "edition": null,
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "set-logo",
+              "role": "distribution-promo",
+              "text": "Aventuras Compartidas"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease",
+            "name": "Aventuras Compartidas Prerelease",
+            "region": "MX",
+            "date": "2025-03-22"
+          },
+          "cardSize": "unknown",
+          "specimenIds": [
+            "SPEC-0033"
+          ],
+          "positiveOnly": true,
+          "completenessClaim": false,
+          "basis": "The exact LA asset supplies identity and marking; the official article calls Hop's Snorlax one of four unique foil promo cards; the dated Mexico event and owner statement supply the narrow distribution wave."
+        },
+        "scopeBoundary": "The LA asset establishes the localized card. The product article establishes Hop's Snorlax as a foil promo, but does not itself date a LATAM market wave."
       }
     }
   ]

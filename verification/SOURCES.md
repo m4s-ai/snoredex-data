@@ -32,6 +32,7 @@ gap, never a finding.
 | **pokemontcg.io** | open-database | 2 | no | 1 | 123 | artist, date |
 | **LigaPokemon** | marketplace | 3 | no | 2 | 3 | language, finish |
 | **Limitless TCG** | open-database | 3 | no | 0 | 0 | artist |
+| **PokéCottage** | collector-checklist | 3 | no | 0 | 0 | product |
 | **Retailer and specialist card listings** | retail-listing | 3 | no | 6 | 31 | finish, product, language |
 | **TCGCSV (TCGplayer product data)** | marketplace-catalogue | 3 | no | 7 | 44 | finish, product |
 | **koreanpokemoncards.com** | collector-database | 3 | no | 0 | 0 | language, finish |
@@ -205,6 +206,15 @@ gap, never a finding.
 - **Can establish absence:** no — positive evidence only
 - **Attribution:** Illustrator data from Limitless TCG.
 - **Notes:** Named in the dataset's meta.artistSources for three cards missing upstream from pokemontcg.io, but no card row attributes to it individually - those rows carry the pokemontcg.io sourceType. Declared here so the gap is visible rather than implied.
+
+### PokéCottage — <https://pokecottage.com>
+
+- **Organization:** PokéCottage
+- **Terms:** Site terms; fan-made collector content.
+- **Coverage:** fan-made set, promo and variant checklists used for discovery leads only
+- **Can establish absence:** no — positive evidence only
+- **Attribution:** Discovery leads from PokéCottage.
+- **Notes:** Inspect the Snorlax master list and matching set guides when a newly announced or released set contains Snorlax. Every row remains a candidate until an independent official page, checklist, product record or specimen verifies it. Never transfer finish, stamp, promo distribution, language/locality, release date or completeness to another Western language.
 
 ### Retailer and specialist card listings
 

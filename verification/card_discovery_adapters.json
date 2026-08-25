@@ -2,8 +2,8 @@
   "meta": {
     "schema": "snoredex-card-discovery-contract",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.16.0",
-    "reviewedAt": "2026-08-20",
+    "coverageVersion": "1.17.0",
+    "reviewedAt": "2026-08-25",
     "policies": [
       "Discovery starts from provider-native localized name queries and never from snorlax_cards.json, units.json, or the legacy Cardmarket candidate list.",
       "Every fetched detail record is retained before identity matching and reaches exactly one visible accounting bucket.",
@@ -13,7 +13,8 @@
       "No discovery adapter may write a confirmation, contradiction, finish verdict, or owner adjudication.",
       "A language-only locale or marketplace geography remains needs-evidence until a positive printed or official physical-locality discriminator exists.",
       "A set-language index remains in set discovery and may support evidence application separately; it may not synthesize provider-native card details from repository units.",
-      "A retained issue evidence scan may replay only an explicit reviewed positive-row whitelist; ambiguous, missing-number, and omitted rows remain unknown and never carry absence."
+      "A retained issue evidence scan may replay only an explicit reviewed positive-row whitelist; ambiguous, missing-number, and omitted rows remain unknown and never carry absence.",
+      "PokéCottage is a discovery-only collector checklist: its rows may trigger research, but every card, promo, variant and date must be independently verified before graph admission, and no finish, stamp, distribution, language/locality, date or completeness transfers across Western languages."
     ]
   },
   "rawRecordContract": {
@@ -664,6 +665,15 @@
       "terminalState": "needs-evidence",
       "reason": "The shared index positively scopes set-language rows and remains retained in set discovery; it supplies no provider-native card name, collector number, variant, deck or promo record.",
       "retryCondition": "Activate category-specific revision-pinned card lists or positive specimens; never synthesize card details from repository units or inherit expansion coverage into promos and decks."
+    },
+    {
+      "gapId": "pokecottage-new-snorlax-set-review",
+      "track": "PokéCottage Snorlax set, promo and variant discovery",
+      "providerId": "pokecottage",
+      "surfaceId": "pokecottage-master-lists",
+      "terminalState": "needs-evidence",
+      "reason": "PokéCottage exposes useful fan-made Snorlax and set checklists, but it has no active retained adapter or row-level provenance and has shown date errors; its rows therefore remain discovery leads rather than confirmation evidence.",
+      "retryCondition": "Whenever a newly announced or released set contains Snorlax, inspect the PokéCottage Snorlax master list and matching set guide for card, promo and variant leads; retain exact positive rows, then independently verify each with an official page, checklist, product record or identified specimen before graph admission. Never transfer finish, stamps, promo distribution, language/locality, release dates or completeness to another Western language."
     }
   ]
 }
