@@ -1,0 +1,32 @@
+# Snoredex Data
+
+> Auditable data about current-known physical Snorlax Pokemon TCG printings, descended from a frozen 2026-07-21 Cardmarket candidate universe. This is not a complete all-locality catalogue.
+
+Use positive evidence only: a source omission is a gap, not evidence that a printing does not exist. `pending`, `unmapped`, and `other-product` never mean non-existence. A `contradicted` language is a disagreement with the inherited marketplace claim; only `not-printed` records a settled absence. Language evidence and finish evidence are separate layers and must not be inferred from one another.
+
+## Start here
+
+- [Dataset documentation](README.md): Scope, evidence rules, data selection guide, caveats, build process, and repository map.
+- [Database contract](DATABASE.md): SQLite schema, application views, status semantics, and example queries.
+- [Research findings](FINDINGS.md): Findings derived while verifying the candidate universe.
+
+## Preferred data
+
+- [Compact release chronology](analysis_confirmed_releases.csv): Small semicolon-separated table of chronological card releases, languages, finishes, and source URLs.
+- [Collector catalogue](collector_catalogue.json): Versioned application contract for current-known printings and explicit research items.
+- [Collector catalogue schema](collector_catalogue.schema.json): JSON Schema for the collector catalogue.
+- [Physical checklist](analysis_checklist.json): Canonical checklist of documented printings and explicit unresolved placeholders.
+- [Language evidence](verification/units.json): One verdict per set code, number, variant, and language.
+- [Finish evidence](verification/finish_units.json): Positive finish evidence per set number and language.
+
+## Evidence and freshness
+
+- [Source guide](verification/SOURCES.md): Providers, authority tiers, attribution, and evidence counts.
+- [Source registry](verification/source_registry.json): Machine-readable provider and evidence index.
+- [Deployment manifest](collector_deployment.json): Exact deployed commit and hash of the published collector catalogue; created during deployment.
+
+## Optional
+
+- [SQLite handoff](snoredex.sqlite): Complete normalized application database; prefer the smaller resources above when they answer the question.
+- [Legacy boundary](legacy-cardmarket-baseline.json): Immutable membership and provenance of the historical candidate universe.
+- [Licence](LICENSE.md): Licence grants and third-party-rights boundary.

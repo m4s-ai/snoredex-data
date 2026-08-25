@@ -529,6 +529,7 @@ def main() -> int:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Snoredex — documented Snorlax TCG printings</title>
 <meta name="description" content="An auditable view of current-known physical Snorlax Pokemon TCG printings descended from a historical Cardmarket candidate universe. It is not an all-locality print manifest.">
+<link rel="describedby" href="llms.txt">
 <script>
 (function () {{
   var root = document.documentElement;

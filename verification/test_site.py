@@ -191,6 +191,10 @@ def main() -> int:
         total = page.evaluate("JSON.parse(document.getElementById('data-rows').textContent).length")
         check("page loads with no console errors", not console_errors, "; ".join(console_errors[:3]))
         check("all rows render", total == EXPECTED_ROWS, f"data has {total} rows")
+        check("page advertises the concise LLM entry point",
+              page.locator('head link[rel="describedby"][href="llms.txt"]').count() == 1
+              and (ROOT / "llms.txt").read_text(encoding="utf-8").startswith("# Snoredex Data\n"),
+              "missing describedby relation or llms.txt H1")
 
         # --- graph-backed artwork/detection review (#120) ---
         artwork_projection = page.evaluate("""() => JSON.parse(
