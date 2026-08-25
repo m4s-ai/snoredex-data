@@ -5,7 +5,8 @@ Current legacy goal: every **card × language × variant** inherited from the fr
 **legacy Cardmarket candidate universe** gets at least one confirmed source **outside Cardmarket**,
 and every inherited physical **set number × language** gets a positive-evidence finish inventory
 with any Cardmarket-product mappings kept explicit. This playbook does not establish all-locality
-discovery completeness; #132 tracks that source-first rebuild.
+discovery completeness. The bounded source-first rebuild completed under #132; the generated
+completeness gate accounts for reviewed inputs while retaining explicit source and locality gaps.
 
 This file is both the current verification playbook and a chronological research log. Use the
 **Current state** section below for authoritative totals; later counts describe historical
@@ -476,8 +477,8 @@ Every era segment cites a retained capability edge, observation, adapter slice, 
 decision or explicit source gap. The generator validates those references and renders the current
 legacy audit counts. Its most important rule is the same one as the capability graph: a complete
 adapter slice accounts for one provider response, not an era or locality universe, and zero rows
-remain unknown. The matrix is the decomposition input for #139 child issues, not a replacement for
-their per-locality discovery loops.
+remain unknown. The matrix was the decomposition input for the #139 child issues and is now the
+reviewed recurrence boundary for their reconciled per-locality discovery loops.
 
 The first child loop, #188, began with exact-name card-discovery run `20260811T100924Z`. Issue #203
 extends that same English slice in run `20260813T135800Z` with TCGdex's bounded
@@ -841,8 +842,9 @@ four-word artist name. Two corrupted credits reached the committed data that way
 V進化` and the Shizurow one above, where `V進化` and `レベルアップ LV. X` are evolution-stage labels —
 and widening the terminator list would only have moved the failure to the next stage label. The
 values were corrected; `verification/history/REVIEW-2026-07-31-ISSUE-STATUS.md` records them as
-found. A parser doing this correctly lived at `verification/jp_parse.py` until #172 retired it as
-uncalled; `git log -- verification/jp_parse.py` has it if a JP illustrator fetch is ever built.
+found. A parser doing this correctly lived in the old `jp_parse.py` until #172 retired it as
+uncalled; the deleted historical `jp_parse.py` remains available through Git history if a JP
+illustrator fetch is ever built.
 
 ### Language scope: Spanish — a documented blind spot, proven by specimen
 
@@ -864,8 +866,10 @@ European print.
 
 **LATAM-ES is in scope since 2026-08-09** — owner decision D3 in
 [`ADR-0001`](ADR-0001-locality-aware-print-identity.md), which makes it a locality of its own
-rather than a footnote on Spanish. No row exists yet; #139 is the discovery work, and this is the
-plan it starts from (owner guidance, written before the decision):
+rather than a footnote on Spanish. Issue #192 retained three official `LA` releases (`JTG LA
+117/159`, `POR LA 063/088`, and `SVP LA 184`) as a complete positive slice. `xJTG` remains an
+explicit evidence gap, so neither that slice nor the closed #139 discovery plan is historically
+exhaustive. The original owner guidance that bounded the work was:
 
 - Source: the **official public Pokémon site**, not Cardmarket. Probed: `pokemon.com/latam`
   responds to scripts (HTTP 200); the LATAM card database would hang off that locale.
@@ -886,9 +890,10 @@ plan it starts from (owner guidance, written before the decision):
 
 Rare-language checks turned up something more useful than a gap: for 7 units an external source **actively refutes** Cardmarket's language claim. This confirms the caveat in the main README — Cardmarket's language filter reflects seller listings and, for some products, appears to fall back to a full global language list rather than actual print availability. `KSS 26` is the clearest case: Cardmarket shows 17 languages, Bulbapedia documents 7. See `CONTRADICTED.json`.
 
-Everything is checkpointed, and passes were designed to be idempotent: confirmed units are
-skipped, caches are reused, and nothing is re-fetched. Scripts derive paths from their own
-location and can be rerun from any checkout or working directory.
+Historical passes are checkpointed and retained as immutable runs. Current regeneration uses
+committed stores and versioned snapshots offline; gitignored caches are transport state, not a
+reproducibility guarantee. Scripts derive paths from their own location and can be run from any
+checkout or working directory.
 
 ## Source landscape — what works, what's blocked
 
@@ -905,16 +910,16 @@ Moved here from `HANDOVER.md` in #103; the detail below is this file's job.
 | **Official Asia** `asia.pokemon-card.com` | scriptable | tw/id/th recent cards |
 | **pokumon.com** | WebFetch | per-market promo printings (one row per Asian printing; **West is one lumped "English" row — never use its absence to contradict a Western language**) |
 | **Elite Fourum** `elitefourum.com` | scriptable (Discourse JSON: `/search.json`, `/t/<id>.json`) | collector-community facts (promo languages, 1st-edition timeline) |
-| **LigaPokemon** `ligapokemon.com.br` | **datacenter IPs banned (Cloudflare 1008)** — use the user's real Chrome (`claude-in-chrome` tools) | Brazilian/Portuguese marketplace listings |
+| **LigaPokemon** `ligapokemon.com.br` | **datacenter IPs banned (Cloudflare 1008)** — use an authenticated user browser session | Brazilian/Portuguese marketplace listings |
 | **Cardmarket** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | seller photos of physical cards (a real photo of a card in language X is valid; the language *filter* is not) |
 
 Dead ends (do not retry): `pokemonkorea.co.kr` / `pokemoncard.co.kr` (HTTP 410, gone),
 `ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts), `namu.wiki` (JS-rendered),
 `krystalkollectz.com` (a shop, not a database).
 
-**Key trick**: when a source (Bulbapedia, LigaPokemon) blocks datacenter IPs, drive the user's
-own Chrome via the `claude-in-chrome` MCP tools — it uses their residential IP. This is how the
-Brazilian Prize Pack confirmations were obtained.
+**Key trick**: when a source (Bulbapedia, LigaPokemon) blocks datacenter IPs, use an authenticated
+user browser session when authorized. This is how the Brazilian Prize Pack confirmations were
+obtained.
 
 ## Files
 
@@ -930,7 +935,7 @@ Brazilian Prize Pack confirmations were obtained.
 | `verify_finish_sources.py` | Live check of TCGCSV product identity and the positive subtypes declared in `finish_overrides.json` |
 | `FINISH_REVIEW.json` / `.csv` | The remaining finish, reverse/mirror-pattern, and product-mapping queue |
 | `state.json` | Last completed phase |
-| `cache/` | Raw API responses. Deleting a file forces a refetch; keeping it makes resume instant. |
+| `cache/` | Ignored transport and scratch state only. Committed snapshots and retained immutable runs are the reproducible inputs. |
 
 ## Resume procedure
 

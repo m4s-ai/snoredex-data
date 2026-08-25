@@ -80,8 +80,9 @@
     <ul>
       <li><strong>Legacy candidate universe.</strong> Every current row descends from one historical
       Cardmarket search captured on 2026-07-21. Cardmarket is a
-      provider, not the discovery boundary; source-first expansion is tracked in
-      <a href="https://github.com/m4s-ai/snoredex-data/issues/132">issue #132</a>.</li>
+      provider, not the discovery boundary. The bounded source-first rebuild completed under
+      <a href="https://github.com/m4s-ai/snoredex-data/issues/132">issue #132</a>; explicit source
+      and locality gaps remain.</li>
       <li><strong>Physical cards only.</strong> Online and live code cards are excluded.</li>
       <li><strong>A marketplace filter is not a print manifest.</strong> Cardmarket's language
       filter over-claims: 84 claims here are contradicted by outside
@@ -93,18 +94,20 @@
       data as <code>needs-evidence</code>, but they do not enter this table or the checklist. The
       remaining 618 claims are established within the permitted evidence granularity.</li>
       <li><strong>Contradicted is not the same as proven absent.</strong> Only
-      80 of those claims are settled — by an explicit collection-owner adjudication or a
-      complete official manifest. The other 4 are <strong>disputed</strong>: a source
+      80 of those claims are settled by explicit collection-owner adjudications after
+      review of the bounded evidence. The other 4 are <strong>disputed</strong>: a source
       disagrees and nothing has settled it. They are excluded from the checklist so that nobody
       hunts a card the evidence points away from, but they are not a claim that the card does not
       exist, and a photograph of one would overturn the row.</li>
       <li><strong>Pending means unresolved, never absent.</strong> No finish is ever marked
       unavailable because a catalogue failed to list it.</li>
-      <li><strong>Finish evidence is positive-only</strong> except under a complete official
-      manifest — currently 4 units.</li>
+      <li><strong>Finish evidence is positive-first.</strong> A complete official manifest may close
+      alternatives within its exact scope — currently 4 units
+      — and a separate owner finish decision may close a reviewed unit without introducing a finish.</li>
       <li><strong>Every &ldquo;Spanish&rdquo; row here is European Spanish.</strong> Latin-American
       Spanish is a physically distinct edition from Journey Together (2025) onward. It came into
-      scope on 2026-08-09 and nothing is recorded yet, so read no row here as covering it.</li>
+      scope on 2026-08-09; three official <code>LA</code> releases are retained as a complete
+      positive slice, with <code>xJTG</code> still an evidence gap. Read no European row as covering it.</li>
       
     </ul>
   </div>
@@ -303,15 +306,17 @@
   evidence; the marketplace's own language filter is not.</p>
   <h3>Evidence is graded, and absence is treated carefully</h3>
   <ul>
-    <li>Source strength is recorded explicitly: photographed specimen &gt; official database /
-    marketplace listing / fan wiki &gt; owner attestation.</li>
+    <li>Source strength is recorded in the generated registry: official records and inspected
+    specimens occupy the strongest tier; owner attestations, listing photographs and named
+    reference pages are supporting evidence; market datasets are weaker; the inherited Cardmarket
+    catalogue and sibling-derived attributes are not external evidence.</li>
     <li><strong>Absence is never a finding on its own.</strong> A source only counts against a claim
     once it is shown to cover that category. This rule exists because an absence argument once
     produced a false contradiction here, which had to be reverted.</li>
-    <li>Only a complete official checklist may establish that an alternative does <em>not</em>
-    exist, and only within its stated scope. Other final absence decisions are explicit
-    collection-owner adjudications after reviewing all cited claims; they are not attributed to a
-    single provider.</li>
+    <li>For language/printing claims, only an explicit collection-owner adjudication makes a final
+    absence decision after reviewing all cited evidence. Complete official scopes provide bounded
+    rationale; they are not themselves the decision authority. Finish alternatives use their own
+    closure model: a complete official checklist may close its exact scope.</li>
   </ul>
   <h3>Finish family, treatment, marking, distribution and size are separate dimensions</h3>
   <p>The collector-facing <strong>Reverse Holo</strong> family includes technical

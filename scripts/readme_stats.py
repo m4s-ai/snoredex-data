@@ -236,10 +236,12 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         f"| Evidence registry | **{source_counts['providers']} providers**, "
         f"{source_counts['evidenceRecords']} evidence records, "
         f"{source_counts['uniqueUrls']} unique URLs, and "
-        f"{source_counts['claimsAttributed']:,} attributed claims. Complete official manifests "
-        "and the separate owner-adjudication store records final cross-source absence decisions. |",
+        f"{source_counts['claimsAttributed']:,} attributed claims. Bounded source scopes provide "
+        "absence rationale; the separate owner-adjudication store records final language/printing "
+        "absence decisions. |",
         "| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact "
-        "consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |",
+        "consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull "
+        "requests. Browser and live-source checks run in the Linux release lane. |",
         f"| Site and publication | The repository is {repository_visibility}. The interactive site "
         f"is generated and usable locally; Pages deployment is {publication_state}. |",
         "| Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present "
@@ -319,8 +321,9 @@ def status_block(decisions: dict[str, Any], baseline: dict[str, Any]) -> str:
         ">",
         f"> **Data coverage:** `{baseline['meta']['baselineId']}` is a frozen historical "
         "Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. "
-        "Current totals describe only known rows descended from that baseline. The source-first "
-        "rebuild is tracked in [#132](https://github.com/m4s-ai/snoredex-data/issues/132).",
+        "Current totals describe only known rows descended from that baseline. The bounded "
+        "source-first rebuild completed under [#132](https://github.com/m4s-ai/snoredex-data/issues/132); "
+        "the completeness gate retains explicit source and locality gaps.",
     ])
 
 

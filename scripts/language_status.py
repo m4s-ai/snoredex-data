@@ -2,8 +2,8 @@
 """Attach the language verification verdict to every card in the main dataset.
 
 `cards[].languages` is what Cardmarket claims. That claim is the project's central finding
-*because it is often wrong*: 85 of 719 unit claims are refuted by an outside source, and
-`KSS 26` advertises 17 languages for an expansion printed in 7.
+*because it is often wrong*: outside sources refute some unit claims, and `KSS 26` is the worked
+example of a marketplace filter exceeding the expansion's printed language set.
 
 Until now the refutation lived only in `verification/units.json` and `CONTRADICTED.json`, so
 anyone loading the main dataset got the unfiltered marketplace claim. The caveat was documented
@@ -22,7 +22,7 @@ A refutation is not automatically a settled absence, and the two used to be indi
 here (#66). `languagesContradicted` stays as it was — the union, so existing consumers are
 unaffected — and the split travels beside it:
 
-    languagesNotPrinted    an owner adjudication or a complete official manifest settled it
+    languagesNotPrinted    a collection-owner adjudication settled it
     languagesDisputed      a source disagrees and nothing has settled it
 
 The application status is read from `verification/evidence_semantics.json`, the one generated

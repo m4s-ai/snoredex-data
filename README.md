@@ -1,9 +1,9 @@
 <!-- doc: role=public entry point for using the data; stage=public -->
 # Snoredex Data
 
-**A frozen 2026-07-21 Cardmarket-derived Snorlax candidate universe, with each inherited language
-and finish claim re-checked against a source outside Cardmarket — not a complete all-locality
-catalogue.**
+**A frozen 2026-07-21 Cardmarket-derived Snorlax candidate universe whose inherited language claims
+were re-checked outside Cardmarket, plus a separately sourced finish layer — not a complete
+all-locality catalogue.**
 
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
@@ -20,7 +20,7 @@ catalogue.**
 > [`publication-decisions.json`](publication-decisions.json), [`LICENSE.md`](LICENSE.md), and
 > [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md).
 >
-> **Data coverage:** `cardmarket-search-2026-07-21` is a frozen historical Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. Current totals describe only known rows descended from that baseline. The source-first rebuild is tracked in [#132](https://github.com/m4s-ai/snoredex-data/issues/132).
+> **Data coverage:** `cardmarket-search-2026-07-21` is a frozen historical Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. Current totals describe only known rows descended from that baseline. The bounded source-first rebuild completed under [#132](https://github.com/m4s-ai/snoredex-data/issues/132); the completeness gate retains explicit source and locality gaps.
 <!-- /generated:status -->
 
 ## Why this exists
@@ -31,10 +31,11 @@ read it as the second question. Ask Cardmarket about `KSS 26` (XY Kalos Starter 
 global language list entirely. Build a collection goal from that and you will hunt cards that were
 never made.
 
-So every language and finish claim in this repository is re-derived from evidence *outside*
-Cardmarket — an official database, a photographed card, a fan wiki, a seller's photo of the actual
-specimen — and each piece of evidence is named, ranked and dated. Where the outside source
-disagrees with the marketplace, both survive: the raw claim, and the verdict beside it. The
+So every inherited language claim is re-checked against evidence *outside* Cardmarket — an official
+database, a photographed card, a fan wiki, or a seller's photo of the actual specimen — and each
+piece of evidence is named, ranked and dated. Finish evidence is tracked in a separate
+positive-evidence layer; marketplace-only finish claims remain labelled as such. Where an outside
+source disagrees with the marketplace, both survive: the raw claim, and the verdict beside it. The
 over-claiming is itself a finding, so it is preserved rather than quietly corrected away.
 
 Two rules hold everywhere in the data, the tooling and the site copy:
@@ -109,7 +110,8 @@ python scripts/regen.py --check             # canonical deterministic PR gate
 The reusable release workflow adds the explicit live-source, browser, and publication checks;
 those are environment gates, not a second generator list. Read [`CLAUDE.md`](CLAUDE.md) for the
 working rules,
-[`HANDOVER.md`](HANDOVER.md) for the current backlog, and
+[`HANDOVER.md`](HANDOVER.md) for cold-start orientation and the repository map, and the
+[issue tracker](https://github.com/m4s-ai/snoredex-data/issues) for current priorities. Read
 [`verification/RESUME.md`](verification/RESUME.md) before touching a single confirmation or
 contradiction — it records the source techniques and the dead ends already paid for here.
 
@@ -125,8 +127,8 @@ Current-known status snapshot: **2026-08-25**. Its candidate denominator is the 
 | Evidence-safe application status | **618 established**, **17 needs evidence**, **80 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **828 items** across 174 cards and 15 languages: 669 documented printings plus 159 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 336 externally confirmed, 101 marketplace-only positives, 125 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 221 units. |
-| Evidence registry | **24 providers**, 902 evidence records, 895 unique URLs, and 2,805 attributed claims. Complete official manifests and the separate owner-adjudication store records final cross-source absence decisions. |
-| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and browser regressions run on Ubuntu and Windows for pull requests. |
+| Evidence registry | **24 providers**, 902 evidence records, 895 unique URLs, and 2,805 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
+| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. Browser and live-source checks run in the Linux release lane. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
 | AI transparency | Development used AI in a human-directed copilot workflow. Scope and safeguards are declared in [`AI-DECLARATION.md`](AI-DECLARATION.md). |
@@ -184,10 +186,11 @@ prose — and only a *cited* specimen may claim specimen authority (check `S14`)
 this language?"; `finish_units.json` answers "which finishes exist for this set number and
 language?" They have separate backlogs, and a confirmed language claim never implies a finish.
 
-**Changes arrive as code, not edits.** Findings are written as a new Python pass under
-`verification/`, then the generators and both check suites are re-run;
-`units.json` and `finish_units.json` are never hand-edited. [`CLAUDE.md`](CLAUDE.md) has the
-required command order.
+**Changes arrive through reviewed inputs and generators, not edits to state stores.** Routine
+physical evidence uses the canonical observation-manifest importer. A new Python pass under
+`verification/` is reserved for migration, bulk repair, or a data-model change. Then the generators
+and checks are re-run; `units.json` and `finish_units.json` are never hand-edited.
+[`CLAUDE.md`](CLAUDE.md) has the required command order.
 
 ## How the repository is built
 
@@ -206,8 +209,9 @@ any rebuild.
 [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) freezes that candidate
 universe with its source commit, file hashes, counts and every inherited card/unit membership. It
 never expands with the current catalogue. Cardmarket is therefore one historical provider, not the
-discovery boundary; the source-first rebuild is tracked in
-[#132](https://github.com/m4s-ai/snoredex-data/issues/132).
+discovery boundary. The bounded source-first rebuild completed under
+[#132](https://github.com/m4s-ai/snoredex-data/issues/132); its terminal result accounts for the
+reviewed inputs and keeps remaining source/locality gaps explicit.
 
 **Everything downstream regenerates from what is committed.** The executable pipeline source of
 truth is [`scripts/regen.py`](scripts/regen.py), which owns the ordered `REGEN`, `CHECK`, and
@@ -237,17 +241,20 @@ workflow run and deploys the already verified artifact without a second projecti
   step to the card is positively supported. Those rows are `languagesNeedsEvidence`, are also in
   `languagesUnresolved`, and do not enter chronological or checklist outputs.
 - **A contradicted language is not automatically a proven absence.** `languagesContradicted`
-  splits into `languagesNotPrinted` — where an explicit owner adjudication or a complete official
-  manifest settled the question — and `languagesDisputed`, where a source disagrees and nothing
-  has settled it. **80 are settled; 4 are disputed.** Both are excluded from the checklist, so
+  splits into `languagesNotPrinted` — where an explicit collection-owner adjudication settled the
+  question after reviewing the bounded evidence — and `languagesDisputed`, where a source disagrees
+  and nothing has settled it. Current counts are in the generated status block above. Both are
+  excluded from the checklist, so
   that nobody is sent hunting a printing the evidence points away from, but only the first is a
   claim that the card does not exist. A photograph would overturn a disputed row.
 - **Every "Spanish" claim here means European Spanish.** From Journey Together (2025), LATAM-ES is
   a physically distinct edition for regular sets — different attack translations, set name and set
   code (specimen-verified on `SVP 184`). Cardmarket does not carry it, so it is absent from this
   legacy candidate universe; that absence is not evidence that the printing does not exist.
-  LATAM-ES came **into scope on 2026-08-09** as its own locality and no rows are recorded yet —
-  the discovery work is [#139](https://github.com/m4s-ai/snoredex-data/issues/139).
+  LATAM-ES came **into scope on 2026-08-09** as its own locality. The completed #139 discovery work
+  retains three official `LA` releases (`JTG LA 117/159`, `POR LA 063/088`, and `SVP LA 184`) as a
+  complete positive slice; `xJTG` remains an explicit evidence gap, so this is not a complete
+  historical catalogue.
 - **`cardKey` groups the same *card*, not the same *artwork*.** It is Cardmarket's own grouping by
   card name plus attack names, so a reprint with brand-new art shares the key. Useful — it is how
   the re-illustrated reprints were found — but never read it as art identity.
@@ -286,7 +293,8 @@ workflow run and deploys the already verified artifact without a second projecti
 Finish availability is modelled independently of Cardmarket products, keyed by set number ×
 language. Because upstream catalogues are incomplete, it is deliberately a **positive-evidence
 model**: an unlisted finish stays `pending` rather than being marked unavailable, and only a
-complete official manifest — which a handful of English units have — may say a finish is absent.
+complete official manifest may close alternatives within its exact scope. A separate
+owner-adjudicated finish decision may also close a unit after review, but never introduces a finish.
 
 <!-- generated:finish-coverage — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Known available finish | Set-number-language units |
@@ -317,10 +325,11 @@ the product/finish split is for.
 
 [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) has the evidence ladder and the
 confirmed Prize Pack, promo, stamped, deck and jumbo cases;
-[`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) is what is still queued. Run
-`python scripts/finishes.py` after
-rebuilding the main dataset; it caches TCGdex responses under the gitignored
-`verification/cache/finish-tcgdex/` and reattaches per-product summaries to `snorlax_cards.json`.
+[`verification/FINISH_REVIEW.csv`](verification/FINISH_REVIEW.csv) is what is still queued. Normal
+regeneration runs through `python scripts/regen.py` and reads the committed TCGdex snapshot offline.
+Refreshing that snapshot is an explicit review flow: stage with
+`python scripts/finishes.py --refresh`, accept the exact staged candidate with
+`python scripts/finishes.py --refresh --accept-refresh`, then regenerate.
 
 ## Findings
 
@@ -347,7 +356,7 @@ All paths are relative to the repository root.
 | [`scripts/`](scripts/) | The generators — data, finish model, checklist, chronology, issue templates, site and publication artifact. |
 | [`site/`](site/) | Source CSS and JavaScript for the generated site. |
 | [`CLAUDE.md`](CLAUDE.md) · [`AGENTS.md`](AGENTS.md) | Working rules for an agent: non-negotiables, data-model traps, command order. |
-| [`HANDOVER.md`](HANDOVER.md) | Cold-start guide and prioritised backlog. |
+| [`HANDOVER.md`](HANDOVER.md) | Cold-start guide and repository map; priorities live in the issue tracker. |
 | [`verification/RESUME.md`](verification/RESUME.md) | Verification playbook — source techniques, corrections, dead ends. |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a correction and how it is graded. |
 | [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md) | Ordered steps to take the site public, and what each approval attests. |

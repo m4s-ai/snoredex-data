@@ -38,45 +38,43 @@ The useful status split is:
   `source_absence_supported` field identifies whether this exact source URL is in one. Provider
   authority alone is never enough.
 
-`exists` is not one thing, and two columns say which kind it is (#137). `evidence_granularity`
+`exists` is not one thing, and two columns say which kind it is. `evidence_granularity`
 records what the evidence was actually about, and `evidence_inference` records whether the step
 from that evidence to this card holds:
 
-| granularity | inference | rows | what it means |
-|---|---|---:|---|
-| `specimen-or-card` | — | 534 | a record about this card in this language |
-| `product-or-set` | `carries` | 83 | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
-| `product-or-set` | `does-not-carry` | **17** | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached; application status is `needs-evidence` |
-| `product-or-set` | `needs-set-size` | 0 | was: undecidable without a printed set size. The set database records those sizes now (#146), so run membership is computed rather than inferred from a rarity word |
-| `sibling-derived` | — | 0 | the evidence of a neighbouring unit; application status is `needs-evidence` |
+| granularity | inference | what it means |
+|---|---|---|
+| `specimen-or-card` | — | a record about this card in this language |
+| `product-or-set` | `carries` | the card is inside the set's numbered run, or the cited source lists it in a closed card list, so the language release reaches it |
+| `product-or-set` | `does-not-carry` | a container-level statement about a promo, deck-fixed or secret-numbered card that no card list reached; application status is `needs-evidence` |
+| `product-or-set` | `needs-set-size` | undecidable without a printed set size; the state remains available for sets whose denominator has not been recorded |
+| `sibling-derived` | — | the evidence of a neighbouring unit; application status is `needs-evidence` |
 
-Applications may use `application_status='exists'` directly: all 17 unsupported confirmations are
-now `needs-evidence`, while `repository_verdict='confirmed'` and the original observation remain
-unchanged. The 17 product/set rows are not wrong — they are unproven at this granularity, and
-unresolved semantics apply: not yet established, never proven absent. Fourteen cite one source, the
-cross-language expansion index, which carries no card list at all, for cards no locale catalogue
-here indexes; three are promo printings, whose collector number is the number of the run card they
-reprint, so the set's printed size cannot reach them. The rows whose page did carry a list, and the
-rows the publisher's own locale databases answer, have been recorded as card-level.
+Applications may use `application_status='exists'` directly. Unsupported confirmations remain
+`needs-evidence`, while `repository_verdict='confirmed'` and the original observation remain
+unchanged. Those product/set rows are not wrong — they are unproven at this granularity, and
+unresolved semantics apply: not yet established, never proven absent. Typical cases cite a
+cross-language expansion index without a card list, or a promo whose reused collector number cannot
+be reached from the base set's printed size. The rows whose page did carry a list, and the rows the
+publisher's own locale databases answer, are recorded as card-level.
 
 Which verdict each granularity may support on its own is now declared rather than implied, in
 `verdictTransitions` in `verification/evidence_semantics.json`. In short: a card-level record
-establishes a printing, and may deny one only inside a coverage edge proven exhaustive; a
+establishes a printing; a bounded exhaustive coverage edge can supply absence rationale but does
+not make the final application decision. A
 product-level statement reaches the card only when the step above holds, and never denies one; an
 era argument and a sibling's record establish nothing on their own. An owner adjudication settles a
 contradiction whatever sits beneath it, because it is the only mechanism that can settle an absence.
-`verdictsBeyondTheirGranularity` counts the raw rows outside that rule — **44** today, held by check
-`N19`. The raw observations remain historical inputs: their application statuses are 17
-`needs-evidence` confirmations and 27 `disputed` contradictions, so none materializes an existence
-or absence claim.
+`verdictsBeyondTheirGranularity` in `verification/evidence_semantics.json` reports the current raw
+rows outside that rule, held by check `N19`. The observations remain historical inputs, so none
+materializes an existence or absence claim beyond its permitted transition.
 
 `needs-set-size` is a third answer, not a softer `does-not-carry`: it is the report declining to
-classify. It stands at 0 because the set database now records `printedSetSize` — the denominator
-printed beside the collector number — so a card is inside the numbered run when its number is
-within that size, in its own numbering. That fact outranks the rarity word in both directions,
-which is what Cardmarket's era-dependent `Ultra Rare` needed: the same word covers the modern Full
-Art, secret in some locales, and the EX-era `ex` and DP-era LV.X cards numbered inside the set.
-The state is kept because a set whose size is not yet recorded still lands there.
+classify. When `printedSetSize` records the denominator printed beside the collector number, a card
+is inside the numbered run when its number is within that size, in its own numbering. That fact
+outranks the rarity word in both directions, which is what Cardmarket's era-dependent `Ultra Rare`
+needed: the same word covers the modern Full Art, secret in some locales, and the EX-era `ex` and
+DP-era LV.X cards numbered inside the set. The state remains available when a set size is missing.
 
 The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated`, none
 is source-derived, which is rule 4 visible in the data. Every `disputed` row is
@@ -120,7 +118,8 @@ are normal columns.
 ## Collection ownership stays separate
 
 [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) is a blank tracker with all
-838 checklist ids and `have=0`. Copy it, or create a fresh tracker:
+current checklist ids and `have=0`. It is regenerated with the checklist, so the exact count lives
+in the generated current-state outputs. Copy it, or create a fresh tracker:
 
 ```console
 python scripts/tracker.py init

@@ -12,8 +12,9 @@ The current data is a **legacy Cardmarket-derived candidate universe** captured 
 plus an independent **source-verification layer**: for each inherited card × language × variant,
 does a source *outside Cardmarket* confirm that printing actually exists? It is not a complete
 all-locality catalogue; the immutable boundary is recorded in
-[`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json), and source-first expansion is
-tracked in #132.
+[`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json). The bounded source-first
+rebuild completed under #132; its terminal state accounts for the reviewed inputs while retaining
+explicit source and locality gaps rather than claiming discovery completeness.
 
 The layer exists because Cardmarket's language filter reports **marketplace availability, not a
 print manifest**, and it over-claims. The worked example is `KSS 26`: advertised in 17 languages,
@@ -26,7 +27,7 @@ specimens. Owner statements are authoritative but are still graded explicitly as
 
 | Document | Read it before |
 |---|---|
-| [`HANDOVER.md`](HANDOVER.md) | anything — it is the cold-start entry point and the current backlog |
+| [`HANDOVER.md`](HANDOVER.md) | anything — it is the cold-start entry point and repository map; priorities live in the issue tracker |
 | [`verification/RESUME.md`](verification/RESUME.md) | adding or changing **any** confirmation or contradiction |
 | [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) | touching finishes, foil patterns or stamps |
 | [`README.md`](README.md) | *using* the data — the caveats there are load-bearing |
@@ -154,8 +155,9 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   worked example), `distribution-promo` (prerelease, Staff, retailer, Pokémon Center marks —
   these do **not** imply a reverse holo).
 - **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
-  outside source disagrees with Cardmarket. Only two things settle it: a complete official manifest
-  within its scope, or an explicit owner adjudication. Everything else is **disputed** — the current
+  outside source disagrees with Cardmarket. Only an explicit collection-owner adjudication settles
+  a language/printing absence; exhaustive source scopes may support its bounded rationale but never
+  make that final decision. Everything else is **disputed** — the current
   settled/disputed counts are generated figures, read them from `verification/evidence_semantics.json`
   (or the README), never from this file — and `DATABASE.md` is right that an application must not
   read disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every
@@ -170,9 +172,10 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   physically distinct editions, and **both are in scope since 2026-08-09** (owner decision D3 in
   [`ADR-0001`](verification/ADR-0001-locality-aware-print-identity.md)). Every existing "Spanish"
   confirmation means the European print and nothing else: Cardmarket collapses both editions into
-  one filter and does not carry LATAM at all, so no LATAM row can come from the harvest. The plan
-  is already written — `RESUME.md` has the source, the scope and the four in-scope cards — and the
-  rows are #139. Never read a European confirmation as covering LATAM.
+  one filter and does not carry LATAM at all, so no LATAM row can come from the harvest. The #139
+  matrix is reconciled, and three official `LA` releases are now retained as a complete positive
+  slice; `xJTG` remains an explicit evidence gap. Never read a European confirmation as covering
+  LATAM or a positive slice as historically exhaustive.
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in
   `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. For

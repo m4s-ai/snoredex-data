@@ -4,22 +4,28 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+from urllib.parse import unquote
+
+from review_findings import documentation_inventory
 
 
 ROOT = Path(__file__).resolve().parent.parent
-ACTIVE_DOCS = (
-    ROOT / "README.md",
-    ROOT / "CLAUDE.md",
-    ROOT / "HANDOVER.md",
-    ROOT / "WORKFLOW-MAP.md",
+ACTIVE_MARKDOWN = tuple(
+    ROOT / relative
+    for relative, document in documentation_inventory().items()
+    if document["stage"] != "history"
+) + (ROOT / "llms.txt", ROOT / "LICENSES" / "README.md")
+WORKFLOWS = (
     ROOT / ".github" / "workflows" / "release-gate.yml",
     ROOT / ".github" / "workflows" / "pages.yml",
 )
 SCRIPT_REF = re.compile(r"(?<![\w/])((?:scripts|verification)/[\w./-]+\.py)\b")
+MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+RUNTIME_LINKS = {(ROOT / "llms.txt", "collector_deployment.json")}
 
 
 def main() -> int:
-    texts = {path: path.read_text(encoding="utf-8") for path in ACTIVE_DOCS}
+    texts = {path: path.read_text(encoding="utf-8") for path in ACTIVE_MARKDOWN + WORKFLOWS}
 
     missing: set[str] = set()
     for path, text in texts.items():
@@ -29,12 +35,34 @@ def main() -> int:
     if missing:
         raise SystemExit("active documentation references missing scripts:\n" + "\n".join(sorted(missing)))
 
+    dead_links: set[str] = set()
+    for path in ACTIVE_MARKDOWN:
+        for raw_target in MARKDOWN_LINK.findall(texts[path]):
+            target = raw_target.strip().strip("<>").split(maxsplit=1)[0]
+            if target.startswith(("#", "http://", "https://", "mailto:", "data:")):
+                continue
+            relative = unquote(target.split("#", 1)[0].split("?", 1)[0])
+            if (
+                relative
+                and not (path.parent / relative).exists()
+                and (path, relative) not in RUNTIME_LINKS
+            ):
+                dead_links.add(f"{path.relative_to(ROOT)} -> {target}")
+    if dead_links:
+        raise SystemExit("active documentation has dead relative links:\n" + "\n".join(sorted(dead_links)))
+
     workflow_map = texts[ROOT / "WORKFLOW-MAP.md"]
     assert "scripts/regen.py` owns the ordered" in workflow_map
     assert "### D. Manual Pages deployment lane" in workflow_map
     assert "scripts/regen.py" in texts[ROOT / "README.md"]
     assert "WORKFLOW-MAP.md" in texts[ROOT / "CLAUDE.md"]
     assert "scripts/regen.py" in texts[ROOT / "HANDOVER.md"]
+    active_text = "\n".join(texts[path] for path in ACTIVE_MARKDOWN)
+    assert "prioritised backlog" not in active_text
+    assert "current backlog" not in active_text
+    assert "source-first rebuild is tracked" not in active_text
+    assert "no rows are recorded yet" not in active_text.lower()
+    assert "verification/test_evidence_application.py" not in workflow_map
 
     pages = texts[ROOT / ".github" / "workflows" / "pages.yml"]
     lane = workflow_map.split("### D. Manual Pages deployment lane", 1)[1].split("### E.", 1)[0]
@@ -46,7 +74,10 @@ def main() -> int:
     assert "uses: ./.github/workflows/release-gate.yml" in pages
     assert "audit_evidence.py" not in "\n".join(texts.values())
 
-    print(f"pipeline documentation contract passed: {len(ACTIVE_DOCS)} active files, {len(lane_commands)} Pages commands")
+    print(
+        f"pipeline documentation contract passed: {len(ACTIVE_MARKDOWN)} active documents, "
+        f"{len(lane_commands)} Pages commands"
+    )
     return 0
 
 
