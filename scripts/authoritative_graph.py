@@ -1045,6 +1045,15 @@ def validate(
         expected_equivalence_by_release[expected["fromId"]].append(
             (assertion_id, expected.get("toId"))
         )
+    for release_id, expected in expected_equivalence_by_release.items():
+        release = releases.get(release_id)
+        if not release:
+            continue
+        if release.get("workMappingState") != "mapped-by-explicit-equivalence":
+            errors.append(
+                "re-keyed release must retain mapped-by-explicit-equivalence state: "
+                f"{release_id}"
+            )
     for release_id, release in releases.items():
         if release.get("workMappingState") != "mapped-by-explicit-equivalence":
             continue

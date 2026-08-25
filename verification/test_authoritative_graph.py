@@ -179,6 +179,36 @@ def main() -> None:
         or "mapped-by-explicit-equivalence release Work is not canonical" in error
         for error in validate(tampered)
     )
+    # A canonical re-key cannot silently fall back to the ordinary mapped
+    # state while changing the release's Work relation.
+    tampered = deepcopy(graph)
+    stateful_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"]["workMappingState"] == "mapped-by-explicit-equivalence"
+    )
+    current_work_id = next(
+        edge["toId"] for edge in tampered["edges"]
+        if edge["fromType"] == "card-release"
+        and edge["fromId"] == stateful_release["entityId"]
+        and edge["relation"] == "implements"
+    )
+    alternate_work = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "work" and row["entityId"] != current_work_id
+    )
+    stateful_release["payload"]["workMappingState"] = "mapped"
+    stateful_release["payload"]["work"] = alternate_work["payload"]["cardKey"]
+    next(
+        edge for edge in tampered["edges"]
+        if edge["fromType"] == "card-release"
+        and edge["fromId"] == stateful_release["entityId"]
+        and edge["relation"] == "implements"
+    )["toId"] = alternate_work["entityId"]
+    assert any(
+        "re-keyed release must retain mapped-by-explicit-equivalence state" in error
+        for error in validate(tampered)
+    )
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.
