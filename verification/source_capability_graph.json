@@ -11,18 +11,19 @@
       "Authority tier and card-existence capability never imply finish capability or absence capability.",
       "A grading registry, collector registry, marketplace image, owner attestation, or inspected specimen may establish only the concrete positive record it identifies.",
       "Every retained observation keeps its query URL and parameters, retrieval date, source record, and a generated SHA-256 content hash.",
-      "Unavailable, incomplete, rate-limited, and browser-blocked surfaces remain visible graph nodes; their failure state must not be converted into a negative verdict."
+      "Unavailable, incomplete, rate-limited, and browser-blocked surfaces remain visible graph nodes; their failure state must not be converted into a negative verdict.",
+      "PokéCottage rows are discovery leads only: independently verify every candidate and never transfer finish, stamp, distribution, language/locality, date or completeness across Western languages."
     ],
     "counts": {
-      "providers": 24,
-      "surfaces": 28,
-      "coverageEdges": 29,
+      "providers": 25,
+      "surfaces": 29,
+      "coverageEdges": 30,
       "absenceEdges": 3,
-      "observations": 31,
+      "observations": 32,
       "resolvedVerdictSources": 902
     },
     "surfaceStates": {
-      "active": 11,
+      "active": 12,
       "blocked-by-browser": 3,
       "incomplete": 8,
       "internal": 1,
@@ -101,6 +102,13 @@
       "authorityTier": 3,
       "licenseOrTerms": "Site terms.",
       "rawRetention": "Retain captured result rows, query URL, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "pokecottage",
+      "operator": "PokéCottage",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; fan-made collector content.",
+      "rawRetention": "Retain the exact result rows or page section, canonical URL, retrieval date and SHA-256; keep every claim as a discovery lead until independently verified."
     },
     {
       "providerId": "snkrdunk",
@@ -1225,6 +1233,42 @@
       },
       "coverageEdgeIds": [
         "cardmarket-listing-photo-positive"
+      ]
+    },
+    {
+      "surfaceId": "pokecottage-master-lists",
+      "providerId": "pokecottage",
+      "label": "PokéCottage fan-made master-set and Pokémon checklists",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-25",
+      "freshnessPolicy": "Inspect the Snorlax master list and matching set guide whenever a newly announced or released set contains a Snorlax card; retain only concrete positive rows and independently verify every candidate before graph admission.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokecottage.com/pokemon-master-sets/snorlax",
+        "parameters": [
+          "Pokémon=Snorlax",
+          "matching set guide or set card list"
+        ],
+        "pagination": "The editorial tables, toggles and downloadable lists may change; retain exact positive rows but never infer completeness from missing rows.",
+        "expectedIdentifiers": [
+          "card name",
+          "collector number",
+          "set name",
+          "listed variant",
+          "listed language"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "editorial variant labels retained only as discovery candidates, never confirmation",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "pokecottage-snorlax-discovery-positive"
       ]
     }
   ],
@@ -2671,6 +2715,64 @@
         "zeroResultMeans": "unknown",
         "challenge": "A retained seller photograph cannot prove that no other language, edition or treatment exists."
       }
+    },
+    {
+      "edgeId": "pokecottage-snorlax-discovery-positive",
+      "providerId": "pokecottage",
+      "surfaceId": "pokecottage-master-lists",
+      "coverage": {
+        "localities": [
+          "WEST",
+          "JP",
+          "CN"
+        ],
+        "languages": [
+          "English",
+          "Japanese",
+          "S-Chinese"
+        ],
+        "scripts": [
+          "Latn",
+          "Jpan",
+          "Hans"
+        ],
+        "productCategories": [
+          "card",
+          "promo",
+          "set"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "positive rows actually retained from the current Snorlax master list or matching set guide"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "discovery-lead",
+        "card-candidate",
+        "promo-candidate",
+        "variant-candidate"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "The fan-made list is not a bounded publisher manifest, and omissions or editorial labels cannot establish a claim or absence."
+      },
+      "knownPositiveObservationId": "obs-pokecottage-snorlax-master-list",
+      "boundary": {
+        "outsideScope": [
+          "confirmation or contradiction",
+          "release dates",
+          "finish or stamp verification",
+          "promo distribution",
+          "language or physical locality transfer",
+          "completeness or absence"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A PokeCottage row can identify what to investigate, but known date errors and absent row-level provenance require independent official or specimen evidence before any graph claim."
+      }
     }
   ],
   "observations": [
@@ -3290,6 +3392,42 @@
         ],
         "retrievedAt": "2026-07-22",
         "usageCount": 2
+      }
+    },
+    {
+      "observationId": "obs-pokecottage-snorlax-master-list",
+      "surfaceId": "pokecottage-master-lists",
+      "kind": "known-positive",
+      "queryUrl": "https://pokecottage.com/pokemon-master-sets/snorlax",
+      "queryParameters": {
+        "pokemon": "Snorlax"
+      },
+      "retrievedAt": "2026-08-25",
+      "expectedIdentifiers": [
+        "Snorlax",
+        "Jungle",
+        "27",
+        "Standard",
+        "English"
+      ],
+      "validatesEdges": [
+        "pokecottage-snorlax-discovery-positive"
+      ],
+      "outcome": "The page exposes concrete Snorlax rows suitable for candidate discovery; it does not independently confirm their dates, variants, distribution, locality or completeness.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:87a9b7f6763b65ff4f424a39900ee10b8d7034e940e0ec00bd5a20e858a41432",
+      "rawRecord": {
+        "page": "Snorlax Master Set List",
+        "examplePositiveRow": {
+          "cardNumber": "27",
+          "cardName": "Snorlax",
+          "set": "Jungle",
+          "listedVariant": "Standard",
+          "listedLanguage": "English"
+        },
+        "recordClass": "fan-made-discovery-lead",
+        "confirmationCapability": false,
+        "absenceCapability": false
       }
     },
     {

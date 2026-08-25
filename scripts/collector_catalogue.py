@@ -873,6 +873,17 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             if photograph:
                 image_path = "verification/specimens/" + photograph
                 image_scope = "exact-printing"
+        if physical and not image_path:
+            specimen_id = next(
+                (
+                    value for value in physical.get("specimenIds") or []
+                    if specimens.get(value, {}).get("photograph")
+                ),
+                None,
+            )
+            if specimen_id:
+                image_path = "verification/specimens/" + specimens[specimen_id]["photograph"]
+                image_scope = "exact-printing"
         image_asset, actual_scope = register_asset(
             image_path,
             image_scope,

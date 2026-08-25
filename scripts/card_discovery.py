@@ -786,6 +786,7 @@ def acquisition_contract(contract: dict[str, Any]) -> dict[str, Any]:
     value["meta"].pop("coverageVersion")
     value["meta"].pop("reviewedAt")
     value["explicitMappings"] = []
+    value["gaps"] = []
     return value
 
 
