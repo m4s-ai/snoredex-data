@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-card-discovery-contract",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.17.0",
+    "coverageVersion": "1.18.0",
     "reviewedAt": "2026-08-25",
     "policies": [
       "Discovery starts from provider-native localized name queries and never from snorlax_cards.json, units.json, or the legacy Cardmarket candidate list.",
@@ -14,7 +14,7 @@
       "A language-only locale or marketplace geography remains needs-evidence until a positive printed or official physical-locality discriminator exists.",
       "A set-language index remains in set discovery and may support evidence application separately; it may not synthesize provider-native card details from repository units.",
       "A retained issue evidence scan may replay only an explicit reviewed positive-row whitelist; ambiguous, missing-number, and omitted rows remain unknown and never carry absence.",
-      "PokéCottage is a discovery-only collector checklist: its rows may trigger research, but every card, promo, variant and date must be independently verified before graph admission, and no finish, stamp, distribution, language/locality, date or completeness transfers across Western languages."
+      "An exact retained PokéCottage row is tier-3 positive confirmation for the card, set, promo, date, artist or named variant it states. When an already identified Western release is demonstrably equivalent, shared facts may corroborate it with the equivalence basis retained; omissions and unstated alternatives never establish absence or completeness."
     ]
   },
   "rawRecordContract": {
@@ -668,12 +668,12 @@
     },
     {
       "gapId": "pokecottage-new-snorlax-set-review",
-      "track": "PokéCottage Snorlax set, promo and variant discovery",
+      "track": "PokéCottage Snorlax set, promo and variant confirmation",
       "providerId": "pokecottage",
       "surfaceId": "pokecottage-master-lists",
       "terminalState": "needs-evidence",
-      "reason": "PokéCottage exposes useful fan-made Snorlax and set checklists, but it has no active retained adapter or row-level provenance and has shown date errors; its rows therefore remain discovery leads rather than confirmation evidence.",
-      "retryCondition": "Whenever a newly announced or released set contains Snorlax, inspect the PokéCottage Snorlax master list and matching set guide for card, promo and variant leads; retain exact positive rows, then independently verify each with an official page, checklist, product record or identified specimen before graph admission. Never transfer finish, stamps, promo distribution, language/locality, release dates or completeness to another Western language."
+      "reason": "PokéCottage is a tier-3 positive confirmation source, but no active retained adapter currently snapshots its editable structured rows; every newly relevant row therefore requires an explicit retained source record before use.",
+      "retryCondition": "Whenever a newly announced or released set contains Snorlax, inspect the PokéCottage Snorlax master list and matching set guide and retain the exact positive card, set, promo or named-variant rows. Apply each stated fact as tier-3 confirmation. For another Western language, retain the basis that identifies the matching release before carrying a shared fact; omissions and unstated alternatives remain unknown."
     }
   ]
 }

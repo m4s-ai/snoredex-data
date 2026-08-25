@@ -12,7 +12,7 @@
       "A grading registry, collector registry, marketplace image, owner attestation, or inspected specimen may establish only the concrete positive record it identifies.",
       "Every retained observation keeps its query URL and parameters, retrieval date, source record, and a generated SHA-256 content hash.",
       "Unavailable, incomplete, rate-limited, and browser-blocked surfaces remain visible graph nodes; their failure state must not be converted into a negative verdict.",
-      "PokéCottage rows are discovery leads only: independently verify every candidate and never transfer finish, stamp, distribution, language/locality, date or completeness across Western languages."
+      "An exact retained PokéCottage row is tier-3 positive confirmation for the facts it states. Facts demonstrably shared by an already identified matching Western release may corroborate that release when the equivalence basis is retained; omissions and unstated alternatives never establish absence or completeness."
     ],
     "counts": {
       "providers": 25,
@@ -108,7 +108,7 @@
       "operator": "PokéCottage",
       "authorityTier": 3,
       "licenseOrTerms": "Site terms; fan-made collector content.",
-      "rawRetention": "Retain the exact result rows or page section, canonical URL, retrieval date and SHA-256; keep every claim as a discovery lead until independently verified."
+      "rawRetention": "Retain the exact structured row or page section, canonical page and data URLs, retrieval date and SHA-256; each stated fact remains attributable to that row."
     },
     {
       "providerId": "snkrdunk",
@@ -1244,31 +1244,35 @@
       "accessMode": "scriptable",
       "adapterState": "planned",
       "lastCheckedAt": "2026-08-25",
-      "freshnessPolicy": "Inspect the Snorlax master list and matching set guide whenever a newly announced or released set contains a Snorlax card; retain only concrete positive rows and independently verify every candidate before graph admission.",
+      "freshnessPolicy": "Inspect the Snorlax master list and matching set guide whenever a newly announced or released set contains a Snorlax card; retain each concrete positive row before using it as tier-3 confirmation.",
       "query": {
         "method": "GET",
-        "endpoint": "https://pokecottage.com/pokemon-master-sets/snorlax",
+        "endpoint": "https://pokecottagecdn.com/mastersets/data/143-snorlax-data.js",
         "parameters": [
           "Pokémon=Snorlax",
           "matching set guide or set card list"
         ],
-        "pagination": "The editorial tables, toggles and downloadable lists may change; retain exact positive rows but never infer completeness from missing rows.",
+        "pagination": "One structured master-set data script currently supplies the page widgets; retain its exact positive rows and hash, but never infer completeness from a missing row.",
         "expectedIdentifiers": [
           "card name",
           "collector number",
           "set name",
           "listed variant",
-          "listed language"
+          "region",
+          "release date",
+          "artist"
         ]
       },
       "finishCapability": {
-        "mode": "none",
-        "vocabulary": [],
-        "publicationForm": "editorial variant labels retained only as discovery candidates, never confirmation",
+        "mode": "named-variety",
+        "vocabulary": [
+          "source-native variant name"
+        ],
+        "publicationForm": "structured master-set row with a positive variant label",
         "closedWithinScope": false
       },
       "coverageEdgeIds": [
-        "pokecottage-snorlax-discovery-positive"
+        "pokecottage-snorlax-positive"
       ]
     }
   ],
@@ -2717,7 +2721,7 @@
       }
     },
     {
-      "edgeId": "pokecottage-snorlax-discovery-positive",
+      "edgeId": "pokecottage-snorlax-positive",
       "providerId": "pokecottage",
       "surfaceId": "pokecottage-master-lists",
       "coverage": {
@@ -2748,30 +2752,35 @@
         }
       },
       "positiveEvidenceCapabilities": [
-        "discovery-lead",
-        "card-candidate",
-        "promo-candidate",
-        "variant-candidate"
+        "language",
+        "card-existence",
+        "set-existence",
+        "set-membership",
+        "product",
+        "finish",
+        "named-variety",
+        "date",
+        "artist",
+        "rarity",
+        "cross-language-equivalence"
       ],
       "exhaustive": false,
       "absenceCapability": {
         "enabled": false,
         "dimensions": [],
         "exactScopes": [],
-        "rationale": "The fan-made list is not a bounded publisher manifest, and omissions or editorial labels cannot establish a claim or absence."
+        "rationale": "PokéCottage can positively confirm an exact stated row, but its editable collector checklist does not let an omission or unstated alternative establish absence."
       },
       "knownPositiveObservationId": "obs-pokecottage-snorlax-master-list",
       "boundary": {
         "outsideScope": [
-          "confirmation or contradiction",
-          "release dates",
-          "finish or stamp verification",
-          "promo distribution",
-          "language or physical locality transfer",
-          "completeness or absence"
+          "contradiction or absence",
+          "facts not stated by an exact retained row",
+          "automatic language or locality transfer without an identified matching release",
+          "completeness"
         ],
         "zeroResultMeans": "unknown",
-        "challenge": "A PokeCottage row can identify what to investigate, but known date errors and absent row-level provenance require independent official or specimen evidence before any graph claim."
+        "challenge": "An exact retained PokéCottage row can confirm the positive facts it states. For another Western language, only facts shown to be shared by an already identified matching release may be carried, with the equivalence basis retained; the row alone does not invent that localized printing."
       }
     }
   ],
@@ -3398,35 +3407,43 @@
       "observationId": "obs-pokecottage-snorlax-master-list",
       "surfaceId": "pokecottage-master-lists",
       "kind": "known-positive",
-      "queryUrl": "https://pokecottage.com/pokemon-master-sets/snorlax",
+      "queryUrl": "https://pokecottagecdn.com/mastersets/data/143-snorlax-data.js",
       "queryParameters": {
         "pokemon": "Snorlax"
       },
       "retrievedAt": "2026-08-25",
       "expectedIdentifiers": [
         "Snorlax",
-        "Jungle",
-        "27",
-        "Standard",
-        "English"
+        "Vivid Voltage",
+        "131",
+        "Holo",
+        "International",
+        "2020-11-13",
+        "Atsuko Nishida"
       ],
       "validatesEdges": [
-        "pokecottage-snorlax-discovery-positive"
+        "pokecottage-snorlax-positive"
       ],
-      "outcome": "The page exposes concrete Snorlax rows suitable for candidate discovery; it does not independently confirm their dates, variants, distribution, locality or completeness.",
+      "outcome": "The exact structured row is tier-3 positive confirmation for the named International Snorlax, Vivid Voltage set membership, collector number, Holo variant, rarity, release date and artist. It does not establish an omitted alternative, completeness or another localized printing by itself.",
       "rawRecordRef": "inline-record",
-      "rawRecordHash": "sha256:87a9b7f6763b65ff4f424a39900ee10b8d7034e940e0ec00bd5a20e858a41432",
+      "rawRecordHash": "sha256:f340bc37e1fc19e030d78e8a11b117c5ee569c61ef5c3d702d0d6c3dfd1006b4",
       "rawRecord": {
-        "page": "Snorlax Master Set List",
+        "page": "Snorlax Master Set List structured data",
         "examplePositiveRow": {
-          "cardNumber": "27",
+          "id": "143-swsh4-131-holo",
+          "cardNumber": "131",
+          "displayCardNumber": "131/185",
           "cardName": "Snorlax",
-          "set": "Jungle",
-          "listedVariant": "Standard",
-          "listedLanguage": "English"
+          "set": "Vivid Voltage",
+          "setId": "swsh4",
+          "listedVariant": "Holo",
+          "rarity": "Holo Rare",
+          "region": "International",
+          "releaseDate": "2020-11-13",
+          "artist": "Atsuko Nishida"
         },
-        "recordClass": "fan-made-discovery-lead",
-        "confirmationCapability": false,
+        "recordClass": "collector-checklist-positive-record",
+        "confirmationCapability": true,
         "absenceCapability": false
       }
     },

@@ -549,11 +549,20 @@ run still accounts for 1,621 rows across fifteen slices with no request or run e
 diff explicitly reports the 154 normalization changes even though the retained provider bytes did
 not change.
 
-The canonical write path is
+The initial canonical write path is
 `python verification/passes/admit_latam_spanish_prints_20260811.py`. It replays the four print
 admissions, SPEC-0033 through SPEC-0036 and their four locality-bearing set profiles from the
 retained positive assets. `--check` validates the current tree without writing. Existing exact
 rows are idempotent; a conflicting row or changed retained image hash is drift and stops the pass.
+
+Issue #261 follows that admission with
+`python verification/passes/admit_issue261_latam_svp_prerelease_20260825.py`. The exact `SVP LA
+184` asset, the official Build & Battle article and the dated Antique Store event establish one
+holo *Aventuras Compartidas* prerelease printing distributed in the Mexico wave on 2025-03-22;
+the official 2025-03-28 set launch remains a separate event. The same pass maps the two ordinary
+LA set releases to their works and reads the positive checklist indicators: `JTG LA 117/159` is
+Rare and holo at the 2025-03-28 launch, while `POR LA 063/088` is Common and non-holo at the
+2026-03-27 launch. Those positive rows exclude no alternative finish.
 
 Issue #193 activates one shared, revision-pinned historical adapter for Dutch, Polish and Russian.
 Bulbapedia MediaWiki revision `4567865` is retained as raw wikitext and parsed only inside its
@@ -909,9 +918,20 @@ Moved here from `HANDOVER.md` in #103; the detail below is this file's job.
 | **Official JP** `pokemon-card.com` | scriptable (`resultAPI.php`, param `regulation_sidebar_form=all`, page param is `page` not `pg`) | Japanese cards + illustrators |
 | **Official Asia** `asia.pokemon-card.com` | scriptable | tw/id/th recent cards |
 | **pokumon.com** | WebFetch | per-market promo printings (one row per Asian printing; **West is one lumped "English" row — never use its absence to contradict a Western language**) |
+| **PokéCottage** `pokecottage.com` / `pokecottagecdn.com` | scriptable structured master-set rows | tier-3 positive confirmation of the exact card, set, promo, date, artist, rarity or named variant stated by a retained row; never absence by omission |
 | **Elite Fourum** `elitefourum.com` | scriptable (Discourse JSON: `/search.json`, `/t/<id>.json`) | collector-community facts (promo languages, 1st-edition timeline) |
 | **LigaPokemon** `ligapokemon.com.br` | **datacenter IPs banned (Cloudflare 1008)** — use an authenticated user browser session | Brazilian/Portuguese marketplace listings |
 | **Cardmarket** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | seller photos of physical cards (a real photo of a card in language X is valid; the language *filter* is not) |
+
+PokéCottage's Snorlax page loads its rows from
+`https://pokecottagecdn.com/mastersets/data/143-snorlax-data.js`. Retain the exact structured row,
+page/data URLs, retrieval date and hash. That row may confirm the positive facts it states; it does
+not need a second provider merely because PokéCottage is tier 3. When a French, German, Italian,
+Spanish or Portuguese release is already identified as the matching Western release, a fact shown
+to be shared may corroborate it if the equivalence basis is retained. An English row alone does
+not create that localized printing, and missing rows or variants never establish absence or
+completeness. Whenever a newly announced or released set contains Snorlax, inspect both the
+Snorlax master list and its matching set guide.
 
 Dead ends (do not retry): `pokemonkorea.co.kr` / `pokemoncard.co.kr` (HTTP 410, gone),
 `ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts), `namu.wiki` (JS-rendered),

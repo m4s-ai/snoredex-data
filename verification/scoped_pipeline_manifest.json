@@ -40,6 +40,8 @@
       "mergeGate": "L3",
       "releaseGate": "L4",
       "steps": [
+        {"id": "source-registry-check", "command": ["scripts/source_registry.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "source-capabilities-check", "command": ["scripts/source_capabilities.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
         {"id": "set-adapter-check", "command": ["scripts/source_adapters.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
         {"id": "card-discovery-check", "command": ["scripts/card_discovery.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
         {"id": "completeness-check", "command": ["scripts/completeness_gate.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},

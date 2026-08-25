@@ -68,6 +68,10 @@ The first accepted graph is deliberately conservative.
   finish surface. Korean collector sources remain present as `needs-evidence` with no claimed edge.
 - LigaPokemon is a positive LATAM listing surface blocked to scripted/datacenter access. Cardmarket
   is rate-limited and product-positive only. Neither inventory can establish absence.
+- An exact retained PokéCottage structured row is tier-3 positive confirmation for the card, set,
+  promo, date, artist, rarity or named variant it states. A demonstrated matching Western release
+  may reuse a shared fact with its equivalence basis retained; an English row alone does not create
+  another localized printing, and omissions never establish absence or completeness.
 - Complete official checklists positively establish the exact English card rows they name and
   their documented finish columns. Together with the reviewed Black Star Promo language table and
   the exact official Play! Pokémon Series 7 gallery, they are the only absence-capable edges. Their

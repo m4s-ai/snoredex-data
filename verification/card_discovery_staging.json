@@ -2,13 +2,13 @@
   "meta": {
     "schema": "snoredex-card-discovery-staging",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.16.0",
+    "coverageVersion": "1.18.0",
     "generatedFromRun": "20260820T125000Z",
     "previousRun": "20260820T122400Z",
     "contract": "verification/card_discovery_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "authoritativeGraph": "verification/authoritative_graph.json",
-    "contractHash": "sha256:6659f077969b976a61caa9403294704f170a78c6c1972b25503258dbb521ae35",
+    "contractHash": "sha256:2ae11fd5754478d2e86e84b8887fd8fd373555f5f0c2ef3f5fe14c70d040216e",
     "capabilityGraphHash": "sha256:28da36acb95eae7ac86f7c04e78631e383daa32632692bdd5f4f096d695474ae",
     "authoritativeGraphHash": "sha256:ef12e4489730e7a3a7fe8bcf55f1819f2828f647981c7fa8e999245d7456ed37",
     "sourceFirst": true,
@@ -22,7 +22,7 @@
       "positivelyExcluded": 21,
       "needsEvidence": 53,
       "runErrors": 0,
-      "gaps": 11
+      "gaps": 12
     }
   },
   "slices": [
@@ -852,6 +852,15 @@
       "terminalState": "needs-evidence",
       "reason": "The shared index positively scopes set-language rows and remains retained in set discovery; it supplies no provider-native card name, collector number, variant, deck or promo record.",
       "retryCondition": "Activate category-specific revision-pinned card lists or positive specimens; never synthesize card details from repository units or inherit expansion coverage into promos and decks."
+    },
+    {
+      "gapId": "pokecottage-new-snorlax-set-review",
+      "track": "PokéCottage Snorlax set, promo and variant confirmation",
+      "providerId": "pokecottage",
+      "surfaceId": "pokecottage-master-lists",
+      "terminalState": "needs-evidence",
+      "reason": "PokéCottage is a tier-3 positive confirmation source, but no active retained adapter currently snapshots its editable structured rows; every newly relevant row therefore requires an explicit retained source record before use.",
+      "retryCondition": "Whenever a newly announced or released set contains Snorlax, inspect the PokéCottage Snorlax master list and matching set guide and retain the exact positive card, set, promo or named-variant rows. Apply each stated fact as tier-3 confirmation. For another Western language, retain the basis that identifies the matching release before carrying a shared fact; omissions and unstated alternatives remain unknown."
     }
   ],
   "recordsPath": "verification/card_discovery_records.jsonl",
