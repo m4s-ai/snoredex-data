@@ -51,6 +51,36 @@ def main() -> None:
         "workMappingState"
     ] = "future-state"
     assert any("unknown work mapping state" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    mapped_release_id = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "card-release" and row["payload"]["workMappingState"] == "mapped"
+    )
+    implements_edge = next(
+        edge for edge in tampered["edges"]
+        if edge["fromType"] == "card-release"
+        and edge["fromId"] == mapped_release_id
+        and edge["relation"] == "implements"
+    )
+    other_work_id = next(
+        row["entityId"] for row in tampered["entities"]
+        if row["entityType"] == "work" and row["entityId"] != implements_edge["toId"]
+    )
+    implements_edge["toId"] = other_work_id
+    assert any("implements edge is missing or inconsistent" in error for error in validate(tampered))
+    tampered = deepcopy(graph)
+    empty_release = next(
+        row for row in tampered["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"]["workMappingState"] == "needs-explicit-equivalence"
+    )
+    empty_release["payload"]["workMappingState"] = "unmapped"
+    empty_release["payload"]["work"] = None
+    tampered["edges"].append({
+        "fromType": "card-release", "fromId": empty_release["entityId"],
+        "relation": "implements", "toType": "work", "toId": other_work_id,
+    })
+    assert any("unmapped card release has an implements edge" in error for error in validate(tampered))
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.

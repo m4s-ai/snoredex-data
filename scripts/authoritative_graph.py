@@ -672,6 +672,13 @@ def validate(
         if previous_mapping is not None and previous_mapping != current_mapping:
             errors.append(f"card release mapping is inconsistent: {card_release_id}")
         mapping_by_release[card_release_id] = current_mapping
+        implements = relations[("card-release", release_id, "implements")]
+        if mapping_state in WORK_REQUIRED_STATES:
+            expected_work_id = works_by_key.get(work_key, {}).get("workId") if isinstance(work_key, str) else None
+            if implements != [("work", expected_work_id)]:
+                errors.append(f"card release implements edge is missing or inconsistent: {release_id}")
+        elif mapping_state in WORK_EMPTY_STATES and implements:
+            errors.append(f"unmapped card release has an implements edge: {release_id}")
         edition_id = release.get("setEditionId")
         edition = editions.get(edition_id)
         if not edition:
