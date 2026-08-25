@@ -1010,11 +1010,17 @@ def validate(
                 continue
             expected_rekeys[legacy_id]["targets"].append(target_id)
             assertion_id = f"ASSERT:same-work:{legacy_id}:{source_id}"
+            legacy_unit = units_by_id.get(legacy_id)
+            expected_card_key = legacy_unit.get("cardKey") if legacy_unit else None
+            if not isinstance(expected_card_key, str) or not expected_card_key:
+                errors.append(f"re-key legacy unit has no canonical cardKey: {legacy_id}")
             expected_assertions[assertion_id] = {
                 "assertionId": assertion_id,
                 "assertionType": mapping.get("assertionType"),
                 "fromId": target_id,
-                "toId": f"WORK:{release.get('work')}" if release.get("work") else None,
+                # The legacy unit is an independent reviewed input.  Never
+                # derive the expected Work from the mutable release payload.
+                "toId": f"WORK:{expected_card_key}" if expected_card_key else None,
                 "legacyUnitId": legacy_id,
                 "sourceFirstRecordId": source_id,
                 "assertedBy": mapping.get("assertedBy"),
@@ -1034,6 +1040,32 @@ def validate(
             errors.append(f"re-key equivalence assertion is stale: {assertion_id}")
         if assertion.get("fromId") not in releases or assertion.get("toId") not in by_type["work"]:
             errors.append(f"re-key equivalence target is invalid: {assertion_id}")
+    expected_equivalence_by_release: defaultdict[str, list[tuple[str, str | None]]] = defaultdict(list)
+    for assertion_id, expected in expected_assertions.items():
+        expected_equivalence_by_release[expected["fromId"]].append(
+            (assertion_id, expected.get("toId"))
+        )
+    for release_id, release in releases.items():
+        if release.get("workMappingState") != "mapped-by-explicit-equivalence":
+            continue
+        expected = expected_equivalence_by_release.get(release_id, [])
+        if len(expected) != 1:
+            errors.append(
+                "mapped-by-explicit-equivalence release has no unique canonical re-key: "
+                f"{release_id}"
+            )
+            continue
+        assertion_id, expected_work_id = expected[0]
+        expected_work = by_type["work"].get(expected_work_id)
+        expected_card_key = expected_work.get("cardKey") if expected_work else None
+        if release.get("work") != expected_card_key:
+            errors.append(f"mapped-by-explicit-equivalence release Work is not canonical: {release_id}")
+        if relations[("card-release", release_id, "implements")] != [("work", expected_work_id)]:
+            errors.append(f"mapped-by-explicit-equivalence implements edge is not canonical: {release_id}")
+        if sorted(relations[("equivalence-assertion", assertion_id, "relates")]) != sorted([
+            ("card-release", release_id), ("work", expected_work_id)
+        ]):
+            errors.append(f"mapped-by-explicit-equivalence assertion edge is not canonical: {release_id}")
     for legacy_id, expected in expected_rekeys.items():
         migration = migration_by_key.get(("legacy-issue-rekey", legacy_id))
         targets = expected["targets"]
