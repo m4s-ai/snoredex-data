@@ -63,6 +63,18 @@ def main() -> None:
 
     assert not collector.validate_catalogue(catalogue, graph)
     assert not collector.validate_migrations(migrations, catalogue, graph, predecessor)
+    assert catalogue["meta"]["previousFingerprint"] == collector.PREVIOUS_CATALOGUE_FINGERPRINT
+    assert migrations["meta"]["schemaVersion"] == "1.1.0"
+    previous_route, = migrations["catalogueTransitions"]
+    assert previous_route["fromFingerprint"] == catalogue["meta"]["previousFingerprint"]
+    assert previous_route["toFingerprint"] == catalogue["meta"]["catalogueFingerprint"]
+    assert {
+        row["fromItemId"] for row in previous_route["transitions"]
+    } == {row["itemId"] for row in catalogue["items"]}
+    assert all(
+        row == collector.retained_state_transition(row["fromItemId"])
+        for row in previous_route["transitions"]
+    )
     assert not collector.validate_catalogue(
         fixture["catalogue"], check_asset_bytes=False
     )
@@ -306,6 +318,8 @@ def main() -> None:
         "merge-many-to-1", "unresolved-transition", "missing-transition-chain",
     }
     assert all(row["fromItemId"] == row["fromItemIds"][0] for row in cases.values())
+    fixture_item_ids = {row["itemId"] for row in fixture["catalogue"]["items"]}
+    assert all(set(row["toItemIds"]) <= fixture_item_ids for row in cases.values())
     assert cases["retained-identity"]["fromItemIds"] == cases["retained-identity"]["toItemIds"]
     assert cases["safe-1-to-1"]["expectedAutomaticStateAction"] == "preserve"
     assert cases["retired-to-orphan"]["expectedStateDisposition"] == "orphan"
@@ -320,6 +334,12 @@ def main() -> None:
     assert cases["missing-transition-chain"]["expectedResolution"] == "fail-closed"
     assert cases["missing-transition-chain"]["expectedAdoption"] \
         == "blocked-with-stored-fingerprint-unchanged"
+
+    tampered_migrations = copy.deepcopy(migrations)
+    tampered_migrations["catalogueTransitions"][0]["transitions"].pop()
+    assert any("previous catalogue" in error for error in collector.validate_migrations(
+        tampered_migrations, catalogue, graph, predecessor
+    ))
 
     # The semantic fingerprint excludes only its own field.
     tampered = copy.deepcopy(catalogue)

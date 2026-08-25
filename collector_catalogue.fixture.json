@@ -340,12 +340,12 @@
   "reconciliationCases": [
     {
       "caseId": "retained-identity",
-      "fromItemId": "item-10000000-0000-5000-8000-000000000001",
+      "fromItemId": "item-00000000-0000-5000-8000-000000000001",
       "fromItemIds": [
-        "item-10000000-0000-5000-8000-000000000001"
+        "item-00000000-0000-5000-8000-000000000001"
       ],
       "toItemIds": [
-        "item-10000000-0000-5000-8000-000000000001"
+        "item-00000000-0000-5000-8000-000000000001"
       ],
       "changeKind": "retained",
       "expectedAutomaticStateAction": "preserve",
@@ -360,7 +360,7 @@
         "item-10000000-0000-5000-8000-000000000002"
       ],
       "toItemIds": [
-        "item-10000000-0000-5000-8000-000000000003"
+        "item-00000000-0000-5000-8000-000000000002"
       ],
       "changeKind": "rekey-1:1",
       "expectedAutomaticStateAction": "preserve",
@@ -389,8 +389,8 @@
         "item-10000000-0000-5000-8000-000000000005"
       ],
       "toItemIds": [
-        "item-10000000-0000-5000-8000-000000000006",
-        "item-10000000-0000-5000-8000-000000000007"
+        "item-00000000-0000-5000-8000-000000000001",
+        "item-00000000-0000-5000-8000-000000000002"
       ],
       "changeKind": "split-1:N",
       "expectedAutomaticStateAction": "none",
@@ -406,7 +406,7 @@
         "item-10000000-0000-5000-8000-000000000009"
       ],
       "toItemIds": [
-        "item-10000000-0000-5000-8000-000000000010"
+        "item-00000000-0000-5000-8000-000000000003"
       ],
       "changeKind": "merge-N:1",
       "expectedAutomaticStateAction": "none",
