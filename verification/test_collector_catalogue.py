@@ -216,9 +216,9 @@ def main() -> None:
     )
     assert catalogue["qualitySummary"]["candidateProgressPolicy"] == {
         "progressClass": "research",
-        "status": "fail-safe-default-pending-owner-decision",
-        "basis": "positive-printing-evidence-or-explicit-owner-decision-required-for-current-known",
-        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "status": "owner-decision-accepted",
+        "basis": "positive-printing-evidence-or-later-dated-explicit-owner-decision-required-for-promotion",
+        "decisionRef": "https://github.com/m4s-ai/snoredex-checklist/issues/5#issuecomment-5407399741",
     }
     assert all(
         isinstance(item["markings"], list)
