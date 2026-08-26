@@ -582,6 +582,14 @@ variant and deck identity. The complete run accounts for 246 card records across
 with no run error and no verdict mutation. Promos, decks beyond the retained KSS identity, later
 Russian history and every unlisted product remain explicit specialist gaps.
 
+Issue #272 adds positive physical-finish evidence for the three Russian rows above. SPEC-0047 is a
+CGC-slab photograph of BKT 118/162, SPEC-0048 is a PSA/DNA-authenticated collector photograph of
+FLF 80/106, and SPEC-0049 retains the KSS binder view from the collector video at 00:05:46. The
+collection owner reviewed the three exact candidates on 2026-08-26 and identified each as
+non-holo. The reviewed input is `verification/evidence/issue-272-russian-finishes.json`. These
+observations establish the three non-holo printings only: slab glare, a signature, video lighting,
+and the lack of another pictured card do not establish or exclude reverse-holo alternatives.
+
 ## Indonesian and Thai official card-discovery result
 
 Run `20260820T122400Z` activates the shared publisher adapter for the native Indonesian `Snorlax`

@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 25,
-   "evidenceRecords": 921,
-   "uniqueUrls": 914,
+   "evidenceRecords": 924,
+   "uniqueUrls": 917,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2870
+   "claimsAttributed": 2873
   }
  },
  "providers": [
@@ -605,8 +605,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
-   "uniqueSources": 5,
-   "claimsSupported": 17
+   "uniqueSources": 7,
+   "claimsSupported": 19
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -626,8 +626,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 4,
-   "claimsSupported": 5
+   "uniqueSources": 5,
+   "claimsSupported": 6
   }
  ],
  "evidence": [
@@ -10013,6 +10013,23 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0024-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-listing-photo",
@@ -10278,6 +10295,40 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0598-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.facebook.com/groups/1434540320772743/posts/2109480509945384",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0125-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.youtube.com/watch?v=t0aMSK32ymQ&t=346s",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0183-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
