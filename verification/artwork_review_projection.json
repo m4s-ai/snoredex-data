@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-26",
-  "projectionVersion": "4434b9fb972813afdfb0df9b502c9b024ff496d9104feffb27a132929909016d",
+  "projectionVersion": "aec122f484d7684b822fd22cf7b5b70b4aca81db89bff7a8b26128766549d7c4",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 501,
-    "sourceObservations": 1684
+    "physicalPrintings": 504,
+    "sourceObservations": 1702
   },
   "groups": [
     {
@@ -7298,8 +7298,8 @@
               "markings": [
                 {
                   "kind": "staff",
-                  "text": "Staff",
-                  "role": "distribution-promo"
+                  "role": "distribution-promo",
+                  "text": "Staff"
                 }
               ],
               "distribution": {
@@ -7312,7 +7312,33 @@
               "sourceFinishUnitId": "F0519",
               "sourcePrintingId": "F0519-P02",
               "establishingClaimId": "CLAIM:finish:F0519-P02",
+              "specimenIds": [
+                "SPEC-0076",
+                "SPEC-0077",
+                "SPEC-0079",
+                "SPEC-0080"
+              ],
               "sources": [
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234329784_iOS.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full owner photograph captured 2025-05-16 of English Hop's Snorlax SVP EN 184. HP 150, Extra Helpings, Dynamic Press 140, the Journey Together logo, SVP EN 184 and gold STAFF text are legible; rainbow reflection is visible on the dark border. Retained as SPEC-0076."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234329784_iOS 1.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Close owner photograph captured 2025-05-16 of the same English Hop's Snorlax SVP EN 184 STAFF card as SPEC-0076. The printed number, attacks, STAFF and reflective border are clear. Retained as SPEC-0077."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234343162_iOS.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Owner macro photograph captured 2025-05-16 of the lower-right portion of Hop's Snorlax SVP EN 184. Gold STAFF and rainbow reflection on the dark border are directly visible; the full-card identity is established by SPEC-0076 and SPEC-0077. Retained as SPEC-0079."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234343162_iOS 1.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Second owner macro photograph captured 2025-05-16 of the lower-right portion of the same Hop's Snorlax SVP EN 184 card. STAFF and the reflective border are visible; no additional physical card is inferred. Retained as SPEC-0080."
+                },
                 {
                   "url": "https://bulbapedia.bulbagarden.net/wiki/SVP_Black_Star_Promos_(TCG)",
                   "sourceType": "Bulbapedia promo release list",
@@ -7381,21 +7407,57 @@
               "image": null
             },
             {
-              "observationId": "finish:F0519-P02:0:88c0d90343caa8ed",
+              "observationId": "finish:F0519-P02:0:177582a971aaab00",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234329784_iOS.jpg",
+              "evidence": "Full owner photograph captured 2025-05-16 of English Hop's Snorlax SVP EN 184. HP 150, Extra Helpings, Dynamic Press 140, the Journey Together logo, SVP EN 184 and gold STAFF text are legible; rainbow reflection is visible on the dark border. Retained as SPEC-0076.",
+              "contentHash": "06131b1f9197b5541c16139687db4ebea0e70cfae9e5029b2e2bd1e9d76c5ad3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0519-P02:1:0a8c0bf46f47d557",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234329784_iOS 1.jpg",
+              "evidence": "Close owner photograph captured 2025-05-16 of the same English Hop's Snorlax SVP EN 184 STAFF card as SPEC-0076. The printed number, attacks, STAFF and reflective border are clear. Retained as SPEC-0077.",
+              "contentHash": "e95d97ea8cc3af856fc8f2143ad6b02e98a08f320e3994fee435c6aabf0f8d74",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0519-P02:2:77f4fd7a533671d6",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234343162_iOS.jpg",
+              "evidence": "Owner macro photograph captured 2025-05-16 of the lower-right portion of Hop's Snorlax SVP EN 184. Gold STAFF and rainbow reflection on the dark border are directly visible; the full-card identity is established by SPEC-0076 and SPEC-0077. Retained as SPEC-0079.",
+              "contentHash": "ea10fe44723697e47f17512faba5a6f3e799300733f2dcc4fb6de2f7e2d5804e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0519-P02:3:61bd8537498147e4",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250516_234343162_iOS 1.jpg",
+              "evidence": "Second owner macro photograph captured 2025-05-16 of the lower-right portion of the same Hop's Snorlax SVP EN 184 card. STAFF and the reflective border are visible; no additional physical card is inferred. Retained as SPEC-0080.",
+              "contentHash": "8ec85d2e933ada6a5eba07c64af99d7b59b89262726136759e335f29200d5216",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0519-P02:4:88c0d90343caa8ed",
               "kind": "finish",
               "provider": "Bulbapedia promo release list",
               "url": "https://bulbapedia.bulbagarden.net/wiki/SVP_Black_Star_Promos_(TCG)",
               "evidence": "Lists the relevant SV Black Star Promo distributions and stamped printings.",
-              "contentHash": "121f8683b5e9e9bdbdeefdbc832968fd4e738c9570b1835d7a7a51946502e1b3",
+              "contentHash": "fd07ca950198c6c92c7d38f650097090c678db62830abe3adb9934e7a0892b65",
               "image": null
             },
             {
-              "observationId": "finish:F0519-P02:1:c20ca290c7a75e28",
+              "observationId": "finish:F0519-P02:5:c20ca290c7a75e28",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SV-Black-Star-Promos/Hops-Snorlax-V2-SVP184",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "058fe7014016c8f5626489763a9d34b6d4603117fbc258d440b4baada4cacdce",
+              "contentHash": "d0e408e97d31f1d03e5140580aa66fcc2aa4577080b11b675e76d0f53ec496e8",
               "image": null
             },
             {
@@ -9824,6 +9886,44 @@
                   "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:978f689a82d7a80e5d302e1b",
+              "semanticPrintingId": "PRINTING:978f689a82d7a80e5d302e1b",
+              "cardReleaseId": "RELEASE:JP:Japanese:PCG3:062:Rockets-Snorlax-ex-Dark-Healer-Poison-Claws-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "sparkle holo across artwork and frame",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0247",
+              "sourcePrintingId": "F0247-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:978f689a82d7a80e5d302e1b",
+              "specimenIds": [
+                "SPEC-0095",
+                "SPEC-0096",
+                "SPEC-0097"
+              ],
+              "sources": [
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250524_220825005_iOS.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. Retained as SPEC-0095."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250524_220828966_iOS.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250524_220828966_iOS 1.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097."
+                }
+              ]
             }
           ],
           "detection": {
@@ -9832,9 +9932,12 @@
             "artist": null,
             "variant": "base",
             "finish": [
+              "holo",
               "non-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "sparkle holo across artwork and frame"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -9857,6 +9960,33 @@
               "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
               "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "b0fd507357a4e1e33d122926ef952376e0827f04dea5adb4f91902c67a283908",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0247-P02:0:b937559c64ca4e90",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250524_220825005_iOS.jpg",
+              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. Retained as SPEC-0095.",
+              "contentHash": "45982294fd195b830c8f8076b1e7b0bf78f8766cca2ddafdde3938ac1fb03286",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0247-P02:1:d6145ee039b82111",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250524_220828966_iOS.jpg",
+              "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
+              "contentHash": "c15a1e271b42fac407a5fc0263447ab887aae493ad19a1bf8cbe55e1145b8dad",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0247-P02:2:564dc13bfc1199f0",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250524_220828966_iOS 1.jpg",
+              "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097.",
+              "contentHash": "7943150bc67b77811fe7ab48d8a7528bcb13ba21177aae6e2017dd567298a87a",
               "image": null
             },
             {
@@ -20530,13 +20660,63 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0534",
-              "sourcePrintingId": "F0534-P01",
+              "sourcePrintingId": "F0534-P02",
               "establishingClaimId": "CLAIM:finish:F0534-P01",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/it/cards/swshp-SWSH068",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "swshp-SWSH068 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:7d87d22549e1b819190f7259",
+              "semanticPrintingId": "PRINTING:7d87d22549e1b819190f7259",
+              "cardReleaseId": "RELEASE:WEST:Italian:SWSH:068:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "distribution-promo",
+                  "text": "Vivid Voltage set logo and STAFF"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0534",
+              "sourcePrintingId": "F0534-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:7d87d22549e1b819190f7259",
+              "specimenIds": [
+                "SPEC-0065",
+                "SPEC-0066",
+                "SPEC-0067",
+                "SPEC-0069"
+              ],
+              "sources": [
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_151724776_iOS.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full owner photograph captured 2025-05-08 of Italian Snorlax SWSH068, HP 130, with the Vivid Voltage logo and STAFF printed over the artwork. Strong vertical rainbow reflection is visible in the artwork window. SPEC-0066, SPEC-0067 and SPEC-0069 are closer views of this same physical card. Retained as SPEC-0065."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_151724776_iOS 1.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Closer full-card owner view captured 2025-05-08 of the same Italian SWSH068 STAFF card as SPEC-0065. SWSH068, the Vivid Voltage logo, STAFF and the holographic artwork field are legible. Retained as SPEC-0066."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_151724776_iOS 2.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Detail owner photograph captured 2025-05-08 of the artwork on the Italian SWSH068 STAFF card also shown in SPEC-0065 and SPEC-0066. The Vivid Voltage logo, STAFF and vertical holo streaks are directly visible. Retained as SPEC-0067."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_152004683_iOS 1.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Alternate owner close view captured 2025-05-08 of the same Italian SWSH068 STAFF card as SPEC-0065 through SPEC-0067. Strong holo streaks, STAFF and the Vivid Voltage logo are visible. Retained as SPEC-0069."
                 }
               ]
             }
@@ -20550,7 +20730,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Vivid Voltage set logo and STAFF"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -20566,12 +20748,48 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0534-P01:0:4e271916e1088b22",
+              "observationId": "finish:F0534-P01:0:6d2c23cefbd84e6a",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_151724776_iOS.jpg",
+              "evidence": "Full owner photograph captured 2025-05-08 of Italian Snorlax SWSH068, HP 130, with the Vivid Voltage logo and STAFF printed over the artwork. Strong vertical rainbow reflection is visible in the artwork window. SPEC-0066, SPEC-0067 and SPEC-0069 are closer views of this same physical card. Retained as SPEC-0065.",
+              "contentHash": "65c25a0250a784c8c77cd204a36237fdd20f03fae03fad9c8cae50dc245302ef",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0534-P01:1:9480b72aadc422cc",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_151724776_iOS 1.jpg",
+              "evidence": "Closer full-card owner view captured 2025-05-08 of the same Italian SWSH068 STAFF card as SPEC-0065. SWSH068, the Vivid Voltage logo, STAFF and the holographic artwork field are legible. Retained as SPEC-0066.",
+              "contentHash": "b35565823f3ce8c980f4e3f8ca6ff1bc800ce0602e511639cd41a6e9ec0d18d1",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0534-P01:2:76ce33ba9c952c38",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_151724776_iOS 2.jpg",
+              "evidence": "Detail owner photograph captured 2025-05-08 of the artwork on the Italian SWSH068 STAFF card also shown in SPEC-0065 and SPEC-0066. The Vivid Voltage logo, STAFF and vertical holo streaks are directly visible. Retained as SPEC-0067.",
+              "contentHash": "b918795b0d7e872d007bbe789e106567df0e18f3fa4554eac11ee446bd653671",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0534-P01:3:3624b5bff136f5b7",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_152004683_iOS 1.jpg",
+              "evidence": "Alternate owner close view captured 2025-05-08 of the same Italian SWSH068 STAFF card as SPEC-0065 through SPEC-0067. Strong holo streaks, STAFF and the Vivid Voltage logo are visible. Retained as SPEC-0069.",
+              "contentHash": "6f831dab8826b2db94ac0d1e187f2078d7afa3ecd0d18c74fa2b8ae15392c598",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0534-P02:0:4e271916e1088b22",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/it/cards/swshp-SWSH068",
               "evidence": "swshp-SWSH068 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "f52ad518526f3a8b26495e348d1bbfb8009ed73854fe5c124c5ad1361a363779",
+              "contentHash": "c5e641fb800ba00d5f8608272228e137e0f7b07849b3e2405a77fc6b18df6778",
               "image": null
             },
             {
@@ -33332,7 +33550,9 @@
               "sourcePrintingId": "F0094-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:d6091bc4805ce1edb01320e2",
               "specimenIds": [
-                "SPEC-0046"
+                "SPEC-0046",
+                "SPEC-0093",
+                "SPEC-0094"
               ],
               "sources": [
                 {
@@ -33349,6 +33569,16 @@
                   "url": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
                   "sourceType": "Seller listing photograph",
                   "evidence": "Complete seller photograph of the Polish Diamond & Pearl Snorlax PZ.35. PODST., Blokada, Relaks, DPBP#174, 37/130 and the 2010 copyright line are legible. Strong rainbow reflection across the card body establishes the reverse-holo printing. Retained as SPEC-0046."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250523_093805287_iOS.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full owner photograph captured 2025-05-23 of Polish Snorlax PZ.35 DP 37/130. PODST., Blokada, Relaks, DPBP#174 and the 2010 copyright line establish the identity. Rainbow reflection across the text body positively establishes the reverse-holo printing and independently corroborates SPEC-0046. Retained as SPEC-0093."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250523_093805287_iOS 1.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Owner close photograph captured 2025-05-23 of the upper portion of the same Polish DP 37/130 reverse-holo card as SPEC-0093. The rainbow foil field is visible across the text area; no additional copy is inferred. Retained as SPEC-0094."
                 }
               ]
             }
@@ -33404,7 +33634,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "3bf05c0e09cc4b73813966b58249dcd6896d9580306af5303dcfbcd03df866a0",
+              "contentHash": "d3422101aeede900cccb63489fd918ce4ff7f45776d1e44fbb0818503ff6fa01",
               "image": null
             },
             {
@@ -33413,7 +33643,7 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "f1e423cfcd400727c0afbb9f23fcc2715bf0c31af8f0710a7efb6cfa1f275536",
+              "contentHash": "0953d76e5a1808a6f05fa90bcc905f44d445948fa8e3eb97fd07758973956c14",
               "image": null
             },
             {
@@ -33422,7 +33652,25 @@
               "provider": "Seller listing photograph",
               "url": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
               "evidence": "Complete seller photograph of the Polish Diamond & Pearl Snorlax PZ.35. PODST., Blokada, Relaks, DPBP#174, 37/130 and the 2010 copyright line are legible. Strong rainbow reflection across the card body establishes the reverse-holo printing. Retained as SPEC-0046.",
-              "contentHash": "9ab5998da6bdf23879eb0d92e710693adb88723ceba5275f5cf4f40d1ecd4927",
+              "contentHash": "6f27c7a7d4b1b667b8f999093505aef49d46925bf50a93bc01273bd6e5de0e57",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0094-P02:3:198df66f6d765a3f",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250523_093805287_iOS.jpg",
+              "evidence": "Full owner photograph captured 2025-05-23 of Polish Snorlax PZ.35 DP 37/130. PODST., Blokada, Relaks, DPBP#174 and the 2010 copyright line establish the identity. Rainbow reflection across the text body positively establishes the reverse-holo printing and independently corroborates SPEC-0046. Retained as SPEC-0093.",
+              "contentHash": "595911af4bdf2514164857ac218bfc75dd2b597a29c583b7feed0457d8313fd0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0094-P02:4:9ab2c78914e7ce3d",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250523_093805287_iOS 1.jpg",
+              "evidence": "Owner close photograph captured 2025-05-23 of the upper portion of the same Polish DP 37/130 reverse-holo card as SPEC-0093. The rainbow foil field is visible across the text area; no additional copy is inferred. Retained as SPEC-0094.",
+              "contentHash": "777a37a1f3c6fb82aa5d0a651f8c1b75a0c1052f5eabdfcc3cd0d4928d341c54",
               "image": null
             },
             {
@@ -41649,7 +41897,8 @@
               "sourcePrintingId": "F0125-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:bf0e4553a710e29792bbea61",
               "specimenIds": [
-                "SPEC-0051"
+                "SPEC-0051",
+                "SPEC-0103"
               ],
               "sources": [
                 {
@@ -41666,6 +41915,11 @@
                   "url": "https://efour.b-cdn.net/uploads/default/original/3X/b/7/b7aa1d2b7803849ac2b6773cd0f09c86ad893e91.jpeg",
                   "sourceType": "Inspected physical specimen photograph",
                   "evidence": "The Elite Fourum binder photograph shows Russian Flashfire Snorlax 80/106 non-holo and reverse-holo copies side by side. The reverse copy visibly carries the type-symbol background treatment while the Russian name, artwork and 80/106 identify the exact card. On 2026-08-26 the collection owner reviewed candidate 2 and confirmed it as the correct reverse-holo printing. Retained as SPEC-0051."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2026\\05\\20260501_110519078_iOS.heic (original HEIC; committed JPEG transcoded with Windows WIC on 2026-08-26)",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "iOS memory close frame exported in 2026 with the overlay Erinnerung 1. Mai 2025, derived from the owner group photograph in SPEC-0101. It shows Russian Снорлакс FLF 80/106, HP 130, with strong rainbow reflection across the card body establishing reverse holo. The number is established by the group frame; the committed JPEG is a Windows WIC conversion of the original HEIC. Retained as SPEC-0103."
                 }
               ]
             },
@@ -41760,7 +42014,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "52e3551cb4221d9be108c7433b5c59b82087e0d251f02949663b84d12ae8edad",
+              "contentHash": "9673527c35c09b33a00b4efee4634fc9b4f736f1a6eb205de51e6001a4a8459c",
               "image": null
             },
             {
@@ -41769,7 +42023,7 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "f906dc7478e7e54c68f9caf54a0b166c8f2548a9248ac35b3b0c81f3bc8ce89c",
+              "contentHash": "92adc8dd0764e42be9aa6f44abe1f9bed5e5616e173b895bf12c0fb33a0961cd",
               "image": null
             },
             {
@@ -41778,7 +42032,16 @@
               "provider": "Inspected physical specimen photograph",
               "url": "https://efour.b-cdn.net/uploads/default/original/3X/b/7/b7aa1d2b7803849ac2b6773cd0f09c86ad893e91.jpeg",
               "evidence": "The Elite Fourum binder photograph shows Russian Flashfire Snorlax 80/106 non-holo and reverse-holo copies side by side. The reverse copy visibly carries the type-symbol background treatment while the Russian name, artwork and 80/106 identify the exact card. On 2026-08-26 the collection owner reviewed candidate 2 and confirmed it as the correct reverse-holo printing. Retained as SPEC-0051.",
-              "contentHash": "17db4632cad873b03f05c704dc7ab64cbfe3326488bf1016a4a7037a5788e108",
+              "contentHash": "a230cce08cb51df3d5bc524236bc78fb52ec45b7869ae356b77528d6d4856438",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0125-P02:3:f0a8e789dbcc2081",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2026\\05\\20260501_110519078_iOS.heic (original HEIC; committed JPEG transcoded with Windows WIC on 2026-08-26)",
+              "evidence": "iOS memory close frame exported in 2026 with the overlay Erinnerung 1. Mai 2025, derived from the owner group photograph in SPEC-0101. It shows Russian Снорлакс FLF 80/106, HP 130, with strong rainbow reflection across the card body establishing reverse holo. The number is established by the group frame; the committed JPEG is a Windows WIC conversion of the original HEIC. Retained as SPEC-0103.",
+              "contentHash": "581c31ca42aaa81730c5140293d0f579fd8a695f3c439c8e3c0131460a1e98b3",
               "image": null
             },
             {
@@ -50689,11 +50952,19 @@
               "sourceFinishUnitId": "F0441",
               "sourcePrintingId": "F0441-P01",
               "establishingClaimId": "CLAIM:finish:F0441-P01",
+              "specimenIds": [
+                "SPEC-0070"
+              ],
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/it/cards/swsh1-197",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "swsh1-197 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_152004683_iOS 2.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Owner photograph captured 2025-05-08 of Italian Snorlax V SSH 197/202, HP 220, full-art card with Introeenergia and Tombolone. The full face shows the textured reflective treatment; this is the same physical card in SPEC-0071. Retained as SPEC-0070."
                 }
               ]
             }
@@ -50728,7 +50999,16 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/it/cards/swsh1-197",
               "evidence": "swsh1-197 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "c4c26bd26dec5a0b4c6df164dca736a1d542146b5b29a40a00b960e58a00de0c",
+              "contentHash": "5e72a6a8c308c5abd6083932c56b38897d179798153c8a5ecbbe122212eb0c5d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0441-P01:1:5614a2f9f1c30d82",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250508_152004683_iOS 2.jpg",
+              "evidence": "Owner photograph captured 2025-05-08 of Italian Snorlax V SSH 197/202, HP 220, full-art card with Introeenergia and Tombolone. The full face shows the textured reflective treatment; this is the same physical card in SPEC-0071. Retained as SPEC-0070.",
+              "contentHash": "220fb1b495e785afb05cdbfbb6e4b4095007c330bbbe255ed902302acd530718",
               "image": null
             },
             {
@@ -50952,14 +51232,45 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:99e2205200c3cbd5da2b11c5",
+              "semanticPrintingId": "PRINTING:99e2205200c3cbd5da2b11c5",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CS1aC:188:Snorlax-V-Swallow-Falling-Down",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "textured full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0054",
+              "sourcePrintingId": "F0054-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:99e2205200c3cbd5da2b11c5",
+              "specimenIds": [
+                "SPEC-0098"
+              ],
+              "sources": [
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250527_172403729_iOS.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full owner photograph captured 2025-05-27 of S-Chinese Snorlax V CS1aC 188/135 SR, HP 220. The full-art card directly shows a textured reflective surface. SPEC-0099 and SPEC-0100 show the same physical card beside T-Chinese sc1b F 120/153 RRR Snorlax VMAX. Retained as SPEC-0098."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax V",
             "artist": null,
             "variant": "V2",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "textured full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -50975,6 +51286,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0054-P01:0:d3f37cbd0fd13a5c",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250527_172403729_iOS.jpg",
+              "evidence": "Full owner photograph captured 2025-05-27 of S-Chinese Snorlax V CS1aC 188/135 SR, HP 220. The full-art card directly shows a textured reflective surface. SPEC-0099 and SPEC-0100 show the same physical card beside T-Chinese sc1b F 120/153 RRR Snorlax VMAX. Retained as SPEC-0098.",
+              "contentHash": "9b0ac1eb5052634b3555e68649291b65e6bcf7f7443d8240e4e661f1c3b78d2d",
+              "image": null
+            },
             {
               "observationId": "unit:U0608",
               "kind": "unit",
@@ -55214,7 +55534,7 @@
               "finish": "mirror-holo",
               "edition": null,
               "foilPattern": "poke-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
@@ -55222,7 +55542,20 @@
               "sourceFinishUnitId": "F0615",
               "sourcePrintingId": "F0615-P03",
               "establishingClaimId": "CLAIM:finish:F0615-P03",
+              "specimenIds": [
+                "SPEC-0061"
+              ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Poké Ball mirror holo"
+                },
+                {
+                  "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250504_205316190_iOS 3.jpg",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Close owner photograph captured 2025-05-04 of Korean 잠만보 xsv2a 143/165, HP 150. Repeated Poké Ball silhouettes are directly visible across the card body, establishing the Poké Ball mirror-holo printing. This is the same physical card shown in the group views SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064. Retained as SPEC-0061."
+                },
                 {
                   "sourceType": "Owner attestation plus downloaded scan review",
                   "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan."
@@ -55291,21 +55624,39 @@
               "image": null
             },
             {
-              "observationId": "finish:F0615-P03:0:767034ab3d1b2860",
+              "observationId": "finish:F0615-P03:0:3272ff38ca47c499",
+              "kind": "finish",
+              "provider": "user",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+              "evidence": "Curated variant name: Poké Ball mirror holo",
+              "contentHash": "754ae8f98fe3a85b44ce3fc83cafec7a1d0d66dbb73c187b9c9edae90ac6353c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0615-P03:1:f0f27595b0453c0c",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250504_205316190_iOS 3.jpg",
+              "evidence": "Close owner photograph captured 2025-05-04 of Korean 잠만보 xsv2a 143/165, HP 150. Repeated Poké Ball silhouettes are directly visible across the card body, establishing the Poké Ball mirror-holo printing. This is the same physical card shown in the group views SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064. Retained as SPEC-0061.",
+              "contentHash": "37165cbcf8594759d77df32becb329c5a0adf0ee674777497d28e975ed4f766f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0615-P03:2:767034ab3d1b2860",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "15d83677f58541a30af910e0cf7fa49fa1700b33acf56a825ca2fccc56f0ca6a",
+              "contentHash": "3db9a27fa39895990c90adaba14278fada7afcc6353c9ad61a91e456a7a32bfb",
               "image": null
             },
             {
-              "observationId": "finish:F0615-P03:1:d91ed390bac0522c",
+              "observationId": "finish:F0615-P03:3:d91ed390bac0522c",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "0f96795dbaf121ef2517a588cd2755fd67d25f762bd19532d0ff4719fc5569c4",
+              "contentHash": "d4ddb5d6cde26dc68198c2495902eac42c48fc632260ee8b26a93dc9fea36d47",
               "image": null
             },
             {
