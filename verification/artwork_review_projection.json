@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-26",
-  "projectionVersion": "5f7f5281513ab412ccc8bbfb7eda8fe235e865471409f911b5a95fefa63ad024",
+  "projectionVersion": "3a3b80bc87efcb2784a926119be0975925ff8a09dae35f80ce24ed7aaa2a5e6a",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 494,
-    "sourceObservations": 1845
+    "physicalPrintings": 496,
+    "sourceObservations": 1850
   },
   "groups": [
     {
@@ -36530,7 +36530,75 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:152b2820e938a5d6f80a77f1",
+              "semanticPrintingId": "PRINTING:152b2820e938a5d6f80a77f1",
+              "cardReleaseId": "RELEASE:WEST:Polish:DP:37:Snorlax-Lv35-Block-Ease-Up",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0094",
+              "sourcePrintingId": "F0094-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:152b2820e938a5d6f80a77f1",
+              "specimenIds": [
+                "SPEC-0045"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://diamentiperla.info/snorlax-polish.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete Polish Diamond & Pearl Snorlax PZ.35 card scan. PODST., the attacks Blokada and Relaks, DPBP#174, collector number 37/130 and the 2010 copyright line are legible. The card surface is uniformly printed without a foil reflection, establishing the non-holo printing. Retained as SPEC-0045."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d6091bc4805ce1edb01320e2",
+              "semanticPrintingId": "PRINTING:d6091bc4805ce1edb01320e2",
+              "cardReleaseId": "RELEASE:WEST:Polish:DP:37:Snorlax-Lv35-Block-Ease-Up",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "plain-foil-background",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0094",
+              "sourcePrintingId": "F0094-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d6091bc4805ce1edb01320e2",
+              "specimenIds": [
+                "SPEC-0046"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of the Polish Diamond & Pearl Snorlax PZ.35. PODST., Blokada, Relaks, DPBP#174, 37/130 and the 2010 copyright line are legible. Strong rainbow reflection across the card body establishes the reverse-holo printing. Retained as SPEC-0046."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax Lv.35",
@@ -36558,6 +36626,51 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0094-P01:0:772564083dc5648c",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "3a4c5c49d8432117db137b5d9ac415238e4f68060d9956f047b3c851b572e818",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0094-P01:1:55497cdcd2eec5be",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://diamentiperla.info/snorlax-polish.jpg",
+              "evidence": "Complete Polish Diamond & Pearl Snorlax PZ.35 card scan. PODST., the attacks Blokada and Relaks, DPBP#174, collector number 37/130 and the 2010 copyright line are legible. The card surface is uniformly printed without a foil reflection, establishing the non-holo printing. Retained as SPEC-0045.",
+              "contentHash": "fb53eda2c71db895213bd0c5cd149286151f7cc5c22fc4cd99b2623cfa766036",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0094-P02:0:772564083dc5648c",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "3bf05c0e09cc4b73813966b58249dcd6896d9580306af5303dcfbcd03df866a0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0094-P02:1:864bd1f7ca541a1b",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "f1e423cfcd400727c0afbb9f23fcc2715bf0c31af8f0710a7efb6cfa1f275536",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0094-P02:2:ee7b2528bee620df",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+              "evidence": "Complete seller photograph of the Polish Diamond & Pearl Snorlax PZ.35. PODST., Blokada, Relaks, DPBP#174, 37/130 and the 2010 copyright line are legible. Strong rainbow reflection across the card body establishes the reverse-holo printing. Retained as SPEC-0046.",
+              "contentHash": "9ab5998da6bdf23879eb0d92e710693adb88723ceba5275f5cf4f40d1ecd4927",
+              "image": null
+            },
             {
               "observationId": "unit:U0364",
               "kind": "unit",
