@@ -60,6 +60,12 @@ reads. A specimen may now carry an optional `physicalObservation`:
 against its source instead of taken on trust. `finish` is the technical vocabulary only —
 `finishFamily` is presentation and is not stored here.
 
+When a retained marketplace photograph establishes card identity but the collection owner supplies
+the finish or edition determination, record that split explicitly as
+`ownerAttestedFields: ["finish"]` or `["edition"]`. The projector then keeps the seller photograph
+as supporting identity evidence and adds owner attestation as the claim-carrying source for those
+named properties; it must not attribute an owner-confirmed property to the listing photograph.
+
 **The block is optional and is never back-filled.** Current counts live in `specimens.json`; records
 without the block say nothing about finish, and that silence is not evidence of non-holo. Read the
 record before adding one: a keyword scan over this corpus would have recorded a finish for

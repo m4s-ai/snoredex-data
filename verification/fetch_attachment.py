@@ -101,6 +101,7 @@ SPECIMEN_FINISHES = {"non-holo", "holo", "reverse-holo", "mirror-holo"}
 SPECIMEN_EDITIONS = {"1st Edition", "Unlimited"}
 SPECIMEN_MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
 SPECIMEN_CARD_SIZES = {"standard", "jumbo", "unknown"}
+OWNER_ATTESTABLE_FIELDS = {"finish", "edition"}
 DISTRIBUTION_FIELDS = {"kind", "name", "region", "date", "text"}
 
 # The one namespace the proxy refuses, in both the current and the historical form. Detected by
@@ -373,6 +374,18 @@ def validate_observation(
     edition = physical.get("edition")
     if edition is not None and (not isinstance(edition, str) or edition not in SPECIMEN_EDITIONS):
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.edition")
+    owner_attested_fields = physical.get("ownerAttestedFields")
+    if owner_attested_fields is not None and (
+        not isinstance(owner_attested_fields, list)
+        or not owner_attested_fields
+        or len(owner_attested_fields) != len(set(owner_attested_fields))
+        or any(field not in OWNER_ATTESTABLE_FIELDS for field in owner_attested_fields)
+        or any(physical.get(field) is None for field in owner_attested_fields)
+    ):
+        fail(
+            f"manifest row for {specimen_id} has invalid "
+            "physicalObservation.ownerAttestedFields"
+        )
     foil_pattern = physical.get("foilPattern")
     if foil_pattern is not None and not isinstance(foil_pattern, str):
         fail(f"manifest row for {specimen_id} needs text physicalObservation.foilPattern")

@@ -436,6 +436,23 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
     )
 
 
+def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> list[dict[str, Any]]:
+    sources = [specimen_source(specimen)]
+    owner_fields = observation.get("ownerAttestedFields") or []
+    if owner_fields:
+        labels = {"finish": "finish", "edition": "edition"}
+        established = ", ".join(labels[field] for field in owner_fields)
+        sources.append({
+            "sourceType": "Owner attestation (domain expert)",
+            "evidence": (
+                f"The collection owner's explicit {specimen.get('recordedAt', '')} confirmation "
+                f"establishes the specimen's {established}; the retained seller photograph "
+                "supports card identity and any independently visible properties."
+            ),
+        })
+    return sources
+
+
 def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
     observation = specimen.get("physicalObservation")
     if not isinstance(observation, dict) or not observation.get("finish"):
@@ -449,7 +466,7 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
         "cardSize": observation.get("cardSize") or "unknown",
         "mappedVariants": [str(specimen.get("variant"))],
         "verificationStatus": "confirmed",
-        "sources": [specimen_source(specimen)],
+        "sources": specimen_sources(specimen, observation),
         "_origin": "specimen",
         "specimenIds": [specimen["specimenId"]],
     }
