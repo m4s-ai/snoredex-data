@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 56,
+  "count": 57,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -64,25 +64,13 @@
       "variant": "base",
       "language": "Portuguese",
       "heldBy": "collection owner",
-      "inspectedFrom": "photograph and public Enjoei seller photograph",
-      "photograph": "SPEC-0004.jpg",
-      "photographSource": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
-      "photographSha256": "sha256:f2254b3da2c1d56e32764205d7f894169372623aa838502ff7e4488328ab0d32",
-      "listingUrl": "https://www.enjoei.com.br/p/carta-pokemon-snorlax-1a-edicao-67794705",
-      "observed": "Public seller photograph corroborating the previously owner-inspected Portuguese XY179 specimen. BASICO, NV.20, 130 PS, Habilidade: Imunidade, Pancada Corporal, XY179 and the black-star promo symbol establish the exact card. Visible foil reflection across the artwork establishes holo; the collection owner confirmed candidate 5 on 2026-08-26.",
-      "recordedAt": "2026-08-26",
+      "inspectedFrom": "photograph",
+      "photograph": null,
+      "observed": "Physical Portuguese copy inspected from a photograph: \"Snorlax\", BASICO, NV.20, 130 PS, \"Habilidade: Imunidade\" (Este Pokemon nao pode ser afetado por nenhuma Condicao Especial), attack \"Pancada Corporal\" 50, Pokedex line \"N 143 Pokemon Dorminhoco Alt: 2,1 m Peso: 460,0 kg\", Fraqueza Fighting x2, Recuar 4, \"Ilust. Ken Sugimori\", (c)2016 Pokemon, card number XY179 with the black star promo symbol. This replaces the earlier owner-attestation record and completes all six Western languages for this promo from inspected specimens.",
+      "recordedAt": "2026-07-22",
       "citedBy": [
-        "U0231",
-        "F0636-P01"
-      ],
-      "physicalObservation": {
-        "finish": "holo",
-        "foilPattern": null,
-        "markings": "black-star promo symbol",
-        "markingRole": "distribution-promo",
-        "cardSize": "standard",
-        "basis": "The public full-card photograph matches the previously owner-inspected Portuguese XY179 identity and visibly shows foil reflection across the artwork. The collection owner confirmed candidate 5 and its finish on 2026-08-26."
-      }
+        "U0231"
+      ]
     },
     {
       "specimenId": "SPEC-0005",
@@ -1148,6 +1136,32 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The complete Portuguese 37/130 card face establishes identity. The collection owner's explicit 2026-08-26 confirmation establishes the non-holo finish; the finish is not inferred merely from missing glare."
+      }
+    },
+    {
+      "specimenId": "SPEC-0057",
+      "setCode": "XYPR",
+      "number": "179",
+      "variant": "base",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Enjoei seller photograph",
+      "photograph": "SPEC-0057.jpg",
+      "photographSource": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
+      "photographSha256": "sha256:f2254b3da2c1d56e32764205d7f894169372623aa838502ff7e4488328ab0d32",
+      "listingUrl": "https://www.enjoei.com.br/p/carta-pokemon-snorlax-1a-edicao-67794705",
+      "observed": "Public Enjoei seller photograph of Portuguese XY179. BASICO, NV.20, 130 PS, Habilidade: Imunidade, Pancada Corporal, XY179 and the black-star promo symbol establish the exact card. Visible foil reflection across the artwork establishes holo; the collection owner confirmed candidate 5 on 2026-08-26.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0636-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The public full-card seller photograph visibly shows foil reflection across the artwork. The ordinary black-star promo symbol identifies the XY promo print and is not a later distribution stamp. The collection owner confirmed candidate 5 and its finish on 2026-08-26."
       }
     }
   ]

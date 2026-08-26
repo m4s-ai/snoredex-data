@@ -14,7 +14,7 @@ gap, never a finding.
 
 | Provider | Category | Tier | Absence? | Sources | Claims | Used for |
 |---|---|---:|:---:|---:|---:|---|
-| **Inspected physical specimen** | non-url-evidence | 1 | no | 10 | 22 | language, finish, edition |
+| **Inspected physical specimen** | non-url-evidence | 1 | no | 9 | 21 | language, finish, edition |
 | **Play! Pokémon rewards gallery** | official-publisher | 1 | yes | 1 | 32 | finish, product |
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 22 | 22 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
@@ -23,7 +23,7 @@ gap, never a finding.
 | **52poke (Wiki)** | collector-database | 2 | no | 1 | 1 | language, artist, edition, finish |
 | **Bulbapedia** | fan-wiki | 2 | no | 86 | 671 | language, edition, date, finish |
 | **CGC certification and registry** | grading-registry | 2 | no | 0 | 0 | finish, language |
-| **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 10 | 11 | language, finish, edition |
+| **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 11 | 12 | language, finish, edition |
 | **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 36 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | no | 1 | 2 | finish |

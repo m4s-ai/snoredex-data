@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:d32055cb72c94e2556fa8f32eee72ace31d816b01c177efa3a0bac51c6255e00",
+    "fromFingerprint": "sha256:5afb80a99f1b20e160b48f89eb7a392d5ab02d6545d13375733459e6bf4bd47f",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:ae7dce801ae4d00bef39ca17f3b157f58a5b79772a2ea93db6d4e2cef431d899",
+    "toFingerprint": "sha256:0c4037a4371a4cad1a53bdb3553650b0084c530691f459b8befdf9c1e7d42e28",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:ae7dce801ae4d00bef39ca17f3b157f58a5b79772a2ea93db6d4e2cef431d899",
+      "toFingerprint": "sha256:0c4037a4371a4cad1a53bdb3553650b0084c530691f459b8befdf9c1e7d42e28",
       "cumulative": true,
       "transitions": [
         {
@@ -2050,6 +2050,15 @@
           "fromItemId": "item-3b56e827-6925-5fa0-97e5-f55ea5f632af",
           "toItemIds": [
             "item-3b56e827-6925-5fa0-97e5-f55ea5f632af"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
+          "fromItemId": "item-3b8e9fff-3873-5b6b-a21d-b37c9441ecbd",
+          "toItemIds": [
+            "item-3b8e9fff-3873-5b6b-a21d-b37c9441ecbd"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -6910,15 +6919,6 @@
           "fromItemId": "item-d9d40711-38a4-5ebe-ac01-2d512ff2ea11",
           "toItemIds": [
             "item-d9d40711-38a4-5ebe-ac01-2d512ff2ea11"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
-          "fromItemId": "item-da62de27-0f8e-58aa-9e3e-6c26d9558df2",
-          "toItemIds": [
-            "item-da62de27-0f8e-58aa-9e3e-6c26d9558df2"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -14812,7 +14812,7 @@
     {
       "fromItemId": "xypr-179-portuguese-none-holo-observed-marking-black-star-promo-symbol",
       "toItemIds": [
-        "item-da62de27-0f8e-58aa-9e3e-6c26d9558df2"
+        "item-3b8e9fff-3873-5b6b-a21d-b37c9441ecbd"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -20815,7 +20815,7 @@
         "legacyChecklistId": "xypr-179-portuguese-none-holo-observed-marking-black-star-promo-symbol",
         "disposition": "projected",
         "targetItemIds": [
-          "item-da62de27-0f8e-58aa-9e3e-6c26d9558df2"
+          "item-3b8e9fff-3873-5b6b-a21d-b37c9441ecbd"
         ]
       },
       {
@@ -25545,7 +25545,7 @@
         "cardReleaseId": "RELEASE:WEST:Portuguese:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
         "disposition": "projected",
         "targetItemIds": [
-          "item-da62de27-0f8e-58aa-9e3e-6c26d9558df2"
+          "item-3b8e9fff-3873-5b6b-a21d-b37c9441ecbd"
         ],
         "reason": null
       },
@@ -28393,6 +28393,11 @@
         "targetItemId": "item-7434769f-81a6-50cf-9008-cf431cf4eaae"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:4a8802e1afb1f83fbc25593c",
+        "disposition": "projected",
+        "targetItemId": "item-3b8e9fff-3873-5b6b-a21d-b37c9441ecbd"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:56826a2f5700819f375a6770",
         "disposition": "projected",
         "targetItemId": "item-6e3964f5-f0cb-5ba5-96d1-769349d4431b"
@@ -28481,11 +28486,6 @@
         "physicalPrintingId": "PHYSICAL:PRINTING:ad83562b090ec4485a69ad1a",
         "disposition": "projected",
         "targetItemId": "item-e93f37ee-1e7d-57fd-8e5c-94e0dd3d5ed9"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:PRINTING:b7649899ccd7db77bc1375b1",
-        "disposition": "projected",
-        "targetItemId": "item-da62de27-0f8e-58aa-9e3e-6c26d9558df2"
       },
       {
         "physicalPrintingId": "PHYSICAL:PRINTING:bf0e4553a710e29792bbea61",
