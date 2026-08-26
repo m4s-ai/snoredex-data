@@ -197,6 +197,35 @@ def main() -> int:
     if not prize_pack_regression:
         raise AssertionError("#210 regression fixture lost — no direct owner-attestation rows found")
 
+    # #306 review — localized Prize Pack manifests and English-market evidence must not be
+    # projected onto neighboring languages merely because they share one finish override.
+    finish_overrides = load("verification/finish_overrides.json")
+    english_only_refs = {
+        "tcgcsv-docs", "tcgcsv-prize-pack-snorlax", "cardmarket-stock-image",
+        "owner-scan-review",
+    }
+    for override in finish_overrides["overrides"]:
+        if not str(override.get("setCode") or "").startswith("PPS"):
+            continue
+        languages = override.get("languages") or []
+        if len(languages) != 1:
+            raise AssertionError(f"Prize Pack override is not language-scoped: {override['setCode']}")
+        language = languages[0]
+        for printing in override.get("printings") or []:
+            refs = printing.get("sourceRefs") or []
+            checklist_languages = {
+                tuple(finish_overrides["sources"][ref].get("languages") or [])
+                for ref in refs if ref.startswith("prize-pack-series-")
+            }
+            if checklist_languages != {(language,)}:
+                raise AssertionError(
+                    f"{override['setCode']} {language} cites another locale's checklist"
+                )
+            if language != "English" and english_only_refs.intersection(refs):
+                raise AssertionError(
+                    f"{override['setCode']} {language} inherits English-market evidence"
+                )
+
     print(f"evidence application regressions passed: {counts}")
     return 0
 

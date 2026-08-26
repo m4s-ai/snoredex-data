@@ -86,6 +86,16 @@ SOURCE_SUFFIX = {
     "Spanish": "-es", "Portuguese": "-pt-br",
 }
 
+# These records describe English-market products or an English scan. They remain useful for the
+# English override, but a localized checklist is the positive finish evidence for every other
+# language and must not inherit them.
+ENGLISH_ONLY_PRINTING_REFS = {
+    "tcgcsv-docs",
+    "tcgcsv-prize-pack-snorlax",
+    "cardmarket-stock-image",
+    "owner-scan-review",
+}
+
 # These Brazilian-market observations are source-capability fixtures and remain the current
 # language evidence. Their official checklists are still appended below and drive finish truth.
 CURRENT_EXCEPTIONS = {
@@ -165,13 +175,11 @@ def main() -> int:
                         "source": url, "evidence": evidence, "at": CHECKED_AT,
                     })
 
-    overrides_by_set = {row["setCode"]: row for row in finish_overrides["overrides"]}
+    all_overrides = finish_overrides["overrides"]
     for series, record in SERIES.items():
         languages = list(next(iter(record["units"].values())))
-        refs = []
         for language in languages:
             ref = source_id(series, language)
-            refs.append(ref)
             finish_overrides["sources"][ref] = {
                 "url": checklist_url(series, language),
                 "sourceType": f"Official Pokemon localized Prize Pack Series {series} checklist",
@@ -185,19 +193,33 @@ def main() -> int:
                     "the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
                 ),
             }
-        override = overrides_by_set.get(record["setCode"])
-        if override is None or str(override.get("number")) != record["number"]:
+        matches = [row for row in all_overrides if row["setCode"] == record["setCode"]]
+        if not matches or str(matches[0].get("number")) != record["number"]:
             print(f"missing finish override for {record['setCode']} {record['number']}", file=sys.stderr)
             return 1
-        override["languages"] = languages
+
+        if series == 8:
+            continue
+        insert_at = all_overrides.index(matches[0])
+        template = deepcopy(matches[0])
+        all_overrides[:] = [row for row in all_overrides if row["setCode"] != record["setCode"]]
+        localized_overrides = []
         prefix = f"prize-pack-series-{series}-checklist"
-        for printing in override["printings"]:
-            other_refs = [ref for ref in printing["sourceRefs"] if not ref.startswith(prefix)]
-            printing["sourceRefs"] = refs + other_refs
+        for language in languages:
+            localized = deepcopy(template)
+            localized["languages"] = [language]
+            for printing in localized["printings"]:
+                other_refs = [
+                    ref for ref in printing["sourceRefs"]
+                    if not ref.startswith(prefix)
+                    and (language == "English" or ref not in ENGLISH_ONLY_PRINTING_REFS)
+                ]
+                printing["sourceRefs"] = [source_id(series, language)] + other_refs
+            localized_overrides.append(localized)
+        all_overrides[insert_at:insert_at] = localized_overrides
 
     # The localized lists establish "foil", not its pattern. Keep Cosmos only where separately
     # established (English and the owner's German adjudication); do not project it to PT/FR/IT/ES.
-    all_overrides = finish_overrides["overrides"]
     pps8_indices = [i for i, row in enumerate(all_overrides) if row["setCode"] == "PPS8 JTG"]
     if not pps8_indices:
         print("missing PPS8 finish override", file=sys.stderr)
@@ -207,25 +229,27 @@ def main() -> int:
     del all_overrides[insert_at:pps8_indices[-1] + 1]
     split_overrides = []
     groups = (
-        (["English"], True, True),
-        (["German"], False, True),
-        (["Portuguese"], False, False),
-        (["French", "Italian", "Spanish"], True, False),
+        ("English", True, True),
+        ("German", False, True),
+        ("Portuguese", False, False),
+        ("French", True, False),
+        ("Italian", True, False),
+        ("Spanish", True, False),
     )
-    for languages, include_manual_holo, keep_cosmos in groups:
+    for language, include_manual_holo, keep_cosmos in groups:
         localized = deepcopy(pps8)
-        localized["languages"] = languages
+        localized["languages"] = [language]
         if not include_manual_holo:
             localized["printings"] = [
                 printing for printing in localized["printings"] if printing["finish"] != "holo"
             ]
-        refs = [source_id(8, language) for language in languages]
         for printing in localized["printings"]:
             other_refs = [
                 ref for ref in printing["sourceRefs"]
                 if not ref.startswith("prize-pack-series-8-checklist")
+                and (language == "English" or ref not in ENGLISH_ONLY_PRINTING_REFS)
             ]
-            printing["sourceRefs"] = refs + other_refs
+            printing["sourceRefs"] = [source_id(8, language)] + other_refs
             if printing["finish"] == "holo" and not keep_cosmos:
                 printing["foilPattern"] = None
         split_overrides.append(localized)
