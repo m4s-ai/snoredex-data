@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-26",
-  "projectionVersion": "3072f009c994b6bdc98dabd6cdab714cf81f9c68c2244d9139367b376035f1b8",
+  "projectionVersion": "4434b9fb972813afdfb0df9b502c9b024ff496d9104feffb27a132929909016d",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 499,
-    "sourceObservations": 1678
+    "physicalPrintings": 501,
+    "sourceObservations": 1684
   },
   "groups": [
     {
@@ -35570,6 +35570,42 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:1a715ebd469c048928442902",
+              "semanticPrintingId": "PRINTING:1a715ebd469c048928442902",
+              "cardReleaseId": "RELEASE:WEST:Russian:BKT:118:Snorlax-Plump-Body-Knock-Away",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "type-symbol-background",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0024",
+              "sourcePrintingId": "F0024-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1a715ebd469c048928442902",
+              "specimenIds": [
+                "SPEC-0050"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAKthrough/Snorlax-BKT118",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://efour.b-cdn.net/uploads/default/original/3X/a/0/a059180b21b4911eada3b980cc57faf5a1e038a5.jpeg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "The Elite Fourum photograph shows the complete Russian BREAKthrough Snorlax 118/162 card. The PSA label identifies 2016 Pokemon Russian XY, Snorlax-Rev. Foil, BREAKthrough and card 118; the Russian card face shows 118/162 and the type-symbol reverse-holo background. On 2026-08-26 the collection owner reviewed candidate 1 and confirmed it as the correct reverse-holo printing. Retained as SPEC-0050."
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:df9e25dc81dbf73b2188a3f9",
               "semanticPrintingId": "PRINTING:df9e25dc81dbf73b2188a3f9",
               "cardReleaseId": "RELEASE:WEST:Russian:BKT:118:Snorlax-Plump-Body-Knock-Away",
@@ -35644,6 +35680,33 @@
               "url": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
               "evidence": "The complete slab photograph and CGC label identify Russian BREAKthrough Snorlax 118/162, cert 6089584097; the card face shows the Russian name, 118/162 and Kouki Saitou credit. On 2026-08-26 the collection owner reviewed candidate 1 and explicitly identified it as the non-holo printing. Rainbow-looking slab or lighting reflections are not treated as reverse-holo evidence. Retained as SPEC-0047.",
               "contentHash": "5e64102b23512ffd7b17b7073a2fef96666b4a41143ed78f656c60fb4e48ef25",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0024-P02:0:adb19e8921fd1b57",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAKthrough/Snorlax-BKT118",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "8a3ca2fe1b0fb1b15e2d69f414a526461e8a9018f2d6b540dd5137c257240986",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0024-P02:1:864bd1f7ca541a1b",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "4555c3c5dd1b1a4375ae985423ee2297da442533a543bd8884863aff6f830a26",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0024-P02:2:a16407ebfafaca23",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://efour.b-cdn.net/uploads/default/original/3X/a/0/a059180b21b4911eada3b980cc57faf5a1e038a5.jpeg",
+              "evidence": "The Elite Fourum photograph shows the complete Russian BREAKthrough Snorlax 118/162 card. The PSA label identifies 2016 Pokemon Russian XY, Snorlax-Rev. Foil, BREAKthrough and card 118; the Russian card face shows 118/162 and the type-symbol reverse-holo background. On 2026-08-26 the collection owner reviewed candidate 1 and confirmed it as the correct reverse-holo printing. Retained as SPEC-0050.",
+              "contentHash": "8885c76f56247baf2f81d69b090aff7ed4e89840c8060ad8255a34bf41c20189",
               "image": null
             },
             {
@@ -36852,12 +36915,9 @@
             "artist": "Naoki Saito",
             "variant": "base",
             "finish": [
-              "non-holo",
-              "reverse-holo"
+              "non-holo"
             ],
-            "foilPattern": [
-              "type-symbol-background"
-            ],
+            "foilPattern": [],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -41574,6 +41634,42 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:bf0e4553a710e29792bbea61",
+              "semanticPrintingId": "PRINTING:bf0e4553a710e29792bbea61",
+              "cardReleaseId": "RELEASE:WEST:Russian:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "type-symbol-background",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0125",
+              "sourcePrintingId": "F0125-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:bf0e4553a710e29792bbea61",
+              "specimenIds": [
+                "SPEC-0051"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://efour.b-cdn.net/uploads/default/original/3X/b/7/b7aa1d2b7803849ac2b6773cd0f09c86ad893e91.jpeg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "The Elite Fourum binder photograph shows Russian Flashfire Snorlax 80/106 non-holo and reverse-holo copies side by side. The reverse copy visibly carries the type-symbol background treatment while the Russian name, artwork and 80/106 identify the exact card. On 2026-08-26 the collection owner reviewed candidate 2 and confirmed it as the correct reverse-holo printing. Retained as SPEC-0051."
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:fc3b57572c6c46f102841102",
               "semanticPrintingId": "PRINTING:fc3b57572c6c46f102841102",
               "cardReleaseId": "RELEASE:WEST:Russian:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
@@ -41656,6 +41752,33 @@
               "url": "https://www.facebook.com/groups/1434540320772743/posts/2109480509945384/",
               "evidence": "The complete physical-card photograph and PSA/DNA label identify a Russian XY Flashfire Snorlax 80/106 illustrated by Mitsuhiro Arita, cert 147335789. On 2026-08-26 the collection owner reviewed candidate 2 and explicitly identified it as the non-holo printing; the signature is not used as a finish indicator. Retained as SPEC-0048.",
               "contentHash": "0702a83297d7ae6ef60952aa121bb4c0126884d5442bfa7422b72c99b6f4ffd5",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0125-P02:0:01d809516c50c37e",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "52e3551cb4221d9be108c7433b5c59b82087e0d251f02949663b84d12ae8edad",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0125-P02:1:864bd1f7ca541a1b",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "f906dc7478e7e54c68f9caf54a0b166c8f2548a9248ac35b3b0c81f3bc8ce89c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0125-P02:2:a4ec0d45f44cb740",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://efour.b-cdn.net/uploads/default/original/3X/b/7/b7aa1d2b7803849ac2b6773cd0f09c86ad893e91.jpeg",
+              "evidence": "The Elite Fourum binder photograph shows Russian Flashfire Snorlax 80/106 non-holo and reverse-holo copies side by side. The reverse copy visibly carries the type-symbol background treatment while the Russian name, artwork and 80/106 identify the exact card. On 2026-08-26 the collection owner reviewed candidate 2 and confirmed it as the correct reverse-holo printing. Retained as SPEC-0051.",
+              "contentHash": "17db4632cad873b03f05c704dc7ab64cbfe3326488bf1016a4a7037a5788e108",
               "image": null
             },
             {

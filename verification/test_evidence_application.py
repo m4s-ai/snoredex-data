@@ -259,6 +259,31 @@ def main() -> int:
         if not any(source.get("languages") == [language] for source in holo["sources"]):
             raise AssertionError(f"{language} specimen-backed holo lost its localized checklist")
 
+    russian_issue_272 = {
+        unit["finishUnitId"]: unit
+        for unit in finish_units
+        if unit["finishUnitId"] in {"F0024", "F0125", "F0183"}
+    }
+    expected_reverse_specimens = {"F0024": "SPEC-0050", "F0125": "SPEC-0051"}
+    for finish_unit_id, specimen_id in expected_reverse_specimens.items():
+        reverse = next(
+            printing for printing in russian_issue_272[finish_unit_id]["printings"]
+            if printing["finish"] == "reverse-holo"
+        )
+        if (
+            reverse["verificationStatus"] != "confirmed"
+            or reverse.get("foilPattern") != "type-symbol-background"
+            or specimen_id not in (reverse.get("specimenIds") or [])
+        ):
+            raise AssertionError(f"#272 reverse evidence was lost for {finish_unit_id}")
+    russian_kss = russian_issue_272["F0183"]
+    if (
+        russian_kss["availableFinishes"] != ["non-holo"]
+        or russian_kss["completenessStatus"] != "owner-adjudicated"
+        or {printing["finish"] for printing in russian_kss["printings"]} != {"non-holo"}
+    ):
+        raise AssertionError("#272 Russian KSS finish adjudication no longer suppresses the false reverse claim")
+
     specimens = load("verification/specimens.json")["specimens"]
     polish_non_holo = next(row for row in specimens if row["specimenId"] == "SPEC-0045")
     finish_basis = str((polish_non_holo.get("physicalObservation") or {}).get("basis") or "")

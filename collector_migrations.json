@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:f9b88a3d3177e1e8e12169275a629ad7595a6caa8873372d01af47b966693c71",
+    "fromFingerprint": "sha256:f1a79d85669a6c258cef60d08cacec276bd20f2ace55e2be145e39344fa3c997",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:f67375ad285aa8869d61cd2eb32a4281e8cb22d81f03cd7782c761e4f01f578b",
+    "toFingerprint": "sha256:5d663e0e59f6e50d7c4c77981ca0ec1e6a804f2b2e6268a63bde16b974e1b420",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:f67375ad285aa8869d61cd2eb32a4281e8cb22d81f03cd7782c761e4f01f578b",
+      "toFingerprint": "sha256:5d663e0e59f6e50d7c4c77981ca0ec1e6a804f2b2e6268a63bde16b974e1b420",
       "cumulative": true,
       "transitions": [
         {
@@ -3544,15 +3544,6 @@
           "fromItemId": "item-6b4ab492-1b89-5e70-beb4-55c81c2f098c",
           "toItemIds": [
             "item-6b4ab492-1b89-5e70-beb4-55c81c2f098c"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
-          "fromItemId": "item-6bd5d267-7ace-57dd-adcc-5cbb7fb37e37",
-          "toItemIds": [
-            "item-6bd5d267-7ace-57dd-adcc-5cbb7fb37e37"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -10371,14 +10362,6 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "kss-26-russian-none-reverse-holo-type-symbol-background",
-      "toItemIds": [
-        "item-6bd5d267-7ace-57dd-adcc-5cbb7fb37e37"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
       "fromItemId": "kss-26-spanish-none-non-holo",
       "toItemIds": [
         "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
@@ -16934,13 +16917,6 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-ae1e6cc2-03ea-557b-a677-970cbee300bc"
-        ]
-      },
-      {
-        "legacyChecklistId": "kss-26-russian-none-reverse-holo-type-symbol-background",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-6bd5d267-7ace-57dd-adcc-5cbb7fb37e37"
         ]
       },
       {
@@ -25595,7 +25571,6 @@
         "cardReleaseId": "RELEASE:WEST:Russian:KSS:26:Snorlax-Rock-Smash-Strength",
         "disposition": "projected",
         "targetItemIds": [
-          "item-6bd5d267-7ace-57dd-adcc-5cbb7fb37e37",
           "item-ae1e6cc2-03ea-557b-a677-970cbee300bc"
         ],
         "reason": null
@@ -28383,6 +28358,11 @@
         "targetItemId": "item-9bd6ca89-58ba-5a5b-9d25-ed06176fc94c"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:1a715ebd469c048928442902",
+        "disposition": "projected",
+        "targetItemId": "item-5c414c98-0a06-51cc-b9ba-7645aa7a4235"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:1a7e140cd50a6fb97f7e03f5",
         "disposition": "projected",
         "targetItemId": "item-125e07bd-3b39-5544-9e22-8bcfbd7c2957"
@@ -28493,6 +28473,11 @@
         "targetItemId": "item-e93f37ee-1e7d-57fd-8e5c-94e0dd3d5ed9"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:bf0e4553a710e29792bbea61",
+        "disposition": "projected",
+        "targetItemId": "item-8f2f9110-2e84-5343-ad4d-636630352c38"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:d6091bc4805ce1edb01320e2",
         "disposition": "projected",
         "targetItemId": "item-05779600-0348-5c04-b378-ea75df235303"
@@ -28539,9 +28524,9 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 830,
+      "legacyChecklistRows": 829,
       "cardReleases": 612,
-      "physicalPrintings": 499,
+      "physicalPrintings": 501,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
