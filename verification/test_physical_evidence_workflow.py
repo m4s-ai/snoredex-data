@@ -101,11 +101,15 @@ def main() -> None:
     merged: list[dict] = [merged_without_image]
     projector.add_printing(merged, projector.specimen_printing(fixture[0]))
     assert merged[0]["image"] == "verification/specimens/SPEC-0040.png"
+    assert merged[0]["_origin"] == "specimen"
     patterned = dict(fixture[0])
     patterned["physicalObservation"] = {
         **fixture[0]["physicalObservation"], "foilPattern": "Poké Ball mirror"
     }
     assert projector.specimen_printing(patterned)["foilPattern"] == "poke-ball"
+    assert projector.specimen_markings({
+        "markings": "STAFF", "markingRole": "distribution-promo"
+    }) == [{"kind": "staff", "role": "distribution-promo", "text": "Staff"}]
     mp1_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0025")
     mp1_candidate = projector.specimen_printing(mp1_specimen)
     assert mp1_candidate is not None
