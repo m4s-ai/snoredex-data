@@ -376,6 +376,7 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
     if candidate.get("specimenIds"):
         existing["specimenIds"] = sorted(set(existing.get("specimenIds") or [])
                                           | set(candidate["specimenIds"]))
+        existing["_origin"] = "specimen"
     existing_conflicts = sorted(set(existing.get("conflictsWith") or []))
     if existing_conflicts or conflicts:
         existing["verificationStatus"] = "pending"
@@ -410,8 +411,14 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
     text = observation.get("markings")
     if not text:
         return []
-    kind = "edition-stamp" if str(text).casefold() == "editie 1" else "observed-marking"
-    return [{"kind": kind, "role": observation.get("markingRole"), "text": text}]
+    normalized = str(text).strip()
+    if normalized.casefold() == "editie 1":
+        kind = "edition-stamp"
+    elif normalized.casefold() == "staff":
+        kind, normalized = "staff", "Staff"
+    else:
+        kind = "observed-marking"
+    return [{"kind": kind, "role": observation.get("markingRole"), "text": normalized}]
 
 
 def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:

@@ -464,11 +464,17 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
     text = observation.get("markings")
     if not text:
         return []
-    kind = "edition-stamp" if str(text).casefold() == "editie 1" else "observed-marking"
+    normalized = str(text).strip()
+    if normalized.casefold() == "editie 1":
+        kind = "edition-stamp"
+    elif normalized.casefold() == "staff":
+        kind, normalized = "staff", "Staff"
+    else:
+        kind = "observed-marking"
     return [{
         "kind": kind,
         "role": observation.get("markingRole"),
-        "text": text,
+        "text": normalized,
     }]
 
 
