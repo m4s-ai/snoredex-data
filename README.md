@@ -125,9 +125,9 @@ Current-known status snapshot: **2026-08-26**. Its candidate denominator is the 
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 635 externally confirmed, 84 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Evidence-safe application status | **618 established**, **17 needs evidence**, **80 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
-| Current-known physical checklist | **829 items** across 174 cards and 15 languages: 683 documented printings plus 146 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 353 externally confirmed, 97 marketplace-only positives, 112 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 208 units. |
-| Evidence registry | **25 providers**, 926 evidence records, 919 unique URLs, and 2,873 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
+| Current-known physical checklist | **829 items** across 174 cards and 15 languages: 686 documented printings plus 143 explicit unresolved placeholders. |
+| Current-known finish evidence | **637 card-number × language units**: 359 externally confirmed, 93 marketplace-only positives, 110 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 206 units. |
+| Evidence registry | **25 providers**, 932 evidence records, 925 unique URLs, and 2,879 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. Browser and live-source checks run in the Linux release lane. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -300,7 +300,7 @@ owner-adjudicated finish decision may also close a unit after review, but never 
 | Known available finish | Set-number-language units |
 |---|---:|
 | Non-Holo | 284 |
-| Holo | 149 |
+| Holo | 151 |
 | Reverse Holo family | 242 |
 | Both Non-Holo and Holo | 22 |
 <!-- /generated:finish-coverage -->

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 46,
+  "count": 56,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -64,13 +64,25 @@
       "variant": "base",
       "language": "Portuguese",
       "heldBy": "collection owner",
-      "inspectedFrom": "photograph",
-      "photograph": null,
-      "observed": "Physical Portuguese copy inspected from a photograph: \"Snorlax\", BASICO, NV.20, 130 PS, \"Habilidade: Imunidade\" (Este Pokemon nao pode ser afetado por nenhuma Condicao Especial), attack \"Pancada Corporal\" 50, Pokedex line \"N 143 Pokemon Dorminhoco Alt: 2,1 m Peso: 460,0 kg\", Fraqueza Fighting x2, Recuar 4, \"Ilust. Ken Sugimori\", (c)2016 Pokemon, card number XY179 with the black star promo symbol. This replaces the earlier owner-attestation record and completes all six Western languages for this promo from inspected specimens.",
-      "recordedAt": "2026-07-22",
+      "inspectedFrom": "photograph and public Enjoei seller photograph",
+      "photograph": "SPEC-0004.jpg",
+      "photographSource": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
+      "photographSha256": "sha256:f2254b3da2c1d56e32764205d7f894169372623aa838502ff7e4488328ab0d32",
+      "listingUrl": "https://www.enjoei.com.br/p/carta-pokemon-snorlax-1a-edicao-67794705",
+      "observed": "Public seller photograph corroborating the previously owner-inspected Portuguese XY179 specimen. BASICO, NV.20, 130 PS, Habilidade: Imunidade, Pancada Corporal, XY179 and the black-star promo symbol establish the exact card. Visible foil reflection across the artwork establishes holo; the collection owner confirmed candidate 5 on 2026-08-26.",
+      "recordedAt": "2026-08-26",
       "citedBy": [
-        "U0231"
-      ]
+        "U0231",
+        "F0636-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "black-star promo symbol",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The public full-card photograph matches the previously owner-inspected Portuguese XY179 identity and visibly shows foil reflection across the artwork. The collection owner confirmed candidate 5 and its finish on 2026-08-26."
+      }
     },
     {
       "specimenId": "SPEC-0005",
@@ -1005,6 +1017,137 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The binder photograph places the Russian non-holo and reverse copies side by side. The Russian name, Flashfire artwork and 80/106 identify the card, and the right copy visibly carries the type-symbol reverse pattern. The collection owner confirmed candidate 2 on 2026-08-26."
+      }
+    },
+    {
+      "specimenId": "SPEC-0052",
+      "setCode": "TRR",
+      "number": "104/109",
+      "variant": "base",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0052.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+      "photographSha256": "sha256:baf097f332826cb9e7a6bf60a3b4d69ca95eff927141ca5e6359e4b2ee8b8eb3",
+      "listingUrl": "https://www.ebay.com/itm/257574042846",
+      "observed": "Complete seller photograph of the Portuguese EX Team Rocket Returns Rocket's Snorlax ex. The card face reads \"Snorlax ex dos Rockets\", 100 PS, Curandeiro Sombrio, Garras Venenosas, Colapso and 104/109. Visible multicolour foil reflection across the artwork and border establishes the holo printing. The collection owner confirmed candidate 1 and its finish on 2026-08-26.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0562-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Portuguese 104/109 card is legible and visibly reflects multicolour foil across its artwork and border; the collection owner confirmed candidate 1 as correctly identified on 2026-08-26."
+      }
+    },
+    {
+      "specimenId": "SPEC-0053",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Shopee seller photograph",
+      "photograph": "SPEC-0053.jpg",
+      "photographSource": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
+      "photographSha256": "sha256:245f19a384d2e6e8b34b7ff0a8f7da85ec21bb18a15169e36e74c5c8d4381ae4",
+      "listingUrl": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
+      "observed": "Complete physical-card photograph of Portuguese Generations Snorlax 58/83. BASICO, 130 PS, Agitar e Acalmar, Aperto Sonolento, the Generations symbol and 58/83 establish the exact identity. The collection owner confirmed candidate 2 as the non-holo printing on 2026-08-26.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0140-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Portuguese 58/83 card face establishes identity. The collection owner's explicit 2026-08-26 confirmation establishes the non-holo finish; the finish is not inferred merely from missing glare."
+      }
+    },
+    {
+      "specimenId": "SPEC-0054",
+      "setCode": "HIF",
+      "number": "50/68",
+      "variant": "V1",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller scan",
+      "photograph": "SPEC-0054.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
+      "photographSha256": "sha256:3fd211b853f8d6508559f7acda7af3580cb09035c201059198499031263ba050",
+      "listingUrl": "https://www.ebay.com/itm/235807084646",
+      "observed": "Complete seller scan of Portuguese Hidden Fates Snorlax 50/68. BASICO, 150 PS, Ronco Impressionante, the Hidden Fates symbol and 50/68 establish the exact identity. The collection owner confirmed candidate 3 as the non-holo printing on 2026-08-26; the seller's inaccurate Ultra Rare metadata is not used.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0148-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Portuguese 50/68 card face establishes identity. The collection owner's explicit 2026-08-26 confirmation establishes the non-holo finish; seller rarity metadata and absence of glare are not treated as finish evidence."
+      }
+    },
+    {
+      "specimenId": "SPEC-0055",
+      "setCode": "JU",
+      "number": "11/64",
+      "variant": "V1",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0055.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
+      "photographSha256": "sha256:10952c850e70c51a51a86551a777bcd236a5fe7bc8ef929a8724904975ff6cc2",
+      "listingUrl": "https://www.ebay.com/itm/397923018972",
+      "observed": "Complete seller photograph of Portuguese Jungle Snorlax 11/64. The Portuguese card text, Jungle symbol and 11/64 identify the exact card, while the reflective artwork field establishes the holo finish. The collection owner confirmed candidate 4 and explicitly adjudicated this copy as Unlimited on 2026-08-26.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0166-P02"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "edition": "Unlimited",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The retained full-card photograph shows Portuguese Jungle 11/64 with a reflective holographic artwork field. The collection owner's explicit 2026-08-26 adjudication establishes Unlimited; edition is not inferred from an absent stamp."
+      }
+    },
+    {
+      "specimenId": "SPEC-0056",
+      "setCode": "DP",
+      "number": "37/130",
+      "variant": "base",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0056.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/XrgAAeSwDF1qVdFf/s-l1600.jpg",
+      "photographSha256": "sha256:d8b96894bbd9be986f7e1bbeac4d3be1f64dfad6dd1b07e1aca89aace6109266",
+      "listingUrl": "https://www.ebay.com/itm/366541317089",
+      "observed": "Complete seller photograph of Portuguese Diamond & Pearl Snorlax Lv.35 37/130. BASICO, Bloquear, Sossegar, DPBP#174 and 37/130 establish the exact local card identity. The collection owner confirmed candidate 6 as the non-holo printing on 2026-08-26.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0093-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Portuguese 37/130 card face establishes identity. The collection owner's explicit 2026-08-26 confirmation establishes the non-holo finish; the finish is not inferred merely from missing glare."
       }
     }
   ]

@@ -4,18 +4,18 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-26",
-  "projectionVersion": "4434b9fb972813afdfb0df9b502c9b024ff496d9104feffb27a132929909016d",
+  "projectionVersion": "ca45efe193344a5a2dafaa61bdc72e34213f22d23966aecef87bc6fc9bd54d9c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 229,
+    "groups": 230,
     "mappedWorks": 38,
-    "mappedAppearances": 179,
+    "mappedAppearances": 180,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 501,
-    "sourceObservations": 1684
+    "physicalPrintings": 507,
+    "sourceObservations": 1693
   },
   "groups": [
     {
@@ -9992,13 +9992,42 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:1d64e8aac5a009bb6114b682",
+              "semanticPrintingId": "PRINTING:1d64e8aac5a009bb6114b682",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:TRR:104:Rockets-Snorlax-ex-Dark-Healer-Poison-Claws-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0562",
+              "sourcePrintingId": "F0562-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1d64e8aac5a009bb6114b682",
+              "specimenIds": [
+                "SPEC-0052"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of the Portuguese EX Team Rocket Returns Rocket's Snorlax ex. The card face reads \"Snorlax ex dos Rockets\", 100 PS, Curandeiro Sombrio, Garras Venenosas, Colapso and 104/109. Visible multicolour foil reflection across the artwork and border establishes the holo printing. The collection owner confirmed candidate 1 and its finish on 2026-08-26. Retained as SPEC-0052."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Rocket's Snorlax ex",
             "artist": "Mitsuhiro Arita",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -10015,6 +10044,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0562-P01:0:8a3b230b4aa374a7",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+              "evidence": "Complete seller photograph of the Portuguese EX Team Rocket Returns Rocket's Snorlax ex. The card face reads \"Snorlax ex dos Rockets\", 100 PS, Curandeiro Sombrio, Garras Venenosas, Colapso and 104/109. Visible multicolour foil reflection across the artwork and border establishes the holo printing. The collection owner confirmed candidate 1 and its finish on 2026-08-26. Retained as SPEC-0052.",
+              "contentHash": "1b32cd42926bd153a2b190add323ded0a51e97cb77b8b6f9172ecfc5da596238",
+              "image": null
+            },
             {
               "observationId": "unit:U0630",
               "kind": "unit",
@@ -29560,7 +29598,39 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d3f6b4c849d9dc25acac8afc",
+              "semanticPrintingId": "PRINTING:d3f6b4c849d9dc25acac8afc",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:HIF:50:Snorlax-Incredible-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0148",
+              "sourcePrintingId": "F0148-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d3f6b4c849d9dc25acac8afc",
+              "specimenIds": [
+                "SPEC-0054"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller scan of Portuguese Hidden Fates Snorlax 50/68. BASICO, 150 PS, Ronco Impressionante, the Hidden Fates symbol and 50/68 establish the exact identity. The collection owner confirmed candidate 3 as the non-holo printing on 2026-08-26; the seller's inaccurate Ultra Rare metadata is not used. Retained as SPEC-0054."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -29588,6 +29658,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0148-P01:0:6ea3d6f679fb4253",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "b54e9940073d6ac8ffa0c348880676da5ad77335154b37284608127eb00d5881",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0148-P01:1:ae05b2dc8bd03602",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
+              "evidence": "Complete seller scan of Portuguese Hidden Fates Snorlax 50/68. BASICO, 150 PS, Ronco Impressionante, the Hidden Fates symbol and 50/68 establish the exact identity. The collection owner confirmed candidate 3 as the non-holo printing on 2026-08-26; the seller's inaccurate Ultra Rare metadata is not used. Retained as SPEC-0054.",
+              "contentHash": "4e1dd989f1e1a972ad4089c291e951d98967568c16e6646f527dc9ab9144e51f",
+              "image": null
+            },
             {
               "observationId": "unit:U0088",
               "kind": "unit",
@@ -33455,7 +33543,39 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:e0d5b31c99fa5eef3c036051",
+              "semanticPrintingId": "PRINTING:e0d5b31c99fa5eef3c036051",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:DP:37:Snorlax-Lv35-Block-Ease-Up",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0093",
+              "sourcePrintingId": "F0093-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e0d5b31c99fa5eef3c036051",
+              "specimenIds": [
+                "SPEC-0056"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/XrgAAeSwDF1qVdFf/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Portuguese Diamond & Pearl Snorlax Lv.35 37/130. BASICO, Bloquear, Sossegar, DPBP#174 and 37/130 establish the exact local card identity. The collection owner confirmed candidate 6 as the non-holo printing on 2026-08-26. Retained as SPEC-0056."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax Lv.35",
@@ -33483,6 +33603,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0093-P01:0:772564083dc5648c",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "4b09e2c3028d7f202e5bb623ac529788e0f7f1146003901e3ab5cc96d17849ad",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0093-P01:1:f150779459d0eb1b",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/XrgAAeSwDF1qVdFf/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Portuguese Diamond & Pearl Snorlax Lv.35 37/130. BASICO, Bloquear, Sossegar, DPBP#174 and 37/130 establish the exact local card identity. The collection owner confirmed candidate 6 as the non-holo printing on 2026-08-26. Retained as SPEC-0056.",
+              "contentHash": "871d8b9e6eafd451c358525d859688075a9e748709cb92ab2e86223277a53dad",
+              "image": null
+            },
             {
               "observationId": "unit:U0363",
               "kind": "unit",
@@ -42409,7 +42547,39 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:98b5de5bbdc57e00735782dc",
+              "semanticPrintingId": "PRINTING:98b5de5bbdc57e00735782dc",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0140",
+              "sourcePrintingId": "F0140-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:98b5de5bbdc57e00735782dc",
+              "specimenIds": [
+                "SPEC-0053"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete physical-card photograph of Portuguese Generations Snorlax 58/83. BASICO, 130 PS, Agitar e Acalmar, Aperto Sonolento, the Generations symbol and 58/83 establish the exact identity. The collection owner confirmed candidate 2 as the non-holo printing on 2026-08-26. Retained as SPEC-0053."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -42437,6 +42607,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0140-P01:0:7408347bd100316b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "b56f476fddd7456165bc9d36eccbe5d7bbd4335e88121cd84db23262a3d65ff2",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0140-P01:1:36400d89db5b8244",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
+              "evidence": "Complete physical-card photograph of Portuguese Generations Snorlax 58/83. BASICO, 130 PS, Agitar e Acalmar, Aperto Sonolento, the Generations symbol and 58/83 establish the exact identity. The collection owner confirmed candidate 2 as the non-holo printing on 2026-08-26. Retained as SPEC-0053.",
+              "contentHash": "9dc8dfa2466b16e4cac7ef02c7430929aa5c6527f38359c4777df3517d37e21c",
+              "image": null
+            },
             {
               "observationId": "unit:U0247",
               "kind": "unit",
@@ -43127,68 +43315,6 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:WEST:Portuguese:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
-          "workId": "WORK:Snorlax-Thick-Skinned-Body-Slam",
-          "cardKey": "Snorlax-Thick-Skinned-Body-Slam",
-          "appearanceId": "APPEARANCE:IMAGE:8d152919c71943974032f83c",
-          "appearanceIdentityState": "verified-image-match",
-          "locality": "WEST",
-          "language": "Portuguese",
-          "script": "Latn",
-          "setEditionId": "EDITION:WEST:Portuguese:XYPR",
-          "localSetCode": "XYPR",
-          "localNumber": "179",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax",
-            "artist": "Ken Sugimori",
-            "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/XYPR_179_Snorlax_295168.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0231",
-              "contentHash": "a0f6f1b5d501cdfdb096a4599f518988350d262e860dd6da3cfb0b085ff2b2f6",
-              "kind": "repository",
-              "reviewable": true
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "specimen:SPEC-0004",
-              "kind": "specimen",
-              "provider": "collection-owner",
-              "url": null,
-              "evidence": "Physical Portuguese copy inspected from a photograph: \"Snorlax\", BASICO, NV.20, 130 PS, \"Habilidade: Imunidade\" (Este Pokemon nao pode ser afetado por nenhuma Condicao Especial), attack \"Pancada Corporal\" 50, Pokedex line \"N 143 Pokemon Dorminhoco Alt: 2,1 m Peso: 460,0 kg\", Fraqueza Fighting x2, Recuar 4, \"Ilust. Ken Sugimori\", (c)2016 Pokemon, card number XY179 with the black star promo symbol. This replaces the earlier owner-attestation record and completes all six Western languages for this promo from inspected specimens.",
-              "contentHash": "15b23833fbd3c581d3c4adb042443edac14855588efea3500a7a06eb00088879",
-              "image": null
-            },
-            {
-              "observationId": "unit:U0231",
-              "kind": "unit",
-              "provider": "inspected-specimen",
-              "url": null,
-              "evidence": "Physical Portuguese copy inspected from a photograph: \"Snorlax\", BASICO, NV.20, 130 PS, \"Habilidade: Imunidade\" (Este Pokemon nao pode ser afetado por nenhuma Condicao Especial), attack \"Pancada Corporal\" 50, Pokedex line \"N 143 Pokemon Dorminhoco Alt: 2,1 m Peso: 460,0 kg\", Fraqueza Fighting x2, Recuar 4, \"Ilust. Ken Sugimori\", (c)2016 Pokemon, card number XY179 with the black star promo symbol. This replaces the earlier owner-attestation record and completes all six Western languages for this promo from inspected specimens.",
-              "contentHash": "2122d890c756c2c45bf3acb648277e226b903c28f9d2efaf51b1c872df4b8433",
-              "image": "images/XYPR_179_Snorlax_295168.jpg"
-            }
-          ]
-        },
-        {
           "cardReleaseId": "RELEASE:WEST:Spanish:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
           "workId": "WORK:Snorlax-Thick-Skinned-Body-Slam",
           "cardKey": "Snorlax-Thick-Skinned-Body-Slam",
@@ -43246,6 +43372,137 @@
               "url": null,
               "evidence": "Physical Spanish copy inspected from a photograph: \"Snorlax\", BASICO, Niv.20, 130 PS, \"Habilidad: Inmunidad\", attack \"Golpe Cuerpo\" 50, Pokedex line \"N.o 143 Pokemon Dormir Altura: 2,1 m Peso: 460,0 kg\", debilidad Fighting x2, retirada 4. All three photographed copies carry card number XY179 with the black star promo symbol, \"Illus. Ken Sugimori\" and (c)2016 Pokemon, matching the English XY179 print. This also shows the promo was localized across Europe, which the Bulbapedia release note (\"in the English Snorlax-GX Box\") does not convey.",
               "contentHash": "64dfd09007773cd1a26a94235b885a157472210178e2ebfe2ab76d65924461d2",
+              "image": "images/XYPR_179_Snorlax_295168.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:IMAGE:9a979c02eda308b4a6d775db",
+      "groupKind": "mapped-appearance",
+      "appearanceId": "APPEARANCE:IMAGE:9a979c02eda308b4a6d775db",
+      "appearanceIdentityState": "verified-image-match",
+      "workIds": [
+        "WORK:Snorlax-Thick-Skinned-Body-Slam"
+      ],
+      "cardKeys": [
+        "Snorlax-Thick-Skinned-Body-Slam"
+      ],
+      "label": "Snorlax-Thick-Skinned-Body-Slam",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:Portuguese:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
+          "workId": "WORK:Snorlax-Thick-Skinned-Body-Slam",
+          "cardKey": "Snorlax-Thick-Skinned-Body-Slam",
+          "appearanceId": "APPEARANCE:IMAGE:9a979c02eda308b4a6d775db",
+          "appearanceIdentityState": "verified-image-match",
+          "locality": "WEST",
+          "language": "Portuguese",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:Portuguese:XYPR",
+          "localSetCode": "XYPR",
+          "localNumber": "179",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:b7649899ccd7db77bc1375b1",
+              "semanticPrintingId": "PRINTING:b7649899ccd7db77bc1375b1",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "distribution-promo",
+                  "text": "black-star promo symbol"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0636",
+              "sourcePrintingId": "F0636-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:b7649899ccd7db77bc1375b1",
+              "specimenIds": [
+                "SPEC-0004"
+              ],
+              "sources": [
+                {
+                  "url": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Public seller photograph corroborating the previously owner-inspected Portuguese XY179 specimen. BASICO, NV.20, 130 PS, Habilidade: Imunidade, Pancada Corporal, XY179 and the black-star promo symbol establish the exact card. Visible foil reflection across the artwork establishes holo; the collection owner confirmed candidate 5 on 2026-08-26. Retained as SPEC-0004."
+                }
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax",
+            "artist": "Ken Sugimori",
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [],
+            "markings": [
+              "black-star promo symbol"
+            ],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "images/XYPR_179_Snorlax_295168.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0231",
+              "contentHash": "a0f6f1b5d501cdfdb096a4599f518988350d262e860dd6da3cfb0b085ff2b2f6",
+              "kind": "repository",
+              "reviewable": true
+            },
+            {
+              "src": "verification/specimens/SPEC-0004.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0004",
+              "contentHash": "f2254b3da2c1d56e32764205d7f894169372623aa838502ff7e4488328ab0d32",
+              "kind": "repository",
+              "reviewable": true
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "finish:F0636-P01:0:bf94f6ca0e627d67",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
+              "evidence": "Public seller photograph corroborating the previously owner-inspected Portuguese XY179 specimen. BASICO, NV.20, 130 PS, Habilidade: Imunidade, Pancada Corporal, XY179 and the black-star promo symbol establish the exact card. Visible foil reflection across the artwork establishes holo; the collection owner confirmed candidate 5 on 2026-08-26. Retained as SPEC-0004.",
+              "contentHash": "b923dcf4124c0ce580fb31edf28ec132dfc5cadd46a7f42f3e9204776cd9a978",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0004",
+              "kind": "specimen",
+              "provider": "collection-owner",
+              "url": null,
+              "evidence": "Public seller photograph corroborating the previously owner-inspected Portuguese XY179 specimen. BASICO, NV.20, 130 PS, Habilidade: Imunidade, Pancada Corporal, XY179 and the black-star promo symbol establish the exact card. Visible foil reflection across the artwork establishes holo; the collection owner confirmed candidate 5 on 2026-08-26.",
+              "contentHash": "9f3767966e57e561d05f9ab67a10e17d74fce67944832b6355273da3f9766c61",
+              "image": "verification/specimens/SPEC-0004.jpg"
+            },
+            {
+              "observationId": "unit:U0231",
+              "kind": "unit",
+              "provider": "inspected-specimen",
+              "url": null,
+              "evidence": "Physical Portuguese copy inspected from a photograph: \"Snorlax\", BASICO, NV.20, 130 PS, \"Habilidade: Imunidade\" (Este Pokemon nao pode ser afetado por nenhuma Condicao Especial), attack \"Pancada Corporal\" 50, Pokedex line \"N 143 Pokemon Dorminhoco Alt: 2,1 m Peso: 460,0 kg\", Fraqueza Fighting x2, Recuar 4, \"Ilust. Ken Sugimori\", (c)2016 Pokemon, card number XY179 with the black star promo symbol. This replaces the earlier owner-attestation record and completes all six Western languages for this promo from inspected specimens.",
+              "contentHash": "2122d890c756c2c45bf3acb648277e226b903c28f9d2efaf51b1c872df4b8433",
               "image": "images/XYPR_179_Snorlax_295168.jpg"
             }
           ]
@@ -44671,7 +44928,34 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d792d590f3ba7f882f69455d",
+              "semanticPrintingId": "PRINTING:d792d590f3ba7f882f69455d",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0166",
+              "sourcePrintingId": "F0166-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d792d590f3ba7f882f69455d",
+              "specimenIds": [
+                "SPEC-0055"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 11/64. The Portuguese card text, Jungle symbol and 11/64 identify the exact card, while the reflective artwork field establishes the holo finish. The collection owner confirmed candidate 4 and explicitly adjudicated this copy as Unlimited on 2026-08-26. Retained as SPEC-0055."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -44696,6 +44980,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0166-P02:0:faed7d634f35f7e8",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 11/64. The Portuguese card text, Jungle symbol and 11/64 identify the exact card, while the reflective artwork field establishes the holo finish. The collection owner confirmed candidate 4 and explicitly adjudicated this copy as Unlimited on 2026-08-26. Retained as SPEC-0055.",
+              "contentHash": "21556cb606b2b22aa6c01221ccfde044566ca5ffe397f0011caaf0566c3b08d9",
+              "image": null
+            },
             {
               "observationId": "unit:U0124",
               "kind": "unit",
