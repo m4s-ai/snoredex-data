@@ -485,7 +485,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 2,
         "coverage": "individual cards whose text and markings were read from a seller's listing photograph",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish", "edition"],
+        "usedFor": ["language", "identity", "finish", "edition"],
         "attribution": "Seller listing photograph via Cardmarket.",
         "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
     },
@@ -500,7 +500,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 2,
         "coverage": "individual cards whose text and markings were read from a retained seller photograph on a non-Cardmarket marketplace",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish", "edition"],
+        "usedFor": ["language", "identity", "finish", "edition"],
         "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
         "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
     },
@@ -678,8 +678,19 @@ def main() -> int:
     for unit in finish_units:
         for printing in unit["printings"]:
             for source in printing.get("sources") or []:
-                record(source.get("url"), source.get("sourceType"), "finish",
-                       printing["printingId"], source.get("retrievedAt"))
+                dimensions = source.get("claimFields") or ["finish"]
+                if (
+                    not isinstance(dimensions, list)
+                    or not dimensions
+                    or any(field not in {"identity", "finish", "edition"} for field in dimensions)
+                ):
+                    unresolved.append(
+                        f"claimFields:{printing['printingId']} value={dimensions!r}"
+                    )
+                    continue
+                for dimension in dimensions:
+                    record(source.get("url"), source.get("sourceType"), dimension,
+                           printing["printingId"], source.get("retrievedAt"))
 
     for name, source in (overrides.get("sources") or {}).items():
         record(source.get("url"), source.get("sourceType"), "finish-override", f"override:{name}")

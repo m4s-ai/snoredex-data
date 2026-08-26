@@ -64,7 +64,9 @@ When a retained marketplace photograph establishes card identity but the collect
 the finish or edition determination, record that split explicitly as
 `ownerAttestedFields: ["finish"]` or `["edition"]`. The projector then keeps the seller photograph
 as supporting identity evidence and adds owner attestation as the claim-carrying source for those
-named properties; it must not attribute an owner-confirmed property to the listing photograph.
+named properties. Its generated sources carry `claimFields`, which the source registry projects as
+separate identity, finish, and edition dimensions; it must not attribute an owner-confirmed property
+to the listing photograph.
 
 **The block is optional and is never back-filled.** Current counts live in `specimens.json`; records
 without the block say nothing about finish, and that silence is not evidence of non-holo. Read the

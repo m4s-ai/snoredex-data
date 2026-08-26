@@ -437,13 +437,22 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
 
 
 def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> list[dict[str, Any]]:
-    sources = [specimen_source(specimen)]
+    photograph_source = specimen_source(specimen)
+    sources = [photograph_source]
     owner_fields = observation.get("ownerAttestedFields") or []
     if owner_fields:
+        photograph_source["claimFields"] = [
+            "identity",
+            *[
+                field for field in ("finish", "edition")
+                if observation.get(field) is not None and field not in owner_fields
+            ],
+        ]
         labels = {"finish": "finish", "edition": "edition"}
         established = ", ".join(labels[field] for field in owner_fields)
         sources.append({
             "sourceType": "Owner attestation (domain expert)",
+            "claimFields": owner_fields,
             "evidence": (
                 f"The collection owner's explicit {specimen.get('recordedAt', '')} confirmation "
                 f"establishes the specimen's {established}; the retained seller photograph "

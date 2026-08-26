@@ -13,7 +13,7 @@
    "evidenceRecords": 932,
    "uniqueUrls": 925,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2901
+   "claimsAttributed": 2902
   }
  },
  "providers": [
@@ -620,6 +620,7 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
+    "identity",
     "finish",
     "edition"
    ],
@@ -641,6 +642,7 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
+    "identity",
     "finish",
     "edition"
    ],
@@ -648,7 +650,7 @@
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
    "uniqueSources": 8,
-   "claimsSupported": 8
+   "claimsSupported": 9
   }
  ],
  "evidence": [
@@ -10443,6 +10445,7 @@
     "Owner attestation plus downloaded scan review"
    ],
    "dimensions": [
+    "edition",
     "finish",
     "finish-override",
     "language"
@@ -12599,7 +12602,7 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "identity"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -12616,7 +12619,7 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "identity"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -12633,14 +12636,15 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "F0166-P02"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
@@ -12650,7 +12654,7 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "identity"
    ],
    "stableIdCount": 1,
    "stableIds": [

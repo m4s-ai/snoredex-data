@@ -104,6 +104,26 @@ def main() -> None:
         owner_evidence = printing["sources"][1]["evidence"]
         expected_property = "edition" if specimen_id == "SPEC-0055" else "finish"
         assert expected_property in owner_evidence
+        assert printing["sources"][1]["claimFields"] == [expected_property]
+        expected_photo_fields = ["identity", "finish"] if specimen_id == "SPEC-0055" else ["identity"]
+        assert printing["sources"][0]["claimFields"] == expected_photo_fields
+
+    source_registry = read("source_registry.json")["evidence"]
+    target_specimens = {
+        row["specimenId"]: row for row in specimens if row["specimenId"] in portuguese_owner_confirmed
+    }
+    target_urls = {row["photographSource"] for row in target_specimens.values()}
+    seller_dimensions = {
+        source["canonicalUrl"]: source["dimensions"]
+        for source in source_registry
+        if source.get("canonicalUrl") in target_urls
+    }
+    assert seller_dimensions == {
+        target_specimens["SPEC-0053"]["photographSource"]: ["identity"],
+        target_specimens["SPEC-0054"]["photographSource"]: ["identity"],
+        target_specimens["SPEC-0055"]["photographSource"]: ["finish", "identity"],
+        target_specimens["SPEC-0056"]["photographSource"]: ["identity"],
+    }
     omitted_size = dict(fixture[0])
     omitted_size["physicalObservation"] = {
         key: value for key, value in fixture[0]["physicalObservation"].items()
