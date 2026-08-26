@@ -96,6 +96,16 @@ ENGLISH_ONLY_PRINTING_REFS = {
     "owner-scan-review",
 }
 
+# These earlier observations identify the exact card, language and Prize Pack printing. The
+# localized Series One/Three name-list rows are deliberately absent: they establish only product
+# names, not a Snorlax card or V1/V2 finish.
+EXACT_PRIOR_CORROBORATION_UNITS = {
+    "U0372", "U0534", "U0593",
+    "U0187", "U0188", "U0189", "U0190", "U0191", "U0192",
+    "U0214", "U0215", "U0216", "U0217", "U0218", "U0219",
+    "U0324", "U0325", "U0326", "U0327", "U0328", "U0329",
+}
+
 # These Brazilian-market observations are source-capability fixtures and remain the current
 # language evidence. Their official checklists are still appended below and drive finish truth.
 CURRENT_EXCEPTIONS = {
@@ -165,12 +175,7 @@ def main() -> int:
                         "evidence": evidence,
                         "checkedAt": CHECKED_AT,
                     }))
-                observed_sources = {
-                    str(row.get("source")) for row in journal
-                    if row.get("unitId") == unit_id and row.get("source")
-                }
-                observed_sources.add(str(desired["sourceUrl"]))
-                desired["corroborated"] = len(observed_sources) > 1
+                desired["corroborated"] = unit_id in EXACT_PRIOR_CORROBORATION_UNITS
                 if any(unit.get(key) != value for key, value in desired.items()):
                     unit.update(desired)
                     changed += 1

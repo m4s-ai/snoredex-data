@@ -226,22 +226,26 @@ def main() -> int:
                     f"{override['setCode']} {language} inherits English-market evidence"
                 )
 
-    journal = [
-        json.loads(line) for line in (ROOT / "verification/evidence.jsonl").read_text(
-            encoding="utf-8"
-        ).splitlines() if line
-    ]
-    prize_pack_unit_ids = {
-        unit["unitId"] for unit in units
-        if unit["setCode"] in {"PPS1 VIV", "PPS3 LOR", "PPS7 JTG", "PPS8 JTG"}
+    exact_prior_support = {
+        "U0372", "U0534", "U0593",
+        "U0187", "U0188", "U0189", "U0190", "U0191", "U0192",
+        "U0214", "U0215", "U0216", "U0217", "U0218", "U0219",
+        "U0324", "U0325", "U0326", "U0327", "U0328", "U0329",
     }
-    for unit_id in prize_pack_unit_ids:
-        observed_sources = {
-            str(row.get("source")) for row in journal
-            if row.get("unitId") == unit_id and row.get("source")
-        }
-        if len(observed_sources) > 1 and not by_id[unit_id].get("corroborated"):
-            raise AssertionError(f"Prize Pack corroboration was demoted: {unit_id}")
+    localized_name_only = {
+        "U0373", "U0374", "U0375", "U0376",
+        "U0535", "U0536", "U0537", "U0538",
+        "U0594", "U0595", "U0596", "U0597",
+    }
+    if {unit_id for unit_id in exact_prior_support if not by_id[unit_id].get("corroborated")}:
+        raise AssertionError("exact Prize Pack corroboration was demoted")
+    false_corroboration = {
+        unit_id for unit_id in localized_name_only if by_id[unit_id].get("corroborated")
+    }
+    if false_corroboration:
+        raise AssertionError(
+            f"localized product names were counted as exact corroboration: {false_corroboration}"
+        )
 
     finish_units = load("verification/finish_units.json")["units"]
     for language in ("German", "Portuguese"):

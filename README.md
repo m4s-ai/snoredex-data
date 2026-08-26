@@ -171,11 +171,11 @@ throughout this project and is genuinely uncommon:
 <!-- generated:evidence-strength — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | How the claim is sourced | Resolved claims |
 |---|---:|
-| Corroborated by a second provider | 67 |
-| Single tier 1-2 source | 649 |
+| Corroborated by a second provider | 55 |
+| Single tier 1-2 source | 661 |
 | Single tier 3 source | 3 |
 
-652 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 23 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+664 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 23 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in
