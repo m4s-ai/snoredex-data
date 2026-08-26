@@ -259,6 +259,16 @@ def main() -> int:
         if not any(source.get("languages") == [language] for source in holo["sources"]):
             raise AssertionError(f"{language} specimen-backed holo lost its localized checklist")
 
+    specimens = load("verification/specimens.json")["specimens"]
+    polish_non_holo = next(row for row in specimens if row["specimenId"] == "SPEC-0045")
+    finish_basis = str((polish_non_holo.get("physicalObservation") or {}).get("basis") or "")
+    if (
+        (polish_non_holo.get("physicalObservation") or {}).get("finish") != "non-holo"
+        or "collection owner" not in finish_basis.casefold()
+        or "scan lighting alone is not treated as finish evidence" not in finish_basis.casefold()
+    ):
+        raise AssertionError("Polish non-holo scan lacks its explicit owner identification boundary")
+
     print(f"evidence application regressions passed: {counts}")
     return 0
 
