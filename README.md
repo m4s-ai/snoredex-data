@@ -127,7 +127,7 @@ Current-known status snapshot: **2026-08-26**. Its candidate denominator is the 
 | Evidence-safe application status | **618 established**, **17 needs evidence**, **80 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **829 items** across 174 cards and 15 languages: 686 documented printings plus 143 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 359 externally confirmed, 93 marketplace-only positives, 110 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 206 units. |
-| Evidence registry | **25 providers**, 932 evidence records, 925 unique URLs, and 2,879 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
+| Evidence registry | **26 providers**, 932 evidence records, 925 unique URLs, and 2,879 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. Browser and live-source checks run in the Linux release lane. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -151,7 +151,7 @@ agreed independently, and `verification/source_registry.json` records the author
 | Tier | Sources |
 |---|---|
 | 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · Pokémon Card official database and rules (Korea) · The Pokémon Company official cards and checklists |
-| 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · TCGdex · pokemontcg.io |
+| 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · Seller listing photograph · TCGdex · pokemontcg.io |
 | 3 | LigaPokemon · Limitless TCG · PokéCottage · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · koreanpokemoncards.com · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 

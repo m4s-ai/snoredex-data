@@ -15,15 +15,15 @@
       "An exact retained PokéCottage row is tier-3 positive confirmation for the facts it states. Facts demonstrably shared by an already identified matching Western release may corroborate that release when the equivalence basis is retained; omissions and unstated alternatives never establish absence or completeness."
     ],
     "counts": {
-      "providers": 25,
-      "surfaces": 29,
-      "coverageEdges": 30,
+      "providers": 26,
+      "surfaces": 30,
+      "coverageEdges": 31,
       "absenceEdges": 3,
-      "observations": 32,
+      "observations": 33,
       "resolvedVerdictSources": 932
     },
     "surfaceStates": {
-      "active": 12,
+      "active": 13,
       "blocked-by-browser": 3,
       "incomplete": 8,
       "internal": 1,
@@ -207,6 +207,13 @@
       "authorityTier": 2,
       "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
       "rawRetention": "Retain listing id, seller image, capture date and SHA-256 when a stable specimen is accepted."
+    },
+    {
+      "providerId": "seller-listing-photo",
+      "operator": "Various online marketplaces",
+      "authorityTier": 2,
+      "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
+      "rawRetention": "Retain marketplace, listing URL/id, seller image, capture date and SHA-256 for every accepted specimen."
     }
   ],
   "surfaces": [
@@ -1233,6 +1240,43 @@
       },
       "coverageEdgeIds": [
         "cardmarket-listing-photo-positive"
+      ]
+    },
+    {
+      "surfaceId": "seller-listing-photos",
+      "providerId": "seller-listing-photo",
+      "label": "Retained non-Cardmarket seller photographs",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-26",
+      "freshnessPolicy": "Retain the actual marketplace, listing URL/id, original seller image, capture date and specimen identity review for every accepted claim.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "Exact marketplace listing URL when retained",
+        "parameters": [
+          "marketplace",
+          "listing id"
+        ],
+        "pagination": "not applicable to one retained seller listing",
+        "expectedIdentifiers": [
+          "marketplace",
+          "listing id",
+          "seller image",
+          "card identity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "specimen-observation",
+        "vocabulary": [
+          "visible finish/pattern/marking"
+        ],
+        "publicationForm": "seller photograph of one identified card",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "seller-listing-photo-positive"
       ]
     },
     {
@@ -2740,6 +2784,55 @@
       }
     },
     {
+      "edgeId": "seller-listing-photo-positive",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "MULTIPLE"
+        ],
+        "scripts": [
+          "MULTIPLE"
+        ],
+        "productCategories": [
+          "marketplace-specimen"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "retained photographed listings only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "finish",
+        "edition",
+        "specimen-existence",
+        "image"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Marketplace inventory is transient and each photograph proves only the visible properties of that specimen."
+      },
+      "knownPositiveObservationId": "obs-seller-listing-photo",
+      "boundary": {
+        "outsideScope": [
+          "other listings",
+          "sold or removed stock",
+          "unphotographed variants",
+          "complete set"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A retained seller photograph cannot prove that no other language, edition or treatment exists."
+      }
+    },
+    {
       "edgeId": "pokecottage-snorlax-positive",
       "providerId": "pokecottage",
       "surfaceId": "pokecottage-master-lists",
@@ -4136,6 +4229,44 @@
         "stableIdCount": 1,
         "stableIds": [
           "F0174-P01"
+        ],
+        "retrievedAt": null,
+        "usageCount": 1
+      }
+    },
+    {
+      "observationId": "obs-seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "kind": "known-positive",
+      "queryUrl": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+      "queryParameters": {
+        "marketplace": "eBay",
+        "listingId": "257574042846"
+      },
+      "retrievedAt": "2026-08-26",
+      "expectedIdentifiers": [
+        "257574042846",
+        "F0562-P01"
+      ],
+      "validatesEdges": [
+        "seller-listing-photo-positive"
+      ],
+      "outcome": "The retained eBay seller photograph visibly establishes the Portuguese holo printing of Rocket's Snorlax ex 104/109.",
+      "rawRecordRef": "verification/source_registry.json:https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+      "rawRecordHash": "sha256:9c79fa1033b61463b5bd05205c2e27cbe0d7aefcf33d3d371180a9f290431203",
+      "rawRecord": {
+        "canonicalUrl": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+        "nonUrlEvidenceId": null,
+        "providerId": "seller-listing-photo",
+        "sourceTypes": [
+          "Seller listing photograph"
+        ],
+        "dimensions": [
+          "finish"
+        ],
+        "stableIdCount": 1,
+        "stableIds": [
+          "F0562-P01"
         ],
         "retrievedAt": null,
         "usageCount": 1
@@ -10243,90 +10374,6 @@
       ]
     },
     {
-      "sourceKey": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
-      "sourceKey": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
-      "sourceKey": "https://i.ebayimg.com/images/g/XrgAAeSwDF1qVdFf/s-l1600.jpg",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
-      "sourceKey": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
-      "sourceKey": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
-      "sourceKey": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
-      "sourceKey": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -10361,18 +10408,6 @@
       "dimensions": [
         "finish",
         "finish-override"
-      ]
-    },
-    {
-      "sourceKey": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
-      "providerId": "cardmarket-listing-photo",
-      "surfaceId": "cardmarket-listing-photos",
-      "capabilityEdgeIds": [
-        "cardmarket-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
       ]
     },
     {
@@ -11908,6 +11943,102 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/XrgAAeSwDF1qVdFf/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {

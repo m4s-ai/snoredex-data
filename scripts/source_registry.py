@@ -489,6 +489,21 @@ PROVIDERS: list[dict[str, Any]] = [
         "attribution": "Seller listing photograph via Cardmarket.",
         "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
     },
+    {
+        "providerId": "seller-listing-photo",
+        "displayName": "Seller listing photograph",
+        "organization": "Various online marketplaces",
+        "homepage": None,
+        "hosts": [],
+        "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
+        "category": "marketplace-photo",
+        "authorityTier": 2,
+        "coverage": "individual cards whose text and markings were read from a retained seller photograph on a non-Cardmarket marketplace",
+        "supportsAbsence": False,
+        "usedFor": ["language", "finish", "edition"],
+        "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
+        "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
+    },
 ]
 
 PROVIDER_BY_ID = {provider["providerId"]: provider for provider in PROVIDERS}
@@ -502,8 +517,9 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     # the catalogue it sits on is not, so the two must never collapse onto one provider. The
     # tie-break is earliest mention, and "Cardmarket seller ..." starts at the same offset as the
     # bare catalogue pattern, so list order decides it here.
-    (re.compile(r"cardmarket seller|seller listing photograph|listing photograph", re.I),
-     "cardmarket-listing-photo"),
+    (re.compile(r"cardmarket seller", re.I), "cardmarket-listing-photo"),
+    (re.compile(r"seller listing photograph|listing photograph", re.I),
+     "seller-listing-photo"),
     (re.compile(r"photograph", re.I), "inspected-specimen"),
     (re.compile(r"owner attestation", re.I), "owner-attestation"),
     (re.compile(r"bulbapedia", re.I), "bulbapedia"),

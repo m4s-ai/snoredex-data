@@ -1814,7 +1814,8 @@ def collect() -> None:
         # typing it.
         uncited_specimen_claims = [u["unitId"] for u in resolved_units
                                    if u.get("providerId") in ("inspected-specimen",
-                                                              "cardmarket-listing-photo")
+                                                              "cardmarket-listing-photo",
+                                                              "seller-listing-photo")
                                    and not str(u.get("sourceRef") or "").startswith("specimen:")]
         check(
             "S14",

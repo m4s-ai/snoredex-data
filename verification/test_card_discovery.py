@@ -246,6 +246,26 @@ class CardDiscoveryTests(unittest.TestCase):
             discovery.acquisition_contract(contract),
         )
 
+    def test_seller_photos_keep_marketplace_provenance(self):
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://i.ebayimg.com/images/g/example/s-l1600.jpg",
+                "Seller listing photograph",
+            ),
+            "seller-listing-photo",
+        )
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://marketplace-article-scans.s3.cardmarket.com/123/123.jpg",
+                "Seller listing photograph",
+            ),
+            "cardmarket-listing-photo",
+        )
+        self.assertEqual(
+            registry.resolve_provider(None, "Cardmarket seller listing photograph"),
+            "cardmarket-listing-photo",
+        )
+
     def test_pokecottage_is_positive_confirmation_evidence(self):
         self.assertEqual(
             registry.resolve_provider(None, "PokeCottage collector checklist"),
