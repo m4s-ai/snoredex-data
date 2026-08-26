@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
 FINISH_UNITS = ROOT / "verification" / "finish_units.json"
 SPECIMENS = ROOT / "verification" / "specimens.json"
+UNITS = ROOT / "verification" / "units.json"
 GRAPH_SCHEMA = "snoredex-authoritative-locality-graph"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
@@ -116,12 +117,24 @@ def _entity(entity_type: str, entity_id: str, payload: dict[str, Any]) -> dict[s
 
 
 def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
-    """Rebuild finish/specimen graph nodes from canonical generated inputs.
+    """Refresh source provenance and rebuild finish/specimen nodes from canonical inputs.
 
     The locality migration remains the graph's reviewed base. This projection owns only the
-    physical-printing slice, so a new specimen changes one canonical input and this function
-    deterministically refreshes claims, nodes, edges and dispositions.
+    physical-printing slice plus the source URL copied onto existing legacy-language claims, so
+    stronger evidence can replace a source without hand-editing the graph snapshot.
     """
+    unit_sources = {
+        str(unit["unitId"]): unit.get("sourceUrl")
+        for unit in _read_json(UNITS)
+    }
+    for row in graph["entities"]:
+        payload = row.get("payload") or {}
+        if row.get("entityType") == "candidate-claim" \
+                and payload.get("sourceKind") == "legacy-language-unit":
+            source_id = str(payload.get("sourceId"))
+            if source_id in unit_sources:
+                payload["sourceRecord"] = unit_sources[source_id]
+
     finish_document = _read_json(FINISH_UNITS)
     specimen_document = _read_json(SPECIMENS)
     finish_units = finish_document.get("units", [])

@@ -39,6 +39,19 @@ ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = ROOT / "verification" / "source_registry.json"
 MARKDOWN_PATH = ROOT / "verification" / "SOURCES.md"
 
+
+def official_finish_manifest_scopes() -> list[str]:
+    """Keep provider absence scopes aligned with the canonical finish-source registry."""
+    document = json.loads((ROOT / "verification" / "finish_overrides.json").read_text(encoding="utf-8"))
+    official_hosts = {"assets.pokemon.com", "www.pokemon.com", "d1wx537rtdixyy.cloudfront.net"}
+    return sorted({
+        source["url"]
+        for source in document["sources"].values()
+        if source.get("supportsAbsence") is True
+        and source.get("coverage") == "complete-manifest"
+        and urlsplit(source.get("url") or "").hostname in official_hosts
+    })
+
 # --------------------------------------------------------------------------------------------
 # Provider definitions
 #
@@ -61,12 +74,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "coverage": "positive localized card pages; complete manifests only within named checklists",
         "supportsAbsence": True,
         "usedFor": ["language", "finish", "product"],
-        "absenceScopes": [
-            "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
-            "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
-            "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
-            "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",
-        ],
+        "absenceScopes": official_finish_manifest_scopes(),
         "attribution": "Official card pages and product checklists © The Pokémon Company International.",
         "notes": ("Localized card pages provide positive card/language evidence only. Exact "
                   "checklists may establish finish absence only inside their stated scope."),

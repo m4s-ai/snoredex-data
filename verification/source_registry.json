@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-25",
+  "generated": "2026-08-26",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 25,
-   "evidenceRecords": 902,
-   "uniqueUrls": 895,
+   "evidenceRecords": 919,
+   "uniqueUrls": 912,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2805
+   "claimsAttributed": 3046
   }
  },
  "providers": [
@@ -34,8 +34,27 @@
    ],
    "absenceScopes": [
     "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
     "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
     "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
+    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
+    "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
     "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
    ],
    "attribution": "Official card pages and product checklists © The Pokémon Company International.",
@@ -45,8 +64,8 @@
     "d1wx537rtdixyy.cloudfront.net",
     "www.pokemon.com"
    ],
-   "uniqueSources": 9,
-   "claimsSupported": 22
+   "uniqueSources": 28,
+   "claimsSupported": 197
   },
   {
    "providerId": "pokemon-card-jp",
@@ -163,8 +182,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 88,
-   "claimsSupported": 687
+   "uniqueSources": 86,
+   "claimsSupported": 672
   },
   {
    "providerId": "tcgcsv",
@@ -187,7 +206,7 @@
     "www.tcgcsv.com"
    ],
    "uniqueSources": 7,
-   "claimsSupported": 44
+   "claimsSupported": 94
   },
   {
    "providerId": "psa",
@@ -429,7 +448,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 396,
-   "claimsSupported": 929
+   "claimsSupported": 944
   },
   {
    "providerId": "pokemontcgio",
@@ -499,7 +518,7 @@
     "play.pokemon.com"
    ],
    "uniqueSources": 1,
-   "claimsSupported": 7
+   "claimsSupported": 32
   },
   {
    "providerId": "retailer-listing",
@@ -566,7 +585,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 47
+   "claimsSupported": 39
   },
   {
    "providerId": "inspected-specimen",
@@ -587,7 +606,7 @@
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
    "uniqueSources": 4,
-   "claimsSupported": 17
+   "claimsSupported": 16
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -1644,55 +1663,6 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_One_(TCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), Play! Pokemon Prize Pack Series article",
-    "Bulbapedia (fan wiki), Prize Pack Series article, \"In other languages\" table"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 10,
-   "stableIds": [
-    "U0534",
-    "U0535",
-    "U0536",
-    "U0537",
-    "U0538",
-    "U0593",
-    "U0594",
-    "U0595",
-    "U0596",
-    "U0597"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 10
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), Play! Pokemon Prize Pack Series article",
-    "Bulbapedia (fan wiki), Prize Pack Series article, \"In other languages\" table"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 5,
-   "stableIds": [
-    "U0372",
-    "U0373",
-    "U0374",
-    "U0375",
-    "U0376"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 5
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Card_Display_Set_Gift_Box_Vol._3_(ATCG)",
@@ -7860,8 +7830,7 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket product page",
-    "Cardmarket stock image (visual evidence)",
-    "user + Cardmarket stock image (no Holo label)"
+    "Cardmarket stock image (visual evidence)"
    ],
    "dimensions": [
     "finish",
@@ -7886,25 +7855,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket product page",
-    "Cardmarket stock image (\"Holo Version\" label)",
     "Cardmarket stock image (visual evidence)"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 5,
    "stableIds": [
     "F0289-P02",
     "F0290-P02",
-    "F0291-P03",
     "F0292-P02",
     "F0293-P02",
-    "F0294-P03",
     "PPS8 JTG JTG 117 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 7
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V1-PPS1VIV-131",
@@ -7918,13 +7884,17 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 6,
    "stableIds": [
     "F0271-P01",
+    "F0272-P01",
+    "F0273-P01",
+    "F0274-P01",
+    "F0275-P01",
     "PPS1 VIV VIV 131 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 2
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-One/Snorlax-V2-PPS1VIV-131",
@@ -7938,13 +7908,17 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 6,
    "stableIds": [
     "F0271-P02",
+    "F0272-P02",
+    "F0273-P02",
+    "F0274-P02",
+    "F0275-P02",
     "PPS1 VIV VIV 131 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 2
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Seven/Hops-Snorlax-PPS7JTG-117",
@@ -7958,13 +7932,18 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 7,
    "stableIds": [
     "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
     "PPS7 JTG JTG 117 base"
    ],
    "retrievedAt": null,
-   "usageCount": 2
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Three/Snorlax-PPS3LOR-143",
@@ -7978,13 +7957,17 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 6,
    "stableIds": [
     "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
     "PPS3 LOR LOR 143 base"
    ],
    "retrievedAt": null,
-   "usageCount": 2
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
@@ -10196,7 +10179,6 @@
    "sourceTypes": [
     "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
     "Owner-supplied physical card photograph",
-    "Physical card, photographed holo specimen",
     "Physical card, photographed sealed product",
     "Physical card, photographed sealed specimen",
     "Physical card, photographed specimen"
@@ -10205,14 +10187,13 @@
     "finish",
     "language"
    ],
-   "stableIdCount": 13,
+   "stableIdCount": 12,
    "stableIds": [
     "F0291-P02",
     "F0294-P02",
     "F0457-P01",
     "F0457-P02",
     "U0100",
-    "U0189",
     "U0228",
     "U0229",
     "U0230",
@@ -10222,7 +10203,7 @@
     "U0772"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 13
+   "usageCount": 12
   },
   {
    "canonicalUrl": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
@@ -10369,7 +10350,6 @@
    "sourceTypes": [
     "Owner attestation (domain expert)",
     "Owner attestation (domain expert) + set release schedule",
-    "Owner attestation (domain expert); German and Portuguese units of the same product independently sourced",
     "Owner attestation (domain expert); localized product image",
     "Owner attestation plus downloaded scan review"
    ],
@@ -10378,9 +10358,12 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 47,
+   "stableIdCount": 39,
    "stableIds": [
     "F0289-P02",
+    "F0290-P02",
+    "F0292-P02",
+    "F0293-P02",
     "F0597-P01",
     "F0597-P02",
     "F0597-P03",
@@ -10403,21 +10386,10 @@
     "U0097",
     "U0098",
     "U0099",
-    "U0188",
-    "U0190",
-    "U0191",
-    "U0215",
-    "U0216",
-    "U0217",
-    "U0218",
     "U0311",
     "U0312",
     "U0313",
     "U0314",
-    "U0325",
-    "U0326",
-    "U0327",
-    "U0328",
     "U0785",
     "U0786",
     "U0787",
@@ -10429,7 +10401,7 @@
     "override:owner-scan-review"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 47
+   "usageCount": 39
   },
   {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
@@ -10442,18 +10414,43 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 32,
    "stableIds": [
     "F0271-P01",
     "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
     "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
     "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
     "F0289-P01",
     "F0289-P02",
+    "F0290-P01",
+    "F0290-P02",
+    "F0291-P01",
+    "F0292-P01",
+    "F0292-P02",
+    "F0293-P01",
+    "F0293-P02",
+    "F0294-P01",
     "override:play-prize-pack-gallery"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 7,
+   "usageCount": 32,
    "supportsAbsence": true
   },
   {
@@ -11633,26 +11630,192 @@
    "usageCount": 2
   },
   {
-   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
    "sourceTypes": [
-    "Official Pokemon Prize Pack Series Seven checklist",
-    "The Pokémon Company official Prize Pack Series Seven card list"
+    "Official Pokemon localized Prize Pack Series 7 checklist",
+    "The Pokémon Company official localized Prize Pack Series 7 card list"
    ],
    "dimensions": [
     "finish",
     "finish-override",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 8,
    "stableIds": [
     "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
+    "U0326",
+    "override:prize-pack-series-7-checklist-de"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 8,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 7 checklist",
+    "The Pokémon Company official localized Prize Pack Series 7 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 8,
+   "stableIds": [
+    "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
     "U0324",
     "override:prize-pack-series-7-checklist"
    ],
-   "retrievedAt": "2026-08-11",
-   "usageCount": 3,
+   "retrievedAt": "2026-08-26",
+   "usageCount": 8,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 7 checklist",
+    "The Pokémon Company official localized Prize Pack Series 7 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 8,
+   "stableIds": [
+    "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
+    "U0327",
+    "override:prize-pack-series-7-checklist-es"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 8,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 7 checklist",
+    "The Pokémon Company official localized Prize Pack Series 7 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 8,
+   "stableIds": [
+    "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
+    "U0325",
+    "override:prize-pack-series-7-checklist-fr"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 8,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 7 checklist",
+    "The Pokémon Company official localized Prize Pack Series 7 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 8,
+   "stableIds": [
+    "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
+    "U0328",
+    "override:prize-pack-series-7-checklist-it"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 8,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 7 checklist"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 7,
+   "stableIds": [
+    "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
+    "override:prize-pack-series-7-checklist-pt-br"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 7,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 8 checklist",
+    "The Pokémon Company official localized Prize Pack Series 8 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 4,
+   "stableIds": [
+    "F0291-P01",
+    "U0189",
+    "U0216",
+    "override:prize-pack-series-8-checklist-de"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 4,
    "supportsAbsence": true
   },
   {
@@ -11660,8 +11823,8 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
    "sourceTypes": [
-    "Official Pokemon Prize Pack Series Eight checklist",
-    "The Pokémon Company official Prize Pack Series Eight card list"
+    "Official Pokemon localized Prize Pack Series 8 checklist",
+    "The Pokémon Company official localized Prize Pack Series 8 card list"
    ],
    "dimensions": [
     "finish",
@@ -11676,8 +11839,115 @@
     "U0214",
     "override:prize-pack-series-8-checklist"
    ],
-   "retrievedAt": "2026-08-11",
+   "retrievedAt": "2026-08-26",
    "usageCount": 5,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 8 checklist",
+    "The Pokémon Company official localized Prize Pack Series 8 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 9,
+   "stableIds": [
+    "F0290-P01",
+    "F0290-P02",
+    "F0292-P01",
+    "F0292-P02",
+    "F0293-P01",
+    "F0293-P02",
+    "U0190",
+    "U0217",
+    "override:prize-pack-series-8-checklist-es"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 9,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 8 checklist",
+    "The Pokémon Company official localized Prize Pack Series 8 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 9,
+   "stableIds": [
+    "F0290-P01",
+    "F0290-P02",
+    "F0292-P01",
+    "F0292-P02",
+    "F0293-P01",
+    "F0293-P02",
+    "U0188",
+    "U0215",
+    "override:prize-pack-series-8-checklist-fr"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 9,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 8 checklist",
+    "The Pokémon Company official localized Prize Pack Series 8 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 9,
+   "stableIds": [
+    "F0290-P01",
+    "F0290-P02",
+    "F0292-P01",
+    "F0292-P02",
+    "F0293-P01",
+    "F0293-P02",
+    "U0191",
+    "U0218",
+    "override:prize-pack-series-8-checklist-it"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 9,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 8 checklist"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0294-P01",
+    "override:prize-pack-series-8-checklist-pt-br"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 2,
    "supportsAbsence": true
   },
   {
@@ -11698,23 +11968,303 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 1 checklist",
+    "The Pokémon Company official localized Prize Pack Series 1 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 13,
+   "stableIds": [
+    "F0271-P01",
+    "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
+    "U0536",
+    "U0595",
+    "override:prize-pack-series-1-checklist-de"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 13,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 3 checklist",
+    "The Pokémon Company official localized Prize Pack Series 3 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 7,
+   "stableIds": [
+    "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
+    "U0374",
+    "override:prize-pack-series-3-checklist-de"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 7,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 1 checklist",
+    "The Pokémon Company official localized Prize Pack Series 1 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 13,
+   "stableIds": [
+    "F0271-P01",
+    "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
+    "U0537",
+    "U0596",
+    "override:prize-pack-series-1-checklist-es"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 13,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 3 checklist",
+    "The Pokémon Company official localized Prize Pack Series 3 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 7,
+   "stableIds": [
+    "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
+    "U0375",
+    "override:prize-pack-series-3-checklist-es"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 7,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 1 checklist",
+    "The Pokémon Company official localized Prize Pack Series 1 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 13,
+   "stableIds": [
+    "F0271-P01",
+    "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
+    "U0535",
+    "U0594",
+    "override:prize-pack-series-1-checklist-fr"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 13,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 3 checklist",
+    "The Pokémon Company official localized Prize Pack Series 3 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 7,
+   "stableIds": [
+    "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
+    "U0373",
+    "override:prize-pack-series-3-checklist-fr"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 7,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 1 checklist",
+    "The Pokémon Company official localized Prize Pack Series 1 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 13,
+   "stableIds": [
+    "F0271-P01",
+    "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
+    "U0538",
+    "U0597",
+    "override:prize-pack-series-1-checklist-it"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 13,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 3 checklist",
+    "The Pokémon Company official localized Prize Pack Series 3 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 7,
+   "stableIds": [
+    "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
+    "U0376",
+    "override:prize-pack-series-3-checklist-it"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 7,
+   "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official Pokemon localized Prize Pack Series 1 checklist",
+    "The Pokémon Company official localized Prize Pack Series 1 card list"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "language"
+   ],
+   "stableIdCount": 13,
+   "stableIds": [
+    "F0271-P01",
+    "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
+    "U0534",
+    "U0593",
+    "override:prize-pack-series-1-checklist"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 13,
+   "supportsAbsence": true
+  },
+  {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
    "sourceTypes": [
-    "Official Pokemon Prize Pack Series Three checklist"
+    "Official Pokemon localized Prize Pack Series 3 checklist",
+    "The Pokémon Company official localized Prize Pack Series 3 card list"
    ],
    "dimensions": [
     "finish",
-    "finish-override"
+    "finish-override",
+    "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 7,
    "stableIds": [
     "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
+    "U0372",
     "override:prize-pack-series-3-checklist"
    ],
-   "retrievedAt": "2026-07-23",
-   "usageCount": 2,
+   "retrievedAt": "2026-08-26",
+   "usageCount": 7,
    "supportsAbsence": true
   },
   {
@@ -12065,16 +12615,41 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 19,
+   "stableIdCount": 44,
    "stableIds": [
     "F0006-P01",
     "F0038-P01",
     "F0271-P01",
     "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
     "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
     "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
     "F0289-P01",
     "F0289-P02",
+    "F0290-P01",
+    "F0290-P02",
+    "F0291-P01",
+    "F0292-P01",
+    "F0292-P02",
+    "F0293-P01",
+    "F0293-P02",
+    "F0294-P01",
     "F0525-P01",
     "F0584-P01",
     "F0597-P01",
@@ -12088,7 +12663,7 @@
     "override:tcgcsv-docs"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 19
+   "usageCount": 44
   },
   {
    "canonicalUrl": "https://tcgcsv.com/tcgplayer/3/2282/prices",
@@ -12120,18 +12695,43 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 32,
    "stableIds": [
     "F0271-P01",
     "F0271-P02",
+    "F0272-P01",
+    "F0272-P02",
+    "F0273-P01",
+    "F0273-P02",
+    "F0274-P01",
+    "F0274-P02",
+    "F0275-P01",
+    "F0275-P02",
     "F0277-P01",
+    "F0278-P01",
+    "F0279-P01",
+    "F0280-P01",
+    "F0281-P01",
     "F0283-P01",
+    "F0284-P01",
+    "F0285-P01",
+    "F0286-P01",
+    "F0287-P01",
+    "F0288-P01",
     "F0289-P01",
     "F0289-P02",
+    "F0290-P01",
+    "F0290-P02",
+    "F0291-P01",
+    "F0292-P01",
+    "F0292-P02",
+    "F0293-P01",
+    "F0293-P02",
+    "F0294-P01",
     "override:tcgcsv-prize-pack-snorlax"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 7
+   "usageCount": 32
   },
   {
    "canonicalUrl": "https://tcgcsv.com/tcgplayer/3/23323/prices",
