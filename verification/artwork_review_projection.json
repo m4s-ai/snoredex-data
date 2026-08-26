@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-26",
-  "projectionVersion": "32062114f3646212222a1b8485d0eba627d43454d9850be57dc7e98facb2169f",
+  "projectionVersion": "4d6752cdbe900bc5d4e11176d269a852a1099cdf293f24ebba5420cfd92e7755",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -15,7 +15,7 @@
     "unmappedReleases": 50,
     "cardReleases": 612,
     "physicalPrintings": 496,
-    "sourceObservations": 1670
+    "sourceObservations": 1672
   },
   "groups": [
     {
@@ -6389,8 +6389,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-              "semanticPrintingId": "PRINTING:118bb1c2e3fe0c3ba0780871",
+              "physicalPrintingId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+              "semanticPrintingId": "PRINTING:80a66b7b4353b3d6f49dd079",
               "cardReleaseId": "RELEASE:WEST:German:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
@@ -6402,13 +6402,16 @@
                   "text": "Play! Pokémon Prize Pack stamp"
                 }
               ],
-              "distribution": null,
+              "distribution": {
+                "kind": "prize-pack",
+                "name": "Play! Pokemon Prize Pack Series Eight"
+              },
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0291",
               "sourcePrintingId": "F0291-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:118bb1c2e3fe0c3ba0780871",
+              "establishingClaimId": "CLAIM:finish:PRINTING:80a66b7b4353b3d6f49dd079",
               "specimenIds": [
                 "SPEC-0001"
               ],
@@ -6417,6 +6420,18 @@
                   "url": "specimen:SPEC-0001",
                   "sourceType": "Owner-supplied physical card photograph",
                   "evidence": "Physical German HOLO specimen inspected from a photograph: \"Hops Relaxo\", KP 150, Fahigkeit \"Extraportion\", attack \"Dynamische Presse\" 140, Illustr. GOSSAN, \"JTG DE 117/159\", Play! Pokemon Prize Pack stamp, (c)2025. This is the holo (V2) printing. The card face does not distinguish PPS7 from PPS8; PPS8 is the owner attribution. Retained as SPEC-0001."
+                },
+                {
+                  "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
+                  "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+                  "authorityTier": "official-primary",
+                  "coverage": "complete-manifest",
+                  "supportsAbsence": true,
+                  "languages": [
+                    "German"
+                  ],
+                  "retrievedAt": "2026-08-26",
+                  "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
                 }
               ]
             },
@@ -6531,7 +6546,16 @@
               "provider": "Owner-supplied physical card photograph",
               "url": "specimen:SPEC-0001",
               "evidence": "Physical German HOLO specimen inspected from a photograph: \"Hops Relaxo\", KP 150, Fahigkeit \"Extraportion\", attack \"Dynamische Presse\" 140, Illustr. GOSSAN, \"JTG DE 117/159\", Play! Pokemon Prize Pack stamp, (c)2025. This is the holo (V2) printing. The card face does not distinguish PPS7 from PPS8; PPS8 is the owner attribution. Retained as SPEC-0001.",
-              "contentHash": "f1df121b5cf9ab9e8533ba4026942a769c50d616af963a42c41f09b4c6657890",
+              "contentHash": "35ff72d89d35a6140257b2b0dc1396cf0e94003066fcbb7654f9ebf9e032d9b2",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0291-P02:1:566059a02df296ae",
+              "kind": "finish",
+              "provider": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
+              "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil.",
+              "contentHash": "7fdcf75fca757c9c7568b51f2d339e074143c1d2cac680172d2c87238128d38c",
               "image": null
             },
             {
@@ -6785,38 +6809,6 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0294-P02",
-              "semanticPrintingId": "PRINTING:ec84b36c00254aeac2d8427e",
-              "cardReleaseId": "RELEASE:WEST:Portuguese:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [
-                {
-                  "kind": "observed-marking",
-                  "role": "distribution-promo",
-                  "text": "Play! Pokémon Prize Pack stamp"
-                }
-              ],
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0294",
-              "sourcePrintingId": "F0294-P02",
-              "establishingClaimId": "CLAIM:finish:F0294-P02",
-              "specimenIds": [
-                "SPEC-0006"
-              ],
-              "sources": [
-                {
-                  "url": "specimen:SPEC-0006",
-                  "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Physical Portuguese HOLO specimen inspected from a photograph: \"Snorlax do Lupo\", Habilidade \"Boca-livre\", attack \"Compressao Dinamica\" 140, \"JTG PT 117/159\", Play! Pokemon Prize Pack stamp, (c)2025. This is the holo (V2) printing. The card face does not distinguish PPS7 from PPS8; PPS8 is the owner attribution. Recorded from the inspection already described in U0192, which cited it in prose before specimen ids existed. Retained as SPEC-0006."
-                }
-              ]
-            },
-            {
               "physicalPrintingId": "PHYSICAL:PRINTING:1ab6f344ac3c5595fd338d46",
               "semanticPrintingId": "PRINTING:1ab6f344ac3c5595fd338d46",
               "cardReleaseId": "RELEASE:WEST:Portuguese:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
@@ -6861,6 +6853,53 @@
                   "supportsAbsence": false,
                   "retrievedAt": "2026-07-23",
                   "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+              "semanticPrintingId": "PRINTING:5aca272347b6acc2976aa776",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "distribution-promo",
+                  "text": "Play! Pokémon Prize Pack stamp"
+                }
+              ],
+              "distribution": {
+                "kind": "prize-pack",
+                "name": "Play! Pokemon Prize Pack Series Eight"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0294",
+              "sourcePrintingId": "F0294-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:5aca272347b6acc2976aa776",
+              "specimenIds": [
+                "SPEC-0006"
+              ],
+              "sources": [
+                {
+                  "url": "specimen:SPEC-0006",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Physical Portuguese HOLO specimen inspected from a photograph: \"Snorlax do Lupo\", Habilidade \"Boca-livre\", attack \"Compressao Dinamica\" 140, \"JTG PT 117/159\", Play! Pokemon Prize Pack stamp, (c)2025. This is the holo (V2) printing. The card face does not distinguish PPS7 from PPS8; PPS8 is the owner attribution. Recorded from the inspection already described in U0192, which cited it in prose before specimen ids existed. Retained as SPEC-0006."
+                },
+                {
+                  "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+                  "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+                  "authorityTier": "official-primary",
+                  "coverage": "complete-manifest",
+                  "supportsAbsence": true,
+                  "languages": [
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-08-26",
+                  "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
                 }
               ]
             }
@@ -6925,7 +6964,16 @@
               "provider": "Owner-supplied physical card photograph",
               "url": "specimen:SPEC-0006",
               "evidence": "Physical Portuguese HOLO specimen inspected from a photograph: \"Snorlax do Lupo\", Habilidade \"Boca-livre\", attack \"Compressao Dinamica\" 140, \"JTG PT 117/159\", Play! Pokemon Prize Pack stamp, (c)2025. This is the holo (V2) printing. The card face does not distinguish PPS7 from PPS8; PPS8 is the owner attribution. Recorded from the inspection already described in U0192, which cited it in prose before specimen ids existed. Retained as SPEC-0006.",
-              "contentHash": "ea863c17e2c8449eb17d5f86885aead3bc799cb28a5ccabd4546a78a22aa8de8",
+              "contentHash": "4b099b59780c1f7c2821bec0b95f2bcd8a7bbd69d8e1f9d08a5f8f1da51b46f9",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0294-P02:1:94485faa9d5a55d1",
+              "kind": "finish",
+              "provider": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+              "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil.",
+              "contentHash": "534587672b9139c93abe10ffa5c2327cfed0fc436dbfdfe856dc2879effe5961",
               "image": null
             },
             {

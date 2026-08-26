@@ -157,15 +157,20 @@ def main() -> int:
                     f"{finish} printing. This establishes the {language} unit and its stated finish "
                     "only; it does not establish another language or an unmarked printing."
                 )
-                desired = CURRENT_EXCEPTIONS.get(unit_id, {
+                desired = deepcopy(CURRENT_EXCEPTIONS.get(unit_id, {
                         "sourceUrl": url,
                         "sourceType": f"The Pokémon Company official localized Prize Pack Series {series} card list",
                         "providerId": "pokemon-official",
                         "sourceRef": None,
-                        "corroborated": False,
                         "evidence": evidence,
                         "checkedAt": CHECKED_AT,
-                    })
+                    }))
+                observed_sources = {
+                    str(row.get("source")) for row in journal
+                    if row.get("unitId") == unit_id and row.get("source")
+                }
+                observed_sources.add(str(desired["sourceUrl"]))
+                desired["corroborated"] = len(observed_sources) > 1
                 if any(unit.get(key) != value for key, value in desired.items()):
                     unit.update(desired)
                     changed += 1
@@ -240,9 +245,9 @@ def main() -> int:
         localized = deepcopy(pps8)
         localized["languages"] = [language]
         if not include_manual_holo:
-            localized["printings"] = [
-                printing for printing in localized["printings"] if printing["finish"] != "holo"
-            ]
+            for printing in localized["printings"]:
+                if printing["finish"] == "holo":
+                    printing["evidenceOnlyForSpecimen"] = True
         for printing in localized["printings"]:
             other_refs = [
                 ref for ref in printing["sourceRefs"]

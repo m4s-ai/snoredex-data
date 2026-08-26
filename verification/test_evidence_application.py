@@ -226,6 +226,35 @@ def main() -> int:
                     f"{override['setCode']} {language} inherits English-market evidence"
                 )
 
+    journal = [
+        json.loads(line) for line in (ROOT / "verification/evidence.jsonl").read_text(
+            encoding="utf-8"
+        ).splitlines() if line
+    ]
+    prize_pack_unit_ids = {
+        unit["unitId"] for unit in units
+        if unit["setCode"] in {"PPS1 VIV", "PPS3 LOR", "PPS7 JTG", "PPS8 JTG"}
+    }
+    for unit_id in prize_pack_unit_ids:
+        observed_sources = {
+            str(row.get("source")) for row in journal
+            if row.get("unitId") == unit_id and row.get("source")
+        }
+        if len(observed_sources) > 1 and not by_id[unit_id].get("corroborated"):
+            raise AssertionError(f"Prize Pack corroboration was demoted: {unit_id}")
+
+    finish_units = load("verification/finish_units.json")["units"]
+    for language in ("German", "Portuguese"):
+        unit = next(
+            row for row in finish_units
+            if row["setCode"] == "PPS8 JTG"
+            and row["number"] == "JTG 117"
+            and row["language"] == language
+        )
+        holo = next(printing for printing in unit["printings"] if printing["finish"] == "holo")
+        if not any(source.get("languages") == [language] for source in holo["sources"]):
+            raise AssertionError(f"{language} specimen-backed holo lost its localized checklist")
+
     print(f"evidence application regressions passed: {counts}")
     return 0
 

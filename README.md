@@ -127,7 +127,7 @@ Current-known status snapshot: **2026-08-26**. Its candidate denominator is the 
 | Evidence-safe application status | **618 established**, **17 needs evidence**, **80 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **830 items** across 174 cards and 15 languages: 684 documented printings plus 146 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 350 externally confirmed, 100 marketplace-only positives, 112 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 208 units. |
-| Evidence registry | **25 providers**, 921 evidence records, 914 unique URLs, and 2,868 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
+| Evidence registry | **25 providers**, 921 evidence records, 914 unique URLs, and 2,870 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. Browser and live-source checks run in the Linux release lane. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -171,11 +171,11 @@ throughout this project and is genuinely uncommon:
 <!-- generated:evidence-strength — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | How the claim is sourced | Resolved claims |
 |---|---:|
-| Corroborated by a second provider | 35 |
-| Single tier 1-2 source | 679 |
-| Single tier 3 source | 5 |
+| Corroborated by a second provider | 67 |
+| Single tier 1-2 source | 649 |
+| Single tier 3 source | 3 |
 
-684 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 5 do. What it forbids is a claim that is neither — all 23 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+652 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 23 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in

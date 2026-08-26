@@ -4901,26 +4901,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:F0294-P02",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:F0294-P02",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0294-P02",
-        "semanticPrintingId": "PRINTING:ec84b36c00254aeac2d8427e",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:F0294-P02",
-        "materializedTargetId": "PHYSICAL:F0294-P02",
-        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
-        "specimenIds": [
-          "SPEC-0006"
-        ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:F0295-P01",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -9488,26 +9468,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:118bb1c2e3fe0c3ba0780871",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:118bb1c2e3fe0c3ba0780871",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0291-P02",
-        "semanticPrintingId": "PRINTING:118bb1c2e3fe0c3ba0780871",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-        "materializedTargetId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
-        "specimenIds": [
-          "SPEC-0001"
-        ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:11db5061845ae932438fa64e",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -10940,6 +10900,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:5aca272347b6acc2976aa776",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:5aca272347b6acc2976aa776",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0294-P02",
+        "semanticPrintingId": "PRINTING:5aca272347b6acc2976aa776",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+        "materializedTargetId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0006"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:5bd507c4c67adf5c6053df59",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -11777,6 +11757,26 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:WEST:German:PGO:055:Snorlax-Block-Collapse"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:80a66b7b4353b3d6f49dd079",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:80a66b7b4353b3d6f49dd079",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0291-P02",
+        "semanticPrintingId": "PRINTING:80a66b7b4353b3d6f49dd079",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+        "materializedTargetId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0001"
+        ]
       }
     },
     {
@@ -26734,10 +26734,10 @@
         "sourceId": "SPEC-0001",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
+        "proposedTargetId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
         "materializedTargetId": null,
-        "reason": "provides provenance for PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871, already established from the finish store",
-        "provenanceTargetId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871"
+        "reason": "provides provenance for PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079"
       }
     },
     {
@@ -26751,10 +26751,10 @@
         "sourceId": "SPEC-0006",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:F0294-P02",
+        "proposedTargetId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
         "materializedTargetId": null,
-        "reason": "provides provenance for PHYSICAL:F0294-P02, already established from the finish store",
-        "provenanceTargetId": "PHYSICAL:F0294-P02"
+        "reason": "provides provenance for PHYSICAL:PRINTING:5aca272347b6acc2976aa776, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776"
       }
     },
     {
@@ -72734,36 +72734,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:F0294-P02",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:F0294-P02",
-        "semanticPrintingId": "PRINTING:ec84b36c00254aeac2d8427e",
-        "cardReleaseId": "RELEASE:WEST:Portuguese:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": [
-          {
-            "kind": "observed-marking",
-            "role": "distribution-promo",
-            "text": "Play! Pokémon Prize Pack stamp"
-          }
-        ],
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0294",
-        "sourcePrintingId": "F0294-P02",
-        "establishingClaimId": "CLAIM:finish:F0294-P02",
-        "specimenIds": [
-          "SPEC-0006"
-        ]
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:F0295-P01",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -78132,36 +78102,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-        "semanticPrintingId": "PRINTING:118bb1c2e3fe0c3ba0780871",
-        "cardReleaseId": "RELEASE:WEST:German:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": "cosmos",
-        "markings": [
-          {
-            "kind": "observed-marking",
-            "role": "distribution-promo",
-            "text": "Play! Pokémon Prize Pack stamp"
-          }
-        ],
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0291",
-        "sourcePrintingId": "F0291-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:118bb1c2e3fe0c3ba0780871",
-        "specimenIds": [
-          "SPEC-0001"
-        ]
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:1244fda05f7a9caa2c95a7ff",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -78486,6 +78426,39 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+        "semanticPrintingId": "PRINTING:5aca272347b6acc2976aa776",
+        "cardReleaseId": "RELEASE:WEST:Portuguese:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "observed-marking",
+            "role": "distribution-promo",
+            "text": "Play! Pokémon Prize Pack stamp"
+          }
+        ],
+        "distribution": {
+          "kind": "prize-pack",
+          "name": "Play! Pokemon Prize Pack Series Eight"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0294",
+        "sourcePrintingId": "F0294-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:5aca272347b6acc2976aa776",
+        "specimenIds": [
+          "SPEC-0006"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:5fed8f5d9bbb911ddaec2500",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -78632,6 +78605,39 @@
         "sourceFinishUnitId": "F0293",
         "sourcePrintingId": "F0293-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:7de696c06d74d669430bcd69"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+        "semanticPrintingId": "PRINTING:80a66b7b4353b3d6f49dd079",
+        "cardReleaseId": "RELEASE:WEST:German:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": "cosmos",
+        "markings": [
+          {
+            "kind": "observed-marking",
+            "role": "distribution-promo",
+            "text": "Play! Pokémon Prize Pack stamp"
+          }
+        ],
+        "distribution": {
+          "kind": "prize-pack",
+          "name": "Play! Pokemon Prize Pack Series Eight"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0291",
+        "sourcePrintingId": "F0291-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:80a66b7b4353b3d6f49dd079",
+        "specimenIds": [
+          "SPEC-0001"
+        ]
       }
     },
     {
@@ -131574,16 +131580,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0294-P02",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:F0294-P02",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:F0295-P01",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -134216,16 +134212,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:118bb1c2e3fe0c3ba0780871",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:11db5061845ae932438fa64e",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -134888,6 +134874,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:5aca272347b6acc2976aa776",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:5bd507c4c67adf5c6053df59",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -135271,6 +135267,16 @@
       "toType": "card-release",
       "toId": "RELEASE:WEST:German:PGO:055:Snorlax-Block-Collapse",
       "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:80a66b7b4353b3d6f49dd079",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -142985,7 +142991,7 @@
       "fromId": "CLAIM:specimen:SPEC-0001",
       "relation": "provenance",
       "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
+      "toId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
       "provenance": {
         "specimenId": "SPEC-0001"
       }
@@ -142995,7 +143001,7 @@
       "fromId": "CLAIM:specimen:SPEC-0006",
       "relation": "provenance",
       "toType": "physical-printing",
-      "toId": "PHYSICAL:F0294-P02",
+      "toId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
       "provenance": {
         "specimenId": "SPEC-0006"
       }
@@ -176548,22 +176554,6 @@
     },
     {
       "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0294-P02",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:F0294-P02",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0294-P02",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Portuguese:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
       "fromId": "PHYSICAL:F0295-P01",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -180532,22 +180522,6 @@
     },
     {
       "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:118bb1c2e3fe0c3ba0780871",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:German:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:1244fda05f7a9caa2c95a7ff",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -180724,6 +180698,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:5aca272347b6acc2976aa776",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Portuguese:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:5fed8f5d9bbb911ddaec2500",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -180800,6 +180790,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Spanish:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:80a66b7b4353b3d6f49dd079",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:German:PPS8 JTG:JTG 117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "provenance": {}
     },
     {
@@ -217143,7 +217149,7 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0291-P02",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871",
+      "targetRef": "PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
@@ -217185,7 +217191,7 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0294-P02",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0294-P02",
+      "targetRef": "PHYSICAL:PRINTING:5aca272347b6acc2976aa776",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
@@ -230533,14 +230539,14 @@
       "sourceId": "SPEC-0001",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
-      "reason": "provides provenance for PHYSICAL:PRINTING:118bb1c2e3fe0c3ba0780871, already established from the finish store"
+      "reason": "provides provenance for PHYSICAL:PRINTING:80a66b7b4353b3d6f49dd079, already established from the finish store"
     },
     {
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0006",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
-      "reason": "provides provenance for PHYSICAL:F0294-P02, already established from the finish store"
+      "reason": "provides provenance for PHYSICAL:PRINTING:5aca272347b6acc2976aa776, already established from the finish store"
     },
     {
       "sourceKind": "specimen-observation",
