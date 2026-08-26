@@ -177,15 +177,12 @@ def main() -> int:
     }:
         raise AssertionError("reported application-status counts are stale")
 
-    # #210 — a direct owner attestation must stay card-level even when trailing corroboration
-    # names neighbouring units. The Prize Pack rows carry providerId `owner-attestation` and
-    # sourceType "Owner attestation (domain expert); ... units of the same product ..."; the
-    # attestation is the basis, the sibling phrase is context.
+    # #210 — a direct owner attestation stays card-level. Do not pin this regression to one
+    # product: stronger official evidence may legitimately replace those rows over time.
     prize_pack_regression = [
         unit for unit in units
         if unit.get("providerId") == "owner-attestation"
         and (unit.get("sourceType") or "").startswith("Owner attestation")
-        and "units of the same product" in (unit.get("sourceType") or "")
     ]
     for unit in prize_pack_regression:
         semantic = semantics[unit["unitId"]]
@@ -198,7 +195,79 @@ def main() -> int:
                 f"direct owner attestation lost its supported confirmation: {unit['unitId']}"
             )
     if not prize_pack_regression:
-        raise AssertionError("#210 regression fixture lost — no direct-attestation rows found")
+        raise AssertionError("#210 regression fixture lost — no direct owner-attestation rows found")
+
+    # #306 review — localized Prize Pack manifests and English-market evidence must not be
+    # projected onto neighboring languages merely because they share one finish override.
+    finish_overrides = load("verification/finish_overrides.json")
+    english_only_refs = {
+        "tcgcsv-docs", "tcgcsv-prize-pack-snorlax", "cardmarket-stock-image",
+        "owner-scan-review",
+    }
+    for override in finish_overrides["overrides"]:
+        if not str(override.get("setCode") or "").startswith("PPS"):
+            continue
+        languages = override.get("languages") or []
+        if len(languages) != 1:
+            raise AssertionError(f"Prize Pack override is not language-scoped: {override['setCode']}")
+        language = languages[0]
+        for printing in override.get("printings") or []:
+            refs = printing.get("sourceRefs") or []
+            checklist_languages = {
+                tuple(finish_overrides["sources"][ref].get("languages") or [])
+                for ref in refs if ref.startswith("prize-pack-series-")
+            }
+            if checklist_languages != {(language,)}:
+                raise AssertionError(
+                    f"{override['setCode']} {language} cites another locale's checklist"
+                )
+            if language != "English" and english_only_refs.intersection(refs):
+                raise AssertionError(
+                    f"{override['setCode']} {language} inherits English-market evidence"
+                )
+
+    exact_prior_support = {
+        "U0372", "U0534", "U0593",
+        "U0187", "U0188", "U0189", "U0190", "U0191", "U0192",
+        "U0214", "U0215", "U0216", "U0217", "U0218", "U0219",
+        "U0324", "U0325", "U0326", "U0327", "U0328", "U0329",
+    }
+    localized_name_only = {
+        "U0373", "U0374", "U0375", "U0376",
+        "U0535", "U0536", "U0537", "U0538",
+        "U0594", "U0595", "U0596", "U0597",
+    }
+    if {unit_id for unit_id in exact_prior_support if not by_id[unit_id].get("corroborated")}:
+        raise AssertionError("exact Prize Pack corroboration was demoted")
+    false_corroboration = {
+        unit_id for unit_id in localized_name_only if by_id[unit_id].get("corroborated")
+    }
+    if false_corroboration:
+        raise AssertionError(
+            f"localized product names were counted as exact corroboration: {false_corroboration}"
+        )
+
+    finish_units = load("verification/finish_units.json")["units"]
+    for language in ("German", "Portuguese"):
+        unit = next(
+            row for row in finish_units
+            if row["setCode"] == "PPS8 JTG"
+            and row["number"] == "JTG 117"
+            and row["language"] == language
+        )
+        holo = next(printing for printing in unit["printings"] if printing["finish"] == "holo")
+        if not any(source.get("languages") == [language] for source in holo["sources"]):
+            raise AssertionError(f"{language} specimen-backed holo lost its localized checklist")
+
+    specimens = load("verification/specimens.json")["specimens"]
+    polish_non_holo = next(row for row in specimens if row["specimenId"] == "SPEC-0045")
+    finish_basis = str((polish_non_holo.get("physicalObservation") or {}).get("basis") or "")
+    if (
+        (polish_non_holo.get("physicalObservation") or {}).get("finish") != "non-holo"
+        or "collection owner" not in finish_basis.casefold()
+        or "scan lighting alone is not treated as finish evidence" not in finish_basis.casefold()
+    ):
+        raise AssertionError("Polish non-holo scan lacks its explicit owner identification boundary")
 
     print(f"evidence application regressions passed: {counts}")
     return 0

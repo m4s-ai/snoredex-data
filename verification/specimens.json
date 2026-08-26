@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 44,
+  "count": 46,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -20,11 +20,11 @@
       ],
       "physicalObservation": {
         "finish": "holo",
-        "foilPattern": null,
+        "foilPattern": "cosmos",
         "markings": "Play! Pokémon Prize Pack stamp",
         "markingRole": "distribution-promo",
         "cardSize": "standard",
-        "basis": "\"Physical German HOLO specimen inspected from a photograph\"; \"This is the holo (V2) printing.\""
+        "basis": "Physical German holo specimen plus the collection owner's 2026-08-25 identification of the foil treatment as Cosmos, matching the English Series Eight product."
       }
     },
     {
@@ -829,6 +829,57 @@
         "basis": "The collection owner explicitly identified this physical card as the Unlimited printing; the retained full-card photograph independently shows Dutch Jungle 27/64 with a uniformly printed non-holo artwork field."
       },
       "photographSha256": "sha256:e272e4dab7100d3097a903cdef81201f5c6bc9d5f16020267bfbc7da4e70ac28"
+    },
+    {
+      "specimenId": "SPEC-0045",
+      "setCode": "DP",
+      "number": "37/130",
+      "variant": "base",
+      "language": "Polish",
+      "heldBy": "third-party collector",
+      "inspectedFrom": "Polish collector archive scan",
+      "photograph": "SPEC-0045.jpg",
+      "photographSource": "https://diamentiperla.info/snorlax-polish.jpg",
+      "photographSha256": "sha256:608aca8fbe7b0a412256d01f776456fab3b7a5abbbd58fa48ce16c5057a03b15",
+      "observed": "Complete Polish Diamond & Pearl Snorlax PZ.35 card scan. PODST., the attacks Blokada and Relaks, DPBP#174, collector number 37/130 and the 2010 copyright line establish the exact local card identity. On 2026-08-26 the collection owner reviewed this candidate and explicitly identified it as the non-holo printing; the finish does not rely on an absence of glare in the scan.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0094-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "PODST., Blokada, Relaks, DPBP#174 and 37/130 in the complete scan establish the exact local card identity. The collection owner's explicit 2026-08-26 candidate confirmation establishes the non-holo finish; scan lighting alone is not treated as finish evidence. Recorded in issue #270."
+      }
+    },
+    {
+      "specimenId": "SPEC-0046",
+      "setCode": "DP",
+      "number": "37/130",
+      "variant": "base",
+      "language": "Polish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Vinted seller photograph",
+      "photograph": "SPEC-0046.jpg",
+      "photographSource": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+      "photographSha256": "sha256:521dd7de3a98d38563f84735a65d0be5d6967b0f0e83510f73f14be9e700fa7f",
+      "observed": "Complete seller photograph of the Polish Diamond & Pearl Snorlax PZ.35. PODST., Blokada, Relaks, DPBP#174, 37/130 and the 2010 copyright line are legible. Strong rainbow reflection across the card body establishes the reverse-holo printing.",
+      "recordedAt": "2026-08-26",
+      "citedBy": [
+        "F0094-P02"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "plain-foil-background",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Polish card photograph visibly shows strong rainbow foil reflection across the card body while PODST., Blokada, Relaks, DPBP#174 and 37/130 establish the exact local card identity."
+      },
+      "listingUrl": "https://www.vinted.pl/items/9302907930-snorlax-37130-reverse-holo-diament-i-perla"
     }
   ]
 }

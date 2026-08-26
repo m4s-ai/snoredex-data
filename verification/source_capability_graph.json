@@ -20,7 +20,7 @@
       "coverageEdges": 30,
       "absenceEdges": 3,
       "observations": 32,
-      "resolvedVerdictSources": 902
+      "resolvedVerdictSources": 921
     },
     "surfaceStates": {
       "active": 12,
@@ -217,9 +217,9 @@
       "match": {
         "urlPrefixes": [
           "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/",
+          "https://www.pokemon.com/static-assets/content-assets/cms2"
         ],
         "nonUrlEvidenceIds": []
       },
@@ -1314,8 +1314,27 @@
         ],
         "exactScopes": [
           "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
           "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
           "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
+          "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
           "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
         ],
         "rationale": "The exact official checklist is complete for its own labelled product and finish columns; no neighbouring product inherits closure."
@@ -1327,7 +1346,7 @@
           "any other set, language, product, web search or official page"
         ],
         "zeroResultMeans": "bounded-absence",
-        "challenge": "A general official card page outside the four URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."
+        "challenge": "A general official card page outside these exact checklist URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."
       }
     },
     {
@@ -3785,7 +3804,7 @@
       ],
       "outcome": "The exact filtered official gallery supplies bounded Series 7 finish rows.",
       "rawRecordRef": "verification/source_registry.json:https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
-      "rawRecordHash": "sha256:ba2bcdf428810073e1a96da9b71095b21653c18863efe72d88e29eb0a206f70e",
+      "rawRecordHash": "sha256:cb8f72fb7a53078303538e28561bd33aeb1944de284fb97af96344ac86371362",
       "rawRecord": {
         "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
         "nonUrlEvidenceId": null,
@@ -3797,18 +3816,43 @@
           "finish",
           "finish-override"
         ],
-        "stableIdCount": 7,
+        "stableIdCount": 32,
         "stableIds": [
           "F0271-P01",
           "F0271-P02",
+          "F0272-P01",
+          "F0272-P02",
+          "F0273-P01",
+          "F0273-P02",
+          "F0274-P01",
+          "F0274-P02",
+          "F0275-P01",
+          "F0275-P02",
           "F0277-P01",
+          "F0278-P01",
+          "F0279-P01",
+          "F0280-P01",
+          "F0281-P01",
           "F0283-P01",
+          "F0284-P01",
+          "F0285-P01",
+          "F0286-P01",
+          "F0287-P01",
+          "F0288-P01",
           "F0289-P01",
           "F0289-P02",
+          "F0290-P01",
+          "F0290-P02",
+          "F0291-P01",
+          "F0292-P01",
+          "F0292-P02",
+          "F0293-P01",
+          "F0293-P02",
+          "F0294-P01",
           "override:play-prize-pack-gallery"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 7,
+        "usageCount": 32,
         "supportsAbsence": true
       }
     },
@@ -3948,7 +3992,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:d04d2724ca85a3d70afd4c840db6b09402e41d924515c729a17cc354a30afb3d",
+      "rawRecordHash": "sha256:ed40a0e5b39e94bcc85c07c60f8a0aa25d24f945aa68f09ab98c04989b5d4c8f",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -3956,7 +4000,6 @@
         "sourceTypes": [
           "Owner attestation (domain expert)",
           "Owner attestation (domain expert) + set release schedule",
-          "Owner attestation (domain expert); German and Portuguese units of the same product independently sourced",
           "Owner attestation (domain expert); localized product image",
           "Owner attestation plus downloaded scan review"
         ],
@@ -3965,7 +4008,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 47,
+        "stableIdCount": 36,
         "stableIds": [
           "F0289-P02",
           "F0597-P01",
@@ -3990,21 +4033,10 @@
           "U0097",
           "U0098",
           "U0099",
-          "U0188",
-          "U0190",
-          "U0191",
-          "U0215",
-          "U0216",
-          "U0217",
-          "U0218",
           "U0311",
           "U0312",
           "U0313",
           "U0314",
-          "U0325",
-          "U0326",
-          "U0327",
-          "U0328",
           "U0785",
           "U0786",
           "U0787",
@@ -4016,7 +4048,7 @@
           "override:owner-scan-review"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 47
+        "usageCount": 36
       }
     },
     {
@@ -4037,7 +4069,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:44114ede7f4766c1068ddf12f66b12c72301e848ecf0e8f9213c07130f215801",
+      "rawRecordHash": "sha256:f881679bd621f682756d9471c9ac90ce903239ea53d20d34d413b5121e11e624",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -4045,7 +4077,6 @@
         "sourceTypes": [
           "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
           "Owner-supplied physical card photograph",
-          "Physical card, photographed holo specimen",
           "Physical card, photographed sealed product",
           "Physical card, photographed sealed specimen",
           "Physical card, photographed specimen"
@@ -4054,14 +4085,13 @@
           "finish",
           "language"
         ],
-        "stableIdCount": 13,
+        "stableIdCount": 12,
         "stableIds": [
           "F0291-P02",
           "F0294-P02",
           "F0457-P01",
           "F0457-P02",
           "U0100",
-          "U0189",
           "U0228",
           "U0229",
           "U0230",
@@ -4071,7 +4101,7 @@
           "U0772"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 13
+        "usageCount": 12
       }
     },
     {
@@ -4755,32 +4785,6 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "date"
-      ]
-    },
-    {
-      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_One_(TCG)",
-      "providerId": "bulbapedia",
-      "surfaceId": "bulbapedia-mediawiki",
-      "capabilityEdgeIds": [
-        "bulbapedia-positive",
-        "bulbapedia-historical-index-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "language"
-      ]
-    },
-    {
-      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
-      "providerId": "bulbapedia",
-      "surfaceId": "bulbapedia-mediawiki",
-      "capabilityEdgeIds": [
-        "bulbapedia-positive",
-        "bulbapedia-historical-index-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "language"
       ]
     },
     {
@@ -10239,6 +10243,18 @@
       ]
     },
     {
+      "sourceKey": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -10340,6 +10356,18 @@
       "dimensions": [
         "finish",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://diamentiperla.info/snorlax-polish.jpg",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {
@@ -11252,7 +11280,102 @@
       ]
     },
     {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-checklists",
       "capabilityEdgeIds": [
@@ -11284,6 +11407,69 @@
       ]
     },
     {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-localized-card-archive",
@@ -11292,6 +11478,150 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -11307,7 +11637,8 @@
       ],
       "dimensions": [
         "finish",
-        "finish-override"
+        "finish-override",
+        "language"
       ]
     },
     {

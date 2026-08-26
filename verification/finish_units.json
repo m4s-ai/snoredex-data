@@ -58,18 +58,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 336,
-      "withOnlyMarketplaceClaim": 101,
-      "pendingFinish": 125,
+      "withConfirmedFinish": 350,
+      "withOnlyMarketplaceClaim": 100,
+      "pendingFinish": 112,
       "notApplicableFinish": 75,
-      "withCompleteManifest": 4,
-      "withNonHolo": 271,
-      "withHolo": 145,
+      "withCompleteManifest": 23,
+      "withNonHolo": 284,
+      "withHolo": 149,
       "withReverseHolo": 234,
       "withMirrorHolo": 9,
-      "withBothNonHoloAndHolo": 18,
-      "withUnresolvedProductMapping": 162,
-      "withAnyUnresolvedDetail": 221,
+      "withBothNonHoloAndHolo": 22,
+      "withUnresolvedProductMapping": 149,
+      "withAnyUnresolvedDetail": 208,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -6428,13 +6428,13 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
@@ -6445,17 +6445,26 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://diamentiperla.info/snorlax-polish.jpg",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Complete Polish Diamond & Pearl Snorlax PZ.35 card scan. PODST., the attacks Blokada and Relaks, DPBP#174, collector number 37/130 and the 2010 copyright line establish the exact local card identity. On 2026-08-26 the collection owner reviewed this candidate and explicitly identified it as the non-holo printing; the finish does not rely on an absence of glare in the scan. Retained as SPEC-0045."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0045"
+          ],
+          "image": "verification/specimens/SPEC-0045.jpg",
           "printingId": "F0094-P01"
         },
         {
@@ -6467,7 +6476,7 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
@@ -6478,8 +6487,17 @@
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "sourceType": "Bulbapedia holofoil pattern history",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+            },
+            {
+              "url": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of the Polish Diamond & Pearl Snorlax PZ.35. PODST., Blokada, Relaks, DPBP#174, 37/130 and the 2010 copyright line are legible. Strong rainbow reflection across the card body establishes the reverse-holo printing. Retained as SPEC-0046."
             }
           ],
+          "specimenIds": [
+            "SPEC-0046"
+          ],
+          "image": "verification/specimens/SPEC-0046.jpg",
           "printingId": "F0094-P02"
         }
       ],
@@ -19390,7 +19408,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "complete-manifest",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -19414,6 +19432,18 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "English"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
             {
               "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
               "sourceType": "Official Play! Pokemon Prize Pack gallery",
@@ -19492,6 +19522,18 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "English"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
             {
               "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
               "sourceType": "Official Play! Pokemon Prize Pack gallery",
@@ -19588,23 +19630,112 @@
           "image": "images/PPS1_VIV_VIV_131_Snorlax_V2_835845.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V2"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "French"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0272-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "French"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0272-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0273",
@@ -19641,23 +19772,112 @@
           "image": "images/PPS1_VIV_VIV_131_Snorlax_V2_835845.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V2"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "German"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0273-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "German"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0273-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0274",
@@ -19694,23 +19914,112 @@
           "image": "images/PPS1_VIV_VIV_131_Snorlax_V2_835845.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V2"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Italian"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0274-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Italian"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0274-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0275",
@@ -19747,23 +20056,112 @@
           "image": "images/PPS1_VIV_VIV_131_Snorlax_V2_835845.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V2"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Spanish"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0275-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series One"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 1 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Spanish"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0275-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0276",
@@ -19874,15 +20272,15 @@
           "sources": [
             {
               "url": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",
-              "sourceType": "Official Pokemon Prize Pack Series Three checklist",
+              "sourceType": "Official Pokemon localized Prize Pack Series 3 checklist",
               "authorityTier": "official-primary",
               "coverage": "complete-manifest",
               "supportsAbsence": true,
               "languages": [
                 "English"
               ],
-              "retrievedAt": "2026-07-23",
-              "evidence": "The complete checklist gives Snorlax 143/196 only the Standard Set checkbox and no Standard Set Foil checkbox."
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
             {
               "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
@@ -19967,23 +20365,67 @@
           "image": "images/PPS3_LOR_LOR_143_Snorlax_730130.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Three"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 3 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "French"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0278-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0279",
@@ -20007,23 +20449,67 @@
           "image": "images/PPS3_LOR_LOR_143_Snorlax_730130.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Three"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 3 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "German"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0279-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0280",
@@ -20047,23 +20533,67 @@
           "image": "images/PPS3_LOR_LOR_143_Snorlax_730130.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Three"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 3 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Italian"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0280-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0281",
@@ -20087,23 +20617,67 @@
           "image": "images/PPS3_LOR_LOR_143_Snorlax_730130.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Three"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 3 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Spanish"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0281-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0282",
@@ -20201,15 +20775,15 @@
           "sources": [
             {
               "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
-              "sourceType": "Official Pokemon Prize Pack Series Seven checklist",
+              "sourceType": "Official Pokemon localized Prize Pack Series 7 checklist",
               "authorityTier": "official-primary",
               "coverage": "complete-manifest",
               "supportsAbsence": true,
               "languages": [
                 "English"
               ],
-              "retrievedAt": "2026-07-23",
-              "evidence": "The complete checklist gives Hop's Snorlax 117/159 only the Standard Set checkbox; the legend distinguishes that column from Standard Set Foil."
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
             {
               "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
@@ -20294,23 +20868,67 @@
           "image": "images/PPS7_JTG_JTG_117_Hop_s_Snorlax_842660.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Seven"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 7 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "French"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0284-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0285",
@@ -20334,23 +20952,67 @@
           "image": "images/PPS7_JTG_JTG_117_Hop_s_Snorlax_842660.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Seven"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 7 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "German"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0285-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0286",
@@ -20374,23 +21036,67 @@
           "image": "images/PPS7_JTG_JTG_117_Hop_s_Snorlax_842660.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Seven"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 7 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Italian"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0286-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0287",
@@ -20414,23 +21120,67 @@
           "image": "images/PPS7_JTG_JTG_117_Hop_s_Snorlax_842660.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Seven"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 7 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Spanish"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0287-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0288",
@@ -20454,23 +21204,67 @@
           "image": "images/PPS7_JTG_JTG_117_Hop_s_Snorlax_842660.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "complete-manifest",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Seven"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 7 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Portuguese"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
+            }
+          ],
+          "printingId": "F0288-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0289",
@@ -20545,15 +21339,15 @@
           "sources": [
             {
               "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
-              "sourceType": "Official Pokemon Prize Pack Series Eight checklist",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
               "authorityTier": "official-primary",
               "coverage": "complete-manifest",
               "supportsAbsence": true,
               "languages": [
                 "English"
               ],
-              "retrievedAt": "2026-07-23",
-              "evidence": "The complete checklist gives Hop's Snorlax 117/159 both Standard Set and Standard Set Foil checkboxes."
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
             {
               "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
@@ -20635,15 +21429,15 @@
           "sources": [
             {
               "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
-              "sourceType": "Official Pokemon Prize Pack Series Eight checklist",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
               "authorityTier": "official-primary",
               "coverage": "complete-manifest",
               "supportsAbsence": true,
               "languages": [
                 "English"
               ],
-              "retrievedAt": "2026-07-23",
-              "evidence": "The complete checklist gives Hop's Snorlax 117/159 both Standard Set and Standard Set Foil checkboxes."
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
             {
               "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
@@ -20757,15 +21551,24 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "complete-manifest",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
           "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -20773,18 +21576,43 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
-              "sourceType": "user + Cardmarket stock image (no Holo label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "French"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0290-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": "cosmos",
-          "markings": null,
-          "distribution": null,
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
@@ -20792,9 +21620,25 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
-              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "French"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0290-P02"
@@ -20849,15 +21693,24 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "complete-manifest",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
           "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -20865,16 +21718,32 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
-              "sourceType": "user + Cardmarket stock image (no Holo label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "German"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0291-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": null,
+          "foilPattern": "cosmos",
           "markings": [
             {
               "kind": "observed-marking",
@@ -20882,7 +21751,10 @@
               "text": "Play! Pokémon Prize Pack stamp"
             }
           ],
-          "distribution": null,
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
@@ -20893,31 +21765,24 @@
               "url": "specimen:SPEC-0001",
               "sourceType": "Owner-supplied physical card photograph",
               "evidence": "Physical German HOLO specimen inspected from a photograph: \"Hops Relaxo\", KP 150, Fahigkeit \"Extraportion\", attack \"Dynamische Presse\" 140, Illustr. GOSSAN, \"JTG DE 117/159\", Play! Pokemon Prize Pack stamp, (c)2025. This is the holo (V2) printing. The card face does not distinguish PPS7 from PPS8; PPS8 is the owner attribution. Retained as SPEC-0001."
+            },
+            {
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "German"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             }
           ],
           "specimenIds": [
             "SPEC-0001"
           ],
           "printingId": "F0291-P02"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": "cosmos",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V2"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
-              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
-            }
-          ],
-          "printingId": "F0291-P03"
         }
       ],
       "unresolved": []
@@ -20969,15 +21834,24 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "complete-manifest",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
           "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -20985,18 +21859,43 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
-              "sourceType": "user + Cardmarket stock image (no Holo label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Italian"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0292-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": "cosmos",
-          "markings": null,
-          "distribution": null,
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
@@ -21004,9 +21903,25 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
-              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Italian"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0292-P02"
@@ -21061,15 +21976,24 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "complete-manifest",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
           "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -21077,18 +22001,43 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
-              "sourceType": "user + Cardmarket stock image (no Holo label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Spanish"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0293-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": "cosmos",
-          "markings": null,
-          "distribution": null,
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
@@ -21096,9 +22045,25 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
-              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Spanish"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0293-P02"
@@ -21153,15 +22118,24 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "complete-manifest",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
           "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "markings": [
+            {
+              "kind": "program-logo",
+              "text": "Play! Pokemon",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -21169,9 +22143,25 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
-              "sourceType": "user + Cardmarket stock image (no Holo label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Portuguese"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
+            },
+            {
+              "url": "https://play.pokemon.com/en-us/rewards/gallery/?filter=series7",
+              "sourceType": "Official Play! Pokemon Prize Pack gallery",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
           "printingId": "F0294-P01"
@@ -21186,7 +22176,10 @@
               "text": "Play! Pokémon Prize Pack stamp"
             }
           ],
-          "distribution": null,
+          "distribution": {
+            "kind": "prize-pack",
+            "name": "Play! Pokemon Prize Pack Series Eight"
+          },
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
@@ -21197,31 +22190,24 @@
               "url": "specimen:SPEC-0006",
               "sourceType": "Owner-supplied physical card photograph",
               "evidence": "Physical Portuguese HOLO specimen inspected from a photograph: \"Snorlax do Lupo\", Habilidade \"Boca-livre\", attack \"Compressao Dinamica\" 140, \"JTG PT 117/159\", Play! Pokemon Prize Pack stamp, (c)2025. This is the holo (V2) printing. The card face does not distinguish PPS7 from PPS8; PPS8 is the owner attribution. Recorded from the inspection already described in U0192, which cited it in prose before specimen ids existed. Retained as SPEC-0006."
+            },
+            {
+              "url": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+              "sourceType": "Official Pokemon localized Prize Pack Series 8 checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "Portuguese"
+              ],
+              "retrievedAt": "2026-08-26",
+              "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             }
           ],
           "specimenIds": [
             "SPEC-0006"
           ],
           "printingId": "F0294-P02"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": "cosmos",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V2"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
-              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
-              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
-            }
-          ],
-          "printingId": "F0294-P03"
         }
       ],
       "unresolved": []

@@ -975,6 +975,23 @@ def main() -> None:
             if candidate is not None:
                 add_reverse_specimen_conflicts(candidate, str(specimen["specimenId"]), reverse_conflicts)
                 for override in applicable_overrides:
+                    for manual in override.get("printings") or []:
+                        manual_variants = set(manual.get("mappedVariants") or [])
+                        if manual.get("finish") != candidate["finish"] or (
+                            manual_variants
+                            and not manual_variants.intersection(candidate["mappedVariants"])
+                        ):
+                            continue
+                        localized_refs = [
+                            ref for ref in manual.get("sourceRefs") or []
+                            if language in (source_registry[ref].get("languages") or [])
+                        ]
+                        candidate["sources"].extend(resolve_override_sources(
+                            localized_refs,
+                            source_registry,
+                            products,
+                            candidate["mappedVariants"],
+                        ))
                     if any(
                         merge_curated_specimen_identity(candidate, manual, source_registry)
                         for manual in override.get("printings") or []
@@ -1003,6 +1020,8 @@ def main() -> None:
                         if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
                             printing["cardSize"] = next(iter(mapped_sizes))
             for manual in override.get("printings") or []:
+                if manual.get("evidenceOnlyForSpecimen"):
+                    continue
                 requested_variants = list(manual.get("mappedVariants") or [])
                 mapped_variants = sorted(set(requested_variants) & present_variants)
                 if requested_variants and not mapped_variants:

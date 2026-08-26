@@ -197,9 +197,9 @@
       "match": {
         "urlPrefixes": [
           "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/",
+          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/",
+          "https://www.pokemon.com/static-assets/content-assets/cms2"
         ],
         "nonUrlEvidenceIds": []
       },
@@ -264,8 +264,27 @@
             ],
             "exactScopes": [
               "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
               "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
               "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
+              "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
+              "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
               "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
             ],
             "rationale": "The exact official checklist is complete for its own labelled product and finish columns; no neighbouring product inherits closure."
@@ -277,7 +296,7 @@
               "any other set, language, product, web search or official page"
             ],
             "zeroResultMeans": "bounded-absence",
-            "challenge": "A general official card page outside the four URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."
+            "challenge": "A general official card page outside these exact checklist URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."
           }
         }
       ]
