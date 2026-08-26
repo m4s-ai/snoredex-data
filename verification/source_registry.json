@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 25,
-   "evidenceRecords": 921,
-   "uniqueUrls": 914,
+   "evidenceRecords": 926,
+   "uniqueUrls": 919,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2888
+   "claimsAttributed": 2891
   }
  },
  "providers": [
@@ -183,7 +183,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 86,
-   "claimsSupported": 672
+   "claimsSupported": 671
   },
   {
    "providerId": "tcgcsv",
@@ -448,7 +448,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 396,
-   "claimsSupported": 920
+   "claimsSupported": 919
   },
   {
    "providerId": "pokemontcgio",
@@ -605,8 +605,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
-   "uniqueSources": 5,
-   "claimsSupported": 34
+   "uniqueSources": 9,
+   "claimsSupported": 38
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -626,8 +626,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 4,
-   "claimsSupported": 5
+   "uniqueSources": 5,
+   "claimsSupported": 6
   }
  ],
  "evidence": [
@@ -1253,7 +1253,7 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 177,
+   "stableIdCount": 176,
    "stableIds": [
     "F0012-P02",
     "F0013-P02",
@@ -1307,7 +1307,7 @@
     "F0124-P02"
    ],
    "retrievedAt": null,
-   "usageCount": 177
+   "usageCount": 176
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Hungry_Snorlax_(Nintendo_64_promo)",
@@ -9951,7 +9951,7 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 15,
+   "stableIdCount": 14,
    "stableIds": [
     "F0175-P01",
     "F0175-P02",
@@ -9966,11 +9966,10 @@
     "F0180-P01",
     "F0180-P02",
     "F0183-P01",
-    "F0183-P02",
     "KSS 26 base"
    ],
    "retrievedAt": null,
-   "usageCount": 15
+   "usageCount": 14
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149",
@@ -10012,6 +10011,23 @@
    ],
    "retrievedAt": null,
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0024-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
@@ -10224,6 +10240,40 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://efour.b-cdn.net/uploads/default/original/3X/a/0/a059180b21b4911eada3b980cc57faf5a1e038a5.jpeg",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0024-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://efour.b-cdn.net/uploads/default/original/3X/b/7/b7aa1d2b7803849ac2b6773cd0f09c86ad893e91.jpeg",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0125-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
@@ -10287,6 +10337,40 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0598-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.facebook.com/groups/1434540320772743/posts/2109480509945384",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0125-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.youtube.com/watch?v=t0aMSK32ymQ&t=346s",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0183-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1

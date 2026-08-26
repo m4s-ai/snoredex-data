@@ -582,6 +582,21 @@ variant and deck identity. The complete run accounts for 246 card records across
 with no run error and no verdict mutation. Promos, decks beyond the retained KSS identity, later
 Russian history and every unlisted product remain explicit specialist gaps.
 
+Issue #272 adds positive physical-finish evidence for the three Russian rows above. SPEC-0047 is a
+CGC-slab photograph of non-holo BKT 118/162, SPEC-0048 is a PSA/DNA-authenticated collector
+photograph of non-holo FLF 80/106, and SPEC-0049 retains non-holo KSS 26/39 in the collector-video
+frame at 00:05:46. SPEC-0050 then establishes the exact Russian BKT reverse holo from a PSA-labelled
+collector photograph, while SPEC-0051 shows the Russian FLF non-holo and type-symbol-background
+reverse holo side by side. The collection owner reviewed and confirmed all five candidates on
+2026-08-26. The reviewed input is `verification/evidence/issue-272-russian-finishes.json`.
+
+The same owner review rejects Cardmarket's generic reverse-holo attribution for Russian KSS 26:
+the regular KSS product contains Snorlax only as non-holo. OAF-20260826-KSS-26-ru therefore closes
+that Russian finish list as `non-holo` only. Elite Fourum's research documents Italian Easter-product
+Wave Holo cards as a separate Italian-only exception. Its evolving gallery does not currently show
+a Snorlax, so this repository neither asserts nor excludes an Italian Wave Holo Snorlax from that
+omission. The owner decision is not attributed to Cardmarket or Elite Fourum as an absence claim.
+
 ## Indonesian and Thai official card-discovery result
 
 Run `20260820T122400Z` activates the shared publisher adapter for the native Indonesian `Snorlax`
