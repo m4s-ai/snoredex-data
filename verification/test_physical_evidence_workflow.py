@@ -89,6 +89,11 @@ def main() -> None:
     projector = finish_projector()
     seller_source = projector.specimen_printing(fixture[2])["sources"][0]
     assert seller_source["sourceType"] == "Seller listing photograph"
+    archived_seller = next(row for row in specimens if row["specimenId"] == "SPEC-0107")
+    assert archived_seller["heldBy"] == "third-party seller"
+    assert projector.specimen_printing(archived_seller)["sources"][0]["sourceType"] == (
+        "Seller listing photograph"
+    )
     owner_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0105")
     owner_sources = projector.specimen_printing(owner_specimen)["sources"]
     assert [source["sourceType"] for source in owner_sources] == [
@@ -135,6 +140,11 @@ def main() -> None:
         target_specimens["SPEC-0055"]["photographSource"]: ["finish", "identity"],
         target_specimens["SPEC-0056"]["photographSource"]: ["identity"],
     }
+    archived_registry_source = next(
+        source for source in source_registry
+        if source.get("canonicalUrl") == archived_seller["photographSource"]
+    )
+    assert archived_registry_source["providerId"] == "seller-listing-photo"
     omitted_size = dict(fixture[0])
     omitted_size["physicalObservation"] = {
         key: value for key, value in fixture[0]["physicalObservation"].items()
@@ -156,6 +166,9 @@ def main() -> None:
     assert projector.specimen_markings({
         "markings": "STAFF", "markingRole": "distribution-promo"
     }) == [{"kind": "staff", "role": "distribution-promo", "text": "Staff"}]
+    assert projector.specimen_markings({
+        "markings": "EDIZIONE 1", "markingRole": "print-identity"
+    }) == [{"kind": "edition-stamp", "role": "print-identity", "text": "EDIZIONE 1"}]
     mp1_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0025")
     mp1_candidate = projector.specimen_printing(mp1_specimen)
     assert mp1_candidate is not None
