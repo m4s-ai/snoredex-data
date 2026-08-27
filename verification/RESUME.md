@@ -52,10 +52,13 @@ state only and is never the release source of truth. A refresh failure is an unr
 ### Physical-card evidence loop (#274)
 
 Keep one reviewed JSON manifest per issue. Each row names `setCode`, `number`, `variant`,
-`language`, `heldBy`, `inspectedFrom`, `observed`, `recordedAt`, and
-`physicalObservation.finish` plus the quoted `physicalObservation.basis`; seller rows also need
-`listingUrl`. An optional `specimenId` must use the `SPEC-nnnn` format. You may also add
-`citedBy` and `attachment` (or `attachmentIndex`). Import it in one idempotent command:
+`language`, `heldBy`, `inspectedFrom`, `observed`, and `recordedAt`; seller rows also need
+`listingUrl`. Add `physicalObservation.finish` and the quoted `physicalObservation.basis` only
+when the retained image positively establishes a physical treatment. An identity-legible database
+scan may omit `physicalObservation` entirely when it establishes the localized card but not its
+finish, edition, marking, distribution, or size; omission is never evidence of non-holo. An optional
+`specimenId` must use the `SPEC-nnnn` format. You may also add `citedBy` and `attachment` (or
+`attachmentIndex`). Import it in one idempotent command:
 
 ```console
 python verification/fetch_attachment.py --issue 269 --manifest path/to/issue-269.json

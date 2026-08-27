@@ -439,6 +439,8 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
     holder = str(specimen.get("heldBy", "")).casefold()
     if "third-party seller" in holder:
         source_type = "Seller listing photograph"
+    elif "third-party scan archive" in holder:
+        source_type = "Third-party scan archive"
     elif "owner" in holder:
         source_type = "Owner-supplied physical card photograph"
     else:

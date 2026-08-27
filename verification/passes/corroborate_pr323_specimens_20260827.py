@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 UNITS = ROOT / "verification" / "units.json"
 SPECIMENS = ROOT / "verification" / "specimens.json"
 JOURNAL = ROOT / "verification" / "evidence.jsonl"
-CHECKED_AT = "2026-08-27T18:18:22Z"
+SPECIMEN_OBSERVED_AT = "2026-08-27T18:18:22Z"
 
 TARGETS = {
     "U0094": ["SPEC-0120"],
@@ -31,6 +31,25 @@ TARGETS = {
     "U0527": ["SPEC-0140", "SPEC-0141", "SPEC-0142"],
     "U0452": ["SPEC-0144"],
     "U0294": ["SPEC-0145"],
+}
+
+PRIMARY_CHECKED_AT = {
+    "U0094": "2026-07-21T16:41:51",
+    "U0295": "2026-07-22T09:26:20",
+    "U0244": "2026-07-21T16:41:51",
+    "U0417": "2026-07-21T14:59:21",
+    "U0434": "2026-07-22T11:00:43",
+    "U0228": "2026-07-22T17:04:58",
+    "U0122": "2026-07-21T16:41:51",
+    "U0245": "2026-07-21T16:41:51",
+    "U0482": "2026-07-21T16:56:33",
+    "U0092": "2026-07-21T16:41:51",
+    "U0229": "2026-07-22T17:04:58",
+    "U0418": "2026-07-21T14:59:21",
+    "U0416": "2026-07-21T14:59:21",
+    "U0527": "2026-07-21T14:59:21",
+    "U0452": "2026-07-22T00:41:51",
+    "U0294": "2026-07-22T09:26:20",
 }
 
 
@@ -84,10 +103,14 @@ def main() -> int:
         desired_evidence = unit["evidence"]
         if sentence not in desired_evidence:
             desired_evidence = f"{desired_evidence.rstrip()} {sentence}"
-        if not unit.get("corroborated") or unit["evidence"] != desired_evidence:
+        if (
+            not unit.get("corroborated")
+            or unit["evidence"] != desired_evidence
+            or unit.get("checkedAt") != PRIMARY_CHECKED_AT[unit_id]
+        ):
             unit["corroborated"] = True
             unit["evidence"] = desired_evidence
-            unit["checkedAt"] = CHECKED_AT
+            unit["checkedAt"] = PRIMARY_CHECKED_AT[unit_id]
             changed += 1
 
         journal_row = {
@@ -95,7 +118,7 @@ def main() -> int:
             "status": "confirmed",
             "source": f"specimen:{specimen_ids[0]}",
             "evidence": sentence,
-            "at": CHECKED_AT,
+            "at": SPECIMEN_OBSERVED_AT,
         }
         key = (journal_row["unitId"], journal_row["source"], journal_row["evidence"])
         if key not in journal_keys:

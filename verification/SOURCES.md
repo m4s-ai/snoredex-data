@@ -14,7 +14,7 @@ gap, never a finding.
 
 | Provider | Category | Tier | Absence? | Sources | Claims | Used for |
 |---|---|---:|:---:|---:|---:|---|
-| **Inspected physical specimen** | non-url-evidence | 1 | no | 11 | 40 | language, identity, finish, edition |
+| **Inspected physical specimen** | non-url-evidence | 1 | no | 10 | 39 | language, identity, finish, edition |
 | **Play! Pokémon rewards gallery** | official-publisher | 1 | yes | 1 | 32 | finish, product |
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 22 | 22 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
@@ -33,6 +33,7 @@ gap, never a finding.
 | **pokemontcg.io** | open-database | 2 | no | 1 | 123 | artist, date |
 | **LigaPokemon** | marketplace | 3 | no | 2 | 3 | language, finish |
 | **Limitless TCG** | open-database | 3 | no | 0 | 0 | artist |
+| **PokéCardex** | collector-database | 3 | no | 1 | 1 | language, identity, finish, product |
 | **PokéCottage** | collector-checklist | 3 | no | 0 | 0 | language, finish, product, date, artist, rarity |
 | **Retailer and specialist card listings** | retail-listing | 3 | no | 6 | 31 | finish, product, language |
 | **TCGCSV (TCGplayer product data)** | marketplace-catalogue | 3 | no | 8 | 49 | finish, product |
@@ -216,6 +217,15 @@ gap, never a finding.
 - **Can establish absence:** no — positive evidence only
 - **Attribution:** Illustrator data from Limitless TCG.
 - **Notes:** Named in the dataset's meta.artistSources for three cards missing upstream from pokemontcg.io, but no card row attributes to it individually - those rows carry the pokemontcg.io sourceType. Declared here so the gap is visible rather than implied.
+
+### PokéCardex — <https://www.pokecardex.com>
+
+- **Organization:** PokéCardex
+- **Terms:** Site terms; scan images are used for identification and verification only.
+- **Coverage:** positive card identity and source-labelled variants shown by retained scans
+- **Can establish absence:** no — positive evidence only
+- **Attribution:** Card scans and variant labels from PokéCardex.
+- **Notes:** A retained scan and its deck-specific page may establish only the visible card identity and the variant that page positively labels. Missing cards, variants, or languages never establish absence or completeness.
 
 ### PokéCottage — <https://pokecottage.com>
 

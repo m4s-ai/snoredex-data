@@ -15,15 +15,15 @@
       "An exact retained PokéCottage row is tier-3 positive confirmation for the facts it states. Facts demonstrably shared by an already identified matching Western release may corroborate that release when the equivalence basis is retained; omissions and unstated alternatives never establish absence or completeness."
     ],
     "counts": {
-      "providers": 26,
-      "surfaces": 30,
-      "coverageEdges": 31,
+      "providers": 27,
+      "surfaces": 31,
+      "coverageEdges": 32,
       "absenceEdges": 3,
-      "observations": 33,
+      "observations": 34,
       "resolvedVerdictSources": 1064
     },
     "surfaceStates": {
-      "active": 13,
+      "active": 14,
       "blocked-by-browser": 3,
       "incomplete": 8,
       "internal": 1,
@@ -109,6 +109,13 @@
       "authorityTier": 3,
       "licenseOrTerms": "Site terms; fan-made collector content.",
       "rawRetention": "Retain the exact structured row or page section, canonical page and data URLs, retrieval date and SHA-256; each stated fact remains attributable to that row."
+    },
+    {
+      "providerId": "pokecardex",
+      "operator": "PokéCardex",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+      "rawRetention": "Retain the exact scan bytes, card/deck page URL, retrieval date, specimen id and SHA-256."
     },
     {
       "providerId": "snkrdunk",
@@ -1319,6 +1326,52 @@
       },
       "coverageEdgeIds": [
         "pokecottage-snorlax-positive"
+      ]
+    },
+    {
+      "surfaceId": "pokecardex-scan-archive",
+      "providerId": "pokecardex",
+      "label": "PokéCardex card scans and deck-specific variant pages",
+      "match": {
+        "urlPrefixes": [
+          "https://pokecardex-scans.b-cdn.net/",
+          "https://www.pokecardex.com/series/",
+          "https://pokecardex.com/series/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-27",
+      "freshnessPolicy": "Retain the exact scan bytes and deck-specific page label before using a card identity or variant as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained PokéCardex scan or deck-specific card page URL",
+        "parameters": [
+          "series",
+          "language",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained scan and its card page",
+        "expectedIdentifiers": [
+          "card name",
+          "collector number or deck identity",
+          "language",
+          "source-labelled variant"
+        ]
+      },
+      "finishCapability": {
+        "mode": "named-variety",
+        "vocabulary": [
+          "source-labelled Standard or foil variant"
+        ],
+        "publicationForm": "retained scan plus the matching deck-specific card-page label",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "pokecardex-positive-scan"
       ]
     }
   ],
@@ -2999,6 +3052,57 @@
         "zeroResultMeans": "unknown",
         "challenge": "An exact retained PokéCottage row can confirm the positive facts it states. For another Western language, only facts shown to be shared by an already identified matching release may be carried, with the equivalence basis retained; the row alone does not invent that localized printing."
       }
+    },
+    {
+      "edgeId": "pokecardex-positive-scan",
+      "providerId": "pokecardex",
+      "surfaceId": "pokecardex-scan-archive",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "MULTIPLE"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "card",
+          "fixed-deck"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "the concrete retained scan and matching page label only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "identity",
+        "finish",
+        "named-variety",
+        "specimen-existence",
+        "image"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A retained scan and page label establish only that displayed card and variant."
+      },
+      "knownPositiveObservationId": "obs-pokecardex-scan",
+      "boundary": {
+        "outsideScope": [
+          "unretained cards",
+          "unlabelled variants",
+          "other languages",
+          "complete set or product"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A missing scan or variant is archive silence and never negative evidence."
+      }
     }
   ],
   "observations": [
@@ -3667,6 +3771,45 @@
       }
     },
     {
+      "observationId": "obs-pokecardex-scan",
+      "surfaceId": "pokecardex-scan-archive",
+      "kind": "known-positive",
+      "queryUrl": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+      "queryParameters": {
+        "series": "ADC-M",
+        "language": "FR",
+        "cardNumber": "9"
+      },
+      "retrievedAt": "2026-08-27",
+      "expectedIdentifiers": [
+        "SPEC-0145",
+        "F0007-P01"
+      ],
+      "validatesEdges": [
+        "pokecardex-positive-scan"
+      ],
+      "outcome": "The retained French Battle Academy scan and its deck-specific Standard label positively establish that displayed fixed-deck card and variant only.",
+      "rawRecordRef": "verification/source_registry.json:https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+      "rawRecordHash": "sha256:7c77babcb0307a6e4c4e292668f374151b0059fdb74b50446bdb04bb4203fe24",
+      "rawRecord": {
+        "canonicalUrl": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+        "nonUrlEvidenceId": null,
+        "providerId": "pokecardex",
+        "sourceTypes": [
+          "Third-party scan archive"
+        ],
+        "dimensions": [
+          "finish"
+        ],
+        "stableIdCount": 1,
+        "stableIds": [
+          "F0007-P01"
+        ],
+        "retrievedAt": null,
+        "usageCount": 1
+      }
+    },
+    {
       "observationId": "obs-snkrdunk",
       "surfaceId": "snkrdunk-listings",
       "kind": "known-positive",
@@ -4276,7 +4419,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:0107e1b83f661b98df9ac616369836e57937e40f6ba9d6efbab44e8feccc82b3",
+      "rawRecordHash": "sha256:3755a473944e9ba3f69900c4cfe3696ddc784e0d65f79d21d2c70d0cbe50aec9",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -4315,7 +4458,7 @@
           "U0752",
           "U0772"
         ],
-        "retrievedAt": "2026-08-27",
+        "retrievedAt": "2026-07-23",
         "usageCount": 29
       }
     },
@@ -10721,18 +10864,6 @@
       ]
     },
     {
-      "sourceKey": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
-      "providerId": "inspected-specimen",
-      "surfaceId": "inspected-specimens",
-      "capabilityEdgeIds": [
-        "inspected-specimen-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish"
-      ]
-    },
-    {
       "sourceKey": "https://www.facebook.com/groups/1434540320772743/posts/2109480509945384",
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
@@ -10820,6 +10951,18 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+      "providerId": "pokecardex",
+      "surfaceId": "pokecardex-scan-archive",
+      "capabilityEdgeIds": [
+        "pokecardex-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {

@@ -91,6 +91,13 @@
       "rawRetention": "Retain the exact structured row or page section, canonical page and data URLs, retrieval date and SHA-256; each stated fact remains attributable to that row."
     },
     {
+      "providerId": "pokecardex",
+      "operator": "PokéCardex",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+      "rawRetention": "Retain the exact scan bytes, card/deck page URL, retrieval date, specimen id and SHA-256."
+    },
+    {
       "providerId": "snkrdunk",
       "operator": "SODA Inc.",
       "authorityTier": 2,
@@ -2884,6 +2891,100 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "pokecardex-scan-archive",
+      "providerId": "pokecardex",
+      "label": "PokéCardex card scans and deck-specific variant pages",
+      "match": {
+        "urlPrefixes": [
+          "https://pokecardex-scans.b-cdn.net/",
+          "https://www.pokecardex.com/series/",
+          "https://pokecardex.com/series/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-27",
+      "freshnessPolicy": "Retain the exact scan bytes and deck-specific page label before using a card identity or variant as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained PokéCardex scan or deck-specific card page URL",
+        "parameters": [
+          "series",
+          "language",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained scan and its card page",
+        "expectedIdentifiers": [
+          "card name",
+          "collector number or deck identity",
+          "language",
+          "source-labelled variant"
+        ]
+      },
+      "finishCapability": {
+        "mode": "named-variety",
+        "vocabulary": [
+          "source-labelled Standard or foil variant"
+        ],
+        "publicationForm": "retained scan plus the matching deck-specific card-page label",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokecardex-positive-scan",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card",
+              "fixed-deck"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the concrete retained scan and matching page label only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "identity",
+            "finish",
+            "named-variety",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained scan and page label establish only that displayed card and variant."
+          },
+          "knownPositiveObservationId": "obs-pokecardex-scan",
+          "boundary": {
+            "outsideScope": [
+              "unretained cards",
+              "unlabelled variants",
+              "other languages",
+              "complete set or product"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing scan or variant is archive silence and never negative evidence."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -3329,6 +3430,31 @@
         "pokecottage-snorlax-positive"
       ],
       "outcome": "The exact structured row is tier-3 positive confirmation for the named International Snorlax, Vivid Voltage set membership, collector number, Holo variant, rarity, release date and artist. It does not establish an omitted alternative, completeness or another localized printing by itself."
+    },
+    {
+      "observationId": "obs-pokecardex-scan",
+      "surfaceId": "pokecardex-scan-archive",
+      "kind": "known-positive",
+      "queryUrl": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+      "queryParameters": {
+        "series": "ADC-M",
+        "language": "FR",
+        "cardNumber": "9"
+      },
+      "retrievedAt": "2026-08-27",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokecardex",
+        "recordKey": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0145",
+        "F0007-P01"
+      ],
+      "validatesEdges": [
+        "pokecardex-positive-scan"
+      ],
+      "outcome": "The retained French Battle Academy scan and its deck-specific Standard label positively establish that displayed fixed-deck card and variant only."
     },
     {
       "observationId": "obs-snkrdunk",

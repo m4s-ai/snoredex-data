@@ -239,6 +239,23 @@ PROVIDERS: list[dict[str, Any]] = [
                   "results and unstated alternatives never establish absence or completeness."),
     },
     {
+        "providerId": "pokecardex",
+        "displayName": "PokéCardex",
+        "organization": "PokéCardex",
+        "homepage": "https://www.pokecardex.com",
+        "hosts": ["pokecardex.com", "www.pokecardex.com", "pokecardex-scans.b-cdn.net"],
+        "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+        "category": "collector-database",
+        "authorityTier": 3,
+        "coverage": "positive card identity and source-labelled variants shown by retained scans",
+        "supportsAbsence": False,
+        "usedFor": ["language", "identity", "finish", "product"],
+        "attribution": "Card scans and variant labels from PokéCardex.",
+        "notes": ("A retained scan and its deck-specific page may establish only the visible card "
+                  "identity and the variant that page positively labels. Missing cards, variants, "
+                  "or languages never establish absence or completeness."),
+    },
+    {
         # Added on the owner's evidence in #119: a Japanese secondhand marketplace whose listings
         # photograph the actual card rather than reusing a stock image. That is the whole value —
         # for a fixed-deck Japanese product neither TCGdex nor the official card database records a
@@ -520,6 +537,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"cardmarket seller", re.I), "cardmarket-listing-photo"),
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
+    (re.compile(r"third-party scan archive|pok[eé]cardex", re.I), "pokecardex"),
     (re.compile(r"photograph", re.I), "inspected-specimen"),
     (re.compile(r"owner attestation", re.I), "owner-attestation"),
     (re.compile(r"bulbapedia", re.I), "bulbapedia"),

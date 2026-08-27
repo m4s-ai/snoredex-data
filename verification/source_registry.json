@@ -9,7 +9,7 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 26,
+   "providers": 27,
    "evidenceRecords": 1064,
    "uniqueUrls": 1057,
    "nonUrlEvidenceClasses": 7,
@@ -400,6 +400,32 @@
    "claimsSupported": 0
   },
   {
+   "providerId": "pokecardex",
+   "displayName": "PokéCardex",
+   "organization": "PokéCardex",
+   "homepage": "https://www.pokecardex.com",
+   "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "positive card identity and source-labelled variants shown by retained scans",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "identity",
+    "finish",
+    "product"
+   ],
+   "attribution": "Card scans and variant labels from PokéCardex.",
+   "notes": "A retained scan and its deck-specific page may establish only the visible card identity and the variant that page positively labels. Missing cards, variants, or languages never establish absence or completeness.",
+   "hosts": [
+    "pokecardex.com",
+    "www.pokecardex.com",
+    "pokecardex-scans.b-cdn.net"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
    "providerId": "snkrdunk",
    "displayName": "SNKRDUNK",
    "organization": "SODA Inc.",
@@ -701,8 +727,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
-   "uniqueSources": 11,
-   "claimsSupported": 40
+   "uniqueSources": 10,
+   "claimsSupported": 39
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -924,7 +950,7 @@
     "U0297",
     "override:battle-academy-2020"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-31",
    "usageCount": 7
   },
   {
@@ -1535,7 +1561,7 @@
     "U0125",
     "U0380"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-31",
    "usageCount": 6
   },
   {
@@ -1567,7 +1593,7 @@
     "U0495",
     "U0586"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-31",
    "usageCount": 13
   },
   {
@@ -1634,7 +1660,7 @@
     "U0511",
     "U0512"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-22",
    "usageCount": 66
   },
   {
@@ -10275,7 +10301,7 @@
     "U0436",
     "U0437"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-08-02",
    "usageCount": 6
   },
   {
@@ -10335,7 +10361,7 @@
     "U0752",
     "U0772"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-23",
    "usageCount": 29
   },
   {
@@ -10470,23 +10496,6 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0174-P02"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
-   "nonUrlEvidenceId": null,
-   "providerId": "inspected-specimen",
-   "sourceTypes": [
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "F0007-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -10708,6 +10717,23 @@
    "retrievedAt": "2026-07-23",
    "usageCount": 32,
    "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokecardex",
+   "sourceTypes": [
+    "Third-party scan archive"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0007-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045",
@@ -16537,7 +16563,7 @@
    "stableIds": [
     "U0417"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-21",
    "usageCount": 1
   },
   {
@@ -18488,7 +18514,7 @@
    "stableIds": [
     "U0418"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-21",
    "usageCount": 1
   },
   {
@@ -18751,7 +18777,7 @@
     "F0116-P01",
     "U0527"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-21",
    "usageCount": 2
   },
   {
@@ -19490,7 +19516,7 @@
    "stableIds": [
     "U0416"
    ],
-   "retrievedAt": "2026-08-27",
+   "retrievedAt": "2026-07-21",
    "usageCount": 1
   },
   {

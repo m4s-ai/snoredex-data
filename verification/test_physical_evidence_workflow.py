@@ -118,6 +118,10 @@ def main() -> None:
     assert projector.specimen_printing(archived_seller)["sources"][0]["sourceType"] == (
         "Seller listing photograph"
     )
+    pokecardex = specimen_by_id["SPEC-0145"]
+    assert projector.specimen_printing(pokecardex)["sources"][0]["sourceType"] == (
+        "Third-party scan archive"
+    )
     owner_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0105")
     owner_sources = projector.specimen_printing(owner_specimen)["sources"]
     assert [source["sourceType"] for source in owner_sources] == [
@@ -149,6 +153,11 @@ def main() -> None:
         assert printing["sources"][0]["claimFields"] == expected_photo_fields
 
     source_registry = read("source_registry.json")["evidence"]
+    pokecardex_source = next(
+        row for row in source_registry
+        if row.get("canonicalUrl") == pokecardex["photographSource"]
+    )
+    assert pokecardex_source["providerId"] == "pokecardex"
     target_specimens = {
         row["specimenId"]: row for row in specimens if row["specimenId"] in portuguese_owner_confirmed
     }
@@ -332,8 +341,19 @@ def main() -> None:
         "U0294": ["SPEC-0145"],
     }
     units = {row["unitId"]: row for row in read("units.json")}
+    primary_checked_at = {
+        "U0094": "2026-07-21T16:41:51", "U0295": "2026-07-22T09:26:20",
+        "U0244": "2026-07-21T16:41:51", "U0417": "2026-07-21T14:59:21",
+        "U0434": "2026-07-22T11:00:43", "U0228": "2026-07-22T17:04:58",
+        "U0122": "2026-07-21T16:41:51", "U0245": "2026-07-21T16:41:51",
+        "U0482": "2026-07-21T16:56:33", "U0092": "2026-07-21T16:41:51",
+        "U0229": "2026-07-22T17:04:58", "U0418": "2026-07-21T14:59:21",
+        "U0416": "2026-07-21T14:59:21", "U0527": "2026-07-21T14:59:21",
+        "U0452": "2026-07-22T00:41:51", "U0294": "2026-07-22T09:26:20",
+    }
     for unit_id, specimen_ids in corroboration.items():
         assert units[unit_id]["corroborated"] is True
+        assert units[unit_id]["checkedAt"] == primary_checked_at[unit_id]
         assert all(unit_id in specimen_by_id[specimen_id]["citedBy"]
                    for specimen_id in specimen_ids)
     assert projector.specimen_markings(
