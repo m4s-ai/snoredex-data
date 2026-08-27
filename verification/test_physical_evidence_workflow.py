@@ -209,6 +209,25 @@ def main() -> None:
                       if printing["finish"] == "reverse-holo")
     assert rr_reverse["mappedVariants"] == ["V1"]
     assert rr_reverse["specimenIds"] == ["SPEC-0117"]
+    italian_wcd = next(unit for unit in finish_units
+                       if unit["setCode"] == "WCD23 LOR" and unit["number"] == "LOR 143"
+                       and unit["language"] == "Italian")
+    assert len(italian_wcd["printings"]) == 1
+    wcd_printing = italian_wcd["printings"][0]
+    assert wcd_printing["specimenIds"] == ["SPEC-0115", "SPEC-0116"]
+    wcd_sources = {source["url"]: source for source in wcd_printing["sources"]}
+    assert wcd_sources["https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg"][
+        "claimFields"
+    ] == ["identity"]
+    assert wcd_sources["https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg"][
+        "claimFields"
+    ] == ["identity"]
+    bulbapedia_url = "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)"
+    assert wcd_sources[bulbapedia_url]["claimFields"] == ["finish"]
+    wcd_registry = next(source for source in source_registry
+                        if source.get("canonicalUrl") == bulbapedia_url)
+    assert wcd_registry["providerId"] == "bulbapedia"
+    assert "finish" in wcd_registry["dimensions"]
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],

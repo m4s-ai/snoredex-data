@@ -1019,6 +1019,23 @@ def main() -> None:
                             and not manual_variants.intersection(candidate["mappedVariants"])
                         ):
                             continue
+                        photograph_claim_fields = manual.get("specimenPhotographClaimFields")
+                        if photograph_claim_fields is not None:
+                            if (
+                                not isinstance(photograph_claim_fields, list)
+                                or not photograph_claim_fields
+                                or any(
+                                    field not in {"identity", "finish", "edition"}
+                                    for field in photograph_claim_fields
+                                )
+                            ):
+                                raise ValueError(
+                                    "invalid specimenPhotographClaimFields for "
+                                    f"{set_code} {number} {language}"
+                                )
+                            candidate["sources"][0]["claimFields"] = list(
+                                photograph_claim_fields
+                            )
                         localized_refs = [
                             ref for ref in manual.get("sourceRefs") or []
                             if language in (source_registry[ref].get("languages") or [])

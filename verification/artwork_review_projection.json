@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "25ee3084cd244c79cd7d2cc4a5dcf533f31f6ef82f0709fd046db12a7fff2055",
+  "projectionVersion": "5579cabef373f4aa67fda7266ccb97641545230d8fca8b31ff813eb6f78ae6c6",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -15,7 +15,7 @@
     "unmappedReleases": 50,
     "cardReleases": 612,
     "physicalPrintings": 524,
-    "sourceObservations": 1749
+    "sourceObservations": 1750
   },
   "groups": [
     {
@@ -47403,12 +47403,33 @@
                 {
                   "url": "https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg",
                   "sourceType": "Seller listing photograph",
-                  "evidence": "Front photograph of Italian WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Grasso Imperturbabile, Russare Tonante 180, 143/196, the silver border and replica signature are legible. The paired back photograph is retained as SPEC-0116. Bulbapedia's Colorless Lugia product description states that the deck uses the lowest-rarity prints with Holofoil removed. Retained as SPEC-0115."
+                  "evidence": "Front photograph of Italian WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Grasso Imperturbabile, Russare Tonante 180, 143/196, the silver border and replica signature are legible. The paired back photograph is retained as SPEC-0116. Bulbapedia's Colorless Lugia product description states that the deck uses the lowest-rarity prints with Holofoil removed. Retained as SPEC-0115.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+                  "sourceType": "Bulbapedia World Championships deck description",
+                  "authorityTier": "specialist-reference",
+                  "coverage": "product-line-description",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "Italian"
+                  ],
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-08-27",
+                  "evidence": "States that World Championships deck replicas use the lowest-rarity prints and have Holofoil removed; this establishes the non-holo finish for the identified 2023 Colorless Lugia deck card."
                 },
                 {
                   "url": "https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg",
                   "sourceType": "Seller listing photograph",
-                  "evidence": "Back photograph from the same eBay listing and physical Italian Snorlax card as SPEC-0115. The green Pokemon World Championships 2023 back positively establishes the championship-deck print identity; it is retained separately so the back image remains part of the data specification. Retained as SPEC-0116."
+                  "evidence": "Back photograph from the same eBay listing and physical Italian Snorlax card as SPEC-0115. The green Pokemon World Championships 2023 back positively establishes the championship-deck print identity; it is retained separately so the back image remains part of the data specification. Retained as SPEC-0116.",
+                  "claimFields": [
+                    "identity"
+                  ]
                 }
               ]
             }
@@ -47440,21 +47461,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0587-P01:0:8507683fb7f01f1f",
+              "observationId": "finish:F0587-P01:0:66193361db850eee",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg",
               "evidence": "Front photograph of Italian WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Grasso Imperturbabile, Russare Tonante 180, 143/196, the silver border and replica signature are legible. The paired back photograph is retained as SPEC-0116. Bulbapedia's Colorless Lugia product description states that the deck uses the lowest-rarity prints with Holofoil removed. Retained as SPEC-0115.",
-              "contentHash": "7e2edd49cf9274e13877b9bd4cd1f8d26d8315642abbadb60369981960c3ca81",
+              "contentHash": "9b709f449d5f9352101130be963cbdba1f3c12cee570a4a45cf857c9ec4ac404",
               "image": null
             },
             {
-              "observationId": "finish:F0587-P01:1:b7a83a719c74469f",
+              "observationId": "finish:F0587-P01:1:0e4c5afbb2c55e86",
+              "kind": "finish",
+              "provider": "Bulbapedia World Championships deck description",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+              "evidence": "States that World Championships deck replicas use the lowest-rarity prints and have Holofoil removed; this establishes the non-holo finish for the identified 2023 Colorless Lugia deck card.",
+              "contentHash": "cc08f6d9d6e1c585189cd329fa83dcbc9454eb6ffa5f7a01c20894837d2f778e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0587-P01:2:5e7a25eb89d800fc",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg",
               "evidence": "Back photograph from the same eBay listing and physical Italian Snorlax card as SPEC-0115. The green Pokemon World Championships 2023 back positively establishes the championship-deck print identity; it is retained separately so the back image remains part of the data specification. Retained as SPEC-0116.",
-              "contentHash": "bed820577ff0d31038fd200953ab911b877c54e5f82b2013da4007708ad332db",
+              "contentHash": "c7e06bf3af5c7df3b6b17c785cd57b8f57f3e1debb3abf100b14103de249e3ac",
               "image": null
             },
             {
