@@ -616,8 +616,9 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
     missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
     if missing:
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
-    physical = validate_observation(item.get("physicalObservation"), specimen_id,
-                                    known_specimen_ids)
+    physical = item.get("physicalObservation")
+    if physical is not None:
+        physical = validate_observation(physical, specimen_id, known_specimen_ids)
     if item.get("heldBy") == "third-party seller" and not listing_url:
         fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
     record = {
@@ -634,8 +635,9 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         "observed": item["observed"],
         "recordedAt": item["recordedAt"],
         "citedBy": list(item.get("citedBy") or []) if cited_by is None else list(cited_by),
-        "physicalObservation": physical,
     }
+    if physical is not None:
+        record["physicalObservation"] = physical
     if listing_url:
         record["listingUrl"] = listing_url
     if allow_small:

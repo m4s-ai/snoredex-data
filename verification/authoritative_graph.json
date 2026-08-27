@@ -11810,6 +11810,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:767f358bf7c9d17f83c68e5e",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:767f358bf7c9d17f83c68e5e",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0007-P01",
+        "semanticPrintingId": "PRINTING:767f358bf7c9d17f83c68e5e",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
+        "materializedTargetId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0145"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:77e370ddcef1704c3ff462ba",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -11860,26 +11880,6 @@
         "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
         "specimenIds": [
           "SPEC-0108"
-        ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0007-P01",
-        "semanticPrintingId": "PRINTING:7a199d00514c6c6a2e4069ec",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
-        "materializedTargetId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
-        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
-        "specimenIds": [
-          "SPEC-0145"
         ]
       }
     },
@@ -28733,10 +28733,10 @@
         "sourceId": "SPEC-0145",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
+        "proposedTargetId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
         "materializedTargetId": null,
-        "reason": "provides provenance for PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec, already established from the finish store",
-        "provenanceTargetId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec"
+        "reason": "provides provenance for PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e"
       }
     },
     {
@@ -81634,6 +81634,39 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
+        "semanticPrintingId": "PRINTING:767f358bf7c9d17f83c68e5e",
+        "cardReleaseId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "deck-logo",
+            "role": "distribution-promo",
+            "text": "Mewtwo"
+          }
+        ],
+        "distribution": {
+          "kind": "fixed-deck",
+          "name": "Battle Academy 2020 Mewtwo Deck"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0007",
+        "sourcePrintingId": "F0007-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:767f358bf7c9d17f83c68e5e",
+        "specimenIds": [
+          "SPEC-0145"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -81674,39 +81707,6 @@
         "establishingClaimId": "CLAIM:finish:PRINTING:795e764012918bf858f384c1",
         "specimenIds": [
           "SPEC-0108"
-        ]
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
-        "semanticPrintingId": "PRINTING:7a199d00514c6c6a2e4069ec",
-        "cardReleaseId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
-        "finish": "non-holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": [
-          {
-            "kind": "observed-marking",
-            "role": "distribution-promo",
-            "text": "Mewtwo deck logo at lower right"
-          }
-        ],
-        "distribution": {
-          "kind": "fixed-deck",
-          "name": "Battle Academy 2020 Mewtwo Deck"
-        },
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0007",
-        "sourcePrintingId": "F0007-P01",
-        "establishingClaimId": "CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
-        "specimenIds": [
-          "SPEC-0145"
         ]
       }
     },
@@ -139947,6 +139947,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:767f358bf7c9d17f83c68e5e",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:77e370ddcef1704c3ff462ba",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -139969,16 +139979,6 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:795e764012918bf858f384c1",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -148840,7 +148840,7 @@
       "fromId": "CLAIM:specimen:SPEC-0145",
       "relation": "provenance",
       "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
+      "toId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
       "provenance": {
         "specimenId": "SPEC-0145"
       }
@@ -187409,6 +187409,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:767f358bf7c9d17f83c68e5e",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -187437,22 +187453,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Italian:HIF:50:Snorlax-Incredible-Snore",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
       "provenance": {}
     },
     {
@@ -222314,7 +222314,7 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0007-P01",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
+      "targetRef": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
@@ -239008,7 +239008,7 @@
       "sourceId": "SPEC-0145",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
-      "reason": "provides provenance for PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec, already established from the finish store"
+      "reason": "provides provenance for PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e, already established from the finish store"
     }
   ],
   "summary": {

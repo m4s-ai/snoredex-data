@@ -43,6 +43,30 @@ def finish_projector():
 
 def main() -> None:
     specimens = read("specimens.json")["specimens"]
+    manifest_specimens: dict[str, list[dict]] = defaultdict(list)
+    for manifest_path in (ROOT / "verification" / "evidence").glob("issue-*.json"):
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        for observation in manifest.get("observations", []):
+            if observation.get("specimenId"):
+                manifest_specimens[observation["specimenId"]].append(observation)
+    expected_manifest_specimens = {f"SPEC-{number:04d}" for number in range(120, 146)}
+    assert {specimen_id for specimen_id in expected_manifest_specimens
+            if len(manifest_specimens[specimen_id]) != 1} == set(), (
+        "every PR #323 specimen must occur in exactly one reviewed issue manifest"
+    )
+    specimen_by_id = {row["specimenId"]: row for row in specimens}
+    manifest_fields = {
+        "setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
+        "observed", "recordedAt", "citedBy", "physicalObservation", "listingUrl",
+    }
+    for specimen_id in expected_manifest_specimens:
+        manifest_row = manifest_specimens[specimen_id][0]
+        specimen_row = specimen_by_id[specimen_id]
+        assert {field: manifest_row.get(field) for field in manifest_fields
+                if field in manifest_row or field in specimen_row} == {
+            field: specimen_row.get(field) for field in manifest_fields
+            if field in manifest_row or field in specimen_row
+        }
     fixture = [row for row in specimens if row["specimenId"] in {
         "SPEC-0040", "SPEC-0041", "SPEC-0042", "SPEC-0043", "SPEC-0044",
     }]
@@ -289,6 +313,32 @@ def main() -> None:
     }
     assert len(spanish_archive) == 6
     assert all("physicalObservation" not in row for row in spanish_archive.values())
+    corroboration = {
+        "U0094": ["SPEC-0120"],
+        "U0295": ["SPEC-0121", "SPEC-0122"],
+        "U0244": ["SPEC-0123", "SPEC-0124"],
+        "U0417": ["SPEC-0125"],
+        "U0434": ["SPEC-0126", "SPEC-0127"],
+        "U0228": ["SPEC-0128"],
+        "U0122": ["SPEC-0129", "SPEC-0130", "SPEC-0133"],
+        "U0245": ["SPEC-0131"],
+        "U0482": ["SPEC-0132"],
+        "U0092": ["SPEC-0134"],
+        "U0229": ["SPEC-0135"],
+        "U0418": ["SPEC-0136"],
+        "U0416": ["SPEC-0137", "SPEC-0138", "SPEC-0139", "SPEC-0143"],
+        "U0527": ["SPEC-0140", "SPEC-0141", "SPEC-0142"],
+        "U0452": ["SPEC-0144"],
+        "U0294": ["SPEC-0145"],
+    }
+    units = {row["unitId"]: row for row in read("units.json")}
+    for unit_id, specimen_ids in corroboration.items():
+        assert units[unit_id]["corroborated"] is True
+        assert all(unit_id in specimen_by_id[specimen_id]["citedBy"]
+                   for specimen_id in specimen_ids)
+    assert projector.specimen_markings(
+        specimen_by_id["SPEC-0145"]["physicalObservation"]
+    ) == [{"kind": "deck-logo", "role": "distribution-promo", "text": "Mewtwo"}]
     archive_only_finish_statuses = {
         unit["finishUnitId"]: unit["availabilityStatus"] for unit in finish_units
         if unit["finishUnitId"] in {"F0139", "F0172", "F0179", "F0529", "F0635"}
