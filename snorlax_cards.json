@@ -37,16 +37,16 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-08-26",
+      "lastUpdated": "2026-08-27",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 360,
-      "withOnlyMarketplaceClaim": 93,
+      "withConfirmedFinish": 369,
+      "withOnlyMarketplaceClaim": 84,
       "pendingFinish": 109,
       "notApplicableFinish": 75,
-      "withCompleteManifest": 23,
-      "withNonHolo": 284,
-      "withHolo": 153,
-      "withReverseHolo": 233,
+      "withCompleteManifest": 161,
+      "withNonHolo": 264,
+      "withHolo": 174,
+      "withReverseHolo": 224,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 23,
       "withUnresolvedProductMapping": 146,
@@ -3972,7 +3972,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -3993,7 +3993,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -4031,7 +4031,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -4052,7 +4052,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -4090,7 +4090,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -4111,7 +4111,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -4149,7 +4149,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -4170,7 +4170,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -4350,10 +4350,12 @@
         "status": "confirmed",
         "availableFinishes": [
           "non-holo",
+          "holo",
           "reverse-holo"
         ],
         "unitAvailableFinishes": [
           "non-holo",
+          "holo",
           "reverse-holo"
         ],
         "byLanguage": [
@@ -4361,23 +4363,21 @@
             "language": "English",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -4386,18 +4386,8 @@
             "printings": [
               {
                 "printingId": "F0202-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0202-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "tiled-type-symbol",
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
@@ -4410,23 +4400,21 @@
             "language": "French",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -4435,18 +4423,8 @@
             "printings": [
               {
                 "printingId": "F0203-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0203-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "tiled-type-symbol",
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
@@ -4459,23 +4437,21 @@
             "language": "German",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -4484,18 +4460,8 @@
             "printings": [
               {
                 "printingId": "F0204-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0204-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "tiled-type-symbol",
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
@@ -4508,23 +4474,21 @@
             "language": "Spanish",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -4533,18 +4497,8 @@
             "printings": [
               {
                 "printingId": "F0206-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0206-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "tiled-type-symbol",
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
@@ -4557,23 +4511,21 @@
             "language": "Italian",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
-              "reverse-holo": "confirmed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -4582,18 +4534,8 @@
             "printings": [
               {
                 "printingId": "F0205-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0205-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "tiled-type-symbol",
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
@@ -5392,7 +5334,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "reverse-holo"
@@ -5416,13 +5358,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -5446,7 +5388,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -5465,13 +5407,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -5495,7 +5437,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -5512,18 +5454,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0145",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -5534,7 +5476,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -5544,7 +5486,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -5561,18 +5503,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0147",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -5583,7 +5525,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -5593,7 +5535,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -5610,18 +5552,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0146",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -5632,7 +5574,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -5642,7 +5584,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -8696,7 +8638,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -8717,7 +8659,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -8755,7 +8697,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -8776,7 +8718,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -8814,7 +8756,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -8835,7 +8777,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -8873,7 +8815,7 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
@@ -8894,7 +8836,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -12166,13 +12108,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -12196,7 +12138,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -12215,13 +12157,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -12245,7 +12187,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -12264,13 +12206,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -12294,7 +12236,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -12313,13 +12255,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -12343,7 +12285,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -12362,13 +12304,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -12392,7 +12334,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -12881,13 +12823,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -12911,7 +12853,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -12930,13 +12872,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -12960,7 +12902,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -12979,13 +12921,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -13009,7 +12951,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -13028,13 +12970,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -13058,7 +13000,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -13077,13 +13019,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -13107,7 +13049,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -13858,13 +13800,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -13888,7 +13830,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -13907,13 +13849,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -13937,7 +13879,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -13956,13 +13898,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -13986,7 +13928,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -14005,13 +13947,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -14035,7 +13977,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -14054,13 +13996,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -14084,7 +14026,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -14766,7 +14708,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "reverse-holo"
@@ -14935,18 +14877,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0315",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -14957,7 +14899,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -14967,7 +14909,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -20761,13 +20703,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -20791,7 +20733,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -20810,13 +20752,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -20840,7 +20782,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -20859,13 +20801,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -20889,7 +20831,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -20908,13 +20850,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -20938,7 +20880,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -20957,13 +20899,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -20987,7 +20929,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -21223,14 +21165,14 @@
             ],
             "finishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -21254,7 +21196,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -21264,7 +21206,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -21284,14 +21226,14 @@
             ],
             "finishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -21315,7 +21257,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -21325,7 +21267,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -21345,14 +21287,14 @@
             ],
             "finishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -21376,7 +21318,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -21386,7 +21328,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -21406,14 +21348,14 @@
             ],
             "finishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -21437,7 +21379,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -21447,7 +21389,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -21467,14 +21409,14 @@
             ],
             "finishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
-              "holo": "marketplace-claimed",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -21498,7 +21440,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -21508,7 +21450,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22042,13 +21984,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -22072,7 +22014,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22091,13 +22033,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -22121,7 +22063,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22140,13 +22082,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -22170,7 +22112,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22189,13 +22131,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -22219,7 +22161,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22238,13 +22180,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -22268,7 +22210,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22416,7 +22358,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "reverse-holo"
@@ -22587,18 +22529,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0311",
             "productMappingStatus": "partial",
             "printings": [
@@ -22609,7 +22551,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -22619,7 +22561,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22719,7 +22661,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "reverse-holo"
@@ -22888,18 +22830,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0092",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -22910,7 +22852,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -22920,7 +22862,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -22937,18 +22879,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0091",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -22959,7 +22901,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -22969,7 +22911,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -23182,37 +23124,33 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
-          "holo",
-          "reverse-holo"
+          "holo"
         ],
         "unitAvailableFinishes": [
-          "holo",
-          "reverse-holo"
+          "holo"
         ],
         "byLanguage": [
           {
             "language": "English",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -23228,16 +23166,6 @@
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0316-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "plain-foil-background",
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
               }
             ]
           },
@@ -23245,23 +23173,21 @@
             "language": "French",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -23277,16 +23203,6 @@
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0317-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "plain-foil-background",
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
               }
             ]
           },
@@ -23294,23 +23210,21 @@
             "language": "German",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "holo",
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "holo",
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -23326,16 +23240,6 @@
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0318-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "plain-foil-background",
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
               }
             ]
           },
@@ -23343,35 +23247,35 @@
             "language": "Italian",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "reverse-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "reverse-holo"
+              "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "holo": "confirmed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0319",
             "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0319-P01",
-                "finish": "reverse-holo",
-                "foilPattern": "plain-foil-background",
+                "finish": "holo",
+                "foilPattern": null,
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -26299,30 +26203,32 @@
         },
         "status": "confirmed",
         "availableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "unitAvailableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "byLanguage": [
           {
             "language": "English",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -26332,7 +26238,7 @@
             "printings": [
               {
                 "printingId": "F0543-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -26346,20 +26252,20 @@
             "language": "French",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -26369,7 +26275,7 @@
             "printings": [
               {
                 "printingId": "F0544-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -26383,20 +26289,20 @@
             "language": "German",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -26406,7 +26312,7 @@
             "printings": [
               {
                 "printingId": "F0545-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -26420,20 +26326,20 @@
             "language": "Spanish",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -26443,7 +26349,7 @@
             "printings": [
               {
                 "printingId": "F0547-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -26457,20 +26363,20 @@
             "language": "Italian",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -26480,7 +26386,7 @@
             "printings": [
               {
                 "printingId": "F0546-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -27520,7 +27426,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "reverse-holo"
@@ -27546,13 +27452,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "unmapped",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -27576,7 +27482,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -27614,13 +27520,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -27644,7 +27550,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -27663,13 +27569,13 @@
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -27693,7 +27599,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -27710,18 +27616,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0034",
             "productMappingStatus": "partial",
             "printings": [
@@ -27732,7 +27638,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               },
               {
@@ -27742,7 +27648,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -29243,7 +29149,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -29307,7 +29213,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -29332,7 +29238,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -29355,9 +29261,9 @@
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -29575,9 +29481,9 @@
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -32397,13 +32303,13 @@
             "finishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -32427,7 +32333,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
@@ -34005,30 +33911,32 @@
         },
         "status": "confirmed",
         "availableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "unitAvailableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "byLanguage": [
           {
             "language": "English",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34038,7 +33946,7 @@
             "printings": [
               {
                 "printingId": "F0549-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34052,20 +33960,20 @@
             "language": "French",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34075,7 +33983,7 @@
             "printings": [
               {
                 "printingId": "F0550-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34089,20 +33997,20 @@
             "language": "German",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34112,7 +34020,7 @@
             "printings": [
               {
                 "printingId": "F0551-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34126,20 +34034,20 @@
             "language": "Spanish",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34149,7 +34057,7 @@
             "printings": [
               {
                 "printingId": "F0553-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34163,20 +34071,20 @@
             "language": "Italian",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34186,7 +34094,7 @@
             "printings": [
               {
                 "printingId": "F0552-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34834,30 +34742,32 @@
         },
         "status": "confirmed",
         "availableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "unitAvailableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "byLanguage": [
           {
             "language": "English",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34867,7 +34777,7 @@
             "printings": [
               {
                 "printingId": "F0555-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34881,20 +34791,20 @@
             "language": "French",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34904,7 +34814,7 @@
             "printings": [
               {
                 "printingId": "F0556-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34918,20 +34828,20 @@
             "language": "German",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34941,7 +34851,7 @@
             "printings": [
               {
                 "printingId": "F0557-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34955,20 +34865,20 @@
             "language": "Spanish",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -34978,7 +34888,7 @@
             "printings": [
               {
                 "printingId": "F0559-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -34992,20 +34902,20 @@
             "language": "Italian",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo"
+              "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
-              "holo": "pending",
+              "non-holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -35015,7 +34925,7 @@
             "printings": [
               {
                 "printingId": "F0558-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
                 "distribution": null,
@@ -37907,7 +37817,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -37952,7 +37862,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -37977,7 +37887,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -38002,7 +37912,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",
@@ -38027,7 +37937,7 @@
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "pending",

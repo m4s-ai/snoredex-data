@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "1.0.0",
-    "generated": "2026-08-26",
+    "generated": "2026-08-27",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 31,
       "absenceEdges": 3,
       "observations": 33,
-      "resolvedVerdictSources": 932
+      "resolvedVerdictSources": 1027
     },
     "surfaceStates": {
       "active": 13,
@@ -226,7 +226,9 @@
           "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
           "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/",
           "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/",
-          "https://www.pokemon.com/static-assets/content-assets/cms2"
+          "https://www.pokemon.com/static-assets/content-assets/cms2",
+          "https://assets.pokemon.com/assets/cms2",
+          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/"
         ],
         "nonUrlEvidenceIds": []
       },
@@ -234,7 +236,7 @@
       "failureState": null,
       "accessMode": "direct-download",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-08-27",
       "freshnessPolicy": "Re-download and hash each exact document before a new absence adjudication.",
       "query": {
         "method": "GET",
@@ -1330,7 +1332,12 @@
           "WEST"
         ],
         "languages": [
-          "English"
+          "English",
+          "French",
+          "German",
+          "Italian",
+          "Spanish",
+          "Portuguese"
         ],
         "scripts": [
           "Latn"
@@ -1342,7 +1349,7 @@
         "timeRange": {
           "start": null,
           "end": null,
-          "basis": "only the four exact documents named below"
+          "basis": "only the exact official checklist documents named below"
         }
       },
       "positiveEvidenceCapabilities": [
@@ -1358,6 +1365,101 @@
         ],
         "exactScopes": [
           "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/fireredleafgreen_checklist.pdf",
+          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/teamrocket_checklist.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw7_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw8_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/col1_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/dp1_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pgo_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm115_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm9_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh11_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh125_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh1_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh2_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh4_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh6_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh8_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy10_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy8_web_cardlist_de.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw7_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw8_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/dp1_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/pgo_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm115_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm9_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh11_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh125_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh1_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh2_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh4_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh6_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh8_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy10_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy8_web_cardlist_es.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw7_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw8_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/col1_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/dp1_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pgo_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm115_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm9_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh11_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh125_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh2_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh4_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh6_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh8_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy10_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy8_web_cardlist_fr.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw7_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw8_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/col1_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/dp1_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pgo_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm9_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh11_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh125_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh1_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh2_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh4_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh6_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh8_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy10_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy8_web_cardlist_it.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw7_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw8_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/col_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/dp1_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pgo_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm115_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm9_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh11_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh125_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh1_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh2_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh4_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh6_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh8_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy10_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy2_web_cardlist_en.pdf",
+          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy8_web_cardlist_en.pdf",
           "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
           "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
           "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
@@ -9364,7 +9466,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "product"
       ]
     },
@@ -11415,6 +11516,1431 @@
       ]
     },
     {
+      "sourceKey": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/fireredleafgreen_checklist.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/teamrocket_checklist.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw7_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw8_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/col1_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/dp1_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pgo_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm115_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm9_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh11_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh125_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh1_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh2_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh4_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh6_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh8_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy10_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy8_web_cardlist_de.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw7_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw8_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/dp1_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/pgo_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm115_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm9_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh11_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh125_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh1_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh2_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh4_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh6_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh8_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy10_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy8_web_cardlist_es.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw7_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw8_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/col1_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/dp1_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pgo_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm115_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm9_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh11_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh125_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh2_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh4_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh6_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh8_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy10_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy8_web_cardlist_fr.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw7_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw8_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/col1_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/dp1_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pgo_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm9_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh11_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh125_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh1_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh2_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh4_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh6_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh8_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy10_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy8_web_cardlist_it.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw7_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw8_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/col_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/dp1_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pgo_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm115_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm9_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh11_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh125_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh1_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh2_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh4_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh6_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh8_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy10_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy2_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy8_web_cardlist_en.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-eu-spanish-card-assets",
@@ -12368,7 +13894,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -12382,7 +13907,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -12396,7 +13920,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -12662,7 +14185,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -13151,7 +14673,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -13165,7 +14686,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -13179,7 +14699,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -13442,7 +14961,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -13707,7 +15225,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -13721,7 +15238,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -13735,7 +15251,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -14001,7 +15516,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -14392,7 +15906,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -14406,7 +15919,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -14420,7 +15932,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -14686,7 +16197,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -14993,7 +16503,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -15007,7 +16516,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -15021,7 +16529,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -15287,7 +16794,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
