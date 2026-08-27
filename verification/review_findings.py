@@ -121,6 +121,21 @@ def norm_number(value: Any) -> str:
     return str(value or "")
 
 
+def specimen_matches_unit(
+    specimen: dict[str, Any],
+    unit: dict[str, Any],
+    rekeyed_specimens: set[tuple[str, str]],
+) -> bool:
+    """Accept a literal identity or a reviewed legacy-to-local release rekey."""
+    literal_match = (
+        specimen["setCode"] == unit["setCode"]
+        and specimen["number"] == str(unit["number"])
+        and specimen["variant"] == (unit.get("variant") or "base")
+        and specimen["language"] == unit["language"]
+    )
+    return literal_match or (unit["unitId"], specimen["specimenId"]) in rekeyed_specimens
+
+
 @contextlib.contextmanager
 def guarded(ident: str, label: str):
     """Run one section; a failure inside it becomes a reported check, not a dead run (#82).
@@ -1834,6 +1849,7 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
     malformed = None
     entry = None
     dangling = None
+    rekeyed_specimens = None
     SPECIMEN_MARKING_ROLES = None
     SPECIMEN_FINISHES = None
     SPECIMEN_EDITIONS = None
@@ -1841,10 +1857,21 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
         image_format = state["image_format"]
         resolved_units = state["resolved_units"]
         def _collect_g6_part1():
-            nonlocal dangling, mismatched, s, sid, specimen_by_id, specimen_dir, specimen_doc, specimens
+            nonlocal dangling, mismatched, rekeyed_specimens, s, sid, specimen_by_id, specimen_dir, specimen_doc, specimens
             specimen_doc = load("verification/specimens.json")
             specimens = specimen_doc["specimens"]
             specimen_by_id = {s["specimenId"]: s for s in specimens}
+            source_first_by_id = {
+                row["printId"]: row
+                for row in load("verification/source_first_prints.json")["prints"]
+            }
+            rekeyed_specimens = {
+                (mapping["legacyUnitId"], source_first_by_id[mapping["sourceFirstRecordId"]]["specimenId"])
+                for question_set in load("verification/legacy_issue_rekeys.json")["questionSets"]
+                for mapping in question_set["mappings"]
+                if mapping["sourceFirstRecordId"] in source_first_by_id
+                and source_first_by_id[mapping["sourceFirstRecordId"]].get("specimenId")
+            }
             specimen_dir = ROOT / "verification" / "specimens"
             duplicate_specimens = [sid for sid, n in Counter(s["specimenId"] for s in specimens).items() if n > 1]
             check(
@@ -1866,11 +1893,7 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
                 if specimen is None:
                     dangling.append(f"{unit['unitId']} -> {ref}")
                     continue
-                same = (specimen["setCode"] == unit["setCode"]
-                        and specimen["number"] == str(unit["number"])
-                        and specimen["variant"] == (unit.get("variant") or "base")
-                        and specimen["language"] == unit["language"])
-                if not same:
+                if not specimen_matches_unit(specimen, unit, rekeyed_specimens):
                     mismatched.append(f"{unit['unitId']} cites {ref}")
             check(
                 "S8",

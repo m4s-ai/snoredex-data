@@ -186,6 +186,19 @@ def route_evidence(row: dict[str, Any], surfaces_by_provider: dict[str, list[dic
     candidates = surfaces_by_provider.get(row["providerId"], [])
     if len(candidates) == 1:
         return candidates[0]
+    matched = matching_surfaces(row, candidates)
+    matched = matched or unmatched_surface_fallback(candidates)
+    if len(matched) != 1:
+        source = row.get("canonicalUrl") or row.get("nonUrlEvidenceId")
+        raise ContractError(
+            f"registry source {source} resolves to {len(matched)} surfaces for {row['providerId']}"
+        )
+    return matched[0]
+
+
+def matching_surfaces(
+    row: dict[str, Any], candidates: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
     matched = []
     for surface in candidates:
         matcher = surface.get("match") or {}
@@ -195,12 +208,11 @@ def route_evidence(row: dict[str, Any], surfaces_by_provider: dict[str, list[dic
             matched.append(surface)
         elif evidence_id in matcher.get("nonUrlEvidenceIds", []):
             matched.append(surface)
-    if len(matched) != 1:
-        source = row.get("canonicalUrl") or row.get("nonUrlEvidenceId")
-        raise ContractError(
-            f"registry source {source} resolves to {len(matched)} surfaces for {row['providerId']}"
-        )
-    return matched[0]
+    return matched
+
+
+def unmatched_surface_fallback(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [surface for surface in candidates if not surface.get("match")]
 
 
 def validate_semantics(manifest: dict[str, Any], registry: dict[str, Any]

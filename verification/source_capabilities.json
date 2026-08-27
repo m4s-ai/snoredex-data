@@ -3332,6 +3332,96 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "asia-card-image",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Asia localized card renders",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/id/card-img/",
+          "https://asia.pokemon-card.com/th/card-img/",
+          "https://asia.pokemon-card.com/tw/card-img/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Only exact retained publisher renders are covered; the image host is not a complete historical manifest.",
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-28",
+      "freshnessPolicy": "Retain the exact card image, publisher detail URL, retrieval date and SHA-256.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/{locale}/card-img/{asset}",
+        "parameters": [
+          "locale",
+          "asset"
+        ],
+        "pagination": "not paginated; each retained render establishes only the pictured card",
+        "expectedIdentifiers": [
+          "printed card name",
+          "collector number",
+          "set mark"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; not a physical finish photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "asia-card-image-positive",
+          "coverage": {
+            "localities": [
+              "TW",
+              "ID",
+              "TH"
+            ],
+            "languages": [
+              "T-Chinese",
+              "Indonesian",
+              "Thai"
+            ],
+            "scripts": [
+              "Hant",
+              "Latn",
+              "Thai"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "exact retained publisher renders only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained render proves the pictured identity; missing assets prove nothing."
+          },
+          "knownPositiveObservationId": "obs-asia-card-image",
+          "boundary": {
+            "outsideScope": [
+              "unretained cards",
+              "physical finish",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "No missing image or failed request can refute a card printing."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -4285,6 +4375,30 @@
         "pokemon-cn-product-positive"
       ],
       "outcome": "The retained official article positively states that rarity R and above cards are foil, and that Simplified Chinese C, U and R cards can appear as the locality-specific patterned random foil treatment."
+    },
+    {
+      "observationId": "obs-asia-card-image",
+      "surfaceId": "asia-card-image",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/card-img/id00004795.png",
+      "queryParameters": {
+        "locale": "id",
+        "asset": "id00004795.png"
+      },
+      "retrievedAt": "2026-08-28",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-card-asia",
+        "recordKey": "https://asia.pokemon-card.com/id/card-img/id00004795.png"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0169",
+        "U0175"
+      ],
+      "validatesEdges": [
+        "asia-card-image-positive"
+      ],
+      "outcome": "The retained publisher render positively identifies the Indonesian Snorlax card pictured in SPEC-0169."
     }
   ]
 }

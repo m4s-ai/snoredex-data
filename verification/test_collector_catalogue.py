@@ -48,11 +48,12 @@ def main() -> None:
     )
     assert collector.legacy_match_for_physical(
         shifted_physical,
+        {},
         {collector.printing_semantic_key(shifted_physical["cardReleaseId"], legacy_row): legacy_row},
         {collector.printing_semantic_core_key(shifted_physical["cardReleaseId"], legacy_row): [legacy_row]},
     ) is legacy_row
     new_physical = {**shifted_physical, "sourcePrintingId": "F0167-P01", "finish": "reverse-holo"}
-    assert collector.legacy_match_for_physical(new_physical, {}, {}) is None
+    assert collector.legacy_match_for_physical(new_physical, {}, {}, {}) is None
 
     graph = read("verification/authoritative_graph.json")
     catalogue = read("collector_catalogue.json")

@@ -8,17 +8,17 @@
     "contract": "verification/card_discovery_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "authoritativeGraph": "verification/authoritative_graph.json",
-    "contractHash": "sha256:2ae11fd5754478d2e86e84b8887fd8fd373555f5f0c2ef3f5fe14c70d040216e",
+    "contractHash": "sha256:3be9d197dd5d20c2f7b983e6e9ceabf65d3d032fad019ea18dce5e89755d8ece",
     "capabilityGraphHash": "sha256:28da36acb95eae7ac86f7c04e78631e383daa32632692bdd5f4f096d695474ae",
-    "authoritativeGraphHash": "sha256:6026512c05348eeecc43da73c816e3cde4d374b51dfa4ea7a83a818b8c867974",
+    "authoritativeGraphHash": "sha256:c538533d3314aa74a372229a98409c76c1cd5fbdaeb968c53d6e295962fb8276",
     "sourceFirst": true,
     "verdictMutationAllowed": false,
     "counts": {
       "slices": 14,
       "records": 354,
-      "matched": 194,
-      "ambiguous": 0,
-      "newCandidate": 86,
+      "matched": 193,
+      "ambiguous": 6,
+      "newCandidate": 81,
       "positivelyExcluded": 21,
       "needsEvidence": 53,
       "runErrors": 0,
@@ -139,9 +139,9 @@
       },
       "accounting": {
         "fetched": 31,
-        "matched": 25,
-        "ambiguous": 0,
-        "newCandidate": 6,
+        "matched": 24,
+        "ambiguous": 6,
+        "newCandidate": 1,
         "positivelyExcluded": 0,
         "needsEvidence": 0,
         "accounted": 31
@@ -864,5 +864,5 @@
     }
   ],
   "recordsPath": "verification/card_discovery_records.jsonl",
-  "recordsHash": "sha256:28e304522818bb2c2f484f290cf485e340068e5b9142a1807941d2f15d94dfc7"
+  "recordsHash": "sha256:e773ee82f119ea2d42ce6665307b96b146a84a03410aff0e5af0008ac22ec5a8"
 }

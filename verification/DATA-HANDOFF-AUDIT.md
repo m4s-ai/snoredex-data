@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-08-27** · SQLite schema: **1.5.0** · source fingerprint:
-`7a5437390bfee007…`
+`e69a7ac98f4aaafe…`
 
 ## Outcome
 
@@ -21,13 +21,13 @@ not a universal all-locality completeness claim and contains no append-only evid
 | Repository language verdicts | 635 confirmed · 84 contradicted |
 | App language statuses | 618 exists · 17 needs-evidence · 80 not-printed · 4 disputed (80 owner-adjudicated) |
 | Established product-edition rows | 642 (80 absent-language and 21 unverified-language projections suppressed) |
-| Finish units / logical printings | 637 / 790 |
-| Current-known physical checklist | 867 (761 documented · 106 unresolved placeholders) |
+| Finish units / logical printings | 637 / 792 |
+| Current-known physical checklist | 867 (763 documented · 104 unresolved placeholders) |
 | Release rows without row-level source | 142 / 203 |
 | Products without established artist | 82 |
 | Opaque V-token products without a physical variant name | 59 |
-| Authoritative graph entities / typed edges | 6845 / 10335 |
-| Graph migration inputs with dispositions | 2298 (350 raw set records) |
+| Authoritative graph entities / typed edges | 6971 / 10557 |
+| Graph migration inputs with dispositions | 2341 (358 raw set records) |
 
 ## The challenged data points
 

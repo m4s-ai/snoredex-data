@@ -16,16 +16,16 @@
     ],
     "counts": {
       "providers": 30,
-      "surfaces": 34,
-      "coverageEdges": 36,
+      "surfaces": 35,
+      "coverageEdges": 37,
       "absenceEdges": 3,
-      "observations": 38,
-      "resolvedVerdictSources": 1084
+      "observations": 39,
+      "resolvedVerdictSources": 1091
     },
     "surfaceStates": {
       "active": 16,
       "blocked-by-browser": 3,
-      "incomplete": 9,
+      "incomplete": 10,
       "internal": 1,
       "needs-evidence": 2,
       "non-url": 2,
@@ -1529,6 +1529,48 @@
       },
       "coverageEdgeIds": [
         "wikidex-positive-scan"
+      ]
+    },
+    {
+      "surfaceId": "asia-card-image",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Asia localized card renders",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/id/card-img/",
+          "https://asia.pokemon-card.com/th/card-img/",
+          "https://asia.pokemon-card.com/tw/card-img/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Only exact retained publisher renders are covered; the image host is not a complete historical manifest.",
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-28",
+      "freshnessPolicy": "Retain the exact card image, publisher detail URL, retrieval date and SHA-256.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/{locale}/card-img/{asset}",
+        "parameters": [
+          "locale",
+          "asset"
+        ],
+        "pagination": "not paginated; each retained render establishes only the pictured card",
+        "expectedIdentifiers": [
+          "printed card name",
+          "collector number",
+          "set mark"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; not a physical finish photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "asia-card-image-positive"
       ]
     }
   ],
@@ -3462,6 +3504,57 @@
         "zeroResultMeans": "unknown",
         "challenge": "A missing scan is database silence and never negative evidence."
       }
+    },
+    {
+      "edgeId": "asia-card-image-positive",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "coverage": {
+        "localities": [
+          "TW",
+          "ID",
+          "TH"
+        ],
+        "languages": [
+          "T-Chinese",
+          "Indonesian",
+          "Thai"
+        ],
+        "scripts": [
+          "Hant",
+          "Latn",
+          "Thai"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "exact retained publisher renders only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "identity",
+        "image"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A retained render proves the pictured identity; missing assets prove nothing."
+      },
+      "knownPositiveObservationId": "obs-asia-card-image",
+      "boundary": {
+        "outsideScope": [
+          "unretained cards",
+          "physical finish",
+          "complete set or era"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "No missing image or failed request can refute a card printing."
+      }
     }
   ],
   "observations": [
@@ -4898,7 +4991,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:3caba34e6013c3635526992f8dc718147982faa9491402a164b3a4977f936544",
+      "rawRecordHash": "sha256:97765d8ce4324c208743ad65f68cf7ec2453512d036418bf3922bef6078fae88",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -4915,7 +5008,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 26,
+        "stableIdCount": 24,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
@@ -4924,8 +5017,6 @@
           "F0291-P02",
           "F0294-P02",
           "F0441-P01",
-          "F0457-P01",
-          "F0457-P02",
           "F0519-P02",
           "F0534-P01",
           "F0615-P03",
@@ -4945,7 +5036,7 @@
           "U0772"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 37
+        "usageCount": 35
       }
     },
     {
@@ -5116,6 +5207,45 @@
         ],
         "retrievedAt": "2026-08-27",
         "usageCount": 20
+      }
+    },
+    {
+      "observationId": "obs-asia-card-image",
+      "surfaceId": "asia-card-image",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/card-img/id00004795.png",
+      "queryParameters": {
+        "locale": "id",
+        "asset": "id00004795.png"
+      },
+      "retrievedAt": "2026-08-28",
+      "expectedIdentifiers": [
+        "SPEC-0169",
+        "U0175"
+      ],
+      "validatesEdges": [
+        "asia-card-image-positive"
+      ],
+      "outcome": "The retained publisher render positively identifies the Indonesian Snorlax card pictured in SPEC-0169.",
+      "rawRecordRef": "verification/source_registry.json:https://asia.pokemon-card.com/id/card-img/id00004795.png",
+      "rawRecordHash": "sha256:b4ea247e5f2100b2437570c81a11f46f756d7c23fd6990dc558519cf224c8037",
+      "rawRecord": {
+        "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00004795.png",
+        "nonUrlEvidenceId": null,
+        "providerId": "pokemon-card-asia",
+        "sourceTypes": [
+          "official Pokémon Asia Indonesian card-detail render"
+        ],
+        "dimensions": [
+          "identity"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "SPEC-0169",
+          "U0175"
+        ],
+        "retrievedAt": "2026-08-28",
+        "usageCount": 2
       }
     }
   ],
@@ -11525,6 +11655,66 @@
       ]
     },
     {
+      "sourceKey": "https://asia.pokemon-card.com/id/card-img/id00004795.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/id/card-img/id00005772.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/id/card-img/id00006007.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/id/card-img/id00010045.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/id/card-img/id00015253.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://asia.pokemon-card.com/id/card-search/detail/10045",
       "providerId": "pokemon-card-asia",
       "surfaceId": "asia-card-search",
@@ -14289,6 +14479,34 @@
     },
     {
       "sourceKey": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo",
+      "providerId": "pokumon",
+      "surfaceId": "pokumon-search",
+      "capabilityEdgeIds": [
+        "pokumon-asian-positive",
+        "pokumon-exact-card-finish-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo",
+      "providerId": "pokumon",
+      "surfaceId": "pokumon-search",
+      "capabilityEdgeIds": [
+        "pokumon-asian-positive",
+        "pokumon-exact-card-finish-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://pokumon.com/card/snorlax-286-sv-p-indonesian-promo",
       "providerId": "pokumon",
       "surfaceId": "pokumon-search",
       "capabilityEdgeIds": [

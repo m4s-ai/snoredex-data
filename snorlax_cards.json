@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-08-27",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 421,
+      "withConfirmedFinish": 423,
       "withOnlyMarketplaceClaim": 65,
-      "pendingFinish": 76,
+      "pendingFinish": 74,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
-      "withNonHolo": 300,
+      "withNonHolo": 302,
       "withHolo": 196,
       "withReverseHolo": 229,
       "withMirrorHolo": 18,
       "withBothNonHoloAndHolo": 47,
-      "withUnresolvedProductMapping": 113,
-      "withAnyUnresolvedDetail": 203,
+      "withUnresolvedProductMapping": 111,
+      "withAnyUnresolvedDetail": 201,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     }
@@ -43577,31 +43577,59 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "confirmed",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "Indonesian",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0459",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0459-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "stamp",
+                    "text": "Taro",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "purchase-promo",
+                  "name": "Taro Pokémon promotion"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              }
+            ]
           }
         ]
       },
@@ -44217,11 +44245,7 @@
                 "distribution": null,
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "mapped",
-                "image": "verification/specimens/SPEC-0019.png",
-                "specimenIds": [
-                  "SPEC-0019"
-                ]
+                "productMapping": "mapped"
               }
             ]
           }
@@ -45625,11 +45649,7 @@
                 "distribution": null,
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "mapped",
-                "image": "verification/specimens/SPEC-0020.png",
-                "specimenIds": [
-                  "SPEC-0020"
-                ]
+                "productMapping": "mapped"
               }
             ]
           }
@@ -45708,31 +45728,59 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "confirmed",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "Indonesian",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0458",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0458-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "stamp",
+                    "text": "Pokémon TCG GYM",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "event-promo-pack",
+                  "name": "Pokémon Card Gym Promo Card Pack 11"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              }
+            ]
           }
         ]
       },

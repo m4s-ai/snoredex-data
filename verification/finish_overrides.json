@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Curated finish, foil-pattern, marking, distribution, release-date, size, and Cardmarket-product mappings that cannot be represented by TCGdex's group-level normal/holo/reverse flags.",
-    "lastUpdated": "2026-08-27",
+    "lastUpdated": "2026-08-28",
     "policy": [
       "A physical stamp is recorded in markings; the way a card was distributed is recorded separately in distribution.",
       "Printed identity features such as a rarity symbol or contest credit use role=print-identity; they do not imply a finish.",
@@ -2015,6 +2015,30 @@
       ],
       "retrievedAt": "2026-08-27",
       "evidence": "Pokumon's exact Simplified-Chinese 061/S-P Snorlax record identifies the Tournament Participation printing as Non-holo."
+    },
+    "pokumon-id-svp278": {
+      "url": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo/",
+      "sourceType": "Specialist per-language promo record",
+      "authorityTier": "specialist-reference",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "languages": [
+        "Indonesian"
+      ],
+      "retrievedAt": "2026-08-28",
+      "evidence": "The exact 278/SV-P Indonesian promo record identifies the July 25, 2025 Gym Promo Pack 11 card as Non-holo."
+    },
+    "pokumon-id-svp286": {
+      "url": "https://pokumon.com/card/snorlax-286-sv-p-indonesian-promo/",
+      "sourceType": "Specialist per-language promo record",
+      "authorityTier": "specialist-reference",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "languages": [
+        "Indonesian"
+      ],
+      "retrievedAt": "2026-08-28",
+      "evidence": "The exact 286/SV-P Indonesian promo record identifies the January-February 2026 Taro card as Non-holo."
     }
   },
   "overrides": [
@@ -9486,6 +9510,81 @@
           "verificationStatus": "confirmed",
           "sourceRefs": [
             "pokemon-cn-simplified-finish-rules"
+          ]
+        }
+      ]
+    },
+    {
+      "setCode": "SV-P/ID",
+      "releaseSetCode": "SV-P",
+      "number": "117",
+      "languages": [
+        "Indonesian"
+      ],
+      "printings": []
+    },
+    {
+      "setCode": "SV-P/ID",
+      "releaseSetCode": "SV-P",
+      "number": "278",
+      "languages": [
+        "Indonesian"
+      ],
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "stamp",
+              "text": "Pokémon TCG GYM",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "event-promo-pack",
+            "name": "Pokémon Card Gym Promo Card Pack 11"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "pokumon-id-svp278"
+          ]
+        }
+      ]
+    },
+    {
+      "setCode": "SV-P/ID",
+      "releaseSetCode": "SV-P",
+      "number": "286",
+      "languages": [
+        "Indonesian"
+      ],
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "stamp",
+              "text": "Taro",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "purchase-promo",
+            "name": "Taro Pokémon promotion"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "pokumon-id-svp286"
           ]
         }
       ]

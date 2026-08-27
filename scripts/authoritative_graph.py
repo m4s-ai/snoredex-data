@@ -113,6 +113,14 @@ def stable_printing_id(semantic_key: str) -> str:
     return "PRINTING:" + hashlib.sha256(semantic_key.encode("utf-8")).hexdigest()[:24]
 
 
+def finish_unit_release_key(unit: dict[str, Any]) -> tuple[str, str, str]:
+    return (
+        str(unit.get("releaseSetCode") or unit.get("setCode") or ""),
+        _number(unit.get("number")),
+        str(unit.get("language") or ""),
+    )
+
+
 def _release_index(graph: dict[str, Any]) -> dict[tuple[str, str, str], str]:
     """Index card releases by the typed local identity used by finish units."""
     index: dict[tuple[str, str, str], str] = {}
@@ -207,8 +215,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     }
 
     for unit in finish_units:
-        unit_key = (str(unit.get("setCode") or ""), _number(unit.get("number")),
-                    str(unit.get("language") or ""))
+        unit_key = finish_unit_release_key(unit)
         release_id = release_ids.get(unit_key)
         for printing in sorted(unit.get("printings", []), key=lambda row: row.get("printingId", "")):
             printing_id = str(printing["printingId"])
@@ -756,9 +763,9 @@ def _validate_explicit_equivalence(
             ("card-release", release_id), ("work", expected_work_id)
         ]):
             matching_assertions.append(assertion_id)
-    if len(matching_assertions) != 1:
+    if not matching_assertions:
         errors.append(
-            "mapped-by-explicit-equivalence card release lacks exactly one "
+            "mapped-by-explicit-equivalence card release lacks a "
             f"matching equivalence assertion: {release_id}"
         )
 
@@ -1334,23 +1341,53 @@ def _validate_rekey_release_mappings(
         if release.get("workMappingState") != "mapped-by-explicit-equivalence":
             continue
         expected = expected_equivalence_by_release.get(release_id, [])
-        if len(expected) != 1:
-            errors.append(
-                "mapped-by-explicit-equivalence release has no unique canonical re-key: "
-                f"{release_id}"
-            )
+        expected_work_id = _canonical_rekey_work_id(errors, release_id, expected)
+        if expected_work_id is None:
             continue
-        assertion_id, expected_work_id = expected[0]
         expected_work = works.get(expected_work_id)
         expected_card_key = expected_work.get("cardKey") if expected_work else None
         if release.get("work") != expected_card_key:
             errors.append(f"mapped-by-explicit-equivalence release Work is not canonical: {release_id}")
         if relations[("card-release", release_id, "implements")] != [("work", expected_work_id)]:
             errors.append(f"mapped-by-explicit-equivalence implements edge is not canonical: {release_id}")
-        if sorted(relations[("equivalence-assertion", assertion_id, "relates")]) != sorted([
-            ("card-release", release_id), ("work", expected_work_id)
-        ]):
-            errors.append(f"mapped-by-explicit-equivalence assertion edge is not canonical: {release_id}")
+        _validate_rekey_assertion_edges(
+            errors, release_id, expected_work_id, expected, relations
+        )
+
+
+def _validate_rekey_assertion_edges(
+    errors: list[str],
+    release_id: str,
+    expected_work_id: str,
+    expected: list[tuple[str, str | None]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
+    targets = sorted([("card-release", release_id), ("work", expected_work_id)])
+    for assertion_id, _ in expected:
+        if sorted(relations[("equivalence-assertion", assertion_id, "relates")]) != targets:
+            errors.append(
+                "mapped-by-explicit-equivalence assertion edge is not canonical: "
+                f"{release_id}:{assertion_id}"
+            )
+
+
+def _canonical_rekey_work_id(
+    errors: list[str], release_id: str, expected: list[tuple[str, str | None]],
+) -> str | None:
+    if not expected:
+        errors.append(
+            "mapped-by-explicit-equivalence release lacks a canonical re-key: "
+            f"{release_id}"
+        )
+        return None
+    expected_work_ids = {work_id for _, work_id in expected}
+    if len(expected_work_ids) != 1:
+        errors.append(
+            "mapped-by-explicit-equivalence release has conflicting canonical re-keys: "
+            f"{release_id}"
+        )
+        return None
+    return next(iter(expected_work_ids))
 
 
 def _validate_rekey_migrations(
