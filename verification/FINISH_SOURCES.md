@@ -207,8 +207,9 @@ actual Snoredex set code and collector number. The result is deliberately split 
 document can prove:
 
 - **95 newly used localized expansion checklists** are exact, complete finish manifests. All 95
-  URLs returned a PDF on the review date. They close 138 applicable set-number-language units in
-  English, French, German, Italian, and European Spanish.
+  URLs returned a PDF on the review date. They close 137 applicable set-number-language units in
+  English, French, German, Italian, and European Spanish. They also establish the standard-set
+  finishes for English `FLF 80`, whose separate Build-A-Bear printing remains unresolved.
 - **23 already used manifests** cover EX Dragon Frontiers and Prize Pack Series 1, 3, 7, and 8;
   the sweep found no reason to change their existing interpretations.
 - **23 additional official card-list PDFs** (`MEW` in five languages; `KSS` in four; `PAR` in five;
