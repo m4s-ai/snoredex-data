@@ -1333,60 +1333,108 @@
       detection.foilPattern && detection.foilPattern.join(', '),
     ].filter(Boolean).join(' · ') || 'no fields');
 
-    const memberHTML = (group, member) => {
-      const draft = draftFor(member);
-      const detection = member.detection || {};
+    const memberCollections = (member, draft) => {
       const physical = member.physicalPrintings || [];
       const images = member.images || [];
       const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
       const physicalIds = physical.map((item) => item.physicalPrintingId).filter(Boolean);
       const selectedPhysicalIds = new Set(
-        draft && Array.isArray(draft.affectedPhysicalPrintingIds)
-          ? draft.affectedPhysicalPrintingIds : physicalIds,
+          draft && Array.isArray(draft.affectedPhysicalPrintingIds)
+            ? draft.affectedPhysicalPrintingIds : physicalIds,
       );
+      return { physical, images, imageHashes, physicalIds, selectedPhysicalIds };
+    };
+
+    const memberExistingFields = (member, detection) => ({
+      cardName: detection.cardName || "",
+      artist: detection.artist || "",
+      variant: detection.variant || "",
+      localSetCode: member.localSetCode || "",
+      localNumber: member.localNumber || "",
+      finish: (detection.finish || []).join(", "),
+      foilPattern: (detection.foilPattern || []).join(", "),
+      markings: (detection.markings || []).join(", "),
+    });
+
+    const memberDetection = (member, draft) => {
+      const detection = member.detection || {};
       const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
       const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields || []);
       const selectedAction = draft ? draft.action : "";
+      return { detection, proposed, cleared, selectedAction,
+        existing: memberExistingFields(member, detection) };
+    };
+
+    const memberIdentityLabels = (member, detection) => ({
+      title: detection.cardName || member.cardReleaseId,
+      language: member.language || '—',
+      locality: member.locality || '—',
+      localSetCode: member.localSetCode || '—',
+      localNumber: member.localNumber || '—',
+    });
+
+    const memberStatusLabels = (draft) => ({
+      statusClass: draft ? 'confirmed' : 'pending',
+      statusLabel: draft ? actionLabel(draft.action) : 'unreviewed',
+      note: draft && draft.note || '',
+    });
+
+    const memberView = (member, draft) => {
+      const collections = memberCollections(member, draft);
+      const state = memberDetection(member, draft);
       const imageReviewable = hasVerifiedImages(member);
-      const actionOptions = actionOptionsHTML(selectedAction, imageReviewable);
+      const identity = memberIdentityLabels(member, state.detection);
+      const status = memberStatusLabels(draft);
       const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
-      const existing = {
-        cardName: detection.cardName || "",
-        artist: detection.artist || "",
-        variant: detection.variant || "",
-        localSetCode: member.localSetCode || "",
-        localNumber: member.localNumber || "",
-        finish: (detection.finish || []).join(", "),
-        foilPattern: (detection.foilPattern || []).join(", "),
-        markings: (detection.markings || []).join(", "),
+      return {
+        member,
+        detection: state.detection,
+        physical: collections.physical,
+        imageHashes: collections.imageHashes,
+        identity,
+        status,
+        target,
+        actionOptions: actionOptionsHTML(state.selectedAction, imageReviewable),
+        structuredFields: structuredFieldsHTML(
+          state.selectedAction, state.existing, state.proposed, state.cleared,
+        ),
+        physicalInputs: physicalInputsHTML(
+          collections.physical, collections.physicalIds, collections.selectedPhysicalIds,
+        ),
+        detectionSummary: detectionSummaryHTML(state.detection),
+        imageWarning: imageReviewable
+          ? '' : '<span class="artwork-muted">No verified image hash; only “Mark unclear” can be proposed.</span>',
       };
-      const structuredFields = structuredFieldsHTML(selectedAction, existing, proposed, cleared);
-      const physicalInputs = physicalInputsHTML(physical, physicalIds, selectedPhysicalIds);
-      return '<article class="artwork-member" data-release-id="' + escapeHTML(member.cardReleaseId) + '">' +
-        imageHTML(member) +
-        '<div class="artwork-member-body"><h4>' + escapeHTML(detection.cardName || member.cardReleaseId) +
-        ' <span class="pill ' + (draft ? 'confirmed' : 'pending') + '">' +
-        escapeHTML(draft ? actionLabel(draft.action) : 'unreviewed') + '</span></h4>' +
-        '<p><strong>' + escapeHTML(member.language || '—') + '</strong> · ' +
-        escapeHTML(member.locality || '—') + ' · <code>' + escapeHTML(member.localSetCode || '—') +
-        ' ' + escapeHTML(member.localNumber || '—') + '</code><br>' +
-        '<small>' + escapeHTML(member.cardReleaseId) + '</small></p>' +
-        '<dl class="artwork-detection"><dt>Detection</dt><dd>' +
-        detectionSummaryHTML(detection) +
-        '</dd><dt>Physical printings</dt><dd>' + escapeHTML(String(physical.length)) +
-        '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(imageHashes[0] || 'not available') +
-        '</code></dd></dl>' +
-        evidenceHTML(member) +
-        physicalInputs + structuredFields +
-        '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
-        escapeHTML(member.cardReleaseId) + '">' + actionOptions + '</select></label>' +
-        '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(target) +
-        '" placeholder="APPEARANCE:…" aria-label="Target artwork group"></label>' +
-        '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
-        escapeHTML(draft && draft.note || '') + '</textarea></label>' +
-        '<button type="button" class="ghost ar-save">Save proposal</button>' +
-        (!imageReviewable ? '<span class="artwork-muted">No verified image hash; only “Mark unclear” can be proposed.</span>' : '') +
-        '<span class="artwork-save-status" role="status"></span></div></div></article>';
+    };
+
+    const memberMarkup = (view) => '<article class="artwork-member" data-release-id="' + escapeHTML(view.member.cardReleaseId) + '">' +
+      imageHTML(view.member) +
+      '<div class="artwork-member-body"><h4>' + escapeHTML(view.identity.title) +
+      ' <span class="pill ' + view.status.statusClass + '">' +
+      escapeHTML(view.status.statusLabel) + '</span></h4>' +
+      '<p><strong>' + escapeHTML(view.identity.language) + '</strong> · ' +
+      escapeHTML(view.identity.locality) + ' · <code>' + escapeHTML(view.identity.localSetCode) +
+      ' ' + escapeHTML(view.identity.localNumber) + '</code><br>' +
+      '<small>' + escapeHTML(view.member.cardReleaseId) + '</small></p>' +
+      '<dl class="artwork-detection"><dt>Detection</dt><dd>' +
+      view.detectionSummary +
+      '</dd><dt>Physical printings</dt><dd>' + escapeHTML(String(view.physical.length)) +
+      '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(view.imageHashes[0] || 'not available') +
+      '</code></dd></dl>' +
+      evidenceHTML(view.member) +
+      view.physicalInputs + view.structuredFields +
+      '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
+      escapeHTML(view.member.cardReleaseId) + '">' + view.actionOptions + '</select></label>' +
+      '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(view.target) +
+      '" placeholder="APPEARANCE:…" aria-label="Target artwork group"></label>' +
+      '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
+      escapeHTML(view.status.note) + '</textarea></label>' +
+      '<button type="button" class="ghost ar-save">Save proposal</button>' +
+      view.imageWarning +
+      '<span class="artwork-save-status" role="status"></span></div></div></article>';
+
+    const memberHTML = (group, member) => {
+      return memberMarkup(memberView(member, draftFor(member)));
     };
 
     const groupHTML = (group) => '<article class="artwork-group" data-group-id="' + escapeHTML(group.groupId) +
