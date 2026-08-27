@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:4627ba534f4b6f6c961b760af3dbf975187fd629ae24900acdefb19c6bd8c037",
+    "fromFingerprint": "sha256:93265de9a6bd2e5b0a63428d8b24cb9b56ee5907e01549621d4dc42a8f28c279",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:596691c5baa50b289dd643992c5f4d963e8b53c7edf143906506b54052b4b458",
+    "toFingerprint": "sha256:8d2e247a30f6d5577197e4adb5b31f82a5828e7224b3adecc2f4a56733f8b458",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:596691c5baa50b289dd643992c5f4d963e8b53c7edf143906506b54052b4b458",
+      "toFingerprint": "sha256:8d2e247a30f6d5577197e4adb5b31f82a5828e7224b3adecc2f4a56733f8b458",
       "cumulative": true,
       "transitions": [
         {
@@ -214,6 +214,15 @@
           "fromItemId": "item-04a6271c-52d5-53ce-972e-9899df9d7860",
           "toItemIds": [
             "item-04a6271c-52d5-53ce-972e-9899df9d7860"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
+          "fromItemId": "item-04b612c2-dd83-5007-8cec-0dc883663423",
+          "toItemIds": [
+            "item-04b612c2-dd83-5007-8cec-0dc883663423"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -4945,15 +4954,6 @@
           "reconciliation": "identity-retained"
         },
         {
-          "fromItemId": "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf",
-          "toItemIds": [
-            "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
           "fromItemId": "item-9699b852-dfee-5044-8a71-84fa39833523",
           "toItemIds": [
             "item-9699b852-dfee-5044-8a71-84fa39833523"
@@ -8443,9 +8443,9 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "ba20-mwt-french-none-unresolved-unknown",
+      "fromItemId": "ba20-mwt-french-none-non-holo-observed-marking-mewtwo-deck-logo-at-lower-right-fixed-deck-battle-academy-2020-mewtwo-deck",
       "toItemIds": [
-        "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
+        "item-04b612c2-dd83-5007-8cec-0dc883663423"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -15481,10 +15481,10 @@
         ]
       },
       {
-        "legacyChecklistId": "ba20-mwt-french-none-unresolved-unknown",
+        "legacyChecklistId": "ba20-mwt-french-none-non-holo-observed-marking-mewtwo-deck-logo-at-lower-right-fixed-deck-battle-academy-2020-mewtwo-deck",
         "disposition": "projected",
         "targetItemIds": [
-          "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
+          "item-04b612c2-dd83-5007-8cec-0dc883663423"
         ]
       },
       {
@@ -24169,7 +24169,7 @@
         "cardReleaseId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
         "disposition": "projected",
         "targetItemIds": [
-          "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
+          "item-04b612c2-dd83-5007-8cec-0dc883663423"
         ],
         "reason": null
       },
@@ -29308,6 +29308,11 @@
         "targetItemId": "item-a32f08eb-a1af-5531-a664-46e4f9fc4dd4"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
+        "disposition": "projected",
+        "targetItemId": "item-04b612c2-dd83-5007-8cec-0dc883663423"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:7b7704d12c6a6d242c066f16",
         "disposition": "projected",
         "targetItemId": "item-99ddfa4d-a95c-5334-8d8d-01eadece9feb"
@@ -29701,7 +29706,7 @@
     "summary": {
       "legacyChecklistRows": 852,
       "cardReleases": 612,
-      "physicalPrintings": 617,
+      "physicalPrintings": 618,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

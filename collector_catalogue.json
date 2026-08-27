@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-08-27",
-    "catalogueFingerprint": "sha256:596691c5baa50b289dd643992c5f4d963e8b53c7edf143906506b54052b4b458",
+    "catalogueFingerprint": "sha256:8d2e247a30f6d5577197e4adb5b31f82a5828e7224b3adecc2f4a56733f8b458",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -35561,12 +35561,14 @@
       "imageScope": "exact-printing",
       "sourceLinks": [
         "https://api.tcgdex.net/v2/fr/cards/swshp-SWSH032",
+        "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
         "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
         "https://i.ebayimg.com/images/g/BGoAAeSwEv9p~LNc/s-l1600.jpg",
         "https://i.ebayimg.com/images/g/qVwAAeSw7cFp~LNc/s-l1600.jpg"
       ],
       "evidenceLinks": [
         "https://api.tcgdex.net/v2/fr/cards/swshp-SWSH032",
+        "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
         "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
         "https://i.ebayimg.com/images/g/BGoAAeSwEv9p~LNc/s-l1600.jpg",
         "https://i.ebayimg.com/images/g/qVwAAeSw7cFp~LNc/s-l1600.jpg"
@@ -35857,22 +35859,23 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+BA20+%E2%80%94+Battle+Academy+2020+MWT+%28verified-printing%29&row-id=item-65155e79-7bef-572f-872e-80d1c14ff8ad&card-name=Snorlax&set-code=BA20+%E2%80%94+Battle+Academy+2020&card-number=MWT&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+deck-logo%2Fdistribution-promo%2FMewtwo+Distribution%3A+kind%3Dfixed-deck%2C+name%3DBattle+Academy+2020+Mewtwo+Deck+Card+size%3A+standard"
     },
     {
-      "itemId": "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf",
+      "itemId": "item-04b612c2-dd83-5007-8cec-0dc883663423",
       "legacyChecklistIds": [
-        "ba20-mwt-french-none-unresolved-unknown"
+        "ba20-mwt-french-none-non-holo-observed-marking-mewtwo-deck-logo-at-lower-right-fixed-deck-battle-academy-2020-mewtwo-deck"
       ],
       "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
       "workId": "WORK:Snorlax-Incredible-Snore",
       "workMappingState": "mapped",
       "setEditionId": "EDITION:WEST:French:BA20",
       "localSetId": "LOCALSET:WEST:BA20",
       "cardReleaseId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
+      "physicalPrintingId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
+      "sourcePrintingId": "F0007-P01",
       "finishUnitId": "F0007",
       "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
         "CLAIM:legacy:U0294"
       ],
       "localizationId": "LOCALIZATION:WEST:fr",
@@ -35885,14 +35888,23 @@
       "collectorNumberSortKey": "mwt",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-5bf47e1d-d53c-5033-9577-692495d7b08c",
+      "finishVerificationStatus": "confirmed",
+      "finish": "non-holo",
+      "finishFamily": "non-holo",
+      "finishGroupId": "finish-group-11d10a78-abd3-5a9c-8363-dfa49e569c86",
       "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
+      "markings": [
+        {
+          "kind": "observed-marking",
+          "role": "distribution-promo",
+          "text": "Mewtwo deck logo at lower right"
+        }
+      ],
+      "distribution": {
+        "kind": "fixed-deck",
+        "name": "Battle Academy 2020 Mewtwo Deck"
+      },
+      "cardSize": "standard",
       "errorClass": null,
       "rarity": {
         "display": "Fixed",
@@ -35902,20 +35914,22 @@
           "RARITYCLAIM:9b73c8f9c1de6d3b"
         ]
       },
-      "completenessStatus": "pending",
+      "completenessStatus": "positive-evidence-only",
       "releaseDate": "2020-06-21",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2020-06-21|LOCALIZATION:WEST:fr|ba000000000020|mwt|research:legacy-checklist:ba20-mwt-french-none-unresolved-unknown",
-      "imageAssetId": "asset-4df25412-1e92-5413-b534-4f3f34ffe26a",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2020-06-21|LOCALIZATION:WEST:fr|ba000000000020|mwt|claim:CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
+      "imageAssetId": "asset-5d191b28-ce97-5f5c-805c-41438a90842d",
+      "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2020_(TCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2020_(TCG)",
+        "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2020_(TCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2020_(TCG)",
+        "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+BA20+%E2%80%94+Battle+Academy+2020+MWT+%28research-placeholder%29&row-id=item-9602e7d9-0cbf-5413-96eb-8d2c989943cf&card-name=Snorlax&set-code=BA20+%E2%80%94+Battle+Academy+2020&card-number=MWT&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+BA20+%E2%80%94+Battle+Academy+2020+MWT+%28verified-printing%29&row-id=item-04b612c2-dd83-5007-8cec-0dc883663423&card-name=Snorlax&set-code=BA20+%E2%80%94+Battle+Academy+2020&card-number=MWT&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+observed-marking%2Fdistribution-promo%2FMewtwo+deck+logo+at+lower+right+Distribution%3A+kind%3Dfixed-deck%2C+name%3DBattle+Academy+2020+Mewtwo+Deck+Card+size%3A+standard"
     },
     {
       "itemId": "item-d86cb23d-68d9-5725-9bce-462525985029",
@@ -60409,10 +60423,12 @@
       "imageAssetId": "asset-8168f240-2e00-5001-84e8-b607c574db54",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://github.com/m4s-ai/snoredex-data/issues/85#issuecomment-5163169071"
+        "https://github.com/m4s-ai/snoredex-data/issues/85#issuecomment-5163169071",
+        "https://i.ebayimg.com/images/g/FbQAAeSws5hobfhl/s-l1600.jpg"
       ],
       "evidenceLinks": [
-        "https://github.com/m4s-ai/snoredex-data/issues/85#issuecomment-5163169071"
+        "https://github.com/m4s-ai/snoredex-data/issues/85#issuecomment-5163169071",
+        "https://i.ebayimg.com/images/g/FbQAAeSws5hobfhl/s-l1600.jpg"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Hop%27s+Snorlax+%E2%80%94+xJTG+%E2%80%94+Journey+Together%3A+Additionals+117+%28verified-printing%29&row-id=item-dd155c60-358f-5750-b519-47d4e588f0b8&card-name=Hop%27s+Snorlax&set-code=xJTG+%E2%80%94+Journey+Together%3A+Additionals&card-number=117&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+observed-marking%2Fdistribution-promo%2FGameStop+logo+stamped+in+red+over+the+lower+left+of+the+illustration+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -70748,6 +70764,20 @@
       }
     },
     {
+      "assetId": "asset-5d191b28-ce97-5f5c-805c-41438a90842d",
+      "path": "verification/specimens/SPEC-0145.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0145.png",
+      "sha256": "sha256:fe436177f7a9dde6cf6bf7bdf7762ceac38cf236c4689d1ad2ddf6ced860a3c8",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — Battle Academy 2020; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-5d1c434d-178c-519b-83bd-17b64a338576",
       "path": "images/PCG3_062_Rocket_s_Snorlax_ex_783415.jpg",
       "url": "https://m4s-ai.github.io/snoredex-data/images/PCG3_062_Rocket_s_Snorlax_ex_783415.jpg",
@@ -72793,7 +72823,7 @@
     }
   ],
   "qualitySummary": {
-    "authoritativeGraphFingerprint": "sha256:ff1a54a87e0ccf3c49f680ba561429e97a65d6620c0e92091399759e19c81ed0",
+    "authoritativeGraphFingerprint": "sha256:6e20f8899d314e128f4c10137bcee356add625695aec5e339786a46bced84c59",
     "authoritativeGraphSchemaVersion": "1.1.0",
     "discoveryTerminalState": "complete",
     "setDiscoveryRun": "20260813T122130Z",
@@ -72804,12 +72834,12 @@
       "setEditions": 461,
       "works": 38,
       "items": 929,
-      "verifiedPrintings": 617,
+      "verifiedPrintings": 618,
       "finishCandidates": 120,
-      "researchPlaceholders": 192,
-      "currentKnown": 617,
-      "research": 312,
-      "assets": 241
+      "researchPlaceholders": 191,
+      "currentKnown": 618,
+      "research": 311,
+      "assets": 242
     },
     "predecessor": {
       "schema": "snoredex-checklist",
@@ -72818,7 +72848,7 @@
     },
     "graphAccounting": {
       "cardReleases": 612,
-      "physicalPrintings": 617
+      "physicalPrintings": 618
     },
     "candidateProgressPolicy": {
       "progressClass": "research",
