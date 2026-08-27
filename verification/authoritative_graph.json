@@ -9988,11 +9988,12 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0087-P01",
         "semanticPrintingId": "PRINTING:363d651abf26003f81687244",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
-        "materializedTargetId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
-        "reason": "finish printing record carries positive evidence"
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing"
       }
     },
     {
@@ -79190,27 +79191,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
-        "semanticPrintingId": "PRINTING:363d651abf26003f81687244",
-        "cardReleaseId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0087",
-        "sourcePrintingId": "F0087-P01",
-        "establishingClaimId": "CLAIM:finish:PRINTING:363d651abf26003f81687244"
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:381b77be9971497ec417f3dd",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -137148,12 +137128,10 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
+      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -183995,22 +183973,6 @@
     },
     {
       "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:381b77be9971497ec417f3dd",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -219873,8 +219835,8 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0087-P01",
-      "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
       "reason": "finish printing record carries positive evidence"
     },
     {
@@ -235613,14 +235575,14 @@
     }
   ],
   "summary": {
-    "entities": 6641,
-    "edges": 10041,
+    "entities": 6640,
+    "edges": 10039,
     "migrationInputs": 2186,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 196,
+      "candidate-needs-evidence": 197,
       "carried": 67,
-      "established-and-mapped": 1265,
+      "established-and-mapped": 1264,
       "linked-local-counterpart": 4,
       "mapped": 218,
       "needs-evidence": 127,
@@ -235630,7 +235592,7 @@
     },
     "candidateClaims": 1620,
     "cardReleases": 612,
-    "physicalPrintings": 580,
+    "physicalPrintings": 579,
     "setSourceRecords": 347,
     "setSourceDispositions": 347,
     "localizations": 16

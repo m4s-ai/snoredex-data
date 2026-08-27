@@ -326,6 +326,23 @@ def main() -> int:
     suite.check("stamp roles valid and finish-safe", not bad_roles, ",".join(first(bad_roles)))
 
     override_sources = finish_overrides.get("sources") or {}
+    unbounded_language_overrides = []
+    for override in (finish_overrides.get("overrides") or []):
+        override_languages = set(override.get("languages") or [])
+        for printing in (override.get("printings") or []):
+            refs = printing.get("sourceRefs") or []
+            scoped_languages = [
+                set(override_sources[ref].get("languages") or []) for ref in refs
+            ]
+            if refs and all(scoped_languages):
+                supported_languages = set().union(*scoped_languages)
+                if not override_languages or not override_languages <= supported_languages:
+                    unbounded_language_overrides.append(
+                        f"{override.get('setCode')} {override.get('number')} {printing.get('finish')}"
+                    )
+    suite.check("language-scoped-only overrides stay within source coverage",
+                not unbounded_language_overrides,
+                ",".join(first(unbounded_language_overrides)))
     unsupported_override_patterns = [
         f"{override.get('setCode')} {override.get('number')} {','.join(override.get('languages') or [])}"
         for override in (finish_overrides.get("overrides") or [])
