@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 26,
-   "evidenceRecords": 1044,
-   "uniqueUrls": 1037,
+   "providers": 29,
+   "evidenceRecords": 1070,
+   "uniqueUrls": 1063,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3240
+   "claimsAttributed": 3323
   }
  },
  "providers": [
@@ -278,7 +278,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 87,
-   "claimsSupported": 669
+   "claimsSupported": 670
   },
   {
    "providerId": "tcgcsv",
@@ -398,6 +398,78 @@
    ],
    "uniqueSources": 0,
    "claimsSupported": 0
+  },
+  {
+   "providerId": "pokecardex",
+   "displayName": "PokéCardex",
+   "organization": "PokéCardex",
+   "homepage": "https://www.pokecardex.com",
+   "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "positive card identity and source-labelled variants shown by retained scans",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "identity",
+    "finish",
+    "product"
+   ],
+   "attribution": "Card scans and variant labels from PokéCardex.",
+   "notes": "A retained scan and its deck-specific page may establish only the visible card identity and the variant that page positively labels. Missing cards, variants, or languages never establish absence or completeness.",
+   "hosts": [
+    "pokecardex.com",
+    "www.pokecardex.com",
+    "pokecardex-scans.b-cdn.net"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 3
+  },
+  {
+   "providerId": "pkparaiso",
+   "displayName": "PKParaiso",
+   "organization": "PKParaiso",
+   "homepage": "https://www.pkparaiso.com",
+   "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "positive localized card identity shown by retained database scans",
+   "supportsAbsence": false,
+   "usedFor": [
+    "identity"
+   ],
+   "attribution": "Card scans from PKParaiso.",
+   "notes": "A retained database scan establishes only the visible card identity. Missing cards, variants, or languages never establish absence or completeness.",
+   "hosts": [
+    "pkparaiso.com",
+    "www.pkparaiso.com"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 2
+  },
+  {
+   "providerId": "wikidex",
+   "displayName": "WikiDex",
+   "organization": "WikiDex",
+   "homepage": "https://www.wikidex.net",
+   "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "positive localized card identity shown by retained database scans",
+   "supportsAbsence": false,
+   "usedFor": [
+    "identity"
+   ],
+   "attribution": "Card scans from WikiDex.",
+   "notes": "A retained database scan establishes only the visible card identity. Missing cards, variants, or languages never establish absence or completeness.",
+   "hosts": [
+    "wikidex.net",
+    "www.wikidex.net",
+    "wikidexcdn.net",
+    "images.wikidexcdn.net"
+   ],
+   "uniqueSources": 5,
+   "claimsSupported": 10
   },
   {
    "providerId": "snkrdunk",
@@ -702,7 +774,7 @@
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
    "uniqueSources": 10,
-   "claimsSupported": 39
+   "claimsSupported": 49
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -745,8 +817,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 21,
-   "claimsSupported": 22
+   "uniqueSources": 40,
+   "claimsSupported": 79
   }
  ],
  "evidence": [
@@ -1048,13 +1120,14 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0586-P01",
     "F0587-P01",
     "override:colorless-lugia-wcd-finish"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/DP-P_Promotional_cards_(TCG)",
@@ -10309,9 +10382,10 @@
    ],
    "dimensions": [
     "finish",
+    "identity",
     "language"
    ],
-   "stableIdCount": 20,
+   "stableIdCount": 26,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -10325,7 +10399,13 @@
     "F0519-P02",
     "F0534-P01",
     "F0615-P03",
+    "SPEC-0001",
+    "SPEC-0002",
+    "SPEC-0005",
+    "SPEC-0006",
     "U0100",
+    "U0189",
+    "U0192",
     "U0228",
     "U0229",
     "U0230",
@@ -10335,7 +10415,7 @@
     "U0772"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 29
+   "usageCount": 37
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -10406,6 +10486,26 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/85",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0598-P01",
+    "SPEC-0016",
+    "U0452"
+   ],
+   "retrievedAt": "2026-08-04",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
@@ -10452,23 +10552,6 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0174-P02"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://github.com/user-attachments/assets/c4e46460-12c0-4e05-aaf9-22c0c26b77c5",
-   "nonUrlEvidenceId": null,
-   "providerId": "inspected-specimen",
-   "sourceTypes": [
-    "Owner-supplied physical card photograph"
-   ],
-   "dimensions": [
-    "finish"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "F0598-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -10642,6 +10725,24 @@
    "usageCount": 42
   },
   {
+   "canonicalUrl": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "pkparaiso",
+   "sourceTypes": [
+    "PKParaiso database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0131",
+    "U0245"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
    "nonUrlEvidenceId": null,
    "providerId": "play-pokemon",
@@ -10690,6 +10791,26 @@
    "retrievedAt": "2026-07-23",
    "usageCount": 32,
    "supportsAbsence": true
+  },
+  {
+   "canonicalUrl": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokecardex",
+   "sourceTypes": [
+    "Third-party scan archive"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0007-P01",
+    "SPEC-0145",
+    "U0294"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045",
@@ -14840,6 +14961,26 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0526-P01",
+    "SPEC-0143",
+    "U0416"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -14857,6 +14998,46 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0526-P01",
+    "SPEC-0139",
+    "U0416"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/BGoAAeSwEv9p~LNc/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0526-P01",
+    "SPEC-0137",
+    "U0416"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -14872,6 +15053,46 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/FbQAAeSws5hobfhl/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0598-P01",
+    "SPEC-0144",
+    "U0452"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0173-P01",
+    "SPEC-0120",
+    "U0094"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/H4wAAeSwIihqJ9Kd/s-l1600.jpg",
@@ -14908,6 +15129,45 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/J4gAAeSwON5ptwI0/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0586-P01",
+    "SPEC-0127",
+    "U0434"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/KGwAAOSwAs5iAqH4/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0116-P02",
+    "SPEC-0141",
+    "U0527"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -14923,6 +15183,25 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0586-P01",
+    "SPEC-0126",
+    "U0434"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
@@ -14994,6 +15273,26 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/cxcAAOSwi6ZiAqH1/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0116-P02",
+    "SPEC-0140",
+    "U0527"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -15011,6 +15310,126 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/itEAAOSwaLhiAqH7/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0116-P02",
+    "SPEC-0142",
+    "U0527"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/jSkAAOSwoeloDpxQ/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0137-P02",
+    "SPEC-0124",
+    "U0244"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0165-P01",
+    "SPEC-0129",
+    "U0122"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/nXkAAeSwXldp1TEr/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0527-P01",
+    "SPEC-0125",
+    "U0417"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0165-P01",
+    "SPEC-0130",
+    "U0122"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/qVwAAeSw7cFp~LNc/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0526-P01",
+    "SPEC-0138",
+    "U0416"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -15026,6 +15445,46 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/sW4AAeSwEG1qfGsy/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0008-P01",
+    "SPEC-0121",
+    "U0295"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/vGMAAeSwXyBqfGs1/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0008-P01",
+    "SPEC-0122",
+    "U0295"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
@@ -15111,6 +15570,46 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://shpnpokestore.de/cdn/shop/files/F4A76B27-1CFF-4B56-9964-4FCED20B2D52.jpg?v=1759855302&width=1445",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0633-P01",
+    "SPEC-0128",
+    "U0228"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.lotticards.de/media/image/product/223694/lg/relaxo-generationen-58-83-rare-deutsch-nm.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0137-P01",
+    "SPEC-0123",
+    "U0244"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
@@ -21606,6 +22105,96 @@
     "U0371"
    ],
    "retrievedAt": "2026-07-21",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0d/latest/20180604134733/Snorlax_(Jungla_11_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0133",
+    "U0122"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0134",
+    "U0092"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0132",
+    "U0482"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c0/latest/20200327234844/Snorlax_(SWSH_Promo_32_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0136",
+    "U0418"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e9/latest/20210107134302/Snorlax_(XY_Promo_179_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0135",
+    "U0229"
+   ],
+   "retrievedAt": "2026-08-27",
    "usageCount": 2
   }
  ]

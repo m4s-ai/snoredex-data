@@ -426,6 +426,8 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
         kind = "edition-stamp"
     elif normalized.casefold() == "staff":
         kind, normalized = "staff", "Staff"
+    elif normalized.casefold().endswith(" deck silhouette"):
+        kind, normalized = "deck-logo", normalized[:-16].strip()
     elif normalized.casefold().endswith(" replica signature"):
         kind, normalized = "championship-signature", normalized[:-18].strip()
     else:
@@ -437,6 +439,8 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
     holder = str(specimen.get("heldBy", "")).casefold()
     if "third-party seller" in holder:
         source_type = "Seller listing photograph"
+    elif "third-party scan archive" in holder:
+        source_type = "Third-party scan archive"
     elif "owner" in holder:
         source_type = "Owner-supplied physical card photograph"
     else:

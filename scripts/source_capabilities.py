@@ -40,7 +40,7 @@ FAILURE_STATES = {
 SPECIMEN_ONLY_PROVIDERS = {
     "psa", "cgc", "snkrdunk", "ligapokemon", "retailer-listing",
     "owner-attestation", "inspected-specimen", "cardmarket-listing-photo",
-    "seller-listing-photo",
+    "seller-listing-photo", "pokecardex", "pkparaiso", "wikidex",
 }
 DIMENSION_ALIASES = {"finish-override": "finish"}
 

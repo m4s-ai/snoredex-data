@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 119,
+  "count": 139,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -277,8 +277,8 @@
       "heldBy": "collection owner",
       "inspectedFrom": "photograph",
       "photograph": "SPEC-0016.png",
-      "photographSource": "https://github.com/user-attachments/assets/c4e46460-12c0-4e05-aaf9-22c0c26b77c5",
-      "observed": "French GameStop-stamped Hop's Snorlax, sealed in its promo wrapper, photographed by the owner: \"Ronflex de Nabil\", PV 150, Basic, Talent \"Portions Supplémentaires\" (attacks by your Pokémon inflict 30 extra damage on the Active Pokémon, before Weakness and Resistance, not cumulative), attack \"Pression Dynamique\" 140 with 80 recoil, \"N° 0143 Pokémon Ronfleur, Taille 2,1 m, Poids 460,0 kg\", Illus. GOSSAN, \"JTG\" \"117/159\", holo. The GameStop logo is stamped in red over the lower left of the illustration. French-language text throughout. This is the card behind the overturn of U0452: the contradiction had reasoned that every documented printing went to an English-language retail market, and GameStop trades in bilingual Canada.",
+      "photographSource": "https://github.com/m4s-ai/snoredex-data/issues/85#issuecomment-5163169071",
+      "observed": "French GameStop-stamped Hop's Snorlax, sealed in its promo wrapper, photographed by the owner and publicly retained in issue #85 comment 5163169071: \"Ronflex de Nabil\", PV 150, Basic, Talent \"Portions Supplémentaires\" (attacks by your Pokémon inflict 30 extra damage on the Active Pokémon, before Weakness and Resistance, not cumulative), attack \"Pression Dynamique\" 140 with 80 recoil, \"N° 0143 Pokémon Ronfleur, Taille 2,1 m, Poids 460,0 kg\", Illus. GOSSAN, \"JTG\" \"117/159\", holo. The GameStop logo is stamped in red over the lower left of the illustration. French-language text throughout. This is the card behind the overturn of U0452: the contradiction had reasoned that every documented printing went to an English-language retail market, and GameStop trades in bilingual Canada.",
       "recordedAt": "2026-08-04",
       "citedBy": [
         "U0452"
@@ -2544,6 +2544,657 @@
         "basis": "The complete Italian 111/111 card directly shows multicolour sparkle across the artwork and frame, while the exact seller title identifies the item as Holo rare Ita."
       },
       "listingUrl": "https://www.ebay.com/itm/406290210703"
+    },
+    {
+      "specimenId": "SPEC-0120",
+      "setCode": "JU",
+      "number": "27/64",
+      "variant": "V2",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0120.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
+      "photographSha256": "sha256:908cb5ad2d9a440067280f7145a6489c35a7ee01edcb686ef4f4ff5a0b42f296",
+      "observed": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0173-P01",
+        "U0094"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Portuguese 27/64 card face visibly shows the uniformly printed non-holographic artwork treatment; its localized text, Jungle symbol and collector number establish the exact printing. No edition is inferred from an absent stamp."
+      },
+      "listingUrl": "https://www.ebay.com/itm/177940547168"
+    },
+    {
+      "specimenId": "SPEC-0121",
+      "setCode": "BA20",
+      "number": "MWT",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller front photograph",
+      "photograph": "SPEC-0121.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/sW4AAeSwEG1qfGsy/s-l1600.jpg",
+      "photographSha256": "sha256:d281591ae28d892dfa096a73f0c1fdb4fdaaa4a4e7327373be54282eff6d3885",
+      "observed": "Complete seller photograph of German Battle Academy 2020 Snorlax 50/68. BASIS, 150 KP, Lautes Schnarchen, the Hidden Fates symbol, 50/68 and the purple Mewtwo deck silhouette establish the exact fixed-deck printing. The uniformly printed artwork and card body establish the non-holo treatment. The paired ordinary Pokemon back is retained as SPEC-0122.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0295"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Mewtwo deck silhouette",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "fixed-deck",
+          "name": "Battle Academy 2020 Mewtwo Deck"
+        },
+        "cardSize": "standard",
+        "basis": "The complete German 50/68 photograph visibly shows the uniformly printed non-holographic treatment and the purple Mewtwo deck silhouette. The exact seller title independently identifies German, 50/68 and Mewtwo Stamp."
+      },
+      "listingUrl": "https://www.ebay.de/itm/366600950681"
+    },
+    {
+      "specimenId": "SPEC-0122",
+      "setCode": "BA20",
+      "number": "MWT",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller back photograph paired with the front",
+      "photograph": "SPEC-0122.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/vGMAAeSwXyBqfGs1/s-l1600.jpg",
+      "photographSha256": "sha256:1adef899f9f4f3e25e439fc506713bbd3e1685322a5669ebe2510d800a67d606",
+      "observed": "Back photograph from the same eBay listing and physical German Battle Academy Snorlax as SPEC-0121. The ordinary Pokemon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the localized Mewtwo-deck identity and non-holo treatment.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0295"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Mewtwo deck silhouette",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "fixed-deck",
+          "name": "Battle Academy 2020 Mewtwo Deck"
+        },
+        "cardSize": "standard",
+        "basis": "This back is paired by the seller listing with the German non-holo Mewtwo-deck front retained as SPEC-0121."
+      },
+      "listingUrl": "https://www.ebay.de/itm/366600950681"
+    },
+    {
+      "specimenId": "SPEC-0123",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "LottiCards seller product photograph",
+      "photograph": "SPEC-0123.jpg",
+      "photographSource": "https://www.lotticards.de/media/image/product/223694/lg/relaxo-generationen-58-83-rare-deutsch-nm.jpg",
+      "photographSha256": "sha256:71cd6387c79238b04f28af74b73ed75e015fd73cdab91635bbd829899814365f",
+      "observed": "Complete seller photograph of German Generations Snorlax 58/83. BASIS, 130 KP, Umdrehen und Dösen, Schlafwalze, the Generations symbol and 58/83 establish the exact card. The uniformly printed artwork and card body establish the non-holo printing; the seller product identifies it as Rare Deutsch rather than Reverse.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0137-P01",
+        "U0244"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete German 58/83 photograph visibly shows a uniformly printed non-holographic treatment; the exact seller product identifies Relaxo Generationen 58/83 Rare Deutsch."
+      },
+      "listingUrl": "https://www.lotticards.de/Generationen"
+    },
+    {
+      "specimenId": "SPEC-0124",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0124.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/jSkAAOSwoeloDpxQ/s-l1600.jpg",
+      "photographSha256": "sha256:d03b89f22cc7b3b3a38e0660e1d0c27e767fc4e25591c76a10acf3cf1affe677",
+      "observed": "Complete seller photograph of German Generations Snorlax 58/83. The German text, Generations symbol and 58/83 establish identity; the reflective type-symbol treatment across the card body establishes the reverse-holo printing.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0137-P02",
+        "U0244"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "type-symbol-background",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete German 58/83 card directly shows the reflective type-symbol reverse-holo treatment across its body."
+      },
+      "listingUrl": "https://www.ebay.de/itm/205451368369"
+    },
+    {
+      "specimenId": "SPEC-0125",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0125.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/nXkAAeSwXldp1TEr/s-l1600.jpg",
+      "photographSha256": "sha256:c237087153a0dbbf4b0c1dda9b3e024046cdafcdd542046eef62439b26f1ced8",
+      "observed": "Complete seller photograph of German SWSH032 Snorlax. The German attacks Rolltackle and Schwerer Einschlag, the black-star promo symbol and SWSH032 establish identity. Large reflective circles and sparkles in the artwork establish the Cosmo Holo treatment; the listing data independently identify German, SWSH032 and Holo.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0417"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete German SWSH032 photograph directly shows large Cosmo circles and sparkles in the artwork; the exact listing metadata also state Rare Holo and Holo surface effect."
+      },
+      "listingUrl": "https://www.ebay.de/itm/147246589735"
+    },
+    {
+      "specimenId": "SPEC-0126",
+      "setCode": "WCD23 LOR",
+      "number": "LOR 143",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller front photograph",
+      "photograph": "SPEC-0126.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg",
+      "photographSha256": "sha256:94cdf6150f8c86db1e8f79058d7c4f8e3949144a98618a7a4a47cc6c31ffa4aa",
+      "observed": "Front photograph of German WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Unbeirrtes Fett, Dumpfes Geschnarche 180, 143/196, the silver border and replica signature are legible. The paired green World Championships 2023 back is retained as SPEC-0127. Bulbapedia's Colorless Lugia product description states that the deck uses the lowest-rarity prints with Holofoil removed.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0434"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Gabriel Fernandez replica signature",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "basis": "The German face, LOR 143 identity, silver border and Gabriel Fernandez replica signature pair with the World Championships 2023 back in SPEC-0127. The Colorless Lugia deck description at https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG) explicitly states that Holofoil is removed from its deck prints."
+      },
+      "listingUrl": "https://www.ebay.de/itm/397718149955"
+    },
+    {
+      "specimenId": "SPEC-0127",
+      "setCode": "WCD23 LOR",
+      "number": "LOR 143",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller back photograph paired with the front",
+      "photograph": "SPEC-0127.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/J4gAAeSwON5ptwI0/s-l1600.jpg",
+      "photographSha256": "sha256:557483d0a61859eb8fe226a333a9d3f3a21523e6a8ba5b949d01ba5a5ec722dd",
+      "observed": "Back photograph from the same eBay listing and physical German Snorlax card as SPEC-0126. The green Pokemon World Championships 2023 back positively establishes the championship-deck print identity; it is retained separately so the back image remains part of the data specification.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0434"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Gabriel Fernandez replica signature",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "basis": "This back photograph is paired by the seller listing with the German front retained as SPEC-0126 and directly shows the World Championships 2023 back. The exact deck product uses Holofoil-removed prints as documented at https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)."
+      },
+      "listingUrl": "https://www.ebay.de/itm/397718149955"
+    },
+    {
+      "specimenId": "SPEC-0128",
+      "setCode": "XYPR",
+      "number": "179",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "ShPnPokestore seller product photograph",
+      "photograph": "SPEC-0128.jpg",
+      "photographSource": "https://shpnpokestore.de/cdn/shop/files/F4A76B27-1CFF-4B56-9964-4FCED20B2D52.jpg?v=1759855302&width=1445",
+      "photographSha256": "sha256:e492c8bb2fef26d5472609f0467ed7e838b79763268b6501c6f5fc075df4f083",
+      "observed": "Complete seller photograph of German XY179 Snorlax. BASIS, 130 KP, Fähigkeit: Immunität, Bodyslam, XY179 and the black-star promo symbol establish the exact card. Visible foil sparkle and reflection in the artwork establish holo; the product title independently identifies Holo Promo Relaxo XY179 Deutsch.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0228"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete German XY179 photograph visibly shows foil sparkle and reflection in the artwork; the exact seller product title independently identifies Holo Promo Relaxo XY179 Deutsch."
+      },
+      "listingUrl": "https://shpnpokestore.de/en/products/pokemon-karte-holo-promo-relaxo-xy179-deutsch-1"
+    },
+    {
+      "specimenId": "SPEC-0129",
+      "setCode": "JU",
+      "number": "11/64",
+      "variant": "V1",
+      "language": "Spanish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller front photograph",
+      "photograph": "SPEC-0129.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
+      "photographSha256": "sha256:84ab65029f730f26d318f2921d8e8a55a1d850b50e08cb03de6245a4594f9a60",
+      "observed": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0165-P01",
+        "U0122"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Spanish 11/64 card directly shows a reflective holo artwork field; the exact seller listing independently identifies Spanish, Jungle 11/64 and Holo Rare."
+      },
+      "listingUrl": "https://www.ebay.com/itm/137311196693"
+    },
+    {
+      "specimenId": "SPEC-0130",
+      "setCode": "JU",
+      "number": "11/64",
+      "variant": "V1",
+      "language": "Spanish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller back photograph paired with the front",
+      "photograph": "SPEC-0130.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
+      "photographSha256": "sha256:5e02efc307764513cd636b3477d856709e54e0cef2323e87f97b10cb0497e2f6",
+      "observed": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0165-P01",
+        "U0122"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "This back is paired by the seller listing with the Spanish Jungle 11/64 holo front retained as SPEC-0129."
+      },
+      "listingUrl": "https://www.ebay.com/itm/137311196693"
+    },
+    {
+      "specimenId": "SPEC-0131",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "PKParaiso database scan",
+      "photograph": "SPEC-0131.jpg",
+      "photographSource": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+      "photographSha256": "sha256:6b0f60a61336c529c6187a0eee0c33d6e7eaeda28d40311fd880756f749ebe6a",
+      "observed": "Spanish database scan of Generations Snorlax 58/83. Pokémon Básico, Vuelta y Cabezadita, Presión Soporífera, the Generations symbol and 58/83 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0245"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0132",
+      "setCode": "KSS",
+      "number": "26/39",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0132.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_%28Bienvenidos_a_Kalos_TCG%29.png",
+      "photographSha256": "sha256:03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
+      "observed": "Spanish database scan of Kalos Starter Set Snorlax 26/39. Pokémon Básico, Golpe Roca, Fuerza and 26/39 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0482"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0133",
+      "setCode": "JU",
+      "number": "11/64",
+      "variant": "V1",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0133.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0d/latest/20180604134733/Snorlax_%28Jungla_11_TCG%29.png",
+      "photographSha256": "sha256:9fbe037d38f29d023f960bddc480857134bed2780e6f0382171288070797bfd0",
+      "observed": "Spanish database scan of Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the localized card identity. No physical finish is inferred from this database render; the separate physical seller photographs SPEC-0129 and SPEC-0130 support the holo observation.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0122"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0134",
+      "setCode": "JU",
+      "number": "27/64",
+      "variant": "V2",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0134.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png",
+      "photographSha256": "sha256:1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2",
+      "observed": "Spanish database scan of Jungle Snorlax 27/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 27/64 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0092"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0135",
+      "setCode": "XYPR",
+      "number": "179",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0135.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e9/latest/20210107134302/Snorlax_%28XY_Promo_179_TCG%29.png",
+      "photographSha256": "sha256:0c14442b0ffbf0daf133e2d5815bed368647f9b7d897debde8a9f784e9322f54",
+      "observed": "Spanish database scan of XY Black Star Promo Snorlax XY179. Pokémon Básico, Habilidad: Inmunidad, Golpe Cuerpo, the black-star promo symbol and XY179 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0229"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0136",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0136.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c0/latest/20200327234844/Snorlax_%28SWSH_Promo_32_TCG%29.png",
+      "photographSha256": "sha256:3efa97774bdb63a31f82b1fbf8793209a3b6332e6f9314995d75dc88ccdb1fdd",
+      "observed": "Spanish database scan of SWSH Black Star Promo Snorlax SWSH032. Pokémon Básico, Placaje Giro, Impacto Pesado, the black-star promo symbol and SWSH032 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0418"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0137",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph 1 of 3",
+      "photograph": "SPEC-0137.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/BGoAAeSwEv9p~LNc/s-l1600.jpg",
+      "photographSha256": "sha256:22130887540177dd6deb4f00f03560ab8837c129101084a44197b3ad18f4c599",
+      "observed": "Complete physical-card photograph of French SWSH032 Ronflex. The French attacks Roulé-Boulé and Gros Impact, the black-star promo symbol and SWSH032 establish identity. Reflective circles and sparkles in the artwork establish the Cosmo Holo treatment; the stronger angled view is retained separately as SPEC-0138 and the paired back as SPEC-0139.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0416"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete French SWSH032 card directly shows reflective circles and sparkles in the artwork; the angled seller photograph SPEC-0138 makes the Cosmo pattern unambiguous."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/336572623072"
+    },
+    {
+      "specimenId": "SPEC-0138",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph 2 of 3",
+      "photograph": "SPEC-0138.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/qVwAAeSw7cFp~LNc/s-l1600.jpg",
+      "photographSha256": "sha256:1fed30abc4174b6fe97ba1d02387aaa878de672daf50bd852cd58e8aa94698ed",
+      "observed": "Angled physical-card photograph of the same French SWSH032 Ronflex as SPEC-0137. Roulé-Boulé, Gros Impact and SWSH032 remain visible, while the angle directly exposes large multicolored reflective circles and fine sparkles across the artwork, establishing the Cosmo Holo treatment.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0416"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The angled photograph directly exposes large multicolored circles and fine reflective sparkles in the French SWSH032 artwork, the characteristic Cosmo Holo pattern."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/336572623072"
+    },
+    {
+      "specimenId": "SPEC-0139",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph 3 of 3",
+      "photograph": "SPEC-0139.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
+      "photographSha256": "sha256:bb10ed2475ffa03dc46de6109c2f24e2a1c115b8eab4bf670386d8e2c45eb0ab",
+      "observed": "Back photograph from the same eBay listing and physical French SWSH032 Ronflex as SPEC-0137 and SPEC-0138. The ordinary western Pokémon back is retained separately so every listing photograph used in the assessment remains part of the data specification.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0416"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "This back is paired by the exact seller listing with the French SWSH032 Cosmo Holo front photographs retained as SPEC-0137 and SPEC-0138."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/336572623072"
+    },
+    {
+      "specimenId": "SPEC-0140",
+      "setCode": "FL",
+      "number": "15/112",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph 1 of 3",
+      "photograph": "SPEC-0140.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/cxcAAOSwi6ZiAqH1/s-l1600.jpg",
+      "photographSha256": "sha256:6851955a6a295b7c1d9a230df3c983af5c078f3e22aba3087e06c541e4bf7d6e",
+      "observed": "Complete physical-card photograph of French EX FireRed & LeafGreen Ronflex 15/112. Repos, Effondrement, Retournement, the set symbol and 15/112 establish the localized identity. Reflective Poké Ball motifs across the card face establish the EX-era reverse-holo treatment; the exact listing title independently identifies REVERSE, 15/112 and FR.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0116-P02",
+        "U0527"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "energy-symbol-artwork-poke-ball",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete French 15/112 photograph directly shows reflective Poké Ball motifs across the card face; the exact seller title independently identifies the card as REVERSE and French."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/134018568041"
+    },
+    {
+      "specimenId": "SPEC-0141",
+      "setCode": "FL",
+      "number": "15/112",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph 2 of 3",
+      "photograph": "SPEC-0141.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/KGwAAOSwAs5iAqH4/s-l1600.jpg",
+      "photographSha256": "sha256:b9aaa3f290993a690741cac0b40647e219bb8c98f1702baf9732a477ea470da1",
+      "observed": "Angled physical-card photograph of the same French FL 15/112 Ronflex as SPEC-0140. The French identity remains visible, while the oblique light directly exposes the reflective EX-era treatment across the card face.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0116-P02",
+        "U0527"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "energy-symbol-artwork-poke-ball",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The angled photograph directly exposes the reflective EX-era reverse treatment on the French 15/112 card paired with SPEC-0140."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/134018568041"
+    },
+    {
+      "specimenId": "SPEC-0142",
+      "setCode": "FL",
+      "number": "15/112",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph 3 of 3",
+      "photograph": "SPEC-0142.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/itEAAOSwaLhiAqH7/s-l1600.jpg",
+      "photographSha256": "sha256:0519a06a047d9095c4f2d49f2ff612bafef3844c3a9354612ec41af6bc8a478e",
+      "observed": "Back photograph from the same eBay listing and physical French FL 15/112 Ronflex as SPEC-0140 and SPEC-0141. The ordinary western Pokémon back is retained separately so every listing photograph used in the assessment remains part of the data specification.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0116-P02",
+        "U0527"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "energy-symbol-artwork-poke-ball",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "This back is paired by the exact seller listing with the French FL 15/112 reverse-holo front photographs retained as SPEC-0140 and SPEC-0141."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/134018568041"
+    },
+    {
+      "specimenId": "SPEC-0143",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0143.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
+      "photographSha256": "sha256:1b71736d1d970e8caa07ce293fe2bc9c187fb1e42b03e4d717dbd5aa2a4ffee4",
+      "observed": "Complete physical-card photograph of French SWSH032 Snorlax. Ronflex, the French attacks Roulé-Boulé and Gros Impact, the black-star promo symbol and SWSH032 establish the exact localized card; large reflective circles and sparkles in the artwork establish the Cosmo Holo treatment. The exact seller title also identifies the card as HOLO, SWSH032, Promo and FR.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0416"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete French SWSH032 photograph visibly shows large Cosmo circles and sparkles in the artwork; the exact listing title independently identifies HOLO, Promo and FR."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/133870581495?_ul=FR"
+    },
+    {
+      "specimenId": "SPEC-0144",
+      "setCode": "xJTG",
+      "number": "117",
+      "variant": "V2",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0144.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/FbQAAeSws5hobfhl/s-l1600.jpg",
+      "photographSha256": "sha256:371c93904e3ceba32a1e73adee3304152d634531c0c83c6f698279a8b5106741",
+      "observed": "Complete seller photograph of sealed French GameStop-stamped Hop's Snorlax. Ronflex de Nabil, PV 150, the French Talent Portions Supplémentaires and attack Pression Dynamique, JTG 117/159 and French text establish the exact localized card. The red GameStop stamp is visible over the lower left of the illustration, and reflective sparkles establish the holo treatment.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0598-P01",
+        "U0452"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "GameStop logo stamped in red over the lower left of the illustration",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The sealed French JTG 117/159 card is fully visible; reflective sparkles show the holo treatment, and the red GameStop logo is directly visible over the lower left of the illustration."
+      },
+      "listingUrl": "https://www.ebay.ca/itm/116684597526"
+    },
+    {
+      "specimenId": "SPEC-0145",
+      "setCode": "BA20",
+      "number": "MWT",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party scan archive",
+      "inspectedFrom": "PokéCardex deck-specific card scan, losslessly converted from the served WebP to PNG for repository compatibility",
+      "photograph": "SPEC-0145.png",
+      "photographSource": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+      "photographSha256": "sha256:fe436177f7a9dde6cf6bf7bdf7762ceac38cf236c4689d1ad2ddf6ced860a3c8",
+      "observed": "Complete PokéCardex scan of French Battle Academy 2020 Mewtwo Deck Snorlax. Ronflex, the French attack Ronflement Incroyable, 50/68 and the Hidden Fates set symbol establish the underlying localized card; the purple Mewtwo deck logo at lower right distinguishes this fixed-deck printing from ordinary French HIF 50/68. The deck-specific PokéCardex page labels the displayed version Standard.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0294"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Mewtwo deck silhouette",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "fixed-deck",
+          "name": "Battle Academy 2020 Mewtwo Deck"
+        },
+        "cardSize": "standard",
+        "basis": "The complete French scan directly shows the purple Mewtwo deck logo that identifies the fixed-deck printing, and the deck-specific PokéCardex card viewer positively classifies this displayed version as Standard."
+      },
+      "listingUrl": "https://www.pokecardex.com/series/ADC-M"
     }
   ]
 }

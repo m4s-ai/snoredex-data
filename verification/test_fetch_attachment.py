@@ -128,6 +128,14 @@ def main() -> None:
         }, "SPEC-9999", "SPEC-9999.png", "issue", digest
     )
     assert record["photographSha256"] == digest
+    identity_only = fetch_attachment.build_specimen(
+        {
+            "setCode": "JU", "number": "27", "variant": "V2", "language": "Spanish",
+            "heldBy": "third-party database", "inspectedFrom": "database scan",
+            "observed": "positive identity only", "recordedAt": "2026-08-27",
+        }, "SPEC-9995", "SPEC-9995.png", "database", digest
+    )
+    assert "physicalObservation" not in identity_only
     seller_record = fetch_attachment.build_specimen(
         {
             "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",

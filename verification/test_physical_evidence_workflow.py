@@ -7,6 +7,7 @@ import json
 import importlib.util
 from collections import defaultdict
 from pathlib import Path
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -43,6 +44,30 @@ def finish_projector():
 
 def main() -> None:
     specimens = read("specimens.json")["specimens"]
+    manifest_specimens: dict[str, list[dict]] = defaultdict(list)
+    for manifest_path in (ROOT / "verification" / "evidence").glob("issue-*.json"):
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        for observation in manifest.get("observations", []):
+            if observation.get("specimenId"):
+                manifest_specimens[observation["specimenId"]].append(observation)
+    expected_manifest_specimens = {f"SPEC-{number:04d}" for number in range(120, 146)}
+    assert {specimen_id for specimen_id in expected_manifest_specimens
+            if len(manifest_specimens[specimen_id]) != 1} == set(), (
+        "every PR #323 specimen must occur in exactly one reviewed issue manifest"
+    )
+    specimen_by_id = {row["specimenId"]: row for row in specimens}
+    manifest_fields = {
+        "setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
+        "observed", "recordedAt", "citedBy", "physicalObservation", "listingUrl",
+    }
+    for specimen_id in expected_manifest_specimens:
+        manifest_row = manifest_specimens[specimen_id][0]
+        specimen_row = specimen_by_id[specimen_id]
+        assert {field: manifest_row.get(field) for field in manifest_fields
+                if field in manifest_row or field in specimen_row} == {
+            field: specimen_row.get(field) for field in manifest_fields
+            if field in manifest_row or field in specimen_row
+        }
     fixture = [row for row in specimens if row["specimenId"] in {
         "SPEC-0040", "SPEC-0041", "SPEC-0042", "SPEC-0043", "SPEC-0044",
     }]
@@ -94,6 +119,10 @@ def main() -> None:
     assert projector.specimen_printing(archived_seller)["sources"][0]["sourceType"] == (
         "Seller listing photograph"
     )
+    pokecardex = specimen_by_id["SPEC-0145"]
+    assert projector.specimen_printing(pokecardex)["sources"][0]["sourceType"] == (
+        "Third-party scan archive"
+    )
     owner_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0105")
     owner_sources = projector.specimen_printing(owner_specimen)["sources"]
     assert [source["sourceType"] for source in owner_sources] == [
@@ -125,6 +154,36 @@ def main() -> None:
         assert printing["sources"][0]["claimFields"] == expected_photo_fields
 
     source_registry = read("source_registry.json")["evidence"]
+    pokecardex_source = next(
+        row for row in source_registry
+        if row.get("canonicalUrl") == pokecardex["photographSource"]
+    )
+    assert pokecardex_source["providerId"] == "pokecardex"
+    database_provider_by_specimen = {
+        "SPEC-0131": "pkparaiso",
+        "SPEC-0132": "wikidex",
+        "SPEC-0133": "wikidex",
+        "SPEC-0134": "wikidex",
+        "SPEC-0135": "wikidex",
+        "SPEC-0136": "wikidex",
+    }
+    registry_by_source = {
+        row.get("canonicalUrl") or row["nonUrlEvidenceId"]: row for row in source_registry
+    }
+    capability_by_source = {
+        row["sourceKey"]: row for row in read("source_capability_graph.json")["sourceResolution"]
+    }
+    for specimen_id, provider_id in database_provider_by_specimen.items():
+        specimen = next(row for row in specimens if row["specimenId"] == specimen_id)
+        canonical_source = unquote(specimen["photographSource"])
+        registry_row = registry_by_source[canonical_source]
+        assert registry_row["providerId"] == provider_id
+        assert registry_row["dimensions"] == ["identity"]
+        assert specimen_id in registry_row["stableIds"]
+        assert set(specimen["citedBy"]) <= set(registry_row["stableIds"])
+        capability_row = capability_by_source[canonical_source]
+        assert capability_row["providerId"] == provider_id
+        assert capability_row["dimensions"] == ["identity"]
     target_specimens = {
         row["specimenId"]: row for row in specimens if row["specimenId"] in portuguese_owner_confirmed
     }
@@ -140,6 +199,16 @@ def main() -> None:
         target_specimens["SPEC-0055"]["photographSource"]: ["finish", "identity"],
         target_specimens["SPEC-0056"]["photographSource"]: ["identity"],
     }
+    portuguese_ju27 = next(row for row in specimens if row["specimenId"] == "SPEC-0120")
+    portuguese_ju27_printing = projector.specimen_printing(portuguese_ju27)
+    assert portuguese_ju27_printing["finish"] == "non-holo"
+    assert "edition" not in portuguese_ju27_printing
+    assert portuguese_ju27_printing["sources"][0]["sourceType"] == "Seller listing photograph"
+    portuguese_ju27_source = next(
+        source for source in source_registry
+        if source.get("canonicalUrl") == portuguese_ju27["photographSource"]
+    )
+    assert portuguese_ju27_source["dimensions"] == ["finish", "identity"]
     archived_registry_source = next(
         source for source in source_registry
         if source.get("canonicalUrl") == archived_seller["photographSource"]
@@ -166,6 +235,9 @@ def main() -> None:
     assert projector.specimen_markings({
         "markings": "STAFF", "markingRole": "distribution-promo"
     }) == [{"kind": "staff", "role": "distribution-promo", "text": "Staff"}]
+    assert projector.specimen_markings({
+        "markings": "Mewtwo deck silhouette", "markingRole": "distribution-promo"
+    }) == [{"kind": "deck-logo", "role": "distribution-promo", "text": "Mewtwo"}]
     assert projector.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
     }) == [{"kind": "edition-stamp", "role": "print-identity", "text": "EDIZIONE 1"}]
@@ -209,6 +281,11 @@ def main() -> None:
                       if printing["finish"] == "reverse-holo")
     assert rr_reverse["mappedVariants"] == ["V1"]
     assert rr_reverse["specimenIds"] == ["SPEC-0117"]
+    portuguese_ju27_unit = next(unit for unit in finish_units
+                                if unit["setCode"] == "JU" and unit["number"] == "27"
+                                and unit["language"] == "Portuguese")
+    assert portuguese_ju27_unit["availabilityStatus"] == "confirmed"
+    assert portuguese_ju27_unit["printings"][0]["specimenIds"] == ["SPEC-0120"]
     italian_wcd = next(unit for unit in finish_units
                        if unit["setCode"] == "WCD23 LOR" and unit["number"] == "LOR 143"
                        and unit["language"] == "Italian")
@@ -228,6 +305,116 @@ def main() -> None:
                         if source.get("canonicalUrl") == bulbapedia_url)
     assert wcd_registry["providerId"] == "bulbapedia"
     assert "finish" in wcd_registry["dimensions"]
+    german_units = {
+        unit["finishUnitId"]: unit for unit in finish_units
+        if unit["language"] == "German"
+        and unit["finishUnitId"] in {"F0008", "F0137", "F0527", "F0586", "F0633"}
+    }
+    assert set(german_units) == {"F0008", "F0137", "F0527", "F0586", "F0633"}
+    assert all(unit["availabilityStatus"] == "confirmed" for unit in german_units.values())
+    assert german_units["F0008"]["printings"][0]["specimenIds"] == [
+        "SPEC-0121", "SPEC-0122"
+    ]
+    assert german_units["F0008"]["printings"][0]["markings"] == [{
+        "kind": "deck-logo", "role": "distribution-promo", "text": "Mewtwo"
+    }]
+    assert {
+        printing["finish"]: printing["specimenIds"]
+        for printing in german_units["F0137"]["printings"]
+    } == {"non-holo": ["SPEC-0123"], "reverse-holo": ["SPEC-0124"]}
+    assert german_units["F0527"]["printings"][0]["specimenIds"] == ["SPEC-0125"]
+    german_wcd = german_units["F0586"]["printings"][0]
+    assert german_wcd["specimenIds"] == ["SPEC-0126", "SPEC-0127"]
+    german_wcd_sources = {source["url"]: source for source in german_wcd["sources"]}
+    assert german_wcd_sources[bulbapedia_url]["claimFields"] == ["finish"]
+    assert german_wcd_sources[
+        "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg"
+    ]["claimFields"] == ["identity"]
+    assert german_units["F0633"]["printings"][0]["specimenIds"] == ["SPEC-0128"]
+    spanish_ju11 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0165")
+    assert spanish_ju11["availabilityStatus"] == "confirmed"
+    assert len(spanish_ju11["printings"]) == 1
+    spanish_ju11_holo = spanish_ju11["printings"][0]
+    assert spanish_ju11_holo["printingId"] == "F0165-P01"
+    assert spanish_ju11_holo["finish"] == "holo"
+    assert "edition" not in spanish_ju11_holo
+    assert spanish_ju11_holo["specimenIds"] == ["SPEC-0129", "SPEC-0130"]
+    spanish_archive = {
+        row["specimenId"]: row for row in specimens
+        if row["specimenId"] in {
+            "SPEC-0131", "SPEC-0132", "SPEC-0133",
+            "SPEC-0134", "SPEC-0135", "SPEC-0136",
+        }
+    }
+    assert len(spanish_archive) == 6
+    assert all("physicalObservation" not in row for row in spanish_archive.values())
+    corroboration = {
+        "U0094": ["SPEC-0120"],
+        "U0295": ["SPEC-0121", "SPEC-0122"],
+        "U0244": ["SPEC-0123", "SPEC-0124"],
+        "U0417": ["SPEC-0125"],
+        "U0434": ["SPEC-0126", "SPEC-0127"],
+        "U0228": ["SPEC-0128"],
+        "U0122": ["SPEC-0129", "SPEC-0130", "SPEC-0133"],
+        "U0245": ["SPEC-0131"],
+        "U0482": ["SPEC-0132"],
+        "U0092": ["SPEC-0134"],
+        "U0229": ["SPEC-0135"],
+        "U0418": ["SPEC-0136"],
+        "U0416": ["SPEC-0137", "SPEC-0138", "SPEC-0139", "SPEC-0143"],
+        "U0527": ["SPEC-0140", "SPEC-0141", "SPEC-0142"],
+        "U0452": ["SPEC-0144"],
+        "U0294": ["SPEC-0145"],
+    }
+    units = {row["unitId"]: row for row in read("units.json")}
+    corroborated_unit_ids = {
+        unit_id for unit_id, unit in units.items() if unit.get("corroborated") is True
+    }
+    for specimen in specimens:
+        cited_units = set(specimen.get("citedBy") or []) & corroborated_unit_ids
+        if not cited_units:
+            continue
+        source_key = (
+            unquote(specimen["photographSource"])
+            if specimen.get("photographSource") else "evidence:inspected-specimen"
+        )
+        if source_key not in registry_by_source:
+            source_key = source_key.split("#", 1)[0]
+        registry_row = registry_by_source[source_key]
+        assert "identity" in registry_row["dimensions"]
+        assert specimen["specimenId"] in registry_row["stableIds"]
+        assert cited_units <= set(registry_row["stableIds"])
+        capability_row = capability_by_source[source_key]
+        assert "identity" in capability_row["dimensions"]
+    primary_checked_at = {
+        "U0094": "2026-07-21T16:41:51", "U0295": "2026-07-22T09:26:20",
+        "U0244": "2026-07-21T16:41:51", "U0417": "2026-07-21T14:59:21",
+        "U0434": "2026-07-22T11:00:43", "U0228": "2026-07-22T17:04:58",
+        "U0122": "2026-07-21T16:41:51", "U0245": "2026-07-21T16:41:51",
+        "U0482": "2026-07-21T16:56:33", "U0092": "2026-07-21T16:41:51",
+        "U0229": "2026-07-22T17:04:58", "U0418": "2026-07-21T14:59:21",
+        "U0416": "2026-07-21T14:59:21", "U0527": "2026-07-21T14:59:21",
+        "U0452": "2026-07-22T00:41:51", "U0294": "2026-07-22T09:26:20",
+    }
+    for unit_id, specimen_ids in corroboration.items():
+        assert units[unit_id]["corroborated"] is True
+        assert units[unit_id]["checkedAt"] == primary_checked_at[unit_id]
+        assert all(unit_id in specimen_by_id[specimen_id]["citedBy"]
+                   for specimen_id in specimen_ids)
+    assert projector.specimen_markings(
+        specimen_by_id["SPEC-0145"]["physicalObservation"]
+    ) == [{"kind": "deck-logo", "role": "distribution-promo", "text": "Mewtwo"}]
+    archive_only_finish_statuses = {
+        unit["finishUnitId"]: unit["availabilityStatus"] for unit in finish_units
+        if unit["finishUnitId"] in {"F0139", "F0172", "F0179", "F0529", "F0635"}
+    }
+    assert archive_only_finish_statuses == {
+        "F0139": "marketplace-claimed",
+        "F0172": "marketplace-claimed",
+        "F0179": "marketplace-claimed",
+        "F0529": "pending",
+        "F0635": "pending",
+    }
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],
