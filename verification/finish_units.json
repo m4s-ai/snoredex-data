@@ -59,18 +59,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 383,
+      "withConfirmedFinish": 384,
       "withOnlyMarketplaceClaim": 76,
-      "pendingFinish": 103,
+      "pendingFinish": 102,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
       "withNonHolo": 287,
-      "withHolo": 177,
+      "withHolo": 178,
       "withReverseHolo": 229,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 43,
-      "withUnresolvedProductMapping": 140,
-      "withAnyUnresolvedDetail": 230,
+      "withUnresolvedProductMapping": 139,
+      "withAnyUnresolvedDetail": 229,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -8818,7 +8818,7 @@
       "finishStatus": {
         "non-holo": "pending",
         "holo": "confirmed",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
@@ -8860,7 +8860,7 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-FireRed-LeafGreen/Snorlax-FL15",
@@ -8871,8 +8871,29 @@
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "sourceType": "Bulbapedia holofoil pattern history",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/cxcAAOSwi6ZiAqH1/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete physical-card photograph of French EX FireRed & LeafGreen Ronflex 15/112. Repos, Effondrement, Retournement, the set symbol and 15/112 establish the localized identity. Reflective Poké Ball motifs across the card face establish the EX-era reverse-holo treatment; the exact listing title independently identifies REVERSE, 15/112 and FR. Retained as SPEC-0140."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/KGwAAOSwAs5iAqH4/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Angled physical-card photograph of the same French FL 15/112 Ronflex as SPEC-0140. The French identity remains visible, while the oblique light directly exposes the reflective EX-era treatment across the card face. Retained as SPEC-0141."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/itEAAOSwaLhiAqH7/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Back photograph from the same eBay listing and physical French FL 15/112 Ronflex as SPEC-0140 and SPEC-0141. The ordinary western Pokémon back is retained separately so every listing photograph used in the assessment remains part of the data specification. Retained as SPEC-0142."
             }
           ],
+          "specimenIds": [
+            "SPEC-0140",
+            "SPEC-0141",
+            "SPEC-0142"
+          ],
+          "image": "verification/specimens/SPEC-0140.jpg",
           "printingId": "F0116-P02"
         }
       ],
@@ -39757,23 +39778,64 @@
           "image": "images/SWSH_032_Snorlax_461684.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "print-identity",
+              "text": "black-star promo symbol"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/BGoAAeSwEv9p~LNc/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete physical-card photograph of French SWSH032 Ronflex. The French attacks Roulé-Boulé and Gros Impact, the black-star promo symbol and SWSH032 establish identity. Reflective circles and sparkles in the artwork establish the Cosmo Holo treatment; the stronger angled view is retained separately as SPEC-0138 and the paired back as SPEC-0139. Retained as SPEC-0137."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/qVwAAeSw7cFp~LNc/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Angled physical-card photograph of the same French SWSH032 Ronflex as SPEC-0137. Roulé-Boulé, Gros Impact and SWSH032 remain visible, while the angle directly exposes large multicolored reflective circles and fine sparkles across the artwork, establishing the Cosmo Holo treatment. Retained as SPEC-0138."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Back photograph from the same eBay listing and physical French SWSH032 Ronflex as SPEC-0137 and SPEC-0138. The ordinary western Pokémon back is retained separately so every listing photograph used in the assessment remains part of the data specification. Retained as SPEC-0139."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0137",
+            "SPEC-0138",
+            "SPEC-0139"
+          ],
+          "image": "verification/specimens/SPEC-0137.jpg",
+          "printingId": "F0526-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0527",
@@ -45759,9 +45821,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://github.com/user-attachments/assets/c4e46460-12c0-4e05-aaf9-22c0c26b77c5",
+              "url": "https://github.com/m4s-ai/snoredex-data/issues/85#issuecomment-5163169071",
               "sourceType": "Owner-supplied physical card photograph",
-              "evidence": "French GameStop-stamped Hop's Snorlax, sealed in its promo wrapper, photographed by the owner: \"Ronflex de Nabil\", PV 150, Basic, Talent \"Portions Supplémentaires\" (attacks by your Pokémon inflict 30 extra damage on the Active Pokémon, before Weakness and Resistance, not cumulative), attack \"Pression Dynamique\" 140 with 80 recoil, \"N° 0143 Pokémon Ronfleur, Taille 2,1 m, Poids 460,0 kg\", Illus. GOSSAN, \"JTG\" \"117/159\", holo. The GameStop logo is stamped in red over the lower left of the illustration. French-language text throughout. This is the card behind the overturn of U0452: the contradiction had reasoned that every documented printing went to an English-language retail market, and GameStop trades in bilingual Canada. Retained as SPEC-0016."
+              "evidence": "French GameStop-stamped Hop's Snorlax, sealed in its promo wrapper, photographed by the owner and publicly retained in issue #85 comment 5163169071: \"Ronflex de Nabil\", PV 150, Basic, Talent \"Portions Supplémentaires\" (attacks by your Pokémon inflict 30 extra damage on the Active Pokémon, before Weakness and Resistance, not cumulative), attack \"Pression Dynamique\" 140 with 80 recoil, \"N° 0143 Pokémon Ronfleur, Taille 2,1 m, Poids 460,0 kg\", Illus. GOSSAN, \"JTG\" \"117/159\", holo. The GameStop logo is stamped in red over the lower left of the illustration. French-language text throughout. This is the card behind the overturn of U0452: the contradiction had reasoned that every documented printing went to an English-language retail market, and GameStop trades in bilingual Canada. Retained as SPEC-0016."
             }
           ],
           "specimenIds": [

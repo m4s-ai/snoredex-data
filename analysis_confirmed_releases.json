@@ -3368,13 +3368,13 @@
      "finishStatus": {
       "non-holo": "pending",
       "holo": "confirmed",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "confirmed",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
       "holo": "confirmed",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "confirmed",
       "mirror-holo": "pending"
      },
      "status": "confirmed",
@@ -3398,8 +3398,14 @@
        "markings": null,
        "distribution": null,
        "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0140.jpg",
+       "specimenIds": [
+        "SPEC-0140",
+        "SPEC-0141",
+        "SPEC-0142"
+       ]
       }
      ]
     },
@@ -18730,24 +18736,51 @@
     {
      "language": "French",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0526",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0526-P01",
+       "finish": "holo",
+       "foilPattern": "cosmos",
+       "markings": [
+        {
+         "kind": "observed-marking",
+         "role": "print-identity",
+         "text": "black-star promo symbol"
+        }
+       ],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0137.jpg",
+       "specimenIds": [
+        "SPEC-0137",
+        "SPEC-0138",
+        "SPEC-0139"
+       ]
+      }
+     ]
     },
     {
      "language": "German",
@@ -18890,7 +18923,7 @@
    ],
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only",
-    "French": "pending",
+    "French": "positive-evidence-only",
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only",
     "Spanish": "pending",

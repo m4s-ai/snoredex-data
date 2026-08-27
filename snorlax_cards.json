@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-08-27",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 383,
+      "withConfirmedFinish": 384,
       "withOnlyMarketplaceClaim": 76,
-      "pendingFinish": 103,
+      "pendingFinish": 102,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
       "withNonHolo": 287,
-      "withHolo": 177,
+      "withHolo": 178,
       "withReverseHolo": 229,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 43,
-      "withUnresolvedProductMapping": 140,
-      "withAnyUnresolvedDetail": 230,
+      "withUnresolvedProductMapping": 139,
+      "withAnyUnresolvedDetail": 229,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     }
@@ -26314,24 +26314,51 @@
           {
             "language": "French",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0526",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0526-P01",
+                "finish": "holo",
+                "foilPattern": "cosmos",
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "print-identity",
+                    "text": "black-star promo symbol"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0137.jpg",
+                "specimenIds": [
+                  "SPEC-0137",
+                  "SPEC-0138",
+                  "SPEC-0139"
+                ]
+              }
+            ]
           },
           {
             "language": "German",
@@ -32842,13 +32869,13 @@
             "finishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "confirmed",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -32872,8 +32899,14 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0140.jpg",
+                "specimenIds": [
+                  "SPEC-0140",
+                  "SPEC-0141",
+                  "SPEC-0142"
+                ]
               }
             ]
           },
