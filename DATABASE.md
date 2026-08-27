@@ -103,7 +103,7 @@ negative printing claim.
 | `release_rows` | Stable chronological row id × edition. |
 | `finish_units` | Set code × collector number × language. |
 | `printings` | Logical physical printing with technical finish, pattern, stamp, distribution and size kept separate. |
-| `checklist_items` | Stable physical checklist id. A missing `printing_id` is an explicit unresolved placeholder. |
+| `checklist_items` | Stable physical checklist id. A missing `printing_id` is an explicit unresolved placeholder; `release_date` is null when no positive date is established for that physical printing. |
 | `providers` / `printing_sources` | Current source metadata and finish evidence; no historical observations. |
 | `checklist_evidence_refs` | Ordered evidence URLs or prose references. These are deliberately references, not falsely advertised as stable source IDs. |
 | `quality_issues` | One queryable record per warning or intentional null. |
@@ -140,7 +140,9 @@ python scripts/tracker.py sync
 
 `sync` updates descriptive catalogue fields, inserts new checklist ids and marks removed ids
 inactive. It does not overwrite any ownership state or notes, so applications do not need a custom
-migration for ordinary catalogue refreshes.
+migration for ordinary catalogue refreshes. When a catalogue field becomes nullable, `sync`
+upgrades older tracker files in place before importing the new rows. The current tracker schema is
+`1.1.0` with `PRAGMA user_version=10001`.
 
 ## Example queries
 
@@ -178,7 +180,7 @@ WHERE application_status = 'not-printed';
 SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
-The database is UTF-8 SQLite, schema version `1.4.0`, with `PRAGMA user_version=10004`. Every build
+The database is UTF-8 SQLite, schema version `1.5.0`, with `PRAGMA user_version=10005`. Every build
 stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`;
 `scripts/database.py --check` fails if
 any source artifact changes without a database refresh.

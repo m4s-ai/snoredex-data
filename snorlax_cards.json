@@ -21072,7 +21072,7 @@
             "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0119-P01",
+                "printingId": "F0119-P02",
                 "finish": "non-holo",
                 "foilPattern": null,
                 "markings": null,
@@ -21082,7 +21082,7 @@
                 "productMapping": "mapped"
               },
               {
-                "printingId": "F0119-P02",
+                "printingId": "F0119-P03",
                 "finish": "reverse-holo",
                 "foilPattern": "type-symbol-background",
                 "markings": null,
@@ -38402,8 +38402,10 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
+        "status": "partial",
+        "availableFinishes": [
+          "non-holo"
+        ],
         "unitAvailableFinishes": [
           "non-holo",
           "reverse-holo"
@@ -38412,13 +38414,15 @@
           {
             "language": "English",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
+              "non-holo": "marketplace-claimed",
               "holo": "pending",
               "reverse-holo": "other-product",
               "mirror-holo": "pending"
@@ -38429,13 +38433,13 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "marketplace-claimed",
             "finishUnitId": "F0119",
             "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0119-P03",
-                "finish": "unknown",
+                "printingId": "F0119-P01",
+                "finish": "non-holo",
                 "foilPattern": null,
                 "markings": [
                   {
@@ -38449,8 +38453,9 @@
                   "name": "Build-A-Bear Workshop"
                 },
                 "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped"
+                "verificationStatus": "marketplace-claimed",
+                "productMapping": "mapped",
+                "releaseDate": null
               }
             ]
           },

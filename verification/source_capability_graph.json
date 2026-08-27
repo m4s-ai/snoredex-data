@@ -20,7 +20,7 @@
       "coverageEdges": 31,
       "absenceEdges": 3,
       "observations": 33,
-      "resolvedVerdictSources": 1043
+      "resolvedVerdictSources": 1044
     },
     "surfaceStates": {
       "active": 13,
@@ -3478,7 +3478,7 @@
       ],
       "outcome": "The documented product/subtype surface supports positive catalogue rows.",
       "rawRecordRef": "verification/source_registry.json:https://tcgcsv.com/docs",
-      "rawRecordHash": "sha256:f576f87f4cd1d0f1b01533c316872ac6598821103c6a12a197edc49a11c68a96",
+      "rawRecordHash": "sha256:0fce392e5897d426ad47c6bfe6cc5b4acce4b20e446409b291c3c6f4ebec9d8e",
       "rawRecord": {
         "canonicalUrl": "https://tcgcsv.com/docs",
         "nonUrlEvidenceId": null,
@@ -3490,10 +3490,11 @@
           "finish",
           "finish-override"
         ],
-        "stableIdCount": 19,
+        "stableIdCount": 20,
         "stableIds": [
           "F0006-P01",
           "F0038-P01",
+          "F0119-P01",
           "F0271-P01",
           "F0271-P02",
           "F0277-P01",
@@ -3513,7 +3514,7 @@
           "override:tcgcsv-docs"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 19
+        "usageCount": 20
       }
     },
     {
@@ -13875,6 +13876,19 @@
     },
     {
       "sourceKey": "https://tcgcsv.com/tcgplayer/3/2686/prices",
+      "providerId": "tcgcsv",
+      "surfaceId": "tcgcsv-api",
+      "capabilityEdgeIds": [
+        "tcgcsv-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://www.tcgplayer.com/product/232309/pokemon-miscellaneous-cards-and-products-snorlax-80-106-build-a-bear-workshop-exclusive?page=1&Language=all",
       "providerId": "tcgcsv",
       "surfaceId": "tcgcsv-api",
       "capabilityEdgeIds": [

@@ -807,6 +807,16 @@ def main() -> int:
         page.fill("#f-q", "")
         page.wait_for_timeout(120)
 
+        build_a_bear = page.evaluate("""() => JSON.parse(
+          document.getElementById('data-rows').textContent
+        ).find(row => row.rowId === 'flf-80-v2-none')""")
+        check("undated retailer promo does not inherit the base-set release date",
+              build_a_bear is not None
+              and build_a_bear["dateDisplay"] == "Undated"
+              and build_a_bear["dateStatus"] == "unknown"
+              and build_a_bear["dateSort"] == "9999-01-01",
+              f"Build-A-Bear row: {build_a_bear}")
+
         required_filters = [
             "dateStatus", "name", "setCode", "setName", "number", "edition", "variant",
             "variantName", "rarity", "artist", "finish", "pattern", "marking",

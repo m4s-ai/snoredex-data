@@ -9076,6 +9076,71 @@
         {
           "finish": "non-holo",
           "foilPattern": null,
+          "markings": [
+            {
+              "kind": "retailer",
+              "text": "Build-A-Bear Workshop",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "retailer-promo",
+            "name": "Build-A-Bear Workshop"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "marketplace-claimed",
+          "sources": [
+            {
+              "url": "https://www.tcgplayer.com/product/232309/pokemon-miscellaneous-cards-and-products-snorlax-80-106-build-a-bear-workshop-exclusive?page=1&Language=all",
+              "sourceType": "TCGplayer product page",
+              "authorityTier": "marketplace-api",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "productId": 232309,
+              "retrievedAt": "2026-08-27",
+              "evidence": "The exact product page identifies Snorlax 80/106 (Build-a-Bear Workshop Exclusive) and exposes the positive pricing category Normal."
+            },
+            {
+              "url": "https://tcgcsv.com/docs",
+              "sourceType": "TCGCSV documentation",
+              "authorityTier": "marketplace-api",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-07-23",
+              "evidence": "Documents that the exported product and price records come from TCGplayer and that price subtypes distinguish Normal, Holofoil, and Reverse Holofoil."
+            },
+            {
+              "url": "https://tcgcsv.com/tcgplayer/3/2374/prices",
+              "identityUrl": "https://tcgcsv.com/tcgplayer/3/2374/products",
+              "sourceType": "TCGCSV TCGplayer export",
+              "authorityTier": "marketplace-api",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "productId": 232309,
+              "expectedSubtypes": {
+                "232309": [
+                  "Normal"
+                ]
+              },
+              "retrievedAt": "2026-08-27",
+              "evidence": "The TCGplayer export identifies product 232309 as Snorlax 80/106 (Build-a-Bear Workshop Exclusive) and records the positive subtype Normal, establishing this printing as non-holo without excluding any other finish."
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V2-FLF1",
+              "sourceType": "Cardmarket stock image (visual evidence)",
+              "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+              "image": "images/FLF_80_Snorlax_V2_886906.png"
+            }
+          ],
+          "releaseDate": null,
+          "printingId": "F0119-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
           "markings": null,
           "distribution": null,
           "cardSize": "standard",
@@ -9108,7 +9173,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0119-P01"
+          "printingId": "F0119-P02"
         },
         {
           "finish": "reverse-holo",
@@ -9145,41 +9210,11 @@
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
           ],
-          "printingId": "F0119-P02"
-        },
-        {
-          "finish": "unknown",
-          "foilPattern": null,
-          "markings": [
-            {
-              "kind": "retailer",
-              "text": "Build-A-Bear Workshop",
-              "role": "distribution-promo"
-            }
-          ],
-          "distribution": {
-            "kind": "retailer-promo",
-            "name": "Build-A-Bear Workshop"
-          },
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V2"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V2-FLF1",
-              "sourceType": "Cardmarket stock image (visual evidence)",
-              "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "image": "images/FLF_80_Snorlax_V2_886906.png"
-            }
-          ],
           "printingId": "F0119-P03"
         }
       ],
       "unresolved": [
-        "One or more known physical printings still have unresolved finishes: F0119-P03",
-        "Scoped complete manifests do not cover these known physical printings: F0119-P03"
+        "Scoped complete manifests do not cover these known physical printings: F0119-P01"
       ]
     },
     {

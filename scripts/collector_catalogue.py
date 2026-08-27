@@ -875,12 +875,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             release_id, edition_value or "unresolved", finish_family or "research",
             canonical_bytes(markings).decode("utf-8"), canonical_bytes(distribution).decode("utf-8"), card_size,
         )))
-        release_date = (old or {}).get("releaseDate") or context["event"].get("releaseDate")
-        release_precision = (old or {}).get("releaseDatePrecision") or context["event"].get("releaseDatePrecision")
-        release_approximate = bool(
-            (old or {}).get("releaseApproximate")
-            if (old or {}).get("releaseDate") else context["event"].get("releaseApproximate")
-        )
+        if old is not None:
+            release_date = old.get("releaseDate")
+            release_precision = old.get("releaseDatePrecision")
+            release_approximate = bool(old.get("releaseApproximate"))
+        else:
+            release_date = context["event"].get("releaseDate")
+            release_precision = context["event"].get("releaseDatePrecision")
+            release_approximate = bool(context["event"].get("releaseApproximate"))
         release_sort = "|".join((
             release_date or "9999", str(context["identity"].get("localizationId")),
             natural_key(context["catalogue"].get("localCode")),
