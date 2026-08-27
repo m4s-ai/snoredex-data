@@ -804,9 +804,10 @@ def main() -> None:
     for override in overrides_document["overrides"]:
         overrides_by_group[(str(override["setCode"]), str(override.get("number") or ""))].append(override)
 
-    specimen_ids = {
-        str(row.get("specimenId")) for row in specimens_document.get("specimens", [])
+    specimens_by_id = {
+        str(row.get("specimenId")): row for row in specimens_document.get("specimens", [])
     }
+    specimen_ids = set(specimens_by_id)
     for override in overrides_document["overrides"]:
         for manual in override.get("printings") or []:
             refs = {str(ref) for ref in manual.get("sourceRefs") or []}
@@ -1051,8 +1052,15 @@ def main() -> None:
                     if product["variant"] in usable
                 }
                 for printing in printings:
-                    if printing["finish"] == finish and printing.get("_origin") == "auto":
-                        printing["mappedVariants"] = usable
+                    observed_variants = {
+                        str(specimens_by_id[specimen_id].get("variant"))
+                        for specimen_id in printing.get("specimenIds") or []
+                        if specimen_id in specimens_by_id
+                    }
+                    if printing["finish"] == finish and (
+                        printing.get("_origin") == "auto" or observed_variants
+                    ):
+                        printing["mappedVariants"] = sorted(set(usable) | observed_variants)
                         if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
                             printing["cardSize"] = next(iter(mapped_sizes))
             for manual in override.get("printings") or []:

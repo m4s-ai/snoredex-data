@@ -182,6 +182,20 @@ def main() -> None:
     assert {printing["foilPattern"] for printing in indonesian["printings"]} == {
         "poke-ball", "master-ball"
     }
+    italian_cl = next(unit for unit in finish_units
+                      if unit["setCode"] == "CL" and unit["number"] == "33"
+                      and unit["language"] == "Italian")
+    cl_reverse = next(printing for printing in italian_cl["printings"]
+                      if printing["finish"] == "reverse-holo")
+    assert cl_reverse["mappedVariants"] == ["V1"]
+    assert cl_reverse["specimenIds"] == ["SPEC-0106"]
+    italian_rr = next(unit for unit in finish_units
+                      if unit["setCode"] == "RR" and unit["number"] == "33"
+                      and unit["language"] == "Italian")
+    rr_reverse = next(printing for printing in italian_rr["printings"]
+                      if printing["finish"] == "reverse-holo")
+    assert rr_reverse["mappedVariants"] == ["V1"]
+    assert rr_reverse["specimenIds"] == ["SPEC-0117"]
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],
