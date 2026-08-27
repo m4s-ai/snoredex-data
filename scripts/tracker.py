@@ -27,19 +27,10 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "snoredex.sqlite"
 DEFAULT_TRACKER = ROOT / "snoredex-tracker.sqlite"
 TEMPLATE = ROOT / "snoredex-tracker-template.sqlite"
-TRACKER_SCHEMA_VERSION = "1.0.0"
+TRACKER_SCHEMA_VERSION = "1.1.0"
+TRACKER_USER_VERSION = 10001
 
-SCHEMA = """
-PRAGMA foreign_keys = ON;
-PRAGMA journal_mode = DELETE;
-PRAGMA user_version = 10000;
-
-CREATE TABLE tracker_metadata (
-    key TEXT PRIMARY KEY,
-    value TEXT NOT NULL
-) WITHOUT ROWID;
-
-CREATE TABLE catalog_items (
+CATALOG_ITEMS_SCHEMA = """CREATE TABLE {table} (
     checklist_id TEXT PRIMARY KEY,
     active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),
     catalog_status TEXT NOT NULL CHECK (catalog_status IN ('documented', 'unresolved')),
@@ -60,22 +51,12 @@ CREATE TABLE catalog_items (
     release_date TEXT,
     image_path TEXT,
     cardmarket_url TEXT NOT NULL
-) WITHOUT ROWID;
+) WITHOUT ROWID;"""
 
-CREATE INDEX catalog_items_browse
-ON catalog_items(active, language, set_code, collector_number, checklist_id);
+CATALOG_ITEMS_INDEX = """CREATE INDEX catalog_items_browse
+ON catalog_items(active, language, set_code, collector_number, checklist_id);"""
 
-CREATE TABLE collection_state (
-    checklist_id TEXT PRIMARY KEY REFERENCES catalog_items(checklist_id),
-    have INTEGER NOT NULL DEFAULT 0 CHECK (have IN (0, 1)),
-    wanted INTEGER NOT NULL DEFAULT 1 CHECK (wanted IN (0, 1)),
-    quantity INTEGER NOT NULL DEFAULT 0 CHECK (quantity >= 0),
-    notes TEXT NOT NULL DEFAULT '',
-    updated_at TEXT,
-    CHECK ((have = 1 AND quantity >= 1) OR (have = 0 AND quantity = 0))
-) WITHOUT ROWID;
-
-CREATE VIEW tracker AS
+TRACKER_VIEWS = """CREATE VIEW tracker AS
 SELECT
     ci.*,
     cs.have,
@@ -93,7 +74,38 @@ FROM catalog_items ci
 JOIN collection_state cs USING(checklist_id);
 
 CREATE VIEW active_tracker AS
-SELECT * FROM tracker WHERE active = 1;
+SELECT * FROM tracker WHERE active = 1;"""
+
+CATALOG_ITEM_COLUMNS = """checklist_id, active, catalog_status, card_name, set_code,
+collector_number, set_name, language_code, language, edition, finish_family, finish,
+foil_pattern, markings_json, distribution_json, card_size, finish_verification_status,
+release_date, image_path, cardmarket_url"""
+
+SCHEMA = f"""
+PRAGMA foreign_keys = ON;
+PRAGMA journal_mode = DELETE;
+PRAGMA user_version = {TRACKER_USER_VERSION};
+
+CREATE TABLE tracker_metadata (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL
+) WITHOUT ROWID;
+
+{CATALOG_ITEMS_SCHEMA.format(table="catalog_items")}
+
+{CATALOG_ITEMS_INDEX}
+
+CREATE TABLE collection_state (
+    checklist_id TEXT PRIMARY KEY REFERENCES catalog_items(checklist_id),
+    have INTEGER NOT NULL DEFAULT 0 CHECK (have IN (0, 1)),
+    wanted INTEGER NOT NULL DEFAULT 1 CHECK (wanted IN (0, 1)),
+    quantity INTEGER NOT NULL DEFAULT 0 CHECK (quantity >= 0),
+    notes TEXT NOT NULL DEFAULT '',
+    updated_at TEXT,
+    CHECK ((have = 1 AND quantity >= 1) OR (have = 0 AND quantity = 0))
+) WITHOUT ROWID;
+
+{TRACKER_VIEWS}
 """
 
 
@@ -180,10 +192,48 @@ def one_to_one_rekeys(connection: sqlite3.Connection, rows: list[tuple]) -> list
     )
 
 
+def migrate_tracker_schema(connection: sqlite3.Connection) -> None:
+    """Make legacy tracker release dates nullable without touching collection state."""
+    columns = {
+        row[1]: row for row in connection.execute("PRAGMA table_info(catalog_items)")
+    }
+    release_date = columns.get("release_date")
+    if release_date is None:
+        raise ValueError("tracker catalog_items table has no release_date column")
+    if release_date[3]:
+        connection.execute("PRAGMA foreign_keys=OFF")
+        try:
+            connection.executescript(
+                f"""
+                BEGIN IMMEDIATE;
+                DROP VIEW IF EXISTS active_tracker;
+                DROP VIEW IF EXISTS tracker;
+                {CATALOG_ITEMS_SCHEMA.format(table="catalog_items_new")}
+                INSERT INTO catalog_items_new ({CATALOG_ITEM_COLUMNS})
+                SELECT {CATALOG_ITEM_COLUMNS} FROM catalog_items;
+                DROP TABLE catalog_items;
+                ALTER TABLE catalog_items_new RENAME TO catalog_items;
+                {CATALOG_ITEMS_INDEX}
+                {TRACKER_VIEWS}
+                PRAGMA user_version = {TRACKER_USER_VERSION};
+                COMMIT;
+                """
+            )
+        except Exception:
+            if connection.in_transaction:
+                connection.rollback()
+            raise
+        finally:
+            connection.execute("PRAGMA foreign_keys=ON")
+    else:
+        connection.execute(f"PRAGMA user_version = {TRACKER_USER_VERSION}")
+
+
 def sync_database(tracker: Path, catalog: Path) -> tuple[int, int, int]:
     rows = catalog_rows(catalog)
     fingerprint = catalog_fingerprint(catalog)
     connection = sqlite3.connect(tracker)
+    migrate_tracker_schema(connection)
     connection.execute("PRAGMA foreign_keys=ON")
     existing = {
         row[0] for row in connection.execute("SELECT checklist_id FROM catalog_items").fetchall()
@@ -347,8 +397,10 @@ def check_template(template: Path, catalog: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("tracker template was built by a different version of scripts/tracker.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10000:
-            problems.append("tracker template PRAGMA user_version is not 10000")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != TRACKER_USER_VERSION:
+            problems.append(
+                f"tracker template PRAGMA user_version is not {TRACKER_USER_VERSION}"
+            )
         count, changed = connection.execute(
             "SELECT COUNT(*), SUM(CASE WHEN have<>0 "
             "OR wanted<>CASE WHEN catalog_status='documented' THEN 1 ELSE 0 END "
