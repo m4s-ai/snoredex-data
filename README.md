@@ -125,9 +125,9 @@ Current-known status snapshot: **2026-08-26**. Its candidate denominator is the 
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 635 externally confirmed, 84 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Evidence-safe application status | **618 established**, **17 needs evidence**, **80 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
-| Current-known physical checklist | **830 items** across 174 cards and 15 languages: 685 documented printings plus 145 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 354 externally confirmed, 97 marketplace-only positives, 111 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 207 units. |
-| Evidence registry | **25 providers**, 926 evidence records, 919 unique URLs, and 2,891 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
+| Current-known physical checklist | **830 items** across 174 cards and 15 languages: 688 documented printings plus 142 explicit unresolved placeholders. |
+| Current-known finish evidence | **637 card-number × language units**: 360 externally confirmed, 93 marketplace-only positives, 109 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 205 units. |
+| Evidence registry | **26 providers**, 932 evidence records, 925 unique URLs, and 2,902 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. Browser and live-source checks run in the Linux release lane. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -151,7 +151,7 @@ agreed independently, and `verification/source_registry.json` records the author
 | Tier | Sources |
 |---|---|
 | 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · Pokémon Card official database and rules (Korea) · The Pokémon Company official cards and checklists |
-| 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · TCGdex · pokemontcg.io |
+| 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · Seller listing photograph · TCGdex · pokemontcg.io |
 | 3 | LigaPokemon · Limitless TCG · PokéCottage · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · koreanpokemoncards.com · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
@@ -300,7 +300,7 @@ owner-adjudicated finish decision may also close a unit after review, but never 
 | Known available finish | Set-number-language units |
 |---|---:|
 | Non-Holo | 284 |
-| Holo | 151 |
+| Holo | 153 |
 | Reverse Holo family | 242 |
 | Both Non-Holo and Holo | 23 |
 <!-- /generated:finish-coverage -->

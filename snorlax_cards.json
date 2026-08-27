@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-08-26",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 354,
-      "withOnlyMarketplaceClaim": 97,
-      "pendingFinish": 111,
+      "withConfirmedFinish": 360,
+      "withOnlyMarketplaceClaim": 93,
+      "pendingFinish": 109,
       "notApplicableFinish": 75,
       "withCompleteManifest": 23,
       "withNonHolo": 284,
-      "withHolo": 151,
+      "withHolo": 153,
       "withReverseHolo": 233,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 23,
-      "withUnresolvedProductMapping": 148,
-      "withAnyUnresolvedDetail": 207,
+      "withUnresolvedProductMapping": 146,
+      "withAnyUnresolvedDetail": 205,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     }
@@ -5659,18 +5659,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0148",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -5681,8 +5681,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0054.jpg",
+                "specimenIds": [
+                  "SPEC-0054"
+                ]
               },
               {
                 "printingId": "F0148-P02",
@@ -7778,17 +7782,17 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0166",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -7801,6 +7805,21 @@
                 "cardSize": "standard",
                 "verificationStatus": "marketplace-claimed",
                 "productMapping": "mapped"
+              },
+              {
+                "printingId": "F0166-P02",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "edition": "Unlimited",
+                "image": "verification/specimens/SPEC-0055.jpg",
+                "specimenIds": [
+                  "SPEC-0055"
+                ]
               }
             ]
           },
@@ -14215,10 +14234,12 @@
         },
         "status": "partial",
         "availableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "unitAvailableFinishes": [
-          "non-holo"
+          "non-holo",
+          "holo"
         ],
         "byLanguage": [
           {
@@ -14364,24 +14385,49 @@
           {
             "language": "Portuguese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0636",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0636-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "print-identity",
+                    "text": "black-star promo symbol"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0057.jpg",
+                "specimenIds": [
+                  "SPEC-0057"
+                ]
+              }
+            ]
           }
         ]
       },
@@ -15520,18 +15566,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0140",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -15542,8 +15588,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0053.jpg",
+                "specimenIds": [
+                  "SPEC-0053"
+                ]
               },
               {
                 "printingId": "F0140-P02",
@@ -22936,18 +22986,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0093",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -22958,8 +23008,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0056.jpg",
+                "specimenIds": [
+                  "SPEC-0056"
+                ]
               },
               {
                 "printingId": "F0093-P02",
@@ -38654,7 +38708,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -38702,24 +38756,43 @@
           {
             "language": "Portuguese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0562",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0562-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0052.jpg",
+                "specimenIds": [
+                  "SPEC-0052"
+                ]
+              }
+            ]
           }
         ]
       },

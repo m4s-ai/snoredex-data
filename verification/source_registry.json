@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 25,
-   "evidenceRecords": 926,
-   "uniqueUrls": 919,
+   "providers": 26,
+   "evidenceRecords": 932,
+   "uniqueUrls": 925,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2891
+   "claimsAttributed": 2902
   }
  },
  "providers": [
@@ -585,7 +585,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 36
+   "claimsSupported": 40
   },
   {
    "providerId": "inspected-specimen",
@@ -620,14 +620,37 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
+    "identity",
     "finish",
     "edition"
    ],
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 5,
-   "claimsSupported": 6
+   "uniqueSources": 3,
+   "claimsSupported": 4
+  },
+  {
+   "providerId": "seller-listing-photo",
+   "displayName": "Seller listing photograph",
+   "organization": "Various online marketplaces",
+   "homepage": null,
+   "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
+   "category": "marketplace-photo",
+   "authorityTier": 2,
+   "coverage": "individual cards whose text and markings were read from a retained seller photograph on a non-Cardmarket marketplace",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "identity",
+    "finish",
+    "edition"
+   ],
+   "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
+   "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
+   "hosts": [],
+   "uniqueSources": 8,
+   "claimsSupported": 9
   }
  ],
  "evidence": [
@@ -10013,40 +10036,6 @@
    "usageCount": 2
   },
   {
-   "canonicalUrl": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket-listing-photo",
-   "sourceTypes": [
-    "Seller listing photograph"
-   ],
-   "dimensions": [
-    "finish"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "F0024-P01"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket-listing-photo",
-   "sourceTypes": [
-    "Seller listing photograph"
-   ],
-   "dimensions": [
-    "finish"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "F0094-P02"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-listing-photo",
@@ -10456,12 +10445,17 @@
     "Owner attestation plus downloaded scan review"
    ],
    "dimensions": [
+    "edition",
     "finish",
     "finish-override",
     "language"
    ],
-   "stableIdCount": 36,
+   "stableIdCount": 40,
    "stableIds": [
+    "F0093-P01",
+    "F0140-P01",
+    "F0148-P01",
+    "F0166-P02",
     "F0289-P02",
     "F0597-P01",
     "F0597-P02",
@@ -10500,7 +10494,7 @@
     "override:owner-scan-review"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 36
+   "usageCount": 40
   },
   {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
@@ -12582,6 +12576,143 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 11
+  },
+  {
+   "canonicalUrl": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0024-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0140-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/XrgAAeSwDF1qVdFf/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0093-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0166-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0148-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0562-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0094-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0636-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",

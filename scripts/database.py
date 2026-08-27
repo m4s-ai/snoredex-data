@@ -146,13 +146,17 @@ def provider_for_source(source: dict, providers: list[dict]) -> str | None:
     url = source.get("url") or source.get("identityUrl")
     if url:
         host = (urlparse(url).hostname or "").lower()
+        if host == "marketplace-article-scans.s3.cardmarket.com":
+            return "cardmarket-listing-photo"
         for provider in providers:
             if host in {item.lower() for item in provider.get("hosts", [])}:
                 return provider["providerId"]
     label = (source.get("sourceType") or "").lower()
+    if "cardmarket" in label and "seller listing photograph" in label:
+        return "cardmarket-listing-photo"
     for provider_id, token in [
         ("owner-attestation", "owner attestation"),
-        ("cardmarket-listing-photo", "seller listing photograph"),
+        ("seller-listing-photo", "seller listing photograph"),
         ("inspected-specimen", "photograph"),
         ("bulbapedia", "bulbapedia"),
         ("tcgdex", "tcgdex"),
