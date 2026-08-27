@@ -1293,44 +1293,20 @@
         }).join('') + '</ul></details>';
     };
 
-    const memberHTML = (group, member) => {
-      const draft = draftFor(member);
-      const detection = member.detection || {};
-      const physical = member.physicalPrintings || [];
-      const images = member.images || [];
-      const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
-      const physicalIds = physical.map((item) => item.physicalPrintingId).filter(Boolean);
-      const selectedPhysicalIds = new Set(
-        draft && Array.isArray(draft.affectedPhysicalPrintingIds)
-          ? draft.affectedPhysicalPrintingIds : physicalIds,
-      );
-      const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
-      const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields || []);
-      const selectedAction = draft ? draft.action : "";
-      const imageReviewable = hasVerifiedImages(member);
-      const actionOptions = ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
-        .map((action) => '<option value="' + escapeHTML(action) + '"' +
-          (imageDependentActions.has(action) && !imageReviewable ? ' disabled' : '') +
-          (selectedAction === action ? ' selected' : '') + '>' +
-          escapeHTML(action ? actionLabel(action) : 'Choose a review action') + '</option>').join('');
-      const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
-      const existing = {
-        cardName: detection.cardName || "",
-        artist: detection.artist || "",
-        variant: detection.variant || "",
-        localSetCode: member.localSetCode || "",
-        localNumber: member.localNumber || "",
-        finish: (detection.finish || []).join(", "),
-        foilPattern: (detection.foilPattern || []).join(", "),
-        markings: (detection.markings || []).join(", "),
-      };
+    const actionOptionsHTML = (selectedAction, imageReviewable) => ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
+      .map((action) => '<option value="' + escapeHTML(action) + '"' +
+        (imageDependentActions.has(action) && !imageReviewable ? ' disabled' : '') +
+        (selectedAction === action ? ' selected' : '') + '>' +
+        escapeHTML(action ? actionLabel(action) : 'Choose a review action') + '</option>').join('');
+
+    const structuredFieldsHTML = (selectedAction, existing, proposed, cleared) => {
       const value = (key) => escapeHTML(Object.prototype.hasOwnProperty.call(proposed, key)
         ? proposed[key] : (cleared.has(key) ? "" : existing[key]));
       const touched = (key) => Object.prototype.hasOwnProperty.call(proposed, key) || cleared.has(key);
       const input = (className, key, placeholder) => '<input class="' + className + '" data-detection-field="' + key +
         '" data-touched="' + (touched(key) ? 'true' : 'false') + '" value="' + value(key) +
         '" placeholder="' + placeholder + '">';
-      const structuredFields = '<div class="ar-structured-fields"' +
+      return '<div class="ar-structured-fields"' +
         (structuredActions.has(selectedAction) ? '' : ' hidden') + '>' +
         '<p class="artwork-muted">Edit a field to set it; clear it to explicitly remove it.</p>' +
         '<label>Card name' + input('ar-proposed-name', 'cardName', 'Corrected card name') + '</label>' +
@@ -1341,40 +1317,124 @@
         '<label>Finish' + input('ar-proposed-finish', 'finish', 'Finish') + '</label>' +
         '<label>Foil pattern' + input('ar-proposed-foil', 'foilPattern', 'Foil pattern') + '</label>' +
         '<label>Markings' + input('ar-proposed-markings', 'markings', 'Stamp or marking') + '</label></div>';
-      const physicalInputs = physicalIds.length
-        ? '<fieldset class="ar-physical-targets"><legend>Affected physical printings</legend>' +
-          physical.map((item) => '<label><input class="ar-physical" type="checkbox" value="' +
-            escapeHTML(item.physicalPrintingId) + '"' +
-            (selectedPhysicalIds.has(item.physicalPrintingId) ? ' checked' : '') + '> <code>' +
-            escapeHTML(item.physicalPrintingId) + '</code> · ' + escapeHTML(item.finish || 'printing') +
-            '</label>').join('') + '</fieldset>'
-        : '<p class="artwork-muted">No physical-printing identity is linked.</p>';
-      return '<article class="artwork-member" data-release-id="' + escapeHTML(member.cardReleaseId) + '">' +
-        imageHTML(member) +
-        '<div class="artwork-member-body"><h4>' + escapeHTML(detection.cardName || member.cardReleaseId) +
-        ' <span class="pill ' + (draft ? 'confirmed' : 'pending') + '">' +
-        escapeHTML(draft ? actionLabel(draft.action) : 'unreviewed') + '</span></h4>' +
-        '<p><strong>' + escapeHTML(member.language || '—') + '</strong> · ' +
-        escapeHTML(member.locality || '—') + ' · <code>' + escapeHTML(member.localSetCode || '—') +
-        ' ' + escapeHTML(member.localNumber || '—') + '</code><br>' +
-        '<small>' + escapeHTML(member.cardReleaseId) + '</small></p>' +
-        '<dl class="artwork-detection"><dt>Detection</dt><dd>' +
-        escapeHTML([detection.variant, detection.artist, detection.finish && detection.finish.join(', '),
-          detection.foilPattern && detection.foilPattern.join(', ')].filter(Boolean).join(' · ') || 'no fields') +
-        '</dd><dt>Physical printings</dt><dd>' + escapeHTML(String(physical.length)) +
-        '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(imageHashes[0] || 'not available') +
-        '</code></dd></dl>' +
-        evidenceHTML(member) +
-        physicalInputs + structuredFields +
-        '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
-        escapeHTML(member.cardReleaseId) + '">' + actionOptions + '</select></label>' +
-        '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(target) +
-        '" placeholder="APPEARANCE:…" aria-label="Target artwork group"></label>' +
-        '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
-        escapeHTML(draft && draft.note || '') + '</textarea></label>' +
-        '<button type="button" class="ghost ar-save">Save proposal</button>' +
-        (!imageReviewable ? '<span class="artwork-muted">No verified image hash; only “Mark unclear” can be proposed.</span>' : '') +
-        '<span class="artwork-save-status" role="status"></span></div></div></article>';
+    };
+
+    const physicalInputsHTML = (physical, physicalIds, selectedPhysicalIds) => physicalIds.length
+      ? '<fieldset class="ar-physical-targets"><legend>Affected physical printings</legend>' +
+        physical.map((item) => '<label><input class="ar-physical" type="checkbox" value="' +
+          escapeHTML(item.physicalPrintingId) + '"' +
+          (selectedPhysicalIds.has(item.physicalPrintingId) ? ' checked' : '') + '> <code>' +
+          escapeHTML(item.physicalPrintingId) + '</code> · ' + escapeHTML(item.finish || 'printing') +
+          '</label>').join('') + '</fieldset>'
+      : '<p class="artwork-muted">No physical-printing identity is linked.</p>';
+
+    const detectionSummaryHTML = (detection) => escapeHTML([
+      detection.variant, detection.artist, detection.finish && detection.finish.join(', '),
+      detection.foilPattern && detection.foilPattern.join(', '),
+    ].filter(Boolean).join(' · ') || 'no fields');
+
+    const memberCollections = (member, draft) => {
+      const physical = member.physicalPrintings || [];
+      const images = member.images || [];
+      const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
+      const physicalIds = physical.map((item) => item.physicalPrintingId).filter(Boolean);
+      const selectedPhysicalIds = new Set(
+          draft && Array.isArray(draft.affectedPhysicalPrintingIds)
+            ? draft.affectedPhysicalPrintingIds : physicalIds,
+      );
+      return { physical, images, imageHashes, physicalIds, selectedPhysicalIds };
+    };
+
+    const memberExistingFields = (member, detection) => ({
+      cardName: detection.cardName || "",
+      artist: detection.artist || "",
+      variant: detection.variant || "",
+      localSetCode: member.localSetCode || "",
+      localNumber: member.localNumber || "",
+      finish: (detection.finish || []).join(", "),
+      foilPattern: (detection.foilPattern || []).join(", "),
+      markings: (detection.markings || []).join(", "),
+    });
+
+    const memberDetection = (member, draft) => {
+      const detection = member.detection || {};
+      const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
+      const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields || []);
+      const selectedAction = draft ? draft.action : "";
+      return { detection, proposed, cleared, selectedAction,
+        existing: memberExistingFields(member, detection) };
+    };
+
+    const memberIdentityLabels = (member, detection) => ({
+      title: detection.cardName || member.cardReleaseId,
+      language: member.language || '—',
+      locality: member.locality || '—',
+      localSetCode: member.localSetCode || '—',
+      localNumber: member.localNumber || '—',
+    });
+
+    const memberStatusLabels = (draft) => ({
+      statusClass: draft ? 'confirmed' : 'pending',
+      statusLabel: draft ? actionLabel(draft.action) : 'unreviewed',
+      note: draft && draft.note || '',
+    });
+
+    const memberView = (member, draft) => {
+      const collections = memberCollections(member, draft);
+      const state = memberDetection(member, draft);
+      const imageReviewable = hasVerifiedImages(member);
+      const identity = memberIdentityLabels(member, state.detection);
+      const status = memberStatusLabels(draft);
+      const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
+      return {
+        member,
+        detection: state.detection,
+        physical: collections.physical,
+        imageHashes: collections.imageHashes,
+        identity,
+        status,
+        target,
+        actionOptions: actionOptionsHTML(state.selectedAction, imageReviewable),
+        structuredFields: structuredFieldsHTML(
+          state.selectedAction, state.existing, state.proposed, state.cleared,
+        ),
+        physicalInputs: physicalInputsHTML(
+          collections.physical, collections.physicalIds, collections.selectedPhysicalIds,
+        ),
+        detectionSummary: detectionSummaryHTML(state.detection),
+        imageWarning: imageReviewable
+          ? '' : '<span class="artwork-muted">No verified image hash; only “Mark unclear” can be proposed.</span>',
+      };
+    };
+
+    const memberMarkup = (view) => '<article class="artwork-member" data-release-id="' + escapeHTML(view.member.cardReleaseId) + '">' +
+      imageHTML(view.member) +
+      '<div class="artwork-member-body"><h4>' + escapeHTML(view.identity.title) +
+      ' <span class="pill ' + view.status.statusClass + '">' +
+      escapeHTML(view.status.statusLabel) + '</span></h4>' +
+      '<p><strong>' + escapeHTML(view.identity.language) + '</strong> · ' +
+      escapeHTML(view.identity.locality) + ' · <code>' + escapeHTML(view.identity.localSetCode) +
+      ' ' + escapeHTML(view.identity.localNumber) + '</code><br>' +
+      '<small>' + escapeHTML(view.member.cardReleaseId) + '</small></p>' +
+      '<dl class="artwork-detection"><dt>Detection</dt><dd>' +
+      view.detectionSummary +
+      '</dd><dt>Physical printings</dt><dd>' + escapeHTML(String(view.physical.length)) +
+      '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(view.imageHashes[0] || 'not available') +
+      '</code></dd></dl>' +
+      evidenceHTML(view.member) +
+      view.physicalInputs + view.structuredFields +
+      '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
+      escapeHTML(view.member.cardReleaseId) + '">' + view.actionOptions + '</select></label>' +
+      '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(view.target) +
+      '" placeholder="APPEARANCE:…" aria-label="Target artwork group"></label>' +
+      '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
+      escapeHTML(view.status.note) + '</textarea></label>' +
+      '<button type="button" class="ghost ar-save">Save proposal</button>' +
+      view.imageWarning +
+      '<span class="artwork-save-status" role="status"></span></div></div></article>';
+
+    const memberHTML = (group, member) => {
+      return memberMarkup(memberView(member, draftFor(member)));
     };
 
     const groupHTML = (group) => '<article class="artwork-group" data-group-id="' + escapeHTML(group.groupId) +

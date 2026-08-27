@@ -80,6 +80,10 @@ def normalized_foil_pattern(value: Any) -> Any:
     return FOIL_PATTERN_ALIASES.get(value.strip().casefold(), value)
 
 
+def _normalized(value: Any) -> str:
+    return "" if value is None else str(value)
+
+
 def _semantic_markings(value: Any) -> list[dict[str, Any]] | None:
     if not value:
         return None
@@ -554,19 +558,19 @@ def specimen_observation_value(observation: dict[str, Any], field: str) -> Any:
     return value or "unknown" if field == "cardSize" else value
 
 
-def validate(
+# Graph shape and migration container invariants.
+def _validate_shape(
     graph: dict[str, Any],
-    source_registry: dict[str, Any] | None = None,
-    identity_inputs: dict[str, Any] | None = None,
-) -> list[str]:
-    """Validate graph structure and the evidence/promotion invariants it carries.
-
-    The graph is the committed authority, but the raw catalogue registry remains the
-    append-only source of source-record identities.  Keeping that comparison here
-    prevents a newly appended source record from silently disappearing at the migration
-    boundary.
-    """
-    errors: list[str] = []
+    errors: list[str],
+) -> tuple[
+    list[dict[str, Any]],
+    set[tuple[Any, Any]],
+    defaultdict[str, dict[str, dict[str, Any]]],
+    list[dict[str, Any]],
+    list[tuple[Any, ...]],
+    defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+    list[dict[str, Any]],
+]:
     meta = graph.get("meta", {})
     if meta.get("schema") != GRAPH_SCHEMA:
         errors.append("unexpected graph schema")
@@ -611,15 +615,15 @@ def validate(
         refs = row.get("targetRefs")
         if refs is not None and row.get("targetRef") != (refs[0] if refs else None):
             errors.append(f"migration targetRef does not preserve targetRefs: {row.get('sourceId')}")
+    return entities, entity_set, by_type, edges, edge_keys, relations, dispositions
 
-    # I2: only positive evidence may promote a claim into an existence-bearing node.
-    claims = by_type["candidate-claim"]
-    releases = by_type["card-release"]
-    printings = by_type["physical-printing"]
-    specimen_claim_ids = {
-        str(claim.get("sourceId")) for claim in claims.values()
-        if claim.get("sourceKind") == "specimen-observation"
-    }
+# Candidate-claim promotion and finish-candidate invariants.
+def _validate_claim_conflicts(
+    errors: list[str],
+    claims: dict[str, dict[str, Any]],
+    printings: dict[str, dict[str, Any]],
+    specimen_claim_ids: set[str],
+) -> None:
     for claim_id, claim in claims.items():
         conflicts = claim.get("conflictsWith") or []
         if conflicts and (
@@ -634,6 +638,14 @@ def validate(
         conflicts = printing.get("conflictsWith") or []
         if conflicts:
             errors.append(f"conflicted printing was materialized: {printing_id}")
+
+
+def _validate_claim_materialization(
+    errors: list[str],
+    claims: dict[str, dict[str, Any]],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for claim_id, claim in claims.items():
         target_id = claim.get("materializedTargetId")
         disposition = claim.get("disposition")
@@ -657,6 +669,14 @@ def validate(
         if claim.get("evidenceStatus") not in permitted_evidence:
             errors.append(f"claim lacks permitted positive evidence: {claim_id}")
 
+
+def _validate_finish_candidates(
+    errors: list[str],
+    claims: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
+
     # Collector-facing finish candidates stay non-materializing, but they must name
     # the one release they propose a treatment for.  This prevents a consumer from
     # repeating the lossy legacy set/number/language join.
@@ -672,10 +692,33 @@ def validate(
         ]:
             errors.append(f"finish candidate release edge is missing or non-unique: {claim_id}")
 
-    # I3/I8: releases have one language-bearing edition and their local identifiers
-    # remain explicit (legacy anchors cannot be promoted into local identifiers).
-    editions = by_type["set-edition"]
-    works = by_type["work"]
+
+def _validate_claims(
+    errors: list[str],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> tuple[
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+]:
+    claims = by_type["candidate-claim"]
+    releases = by_type["card-release"]
+    printings = by_type["physical-printing"]
+    specimen_claim_ids = {
+        str(claim.get("sourceId")) for claim in claims.values()
+        if claim.get("sourceKind") == "specimen-observation"
+    }
+    _validate_claim_conflicts(errors, claims, printings, specimen_claim_ids)
+    _validate_claim_materialization(errors, claims, by_type, relations)
+    _validate_finish_candidates(errors, claims, releases, relations)
+    return claims, releases, printings
+
+# Card-release/work/edition identity invariants.
+def _validate_work_index(
+    errors: list[str],
+    works: dict[str, dict[str, Any]],
+) -> dict[str, tuple[str, dict[str, Any]]]:
     works_by_key: dict[str, tuple[str, dict[str, Any]]] = {}
     for work_id, work in works.items():
         if work.get("workId") != work_id:
@@ -689,6 +732,43 @@ def validate(
             # The entity index is authoritative for relation targets.  The
             # payload workId is checked above but never used to derive an edge.
             works_by_key[card_key] = (work_id, work)
+    return works_by_key
+
+
+def _validate_explicit_equivalence(
+    errors: list[str],
+    release_id: str,
+    expected_work_id: str | None,
+    assertions: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
+    matching_assertions = []
+    for assertion_id, assertion in assertions.items():
+        if (
+            assertion.get("fromId") != release_id
+            or assertion.get("toId") != expected_work_id
+        ):
+            continue
+        assertion_relates = relations[("equivalence-assertion", assertion_id, "relates")]
+        if sorted(assertion_relates) == sorted([
+            ("card-release", release_id), ("work", expected_work_id)
+        ]):
+            matching_assertions.append(assertion_id)
+    if len(matching_assertions) != 1:
+        errors.append(
+            "mapped-by-explicit-equivalence card release lacks exactly one "
+            f"matching equivalence assertion: {release_id}"
+        )
+
+
+def _validate_release_work_mappings(
+    errors: list[str],
+    releases: dict[str, dict[str, Any]],
+    works_by_key: dict[str, tuple[str, dict[str, Any]]],
+    assertions: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+    claims: dict[str, dict[str, Any]],
+) -> None:
     mapping_by_release: dict[str, tuple[Any, Any]] = {}
     for release_id, release in releases.items():
         if release.get("cardReleaseId") != release_id:
@@ -719,25 +799,54 @@ def validate(
             if implements != [("work", expected_work_id)]:
                 errors.append(f"card release implements edge is missing or inconsistent: {release_id}")
             if mapping_state == "mapped-by-explicit-equivalence":
-                matching_assertions = []
-                for assertion_id, assertion in by_type["equivalence-assertion"].items():
-                    if (
-                        assertion.get("fromId") != release_id
-                        or assertion.get("toId") != expected_work_id
-                    ):
-                        continue
-                    assertion_relates = relations[("equivalence-assertion", assertion_id, "relates")]
-                    if sorted(assertion_relates) == sorted([
-                        ("card-release", release_id), ("work", expected_work_id)
-                    ]):
-                        matching_assertions.append(assertion_id)
-                if len(matching_assertions) != 1:
-                    errors.append(
-                        "mapped-by-explicit-equivalence card release lacks exactly one "
-                        f"matching equivalence assertion: {release_id}"
-                    )
+                _validate_explicit_equivalence(
+                    errors, release_id, expected_work_id, assertions, relations
+                )
         elif mapping_state in WORK_EMPTY_STATES and implements:
             errors.append(f"unmapped card release has an implements edge: {release_id}")
+
+    # Every materialized card-release claim must be recorded by that release.
+    for claim_id, claim in claims.items():
+        target_id = claim.get("materializedTargetId")
+        if target_id and claim.get("claimKind") == "card-release":
+            if claim_id not in (releases.get(target_id, {}).get("establishingClaimIds") or []):
+                errors.append(f"card release omits establishing claim: {target_id} -> {claim_id}")
+
+
+def _validate_release_claim_refs(
+    errors: list[str],
+    release_id: str,
+    release: dict[str, Any],
+    claims: dict[str, dict[str, Any]],
+) -> None:
+    establishing = release.get("establishingClaimIds") or []
+    if not establishing:
+        errors.append(f"card release has no establishing claim: {release_id}")
+    for claim_id in establishing:
+        claim = claims.get(claim_id)
+        if not claim:
+            errors.append(f"card release establishing claim is missing: {release_id} -> {claim_id}")
+            continue
+        if (
+            claim.get("claimKind") != "card-release"
+            or claim.get("materializedTargetId") != release_id
+            or claim.get("disposition") != "established-and-mapped"
+            or claim.get("evidenceStatus") != "confirmed"
+        ):
+            errors.append(f"card release establishing claim is not positive: {release_id} -> {claim_id}")
+    for claim_id in release.get("nonEstablishingClaimIds") or []:
+        if claim_id not in claims:
+            errors.append(f"card release non-establishing claim is missing: {release_id} -> {claim_id}")
+
+
+def _validate_release_editions(
+    errors: list[str],
+    releases: dict[str, dict[str, Any]],
+    editions: dict[str, dict[str, Any]],
+    claims: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
+    for release_id, release in releases.items():
         edition_id = release.get("setEditionId")
         edition = editions.get(edition_id)
         if not edition:
@@ -761,35 +870,34 @@ def validate(
         has_number = release.get("localNumber") is not None
         if not isinstance(known, bool) or has_set_code != has_number or known != has_set_code:
             errors.append(f"card release local identifier invariant failed: {release_id}")
-        establishing = release.get("establishingClaimIds") or []
-        if not establishing:
-            errors.append(f"card release has no establishing claim: {release_id}")
-        for claim_id in establishing:
-            claim = claims.get(claim_id)
-            if not claim:
-                errors.append(f"card release establishing claim is missing: {release_id} -> {claim_id}")
-                continue
-            if (
-                claim.get("claimKind") != "card-release"
-                or claim.get("materializedTargetId") != release_id
-                or claim.get("disposition") != "established-and-mapped"
-                or claim.get("evidenceStatus") != "confirmed"
-            ):
-                errors.append(f"card release establishing claim is not positive: {release_id} -> {claim_id}")
-        for claim_id in release.get("nonEstablishingClaimIds") or []:
-            if claim_id not in claims:
-                errors.append(f"card release non-establishing claim is missing: {release_id} -> {claim_id}")
+        _validate_release_claim_refs(errors, release_id, release, claims)
     for release_id in ISSUE304_NEEDS_EXPLICIT_RELEASES - set(releases):
         errors.append(f"issue #304 release is missing: {release_id}")
 
-    # Every materialized card-release claim must be recorded by that release.  This
-    # closes the opposite direction of the promotion invariant above.
-    for claim_id, claim in claims.items():
-        target_id = claim.get("materializedTargetId")
-        if target_id and claim.get("claimKind") == "card-release":
-            if claim_id not in (releases.get(target_id, {}).get("establishingClaimIds") or []):
-                errors.append(f"card release omits establishing claim: {target_id} -> {claim_id}")
 
+def _validate_releases(
+    errors: list[str],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+    claims: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+) -> None:
+    works_by_key = _validate_work_index(errors, by_type["work"])
+    _validate_release_work_mappings(
+        errors, releases, works_by_key, by_type["equivalence-assertion"], relations, claims
+    )
+    _validate_release_editions(errors, releases, by_type["set-edition"], claims, relations)
+
+# Physical-printing and legacy migration invariants.
+def _validate_printings_and_migrations(
+    errors: list[str],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+    claims: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    printings: dict[str, dict[str, Any]],
+    dispositions: list[dict[str, Any]],
+) -> dict[tuple[Any, Any], dict[str, Any]]:
     # Physical printings are classifications of an established card release and must
     # point back to their own positive establishing claim.
     for printing_id, printing in printings.items():
@@ -845,11 +953,23 @@ def validate(
         refs = migration.get("targetRefs") or ([] if migration.get("targetRef") is None else [migration["targetRef"]])
         if any(ref not in releases for ref in refs):
             errors.append(f"migration targetRefs contain unknown release: {migration.get('sourceId')}")
+    return migration_by_key
 
-    # Candidate claims are projections of several append-only identity stores.  Keep
-    # their keys and promotion-relevant fields accounted for here so a new confirmed
-    # unit, finish printing, source-first record, or specimen cannot vanish while the
-    # committed graph still passes its own summary checks.
+# Load append-only identity inputs once.
+def _load_identity_inputs(
+    identity_inputs: dict[str, Any] | None,
+    errors: list[str],
+    claims: dict[str, dict[str, Any]],
+) -> tuple[
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    dict[str, Any],
+    dict[tuple[str, str], dict[str, dict[str, Any]]],
+    dict[tuple[str, str], tuple[str, str | None, str | None]],
+]:
     identity_inputs = identity_inputs or {}
 
     def read_identity_input(key: str, relative: str, fallback: Any) -> Any:
@@ -878,29 +998,54 @@ def validate(
     specimens = specimens_raw.get("specimens", []) if isinstance(specimens_raw, dict) else []
     claims_by_source = {(row.get("sourceKind"), row.get("sourceId")): row for row in claims.values()}
     expected_claims: dict[tuple[str, str], tuple[str, str | None, str | None]] = {}
+    return units, codecards, finish_units, source_first, specimens, rekeys_raw, claims_by_source, expected_claims
 
-    def expect_claim(
-        source_kind: str,
-        source_id: Any,
-        evidence_status: str,
-        disposition: str | None,
-        source_record: str | None,
-    ) -> None:
-        key = (source_kind, str(source_id))
-        if key in expected_claims:
-            errors.append(f"duplicate identity input claim: {source_kind}:{source_id}")
-        expected_claims[key] = (evidence_status, disposition, source_record)
+# Identity input claim accounting and reviewed positive evidence.
+def _expect_identity_claim(
+    errors: list[str],
+    expected_claims: dict[tuple[str, str], tuple[str, str | None, str | None]],
+    source_kind: str,
+    source_id: Any,
+    evidence_status: str,
+    disposition: str | None,
+    source_record: str | None,
+) -> None:
+    key = (source_kind, str(source_id))
+    if key in expected_claims:
+        errors.append(f"duplicate identity input claim: {source_kind}:{source_id}")
+    expected_claims[key] = (evidence_status, disposition, source_record)
 
+
+def _collect_identity_claim_inputs(
+    errors: list[str],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    units: list[dict[str, Any]],
+    codecards: list[dict[str, Any]],
+    finish_units: list[dict[str, Any]],
+    source_first: list[dict[str, Any]],
+    specimens: list[dict[str, Any]],
+    expected_claims: dict[tuple[str, str], tuple[str, str | None, str | None]],
+) -> tuple[
+    dict[str, tuple[dict[str, Any], str]],
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+]:
     for unit in units:
         status = unit.get("status")
         disposition = {
             "confirmed": "established-and-mapped",
             "contradicted": "bounded-contradicted",
         }.get(status)
-        expect_claim("legacy-language-unit", unit.get("unitId"), status, disposition, unit.get("sourceUrl"))
+        _expect_identity_claim(
+            errors, expected_claims, "legacy-language-unit", unit.get("unitId"),
+            status, disposition, unit.get("sourceUrl"),
+        )
     for unit in codecards:
-        expect_claim("legacy-code-card-unit", unit.get("unitId"), "out-of-scope-product",
-                     "positively-excluded", None)
+        _expect_identity_claim(
+            errors, expected_claims, "legacy-code-card-unit", unit.get("unitId"),
+            "out-of-scope-product", "positively-excluded", None,
+        )
 
     finish_printings: dict[str, tuple[dict[str, Any], str]] = {}
     for finish_unit in finish_units:
@@ -910,26 +1055,42 @@ def validate(
             finish_printings[str(printing_id)] = (printing, str(finish_unit_id))
             status = printing.get("verificationStatus")
             disposition = "established-and-mapped" if status == "confirmed" else "candidate-needs-evidence"
-            expect_claim("finish-printing-record", printing_id, status, disposition, None)
+            _expect_identity_claim(
+                errors, expected_claims, "finish-printing-record", printing_id,
+                status, disposition, None,
+            )
     source_first_prints = {str(row.get("printId")): row for row in source_first}
     for row in source_first:
-        expect_claim("source-first-record", row.get("printId"), "confirmed",
-                     "established-and-mapped", row.get("sourceUrl"))
+        _expect_identity_claim(
+            errors, expected_claims, "source-first-record", row.get("printId"),
+            "confirmed", "established-and-mapped", row.get("sourceUrl"),
+        )
     observed_specimens = {
         str(row.get("specimenId")): row for row in specimens if row.get("physicalObservation")
     }
     for row in observed_specimens.values():
-        expect_claim("specimen-observation", row.get("specimenId"), "observed", None, None)
+        _expect_identity_claim(
+            errors, expected_claims, "specimen-observation", row.get("specimenId"),
+            "observed", None, None,
+        )
     reviewed_source_printings: dict[str, dict[str, Any]] = {}
     for source_id, source in by_type["set-source-record"].items():
         evidence = (source.get("raw") or {}).get("physicalPrintingEvidence")
         if not evidence:
             continue
         reviewed_source_printings[source_id] = evidence
-        expect_claim(
-            "reviewed-positive-evidence", source_id, "confirmed",
-            "established-and-mapped", evidence.get("sourceUrl"),
+        _expect_identity_claim(
+            errors, expected_claims, "reviewed-positive-evidence", source_id,
+            "confirmed", "established-and-mapped", evidence.get("sourceUrl"),
         )
+    return finish_printings, source_first_prints, observed_specimens, reviewed_source_printings
+
+
+def _validate_identity_claim_accounting(
+    errors: list[str],
+    claims_by_source: dict[tuple[str, Any], dict[str, Any]],
+    expected_claims: dict[tuple[str, str], tuple[str, str | None, str | None]],
+) -> None:
 
     actual_claim_keys = set(claims_by_source)
     if actual_claim_keys != set(expected_claims):
@@ -945,11 +1106,19 @@ def validate(
         if expected_source_record != claim.get("sourceRecord"):
             errors.append(f"identity claim source is stale: {key[0]}:{key[1]}")
 
+def _validate_reviewed_positive_evidence(
+    errors: list[str],
+    reviewed_source_printings: dict[str, dict[str, Any]],
+    claims_by_source: dict[tuple[str, Any], dict[str, Any]],
+    printings: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    source_records: dict[str, dict[str, Any]],
+) -> None:
     for source_id, evidence in reviewed_source_printings.items():
         claim = claims_by_source.get(("reviewed-positive-evidence", source_id))
         physical = printings.get((claim or {}).get("materializedTargetId"))
         release = releases.get((physical or {}).get("cardReleaseId"))
-        source = by_type["set-source-record"][source_id]
+        source = source_records[source_id]
         if not physical or not release:
             errors.append(f"reviewed physical-printing evidence is not materialized: {source_id}")
             continue
@@ -968,9 +1137,48 @@ def validate(
         if (source.get("raw") or {}).get("locality") != release.get("locality"):
             errors.append(f"reviewed physical-printing evidence locality differs: {source_id}")
 
-    def normalized(value: Any) -> str:
-        return "" if value is None else str(value)
 
+def _validate_identity_claims(
+    errors: list[str],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    claims: dict[str, dict[str, Any]],
+    printings: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    units: list[dict[str, Any]],
+    codecards: list[dict[str, Any]],
+    finish_units: list[dict[str, Any]],
+    source_first: list[dict[str, Any]],
+    specimens: list[dict[str, Any]],
+    claims_by_source: dict[tuple[str, Any], dict[str, Any]],
+    expected_claims: dict[tuple[str, str], tuple[str, str | None, str | None]],
+) -> tuple[
+    dict[str, tuple[dict[str, Any], str]],
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+]:
+    (
+        finish_printings, source_first_prints, observed_specimens, reviewed_source_printings,
+    ) = _collect_identity_claim_inputs(
+        errors, by_type, units, codecards, finish_units, source_first, specimens, expected_claims
+    )
+    _validate_identity_claim_accounting(errors, claims_by_source, expected_claims)
+    _validate_reviewed_positive_evidence(
+        errors, reviewed_source_printings, claims_by_source, printings, releases,
+        by_type["set-source-record"],
+    )
+    return finish_printings, source_first_prints, observed_specimens, reviewed_source_printings
+
+# Identity input projections stay aligned with graph nodes.
+def _validate_identity_projections(
+    errors: list[str],
+    units: list[dict[str, Any]],
+    claims_by_source: dict[tuple[str, Any], dict[str, Any]],
+    printings: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    finish_printings: dict[str, tuple[dict[str, Any], str]],
+    source_first_prints: dict[str, dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
     units_by_id = {str(row.get("unitId")): row for row in units}
     for unit_id, unit in units_by_id.items():
         claim = claims_by_source.get(("legacy-language-unit", unit_id))
@@ -987,7 +1195,7 @@ def validate(
             ("language", "language"), ("setCode", set_field), ("number", number_field),
             ("cardKey", "work"),
         ):
-            if normalized(unit.get(input_field)) != normalized(release.get(release_field)):
+            if _normalized(unit.get(input_field)) != _normalized(release.get(release_field)):
                 errors.append(f"identity release is stale: {unit_id}:{input_field}")
 
     for print_id, (printing, finish_unit_id) in finish_printings.items():
@@ -1015,9 +1223,18 @@ def validate(
             ("locality", "locality"), ("language", "language"), ("script", "script"),
             ("localSetCode", "localSetCode"), ("localNumber", "localNumber"),
         ):
-            if normalized(row.get(input_field)) != normalized(release.get(release_field)):
+            if _normalized(row.get(input_field)) != _normalized(release.get(release_field)):
                 errors.append(f"source-first release is stale: {print_id}:{input_field}")
+    return units_by_id
 
+# Same-work and reviewed re-key invariants.
+def _build_rekey_expectations(
+    errors: list[str],
+    rekeys_raw: dict[str, Any],
+    units_by_id: dict[str, dict[str, Any]],
+    claims_by_source: dict[tuple[str, Any], dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
     # Same-work/re-key decisions are another reviewed identity input.  They drive both
     # equivalence assertions and the one-to-many migration targetRefs contract.
     question_sets = rekeys_raw.get("questionSets", []) if isinstance(rekeys_raw, dict) else []
@@ -1068,7 +1285,16 @@ def validate(
                 "evidence": mapping.get("evidence"),
                 "destructiveMergeAllowed": False,
             }
-    graph_assertions = by_type["equivalence-assertion"]
+    return expected_assertions, expected_rekeys
+
+
+def _validate_rekey_assertions(
+    errors: list[str],
+    expected_assertions: dict[str, dict[str, Any]],
+    graph_assertions: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    works: dict[str, dict[str, Any]],
+) -> None:
     if set(graph_assertions) != set(expected_assertions):
         errors.append("re-key decisions and graph equivalence assertions differ")
     for assertion_id, expected in expected_assertions.items():
@@ -1077,8 +1303,17 @@ def validate(
             continue
         if any(assertion.get(field) != value for field, value in expected.items()):
             errors.append(f"re-key equivalence assertion is stale: {assertion_id}")
-        if assertion.get("fromId") not in releases or assertion.get("toId") not in by_type["work"]:
+        if assertion.get("fromId") not in releases or assertion.get("toId") not in works:
             errors.append(f"re-key equivalence target is invalid: {assertion_id}")
+
+
+def _validate_rekey_release_mappings(
+    errors: list[str],
+    expected_assertions: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    works: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     expected_equivalence_by_release: defaultdict[str, list[tuple[str, str | None]]] = defaultdict(list)
     for assertion_id, expected in expected_assertions.items():
         expected_equivalence_by_release[expected["fromId"]].append(
@@ -1104,7 +1339,7 @@ def validate(
             )
             continue
         assertion_id, expected_work_id = expected[0]
-        expected_work = by_type["work"].get(expected_work_id)
+        expected_work = works.get(expected_work_id)
         expected_card_key = expected_work.get("cardKey") if expected_work else None
         if release.get("work") != expected_card_key:
             errors.append(f"mapped-by-explicit-equivalence release Work is not canonical: {release_id}")
@@ -1114,82 +1349,148 @@ def validate(
             ("card-release", release_id), ("work", expected_work_id)
         ]):
             errors.append(f"mapped-by-explicit-equivalence assertion edge is not canonical: {release_id}")
+
+
+def _validate_rekey_migrations(
+    errors: list[str],
+    expected_rekeys: dict[str, dict[str, Any]],
+    migration_by_key: dict[tuple[Any, Any], dict[str, Any]],
+) -> None:
     for legacy_id, expected in expected_rekeys.items():
         migration = migration_by_key.get(("legacy-issue-rekey", legacy_id))
         targets = expected["targets"]
         expected_disposition = "linked-local-counterpart" if targets else expected["defaultDisposition"]
-        if not migration or migration.get("disposition") != expected_disposition \
-                or migration.get("targetRefs") != targets \
-                or migration.get("targetRef") != (targets[0] if targets else None) \
-                or migration.get("reason") != f"issue #{expected['issueNumber']} re-key":
+        if not migration or migration.get("disposition") != expected_disposition                 or migration.get("targetRefs") != targets                 or migration.get("targetRef") != (targets[0] if targets else None)                 or migration.get("reason") != f"issue #{expected['issueNumber']} re-key":
             errors.append(f"re-key migration disposition is stale: {legacy_id}")
 
-    for specimen_id, specimen in observed_specimens.items():
-        claim = claims_by_source.get(("specimen-observation", specimen_id))
-        if not claim or not claim.get("materializedTargetId"):
-            if specimen.get("physicalObservation", {}).get("coversMultipleCards"):
-                continue
-            provenance_target = claim.get("provenanceTargetId") if claim else None
-            corroborated = claim.get("corroboratedTargetId") if claim else None
-            target_id = provenance_target or corroborated
-            if target_id:
-                physical = printings.get(target_id)
-                if not physical:
-                    errors.append(f"specimen evidence target is missing: {specimen_id}")
-                elif ("candidate-claim", claim["claimId"],
-                      "provenance" if provenance_target else "corroborates",
-                      "physical-printing", target_id) \
-                        not in edge_keys:
-                    errors.append(f"specimen evidence edge is missing: {specimen_id}")
-                else:
-                    observation = specimen.get("physicalObservation", {})
-                    for field in ("finish", "edition", "foilPattern", "cardSize"):
-                        if physical.get(field) != specimen_observation_value(observation, field):
-                            errors.append(f"specimen printing is stale: {specimen_id}:{field}")
-                    if (physical.get("markings") or []) != specimen_markings(observation):
-                        errors.append(f"specimen printing is stale: {specimen_id}:markings")
-                    release = releases.get(physical.get("cardReleaseId"))
-                    if release:
-                        set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
-                        number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
-                        for input_field, release_field in (
-                            ("language", "language"), ("setCode", set_field),
-                            ("number", number_field),
-                        ):
-                            left = _number(specimen.get(input_field)) if input_field == "number" \
-                                else str(specimen.get(input_field) or "")
-                            right = _number(release.get(release_field)) if input_field == "number" \
-                                else str(release.get(release_field) or "")
-                            if left != right:
-                                errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
-            continue
-        physical = printings.get(claim["materializedTargetId"])
+
+def _validate_rekeys(
+    errors: list[str],
+    rekeys_raw: dict[str, Any],
+    units_by_id: dict[str, dict[str, Any]],
+    claims_by_source: dict[tuple[str, Any], dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+    migration_by_key: dict[tuple[Any, Any], dict[str, Any]],
+) -> None:
+    expected_assertions, expected_rekeys = _build_rekey_expectations(
+        errors, rekeys_raw, units_by_id, claims_by_source, releases
+    )
+    _validate_rekey_assertions(
+        errors, expected_assertions, by_type["equivalence-assertion"], releases, by_type["work"]
+    )
+    _validate_rekey_release_mappings(
+        errors, expected_assertions, releases, by_type["work"], relations
+    )
+    _validate_rekey_migrations(errors, expected_rekeys, migration_by_key)
+
+# Specimen observation and physical-printing alignment.
+def _validate_unmaterialized_specimen(
+    errors: list[str],
+    specimen_id: str,
+    specimen: dict[str, Any],
+    claim: dict[str, Any] | None,
+    printings: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    edge_keys: list[tuple[Any, ...]],
+) -> None:
+    if specimen.get("physicalObservation", {}).get("coversMultipleCards"):
+        return
+    provenance_target = claim.get("provenanceTargetId") if claim else None
+    corroborated = claim.get("corroboratedTargetId") if claim else None
+    target_id = provenance_target or corroborated
+    if not target_id:
+        return
+    physical = printings.get(target_id)
+    if not physical:
+        errors.append(f"specimen evidence target is missing: {specimen_id}")
+    elif ("candidate-claim", claim["claimId"],
+          "provenance" if provenance_target else "corroborates",
+          "physical-printing", target_id) not in edge_keys:
+        errors.append(f"specimen evidence edge is missing: {specimen_id}")
+    else:
         observation = specimen.get("physicalObservation", {})
-        if not physical:
-            errors.append(f"specimen printing target is missing: {specimen_id}")
-            continue
         for field in ("finish", "edition", "foilPattern", "cardSize"):
             if physical.get(field) != specimen_observation_value(observation, field):
                 errors.append(f"specimen printing is stale: {specimen_id}:{field}")
         if (physical.get("markings") or []) != specimen_markings(observation):
             errors.append(f"specimen printing is stale: {specimen_id}:markings")
-        if physical.get("basis") != observation.get("basis"):
-            errors.append(f"specimen basis is stale: {specimen_id}")
         release = releases.get(physical.get("cardReleaseId"))
-        if not release:
-            continue
-        set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
-        number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
-        for input_field, release_field in (
-            ("language", "language"), ("setCode", set_field), ("number", number_field),
-        ):
-            left = _number(specimen.get(input_field)) if input_field == "number" \
-                else normalized(specimen.get(input_field))
-            right = _number(release.get(release_field)) if input_field == "number" \
-                else normalized(release.get(release_field))
-            if left != right:
-                errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
+        if release:
+            set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
+            number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
+            for input_field, release_field in (
+                ("language", "language"), ("setCode", set_field), ("number", number_field),
+            ):
+                left = _number(specimen.get(input_field)) if input_field == "number"                     else str(specimen.get(input_field) or "")
+                right = _number(release.get(release_field)) if input_field == "number"                     else str(release.get(release_field) or "")
+                if left != right:
+                    errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
 
+
+def _validate_materialized_specimen(
+    errors: list[str],
+    specimen_id: str,
+    specimen: dict[str, Any],
+    claim: dict[str, Any],
+    printings: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+) -> None:
+    physical = printings.get(claim["materializedTargetId"])
+    observation = specimen.get("physicalObservation", {})
+    if not physical:
+        errors.append(f"specimen printing target is missing: {specimen_id}")
+        return
+    for field in ("finish", "edition", "foilPattern", "cardSize"):
+        if physical.get(field) != specimen_observation_value(observation, field):
+            errors.append(f"specimen printing is stale: {specimen_id}:{field}")
+    if (physical.get("markings") or []) != specimen_markings(observation):
+        errors.append(f"specimen printing is stale: {specimen_id}:markings")
+    if physical.get("basis") != observation.get("basis"):
+        errors.append(f"specimen basis is stale: {specimen_id}")
+    release = releases.get(physical.get("cardReleaseId"))
+    if not release:
+        return
+    set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
+    number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
+    for input_field, release_field in (
+        ("language", "language"), ("setCode", set_field), ("number", number_field),
+    ):
+        left = _number(specimen.get(input_field)) if input_field == "number"             else _normalized(specimen.get(input_field))
+        right = _number(release.get(release_field)) if input_field == "number"             else _normalized(release.get(release_field))
+        if left != right:
+            errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
+
+
+def _validate_specimens(
+    errors: list[str],
+    observed_specimens: dict[str, dict[str, Any]],
+    claims_by_source: dict[tuple[str, Any], dict[str, Any]],
+    printings: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    edge_keys: list[tuple[Any, ...]],
+) -> None:
+    for specimen_id, specimen in observed_specimens.items():
+        claim = claims_by_source.get(("specimen-observation", specimen_id))
+        if not claim or not claim.get("materializedTargetId"):
+            _validate_unmaterialized_specimen(
+                errors, specimen_id, specimen, claim, printings, releases, edge_keys
+            )
+            continue
+        _validate_materialized_specimen(
+            errors, specimen_id, specimen, claim, printings, releases
+        )
+
+# Append-only raw catalogue source boundary.
+def _validate_source_registry(
+    errors: list[str],
+    source_registry: dict[str, Any] | None,
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+) -> tuple[
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+]:
     # The raw catalogue registry is append-only.  Every raw record must have exactly
     # one graph source node and one disposition, and the graph node must preserve the
     # raw record byte-for-byte as parsed JSON.
@@ -1214,20 +1515,16 @@ def validate(
         disposition = graph_source_dispositions.get(source_id)
         if disposition and disposition.get("sourceRecordId") != source_id:
             errors.append(f"graph source disposition key mismatch: {source_id}")
+    return graph_sources, graph_source_dispositions
 
-    # Catalogue entities retain the old N9-N11 safety boundary: availability and
-    # aliases decorate established identities, while source, locality and closure
-    # semantics remain checked before the graph reaches SQLite consumers.
-    local_sets = by_type["local-set"]
-    localizations = by_type["localization"]
-    events = by_type["release-event"]
-    profiles = by_type["finish-profile"]
-    refs = by_type["catalogue-card-release-ref"]
-    rarities = by_type["rarity-claim"]
-    profile_claims = by_type["profile-finish-claim"]
-    aliases = by_type["catalogue-alias-assertion"]
-    source_assertions = by_type["source-assertion"]
-
+# Locality, localization, and local-set catalogue invariants.
+def _validate_localizations_and_sets(
+    errors: list[str],
+    localizations: dict[str, dict[str, Any]],
+    local_sets: dict[str, dict[str, Any]],
+    graph_sources: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     localization_tuples: set[tuple[str, str, str]] = set()
     for localization_id, localization in localizations.items():
         identity = (
@@ -1267,6 +1564,14 @@ def validate(
             if ("set-source-record", source_id) not in relations[("local-set", local_set_id, "observed-by")]:
                 errors.append(f"local set source edge is missing: {local_set_id} -> {source_id}")
 
+# Set-edition identity and graph edges.
+def _validate_editions(
+    errors: list[str],
+    editions: dict[str, dict[str, Any]],
+    local_sets: dict[str, dict[str, Any]],
+    localizations: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for edition_id, edition in editions.items():
         identity = edition.get("identity") if isinstance(edition.get("identity"), dict) else edition
         catalogue = edition.get("catalogue") if isinstance(edition.get("catalogue"), dict) else None
@@ -1294,6 +1599,15 @@ def validate(
         ] != [("localization", localization_id)]:
             errors.append(f"set edition localization edge is missing or non-unique: {edition_id}")
 
+# Release-event identity and scope.
+def _validate_events(
+    errors: list[str],
+    events: dict[str, dict[str, Any]],
+    local_sets: dict[str, dict[str, Any]],
+    editions: dict[str, dict[str, Any]],
+    graph_sources: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for event_id, event in events.items():
         local_set_id = event.get("localSetId")
         source_id = event.get("sourceRecordId")
@@ -1314,6 +1628,15 @@ def validate(
                 if ("set-edition", edition_id) not in relations[("release-event", event_id, "supports")]:
                     errors.append(f"release event edition edge is missing: {event_id} -> {edition_id}")
 
+# Finish-profile identity and scoped rules.
+def _validate_profiles(
+    errors: list[str],
+    profiles: dict[str, dict[str, Any]],
+    local_sets: dict[str, dict[str, Any]],
+    editions: dict[str, dict[str, Any]],
+    graph_sources: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for profile_id, profile in profiles.items():
         source_id = profile.get("sourceRecordId")
         if profile.get("finishProfileId") != profile_id or profile.get("localSetId") not in local_sets \
@@ -1337,6 +1660,14 @@ def validate(
                     or rule.get("sourceRecordId") not in graph_sources:
                 errors.append(f"finish profile rule is incomplete: {profile_id}")
 
+# Catalogue card-release references.
+def _validate_refs(
+    errors: list[str],
+    refs: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    editions: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for ref_id, ref in refs.items():
         card_release_id = ref.get("cardReleaseId")
         set_edition_id = ref.get("setEditionId")
@@ -1349,6 +1680,14 @@ def validate(
         if ("set-edition", set_edition_id) not in relations[("catalogue-card-release-ref", ref_id, "belongs-to")]:
             errors.append(f"catalogue release edition edge is missing: {ref_id}")
 
+# Source-native rarity claims.
+def _validate_rarities(
+    errors: list[str],
+    rarities: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
+    graph_sources: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for rarity_id, rarity in rarities.items():
         source_id = rarity.get("sourceRecordId")
         release = releases.get(rarity.get("cardReleaseId"))
@@ -1364,6 +1703,14 @@ def validate(
         if ("set-source-record", source_id) not in relations[("rarity-claim", rarity_id, "observed-by")]:
             errors.append(f"rarity claim source edge is missing: {rarity_id}")
 
+# Finish-profile claims.
+def _validate_profile_claims(
+    errors: list[str],
+    profile_claims: dict[str, dict[str, Any]],
+    profiles: dict[str, dict[str, Any]],
+    refs: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for claim_id, claim in profile_claims.items():
         profile_id = claim.get("finishProfileId")
         card_release_id = claim.get("cardReleaseId")
@@ -1376,6 +1723,14 @@ def validate(
         if ("card-release", card_release_id) not in relations[("profile-finish-claim", claim_id, "asserts-finish-for")]:
             errors.append(f"profile finish release edge is missing: {claim_id}")
 
+# Catalogue aliases.
+def _validate_aliases(
+    errors: list[str],
+    aliases: dict[str, dict[str, Any]],
+    graph_sources: dict[str, dict[str, Any]],
+    local_sets: dict[str, dict[str, Any]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     for alias_id, alias in aliases.items():
         local_set_id = alias.get("localSetId")
         if alias.get("aliasAssertionId") != alias_id or alias.get("sourceRecordId") not in graph_sources \
@@ -1387,6 +1742,14 @@ def validate(
         if ("local-set", local_set_id) not in relations[("catalogue-alias-assertion", alias_id, "identifies")]:
             errors.append(f"catalogue alias target edge is missing: {alias_id}")
 
+# Provider assertion edges.
+def _validate_source_assertions(
+    errors: list[str],
+    source_assertions: dict[str, dict[str, Any]],
+    graph_sources: dict[str, dict[str, Any]],
+    by_type: defaultdict[str, dict[str, dict[str, Any]]],
+    relations: defaultdict[tuple[str, str, str], list[tuple[str, str]]],
+) -> None:
     assertion_targets = {
         "asserts-rarity-claim": ("rarityClaimId", "rarity-claim"),
         "asserts-local-set": ("localSetId", "local-set"),
@@ -1405,6 +1768,15 @@ def validate(
             errors.append(f"source assertion source edge is missing: {assertion_id}")
         if (target_type, target_id) not in relations[("source-assertion", assertion_id, kind)]:
             errors.append(f"source assertion target edge is missing: {assertion_id}")
+
+# Graph summary counts.
+def _validate_summary(
+    errors: list[str],
+    graph: dict[str, Any],
+    entities: list[dict[str, Any]],
+    edges: list[dict[str, Any]],
+    dispositions: list[dict[str, Any]],
+) -> None:
     summary = graph.get("summary", {})
     if summary.get("entities") != len(entities) or summary.get("edges") != len(edges):
         errors.append("graph summary does not match entity/edge counts")
@@ -1420,8 +1792,70 @@ def validate(
     ):
         if summary.get(summary_key) != sum(row["entityType"] == entity_type for row in entities):
             errors.append(f"graph summary does not match {entity_type} count")
-    return errors
 
+def validate(
+    graph: dict[str, Any],
+    source_registry: dict[str, Any] | None = None,
+    identity_inputs: dict[str, Any] | None = None,
+) -> list[str]:
+    """Validate graph structure and the evidence/promotion invariants it carries.
+
+    The graph is the committed authority, but the raw catalogue registry remains the
+    append-only source of source-record identities.  Keeping that comparison here
+    prevents a newly appended source record from silently disappearing at the migration
+    boundary.
+    """
+    errors: list[str] = []
+    entities, entity_set, by_type, edges, edge_keys, relations, dispositions = _validate_shape(
+        graph, errors
+    )
+    claims, releases, printings = _validate_claims(errors, by_type, relations)
+    _validate_releases(errors, by_type, relations, claims, releases)
+    migration_by_key = _validate_printings_and_migrations(
+        errors, by_type, relations, claims, releases, printings, dispositions
+    )
+    (
+        units, codecards, finish_units, source_first, specimens, rekeys_raw,
+        claims_by_source, expected_claims,
+    ) = _load_identity_inputs(identity_inputs, errors, claims)
+    (
+        finish_printings, source_first_prints, observed_specimens, reviewed_source_printings,
+    ) = _validate_identity_claims(
+        errors, by_type, claims, printings, releases, units, codecards, finish_units,
+        source_first, specimens, claims_by_source, expected_claims,
+    )
+    units_by_id = _validate_identity_projections(
+        errors, units, claims_by_source, printings, releases, finish_printings, source_first_prints
+    )
+    _validate_rekeys(
+        errors, rekeys_raw, units_by_id, claims_by_source, releases, by_type,
+        relations, migration_by_key,
+    )
+    _validate_specimens(errors, observed_specimens, claims_by_source, printings, releases, edge_keys)
+    graph_sources, graph_source_dispositions = _validate_source_registry(
+        errors, source_registry, by_type
+    )
+    local_sets = by_type["local-set"]
+    localizations = by_type["localization"]
+    editions = by_type["set-edition"]
+    events = by_type["release-event"]
+    profiles = by_type["finish-profile"]
+    refs = by_type["catalogue-card-release-ref"]
+    rarities = by_type["rarity-claim"]
+    profile_claims = by_type["profile-finish-claim"]
+    aliases = by_type["catalogue-alias-assertion"]
+    source_assertions = by_type["source-assertion"]
+    _validate_localizations_and_sets(errors, localizations, local_sets, graph_sources, relations)
+    _validate_editions(errors, editions, local_sets, localizations, relations)
+    _validate_events(errors, events, local_sets, editions, graph_sources, relations)
+    _validate_profiles(errors, profiles, local_sets, editions, graph_sources, relations)
+    _validate_refs(errors, refs, releases, editions, relations)
+    _validate_rarities(errors, rarities, releases, graph_sources, relations)
+    _validate_profile_claims(errors, profile_claims, profiles, refs, relations)
+    _validate_aliases(errors, aliases, graph_sources, local_sets, relations)
+    _validate_source_assertions(errors, source_assertions, graph_sources, by_type, relations)
+    _validate_summary(errors, graph, entities, edges, dispositions)
+    return errors
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)

@@ -682,7 +682,7 @@ def project_unit_onto_product(unit: dict[str, Any], token: str) -> dict[str, Any
     }
 
 
-def main() -> None:
+def _load_finish_context() -> dict[str, Any]:
     cards_document = read_json(CARDS_PATH)
     cards = cards_document["cards"]
     units = read_json(UNITS_PATH)
@@ -733,6 +733,26 @@ def main() -> None:
             and str(unit.get("sourceUrl") or "").startswith("https://api.tcgdex.net/")
         }
     )
+
+    return {
+        "cards_document": cards_document,
+        "cards": cards,
+        "units": units,
+        "overrides_document": overrides_document,
+        "specimens_document": specimens_document,
+        "specimens_by_group": specimens_by_group,
+        "reverse_conflicts": reverse_conflicts,
+        "owner_finish_decisions": owner_finish_decisions,
+        "source_registry": source_registry,
+        "cards_by_product": cards_by_product,
+        "grouped_units": grouped_units,
+        "tcgdex_urls": tcgdex_urls,
+    }
+
+
+def _resolve_tcgdex(context: dict[str, Any]) -> int | None:
+    """Resolve offline, refresh, and refresh-accept modes before projection starts."""
+    tcgdex_urls = context["tcgdex_urls"]
     tcgdex_data: dict[str, dict[str, Any]] = {}
     fetch_errors: dict[str, str] = {}
     refresh = "--refresh" in sys.argv or "--refresh-cache" in sys.argv
@@ -803,7 +823,20 @@ def main() -> None:
         for url, reason in sorted(fetch_errors.items()):
             print(f"unreachable: {url} — {reason}", file=sys.stderr)
         return 2
+    context.update({
+        "tcgdex_data": tcgdex_data,
+        "fetch_errors": fetch_errors,
+        "accepted_refresh": accepted_refresh,
+        "refresh": refresh,
+    })
+    return None
 
+
+def _prepare_finish_indexes(context: dict[str, Any]) -> None:
+    """Build local lookup indexes and reject duplicate evidence references."""
+    units = context["units"]
+    overrides_document = context["overrides_document"]
+    specimens_document = context["specimens_document"]
     tcgdex_sibling_url: dict[tuple[str, str], str] = {}
     for unit in units:
         url = str(unit.get("sourceUrl") or "")
@@ -829,12 +862,67 @@ def main() -> None:
                     "finish_overrides duplicates specimen evidence: "
                     + ", ".join(sorted(duplicate_refs or refs))
                 )
+    context.update({
+        "tcgdex_sibling_url": tcgdex_sibling_url,
+        "overrides_by_group": overrides_by_group,
+        "specimens_by_id": specimens_by_id,
+    })
 
-    finish_units: list[dict[str, Any]] = []
-    for finish_index, key in enumerate(sorted(grouped_units, key=group_sort_key)):
-        set_code, number, language = key
-        member_units = grouped_units[key]
-        products: list[dict[str, Any]] = []
+
+def _build_finish_unit(
+    context: dict[str, Any], finish_index: int, key: tuple[str, str, str]
+) -> dict[str, Any]:
+    cards_by_product = context["cards_by_product"]
+    grouped_units = context["grouped_units"]
+    tcgdex_data = context["tcgdex_data"]
+    tcgdex_sibling_url = context["tcgdex_sibling_url"]
+    source_registry = context["source_registry"]
+    overrides_by_group = context["overrides_by_group"]
+    specimens_by_group = context["specimens_by_group"]
+    specimens_by_id = context["specimens_by_id"]
+    reverse_conflicts = context["reverse_conflicts"]
+    owner_finish_decisions = context["owner_finish_decisions"]
+    set_code, number, language = key
+    member_units = grouped_units[key]
+    products: list[dict[str, Any]] = []
+    active_variants = None
+    all_claims_contradicted = None
+    applicable_overrides = None
+    auto_card_size = None
+    auto_mapping = None
+    available_finishes = None
+    bounded_manifest_urls = None
+    candidate = None
+    card_name = None
+    complete_manifest = None
+    completeness_status = None
+    exact_urls = None
+    field = None
+    finish = None
+    finish_status = None
+    finish_unit_id = None
+    inferred_reverse_pattern = None
+    known_printings = None
+    manifest_scopes = None
+    manifests = None
+    manual = None
+    mapped_variants = None
+    override = None
+    pattern_status = None
+    present_variants = None
+    printing = None
+    printings = None
+    product = None
+    product_mapping_status = None
+    required_variants = None
+    set_name = None
+    source = None
+    sources = None
+    unit = None
+    unknown_finish_printings = None
+    unresolved = None
+    def _build_finish_unit_part1():
+        nonlocal active_variants, all_claims_contradicted, card_name, present_variants, printings, product, set_name, unit
         for unit in sorted(member_units, key=lambda item: variant_token(item)):
             product_key = (set_code, number, variant_token(unit))
             card = cards_by_product.get(product_key)
@@ -862,8 +950,10 @@ def main() -> None:
         all_claims_contradicted = bool(products) and not active_variants
         card_name = member_units[0]["cardName"]
         set_name = member_units[0]["setName"]
-        printings: list[dict[str, Any]] = []
+        printings = []
 
+    def _build_finish_unit_part2():
+        nonlocal auto_card_size, auto_mapping, exact_urls, inferred_reverse_pattern, product, unit
         exact_urls = sorted(
             {
                 str(unit.get("sourceUrl") or "")
@@ -884,6 +974,8 @@ def main() -> None:
             "jumbo" if auto_product and auto_product.get("rarity") == "Oversized" else "standard"
         ) if auto_product else "unknown"
 
+    def _build_finish_unit_part3():
+        nonlocal field, finish, sources
         for url in exact_urls:
             payload = tcgdex_data.get(url)
             if payload is None:
@@ -916,6 +1008,8 @@ def main() -> None:
                     },
                 )
 
+    def _build_finish_unit_part4():
+        nonlocal product, sources
         for product in products:
             if product["claimStatus"] == "contradicted":
                 continue
@@ -1010,15 +1104,16 @@ def main() -> None:
                         },
                     )
 
+    def _build_finish_unit_part5():
+        nonlocal applicable_overrides, override
         applicable_overrides = [
             override
             for override in overrides_by_group.get((set_code, number), [])
             if not override.get("languages") or language in override["languages"]
         ]
 
-        # Physical observations are canonical positive evidence. If a curated override cites
-        # the same listing, carry its optional identity (for example distribution) onto the
-        # specimen before semantic signature matching, so one card cannot become two printings.
+    def _build_finish_unit_part6():
+        nonlocal candidate, field, manual, override
         for specimen in specimens_by_group.get((set_code, number, language), []):
             candidate = specimen_printing(specimen)
             if candidate is not None:
@@ -1065,78 +1160,87 @@ def main() -> None:
                         break
                 add_printing(printings, candidate)
 
-        for override in applicable_overrides:
-            suppressed = set(override.get("suppressAutoFinishes") or [])
-            if suppressed:
-                # Suppression corrects catalogue-derived guesses; only a positive TCGdex
-                # variants=true response is immune.
-                printings = [
-                    printing
-                    for printing in printings
-                    if not (
-                        printing.get("_origin") == "auto"
-                        and printing["finish"] in suppressed
-                        and not any(
-                            str(source.get("url") or "").startswith("https://api.tcgdex.net/")
-                            for source in printing.get("sources") or []
+    def _build_finish_unit_part7():
+        nonlocal candidate, finish, manual, mapped_variants, override, printing, printings, product, source
+        def _build_finish_unit_part7_suppression():
+            nonlocal override, printing, printings, product, source
+            for override in applicable_overrides:
+                suppressed = set(override.get("suppressAutoFinishes") or [])
+                if suppressed:
+                    # Suppression corrects catalogue-derived guesses; only a positive TCGdex
+                    # variants=true response is immune.
+                    printings = [
+                        printing
+                        for printing in printings
+                        if not (
+                            printing.get("_origin") == "auto"
+                            and printing["finish"] in suppressed
+                            and not any(
+                                str(source.get("url") or "").startswith("https://api.tcgdex.net/")
+                                for source in printing.get("sources") or []
+                            )
                         )
-                    )
-                ]
-            for finish, mapped_variants in (override.get("mapAutoFinishes") or {}).items():
-                usable = sorted(set(mapped_variants) & present_variants)
-                mapped_sizes = {
-                    "jumbo" if product.get("rarity") == "Oversized" else "standard"
-                    for product in products
-                    if product["variant"] in usable
-                }
-                for printing in printings:
-                    observed_variants = {
-                        str(specimens_by_id[specimen_id].get("variant"))
-                        for specimen_id in printing.get("specimenIds") or []
-                        if specimen_id in specimens_by_id
+                    ]
+                for finish, mapped_variants in (override.get("mapAutoFinishes") or {}).items():
+                    usable = sorted(set(mapped_variants) & present_variants)
+                    mapped_sizes = {
+                        "jumbo" if product.get("rarity") == "Oversized" else "standard"
+                        for product in products
+                        if product["variant"] in usable
                     }
-                    if printing["finish"] == finish and (
-                        printing.get("_origin") == "auto" or observed_variants
-                    ):
-                        printing["mappedVariants"] = sorted(set(usable) | observed_variants)
-                        if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
-                            printing["cardSize"] = next(iter(mapped_sizes))
-            for manual in override.get("printings") or []:
-                if manual.get("evidenceOnlyForSpecimen"):
-                    continue
-                requested_variants = list(manual.get("mappedVariants") or [])
-                mapped_variants = sorted(set(requested_variants) & present_variants)
-                if requested_variants and not mapped_variants:
-                    continue
-                candidate = {
-                    "finish": manual["finish"],
-                    "foilPattern": manual.get("foilPattern"),
-                    "markings": manual.get("markings"),
-                    "distribution": manual.get("distribution"),
-                    "cardSize": manual.get("cardSize", "unknown"),
-                    "mappedVariants": mapped_variants,
-                    "verificationStatus": manual["verificationStatus"],
-                    "sources": resolve_override_sources(
-                        manual.get("sourceRefs") or [], source_registry, products, mapped_variants
-                    ),
-                    "_origin": "manual",
-                }
-                if "edition" in manual:
-                    candidate["edition"] = manual["edition"]
-                if "releaseDate" in manual:
-                    candidate["releaseDate"] = manual["releaseDate"]
-                if "image" in manual:
-                    candidate["image"] = manual["image"]
-                add_printing(printings, candidate)
+                    for printing in printings:
+                        observed_variants = {
+                            str(specimens_by_id[specimen_id].get("variant"))
+                            for specimen_id in printing.get("specimenIds") or []
+                            if specimen_id in specimens_by_id
+                        }
+                        if printing["finish"] == finish and (
+                            printing.get("_origin") == "auto" or observed_variants
+                        ):
+                            printing["mappedVariants"] = sorted(set(usable) | observed_variants)
+                            if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
+                                printing["cardSize"] = next(iter(mapped_sizes))
 
+        def _build_finish_unit_part7_manual():
+            nonlocal candidate, mapped_variants, override
+            for override in applicable_overrides:
+                for manual in override.get("printings") or []:
+                    if manual.get("evidenceOnlyForSpecimen"):
+                        continue
+                    requested_variants = list(manual.get("mappedVariants") or [])
+                    mapped_variants = sorted(set(requested_variants) & present_variants)
+                    if requested_variants and not mapped_variants:
+                        continue
+                    candidate = {
+                        "finish": manual["finish"],
+                        "foilPattern": manual.get("foilPattern"),
+                        "markings": manual.get("markings"),
+                        "distribution": manual.get("distribution"),
+                        "cardSize": manual.get("cardSize", "unknown"),
+                        "mappedVariants": mapped_variants,
+                        "verificationStatus": manual["verificationStatus"],
+                        "sources": resolve_override_sources(
+                            manual.get("sourceRefs") or [], source_registry, products, mapped_variants
+                        ),
+                        "_origin": "manual",
+                    }
+                    if "edition" in manual:
+                        candidate["edition"] = manual["edition"]
+                    if "releaseDate" in manual:
+                        candidate["releaseDate"] = manual["releaseDate"]
+                    if "image" in manual:
+                        candidate["image"] = manual["image"]
+                    add_printing(printings, candidate)
+
+        _build_finish_unit_part7_suppression()
+        _build_finish_unit_part7_manual()
+
+    def _build_finish_unit_part8():
+        nonlocal available_finishes, finish, finish_status, finish_unit_id, printing, printings
         deduplicated_printings: list[dict[str, Any]] = []
         for printing in printings:
             add_printing(deduplicated_printings, printing)
-        # A finish cannot be attached to a product-language claim that the language
-        # verification layer has already disproved. These units remain in the state
-        # store for exact key coverage, but they are not finish-research work.
         printings = [] if all_claims_contradicted else deduplicated_printings
-
         printings.sort(
             key=lambda item: (
                 FINISHES.index(item["finish"]) if item["finish"] in FINISHES else 99,
@@ -1151,12 +1255,14 @@ def main() -> None:
         for printing_index, printing in enumerate(printings, 1):
             printing["printingId"] = f"{finish_unit_id}-P{printing_index:02d}"
             printing.pop("_origin", None)
-
         available_finishes = [finish for finish in FINISHES if any(p["finish"] == finish for p in printings)]
         finish_status = {
             finish: "not-applicable" if all_claims_contradicted else strongest_status(printings, finish)
             for finish in FINISHES
         }
+
+    def _build_finish_unit_part9():
+        nonlocal complete_manifest, known_printings, manifest_scopes, manifests, mapped_variants, printing, product_mapping_status, required_variants, source, unknown_finish_printings
         mapped_variants = {variant for printing in printings for variant in printing["mappedVariants"]}
         required_variants = active_variants
         if not required_variants:
@@ -1167,12 +1273,14 @@ def main() -> None:
             product_mapping_status = "partial"
         else:
             product_mapping_status = "pending"
-
         known_printings = [printing for printing in printings if printing["finish"] in FINISHES]
         unknown_finish_printings = [printing for printing in printings if printing["finish"] == "unknown"]
         manifests = complete_manifests(known_printings, language)
         manifest_scopes = {source["closureScope"] for source in manifests}
         complete_manifest = not unknown_finish_printings and "finish-unit" in manifest_scopes
+
+    def _build_finish_unit_part10():
+        nonlocal bounded_manifest_urls, pattern_status, printing, source, unresolved
         pattern_target_printings = [
             printing for printing in printings if printing["finish"] in {"reverse-holo", "mirror-holo"}
         ]
@@ -1185,8 +1293,7 @@ def main() -> None:
             pattern_status = "partial"
         else:
             pattern_status = "pending"
-
-        unresolved: list[str] = []
+        unresolved = []
         if not all_claims_contradicted and not known_printings:
             unresolved.append("No positive finish evidence has been recorded for this set-number-language unit.")
         if unknown_finish_printings:
@@ -1198,6 +1305,9 @@ def main() -> None:
             source.get("url") for source in manifests
             if source["closureScope"] != "finish-unit" and source.get("url")
         }
+
+    def _build_finish_unit_part11():
+        nonlocal completeness_status, printing, product, source
         uncovered_printings = [
             printing["printingId"] for printing in printings
             if bounded_manifest_urls and not any(
@@ -1221,7 +1331,6 @@ def main() -> None:
             product["claimStatus"] == "contradicted" for product in products
         ):
             unresolved.append("The underlying Cardmarket language claim is contradicted for at least one product variant.")
-
         if all_claims_contradicted:
             completeness_status = "not-applicable"
         elif complete_manifest:
@@ -1240,29 +1349,50 @@ def main() -> None:
         else:
             completeness_status = "pending"
 
-        finish_units.append(
-            {
-                "finishUnitId": finish_unit_id,
-                "cardName": card_name,
-                "setCode": set_code,
-                "setName": set_name,
-                "number": number,
-                "language": language,
-                "products": products,
-                "availableFinishes": available_finishes,
-                "finishStatus": finish_status,
-                "applicabilityStatus": "not-applicable" if all_claims_contradicted else "applicable",
-                "availabilityStatus": (
-                    "not-applicable" if all_claims_contradicted else strongest_status(known_printings)
-                ),
-                "completenessStatus": completeness_status,
-                "productMappingStatus": product_mapping_status,
-                "patternStatus": pattern_status,
-                "printings": printings,
-                "unresolved": unresolved,
-            }
-        )
+    _build_finish_unit_part1()
+    _build_finish_unit_part2()
+    _build_finish_unit_part3()
+    _build_finish_unit_part4()
+    _build_finish_unit_part5()
+    _build_finish_unit_part6()
+    _build_finish_unit_part7()
+    _build_finish_unit_part8()
+    _build_finish_unit_part9()
+    _build_finish_unit_part10()
+    _build_finish_unit_part11()
+    return {
+            "finishUnitId": finish_unit_id,
+            "cardName": card_name,
+            "setCode": set_code,
+            "setName": set_name,
+            "number": number,
+            "language": language,
+            "products": products,
+            "availableFinishes": available_finishes,
+            "finishStatus": finish_status,
+            "applicabilityStatus": "not-applicable" if all_claims_contradicted else "applicable",
+            "availabilityStatus": (
+                "not-applicable" if all_claims_contradicted else strongest_status(known_printings)
+            ),
+            "completenessStatus": completeness_status,
+            "productMappingStatus": product_mapping_status,
+            "patternStatus": pattern_status,
+            "printings": printings,
+            "unresolved": unresolved,
+        }
 
+
+def _build_finish_units(context: dict[str, Any]) -> list[dict[str, Any]]:
+    grouped_units = context["grouped_units"]
+    finish_units: list[dict[str, Any]] = []
+    for finish_index, key in enumerate(sorted(grouped_units, key=group_sort_key)):
+        finish_units.append(_build_finish_unit(context, finish_index, key))
+    return finish_units
+
+
+
+
+def _project_cards(cards: list[dict[str, Any]], finish_units: list[dict[str, Any]]) -> None:
     finish_lookup = {
         (unit["setCode"], unit["number"], unit["language"]): unit for unit in finish_units
     }
@@ -1315,6 +1445,13 @@ def main() -> None:
             "byLanguage": by_language,
         }
 
+
+def _build_finish_counts(
+    cards_document: dict[str, Any],
+    finish_units: list[dict[str, Any]],
+    tcgdex_urls: list[str],
+    fetch_errors: dict[str, str],
+) -> dict[str, int]:
     counts = {
         "totalFinishUnits": len(finish_units),
         "withConfirmedFinish": sum(unit["availabilityStatus"] == "confirmed" for unit in finish_units),
@@ -1358,6 +1495,14 @@ def main() -> None:
     )
     cards_document["meta"]["notes"] = notes
 
+    return counts
+
+
+def _build_finish_documents(
+    finish_units: list[dict[str, Any]],
+    counts: dict[str, int],
+    fetch_errors: dict[str, str],
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
     finish_document = {
         "meta": {
             "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
@@ -1469,6 +1614,16 @@ def main() -> None:
         ],
     }
 
+    return finish_document, review_document, analysis, review_rows
+
+
+def _write_finish_outputs(
+    cards_document: dict[str, Any],
+    finish_document: dict[str, Any],
+    review_document: dict[str, Any],
+    analysis: dict[str, Any],
+    review_rows: list[dict[str, Any]],
+) -> None:
     write_json(OUTPUT_PATH, finish_document)
     write_json(REVIEW_JSON_PATH, review_document)
     write_json(ANALYSIS_PATH, analysis)
@@ -1507,6 +1662,14 @@ def main() -> None:
                 ]
             )
 
+def _finish_summary(
+    counts: dict[str, int],
+    review_rows: list[dict[str, Any]],
+    tcgdex_data: dict[str, dict[str, Any]],
+    tcgdex_urls: list[str],
+    fetch_errors: dict[str, str],
+    accepted_refresh: bool,
+) -> int:
     print(f"finish units: {counts['totalFinishUnits']}")
     print(
         "availability: "
@@ -1535,6 +1698,27 @@ def main() -> None:
     if accepted_refresh:
         REFRESH_CANDIDATE_PATH.unlink(missing_ok=True)
     return 0
+
+def main() -> int:
+    context = _load_finish_context()
+    cards_document = context["cards_document"]
+    cards = context["cards"]
+    tcgdex_urls = context["tcgdex_urls"]
+    status = _resolve_tcgdex(context)
+    if status is not None:
+        return status
+    tcgdex_data = context["tcgdex_data"]
+    fetch_errors = context["fetch_errors"]
+    accepted_refresh = context["accepted_refresh"]
+    _prepare_finish_indexes(context)
+
+    finish_units = _build_finish_units(context)
+    _project_cards(cards, finish_units)
+    counts = _build_finish_counts(cards_document, finish_units, tcgdex_urls, fetch_errors)
+    finish_document, review_document, analysis, review_rows = _build_finish_documents(finish_units, counts, fetch_errors)
+    _write_finish_outputs(cards_document, finish_document, review_document, analysis, review_rows)
+    return _finish_summary(counts, review_rows, tcgdex_data, tcgdex_urls, fetch_errors, accepted_refresh)
+
 
 
 def reproject() -> None:

@@ -77,18 +77,8 @@ def printings_of(unit: dict | None) -> list[dict]:
     return list(unit.get("printings") or []) if unit else []
 
 
-def main() -> int:
-    suite = Suite()
-
-    units = read_json(VERIFICATION / "units.json")
-    cards = read_json(ROOT / "snorlax_cards.json")["cards"]
-    excluded = read_json(VERIFICATION / "excluded_codecards.json")
-    finish_units = read_json(VERIFICATION / "finish_units.json")["units"]
-    finish_review = read_json(VERIFICATION / "FINISH_REVIEW.json")
-    finish_overrides = read_json(VERIFICATION / "finish_overrides.json")
-    tcgdex_snapshot = read_json(VERIFICATION / "finish_tcgdex_snapshot.json")["records"]
-
-    # --- 1. unit totals and identity ---
+def _check_unit_store(suite: Suite, units: list[dict], cards: list[dict], excluded: list[dict]) -> None:
+    """Check unit identity, status shape, evidence, and card coverage."""
     suite.report("units total", len(units), 719)
     seen: dict[str, int] = {}
     for unit in units:
@@ -101,15 +91,12 @@ def main() -> int:
         status = unit.get("status")
         status_counts[status] = status_counts.get(status, 0) + 1
     stray = [status for status in status_counts if status not in KNOWN_STATUSES]
-    # Sorted by name, because that is what Group-Object did and this string is read against the
-    # PowerShell's output history, not against the order units happen to appear in.
     suite.check("no stray statuses", not stray,
                 ", ".join(f"{name}={status_counts[name]}" for name in sorted(status_counts)))
     total = sum(status_counts.values())
     suite.check("status sum equals unit count", total == len(units),
                 f"sum={total} units={len(units)}")
 
-    # --- 2. resolved units carry full evidence ---
     bad_evidence, bad_source = [], []
     for unit in units:
         if unit.get("status") in RESOLVED:
@@ -123,38 +110,32 @@ def main() -> int:
                 ",".join(first(bad_evidence)))
     suite.check("resolved units have sourceType", not bad_source, ",".join(first(bad_source)))
 
-    # --- 3. no stale manualReason on resolved units ---
     stale = [u for u in units if u.get("status") in RESOLVED and u.get("manualReason")]
     suite.check("no manualReason on resolved units", not stale,
                 ",".join(u.get("unitId") for u in first(stale)))
-
-    # --- 4. units cover exactly the non-code cards' languages ---
     expected = sum(len(c.get("languages") or []) for c in cards if not c.get("isCodeCard"))
     suite.check("unit rows match non-code card language claims", expected == len(units),
                 f"non-code card langs={expected}, units={len(units)}")
     suite.report("excluded code-card units", len(excluded), 75)
 
-    # --- 5. every unit maps to a card ---
     card_keys = {f"{c.get('setCode')}|{c.get('number')}|{c.get('variantToken') or 'base'}"
                  for c in cards}
     orphans = [u for u in units
                if f"{u.get('setCode')}|{u.get('number')}|{u.get('variant')}" not in card_keys]
     suite.check("no orphaned units", not orphans,
                 "; ".join(f"{u.get('setCode')} {u.get('number')} {u.get('variant')}"
-                          for u in first(orphans)))
+                           for u in first(orphans)))
 
-    # --- 6. images exist ---
+
+def _check_card_metadata(suite: Suite, cards: list[dict]) -> None:
     missing_images = [c for c in cards if not (ROOT / str(c.get("imageFile"))).exists()]
     suite.check("all 198 images on disk", not missing_images, f"{len(missing_images)} missing")
-
-    # --- 7. named variants present ---
     suite.report("named variants", sum(1 for c in cards if c.get("variantName")), 11)
-
-    # --- 8. artist coverage ---
     suite.report("artist coverage", sum(1 for c in cards if c.get("artist")), 115,
                  f"of {len(cards)} cards")
 
-    # --- 9. evidence log is valid JSONL ---
+
+def _check_evidence_log(suite: Suite) -> None:
     bad_lines = 0
     line_number = 0
     for line in (VERIFICATION / "evidence.jsonl").read_text(encoding="utf-8-sig").splitlines():
@@ -168,13 +149,10 @@ def main() -> int:
     suite.check(f"evidence.jsonl parses ({line_number} lines)", bad_lines == 0,
                 f"{bad_lines} bad lines")
 
-    # --- 10. remaining work is exactly as documented ---
+
+def _check_work_queue(suite: Suite, units: list[dict]) -> None:
     pending = [u for u in units if u.get("status") == "pending"]
     manual = [u for u in units if u.get("status") == "needs-manual-review"]
-    # Queue depths, so down is progress and the baseline is the low-water mark rather than the
-    # starting point (#69). Anchoring these at their old 9 and 5 would let the queue climb back to
-    # 8 and 4 unremarked, which is the failure the baseline exists to catch. Re-anchoring downward
-    # is the opposite of the move CLAUDE.md forbids: that one raises a baseline to hide a rise.
     suite.report("pending units", len(pending), 0,
                  "; ".join(f"{u.get('setCode')} {u.get('number')} {u.get('language')}"
                            for u in pending),
@@ -183,7 +161,8 @@ def main() -> int:
                  "; ".join(f"{u.get('setCode')} {u.get('variant')}" for u in manual),
                  direction=checks.DOWN_IS_PROGRESS)
 
-    # --- 11. finish-verification layer ---
+
+def _check_finish_identity(suite: Suite, units: list[dict], finish_units: list[dict]) -> None:
     suite.report("finish units", len(finish_units), 637)
     finish_seen: dict[str, int] = {}
     for unit in finish_units:
@@ -200,6 +179,8 @@ def main() -> int:
     suite.check("finish units exactly cover claim groups", not key_differences,
                 f"{len(key_differences)} key differences")
 
+
+def _check_finish_states(suite: Suite, finish_units: list[dict], finish_review: dict) -> None:
     bad_state = []
     for unit in finish_units:
         printings = list(unit.get("printings") or [])
@@ -225,15 +206,6 @@ def main() -> int:
     not_applicable = [u for u in finish_units if u.get("applicabilityStatus") == "not-applicable"]
     review_not_applicable = [u for u in (finish_review.get("units") or [])
                              if u.get("availabilityStatus") == "not-applicable"]
-    # Structure only. This check used to also assert `not-applicable == 64`, `complete-manifest
-    # == 4` and `review count == 233`, which is the one thing this suite says it never does — and
-    # it had teeth: those three numbers pinned the *stale* finish store in place, so the full
-    # `finishes.py` run that brought it back into agreement with units.json failed here (#71).
-    # A check that makes correct data illegal teaches people to revert the data.
-    #
-    # What is still asserted is structural: every status is a known value, a not-applicable unit
-    # really is empty, and the review queue never contains a not-applicable row. The counts move to
-    # metrics below, where a losing move fails and progress does not.
     review_count = finish_review.get("meta", {}).get("count")
     state_ok = (
         not bad_state
@@ -243,6 +215,9 @@ def main() -> int:
     suite.check("finish taxonomy, applicability, and review queue valid", state_ok,
                 f"bad={len(bad_state)}, not-applicable={len(not_applicable)}, "
                 f"review={review_count}")
+
+
+def _check_finish_unknowns(suite: Suite, finish_units: list[dict]) -> None:
     hidden_unknown_finishes = [
         unit.get("finishUnitId") for unit in finish_units
         if any(p.get("finish") == "unknown" for p in (unit.get("printings") or []))
@@ -250,6 +225,9 @@ def main() -> int:
     ]
     suite.check("unknown finish printings remain unresolved", not hidden_unknown_finishes,
                 ",".join(first(hidden_unknown_finishes)))
+
+
+def _check_finish_scopes(suite: Suite, finish_units: list[dict], finish_review: dict) -> None:
     improperly_closed_scopes, hidden_out_of_scope_printings = [], []
     for unit in finish_units:
         manifests = [
@@ -282,12 +260,11 @@ def main() -> int:
     suite.report("finish units covered by a complete manifest",
                  sum(1 for u in finish_units
                      if u.get("completenessStatus") == "complete-manifest"), 4)
-    # 223 -> 234 on 2026-08-27: preserving 25 TCGdex variants=true claims reopened 20 EFIGS
-    # units whose standard-set checklists do not cover those physical printings. The increase
-    # corrects hidden positive evidence; subsequent growth remains a regression.
     suite.report("finish review queue", len(finish_review.get("units") or []), 234,
                  direction=checks.DOWN_IS_PROGRESS)
 
+
+def _check_finish_printings(suite: Suite, finish_units: list[dict]) -> None:
     printing_ids = [p.get("printingId")
                     for u in finish_units for p in (u.get("printings") or [])]
     printing_seen: dict[str, int] = {}
@@ -326,6 +303,10 @@ def main() -> int:
                 ",".join(first(bad_mappings)))
     suite.check("stamp roles valid and finish-safe", not bad_roles, ",".join(first(bad_roles)))
 
+
+def _check_tcgdex_positives(
+    suite: Suite, units: list[dict], finish_units: list[dict], tcgdex_snapshot: dict
+) -> None:
     finish_units_by_key = {
         (unit.get("setCode"), str(unit.get("number")), unit.get("language")): unit
         for unit in finish_units
@@ -356,6 +337,8 @@ def main() -> int:
     suite.check("TCGdex positive finish evidence is preserved", not missing_tcgdex_positives,
                 ",".join(first(missing_tcgdex_positives)))
 
+
+def _check_standard_set_mappings(suite: Suite, finish_units: list[dict]) -> None:
     bad_standard_set_mappings = []
     for unit in finish_units:
         standard_variants = {
@@ -377,6 +360,10 @@ def main() -> int:
                 not bad_standard_set_mappings,
                 ",".join(first(bad_standard_set_mappings)))
 
+
+def _check_finish_overrides(
+    suite: Suite, finish_units: list[dict], finish_overrides: dict
+) -> None:
     override_sources = finish_overrides.get("sources") or {}
     unbounded_language_overrides = []
     for override in (finish_overrides.get("overrides") or []):
@@ -426,6 +413,8 @@ def main() -> int:
                 not ambiguous_pattern_duplicates,
                 ",".join(first(ambiguous_pattern_duplicates)))
 
+
+def _special_finish_core(finish_units: list[dict]) -> dict[str, object]:
     dragon_frontiers = [
         p for u in finish_units if u.get("setCode") == "DF" and u.get("number") == "10"
         for p in (u.get("printings") or [])
@@ -444,6 +433,41 @@ def main() -> int:
     exs_printings = printings_of(exs)
     exs_dates = [p.get("releaseDate") for p in exs_printings]
     exs_roles = {m.get("role") for p in exs_printings for m in (p.get("markings") or []) if m}
+    return {
+        "dragon_frontiers": dragon_frontiers,
+        "battle_academy": battle_academy,
+        "classic": classic,
+        "prize3": prize3,
+        "prize7": prize7,
+        "jtg_promos": jtg_promos,
+        "prismatic": prismatic,
+        "exs_printings": exs_printings,
+        "exs_dates": exs_dates,
+        "exs_roles": exs_roles,
+    }
+
+
+def _special_finish_prizes(finish_units: list[dict]) -> tuple[list[dict], list[str]]:
+    prize8_units = [
+        unit for unit in finish_units
+        if unit.get("setCode") == "PPS8 JTG" and unit.get("number") == "JTG 117"
+    ]
+    hop_english = unit_of(finish_units, setCode="JTG", number="117", language="English")
+    return prize8_units, list((hop_english or {}).get("availableFinishes") or [])
+
+
+def _check_special_finish_cases(suite: Suite, finish_units: list[dict]) -> None:
+    core = _special_finish_core(finish_units)
+    dragon_frontiers = core["dragon_frontiers"]
+    battle_academy = core["battle_academy"]
+    classic = core["classic"]
+    prize3 = core["prize3"]
+    prize7 = core["prize7"]
+    jtg_promos = core["jtg_promos"]
+    prismatic = core["prismatic"]
+    exs_printings = core["exs_printings"]
+    exs_dates = core["exs_dates"]
+    exs_roles = core["exs_roles"]
     special_ok = (
         len(dragon_frontiers) == 4
         and sum(1 for p in printings_of(battle_academy) if p.get("finish") == "non-holo") == 1
@@ -464,10 +488,7 @@ def main() -> int:
                 f"DF={len(dragon_frontiers)}, xJTG={len(printings_of(jtg_promos))}, "
                 f"xPRE={len(printings_of(prismatic))}, EXS={len(exs_printings)}")
 
-    prize8_units = [
-        unit for unit in finish_units
-        if unit.get("setCode") == "PPS8 JTG" and unit.get("number") == "JTG 117"
-    ]
+    prize8_units, hop_finishes = _special_finish_prizes(finish_units)
     prize8_ok = len(prize8_units) == 6 and all(
         len(printings_of(unit)) == 2
         and {printing.get("finish") for printing in printings_of(unit)} == {"non-holo", "holo"}
@@ -477,11 +498,11 @@ def main() -> int:
                 ",".join(f"{unit.get('language')}={len(printings_of(unit))}"
                          for unit in prize8_units))
 
-    hop_english = unit_of(finish_units, setCode="JTG", number="117", language="English")
-    hop_finishes = list((hop_english or {}).get("availableFinishes") or [])
     hop_ok = len(hop_finishes) == 2 and all(f in hop_finishes for f in ("holo", "reverse-holo"))
     suite.check("regular JTG 117 discloses holo + reverse only", hop_ok, ",".join(hop_finishes))
 
+
+def _check_finish_projection(suite: Suite, cards: list[dict], finish_units: list[dict]) -> None:
     bad_summaries = []
     for card in cards:
         summary = card.get("finishAvailability")
@@ -493,9 +514,6 @@ def main() -> int:
     suite.check("all cards carry finish summaries", not bad_summaries,
                 "; ".join(f"{c.get('setCode')} {c.get('number')}" for c in first(bad_summaries)))
 
-    # Confirmed evidence must reach a consumer. Mapping validity alone is not enough: a printing
-    # attributed to no product used to be silently dropped by the card projection, so 27 confirmed
-    # printings appeared in no generated artifact at all.
     reachable = {p.get("printingId")
                  for c in cards
                  for row in ((c.get("finishAvailability") or {}).get("byLanguage") or [])
@@ -507,7 +525,6 @@ def main() -> int:
     suite.check("confirmed printings reachable from a product view", not unreachable,
                 ", ".join(first(unreachable)))
 
-    # The projection can only ever be weaker than the store, so it must carry the store's own view.
     missing_status = [
         c for c in cards if not c.get("isCodeCard")
         and any(not row.get("unitFinishStatus") or not row.get("productMappingStatus")
@@ -516,16 +533,37 @@ def main() -> int:
     suite.check("projected finish rows carry unit status and mapping status", not missing_status,
                 "; ".join(f"{c.get('setCode')} {c.get('number')}" for c in first(missing_status)))
 
+
+def main() -> int:
+    suite = Suite()
+    units = read_json(VERIFICATION / "units.json")
+    cards = read_json(ROOT / "snorlax_cards.json")["cards"]
+    excluded = read_json(VERIFICATION / "excluded_codecards.json")
+    finish_units = read_json(VERIFICATION / "finish_units.json")["units"]
+    finish_review = read_json(VERIFICATION / "FINISH_REVIEW.json")
+    finish_overrides = read_json(VERIFICATION / "finish_overrides.json")
+    tcgdex_snapshot = read_json(VERIFICATION / "finish_tcgdex_snapshot.json")["records"]
+
+    _check_unit_store(suite, units, cards, excluded)
+    _check_card_metadata(suite, cards)
+    _check_evidence_log(suite)
+    _check_work_queue(suite, units)
+    _check_finish_identity(suite, units, finish_units)
+    _check_finish_states(suite, finish_units, finish_review)
+    _check_finish_unknowns(suite, finish_units)
+    _check_finish_scopes(suite, finish_units, finish_review)
+    _check_finish_printings(suite, finish_units)
+    _check_tcgdex_positives(suite, units, finish_units, tcgdex_snapshot)
+    _check_standard_set_mappings(suite, finish_units)
+    _check_finish_overrides(suite, finish_units, finish_overrides)
+    _check_special_finish_cases(suite, finish_units)
+    _check_finish_projection(suite, cards, finish_units)
+
     suite.render(emit)
     print()
     if suite.failed:
         print(f"=== REVIEW FAILED: {', '.join(suite.failed)} ===")
         return 1
-    # A count moving the wrong way now fails the run. It always printed a banner and then exited 0,
-    # so a genuine loss — units vanishing from the store, the silent corruption CLAUDE.md says has
-    # happened here — looked exactly like the permanent false alarm the old polarity produced, and
-    # CI went green through both (#69). Reporting rather than asserting still holds: nothing here
-    # fails for a count being the wrong *size*, only for moving in the losing direction.
     if suite.regressed:
         print(f"=== COUNTS WENT BACKWARDS: {', '.join(suite.regressed)} ===")
         print("A metric moved in the losing direction. That is data loss or a reopened queue, not")
