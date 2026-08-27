@@ -32,7 +32,7 @@ import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -254,6 +254,38 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": ("A retained scan and its deck-specific page may establish only the visible card "
                   "identity and the variant that page positively labels. Missing cards, variants, "
                   "or languages never establish absence or completeness."),
+    },
+    {
+        "providerId": "pkparaiso",
+        "displayName": "PKParaiso",
+        "organization": "PKParaiso",
+        "homepage": "https://www.pkparaiso.com",
+        "hosts": ["pkparaiso.com", "www.pkparaiso.com"],
+        "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+        "category": "collector-database",
+        "authorityTier": 3,
+        "coverage": "positive localized card identity shown by retained database scans",
+        "supportsAbsence": False,
+        "usedFor": ["identity"],
+        "attribution": "Card scans from PKParaiso.",
+        "notes": "A retained database scan establishes only the visible card identity. Missing "
+                 "cards, variants, or languages never establish absence or completeness.",
+    },
+    {
+        "providerId": "wikidex",
+        "displayName": "WikiDex",
+        "organization": "WikiDex",
+        "homepage": "https://www.wikidex.net",
+        "hosts": ["wikidex.net", "www.wikidex.net", "wikidexcdn.net", "images.wikidexcdn.net"],
+        "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+        "category": "collector-database",
+        "authorityTier": 3,
+        "coverage": "positive localized card identity shown by retained database scans",
+        "supportsAbsence": False,
+        "usedFor": ["identity"],
+        "attribution": "Card scans from WikiDex.",
+        "notes": "A retained database scan establishes only the visible card identity. Missing "
+                 "cards, variants, or languages never establish absence or completeness.",
     },
     {
         # Added on the owner's evidence in #119: a Japanese secondhand marketplace whose listings
@@ -538,6 +570,8 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
     (re.compile(r"third-party scan archive|pok[eé]cardex", re.I), "pokecardex"),
+    (re.compile(r"pkparaiso", re.I), "pkparaiso"),
+    (re.compile(r"wikidex", re.I), "wikidex"),
     (re.compile(r"photograph", re.I), "inspected-specimen"),
     (re.compile(r"owner attestation", re.I), "owner-attestation"),
     (re.compile(r"bulbapedia", re.I), "bulbapedia"),
@@ -632,9 +666,28 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
     return min(named)[2] if named else None
 
 
+def record_database_specimens(
+    specimens: list[dict[str, Any]], record: Callable[..., None]
+) -> None:
+    """Project identity-only database specimens into the source registry."""
+    for specimen in specimens:
+        if specimen.get("heldBy") != "third-party database":
+            continue
+        record(
+            specimen.get("photographSource"), specimen.get("inspectedFrom"),
+            "identity", specimen["specimenId"], specimen.get("recordedAt"),
+        )
+        for unit_id in specimen.get("citedBy") or []:
+            record(
+                specimen.get("photographSource"), specimen.get("inspectedFrom"),
+                "identity", unit_id, specimen.get("recordedAt"),
+            )
+
+
 def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
     finish_units = read_json(ROOT / "verification" / "finish_units.json")["units"]
+    specimens = read_json(ROOT / "verification" / "specimens.json")["specimens"]
     overrides = read_json(ROOT / "verification" / "finish_overrides.json")
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     artists = read_json(ROOT / "artists_pokemontcgio.json")
@@ -685,6 +738,11 @@ def main() -> int:
             record(unit.get("sourceUrl"), unit.get("sourceType"), "language",
                    unit["unitId"], (unit.get("checkedAt") or "")[:10] or None,
                    provider_id=unit.get("providerId"))
+
+    # Database scans without a physical observation still positively corroborate the localized
+    # card identity. Project that evidence by cited unit so corroborated flags cannot outrun the
+    # registry and capability graph; no finish or absence capability is inferred from the scan.
+    record_database_specimens(specimens, record)
 
     for entry in source_first["prints"]:
         if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea"}:

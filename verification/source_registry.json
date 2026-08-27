@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 27,
-   "evidenceRecords": 1064,
-   "uniqueUrls": 1057,
+   "providers": 29,
+   "evidenceRecords": 1070,
+   "uniqueUrls": 1063,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3261
+   "claimsAttributed": 3273
   }
  },
  "providers": [
@@ -424,6 +424,52 @@
    ],
    "uniqueSources": 1,
    "claimsSupported": 1
+  },
+  {
+   "providerId": "pkparaiso",
+   "displayName": "PKParaiso",
+   "organization": "PKParaiso",
+   "homepage": "https://www.pkparaiso.com",
+   "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "positive localized card identity shown by retained database scans",
+   "supportsAbsence": false,
+   "usedFor": [
+    "identity"
+   ],
+   "attribution": "Card scans from PKParaiso.",
+   "notes": "A retained database scan establishes only the visible card identity. Missing cards, variants, or languages never establish absence or completeness.",
+   "hosts": [
+    "pkparaiso.com",
+    "www.pkparaiso.com"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 2
+  },
+  {
+   "providerId": "wikidex",
+   "displayName": "WikiDex",
+   "organization": "WikiDex",
+   "homepage": "https://www.wikidex.net",
+   "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "positive localized card identity shown by retained database scans",
+   "supportsAbsence": false,
+   "usedFor": [
+    "identity"
+   ],
+   "attribution": "Card scans from WikiDex.",
+   "notes": "A retained database scan establishes only the visible card identity. Missing cards, variants, or languages never establish absence or completeness.",
+   "hosts": [
+    "wikidex.net",
+    "www.wikidex.net",
+    "wikidexcdn.net",
+    "images.wikidexcdn.net"
+   ],
+   "uniqueSources": 5,
+   "claimsSupported": 10
   },
   {
    "providerId": "snkrdunk",
@@ -10667,6 +10713,24 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 42
+  },
+  {
+   "canonicalUrl": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "pkparaiso",
+   "sourceTypes": [
+    "PKParaiso database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0131",
+    "U0245"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
@@ -21973,6 +22037,96 @@
     "U0371"
    ],
    "retrievedAt": "2026-07-21",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0d/latest/20180604134733/Snorlax_(Jungla_11_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0133",
+    "U0122"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0134",
+    "U0092"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0132",
+    "U0482"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c0/latest/20200327234844/Snorlax_(SWSH_Promo_32_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0136",
+    "U0418"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e9/latest/20210107134302/Snorlax_(XY_Promo_179_TCG).png",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "WikiDex database scan"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0135",
+    "U0229"
+   ],
+   "retrievedAt": "2026-08-27",
    "usageCount": 2
   }
  ]

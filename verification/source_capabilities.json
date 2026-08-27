@@ -98,6 +98,20 @@
       "rawRetention": "Retain the exact scan bytes, card/deck page URL, retrieval date, specimen id and SHA-256."
     },
     {
+      "providerId": "pkparaiso",
+      "operator": "PKParaiso",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+      "rawRetention": "Retain the exact scan bytes, database URL, retrieval date, specimen id and SHA-256."
+    },
+    {
+      "providerId": "wikidex",
+      "operator": "WikiDex",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+      "rawRetention": "Retain the exact hosted scan bytes, database URL, retrieval date, specimen id and SHA-256."
+    },
+    {
       "providerId": "snkrdunk",
       "operator": "SODA Inc.",
       "authorityTier": 2,
@@ -2985,6 +2999,179 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "pkparaiso-card-scans",
+      "providerId": "pkparaiso",
+      "label": "PKParaiso retained card scans",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pkparaiso.com/tcg/",
+          "https://pkparaiso.com/tcg/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-27",
+      "freshnessPolicy": "Retain the exact scan bytes before using a localized card identity as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained PKParaiso card scan URL",
+        "parameters": [
+          "set path",
+          "language",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained scan",
+        "expectedIdentifiers": [
+          "localized card name",
+          "collector number",
+          "language",
+          "printed set identity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained card scan",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pkparaiso-positive-scan",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the concrete retained scan only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained scan establishes only the displayed card identity."
+          },
+          "knownPositiveObservationId": "obs-pkparaiso-scan",
+          "boundary": {
+            "outsideScope": [
+              "finish",
+              "edition",
+              "unretained cards",
+              "complete set or language catalogue"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing scan is database silence and never negative evidence."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "wikidex-card-scans",
+      "providerId": "wikidex",
+      "label": "WikiDex retained card scans",
+      "match": {
+        "urlPrefixes": [
+          "https://images.wikidexcdn.net/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-27",
+      "freshnessPolicy": "Retain the exact scan bytes before using a localized card identity as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained WikiDex-hosted card scan URL",
+        "parameters": [
+          "image path",
+          "language",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained scan",
+        "expectedIdentifiers": [
+          "localized card name",
+          "collector number",
+          "language",
+          "printed set or promo identity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained card scan",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "wikidex-positive-scan",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the concrete retained scan only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained scan establishes only the displayed card identity."
+          },
+          "knownPositiveObservationId": "obs-wikidex-scan",
+          "boundary": {
+            "outsideScope": [
+              "finish",
+              "edition",
+              "unretained cards",
+              "complete set or language catalogue"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing scan is database silence and never negative evidence."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -3455,6 +3642,54 @@
         "pokecardex-positive-scan"
       ],
       "outcome": "The retained French Battle Academy scan and its deck-specific Standard label positively establish that displayed fixed-deck card and variant only."
+    },
+    {
+      "observationId": "obs-pkparaiso-scan",
+      "surfaceId": "pkparaiso-card-scans",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+      "queryParameters": {
+        "language": "es",
+        "cardNumber": "058"
+      },
+      "retrievedAt": "2026-08-27",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pkparaiso",
+        "recordKey": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0131",
+        "U0245"
+      ],
+      "validatesEdges": [
+        "pkparaiso-positive-scan"
+      ],
+      "outcome": "The retained Spanish Generations scan positively establishes the displayed localized card identity only."
+    },
+    {
+      "observationId": "obs-wikidex-scan",
+      "surfaceId": "wikidex-card-scans",
+      "kind": "known-positive",
+      "queryUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_%28Bienvenidos_a_Kalos_TCG%29.png",
+      "queryParameters": {
+        "language": "es",
+        "cardNumber": "26"
+      },
+      "retrievedAt": "2026-08-27",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "wikidex",
+        "recordKey": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0132",
+        "U0482"
+      ],
+      "validatesEdges": [
+        "wikidex-positive-scan"
+      ],
+      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only."
     },
     {
       "observationId": "obs-snkrdunk",

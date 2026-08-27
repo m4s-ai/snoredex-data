@@ -7,6 +7,7 @@ import json
 import importlib.util
 from collections import defaultdict
 from pathlib import Path
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -158,6 +159,31 @@ def main() -> None:
         if row.get("canonicalUrl") == pokecardex["photographSource"]
     )
     assert pokecardex_source["providerId"] == "pokecardex"
+    database_provider_by_specimen = {
+        "SPEC-0131": "pkparaiso",
+        "SPEC-0132": "wikidex",
+        "SPEC-0133": "wikidex",
+        "SPEC-0134": "wikidex",
+        "SPEC-0135": "wikidex",
+        "SPEC-0136": "wikidex",
+    }
+    registry_by_url = {
+        row.get("canonicalUrl"): row for row in source_registry if row.get("canonicalUrl")
+    }
+    capability_by_url = {
+        row["sourceKey"]: row for row in read("source_capability_graph.json")["sourceResolution"]
+    }
+    for specimen_id, provider_id in database_provider_by_specimen.items():
+        specimen = next(row for row in specimens if row["specimenId"] == specimen_id)
+        canonical_source = unquote(specimen["photographSource"])
+        registry_row = registry_by_url[canonical_source]
+        assert registry_row["providerId"] == provider_id
+        assert registry_row["dimensions"] == ["identity"]
+        assert specimen_id in registry_row["stableIds"]
+        assert set(specimen["citedBy"]) <= set(registry_row["stableIds"])
+        capability_row = capability_by_url[canonical_source]
+        assert capability_row["providerId"] == provider_id
+        assert capability_row["dimensions"] == ["identity"]
     target_specimens = {
         row["specimenId"]: row for row in specimens if row["specimenId"] in portuguese_owner_confirmed
     }

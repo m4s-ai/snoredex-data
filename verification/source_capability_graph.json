@@ -15,15 +15,15 @@
       "An exact retained PokéCottage row is tier-3 positive confirmation for the facts it states. Facts demonstrably shared by an already identified matching Western release may corroborate that release when the equivalence basis is retained; omissions and unstated alternatives never establish absence or completeness."
     ],
     "counts": {
-      "providers": 27,
-      "surfaces": 31,
-      "coverageEdges": 32,
+      "providers": 29,
+      "surfaces": 33,
+      "coverageEdges": 34,
       "absenceEdges": 3,
-      "observations": 34,
-      "resolvedVerdictSources": 1064
+      "observations": 36,
+      "resolvedVerdictSources": 1070
     },
     "surfaceStates": {
-      "active": 14,
+      "active": 16,
       "blocked-by-browser": 3,
       "incomplete": 8,
       "internal": 1,
@@ -116,6 +116,20 @@
       "authorityTier": 3,
       "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
       "rawRetention": "Retain the exact scan bytes, card/deck page URL, retrieval date, specimen id and SHA-256."
+    },
+    {
+      "providerId": "pkparaiso",
+      "operator": "PKParaiso",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
+      "rawRetention": "Retain the exact scan bytes, database URL, retrieval date, specimen id and SHA-256."
+    },
+    {
+      "providerId": "wikidex",
+      "operator": "WikiDex",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+      "rawRetention": "Retain the exact hosted scan bytes, database URL, retrieval date, specimen id and SHA-256."
     },
     {
       "providerId": "snkrdunk",
@@ -1372,6 +1386,91 @@
       },
       "coverageEdgeIds": [
         "pokecardex-positive-scan"
+      ]
+    },
+    {
+      "surfaceId": "pkparaiso-card-scans",
+      "providerId": "pkparaiso",
+      "label": "PKParaiso retained card scans",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pkparaiso.com/tcg/",
+          "https://pkparaiso.com/tcg/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-27",
+      "freshnessPolicy": "Retain the exact scan bytes before using a localized card identity as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained PKParaiso card scan URL",
+        "parameters": [
+          "set path",
+          "language",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained scan",
+        "expectedIdentifiers": [
+          "localized card name",
+          "collector number",
+          "language",
+          "printed set identity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained card scan",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "pkparaiso-positive-scan"
+      ]
+    },
+    {
+      "surfaceId": "wikidex-card-scans",
+      "providerId": "wikidex",
+      "label": "WikiDex retained card scans",
+      "match": {
+        "urlPrefixes": [
+          "https://images.wikidexcdn.net/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-27",
+      "freshnessPolicy": "Retain the exact scan bytes before using a localized card identity as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained WikiDex-hosted card scan URL",
+        "parameters": [
+          "image path",
+          "language",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained scan",
+        "expectedIdentifiers": [
+          "localized card name",
+          "collector number",
+          "language",
+          "printed set or promo identity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained card scan",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "wikidex-positive-scan"
       ]
     }
   ],
@@ -3103,6 +3202,100 @@
         "zeroResultMeans": "unknown",
         "challenge": "A missing scan or variant is archive silence and never negative evidence."
       }
+    },
+    {
+      "edgeId": "pkparaiso-positive-scan",
+      "providerId": "pkparaiso",
+      "surfaceId": "pkparaiso-card-scans",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "MULTIPLE"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "the concrete retained scan only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "identity",
+        "specimen-existence",
+        "image"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A retained scan establishes only the displayed card identity."
+      },
+      "knownPositiveObservationId": "obs-pkparaiso-scan",
+      "boundary": {
+        "outsideScope": [
+          "finish",
+          "edition",
+          "unretained cards",
+          "complete set or language catalogue"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A missing scan is database silence and never negative evidence."
+      }
+    },
+    {
+      "edgeId": "wikidex-positive-scan",
+      "providerId": "wikidex",
+      "surfaceId": "wikidex-card-scans",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "MULTIPLE"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "the concrete retained scan only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "identity",
+        "specimen-existence",
+        "image"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A retained scan establishes only the displayed card identity."
+      },
+      "knownPositiveObservationId": "obs-wikidex-scan",
+      "boundary": {
+        "outsideScope": [
+          "finish",
+          "edition",
+          "unretained cards",
+          "complete set or language catalogue"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A missing scan is database silence and never negative evidence."
+      }
     }
   ],
   "observations": [
@@ -3807,6 +4000,84 @@
         ],
         "retrievedAt": null,
         "usageCount": 1
+      }
+    },
+    {
+      "observationId": "obs-pkparaiso-scan",
+      "surfaceId": "pkparaiso-card-scans",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+      "queryParameters": {
+        "language": "es",
+        "cardNumber": "058"
+      },
+      "retrievedAt": "2026-08-27",
+      "expectedIdentifiers": [
+        "SPEC-0131",
+        "U0245"
+      ],
+      "validatesEdges": [
+        "pkparaiso-positive-scan"
+      ],
+      "outcome": "The retained Spanish Generations scan positively establishes the displayed localized card identity only.",
+      "rawRecordRef": "verification/source_registry.json:https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+      "rawRecordHash": "sha256:54a12723bfe20a0c84d6291046d2ca442fe91a982a34c2672c8be9579351b535",
+      "rawRecord": {
+        "canonicalUrl": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+        "nonUrlEvidenceId": null,
+        "providerId": "pkparaiso",
+        "sourceTypes": [
+          "PKParaiso database scan"
+        ],
+        "dimensions": [
+          "identity"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "SPEC-0131",
+          "U0245"
+        ],
+        "retrievedAt": "2026-08-27",
+        "usageCount": 2
+      }
+    },
+    {
+      "observationId": "obs-wikidex-scan",
+      "surfaceId": "wikidex-card-scans",
+      "kind": "known-positive",
+      "queryUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_%28Bienvenidos_a_Kalos_TCG%29.png",
+      "queryParameters": {
+        "language": "es",
+        "cardNumber": "26"
+      },
+      "retrievedAt": "2026-08-27",
+      "expectedIdentifiers": [
+        "SPEC-0132",
+        "U0482"
+      ],
+      "validatesEdges": [
+        "wikidex-positive-scan"
+      ],
+      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only.",
+      "rawRecordRef": "verification/source_registry.json:https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png",
+      "rawRecordHash": "sha256:034f8685cfa0d1960b035191983929c9a005be5175b18adfcbea19cc8d7a840d",
+      "rawRecord": {
+        "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png",
+        "nonUrlEvidenceId": null,
+        "providerId": "wikidex",
+        "sourceTypes": [
+          "WikiDex database scan"
+        ],
+        "dimensions": [
+          "identity"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "SPEC-0132",
+          "U0482"
+        ],
+        "retrievedAt": "2026-08-27",
+        "usageCount": 2
       }
     },
     {
@@ -10936,6 +11207,18 @@
         "finish",
         "finish-override",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+      "providerId": "pkparaiso",
+      "surfaceId": "pkparaiso-card-scans",
+      "capabilityEdgeIds": [
+        "pkparaiso-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {
@@ -18598,6 +18881,66 @@
       "dimensions": [
         "finish",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0d/latest/20180604134733/Snorlax_(Jungla_11_TCG).png",
+      "providerId": "wikidex",
+      "surfaceId": "wikidex-card-scans",
+      "capabilityEdgeIds": [
+        "wikidex-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+      "providerId": "wikidex",
+      "surfaceId": "wikidex-card-scans",
+      "capabilityEdgeIds": [
+        "wikidex-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png",
+      "providerId": "wikidex",
+      "surfaceId": "wikidex-card-scans",
+      "capabilityEdgeIds": [
+        "wikidex-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c0/latest/20200327234844/Snorlax_(SWSH_Promo_32_TCG).png",
+      "providerId": "wikidex",
+      "surfaceId": "wikidex-card-scans",
+      "capabilityEdgeIds": [
+        "wikidex-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e9/latest/20210107134302/Snorlax_(XY_Promo_179_TCG).png",
+      "providerId": "wikidex",
+      "surfaceId": "wikidex-card-scans",
+      "capabilityEdgeIds": [
+        "wikidex-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     }
   ]
