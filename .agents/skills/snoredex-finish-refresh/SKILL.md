@@ -3,15 +3,17 @@ name: snoredex-finish-refresh
 description: Refresh, review, accept, and project the versioned TCGdex finish snapshot for Snoredex. Use for monthly drift review, pre-release checks, or known upstream changes; not for specimen or curated finish corrections.
 ---
 
+<!-- doc: role=finish-refresh workflow skill; stage=task -->
+
 # Snoredex finish refresh
 
 Perform the explicit TCGdex candidate-to-snapshot workflow while keeping ordinary regeneration offline and reproducible.
 
-## Required context
+## Finish-refresh context
 
 Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md), and the finish-refresh path in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md).
 
-## Workflow
+## Finish-refresh workflow
 
 1. Establish a clean baseline with `python scripts/regen.py --check` and record pre-existing failures.
 2. Stage one live candidate with `python scripts/finishes.py --refresh`. Treat exit code 2 as a source or transport failure; retry later rather than interpreting it as finish evidence.

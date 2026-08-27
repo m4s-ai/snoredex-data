@@ -3,15 +3,17 @@ name: snoredex-issue-delivery
 description: Deliver one Snoredex-Data issue through implementation and verification to a review-ready branch or pull request. Use for implementing or fixing a specific issue; not for review-only remediation or broad backlog planning.
 ---
 
+<!-- doc: role=issue-delivery workflow skill; stage=task -->
+
 # Snoredex issue delivery
 
 Complete one issue without mixing unrelated work or weakening the repository's evidence and gate contracts.
 
-## Required context
+## Issue-delivery context
 
 Work from the repository root. Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), and [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). Read the full issue, every comment, linked issue and relevant pull request before planning. If the issue changes evidence, read the domain document required by `CLAUDE.md` before editing.
 
-## Workflow
+## Issue-delivery workflow
 
 1. Confirm the requested issue and authorization boundary. Do not infer permission to merge, publish, close other issues, or expand the task.
 2. Fetch `origin` and start from current `origin/main`. Reuse an existing branch only when it belongs exclusively to this issue and its work is understood; otherwise create one isolated issue branch.

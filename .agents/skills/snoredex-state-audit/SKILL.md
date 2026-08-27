@@ -3,15 +3,17 @@ name: snoredex-state-audit
 description: Audit the current Snoredex-Data repository and data handoff as a read-only, evidence-backed report. Use for current-state, data-quality, architecture, dependency, documentation, or consumer-readiness reviews; not for implementing fixes.
 ---
 
+<!-- doc: role=repository-state audit workflow skill; stage=task -->
+
 # Snoredex state audit
 
 Report what the current tree and generated audits establish, which contracts fail, and where evidence or maintenance work remains. Do not change the repository unless the user separately requests remediation.
 
-## Required context
+## State-audit context
 
 Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), [README.md](../../../README.md), [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md), and the current generated [DATA-HANDOFF-AUDIT.md](../../../verification/DATA-HANDOFF-AUDIT.md). Use the issue tracker only for priorities; do not infer backlog from stale prose.
 
-## Workflow
+## State-audit workflow
 
 1. Define the requested audit boundary: data truth, architecture, gates, documentation, consumer handoff, or a stated combination. Do not silently expand to history or unrelated branches.
 2. Record branch, HEAD, `origin/main` freshness, working-tree state, and pre-existing changes. Do not switch, clean, or rewrite the user's checkout.

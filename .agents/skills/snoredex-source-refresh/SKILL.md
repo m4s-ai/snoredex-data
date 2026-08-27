@@ -3,15 +3,17 @@ name: snoredex-source-refresh
 description: Refresh and reconcile Snoredex source-first set and card discovery runs. Use for scheduled, release-triggered, provider-change, or manual catalogue discovery; not for applying evidence to an already-known unit.
 ---
 
+<!-- doc: role=source-refresh workflow skill; stage=task -->
+
 # Snoredex source refresh
 
 Create one immutable provider refresh and reconcile every result to a visible terminal state without turning source failure or silence into a verdict.
 
-## Required context
+## Source-refresh context
 
 Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md), and [RECURRENCE.md](../../../verification/RECURRENCE.md). Treat the adapter and discovery manifests as reviewed contracts and their generated staging files as review surfaces, not truth stores.
 
-## Workflow
+## Source-refresh workflow
 
 1. Confirm whether the request is offline validation or an authorized live refresh. Network access and scheduling do not authorize commits, merges, publication, or canonical verdict changes.
 2. Run `python scripts/discovery_cycle.py --check` for retained-run validation. For a live refresh, create a unique UTC run ID and run `python scripts/discovery_cycle.py --refresh --run-id <YYYYMMDDTHHMMSSZ>`.

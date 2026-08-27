@@ -3,15 +3,17 @@ name: snoredex-specimen-intake
 description: File physical Snoredex card or seller-listing photographs as stable specimen evidence and project their supported observations. Use for local images, issue attachments, scans, or listing photos; not for source pages without a card image.
 ---
 
+<!-- doc: role=specimen-intake workflow skill; stage=task -->
+
 # Snoredex specimen intake
 
 Turn physical-card image evidence into a stable, checkable specimen record without asserting anything the image cannot establish.
 
-## Required context
+## Specimen-intake context
 
 Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), the complete [verification playbook](../../../verification/RESUME.md), [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md), and the physical-evidence path in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md).
 
-## Workflow
+## Specimen-intake workflow
 
 1. Inspect the original image at sufficient resolution. Identify only visible facts: card identity, printed language/locality markers, finish or foil pattern, stamps or markings, distribution marks, and size cues.
 2. Match or create the stable `SPEC-nnnn` record through the canonical manifest workflow. Do not replace a specimen with prose or reuse a neighbouring specimen's authority.

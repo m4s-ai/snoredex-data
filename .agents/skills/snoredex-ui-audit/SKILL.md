@@ -3,15 +3,17 @@ name: snoredex-ui-audit
 description: Audit the generated Snoredex static UI for responsive layout, accessibility, interaction, dark mode, print, and image behavior. Use for UI review and reproducible browser findings; not for data-verdict research or redesign without a request.
 ---
 
+<!-- doc: role=static-UI audit workflow skill; stage=task -->
+
 # Snoredex UI audit
 
 Produce a prioritized, reproducible review of the static site's actual behavior while keeping generated output and data truth boundaries intact.
 
-## Required context
+## UI-audit context
 
 Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), and the site/consumer paths in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). `index.html` is generated: trace defects to the owning generator, styles, templates, or canonical data instead of editing it directly.
 
-## Workflow
+## UI-audit workflow
 
 1. Confirm whether the user requested audit-only or implementation. In audit-only mode, do not modify files or open issues.
 2. Establish current branch, working-tree state, and a reproducible local build. Use `python scripts/publish.py --out _site` when an isolated publication artifact is needed.
