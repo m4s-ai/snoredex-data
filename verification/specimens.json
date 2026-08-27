@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 119,
+  "count": 120,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -2544,6 +2544,32 @@
         "basis": "The complete Italian 111/111 card directly shows multicolour sparkle across the artwork and frame, while the exact seller title identifies the item as Holo rare Ita."
       },
       "listingUrl": "https://www.ebay.com/itm/406290210703"
+    },
+    {
+      "specimenId": "SPEC-0120",
+      "setCode": "JU",
+      "number": "27/64",
+      "variant": "V2",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0120.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
+      "photographSha256": "sha256:908cb5ad2d9a440067280f7145a6489c35a7ee01edcb686ef4f4ff5a0b42f296",
+      "observed": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0173-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Portuguese 27/64 card face visibly shows the uniformly printed non-holographic artwork treatment; its localized text, Jungle symbol and collector number establish the exact printing. No edition is inferred from an absent stamp."
+      },
+      "listingUrl": "https://www.ebay.com/itm/177940547168"
     }
   ]
 }

@@ -59,8 +59,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 376,
-      "withOnlyMarketplaceClaim": 79,
+      "withConfirmedFinish": 377,
+      "withOnlyMarketplaceClaim": 78,
       "pendingFinish": 107,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
@@ -13793,13 +13793,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -13810,17 +13810,26 @@
           "mappedVariants": [
             "V2"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. Retained as SPEC-0120."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0120"
+          ],
+          "image": "verification/specimens/SPEC-0120.jpg",
           "printingId": "F0173-P01"
         }
       ],

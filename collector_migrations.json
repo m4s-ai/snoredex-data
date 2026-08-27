@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:497e2ca0c24fbe4f4fd60332edcc4a5b1a514878ccb785ad30f2108b0dc5fa44",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:b370b76ac41e3b6eb2c0b56c457941b6ba907f23f875fa4fad2c8e38f581af7e",
+    "toFingerprint": "sha256:79056e64fed530cec0ac48c2b99dbd9d94559e40ed4c5c38238adfcb4908b00c",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:b370b76ac41e3b6eb2c0b56c457941b6ba907f23f875fa4fad2c8e38f581af7e",
+      "toFingerprint": "sha256:79056e64fed530cec0ac48c2b99dbd9d94559e40ed4c5c38238adfcb4908b00c",
       "cumulative": true,
       "transitions": [
         {
@@ -5785,6 +5785,15 @@
           "fromItemId": "item-ae1e6cc2-03ea-557b-a677-970cbee300bc",
           "toItemIds": [
             "item-ae1e6cc2-03ea-557b-a677-970cbee300bc"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
+          "fromItemId": "item-ae2013d0-c90a-5b69-83be-2f93c17d31da",
+          "toItemIds": [
+            "item-ae2013d0-c90a-5b69-83be-2f93c17d31da"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -25817,7 +25826,8 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-1e434380-cddc-5172-888a-fe93f268f07e",
-          "item-636812a1-432f-5dcb-8703-ed1b559a5681"
+          "item-636812a1-432f-5dcb-8703-ed1b559a5681",
+          "item-ae2013d0-c90a-5b69-83be-2f93c17d31da"
         ],
         "reason": null
       },
@@ -29408,6 +29418,11 @@
         "targetItemId": "item-4887546b-cb8e-5fde-bc5f-ae13d10d2762"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:a4fd7a57dcc14611a79cb9e5",
+        "disposition": "projected",
+        "targetItemId": "item-ae2013d0-c90a-5b69-83be-2f93c17d31da"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:a744bc013d0927da8699d687",
         "disposition": "projected",
         "targetItemId": "item-00d41517-3f40-56df-b580-d5909268a7bb"
@@ -29631,7 +29646,7 @@
     "summary": {
       "legacyChecklistRows": 852,
       "cardReleases": 612,
-      "physicalPrintings": 607,
+      "physicalPrintings": 608,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

@@ -39,8 +39,8 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-08-27",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 376,
-      "withOnlyMarketplaceClaim": 79,
+      "withConfirmedFinish": 377,
+      "withOnlyMarketplaceClaim": 78,
       "pendingFinish": 107,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
@@ -6094,18 +6094,18 @@
               "non-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0173",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -6116,8 +6116,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0120.jpg",
+                "specimenIds": [
+                  "SPEC-0120"
+                ]
               }
             ]
           },

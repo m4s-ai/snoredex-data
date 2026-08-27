@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "7d7ede6334511af7f0d8a7b3b46d48580c58be752b7147cc03f882b509d12c66",
+  "projectionVersion": "ce2cfefe0b5981f8346c043a25dfaec9837afa583e9df078e5fc6c278bddcfc0",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 607,
-    "sourceObservations": 2079
+    "physicalPrintings": 608,
+    "sourceObservations": 2081
   },
   "groups": [
     {
@@ -51639,7 +51639,39 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:a4fd7a57dcc14611a79cb9e5",
+              "semanticPrintingId": "PRINTING:a4fd7a57dcc14611a79cb9e5",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0173",
+              "sourcePrintingId": "F0173-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a4fd7a57dcc14611a79cb9e5",
+              "specimenIds": [
+                "SPEC-0120"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. Retained as SPEC-0120."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -51664,6 +51696,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0173-P01:0:080249249eec4b7b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "3063e4c65483b4025dd56c1115c5f3375cce18ccd67b35c7ef771e18593875ea",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0173-P01:1:c30771e2f46eecb6",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. Retained as SPEC-0120.",
+              "contentHash": "a5d2d52b4cbeb2ad90e8f980d2b823fddef5abbfdc854c6ac3dbc2975a702921",
+              "image": null
+            },
             {
               "observationId": "unit:U0094",
               "kind": "unit",

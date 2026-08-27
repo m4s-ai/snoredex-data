@@ -140,6 +140,16 @@ def main() -> None:
         target_specimens["SPEC-0055"]["photographSource"]: ["finish", "identity"],
         target_specimens["SPEC-0056"]["photographSource"]: ["identity"],
     }
+    portuguese_ju27 = next(row for row in specimens if row["specimenId"] == "SPEC-0120")
+    portuguese_ju27_printing = projector.specimen_printing(portuguese_ju27)
+    assert portuguese_ju27_printing["finish"] == "non-holo"
+    assert "edition" not in portuguese_ju27_printing
+    assert portuguese_ju27_printing["sources"][0]["sourceType"] == "Seller listing photograph"
+    portuguese_ju27_source = next(
+        source for source in source_registry
+        if source.get("canonicalUrl") == portuguese_ju27["photographSource"]
+    )
+    assert portuguese_ju27_source["dimensions"] == ["finish"]
     archived_registry_source = next(
         source for source in source_registry
         if source.get("canonicalUrl") == archived_seller["photographSource"]
@@ -209,6 +219,11 @@ def main() -> None:
                       if printing["finish"] == "reverse-holo")
     assert rr_reverse["mappedVariants"] == ["V1"]
     assert rr_reverse["specimenIds"] == ["SPEC-0117"]
+    portuguese_ju27_unit = next(unit for unit in finish_units
+                                if unit["setCode"] == "JU" and unit["number"] == "27"
+                                and unit["language"] == "Portuguese")
+    assert portuguese_ju27_unit["availabilityStatus"] == "confirmed"
+    assert portuguese_ju27_unit["printings"][0]["specimenIds"] == ["SPEC-0120"]
     italian_wcd = next(unit for unit in finish_units
                        if unit["setCode"] == "WCD23 LOR" and unit["number"] == "LOR 143"
                        and unit["language"] == "Italian")
