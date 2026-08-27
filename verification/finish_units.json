@@ -59,18 +59,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 385,
-      "withOnlyMarketplaceClaim": 76,
-      "pendingFinish": 101,
+      "withConfirmedFinish": 421,
+      "withOnlyMarketplaceClaim": 65,
+      "pendingFinish": 76,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
-      "withNonHolo": 288,
-      "withHolo": 178,
+      "withNonHolo": 300,
+      "withHolo": 196,
       "withReverseHolo": 229,
-      "withMirrorHolo": 9,
-      "withBothNonHoloAndHolo": 43,
-      "withUnresolvedProductMapping": 138,
-      "withAnyUnresolvedDetail": 228,
+      "withMirrorHolo": 18,
+      "withBothNonHoloAndHolo": 47,
+      "withUnresolvedProductMapping": 113,
+      "withAnyUnresolvedDetail": 203,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -101,16 +101,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -152,6 +153,32 @@
             }
           ],
           "printingId": "F0000-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0000-P03"
         }
       ],
       "unresolved": [
@@ -180,23 +207,49 @@
           "image": "images/151C_169_Snorlax_V2_819235.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0001-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0002",
@@ -4458,16 +4511,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -4509,6 +4563,32 @@
             }
           ],
           "printingId": "F0051-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0051-P03"
         }
       ],
       "unresolved": [
@@ -4537,23 +4617,49 @@
           "image": "images/CS1aC_111_Snorlax_V_V1_846873.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0052-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0053",
@@ -4577,23 +4683,49 @@
           "image": "images/CS1aC_112_Snorlax_VMAX_V1_846874.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0053-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0054",
@@ -4680,23 +4812,49 @@
           "image": "images/CS1aC_207_Snorlax_VMAX_V2_846974.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0055-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0056",
@@ -4720,23 +4878,52 @@
           "image": "images/CS1DC_152_Snorlax_887087.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Dynamax Clash V Starter Deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16268.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Dynamax Clash specification states that all 60 cards in each constructed starter deck are 平卡 (non-holo), and that the Deck Building Box includes one random Pokémon V 闪卡 (foil card)."
+            }
+          ],
+          "printingId": "F0056-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0057",
@@ -4762,16 +4949,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -4813,6 +5001,32 @@
             }
           ],
           "printingId": "F0057-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0057-P03"
         }
       ],
       "unresolved": [
@@ -4841,23 +5055,49 @@
           "image": "images/CS2aC_142_Snorlax_V2_845092.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0058-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0059",
@@ -4881,23 +5121,52 @@
           "image": "images/CS3DC_117_Snorlax_882597.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Primordial Arts V Starter Deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16070.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Primordial Arts V starter-deck specification states that all 60 constructed-deck cards, drawn from its named 178-card pool, are 平卡 (non-holo)."
+            }
+          ],
+          "printingId": "F0059-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0060",
@@ -4923,16 +5192,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -4974,6 +5244,32 @@
             }
           ],
           "printingId": "F0060-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0060-P03"
         }
       ],
       "unresolved": [
@@ -5002,23 +5298,52 @@
           "image": "images/CS5DC_097_Snorlax_V1_882375.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Gallant Galaxy V Starter Deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/15831.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Gallant Galaxy V starter-deck specification states that all 60 constructed-deck cards, drawn from its named 160-card pool, are 平卡 (non-holo)."
+            }
+          ],
+          "printingId": "F0061-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0062",
@@ -5042,23 +5367,52 @@
           "image": "images/CS5DC_098_Snorlax_V2_882376.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Gallant Galaxy V Starter Deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/15831.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Gallant Galaxy V starter-deck specification states that all 60 constructed-deck cards, drawn from its named 160-card pool, are 平卡 (non-holo)."
+            }
+          ],
+          "printingId": "F0062-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0063",
@@ -5084,16 +5438,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -5135,6 +5490,32 @@
             }
           ],
           "printingId": "F0063-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0063-P03"
         }
       ],
       "unresolved": [
@@ -5163,23 +5544,52 @@
           "image": "images/CSAC_009_Snorlax_V_882263.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "deck-building-box",
+            "name": "Dynamax Clash Deck Building Box random Pokémon V foil"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16268.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Dynamax Clash specification states that all 60 cards in each constructed starter deck are 平卡 (non-holo), and that the Deck Building Box includes one random Pokémon V 闪卡 (foil card)."
+            }
+          ],
+          "printingId": "F0064-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0065",
@@ -5203,23 +5613,49 @@
           "image": "images/CSM1cC_102_Snorlax_GX_853670.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0065-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0066",
@@ -5243,23 +5679,46 @@
           "image": "images/CSM2.1C_054_Eevee___Snorlax_GX_881945.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/iMAAAeSwQIpp678y/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete front photograph of a CGC Pristine 10 Simplified Chinese Eevee & Snorlax GX CSM2.1C 054/045 card. The printed set code and number, Simplified Chinese text and CGC label establish the exact Golden Energy card; the reflective rainbow card face and CGC label's Holo designation establish its holo finish. Retained as SPEC-0147."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0147"
+          ],
+          "image": "verification/specimens/SPEC-0147.jpg",
+          "printingId": "F0066-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0067",
@@ -5285,16 +5744,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -5336,6 +5796,32 @@
             }
           ],
           "printingId": "F0067-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0067-P03"
         }
       ],
       "unresolved": [
@@ -5364,23 +5850,49 @@
           "image": "images/CSM2cC_103_Eevee___Snorlax_GX_V1_851389.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0068-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0069",
@@ -5404,23 +5916,49 @@
           "image": "images/CSM2cC_170_Eevee___Snorlax_GX_V2_851456.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0069-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0070",
@@ -5444,23 +5982,49 @@
           "image": "images/CSM2cC_171_Eevee___Snorlax_GX_V3_851457.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V3"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V3"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0070-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0071",
@@ -5484,23 +6048,52 @@
           "image": "images/CSM2DC_213_Snorlax_888916.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Shining Synergy GX Starter Deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16344.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Shining Synergy GX starter-deck specification states that all 60 constructed-deck cards, drawn from its named 351-card pool, are 平卡 (non-holo)."
+            }
+          ],
+          "printingId": "F0071-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0072",
@@ -5524,23 +6117,82 @@
           "image": "images/CSMPC_h009_Snorlax_886773.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Battle Party ordinary deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/15951.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Battle Party specification describes ordinary and foil packs with the same card contents and different processing, positively establishing both flat and foil copies of each included deck card."
+            }
+          ],
+          "printingId": "F0072-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Battle Party foil deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/15951.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Battle Party specification describes ordinary and foil packs with the same card contents and different processing, positively establishing both flat and foil copies of each included deck card."
+            }
+          ],
+          "printingId": "F0072-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0073",
@@ -5564,23 +6216,52 @@
           "image": "images/CSUC_010_Snorlax_853988.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "print-identity",
+              "text": "F rarity symbol"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/PYIAAeSwGRBopW3h/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller image of Simplified Chinese Snorlax CSUC 010/012. The Simplified Chinese text, CSUC set code and 010/012 collector number establish the exact localized card; the exact listing item data identify rarity CHR and finish Holo. Retained as SPEC-0153."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0153"
+          ],
+          "image": "verification/specimens/SPEC-0153.jpg",
+          "printingId": "F0073-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0074",
@@ -5606,16 +6287,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -5657,6 +6339,32 @@
             }
           ],
           "printingId": "F0074-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0074-P03"
         }
       ],
       "unresolved": [
@@ -5687,16 +6395,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -5738,6 +6447,32 @@
             }
           ],
           "printingId": "F0075-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0075-P03"
         }
       ],
       "unresolved": [
@@ -5768,16 +6503,17 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -5819,6 +6555,32 @@
             }
           ],
           "printingId": "F0076-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0076-P03"
         }
       ],
       "unresolved": [
@@ -5847,23 +6609,52 @@
           "image": "images/CSVE1C_093_Snorlax_877905.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Battle Party Shared Dream flat-card deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/19640.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official product specification states that Shared Dream has fourteen flat-card decks plus one foil Mewtwo deck and Shining Dream has eighteen flat-card decks plus two foil decks; the corresponding flat and foil decks have identical card contents and differ only in processing."
+            }
+          ],
+          "printingId": "F0077-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0078",
@@ -5887,23 +6678,52 @@
           "image": "images/CSVE2C_122_Snorlax_887279.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Battle Party Shining Dream flat-card deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/19640.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official product specification states that Shared Dream has fourteen flat-card decks plus one foil Mewtwo deck and Shining Dream has eighteen flat-card decks plus two foil decks; the corresponding flat and foil decks have identical card contents and differ only in processing."
+            }
+          ],
+          "printingId": "F0078-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0079",
@@ -5927,23 +6747,82 @@
           "image": "images/CSVH1C_a001_Snorlax_860966.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Happy Set 1 ordinary deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/15585.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official first Happy Set specification positively describes the same constructed-deck contents in ordinary and foil processing, establishing both flat and foil copies for cards in the paired deck."
+            }
+          ],
+          "printingId": "F0079-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Happy Set 1 foil deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/15585.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official first Happy Set specification positively describes the same constructed-deck contents in ordinary and foil processing, establishing both flat and foil copies for cards in the paired deck."
+            }
+          ],
+          "printingId": "F0079-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0080",
@@ -5967,23 +6846,82 @@
           "image": "images/CSVH4C_a003_Snorlax_888115.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Happy Set 4 ordinary deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/21022.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official fourth Happy Set specification positively describes ordinary and foil versions with the same constructed-deck contents and different processing."
+            }
+          ],
+          "printingId": "F0080-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Happy Set 4 foil deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/21022.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official fourth Happy Set specification positively describes ordinary and foil versions with the same constructed-deck contents and different processing."
+            }
+          ],
+          "printingId": "F0080-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0081",
@@ -6007,23 +6945,82 @@
           "image": "images/CSVH4C_p006_Snorlax_ex_888095.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo",
+        "holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
-        "holo": "pending",
+        "non-holo": "confirmed",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Happy Set 4 ordinary deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/21022.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official fourth Happy Set specification positively describes ordinary and foil versions with the same constructed-deck contents and different processing."
+            }
+          ],
+          "printingId": "F0081-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Happy Set 4 foil deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/21022.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official fourth Happy Set specification positively describes ordinary and foil versions with the same constructed-deck contents and different processing."
+            }
+          ],
+          "printingId": "F0081-P02"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0082",
@@ -6047,23 +7044,52 @@
           "image": "images/CSVL1C_109_Snorlax_839842.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "special-pack",
+            "name": "Departure Special Pack special-illustration foil slot"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/15499.html",
+              "sourceType": "Official Mainland China Simplified Chinese product specification",
+              "authorityTier": "official-primary",
+              "coverage": "product-line-description",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official Departure Special Pack specification states that the second card can be a newly included Pokémon special-illustration 闪卡; SPEC-0154 establishes the exact CSVL1C 109/049 Snorlax special-illustration identity."
+            }
+          ],
+          "printingId": "F0082-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0083",
@@ -6093,14 +7119,14 @@
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "pending",
+      "patternStatus": "partial",
       "printings": [
         {
           "finish": "reverse-holo",
@@ -6120,6 +7146,35 @@
             }
           ],
           "printingId": "F0083-P01"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "multicolour sparkle across artwork and frame",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "print-identity",
+              "text": "F rarity symbol"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/erwAAOSwjxpn2Lqe/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete front photograph of Simplified Chinese Snorlax CSZC 018/066 from Variety Treasure Box. The Simplified Chinese text, printed CSZC set code, F rarity and collector number establish the exact card. Dense multicoloured reflective flecks are directly visible across the artwork and card frame, and the seller independently identifies the pictured card as Special Holo. Retained as SPEC-0149."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0149"
+          ],
+          "image": "verification/specimens/SPEC-0149.jpg",
+          "printingId": "F0083-P02"
         }
       ],
       "unresolved": [
@@ -27135,23 +28190,52 @@
           "image": "images/S-P_CS_061_Snorlax_852628.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "event-promo",
+            "name": "2023 tournament participation promo"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo/",
+              "sourceType": "Specialist per-language promo record",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "Pokumon's exact Simplified-Chinese 061/S-P Snorlax record identifies the Tournament Participation printing as Non-holo."
+            }
+          ],
+          "printingId": "F0323-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0324",
@@ -35692,20 +36776,50 @@
         }
       ],
       "availableFinishes": [
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": {
+            "kind": "event-promo-pack",
+            "name": "Event Special Pack Part 3"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0456-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -35723,7 +36837,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0456-P01"
+          "printingId": "F0456-P02"
         }
       ],
       "unresolved": [

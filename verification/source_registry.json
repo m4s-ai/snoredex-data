@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 29,
-   "evidenceRecords": 1070,
-   "uniqueUrls": 1063,
+   "providers": 30,
+   "evidenceRecords": 1084,
+   "uniqueUrls": 1077,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3323
+   "claimsAttributed": 3374
   }
  },
  "providers": [
@@ -161,6 +161,31 @@
    ],
    "uniqueSources": 123,
    "claimsSupported": 419
+  },
+  {
+   "providerId": "pokemon-cn-official",
+   "displayName": "Pokémon official website (Mainland China)",
+   "organization": "Pokémon (Shanghai) Toys Co., Ltd.",
+   "homepage": "https://www.pokemon.cn/tcg/",
+   "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
+   "category": "official-publisher",
+   "authorityTier": 1,
+   "coverage": "positive Simplified Chinese card, product, rarity and finish statements",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "finish",
+    "product"
+   ],
+   "attribution": "Mainland Chinese card and product data © Pokémon (Shanghai) Toys Co., Ltd.",
+   "notes": "Only explicit retained publisher statements and card renders are positive evidence; missing products, pages, cards or unstated finishes remain unknown.",
+   "hosts": [
+    "www.pokemon.cn",
+    "pokemon.cn",
+    "image.pokemon.com.cn"
+   ],
+   "uniqueSources": 10,
+   "claimsSupported": 46
   },
   {
    "providerId": "pokemon-card-jp",
@@ -359,16 +384,17 @@
    "coverage": "one row per Asian market printing; Western printings lumped into a single English row",
    "supportsAbsence": false,
    "usedFor": [
-    "language"
+    "language",
+    "finish"
    ],
    "attribution": "Promo printing data from pokumon.com.",
-   "notes": "Indexes English names only. Absence never contradicts a Western language.",
+   "notes": "Indexes English names only. Exact per-card pages can positively state a finish, but omissions never contradict a language or finish.",
    "hosts": [
     "pokumon.com",
     "www.pokumon.com"
    ],
-   "uniqueSources": 2,
-   "claimsSupported": 3
+   "uniqueSources": 3,
+   "claimsSupported": 5
   },
   {
    "providerId": "pokecottage",
@@ -817,8 +843,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 40,
-   "claimsSupported": 79
+   "uniqueSources": 43,
+   "claimsSupported": 82
   }
  ],
  "evidence": [
@@ -9024,7 +9050,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0456-P01",
+    "F0456-P02",
     "SV-P/CS 277 base"
    ],
    "retrievedAt": null,
@@ -11896,6 +11922,222 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15499.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0082-P01",
+    "override:pokemon-cn-departure-special-pack"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15585.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0079-P01",
+    "F0079-P02",
+    "override:pokemon-cn-happy-set-1-decks"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15831.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0061-P01",
+    "F0062-P01",
+    "override:pokemon-cn-gallant-galaxy-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15951.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0072-P01",
+    "F0072-P02",
+    "override:pokemon-cn-battle-party-flat-and-foil"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16070.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0059-P01",
+    "override:pokemon-cn-primordial-arts-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16268.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0056-P01",
+    "F0064-P01",
+    "override:pokemon-cn-dynamax-clash-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16344.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0071-P01",
+    "override:pokemon-cn-shining-synergy-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese card-finish guide"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 20,
+   "stableIds": [
+    "F0000-P03",
+    "F0001-P01",
+    "F0051-P03",
+    "F0052-P01",
+    "F0053-P01",
+    "F0055-P01",
+    "F0057-P03",
+    "F0058-P01",
+    "F0060-P03",
+    "F0063-P03",
+    "F0065-P01",
+    "F0067-P03",
+    "F0068-P01",
+    "F0069-P01",
+    "F0070-P01",
+    "F0074-P03",
+    "F0075-P03",
+    "F0076-P03",
+    "F0456-P01",
+    "override:pokemon-cn-simplified-finish-rules"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 20
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/19640.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0077-P01",
+    "F0078-P01",
+    "override:pokemon-cn-battle-party-dream-decks"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/21022.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 5,
+   "stableIds": [
+    "F0080-P01",
+    "F0080-P02",
+    "F0081-P01",
+    "F0081-P02",
+    "override:pokemon-cn-happy-set-4-decks"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 5
+  },
+  {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -14726,6 +14968,25 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0323-P01",
+    "override:pokumon-s-p-cs-061"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636",
    "nonUrlEvidenceId": null,
    "providerId": "psa",
@@ -15204,6 +15465,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/PYIAAeSwGRBopW3h/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0073-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -15305,6 +15583,40 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0148-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/erwAAOSwjxpn2Lqe/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0083-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/iMAAAeSwQIpp678y/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0066-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
