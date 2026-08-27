@@ -465,7 +465,7 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
     if not text:
         return []
     normalized = str(text).strip()
-    if normalized.casefold() == "editie 1":
+    if normalized.casefold() in {"editie 1", "edizione 1"}:
         kind = "edition-stamp"
     elif normalized.casefold() == "staff":
         kind, normalized = "staff", "Staff"

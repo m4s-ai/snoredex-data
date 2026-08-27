@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 26,
-   "evidenceRecords": 933,
-   "uniqueUrls": 926,
+   "evidenceRecords": 948,
+   "uniqueUrls": 941,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 2904
+   "claimsAttributed": 2921
   }
  },
  "providers": [
@@ -182,8 +182,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 86,
-   "claimsSupported": 671
+   "uniqueSources": 87,
+   "claimsSupported": 673
   },
   {
    "providerId": "tcgcsv",
@@ -585,7 +585,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 41
+   "claimsSupported": 42
   },
   {
    "providerId": "inspected-specimen",
@@ -628,8 +628,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 3,
-   "claimsSupported": 4
+   "uniqueSources": 4,
+   "claimsSupported": 5
   },
   {
    "providerId": "seller-listing-photo",
@@ -650,8 +650,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 8,
-   "claimsSupported": 9
+   "uniqueSources": 21,
+   "claimsSupported": 22
   }
  ],
  "evidence": [
@@ -940,6 +940,25 @@
     "U0266"
    ],
    "retrievedAt": "2026-07-21",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia World Championships deck description"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0587-P01",
+    "override:colorless-lugia-wcd-finish"
+   ],
+   "retrievedAt": "2026-08-27",
    "usageCount": 2
   },
   {
@@ -8416,7 +8435,7 @@
     "F0316-P02",
     "F0317-P02",
     "F0318-P02",
-    "F0319-P01",
+    "F0319-P02",
     "RR 111 base"
    ],
    "retrievedAt": null,
@@ -10054,6 +10073,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2046269749/2046269749.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0315-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-listing-photo",
@@ -10468,10 +10504,11 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 41,
+   "stableIdCount": 42,
    "stableIds": [
     "F0093-P01",
     "F0140-P01",
+    "F0146-P01",
     "F0148-P01",
     "F0166-P02",
     "F0289-P02",
@@ -10513,7 +10550,7 @@
     "override:owner-scan-review"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 41
+   "usageCount": 42
   },
   {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
@@ -12614,6 +12651,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0118-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -12626,6 +12680,159 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0140-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0146-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://federicstore.it/wp-content/uploads/2020/06/50-68r-destinosfuggente.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0146-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0319-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0587-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/H4wAAeSwIihqJ9Kd/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0311-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/IZ0AAeSwl~ZplBcJ/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0034-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0385-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0171-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0587-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -12683,6 +12890,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0164-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -12695,6 +12919,40 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0562-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0164-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/zHAAAeSw82lqTLpc/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0528-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
