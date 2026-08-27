@@ -272,6 +272,34 @@ def main() -> None:
         "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg"
     ]["claimFields"] == ["identity"]
     assert german_units["F0633"]["printings"][0]["specimenIds"] == ["SPEC-0128"]
+    spanish_ju11 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0165")
+    assert spanish_ju11["availabilityStatus"] == "confirmed"
+    assert len(spanish_ju11["printings"]) == 1
+    spanish_ju11_holo = spanish_ju11["printings"][0]
+    assert spanish_ju11_holo["printingId"] == "F0165-P01"
+    assert spanish_ju11_holo["finish"] == "holo"
+    assert "edition" not in spanish_ju11_holo
+    assert spanish_ju11_holo["specimenIds"] == ["SPEC-0129", "SPEC-0130"]
+    spanish_archive = {
+        row["specimenId"]: row for row in specimens
+        if row["specimenId"] in {
+            "SPEC-0131", "SPEC-0132", "SPEC-0133",
+            "SPEC-0134", "SPEC-0135", "SPEC-0136",
+        }
+    }
+    assert len(spanish_archive) == 6
+    assert all("physicalObservation" not in row for row in spanish_archive.values())
+    archive_only_finish_statuses = {
+        unit["finishUnitId"]: unit["availabilityStatus"] for unit in finish_units
+        if unit["finishUnitId"] in {"F0139", "F0172", "F0179", "F0529", "F0635"}
+    }
+    assert archive_only_finish_statuses == {
+        "F0139": "marketplace-claimed",
+        "F0172": "marketplace-claimed",
+        "F0179": "marketplace-claimed",
+        "F0529": "pending",
+        "F0635": "pending",
+    }
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],

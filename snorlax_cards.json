@@ -39,8 +39,8 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-08-27",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 382,
-      "withOnlyMarketplaceClaim": 77,
+      "withConfirmedFinish": 383,
+      "withOnlyMarketplaceClaim": 76,
       "pendingFinish": 103,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
@@ -7667,7 +7667,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -7797,17 +7797,17 @@
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "marketplace-claimed",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0165",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -7818,8 +7818,13 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0129.jpg",
+                "specimenIds": [
+                  "SPEC-0129",
+                  "SPEC-0130"
+                ]
               }
             ]
           },

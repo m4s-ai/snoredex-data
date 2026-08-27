@@ -10295,12 +10295,15 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0165-P01",
         "semanticPrintingId": "PRINTING:2ea0186aedbd7154da75ef5c",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+        "materializedTargetId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0129",
+          "SPEC-0130"
+        ]
       }
     },
     {
@@ -28499,6 +28502,40 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:efd00c69b82491f3a04b123f, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:efd00c69b82491f3a04b123f"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0129",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0129",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0129",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0130",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0130",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0130",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c"
       }
     },
     {
@@ -80424,6 +80461,31 @@
         "sourceFinishUnitId": "F0278",
         "sourcePrintingId": "F0278-P01",
         "establishingClaimId": "CLAIM:finish:PRINTING:2e48c98bd8a510551ddda590"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+        "semanticPrintingId": "PRINTING:2ea0186aedbd7154da75ef5c",
+        "cardReleaseId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0165",
+        "sourcePrintingId": "F0165-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:2ea0186aedbd7154da75ef5c",
+        "specimenIds": [
+          "SPEC-0129",
+          "SPEC-0130"
+        ]
       }
     },
     {
@@ -138834,10 +138896,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:2ea0186aedbd7154da75ef5c",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -148353,6 +148417,26 @@
       "toId": "PHYSICAL:PRINTING:efd00c69b82491f3a04b123f",
       "provenance": {
         "specimenId": "SPEC-0128"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0129",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "provenance": {
+        "specimenId": "SPEC-0129"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0130",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "provenance": {
+        "specimenId": "SPEC-0130"
       }
     },
     {
@@ -186295,6 +186379,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:2ea0186aedbd7154da75ef5c",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:32dcae018930290433881198",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -223117,9 +223217,9 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0165-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -238364,17 +238464,31 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:efd00c69b82491f3a04b123f, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0129",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0130",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 6717,
-    "edges": 10151,
-    "migrationInputs": 2228,
+    "entities": 6720,
+    "edges": 10155,
+    "migrationInputs": 2230,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 204,
+      "candidate-needs-evidence": 205,
       "carried": 67,
-      "established-and-mapped": 1299,
+      "established-and-mapped": 1300,
       "linked-local-counterpart": 4,
       "mapped": 218,
       "needs-evidence": 127,
@@ -238382,9 +238496,9 @@
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1662,
+    "candidateClaims": 1664,
     "cardReleases": 612,
-    "physicalPrintings": 614,
+    "physicalPrintings": 615,
     "setSourceRecords": 347,
     "setSourceDispositions": 347,
     "localizations": 16

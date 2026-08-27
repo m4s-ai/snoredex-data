@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 128,
+  "count": 136,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -2782,6 +2782,160 @@
         "basis": "The complete German XY179 photograph visibly shows foil sparkle and reflection in the artwork; the exact seller product title independently identifies Holo Promo Relaxo XY179 Deutsch."
       },
       "listingUrl": "https://shpnpokestore.de/en/products/pokemon-karte-holo-promo-relaxo-xy179-deutsch-1"
+    },
+    {
+      "specimenId": "SPEC-0129",
+      "setCode": "JU",
+      "number": "11/64",
+      "variant": "V1",
+      "language": "Spanish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller front photograph",
+      "photograph": "SPEC-0129.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
+      "photographSha256": "sha256:84ab65029f730f26d318f2921d8e8a55a1d850b50e08cb03de6245a4594f9a60",
+      "observed": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0165-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete Spanish 11/64 card directly shows a reflective holo artwork field; the exact seller listing independently identifies Spanish, Jungle 11/64 and Holo Rare."
+      },
+      "listingUrl": "https://www.ebay.com/itm/137311196693"
+    },
+    {
+      "specimenId": "SPEC-0130",
+      "setCode": "JU",
+      "number": "11/64",
+      "variant": "V1",
+      "language": "Spanish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller back photograph paired with the front",
+      "photograph": "SPEC-0130.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
+      "photographSha256": "sha256:5e02efc307764513cd636b3477d856709e54e0cef2323e87f97b10cb0497e2f6",
+      "observed": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0165-P01"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "This back is paired by the seller listing with the Spanish Jungle 11/64 holo front retained as SPEC-0129."
+      },
+      "listingUrl": "https://www.ebay.com/itm/137311196693"
+    },
+    {
+      "specimenId": "SPEC-0131",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "PKParaiso database scan",
+      "photograph": "SPEC-0131.jpg",
+      "photographSource": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+      "photographSha256": "sha256:6b0f60a61336c529c6187a0eee0c33d6e7eaeda28d40311fd880756f749ebe6a",
+      "observed": "Spanish database scan of Generations Snorlax 58/83. Pokémon Básico, Vuelta y Cabezadita, Presión Soporífera, the Generations symbol and 58/83 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0245"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0132",
+      "setCode": "KSS",
+      "number": "26/39",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0132.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_%28Bienvenidos_a_Kalos_TCG%29.png",
+      "photographSha256": "sha256:03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
+      "observed": "Spanish database scan of Kalos Starter Set Snorlax 26/39. Pokémon Básico, Golpe Roca, Fuerza and 26/39 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0482"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0133",
+      "setCode": "JU",
+      "number": "11/64",
+      "variant": "V1",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0133.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0d/latest/20180604134733/Snorlax_%28Jungla_11_TCG%29.png",
+      "photographSha256": "sha256:9fbe037d38f29d023f960bddc480857134bed2780e6f0382171288070797bfd0",
+      "observed": "Spanish database scan of Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the localized card identity. No physical finish is inferred from this database render; the separate physical seller photographs SPEC-0129 and SPEC-0130 support the holo observation.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0122"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0134",
+      "setCode": "JU",
+      "number": "27/64",
+      "variant": "V2",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0134.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png",
+      "photographSha256": "sha256:1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2",
+      "observed": "Spanish database scan of Jungle Snorlax 27/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 27/64 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0092"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0135",
+      "setCode": "XYPR",
+      "number": "179",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0135.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e9/latest/20210107134302/Snorlax_%28XY_Promo_179_TCG%29.png",
+      "photographSha256": "sha256:0c14442b0ffbf0daf133e2d5815bed368647f9b7d897debde8a9f784e9322f54",
+      "observed": "Spanish database scan of XY Black Star Promo Snorlax XY179. Pokémon Básico, Habilidad: Inmunidad, Golpe Cuerpo, the black-star promo symbol and XY179 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0229"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0136",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party database",
+      "inspectedFrom": "WikiDex database scan",
+      "photograph": "SPEC-0136.png",
+      "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c0/latest/20200327234844/Snorlax_%28SWSH_Promo_32_TCG%29.png",
+      "photographSha256": "sha256:3efa97774bdb63a31f82b1fbf8793209a3b6332e6f9314995d75dc88ccdb1fdd",
+      "observed": "Spanish database scan of SWSH Black Star Promo Snorlax SWSH032. Pokémon Básico, Placaje Giro, Impacto Pesado, the black-star promo symbol and SWSH032 establish the localized card identity. No physical finish is inferred from this database render.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "U0418"
+      ]
     }
   ]
 }

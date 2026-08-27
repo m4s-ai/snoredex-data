@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:0c3c6120b67b22fa1b73df88fe2ac2eb6044d426415348fa15eab82738c6a91f",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:edfd5df16ec88032b52f72b9e15b267660bb64cb9a1864b7bf1e1d2fadafd4b2",
+    "toFingerprint": "sha256:5f5e28cccb9f45a9cecac71ed126cb846fafedc0a7c0146b60f26f8f606a4c05",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:edfd5df16ec88032b52f72b9e15b267660bb64cb9a1864b7bf1e1d2fadafd4b2",
+      "toFingerprint": "sha256:5f5e28cccb9f45a9cecac71ed126cb846fafedc0a7c0146b60f26f8f606a4c05",
       "cumulative": true,
       "transitions": [
         {
@@ -700,6 +700,15 @@
           "fromItemId": "item-133f457d-c7da-518e-b2e9-5c92b80fbf5e",
           "toItemIds": [
             "item-133f457d-c7da-518e-b2e9-5c92b80fbf5e"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
+          "fromItemId": "item-134d7cff-5acc-53a0-b171-a0e11019fc6d",
+          "toItemIds": [
+            "item-134d7cff-5acc-53a0-b171-a0e11019fc6d"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -26257,6 +26266,7 @@
         "cardReleaseId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam",
         "disposition": "projected",
         "targetItemIds": [
+          "item-134d7cff-5acc-53a0-b171-a0e11019fc6d",
           "item-93a12a1f-62e5-5ded-ac24-51a46ed9eb1e",
           "item-c2ef8665-e27f-52f4-90e0-607614fed6df"
         ],
@@ -29093,6 +29103,11 @@
         "targetItemId": "item-11d75ee5-2f21-5592-bb19-21f5c60a9978"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+        "disposition": "projected",
+        "targetItemId": "item-134d7cff-5acc-53a0-b171-a0e11019fc6d"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:32dcae018930290433881198",
         "disposition": "projected",
         "targetItemId": "item-fccd9f17-ce77-5f19-ad5d-a3662fc1d6c8"
@@ -29676,7 +29691,7 @@
     "summary": {
       "legacyChecklistRows": 852,
       "cardReleases": 612,
-      "physicalPrintings": 614,
+      "physicalPrintings": 615,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
