@@ -94,6 +94,9 @@ def main() -> None:
     assert [source["sourceType"] for source in owner_sources] == [
         "Owner-supplied physical card photograph", "Owner attestation (domain expert)"
     ]
+    assert owner_specimen["photographSource"] == (
+        "https://github.com/m4s-ai/snoredex-data/issues/265#attachment-1"
+    )
     assert "retained owner-supplied physical card photograph" in owner_sources[1]["evidence"]
     assert "seller photograph" not in owner_sources[1]["evidence"]
     portuguese_owner_confirmed = {
