@@ -38,7 +38,7 @@ def write_catalog(path: Path, rows: list[tuple]) -> None:
             distribution_json TEXT,
             card_size TEXT NOT NULL,
             finish_verification_status TEXT NOT NULL,
-            release_date TEXT NOT NULL,
+            release_date TEXT,
             image_path TEXT,
             cardmarket_url TEXT NOT NULL
         );
@@ -52,12 +52,15 @@ def write_catalog(path: Path, rows: list[tuple]) -> None:
     connection.close()
 
 
-def item(checklist_id: str, number: str, finish: str = "unresolved") -> tuple:
+def item(
+    checklist_id: str, number: str, finish: str = "unresolved",
+    release_date: str | None = "1999-06-16",
+) -> tuple:
     return (
         checklist_id, "unresolved" if finish == "unresolved" else "documented", "Snorlax",
         "JU", number, "Jungle", "NL", "Dutch", "Unlimited", finish, finish, None,
         None, None, "unknown" if finish == "unresolved" else "standard",
-        "pending" if finish == "unresolved" else "confirmed", "1999-06-16", None,
+        "pending" if finish == "unresolved" else "confirmed", release_date, None,
         f"https://www.cardmarket.com/ju/{number}",
     )
 
@@ -69,7 +72,7 @@ def main() -> None:
         personal = root / "tracker.sqlite"
         old_id = "ju-11-dutch-unl-unresolved-unknown"
         ambiguous_id = "ju-27-dutch-unl-unresolved-unknown"
-        write_catalog(catalog, [item(old_id, "11"), item(ambiguous_id, "27")])
+        write_catalog(catalog, [item(old_id, "11", release_date=None), item(ambiguous_id, "27")])
         tracker.build_tracker(personal, catalog)
 
         connection = sqlite3.connect(personal)

@@ -225,7 +225,20 @@ for c in cards:
     if not langs:
         skipped.append(key)
         continue
-    d, exact, date_source = get_date(c)
+    finish_by_language = (c.get("finishAvailability") or {}).get("byLanguage", [])
+    product_printings = [
+        printing
+        for cell in finish_by_language
+        for printing in cell.get("printings") or []
+        if printing.get("productMapping") == "mapped"
+    ]
+    if product_printings and all(
+        "releaseDate" in printing and printing.get("releaseDate") is None
+        for printing in product_printings
+    ):
+        d, exact, date_source = "9999", False, None
+    else:
+        d, exact, date_source = get_date(c)
     ed = c.get("editions") or {}
     base = {
         "date": d, "dateExact": exact, "dateSource": date_source,
@@ -233,7 +246,7 @@ for c in cards:
         "setName": c["setName"], "variant": vt,
         "variantName": c.get("variantName"), "rarity": c.get("rarity"),
         "artist": c.get("artist"), "cardmarketUrl": c["productUrl"], "image": c["imageFile"],
-        "finishByLanguage": (c.get("finishAvailability") or {}).get("byLanguage", []),
+        "finishByLanguage": finish_by_language,
         "finishCompletenessByLanguage": {
             language: finish_lookup.get((c["setCode"], str(c.get("number") or ""), language), {}).get(
                 "completenessStatus", "pending"

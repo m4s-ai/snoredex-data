@@ -103,7 +103,7 @@ negative printing claim.
 | `release_rows` | Stable chronological row id × edition. |
 | `finish_units` | Set code × collector number × language. |
 | `printings` | Logical physical printing with technical finish, pattern, stamp, distribution and size kept separate. |
-| `checklist_items` | Stable physical checklist id. A missing `printing_id` is an explicit unresolved placeholder. |
+| `checklist_items` | Stable physical checklist id. A missing `printing_id` is an explicit unresolved placeholder; `release_date` is null when no positive date is established for that physical printing. |
 | `providers` / `printing_sources` | Current source metadata and finish evidence; no historical observations. |
 | `checklist_evidence_refs` | Ordered evidence URLs or prose references. These are deliberately references, not falsely advertised as stable source IDs. |
 | `quality_issues` | One queryable record per warning or intentional null. |

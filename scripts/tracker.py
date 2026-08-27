@@ -57,7 +57,7 @@ CREATE TABLE catalog_items (
     distribution_json TEXT,
     card_size TEXT NOT NULL,
     finish_verification_status TEXT NOT NULL,
-    release_date TEXT NOT NULL,
+    release_date TEXT,
     image_path TEXT,
     cardmarket_url TEXT NOT NULL
 ) WITHOUT ROWID;

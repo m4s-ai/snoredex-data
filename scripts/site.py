@@ -109,7 +109,7 @@ def current_state_summary(row: dict[str, Any]) -> str:
             if printing.get("cardSize"):
                 sizes.add(printing["cardSize"])
 
-    release = str(row["date"]) + (" (approximate)" if row.get("dateApproximate") else "")
+    release = display_date(row)
     release_source = row.get("dateSource") or {}
     finish_text = ", ".join(
         f"{FINISH_LABEL.get(f, f)} = {s}" for f, s in sorted(finishes.items())
@@ -152,6 +152,8 @@ def correction_url(row: dict[str, Any]) -> str:
 
 
 def display_date(row: dict[str, Any]) -> str:
+    if str(row.get("dateSort") or "").startswith("9999"):
+        return "Undated"
     if row.get("dateApproximate"):
         return "~" + str(row["date"])[:4]
     return str(row["date"])
@@ -327,7 +329,10 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "edition": row["edition"],
             "dateSort": row["dateSort"],
             "dateDisplay": display_date(row),
-            "dateStatus": "approximate" if row.get("dateApproximate") else "exact",
+            "dateStatus": (
+                "unknown" if str(row.get("dateSort") or "").startswith("9999")
+                else "approximate" if row.get("dateApproximate") else "exact"
+            ),
             "dateSource": row.get("dateSource"),
             "image": row.get("image"),
             "finishes": sorted(finishes),
