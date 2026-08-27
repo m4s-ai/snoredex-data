@@ -464,6 +464,19 @@ def main() -> int:
                 f"DF={len(dragon_frontiers)}, xJTG={len(printings_of(jtg_promos))}, "
                 f"xPRE={len(printings_of(prismatic))}, EXS={len(exs_printings)}")
 
+    prize8_units = [
+        unit for unit in finish_units
+        if unit.get("setCode") == "PPS8 JTG" and unit.get("number") == "JTG 117"
+    ]
+    prize8_ok = len(prize8_units) == 6 and all(
+        len(printings_of(unit)) == 2
+        and {printing.get("finish") for printing in printings_of(unit)} == {"non-holo", "holo"}
+        for unit in prize8_units
+    )
+    suite.check("Prize Pack Series Eight products are not duplicated", prize8_ok,
+                ",".join(f"{unit.get('language')}={len(printings_of(unit))}"
+                         for unit in prize8_units))
+
     hop_english = unit_of(finish_units, setCode="JTG", number="117", language="English")
     hop_finishes = list((hop_english or {}).get("availableFinishes") or [])
     hop_ok = len(hop_finishes) == 2 and all(f in hop_finishes for f in ("holo", "reverse-holo"))
