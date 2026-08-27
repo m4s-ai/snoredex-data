@@ -167,21 +167,21 @@ def main() -> None:
         "SPEC-0135": "wikidex",
         "SPEC-0136": "wikidex",
     }
-    registry_by_url = {
-        row.get("canonicalUrl"): row for row in source_registry if row.get("canonicalUrl")
+    registry_by_source = {
+        row.get("canonicalUrl") or row["nonUrlEvidenceId"]: row for row in source_registry
     }
-    capability_by_url = {
+    capability_by_source = {
         row["sourceKey"]: row for row in read("source_capability_graph.json")["sourceResolution"]
     }
     for specimen_id, provider_id in database_provider_by_specimen.items():
         specimen = next(row for row in specimens if row["specimenId"] == specimen_id)
         canonical_source = unquote(specimen["photographSource"])
-        registry_row = registry_by_url[canonical_source]
+        registry_row = registry_by_source[canonical_source]
         assert registry_row["providerId"] == provider_id
         assert registry_row["dimensions"] == ["identity"]
         assert specimen_id in registry_row["stableIds"]
         assert set(specimen["citedBy"]) <= set(registry_row["stableIds"])
-        capability_row = capability_by_url[canonical_source]
+        capability_row = capability_by_source[canonical_source]
         assert capability_row["providerId"] == provider_id
         assert capability_row["dimensions"] == ["identity"]
     target_specimens = {
@@ -208,7 +208,7 @@ def main() -> None:
         source for source in source_registry
         if source.get("canonicalUrl") == portuguese_ju27["photographSource"]
     )
-    assert portuguese_ju27_source["dimensions"] == ["finish"]
+    assert portuguese_ju27_source["dimensions"] == ["finish", "identity"]
     archived_registry_source = next(
         source for source in source_registry
         if source.get("canonicalUrl") == archived_seller["photographSource"]
@@ -367,6 +367,25 @@ def main() -> None:
         "U0294": ["SPEC-0145"],
     }
     units = {row["unitId"]: row for row in read("units.json")}
+    corroborated_unit_ids = {
+        unit_id for unit_id, unit in units.items() if unit.get("corroborated") is True
+    }
+    for specimen in specimens:
+        cited_units = set(specimen.get("citedBy") or []) & corroborated_unit_ids
+        if not cited_units:
+            continue
+        source_key = (
+            unquote(specimen["photographSource"])
+            if specimen.get("photographSource") else "evidence:inspected-specimen"
+        )
+        if source_key not in registry_by_source:
+            source_key = source_key.split("#", 1)[0]
+        registry_row = registry_by_source[source_key]
+        assert "identity" in registry_row["dimensions"]
+        assert specimen["specimenId"] in registry_row["stableIds"]
+        assert cited_units <= set(registry_row["stableIds"])
+        capability_row = capability_by_source[source_key]
+        assert "identity" in capability_row["dimensions"]
     primary_checked_at = {
         "U0094": "2026-07-21T16:41:51", "U0295": "2026-07-22T09:26:20",
         "U0244": "2026-07-21T16:41:51", "U0417": "2026-07-21T14:59:21",

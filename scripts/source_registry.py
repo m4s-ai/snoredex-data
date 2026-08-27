@@ -666,20 +666,34 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
     return min(named)[2] if named else None
 
 
-def record_database_specimens(
-    specimens: list[dict[str, Any]], record: Callable[..., None]
+SPECIMEN_SOURCE_TYPES = {
+    "collection owner": "Owner-supplied physical card photograph",
+    "third-party seller": "Seller listing photograph",
+    "third-party scan archive": "Third-party scan archive",
+}
+
+
+def record_corroborating_specimens(
+    specimens: list[dict[str, Any]], units: list[dict[str, Any]],
+    record: Callable[..., None],
 ) -> None:
-    """Project identity-only database specimens into the source registry."""
+    """Project every specimen supporting a corroborated unit as identity evidence."""
+    corroborated = {unit["unitId"] for unit in units if unit.get("corroborated") is True}
     for specimen in specimens:
-        if specimen.get("heldBy") != "third-party database":
+        unit_ids = [ref for ref in specimen.get("citedBy") or [] if ref in corroborated]
+        if not unit_ids:
             continue
+        source_type = SPECIMEN_SOURCE_TYPES.get(
+            str(specimen.get("heldBy", "")).casefold(),
+            str(specimen.get("inspectedFrom") or "Inspected physical specimen photograph"),
+        )
         record(
-            specimen.get("photographSource"), specimen.get("inspectedFrom"),
+            specimen.get("photographSource"), source_type,
             "identity", specimen["specimenId"], specimen.get("recordedAt"),
         )
-        for unit_id in specimen.get("citedBy") or []:
+        for unit_id in unit_ids:
             record(
-                specimen.get("photographSource"), specimen.get("inspectedFrom"),
+                specimen.get("photographSource"), source_type,
                 "identity", unit_id, specimen.get("recordedAt"),
             )
 
@@ -739,10 +753,9 @@ def main() -> int:
                    unit["unitId"], (unit.get("checkedAt") or "")[:10] or None,
                    provider_id=unit.get("providerId"))
 
-    # Database scans without a physical observation still positively corroborate the localized
-    # card identity. Project that evidence by cited unit so corroborated flags cannot outrun the
-    # registry and capability graph; no finish or absence capability is inferred from the scan.
-    record_database_specimens(specimens, record)
+    # Every specimen used to mark a unit corroborated must reach the source graph as identity
+    # evidence. Finish/edition observations remain separate and no absence capability is inferred.
+    record_corroborating_specimens(specimens, units, record)
 
     for entry in source_first["prints"]:
         if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea"}:
