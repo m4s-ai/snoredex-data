@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 156,
+  "count": 252,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -244,12 +244,22 @@
       "inspectedFrom": "database scan",
       "photograph": "SPEC-0014.png",
       "photographSource": "https://github.com/user-attachments/assets/7302c36e-1046-458a-a397-4e594916f682",
-      "observed": "Korean Snorlax read off a clean database scan rather than a photograph — no photographic background, lighting or card edges: \"잠만보\", HP 140, Basic, Single Strike (일격) marker, attacks 「뺨때리기」 30 and 「일격태클」 120, Illus. Yuya Oka, \"101/S-P\", PROMO, regulation mark D, ©2021. Note verification/units.json records for S-P 156 state that S-P 101 is a different card; the owner presents it as the Korean counterpart. That disagreement is unresolved and is not settled by this record.",
+      "observed": "Korean Snorlax read off a clean database scan rather than a photograph — no photographic background, lighting or card edges: \"잠만보\", HP 140, Basic, Single Strike (일격) marker, attacks 「뺨때리기」 30 and 「일격태클」 120, Illus. Yuya Oka, \"101/S-P\", PROMO, regulation mark D, ©2021. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity.",
       "recordedAt": "2026-08-03",
       "citedBy": [
-        "KR:S-P:101:base"
+        "KR:S-P:101:base",
+        "U0523"
       ],
-      "photographSha256": "sha256:77758e788cfc990cb27fb628fb13442dbc5d98f423ab4e8a90e4deb81e982d6f"
+      "photographSha256": "sha256:77758e788cfc990cb27fb628fb13442dbc5d98f423ab4e8a90e4deb81e982d6f",
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/SP000000101",
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Pokumon's exact Korean 101/S-P record positively classifies this purchase promo as Non-holo."
+      }
     },
     {
       "specimenId": "SPEC-0015",
@@ -519,10 +529,22 @@
       "inspectedFrom": "owner photograph",
       "photograph": "SPEC-0028.png",
       "photographSource": "/tmp/claude-0/-home-user-snoredex-data/0a38d020-3b1f-5df4-934b-61dbad7e52e9/scratchpad/c_42697078.png",
-      "observed": "Korean Full Art Eevee & Snorlax-GX in a PSA holder, photographed by the owner and supplied through issue #166. The label reads \"2019 P.M. KOR. SM PROMO #140 / FA/EEVEE & SNORLAX GX / T.B/N.U. B.B.PURCHASE CP.\", GEM MT 10, cert 101016611. The card reads \"이브이&잠만보 GX\", 기본 (Basic), TAG TEAM, HP 270, Colorless; 응원, 덤프프레스 120+, 메가톤프렌즈GX 210; weakness Fighting x2, retreat 4; Illus. Tomokazu Komiya; PROMO, regulation mark C, \"140/SM-P\", ©2019 Pokémon. Note this is the Full Art by Tomokazu Komiya and dated 2019 — a different card from the Mitsuhiro Arita TAG TEAM art of the Thai 083 and Indonesian 166, which are ©2020. Same species pair, not the same printing.",
+      "observed": "Korean Full Art Eevee & Snorlax-GX in a PSA holder, photographed by the owner and supplied through issue #166. The label reads \"2019 P.M. KOR. SM PROMO #140 / FA/EEVEE & SNORLAX GX / T.B/N.U. B.B.PURCHASE CP.\", GEM MT 10, cert 101016611. The card reads \"이브이&잠만보 GX\", 기본 (Basic), TAG TEAM, HP 270, Colorless; 응원, 덤프프레스 120+, 메가톤프렌즈GX 210; weakness Fighting x2, retreat 4; Illus. Tomokazu Komiya; PROMO, regulation mark C, \"140/SM-P\", ©2019 Pokémon. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity.",
       "recordedAt": "2026-08-10",
-      "citedBy": [],
-      "photographSha256": "sha256:a79d0556f976ca0e079bf7e7bcb4f914608025bdec06505cded07d0c9643a685"
+      "citedBy": [
+        "KR:SM-P:140:base",
+        "U0627"
+      ],
+      "photographSha256": "sha256:a79d0556f976ca0e079bf7e7bcb4f914608025bdec06505cded07d0c9643a685",
+      "listingUrl": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "ripple",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Pokumon's exact Korean 140/SM-P record positively identifies the Full Art purchase promo with Ripple treatment."
+      }
     },
     {
       "specimenId": "SPEC-0029",
@@ -572,10 +594,22 @@
       "inspectedFrom": "owner photograph",
       "photograph": "SPEC-0031.png",
       "photographSource": "/tmp/claude-0/-home-user-snoredex-data/0a38d020-3b1f-5df4-934b-61dbad7e52e9/scratchpad/c_7e632ba1.png",
-      "observed": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on.",
+      "observed": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity.",
       "recordedAt": "2026-08-10",
-      "citedBy": [],
-      "photographSha256": "sha256:7b1e31e3e1eee9e7ef5fb294645e50eeff47eb00dfc13a5962252fea8eebb64e"
+      "citedBy": [
+        "KR:XY-P:167:base",
+        "U0661"
+      ],
+      "photographSha256": "sha256:7b1e31e3e1eee9e7ef5fb294645e50eeff47eb00dfc13a5962252fea8eebb64e",
+      "listingUrl": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Pokumon's exact Korean 167/XY-P Kisstick promotion record positively classifies the card as Non-holo."
+      }
     },
     {
       "specimenId": "SPEC-0032",
@@ -5017,6 +5051,329 @@
         "cardSize": "standard",
         "basis": "The rainbow colour field and reflective texture are visible across the full card face."
       }
+    },
+    {
+      "specimenId": "SPEC-0236",
+      "setCode": "s10a",
+      "number": "058/071",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0236.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
+      "photographSha256": "sha256:17501d9725a033f7164a607bca023ce3dd4af4670d075555277ba852359370f5",
+      "observed": "Complete official Korean render for Snorlax s10a 058/071. The printed Korean name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0344",
+        "KR:s10a:058/071:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011097"
+    },
+    {
+      "specimenId": "SPEC-0237",
+      "setCode": "s10a",
+      "number": "077/071",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0237.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
+      "photographSha256": "sha256:3f2ea9b4beb6e30c7e27611f0e8174d6cdb8f1c88fbbc2998618d1a2604a6fbf",
+      "observed": "Complete official Korean render for Snorlax s10a 077/071. The printed Korean name, collector identity, attacks and rarity CHR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0168",
+        "KR:s10a:077/071:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011126"
+    },
+    {
+      "specimenId": "SPEC-0238",
+      "setCode": "s10b",
+      "number": "056/071",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0238.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
+      "photographSha256": "sha256:1ee8f8f22dcfdeb70f45b172b1a131c10ee7abc28c9c1a8bc5f56a6fc96348ec",
+      "observed": "Complete official Korean render for Snorlax s10b 056/071. The printed Korean name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0202",
+        "KR:s10b:056/071:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2022010056"
+    },
+    {
+      "specimenId": "SPEC-0239",
+      "setCode": "s2",
+      "number": "077/096",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0239.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+      "photographSha256": "sha256:f802695d584a55e4163e1befaf3487946c0b04ef596399c8b9cf1b4cfbe15bdc",
+      "observed": "Complete official Korean render for Snorlax s2 077/096. The printed Korean name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0532",
+        "KR:s2:077/096:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0240",
+      "setCode": "s4",
+      "number": "084/100",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0240.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
+      "photographSha256": "sha256:2874364c7b3c7da8b37b89839ed88868604e398a3577e343241f6deb0e6a577b",
+      "observed": "Complete official Korean render for Snorlax s4 084/100. The printed Korean name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0291",
+        "KR:s4:084/100:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2020014084"
+    },
+    {
+      "specimenId": "SPEC-0241",
+      "setCode": "s8b",
+      "number": "126/184",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0241.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
+      "photographSha256": "sha256:9744693388678e99d7f2732932d5c59a8b59feffe10b7199cdaa8e088fceac2f",
+      "observed": "Complete official Korean render for Snorlax s8b 126/184. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0173",
+        "KR:s8b:126/184:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2022001126"
+    },
+    {
+      "specimenId": "SPEC-0242",
+      "setCode": "sI",
+      "number": "341/414",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0242.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
+      "photographSha256": "sha256:e87ba6a7c8f780b186cb664bd05d58c843a9cda46dc71aa7c705b8198d7c4c4b",
+      "observed": "Complete official Korean render for Snorlax sI 341/414. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0653",
+        "KR:sI:341/414:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0243",
+      "setCode": "sI",
+      "number": "342/414",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0243.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
+      "photographSha256": "sha256:0ace1412d4ebcaf7dcdb70f31144593a8072db33dbd70ebff479cf3d3b0bb6fb",
+      "observed": "Complete official Korean render for Snorlax sI 342/414. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0657",
+        "KR:sI:342/414:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0244",
+      "setCode": "s1H",
+      "number": "045/060",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0244.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
+      "photographSha256": "sha256:4da83cc89949086bc8a29ce85a2d9e8e2cb46c413fc8d7940f89e927a05efc06",
+      "observed": "Complete official Korean render for Snorlax V s1H 045/060. The printed Korean name, collector identity, attacks and rarity RR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0511",
+        "KR:s1H:045/060:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0245",
+      "setCode": "s1H",
+      "number": "046/060",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0245.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
+      "photographSha256": "sha256:78d54a457db3fea62d834e9a61bfe5ceee6351e42fa37afb34759ba6bb4f10b6",
+      "observed": "Complete official Korean render for Snorlax VMAX s1H 046/060. The printed Korean name, collector identity, attacks and rarity RRR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0287",
+        "KR:s1H:046/060:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0246",
+      "setCode": "s1H",
+      "number": "066/060",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0246.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
+      "photographSha256": "sha256:d636da5eeb326b538c6b58be8fdaefdaf9f079352a8d77e925b3833171a35ba4",
+      "observed": "Complete official Korean render for Snorlax V s1H 066/060. The printed Korean name, collector identity, attacks and rarity SR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0548",
+        "KR:s1H:066/060:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0247",
+      "setCode": "sN",
+      "number": "008/024",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0247.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
+      "photographSha256": "sha256:7df4cb9094405827701a0608aeb36a3fab2c046e50d0fbf7c1034bd944a2b615",
+      "observed": "Complete official Korean render for Snorlax sN 008/024. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0770",
+        "KR:sN:008/024:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0248",
+      "setCode": "sm10",
+      "number": "076/095",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0248.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+      "photographSha256": "sha256:37b26aaa29afb9a8d95c6a40c079f03d6f415b39961b41cdf4be199ea1616c11",
+      "observed": "Complete official Korean render for Snorlax sm10 076/095. The printed Korean name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0264",
+        "KR:sm10:076/095:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0249",
+      "setCode": "smL",
+      "number": "038/051",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0249.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
+      "photographSha256": "sha256:8231f8f870bc7ed860fcd3f3fd63a9eb246e9ac403cc27b4068e2b6273ec35ec",
+      "observed": "Complete official Korean render for Snorlax smL 038/051. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0583",
+        "KR:smL:038/051:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2019006059"
+    },
+    {
+      "specimenId": "SPEC-0250",
+      "setCode": "sm9",
+      "number": "106/095",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0250.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
+      "photographSha256": "sha256:d063aef50742c0a61adc7fc9c4cf126c53affdf50a25787a032117e363dd7ff6",
+      "observed": "Complete official Korean render for Eevee & Snorlax GX sm9 106/095. The printed Korean name, collector identity, attacks and rarity SR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0633",
+        "KR:sm9:106/095:base"
+      ],
+      "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512"
+    },
+    {
+      "specimenId": "SPEC-0251",
+      "setCode": "sv4a",
+      "number": "310/190",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0251.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
+      "photographSha256": "sha256:8693799e3141cebd6eb24c56f5c77cd9bccc40655ccd74bac4715cf869da60b6",
+      "observed": "Complete official Korean render for Snorlax sv4a 310/190. The printed Korean name, collector identity, attacks and rarity S establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0384",
+        "KR:sv4a:310/190:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2024001310"
+    },
+    {
+      "specimenId": "SPEC-0252",
+      "setCode": "svG",
+      "number": "021/049",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Korea card render",
+      "photograph": "SPEC-0252.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512",
+      "photographSha256": "sha256:fcc50d13475108e8811abc5ebdf1364b6e4480b72a50694531e1c5981e2a7ffa",
+      "observed": "Complete official Korean render for Snorlax svG 021/049. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "U0466",
+        "KR:svG:021/049:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2023023021"
     }
   ]
 }

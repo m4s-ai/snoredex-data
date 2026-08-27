@@ -421,12 +421,18 @@ def legacy_row_releases(items: list[dict[str, Any]]) -> set[str]:
     }
 
 
+def collector_number(value: Any) -> str:
+    numerator = str(value or "").split("/", 1)[0]
+    return numerator.lstrip("0") or ("0" if numerator else "")
+
+
 def release_lookup(releases: list[dict[str, Any]]) -> dict[tuple[str, str, str], list[str]]:
     lookup: defaultdict[tuple[str, str, str], list[str]] = defaultdict(list)
     for release in releases:
         codes = {release.get("localSetCode"), release.get("viaLegacySetCode")} - {None}
         numbers = {
-            str(value or "") for value in (release.get("localNumber"), release.get("viaLegacyNumber"))
+            collector_number(value)
+            for value in (release.get("localNumber"), release.get("viaLegacyNumber"))
         }
         for code in codes:
             for number in numbers:
@@ -437,7 +443,7 @@ def release_lookup(releases: list[dict[str, Any]]) -> dict[tuple[str, str, str],
 def legacy_release_id(
     item: dict[str, Any], lookup: dict[tuple[str, str, str], list[str]]
 ) -> str:
-    key = (item["setCode"], str(item.get("number") or ""), item["language"])
+    key = (item["setCode"], collector_number(item.get("number")), item["language"])
     targets = sorted(set(lookup.get(key, [])))
     if len(targets) != 1:
         raise ContractError(f"legacy checklist row does not resolve exactly once: {item['checklistId']} -> {targets}")

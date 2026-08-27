@@ -21,6 +21,7 @@ def read(name: str) -> dict:
 
 
 def main() -> None:
+    assert collector.collector_number("076/095") == collector.collector_number("076")
     legacy_row = {
         "checklistId": "legacy-semantic-row",
         "printingId": "F0167-P01",

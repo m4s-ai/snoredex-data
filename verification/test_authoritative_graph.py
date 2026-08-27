@@ -19,6 +19,7 @@ from authoritative_graph import identity_view, project_physical_evidence, valida
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
     }) == [{"kind": "edition-stamp", "role": "print-identity", "text": "EDIZIONE 1"}]

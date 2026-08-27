@@ -4,18 +4,18 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "2200957206baef4bc04df62cff958d399530d8eb1c558ec8987102626482bb40",
+  "projectionVersion": "47f34cd1d60cafea47e7bd6ce8cb918ad3dfedb1b03109496c19e36d3ee55198",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 244,
+    "groups": 246,
     "mappedWorks": 38,
     "mappedAppearances": 179,
-    "unmappedReleases": 65,
-    "cardReleases": 627,
-    "physicalPrintings": 688,
-    "sourceObservations": 2190
+    "unmappedReleases": 67,
+    "cardReleases": 629,
+    "physicalPrintings": 691,
+    "sourceObservations": 2207
   },
   "groups": [
     {
@@ -3670,7 +3670,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sm9:unknown-local-set:via-106:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
           "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
           "cardKey": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
           "appearanceId": "APPEARANCE:IMAGE:db2ae515b7efc8ee96c4f98c",
@@ -3678,22 +3678,25 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sm9:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sm9",
+          "localSetCode": "sm9",
+          "localNumber": "106/095",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0633"
+          ],
           "legacyVariants": [
-            "V2"
+            "V2",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
-            "artist": "5ban Graphics",
-            "variant": "V2",
+            "artist": null,
+            "variant": "V2, base",
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -3708,9 +3711,26 @@
               "contentHash": "7f7f4ebb3a864dfb57726b5b0d41470f66d02c61f6fbf4072d48669c4e3b1ee7",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sm9:106/095:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:sm9:106/095:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0250 shows sm9 106/095, including its Korean name, printed attacks and rarity SR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "04ef132ab5775de6b4cf8854f82cc0c6cbe2d466cf30215203ee9ddf5d8ea817",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512"
+            },
             {
               "observationId": "unit:U0633",
               "kind": "unit",
@@ -11394,7 +11414,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s10b:056/071:Snorlax-Block-Collapse",
           "workId": "WORK:Snorlax-Block-Collapse",
           "cardKey": "Snorlax-Block-Collapse",
           "appearanceId": "APPEARANCE:IMAGE:5d762aca2b1b2212a7446a3f",
@@ -11402,13 +11422,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s10b:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s10b",
+          "localSetCode": "s10b",
+          "localNumber": "056/071",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0202"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -11416,11 +11438,9 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "N-DESIGN Inc.",
+            "artist": null,
             "variant": "base",
-            "finish": [
-              "non-holo"
-            ],
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -11434,9 +11454,26 @@
               "contentHash": "daef474b09b3aed505e44edd1fe5ba151d6790f93bd301164fcde8fb96419211",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s10b:056/071:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s10b:056/071:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022010056",
+              "evidence": "The retained exact Korean card image SPEC-0238 shows s10b 056/071, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "1bbd8560937674f7aa80dc15d7db79e889a9e960cd7bc9c57eb325c9fa4a3103",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512"
+            },
             {
               "observationId": "unit:U0202",
               "kind": "unit",
@@ -16591,7 +16628,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s2:unknown-local-set:via-77:Snorlax-Collect-Collapse:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s2:077/096:Snorlax-Collect-Collapse",
           "workId": "WORK:Snorlax-Collect-Collapse",
           "cardKey": "Snorlax-Collect-Collapse",
           "appearanceId": "APPEARANCE:IMAGE:84220a986ccc28349415da0b",
@@ -16599,13 +16636,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s2:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s2",
+          "localSetCode": "s2",
+          "localNumber": "077/096",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0532"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -16613,12 +16652,9 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Eri Yamaki",
+            "artist": null,
             "variant": "base",
-            "finish": [
-              "non-holo",
-              "reverse-holo"
-            ],
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -16632,9 +16668,26 @@
               "contentHash": "f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s2:077/096:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s2:077/096:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0239 shows s2 077/096, including its Korean name, printed attacks and rarity U. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "b1aaa47d65dbfe755f9db1e52aed0c1662c8d63b9c1ea587c7113c225be8d18e",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512"
+            },
             {
               "observationId": "unit:U0532",
               "kind": "unit",
@@ -25792,7 +25845,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s8b:126/184:Snorlax-Gormandize-Body-Slam",
           "workId": "WORK:Snorlax-Gormandize-Body-Slam",
           "cardKey": "Snorlax-Gormandize-Body-Slam",
           "appearanceId": "APPEARANCE:IMAGE:6c0622ef693a724b39f68531",
@@ -25800,13 +25853,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s8b:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s8b",
+          "localSetCode": "s8b",
+          "localNumber": "126/184",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0173"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -25814,11 +25869,9 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Narumi Sato",
+            "artist": null,
             "variant": "base",
-            "finish": [
-              "reverse-holo"
-            ],
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -25832,9 +25885,26 @@
               "contentHash": "9eec7c336f99e03ba707851a4c30ad6063b85dab0809c9a5c2fb08f040f71817",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s8b:126/184:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s8b:126/184:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022001126",
+              "evidence": "The retained exact Korean card image SPEC-0241 shows s8b 126/184, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "e39f20fce9e4b4d0cf915e57f5e38143ff146fc3f37c9f139218ea7aefe25322",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512"
+            },
             {
               "observationId": "unit:U0173",
               "kind": "unit",
@@ -27483,7 +27553,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s4:unknown-local-set:via-84:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s4:084/100:Snorlax-Gormandize-Body-Slam",
           "workId": "WORK:Snorlax-Gormandize-Body-Slam",
           "cardKey": "Snorlax-Gormandize-Body-Slam",
           "appearanceId": "APPEARANCE:IMAGE:e8e4691a67890adee9e2ce3f",
@@ -27491,13 +27561,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s4:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s4",
+          "localSetCode": "s4",
+          "localNumber": "084/100",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0291"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -27505,12 +27577,9 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Atsuko Nishida",
+            "artist": null,
             "variant": "base",
-            "finish": [
-              "non-holo",
-              "reverse-holo"
-            ],
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -27524,9 +27593,26 @@
               "contentHash": "e19ce360f01e1914a71721fb5c57f55e5174eb78256eb92454fed28dfc625b79",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s4:084/100:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s4:084/100:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020014084",
+              "evidence": "The retained exact Korean card image SPEC-0240 shows s4 084/100, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "f6ed7d5de202bafd39203f8d7ad646aabc59a7f619176aab6df0701e2380e6ee",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512"
+            },
             {
               "observationId": "unit:U0291",
               "kind": "unit",
@@ -32826,7 +32912,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sN:unknown-local-set:via-008:Snorlax-Heavy-Impact:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sN:008/024:Snorlax-Heavy-Impact",
           "workId": "WORK:Snorlax-Heavy-Impact",
           "cardKey": "Snorlax-Heavy-Impact",
           "appearanceId": "APPEARANCE:IMAGE:ca3ea7ccfac3e81f50f3eb57",
@@ -32834,13 +32920,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sN:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sN",
+          "localSetCode": "sN",
+          "localNumber": "008/024",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0770"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -32848,7 +32936,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Oswaldo KATO",
+            "artist": null,
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -32864,9 +32952,26 @@
               "contentHash": "523a5c108543563ee1345340856d45487397b03b67b928648bafae36982a54e4",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sN:008/024:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:sN:008/024:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0247 shows sN 008/024, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "aa72b9fa691f6169502787484b604fc6b3d754e1d4856b91bbf077f4b4fee3c5",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512"
+            },
             {
               "observationId": "unit:U0770",
               "kind": "unit",
@@ -33270,7 +33375,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-smL:unknown-local-set:via-038:Snorlax-Incredible-Snore:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:smL:038/051:Snorlax-Incredible-Snore",
           "workId": "WORK:Snorlax-Incredible-Snore",
           "cardKey": "Snorlax-Incredible-Snore",
           "appearanceId": "APPEARANCE:IMAGE:69671e819cf6767e2970262f",
@@ -33278,13 +33383,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-smL:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:smL",
+          "localSetCode": "smL",
+          "localNumber": "038/051",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0583"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -33292,7 +33399,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Akira Komayama",
+            "artist": null,
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -33308,9 +33415,26 @@
               "contentHash": "520131a6b7be5eec6da73f3ff1eb819c9178497d677e31bbec7bf35fb041c0d8",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:smL:038/051:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:smL:038/051:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
+              "evidence": "The retained exact Korean card image SPEC-0249 shows smL 038/051, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "f37e7fb7c33a98f4ec52fcaa86c814a119ebc4997c787e1920165d6732b30f98",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512"
+            },
             {
               "observationId": "unit:U0583",
               "kind": "unit",
@@ -37709,7 +37833,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sm10:unknown-local-set:via-076:Snorlax-Lazy-Eating-Big-Counter:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sm10:076/095:Snorlax-Lazy-Eating-Big-Counter",
           "workId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
           "cardKey": "Snorlax-Lazy-Eating-Big-Counter",
           "appearanceId": "APPEARANCE:IMAGE:e115f68803e417e0ec75823d",
@@ -37717,13 +37841,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sm10:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sm10",
+          "localSetCode": "sm10",
+          "localNumber": "076/095",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0264"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -37733,10 +37859,7 @@
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [
-              "non-holo",
-              "reverse-holo"
-            ],
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -37750,9 +37873,26 @@
               "contentHash": "ec8f2084e1b4ed31157775c2f43e42c6800abe70bf18996acf2b2f2689ad0ade",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sm10:076/095:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:sm10:076/095:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0248 shows sm10 076/095, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "3a9288df86d8a56f0e33bb346b2fd5269bacb609cd617b1c3a403e51be61475a",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512"
+            },
             {
               "observationId": "unit:U0264",
               "kind": "unit",
@@ -56071,7 +56211,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s10a:unknown-local-set:via-077:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s10a:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
           "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
           "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
           "appearanceId": "APPEARANCE:IMAGE:4734301067b02afa4c4d7a9d",
@@ -56079,22 +56219,25 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s10a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s10a",
+          "localSetCode": "s10a",
+          "localNumber": "077/071",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0168"
+          ],
           "legacyVariants": [
-            "V2"
+            "V2",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Kouki Saitou",
-            "variant": "V2",
+            "artist": null,
+            "variant": "V2, base",
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -56109,9 +56252,26 @@
               "contentHash": "6e3a1a4388ad64e77103ed94b1fabfdfcbcccfe6b24b14386dae1ba124952355",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s10a:077/071:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s10a:077/071:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022011126",
+              "evidence": "The retained exact Korean card image SPEC-0237 shows s10a 077/071, including its Korean name, printed attacks and rarity CHR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "96e3e94800e364d923b7d45ff8b04300e91796fbf79065a6c1359f9eb8b796b7",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512"
+            },
             {
               "observationId": "unit:U0168",
               "kind": "unit",
@@ -59434,7 +59594,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s10a:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
           "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
           "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
           "appearanceId": "APPEARANCE:IMAGE:bac26d6d247bda8737fd6eb6",
@@ -59442,26 +59602,26 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s10a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s10a",
+          "localSetCode": "s10a",
+          "localNumber": "058/071",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0344"
+          ],
           "legacyVariants": [
-            "V1"
+            "V1",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "0313",
-            "variant": "V1",
-            "finish": [
-              "non-holo",
-              "reverse-holo"
-            ],
+            "artist": null,
+            "variant": "V1, base",
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -59475,9 +59635,26 @@
               "contentHash": "176589fdb7d0af75c4617d1595d75a466a7e429ab6abd6aed12d5edc0e6b519f",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s10a:058/071:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s10a:058/071:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
+              "evidence": "The retained exact Korean card image SPEC-0236 shows s10a 058/071, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "9530a31b4387c10cf5e811f85be3b8675510d0beda0b2afddbda331f90ad3082",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512"
+            },
             {
               "observationId": "unit:U0344",
               "kind": "unit",
@@ -60813,7 +60990,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-svG:unknown-local-set:via-021:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:svG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
           "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
           "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
           "appearanceId": "APPEARANCE:IMAGE:f506a6e09ba0549d468bc80e",
@@ -60821,13 +60998,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-svG:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:svG",
+          "localSetCode": "svG",
+          "localNumber": "021/049",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0466"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -60835,7 +61014,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "0313",
+            "artist": null,
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -60851,9 +61030,26 @@
               "contentHash": "c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:svG:021/049:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:svG:021/049:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
+              "evidence": "The retained exact Korean card image SPEC-0252 shows svG 021/049, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "df46e3a4d1dac5f31afecc4c8e6adc3e4fcd12260a7fe477945a0f29b839d2b7",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512"
+            },
             {
               "observationId": "unit:U0466",
               "kind": "unit",
@@ -61790,7 +61986,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s1H:unknown-local-set:via-66:Snorlax-V-Swallow-Falling-Down:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s1H:066/060:Snorlax-V-Swallow-Falling-Down",
           "workId": "WORK:Snorlax-V-Swallow-Falling-Down",
           "cardKey": "Snorlax-V-Swallow-Falling-Down",
           "appearanceId": "APPEARANCE:IMAGE:3534201966259fe6328c1987",
@@ -61798,22 +61994,25 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s1H:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s1H",
+          "localSetCode": "s1H",
+          "localNumber": "066/060",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0548"
+          ],
           "legacyVariants": [
-            "V2"
+            "V2",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax V",
-            "artist": "aky CG Works",
-            "variant": "V2",
+            "artist": null,
+            "variant": "V2, base",
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -61828,9 +62027,26 @@
               "contentHash": "242a34a110c6bb8c1c06586514e0f535af7f377c1dbd97b9f77d18b1a6b6fc32",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s1H:066/060:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s1H:066/060:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0246 shows s1H 066/060, including its Korean name, printed attacks and rarity SR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "e3d51ab12f701a66cb28f22b80383112899275b724661ba8d29d29b8d8fdb31f",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512"
+            },
             {
               "observationId": "unit:U0548",
               "kind": "unit",
@@ -61951,7 +62167,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s1H:unknown-local-set:via-45:Snorlax-V-Swallow-Falling-Down:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s1H:045/060:Snorlax-V-Swallow-Falling-Down",
           "workId": "WORK:Snorlax-V-Swallow-Falling-Down",
           "cardKey": "Snorlax-V-Swallow-Falling-Down",
           "appearanceId": "APPEARANCE:IMAGE:942db35e23091b3de9a41a5e",
@@ -61959,22 +62175,25 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s1H:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s1H",
+          "localSetCode": "s1H",
+          "localNumber": "045/060",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0511"
+          ],
           "legacyVariants": [
-            "V1"
+            "V1",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax V",
-            "artist": "Masakazu Fukuda",
-            "variant": "V1",
+            "artist": null,
+            "variant": "V1, base",
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -61989,9 +62208,26 @@
               "contentHash": "f69568ce35c42ca4970e5ed0aa75b3d9c334067d30726a2d75230e01f5b09951",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s1H:045/060:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s1H:045/060:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0244 shows s1H 045/060, including its Korean name, printed attacks and rarity RR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "93ff97b1c503bb68d604aaf703cd6f8344315632a3e89344917afe75d7259c8c",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512"
+            },
             {
               "observationId": "unit:U0511",
               "kind": "unit",
@@ -63927,7 +64163,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-s1H:unknown-local-set:via-46:Snorlax-VMAX-G-Max-Fall:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:s1H:046/060:Snorlax-VMAX-G-Max-Fall",
           "workId": "WORK:Snorlax-VMAX-G-Max-Fall",
           "cardKey": "Snorlax-VMAX-G-Max-Fall",
           "appearanceId": "APPEARANCE:IMAGE:aabf4fb661bef6312df647df",
@@ -63935,22 +64171,25 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-s1H:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:s1H",
+          "localSetCode": "s1H",
+          "localNumber": "046/060",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0287"
+          ],
           "legacyVariants": [
-            "V1"
+            "V1",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax VMAX",
-            "artist": "aky CG Works",
-            "variant": "V1",
+            "artist": null,
+            "variant": "V1, base",
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -63965,9 +64204,26 @@
               "contentHash": "0381d58c6dd4ce3b4f29b213bdf735c1de670f93ebf3195a0e391e5dc5a023f9",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:s1H:046/060:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:s1H:046/060:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0245 shows s1H 046/060, including its Korean name, printed attacks and rarity RRR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "c33606f4779bd1b54fd2d3ff77e2a5ed9eadf21c8a91fafa255f572c415d8664",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512"
+            },
             {
               "observationId": "unit:U0287",
               "kind": "unit",
@@ -66992,7 +67248,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
           "workId": "WORK:Snorlax-Voraciousness-Thudding-Press",
           "cardKey": "Snorlax-Voraciousness-Thudding-Press",
           "appearanceId": "APPEARANCE:IMAGE:720c0555c125941a38111cd8",
@@ -67000,22 +67256,25 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sv4a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sv4a",
+          "localSetCode": "sv4a",
+          "localNumber": "310/190",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0384"
+          ],
           "legacyVariants": [
-            "V2"
+            "V2",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
-            "variant": "V2",
+            "variant": "V2, base",
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -67030,9 +67289,26 @@
               "contentHash": "2d449e73b965293eccb149af7914cddc2a59cac1f99ebda04de9d085b64d7367",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sv4a:310/190:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:KR:sv4a:310/190:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024001310",
+              "evidence": "The retained exact Korean card image SPEC-0251 shows sv4a 310/190, including its Korean name, printed attacks and rarity S. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "5ad4c4347bf298885784977cd0a697784ec93b209f5c0b7adaaceb489ab62dd4",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512"
+            },
             {
               "observationId": "unit:U0384",
               "kind": "unit",
@@ -73206,6 +73482,91 @@
       ]
     },
     {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+      ],
+      "cardKeys": [
+        "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+      ],
+      "label": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "cardKey": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:SM-P",
+          "localSetCode": "SM-P",
+          "localNumber": "140",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0627"
+          ],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0028",
+              "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "ripple",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Pokumon's exact Korean 140/SM-P record positively identifies the Full Art purchase promo with Ripple treatment.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0028",
+              "specimenIds": [
+                "SPEC-0028"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "이브이&잠만보 GX",
+            "artist": null,
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "ripple"
+            ],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [],
+          "observations": [
+            {
+              "observationId": "source-first:KR:SM-P:140:base",
+              "kind": "source-first",
+              "provider": "pokumon",
+              "url": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
+              "evidence": "The retained exact Korean card image SPEC-0028 shows SM-P 140, including its Korean name, printed attacks and rarity PROMO. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "fd45ea77a1c18cd2a3fba247a6a8698d068965adc93b44674fc278b71b5f6fe7",
+              "image": null
+            }
+          ]
+        }
+      ]
+    },
+    {
       "groupId": "APPEARANCE:RELEASE:RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "groupKind": "unmapped-release",
       "appearanceId": "APPEARANCE:RELEASE:RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
@@ -75008,6 +75369,148 @@
       ]
     },
     {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Snorlax-Heavy-Impact"
+      ],
+      "cardKeys": [
+        "Snorlax-Heavy-Impact"
+      ],
+      "label": "Snorlax-Heavy-Impact",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
+          "workId": "WORK:Snorlax-Heavy-Impact",
+          "cardKey": "Snorlax-Heavy-Impact",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:sI",
+          "localSetCode": "sI",
+          "localNumber": "341/414",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0653"
+          ],
+          "legacyVariants": [
+            "V1",
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "잠만보",
+            "artist": null,
+            "variant": "V1, base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sI:341/414:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:KR:sI:341/414:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0242 shows sI 341/414, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "916b9a67387503280d5633ee2d4a64b92071f5260e29eccd27072e1304682197",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Snorlax-Heavy-Impact"
+      ],
+      "cardKeys": [
+        "Snorlax-Heavy-Impact"
+      ],
+      "label": "Snorlax-Heavy-Impact",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
+          "workId": "WORK:Snorlax-Heavy-Impact",
+          "cardKey": "Snorlax-Heavy-Impact",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:sI",
+          "localSetCode": "sI",
+          "localNumber": "342/414",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0657"
+          ],
+          "legacyVariants": [
+            "V2",
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "잠만보",
+            "artist": null,
+            "variant": "V2, base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sI:342/414:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:KR:sI:342/414:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
+              "evidence": "The retained exact Korean card image SPEC-0243 shows sI 342/414, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "e588cb4e7b1fba4273fe94b45261f60af380f1a6525e75c378716a17fa2c3386",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "groupId": "APPEARANCE:RELEASE:RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
       "groupKind": "unmapped-release",
       "appearanceId": "APPEARANCE:RELEASE:RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
@@ -75128,6 +75631,90 @@
               "url": "https://s1.52poke.com/wiki/7/7b/AS5a142.png",
               "evidence": "Traditional Chinese Snorlax on the 52poke wiki card image: HP 150, Basic, Ability 「吃食不專」, attack 「大反擊」60+, Illus. kawayoo, card number 142 with the AS5a set glyph. The owner confirms in #84 that this is the Traditional Chinese catch-up-set printing existing under its own AS5a 142 code rather than as an sm10 language, so a second provider agrees about this printing.",
               "contentHash": "aae672623ab02d6acd05d605cd326219679b27d7dff5ceda5f5ac271ec63ce75",
+              "image": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Snorlax-Plump-Body-Knock-Away"
+      ],
+      "cardKeys": [
+        "Snorlax-Plump-Body-Knock-Away"
+      ],
+      "label": "Snorlax-Plump-Body-Knock-Away",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+          "workId": "WORK:Snorlax-Plump-Body-Knock-Away",
+          "cardKey": "Snorlax-Plump-Body-Knock-Away",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:XY-P",
+          "localSetCode": "XY-P",
+          "localNumber": "167",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0661"
+          ],
+          "legacyVariants": [
+            "V1",
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0031",
+              "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Pokumon's exact Korean 167/XY-P Kisstick promotion record positively classifies the card as Non-holo.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0031",
+              "specimenIds": [
+                "SPEC-0031"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "잠만보",
+            "artist": null,
+            "variant": "V1, base",
+            "finish": [
+              "non-holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [],
+          "observations": [
+            {
+              "observationId": "source-first:KR:XY-P:167:base",
+              "kind": "source-first",
+              "provider": "pokumon",
+              "url": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+              "evidence": "The retained exact Korean card image SPEC-0031 shows XY-P 167, including its Korean name, printed attacks and rarity PROMO. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "6d4699a19a176dbb38c83226ab4c530235676dd9ede07439c05b6529272f7bfc",
               "image": null
             }
           ]
@@ -75333,6 +75920,89 @@
               "evidence": "The retained official Indonesian card detail 4527 and SPEC-0168 show Snorlax 111/159 in scD I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "0718b4ddd088c3821861434e1a038172b2cb624e211496726ded6f3eb69d7574",
               "image": "https://asia.pokemon-card.com/id/card-img/id00004527.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:S-P:101:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:S-P:101:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Snorlax-Slap-Push-Single-Strike-Tackle"
+      ],
+      "cardKeys": [
+        "Snorlax-Slap-Push-Single-Strike-Tackle"
+      ],
+      "label": "Snorlax-Slap-Push-Single-Strike-Tackle",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:S-P:101:Snorlax-Slap-Push-Single-Strike-Tackle",
+          "workId": "WORK:Snorlax-Slap-Push-Single-Strike-Tackle",
+          "cardKey": "Snorlax-Slap-Push-Single-Strike-Tackle",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:S-P:101:Snorlax-Slap-Push-Single-Strike-Tackle",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:S-P",
+          "localSetCode": "S-P",
+          "localNumber": "101",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0523"
+          ],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0014",
+              "cardReleaseId": "RELEASE:KR:Korean:S-P:101:Snorlax-Slap-Push-Single-Strike-Tackle",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Pokumon's exact Korean 101/S-P record positively classifies this purchase promo as Non-holo.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0014",
+              "specimenIds": [
+                "SPEC-0014"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "잠만보",
+            "artist": null,
+            "variant": "base",
+            "finish": [
+              "non-holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [],
+          "observations": [
+            {
+              "observationId": "source-first:KR:S-P:101:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/SP000000101",
+              "evidence": "The retained exact Korean card image SPEC-0014 shows S-P 101, including its Korean name, printed attacks and rarity PROMO. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
+              "contentHash": "02bd190960604ad044d406807566a831b72c76df64229c7f3994906db1837215",
+              "image": null
             }
           ]
         }
@@ -76371,165 +77041,6 @@
               "url": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
               "evidence": "The retained exact Pokémon Korea card observation BS2010002030 identifies Korean 잠만보 Lv.35, 30/40, rarity U, in DP 확장팩 불꽃 튀는 대결. The publisher rules call 불꽃 튀는 대결 expansion pack number 2; Daldagury displays the same card as BS2 30; Collectory retains the distinct catalogue set id BS2010002-kr; and the owner photograph remains SPEC-0037. BS2 is the human catalogue code and BS2010002-kr is a separate catalogue id. This record establishes only Korean language and local card identity. The low-resolution specimen establishes no finish, and no same-work equivalence to the Japanese DP1 product is asserted. Reviewed 2026-08-20.",
               "contentHash": "d7dec0d5ca0607553a5dd1fe670d32a4462dd3a73dcf8b0ccd6a9c57beb40317",
-              "image": null
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [],
-      "cardKeys": [],
-      "label": "Unresolved artwork appearance",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:S-P:101:unmapped-work:SPEC-0014",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:S-P",
-          "localSetCode": "S-P",
-          "localNumber": "101",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보",
-            "artist": null,
-            "variant": null,
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:S-P:101:base",
-              "kind": "source-first",
-              "provider": "owner-attestation",
-              "url": "https://github.com/user-attachments/assets/7302c36e-1046-458a-a397-4e594916f682",
-              "evidence": "Korean Snorlax on a database scan: HP 140, Basic, Single Strike (일격) marker, attacks 「뺨때리기」 30 and 「일격태클」 120, Illus. Yuya Oka, \"101/S-P\", PROMO, regulation mark D, ©2021. The printing and its identifiers are what this record establishes. OPEN: units.json records for S-P 156 state that S-P 101 is a different card, and the owner presents it as the Korean counterpart. That is an equivalence assertion about which work this print realizes; invariant I5 requires an explicit decision for it and none is made here.",
-              "contentHash": "4fb90cf6169db3733e1e104364479ca73c930ee6eacddc9c6c5a5de1fcad89d2",
-              "image": null
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [],
-      "cardKeys": [],
-      "label": "Unresolved artwork appearance",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:unmapped-work:SPEC-0028",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:SM-P",
-          "localSetCode": "SM-P",
-          "localNumber": "140",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "이브이&잠만보 GX",
-            "artist": null,
-            "variant": null,
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:SM-P:140:base",
-              "kind": "source-first",
-              "provider": "inspected-specimen",
-              "url": null,
-              "evidence": "Photographed by the owner and filed as SPEC-0028, supplied through issue #166 within the hour of the lead being recorded — the Full Art by Tomokazu Komiya, ©2019, graded PSA GEM MT 10 (cert 101016611); a different printing from the Mitsuhiro Arita ©2020 artwork of the Thai and Indonesian SM-P cards. Corroborated about this printing rather than about a neighbour: pokumon carries it as its own per-language entry, which is how it was found. Admitted under ADR-0001 D1, a specimen-backed code. Language and identity only; finish is asserted for no print here except where its specimen records a physical observation.",
-              "contentHash": "22c66fe243b02996174b406e630d3b081fe23e1b9cd6df3edddbf6dd19986baf",
-              "image": null
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [],
-      "cardKeys": [],
-      "label": "Unresolved artwork appearance",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:unmapped-work:SPEC-0031",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:XY-P",
-          "localSetCode": "XY-P",
-          "localNumber": "167",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보",
-            "artist": null,
-            "variant": null,
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:XY-P:167:base",
-              "kind": "source-first",
-              "provider": "inspected-specimen",
-              "url": null,
-              "evidence": "Photographed by the owner and filed as SPEC-0031, supplied through issue #166 within the hour of the lead being recorded — the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction; Illus. Kouki Saitou, ©2016, which is the identifier that correction's identity test used. Corroborated about this printing rather than about a neighbour: pokumon carries it as its own per-language entry, which is how it was found. Admitted under ADR-0001 D1, a specimen-backed code. Language and identity only; finish is asserted for no print here except where its specimen records a physical observation.",
-              "contentHash": "9e83e81cfd5f08580819145ea36cc4a2983cc254f9725eeed6793a9ebc49b432",
               "image": null
             }
           ]

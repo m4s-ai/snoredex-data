@@ -71,7 +71,12 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def _number(value: Any) -> str:
-    return str(value or "").split("/", 1)[0]
+    numerator = str(value or "").split("/", 1)[0]
+    return numerator.lstrip("0") or ("0" if numerator else "")
+
+
+def _identity_value(field: str, value: Any) -> str:
+    return _number(value) if field == "number" else _normalized(value)
 
 
 def normalized_foil_pattern(value: Any) -> Any:
@@ -1204,7 +1209,9 @@ def _validate_identity_projections(
             ("language", "language"), ("setCode", set_field), ("number", number_field),
             ("cardKey", "work"),
         ):
-            if _normalized(unit.get(input_field)) != _normalized(release.get(release_field)):
+            if _identity_value(input_field, unit.get(input_field)) != _identity_value(
+                input_field, release.get(release_field)
+            ):
                 errors.append(f"identity release is stale: {unit_id}:{input_field}")
 
     for print_id, (printing, finish_unit_id) in finish_printings.items():
