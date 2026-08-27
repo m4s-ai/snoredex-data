@@ -443,6 +443,7 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
     sources = [photograph_source]
     owner_fields = observation.get("ownerAttestedFields") or []
     if owner_fields:
+        photograph_label = str(photograph_source["sourceType"]).casefold()
         photograph_source["claimFields"] = [
             "identity",
             *[
@@ -457,7 +458,7 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
             "claimFields": owner_fields,
             "evidence": (
                 f"The collection owner's explicit {specimen.get('recordedAt', '')} confirmation "
-                f"establishes the specimen's {established}; the retained seller photograph "
+                f"establishes the specimen's {established}; the retained {photograph_label} "
                 "supports card identity and any independently visible properties."
             ),
         })
