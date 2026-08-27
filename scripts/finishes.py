@@ -1068,10 +1068,16 @@ def main() -> None:
         for override in applicable_overrides:
             suppressed = set(override.get("suppressAutoFinishes") or [])
             if suppressed:
+                # Suppression corrects weak catalogue-derived guesses; it must never erase
+                # confirmed positive evidence such as a TCGdex variants=true response.
                 printings = [
                     printing
                     for printing in printings
-                    if not (printing.get("_origin") == "auto" and printing["finish"] in suppressed)
+                    if not (
+                        printing.get("_origin") == "auto"
+                        and printing["finish"] in suppressed
+                        and printing.get("verificationStatus") != "confirmed"
+                    )
                 ]
             for finish, mapped_variants in (override.get("mapAutoFinishes") or {}).items():
                 usable = sorted(set(mapped_variants) & present_variants)

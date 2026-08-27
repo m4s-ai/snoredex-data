@@ -86,6 +86,7 @@ def main() -> int:
     finish_units = read_json(VERIFICATION / "finish_units.json")["units"]
     finish_review = read_json(VERIFICATION / "FINISH_REVIEW.json")
     finish_overrides = read_json(VERIFICATION / "finish_overrides.json")
+    tcgdex_snapshot = read_json(VERIFICATION / "finish_tcgdex_snapshot.json")["records"]
 
     # --- 1. unit totals and identity ---
     suite.report("units total", len(units), 719)
@@ -281,10 +282,10 @@ def main() -> int:
     suite.report("finish units covered by a complete manifest",
                  sum(1 for u in finish_units
                      if u.get("completenessStatus") == "complete-manifest"), 4)
-    # 222 -> 223 on 2026-08-03: the owner's GameStop/Canada adjudication overturned U0452, so
-    # xJTG 117 French became a confirmed language and F0598 became an applicable finish unit.
-    # The queue grew because the corpus grew, not because finish work was lost or reopened.
-    suite.report("finish review queue", len(finish_review.get("units") or []), 223,
+    # 223 -> 234 on 2026-08-27: preserving 25 TCGdex variants=true claims reopened 20 EFIGS
+    # units whose standard-set checklists do not cover those physical printings. The increase
+    # corrects hidden positive evidence; subsequent growth remains a regression.
+    suite.report("finish review queue", len(finish_review.get("units") or []), 234,
                  direction=checks.DOWN_IS_PROGRESS)
 
     printing_ids = [p.get("printingId")
@@ -324,6 +325,57 @@ def main() -> int:
     suite.check("finish mappings reference local products", not bad_mappings,
                 ",".join(first(bad_mappings)))
     suite.check("stamp roles valid and finish-safe", not bad_roles, ",".join(first(bad_roles)))
+
+    finish_units_by_key = {
+        (unit.get("setCode"), str(unit.get("number")), unit.get("language")): unit
+        for unit in finish_units
+    }
+    missing_tcgdex_positives = []
+    for unit in units:
+        url = str(unit.get("sourceUrl") or "")
+        if unit.get("status") != "confirmed" or not url.startswith("https://api.tcgdex.net/"):
+            continue
+        finish_unit = finish_units_by_key.get(
+            (unit.get("setCode"), str(unit.get("number")), unit.get("language"))
+        )
+        variants = (tcgdex_snapshot.get(url) or {}).get("payload", {}).get("variants", {})
+        for field, finish in (
+            ("normal", "non-holo"), ("holo", "holo"), ("reverse", "reverse-holo")
+        ):
+            if variants.get(field) is not True:
+                continue
+            preserved = any(
+                printing.get("finish") == finish
+                and any(source.get("url") == url for source in (printing.get("sources") or []))
+                for printing in (finish_unit or {}).get("printings", [])
+            )
+            if not preserved:
+                missing_tcgdex_positives.append(
+                    f"{unit.get('setCode')} {unit.get('number')} {unit.get('language')} {finish}"
+                )
+    suite.check("TCGdex positive finish evidence is preserved", not missing_tcgdex_positives,
+                ",".join(first(missing_tcgdex_positives)))
+
+    bad_standard_set_mappings = []
+    for unit in finish_units:
+        standard_variants = {
+            product.get("variant") for product in (unit.get("products") or [])
+            if product.get("rarity") != "Oversized"
+        }
+        for printing in (unit.get("printings") or []):
+            if not any(
+                source.get("closureScope") == "standard-set"
+                for source in (printing.get("sources") or [])
+            ):
+                continue
+            mapped = set(printing.get("mappedVariants") or [])
+            if printing.get("cardSize") != "standard" or (
+                len(standard_variants) == 1 and not standard_variants <= mapped
+            ):
+                bad_standard_set_mappings.append(printing.get("printingId"))
+    suite.check("standard-set checklist printings map to the standard product",
+                not bad_standard_set_mappings,
+                ",".join(first(bad_standard_set_mappings)))
 
     override_sources = finish_overrides.get("sources") or {}
     unbounded_language_overrides = []

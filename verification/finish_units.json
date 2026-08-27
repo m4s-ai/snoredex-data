@@ -64,13 +64,13 @@
       "pendingFinish": 107,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
-      "withNonHolo": 265,
+      "withNonHolo": 285,
       "withHolo": 175,
-      "withReverseHolo": 224,
+      "withReverseHolo": 229,
       "withMirrorHolo": 9,
-      "withBothNonHoloAndHolo": 23,
+      "withBothNonHoloAndHolo": 43,
       "withUnresolvedProductMapping": 144,
-      "withAnyUnresolvedDetail": 214,
+      "withAnyUnresolvedDetail": 234,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -15802,20 +15802,41 @@
         }
       ],
       "availableFinishes": [
-        "holo"
+        "non-holo",
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
-        "reverse-holo": "pending",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/en/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0202-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -15841,10 +15862,36 @@
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0202-P01"
+          "printingId": "F0202-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "tiled-type-symbol",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/en/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "sourceType": "Bulbapedia holofoil pattern history",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+            }
+          ],
+          "printingId": "F0202-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0202-P01, F0202-P03"
+      ]
     },
     {
       "finishUnitId": "F0203",
@@ -15869,20 +15916,41 @@
         }
       ],
       "availableFinishes": [
-        "holo"
+        "non-holo",
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
-        "reverse-holo": "pending",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/fr/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0203-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -15908,10 +15976,36 @@
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0203-P01"
+          "printingId": "F0203-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "tiled-type-symbol",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/fr/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "sourceType": "Bulbapedia holofoil pattern history",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+            }
+          ],
+          "printingId": "F0203-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0203-P01, F0203-P03"
+      ]
     },
     {
       "finishUnitId": "F0204",
@@ -15936,20 +16030,41 @@
         }
       ],
       "availableFinishes": [
-        "holo"
+        "non-holo",
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
-        "reverse-holo": "pending",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/de/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0204-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -15975,10 +16090,36 @@
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0204-P01"
+          "printingId": "F0204-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "tiled-type-symbol",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/de/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "sourceType": "Bulbapedia holofoil pattern history",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+            }
+          ],
+          "printingId": "F0204-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0204-P01, F0204-P03"
+      ]
     },
     {
       "finishUnitId": "F0205",
@@ -16003,20 +16144,41 @@
         }
       ],
       "availableFinishes": [
-        "holo"
+        "non-holo",
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
-        "reverse-holo": "pending",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/it/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0205-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -16042,10 +16204,36 @@
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0205-P01"
+          "printingId": "F0205-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "tiled-type-symbol",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/it/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "sourceType": "Bulbapedia holofoil pattern history",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+            }
+          ],
+          "printingId": "F0205-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0205-P01, F0205-P03"
+      ]
     },
     {
       "finishUnitId": "F0206",
@@ -16070,20 +16258,41 @@
         }
       ],
       "availableFinishes": [
-        "holo"
+        "non-holo",
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
-        "reverse-holo": "pending",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/es/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0206-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -16109,10 +16318,36 @@
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0206-P01"
+          "printingId": "F0206-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "tiled-type-symbol",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/es/cards/swsh11-010",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh11-010 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "sourceType": "Bulbapedia holofoil pattern history",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+            }
+          ],
+          "printingId": "F0206-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0206-P01, F0206-P03"
+      ]
     },
     {
       "finishUnitId": "F0207",
@@ -23312,6 +23547,25 @@
           "printingId": "F0289-P01"
         },
         {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
+              "sourceType": "user + Cardmarket stock image (no Holo label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+            }
+          ],
+          "printingId": "F0289-P02"
+        },
+        {
           "finish": "holo",
           "foilPattern": "cosmos",
           "markings": [
@@ -23404,7 +23658,26 @@
               "image": "images/PPS8_JTG_JTG_117_Hop_s_Snorlax_V2_864370.png"
             }
           ],
-          "printingId": "F0289-P02"
+          "printingId": "F0289-P03"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
+              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+            }
+          ],
+          "printingId": "F0289-P04"
         }
       ],
       "unresolved": []
@@ -23506,6 +23779,25 @@
           "printingId": "F0290-P01"
         },
         {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
+              "sourceType": "user + Cardmarket stock image (no Holo label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+            }
+          ],
+          "printingId": "F0290-P02"
+        },
+        {
           "finish": "holo",
           "foilPattern": null,
           "markings": [
@@ -23548,7 +23840,26 @@
               "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
-          "printingId": "F0290-P02"
+          "printingId": "F0290-P03"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
+              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+            }
+          ],
+          "printingId": "F0290-P04"
         }
       ],
       "unresolved": []
@@ -23650,6 +23961,25 @@
           "printingId": "F0291-P01"
         },
         {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
+              "sourceType": "user + Cardmarket stock image (no Holo label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+            }
+          ],
+          "printingId": "F0291-P02"
+        },
+        {
           "finish": "holo",
           "foilPattern": "cosmos",
           "markings": [
@@ -23691,7 +24021,26 @@
           "specimenIds": [
             "SPEC-0001"
           ],
-          "printingId": "F0291-P02"
+          "printingId": "F0291-P03"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
+              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+            }
+          ],
+          "printingId": "F0291-P04"
         }
       ],
       "unresolved": []
@@ -23793,6 +24142,25 @@
           "printingId": "F0292-P01"
         },
         {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
+              "sourceType": "user + Cardmarket stock image (no Holo label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+            }
+          ],
+          "printingId": "F0292-P02"
+        },
+        {
           "finish": "holo",
           "foilPattern": null,
           "markings": [
@@ -23835,7 +24203,26 @@
               "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
-          "printingId": "F0292-P02"
+          "printingId": "F0292-P03"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
+              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+            }
+          ],
+          "printingId": "F0292-P04"
         }
       ],
       "unresolved": []
@@ -23937,6 +24324,25 @@
           "printingId": "F0293-P01"
         },
         {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
+              "sourceType": "user + Cardmarket stock image (no Holo label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+            }
+          ],
+          "printingId": "F0293-P02"
+        },
+        {
           "finish": "holo",
           "foilPattern": null,
           "markings": [
@@ -23979,7 +24385,26 @@
               "evidence": "States that every Prize Pack card carries the Play! Pokemon stamp and only selected cards receive the special foil treatment."
             }
           ],
-          "printingId": "F0293-P02"
+          "printingId": "F0293-P03"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
+              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+            }
+          ],
+          "printingId": "F0293-P04"
         }
       ],
       "unresolved": []
@@ -24081,6 +24506,25 @@
           "printingId": "F0294-P01"
         },
         {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V1-PPS8JTG-117",
+              "sourceType": "user + Cardmarket stock image (no Holo label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Non-Holo (physically identical to the PPS7 Non-Holo print, catalogued separately)"
+            }
+          ],
+          "printingId": "F0294-P02"
+        },
+        {
           "finish": "holo",
           "foilPattern": null,
           "markings": [
@@ -24122,7 +24566,26 @@
           "specimenIds": [
             "SPEC-0006"
           ],
-          "printingId": "F0294-P02"
+          "printingId": "F0294-P03"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Play-Pokemon-Prize-Pack-Series-Eight/Hops-Snorlax-V2-PPS8JTG-117",
+              "sourceType": "Cardmarket stock image (\"Holo Version\" label)",
+              "evidence": "Curated variant name: Prize Pack Series Eight, Holo (Cosmos)"
+            }
+          ],
+          "printingId": "F0294-P04"
         }
       ],
       "unresolved": []
@@ -33430,7 +33893,7 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
@@ -33438,15 +33901,12 @@
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/fr/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            },
             {
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
@@ -33462,10 +33922,28 @@
             }
           ],
           "printingId": "F0433-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/fr/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0433-P02"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V3"
+        "Scoped complete manifests do not cover these known physical printings: F0433-P02",
+        "One or more Cardmarket product variants are not mapped to a logical printing: V3"
       ]
     },
     {
@@ -33515,7 +33993,7 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
@@ -33523,15 +34001,12 @@
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/de/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            },
             {
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh1_web_cardlist_de.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
@@ -33547,10 +34022,28 @@
             }
           ],
           "printingId": "F0434-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/de/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0434-P02"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V3"
+        "Scoped complete manifests do not cover these known physical printings: F0434-P02",
+        "One or more Cardmarket product variants are not mapped to a logical printing: V3"
       ]
     },
     {
@@ -33600,7 +34093,7 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
@@ -33608,15 +34101,12 @@
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/it/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            },
             {
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh1_web_cardlist_it.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
@@ -33632,10 +34122,28 @@
             }
           ],
           "printingId": "F0435-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/it/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0435-P02"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V3"
+        "Scoped complete manifests do not cover these known physical printings: F0435-P02",
+        "One or more Cardmarket product variants are not mapped to a logical printing: V3"
       ]
     },
     {
@@ -33685,7 +34193,7 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
@@ -33693,15 +34201,12 @@
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/es/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            },
             {
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh1_web_cardlist_es.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
@@ -33717,10 +34222,28 @@
             }
           ],
           "printingId": "F0436-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/es/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0436-P02"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V3"
+        "Scoped complete manifests do not cover these known physical printings: F0436-P02",
+        "One or more Cardmarket product variants are not mapped to a logical printing: V3"
       ]
     },
     {
@@ -40332,10 +40855,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40346,6 +40870,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/en/cards/sm9-120",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-120 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0543-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40371,10 +40914,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0543-P01"
+          "printingId": "F0543-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0543-P01"
+      ]
     },
     {
       "finishUnitId": "F0544",
@@ -40399,10 +40944,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40413,6 +40959,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/fr/cards/sm9-120",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-120 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0544-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40438,10 +41003,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0544-P01"
+          "printingId": "F0544-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0544-P01"
+      ]
     },
     {
       "finishUnitId": "F0545",
@@ -40466,10 +41033,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40480,6 +41048,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/de/cards/sm9-120",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-120 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0545-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40505,10 +41092,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0545-P01"
+          "printingId": "F0545-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0545-P01"
+      ]
     },
     {
       "finishUnitId": "F0546",
@@ -40533,10 +41122,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40547,6 +41137,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/it/cards/sm9-120",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-120 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0546-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40572,10 +41181,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0546-P01"
+          "printingId": "F0546-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0546-P01"
+      ]
     },
     {
       "finishUnitId": "F0547",
@@ -40600,10 +41211,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40614,6 +41226,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/es/cards/sm9-120",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-120 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0547-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40639,10 +41270,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0547-P01"
+          "printingId": "F0547-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0547-P01"
+      ]
     },
     {
       "finishUnitId": "F0548",
@@ -40726,10 +41359,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40740,6 +41374,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/en/cards/sm9-171",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-171 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0549-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40765,10 +41418,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0549-P01"
+          "printingId": "F0549-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0549-P01"
+      ]
     },
     {
       "finishUnitId": "F0550",
@@ -40793,10 +41448,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40807,6 +41463,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/fr/cards/sm9-171",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-171 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0550-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40832,10 +41507,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0550-P01"
+          "printingId": "F0550-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0550-P01"
+      ]
     },
     {
       "finishUnitId": "F0551",
@@ -40860,10 +41537,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40874,6 +41552,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/de/cards/sm9-171",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-171 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0551-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40899,10 +41596,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0551-P01"
+          "printingId": "F0551-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0551-P01"
+      ]
     },
     {
       "finishUnitId": "F0552",
@@ -40927,10 +41626,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -40941,6 +41641,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/it/cards/sm9-171",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-171 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0552-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -40966,10 +41685,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0552-P01"
+          "printingId": "F0552-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0552-P01"
+      ]
     },
     {
       "finishUnitId": "F0553",
@@ -40994,10 +41715,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -41008,6 +41730,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/es/cards/sm9-171",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-171 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0553-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -41033,10 +41774,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0553-P01"
+          "printingId": "F0553-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0553-P01"
+      ]
     },
     {
       "finishUnitId": "F0554",
@@ -41120,10 +41863,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -41134,6 +41878,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V3"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/en/cards/sm9-191",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-191 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0555-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -41159,10 +41922,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0555-P01"
+          "printingId": "F0555-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0555-P01"
+      ]
     },
     {
       "finishUnitId": "F0556",
@@ -41187,10 +41952,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -41201,6 +41967,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V3"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/fr/cards/sm9-191",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-191 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0556-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -41226,10 +42011,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0556-P01"
+          "printingId": "F0556-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0556-P01"
+      ]
     },
     {
       "finishUnitId": "F0557",
@@ -41254,10 +42041,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -41268,6 +42056,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V3"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/de/cards/sm9-191",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-191 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0557-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -41293,10 +42100,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0557-P01"
+          "printingId": "F0557-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0557-P01"
+      ]
     },
     {
       "finishUnitId": "F0558",
@@ -41321,10 +42130,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -41335,6 +42145,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V3"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/it/cards/sm9-191",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-191 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0558-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -41360,10 +42189,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0558-P01"
+          "printingId": "F0558-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0558-P01"
+      ]
     },
     {
       "finishUnitId": "F0559",
@@ -41388,10 +42219,11 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
@@ -41402,6 +42234,25 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V3"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/es/cards/sm9-191",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "sm9-191 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            }
+          ],
+          "printingId": "F0559-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -41427,10 +42278,12 @@
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
           ],
-          "printingId": "F0559-P01"
+          "printingId": "F0559-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0559-P01"
+      ]
     },
     {
       "finishUnitId": "F0560",
@@ -45198,7 +46051,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45206,6 +46059,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45240,7 +46098,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45248,6 +46106,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45335,7 +46198,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45343,6 +46206,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45377,7 +46245,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45385,6 +46253,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45472,7 +46345,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45480,6 +46353,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45514,7 +46392,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45522,6 +46400,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45609,7 +46492,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45617,6 +46500,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45651,7 +46539,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45659,6 +46547,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45746,7 +46639,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45754,6 +46647,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -45788,7 +46686,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -45796,6 +46694,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -46699,7 +47602,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "master-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -46707,6 +47610,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Master Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan."
@@ -46723,7 +47631,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -46731,6 +47639,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Poké Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan."
@@ -46826,7 +47739,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "master-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -46834,6 +47747,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Master Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan."
@@ -46967,7 +47885,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "master-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -46975,6 +47893,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Master Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan."
@@ -46991,7 +47914,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -46999,6 +47922,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Poké Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan."
