@@ -1123,7 +1123,8 @@ def main() -> None:
             product_mapping_status = "pending"
 
         known_printings = [printing for printing in printings if printing["finish"] in FINISHES]
-        complete_manifest = has_complete_manifest(known_printings, language)
+        unknown_finish_printings = [printing for printing in printings if printing["finish"] == "unknown"]
+        complete_manifest = not unknown_finish_printings and has_complete_manifest(known_printings, language)
         pattern_target_printings = [
             printing for printing in printings if printing["finish"] in {"reverse-holo", "mirror-holo"}
         ]
@@ -1140,6 +1141,11 @@ def main() -> None:
         unresolved: list[str] = []
         if not all_claims_contradicted and not known_printings:
             unresolved.append("No positive finish evidence has been recorded for this set-number-language unit.")
+        if unknown_finish_printings:
+            unresolved.append(
+                "One or more known physical printings still have unresolved finishes: "
+                + ", ".join(printing["printingId"] for printing in unknown_finish_printings)
+            )
         if product_mapping_status in {"partial", "pending"}:
             unresolved.append(
                 "One or more Cardmarket product variants are not mapped to a logical printing: "
@@ -1296,7 +1302,7 @@ def main() -> None:
             "sourcePolicy": [
                 "Only positive availability is asserted. pending means not yet established, never proven absent.",
                 "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
-                "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest can set completenessStatus=complete-manifest.",
+                "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest, with no known printing whose finish is unresolved, can set completenessStatus=complete-manifest.",
                 "A collection-owner finish adjudication sets completenessStatus=owner-adjudicated, which never asserts a finish and is deliberately distinct from complete-manifest.",
                 "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
                 "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",

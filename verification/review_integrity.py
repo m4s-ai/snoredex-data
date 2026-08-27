@@ -240,6 +240,13 @@ def main() -> int:
     suite.check("finish taxonomy, applicability, and review queue valid", state_ok,
                 f"bad={len(bad_state)}, not-applicable={len(not_applicable)}, "
                 f"review={review_count}")
+    hidden_unknown_finishes = [
+        unit.get("finishUnitId") for unit in finish_units
+        if any(p.get("finish") == "unknown" for p in (unit.get("printings") or []))
+        and (unit.get("completenessStatus") == "complete-manifest" or not unit.get("unresolved"))
+    ]
+    suite.check("unknown finish printings remain unresolved", not hidden_unknown_finishes,
+                ",".join(first(hidden_unknown_finishes)))
     suite.report("finish units covered by a complete manifest",
                  sum(1 for u in finish_units
                      if u.get("completenessStatus") == "complete-manifest"), 4)
