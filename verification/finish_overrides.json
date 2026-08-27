@@ -84,6 +84,32 @@
       "retrievedAt": "2026-07-23",
       "evidence": "Documents that the exported product and price records come from TCGplayer and that price subtypes distinguish Normal, Holofoil, and Reverse Holofoil."
     },
+    "tcgplayer-build-a-bear-snorlax": {
+      "url": "https://www.tcgplayer.com/product/232309/pokemon-miscellaneous-cards-and-products-snorlax-80-106-build-a-bear-workshop-exclusive?page=1&Language=all",
+      "sourceType": "TCGplayer product page",
+      "authorityTier": "marketplace-api",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "productId": 232309,
+      "retrievedAt": "2026-08-27",
+      "evidence": "The exact product page identifies Snorlax 80/106 (Build-a-Bear Workshop Exclusive) and exposes the positive pricing category Normal."
+    },
+    "tcgcsv-build-a-bear-snorlax": {
+      "url": "https://tcgcsv.com/tcgplayer/3/2374/prices",
+      "identityUrl": "https://tcgcsv.com/tcgplayer/3/2374/products",
+      "sourceType": "TCGCSV TCGplayer export",
+      "authorityTier": "marketplace-api",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "productId": 232309,
+      "expectedSubtypes": {
+        "232309": [
+          "Normal"
+        ]
+      },
+      "retrievedAt": "2026-08-27",
+      "evidence": "The TCGplayer export identifies product 232309 as Snorlax 80/106 (Build-a-Bear Workshop Exclusive) and records the positive subtype Normal, establishing this printing as non-holo without excluding any other finish."
+    },
     "tcgcsv-battle-academy-snorlax": {
       "url": "https://tcgcsv.com/tcgplayer/3/2686/prices",
       "identityUrl": "https://tcgcsv.com/tcgplayer/3/2686/products",
@@ -1129,7 +1155,7 @@
       ],
       "printings": [
         {
-          "finish": "unknown",
+          "finish": "non-holo",
           "foilPattern": null,
           "markings": [
             {
@@ -1142,12 +1168,16 @@
             "kind": "retailer-promo",
             "name": "Build-A-Bear Workshop"
           },
+          "releaseDate": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
           ],
-          "verificationStatus": "confirmed",
+          "verificationStatus": "marketplace-claimed",
           "sourceRefs": [
+            "tcgplayer-build-a-bear-snorlax",
+            "tcgcsv-docs",
+            "tcgcsv-build-a-bear-snorlax",
             "cardmarket-stock-image"
           ]
         }

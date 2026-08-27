@@ -38,7 +38,7 @@ def write_catalog(path: Path, rows: list[tuple]) -> None:
             distribution_json TEXT,
             card_size TEXT NOT NULL,
             finish_verification_status TEXT NOT NULL,
-            release_date TEXT NOT NULL,
+            release_date TEXT,
             image_path TEXT,
             cardmarket_url TEXT NOT NULL
         );
@@ -52,12 +52,15 @@ def write_catalog(path: Path, rows: list[tuple]) -> None:
     connection.close()
 
 
-def item(checklist_id: str, number: str, finish: str = "unresolved") -> tuple:
+def item(
+    checklist_id: str, number: str, finish: str = "unresolved",
+    release_date: str | None = "1999-06-16",
+) -> tuple:
     return (
         checklist_id, "unresolved" if finish == "unresolved" else "documented", "Snorlax",
         "JU", number, "Jungle", "NL", "Dutch", "Unlimited", finish, finish, None,
         None, None, "unknown" if finish == "unresolved" else "standard",
-        "pending" if finish == "unresolved" else "confirmed", "1999-06-16", None,
+        "pending" if finish == "unresolved" else "confirmed", release_date, None,
         f"https://www.cardmarket.com/ju/{number}",
     )
 
@@ -70,9 +73,26 @@ def main() -> None:
         old_id = "ju-11-dutch-unl-unresolved-unknown"
         ambiguous_id = "ju-27-dutch-unl-unresolved-unknown"
         write_catalog(catalog, [item(old_id, "11"), item(ambiguous_id, "27")])
-        tracker.build_tracker(personal, catalog)
 
+        legacy_schema = tracker.SCHEMA.replace(
+            f"PRAGMA user_version = {tracker.TRACKER_USER_VERSION};",
+            "PRAGMA user_version = 10000;",
+        ).replace("release_date TEXT,", "release_date TEXT NOT NULL,")
         connection = sqlite3.connect(personal)
+        connection.executescript(legacy_schema)
+        rows = tracker.catalog_rows(catalog)
+        connection.executemany(
+            "INSERT INTO catalog_items VALUES (" + ",".join("?" for _ in range(20)) + ")",
+            [(row[0], 1, *row[1:]) for row in rows],
+        )
+        connection.executemany(
+            "INSERT INTO collection_state(checklist_id, wanted) VALUES (?, ?)",
+            [(row[0], 1 if row[1] == "documented" else 0) for row in rows],
+        )
+        connection.executemany(
+            "INSERT INTO tracker_metadata VALUES (?, ?)",
+            [("schema", "snoredex-collection-tracker"), ("schema_version", "1.0.0")],
+        )
         connection.execute(
             "UPDATE collection_state SET have=1, wanted=1, quantity=2, notes='kept', "
             "updated_at='2026-08-24T10:00:00Z' WHERE checklist_id=?",
@@ -84,6 +104,32 @@ def main() -> None:
             (ambiguous_id,),
         )
         connection.commit()
+        connection.close()
+
+        write_catalog(catalog, [
+            item(old_id, "11", release_date=None),
+            item(ambiguous_id, "27"),
+        ])
+        tracker.sync_database(personal, catalog)
+
+        connection = sqlite3.connect(personal)
+        assert next(
+            row for row in connection.execute("PRAGMA table_info(catalog_items)")
+            if row[1] == "release_date"
+        )[3] == 0
+        assert connection.execute("PRAGMA user_version").fetchone() == (
+            tracker.TRACKER_USER_VERSION,
+        )
+        assert connection.execute(
+            "SELECT value FROM tracker_metadata WHERE key='schema_version'"
+        ).fetchone() == (tracker.TRACKER_SCHEMA_VERSION,)
+        assert connection.execute(
+            "SELECT release_date FROM catalog_items WHERE checklist_id=?", (old_id,)
+        ).fetchone() == (None,)
+        assert connection.execute(
+            "SELECT have, wanted, quantity, notes, updated_at FROM collection_state "
+            "WHERE checklist_id=?", (old_id,),
+        ).fetchone() == (1, 1, 2, "kept", "2026-08-24T10:00:00Z")
         connection.close()
 
         new_id = "ju-11-dutch-unl-holo"

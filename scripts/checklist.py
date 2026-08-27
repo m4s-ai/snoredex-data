@@ -369,12 +369,13 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
         (set_code, number, product.get("variantToken") or "base", edition)
     ) or release.get((set_code, number, product.get("variantToken") or "base", "—"))
 
-    printing_release = printing.get("releaseDate") if printing else None
-    if printing_release:
+    printing_has_release = printing is not None and "releaseDate" in printing
+    printing_release = printing.get("releaseDate") if printing_has_release else None
+    if printing_has_release:
         release_date = printing_release
-        release_date_precision = release_precision(printing_release)
+        release_date_precision = release_precision(printing_release) if printing_release else None
         release_approximate = bool(printing.get("releaseApproximate", False))
-        release_sort_value = release_sort(printing_release)
+        release_sort_value = release_sort(printing_release) if printing_release else "9999-01-01"
         release_date_source = printing.get("releaseDateSource")
     else:
         release_date = (row or {}).get("date")

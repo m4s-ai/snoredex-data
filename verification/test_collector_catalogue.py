@@ -60,6 +60,21 @@ def main() -> None:
     fixture = read("collector_catalogue.fixture.json")
     schema = read("collector_catalogue.schema.json")
     predecessor = read("analysis_checklist.json")
+    releases = read("analysis_confirmed_releases.json")
+
+    build_a_bear_predecessor = next(
+        row for row in predecessor["items"]
+        if row["checklistId"].startswith(
+            "flf-80-english-none-non-holo-retailer-build-a-bear-workshop"
+        )
+    )
+    assert build_a_bear_predecessor["releaseDate"] is None
+    build_a_bear_release = next(
+        row for row in releases["variants"]
+        if row["setCode"] == "FLF" and row["number"] == "80" and row["variant"] == "V2"
+    )
+    assert build_a_bear_release["date"] == "9999"
+    assert build_a_bear_release["dateSort"] == "9999-01-01"
 
     assert not collector.validate_catalogue(catalogue, graph)
     assert not collector.validate_migrations(migrations, catalogue, graph, predecessor)
@@ -203,6 +218,13 @@ def main() -> None:
     assert {row["cardReleaseId"] for row in catalogue["items"]} == graph_release_ids
     assert counts["currentKnown"] == counts["verifiedPrintings"]
     assert counts["research"] == counts["finishCandidates"] + counts["researchPlaceholders"]
+    build_a_bear_item = next(
+        row for row in catalogue["items"]
+        if row.get("sourcePrintingId") == "F0119-P01"
+        and (row.get("distribution") or {}).get("name") == "Build-A-Bear Workshop"
+    )
+    assert build_a_bear_item["releaseDate"] is None
+    assert build_a_bear_item["releaseDatePrecision"] is None
     dutch_printings = {
         row["physicalPrintingId"]: row
         for row in catalogue["items"]

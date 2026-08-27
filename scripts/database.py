@@ -32,7 +32,7 @@ from absence_model import absence_scope_urls  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.4.0"
+SCHEMA_VERSION = "1.5.0"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 
 INPUTS = [
@@ -175,7 +175,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10004;
+PRAGMA user_version = 10005;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -418,8 +418,8 @@ CREATE TABLE checklist_items (
     product_mapping TEXT NOT NULL,
     mapped_variants_json TEXT NOT NULL,
     completeness_status TEXT NOT NULL,
-    release_date TEXT NOT NULL,
-    release_date_precision TEXT NOT NULL,
+    release_date TEXT,
+    release_date_precision TEXT,
     release_approximate INTEGER NOT NULL CHECK (release_approximate IN (0, 1)),
     release_sort TEXT NOT NULL,
     image_path TEXT,
@@ -1256,8 +1256,8 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10004:
-            problems.append("database PRAGMA user_version is not 10004")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != 10005:
+            problems.append("database PRAGMA user_version is not 10005")
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()

@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "5579cabef373f4aa67fda7266ccb97641545230d8fca8b31ff813eb6f78ae6c6",
+  "projectionVersion": "45b77dd4d5fcdae249305e080e74ecc8f80e19e1f23ece096b35010be2bf1a6c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 524,
-    "sourceObservations": 1750
+    "physicalPrintings": 523,
+    "sourceObservations": 1749
   },
   "groups": [
     {
@@ -41924,7 +41924,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0119",
-              "sourcePrintingId": "F0119-P01",
+              "sourcePrintingId": "F0119-P02",
               "establishingClaimId": "CLAIM:finish:F0119-P01",
               "sources": [
                 {
@@ -41938,39 +41938,6 @@
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:F0119-P03",
-              "semanticPrintingId": "PRINTING:9b6a31c78dde1fd00d675023",
-              "cardReleaseId": "RELEASE:WEST:English:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
-              "finish": "unknown",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [
-                {
-                  "kind": "retailer",
-                  "text": "Build-A-Bear Workshop",
-                  "role": "distribution-promo"
-                }
-              ],
-              "distribution": {
-                "kind": "retailer-promo",
-                "name": "Build-A-Bear Workshop"
-              },
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0119",
-              "sourcePrintingId": "F0119-P03",
-              "establishingClaimId": "CLAIM:finish:F0119-P03",
-              "sources": [
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V2-FLF1",
-                  "sourceType": "Cardmarket stock image (visual evidence)",
-                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-                  "image": "images/FLF_80_Snorlax_V2_886906.png"
-                }
-              ]
             }
           ],
           "detection": {
@@ -41980,15 +41947,12 @@
             "variant": "V1, V2",
             "finish": [
               "non-holo",
-              "reverse-holo",
-              "unknown"
+              "reverse-holo"
             ],
             "foilPattern": [
               "type-symbol-background"
             ],
-            "markings": [
-              "Build-A-Bear Workshop"
-            ],
+            "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -42012,30 +41976,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0119-P01:0:c5c4d66ec2f4e75e",
+              "observationId": "finish:F0119-P02:0:c5c4d66ec2f4e75e",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/en/cards/xy2-80",
               "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "7410cec228c14853aca2c5d3d12cdccade9b30a0289e6e7b9bccb21c652be945",
+              "contentHash": "c9a61ef18a56787a5d730d359c234118cb90f8a1f283a83eb82a321f407d2071",
               "image": null
             },
             {
-              "observationId": "finish:F0119-P01:1:01d809516c50c37e",
+              "observationId": "finish:F0119-P02:1:01d809516c50c37e",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "75241dba9dd0407b6095e1b4f8122ac6b2cdf591de6871813bb8245a5e6b157e",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0119-P03:0:528dd5ddf576e9b7",
-              "kind": "finish",
-              "provider": "Cardmarket stock image (visual evidence)",
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V2-FLF1",
-              "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "5b848dbc680bd1849a0a419799349e0d05b980ef324f19638a922178ef74fe45",
+              "contentHash": "8e9f227cf5feb6414a8051103cba2f4b66c2313b94040fa071d11a54be7c0513",
               "image": null
             },
             {

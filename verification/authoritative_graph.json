@@ -2273,29 +2273,12 @@
         "claimId": "CLAIM:finish:F0119-P01",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0119-P01",
+        "sourceId": "F0119-P02",
         "semanticPrintingId": "PRINTING:4aa2e85a3807e5219b8eafe4",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:F0119-P01",
         "materializedTargetId": "PHYSICAL:F0119-P01",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:F0119-P03",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:F0119-P03",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0119-P03",
-        "semanticPrintingId": "PRINTING:9b6a31c78dde1fd00d675023",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:F0119-P03",
-        "materializedTargetId": "PHYSICAL:F0119-P03",
         "reason": "finish printing record carries positive evidence"
       }
     },
@@ -9252,7 +9235,7 @@
         "claimId": "CLAIM:finish:PRINTING:053a274ef6b9e0664321ea69",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0119-P02",
+        "sourceId": "F0119-P03",
         "semanticPrintingId": "PRINTING:053a274ef6b9e0664321ea69",
         "evidenceStatus": "marketplace-claimed",
         "disposition": "candidate-needs-evidence",
@@ -10208,6 +10191,24 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:KR:Korean:via-BW7:unknown-local-set:via-055:Snorlax-Block-Teampact:unknown-local-id"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:2d27e979039eda2fc8ce0505",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:2d27e979039eda2fc8ce0505",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0119-P01",
+        "semanticPrintingId": "PRINTING:2d27e979039eda2fc8ce0505",
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:WEST:English:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press"
       }
     },
     {
@@ -70421,38 +70422,8 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0119",
-        "sourcePrintingId": "F0119-P01",
+        "sourcePrintingId": "F0119-P02",
         "establishingClaimId": "CLAIM:finish:F0119-P01"
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:F0119-P03",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:F0119-P03",
-        "semanticPrintingId": "PRINTING:9b6a31c78dde1fd00d675023",
-        "cardReleaseId": "RELEASE:WEST:English:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
-        "finish": "unknown",
-        "edition": null,
-        "foilPattern": null,
-        "markings": [
-          {
-            "kind": "retailer",
-            "text": "Build-A-Bear Workshop",
-            "role": "distribution-promo"
-          }
-        ],
-        "distribution": {
-          "kind": "retailer-promo",
-          "name": "Build-A-Bear Workshop"
-        },
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0119",
-        "sourcePrintingId": "F0119-P03",
-        "establishingClaimId": "CLAIM:finish:F0119-P03"
       }
     },
     {
@@ -131791,16 +131762,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0119-P03",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:F0119-P03",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:F0120-P01",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -136293,6 +136254,14 @@
       "relation": "proposes-for",
       "toType": "card-release",
       "toId": "RELEASE:KR:Korean:via-BW7:unknown-local-set:via-055:Snorlax-Block-Teampact:unknown-local-id",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:2d27e979039eda2fc8ce0505",
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:English:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
       "provenance": {}
     },
     {
@@ -176414,22 +176383,6 @@
     {
       "fromType": "physical-printing",
       "fromId": "PHYSICAL:F0119-P01",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:English:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0119-P03",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:F0119-P03",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0119-P03",
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:English:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
@@ -218259,22 +218212,22 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0119-P01",
-      "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0119-P01",
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0119-P02",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "finish printing record carries positive evidence"
     },
     {
       "sourceKind": "finish-printing-record",
-      "sourceId": "F0119-P03",
+      "sourceId": "F0119-P02",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0119-P03",
+      "targetRef": "PHYSICAL:F0119-P01",
+      "reason": "finish printing record carries positive evidence"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0119-P03",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
       "reason": "finish printing record carries positive evidence"
     },
     {
@@ -233782,14 +233735,14 @@
     }
   ],
   "summary": {
-    "entities": 6594,
-    "edges": 9938,
+    "entities": 6593,
+    "edges": 9936,
     "migrationInputs": 2195,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 261,
+      "candidate-needs-evidence": 262,
       "carried": 67,
-      "established-and-mapped": 1209,
+      "established-and-mapped": 1208,
       "linked-local-counterpart": 4,
       "mapped": 218,
       "needs-evidence": 127,
@@ -233799,7 +233752,7 @@
     },
     "candidateClaims": 1629,
     "cardReleases": 612,
-    "physicalPrintings": 524,
+    "physicalPrintings": 523,
     "setSourceRecords": 347,
     "setSourceDispositions": 347,
     "localizations": 16
