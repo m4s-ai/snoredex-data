@@ -422,7 +422,7 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
     if not text:
         return []
     normalized = str(text).strip()
-    if normalized.casefold() == "editie 1":
+    if normalized.casefold() in {"editie 1", "edizione 1"}:
         kind = "edition-stamp"
     elif normalized.casefold() == "staff":
         kind, normalized = "staff", "Staff"
@@ -816,9 +816,10 @@ def main() -> None:
     for override in overrides_document["overrides"]:
         overrides_by_group[(str(override["setCode"]), str(override.get("number") or ""))].append(override)
 
-    specimen_ids = {
-        str(row.get("specimenId")) for row in specimens_document.get("specimens", [])
+    specimens_by_id = {
+        str(row.get("specimenId")): row for row in specimens_document.get("specimens", [])
     }
+    specimen_ids = set(specimens_by_id)
     for override in overrides_document["overrides"]:
         for manual in override.get("printings") or []:
             refs = {str(ref) for ref in manual.get("sourceRefs") or []}
@@ -1030,6 +1031,23 @@ def main() -> None:
                             and not manual_variants.intersection(candidate["mappedVariants"])
                         ):
                             continue
+                        photograph_claim_fields = manual.get("specimenPhotographClaimFields")
+                        if photograph_claim_fields is not None:
+                            if (
+                                not isinstance(photograph_claim_fields, list)
+                                or not photograph_claim_fields
+                                or any(
+                                    field not in {"identity", "finish", "edition"}
+                                    for field in photograph_claim_fields
+                                )
+                            ):
+                                raise ValueError(
+                                    "invalid specimenPhotographClaimFields for "
+                                    f"{set_code} {number} {language}"
+                                )
+                            candidate["sources"][0]["claimFields"] = list(
+                                photograph_claim_fields
+                            )
                         localized_refs = [
                             ref for ref in manual.get("sourceRefs") or []
                             if language in (source_registry[ref].get("languages") or [])
@@ -1063,8 +1081,15 @@ def main() -> None:
                     if product["variant"] in usable
                 }
                 for printing in printings:
-                    if printing["finish"] == finish and printing.get("_origin") == "auto":
-                        printing["mappedVariants"] = usable
+                    observed_variants = {
+                        str(specimens_by_id[specimen_id].get("variant"))
+                        for specimen_id in printing.get("specimenIds") or []
+                        if specimen_id in specimens_by_id
+                    }
+                    if printing["finish"] == finish and (
+                        printing.get("_origin") == "auto" or observed_variants
+                    ):
+                        printing["mappedVariants"] = sorted(set(usable) | observed_variants)
                         if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
                             printing["cardSize"] = next(iter(mapped_sizes))
             for manual in override.get("printings") or []:

@@ -35,6 +35,10 @@ specimens. Owner statements are authoritative but are still graded explicitly as
 `RESUME.md` is long and worth it. It records every source technique, dead end and methodology
 correction already made here, and reading it is how you avoid repeating one.
 
+Reusable repository workflows live under [`.agents/skills/`](.agents/skills/). Select the narrow
+skill whose description matches the task; each routes back to these canonical documents and the
+existing Python workflow owners rather than copying their contracts.
+
 ## Non-negotiable rules
 
 1. **Evidence outside Cardmarket only.** A product's *language filter* on Cardmarket is not

@@ -68,6 +68,11 @@ named properties. Its generated sources carry `claimFields`, which the source re
 separate identity, finish, and edition dimensions; it must not attribute an owner-confirmed property
 to the listing photograph.
 
+When a retained photograph establishes only identity and a curated external source establishes the
+finish, an `evidenceOnlyForSpecimen` override may set `specimenPhotographClaimFields: ["identity"]`
+and attach the external `sourceRef` with `claimFields: ["finish"]`. This keeps both positive sources
+on one physical printing while preserving their separate authority and claim scope.
+
 **The block is optional and is never back-filled.** Current counts live in `specimens.json`; records
 without the block say nothing about finish, and that silence is not evidence of non-holo. Read the
 record before adding one: a keyword scan over this corpus would have recorded a finish for

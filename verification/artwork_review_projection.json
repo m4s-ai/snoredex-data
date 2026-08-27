@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "650d4f4fc14eccf5e1601164ba3115c12e9548a50e86ed49fc680c76b6de17bb",
+  "projectionVersion": "88ff45d39469d64799069e2cd5975283cf3e12c1542813accfe720f75358d172",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 573,
-    "sourceObservations": 2034
+    "physicalPrintings": 580,
+    "sourceObservations": 2054
   },
   "groups": [
     {
@@ -32737,6 +32737,9 @@
               "sourceFinishUnitId": "F0146",
               "sourcePrintingId": "F0146-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:24d0698b965819962e446bd2",
+              "specimenIds": [
+                "SPEC-0109"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
@@ -32747,6 +32750,11 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://federicstore.it/wp-content/uploads/2020/06/50-68r-destinosfuggente.png",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Federicstore image of Italian Hidden Fates Snorlax 50/68 with the reflective type-symbol card-body treatment. The product page independently labels the exact item Rara Reverse (IT). Retained as SPEC-0109."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
@@ -32778,11 +32786,29 @@
               "sourceFinishUnitId": "F0146",
               "sourcePrintingId": "F0146-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:795e764012918bf858f384c1",
+              "specimenIds": [
+                "SPEC-0108"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Federicstore image of Italian Hidden Fates Snorlax 50/68. The Italian attack Russare Impossibile, Hidden Fates symbol and 50/68 establish identity. The listing calls it Rara rather than Rara Reverse, and the collection owner explicitly confirmed this candidate as non-holo on 2026-08-27. Retained as SPEC-0108.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-27 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
@@ -32833,16 +32859,34 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "e8362baf81a23049e6f4487d98cad14f9594c72015da6be541989a2c191d5bac",
+              "contentHash": "a3b0d69e977bb2ebf3067c10ff18f4844935bf094b3b7e74c10a4dba0ae25e14",
               "image": null
             },
             {
-              "observationId": "finish:F0146-P01:1:e71531a4943d5629",
+              "observationId": "finish:F0146-P01:1:cdace500fa94c126",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",
+              "evidence": "Federicstore image of Italian Hidden Fates Snorlax 50/68. The Italian attack Russare Impossibile, Hidden Fates symbol and 50/68 establish identity. The listing calls it Rara rather than Rara Reverse, and the collection owner explicitly confirmed this candidate as non-holo on 2026-08-27. Retained as SPEC-0108.",
+              "contentHash": "c88db81468ca24877b4a22abd1bd620c704842efbcce3c16fffc540b9fe8f55b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0146-P01:2:c90d3a51112c6147",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-27 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "6ee485435646ed3c6fa070c57cc9e9efaa04433aadacda66881246f08e4603b9",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0146-P01:3:e71531a4943d5629",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "contentHash": "6f3913a23d3a4f4a0caf52255e706a4c86ffe7786a5f6264378952fef8d5e52b",
+              "contentHash": "d0c6a24e95a2c66bcbd9f6c966cf48ce4e9b8994a07eb7aa3e3383dd1a314651",
               "image": null
             },
             {
@@ -32851,7 +32895,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "eff94dc0023ef1efe092bf2b4dcc9fbf2b5b503a3856b791be8c65e28a4c8b2d",
+              "contentHash": "a9fb088b2c3bffe2429ab22546bc9bca833885f76df29cec12dff3154a571910",
               "image": null
             },
             {
@@ -32860,16 +32904,25 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "4dd7062beb60040938c1a20ca1b9fbfa29f065efd502af79114fb34053b5e408",
+              "contentHash": "c0182f400cebd64b257221748b9ced3c9caffd4c467551778dc6695ac6ba1ab1",
               "image": null
             },
             {
-              "observationId": "finish:F0146-P02:2:e71531a4943d5629",
+              "observationId": "finish:F0146-P02:2:f90203b40fe1ca8a",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://federicstore.it/wp-content/uploads/2020/06/50-68r-destinosfuggente.png",
+              "evidence": "Federicstore image of Italian Hidden Fates Snorlax 50/68 with the reflective type-symbol card-body treatment. The product page independently labels the exact item Rara Reverse (IT). Retained as SPEC-0109.",
+              "contentHash": "5b75266b3fdeb97e82682defc3e542c3f4ab9ac5d9e93e6203c090f89df28823",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0146-P02:3:e71531a4943d5629",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "contentHash": "736a34162e4a984ea502bcbca348be63211d52ae0d5671d102229b2d1aff725a",
+              "contentHash": "45d7f87eb352c90647fe2e7cca4f33d49c1e65dedbe6366aa57a0e85c70c30a2",
               "image": null
             },
             {
@@ -34130,6 +34183,9 @@
               "sourceFinishUnitId": "F0034",
               "sourcePrintingId": "F0034-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:ec83ec79685571656aba6120",
+              "specimenIds": [
+                "SPEC-0106"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Call-of-Legends/Snorlax-V1-CL33",
@@ -34145,6 +34201,11 @@
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Call-of-Legends/Snorlax-V2-CL000",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/IZ0AAeSwl~ZplBcJ/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Italian Call of Legends Snorlax 33/95. The Italian attacks Mollaccione and Botta Bum Bum, the Call of Legends symbol and 33/95 establish the exact card; strong vertical rainbow reflection across the card body establishes the reverse-holo printing. Retained as SPEC-0106."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/col1_web_cardlist_it.pdf",
@@ -34221,7 +34282,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Call-of-Legends/Snorlax-V1-CL33",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "1e6951d6a29081f2d7a9ce55ade8b709e5172f7955ebadeee6996b3e0c2d8267",
+              "contentHash": "2fef2c7927d4ac8fc5b2534e81889e0163693c0458adf1b7d62ac903e55ac358",
               "image": null
             },
             {
@@ -34230,7 +34291,7 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "e16c075fd8a82caaf9deeb0f408231ded39635c3519ca930a5a9863196d50e9e",
+              "contentHash": "dbb61713f3c9a539a2c4957d20a3f29d1a131b4cdb5d01ec8bf1a3a8f87dd6fc",
               "image": null
             },
             {
@@ -34239,16 +34300,25 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Call-of-Legends/Snorlax-V2-CL000",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "25b979347ccf195c76c652c20988b76b97585448a97be940fc34af9c603b7627",
+              "contentHash": "36469957435c2cd7c39695079497f2d8756951f61f7cbfbd1736efe5df01ca99",
               "image": null
             },
             {
-              "observationId": "finish:F0034-P02:3:8f1d5df9afa7ac2f",
+              "observationId": "finish:F0034-P02:3:a3ee3c2a5bbc4ea8",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/IZ0AAeSwl~ZplBcJ/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Italian Call of Legends Snorlax 33/95. The Italian attacks Mollaccione and Botta Bum Bum, the Call of Legends symbol and 33/95 establish the exact card; strong vertical rainbow reflection across the card body establishes the reverse-holo printing. Retained as SPEC-0106.",
+              "contentHash": "6729ad163b0ab0e9a6b4135a8dbe3a400fe4561dfa6454d71c9628977e78d27f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0034-P02:4:8f1d5df9afa7ac2f",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/col1_web_cardlist_it.pdf",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings.",
-              "contentHash": "14b5da6dfb4a33ba5a4d86830693db1476cc6b3d75dd29dbed0f5b68a39d9a13",
+              "contentHash": "dd7bd3835d3f83250f375103f029ba94c6c77ecc8fb100eb44997d1f041ee8fb",
               "image": null
             },
             {
@@ -37181,7 +37251,44 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:4efbe1d53ecd639741f1325e",
+              "semanticPrintingId": "PRINTING:4efbe1d53ecd639741f1325e",
+              "cardReleaseId": "RELEASE:WEST:Italian:SK:100:Snorlax-Lolling-About-Continuous-Tumble",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "flat-foil-card-body",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0385",
+              "sourcePrintingId": "F0385-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4efbe1d53ecd639741f1325e",
+              "specimenIds": [
+                "SPEC-0113"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Skyridge/Snorlax-SK100",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete slab photograph of Italian Skyridge Snorlax 100/144. The Italian text and 100/144 are legible, and the Beckett label independently reads 2003 Skyridge Reverse Foil Italian #100 Snorlax. Retained as SPEC-0113."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -37209,6 +37316,33 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0385-P02:0:26cc44d9516b1c6e",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Skyridge/Snorlax-SK100",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "54357426bf6644bc3dfac5b3e117b0d23655e00be848b091edf56090980c5b56",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0385-P02:1:864bd1f7ca541a1b",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "57e1a850173df0e611aa31b469737943a2d67f4cfee60641ac8379a49d6d5e2b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0385-P02:2:06c9ba6235b8b794",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
+              "evidence": "Complete slab photograph of Italian Skyridge Snorlax 100/144. The Italian text and 100/144 are legible, and the Beckett label independently reads 2003 Skyridge Reverse Foil Italian #100 Snorlax. Retained as SPEC-0113.",
+              "contentHash": "f3633f67aa895ed50b6bdddc2d6f8b734e2baa2abb24ffccad8c068716f5df51",
+              "image": null
+            },
             {
               "observationId": "unit:U0186",
               "kind": "unit",
@@ -39407,6 +39541,9 @@
               "sourceFinishUnitId": "F0311",
               "sourcePrintingId": "F0311-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:1ebc6ddd9785414ea491241e",
+              "specimenIds": [
+                "SPEC-0117"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
@@ -39417,6 +39554,11 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/H4wAAeSwIihqJ9Kd/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax Liv.37 33/111. The Italian attacks Sceltaraccolta and Rigirarsi, the Rising Rivals symbol and 33/111 establish identity; strong vertical rainbow reflection across the card body establishes reverse holo. The seller title and item data also say Reverse and Reverse Holo. Retained as SPEC-0117."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
@@ -39529,7 +39671,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "1d4b1a38f9b0cf56e0e7da15d8e33269f51fe64ab2a32262737c529308b22f90",
+              "contentHash": "d46a2fec551aed1df571a83530c065d31241f952366deac8dbc81694af99cb2d",
               "image": null
             },
             {
@@ -39538,16 +39680,25 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "5967908118826a7c5c27e00b56429b35ad03d0039e6aa58d21d43819ce625527",
+              "contentHash": "092436c8a2d8b432fe00784f42ff838ed965bfa091fef73ad6bfb67ed5afcf9c",
               "image": null
             },
             {
-              "observationId": "finish:F0311-P02:2:e31259a2d89729b1",
+              "observationId": "finish:F0311-P02:2:cb2c18c7f49c8552",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/H4wAAeSwIihqJ9Kd/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax Liv.37 33/111. The Italian attacks Sceltaraccolta and Rigirarsi, the Rising Rivals symbol and 33/111 establish identity; strong vertical rainbow reflection across the card body establishes reverse holo. The seller title and item data also say Reverse and Reverse Holo. Retained as SPEC-0117.",
+              "contentHash": "082a92e134e007111738d8914f9f50da55b0aef423e83c7ea104042b8d84b026",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0311-P02:3:e31259a2d89729b1",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-              "contentHash": "64dcf304e071de63b08dbbdd32c6fd5dc5062d170332addf2fc5bd83219e096f",
+              "contentHash": "8db32447f64d3241d97c65625611a59ae4321e1a7a2fd3970b3d8a5d1e00baaf",
               "image": null
             },
             {
@@ -40354,6 +40505,9 @@
               "sourceFinishUnitId": "F0315",
               "sourcePrintingId": "F0315-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:28e4b9e9d1add88b3da7e7c2",
+              "specimenIds": [
+                "SPEC-0118"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv40-RR81",
@@ -40364,6 +40518,11 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://marketplace-article-scans.s3.cardmarket.com/2046269749/2046269749.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete Cardmarket article scan of Italian Rising Rivals Snorlax Liv.40 81/111 supplied by the collection owner. Brutte Abitudini nel Dormire, Girarsi e Rigirarsi, Pressa Pesante and 81/111 establish identity; broad rainbow reflection across the card body positively establishes reverse holo. Retained as SPEC-0118."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
@@ -40432,7 +40591,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv40-RR81",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "ce995514e2dbf975d117d7d09bad990a7f904183f7dcbba677ede15527fed99f",
+              "contentHash": "ef504e420b4be2478c1bba41f7cad0cf96b745a6355f54dfb8af569ecee5eb9d",
               "image": null
             },
             {
@@ -40441,16 +40600,25 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "d9851d132e02dc1ab98b8eb0f10958a387e5658dc4023422e8801b407e83d7b6",
+              "contentHash": "41400c2aaffa18fb7a364f5379a7c2497496e878411f21c6298ed0b7ecb8ddce",
               "image": null
             },
             {
-              "observationId": "finish:F0315-P02:2:e31259a2d89729b1",
+              "observationId": "finish:F0315-P02:2:553689c60d2f3f5e",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2046269749/2046269749.jpg",
+              "evidence": "Complete Cardmarket article scan of Italian Rising Rivals Snorlax Liv.40 81/111 supplied by the collection owner. Brutte Abitudini nel Dormire, Girarsi e Rigirarsi, Pressa Pesante and 81/111 establish identity; broad rainbow reflection across the card body positively establishes reverse holo. Retained as SPEC-0118.",
+              "contentHash": "ab62d22e5d4bd1cfc8fc640852c1bfa0a57e0113591334d127244e8401fe8b44",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0315-P02:3:e31259a2d89729b1",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-              "contentHash": "56fad039bfc520aec94ed2982728123dc61055e9c4951d94bf5a82540cd883b4",
+              "contentHash": "ad10435ac7db84aff319f11ef885e87062662ba8803719dbff5227b478c91a85",
               "image": null
             },
             {
@@ -42398,7 +42566,44 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:1830a963fa3d3f33b01565cc",
+              "semanticPrintingId": "PRINTING:1830a963fa3d3f33b01565cc",
+              "cardReleaseId": "RELEASE:WEST:Italian:FL:15:Snorlax-Rest-Up-Collapse-Toss-and-Turn",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "energy-symbol-artwork-poke-ball",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0118",
+              "sourcePrintingId": "F0118-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1830a963fa3d3f33b01565cc",
+              "specimenIds": [
+                "SPEC-0107"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-FireRed-LeafGreen/Snorlax-FL15",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Archived physical-card sale image paired with the exact sale record 'POKEMON SNORLAX REVERSE HOLO EX FIRERED & LEAFGREEN 15/112 ITA PL NO CHARIZARD' dated 2026-04-02. The pictured slab contains Snorlax 15/112 with the EX-era reverse-holo energy-symbol treatment. Retained as SPEC-0107."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -42426,6 +42631,33 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0118-P02:0:dfe4bad903d66adf",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-FireRed-LeafGreen/Snorlax-FL15",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "0a7574eb5abc99b248aa312912498478784ef028d16be6469118709bc38183b2",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0118-P02:1:864bd1f7ca541a1b",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "de972fa065d046dd2644406879f86b5a36a028f149a6b7d4dbfd2e99953402a8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0118-P02:2:a99b1fa3e2f74fa3",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",
+              "evidence": "Archived physical-card sale image paired with the exact sale record 'POKEMON SNORLAX REVERSE HOLO EX FIRERED & LEAFGREEN 15/112 ITA PL NO CHARIZARD' dated 2026-04-02. The pictured slab contains Snorlax 15/112 with the EX-era reverse-holo energy-symbol treatment. Retained as SPEC-0107.",
+              "contentHash": "33874c7cf16d12d5321296813d1f1770ee0e49741147bbccfbf310d8b697de20",
+              "image": null
+            },
             {
               "observationId": "unit:U0529",
               "kind": "unit",
@@ -43554,15 +43786,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:3def7ced442c9385ba3a834b",
+              "semanticPrintingId": "PRINTING:3def7ced442c9385ba3a834b",
+              "cardReleaseId": "RELEASE:WEST:Italian:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "cosmos",
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "print-identity",
+                  "text": "black-star promo symbol"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0528",
+              "sourcePrintingId": "F0528-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:3def7ced442c9385ba3a834b",
+              "specimenIds": [
+                "SPEC-0114"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/zHAAAeSw82lqTLpc/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete physical-card photograph of Italian SWSH032 Snorlax. The Italian attacks Rollazione and Impatto Pesante, the promo symbol and SWSH032 establish identity; large reflective circles and sparkles in the artwork establish the Cosmo Holo treatment. The exact listing title also says Promo Cosmo Holo and Italiano. Retained as SPEC-0114."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Tika Matsuno",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "cosmos"
+            ],
+            "markings": [
+              "black-star promo symbol"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -43577,6 +43848,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0528-P01:0:5914cf9225cf0557",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/zHAAAeSw82lqTLpc/s-l1600.jpg",
+              "evidence": "Complete physical-card photograph of Italian SWSH032 Snorlax. The Italian attacks Rollazione and Impatto Pesante, the promo symbol and SWSH032 establish identity; large reflective circles and sparkles in the artwork establish the Cosmo Holo treatment. The exact listing title also says Promo Cosmo Holo and Italiano. Retained as SPEC-0114.",
+              "contentHash": "09aba2f421759083d428c95255fbf18d2885b6a05cead4d8b2167add20d5ed33",
+              "image": null
+            },
             {
               "observationId": "unit:U0419",
               "kind": "unit",
@@ -50916,7 +51196,34 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f10b18e760d3bc832c60f77e",
+              "semanticPrintingId": "PRINTING:f10b18e760d3bc832c60f77e",
+              "cardReleaseId": "RELEASE:WEST:Italian:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "non-holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0171",
+              "sourcePrintingId": "F0171-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f10b18e760d3bc832c60f77e",
+              "specimenIds": [
+                "SPEC-0112"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 27/64 with a uniformly printed artwork field. The exact seller title says Unlimited and Non Holo, while item data state Italian, 27/64 and finish Standard. Retained as SPEC-0112."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -50941,6 +51248,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0171-P02:0:86edc25ff9192c67",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
+              "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 27/64 with a uniformly printed artwork field. The exact seller title says Unlimited and Non Holo, while item data state Italian, 27/64 and finish Standard. Retained as SPEC-0112.",
+              "contentHash": "eac2ba34ec81b34dce0b58438f39b72ab234ec04c6f12bc337f4ad21896b1335",
+              "image": null
+            },
             {
               "observationId": "unit:U0093",
               "kind": "unit",
@@ -51536,7 +51852,66 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:5b3b4444d26f774ebf8b5012",
+              "semanticPrintingId": "PRINTING:5b3b4444d26f774ebf8b5012",
+              "cardReleaseId": "RELEASE:WEST:Italian:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0164",
+              "sourcePrintingId": "F0164-P03",
+              "establishingClaimId": "CLAIM:finish:PRINTING:5b3b4444d26f774ebf8b5012",
+              "specimenIds": [
+                "SPEC-0110"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The Italian text, Jungle symbol and 11/64 establish identity; the artwork window directly shows the star-pattern holographic field. The seller title and item data explicitly identify the card as Holo Unlimited. Retained as SPEC-0110."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:ad0c957d33b011837957b7eb",
+              "semanticPrintingId": "PRINTING:ad0c957d33b011837957b7eb",
+              "cardReleaseId": "RELEASE:WEST:Italian:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": "1st Edition",
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "edition-stamp",
+                  "role": "print-identity",
+                  "text": "EDIZIONE 1"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0164",
+              "sourcePrintingId": "F0164-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:ad0c957d33b011837957b7eb",
+              "specimenIds": [
+                "SPEC-0111"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The card face visibly carries the EDIZIONE 1 stamp and a reflective holographic artwork field; the seller data also identify Prima edizione and Rara olografica. Retained as SPEC-0111."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -51546,7 +51921,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "EDIZIONE 1"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -51561,6 +51938,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0164-P02:0:2b17eba368062bd1",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
+              "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The card face visibly carries the EDIZIONE 1 stamp and a reflective holographic artwork field; the seller data also identify Prima edizione and Rara olografica. Retained as SPEC-0111.",
+              "contentHash": "387bf122d8a4109d90dae42d0b78be27e059fa02542a49bb808e433fa5f1606f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0164-P03:0:a1ac7c19e2a0bacb",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
+              "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The Italian text, Jungle symbol and 11/64 establish identity; the artwork window directly shows the star-pattern holographic field. The seller title and item data explicitly identify the card as Holo Unlimited. Retained as SPEC-0110.",
+              "contentHash": "63f0337debf259724bb36dafa3bccd490ce0f0d892c148f625fc91dbd2f026d1",
+              "image": null
+            },
             {
               "observationId": "unit:U0123",
               "kind": "unit",
@@ -53557,15 +53952,82 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:54557822298699d280c0beb7",
+              "semanticPrintingId": "PRINTING:54557822298699d280c0beb7",
+              "cardReleaseId": "RELEASE:WEST:Italian:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "championship-signature",
+                  "role": "distribution-promo",
+                  "text": "Gabriel Fernandez"
+                }
+              ],
+              "distribution": {
+                "kind": "world-championship-deck",
+                "name": "2023 Colorless Lugia"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0587",
+              "sourcePrintingId": "F0587-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:54557822298699d280c0beb7",
+              "specimenIds": [
+                "SPEC-0115",
+                "SPEC-0116"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Front photograph of Italian WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Grasso Imperturbabile, Russare Tonante 180, 143/196, the silver border and replica signature are legible. The paired back photograph is retained as SPEC-0116. Bulbapedia's Colorless Lugia product description states that the deck uses the lowest-rarity prints with Holofoil removed. Retained as SPEC-0115.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+                  "sourceType": "Bulbapedia World Championships deck description",
+                  "authorityTier": "specialist-reference",
+                  "coverage": "product-line-description",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "Italian"
+                  ],
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-08-27",
+                  "evidence": "States that World Championships deck replicas use the lowest-rarity prints and have Holofoil removed; this establishes the non-holo finish for the identified 2023 Colorless Lugia deck card."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Back photograph from the same eBay listing and physical Italian Snorlax card as SPEC-0115. The green Pokemon World Championships 2023 back positively establishes the championship-deck print identity; it is retained separately so the back image remains part of the data specification. Retained as SPEC-0116.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "0313",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Gabriel Fernandez"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -53580,6 +54042,33 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0587-P01:0:66193361db850eee",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg",
+              "evidence": "Front photograph of Italian WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Grasso Imperturbabile, Russare Tonante 180, 143/196, the silver border and replica signature are legible. The paired back photograph is retained as SPEC-0116. Bulbapedia's Colorless Lugia product description states that the deck uses the lowest-rarity prints with Holofoil removed. Retained as SPEC-0115.",
+              "contentHash": "9b709f449d5f9352101130be963cbdba1f3c12cee570a4a45cf857c9ec4ac404",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0587-P01:1:0e4c5afbb2c55e86",
+              "kind": "finish",
+              "provider": "Bulbapedia World Championships deck description",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+              "evidence": "States that World Championships deck replicas use the lowest-rarity prints and have Holofoil removed; this establishes the non-holo finish for the identified 2023 Colorless Lugia deck card.",
+              "contentHash": "cc08f6d9d6e1c585189cd329fa83dcbc9454eb6ffa5f7a01c20894837d2f778e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0587-P01:2:5e7a25eb89d800fc",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg",
+              "evidence": "Back photograph from the same eBay listing and physical Italian Snorlax card as SPEC-0115. The green Pokemon World Championships 2023 back positively establishes the championship-deck print identity; it is retained separately so the back image remains part of the data specification. Retained as SPEC-0116.",
+              "contentHash": "c7e06bf3af5c7df3b6b17c785cd57b8f57f3e1debb3abf100b14103de249e3ac",
+              "image": null
+            },
             {
               "observationId": "unit:U0436",
               "kind": "unit",
@@ -68199,21 +68688,29 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:3ede43ddd9e48695637583e1",
-              "semanticPrintingId": "PRINTING:3ede43ddd9e48695637583e1",
+              "physicalPrintingId": "PHYSICAL:PRINTING:ffae450dbabd7a908e312565",
+              "semanticPrintingId": "PRINTING:ffae450dbabd7a908e312565",
               "cardReleaseId": "RELEASE:WEST:Italian:RR:111:None",
               "finish": "holo",
               "edition": null,
-              "foilPattern": null,
-              "markings": null,
+              "foilPattern": "sparkle holo across artwork and frame",
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0319",
               "sourcePrintingId": "F0319-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:3ede43ddd9e48695637583e1",
+              "establishingClaimId": "CLAIM:finish:PRINTING:ffae450dbabd7a908e312565",
+              "specimenIds": [
+                "SPEC-0119"
+              ],
               "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax LIV.X 111/111. Grande Appetito, Allenarsi and 111/111 establish the exact local identity; multicolour sparkle and reflective treatment are visible across the artwork and card frame. The exact seller title independently identifies Holo rare Ita. Retained as SPEC-0119."
+                },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
                   "sourceType": "Official Pokémon localized expansion checklist",
@@ -68238,7 +68735,9 @@
             "finish": [
               "holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "sparkle holo across artwork and frame"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -68255,12 +68754,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0319-P01:0:e31259a2d89729b1",
+              "observationId": "finish:F0319-P01:0:7040f9cffbdcaa97",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax LIV.X 111/111. Grande Appetito, Allenarsi and 111/111 establish the exact local identity; multicolour sparkle and reflective treatment are visible across the artwork and card frame. The exact seller title independently identifies Holo rare Ita. Retained as SPEC-0119.",
+              "contentHash": "aace4d73536f999c1f06ceed1045b2bd0494b132748ac24d4872bb7eb8344b59",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0319-P01:1:e31259a2d89729b1",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-              "contentHash": "eb54a4a03a4950bcf5a033c6dadacd08453d134a3c1aeea7b909f817575b7c1f",
+              "contentHash": "c4de516d68f60c52717ee5c9f118fad780041895a01c6de8949f2d8826b9eb90",
               "image": null
             },
             {

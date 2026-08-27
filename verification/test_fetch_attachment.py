@@ -84,6 +84,13 @@ def main() -> None:
     expect_failure(lambda: fetch_attachment.validate(b"not an image", allow_small=False))
     expect_failure(lambda: fetch_attachment.validate(image[:-12], allow_small=False))
     expect_failure(lambda: fetch_attachment.select_issue_attachment([], None, 1))
+    same_basename = [
+        ("https://cdn.example.test/a/s-l1600.jpg", ["https://cdn.example.test/a/s-l1600.jpg"]),
+        ("https://cdn.example.test/b/s-l1600.jpg", ["https://cdn.example.test/b/s-l1600.jpg"]),
+    ]
+    assert fetch_attachment.select_issue_attachment(
+        same_basename, "https://cdn.example.test/b/s-l1600.jpg", 1
+    ) == same_basename[1]
     expect_failure(lambda: fetch_attachment.build_specimen(
         {"setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch"},
         "SPEC-9999", "SPEC-9999.png", "issue", digest

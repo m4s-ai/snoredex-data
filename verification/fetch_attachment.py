@@ -258,7 +258,10 @@ def select_issue_attachment(
         return select_issue_attachment(attachments, None, selector)
     needle = str(selector)
     for stable, candidates in attachments:
-        if needle == stable or needle in candidates or Path(urlparse(needle).path).name == Path(urlparse(stable).path).name:
+        if needle == stable or needle in candidates:
+            return stable, candidates
+    for stable, candidates in attachments:
+        if Path(urlparse(needle).path).name == Path(urlparse(stable).path).name:
             return stable, candidates
     fail(f"manifest attachment {needle!r} was not found in the issue HTML")
 

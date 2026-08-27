@@ -89,6 +89,11 @@ def main() -> None:
     projector = finish_projector()
     seller_source = projector.specimen_printing(fixture[2])["sources"][0]
     assert seller_source["sourceType"] == "Seller listing photograph"
+    archived_seller = next(row for row in specimens if row["specimenId"] == "SPEC-0107")
+    assert archived_seller["heldBy"] == "third-party seller"
+    assert projector.specimen_printing(archived_seller)["sources"][0]["sourceType"] == (
+        "Seller listing photograph"
+    )
     owner_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0105")
     owner_sources = projector.specimen_printing(owner_specimen)["sources"]
     assert [source["sourceType"] for source in owner_sources] == [
@@ -135,6 +140,11 @@ def main() -> None:
         target_specimens["SPEC-0055"]["photographSource"]: ["finish", "identity"],
         target_specimens["SPEC-0056"]["photographSource"]: ["identity"],
     }
+    archived_registry_source = next(
+        source for source in source_registry
+        if source.get("canonicalUrl") == archived_seller["photographSource"]
+    )
+    assert archived_registry_source["providerId"] == "seller-listing-photo"
     omitted_size = dict(fixture[0])
     omitted_size["physicalObservation"] = {
         key: value for key, value in fixture[0]["physicalObservation"].items()
@@ -156,6 +166,9 @@ def main() -> None:
     assert projector.specimen_markings({
         "markings": "STAFF", "markingRole": "distribution-promo"
     }) == [{"kind": "staff", "role": "distribution-promo", "text": "Staff"}]
+    assert projector.specimen_markings({
+        "markings": "EDIZIONE 1", "markingRole": "print-identity"
+    }) == [{"kind": "edition-stamp", "role": "print-identity", "text": "EDIZIONE 1"}]
     mp1_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0025")
     mp1_candidate = projector.specimen_printing(mp1_specimen)
     assert mp1_candidate is not None
@@ -182,6 +195,39 @@ def main() -> None:
     assert {printing["foilPattern"] for printing in indonesian["printings"]} == {
         "poke-ball", "master-ball"
     }
+    italian_cl = next(unit for unit in finish_units
+                      if unit["setCode"] == "CL" and unit["number"] == "33"
+                      and unit["language"] == "Italian")
+    cl_reverse = next(printing for printing in italian_cl["printings"]
+                      if printing["finish"] == "reverse-holo")
+    assert cl_reverse["mappedVariants"] == ["V1"]
+    assert cl_reverse["specimenIds"] == ["SPEC-0106"]
+    italian_rr = next(unit for unit in finish_units
+                      if unit["setCode"] == "RR" and unit["number"] == "33"
+                      and unit["language"] == "Italian")
+    rr_reverse = next(printing for printing in italian_rr["printings"]
+                      if printing["finish"] == "reverse-holo")
+    assert rr_reverse["mappedVariants"] == ["V1"]
+    assert rr_reverse["specimenIds"] == ["SPEC-0117"]
+    italian_wcd = next(unit for unit in finish_units
+                       if unit["setCode"] == "WCD23 LOR" and unit["number"] == "LOR 143"
+                       and unit["language"] == "Italian")
+    assert len(italian_wcd["printings"]) == 1
+    wcd_printing = italian_wcd["printings"][0]
+    assert wcd_printing["specimenIds"] == ["SPEC-0115", "SPEC-0116"]
+    wcd_sources = {source["url"]: source for source in wcd_printing["sources"]}
+    assert wcd_sources["https://i.ebayimg.com/images/g/BOgAAOSw6odmeCkP/s-l1600.jpg"][
+        "claimFields"
+    ] == ["identity"]
+    assert wcd_sources["https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg"][
+        "claimFields"
+    ] == ["identity"]
+    bulbapedia_url = "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)"
+    assert wcd_sources[bulbapedia_url]["claimFields"] == ["finish"]
+    wcd_registry = next(source for source in source_registry
+                        if source.get("canonicalUrl") == bulbapedia_url)
+    assert wcd_registry["providerId"] == "bulbapedia"
+    assert "finish" in wcd_registry["dimensions"]
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],
