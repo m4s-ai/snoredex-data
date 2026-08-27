@@ -37,10 +37,10 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-08-26",
+      "lastUpdated": "2026-08-27",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 360,
-      "withOnlyMarketplaceClaim": 93,
+      "withConfirmedFinish": 361,
+      "withOnlyMarketplaceClaim": 92,
       "pendingFinish": 109,
       "notApplicableFinish": 75,
       "withCompleteManifest": 23,
@@ -27028,18 +27028,18 @@
               "non-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0584",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -27050,8 +27050,8 @@
                 "markings": [
                   {
                     "kind": "championship-signature",
-                    "text": "Gabriel Fernandez",
-                    "role": "distribution-promo"
+                    "role": "distribution-promo",
+                    "text": "Gabriel Fernandez"
                   }
                 ],
                 "distribution": {
@@ -27059,8 +27059,12 @@
                   "name": "2023 Colorless Lugia"
                 },
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0105.png",
+                "specimenIds": [
+                  "SPEC-0105"
+                ]
               }
             ]
           },

@@ -89,6 +89,16 @@ def main() -> None:
     projector = finish_projector()
     seller_source = projector.specimen_printing(fixture[2])["sources"][0]
     assert seller_source["sourceType"] == "Seller listing photograph"
+    owner_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0105")
+    owner_sources = projector.specimen_printing(owner_specimen)["sources"]
+    assert [source["sourceType"] for source in owner_sources] == [
+        "Owner-supplied physical card photograph", "Owner attestation (domain expert)"
+    ]
+    assert owner_specimen["photographSource"] == (
+        "https://github.com/m4s-ai/snoredex-data/issues/265#attachment-1"
+    )
+    assert "retained owner-supplied physical card photograph" in owner_sources[1]["evidence"]
+    assert "seller photograph" not in owner_sources[1]["evidence"]
     portuguese_owner_confirmed = {
         row["specimenId"]: projector.specimen_printing(row)
         for row in specimens
@@ -104,6 +114,7 @@ def main() -> None:
         owner_evidence = printing["sources"][1]["evidence"]
         expected_property = "edition" if specimen_id == "SPEC-0055" else "finish"
         assert expected_property in owner_evidence
+        assert "retained seller listing photograph" in owner_evidence
         assert printing["sources"][1]["claimFields"] == [expected_property]
         expected_photo_fields = ["identity", "finish"] if specimen_id == "SPEC-0055" else ["identity"]
         assert printing["sources"][0]["claimFields"] == expected_photo_fields

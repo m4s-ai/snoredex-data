@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-08-26",
+    "generated": "2026-08-27",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -13720,12 +13720,14 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0584-P01",
         "semanticPrintingId": "PRINTING:ffc9ab2517a7b6e09bdfd4df",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+        "materializedTargetId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0105"
+        ]
       }
     },
     {
@@ -27589,6 +27591,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:bf0e4553a710e29792bbea61, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:bf0e4553a710e29792bbea61"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0105",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0105",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0105",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df"
       }
     },
     {
@@ -79913,6 +79932,39 @@
         "establishingClaimId": "CLAIM:finish:PRINTING:fc3b57572c6c46f102841102",
         "specimenIds": [
           "SPEC-0048"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+        "semanticPrintingId": "PRINTING:ffc9ab2517a7b6e09bdfd4df",
+        "cardReleaseId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "championship-signature",
+            "role": "distribution-promo",
+            "text": "Gabriel Fernandez"
+          }
+        ],
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0584",
+        "sourcePrintingId": "F0584-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+        "specimenIds": [
+          "SPEC-0105"
         ]
       }
     },
@@ -137151,10 +137203,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:ffc9ab2517a7b6e09bdfd4df",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -144454,6 +144508,16 @@
       "toId": "PHYSICAL:PRINTING:bf0e4553a710e29792bbea61",
       "provenance": {
         "specimenId": "SPEC-0103"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0105",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "provenance": {
+        "specimenId": "SPEC-0105"
       }
     },
     {
@@ -182520,6 +182584,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Russian:FLF:80:Snorlax-Stir-and-Snooze-Sleepy-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {}
     },
     {
@@ -220865,9 +220945,9 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0584-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -232423,17 +232503,24 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:bf0e4553a710e29792bbea61, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0105",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 6559,
-    "edges": 9889,
-    "migrationInputs": 2174,
+    "entities": 6561,
+    "edges": 9892,
+    "migrationInputs": 2175,
     "migrationDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 254,
       "carried": 67,
-      "established-and-mapped": 1195,
+      "established-and-mapped": 1196,
       "linked-local-counterpart": 4,
       "mapped": 218,
       "needs-evidence": 127,
@@ -232441,9 +232528,9 @@
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1608,
+    "candidateClaims": 1609,
     "cardReleases": 612,
-    "physicalPrintings": 510,
+    "physicalPrintings": 511,
     "setSourceRecords": 347,
     "setSourceDispositions": 347,
     "localizations": 16
