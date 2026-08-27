@@ -40,6 +40,7 @@ ALLOWED_PATTERN = ("confirmed", "partial", "pending", "not-applicable")
 # "complete-manifest", which stays source-derived; E13 holds the decision to what it may do.
 ALLOWED_COMPLETENESS = ("complete-manifest", "owner-adjudicated", "positive-evidence-only",
                         "pending", "not-applicable")
+ALLOWED_CLOSURE_SCOPES = ("finish-unit", "standard-set")
 ALLOWED_MARKING_ROLES = ("print-identity", "reverse-holo-treatment", "distribution-promo")
 ALLOWED_EDITIONS = ("1st Edition", "Unlimited")
 
@@ -84,6 +85,8 @@ def main() -> int:
     excluded = read_json(VERIFICATION / "excluded_codecards.json")
     finish_units = read_json(VERIFICATION / "finish_units.json")["units"]
     finish_review = read_json(VERIFICATION / "FINISH_REVIEW.json")
+    finish_overrides = read_json(VERIFICATION / "finish_overrides.json")
+    tcgdex_snapshot = read_json(VERIFICATION / "finish_tcgdex_snapshot.json")["records"]
 
     # --- 1. unit totals and identity ---
     suite.report("units total", len(units), 719)
@@ -240,13 +243,49 @@ def main() -> int:
     suite.check("finish taxonomy, applicability, and review queue valid", state_ok,
                 f"bad={len(bad_state)}, not-applicable={len(not_applicable)}, "
                 f"review={review_count}")
+    hidden_unknown_finishes = [
+        unit.get("finishUnitId") for unit in finish_units
+        if any(p.get("finish") == "unknown" for p in (unit.get("printings") or []))
+        and (unit.get("completenessStatus") == "complete-manifest" or not unit.get("unresolved"))
+    ]
+    suite.check("unknown finish printings remain unresolved", not hidden_unknown_finishes,
+                ",".join(first(hidden_unknown_finishes)))
+    improperly_closed_scopes, hidden_out_of_scope_printings = [], []
+    for unit in finish_units:
+        manifests = [
+            source
+            for printing in (unit.get("printings") or [])
+            for source in (printing.get("sources") or [])
+            if source.get("supportsAbsence") is True
+            and source.get("coverage") == "complete-manifest"
+            and (not source.get("languages") or unit.get("language") in source["languages"])
+        ]
+        scopes = {source.get("closureScope") for source in manifests}
+        if scopes and "finish-unit" not in scopes \
+                and unit.get("completenessStatus") == "complete-manifest":
+            improperly_closed_scopes.append(unit.get("finishUnitId"))
+        bounded_urls = {
+            source.get("url") for source in manifests
+            if source.get("closureScope") != "finish-unit" and source.get("url")
+        }
+        uncovered = [
+            printing for printing in (unit.get("printings") or [])
+            if bounded_urls and not any(
+                source.get("url") in bounded_urls for source in (printing.get("sources") or []))
+        ]
+        if uncovered and "finish-unit" not in scopes and not unit.get("unresolved"):
+            hidden_out_of_scope_printings.append(unit.get("finishUnitId"))
+    suite.check("scoped manifests do not close finish units", not improperly_closed_scopes,
+                ",".join(first(improperly_closed_scopes)))
+    suite.check("out-of-scope printings remain unresolved", not hidden_out_of_scope_printings,
+                ",".join(first(hidden_out_of_scope_printings)))
     suite.report("finish units covered by a complete manifest",
                  sum(1 for u in finish_units
                      if u.get("completenessStatus") == "complete-manifest"), 4)
-    # 222 -> 223 on 2026-08-03: the owner's GameStop/Canada adjudication overturned U0452, so
-    # xJTG 117 French became a confirmed language and F0598 became an applicable finish unit.
-    # The queue grew because the corpus grew, not because finish work was lost or reopened.
-    suite.report("finish review queue", len(finish_review.get("units") or []), 223,
+    # 223 -> 234 on 2026-08-27: preserving 25 TCGdex variants=true claims reopened 20 EFIGS
+    # units whose standard-set checklists do not cover those physical printings. The increase
+    # corrects hidden positive evidence; subsequent growth remains a regression.
+    suite.report("finish review queue", len(finish_review.get("units") or []), 234,
                  direction=checks.DOWN_IS_PROGRESS)
 
     printing_ids = [p.get("printingId")
@@ -268,7 +307,8 @@ def main() -> int:
             for source in sources:
                 if source.get("supportsAbsence") is True and (
                         source.get("authorityTier") != "official-primary"
-                        or source.get("coverage") != "complete-manifest"):
+                        or source.get("coverage") != "complete-manifest"
+                        or source.get("closureScope") not in ALLOWED_CLOSURE_SCOPES):
                     bad_sources.append(printing.get("printingId"))
             for mapped in (printing.get("mappedVariants") or []):
                 if mapped not in product_variants:
@@ -285,6 +325,106 @@ def main() -> int:
     suite.check("finish mappings reference local products", not bad_mappings,
                 ",".join(first(bad_mappings)))
     suite.check("stamp roles valid and finish-safe", not bad_roles, ",".join(first(bad_roles)))
+
+    finish_units_by_key = {
+        (unit.get("setCode"), str(unit.get("number")), unit.get("language")): unit
+        for unit in finish_units
+    }
+    missing_tcgdex_positives = []
+    for unit in units:
+        url = str(unit.get("sourceUrl") or "")
+        if unit.get("status") != "confirmed" or not url.startswith("https://api.tcgdex.net/"):
+            continue
+        finish_unit = finish_units_by_key.get(
+            (unit.get("setCode"), str(unit.get("number")), unit.get("language"))
+        )
+        variants = (tcgdex_snapshot.get(url) or {}).get("payload", {}).get("variants", {})
+        for field, finish in (
+            ("normal", "non-holo"), ("holo", "holo"), ("reverse", "reverse-holo")
+        ):
+            if variants.get(field) is not True:
+                continue
+            preserved = any(
+                printing.get("finish") == finish
+                and any(source.get("url") == url for source in (printing.get("sources") or []))
+                for printing in (finish_unit or {}).get("printings", [])
+            )
+            if not preserved:
+                missing_tcgdex_positives.append(
+                    f"{unit.get('setCode')} {unit.get('number')} {unit.get('language')} {finish}"
+                )
+    suite.check("TCGdex positive finish evidence is preserved", not missing_tcgdex_positives,
+                ",".join(first(missing_tcgdex_positives)))
+
+    bad_standard_set_mappings = []
+    for unit in finish_units:
+        standard_variants = {
+            product.get("variant") for product in (unit.get("products") or [])
+            if product.get("rarity") != "Oversized"
+        }
+        for printing in (unit.get("printings") or []):
+            if not any(
+                source.get("closureScope") == "standard-set"
+                for source in (printing.get("sources") or [])
+            ):
+                continue
+            mapped = set(printing.get("mappedVariants") or [])
+            if printing.get("cardSize") != "standard" or (
+                len(standard_variants) == 1 and not standard_variants <= mapped
+            ):
+                bad_standard_set_mappings.append(printing.get("printingId"))
+    suite.check("standard-set checklist printings map to the standard product",
+                not bad_standard_set_mappings,
+                ",".join(first(bad_standard_set_mappings)))
+
+    override_sources = finish_overrides.get("sources") or {}
+    unbounded_language_overrides = []
+    for override in (finish_overrides.get("overrides") or []):
+        override_languages = set(override.get("languages") or [])
+        for printing in (override.get("printings") or []):
+            refs = printing.get("sourceRefs") or []
+            scoped_languages = [
+                set(override_sources[ref].get("languages") or []) for ref in refs
+            ]
+            if refs and all(scoped_languages):
+                supported_languages = set().union(*scoped_languages)
+                if not override_languages or not override_languages <= supported_languages:
+                    unbounded_language_overrides.append(
+                        f"{override.get('setCode')} {override.get('number')} {printing.get('finish')}"
+                    )
+    suite.check("language-scoped-only overrides stay within source coverage",
+                not unbounded_language_overrides,
+                ",".join(first(unbounded_language_overrides)))
+    unsupported_override_patterns = [
+        f"{override.get('setCode')} {override.get('number')} {','.join(override.get('languages') or [])}"
+        for override in (finish_overrides.get("overrides") or [])
+        for printing in (override.get("printings") or [])
+        if printing.get("foilPattern")
+        and printing.get("sourceRefs")
+        and all(override_sources[ref].get("closureScope") == "standard-set"
+                for ref in printing["sourceRefs"])
+    ]
+    suite.check("finish-only checklists do not assert foil patterns",
+                not unsupported_override_patterns,
+                ",".join(first(unsupported_override_patterns)))
+    ambiguous_pattern_duplicates = []
+    for unit in finish_units:
+        by_patternless_identity: dict[tuple, set] = {}
+        for printing in (unit.get("printings") or []):
+            identity = (
+                printing.get("finish"), printing.get("edition"),
+                json.dumps(printing.get("markings"), sort_keys=True),
+                json.dumps(printing.get("distribution"), sort_keys=True),
+                printing.get("releaseDate"), printing.get("cardSize"),
+                tuple(sorted(printing.get("mappedVariants") or [])),
+            )
+            by_patternless_identity.setdefault(identity, set()).add(printing.get("foilPattern"))
+        if any(None in patterns and len(patterns) > 1
+               for patterns in by_patternless_identity.values()):
+            ambiguous_pattern_duplicates.append(unit.get("finishUnitId"))
+    suite.check("pattern placeholders do not duplicate identified printings",
+                not ambiguous_pattern_duplicates,
+                ",".join(first(ambiguous_pattern_duplicates)))
 
     dragon_frontiers = [
         p for u in finish_units if u.get("setCode") == "DF" and u.get("number") == "10"
@@ -323,6 +463,19 @@ def main() -> int:
     suite.check("special finish cases modeled", special_ok,
                 f"DF={len(dragon_frontiers)}, xJTG={len(printings_of(jtg_promos))}, "
                 f"xPRE={len(printings_of(prismatic))}, EXS={len(exs_printings)}")
+
+    prize8_units = [
+        unit for unit in finish_units
+        if unit.get("setCode") == "PPS8 JTG" and unit.get("number") == "JTG 117"
+    ]
+    prize8_ok = len(prize8_units) == 6 and all(
+        len(printings_of(unit)) == 2
+        and {printing.get("finish") for printing in printings_of(unit)} == {"non-holo", "holo"}
+        for unit in prize8_units
+    )
+    suite.check("Prize Pack Series Eight products are not duplicated", prize8_ok,
+                ",".join(f"{unit.get('language')}={len(printings_of(unit))}"
+                         for unit in prize8_units))
 
     hop_english = unit_of(finish_units, setCode="JTG", number="117", language="English")
     hop_finishes = list((hop_english or {}).get("availableFinishes") or [])

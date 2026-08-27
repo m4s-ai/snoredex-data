@@ -205,6 +205,49 @@ to a unit with no printings at all — that would be an absence argument wearing
 
 ## Confirmed and narrowed cases
 
+### Official checklist sweep (2026-08-27)
+
+All 146 official checklist PDFs found in the repository-wide set sweep were evaluated against the
+actual Snoredex set code and collector number. The result is deliberately split by what the
+document can prove:
+
+- **95 newly used localized expansion checklists** are exact, complete finish manifests inside
+  their explicit `standard-set` scope. All 95 URLs returned a PDF on the review date. They establish
+  138 standard-set finish profiles in English, French, German, Italian, and European Spanish, but
+  do not close the wider finish units against separate promotional distributions.
+- **23 already used manifests** cover EX Dragon Frontiers and Prize Pack Series 1, 3, 7, and 8.
+  The 22 Prize Pack scopes retain finish-unit closure; Dragon Frontiers is now explicitly bounded
+  to its standard set, with its special foil treatment established by separate pattern evidence.
+- **23 additional official card-list PDFs** (`MEW` in five languages; `KSS` in four; `PAR` in five;
+  English `JTG`, `PAF`, `PRE`, `TWM`, `SSP`, and `POR`; French/German `PAF`; German `PRE`) name the
+  card but do not expose a complete finish matrix for its row. Their positive card/rarity facts are
+  already present, so they add no finish claim and cannot close a finish list.
+- **Five `sm1` PDFs** are a false code match: the repository's `SM` means *SM Black Star Promos*,
+  while those PDFs describe the Sun & Moon base expansion. They say nothing about `SM 05` or
+  `SM 169`.
+
+The newly imported manifests resolve these set-printing profiles. A localized checklist is applied
+only to the language printed in that document; Portuguese, Polish, and Russian rows do not inherit
+an EFIGS result.
+
+| Checklist result | Snoredex rows |
+|---|---|
+| Non-holo + reverse-holo | `BCR 109`, `BKT 118`, `CL 33`, `CRZ 109`, `DP 37`, `FCO 77`, `FLF 80`, `FST 206`, `HIF 50`, `PLS 101`, `RCL 141`, `RR 33`, `RR 81`, `SSH 140` |
+| Holo + reverse-holo | `FL 15`, `LOR 143`, `PGO 055`, `UNB 158`, `VIV 131` |
+| Holo only | `CRE 224`, `LOR TG10`, `RR 111`, `SSH 141`, `SSH 142`, `SSH 197`, `SSH 206`, `TEU 120`, `TEU 171`, `TEU 191`, `TRR 104` |
+
+This produces five material row-level corrections: `LOR TG10` is holo rather than non-holo plus
+reverse-holo; `RR 111` is holo rather than holo plus a marketplace-claimed reverse-holo; and all
+three Team Up Eevee & Snorlax-GX rows (`120`, `171`, `191`) are holo rather than non-holo. Separate
+positive product evidence remains additive: for example, the English League holos of `CL 33` and
+`RR 33`, and the non-holo `UNB 158` printing, are not erased merely because the expansion checklist
+describes the standard set columns.
+
+Third-party checklists found during the same sweep were also evaluated and rejected as new finish
+evidence: Pokechart explicitly estimates “likely” parallel candidates, while Pokellector and the
+other printable collector lists do not establish an official, exhaustive finish scope. Their
+silence is therefore not used as absence evidence.
+
 | Card/product | Result | Strongest evidence |
 |---|---|---|
 | `DF 10` | Regular holo plus a reverse holo with the EX Dragon Frontiers set-logo treatment | [Official EX Dragon Frontiers checklist](https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf) says cards 1–12 have two foil versions; exact specimen and pattern history identify the stamped reverse |
@@ -276,9 +319,10 @@ TCGCSV is a reproducible TCGplayer export. Its group endpoints used here are:
 Work [`FINISH_REVIEW.csv`](FINISH_REVIEW.csv), grouping by card before language. Prefer sources in
 this order:
 
-1. Official expansion checklists and sealed-product descriptions. Pokémon hosts localized
-   checklists under `assets.pokemon.com`; Vivid Voltage checklists are known in English, German,
-   and Spanish and are good templates for locating other languages.
+1. Official expansion checklists and sealed-product descriptions. The 2026-08-27 sweep exhausted
+   the 95 actionable EFIGS documents recorded in `finish_overrides.json`; search here only for a
+   set/language not covered by that exact URL list, especially Portuguese or product-specific
+   alternate printings.
 2. Official regional databases: [Japan](https://www.pokemon-card.com/card-search/),
    [Asia](https://asia.pokemon-card.com/id/card-search/),
    [Mainland China](https://www.pokemon.cn/tcg/product), and

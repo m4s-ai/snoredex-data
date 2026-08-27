@@ -363,6 +363,16 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         candidate.pop("conflictsWith", None)
     signature = printing_signature(candidate)
     existing = next((item for item in printings if printing_signature(item) == signature), None)
+    if existing is None and candidate["foilPattern"] is None and any(
+            source.get("closureScope") == "standard-set" for source in candidate["sources"]):
+        pattern_matches = []
+        for item in printings:
+            patternless = dict(item)
+            patternless["foilPattern"] = None
+            if printing_signature(patternless) == signature:
+                pattern_matches.append(item)
+        if len(pattern_matches) == 1:
+            existing = pattern_matches[0]
     if existing is None:
         candidate["mappedVariants"] = sorted(set(candidate["mappedVariants"]))
         if candidate.get("specimenIds"):
@@ -568,15 +578,17 @@ def strongest_status(printings: list[dict[str, Any]], finish: str | None = None)
     return max(statuses, key=lambda status: STATUS_RANK[status]) if statuses else "pending"
 
 
-def has_complete_manifest(printings: list[dict[str, Any]], language: str) -> bool:
-    """Return true only for a complete source whose declared language covers this unit."""
-    return any(
-        source.get("supportsAbsence") is True
-        and source.get("coverage") == "complete-manifest"
-        and (not source.get("languages") or language in source["languages"])
+def complete_manifests(printings: list[dict[str, Any]], language: str) -> list[dict[str, Any]]:
+    """Return complete sources whose declared language covers this unit."""
+    return [
+        source
         for printing in printings
         for source in printing.get("sources") or []
-    )
+        if source.get("closureScope")
+        and source.get("supportsAbsence") is True
+        and source.get("coverage") == "complete-manifest"
+        and (not source.get("languages") or language in source["languages"])
+    ]
 
 
 def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") -> dict[str, Any]:
@@ -1056,10 +1068,19 @@ def main() -> None:
         for override in applicable_overrides:
             suppressed = set(override.get("suppressAutoFinishes") or [])
             if suppressed:
+                # Suppression corrects catalogue-derived guesses; only a positive TCGdex
+                # variants=true response is immune.
                 printings = [
                     printing
                     for printing in printings
-                    if not (printing.get("_origin") == "auto" and printing["finish"] in suppressed)
+                    if not (
+                        printing.get("_origin") == "auto"
+                        and printing["finish"] in suppressed
+                        and not any(
+                            str(source.get("url") or "").startswith("https://api.tcgdex.net/")
+                            for source in printing.get("sources") or []
+                        )
+                    )
                 ]
             for finish, mapped_variants in (override.get("mapAutoFinishes") or {}).items():
                 usable = sorted(set(mapped_variants) & present_variants)
@@ -1148,7 +1169,10 @@ def main() -> None:
             product_mapping_status = "pending"
 
         known_printings = [printing for printing in printings if printing["finish"] in FINISHES]
-        complete_manifest = has_complete_manifest(known_printings, language)
+        unknown_finish_printings = [printing for printing in printings if printing["finish"] == "unknown"]
+        manifests = complete_manifests(known_printings, language)
+        manifest_scopes = {source["closureScope"] for source in manifests}
+        complete_manifest = not unknown_finish_printings and "finish-unit" in manifest_scopes
         pattern_target_printings = [
             printing for printing in printings if printing["finish"] in {"reverse-holo", "mirror-holo"}
         ]
@@ -1165,6 +1189,27 @@ def main() -> None:
         unresolved: list[str] = []
         if not all_claims_contradicted and not known_printings:
             unresolved.append("No positive finish evidence has been recorded for this set-number-language unit.")
+        if unknown_finish_printings:
+            unresolved.append(
+                "One or more known physical printings still have unresolved finishes: "
+                + ", ".join(printing["printingId"] for printing in unknown_finish_printings)
+            )
+        bounded_manifest_urls = {
+            source.get("url") for source in manifests
+            if source["closureScope"] != "finish-unit" and source.get("url")
+        }
+        uncovered_printings = [
+            printing["printingId"] for printing in printings
+            if bounded_manifest_urls and not any(
+                source.get("url") in bounded_manifest_urls
+                for source in printing.get("sources") or []
+            )
+        ]
+        if uncovered_printings and "finish-unit" not in manifest_scopes:
+            unresolved.append(
+                "Scoped complete manifests do not cover these known physical printings: "
+                + ", ".join(uncovered_printings)
+            )
         if product_mapping_status in {"partial", "pending"}:
             unresolved.append(
                 "One or more Cardmarket product variants are not mapped to a logical printing: "
@@ -1321,7 +1366,8 @@ def main() -> None:
             "sourcePolicy": [
                 "Only positive availability is asserted. pending means not yet established, never proven absent.",
                 "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
-                "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest can set completenessStatus=complete-manifest.",
+                "Only a language-scoped source marked supportsAbsence=true, coverage=complete-manifest, and closureScope=finish-unit, with no known printing whose finish is unresolved, can set completenessStatus=complete-manifest.",
+                "A scoped complete source remains positive evidence inside its named boundary and leaves the wider finish unit open for review.",
                 "A collection-owner finish adjudication sets completenessStatus=owner-adjudicated, which never asserts a finish and is deliberately distinct from complete-manifest.",
                 "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
                 "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
