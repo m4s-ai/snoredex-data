@@ -466,7 +466,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 1,
         "coverage": "individual cards whose text and markings were read from a photograph",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish", "edition"],
+        "usedFor": ["language", "identity", "finish", "edition"],
         "attribution": "Physical card, inspected specimen.",
         "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
     },

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 104,
+  "count": 105,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -2147,6 +2147,38 @@
       "citedBy": [
         "U0540"
       ]
+    },
+    {
+      "specimenId": "SPEC-0105",
+      "setCode": "WCD23 LOR",
+      "number": "LOR 143",
+      "variant": "base",
+      "language": "English",
+      "heldBy": "collection owner",
+      "inspectedFrom": "owner-supplied photograph attached to issue #265",
+      "photograph": "SPEC-0105.png",
+      "photographSource": "https://github.com/user-attachments/assets/117d1e60-2b9c-4ce1-8e7d-13d115508ffc",
+      "photographSha256": "sha256:3d19cb8990ad93ee0d2011b0b2413159174d60ad00f59c2f4cb0fde974a2167f",
+      "observed": "Owner photograph of English WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia World Championship Deck. The visible card face shows Snorlax, 150 HP, Ability Unfazed Fat, Thumping Snore 130 and the replica signature, with Pokemon World Championships deck packaging behind the card. On 2026-08-27 the collection owner explicitly confirmed that this physical copy is non-holo.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0584-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "foilPattern": null,
+        "markings": "Gabriel Fernandez replica signature",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "basis": "The owner designated the photograph for issue #265; the English card face, Gabriel Fernandez replica signature and World Championships deck packaging establish the WCD 2023 Colorless Lugia printing. The collection owner's explicit 2026-08-27 confirmation establishes the non-holo finish; finish is not inferred from an absence of glare."
+      }
     }
   ]
 }

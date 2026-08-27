@@ -416,6 +416,8 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
         kind = "edition-stamp"
     elif normalized.casefold() == "staff":
         kind, normalized = "staff", "Staff"
+    elif normalized.casefold().endswith(" replica signature"):
+        kind, normalized = "championship-signature", normalized[:-18].strip()
     else:
         kind = "observed-marking"
     return [{"kind": kind, "role": observation.get("markingRole"), "text": normalized}]

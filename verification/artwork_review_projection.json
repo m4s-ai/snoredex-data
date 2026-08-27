@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "9c2a2622cf60cd996337a33c05b34d990bdde7a5845be854374bad5983fed26a",
+  "projectionVersion": "fa9a21f24ccd0fc48661b4fe49eb595a12105f847c2811edebe7d87f844ada1f",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 510,
-    "sourceObservations": 1715
+    "physicalPrintings": 511,
+    "sourceObservations": 1720
   },
   "groups": [
     {
@@ -46456,7 +46456,84 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+              "semanticPrintingId": "PRINTING:ffc9ab2517a7b6e09bdfd4df",
+              "cardReleaseId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "championship-signature",
+                  "role": "distribution-promo",
+                  "text": "Gabriel Fernandez"
+                }
+              ],
+              "distribution": {
+                "kind": "world-championship-deck",
+                "name": "2023 Colorless Lugia"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0584",
+              "sourcePrintingId": "F0584-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+              "specimenIds": [
+                "SPEC-0105"
+              ],
+              "sources": [
+                {
+                  "url": "https://github.com/user-attachments/assets/117d1e60-2b9c-4ce1-8e7d-13d115508ffc",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Owner photograph of English WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia World Championship Deck. The visible card face shows Snorlax, 150 HP, Ability Unfazed Fat, Thumping Snore 130 and the replica signature, with Pokemon World Championships deck packaging behind the card. On 2026-08-27 the collection owner explicitly confirmed that this physical copy is non-holo. Retained as SPEC-0105.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-27 confirmation establishes the specimen's finish; the retained seller photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://tcgcsv.com/docs",
+                  "sourceType": "TCGCSV documentation",
+                  "authorityTier": "marketplace-api",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Documents that the exported product and price records come from TCGplayer and that price subtypes distinguish Normal, Holofoil, and Reverse Holofoil."
+                },
+                {
+                  "url": "https://tcgcsv.com/tcgplayer/3/2282/prices",
+                  "identityUrl": "https://tcgcsv.com/tcgplayer/3/2282/products",
+                  "sourceType": "TCGCSV TCGplayer export",
+                  "authorityTier": "marketplace-api",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "productId": 541770,
+                  "expectedSubtypes": {
+                    "541770": [
+                      "Normal"
+                    ]
+                  },
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Product 541770 is Snorlax from the 2023 Gabriel Fernandez World Championship Deck and has the positive price subtype Normal."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/WCD-2023/Snorlax-WCD23LOR-143",
+                  "sourceType": "Cardmarket stock image (visual evidence)",
+                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+                  "image": "images/WCD23_LOR_LOR_143_Snorlax_833025.jpg"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -46483,6 +46560,51 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0584-P01:0:caabc2f506434274",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://github.com/user-attachments/assets/117d1e60-2b9c-4ce1-8e7d-13d115508ffc",
+              "evidence": "Owner photograph of English WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia World Championship Deck. The visible card face shows Snorlax, 150 HP, Ability Unfazed Fat, Thumping Snore 130 and the replica signature, with Pokemon World Championships deck packaging behind the card. On 2026-08-27 the collection owner explicitly confirmed that this physical copy is non-holo. Retained as SPEC-0105.",
+              "contentHash": "66e767b2afe402afbc464342c35a30ea1d4b0c91eeb0260a5c5d1f5ea8772e34",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0584-P01:1:68cfd8b84d05d97d",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-27 confirmation establishes the specimen's finish; the retained seller photograph supports card identity and any independently visible properties.",
+              "contentHash": "2686b592164e4e802e17f6bf0f34813ab083c189d6b45cf8475c7c00e5073419",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0584-P01:2:3267ff5989e4cc78",
+              "kind": "finish",
+              "provider": "TCGCSV documentation",
+              "url": "https://tcgcsv.com/docs",
+              "evidence": "Documents that the exported product and price records come from TCGplayer and that price subtypes distinguish Normal, Holofoil, and Reverse Holofoil.",
+              "contentHash": "4e181fec42f5fc8eec81beabc6d2da833473930aecdd08cfb43290f8d9e2260c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0584-P01:3:957ebe6ce840c809",
+              "kind": "finish",
+              "provider": "TCGCSV TCGplayer export",
+              "url": "https://tcgcsv.com/tcgplayer/3/2282/prices",
+              "evidence": "Product 541770 is Snorlax from the 2023 Gabriel Fernandez World Championship Deck and has the positive price subtype Normal.",
+              "contentHash": "63fdb21b5fe59ceb476092fd5ff81560bfc99e7b931cc5930f9544f518c6997e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0584-P01:4:9d1fd6f040e56852",
+              "kind": "finish",
+              "provider": "Cardmarket stock image (visual evidence)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/WCD-2023/Snorlax-WCD23LOR-143",
+              "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+              "contentHash": "e472b2172972a6eeb9af87d64ddd4c44fccca93b42faf089cd3b55f546445fb5",
+              "image": null
+            },
             {
               "observationId": "unit:U0432",
               "kind": "unit",
