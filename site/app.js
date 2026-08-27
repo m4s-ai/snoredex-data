@@ -1293,6 +1293,46 @@
         }).join('') + '</ul></details>';
     };
 
+    const actionOptionsHTML = (selectedAction, imageReviewable) => ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
+      .map((action) => '<option value="' + escapeHTML(action) + '"' +
+        (imageDependentActions.has(action) && !imageReviewable ? ' disabled' : '') +
+        (selectedAction === action ? ' selected' : '') + '>' +
+        escapeHTML(action ? actionLabel(action) : 'Choose a review action') + '</option>').join('');
+
+    const structuredFieldsHTML = (selectedAction, existing, proposed, cleared) => {
+      const value = (key) => escapeHTML(Object.prototype.hasOwnProperty.call(proposed, key)
+        ? proposed[key] : (cleared.has(key) ? "" : existing[key]));
+      const touched = (key) => Object.prototype.hasOwnProperty.call(proposed, key) || cleared.has(key);
+      const input = (className, key, placeholder) => '<input class="' + className + '" data-detection-field="' + key +
+        '" data-touched="' + (touched(key) ? 'true' : 'false') + '" value="' + value(key) +
+        '" placeholder="' + placeholder + '">';
+      return '<div class="ar-structured-fields"' +
+        (structuredActions.has(selectedAction) ? '' : ' hidden') + '>' +
+        '<p class="artwork-muted">Edit a field to set it; clear it to explicitly remove it.</p>' +
+        '<label>Card name' + input('ar-proposed-name', 'cardName', 'Corrected card name') + '</label>' +
+        '<label>Artist' + input('ar-proposed-artist', 'artist', 'Corrected artist') + '</label>' +
+        '<label>Variant identity' + input('ar-proposed-variant', 'variant', 'e.g. V2') + '</label>' +
+        '<label>Local set code' + input('ar-proposed-set', 'localSetCode', 'Set code for a new variant') + '</label>' +
+        '<label>Local number' + input('ar-proposed-number', 'localNumber', 'Collector number for a new variant') + '</label>' +
+        '<label>Finish' + input('ar-proposed-finish', 'finish', 'Finish') + '</label>' +
+        '<label>Foil pattern' + input('ar-proposed-foil', 'foilPattern', 'Foil pattern') + '</label>' +
+        '<label>Markings' + input('ar-proposed-markings', 'markings', 'Stamp or marking') + '</label></div>';
+    };
+
+    const physicalInputsHTML = (physical, physicalIds, selectedPhysicalIds) => physicalIds.length
+      ? '<fieldset class="ar-physical-targets"><legend>Affected physical printings</legend>' +
+        physical.map((item) => '<label><input class="ar-physical" type="checkbox" value="' +
+          escapeHTML(item.physicalPrintingId) + '"' +
+          (selectedPhysicalIds.has(item.physicalPrintingId) ? ' checked' : '') + '> <code>' +
+          escapeHTML(item.physicalPrintingId) + '</code> · ' + escapeHTML(item.finish || 'printing') +
+          '</label>').join('') + '</fieldset>'
+      : '<p class="artwork-muted">No physical-printing identity is linked.</p>';
+
+    const detectionSummaryHTML = (detection) => escapeHTML([
+      detection.variant, detection.artist, detection.finish && detection.finish.join(', '),
+      detection.foilPattern && detection.foilPattern.join(', '),
+    ].filter(Boolean).join(' · ') || 'no fields');
+
     const memberHTML = (group, member) => {
       const draft = draftFor(member);
       const detection = member.detection || {};
@@ -1308,11 +1348,7 @@
       const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields || []);
       const selectedAction = draft ? draft.action : "";
       const imageReviewable = hasVerifiedImages(member);
-      const actionOptions = ["", "confirm", "correct", "reassign", "split", "unclear", "propose-variant"]
-        .map((action) => '<option value="' + escapeHTML(action) + '"' +
-          (imageDependentActions.has(action) && !imageReviewable ? ' disabled' : '') +
-          (selectedAction === action ? ' selected' : '') + '>' +
-          escapeHTML(action ? actionLabel(action) : 'Choose a review action') + '</option>').join('');
+      const actionOptions = actionOptionsHTML(selectedAction, imageReviewable);
       const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
       const existing = {
         cardName: detection.cardName || "",
@@ -1324,31 +1360,8 @@
         foilPattern: (detection.foilPattern || []).join(", "),
         markings: (detection.markings || []).join(", "),
       };
-      const value = (key) => escapeHTML(Object.prototype.hasOwnProperty.call(proposed, key)
-        ? proposed[key] : (cleared.has(key) ? "" : existing[key]));
-      const touched = (key) => Object.prototype.hasOwnProperty.call(proposed, key) || cleared.has(key);
-      const input = (className, key, placeholder) => '<input class="' + className + '" data-detection-field="' + key +
-        '" data-touched="' + (touched(key) ? 'true' : 'false') + '" value="' + value(key) +
-        '" placeholder="' + placeholder + '">';
-      const structuredFields = '<div class="ar-structured-fields"' +
-        (structuredActions.has(selectedAction) ? '' : ' hidden') + '>' +
-        '<p class="artwork-muted">Edit a field to set it; clear it to explicitly remove it.</p>' +
-        '<label>Card name' + input('ar-proposed-name', 'cardName', 'Corrected card name') + '</label>' +
-        '<label>Artist' + input('ar-proposed-artist', 'artist', 'Corrected artist') + '</label>' +
-        '<label>Variant identity' + input('ar-proposed-variant', 'variant', 'e.g. V2') + '</label>' +
-        '<label>Local set code' + input('ar-proposed-set', 'localSetCode', 'Set code for a new variant') + '</label>' +
-        '<label>Local number' + input('ar-proposed-number', 'localNumber', 'Collector number for a new variant') + '</label>' +
-        '<label>Finish' + input('ar-proposed-finish', 'finish', 'Finish') + '</label>' +
-        '<label>Foil pattern' + input('ar-proposed-foil', 'foilPattern', 'Foil pattern') + '</label>' +
-        '<label>Markings' + input('ar-proposed-markings', 'markings', 'Stamp or marking') + '</label></div>';
-      const physicalInputs = physicalIds.length
-        ? '<fieldset class="ar-physical-targets"><legend>Affected physical printings</legend>' +
-          physical.map((item) => '<label><input class="ar-physical" type="checkbox" value="' +
-            escapeHTML(item.physicalPrintingId) + '"' +
-            (selectedPhysicalIds.has(item.physicalPrintingId) ? ' checked' : '') + '> <code>' +
-            escapeHTML(item.physicalPrintingId) + '</code> · ' + escapeHTML(item.finish || 'printing') +
-            '</label>').join('') + '</fieldset>'
-        : '<p class="artwork-muted">No physical-printing identity is linked.</p>';
+      const structuredFields = structuredFieldsHTML(selectedAction, existing, proposed, cleared);
+      const physicalInputs = physicalInputsHTML(physical, physicalIds, selectedPhysicalIds);
       return '<article class="artwork-member" data-release-id="' + escapeHTML(member.cardReleaseId) + '">' +
         imageHTML(member) +
         '<div class="artwork-member-body"><h4>' + escapeHTML(detection.cardName || member.cardReleaseId) +
@@ -1359,8 +1372,7 @@
         ' ' + escapeHTML(member.localNumber || '—') + '</code><br>' +
         '<small>' + escapeHTML(member.cardReleaseId) + '</small></p>' +
         '<dl class="artwork-detection"><dt>Detection</dt><dd>' +
-        escapeHTML([detection.variant, detection.artist, detection.finish && detection.finish.join(', '),
-          detection.foilPattern && detection.foilPattern.join(', ')].filter(Boolean).join(' · ') || 'no fields') +
+        detectionSummaryHTML(detection) +
         '</dd><dt>Physical printings</dt><dd>' + escapeHTML(String(physical.length)) +
         '</dd><dt>Image hash</dt><dd><code>' + escapeHTML(imageHashes[0] || 'not available') +
         '</code></dd></dl>' +

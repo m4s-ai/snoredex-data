@@ -109,6 +109,7 @@ CHECK = [
 # runs, in the order CI runs them.
 # --------------------------------------------------------------------------- #
 TESTS = [
+    ["verification/test_complexity.py"],
     ["verification/review_integrity.py"],
     ["verification/test_evidence_application.py"],
     ["verification/test_database_portability.py"],

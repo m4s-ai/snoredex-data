@@ -66,9 +66,17 @@
       "owner": "orchestration-determinism",
       "deterministic": true,
       "consumers": ["regen-readiness"]
+    },
+    {
+      "id": "complexity-fixture",
+      "path": "verification/test_complexity.py::inline AST fixtures",
+      "owner": "complexity-guard",
+      "deterministic": true,
+      "consumers": ["complexity-guard"]
     }
   ],
   "tests": [
+    {"id": "complexity-guard", "command": ["verification/test_complexity.py"], "primaryOwner": "complexity-guard", "boundary": "import", "gateLevel": "L0", "fixtures": ["complexity-fixture"]},
     {"id": "review-integrity", "command": ["verification/review_integrity.py"], "primaryOwner": "store-invariants", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},
     {"id": "evidence-application", "command": ["verification/test_evidence_application.py"], "primaryOwner": "evidence-application", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},
     {"id": "database-portability", "command": ["verification/test_database_portability.py"], "primaryOwner": "database-portability", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": []},
