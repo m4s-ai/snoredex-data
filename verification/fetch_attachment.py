@@ -607,15 +607,19 @@ def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
     }
 
 
-def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
-                   digest: str, *, listing_url: str | None = None,
-                   allow_small: bool = False, cited_by: list | None = None,
-                   known_specimen_ids: set[str] | None = None) -> dict:
+def validate_manifest_fields(item: dict, specimen_id: str) -> None:
     required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
                 "observed", "recordedAt")
     missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
     if missing:
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
+
+
+def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
+                   digest: str, *, listing_url: str | None = None,
+                   allow_small: bool = False, cited_by: list | None = None,
+                   known_specimen_ids: set[str] | None = None) -> dict:
+    validate_manifest_fields(item, specimen_id)
     physical = item.get("physicalObservation")
     if physical is not None:
         physical = validate_observation(physical, specimen_id, known_specimen_ids)
