@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "f7038f8faada1ecfabb0fa7f7c3d1673a1d5f18a9b6c8796a3d604d9f9916f50",
+  "projectionVersion": "2200957206baef4bc04df62cff958d399530d8eb1c558ec8987102626482bb40",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 65,
     "cardReleases": 627,
-    "physicalPrintings": 665,
-    "sourceObservations": 2166
+    "physicalPrintings": 688,
+    "sourceObservations": 2190
   },
   "groups": [
     {
@@ -1872,14 +1872,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:2604825c4d3fb1b83a8f23b6",
+              "semanticPrintingId": "PRINTING:2604825c4d3fb1b83a8f23b6",
+              "cardReleaseId": "RELEASE:JP:Japanese:SM-P:297:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0400",
+              "sourcePrintingId": "F0400-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:2604825c4d3fb1b83a8f23b6",
+              "specimenIds": [
+                "SPEC-0189"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX SM-P 297 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective colour bands are visible across the Eevee & Snorlax-GX promo face. Retained as SPEC-0189."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": "Tomokazu Komiya",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -1895,6 +1926,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0400-P01:0:77096783b6220870",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX SM-P 297 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective colour bands are visible across the Eevee & Snorlax-GX promo face. Retained as SPEC-0189.",
+              "contentHash": "d8e6676f827e04f6673dc57bc81821aaf09f0a24fb4d661422b4ae35919cf172",
+              "image": null
+            },
             {
               "observationId": "unit:U0626",
               "kind": "unit",
@@ -2536,14 +2576,45 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:0a3e0446997baf12f8afa5ec",
+              "semanticPrintingId": "PRINTING:0a3e0446997baf12f8afa5ec",
+              "cardReleaseId": "RELEASE:JP:Japanese:sm9:066:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0405",
+              "sourcePrintingId": "F0405-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0a3e0446997baf12f8afa5ec",
+              "specimenIds": [
+                "SPEC-0190"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/sm9/558416/558416.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX sm9 066 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective rays and colour bands are visible across the TAG TEAM GX card face. Retained as SPEC-0190."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": "Mitsuhiro Arita",
             "variant": "V1",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -2559,6 +2630,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0405-P01:0:9c655d436f408be0",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/sm9/558416/558416.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX sm9 066 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective rays and colour bands are visible across the TAG TEAM GX card face. Retained as SPEC-0190.",
+              "contentHash": "a915c3815640f161a1cf9ee6b8d79dca6e61c8276ded36a7065b539fba3c5397",
+              "image": null
+            },
             {
               "observationId": "unit:U0412",
               "kind": "unit",
@@ -3515,14 +3595,45 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:b389c723bbb6fb0103e6987a",
+              "semanticPrintingId": "PRINTING:b389c723bbb6fb0103e6987a",
+              "cardReleaseId": "RELEASE:JP:Japanese:sm9:106:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "textured full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0408",
+              "sourcePrintingId": "F0408-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:b389c723bbb6fb0103e6987a",
+              "specimenIds": [
+                "SPEC-0191"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/sm9/558481/558481.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX sm9 106 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective geometric texture is visible across the full-art TAG TEAM GX card. Retained as SPEC-0191."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "V2",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "textured full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -3538,6 +3649,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0408-P01:0:60e03651faffc9b3",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/sm9/558481/558481.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX sm9 106 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective geometric texture is visible across the full-art TAG TEAM GX card. Retained as SPEC-0191.",
+              "contentHash": "6cee2aea8ae741413fd5299e3fd54bc52b968accb0e3b01b387d1cbf92b483d2",
+              "image": null
+            },
             {
               "observationId": "unit:U0632",
               "kind": "unit",
@@ -3636,14 +3756,45 @@
           "legacyVariants": [
             "V3"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d74a894f7617469ee0b661fd",
+              "semanticPrintingId": "PRINTING:d74a894f7617469ee0b661fd",
+              "cardReleaseId": "RELEASE:JP:Japanese:sm9:115:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "rainbow textured",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0411",
+              "sourcePrintingId": "F0411-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d74a894f7617469ee0b661fd",
+              "specimenIds": [
+                "SPEC-0192"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/sm9/558490/558490.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX sm9 115 (V3). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. The rainbow colour field and reflective texture are visible across the TAG TEAM GX card. Retained as SPEC-0192."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": null,
             "variant": "V3",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "rainbow textured"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -3659,6 +3810,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0411-P01:0:9114b4d683ea583d",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/sm9/558490/558490.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Eevee & Snorlax GX sm9 115 (V3). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. The rainbow colour field and reflective texture are visible across the TAG TEAM GX card. Retained as SPEC-0192.",
+              "contentHash": "ef869175128c7284a7cc888b37f5ed84a2ece27aa9726f95b67bffe4333ec7c6",
+              "image": null
+            },
             {
               "observationId": "unit:U0556",
               "kind": "unit",
@@ -11158,16 +11318,46 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:459898f50af54914d881902e",
+              "semanticPrintingId": "PRINTING:459898f50af54914d881902e",
+              "cardReleaseId": "RELEASE:JP:Japanese:s10b:056:Snorlax-Block-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "vertical-line",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0334",
+              "sourcePrintingId": "F0334-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:459898f50af54914d881902e",
+              "specimenIds": [
+                "SPEC-0208"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s10b/664610/664610.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s10b 056 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Vertical rainbow foil lines are visible across the artwork window. Retained as SPEC-0208."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "N-DESIGN Inc.",
             "variant": "base",
             "finish": [
+              "holo",
               "non-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "vertical-line"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -11183,6 +11373,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0334-P02:0:39de8202061c0488",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s10b/664610/664610.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s10b 056 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Vertical rainbow foil lines are visible across the artwork window. Retained as SPEC-0208.",
+              "contentHash": "4ddc890d698f09e91430671218c5af1dd557c2b7fa41a28eb31dc71e85a9e417",
+              "image": null
+            },
             {
               "observationId": "unit:U0201",
               "kind": "unit",
@@ -17819,14 +18018,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:6b4a10829d31abee1072c43b",
+              "semanticPrintingId": "PRINTING:6b4a10829d31abee1072c43b",
+              "cardReleaseId": "RELEASE:JP:Japanese:CLF:016:Snorlax-Collect-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "speckled full-face",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0035",
+              "sourcePrintingId": "F0035-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:6b4a10829d31abee1072c43b",
+              "specimenIds": [
+                "SPEC-0198"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/CLF/743180/743180.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax CLF 016 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Dense reflective speckling is visible across the border and card face. Retained as SPEC-0198."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "speckled full-face"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -17842,6 +18072,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0035-P01:0:21d151ebe54df5ee",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/CLF/743180/743180.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax CLF 016 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Dense reflective speckling is visible across the border and card face. Retained as SPEC-0198.",
+              "contentHash": "cd8dc8cfa166e9363cbabd1ac245d14d85aaef107a867ba9b30ffe013e6d9644",
+              "image": null
+            },
             {
               "observationId": "unit:U0439",
               "kind": "unit",
@@ -22468,14 +22707,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:116e8754c102283dac38e162",
+              "semanticPrintingId": "PRINTING:116e8754c102283dac38e162",
+              "cardReleaseId": "RELEASE:JP:Japanese:SM-P:1:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0398",
+              "sourcePrintingId": "F0398-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:116e8754c102283dac38e162",
+              "specimenIds": [
+                "SPEC-0227"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/SM-P/468359/468359.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax GX SM-P 1 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective rays and colour bands are visible across the Snorlax-GX card face. Retained as SPEC-0227."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -22491,6 +22761,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0398-P01:0:dc0d6fb84ee9bedc",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/SM-P/468359/468359.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax GX SM-P 1 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective rays and colour bands are visible across the Snorlax-GX card face. Retained as SPEC-0227.",
+              "contentHash": "4d36635a92da26c19cd8f31b5afcd2deef4286039aa79e00c2996c50507438fa",
+              "image": null
+            },
             {
               "observationId": "unit:U0378",
               "kind": "unit",
@@ -27127,17 +27406,47 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:ba572d35157e1e1af21832a8",
+              "semanticPrintingId": "PRINTING:ba572d35157e1e1af21832a8",
+              "cardReleaseId": "RELEASE:JP:Japanese:s4:84:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "vertical-line",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0354",
+              "sourcePrintingId": "F0354-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:ba572d35157e1e1af21832a8",
+              "specimenIds": [
+                "SPEC-0210"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s4/499775/499775.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s4 84 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Vertical rainbow foil lines are visible in the artwork window. Retained as SPEC-0210."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Atsuko Nishida",
             "variant": "base",
             "finish": [
+              "holo",
               "non-holo",
               "reverse-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "vertical-line"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -27153,6 +27462,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0354-P02:0:fabc2ae927216625",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s4/499775/499775.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s4 84 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Vertical rainbow foil lines are visible in the artwork window. Retained as SPEC-0210.",
+              "contentHash": "db6c673c79968598771564339e59795d094409267e959239c66226e799c079e2",
+              "image": null
+            },
             {
               "observationId": "unit:U0290",
               "kind": "unit",
@@ -27412,16 +27730,46 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:056d2ead3883407b6e17fef4",
+              "semanticPrintingId": "PRINTING:056d2ead3883407b6e17fef4",
+              "cardReleaseId": "RELEASE:JP:Japanese:s5a:93:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "gold textured",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0358",
+              "sourcePrintingId": "F0358-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:056d2ead3883407b6e17fef4",
+              "specimenIds": [
+                "SPEC-0211"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s5a/552704/552704.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s5a 93 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Gold foil, texture and reflective stars are visible across the secret-rare card face. Retained as SPEC-0211."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
             "finish": [
+              "holo",
               "reverse-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "gold textured"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -27437,6 +27785,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0358-P01:0:9f538f3c401dd780",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s5a/552704/552704.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s5a 93 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Gold foil, texture and reflective stars are visible across the secret-rare card face. Retained as SPEC-0211.",
+              "contentHash": "186294e2e66db41765019a26af4896158423d8f9369bd375eb80c7609a2a9b71",
+              "image": null
+            },
             {
               "observationId": "unit:U0600",
               "kind": "unit",
@@ -32394,14 +32751,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:44987d5fe8d7e8c2cc81138b",
+              "semanticPrintingId": "PRINTING:44987d5fe8d7e8c2cc81138b",
+              "cardReleaseId": "RELEASE:JP:Japanese:sN:008:Snorlax-Heavy-Impact",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "diagonal rainbow",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0417",
+              "sourcePrintingId": "F0417-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:44987d5fe8d7e8c2cc81138b",
+              "specimenIds": [
+                "SPEC-0218"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/sN/606631/606631.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sN 008 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Broad diagonal rainbow foil bands are visible across the lower card face. Retained as SPEC-0218."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Oswaldo KATO",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "diagonal rainbow"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -32417,6 +32805,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0417-P01:0:20d6b309d3f2b716",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/sN/606631/606631.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sN 008 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Broad diagonal rainbow foil bands are visible across the lower card face. Retained as SPEC-0218.",
+              "contentHash": "c92796ce7f7e4e721a305bcd79b2a1ed992a42c7ccf33fcc217c6714e40954cc",
+              "image": null
+            },
             {
               "observationId": "unit:U0769",
               "kind": "unit",
@@ -34535,7 +34932,39 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:2284540940621698b674d630",
+              "semanticPrintingId": "PRINTING:2284540940621698b674d630",
+              "cardReleaseId": "RELEASE:JP:Japanese:LL:028:Snorlax-Layabout-Clomp-Clomp-Clobber",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0193",
+              "sourcePrintingId": "F0193-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:2284540940621698b674d630",
+              "specimenIds": [
+                "SPEC-0203"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Lost-Link/Snorlax-LL028",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/LL/668962/668962.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax LL 028 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. A reflective sheen is visible across the artwork window of the Holo Rare card. Retained as SPEC-0203."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -34560,6 +34989,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0193-P01:0:5c9b7e52ed70c3c0",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Lost-Link/Snorlax-LL028",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "49446ffe21280371d236b89958fd0e2adce3a5018daf36b52e1b5b7018d205f3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0193-P01:1:18dc37f6cb6cc4f9",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/LL/668962/668962.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax LL 028 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. A reflective sheen is visible across the artwork window of the Holo Rare card. Retained as SPEC-0203.",
+              "contentHash": "633b042ba4661a7ce796ecdc35b3062d64c760a4bf7a0e4a45f5ebc4ae108b3f",
+              "image": null
+            },
             {
               "observationId": "unit:U0544",
               "kind": "unit",
@@ -52518,7 +52965,34 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:0e2eb04321e1400b948df754",
+              "semanticPrintingId": "PRINTING:0e2eb04321e1400b948df754",
+              "cardReleaseId": "RELEASE:JP:Japanese:PJU:unnumbered:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "cosmos",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0255",
+              "sourcePrintingId": "F0255-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0e2eb04321e1400b948df754",
+              "specimenIds": [
+                "SPEC-0204"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/PJU/584696/584696.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax PJU (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Large stars and reflective circles are visible throughout the artwork window. Retained as SPEC-0204."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -52527,7 +53001,9 @@
             "finish": [
               "holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "cosmos"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -52543,6 +53019,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0255-P02:0:d61c58c7a21fee36",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/PJU/584696/584696.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax PJU (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Large stars and reflective circles are visible throughout the artwork window. Retained as SPEC-0204.",
+              "contentHash": "c68a301e7846075c35de542ba7d50bc82a1251754a89b1c8d6860adf47351067",
+              "image": null
+            },
             {
               "observationId": "unit:U0380",
               "kind": "unit",
@@ -52588,16 +53073,46 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f51ae7ba7336aa04d8efed66",
+              "semanticPrintingId": "PRINTING:f51ae7ba7336aa04d8efed66",
+              "cardReleaseId": "RELEASE:JP:Japanese:XY-P:261:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "speckled",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0622",
+              "sourcePrintingId": "F0622-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f51ae7ba7336aa04d8efed66",
+              "specimenIds": [
+                "SPEC-0223"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/XY-P/554018/554018.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax XY-P 261 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Dense reflective speckles are visible throughout the artwork window. Retained as SPEC-0223."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "V2",
             "finish": [
+              "holo",
               "reverse-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "speckled"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -52613,6 +53128,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0622-P01:0:e096621528fa5d43",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/XY-P/554018/554018.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax XY-P 261 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Dense reflective speckles are visible throughout the artwork window. Retained as SPEC-0223.",
+              "contentHash": "19f1bc0068029b7cbb3e55b04ef228d305f3b9a15465f68351cfc924e044d8f2",
+              "image": null
+            },
             {
               "observationId": "unit:U0663",
               "kind": "unit",
@@ -55472,14 +55996,45 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:46767d565a4b279dd410dfd7",
+              "semanticPrintingId": "PRINTING:46767d565a4b279dd410dfd7",
+              "cardReleaseId": "RELEASE:JP:Japanese:s10a:077:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0329",
+              "sourcePrintingId": "F0329-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:46767d565a4b279dd410dfd7",
+              "specimenIds": [
+                "SPEC-0207"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s10a/657056/657056.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s10a 077 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective colour bands and texture are visible across the full-art card face. Retained as SPEC-0207."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Kouki Saitou",
             "variant": "V2",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -55495,6 +56050,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0329-P01:0:76e35dd3bc153fd8",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s10a/657056/657056.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s10a 077 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective colour bands and texture are visible across the full-art card face. Retained as SPEC-0207.",
+              "contentHash": "08d66134a2d00d7c8e53db1e54c77f4965c44b652639754bc6cfe4084d5cf643",
+              "image": null
+            },
             {
               "observationId": "unit:U0167",
               "kind": "unit",
@@ -58793,17 +59357,47 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:2466cad5da2e3e160091714a",
+              "semanticPrintingId": "PRINTING:2466cad5da2e3e160091714a",
+              "cardReleaseId": "RELEASE:JP:Japanese:s10a:058:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "vertical-line",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0324",
+              "sourcePrintingId": "F0324-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:2466cad5da2e3e160091714a",
+              "specimenIds": [
+                "SPEC-0206"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s10a/656382/656382.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s10a 058 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Vertical rainbow foil lines are visible across the artwork window. Retained as SPEC-0206."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "0313",
             "variant": "V1",
             "finish": [
+              "holo",
               "non-holo",
               "reverse-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "vertical-line"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -58819,6 +59413,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0324-P02:0:325f6822891a6094",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s10a/656382/656382.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s10a 058 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Vertical rainbow foil lines are visible across the artwork window. Retained as SPEC-0206.",
+              "contentHash": "f4035fbcdd0da555065461264299fd04bf1f2ea814fd8603b60224074b850506",
+              "image": null
+            },
             {
               "observationId": "unit:U0343",
               "kind": "unit",
@@ -61112,14 +61715,45 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:67239b9e24b15cb616d7fdb1",
+              "semanticPrintingId": "PRINTING:67239b9e24b15cb616d7fdb1",
+              "cardReleaseId": "RELEASE:JP:Japanese:s1H:66:Snorlax-V-Swallow-Falling-Down",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "textured full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0345",
+              "sourcePrintingId": "F0345-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:67239b9e24b15cb616d7fdb1",
+              "specimenIds": [
+                "SPEC-0233"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s1H/467624/467624.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax V s1H 66 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Diagonal texture and reflective colour are visible across the full-art Pokémon V card. Retained as SPEC-0233."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax V",
             "artist": "aky CG Works",
             "variant": "V2",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "textured full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -61135,6 +61769,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0345-P01:0:c954eca8243cc39f",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s1H/467624/467624.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax V s1H 66 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Diagonal texture and reflective colour are visible across the full-art Pokémon V card. Retained as SPEC-0233.",
+              "contentHash": "94d33e7ee5935c8baa88cf774f27f44cebd338898b9313e8275ea0ff7caece33",
+              "image": null
+            },
             {
               "observationId": "unit:U0547",
               "kind": "unit",
@@ -61233,14 +61876,45 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:fc7f98da075bc4be59993210",
+              "semanticPrintingId": "PRINTING:fc7f98da075bc4be59993210",
+              "cardReleaseId": "RELEASE:JP:Japanese:s1H:45:Snorlax-V-Swallow-Falling-Down",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0339",
+              "sourcePrintingId": "F0339-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:fc7f98da075bc4be59993210",
+              "specimenIds": [
+                "SPEC-0232"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s1H/467619/467619.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax V s1H 45 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective bands are visible across the Pokémon V card face. Retained as SPEC-0232."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax V",
             "artist": "Masakazu Fukuda",
             "variant": "V1",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -61256,6 +61930,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0339-P01:0:ecb620b7207bd035",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s1H/467619/467619.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax V s1H 45 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective bands are visible across the Pokémon V card face. Retained as SPEC-0232.",
+              "contentHash": "4e0d6500f38d395e481be16c9eb9e9e41a0444700be50c2822f9cf99e5caaa64",
+              "image": null
+            },
             {
               "observationId": "unit:U0510",
               "kind": "unit",
@@ -63008,14 +63691,45 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:e30c60f0477bd21d8902a60d",
+              "semanticPrintingId": "PRINTING:e30c60f0477bd21d8902a60d",
+              "cardReleaseId": "RELEASE:JP:Japanese:s1H:70:Snorlax-VMAX-G-Max-Fall",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "rainbow textured",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0348",
+              "sourcePrintingId": "F0348-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e30c60f0477bd21d8902a60d",
+              "specimenIds": [
+                "SPEC-0235"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s1H/467629/467629.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax VMAX s1H 70 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. The rainbow colour field and reflective texture are visible across the full card face. Retained as SPEC-0235."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax VMAX",
             "artist": null,
             "variant": "V2",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "rainbow textured"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -63031,6 +63745,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0348-P01:0:6c0d6871edb25aab",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s1H/467629/467629.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax VMAX s1H 70 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. The rainbow colour field and reflective texture are visible across the full card face. Retained as SPEC-0235.",
+              "contentHash": "cfb7d036ac147ba9503de339437cc955962e2ad77cf0957c86d6c0f5bfeeba02",
+              "image": null
+            },
             {
               "observationId": "unit:U0507",
               "kind": "unit",
@@ -63129,14 +63852,45 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:4b2b39106b870d4204a504b3",
+              "semanticPrintingId": "PRINTING:4b2b39106b870d4204a504b3",
+              "cardReleaseId": "RELEASE:JP:Japanese:s1H:46:Snorlax-VMAX-G-Max-Fall",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0342",
+              "sourcePrintingId": "F0342-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4b2b39106b870d4204a504b3",
+              "specimenIds": [
+                "SPEC-0234"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s1H/467634/467634.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax VMAX s1H 46 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective sparkles and colour bands are visible across the Pokémon VMAX card face. Retained as SPEC-0234."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax VMAX",
             "artist": "aky CG Works",
             "variant": "V1",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -63152,6 +63906,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0342-P01:0:417900b0189c63f6",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s1H/467634/467634.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax VMAX s1H 46 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective sparkles and colour bands are visible across the Pokémon VMAX card face. Retained as SPEC-0234.",
+              "contentHash": "0626ce426b88b88748d7aa80fd6c47ab465d7aff05e143b5730dd73632629436",
+              "image": null
+            },
             {
               "observationId": "unit:U0286",
               "kind": "unit",
@@ -69249,14 +70012,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:7cc2c77a17de75506edf0896",
+              "semanticPrintingId": "PRINTING:7cc2c77a17de75506edf0896",
+              "cardReleaseId": "RELEASE:JP:Japanese:svM:094:Snorlax-ex-Strength-Toss-and-Turn-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "full-art",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0502",
+              "sourcePrintingId": "F0502-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:7cc2c77a17de75506edf0896",
+              "specimenIds": [
+                "SPEC-0226"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/svM/801337/801337.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax ex svM 094 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective streaks and sparkles are visible across the Snorlax ex card face. Retained as SPEC-0226."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax ex",
             "artist": "N-DESIGN Inc.",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "full-art"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -69272,6 +70066,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0502-P01:0:16a0bdc539128f22",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/svM/801337/801337.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax ex svM 094 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective streaks and sparkles are visible across the Snorlax ex card face. Retained as SPEC-0226.",
+              "contentHash": "1e1acc946207b8c89903d7ffd36a644246594f5f2240db384d7f8d3847647e68",
+              "image": null
+            },
             {
               "observationId": "unit:U0401",
               "kind": "unit",
@@ -71447,14 +72250,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:27f7305d8849e092d8ae6325",
+              "semanticPrintingId": "PRINTING:27f7305d8849e092d8ae6325",
+              "cardReleaseId": "RELEASE:JP:Japanese:DP-P:127:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "sparkle",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0098",
+              "sourcePrintingId": "F0098-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:27f7305d8849e092d8ae6325",
+              "specimenIds": [
+                "SPEC-0231"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.X DP-P 127 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Multicolour reflective points are visible throughout the artwork window. Retained as SPEC-0231."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax Lv.X",
             "artist": "Shizurow",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "sparkle"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -71470,6 +72304,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0098-P01:0:23f17dc7a3253e68",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.X DP-P 127 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Multicolour reflective points are visible throughout the artwork window. Retained as SPEC-0231.",
+              "contentHash": "a9067f1d6fd3df52496503f2c0ada5dcd4e52e26a9e2641d423b3114cd5fc949",
+              "image": null
+            },
             {
               "observationId": "unit:U0622",
               "kind": "unit",
@@ -72020,14 +72863,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:9ebf8f9da1deee0f01041a18",
+              "semanticPrintingId": "PRINTING:9ebf8f9da1deee0f01041a18",
+              "cardReleaseId": "RELEASE:JP:Japanese:UNP:unnumbered:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "speckled",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0575",
+              "sourcePrintingId": "F0575-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:9ebf8f9da1deee0f01041a18",
+              "specimenIds": [
+                "SPEC-0193"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/UNP/571773/571773.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Hungry Snorlax UNP (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Dense multicolour reflective speckles are visible in the artwork window. Retained as SPEC-0193."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Hungry Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "speckled"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -72043,6 +72917,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0575-P01:0:513dd31c809e15b6",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/UNP/571773/571773.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Hungry Snorlax UNP (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Dense multicolour reflective speckles are visible in the artwork window. Retained as SPEC-0193.",
+              "contentHash": "2cd8ac3c8b5518a2508ff56ba8c8b9549df630a2da2d78e600dd9e896ec5d338",
+              "image": null
+            },
             {
               "observationId": "unit:U0504",
               "kind": "unit",
@@ -72084,14 +72967,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:0f0140cf50598a7e4923254c",
+              "semanticPrintingId": "PRINTING:0f0140cf50598a7e4923254c",
+              "cardReleaseId": "RELEASE:JP:Japanese:DP-P:126:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "sparkle",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0095",
+              "sourcePrintingId": "F0095-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0f0140cf50598a7e4923254c",
+              "specimenIds": [
+                "SPEC-0229"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/DP-P/566757/566757.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.37 DP-P 126 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective points are visible throughout the artwork window. Retained as SPEC-0229."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax Lv.37",
             "artist": "Kagemaru Himeno",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "sparkle"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -72107,6 +73021,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0095-P01:0:d1c7b8b8e1fc242d",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/DP-P/566757/566757.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.37 DP-P 126 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Reflective points are visible throughout the artwork window. Retained as SPEC-0229.",
+              "contentHash": "1a3921be465b33f0c12eaaeedab65c1829272c4303dc7e9f7c6d1f7b2e3a13d1",
+              "image": null
+            },
             {
               "observationId": "unit:U0636",
               "kind": "unit",
