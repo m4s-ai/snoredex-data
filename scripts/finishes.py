@@ -416,6 +416,8 @@ def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
         kind = "edition-stamp"
     elif normalized.casefold() == "staff":
         kind, normalized = "staff", "Staff"
+    elif normalized.casefold().endswith(" replica signature"):
+        kind, normalized = "championship-signature", normalized[:-18].strip()
     else:
         kind = "observed-marking"
     return [{"kind": kind, "role": observation.get("markingRole"), "text": normalized}]
@@ -441,6 +443,7 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
     sources = [photograph_source]
     owner_fields = observation.get("ownerAttestedFields") or []
     if owner_fields:
+        photograph_label = str(photograph_source["sourceType"]).casefold()
         photograph_source["claimFields"] = [
             "identity",
             *[
@@ -455,7 +458,7 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
             "claimFields": owner_fields,
             "evidence": (
                 f"The collection owner's explicit {specimen.get('recordedAt', '')} confirmation "
-                f"establishes the specimen's {established}; the retained seller photograph "
+                f"establishes the specimen's {established}; the retained {photograph_label} "
                 "supports card identity and any independently visible properties."
             ),
         })

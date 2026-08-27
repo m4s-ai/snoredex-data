@@ -466,7 +466,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 1,
         "coverage": "individual cards whose text and markings were read from a photograph",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish", "edition"],
+        "usedFor": ["language", "identity", "finish", "edition"],
         "attribution": "Physical card, inspected specimen.",
         "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
     },
@@ -554,7 +554,7 @@ def read_json(path: Path) -> Any:
 
 
 def canonical_url(url: str) -> str:
-    """Normalize path encoding, fragments and slashes so a page is counted once.
+    """Normalize path encoding, fragments and slashes so a source is counted once.
 
     Query strings are preserved: several providers put the language or the card id in the query,
     so dropping it would merge genuinely different endpoints.
@@ -563,7 +563,12 @@ def canonical_url(url: str) -> str:
     # Evidence stores historically mixed Unicode/raw ampersands with percent-encoded paths.
     # Keep ordinary path punctuation readable, but encode ampersands and non-ASCII characters.
     path = quote(unquote(parts.path), safe="/:@!$'()*+,;=-._~").rstrip("/") or "/"
-    return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, ""))
+    fragment = parts.fragment if (
+        parts.netloc.casefold() in {"github.com", "www.github.com"}
+        and re.fullmatch(r"/[^/]+/[^/]+/issues/\d+", path)
+        and re.fullmatch(r"attachment-[1-9]\d*", parts.fragment)
+    ) else ""
+    return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, fragment))
 
 
 def resolve_provider(url: str | None, source_type: str | None) -> str | None:

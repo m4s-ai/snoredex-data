@@ -58,8 +58,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 369,
-      "withOnlyMarketplaceClaim": 84,
+      "withConfirmedFinish": 370,
+      "withOnlyMarketplaceClaim": 83,
       "pendingFinish": 109,
       "notApplicableFinish": 75,
       "withCompleteManifest": 161,
@@ -7058,7 +7058,7 @@
               "claimFields": [
                 "finish"
               ],
-              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's finish; the retained seller photograph supports card identity and any independently visible properties."
+              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
@@ -11124,7 +11124,7 @@
               "claimFields": [
                 "finish"
               ],
-              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's finish; the retained seller photograph supports card identity and any independently visible properties."
+              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
@@ -11878,7 +11878,7 @@
               "claimFields": [
                 "finish"
               ],
-              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's finish; the retained seller photograph supports card identity and any independently visible properties."
+              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
@@ -13073,7 +13073,7 @@
               "claimFields": [
                 "edition"
               ],
-              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's edition; the retained seller photograph supports card identity and any independently visible properties."
+              "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's edition; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "specimenIds": [
@@ -43473,13 +43473,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -43490,8 +43490,8 @@
           "markings": [
             {
               "kind": "championship-signature",
-              "text": "Gabriel Fernandez",
-              "role": "distribution-promo"
+              "role": "distribution-promo",
+              "text": "Gabriel Fernandez"
             }
           ],
           "distribution": {
@@ -43502,8 +43502,23 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://github.com/m4s-ai/snoredex-data/issues/265#attachment-1",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Owner photograph of English WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia World Championship Deck. The visible card face shows Snorlax, 150 HP, Ability Unfazed Fat, Thumping Snore 130 and the replica signature, with Pokemon World Championships deck packaging behind the card. On 2026-08-27 the collection owner explicitly confirmed that this physical copy is non-holo. Retained as SPEC-0105.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "evidence": "The collection owner's explicit 2026-08-27 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            },
             {
               "url": "https://tcgcsv.com/docs",
               "sourceType": "TCGCSV documentation",
@@ -43536,6 +43551,10 @@
               "image": "images/WCD23_LOR_LOR_143_Snorlax_833025.jpg"
             }
           ],
+          "specimenIds": [
+            "SPEC-0105"
+          ],
+          "image": "verification/specimens/SPEC-0105.png",
           "printingId": "F0584-P01"
         }
       ],

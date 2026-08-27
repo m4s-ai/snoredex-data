@@ -20,7 +20,7 @@
       "coverageEdges": 31,
       "absenceEdges": 3,
       "observations": 33,
-      "resolvedVerdictSources": 1027
+      "resolvedVerdictSources": 1028
     },
     "surfaceStates": {
       "active": 13,
@@ -2813,6 +2813,7 @@
       },
       "positiveEvidenceCapabilities": [
         "language",
+        "identity",
         "finish",
         "specimen-existence",
         "image"
@@ -4189,7 +4190,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:f2225de1f45bd9df71a6b2c47f7638c214bc01d8d175c1aa456482f70de69425",
+      "rawRecordHash": "sha256:8452d7263192f77d4efdd44ee6a3ed281361d569a3466c77452fdf272348ace7",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -4206,13 +4207,14 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 40,
+        "stableIdCount": 41,
         "stableIds": [
           "F0093-P01",
           "F0140-P01",
           "F0148-P01",
           "F0166-P02",
           "F0289-P02",
+          "F0584-P01",
           "F0597-P01",
           "F0597-P02",
           "F0597-P03",
@@ -4250,7 +4252,7 @@
           "override:owner-scan-review"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 40
+        "usageCount": 41
       }
     },
     {
@@ -10627,6 +10629,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/m4s-ai/snoredex-data/issues/265#attachment-1",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {

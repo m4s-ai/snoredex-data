@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 26,
-   "evidenceRecords": 1027,
-   "uniqueUrls": 1020,
+   "evidenceRecords": 1028,
+   "uniqueUrls": 1021,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3185
+   "claimsAttributed": 3187
   }
  },
  "providers": [
@@ -680,7 +680,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 40
+   "claimsSupported": 41
   },
   {
    "providerId": "inspected-specimen",
@@ -694,14 +694,15 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
+    "identity",
     "finish",
     "edition"
    ],
    "attribution": "Physical card, inspected specimen.",
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
-   "uniqueSources": 9,
-   "claimsSupported": 38
+   "uniqueSources": 10,
+   "claimsSupported": 39
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -10352,6 +10353,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/265#attachment-1",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0584-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
@@ -10539,13 +10557,14 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 40,
+   "stableIdCount": 41,
    "stableIds": [
     "F0093-P01",
     "F0140-P01",
     "F0148-P01",
     "F0166-P02",
     "F0289-P02",
+    "F0584-P01",
     "F0597-P01",
     "F0597-P02",
     "F0597-P03",
@@ -10583,7 +10602,7 @@
     "override:owner-scan-review"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 40
+   "usageCount": 41
   },
   {
    "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",

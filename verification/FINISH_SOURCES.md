@@ -254,7 +254,7 @@ silence is therefore not used as absence evidence.
 | `EXS` Japanese | Two non-holo printings: glossy Expansion Sheet 1 Sheet 16 with an Uncommon rarity symbol (1998-03-23), and non-glossy Quick Starter Gift Set Red Deck with no rarity symbol and an added contest credit (1998-12-04) | Bulbapedia card and product release histories plus the two physical scans supplied with issue #24 |
 | `CLV 016` English | Holo | Local product image and TCGCSV product `527903` Holofoil |
 | `SWSH 032` English | Holo Snorlax Pin Collection promo | PSA's Snorlax Master Set names the Holo variety; TCGCSV product `210578` is Holofoil |
-| `WCD23 LOR 143` English | Non-holo remains marketplace-claimed rather than externally confirmed | TCGCSV product `541770` Normal; this is positive-only evidence |
+| `WCD23 LOR 143` English | Non-holo confirmed from an owner-held physical specimen | SPEC-0105 retains the owner photograph and explicit owner finish attestation; TCGCSV product `541770` Normal remains corroborating positive-only evidence |
 | `xJTG 117` English | Journey Together, GameStop, and EB Games stamped products are all Cosmos holo | Exact local scans plus TCGCSV products `627793`, `626640`, and `629648`, all named Cosmos Holo with Holofoil subtype |
 | `xPRE 076` | Stamped standard and jumbo products are holo | Sealed-product contents call both Snorlax ex cards foil; TCGCSV product `663405` corroborates the stamped standard card |
 | `xm2a 136` | Colorless Energy and Poke Ball mirror treatments | [Official MEGA Dream ex product page](https://www.pokemon-card.com/ex/m2a/index.html) plus exact specialist specimens |
