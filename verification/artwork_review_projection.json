@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-27",
-  "projectionVersion": "7d7ede6334511af7f0d8a7b3b46d48580c58be752b7147cc03f882b509d12c66",
+  "projectionVersion": "6ee1028873b5b64e46cf68f1f4841868052bb72be644877320abd6a5e9a97d86",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 179,
     "unmappedReleases": 50,
     "cardReleases": 612,
-    "physicalPrintings": 607,
-    "sourceObservations": 2079
+    "physicalPrintings": 609,
+    "sourceObservations": 2082
   },
   "groups": [
     {
@@ -3826,13 +3826,19 @@
               "sourcePrintingId": "F0598-P01",
               "establishingClaimId": "CLAIM:finish:F0598-P01",
               "specimenIds": [
-                "SPEC-0016"
+                "SPEC-0016",
+                "SPEC-0121"
               ],
               "sources": [
                 {
                   "url": "https://github.com/user-attachments/assets/c4e46460-12c0-4e05-aaf9-22c0c26b77c5",
                   "sourceType": "Owner-supplied physical card photograph",
                   "evidence": "French GameStop-stamped Hop's Snorlax, sealed in its promo wrapper, photographed by the owner: \"Ronflex de Nabil\", PV 150, Basic, Talent \"Portions Supplémentaires\" (attacks by your Pokémon inflict 30 extra damage on the Active Pokémon, before Weakness and Resistance, not cumulative), attack \"Pression Dynamique\" 140 with 80 recoil, \"N° 0143 Pokémon Ronfleur, Taille 2,1 m, Poids 460,0 kg\", Illus. GOSSAN, \"JTG\" \"117/159\", holo. The GameStop logo is stamped in red over the lower left of the illustration. French-language text throughout. This is the card behind the overturn of U0452: the contradiction had reasoned that every documented printing went to an English-language retail market, and GameStop trades in bilingual Canada. Retained as SPEC-0016."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/FbQAAeSws5hobfhl/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of sealed French GameStop-stamped Hop's Snorlax. Ronflex de Nabil, PV 150, the French Talent Portions Supplémentaires and attack Pression Dynamique, JTG 117/159 and French text establish the exact localized card. The red GameStop stamp is visible over the lower left of the illustration, and reflective sparkles establish the holo treatment. Retained as SPEC-0121."
                 }
               ]
             }
@@ -3885,7 +3891,16 @@
               "provider": "Owner-supplied physical card photograph",
               "url": "https://github.com/user-attachments/assets/c4e46460-12c0-4e05-aaf9-22c0c26b77c5",
               "evidence": "French GameStop-stamped Hop's Snorlax, sealed in its promo wrapper, photographed by the owner: \"Ronflex de Nabil\", PV 150, Basic, Talent \"Portions Supplémentaires\" (attacks by your Pokémon inflict 30 extra damage on the Active Pokémon, before Weakness and Resistance, not cumulative), attack \"Pression Dynamique\" 140 with 80 recoil, \"N° 0143 Pokémon Ronfleur, Taille 2,1 m, Poids 460,0 kg\", Illus. GOSSAN, \"JTG\" \"117/159\", holo. The GameStop logo is stamped in red over the lower left of the illustration. French-language text throughout. This is the card behind the overturn of U0452: the contradiction had reasoned that every documented printing went to an English-language retail market, and GameStop trades in bilingual Canada. Retained as SPEC-0016.",
-              "contentHash": "5ffdedd0a11627144f9f6d75e0ae54e994e4dece3d01511ea03907b0f2600606",
+              "contentHash": "66d03b8e089840d7de5dcd50f353c5f6430a30b9fdc56bccd9e808220db0b74d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0598-P01:1:a3bcda9772cb43a9",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/FbQAAeSws5hobfhl/s-l1600.jpg",
+              "evidence": "Complete seller photograph of sealed French GameStop-stamped Hop's Snorlax. Ronflex de Nabil, PV 150, the French Talent Portions Supplémentaires and attack Pression Dynamique, JTG 117/159 and French text establish the exact localized card. The red GameStop stamp is visible over the lower left of the illustration, and reflective sparkles establish the holo treatment. Retained as SPEC-0121.",
+              "contentHash": "16bb849a7dfcfc1e0a053aea0049ad71daa10b38c852bf00cc0e4d8dc792de1c",
               "image": null
             },
             {
@@ -32373,15 +32388,55 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
+              "semanticPrintingId": "PRINTING:7a199d00514c6c6a2e4069ec",
+              "cardReleaseId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "distribution-promo",
+                  "text": "Mewtwo deck logo at lower right"
+                }
+              ],
+              "distribution": {
+                "kind": "fixed-deck",
+                "name": "Battle Academy 2020 Mewtwo Deck"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0007",
+              "sourcePrintingId": "F0007-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:7a199d00514c6c6a2e4069ec",
+              "specimenIds": [
+                "SPEC-0122"
+              ],
+              "sources": [
+                {
+                  "url": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete PokéCardex scan of French Battle Academy 2020 Mewtwo Deck Snorlax. Ronflex, the French attack Ronflement Incroyable, 50/68 and the Hidden Fates set symbol establish the underlying localized card; the purple Mewtwo deck logo at lower right distinguishes this fixed-deck printing from ordinary French HIF 50/68. The deck-specific PokéCardex page labels the displayed version Standard. Retained as SPEC-0122."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Akira Komayama",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Mewtwo deck logo at lower right"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -32396,6 +32451,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0007-P01:0:729abeccd6a1fe5a",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
+              "evidence": "Complete PokéCardex scan of French Battle Academy 2020 Mewtwo Deck Snorlax. Ronflex, the French attack Ronflement Incroyable, 50/68 and the Hidden Fates set symbol establish the underlying localized card; the purple Mewtwo deck logo at lower right distinguishes this fixed-deck printing from ordinary French HIF 50/68. The deck-specific PokéCardex page labels the displayed version Standard. Retained as SPEC-0122.",
+              "contentHash": "b95ee74a4446b03cfc600a770dab1d6870cfd87d18c75ecfd4991d577a430857",
+              "image": null
+            },
             {
               "observationId": "unit:U0294",
               "kind": "unit",
@@ -44077,15 +44141,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:daffb58a5a51aa442407bf25",
+              "semanticPrintingId": "PRINTING:daffb58a5a51aa442407bf25",
+              "cardReleaseId": "RELEASE:WEST:French:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "cosmos",
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "print-identity",
+                  "text": "black-star promo symbol"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0526",
+              "sourcePrintingId": "F0526-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:daffb58a5a51aa442407bf25",
+              "specimenIds": [
+                "SPEC-0120"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete physical-card photograph of French SWSH032 Snorlax. Ronflex, the French attacks Roulé-Boulé and Gros Impact, the black-star promo symbol and SWSH032 establish the exact localized card; large reflective circles and sparkles in the artwork establish the Cosmo Holo treatment. The exact seller title also identifies the card as HOLO, SWSH032, Promo and FR. Retained as SPEC-0120."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Tika Matsuno",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "cosmos"
+            ],
+            "markings": [
+              "black-star promo symbol"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -44100,6 +44203,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0526-P01:0:bc8f575bb8ca6149",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
+              "evidence": "Complete physical-card photograph of French SWSH032 Snorlax. Ronflex, the French attacks Roulé-Boulé and Gros Impact, the black-star promo symbol and SWSH032 establish the exact localized card; large reflective circles and sparkles in the artwork establish the Cosmo Holo treatment. The exact seller title also identifies the card as HOLO, SWSH032, Promo and FR. Retained as SPEC-0120.",
+              "contentHash": "f01dde7c6d313d5b0d1510c6b35697e8d754c271bafc6c10735a44f695001e92",
+              "image": null
+            },
             {
               "observationId": "unit:U0416",
               "kind": "unit",

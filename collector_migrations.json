@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:497e2ca0c24fbe4f4fd60332edcc4a5b1a514878ccb785ad30f2108b0dc5fa44",
+    "fromFingerprint": "sha256:ad5aa96001d9ab23e593d5211292d9b569c8c27d2e7f8089b471b2d879083f47",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:b370b76ac41e3b6eb2c0b56c457941b6ba907f23f875fa4fad2c8e38f581af7e",
+    "toFingerprint": "sha256:559d5551729e7b155a9987e79ef0acc617408eb8eafaff3628758b32cb6ee267",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:b370b76ac41e3b6eb2c0b56c457941b6ba907f23f875fa4fad2c8e38f581af7e",
+      "toFingerprint": "sha256:559d5551729e7b155a9987e79ef0acc617408eb8eafaff3628758b32cb6ee267",
       "cumulative": true,
       "transitions": [
         {
@@ -214,6 +214,15 @@
           "fromItemId": "item-04a6271c-52d5-53ce-972e-9899df9d7860",
           "toItemIds": [
             "item-04a6271c-52d5-53ce-972e-9899df9d7860"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
+          "fromItemId": "item-04b612c2-dd83-5007-8cec-0dc883663423",
+          "toItemIds": [
+            "item-04b612c2-dd83-5007-8cec-0dc883663423"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -700,6 +709,15 @@
           "fromItemId": "item-12739e2c-821d-516c-87dc-a8712ff6c9a9",
           "toItemIds": [
             "item-12739e2c-821d-516c-87dc-a8712ff6c9a9"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
+          "fromItemId": "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c",
+          "toItemIds": [
+            "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -4594,15 +4612,6 @@
           "reconciliation": "identity-retained"
         },
         {
-          "fromItemId": "item-89ebe75a-3bda-5d3e-aa48-861dee196e06",
-          "toItemIds": [
-            "item-89ebe75a-3bda-5d3e-aa48-861dee196e06"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
           "fromItemId": "item-8a00f509-9944-582c-bb19-ad3a6663fcf4",
           "toItemIds": [
             "item-8a00f509-9944-582c-bb19-ad3a6663fcf4"
@@ -4930,15 +4939,6 @@
           "fromItemId": "item-95d866d9-c4a8-52c8-a0df-7504109cb4bf",
           "toItemIds": [
             "item-95d866d9-c4a8-52c8-a0df-7504109cb4bf"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
-          "fromItemId": "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf",
-          "toItemIds": [
-            "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -8425,9 +8425,9 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "ba20-mwt-french-none-unresolved-unknown",
+      "fromItemId": "ba20-mwt-french-none-non-holo-observed-marking-mewtwo-deck-logo-at-lower-right-fixed-deck-battle-academy-2020-mewtwo-deck",
       "toItemIds": [
-        "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
+        "item-04b612c2-dd83-5007-8cec-0dc883663423"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -13977,9 +13977,9 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "swsh-032-french-none-unresolved-unknown",
+      "fromItemId": "swsh-032-french-none-holo-cosmos-observed-marking-black-star-promo-symbol",
       "toItemIds": [
-        "item-89ebe75a-3bda-5d3e-aa48-861dee196e06"
+        "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -15463,10 +15463,10 @@
         ]
       },
       {
-        "legacyChecklistId": "ba20-mwt-french-none-unresolved-unknown",
+        "legacyChecklistId": "ba20-mwt-french-none-non-holo-observed-marking-mewtwo-deck-logo-at-lower-right-fixed-deck-battle-academy-2020-mewtwo-deck",
         "disposition": "projected",
         "targetItemIds": [
-          "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
+          "item-04b612c2-dd83-5007-8cec-0dc883663423"
         ]
       },
       {
@@ -20293,10 +20293,10 @@
         ]
       },
       {
-        "legacyChecklistId": "swsh-032-french-none-unresolved-unknown",
+        "legacyChecklistId": "swsh-032-french-none-holo-cosmos-observed-marking-black-star-promo-symbol",
         "disposition": "projected",
         "targetItemIds": [
-          "item-89ebe75a-3bda-5d3e-aa48-861dee196e06"
+          "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c"
         ]
       },
       {
@@ -24151,7 +24151,7 @@
         "cardReleaseId": "RELEASE:WEST:French:BA20:MWT:Snorlax-Incredible-Snore",
         "disposition": "projected",
         "targetItemIds": [
-          "item-9602e7d9-0cbf-5413-96eb-8d2c989943cf"
+          "item-04b612c2-dd83-5007-8cec-0dc883663423"
         ],
         "reason": null
       },
@@ -24554,7 +24554,7 @@
         "cardReleaseId": "RELEASE:WEST:French:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
         "disposition": "projected",
         "targetItemIds": [
-          "item-89ebe75a-3bda-5d3e-aa48-861dee196e06"
+          "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c"
         ],
         "reason": null
       },
@@ -29263,6 +29263,11 @@
         "targetItemId": "item-a32f08eb-a1af-5531-a664-46e4f9fc4dd4"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:7a199d00514c6c6a2e4069ec",
+        "disposition": "projected",
+        "targetItemId": "item-04b612c2-dd83-5007-8cec-0dc883663423"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:7b7704d12c6a6d242c066f16",
         "disposition": "projected",
         "targetItemId": "item-99ddfa4d-a95c-5334-8d8d-01eadece9feb"
@@ -29523,6 +29528,11 @@
         "targetItemId": "item-468fb4c4-b355-52c2-87bf-4596a2eee877"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:daffb58a5a51aa442407bf25",
+        "disposition": "projected",
+        "targetItemId": "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
         "disposition": "projected",
         "targetItemId": "item-201d8d0e-60f7-5db7-9ecd-e932bb4ba311"
@@ -29631,7 +29641,7 @@
     "summary": {
       "legacyChecklistRows": 852,
       "cardReleases": 612,
-      "physicalPrintings": 607,
+      "physicalPrintings": 609,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
