@@ -266,6 +266,22 @@ class CardDiscoveryTests(unittest.TestCase):
             "cardmarket-listing-photo",
         )
 
+    def test_issue_attachment_source_keys_preserve_only_the_synthetic_ordinal(self):
+        issue = "https://github.com/m4s-ai/snoredex-data/issues/265"
+        self.assertEqual(
+            registry.canonical_url(f"{issue}#attachment-1"),
+            f"{issue}#attachment-1",
+        )
+        self.assertNotEqual(
+            registry.canonical_url(f"{issue}#attachment-1"),
+            registry.canonical_url(f"{issue}#attachment-2"),
+        )
+        self.assertEqual(registry.canonical_url(f"{issue}#issuecomment-123"), issue)
+        self.assertEqual(
+            registry.canonical_url("https://example.test/source#attachment-1"),
+            "https://example.test/source",
+        )
+
     def test_pokecottage_is_positive_confirmation_evidence(self):
         self.assertEqual(
             registry.resolve_provider(None, "PokeCottage collector checklist"),
