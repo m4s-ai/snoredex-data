@@ -177,6 +177,9 @@ def main() -> None:
         "markings": "STAFF", "markingRole": "distribution-promo"
     }) == [{"kind": "staff", "role": "distribution-promo", "text": "Staff"}]
     assert projector.specimen_markings({
+        "markings": "Mewtwo deck silhouette", "markingRole": "distribution-promo"
+    }) == [{"kind": "deck-logo", "role": "distribution-promo", "text": "Mewtwo"}]
+    assert projector.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
     }) == [{"kind": "edition-stamp", "role": "print-identity", "text": "EDIZIONE 1"}]
     mp1_specimen = next(row for row in specimens if row["specimenId"] == "SPEC-0025")
@@ -243,6 +246,32 @@ def main() -> None:
                         if source.get("canonicalUrl") == bulbapedia_url)
     assert wcd_registry["providerId"] == "bulbapedia"
     assert "finish" in wcd_registry["dimensions"]
+    german_units = {
+        unit["finishUnitId"]: unit for unit in finish_units
+        if unit["language"] == "German"
+        and unit["finishUnitId"] in {"F0008", "F0137", "F0527", "F0586", "F0633"}
+    }
+    assert set(german_units) == {"F0008", "F0137", "F0527", "F0586", "F0633"}
+    assert all(unit["availabilityStatus"] == "confirmed" for unit in german_units.values())
+    assert german_units["F0008"]["printings"][0]["specimenIds"] == [
+        "SPEC-0121", "SPEC-0122"
+    ]
+    assert german_units["F0008"]["printings"][0]["markings"] == [{
+        "kind": "deck-logo", "role": "distribution-promo", "text": "Mewtwo"
+    }]
+    assert {
+        printing["finish"]: printing["specimenIds"]
+        for printing in german_units["F0137"]["printings"]
+    } == {"non-holo": ["SPEC-0123"], "reverse-holo": ["SPEC-0124"]}
+    assert german_units["F0527"]["printings"][0]["specimenIds"] == ["SPEC-0125"]
+    german_wcd = german_units["F0586"]["printings"][0]
+    assert german_wcd["specimenIds"] == ["SPEC-0126", "SPEC-0127"]
+    german_wcd_sources = {source["url"]: source for source in german_wcd["sources"]}
+    assert german_wcd_sources[bulbapedia_url]["claimFields"] == ["finish"]
+    assert german_wcd_sources[
+        "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg"
+    ]["claimFields"] == ["identity"]
+    assert german_units["F0633"]["printings"][0]["specimenIds"] == ["SPEC-0128"]
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],

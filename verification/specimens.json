@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 120,
+  "count": 128,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -2570,6 +2570,218 @@
         "basis": "The complete Portuguese 27/64 card face visibly shows the uniformly printed non-holographic artwork treatment; its localized text, Jungle symbol and collector number establish the exact printing. No edition is inferred from an absent stamp."
       },
       "listingUrl": "https://www.ebay.com/itm/177940547168"
+    },
+    {
+      "specimenId": "SPEC-0121",
+      "setCode": "BA20",
+      "number": "MWT",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller front photograph",
+      "photograph": "SPEC-0121.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/sW4AAeSwEG1qfGsy/s-l1600.jpg",
+      "photographSha256": "sha256:d281591ae28d892dfa096a73f0c1fdb4fdaaa4a4e7327373be54282eff6d3885",
+      "observed": "Complete seller photograph of German Battle Academy 2020 Snorlax 50/68. BASIS, 150 KP, Verblüffendes Schnarchen, the Hidden Fates symbol, 50/68 and the purple Mewtwo deck silhouette establish the exact fixed-deck printing. The uniformly printed artwork and card body establish the non-holo treatment. The paired ordinary Pokemon back is retained as SPEC-0122.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Mewtwo deck silhouette",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "fixed-deck",
+          "name": "Battle Academy 2020 Mewtwo Deck"
+        },
+        "cardSize": "standard",
+        "basis": "The complete German 50/68 photograph visibly shows the uniformly printed non-holographic treatment and the purple Mewtwo deck silhouette. The exact seller title independently identifies German, 50/68 and Mewtwo Stamp."
+      },
+      "listingUrl": "https://www.ebay.de/itm/366600950681"
+    },
+    {
+      "specimenId": "SPEC-0122",
+      "setCode": "BA20",
+      "number": "MWT",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller back photograph paired with the front",
+      "photograph": "SPEC-0122.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/vGMAAeSwXyBqfGs1/s-l1600.jpg",
+      "photographSha256": "sha256:1adef899f9f4f3e25e439fc506713bbd3e1685322a5669ebe2510d800a67d606",
+      "observed": "Back photograph from the same eBay listing and physical German Battle Academy Snorlax as SPEC-0121. The ordinary Pokemon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the localized Mewtwo-deck identity and non-holo treatment.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Mewtwo deck silhouette",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "fixed-deck",
+          "name": "Battle Academy 2020 Mewtwo Deck"
+        },
+        "cardSize": "standard",
+        "basis": "This back is paired by the seller listing with the German non-holo Mewtwo-deck front retained as SPEC-0121."
+      },
+      "listingUrl": "https://www.ebay.de/itm/366600950681"
+    },
+    {
+      "specimenId": "SPEC-0123",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "LottiCards seller product photograph",
+      "photograph": "SPEC-0123.jpg",
+      "photographSource": "https://www.lotticards.de/media/image/product/223694/lg/relaxo-generationen-58-83-rare-deutsch-nm.jpg",
+      "photographSha256": "sha256:71cd6387c79238b04f28af74b73ed75e015fd73cdab91635bbd829899814365f",
+      "observed": "Complete seller photograph of German Generations Snorlax 58/83. BASIS, 130 KP, Rühren und Ruhen, Schlafdruck, the Generations symbol and 58/83 establish the exact card. The uniformly printed artwork and card body establish the non-holo printing; the seller product identifies it as Rare Deutsch rather than Reverse.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0137-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete German 58/83 photograph visibly shows a uniformly printed non-holographic treatment; the exact seller product identifies Relaxo Generationen 58/83 Rare Deutsch."
+      },
+      "listingUrl": "https://www.lotticards.de/Generationen"
+    },
+    {
+      "specimenId": "SPEC-0124",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0124.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/jSkAAOSwoeloDpxQ/s-l1600.jpg",
+      "photographSha256": "sha256:d03b89f22cc7b3b3a38e0660e1d0c27e767fc4e25591c76a10acf3cf1affe677",
+      "observed": "Complete seller photograph of German Generations Snorlax 58/83. The German text, Generations symbol and 58/83 establish identity; the reflective type-symbol treatment across the card body establishes the reverse-holo printing.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [
+        "F0137-P02"
+      ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "foilPattern": "type-symbol-background",
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The complete German 58/83 card directly shows the reflective type-symbol reverse-holo treatment across its body."
+      },
+      "listingUrl": "https://www.ebay.de/itm/205451368369"
+    },
+    {
+      "specimenId": "SPEC-0125",
+      "setCode": "SWSH",
+      "number": "032",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0125.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/nXkAAeSwXldp1TEr/s-l1600.jpg",
+      "photographSha256": "sha256:c237087153a0dbbf4b0c1dda9b3e024046cdafcdd542046eef62439b26f1ced8",
+      "observed": "Complete seller photograph of German SWSH032 Snorlax. The German attacks Walzer and Rammboss, the black-star promo symbol and SWSH032 establish identity. Large reflective circles and sparkles in the artwork establish the Cosmo Holo treatment; the listing data independently identify German, SWSH032 and Holo.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete German SWSH032 photograph directly shows large Cosmo circles and sparkles in the artwork; the exact listing metadata also state Rare Holo and Holo surface effect."
+      },
+      "listingUrl": "https://www.ebay.de/itm/147246589735"
+    },
+    {
+      "specimenId": "SPEC-0126",
+      "setCode": "WCD23 LOR",
+      "number": "LOR 143",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller front photograph",
+      "photograph": "SPEC-0126.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg",
+      "photographSha256": "sha256:94cdf6150f8c86db1e8f79058d7c4f8e3949144a98618a7a4a47cc6c31ffa4aa",
+      "observed": "Front photograph of German WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Unbeeindruckter Magen, Donnerndes Schnarchen 180, 143/196, the silver border and replica signature are legible. The paired green World Championships 2023 back is retained as SPEC-0127. Bulbapedia's Colorless Lugia product description states that the deck uses the lowest-rarity prints with Holofoil removed.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Gabriel Fernandez replica signature",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "basis": "The German face, LOR 143 identity, silver border and Gabriel Fernandez replica signature pair with the World Championships 2023 back in SPEC-0127. The Colorless Lugia deck description at https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG) explicitly states that Holofoil is removed from its deck prints."
+      },
+      "listingUrl": "https://www.ebay.de/itm/397718149955"
+    },
+    {
+      "specimenId": "SPEC-0127",
+      "setCode": "WCD23 LOR",
+      "number": "LOR 143",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller back photograph paired with the front",
+      "photograph": "SPEC-0127.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/J4gAAeSwON5ptwI0/s-l1600.jpg",
+      "photographSha256": "sha256:557483d0a61859eb8fe226a333a9d3f3a21523e6a8ba5b949d01ba5a5ec722dd",
+      "observed": "Back photograph from the same eBay listing and physical German Snorlax card as SPEC-0126. The green Pokemon World Championships 2023 back positively establishes the championship-deck print identity; it is retained separately so the back image remains part of the data specification.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "foilPattern": null,
+        "markings": "Gabriel Fernandez replica signature",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "basis": "This back photograph is paired by the seller listing with the German front retained as SPEC-0126 and directly shows the World Championships 2023 back. The exact deck product uses Holofoil-removed prints as documented at https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)."
+      },
+      "listingUrl": "https://www.ebay.de/itm/397718149955"
+    },
+    {
+      "specimenId": "SPEC-0128",
+      "setCode": "XYPR",
+      "number": "179",
+      "variant": "base",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "ShPnPokestore seller product photograph",
+      "photograph": "SPEC-0128.jpg",
+      "photographSource": "https://shpnpokestore.de/cdn/shop/files/F4A76B27-1CFF-4B56-9964-4FCED20B2D52.jpg?v=1759855302&width=1445",
+      "photographSha256": "sha256:e492c8bb2fef26d5472609f0467ed7e838b79763268b6501c6f5fc075df4f083",
+      "observed": "Complete seller photograph of German XY179 Snorlax. BASIS, 130 KP, Fähigkeit: Immunität, Bodyslam, XY179 and the black-star promo symbol establish the exact card. Visible foil sparkle and reflection in the artwork establish holo; the product title independently identifies Holo Promo Relaxo XY179 Deutsch.",
+      "recordedAt": "2026-08-27",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The complete German XY179 photograph visibly shows foil sparkle and reflection in the artwork; the exact seller product title independently identifies Holo Promo Relaxo XY179 Deutsch."
+      },
+      "listingUrl": "https://shpnpokestore.de/en/products/pokemon-karte-holo-promo-relaxo-xy179-deutsch-1"
     }
   ]
 }
