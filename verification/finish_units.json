@@ -6,7 +6,8 @@
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
       "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
-      "Only a language-scoped source marked supportsAbsence=true and coverage=complete-manifest, with no known printing whose finish is unresolved, can set completenessStatus=complete-manifest.",
+      "Only a language-scoped source marked supportsAbsence=true, coverage=complete-manifest, and closureScope=finish-unit, with no known printing whose finish is unresolved, can set completenessStatus=complete-manifest.",
+      "A scoped complete source remains positive evidence inside its named boundary and leaves the wider finish unit open for review.",
       "A collection-owner finish adjudication sets completenessStatus=owner-adjudicated, which never asserts a finish and is deliberately distinct from complete-manifest.",
       "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
       "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
@@ -62,14 +63,14 @@
       "withOnlyMarketplaceClaim": 83,
       "pendingFinish": 109,
       "notApplicableFinish": 75,
-      "withCompleteManifest": 160,
+      "withCompleteManifest": 22,
       "withNonHolo": 264,
       "withHolo": 174,
       "withReverseHolo": 224,
       "withMirrorHolo": 9,
       "withBothNonHoloAndHolo": 23,
       "withUnresolvedProductMapping": 146,
-      "withAnyUnresolvedDetail": 206,
+      "withAnyUnresolvedDetail": 216,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -751,7 +752,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -785,6 +786,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -821,6 +823,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -864,7 +867,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -898,6 +901,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -934,6 +938,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -977,7 +982,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1011,6 +1016,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1047,6 +1053,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1090,7 +1097,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1124,6 +1131,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1160,6 +1168,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1203,7 +1212,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1237,6 +1246,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1273,6 +1283,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1405,7 +1416,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1439,6 +1450,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1475,6 +1487,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1518,7 +1531,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1552,6 +1565,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1588,6 +1602,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1631,7 +1646,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1665,6 +1680,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1701,6 +1717,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1744,7 +1761,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1778,6 +1795,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1814,6 +1832,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1857,7 +1876,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -1891,6 +1910,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -1927,6 +1947,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized BREAKthrough checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 118 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -2465,7 +2486,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -2494,6 +2515,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             },
@@ -2600,6 +2622,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             }
@@ -2607,7 +2630,9 @@
           "printingId": "F0031-P04"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0031-P02, F0031-P03"
+      ]
     },
     {
       "finishUnitId": "F0032",
@@ -2656,7 +2681,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -2685,6 +2710,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             },
@@ -2731,6 +2757,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             }
@@ -2789,7 +2816,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -2818,6 +2845,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             },
@@ -2864,6 +2892,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             }
@@ -2922,7 +2951,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -2948,6 +2977,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             }
@@ -2992,6 +3022,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Call of Legends checklist states that cards 23-87 have foil and non-foil versions; Snorlax 33 therefore has non-holo and reverse-holo set printings."
             }
@@ -3244,7 +3275,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -3273,6 +3304,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Chilling Reign checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 224 Snorlax: Standard Set Foil/holo."
             }
@@ -3315,7 +3347,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -3344,6 +3376,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Chilling Reign checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 224 Snorlax: Standard Set Foil/holo."
             }
@@ -3386,7 +3419,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -3415,6 +3448,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Chilling Reign checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 224 Snorlax: Standard Set Foil/holo."
             }
@@ -3457,7 +3491,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -3486,6 +3520,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Chilling Reign checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 224 Snorlax: Standard Set Foil/holo."
             }
@@ -3528,7 +3563,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -3557,6 +3592,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Chilling Reign checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 224 Snorlax: Standard Set Foil/holo."
             }
@@ -3659,7 +3695,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -3693,6 +3729,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -3734,6 +3771,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -3777,7 +3815,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -3811,6 +3849,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -3852,6 +3891,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -3895,7 +3935,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -3929,6 +3969,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -3970,6 +4011,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -4013,7 +4055,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -4047,6 +4089,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -4088,6 +4131,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -4131,7 +4175,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -4165,6 +4209,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -4206,6 +4251,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Crown Zenith checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6035,7 +6081,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -6059,6 +6105,19 @@
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Dragon-Frontiers/Snorlax-Delta-Species-DF10",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+              "sourceType": "Official Pokemon expansion checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "English"
+              ],
+              "closureScope": "standard-set",
+              "retrievedAt": "2026-07-23",
+              "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             }
           ],
           "printingId": "F0084-P01"
@@ -6089,6 +6148,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-07-23",
               "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             },
@@ -6166,6 +6226,19 @@
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Dragon-Frontiers/Snorlax-Delta-Species-DF10",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+              "sourceType": "Official Pokemon expansion checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "English"
+              ],
+              "closureScope": "standard-set",
+              "retrievedAt": "2026-07-23",
+              "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             }
           ],
           "printingId": "F0085-P01"
@@ -6196,6 +6269,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-07-23",
               "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             },
@@ -6273,6 +6347,19 @@
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Dragon-Frontiers/Snorlax-Delta-Species-DF10",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+              "sourceType": "Official Pokemon expansion checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "English"
+              ],
+              "closureScope": "standard-set",
+              "retrievedAt": "2026-07-23",
+              "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             }
           ],
           "printingId": "F0086-P01"
@@ -6303,6 +6390,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-07-23",
               "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             },
@@ -6350,7 +6438,7 @@
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "marketplace-claimed",
+        "holo": "confirmed",
         "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
@@ -6366,12 +6454,25 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Dragon-Frontiers/Snorlax-Delta-Species-DF10",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
+              "sourceType": "Official Pokemon expansion checklist",
+              "authorityTier": "official-primary",
+              "coverage": "complete-manifest",
+              "supportsAbsence": true,
+              "languages": [
+                "English"
+              ],
+              "closureScope": "standard-set",
+              "retrievedAt": "2026-07-23",
+              "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             }
           ],
           "foilPattern": null,
@@ -6405,6 +6506,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-07-23",
               "evidence": "The official EX Dragon Frontiers checklist states that cards 1 through 12 come in two foil versions; Snorlax is card 10."
             },
@@ -6458,7 +6560,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -6492,6 +6594,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6533,6 +6636,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6576,7 +6680,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -6610,6 +6714,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6651,6 +6756,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6694,7 +6800,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -6728,6 +6834,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6769,6 +6876,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6812,7 +6920,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -6838,6 +6946,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6877,6 +6986,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6920,7 +7030,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -6946,6 +7056,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -6985,6 +7096,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -7887,7 +7999,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -7921,6 +8033,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -7957,6 +8070,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8000,7 +8114,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -8034,6 +8148,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8070,6 +8185,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8113,7 +8229,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -8147,6 +8263,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8183,6 +8300,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8226,7 +8344,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -8260,6 +8378,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8296,6 +8415,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8339,7 +8459,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -8373,6 +8493,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8409,6 +8530,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fates Collide checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 77 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -8578,7 +8700,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -8612,6 +8734,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete official EX FireRed & LeafGreen checklist states that cards 1-17 have two foil versions; Snorlax 15 therefore has holo and reverse-holo set printings."
             }
@@ -8648,6 +8771,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete official EX FireRed & LeafGreen checklist states that cards 1-17 have two foil versions; Snorlax 15 therefore has holo and reverse-holo set printings."
             }
@@ -8995,6 +9119,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             },
@@ -9036,6 +9161,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -9073,7 +9199,8 @@
         }
       ],
       "unresolved": [
-        "One or more known physical printings still have unresolved finishes: F0119-P03"
+        "One or more known physical printings still have unresolved finishes: F0119-P03",
+        "Scoped complete manifests do not cover these known physical printings: F0119-P03"
       ]
     },
     {
@@ -9123,7 +9250,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -9152,6 +9279,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             },
@@ -9193,6 +9321,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -9251,7 +9380,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -9280,6 +9409,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             },
@@ -9321,6 +9451,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -9379,7 +9510,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -9408,6 +9539,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             },
@@ -9449,6 +9581,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -9507,7 +9640,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -9536,6 +9669,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             },
@@ -9577,6 +9711,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -9849,7 +9984,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -9883,6 +10018,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -9924,6 +10060,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -9967,7 +10104,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -10001,6 +10138,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -10042,6 +10180,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -10085,7 +10224,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -10119,6 +10258,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -10160,6 +10300,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -10203,7 +10344,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -10237,6 +10378,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -10278,6 +10420,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -10321,7 +10464,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -10355,6 +10498,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -10396,6 +10540,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Fusion Strike checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 206 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11300,7 +11445,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -11334,6 +11479,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11370,6 +11516,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11413,7 +11560,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -11447,6 +11594,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11483,6 +11631,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11526,7 +11675,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -11552,6 +11701,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11591,6 +11741,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11634,7 +11785,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -11660,6 +11811,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11699,6 +11851,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11742,7 +11895,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -11768,6 +11921,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -11807,6 +11961,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Hidden Fates checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 50 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -14879,7 +15034,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -14913,6 +15068,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -14954,6 +15110,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -14997,7 +15154,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -15031,6 +15188,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15072,6 +15230,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15115,7 +15274,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -15149,6 +15308,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15190,6 +15350,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15233,7 +15394,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -15267,6 +15428,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15308,6 +15470,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15351,7 +15514,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -15385,6 +15548,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15426,6 +15590,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15562,7 +15727,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -15586,6 +15751,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15628,7 +15794,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -15652,6 +15818,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15694,7 +15861,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -15718,6 +15885,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15760,7 +15928,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -15784,6 +15952,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -15826,7 +15995,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -15850,6 +16019,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Lost Origin checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 143 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo; TG10 Snorlax: Standard Set Foil/holo."
             }
@@ -18759,7 +18929,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -18792,6 +18962,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -18848,6 +19019,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pgo_web_cardlist_en.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -18856,19 +19032,17 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0249-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0249-P02"
+      ]
     },
     {
       "finishUnitId": "F0250",
@@ -18917,7 +19091,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -18943,6 +19117,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -18991,6 +19166,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pgo_web_cardlist_fr.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -18999,19 +19179,16 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0250-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0250-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
@@ -19062,7 +19239,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -19088,6 +19265,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -19136,6 +19314,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pgo_web_cardlist_de.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -19144,19 +19327,16 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0251-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0251-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
@@ -19207,7 +19387,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -19233,6 +19413,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -19281,6 +19462,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pgo_web_cardlist_it.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -19289,19 +19475,16 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0252-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0252-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
@@ -19352,7 +19535,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -19378,6 +19561,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -19426,6 +19610,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/pgo_web_cardlist_es.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -19434,19 +19623,16 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0253-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0253-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
@@ -19778,7 +19964,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -19812,6 +19998,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -19848,6 +20035,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -19891,7 +20079,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -19925,6 +20113,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -19961,6 +20150,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -20004,7 +20194,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -20038,6 +20228,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -20074,6 +20265,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -20117,7 +20309,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -20151,6 +20343,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -20187,6 +20380,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -20230,7 +20424,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -20264,6 +20458,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -20300,6 +20495,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Plasma Storm checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 101 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -21042,6 +21238,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21132,6 +21329,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21276,6 +21474,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21320,6 +21519,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21418,6 +21618,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21462,6 +21663,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21560,6 +21762,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21604,6 +21807,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21702,6 +21906,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21746,6 +21951,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -21880,6 +22086,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22010,6 +22217,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22094,6 +22302,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22178,6 +22387,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22262,6 +22472,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22383,6 +22594,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22513,6 +22725,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22597,6 +22810,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22681,6 +22895,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22765,6 +22980,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22849,6 +23065,7 @@
               "languages": [
                 "Portuguese"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -22947,6 +23164,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23037,6 +23255,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete English checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23185,6 +23404,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23229,6 +23449,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete French checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23327,6 +23548,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23376,6 +23598,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete German checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             }
@@ -23468,6 +23691,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23512,6 +23736,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Italian checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23610,6 +23835,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23654,6 +23880,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Spanish checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23752,6 +23979,7 @@
               "languages": [
                 "Portuguese"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             },
@@ -23801,6 +24029,7 @@
               "languages": [
                 "Portuguese"
               ],
+              "closureScope": "finish-unit",
               "retrievedAt": "2026-08-26",
               "evidence": "The complete Portuguese checklist positively names the exact Snorlax row; the colored legend checkboxes distinguish Standard Set from Standard Set Foil."
             }
@@ -24282,7 +24511,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -24316,6 +24545,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24357,6 +24587,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24400,7 +24631,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -24434,6 +24665,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24475,6 +24707,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24518,7 +24751,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -24552,6 +24785,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24593,6 +24827,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24636,7 +24871,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -24670,6 +24905,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24711,6 +24947,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24754,7 +24991,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -24788,6 +25025,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24829,6 +25067,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rebel Clash checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 141 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo."
             }
@@ -24980,7 +25219,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -25009,6 +25248,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             },
@@ -25071,6 +25311,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -25079,19 +25324,17 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0308-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0308-P02"
+      ]
     },
     {
       "finishUnitId": "F0309",
@@ -25140,7 +25383,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -25169,6 +25412,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             },
@@ -25202,6 +25446,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -25210,13 +25459,9 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0309-P02"
@@ -25273,7 +25518,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -25302,6 +25547,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             },
@@ -25335,6 +25581,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -25343,13 +25594,9 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0310-P02"
@@ -25406,7 +25653,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -25432,6 +25679,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25471,6 +25719,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25516,7 +25765,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -25550,6 +25799,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25591,6 +25841,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25634,7 +25885,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -25668,6 +25919,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25709,6 +25961,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25752,7 +26005,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -25786,6 +26039,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25827,6 +26081,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25870,7 +26125,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -25896,6 +26151,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25935,6 +26191,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -25977,7 +26234,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -26006,6 +26263,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -26048,7 +26306,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -26077,6 +26335,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -26119,7 +26378,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -26148,6 +26407,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -26190,7 +26450,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -26214,6 +26474,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo."
             }
@@ -31814,7 +32075,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -31848,6 +32109,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -31889,6 +32151,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -31932,7 +32195,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -31966,6 +32229,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32007,6 +32271,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32050,7 +32315,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -32084,6 +32349,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32125,6 +32391,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32168,7 +32435,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -32202,6 +32469,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32243,6 +32511,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32286,7 +32555,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -32320,6 +32589,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32361,6 +32631,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32497,7 +32768,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -32526,6 +32797,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32568,7 +32840,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -32597,6 +32869,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32639,7 +32912,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -32668,6 +32941,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32710,7 +32984,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -32739,6 +33013,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32781,7 +33056,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -32810,6 +33085,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32924,7 +33200,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -32974,6 +33250,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -32981,7 +33258,9 @@
           "printingId": "F0432-P02"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0432-P01"
+      ]
     },
     {
       "finishUnitId": "F0433",
@@ -33029,7 +33308,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "pending",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33056,6 +33335,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33113,7 +33393,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "pending",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33140,6 +33420,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33197,7 +33478,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "pending",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33224,6 +33505,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33281,7 +33563,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "pending",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33308,6 +33590,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33424,7 +33707,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33453,6 +33736,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33495,7 +33779,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33524,6 +33808,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33566,7 +33851,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33595,6 +33880,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33637,7 +33923,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33671,6 +33957,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33717,7 +34004,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33746,6 +34033,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33847,7 +34135,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33876,6 +34164,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33918,7 +34207,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -33947,6 +34236,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -33989,7 +34279,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -34018,6 +34308,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -34060,7 +34351,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -34089,6 +34380,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -34131,7 +34423,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -34160,6 +34452,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Sword & Shield checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 140 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo; 141 Snorlax V: Standard Set Foil/holo; 142 Snorlax VMAX: Standard Set Foil/holo; 197 Snorlax V: Standard Set Foil/holo; 206 Snorlax VMAX: Standard Set Foil/holo."
             }
@@ -39899,7 +40192,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -39923,6 +40216,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -39965,7 +40259,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -39989,6 +40283,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40031,7 +40326,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40055,6 +40350,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40097,7 +40393,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40121,6 +40417,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40163,7 +40460,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40187,6 +40484,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40288,7 +40586,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40312,6 +40610,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40354,7 +40653,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40378,6 +40677,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40420,7 +40720,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40444,6 +40744,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40486,7 +40787,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40510,6 +40811,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40552,7 +40854,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40576,6 +40878,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40677,7 +40980,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40701,6 +41004,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40743,7 +41047,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40767,6 +41071,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40809,7 +41114,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40833,6 +41138,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40875,7 +41181,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40899,6 +41205,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -40941,7 +41248,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -40965,6 +41272,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Team Up checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 120 Eevee & Snorlax GX: Standard Set Foil/holo; 171 Eevee & Snorlax GX: Standard Set Foil/holo; 191 Eevee & Snorlax GX: Standard Set Foil/holo."
             }
@@ -41066,7 +41374,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -41095,6 +41403,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete official EX Team Rocket Returns checklist states that cards 96-109 have one holo version; Rocket’s Snorlax ex 104 is in that range."
             }
@@ -41766,7 +42075,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -41811,6 +42120,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -41850,6 +42160,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -41857,7 +42168,9 @@
           "printingId": "F0569-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0569-P01"
+      ]
     },
     {
       "finishUnitId": "F0570",
@@ -41894,7 +42207,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -41939,6 +42252,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -41978,6 +42292,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -41985,7 +42300,9 @@
           "printingId": "F0570-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0570-P01"
+      ]
     },
     {
       "finishUnitId": "F0571",
@@ -42022,7 +42339,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -42067,6 +42384,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42106,6 +42424,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42113,7 +42432,9 @@
           "printingId": "F0571-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0571-P01"
+      ]
     },
     {
       "finishUnitId": "F0572",
@@ -42150,7 +42471,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -42195,6 +42516,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42234,6 +42556,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42241,7 +42564,9 @@
           "printingId": "F0572-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0572-P01"
+      ]
     },
     {
       "finishUnitId": "F0573",
@@ -42278,7 +42603,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -42323,6 +42648,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42362,6 +42688,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42369,7 +42696,9 @@
           "printingId": "F0573-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0573-P01"
+      ]
     },
     {
       "finishUnitId": "F0574",
@@ -42636,7 +42965,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
@@ -42669,6 +42998,7 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42726,6 +43056,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh4_web_cardlist_en.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -42734,19 +43069,17 @@
               "languages": [
                 "English"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0578-P03"
         }
       ],
-      "unresolved": []
+      "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0578-P02"
+      ]
     },
     {
       "finishUnitId": "F0579",
@@ -42795,7 +43128,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -42821,6 +43154,7 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -42869,6 +43203,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh4_web_cardlist_fr.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -42877,19 +43216,16 @@
               "languages": [
                 "French"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0579-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0579-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
@@ -42940,7 +43276,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -42966,6 +43302,7 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -43014,6 +43351,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh4_web_cardlist_de.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -43022,19 +43364,16 @@
               "languages": [
                 "German"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0580-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0580-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
@@ -43085,7 +43424,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -43111,6 +43450,7 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -43159,6 +43499,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh4_web_cardlist_it.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -43167,19 +43512,16 @@
               "languages": [
                 "Italian"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0581-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0581-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
@@ -43230,7 +43572,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "complete-manifest",
+      "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "partial",
       "patternStatus": "confirmed",
       "printings": [
@@ -43256,6 +43598,7 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
             }
@@ -43304,6 +43647,11 @@
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
             },
             {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh4_web_cardlist_es.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -43312,19 +43660,16 @@
               "languages": [
                 "Spanish"
               ],
+              "closureScope": "standard-set",
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "printingId": "F0582-P03"
         }
       ],
       "unresolved": [
+        "Scoped complete manifests do not cover these known physical printings: F0582-P02",
         "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },

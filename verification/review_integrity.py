@@ -40,6 +40,7 @@ ALLOWED_PATTERN = ("confirmed", "partial", "pending", "not-applicable")
 # "complete-manifest", which stays source-derived; E13 holds the decision to what it may do.
 ALLOWED_COMPLETENESS = ("complete-manifest", "owner-adjudicated", "positive-evidence-only",
                         "pending", "not-applicable")
+ALLOWED_CLOSURE_SCOPES = ("finish-unit", "standard-set")
 ALLOWED_MARKING_ROLES = ("print-identity", "reverse-holo-treatment", "distribution-promo")
 ALLOWED_EDITIONS = ("1st Edition", "Unlimited")
 
@@ -84,6 +85,7 @@ def main() -> int:
     excluded = read_json(VERIFICATION / "excluded_codecards.json")
     finish_units = read_json(VERIFICATION / "finish_units.json")["units"]
     finish_review = read_json(VERIFICATION / "FINISH_REVIEW.json")
+    finish_overrides = read_json(VERIFICATION / "finish_overrides.json")
 
     # --- 1. unit totals and identity ---
     suite.report("units total", len(units), 719)
@@ -247,6 +249,35 @@ def main() -> int:
     ]
     suite.check("unknown finish printings remain unresolved", not hidden_unknown_finishes,
                 ",".join(first(hidden_unknown_finishes)))
+    improperly_closed_scopes, hidden_out_of_scope_printings = [], []
+    for unit in finish_units:
+        manifests = [
+            source
+            for printing in (unit.get("printings") or [])
+            for source in (printing.get("sources") or [])
+            if source.get("supportsAbsence") is True
+            and source.get("coverage") == "complete-manifest"
+            and (not source.get("languages") or unit.get("language") in source["languages"])
+        ]
+        scopes = {source.get("closureScope") for source in manifests}
+        if scopes and "finish-unit" not in scopes \
+                and unit.get("completenessStatus") == "complete-manifest":
+            improperly_closed_scopes.append(unit.get("finishUnitId"))
+        bounded_urls = {
+            source.get("url") for source in manifests
+            if source.get("closureScope") != "finish-unit" and source.get("url")
+        }
+        uncovered = [
+            printing for printing in (unit.get("printings") or [])
+            if bounded_urls and not any(
+                source.get("url") in bounded_urls for source in (printing.get("sources") or []))
+        ]
+        if uncovered and "finish-unit" not in scopes and not unit.get("unresolved"):
+            hidden_out_of_scope_printings.append(unit.get("finishUnitId"))
+    suite.check("scoped manifests do not close finish units", not improperly_closed_scopes,
+                ",".join(first(improperly_closed_scopes)))
+    suite.check("out-of-scope printings remain unresolved", not hidden_out_of_scope_printings,
+                ",".join(first(hidden_out_of_scope_printings)))
     suite.report("finish units covered by a complete manifest",
                  sum(1 for u in finish_units
                      if u.get("completenessStatus") == "complete-manifest"), 4)
@@ -275,7 +306,8 @@ def main() -> int:
             for source in sources:
                 if source.get("supportsAbsence") is True and (
                         source.get("authorityTier") != "official-primary"
-                        or source.get("coverage") != "complete-manifest"):
+                        or source.get("coverage") != "complete-manifest"
+                        or source.get("closureScope") not in ALLOWED_CLOSURE_SCOPES):
                     bad_sources.append(printing.get("printingId"))
             for mapped in (printing.get("mappedVariants") or []):
                 if mapped not in product_variants:
@@ -292,6 +324,38 @@ def main() -> int:
     suite.check("finish mappings reference local products", not bad_mappings,
                 ",".join(first(bad_mappings)))
     suite.check("stamp roles valid and finish-safe", not bad_roles, ",".join(first(bad_roles)))
+
+    override_sources = finish_overrides.get("sources") or {}
+    unsupported_override_patterns = [
+        f"{override.get('setCode')} {override.get('number')} {','.join(override.get('languages') or [])}"
+        for override in (finish_overrides.get("overrides") or [])
+        for printing in (override.get("printings") or [])
+        if printing.get("foilPattern")
+        and printing.get("sourceRefs")
+        and all(override_sources[ref].get("closureScope") == "standard-set"
+                for ref in printing["sourceRefs"])
+    ]
+    suite.check("finish-only checklists do not assert foil patterns",
+                not unsupported_override_patterns,
+                ",".join(first(unsupported_override_patterns)))
+    ambiguous_pattern_duplicates = []
+    for unit in finish_units:
+        by_patternless_identity: dict[tuple, set] = {}
+        for printing in (unit.get("printings") or []):
+            identity = (
+                printing.get("finish"), printing.get("edition"),
+                json.dumps(printing.get("markings"), sort_keys=True),
+                json.dumps(printing.get("distribution"), sort_keys=True),
+                printing.get("releaseDate"), printing.get("cardSize"),
+                tuple(sorted(printing.get("mappedVariants") or [])),
+            )
+            by_patternless_identity.setdefault(identity, set()).add(printing.get("foilPattern"))
+        if any(None in patterns and len(patterns) > 1
+               for patterns in by_patternless_identity.values()):
+            ambiguous_pattern_duplicates.append(unit.get("finishUnitId"))
+    suite.check("pattern placeholders do not duplicate identified printings",
+                not ambiguous_pattern_duplicates,
+                ",".join(first(ambiguous_pattern_duplicates)))
 
     dragon_frontiers = [
         p for u in finish_units if u.get("setCode") == "DF" and u.get("number") == "10"
