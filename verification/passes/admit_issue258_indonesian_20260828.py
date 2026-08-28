@@ -177,7 +177,7 @@ def official_prints() -> list[dict[str, Any]]:
             "name": raw["raw"]["localName"], "cardName": card_name,
             "catchUpOf": "the exact Indonesian counterpart identified by the retained official card detail and printed attacks",
             "specimenId": SPEC_BY_DETAIL[detail], "providerId": "pokemon-card-asia", "sourceUrl": raw["sourceUrl"],
-            "corroborated": bool(raw.get("bucket") == "matched"), "markAssetUrl": raw["raw"].get("setSymbolUrl"),
+            "corroborated": False, "markAssetUrl": raw["raw"].get("setSymbolUrl"),
             "cardImageUrl": raw["raw"]["cardImageUrl"], "releaseDate": date, "releaseDatePrecision": precision,
             "releaseApproximate": False,
             "evidence": (
@@ -437,8 +437,15 @@ def main() -> int:
         {"setCode": "SV-P/ID", "releaseSetCode": "SV-P", "number": "278", "languages": ["Indonesian"], "printings": [{"finish": "non-holo", "foilPattern": None, "markings": [{"kind": "stamp", "text": "Pokémon TCG GYM", "role": "distribution-promo"}], "distribution": {"kind": "event-promo-pack", "name": "Pokémon Card Gym Promo Card Pack 11"}, "cardSize": "standard", "mappedVariants": ["base"], "verificationStatus": "confirmed", "sourceRefs": ["pokumon-id-svp278"]}]},
         {"setCode": "SV-P/ID", "releaseSetCode": "SV-P", "number": "286", "languages": ["Indonesian"], "printings": [{"finish": "non-holo", "foilPattern": None, "markings": [{"kind": "stamp", "text": "Taro", "role": "distribution-promo"}], "distribution": {"kind": "purchase-promo", "name": "Taro Pokémon promotion"}, "cardSize": "standard", "mappedVariants": ["base"], "verificationStatus": "confirmed", "sourceRefs": ["pokumon-id-svp286"]}]},
     ]
-    keys = {(row["setCode"], row["number"], tuple(row.get("languages") or [])) for row in finish_rows}
-    finishes["overrides"] = [row for row in finishes["overrides"] if (row["setCode"], row["number"], tuple(row.get("languages") or [])) not in keys] + finish_rows
+    finish_by_key = {
+        (row["setCode"], row["number"], tuple(row.get("languages") or [])): row
+        for row in finish_rows
+    }
+    updated_overrides = []
+    for row in finishes["overrides"]:
+        key = (row["setCode"], row["number"], tuple(row.get("languages") or []))
+        updated_overrides.append(finish_by_key.pop(key, row))
+    finishes["overrides"] = updated_overrides + list(finish_by_key.values())
     for row in finishes["overrides"]:
         if row.get("setCode") == "SV-P/ID" and row.get("number") == "117" and "Indonesian" in (row.get("languages") or []):
             row["releaseSetCode"] = "SV-P"

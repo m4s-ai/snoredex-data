@@ -221,10 +221,6 @@ OVERRIDES = [
         "setCode": "S-P/CS", "number": "061", "languages": ["S-Chinese"],
         "printings": [printing("non-holo", "pokumon-s-p-cs-061", distribution={"kind": "event-promo", "name": "2023 tournament participation promo"})],
     },
-    {
-        "setCode": "SV-P/CS", "number": "277", "languages": ["S-Chinese"],
-        "printings": [printing("holo", "pokemon-cn-simplified-finish-rules", distribution={"kind": "event-promo-pack", "name": "Event Special Pack Part 3"})],
-    },
 ]
 
 
@@ -713,13 +709,18 @@ def main() -> int:
     before_finish = json.dumps(finish, sort_keys=True, ensure_ascii=False)
     finish["sources"].update(SOURCES)
     finish["sources"].pop("52poke-sv-p-cs-277", None)
-    issue_keys = {
-        (row["setCode"], row["number"], tuple(row["languages"])) for row in OVERRIDES
+    issue_rows = {
+        (row["setCode"], row["number"], tuple(row["languages"])): row
+        for row in OVERRIDES
     }
-    finish["overrides"] = [
-        row for row in finish["overrides"]
-        if (row["setCode"], row["number"], tuple(row.get("languages") or [])) not in issue_keys
-    ] + OVERRIDES
+    retired_keys = {("SV-P/CS", "277", ("S-Chinese",))}
+    updated_overrides = []
+    for row in finish["overrides"]:
+        key = (row["setCode"], row["number"], tuple(row.get("languages") or []))
+        if key in retired_keys:
+            continue
+        updated_overrides.append(issue_rows.pop(key, row))
+    finish["overrides"] = updated_overrides + list(issue_rows.values())
     finish["meta"]["lastUpdated"] = "2026-08-27"
 
     prints = read(PRINTS)

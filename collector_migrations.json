@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:1a63af699f7f6648de8a1da3f54364e71e3d562c42b2836369d869e068354e24",
+    "fromFingerprint": "sha256:43626e9d696a1a9dcf0085bf5e98f93df426a6d12cba163c608188ec97bda92e",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:a72d62c75bd9343e9fb21070b31c87597f092d5a0a03741245060d28742857a5",
+    "toFingerprint": "sha256:50c28839620e2e9e237ba61881f383285837615c75e53b96f19bab1d6e2d8d5f",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a72d62c75bd9343e9fb21070b31c87597f092d5a0a03741245060d28742857a5",
+      "toFingerprint": "sha256:50c28839620e2e9e237ba61881f383285837615c75e53b96f19bab1d6e2d8d5f",
       "cumulative": true,
       "transitions": [
         {
@@ -3157,15 +3157,6 @@
           "fromItemId": "item-5c25ecd5-75da-5c38-be10-9ec69cf1a739",
           "toItemIds": [
             "item-5c25ecd5-75da-5c38-be10-9ec69cf1a739"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
-          "fromItemId": "item-5c28a0c5-d190-5ceb-b07b-a9e39013d33a",
-          "toItemIds": [
-            "item-5c28a0c5-d190-5ceb-b07b-a9e39013d33a"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -14054,14 +14045,6 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "sv-p-cs-277-s-chinese-none-holo-event-promo-pack-event-special-pack-part-3",
-      "toItemIds": [
-        "item-5c28a0c5-d190-5ceb-b07b-a9e39013d33a"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
       "fromItemId": "sv-p-cs-277-s-chinese-none-reverse-holo",
       "toItemIds": [
         "item-ba258f3e-4106-5795-87f4-97d9c19a3e42"
@@ -21649,13 +21632,6 @@
         ]
       },
       {
-        "legacyChecklistId": "sv-p-cs-277-s-chinese-none-holo-event-promo-pack-event-special-pack-part-3",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-5c28a0c5-d190-5ceb-b07b-a9e39013d33a"
-        ]
-      },
-      {
         "legacyChecklistId": "sv-p-cs-277-s-chinese-none-reverse-holo",
         "disposition": "projected",
         "targetItemIds": [
@@ -23564,7 +23540,6 @@
         "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
         "disposition": "projected",
         "targetItemIds": [
-          "item-5c28a0c5-d190-5ceb-b07b-a9e39013d33a",
           "item-ba258f3e-4106-5795-87f4-97d9c19a3e42"
         ],
         "reason": null
@@ -31893,11 +31868,6 @@
         "targetItemId": "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c"
       },
       {
-        "physicalPrintingId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-        "disposition": "projected",
-        "targetItemId": "item-5c28a0c5-d190-5ceb-b07b-a9e39013d33a"
-      },
-      {
         "physicalPrintingId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
         "disposition": "projected",
         "targetItemId": "item-201d8d0e-60f7-5db7-9ecd-e932bb4ba311"
@@ -32134,9 +32104,9 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 872,
+      "legacyChecklistRows": 871,
       "cardReleases": 635,
-      "physicalPrintings": 696,
+      "physicalPrintings": 695,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

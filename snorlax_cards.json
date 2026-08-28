@@ -39,13 +39,13 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-08-28",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 448,
-      "withOnlyMarketplaceClaim": 58,
+      "withConfirmedFinish": 447,
+      "withOnlyMarketplaceClaim": 59,
       "pendingFinish": 56,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
       "withNonHolo": 301,
-      "withHolo": 218,
+      "withHolo": 217,
       "withReverseHolo": 229,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 50,
@@ -31731,13 +31731,11 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "confirmed",
+        "status": "partial",
         "availableFinishes": [
-          "holo",
           "reverse-holo"
         ],
         "unitAvailableFinishes": [
-          "holo",
           "reverse-holo"
         ],
         "byLanguage": [
@@ -31745,44 +31743,29 @@
             "language": "S-Chinese",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "holo",
               "reverse-holo"
             ],
             "unitAvailableFinishes": [
-              "holo",
               "reverse-holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "confirmed",
+              "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "confirmed",
+              "holo": "pending",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
-            "status": "confirmed",
+            "status": "marketplace-claimed",
             "finishUnitId": "F0456",
             "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0456-P01",
-                "finish": "holo",
-                "foilPattern": null,
-                "markings": null,
-                "distribution": {
-                  "kind": "event-promo-pack",
-                  "name": "Event Special Pack Part 3"
-                },
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0456-P02",
                 "finish": "reverse-holo",
                 "foilPattern": null,
                 "markings": null,

@@ -108,6 +108,22 @@ def main() -> None:
     ]
 
     finish_units = read("finish_units.json")["units"]
+    simplified_chinese_promo = next(
+        unit for unit in finish_units if unit["finishUnitId"] == "F0456"
+    )
+    assert simplified_chinese_promo["finishStatus"]["holo"] == "pending"
+    assert all(
+        printing["verificationStatus"] != "confirmed"
+        for printing in simplified_chinese_promo["printings"]
+    ), "the R/C/U finish guide does not establish a Promo-card finish"
+    indonesian_official_prints = [
+        row for row in read("source_first_prints.json")["prints"]
+        if row["locality"] == "ID" and row["providerId"] == "pokemon-card-asia"
+    ]
+    assert len(indonesian_official_prints) == 30
+    assert all(row["corroborated"] is False for row in indonesian_official_prints), (
+        "matching an existing graph identity is not independent corroboration"
+    )
     dutch = {
         (unit["number"], printing["edition"]): printing
         for unit in finish_units

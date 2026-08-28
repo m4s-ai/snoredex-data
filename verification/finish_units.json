@@ -59,13 +59,13 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 448,
-      "withOnlyMarketplaceClaim": 58,
+      "withConfirmedFinish": 447,
+      "withOnlyMarketplaceClaim": 59,
       "pendingFinish": 56,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
       "withNonHolo": 301,
-      "withHolo": 218,
+      "withHolo": 217,
       "withReverseHolo": 229,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 50,
@@ -37812,50 +37812,20 @@
         }
       ],
       "availableFinishes": [
-        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "confirmed",
+        "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
+      "availabilityStatus": "marketplace-claimed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": {
-            "kind": "event-promo-pack",
-            "name": "Event Special Pack Part 3"
-          },
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://www.pokemon.cn/tcg/product/16377.html",
-              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
-              "authorityTier": "official-primary",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "languages": [
-                "S-Chinese"
-              ],
-              "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
-            }
-          ],
-          "printingId": "F0456-P01"
-        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -37873,7 +37843,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0456-P02"
+          "printingId": "F0456-P01"
         }
       ],
       "unresolved": [

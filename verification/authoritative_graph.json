@@ -8754,7 +8754,7 @@
         "claimId": "CLAIM:finish:PRINTING:06fd30a3117f1886bcadd4c6",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0456-P02",
+        "sourceId": "F0456-P01",
         "semanticPrintingId": "PRINTING:06fd30a3117f1886bcadd4c6",
         "evidenceStatus": "marketplace-claimed",
         "disposition": "candidate-needs-evidence",
@@ -14593,23 +14593,6 @@
           "SPEC-0139",
           "SPEC-0143"
         ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:db3e8a1264119db9537de60c",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:db3e8a1264119db9537de60c",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0456-P01",
-        "semanticPrintingId": "PRINTING:db3e8a1264119db9537de60c",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-        "materializedTargetId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-        "reason": "finish printing record carries positive evidence"
       }
     },
     {
@@ -93038,30 +93021,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-        "semanticPrintingId": "PRINTING:db3e8a1264119db9537de60c",
-        "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": {
-          "kind": "event-promo-pack",
-          "name": "Event Special Pack Part 3"
-        },
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0456",
-        "sourcePrintingId": "F0456-P01",
-        "establishingClaimId": "CLAIM:finish:PRINTING:db3e8a1264119db9537de60c"
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -159492,16 +159451,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:db3e8a1264119db9537de60c",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:db83efedce8c21d5463f9cd9",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -214544,22 +214493,6 @@
     },
     {
       "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:db3e8a1264119db9537de60c",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -256696,13 +256629,6 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0456-P01",
-      "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0456-P02",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "finish printing record carries positive evidence"
@@ -272055,14 +271981,14 @@
     }
   ],
   "summary": {
-    "entities": 7548,
-    "edges": 11347,
-    "migrationInputs": 2613,
+    "entities": 7546,
+    "edges": 11344,
+    "migrationInputs": 2612,
     "migrationDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 239,
       "carried": 67,
-      "established-and-mapped": 1468,
+      "established-and-mapped": 1467,
       "linked-local-counterpart": 86,
       "mapped": 279,
       "needs-evidence": 127,
@@ -272070,9 +271996,9 @@
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1866,
+    "candidateClaims": 1865,
     "cardReleases": 635,
-    "physicalPrintings": 696,
+    "physicalPrintings": 695,
     "setSourceRecords": 408,
     "setSourceDispositions": 408,
     "localizations": 16

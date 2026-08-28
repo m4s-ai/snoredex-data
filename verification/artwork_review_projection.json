@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-28",
-  "projectionVersion": "acae096a04a1e250d43c0f0abb83a596ab54899a2e7d8154fc36534f67ce5fa9",
+  "projectionVersion": "b9a3eb6ec23a1b9e5db052cc3fc85209d039da3a842d605e7d3947a60270c9a1",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 181,
     "unmappedReleases": 76,
     "cardReleases": 635,
-    "physicalPrintings": 696,
-    "sourceObservations": 2268
+    "physicalPrintings": 695,
+    "sourceObservations": 2267
   },
   "groups": [
     {
@@ -49281,48 +49281,13 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:db3e8a1264119db9537de60c",
-              "semanticPrintingId": "PRINTING:db3e8a1264119db9537de60c",
-              "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": {
-                "kind": "event-promo-pack",
-                "name": "Event Special Pack Part 3"
-              },
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0456",
-              "sourcePrintingId": "F0456-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:db3e8a1264119db9537de60c",
-              "sources": [
-                {
-                  "url": "https://www.pokemon.cn/tcg/product/16377.html",
-                  "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
-                  "authorityTier": "official-primary",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "languages": [
-                    "S-Chinese"
-                  ],
-                  "retrievedAt": "2026-08-27",
-                  "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
             "finish": [
-              "holo",
               "reverse-holo"
             ],
             "foilPattern": [],
@@ -49341,15 +49306,6 @@
             }
           ],
           "observations": [
-            {
-              "observationId": "finish:F0456-P01:0:d4c48dae59a72376",
-              "kind": "finish",
-              "provider": "Official Mainland China Simplified Chinese card-finish guide",
-              "url": "https://www.pokemon.cn/tcg/product/16377.html",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings.",
-              "contentHash": "7ef643febeab1523deae95185f5e2b8fc5c81e2f0577db955863849c3192cfc2",
-              "image": null
-            },
             {
               "observationId": "unit:U0503",
               "kind": "unit",
@@ -74371,7 +74327,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/2501/",
               "evidence": "The retained official Indonesian card detail 2501 and SPEC-0164 show Eevee & Snorlax GX 120/172 in AC3D, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "4449c40c65c89756852d48c0b3c6c14c8fc6da15af02582d41eeeaa23ca02850",
+              "contentHash": "73362e91021fcbe858bda004c37705d1bb4dae98b8c2be9d56cfe63e1d336e88",
               "image": "https://asia.pokemon-card.com/id/card-img/id00002501.png"
             }
           ]
@@ -75055,7 +75011,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/17792/",
               "evidence": "The retained official Indonesian card detail 17792 and SPEC-0185 show Snorlax <Hop> 136/193 in MA3 I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "a572f3f6418d51320f394f8dffa889e704d2ea4300de46d72a0e1ac84e0e7760",
+              "contentHash": "2375dfd86a74cd91d2d70cfbbe5bdd9c0ac0b595dc21484e86822d0786f3d245",
               "image": "https://asia.pokemon-card.com/id/card-img/id00017792.png"
             },
             {
@@ -75064,7 +75020,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/17793/",
               "evidence": "The retained official Indonesian card detail 17793 and SPEC-0186 show Snorlax <Hop> 136/193 in MA3 I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "d04d0b4c2b9f01806d4b398448bb9c24abd2b235ecf71ca3308035105b5eb6df",
+              "contentHash": "e2c36c7eceb47ffffcf69e5878b72d70b94d5168869e824e934638e28e6a62ae",
               "image": "https://asia.pokemon-card.com/id/card-img/id00017793.png"
             },
             {
@@ -75141,7 +75097,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/15784/",
               "evidence": "The retained official Indonesian card detail 15784 and SPEC-0183 show Snorlax <Hop> 109/139 in SV9s I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity R. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "aad7070b41a7ab62cdaefd5e4352dc81e2f480e07f195bf5d2eced902cc5679c",
+              "contentHash": "92e022ad48681580ccce56b9af488bf69bd4be9d257c38d9453fd1d07dcac1e6",
               "image": "https://asia.pokemon-card.com/id/card-img/id00015784.png"
             }
           ]
@@ -75660,7 +75616,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/13757/",
               "evidence": "The retained official Indonesian card detail 13757 and SPEC-0181 show Snorlax 136/167 in SV6s I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity U. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "e380c34df67e8b3ce3822663e6e7a2ee0fb472d09c602f99cbed03a9d9e4c131",
+              "contentHash": "666c179d0113205659fd61813396a075153e6a380091bb3eca562badcb930822",
               "image": "https://asia.pokemon-card.com/id/card-img/id00013757.png"
             }
           ]
@@ -75728,7 +75684,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/454/",
               "evidence": "The retained official Indonesian card detail 454 and SPEC-0157 show Snorlax 127/154 in sc1a I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity U. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "8524fc7c27e86520aa5e64c9df4e0a6944411de6b3f932090ae45a627d52b8fc",
+              "contentHash": "eecfaaa6f6cad6a23ef68d650558061b0b12476f80a2caf41cd18c5380c90abd",
               "image": "https://asia.pokemon-card.com/id/card-img/id00000454.png"
             }
           ]
@@ -75932,7 +75888,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/9774/",
               "evidence": "The retained official Indonesian card detail 9774 and SPEC-0178 show Boneka Snorlax 118/132 in SV4s I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity U. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "cf7d7dc00c6aa8f133e780ab17f95cdf3e7977c2c3a7ffa3e914d833dbf42ece",
+              "contentHash": "874a30bff02eeabe8b70a1c9b51371eb60f2f209a93a3e236f007fdfe25740fa",
               "image": "https://asia.pokemon-card.com/id/card-img/id00009774.png"
             }
           ]
@@ -76000,7 +75956,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/3466/",
               "evidence": "The retained official Indonesian card detail 3466 and SPEC-0166 show SnorlaxGX 108/140 in AS1D, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "f7e75b262ab6245f95df9a9afbc2cc4b9b6b5b409226565c7f0b5332db946823",
+              "contentHash": "125a4ec83ea13742eca1d26ab6ebb2d1b0cd3b41ee4e08e34eaa58933811e86c",
               "image": "https://asia.pokemon-card.com/id/card-img/id00003466.png"
             }
           ]
@@ -76068,7 +76024,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/1605/",
               "evidence": "The retained official Indonesian card detail 1605 and SPEC-0162 show SnorlaxGX 112/150 in AS1b, including the printed attacks used for the explicit Work mapping. The exact render prints rarity RR. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "3bfe4ed441628df4be80427159932e23da6a46b9cb68aa5e285b97cbcb1f8410",
+              "contentHash": "470a7e47e3839375071e1b50118f82ce7e892bde547288b33e275338c09ba9bb",
               "image": "https://asia.pokemon-card.com/id/card-img/id00001605.png"
             }
           ]
@@ -76272,7 +76228,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/5089/",
               "evidence": "The retained official Indonesian card detail 5089 and SPEC-0171 show Snorlax 052 in S-P, including the printed attacks used for the explicit Work mapping. The exact render prints rarity PROMO. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "116d4349b168965f0d119bd5c637e91800db0ddcc652c6651ff0ab7862538624",
+              "contentHash": "cca0eb64b3e23d3f2f8c6f87dfbd0d56911cb01124a4bfe75990ec62d75cee32",
               "image": "https://asia.pokemon-card.com/id/card-img/id00005089.png"
             }
           ]
@@ -76410,7 +76366,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/3982/",
               "evidence": "The retained official Indonesian card detail 3982 and SPEC-0167 show Snorlax 126/158 in sc3b I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity R. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "11621b26fbe0d650a0df87d18b0ef847611d56cf7eac6a27e3420c48ba95617a",
+              "contentHash": "5c547ecf0e49da6ad7e8c8b90c76828987ed61addff5dc3391e5a23d9517cff2",
               "image": "https://asia.pokemon-card.com/id/card-img/id00003982.png"
             }
           ]
@@ -76478,7 +76434,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/2796/",
               "evidence": "The retained official Indonesian card detail 2796 and SPEC-0165 show Snorlax 084/135 in scA I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "703baed4ca07cc03d2476c7035d9580eac93719feb8d8ea5088ec656fe330f8b",
+              "contentHash": "a99afcb55f5a97dbc36645e481370ba65d6c205b272ac3ceca7f884b1f0f6a3e",
               "image": "https://asia.pokemon-card.com/id/card-img/id00002796.png"
             }
           ]
@@ -77066,7 +77022,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/6671/",
               "evidence": "The retained official Indonesian card detail 6671 and SPEC-0175 show Snorlax 356 in S-P, including the printed attacks used for the explicit Work mapping. The exact render prints rarity PROMO. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "3a49df6febbb5eb62e53da3faa5f22ddd43e35b6b7b6c17af0268432f869ac2d",
+              "contentHash": "b30527c7f4e334c05844f59a882909f65c123307f99bc51bc6501beda8b5f286",
               "image": "https://asia.pokemon-card.com/id/card-img/id00006671.png"
             }
           ]
@@ -77344,7 +77300,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/2129/",
               "evidence": "The retained official Indonesian card detail 2129 and SPEC-0163 show Snorlax 145/205 in AC3a, including the printed attacks used for the explicit Work mapping. The exact render prints rarity C. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "98d18b028e8ec57c8c2285f27b634adc180e6ea2ee4d4b4993572fe063c5febb",
+              "contentHash": "af137c5e9378a9b2209a662f6a58fc9277402f36d5ba10495d8970e123eea48d",
               "image": "https://asia.pokemon-card.com/id/card-img/id00002129.png"
             }
           ]
@@ -77634,7 +77590,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/5137/",
               "evidence": "The retained official Indonesian card detail 5137 and SPEC-0172 show Snorlax 100 in S-P, including the printed attacks used for the explicit Work mapping. The exact render prints rarity PROMO. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "d6264ff4ba59c035a7969f4a8dd1cae1de9adda46f05d9b0eb54c5b0d6f550e4",
+              "contentHash": "1599d0c23abec96770993c032b36c34478b4f3f61ca3d30540ed7ae7c3ea0acb",
               "image": "https://asia.pokemon-card.com/id/card-img/id00005137.png"
             }
           ]
@@ -77702,7 +77658,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/764/",
               "evidence": "The retained official Indonesian card detail 764 and SPEC-0160 show Snorlax 132/164 in sc1D I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "542c732678df3786bb8dab0238195bc3221a43ae1b425bb5ba09a0049d61ce88",
+              "contentHash": "bf4543f52c25192e1a005d778305e1e0f426f0402817493eb5f175bd86ad7284",
               "image": "https://asia.pokemon-card.com/id/card-img/id00000764.png"
             }
           ]
@@ -77906,7 +77862,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/4527/",
               "evidence": "The retained official Indonesian card detail 4527 and SPEC-0168 show Snorlax 111/159 in scD I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "0718b4ddd088c3821861434e1a038172b2cb624e211496726ded6f3eb69d7574",
+              "contentHash": "fc50cc9c52e81b990262a66a481188479641f92a5abdff7e7eef7d84df4c6d6a",
               "image": "https://asia.pokemon-card.com/id/card-img/id00004527.png"
             }
           ]
@@ -78513,7 +78469,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/5067/",
               "evidence": "The retained official Indonesian card detail 5067 and SPEC-0170 show Snorlax V 030 in S-P, including the printed attacks used for the explicit Work mapping. The exact render prints rarity PROMO. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "7888084a646b13a3cd7d1925e39fb1547bd79aae4ce2b2aa3b94dc929fed6dc3",
+              "contentHash": "b134d0695c6130cd40ed4ac4405e396d0b2835f8baa60855546b87a9780d1dba",
               "image": "https://asia.pokemon-card.com/id/card-img/id00005067.png"
             }
           ]
@@ -78581,7 +78537,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/765/",
               "evidence": "The retained official Indonesian card detail 765 and SPEC-0161 show Snorlax V 133/164 in sc1D I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "ef590ad190878ae6e6c9f41913f353ee211a276bd4725643293aaa4be0e79ca0",
+              "contentHash": "3cc769baae6d7fe686d8fbf77e763cacee3bb966ff7517fc6d4021348f384fd2",
               "image": "https://asia.pokemon-card.com/id/card-img/id00000765.png"
             }
           ]
@@ -78649,7 +78605,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/600/",
               "evidence": "The retained official Indonesian card detail 600 and SPEC-0158 show Snorlax V 119/153 in sc1b I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity RR. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "630721f0b4833029fc5d9b4e90e206a8f6b7b6fc710f94306d90f9999ae1e985",
+              "contentHash": "c7372bf1e6698b6be0b1fcc070aa087aba584e39160d4b266a9c05aa09d61727",
               "image": "https://asia.pokemon-card.com/id/card-img/id00000600.png"
             }
           ]
@@ -79057,7 +79013,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/601/",
               "evidence": "The retained official Indonesian card detail 601 and SPEC-0159 show Snorlax VMAX 120/153 in sc1b I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity RRR. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "c73ba95d1529b72382cba2abf6eec0af6089643442b443268ab9482cc207d0d0",
+              "contentHash": "0a572ad5bb11f3426fcf58a26c335c0561b98b115a43f98c71e6882225b6ec7e",
               "image": "https://asia.pokemon-card.com/id/card-img/id00000601.png"
             }
           ]
@@ -79502,7 +79458,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/8554/",
               "evidence": "The retained official Indonesian card detail 8554 and SPEC-0176 show Snorlax 143/165 in SV2a I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity U. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "18d883e4318f4787e191754c47e44dbd5272502fac600541af13d094c9e97be7",
+              "contentHash": "e010ad71902c822f907dc2e937f608ec516ce67df31b7ed7ab33d84397719af7",
               "image": "https://asia.pokemon-card.com/id/card-img/id00008554.png"
             }
           ]
@@ -79572,7 +79528,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
               "evidence": "The retained official Indonesian card detail 8760 and SPEC-0177 show Snorlax 181/165 in SV2a I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity AR. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "f42ab3cb706327a4e04f4a7d32f943ac327d5947b8951342fe8651be55916ef8",
+              "contentHash": "bb18fb615126a3d027cd9f3ed69b161b2f8ceb3e4dafd853e74b2f1d398a2d8b",
               "image": "https://asia.pokemon-card.com/id/card-img/id00008760.png"
             }
           ]
@@ -79712,7 +79668,7 @@
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/10239/",
               "evidence": "The retained official Indonesian card detail 10239 and SPEC-0180 show Snorlax 310/190 in SV4a I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity S. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "2caa815c091c84258ec05d4338b1b4cc42bfb41d7ae0e8981ae7ec0c80c5509d",
+              "contentHash": "6576d4d86952b810b42de54d136441b0c8b956d8a52a516fcde87006d3e62b96",
               "image": "https://asia.pokemon-card.com/id/card-img/id00010239.png"
             }
           ]

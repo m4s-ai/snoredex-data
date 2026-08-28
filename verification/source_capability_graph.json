@@ -16,16 +16,16 @@
     ],
     "counts": {
       "providers": 30,
-      "surfaces": 36,
-      "coverageEdges": 38,
+      "surfaces": 35,
+      "coverageEdges": 37,
       "absenceEdges": 3,
-      "observations": 40,
+      "observations": 39,
       "resolvedVerdictSources": 1142
     },
     "surfaceStates": {
       "active": 16,
       "blocked-by-browser": 3,
-      "incomplete": 11,
+      "incomplete": 10,
       "internal": 1,
       "needs-evidence": 2,
       "non-url": 2,
@@ -1572,48 +1572,6 @@
       },
       "coverageEdgeIds": [
         "asia-card-image-positive"
-      ]
-    },
-    {
-      "surfaceId": "pokemon-card-korea-image",
-      "providerId": "pokemon-card-korea",
-      "label": "Pokémon Korea exact card renders",
-      "match": {
-        "urlPrefixes": [
-          "https://cards.image.pokemonkorea.co.kr/data/wmimages/"
-        ],
-        "nonUrlEvidenceIds": []
-      },
-      "state": "incomplete",
-      "failureState": "Only retained exact positive renders are covered; failed or missing image requests prove nothing.",
-      "accessMode": "direct-download",
-      "adapterState": "planned",
-      "lastCheckedAt": "2026-08-28",
-      "freshnessPolicy": "Retain each exact render URL, retrieval date and SHA-256; never interpret image-host silence as absence.",
-      "query": {
-        "method": "GET",
-        "endpoint": "https://cards.image.pokemonkorea.co.kr/data/wmimages/{era}/{set}/{asset}",
-        "parameters": [
-          "era",
-          "set",
-          "asset"
-        ],
-        "pagination": "not paginated; every render establishes only its pictured card",
-        "expectedIdentifiers": [
-          "Korean card name",
-          "printed local set code",
-          "collector number",
-          "printed rarity"
-        ]
-      },
-      "finishCapability": {
-        "mode": "none",
-        "vocabulary": [],
-        "publicationForm": "publisher/database render, not a physical card photograph",
-        "closedWithinScope": false
-      },
-      "coverageEdgeIds": [
-        "pokemon-card-korea-image-positive"
       ]
     }
   ],
@@ -3599,58 +3557,6 @@
         "zeroResultMeans": "unknown",
         "challenge": "No missing image or failed request can refute a card printing."
       }
-    },
-    {
-      "edgeId": "pokemon-card-korea-image-positive",
-      "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
-      "coverage": {
-        "localities": [
-          "KR"
-        ],
-        "languages": [
-          "Korean"
-        ],
-        "scripts": [
-          "Hang"
-        ],
-        "productCategories": [
-          "card"
-        ],
-        "timeRange": {
-          "start": null,
-          "end": null,
-          "basis": "retained exact positive renders only"
-        }
-      },
-      "positiveEvidenceCapabilities": [
-        "identity",
-        "image",
-        "language",
-        "card-existence",
-        "card-release",
-        "local-set-identifier",
-        "collector-number",
-        "rarity",
-        "set-membership"
-      ],
-      "exhaustive": false,
-      "absenceCapability": {
-        "enabled": false,
-        "dimensions": [],
-        "exactScopes": [],
-        "rationale": "A retained render proves only the pictured card; an unavailable image proves nothing."
-      },
-      "knownPositiveObservationId": "obs-pokemon-card-korea-image",
-      "boundary": {
-        "outsideScope": [
-          "unretained Korean cards",
-          "physical finish",
-          "complete set or era"
-        ],
-        "zeroResultMeans": "unknown",
-        "challenge": "The image host is positive-only and does not publish a completeness contract."
-      }
     }
   ],
   "observations": [
@@ -5266,7 +5172,7 @@
       ],
       "outcome": "The retained official article positively states that rarity R and above cards are foil, and that Simplified Chinese C, U and R cards can appear as the locality-specific patterned random foil treatment.",
       "rawRecordRef": "verification/source_registry.json:https://www.pokemon.cn/tcg/product/16377.html",
-      "rawRecordHash": "sha256:bd4d053bb12230ab2e5c92bf7c4d3d1f944c59c6f91f8b8302b2c31ff8d3bdab",
+      "rawRecordHash": "sha256:b83353930e14ec7ec288716851d880293ccaf000f93addbe66bbf03cee4f30b2",
       "rawRecord": {
         "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
         "nonUrlEvidenceId": null,
@@ -5278,7 +5184,7 @@
           "finish",
           "finish-override"
         ],
-        "stableIdCount": 20,
+        "stableIdCount": 19,
         "stableIds": [
           "F0000-P03",
           "F0001-P01",
@@ -5298,11 +5204,10 @@
           "F0074-P03",
           "F0075-P03",
           "F0076-P03",
-          "F0456-P01",
           "override:pokemon-cn-simplified-finish-rules"
         ],
         "retrievedAt": "2026-08-27",
-        "usageCount": 20
+        "usageCount": 19
       }
     },
     {
@@ -5342,39 +5247,6 @@
         ],
         "retrievedAt": "2026-08-28",
         "usageCount": 2
-      }
-    },
-    {
-      "observationId": "obs-pokemon-card-korea-image",
-      "surfaceId": "pokemon-card-korea-image",
-      "kind": "known-positive",
-      "queryUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
-      "queryParameters": {
-        "era": "S",
-        "set": "S10a",
-        "asset": "S10a_058.png"
-      },
-      "retrievedAt": "2026-08-28",
-      "expectedIdentifiers": [
-        "SPEC-0236",
-        "s10a",
-        "058/071",
-        "잠만보"
-      ],
-      "validatesEdges": [
-        "pokemon-card-korea-image-positive"
-      ],
-      "outcome": "The retained exact publisher render positively identifies Korean Snorlax s10a 058/071 and its printed rarity; it establishes no physical finish.",
-      "rawRecordRef": "inline-record",
-      "rawRecordHash": "sha256:a1bd14e83364e9a5177355c7be0a295fdc0b83dce478947a48980bcbb9c99a19",
-      "rawRecord": {
-        "specimenId": "SPEC-0236",
-        "sha256": "sha256:17501d9725a033f7164a607bca023ce3dd4af4670d075555277ba852359370f5",
-        "localSetCode": "s10a",
-        "collectorNumber": "058/071",
-        "cardName": "잠만보",
-        "absenceCapability": false,
-        "finishCapability": false
       }
     }
   ],
@@ -12811,9 +12683,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12823,9 +12695,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12835,9 +12707,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12847,9 +12719,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12859,9 +12731,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12871,9 +12743,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12883,9 +12755,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12895,9 +12767,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12907,9 +12779,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12919,9 +12791,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12931,9 +12803,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12943,9 +12815,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12955,9 +12827,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12967,9 +12839,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12979,9 +12851,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -12991,9 +12863,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -13003,9 +12875,9 @@
     {
       "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512",
       "providerId": "pokemon-card-korea",
-      "surfaceId": "pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-historical-detail",
       "capabilityEdgeIds": [
-        "pokemon-card-korea-image-positive"
+        "pokemon-card-korea-bs2010002030-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
