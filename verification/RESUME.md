@@ -939,7 +939,7 @@ Moved here from `HANDOVER.md` in #103; the detail below is this file's job.
 | **PokéCottage** `pokecottage.com` / `pokecottagecdn.com` | scriptable structured master-set rows | tier-3 positive confirmation of the exact card, set, promo, date, artist, rarity or named variant stated by a retained row; never absence by omission |
 | **Elite Fourum** `elitefourum.com` | scriptable (Discourse JSON: `/search.json`, `/t/<id>.json`) | collector-community facts (promo languages, 1st-edition timeline) |
 | **LigaPokemon** `ligapokemon.com.br` | **datacenter IPs banned (Cloudflare 1008)** — use an authenticated user browser session | Brazilian/Portuguese marketplace listings |
-| **Cardmarket** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | seller photos of physical cards (a real photo of a card in language X is valid; the language *filter* is not) |
+| **Cardmarket** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | exact product images or seller photos whose card face visibly carries language X are positive evidence; the selected language *filter*, offers and counts are not |
 
 PokéCottage's Snorlax page loads its rows from
 `https://pokecottagecdn.com/mastersets/data/143-snorlax-data.js`. Retain the exact structured row,

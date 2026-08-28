@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 30,
-   "evidenceRecords": 1142,
-   "uniqueUrls": 1135,
+   "evidenceRecords": 1143,
+   "uniqueUrls": 1136,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3476
+   "claimsAttributed": 3478
   }
  },
  "providers": [
@@ -641,7 +641,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 396,
-   "claimsSupported": 936
+   "claimsSupported": 937
   },
   {
    "providerId": "pokemontcgio",
@@ -821,8 +821,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 4,
-   "claimsSupported": 5
+   "uniqueSources": 5,
+   "claimsSupported": 6
   },
   {
    "providerId": "seller-listing-photo",
@@ -7788,7 +7788,8 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket product page",
-    "Cardmarket stock image (visual evidence)"
+    "Cardmarket stock image (visual evidence)",
+    "user + read off 5x upscaled crop of the scan"
    ],
    "dimensions": [
     "finish",
@@ -7804,7 +7805,7 @@
     "xm2a 136 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex/Hops-Snorlax-m2a136",
@@ -10340,6 +10341,23 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0315-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0604-P02"
    ],
    "retrievedAt": null,
    "usageCount": 1

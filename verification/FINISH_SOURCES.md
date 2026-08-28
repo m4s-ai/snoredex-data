@@ -39,11 +39,11 @@ population report, or catalogue omission does not prove that a version does not 
 | Identified physical scan | Visible finish, pattern, marking, and size on that specimen | No |
 | Owner attestation | A review lead, or corroboration when recorded with a scan | No |
 
-For Cardmarket, keep the image and catalogue claims separate. A retained product image may support
-only facts visible on the pictured Japanese or English card, including a visible finish. A
-product/language filter combination is not evidence that a localized card exists under that
-collector number; in particular, a Traditional Chinese filter cannot be projected onto the card
-shown. Neither filters nor missing images establish absence.
+For Cardmarket, keep the image and catalogue claims separate. A retained product or seller image
+may support only facts visible on the pictured card, including its printed language, identity and
+any visibly demonstrated finish. A product/language filter combination is not evidence that a
+localized card exists under that collector number; the selected language cannot be projected onto
+a card image printed in another language. Neither filters nor missing images establish absence.
 
 ### Recording what a scan shows (#150)
 

@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-28",
-  "projectionVersion": "f22d6a8d3953cb1e99943712a7c7c3be58f9b80936a00d3c56287ace6a365eaa",
+  "projectionVersion": "8cf73077d14e2df44e0c64c9292d04f254ebb0605149ad6bd426836f71c630b7",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -15,7 +15,7 @@
     "unmappedReleases": 76,
     "cardReleases": 635,
     "physicalPrintings": 695,
-    "sourceObservations": 2267
+    "sourceObservations": 2269
   },
   "groups": [
     {
@@ -4866,7 +4866,7 @@
               "finish": "mirror-holo",
               "edition": null,
               "foilPattern": "poke-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
@@ -4874,7 +4874,20 @@
               "sourceFinishUnitId": "F0604",
               "sourcePrintingId": "F0604-P02",
               "establishingClaimId": "CLAIM:finish:F0604-P02",
+              "specimenIds": [
+                "SPEC-0410"
+              ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+                },
+                {
+                  "url": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment. Retained as SPEC-0410."
+                },
                 {
                   "url": "https://www.pokemon-card.com/ex/m2a/index.html",
                   "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -4978,39 +4991,57 @@
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:0:8b0b29f7efff8575",
+              "observationId": "finish:F0604-P02:0:a971f565ce22278f",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern",
+              "contentHash": "72de31d3e8c347c389b5ae92b9970b36121fc56eeab1cdda6a671d302a53ed68",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0604-P02:1:209137131f13e88e",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
+              "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment. Retained as SPEC-0410.",
+              "contentHash": "00e1ff8bc0ea306de5f562e712aed6c72b057dc922342380fd82297497624256",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0604-P02:2:8b0b29f7efff8575",
               "kind": "finish",
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "bc835cbc328b0ea8d51ca2f1dfb4e789c02989038672e9eb2cb7fad256c8cbb6",
+              "contentHash": "525e36197e012fb7f613fd2fd072a7aca49dd12e0640480f85239b352205fa7a",
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:1:c2330fed34cbcc7f",
+              "observationId": "finish:F0604-P02:3:c2330fed34cbcc7f",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://www.pokeca.net/product/22292",
               "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment.",
-              "contentHash": "619b05100c368c835cb0ec0b6b852d861055c8b10e7d31dad43816de4e39203d",
+              "contentHash": "37f6ddee61859adc46d6afa28ff9cc9994f5807b8499711e33bb5105744a53bf",
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:2:767034ab3d1b2860",
+              "observationId": "finish:F0604-P02:4:767034ab3d1b2860",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "ac963ad920f4d1a96671a4ff65ebed04906b52e75468be8121dd3f8de65c9719",
+              "contentHash": "231d7604d6481eb11d6d6f99dea2a6f7daa8a2d7d938f9002f4639491aece403",
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:3:79682a0bcb65356f",
+              "observationId": "finish:F0604-P02:5:79682a0bcb65356f",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "5dd679f88895ba98bebf21e87b752dee9474a17b79abbb8eb7f095da7e9cc214",
+              "contentHash": "d7fbeb63fbd174844861b5755611fed036f4f88e59967bcf363ac973f921540a",
               "image": null
             },
             {
