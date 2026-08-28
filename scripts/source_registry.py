@@ -608,8 +608,6 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     # tie-break is earliest mention, and "Cardmarket seller ..." starts at the same offset as the
     # bare catalogue pattern, so list order decides it here.
     (re.compile(r"cardmarket seller", re.I), "cardmarket-listing-photo"),
-    (re.compile(r"cardmarket.*product (?:image|scan)", re.I),
-     "cardmarket-product-image"),
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
     (re.compile(r"third-party scan archive|pok[eé]cardex", re.I), "pokecardex"),

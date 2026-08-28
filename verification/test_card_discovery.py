@@ -274,7 +274,7 @@ class CardDiscoveryTests(unittest.TestCase):
         )
         self.assertEqual(
             registry.resolve_provider(None, "retained Cardmarket product scan"),
-            "cardmarket-product-image",
+            "cardmarket",
         )
         self.assertEqual(
             registry.resolve_provider(
