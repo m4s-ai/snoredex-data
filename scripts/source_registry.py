@@ -407,11 +407,18 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
         "category": "marketplace-catalogue",
         "authorityTier": 5,
-        "coverage": "product catalogue, images, and marketplace availability",
+        "coverage": "product/filter metadata and retained Japanese or English product images",
         "supportsAbsence": False,
         "usedFor": ["product", "image", "finish"],
         "attribution": "Product catalogue and images via Cardmarket.",
-        "notes": "The catalogue over-claims languages — this is the finding the project exists to document. Never verification.",
+        "notes": (
+            "Retained product images may positively establish only facts visible on the pictured "
+            "Japanese or English card, including a visible finish. Product/language filter "
+            "combinations and catalogue language metadata do not establish a localized release "
+            "or collector number; in particular, a Traditional Chinese filter is not evidence "
+            "that the card was released under that product number. Missing products, images, "
+            "filters, or listings never establish absence."
+        ),
     },
     {
         "providerId": "pokemontcgio",

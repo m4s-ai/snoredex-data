@@ -2235,9 +2235,10 @@
       "finishCapability": {
         "mode": "product-subtype",
         "vocabulary": [
-          "product/listing-native rarity or finish label"
+          "product/listing-native rarity or finish label",
+          "finish directly visible on a retained Japanese or English product image"
         ],
-        "publicationForm": "catalogue product field or retained seller photo",
+        "publicationForm": "positive catalogue field or retained Japanese or English product image",
         "closedWithinScope": false
       },
       "coverageEdges": [
@@ -2281,13 +2282,14 @@
           "knownPositiveObservationId": "obs-cardmarket",
           "boundary": {
             "outsideScope": [
+              "localized release identity inferred from a product/language filter",
               "language-filter silence",
               "missing products",
               "seller inventory",
               "other localities"
             ],
             "zeroResultMeans": "unknown",
-            "challenge": "A missing listing or product filter result cannot refute a printing."
+            "challenge": "A filter combination cannot establish a localized release or collector number, and a missing listing or product filter result cannot refute a printing."
           }
         }
       ]

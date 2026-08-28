@@ -83,8 +83,11 @@ Finish, foil pattern, markings, distribution, size, and explicit error class liv
 
 A confirmed language claim establishes at most a card release. A physical-printing node requires
 positive evidence for the manufacturing classification. Current `finish_units.json` records with
-`verificationStatus=confirmed` may establish one; `marketplace-claimed` records remain candidate
-claims because Cardmarket is not external verification.
+`verificationStatus=confirmed` may establish one. Cardmarket product and language-filter metadata
+remain candidate claims because those catalogue fields are not external verification. A retained
+Cardmarket product image may instead establish facts directly visible on the pictured Japanese or
+English card, including finish. The image does not project a language filter onto a localized
+release or collector number, and neither the filter nor a missing image establishes absence.
 
 ## Measured result
 

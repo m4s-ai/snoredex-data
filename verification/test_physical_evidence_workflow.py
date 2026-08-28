@@ -7,7 +7,7 @@ import json
 import importlib.util
 from collections import defaultdict
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -56,6 +56,18 @@ def main() -> None:
         "every PR #323 specimen must occur in exactly one reviewed issue manifest"
     )
     specimen_by_id = {row["specimenId"]: row for row in specimens}
+    cardmarket_catalogue_specimens = [
+        row for row in specimens
+        if urlparse(row.get("photographSource", "")).hostname
+        == "product-images.s3.cardmarket.com"
+    ]
+    assert cardmarket_catalogue_specimens
+    assert {
+        row["language"] for row in cardmarket_catalogue_specimens
+    } <= {"Japanese", "English"}, (
+        "Cardmarket product images may support pictured Japanese or English cards only; "
+        "catalogue language filters do not establish another localized release"
+    )
     manifest_fields = {
         "setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
         "observed", "recordedAt", "citedBy", "physicalObservation", "listingUrl",

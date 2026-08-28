@@ -306,10 +306,10 @@ gap, never a finding.
 
 - **Organization:** Cardmarket (Sammelkartenmarkt GmbH & Co. KG)
 - **Terms:** Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.
-- **Coverage:** product catalogue, images, and marketplace availability
+- **Coverage:** product/filter metadata and retained Japanese or English product images
 - **Can establish absence:** no — positive evidence only
 - **Attribution:** Product catalogue and images via Cardmarket.
-- **Notes:** The catalogue over-claims languages — this is the finding the project exists to document. Never verification.
+- **Notes:** Retained product images may positively establish only facts visible on the pictured Japanese or English card, including a visible finish. Product/language filter combinations and catalogue language metadata do not establish a localized release or collector number; in particular, a Traditional Chinese filter is not evidence that the card was released under that product number. Missing products, images, filters, or listings never establish absence.
 
 ### Internal derivation from a sibling record
 
