@@ -157,8 +157,15 @@
       "providerId": "cardmarket",
       "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
       "authorityTier": 5,
+      "licenseOrTerms": "Site terms.",
+      "rawRetention": "Retain product URL/id, captured product fields, retrieval date and SHA-256."
+    },
+    {
+      "providerId": "cardmarket-product-image",
+      "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
+      "authorityTier": 2,
       "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
-      "rawRetention": "Retain product URL/id, captured product fields or image, retrieval date and SHA-256."
+      "rawRetention": "Retain the exact product image, product id, capture date and SHA-256 when accepted as a stable specimen."
     },
     {
       "providerId": "pokemontcgio",
@@ -2209,22 +2216,21 @@
     {
       "surfaceId": "cardmarket-products",
       "providerId": "cardmarket",
-      "label": "Cardmarket product pages and images",
+      "label": "Cardmarket product pages",
       "state": "rate-limited",
-      "failureState": "Rolling rate limits and seller/inventory changes make scripted coverage unstable.",
+      "failureState": "Rolling rate limits and catalogue changes make scripted coverage unstable.",
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Retain exact product/listing id and image; re-check only within rate-limit policy.",
+      "lastCheckedAt": "2026-08-28",
+      "freshnessPolicy": "Retain the exact product id and fields; re-check only within rate-limit policy.",
       "query": {
         "method": "GET",
         "endpoint": "https://www.cardmarket.com/en/Pokemon/Products/Singles/{set}/{product}",
         "parameters": [
           "set slug",
-          "product slug",
-          "listing id when specimen-backed"
+          "product slug"
         ],
-        "pagination": "product pages and seller listings are retained separately; language filters never close availability",
+        "pagination": "product pages are retained separately; language filters never close availability",
         "expectedIdentifiers": [
           "product URL",
           "set slug",
@@ -2235,10 +2241,9 @@
       "finishCapability": {
         "mode": "product-subtype",
         "vocabulary": [
-          "product/listing-native rarity or finish label",
-          "finish directly visible on a retained Japanese or English product image"
+          "product-native rarity or finish label"
         ],
-        "publicationForm": "positive catalogue field or retained Japanese or English product image",
+        "publicationForm": "positive catalogue field",
         "closedWithinScope": false
       },
       "coverageEdges": [
@@ -2257,18 +2262,16 @@
               "MULTIPLE"
             ],
             "productCategories": [
-              "marketplace-product",
-              "marketplace-image"
+              "marketplace-product"
             ],
             "timeRange": {
               "start": null,
               "end": null,
-              "basis": "positive retained product/listing records only"
+              "basis": "positive retained product records only"
             }
           },
           "positiveEvidenceCapabilities": [
             "product",
-            "image",
             "finish",
             "card-existence"
           ],
@@ -2290,6 +2293,90 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "A filter combination cannot establish a localized release or collector number, and a missing listing or product filter result cannot refute a printing."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "cardmarket-product-images",
+      "providerId": "cardmarket-product-image",
+      "label": "Retained exact Cardmarket product images",
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-28",
+      "freshnessPolicy": "Retain the exact image bytes, product id, capture date and SHA-256 for every accepted visible-card claim.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://product-images.s3.cardmarket.com/51/{set}/{productId}/{productId}.jpg",
+        "parameters": [
+          "set code",
+          "product id"
+        ],
+        "pagination": "not paginated; each retained image establishes only its pictured card",
+        "expectedIdentifiers": [
+          "product id",
+          "visible localized card text",
+          "collector number or other printed identity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "specimen-observation",
+        "vocabulary": [
+          "visible finish/pattern/marking"
+        ],
+        "publicationForm": "retained exact product image of one identified card",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "cardmarket-product-image-positive",
+          "coverage": {
+            "localities": [
+              "GLOBAL"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "marketplace-product-image"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "retained exact product images only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "identity",
+            "finish",
+            "edition",
+            "card-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Each retained image proves only the visible properties of its pictured card."
+          },
+          "knownPositiveObservationId": "obs-cardmarket-product-image",
+          "boundary": {
+            "outsideScope": [
+              "selected language filters",
+              "product-page language metadata",
+              "offers and seller counts",
+              "unpictured variants",
+              "complete set"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A retained product image supports only the language, identity and finish visible on that card face; filters, offers, counts and missing images remain non-evidence."
           }
         }
       ]
@@ -4107,6 +4194,31 @@
         "cardmarket-positive"
       ],
       "outcome": "The canonical product page is positive catalogue identity evidence only."
+    },
+    {
+      "observationId": "obs-cardmarket-product-image",
+      "surfaceId": "cardmarket-product-images",
+      "kind": "known-positive",
+      "queryUrl": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
+      "queryParameters": {
+        "set": "SM-P",
+        "productId": "470044"
+      },
+      "retrievedAt": "2026-08-28",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "cardmarket-product-image",
+        "recordKey": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg"
+      },
+      "expectedIdentifiers": [
+        "SM-P",
+        "297",
+        "F0400-P01"
+      ],
+      "validatesEdges": [
+        "cardmarket-product-image-positive"
+      ],
+      "outcome": "The retained exact product image visibly establishes the Japanese SM-P 297 card and its pictured finish only."
     },
     {
       "observationId": "obs-pokemontcgio",

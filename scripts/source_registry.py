@@ -403,21 +403,39 @@ PROVIDERS: list[dict[str, Any]] = [
         "displayName": "Cardmarket",
         "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
         "homepage": "https://www.cardmarket.com",
-        "hosts": ["www.cardmarket.com", "cardmarket.com", "product-images.s3.cardmarket.com"],
-        "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+        "hosts": ["www.cardmarket.com", "cardmarket.com"],
+        "licenseOrTerms": "Site terms.",
         "category": "marketplace-catalogue",
         "authorityTier": 5,
-        "coverage": "product/filter metadata and retained Japanese or English product images",
+        "coverage": "product and filter metadata",
         "supportsAbsence": False,
-        "usedFor": ["product", "image", "finish"],
-        "attribution": "Product catalogue and images via Cardmarket.",
+        "usedFor": ["product", "finish"],
+        "attribution": "Product catalogue via Cardmarket.",
         "notes": (
-            "Retained product images may positively establish only facts visible on the pictured "
-            "Japanese or English card, including a visible finish. Product/language filter "
-            "combinations and catalogue language metadata do not establish a localized release "
-            "or collector number; in particular, a Traditional Chinese filter is not evidence "
-            "that the card was released under that product number. Missing products, images, "
-            "filters, or listings never establish absence."
+            "Product/language filter combinations and catalogue language metadata do not "
+            "establish a localized release or collector number; in particular, a Traditional "
+            "Chinese filter is not evidence that the card was released under that product "
+            "number. Missing products, images, filters, or listings never establish absence."
+        ),
+    },
+    {
+        "providerId": "cardmarket-product-image",
+        "displayName": "Cardmarket exact product image",
+        "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
+        "homepage": "https://www.cardmarket.com",
+        "hosts": ["product-images.s3.cardmarket.com"],
+        "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+        "category": "marketplace-photo",
+        "authorityTier": 2,
+        "coverage": "individual cards whose printed text, identity or finish is visible in an exact retained product image",
+        "supportsAbsence": False,
+        "usedFor": ["language", "identity", "finish", "edition", "image"],
+        "attribution": "Exact retained product image via Cardmarket.",
+        "notes": (
+            "The image is positive evidence only for properties visible on the pictured card. "
+            "The surrounding product page, selected language filter, offers and counts remain "
+            "tier-5 catalogue metadata and never establish another localized release or absence. "
+            "Retain accepted images as SPEC-nnnn records so the observation is reviewable."
         ),
     },
     {
@@ -590,6 +608,8 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     # tie-break is earliest mention, and "Cardmarket seller ..." starts at the same offset as the
     # bare catalogue pattern, so list order decides it here.
     (re.compile(r"cardmarket seller", re.I), "cardmarket-listing-photo"),
+    (re.compile(r"cardmarket.*product (?:image|scan)", re.I),
+     "cardmarket-product-image"),
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
     (re.compile(r"third-party scan archive|pok[eé]cardex", re.I), "pokecardex"),
