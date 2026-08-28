@@ -839,10 +839,21 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
     return result
 
 
+def registry_count_errors(registry: dict) -> list[str]:
+    """Return a bounded error when declared specimen metadata drifts from the records."""
+    specimens = registry.get("specimens", [])
+    if registry.get("count") != len(specimens):
+        return [
+            f"specimen count differs: declared {registry.get('count')!r}, actual {len(specimens)}"
+        ]
+    return []
+
+
 def command_evidence_check(*, check_projection: bool = True) -> int:
     """Check the evidence slice without network access or generated-output writes."""
-    errors: list[str] = []
-    specimens = load_registry().get("specimens", [])
+    registry = load_registry()
+    errors = registry_count_errors(registry)
+    specimens = registry.get("specimens", [])
     photographed = [row for row in specimens if row.get("photograph")]
     for specimen in photographed:
         photograph = specimen.get("photograph")

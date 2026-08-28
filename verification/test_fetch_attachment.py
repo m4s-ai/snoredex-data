@@ -264,6 +264,13 @@ def main() -> None:
         assert fetch_attachment.command_evidence_check(check_projection=False) == 0
         assert seen_allow_small == [True, False, False]
         fetch_attachment.validate = original_validate
+        registry.write_text(
+            json.dumps({"count": len(records) - 1, "specimens": records}), encoding="utf-8"
+        )
+        assert fetch_attachment.command_evidence_check(check_projection=False) == 1
+        registry.write_text(
+            json.dumps({"count": len(records), "specimens": records}), encoding="utf-8"
+        )
         photo_paths[0].write_bytes(image[:-1] + b"\x00")
         assert fetch_attachment.command_evidence_check(check_projection=False) == 1
     finally:
