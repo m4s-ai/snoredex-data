@@ -1938,10 +1938,12 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
             )
             check(
                 "S11",
-                "Specimen registry carries schema and version metadata",
+                "Specimen registry metadata matches its contents",
                 "FAIL",
-                bool(specimen_doc.get("schema") and specimen_doc.get("schemaVersion")),
-                "schema and schemaVersion are required for a canonical store",
+                bool(specimen_doc.get("schema") and specimen_doc.get("schemaVersion"))
+                and specimen_doc.get("count") == len(specimens),
+                "schema and schemaVersion are required, and count must equal the specimen array length; "
+                f"declared={specimen_doc.get('count')!r} actual={len(specimens)}",
             )
             check(
                 "S12",
