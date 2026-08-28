@@ -256,7 +256,7 @@ def official_rows() -> list[dict[str, Any]]:
             "catchUpOf": "the exact Traditional Chinese counterpart established by its printed attacks and card traits",
             "providerId": "pokemon-card-asia",
             "sourceUrl": raw["sourceUrl"],
-            "corroborated": True,
+            "corroborated": False,
             "markAssetUrl": raw["raw"].get("setSymbolUrl"),
             "cardImageUrl": raw["raw"]["cardImageUrl"],
             "releaseDate": date,

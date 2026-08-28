@@ -150,12 +150,6 @@ ISSUE_UNITS = sorted({
     "U0788", "U0793",
 })
 
-ORIGINALLY_MATCHED_DETAILS = {
-    "127", "273", "274", "439", "440", "1006", "1806", "2297", "2468",
-    "3281", "6835", "7755", "8631", "10595", "13046",
-}
-
-
 def read(path: Path) -> dict[str, Any] | list[dict[str, Any]]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
@@ -191,7 +185,7 @@ def official_rows() -> list[dict[str, Any]]:
             "catchUpOf": "the exact Thai counterpart established by its printed Thai attacks and card traits",
             "providerId": "pokemon-card-asia",
             "sourceUrl": raw["sourceUrl"],
-            "corroborated": facts["detail"] in ORIGINALLY_MATCHED_DETAILS,
+            "corroborated": False,
             "markAssetUrl": raw["raw"].get("setSymbolUrl"),
             "cardImageUrl": raw["raw"]["cardImageUrl"],
             "releaseDate": date,

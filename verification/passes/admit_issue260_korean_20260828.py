@@ -98,6 +98,7 @@ PROMOS = [
         "providerId": "pokemon-card-korea", "providerRecordId": "SP000000101",
         "sourceUrl": "https://pokemoncard.co.kr/cards/detail/SP000000101",
         "corroboratingSourceUrls": ["https://pokumon.com/card/snorlax-101-s-p-korean-promo/"],
+        "corroborated": True,
         "releaseDate": "2021", "releaseDatePrecision": "year",
     },
     {
@@ -105,6 +106,7 @@ PROMOS = [
         "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", "legacy": ["U0627"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0028", "cardName": "Eevee & Snorlax GX",
         "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
+        "corroborated": True,
         "releaseDate": "2019", "releaseDatePrecision": "year",
     },
     {
@@ -112,6 +114,7 @@ PROMOS = [
         "work": "Snorlax-Plump-Body-Knock-Away", "legacy": ["U0661"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0031", "cardName": "Snorlax",
         "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+        "corroborated": True,
         "releaseDate": "2017", "releaseDatePrecision": "year",
     },
 ]
@@ -148,7 +151,8 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
         "cardName": row["cardName"],
         "catchUpOf": "the exact Korean counterpart established by the printed Korean attacks and card traits",
         "specimenId": row["specimenId"], "providerId": row.get("providerId", "pokemon-card-korea"),
-        "sourceUrl": row["sourceUrl"], "corroborated": True, "markAssetUrl": None,
+        "sourceUrl": row["sourceUrl"],
+        "corroborated": bool(row.get("corroborated")), "markAssetUrl": None,
         "cardImageUrl": row.get("cardImageUrl"),
         "evidence": (
             f"The retained exact Korean card image {row['specimenId']} shows {row['localSetCode']} "

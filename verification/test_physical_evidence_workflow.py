@@ -116,14 +116,36 @@ def main() -> None:
         printing["verificationStatus"] != "confirmed"
         for printing in simplified_chinese_promo["printings"]
     ), "the R/C/U finish guide does not establish a Promo-card finish"
-    indonesian_official_prints = [
-        row for row in read("source_first_prints.json")["prints"]
-        if row["locality"] == "ID" and row["providerId"] == "pokemon-card-asia"
-    ]
-    assert len(indonesian_official_prints) == 30
-    assert all(row["corroborated"] is False for row in indonesian_official_prints), (
-        "matching an existing graph identity is not independent corroboration"
-    )
+    source_first_prints = read("source_first_prints.json")["prints"]
+    single_provider_counts = {
+        ("ID", "pokemon-card-asia"): 30,
+        ("KR", "pokemon-card-korea"): 17,
+        ("TH", "pokemon-card-asia"): 25,
+        ("TW", "pokemon-card-asia"): 40,
+    }
+    independently_corroborated_prints = {
+        "KR:BS2:30/40:base", "KR:S-P:101:base",
+    }
+    for provider_key, expected_count in single_provider_counts.items():
+        official_prints = [
+            row for row in source_first_prints
+            if (row["locality"], row["providerId"]) == provider_key
+            and row["printId"] not in independently_corroborated_prints
+        ]
+        assert len(official_prints) == expected_count
+        assert all(row["corroborated"] is False for row in official_prints), (
+            "matching an existing graph identity is not independent corroboration"
+        )
+    independently_corroborated_promos = {
+        "KR:S-P:101:base", "KR:SM-P:140:base", "KR:XY-P:167:base",
+        "TH:SM-P:083:base",
+    }
+    corroborated_promo_rows = {
+        row["printId"]: row for row in source_first_prints
+        if row["printId"] in independently_corroborated_promos
+    }
+    assert set(corroborated_promo_rows) == independently_corroborated_promos
+    assert all(row["corroborated"] is True for row in corroborated_promo_rows.values())
     dutch = {
         (unit["number"], printing["edition"]): printing
         for unit in finish_units
