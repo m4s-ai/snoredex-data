@@ -108,7 +108,6 @@ SET_DATES = {
     "MC F": ("2026-01-16", "day"),
     "M3 F": ("2026-02-06", "day"),
     "CLF": ("2023", "year"),
-    "SVG": ("2022", "year"),
     "SM-P": ("2020", "year"),
 }
 
@@ -209,7 +208,10 @@ SUPPLEMENTAL = [
     card("existing-as5a222", "SPEC-0038", "AS5a", "222/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("HR", "hyper-rare"), "U0558", card_name="Eevee & Snorlax-GX"),
     card("existing-smp053", "SPEC-0029", "SM-P", "053", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("PROMO", "promo"), "U0414", card_name="Eevee & Snorlax-GX"),
     card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", "hyper-rare"), card_name="Snorlax VMAX"),
-    card("svg021", "", "SVG", "021/049", "Snorlax-Unfazed-Fat-Thumping-Snore", ("no printed rarity symbol", None), "U0467"),
+    card(
+        "svg021", "", "SVG", "021/049", "Snorlax-Unfazed-Fat-Thumping-Snore",
+        ("no printed rarity symbol", None), "U0467", date=("2023-11-10", "day"),
+    ),
 ]
 
 ISSUE_UNITS = sorted({
@@ -285,7 +287,7 @@ def enrich_photo_rows() -> list[dict[str, Any]]:
             "script": SCRIPT,
             "name": "卡比獸",
             "catchUpOf": "the exact Traditional Chinese counterpart established by the photographed card",
-            "corroborated": True,
+            "corroborated": not is_clf,
             "markAssetUrl": None,
             "releaseDate": date,
             "releaseDatePrecision": precision,
@@ -293,7 +295,7 @@ def enrich_photo_rows() -> list[dict[str, Any]]:
             "evidence": (
                 f"The retained listing photograph {row['specimenId']} positively shows Traditional Chinese "
                 f"Snorlax {row['localSetCode']} {row['localNumber']}. "
-                + ("Four independent listings show the same full-card mirror-holo CLF printing."
+                + ("Four retained Shopee seller listings show the same full-card mirror-holo CLF printing."
                    if is_clf else "NACG and Ruten independently identify the exact CHR card as Foil.")
             ),
             "physicalObservation": {
@@ -328,7 +330,7 @@ def supplemental_rows(existing: dict[str, dict[str, Any]]) -> list[dict[str, Any
                 "catchUpOf": "the exact Traditional Chinese S10a Snorlax counterpart",
                 "specimenId": None, "providerId": "52poke",
                 "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89",
-                "corroborated": True, "markAssetUrl": None, "cardImageUrl": None,
+                "corroborated": False, "markAssetUrl": None, "cardImageUrl": None,
                 "evidence": "The retained 52poke card record positively lists Traditional Chinese SVG 021/049 Snorlax with the exact S10a attack text.",
             }
         else:
@@ -638,12 +640,12 @@ def restore_prior_rekey_migrations(graph: dict[str, Any]) -> None:
 
 def apply_finish_evidence(document: dict[str, Any]) -> None:
     document["sources"].update({
-        "tw-clf016-shopee-a": {"url": PHOTO_ROWS[0]["sourceUrl"], "sourceType": "Marketplace physical card photograph", "authorityTier": "physical-specimen", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Exact CLF 016/032 Traditional Chinese card photographed with full-card mirror holo."},
-        "tw-clf016-shopee-b": {"url": PHOTO_ROWS[1]["sourceUrl"], "sourceType": "Marketplace physical card photograph", "authorityTier": "physical-specimen", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Independent exact CLF 016/032 Traditional Chinese mirror-holo card photograph."},
-        "tw-clf016-shopee-c": {"url": PHOTO_ROWS[2]["sourceUrl"], "sourceType": "Marketplace physical card photograph", "authorityTier": "physical-specimen", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Independent exact CLF 016/032 Traditional Chinese mirror-holo card photograph."},
-        "tw-clf016-shopee-d": {"url": PHOTO_ROWS[3]["sourceUrl"], "sourceType": "Marketplace physical card photograph", "authorityTier": "physical-specimen", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Independent exact CLF 016/032 Traditional Chinese mirror-holo card photograph."},
+        "tw-clf016-shopee-a": {"url": PHOTO_ROWS[0]["sourceUrl"], "sourceType": "Seller listing photograph", "authorityTier": "seller-listing-photo", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Exact CLF 016/032 Traditional Chinese card photographed with full-card mirror holo."},
+        "tw-clf016-shopee-b": {"url": PHOTO_ROWS[1]["sourceUrl"], "sourceType": "Seller listing photograph", "authorityTier": "seller-listing-photo", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Additional exact CLF 016/032 Traditional Chinese mirror-holo card photograph."},
+        "tw-clf016-shopee-c": {"url": PHOTO_ROWS[2]["sourceUrl"], "sourceType": "Seller listing photograph", "authorityTier": "seller-listing-photo", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Additional exact CLF 016/032 Traditional Chinese mirror-holo card photograph."},
+        "tw-clf016-shopee-d": {"url": PHOTO_ROWS[3]["sourceUrl"], "sourceType": "Seller listing photograph", "authorityTier": "seller-listing-photo", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Additional exact CLF 016/032 Traditional Chinese mirror-holo card photograph."},
         "tw-s10a077-nacg": {"url": PHOTO_ROWS[4]["sourceUrl"], "sourceType": "Specialist card listing with exact retained image", "authorityTier": "specialist-reference", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Exact S10a F 077/071 CHR listing explicitly identifies the card as Foil."},
-        "tw-s10a077-ruten": {"url": PHOTO_ROWS[5]["sourceUrl"], "sourceType": "Marketplace physical card photograph", "authorityTier": "physical-specimen", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Independent physical photograph of exact Traditional Chinese S10a F 077/071 CHR."},
+        "tw-s10a077-ruten": {"url": PHOTO_ROWS[5]["sourceUrl"], "sourceType": "Seller listing photograph", "authorityTier": "seller-listing-photo", "coverage": "positive-only", "supportsAbsence": False, "languages": [LANGUAGE], "retrievedAt": "2026-08-28", "evidence": "Independent seller photograph of exact Traditional Chinese S10a F 077/071 CHR."},
     })
     rows = [
         {"setCode": "m2a", "releaseSetCode": "M2a F", "number": "136", "languages": [LANGUAGE], "printings": []},
@@ -820,7 +822,11 @@ def main() -> int:
         by_print.pop(print_id, None)
     for row in rows:
         persisted = persisted_source_row(row)
-        if row["printId"] in by_print and row["printId"] in {item["printId"] for item in photos}:
+        if (
+            row["corroborated"]
+            and row["printId"] in by_print
+            and row["printId"] in {item["printId"] for item in photos}
+        ):
             persisted["corroboratingSourceUrls"] = sorted({item["sourceUrl"] for item in photos if item["printId"] == row["printId"]})
         by_print[row["printId"]] = persisted
     prints["prints"] = sorted(by_print.values(), key=lambda row: row["printId"])

@@ -146,6 +146,52 @@ def main() -> None:
     }
     assert set(corroborated_promo_rows) == independently_corroborated_promos
     assert all(row["corroborated"] is True for row in corroborated_promo_rows.values())
+    clf_row = next(
+        row for row in source_first_prints if row["printId"] == "TW:CLF:016/032:base"
+    )
+    assert clf_row["providerId"] == "shopee-tw"
+    assert clf_row["corroborated"] is False
+    assert "corroboratingSourceUrls" not in clf_row
+    s10a_chr_row = next(
+        row for row in source_first_prints if row["printId"] == "TW:S10a F:077/071:base"
+    )
+    assert s10a_chr_row["providerId"] == "ruten"
+    assert s10a_chr_row["corroborated"] is True
+    assert set(s10a_chr_row["corroboratingSourceUrls"]) == {
+        "https://www.nacg.tw/product-details.php?id=149595",
+        "https://www.ruten.com.tw/item/22223353127192/",
+    }
+    svg_row = next(
+        row for row in source_first_prints if row["printId"] == "TW:SVG:021/049:base"
+    )
+    assert svg_row["corroborated"] is False
+    assert (svg_row["releaseDate"], svg_row["releaseDatePrecision"]) == (
+        "2023-11-10", "day",
+    )
+    marketplace_override_sources = {
+        source["url"]: source
+        for unit in finish_units if unit["finishUnitId"] in {"F0037", "F0331"}
+        for printing in unit["printings"]
+        for source in printing["sources"]
+        if source.get("authorityTier") == "seller-listing-photo"
+    }
+    assert set(marketplace_override_sources) == {
+        "https://shopee.tw/product/9736187/25206242683",
+        "https://shopee.tw/product/4914178/22786197647",
+        "https://shopee.tw/product/6777510/50602680694",
+        "https://shopee.tw/product/16896213/51412187955",
+        "https://www.ruten.com.tw/item/22223353127192/",
+    }
+    assert all(
+        source["sourceType"] == "Seller listing photograph"
+        for source in marketplace_override_sources.values()
+    )
+    assert all(
+        source.get("authorityTier") != "physical-specimen"
+        for unit in finish_units if unit["finishUnitId"] in {"F0037", "F0331"}
+        for printing in unit["printings"]
+        for source in printing["sources"]
+    )
     dutch = {
         (unit["number"], printing["edition"]): printing
         for unit in finish_units
