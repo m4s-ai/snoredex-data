@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "1.0.0",
-    "generated": "2026-08-27",
+    "generated": "2026-08-28",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 38,
       "absenceEdges": 3,
       "observations": 40,
-      "resolvedVerdictSources": 1117
+      "resolvedVerdictSources": 1122
     },
     "surfaceStates": {
       "active": 16,
@@ -11937,6 +11937,42 @@
       ]
     },
     {
+      "sourceKey": "https://asia.pokemon-card.com/th/card-img/th00003281.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/th/card-img/th00006835.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/th/card-img/th00010595.png",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-image",
+      "capabilityEdgeIds": [
+        "asia-card-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://asia.pokemon-card.com/th/card-search/detail/10595",
       "providerId": "pokemon-card-asia",
       "surfaceId": "asia-card-search",
@@ -14940,6 +14976,19 @@
       ]
     },
     {
+      "sourceKey": "https://pokumon.com/card/eevee-snorlax-tag-team-gx-083-sm-p-thai-promo",
+      "providerId": "pokumon",
+      "surfaceId": "pokumon-search",
+      "capabilityEdgeIds": [
+        "pokumon-asian-positive",
+        "pokumon-exact-card-finish-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo",
       "providerId": "pokumon",
       "surfaceId": "pokumon-search",
@@ -14950,6 +14999,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://pokumon.com/card/snorlax-082-sv-p-thai-promo",
+      "providerId": "pokumon",
+      "surfaceId": "pokumon-search",
+      "capabilityEdgeIds": [
+        "pokumon-asian-positive",
+        "pokumon-exact-card-finish-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "finish-override"
       ]
     },

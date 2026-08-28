@@ -15,7 +15,7 @@ A complete track means only that its bounded positive slice balances. Silence, z
 | `asia-cn` Simplified Chinese — mainland China | `blocked-by-source` | none | `official-asia-kr-cn` |
 | `asia-kr` Korean | `blocked-by-source` | none | `official-asia-kr-cn` |
 | `asia-id` Indonesian | `complete` | `pokemon-asia-id-snorlax` 31/31 (1 new candidates) | none |
-| `asia-th` Thai | `complete` | `pokemon-asia-th-snorlax` 25/25 (10 new candidates) | none |
+| `asia-th` Thai | `complete` | `pokemon-asia-th-snorlax` 25/25 (0 new candidates) | none |
 | `asia-sea-en` Southeast-Asian English | `needs-evidence` | none | `official-sea-english-card-discovery` |
 
 ## Minimum regressions

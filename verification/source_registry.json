@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-27",
+  "generated": "2026-08-28",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 30,
-   "evidenceRecords": 1117,
-   "uniqueUrls": 1110,
+   "evidenceRecords": 1122,
+   "uniqueUrls": 1115,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3435
+   "claimsAttributed": 3443
   }
  },
  "providers": [
@@ -229,8 +229,8 @@
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 27,
-   "claimsSupported": 32
+   "uniqueSources": 30,
+   "claimsSupported": 38
   },
   {
    "providerId": "pokemon-card-korea",
@@ -393,8 +393,8 @@
     "pokumon.com",
     "www.pokumon.com"
    ],
-   "uniqueSources": 5,
-   "claimsSupported": 9
+   "uniqueSources": 7,
+   "claimsSupported": 11
   },
   {
    "providerId": "pokecottage",
@@ -11098,6 +11098,60 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00003281.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Thai card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0262",
+    "U0205"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00006835.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Thai card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0267",
+    "U0753"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00010595.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Thai card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0272",
+    "U0405"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/10595",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -15567,6 +15621,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokumon.com/card/eevee-snorlax-tag-team-gx-083-sm-p-thai-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish-override"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "override:pokumon-th-smp083"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo",
    "nonUrlEvidenceId": null,
    "providerId": "pokumon",
@@ -15584,6 +15655,23 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-082-sv-p-thai-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish-override"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "override:pokumon-th-svp082"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo",

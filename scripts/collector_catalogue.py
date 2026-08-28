@@ -437,6 +437,10 @@ def release_lookup(releases: list[dict[str, Any]]) -> dict[tuple[str, str, str],
         for code in codes:
             for number in numbers:
                 lookup[(str(code), number, release["language"])].append(release["cardReleaseId"])
+        for code, number in release.get("legacyIdentityAliases") or []:
+            lookup[(str(code), collector_number(number), release["language"])].append(
+                release["cardReleaseId"]
+            )
     return lookup
 
 

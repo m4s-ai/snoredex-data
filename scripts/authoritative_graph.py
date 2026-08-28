@@ -1183,6 +1183,32 @@ def _validate_identity_claims(
     )
     return finish_printings, source_first_prints, observed_specimens, reviewed_source_printings
 
+def _matches_legacy_identity_alias(
+    unit: dict[str, Any], release: dict[str, Any],
+) -> bool:
+    return any(
+        _identity_value("setCode", unit.get("setCode"))
+        == _identity_value("setCode", alias[0])
+        and _identity_value("number", unit.get("number"))
+        == _identity_value("number", alias[1])
+        for alias in release.get("legacyIdentityAliases") or []
+    )
+
+
+def _identity_projection_field_matches(
+    unit: dict[str, Any],
+    release: dict[str, Any],
+    input_field: str,
+    release_field: str,
+    legacy_identity_matches: bool,
+) -> bool:
+    if input_field in {"setCode", "number"} and legacy_identity_matches:
+        return True
+    return _identity_value(input_field, unit.get(input_field)) == _identity_value(
+        input_field, release.get(release_field)
+    )
+
+
 # Identity input projections stay aligned with graph nodes.
 def _validate_identity_projections(
     errors: list[str],
@@ -1205,12 +1231,13 @@ def _validate_identity_projections(
             continue
         set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
         number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
+        legacy_identity_matches = _matches_legacy_identity_alias(unit, release)
         for input_field, release_field in (
             ("language", "language"), ("setCode", set_field), ("number", number_field),
             ("cardKey", "work"),
         ):
-            if _identity_value(input_field, unit.get(input_field)) != _identity_value(
-                input_field, release.get(release_field)
+            if not _identity_projection_field_matches(
+                unit, release, input_field, release_field, legacy_identity_matches,
             ):
                 errors.append(f"identity release is stale: {unit_id}:{input_field}")
 

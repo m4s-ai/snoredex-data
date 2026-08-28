@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 252,
+  "count": 277,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -485,10 +485,25 @@
       "inspectedFrom": "owner photograph",
       "photograph": "SPEC-0026.png",
       "photographSource": "https://github.com/user-attachments/assets/ef4a7af0-ef2a-423f-ae92-5a585c58b97a",
-      "observed": "Thai Eevee & Snorlax-GX photographed by the owner and supplied through issue #166: \"อีวุย&คาบิกอน GX\", พื้นฐาน (Basic), TAG TEAM, HP 270, Colorless; ability \"เชียร์\" for one Colorless; attacks \"ดัมป์เพรส\" 120+ and \"เมกะตันเฟรนส์ GX\" 210; weakness Fighting x2, no resistance, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, \"083/SM-P\", ©2020 Pokémon. The artwork carries a POKÉMON TCG GYM stamp — a distribution marking, markings.role distribution-promo, which implies no finish. This is the printing pokumon listed and nothing else here recorded.",
+      "observed": "Thai Eevee & Snorlax-GX photographed by the owner and supplied through issue #166: \"อีวุย&คาบิกอน GX\", พื้นฐาน (Basic), TAG TEAM, HP 270, Colorless; ability \"เชียร์\" for one Colorless; attacks \"ดัมป์เพรส\" 120+ and \"เมกะตันเฟรนส์ GX\" 210; weakness Fighting x2, no resistance, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, \"083/SM-P\", ©2020 Pokémon. The artwork carries a POKÉMON TCG GYM stamp. The exact physical finish is recorded separately from the card identity.",
       "recordedAt": "2026-08-10",
-      "citedBy": [],
-      "photographSha256": "sha256:a4806fe287896a425654a46854b670fdf8f1e0edfaf04a7ba15f62f827290a26"
+      "citedBy": [
+        "TH:SM-P:083:base"
+      ],
+      "photographSha256": "sha256:a4806fe287896a425654a46854b670fdf8f1e0edfaf04a7ba15f62f827290a26",
+      "listingUrl": "https://pokumon.com/card/eevee-snorlax-tag-team-gx-083-sm-p-thai-promo/",
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "ripple",
+        "markings": "POKÉMON TCG GYM stamp in artwork",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "event-prize",
+          "name": "FunFromHome: Bring the Gym Battle Home round 3"
+        },
+        "cardSize": "standard",
+        "basis": "The owner photograph establishes the exact stamped card identity; Pokumon's exact 083/SM-P Thai record independently classifies its Ripple treatment and event distribution."
+      }
     },
     {
       "specimenId": "SPEC-0027",
@@ -5374,6 +5389,470 @@
         "KR:svG:021/049:base"
       ],
       "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2023023021"
+    },
+    {
+      "specimenId": "SPEC-0253",
+      "setCode": "sc1a T",
+      "number": "127/154",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0253.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00000127.png",
+      "photographSha256": "sha256:a3193ff8b91b36f6c796a266ae881717eb9bdc1bb6118e8e10efb04457c55cb4",
+      "observed": "Complete official Thai render for Snorlax sc1a T 127/154 (base). The printed Thai name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sc1a T:127/154:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/127/"
+    },
+    {
+      "specimenId": "SPEC-0254",
+      "setCode": "sc1b T",
+      "number": "119/153",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0254.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00000273.png",
+      "photographSha256": "sha256:93ad599fca9777b0941adc3b4cf34a2d3eb6c0ab5f92c420bea90d07aedd4bcf",
+      "observed": "Complete official Thai render for Snorlax V sc1b T 119/153 (base). The printed Thai name, collector identity, attacks and rarity RR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sc1b T:119/153:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/273/"
+    },
+    {
+      "specimenId": "SPEC-0255",
+      "setCode": "sc1b T",
+      "number": "120/153",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0255.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00000274.png",
+      "photographSha256": "sha256:775ffc3c0e6209d9a151d0c8d14f8620d3b259518bb2042de6500ef8d8d332cf",
+      "observed": "Complete official Thai render for Snorlax VMAX sc1b T 120/153 (base). The printed Thai name, collector identity, attacks and rarity RRR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sc1b T:120/153:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/274/"
+    },
+    {
+      "specimenId": "SPEC-0256",
+      "setCode": "sc1D T",
+      "number": "132/164",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0256.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00000439.png",
+      "photographSha256": "sha256:4f0429bdb4cfb62ef6b765abe5ce987f210512fc30da54e9ecd243c95b54fbc6",
+      "observed": "Complete official Thai render for Snorlax sc1D T 132/164 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sc1D T:132/164:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/439/"
+    },
+    {
+      "specimenId": "SPEC-0257",
+      "setCode": "sc1D T",
+      "number": "133/164",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0257.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00000440.png",
+      "photographSha256": "sha256:c906c4667a29747a19a9f2541d98eff3adf6689b00eefaa9690dcd2dd607fd3d",
+      "observed": "Complete official Thai render for Snorlax V sc1D T 133/164 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sc1D T:133/164:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/440/"
+    },
+    {
+      "specimenId": "SPEC-0258",
+      "setCode": "sc3b T",
+      "number": "126/158",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0258.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00001006.png",
+      "photographSha256": "sha256:7642e39960730f6ba8b5d0280966a9ff59d4d7f8ed4155f2adb3ff3a08957522",
+      "observed": "Complete official Thai render for Snorlax sc3b T 126/158 (base). The printed Thai name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sc3b T:126/158:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/1006/"
+    },
+    {
+      "specimenId": "SPEC-0259",
+      "setCode": "scA T",
+      "number": "084/135",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0259.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00001806.png",
+      "photographSha256": "sha256:658395dbb5bb8cd863fecb69fe4df4ebbe255d7a2ba4a44507f60ebf6b338b0f",
+      "observed": "Complete official Thai render for Snorlax scA T 084/135 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:scA T:084/135:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/1806/"
+    },
+    {
+      "specimenId": "SPEC-0260",
+      "setCode": "scD T",
+      "number": "111/159",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0260.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00002297.png",
+      "photographSha256": "sha256:dcb65828b9d4453a2edb414dde2bfed64d6d6d0b3a029fd5c33e084e4841976d",
+      "observed": "Complete official Thai render for Snorlax scD T 111/159 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:scD T:111/159:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/2297/"
+    },
+    {
+      "specimenId": "SPEC-0261",
+      "setCode": "s8b",
+      "number": "126/184",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0261.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00002468.png",
+      "photographSha256": "sha256:3dd2e13ee14cde039ce827072fded43904f74e00a2109065676f4aad1c7e9ed8",
+      "observed": "Complete official Thai render for Snorlax s8b 126/184 (base). The printed Thai name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:s8b:126/184:base",
+        "U0176"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/2468/"
+    },
+    {
+      "specimenId": "SPEC-0262",
+      "setCode": "s10b",
+      "number": "056/071",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0262.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00003281.png",
+      "photographSha256": "sha256:5afbda46e1128d441f4bf883aa9ea46653ac8080626b7b59c3b9dd3df4b37858",
+      "observed": "Complete official Thai render for Snorlax s10b 056/071 (base). The printed Thai name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:s10b:056/071:base",
+        "U0205"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/3281/"
+    },
+    {
+      "specimenId": "SPEC-0263",
+      "setCode": "SH",
+      "number": "026/038",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0263.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00003343.png",
+      "photographSha256": "sha256:6cbda4858fa939c6597244ad758e14a76d3207b4221051ef122b04373e439518",
+      "observed": "Complete official Thai render for Snorlax SH 026/038 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:SH:026/038:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/3343/"
+    },
+    {
+      "specimenId": "SPEC-0264",
+      "setCode": "s10a",
+      "number": "058/071",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0264.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
+      "photographSha256": "sha256:2218c4d96cdedcf1d687626197d0d6f41a4963a0224aacfa6813861d0eaa2f85",
+      "observed": "Complete official Thai render for Snorlax s10a 058/071 (base). The printed Thai name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:s10a:058/071:base",
+        "U0347"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/3495/"
+    },
+    {
+      "specimenId": "SPEC-0265",
+      "setCode": "sv2a",
+      "number": "143/165",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0265.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00006241.png",
+      "photographSha256": "sha256:8007da2d5151368b3aa3b73e36221867f9c46580b7abcb63008574244a81571e",
+      "observed": "Complete official Thai render for Snorlax sv2a 143/165 (base). The printed Thai name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sv2a:143/165:base",
+        "U0106"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/6241/"
+    },
+    {
+      "specimenId": "SPEC-0266",
+      "setCode": "sv2a",
+      "number": "181/165",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0266.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00006363.png",
+      "photographSha256": "sha256:0695ee49e6bbbea3d8951626b467813fd639d7240d9d1740357475cb5f6f1878",
+      "observed": "Complete official Thai render for Snorlax sv2a 181/165 (base). The printed Thai name, collector identity, attacks and rarity AR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sv2a:181/165:base",
+        "U0052"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/6363/"
+    },
+    {
+      "specimenId": "SPEC-0267",
+      "setCode": "SV-P",
+      "number": "082/SV-P",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0267.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00006835.png",
+      "photographSha256": "sha256:27b0bc9b57b003897089c74664ab6b4223f40c2f4a6f8ed2e99abfd8112f0fc3",
+      "observed": "Complete official Thai render for Snorlax SV-P 082/SV-P (base). The printed Thai name, collector identity, attacks and rarity PROMO establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:SV-P:082/SV-P:base",
+        "U0753"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/6835/"
+    },
+    {
+      "specimenId": "SPEC-0268",
+      "setCode": "sv4K",
+      "number": "059/066",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0268.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00007440.png",
+      "photographSha256": "sha256:e5b9ce4f1a4169e066c021e557efddb304b7b2125a9698037ad0ca8c5d5c455f",
+      "observed": "Complete official Thai render for Snorlax Doll sv4K 059/066 (base). The printed Thai name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sv4K:059/066:base",
+        "U0262"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/7440/"
+    },
+    {
+      "specimenId": "SPEC-0269",
+      "setCode": "sv4a",
+      "number": "145/190",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0269.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00007755.png",
+      "photographSha256": "sha256:bf1c521252000f872f482f13da60c77c074950562c2a1c98ec1407cfe7f381d2",
+      "observed": "Complete official Thai render for Snorlax sv4a 145/190 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sv4a:145/190:base",
+        "U0309"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/7755/"
+    },
+    {
+      "specimenId": "SPEC-0270",
+      "setCode": "sv5a",
+      "number": "051/066",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0270.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00008167.png",
+      "photographSha256": "sha256:027a1330a4a3ad80cbcd562e0b09ae1b8f7aa9247eb587d2822cab5fbf0e4caf",
+      "observed": "Complete official Thai render for Snorlax sv5a 051/066 (base). The printed Thai name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sv5a:051/066:base",
+        "U0235"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/8167/"
+    },
+    {
+      "specimenId": "SPEC-0271",
+      "setCode": "sv4a",
+      "number": "310/190",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0271.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00008631.png",
+      "photographSha256": "sha256:679ef6aab75627b046eee9a05771fdd2738db14ffe54b6e2764d5c07a42a8dc5",
+      "observed": "Complete official Thai render for Snorlax sv4a 310/190 (base). The printed Thai name, collector identity, attacks and rarity S establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:sv4a:310/190:base",
+        "U0387"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/8631/"
+    },
+    {
+      "specimenId": "SPEC-0272",
+      "setCode": "svM",
+      "number": "094/175",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0272.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00010595.png",
+      "photographSha256": "sha256:3690ce9fcf6bfeb63e695620b1f9120747bb73540ccbd8bb91b8986ed5d89838",
+      "observed": "Complete official Thai render for Snorlax ex svM 094/175 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:svM:094/175:base",
+        "U0405"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/10595/"
+    },
+    {
+      "specimenId": "SPEC-0273",
+      "setCode": "SV9s",
+      "number": "109/139",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0273.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00011193.png",
+      "photographSha256": "sha256:713701b2092f9ba9e1846258bf49c7033cf08944e4d3124ca535b97490a37978",
+      "observed": "Complete official Thai render for Hop's Snorlax SV9s 109/139 (base). The printed Thai name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:SV9s:109/139:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/11193/"
+    },
+    {
+      "specimenId": "SPEC-0274",
+      "setCode": "MA3",
+      "number": "136/193",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0274.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00013046.png",
+      "photographSha256": "sha256:acdedebae77423eda037f5aeb2856ca5b8bbfa7f9145b40e7a4af2e08d856ee8",
+      "observed": "Complete official Thai render for Hop's Snorlax MA3 136/193 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:MA3:136/193:base",
+        "U0130"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/13046/"
+    },
+    {
+      "specimenId": "SPEC-0275",
+      "setCode": "MA3",
+      "number": "136/193",
+      "variant": "V1",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0275.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00013749.png",
+      "photographSha256": "sha256:8360832efcc054723e810600be2d32f8104a199d3d35edbed5dc117d6df0187b",
+      "observed": "Complete official Thai render for Hop's Snorlax MA3 136/193 (V1). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:MA3:136/193:V1",
+        "U0788"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/13749/"
+    },
+    {
+      "specimenId": "SPEC-0276",
+      "setCode": "MA3",
+      "number": "136/193",
+      "variant": "V2",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0276.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00013750.png",
+      "photographSha256": "sha256:a796e42074485c5452121b22abfb74279eff8105be3e58f0371e4fdc72488862",
+      "observed": "Complete official Thai render for Hop's Snorlax MA3 136/193 (V2). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:MA3:136/193:V2",
+        "U0793"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/13750/"
+    },
+    {
+      "specimenId": "SPEC-0277",
+      "setCode": "MA4",
+      "number": "091/123",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "official Pokémon Asia Thai card-detail render",
+      "photograph": "SPEC-0277.png",
+      "photographSource": "https://asia.pokemon-card.com/th/card-img/th00013857.png",
+      "photographSha256": "sha256:f66a1c4dd7fd4a4262372f8931b398110a6351d163ddac845b98d44bc10086f7",
+      "observed": "Complete official Thai render for Snorlax MA4 091/123 (base). The printed Thai name, collector identity, attacks and rarity C establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TH:MA4:091/123:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/13857/"
     }
   ]
 }
