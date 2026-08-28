@@ -255,16 +255,19 @@ def legacy_match_for_physical(
     legacy_by_core: dict[bytes, list[dict[str, Any]]],
 ) -> dict[str, Any] | None:
     """Match predecessor state semantically; never let an ordinal id steal a row."""
-    source_printing_id = physical.get("sourcePrintingId")
-    if source_printing_id in legacy_by_source:
-        return legacy_by_source[source_printing_id]
+    release_id = str(physical.get("cardReleaseId") or "")
+    source_match = legacy_by_source.get(physical.get("sourcePrintingId"))
+    if source_match \
+            and printing_semantic_core_key(release_id, source_match) == printing_semantic_core_key(release_id, physical) \
+            and (physical.get("edition") is None or source_match.get("edition") in (None, "—", physical.get("edition"))):
+        return source_match
     semantic = legacy_by_semantic.get(
-        printing_semantic_key(str(physical.get("cardReleaseId") or ""), physical)
+        printing_semantic_key(release_id, physical)
     )
     if semantic:
         return semantic
     candidates = legacy_by_core.get(
-        printing_semantic_core_key(str(physical.get("cardReleaseId") or ""), physical), []
+        printing_semantic_core_key(release_id, physical), []
     )
     compatible = [
         row for row in candidates
