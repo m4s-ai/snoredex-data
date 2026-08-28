@@ -166,6 +166,12 @@ def main() -> None:
         assert printing["sources"][0]["claimFields"] == expected_photo_fields
 
     source_registry = read("source_registry.json")["evidence"]
+    for specimen_id in {f"SPEC-{number:04d}" for number in range(319, 325)}:
+        marketplace_specimen = specimen_by_id[specimen_id]
+        assert marketplace_specimen["heldBy"] == "third-party seller"
+        assert projector.specimen_source(marketplace_specimen)["sourceType"] == (
+            "Seller listing photograph"
+        )
     pokecardex_source = next(
         row for row in source_registry
         if row.get("canonicalUrl") == pokecardex["photographSource"]

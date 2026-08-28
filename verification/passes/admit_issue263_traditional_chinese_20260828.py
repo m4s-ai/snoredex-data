@@ -364,7 +364,11 @@ def specimen_row(row: dict[str, Any]) -> dict[str, Any]:
     result = {
         "specimenId": row["specimenId"], "setCode": row["localSetCode"],
         "number": row["localNumber"], "variant": row["variant"], "language": LANGUAGE,
-        "heldBy": "publisher or marketplace seller", "inspectedFrom": "retained positive card image",
+        "heldBy": (
+            "publisher or marketplace seller"
+            if row["providerId"] == "pokemon-card-asia" else "third-party seller"
+        ),
+        "inspectedFrom": "retained positive card image",
         "photograph": photograph.name, "photographSource": row["cardImageUrl"],
         "photographSha256": "sha256:" + hashlib.sha256(photograph.read_bytes()).hexdigest(),
         "observed": observed, "recordedAt": "2026-08-28",

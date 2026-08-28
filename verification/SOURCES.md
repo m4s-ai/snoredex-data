@@ -14,7 +14,7 @@ gap, never a finding.
 
 | Provider | Category | Tier | Absence? | Sources | Claims | Used for |
 |---|---|---:|:---:|---:|---:|---|
-| **Inspected physical specimen** | non-url-evidence | 1 | no | 19 | 61 | language, identity, finish, edition |
+| **Inspected physical specimen** | non-url-evidence | 1 | no | 15 | 57 | language, identity, finish, edition |
 | **Play! Pokémon rewards gallery** | official-publisher | 1 | yes | 1 | 32 | finish, product |
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | no | 40 | 58 | language |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | no | 37 | 83 | language, artist, date |
@@ -29,7 +29,7 @@ gap, never a finding.
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | no | 1 | 2 | finish |
 | **SNKRDUNK** | marketplace | 2 | no | 1 | 3 | finish, language |
-| **Seller listing photograph** | marketplace-photo | 2 | no | 43 | 82 | language, identity, finish, edition |
+| **Seller listing photograph** | marketplace-photo | 2 | no | 47 | 86 | language, identity, finish, edition |
 | **TCGdex** | open-database | 2 | no | 309 | 747 | language, finish |
 | **pokemontcg.io** | open-database | 2 | no | 1 | 123 | artist, date |
 | **LigaPokemon** | marketplace | 3 | no | 2 | 3 | language, finish |
