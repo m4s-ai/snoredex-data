@@ -257,6 +257,7 @@ def main() -> int:
         structured_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
             const member = group.members.find(candidate => group.groupKind === 'mapped-appearance'
+              && candidate.detection && candidate.detection.artist
               && candidate.images && candidate.images.length && candidate.physicalPrintings
               && candidate.physicalPrintings.length);
             if (member) return {id: member.cardReleaseId,
@@ -303,7 +304,7 @@ def main() -> int:
             page.wait_for_timeout(80)
         else:
             check("artwork correction saves structured values and physical targets", False,
-                  "projection has no mapped member with image and physical printing")
+                  "projection has no mapped member with artist, image and physical printing")
 
         page.select_option("#ar-scope", "all")
         page.wait_for_timeout(80)
