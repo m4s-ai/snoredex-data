@@ -80,6 +80,22 @@ PROVIDERS: list[dict[str, Any]] = [
                   "checklists may establish finish absence only inside their stated scope."),
     },
     {
+        "providerId": "pokemon-cn-official",
+        "displayName": "Pokémon official website (Mainland China)",
+        "organization": "Pokémon (Shanghai) Toys Co., Ltd.",
+        "homepage": "https://www.pokemon.cn/tcg/",
+        "hosts": ["www.pokemon.cn", "pokemon.cn", "image.pokemon.com.cn"],
+        "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
+        "category": "official-publisher",
+        "authorityTier": 1,
+        "coverage": "positive Simplified Chinese card, product, rarity and finish statements",
+        "supportsAbsence": False,
+        "usedFor": ["language", "finish", "product"],
+        "attribution": "Mainland Chinese card and product data © Pokémon (Shanghai) Toys Co., Ltd.",
+        "notes": ("Only explicit retained publisher statements and card renders are positive "
+                  "evidence; missing products, pages, cards or unstated finishes remain unknown."),
+    },
+    {
         "providerId": "pokemon-card-jp",
         "displayName": "Pokémon Card official database (Japan)",
         "organization": "The Pokémon Company",
@@ -212,9 +228,9 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 3,
         "coverage": "one row per Asian market printing; Western printings lumped into a single English row",
         "supportsAbsence": False,
-        "usedFor": ["language"],
+        "usedFor": ["language", "finish"],
         "attribution": "Promo printing data from pokumon.com.",
-        "notes": "Indexes English names only. Absence never contradicts a Western language.",
+        "notes": "Indexes English names only. Exact per-card pages can positively state a finish, but omissions never contradict a language or finish.",
     },
     {
         "providerId": "pokecottage",
@@ -391,11 +407,18 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
         "category": "marketplace-catalogue",
         "authorityTier": 5,
-        "coverage": "product catalogue, images, and marketplace availability",
+        "coverage": "product/filter metadata and retained Japanese or English product images",
         "supportsAbsence": False,
         "usedFor": ["product", "image", "finish"],
         "attribution": "Product catalogue and images via Cardmarket.",
-        "notes": "The catalogue over-claims languages — this is the finding the project exists to document. Never verification.",
+        "notes": (
+            "Retained product images may positively establish only facts visible on the pictured "
+            "Japanese or English card, including a visible finish. Product/language filter "
+            "combinations and catalogue language metadata do not establish a localized release "
+            "or collector number; in particular, a Traditional Chinese filter is not evidence "
+            "that the card was released under that product number. Missing products, images, "
+            "filters, or listings never establish absence."
+        ),
     },
     {
         "providerId": "pokemontcgio",

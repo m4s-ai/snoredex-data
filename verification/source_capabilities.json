@@ -21,6 +21,13 @@
       "rawRetention": "Retain exact localized card-page fields or checklist bytes, canonical URL, locale, retrieval date and SHA-256."
     },
     {
+      "providerId": "pokemon-cn-official",
+      "operator": "Pokémon (Shanghai) Toys Co., Ltd.",
+      "authorityTier": 1,
+      "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
+      "rawRetention": "Retain exact Simplified Chinese product prose or official card-render bytes, canonical URL, retrieval date and SHA-256."
+    },
+    {
       "providerId": "pokemon-card-jp",
       "operator": "The Pokémon Company",
       "authorityTier": 1,
@@ -218,6 +225,103 @@
     }
   ],
   "surfaces": [
+    {
+      "surfaceId": "pokemon-cn-product-pages",
+      "providerId": "pokemon-cn-official",
+      "label": "Mainland China official TCG product and manufacturing pages",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon.cn/tcg/",
+          "https://pokemon.cn/tcg/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Only products and rules with an explicit retained publisher page are covered.",
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-27",
+      "freshnessPolicy": "Retain the exact Chinese prose, section, canonical URL, retrieval date and SHA-256 before applying a product or finish rule.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.pokemon.cn/tcg/{section}/{article}.html",
+        "parameters": [
+          "section",
+          "article id"
+        ],
+        "pagination": "not paginated; every retained page establishes only its explicit statements",
+        "expectedIdentifiers": [
+          "article heading",
+          "product name or rarity class",
+          "source-native finish wording"
+        ]
+      },
+      "finishCapability": {
+        "mode": "set-profile",
+        "vocabulary": [
+          "平卡",
+          "闪卡",
+          "随机闪卡",
+          "镜面工艺"
+        ],
+        "publicationForm": "official product specification or manufacturing prose",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokemon-cn-product-positive",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "card",
+              "set",
+              "deck",
+              "product"
+            ],
+            "timeRange": {
+              "start": "2022-09",
+              "end": null,
+              "basis": "explicit retained official Simplified Chinese pages only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "local-card-identifier",
+            "finish",
+            "rarity",
+            "product",
+            "release-event"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained product or manufacturing page establishes only what it explicitly states; silence is not a complete catalogue or finish manifest."
+          },
+          "knownPositiveObservationId": "obs-pokemon-cn-finish-rules",
+          "boundary": {
+            "outsideScope": [
+              "unretained products and cards",
+              "unstated finish alternatives",
+              "other localities",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing page, card or finish statement cannot refute a Simplified Chinese printing."
+          }
+        }
+      ]
+    },
     {
       "surfaceId": "tpci-checklists",
       "providerId": "pokemon-official",
@@ -1600,9 +1704,13 @@
         ]
       },
       "finishCapability": {
-        "mode": "none",
-        "vocabulary": [],
-        "publicationForm": "no closed finish field",
+        "mode": "card-flags",
+        "vocabulary": [
+          "non-holo",
+          "holo",
+          "reverse-holo"
+        ],
+        "publicationForm": "exact per-card pages can carry a positive finish tag; no closed finish manifest",
         "closedWithinScope": false
       },
       "coverageEdges": [
@@ -1654,6 +1762,58 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "The provider's single Western English row cannot refute French, German or other Western printings."
+          }
+        },
+        {
+          "edgeId": "pokumon-exact-card-finish-positive",
+          "coverage": {
+            "localities": [
+              "JP",
+              "KR",
+              "TW",
+              "CN",
+              "ID",
+              "TH",
+              "SEA",
+              "WEST"
+            ],
+            "languages": [
+              "MULTIPLE"
+            ],
+            "scripts": [
+              "MULTIPLE"
+            ],
+            "productCategories": [
+              "card",
+              "promo"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "exact retained per-card pages only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "finish"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A positive finish tag describes only the exact retained printing and is not a finish manifest."
+          },
+          "knownPositiveObservationId": "obs-pokumon-finish-tag",
+          "boundary": {
+            "outsideScope": [
+              "unstated finish alternatives",
+              "omitted markets",
+              "complete promo-series coverage"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Only an explicit finish tag on the exact per-card page can support a finish claim."
           }
         }
       ]
@@ -2075,9 +2235,10 @@
       "finishCapability": {
         "mode": "product-subtype",
         "vocabulary": [
-          "product/listing-native rarity or finish label"
+          "product/listing-native rarity or finish label",
+          "finish directly visible on a retained Japanese or English product image"
         ],
-        "publicationForm": "catalogue product field or retained seller photo",
+        "publicationForm": "positive catalogue field or retained Japanese or English product image",
         "closedWithinScope": false
       },
       "coverageEdges": [
@@ -2121,13 +2282,14 @@
           "knownPositiveObservationId": "obs-cardmarket",
           "boundary": {
             "outsideScope": [
+              "localized release identity inferred from a product/language filter",
               "language-filter silence",
               "missing products",
               "seller inventory",
               "other localities"
             ],
             "zeroResultMeans": "unknown",
-            "challenge": "A missing listing or product filter result cannot refute a printing."
+            "challenge": "A filter combination cannot establish a localized release or collector number, and a missing listing or product filter result cannot refute a printing."
           }
         }
       ]
@@ -3172,6 +3334,96 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "asia-card-image",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Asia localized card renders",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/id/card-img/",
+          "https://asia.pokemon-card.com/th/card-img/",
+          "https://asia.pokemon-card.com/tw/card-img/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Only exact retained publisher renders are covered; the image host is not a complete historical manifest.",
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-28",
+      "freshnessPolicy": "Retain the exact card image, publisher detail URL, retrieval date and SHA-256.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/{locale}/card-img/{asset}",
+        "parameters": [
+          "locale",
+          "asset"
+        ],
+        "pagination": "not paginated; each retained render establishes only the pictured card",
+        "expectedIdentifiers": [
+          "printed card name",
+          "collector number",
+          "set mark"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; not a physical finish photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "asia-card-image-positive",
+          "coverage": {
+            "localities": [
+              "TW",
+              "ID",
+              "TH"
+            ],
+            "languages": [
+              "T-Chinese",
+              "Indonesian",
+              "Thai"
+            ],
+            "scripts": [
+              "Hant",
+              "Latn",
+              "Thai"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "exact retained publisher renders only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained render proves the pictured identity; missing assets prove nothing."
+          },
+          "knownPositiveObservationId": "obs-asia-card-image",
+          "boundary": {
+            "outsideScope": [
+              "unretained cards",
+              "physical finish",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "No missing image or failed request can refute a card printing."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -3572,6 +3824,29 @@
         "pokumon-asian-positive"
       ],
       "outcome": "A per-market promo row is positive evidence for that returned printing."
+    },
+    {
+      "observationId": "obs-pokumon-finish-tag",
+      "surfaceId": "pokumon-search",
+      "kind": "known-positive",
+      "queryUrl": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo",
+      "queryParameters": {
+        "card": "Snorlax 061/S-P Simplified Chinese Promo"
+      },
+      "retrievedAt": "2026-08-27",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokumon",
+        "recordKey": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo"
+      },
+      "expectedIdentifiers": [
+        "Snorlax (061/S-P Simplified Chinese Promo)",
+        "Non-holo"
+      ],
+      "validatesEdges": [
+        "pokumon-exact-card-finish-positive"
+      ],
+      "outcome": "The exact per-card page positively labels the retained Simplified-Chinese 061/S-P printing Non-holo; no unstated alternative is inferred."
     },
     {
       "observationId": "obs-pokecottage-snorlax-master-list",
@@ -4078,6 +4353,54 @@
         "bulbapedia-historical-index-positive"
       ],
       "outcome": "The retained revision exposes three Dutch, two Polish and nine Russian positive physical-set cells; every one is staged without interpreting dashes as absence."
+    },
+    {
+      "observationId": "obs-pokemon-cn-finish-rules",
+      "surfaceId": "pokemon-cn-product-pages",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.cn/tcg/product/16377.html",
+      "queryParameters": {
+        "articleId": "16377"
+      },
+      "retrievedAt": "2026-08-27",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-cn-official",
+        "recordKey": "https://www.pokemon.cn/tcg/product/16377.html"
+      },
+      "expectedIdentifiers": [
+        "稀有度R以上",
+        "随机闪卡",
+        "镜面工艺"
+      ],
+      "validatesEdges": [
+        "pokemon-cn-product-positive"
+      ],
+      "outcome": "The retained official article positively states that rarity R and above cards are foil, and that Simplified Chinese C, U and R cards can appear as the locality-specific patterned random foil treatment."
+    },
+    {
+      "observationId": "obs-asia-card-image",
+      "surfaceId": "asia-card-image",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/card-img/id00004795.png",
+      "queryParameters": {
+        "locale": "id",
+        "asset": "id00004795.png"
+      },
+      "retrievedAt": "2026-08-28",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-card-asia",
+        "recordKey": "https://asia.pokemon-card.com/id/card-img/id00004795.png"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0169",
+        "U0175"
+      ],
+      "validatesEdges": [
+        "asia-card-image-positive"
+      ],
+      "outcome": "The retained publisher render positively identifies the Indonesian Snorlax card pictured in SPEC-0169."
     }
   ]
 }

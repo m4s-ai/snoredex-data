@@ -1364,10 +1364,18 @@ def _build_finish_unit(
     _build_finish_unit_part9()
     _build_finish_unit_part10()
     _build_finish_unit_part11()
+    release_set_codes = {
+        str(override["releaseSetCode"])
+        for override in applicable_overrides
+        if override.get("releaseSetCode")
+    }
+    if len(release_set_codes) > 1:
+        raise ValueError(f"conflicting releaseSetCode overrides for {set_code} {number} {language}")
     return {
             "finishUnitId": finish_unit_id,
             "cardName": card_name,
             "setCode": set_code,
+            "releaseSetCode": next(iter(release_set_codes), None),
             "setName": set_name,
             "number": number,
             "language": language,

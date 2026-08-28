@@ -21,6 +21,7 @@ def read(name: str) -> dict:
 
 
 def main() -> None:
+    assert collector.collector_number("076/095") == collector.collector_number("076")
     legacy_row = {
         "checklistId": "legacy-semantic-row",
         "printingId": "F0167-P01",
@@ -48,11 +49,29 @@ def main() -> None:
     )
     assert collector.legacy_match_for_physical(
         shifted_physical,
+        {},
+        set(),
         {collector.printing_semantic_key(shifted_physical["cardReleaseId"], legacy_row): legacy_row},
         {collector.printing_semantic_core_key(shifted_physical["cardReleaseId"], legacy_row): [legacy_row]},
     ) is legacy_row
-    new_physical = {**shifted_physical, "sourcePrintingId": "F0167-P01", "finish": "reverse-holo"}
-    assert collector.legacy_match_for_physical(new_physical, {}, {}) is None
+    reused_ordinal = {**shifted_physical, "sourcePrintingId": "F0167-P01", "finish": "reverse-holo"}
+    assert collector.legacy_match_for_physical(
+        reused_ordinal,
+        {legacy_row["printingId"]: (shifted_physical["cardReleaseId"], legacy_row)},
+        set(),
+        {collector.printing_semantic_key(shifted_physical["cardReleaseId"], legacy_row): legacy_row},
+        {collector.printing_semantic_core_key(shifted_physical["cardReleaseId"], legacy_row): [legacy_row]},
+    ) is None
+    old_release = "RELEASE:JU:Dutch:legacy-JU:11"
+    rekeyed_release = {**shifted_physical, "sourcePrintingId": "F0167-P01", "edition": None}
+    source_candidate = {legacy_row["printingId"]: (old_release, legacy_row)}
+    assert collector.legacy_match_for_physical(
+        rekeyed_release, source_candidate, set(), {}, {}
+    ) is None
+    assert collector.legacy_match_for_physical(
+        rekeyed_release, source_candidate,
+        {(old_release, rekeyed_release["cardReleaseId"])}, {}, {}
+    ) is legacy_row
 
     graph = read("verification/authoritative_graph.json")
     catalogue = read("collector_catalogue.json")

@@ -7,7 +7,7 @@ import json
 import importlib.util
 from collections import defaultdict
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -56,6 +56,18 @@ def main() -> None:
         "every PR #323 specimen must occur in exactly one reviewed issue manifest"
     )
     specimen_by_id = {row["specimenId"]: row for row in specimens}
+    cardmarket_catalogue_specimens = [
+        row for row in specimens
+        if urlparse(row.get("photographSource", "")).hostname
+        == "product-images.s3.cardmarket.com"
+    ]
+    assert cardmarket_catalogue_specimens
+    assert {
+        row["language"] for row in cardmarket_catalogue_specimens
+    } <= {"Japanese", "English"}, (
+        "Cardmarket product images may support pictured Japanese or English cards only; "
+        "catalogue language filters do not establish another localized release"
+    )
     manifest_fields = {
         "setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
         "observed", "recordedAt", "citedBy", "physicalObservation", "listingUrl",
@@ -96,6 +108,97 @@ def main() -> None:
     ]
 
     finish_units = read("finish_units.json")["units"]
+    simplified_chinese_promo = next(
+        unit for unit in finish_units if unit["finishUnitId"] == "F0456"
+    )
+    assert simplified_chinese_promo["finishStatus"]["holo"] == "pending"
+    assert all(
+        printing["verificationStatus"] != "confirmed"
+        for printing in simplified_chinese_promo["printings"]
+    ), "the R/C/U finish guide does not establish a Promo-card finish"
+    source_first_prints = read("source_first_prints.json")["prints"]
+    single_provider_counts = {
+        ("ID", "pokemon-card-asia"): 30,
+        ("KR", "pokemon-card-korea"): 17,
+        ("TH", "pokemon-card-asia"): 25,
+        ("TW", "pokemon-card-asia"): 40,
+    }
+    independently_corroborated_prints = {
+        "KR:BS2:30/40:base", "KR:S-P:101:base",
+    }
+    for provider_key, expected_count in single_provider_counts.items():
+        official_prints = [
+            row for row in source_first_prints
+            if (row["locality"], row["providerId"]) == provider_key
+            and row["printId"] not in independently_corroborated_prints
+        ]
+        assert len(official_prints) == expected_count
+        assert all(row["corroborated"] is False for row in official_prints), (
+            "matching an existing graph identity is not independent corroboration"
+        )
+    independently_corroborated_promos = {
+        "KR:S-P:101:base", "KR:SM-P:140:base", "KR:XY-P:167:base",
+        "TH:SM-P:083:base",
+    }
+    corroborated_promo_rows = {
+        row["printId"]: row for row in source_first_prints
+        if row["printId"] in independently_corroborated_promos
+    }
+    assert set(corroborated_promo_rows) == independently_corroborated_promos
+    assert all(row["corroborated"] is True for row in corroborated_promo_rows.values())
+    pokumon_only_promos = {
+        row["printId"]: row for row in source_first_prints
+        if row["printId"] in {"ID:SV-P:278:base", "ID:SV-P:286:base"}
+    }
+    assert set(pokumon_only_promos) == {"ID:SV-P:278:base", "ID:SV-P:286:base"}
+    assert all(row["providerId"] == "pokumon" for row in pokumon_only_promos.values())
+    assert all(row["corroborated"] is False for row in pokumon_only_promos.values())
+    clf_row = next(
+        row for row in source_first_prints if row["printId"] == "TW:CLF:016/032:base"
+    )
+    assert clf_row["providerId"] == "shopee-tw"
+    assert clf_row["corroborated"] is False
+    assert "corroboratingSourceUrls" not in clf_row
+    s10a_chr_row = next(
+        row for row in source_first_prints if row["printId"] == "TW:S10a F:077/071:base"
+    )
+    assert s10a_chr_row["providerId"] == "ruten"
+    assert s10a_chr_row["corroborated"] is True
+    assert set(s10a_chr_row["corroboratingSourceUrls"]) == {
+        "https://www.nacg.tw/product-details.php?id=149595",
+        "https://www.ruten.com.tw/item/22223353127192/",
+    }
+    svg_row = next(
+        row for row in source_first_prints if row["printId"] == "TW:SVG:021/049:base"
+    )
+    assert svg_row["corroborated"] is False
+    assert (svg_row["releaseDate"], svg_row["releaseDatePrecision"]) == (
+        "2023-11-10", "day",
+    )
+    marketplace_override_sources = {
+        source["url"]: source
+        for unit in finish_units if unit["finishUnitId"] in {"F0037", "F0331"}
+        for printing in unit["printings"]
+        for source in printing["sources"]
+        if source.get("authorityTier") == "seller-listing-photo"
+    }
+    assert set(marketplace_override_sources) == {
+        "https://shopee.tw/product/9736187/25206242683",
+        "https://shopee.tw/product/4914178/22786197647",
+        "https://shopee.tw/product/6777510/50602680694",
+        "https://shopee.tw/product/16896213/51412187955",
+        "https://www.ruten.com.tw/item/22223353127192/",
+    }
+    assert all(
+        source["sourceType"] == "Seller listing photograph"
+        for source in marketplace_override_sources.values()
+    )
+    assert all(
+        source.get("authorityTier") != "physical-specimen"
+        for unit in finish_units if unit["finishUnitId"] in {"F0037", "F0331"}
+        for printing in unit["printings"]
+        for source in printing["sources"]
+    )
     dutch = {
         (unit["number"], printing["edition"]): printing
         for unit in finish_units
@@ -154,6 +257,12 @@ def main() -> None:
         assert printing["sources"][0]["claimFields"] == expected_photo_fields
 
     source_registry = read("source_registry.json")["evidence"]
+    for specimen_id in {f"SPEC-{number:04d}" for number in range(319, 325)}:
+        marketplace_specimen = specimen_by_id[specimen_id]
+        assert marketplace_specimen["heldBy"] == "third-party seller"
+        assert projector.specimen_source(marketplace_specimen)["sourceType"] == (
+            "Seller listing photograph"
+        )
     pokecardex_source = next(
         row for row in source_registry
         if row.get("canonicalUrl") == pokecardex["photographSource"]

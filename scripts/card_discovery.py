@@ -1360,7 +1360,9 @@ def build_latest(
             run_contract = read_json(snapshot_path)
             if manifest.get("contractHash") != content_hash(run_contract):
                 raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
-            validate_contract(run_contract, capability, identity)
+            # Historical editorial targets may have been superseded in the
+            # current graph. The immutable snapshot hash preserves what the run
+            # used; only the current contract is required to resolve today.
         compatible = acquisition_contract(run_contract) == acquisition_contract(contract)
         previous = build_projection(
             run_contract, capability, identity, manifest, run_dir, previous,
@@ -2354,7 +2356,9 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
         raise DiscoveryError(f"replay source run is not complete: {source_run_id}")
     if source_manifest.get("contractHash") != content_hash(source_contract):
         raise DiscoveryError(f"replay source contract hash differs: {source_run_id}")
-    validate_contract(source_contract, capability, identity)
+    # A replay reuses only immutable provider bytes. Editorial mappings in the
+    # source contract may legitimately name release ids superseded by the current
+    # reviewed graph; the current contract was already validated by load_inputs().
     if acquisition_contract(source_contract) != acquisition_contract(contract):
         raise DiscoveryError("replay source differs in its provider acquisition contract")
     newest_source_run_id = newest_compatible_complete_run(contract)
@@ -2387,6 +2391,7 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
         "completedAt": None,
         "status": "incomplete",
         "contractHash": content_hash(contract),
+        "capabilityGraphHash": expected["capabilityGraphHash"],
         "replayedFromRun": source_run_id,
     })
     for request in manifest["requests"]:

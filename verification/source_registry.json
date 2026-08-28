@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-27",
+  "generated": "2026-08-28",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 29,
-   "evidenceRecords": 1070,
-   "uniqueUrls": 1063,
+   "providers": 30,
+   "evidenceRecords": 1142,
+   "uniqueUrls": 1135,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3323
+   "claimsAttributed": 3476
   }
  },
  "providers": [
@@ -163,6 +163,31 @@
    "claimsSupported": 419
   },
   {
+   "providerId": "pokemon-cn-official",
+   "displayName": "Pokémon official website (Mainland China)",
+   "organization": "Pokémon (Shanghai) Toys Co., Ltd.",
+   "homepage": "https://www.pokemon.cn/tcg/",
+   "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
+   "category": "official-publisher",
+   "authorityTier": 1,
+   "coverage": "positive Simplified Chinese card, product, rarity and finish statements",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "finish",
+    "product"
+   ],
+   "attribution": "Mainland Chinese card and product data © Pokémon (Shanghai) Toys Co., Ltd.",
+   "notes": "Only explicit retained publisher statements and card renders are positive evidence; missing products, pages, cards or unstated finishes remain unknown.",
+   "hosts": [
+    "www.pokemon.cn",
+    "pokemon.cn",
+    "image.pokemon.com.cn"
+   ],
+   "uniqueSources": 10,
+   "claimsSupported": 45
+  },
+  {
    "providerId": "pokemon-card-jp",
    "displayName": "Pokémon Card official database (Japan)",
    "organization": "The Pokémon Company",
@@ -204,8 +229,8 @@
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 22,
-   "claimsSupported": 22
+   "uniqueSources": 40,
+   "claimsSupported": 58
   },
   {
    "providerId": "pokemon-card-korea",
@@ -229,8 +254,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 1,
-   "claimsSupported": 1
+   "uniqueSources": 27,
+   "claimsSupported": 27
   },
   {
    "providerId": "tcgdex",
@@ -359,16 +384,17 @@
    "coverage": "one row per Asian market printing; Western printings lumped into a single English row",
    "supportsAbsence": false,
    "usedFor": [
-    "language"
+    "language",
+    "finish"
    ],
    "attribution": "Promo printing data from pokumon.com.",
-   "notes": "Indexes English names only. Absence never contradicts a Western language.",
+   "notes": "Indexes English names only. Exact per-card pages can positively state a finish, but omissions never contradict a language or finish.",
    "hosts": [
     "pokumon.com",
     "www.pokumon.com"
    ],
-   "uniqueSources": 2,
-   "claimsSupported": 3
+   "uniqueSources": 7,
+   "claimsSupported": 11
   },
   {
    "providerId": "pokecottage",
@@ -600,7 +626,7 @@
    "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
    "category": "marketplace-catalogue",
    "authorityTier": 5,
-   "coverage": "product catalogue, images, and marketplace availability",
+   "coverage": "product/filter metadata and retained Japanese or English product images",
    "supportsAbsence": false,
    "usedFor": [
     "product",
@@ -608,14 +634,14 @@
     "finish"
    ],
    "attribution": "Product catalogue and images via Cardmarket.",
-   "notes": "The catalogue over-claims languages — this is the finding the project exists to document. Never verification.",
+   "notes": "Retained product images may positively establish only facts visible on the pictured Japanese or English card, including a visible finish. Product/language filter combinations and catalogue language metadata do not establish a localized release or collector number; in particular, a Traditional Chinese filter is not evidence that the card was released under that product number. Missing products, images, filters, or listings never establish absence.",
    "hosts": [
     "www.cardmarket.com",
     "cardmarket.com",
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 396,
-   "claimsSupported": 915
+   "claimsSupported": 936
   },
   {
    "providerId": "pokemontcgio",
@@ -711,8 +737,8 @@
     "www.pokeca.net",
     "www.ebay.de"
    ],
-   "uniqueSources": 6,
-   "claimsSupported": 31
+   "uniqueSources": 7,
+   "claimsSupported": 33
   },
   {
    "providerId": "internal-derivation",
@@ -774,7 +800,7 @@
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
    "uniqueSources": 10,
-   "claimsSupported": 49
+   "claimsSupported": 47
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -817,8 +843,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 40,
-   "claimsSupported": 79
+   "uniqueSources": 52,
+   "claimsSupported": 96
   }
  ],
  "evidence": [
@@ -2932,17 +2958,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "CLF 016 base"
+    "CLF 016 base",
+    "F0035-P01"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CLV/745674/745674.jpg",
@@ -3595,34 +3624,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "DP-P 126 base"
+    "DP-P 126 base",
+    "F0095-P01"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "DP-P 127 base"
+    "DP-P 127 base",
+    "F0098-P01"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP/277536/277536.jpg",
@@ -3969,17 +4004,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0193-P01",
     "LL 028 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/LOR/670829/670829.jpg",
@@ -4173,17 +4211,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0255-P02",
     "PJU  base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/PKM/301122/301122.jpg",
@@ -4581,34 +4622,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0398-P01",
     "SM-P 1 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0400-P01",
     "SM-P 297 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM/295297/295297.jpg",
@@ -5142,17 +5189,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0575-P01",
     "UNP  base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/VIV/512365/512365.jpg",
@@ -5244,17 +5294,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0622-P01",
     "XY-P 261 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY10/562999/562999.jpg",
@@ -5414,119 +5467,140 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0324-P02",
     "s10a 058 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10a/657056/657056.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0329-P01",
     "s10a 077 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10b/664610/664610.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0334-P02",
     "s10b 056 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467619/467619.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0339-P01",
     "s1H 45 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467624/467624.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0345-P01",
     "s1H 66 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467629/467629.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0348-P01",
     "s1H 70 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467634/467634.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0342-P01",
     "s1H 46 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s2/464294/464294.jpg",
@@ -5550,34 +5624,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0354-P02",
     "s4 84 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s5a/552704/552704.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0358-P01",
     "s5a 93 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
@@ -5669,17 +5749,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0417-P01",
     "sN 008 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm10/557434/557434.jpg",
@@ -5703,51 +5786,60 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0405-P01",
     "sm9 066 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558481/558481.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0408-P01",
     "sm9 106 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558490/558490.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0411-P01",
     "sm9 115 V3"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/smL/564732/564732.jpg",
@@ -5941,17 +6033,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0502-P01",
     "svM 094 base"
    ],
    "retrievedAt": null,
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/xJTG/817769/817769.jpg",
@@ -6823,7 +6918,7 @@
    "stableIdCount": 11,
    "stableIds": [
     "F0324-P01",
-    "F0324-P02",
+    "F0324-P03",
     "F0325-P01",
     "F0325-P02",
     "F0326-P01",
@@ -7815,7 +7910,7 @@
    ],
    "stableIdCount": 6,
    "stableIds": [
-    "F0358-P01",
+    "F0358-P02",
     "F0359-P01",
     "F0360-P01",
     "F0361-P01",
@@ -8169,18 +8264,17 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 6,
    "stableIds": [
     "F0614-P01",
     "F0614-P03",
     "F0615-P01",
     "F0615-P03",
-    "F0616-P01",
-    "F0616-P03",
+    "F0616-P02",
     "xsv2a 143 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 8
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
@@ -8195,18 +8289,17 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 6,
    "stableIds": [
     "F0614-P01",
     "F0614-P02",
     "F0615-P01",
     "F0615-P02",
     "F0616-P01",
-    "F0616-P02",
     "xsv2a 143 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 7
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143",
@@ -9260,7 +9353,7 @@
    "stableIdCount": 9,
    "stableIds": [
     "F0354-P01",
-    "F0354-P02",
+    "F0354-P03",
     "F0355-P01",
     "F0355-P02",
     "F0356-P01",
@@ -10211,7 +10304,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0622-P01",
+    "F0622-P02",
     "XY-P 261 V2"
    ],
    "retrievedAt": null,
@@ -10385,7 +10478,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 26,
+   "stableIdCount": 24,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -10394,8 +10487,6 @@
     "F0291-P02",
     "F0294-P02",
     "F0441-P01",
-    "F0457-P01",
-    "F0457-P02",
     "F0519-P02",
     "F0534-P01",
     "F0615-P03",
@@ -10415,7 +10506,7 @@
     "U0772"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 37
+   "usageCount": 35
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -10702,8 +10793,8 @@
     "F0614-P03",
     "F0615-P02",
     "F0615-P03",
+    "F0616-P01",
     "F0616-P02",
-    "F0616-P03",
     "U0097",
     "U0098",
     "U0099",
@@ -10813,6 +10904,96 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00004795.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Indonesian card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0169",
+    "U0175"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00005772.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Indonesian card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0173",
+    "U0204"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00006007.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Indonesian card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0174",
+    "U0346"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00010045.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Indonesian card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0179",
+    "U0308"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00015253.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Indonesian card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0182",
+    "U0404"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -10913,6 +11094,60 @@
    ],
    "retrievedAt": "2026-07-21",
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00003281.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Thai card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0262",
+    "U0205"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00006835.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Thai card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0267",
+    "U0753"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00010595.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "official Pokémon Asia Thai card-detail render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0272",
+    "U0405"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/10595",
@@ -11032,6 +11267,186 @@
    ],
    "retrievedAt": "2026-07-21",
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00005968.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0293",
+    "U0654"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00005969.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0294",
+    "U0658"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00009173.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0302",
+    "U0307"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00012164.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0306",
+    "U0403"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00014796.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0310",
+    "U0128"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00017038.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0314",
+    "U0684"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00017039.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0315",
+    "U0591"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00017040.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0316",
+    "U0764"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00018039.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0317",
+    "U0258"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00018292.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "retained positive card image"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0318",
+    "U0591"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12164",
@@ -11879,6 +12294,295 @@
    "usageCount": 11
   },
   {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s10a:058/071:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s10a:077/071:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s10b:056/071:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s1H:045/060:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s1H:046/060:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s1H:066/060:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s2:077/096:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s4:084/100:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s8b:126/184:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sI:341/414:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sI:342/414:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sN:008/024:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sm10:076/095:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sm9:106/095:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:smL:038/051:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv4a:310/190:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svG:021/049:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -11894,6 +12598,374 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:smL:038/051:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020014084",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s4:084/100:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022001126",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s8b:126/184:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022010056",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s10b:056/071:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s10a:058/071:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011126",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s10a:077/071:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svG:021/049:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024001310",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv4a:310/190:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/SP000000101",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:S-P:101:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15499.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0082-P01",
+    "override:pokemon-cn-departure-special-pack"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15585.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0079-P01",
+    "F0079-P02",
+    "override:pokemon-cn-happy-set-1-decks"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15831.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0061-P01",
+    "F0062-P01",
+    "override:pokemon-cn-gallant-galaxy-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15951.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0072-P01",
+    "F0072-P02",
+    "override:pokemon-cn-battle-party-flat-and-foil"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16070.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0059-P01",
+    "override:pokemon-cn-primordial-arts-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16268.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0056-P01",
+    "F0064-P01",
+    "override:pokemon-cn-dynamax-clash-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16344.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0071-P01",
+    "override:pokemon-cn-shining-synergy-starter"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese card-finish guide"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 19,
+   "stableIds": [
+    "F0000-P03",
+    "F0001-P01",
+    "F0051-P03",
+    "F0052-P01",
+    "F0053-P01",
+    "F0055-P01",
+    "F0057-P03",
+    "F0058-P01",
+    "F0060-P03",
+    "F0063-P03",
+    "F0065-P01",
+    "F0067-P03",
+    "F0068-P01",
+    "F0069-P01",
+    "F0070-P01",
+    "F0074-P03",
+    "F0075-P03",
+    "F0076-P03",
+    "override:pokemon-cn-simplified-finish-rules"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 19
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/19640.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0077-P01",
+    "F0078-P01",
+    "override:pokemon-cn-battle-party-dream-decks"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/21022.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Official Mainland China Simplified Chinese product specification"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 5,
+   "stableIds": [
+    "F0080-P01",
+    "F0080-P02",
+    "F0081-P01",
+    "F0081-P02",
+    "override:pokemon-cn-happy-set-4-decks"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
@@ -14726,6 +15798,97 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokumon.com/card/eevee-snorlax-tag-team-gx-083-sm-p-thai-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish-override"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "override:pokumon-th-smp083"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0323-P01",
+    "override:pokumon-s-p-cs-061"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-082-sv-p-thai-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish-override"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "override:pokumon-th-svp082"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0458-P01",
+    "override:pokumon-id-svp278"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-286-sv-p-indonesian-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Specialist per-language promo record"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0459-P01",
+    "override:pokumon-id-svp286"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636",
    "nonUrlEvidenceId": null,
    "providerId": "psa",
@@ -14825,6 +15988,25 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://www.nacg.tw/product-details.php?id=149595",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Specialist card listing with exact retained image"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0331-P01",
+    "override:tw-s10a077-nacg"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://www.pokeca.net/product/22292",
    "nonUrlEvidenceId": null,
    "providerId": "retailer-listing",
@@ -14888,6 +16070,74 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0024-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-7r98p-lq0zta37yupu9a",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0037-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-7r991-lny2yl0igo4d9b",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0037-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-81ztc-mhx0q1fnelmuc0",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0037-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-820lg-mpg97q4m34lof2",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0037-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -15204,6 +16454,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/PYIAAeSwGRBopW3h/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0073-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -15305,6 +16572,40 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0148-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/erwAAOSwjxpn2Lqe/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0083-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/iMAAAeSwQIpp678y/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0066-P01"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -15572,6 +16873,82 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://shopee.tw/product/16896213/51412187955",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0037-P01",
+    "override:tw-clf016-shopee-d"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://shopee.tw/product/4914178/22786197647",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0037-P01",
+    "override:tw-clf016-shopee-b"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://shopee.tw/product/6777510/50602680694",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0037-P01",
+    "override:tw-clf016-shopee-c"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://shopee.tw/product/9736187/25206242683",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0037-P01",
+    "override:tw-clf016-shopee-a"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://shpnpokestore.de/cdn/shop/files/F4A76B27-1CFF-4B56-9964-4FCED20B2D52.jpg?v=1759855302&width=1445",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -15610,6 +16987,25 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.ruten.com.tw/item/22223353127192",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0331-P01",
+    "override:tw-s10a077-ruten"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",

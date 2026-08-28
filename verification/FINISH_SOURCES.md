@@ -39,6 +39,12 @@ population report, or catalogue omission does not prove that a version does not 
 | Identified physical scan | Visible finish, pattern, marking, and size on that specimen | No |
 | Owner attestation | A review lead, or corroboration when recorded with a scan | No |
 
+For Cardmarket, keep the image and catalogue claims separate. A retained product image may support
+only facts visible on the pictured Japanese or English card, including a visible finish. A
+product/language filter combination is not evidence that a localized card exists under that
+collector number; in particular, a Traditional Chinese filter cannot be projected onto the card
+shown. Neither filters nor missing images establish absence.
+
 ### Recording what a scan shows (#150)
 
 The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record

@@ -19,6 +19,7 @@ from authoritative_graph import identity_view, project_physical_evidence, valida
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
     }) == [{"kind": "edition-stamp", "role": "print-identity", "text": "EDIZIONE 1"}]
@@ -109,33 +110,33 @@ def main() -> None:
             ):
                 edge["toId"] = target_id
     assert any("work payload id mismatch" in error for error in validate(tampered))
-    # An explicit-equivalence mapping is only promotable with one reviewed
-    # assertion that names both the exact release and Work relation.
+    # An explicit-equivalence mapping is only promotable with at least one
+    # reviewed assertion that names both the exact release and Work relation.
     tampered = deepcopy(graph)
     equivalence_release = next(
         row for row in tampered["entities"]
         if row["entityType"] == "card-release"
         and row["payload"]["workMappingState"] == "mapped-by-explicit-equivalence"
     )
-    assertion_id = next(
+    assertion_ids = {
         edge["fromId"] for edge in tampered["edges"]
         if edge["fromType"] == "equivalence-assertion"
         and edge["relation"] == "relates"
         and edge["toType"] == "card-release"
         and edge["toId"] == equivalence_release["entityId"]
-    )
+    }
     tampered["entities"] = [
         row for row in tampered["entities"] if not (
             row["entityType"] == "equivalence-assertion"
-            and row["entityId"] == assertion_id
+            and row["entityId"] in assertion_ids
         )
     ]
     tampered["edges"] = [
         edge for edge in tampered["edges"]
-        if not (edge["fromType"] == "equivalence-assertion" and edge["fromId"] == assertion_id)
+        if not (edge["fromType"] == "equivalence-assertion" and edge["fromId"] in assertion_ids)
     ]
     assert any(
-        "mapped-by-explicit-equivalence card release lacks exactly one matching equivalence assertion"
+        "mapped-by-explicit-equivalence card release lacks a matching equivalence assertion"
         in error for error in validate(tampered)
     )
     # Retargeting the release, implements edge, assertion payload and

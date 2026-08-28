@@ -248,19 +248,64 @@ def printing_semantic_core_key(release_id: str, printing: dict[str, Any]) -> byt
     return canonical_bytes(payload)
 
 
+def reviewed_release_rekeys(
+    releases: dict[str, dict[str, Any]],
+) -> set[tuple[str, str]]:
+    legacy_release_by_unit = {
+        claim_id.removeprefix("CLAIM:legacy:"): release["cardReleaseId"]
+        for release in releases.values()
+        for claim_id in release.get("claimIds", [])
+        if claim_id.startswith("CLAIM:legacy:")
+    }
+    return {
+        (legacy_release_by_unit[unit_id], release["cardReleaseId"])
+        for release in releases.values()
+        for unit_id in release.get("legacyCounterpartUnitIds", [])
+        if unit_id in legacy_release_by_unit
+    }
+
+
+def source_predecessor_match(
+    physical: dict[str, Any],
+    source_candidate: tuple[str, dict[str, Any]] | None,
+    release_rekeys: set[tuple[str, str]],
+) -> dict[str, Any] | None:
+    if not source_candidate:
+        return None
+    source_release_id, source_match = source_candidate
+    release_id = str(physical.get("cardReleaseId") or "")
+    if source_release_id != release_id and (source_release_id, release_id) not in release_rekeys:
+        return None
+    if printing_semantic_core_key(release_id, source_match) != printing_semantic_core_key(release_id, physical):
+        return None
+    edition = physical.get("edition")
+    if edition is not None and source_match.get("edition") not in (None, "—", edition):
+        return None
+    return source_match
+
+
 def legacy_match_for_physical(
     physical: dict[str, Any],
+    legacy_by_source: dict[str, tuple[str, dict[str, Any]]],
+    reviewed_release_rekeys: set[tuple[str, str]],
     legacy_by_semantic: dict[bytes, dict[str, Any]],
     legacy_by_core: dict[bytes, list[dict[str, Any]]],
 ) -> dict[str, Any] | None:
     """Match predecessor state semantically; never let an ordinal id steal a row."""
+    release_id = str(physical.get("cardReleaseId") or "")
+    source_match = source_predecessor_match(
+        physical, legacy_by_source.get(physical.get("sourcePrintingId")),
+        reviewed_release_rekeys,
+    )
+    if source_match:
+        return source_match
     semantic = legacy_by_semantic.get(
-        printing_semantic_key(str(physical.get("cardReleaseId") or ""), physical)
+        printing_semantic_key(release_id, physical)
     )
     if semantic:
         return semantic
     candidates = legacy_by_core.get(
-        printing_semantic_core_key(str(physical.get("cardReleaseId") or ""), physical), []
+        printing_semantic_core_key(release_id, physical), []
     )
     compatible = [
         row for row in candidates
@@ -377,23 +422,73 @@ def split_collector_number(value: Any) -> tuple[str | None, str | None]:
     return (match.group(1), match.group(2)) if match else (text, None)
 
 
+def release_date_values(
+    source_first: dict[str, Any] | None,
+    old: dict[str, Any] | None,
+    event: dict[str, Any],
+) -> tuple[Any, Any, bool]:
+    if source_first and source_first.get("releaseDate"):
+        return (
+            source_first["releaseDate"], source_first.get("releaseDatePrecision"),
+            bool(source_first.get("releaseApproximate")),
+        )
+    if old is not None:
+        return (
+            old.get("releaseDate"), old.get("releaseDatePrecision"),
+            bool(old.get("releaseApproximate")),
+        )
+    return (
+        event.get("releaseDate"), event.get("releaseDatePrecision"),
+        bool(event.get("releaseApproximate")),
+    )
+
+
+def prefer_source_first_image(
+    image_path: str | None,
+    image_scope: str,
+    source_first: dict[str, Any] | None,
+    specimens: dict[str, dict[str, Any]],
+) -> tuple[str | None, str]:
+    specimen = specimens.get((source_first or {}).get("specimenId"), {})
+    photograph = specimen.get("photograph")
+    if photograph and IMAGE_SCOPE_RANK[image_scope] < IMAGE_SCOPE_RANK["card-release"]:
+        return "verification/specimens/" + photograph, "card-release"
+    return image_path, image_scope
+
+
+def legacy_row_releases(items: list[dict[str, Any]]) -> set[str]:
+    return {
+        row["cardReleaseId"] for row in items if row["legacyChecklistIds"]
+    }
+
+
+def collector_number(value: Any) -> str:
+    numerator = str(value or "").split("/", 1)[0]
+    return numerator.lstrip("0") or ("0" if numerator else "")
+
+
 def release_lookup(releases: list[dict[str, Any]]) -> dict[tuple[str, str, str], list[str]]:
     lookup: defaultdict[tuple[str, str, str], list[str]] = defaultdict(list)
     for release in releases:
         codes = {release.get("localSetCode"), release.get("viaLegacySetCode")} - {None}
         numbers = {
-            str(value or "") for value in (release.get("localNumber"), release.get("viaLegacyNumber"))
+            collector_number(value)
+            for value in (release.get("localNumber"), release.get("viaLegacyNumber"))
         }
         for code in codes:
             for number in numbers:
                 lookup[(str(code), number, release["language"])].append(release["cardReleaseId"])
+        for code, number in release.get("legacyIdentityAliases") or []:
+            lookup[(str(code), collector_number(number), release["language"])].append(
+                release["cardReleaseId"]
+            )
     return lookup
 
 
 def legacy_release_id(
     item: dict[str, Any], lookup: dict[tuple[str, str, str], list[str]]
 ) -> str:
-    key = (item["setCode"], str(item.get("number") or ""), item["language"])
+    key = (item["setCode"], collector_number(item.get("number")), item["language"])
     targets = sorted(set(lookup.get(key, [])))
     if len(targets) != 1:
         raise ContractError(f"legacy checklist row does not resolve exactly once: {item['checklistId']} -> {targets}")
@@ -673,11 +768,16 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     legacy_release = {
         row["checklistId"]: legacy_release_id(row, release_index) for row in legacy_items
     }
+    release_rekeys = reviewed_release_rekeys(releases)
     legacy_by_semantic: dict[bytes, dict[str, Any]] = {}
+    legacy_by_source: dict[str, tuple[str, dict[str, Any]]] = {}
     legacy_by_core: defaultdict[bytes, list[dict[str, Any]]] = defaultdict(list)
     for row in legacy_items:
         if not row.get("printingId"):
             continue
+        legacy_by_source[row["printingId"]] = (
+            legacy_release[row["checklistId"]], row
+        )
         key = printing_semantic_key(legacy_release[row["checklistId"]], row)
         previous = legacy_by_semantic.get(key)
         if previous and previous["checklistId"] != row["checklistId"]:
@@ -875,14 +975,9 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             release_id, edition_value or "unresolved", finish_family or "research",
             canonical_bytes(markings).decode("utf-8"), canonical_bytes(distribution).decode("utf-8"), card_size,
         )))
-        if old is not None:
-            release_date = old.get("releaseDate")
-            release_precision = old.get("releaseDatePrecision")
-            release_approximate = bool(old.get("releaseApproximate"))
-        else:
-            release_date = context["event"].get("releaseDate")
-            release_precision = context["event"].get("releaseDatePrecision")
-            release_approximate = bool(context["event"].get("releaseApproximate"))
+        release_date, release_precision, release_approximate = release_date_values(
+            source_first_row, old, context["event"]
+        )
         release_sort = "|".join((
             release_date or "9999", str(context["identity"].get("localizationId")),
             natural_key(context["catalogue"].get("localCode")),
@@ -924,6 +1019,9 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             if specimen_id:
                 image_path = "verification/specimens/" + specimens[specimen_id]["photograph"]
                 image_scope = "exact-printing"
+        image_path, image_scope = prefer_source_first_image(
+            image_path, image_scope, source_first_row, specimens
+        )
         image_asset, actual_scope = register_asset(
             image_path,
             image_scope,
@@ -988,7 +1086,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     for physical in physicals.values():
         source_printing_id = physical.get("sourcePrintingId")
         old = legacy_match_for_physical(
-            physical, legacy_by_semantic, legacy_by_core
+            physical, legacy_by_source, release_rekeys,
+            legacy_by_semantic, legacy_by_core
         )
         unit = unit_by_printing.get(source_printing_id)
         claim = claims[physical["establishingClaimId"]]
@@ -1143,12 +1242,13 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     for row in items:
         items_by_release[row["cardReleaseId"]].append(row["itemId"])
     item_ids = {row["itemId"] for row in items}
+    releases_with_legacy_rows = legacy_row_releases(items)
     graph_only_transitions = [
         state_transition(
             item_id("research:card-release:" + release_id),
             items_by_release[release_id],
         )
-        for release_id in sorted(set(releases) - set(legacy_by_release))
+        for release_id in sorted(set(releases) - releases_with_legacy_rows)
         if item_id("research:card-release:" + release_id) not in item_ids
     ]
     migrations = {
