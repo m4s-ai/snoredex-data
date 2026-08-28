@@ -41,24 +41,26 @@ existing Python workflow owners rather than copying their contracts.
 
 ## Non-negotiable rules
 
-1. **Evidence outside Cardmarket only.** A product's *language filter* on Cardmarket is not
-   evidence. A seller's *photo* of the physical card is.
+1. **A Cardmarket catalogue claim is not evidence; a retained card image can be.** A product's
+   *language filter*, offers and counts are not evidence. An exact product image or seller photo is
+   positive evidence only when the visible card face itself establishes the target language or
+   other claimed property.
 
-   Both halves are now recordable. `cardmarket` is tier 5 — the catalogue this project exists to
-   check, never verification — and `cardmarket-listing-photo` is tier 2, for a card whose text you
-   read off a seller's photograph. Until 2026-08-03 only the first existed, so the second half of
-   this rule had nowhere to be written down. File a listing photograph as a `SPEC-nnnn` record with
-   `heldBy: "third-party seller"` and the listing URL, never as a bare link: listings are deleted
-   and the observation has to outlive them. Tier 2 rather than 1 because you cannot re-examine it
-   and the seller may have mislabelled the language. There is no open API; collection is by hand or
-   a browser session, and the rolling ~55-request quota returns HTTP 429.
+   All three classes are recordable. `cardmarket` is tier 5 — the catalogue this project exists to
+   check, never localized-card verification. `cardmarket-product-image` and
+   `cardmarket-listing-photo` are tier 2 for exact product images and seller photographs whose card
+   text or treatment was actually inspected. File an accepted image as a `SPEC-nnnn` record with
+   its image and listing/product provenance, never as a bare link: pages and listings change, and
+   the observation has to outlive them. Tier 2 rather than 1 because the pictured card cannot be
+   re-examined physically and catalogue or seller metadata may be wrong. There is no open API;
+   collection is by hand or a browser session, and the rolling ~55-request quota returns HTTP 429.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `verification/source_registry.json` ranks each provider by `authorityTier` —
    the evidence ladder in [`README.md`](README.md#how-a-claim-becomes-a-fact), generated from that
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **15 units rest on owner attestation alone** and 9
+   A single non-URL source may confirm a unit: **14 units rest on owner attestation alone** and 9
    on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 
@@ -67,7 +69,7 @@ existing Python workflow owners rather than copying their contracts.
    itself, and 3 resolved units do — never report a lone tier-3 source as a rule violation, and
    never state the tiers more strictly than this ([LESSONS](LESSONS.md#a-rule-stated-more-strictly-than-the-check-enforces)).
    `E4` fails when the attestation count stops matching the data. Prefer corroboration where it
-   exists — it covers 70 of 719 units, so it usually does not.
+   exists — it covers 73 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in

@@ -8275,7 +8275,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:F0604-P02",
         "materializedTargetId": "PHYSICAL:F0604-P02",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0410"
+        ]
       }
     },
     {
@@ -32043,6 +32046,23 @@
         "materializedTargetId": "PHYSICAL:specimen:SPEC-0324",
         "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:S10a F:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
         "provenanceTargetId": "PHYSICAL:specimen:SPEC-0324"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0410",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0410",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0410",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:F0604-P02",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:F0604-P02, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:F0604-P02"
       }
     },
     {
@@ -87429,14 +87449,17 @@
         "finish": "mirror-holo",
         "edition": null,
         "foilPattern": "poke-ball",
-        "markings": [],
+        "markings": null,
         "distribution": null,
         "cardSize": "standard",
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0604",
         "sourcePrintingId": "F0604-P02",
-        "establishingClaimId": "CLAIM:finish:F0604-P02"
+        "establishingClaimId": "CLAIM:finish:F0604-P02",
+        "specimenIds": [
+          "SPEC-0410"
+        ]
       }
     },
     {
@@ -168797,6 +168820,16 @@
       "toId": "PHYSICAL:specimen:SPEC-0324",
       "provenance": {
         "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0410",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:F0604-P02",
+      "provenance": {
+        "specimenId": "SPEC-0410"
       }
     },
     {
@@ -257800,7 +257833,7 @@
       "sourceId": "F0604-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0604-P02",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -271978,15 +272011,22 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0324",
       "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:S10a F:077/071:Snorlax-Unfazed-Fat-Thumping-Snore"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0410",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:F0604-P02, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 7546,
-    "edges": 11344,
-    "migrationInputs": 2612,
+    "entities": 7547,
+    "edges": 11345,
+    "migrationInputs": 2613,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 239,
+      "candidate-needs-evidence": 240,
       "carried": 67,
       "established-and-mapped": 1467,
       "linked-local-counterpart": 86,
@@ -271996,7 +272036,7 @@
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1865,
+    "candidateClaims": 1866,
     "cardReleases": 635,
     "physicalPrintings": 695,
     "setSourceRecords": 408,

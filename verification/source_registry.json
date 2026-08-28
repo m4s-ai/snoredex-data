@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 30,
-   "evidenceRecords": 1142,
-   "uniqueUrls": 1135,
+   "providers": 31,
+   "evidenceRecords": 1145,
+   "uniqueUrls": 1138,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3476
+   "claimsAttributed": 3484
   }
  },
  "providers": [
@@ -623,25 +623,48 @@
    "displayName": "Cardmarket",
    "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
    "homepage": "https://www.cardmarket.com",
-   "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+   "licenseOrTerms": "Site terms.",
    "category": "marketplace-catalogue",
    "authorityTier": 5,
-   "coverage": "product/filter metadata and retained Japanese or English product images",
+   "coverage": "product/filter metadata and unreviewed catalogue images",
    "supportsAbsence": false,
    "usedFor": [
     "product",
     "image",
     "finish"
    ],
-   "attribution": "Product catalogue and images via Cardmarket.",
-   "notes": "Retained product images may positively establish only facts visible on the pictured Japanese or English card, including a visible finish. Product/language filter combinations and catalogue language metadata do not establish a localized release or collector number; in particular, a Traditional Chinese filter is not evidence that the card was released under that product number. Missing products, images, filters, or listings never establish absence.",
+   "attribution": "Product catalogue via Cardmarket.",
+   "notes": "Product/language filter combinations and catalogue language metadata do not establish a localized release or collector number; in particular, a Traditional Chinese filter is not evidence that the card was released under that product number. Missing products, images, filters, or listings never establish absence.",
    "hosts": [
     "www.cardmarket.com",
     "cardmarket.com",
     "product-images.s3.cardmarket.com"
    ],
-   "uniqueSources": 396,
-   "claimsSupported": 936
+   "uniqueSources": 349,
+   "claimsSupported": 867
+  },
+  {
+   "providerId": "cardmarket-product-image",
+   "displayName": "Cardmarket exact product image",
+   "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
+   "homepage": "https://www.cardmarket.com",
+   "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+   "category": "marketplace-photo",
+   "authorityTier": 2,
+   "coverage": "individual cards whose printed text, identity or finish is visible in an exact retained product image",
+   "supportsAbsence": false,
+   "usedFor": [
+    "language",
+    "identity",
+    "finish",
+    "edition",
+    "image"
+   ],
+   "attribution": "Exact retained product image via Cardmarket.",
+   "notes": "The image is positive evidence only for properties visible on the pictured card. The surrounding product page, selected language filter, offers and counts remain tier-5 catalogue metadata and never establish another localized release or absence. Retain accepted images as SPEC-nnnn records so the observation is reviewable.",
+   "hosts": [],
+   "uniqueSources": 47,
+   "claimsSupported": 70
   },
   {
    "providerId": "pokemontcgio",
@@ -821,8 +844,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 4,
-   "claimsSupported": 5
+   "uniqueSources": 7,
+   "claimsSupported": 12
   },
   {
    "providerId": "seller-listing-photo",
@@ -2801,23 +2824,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/20th/563078/563078.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "20th 047 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/B2/273953/273953.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -2886,40 +2892,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/BW-P/562335/562335.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "BW-P 207 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/BW7/568344/568344.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "BW7 055 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CL/279676/279676.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -2952,26 +2924,6 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CLF/743180/743180.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "CLF 016 base",
-    "F0035-P01"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CLV/745674/745674.jpg",
@@ -3620,46 +3572,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566757/566757.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "DP-P 126 base",
-    "F0095-P01"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "DP-P 127 base",
-    "F0098-P01"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP/277536/277536.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -3672,57 +3584,6 @@
    "stableIdCount": 1,
    "stableIds": [
     "DP 37 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP1/699402/699402.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "DP1  base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/EC5/654062/654062.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "EC5 062 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/EXS/548656/548656.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "EXS  base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -3813,23 +3674,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/G2/605388/605388.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "G2  base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/GEN/288496/288496.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -3876,40 +3720,6 @@
    "stableIdCount": 1,
    "stableIds": [
     "HIF 50 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/HSZ/568916/568916.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "HSZ 027 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/HXY/564579/564579.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "HXY 026 base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -3998,26 +3808,6 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/LL/668962/668962.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0193-P01",
-    "LL 028 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/LOR/670829/670829.jpg",
@@ -4205,26 +3995,6 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/PJU/584696/584696.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0255-P02",
-    "PJU  base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/PKM/301122/301122.jpg",
@@ -4465,23 +4235,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/Pt2/678150/678150.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "Pt2 070 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/RCL/458093/458093.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -4567,23 +4320,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/S-P/534097/534097.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "S-P 156 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/S-P/CS/852628/852628.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -4616,46 +4352,6 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/468359/468359.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0398-P01",
-    "SM-P 1 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0400-P01",
-    "SM-P 297 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM/295297/295297.jpg",
@@ -5185,26 +4881,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/UNP/571773/571773.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0575-P01",
-    "UNP  base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/VIV/512365/512365.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -5268,77 +4944,6 @@
    "stableIdCount": 1,
    "stableIds": [
     "WP 49 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY-P/553464/553464.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "XY-P 149 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY-P/554018/554018.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0622-P01",
-    "XY-P 261 V2"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY10/562999/562999.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "XY10 057 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY2/564369/564369.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "XY2 066 base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -5463,308 +5068,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10a/656382/656382.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0324-P02",
-    "s10a 058 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10a/657056/657056.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0329-P01",
-    "s10a 077 V2"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10b/664610/664610.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0334-P02",
-    "s10b 056 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467619/467619.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0339-P01",
-    "s1H 45 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467624/467624.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0345-P01",
-    "s1H 66 V2"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467629/467629.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0348-P01",
-    "s1H 70 V2"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467634/467634.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0342-P01",
-    "s1H 46 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s2/464294/464294.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "s2 77 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s4/499775/499775.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0354-P02",
-    "s4 84 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s5a/552704/552704.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0358-P01",
-    "s5a 93 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "s8b 126 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sA/524195/524195.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "sA 10 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sH/564222/564222.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "sH 038 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sI100/588051/588051.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "sI100 341 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sI100/588052/588052.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "sI100 342 V2"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sN/606631/606631.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0417-P01",
-    "sN 008 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm10/557434/557434.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -5777,83 +5080,6 @@
    "stableIdCount": 1,
    "stableIds": [
     "sm10 076 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558416/558416.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0405-P01",
-    "sm9 066 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558481/558481.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0408-P01",
-    "sm9 106 V2"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558490/558490.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0411-P01",
-    "sm9 115 V3"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/smL/564732/564732.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "smL 038 base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -5910,23 +5136,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sv4a/746527/746527.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "sv4a 145 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sv4a/747664/747664.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -5978,40 +5187,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svG/744984/744984.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "svG 021 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svIba/761066/761066.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "svIba 046 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svLN/785477/785477.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -6027,26 +5202,6 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svM/801337/801337.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image",
-    "Inspected physical specimen photograph"
-   ],
-   "dimensions": [
-    "finish",
-    "image"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0502-P01",
-    "svM 094 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/xJTG/817769/817769.jpg",
@@ -7788,7 +6943,8 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket product page",
-    "Cardmarket stock image (visual evidence)"
+    "Cardmarket stock image (visual evidence)",
+    "user + read off 5x upscaled crop of the scan"
    ],
    "dimensions": [
     "finish",
@@ -7804,7 +6960,7 @@
     "xm2a 136 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex/Hops-Snorlax-m2a136",
@@ -10345,6 +9501,44 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2087744043/2087744043.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0411",
+    "U0561"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0604-P02",
+    "SPEC-0410",
+    "U0785"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-listing-photo",
@@ -10378,6 +9572,892 @@
     "override:exs-rarity-symbol-specimen"
    ],
    "retrievedAt": "2026-07-31",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2144873798/2144873798.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0409",
+    "U0246"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/20th/563078/563078.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "20th 047 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/BW-P/562335/562335.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "BW-P 207 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/BW7/568344/568344.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "BW7 055 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CLF/743180/743180.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "CLF 016 base",
+    "F0035-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566757/566757.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "DP-P 126 base",
+    "F0095-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "DP-P 127 base",
+    "F0098-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP1/699402/699402.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "DP1  base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/EC5/654062/654062.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "EC5 062 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/EXS/548656/548656.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "EXS  base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/G2/605388/605388.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "G2  base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/HSZ/568916/568916.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "HSZ 027 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/HXY/564579/564579.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "HXY 026 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/LL/668962/668962.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0193-P01",
+    "LL 028 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/PJU/584696/584696.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0255-P02",
+    "PJU  base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/Pt2/678150/678150.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "Pt2 070 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/S-P/534097/534097.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "S-P 156 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/468359/468359.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0398-P01",
+    "SM-P 1 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0400-P01",
+    "SM-P 297 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/UNP/571773/571773.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0575-P01",
+    "UNP  base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY-P/553464/553464.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "XY-P 149 V1"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY-P/554018/554018.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0622-P01",
+    "XY-P 261 V2"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY10/562999/562999.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "XY10 057 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY2/564369/564369.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "XY2 066 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10a/656382/656382.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0324-P02",
+    "s10a 058 V1"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10a/657056/657056.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0329-P01",
+    "s10a 077 V2"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10b/664610/664610.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0334-P02",
+    "s10b 056 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467619/467619.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0339-P01",
+    "s1H 45 V1"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467624/467624.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0345-P01",
+    "s1H 66 V2"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467629/467629.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0348-P01",
+    "s1H 70 V2"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467634/467634.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0342-P01",
+    "s1H 46 V1"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s2/464294/464294.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "s2 77 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s4/499775/499775.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0354-P02",
+    "s4 84 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s5a/552704/552704.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0358-P01",
+    "s5a 93 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "s8b 126 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sA/524195/524195.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "sA 10 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sH/564222/564222.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "sH 038 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sI100/588051/588051.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "sI100 341 V1"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sI100/588052/588052.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "sI100 342 V2"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sN/606631/606631.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0417-P01",
+    "sN 008 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558416/558416.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0405-P01",
+    "sm9 066 V1"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558481/558481.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0408-P01",
+    "sm9 106 V2"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558490/558490.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0411-P01",
+    "sm9 115 V3"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/smL/564732/564732.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "smL 038 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sv4a/746527/746527.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "sv4a 145 V1"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svG/744984/744984.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "svG 021 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svIba/761066/761066.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "svIba 046 base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svM/801337/801337.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "image"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0502-P01",
+    "svM 094 base"
+   ],
+   "retrievedAt": null,
    "usageCount": 2
   },
   {

@@ -37,8 +37,9 @@ The following invariants apply to every path:
    hand-edited as a shortcut.
 4. A source-first candidate remains a candidate until reviewed and reconciled to the
    canonical graph; it cannot mutate a language verdict or finish verdict directly.
-5. Cardmarket is a frozen historical candidate boundary. A seller photograph is positive
-   physical evidence; a Cardmarket filter or omission is not a print-manifest assertion.
+5. Cardmarket is a frozen historical candidate boundary. A retained exact product image or seller
+   photograph is positive evidence only for visible card properties; a Cardmarket filter, offer,
+   count or omission is not a print-manifest assertion.
 6. Historical passes under `verification/archive/` are provenance, not recurring workflow.
 
 ## 2. Canonical stores
@@ -221,7 +222,7 @@ projection.
 | New card from internet/source-first | Retained adapter/discovery run, then reconciliation | New candidate/release/source edges; locality and mapping edges | Adapter/card-discovery/completeness before canonical mutation |
 | New set or promo announcement (including Pokémon.com news) | Official lead, then concrete set/card source | Set/release/card edges only when positively identified | News alone is a lead; no inferred card list or finish |
 | Physical card/image | Issue manifest → attachment importer → specimen | `observed-by`/`supported-by` to finish/printing | Image/hash/SPEC validation, then finish/graph/collector projection |
-| Cardmarket listing | Historical candidate or positive seller photo | Candidate provenance or physical observation | Never expands the frozen baseline automatically |
+| Cardmarket page or image | Historical candidate metadata, or positive visible-card evidence from a retained exact product image or seller photo | Candidate provenance or physical observation | Filters, offers and counts never verify a localized card or expand the frozen baseline automatically |
 | TCGdex refresh | Candidate snapshot → explicit accept | Finish candidate/profile edges | Hash/URL diff and review before accepting snapshot |
 | Contradiction / absence | Scoped source or owner adjudication | `contradicts` or bounded absence/adjudication edges | No zero-result inference; unresolved stays disputed/pending |
 | Artwork review | Graph-backed browser projection | Artwork/work/image observation edges | Browser proposals never write catalogue truth directly |

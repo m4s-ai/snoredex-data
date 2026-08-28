@@ -188,7 +188,7 @@ All three databases point the same way, and all three are wrong:
 
 Six specimens were photographed and their card text read off — `Relaxo` / `Ronflex` / `Snorlax`, ability `Immunität` / `Vaccin` / `Immunità` / `Inmunidad` / `Imunidade`, all bearing `XY179`, Ken Sugimori and ©2016. Had the absence-argument been applied here as it was for the Asian promos, it would have produced four false contradictions.
 
-**Grade physical evidence explicitly, and by what the claim rests on.** `sourceType` distinguishes *photographed specimen* from *owner attestation*, and `providerId` must name the source the unit would fall over without — not the strongest source standing near it. **15 units rest on owner attestation alone**; 9 rest on a photographed specimen alone, each citing its `SPEC-nnnn` record. Check `E4` holds this sentence to the data, so correct it here rather than letting it drift (it read "currently 0" for weeks while the real figure was 16, then 30). A specimen may only be claimed by a unit that cites it — `S14` — and `sourceRef` holds a reference or nothing, never prose — `S13`.
+**Grade physical evidence explicitly, and by what the claim rests on.** `sourceType` distinguishes *photographed specimen* from *owner attestation*, and `providerId` must name the source the unit would fall over without — not the strongest source standing near it. **14 units rest on owner attestation alone**; 9 rest on a photographed specimen alone, each citing its `SPEC-nnnn` record. Check `E4` holds this sentence to the data, so correct it here rather than letting it drift (it read "currently 0" for weeks while the real figure was 16, then 30). A specimen may only be claimed by a unit that cites it — `S14` — and `sourceRef` holds a reference or nothing, never prose — `S13`.
 
 At this checkpoint, every card had at least one confirmed language. The then-25 open units were
 all *additional* language claims on cards that were otherwise evidenced.
@@ -939,7 +939,9 @@ Moved here from `HANDOVER.md` in #103; the detail below is this file's job.
 | **PokéCottage** `pokecottage.com` / `pokecottagecdn.com` | scriptable structured master-set rows | tier-3 positive confirmation of the exact card, set, promo, date, artist, rarity or named variant stated by a retained row; never absence by omission |
 | **Elite Fourum** `elitefourum.com` | scriptable (Discourse JSON: `/search.json`, `/t/<id>.json`) | collector-community facts (promo languages, 1st-edition timeline) |
 | **LigaPokemon** `ligapokemon.com.br` | **datacenter IPs banned (Cloudflare 1008)** — use an authenticated user browser session | Brazilian/Portuguese marketplace listings |
-| **Cardmarket** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | seller photos of physical cards (a real photo of a card in language X is valid; the language *filter* is not) |
+| **Cardmarket catalogue** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | product pages, selected language filters, offers and counts are routing metadata, not localized-card evidence |
+| **Cardmarket product image** | retained exact image from `product-images.s3.cardmarket.com` | positive evidence only for language, identity or finish visible on the pictured card face; file as a stable `SPEC-nnnn` record |
+| **Cardmarket seller photo** | retained seller image from a listing | positive evidence only for language, identity or finish visible on the photographed card; file as a stable `SPEC-nnnn` record |
 
 PokéCottage's Snorlax page loads its rows from
 `https://pokecottagecdn.com/mastersets/data/143-snorlax-data.js`. Retain the exact structured row,

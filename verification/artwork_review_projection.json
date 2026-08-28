@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-28",
-  "projectionVersion": "f22d6a8d3953cb1e99943712a7c7c3be58f9b80936a00d3c56287ace6a365eaa",
+  "projectionVersion": "7bc797626836991ac540003f831d04e3b62712e8292051efb6a13b2765ffb623",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -15,7 +15,7 @@
     "unmappedReleases": 76,
     "cardReleases": 635,
     "physicalPrintings": 695,
-    "sourceObservations": 2267
+    "sourceObservations": 2269
   },
   "groups": [
     {
@@ -4866,7 +4866,7 @@
               "finish": "mirror-holo",
               "edition": null,
               "foilPattern": "poke-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
@@ -4874,7 +4874,20 @@
               "sourceFinishUnitId": "F0604",
               "sourcePrintingId": "F0604-P02",
               "establishingClaimId": "CLAIM:finish:F0604-P02",
+              "specimenIds": [
+                "SPEC-0410"
+              ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+                },
+                {
+                  "url": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment. Retained as SPEC-0410."
+                },
                 {
                   "url": "https://www.pokemon-card.com/ex/m2a/index.html",
                   "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -4978,39 +4991,57 @@
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:0:8b0b29f7efff8575",
+              "observationId": "finish:F0604-P02:0:a971f565ce22278f",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern",
+              "contentHash": "72de31d3e8c347c389b5ae92b9970b36121fc56eeab1cdda6a671d302a53ed68",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0604-P02:1:209137131f13e88e",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
+              "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment. Retained as SPEC-0410.",
+              "contentHash": "00e1ff8bc0ea306de5f562e712aed6c72b057dc922342380fd82297497624256",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0604-P02:2:8b0b29f7efff8575",
               "kind": "finish",
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "bc835cbc328b0ea8d51ca2f1dfb4e789c02989038672e9eb2cb7fad256c8cbb6",
+              "contentHash": "525e36197e012fb7f613fd2fd072a7aca49dd12e0640480f85239b352205fa7a",
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:1:c2330fed34cbcc7f",
+              "observationId": "finish:F0604-P02:3:c2330fed34cbcc7f",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://www.pokeca.net/product/22292",
               "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment.",
-              "contentHash": "619b05100c368c835cb0ec0b6b852d861055c8b10e7d31dad43816de4e39203d",
+              "contentHash": "37f6ddee61859adc46d6afa28ff9cc9994f5807b8499711e33bb5105744a53bf",
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:2:767034ab3d1b2860",
+              "observationId": "finish:F0604-P02:4:767034ab3d1b2860",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "ac963ad920f4d1a96671a4ff65ebed04906b52e75468be8121dd3f8de65c9719",
+              "contentHash": "231d7604d6481eb11d6d6f99dea2a6f7daa8a2d7d938f9002f4639491aece403",
               "image": null
             },
             {
-              "observationId": "finish:F0604-P02:3:79682a0bcb65356f",
+              "observationId": "finish:F0604-P02:5:79682a0bcb65356f",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "5dd679f88895ba98bebf21e87b752dee9474a17b79abbb8eb7f095da7e9cc214",
+              "contentHash": "d7fbeb63fbd174844861b5755611fed036f4f88e59967bcf363ac973f921540a",
               "image": null
             },
             {
@@ -5018,8 +5049,8 @@
               "kind": "unit",
               "provider": "owner-attestation",
               "url": null,
-              "evidence": "Owner (domain expert) confirms the MEGA Dream ex mirror-holo Hop's Snorlax variants exist in Korean. MEGA Dream ex released in Korean as part of the schedule JA 2025-11-28 / TC 2025-12-05 / TH 2026-01-16 / KO 2026-01-23 / ID 2026-01-30; in Thai and Indonesian it is a main expansion numbered MA3 rather than the MA2a subset, and unlike the 151 set those localizations DO carry the mirror-holo treatment. Cardmarket files this under xm2a (Additionals); the base m2a 136 is independently confirmed in Korean.",
-              "contentHash": "9134828953be2cac0f79a1a38796df181f25213b9480d4d49079ff5898ff4acc",
+              "evidence": "Owner (domain expert) confirms the MEGA Dream ex mirror-holo Hop's Snorlax variants exist in Korean. MEGA Dream ex released in Korean as part of the schedule JA 2025-11-28 / TC 2025-12-05 / TH 2026-01-16 / KO 2026-01-23 / ID 2026-01-30; in Thai and Indonesian it is a main expansion numbered MA3 rather than the MA2a subset, and unlike the 151 set those localizations DO carry the mirror-holo treatment. Cardmarket files this under xm2a (Additionals); the base m2a 136 is independently confirmed in Korean. Independent positive seller-photo evidence retained as SPEC-0410 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
+              "contentHash": "85a746fbe737475526d2d948525565486798b920d525b992855a8fc538d5f593",
               "image": "images/xm2a_136_Hop_s_Snorlax_V2_861745.png"
             },
             {
@@ -52043,8 +52074,8 @@
               "kind": "unit",
               "provider": "bulbapedia",
               "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Wild Blaze (XY2) is listed with a Korean release as \"와일드 블레이즈\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "24980a16f900ac4efc360efaaed1eb1117da08f4d2c1a8573c2794270ceff583",
+              "evidence": "expansion Wild Blaze (XY2) is listed with a Korean release as \"와일드 블레이즈\" in the cross-language expansion index (set-level evidence) Independent positive seller-photo evidence retained as SPEC-0411 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
+              "contentHash": "0ed5a7df7292a61512740d738e8ddd2da98e96bd3007158769c2efb2d0d37a1b",
               "image": "images/XY2_066_Snorlax_564369.jpg"
             }
           ]
@@ -52497,8 +52528,8 @@
               "kind": "unit",
               "provider": "bulbapedia",
               "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Generations (GEN) is listed with a Italian release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "0bcda55e3946999fa0edf495b5219c4857baa5fd6083db2cfcbfd5afdbf5bc22",
+              "evidence": "expansion Generations (GEN) is listed with a Italian release in the cross-language expansion index (set-level evidence) Independent positive seller-photo evidence retained as SPEC-0409 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
+              "contentHash": "e5ae37e91c308b4884650b4e694b2082bf7ad73c8b14f24a871cd7ce8bb0b156",
               "image": "images/GEN_58_Snorlax_288496.jpg"
             }
           ]

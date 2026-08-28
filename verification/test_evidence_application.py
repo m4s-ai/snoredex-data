@@ -247,6 +247,17 @@ def main() -> int:
             f"localized product names were counted as exact corroboration: {false_corroboration}"
         )
 
+    exact_cardmarket_specimen_support = {"U0246", "U0561", "U0785"}
+    missing_cardmarket_corroboration = {
+        unit_id for unit_id in exact_cardmarket_specimen_support
+        if not by_id[unit_id].get("corroborated")
+    }
+    if missing_cardmarket_corroboration:
+        raise AssertionError(
+            "exact Cardmarket seller-photo corroboration was not applied: "
+            f"{missing_cardmarket_corroboration}"
+        )
+
     finish_units = load("verification/finish_units.json")["units"]
     for language in ("German", "Portuguese"):
         unit = next(
