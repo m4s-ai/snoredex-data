@@ -403,13 +403,13 @@ PROVIDERS: list[dict[str, Any]] = [
         "displayName": "Cardmarket",
         "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
         "homepage": "https://www.cardmarket.com",
-        "hosts": ["www.cardmarket.com", "cardmarket.com"],
+        "hosts": ["www.cardmarket.com", "cardmarket.com", "product-images.s3.cardmarket.com"],
         "licenseOrTerms": "Site terms.",
         "category": "marketplace-catalogue",
         "authorityTier": 5,
-        "coverage": "product and filter metadata",
+        "coverage": "product/filter metadata and unreviewed catalogue images",
         "supportsAbsence": False,
-        "usedFor": ["product", "finish"],
+        "usedFor": ["product", "image", "finish"],
         "attribution": "Product catalogue via Cardmarket.",
         "notes": (
             "Product/language filter combinations and catalogue language metadata do not "
@@ -423,7 +423,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "displayName": "Cardmarket exact product image",
         "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
         "homepage": "https://www.cardmarket.com",
-        "hosts": ["product-images.s3.cardmarket.com"],
+        "hosts": [],
         "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
         "category": "marketplace-photo",
         "authorityTier": 2,
@@ -664,6 +664,23 @@ def canonical_url(url: str) -> str:
     return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, parts.query, fragment))
 
 
+def is_cardmarket_product_image(url: str | None) -> bool:
+    return bool(
+        url
+        and urlsplit(url).netloc.lower() == "product-images.s3.cardmarket.com"
+    )
+
+
+def retained_cardmarket_product_image_urls(
+    specimens: list[dict[str, Any]],
+) -> set[str]:
+    return {
+        canonical_url(specimen["photographSource"])
+        for specimen in specimens
+        if is_cardmarket_product_image(specimen.get("photographSource"))
+    }
+
+
 def resolve_provider(url: str | None, source_type: str | None) -> str | None:
     """Infer the provider for a record that does not carry one.
 
@@ -705,6 +722,23 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
             # result is deterministic rather than dependent on dict or set iteration.
             named.append((found.start(), order, provider_id))
     return min(named)[2] if named else None
+
+
+def resolve_evidence_provider(
+    url: str | None,
+    source_type: str | None,
+    provider_id: str | None,
+    retained_cardmarket_images: set[str],
+) -> str | None:
+    if provider_id is not None:
+        return provider_id
+    if is_cardmarket_product_image(url):
+        return (
+            "cardmarket-product-image"
+            if canonical_url(url) in retained_cardmarket_images
+            else "cardmarket"
+        )
+    return resolve_provider(url, source_type)
 
 
 SPECIMEN_SOURCE_TYPES = {
@@ -750,6 +784,7 @@ def main() -> int:
     bulbapedia_dates = read_json(
         ROOT / "verification" / "bulbapedia_release_dates.json"
     )
+    retained_cardmarket_images = retained_cardmarket_product_image_urls(specimens)
 
     evidence: dict[str, dict[str, Any]] = {}
     unresolved: list[str] = []
@@ -759,7 +794,9 @@ def main() -> int:
         # A language unit already names its provider; inferring one from prose that the unit could
         # simply be asked is how the registry came to disagree with the store (#73). Inference is
         # for the records that carry no provider — finish sources, artist credits, release dates.
-        provider_id = provider_id or resolve_provider(url, source_type)
+        provider_id = resolve_evidence_provider(
+            url, source_type, provider_id, retained_cardmarket_images
+        )
         if provider_id is None:
             unresolved.append(f"{dimension}:{stable_id} url={url!r} sourceType={source_type!r}")
             return

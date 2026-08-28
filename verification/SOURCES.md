@@ -24,7 +24,7 @@ gap, never a finding.
 | **52poke (Wiki)** | collector-database | 2 | no | 1 | 1 | language, artist, edition, finish |
 | **Bulbapedia** | fan-wiki | 2 | no | 87 | 670 | language, edition, date, finish |
 | **CGC certification and registry** | grading-registry | 2 | no | 0 | 0 | finish, language |
-| **Cardmarket exact product image** | marketplace-photo | 2 | no | 198 | 221 | language, identity, finish, edition, image |
+| **Cardmarket exact product image** | marketplace-photo | 2 | no | 47 | 70 | language, identity, finish, edition, image |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | no | 7 | 12 | language, identity, finish, edition |
 | **Collection owner attestation** | non-url-evidence | 2 | no | 1 | 42 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | yes | 4 | 16 | language, edition |
@@ -43,7 +43,7 @@ gap, never a finding.
 | **WikiDex** | collector-database | 3 | no | 5 | 10 | identity |
 | **koreanpokemoncards.com** | collector-database | 3 | no | 0 | 0 | language, finish |
 | **pokumon.com** | collector-database | 3 | no | 7 | 11 | language, finish |
-| **Cardmarket** | marketplace-catalogue | 5 | no | 198 | 716 | product, finish |
+| **Cardmarket** | marketplace-catalogue | 5 | no | 349 | 867 | product, image, finish |
 | **Internal derivation from a sibling record** | internal | 5 | no | 1 | 13 | artist |
 
 ## Provider detail
@@ -316,7 +316,7 @@ gap, never a finding.
 
 - **Organization:** Cardmarket (Sammelkartenmarkt GmbH & Co. KG)
 - **Terms:** Site terms.
-- **Coverage:** product and filter metadata
+- **Coverage:** product/filter metadata and unreviewed catalogue images
 - **Can establish absence:** no — positive evidence only
 - **Attribution:** Product catalogue via Cardmarket.
 - **Notes:** Product/language filter combinations and catalogue language metadata do not establish a localized release or collector number; in particular, a Traditional Chinese filter is not evidence that the card was released under that product number. Missing products, images, filters, or listings never establish absence.

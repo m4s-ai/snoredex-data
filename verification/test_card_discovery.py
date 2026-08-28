@@ -270,7 +270,7 @@ class CardDiscoveryTests(unittest.TestCase):
         image_url = "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg"
         self.assertEqual(
             registry.resolve_provider(image_url, "Cardmarket product image"),
-            "cardmarket-product-image",
+            "cardmarket",
         )
         self.assertEqual(
             registry.resolve_provider(None, "retained Cardmarket product scan"),
@@ -302,6 +302,33 @@ class CardDiscoveryTests(unittest.TestCase):
             <= set(surface["coverageEdges"][0]["positiveEvidenceCapabilities"])
         )
         self.assertFalse(surface["coverageEdges"][0]["absenceCapability"]["enabled"])
+        source_registry = json.loads(
+            (ROOT / "verification" / "source_registry.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        specimens = json.loads(
+            (ROOT / "verification" / "specimens.json").read_text(encoding="utf-8")
+        )["specimens"]
+        retained_urls = {
+            specimen["photographSource"]
+            for specimen in specimens
+            if specimen.get("photographSource", "").startswith(
+                "https://product-images.s3.cardmarket.com/"
+            )
+        }
+        tier_two_urls = {
+            row["canonicalUrl"]
+            for row in source_registry["evidence"]
+            if row["providerId"] == "cardmarket-product-image"
+        }
+        self.assertEqual(tier_two_urls, retained_urls)
+        unreviewed = next(
+            row for row in source_registry["evidence"]
+            if row["canonicalUrl"]
+            == "https://product-images.s3.cardmarket.com/51/151C/819209/819209.jpg"
+        )
+        self.assertEqual(unreviewed["providerId"], "cardmarket")
 
     def test_issue_attachment_source_keys_preserve_only_the_synthetic_ordinal(self):
         issue = "https://github.com/m4s-ai/snoredex-data/issues/265"
