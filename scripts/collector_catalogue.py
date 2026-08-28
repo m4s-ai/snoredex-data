@@ -248,18 +248,56 @@ def printing_semantic_core_key(release_id: str, printing: dict[str, Any]) -> byt
     return canonical_bytes(payload)
 
 
+def reviewed_release_rekeys(
+    releases: dict[str, dict[str, Any]],
+) -> set[tuple[str, str]]:
+    legacy_release_by_unit = {
+        claim_id.removeprefix("CLAIM:legacy:"): release["cardReleaseId"]
+        for release in releases.values()
+        for claim_id in release.get("claimIds", [])
+        if claim_id.startswith("CLAIM:legacy:")
+    }
+    return {
+        (legacy_release_by_unit[unit_id], release["cardReleaseId"])
+        for release in releases.values()
+        for unit_id in release.get("legacyCounterpartUnitIds", [])
+        if unit_id in legacy_release_by_unit
+    }
+
+
+def source_predecessor_match(
+    physical: dict[str, Any],
+    source_candidate: tuple[str, dict[str, Any]] | None,
+    release_rekeys: set[tuple[str, str]],
+) -> dict[str, Any] | None:
+    if not source_candidate:
+        return None
+    source_release_id, source_match = source_candidate
+    release_id = str(physical.get("cardReleaseId") or "")
+    if source_release_id != release_id and (source_release_id, release_id) not in release_rekeys:
+        return None
+    if printing_semantic_core_key(release_id, source_match) != printing_semantic_core_key(release_id, physical):
+        return None
+    edition = physical.get("edition")
+    if edition is not None and source_match.get("edition") not in (None, "—", edition):
+        return None
+    return source_match
+
+
 def legacy_match_for_physical(
     physical: dict[str, Any],
-    legacy_by_source: dict[str, dict[str, Any]],
+    legacy_by_source: dict[str, tuple[str, dict[str, Any]]],
+    reviewed_release_rekeys: set[tuple[str, str]],
     legacy_by_semantic: dict[bytes, dict[str, Any]],
     legacy_by_core: dict[bytes, list[dict[str, Any]]],
 ) -> dict[str, Any] | None:
     """Match predecessor state semantically; never let an ordinal id steal a row."""
     release_id = str(physical.get("cardReleaseId") or "")
-    source_match = legacy_by_source.get(physical.get("sourcePrintingId"))
-    if source_match \
-            and printing_semantic_core_key(release_id, source_match) == printing_semantic_core_key(release_id, physical) \
-            and (physical.get("edition") is None or source_match.get("edition") in (None, "—", physical.get("edition"))):
+    source_match = source_predecessor_match(
+        physical, legacy_by_source.get(physical.get("sourcePrintingId")),
+        reviewed_release_rekeys,
+    )
+    if source_match:
         return source_match
     semantic = legacy_by_semantic.get(
         printing_semantic_key(release_id, physical)
@@ -730,13 +768,16 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     legacy_release = {
         row["checklistId"]: legacy_release_id(row, release_index) for row in legacy_items
     }
+    release_rekeys = reviewed_release_rekeys(releases)
     legacy_by_semantic: dict[bytes, dict[str, Any]] = {}
-    legacy_by_source: dict[str, dict[str, Any]] = {}
+    legacy_by_source: dict[str, tuple[str, dict[str, Any]]] = {}
     legacy_by_core: defaultdict[bytes, list[dict[str, Any]]] = defaultdict(list)
     for row in legacy_items:
         if not row.get("printingId"):
             continue
-        legacy_by_source[row["printingId"]] = row
+        legacy_by_source[row["printingId"]] = (
+            legacy_release[row["checklistId"]], row
+        )
         key = printing_semantic_key(legacy_release[row["checklistId"]], row)
         previous = legacy_by_semantic.get(key)
         if previous and previous["checklistId"] != row["checklistId"]:
@@ -1045,7 +1086,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     for physical in physicals.values():
         source_printing_id = physical.get("sourcePrintingId")
         old = legacy_match_for_physical(
-            physical, legacy_by_source, legacy_by_semantic, legacy_by_core
+            physical, legacy_by_source, release_rekeys,
+            legacy_by_semantic, legacy_by_core
         )
         unit = unit_by_printing.get(source_printing_id)
         claim = claims[physical["establishingClaimId"]]
