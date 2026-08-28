@@ -146,6 +146,13 @@ def main() -> None:
     }
     assert set(corroborated_promo_rows) == independently_corroborated_promos
     assert all(row["corroborated"] is True for row in corroborated_promo_rows.values())
+    pokumon_only_promos = {
+        row["printId"]: row for row in source_first_prints
+        if row["printId"] in {"ID:SV-P:278:base", "ID:SV-P:286:base"}
+    }
+    assert set(pokumon_only_promos) == {"ID:SV-P:278:base", "ID:SV-P:286:base"}
+    assert all(row["providerId"] == "pokumon" for row in pokumon_only_promos.values())
+    assert all(row["corroborated"] is False for row in pokumon_only_promos.values())
     clf_row = next(
         row for row in source_first_prints if row["printId"] == "TW:CLF:016/032:base"
     )

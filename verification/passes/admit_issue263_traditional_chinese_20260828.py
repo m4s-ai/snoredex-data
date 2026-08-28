@@ -706,6 +706,17 @@ def apply_discovery_adapters(document: dict[str, Any], rows: list[dict[str, Any]
         source = by_detail[detail]
         key = (raw["providerId"], raw["rawLocale"], detail)
         mappings[key] = {"providerId": raw["providerId"], "surfaceId": raw["surfaceId"], "rawLocale": raw["rawLocale"], "rawProviderId": detail, "mode": "exact-match", "targetCardReleaseId": release_id(source), "evidence": "The retained official Taiwan detail and exact image establish this Traditional Chinese card release and its printed Work traits."}
+    for detail, target in {
+        "S4|S8bF|126/184": "RELEASE:TW:T-Chinese:S8b F:126/184:Snorlax-Gormandize-Body-Slam",
+        "S4|SCAF|084/135": "RELEASE:TW:T-Chinese:SCA F:084/135:Snorlax-Gormandize-Body-Slam",
+    }.items():
+        key = ("52poke", "zh-hant", detail)
+        mappings[key] = {
+            "providerId": "52poke", "surfaceId": "52poke-wiki",
+            "rawLocale": "zh-hant", "rawProviderId": detail, "mode": "exact-match",
+            "targetCardReleaseId": target,
+            "evidence": "The retained Traditional Chinese set code and collector number identify this exact Taiwan release despite the shared 52poke page URL.",
+        }
     document["explicitMappings"] = sorted(mappings.values(), key=lambda row: (row["providerId"], row["rawLocale"], str(row["rawProviderId"])))
 
 

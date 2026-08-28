@@ -116,17 +116,17 @@ PROMOS = [
     {
         "printId": "ID:SV-P:278:base", "locality": "ID", "localSetCode": "SV-P", "localNumber": "278", "variant": "base",
         "language": "Indonesian", "script": "Latn", "name": "Snorlax", "cardName": "Snorlax", "catchUpOf": None,
-        "specimenId": "SPEC-0187", "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo/", "corroborated": True,
+        "specimenId": "SPEC-0187", "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo/", "corroborated": False,
         "markAssetUrl": None, "cardImageUrl": None, "releaseDate": "2025-07-25", "releaseDatePrecision": "day", "releaseApproximate": False,
-        "evidence": "The exact retained Indonesian 278/SV-P image is SPEC-0187; Pokumon and the Indonesian SV-P list identify Promo Pack 11 on July 25, 2025 and the non-holo treatment.",
+        "evidence": "The Pokumon record and retained copy of its exact Indonesian 278/SV-P image in SPEC-0187 identify Promo Pack 11 on July 25, 2025 and the non-holo treatment.",
         "work": "Snorlax-Spike-Draw-Mega-Punch", "rarity": ("PROMO", "promo"), "legacy": ["U0773"],
     },
     {
         "printId": "ID:SV-P:286:base", "locality": "ID", "localSetCode": "SV-P", "localNumber": "286", "variant": "base",
         "language": "Indonesian", "script": "Latn", "name": "Snorlax", "cardName": "Snorlax", "catchUpOf": None,
-        "specimenId": "SPEC-0188", "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/snorlax-286-sv-p-indonesian-promo/", "corroborated": True,
+        "specimenId": "SPEC-0188", "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/snorlax-286-sv-p-indonesian-promo/", "corroborated": False,
         "markAssetUrl": None, "cardImageUrl": None, "releaseDate": "2026-01", "releaseDatePrecision": "month", "releaseApproximate": False,
-        "evidence": "The exact retained Indonesian 286/SV-P Taro-stamped image is SPEC-0188; Pokumon and the Indonesian SV-P list identify the January-February 2026 promotion and non-holo treatment.",
+        "evidence": "The Pokumon record and retained copy of its exact Indonesian 286/SV-P Taro-stamped image in SPEC-0188 identify the January-February 2026 promotion and non-holo treatment.",
         "work": "Snorlax-But-First-Food-Heavy-Impact", "rarity": ("PROMO", "promo"), "legacy": ["U0687"],
     },
 ]

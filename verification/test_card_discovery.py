@@ -1130,6 +1130,32 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertEqual(
             records["S10a|SVG|021/049"]["sourcePageKey"], "S10a"
         )
+        expected_targets = {
+            "S4|S8bF|126/184": "RELEASE:TW:T-Chinese:S8b F:126/184:Snorlax-Gormandize-Body-Slam",
+            "S4|SCAF|084/135": "RELEASE:TW:T-Chinese:SCA F:084/135:Snorlax-Gormandize-Body-Slam",
+        }
+        mappings = {
+            row["rawProviderId"]: row["targetCardReleaseId"]
+            for row in contract["explicitMappings"]
+            if row["providerId"] == "52poke" and row["rawLocale"] == "zh-hant"
+        }
+        self.assertEqual(
+            {detail: mappings.get(detail) for detail in expected_targets},
+            expected_targets,
+        )
+        projected = {
+            row["rawProviderId"]: row["normalizationProposal"]["targetCardReleaseId"]
+            for row in (
+                json.loads(line) for line in
+                (ROOT / "verification" / "card_discovery_records.jsonl")
+                .read_text(encoding="utf-8").splitlines()
+            )
+            if row["providerId"] == "52poke"
+        }
+        self.assertEqual(
+            {detail: projected.get(detail) for detail in expected_targets},
+            expected_targets,
+        )
 
     def test_zero_result_is_source_failure_not_absence(self):
         raw = b"""
