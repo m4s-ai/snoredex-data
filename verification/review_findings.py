@@ -1003,11 +1003,12 @@ def _collect_g2c(state: dict[str, Any]) -> dict[str, Any]:
         def _collect_g2c_part12():
             nonlocal munchlax_faults, pocket_faults, pocket_rows, row, svqp_ok, western_locale_expectations
             svqp_ok = len(svqp_rows) == 1 and (
-                svqp_rows[0]["bucket"] == "new-candidate"
+                svqp_rows[0]["bucket"] == "matched"
                 and svqp_rows[0]["raw"]["rawSetCode"] == "SVQP"
                 and svqp_rows[0]["raw"]["localCollectorNumber"] == "012/023"
                 and svqp_rows[0]["normalizationProposal"]["assertedLocalSetCode"] == "svQP F"
-                and svqp_rows[0]["normalizationProposal"]["targetCardReleaseId"] is None
+                and svqp_rows[0]["normalizationProposal"]["targetCardReleaseId"]
+                    == "RELEASE:TW:T-Chinese:svQP F:012/023:Snorlax-Spike-Draw-Mega-Punch"
             )
             munchlax_faults = [
                 row["recordId"] for row in card_records

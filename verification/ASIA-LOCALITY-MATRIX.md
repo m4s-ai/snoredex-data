@@ -10,7 +10,7 @@ A complete track means only that its bounded positive slice balances. Silence, z
 | Track | Terminal state | Bounded slice accounting | Explicit gaps |
 |---|---|---|---|
 | `asia-jp` Japan | `needs-evidence` | none | `official-japanese-card-search` |
-| `asia-tw` Traditional Chinese — Taiwan catalogue surface | `complete` | `pokemon-asia-tw-snorlax` 43/43 (31 new candidates); `52poke-tw-issue84-snorlax` 12/12 (9 new candidates) | none |
+| `asia-tw` Traditional Chinese — Taiwan catalogue surface | `complete` | `pokemon-asia-tw-snorlax` 43/43 (0 new candidates); `52poke-tw-issue84-snorlax` 12/12 (9 new candidates) | none |
 | `asia-hk` Traditional Chinese — Hong Kong provenance | `needs-evidence` | none | `official-asia-hk-market-provenance` |
 | `asia-cn` Simplified Chinese — mainland China | `blocked-by-source` | none | `official-asia-kr-cn` |
 | `asia-kr` Korean | `blocked-by-source` | none | `official-asia-kr-cn` |
@@ -22,7 +22,7 @@ A complete track means only that its bounded positive slice balances. Silence, z
 
 | Regression | Disposition | Evidence |
 |---|---|---|
-| `tw-svqp-f-012` T-Chinese svQP F 012/023 | `positive-candidate` | `card-record:raw-card:68199fe53d096ca857ed285d` — The official detail and set-symbol asset are retained; no work equivalence or finish is inferred. |
+| `tw-svqp-f-012` T-Chinese svQP F 012/023 | `positive-node` | `source-first:TW:svQP F:012/023:base` — The retained official detail and card image establish the local release and its printed Work traits; no physical finish is inferred. |
 | `tw-sv-p-215` T-Chinese SV-P 215 | `positive-node` | `source-first:TW:SV-P:215:base` — The specimen-backed local release is materialized in the dry-run graph. |
 | `tw-as5a-142` T-Chinese AS5a 142 linked to U0265 | `positive-node` | `source-first:TW:AS5a:142:base`, `legacy-rekey:84/U0265` — The reviewed same-work decision retains the legacy and local identities separately. |
 | `cn-sv9-075` S-Chinese counterpart to legacy SV9-075 | `positive-node` | `unit:U0761` — The existing zh-tw SV9 075 row is Traditional Chinese; the retained positive S-Chinese counterpart is the same Hop's Snorlax work under its own local identity CSV10C 175. |

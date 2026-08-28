@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 277,
+  "count": 324,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -142,7 +142,8 @@
       "citedBy": [
         "TW:sc1b F:177/153:base"
       ],
-      "photographSha256": "sha256:68e9013ed759f8f3d8ab1ed79c0677aca50d1670570dd26073529ff5cd526e2d"
+      "photographSha256": "sha256:68e9013ed759f8f3d8ab1ed79c0677aca50d1670570dd26073529ff5cd526e2d",
+      "listingUrl": "https://github.com/user-attachments/assets/65ea5eff-7441-47a4-8750-47c03822f3d8"
     },
     {
       "specimenId": "SPEC-0009",
@@ -573,8 +574,11 @@
       "photographSource": "/tmp/claude-0/-home-user-snoredex-data/0a38d020-3b1f-5df4-934b-61dbad7e52e9/scratchpad/c_58445291.png",
       "observed": "Traditional Chinese Eevee & Snorlax-GX photographed by the owner through issue #166: \"伊布&卡比獸 GX\", 基礎 (Basic), TAG TEAM, HP 270, Colorless; 加油, 拋擲重壓 120+, 百萬噸友情GX 210; weakness Fighting x2, retreat 4; Illus. Mitsuhiro Arita; PROMO, regulation mark C, \"053/SM-P\", ©2020 Pokémon. The artwork carries a POKÉMON TCG GYM stamp — the same distribution marking as the Thai 083/SM-P, and the same Mitsuhiro Arita artwork.",
       "recordedAt": "2026-08-10",
-      "citedBy": [],
-      "photographSha256": "sha256:48b1b4ecba6482b17501c890431243433e8ab0f1e1b2dbf0569224c06c7a38eb"
+      "citedBy": [
+        "TW:SM-P:053:base"
+      ],
+      "photographSha256": "sha256:48b1b4ecba6482b17501c890431243433e8ab0f1e1b2dbf0569224c06c7a38eb",
+      "listingUrl": "https://pokumon.com/card/eevee-snorlax-gx-053-sm-p-chinese-promo"
     },
     {
       "specimenId": "SPEC-0030",
@@ -742,7 +746,8 @@
       "citedBy": [
         "TW:AS5a:222/184:base"
       ],
-      "photographSha256": "sha256:7cd1d1e3381e3a2a8a25bf6c6e65cb6790d90662f94a57c45f9e5448eb4b19db"
+      "photographSha256": "sha256:7cd1d1e3381e3a2a8a25bf6c6e65cb6790d90662f94a57c45f9e5448eb4b19db",
+      "listingUrl": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
     },
     {
       "specimenId": "SPEC-0039",
@@ -759,7 +764,8 @@
       "citedBy": [
         "TW:AS5a:203/184:base"
       ],
-      "photographSha256": "sha256:ae74abf7d7a9d3f45777e75232277a5f3c99ecb2c67af422415e1f4d582ea5e7"
+      "photographSha256": "sha256:ae74abf7d7a9d3f45777e75232277a5f3c99ecb2c67af422415e1f4d582ea5e7",
+      "listingUrl": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
     },
     {
       "specimenId": "SPEC-0040",
@@ -5853,6 +5859,935 @@
         "TH:MA4:091/123:base"
       ],
       "listingUrl": "https://asia.pokemon-card.com/th/card-search/detail/13857/"
+    },
+    {
+      "specimenId": "SPEC-0278",
+      "setCode": "S4 F",
+      "number": "084/100",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0278.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00000375.png",
+      "photographSha256": "sha256:8b20854534abfe0a1ce750bfdd03f57b237477572accbd754dd9cd35d474a2a1",
+      "observed": "Complete retained image for Traditional Chinese Snorlax S4 F 084/100 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:S4 F:084/100:base",
+        "U0292"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/375/"
+    },
+    {
+      "specimenId": "SPEC-0279",
+      "setCode": "SCA F",
+      "number": "084/135",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0279.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00001474.png",
+      "photographSha256": "sha256:5522e34a25d17925b3ea9459ce9df9f0ea1a2ec208a1873a7b225fe3467d511c",
+      "observed": "Complete retained image for Traditional Chinese Snorlax SCA F 084/135 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SCA F:084/135:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/1474/"
+    },
+    {
+      "specimenId": "SPEC-0280",
+      "setCode": "sH F",
+      "number": "038/053",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0280.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002051.png",
+      "photographSha256": "sha256:9e3061c0f0d40a7944dc832db77cee2dd538c5088e62e84bc6daf1bf0b7f3ba7",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sH F 038/053 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sH F:038/053:base",
+        "U0642"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2051/"
+    },
+    {
+      "specimenId": "SPEC-0281",
+      "setCode": "scD F",
+      "number": "111/159",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0281.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002220.png",
+      "photographSha256": "sha256:505de0cb74bc6754359202a2f8f76086414c0428ba84a5eeba99a544c62901c8",
+      "observed": "Complete retained image for Traditional Chinese Snorlax scD F 111/159 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:scD F:111/159:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2220/"
+    },
+    {
+      "specimenId": "SPEC-0282",
+      "setCode": "sc1a F",
+      "number": "127/154",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0282.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002395.png",
+      "photographSha256": "sha256:0deea825dcd277205fd86243a55a1c561a84572ef298b98bf1264f2305b4c676",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sc1a F 127/154 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sc1a F:127/154:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2395/"
+    },
+    {
+      "specimenId": "SPEC-0283",
+      "setCode": "sc1b F",
+      "number": "119/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0283.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002541.png",
+      "photographSha256": "sha256:0f2385d46bb7ae8d0cddb2755fc5c20310cc596117b5bf3fd027e0f07cf4b044",
+      "observed": "Complete retained image for Traditional Chinese Snorlax V sc1b F 119/153 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sc1b F:119/153:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2541/"
+    },
+    {
+      "specimenId": "SPEC-0284",
+      "setCode": "sc1b F",
+      "number": "120/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0284.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002542.png",
+      "photographSha256": "sha256:be06f7fad95f308bbfabf974799e1e928638e403eb46b55fc6ce7bc08fa71cac",
+      "observed": "Complete retained image for Traditional Chinese Snorlax VMAX sc1b F 120/153 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sc1b F:120/153:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2542/"
+    },
+    {
+      "specimenId": "SPEC-0285",
+      "setCode": "sc1D F",
+      "number": "132/164",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0285.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002707.png",
+      "photographSha256": "sha256:eed04e8ebab8cea709690eb4d05f67b6981f535f833f5e2af77933cc02224ca9",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sc1D F 132/164 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sc1D F:132/164:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2707/"
+    },
+    {
+      "specimenId": "SPEC-0286",
+      "setCode": "sc1D F",
+      "number": "133/164",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0286.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002708.png",
+      "photographSha256": "sha256:1d6c6ebbaa06d221a075d4e6b77f71c1a277e18ef56db8ca590362bf1c625b93",
+      "observed": "Complete retained image for Traditional Chinese Snorlax V sc1D F 133/164 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sc1D F:133/164:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2708/"
+    },
+    {
+      "specimenId": "SPEC-0287",
+      "setCode": "AS5a",
+      "number": "117/184",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0287.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002856.png",
+      "photographSha256": "sha256:d91b058876a79ae958d03b06c6e3f65791e88ea91fb1b0a00589fae16a7a25f3",
+      "observed": "Complete retained image for Traditional Chinese Eevee & Snorlax-GX AS5a 117/184 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:AS5a:117/184:base",
+        "U0414"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2856/"
+    },
+    {
+      "specimenId": "SPEC-0288",
+      "setCode": "AS5a",
+      "number": "142",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0288.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00002881.png",
+      "photographSha256": "sha256:c09460ab23194c25f0d7c9449d14463f7c64637add85b78d85faa9935c43eb68",
+      "observed": "Complete retained image for Traditional Chinese Snorlax AS5a 142 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:AS5a:142:base",
+        "U0265"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2881/"
+    },
+    {
+      "specimenId": "SPEC-0289",
+      "setCode": "AS5D",
+      "number": "118/169",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0289.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00003553.png",
+      "photographSha256": "sha256:82be93ea46d06f2619cb27c40ed5469ba1e051f1b71fb7471b05a82334c8bf43",
+      "observed": "Complete retained image for Traditional Chinese Eevee & Snorlax-GX AS5D 118/169 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:AS5D:118/169:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/3553/"
+    },
+    {
+      "specimenId": "SPEC-0290",
+      "setCode": "AC1b",
+      "number": "118/158",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0290.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00004244.png",
+      "photographSha256": "sha256:495684d10662727e62edd972006d10ebbe9064b5a66bc520cd590d710ac2747f",
+      "observed": "Complete retained image for Traditional Chinese Snorlax-GX AC1b 118/158 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:AC1b:118/158:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/4244/"
+    },
+    {
+      "specimenId": "SPEC-0291",
+      "setCode": "S8b F",
+      "number": "126/184",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0291.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00005314.png",
+      "photographSha256": "sha256:8ac73092222ebfda4fbfd372a40fc24323e2f213dcc6d8dda581354d539b2766",
+      "observed": "Complete retained image for Traditional Chinese Snorlax S8b F 126/184 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:S8b F:126/184:base",
+        "U0174"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5314/"
+    },
+    {
+      "specimenId": "SPEC-0292",
+      "setCode": "S-P",
+      "number": "145",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0292.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00005618.png",
+      "photographSha256": "sha256:d2ba0383495197531d9e11ff99e352652f484c6f3de98c162f02a5f27ebd361d",
+      "observed": "Complete retained image for Traditional Chinese Snorlax S-P 145 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:S-P:145:base",
+        "U0625"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5618/"
+    },
+    {
+      "specimenId": "SPEC-0293",
+      "setCode": "SI F",
+      "number": "341/414",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0293.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00005968.png",
+      "photographSha256": "sha256:b49a14934a078fb84f98fb9717c894eb6037f1e30e307c7aedd2004e75066f96",
+      "observed": "Complete retained image for Traditional Chinese Snorlax SI F 341/414 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SI F:341/414:base",
+        "U0654"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5968/"
+    },
+    {
+      "specimenId": "SPEC-0294",
+      "setCode": "SI F",
+      "number": "342/414",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0294.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00005969.png",
+      "photographSha256": "sha256:5cd0c0cb4045bd07c2a03e398f09c77c37f239bc948db259e147f3f99b2ad4e9",
+      "observed": "Complete retained image for Traditional Chinese Snorlax SI F 342/414 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SI F:342/414:base",
+        "U0658"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5969/"
+    },
+    {
+      "specimenId": "SPEC-0295",
+      "setCode": "S10a F",
+      "number": "058/071",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0295.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00006424.png",
+      "photographSha256": "sha256:b9bf16742aec30c620d48ae8ea38e4889266af1dce743605bbfce5befb059eab",
+      "observed": "Complete retained image for Traditional Chinese Snorlax S10a F 058/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:S10a F:058/071:base",
+        "U0345"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/6424/"
+    },
+    {
+      "specimenId": "SPEC-0296",
+      "setCode": "S10b F",
+      "number": "056/071",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0296.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00006589.png",
+      "photographSha256": "sha256:10fb59d6ee99d36ef5b3771b7abbdcc226fcf3a92a5e400045ea3ecca66d4f4e",
+      "observed": "Complete retained image for Traditional Chinese Snorlax S10b F 056/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:S10b F:056/071:base",
+        "U0203"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/6589/"
+    },
+    {
+      "specimenId": "SPEC-0297",
+      "setCode": "SN F",
+      "number": "008/024",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0297.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00007016.png",
+      "photographSha256": "sha256:6d0043207562aac498dd635256e47c6db0d569f7044c16ef867b57828eb2d1d4",
+      "observed": "Complete retained image for Traditional Chinese Snorlax SN F 008/024 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SN F:008/024:base",
+        "U0771"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/7016/"
+    },
+    {
+      "specimenId": "SPEC-0298",
+      "setCode": "sc1b F",
+      "number": "165/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0298.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00007426.png",
+      "photographSha256": "sha256:f1ed7237362035c6c3dcec9ed96b6d475050535832c8921d5d54ae7c575438c1",
+      "observed": "Complete retained image for Traditional Chinese Snorlax V sc1b F 165/153 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sc1b F:165/153:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/7426/"
+    },
+    {
+      "specimenId": "SPEC-0299",
+      "setCode": "sv2a F",
+      "number": "143/165",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0299.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00008266.png",
+      "photographSha256": "sha256:3eb852aebc5145dd2e4afe8b3b5c39cbfb0243b23ee7a808f6b7d8e0754397c9",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sv2a F 143/165 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sv2a F:143/165:base",
+        "U0104"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8266/"
+    },
+    {
+      "specimenId": "SPEC-0300",
+      "setCode": "sv2a F",
+      "number": "181/165",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0300.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00008304.png",
+      "photographSha256": "sha256:10788e330cb60de494042ea4c0c819b933c078e6ebcd2c54df6c0a8eb7e4d450",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sv2a F 181/165 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sv2a F:181/165:base",
+        "U0050"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8304/"
+    },
+    {
+      "specimenId": "SPEC-0301",
+      "setCode": "sv4K F",
+      "number": "059/066",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0301.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00008943.png",
+      "photographSha256": "sha256:a0780295fa47f2021393a4c4222665943e054f2486ee47a39f9ad1a0927bf380",
+      "observed": "Complete retained image for Traditional Chinese Snorlax Doll sv4K F 059/066 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sv4K F:059/066:base",
+        "U0261"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8943/"
+    },
+    {
+      "specimenId": "SPEC-0302",
+      "setCode": "sv4a F",
+      "number": "145/190",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0302.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00009173.png",
+      "photographSha256": "sha256:378c844f673d17974a44336254f6d17679543c1e74fdcabfa1b8b8c14b4374de",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sv4a F 145/190 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sv4a F:145/190:base",
+        "U0307"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/9173/"
+    },
+    {
+      "specimenId": "SPEC-0303",
+      "setCode": "sv4a F",
+      "number": "310/190",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0303.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00009339.png",
+      "photographSha256": "sha256:2d39dcd3ed82ddb80d98fb222590c365d325b4cc5960931445080e10396d7e82",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sv4a F 310/190 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sv4a F:310/190:base",
+        "U0385"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/9339/"
+    },
+    {
+      "specimenId": "SPEC-0304",
+      "setCode": "sv5a F",
+      "number": "051/066",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0304.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00010298.png",
+      "photographSha256": "sha256:e7dc10c31e9655822f0b90de0d3b3f22e875d9fe468a45c8e08590543fd5e469",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sv5a F 051/066 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sv5a F:051/066:base",
+        "U0234"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/10298/"
+    },
+    {
+      "specimenId": "SPEC-0305",
+      "setCode": "SVI F",
+      "number": "046/066",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0305.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00011337.png",
+      "photographSha256": "sha256:e68429a68757fc06a5abc4fc9af9fbb82c2c891cf6a0e161a15c55509a5b1565",
+      "observed": "Complete retained image for Traditional Chinese Snorlax SVI F 046/066 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SVI F:046/066:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/11337/"
+    },
+    {
+      "specimenId": "SPEC-0306",
+      "setCode": "SVM F",
+      "number": "094/175",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0306.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00012164.png",
+      "photographSha256": "sha256:847f95bd38d5793ed9c50c52f7a7cad56503008a2f6b496a6135eb50ad4a0484",
+      "observed": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SVM F:094/175:base",
+        "U0403"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12164/"
+    },
+    {
+      "specimenId": "SPEC-0307",
+      "setCode": "SV-P",
+      "number": "215",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0307.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00012268.png",
+      "photographSha256": "sha256:4d0c0b49ccea71a199a30cf9a3236bb856acecc2c42d7d5054838196e660dc95",
+      "observed": "Complete retained image for Traditional Chinese Snorlax SV-P 215 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SV-P:215:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12268/"
+    },
+    {
+      "specimenId": "SPEC-0308",
+      "setCode": "SV9 F",
+      "number": "075/100",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0308.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00012537.png",
+      "photographSha256": "sha256:a6940e5935e2ce92d52b39f06057b9556bd1e825c702324aa78502dbf03ea197",
+      "observed": "Complete retained image for Traditional Chinese Hop's Snorlax SV9 F 075/100 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:SV9 F:075/100:base",
+        "U0371"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12537/"
+    },
+    {
+      "specimenId": "SPEC-0309",
+      "setCode": "svQP F",
+      "number": "012/023",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0309.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00013148.png",
+      "photographSha256": "sha256:a2fb570718c088e5e979b11bcf6cd33799e49f4a9db769f3f822923fb7d8f4ca",
+      "observed": "Complete retained image for Traditional Chinese Snorlax svQP F 012/023 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:svQP F:012/023:base"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/13148/"
+    },
+    {
+      "specimenId": "SPEC-0310",
+      "setCode": "M2a F",
+      "number": "136/193",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0310.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00014796.png",
+      "photographSha256": "sha256:d237a9d0f65fa811c1408bdef87310c8d3aa90a19af3867211353184b7e900d4",
+      "observed": "Complete retained image for Traditional Chinese Hop's Snorlax M2a F 136/193 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:M2a F:136/193:base",
+        "U0128"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/14796/"
+    },
+    {
+      "specimenId": "SPEC-0311",
+      "setCode": "sv2a F",
+      "number": "143/165",
+      "variant": "poke-ball-pattern",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0311.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00014986.png",
+      "photographSha256": "sha256:de7bec15066edb9ea997045a4f57e9069fdea873c310409be3789b519460884d",
+      "observed": "Complete retained image for Traditional Chinese Snorlax sv2a F 143/165 (poke-ball-pattern). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:sv2a F:143/165:poke-ball-pattern",
+        "U0776",
+        "U0781"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/14986/"
+    },
+    {
+      "specimenId": "SPEC-0312",
+      "setCode": "M2a F",
+      "number": "136/193",
+      "variant": "poke-ball-pattern",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0312.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00016453.png",
+      "photographSha256": "sha256:44195d3f716e160a0e179294297f485925cd924a9b31102467e1a19fafe6ca82",
+      "observed": "Complete retained image for Traditional Chinese Hop's Snorlax M2a F 136/193 (poke-ball-pattern). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:M2a F:136/193:poke-ball-pattern",
+        "U0786"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/16453/"
+    },
+    {
+      "specimenId": "SPEC-0313",
+      "setCode": "M2a F",
+      "number": "136/193",
+      "variant": "colorless-energy-star-pattern",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0313.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00016454.png",
+      "photographSha256": "sha256:41faea934420c066bc825426cc833fa9431d00ff595f7da60d56be50d47297c2",
+      "observed": "Complete retained image for Traditional Chinese Hop's Snorlax M2a F 136/193 (colorless-energy-star-pattern). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:M2a F:136/193:colorless-energy-star-pattern",
+        "U0791"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/16454/"
+    },
+    {
+      "specimenId": "SPEC-0314",
+      "setCode": "MC F",
+      "number": "567/742",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0314.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00017038.png",
+      "photographSha256": "sha256:5fc275616e5441930eef0e242bd7fe9cf630417e774080f60e0813639b14c600",
+      "observed": "Complete retained image for Traditional Chinese Snorlax MC F 567/742 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:MC F:567/742:base",
+        "U0684"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/17038/"
+    },
+    {
+      "specimenId": "SPEC-0315",
+      "setCode": "MC F",
+      "number": "568/742",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0315.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00017039.png",
+      "photographSha256": "sha256:8ba476777a2e4417241c2f28fc82d03d5bb92a330f1807c3e4c5c29c9032aaa4",
+      "observed": "Complete retained image for Traditional Chinese Snorlax MC F 568/742 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:MC F:568/742:base",
+        "U0591"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/17039/"
+    },
+    {
+      "specimenId": "SPEC-0316",
+      "setCode": "MC F",
+      "number": "569/742",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0316.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00017040.png",
+      "photographSha256": "sha256:cd8a8c95844e583a3961fbc1531cf6245d364c67d1a3cf5930cf73a7b977639f",
+      "observed": "Complete retained image for Traditional Chinese Hop's Snorlax MC F 569/742 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:MC F:569/742:base",
+        "U0764"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/17040/"
+    },
+    {
+      "specimenId": "SPEC-0317",
+      "setCode": "M3 F",
+      "number": "062/080",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0317.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00018039.png",
+      "photographSha256": "sha256:1e37e72e3141bc81355848148595a4405ed6ddcef76730446b0a7575ab59de35",
+      "observed": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:M3 F:062/080:base",
+        "U0258"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/18039/"
+    },
+    {
+      "specimenId": "SPEC-0318",
+      "setCode": "MC F",
+      "number": "568/742",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0318.png",
+      "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00018292.png",
+      "photographSha256": "sha256:7296b16973858af6e10519262d84e8d3cf63fb4b457d018e6473f857ca11ae42",
+      "observed": "Complete retained image for Traditional Chinese Snorlax MC F 568/742 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:MC F:568/742:base",
+        "U0591"
+      ],
+      "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/18292/"
+    },
+    {
+      "specimenId": "SPEC-0319",
+      "setCode": "CLF",
+      "number": "016/032",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0319.jpg",
+      "photographSource": "https://cf.shopee.tw/file/tw-11134207-7r98p-lq0zta37yupu9a",
+      "photographSha256": "sha256:f7a121b704c24010b60660e283485422a68192977a92f91d4977b8ae22e02021",
+      "observed": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:CLF:016/032:base",
+        "U0441"
+      ],
+      "listingUrl": "https://shopee.tw/product/9736187/25206242683",
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The photograph visibly shows dense foil across the full card face, including the artwork window."
+      }
+    },
+    {
+      "specimenId": "SPEC-0320",
+      "setCode": "CLF",
+      "number": "016/032",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0320.jpg",
+      "photographSource": "https://cf.shopee.tw/file/tw-11134207-7r991-lny2yl0igo4d9b",
+      "photographSha256": "sha256:089a8d796980650cd1e42abeb125139d88a18955af8b3f12827c2b410f2b7f01",
+      "observed": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:CLF:016/032:base",
+        "U0441"
+      ],
+      "listingUrl": "https://shopee.tw/product/4914178/22786197647",
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The photograph visibly shows dense foil across the full card face, including the artwork window."
+      }
+    },
+    {
+      "specimenId": "SPEC-0321",
+      "setCode": "CLF",
+      "number": "016/032",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0321.jpg",
+      "photographSource": "https://cf.shopee.tw/file/tw-11134207-81ztc-mhx0q1fnelmuc0",
+      "photographSha256": "sha256:ca7f8d692ecf8e520bb144658d1c783240b5fcb24734148038325cc0511f971c",
+      "observed": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:CLF:016/032:base",
+        "U0441"
+      ],
+      "listingUrl": "https://shopee.tw/product/6777510/50602680694",
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The photograph visibly shows dense foil across the full card face, including the artwork window."
+      }
+    },
+    {
+      "specimenId": "SPEC-0322",
+      "setCode": "CLF",
+      "number": "016/032",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0322.jpg",
+      "photographSource": "https://cf.shopee.tw/file/tw-11134207-820lg-mpg97q4m34lof2",
+      "photographSha256": "sha256:701f18406b2a4da265ae1735b01e597ef78b13dd6505c7f2b6522f6a40c0a129",
+      "observed": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:CLF:016/032:base",
+        "U0441"
+      ],
+      "listingUrl": "https://shopee.tw/product/16896213/51412187955",
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The photograph visibly shows dense foil across the full card face, including the artwork window."
+      }
+    },
+    {
+      "specimenId": "SPEC-0323",
+      "setCode": "S10a F",
+      "number": "077/071",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0323.jpg",
+      "photographSource": "https://www.nacg.tw/files/item/149595.jpg?v=1748956270",
+      "photographSha256": "sha256:401c75ea5eca84db87776dd887a011d81f6c90ce03d97e97c216bb5aa5e9736c",
+      "observed": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:S10a F:077/071:base",
+        "U0169"
+      ],
+      "listingUrl": "https://www.nacg.tw/product-details.php?id=149595",
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The exact specialist listing identifies the card as Foil and the physical listing photograph shows the same exact card."
+      }
+    },
+    {
+      "specimenId": "SPEC-0324",
+      "setCode": "S10a F",
+      "number": "077/071",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "publisher or marketplace seller",
+      "inspectedFrom": "retained positive card image",
+      "photograph": "SPEC-0324.jpeg",
+      "photographSource": "https://a.rimg.com.tw/s6/76c/3b0/akb5566/9/18/22223353127192_302.jpeg",
+      "photographSha256": "sha256:9d24d86ee6db05be009256e307114b5ba57d688b869b422ebb1c3243e0520b1c",
+      "observed": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
+      "recordedAt": "2026-08-28",
+      "citedBy": [
+        "TW:S10a F:077/071:base",
+        "U0169"
+      ],
+      "listingUrl": "https://www.ruten.com.tw/item/22223353127192/",
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "The exact specialist listing identifies the card as Foil and the physical listing photograph shows the same exact card."
+      }
     }
   ]
 }

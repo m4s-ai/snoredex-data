@@ -59,18 +59,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 446,
+      "withConfirmedFinish": 448,
       "withOnlyMarketplaceClaim": 58,
-      "pendingFinish": 58,
+      "pendingFinish": 56,
       "notApplicableFinish": 75,
       "withCompleteManifest": 22,
-      "withNonHolo": 302,
-      "withHolo": 217,
+      "withNonHolo": 301,
+      "withHolo": 218,
       "withReverseHolo": 229,
-      "withMirrorHolo": 18,
+      "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 50,
-      "withUnresolvedProductMapping": 95,
-      "withAnyUnresolvedDetail": 185,
+      "withUnresolvedProductMapping": 93,
+      "withAnyUnresolvedDetail": 184,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -3310,7 +3310,7 @@
       "finishUnitId": "F0037",
       "cardName": "Snorlax",
       "setCode": "CLF",
-      "releaseSetCode": null,
+      "releaseSetCode": "CLF",
       "setName": "Pokémon Card Game Classic: Venusaur & Lugia ex Deck",
       "number": "016",
       "language": "T-Chinese",
@@ -3329,22 +3329,113 @@
           "image": "images/CLF_016_Snorlax_743180.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "mirror-holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
         "reverse-holo": "pending",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
-      "patternStatus": "not-applicable",
-      "printings": [],
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
+      "patternStatus": "pending",
+      "printings": [
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cf.shopee.tw/file/tw-11134207-7r98p-lq0zta37yupu9a",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0319."
+            },
+            {
+              "url": "https://shopee.tw/product/9736187/25206242683",
+              "sourceType": "Marketplace physical card photograph",
+              "authorityTier": "physical-specimen",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "T-Chinese"
+              ],
+              "retrievedAt": "2026-08-28",
+              "evidence": "Exact CLF 016/032 Traditional Chinese card photographed with full-card mirror holo."
+            },
+            {
+              "url": "https://shopee.tw/product/4914178/22786197647",
+              "sourceType": "Marketplace physical card photograph",
+              "authorityTier": "physical-specimen",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "T-Chinese"
+              ],
+              "retrievedAt": "2026-08-28",
+              "evidence": "Independent exact CLF 016/032 Traditional Chinese mirror-holo card photograph."
+            },
+            {
+              "url": "https://shopee.tw/product/6777510/50602680694",
+              "sourceType": "Marketplace physical card photograph",
+              "authorityTier": "physical-specimen",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "T-Chinese"
+              ],
+              "retrievedAt": "2026-08-28",
+              "evidence": "Independent exact CLF 016/032 Traditional Chinese mirror-holo card photograph."
+            },
+            {
+              "url": "https://shopee.tw/product/16896213/51412187955",
+              "sourceType": "Marketplace physical card photograph",
+              "authorityTier": "physical-specimen",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "T-Chinese"
+              ],
+              "retrievedAt": "2026-08-28",
+              "evidence": "Independent exact CLF 016/032 Traditional Chinese mirror-holo card photograph."
+            },
+            {
+              "url": "https://cf.shopee.tw/file/tw-11134207-7r991-lny2yl0igo4d9b",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0320."
+            },
+            {
+              "url": "https://cf.shopee.tw/file/tw-11134207-81ztc-mhx0q1fnelmuc0",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0321."
+            },
+            {
+              "url": "https://cf.shopee.tw/file/tw-11134207-820lg-mpg97q4m34lof2",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0322."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0319",
+            "SPEC-0320",
+            "SPEC-0321",
+            "SPEC-0322"
+          ],
+          "image": "verification/specimens/SPEC-0319.jpg",
+          "printingId": "F0037-P01"
+        }
+      ],
       "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
+        "The exact reverse- or mirror-holo pattern is not identified for every known printing of those types."
       ]
     },
     {
@@ -18069,7 +18160,7 @@
       "finishUnitId": "F0210",
       "cardName": "Hop's Snorlax",
       "setCode": "m2a",
-      "releaseSetCode": null,
+      "releaseSetCode": "M2a F",
       "setName": "MEGA Dream ex",
       "number": "136",
       "language": "T-Chinese",
@@ -18317,7 +18408,7 @@
       "finishUnitId": "F0215",
       "cardName": "Snorlax",
       "setCode": "m3",
-      "releaseSetCode": null,
+      "releaseSetCode": "M3 F",
       "setName": "Nihil Zero",
       "number": "062",
       "language": "T-Chinese",
@@ -18478,7 +18569,7 @@
       "finishUnitId": "F0218",
       "cardName": "Snorlax",
       "setCode": "mC",
-      "releaseSetCode": null,
+      "releaseSetCode": "MC F",
       "setName": "MEGA Start Deck 100 Battle Collection",
       "number": "567",
       "language": "T-Chinese",
@@ -18663,7 +18754,7 @@
       "finishUnitId": "F0221",
       "cardName": "Snorlax",
       "setCode": "mC",
-      "releaseSetCode": null,
+      "releaseSetCode": "MC F",
       "setName": "MEGA Start Deck 100 Battle Collection",
       "number": "568",
       "language": "T-Chinese",
@@ -18826,7 +18917,7 @@
       "finishUnitId": "F0224",
       "cardName": "Hop's Snorlax",
       "setCode": "mC",
-      "releaseSetCode": null,
+      "releaseSetCode": "MC F",
       "setName": "MEGA Start Deck 100 Battle Collection",
       "number": "569",
       "language": "T-Chinese",
@@ -21796,7 +21887,7 @@
       "finishUnitId": "F0258",
       "cardName": "Snorlax",
       "setCode": "PKMTCH S-P",
-      "releaseSetCode": null,
+      "releaseSetCode": "S-P",
       "setName": "Traditional Chinese Products",
       "number": "S-P 145",
       "language": "T-Chinese",
@@ -28854,7 +28945,7 @@
       "finishUnitId": "F0326",
       "cardName": "Snorlax",
       "setCode": "s10a",
-      "releaseSetCode": null,
+      "releaseSetCode": "S10a F",
       "setName": "Dark Phantasma",
       "number": "058",
       "language": "T-Chinese",
@@ -29210,7 +29301,7 @@
       "finishUnitId": "F0331",
       "cardName": "Snorlax",
       "setCode": "s10a",
-      "releaseSetCode": null,
+      "releaseSetCode": "S10a F",
       "setName": "Dark Phantasma",
       "number": "077",
       "language": "T-Chinese",
@@ -29229,23 +29320,61 @@
           "image": "images/s10a_077_Snorlax_V2_657056.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.nacg.tw/product-details.php?id=149595",
+              "sourceType": "Specialist card listing with exact retained image",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "T-Chinese"
+              ],
+              "retrievedAt": "2026-08-28",
+              "evidence": "Exact S10a F 077/071 CHR listing explicitly identifies the card as Foil."
+            },
+            {
+              "url": "https://www.ruten.com.tw/item/22223353127192/",
+              "sourceType": "Marketplace physical card photograph",
+              "authorityTier": "physical-specimen",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "T-Chinese"
+              ],
+              "retrievedAt": "2026-08-28",
+              "evidence": "Independent physical photograph of exact Traditional Chinese S10a F 077/071 CHR."
+            }
+          ],
+          "printingId": "F0331-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0332",
@@ -29477,7 +29606,7 @@
       "finishUnitId": "F0336",
       "cardName": "Snorlax",
       "setCode": "s10b",
-      "releaseSetCode": null,
+      "releaseSetCode": "S10b F",
       "setName": "Pokémon GO Enhanced Expansion Pack",
       "number": "056",
       "language": "T-Chinese",
@@ -30624,7 +30753,7 @@
       "finishUnitId": "F0356",
       "cardName": "Snorlax",
       "setCode": "s4",
-      "releaseSetCode": null,
+      "releaseSetCode": "S4 F",
       "setName": "Shocking Volt Tackle",
       "number": "84",
       "language": "T-Chinese",
@@ -31251,7 +31380,7 @@
       "finishUnitId": "F0365",
       "cardName": "Snorlax",
       "setCode": "s8b",
-      "releaseSetCode": null,
+      "releaseSetCode": "S8b F",
       "setName": "VMAX Climax",
       "number": "126",
       "language": "T-Chinese",
@@ -31659,7 +31788,7 @@
       "finishUnitId": "F0373",
       "cardName": "Snorlax",
       "setCode": "sH",
-      "releaseSetCode": null,
+      "releaseSetCode": "sH F",
       "setName": "Sword & Shield Family Pokémon Card Game",
       "number": "038",
       "language": "T-Chinese",
@@ -31884,7 +32013,7 @@
       "finishUnitId": "F0377",
       "cardName": "Snorlax",
       "setCode": "sI100",
-      "releaseSetCode": null,
+      "releaseSetCode": "SI F",
       "setName": "Start Deck 100",
       "number": "341",
       "language": "T-Chinese",
@@ -32132,7 +32261,7 @@
       "finishUnitId": "F0381",
       "cardName": "Snorlax",
       "setCode": "sI100",
-      "releaseSetCode": null,
+      "releaseSetCode": "SI F",
       "setName": "Start Deck 100",
       "number": "342",
       "language": "T-Chinese",
@@ -34463,7 +34592,7 @@
       "finishUnitId": "F0419",
       "cardName": "Snorlax",
       "setCode": "sN",
-      "releaseSetCode": null,
+      "releaseSetCode": "SN F",
       "setName": "Start Deck 100 CoroCoro Comic Version",
       "number": "008",
       "language": "T-Chinese",
@@ -38165,7 +38294,7 @@
       "finishUnitId": "F0463",
       "cardName": "Snorlax",
       "setCode": "sv2a",
-      "releaseSetCode": null,
+      "releaseSetCode": "sv2a F",
       "setName": "Pokémon Card 151",
       "number": "143",
       "language": "T-Chinese",
@@ -38461,7 +38590,7 @@
       "finishUnitId": "F0468",
       "cardName": "Snorlax",
       "setCode": "sv2a",
-      "releaseSetCode": null,
+      "releaseSetCode": "sv2a F",
       "setName": "Pokémon Card 151",
       "number": "181",
       "language": "T-Chinese",
@@ -38765,7 +38894,7 @@
       "finishUnitId": "F0473",
       "cardName": "Snorlax",
       "setCode": "sv4a",
-      "releaseSetCode": null,
+      "releaseSetCode": "sv4a F",
       "setName": "Shiny Treasure ex",
       "number": "145",
       "language": "T-Chinese",
@@ -39052,7 +39181,7 @@
       "finishUnitId": "F0478",
       "cardName": "Snorlax",
       "setCode": "sv4a",
-      "releaseSetCode": null,
+      "releaseSetCode": "sv4a F",
       "setName": "Shiny Treasure ex",
       "number": "310",
       "language": "T-Chinese",
@@ -39343,7 +39472,7 @@
       "finishUnitId": "F0483",
       "cardName": "Snorlax Doll",
       "setCode": "sv4K",
-      "releaseSetCode": null,
+      "releaseSetCode": "sv4K F",
       "setName": "Ancient Roar",
       "number": "059",
       "language": "T-Chinese",
@@ -39598,7 +39727,7 @@
       "finishUnitId": "F0487",
       "cardName": "Snorlax",
       "setCode": "sv5a",
-      "releaseSetCode": null,
+      "releaseSetCode": "sv5a F",
       "setName": "Crimson Haze",
       "number": "051",
       "language": "T-Chinese",
@@ -39853,7 +39982,7 @@
       "finishUnitId": "F0491",
       "cardName": "Hop's Snorlax",
       "setCode": "sv9",
-      "releaseSetCode": null,
+      "releaseSetCode": "SV9 F",
       "setName": "Battle Partners",
       "number": "075",
       "language": "T-Chinese",
@@ -40000,7 +40129,7 @@
       "finishUnitId": "F0494",
       "cardName": "Snorlax",
       "setCode": "svG",
-      "releaseSetCode": null,
+      "releaseSetCode": "SVG",
       "setName": "Venusaur & Charizard & Blastoise Special Deck Set ex",
       "number": "021",
       "language": "T-Chinese",
@@ -40446,7 +40575,7 @@
       "finishUnitId": "F0504",
       "cardName": "Snorlax ex",
       "setCode": "svM",
-      "releaseSetCode": null,
+      "releaseSetCode": "SVM F",
       "setName": "Generations Start Decks",
       "number": "094",
       "language": "T-Chinese",
@@ -48626,7 +48755,7 @@
       "finishUnitId": "F0605",
       "cardName": "Hop's Snorlax",
       "setCode": "xm2a",
-      "releaseSetCode": null,
+      "releaseSetCode": "M2a F",
       "setName": "MEGA Dream ex: Additionals",
       "number": "136",
       "language": "T-Chinese",
@@ -50106,7 +50235,7 @@
       "finishUnitId": "F0616",
       "cardName": "Snorlax",
       "setCode": "xsv2a",
-      "releaseSetCode": null,
+      "releaseSetCode": "sv2a F",
       "setName": "Pokémon Card 151: Additionals",
       "number": "143",
       "language": "T-Chinese",
@@ -50139,11 +50268,10 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
         "mirror-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "pending",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "confirmed"
@@ -50154,31 +50282,6 @@
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
-        {
-          "finish": "non-holo",
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1",
-            "V2"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0616-P01"
-        },
         {
           "finish": "mirror-holo",
           "foilPattern": "master-ball",
@@ -50201,7 +50304,7 @@
               "image": "images/xsv2a_143_Snorlax_V2_837511.jpg"
             }
           ],
-          "printingId": "F0616-P02"
+          "printingId": "F0616-P01"
         },
         {
           "finish": "mirror-holo",
@@ -50225,7 +50328,7 @@
               "image": "images/xsv2a_143_Snorlax_V1_837510.jpg"
             }
           ],
-          "printingId": "F0616-P03"
+          "printingId": "F0616-P02"
         }
       ],
       "unresolved": []
