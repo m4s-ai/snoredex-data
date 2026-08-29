@@ -346,6 +346,27 @@ def printing_signature(printing: dict[str, Any]) -> str:
     return json.dumps(identity, ensure_ascii=False, sort_keys=True)
 
 
+def refine_specimen_card_size(
+    printings: list[dict[str, Any]], candidate: dict[str, Any]
+) -> None:
+    """Resolve an omitted specimen size from one otherwise-identical standard printing."""
+    size_matches = []
+    for item in printings:
+        resized = dict(candidate)
+        resized["cardSize"] = item.get("cardSize")
+        if printing_signature(resized) == printing_signature(item):
+            size_matches.append(item)
+    if len(size_matches) != 1:
+        return
+    match = size_matches[0]
+    if (candidate["cardSize"] == "unknown" and candidate.get("specimenIds")
+            and match.get("cardSize") == "standard"):
+        candidate["cardSize"] = "standard"
+    elif (candidate["cardSize"] == "standard" and match.get("specimenIds")
+          and match.get("cardSize") == "unknown"):
+        match["cardSize"] = "standard"
+
+
 def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> None:
     candidate["foilPattern"] = normalize_foil_pattern(candidate.get("foilPattern"))
     candidate.setdefault("foilPattern", None)
@@ -361,6 +382,7 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         candidate["verificationStatus"] = "pending"
     else:
         candidate.pop("conflictsWith", None)
+    refine_specimen_card_size(printings, candidate)
     signature = printing_signature(candidate)
     existing = next((item for item in printings if printing_signature(item) == signature), None)
     if existing is None and candidate["foilPattern"] is None and any(

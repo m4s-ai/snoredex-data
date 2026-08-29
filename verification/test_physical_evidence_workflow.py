@@ -335,6 +335,24 @@ def main() -> None:
         if key != "cardSize"
     }
     assert projector.specimen_printing(omitted_size)["cardSize"] == "unknown"
+    unknown_specimen = projector.specimen_printing(omitted_size)
+    standard_source = {**unknown_specimen, "cardSize": "standard", "sources": []}
+    standard_source.pop("specimenIds")
+    standard_source.pop("image", None)
+    merged_size = [standard_source]
+    projector.add_printing(merged_size, unknown_specimen)
+    assert len(merged_size) == 1
+    assert merged_size[0]["cardSize"] == "standard"
+    assert merged_size[0]["specimenIds"] == [fixture[0]["specimenId"]]
+    unknown_first = projector.specimen_printing(omitted_size)
+    merged_reverse_order = [unknown_first]
+    projector.add_printing(merged_reverse_order, dict(standard_source))
+    assert len(merged_reverse_order) == 1
+    assert merged_reverse_order[0]["cardSize"] == "standard"
+    ambiguous = [dict(standard_source), {**standard_source, "cardSize": "jumbo"}]
+    projector.add_printing(ambiguous, projector.specimen_printing(omitted_size))
+    assert len(ambiguous) == 3
+    assert {printing["cardSize"] for printing in ambiguous} == {"standard", "jumbo", "unknown"}
     merged_without_image = projector.specimen_printing(fixture[0])
     merged_without_image.pop("image")
     merged_without_image["_origin"] = "auto"
