@@ -339,20 +339,45 @@ def main() -> None:
     standard_source = {**unknown_specimen, "cardSize": "standard", "sources": []}
     standard_source.pop("specimenIds")
     standard_source.pop("image", None)
-    merged_size = [standard_source]
+
+    def finalize_sizes(candidates: list[dict]) -> list[dict]:
+        projector.refine_specimen_card_sizes(candidates)
+        deduplicated: list[dict] = []
+        for candidate in candidates:
+            projector.add_printing(deduplicated, candidate)
+        return deduplicated
+
+    merged_size = [dict(standard_source)]
     projector.add_printing(merged_size, unknown_specimen)
+    merged_size = finalize_sizes(merged_size)
     assert len(merged_size) == 1
     assert merged_size[0]["cardSize"] == "standard"
     assert merged_size[0]["specimenIds"] == [fixture[0]["specimenId"]]
     unknown_first = projector.specimen_printing(omitted_size)
     merged_reverse_order = [unknown_first]
     projector.add_printing(merged_reverse_order, dict(standard_source))
+    merged_reverse_order = finalize_sizes(merged_reverse_order)
     assert len(merged_reverse_order) == 1
     assert merged_reverse_order[0]["cardSize"] == "standard"
     ambiguous = [dict(standard_source), {**standard_source, "cardSize": "jumbo"}]
     projector.add_printing(ambiguous, projector.specimen_printing(omitted_size))
+    projector.refine_specimen_card_sizes(ambiguous)
     assert len(ambiguous) == 3
     assert {printing["cardSize"] for printing in ambiguous} == {"standard", "jumbo", "unknown"}
+    assert next(printing for printing in ambiguous if printing.get("specimenIds"))["cardSize"] == "unknown"
+    ambiguous_unknown_first = [projector.specimen_printing(omitted_size)]
+    projector.add_printing(ambiguous_unknown_first, dict(standard_source))
+    projector.add_printing(
+        ambiguous_unknown_first, {**standard_source, "cardSize": "jumbo"}
+    )
+    projector.refine_specimen_card_sizes(ambiguous_unknown_first)
+    assert len(ambiguous_unknown_first) == 3
+    assert {printing["cardSize"] for printing in ambiguous_unknown_first} == {
+        "standard", "jumbo", "unknown"
+    }
+    assert next(
+        printing for printing in ambiguous_unknown_first if printing.get("specimenIds")
+    )["cardSize"] == "unknown"
     merged_without_image = projector.specimen_printing(fixture[0])
     merged_without_image.pop("image")
     merged_without_image["_origin"] = "auto"
