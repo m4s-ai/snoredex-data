@@ -7,9 +7,9 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 408,
+      "sourceRecords": 409,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 99,
+      "sourceFirstLocalSets": 100,
       "releaseDateRecords": 46,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 112,
@@ -7403,12 +7403,14 @@
         "englishName": "Double Burst",
         "indonesianName": null,
         "series": "Sun and Moon",
-        "releaseDate": null,
+        "releaseDate": "February 27, 2020",
         "indexCoverage": "Bulbapedia tags this table {{outdated}} — \"needs=updated list of booster packs since SWSH\" — so it stops in the Sun & Moon era. Thai Sword & Shield-era codes this repository already holds are absent from the index because the article never listed them, not because they do not exist. Never read this index as a catalogue of Thai releases.",
-        "snorlaxExaminationState": "not-examined",
-        "snorlaxPrintIds": [],
+        "snorlaxExaminationState": "examined-snorlax-found",
+        "snorlaxPrintIds": [
+          "TH:AS5a:142/184:base"
+        ],
         "snorlaxUnitIds": [],
-        "examinationBasis": "no Snorlax has been established for this code. This source cannot distinguish a set with no Snorlax from a set it does not list, and it is explicitly outdated, so the state is 'not examined' and never an absence."
+        "examinationBasis": "the reviewed positive Thai AS5a card evidence establishes Snorlax 142/184; this is not an absence or complete-set claim"
       }
     },
     {
@@ -11655,6 +11657,49 @@
         "cardImageUrls": [
           "https://asia.pokemon-card.com/tw/card-img/tw00002051.png"
         ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "TH\u001fAS5a",
+      "retrieved": "2026-08-30",
+      "raw": {
+        "localCode": "AS5a",
+        "localName": "Double Burst Set A",
+        "locality": "TH",
+        "languages": [
+          "Thai"
+        ],
+        "scripts": [
+          "Thai"
+        ],
+        "printIds": [
+          "TH:AS5a:142/184:base"
+        ],
+        "providers": [
+          "bulbapedia",
+          "ojama-card",
+          "pokemon-card-asia"
+        ],
+        "sourceUrls": [
+          "https://asia.pokemon-card.com/th/archive/card/sun_moon_series/booster_pack_5a.html",
+          "https://asia.pokemon-card.com/th/archive/card/pdf/AS5a.pdf",
+          "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+          "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Double_Burst_142)",
+          "https://ojamacard.com/product/21823/142-184-%E0%B8%84%E0%B8%B2%E0%B8%9A%E0%B8%B4%E0%B8%81%E0%B8%AD%E0%B8%99-r-as5a",
+          "https://ojamacard.com/product/tag/as4a?tskp=12"
+        ],
+        "printedSetSize": 184,
+        "printedSetSizeBasis": "the denominator printed on both retained Thai cards",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "142/184"
+        ],
+        "observedCoverage": "one exact positive Thai Snorlax card, not an enumeration of the set",
+        "markAssetUrls": [],
+        "cardImageUrls": []
       }
     },
     {

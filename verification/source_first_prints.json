@@ -2,13 +2,13 @@
   "meta": {
     "schema": "snoredex-source-first-prints",
     "schemaVersion": "0.1.0",
-    "generated": "2026-08-28",
+    "generated": "2026-08-30",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "decision": "ADR-0001 D1 (owner, 2026-08-09) for specimen-backed codes; ADR-0001 D5 (owner, 2026-08-10) for codes backed by a tier-1 publisher record, language and identity only",
     "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
     "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
     "counts": {
-      "admitted": 137,
+      "admitted": 138,
       "held": 0
     }
   },
@@ -1350,6 +1350,37 @@
       "translation": "Raciones Extra; Plancha Dinámica",
       "distribution": "Latin America, established by the official es-xl asset and the printed LA modifier",
       "evidence": "The official Latin-American Spanish promo asset is retained as SPEC-0033. It reads the complete printed code \"SVP LA 184\", carries the \"Aventuras Compartidas\" stamp, and uses \"Plancha Dinámica\". SPEC-0034 retains the publisher's European-Spanish comparison, which instead reads \"SVP ES 184\", carries \"Juntos de Aventuras\", and uses \"Presión Dinámica\". This positive pair establishes a separate LATAM/es-419 release without inferring finish or completeness. Retrieved 2026-08-11."
+    },
+    {
+      "specimenId": "SPEC-0427",
+      "printId": "TH:AS5a:142/184:base",
+      "localSetCode": "AS5a",
+      "localNumber": "142/184",
+      "variant": "base",
+      "cardName": "Snorlax",
+      "locality": "TH",
+      "language": "Thai",
+      "script": "Thai",
+      "name": "คาบิกอน",
+      "catchUpOf": "the exact Thai counterpart established by its printed Thai attacks and card traits",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+      "corroborated": true,
+      "markAssetUrl": null,
+      "cardImageUrl": null,
+      "releaseDate": "2020-02-27",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "evidence": "Bulbapedia's exact AS5a list identifies Thai Snorlax 142/184 as rarity R and dates Double Burst Set A to 2020-02-27. The official Thai product page and retained official card-list PDF establish the AS5a product. SPEC-0427 and SPEC-0428 positively show the Thai card face, collector number, 150 HP and kanahei credit; their owner attestations separately establish regular and holo physical copies. Ojama's exact R and R-Foil SKUs and the two exact seller-photo listings independently corroborate the two treatments. No completeness or unpictured variant is inferred.",
+      "corroboratingSourceUrls": [
+        "https://asia.pokemon-card.com/th/archive/card/sun_moon_series/booster_pack_5a.html",
+        "https://asia.pokemon-card.com/th/archive/card/pdf/AS5a.pdf",
+        "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Double_Burst_142)",
+        "https://ojamacard.com/product/21823/142-184-%E0%B8%84%E0%B8%B2%E0%B8%9A%E0%B8%B4%E0%B8%81%E0%B8%AD%E0%B8%99-r-as5a",
+        "https://ojamacard.com/product/tag/as4a?tskp=12",
+        "https://www.ebay.com/itm/127908236860",
+        "https://www.ebay.com/itm/127969187437"
+      ]
     },
     {
       "specimenId": "SPEC-0275",

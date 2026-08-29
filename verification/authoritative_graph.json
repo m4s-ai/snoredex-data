@@ -29014,6 +29014,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TH:AS5a:142/184:base",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "claimId": "CLAIM:source-first:TH:AS5a:142/184:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TH:AS5a:142/184:base",
+        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "materializedTargetId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "reason": "positive exact Thai card record and retained image"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:TH:MA3:136/193:V1",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -32540,10 +32557,11 @@
         "sourceKind": "specimen-observation",
         "sourceId": "SPEC-0427",
         "evidenceStatus": "observed",
-        "disposition": "candidate-needs-evidence",
+        "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:specimen:SPEC-0427",
-        "materializedTargetId": null,
-        "reason": "physical observation has no matching projected printing"
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0427",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0427"
       }
     },
     {
@@ -32556,10 +32574,11 @@
         "sourceKind": "specimen-observation",
         "sourceId": "SPEC-0428",
         "evidenceStatus": "observed",
-        "disposition": "candidate-needs-evidence",
+        "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:specimen:SPEC-0428",
-        "materializedTargetId": null,
-        "reason": "physical observation has no matching projected printing"
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0428",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0428"
       }
     },
     {
@@ -40865,6 +40884,48 @@
         "sourceFirstRecordIds": [
           "LATAM:SVP LA:184:base"
         ]
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "setEditionId": "EDITION:TH:Thai:AS5a",
+        "locality": "TH",
+        "language": "Thai",
+        "script": "Thai",
+        "localSetCode": "AS5a",
+        "localNumber": "142/184",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Snorlax-Lazy-Eating-Big-Counter",
+        "workMappingState": "mapped",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:TH:AS5a:142/184:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:TH:AS5a:142/184:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://bulbapedia.bulbagarden.net/wiki/AS5a"
+        ],
+        "sourceFirstRecordIds": [
+          "TH:AS5a:142/184:base"
+        ],
+        "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
+        "releaseDate": "2020-02-27",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
       }
     },
     {
@@ -62370,6 +62431,17 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "setEditionId": "EDITION:TH:Thai:AS5a",
+        "collectorNumber": "142/184",
+        "origin": "issue-262-positive-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -75583,6 +75655,22 @@
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
           "SET-SRC-CM-48A40A4DC0EE"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
+      "entityId": "LOCALSET:TH:AS5a",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "localSetId": "LOCALSET:TH:AS5a",
+        "locality": "TH",
+        "localCode": "AS5a",
+        "observedNames": [],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-IDX-FF7AA1CC9DD8",
+          "SET-SRC-SF-FF7AA1CC9DD8"
         ]
       }
     },
@@ -95092,6 +95180,54 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0427",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0427",
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "\"The collection-owner checklist labels this specimen Non-Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0427",
+        "specimenIds": [
+          "SPEC-0427"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0428",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0428",
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0428",
+        "specimenIds": [
+          "SPEC-0428"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:specimen:SPEC-0429",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -103770,6 +103906,21 @@
         "sourceNativeValue": "no printed rarity symbol",
         "normalizedRarityId": "fixed",
         "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2023023021"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Thai-card",
+        "sourceNativeValue": "R",
+        "normalizedRarityId": "rare",
+        "sourceProductKey": "https://bulbapedia.bulbagarden.net/wiki/AS5a"
       }
     },
     {
@@ -112508,6 +112659,41 @@
             "SET-SRC-RETAIL-DATE:23ca130aa87a707a"
           ],
           "localizationId": "LOCALIZATION:LATAM:es-419"
+        }
+      }
+    },
+    {
+      "entityType": "set-edition",
+      "entityId": "EDITION:TH:Thai:AS5a",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "setEditionId": "EDITION:TH:Thai:AS5a",
+        "identity": {
+          "setEditionId": "EDITION:TH:Thai:AS5a",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "localSetCode": "AS5a",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "viaLegacySetCodes": [],
+          "establishingClaimIds": [
+            "CLAIM:source-first:TH:AS5a:142/184:base"
+          ],
+          "localizationId": "LOCALIZATION:TH:th"
+        },
+        "catalogue": {
+          "setEditionId": "EDITION:TH:Thai:AS5a",
+          "localSetId": "LOCALSET:TH:AS5a",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "localCode": "AS5a",
+          "state": "identified",
+          "establishingEvidenceIds": [
+            "SET-SRC-SF-FF7AA1CC9DD8"
+          ],
+          "localizationId": "LOCALIZATION:TH:th"
         }
       }
     },
@@ -128802,12 +128988,12 @@
     {
       "entityType": "set-source-disposition",
       "entityId": "SET-SRC-IDX-FF7AA1CC9DD8",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-thai-as5a-20260830",
       "payload": {
         "sourceRecordId": "SET-SRC-IDX-FF7AA1CC9DD8",
-        "disposition": "needs-evidence",
-        "targetRef": null,
-        "reason": "source kind is retained but not yet mapped by schema version 0.1.0"
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS5a",
+        "reason": "the reviewed Thai AS5a record and exact card evidence establish this local set"
       }
     },
     {
@@ -129919,6 +130105,17 @@
         "disposition": "mapped",
         "targetRef": "LOCALSET:TW:sH%20F",
         "reason": "positive Traditional Chinese source-first records establish this local set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS5a",
+        "reason": "positive Thai source-first records establish this local set"
       }
     },
     {
@@ -138909,7 +139106,7 @@
     {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-IDX-FF7AA1CC9DD8",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-thai-as5a-20260830",
       "payload": {
         "sourceRecordId": "SET-SRC-IDX-FF7AA1CC9DD8",
         "sourceKind": "locality-set-index-record",
@@ -138925,12 +139122,14 @@
           "englishName": "Double Burst",
           "indonesianName": null,
           "series": "Sun and Moon",
-          "releaseDate": null,
+          "releaseDate": "February 27, 2020",
           "indexCoverage": "Bulbapedia tags this table {{outdated}} — \"needs=updated list of booster packs since SWSH\" — so it stops in the Sun & Moon era. Thai Sword & Shield-era codes this repository already holds are absent from the index because the article never listed them, not because they do not exist. Never read this index as a catalogue of Thai releases.",
-          "snorlaxExaminationState": "not-examined",
-          "snorlaxPrintIds": [],
+          "snorlaxExaminationState": "examined-snorlax-found",
+          "snorlaxPrintIds": [
+            "TH:AS5a:142/184:base"
+          ],
           "snorlaxUnitIds": [],
-          "examinationBasis": "no Snorlax has been established for this code. This source cannot distinguish a set with no Snorlax from a set it does not list, and it is explicitly outdated, so the state is 'not examined' and never an absence."
+          "examinationBasis": "the reviewed positive Thai AS5a card evidence establishes Snorlax 142/184; this is not an absence or complete-set claim"
         }
       }
     },
@@ -143682,6 +143881,54 @@
           "cardImageUrls": [
             "https://asia.pokemon-card.com/tw/card-img/tw00002051.png"
           ]
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "mixed-positive-evidence",
+        "providerRecordKey": "TH\u001fAS5a",
+        "retrieved": "2026-08-30",
+        "raw": {
+          "localCode": "AS5a",
+          "localName": "Double Burst Set A",
+          "locality": "TH",
+          "languages": [
+            "Thai"
+          ],
+          "scripts": [
+            "Thai"
+          ],
+          "printIds": [
+            "TH:AS5a:142/184:base"
+          ],
+          "providers": [
+            "bulbapedia",
+            "ojama-card",
+            "pokemon-card-asia"
+          ],
+          "sourceUrls": [
+            "https://asia.pokemon-card.com/th/archive/card/sun_moon_series/booster_pack_5a.html",
+            "https://asia.pokemon-card.com/th/archive/card/pdf/AS5a.pdf",
+            "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+            "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Double_Burst_142)",
+            "https://ojamacard.com/product/21823/142-184-%E0%B8%84%E0%B8%B2%E0%B8%9A%E0%B8%B4%E0%B8%81%E0%B8%AD%E0%B8%99-r-as5a",
+            "https://ojamacard.com/product/tag/as4a?tskp=12"
+          ],
+          "printedSetSize": 184,
+          "printedSetSizeBasis": "the denominator printed on both retained Thai cards",
+          "localeSuffix": null,
+          "observedCollectorNumbers": [
+            "142/184"
+          ],
+          "observedCoverage": "one exact positive Thai Snorlax card, not an enumeration of the set",
+          "markAssetUrls": [],
+          "cardImageUrls": []
         }
       }
     },
@@ -167957,6 +168204,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TH:AS5a:142/184:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:TH:MA3:136/193:V1",
       "relation": "materializes",
       "toType": "card-release",
@@ -170011,6 +170268,26 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:specimen:SPEC-0426",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0427",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0427",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0428",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0428",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -173979,6 +174256,25 @@
         "state": "mapped",
         "sourceRecordId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
         "basis": "the official article names Hop's Snorlax and describes Extra Helpings plus its 170-damage attack; the exact LA asset carries their Spanish translation"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {
+        "state": "mapped",
+        "basis": "exact Thai printed attacks and card traits"
       }
     },
     {
@@ -187587,6 +187883,22 @@
       "relation": "references",
       "toType": "card-release",
       "toId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
       "provenance": {}
     },
     {
@@ -204579,6 +204891,22 @@
     },
     {
       "fromType": "local-set",
+      "fromId": "LOCALSET:TH:AS5a",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-IDX-FF7AA1CC9DD8",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:TH:AS5a",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
       "fromId": "LOCALSET:TH:MA3",
       "relation": "observed-by",
       "toType": "set-source-record",
@@ -216691,6 +217019,38 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0427",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0427",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0427",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0428",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0428",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0428",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:specimen:SPEC-0429",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -225939,6 +226299,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue262:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -231266,6 +231642,25 @@
       "relation": "localized-as",
       "toType": "localization",
       "toId": "LOCALIZATION:LATAM:es-419",
+      "provenance": {
+        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "reviewedAt": "2026-08-24"
+      }
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TH:Thai:AS5a",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:TH:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TH:Thai:AS5a",
+      "relation": "localized-as",
+      "toType": "localization",
+      "toId": "LOCALIZATION:TH:th",
       "provenance": {
         "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
         "reviewedAt": "2026-08-24"
@@ -241094,6 +241489,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-FF18D916CB31",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-FF7AA1CC9DD8",
       "provenance": {}
     },
     {
@@ -270933,9 +271336,9 @@
     {
       "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-IDX-FF7AA1CC9DD8",
-      "disposition": "needs-evidence",
-      "targetRef": null,
-      "reason": "source kind is retained but not yet mapped by schema version 0.1.0"
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS5a",
+      "reason": "the reviewed Thai AS5a record and exact card evidence establish this local set"
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -271646,6 +272049,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS5a",
+      "reason": "positive Thai source-first records establish this local set"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-SIZE-099BDAFEE0A2",
       "disposition": "needs-evidence",
       "targetRef": null,
@@ -272182,6 +272592,13 @@
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
       "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:AS5a:142/184:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "reason": "positive exact Thai card record and retained image"
     },
     {
       "sourceKind": "source-first-record",
@@ -273635,16 +274052,16 @@
     {
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0427",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "physical observation has no matching projected printing"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0427",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter"
     },
     {
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0428",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "physical observation has no matching projected printing"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0428",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter"
     },
     {
       "sourceKind": "specimen-observation",
@@ -273697,26 +274114,26 @@
     }
   ],
   "summary": {
-    "entities": 7592,
-    "edges": 11400,
-    "migrationInputs": 2646,
+    "entities": 7602,
+    "edges": 11418,
+    "migrationInputs": 2648,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 261,
+      "candidate-needs-evidence": 259,
       "carried": 67,
-      "established-and-mapped": 1479,
+      "established-and-mapped": 1482,
       "linked-local-counterpart": 86,
-      "mapped": 279,
-      "needs-evidence": 127,
+      "mapped": 281,
+      "needs-evidence": 126,
       "needs-positive-local-identity": 55,
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1899,
-    "cardReleases": 635,
-    "physicalPrintings": 707,
-    "setSourceRecords": 408,
-    "setSourceDispositions": 408,
+    "candidateClaims": 1900,
+    "cardReleases": 636,
+    "physicalPrintings": 709,
+    "setSourceRecords": 409,
+    "setSourceDispositions": 409,
     "localizations": 16
   }
 }

@@ -4,18 +4,18 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-29",
-  "projectionVersion": "b5c5e2b6e87cb7bb80c8c5dfa9eb09a1afe870c7e49c51d9d8b2382fbcf4e5d0",
+  "projectionVersion": "5e14d7bbed4fd2d6abf799c23f0a982cc645b3d5f76eaa232ec2578328f72f5c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 257,
+    "groups": 258,
     "mappedWorks": 39,
     "mappedAppearances": 181,
-    "unmappedReleases": 76,
-    "cardReleases": 635,
-    "physicalPrintings": 707,
-    "sourceObservations": 2311
+    "unmappedReleases": 77,
+    "cardReleases": 636,
+    "physicalPrintings": 709,
+    "sourceObservations": 2312
   },
   "groups": [
     {
@@ -78299,6 +78299,107 @@
               "evidence": "The retained official Indonesian card detail 2129 and SPEC-0163 show Snorlax 145/205 in AC3a, including the printed attacks used for the explicit Work mapping. The exact render prints rarity C. The image is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "af137c5e9378a9b2209a662f6a58fc9277402f36d5ba10495d8970e123eea48d",
               "image": "https://asia.pokemon-card.com/id/card-img/id00002129.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Snorlax-Lazy-Eating-Big-Counter"
+      ],
+      "cardKeys": [
+        "Snorlax-Lazy-Eating-Big-Counter"
+      ],
+      "label": "Snorlax-Lazy-Eating-Big-Counter",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+          "workId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
+          "cardKey": "Snorlax-Lazy-Eating-Big-Counter",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "setEditionId": "EDITION:TH:Thai:AS5a",
+          "localSetCode": "AS5a",
+          "localNumber": "142/184",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0427",
+              "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "\"The collection-owner checklist labels this specimen Non-Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0427",
+              "specimenIds": [
+                "SPEC-0427"
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0428",
+              "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0428",
+              "specimenIds": [
+                "SPEC-0428"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "คาบิกอน",
+            "artist": null,
+            "variant": "base",
+            "finish": [
+              "holo",
+              "non-holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [],
+          "observations": [
+            {
+              "observationId": "source-first:TH:AS5a:142/184:base",
+              "kind": "source-first",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+              "evidence": "Bulbapedia's exact AS5a list identifies Thai Snorlax 142/184 as rarity R and dates Double Burst Set A to 2020-02-27. The official Thai product page and retained official card-list PDF establish the AS5a product. SPEC-0427 and SPEC-0428 positively show the Thai card face, collector number, 150 HP and kanahei credit; their owner attestations separately establish regular and holo physical copies. Ojama's exact R and R-Foil SKUs and the two exact seller-photo listings independently corroborate the two treatments. No completeness or unpictured variant is inferred.",
+              "contentHash": "958b30e1f490e61e8e28fcdb669b5469bd9e1000b1a31de1dbac47c5dacd011f",
+              "image": null
             }
           ]
         }

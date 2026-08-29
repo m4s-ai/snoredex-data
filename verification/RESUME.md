@@ -629,6 +629,19 @@ the same three local releases under both historical and current provider keys. G
 disappeared from the response. It remains known from the earlier immutable run, and the current
 provider omission is not a contradiction or absence claim.
 
+### Thai AS5a 142/184 — regular and holo
+
+The reviewed 2026-08-30 evidence establishes one Thai card release and two physical treatments,
+without merging it with the existing Traditional-Chinese AS5a release. The official Thai product
+page and card-list PDF establish Double Burst Set A; Bulbapedia's exact AS5a list identifies
+`คาบิกอน` 142/184 as rarity R and dates the release to 2020-02-27. Owner photographs
+SPEC-0427 and SPEC-0428 positively show Thai AS5a 142/184, 150 HP and Illus. kanahei, while the
+owner checklist identifies the copies as non-holo and holo respectively. Ojama's exact
+`AS5A-142/184-R` and `AS5A-142/184-R-Foil` SKUs and two exact seller-photo listings corroborate
+those treatments. Seller-generated item specifics were not used because they contain conflicting
+metadata. No exact foil pattern is asserted, and the two observed treatments are not claimed to
+exhaust every AS5a 142/184 printing.
+
 The live Italian archive returned `Pardon Our Interruption` during this refresh. The completed run
 therefore carries forward only four exact unchanged requests from complete run
 `20260813T150337Z`: the Italian filter and three LATAM asset slices. Each request keeps its original

@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:f694e8fdfb493193d3b98b17115d8a5670dc4399baad31cd431f35a26531ed35",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:ad99ca1acdcc7430675e5d9e760af8a282b76f15010db5cbb432d492b3ff578a",
+    "toFingerprint": "sha256:12b0fd19eec942fec60bce31a8bec20161b56be3c55ed64641b8e4bd1c691965",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:ad99ca1acdcc7430675e5d9e760af8a282b76f15010db5cbb432d492b3ff578a",
+      "toFingerprint": "sha256:12b0fd19eec942fec60bce31a8bec20161b56be3c55ed64641b8e4bd1c691965",
       "cumulative": true,
       "transitions": [
         {
@@ -4873,6 +4873,15 @@
           "reconciliation": "identity-retained"
         },
         {
+          "fromItemId": "item-8df9a5d6-8803-52c5-a25d-4ab8f911b13f",
+          "toItemIds": [
+            "item-8df9a5d6-8803-52c5-a25d-4ab8f911b13f"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
           "fromItemId": "item-8e271859-1b1c-5eb2-be27-eda3cd37c326",
           "toItemIds": [
             "item-8e271859-1b1c-5eb2-be27-eda3cd37c326"
@@ -8557,6 +8566,15 @@
           "fromItemId": "item-f819b22b-e1d7-524e-bab9-a85ad843890f",
           "toItemIds": [
             "item-f819b22b-e1d7-524e-bab9-a85ad843890f"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
+          "fromItemId": "item-f81b51bc-5822-5026-8c9d-cc5b2a8b1aa9",
+          "toItemIds": [
+            "item-f81b51bc-5822-5026-8c9d-cc5b2a8b1aa9"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -16087,6 +16105,16 @@
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve",
       "reconciliation": "one-to-one-preserve"
+    },
+    {
+      "fromItemId": "item-ebcea368-26ca-51d4-9940-33b0f10cfc20",
+      "toItemIds": [
+        "item-8df9a5d6-8803-52c5-a25d-4ab8f911b13f",
+        "item-f81b51bc-5822-5026-8c9d-cc5b2a8b1aa9"
+      ],
+      "changeKind": "split-1:N",
+      "automaticStateAction": "none",
+      "reconciliation": "requires-user-resolution"
     },
     {
       "fromItemId": "item-5dde6bf6-727a-5b43-be0f-7d120b0c5e2e",
@@ -25247,6 +25275,15 @@
         "reason": null
       },
       {
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-8df9a5d6-8803-52c5-a25d-4ab8f911b13f",
+          "item-f81b51bc-5822-5026-8c9d-cc5b2a8b1aa9"
+        ],
+        "reason": null
+      },
+      {
         "cardReleaseId": "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "disposition": "projected",
         "targetItemIds": [
@@ -32407,6 +32444,16 @@
         "targetItemId": "item-97f412a6-9fd4-54cd-922b-f0b5d54b02be"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0427",
+        "disposition": "projected",
+        "targetItemId": "item-f81b51bc-5822-5026-8c9d-cc5b2a8b1aa9"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0428",
+        "disposition": "projected",
+        "targetItemId": "item-8df9a5d6-8803-52c5-a25d-4ab8f911b13f"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0429",
         "disposition": "projected",
         "targetItemId": "item-6ea175e1-a9e2-5576-a973-d93a2786d909"
@@ -32419,8 +32466,8 @@
     ],
     "summary": {
       "legacyChecklistRows": 880,
-      "cardReleases": 635,
-      "physicalPrintings": 707,
+      "cardReleases": 636,
+      "physicalPrintings": 709,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
