@@ -402,6 +402,15 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         existing["image"] = candidate["image"]
 
 
+def apply_standard_scope_card_size(candidate: dict[str, Any]) -> None:
+    """Use a standard-set manifest to resolve an otherwise unobserved card size."""
+    if candidate.get("cardSize") == "unknown" and any(
+        source.get("closureScope") == "standard-set"
+        for source in candidate.get("sources") or []
+    ):
+        candidate["cardSize"] = "standard"
+
+
 def exact_source(url: str, source_type: str, evidence: str) -> dict[str, Any]:
     return {"url": url, "sourceType": source_type, "evidence": evidence}
 
@@ -1162,6 +1171,7 @@ def _build_finish_unit(
                         for manual in override.get("printings") or []
                     ):
                         break
+                apply_standard_scope_card_size(candidate)
                 add_printing(printings, candidate)
 
     def _build_finish_unit_part7():

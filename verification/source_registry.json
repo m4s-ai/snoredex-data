@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-28",
+  "generated": "2026-08-29",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 31,
-   "evidenceRecords": 1145,
-   "uniqueUrls": 1138,
+   "evidenceRecords": 1164,
+   "uniqueUrls": 1157,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3484
+   "claimsAttributed": 3526
   }
  },
  "providers": [
@@ -185,7 +185,7 @@
     "image.pokemon.com.cn"
    ],
    "uniqueSources": 10,
-   "claimsSupported": 45
+   "claimsSupported": 49
   },
   {
    "providerId": "pokemon-card-jp",
@@ -801,7 +801,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 42
+   "claimsSupported": 61
   },
   {
    "providerId": "inspected-specimen",
@@ -822,8 +822,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
    "hosts": [],
-   "uniqueSources": 10,
-   "claimsSupported": 47
+   "uniqueSources": 29,
+   "claimsSupported": 66
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -6169,9 +6169,9 @@
    "stableIdCount": 5,
    "stableIds": [
     "F0402-P01",
-    "F0402-P03",
+    "F0402-P04",
     "F0403-P01",
-    "F0403-P02",
+    "F0403-P03",
     "sm10 076 base"
    ],
    "retrievedAt": null,
@@ -9126,8 +9126,8 @@
     "F0572-P03",
     "F0573-P02",
     "F0573-P03",
-    "F0574-P02",
     "F0574-P03",
+    "F0574-P05",
     "UNB 158 base"
    ],
    "retrievedAt": null,
@@ -10606,6 +10606,329 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://drive.google.com/file/d/1-SEz7Lm9ld6FYzWXmVpyzruvu5LiWqth/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0572-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/11pGJgM19YmFtmahfiiyxdgO0x2Z-wUOy/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0573-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/16cU6VpJUSGqAEnBJyRSm74Sdph8cNMyY/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0570-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1GwN3F5EFC2fwEyXK5Z5ziX1C9eANLV9Z/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0572-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1H0hYxX1kU7qqk4YST3kXo5SQgpV3Eoiz/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0571-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1IT15qTjdyZuXg1OEg6pFFpJmPt0CFUyy/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0072-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1JzXXNGRri69XB28zOAJsA1pY3CIKftJb/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0569-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1Qpd5LgCmHeNtoAkNQqAWnvu-4avabAxk/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0574-P04"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1Sheay9EglZV6v-NfyuCcgtkUfMIxat1B/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0573-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1Sk_ZC_2sbCgMWBVIdoaVhM0GpblqUnSn/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0570-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1gcQJEVk4_mtGLC4EEGxDi1X7iA1rfMaa/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0071-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1hnxxpXEny4Sxl00FqtYrKv8xsdbV4ULr/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0571-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1lxbJemd4GCtWSZk1EGmxRBpHfrkOwkZ6/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0574-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1nYeCM-wL3Q_CSSkX3aeZwGVPoiBGCZA_/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0569-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1oJmBYlLh109-x_LhpOH-5zSVYXu41mj0/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0402-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1tYo9XFldI6rKRykKP_1EzE33_x9S4MLC/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0067-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1thcVf7KDJq0IwhwLvNfxNKLTnDKWfQDb/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0072-P03"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0403-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0067-P04"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://efour.b-cdn.net/uploads/default/original/3X/a/0/a059180b21b4911eada3b980cc57faf5a1e038a5.jpeg",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
@@ -10847,14 +11170,33 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 42,
+   "stableIdCount": 61,
    "stableIds": [
+    "F0067-P03",
+    "F0067-P04",
+    "F0071-P01",
+    "F0072-P01",
+    "F0072-P03",
     "F0093-P01",
     "F0140-P01",
     "F0146-P01",
     "F0148-P01",
     "F0166-P02",
     "F0289-P02",
+    "F0402-P02",
+    "F0403-P02",
+    "F0569-P02",
+    "F0569-P03",
+    "F0570-P02",
+    "F0570-P03",
+    "F0571-P02",
+    "F0571-P03",
+    "F0572-P02",
+    "F0572-P03",
+    "F0573-P02",
+    "F0573-P03",
+    "F0574-P02",
+    "F0574-P04",
     "F0584-P01",
     "F0597-P01",
     "F0597-P02",
@@ -10879,21 +11221,10 @@
     "U0098",
     "U0099",
     "U0311",
-    "U0312",
-    "U0313",
-    "U0314",
-    "U0785",
-    "U0786",
-    "U0787",
-    "U0788",
-    "U0790",
-    "U0791",
-    "U0792",
-    "U0793",
-    "override:owner-scan-review"
+    "U0312"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 42
+   "usageCount": 61
   },
   {
    "canonicalUrl": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
@@ -12902,14 +13233,16 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 5,
    "stableIds": [
     "F0072-P01",
     "F0072-P02",
+    "F0072-P03",
+    "F0072-P04",
     "override:pokemon-cn-battle-party-flat-and-foil"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/16070.html",
@@ -12961,13 +13294,14 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "F0071-P01",
+    "F0071-P02",
     "override:pokemon-cn-shining-synergy-starter"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
@@ -12980,7 +13314,7 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 19,
+   "stableIdCount": 20,
    "stableIds": [
     "F0000-P03",
     "F0001-P01",
@@ -12993,7 +13327,8 @@
     "F0060-P03",
     "F0063-P03",
     "F0065-P01",
-    "F0067-P03",
+    "F0067-P04",
+    "F0067-P05",
     "F0068-P01",
     "F0069-P01",
     "F0070-P01",
@@ -13003,7 +13338,7 @@
     "override:pokemon-cn-simplified-finish-rules"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 19
+   "usageCount": 20
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/19640.html",
@@ -22300,7 +22635,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0402-P02",
+    "F0402-P03",
     "U0263"
    ],
    "retrievedAt": "2026-07-21",

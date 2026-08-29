@@ -572,6 +572,15 @@ def specimen_observation_value(observation: dict[str, Any], field: str) -> Any:
     return value or "unknown" if field == "cardSize" else value
 
 
+def specimen_observation_field_matches(
+    observation: dict[str, Any], physical: dict[str, Any], field: str,
+) -> bool:
+    """Allow another positive source to refine an unobserved specimen card size."""
+    if field == "cardSize" and not observation.get(field):
+        return True
+    return physical.get(field) == specimen_observation_value(observation, field)
+
+
 # Graph shape and migration container invariants.
 def _validate_shape(
     graph: dict[str, Any],
@@ -1485,7 +1494,7 @@ def _validate_unmaterialized_specimen(
     else:
         observation = specimen.get("physicalObservation", {})
         for field in ("finish", "edition", "foilPattern", "cardSize"):
-            if physical.get(field) != specimen_observation_value(observation, field):
+            if not specimen_observation_field_matches(observation, physical, field):
                 errors.append(f"specimen printing is stale: {specimen_id}:{field}")
         if (physical.get("markings") or []) != specimen_markings(observation):
             errors.append(f"specimen printing is stale: {specimen_id}:markings")
@@ -1516,7 +1525,7 @@ def _validate_materialized_specimen(
         errors.append(f"specimen printing target is missing: {specimen_id}")
         return
     for field in ("finish", "edition", "foilPattern", "cardSize"):
-        if physical.get(field) != specimen_observation_value(observation, field):
+        if not specimen_observation_field_matches(observation, physical, field):
             errors.append(f"specimen printing is stale: {specimen_id}:{field}")
     if (physical.get("markings") or []) != specimen_markings(observation):
         errors.append(f"specimen printing is stale: {specimen_id}:markings")

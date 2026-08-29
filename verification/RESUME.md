@@ -62,6 +62,7 @@ finish, edition, marking, distribution, or size; omission is never evidence of n
 
 ```console
 python verification/fetch_attachment.py --issue 269 --manifest path/to/issue-269.json
+python verification/fetch_attachment.py --manifest path/to/owner-photos.json
 python scripts/regen.py
 python verification/fetch_attachment.py --evidence-check
 ```
@@ -69,6 +70,11 @@ python verification/fetch_attachment.py --evidence-check
 The importer parses the issue HTML, downloads the signed image candidate, validates PNG/JPEG
 bytes, records `photographSha256`, writes `specimens.json` plus `verification/specimens/`, and
 keeps the stable issue URL as provenance. A second run is a no-op for identical bytes.
+The direct manifest form reads each row's `attachment` path or URL and keeps its optional
+`photographSource` as stable provenance. If an exact owner photograph predates its canonical
+source-first release, the reviewed row may set `allowUnprojected: true`; the specimen is retained
+as an explicit graph candidate until that release is admitted rather than being mis-keyed to a
+neighbouring product.
 `finishes.py` projects typed finish, edition, marking, size, specimen ids, and explicit
 `conflictsWith` review markers; conflicted observations remain pending until resolved.
 `authoritative_graph.py` then projects provenance edges. Never add the same SPEC evidence again

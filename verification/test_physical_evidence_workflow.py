@@ -215,6 +215,12 @@ def main() -> None:
     assert dutch[("27", "1st Edition")]["specimenIds"] == ["SPEC-0042", "SPEC-0043"]
 
     projector = finish_projector()
+    standard_scoped = {
+        "cardSize": "unknown",
+        "sources": [{"closureScope": "standard-set"}],
+    }
+    projector.apply_standard_scope_card_size(standard_scoped)
+    assert standard_scoped["cardSize"] == "standard"
     seller_source = projector.specimen_printing(fixture[2])["sources"][0]
     assert seller_source["sourceType"] == "Seller listing photograph"
     archived_seller = next(row for row in specimens if row["specimenId"] == "SPEC-0107")

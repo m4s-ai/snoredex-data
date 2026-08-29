@@ -29,6 +29,13 @@ def main() -> int:
     assert manifest["runContract"]["defaultNetwork"] is False
     source_steps = {step["id"] for step in lanes["source-discovery"]["steps"]}
     assert {"source-registry-check", "source-capabilities-check"} <= source_steps
+    assert [step["command"] for step in lanes["physical-evidence"]["steps"]] == [
+        ["scripts/finishes.py", "--offline"],
+        ["scripts/authoritative_graph.py", "--write"],
+        ["scripts/checklist.py"],
+        ["scripts/collector_catalogue.py"],
+        ["verification/fetch_attachment.py", "--evidence-check"],
+    ]
 
     # Lane dependencies are a DAG, and every command is an existing repository-owned script.
     visiting: set[str] = set()
