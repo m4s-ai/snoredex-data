@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 31,
-   "evidenceRecords": 1164,
-   "uniqueUrls": 1157,
+   "providers": 32,
+   "evidenceRecords": 1175,
+   "uniqueUrls": 1168,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3522
+   "claimsAttributed": 3535
   }
  },
  "providers": [
@@ -354,6 +354,30 @@
    "claimsSupported": 2
   },
   {
+   "providerId": "collectory",
+   "displayName": "Collectory",
+   "organization": "Collectory",
+   "homepage": "https://collectory.cc",
+   "licenseOrTerms": "Site terms; hosted card renders are used for identification and verification only.",
+   "category": "collector-database",
+   "authorityTier": 3,
+   "coverage": "positive localized card identity and printed rarity shown by retained database renders",
+   "supportsAbsence": false,
+   "usedFor": [
+    "identity",
+    "rarity"
+   ],
+   "attribution": "Card renders from Collectory.",
+   "notes": "A retained database render establishes only the visible card identity and printed rarity. It is not physical-finish evidence. Missing cards, variants, or languages never establish absence or completeness.",
+   "hosts": [
+    "collectory.cc",
+    "www.collectory.cc",
+    "cdn.collectory.cc"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 2
+  },
+  {
    "providerId": "wikidex",
    "displayName": "WikiDex",
    "organization": "WikiDex",
@@ -518,7 +542,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 349,
-   "claimsSupported": 867
+   "claimsSupported": 868
   },
   {
    "providerId": "cardmarket-product-image",
@@ -740,8 +764,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 52,
-   "claimsSupported": 96
+   "uniqueSources": 62,
+   "claimsSupported": 106
   }
  ],
  "evidence": [
@@ -5949,7 +5973,7 @@
     "F0324-P01",
     "F0324-P03",
     "F0325-P01",
-    "F0325-P02",
+    "F0325-P03",
     "F0326-P01",
     "F0326-P02",
     "F0327-P01",
@@ -6793,7 +6817,8 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket product page",
-    "Cardmarket stock image (visual evidence)"
+    "Cardmarket stock image (visual evidence)",
+    "user + read off 5x upscaled crop of the scan"
    ],
    "dimensions": [
     "finish",
@@ -6809,7 +6834,7 @@
     "xm2a 136 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
@@ -8385,7 +8410,7 @@
     "F0354-P01",
     "F0354-P03",
     "F0355-P01",
-    "F0355-P02",
+    "F0355-P03",
     "F0356-P01",
     "F0356-P02",
     "F0357-P01",
@@ -9039,7 +9064,7 @@
    "stableIdCount": 6,
    "stableIds": [
     "F0363-P01",
-    "F0364-P01",
+    "F0364-P02",
     "F0365-P02",
     "F0366-P01",
     "F0367-P01",
@@ -10332,6 +10357,24 @@
     "svM 094 base"
    ],
    "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Collectory Korean card database render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0464",
+    "U0402"
+   ],
+   "retrievedAt": "2026-08-30",
    "usageCount": 2
   },
   {
@@ -17016,6 +17059,176 @@
    "stableIdCount": 1,
    "stableIds": [
     "F0094-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0346-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0340-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/418966418_1_1784832595_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0364-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0604-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0490-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/423230216_1_1786302836_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0335-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0209-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0355-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0343-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/425674631_1_1787968532_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0325-P02"
    ],
    "retrievedAt": null,
    "usageCount": 1

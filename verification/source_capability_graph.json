@@ -15,15 +15,15 @@
       "An exact retained PokéCottage row is tier-3 positive confirmation for the facts it states. Facts demonstrably shared by an already identified matching Western release may corroborate that release when the equivalence basis is retained; omissions and unstated alternatives never establish absence or completeness."
     ],
     "counts": {
-      "providers": 31,
-      "surfaces": 36,
-      "coverageEdges": 38,
+      "providers": 32,
+      "surfaces": 37,
+      "coverageEdges": 39,
       "absenceEdges": 0,
-      "observations": 40,
-      "resolvedVerdictSources": 1164
+      "observations": 41,
+      "resolvedVerdictSources": 1175
     },
     "surfaceStates": {
-      "active": 17,
+      "active": 18,
       "blocked-by-browser": 3,
       "incomplete": 10,
       "internal": 1,
@@ -130,6 +130,13 @@
       "authorityTier": 3,
       "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
       "rawRetention": "Retain the exact scan bytes, database URL, retrieval date, specimen id and SHA-256."
+    },
+    {
+      "providerId": "collectory",
+      "operator": "Collectory",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; hosted card renders are used for identification and verification only.",
+      "rawRetention": "Retain the exact render bytes, card page and image URLs, retrieval date, specimen id and SHA-256."
     },
     {
       "providerId": "wikidex",
@@ -1529,6 +1536,48 @@
       },
       "coverageEdgeIds": [
         "pkparaiso-positive-scan"
+      ]
+    },
+    {
+      "surfaceId": "collectory-card-renders",
+      "providerId": "collectory",
+      "label": "Collectory retained card renders",
+      "match": {
+        "urlPrefixes": [
+          "https://cdn.collectory.cc/cards/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-30",
+      "freshnessPolicy": "Retain the exact render bytes before using localized card identity or printed rarity as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained Collectory card-render URL",
+        "parameters": [
+          "region",
+          "set path",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained render",
+        "expectedIdentifiers": [
+          "localized card name",
+          "collector number",
+          "printed set identity",
+          "printed rarity when present"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained digital card render",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "collectory-positive-render"
       ]
     },
     {
@@ -3424,6 +3473,54 @@
       }
     },
     {
+      "edgeId": "collectory-positive-render",
+      "providerId": "collectory",
+      "surfaceId": "collectory-card-renders",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "the concrete retained render only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "identity",
+        "rarity",
+        "specimen-existence",
+        "image"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A retained render establishes only the displayed card identity and printed rarity."
+      },
+      "knownPositiveObservationId": "obs-collectory-render",
+      "boundary": {
+        "outsideScope": [
+          "physical finish",
+          "edition",
+          "unretained cards",
+          "complete set or language catalogue"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A missing render is database silence and never negative evidence."
+      }
+    },
+    {
       "edgeId": "wikidex-positive-scan",
       "providerId": "wikidex",
       "surfaceId": "wikidex-card-scans",
@@ -4303,6 +4400,45 @@
           "U0245"
         ],
         "retrievedAt": "2026-08-27",
+        "usageCount": 2
+      }
+    },
+    {
+      "observationId": "obs-collectory-render",
+      "surfaceId": "collectory-card-renders",
+      "kind": "known-positive",
+      "queryUrl": "https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp",
+      "queryParameters": {
+        "region": "kr",
+        "cardNumber": "094/175"
+      },
+      "retrievedAt": "2026-08-30",
+      "expectedIdentifiers": [
+        "SPEC-0464",
+        "U0402"
+      ],
+      "validatesEdges": [
+        "collectory-positive-render"
+      ],
+      "outcome": "The retained Korean svM 094/175 render positively establishes the displayed localized card identity and printed rarity only; it does not establish physical finish.",
+      "rawRecordRef": "verification/source_registry.json:https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp",
+      "rawRecordHash": "sha256:90ecc073b47dd0a604bd2bdb221b8979e862a349cf4a297c6d98e40dfc9170b0",
+      "rawRecord": {
+        "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp",
+        "nonUrlEvidenceId": null,
+        "providerId": "collectory",
+        "sourceTypes": [
+          "Collectory Korean card database render"
+        ],
+        "dimensions": [
+          "identity"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "SPEC-0464",
+          "U0402"
+        ],
+        "retrievedAt": "2026-08-30",
         "usageCount": 2
       }
     },
@@ -11446,6 +11582,18 @@
       ]
     },
     {
+      "sourceKey": "https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp",
+      "providerId": "collectory",
+      "surfaceId": "collectory-card-renders",
+      "capabilityEdgeIds": [
+        "collectory-positive-render"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.elitefourum.com/t/black-star-promos-languages/36573",
       "providerId": "elitefourum",
       "surfaceId": "elitefourum-topics",
@@ -15708,6 +15856,126 @@
     },
     {
       "sourceKey": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/418966418_1_1784832595_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/423230216_1_1786302836_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/425674631_1_1787968532_w480.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
