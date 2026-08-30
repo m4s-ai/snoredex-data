@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -173,7 +174,7 @@ class SourceAdapterTests(unittest.TestCase):
             run_dir = Path(temporary)
             (run_dir / "raw").mkdir()
             (run_dir / "raw" / "sets.json").write_bytes(raw)
-            projection = adapters.build_projection(contract, manifest, run_dir, None)
+            projection = adapters.build_projection(contract, manifest, run_dir, None, contract)
         self.assertEqual(projection["slices"][0]["terminalState"], "needs-evidence")
         self.assertEqual(projection["slices"][0]["accounting"]["fetched"], 0)
         self.assertEqual(projection["slices"][0]["accounting"]["accounted"], 0)
@@ -206,6 +207,131 @@ class SourceAdapterTests(unittest.TestCase):
         self.assertEqual(diff["changed"], [new["stableKey"]])
         self.assertEqual(diff["counts"]["changed"], 1)
 
+    def test_incomplete_run_does_not_replace_canonical_projection(self):
+        contract = {
+            "meta": {
+                "coverageVersion": "test",
+                "reviewedAt": "2026-08-30",
+                "policies": [],
+            },
+            "adapters": [{"adapterId": "current"}],
+            "explicitMappings": [],
+            "gaps": [],
+        }
+        compatible = json.loads(json.dumps(contract))
+        compatible["meta"]["coverageVersion"] = "previous"
+        compatible["meta"]["reviewedAt"] = "2026-08-29"
+        compatible["meta"]["policies"] = ["previous"]
+        compatible["explicitMappings"] = [{"mapping": "previous"}]
+        compatible["gaps"] = [{"gap": "previous"}]
+        incompatible = json.loads(json.dumps(contract))
+        incompatible["adapters"] = [{"adapterId": "obsolete"}]
+        capability = {}
+        capability_hash = adapters.capability_pin(capability, None)
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            for run_id, status, run_contract, run_capability_hash in (
+                ("20260809T000000Z", "complete", compatible, capability_hash),
+                ("20260810T000000Z", "complete", incompatible, capability_hash),
+                ("20260811T000000Z", "complete", compatible, "sha256:obsolete"),
+                ("20260812T000000Z", "incomplete", contract, capability_hash),
+            ):
+                run_dir = runs_dir / run_id
+                run_dir.mkdir()
+                (run_dir / "manifest.json").write_text(json.dumps({
+                    "runId": run_id,
+                    "status": status,
+                    "contractHash": adapters.content_hash(run_contract),
+                    "capabilityGraphHash": run_capability_hash,
+                }), encoding="utf-8")
+                (run_dir / "contract.json").write_text(
+                    json.dumps(run_contract), encoding="utf-8"
+                )
+            with (
+                mock.patch.object(adapters, "RUNS_DIR", runs_dir),
+                mock.patch.object(adapters, "validate_contract"),
+                mock.patch.object(
+                    adapters,
+                    "build_projection",
+                    side_effect=lambda _contract, manifest, *_args: {
+                        "runId": manifest["runId"]
+                    },
+                ) as build,
+            ):
+                projection, run_dir = adapters.build_latest(contract, capability)
+        self.assertEqual(run_dir.name, "20260809T000000Z")
+        self.assertEqual(projection["runId"], "20260809T000000Z")
+        self.assertEqual(build.call_count, 4)
+        self.assertEqual(build.call_args_list[0].args[4], contract)
+
+    def test_replay_repins_compatible_source_bytes(self):
+        contract = {
+            "meta": {
+                "coverageVersion": "current",
+                "reviewedAt": "2026-08-30",
+                "policies": [],
+            },
+            "adapters": [],
+            "explicitMappings": [],
+            "gaps": [],
+        }
+        source_contract = json.loads(json.dumps(contract))
+        source_contract["meta"]["coverageVersion"] = "previous"
+        capability = {}
+        source_id = "20260809T000000Z"
+        replay_id = "20260810T000000Z"
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_root = Path(temporary)
+            runs_dir = temporary_root / "runs"
+            source_dir = runs_dir / source_id
+            (source_dir / "raw").mkdir(parents=True)
+            (source_dir / "raw" / "sets.json").write_text("[]", encoding="utf-8")
+            (source_dir / "contract.json").write_text(
+                json.dumps(source_contract), encoding="utf-8"
+            )
+            (source_dir / "manifest.json").write_text(json.dumps({
+                "runId": source_id,
+                "status": "complete",
+                "contractHash": adapters.content_hash(source_contract),
+                "capabilityGraphHash": "sha256:previous",
+                "requests": [],
+                "failures": [],
+            }), encoding="utf-8")
+            projection = {"meta": {"counts": {"records": 0, "runErrors": 0}}, "records": []}
+            with (
+                mock.patch.object(adapters, "RUNS_DIR", runs_dir),
+                mock.patch.object(adapters, "OUTPUT_PATH", temporary_root / "staging.json"),
+                mock.patch.object(adapters, "RECORDS_PATH", temporary_root / "records.jsonl"),
+                mock.patch.object(adapters, "load_inputs", return_value=(contract, capability)),
+                mock.patch.object(adapters, "build_projection") as build,
+                mock.patch.object(adapters, "build_latest", return_value=(projection, runs_dir / replay_id)),
+            ):
+                adapters.replay_run(source_id, replay_id, "2026-08-30T00:00:00Z")
+            replay_dir = runs_dir / replay_id
+            manifest = json.loads((replay_dir / "manifest.json").read_text(encoding="utf-8"))
+            replayed_raw = (replay_dir / "raw" / "sets.json").read_text(encoding="utf-8")
+        self.assertEqual(manifest["status"], "complete")
+        self.assertEqual(manifest["replayedFromRun"], source_id)
+        self.assertEqual(manifest["contractHash"], adapters.content_hash(contract))
+        self.assertEqual(manifest["capabilityGraphHash"], adapters.capability_pin(capability, None))
+        self.assertEqual(replayed_raw, "[]")
+        self.assertEqual(build.call_args.args[4:], (contract, capability))
+
+    def test_check_cannot_replay_source_run(self):
+        args = mock.Mock(
+            check=True,
+            refresh=False,
+            refresh_tcgdex=False,
+            replay_from_run="20260809T000000Z",
+            run_id="20260810T000000Z",
+        )
+        with mock.patch.object(adapters, "replay_run") as replay:
+            with self.assertRaisesRegex(
+                adapters.AdapterError, "requires only --run-id"
+            ):
+                adapters.run_requested_action(args)
+        replay.assert_not_called()
+
     def test_incomplete_pagination_is_a_run_error(self):
         contract = {
             "meta": {"coverageVersion": "test"},
@@ -235,7 +361,7 @@ class SourceAdapterTests(unittest.TestCase):
             run_dir = Path(temporary)
             (run_dir / "raw").mkdir()
             (run_dir / "raw" / "sets.json").write_bytes(raw)
-            projection = adapters.build_projection(contract, manifest, run_dir, None)
+            projection = adapters.build_projection(contract, manifest, run_dir, None, contract)
         self.assertEqual(projection["slices"][0]["terminalState"], "needs-evidence")
         self.assertIn("incomplete-pagination", {row["code"] for row in projection["runErrors"]})
 

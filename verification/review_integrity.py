@@ -35,12 +35,9 @@ ALLOWED_AVAILABILITY = ("confirmed", "owner-attested", "marketplace-claimed", "p
 ALLOWED_PRINTING = ("confirmed", "owner-attested", "marketplace-claimed", "pending")
 ALLOWED_MAPPING = ("confirmed", "partial", "pending", "not-applicable")
 ALLOWED_PATTERN = ("confirmed", "partial", "pending", "not-applicable")
-# "owner-adjudicated" is rule 4 applied to finishes (#119): the collection owner closing a list
-# the evidence already established, where no manifest covers the product. Kept separate from
-# "complete-manifest", which stays source-derived; E13 holds the decision to what it may do.
-ALLOWED_COMPLETENESS = ("complete-manifest", "owner-adjudicated", "positive-evidence-only",
-                        "pending", "not-applicable")
-ALLOWED_CLOSURE_SCOPES = ("finish-unit", "standard-set")
+ALLOWED_COMPLETENESS = ("owner-adjudicated", "positive-evidence-only", "pending",
+                        "not-applicable")
+ALLOWED_EVIDENCE_SCOPES = ("finish-unit", "standard-set")
 ALLOWED_MARKING_ROLES = ("print-identity", "reverse-holo-treatment", "distribution-promo")
 ALLOWED_EDITIONS = ("1st Edition", "Unlimited")
 
@@ -221,45 +218,23 @@ def _check_finish_unknowns(suite: Suite, finish_units: list[dict]) -> None:
     hidden_unknown_finishes = [
         unit.get("finishUnitId") for unit in finish_units
         if any(p.get("finish") == "unknown" for p in (unit.get("printings") or []))
-        and (unit.get("completenessStatus") == "complete-manifest" or not unit.get("unresolved"))
+        and not unit.get("unresolved")
     ]
     suite.check("unknown finish printings remain unresolved", not hidden_unknown_finishes,
                 ",".join(first(hidden_unknown_finishes)))
 
 
 def _check_finish_scopes(suite: Suite, finish_units: list[dict], finish_review: dict) -> None:
-    improperly_closed_scopes, hidden_out_of_scope_printings = [], []
-    for unit in finish_units:
-        manifests = [
-            source
-            for printing in (unit.get("printings") or [])
-            for source in (printing.get("sources") or [])
-            if source.get("supportsAbsence") is True
-            and source.get("coverage") == "complete-manifest"
-            and (not source.get("languages") or unit.get("language") in source["languages"])
-        ]
-        scopes = {source.get("closureScope") for source in manifests}
-        if scopes and "finish-unit" not in scopes \
-                and unit.get("completenessStatus") == "complete-manifest":
-            improperly_closed_scopes.append(unit.get("finishUnitId"))
-        bounded_urls = {
-            source.get("url") for source in manifests
-            if source.get("closureScope") != "finish-unit" and source.get("url")
-        }
-        uncovered = [
-            printing for printing in (unit.get("printings") or [])
-            if bounded_urls and not any(
-                source.get("url") in bounded_urls for source in (printing.get("sources") or []))
-        ]
-        if uncovered and "finish-unit" not in scopes and not unit.get("unresolved"):
-            hidden_out_of_scope_printings.append(unit.get("finishUnitId"))
-    suite.check("scoped manifests do not close finish units", not improperly_closed_scopes,
-                ",".join(first(improperly_closed_scopes)))
-    suite.check("out-of-scope printings remain unresolved", not hidden_out_of_scope_printings,
-                ",".join(first(hidden_out_of_scope_printings)))
-    suite.report("finish units covered by a complete manifest",
+    external_closures = [
+        unit.get("finishUnitId")
+        for unit in finish_units
+        if unit.get("completenessStatus") not in ALLOWED_COMPLETENESS
+    ]
+    suite.check("external finish sources do not close units", not external_closures,
+                ",".join(first(external_closures)))
+    suite.report("owner-adjudicated finish units",
                  sum(1 for u in finish_units
-                     if u.get("completenessStatus") == "complete-manifest"), 4)
+                     if u.get("completenessStatus") == "owner-adjudicated"), 2)
     suite.report("finish review queue", len(finish_review.get("units") or []), 234,
                  direction=checks.DOWN_IS_PROGRESS)
 
@@ -282,10 +257,10 @@ def _check_finish_printings(suite: Suite, finish_units: list[dict]) -> None:
             if not sources:
                 bad_sources.append(printing.get("printingId"))
             for source in sources:
-                if source.get("supportsAbsence") is True and (
-                        source.get("authorityTier") != "official-primary"
-                        or source.get("coverage") != "complete-manifest"
-                        or source.get("closureScope") not in ALLOWED_CLOSURE_SCOPES):
+                if source.get("supportsAbsence") is True:
+                    bad_sources.append(printing.get("printingId"))
+                if (source.get("evidenceScope") is not None
+                        and source.get("evidenceScope") not in ALLOWED_EVIDENCE_SCOPES):
                     bad_sources.append(printing.get("printingId"))
             for mapped in (printing.get("mappedVariants") or []):
                 if mapped not in product_variants:
@@ -347,7 +322,7 @@ def _check_standard_set_mappings(suite: Suite, finish_units: list[dict]) -> None
         }
         for printing in (unit.get("printings") or []):
             if not any(
-                source.get("closureScope") == "standard-set"
+                source.get("evidenceScope") == "standard-set"
                 for source in (printing.get("sources") or [])
             ):
                 continue
@@ -388,7 +363,7 @@ def _check_finish_overrides(
         for printing in (override.get("printings") or [])
         if printing.get("foilPattern")
         and printing.get("sourceRefs")
-        and all(override_sources[ref].get("closureScope") == "standard-set"
+        and all(override_sources[ref].get("evidenceScope") == "standard-set"
                 for ref in printing["sourceRefs"])
     ]
     suite.check("finish-only checklists do not assert foil patterns",

@@ -34,7 +34,6 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -130,8 +129,15 @@ def printing_editions(printing: dict[str, Any]) -> set[str]:
 def main() -> int:
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
-    finish_units = read_json(ROOT / "verification" / "finish_units.json")["units"]
-    releases = read_json(ROOT / "analysis_confirmed_releases.json")["variants"]
+    finish_document = read_json(ROOT / "verification" / "finish_units.json")
+    finish_units = finish_document["units"]
+    release_document = read_json(ROOT / "analysis_confirmed_releases.json")
+    releases = release_document["variants"]
+    generated = max(
+        str(baseline["meta"]["frozenAt"])[:10],
+        str(finish_document["meta"]["generated"])[:10],
+        str(release_document["generated"])[:10],
+    )
 
     # Products keyed by (setCode, number) so a finish unit can find its edition model, imagery
     # and Cardmarket URLs. A finish unit is language-scoped; products are variant-scoped.
@@ -263,7 +269,7 @@ def main() -> int:
         "meta": {
             "schema": "snoredex-checklist",
             "schemaVersion": SCHEMA_VERSION,
-            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "generated": generated,
             "candidateUniverse": {
                 "id": baseline["meta"]["baselineId"],
                 "type": "historical-marketplace-search",
@@ -285,7 +291,7 @@ def main() -> int:
                 "A confirmed card-language-edition with no printing detail yields exactly one finish:unresolved placeholder.",
                 "Markings, foil patterns, distribution channels, release dates and card sizes remain attached to each physical item even when the finish family matches.",
                 "Technical mirror-holo printings use finishFamily:reverse-holo for collector-facing grouping while retaining finish:mirror-holo.",
-                "Positive evidence is not proof of completeness: only completenessStatus=complete-manifest asserts that an unlisted alternative is absent.",
+                "Positive evidence is not proof of completeness. Unlisted alternatives remain unknown unless the collection owner adjudicates the unit.",
             ],
             "warning": (
                 "This checklist lists what is DOCUMENTED, not what exists. An item's absence means "
@@ -309,8 +315,8 @@ def main() -> int:
                 ),
                 "firstEditionItems": len(first_edition),
                 "firstEditionWithEditionAgnosticEvidence": len(agnostic),
-                "completeManifestItems": sum(
-                    1 for item in items if item["completenessStatus"] == "complete-manifest"
+                "ownerAdjudicatedItems": sum(
+                    1 for item in items if item["completenessStatus"] == "owner-adjudicated"
                 ),
                 "finishFamilyGroups": len(finish_groups),
                 "reverseHoloFamilyItems": len(reverse_family),
@@ -326,23 +332,16 @@ def main() -> int:
         for warning in warnings[:10]:
             print(f"warning: {warning}", file=sys.stderr)
 
+    rendered = json.dumps(document, ensure_ascii=False, indent=1) + "\n"
     if "--check" in sys.argv:
-        if not OUTPUT_PATH.exists():
-            print("analysis_checklist.json missing; run python scripts/checklist.py")
-            return 1
-        existing = read_json(OUTPUT_PATH)
-        if (existing["items"] != items
-                or existing.get("meta", {}).get("schemaVersion") != SCHEMA_VERSION
-                or existing.get("meta", {}).get("candidateUniverse")
-                != document["meta"]["candidateUniverse"]):
-            print("analysis_checklist.json is stale; run python scripts/checklist.py")
+        if not OUTPUT_PATH.exists() or OUTPUT_PATH.read_text(encoding="utf-8") != rendered:
+            print("analysis_checklist.json is stale. Run python scripts/checklist.py")
             return 1
         print(f"checklist is current ({len(items)} items)")
         return 0
 
     with OUTPUT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
-        json.dump(document, handle, ensure_ascii=False, indent=1)
-        handle.write("\n")
+        handle.write(rendered)
 
     counts = document["meta"]["counts"]
     print(f"checklist items: {counts['items']} "
@@ -350,7 +349,7 @@ def main() -> int:
           f"{counts['unresolvedPlaceholders']} unresolved placeholders)")
     print(f"first edition: {counts['firstEditionItems']} items, "
           f"{counts['firstEditionWithEditionAgnosticEvidence']} resting on edition-agnostic evidence")
-    print(f"complete-manifest items: {counts['completeManifestItems']}")
+    print(f"owner-adjudicated items: {counts['ownerAdjudicatedItems']}")
     return 0
 
 

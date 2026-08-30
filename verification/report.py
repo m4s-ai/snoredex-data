@@ -20,6 +20,7 @@ by hand, who saw the tables at an interactive console and now see them everywher
 
 from __future__ import annotations
 
+import json
 import sys
 from collections import Counter
 
@@ -44,6 +45,23 @@ def project(units: list[dict], fields: list[str]) -> list[dict]:
     return [{field: unit.get(field) for field in fields} for unit in units]
 
 
+def write_or_check(outputs: dict) -> None:
+    if "--check" in sys.argv:
+        stale = [
+            path.name
+            for path, payload in outputs.items()
+            if not path.exists()
+            or path.read_text(encoding="utf-8")
+            != json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+        ]
+        if stale:
+            raise ValueError(f"stale: {', '.join(stale)}")
+        print("language-verification exports are current")
+        return
+    for path, payload in outputs.items():
+        write_json(path, payload)
+
+
 def main() -> int:
     units = read_json(VERIFICATION / "units.json")
 
@@ -52,9 +70,8 @@ def main() -> int:
     manual = [u for u in units if u.get("status") == "needs-manual-review"]
     unresolved = [u for u in units if u.get("status") not in SETTLED]
 
-    write_json(VERIFICATION / "confirmed_sources.json", project(confirmed, CONFIRMED_FIELDS))
-    # CONTRADICTED: Cardmarket claims the language, an external source says otherwise
-    write_json(VERIFICATION / "CONTRADICTED.json", project(contradicted, CONTRADICTED_FIELDS))
+    confirmed_rows = project(confirmed, CONFIRMED_FIELDS)
+    contradicted_rows = project(contradicted, CONTRADICTED_FIELDS)
 
     # OPEN: still no external source either way. Grouped by card-variant, because a reader decides
     # per card, not per language. Group-Object orders groups by name; the later sort is stable, so
@@ -88,7 +105,12 @@ def main() -> int:
                 and u.get("status") == "confirmed"),
         })
     open_rows.sort(key=lambda row: len(row["openLanguages"]), reverse=True)
-    write_json(VERIFICATION / "UNCONFIRMED.json", open_rows)
+    outputs = {
+        VERIFICATION / "confirmed_sources.json": confirmed_rows,
+        VERIFICATION / "CONTRADICTED.json": contradicted_rows,
+        VERIFICATION / "UNCONFIRMED.json": open_rows,
+    }
+    write_or_check(outputs)
 
     fully_resolved = 0
     card_variants: dict[str, list[dict]] = {}

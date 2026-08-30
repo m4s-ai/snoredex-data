@@ -23,7 +23,7 @@ python scripts/database.py --check
 |---|---|
 | `app_checklist` | One flat row per physical item to collect, including explicit unresolved finish placeholders. |
 | `app_products` | One row per Cardmarket product, with the dated marketplace snapshot kept separate from timeless card fields. |
-| `app_language_availability` | Raw repository verdict, application status, source capability, owner decision provenance and provider strength per claimed language. |
+| `app_language_availability` | Raw repository verdict, application status, evidence scope, owner decision provenance and provider strength per claimed language. |
 | `collection_tracker_seed` | Stable checklist ids with blank `have`, `wanted` and quantity values. |
 | `quality_summary` | Counts of warnings and intentionally incomplete fields. |
 
@@ -34,9 +34,9 @@ The useful status split is:
 - `application_status='needs-evidence'` preserves a confirmation whose set/product or sibling
   observation cannot establish this exact card.
 - `application_status='not-printed'` is reserved for an entry in `owner_adjudications`.
-- `providers.supports_absence` means that a provider has at least one such scope; the row-level
-  `source_absence_supported` field identifies whether this exact source URL is in one. Provider
-  authority alone is never enough.
+- `providers.supports_absence`, `product_languages.absence_supported`, and
+  `app_language_availability.source_absence_supported` are compatibility fields. They are always
+  zero and must not be used to infer non-release.
 
 `exists` is not one thing, and two columns say which kind it is. `evidence_granularity`
 records what the evidence was actually about, and `evidence_inference` records whether the step
@@ -59,10 +59,9 @@ be reached from the base set's printed size. The rows whose page did carry a lis
 publisher's own locale databases answer, are recorded as card-level.
 
 Which verdict each granularity may support on its own is now declared rather than implied, in
-`verdictTransitions` in `verification/evidence_semantics.json`. In short: a card-level record
-establishes a printing; a bounded exhaustive coverage edge can supply absence rationale but does
-not make the final application decision. A
-product-level statement reaches the card only when the step above holds, and never denies one; an
+`verdictTransitions` in `verification/evidence_semantics.json`. In short, a card-level record
+establishes a printing. Every external provider is positive only. A product-level statement reaches
+the card only when the step above holds, and never denies one. An
 era argument and a sibling's record establish nothing on their own. An owner adjudication settles a
 contradiction whatever sits beneath it, because it is the only mechanism that can settle an absence.
 `verdictsBeyondTheirGranularity` in `verification/evidence_semantics.json` reports the current raw
@@ -76,13 +75,12 @@ outranks the rarity word in both directions, which is what Cardmarket's era-depe
 needed: the same word covers the modern Full Art, secret in some locales, and the EX-era `ex` and
 DP-era LV.X cards numbered inside the set. The state remains available when a set size is missing.
 
-The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated`, none
-is source-derived, which is rule 4 visible in the data. Every `disputed` row is
-`market-or-era` + `unscoped-absence`.
+The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated` and none
+is source-derived. Every `disputed` row retains `source-disagreement` as its evidence inference.
 - `owner_adjudications` records the collection owner's final decision after reviewing all cited
   claims and evidence. It is not a claim that any one provider proved absence.
-- `application_status='disputed'` preserves a repository contradiction with neither a scoped
-  absence source nor an owner adjudication. Do not turn it into a hard “does not exist.”
+- `application_status='disputed'` preserves a repository contradiction without an owner
+  adjudication. Do not turn it into a hard “does not exist.”
 - `application_status='needs-evidence'` is a raw confirmation whose evidence cannot reach the card.
 - `application_status='unresolved'` means not yet established.
 - `application_status='out-of-scope'` is a code card.
@@ -169,7 +167,7 @@ SELECT set_code, collector_number, language, evidence_granularity, source_type
 FROM app_language_availability
 WHERE evidence_inference = 'does-not-carry';
 
--- Distinguish owner decisions from source-scoped absence
+-- Inspect owner decisions and the zeroed compatibility field
 SELECT unit_id, language, repository_verdict, application_status,
        source_absence_supported, decision_authority, decision_basis,
        decision_rationale, decision_evidence_refs_json
@@ -180,7 +178,7 @@ WHERE application_status = 'not-printed';
 SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
-The database is UTF-8 SQLite, schema version `1.5.0`, with `PRAGMA user_version=10005`. Every build
-stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`;
+The database is UTF-8 SQLite, schema version `1.6.0`, with `PRAGMA user_version=10006`. Every build
+stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`.
 `scripts/database.py --check` fails if
 any source artifact changes without a database refresh.

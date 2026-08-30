@@ -1044,8 +1044,18 @@ def checked_raw_path(run_dir: Path, relative: str) -> Path:
     return path
 
 
+def validate_capability_graph(
+    manifest: dict[str, Any], capability: dict[str, Any] | None
+) -> None:
+    if capability is None:
+        return
+    if manifest.get("capabilityGraphHash") != capability_pin(
+            capability, manifest_surfaces(manifest)):
+        raise DiscoveryError(f"run {manifest.get('runId')} was captured under another capability graph")
+
+
 def build_projection(
-    contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any],
+    contract: dict[str, Any], capability: dict[str, Any] | None, identity: dict[str, Any],
     manifest: dict[str, Any], run_dir: Path, previous: dict[str, Any] | None,
     projection_contract: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -1065,9 +1075,7 @@ def build_projection(
     }
     if manifest.get("contractHash") != content_hash(contract):
         raise DiscoveryError(f"run {manifest.get('runId')} was captured under another contract")
-    if manifest.get("capabilityGraphHash") != capability_pin(
-            capability, manifest_surfaces(manifest)):
-        raise DiscoveryError(f"run {manifest.get('runId')} was captured under another capability graph")
+    validate_capability_graph(manifest, capability)
     if manifest.get("coverageVersion") != contract["meta"]["coverageVersion"]:
         raise DiscoveryError(f"run {manifest.get('runId')} has another coverage version")
     expected_slice_ids = set(slices)
@@ -1319,8 +1327,7 @@ def run_directories() -> list[Path]:
     )
 
 
-def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
-    """Return the newest complete run with the same acquisition contract."""
+def acquisition_compatible_complete_runs(contract: dict[str, Any]) -> list[str]:
     compatible = []
     for run_dir in run_directories():
         manifest = read_json(run_dir / "manifest.json")
@@ -1336,39 +1343,78 @@ def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
             raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
         if acquisition_contract(run_contract) == acquisition_contract(contract):
             compatible.append(run_dir.name)
-    return max(compatible, default=None)
+    return compatible
+
+
+def newest_acquisition_compatible_complete_run(
+    contract: dict[str, Any],
+) -> str | None:
+    return max(acquisition_compatible_complete_runs(contract), default=None)
+
+
+def newest_compatible_complete_run(
+    contract: dict[str, Any], capability: dict[str, Any]
+) -> str | None:
+    for run_id in reversed(acquisition_compatible_complete_runs(contract)):
+        manifest = read_json(RUNS_DIR / run_id / "manifest.json")
+        if manifest.get("capabilityGraphHash") == capability_pin(
+            capability, manifest_surfaces(manifest)
+        ):
+            return run_id
+    return None
 
 
 def build_latest(
     contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any]
 ) -> tuple[dict[str, Any], Path]:
-    directories = run_directories()
-    if not directories:
-        raise DiscoveryError("no retained card-discovery run exists")
-    previous = None
-    for run_dir in directories:
+    def load_manifest(run_dir: Path) -> dict[str, Any]:
         manifest = read_json(run_dir / "manifest.json")
         if manifest.get("runId") != run_dir.name:
             raise DiscoveryError(f"run directory and manifest id differ: {run_dir.name}")
-        run_contract = contract
-        if manifest.get("contractHash") != content_hash(contract):
-            snapshot_path = run_dir / "contract.json"
-            if not snapshot_path.is_file():
-                raise DiscoveryError(
-                    f"historical run {run_dir.name} needs its immutable contract snapshot"
-                )
-            run_contract = read_json(snapshot_path)
-            if manifest.get("contractHash") != content_hash(run_contract):
-                raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
-            # Historical editorial targets may have been superseded in the
-            # current graph. The immutable snapshot hash preserves what the run
-            # used; only the current contract is required to resolve today.
+        return manifest
+
+    def load_run_contract(run_dir: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+        if manifest.get("contractHash") == content_hash(contract):
+            return contract
+        snapshot_path = run_dir / "contract.json"
+        if not snapshot_path.is_file():
+            raise DiscoveryError(
+                f"historical run {run_dir.name} needs its immutable contract snapshot"
+            )
+        run_contract = read_json(snapshot_path)
+        if manifest.get("contractHash") != content_hash(run_contract):
+            raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
+        return run_contract
+
+    def selected_capability(run_dir: Path) -> dict[str, Any] | None:
+        return capability if run_dir == latest_dir else None
+
+    directories = run_directories()
+    if not directories:
+        raise DiscoveryError("no retained card-discovery run exists")
+    manifests = [(run_dir, load_manifest(run_dir)) for run_dir in directories]
+    latest_run_id = newest_compatible_complete_run(contract, capability)
+    if latest_run_id is None:
+        raise DiscoveryError("no compatible complete card-discovery run exists")
+    latest_dir = RUNS_DIR / latest_run_id
+    previous = None
+    latest_projection = None
+    for run_dir, manifest in manifests:
+        run_contract = load_run_contract(run_dir, manifest)
         compatible = acquisition_contract(run_contract) == acquisition_contract(contract)
-        previous = build_projection(
-            run_contract, capability, identity, manifest, run_dir, previous,
+        projection = build_projection(
+            run_contract,
+            selected_capability(run_dir),
+            identity,
+            manifest,
+            run_dir,
+            previous,
             contract if compatible else run_contract,
         )
-    return previous, directories[-1]
+        if run_dir == latest_dir:
+            latest_projection = projection
+        previous = projection
+    return latest_projection, latest_dir
 
 
 def fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:
@@ -2356,12 +2402,9 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
         raise DiscoveryError(f"replay source run is not complete: {source_run_id}")
     if source_manifest.get("contractHash") != content_hash(source_contract):
         raise DiscoveryError(f"replay source contract hash differs: {source_run_id}")
-    # A replay reuses only immutable provider bytes. Editorial mappings in the
-    # source contract may legitimately name release ids superseded by the current
-    # reviewed graph; the current contract was already validated by load_inputs().
     if acquisition_contract(source_contract) != acquisition_contract(contract):
         raise DiscoveryError("replay source differs in its provider acquisition contract")
-    newest_source_run_id = newest_compatible_complete_run(contract)
+    newest_source_run_id = newest_acquisition_compatible_complete_run(contract)
     if source_run_id != newest_source_run_id:
         raise DiscoveryError(
             "replay source must be the newest compatible complete run: "

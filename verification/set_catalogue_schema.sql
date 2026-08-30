@@ -141,15 +141,9 @@ CREATE TABLE finish_profile (
     finish_profile_id TEXT PRIMARY KEY,
     local_set_id TEXT NOT NULL REFERENCES local_set(local_set_id),
     scope_precision TEXT NOT NULL CHECK (scope_precision IN ('exact', 'scoped', 'partial')),
-    closed_within_scope INTEGER NOT NULL CHECK (closed_within_scope IN (0, 1)),
-    closure_scope TEXT,
-    closure_authority TEXT CHECK (closure_authority IN
-        ('official-complete-manifest', 'equivalent-explicit-complete-statement')),
-    source_record_id TEXT NOT NULL REFERENCES source_record(source_record_id),
-    CHECK (
-        closed_within_scope = 0
-        OR (closure_scope IS NOT NULL AND closure_authority IS NOT NULL)
-    )
+    closed_within_scope INTEGER NOT NULL CHECK (closed_within_scope = 0),
+    evidence_scope TEXT,
+    source_record_id TEXT NOT NULL REFERENCES source_record(source_record_id)
 ) STRICT;
 
 CREATE TABLE finish_profile_edition (
@@ -162,7 +156,7 @@ CREATE TABLE finish_profile_rule (
     finish_profile_rule_id TEXT PRIMARY KEY,
     finish_profile_id TEXT NOT NULL REFERENCES finish_profile(finish_profile_id),
     priority INTEGER NOT NULL,
-    effect TEXT NOT NULL CHECK (effect IN ('include', 'exclude')),
+    effect TEXT NOT NULL CHECK (effect = 'include'),
     finish TEXT NOT NULL,
     condition_json TEXT NOT NULL CHECK (json_valid(condition_json)),
     source_record_id TEXT NOT NULL REFERENCES source_record(source_record_id)

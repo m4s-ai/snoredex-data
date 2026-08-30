@@ -1,63 +1,8 @@
 #!/usr/bin/env python3
-"""Classify what each verdict actually rests on, and which inferences carry (#137).
+"""Classify evidence granularity and derive conservative application states.
 
-#137 first inventories what every verdict rests on, then derives the conservative application
-status from that inventory. The raw verdict and observation never change: an unsupported
-confirmation becomes ``needs-evidence`` only on consumer projections, and an unsupported
-contradiction becomes ``disputed``.
-
-FOUR GRANULARITIES, FROM THE ISSUE
-
-``specimen-or-card``   a record about this exact card in this exact language — a card database
-                      entry, a set list row, a photographed specimen
-``product-or-set``     a statement about the set or product, not the card row — a cross-language
-                      expansion index, an "In other languages" table, a release field
-``market-or-era``      market-history reasoning — "the Traditional Chinese market opened in 2019"
-``sibling-derived``    the evidence of a neighbouring unit rather than this one
-
-WHY SET-LEVEL IS NOT AUTOMATICALLY WRONG
-
-The tempting summary is "142 confirmations rest on a set release, all of them unsound". That is
-false and worth resisting. A normally numbered expansion is printed as a whole: if the set was
-released in German, card 118/162 exists in German, and inferring that is sound. What does not
-follow is a card that is not part of that numbered run — a promo, a deck-fixed card, or a
-secret-numbered card above the set size. Bulbapedia's own Rarity article is explicit that these
-vary by locale: "Full Art cards were notably only considered 'secret' in Japan", and "the rarity
-of a card may vary between Japanese and other-language releases".
-
-So the inventory splits set-level confirmations by whether the step from the source to the card
-holds, and only the remainder is a finding. Two things make it hold:
-
-* the card sits inside the set's **numbered run**, which is printed as a whole per language; or
-* the cited source carries a **closed card list** containing this card, beside its statement about
-  which languages the product exists in.
-
-The second was missed on the first pass, and the miss is instructive. A rarity-only rule flagged
-the fifteen Play! Pokémon Prize Pack rows as unsound because "Prize Pack Series" is not an
-expansion rarity. But the Prize Pack Series article carries the card row — `Snorlax 131/185` — next
-to a language table naming the French, German, Italian and Spanish products. A Prize Pack is a
-closed list distributed as a whole, structurally the same as an expansion, so the inference carries
-for the same reason. Rarity was a poor proxy; what matters is whether the source lists the card.
-
-WHERE THE RARITY PROXY LEAKS, AND WHAT IT IS NOW ALLOWED TO SAY
-
-Rarity remained the proxy for run membership, and it has since been wrong twice more. Both are
-recorded here because the queue this report produces is read as a work list, and a row on it for a
-bad reason costs someone the same time as a real one.
-
-* **A rarity belongs to a card, not to a collector number.** The lookup was keyed by
-  `(setCode, number)` while a unit is keyed by variant as well. Seventeen pairs carry more than one
-  card and eight differ in rarity — always a base printing beside a promo variant sharing a number —
-  so `RR 33 V1`, a Rare inside the numbered run, read as the `V2` Promo next to it.
-* **"Ultra Rare" is era-dependent and cannot answer alone.** It covers the modern Full Art, which is
-  secret in some locales, and the EX-era `ex` and DP-era LV.X cards, which were numbered inside the
-  set. The fact that decides between them is the set's printed size, and this project records it
-  nowhere. Those rows now report `needs-set-size` rather than an answer; the fix belongs in the set
-  database (#146), not in another rarity special case.
-
-A third state is therefore deliberate. `carries` and `does-not-carry` are claims about the
-inference; `needs-set-size` is the report declining to make one, and it is not a quieter way of
-saying the inference fails.
+Raw verdicts remain unchanged. Confirmations can become ``needs-evidence`` in projections.
+Contradictions remain disputed unless the collection owner adjudicates them.
 
     python scripts/evidence_semantics.py
     python scripts/evidence_semantics.py --check
@@ -70,59 +15,29 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "verification" / "evidence_semantics.json"
-SCHEMA_VERSION = "0.2.0"
+SCHEMA_VERSION = "1.0.0"
 
-# Matched against `sourceType`, most specific first. A market-history article and a sibling
-# inference both mention things the card-level pattern would otherwise catch.
 MARKET_ERA = re.compile(r"Pok[eé]mon in |market-history", re.IGNORECASE)
-# A sibling-derived row rests on **another unit's record**. That is what makes it unable to support
-# a confirmation: the neighbour's evidence is not this unit's evidence.
-#
-# `set release schedule` was in this pattern and is not a sibling. It is a fact about the set, and
-# it sat in `sourceType` after an owner attestation naming this exact card in this exact language —
-# "Owner (domain expert) confirms the MEGA Dream ex mirror-holo Hop's Snorlax variants exist in
-# Korean". Because this pattern is tested before `CARD_LEVEL`, the trailing context decided the
-# granularity and eight `xm2a 136` rows were filed as though a neighbour carried them.
-#
-# The same precedence trap remains for Prize Pack rows whose sourceType is a direct owner
-# attestation followed by corroboration that names other units ("units of the same product"):
-# `providerId` is `owner-attestation`, so the claim rests on that attestation, and the trailing
-# prose is corroborating context, not the basis (#210). The direct-attestation guard in
-# `granularity()` runs before this pattern so the primary source is never downgraded by the
-# corroboration that follows it.
 SIBLING = re.compile(r"units of the same product", re.IGNORECASE)
-# A direct owner attestation — `providerId == "owner-attestation"` — names this exact card in this
-# exact language. It is graded as card-level evidence by the rule that grades a claim by what it
-# rests on (CLAUDE.md rule 2), even when the sourceType trails corroboration about neighbouring
-# units after the attestation. Checked before SIBLING so the trailing context cannot demote it.
 DIRECT_OWNER_ATTESTATION = re.compile(r"^Owner attestation", re.IGNORECASE)
 CARD_LEVEL = re.compile(
     r"card database|TCGdex|photographed|specimen|set list|card article|card page|"
     r"locale card archive|promo search|"
     r"promo series article|card list|deck list|"
-    # An owner speaking about a card, a collector community naming its languages, and a listing
-    # of the card itself are all statements about this card rather than about its set.
     r"Owner attestation|Marketplace listing|retail listings|Elite Fourum|collector guide|"
     r"collector-group|card release history", re.IGNORECASE)
 SET_LEVEL = re.compile(
     r"expansion index|expansion article|set article|In other languages|release. field|"
     r"Prize Pack Series article|Languages this set|product article|set-code note", re.IGNORECASE)
 
-# Sources whose page carries a closed card list containing the card, not merely a statement about
-# the container. A list plus a language statement reaches the card the same way an expansion's
-# numbered run does.
 CLOSED_LIST_SOURCE = re.compile(r"set list|deck list|card list|Prize Pack Series article",
                                 re.IGNORECASE)
 
-# Does a card of this harvest rarity sit inside the set's numbered run? Only then does "the set
-# was released in language L" reach the card. The vocabulary is Cardmarket's, because that is what
-# the harvest stores; the reasons cite the rarity catalogue where it speaks.
 RUN_MEMBERSHIP = {
     "Common": (True, "part of the numbered run"),
     "Uncommon": (True, "part of the numbered run"),
@@ -132,39 +47,19 @@ RUN_MEMBERSHIP = {
     "Promo": (False, "a promo is distributed outside the expansion's numbered run"),
     "Fixed": (False, "deck, kit and half-deck cards carry no set rarity and are not in the run"),
     "Prize Pack Series": (False, "distribution promo, released per market on its own schedule"),
-    "Secret Rare": (False, "numbered above the printed set size; presence varies by locale"),
-    "Rainbow Rare": (False, "secret-numbered class; presence varies by locale"),
+    "Secret Rare": (False, "numbered above the printed set size, with presence varying by locale"),
+    "Rainbow Rare": (False, "secret-numbered class with presence varying by locale"),
     "Shiny Rare": (False, "subset rarity, not a guaranteed part of every locale's run"),
-    "Character Rare": (False, "secret-numbered class; presence varies by locale"),
+    "Character Rare": (False, "secret-numbered class with presence varying by locale"),
     "Illustration Rare": (False, "presence and rarity assignment differ between locales"),
     "Special Illustration Rare": (False, "presence and rarity assignment differ between locales"),
-    "Triple Rare": (False, "secret-numbered class; presence varies by locale"),
-    # Era-dependent, and the only rarity in this table that is. Cardmarket's "Ultra Rare" covers
-    # both the modern Full Art — secret in some locales and not others — and the EX-era `ex` and
-    # DP-era LV.X cards, which were numbered inside the set (`TRR 104` of 109, `RR 111` of 111).
-    # One word, two opposite answers, and the deciding fact is the set's printed size, which this
-    # project does not yet record anywhere. Asserting "does not carry" from the word alone was
-    # wrong; `None` reports the gap instead of guessing past it. Set size belongs in the set
-    # database — filed on #146.
+    "Triple Rare": (False, "secret-numbered class with presence varying by locale"),
     "Ultra Rare": (None, "run membership depends on the set's printed size, which is not recorded"),
     "Oversized": (False, "jumbo product insert, not part of any numbered run"),
     "World Championship Deck": (False, "event product, not an expansion run"),
     "Online Code Card": (False, "not a physical collectible card"),
 }
 
-# Rarities that name how a card was *distributed*, not where it sits in a set. A recorded set size
-# outranks the rarity word — but not these, and the difference is not a nicety.
-#
-# A promo's collector number is the number of the run card it reprints. `RR 33 V2` is the Rival
-# Season promo printing of `RR 33 V1`, an ordinary Rare; `CL 33 V2` and `FLF 80 V2` are the same
-# shape. Comparing 33 against a 111-card run therefore answers a question nobody asked: it says the
-# *number* is inside the run, which was never in doubt, and concludes that a language release of the
-# set reaches a promo distributed separately from it.
-#
-# This is not hypothetical. When `RR` gained a size and `CL`/`FLF` had not yet, `RR 33 V2` moved to
-# `carries` while its two identical siblings stayed on the queue — one promo judged sound and two
-# unsound, by nothing but which set had been measured first. So the exclusion is checked before the
-# size, and a distribution rarity is outside every numbered run whatever its number says.
 DISTRIBUTION_RARITIES = {
     "Promo",
     "Prize Pack Series",
@@ -174,17 +69,6 @@ DISTRIBUTION_RARITIES = {
 }
 
 
-# WHICH VERDICT EACH GRANULARITY MAY SUPPORT
-#
-# #137's second work item, and the one #140 needs before it can downgrade anything: the rules were
-# implicit in this file's branching, so a reader could see what the report concluded but not what it
-# was entitled to conclude. Declaring them makes the residue one queue under one rule instead of
-# three ad-hoc counters.
-#
-# `alone` is the operative word throughout. Every row here asks what a granularity establishes **by
-# itself**; corroboration and owner adjudication are separate mechanisms layered on top, and the
-# owner adjudication in particular settles a contradiction whatever the evidence's granularity,
-# because rule 4 makes it the only thing that can.
 VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
     "specimen-or-card": {
         "confirmed": {
@@ -193,9 +77,9 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
                     "This is the granularity every other one is trying to reach.",
         },
         "contradicted": {
-            "support": "only-within-an-exhaustive-absence-edge",
-            "rule": "A card-level source may deny a printing only where #135 proves it exhaustive "
-                    "for that locality, category and period. Otherwise its silence is a gap.",
+            "support": "raw-disagreement-only",
+            "rule": "A contradiction retains source disagreement. It does not establish absence "
+                    "without owner adjudication.",
         },
     },
     "product-or-set": {
@@ -203,13 +87,11 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
             "support": "only-when-the-step-to-the-card-holds",
             "rule": "A statement about the product reaches the card when the card sits inside the "
                     "set's numbered run, or when the cited page carries a closed card list "
-                    "containing it — and never when the row is a distribution printing.",
+                    "containing it. A distribution printing remains separate.",
         },
         "contradicted": {
-            "support": "never",
-            "rule": "A product-level source that does not list a card has a gap, not a finding. "
-                    "This is #137's named failure: contradicting a card because a cross-language "
-                    "expansion index has no entry for it.",
+            "support": "raw-disagreement-only",
+            "rule": "A contradiction retains source disagreement. Product omission alone remains unknown.",
         },
     },
     "market-or-era": {
@@ -219,9 +101,8 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
                     "card in a particular language.",
         },
         "contradicted": {
-            "support": "never",
-            "rule": "An era argument is Indizien: it is the material the owner weighs, not a "
-                    "verdict a page can assert. Only an owner adjudication settles it.",
+            "support": "raw-disagreement-only",
+            "rule": "An era argument may be retained as disagreement. It does not establish absence.",
         },
     },
     "sibling-derived": {
@@ -231,18 +112,13 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
                     "is a sibling's record establishes nothing about itself.",
         },
         "contradicted": {
-            "support": "never",
-            "rule": "Same reason, in the other direction.",
+            "support": "raw-disagreement-only",
+            "rule": "A sibling record may be retained as disagreement but cannot settle absence.",
         },
     },
 }
 
-# An owner adjudication settles a contradiction whatever the granularity beneath it, because rule 4
-# makes it the only mechanism that can settle an absence at all. It is recorded separately in
-# owner_adjudications.json and never attributed to a provider, so it is a layer over this table
-# rather than a row in it.
 ADJUDICATED = "owner-adjudicated"
-SCOPED_ABSENCE = "provider-holds-an-absence-edge"
 
 
 def transition_support(grain: str, status: str, inference: str | None) -> tuple[bool, str]:
@@ -257,10 +133,7 @@ def transition_support(grain: str, status: str, inference: str | None) -> tuple[
     if status == "contradicted":
         if inference == ADJUDICATED:
             return True, "owner-adjudication"
-        if inference == SCOPED_ABSENCE:
-            allowed = VERDICT_TRANSITIONS.get(grain, {}).get("contradicted", {}).get("support")
-            return allowed == "only-within-an-exhaustive-absence-edge", "exhaustive-absence-edge"
-        return False, "unscoped-absence"
+        return False, "source-disagreement-does-not-establish-absence"
     if grain == "specimen-or-card":
         return True, "card-level-record"
     if grain == "product-or-set":
@@ -273,9 +146,6 @@ def application_status(status: str, within: bool, inference: str | None) -> str:
     if status == "confirmed":
         return "exists" if within else "needs-evidence"
     if status == "contradicted":
-        # The collection owner's explicit decision is the only mechanism that publishes a hard
-        # absence. An exact exhaustive source edge permits the raw contradiction, but remains
-        # disputed at the application boundary until the owner adjudicates it.
         return "not-printed" if inference == ADJUDICATED else "disputed"
     return "unresolved"
 
@@ -289,11 +159,6 @@ def granularity(unit: dict[str, Any]) -> str:
     source_type = unit.get("sourceType") or ""
     if MARKET_ERA.search(source_type):
         return "market-or-era"
-    # A direct owner attestation is this unit's own card-level evidence, whatever corroboration
-    # trails it. `providerId` is the source the claim rests on; corroborating prose about
-    # neighbouring units is context, never a demotion (#210). This guard must run before SIBLING:
-    # `owner-attestation` rows carry "units of the same product" in their trailing corroboration,
-    # and the substring test would otherwise demote the attestation it follows.
     if unit.get("providerId") == "owner-attestation" and DIRECT_OWNER_ATTESTATION.match(source_type):
         return "specimen-or-card"
     if SIBLING.search(source_type):
@@ -310,7 +175,7 @@ def printed_set_sizes(set_sources: dict) -> dict[str, int]:
 
     This is what separates the two things Cardmarket's `Ultra Rare` means. A card is inside the
     numbered run when its number is within the set's printed size, and once that number is
-    recorded, run membership is computed from data rather than inferred from a rarity word — which
+    recorded, run membership is computed from data rather than inferred from a rarity word. This
     is the requirement filed on #146 and the reason the `needs-set-size` state existed.
     """
     return {
@@ -320,45 +185,12 @@ def printed_set_sizes(set_sources: dict) -> dict[str, int]:
     }
 
 
-def build(units: list[dict], cards: list[dict], registry: dict,
-          capabilities: dict, adjudications: dict, set_sources: dict) -> dict[str, Any]:
-    # Keyed by the variant token too, not just set and number. Seventeen (setCode, number) pairs
-    # carry more than one card and eight of those differ in rarity, always the same way: a base
-    # printing and a promo variant sharing a collector number. Keying without the token kept
-    # whichever card came last, so `RR 33 V1` — a Rare, inside the numbered run — read as the
-    # `V2` Promo beside it and was reported as an unsound inference. That is the neighbour's
-    # evidence problem in a new place: judge a row by its own record.
+def build(units: list[dict], cards: list[dict],
+          adjudications: dict, set_sources: dict) -> dict[str, Any]:
     by_key = {(c["setCode"], str(c.get("number") or ""), c.get("variantToken") or "base"): c
               for c in cards}
     sizes = printed_set_sizes(set_sources)
 
-    # Which providers may carry absence at all. Both stores are consulted and must agree; they do
-    # today, and a disagreement is worth seeing rather than silently preferring one.
-    registry_absence = {p["providerId"] for p in registry["providers"] if p.get("supportsAbsence")}
-    graph_absence = {
-        surface["providerId"]
-        for surface in capabilities["surfaces"]
-        for edge in surface.get("coverageEdges", [])
-        if edge.get("exhaustive") and (edge.get("absenceCapability") or {}).get("enabled")
-    }
-    registry_absence_scopes = {
-        (provider["providerId"], url.rstrip("/"))
-        for provider in registry["providers"]
-        if provider.get("supportsAbsence")
-        for url in provider.get("absenceScopes") or []
-    }
-    graph_language_absence_scopes = {
-        (surface["providerId"], url.rstrip("/"))
-        for surface in capabilities["surfaces"]
-        for edge in surface.get("coverageEdges", [])
-        if edge.get("exhaustive")
-        for absence in [edge.get("absenceCapability") or {}]
-        if absence.get("enabled") and "language" in (absence.get("dimensions") or [])
-        for url in absence.get("exactScopes") or []
-    }
-    bounded_language_absence_scopes = (
-        registry_absence_scopes & graph_language_absence_scopes
-    )
     settled_units = set()
     for decision in adjudications["decisions"]:
         for key in ("unitId", "unitIds"):
@@ -376,13 +208,6 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         rarity = card["rarity"] if card else None
         inside_run, run_reason = RUN_MEMBERSHIP.get(rarity, (None, "rarity not classified"))
         run_basis = "rarity-table"
-        # A recorded set size outranks the rarity word in both directions. It is the fact the word
-        # was standing in for, so it settles the era-dependent rarities and corrects any other
-        # classification that disagrees with the printed denominator.
-        #
-        # A distribution rarity is the exception, and it is checked first: that row is a promo,
-        # prize-pack, jumbo, Worlds-deck or code-card printing, whose collector number belongs to
-        # the run card it reprints rather than to itself. See DISTRIBUTION_RARITIES.
         size = sizes.get(unit["setCode"])
         number_text = str(unit.get("number") or "")
         if rarity in DISTRIBUTION_RARITIES:
@@ -404,21 +229,14 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             elif inside_run is False:
                 inference = "does-not-carry"
             elif rarity in RUN_MEMBERSHIP:
-                # The rarity is known and the table declines to answer: the fact that would decide
-                # it is missing, not the classification. Kept apart from `unknown-rarity` so the
-                # queue says which of the two a reader is looking at.
                 inference = "needs-set-size"
             else:
                 inference = "unknown-rarity"
         if unit["status"] == "contradicted":
             if unit["unitId"] in settled_units:
                 inference = "owner-adjudicated"
-            elif (
-                unit["providerId"], str(unit.get("sourceUrl") or "").rstrip("/")
-            ) in bounded_language_absence_scopes:
-                inference = "provider-holds-an-absence-edge"
             else:
-                inference = "unscoped-absence"
+                inference = "source-disagreement"
 
         rows.append({
             "unitId": unit["unitId"],
@@ -446,31 +264,26 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         by_grain[row["granularity"]][row["status"]] += 1
 
     unsound = [r for r in rows if r["inference"] == "does-not-carry"]
-    unscoped = [r for r in rows if r["inference"] == "unscoped-absence"]
     needs_size = [r for r in rows if r["inference"] == "needs-set-size"]
     beyond = [r for r in rows if not r["verdictWithinGranularity"]]
+    generated = max(
+        [str(unit.get("checkedAt") or "")[:10] for unit in units]
+        + [str(adjudications.get("meta", {}).get("generated") or "")[:10]]
+        + [str(set_sources.get("meta", {}).get("generated") or "")[:10]]
+    )
 
     return {
         "meta": {
             "schema": "snoredex-evidence-semantics",
             "schemaVersion": SCHEMA_VERSION,
-            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "generated": generated,
             "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
-            "status": "active application policy — raw verdicts remain unchanged",
+            "status": "active application policy. Raw verdicts remain unchanged",
             "description": (
                 "Every unit classified by the granularity of the evidence it rests on, and, for "
                 "set-level confirmations, whether the inference from set to card carries. "
                 "applicationStatus is the conservative consumer projection."
             ),
-            "absenceCapableProviders": {
-                "sourceRegistry": sorted(registry_absence),
-                "capabilityGraph": sorted(graph_absence),
-                "agree": sorted(registry_absence) == sorted(graph_absence),
-            },
-            "boundedLanguageAbsenceScopes": [
-                {"providerId": provider, "url": url}
-                for provider, url in sorted(bounded_language_absence_scopes)
-            ],
         },
         "runMembershipRules": {
             rarity: {"insideNumberedRun": inside, "reason": reason}
@@ -492,9 +305,6 @@ def build(units: list[dict], cards: list[dict], registry: dict,
             "setLevelConfirmationsThatCarry": sum(1 for r in rows if r["inference"] == "carries"),
             "setLevelConfirmationsThatDoNotCarry": len(unsound),
             "setLevelConfirmationsNeedingSetSize": len(needs_size),
-            # One queue, reported as one number. Splitting "the inference fails" from "this report
-            # cannot say" is useful to a reader and misleading to a gate: resolving an undecidable
-            # row into a failing one moves both counters and reads as a regression on either half.
             "setLevelConfirmationsNotReachingTheCard": len(unsound) + len(needs_size),
             "contradictionsByBacking": dict(Counter(
                 r["inference"] for r in rows if r["status"] == "contradicted")),
@@ -502,9 +312,6 @@ def build(units: list[dict], cards: list[dict], registry: dict,
                 r["runMembershipBasis"] for r in rows
                 if r["status"] == "confirmed" and r["granularity"] == "product-or-set")),
             "unsoundByRarity": dict(Counter(r["rarity"] for r in unsound).most_common()),
-            # The same residue the three queues above describe, counted once under one rule. It is
-            # what #140 has to disposition, and it is deliberately a superset: a row can fail the
-            # transition test without appearing on any single one of them.
             "verdictsBeyondTheirGranularity": len(beyond),
             "verdictsBeyondTheirGranularityByRule": dict(Counter(
                 r["verdictTransitionRule"] for r in beyond).most_common()),
@@ -514,7 +321,6 @@ def build(units: list[dict], cards: list[dict], registry: dict,
         "verdictsBeyondTheirGranularity": sorted(beyond, key=lambda r: r["unitId"]),
         "setLevelConfirmationsThatDoNotCarry": sorted(unsound, key=lambda r: r["unitId"]),
         "setLevelConfirmationsNeedingSetSize": sorted(needs_size, key=lambda r: r["unitId"]),
-        "unscopedAbsenceContradictions": sorted(unscoped, key=lambda r: r["unitId"]),
         "units": rows,
     }
 
@@ -527,20 +333,18 @@ def main() -> int:
     document = build(
         read_json(ROOT / "verification" / "units.json"),
         read_json(ROOT / "snorlax_cards.json")["cards"],
-        read_json(ROOT / "verification" / "source_registry.json"),
-        read_json(ROOT / "verification" / "source_capabilities.json"),
         read_json(ROOT / "verification" / "owner_adjudications.json"),
         read_json(ROOT / "verification" / "set_catalogue_sources.json"),
     )
 
     if args.check:
         if not OUTPUT_PATH.is_file():
-            print("evidence_semantics.json missing; run python scripts/evidence_semantics.py")
+            print("evidence_semantics.json missing. Run python scripts/evidence_semantics.py")
             return 1
         existing = read_json(OUTPUT_PATH)
         if {k: v for k, v in existing.items() if k != "meta"} != \
                 {k: v for k, v in document.items() if k != "meta"}:
-            print("evidence_semantics.json is stale; run python scripts/evidence_semantics.py")
+            print("evidence_semantics.json is stale. Run python scripts/evidence_semantics.py")
             return 1
         print(f"evidence semantics current ({document['counts']['units']} units classified)")
         return 0

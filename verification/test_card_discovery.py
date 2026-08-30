@@ -448,6 +448,51 @@ class CardDiscoveryTests(unittest.TestCase):
                         "20260813T135800Z", "20260813T135700Z", None
                     )
 
+    def test_incomplete_run_does_not_replace_canonical_projection(self):
+        contract = {
+            "meta": {"coverageVersion": "test", "reviewedAt": "2026-08-30", "policies": []},
+            "adapters": [],
+            "explicitMappings": [],
+            "gaps": [],
+        }
+        incompatible = json.loads(json.dumps(contract))
+        incompatible["adapters"] = [{"adapterId": "obsolete"}]
+        capability = {}
+        capability_hash = discovery.capability_pin(capability, None)
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            for run_id, status, run_contract, run_capability_hash in (
+                ("20260809T000000Z", "complete", contract, capability_hash),
+                ("20260810T000000Z", "complete", incompatible, capability_hash),
+                ("20260811T000000Z", "complete", contract, "sha256:obsolete"),
+                ("20260812T000000Z", "incomplete", contract, capability_hash),
+            ):
+                run_dir = runs_dir / run_id
+                run_dir.mkdir()
+                (run_dir / "manifest.json").write_text(json.dumps({
+                    "runId": run_id,
+                    "status": status,
+                    "contractHash": discovery.content_hash(run_contract),
+                    "capabilityGraphHash": run_capability_hash,
+                }), encoding="utf-8")
+                (run_dir / "contract.json").write_text(
+                    json.dumps(run_contract), encoding="utf-8"
+                )
+            with (
+                mock.patch.object(discovery, "RUNS_DIR", runs_dir),
+                mock.patch.object(
+                    discovery,
+                    "build_projection",
+                    side_effect=lambda _contract, _capability, _identity, manifest, *_args: {
+                        "runId": manifest["runId"]
+                    },
+                ) as build,
+            ):
+                projection, run_dir = discovery.build_latest(contract, capability, {})
+        self.assertEqual(run_dir.name, "20260809T000000Z")
+        self.assertEqual(projection["runId"], "20260809T000000Z")
+        self.assertEqual(build.call_count, 4)
+
     def test_replay_source_must_be_newest_compatible_complete_run(self):
         contract = {
             "meta": {

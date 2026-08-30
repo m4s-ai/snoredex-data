@@ -58,7 +58,10 @@ SENSITIVE_SCAN_EXEMPT = frozenset({
 })
 
 DOC_STAGES = ("auto", "task", "reference", "public", "generated", "history")
-DOC_HEADER = re.compile(r"<!--\s*doc:\s*role=(?P<role>[^;]+);\s*stage=(?P<stage>[^\s>]+)\s*-->")
+DOC_HEADER = re.compile(
+    r"<!--\s*doc:\s*role=(?P<role>[^;\r\n]+)(?:;|\r?\n)\s*"
+    r"stage=(?P<stage>[^\s>]+)\s*-->"
+)
 
 # The check protocol is shared with `review_integrity.py` — one implementation of how a check is
 # declared and when the process exits non-zero. The output format below stays this suite's own.
@@ -1582,12 +1585,7 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
             )
             adjudicated_units = {d["unitId"] for d in
                                  load("verification/owner_adjudications.json")["decisions"]}
-            manifest_scopes = {url.rstrip("/") for provider in registry["providers"]
-                               if provider.get("supportsAbsence")
-                               for url in provider.get("absenceScopes") or []}
             def settles_absence(unit: dict) -> bool:
-                # Only an adjudication settles anything (owner decision, 2026-08-03). A declared scope is
-                # recorded rationale, checked by E9, and deliberately not consulted here.
                 return unit["unitId"] in adjudicated_units
             absence_backing = []
 
@@ -1610,8 +1608,8 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
                 "Every published not-printed language rests on an owner adjudication",
                 "FAIL",
                 not absence_backing,
-                f"{len(absence_backing)} card-language(s) are published as settled absences with neither an "
-                f"owner adjudication nor a manifest-scoped source: {absence_backing[:5]}",
+                f"{len(absence_backing)} card-language(s) are published as settled absences without "
+                f"owner adjudication: {absence_backing[:5]}",
             )
 
         def _collect_g4_part6():
@@ -1630,25 +1628,18 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
                 f"{len(mispartitioned)} card(s) where the split does not reconstruct languagesContradicted: "
                 f"{mispartitioned[:5]}",
             )
-            unjustified_scopes = []
-            for provider in registry["providers"]:
-                if not provider.get("supportsAbsence"):
-                    continue
-                scopes = provider.get("absenceScopes") or []
-                if not scopes:
-                    unjustified_scopes.append(f"{provider['providerId']}: supportsAbsence with no scope")
-                    continue
-                if not any(word in (provider.get("notes") or "").lower()
-                           for word in ("scope", "complete", "exhaustive", "manifest", "checklist")):
-                    unjustified_scopes.append(
-                        f"{provider['providerId']}: {len(scopes)} scope(s), notes do not say why")
+            external_absence_authority = [
+                provider["providerId"]
+                for provider in registry["providers"]
+                if provider.get("supportsAbsence") is not False
+                or provider.get("absenceScopes")
+            ]
             check(
                 "E9",
-                "Every absence scope names its pages and says why they are complete",
+                "External providers have no absence authority",
                 "FAIL",
-                not unjustified_scopes,
-                f"{len(unjustified_scopes)} provider(s) claim absence capability without a justified "
-                f"scope: {unjustified_scopes}",
+                not external_absence_authority,
+                f"providers with absence authority: {external_absence_authority}",
             )
 
         def _collect_g4_part7():
@@ -1753,21 +1744,7 @@ def _collect_g5(state: dict[str, Any]) -> dict[str, Any]:
             f"`python scripts/finishes.py`, not --reproject: {stale_applicability[:5]}",
         )
 
-        # E13 — the finish half of rule 4, held to the same line as the language half (#119)
-        # --------------------------------------------------------------------------- #
-        # `owner-adjudicated` closes a unit's finish list on the collection owner's authority, which
-        # is the only route to completeness for products no manifest covers. Three things keep it
-        # from becoming a way to assert finishes rather than close a list:
-        #
-        #   * every such unit traces to a recorded decision, so the ruling is citable;
-        #   * the decision names exactly the finishes the evidence already found, so it can never
-        #     introduce one;
-        #   * it never applies to a unit with no printings at all, which would be an absence
-        #     argument wearing the owner's name rather than a decision about known evidence.
-        #
-        # `complete-manifest` stays source-derived and separate: E9 and the finish generator's own
-        # policy keep it that way, and a consumer that trusts only manufacturer manifests must be
-        # able to tell the two apart.
+        # Owner finish decisions may close only lists already supported by positive evidence.
         finish_decisions = {
             (d["setCode"], d["number"], d["language"]): d
             for d in load("verification/owner_adjudications.json").get("finishDecisions", [])
@@ -2746,11 +2723,12 @@ def _collect_g10(state: dict[str, Any]) -> dict[str, Any]:
                         provider["providerId"]
                         for provider in registry["providers"]
                         if not provider.get("attribution") or not provider.get("licenseOrTerms")
-                        or provider.get("supportsAbsence") is None
+                        or provider.get("supportsAbsence") is not False
+                        or provider.get("absenceScopes")
                     ]
                     check(
                         "S4",
-                        "Every provider declares attribution, terms and its absence policy",
+                        "Every provider declares attribution, terms and positive-only evidence mode",
                         "FAIL",
                         not missing_attribution,
                         f"providers missing required fields: {missing_attribution}",
@@ -2835,24 +2813,15 @@ def _collect_g10(state: dict[str, Any]) -> dict[str, Any]:
                                 if observation.get("rawRecordHash") != expected_hash:
                                     bad_hashes.append(observation["observationId"])
                             edge_contract_errors = []
-                            manifest_absence_scopes = set()
                             for edge_id, edge in graph_edges.items():
                                 positive = observations.get(edge.get("knownPositiveObservationId"))
                                 if (not positive or positive.get("kind") != "known-positive"
                                         or edge_id not in positive.get("validatesEdges", [])):
                                     edge_contract_errors.append(f"{edge_id}: no positive fixture")
                                 absence = edge["absenceCapability"]
-                                if absence["enabled"]:
-                                    challenge = observations.get(
-                                        edge.get("outOfScopeChallengeObservationId"))
-                                    if (not edge["exhaustive"] or not absence["exactScopes"]
-                                            or edge["boundary"]["zeroResultMeans"] != "bounded-absence"
-                                            or not challenge
-                                            or challenge.get("kind") != "out-of-scope-challenge"):
-                                        edge_contract_errors.append(f"{edge_id}: unbounded absence")
-                                    manifest_absence_scopes.update(absence["exactScopes"])
-                                elif (edge["exhaustive"] or absence["exactScopes"]
-                                      or edge["boundary"]["zeroResultMeans"] != "unknown"):
+                                if (absence["enabled"] or edge["exhaustive"]
+                                        or absence["dimensions"] or absence["exactScopes"]
+                                        or edge["boundary"]["zeroResultMeans"] != "unknown"):
                                     edge_contract_errors.append(f"{edge_id}: silence promoted to absence")
                                 surface = graph_surfaces[edge["surfaceId"]]
                                 if ("finish" in edge["positiveEvidenceCapabilities"]
@@ -2861,19 +2830,12 @@ def _collect_g10(state: dict[str, Any]) -> dict[str, Any]:
                                 if (edge["providerId"] in {"psa", "cgc", "inspected-specimen"}
                                         and absence["enabled"]):
                                     edge_contract_errors.append(f"{edge_id}: specimen registry closes absence")
-                            registry_absence_scopes = {
-                                scope for provider in registry["providers"]
-                                if provider.get("supportsAbsence")
-                                for scope in provider.get("absenceScopes") or []
-                            }
                             check(
                                 "S6",
-                                "Coverage edges keep positive fixtures, hashes, finish scope and absence boundaries",
+                                "Coverage edges keep positive fixtures, hashes and positive-only boundaries",
                                 "FAIL",
-                                not bad_hashes and not edge_contract_errors
-                                and manifest_absence_scopes == registry_absence_scopes,
-                                f"bad hashes={bad_hashes[:5]}; edge errors={edge_contract_errors[:5]}; "
-                                f"absence scope drift={sorted(manifest_absence_scopes ^ registry_absence_scopes)[:5]}",
+                                not bad_hashes and not edge_contract_errors,
+                                f"bad hashes={bad_hashes[:5]}, edge errors={edge_contract_errors[:5]}",
                             )
 
                         _collect_g10_part2_if_part3_s5()
@@ -2884,7 +2846,7 @@ def _collect_g10(state: dict[str, Any]) -> dict[str, Any]:
                             "FAIL", False, f"missing {missing_capability_files}",
                         )
                         check(
-                            "S6", "Coverage edges keep positive fixtures, hashes, finish scope and absence boundaries",
+                            "S6", "Coverage edges keep positive fixtures, hashes and positive-only boundaries",
                             "FAIL", False, f"missing {missing_capability_files}",
                         )
 

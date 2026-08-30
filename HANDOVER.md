@@ -28,7 +28,7 @@ its accounted inputs and explicit remaining gaps.
 ## 1. Repository layout
 
 ```
-snorlax_cards.json            MAIN dataset: 198 singles, one object each. Fields: name, setCode,
+snorlax_cards.json            MAIN dataset. One object per current product. Fields: name, setCode,
                               number, setName, rarity, languages, imageUrl/imageFile, productUrl,
                               variantToken (V1/V2/V3), variantName (+source), variantAxes,
                               cardKey, artist(+source), editions{}, finishAvailability{}, market,
@@ -56,15 +56,15 @@ verification/ADR-0002-local-set-edition-release-events.md
 verification/ADR-0003-source-capability-coverage.md
                               ACCEPTED evidence-routing boundary (#135): provider surfaces point
                               through explicit locality/category/time coverage edges. Every claimed
-                              edge has a positive fixture and a boundary; only exact exhaustive
-                              edges may carry absence. PSA/CGC and specimens are positive-only.
+                              edge has a positive fixture and a boundary. Every provider and edge
+                              is positive only. Missing rows and zero results remain unknown.
 verification/ADR-0004-source-first-adapter-runs.md
                               ACCEPTED source-first enumeration loop (#147): retained provider runs
                               start outside the Snorlax/legacy candidate universe, preserve raw
                               locale records and park every unmapped identity as a visible candidate.
 verification/ADR-0005-legacy-set-reconciliation.md
-                              ACCEPTED bounded backfill (#148): all 135 aliases, 203 release rows
-                              and 637 finish units project into the identity graph or an explicit
+                              ACCEPTED bounded backfill (#148): aliases, release rows and finish
+                              units project into the identity graph or an explicit
                               needs-evidence/blocked-by-source state. Coverage is versioned and lossless.
 verification/ADR-0006-source-first-card-discovery.md
                               ACCEPTED card-level discovery loop (#136): localized provider queries
@@ -86,8 +86,8 @@ snoredex.sqlite               NORMALIZED HANDOFF: current products, language ver
 snoredex-tracker-template.sqlite
                               Blank separate collection state keyed by checklistId. Copy it or use
                               scripts/tracker.py; sync preserves have/wanted/quantity/notes.
-images/                       198 card images (SETCODE_NUMBER_NAME[_Vn]_ID.jpg or .png — the
-                              extension states the actual format; 55 are PNG, see #34).
+images/                       Card images named SETCODE_NUMBER_NAME[_Vn]_ID.jpg or .png. The
+                              extension states the actual format.
 README.md / CONTRIBUTING.md   The public pair: how to use the data, and how to report a
                               correction. Written for people, not agents.
 DATABASE.md                   The contract snoredex.sqlite offers an application.
@@ -143,7 +143,7 @@ scripts/                      Two halves; only the second can be re-run (#28). T
 
                                 mkunits    Also historical, and destructive: rebuilds
                                            verification/units.json from scratch with fresh ids,
-                                           discarding the state of all 719 units. Never part
+                                           discarding the state of all 719 frozen legacy units. Never part
                                            of a rebuild.
 
                               The release gate runs the live half and fails if the output differs
@@ -191,8 +191,9 @@ verification/
                               GENERATED #120 client-side review projection: graph-backed artwork/work
                               groups, local releases, images, observations and hashes. Browser edits
                               are proposals only and never write catalogue truth directly.
-  specimens.json              Physical cards the owner holds and inspected, each with a stable
-                              SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
+  specimens.json              Physical evidence records from owner, collector, seller,
+                              marketplace, publisher, database, retailer, and archive sources.
+                              Each has a stable SPEC-nnnn id. A unit cites one as sourceRef "specimen:SPEC-0002"
                               instead of describing it in prose. `photograph` is null until the
                               image is supplied; the claim rests on the recorded inspection either
                               way, and the file is what lets a third party re-check it.
@@ -220,7 +221,7 @@ verification/
                               the bytes to a branch and point `--from` at the local path. Release
                               downloads and githubusercontent hosts are also reachable.
   confirmed_sources.json      Export of all confirmed units.
-  CONTRADICTED.json           The 84 refuted claims.
+  CONTRADICTED.json           Generated export of raw contradicted claims.
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
   UNCONFIRMED.json            The open units, grouped by card.
   open-items.html             Browsable page of open + manual-review items (an Artifact).
@@ -246,7 +247,7 @@ verification/
                               Versioned JSON Schema for the reviewed source capability manifest.
   source_capabilities.json    REVIEWED MANIFEST: provider operators, access/failure/freshness state,
                               query and pagination contracts, independent finish capability and
-                              bounded locality/language/category/time coverage edges.
+                              positive-only locality/language/category/time coverage edges.
   source_capability_graph.json
                               GENERATED GRAPH: flattened coverage edges, hashed positive/boundary
                               observations and one capability-surface resolution for every source

@@ -88,7 +88,6 @@ summary:focus-visible, th button:focus-visible {
 
 .wrap { max-width: 192rem; margin: 0 auto; padding: 0 clamp(10px, 1.35vw, 26px) 64px; }
 
-/* --- masthead and navigation --- */
 header.masthead { border-bottom: 1px solid var(--line); background: var(--panel); }
 header.masthead .wrap { padding-top: 20px; padding-bottom: 0; }
 .masthead-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
@@ -128,7 +127,6 @@ h2 { font-size: 20px; margin: 0 0 10px; }
 h3 { font-size: 16px; margin: 20px 0 8px; }
 p { max-width: 78ch; }
 
-/* --- statistic tiles --- */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 16px 0; }
 .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
 .stat .n { font-size: 22px; font-weight: 650; display: block; }
@@ -141,7 +139,6 @@ p { max-width: 78ch; }
 .callout ul { margin: 8px 0 0; padding-left: 20px; }
 .callout li { max-width: 78ch; margin-bottom: 4px; }
 
-/* --- filter controls --- */
 .controls { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin: 12px 0; }
 .controls .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
 .field { display: flex; flex-direction: column; gap: 4px; }
@@ -179,7 +176,6 @@ button.ghost {
 }
 .count { color: var(--muted); font-size: 13px; margin-top: 8px; }
 
-/* --- collection table --- */
 .tableframe { position: relative; }
 .table-scroll-tools {
   position: sticky; top: 0; z-index: 6;
@@ -447,13 +443,11 @@ tbody tr:hover td.corr { background: var(--panel); }
 
 .empty { padding: 28px; text-align: center; color: var(--muted); }
 
-/* --- checklist builder --- */
 .builder { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
 .builder .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
 .builder .preview { margin-top: 12px; font-size: 14px; }
 .builder .preview strong { font-size: 18px; }
 
-/* --- artwork/detection review (#120) --- */
 .artwork-review { display: grid; gap: 12px; }
 .artwork-group { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
 .artwork-group > header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
@@ -494,7 +488,6 @@ tbody tr:hover td.corr { background: var(--panel); }
 .artwork-save-status { min-height: 1.2em; color: var(--muted); font-size: 12px; }
 .artwork-muted { color: var(--muted); }
 
-/* --- sources --- */
 table.sources { font-size: 13px; }
 details.sourcelist { margin-top: 12px; }
 details.sourcelist > summary { cursor: pointer; font-weight: 600; }

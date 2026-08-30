@@ -26,18 +26,19 @@ versioned snapshot only after the drift has been reviewed.
 
 ## Evidence rules
 
-The finish layer is positive-evidence-first. A missing API field, missing price subtype, empty
-population report, or catalogue omission does not prove that a version does not exist.
+The finish layer is positive only. A missing API field, missing price subtype, empty population
+report, checklist blank, or catalogue omission does not prove that a version does not exist.
+Official Pokémon sources confirm only the named finishes for the matching language and region.
 
-| Evidence class | What it can establish | Can establish absence? |
-|---|---|---:|
-| Official checklist with an explicit legend and complete finish columns | The listed versions for the covered set, card, and language | Yes, within that checklist's stated scope |
-| Official card/product database or sealed-product contents | A named printing, treatment, stamp, size, or distribution | No, unless it explicitly claims completeness |
-| Card API with a positive variant flag | That positive finish exists for the returned card | No |
-| TCGCSV/TCGplayer product plus positive price subtype | A marketplace claim for Normal, Holofoil, or Reverse Holofoil | No |
-| PSA cert/spec/registry entry | The exact variety named on the label or checklist | No; late recognition and omissions make population absence unsafe |
-| Identified physical scan | Visible finish, pattern, marking, and size on that specimen | No |
-| Owner attestation | A review lead, or corroboration when recorded with a scan | No |
+| Evidence class | What it can establish | Evidence limit |
+|---|---|---|
+| Official checklist with an explicit legend and finish columns | The listed versions for the covered set, card, language, and region | Positive only |
+| Official card or product database and sealed-product contents | A named printing, treatment, stamp, size, or distribution | Positive only |
+| Card API with a positive variant flag | That positive finish exists for the returned card | Positive only |
+| TCGCSV or TCGplayer product plus positive price subtype | A marketplace claim for Normal, Holofoil, or Reverse Holofoil | Positive only |
+| PSA cert, spec, or registry entry | The exact variety named on the label or checklist | Positive only |
+| Identified physical scan | Visible finish, pattern, marking, and size on that specimen | Positive only |
+| Owner attestation | A review lead, or corroboration when recorded with a scan | Positive only |
 
 For Cardmarket, keep the image and catalogue claims separate. A retained product or seller image
 may support only facts visible on the pictured card, including its printed language, identity and
@@ -98,7 +99,7 @@ The live split is `meta.pendingByLanguage` in
 
 | Language | Finish source that can answer | Notes |
 |---|---|---|
-| English, French, German, Italian, Spanish, Portuguese | TCGdex `variants`, official checklist PDFs, TCGCSV subtypes | The only languages with all three. Official checklists are the one class that can establish absence. |
+| English, French, German, Italian, Spanish, Portuguese | TCGdex `variants`, official checklist PDFs, TCGCSV subtypes | The only languages with all three. Each source confirms listed finishes only. |
 | Japanese | **Official product pages** (`pokemon-card.com/ex/<set>/index.html`) | **Not** the card database — see below. |
 | Traditional Chinese | `asia.pokemon-card.com`, TCGdex `zh-tw` | TCGdex coverage is partial, so many rows need the Asia site. |
 | Indonesian, Thai | `asia.pokemon-card.com`, TCGdex `id` / `th` | Both TCGdex locale slices are thin. |
@@ -167,17 +168,16 @@ The Japanese route is the **product page**, not the card page. `pokemon-card.com
 does carry ミラー仕様 and レアリティ, which is how `xm2a 136`'s two mirror treatments were
 established. One page per product, read for the treatments it names.
 
-`supportsAbsence` is therefore true only for complete official manifests in the source registry.
-TCGdex `variants=false`, TCGCSV subtype absence, and PSA population absence remain non-evidence.
-The generator marks a unit `completenessStatus=complete-manifest` only when the source explicitly
-covers that unit's language. Current status counts live in `finish_units.json` and
-`analysis_finishes.json`.
+`supportsAbsence` is false for every source in the source registry. TCGdex `variants=false`,
+TCGCSV subtype omission, PSA population omission, blank checklist fields, and missing product pages
+remain non-evidence. External sources produce `positive-evidence-only`, never a closed finish list.
+Current status counts live in `finish_units.json` and `analysis_finishes.json`.
 
 #### The product-page route does not exist for magazine-bonus decks — probed, do not repeat
 
 `/ex/` pages are published for expansions, not for every product. Probed on 2026-08-08 for `mP1`
-(Start Deck 100 Battle Collection CoroCiao Version) while trying to raise `F0231` from
-positive-evidence-only to a manifest:
+(Start Deck 100 Battle Collection CoroCiao Version) while looking for another positive finish
+source for `F0231`:
 
 | Page | Result |
 |---|---|
@@ -190,8 +190,8 @@ The control is the point: the same probe finds the vocabulary where it exists, s
 absence of a page rather than the absence of a technique. A magazine-bonus fixed deck gets no `/ex/`
 page, and the official card page carries the card data only — exactly as the section above says.
 
-So a Japanese fixed-deck product has **no** route to `complete-manifest`, and none is coming: the
-page is not published for this class of product.
+The missing product page does not say anything about unlisted finishes. It records a research gap
+only.
 
 That is what opened the finish layer to rule 4. Owner attestation still cannot *establish* a finish
 — it stays in the row above — but the collection owner may now **close the list** of finishes a unit
@@ -200,14 +200,13 @@ already has evidence for, exactly as they may settle a language absence. The dec
 
 | completenessStatus | set by |
 |---|---|
-| `complete-manifest` | a source that explicitly covers the unit's language |
-| `owner-adjudicated` | a collection-owner decision, where no such source exists |
-| `positive-evidence-only` | finishes found; others unevidenced, **not** excluded |
+| `owner-adjudicated` | a collection-owner decision after positive finish evidence exists |
+| `positive-evidence-only` | finishes found, with every unlisted alternative still unknown |
+| `pending` | no positive finish evidence yet |
+| `not-applicable` | every underlying product-language claim is contradicted |
 
-The two top rows stay separate on purpose, so a consumer trusting only manufacturer manifests can
-still tell a collector's ruling from one. `E13` holds the decision to what it may do: it must name
-exactly the finishes the evidence already found, so it can never introduce one, and it may not apply
-to a unit with no printings at all — that would be an absence argument wearing the owner's name.
+`E13` holds the owner decision to what it may do. It must name exactly the finishes the evidence
+already found, so it can never introduce one. It may not apply to a unit with no printings at all.
 
 ## Confirmed and narrowed cases
 
@@ -217,13 +216,13 @@ All 146 official checklist PDFs found in the repository-wide set sweep were eval
 actual Snoredex set code and collector number. The result is deliberately split by what the
 document can prove:
 
-- **95 newly used localized expansion checklists** are exact, complete finish manifests inside
-  their explicit `standard-set` scope. All 95 URLs returned a PDF on the review date. They establish
-  138 standard-set finish profiles in English, French, German, Italian, and European Spanish, but
-  do not close the wider finish units against separate promotional distributions.
-- **23 already used manifests** cover EX Dragon Frontiers and Prize Pack Series 1, 3, 7, and 8.
-  The 22 Prize Pack scopes retain finish-unit closure; Dragon Frontiers is now explicitly bounded
-  to its standard set, with its special foil treatment established by separate pattern evidence.
+- **95 newly used localized expansion checklists** provide positive standard-set finish evidence.
+  All 95 URLs returned a PDF on the review date. They establish 138 standard-set finish profiles in
+  English, French, German, Italian, and European Spanish. Unlisted alternatives remain unknown.
+- **23 already used checklists** cover EX Dragon Frontiers and Prize Pack Series 1, 3, 7, and 8.
+  The 22 Prize Pack scopes now retain positive finish-unit evidence without closure. Dragon
+  Frontiers remains bounded to its standard set, with its special foil treatment established by
+  separate pattern evidence.
 - **23 additional official card-list PDFs** (`MEW` in five languages; `KSS` in four; `PAR` in five;
   English `JTG`, `PAF`, `PRE`, `TWM`, `SSP`, and `POR`; French/German `PAF`; German `PRE`) name the
   card but do not expose a complete finish matrix for its row. Their positive card/rarity facts are
@@ -232,7 +231,7 @@ document can prove:
   while those PDFs describe the Sun & Moon base expansion. They say nothing about `SM 05` or
   `SM 169`.
 
-The newly imported manifests resolve these set-printing profiles. A localized checklist is applied
+The newly imported checklists establish these positive set-printing profiles. A localized checklist is applied
 only to the language printed in that document; Portuguese, Polish, and Russian rows do not inherit
 an EFIGS result.
 
@@ -298,8 +297,8 @@ python verification/verify_finish_sources.py
 For a curated case:
 
 1. Add the durable source once under `sources` in `finish_overrides.json`. Record its authority,
-   coverage, whether it can support absence, retrieval date, exact product ID where applicable,
-   and the fact it establishes.
+   positive coverage, retrieval date, exact product ID where applicable, and the fact it
+   establishes.
 2. Add or amend an override with the narrowest supported set-number-language scope.
 3. Keep `finish`, `foilPattern`, `markings`, `distribution`, and `cardSize` separate.
 4. Regenerate; never hand-edit `finish_units.json`, `FINISH_REVIEW.*`, `analysis_finishes.json`, or
@@ -335,7 +334,7 @@ this order:
    [Korea](https://pokemoncard.co.kr/?hl=ko).
 3. TCGdex and Pokémon TCG API positive finish fields for ordinary set cards.
 4. Exact TCGCSV product/price pairs for English promos, decks, and retailer variants. Record these
-   as `marketplace-claimed` until an official manifest, grading variety, or physical specimen
+   as `marketplace-claimed` until an official checklist, grading variety, or physical specimen
    corroborates them.
 5. PSA cert/spec pages for named prerelease, Staff, and other grading varieties. Use entries for
    discovery and positive confirmation only.

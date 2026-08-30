@@ -1,15 +1,15 @@
 <!-- doc: role=architecture decision record for source capabilities and bounded coverage; stage=reference -->
 # ADR-0003: source capability and bounded coverage graph
 
-- **Status:** Accepted
+- **Status:** Accepted, positive-only boundary amended 2026-08-29
 - **Date:** 2026-08-09
 - **Issues:** #135; incorporates #108 and #117
 - **Depends on:** ADR-0001 and ADR-0002 define the identity grains this graph may support
 
 ## Context
 
-The source registry answers who supplied an evidence record and whether a few exact pages are
-complete. It did not answer which provider surface was queried, which localities or product classes
+The source registry answers who supplied an evidence record. It did not answer which provider
+surface was queried, which localities or product classes
 that surface can positively describe, whether its pagination was understood, or whether a finish
 field is independent from card existence. Those missing boundaries make two unsafe inferences easy:
 
@@ -41,15 +41,14 @@ applies semantic checks that JSON Schema alone cannot express:
 - every provider in `source_registry.json` has a capability surface and every evidence row used by
   a verdict resolves to one surface with all of its required positive dimensions;
 - every coverage edge cites a retained known-positive observation and boundary metadata;
-- a zero result is `unknown` unless the exact edge is exhaustive and explicitly absence-capable;
-- every absence edge cites an out-of-scope challenge and exactly matches the absence URL set in the
-  provider registry;
+- every coverage edge is non-exhaustive and every zero result is `unknown`.
+- every provider and coverage edge disables absence authority and declares no absence scope.
 - finish evidence requires a separate finish capability; card/set existence never supplies it;
 - PSA, CGC, inspected specimens and other specimen-like surfaces are positive-only; and
 - every retained observation's raw record is hashed deterministically.
 
 `scripts/source_capabilities.py --check` is part of the documented and CI release gates. Independent
-checks S5 and S6 protect source routing and the positive/absence boundary even if the generator is
+checks S5 and S6 protect source routing and the positive-only boundary even if the generator is
 changed incorrectly.
 
 ## Coverage choices
@@ -72,10 +71,9 @@ The first accepted graph is deliberately conservative.
   promo, date, artist, rarity or named variant it states. A demonstrated matching Western release
   may reuse a shared fact with its equivalence basis retained; an English row alone does not create
   another localized printing, and omissions never establish absence or completeness.
-- Complete official checklists positively establish the exact English card rows they name and
-  their documented finish columns. Together with the reviewed Black Star Promo language table and
-  the exact official Play! Pokémon Series 7 gallery, they are the only absence-capable edges. Their
-  closure is URL/scope specific and cannot be inherited by another page from the same provider.
+- Official checklists positively establish the exact card rows and finish fields they name for the
+  matching language and region. The Black Star Promo language table and official Play! Pokémon
+  gallery are positive sources under the same rule. Missing rows and blank fields remain unknown.
 - PSA and CGC named varieties or registry rows establish concrete graded specimens. CGC personal
   registry set 102462 is retained as the #117 positive fixture, while its empty slots and the
   collector's missing cards remain unknown.
@@ -89,11 +87,10 @@ An adapter introduced by #147 follows this loop:
 3. emit only assertions listed on a matching coverage edge;
 4. keep records outside a known edge or from a failed query as `needs-evidence`;
 5. test a known-positive fixture and the edge boundary;
-6. challenge any proposed absence edge with an out-of-scope positive record; and
-7. narrow or remove the edge when the challenge crosses its claimed boundary.
+6. reject any negative inference from omission, blank fields, missing pages, or zero results.
 
 Changing an adapter from `planned` to `active` therefore requires its fixture and boundary to pass
-in the same change. New locality, category, time, finish or absence claims extend the manifest first;
+in the same change. New locality, category, time, or finish claims extend the manifest first.
 they never emerge implicitly from an adapter result.
 
 ## Consequences

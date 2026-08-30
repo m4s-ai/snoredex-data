@@ -29,37 +29,24 @@ import time
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# --------------------------------------------------------------------------- #
-# Regenerate (write) phase — every generator that produces a derived artifact,
-# in dependency order (later generators read earlier outputs). These are the
-# *writing* variants; the same scripts with --check (see CHECK) verify them.
-# --------------------------------------------------------------------------- #
 REGEN = [
-    # source-of-truth parses & candidate-universe contracts
     ["scripts/legacy_baseline.py"],
     ["scripts/analyze.py"],
-    # card-evidence inventory & its conservative application policy (keystone for
-    # every consumer projection's per-unit status)
     ["scripts/evidence_semantics.py"],
-    # Editions are written onto the card rows consumed by the remaining projections.
     ["scripts/editions.py"],
     ["scripts/finishes.py", "--offline"],
     ["scripts/language_status.py"],
     ["scripts/confirmed_releases.py"],
     ["verification/report.py"],
-    # source-first catalogue & discovery
     ["scripts/source_registry.py"],
     ["scripts/source_capabilities.py"],
     ["scripts/source_adapters.py"],
-    # The migration remains the reviewed graph base; physical evidence is projected from
-    # canonical finish/specimen inputs before downstream consumers read it.
     ["scripts/authoritative_graph.py", "--write"],
     ["scripts/artwork_review.py"],
     ["scripts/card_discovery.py"],
     ["scripts/asia_locality_matrix.py"],
     ["scripts/locality_matrix.py"],
     ["scripts/completeness_gate.py"],
-    # downstream projections
     ["scripts/checklist.py"],
     ["scripts/collector_catalogue.py"],
     ["scripts/readme_stats.py"],
@@ -70,21 +57,15 @@ REGEN = [
     ["scripts/site.py"],
 ]
 
-# --------------------------------------------------------------------------- #
-# Determinism (verify) phase — the same generators in the --check/--reproject
-# modes the gate's "Generated artifacts match their inputs" step uses, then the
-# git diff proving committed == generated. Scripts with no --check are re-run in
-# write mode (idempotent on a clean tree) and the diff catches drift.
-# --------------------------------------------------------------------------- #
 CHECK = [
     ["scripts/legacy_baseline.py", "--check"],
     ["scripts/analyze.py", "--check"],
     ["scripts/evidence_semantics.py", "--check"],
-    ["scripts/editions.py"],
-    ["scripts/finishes.py", "--offline"],
-    ["scripts/language_status.py"],
-    ["scripts/confirmed_releases.py"],
-    ["verification/report.py"],
+    ["scripts/editions.py", "--check"],
+    ["scripts/finishes.py", "--offline", "--check"],
+    ["scripts/language_status.py", "--check"],
+    ["scripts/confirmed_releases.py", "--check"],
+    ["verification/report.py", "--check"],
     ["scripts/source_registry.py", "--check"],
     ["scripts/source_capabilities.py", "--check"],
     ["scripts/source_adapters.py", "--check"],
@@ -104,10 +85,6 @@ CHECK = [
     ["scripts/site.py", "--check"],
 ]
 
-# --------------------------------------------------------------------------- #
-# Verify (test) phase — every regression suite and cross-artifact gate the gate
-# runs, in the order CI runs them.
-# --------------------------------------------------------------------------- #
 TESTS = [
     ["verification/test_complexity.py"],
     ["verification/review_integrity.py"],
@@ -141,13 +118,7 @@ TESTS = [
     ["verification/test_regen_readiness.py"],
 ]
 
-# Local-only gate exceptions: CI is the authority on merge-readiness. A finding
-# that is green in the gate but red on a local full clone must not block a PR
-# that CI will pass. P6 scans *all reachable git blobs*; a local clone that still
-# carries the kept `refs/original/*` rollback refs from the 2026-08 history
-# rewrite scans more blobs than the gate's fresh clone, so it reports sensitive
-# history hits the gate never sees. If review_findings fails with exactly P6 and
-# no other FAIL, treat it as a warning, not a block.
+# Local refs can make P6 scan more history than a fresh CI clone.
 
 
 CHILD_ENV = os.environ.copy()
@@ -182,7 +153,7 @@ def main() -> int:
     ap.add_argument("--check", action="store_true",
                     help="verify artifacts and run the core regression gate")
     ap.add_argument("--check-only", action="append", metavar="SCRIPT",
-                    help="run only selected CHECK entries (diagnostic/test hook; repeatable)")
+                    help="run only selected CHECK entries (repeatable diagnostic hook)")
     args = ap.parse_args()
 
     if args.check_only and not args.check:
@@ -202,8 +173,6 @@ def main() -> int:
                 print(f"\nFAILED regenerating {' '.join(cmd)}", file=sys.stderr)
                 return 1
 
-    # Snapshot after the intentional write phase. The check phase may run idempotent
-    # writers, but it must not change any tracked text or create a new non-SQLite file.
     before_check = tree_state()
     determinism_failures: list[list[str]] = []
     for cmd in check_commands:
@@ -240,7 +209,7 @@ def main() -> int:
             if p6_only:
                 print(proc.stdout)
                 print("note: review_findings FAILed only on P6 (local full-clone "
-                      "history scan); CI gate is green — not blocking.", file=sys.stderr)
+                      "history scan). CI gate is green and this does not block.", file=sys.stderr)
             continue
         if not run([sys.executable, *test], " ".join(test)):
             print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
@@ -253,9 +222,9 @@ def main() -> int:
     if status and not args.check:
         print("\nWorking tree changes to review and commit:\n" + status)
     if args.check_only:
-        print("\nregen.py: OK — selected determinism checks are current.")
+        print("\nregen.py: OK. Selected determinism checks are current.")
     else:
-        print("\nregen.py: OK — generated artifacts and core regressions are current.")
+        print("\nregen.py: OK. Generated artifacts and core regressions are current.")
     return 0
 
 

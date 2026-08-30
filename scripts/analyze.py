@@ -4,7 +4,7 @@
     python scripts/analyze.py
     python scripts/analyze.py --check    # fail if regeneration would change any output
 
-Ported from `scripts/analyze.ps1`, the last step that required PowerShell. Produces the four
+Ported from `verification/archive/scripts/analyze.ps1`, the last step that required PowerShell. Produces the four
 artifacts nothing else generates:
 
     analysis_language_drift.json   languages a printing has beyond, or short of, its market baseline
@@ -61,7 +61,7 @@ def dumps(payload: Any) -> str:
 
 
 def market(languages: list[str]) -> str:
-    """Kept identical to scripts/finalize.ps1: the marketplace claim, never the product type (#31)."""
+    """Keep the marketplace claim from verification/archive/passes/finalize.ps1."""
     if "English" in languages:
         return "Western"
     if "Japanese" in languages:

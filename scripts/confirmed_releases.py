@@ -11,9 +11,9 @@ Date sources, in precedence order:
   4. Approximate dates carry exact=False and render as "~YYYY".
 Outputs: analysis_confirmed_releases.json + .csv (the HTML page is built by scripts/site.py)
 """
-import json, io, html, os, re
+import csv, json, io, os, re, sys
 from pathlib import Path
-from urllib.parse import quote, urlencode
+from urllib.parse import quote
 
 B = Path(__file__).resolve().parent.parent
 cards = json.load(io.open(os.path.join(B, "snorlax_cards.json"), encoding="utf-8"))["cards"]
@@ -43,13 +43,11 @@ bulbapedia_dates = {record["setCode"]: record for record in bulbapedia_document[
 def bulbapedia_url(page):
     return "https://bulbapedia.bulbagarden.net/wiki/" + quote(page.replace(" ", "_"))
 
-# --- 1. exact EN set dates from pokemontcg.io ---
 en_dates = {}
 for a in artists:
     if a.get("releaseDate") and a.get("setName"):
         en_dates[a["setName"]] = a["releaseDate"].replace("/", "-")
 
-# map Cardmarket setName -> pokemontcg.io setName where they differ
 EN_NAME_MAP = {
     "151": "151", "Jungle": "Jungle", "Base Set 2": "Base Set 2",
     "Legendary Collection": "Legendary Collection", "Skyridge": "Skyridge",
@@ -70,12 +68,10 @@ EN_NAME_MAP = {
     "Gym Heroes": "Gym Heroes",
 }
 
-# --- 2. dates verified in-session or approximations (exact: full ISO; approx: year or year-month) ---
-# key: setCode or (setCode, number)
 DATES = {
     # Japanese classics
     "PJU": ("1997-03", False), "UNP": ("1997-12", True),  # Hungry Snorlax N64 campaign Dec 1997
-    "EXS": ("1998-03-23", True),  # Expansion Sheet 1; later Quick Starter printing is dated per checklist item
+    "EXS": ("1998-03-23", True),  # Later Quick Starter printings are dated per checklist item.
     "G2": ("1999", False), "EC5": ("2002", False),
     "PCG1": ("2004", False), "PCG3": ("2004", False), "PCG9": ("2006", False),
     "DP1": ("2006-10", False),
@@ -179,11 +175,6 @@ def get_date(c):
         return en_dates[en], True, None
     return ("9999", False, None)
 
-# --- collect confirmed languages per card-variant ---
-# Each confirmed language also carries how strong the claim behind it is (#32): which provider,
-# that provider's authority tier from the registry, and whether a second provider agreed. A
-# Bulbapedia row and a photographed specimen are both "confirmed" and are not the same claim, and
-# until now the site could not say so.
 source_registry = json.load(
     io.open(os.path.join(B, "verification", "source_registry.json"), encoding="utf-8")
 )
@@ -203,8 +194,6 @@ for u in units:
         "provider": NAME_BY_PROVIDER.get(provider),
         "authorityTier": TIER_BY_PROVIDER.get(provider),
         "corroborated": bool(u.get("corroborated")),
-        # A claim with no URL cannot be re-checked by a reader following a link, whatever its
-        # tier. That is a different question from how strong the source is, so it is its own field.
         "checkable": bool(u.get("sourceUrl")),
     }
 
@@ -266,10 +255,6 @@ for c in cards:
     else:
         rows.append({**base, "edition": "—", "edord": 1, "confirmedLanguages": langs})
 
-# --- stable identity and typed date fields -------------------------------------------------
-# Identity must not be the sort position: filtering and sorting reorder rows, and correction
-# links, checklist scope and deep links all have to survive that. (setCode, number, variant,
-# edition) is unique across every row, so it is the natural key.
 EDITION_SLUG = {"1st Edition": "1e", "Unlimited": "unl", "—": "none"}
 
 def row_id(r):
@@ -309,7 +294,7 @@ for r in rows:
     r["rowId"] = row_id(r)
     # `dateExact` conflated two things: how precise the value is, and whether it is trusted at
     # that precision. Both are now explicit. `datePrecision` is derived from the value, so it
-    # can never contradict it; `dateApproximate` carries the confidence judgement alone.
+    # can never contradict it. `dateApproximate` carries the confidence judgement alone.
     r["datePrecision"] = date_precision(r["date"])
     r["dateApproximate"] = not r["dateExact"]
     r["dateSort"] = date_sort_key(r["date"])
@@ -320,28 +305,19 @@ if _dupe_ids:
 
 rows.sort(key=lambda r: (r["dateSort"], r["setName"], str(r["number"]), r["variant"], r["edord"]))
 
-# Derived from the evidence, not from the clock (#37). The release gate regenerates this file and
-# requires `git diff --exit-code`, so `date.today()` would fail every run made on a later day —
-# which is why this was a literal. Taking the newest `checkedAt` keeps the field honest and
-# reproducible at once: it moves when the evidence moves, and not otherwise. Other generators use
-# `date.today()` safely because their `--check` compares only the payload; this one is compared
-# whole, so the date has to be a function of the inputs.
 generated = max(u["checkedAt"][:10] for u in units if u.get("checkedAt"))
 
-json.dump({"schema": "snoredex-confirmed-releases",
+output_document = {"schema": "snoredex-confirmed-releases",
            # 1.x while `dateExact` is still emitted. It is the deprecated inverse of
-           # `dateApproximate` and is scheduled for removal at 2.0.0 (#37); consumers that
+           # `dateApproximate` and is scheduled for removal at 2.0.0 (#37). Consumers that
            # read it should move to `datePrecision` + `dateApproximate` before then. The
            # file previously carried no schema at all, so there was no way to announce a
            # removal rather than spring it.
            "schemaVersion": "1.0.0",
            "generated": generated,
-           "note": "One row per card-variant-edition; confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order; use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
-           "variants": rows},
-          io.open(os.path.join(B, "analysis_confirmed_releases.json"), "w", encoding="utf-8", newline="\n"),
-          ensure_ascii=False, indent=1)
+           "note": "One row per card-variant-edition. confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order. Use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
+           "variants": rows}
 
-# --- shared formatting ---
 def fmt_date(r):
     d = r["date"]
     if not r["dateExact"]:
@@ -352,48 +328,61 @@ def fmt_date(r):
     if len(p) == 2: return f"{p[0]}-{p[1]}"
     return d
 
-# compact 2-letter language codes, in the fixed column order of the matrix
 LANG_CODE = {"English":"EN","French":"FR","German":"DE","Italian":"IT","Spanish":"ES",
              "Portuguese":"PT","Dutch":"NL","Polish":"PL","Russian":"RU","Japanese":"JA",
              "Korean":"KO","T-Chinese":"ZH-T","S-Chinese":"ZH-S","Indonesian":"ID","Thai":"TH"}
 LANG_COLS = [LANG_CODE[l] for l in LANG_ORDER]
-# canonical count: each confirmed card x language once (Unlimited / no-edition rows carry all langs)
 total_langs = sum(len(r["confirmedLanguages"]) for r in rows if r["edition"] != "1st Edition")
 
-# --- CSV (Excel-friendly matrix: one column per language, X = confirmed) ---
-import csv
-with io.open(os.path.join(B, "analysis_confirmed_releases.csv"), "w", encoding="utf-8", newline="") as f:
-    w = csv.writer(f, delimiter=";", lineterminator="\n")
-    w.writerow(["#","Release","Date exact","Release source","Card","Set code","Number","Edition","Variant","Variant name",
-                "Set / expansion","Rarity","Artist","Known finishes","Finish evidence","Langs"] + LANG_COLS + ["Cardmarket URL"])
-    for i, r in enumerate(rows, 1):
-        have = {LANG_CODE[l] for l in r["confirmedLanguages"]}
-        finish_rows = [
-            item for item in r["finishByLanguage"] if item["language"] in r["confirmedLanguages"]
-        ]
-        known_finishes = [
-            finish
-            for finish in ("non-holo", "holo", "reverse-holo", "mirror-holo")
-            if any(finish in item.get("availableFinishes", []) for item in finish_rows)
-        ]
-        finish_evidence = sorted({item.get("status", "pending") for item in finish_rows})
-        w.writerow([i, fmt_date(r), "yes" if r["dateExact"] else "approx",
-                    (r.get("dateSource") or {}).get("url", ""),
-                    r["name"], r["setCode"], r["number"] or "", r["edition"], r["variant"],
-                    r.get("variantName") or "", r["setName"], r.get("rarity") or "",
-                    r.get("artist") or "", ", ".join(known_finishes), ", ".join(finish_evidence),
-                    len(r["confirmedLanguages"])]
-                   + ["X" if c in have else "" for c in LANG_COLS]
-                   + [r["cardmarketUrl"]])
+csv_buffer = io.StringIO(newline="")
+w = csv.writer(csv_buffer, delimiter=";", lineterminator="\n")
+w.writerow(["#","Release","Date exact","Release source","Card","Set code","Number","Edition","Variant","Variant name",
+            "Set / expansion","Rarity","Artist","Known finishes","Finish evidence","Langs"] + LANG_COLS + ["Cardmarket URL"])
+for i, r in enumerate(rows, 1):
+    have = {LANG_CODE[l] for l in r["confirmedLanguages"]}
+    finish_rows = [
+        item for item in r["finishByLanguage"] if item["language"] in r["confirmedLanguages"]
+    ]
+    known_finishes = [
+        finish
+        for finish in ("non-holo", "holo", "reverse-holo", "mirror-holo")
+        if any(finish in item.get("availableFinishes", []) for item in finish_rows)
+    ]
+    finish_evidence = sorted({item.get("status", "pending") for item in finish_rows})
+    w.writerow([i, fmt_date(r), "yes" if r["dateExact"] else "approx",
+                (r.get("dateSource") or {}).get("url", ""),
+                r["name"], r["setCode"], r["number"] or "", r["edition"], r["variant"],
+                r.get("variantName") or "", r["setName"], r.get("rarity") or "",
+                r.get("artist") or "", ", ".join(known_finishes), ", ".join(finish_evidence),
+                len(r["confirmedLanguages"])]
+               + ["X" if c in have else "" for c in LANG_COLS]
+               + [r["cardmarketUrl"]])
+
+outputs = {
+    B / "analysis_confirmed_releases.json": json.dumps(
+        output_document, ensure_ascii=False, indent=1
+    ),
+    B / "analysis_confirmed_releases.csv": csv_buffer.getvalue(),
+}
+if "--check" in sys.argv:
+    stale = [
+        path.name for path, body in outputs.items()
+        if not path.exists() or path.read_text(encoding="utf-8") != body
+    ]
+    if stale:
+        print(f"stale: {', '.join(stale)}")
+        sys.exit(1)
+else:
+    for path, body in outputs.items():
+        path.write_text(body, encoding="utf-8", newline="\n")
 
 
-# The HTML page used to be generated here, from ~430 lines of CSS, JavaScript and markup
-# embedded in Python string literals. scripts/site.py is now the single page generator and the
-# styles and behaviour live in site/app.css and site/app.js, so that block has been removed
-# rather than left to rot beside a second implementation of the same page.
-# verification/confirmed-releases.html is a redirect to the site root, written by site.py.
 print(f"variants: {len(rows)}  confirmed language printings: {total_langs}")
 print(f"skipped (no confirmed lang): {len(skipped)} -> {skipped}")
 approx = sum(1 for r in rows if not r["dateExact"])
 print(f"approx dates: {approx} / {len(rows)}")
-print("wrote: analysis_confirmed_releases.csv, analysis_confirmed_releases.json")
+print(
+    "checked: analysis_confirmed_releases.csv, analysis_confirmed_releases.json"
+    if "--check" in sys.argv
+    else "wrote: analysis_confirmed_releases.csv, analysis_confirmed_releases.json"
+)

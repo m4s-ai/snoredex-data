@@ -1,35 +1,16 @@
 {
   "meta": {
     "schema": "snoredex-evidence-semantics",
-    "schemaVersion": "0.2.0",
-    "generated": "2026-08-29",
+    "schemaVersion": "1.0.0",
+    "generated": "2026-08-26",
     "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
-    "status": "active application policy — raw verdicts remain unchanged",
-    "description": "Every unit classified by the granularity of the evidence it rests on, and, for set-level confirmations, whether the inference from set to card carries. applicationStatus is the conservative consumer projection.",
-    "absenceCapableProviders": {
-      "sourceRegistry": [
-        "elitefourum",
-        "play-pokemon",
-        "pokemon-official"
-      ],
-      "capabilityGraph": [
-        "elitefourum",
-        "play-pokemon",
-        "pokemon-official"
-      ],
-      "agree": true
-    },
-    "boundedLanguageAbsenceScopes": [
-      {
-        "providerId": "elitefourum",
-        "url": "https://www.elitefourum.com/t/black-star-promos-languages/36573"
-      }
-    ]
+    "status": "active application policy. Raw verdicts remain unchanged",
+    "description": "Every unit classified by the granularity of the evidence it rests on, and, for set-level confirmations, whether the inference from set to card carries. applicationStatus is the conservative consumer projection."
   },
   "runMembershipRules": {
     "Character Rare": {
       "insideNumberedRun": false,
-      "reason": "secret-numbered class; presence varies by locale"
+      "reason": "secret-numbered class with presence varying by locale"
     },
     "Common": {
       "insideNumberedRun": true,
@@ -69,7 +50,7 @@
     },
     "Rainbow Rare": {
       "insideNumberedRun": false,
-      "reason": "secret-numbered class; presence varies by locale"
+      "reason": "secret-numbered class with presence varying by locale"
     },
     "Rare": {
       "insideNumberedRun": true,
@@ -77,7 +58,7 @@
     },
     "Secret Rare": {
       "insideNumberedRun": false,
-      "reason": "numbered above the printed set size; presence varies by locale"
+      "reason": "numbered above the printed set size, with presence varying by locale"
     },
     "Shiny Rare": {
       "insideNumberedRun": false,
@@ -89,7 +70,7 @@
     },
     "Triple Rare": {
       "insideNumberedRun": false,
-      "reason": "secret-numbered class; presence varies by locale"
+      "reason": "secret-numbered class with presence varying by locale"
     },
     "Ultra Rare": {
       "insideNumberedRun": null,
@@ -113,18 +94,18 @@
           "rule": "A record of this exact card in this exact language establishes the printing. This is the granularity every other one is trying to reach."
         },
         "contradicted": {
-          "support": "only-within-an-exhaustive-absence-edge",
-          "rule": "A card-level source may deny a printing only where #135 proves it exhaustive for that locality, category and period. Otherwise its silence is a gap."
+          "support": "raw-disagreement-only",
+          "rule": "A contradiction retains source disagreement. It does not establish absence without owner adjudication."
         }
       },
       "product-or-set": {
         "confirmed": {
           "support": "only-when-the-step-to-the-card-holds",
-          "rule": "A statement about the product reaches the card when the card sits inside the set's numbered run, or when the cited page carries a closed card list containing it — and never when the row is a distribution printing."
+          "rule": "A statement about the product reaches the card when the card sits inside the set's numbered run, or when the cited page carries a closed card list containing it. A distribution printing remains separate."
         },
         "contradicted": {
-          "support": "never",
-          "rule": "A product-level source that does not list a card has a gap, not a finding. This is #137's named failure: contradicting a card because a cross-language expansion index has no entry for it."
+          "support": "raw-disagreement-only",
+          "rule": "A contradiction retains source disagreement. Product omission alone remains unknown."
         }
       },
       "market-or-era": {
@@ -133,8 +114,8 @@
           "rule": "That a market existed, or received a set, never establishes a particular card in a particular language."
         },
         "contradicted": {
-          "support": "never",
-          "rule": "An era argument is Indizien: it is the material the owner weighs, not a verdict a page can assert. Only an owner adjudication settles it."
+          "support": "raw-disagreement-only",
+          "rule": "An era argument may be retained as disagreement. It does not establish absence."
         }
       },
       "sibling-derived": {
@@ -143,8 +124,8 @@
           "rule": "The neighbour's evidence is not this unit's evidence. A row whose only basis is a sibling's record establishes nothing about itself."
         },
         "contradicted": {
-          "support": "never",
-          "rule": "Same reason, in the other direction."
+          "support": "raw-disagreement-only",
+          "rule": "A sibling record may be retained as disagreement but cannot settle absence."
         }
       }
     }
@@ -171,7 +152,7 @@
     "setLevelConfirmationsNotReachingTheCard": 17,
     "contradictionsByBacking": {
       "owner-adjudicated": 80,
-      "unscoped-absence": 4
+      "source-disagreement": 4
     },
     "setLevelConfirmationsByRunBasis": {
       "printed-set-size": 31,
@@ -190,7 +171,7 @@
     "verdictsBeyondTheirGranularity": 21,
     "verdictsBeyondTheirGranularityByRule": {
       "step-from-product-to-card": 17,
-      "unscoped-absence": 4
+      "source-disagreement-does-not-establish-absence": 4
     },
     "applicationStatuses": {
       "exists": 618,
@@ -309,9 +290,9 @@
       "runMembershipBasis": "rarity-table",
       "runMembershipReason": "part of the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -347,9 +328,9 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -461,9 +442,9 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -594,9 +575,9 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     }
   ],
@@ -926,84 +907,6 @@
     }
   ],
   "setLevelConfirmationsNeedingSetSize": [],
-  "unscopedAbsenceContradictions": [
-    {
-      "unitId": "U0265",
-      "setCode": "sm10",
-      "number": "076",
-      "variant": "base",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Rare",
-      "insideNumberedRun": true,
-      "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "part of the numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
-      "applicationStatus": "disputed"
-    },
-    {
-      "unitId": "U0414",
-      "setCode": "sm9",
-      "number": "066",
-      "variant": "V1",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Double Rare",
-      "insideNumberedRun": true,
-      "runMembershipBasis": "printed-set-size",
-      "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
-      "applicationStatus": "disputed"
-    },
-    {
-      "unitId": "U0558",
-      "setCode": "sm9",
-      "number": "115",
-      "variant": "V3",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Rainbow Rare",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "printed-set-size",
-      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
-      "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
-      "applicationStatus": "disputed"
-    },
-    {
-      "unitId": "U0634",
-      "setCode": "sm9",
-      "number": "106",
-      "variant": "V2",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Ultra Rare",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "printed-set-size",
-      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
-      "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
-      "applicationStatus": "disputed"
-    }
-  ],
   "units": [
     {
       "unitId": "U0000",
@@ -6054,9 +5957,9 @@
       "runMembershipBasis": "rarity-table",
       "runMembershipReason": "part of the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -6698,7 +6601,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -6717,7 +6620,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -6736,7 +6639,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -6755,7 +6658,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -6774,7 +6677,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -6793,7 +6696,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -8389,7 +8292,7 @@
       "rarity": "Secret Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "numbered above the printed set size; presence varies by locale",
+      "runMembershipReason": "numbered above the printed set size, with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -8408,7 +8311,7 @@
       "rarity": "Secret Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "numbered above the printed set size; presence varies by locale",
+      "runMembershipReason": "numbered above the printed set size, with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -8427,7 +8330,7 @@
       "rarity": "Secret Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "numbered above the printed set size; presence varies by locale",
+      "runMembershipReason": "numbered above the printed set size, with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -8446,7 +8349,7 @@
       "rarity": "Secret Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "numbered above the printed set size; presence varies by locale",
+      "runMembershipReason": "numbered above the printed set size, with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -8465,7 +8368,7 @@
       "rarity": "Secret Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "numbered above the printed set size; presence varies by locale",
+      "runMembershipReason": "numbered above the printed set size, with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -8484,7 +8387,7 @@
       "rarity": "Secret Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "numbered above the printed set size; presence varies by locale",
+      "runMembershipReason": "numbered above the printed set size, with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -8885,9 +8788,9 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -11621,9 +11524,9 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -11714,7 +11617,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -11733,7 +11636,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -11752,7 +11655,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -11771,7 +11674,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -11790,7 +11693,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -11809,7 +11712,7 @@
       "rarity": "Rainbow Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "secret-numbered class; presence varies by locale",
+      "runMembershipReason": "secret-numbered class with presence varying by locale",
       "sourceCarriesCardList": false,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -12151,7 +12054,7 @@
       "rarity": "Secret Rare",
       "insideNumberedRun": false,
       "runMembershipBasis": "rarity-table",
-      "runMembershipReason": "numbered above the printed set size; presence varies by locale",
+      "runMembershipReason": "numbered above the printed set size, with presence varying by locale",
       "sourceCarriesCardList": true,
       "inference": null,
       "verdictWithinGranularity": true,
@@ -12951,9 +12854,9 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "unscoped-absence",
+      "inference": "source-disagreement",
       "verdictWithinGranularity": false,
-      "verdictTransitionRule": "unscoped-absence",
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {

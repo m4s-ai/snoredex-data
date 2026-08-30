@@ -69318,26 +69318,12 @@
           "German",
           "Italian"
         ],
-        "scopePrecision": "exact",
-        "closedWithinScope": true,
-        "closureScope": "reverse-holo availability for setlist cards, excluding the H/32 subset",
-        "closureAuthority": "equivalent-explicit-complete-statement",
-        "closedFinishQuestions": [
-          "reverse-holo"
-        ],
+        "scopePrecision": "scoped",
+        "closedWithinScope": false,
+        "evidenceScope": "named reverse-holo availability for the listed languages",
         "sourceRecordId": "SET-SRC-BP-AVAIL-1E3BBC48CFC6",
         "sourceStatement": "\"The Skyridge set is released in English, German, and Italian, with all cards except the \\\"H/32\\\" cards also available as Reverse Holos. In a change from Aquapolis, the secret rare cards are also available as Reverse Holos.\"",
         "rules": [
-          {
-            "finishProfileRuleId": "FINISHRULE:c3269e50a94913a4",
-            "priority": 100,
-            "effect": "exclude",
-            "finish": "reverse-holo",
-            "condition": {
-              "collectorNumberPrefix": "H/"
-            },
-            "sourceRecordId": "SET-SRC-BP-AVAIL-1E3BBC48CFC6"
-          },
           {
             "finishProfileRuleId": "FINISHRULE:b4610865aa9b15d3",
             "priority": 20,
@@ -130066,7 +130052,7 @@
           "finishProfile": {
             "statement": "\"The Skyridge set is released in English, German, and Italian, with all cards except the \\\"H/32\\\" cards also available as Reverse Holos. In a change from Aquapolis, the secret rare cards are also available as Reverse Holos.\"",
             "scope": "the three languages named, excepting the H/32 subset",
-            "closedWithinScope": true
+            "closedWithinScope": false
           }
         }
       }

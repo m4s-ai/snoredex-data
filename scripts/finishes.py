@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import io
 import json
 import re
 import sys
@@ -80,6 +81,29 @@ def write_json(path: Path, value: Any) -> None:
     with path.open("w", encoding="utf-8", newline="\n") as handle:
         json.dump(value, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
+
+
+def rendered_json(value: Any) -> str:
+    return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
+
+
+def latest_input_date(*documents: Any) -> str:
+    keys = {"checkedAt", "decidedAt", "generated", "lastUpdated", "recordedAt", "retrievedAt"}
+    dates: list[str] = []
+    stack = list(documents)
+    while stack:
+        value = stack.pop()
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key in keys and isinstance(item, str) and re.match(r"^\d{4}-\d{2}-\d{2}", item):
+                    dates.append(item[:10])
+                elif isinstance(item, (dict, list)):
+                    stack.append(item)
+        elif isinstance(value, list):
+            stack.extend(value)
+    if not dates:
+        raise ValueError("finish inputs contain no dated evidence")
+    return max(dates)
 
 
 def variant_token(value: dict[str, Any]) -> str:
@@ -379,7 +403,7 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
     signature = printing_signature(candidate)
     existing = next((item for item in printings if printing_signature(item) == signature), None)
     if existing is None and candidate["foilPattern"] is None and any(
-            source.get("closureScope") == "standard-set" for source in candidate["sources"]):
+            source.get("evidenceScope") == "standard-set" for source in candidate["sources"]):
         pattern_matches = []
         for item in printings:
             patternless = dict(item)
@@ -418,9 +442,8 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
 
 
 def apply_standard_scope_card_size(candidate: dict[str, Any]) -> None:
-    """Use a standard-set manifest to resolve an otherwise unobserved card size."""
     if candidate.get("cardSize") == "unknown" and any(
-        source.get("closureScope") == "standard-set"
+        source.get("evidenceScope") == "standard-set"
         for source in candidate.get("sources") or []
     ):
         candidate["cardSize"] = "standard"
@@ -606,17 +629,22 @@ def strongest_status(printings: list[dict[str, Any]], finish: str | None = None)
     return max(statuses, key=lambda status: STATUS_RANK[status]) if statuses else "pending"
 
 
-def complete_manifests(printings: list[dict[str, Any]], language: str) -> list[dict[str, Any]]:
-    """Return complete sources whose declared language covers this unit."""
-    return [
-        source
+def evidence_scopes(printings: list[dict[str, Any]]) -> set[str]:
+    return {
+        source["evidenceScope"]
         for printing in printings
         for source in printing.get("sources") or []
-        if source.get("closureScope")
-        and source.get("supportsAbsence") is True
-        and source.get("coverage") == "complete-manifest"
-        and (not source.get("languages") or language in source["languages"])
-    ]
+        if source.get("evidenceScope")
+    }
+
+
+def source_scope_needs_owner(
+    printings: list[dict[str, Any]],
+    scopes: set[str],
+    unit_key: tuple[str, str, str],
+    decisions: dict[tuple[str, str, str], dict[str, Any]],
+) -> bool:
+    return bool(printings) and "finish-unit" in scopes and unit_key not in decisions
 
 
 def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") -> dict[str, Any]:
@@ -734,9 +762,10 @@ def _load_finish_context() -> dict[str, Any]:
             ].append(specimen)
     # Rule 4 owner decisions, finish half (#119). Keyed by (setCode, number, language) rather
     # than by finishUnitId, because the F-numbers are positional and would silently retarget.
+    adjudications_document = read_json(ADJUDICATIONS_PATH)
     owner_finish_decisions = {
         (d["setCode"], d["number"], d["language"]): d
-        for d in read_json(ADJUDICATIONS_PATH).get("finishDecisions", [])
+        for d in adjudications_document.get("finishDecisions", [])
     }
     source_registry = overrides_document["sources"]
 
@@ -771,6 +800,8 @@ def _load_finish_context() -> dict[str, Any]:
         "specimens_by_group": specimens_by_group,
         "reverse_conflicts": reverse_conflicts,
         "owner_finish_decisions": owner_finish_decisions,
+        "adjudications_document": adjudications_document,
+        "snapshot_document": read_json(SNAPSHOT_PATH),
         "source_registry": source_registry,
         "cards_by_product": cards_by_product,
         "grouped_units": grouped_units,
@@ -839,14 +870,13 @@ def _resolve_tcgdex(context: dict[str, Any]) -> int | None:
         )
         for url in changed + added + removed:
             print(f"  drift: {url}")
-        write_json(
-            SNAPSHOT_PATH,
-            {
-                "schema": "snoredex-tcgdex-snapshot/1",
-                "generated": datetime.now(timezone.utc).date().isoformat(),
-                "records": current_snapshot,
-            },
-        )
+        snapshot_document = {
+            "schema": "snoredex-tcgdex-snapshot/1",
+            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "records": current_snapshot,
+        }
+        write_json(SNAPSHOT_PATH, snapshot_document)
+        context["snapshot_document"] = snapshot_document
     if fetch_errors and (offline or refresh):
         for url, reason in sorted(fetch_errors.items()):
             print(f"unreachable: {url} — {reason}", file=sys.stderr)
@@ -919,10 +949,8 @@ def _build_finish_unit(
     auto_card_size = None
     auto_mapping = None
     available_finishes = None
-    bounded_manifest_urls = None
     candidate = None
     card_name = None
-    complete_manifest = None
     completeness_status = None
     exact_urls = None
     field = None
@@ -931,8 +959,6 @@ def _build_finish_unit(
     finish_unit_id = None
     inferred_reverse_pattern = None
     known_printings = None
-    manifest_scopes = None
-    manifests = None
     manual = None
     mapped_variants = None
     override = None
@@ -949,6 +975,7 @@ def _build_finish_unit(
     unit = None
     unknown_finish_printings = None
     unresolved = None
+    source_scopes = None
     def _build_finish_unit_part1():
         nonlocal active_variants, all_claims_contradicted, card_name, present_variants, printings, product, set_name, unit
         for unit in sorted(member_units, key=lambda item: variant_token(item)):
@@ -1292,7 +1319,7 @@ def _build_finish_unit(
         }
 
     def _build_finish_unit_part9():
-        nonlocal complete_manifest, known_printings, manifest_scopes, manifests, mapped_variants, printing, product_mapping_status, required_variants, source, unknown_finish_printings
+        nonlocal known_printings, mapped_variants, printing, product_mapping_status, required_variants, source, source_scopes, unknown_finish_printings
         mapped_variants = {variant for printing in printings for variant in printing["mappedVariants"]}
         required_variants = active_variants
         if not required_variants:
@@ -1305,12 +1332,10 @@ def _build_finish_unit(
             product_mapping_status = "pending"
         known_printings = [printing for printing in printings if printing["finish"] in FINISHES]
         unknown_finish_printings = [printing for printing in printings if printing["finish"] == "unknown"]
-        manifests = complete_manifests(known_printings, language)
-        manifest_scopes = {source["closureScope"] for source in manifests}
-        complete_manifest = not unknown_finish_printings and "finish-unit" in manifest_scopes
+        source_scopes = evidence_scopes(known_printings)
 
     def _build_finish_unit_part10():
-        nonlocal bounded_manifest_urls, pattern_status, printing, source, unresolved
+        nonlocal pattern_status, printing, unresolved
         pattern_target_printings = [
             printing for printing in printings if printing["finish"] in {"reverse-holo", "mirror-holo"}
         ]
@@ -1331,25 +1356,18 @@ def _build_finish_unit(
                 "One or more known physical printings still have unresolved finishes: "
                 + ", ".join(printing["printingId"] for printing in unknown_finish_printings)
             )
-        bounded_manifest_urls = {
-            source.get("url") for source in manifests
-            if source["closureScope"] != "finish-unit" and source.get("url")
-        }
+        if source_scope_needs_owner(
+            known_printings,
+            source_scopes,
+            (set_code, number, language),
+            owner_finish_decisions,
+        ):
+            unresolved.append(
+                "The source lists known finishes only. Unlisted alternatives remain unknown."
+            )
 
     def _build_finish_unit_part11():
-        nonlocal completeness_status, printing, product, source
-        uncovered_printings = [
-            printing["printingId"] for printing in printings
-            if bounded_manifest_urls and not any(
-                source.get("url") in bounded_manifest_urls
-                for source in printing.get("sources") or []
-            )
-        ]
-        if uncovered_printings and "finish-unit" not in manifest_scopes:
-            unresolved.append(
-                "Scoped complete manifests do not cover these known physical printings: "
-                + ", ".join(uncovered_printings)
-            )
+        nonlocal completeness_status, product
         if product_mapping_status in {"partial", "pending"}:
             unresolved.append(
                 "One or more Cardmarket product variants are not mapped to a logical printing: "
@@ -1363,16 +1381,7 @@ def _build_finish_unit(
             unresolved.append("The underlying Cardmarket language claim is contradicted for at least one product variant.")
         if all_claims_contradicted:
             completeness_status = "not-applicable"
-        elif complete_manifest:
-            completeness_status = "complete-manifest"
         elif known_printings and (set_code, number, language) in owner_finish_decisions:
-            # Rule 4's owner adjudication, extended to finishes (#119). Kept as its own value rather
-            # than folded into complete-manifest so a consumer can still tell a collector's ruling
-            # from a manufacturer's — the same separation units.json keeps between the repository
-            # verdict and the application status.
-            #
-            # Only reachable with positive evidence already in hand: closing the finish list for a
-            # unit nothing is known about would be an absence argument wearing the owner's name.
             completeness_status = "owner-adjudicated"
         elif known_printings:
             completeness_status = "positive-evidence-only"
@@ -1489,6 +1498,7 @@ def _build_finish_counts(
     finish_units: list[dict[str, Any]],
     tcgdex_urls: list[str],
     fetch_errors: dict[str, str],
+    generated_date: str,
 ) -> dict[str, int]:
     counts = {
         "totalFinishUnits": len(finish_units),
@@ -1496,7 +1506,9 @@ def _build_finish_counts(
         "withOnlyMarketplaceClaim": sum(unit["availabilityStatus"] == "marketplace-claimed" for unit in finish_units),
         "pendingFinish": sum(unit["availabilityStatus"] == "pending" for unit in finish_units),
         "notApplicableFinish": sum(unit["availabilityStatus"] == "not-applicable" for unit in finish_units),
-        "withCompleteManifest": sum(unit["completenessStatus"] == "complete-manifest" for unit in finish_units),
+        "withOwnerAdjudication": sum(
+            unit["completenessStatus"] == "owner-adjudicated" for unit in finish_units
+        ),
         "withNonHolo": sum("non-holo" in unit["availableFinishes"] for unit in finish_units),
         "withHolo": sum("holo" in unit["availableFinishes"] for unit in finish_units),
         "withReverseHolo": sum("reverse-holo" in unit["availableFinishes"] for unit in finish_units),
@@ -1513,7 +1525,7 @@ def _build_finish_counts(
     }
     cards_document["meta"]["finishVerification"] = {
         "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-        "lastUpdated": datetime.now(timezone.utc).date().isoformat(),
+        "lastUpdated": generated_date,
         **counts,
     }
     notes = cards_document["meta"].setdefault("notes", [])
@@ -1522,36 +1534,53 @@ def _build_finish_counts(
         "variantAxes and hasReverseHolo are",
         "markings.role distinguishes",
     )
-    notes = [
-        note for note in notes if not any(str(note).startswith(prefix) for prefix in generated_note_prefixes)
-    ]
+    language_notes = extract_language_notes(notes)
+    notes = retained_finish_notes(notes, generated_note_prefixes, language_notes)
     notes.append(
         "variantAxes and hasReverseHolo are Cardmarket catalogue hints only. finishAvailability is the positive-evidence finish layer; pending never means a finish is proven not to exist."
     )
     notes.append(
         "markings.role distinguishes print-identity features, EX-era reverse-holo-treatment set logos, and later distribution-promo stamps such as prerelease, Staff, retailer, and Pokemon Center marks."
     )
+    notes.extend(language_notes)
     cards_document["meta"]["notes"] = notes
 
     return counts
+
+
+def extract_language_notes(notes: list[Any]) -> list[Any]:
+    return [
+        note for note in notes
+        if str(note).startswith(("languagesConfirmed", "languagesRepositoryConfirmed"))
+    ]
+
+
+def retained_finish_notes(
+    notes: list[Any], prefixes: tuple[str, ...], language_notes: list[Any]
+) -> list[Any]:
+    return [
+        note for note in notes
+        if not any(str(note).startswith(prefix) for prefix in prefixes)
+        and note not in language_notes
+    ]
 
 
 def _build_finish_documents(
     finish_units: list[dict[str, Any]],
     counts: dict[str, int],
     fetch_errors: dict[str, str],
+    generated_date: str,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
     finish_document = {
         "meta": {
             "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "generated": generated_date,
             "scope": "Physical cards only; online/live code cards are excluded.",
             "sourcePolicy": [
                 "Only positive availability is asserted. pending means not yet established, never proven absent.",
                 "A unit whose underlying product-language claims are all contradicted is not-applicable and is excluded from the finish-review queue.",
-                "Only a language-scoped source marked supportsAbsence=true, coverage=complete-manifest, and closureScope=finish-unit, with no known printing whose finish is unresolved, can set completenessStatus=complete-manifest.",
-                "A scoped complete source remains positive evidence inside its named boundary and leaves the wider finish unit open for review.",
-                "A collection-owner finish adjudication sets completenessStatus=owner-adjudicated, which never asserts a finish and is deliberately distinct from complete-manifest.",
+                "Every external source confirms named finishes only. Missing alternatives remain unknown.",
+                "A collection-owner finish adjudication can close a finish list after every named finish has positive evidence.",
                 "TCGdex variants=true is confirmation; false is ignored because upstream variant coverage is incomplete.",
                 "TCGdex finish flags are set-number-language level and are not mapped to a Cardmarket V token without independent evidence or an unambiguous single product.",
                 "Cardmarket Reverse Holo axes and rarity labels are retained as marketplace-claimed hints, not external confirmation.",
@@ -1564,7 +1593,7 @@ def _build_finish_documents(
                 "availabilityStatus": ["confirmed", "owner-attested", "marketplace-claimed", "pending", "not-applicable"],
                 "cardSize": ["standard", "jumbo", "unknown"],
                 "markingRoles": ["print-identity", "reverse-holo-treatment", "distribution-promo"],
-                "completenessStatus": ["complete-manifest", "owner-adjudicated", "positive-evidence-only", "pending", "not-applicable"],
+                "completenessStatus": ["owner-adjudicated", "positive-evidence-only", "pending", "not-applicable"],
             },
             "counts": counts,
             "fetchErrors": fetch_errors,
@@ -1613,7 +1642,7 @@ def _build_finish_documents(
     review_document = {
         "meta": {
             "description": "Finish units that still need finish, pattern, marking, size, or Cardmarket-product mapping evidence.",
-            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "generated": generated_date,
             "count": len(review_rows),
             "pendingByLanguage": dict(sorted(pending_by_language.items(),
                                              key=lambda kv: (-kv[1], kv[0]))),
@@ -1635,7 +1664,7 @@ def _build_finish_documents(
         for marking in (printing.get("markings") or [])
     )
     analysis = {
-        "generated": datetime.now(timezone.utc).date().isoformat(),
+        "generated": generated_date,
         "note": "Counts are set-number-language finish units. Availability is positive-evidence-only and is not a proof of completeness.",
         "counts": counts,
         "finishCombinations": dict(sorted(combination_counts.items())),
@@ -1655,50 +1684,58 @@ def _build_finish_documents(
     return finish_document, review_document, analysis, review_rows
 
 
-def _write_finish_outputs(
+def _render_finish_outputs(
     cards_document: dict[str, Any],
     finish_document: dict[str, Any],
     review_document: dict[str, Any],
     analysis: dict[str, Any],
     review_rows: list[dict[str, Any]],
-) -> None:
-    write_json(OUTPUT_PATH, finish_document)
-    write_json(REVIEW_JSON_PATH, review_document)
-    write_json(ANALYSIS_PATH, analysis)
-    write_json(CARDS_PATH, cards_document)
-    with REVIEW_CSV_PATH.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle, lineterminator="\n")
+) -> dict[Path, str]:
+    csv_buffer = io.StringIO(newline="")
+    writer = csv.writer(csv_buffer, lineterminator="\n")
+    writer.writerow(
+        [
+            "finishUnitId",
+            "cardName",
+            "setCode",
+            "number",
+            "language",
+            "availabilityStatus",
+            "availableFinishes",
+            "productMappingStatus",
+            "patternStatus",
+            "unmappedVariants",
+            "unresolved",
+        ]
+    )
+    for row in review_rows:
         writer.writerow(
             [
-                "finishUnitId",
-                "cardName",
-                "setCode",
-                "number",
-                "language",
-                "availabilityStatus",
-                "availableFinishes",
-                "productMappingStatus",
-                "patternStatus",
-                "unmappedVariants",
-                "unresolved",
+                row["finishUnitId"],
+                row["cardName"],
+                row["setCode"],
+                row["number"],
+                row["language"],
+                row["availabilityStatus"],
+                "; ".join(row["availableFinishes"]),
+                row["productMappingStatus"],
+                row["patternStatus"],
+                "; ".join(row["unmappedVariants"]),
+                " | ".join(row["unresolved"]),
             ]
         )
-        for row in review_rows:
-            writer.writerow(
-                [
-                    row["finishUnitId"],
-                    row["cardName"],
-                    row["setCode"],
-                    row["number"],
-                    row["language"],
-                    row["availabilityStatus"],
-                    "; ".join(row["availableFinishes"]),
-                    row["productMappingStatus"],
-                    row["patternStatus"],
-                    "; ".join(row["unmappedVariants"]),
-                    " | ".join(row["unresolved"]),
-                ]
-            )
+    return {
+        OUTPUT_PATH: rendered_json(finish_document),
+        REVIEW_JSON_PATH: rendered_json(review_document),
+        REVIEW_CSV_PATH: csv_buffer.getvalue(),
+        ANALYSIS_PATH: rendered_json(analysis),
+        CARDS_PATH: rendered_json(cards_document),
+    }
+
+
+def _write_finish_outputs(outputs: dict[Path, str]) -> None:
+    for path, body in outputs.items():
+        path.write_text(body, encoding="utf-8", newline="\n")
 
 def _finish_summary(
     counts: dict[str, int],
@@ -1738,6 +1775,8 @@ def _finish_summary(
     return 0
 
 def main() -> int:
+    if "--check" in sys.argv and ("--refresh" in sys.argv or "--accept-refresh" in sys.argv):
+        raise ValueError("--check cannot be combined with refresh modes")
     context = _load_finish_context()
     cards_document = context["cards_document"]
     cards = context["cards"]
@@ -1748,13 +1787,38 @@ def main() -> int:
     tcgdex_data = context["tcgdex_data"]
     fetch_errors = context["fetch_errors"]
     accepted_refresh = context["accepted_refresh"]
+    generated_date = latest_input_date(
+        context["units"],
+        context["overrides_document"],
+        context["specimens_document"],
+        context["adjudications_document"],
+        context["snapshot_document"],
+    )
     _prepare_finish_indexes(context)
 
     finish_units = _build_finish_units(context)
     _project_cards(cards, finish_units)
-    counts = _build_finish_counts(cards_document, finish_units, tcgdex_urls, fetch_errors)
-    finish_document, review_document, analysis, review_rows = _build_finish_documents(finish_units, counts, fetch_errors)
-    _write_finish_outputs(cards_document, finish_document, review_document, analysis, review_rows)
+    counts = _build_finish_counts(
+        cards_document, finish_units, tcgdex_urls, fetch_errors, generated_date
+    )
+    finish_document, review_document, analysis, review_rows = _build_finish_documents(
+        finish_units, counts, fetch_errors, generated_date
+    )
+    outputs = _render_finish_outputs(
+        cards_document, finish_document, review_document, analysis, review_rows
+    )
+    if "--check" in sys.argv:
+        stale = [
+            str(path.relative_to(ROOT))
+            for path, body in outputs.items()
+            if not path.exists() or path.read_text(encoding="utf-8") != body
+        ]
+        if stale:
+            print(f"stale: {', '.join(stale)}")
+            return 1
+        print("finish artifacts are current")
+    else:
+        _write_finish_outputs(outputs)
     return _finish_summary(counts, review_rows, tcgdex_data, tcgdex_urls, fetch_errors, accepted_refresh)
 
 

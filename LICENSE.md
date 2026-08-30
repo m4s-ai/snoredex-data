@@ -1,155 +1,81 @@
 <!-- doc: role=licensing scope; stage=reference -->
 # Licensing scope
 
-This repository is a **mixed work**. No single licence covers all of it, and presenting one as if
-it did would claim rights the project does not hold. This document says exactly which material is
-licensed by this project, under which terms, and which material is excluded because it belongs to
-someone else.
+This repository is a mixed work. No single licence covers all of it. This project is
+noncommercial and source available. It is not OSI open source.
 
-This project is **noncommercial and source-available**. It is deliberately **not** OSI open source.
+The owner approved the licence grants on 2026-07-26. The owner approved public repository and
+site publication on 2026-07-31. Both decisions are recorded in `publication-decisions.json`.
+Deployment remains a manual action through the Pages workflow.
 
-> **Status: in force since 2026-07-26.** The owner approved the licence grants on that date and
-> `publication-decisions.json` records it, so the terms below are an operative grant rather than a
-> described intention. The two verbatim licence texts are present and hash-verified.
->
-> Publication of the site is a separate decision and is still pending; the grants do not depend on
-> it.
+## Original software
 
-## 1. Original software — PolyForm Noncommercial 1.0.0
+The software authored for this project is licensed under PolyForm Noncommercial 1.0.0. This
+includes build scripts, verification tools, workflows, and authored configuration.
 
-Covers the build and verification code written for this project:
+Full text: `LICENSES/PolyForm-Noncommercial-1.0.0.md`
 
-- `scripts/**` — dataset build pipeline, finish modelling, chronological and site generators;
-- `verification/*.py`, `verification/archive/**` — verification tooling;
-- any workflow or configuration files authored here.
+Canonical source: <https://polyformproject.org/licenses/noncommercial/1.0.0/>
 
-Full text: `LICENSES/PolyForm-Noncommercial-1.0.0.md` ·
-canonical source <https://polyformproject.org/licenses/noncommercial/1.0.0/>
+## Original data work and documentation
 
-The publisher's versioned source file is
-<https://github.com/polyformproject/polyform-licenses/blob/1.0.0/PolyForm-Noncommercial-1.0.0.md>;
-the older rendered URL currently returns 404 but remains the URL printed in the licence itself.
+The original selection, arrangement, verification annotations, documentation, and site copy are
+licensed under CC BY-NC-SA 4.0.
 
-Permits personal, hobby, research, and other noncommercial use, including modification and
-redistribution. Commercial use requires a separate grant from the licensor.
+Full text: `LICENSES/CC-BY-NC-SA-4.0.md`
 
-## 2. Original data selection, arrangement and annotation — CC BY-NC-SA 4.0
+Canonical source: <https://creativecommons.org/licenses/by-nc-sa/4.0/>
 
-Covers the parts of the data that are this project's own intellectual contribution:
+The required attribution name is `M4S.Collection`.
 
-- the **selection and arrangement** of the catalogue — which units exist, how they are keyed,
-  the finish/pattern/marking/distribution/size decomposition, the edition model;
-- the **verification annotations** — status verdicts, evidence strings, source grading,
-  contradiction findings, completeness judgements;
-- the **documentation and site copy** — `README.md`, `FINDINGS.md`, `HANDOVER.md`, `CLAUDE.md`,
-  `AGENTS.md`, `CONTRIBUTING.md`, `verification/*.md`, generated page prose.
+## Excluded third-party material
 
-Full text: `LICENSES/CC-BY-NC-SA-4.0.md` ·
-canonical source <https://creativecommons.org/licenses/by-nc-sa/4.0/>
+The licences above do not grant rights to:
 
-Version 4.0 is used deliberately: it addresses sui generis database rights, which matter for a
-work whose value is largely in selection and arrangement. Attribution, noncommercial use, and
-ShareAlike apply.
+- Pokémon card artwork, card images, names, logos, character designs, or trademarks
+- illustrator credits or the underlying illustrations
+- quoted provider content
+- marketplace, publisher, database, retailer, seller, collector, or archive images
+- a physical card photograph unless `M4S.Collection` owns that photograph
 
-## 3. Explicitly excluded — third-party rights this project does not hold
+The evidence store contains both owner photographs and third-party images. Custody labels such as
+`heldBy` do not establish copyright ownership. Every depicted card and its artwork remain excluded
+even when the collection owner owns the photograph.
 
-The licences above grant **nothing** in respect of:
-
-- **Pokémon card artwork and card images**, including every file in `images/`;
-- **Pokémon names, logos, character designs, and trademarks**;
-- **illustrator credits and the underlying illustrations**;
-- **quoted or extracted factual content** from Bulbapedia, TCGdex, TCGplayer/TCGCSV, PSA,
-  pokumon.com, Elite Fourum, Cardmarket, and the official Pokémon sites — each carries its own
-  terms, recorded in `THIRD_PARTY_NOTICES.md`;
-- **photographs of physical cards**, whoever took them. Where the licensor took the photograph,
-  the licensor holds rights in that photograph and grants them under §2 — but the **card artwork
-  visible in it remains the rights holders' and is granted by nobody here**. A specimen photograph
-  is therefore usable as evidence of what a card looks like, and is not a licence to the artwork
-  it depicts.
-
-Raw factual observations — that a given card exists in a given language with a given finish — are
-facts. This project claims no ownership of facts; the claim is over the selection, arrangement,
-and verification layer built around them.
-
-## 4. Non-affiliation
-
-This is an unofficial fan project. It is not affiliated with, endorsed by, sponsored by, or
-associated with Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company, Cardmarket, or any
-other rights holder or data provider named here.
-
-Pokémon and all related names are trademarks of Nintendo, Creatures Inc., and GAME FREAK inc.
-© Pokémon / Nintendo / Creatures / GAME FREAK.
-
-## 5. No warranty
-
-The dataset records evidence and its strength. It is not a print manifest and is not guaranteed
-complete or correct. `pending` means *not established*, never *proven absent*. Do not rely on it
-for purchase, grading, insurance, or valuation decisions without independent verification.
+`THIRD_PARTY_NOTICES.md` describes the retained material categories and links the provider
+inventory. Raw facts are not claimed as project property.
 
 ## Owner decisions
 
-Recorded in `publication-decisions.json`, which `verification/publication_gate.py` verifies before
-any deployment.
+`publication-decisions.json` records these settled decisions:
 
-**Settled 2026-07-26, approved by `M4S.Collection`:**
+1. Noncommercial modification and redistribution are permitted under the two licences above.
+2. `M4S.Collection` is the licensor and attribution name.
+3. Owner attestations and specimen evidence may be published without personal identifiers.
+4. The retained third-party image categories may be published for this project. This approval does
+   not transfer ownership or extend the repository licences to those images.
+5. Public repository visibility and site publication were approved on 2026-07-31.
 
-1. **Scope of "private use".** Noncommercial reuse *with* modification and redistribution
-   permitted — which is what the two licences above provide.
-2. **Licensor identity.** `M4S.Collection`. This is the name downstream CC BY-NC-SA attribution
-   must reproduce, and the party from whom a commercial exception is sought. It is a pseudonymous
-   handle rather than a legal entity name; see *Licensor* below.
-3. **Publication consent.** Owner attestations and photographed specimens may be published. They
-   are represented as anonymous evidence classes carrying no personal identifiers.
-4. **Third-party images.** The Cardmarket card images in `images/`, and the licensor's own
-   specimen photographs in `verification/specimens/`, may be published on the basis set out in
-   `THIRD_PARTY_NOTICES.md`. This applies to the categories rather than to a fixed list, so
-   specimen photographs added over time are covered as they arrive without the decision needing to
-   be retaken. It does not extend to any other third-party image: anything from a source not
-   already named in `THIRD_PARTY_NOTICES.md` is a new decision.
+The publication gate validates the decision record before deployment. Merging code does not deploy
+the site.
 
-**Still open:**
+## Non-affiliation
 
-5. **Site publication and repository visibility.** The site's correction links all point into this
-   repository's issue tracker, so publishing the site for public review requires the repository to
-   be public too, and `publication_gate.py` enforces that the two are decided together. The
-   historical local paths that previously blocked public visibility were redacted on 2026-07-26;
-   see `verification/history/PUBLIC-READINESS-AUDIT.md` and `verification/history/LAUNCH-RUNBOOK.md`.
+This is an unofficial fan project. It is not affiliated with or endorsed by Nintendo, Creatures
+Inc., GAME FREAK inc., The Pokémon Company, Cardmarket, or any provider named in this repository.
 
-The licence grants above are in force and do not depend on decision 5. Merging code does not
-deploy the site: the Pages workflow is manual and calls the publication gate before any upload.
+Pokémon and related names are trademarks of Nintendo, Creatures Inc., and GAME FREAK inc.
+© Pokémon / Nintendo / Creatures / GAME FREAK.
 
-See issue #5 and `verification/history/PUBLIC-READINESS-AUDIT.md`.
+## No warranty
 
-## Licensor
+The dataset records evidence and its strength. It is not a print manifest and is not guaranteed
+complete or correct. `pending` means not established. It never means proven absent. Verify material
+independently before purchase, grading, insurance, or valuation decisions.
 
-**`M4S.Collection`** — selected 2026-07-26 and recorded in `publication-decisions.json`, which
-`publication_gate.py` verifies before any deployment.
+## Contact
 
-Where the name appears once the grants are in force:
+Commercial-use enquiries and licensing questions: [@M4S.Collection on
+Instagram](https://www.instagram.com/m4s.collection/).
 
-- **Attribution.** CC BY-NC-SA 4.0 requires reuse to credit the licensor by name, so
-  `M4S.Collection` is the credit line downstream users must reproduce.
-- **Commercial exceptions.** Both licences are noncommercial. Anyone wanting commercial use needs
-  a separate grant, and `M4S.Collection` is the party who can give it.
-
-Two properties worth stating plainly, because they are consequences rather than problems:
-
-- It is a **pseudonymous handle, not a legal entity**. That is a deliberate choice and keeps the
-  collection owner's legal name out of every downstream attribution. It does mean the licence is
-  granted by a pseudonym, which is normal for hobby projects and sufficient for attribution, but
-  is weaker than a named person or company if a grant ever had to be enforced or transferred.
-- A licensor must be **reachable**, or a commercial exception cannot be requested and the
-  attribution requirement points at no one.
-
-### Contact
-
-Commercial-use enquiries and licensing questions: **[@M4S.Collection on
-Instagram](https://www.instagram.com/m4s.collection/)**.
-
-This is a licensing contact, not a corrections channel. Data corrections belong in the issue
-tracker, where they are graded against the source ladder and recorded with their evidence — see
-[`CONTRIBUTING.md`](CONTRIBUTING.md). Corrections sent by direct message cannot be attributed to a
-source and will be redirected.
-
-If a longer-lived contact route is added later, add it alongside this one rather than replacing
-the attribution name, so credits already published downstream stay correct.
+Data corrections belong in the issue tracker. See [`CONTRIBUTING.md`](CONTRIBUTING.md).

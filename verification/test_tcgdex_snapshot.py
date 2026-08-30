@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -68,6 +70,35 @@ def main() -> None:
         finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
         finishes.CACHE_DIR = original_cache_dir
         candidate_path.unlink(missing_ok=True)
+    with tempfile.TemporaryDirectory() as temporary:
+        temporary_root = Path(temporary)
+        snapshot_path = temporary_root / "snapshot.json"
+        candidate_path = temporary_root / "candidate.json"
+        old_snapshot = {
+            "schema": "snoredex-tcgdex-snapshot/1",
+            "generated": "2026-08-01",
+            "records": staged,
+        }
+        snapshot_path.write_text(json.dumps(old_snapshot), encoding="utf-8")
+        original_snapshot_path = finishes.SNAPSHOT_PATH
+        original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
+        original_cache_dir = finishes.CACHE_DIR
+        original_arguments = sys.argv
+        finishes.SNAPSHOT_PATH = snapshot_path
+        finishes.REFRESH_CANDIDATE_PATH = candidate_path
+        finishes.CACHE_DIR = temporary_root / "cache"
+        try:
+            finishes.write_refresh_candidate(staged)
+            sys.argv = ["finishes.py", "--refresh", "--accept-refresh"]
+            context = {"tcgdex_urls": sorted(staged), "snapshot_document": old_snapshot}
+            assert finishes._resolve_tcgdex(context) is None
+            accepted = json.loads(snapshot_path.read_text(encoding="utf-8"))
+            assert context["snapshot_document"] == accepted
+        finally:
+            finishes.SNAPSHOT_PATH = original_snapshot_path
+            finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
+            finishes.CACHE_DIR = original_cache_dir
+            sys.argv = original_arguments
     print(f"tcgdex snapshot regression passed: {len(records)} hashed records, offline")
 
 

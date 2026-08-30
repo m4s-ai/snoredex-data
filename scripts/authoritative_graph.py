@@ -1710,7 +1710,7 @@ def _validate_events(
                 if ("set-edition", edition_id) not in relations[("release-event", event_id, "supports")]:
                     errors.append(f"release event edition edge is missing: {event_id} -> {edition_id}")
 
-# Finish-profile identity and scoped rules.
+# Finish-profile identity and positive rules.
 def _validate_profiles(
     errors: list[str],
     profiles: dict[str, dict[str, Any]],
@@ -1725,10 +1725,13 @@ def _validate_profiles(
                 or not profile.get("languageScope") or not profile.get("rules") \
                 or source_id not in graph_sources:
             errors.append(f"finish profile is incomplete: {profile_id}")
-        if profile.get("closedWithinScope") and not (
-            profile.get("closureScope") and profile.get("closureAuthority")
-        ):
-            errors.append(f"closed finish profile lacks closure scope/authority: {profile_id}")
+        if any((
+            profile.get("closedWithinScope") is not False,
+            profile.get("closureScope"),
+            profile.get("closureAuthority"),
+            profile.get("closedFinishQuestions"),
+        )):
+            errors.append(f"external finish profile claims closure: {profile_id}")
         if ("set-source-record", source_id) not in relations[("finish-profile", profile_id, "supported-by")]:
             errors.append(f"finish profile source edge is missing: {profile_id}")
         for edition_id in profile.get("setEditionIds", []):
@@ -1737,7 +1740,7 @@ def _validate_profiles(
             if ("set-edition", edition_id) not in relations[("finish-profile", profile_id, "scoped-to")]:
                 errors.append(f"finish profile edition edge is missing: {profile_id} -> {edition_id}")
         for rule in profile.get("rules", []):
-            if not rule.get("finishProfileRuleId") or not rule.get("effect") \
+            if not rule.get("finishProfileRuleId") or rule.get("effect") != "include" \
                     or not rule.get("finish") or rule.get("sourceRecordId") != source_id \
                     or rule.get("sourceRecordId") not in graph_sources:
                 errors.append(f"finish profile rule is incomplete: {profile_id}")

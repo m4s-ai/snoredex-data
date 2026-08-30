@@ -37,10 +37,8 @@ def main() -> int:
         "unresolved": set(),
     }
     by_id = {unit["unitId"]: unit for unit in units}
-    bounded_scopes = {
-        (row["providerId"], row["url"].rstrip("/"))
-        for row in semantics_doc["meta"]["boundedLanguageAbsenceScopes"]
-    }
+    if "boundedLanguageAbsenceScopes" in semantics_doc["meta"]:
+        raise AssertionError("evidence semantics still exposes provider absence scopes")
     for unit_id, semantic in semantics.items():
         status = semantic["applicationStatus"]
         if status not in expected:
@@ -58,11 +56,10 @@ def main() -> int:
             raise AssertionError(f"needs-evidence is not an unsupported confirmation: {unit_id}")
         if status == "not-printed" and semantic["inference"] != "owner-adjudicated":
             raise AssertionError(f"hard absence lacks owner adjudication: {unit_id}")
-        if semantic["inference"] == "provider-holds-an-absence-edge" and (
-            by_id[unit_id]["providerId"],
-            str(by_id[unit_id].get("sourceUrl") or "").rstrip("/"),
-        ) not in bounded_scopes:
-            raise AssertionError(f"provider-wide absence leaked past an exact scope: {unit_id}")
+        if status == "disputed" and semantic["verdictWithinGranularity"]:
+            raise AssertionError(f"source disagreement presented as supported: {unit_id}")
+        if semantic["inference"] == "provider-holds-an-absence-edge":
+            raise AssertionError(f"provider absence inference remains active: {unit_id}")
 
     cards = {
         key(card, "variantToken"): card
@@ -177,7 +174,7 @@ def main() -> int:
     }:
         raise AssertionError("reported application-status counts are stale")
 
-    # #210 — a direct owner attestation stays card-level. Do not pin this regression to one
+    # A direct owner attestation stays card-level. Do not pin this regression to one
     # product: stronger official evidence may legitimately replace those rows over time.
     prize_pack_regression = [
         unit for unit in units
@@ -195,9 +192,9 @@ def main() -> int:
                 f"direct owner attestation lost its supported confirmation: {unit['unitId']}"
             )
     if not prize_pack_regression:
-        raise AssertionError("#210 regression fixture lost — no direct owner-attestation rows found")
+        raise AssertionError("owner-attestation regression fixture is missing")
 
-    # #306 review — localized Prize Pack manifests and English-market evidence must not be
+    # Localized Prize Pack checklists and English-market evidence must not be
     # projected onto neighboring languages merely because they share one finish override.
     finish_overrides = load("verification/finish_overrides.json")
     english_only_refs = {

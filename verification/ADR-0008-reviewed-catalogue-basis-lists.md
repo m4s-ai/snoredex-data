@@ -137,8 +137,8 @@ A reviewed pass may add, correct, split, merge, or relate canonical rows, but it
 and new values and account for every affected reference. Browser proposals from ADR-0007 follow the
 same path. Direct browser writes and source-to-registry auto-promotion are prohibited.
 
-Closed or exhaustive lists use the repository's existing complete-manifest or owner-adjudication
-mechanism. Omission from a basis list is otherwise unknown, not proof of absence.
+Only owner adjudication can close a reviewed list. Every external basis list is positive only.
+Omission from a basis list is unknown, not proof of absence.
 
 ## Migration acceptance criteria
 

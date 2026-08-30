@@ -99,9 +99,12 @@ def main() -> int:
         discovery_report = json.loads(reports[3].read_text(encoding="utf-8"))
         progress = discovery_report["stateBefore"]["progress"]
         if progress["blockedGaps"] and progress["needsSourceGaps"]:
-            # A blocked provider must remain visible while an explicit live refresh can still run
-            # for unrelated refreshable gaps.
-            assert discovery_report["stateBefore"]["state"] == "blocked-by-source"
+            statuses = (progress["sourceStatus"], progress["cardStatus"])
+            expected_state = (
+                "retained" if any(status != "complete" for status in statuses)
+                else "blocked-by-source"
+            )
+            assert discovery_report["stateBefore"]["state"] == expected_state
             assert discovery_report["cycleCount"] == 1
             assert discovery_report["cycles"][0]["lane"]["reason"] == "dry-run"
     finally:
