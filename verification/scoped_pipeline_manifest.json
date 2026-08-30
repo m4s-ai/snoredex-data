@@ -22,10 +22,11 @@
       "mergeGate": "L3",
       "releaseGate": "L4",
       "steps": [
-        {"id": "attachment-integrity", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": ["verification/specimens/", "verification/specimens.json"]},
-        {"id": "finish-projection", "command": ["scripts/finishes.py", "--reproject"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json"]},
-        {"id": "graph-check", "command": ["scripts/authoritative_graph.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
-        {"id": "collector-check", "command": ["scripts/collector_catalogue.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json"]}
+        {"id": "finish-projection", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json", "verification/FINISH_REVIEW.json", "verification/FINISH_REVIEW.csv", "analysis_finishes.json", "snorlax_cards.json"]},
+        {"id": "graph-projection", "command": ["scripts/authoritative_graph.py", "--write"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/authoritative_graph.json"]},
+        {"id": "checklist-projection", "command": ["scripts/checklist.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_checklist.json"]},
+        {"id": "collector-projection", "command": ["scripts/collector_catalogue.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json"]},
+        {"id": "attachment-integrity", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": []}
       ],
       "skippedChecks": ["full L3 regen.py gate", "browser acceptance", "live finish-source verification", "publish/deployment"]
     },

@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "1.0.0",
-    "generated": "2026-08-28",
+    "generated": "2026-08-29",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 38,
       "absenceEdges": 3,
       "observations": 40,
-      "resolvedVerdictSources": 1145
+      "resolvedVerdictSources": 1164
     },
     "surfaceStates": {
       "active": 17,
@@ -5043,7 +5043,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:2b262a53dfbf17f8e7d0348596649c5cc4e8ea3d144ea3a9713fd9699c248ce1",
+      "rawRecordHash": "sha256:b307c0d33fb79521dc240561c4893dd226ec4ac6e9892842e038db6b9a4be85a",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -5060,14 +5060,33 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 42,
+        "stableIdCount": 61,
         "stableIds": [
+          "F0067-P03",
+          "F0067-P04",
+          "F0071-P01",
+          "F0072-P01",
+          "F0072-P02",
           "F0093-P01",
           "F0140-P01",
           "F0146-P01",
           "F0148-P01",
           "F0166-P02",
           "F0289-P02",
+          "F0402-P02",
+          "F0403-P02",
+          "F0569-P02",
+          "F0569-P03",
+          "F0570-P02",
+          "F0570-P03",
+          "F0571-P02",
+          "F0571-P03",
+          "F0572-P02",
+          "F0572-P03",
+          "F0573-P02",
+          "F0573-P03",
+          "F0574-P02",
+          "F0574-P03",
           "F0584-P01",
           "F0597-P01",
           "F0597-P02",
@@ -5092,21 +5111,10 @@
           "U0098",
           "U0099",
           "U0311",
-          "U0312",
-          "U0313",
-          "U0314",
-          "U0785",
-          "U0786",
-          "U0787",
-          "U0788",
-          "U0790",
-          "U0791",
-          "U0792",
-          "U0793",
-          "override:owner-scan-review"
+          "U0312"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 42
+        "usageCount": 61
       }
     },
     {
@@ -5306,7 +5314,7 @@
       ],
       "outcome": "The retained official article positively states that rarity R and above cards are foil, and that Simplified Chinese C, U and R cards can appear as the locality-specific patterned random foil treatment.",
       "rawRecordRef": "verification/source_registry.json:https://www.pokemon.cn/tcg/product/16377.html",
-      "rawRecordHash": "sha256:b83353930e14ec7ec288716851d880293ccaf000f93addbe66bbf03cee4f30b2",
+      "rawRecordHash": "sha256:9b843cd68da239b0a1bf9ceee394f9af20b99eabc87552956996ce1f708ea37c",
       "rawRecord": {
         "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
         "nonUrlEvidenceId": null,
@@ -5331,7 +5339,7 @@
           "F0060-P03",
           "F0063-P03",
           "F0065-P01",
-          "F0067-P03",
+          "F0067-P04",
           "F0068-P01",
           "F0069-P01",
           "F0070-P01",
@@ -11647,6 +11655,234 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1-SEz7Lm9ld6FYzWXmVpyzruvu5LiWqth/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/11pGJgM19YmFtmahfiiyxdgO0x2Z-wUOy/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/16cU6VpJUSGqAEnBJyRSm74Sdph8cNMyY/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1GwN3F5EFC2fwEyXK5Z5ziX1C9eANLV9Z/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1H0hYxX1kU7qqk4YST3kXo5SQgpV3Eoiz/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1IT15qTjdyZuXg1OEg6pFFpJmPt0CFUyy/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1JzXXNGRri69XB28zOAJsA1pY3CIKftJb/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1Qpd5LgCmHeNtoAkNQqAWnvu-4avabAxk/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1Sheay9EglZV6v-NfyuCcgtkUfMIxat1B/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1Sk_ZC_2sbCgMWBVIdoaVhM0GpblqUnSn/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1gcQJEVk4_mtGLC4EEGxDi1X7iA1rfMaa/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1hnxxpXEny4Sxl00FqtYrKv8xsdbV4ULr/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1lxbJemd4GCtWSZk1EGmxRBpHfrkOwkZ6/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1nYeCM-wL3Q_CSSkX3aeZwGVPoiBGCZA_/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1oJmBYlLh109-x_LhpOH-5zSVYXu41mj0/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1tYo9XFldI6rKRykKP_1EzE33_x9S4MLC/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1thcVf7KDJq0IwhwLvNfxNKLTnDKWfQDb/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {

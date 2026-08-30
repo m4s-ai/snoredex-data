@@ -346,6 +346,21 @@ def printing_signature(printing: dict[str, Any]) -> str:
     return json.dumps(identity, ensure_ascii=False, sort_keys=True)
 
 
+def refine_specimen_card_sizes(printings: list[dict[str, Any]]) -> None:
+    """Resolve omitted specimen sizes after every printing candidate is known."""
+    for specimen in printings:
+        if specimen.get("cardSize") != "unknown" or not specimen.get("specimenIds"):
+            continue
+        matching_sizes = set()
+        for candidate in printings:
+            resized = dict(specimen)
+            resized["cardSize"] = candidate.get("cardSize")
+            if printing_signature(resized) == printing_signature(candidate):
+                matching_sizes.add(candidate.get("cardSize"))
+        if matching_sizes == {"unknown", "standard"}:
+            specimen["cardSize"] = "standard"
+
+
 def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> None:
     candidate["foilPattern"] = normalize_foil_pattern(candidate.get("foilPattern"))
     candidate.setdefault("foilPattern", None)
@@ -400,6 +415,15 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
             seen_sources.add(source_signature(source))
     if "image" not in existing and candidate.get("image"):
         existing["image"] = candidate["image"]
+
+
+def apply_standard_scope_card_size(candidate: dict[str, Any]) -> None:
+    """Use a standard-set manifest to resolve an otherwise unobserved card size."""
+    if candidate.get("cardSize") == "unknown" and any(
+        source.get("closureScope") == "standard-set"
+        for source in candidate.get("sources") or []
+    ):
+        candidate["cardSize"] = "standard"
 
 
 def exact_source(url: str, source_type: str, evidence: str) -> dict[str, Any]:
@@ -1162,6 +1186,7 @@ def _build_finish_unit(
                         for manual in override.get("printings") or []
                     ):
                         break
+                apply_standard_scope_card_size(candidate)
                 add_printing(printings, candidate)
 
     def _build_finish_unit_part7():
@@ -1241,6 +1266,7 @@ def _build_finish_unit(
 
     def _build_finish_unit_part8():
         nonlocal available_finishes, finish, finish_status, finish_unit_id, printing, printings
+        refine_specimen_card_sizes(printings)
         deduplicated_printings: list[dict[str, Any]] = []
         for printing in printings:
             add_printing(deduplicated_printings, printing)

@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-08-28",
+    "generated": "2026-08-29",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -5712,7 +5712,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:F0402-P02",
         "materializedTargetId": "PHYSICAL:F0402-P02",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0414"
+        ]
       }
     },
     {
@@ -8795,12 +8798,14 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0574-P03",
         "semanticPrintingId": "PRINTING:09f26361995a28419ad8840f",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+        "materializedTargetId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0425"
+        ]
       }
     },
     {
@@ -9143,7 +9148,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:15354761ea1c0200cce43614",
         "materializedTargetId": "PHYSICAL:PRINTING:15354761ea1c0200cce43614",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0418"
+        ]
       }
     },
     {
@@ -9372,7 +9380,7 @@
         "claimId": "CLAIM:finish:PRINTING:191d5e36650807db782521fc",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0403-P02",
+        "sourceId": "F0403-P03",
         "semanticPrintingId": "PRINTING:191d5e36650807db782521fc",
         "evidenceStatus": "marketplace-claimed",
         "disposition": "candidate-needs-evidence",
@@ -9592,7 +9600,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758",
         "materializedTargetId": "PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0422"
+        ]
       }
     },
     {
@@ -10308,6 +10319,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:366f02062d82aa50ce525a27",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:366f02062d82aa50ce525a27",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0403-P02",
+        "semanticPrintingId": "PRINTING:366f02062d82aa50ce525a27",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+        "materializedTargetId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0415"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:37a467a24aad9bd9b06c7e8c",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -10515,7 +10546,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a",
         "materializedTargetId": "PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0432"
+        ]
       }
     },
     {
@@ -10856,7 +10890,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74",
         "materializedTargetId": "PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0413"
+        ]
       }
     },
     {
@@ -11945,12 +11982,14 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0574-P02",
         "semanticPrintingId": "PRINTING:72c905f18ac5b686a43657cc",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+        "materializedTargetId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0424"
+        ]
       }
     },
     {
@@ -12147,7 +12186,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad",
         "materializedTargetId": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0420"
+        ]
       }
     },
     {
@@ -12547,7 +12589,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05",
         "materializedTargetId": "PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0431"
+        ]
       }
     },
     {
@@ -12732,13 +12777,16 @@
         "claimId": "CLAIM:finish:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0067-P03",
+        "sourceId": "F0067-P04",
         "semanticPrintingId": "PRINTING:8c1f16fe9e5eb9a3d2ea8056",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
         "materializedTargetId": "PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0433"
+        ]
       }
     },
     {
@@ -12927,7 +12975,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37",
         "materializedTargetId": "PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0435"
+        ]
       }
     },
     {
@@ -13166,7 +13217,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb",
         "materializedTargetId": "PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0417"
+        ]
       }
     },
     {
@@ -13462,7 +13516,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf",
         "materializedTargetId": "PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0419"
+        ]
       }
     },
     {
@@ -14017,7 +14074,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b",
         "materializedTargetId": "PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0416"
+        ]
       }
     },
     {
@@ -14630,7 +14690,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
         "materializedTargetId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0412"
+        ]
       }
     },
     {
@@ -14919,6 +14982,26 @@
         "proposedTargetId": "PHYSICAL:PRINTING:e4cc28356cd82ec3049d3171",
         "materializedTargetId": "PHYSICAL:PRINTING:e4cc28356cd82ec3049d3171",
         "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:e573b3ea832d59cd6151bfe9",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:e573b3ea832d59cd6151bfe9",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0067-P03",
+        "semanticPrintingId": "PRINTING:e573b3ea832d59cd6151bfe9",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+        "materializedTargetId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0434"
+        ]
       }
     },
     {
@@ -15243,7 +15326,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa",
         "materializedTargetId": "PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0421"
+        ]
       }
     },
     {
@@ -15369,7 +15455,10 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:fd846e7e313f2d9939f46245",
         "materializedTargetId": "PHYSICAL:PRINTING:fd846e7e313f2d9939f46245",
-        "reason": "finish printing record carries positive evidence"
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0423"
+        ]
       }
     },
     {
@@ -28804,6 +28893,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TH:AS5a:142/184:base",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "claimId": "CLAIM:source-first:TH:AS5a:142/184:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TH:AS5a:142/184:base",
+        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "materializedTargetId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "reason": "positive exact Thai card record and retained image"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:TH:MA3:136/193:V1",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -32063,6 +32169,414 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0604-P02, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0604-P02"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0412",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0412",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0412",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0413",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0413",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0413",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0414",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0414",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0414",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:F0402-P02",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:F0402-P02, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:F0402-P02"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0415",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0415",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0415",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:366f02062d82aa50ce525a27, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0416",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0416",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0416",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0417",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0417",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0417",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0418",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0418",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0418",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:15354761ea1c0200cce43614",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:15354761ea1c0200cce43614, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:15354761ea1c0200cce43614"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0419",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0419",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0419",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0420",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0420",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0420",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:789a20a646058e0b1ef717ad, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0421",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0421",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0421",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0422",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0422",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0422",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0423",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0423",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0423",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:fd846e7e313f2d9939f46245",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:fd846e7e313f2d9939f46245, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:fd846e7e313f2d9939f46245"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0424",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0424",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0424",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:72c905f18ac5b686a43657cc, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0425",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0425",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0425",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:09f26361995a28419ad8840f, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0426",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0426",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0426",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0426",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0426",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0426"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0427",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0427",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0427",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0427",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0427",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0427"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0428",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0428",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0428",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0428",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0428",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0428"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0429",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0429",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0429",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0429",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0429",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0429"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0430",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0430",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0430",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0430",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0430",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0430"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0431",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0431",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0431",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0432",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0432",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0432",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0433",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0433",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0433",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0434",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0434",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0434",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0435",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0435",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0435",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37"
       }
     },
     {
@@ -40249,6 +40763,48 @@
         "sourceFirstRecordIds": [
           "LATAM:SVP LA:184:base"
         ]
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "setEditionId": "EDITION:TH:Thai:AS5a",
+        "locality": "TH",
+        "language": "Thai",
+        "script": "Thai",
+        "localSetCode": "AS5a",
+        "localNumber": "142/184",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Snorlax-Lazy-Eating-Big-Counter",
+        "workMappingState": "mapped",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:TH:AS5a:142/184:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:TH:AS5a:142/184:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://bulbapedia.bulbagarden.net/wiki/AS5a"
+        ],
+        "sourceFirstRecordIds": [
+          "TH:AS5a:142/184:base"
+        ],
+        "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
+        "releaseDate": "2020-02-27",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
       }
     },
     {
@@ -61754,6 +62310,17 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "setEditionId": "EDITION:TH:Thai:AS5a",
+        "collectorNumber": "142/184",
+        "origin": "issue-262-positive-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -74972,6 +75539,22 @@
     },
     {
       "entityType": "local-set",
+      "entityId": "LOCALSET:TH:AS5a",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "localSetId": "LOCALSET:TH:AS5a",
+        "locality": "TH",
+        "localCode": "AS5a",
+        "observedNames": [],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-IDX-FF7AA1CC9DD8",
+          "SET-SRC-SF-FF7AA1CC9DD8"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
       "entityId": "LOCALSET:TH:MA3",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -84224,7 +84807,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0402",
         "sourcePrintingId": "F0402-P02",
-        "establishingClaimId": "CLAIM:finish:F0402-P02"
+        "establishingClaimId": "CLAIM:finish:F0402-P02",
+        "specimenIds": [
+          "SPEC-0414"
+        ]
       }
     },
     {
@@ -88043,6 +88629,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+        "semanticPrintingId": "PRINTING:09f26361995a28419ad8840f",
+        "cardReleaseId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "reverse-holo",
+        "edition": null,
+        "foilPattern": "large-type-symbol-left",
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0574",
+        "sourcePrintingId": "F0574-P03",
+        "establishingClaimId": "CLAIM:finish:PRINTING:09f26361995a28419ad8840f",
+        "specimenIds": [
+          "SPEC-0425"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:0a3e0446997baf12f8afa5ec",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -88356,7 +88966,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0570",
         "sourcePrintingId": "F0570-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:15354761ea1c0200cce43614"
+        "establishingClaimId": "CLAIM:finish:PRINTING:15354761ea1c0200cce43614",
+        "specimenIds": [
+          "SPEC-0418"
+        ]
       }
     },
     {
@@ -88850,7 +89463,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0573",
         "sourcePrintingId": "F0573-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:1e9cb19cf39b2d7f755ab758"
+        "establishingClaimId": "CLAIM:finish:PRINTING:1e9cb19cf39b2d7f755ab758",
+        "specimenIds": [
+          "SPEC-0422"
+        ]
       }
     },
     {
@@ -89427,6 +90043,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+        "semanticPrintingId": "PRINTING:366f02062d82aa50ce525a27",
+        "cardReleaseId": "RELEASE:KR:Korean:sm10:076/095:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0403",
+        "sourcePrintingId": "F0403-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:366f02062d82aa50ce525a27",
+        "specimenIds": [
+          "SPEC-0415"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:381b77be9971497ec417f3dd",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -89571,7 +90211,7 @@
         "finish": "holo",
         "edition": null,
         "foilPattern": null,
-        "markings": null,
+        "markings": [],
         "distribution": {
           "kind": "fixed-deck",
           "name": "Battle Party foil deck"
@@ -89581,7 +90221,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0072",
         "sourcePrintingId": "F0072-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:3cf2685cb9d1b9dd0a6b003a"
+        "establishingClaimId": "CLAIM:finish:PRINTING:3cf2685cb9d1b9dd0a6b003a",
+        "specimenIds": [
+          "SPEC-0432"
+        ]
       }
     },
     {
@@ -89884,7 +90527,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0569",
         "sourcePrintingId": "F0569-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:4a4581875b1ce9231cd57c74"
+        "establishingClaimId": "CLAIM:finish:PRINTING:4a4581875b1ce9231cd57c74",
+        "specimenIds": [
+          "SPEC-0413"
+        ]
       }
     },
     {
@@ -90742,6 +91388,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+        "semanticPrintingId": "PRINTING:72c905f18ac5b686a43657cc",
+        "cardReleaseId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0574",
+        "sourcePrintingId": "F0574-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:72c905f18ac5b686a43657cc",
+        "specimenIds": [
+          "SPEC-0424"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:739ab468d8be6851b49d1671",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -90833,7 +91503,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0572",
         "sourcePrintingId": "F0572-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:789a20a646058e0b1ef717ad"
+        "establishingClaimId": "CLAIM:finish:PRINTING:789a20a646058e0b1ef717ad",
+        "specimenIds": [
+          "SPEC-0420"
+        ]
       }
     },
     {
@@ -91199,7 +91872,7 @@
         "finish": "non-holo",
         "edition": null,
         "foilPattern": null,
-        "markings": null,
+        "markings": [],
         "distribution": {
           "kind": "fixed-deck",
           "name": "Battle Party ordinary deck"
@@ -91209,7 +91882,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0072",
         "sourcePrintingId": "F0072-P01",
-        "establishingClaimId": "CLAIM:finish:PRINTING:829e747389fc5b6b3b9d0e05"
+        "establishingClaimId": "CLAIM:finish:PRINTING:829e747389fc5b6b3b9d0e05",
+        "specimenIds": [
+          "SPEC-0431"
+        ]
       }
     },
     {
@@ -91367,14 +92043,17 @@
         "finish": "mirror-holo",
         "edition": null,
         "foilPattern": null,
-        "markings": null,
+        "markings": [],
         "distribution": null,
         "cardSize": "standard",
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0067",
-        "sourcePrintingId": "F0067-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:8c1f16fe9e5eb9a3d2ea8056"
+        "sourcePrintingId": "F0067-P04",
+        "establishingClaimId": "CLAIM:finish:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
+        "specimenIds": [
+          "SPEC-0433"
+        ]
       }
     },
     {
@@ -91586,7 +92265,7 @@
         "finish": "non-holo",
         "edition": null,
         "foilPattern": null,
-        "markings": null,
+        "markings": [],
         "distribution": {
           "kind": "fixed-deck",
           "name": "Shining Synergy GX Starter Deck"
@@ -91596,7 +92275,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0071",
         "sourcePrintingId": "F0071-P01",
-        "establishingClaimId": "CLAIM:finish:PRINTING:9727a5b1e6fdff1ecf941a37"
+        "establishingClaimId": "CLAIM:finish:PRINTING:9727a5b1e6fdff1ecf941a37",
+        "specimenIds": [
+          "SPEC-0435"
+        ]
       }
     },
     {
@@ -91883,7 +92565,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0571",
         "sourcePrintingId": "F0571-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:a1af0c02ed63942cc9f681cb"
+        "establishingClaimId": "CLAIM:finish:PRINTING:a1af0c02ed63942cc9f681cb",
+        "specimenIds": [
+          "SPEC-0417"
+        ]
       }
     },
     {
@@ -92171,7 +92856,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0570",
         "sourcePrintingId": "F0570-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:aaac040713b4100e2a55dbbf"
+        "establishingClaimId": "CLAIM:finish:PRINTING:aaac040713b4100e2a55dbbf",
+        "specimenIds": [
+          "SPEC-0419"
+        ]
       }
     },
     {
@@ -92620,7 +93308,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0571",
         "sourcePrintingId": "F0571-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:bfb6088d93a4adbc3acfcd3b"
+        "establishingClaimId": "CLAIM:finish:PRINTING:bfb6088d93a4adbc3acfcd3b",
+        "specimenIds": [
+          "SPEC-0416"
+        ]
       }
     },
     {
@@ -93060,7 +93751,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0569",
         "sourcePrintingId": "F0569-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:dc803616f45a4fe1b0d6255a"
+        "establishingClaimId": "CLAIM:finish:PRINTING:dc803616f45a4fe1b0d6255a",
+        "specimenIds": [
+          "SPEC-0412"
+        ]
       }
     },
     {
@@ -93338,6 +94032,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+        "semanticPrintingId": "PRINTING:e573b3ea832d59cd6151bfe9",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CSM2bC:124:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "reverse-holo",
+        "edition": null,
+        "foilPattern": "large-type-symbol-left",
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0067",
+        "sourcePrintingId": "F0067-P03",
+        "establishingClaimId": "CLAIM:finish:PRINTING:e573b3ea832d59cd6151bfe9",
+        "specimenIds": [
+          "SPEC-0434"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:ea2fd98ddbbeb061071ece18",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -93594,7 +94312,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0572",
         "sourcePrintingId": "F0572-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:fa4d5a727feda2a4b6d844fa"
+        "establishingClaimId": "CLAIM:finish:PRINTING:fa4d5a727feda2a4b6d844fa",
+        "specimenIds": [
+          "SPEC-0421"
+        ]
       }
     },
     {
@@ -93729,7 +94450,10 @@
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0573",
         "sourcePrintingId": "F0573-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:fd846e7e313f2d9939f46245"
+        "establishingClaimId": "CLAIM:finish:PRINTING:fd846e7e313f2d9939f46245",
+        "specimenIds": [
+          "SPEC-0423"
+        ]
       }
     },
     {
@@ -94192,6 +94916,126 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0324",
         "specimenIds": [
           "SPEC-0324"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0426",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0426",
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Indonesian card face and AC3a 145/205 identity are retained.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0426",
+        "specimenIds": [
+          "SPEC-0426"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0427",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0427",
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "\"The collection-owner checklist labels this specimen Non-Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0427",
+        "specimenIds": [
+          "SPEC-0427"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0428",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0428",
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0428",
+        "specimenIds": [
+          "SPEC-0428"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0429",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0429",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "\"The collection-owner checklist labels this specimen Non-Holo\"; the complete Traditional-Chinese card face and AS5a 142/184 identity are retained.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0429",
+        "specimenIds": [
+          "SPEC-0429"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0430",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0430",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Traditional-Chinese card face and AS5a 142/184 identity are retained.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0430",
+        "specimenIds": [
+          "SPEC-0430"
         ]
       }
     },
@@ -102827,6 +103671,21 @@
         "sourceNativeValue": "no printed rarity symbol",
         "normalizedRarityId": "fixed",
         "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2023023021"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Thai-card",
+        "sourceNativeValue": "R",
+        "normalizedRarityId": "rare",
+        "sourceProductKey": "https://bulbapedia.bulbagarden.net/wiki/AS5a"
       }
     },
     {
@@ -111565,6 +112424,41 @@
             "SET-SRC-RETAIL-DATE:23ca130aa87a707a"
           ],
           "localizationId": "LOCALIZATION:LATAM:es-419"
+        }
+      }
+    },
+    {
+      "entityType": "set-edition",
+      "entityId": "EDITION:TH:Thai:AS5a",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "setEditionId": "EDITION:TH:Thai:AS5a",
+        "identity": {
+          "setEditionId": "EDITION:TH:Thai:AS5a",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "localSetCode": "AS5a",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "viaLegacySetCodes": [],
+          "establishingClaimIds": [
+            "CLAIM:source-first:TH:AS5a:142/184:base"
+          ],
+          "localizationId": "LOCALIZATION:TH:th"
+        },
+        "catalogue": {
+          "setEditionId": "EDITION:TH:Thai:AS5a",
+          "localSetId": "LOCALSET:TH:AS5a",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "localCode": "AS5a",
+          "state": "identified",
+          "establishingEvidenceIds": [
+            "SET-SRC-SF-FF7AA1CC9DD8"
+          ],
+          "localizationId": "LOCALIZATION:TH:th"
         }
       }
     },
@@ -127859,12 +128753,12 @@
     {
       "entityType": "set-source-disposition",
       "entityId": "SET-SRC-IDX-FF7AA1CC9DD8",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-thai-as5a-20260830",
       "payload": {
         "sourceRecordId": "SET-SRC-IDX-FF7AA1CC9DD8",
-        "disposition": "needs-evidence",
-        "targetRef": null,
-        "reason": "source kind is retained but not yet mapped by schema version 0.1.0"
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS5a",
+        "reason": "the reviewed Thai AS5a record and exact card evidence establish this local set"
       }
     },
     {
@@ -128976,6 +129870,17 @@
         "disposition": "mapped",
         "targetRef": "LOCALSET:TW:sH%20F",
         "reason": "positive Traditional Chinese source-first records establish this local set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS5a",
+        "reason": "positive Thai source-first records establish this local set"
       }
     },
     {
@@ -137966,7 +138871,7 @@
     {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-IDX-FF7AA1CC9DD8",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-thai-as5a-20260830",
       "payload": {
         "sourceRecordId": "SET-SRC-IDX-FF7AA1CC9DD8",
         "sourceKind": "locality-set-index-record",
@@ -137982,12 +138887,14 @@
           "englishName": "Double Burst",
           "indonesianName": null,
           "series": "Sun and Moon",
-          "releaseDate": null,
+          "releaseDate": "February 27, 2020",
           "indexCoverage": "Bulbapedia tags this table {{outdated}} — \"needs=updated list of booster packs since SWSH\" — so it stops in the Sun & Moon era. Thai Sword & Shield-era codes this repository already holds are absent from the index because the article never listed them, not because they do not exist. Never read this index as a catalogue of Thai releases.",
-          "snorlaxExaminationState": "not-examined",
-          "snorlaxPrintIds": [],
+          "snorlaxExaminationState": "examined-snorlax-found",
+          "snorlaxPrintIds": [
+            "TH:AS5a:142/184:base"
+          ],
           "snorlaxUnitIds": [],
-          "examinationBasis": "no Snorlax has been established for this code. This source cannot distinguish a set with no Snorlax from a set it does not list, and it is explicitly outdated, so the state is 'not examined' and never an absence."
+          "examinationBasis": "the reviewed positive Thai AS5a card evidence establishes Snorlax 142/184; this is not an absence or complete-set claim"
         }
       }
     },
@@ -142739,6 +143646,54 @@
           "cardImageUrls": [
             "https://asia.pokemon-card.com/tw/card-img/tw00002051.png"
           ]
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "mixed-positive-evidence",
+        "providerRecordKey": "TH\u001fAS5a",
+        "retrieved": "2026-08-30",
+        "raw": {
+          "localCode": "AS5a",
+          "localName": "Double Burst Set A",
+          "locality": "TH",
+          "languages": [
+            "Thai"
+          ],
+          "scripts": [
+            "Thai"
+          ],
+          "printIds": [
+            "TH:AS5a:142/184:base"
+          ],
+          "providers": [
+            "bulbapedia",
+            "ojama-card",
+            "pokemon-card-asia"
+          ],
+          "sourceUrls": [
+            "https://asia.pokemon-card.com/th/archive/card/sun_moon_series/booster_pack_5a.html",
+            "https://asia.pokemon-card.com/th/archive/card/pdf/AS5a.pdf",
+            "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+            "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Double_Burst_142)",
+            "https://ojamacard.com/product/21823/142-184-%E0%B8%84%E0%B8%B2%E0%B8%9A%E0%B8%B4%E0%B8%81%E0%B8%AD%E0%B8%99-r-as5a",
+            "https://ojamacard.com/product/tag/as4a?tskp=12"
+          ],
+          "printedSetSize": 184,
+          "printedSetSizeBasis": "the denominator printed on both retained Thai cards",
+          "localeSuffix": null,
+          "observedCollectorNumbers": [
+            "142/184"
+          ],
+          "observedCoverage": "one exact positive Thai Snorlax card, not an enumeration of the set",
+          "markAssetUrls": [],
+          "cardImageUrls": []
         }
       }
     },
@@ -156463,10 +157418,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:09f26361995a28419ad8840f",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -157247,6 +158204,16 @@
       "toType": "card-release",
       "toId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
       "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:366f02062d82aa50ce525a27",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -158089,10 +159056,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:72c905f18ac5b686a43657cc",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -159638,6 +160607,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:e4cc28356cd82ec3049d3171",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:e573b3ea832d59cd6151bfe9",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -166924,6 +167903,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TH:AS5a:142/184:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:TH:MA3:136/193:V1",
       "relation": "materializes",
       "toType": "card-release",
@@ -168830,6 +169819,246 @@
       "toId": "PHYSICAL:F0604-P02",
       "provenance": {
         "specimenId": "SPEC-0410"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0412",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
+      "provenance": {
+        "specimenId": "SPEC-0412"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0413",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74",
+      "provenance": {
+        "specimenId": "SPEC-0413"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0414",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:F0402-P02",
+      "provenance": {
+        "specimenId": "SPEC-0414"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0415",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+      "provenance": {
+        "specimenId": "SPEC-0415"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0416",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b",
+      "provenance": {
+        "specimenId": "SPEC-0416"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0417",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb",
+      "provenance": {
+        "specimenId": "SPEC-0417"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0418",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:15354761ea1c0200cce43614",
+      "provenance": {
+        "specimenId": "SPEC-0418"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0419",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf",
+      "provenance": {
+        "specimenId": "SPEC-0419"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0420",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad",
+      "provenance": {
+        "specimenId": "SPEC-0420"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0421",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa",
+      "provenance": {
+        "specimenId": "SPEC-0421"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0422",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758",
+      "provenance": {
+        "specimenId": "SPEC-0422"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0423",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:fd846e7e313f2d9939f46245",
+      "provenance": {
+        "specimenId": "SPEC-0423"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0424",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+      "provenance": {
+        "specimenId": "SPEC-0424"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0425",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+      "provenance": {
+        "specimenId": "SPEC-0425"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0426",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0426",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0427",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0427",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0428",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0428",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0429",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0429",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0430",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0430",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0431",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05",
+      "provenance": {
+        "specimenId": "SPEC-0431"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0432",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a",
+      "provenance": {
+        "specimenId": "SPEC-0432"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0433",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
+      "provenance": {
+        "specimenId": "SPEC-0433"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0434",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+      "provenance": {
+        "specimenId": "SPEC-0434"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0435",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37",
+      "provenance": {
+        "specimenId": "SPEC-0435"
       }
     },
     {
@@ -172726,6 +173955,25 @@
         "state": "mapped",
         "sourceRecordId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
         "basis": "the official article names Hop's Snorlax and describes Extra Helpings plus its 170-damage attack; the exact LA asset carries their Spanish translation"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {
+        "state": "mapped",
+        "basis": "exact Thai printed attacks and card traits"
       }
     },
     {
@@ -186334,6 +187582,22 @@
       "relation": "references",
       "toType": "card-release",
       "toId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
       "provenance": {}
     },
     {
@@ -203326,6 +204590,22 @@
     },
     {
       "fromType": "local-set",
+      "fromId": "LOCALSET:TH:AS5a",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-IDX-FF7AA1CC9DD8",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:TH:AS5a",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
       "fromId": "LOCALSET:TH:MA3",
       "relation": "observed-by",
       "toType": "set-source-record",
@@ -211166,6 +212446,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:09f26361995a28419ad8840f",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:0a3e0446997baf12f8afa5ec",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -212094,6 +213390,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:366f02062d82aa50ce525a27",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:sm10:076/095:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:381b77be9971497ec417f3dd",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -212970,6 +214282,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:German:SSH:142:Snorlax-VMAX-G-Max-Fall",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:72c905f18ac5b686a43657cc",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
       "provenance": {}
     },
     {
@@ -214734,6 +216062,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:e573b3ea832d59cd6151bfe9",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSM2bC:124:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:ea2fd98ddbbeb061071ece18",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -215274,6 +216618,86 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:S10a F:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0426",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0426",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0426",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0427",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0427",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0427",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0428",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0428",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0428",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0429",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0429",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0429",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0430",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0430",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0430",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
       "provenance": {}
     },
     {
@@ -224494,6 +225918,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue262:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -229821,6 +231261,25 @@
       "relation": "localized-as",
       "toType": "localization",
       "toId": "LOCALIZATION:LATAM:es-419",
+      "provenance": {
+        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "reviewedAt": "2026-08-24"
+      }
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TH:Thai:AS5a",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:TH:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TH:Thai:AS5a",
+      "relation": "localized-as",
+      "toType": "localization",
+      "toId": "LOCALIZATION:TH:th",
       "provenance": {
         "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
         "reviewedAt": "2026-08-24"
@@ -239649,6 +241108,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-FF18D916CB31",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-FF7AA1CC9DD8",
       "provenance": {}
     },
     {
@@ -253065,8 +254532,15 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0067-P03",
       "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0067-P04",
+      "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -253094,21 +254568,21 @@
       "sourceId": "F0071-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0072-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0072-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -256230,7 +257704,7 @@
       "sourceId": "F0402-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0402-P02",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -256249,6 +257723,13 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0403-P02",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0403-P03",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "finish printing record carries positive evidence"
@@ -257504,14 +258985,14 @@
       "sourceId": "F0569-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0569-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -257525,14 +259006,14 @@
       "sourceId": "F0570-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:15354761ea1c0200cce43614",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0570-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -257546,14 +259027,14 @@
       "sourceId": "F0571-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0571-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -257567,14 +259048,14 @@
       "sourceId": "F0572-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:789a20a646058e0b1ef717ad",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0572-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -257588,14 +259069,14 @@
       "sourceId": "F0573-P02",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0573-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:fd846e7e313f2d9939f46245",
-      "reason": "finish printing record carries positive evidence"
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -257607,16 +259088,16 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0574-P02",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0574-P03",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -269425,9 +270906,9 @@
     {
       "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-IDX-FF7AA1CC9DD8",
-      "disposition": "needs-evidence",
-      "targetRef": null,
-      "reason": "source kind is retained but not yet mapped by schema version 0.1.0"
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS5a",
+      "reason": "the reviewed Thai AS5a record and exact card evidence establish this local set"
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -270138,6 +271619,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SF-FF7AA1CC9DD8",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS5a",
+      "reason": "positive Thai source-first records establish this local set"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-SIZE-099BDAFEE0A2",
       "disposition": "needs-evidence",
       "targetRef": null,
@@ -270674,6 +272162,13 @@
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
       "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:AS5a:142/184:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "reason": "positive exact Thai card record and retained image"
     },
     {
       "sourceKind": "source-first-record",
@@ -272018,29 +273513,197 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:F0604-P02, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0412",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:dc803616f45a4fe1b0d6255a, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0413",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:4a4581875b1ce9231cd57c74, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0414",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:F0402-P02, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0415",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:366f02062d82aa50ce525a27, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0416",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:bfb6088d93a4adbc3acfcd3b, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0417",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:a1af0c02ed63942cc9f681cb, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0418",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:15354761ea1c0200cce43614, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0419",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:aaac040713b4100e2a55dbbf, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0420",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:789a20a646058e0b1ef717ad, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0421",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:fa4d5a727feda2a4b6d844fa, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0422",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0423",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:fd846e7e313f2d9939f46245, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0424",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:72c905f18ac5b686a43657cc, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0425",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:09f26361995a28419ad8840f, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0426",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0426",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0427",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0427",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0428",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0428",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0429",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0429",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0430",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0430",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0431",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:829e747389fc5b6b3b9d0e05, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0432",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:3cf2685cb9d1b9dd0a6b003a, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0433",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0434",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0435",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:9727a5b1e6fdff1ecf941a37, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 7547,
-    "edges": 11345,
-    "migrationInputs": 2613,
+    "entities": 7590,
+    "edges": 11401,
+    "migrationInputs": 2641,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 240,
+      "candidate-needs-evidence": 257,
       "carried": 67,
-      "established-and-mapped": 1467,
+      "established-and-mapped": 1477,
       "linked-local-counterpart": 86,
-      "mapped": 279,
-      "needs-evidence": 127,
+      "mapped": 281,
+      "needs-evidence": 126,
       "needs-positive-local-identity": 55,
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1866,
-    "cardReleases": 635,
-    "physicalPrintings": 695,
-    "setSourceRecords": 408,
-    "setSourceDispositions": 408,
+    "candidateClaims": 1893,
+    "cardReleases": 636,
+    "physicalPrintings": 704,
+    "setSourceRecords": 409,
+    "setSourceDispositions": 409,
     "localizations": 16
   }
 }

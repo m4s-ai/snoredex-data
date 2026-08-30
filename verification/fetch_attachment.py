@@ -53,6 +53,7 @@ USAGE
 
     python verification/fetch_attachment.py --list
     python verification/fetch_attachment.py --issue 269 --manifest verification/evidence/issue-269.json
+    python verification/fetch_attachment.py --manifest verification/evidence/owner-photos.json
     python scripts/regen.py
     python verification/fetch_attachment.py --evidence-check
     python verification/fetch_attachment.py --specimen SPEC-0001 --from ~/SPEC-0001.jpg \
@@ -642,6 +643,8 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
     }
     if physical is not None:
         record["physicalObservation"] = physical
+    if item.get("allowUnprojected") is True:
+        record["allowUnprojected"] = True
     if listing_url:
         record["listingUrl"] = listing_url
     if allow_small:
@@ -702,8 +705,12 @@ def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[d
         raise
 
 
-def command_issue(doc: dict, args: argparse.Namespace) -> int:
-    """Import an issue's images from one explicit observation manifest."""
+def manifest_issue_context(args: argparse.Namespace) -> tuple[str | None, list[tuple[str, list[str]]]]:
+    """Load issue attachment candidates, or validate a direct-source manifest invocation."""
+    if not args.issue:
+        if args.issue_html:
+            fail("--issue-html requires --issue")
+        return None, []
     issue_url = f"https://github.com/m4s-ai/snoredex-data/issues/{args.issue}"
     html = (
         Path(args.issue_html).read_text(encoding="utf-8")
@@ -713,6 +720,51 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
     attachments = issue_attachments(html)
     if not attachments:
         fail(f"no image attachments found in issue #{args.issue}")
+    return issue_url, attachments
+
+
+def acquire_manifest_image(
+    item: dict, ordinal: int, issue_url: str | None,
+    attachments: list[tuple[str, list[str]]],
+) -> tuple[bytes, str, str, str]:
+    """Acquire one manifest image and return bytes, provenance, lookup key, and label."""
+    if issue_url:
+        stable, candidates = select_issue_attachment(
+            attachments, item.get("attachment", item.get("attachmentIndex")), ordinal
+        )
+        selected_position = next(
+            position for position, (candidate_stable, _) in enumerate(attachments, 1)
+            if candidate_stable == stable
+        )
+        provenance = canonical_issue_attachment_provenance(
+            issue_url, stable, selected_position
+        )
+        return download_candidates(candidates), provenance, stable, f"attachment {selected_position}"
+    source = item.get("attachment")
+    if not isinstance(source, str) or not source:
+        fail(f"manifest row {ordinal} needs attachment PATH|URL")
+    provenance = item.get("photographSource") or source
+    if not isinstance(provenance, str) or not provenance:
+        fail(f"manifest row {ordinal} needs text photographSource")
+    return acquire(source), provenance, provenance, source
+
+
+def manifest_target_exists(source_first_release: dict | None, variant: str, item: dict) -> bool:
+    """Accept a canonical base target or an explicit candidate awaiting source discovery."""
+    return (
+        (source_first_release is not None and variant == "base")
+        or item.get("allowUnprojected") is True
+    )
+
+
+def unprojected_finish_is_missing(specimen: dict, source_first_release: dict | None) -> bool:
+    """Return whether an observed specimen should already have a projected finish unit."""
+    return source_first_release is None and specimen.get("allowUnprojected") is not True
+
+
+def command_issue(doc: dict, args: argparse.Namespace) -> int:
+    """Import reviewed manifest images from an issue or direct local/URL sources."""
+    issue_url, attachments = manifest_issue_context(args)
 
     manifest = json.loads(Path(args.manifest).read_text(encoding="utf-8-sig"))
     observations = manifest.get("observations") if isinstance(manifest, dict) else manifest
@@ -749,17 +801,10 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
     for ordinal, item in enumerate(observations, 1):
         if not isinstance(item, dict):
             fail(f"manifest observation {ordinal} is not an object")
-        stable, candidates = select_issue_attachment(
-            attachments, item.get("attachment", item.get("attachmentIndex")), ordinal
+        blob, provenance, lookup_source, source_label = acquire_manifest_image(
+            item, ordinal, issue_url, attachments
         )
-        selected_position = next(
-            position for position, (candidate_stable, _) in enumerate(attachments, 1)
-            if candidate_stable == stable
-        )
-        provenance = canonical_issue_attachment_provenance(
-            issue_url, stable, selected_position
-        )
-        existing = existing_by_source.get(provenance) or existing_by_source.get(stable)
+        existing = existing_by_source.get(provenance) or existing_by_source.get(lookup_source)
         specimen_id = validate_specimen_id(
             item.get("specimenId") or (existing or {}).get("specimenId") or next_id
         )
@@ -779,7 +824,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
             source_first_release = source_first_release_for(
                 source_first_releases, item.get("setCode"), number, item.get("language")
             )
-            if source_first_release is None or variant != "base":
+            if not manifest_target_exists(source_first_release, variant, item):
                 fail(f"manifest row for {specimen_id} has no canonical finish unit or source-first release")
         elif not any(str(product.get("variant")) == variant
                      and product.get("claimStatus") != "contradicted"
@@ -788,7 +833,6 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
         ensure_cited_identity(current, item)
 
-        blob = download_candidates(candidates)
         ext, size = validate(blob, args.allow_small)
         filename = f"{specimen_id}.{ext}"
         destination = SPECIMEN_DIR / filename
@@ -825,13 +869,14 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
                 fail(f"{specimen_id} already has a photograph; pass --replace to overwrite it")
         records.append(record)
         prepared.append((destination, blob))
-        print(f"prepared {specimen_id}: {size[0]}x{size[1]} {ext} from attachment {selected_position}")
+        print(f"prepared {specimen_id}: {size[0]}x{size[1]} {ext} from {source_label}")
 
+    source_description = f"issue #{args.issue}" if args.issue else "direct manifest sources"
     if args.dry_run:
-        print(f"DRY RUN — would import {len(records)} specimen(s) from issue #{args.issue}")
+        print(f"DRY RUN — would import {len(records)} specimen(s) from {source_description}")
         return 0
     commit_import(doc, prepared, records)
-    print(f"imported {len(records)} specimen(s) from issue #{args.issue}")
+    print(f"imported {len(records)} specimen(s) from {source_description}")
     result = command_evidence_check(check_projection=False)
     if result == 0:
         print("next: python scripts/regen.py && "
@@ -907,7 +952,7 @@ def command_evidence_check(*, check_projection: bool = True) -> int:
             except (OSError, ValueError, TypeError, KeyError) as error:
                 source_first = None
                 errors.append(f"{specimen['specimenId']}: source-first identity check failed: {error}")
-            if source_first is None:
+            if unprojected_finish_is_missing(specimen, source_first):
                 errors.append(f"{specimen['specimenId']}: finish unit is missing")
             continue
         if not any(specimen["specimenId"] in (printing.get("specimenIds") or [])
@@ -971,7 +1016,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--issue", type=int, metavar="NUMBER",
                         help="import all selected images from a repository issue")
     parser.add_argument("--manifest", metavar="PATH",
-                        help="JSON observation manifest for --issue")
+                        help="JSON observation manifest for --issue or direct PATH|URL sources")
     parser.add_argument("--issue-html", metavar="PATH",
                         help="offline issue HTML fixture (tests and dry runs)")
     parser.add_argument("--evidence-check", action="store_true",
@@ -983,17 +1028,17 @@ def main(argv: list[str] | None = None) -> int:
         return command_list(doc)
     if args.evidence_check:
         return command_evidence_check()
-    if args.issue:
+    if args.manifest:
         if args.specimen or args.source:
-            parser.error("--issue cannot be combined with --specimen or --from")
-        if not args.manifest:
-            parser.error("--issue requires --manifest")
+            parser.error("--manifest cannot be combined with --specimen or --from")
         try:
             return command_issue(doc, args)
         except SourceUnreachable as error:
             print(f"UNREACHABLE: {error}", file=sys.stderr)
             print("The bytes are missing, not wrong — retry rather than investigate.", file=sys.stderr)
             return 2
+    if args.issue:
+        parser.error("--issue requires --manifest")
     if not args.specimen or not args.source:
         parser.error("--specimen and --from are both required (or use --list)")
 

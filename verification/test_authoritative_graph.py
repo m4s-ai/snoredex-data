@@ -23,6 +23,12 @@ def main() -> None:
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
     }) == [{"kind": "edition-stamp", "role": "print-identity", "text": "EDIZIONE 1"}]
+    assert graph_module.specimen_observation_field_matches(
+        {}, {"cardSize": "standard"}, "cardSize"
+    )
+    assert not graph_module.specimen_observation_field_matches(
+        {"cardSize": "jumbo"}, {"cardSize": "standard"}, "cardSize"
+    )
     repaired_releases = [
         row["payload"] for row in graph["entities"] if row["entityType"] == "card-release"
     ]

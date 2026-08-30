@@ -3,19 +3,19 @@
   "schemaVersion": "1.1.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
-  "generated": "2026-08-28",
-  "projectionVersion": "7bc797626836991ac540003f831d04e3b62712e8292051efb6a13b2765ffb623",
+  "generated": "2026-08-29",
+  "projectionVersion": "0c97195f62347045a30399c96581ea0acd8411f922dedf5f93a5ae0fe9433470",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 257,
+    "groups": 258,
     "mappedWorks": 39,
     "mappedAppearances": 181,
-    "unmappedReleases": 76,
-    "cardReleases": 635,
-    "physicalPrintings": 695,
-    "sourceObservations": 2269
+    "unmappedReleases": 77,
+    "cardReleases": 636,
+    "physicalPrintings": 704,
+    "sourceObservations": 2311
   },
   "groups": [
     {
@@ -36798,7 +36798,7 @@
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": {
                 "kind": "fixed-deck",
                 "name": "Battle Party foil deck"
@@ -36809,7 +36809,25 @@
               "sourceFinishUnitId": "F0072",
               "sourcePrintingId": "F0072-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:3cf2685cb9d1b9dd0a6b003a",
+              "specimenIds": [
+                "SPEC-0432"
+              ],
               "sources": [
+                {
+                  "url": "https://drive.google.com/file/d/1thcVf7KDJq0IwhwLvNfxNKLTnDKWfQDb/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax and the printed identifier CSMPhC 009/024, represented by the repository's legacy key CSMPC h009. A continuous reflective foil treatment is visible across the card frame, and the collection-owner checklist labels this specimen the foil deck printing. Retained as SPEC-0432.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                },
                 {
                   "url": "https://www.pokemon.cn/tcg/product/15951.html",
                   "sourceType": "Official Mainland China Simplified Chinese product specification",
@@ -36831,7 +36849,7 @@
               "finish": "non-holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": {
                 "kind": "fixed-deck",
                 "name": "Battle Party ordinary deck"
@@ -36842,7 +36860,25 @@
               "sourceFinishUnitId": "F0072",
               "sourcePrintingId": "F0072-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:829e747389fc5b6b3b9d0e05",
+              "specimenIds": [
+                "SPEC-0431"
+              ],
               "sources": [
+                {
+                  "url": "https://drive.google.com/file/d/1IT15qTjdyZuXg1OEg6pFFpJmPt0CFUyy/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax and the printed identifier CSMPhC 009/024, represented by the repository's legacy key CSMPC h009. The collection-owner checklist labels this specimen Non-Holo. Retained as SPEC-0431.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                },
                 {
                   "url": "https://www.pokemon.cn/tcg/product/15951.html",
                   "sourceType": "Official Mainland China Simplified Chinese product specification",
@@ -36884,21 +36920,57 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0072-P01:0:764711ef10dfa24b",
+              "observationId": "finish:F0072-P01:0:4796108ebc75329d",
               "kind": "finish",
-              "provider": "Official Mainland China Simplified Chinese product specification",
-              "url": "https://www.pokemon.cn/tcg/product/15951.html",
-              "evidence": "The official Battle Party specification describes ordinary and foil packs with the same card contents and different processing, positively establishing both flat and foil copies of each included deck card.",
-              "contentHash": "dd4cfa16d7da9a00aba94d212214ede792eb1ab23cf214b735abfabc490496cc",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1IT15qTjdyZuXg1OEg6pFFpJmPt0CFUyy/view",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax and the printed identifier CSMPhC 009/024, represented by the repository's legacy key CSMPC h009. The collection-owner checklist labels this specimen Non-Holo. Retained as SPEC-0431.",
+              "contentHash": "3560936a3c64a5898aa0bea90bfaa5bf03dad7a2e221339b20ba25e639e05d4e",
               "image": null
             },
             {
-              "observationId": "finish:F0072-P02:0:764711ef10dfa24b",
+              "observationId": "finish:F0072-P01:1:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "41fd98808ce48b01a9b75863221d72da463ac60327d6067cec249ccd729fe148",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0072-P01:2:764711ef10dfa24b",
               "kind": "finish",
               "provider": "Official Mainland China Simplified Chinese product specification",
               "url": "https://www.pokemon.cn/tcg/product/15951.html",
               "evidence": "The official Battle Party specification describes ordinary and foil packs with the same card contents and different processing, positively establishing both flat and foil copies of each included deck card.",
-              "contentHash": "6afc8ad8f27ade35c00a1538faa3391db1fe77b6474419d34865060e63d1b297",
+              "contentHash": "a7bd02285257b8bf458aa7cc0bca664c8ea273958092620b23be5b17ed83935d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0072-P02:0:6431e3b8adf2794c",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1thcVf7KDJq0IwhwLvNfxNKLTnDKWfQDb/view",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax and the printed identifier CSMPhC 009/024, represented by the repository's legacy key CSMPC h009. A continuous reflective foil treatment is visible across the card frame, and the collection-owner checklist labels this specimen the foil deck printing. Retained as SPEC-0432.",
+              "contentHash": "a610eab12ac63a4b6217758b7a6f6e4c0f3a9316f0a0b91c4cd6f9dd1345518d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0072-P02:1:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "a712da6abf2fd7377ff0fac87cf83046b11870d48728f6601b81af6944015f52",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0072-P02:2:764711ef10dfa24b",
+              "kind": "finish",
+              "provider": "Official Mainland China Simplified Chinese product specification",
+              "url": "https://www.pokemon.cn/tcg/product/15951.html",
+              "evidence": "The official Battle Party specification describes ordinary and foil packs with the same card contents and different processing, positively establishing both flat and foil copies of each included deck card.",
+              "contentHash": "4c7866100f3f001f3df2a10c1bc00b54aa86d605d85cdcef9b55ed544c1a9da8",
               "image": null
             },
             {
@@ -36954,7 +37026,7 @@
               "finish": "non-holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": {
                 "kind": "fixed-deck",
                 "name": "Shining Synergy GX Starter Deck"
@@ -36965,7 +37037,25 @@
               "sourceFinishUnitId": "F0071",
               "sourcePrintingId": "F0071-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:9727a5b1e6fdff1ecf941a37",
+              "specimenIds": [
+                "SPEC-0435"
+              ],
               "sources": [
+                {
+                  "url": "https://drive.google.com/file/d/1gcQJEVk4_mtGLC4EEGxDi1X7iA1rfMaa/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2DC 213/342, Illus. kanahei. The collection-owner checklist labels this specimen Non-Holo. Retained as SPEC-0435.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                },
                 {
                   "url": "https://www.pokemon.cn/tcg/product/16344.html",
                   "sourceType": "Official Mainland China Simplified Chinese product specification",
@@ -37006,12 +37096,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0071-P01:0:ef8d0f3ac618b552",
+              "observationId": "finish:F0071-P01:0:f949dacf555c831c",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1gcQJEVk4_mtGLC4EEGxDi1X7iA1rfMaa/view",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2DC 213/342, Illus. kanahei. The collection-owner checklist labels this specimen Non-Holo. Retained as SPEC-0435.",
+              "contentHash": "083cb3282ab66e3bfb0e5b7ac8e95f438acf867a6b11d02582116af621a47e06",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0071-P01:1:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "3394884b85be4176e011172aef5486dc0eb1e55167742b0924fc26b94644002f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0071-P01:2:ef8d0f3ac618b552",
               "kind": "finish",
               "provider": "Official Mainland China Simplified Chinese product specification",
               "url": "https://www.pokemon.cn/tcg/product/16344.html",
               "evidence": "The official Shining Synergy GX starter-deck specification states that all 60 constructed-deck cards, drawn from its named 351-card pool, are 平卡 (non-holo).",
-              "contentHash": "c28dcae06b6ff94517ca0911cc0f53773c4136d97796b45bc8753b3ec47d2946",
+              "contentHash": "455a92aef2d787d04bb16ee52ac2d57aad378e3e9d50f5e90f5598b09a88d9b5",
               "image": null
             },
             {
@@ -37098,6 +37206,9 @@
               "sourceFinishUnitId": "F0569",
               "sourcePrintingId": "F0569-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:4a4581875b1ce9231cd57c74",
+              "specimenIds": [
+                "SPEC-0413"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
@@ -37108,6 +37219,21 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1JzXXNGRri69XB28zOAJsA1pY3CIKftJb/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads English Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0413.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
@@ -37139,11 +37265,29 @@
               "sourceFinishUnitId": "F0569",
               "sourcePrintingId": "F0569-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:dc803616f45a4fe1b0d6255a",
+              "specimenIds": [
+                "SPEC-0412"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1nYeCM-wL3Q_CSSkX3aeZwGVPoiBGCZA_/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads English Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0412.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
@@ -37204,16 +37348,34 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "7c4515f5c75f801c058b42e31929e1ac159ec06d2ff6c33f6286ef55156a6830",
+              "contentHash": "51fd56dca2ffbe2ae337edd77d10f74a29108871f7431484dda9e222b4d8c06c",
               "image": null
             },
             {
-              "observationId": "finish:F0569-P02:1:b60e3830f56e09be",
+              "observationId": "finish:F0569-P02:1:ee4a6955689e92b8",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1nYeCM-wL3Q_CSSkX3aeZwGVPoiBGCZA_/view",
+              "evidence": "The retained full-card photograph reads English Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0412.",
+              "contentHash": "0d74f6011e3227bbc19a12f866edc55339c6e76824d6f9299c496c27542aa442",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0569-P02:2:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "93fdc9f25964f44951f3e53194c43f4951100974a0a84e4b7650f1458d8ff01c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0569-P02:3:b60e3830f56e09be",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "8fe1ca2f10aa9feb0ec2464a120507d6c42acea055433bc987aaf2390ebb6e5e",
+              "contentHash": "b1720aef3437fcc5f33efa681b36780a52ccb67ccdfbc7fefe5bb660fa0fb6e9",
               "image": null
             },
             {
@@ -37222,7 +37384,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "a5111dca02f333578e3ebfca5ae5ac021dc4824065de07bacae62b6e054d61a8",
+              "contentHash": "898e742cccfba3a78f71f651bd085ed596562816259630a22031fb06146ba6f3",
               "image": null
             },
             {
@@ -37231,16 +37393,34 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "36172f6867e373a69b0e476d938bdcd2884d1449a83c067a09b4a307a9cb11e8",
+              "contentHash": "5e6fe0ddc87d88489b1757f69c62fa017fc0080ea6a91d8c2b430ec0b7920dd4",
               "image": null
             },
             {
-              "observationId": "finish:F0569-P03:2:b60e3830f56e09be",
+              "observationId": "finish:F0569-P03:2:b3e235d0dc2698ae",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1JzXXNGRri69XB28zOAJsA1pY3CIKftJb/view",
+              "evidence": "The retained full-card photograph reads English Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0413.",
+              "contentHash": "ca1417db8fa8ad4282dde2e35067c63a4182ece5fe17bfbd3be1b6fe2a1e953b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0569-P03:3:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "d78ba060258e6ba87cbe5362c39675cb80be657031a419cc6279cf30fda71b81",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0569-P03:4:b60e3830f56e09be",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "77789830b1227a8ee17fd6d7f36159751f282af860a1cdd9f14fb9b41d16f117",
+              "contentHash": "444b665fdf1ac85ad9ba02e9aebeffc2a62ab809c89c874e48a21d6dd923d21c",
               "image": null
             },
             {
@@ -37312,11 +37492,29 @@
               "sourceFinishUnitId": "F0570",
               "sourcePrintingId": "F0570-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:15354761ea1c0200cce43614",
+              "specimenIds": [
+                "SPEC-0418"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1Sk_ZC_2sbCgMWBVIdoaVhM0GpblqUnSn/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads French Ronflex, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0418.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
@@ -37348,6 +37546,9 @@
               "sourceFinishUnitId": "F0570",
               "sourcePrintingId": "F0570-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:aaac040713b4100e2a55dbbf",
+              "specimenIds": [
+                "SPEC-0419"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
@@ -37358,6 +37559,21 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/16cU6VpJUSGqAEnBJyRSm74Sdph8cNMyY/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads French Ronflex, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0419.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
@@ -37418,16 +37634,34 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "36e1717d6f2a80c6221166e736fe59c139ae02c74ad98e6bc500ec93ffacb6c3",
+              "contentHash": "1fecd70ab359fc9c805ff63509d021fb08609fad82f7c255b2b74a4068313a66",
               "image": null
             },
             {
-              "observationId": "finish:F0570-P02:1:c56e55b5eca3d423",
+              "observationId": "finish:F0570-P02:1:4e932de17aade043",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1Sk_ZC_2sbCgMWBVIdoaVhM0GpblqUnSn/view",
+              "evidence": "The retained full-card photograph reads French Ronflex, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0418.",
+              "contentHash": "f1e1c5578089b779bbe3b58afeaeee16153934cf62ef9118e44a3ee9538d7bbe",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0570-P02:2:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "a5b83016c63a9da73df54fb626edb614818de6ec6afa5440a278f380f32f1229",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0570-P02:3:c56e55b5eca3d423",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "9c4d207c2a9e4ae275b9329078350e04afe54dc1e542208827f424a6d1291379",
+              "contentHash": "d5ef95b915a657b6bd7b500d58f43ecfe5881ba898c7a0ce7b6b3d6e43cac9b4",
               "image": null
             },
             {
@@ -37436,7 +37670,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "36544b4492668772927eacf4319bc80d0fb880ac80af4957f33bfa76e3d55041",
+              "contentHash": "19f7531e6c78e35f787418613c73ca5d534a30cf91efa9531a93e18f01974e5f",
               "image": null
             },
             {
@@ -37445,16 +37679,34 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "559816d6f0e450636f68153b33ddddc16cc71a0716257f72dbfb831d27459c21",
+              "contentHash": "879c7c61cefa3d9dab53bd1429b12f67ab210e2d13ca339e7b37e0a52a48e1fe",
               "image": null
             },
             {
-              "observationId": "finish:F0570-P03:2:c56e55b5eca3d423",
+              "observationId": "finish:F0570-P03:2:a96c82aafe1cb8de",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/16cU6VpJUSGqAEnBJyRSm74Sdph8cNMyY/view",
+              "evidence": "The retained full-card photograph reads French Ronflex, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0419.",
+              "contentHash": "1cdf029e354c2f3a49fb81c9604ed61d6db8cb353bf11692405734e473349318",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0570-P03:3:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "b01b6584059f65a2ef389144b36f80a4b0a0934bd12e0c3ae6a6d53939271a10",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0570-P03:4:c56e55b5eca3d423",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "d497c36e26463479176dd12e5324afff18be7a163ef14c5d5f7e7e898b594f48",
+              "contentHash": "800f2b060c2697b9824c163d9bbea166e034a0865db5d65a028e9222e0bb1cc8",
               "image": null
             },
             {
@@ -37526,6 +37778,9 @@
               "sourceFinishUnitId": "F0571",
               "sourcePrintingId": "F0571-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:a1af0c02ed63942cc9f681cb",
+              "specimenIds": [
+                "SPEC-0417"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
@@ -37536,6 +37791,21 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1hnxxpXEny4Sxl00FqtYrKv8xsdbV4ULr/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads German Relaxo, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0417.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
@@ -37567,11 +37837,29 @@
               "sourceFinishUnitId": "F0571",
               "sourcePrintingId": "F0571-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:bfb6088d93a4adbc3acfcd3b",
+              "specimenIds": [
+                "SPEC-0416"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1H0hYxX1kU7qqk4YST3kXo5SQgpV3Eoiz/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads German Relaxo, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0416.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
@@ -37632,16 +37920,34 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "26795320f05e5ad6fe474f228756d608b038c20192751df394c49d83ff2127d6",
+              "contentHash": "2d0090df33b7d234c7c145a291bd8ceba93cfd4604e8c9536a6b7116ed5b81b0",
               "image": null
             },
             {
-              "observationId": "finish:F0571-P02:1:2e03a3064fec2f42",
+              "observationId": "finish:F0571-P02:1:b1cc20be1a4c7863",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1H0hYxX1kU7qqk4YST3kXo5SQgpV3Eoiz/view",
+              "evidence": "The retained full-card photograph reads German Relaxo, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0416.",
+              "contentHash": "00b8a44c2f42ecb51ac51ea598cca7766d93571466c486b5599af37ae19d450d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0571-P02:2:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "b4d1deea5c926d2deb75d6c6f4f3ae9b4626795bd3f0fe1ac4f977f40574dad8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0571-P02:3:2e03a3064fec2f42",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "132b1e73920e270b353122b2b77d3dd027e6c2b5140376f6ce9e4cbf617bbd4e",
+              "contentHash": "59a3e207787405670720c904dbae0517f81e481929f66bc15fed82277432bffd",
               "image": null
             },
             {
@@ -37650,7 +37956,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "435fcef69c811c5277395dd0fa3211a85a28c2c8ae8e99742398c616691ad476",
+              "contentHash": "133057e9426146ea712b6c223f38be604a492b4b44bf2bdfe232785442810575",
               "image": null
             },
             {
@@ -37659,16 +37965,34 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "3d9668edb8d5ba25225c15747ea00d85aebfeae13eac4fc76cd38a6ec0104394",
+              "contentHash": "943e15a77fba2b6bb60606113809d17560c6a4326cd77ab47b4d690f08e78b6a",
               "image": null
             },
             {
-              "observationId": "finish:F0571-P03:2:2e03a3064fec2f42",
+              "observationId": "finish:F0571-P03:2:b5898b8edd4bf801",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1hnxxpXEny4Sxl00FqtYrKv8xsdbV4ULr/view",
+              "evidence": "The retained full-card photograph reads German Relaxo, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0417.",
+              "contentHash": "a9586fa89742ff6bf1351844b313113467e161e346b3cf04fc83eb3d8f9b9f90",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0571-P03:3:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "1e28be652977ed1473c96bea6ca387111a72c13fb8095e6b69d51cd19b47bcd6",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0571-P03:4:2e03a3064fec2f42",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "edb9681ba13207c2b946f42cfd3e72ab8c9c4682b63a1b748724912697c08d57",
+              "contentHash": "23e3fc342773d045ab69c141ac1d4bccf756caa3da4e3e3d95f47d35530b4012",
               "image": null
             },
             {
@@ -37740,11 +38064,29 @@
               "sourceFinishUnitId": "F0572",
               "sourcePrintingId": "F0572-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:789a20a646058e0b1ef717ad",
+              "specimenIds": [
+                "SPEC-0420"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1-SEz7Lm9ld6FYzWXmVpyzruvu5LiWqth/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Italian Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0420.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
@@ -37776,6 +38118,9 @@
               "sourceFinishUnitId": "F0572",
               "sourcePrintingId": "F0572-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:fa4d5a727feda2a4b6d844fa",
+              "specimenIds": [
+                "SPEC-0421"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
@@ -37786,6 +38131,21 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1GwN3F5EFC2fwEyXK5Z5ziX1C9eANLV9Z/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Italian Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0421.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
@@ -37846,16 +38206,34 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "e97c19c7349e5553d9d171248dc19f94d15eb768e60f3c2253deb43c477f13f6",
+              "contentHash": "ff9d30185091757f4aa8dfc01658dd03cceeb92b46d5d5faac106afa84d7305b",
               "image": null
             },
             {
-              "observationId": "finish:F0572-P02:1:efc42f97e217ba65",
+              "observationId": "finish:F0572-P02:1:f33f3640bc06ced1",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1-SEz7Lm9ld6FYzWXmVpyzruvu5LiWqth/view",
+              "evidence": "The retained full-card photograph reads Italian Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0420.",
+              "contentHash": "c4aa5d26f35ac7aeb1195147645b8a669b420b97959eb871c797512dcdb3ace0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0572-P02:2:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "901d937057e3b733f52436708fa93eca1bd7f7aaeefac9ee865eb9fa6d53bb8a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0572-P02:3:efc42f97e217ba65",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "555308e334f74059aa7399d1e24c693888dedb46c15c64428ccae91dfb5b9b7d",
+              "contentHash": "489f13ec14632094f2ce090b0ee88174c729d49df50fb57924618bd6a19d0b43",
               "image": null
             },
             {
@@ -37864,7 +38242,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "cd82a8425cd19dcb025d5ad0b9be4f00d84803070949d83c20f67d73991f564f",
+              "contentHash": "853efed235ff55520fbf13bbb0f49067a7652edfd0ccc1c98fdfa8a32748e2df",
               "image": null
             },
             {
@@ -37873,16 +38251,34 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "282f95d8983230e50797d27b70049b7f23633502476c443f3d1a084accd7454d",
+              "contentHash": "8c29362e5719e27a783d652cf7ba9bda7edb9bc9baedc985163546c50e21a1fa",
               "image": null
             },
             {
-              "observationId": "finish:F0572-P03:2:efc42f97e217ba65",
+              "observationId": "finish:F0572-P03:2:9ffd3d0b4c250112",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1GwN3F5EFC2fwEyXK5Z5ziX1C9eANLV9Z/view",
+              "evidence": "The retained full-card photograph reads Italian Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0421.",
+              "contentHash": "815cfc3e42e77f5d4b653f9c64ab92137d5b397ba902d49006f4bee70cadda5d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0572-P03:3:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "b3cbd681de5f1af1ce84489d8ebb749a3b3caf0c4ff2519fc06837e7255e4f3e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0572-P03:4:efc42f97e217ba65",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "98c454516edb2ce47596e5ee869c51425654bfd6d3416e59bca28b73e2a7f737",
+              "contentHash": "8e476fe5e01a53d760cb188de862aa56232b0268b0214e9984eb4012f2e0f1d2",
               "image": null
             },
             {
@@ -37938,6 +38334,93 @@
                   "evidence": "sm10-158 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
+              "semanticPrintingId": "PRINTING:09f26361995a28419ad8840f",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "large-type-symbol-left",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0574",
+              "sourcePrintingId": "F0574-P03",
+              "establishingClaimId": "CLAIM:finish:PRINTING:09f26361995a28419ad8840f",
+              "specimenIds": [
+                "SPEC-0425"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1Qpd5LgCmHeNtoAkNQqAWnvu-4avabAxk/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Brazilian Portuguese Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0425.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:72c905f18ac5b686a43657cc",
+              "semanticPrintingId": "PRINTING:72c905f18ac5b686a43657cc",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:UNB:158:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0574",
+              "sourcePrintingId": "F0574-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:72c905f18ac5b686a43657cc",
+              "specimenIds": [
+                "SPEC-0424"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1lxbJemd4GCtWSZk1EGmxRBpHfrkOwkZ6/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Brazilian Portuguese Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0424.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
             }
           ],
           "detection": {
@@ -37975,6 +38458,69 @@
               "url": "https://api.tcgdex.net/v2/pt/cards/sm10-158",
               "evidence": "sm10-158 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "5bd070c6141de6d2ed28d6b277bd3fb91fb84391108efb0a0bb554e9c40722a4",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0574-P02:0:af9af7e2a9340955",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "63da890509383233466bcba48ca2bdb5dc7a0aa884c9765eb6107ba64d264bca",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0574-P02:1:dc2fed5fe1fb6392",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1lxbJemd4GCtWSZk1EGmxRBpHfrkOwkZ6/view",
+              "evidence": "The retained full-card photograph reads Brazilian Portuguese Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0424.",
+              "contentHash": "6ec6218c7d6fe80f84beca1d7f7fe8830d02f92d9669c944724ea64b3903ed9e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0574-P02:2:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "0364782fe308c996f46d258174d2dec2067a6928e1ecb5ea7974b47aad2f735c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0574-P03:0:af9af7e2a9340955",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "489ef51616116113d317521f57695b991f556d465bd7cf07b61b6306e8953c40",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0574-P03:1:864bd1f7ca541a1b",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "984daa55449c917cf5017347a75a2cfab905019b8de0b3db53d265c809e6cf1e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0574-P03:2:df390fc9c0a1bd65",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1Qpd5LgCmHeNtoAkNQqAWnvu-4avabAxk/view",
+              "evidence": "The retained full-card photograph reads Brazilian Portuguese Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0425.",
+              "contentHash": "2711c14476a052a4babf14d6b02d3457d4048cd20a8f1b99bedb489b72fc22f8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0574-P03:3:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "2580b6463dca6f7431838aa26d9f2dea63cd61cbe58f9f963466043ac6f51e28",
               "image": null
             },
             {
@@ -38046,11 +38592,29 @@
               "sourceFinishUnitId": "F0573",
               "sourcePrintingId": "F0573-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:1e9cb19cf39b2d7f755ab758",
+              "specimenIds": [
+                "SPEC-0422"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/11pGJgM19YmFtmahfiiyxdgO0x2Z-wUOy/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads European Spanish Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0422.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
@@ -38082,6 +38646,9 @@
               "sourceFinishUnitId": "F0573",
               "sourcePrintingId": "F0573-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:fd846e7e313f2d9939f46245",
+              "specimenIds": [
+                "SPEC-0423"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
@@ -38092,6 +38659,21 @@
                   "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
                   "sourceType": "Bulbapedia holofoil pattern history",
                   "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1Sheay9EglZV6v-NfyuCcgtkUfMIxat1B/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads European Spanish Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0423.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 },
                 {
                   "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
@@ -38152,16 +38734,34 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "7921860a585f88d8d1d7a38504aeee8aab36d054083326369180c455d3f35291",
+              "contentHash": "0aaf037d279362fb7ddb6bbf1e066194710c9a24a327715e17e6dbb690bc173b",
               "image": null
             },
             {
-              "observationId": "finish:F0573-P02:1:f829a88e6486480e",
+              "observationId": "finish:F0573-P02:1:d768ebef51052af8",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/11pGJgM19YmFtmahfiiyxdgO0x2Z-wUOy/view",
+              "evidence": "The retained full-card photograph reads European Spanish Snorlax, UNB 158/214, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0422.",
+              "contentHash": "19b29f0869bd24d79d9d766ff0f11adcf356c5fe17c99f430f0272c9a4640b73",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0573-P02:2:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "41c05ea07c26b6b3c5da0f77eefec98164abbf701eff89d43130a2aa478f26c3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0573-P02:3:f829a88e6486480e",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "4637b2f1912d56c34f7b9e07d3a7f96e4f9cdc0add478261fcc2e360eb16f46d",
+              "contentHash": "309166779e071572caffe1d6a834b351344d3008e1916cfb14a58d63c262b4b5",
               "image": null
             },
             {
@@ -38170,7 +38770,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Unbroken-Bonds/Snorlax-UNB158",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "61cf8db0972b807af0dec51f7a9fe13d15da8f05a3fb251740b7f2da20dab4d1",
+              "contentHash": "047144ccf83934db4e1033b16b18ba0ff9865ab9b57f36be67d56d140af98afd",
               "image": null
             },
             {
@@ -38179,16 +38779,34 @@
               "provider": "Bulbapedia holofoil pattern history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "contentHash": "3fcb94e1f76b50733b0fdfc362ad06d00f1f187bf7e2586f7e8ded59db5a1f9e",
+              "contentHash": "1b4df77e6528edb25ed0cb9d3db9549cd0c5393df2f376dc2c226d3e0368ddd0",
               "image": null
             },
             {
-              "observationId": "finish:F0573-P03:2:f829a88e6486480e",
+              "observationId": "finish:F0573-P03:2:808356b062fc92bd",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1Sheay9EglZV6v-NfyuCcgtkUfMIxat1B/view",
+              "evidence": "The retained full-card photograph reads European Spanish Snorlax, UNB 158/214, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0423.",
+              "contentHash": "adec468b66e86d2d1eed1d1bce1a3316b3233ee89e6b40f057f99e9e09313f41",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0573-P03:3:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "14772b93177ca3381f8a27696479f98e6dffa4317cfa298617ad55830a8872a4",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0573-P03:4:f829a88e6486480e",
               "kind": "finish",
               "provider": "Official Pokémon localized expansion checklist",
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
               "evidence": "The complete localized Unbroken Bonds checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 158 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
-              "contentHash": "74bd3faa5693627b1b1b04e19279847b1b98cc520db57af67a6f29ac5dae6f2a",
+              "contentHash": "c6dc69b18992605681963c2d1f944c0f166f401ed676314504a57dd73424b90e",
               "image": null
             },
             {
@@ -38244,15 +38862,33 @@
               "finish": "mirror-holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0067",
-              "sourcePrintingId": "F0067-P03",
+              "sourcePrintingId": "F0067-P04",
               "establishingClaimId": "CLAIM:finish:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
+              "specimenIds": [
+                "SPEC-0433"
+              ],
               "sources": [
+                {
+                  "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo. Retained as SPEC-0433.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                },
                 {
                   "url": "https://www.pokemon.cn/tcg/product/16377.html",
                   "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
@@ -38264,6 +38900,42 @@
                   ],
                   "retrievedAt": "2026-08-27",
                   "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:e573b3ea832d59cd6151bfe9",
+              "semanticPrintingId": "PRINTING:e573b3ea832d59cd6151bfe9",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CSM2bC:124:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "large-type-symbol-left",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0067",
+              "sourcePrintingId": "F0067-P03",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e573b3ea832d59cd6151bfe9",
+              "specimenIds": [
+                "SPEC-0434"
+              ],
+              "sources": [
+                {
+                  "url": "https://drive.google.com/file/d/1tYo9XFldI6rKRykKP_1EzE33_x9S4MLC/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0434.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 }
               ]
             }
@@ -38278,7 +38950,9 @@
               "non-holo",
               "reverse-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "large-type-symbol-left"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -38295,12 +38969,48 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0067-P03:0:d4c48dae59a72376",
+              "observationId": "finish:F0067-P03:0:56d9fe60d238ce03",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1tYo9XFldI6rKRykKP_1EzE33_x9S4MLC/view",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0434.",
+              "contentHash": "7f88591c6837f92a5289f770d432e4f2d67b35d8aa9a8f0a7c07add3c8de1bb1",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P03:1:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "9f694e9aefd8ab2ee5753a68ff9821eadd2a3476b6947aab526a9dbe12ca7542",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P04:0:8ecd175a151357d3",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo. Retained as SPEC-0433.",
+              "contentHash": "3ae3fd7dbb62a66a1ea047fe31028ef6658e96f2478ae9801a0e7b8705a0da74",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P04:1:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "754dc391a155bdaa9862458b18e6ee00d216ad4a1ca5efa471fc52e5ccd01508",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P04:2:d4c48dae59a72376",
               "kind": "finish",
               "provider": "Official Mainland China Simplified Chinese card-finish guide",
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings.",
-              "contentHash": "1c78e4e83a0441b35ab84648811c8590ebb9796e0390feac40d227107f12dab6",
+              "contentHash": "0c0784da66f44f32c5a16ae24b97ba4123df2f135ff5bc4e7a123d5ae9a449a2",
               "image": null
             },
             {
@@ -38364,11 +39074,29 @@
               "sourceFinishUnitId": "F0402",
               "sourcePrintingId": "F0402-P02",
               "establishingClaimId": "CLAIM:finish:F0402-P02",
+              "specimenIds": [
+                "SPEC-0414"
+              ],
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/ja/cards/SM10-076",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "SM10-076 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "url": "https://drive.google.com/file/d/1oJmBYlLh109-x_LhpOH-5zSVYXu41mj0/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Japanese Snorlax, sm10 076/095, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0414.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
                 }
               ]
             }
@@ -38405,7 +39133,25 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/ja/cards/SM10-076",
               "evidence": "SM10-076 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "1f2dea57360a9d70d76ef0842db9fefc1119a6397d7866d35e23eb56247cd97c",
+              "contentHash": "c496f4c6c3d7011a2217acf68f876ff6cb03b83c26292369ef51febd4faad650",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0402-P02:1:0bbf708198b6c24b",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1oJmBYlLh109-x_LhpOH-5zSVYXu41mj0/view",
+              "evidence": "The retained full-card photograph reads Japanese Snorlax, sm10 076/095, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0414.",
+              "contentHash": "a5c3337091d7a2814dfe3c34f6067d90db4bc5fab1f0818910155493ce7edf7d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0402-P02:2:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "9740ef33dcd4638ea1e1031bd7823bbe992aa7c83b90bea5a0a03f4ba677b7ad",
               "image": null
             },
             {
@@ -38440,13 +39186,52 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
+              "semanticPrintingId": "PRINTING:366f02062d82aa50ce525a27",
+              "cardReleaseId": "RELEASE:KR:Korean:sm10:076/095:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0403",
+              "sourcePrintingId": "F0403-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:366f02062d82aa50ce525a27",
+              "specimenIds": [
+                "SPEC-0415"
+              ],
+              "sources": [
+                {
+                  "url": "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "The retained full-card photograph reads Korean Snorlax, sm10 076/095, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0415.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -38471,6 +39256,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0403-P02:0:54923cf53664b950",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view",
+              "evidence": "The retained full-card photograph reads Korean Snorlax, sm10 076/095, Illus. kanahei. The collection-owner checklist labels this specimen Holo. Retained as SPEC-0415.",
+              "contentHash": "a716bd94138ffef9756bbffc19d5091c64013717e34ae930286d6853f92f95b4",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0403-P02:1:9f903417421bfa17",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "35de32433d9e5b0b8df8b0e32d9a511b287d7746efd89a487c1e7c642803aa0a",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sm10:076/095:base",
               "kind": "source-first",
@@ -77302,13 +78105,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0426",
+              "cardReleaseId": "RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Indonesian card face and AC3a 145/205 identity are retained.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0426",
+              "specimenIds": [
+                "SPEC-0426"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -77333,6 +78158,107 @@
               "evidence": "The retained official Indonesian card detail 2129 and SPEC-0163 show Snorlax 145/205 in AC3a, including the printed attacks used for the explicit Work mapping. The exact render prints rarity C. The image is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "af137c5e9378a9b2209a662f6a58fc9277402f36d5ba10495d8970e123eea48d",
               "image": "https://asia.pokemon-card.com/id/card-img/id00002129.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Snorlax-Lazy-Eating-Big-Counter"
+      ],
+      "cardKeys": [
+        "Snorlax-Lazy-Eating-Big-Counter"
+      ],
+      "label": "Snorlax-Lazy-Eating-Big-Counter",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+          "workId": "WORK:Snorlax-Lazy-Eating-Big-Counter",
+          "cardKey": "Snorlax-Lazy-Eating-Big-Counter",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "setEditionId": "EDITION:TH:Thai:AS5a",
+          "localSetCode": "AS5a",
+          "localNumber": "142/184",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0427",
+              "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "\"The collection-owner checklist labels this specimen Non-Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0427",
+              "specimenIds": [
+                "SPEC-0427"
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0428",
+              "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Thai card face and AS5a 142/184 identity are retained.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0428",
+              "specimenIds": [
+                "SPEC-0428"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "คาบิกอน",
+            "artist": null,
+            "variant": "base",
+            "finish": [
+              "holo",
+              "non-holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [],
+          "observations": [
+            {
+              "observationId": "source-first:TH:AS5a:142/184:base",
+              "kind": "source-first",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/AS5a",
+              "evidence": "Bulbapedia's exact AS5a list identifies Thai Snorlax 142/184 as rarity R and dates Double Burst Set A to 2020-02-27. The official Thai product page and retained official card-list PDF establish the AS5a product. SPEC-0427 and SPEC-0428 positively show the Thai card face, collector number, 150 HP and kanahei credit; their owner attestations separately establish regular and holo physical copies. Ojama's exact R and R-Foil SKUs and the two exact seller-photo listings independently corroborate the two treatments. No completeness or unpictured variant is inferred.",
+              "contentHash": "958b30e1f490e61e8e28fcdb669b5469bd9e1000b1a31de1dbac47c5dacd011f",
+              "image": null
             }
           ]
         }
@@ -77372,13 +78298,55 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0429",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "\"The collection-owner checklist labels this specimen Non-Holo\"; the complete Traditional-Chinese card face and AS5a 142/184 identity are retained.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0429",
+              "specimenIds": [
+                "SPEC-0429"
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0430",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:142:Snorlax-Lazy-Eating-Big-Counter",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "\"The collection-owner checklist labels this specimen Holo\"; the complete Traditional-Chinese card face and AS5a 142/184 identity are retained.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0430",
+              "specimenIds": [
+                "SPEC-0430"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo",
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,

@@ -319,6 +319,45 @@ def main() -> None:
         registry.unlink(missing_ok=True)
         (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
 
+    # The same manifest path accepts owner-supplied local or reachable images without an issue.
+    direct_source = ROOT / ".fetch-attachment-test-direct-source.png"
+    direct_source.write_bytes(image)
+    direct_manifest = ROOT / ".fetch-attachment-test-direct-manifest.json"
+    direct_manifest.write_text(json.dumps({"observations": [{
+        "attachment": str(direct_source),
+        "photographSource": "https://drive.example.test/file/card/view",
+        "setCode": "OWNER", "number": "001/001", "variant": "base",
+        "language": "Dutch", "heldBy": "collection owner", "inspectedFrom": "photo",
+        "observed": "positive", "recordedAt": "2026-08-29",
+        "allowUnprojected": True,
+        "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
+    }]}), encoding="utf-8")
+    direct_registry = ROOT / ".fetch-attachment-test-direct-registry.json"
+    direct_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+    original_registry = fetch_attachment.SPECIMENS_JSON
+    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
+    fetch_attachment.SPECIMENS_JSON = direct_registry
+    fetch_attachment.SPECIMEN_DIR = ROOT
+    try:
+        direct_doc = {"count": 0, "specimens": []}
+        assert fetch_attachment.command_issue(
+            direct_doc,
+            SimpleNamespace(
+                issue=None, issue_html=None, manifest=str(direct_manifest),
+                allow_small=False, replace=False, dry_run=False,
+            ),
+        ) == 0
+        assert direct_doc["specimens"][0]["photographSource"] == (
+            "https://drive.example.test/file/card/view"
+        )
+    finally:
+        fetch_attachment.SPECIMENS_JSON = original_registry
+        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
+        direct_source.unlink(missing_ok=True)
+        direct_manifest.unlink(missing_ok=True)
+        direct_registry.unlink(missing_ok=True)
+        (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
+
     # Source-first releases without a legacy finish unit use the authoritative card-release index.
     source_first_issue = ROOT / ".fetch-attachment-test-source-first.html"
     source_first_issue.write_text(

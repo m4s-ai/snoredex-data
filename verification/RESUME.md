@@ -62,6 +62,7 @@ finish, edition, marking, distribution, or size; omission is never evidence of n
 
 ```console
 python verification/fetch_attachment.py --issue 269 --manifest path/to/issue-269.json
+python verification/fetch_attachment.py --manifest path/to/owner-photos.json
 python scripts/regen.py
 python verification/fetch_attachment.py --evidence-check
 ```
@@ -69,6 +70,11 @@ python verification/fetch_attachment.py --evidence-check
 The importer parses the issue HTML, downloads the signed image candidate, validates PNG/JPEG
 bytes, records `photographSha256`, writes `specimens.json` plus `verification/specimens/`, and
 keeps the stable issue URL as provenance. A second run is a no-op for identical bytes.
+The direct manifest form reads each row's `attachment` path or URL and keeps its optional
+`photographSource` as stable provenance. If an exact owner photograph predates its canonical
+source-first release, the reviewed row may set `allowUnprojected: true`; the specimen is retained
+as an explicit graph candidate until that release is admitted rather than being mis-keyed to a
+neighbouring product.
 `finishes.py` projects typed finish, edition, marking, size, specimen ids, and explicit
 `conflictsWith` review markers; conflicted observations remain pending until resolved.
 `authoritative_graph.py` then projects provenance edges. Never add the same SPEC evidence again
@@ -622,6 +628,19 @@ The same live run exposes two TCGdex identifier deltas. Trainer Gallery TG10 cha
 the same three local releases under both historical and current provider keys. German `ex15-10`
 disappeared from the response. It remains known from the earlier immutable run, and the current
 provider omission is not a contradiction or absence claim.
+
+### Thai AS5a 142/184 — regular and holo
+
+The reviewed 2026-08-30 evidence establishes one Thai card release and two physical treatments,
+without merging it with the existing Traditional-Chinese AS5a release. The official Thai product
+page and card-list PDF establish Double Burst Set A; Bulbapedia's exact AS5a list identifies
+`คาบิกอน` 142/184 as rarity R and dates the release to 2020-02-27. Owner photographs
+SPEC-0427 and SPEC-0428 positively show Thai AS5a 142/184, 150 HP and Illus. kanahei, while the
+owner checklist identifies the copies as non-holo and holo respectively. Ojama's exact
+`AS5A-142/184-R` and `AS5A-142/184-R-Foil` SKUs and two exact seller-photo listings corroborate
+those treatments. Seller-generated item specifics were not used because they contain conflicting
+metadata. No exact foil pattern is asserted, and the two observed treatments are not claimed to
+exhaust every AS5a 142/184 printing.
 
 The live Italian archive returned `Pardon Our Interruption` during this refresh. The completed run
 therefore carries forward only four exact unchanged requests from complete run
