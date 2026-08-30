@@ -236,8 +236,8 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         f"| Evidence registry | **{source_counts['providers']} providers**, "
         f"{source_counts['evidenceRecords']} evidence records, "
         f"{source_counts['uniqueUrls']} unique URLs, and "
-        f"{source_counts['claimsAttributed']:,} attributed claims. Bounded source scopes provide "
-        "absence rationale; the separate owner-adjudication store records final language/printing "
+        f"{source_counts['claimsAttributed']:,} attributed claims. Every external provider is "
+        "positive only. The separate owner-adjudication store records final language and printing "
         "absence decisions. |",
         "| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact "
         "consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull "

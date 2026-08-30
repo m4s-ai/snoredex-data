@@ -3,25 +3,25 @@
     "schema": "snoredex-card-discovery-staging",
     "schemaVersion": "1.0.0",
     "coverageVersion": "1.18.0",
-    "generatedFromRun": "20260820T125000Z",
-    "previousRun": "20260820T122400Z",
+    "generatedFromRun": "20260830T111240Z",
+    "previousRun": "20260829T220901Z",
     "contract": "verification/card_discovery_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "authoritativeGraph": "verification/authoritative_graph.json",
     "contractHash": "sha256:d26742a0d6659fe517062cf797f30eb3d0c51570533b44c921b939c62b881fb0",
-    "capabilityGraphHash": "sha256:28da36acb95eae7ac86f7c04e78631e383daa32632692bdd5f4f096d695474ae",
-    "authoritativeGraphHash": "sha256:b871ce816008d7e4f624f87743d41c37fe454429813af4d3901222656161704c",
+    "capabilityGraphHash": "sha256:33ce1db22b7e47f92273bb1514d54d43db2c0d64445e9e49b93effa50a6d168f",
+    "authoritativeGraphHash": "sha256:fc75533e2e4f259a74046f6b5d8cc1c3e82d8d70af415d343ab5026d06f21115",
     "sourceFirst": true,
     "verdictMutationAllowed": false,
     "counts": {
       "slices": 14,
-      "records": 354,
-      "matched": 234,
+      "records": 111,
+      "matched": 93,
       "ambiguous": 6,
-      "newCandidate": 40,
-      "positivelyExcluded": 21,
-      "needsEvidence": 53,
-      "runErrors": 0,
+      "newCandidate": 10,
+      "positivelyExcluded": 2,
+      "needsEvidence": 0,
+      "runErrors": 10,
       "gaps": 12
     }
   },
@@ -66,28 +66,23 @@
     {
       "sliceId": "ligapokemon-pt-br-positive-frontier",
       "adapterId": "ligapokemon-confirmed-positive",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every reviewed retained positive record in this browser-blocked frontier was replayed and accounted; marketplace or provider-universe completeness is not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax do Lupo:1"
-        ],
-        "completedDetailIds": [
-          "card=Hop%27s%20Snorlax%20%28117%2F096%29&ed=PPPS7&num=117",
-          "card=Hop%27s%20Snorlax%20%28117b%2F90%29&ed=PPPS8&num=117b"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 2,
+        "fetched": 0,
         "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
         "positivelyExcluded": 0,
-        "needsEvidence": 2,
-        "accounted": 2
+        "needsEvidence": 0,
+        "accounted": 0
       }
     },
     {
@@ -271,474 +266,267 @@
     {
       "sliceId": "tcgdex-de-snorlax",
       "adapterId": "tcgdex-exact-name",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Relaxo:1"
-        ],
-        "completedDetailIds": [
-          "A1-211",
-          "A1-250",
-          "A2a-063",
-          "P-A-049",
-          "base2-11",
-          "base2-27",
-          "bw7-109",
-          "bw8-101",
-          "col1-33",
-          "dp1-37",
-          "ecard3-100",
-          "ex6-15",
-          "me03-063",
-          "pl2-111",
-          "pl2-33",
-          "pl2-81",
-          "sm10-158",
-          "sv03.5-143",
-          "sv04.5-202",
-          "sv06-136",
-          "sv08-144",
-          "svp-051",
-          "svp-122",
-          "swsh1-140",
-          "swsh10.5-055",
-          "swsh11-143",
-          "swsh11tg-TG10",
-          "swsh12.5-109",
-          "swsh2-141",
-          "swsh4-131",
-          "swsh6-224",
-          "swsh8-206",
-          "swshp-SWSH032",
-          "swshp-SWSH068",
-          "swshp-SWSH119",
-          "xy0-26",
-          "xy10-77",
-          "xy2-80",
-          "xy8-118"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 39,
-        "matched": 35,
+        "fetched": 0,
+        "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
-        "positivelyExcluded": 4,
+        "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 39
+        "accounted": 0
       }
     },
     {
       "sliceId": "tcgdex-en-snorlax",
       "adapterId": "tcgdex-exact-name",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "terminalState": "blocked-by-source",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax:1"
-        ],
-        "completedDetailIds": [
-          "A1-211",
-          "A1-250",
-          "A2a-063",
-          "A3b-057",
-          "A3b-084",
-          "A3b-091",
-          "P-A-049",
-          "base2-11",
-          "base2-27",
-          "base4-30",
-          "basep-49",
-          "bw7-109",
-          "bw8-101",
-          "col1-33",
-          "dp1-37",
-          "ecard3-100",
-          "ex15-10",
-          "ex6-15",
-          "ex7-104",
-          "g1-58",
-          "gym1-33",
-          "lc-64",
-          "me03-063",
-          "pl2-111",
-          "pl2-33",
-          "pl2-81",
-          "sm10-158",
-          "sm115-50",
-          "sm9-120",
-          "sm9-171",
-          "sm9-191",
-          "smp-SM05",
-          "smp-SM169",
-          "sv03.5-143",
-          "sv04-175",
-          "sv04.5-202",
-          "sv06-136",
-          "sv08-144",
-          "sv08.5-076",
-          "sv09-117",
-          "svp-051",
-          "svp-122",
-          "svp-184",
-          "swsh1-140",
-          "swsh1-141",
-          "swsh1-142",
-          "swsh1-197",
-          "swsh1-206",
-          "swsh10.5-055",
-          "swsh11-143",
-          "swsh11tg-TG10",
-          "swsh12.5-109",
-          "swsh2-141",
-          "swsh4-131",
-          "swsh6-224",
-          "swsh8-206",
-          "swshp-SWSH032",
-          "swshp-SWSH068",
-          "swshp-SWSH119",
-          "xy0-26",
-          "xy10-77",
-          "xy2-80",
-          "xy8-118",
-          "xyp-XY179"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 64,
-        "matched": 57,
+        "fetched": 0,
+        "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
-        "positivelyExcluded": 7,
+        "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 64
+        "accounted": 0
       }
     },
     {
       "sliceId": "tcgdex-es-eu-snorlax",
       "adapterId": "tcgdex-exact-name",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax:1"
-        ],
-        "completedDetailIds": [
-          "A1-211",
-          "A1-250",
-          "A2a-063",
-          "P-A-049",
-          "bw7-109",
-          "bw8-101",
-          "me03-063",
-          "sm10-158",
-          "sv03.5-143",
-          "sv04.5-202",
-          "sv06-136",
-          "sv08-144",
-          "svp-051",
-          "svp-122",
-          "swsh1-140",
-          "swsh10.5-055",
-          "swsh11-143",
-          "swsh11tg-TG10",
-          "swsh12.5-109",
-          "swsh2-141",
-          "swsh4-131",
-          "swsh6-224",
-          "swsh8-206",
-          "swshp-SWSH032",
-          "swshp-SWSH068",
-          "swshp-SWSH119",
-          "xy10-77",
-          "xy2-80",
-          "xy8-118"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 29,
+        "fetched": 0,
         "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
-        "positivelyExcluded": 4,
-        "needsEvidence": 25,
-        "accounted": 29
+        "positivelyExcluded": 0,
+        "needsEvidence": 0,
+        "accounted": 0
       }
     },
     {
       "sliceId": "tcgdex-fr-snorlax",
       "adapterId": "tcgdex-exact-name",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Ronflex:1"
-        ],
-        "completedDetailIds": [
-          "A1-211",
-          "A1-250",
-          "A2a-063",
-          "P-A-049",
-          "base2-11",
-          "base2-27",
-          "bw7-109",
-          "bw8-101",
-          "col1-33",
-          "dp1-37",
-          "ex6-15",
-          "g1-58",
-          "me03-063",
-          "sm10-158",
-          "sm115-50",
-          "sv03.5-143",
-          "sv04.5-202",
-          "sv06-136",
-          "sv08-144",
-          "svp-051",
-          "svp-122",
-          "swsh1-140",
-          "swsh10.5-055",
-          "swsh11-143",
-          "swsh11tg-TG10",
-          "swsh12.5-109",
-          "swsh2-141",
-          "swsh4-131",
-          "swsh6-224",
-          "swsh8-206",
-          "swshp-SWSH032",
-          "swshp-SWSH068",
-          "swshp-SWSH119",
-          "xy0-26",
-          "xy10-77",
-          "xy2-80",
-          "xy8-118",
-          "xyp-XY179"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 38,
-        "matched": 34,
+        "fetched": 0,
+        "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
-        "positivelyExcluded": 4,
+        "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 38
+        "accounted": 0
       }
     },
     {
       "sliceId": "tcgdex-pt-unqualified-snorlax",
       "adapterId": "tcgdex-exact-name",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax:1"
-        ],
-        "completedDetailIds": [
-          "bw7-109",
-          "bw8-101",
-          "me03-063",
-          "sm10-158",
-          "sv03.5-143",
-          "sv04.5-202",
-          "sv06-136",
-          "sv08-144",
-          "svp-051",
-          "svp-122",
-          "swsh1-140",
-          "swsh10.5-055",
-          "swsh11-143",
-          "swsh11tg-TG10",
-          "swsh12.5-109",
-          "swsh2-141",
-          "swsh4-131",
-          "swsh6-224",
-          "swsh8-206",
-          "swshp-SWSH032",
-          "swshp-SWSH068",
-          "swshp-SWSH119",
-          "xy0-26",
-          "xy10-77",
-          "xy2-80",
-          "xy8-118"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 26,
+        "fetched": 0,
         "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
         "positivelyExcluded": 0,
-        "needsEvidence": 26,
-        "accounted": 26
+        "needsEvidence": 0,
+        "accounted": 0
       }
     },
     {
       "sliceId": "tpci-it-snorlax",
       "adapterId": "tpci-localized-name",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every positive detail returned by the bounded provider-native name query was retained and accounted; historical or provider-universe completeness is not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax:1",
-          "Snorlax:2",
-          "Snorlax:3",
-          "Snorlax:4"
-        ],
-        "completedDetailIds": [
-          "bw7/109",
-          "bw8/101",
-          "col1/33",
-          "dp1/37",
-          "g1/58",
-          "me03/63",
-          "pgo/55",
-          "sm10/158",
-          "sm115/50",
-          "sm9/120",
-          "sm9/171",
-          "sm9/191",
-          "smp/SM169",
-          "sv04/175",
-          "sv06/136",
-          "sv08/144",
-          "sv09/117",
-          "sv3pt5/143",
-          "sv4pt5/202",
-          "sv8pt5/76",
-          "svp/122",
-          "svp/184",
-          "svp/51",
-          "swsh1/140",
-          "swsh1/141",
-          "swsh1/142",
-          "swsh1/197",
-          "swsh1/206",
-          "swsh11/143",
-          "swsh11tg/TG10",
-          "swsh12pt5/109",
-          "swsh2/141",
-          "swsh4/131",
-          "swsh6/224",
-          "swsh8/206",
-          "swshp/SWSH032",
-          "swshp/SWSH068",
-          "swshp/SWSH119",
-          "xy0/26",
-          "xy10/77",
-          "xy2/80",
-          "xy8/118"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 42,
-        "matched": 12,
+        "fetched": 0,
+        "matched": 0,
         "ambiguous": 0,
-        "newCandidate": 30,
+        "newCandidate": 0,
         "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 42
+        "accounted": 0
       }
     },
     {
       "sliceId": "tpci-latam-jtg-positive",
       "adapterId": "tpci-spanish-card-assets",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every reviewed retained positive source-first print was replayed and accounted; neighbouring cards, variants, products and era completeness are not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax de Paul:1"
-        ],
-        "completedDetailIds": [
-          "LATAM:JTG LA:117/159:base"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 1,
-        "matched": 1,
+        "fetched": 0,
+        "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
         "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 1
+        "accounted": 0
       }
     },
     {
       "sliceId": "tpci-latam-por063-positive",
       "adapterId": "tpci-spanish-card-assets",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every reviewed retained positive source-first print was replayed and accounted; neighbouring cards, variants, products and era completeness are not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax:1"
-        ],
-        "completedDetailIds": [
-          "LATAM:POR LA:063/088:base"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 1,
-        "matched": 1,
+        "fetched": 0,
+        "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
         "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 1
+        "accounted": 0
       }
     },
     {
       "sliceId": "tpci-latam-svp184-positive",
       "adapterId": "tpci-spanish-card-assets",
-      "terminalState": "complete",
-      "sourceFailureState": null,
-      "terminalMeaning": "every reviewed retained positive source-first print was replayed and accounted; neighbouring cards, variants, products and era completeness are not claimed",
+      "terminalState": "needs-evidence",
+      "sourceFailureState": "source-failed",
+      "terminalMeaning": "source access, pagination, parsing, or positive content needs evidence; no absence is inferred",
       "checkpoint": {
-        "completedPages": [
-          "Snorlax de Paul:1"
-        ],
-        "completedDetailIds": [
-          "LATAM:SVP LA:184:base"
-        ],
-        "nextPage": null,
-        "complete": true
+        "completedPages": [],
+        "completedDetailIds": [],
+        "nextPage": 1,
+        "complete": false
       },
       "accounting": {
-        "fetched": 1,
-        "matched": 1,
+        "fetched": 0,
+        "matched": 0,
         "ambiguous": 0,
         "newCandidate": 0,
         "positivelyExcluded": 0,
         "needsEvidence": 0,
-        "accounted": 1
+        "accounted": 0
       }
     }
   ],
-  "runErrors": [],
+  "runErrors": [
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-en-snorlax",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      },
+      "meaning": "source-failed; never negative evidence"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "ligapokemon-pt-br-positive-frontier",
+      "query": "Snorlax do Lupo",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tcgdex-de-snorlax",
+      "query": "Relaxo",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tcgdex-es-eu-snorlax",
+      "query": "Snorlax",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tcgdex-fr-snorlax",
+      "query": "Ronflex",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tcgdex-pt-unqualified-snorlax",
+      "query": "Snorlax",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tpci-it-snorlax",
+      "query": "Snorlax",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tpci-latam-jtg-positive",
+      "query": "Snorlax de Paul",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tpci-latam-por063-positive",
+      "query": "Snorlax",
+      "meaning": "needs-evidence; never a closed catalogue"
+    },
+    {
+      "code": "incomplete-pagination",
+      "sliceId": "tpci-latam-svp184-positive",
+      "query": "Snorlax de Paul",
+      "meaning": "needs-evidence; never a closed catalogue"
+    }
+  ],
   "diff": {
     "added": [],
     "changed": [],
@@ -864,5 +652,5 @@
     }
   ],
   "recordsPath": "verification/card_discovery_records.jsonl",
-  "recordsHash": "sha256:3e324c4171c66dbb5c22ba60c2d8966e4eaef7ce11a73c35331578ff54869810"
+  "recordsHash": "sha256:2f49846ca2b0990e0b4099a39b5f56c7147544fb82c8989bf95d082d6002429e"
 }

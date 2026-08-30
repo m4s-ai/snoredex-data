@@ -1,17 +1,6 @@
 name: Release gate
 
-# Every check that must pass before the site may be published (#11), and the same suite a
-# contributor can run locally. Called by pages.yml and runnable on its own. The executable core
-# order is owned by scripts/regen.py; WORKFLOW-MAP.md is the human-readable DAG and gate reference.
-#
-# Two deliberate choices:
-#
-#  * Generators run and their output is compared against what is committed. A generated artifact
-#    that disagrees with its inputs fails here rather than being published.
-#  * Counts are never asserted by size. review_integrity.py reports them as drift, because closing
-#    an open verification unit is the project's goal, and a gate that blocks on progress is a gate
-#    people learn to bypass. A move in the losing direction does fail: each metric declares whether
-#    up or down is progress, so an emptying queue is quiet and a refilling one is not (#69).
+# scripts/regen.py owns the executable core order.
 
 on:
   workflow_call:
@@ -30,15 +19,11 @@ concurrency:
 
 jobs:
   gate:
-    # Draft PRs are intentionally in the Codex review loop: avoid spending the full two-OS
-    # release gate on every review-fix push. Marking the PR ready starts the gate again, and
-    # workflow_dispatch remains available for an explicit check at any time.
+    # Draft pull requests skip the two-platform gate.
     if: ${{ github.event_name != 'push' && (github.event_name != 'pull_request' || !github.event.pull_request.draft) }}
     name: gate (${{ matrix.os }})
     env:
-      # Keep the checkout artifact-clean while generators import sibling modules.
       PYTHONDONTWRITEBYTECODE: "1"
-      # Windows defaults redirected Python output to cp1252; card data includes δ and other Unicode.
       PYTHONUTF8: "1"
       GATE_LEVEL: ${{ github.event_name == 'pull_request' && 'L3' || 'L4' }}
     strategy:
@@ -59,17 +44,11 @@ jobs:
         if: runner.os == 'Linux'
         run: python -m pip install -r requirements.txt
 
-      # The browser suite runs on Linux only. Windows is here to prove the Python is
-      # path-portable — the assumption the old PowerShell only satisfied by accident of its
-      # provider normalising backslashes — and rendering is not path handling. Accepted cost: a
-      # Windows-only rendering regression would reach main unseen. The page is generated once and
-      # drawn by the same Chromium on both platforms, so that risk is judged small; if the site
-      # ever grows platform-specific behaviour, restore this leg rather than inherit the decision.
+      # Browser behavior is platform independent. Windows verifies path portability.
       - name: Install Chromium with Linux dependencies
         if: runner.os == 'Linux'
         run: python -m playwright install --with-deps chromium
 
-      # --- syntax: every script must parse before anything is trusted to run ---
       - name: Parse every Python file
         shell: bash
         run: |
@@ -88,8 +67,6 @@ jobs:
               sys.exit("\n".join(bad))
           PY
 
-      # --- core gate: integrity, regressions and generator determinism (#213) ---
-      # The script owns this list so local readiness and CI cannot drift apart.
       - name: Generated artifacts and core regressions
         run: python scripts/regen.py --check
 
@@ -97,12 +74,10 @@ jobs:
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python verification/verify_finish_sources.py
 
-      # --- behaviour: the page has to actually work ---
       - name: Browser tests
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python verification/test_site.py
 
-      # --- artifact hygiene ---
       - name: Public artifact contains only allowlisted files
         if: github.event_name != 'pull_request'
         run: |
@@ -169,8 +144,6 @@ jobs:
         run: |
           python - <<'PY'
           import pathlib, re, sys
-          # review_findings.py check P4 covers the tracked tree; this catches anything that
-          # slipped in during the workflow itself, such as a cache directory.
           leaked = [
               str(p) for p in pathlib.Path(".").rglob("*")
               if p.is_dir() and p.name in {"cache", "zoom", "__pycache__", ".pytest_cache"}

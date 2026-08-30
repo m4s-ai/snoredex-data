@@ -46,7 +46,6 @@
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
-  /* --------------------------------------------------------------- theme */
 
   function initTheme() {
     const root = document.documentElement;
@@ -101,7 +100,6 @@
   const collectorFinish = (item) => item.finishFamily ||
     (item.finish === "mirror-holo" ? "reverse-holo" : item.finish);
 
-  /* ---------------------------------------------------------------- sorting */
 
   // Collector numbers are not lexicographic: "9" sorts before "10", and "TG10" before "TG2"
   // only if the digit runs are compared as numbers. Split into alternating text/number parts.
@@ -166,7 +164,6 @@
     return sorted;
   }
 
-  /* -------------------------------------------------------------- filtering */
 
   const state = {
     q: "",
@@ -250,7 +247,6 @@
     return true;
   }
 
-  /* ------------------------------------------------------------- URL state */
 
   function writeURL() {
     const params = new URLSearchParams();
@@ -286,7 +282,6 @@
     }
   }
 
-  /* --------------------------------------------------------------- controls */
 
   function distinct(getter) {
     const set = new Set();
@@ -428,7 +423,6 @@
     });
   }
 
-  /* ---------------------------------------------------------------- render */
 
   let visibleRows = [];
   let refreshLanguageEvidence = () => {};
@@ -611,7 +605,6 @@
     });
   }
 
-  /* ------------------------------------------- clipped-cell disclosure */
 
   let refreshClippedCells = () => {};
 
@@ -688,7 +681,6 @@
     return update;
   }
 
-  /* ------------------------------------------------ language evidence detail */
 
   function initLanguageEvidence() {
     const popover = document.createElement("div");
@@ -782,7 +774,6 @@
     };
   }
 
-  /* ------------------------------------------ horizontal table affordance */
 
   let refreshTableOverflow = () => {};
 
@@ -829,7 +820,6 @@
     return update;
   }
 
-  /* --------------------------------------------- sticky table heading */
 
   let refreshStickyHeader = () => {};
 
@@ -932,7 +922,6 @@
     return sync;
   }
 
-  /* ---------------------------------------------------- card image preview */
 
   function initCardPreview() {
     const preview = document.createElement("figure");
@@ -1022,7 +1011,6 @@
     window.addEventListener("scroll", position, { passive: true });
   }
 
-  /* ------------------------------------------------------- checklist builder */
 
   function checklistSelection() {
     const scope = $("#cl-scope").value;
@@ -1214,7 +1202,6 @@
     });
   }
 
-  /* --------------------------------------------- artwork/detection review (#120) */
 
   function initArtworkReview() {
     const root = $("#artwork-review-app");
@@ -1695,7 +1682,6 @@
     });
   }
 
-  /* ------------------------------------------------------------------ boot */
 
   initTheme();
   initSectionNav();

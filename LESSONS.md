@@ -187,29 +187,28 @@ down rather than inferred.
 
 ---
 
-## "Complete official manifest" was narrower than intended
+## Dependable sources still cannot establish absence by omission
 
-**Trap:** *Dependability decides whether a source may carry absence weight, not whether it is a
-manufacturer.*
+**Trap:** *A dependable or official source still publishes releases, not declarations of every
+non-release.*
 
-Rule 4 required a *"complete official manifest"* to scope an absence. The owner's intent was
-dependability: Bulbapedia and Elite Fourum are the most dedicated researchers in this space and
-qualify, manufacturer or not. The narrower wording would have excluded them.
+Rule 4 once allowed a source to carry scoped absence weight. That model was reversed after the
+documentation audit. Official Pokémon sources confirm what was released for the matching language
+and region. They do not normally publish statements that an unlisted card was not released.
 
-A related withdrawal was caught by a test: removing `elitefourum`'s `supportsAbsence` failed
-`test_owner_adjudications.py`, which asserts *"Elite Fourum must retain scoped absence capability"*.
-The test was right and the change was wrong.
+A test once required Elite Fourum to retain scoped absence capability. The requirement encoded the
+wrong policy and was replaced with a test that requires zero external absence authority.
 
-**Still true either way:** a scoped source alone leaves a claim `disputed`. `absenceScopes` is
-recorded rationale, never a mechanism.
+Every external source is now positive only. A contradiction remains source disagreement until the
+collection owner adjudicates it.
 
-*Corrected 2026-08-03, PR #96.*
+*Original correction 2026-08-03. Policy amended after the 2026-08-29 documentation audit.*
 
 ---
 
 ## An absence argument that produced a false contradiction
 
-**Trap:** *Never contradict on bare absence. Prove the source covers the category first.*
+**Trap:** *Never contradict from omission, even when a source covers nearby records.*
 
 `XY-P 149` was marked contradicted because a source did not list a Traditional Chinese printing.
 The source did not cover that category at all. The contradiction was wrong and had to be reverted.
@@ -218,9 +217,9 @@ The same shape nearly repeated with `DP-P 126`: Japan ran a Domino's Pizza campa
 reasoning went, therefore no Korean printing. But Korea ran its own food tie-ins — Kisstick sausages
 — and it was *the same card*. A channel being Japanese does not make a card Japanese-only.
 
-The discipline that works: pokumon lists Korean promos, so a missing Korean row there is meaningful;
-its West coverage is one lumped "English" row, so its silence on French means nothing. Prove
-coverage, then argue absence.
+The discipline that works is positive evidence only. A listed Korean promo confirms that promo. A
+missing Korean or Western row remains unknown. Only a collection-owner adjudication can settle the
+application decision after evidence review.
 
 *Recorded in `verification/RESUME.md`, which carries the full source-by-source detail.*
 

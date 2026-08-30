@@ -1,10 +1,10 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-29",
+  "generated": "2026-08-30",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
-   "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
+   "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
    "Non-URL evidence is a named evidence class, never a fabricated hyperlink.",
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
@@ -25,135 +25,15 @@
    "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "positive localized card pages; complete manifests only within named checklists",
-   "supportsAbsence": true,
+   "coverage": "positive localized card pages and listed checklist entries",
+   "supportsAbsence": false,
    "usedFor": [
     "language",
     "finish",
     "product"
    ],
-   "absenceScopes": [
-    "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
-    "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/fireredleafgreen_checklist.pdf",
-    "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/teamrocket_checklist.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw7_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw8_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/col1_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/dp1_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pgo_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm115_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm9_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh11_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh125_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh1_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh2_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh4_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh6_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh8_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy10_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy8_web_cardlist_de.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw7_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw8_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/dp1_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/pgo_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm115_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm9_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh11_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh125_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh1_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh2_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh4_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh6_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh8_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy10_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy8_web_cardlist_es.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw7_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw8_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/col1_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/dp1_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pgo_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm115_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm9_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh11_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh125_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh2_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh4_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh6_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh8_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy10_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy8_web_cardlist_fr.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw7_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw8_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/col1_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/dp1_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pgo_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm9_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh11_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh125_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh1_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh2_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh4_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh6_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh8_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy10_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy8_web_cardlist_it.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw7_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw8_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/col_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/dp1_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pgo_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm115_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm9_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh11_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh125_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh1_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh2_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh4_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh6_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh8_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy10_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy2_web_cardlist_en.pdf",
-    "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy8_web_cardlist_en.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
-    "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
-    "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
-   ],
    "attribution": "Official card pages and product checklists © The Pokémon Company International.",
-   "notes": "Localized card pages provide positive card/language evidence only. Exact checklists may establish finish absence only inside their stated scope.",
+   "notes": "Localized pages and checklists confirm only the cards, languages, regions, and finishes they explicitly list. Missing entries remain unknown.",
    "hosts": [
     "assets.pokemon.com",
     "d1wx537rtdixyy.cloudfront.net",
@@ -577,17 +457,14 @@
    "licenseOrTerms": "Forum terms; community-contributed content.",
    "category": "collector-community",
    "authorityTier": 2,
-   "coverage": "promo language tables and the 1st-edition timeline within their stated scope",
-   "supportsAbsence": true,
+   "coverage": "positive promo language tables and the 1st-edition timeline",
+   "supportsAbsence": false,
    "usedFor": [
     "language",
     "edition"
    ],
-   "absenceScopes": [
-    "https://www.elitefourum.com/t/black-star-promos-languages/36573"
-   ],
    "attribution": "Collector-community reference tables from Elite Fourum.",
-   "notes": "High-authority community reference, just below collection-owner authority. Its designated complete table is absence-capable within scope; other final absence decisions require a collection-owner adjudication. This capability is deliberate and pinned by verification/test_owner_adjudications.py; #66 questioned whether it sits well with rule 4, which admits only a complete official manifest, and left the decision with the owner. Nothing currently depends on it either way: all five units citing that thread also carry owner adjudications, so withdrawing it would move no row off not-printed.",
+   "notes": "High-authority community reference. Listed language and edition facts are positive evidence. Missing flags or rows remain unknown.",
    "hosts": [
     "elitefourum.com",
     "www.elitefourum.com"
@@ -719,17 +596,14 @@
    "licenseOrTerms": "Publisher's own terms.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "complete-manifest for the Prize Pack series it lists",
-   "supportsAbsence": true,
+   "coverage": "positive Prize Pack cards and finishes shown in the gallery",
+   "supportsAbsence": false,
    "usedFor": [
     "finish",
     "product"
    ],
-   "absenceScopes": [
-    "https://play.pokemon.com/en-us/rewards/gallery?filter=series7"
-   ],
    "attribution": "Prize Pack contents © The Pokémon Company International.",
-   "notes": "Official gallery of Prize Pack series contents; one of the few complete manifests here.",
+   "notes": "The gallery confirms displayed Prize Pack cards and finishes. Omitted alternatives remain unknown.",
    "hosts": [
     "play.pokemon.com"
    ],
@@ -820,7 +694,7 @@
     "edition"
    ],
    "attribution": "Physical card, inspected specimen.",
-   "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
+   "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 29,
    "claimsSupported": 66
@@ -10479,8 +10353,7 @@
     "U0501"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
@@ -11291,8 +11164,7 @@
     "override:play-prize-pack-gallery"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 32,
-   "supportsAbsence": true
+   "usageCount": 32
   },
   {
    "canonicalUrl": "https://pokecardex-scans.b-cdn.net/sets/ADC-M/FR/9.jpg?class=hd",
@@ -13399,8 +13271,7 @@
     "override:dragon-frontiers-official-checklist"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 6,
-   "supportsAbsence": true
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/fireredleafgreen_checklist.pdf",
@@ -13420,8 +13291,7 @@
     "override:fl-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/teamrocket_checklist.pdf",
@@ -13440,8 +13310,7 @@
     "override:trr-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2,
-   "supportsAbsence": true
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw7_web_cardlist_de.pdf",
@@ -13461,8 +13330,7 @@
     "override:bcr-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw8_web_cardlist_de.pdf",
@@ -13482,8 +13350,7 @@
     "override:pls-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/col1_web_cardlist_de.pdf",
@@ -13503,8 +13370,7 @@
     "override:cl-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/dp1_web_cardlist_de.pdf",
@@ -13524,8 +13390,7 @@
     "override:dp-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pgo_web_cardlist_de.pdf",
@@ -13545,8 +13410,7 @@
     "override:pgo-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
@@ -13569,8 +13433,7 @@
     "override:rr-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 6,
-   "supportsAbsence": true
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
@@ -13590,8 +13453,7 @@
     "override:unb-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm115_web_cardlist_de.pdf",
@@ -13611,8 +13473,7 @@
     "override:hif-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm9_web_cardlist_de.pdf",
@@ -13633,8 +13494,7 @@
     "override:teu-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh11_web_cardlist_de.pdf",
@@ -13655,8 +13515,7 @@
     "override:lor-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh125_web_cardlist_de.pdf",
@@ -13676,8 +13535,7 @@
     "override:crz-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh1_web_cardlist_de.pdf",
@@ -13701,8 +13559,7 @@
     "override:ssh-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 7,
-   "supportsAbsence": true
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh2_web_cardlist_de.pdf",
@@ -13722,8 +13579,7 @@
     "override:rcl-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh4_web_cardlist_de.pdf",
@@ -13743,8 +13599,7 @@
     "override:viv-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh6_web_cardlist_de.pdf",
@@ -13763,8 +13618,7 @@
     "override:cre-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2,
-   "supportsAbsence": true
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh8_web_cardlist_de.pdf",
@@ -13784,8 +13638,7 @@
     "override:fst-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy10_web_cardlist_de.pdf",
@@ -13805,8 +13658,7 @@
     "override:fco-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
@@ -13826,8 +13678,7 @@
     "override:flf-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy8_web_cardlist_de.pdf",
@@ -13847,8 +13698,7 @@
     "override:bkt-official-checklist-de"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw7_web_cardlist_es.pdf",
@@ -13868,8 +13718,7 @@
     "override:bcr-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw8_web_cardlist_es.pdf",
@@ -13889,8 +13738,7 @@
     "override:pls-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/dp1_web_cardlist_es.pdf",
@@ -13910,8 +13758,7 @@
     "override:dp-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/pgo_web_cardlist_es.pdf",
@@ -13931,8 +13778,7 @@
     "override:pgo-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
@@ -13952,8 +13798,7 @@
     "override:unb-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm115_web_cardlist_es.pdf",
@@ -13973,8 +13818,7 @@
     "override:hif-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm9_web_cardlist_es.pdf",
@@ -13995,8 +13839,7 @@
     "override:teu-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh11_web_cardlist_es.pdf",
@@ -14017,8 +13860,7 @@
     "override:lor-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh125_web_cardlist_es.pdf",
@@ -14038,8 +13880,7 @@
     "override:crz-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh1_web_cardlist_es.pdf",
@@ -14063,8 +13904,7 @@
     "override:ssh-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 7,
-   "supportsAbsence": true
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh2_web_cardlist_es.pdf",
@@ -14084,8 +13924,7 @@
     "override:rcl-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh4_web_cardlist_es.pdf",
@@ -14105,8 +13944,7 @@
     "override:viv-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh6_web_cardlist_es.pdf",
@@ -14125,8 +13963,7 @@
     "override:cre-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2,
-   "supportsAbsence": true
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh8_web_cardlist_es.pdf",
@@ -14146,8 +13983,7 @@
     "override:fst-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy10_web_cardlist_es.pdf",
@@ -14167,8 +14003,7 @@
     "override:fco-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
@@ -14188,8 +14023,7 @@
     "override:flf-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy8_web_cardlist_es.pdf",
@@ -14209,8 +14043,7 @@
     "override:bkt-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw7_web_cardlist_fr.pdf",
@@ -14230,8 +14063,7 @@
     "override:bcr-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw8_web_cardlist_fr.pdf",
@@ -14251,8 +14083,7 @@
     "override:pls-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/col1_web_cardlist_fr.pdf",
@@ -14272,8 +14103,7 @@
     "override:cl-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/dp1_web_cardlist_fr.pdf",
@@ -14293,8 +14123,7 @@
     "override:dp-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pgo_web_cardlist_fr.pdf",
@@ -14314,8 +14143,7 @@
     "override:pgo-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
@@ -14338,8 +14166,7 @@
     "override:rr-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 6,
-   "supportsAbsence": true
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
@@ -14359,8 +14186,7 @@
     "override:unb-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm115_web_cardlist_fr.pdf",
@@ -14380,8 +14206,7 @@
     "override:hif-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm9_web_cardlist_fr.pdf",
@@ -14402,8 +14227,7 @@
     "override:teu-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh11_web_cardlist_fr.pdf",
@@ -14424,8 +14248,7 @@
     "override:lor-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh125_web_cardlist_fr.pdf",
@@ -14445,8 +14268,7 @@
     "override:crz-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
@@ -14470,8 +14292,7 @@
     "override:ssh-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 7,
-   "supportsAbsence": true
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh2_web_cardlist_fr.pdf",
@@ -14491,8 +14312,7 @@
     "override:rcl-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh4_web_cardlist_fr.pdf",
@@ -14512,8 +14332,7 @@
     "override:viv-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh6_web_cardlist_fr.pdf",
@@ -14532,8 +14351,7 @@
     "override:cre-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2,
-   "supportsAbsence": true
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh8_web_cardlist_fr.pdf",
@@ -14553,8 +14371,7 @@
     "override:fst-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy10_web_cardlist_fr.pdf",
@@ -14574,8 +14391,7 @@
     "override:fco-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
@@ -14595,8 +14411,7 @@
     "override:flf-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy8_web_cardlist_fr.pdf",
@@ -14616,8 +14431,7 @@
     "override:bkt-official-checklist-fr"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw7_web_cardlist_it.pdf",
@@ -14637,8 +14451,7 @@
     "override:bcr-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw8_web_cardlist_it.pdf",
@@ -14658,8 +14471,7 @@
     "override:pls-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/col1_web_cardlist_it.pdf",
@@ -14679,8 +14491,7 @@
     "override:cl-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/dp1_web_cardlist_it.pdf",
@@ -14700,8 +14511,7 @@
     "override:dp-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pgo_web_cardlist_it.pdf",
@@ -14721,8 +14531,7 @@
     "override:pgo-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
@@ -14745,8 +14554,7 @@
     "override:rr-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 6,
-   "supportsAbsence": true
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
@@ -14766,8 +14574,7 @@
     "override:unb-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
@@ -14787,8 +14594,7 @@
     "override:hif-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm9_web_cardlist_it.pdf",
@@ -14809,8 +14615,7 @@
     "override:teu-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh11_web_cardlist_it.pdf",
@@ -14831,8 +14636,7 @@
     "override:lor-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh125_web_cardlist_it.pdf",
@@ -14852,8 +14656,7 @@
     "override:crz-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh1_web_cardlist_it.pdf",
@@ -14877,8 +14680,7 @@
     "override:ssh-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 7,
-   "supportsAbsence": true
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh2_web_cardlist_it.pdf",
@@ -14898,8 +14700,7 @@
     "override:rcl-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh4_web_cardlist_it.pdf",
@@ -14919,8 +14720,7 @@
     "override:viv-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh6_web_cardlist_it.pdf",
@@ -14939,8 +14739,7 @@
     "override:cre-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2,
-   "supportsAbsence": true
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh8_web_cardlist_it.pdf",
@@ -14960,8 +14759,7 @@
     "override:fst-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy10_web_cardlist_it.pdf",
@@ -14981,8 +14779,7 @@
     "override:fco-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
@@ -15002,8 +14799,7 @@
     "override:flf-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy8_web_cardlist_it.pdf",
@@ -15023,8 +14819,7 @@
     "override:bkt-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw7_web_cardlist_en.pdf",
@@ -15044,8 +14839,7 @@
     "override:bcr-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw8_web_cardlist_en.pdf",
@@ -15065,8 +14859,7 @@
     "override:pls-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/col_web_cardlist_en.pdf",
@@ -15086,8 +14879,7 @@
     "override:cl-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/dp1_web_cardlist_en.pdf",
@@ -15107,8 +14899,7 @@
     "override:dp-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pgo_web_cardlist_en.pdf",
@@ -15128,8 +14919,7 @@
     "override:pgo-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
@@ -15152,8 +14942,7 @@
     "override:rr-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 6,
-   "supportsAbsence": true
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
@@ -15173,8 +14962,7 @@
     "override:unb-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm115_web_cardlist_en.pdf",
@@ -15194,8 +14982,7 @@
     "override:hif-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm9_web_cardlist_en.pdf",
@@ -15216,8 +15003,7 @@
     "override:teu-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh11_web_cardlist_en.pdf",
@@ -15238,8 +15024,7 @@
     "override:lor-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4,
-   "supportsAbsence": true
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh125_web_cardlist_en.pdf",
@@ -15259,8 +15044,7 @@
     "override:crz-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh1_web_cardlist_en.pdf",
@@ -15284,8 +15068,7 @@
     "override:ssh-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 7,
-   "supportsAbsence": true
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh2_web_cardlist_en.pdf",
@@ -15305,8 +15088,7 @@
     "override:rcl-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh4_web_cardlist_en.pdf",
@@ -15326,8 +15108,7 @@
     "override:viv-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh6_web_cardlist_en.pdf",
@@ -15346,8 +15127,7 @@
     "override:cre-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2,
-   "supportsAbsence": true
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh8_web_cardlist_en.pdf",
@@ -15367,8 +15147,7 @@
     "override:fst-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy10_web_cardlist_en.pdf",
@@ -15388,8 +15167,7 @@
     "override:fco-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy2_web_cardlist_en.pdf",
@@ -15409,8 +15187,7 @@
     "override:flf-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy8_web_cardlist_en.pdf",
@@ -15430,8 +15207,7 @@
     "override:bkt-official-checklist-en"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
@@ -15523,8 +15299,7 @@
     "override:prize-pack-series-7-checklist-de"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
@@ -15546,8 +15321,7 @@
     "override:prize-pack-series-7-checklist"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
@@ -15569,8 +15343,7 @@
     "override:prize-pack-series-7-checklist-es"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
@@ -15592,8 +15365,7 @@
     "override:prize-pack-series-7-checklist-fr"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
@@ -15615,8 +15387,7 @@
     "override:prize-pack-series-7-checklist-it"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
@@ -15635,8 +15406,7 @@
     "override:prize-pack-series-7-checklist-pt-br"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 2,
-   "supportsAbsence": true
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
@@ -15660,8 +15430,7 @@
     "override:prize-pack-series-8-checklist-de"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
@@ -15685,8 +15454,7 @@
     "override:prize-pack-series-8-checklist"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
@@ -15710,8 +15478,7 @@
     "override:prize-pack-series-8-checklist-es"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
@@ -15735,8 +15502,7 @@
     "override:prize-pack-series-8-checklist-fr"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
@@ -15760,8 +15526,7 @@
     "override:prize-pack-series-8-checklist-it"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
@@ -15781,8 +15546,7 @@
     "override:prize-pack-series-8-checklist-pt-br"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111",
@@ -15823,8 +15587,7 @@
     "override:prize-pack-series-1-checklist-de"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
@@ -15846,8 +15609,7 @@
     "override:prize-pack-series-3-checklist-de"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
@@ -15871,8 +15633,7 @@
     "override:prize-pack-series-1-checklist-es"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
@@ -15894,8 +15655,7 @@
     "override:prize-pack-series-3-checklist-es"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
@@ -15919,8 +15679,7 @@
     "override:prize-pack-series-1-checklist-fr"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
@@ -15942,8 +15701,7 @@
     "override:prize-pack-series-3-checklist-fr"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
@@ -15967,8 +15725,7 @@
     "override:prize-pack-series-1-checklist-it"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
@@ -15990,8 +15747,7 @@
     "override:prize-pack-series-3-checklist-it"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
@@ -16015,8 +15771,7 @@
     "override:prize-pack-series-1-checklist"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 5,
-   "supportsAbsence": true
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf",
@@ -16038,8 +15793,7 @@
     "override:prize-pack-series-3-checklist"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 3,
-   "supportsAbsence": true
+   "usageCount": 3
   },
   {
    "canonicalUrl": null,

@@ -30,7 +30,6 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
@@ -39,27 +38,6 @@ ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = ROOT / "verification" / "source_registry.json"
 MARKDOWN_PATH = ROOT / "verification" / "SOURCES.md"
 
-
-def official_finish_manifest_scopes() -> list[str]:
-    """Keep provider absence scopes aligned with the canonical finish-source registry."""
-    document = json.loads((ROOT / "verification" / "finish_overrides.json").read_text(encoding="utf-8"))
-    official_hosts = {"assets.pokemon.com", "www.pokemon.com", "d1wx537rtdixyy.cloudfront.net"}
-    return sorted({
-        source["url"]
-        for source in document["sources"].values()
-        if source.get("supportsAbsence") is True
-        and source.get("coverage") == "complete-manifest"
-        and urlsplit(source.get("url") or "").hostname in official_hosts
-    })
-
-# --------------------------------------------------------------------------------------------
-# Provider definitions
-#
-# `authorityTier` ranks how much weight a source carries. `supportsAbsence` says that a provider
-# has one or more explicitly complete scopes; `absenceScopes` names the exact URLs that qualify.
-# Provider authority is not itself an absence decision: the collection owner's final cross-source
-# adjudications live in `verification/owner_adjudications.json` and are projected into the database.
-# --------------------------------------------------------------------------------------------
 
 PROVIDERS: list[dict[str, Any]] = [
     {
@@ -71,13 +49,12 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "positive localized card pages; complete manifests only within named checklists",
-        "supportsAbsence": True,
+        "coverage": "positive localized card pages and listed checklist entries",
+        "supportsAbsence": False,
         "usedFor": ["language", "finish", "product"],
-        "absenceScopes": official_finish_manifest_scopes(),
         "attribution": "Official card pages and product checklists © The Pokémon Company International.",
-        "notes": ("Localized card pages provide positive card/language evidence only. Exact "
-                  "checklists may establish finish absence only inside their stated scope."),
+        "notes": ("Localized pages and checklists confirm only the cards, languages, regions, "
+                  "and finishes they explicitly list. Missing entries remain unknown."),
     },
     {
         "providerId": "pokemon-cn-official",
@@ -374,14 +351,11 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Forum terms; community-contributed content.",
         "category": "collector-community",
         "authorityTier": 2,
-        "coverage": "promo language tables and the 1st-edition timeline within their stated scope",
-        "supportsAbsence": True,
+        "coverage": "positive promo language tables and the 1st-edition timeline",
+        "supportsAbsence": False,
         "usedFor": ["language", "edition"],
-        "absenceScopes": [
-            "https://www.elitefourum.com/t/black-star-promos-languages/36573",
-        ],
         "attribution": "Collector-community reference tables from Elite Fourum.",
-        "notes": "High-authority community reference, just below collection-owner authority. Its designated complete table is absence-capable within scope; other final absence decisions require a collection-owner adjudication. This capability is deliberate and pinned by verification/test_owner_adjudications.py; #66 questioned whether it sits well with rule 4, which admits only a complete official manifest, and left the decision with the owner. Nothing currently depends on it either way: all five units citing that thread also carry owner adjudications, so withdrawing it would move no row off not-printed.",
+        "notes": "High-authority community reference. Listed language and edition facts are positive evidence. Missing flags or rows remain unknown.",
     },
     {
         "providerId": "ligapokemon",
@@ -479,14 +453,11 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Publisher's own terms.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "complete-manifest for the Prize Pack series it lists",
-        "supportsAbsence": True,
+        "coverage": "positive Prize Pack cards and finishes shown in the gallery",
+        "supportsAbsence": False,
         "usedFor": ["finish", "product"],
-        "absenceScopes": [
-            "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
-        ],
         "attribution": "Prize Pack contents © The Pokémon Company International.",
-        "notes": "Official gallery of Prize Pack series contents; one of the few complete manifests here.",
+        "notes": "The gallery confirms displayed Prize Pack cards and finishes. Omitted alternatives remain unknown.",
     },
     {
         "providerId": "retailer-listing",
@@ -558,7 +529,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "supportsAbsence": False,
         "usedFor": ["language", "identity", "finish", "edition"],
         "attribution": "Physical card, inspected specimen.",
-        "notes": "The strongest evidence class here: it defeated three databases at once on XYPR 179. Named for the act that is on the record. It was `photographed-specimen` until 2026-08-03, but no photograph is committed for any of the six specimens, so the label promised a file a reader could open and none existed. The recorded inspection is the evidence either way; rename it back once images land in verification/specimens/.",
+        "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
     },
     {
         # Cardmarket appears twice on purpose. The catalogue above is tier 5 — the thing this
@@ -644,6 +615,25 @@ def read_json(path: Path) -> Any:
     # Tolerate historical PowerShell 5.1 BOM output; all active writers now emit UTF-8 no-BOM.
     with path.open(encoding="utf-8-sig") as handle:
         return json.load(handle)
+
+
+def latest_input_date(*documents: Any) -> str:
+    keys = {"checkedAt", "decidedAt", "generated", "lastUpdated", "recordedAt", "retrievedAt"}
+    dates: list[str] = []
+    stack = list(documents)
+    while stack:
+        value = stack.pop()
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key in keys and isinstance(item, str) and re.match(r"^\d{4}-\d{2}-\d{2}", item):
+                    dates.append(item[:10])
+                elif isinstance(item, (dict, list)):
+                    stack.append(item)
+        elif isinstance(value, list):
+            stack.extend(value)
+    if not dates:
+        raise ValueError("source inputs contain no dated evidence")
+    return max(dates)
 
 
 def canonical_url(url: str) -> str:
@@ -775,14 +765,26 @@ def record_corroborating_specimens(
 
 def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
-    finish_units = read_json(ROOT / "verification" / "finish_units.json")["units"]
-    specimens = read_json(ROOT / "verification" / "specimens.json")["specimens"]
+    finish_document = read_json(ROOT / "verification" / "finish_units.json")
+    finish_units = finish_document["units"]
+    specimen_document = read_json(ROOT / "verification" / "specimens.json")
+    specimens = specimen_document["specimens"]
     overrides = read_json(ROOT / "verification" / "finish_overrides.json")
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     artists = read_json(ROOT / "artists_pokemontcgio.json")
     source_first = read_json(ROOT / "verification" / "source_first_prints.json")
     bulbapedia_dates = read_json(
         ROOT / "verification" / "bulbapedia_release_dates.json"
+    )
+    generated = latest_input_date(
+        units,
+        finish_document,
+        specimen_document,
+        overrides,
+        cards,
+        artists,
+        source_first,
+        bulbapedia_dates,
     )
     retained_cardmarket_images = retained_cardmarket_product_image_urls(specimens)
 
@@ -903,38 +905,7 @@ def main() -> int:
             "retrievedAt": entry["retrievedAt"],
             "usageCount": entry["usageCount"],
         }
-        if entry["canonicalUrl"] and entry["canonicalUrl"] in {
-            canonical_url(scope)
-            for scope in PROVIDER_BY_ID[entry["providerId"]].get("absenceScopes", [])
-        }:
-            row["supportsAbsence"] = True
         rows.append(row)
-
-    evidence_urls = {row["canonicalUrl"] for row in rows if row["canonicalUrl"]}
-    missing_scopes = {
-        provider["providerId"]: sorted(
-            canonical_url(scope)
-            for scope in provider.get("absenceScopes", [])
-            if canonical_url(scope) not in evidence_urls
-        )
-        for provider in PROVIDERS
-        if provider.get("supportsAbsence") and provider.get("absenceScopes")
-    }
-    missing_scopes = {provider: scopes for provider, scopes in missing_scopes.items() if scopes}
-    if missing_scopes:
-        print(f"ERROR: absence scopes are not present in the evidence index: {missing_scopes}", file=sys.stderr)
-        return 1
-    unscopeable = [
-        provider["providerId"] for provider in PROVIDERS
-        if provider.get("supportsAbsence") and not provider.get("absenceScopes")
-    ]
-    if unscopeable:
-        print(
-            "ERROR: absence-capable providers must declare absenceScopes: "
-            + ", ".join(unscopeable),
-            file=sys.stderr,
-        )
-        return 1
 
     usage_by_provider = Counter(row["providerId"] for row in rows)
     urls_by_provider: dict[str, int] = defaultdict(int)
@@ -957,10 +928,10 @@ def main() -> int:
     document = {
         "meta": {
             "description": "Canonical provider registry and evidence index for every sourced claim.",
-            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "generated": generated,
             "policy": [
                 "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
-                "supportsAbsence identifies providers with complete scopes; only evidence URLs marked supportsAbsence=true are absence-capable. Provider authority alone never establishes absence.",
+                "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
                 "Non-URL evidence is a named evidence class, never a fabricated hyperlink.",
                 "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there.",
             ],
@@ -983,27 +954,23 @@ def main() -> int:
         return 1
 
     markdown = render_markdown(document)
+    registry_rendered = json.dumps(document, ensure_ascii=False, indent=1) + "\n"
 
     if "--check" in sys.argv:
         stale = []
-        current_registry = (
-            json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
-            if REGISTRY_PATH.exists() else {}
-        )
-        if (current_registry.get("evidence") != rows
-                or current_registry.get("providers") != providers_out):
+        if not REGISTRY_PATH.exists() or REGISTRY_PATH.read_text(
+                encoding="utf-8") != registry_rendered:
             stale.append(str(REGISTRY_PATH.relative_to(ROOT)))
         if not MARKDOWN_PATH.exists() or MARKDOWN_PATH.read_text(encoding="utf-8") != markdown:
             stale.append(str(MARKDOWN_PATH.relative_to(ROOT)))
         if stale:
-            print(f"stale: {', '.join(stale)}; run python scripts/source_registry.py")
+            print(f"stale: {', '.join(stale)}. Run python scripts/source_registry.py")
             return 1
         print("source registry is current")
         return 0
 
     with REGISTRY_PATH.open("w", encoding="utf-8", newline="\n") as handle:
-        json.dump(document, handle, ensure_ascii=False, indent=1)
-        handle.write("\n")
+        handle.write(registry_rendered)
     with MARKDOWN_PATH.open("w", encoding="utf-8", newline="\n") as handle:
         handle.write(markdown)
 
@@ -1027,20 +994,18 @@ def render_markdown(document: dict[str, Any]) -> str:
         f"({document['meta']['counts']['uniqueUrls']} unique URLs and "
         f"{document['meta']['counts']['nonUrlEvidenceClasses']} non-URL evidence classes).",
         "",
-        "**`supportsAbsence` describes source capability, not a final application decision.** A",
-        "complete official manifest may establish that a printing does *not* exist within its",
-        "stated scope. The collection owner's cross-source decisions are stored separately in",
-        "`verification/owner_adjudications.json`; an evidence row is absence-capable only when its",
-        "own `supportsAbsence` flag is true. For every other source a missing row is a coverage",
-        "gap, never a finding.",
+        "Every external provider is positive-only. An official Pokémon page confirms what it",
+        "explicitly lists for the corresponding language or region. A missing card, language,",
+        "finish, page, or result remains unknown. Final absence decisions are stored separately",
+        "in `verification/owner_adjudications.json`.",
         "",
-        "| Provider | Category | Tier | Absence? | Sources | Claims | Used for |",
+        "| Provider | Category | Tier | Evidence mode | Sources | Claims | Used for |",
         "|---|---|---:|:---:|---:|---:|---|",
     ]
     for provider in sorted(document["providers"], key=lambda p: (p["authorityTier"], p["displayName"])):
         lines.append(
             f"| **{provider['displayName']}** | {provider['category']} | {provider['authorityTier']} | "
-            f"{'yes' if provider['supportsAbsence'] else 'no'} | {provider['uniqueSources']} | "
+            f"positive only | {provider['uniqueSources']} | "
             f"{provider['claimsSupported']} | {', '.join(provider['usedFor'])} |"
         )
     lines += ["", "## Provider detail", ""]
@@ -1052,10 +1017,7 @@ def render_markdown(document: dict[str, Any]) -> str:
             f"- **Organization:** {provider['organization'] or 'not applicable (evidence class)'}",
             f"- **Terms:** {provider['licenseOrTerms']}",
             f"- **Coverage:** {provider['coverage']}",
-            f"- **Can establish absence:** {'yes, within its stated scope' if provider['supportsAbsence'] else 'no — positive evidence only'}",
-            *(["- **Absence-capable source scopes:** " + ", ".join(
-                f"<{scope}>" for scope in provider.get("absenceScopes", [])
-            )] if provider.get("absenceScopes") else []),
+            "- **Evidence mode:** positive only",
             f"- **Attribution:** {provider['attribution']}",
             f"- **Notes:** {provider['notes']}",
             "",

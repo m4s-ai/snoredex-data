@@ -26,13 +26,10 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from absence_model import absence_scope_urls  # noqa: E402
-
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.5.0"
+SCHEMA_VERSION = "1.6.0"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 
 INPUTS = [
@@ -175,7 +172,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10005;
+PRAGMA user_version = 10006;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -198,7 +195,7 @@ CREATE TABLE providers (
     category TEXT NOT NULL,
     authority_tier INTEGER NOT NULL CHECK (authority_tier BETWEEN 1 AND 5),
     coverage TEXT NOT NULL,
-    supports_absence INTEGER NOT NULL CHECK (supports_absence IN (0, 1)),
+    supports_absence INTEGER NOT NULL CHECK (supports_absence = 0),
     used_for_json TEXT NOT NULL,
     attribution TEXT NOT NULL,
     notes TEXT NOT NULL,
@@ -268,7 +265,7 @@ CREATE TABLE product_languages (
     application_status TEXT NOT NULL CHECK (application_status IN (
         'exists', 'not-printed', 'disputed', 'needs-evidence', 'unresolved', 'out-of-scope'
     )),
-    absence_supported INTEGER NOT NULL CHECK (absence_supported IN (0, 1)),
+    absence_supported INTEGER NOT NULL CHECK (absence_supported = 0),
     adjudication_id TEXT REFERENCES owner_adjudications(adjudication_id),
     unit_id TEXT,
     provider_id TEXT REFERENCES providers(provider_id),
@@ -390,7 +387,7 @@ CREATE TABLE printing_sources (
     evidence TEXT NOT NULL,
     authority_tier INTEGER,
     coverage TEXT,
-    supports_absence INTEGER CHECK (supports_absence IN (0, 1)),
+    supports_absence INTEGER CHECK (supports_absence IS NULL OR supports_absence = 0),
     retrieved_at TEXT,
     source_json TEXT NOT NULL,
     PRIMARY KEY (printing_id, source_order)
@@ -555,14 +552,10 @@ SELECT
     pl.adjudication_id,
     CASE
         WHEN oa.adjudication_id IS NOT NULL THEN oa.authority
-        WHEN pl.application_status = 'not-printed' AND pl.absence_supported = 1
-            THEN 'source-scope'
         ELSE NULL
     END AS decision_authority,
     CASE
         WHEN oa.adjudication_id IS NOT NULL THEN oa.basis
-        WHEN pl.application_status = 'not-printed' AND pl.absence_supported = 1
-            THEN 'scoped-source'
         ELSE NULL
     END AS decision_basis,
     oa.decided_at AS decision_decided_at,
@@ -730,17 +723,13 @@ def build_database(target: Path) -> dict[str, int | str]:
     cursor.executemany("INSERT INTO languages VALUES (?, ?, ?, ?, ?)", LANGUAGES)
 
     provider_by_id = {item["providerId"]: item for item in providers}
-    # The declared complete manifests, read from the provider config rather than from the evidence
-    # index, so this and scripts/language_status.py apply one rule from one place (#66). The two
-    # sets are identical today; deriving them separately is how they would stop being.
-    absence_source_urls = absence_scope_urls(providers)
     cursor.executemany(
         "INSERT INTO providers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
             (
                 item["providerId"], item["displayName"], item.get("organization"),
                 item.get("homepage"), item["category"], item["authorityTier"],
-                item["coverage"], int(item["supportsAbsence"]), compact(item.get("usedFor", [])),
+                item["coverage"], 0, compact(item.get("usedFor", [])),
                 item["attribution"], item["notes"], compact(item.get("hosts", [])),
             )
             for item in providers
@@ -859,11 +848,7 @@ def build_database(target: Path) -> dict[str, int | str]:
         pid = product_by_identity.get(identity)
         if pid is None:
             raise ValueError(f"language unit {unit['unitId']} has no collectible product {identity}")
-        provider = provider_by_id[unit["providerId"]]
         source_url = unit.get("sourceUrl")
-        absence_supported = int(
-            bool(source_url) and source_url.rstrip("/") in absence_source_urls
-        )
         adjudication = owner_by_unit.get(unit["unitId"])
         if adjudication and unit["status"] != "contradicted":
             raise ValueError(
@@ -879,7 +864,7 @@ def build_database(target: Path) -> dict[str, int | str]:
             "INSERT INTO product_languages VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 pid, LANGUAGE_CODE[unit["language"]], 1, unit["status"], app_status,
-                absence_supported, adjudication["adjudicationId"] if adjudication else None,
+                0, adjudication["adjudicationId"] if adjudication else None,
                 unit["unitId"], unit["providerId"],
                 int(unit["corroborated"]), source_url, unit.get("sourceRef"),
                 unit.get("sourceType"), unit.get("evidence"),
@@ -1021,7 +1006,7 @@ def build_database(target: Path) -> dict[str, int | str]:
                         printing["printingId"], order, provider_for_source(source, providers),
                         source.get("url"), source.get("identityUrl"), source["sourceType"],
                         source["evidence"], source.get("authorityTier"), source.get("coverage"),
-                        int(source["supportsAbsence"]) if "supportsAbsence" in source else None,
+                        0 if "supportsAbsence" in source else None,
                         source.get("retrievedAt"), compact(source),
                     ),
                 )
@@ -1071,23 +1056,17 @@ def build_database(target: Path) -> dict[str, int | str]:
         )
 
     for unit in units:
-        provider = provider_by_id[unit["providerId"]]
         adjudication = owner_by_unit.get(unit["unitId"])
-        source_absence_supported = bool(
-            unit.get("sourceUrl")
-            and unit["sourceUrl"].rstrip("/") in absence_source_urls
-        )
         if adjudication:
             issue(
                 "information", "owner-adjudicated-absence", "language-unit", unit["unitId"],
                 "The collection owner adopted not-printed after reviewing the cited claims and "
                 "evidence; no single provider is treated as proving absence.",
             )
-        elif unit["status"] == "contradicted" and not source_absence_supported:
+        elif unit["status"] == "contradicted":
             issue(
-                "warning", "unsupported-negative-language-claim", "language-unit", unit["unitId"],
-                f"Repository verdict is contradicted, but source {unit.get('sourceUrl') or unit['providerId']} "
-                "is not marked as an absence-capable complete scope. App status is conservatively disputed.",
+                "warning", "unadjudicated-language-disagreement", "language-unit", unit["unitId"],
+                "Repository verdict is contradicted and remains disputed until the collection owner adjudicates it.",
             )
     for pid, language_code, edition, category in suppressed_edition_claims:
         if category == "suppressed-absent-edition":
@@ -1256,8 +1235,8 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10005:
-            problems.append("database PRAGMA user_version is not 10005")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != 10006:
+            problems.append("database PRAGMA user_version is not 10006")
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()
@@ -1307,12 +1286,11 @@ def validate_database(target: Path) -> list[str]:
             problems.append(f"{invalid_graph_edges} graph edge source(s) are not materialized")
         hard_negatives = connection.execute(
             "SELECT COUNT(*) FROM product_languages "
-            "WHERE application_status='not-printed' AND absence_supported=0 "
-            "AND adjudication_id IS NULL"
+            "WHERE application_status='not-printed' AND adjudication_id IS NULL"
         ).fetchone()[0]
         if hard_negatives:
             problems.append(
-                f"{hard_negatives} hard negatives lack scoped source evidence or owner adjudication"
+                f"{hard_negatives} hard negatives lack owner adjudication"
             )
         semantic_status = {
             row["unitId"]: row["applicationStatus"]
@@ -1424,8 +1402,8 @@ application decision separately. **{stats['language_owner_adjudicated']}** rows 
 `owner_adjudications`: the collection owner reviewed all cited claims and evidence and adopted
 `application_status='not-printed'`. This is deliberately not attributed to Elite Fourum or any
 other single provider. The remaining **{stats['language_disputed']}** rows stay
-`application_status='disputed'` because no owner adjudication settles them. Exact exhaustive source
-edges may support the recorded contradiction, but do not become a final collection decision.
+`application_status='disputed'` because no owner adjudication settles them. External sources record
+positive evidence or disagreement and never become a final collection decision.
 
 The owner decision and its rationale are queryable in `owner_adjudications` and through the
 `app_language_availability` view. The raw evidence and repository verdict remain unchanged, so a

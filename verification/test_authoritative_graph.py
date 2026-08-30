@@ -392,12 +392,12 @@ def main() -> None:
     )
     assert any("identity input claims" in error for error in validate(graph, identity_inputs=identity_inputs))
 
-    # Closed finish profiles require an explicit scope and closure authority.
+    # External finish profiles cannot close a list.
     tampered = deepcopy(graph)
     next(row["payload"] for row in tampered["entities"] if row["entityType"] == "finish-profile")[
-        "closureAuthority"
-    ] = None
-    assert any("closure scope/authority" in error for error in validate(tampered))
+        "closedWithinScope"
+    ] = True
+    assert any("claims closure" in error for error in validate(tampered))
 
     # Rarity observations must stay in the locality of the release they describe.
     tampered = deepcopy(graph)

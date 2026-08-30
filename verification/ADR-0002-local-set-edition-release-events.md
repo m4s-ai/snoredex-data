@@ -38,7 +38,7 @@ set would make the catalogue unable to discover what it was built to find.
   distribution-market scope. Editions link to zero or more events; dates never live on a set
   concept, and an event cannot override its local set's locality.
 - `finish_profile` carries language-bearing edition links, sourced rules, conditions, exceptions,
-  precision and any justified closure scope.
+  precision and a positive evidence scope.
 - `card_release_ref` points only to a release already established by ADR-0001. Set availability,
   finish profiles and rarity claims have no path that can mint one.
 - `rarity_claim` belongs to a card release and preserves the source-native vocabulary. Cardmarket
@@ -50,21 +50,20 @@ The SQL contract uses foreign keys, uniqueness checks and scoped value checks fo
 edges. It also prevents updates or deletes of a loaded source record. #140 may choose a different
 physical layout, but it must preserve the same boundaries and constraints.
 
-## Evidence and closure rules
+## Evidence rules
 
 Positive evidence can create a local set, edition, event or finish rule only at the scope the
 source states. Silence creates neither an event nor a negative claim. An unknown date remains a
 `needs-evidence` disposition unless a dated/undated event itself is positively identified.
 
 A finish profile establishes a finish only for card releases that already belong to one of its
-linked editions. Its conditions are evaluated after reachability; they are not a set checklist.
-Closure is legal only when both a closure scope and an accepted complete-manifest or equivalent
-explicit complete-statement authority are recorded. The Skyridge rule therefore closes only the
-question “is a reverse-holo version available?” inside English, German and Italian, with H/32
-excluded. It does not close the card's complete finish list.
+linked editions. Its conditions are evaluated after reachability. They are not a set checklist.
+External source profiles are positive only and cannot close a finish question. The Skyridge rule
+positively identifies reverse-holo availability for English, German and Italian cards outside the
+H/32 subset. It makes no negative claim about H/32 cards or any other finish.
 
-A physical specimen remains independent card-level evidence. A specimen showing a treatment that
-falls outside a closed profile is a reported conflict; neither source overwrites the other.
+A physical specimen remains independent card-level evidence. A specimen showing another treatment
+adds a positive observation. Neither source overwrites the other.
 
 Rarity can imply a base finish only through a declared, sourced vocabulary mapping. It can never
 establish that a card or language edition exists. A marketplace rarity attached to a listing from
@@ -93,7 +92,7 @@ date fields until #140. That projection is explicitly lossy:
 - a raw code without locality can collide;
 - one language list hides distinct language/script editions and regional Spanish releases;
 - one date loses market, wave, precision, approximation, status, timezone and source;
-- one finish list loses language scope, exceptions, conditions, closure authority and conflicts;
+- one finish list loses language scope, evidence scope, conditions and conflicts.
 - one rarity column destroys independent provider claims and cross-locality divergence;
 - source-first sets disappear when the projection begins from Snorlax cards.
 

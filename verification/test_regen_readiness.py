@@ -23,13 +23,13 @@ TARGETS = [
     (ROOT / "verification" / "authoritative_graph.json",
      b'"schemaVersion": "1.1.0"', b'"schemaVersion": "0.0.0"'),
 ]
-UTC_DATE_GENERATORS = [
-    ROOT / "scripts" / "source_registry.py",
-    ROOT / "scripts" / "source_capabilities.py",
-    ROOT / "scripts" / "evidence_semantics.py",
-    ROOT / "scripts" / "checklist.py",
-    ROOT / "scripts" / "finishes.py",
-]
+INPUT_DATE_MARKERS = {
+    ROOT / "scripts" / "source_registry.py": "generated = latest_input_date(",
+    ROOT / "scripts" / "source_capabilities.py": 'str(manifest["meta"]["reviewedAt"])[:10]',
+    ROOT / "scripts" / "evidence_semantics.py": "generated = max(",
+    ROOT / "scripts" / "checklist.py": "generated = max(",
+    ROOT / "scripts" / "finishes.py": "generated_date = latest_input_date(",
+}
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess:
@@ -38,11 +38,10 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess:
 
 
 def main() -> int:
-    utc_expression = "datetime.now(timezone.utc).date().isoformat()"
-    for path in UTC_DATE_GENERATORS:
+    for path, marker in INPUT_DATE_MARKERS.items():
         source = path.read_text(encoding="utf-8")
-        if "date.today()" in source or utc_expression not in source:
-            print(f"FAIL: {path.relative_to(ROOT)} does not use the UTC snapshot date")
+        if "date.today()" in source or marker not in source:
+            print(f"FAIL: {path.relative_to(ROOT)} does not derive its write date from inputs")
             return 1
     if not all(path.is_file() for path, _, _ in TARGETS):
         print("SKIP: a readiness target is missing")

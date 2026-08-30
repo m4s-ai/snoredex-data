@@ -21,7 +21,7 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -36,12 +36,6 @@ ALLOWED_LOCALITIES = {
 }
 FAILURE_STATES = {
     "incomplete", "rate-limited", "blocked-by-browser", "unavailable", "needs-evidence",
-}
-SPECIMEN_ONLY_PROVIDERS = {
-    "psa", "cgc", "snkrdunk", "ligapokemon", "retailer-listing",
-    "owner-attestation", "inspected-specimen", "cardmarket-product-image",
-    "cardmarket-listing-photo",
-    "seller-listing-photo", "pokecardex", "pkparaiso", "wikidex",
 }
 DIMENSION_ALIASES = {"finish-override": "finish"}
 
@@ -257,6 +251,8 @@ def validate_semantics(manifest: dict[str, Any], registry: dict[str, Any]
             raise ContractError(f"{surface['surfaceId']}: accessible surface lacks an endpoint")
         if surface["adapterState"] == "active" and not surface["coverageEdges"]:
             raise ContractError(f"{surface['surfaceId']}: active adapter has no tested edge")
+        if surface["finishCapability"]["closedWithinScope"]:
+            raise ContractError(f"{surface['surfaceId']}: external finish surfaces are positive only")
         for edge in surface["coverageEdges"]:
             edge_id = edge["edgeId"]
             if edge_id in edges:
@@ -270,22 +266,11 @@ def validate_semantics(manifest: dict[str, Any], registry: dict[str, Any]
             if finish_capable and surface["finishCapability"]["mode"] == "none":
                 raise ContractError(f"{edge_id}: finish evidence has no independent finish capability")
             absence = edge["absenceCapability"]
-            if absence["enabled"]:
-                if not edge["exhaustive"] or not absence["dimensions"] or not absence["exactScopes"]:
-                    raise ContractError(f"{edge_id}: absence requires an exhaustive exact scope")
-                if edge["boundary"]["zeroResultMeans"] != "bounded-absence":
-                    raise ContractError(f"{edge_id}: absence boundary is not explicitly bounded")
-                if not edge.get("outOfScopeChallengeObservationId"):
-                    raise ContractError(f"{edge_id}: absence edge lacks an out-of-scope challenge")
-                if "finish" in absence["dimensions"] and not surface["finishCapability"]["closedWithinScope"]:
-                    raise ContractError(f"{edge_id}: finish absence lacks a closed finish profile")
-            else:
-                if edge["exhaustive"] or absence["dimensions"] or absence["exactScopes"]:
-                    raise ContractError(f"{edge_id}: non-absence edge carries exhaustive/absence fields")
-                if edge["boundary"]["zeroResultMeans"] != "unknown":
-                    raise ContractError(f"{edge_id}: zero result must remain unknown")
-            if surface["providerId"] in SPECIMEN_ONLY_PROVIDERS and absence["enabled"]:
-                raise ContractError(f"{edge_id}: specimen-only provider cannot establish absence")
+            if edge["exhaustive"] or absence["enabled"] \
+                    or absence["dimensions"] or absence["exactScopes"]:
+                raise ContractError(f"{edge_id}: external edges are positive only")
+            if edge["boundary"]["zeroResultMeans"] != "unknown":
+                raise ContractError(f"{edge_id}: zero results must remain unknown")
 
     providers_without_surface = sorted(set(providers) - set(surfaces_by_provider))
     if providers_without_surface:
@@ -323,26 +308,18 @@ def validate_semantics(manifest: dict[str, Any], registry: dict[str, Any]
         if not positive or positive["kind"] != "known-positive" \
                 or edge_id not in positive["validatesEdges"]:
             raise ContractError(f"{edge_id}: known-positive observation is missing or mislinked")
-        if edge["absenceCapability"]["enabled"]:
-            challenge = observations.get(edge["outOfScopeChallengeObservationId"])
-            if not challenge or challenge["kind"] != "out-of-scope-challenge" \
-                    or edge_id not in challenge["validatesEdges"]:
-                raise ContractError(f"{edge_id}: out-of-scope challenge is missing or mislinked")
-
-    manifest_absence: dict[str, set[str]] = defaultdict(set)
-    for edge_id, edge in edges.items():
-        if edge["absenceCapability"]["enabled"]:
-            provider_id = surfaces[edge_surface[edge_id]]["providerId"]
-            manifest_absence[provider_id].update(edge["absenceCapability"]["exactScopes"])
-    registry_absence = {
-        provider_id: set(provider.get("absenceScopes") or [])
-        for provider_id, provider in registry_providers.items()
-        if provider.get("supportsAbsence")
-    }
-    if dict(manifest_absence) != registry_absence:
+    registry_absence = [
+        provider_id for provider_id, provider in registry_providers.items()
+        if provider.get("supportsAbsence") or provider.get("absenceScopes")
+    ]
+    evidence_absence = [
+        row.get("canonicalUrl") or row.get("nonUrlEvidenceId")
+        for row in registry["evidence"] if row.get("supportsAbsence")
+    ]
+    if registry_absence or evidence_absence:
         raise ContractError(
-            f"absence scopes differ from source registry: manifest={dict(manifest_absence)}, "
-            f"registry={registry_absence}"
+            f"source registry carries absence authority: providers={registry_absence}, "
+            f"evidence={evidence_absence}"
         )
 
     source_resolution = []
@@ -364,20 +341,12 @@ def validate_semantics(manifest: dict[str, Any], registry: dict[str, Any]
                 f"used source {source} requires undeclared capabilities {missing} on "
                 f"{surface['surfaceId']}"
             )
-        absence_edges = [
-            edge["edgeId"] for edge in surface_edges
-            if row.get("canonicalUrl") in edge["absenceCapability"]["exactScopes"]
-        ]
-        if row.get("supportsAbsence") and len(absence_edges) != 1:
-            raise ContractError(
-                f"absence-capable source {row['canonicalUrl']} resolves to {absence_edges}"
-            )
         source_resolution.append({
             "sourceKey": row.get("canonicalUrl") or row.get("nonUrlEvidenceId"),
             "providerId": row["providerId"],
             "surfaceId": surface["surfaceId"],
             "capabilityEdgeIds": [edge["edgeId"] for edge in surface_edges],
-            "absenceEdgeIds": absence_edges,
+            "absenceEdgeIds": [],
             "dimensions": row["dimensions"],
         })
 
@@ -423,7 +392,10 @@ def build() -> dict[str, Any]:
         "meta": {
             "schema": "snoredex-source-capability-graph",
             "schemaVersion": manifest["meta"]["schemaVersion"],
-            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "generated": max(
+                str(manifest["meta"]["reviewedAt"])[:10],
+                str(registry["meta"]["generated"])[:10],
+            ),
             "manifest": "verification/source_capabilities.json",
             "manifestSchema": "verification/source_capability_schema.json",
             "sourceRegistry": "verification/source_registry.json",
@@ -462,30 +434,25 @@ def main() -> int:
         return 1
 
     if args.check:
-        current = read_json(OUTPUT_PATH) if OUTPUT_PATH.exists() else {}
-        expected = json.loads(rendered)
-        # The write date is provenance, not input-derived graph content. Comparing it made every
-        # unchanged checkout stale at midnight; source_registry.py applies the same boundary.
-        current.get("meta", {}).pop("generated", None)
-        expected.get("meta", {}).pop("generated", None)
-        if current != expected:
+        if not OUTPUT_PATH.exists() or OUTPUT_PATH.read_text(encoding="utf-8") != rendered:
             print(f"[FAIL] {OUTPUT_PATH.relative_to(ROOT)} is stale")
             return 1
-        graph = expected
+        graph = json.loads(rendered)
         counts = graph["meta"]["counts"]
         print(
             f"[ ok ] source capability graph: {counts['providers']} providers, "
-            f"{counts['coverageEdges']} bounded edges, {counts['resolvedVerdictSources']} "
+            f"{counts['coverageEdges']} positive edges, {counts['resolvedVerdictSources']} "
             "verdict sources resolved"
         )
         return 0
 
-    OUTPUT_PATH.write_text(rendered, encoding="utf-8")
+    with OUTPUT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(rendered)
     graph = json.loads(rendered)
     counts = graph["meta"]["counts"]
     print(
         f"wrote {OUTPUT_PATH.relative_to(ROOT)}: {counts['providers']} providers -> "
-        f"{counts['coverageEdges']} edges, {counts['absenceEdges']} exact absence edges, "
+        f"{counts['coverageEdges']} edges, {counts['absenceEdges']} absence edges, "
         f"{counts['observations']} hashed observations"
     )
     return 0

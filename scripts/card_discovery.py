@@ -1045,7 +1045,7 @@ def checked_raw_path(run_dir: Path, relative: str) -> Path:
 
 
 def build_projection(
-    contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any],
+    contract: dict[str, Any], capability: dict[str, Any] | None, identity: dict[str, Any],
     manifest: dict[str, Any], run_dir: Path, previous: dict[str, Any] | None,
     projection_contract: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -1065,7 +1065,7 @@ def build_projection(
     }
     if manifest.get("contractHash") != content_hash(contract):
         raise DiscoveryError(f"run {manifest.get('runId')} was captured under another contract")
-    if manifest.get("capabilityGraphHash") != capability_pin(
+    if capability is not None and manifest.get("capabilityGraphHash") != capability_pin(
             capability, manifest_surfaces(manifest)):
         raise DiscoveryError(f"run {manifest.get('runId')} was captured under another capability graph")
     if manifest.get("coverageVersion") != contract["meta"]["coverageVersion"]:
@@ -1346,6 +1346,7 @@ def build_latest(
     if not directories:
         raise DiscoveryError("no retained card-discovery run exists")
     previous = None
+    latest_dir = directories[-1]
     for run_dir in directories:
         manifest = read_json(run_dir / "manifest.json")
         if manifest.get("runId") != run_dir.name:
@@ -1360,15 +1361,17 @@ def build_latest(
             run_contract = read_json(snapshot_path)
             if manifest.get("contractHash") != content_hash(run_contract):
                 raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
-            # Historical editorial targets may have been superseded in the
-            # current graph. The immutable snapshot hash preserves what the run
-            # used; only the current contract is required to resolve today.
         compatible = acquisition_contract(run_contract) == acquisition_contract(contract)
         previous = build_projection(
-            run_contract, capability, identity, manifest, run_dir, previous,
+            run_contract,
+            capability if run_dir == latest_dir else None,
+            identity,
+            manifest,
+            run_dir,
+            previous,
             contract if compatible else run_contract,
         )
-    return previous, directories[-1]
+    return previous, latest_dir
 
 
 def fetch_bytes(url: str, headers: dict[str, str] | None = None) -> bytes:

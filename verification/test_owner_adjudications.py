@@ -15,13 +15,9 @@ from __future__ import annotations
 
 import json
 import sqlite3
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "scripts"))
-
-from absence_model import absence_scope_urls  # noqa: E402
 
 DATABASE = ROOT / "snoredex.sqlite"
 
@@ -37,7 +33,10 @@ def main() -> int:
     registry = json.loads(
         (ROOT / "verification" / "source_registry.json").read_text(encoding="utf-8")
     )
-    scope_urls = absence_scope_urls(registry["providers"])
+    if any(provider.get("supportsAbsence") for provider in registry["providers"]):
+        raise AssertionError("an external provider still has absence authority")
+    if any(provider.get("absenceScopes") for provider in registry["providers"]):
+        raise AssertionError("an external provider still declares absence scopes")
 
     decisions = owner_doc["decisions"]
     decision_ids = {item["unitId"] for item in decisions}
@@ -58,13 +57,6 @@ def main() -> int:
         if not decision["rationale"] or not decision["evidenceRefs"]:
             raise AssertionError(f"owner decision lacks rationale or evidence refs: {decision}")
 
-    # A unit's source only "supports absence" when it is one of the declared complete manifests.
-    # The owner's decision never confers that property, so the projection must not invent it.
-    source_scoped = {
-        unit_id
-        for unit_id in decision_ids
-        if (raw_units[unit_id].get("sourceUrl") or "").rstrip("/") in scope_urls
-    }
     contradicted_ids = {
         unit_id for unit_id, unit in raw_units.items() if unit["status"] == "contradicted"
     }
@@ -80,9 +72,8 @@ def main() -> int:
         if {row[0] for row in rows} != decision_ids:
             raise AssertionError("database owner-adjudication coverage differs from canonical store")
         for unit_id, verdict, status, absence_supported, authority, basis, rationale, refs_json in rows:
-            expected_absence_supported = int(unit_id in source_scoped)
             if (verdict, status, absence_supported, authority, basis) != (
-                "contradicted", "not-printed", expected_absence_supported,
+                "contradicted", "not-printed", 0,
                 "collection-owner", "multi-source-adjudication"
             ):
                 raise AssertionError(f"invalid owner projection for {unit_id}: {verdict, status, absence_supported, authority, basis}")
@@ -98,11 +89,11 @@ def main() -> int:
                 f"expected {expected_disputed} non-adjudicated disputed rows "
                 f"(contradicted units without an owner decision), found {ordinary_disputed}"
             )
-        elitefourum_capability = connection.execute(
-            "SELECT supports_absence FROM providers WHERE provider_id='elitefourum'"
+        provider_absence_count = connection.execute(
+            "SELECT COUNT(*) FROM providers WHERE supports_absence<>0"
         ).fetchone()[0]
-        if elitefourum_capability != 1:
-            raise AssertionError("Elite Fourum must retain scoped absence capability")
+        if provider_absence_count:
+            raise AssertionError("database providers still expose absence authority")
     finally:
         connection.close()
 

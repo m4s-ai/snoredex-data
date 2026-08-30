@@ -78,37 +78,32 @@ existing Python workflow owners rather than copying their contracts.
    ([LESSONS](LESSONS.md#the-neighbours-evidence-is-not-this-units-evidence)). `S13` and `S14` hold
    the line: `sourceRef` carries a reference or nothing, and only a cited specimen may claim
    specimen authority.
-3. **Never contradict on bare absence.** A source that fails to list a printing has a gap; it has
-   not proved the printing does not exist. First prove the source *covers the category* — pokumon
-   lists Korean promos, so a missing Korean row there is meaningful; its West coverage is one
-   lumped "English" row, so its silence on French means nothing. This rule exists because an
+3. **Never contradict on bare absence.** A source that fails to list a printing has a gap. It has
+   not proved the printing does not exist. Official Pokémon sources confirm only the releases they
+   name for the matching language and region. Missing rows, fields, pages, and results stay unknown.
+   This rule exists because an
    absence argument produced a false contradiction (`XY-P 149`) that had to be reverted
    ([LESSONS](LESSONS.md#an-absence-argument-that-produced-a-false-contradiction)).
-4. **Only a collection-owner adjudication settles an absence.** Not a source — any source.
+4. **Only a collection-owner adjudication settles an absence.** No external source can do so.
    Converging evidence from dependable sources is *Indizien*: it is the material the owner weighs,
    and deciding which way it points is the collector's job, not a property a page can assert.
    Adjudications are stored separately in `verification/owner_adjudications.json` and are never
    attributed to a single provider.
 
-   A provider may declare `absenceScopes` — specific pages that state a closed list rather than
-   merely failing to mention something, like Elite Fourum's Black Star Promos language table or the
-   Kalos Starter Set article. That is **recorded rationale, never a mechanism**: it strengthens the
-   case, and `E9` checks each scope is declared and justified, but a scoped source alone leaves the
-   claim `disputed`. Dependability decides whether a source may carry that weight, not whether it
-   is a manufacturer — Bulbapedia and Elite Fourum qualify
-   ([LESSONS](LESSONS.md#complete-official-manifest-was-narrower-than-intended)).
+   External providers must set `supportsAbsence=false` and declare no `absenceScopes`. `E9` enforces
+   that boundary. Provider coverage remains useful research context, but it never turns omission
+   into evidence.
 
    **The finish layer has the same mechanism since #119.** `owner_adjudications.json` carries a
    second array, `finishDecisions`, and a decision there closes the list of finishes for one
-   set-number-language unit — `completenessStatus=owner-adjudicated`, kept deliberately distinct
-   from the source-derived `complete-manifest` so a consumer can tell a collector's ruling from a
-   manufacturer's. It exists because some products have no manifest to find: `/ex/` product pages
+   set-number-language unit with `completenessStatus=owner-adjudicated`. It exists because some
+   products have no finish-specific product page to find. `/ex/` product pages
    are not published for magazine-bonus decks, and the official card page carries no finish
    vocabulary at all (`FINISH_SOURCES.md` records the probe, with a working control).
 
-   A finish decision **closes a list, it never asserts a finish.** `E13` enforces both halves: it
+   A finish decision **closes a list and never asserts a finish.** `E13` enforces both halves. It
    must name exactly the finishes the evidence already found, and it may not apply to a unit with no
-   printings — that would be an absence argument wearing the owner's name.
+   printings. That would be an absence argument wearing the owner's name.
 
    **`not-printed` means no regular release.** A proof copy or an error card is a different
    category and does not falsify the decision.
@@ -162,8 +157,7 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   these do **not** imply a reverse holo).
 - **`contradicted` is a disagreement; `not-printed` is a decision.** A contradicted unit means an
   outside source disagrees with Cardmarket. Only an explicit collection-owner adjudication settles
-  a language/printing absence; exhaustive source scopes may support its bounded rationale but never
-  make that final decision. Everything else is **disputed** — the current
+  a language or printing absence. Everything else is **disputed**. The current
   settled/disputed counts are generated figures, read them from `verification/evidence_semantics.json`
   (or the README), never from this file — and `DATABASE.md` is right that an application must not
   read disputed as "does not exist". `scripts/absence_model.py` holds that one rule for every

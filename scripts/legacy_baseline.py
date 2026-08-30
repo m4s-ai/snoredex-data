@@ -112,15 +112,8 @@ SCOPE_QUALIFIERS = (
     "inherited", "within its scope", "within scope", "frozen", "baseline",
 )
 
-# Domain terms that contain the vocabulary and are not global claims. `complete official manifest`
-# is rule 4 — a source that states a closed list within its own declared scope — and
-# `complete-manifest` is the finish layer's status value for exactly that. Neither says anything
-# about the catalogue being finished.
+# Domain terms that contain the vocabulary and are not global claims.
 CLAIM_ALLOWLIST = (
-    "complete official manifest",
-    "complete-manifest",
-    "complete manifest",
-    "complete list of finishes",
     "complete all-locality",       # only ever appears inside a denial of one
     "complete verification",
 )

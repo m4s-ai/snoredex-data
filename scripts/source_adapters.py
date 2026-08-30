@@ -714,6 +714,7 @@ def build_latest(
     if not directories:
         raise AdapterError("no retained source-adapter run exists")
     previous = None
+    latest_dir = directories[-1]
     for run_dir in directories:
         manifest = read_json(run_dir / "manifest.json")
         if manifest.get("runId") != run_dir.name:
@@ -730,9 +731,13 @@ def build_latest(
                 raise AdapterError(f"contract snapshot hash mismatch: {run_dir.name}")
             validate_contract(run_contract, capability)
         previous = build_projection(
-            run_contract, manifest, run_dir, previous, capability
+            run_contract,
+            manifest,
+            run_dir,
+            previous,
+            capability if run_dir == latest_dir else None,
         )
-    return previous, directories[-1]
+    return previous, latest_dir
 
 
 def fetch_one(
@@ -808,7 +813,7 @@ def refresh(run_id: str, retrieved_at: str | None) -> None:
         for adapter in contract["adapters"] for slice_row in adapter["slices"]
     ]
     results = []
-    with ThreadPoolExecutor(max_workers=min(8, len(jobs))) as executor:
+    with ThreadPoolExecutor(max_workers=min(4, len(jobs))) as executor:
         futures = {
             executor.submit(fetch_one, adapter, slice_row, timestamp, run_id):
             (adapter, slice_row)

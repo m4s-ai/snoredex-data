@@ -8,10 +8,10 @@ with any Cardmarket-product mappings kept explicit. This playbook does not estab
 discovery completeness. The bounded source-first rebuild completed under #132; the generated
 completeness gate accounts for reviewed inputs while retaining explicit source and locality gaps.
 
-This file is both the current verification playbook and a chronological research log. Use the
-**Current state** section below for authoritative totals; later counts describe historical
-checkpoints unless explicitly marked current. Paths and commands are relative to the repository
-root.
+This file is both the current verification playbook and a chronological research log. Use
+[`DATA-HANDOFF-AUDIT.md`](DATA-HANDOFF-AUDIT.md) for authoritative totals. Counts in the research
+log describe historical checkpoints unless explicitly marked current. Paths and commands are
+relative to the repository root.
 
 ## Before opening a PR: one command (#213)
 
@@ -110,10 +110,11 @@ When every underlying product-language claim is contradicted, the finish unit re
 store as `not-applicable` for exact key coverage but is not finish-research work and does not appear
 in `FINISH_REVIEW`.
 
-Only a complete official checklist with explicit finish columns can establish that a covered
-alternative is absent. TCGdex false values, TCGCSV subtype omissions, PSA population omissions, and
-catalogue gaps cannot. The source ladder, exact endpoints, and current special-case findings are in
-[`FINISH_SOURCES.md`](FINISH_SOURCES.md).
+Every external finish source confirms only the finishes it names for the matching language and
+region. Official checklist omissions, TCGdex false values, TCGCSV subtype omissions, PSA population
+omissions, and catalogue gaps leave alternatives unknown. Only a collection-owner finish decision
+can close a reviewed list. The source ladder, exact endpoints, and current special-case findings
+are in [`FINISH_SOURCES.md`](FINISH_SOURCES.md).
 
 Keep technical `finish`, collector-facing `finishFamily`, `foilPattern`, `markings`, `distribution`,
 and `cardSize` separate. Aggregating under Reverse Holo must never delete the underlying
@@ -178,7 +179,10 @@ Snorlax (149/XY-P Japanese Promo)  Marumiya, July 2015
 Snorlax (XY179 English Promo)      Snorlax-GX Box
 ```
 
-**This is how to make an absence argument valid.** The source visibly carries Korean XY-P Snorlax promos, so the absence of a Korean `261` is evidence rather than a coverage gap. Establish that the source covers the category *before* treating a missing row as a finding — that check is exactly what was missing when `XY-P 149` was wrongly contradicted.
+The source positively confirms the Korean `167` printing. It does not establish that a Korean
+`261` was never released. A missing row remains unknown unless the collection owner records a final
+adjudication after reviewing the available evidence. Treat source coverage as research context,
+not absence authority.
 
 **But its Western coverage is one row per card, not one per language.** It lists a single `Snorlax (XY179 English Promo)` — yet physical copies of that promo exist in **French, German, Italian, Spanish and Portuguese**, all inspected from photographs. Searching `ronflex` returns nothing at all, so the database indexes English names only. **Never use a pokumon absence to contradict a Western language.** The asymmetry is real: per-market rows for Asian printings, a single lumped row for the West.
 
@@ -441,8 +445,8 @@ answered `RR 111` Italian, which the cross-language expansion index could only r
 
 So the only signal is positive and specific: **a returned card whose own `/series/<set>/<number>/`
 path matches the set you asked for.** Everything else is silence. When this is wired up, the
-archive's URLs must stay *out* of `pokemon-official`'s `absenceScopes`, even though the provider is
-absence-capable for its published checklists.
+archive's URLs remain positive-only records. The official provider has no absence authority for
+this archive or its published checklists.
 
 **The first archive route is wired up.** The Italian surface is declared as positive-only
 card/language evidence, and `U0368` (`RR 111`) cites the exact publisher page instead of the
@@ -756,7 +760,10 @@ the stored resolution before recording a glyph as unreadable.
 
 ### Market-history rule — the highest-yield technique for Asian languages
 
-Bulbapedia's country articles carry a TCG section that dates when a language market opened. That settles whole eras at once instead of one set at a time (`verification/verification/archive/passes/verify_market_history.ps1`, an archived one-shot — never rerun it):
+Bulbapedia's country articles carry a TCG section that dates when a language market opened. The
+dates provide positive market context without proving that any unlisted card was never released
+(`verification/archive/passes/verify_market_history.ps1`, an archived one-shot that must not be
+rerun):
 
 - **Traditional Chinese** launched **October 2019** with *All Stars Collection*. Before the Sun & Moon era only Base Set plus EX Legend Maker / EX Trainer Kit 2 were ever printed in Traditional Chinese; between 2006 and 2019 Taiwan received English-language product. Any Japanese set older than Oct 2019 therefore has **no** Traditional Chinese printing.
 - **Korean**: before the DP era only Base Set and ADV Expansion Pack (plus the Treecko/Torchic/Mudkip decks) were printed in Korean. From DP through HGSS, Korean sets were *unique recombinations* — "none of the sets themselves corresponding to existing sets". Only from Black & White do Korean sets track the Japanese ones.
@@ -789,7 +796,10 @@ the source-specific findings described above.
 
 Deliverables for hand-checking: **`MANUAL_REVIEW.csv`** (flat, one row per unit, with empty `verdict` / `yourSource` columns) and **`MANUAL_REVIEW.json`** (grouped per card-variant, showing which languages are already confirmed for the same card). Fill `verdict` with `confirmed` or `false`.
 
-**Thai needs its Thai-script keyword.** `asia.pokemon-card.com/th` returns nothing for `Snorlax` but 25 records for `คาบิกอน` (`verification/verification/archive/passes/asia_fetch_th.ps1`, an archived one-shot — never rerun it). Traditional Chinese likewise needs `卡比獸`; only Indonesian answers to the English name.
+**Thai needs its Thai-script keyword.** `asia.pokemon-card.com/th` returns nothing for `Snorlax`
+but 25 records for `คาบิกอน` (`verification/archive/passes/asia_fetch_th.ps1`, an archived one-shot
+that must not be rerun). Traditional Chinese likewise needs `卡比獸`. Only Indonesian answers to
+the English name.
 
 Yield per action is now 1–3 units. All bulk sources are exhausted; future additions will need one
 lookup per card.
@@ -803,9 +813,16 @@ The cross-language index uses **two different table shapes**:
 | Sword & Shield era and later | Japanese, English, Traditional Chinese, Indonesian, Thai, Korean |
 | Sun & Moon era and earlier | Japanese, English, **Korean only** |
 
-An earlier pass read a missing Traditional Chinese cell in an *older* section as proof of non-release. The column does not exist there at all. **7 contradictions were wrong and have been reverted to `pending`** (Tag Bolt ×3, Double Blaze, Wild Blaze, Plasma Gale, Awakening Psychic King) — see `verification/verification/archive/passes/fix_asia_setlevel.ps1`, an archived one-shot — never rerun it.
+An earlier pass read a missing Traditional Chinese cell in an older section as proof of
+non-release. The column does not exist there at all. Seven contradictions were wrong and were
+reverted to `pending` (Tag Bolt ×3, Double Blaze, Wild Blaze, Plasma Gale, Awakening Psychic King).
+See `verification/archive/passes/fix_asia_setlevel.ps1`, an archived one-shot that must not be
+rerun.
 
-The rule now enforced: only an **explicit em-dash** (usually `colspan=3 | —`) counts as evidence of non-release. Shield (`s1H`) and Rebellion Crash (`s2`) carry that em-dash, so those contradictions stand. Verified positive rows, read from raw wikitext:
+The rule now enforced is that a blank cell, dash, missing column, or zero-result response never
+proves non-release. Positive cells confirm only the named language and region. Raw contradictions
+remain source disagreement until the collection owner adjudicates them. Example rows from the raw
+wikitext follow:
 
 ```
 Dark Phantasma  | 黑暗亡靈 | Fantom Kegelapan | อันธการลวงตา | 다크판타스마
@@ -835,7 +852,10 @@ or pokemontcg.io — never inferred.
 
 ### `KSS 26` — the worked example of the Cardmarket artefact
 
-Fully closed: Cardmarket advertises **17 languages**, the expansion article states the print languages exhaustively as **7** (EN, DE, FR, IT, ES, PT, RU). All seven confirmed, the other ten contradicted — Japanese, Korean, both Chinese variants, Indonesian, Thai, Dutch, Polish, Czech, Hungarian. Use this card when explaining why the language column needs a source.
+Cardmarket advertises 17 languages. The expansion article positively names seven languages: EN,
+DE, FR, IT, ES, PT, and RU. Those seven are confirmed. The other ten raw claims remain recorded as
+contradictions, with final `not-printed` status coming only from collection-owner adjudication. Use
+this card when explaining why a marketplace language filter needs independent evidence.
 
 ### Two structural limits on what is still open
 
@@ -864,7 +884,7 @@ not print reality. Thirty T-Chinese units on old sets were still open at that st
 
 Side benefit at this stage: the official Japanese database also publishes illustrators, so artist
 coverage in the **main dataset rose from 79/198 to 108/198**. See `artists_official_jp.json` and
-`verification/verification/archive/passes/backfill_artists.ps1`, an archived one-shot — never rerun it.
+`verification/archive/passes/backfill_artists.ps1`, an archived one-shot that must not be rerun.
 
 ### Official Japanese API — hard-won details
 
@@ -948,7 +968,7 @@ Moved here from `HANDOVER.md` in #103; the detail below is this file's job.
 | Source | Access | Use for |
 |---|---|---|
 | **TCGdex API** `api.tcgdex.net` | scriptable | en/fr/de/es/it/pt/ja/zh-tw/id/th card existence; positive normal/holo/reverse flags |
-| **Official Pokemon checklists** `assets.pokemon.com` / `d1wx537rtdixyy.cloudfront.net` | scriptable PDFs | complete set and Prize Pack finish manifests; the only current finish source allowed to establish absence within its stated scope |
+| **Official Pokemon checklists** `assets.pokemon.com` / `d1wx537rtdixyy.cloudfront.net` | scriptable PDFs | positive confirmation for the rows and finish fields explicitly listed for the matching language and region |
 | **TCGCSV** `tcgcsv.com` | scriptable JSON | reproducible TCGplayer product identity plus positive Normal/Holofoil/Reverse Holofoil subtypes; positive-only marketplace evidence |
 | **PSA cert/spec/registry** `psacard.com` | scriptable | exact named grading varieties; never use population counts or omissions as negative evidence |
 | **Bulbapedia** | scriptable **only via in-app browser** + MediaWiki API (`/w/api.php?action=parse&prop=wikitext&redirects=1`) — plain fetch is 403 | set lists, `release=` infobox fields, `ko=`/`pt_br=` langtable lines, per-language articles (`(KTCG)`/`(TCTCG)`/`(ITCG)`/`(ATCG)`/`(SCTCG)` suffixes) |
@@ -1017,7 +1037,7 @@ Safe to interrupt at any point: `units.json` is rewritten only after a full pass
 
 - **The archived TCGdex pass exhausted its then-current queries, not the locality universe.** It
   lists sets it has no cards for (e.g. `S1H` = Shield: 0 cards), and its locale coverage is uneven.
-  A zero result is a source gap unless exact exhaustive scope has been established.
+  A zero result is a source gap and never evidence of non-release.
 - **The archived official-Asia pass was query-limited.** Its `tw` query returned 43 records and the
   English Thai keyword returned none; neither result establishes database coverage. Native-name,
   product-type and locality enumeration belongs to the source-first work in #138.

@@ -1,14 +1,14 @@
 {
   "meta": {
     "schema": "snoredex-source-capability-graph",
-    "schemaVersion": "1.0.0",
-    "generated": "2026-08-29",
+    "schemaVersion": "2.0.0",
+    "generated": "2026-08-30",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
     "policies": [
-      "Positive evidence is the default: provider silence, a zero-result query, a missing page, or a false variant flag is unknown unless an exact exhaustive edge explicitly says otherwise.",
-      "Authority tier and card-existence capability never imply finish capability or absence capability.",
+      "External providers record positive evidence only. A missing page, row, field, result, language, region, card, or finish remains unknown.",
+      "Authority tier and card-existence capability never imply finish completeness or absence authority.",
       "A grading registry, collector registry, marketplace image, owner attestation, or inspected specimen may establish only the concrete positive record it identifies.",
       "Every retained observation keeps its query URL and parameters, retrieval date, source record, and a generated SHA-256 content hash.",
       "Unavailable, incomplete, rate-limited, and browser-blocked surfaces remain visible graph nodes; their failure state must not be converted into a negative verdict.",
@@ -18,7 +18,7 @@
       "providers": 31,
       "surfaces": 36,
       "coverageEdges": 38,
-      "absenceEdges": 3,
+      "absenceEdges": 0,
       "observations": 40,
       "resolvedVerdictSources": 1164
     },
@@ -318,12 +318,12 @@
       "accessMode": "direct-download",
       "adapterState": "planned",
       "lastCheckedAt": "2026-08-27",
-      "freshnessPolicy": "Re-download and hash each exact document before a new absence adjudication.",
+      "freshnessPolicy": "Re-download and hash each exact document before applying a new positive observation.",
       "query": {
         "method": "GET",
-        "endpoint": "exact URL from absenceCapability.exactScopes",
+        "endpoint": "exact retained checklist URL",
         "parameters": [],
-        "pagination": "not paginated; completeness belongs only to the named document",
+        "pagination": "not paginated. Each document confirms only the rows and fields it explicitly lists.",
         "expectedIdentifiers": [
           "checklist URL",
           "set or series label",
@@ -335,8 +335,8 @@
         "vocabulary": [
           "document-native finish columns and legends"
         ],
-        "publicationForm": "complete official checklist legend/columns",
-        "closedWithinScope": true
+        "publicationForm": "official checklist legend and columns",
+        "closedWithinScope": false
       },
       "coverageEdgeIds": [
         "tpci-exact-checklist-finish"
@@ -1168,7 +1168,7 @@
         "parameters": [
           "filter"
         ],
-        "pagination": "capture the complete filtered gallery response; closure is filter-specific",
+        "pagination": "capture the filtered gallery response. It confirms listed cards only.",
         "expectedIdentifiers": [
           "series filter",
           "card/product identity",
@@ -1180,8 +1180,8 @@
         "vocabulary": [
           "official gallery-native treatment"
         ],
-        "publicationForm": "complete filtered official gallery",
-        "closedWithinScope": true
+        "publicationForm": "filtered official gallery",
+        "closedWithinScope": false
       },
       "coverageEdgeIds": [
         "play-series7-gallery"
@@ -1705,133 +1705,12 @@
         "product",
         "language"
       ],
-      "exhaustive": true,
+      "exhaustive": false,
       "absenceCapability": {
-        "enabled": true,
-        "dimensions": [
-          "finish"
-        ],
-        "exactScopes": [
-          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
-          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/fireredleafgreen_checklist.pdf",
-          "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/teamrocket_checklist.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw7_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/bw8_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/col1_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/dp1_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pgo_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm10_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm115_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/sm9_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh11_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh125_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh1_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh2_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh4_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh6_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh8_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy10_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy8_web_cardlist_de.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw7_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/bw8_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/dp1_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/pgo_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm10_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm115_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/sm9_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh11_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh125_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh1_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh2_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh4_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh6_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh8_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy10_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy8_web_cardlist_es.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw7_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/bw8_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/col1_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/dp1_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pgo_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm10_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm115_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/sm9_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh11_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh125_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh2_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh4_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh6_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh8_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy10_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy8_web_cardlist_fr.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw7_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/bw8_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/col1_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/dp1_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pgo_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm10_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm115_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/sm9_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh11_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh125_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh1_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh2_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh4_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh6_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh8_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy10_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy8_web_cardlist_it.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw7_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/bw8_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/col_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/dp1_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pgo_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm10_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm115_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/sm9_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh11_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh125_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh1_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh2_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh4_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh6_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/swsh8_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy10_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy2_web_cardlist_en.pdf",
-          "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy8_web_cardlist_en.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/de-de/P11076_USOP_OP_Prize_Packs_Series7_Card_List_DE.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/en-us/P11076_USOP_OP_Prize_Packs_Series7_Card_List_EN.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/es-es/P11076_USOP_OP_Prize_Packs_Series7_Card_List_ES.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/fr-fr/P11076_USOP_OP_Prize_Packs_Series7_Card_List_FR.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/it-it/P11076_USOP_OP_Prize_Packs_Series7_Card_List_IT.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series7/pt-br/P11076_USOP_OP_Prize_Packs_Series7_Card_List_PTBR.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/de-de/OP_Prize_Packs_Series8_Card_List_DE.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/en-us/OP_Prize_Packs_Series8_Card_List_EN.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/es-es/OP_Prize_Packs_Series8_Card_List_ES.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/fr-fr/OP_Prize_Packs_Series8_Card_List_FR.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/it-it/OP_Prize_Packs_Series8_Card_List_IT.pdf",
-          "https://d1wx537rtdixyy.cloudfront.net/expansions/series8/pt-br/OP_Prize_Packs_Series8_Card_List_PTBR.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_de.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-de-de/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_de.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_es.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-es-es/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_es.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_fr.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_it.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_it.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_en.pdf",
-          "https://www.pokemon.com/static-assets/content-assets/cms2/pdf/trading-card-game/checklist/prize_pack_series_3_web_cardlist_en.pdf"
-        ],
-        "rationale": "The exact official checklist is complete for its own labelled product and finish columns; no neighbouring product inherits closure."
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "This edge records explicit positive observations only. Omitted alternatives remain unknown."
       },
       "knownPositiveObservationId": "obs-tpci-checklist",
       "outOfScopeChallengeObservationId": "obs-tpci-outside-checklist",
@@ -1839,8 +1718,8 @@
         "outsideScope": [
           "any other set, language, product, web search or official page"
         ],
-        "zeroResultMeans": "bounded-absence",
-        "challenge": "A general official card page outside these exact checklist URLs is deliberately retained as an out-of-scope counterexample to provider-wide absence."
+        "zeroResultMeans": "unknown",
+        "challenge": "Missing rows, flags, cards, languages, regions, finishes, and results remain unknown."
       }
     },
     {
@@ -2830,16 +2709,12 @@
         "language",
         "edition"
       ],
-      "exhaustive": true,
+      "exhaustive": false,
       "absenceCapability": {
-        "enabled": true,
-        "dimensions": [
-          "language"
-        ],
-        "exactScopes": [
-          "https://www.elitefourum.com/t/black-star-promos-languages/36573"
-        ],
-        "rationale": "Owner-reviewed closed language table for the exact Black Star Promo rows; closure does not extend to any other topic or product."
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "This edge records explicit positive observations only. Omitted alternatives remain unknown."
       },
       "knownPositiveObservationId": "obs-elitefourum",
       "outOfScopeChallengeObservationId": "obs-elitefourum-outside-table",
@@ -2849,8 +2724,8 @@
           "products outside the named rows",
           "finish/treatment"
         ],
-        "zeroResultMeans": "bounded-absence",
-        "challenge": "The Eevee collector guide is retained as a positive, out-of-scope topic that cannot inherit the Black Star table's closure."
+        "zeroResultMeans": "unknown",
+        "challenge": "Missing rows, flags, cards, languages, regions, finishes, and results remain unknown."
       }
     },
     {
@@ -3077,16 +2952,12 @@
         "finish",
         "product"
       ],
-      "exhaustive": true,
+      "exhaustive": false,
       "absenceCapability": {
-        "enabled": true,
-        "dimensions": [
-          "finish"
-        ],
-        "exactScopes": [
-          "https://play.pokemon.com/en-us/rewards/gallery?filter=series7"
-        ],
-        "rationale": "The owner-reviewed official filtered gallery is closed only for Series 7."
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "This edge records explicit positive observations only. Omitted alternatives remain unknown."
       },
       "knownPositiveObservationId": "obs-play-series7",
       "outOfScopeChallengeObservationId": "obs-play-outside-series7",
@@ -3096,8 +2967,8 @@
           "other localities",
           "unfiltered search"
         ],
-        "zeroResultMeans": "bounded-absence",
-        "challenge": "The Series 8 filter is retained as an out-of-scope counterexample and cannot inherit Series 7 closure."
+        "zeroResultMeans": "unknown",
+        "challenge": "Missing rows, flags, cards, languages, regions, finishes, and results remain unknown."
       }
     },
     {
@@ -3667,7 +3538,7 @@
       ],
       "outcome": "Exact official English checklist positively records the card row, its printed language and its finish rows.",
       "rawRecordRef": "verification/source_registry.json:https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
-      "rawRecordHash": "sha256:98e70cb6b5cbcd2c6d5c16fb19aef8a493013f7f4423be0e8efd98a1c94eebd1",
+      "rawRecordHash": "sha256:baaa232f93d352cfde6379bf800f1a4409a228c000bbcda6d26df97f8fb86990",
       "rawRecord": {
         "canonicalUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
         "nonUrlEvidenceId": null,
@@ -3689,8 +3560,7 @@
           "override:dragon-frontiers-official-checklist"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 6,
-        "supportsAbsence": true
+        "usageCount": 6
       }
     },
     {
@@ -4560,7 +4430,7 @@
       ],
       "outcome": "The exact reviewed table provides positive language rows and bounded closure only for those rows.",
       "rawRecordRef": "verification/source_registry.json:https://www.elitefourum.com/t/black-star-promos-languages/36573",
-      "rawRecordHash": "sha256:84defa8d13386e891ab78ba73e059abf57f3c294aae8668aa849495bd200bc86",
+      "rawRecordHash": "sha256:7c5b3c75a16a22dcf7e40300378be8a94e8dfc76275d89da364f62764b0a37bb",
       "rawRecord": {
         "canonicalUrl": "https://www.elitefourum.com/t/black-star-promos-languages/36573",
         "nonUrlEvidenceId": null,
@@ -4580,8 +4450,7 @@
           "U0501"
         ],
         "retrievedAt": "2026-07-22",
-        "usageCount": 5,
-        "supportsAbsence": true
+        "usageCount": 5
       }
     },
     {
@@ -4855,7 +4724,7 @@
       ],
       "outcome": "The exact filtered official gallery supplies bounded Series 7 finish rows.",
       "rawRecordRef": "verification/source_registry.json:https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
-      "rawRecordHash": "sha256:cb8f72fb7a53078303538e28561bd33aeb1944de284fb97af96344ac86371362",
+      "rawRecordHash": "sha256:b8cd2d4c075ae68de05638633c17d7bf5754035533b023b2f5d61e1d3bda0ba8",
       "rawRecord": {
         "canonicalUrl": "https://play.pokemon.com/en-us/rewards/gallery?filter=series7",
         "nonUrlEvidenceId": null,
@@ -4903,8 +4772,7 @@
           "override:play-prize-pack-gallery"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 32,
-        "supportsAbsence": true
+        "usageCount": 32
       }
     },
     {
@@ -11585,9 +11453,7 @@
         "elitefourum-positive-research",
         "elitefourum-black-star-language-table"
       ],
-      "absenceEdgeIds": [
-        "elitefourum-black-star-language-table"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "language"
       ]
@@ -12064,9 +11930,7 @@
       "capabilityEdgeIds": [
         "play-series7-gallery"
       ],
-      "absenceEdgeIds": [
-        "play-series7-gallery"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13483,9 +13347,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13498,9 +13360,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13513,9 +13373,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13528,9 +13386,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13543,9 +13399,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13558,9 +13412,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13573,9 +13425,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13588,9 +13438,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13603,9 +13451,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13618,9 +13464,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13633,9 +13477,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13648,9 +13490,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13663,9 +13503,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13678,9 +13516,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13693,9 +13529,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13708,9 +13542,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13723,9 +13555,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13738,9 +13568,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13753,9 +13581,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13768,9 +13594,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13783,9 +13607,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13798,9 +13620,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13813,9 +13633,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13828,9 +13646,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13843,9 +13659,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13858,9 +13672,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13873,9 +13685,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13888,9 +13698,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13903,9 +13711,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13918,9 +13724,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13933,9 +13737,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13948,9 +13750,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13963,9 +13763,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13978,9 +13776,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -13993,9 +13789,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14008,9 +13802,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14023,9 +13815,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14038,9 +13828,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14053,9 +13841,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14068,9 +13854,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14083,9 +13867,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14098,9 +13880,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14113,9 +13893,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14128,9 +13906,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14143,9 +13919,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14158,9 +13932,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14173,9 +13945,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14188,9 +13958,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14203,9 +13971,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14218,9 +13984,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14233,9 +13997,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14248,9 +14010,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14263,9 +14023,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14278,9 +14036,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14293,9 +14049,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14308,9 +14062,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14323,9 +14075,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14338,9 +14088,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14353,9 +14101,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14368,9 +14114,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14383,9 +14127,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14398,9 +14140,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14413,9 +14153,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14428,9 +14166,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14443,9 +14179,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14458,9 +14192,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14473,9 +14205,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14488,9 +14218,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14503,9 +14231,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14518,9 +14244,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14533,9 +14257,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14548,9 +14270,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14563,9 +14283,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14578,9 +14296,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14593,9 +14309,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14608,9 +14322,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14623,9 +14335,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14638,9 +14348,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14653,9 +14361,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14668,9 +14374,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14683,9 +14387,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14698,9 +14400,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14713,9 +14413,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14728,9 +14426,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14743,9 +14439,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14758,9 +14452,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14773,9 +14465,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14788,9 +14478,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14803,9 +14491,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14818,9 +14504,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14833,9 +14517,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14848,9 +14530,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14863,9 +14543,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14878,9 +14556,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14893,9 +14569,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14908,9 +14582,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -14971,9 +14643,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -14987,9 +14657,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15003,9 +14671,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15019,9 +14685,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15035,9 +14699,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15051,9 +14713,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -15066,9 +14726,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15082,9 +14740,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15098,9 +14754,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15114,9 +14768,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15130,9 +14782,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15146,9 +14796,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override"
@@ -15173,9 +14821,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15189,9 +14835,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15205,9 +14849,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15221,9 +14863,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15237,9 +14877,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15253,9 +14891,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15269,9 +14905,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15285,9 +14919,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15301,9 +14933,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",
@@ -15317,9 +14947,7 @@
       "capabilityEdgeIds": [
         "tpci-exact-checklist-finish"
       ],
-      "absenceEdgeIds": [
-        "tpci-exact-checklist-finish"
-      ],
+      "absenceEdgeIds": [],
       "dimensions": [
         "finish",
         "finish-override",

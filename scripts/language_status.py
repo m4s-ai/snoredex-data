@@ -37,6 +37,7 @@ Run after any verification write pass, before regenerating the chronological exp
 from __future__ import annotations
 
 import json
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -176,9 +177,15 @@ def main() -> None:
     )
     cards_document["meta"]["notes"] = notes
 
-    with CARDS_PATH.open("w", encoding="utf-8", newline="\n") as handle:
-        json.dump(cards_document, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
+    rendered = json.dumps(cards_document, ensure_ascii=False, indent=2) + "\n"
+    if "--check" in sys.argv:
+        if CARDS_PATH.read_text(encoding="utf-8") != rendered:
+            print("snorlax_cards.json language status is stale")
+            return 1
+        print("snorlax_cards.json language status is current")
+        return 0
+
+    CARDS_PATH.write_text(rendered, encoding="utf-8", newline="\n")
 
     refuted_products = sum(
         1
@@ -189,4 +196,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)

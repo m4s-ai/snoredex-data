@@ -99,7 +99,7 @@ things in different sets. `variantAxes` preserves Cardmarket's filter UI only as
 | Cluster | What the tokens turned out to be |
 |---|---|
 | `xsv2a 143` | V1 Poké Ball mirror holo · V2 Master Ball mirror holo |
-| `xm2a 143` | the same two treatments in the opposite order |
+| `xm2a 136` | V1 Colorless Energy star mirror holo · V2 Poké Ball mirror holo |
 | `PPS8 JTG 117` | V1 non-holo · V2 Cosmos holo |
 | `xJTG 117` | three distribution stamps, all independently identified as Cosmos holo |
 | `SSH 142` | separates the standard and jumbo products |

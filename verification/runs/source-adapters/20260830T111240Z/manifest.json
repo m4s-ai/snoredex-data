@@ -1,0 +1,564 @@
+{
+  "schema": "snoredex-source-adapter-run",
+  "schemaVersion": "1.0.0",
+  "runId": "20260830T111240Z",
+  "coverageVersion": "1.2.0",
+  "startedAt": "2026-08-30T11:12:41Z",
+  "completedAt": "2026-08-30T11:12:41Z",
+  "status": "incomplete",
+  "contract": "verification/source_adapters.json",
+  "contractHash": "sha256:b5ac6c982efe67b28c2ced2a0428cf1d2939c6314c78a57a04145c03042554c3",
+  "capabilityGraph": "verification/source_capability_graph.json",
+  "capabilityGraphHash": "sha256:42e1d259b4c7ee5198503a73f0ea7de215c74786c03924889615e558a0de53e7",
+  "capabilityGraphSurfaces": [
+    "bulbapedia-mediawiki",
+    "tcgdex-api"
+  ],
+  "requests": [
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "bulbapedia-historical-language-index",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-nl-sets",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "rawLocale": "nl",
+        "resource": "English-set language column",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865
+      },
+      "rawLocale": "nl",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/bulbapedia-historical-nl-sets.json",
+      "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+      "recordCount": 3,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "bulbapedia-historical-language-index",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-pl-sets",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "rawLocale": "pl",
+        "resource": "English-set language column",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865
+      },
+      "rawLocale": "pl",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/bulbapedia-historical-pl-sets.json",
+      "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+      "recordCount": 2,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "bulbapedia-historical-language-index",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-ru-sets",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "rawLocale": "ru",
+        "resource": "English-set language column",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865
+      },
+      "rawLocale": "ru",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/bulbapedia-historical-ru-sets.json",
+      "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+      "recordCount": 9,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-de-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/de/sets",
+      "queryParameters": {
+        "rawLocale": "de",
+        "resource": "sets"
+      },
+      "rawLocale": "de",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-en-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/en/sets",
+      "queryParameters": {
+        "rawLocale": "en",
+        "resource": "sets"
+      },
+      "rawLocale": "en",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-es-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/es/sets",
+      "queryParameters": {
+        "rawLocale": "es",
+        "resource": "sets"
+      },
+      "rawLocale": "es",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-fr-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/fr/sets",
+      "queryParameters": {
+        "rawLocale": "fr",
+        "resource": "sets"
+      },
+      "rawLocale": "fr",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-id-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/id/sets",
+      "queryParameters": {
+        "rawLocale": "id",
+        "resource": "sets"
+      },
+      "rawLocale": "id",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-it-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/it/sets",
+      "queryParameters": {
+        "rawLocale": "it",
+        "resource": "sets"
+      },
+      "rawLocale": "it",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-ja-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/ja/sets",
+      "queryParameters": {
+        "rawLocale": "ja",
+        "resource": "sets"
+      },
+      "rawLocale": "ja",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-ko-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/ko/sets",
+      "queryParameters": {
+        "rawLocale": "ko",
+        "resource": "sets"
+      },
+      "rawLocale": "ko",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-pt-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/pt/sets",
+      "queryParameters": {
+        "rawLocale": "pt",
+        "resource": "sets"
+      },
+      "rawLocale": "pt",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-th-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/th/sets",
+      "queryParameters": {
+        "rawLocale": "th",
+        "resource": "sets"
+      },
+      "rawLocale": "th",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-zh-cn-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/zh-cn/sets",
+      "queryParameters": {
+        "rawLocale": "zh-cn",
+        "resource": "sets"
+      },
+      "rawLocale": "zh-cn",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "runId": "20260830T111240Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-zh-tw-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/zh-tw/sets",
+      "queryParameters": {
+        "rawLocale": "zh-tw",
+        "resource": "sets"
+      },
+      "rawLocale": "zh-tw",
+      "retrievedAt": "2026-08-30T11:12:41Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": false
+      },
+      "httpStatus": null,
+      "rawPath": null,
+      "responseHash": null,
+      "recordCount": 0,
+      "pageCount": 0,
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    }
+  ],
+  "failures": [
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-de-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-en-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-es-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-fr-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-id-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-it-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-ja-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-ko-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-pt-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-th-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-zh-cn-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    },
+    {
+      "code": "request-failure",
+      "sliceId": "tcgdex-zh-tw-sets",
+      "error": {
+        "code": "fetch-or-parse-failure",
+        "message": "The read operation timed out"
+      }
+    }
+  ]
+}

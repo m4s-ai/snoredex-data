@@ -63,8 +63,8 @@ is one of:
 - `none` with `needs-evidence`.
 
 Agreement among card rows cannot create a profile. A profile rule cannot be copied back as
-per-card evidence. The four `complete-manifest` units and one `owner-adjudicated` unit retain those
-different closure dispositions.
+per-card evidence. External source profiles remain positive only. Owner-adjudicated finish units
+retain their separate collection-owner decisions.
 
 The six documented Japanese-source to Traditional-Chinese catch-up cases are card-work edges with
 `setMergeAllowed=false`. `AS5a`, `sc1a F`, `sc1b F`, and `scD F` retain their positively sourced
@@ -111,6 +111,6 @@ enforce:
 - deterministic graph-backed rebuilds;
 - zero dropped rows, language relationships or overwritten scalar dates;
 - explicit event locality, market, precision, status and evidence;
-- exact finish-unit retention and preservation of all five closed lists;
+- exact finish-unit retention and preservation of owner-adjudicated closed lists.
 - separate source-first identities and non-merging catch-up edges; and
 - card-level retention of the three mixed-status language pairs.

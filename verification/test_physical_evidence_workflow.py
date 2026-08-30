@@ -217,7 +217,7 @@ def main() -> None:
     projector = finish_projector()
     standard_scoped = {
         "cardSize": "unknown",
-        "sources": [{"closureScope": "standard-set"}],
+        "sources": [{"evidenceScope": "standard-set"}],
     }
     projector.apply_standard_scope_card_size(standard_scoped)
     assert standard_scoped["cardSize"] == "standard"

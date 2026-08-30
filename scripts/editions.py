@@ -17,7 +17,7 @@ Ruleset (all from Bulbapedia, verified this session):
 Cardmarket's own "First Edition?" filter axis is NOT used - it is present on 83/198 cards
 including SwSh/SM-era cards that never had a 1st edition, so it is unreliable.
 """
-import json, io, os
+import json, io, os, sys
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
@@ -103,9 +103,16 @@ data["meta"]["editionRuleset"] = {
 # That is a one-byte diff that fails `database.py --check` through the source fingerprint, with a
 # message about canonical inputs that says nothing about a newline. Writing it here makes the
 # generator order irrelevant.
-with io.open(os.path.join(B, "snorlax_cards.json"), "w", encoding="utf-8", newline="\n") as handle:
-    json.dump(data, handle, ensure_ascii=False, indent=2)
-    handle.write("\n")
+output_path = B / "snorlax_cards.json"
+rendered = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+if "--check" in sys.argv:
+    if output_path.read_text(encoding="utf-8") != rendered:
+        print("snorlax_cards.json editions are stale")
+        sys.exit(1)
+    print("snorlax_cards.json editions are current")
+    sys.exit(0)
+
+output_path.write_text(rendered, encoding="utf-8", newline="\n")
 
 for k, v in summary.items():
     print(f"\n{k} ({len(v)}):")

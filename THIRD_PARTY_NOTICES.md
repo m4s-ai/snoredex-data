@@ -1,65 +1,63 @@
 <!-- doc: role=third-party attribution; stage=reference -->
 # Third-party notices
 
-This project's own licences (see `LICENSE.md`) cover only its original software, data selection
-and arrangement, verification annotations, and documentation. Everything listed here belongs to
-someone else and is used under that party's terms.
+The repository licences cover only original project work. Third-party material remains subject to
+the rights and terms of its owner or provider.
 
-## Rights holders
+## Pokémon material
 
-**Pokémon.** Pokémon and all related names, characters, artwork, logos, and trademarks are the
-property of Nintendo, Creatures Inc., and GAME FREAK inc.
-© Pokémon / Nintendo / Creatures / GAME FREAK. Trading card game © The Pokémon Company.
+Pokémon names, characters, artwork, logos, trademarks, and trading card designs belong to their
+respective rights holders. This project is unofficial and makes no ownership claim over that
+material.
 
-This project is an unofficial fan project and is **not affiliated with, endorsed by, or sponsored
-by** any of them. No claim of ownership is made over any Pokémon intellectual property.
+Files under `images/` are retained Cardmarket product images used for identification. Their source
+does not establish that Cardmarket owns every underlying photograph or depicted work. No repository
+licence grant applies to them.
 
-**Card images.** Every file in `images/` depicts a Pokémon trading card and is served from
-Cardmarket's product image host. The depicted artwork is the rights holders' property; the card
-photography and hosting are Cardmarket's. They are included for identification only.
+## Specimen evidence
 
-**Specimen photographs.** Files in `verification/specimens/` are photographs the collection owner
-took of cards they hold, published as evidence for claims no database records — the printing runs
-where the physical card is the only source. Three parties are distinguishable in one of these
-files and only one of them is the licensor:
+Files under `verification/specimens/` include several source categories:
 
-- the **photograph** is the licensor's, granted under `LICENSE.md` §2;
-- the **card artwork** in it is the rights holders' and is granted by nobody here;
-- nothing personal is depicted, and the images carry no identifiers — the evidence class is
-  anonymous exactly as the attestations are.
+- photographs supplied by the collection owner
+- photographs or scans from third-party collectors
+- seller-listing photographs
+- marketplace and catalogue images
+- publisher and database images
+- retailer and archive images
 
-They are added over time rather than in one batch, as claims requiring them arise. Publication
-rests on the owner decision recorded in `LICENSE.md`, which covers the category rather than a
-fixed list. A photograph of a card the owner does **not** hold belongs to whoever took it and is
-not covered: it is a third-party photograph under `LICENSE.md` §3.
+The `heldBy` field records evidence custody or source category. It is not a copyright ownership
+statement. Owner-created photographs remain subject to the exclusion for the card artwork they
+depict. Third-party photographs and scans remain the property of their respective rights holders.
 
-## Data providers
+Publication approval is recorded in `publication-decisions.json`. That approval permits this
+project to publish the retained evidence. It does not transfer ownership and does not include the
+material in the repository licences.
 
-Each provider below appears in the generated source registry
-(`verification/source_registry.json`) with its stable ID, coverage limits, and attribution
-wording. The registry is the machine-readable form of this section.
+## Provider inventory
 
-| Provider | Used for | Terms |
-|---|---|---|
-| **Cardmarket** (`cardmarket`) | product catalogue, product identity, images, marketplace language and finish hints | Site terms at <https://www.cardmarket.com>. Catalogue claims are treated as hints, never as verification. |
-| **Bulbapedia** (`bulbapedia`) | set lists, release fields, per-language articles, promo series | Content licensed **CC BY-NC-SA 2.5**. Attribution and ShareAlike apply to quoted or derived content. <https://bulbapedia.bulbagarden.net/wiki/Bulbapedia:Copyrights> |
-| **TCGdex** (`tcgdex`) | card existence per language; positive normal/holo/reverse flags | Open card database, <https://api.tcgdex.net>. Variant coverage is explicitly incomplete upstream; false flags are never treated as absence. |
-| **The Pokémon Company official sites** (`pokemon-official`, `pokemon-card-jp`, `pokemon-card-asia`) | official checklists and Prize Pack manifests; Japanese and Asian card databases | Publisher's own terms. The only sources permitted to establish absence, and only within their stated scope. |
-| **TCGCSV / TCGplayer** (`tcgcsv`) | reproducible product identity and positive Normal/Holofoil/Reverse Holofoil subtypes | <https://tcgcsv.com>. Positive-only marketplace evidence. |
-| **PSA** (`psa`) | named grading varieties | <https://www.psacard.com>. Population counts and omissions are never used as negative evidence. |
-| **pokumon.com** (`pokumon`) | per-market promo printings | Collector database. Indexes English names only and lumps all Western languages into one row; absence is never used to contradict a Western language. |
-| **Elite Fourum** (`elitefourum`) | collector-community facts: promo languages, 1st-edition timeline | Community forum, <https://elitefourum.com>. |
-| **LigaPokemon** (`ligapokemon`) | Brazilian/Portuguese marketplace listings | <https://www.ligapokemon.com.br>. Marketplace listing evidence. |
+`verification/SOURCES.md` is the generated readable provider inventory.
+`verification/source_registry.json` is the machine-readable inventory. They record stable provider
+IDs, attribution wording, terms links, coverage limits, and evidence use.
 
-## Evidence that is not a link
+All providers are positive-evidence sources. An official Pokémon page or checklist confirms only
+the release it names for the corresponding language and region. An omitted card, language, region,
+or finish remains unknown. No provider can establish non-release by omission.
 
-Some confirmations rest on the collection owner's inspection of a physical card, recorded as
-`Owner attestation (domain expert)` or `Physical card, photographed specimen`. These are
-represented in the source registry as **anonymous named evidence classes**, never as fabricated
-hyperlinks and never with personal identifiers. Their publication is subject to the owner's
-consent (see `LICENSE.md`, *Open decisions*).
+Bulbapedia original content is licensed under CC BY-NC-SA 2.5 for the revisions described by its
+[copyright statement](https://bulbapedia.bulbagarden.net/wiki/Bulbapedia:Copyrights). Attribution
+and ShareAlike apply to quoted or adapted Bulbapedia content.
+
+Cardmarket material is subject to Cardmarket's [general terms and
+conditions](https://www.cardmarket.com/en/Pokemon/Policies/GeneralTermsAndConditions/GB). This
+repository claims no licence to redistribute Cardmarket material beyond the approved project use.
+
+## Evidence without a public URL
+
+Owner attestations and direct physical inspections are recorded as named evidence classes without
+fabricated links or personal identifiers. Their publication is covered by the owner decision in
+`publication-decisions.json`.
 
 ## Reporting
 
-If you hold rights in material used here and want it removed or its attribution corrected, open
-an issue at <https://github.com/m4s-ai/snoredex-data/issues>.
+Rights holders can request removal or attribution correction through the repository issue tracker:
+<https://github.com/m4s-ai/snoredex-data/issues>.

@@ -40,9 +40,10 @@ over-claiming is itself a finding, so it is preserved rather than quietly correc
 
 Two rules hold everywhere in the data, the tooling and the site copy:
 
-1. **Positive evidence only.** A source that fails to list a printing has a *gap*; it has not
-   proved the printing does not exist — and no source settles an absence at any tier. Converging
-   evidence from dependable sources is what the collection owner weighs; the decision is theirs,
+1. **Positive evidence only.** A source that fails to list a printing has a gap. It has not
+   proved the printing does not exist. Official Pokémon sources confirm only the releases they name
+   for the matching language and region. No source settles an absence at any tier. Converging
+   evidence from dependable sources is what the collection owner weighs. The decision is theirs,
    recorded in `verification/owner_adjudications.json` and never attributed to a single provider.
    `not-printed` means **no regular release**: a proof copy or an error card is a separate
    category and does not falsify the decision.
@@ -67,7 +68,7 @@ Then visit <http://localhost:8000/>. `index.html` is the whole site; nothing els
 | You want | Read | Watch out for |
 |---|---|---|
 | The immutable pre-migration candidate universe | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) | It records the historical Cardmarket boundary and every inherited card/unit; it is provenance, not an all-locality manifest. |
-| A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite) / [`DATABASE.md`](DATABASE.md) | Start from the `app_*` views. Historical `contradicted` rows become `disputed` unless a scoped source or explicit owner adjudication resolves them. |
+| A ready-to-use application database | [`snoredex.sqlite`](snoredex.sqlite) / [`DATABASE.md`](DATABASE.md) | Start from the `app_*` views. Historical `contradicted` rows become `disputed` unless explicit owner adjudication resolves them. |
 | A personal have/have-not tracker | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Copy the blank template or use `scripts/tracker.py`; catalogue sync preserves ownership state. |
 | The Cardmarket product view — identity, rarity, art, artist, editions | [`snorlax_cards.json`](snorlax_cards.json) | Use `languagesConfirmed` for established prints and `languagesNeedsEvidence` / `languagesDisputed` for open questions. `languagesRepositoryConfirmed`, `languagesContradicted`, and raw `languages` preserve the research inputs. |
 | The current-known list of physical things to collect | [`analysis_checklist.json`](analysis_checklist.json) | One record per documented printing *or* per explicitly unresolved one within current coverage — placeholders are items too. |
@@ -118,7 +119,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-08-29**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
+Current-known status snapshot: **2026-08-30**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
@@ -126,8 +127,8 @@ Current-known status snapshot: **2026-08-29**. Its candidate denominator is the 
 | Legacy language-claim review | **719 claims**: 635 externally confirmed, 84 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Evidence-safe application status | **618 established**, **17 needs evidence**, **80 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **873 items** across 174 cards and 15 languages: 786 documented printings plus 87 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 448 externally confirmed, 58 marketplace-only positives, 56 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 184 units. |
-| Evidence registry | **31 providers**, 1164 evidence records, 1157 unique URLs, and 3,522 attributed claims. Bounded source scopes provide absence rationale; the separate owner-adjudication store records final language/printing absence decisions. |
+| Current-known finish evidence | **637 card-number × language units**: 448 externally confirmed, 58 marketplace-only positives, 56 without positive finish evidence, and 75 not applicable. The remaining detail/mapping queue contains 175 units. |
+| Evidence registry | **31 providers**, 1164 evidence records, 1157 unique URLs, and 3,522 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. Browser and live-source checks run in the Linux release lane. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -272,8 +273,9 @@ workflow run and deploys the already verified artifact without a second projecti
   different listing of the same card. None of the three ever means "does not exist".
 - **A Cardmarket V-token is not a finish, and is set-specific.** TCGdex's `normal`/`holo`/`reverse`
   flags apply to the set number and language; a `V1`/`V2`/`V3` mapping is recorded only where it is
-  unambiguous or independently identified. `xsv2a` and `xm2a` order the same two treatments
-  differently — always read `variantName`.
+  unambiguous or independently identified. `xsv2a 143` uses Poké Ball and Master Ball mirror
+  treatments. `xm2a 136` uses Colorless Energy star and Poké Ball mirror treatments. Always read
+  `variantName`.
 - **Marking role is a trichotomy.** `print-identity` covers rarity symbols and contest credits;
   `reverse-holo-treatment` covers EX-era set-logo stamps that *are* part of the reverse design;
   `distribution-promo` covers prerelease, Staff, retailer and Pokémon Center stamps, which do
@@ -292,9 +294,9 @@ workflow run and deploys the already verified artifact without a second projecti
 
 Finish availability is modelled independently of Cardmarket products, keyed by set number ×
 language. Because upstream catalogues are incomplete, it is deliberately a **positive-evidence
-model**: an unlisted finish stays `pending` rather than being marked unavailable, and only a
-complete official manifest may close alternatives within its exact scope. A separate
-owner-adjudicated finish decision may also close a unit after review, but never introduces a finish.
+model**. An unlisted finish stays `pending` rather than being marked unavailable. Official sources
+confirm only the finishes they name for the matching language and region. Only an owner-adjudicated
+finish decision may close a unit after review, and that decision never introduces a finish.
 
 <!-- generated:finish-coverage — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Known available finish | Set-number-language units |

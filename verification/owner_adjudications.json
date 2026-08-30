@@ -7,7 +7,7 @@
       "The collection owner records the final application decision after reviewing all cited claims and evidence.",
       "An owner adjudication does not attribute the absence decision to any single provider or source.",
       "The raw repository verdict and source evidence remain unchanged in verification/units.json.",
-      "A finish decision closes the finish list for one set-number-language unit. It never asserts a finish: every finish it names must already rest on positive evidence, and the decision only states that no others exist. It projects to completenessStatus=owner-adjudicated, which is deliberately distinct from complete-manifest so a consumer can tell a collector's ruling from a manufacturer's."
+      "A finish decision closes the finish list for one set-number-language unit. It never asserts a finish. Every finish it names must already rest on positive evidence, and external sources cannot close the list. It projects to completenessStatus=owner-adjudicated."
     ]
   },
   "decisions": [
