@@ -17,6 +17,7 @@ import argparse
 import hashlib
 import json
 import re
+import shutil
 import sys
 import urllib.error
 import urllib.request
@@ -718,7 +719,7 @@ def acquisition_contract(contract: dict[str, Any]) -> dict[str, Any]:
     return value
 
 
-def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
+def acquisition_compatible_complete_runs(contract: dict[str, Any]) -> list[str]:
     compatible = []
     for run_dir in run_directories():
         manifest = read_json(run_dir / "manifest.json")
@@ -734,7 +735,25 @@ def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
             raise AdapterError(f"contract snapshot hash mismatch: {run_dir.name}")
         if acquisition_contract(run_contract) == acquisition_contract(contract):
             compatible.append(run_dir.name)
-    return max(compatible, default=None)
+    return compatible
+
+
+def newest_acquisition_compatible_complete_run(
+    contract: dict[str, Any],
+) -> str | None:
+    return max(acquisition_compatible_complete_runs(contract), default=None)
+
+
+def newest_compatible_complete_run(
+    contract: dict[str, Any], capability: dict[str, Any]
+) -> str | None:
+    for run_id in reversed(acquisition_compatible_complete_runs(contract)):
+        manifest = read_json(RUNS_DIR / run_id / "manifest.json")
+        if manifest.get("capabilityGraphHash") == capability_pin(
+            capability, manifest_surfaces(manifest)
+        ):
+            return run_id
+    return None
 
 
 def build_latest(
@@ -760,19 +779,14 @@ def build_latest(
         validate_contract(run_contract, capability)
         return run_contract
 
-    def selected_capability(run_dir: Path, manifest: dict[str, Any]) -> dict[str, Any] | None:
-        if run_dir != latest_dir:
-            return None
-        if manifest.get("capabilityGraphHash") != capability_pin(
-                capability, manifest_surfaces(manifest)):
-            return None
-        return capability
+    def selected_capability(run_dir: Path) -> dict[str, Any] | None:
+        return capability if run_dir == latest_dir else None
 
     directories = run_directories()
     if not directories:
         raise AdapterError("no retained source-adapter run exists")
     manifests = [(run_dir, load_manifest(run_dir)) for run_dir in directories]
-    latest_run_id = newest_compatible_complete_run(contract)
+    latest_run_id = newest_compatible_complete_run(contract, capability)
     if latest_run_id is None:
         raise AdapterError("no compatible complete source-adapter run exists")
     latest_dir = RUNS_DIR / latest_run_id
@@ -787,7 +801,7 @@ def build_latest(
             run_dir,
             previous,
             contract if compatible else run_contract,
-            selected_capability(run_dir, manifest),
+            selected_capability(run_dir),
         )
         if run_dir == latest_dir:
             latest_projection = projection
@@ -917,19 +931,110 @@ def refresh(run_id: str, retrieved_at: str | None) -> None:
     )
 
 
+def replay_paths(source_run_id: str, run_id: str) -> tuple[Path, Path]:
+    if not RUN_ID_PATTERN.fullmatch(source_run_id) or not RUN_ID_PATTERN.fullmatch(run_id):
+        raise AdapterError("replay run ids must use YYYYMMDDTHHMMSSZ form")
+    source_dir = RUNS_DIR / source_run_id
+    run_dir = RUNS_DIR / run_id
+    if not source_dir.is_dir():
+        raise AdapterError(f"replay source run does not exist: {source_run_id}")
+    if run_dir.exists():
+        raise AdapterError(f"replay destination run already exists: {run_id}")
+    if run_id <= max((path.name for path in run_directories()), default=""):
+        raise AdapterError("replay destination run must sort after every retained run")
+    return source_dir, run_dir
+
+
+def replay_source(
+    source_run_id: str, source_dir: Path, contract: dict[str, Any]
+) -> dict[str, Any]:
+    source_manifest = read_json(source_dir / "manifest.json")
+    source_contract = read_json(source_dir / "contract.json")
+    if source_manifest.get("status") != "complete":
+        raise AdapterError(f"replay source run is not complete: {source_run_id}")
+    if source_manifest.get("contractHash") != content_hash(source_contract):
+        raise AdapterError(f"replay source contract hash differs: {source_run_id}")
+    if acquisition_contract(source_contract) != acquisition_contract(contract):
+        raise AdapterError("replay source differs in its provider acquisition contract")
+    if source_run_id != newest_acquisition_compatible_complete_run(contract):
+        raise AdapterError("replay source must be the newest acquisition-compatible complete run")
+    return source_manifest
+
+
+def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None:
+    source_dir, run_dir = replay_paths(source_run_id, run_id)
+
+    contract, capability = load_inputs()
+    source_manifest = replay_source(source_run_id, source_dir, contract)
+
+    timestamp = replayed_at or datetime.now(timezone.utc).replace(
+        microsecond=0
+    ).isoformat().replace("+00:00", "Z")
+    manifest = json.loads(json.dumps(source_manifest))
+    manifest.update({
+        "runId": run_id,
+        "coverageVersion": contract["meta"]["coverageVersion"],
+        "startedAt": timestamp,
+        "completedAt": None,
+        "status": "incomplete",
+        "contractHash": content_hash(contract),
+        "capabilityGraphHash": capability_pin(
+            capability, manifest_surfaces(source_manifest)
+        ),
+        "replayedFromRun": source_run_id,
+    })
+    for request in manifest["requests"]:
+        request["runId"] = run_id
+        request["replayedFromRun"] = source_run_id
+
+    run_dir.mkdir(parents=True)
+    write_json(run_dir / "contract.json", contract)
+    shutil.copytree(source_dir / "raw", run_dir / "raw")
+    write_json(run_dir / "manifest.json", manifest)
+    build_projection(contract, manifest, run_dir, None, contract, capability)
+    manifest["status"] = "complete"
+    manifest["completedAt"] = timestamp
+    write_json(run_dir / "manifest.json", manifest)
+
+    projection, _ = build_latest(contract, capability)
+    summary_text, records_text = render_projection(projection)
+    OUTPUT_PATH.write_text(summary_text, encoding="utf-8")
+    RECORDS_PATH.write_bytes(records_text.encode("utf-8"))
+    counts = projection["meta"]["counts"]
+    print(
+        f"replayed {source_run_id} as {run_id}: {counts['records']} source-first records, "
+        f"{counts['runErrors']} run errors"
+    )
+
+
+def run_requested_action(args: argparse.Namespace) -> bool:
+    if args.replay_from_run:
+        if args.refresh or args.refresh_tcgdex or not args.run_id:
+            raise AdapterError("--replay-from-run requires only --run-id")
+        replay_run(args.replay_from_run, args.run_id, args.retrieved_at)
+        return True
+    if args.refresh or args.refresh_tcgdex:
+        if not args.run_id:
+            raise AdapterError("--refresh requires --run-id")
+        refresh(args.run_id, args.retrieved_at)
+        return True
+    return False
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate immutable runs and projections")
     parser.add_argument("--refresh", action="store_true", help="create a new immutable live run")
     parser.add_argument("--refresh-tcgdex", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument(
+        "--replay-from-run",
+        help="reuse a complete immutable run when provider acquisition inputs are unchanged",
+    )
     parser.add_argument("--run-id", help="immutable run id in YYYYMMDDTHHMMSSZ form")
     parser.add_argument("--retrieved-at", help="explicit ISO-8601 retrieval timestamp for a run")
     args = parser.parse_args()
     try:
-        if args.refresh or args.refresh_tcgdex:
-            if not args.run_id:
-                raise AdapterError("--refresh requires --run-id")
-            refresh(args.run_id, args.retrieved_at)
+        if run_requested_action(args):
             return 0
         contract, capability = load_inputs()
         projection, run_dir = build_latest(contract, capability)

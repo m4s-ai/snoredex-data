@@ -676,6 +676,20 @@ The initial retry sequence retained three immutable set-discovery attempts with 
 | Cross-artifact review | 111 of 111 checks passed |
 | Evidence boundary | No language, finish, or absence verdict changed. Provider timeouts remain source gaps |
 
+### Capability-safe source retry update for 2026-08-30
+
+| Item | Retained result |
+|---|---|
+| Live source run | `20260830T131628Z`, incomplete with manifest SHA-256 `6737434a3100277de82fe24f6699cea03551ce42c353c6ba8f8bdf39f7984d43` |
+| Live failure boundary | Twelve TCGdex requests returned HTTP 504 or read timeouts. The three revision-pinned Bulbapedia requests completed |
+| Source replay run | `20260830T132131Z`, complete with manifest SHA-256 `9887a87812af8178f37a9acacee8804da8b5534d09b5e48704ecb9865a18666e` |
+| Replay provenance | The replay copied the immutable raw responses from complete run `20260813T122130Z`, revalidated every response hash and acquisition field, and pinned the current scoped capability graph |
+| Source canonical projection | Run `20260830T132131Z` is canonical with 1,621 records, 15 accounted slices, 10 explicit gaps, and zero run errors |
+| Capability compatibility review | Canonical source and card selection now requires both acquisition-contract compatibility and the current scoped capability pin. A mismatched complete run is ineligible rather than silently bypassing validation |
+| Replay boundary | Replaying unchanged raw responses updates projection metadata and capability validation. It does not claim a new provider retrieval time or provider-universe completeness |
+| Pre-commit full gate | Regeneration passed generation, determinism, source, complexity, structural, and workflow checks. It stopped only at the commit-bound handoff because the replay-derived collector bytes were not yet in `HEAD` |
+| Evidence boundary | No language, finish, or absence verdict changed. The failed live requests remain source gaps |
+
 ## Remediation plan
 
 ### Progress overview

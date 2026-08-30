@@ -1327,8 +1327,7 @@ def run_directories() -> list[Path]:
     )
 
 
-def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
-    """Return the newest complete run with the same acquisition contract."""
+def acquisition_compatible_complete_runs(contract: dict[str, Any]) -> list[str]:
     compatible = []
     for run_dir in run_directories():
         manifest = read_json(run_dir / "manifest.json")
@@ -1344,7 +1343,25 @@ def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
             raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
         if acquisition_contract(run_contract) == acquisition_contract(contract):
             compatible.append(run_dir.name)
-    return max(compatible, default=None)
+    return compatible
+
+
+def newest_acquisition_compatible_complete_run(
+    contract: dict[str, Any],
+) -> str | None:
+    return max(acquisition_compatible_complete_runs(contract), default=None)
+
+
+def newest_compatible_complete_run(
+    contract: dict[str, Any], capability: dict[str, Any]
+) -> str | None:
+    for run_id in reversed(acquisition_compatible_complete_runs(contract)):
+        manifest = read_json(RUNS_DIR / run_id / "manifest.json")
+        if manifest.get("capabilityGraphHash") == capability_pin(
+            capability, manifest_surfaces(manifest)
+        ):
+            return run_id
+    return None
 
 
 def build_latest(
@@ -1369,19 +1386,14 @@ def build_latest(
             raise DiscoveryError(f"contract snapshot hash mismatch: {run_dir.name}")
         return run_contract
 
-    def selected_capability(run_dir: Path, manifest: dict[str, Any]) -> dict[str, Any] | None:
-        if run_dir != latest_dir:
-            return None
-        if manifest.get("capabilityGraphHash") != capability_pin(
-                capability, manifest_surfaces(manifest)):
-            return None
-        return capability
+    def selected_capability(run_dir: Path) -> dict[str, Any] | None:
+        return capability if run_dir == latest_dir else None
 
     directories = run_directories()
     if not directories:
         raise DiscoveryError("no retained card-discovery run exists")
     manifests = [(run_dir, load_manifest(run_dir)) for run_dir in directories]
-    latest_run_id = newest_compatible_complete_run(contract)
+    latest_run_id = newest_compatible_complete_run(contract, capability)
     if latest_run_id is None:
         raise DiscoveryError("no compatible complete card-discovery run exists")
     latest_dir = RUNS_DIR / latest_run_id
@@ -1392,7 +1404,7 @@ def build_latest(
         compatible = acquisition_contract(run_contract) == acquisition_contract(contract)
         projection = build_projection(
             run_contract,
-            selected_capability(run_dir, manifest),
+            selected_capability(run_dir),
             identity,
             manifest,
             run_dir,
@@ -2390,12 +2402,9 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
         raise DiscoveryError(f"replay source run is not complete: {source_run_id}")
     if source_manifest.get("contractHash") != content_hash(source_contract):
         raise DiscoveryError(f"replay source contract hash differs: {source_run_id}")
-    # A replay reuses only immutable provider bytes. Editorial mappings in the
-    # source contract may legitimately name release ids superseded by the current
-    # reviewed graph; the current contract was already validated by load_inputs().
     if acquisition_contract(source_contract) != acquisition_contract(contract):
         raise DiscoveryError("replay source differs in its provider acquisition contract")
-    newest_source_run_id = newest_compatible_complete_run(contract)
+    newest_source_run_id = newest_acquisition_compatible_complete_run(contract)
     if source_run_id != newest_source_run_id:
         raise DiscoveryError(
             "replay source must be the newest compatible complete run: "
