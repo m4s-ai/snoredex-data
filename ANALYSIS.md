@@ -689,6 +689,7 @@ The initial retry sequence retained three immutable set-discovery attempts with 
 | Replay boundary | Replaying unchanged raw responses updates projection metadata and capability validation. It does not claim a new provider retrieval time or provider-universe completeness |
 | Pre-commit full gate | Regeneration passed generation, determinism, source, complexity, structural, and workflow checks. It stopped only at the commit-bound handoff because the replay-derived collector bytes were not yet in `HEAD` |
 | Read-only replay guard | `--check` cannot be combined with `--replay-from-run`. The regression verifies that the replay function is not called |
+| Disagreement granularity guard | A non-adjudicated contradiction remains disputed and is reported outside supported verdict granularity. Raw source disagreement does not establish absence |
 | Evidence boundary | No language, finish, or absence verdict changed. The failed live requests remain source gaps |
 
 ## Remediation plan

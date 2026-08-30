@@ -94,8 +94,8 @@
           "rule": "A record of this exact card in this exact language establishes the printing. This is the granularity every other one is trying to reach."
         },
         "contradicted": {
-          "support": "records-source-disagreement",
-          "rule": "A contradiction records source disagreement. Only owner adjudication may publish a final absence."
+          "support": "raw-disagreement-only",
+          "rule": "A contradiction retains source disagreement. It does not establish absence without owner adjudication."
         }
       },
       "product-or-set": {
@@ -104,8 +104,8 @@
           "rule": "A statement about the product reaches the card when the card sits inside the set's numbered run, or when the cited page carries a closed card list containing it. A distribution printing remains separate."
         },
         "contradicted": {
-          "support": "records-source-disagreement",
-          "rule": "A contradiction records source disagreement. Product omission alone remains unknown."
+          "support": "raw-disagreement-only",
+          "rule": "A contradiction retains source disagreement. Product omission alone remains unknown."
         }
       },
       "market-or-era": {
@@ -114,8 +114,8 @@
           "rule": "That a market existed, or received a set, never establishes a particular card in a particular language."
         },
         "contradicted": {
-          "support": "records-source-disagreement",
-          "rule": "An era argument may be retained as disagreement. Only owner adjudication settles absence."
+          "support": "raw-disagreement-only",
+          "rule": "An era argument may be retained as disagreement. It does not establish absence."
         }
       },
       "sibling-derived": {
@@ -124,7 +124,7 @@
           "rule": "The neighbour's evidence is not this unit's evidence. A row whose only basis is a sibling's record establishes nothing about itself."
         },
         "contradicted": {
-          "support": "records-source-disagreement",
+          "support": "raw-disagreement-only",
           "rule": "A sibling record may be retained as disagreement but cannot settle absence."
         }
       }
@@ -168,9 +168,10 @@
       "Illustration Rare": 1,
       "Shiny Rare": 1
     },
-    "verdictsBeyondTheirGranularity": 17,
+    "verdictsBeyondTheirGranularity": 21,
     "verdictsBeyondTheirGranularityByRule": {
-      "step-from-product-to-card": 17
+      "step-from-product-to-card": 17,
+      "source-disagreement-does-not-establish-absence": 4
     },
     "applicationStatuses": {
       "exists": 618,
@@ -276,6 +277,25 @@
       "applicationStatus": "needs-evidence"
     },
     {
+      "unitId": "U0265",
+      "setCode": "sm10",
+      "number": "076",
+      "variant": "base",
+      "language": "T-Chinese",
+      "status": "contradicted",
+      "providerId": "bulbapedia",
+      "granularity": "market-or-era",
+      "rarity": "Rare",
+      "insideNumberedRun": true,
+      "runMembershipBasis": "rarity-table",
+      "runMembershipReason": "part of the numbered run",
+      "sourceCarriesCardList": false,
+      "inference": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
+      "applicationStatus": "disputed"
+    },
+    {
       "unitId": "U0384",
       "setCode": "sv4a",
       "number": "310",
@@ -293,6 +313,25 @@
       "verdictWithinGranularity": false,
       "verdictTransitionRule": "step-from-product-to-card",
       "applicationStatus": "needs-evidence"
+    },
+    {
+      "unitId": "U0414",
+      "setCode": "sm9",
+      "number": "066",
+      "variant": "V1",
+      "language": "T-Chinese",
+      "status": "contradicted",
+      "providerId": "bulbapedia",
+      "granularity": "market-or-era",
+      "rarity": "Double Rare",
+      "insideNumberedRun": true,
+      "runMembershipBasis": "printed-set-size",
+      "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
+      "sourceCarriesCardList": false,
+      "inference": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
+      "applicationStatus": "disputed"
     },
     {
       "unitId": "U0471",
@@ -388,6 +427,25 @@
       "verdictWithinGranularity": false,
       "verdictTransitionRule": "step-from-product-to-card",
       "applicationStatus": "needs-evidence"
+    },
+    {
+      "unitId": "U0558",
+      "setCode": "sm9",
+      "number": "115",
+      "variant": "V3",
+      "language": "T-Chinese",
+      "status": "contradicted",
+      "providerId": "bulbapedia",
+      "granularity": "market-or-era",
+      "rarity": "Rainbow Rare",
+      "insideNumberedRun": false,
+      "runMembershipBasis": "printed-set-size",
+      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
+      "sourceCarriesCardList": false,
+      "inference": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
+      "applicationStatus": "disputed"
     },
     {
       "unitId": "U0601",
@@ -502,6 +560,25 @@
       "verdictWithinGranularity": false,
       "verdictTransitionRule": "step-from-product-to-card",
       "applicationStatus": "needs-evidence"
+    },
+    {
+      "unitId": "U0634",
+      "setCode": "sm9",
+      "number": "106",
+      "variant": "V2",
+      "language": "T-Chinese",
+      "status": "contradicted",
+      "providerId": "bulbapedia",
+      "granularity": "market-or-era",
+      "rarity": "Ultra Rare",
+      "insideNumberedRun": false,
+      "runMembershipBasis": "printed-set-size",
+      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
+      "sourceCarriesCardList": false,
+      "inference": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
+      "applicationStatus": "disputed"
     }
   ],
   "setLevelConfirmationsThatDoNotCarry": [
@@ -5881,8 +5958,8 @@
       "runMembershipReason": "part of the numbered run",
       "sourceCarriesCardList": false,
       "inference": "source-disagreement",
-      "verdictWithinGranularity": true,
-      "verdictTransitionRule": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -8712,8 +8789,8 @@
       "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
       "inference": "source-disagreement",
-      "verdictWithinGranularity": true,
-      "verdictTransitionRule": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -11448,8 +11525,8 @@
       "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "source-disagreement",
-      "verdictWithinGranularity": true,
-      "verdictTransitionRule": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {
@@ -12778,8 +12855,8 @@
       "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
       "inference": "source-disagreement",
-      "verdictWithinGranularity": true,
-      "verdictTransitionRule": "source-disagreement",
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
       "applicationStatus": "disputed"
     },
     {

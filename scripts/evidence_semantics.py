@@ -77,9 +77,9 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
                     "This is the granularity every other one is trying to reach.",
         },
         "contradicted": {
-            "support": "records-source-disagreement",
-            "rule": "A contradiction records source disagreement. Only owner adjudication may "
-                    "publish a final absence.",
+            "support": "raw-disagreement-only",
+            "rule": "A contradiction retains source disagreement. It does not establish absence "
+                    "without owner adjudication.",
         },
     },
     "product-or-set": {
@@ -90,8 +90,8 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
                     "containing it. A distribution printing remains separate.",
         },
         "contradicted": {
-            "support": "records-source-disagreement",
-            "rule": "A contradiction records source disagreement. Product omission alone remains unknown.",
+            "support": "raw-disagreement-only",
+            "rule": "A contradiction retains source disagreement. Product omission alone remains unknown.",
         },
     },
     "market-or-era": {
@@ -101,8 +101,8 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
                     "card in a particular language.",
         },
         "contradicted": {
-            "support": "records-source-disagreement",
-            "rule": "An era argument may be retained as disagreement. Only owner adjudication settles absence.",
+            "support": "raw-disagreement-only",
+            "rule": "An era argument may be retained as disagreement. It does not establish absence.",
         },
     },
     "sibling-derived": {
@@ -112,7 +112,7 @@ VERDICT_TRANSITIONS: dict[str, dict[str, dict[str, str]]] = {
                     "is a sibling's record establishes nothing about itself.",
         },
         "contradicted": {
-            "support": "records-source-disagreement",
+            "support": "raw-disagreement-only",
             "rule": "A sibling record may be retained as disagreement but cannot settle absence.",
         },
     },
@@ -133,7 +133,7 @@ def transition_support(grain: str, status: str, inference: str | None) -> tuple[
     if status == "contradicted":
         if inference == ADJUDICATED:
             return True, "owner-adjudication"
-        return True, "source-disagreement"
+        return False, "source-disagreement-does-not-establish-absence"
     if grain == "specimen-or-card":
         return True, "card-level-record"
     if grain == "product-or-set":

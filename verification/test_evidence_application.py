@@ -56,6 +56,8 @@ def main() -> int:
             raise AssertionError(f"needs-evidence is not an unsupported confirmation: {unit_id}")
         if status == "not-printed" and semantic["inference"] != "owner-adjudicated":
             raise AssertionError(f"hard absence lacks owner adjudication: {unit_id}")
+        if status == "disputed" and semantic["verdictWithinGranularity"]:
+            raise AssertionError(f"source disagreement presented as supported: {unit_id}")
         if semantic["inference"] == "provider-holds-an-absence-edge":
             raise AssertionError(f"provider absence inference remains active: {unit_id}")
 
