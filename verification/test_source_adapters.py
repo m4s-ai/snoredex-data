@@ -317,6 +317,21 @@ class SourceAdapterTests(unittest.TestCase):
         self.assertEqual(replayed_raw, "[]")
         self.assertEqual(build.call_args.args[4:], (contract, capability))
 
+    def test_check_cannot_replay_source_run(self):
+        args = mock.Mock(
+            check=True,
+            refresh=False,
+            refresh_tcgdex=False,
+            replay_from_run="20260809T000000Z",
+            run_id="20260810T000000Z",
+        )
+        with mock.patch.object(adapters, "replay_run") as replay:
+            with self.assertRaisesRegex(
+                adapters.AdapterError, "requires only --run-id"
+            ):
+                adapters.run_requested_action(args)
+        replay.assert_not_called()
+
     def test_incomplete_pagination_is_a_run_error(self):
         contract = {
             "meta": {"coverageVersion": "test"},

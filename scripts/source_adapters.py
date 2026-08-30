@@ -1009,7 +1009,7 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
 
 def run_requested_action(args: argparse.Namespace) -> bool:
     if args.replay_from_run:
-        if args.refresh or args.refresh_tcgdex or not args.run_id:
+        if args.check or args.refresh or args.refresh_tcgdex or not args.run_id:
             raise AdapterError("--replay-from-run requires only --run-id")
         replay_run(args.replay_from_run, args.run_id, args.retrieved_at)
         return True
