@@ -528,6 +528,7 @@ def diff_records(current: list[dict[str, Any]], previous: list[dict[str, Any]]) 
 def build_projection(
     contract: dict[str, Any], manifest: dict[str, Any], run_dir: Path,
     previous: dict[str, Any] | None,
+    projection_contract: dict[str, Any],
     capability: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     adapters = {row["adapterId"]: row for row in contract["adapters"]}
@@ -537,7 +538,7 @@ def build_projection(
     }
     mappings = {
         raw_key(row["providerId"], row["surfaceId"], row["rawLocale"], row["rawProviderId"]): row
-        for row in contract["explicitMappings"]
+        for row in projection_contract["explicitMappings"]
     }
     records: list[dict[str, Any]] = []
     run_errors: list[dict[str, Any]] = list(manifest.get("failures", []))
@@ -670,12 +671,12 @@ def build_projection(
         "meta": {
             "schema": "snoredex-source-adapter-staging",
             "schemaVersion": "1.0.0",
-            "coverageVersion": contract["meta"]["coverageVersion"],
+            "coverageVersion": projection_contract["meta"]["coverageVersion"],
             "generatedFromRun": manifest["runId"],
             "previousRun": None if previous is None else previous["meta"]["generatedFromRun"],
             "contract": "verification/source_adapters.json",
             "capabilityGraph": "verification/source_capability_graph.json",
-            "contractHash": manifest["contractHash"],
+            "contractHash": content_hash(projection_contract),
             "capabilityGraphHash": manifest["capabilityGraphHash"],
             "sourceFirst": True,
             "verdictMutationAllowed": False,
@@ -687,13 +688,13 @@ def build_projection(
                 "ambiguousNeedsEvidence": totals["ambiguous/needs-evidence"],
                 "positivelyExcluded": totals["positively-excluded"],
                 "runErrors": len(run_errors),
-                "gaps": len(contract["gaps"]),
+                "gaps": len(projection_contract["gaps"]),
             },
         },
         "slices": slice_rows,
         "runErrors": run_errors,
         "diff": diff,
-        "gaps": contract["gaps"],
+        "gaps": projection_contract["gaps"],
         "records": records,
     }
 
@@ -779,11 +780,13 @@ def build_latest(
     latest_projection = None
     for run_dir, manifest in manifests:
         run_contract = load_run_contract(run_dir, manifest)
+        compatible = acquisition_contract(run_contract) == acquisition_contract(contract)
         projection = build_projection(
             run_contract,
             manifest,
             run_dir,
             previous,
+            contract if compatible else run_contract,
             selected_capability(run_dir, manifest),
         )
         if run_dir == latest_dir:

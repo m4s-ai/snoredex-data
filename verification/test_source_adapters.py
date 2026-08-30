@@ -174,7 +174,7 @@ class SourceAdapterTests(unittest.TestCase):
             run_dir = Path(temporary)
             (run_dir / "raw").mkdir()
             (run_dir / "raw" / "sets.json").write_bytes(raw)
-            projection = adapters.build_projection(contract, manifest, run_dir, None)
+            projection = adapters.build_projection(contract, manifest, run_dir, None, contract)
         self.assertEqual(projection["slices"][0]["terminalState"], "needs-evidence")
         self.assertEqual(projection["slices"][0]["accounting"]["fetched"], 0)
         self.assertEqual(projection["slices"][0]["accounting"]["accounted"], 0)
@@ -218,12 +218,18 @@ class SourceAdapterTests(unittest.TestCase):
             "explicitMappings": [],
             "gaps": [],
         }
+        compatible = json.loads(json.dumps(contract))
+        compatible["meta"]["coverageVersion"] = "previous"
+        compatible["meta"]["reviewedAt"] = "2026-08-29"
+        compatible["meta"]["policies"] = ["previous"]
+        compatible["explicitMappings"] = [{"mapping": "previous"}]
+        compatible["gaps"] = [{"gap": "previous"}]
         incompatible = json.loads(json.dumps(contract))
         incompatible["adapters"] = [{"adapterId": "obsolete"}]
         with tempfile.TemporaryDirectory() as temporary:
             runs_dir = Path(temporary)
             for run_id, status, run_contract in (
-                ("20260809T000000Z", "complete", contract),
+                ("20260809T000000Z", "complete", compatible),
                 ("20260810T000000Z", "complete", incompatible),
                 ("20260811T000000Z", "incomplete", contract),
             ):
@@ -252,6 +258,7 @@ class SourceAdapterTests(unittest.TestCase):
         self.assertEqual(run_dir.name, "20260809T000000Z")
         self.assertEqual(projection["runId"], "20260809T000000Z")
         self.assertEqual(build.call_count, 3)
+        self.assertEqual(build.call_args_list[0].args[4], contract)
 
     def test_incomplete_pagination_is_a_run_error(self):
         contract = {
@@ -282,7 +289,7 @@ class SourceAdapterTests(unittest.TestCase):
             run_dir = Path(temporary)
             (run_dir / "raw").mkdir()
             (run_dir / "raw" / "sets.json").write_bytes(raw)
-            projection = adapters.build_projection(contract, manifest, run_dir, None)
+            projection = adapters.build_projection(contract, manifest, run_dir, None, contract)
         self.assertEqual(projection["slices"][0]["terminalState"], "needs-evidence")
         self.assertIn("incomplete-pagination", {row["code"] for row in projection["runErrors"]})
 

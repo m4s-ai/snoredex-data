@@ -672,6 +672,7 @@ The initial retry sequence retained three immutable set-discovery attempts with 
 | Full read-only gate | `python scripts/regen.py --check` passed after the workflow-loop correction, including all generators, structural tests, workflow tests, and 111 cross-artifact checks |
 | CI cache cleanup | Both platform jobs exposed an ignored `verification/cache` directory. A fresh checkout isolated an empty `finish-tcgdex` directory created by the accepted-snapshot regression. The test now redirects both candidate and cache paths into its temporary directory. The handoff regression also removes its empty parent after cleaning its fixtures |
 | Contract compatibility review | The exact-head review found that complete canonical selection also needed acquisition-contract compatibility. Both selectors and both regression suites now cover a newer incompatible complete run followed by an incomplete current run |
+| Projection-contract review | The next exact-head review found that source projection still used historical mapping and gap fields. Source runs now retain their acquisition contract while compatible runs project through the current mapping, gap, coverage-version, and contract-hash fields |
 | Cross-artifact review | 111 of 111 checks passed |
 | Evidence boundary | No language, finish, or absence verdict changed. Provider timeouts remain source gaps |
 
