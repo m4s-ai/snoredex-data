@@ -547,7 +547,7 @@ verification/archive/scripts/analyze.ps1
 
    - Lines 11 to 13 direct readers to a current-state section that does not exist.
    - Lines 83 to 86 correctly say the file does not state current figures.
-   - Four code-form paths repeat `verification/verification`. They point to `verify_market_history.ps1`, `asia_fetch_th.ps1`, `fix_asia_setlevel.ps1`, and `backfill_artists.ps1`.
+   - Four code-form paths repeat the `verification/` prefix. They refer to `verification/archive/passes/verify_market_history.ps1`, `verification/archive/passes/asia_fetch_th.ps1`, `verification/archive/passes/fix_asia_setlevel.ps1`, and `verification/archive/passes/backfill_artists.ps1`. These are archived one-shot tools and must not be rerun.
    - The explicit-dash rule is described as evidence of non-release. Under current application semantics it can support a bounded contradiction, but it does not settle final absence by itself.
    - The normal `--check` description also implies a non-writing operation that the current gate does not provide.
 
@@ -564,8 +564,8 @@ verification/archive/scripts/analyze.ps1
 
 8. Two active `scripts/analyze.py` docstrings refer to moved PowerShell paths.
 
-   - The module text points to `scripts/analyze.ps1`. The retained predecessor is under `verification/archive/scripts`.
-   - A function docstring points to `scripts/finalize.ps1`. The retained predecessor is under `verification/archive/passes`.
+   - The module text points to the archived one-shot `verification/archive/scripts/analyze.ps1`, which must not be rerun.
+   - A function docstring points to the archived one-shot `verification/archive/passes/finalize.ps1`, which must not be rerun.
 
 ### Low priority
 
@@ -631,9 +631,10 @@ The passing findings review reports 635 confirmed legacy claims, 84 contradicted
 | Browser suite | Passed 122 of 122 checks |
 | Read-only selected checks | Passed twice with the same worktree diff hash before and after |
 | Stale-artifact regression | Passed. Check mode rejected both stale fixtures without repairing them |
-| Complete regeneration check | Blocked twice by the retained source-discovery failures described below. Both attempts left the worktree diff unchanged |
+| Complete regeneration check | Blocked by the retained source-discovery failures described below. Read-only attempts left the worktree diff unchanged |
+| Post-push documentation regression | Passed after correcting the two D2 references to archived one-shot tools |
 
-Three immutable set-discovery attempts are retained with run IDs `20260829T220557Z`, `20260829T220901Z`, and `20260830T111240Z`. The latest run retained 14 positive records and 12 request failures after the TCGdex endpoints timed out. The matching card-discovery run was resumed once after its first timeout. It retains 120 hash-verified raw responses, one timed-out TCGdex request, and 10 projection errors for that request and its incomplete dependent slices. The bounded discovery loop stopped after one cycle with `lane-failed`, and the scoped source-discovery lane reported two checks passed, one failed, and three correctly skipped. These failures remain source gaps and never become evidence that a card, language, region, or finish is absent.
+The initial retry sequence retained three immutable set-discovery attempts with run IDs `20260829T220557Z`, `20260829T220901Z`, and `20260830T111240Z`. The latest run retained 14 positive records and 12 request failures after the TCGdex endpoints timed out. The matching card-discovery run was resumed once after its first timeout. It retains 120 hash-verified raw responses, one timed-out TCGdex request, and 10 projection errors for that request and its incomplete dependent slices. The bounded discovery loop stopped after one cycle with `lane-failed`, and the scoped source-discovery lane reported two checks passed, one failed, and three correctly skipped. These failures remain source gaps and never become evidence that a card, language, region, or finish is absent.
 
 ### Live retry update for 2026-08-30
 
@@ -649,6 +650,26 @@ Three immutable set-discovery attempts are retained with run IDs `20260829T22055
 | Full write gate | On this Windows run, `regen.py` raised `OSError 22` while rewriting existing generated files. Direct retries of both affected writers succeeded |
 | Full read-only gate | Every non-discovery generator check passed. Source adapters, card discovery, locality, and completeness remained red |
 | Cross-artifact review | 107 of 111 checks passed. N12 through N15 remained red only for the incomplete retained runs |
+
+### Second live retry update for 2026-08-30
+
+| Item | Retained result |
+|---|---|
+| Set run | `20260830T114212Z`, incomplete with manifest SHA-256 `1a76100df18cdbe713c1746328a7f045fb5d59dd90cb20e13fa169fed4c4eeb8` |
+| Card run | `20260830T114212Z`, complete with manifest SHA-256 `08a98bf2029074f33a5abd8b308a280e0cece356d20b507e5bfc65f99b10a3a` |
+| Raw validation | 539 referenced responses checked, zero missing files, and zero hash mismatches |
+| Set reconciliation | 14 records, 5 mapped, 9 new candidates, 10 explicit gaps, zero added, changed, disappeared, or re-keyed rows, and 12 TCGdex run errors |
+| Card reconciliation | 354 records, 234 matched, 6 ambiguous, 40 new candidates, 21 positively excluded, 53 needs-evidence, 12 explicit gaps, and zero run errors |
+| Replay provenance | 243 records came from ten unchanged slices replayed from `20260820T125000Z`. All 416 reused response hashes match that run exactly |
+| Live card slices | Four live slices retained 111 records across 120 hash-verified responses |
+| Source canonical projection | Complete run `20260813T122130Z` remains canonical with 1,621 records, 15 slices, 10 explicit gaps, and zero run errors |
+| Card canonical projection | Complete run `20260830T114212Z` is canonical with 354 records, 14 slices, 12 explicit gaps, and zero run errors |
+| Bounded loop | Run `20260830T114905Z-discovery` stopped after one cycle because the set source lane failed |
+| Scoped lane | Run `20260830T114908Z-source-discovery-f2b4bda50c` reported two passed, one failed, and three not run |
+| Review remediation | Canonical source and card staging now select the newest complete retained run. Incomplete attempts remain immutable and are still validated without replacing a complete projection |
+| Full write gate | All tree-based generation, determinism, source, complexity, structural, and workflow checks passed. The pre-commit run stopped only at the commit-bound handoff test because regenerated collector bytes were not yet in `HEAD` |
+| Cross-artifact review | 111 of 111 checks passed |
+| Evidence boundary | No language, finish, or absence verdict changed. Provider timeouts remain source gaps |
 
 ## Remediation plan
 
@@ -774,7 +795,7 @@ Affected files and generators:
 - [x] `verification/SOURCES.md`
 - [x] `verification/source_capabilities.json`
 - [x] The source-capability schema and validator
-- [x] `verification/source_capabilities.py`
+- [x] `scripts/source_capabilities.py`
 - [x] Review-finding rules and their tests
 
 Tasks:
@@ -919,8 +940,8 @@ Tasks by document:
 - [x] Remove duplicate generator-order instructions when the canonical pipeline already defines the order.
 - [x] In `scripts/analyze.py`, change archived path references to `verification/archive/scripts/analyze.ps1` and `verification/archive/passes/finalize.ps1`.
 - [x] Add a generated-file marker to `index.html` through `scripts/site.py` and test its presence.
-- [x] Extend documentation-path tests to cover `.ps1` paths, archive paths, and paths inside inline code.
-- [x] Add a regression that rejects duplicated prefixes such as `verification/verification`.
+- [x] Extend documentation-path tests to cover archived one-shot paths such as `verification/archive/passes/verify_market_history.ps1`, which must not be rerun, plus paths inside inline code.
+- [x] Add a regression that rejects duplicated path prefixes.
 - [x] Update this analysis ledger after each file is corrected.
 
 Exit gate:

@@ -1725,9 +1725,12 @@ def _validate_profiles(
                 or not profile.get("languageScope") or not profile.get("rules") \
                 or source_id not in graph_sources:
             errors.append(f"finish profile is incomplete: {profile_id}")
-        if (profile.get("closedWithinScope") is not False
-                or profile.get("closureScope") or profile.get("closureAuthority")
-                or profile.get("closedFinishQuestions")):
+        if any((
+            profile.get("closedWithinScope") is not False,
+            profile.get("closureScope"),
+            profile.get("closureAuthority"),
+            profile.get("closedFinishQuestions"),
+        )):
             errors.append(f"external finish profile claims closure: {profile_id}")
         if ("set-source-record", source_id) not in relations[("finish-profile", profile_id, "supported-by")]:
             errors.append(f"finish profile source edge is missing: {profile_id}")

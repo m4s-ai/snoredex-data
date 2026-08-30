@@ -629,6 +629,24 @@ def strongest_status(printings: list[dict[str, Any]], finish: str | None = None)
     return max(statuses, key=lambda status: STATUS_RANK[status]) if statuses else "pending"
 
 
+def evidence_scopes(printings: list[dict[str, Any]]) -> set[str]:
+    return {
+        source["evidenceScope"]
+        for printing in printings
+        for source in printing.get("sources") or []
+        if source.get("evidenceScope")
+    }
+
+
+def source_scope_needs_owner(
+    printings: list[dict[str, Any]],
+    scopes: set[str],
+    unit_key: tuple[str, str, str],
+    decisions: dict[tuple[str, str, str], dict[str, Any]],
+) -> bool:
+    return bool(printings) and "finish-unit" in scopes and unit_key not in decisions
+
+
 def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") -> dict[str, Any]:
     compact = {
         "printingId": printing["printingId"],
@@ -852,14 +870,13 @@ def _resolve_tcgdex(context: dict[str, Any]) -> int | None:
         )
         for url in changed + added + removed:
             print(f"  drift: {url}")
-        write_json(
-            SNAPSHOT_PATH,
-            {
-                "schema": "snoredex-tcgdex-snapshot/1",
-                "generated": datetime.now(timezone.utc).date().isoformat(),
-                "records": current_snapshot,
-            },
-        )
+        snapshot_document = {
+            "schema": "snoredex-tcgdex-snapshot/1",
+            "generated": datetime.now(timezone.utc).date().isoformat(),
+            "records": current_snapshot,
+        }
+        write_json(SNAPSHOT_PATH, snapshot_document)
+        context["snapshot_document"] = snapshot_document
     if fetch_errors and (offline or refresh):
         for url, reason in sorted(fetch_errors.items()):
             print(f"unreachable: {url} — {reason}", file=sys.stderr)
@@ -1315,12 +1332,7 @@ def _build_finish_unit(
             product_mapping_status = "pending"
         known_printings = [printing for printing in printings if printing["finish"] in FINISHES]
         unknown_finish_printings = [printing for printing in printings if printing["finish"] == "unknown"]
-        source_scopes = {
-            source["evidenceScope"]
-            for printing in known_printings
-            for source in printing.get("sources") or []
-            if source.get("evidenceScope")
-        }
+        source_scopes = evidence_scopes(known_printings)
 
     def _build_finish_unit_part10():
         nonlocal pattern_status, printing, unresolved
@@ -1344,8 +1356,12 @@ def _build_finish_unit(
                 "One or more known physical printings still have unresolved finishes: "
                 + ", ".join(printing["printingId"] for printing in unknown_finish_printings)
             )
-        if (known_printings and "finish-unit" in source_scopes
-                and (set_code, number, language) not in owner_finish_decisions):
+        if source_scope_needs_owner(
+            known_printings,
+            source_scopes,
+            (set_code, number, language),
+            owner_finish_decisions,
+        ):
             unresolved.append(
                 "The source lists known finishes only. Unlisted alternatives remain unknown."
             )
@@ -1518,15 +1534,8 @@ def _build_finish_counts(
         "variantAxes and hasReverseHolo are",
         "markings.role distinguishes",
     )
-    language_notes = [
-        note for note in notes
-        if str(note).startswith(("languagesConfirmed", "languagesRepositoryConfirmed"))
-    ]
-    notes = [
-        note for note in notes
-        if not any(str(note).startswith(prefix) for prefix in generated_note_prefixes)
-        and note not in language_notes
-    ]
+    language_notes = extract_language_notes(notes)
+    notes = retained_finish_notes(notes, generated_note_prefixes, language_notes)
     notes.append(
         "variantAxes and hasReverseHolo are Cardmarket catalogue hints only. finishAvailability is the positive-evidence finish layer; pending never means a finish is proven not to exist."
     )
@@ -1537,6 +1546,23 @@ def _build_finish_counts(
     cards_document["meta"]["notes"] = notes
 
     return counts
+
+
+def extract_language_notes(notes: list[Any]) -> list[Any]:
+    return [
+        note for note in notes
+        if str(note).startswith(("languagesConfirmed", "languagesRepositoryConfirmed"))
+    ]
+
+
+def retained_finish_notes(
+    notes: list[Any], prefixes: tuple[str, ...], language_notes: list[Any]
+) -> list[Any]:
+    return [
+        note for note in notes
+        if not any(str(note).startswith(prefix) for prefix in prefixes)
+        and note not in language_notes
+    ]
 
 
 def _build_finish_documents(

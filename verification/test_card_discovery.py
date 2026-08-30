@@ -448,6 +448,41 @@ class CardDiscoveryTests(unittest.TestCase):
                         "20260813T135800Z", "20260813T135700Z", None
                     )
 
+    def test_incomplete_run_does_not_replace_canonical_projection(self):
+        contract = {
+            "meta": {"coverageVersion": "test", "reviewedAt": "2026-08-30", "policies": []},
+            "adapters": [],
+            "explicitMappings": [],
+            "gaps": [],
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            for run_id, status in (
+                ("20260809T000000Z", "complete"),
+                ("20260810T000000Z", "incomplete"),
+            ):
+                run_dir = runs_dir / run_id
+                run_dir.mkdir()
+                (run_dir / "manifest.json").write_text(json.dumps({
+                    "runId": run_id,
+                    "status": status,
+                    "contractHash": discovery.content_hash(contract),
+                }), encoding="utf-8")
+            with (
+                mock.patch.object(discovery, "RUNS_DIR", runs_dir),
+                mock.patch.object(
+                    discovery,
+                    "build_projection",
+                    side_effect=lambda _contract, _capability, _identity, manifest, *_args: {
+                        "runId": manifest["runId"]
+                    },
+                ) as build,
+            ):
+                projection, run_dir = discovery.build_latest(contract, {}, {})
+        self.assertEqual(run_dir.name, "20260809T000000Z")
+        self.assertEqual(projection["runId"], "20260809T000000Z")
+        self.assertEqual(build.call_count, 2)
+
     def test_replay_source_must_be_newest_compatible_complete_run(self):
         contract = {
             "meta": {

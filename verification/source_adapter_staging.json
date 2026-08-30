@@ -3,22 +3,22 @@
     "schema": "snoredex-source-adapter-staging",
     "schemaVersion": "1.0.0",
     "coverageVersion": "1.2.0",
-    "generatedFromRun": "20260830T111240Z",
-    "previousRun": "20260829T220901Z",
+    "generatedFromRun": "20260813T122130Z",
+    "previousRun": "20260811T144120Z",
     "contract": "verification/source_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "contractHash": "sha256:b5ac6c982efe67b28c2ced2a0428cf1d2939c6314c78a57a04145c03042554c3",
-    "capabilityGraphHash": "sha256:42e1d259b4c7ee5198503a73f0ea7de215c74786c03924889615e558a0de53e7",
+    "capabilityGraphHash": "sha256:440b60db0b71f6687c1acf9852a38e23e53cae84fcaec103afcba212601d8791",
     "sourceFirst": true,
     "verdictMutationAllowed": false,
     "counts": {
       "slices": 15,
-      "records": 14,
+      "records": 1621,
       "mapped": 5,
-      "newCandidate": 9,
-      "ambiguousNeedsEvidence": 0,
+      "newCandidate": 1460,
+      "ambiguousNeedsEvidence": 156,
       "positivelyExcluded": 0,
-      "runErrors": 12,
+      "runErrors": 0,
       "gaps": 10
     }
   },
@@ -83,338 +83,396 @@
     {
       "sliceId": "tcgdex-de-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 153,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 153,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 153
       }
     },
     {
       "sliceId": "tcgdex-en-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 218,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 218,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 218
       }
     },
     {
       "sliceId": "tcgdex-es-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 154,
         "mapped": 0,
         "newCandidate": 0,
-        "ambiguousNeedsEvidence": 0,
+        "ambiguousNeedsEvidence": 154,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 154
       }
     },
     {
       "sliceId": "tcgdex-fr-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 200,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 200,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 200
       }
     },
     {
       "sliceId": "tcgdex-id-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 70,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 70,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 70
       }
     },
     {
       "sliceId": "tcgdex-it-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 190,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 190,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 190
       }
     },
     {
       "sliceId": "tcgdex-ja-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 177,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 177,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 177
       }
     },
     {
       "sliceId": "tcgdex-ko-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 95,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 95,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 95
       }
     },
     {
       "sliceId": "tcgdex-pt-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 123,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 123,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 123
       }
     },
     {
       "sliceId": "tcgdex-th-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 72,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 72,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 72
       }
     },
     {
       "sliceId": "tcgdex-zh-cn-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 57,
         "mapped": 0,
-        "newCandidate": 0,
-        "ambiguousNeedsEvidence": 0,
+        "newCandidate": 55,
+        "ambiguousNeedsEvidence": 2,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 57
       }
     },
     {
       "sliceId": "tcgdex-zh-tw-sets",
       "adapterId": "tcgdex-local-set-list",
-      "terminalState": "blocked-by-source",
-      "terminalMeaning": "source access or positive catalogue content needs evidence; no absence is inferred",
+      "terminalState": "complete",
+      "terminalMeaning": "all rows returned by this bounded request were retained and accounted; provider-universe completeness is not claimed",
       "checkpoint": {
         "page": 1,
         "nextCursor": null,
-        "complete": false
+        "complete": true
       },
       "accounting": {
-        "fetched": 0,
+        "fetched": 98,
         "mapped": 0,
-        "newCandidate": 0,
+        "newCandidate": 98,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 0
+        "accounted": 98
       }
     }
   ],
-  "runErrors": [
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-de-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-en-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-es-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-fr-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-id-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-it-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-ja-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-ko-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-pt-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-th-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-zh-cn-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    },
-    {
-      "code": "request-failure",
-      "sliceId": "tcgdex-zh-tw-sets",
-      "error": {
-        "code": "fetch-or-parse-failure",
-        "message": "The read operation timed out"
-      }
-    }
-  ],
+  "runErrors": [],
   "diff": {
     "added": [],
-    "changed": [],
+    "changed": [
+      "tcgdex|tcgdex-api|es|2011bw",
+      "tcgdex|tcgdex-api|es|2012bw",
+      "tcgdex|tcgdex-api|es|2021swsh",
+      "tcgdex|tcgdex-api|es|2022swsh",
+      "tcgdex|tcgdex-api|es|2023sv",
+      "tcgdex|tcgdex-api|es|2024sv",
+      "tcgdex|tcgdex-api|es|A1",
+      "tcgdex|tcgdex-api|es|A1a",
+      "tcgdex|tcgdex-api|es|A2",
+      "tcgdex|tcgdex-api|es|A2a",
+      "tcgdex|tcgdex-api|es|A2b",
+      "tcgdex|tcgdex-api|es|A3",
+      "tcgdex|tcgdex-api|es|A4a",
+      "tcgdex|tcgdex-api|es|B1a",
+      "tcgdex|tcgdex-api|es|B2",
+      "tcgdex|tcgdex-api|es|B2a",
+      "tcgdex|tcgdex-api|es|P-A",
+      "tcgdex|tcgdex-api|es|base1",
+      "tcgdex|tcgdex-api|es|base2",
+      "tcgdex|tcgdex-api|es|base3",
+      "tcgdex|tcgdex-api|es|basep",
+      "tcgdex|tcgdex-api|es|bw1",
+      "tcgdex|tcgdex-api|es|bw2",
+      "tcgdex|tcgdex-api|es|bw3",
+      "tcgdex|tcgdex-api|es|bw4",
+      "tcgdex|tcgdex-api|es|bw5",
+      "tcgdex|tcgdex-api|es|bw6",
+      "tcgdex|tcgdex-api|es|bw7",
+      "tcgdex|tcgdex-api|es|bw8",
+      "tcgdex|tcgdex-api|es|bw9",
+      "tcgdex|tcgdex-api|es|bwp",
+      "tcgdex|tcgdex-api|es|cel25",
+      "tcgdex|tcgdex-api|es|cel25cc",
+      "tcgdex|tcgdex-api|es|det1",
+      "tcgdex|tcgdex-api|es|dp1",
+      "tcgdex|tcgdex-api|es|dp2",
+      "tcgdex|tcgdex-api|es|dp3",
+      "tcgdex|tcgdex-api|es|dp4",
+      "tcgdex|tcgdex-api|es|dp6",
+      "tcgdex|tcgdex-api|es|dp7",
+      "tcgdex|tcgdex-api|es|dpp",
+      "tcgdex|tcgdex-api|es|dv1",
+      "tcgdex|tcgdex-api|es|ex1",
+      "tcgdex|tcgdex-api|es|ex10",
+      "tcgdex|tcgdex-api|es|exu",
+      "tcgdex|tcgdex-api|es|g1",
+      "tcgdex|tcgdex-api|es|hgss1",
+      "tcgdex|tcgdex-api|es|hgss2",
+      "tcgdex|tcgdex-api|es|hgssp",
+      "tcgdex|tcgdex-api|es|me01",
+      "tcgdex|tcgdex-api|es|me02",
+      "tcgdex|tcgdex-api|es|me02.5",
+      "tcgdex|tcgdex-api|es|me03",
+      "tcgdex|tcgdex-api|es|me04",
+      "tcgdex|tcgdex-api|es|me05",
+      "tcgdex|tcgdex-api|es|mee",
+      "tcgdex|tcgdex-api|es|mep",
+      "tcgdex|tcgdex-api|es|neo1",
+      "tcgdex|tcgdex-api|es|np",
+      "tcgdex|tcgdex-api|es|pl1",
+      "tcgdex|tcgdex-api|es|pl4",
+      "tcgdex|tcgdex-api|es|ru1",
+      "tcgdex|tcgdex-api|es|sm1",
+      "tcgdex|tcgdex-api|es|sm10",
+      "tcgdex|tcgdex-api|es|sm11",
+      "tcgdex|tcgdex-api|es|sm115",
+      "tcgdex|tcgdex-api|es|sm12",
+      "tcgdex|tcgdex-api|es|sm2",
+      "tcgdex|tcgdex-api|es|sm3",
+      "tcgdex|tcgdex-api|es|sm3.5",
+      "tcgdex|tcgdex-api|es|sm4",
+      "tcgdex|tcgdex-api|es|sm5",
+      "tcgdex|tcgdex-api|es|sm6",
+      "tcgdex|tcgdex-api|es|sm7",
+      "tcgdex|tcgdex-api|es|sm7.5",
+      "tcgdex|tcgdex-api|es|sm8",
+      "tcgdex|tcgdex-api|es|sm9",
+      "tcgdex|tcgdex-api|es|sma",
+      "tcgdex|tcgdex-api|es|smp",
+      "tcgdex|tcgdex-api|es|sv01",
+      "tcgdex|tcgdex-api|es|sv02",
+      "tcgdex|tcgdex-api|es|sv03",
+      "tcgdex|tcgdex-api|es|sv03.5",
+      "tcgdex|tcgdex-api|es|sv04",
+      "tcgdex|tcgdex-api|es|sv04.5",
+      "tcgdex|tcgdex-api|es|sv05",
+      "tcgdex|tcgdex-api|es|sv06",
+      "tcgdex|tcgdex-api|es|sv06.5",
+      "tcgdex|tcgdex-api|es|sv07",
+      "tcgdex|tcgdex-api|es|sv08",
+      "tcgdex|tcgdex-api|es|sv08.5",
+      "tcgdex|tcgdex-api|es|sv09",
+      "tcgdex|tcgdex-api|es|sv10",
+      "tcgdex|tcgdex-api|es|sv10.5b",
+      "tcgdex|tcgdex-api|es|sv10.5w",
+      "tcgdex|tcgdex-api|es|sve",
+      "tcgdex|tcgdex-api|es|svp",
+      "tcgdex|tcgdex-api|es|swsh1",
+      "tcgdex|tcgdex-api|es|swsh10",
+      "tcgdex|tcgdex-api|es|swsh10.5",
+      "tcgdex|tcgdex-api|es|swsh10.5tg",
+      "tcgdex|tcgdex-api|es|swsh11",
+      "tcgdex|tcgdex-api|es|swsh11.5tg",
+      "tcgdex|tcgdex-api|es|swsh12",
+      "tcgdex|tcgdex-api|es|swsh12.5",
+      "tcgdex|tcgdex-api|es|swsh12.5gg",
+      "tcgdex|tcgdex-api|es|swsh12.5tg",
+      "tcgdex|tcgdex-api|es|swsh2",
+      "tcgdex|tcgdex-api|es|swsh3",
+      "tcgdex|tcgdex-api|es|swsh3.5",
+      "tcgdex|tcgdex-api|es|swsh4",
+      "tcgdex|tcgdex-api|es|swsh4.5",
+      "tcgdex|tcgdex-api|es|swsh4.5sv",
+      "tcgdex|tcgdex-api|es|swsh5",
+      "tcgdex|tcgdex-api|es|swsh6",
+      "tcgdex|tcgdex-api|es|swsh7",
+      "tcgdex|tcgdex-api|es|swsh8",
+      "tcgdex|tcgdex-api|es|swsh9",
+      "tcgdex|tcgdex-api|es|swsh9.5tg",
+      "tcgdex|tcgdex-api|es|swshp",
+      "tcgdex|tcgdex-api|es|tk-bw-e",
+      "tcgdex|tcgdex-api|es|tk-bw-z",
+      "tcgdex|tcgdex-api|es|tk-dp-l",
+      "tcgdex|tcgdex-api|es|tk-dp-m",
+      "tcgdex|tcgdex-api|es|tk-ex-latia",
+      "tcgdex|tcgdex-api|es|tk-ex-latio",
+      "tcgdex|tcgdex-api|es|tk-ex-m",
+      "tcgdex|tcgdex-api|es|tk-ex-p",
+      "tcgdex|tcgdex-api|es|tk-hs-g",
+      "tcgdex|tcgdex-api|es|tk-hs-r",
+      "tcgdex|tcgdex-api|es|tk-sm-l",
+      "tcgdex|tcgdex-api|es|tk-sm-r",
+      "tcgdex|tcgdex-api|es|tk-xy-b",
+      "tcgdex|tcgdex-api|es|tk-xy-latia",
+      "tcgdex|tcgdex-api|es|tk-xy-latio",
+      "tcgdex|tcgdex-api|es|tk-xy-n",
+      "tcgdex|tcgdex-api|es|tk-xy-p",
+      "tcgdex|tcgdex-api|es|tk-xy-su",
+      "tcgdex|tcgdex-api|es|tk-xy-sy",
+      "tcgdex|tcgdex-api|es|tk-xy-w",
+      "tcgdex|tcgdex-api|es|xy1",
+      "tcgdex|tcgdex-api|es|xy10",
+      "tcgdex|tcgdex-api|es|xy11",
+      "tcgdex|tcgdex-api|es|xy12",
+      "tcgdex|tcgdex-api|es|xy2",
+      "tcgdex|tcgdex-api|es|xy3",
+      "tcgdex|tcgdex-api|es|xy4",
+      "tcgdex|tcgdex-api|es|xy5",
+      "tcgdex|tcgdex-api|es|xy6",
+      "tcgdex|tcgdex-api|es|xy7",
+      "tcgdex|tcgdex-api|es|xy8",
+      "tcgdex|tcgdex-api|es|xy9",
+      "tcgdex|tcgdex-api|es|xya",
+      "tcgdex|tcgdex-api|es|xyp"
+    ],
     "disappeared": [],
     "rekeyedCandidates": [],
     "counts": {
       "added": 0,
-      "changed": 0,
+      "changed": 154,
       "disappeared": 0,
       "rekeyedCandidates": 0
     }
@@ -512,5 +570,5 @@
     }
   ],
   "recordsPath": "verification/source_adapter_records.jsonl",
-  "recordsHash": "sha256:f5f5dac0d6daf2db3c3369450b70f603eb3455afddb8537523002ea219555889"
+  "recordsHash": "sha256:4ea0d924da92f42239c86e55f75bfb0e6521cc7cd1d53386ee7b9927d795c78e"
 }

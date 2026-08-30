@@ -73,6 +73,16 @@ def ordered(languages: set[str]) -> list[str]:
     return sorted(languages, key=lambda language: (LANG_RANK.get(language, 999), language))
 
 
+def write_or_check(cards_document: dict[str, Any]) -> None:
+    rendered = json.dumps(cards_document, ensure_ascii=False, indent=2) + "\n"
+    if "--check" in sys.argv:
+        if CARDS_PATH.read_text(encoding="utf-8") != rendered:
+            raise ValueError("snorlax_cards.json language status is stale")
+        print("snorlax_cards.json language status is current")
+        return
+    CARDS_PATH.write_text(rendered, encoding="utf-8", newline="\n")
+
+
 def main() -> None:
     cards_document = read_json(CARDS_PATH)
     units = read_json(UNITS_PATH)
@@ -177,15 +187,7 @@ def main() -> None:
     )
     cards_document["meta"]["notes"] = notes
 
-    rendered = json.dumps(cards_document, ensure_ascii=False, indent=2) + "\n"
-    if "--check" in sys.argv:
-        if CARDS_PATH.read_text(encoding="utf-8") != rendered:
-            print("snorlax_cards.json language status is stale")
-            return 1
-        print("snorlax_cards.json language status is current")
-        return 0
-
-    CARDS_PATH.write_text(rendered, encoding="utf-8", newline="\n")
+    write_or_check(cards_document)
 
     refuted_products = sum(
         1

@@ -45,6 +45,23 @@ def project(units: list[dict], fields: list[str]) -> list[dict]:
     return [{field: unit.get(field) for field in fields} for unit in units]
 
 
+def write_or_check(outputs: dict) -> None:
+    if "--check" in sys.argv:
+        stale = [
+            path.name
+            for path, payload in outputs.items()
+            if not path.exists()
+            or path.read_text(encoding="utf-8")
+            != json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+        ]
+        if stale:
+            raise ValueError(f"stale: {', '.join(stale)}")
+        print("language-verification exports are current")
+        return
+    for path, payload in outputs.items():
+        write_json(path, payload)
+
+
 def main() -> int:
     units = read_json(VERIFICATION / "units.json")
 
@@ -93,21 +110,7 @@ def main() -> int:
         VERIFICATION / "CONTRADICTED.json": contradicted_rows,
         VERIFICATION / "UNCONFIRMED.json": open_rows,
     }
-    if "--check" in sys.argv:
-        stale = [
-            path.name
-            for path, payload in outputs.items()
-            if not path.exists()
-            or path.read_text(encoding="utf-8")
-            != json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
-        ]
-        if stale:
-            print(f"stale: {', '.join(stale)}")
-            return 1
-        print("language-verification exports are current")
-    else:
-        for path, payload in outputs.items():
-            write_json(path, payload)
+    write_or_check(outputs)
 
     fully_resolved = 0
     card_variants: dict[str, list[dict]] = {}

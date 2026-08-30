@@ -710,34 +710,59 @@ def run_directories() -> list[Path]:
 def build_latest(
     contract: dict[str, Any], capability: dict[str, Any]
 ) -> tuple[dict[str, Any], Path]:
-    directories = run_directories()
-    if not directories:
-        raise AdapterError("no retained source-adapter run exists")
-    previous = None
-    latest_dir = directories[-1]
-    for run_dir in directories:
+    def load_manifest(run_dir: Path) -> dict[str, Any]:
         manifest = read_json(run_dir / "manifest.json")
         if manifest.get("runId") != run_dir.name:
             raise AdapterError(f"run directory and manifest id differ: {run_dir.name}")
-        run_contract = contract
-        if manifest.get("contractHash") != content_hash(contract):
-            snapshot_path = run_dir / "contract.json"
-            if not snapshot_path.is_file():
-                raise AdapterError(
-                    f"historical run {run_dir.name} needs its immutable contract snapshot"
-                )
-            run_contract = read_json(snapshot_path)
-            if manifest.get("contractHash") != content_hash(run_contract):
-                raise AdapterError(f"contract snapshot hash mismatch: {run_dir.name}")
-            validate_contract(run_contract, capability)
-        previous = build_projection(
+        return manifest
+
+    def load_run_contract(run_dir: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+        if manifest.get("contractHash") == content_hash(contract):
+            return contract
+        snapshot_path = run_dir / "contract.json"
+        if not snapshot_path.is_file():
+            raise AdapterError(
+                f"historical run {run_dir.name} needs its immutable contract snapshot"
+            )
+        run_contract = read_json(snapshot_path)
+        if manifest.get("contractHash") != content_hash(run_contract):
+            raise AdapterError(f"contract snapshot hash mismatch: {run_dir.name}")
+        validate_contract(run_contract, capability)
+        return run_contract
+
+    def selected_capability(run_dir: Path, manifest: dict[str, Any]) -> dict[str, Any] | None:
+        if run_dir != latest_dir:
+            return None
+        if manifest.get("capabilityGraphHash") != capability_pin(
+                capability, manifest_surfaces(manifest)):
+            return None
+        return capability
+
+    directories = run_directories()
+    if not directories:
+        raise AdapterError("no retained source-adapter run exists")
+    manifests = [(run_dir, load_manifest(run_dir)) for run_dir in directories]
+    latest_dir = next((
+        run_dir for run_dir, manifest in reversed(manifests)
+        if manifest.get("status") == "complete"
+    ), None)
+    if latest_dir is None:
+        raise AdapterError("no complete retained source-adapter run exists")
+    previous = None
+    latest_projection = None
+    for run_dir, manifest in manifests:
+        run_contract = load_run_contract(run_dir, manifest)
+        projection = build_projection(
             run_contract,
             manifest,
             run_dir,
             previous,
-            capability if run_dir == latest_dir else None,
+            selected_capability(run_dir, manifest),
         )
-    return previous, latest_dir
+        if run_dir == latest_dir:
+            latest_projection = projection
+        previous = projection
+    return latest_projection, latest_dir
 
 
 def fetch_one(

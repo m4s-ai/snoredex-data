@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -205,6 +206,36 @@ class SourceAdapterTests(unittest.TestCase):
         diff = adapters.diff_records([new], [old])
         self.assertEqual(diff["changed"], [new["stableKey"]])
         self.assertEqual(diff["counts"]["changed"], 1)
+
+    def test_incomplete_run_does_not_replace_canonical_projection(self):
+        contract = {"meta": {"coverageVersion": "test"}}
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            for run_id, status in (
+                ("20260809T000000Z", "complete"),
+                ("20260810T000000Z", "incomplete"),
+            ):
+                run_dir = runs_dir / run_id
+                run_dir.mkdir()
+                (run_dir / "manifest.json").write_text(json.dumps({
+                    "runId": run_id,
+                    "status": status,
+                    "contractHash": adapters.content_hash(contract),
+                }), encoding="utf-8")
+            with (
+                mock.patch.object(adapters, "RUNS_DIR", runs_dir),
+                mock.patch.object(
+                    adapters,
+                    "build_projection",
+                    side_effect=lambda _contract, manifest, *_args: {
+                        "runId": manifest["runId"]
+                    },
+                ) as build,
+            ):
+                projection, run_dir = adapters.build_latest(contract, {})
+        self.assertEqual(run_dir.name, "20260809T000000Z")
+        self.assertEqual(projection["runId"], "20260809T000000Z")
+        self.assertEqual(build.call_count, 2)
 
     def test_incomplete_pagination_is_a_run_error(self):
         contract = {
