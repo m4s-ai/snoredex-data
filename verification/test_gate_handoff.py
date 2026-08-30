@@ -46,6 +46,10 @@ def main() -> int:
             temp.rmdir()
         except OSError:
             pass
+        try:
+            temp.parent.rmdir()
+        except OSError:
+            pass
 
     release = (ROOT / ".github" / "workflows" / "release-gate.yml").read_text(encoding="utf-8")
     pages = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
