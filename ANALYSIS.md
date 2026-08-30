@@ -668,6 +668,8 @@ The initial retry sequence retained three immutable set-discovery attempts with 
 | Scoped lane | Run `20260830T114908Z-source-discovery-f2b4bda50c` reported two passed, one failed, and three not run |
 | Review remediation | Canonical source and card staging now select the newest complete retained run. Incomplete attempts remain immutable and are still validated without replacing a complete projection |
 | Full write gate | All tree-based generation, determinism, source, complexity, structural, and workflow checks passed. The pre-commit run stopped only at the commit-bound handoff test because regenerated collector bytes were not yet in `HEAD` |
+| Workflow-loop retry | The first post-commit run passed the handoff test and exposed one stale test expectation. The test now distinguishes a retained incomplete attempt from the complete canonical projection |
+| Full read-only gate | `python scripts/regen.py --check` passed after the workflow-loop correction, including all generators, structural tests, workflow tests, and 111 cross-artifact checks |
 | Cross-artifact review | 111 of 111 checks passed |
 | Evidence boundary | No language, finish, or absence verdict changed. Provider timeouts remain source gaps |
 
