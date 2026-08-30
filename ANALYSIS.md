@@ -670,7 +670,7 @@ The initial retry sequence retained three immutable set-discovery attempts with 
 | Full write gate | All tree-based generation, determinism, source, complexity, structural, and workflow checks passed. The pre-commit run stopped only at the commit-bound handoff test because regenerated collector bytes were not yet in `HEAD` |
 | Workflow-loop retry | The first post-commit run passed the handoff test and exposed one stale test expectation. The test now distinguishes a retained incomplete attempt from the complete canonical projection |
 | Full read-only gate | `python scripts/regen.py --check` passed after the workflow-loop correction, including all generators, structural tests, workflow tests, and 111 cross-artifact checks |
-| CI cache cleanup | Both platform jobs exposed an empty ignored `verification/cache` directory left by the handoff regression test. The test now removes its empty parent after cleaning its fixtures |
+| CI cache cleanup | Both platform jobs exposed an ignored `verification/cache` directory. A fresh checkout isolated an empty `finish-tcgdex` directory created by the accepted-snapshot regression. The test now redirects both candidate and cache paths into its temporary directory. The handoff regression also removes its empty parent after cleaning its fixtures |
 | Cross-artifact review | 111 of 111 checks passed |
 | Evidence boundary | No language, finish, or absence verdict changed. Provider timeouts remain source gaps |
 

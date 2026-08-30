@@ -82,9 +82,11 @@ def main() -> None:
         snapshot_path.write_text(json.dumps(old_snapshot), encoding="utf-8")
         original_snapshot_path = finishes.SNAPSHOT_PATH
         original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
+        original_cache_dir = finishes.CACHE_DIR
         original_arguments = sys.argv
         finishes.SNAPSHOT_PATH = snapshot_path
         finishes.REFRESH_CANDIDATE_PATH = candidate_path
+        finishes.CACHE_DIR = temporary_root / "cache"
         try:
             finishes.write_refresh_candidate(staged)
             sys.argv = ["finishes.py", "--refresh", "--accept-refresh"]
@@ -95,6 +97,7 @@ def main() -> None:
         finally:
             finishes.SNAPSHOT_PATH = original_snapshot_path
             finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
+            finishes.CACHE_DIR = original_cache_dir
             sys.argv = original_arguments
     print(f"tcgdex snapshot regression passed: {len(records)} hashed records, offline")
 
