@@ -455,19 +455,25 @@ class CardDiscoveryTests(unittest.TestCase):
             "explicitMappings": [],
             "gaps": [],
         }
+        incompatible = json.loads(json.dumps(contract))
+        incompatible["adapters"] = [{"adapterId": "obsolete"}]
         with tempfile.TemporaryDirectory() as temporary:
             runs_dir = Path(temporary)
-            for run_id, status in (
-                ("20260809T000000Z", "complete"),
-                ("20260810T000000Z", "incomplete"),
+            for run_id, status, run_contract in (
+                ("20260809T000000Z", "complete", contract),
+                ("20260810T000000Z", "complete", incompatible),
+                ("20260811T000000Z", "incomplete", contract),
             ):
                 run_dir = runs_dir / run_id
                 run_dir.mkdir()
                 (run_dir / "manifest.json").write_text(json.dumps({
                     "runId": run_id,
                     "status": status,
-                    "contractHash": discovery.content_hash(contract),
+                    "contractHash": discovery.content_hash(run_contract),
                 }), encoding="utf-8")
+                (run_dir / "contract.json").write_text(
+                    json.dumps(run_contract), encoding="utf-8"
+                )
             with (
                 mock.patch.object(discovery, "RUNS_DIR", runs_dir),
                 mock.patch.object(
@@ -481,7 +487,7 @@ class CardDiscoveryTests(unittest.TestCase):
                 projection, run_dir = discovery.build_latest(contract, {}, {})
         self.assertEqual(run_dir.name, "20260809T000000Z")
         self.assertEqual(projection["runId"], "20260809T000000Z")
-        self.assertEqual(build.call_count, 2)
+        self.assertEqual(build.call_count, 3)
 
     def test_replay_source_must_be_newest_compatible_complete_run(self):
         contract = {

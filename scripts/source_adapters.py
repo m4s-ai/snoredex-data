@@ -707,6 +707,35 @@ def run_directories() -> list[Path]:
     )
 
 
+def acquisition_contract(contract: dict[str, Any]) -> dict[str, Any]:
+    value = json.loads(json.dumps(contract))
+    value["meta"].pop("coverageVersion")
+    value["meta"].pop("reviewedAt")
+    value["meta"]["policies"] = []
+    value["explicitMappings"] = []
+    value["gaps"] = []
+    return value
+
+
+def newest_compatible_complete_run(contract: dict[str, Any]) -> str | None:
+    compatible = []
+    for run_dir in run_directories():
+        manifest = read_json(run_dir / "manifest.json")
+        if manifest.get("status") != "complete":
+            continue
+        snapshot_path = run_dir / "contract.json"
+        if not snapshot_path.is_file():
+            raise AdapterError(
+                f"complete run lacks its immutable contract snapshot: {run_dir.name}"
+            )
+        run_contract = read_json(snapshot_path)
+        if manifest.get("contractHash") != content_hash(run_contract):
+            raise AdapterError(f"contract snapshot hash mismatch: {run_dir.name}")
+        if acquisition_contract(run_contract) == acquisition_contract(contract):
+            compatible.append(run_dir.name)
+    return max(compatible, default=None)
+
+
 def build_latest(
     contract: dict[str, Any], capability: dict[str, Any]
 ) -> tuple[dict[str, Any], Path]:
@@ -742,12 +771,10 @@ def build_latest(
     if not directories:
         raise AdapterError("no retained source-adapter run exists")
     manifests = [(run_dir, load_manifest(run_dir)) for run_dir in directories]
-    latest_dir = next((
-        run_dir for run_dir, manifest in reversed(manifests)
-        if manifest.get("status") == "complete"
-    ), None)
-    if latest_dir is None:
-        raise AdapterError("no complete retained source-adapter run exists")
+    latest_run_id = newest_compatible_complete_run(contract)
+    if latest_run_id is None:
+        raise AdapterError("no compatible complete source-adapter run exists")
+    latest_dir = RUNS_DIR / latest_run_id
     previous = None
     latest_projection = None
     for run_dir, manifest in manifests:

@@ -208,22 +208,38 @@ class SourceAdapterTests(unittest.TestCase):
         self.assertEqual(diff["counts"]["changed"], 1)
 
     def test_incomplete_run_does_not_replace_canonical_projection(self):
-        contract = {"meta": {"coverageVersion": "test"}}
+        contract = {
+            "meta": {
+                "coverageVersion": "test",
+                "reviewedAt": "2026-08-30",
+                "policies": [],
+            },
+            "adapters": [{"adapterId": "current"}],
+            "explicitMappings": [],
+            "gaps": [],
+        }
+        incompatible = json.loads(json.dumps(contract))
+        incompatible["adapters"] = [{"adapterId": "obsolete"}]
         with tempfile.TemporaryDirectory() as temporary:
             runs_dir = Path(temporary)
-            for run_id, status in (
-                ("20260809T000000Z", "complete"),
-                ("20260810T000000Z", "incomplete"),
+            for run_id, status, run_contract in (
+                ("20260809T000000Z", "complete", contract),
+                ("20260810T000000Z", "complete", incompatible),
+                ("20260811T000000Z", "incomplete", contract),
             ):
                 run_dir = runs_dir / run_id
                 run_dir.mkdir()
                 (run_dir / "manifest.json").write_text(json.dumps({
                     "runId": run_id,
                     "status": status,
-                    "contractHash": adapters.content_hash(contract),
+                    "contractHash": adapters.content_hash(run_contract),
                 }), encoding="utf-8")
+                (run_dir / "contract.json").write_text(
+                    json.dumps(run_contract), encoding="utf-8"
+                )
             with (
                 mock.patch.object(adapters, "RUNS_DIR", runs_dir),
+                mock.patch.object(adapters, "validate_contract"),
                 mock.patch.object(
                     adapters,
                     "build_projection",
@@ -235,7 +251,7 @@ class SourceAdapterTests(unittest.TestCase):
                 projection, run_dir = adapters.build_latest(contract, {})
         self.assertEqual(run_dir.name, "20260809T000000Z")
         self.assertEqual(projection["runId"], "20260809T000000Z")
-        self.assertEqual(build.call_count, 2)
+        self.assertEqual(build.call_count, 3)
 
     def test_incomplete_pagination_is_a_run_error(self):
         contract = {

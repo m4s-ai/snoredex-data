@@ -1381,12 +1381,10 @@ def build_latest(
     if not directories:
         raise DiscoveryError("no retained card-discovery run exists")
     manifests = [(run_dir, load_manifest(run_dir)) for run_dir in directories]
-    latest_dir = next((
-        run_dir for run_dir, manifest in reversed(manifests)
-        if manifest.get("status") == "complete"
-    ), None)
-    if latest_dir is None:
-        raise DiscoveryError("no complete retained card-discovery run exists")
+    latest_run_id = newest_compatible_complete_run(contract)
+    if latest_run_id is None:
+        raise DiscoveryError("no compatible complete card-discovery run exists")
+    latest_dir = RUNS_DIR / latest_run_id
     previous = None
     latest_projection = None
     for run_dir, manifest in manifests:

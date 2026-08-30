@@ -666,11 +666,12 @@ The initial retry sequence retained three immutable set-discovery attempts with 
 | Card canonical projection | Complete run `20260830T114212Z` is canonical with 354 records, 14 slices, 12 explicit gaps, and zero run errors |
 | Bounded loop | Run `20260830T114905Z-discovery` stopped after one cycle because the set source lane failed |
 | Scoped lane | Run `20260830T114908Z-source-discovery-f2b4bda50c` reported two passed, one failed, and three not run |
-| Review remediation | Canonical source and card staging now select the newest complete retained run. Incomplete attempts remain immutable and are still validated without replacing a complete projection |
+| Review remediation | Canonical source and card staging now select the newest acquisition-contract-compatible complete retained run. Incomplete and incompatible attempts remain immutable and are still validated without replacing the compatible complete projection |
 | Full write gate | All tree-based generation, determinism, source, complexity, structural, and workflow checks passed. The pre-commit run stopped only at the commit-bound handoff test because regenerated collector bytes were not yet in `HEAD` |
 | Workflow-loop retry | The first post-commit run passed the handoff test and exposed one stale test expectation. The test now distinguishes a retained incomplete attempt from the complete canonical projection |
 | Full read-only gate | `python scripts/regen.py --check` passed after the workflow-loop correction, including all generators, structural tests, workflow tests, and 111 cross-artifact checks |
 | CI cache cleanup | Both platform jobs exposed an ignored `verification/cache` directory. A fresh checkout isolated an empty `finish-tcgdex` directory created by the accepted-snapshot regression. The test now redirects both candidate and cache paths into its temporary directory. The handoff regression also removes its empty parent after cleaning its fixtures |
+| Contract compatibility review | The exact-head review found that complete canonical selection also needed acquisition-contract compatibility. Both selectors and both regression suites now cover a newer incompatible complete run followed by an incomplete current run |
 | Cross-artifact review | 111 of 111 checks passed |
 | Evidence boundary | No language, finish, or absence verdict changed. Provider timeouts remain source gaps |
 
