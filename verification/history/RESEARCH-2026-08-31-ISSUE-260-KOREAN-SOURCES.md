@@ -2,7 +2,7 @@
 # Korean source research for issue #260 — 2026-08-31
 
 > [!NOTE]
-> Historical research snapshot based on the post-PR-333 repository state (`b1383ae`). This
+> **Historical record.** Research snapshot based on the post-PR-333 repository state (`b1383ae`). This
 > document records positive source observations and remaining uncertainty; it does not itself
 > change a legacy mapping or assert that an unpictured alternative does not exist.
 
