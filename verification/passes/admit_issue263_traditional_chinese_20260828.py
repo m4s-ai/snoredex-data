@@ -205,9 +205,9 @@ PHOTO_ROWS = [
 
 SUPPLEMENTAL = [
     card("existing-as5a203", "SPEC-0039", "AS5a", "203/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("SR", None), "U0634", card_name="Eevee & Snorlax-GX"),
-    card("existing-as5a222", "SPEC-0038", "AS5a", "222/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("HR", "hyper-rare"), "U0558", card_name="Eevee & Snorlax-GX"),
+    card("existing-as5a222", "SPEC-0038", "AS5a", "222/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("HR", None), "U0558", card_name="Eevee & Snorlax-GX"),
     card("existing-smp053", "SPEC-0029", "SM-P", "053", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("PROMO", "promo"), "U0414", card_name="Eevee & Snorlax-GX"),
-    card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", "hyper-rare"), card_name="Snorlax VMAX"),
+    card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", None), card_name="Snorlax VMAX"),
     card(
         "svg021", "", "SVG", "021/049", "Snorlax-Unfazed-Fat-Thumping-Snore",
         ("no printed rarity symbol", None), "U0467", date=("2023-11-10", "day"),

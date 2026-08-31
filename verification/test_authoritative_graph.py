@@ -12,13 +12,31 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+sys.path.insert(0, str(ROOT / "verification" / "passes"))
 import authoritative_graph as graph_module  # noqa: E402
+import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
+
+
+def issue263_rebuilt_graph() -> dict:
+    prints = issue263_pass.read(issue263_pass.PRINTS)
+    existing = {row["printId"]: row for row in prints["prints"]}
+    official = issue263_pass.official_rows()
+    photos = issue263_pass.enrich_photo_rows()
+    rows = official + photos + issue263_pass.supplemental_rows(existing)
+    sources = issue263_pass.read(issue263_pass.SET_SOURCES)
+    profiles = issue263_pass.apply_profiles(sources, rows)
+    units = {row["unitId"]: row for row in issue263_pass.read(issue263_pass.UNITS)}
+    graph = issue263_pass.read(issue263_pass.GRAPH)
+    issue263_pass.remove_superseded_graph_records(graph)
+    rebuilt, _ = issue263_pass.apply_graph(graph, profiles, rows, units)
+    return rebuilt
 
 
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    assert not validate(issue263_rebuilt_graph())
     tampered = deepcopy(graph)
     next(
         row["payload"] for row in tampered["entities"]
