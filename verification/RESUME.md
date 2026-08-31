@@ -299,11 +299,12 @@ Finish stays `pending`: a database page cannot be turned over.
 - **`Snorlax (TCG)`** — a master list for the species, one block per card with every release as `jpset=` / `enset=` pairs. It resolves Japanese↔English correspondence for all 40 cards in one fetch. It does **not** carry Korean or Chinese, so it only helps Japanese units.
 - **Individual card articles** carry a `Release information` paragraph that often states the originating Japanese set in prose, which is the only route to Japanese secret/rainbow prints — the official `pokemon-card.com` search never returns them and the expansion article lists English numbering only. `s1H 70` was settled that way.
 
-### Sources researched and rejected for the Korean/Chinese tail
+### Sources researched and access outcomes for the Korean/Chinese tail
 
 | Source | Verdict |
 |---|---|
-| `pokemoncard.co.kr`, `pokemonkorea.co.kr` | **HTTP 410 Gone** — dead, in browser too, not a scraping block |
+| `pokemoncard.co.kr` | **Direct scripted requests historically returned HTTP 410; current detail URLs may be reachable through an authenticated/in-app browser. Treat failed fetches as access caveats, not evidence of absence.** |
+| `pokemonkorea.co.kr` | **Obsolete domain; do not treat it as the current official source.** |
 | `namu.wiki` (Korean wiki) | reachable but JS-rendered; script sees ~14 KB of chrome, no card data |
 | `krystalkollectz.com` | a shop, not a database — useful only as marketplace evidence |
 | `ptcg.cn` | a Magic: The Gathering site despite the name |
