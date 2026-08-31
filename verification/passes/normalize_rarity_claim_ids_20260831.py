@@ -17,6 +17,7 @@ EXPECTED = Counter({
     "character-rare": 2,
     "hyper-rare": 4,
 })
+EXPECTED_NATIVE = Counter({("printed-Korean-card", "UR", "ultra-rare"): 1})
 SOURCE_NATIVE_MAPPINGS = [
     {
         "locality": "WEST",
@@ -83,14 +84,13 @@ SOURCE_NATIVE_MAPPINGS = [
         "locality": "KR",
         "sourceVocabulary": "printed-Korean-card",
         "basis": (
-            "Reviewed Korean card mappings admitted under issue #260. Historical HR remains "
-            "unmapped because the catalogue's Hyper Rare id describes the later SV-era UR tier."
+            "Reviewed Korean card mappings admitted under issue #260. Historical HR and "
+            "unqualified UR remain unmapped because their canonical meaning varies by era."
         ),
         "values": {
             "AR": "illustration-rare", "C": "common", "fixed product": "fixed",
             "no printed rarity symbol": "fixed", "PROMO": "promo",
             "R": "rare", "RR": "double-rare", "S": "shiny-rare", "U": "uncommon",
-            "UR": "ultra-rare",
         },
     },
     {
@@ -139,6 +139,22 @@ def main() -> int:
     counts = Counter(row["normalizedRarityId"] for row in claims)
     if any(count != EXPECTED[rarity_id] for rarity_id, count in counts.items()):
         raise SystemExit(f"unexpected unsupported rarity claims: {dict(counts)}")
+    native_claims = [
+        row["payload"]
+        for row in graph["entities"]
+        if row["entityType"] == "rarity-claim"
+        and (
+            row["payload"].get("sourceVocabulary"),
+            row["payload"].get("sourceNativeValue"),
+            row["payload"].get("normalizedRarityId"),
+        ) in EXPECTED_NATIVE
+    ]
+    native_counts = Counter((
+        row["sourceVocabulary"], row["sourceNativeValue"], row["normalizedRarityId"]
+    ) for row in native_claims)
+    if native_counts and native_counts != EXPECTED_NATIVE:
+        raise SystemExit(f"unexpected unsupported native rarity claims: {dict(native_counts)}")
+    claims.extend(native_claims)
     for claim in claims:
         claim["normalizedRarityId"] = None
 

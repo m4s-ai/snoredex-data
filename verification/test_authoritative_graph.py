@@ -49,6 +49,28 @@ def main() -> None:
         "rarity claim normalized id does not match source-native mapping" in error
         for error in validate(tampered)
     )
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("sourceVocabulary") == "printed-Korean-card"
+        and row["payload"].get("sourceNativeValue") == "R"
+    )["normalizedRarityId"] = None
+    assert any(
+        "rarity claim normalized id does not match source-native mapping" in error
+        for error in validate(tampered)
+    )
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("sourceVocabulary") == "printed-Korean-card"
+        and row["payload"].get("sourceNativeValue") == "UR"
+    )["normalizedRarityId"] = "ultra-rare"
+    assert any(
+        "rarity claim normalized id does not match source-native mapping" in error
+        for error in validate(tampered)
+    )
     assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"

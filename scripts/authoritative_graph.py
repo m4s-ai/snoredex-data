@@ -1783,17 +1783,22 @@ def _validate_rarity_catalogue_refs(
 ) -> None:
     for rarity_id, rarity in rarities.items():
         normalized_id = rarity.get("normalizedRarityId")
+        release = releases.get(rarity.get("cardReleaseId"))
+        expected_id = native_mappings.get((
+            release.get("locality"),
+            rarity.get("sourceVocabulary"),
+            rarity.get("sourceNativeValue"),
+        )) if release else None
         if normalized_id is None:
+            if expected_id is not None:
+                errors.append(
+                    f"rarity claim normalized id does not match source-native mapping: {rarity_id}"
+                )
             continue
         if not isinstance(normalized_id, str) or normalized_id not in rarity_ids:
             errors.append(f"rarity claim normalized id is not in the catalogue: {rarity_id}")
             continue
-        release = releases.get(rarity.get("cardReleaseId"))
-        if release and native_mappings.get((
-            release.get("locality"),
-            rarity.get("sourceVocabulary"),
-            rarity.get("sourceNativeValue"),
-        )) != normalized_id:
+        if release and expected_id != normalized_id:
             errors.append(
                 f"rarity claim normalized id does not match source-native mapping: {rarity_id}"
             )
