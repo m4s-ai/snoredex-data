@@ -977,6 +977,7 @@ Moved here from `HANDOVER.md` in #103; the detail below is this file's job.
 | **pokumon.com** | WebFetch | per-market promo printings (one row per Asian printing; **West is one lumped "English" row — never use its absence to contradict a Western language**) |
 | **PokéCottage** `pokecottage.com` / `pokecottagecdn.com` | scriptable structured master-set rows | tier-3 positive confirmation of the exact card, set, promo, date, artist, rarity or named variant stated by a retained row; never absence by omission |
 | **Elite Fourum** `elitefourum.com` | scriptable (Discourse JSON: `/search.json`, `/t/<id>.json`) | collector-community facts (promo languages, 1st-edition timeline) |
+| **Official Pokémon Korea card search** `pokemoncard.co.kr/cards` | browser-dependent: the 2026-08-31 Korean research pass recorded successful detail pages, while direct scripted fetches may still return HTTP 410 | Korean name, local number, rarity, product and printed attacks on the exact detail row; retain the URL and retrieval date, and do not infer physical finish |
 | **LigaPokemon** `ligapokemon.com.br` | **datacenter IPs banned (Cloudflare 1008)** — use an authenticated user browser session | Brazilian/Portuguese marketplace listings |
 | **Cardmarket catalogue** | in-app browser (rolling ~55-req quota → HTTP 429; recover by navigating to re-solve the challenge) | product pages, selected language filters, offers and counts are routing metadata, not localized-card evidence |
 | **Cardmarket product image** | retained exact image from `product-images.s3.cardmarket.com` | positive evidence only for language, identity or finish visible on the pictured card face; file as a stable `SPEC-nnnn` record |
@@ -992,9 +993,12 @@ not create that localized printing, and missing rows or variants never establish
 completeness. Whenever a newly announced or released set contains Snorlax, inspect both the
 Snorlax master list and its matching set guide.
 
-Dead ends (do not retry): `pokemonkorea.co.kr` / `pokemoncard.co.kr` (HTTP 410, gone),
-`ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts), `namu.wiki` (JS-rendered),
-`krystalkollectz.com` (a shop, not a database).
+Access caveats (a failed fetch is not negative evidence): `pokemonkorea.co.kr` is an obsolete
+domain, and direct scripted requests to `pokemoncard.co.kr` have returned HTTP 410; do not label
+the official Korean source permanently dead when a current detail URL is available. Re-check it
+through the authenticated/in-app browser and retain the exact URL and retrieval date. Other
+known dead ends remain `ptcg.cn` (a Magic site), `pokebeach.com` (403 to scripts), `namu.wiki`
+(JS-rendered), and `krystalkollectz.com` (a shop, not a database).
 
 **Key trick**: when a source (Bulbapedia, LigaPokemon) blocks datacenter IPs, use an authenticated
 user browser session when authorized. This is how the Brazilian Prize Pack confirmations were
