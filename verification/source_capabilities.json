@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-manifest",
     "schemaVersion": "2.0.0",
-    "reviewedAt": "2026-08-29",
+    "reviewedAt": "2026-08-30",
     "policies": [
       "External providers record positive evidence only. A missing page, row, field, result, language, region, card, or finish remains unknown.",
       "Authority tier and card-existence capability never imply finish completeness or absence authority.",
@@ -110,6 +110,13 @@
       "authorityTier": 3,
       "licenseOrTerms": "Site terms; scan images are used for identification and verification only.",
       "rawRetention": "Retain the exact scan bytes, database URL, retrieval date, specimen id and SHA-256."
+    },
+    {
+      "providerId": "collectory",
+      "operator": "Collectory",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; hosted card renders are used for identification and verification only.",
+      "rawRetention": "Retain the exact render bytes, card page and image URLs, retrieval date, specimen id and SHA-256."
     },
     {
       "providerId": "wikidex",
@@ -3210,6 +3217,93 @@
       ]
     },
     {
+      "surfaceId": "collectory-card-renders",
+      "providerId": "collectory",
+      "label": "Collectory retained card renders",
+      "match": {
+        "urlPrefixes": [
+          "https://cdn.collectory.cc/cards/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-30",
+      "freshnessPolicy": "Retain the exact render bytes before using localized card identity or printed rarity as positive evidence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "Exact retained Collectory card-render URL",
+        "parameters": [
+          "region",
+          "set path",
+          "card number"
+        ],
+        "pagination": "not applicable to one retained render",
+        "expectedIdentifiers": [
+          "localized card name",
+          "collector number",
+          "printed set identity",
+          "printed rarity when present"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained digital card render",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "collectory-positive-render",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the concrete retained render only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "rarity",
+            "specimen-existence",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained render establishes only the displayed card identity and printed rarity."
+          },
+          "knownPositiveObservationId": "obs-collectory-render",
+          "boundary": {
+            "outsideScope": [
+              "physical finish",
+              "edition",
+              "unretained cards",
+              "complete set or language catalogue"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A missing render is database silence and never negative evidence."
+          }
+        }
+      ]
+    },
+    {
       "surfaceId": "wikidex-card-scans",
       "providerId": "wikidex",
       "label": "WikiDex retained card scans",
@@ -3901,6 +3995,30 @@
         "pkparaiso-positive-scan"
       ],
       "outcome": "The retained Spanish Generations scan positively establishes the displayed localized card identity only."
+    },
+    {
+      "observationId": "obs-collectory-render",
+      "surfaceId": "collectory-card-renders",
+      "kind": "known-positive",
+      "queryUrl": "https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp",
+      "queryParameters": {
+        "region": "kr",
+        "cardNumber": "094/175"
+      },
+      "retrievedAt": "2026-08-30",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "collectory",
+        "recordKey": "https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0464",
+        "U0402"
+      ],
+      "validatesEdges": [
+        "collectory-positive-render"
+      ],
+      "outcome": "The retained Korean svM 094/175 render positively establishes the displayed localized card identity and printed rarity only; it does not establish physical finish."
     },
     {
       "observationId": "obs-wikidex-scan",

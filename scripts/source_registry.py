@@ -265,6 +265,23 @@ PROVIDERS: list[dict[str, Any]] = [
                  "cards, variants, or languages never establish absence or completeness.",
     },
     {
+        "providerId": "collectory",
+        "displayName": "Collectory",
+        "organization": "Collectory",
+        "homepage": "https://collectory.cc",
+        "hosts": ["collectory.cc", "www.collectory.cc", "cdn.collectory.cc"],
+        "licenseOrTerms": "Site terms; hosted card renders are used for identification and verification only.",
+        "category": "collector-database",
+        "authorityTier": 3,
+        "coverage": "positive localized card identity and printed rarity shown by retained database renders",
+        "supportsAbsence": False,
+        "usedFor": ["identity", "rarity"],
+        "attribution": "Card renders from Collectory.",
+        "notes": "A retained database render establishes only the visible card identity and printed "
+                 "rarity. It is not physical-finish evidence. Missing cards, variants, or languages "
+                 "never establish absence or completeness.",
+    },
+    {
         "providerId": "wikidex",
         "displayName": "WikiDex",
         "organization": "WikiDex",
@@ -583,6 +600,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
      "seller-listing-photo"),
     (re.compile(r"third-party scan archive|pok[eé]cardex", re.I), "pokecardex"),
     (re.compile(r"pkparaiso", re.I), "pkparaiso"),
+    (re.compile(r"collectory", re.I), "collectory"),
     (re.compile(r"wikidex", re.I), "wikidex"),
     (re.compile(r"photograph", re.I), "inspected-specimen"),
     (re.compile(r"owner attestation", re.I), "owner-attestation"),

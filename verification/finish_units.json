@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-08-29",
+    "generated": "2026-08-30",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 448,
-      "withOnlyMarketplaceClaim": 58,
-      "pendingFinish": 56,
+      "withConfirmedFinish": 457,
+      "withOnlyMarketplaceClaim": 53,
+      "pendingFinish": 52,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 2,
       "withNonHolo": 301,
-      "withHolo": 218,
+      "withHolo": 227,
       "withReverseHolo": 229,
       "withMirrorHolo": 19,
-      "withBothNonHoloAndHolo": 51,
-      "withUnresolvedProductMapping": 93,
-      "withAnyUnresolvedDetail": 175,
+      "withBothNonHoloAndHolo": 55,
+      "withUnresolvedProductMapping": 89,
+      "withAnyUnresolvedDetail": 171,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -18336,23 +18336,46 @@
           "image": "images/m2a_136_Hop_s_Snorlax_861379.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Hop's Snorlax. The Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Reflective colour is visible across the card and the listing explicitly identifies the card as holo. Retained as SPEC-0436."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0436"
+          ],
+          "image": "verification/specimens/SPEC-0436.png",
+          "printingId": "F0209-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0210",
@@ -29175,16 +29198,17 @@
       ],
       "availableFinishes": [
         "non-holo",
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -29209,6 +29233,29 @@
           "printingId": "F0325-P01"
         },
         {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/425674631_1_1787968532_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed s10a 058/071 R identity establish the exact localized V1 card. Reflective vertical colour is visible in the artwork window. Retained as SPEC-0451."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0451"
+          ],
+          "image": "verification/specimens/SPEC-0451.png",
+          "printingId": "F0325-P02"
+        },
+        {
           "finish": "reverse-holo",
           "foilPattern": null,
           "markings": null,
@@ -29225,7 +29272,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0325-P02"
+          "printingId": "F0325-P03"
         }
       ],
       "unresolved": [
@@ -29857,16 +29904,17 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "non-holo",
+        "holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -29889,6 +29937,29 @@
           "markings": null,
           "distribution": null,
           "printingId": "F0335-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/423230216_1_1786302836_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Pokémon GO Snorlax. The Hangul name and rules text, Pokémon GO logo and printed s10b 056/071 R identity establish the exact localized card. Vertical holographic bands are visible in the artwork window. Retained as SPEC-0454."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0454"
+          ],
+          "image": "verification/specimens/SPEC-0454.png",
+          "printingId": "F0335-P02"
         }
       ],
       "unresolved": []
@@ -30165,23 +30236,46 @@
           "image": "images/s1H_45_Snorlax_V_V1_467619.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "full-art",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Seller photograph of Korean Snorlax V with Hangul name and rules text; the listing identifies s1H 045/060 and explicitly labels it Korean holo. Reflective colour is visible across the Pokémon V card face. Retained as SPEC-0446."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0446"
+          ],
+          "image": "verification/specimens/SPEC-0446.png",
+          "printingId": "F0340-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0341",
@@ -30308,23 +30402,46 @@
           "image": "images/s1H_46_Snorlax_VMAX_V1_467634.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "full-art",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Snorlax VMAX. The Hangul name and rules text and printed s1H 046/060 RRR identity establish the exact localized card. Reflective sparkles and colour bands are visible across the VMAX card face. Retained as SPEC-0447."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0447"
+          ],
+          "image": "verification/specimens/SPEC-0447.png",
+          "printingId": "F0343-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0344",
@@ -30451,23 +30568,46 @@
           "image": "images/s1H_66_Snorlax_V_V2_467624.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "textured full-art",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Seller photograph of Korean Snorlax V with Hangul rules text; the exact listing identifies the 066/060 SR printing. Diagonal texture and rainbow reflection are directly visible across the full-art card face. Retained as SPEC-0448."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0448"
+          ],
+          "image": "verification/specimens/SPEC-0448.png",
+          "printingId": "F0346-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0347",
@@ -30983,16 +31123,17 @@
       ],
       "availableFinishes": [
         "non-holo",
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -31017,6 +31158,29 @@
           "printingId": "F0355-P01"
         },
         {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed s4 084/100 R identity establish the exact localized card. Vertical holographic bands are visible in the artwork window. Retained as SPEC-0456."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0456"
+          ],
+          "image": "verification/specimens/SPEC-0456.png",
+          "printingId": "F0355-P02"
+        },
+        {
           "finish": "reverse-holo",
           "foilPattern": null,
           "markings": null,
@@ -31033,7 +31197,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0355-P02"
+          "printingId": "F0355-P03"
         }
       ],
       "unresolved": [
@@ -31629,20 +31793,44 @@
         }
       ],
       "availableFinishes": [
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/418966418_1_1784832595_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed s8b 126/184 identity establish the exact localized card. Vertical holographic bands are visible throughout the artwork window; no Poké Ball error pattern is claimed. Retained as SPEC-0453."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0453"
+          ],
+          "image": "verification/specimens/SPEC-0453.png",
+          "printingId": "F0364-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -31660,7 +31848,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0364-P01"
+          "printingId": "F0364-P02"
         }
       ],
       "unresolved": [
@@ -40269,16 +40457,17 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "non-holo",
+        "holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -40301,6 +40490,29 @@
           "markings": null,
           "distribution": null,
           "printingId": "F0490-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Hop's Snorlax. The Hangul name and rules text and printed sv9 075/100 R identity establish the exact localized card. Reflective vertical colour bands are visible in the artwork window. Retained as SPEC-0444."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0444"
+          ],
+          "image": "verification/specimens/SPEC-0444.png",
+          "printingId": "F0490-P02"
         }
       ],
       "unresolved": []
@@ -49216,7 +49428,7 @@
         {
           "finish": "mirror-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -49224,6 +49436,16 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Hop's Snorlax 136/193. The Hangul name and rules text, Trainer portrait and printed m2a identity establish the localized card. A large Colorless Energy symbol is directly visible across the reflective card body; the listing identifies it as the type-mirror version. Retained as SPEC-0437."
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -49255,6 +49477,10 @@
               "image": "images/xm2a_136_Hop_s_Snorlax_V1_861744.png"
             }
           ],
+          "specimenIds": [
+            "SPEC-0437"
+          ],
+          "image": "verification/specimens/SPEC-0437.png",
           "printingId": "F0604-P01"
         },
         {
