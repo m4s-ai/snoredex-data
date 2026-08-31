@@ -119,7 +119,7 @@ def main() -> None:
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {
         ("ID", "pokemon-card-asia"): 30,
-        ("KR", "pokemon-card-korea"): 17,
+        ("KR", "pokemon-card-korea"): 22,
         ("TH", "pokemon-card-asia"): 25,
         ("TW", "pokemon-card-asia"): 40,
     }

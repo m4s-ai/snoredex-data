@@ -3478,6 +3478,97 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "pokemon-card-korea-image",
+      "providerId": "pokemon-card-korea",
+      "label": "Pokémon Korea exact card renders",
+      "match": {
+        "urlPrefixes": [
+          "https://cards.image.pokemonkorea.co.kr/data/wmimages/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Only retained exact positive renders are covered; failed or missing image requests prove nothing.",
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-08-28",
+      "freshnessPolicy": "Retain each exact render URL, retrieval date and SHA-256; never interpret image-host silence as absence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://cards.image.pokemonkorea.co.kr/data/wmimages/{era}/{set}/{asset}",
+        "parameters": [
+          "era",
+          "set",
+          "asset"
+        ],
+        "pagination": "not paginated; every render establishes only its pictured card",
+        "expectedIdentifiers": [
+          "Korean card name",
+          "printed local set code",
+          "collector number",
+          "printed rarity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher/database render, not a physical card photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokemon-card-korea-image-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "retained exact positive renders only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "image",
+            "language",
+            "card-existence",
+            "card-release",
+            "local-set-identifier",
+            "collector-number",
+            "rarity",
+            "set-membership"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained render proves only the pictured card; an unavailable image proves nothing."
+          },
+          "knownPositiveObservationId": "obs-pokemon-card-korea-image",
+          "boundary": {
+            "outsideScope": [
+              "unretained Korean cards",
+              "physical finish",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The image host is positive-only and does not publish a completeness contract."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -4504,6 +4595,40 @@
         "asia-card-image-positive"
       ],
       "outcome": "The retained publisher render positively identifies the Indonesian Snorlax card pictured in SPEC-0169."
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-image",
+      "surfaceId": "pokemon-card-korea-image",
+      "kind": "known-positive",
+      "queryUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
+      "queryParameters": {
+        "era": "S",
+        "set": "S10a",
+        "asset": "S10a_058.png"
+      },
+      "retrievedAt": "2026-08-28",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "specimenId": "SPEC-0236",
+          "sha256": "sha256:17501d9725a033f7164a607bca023ce3dd4af4670d075555277ba852359370f5",
+          "localSetCode": "s10a",
+          "collectorNumber": "058/071",
+          "cardName": "잠만보",
+          "absenceCapability": false,
+          "finishCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "SPEC-0236",
+        "s10a",
+        "058/071",
+        "잠만보"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-image-positive"
+      ],
+      "outcome": "The retained exact publisher render positively identifies Korean Snorlax s10a 058/071 and its printed rarity; it establishes no physical finish."
     }
   ]
 }
