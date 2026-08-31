@@ -1,4 +1,4 @@
-"""Drop unsupported rarity normalizations while retaining source-native values."""
+"""Register reviewed rarity mappings and drop unsupported normalizations."""
 
 from __future__ import annotations
 
@@ -10,7 +10,101 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 GRAPH = ROOT / "verification" / "authoritative_graph.json"
+CATALOGUE = ROOT / "verification" / "rarity_catalogue.json"
 EXPECTED = Counter({"triple-rare": 4, "super-rare": 4, "character-rare": 2})
+SOURCE_NATIVE_MAPPINGS = [
+    {
+        "locality": "WEST",
+        "sourceVocabulary": "cardmarket-2026-07-21",
+        "basis": "Reviewed normalization of exact labels in the frozen Cardmarket-derived candidate universe.",
+        "values": {
+            "Common": "common", "Double Rare": "double-rare", "Holo Rare": "holofoil-rare",
+            "Illustration Rare": "illustration-rare", "Promo": "promo", "Rare": "rare",
+            "Secret Rare": "secret-rare", "Shiny Rare": "shiny-rare",
+            "Ultra Rare": "ultra-rare", "Uncommon": "uncommon",
+        },
+    },
+    {
+        "locality": "JP",
+        "sourceVocabulary": "cardmarket-2026-07-21",
+        "basis": "Reviewed normalization of exact labels in the frozen Cardmarket-derived candidate universe.",
+        "values": {
+            "Common": "common", "Double Rare": "double-rare", "Holo Rare": "holofoil-rare",
+            "Illustration Rare": "illustration-rare", "Promo": "promo", "Rare": "rare",
+            "Secret Rare": "secret-rare", "Shiny Rare": "shiny-rare",
+            "Ultra Rare": "ultra-rare", "Uncommon": "uncommon",
+        },
+    },
+    {
+        "locality": "CN",
+        "sourceVocabulary": "cardmarket-2026-07-21",
+        "basis": "Reviewed normalization of exact labels in the frozen Cardmarket-derived candidate universe.",
+        "values": {
+            "Double Rare": "double-rare", "Promo": "promo", "Rare": "rare",
+            "Secret Rare": "secret-rare", "Shiny Rare": "shiny-rare",
+            "Special Illustration Rare": "special-illustration-rare",
+            "Ultra Rare": "ultra-rare", "Uncommon": "uncommon",
+        },
+    },
+    {
+        "locality": "TW",
+        "sourceVocabulary": "cardmarket-2026-07-21",
+        "basis": "Reviewed normalization of exact labels in the frozen Cardmarket-derived candidate universe.",
+        "values": {"Promo": "promo"},
+    },
+    {
+        "locality": "LATAM",
+        "sourceVocabulary": "pokemon-official-la-card-database",
+        "basis": "Reviewed exact rarity labels retained from the official Latin American card database.",
+        "values": {"Common": "common", "Rare": "rare"},
+    },
+    {
+        "locality": "LATAM",
+        "sourceVocabulary": "pokemon-official-journey-together-prerelease-2025",
+        "basis": "Reviewed promotional-card classification from the official prerelease product source.",
+        "values": {"promo card": "promo"},
+    },
+    {
+        "locality": "ID",
+        "sourceVocabulary": "printed-Indonesian-card-render",
+        "basis": "Reviewed official Indonesian card-render mappings admitted under issue #258.",
+        "values": {
+            "AR": "illustration-rare", "C": "common", "no printed rarity symbol": "fixed",
+            "PROMO": "promo", "R": "rare", "RR": "double-rare", "S": "shiny-rare",
+            "U": "uncommon",
+        },
+    },
+    {
+        "locality": "KR",
+        "sourceVocabulary": "printed-Korean-card",
+        "basis": "Reviewed Korean card mappings admitted under issue #260.",
+        "values": {
+            "AR": "illustration-rare", "C": "common", "fixed product": "fixed",
+            "HR": "hyper-rare", "no printed rarity symbol": "fixed", "PROMO": "promo",
+            "R": "rare", "RR": "double-rare", "S": "shiny-rare", "U": "uncommon",
+            "UR": "ultra-rare",
+        },
+    },
+    {
+        "locality": "TH",
+        "sourceVocabulary": "printed-Thai-card",
+        "basis": "Reviewed official Thai card mappings admitted under issue #262.",
+        "values": {
+            "AR": "illustration-rare", "C": "common", "no printed rarity symbol": "fixed",
+            "PROMO": "promo", "R": "rare", "RR": "double-rare", "S": "shiny-rare",
+            "U": "uncommon",
+        },
+    },
+    {
+        "locality": "TW",
+        "sourceVocabulary": "printed-Traditional-Chinese-card",
+        "basis": "Reviewed official and retained Traditional Chinese card mappings admitted under issue #263.",
+        "values": {
+            "AR": "illustration-rare", "C": "common", "HR": "hyper-rare", "PROMO": "promo",
+            "R": "rare", "RR": "double-rare", "S": "shiny-rare", "U": "uncommon",
+        },
+    },
+]
 
 
 def encoded(document: dict) -> str:
@@ -23,6 +117,7 @@ def main() -> int:
     args = parser.parse_args()
 
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    catalogue = json.loads(CATALOGUE.read_text(encoding="utf-8"))
     claims = [
         row["payload"]
         for row in graph["entities"]
@@ -35,15 +130,35 @@ def main() -> int:
     for claim in claims:
         claim["normalizedRarityId"] = None
 
-    rendered = encoded(graph)
-    current = GRAPH.read_text(encoding="utf-8")
+    catalogue["meta"]["schemaVersion"] = "0.2.0"
+    catalogue["meta"]["generated"] = "2026-09-01"
+    catalogue["meta"]["description"] = (
+        "One entry per rarity plus reviewed, locality-qualified mappings from exact source-native "
+        "values to canonical rarity ids. Rarity remains a card-release claim, never a work claim."
+    )
+    catalogue = {
+        "meta": catalogue["meta"],
+        "localeVocabularies": catalogue["localeVocabularies"],
+        "sourceNativeMappings": SOURCE_NATIVE_MAPPINGS,
+        "rarities": catalogue["rarities"],
+        "editionAvailability": catalogue["editionAvailability"],
+    }
+
+    rendered_graph = encoded(graph)
+    rendered_catalogue = encoded(catalogue)
+    current_graph = GRAPH.read_text(encoding="utf-8")
+    current_catalogue = CATALOGUE.read_text(encoding="utf-8")
     if args.check:
-        if current != rendered:
-            raise SystemExit("unsupported rarity claim normalizations remain")
-        print("rarity claim normalizations are catalogue-safe")
+        if current_graph != rendered_graph or current_catalogue != rendered_catalogue:
+            raise SystemExit("rarity claim mappings are stale")
+        print("rarity claim mappings are catalogue-safe")
         return 0
-    GRAPH.write_text(rendered, encoding="utf-8", newline="\n")
-    print(f"cleared {len(claims)} unsupported rarity claim normalization(s)")
+    GRAPH.write_text(rendered_graph, encoding="utf-8", newline="\n")
+    CATALOGUE.write_text(rendered_catalogue, encoding="utf-8", newline="\n")
+    print(
+        f"registered {len(SOURCE_NATIVE_MAPPINGS)} rarity mapping scope(s); "
+        f"cleared {len(claims)} unsupported normalization(s)"
+    )
     return 0
 
 

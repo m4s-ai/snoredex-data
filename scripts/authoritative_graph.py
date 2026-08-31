@@ -1766,17 +1766,37 @@ def _validate_refs(
             errors.append(f"catalogue release edition edge is missing: {ref_id}")
 
 # Source-native rarity claims.
+def _rarity_native_mappings(catalogue: dict[str, Any]) -> dict[tuple[str, str, str], str]:
+    return {
+        (scope["locality"], scope["sourceVocabulary"], native): rarity_id
+        for scope in catalogue.get("sourceNativeMappings", [])
+        for native, rarity_id in scope.get("values", {}).items()
+    }
+
+
 def _validate_rarity_catalogue_refs(
     errors: list[str],
     rarities: dict[str, dict[str, Any]],
+    releases: dict[str, dict[str, Any]],
     rarity_ids: set[str],
+    native_mappings: dict[tuple[str, str, str], str],
 ) -> None:
     for rarity_id, rarity in rarities.items():
         normalized_id = rarity.get("normalizedRarityId")
-        if normalized_id is not None and (
-            not isinstance(normalized_id, str) or normalized_id not in rarity_ids
-        ):
+        if normalized_id is None:
+            continue
+        if not isinstance(normalized_id, str) or normalized_id not in rarity_ids:
             errors.append(f"rarity claim normalized id is not in the catalogue: {rarity_id}")
+            continue
+        release = releases.get(rarity.get("cardReleaseId"))
+        if release and native_mappings.get((
+            release.get("locality"),
+            rarity.get("sourceVocabulary"),
+            rarity.get("sourceNativeValue"),
+        )) != normalized_id:
+            errors.append(
+                f"rarity claim normalized id does not match source-native mapping: {rarity_id}"
+            )
 
 
 def _validate_rarities(
@@ -1940,11 +1960,13 @@ def validate(
     profiles = by_type["finish-profile"]
     refs = by_type["catalogue-card-release-ref"]
     rarities = by_type["rarity-claim"]
+    rarity_catalogue = _read_json(RARITY_CATALOGUE)
     rarity_ids = {
         row["rarityId"]
-        for row in _read_json(RARITY_CATALOGUE).get("rarities", [])
+        for row in rarity_catalogue.get("rarities", [])
         if isinstance(row.get("rarityId"), str)
     }
+    rarity_native_mappings = _rarity_native_mappings(rarity_catalogue)
     profile_claims = by_type["profile-finish-claim"]
     aliases = by_type["catalogue-alias-assertion"]
     source_assertions = by_type["source-assertion"]
@@ -1953,7 +1975,9 @@ def validate(
     _validate_events(errors, events, local_sets, editions, graph_sources, relations)
     _validate_profiles(errors, profiles, local_sets, editions, graph_sources, relations)
     _validate_refs(errors, refs, releases, editions, relations)
-    _validate_rarity_catalogue_refs(errors, rarities, rarity_ids)
+    _validate_rarity_catalogue_refs(
+        errors, rarities, releases, rarity_ids, rarity_native_mappings
+    )
     _validate_rarities(errors, rarities, releases, graph_sources, relations)
     _validate_profile_claims(errors, profile_claims, profiles, refs, relations)
     _validate_aliases(errors, aliases, graph_sources, local_sets, relations)
