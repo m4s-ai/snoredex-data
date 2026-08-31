@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-08-30",
-  "projectionVersion": "4947e2b8ab92a518838ebdaf5a0c94410c4a7fb8af6181832c94953f7b7dc4a8",
+  "projectionVersion": "40abdacc915e25758994e66ca84a4cd8b59fa3d0c2937cd6f5f94056c0f13749",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 181,
     "unmappedReleases": 80,
     "cardReleases": 639,
-    "physicalPrintings": 713,
-    "sourceObservations": 2349
+    "physicalPrintings": 714,
+    "sourceObservations": 2351
   },
   "groups": [
     {
@@ -8768,7 +8768,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sv9:unknown-local-set:via-075:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sv9:075/100:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "workId": "WORK:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "cardKey": "Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "appearanceId": "APPEARANCE:IMAGE:a72dda432a5d2c90097724b4",
@@ -8776,21 +8776,23 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sv9:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sv9",
+          "localSetCode": "sv9",
+          "localNumber": "075/100",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0370"
+          ],
           "legacyVariants": [
             "base"
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:c974f8c702f30eb4678bc017",
-              "semanticPrintingId": "PRINTING:c974f8c702f30eb4678bc017",
-              "cardReleaseId": "RELEASE:KR:Korean:via-sv9:unknown-local-set:via-075:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+              "physicalPrintingId": "PHYSICAL:PRINTING:68acc0e59a121dc0e102cf5b",
+              "semanticPrintingId": "PRINTING:68acc0e59a121dc0e102cf5b",
+              "cardReleaseId": "RELEASE:KR:Korean:sv9:075/100:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
@@ -8801,7 +8803,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0490",
               "sourcePrintingId": "F0490-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:c974f8c702f30eb4678bc017",
+              "establishingClaimId": "CLAIM:finish:PRINTING:68acc0e59a121dc0e102cf5b",
               "specimenIds": [
                 "SPEC-0444"
               ],
@@ -8820,8 +8822,7 @@
             "artist": null,
             "variant": "base",
             "finish": [
-              "holo",
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -8849,12 +8850,21 @@
               "image": null
             },
             {
+              "observationId": "source-first:KR:sv9:075/100:base",
+              "kind": "source-first",
+              "provider": "seller-listing-photo",
+              "url": "https://globalbunjang.com/product/423230156",
+              "evidence": "The retained positive seller-listing-photo record identifies Korean sv9 075/100 for Hop's Snorlax and states rarity R. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0444 is the positive physical/card-face observation.",
+              "contentHash": "7d472b89f6aac24ced4e7efc1e66a486f440cbe1ee128b22f8dc535f4357dd26",
+              "image": null
+            },
+            {
               "observationId": "unit:U0370",
               "kind": "unit",
               "provider": "bulbapedia",
               "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Battle Partners (sv9) is listed with a Korean release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "1036654b7b1ddc0eab534d47bc9abaf2f6c2531bca1eb59ac2a067638a1d4be0",
+              "evidence": "expansion Battle Partners (sv9) is listed with a Korean release in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0444 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
+              "contentHash": "617e5b76e31aa0b68dffaf9dbc53d1ed9a079e110e9c1cade7b62065a6263978",
               "image": "images/sv9_075_Hop_s_Snorlax_807662.jpg"
             }
           ]
@@ -75146,8 +75156,12 @@
       "groupKind": "mapped-appearance",
       "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
       "appearanceIdentityState": "verified-image-match",
-      "workIds": [],
-      "cardKeys": [],
+      "workIds": [
+        "WORK:Snorlax-LvX-Big-Appetite-Exercise"
+      ],
+      "cardKeys": [
+        "Snorlax-LvX-Big-Appetite-Exercise"
+      ],
       "label": "Unresolved artwork appearance",
       "members": [
         {
@@ -75244,31 +75258,55 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-DP-P:unknown-local-set:via-127:None:unknown-local-id",
-          "workId": null,
-          "cardKey": null,
+          "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
+          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
           "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
           "appearanceIdentityState": "verified-image-match",
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-DP-P:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:DP",
+          "localSetCode": "DP",
+          "localNumber": "006",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0623"
+          ],
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0440",
+              "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Reflective points are directly visible across the photographed Korean Lv.X card face.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0440",
+              "specimenIds": [
+                "SPEC-0440"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax Lv.X",
-            "artist": "Shizurow",
+            "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -75286,12 +75324,21 @@
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:DP:006:base",
+              "kind": "source-first",
+              "provider": "seller-listing-photo",
+              "url": "https://globalbunjang.com/product/386929037",
+              "evidence": "The retained positive seller-listing-photo record identifies Korean DP 006 for Snorlax Lv.X and states rarity PROMO. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0440 is the positive physical/card-face observation.",
+              "contentHash": "50b17c6686b43b8d908f5c1bb9193a98ae0c66293ddc50bf585596e4b3907067",
+              "image": null
+            },
+            {
               "observationId": "unit:U0623",
               "kind": "unit",
               "provider": "bulbapedia",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
-              "evidence": "Korean Black Star Promos set list row: 006 Snorlax LV.X, Colorless, Promo pack 2. NOTE: the Korean promo series numbers independently (006 there vs the Japanese DP-P 127 that Cardmarket files it under).",
-              "contentHash": "5ce47ea3a9b7a814740f65920e0aada8a4020b364de39b9a440eb1623c180500",
+              "evidence": "Korean Black Star Promos set list row: 006 Snorlax LV.X, Colorless, Promo pack 2. NOTE: the Korean promo series numbers independently (006 there vs the Japanese DP-P 127 that Cardmarket files it under). Independent positive specimen evidence retained as SPEC-0440 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
+              "contentHash": "8fe0c5b3ca2ca16312ef45bc9f0613794845f8bc870f6a3221cd605ea0678730",
               "image": "images/DP-P_127_Snorlax_Lv_X_566758.jpg"
             }
           ]

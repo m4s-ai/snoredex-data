@@ -47,6 +47,7 @@ def research(
     card_name: str | None = None,
     corroborating: list[str] | None = None,
     legacy: list[str] | None = None,
+    legacy_aliases: list[tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
     unit = UNITS_BY_ID[unit_id]
     legacy_ids = legacy if legacy is not None else [unit_id]
@@ -69,6 +70,7 @@ def research(
         "corroborated": bool(corroborating_urls) or specimen_id in SPECIMEN_CORROBORATION_URLS,
         "corroboratingSourceUrls": corroborating_urls,
         "legacyVariants": sorted({str(UNITS_BY_ID[item].get("variant") or "base") for item in legacy_ids}),
+        "legacyIdentityAliases": legacy_aliases or [],
     }
 
 
@@ -84,6 +86,8 @@ SPECIMEN_CORROBORATION_URLS: dict[str, str | None] = {
     "SPEC-0442": "https://globalbunjang.com/product/404911233",
     "SPEC-0438": "https://globalbunjang.com/product/426224532",
     "SPEC-0437": "https://globalbunjang.com/product/420832203",
+    "SPEC-0440": "https://globalbunjang.com/product/386929037",
+    "SPEC-0444": "https://globalbunjang.com/product/423230156",
     "SPEC-0061": None,
 }
 
@@ -96,9 +100,13 @@ UNIT_CORROBORATION_SPECIMENS = {
     "U0561": "SPEC-0411",
     "U0579": "SPEC-0442",
     "U0677": "SPEC-0438",
+    "U0370": "SPEC-0444",
+    "U0623": "SPEC-0440",
     "U0780": "SPEC-0061",
     "U0790": "SPEC-0437",
 }
+
+KOREAN_LVX_WORK = "Snorlax-LvX-Big-Appetite-Exercise"
 
 
 # Positive source observations from the current Korean research.  Namu-only
@@ -112,6 +120,7 @@ RESEARCH_ROWS = [
     research("U0257", "m3", "062/080", ("C", "common"), "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e", "collectory", specimen_id="SPEC-0443"),
     research("U0260", "sv4K", "060/066", ("U", "uncommon"), "https://globalbunjang.com/product/407721760", "seller-listing-photo", specimen_id="SPEC-0445", corroborating=["https://www.pokepolio.com/cards/8ae3d25e-9838-4724-bcf3-cf5ed897d22b"]),
     research("U0306", "sv4a", "145/190", ("N", "normal"), "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed", "collectory"),
+    research("U0370", "sv9", "075/100", ("R", "rare"), "https://globalbunjang.com/product/423230156", "seller-listing-photo", specimen_id="SPEC-0444"),
     research("U0379", "SM-P", "017/SM-P", ("PROMO", "promo"), "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)", "bulbapedia", specimen_id="SPEC-0439", corroborating=["https://tcgbox.co.kr/product/%EC%9E%A0%EB%A7%8C%EB%B3%B4gx/3966/"]),
     research("U0402", "svM", "094/175", ("U", "uncommon"), "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f", "collectory", specimen_id="SPEC-0464"),
     research("U0413", "sm9", "066/095", ("RR", "double-rare"), "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb", "collectory", specimen_id="SPEC-0449"),
@@ -124,6 +133,7 @@ RESEARCH_ROWS = [
     research("U0590", "mC", "568/742", ("N", "normal"), "https://collectory.cc/cards/f7c4636f-8030-40a7-86d6-994a0bc3283c", "collectory", specimen_id="SPEC-0459"),
     research("U0601", "s5a", "093/070", ("UR", "ultra-rare"), "https://bulbapedia.bulbagarden.net/wiki/Matchless_Fighters_(TCG)", "bulbapedia"),
     research("U0610", "sA", "010/023", ("fixed product", "fixed"), "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39", "collectory", specimen_id="SPEC-0462"),
+    research("U0623", "DP", "006", ("PROMO", "promo"), "https://globalbunjang.com/product/386929037", "seller-listing-photo", specimen_id="SPEC-0440", card_name="Snorlax Lv.X", legacy_aliases=[("DP-P", "127")]),
     research("U0641", "sH", "038/053", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)", "bulbapedia"),
     research("U0648", "svI", "046/066", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)", "bulbapedia", specimen_id="SPEC-0463", corroborating=["https://collectory.cc/cards/73c55006-427b-45ae-9a58-f7facd855820"]),
     research("U0677", "svLN", "010/022", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Stellar_Tera_Type_Starter_Set_(TCG)", "bulbapedia", specimen_id="SPEC-0438"),
@@ -143,6 +153,7 @@ def korean_name(card_name: str) -> str:
         "Snorlax VMAX": "잠만보 VMAX",
         "Snorlax Doll": "잠만보인형",
         "Hop's Snorlax": "호브의 잠만보",
+        "Snorlax Lv.X": "잠만보 Lv.X",
     }.get(card_name, "잠만보")
 
 
@@ -173,6 +184,23 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
     if row.get("corroboratingSourceUrls"):
         result["corroboratingSourceUrls"] = row["corroboratingSourceUrls"]
     return result
+
+
+def ensure_researched_works(graph: dict[str, Any], rows: list[dict[str, Any]]) -> None:
+    """Create only explicitly researched Work nodes missing from the legacy graph."""
+    for work in sorted({row["work"] for row in rows if row.get("work")}):
+        work_id = f"WORK:{work}"
+        if not any(
+            item.get("entityType") == "work" and item.get("entityId") == work_id
+            for item in graph["entities"]
+        ):
+            base.upsert_entity(
+                graph,
+                "work",
+                work_id,
+                {"workId": work_id, "cardKey": work},
+                origin="reviewed-evidence-issue-260",
+            )
 
 
 def apply_unit_corroboration(
@@ -239,6 +267,7 @@ def main() -> int:
     before_rekeys = base.encoded(rekeys)
     graph = read(GRAPH)
     before_graph = base.encoded(graph)
+    ensure_researched_works(graph, rows)
 
     if not args.check:
         base.write(PRINTS, prints)

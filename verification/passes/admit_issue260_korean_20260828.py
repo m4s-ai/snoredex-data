@@ -326,22 +326,35 @@ def apply_set_graph(graph: dict[str, Any], profile: dict[str, Any], code: str, c
 def remove_obsolete_release(
     graph: dict[str, Any], row: dict[str, Any], target: str,
 ) -> tuple[list[tuple[str, str | None]], list[str], dict[str, list[str]]]:
-    legacy_number = row["localNumber"].partition("/")[0].lstrip("0")
+    identity_aliases = [
+        (row["localSetCode"], row["localNumber"].partition("/")[0]),
+        *(row.get("legacyIdentityAliases") or []),
+    ]
+    identity_aliases = [
+        (str(set_code), str(number).partition("/")[0])
+        for set_code, number in identity_aliases
+    ]
 
     def is_old_ref(value: Any) -> bool:
         text = str(value or "")
-        marker = f":via-{row['localSetCode']}:unknown-local-set:via-"
-        if not text.startswith("RELEASE:KR:Korean:") or marker not in text:
+        if not text.startswith("RELEASE:KR:Korean:via-"):
             return False
-        observed_number = text.split(marker, 1)[1].split(":", 1)[0].lstrip("0")
-        return observed_number == legacy_number
+        for set_code, number in identity_aliases:
+            marker = f":via-{set_code}:unknown-local-set:via-"
+            if marker in text:
+                observed_number = text.split(marker, 1)[1].split(":", 1)[0].lstrip("0")
+                if observed_number == number.lstrip("0"):
+                    return True
+        return False
 
     obsolete = {
         item["entityId"] for item in graph["entities"]
         if item.get("entityType") == "card-release" and item.get("entityId") != target
         and item.get("payload", {}).get("language") == "Korean"
-        and (item.get("payload", {}).get("localSetCode") or item.get("payload", {}).get("viaLegacySetCode")) == row["localSetCode"]
-        and str(item.get("payload", {}).get("localNumber") or item.get("payload", {}).get("viaLegacyNumber") or "").partition("/")[0].lstrip("0") == row["localNumber"].partition("/")[0].lstrip("0")
+        and (
+            str(item.get("payload", {}).get("localSetCode") or item.get("payload", {}).get("viaLegacySetCode")),
+            str(item.get("payload", {}).get("localNumber") or item.get("payload", {}).get("viaLegacyNumber") or "").partition("/")[0],
+        ) in identity_aliases
     }
     legacy_claims = []
     finish_claims = []
@@ -397,6 +410,29 @@ def remove_obsolete_release(
 def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dict[str, Any]) -> None:
     rid = release_id(row)
     legacy_claims, finish_claims, heritage = remove_obsolete_release(graph, row, rid)
+    # A previous run may have materialized a release before its Work key was
+    # known.  Replace any derived rarity claim for that same local identity so
+    # the corrected release does not retain a dangling claim.
+    stale_rarity_ids = {
+        item["entityId"] for item in graph["entities"]
+        if item.get("entityType") == "rarity-claim"
+        and item.get("payload", {}).get("cardReleaseId") != rid
+        and item.get("payload", {}).get("cardReleaseId", "").startswith(
+            f"RELEASE:KR:Korean:{row['localSetCode']}:"
+        )
+        and str(item.get("payload", {}).get("cardReleaseId", "")).split(":")[-2:-1]
+        == [row["localNumber"]]
+    }
+    if stale_rarity_ids:
+        graph["entities"] = [
+            item for item in graph["entities"]
+            if item.get("entityId") not in stale_rarity_ids
+        ]
+        graph["edges"] = [
+            edge for edge in graph["edges"]
+            if edge.get("fromId") not in stale_rarity_ids
+            and edge.get("toId") not in stale_rarity_ids
+        ]
     claim_id = f"CLAIM:source-first:{row['printId']}"
     edition_id = f"EDITION:KR:Korean:{row['localSetCode']}"
     claim = {"claimId": claim_id, "claimKind": "card-release", "sourceKind": "source-first-record", "sourceId": row["printId"], "sourceRecord": row["sourceUrl"], "evidenceStatus": "confirmed", "disposition": "established-and-mapped", "proposedTargetId": rid, "materializedTargetId": rid, "reason": "positive exact Korean card record and retained image"}
@@ -409,6 +445,8 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     for field in ("releaseDate", "releaseDatePrecision", "releaseApproximate"):
         if row.get(field) is not None:
             payload[field] = row[field]
+    if row.get("legacyIdentityAliases"):
+        payload["legacyIdentityAliases"] = row["legacyIdentityAliases"]
     upsert_entity(graph, "card-release", rid, payload, origin="reviewed-evidence-issue-260")
     for legacy_claim_id, _ in legacy_claims:
         upsert_edge(graph, "candidate-claim", legacy_claim_id, "materializes", "card-release", rid, {"disposition": "established-and-mapped"})
@@ -444,6 +482,15 @@ def apply_mapping_graph(
 ) -> None:
     rid = release_id(row)
     assertion_id = f"ASSERT:same-work:{legacy_id}:{row['printId']}"
+    # Re-key assertions are upserted by stable ID.  Remove edges from an older
+    # target before adding the canonical release/Work pair.
+    graph["edges"] = [
+        edge for edge in graph["edges"]
+        if not (
+            edge.get("fromType") == "equivalence-assertion"
+            and edge.get("fromId") == assertion_id
+        )
+    ]
     assertion = {"assertionId": assertion_id, "assertionType": "same-work-decision", "fromId": rid, "toId": f"WORK:{row['work']}", "legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertedBy": "repository verification pass", "assertedAt": asserted_at, "evidenceUrl": row["sourceUrl"], "evidence": "The exact Korean card identity and printed attacks establish this local counterpart without merging release identities.", "destructiveMergeAllowed": False}
     upsert_entity(graph, "equivalence-assertion", assertion_id, assertion, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "equivalence-assertion", assertion_id, "relates", "card-release", rid, assertion)
