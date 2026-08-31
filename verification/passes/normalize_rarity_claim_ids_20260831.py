@@ -11,7 +11,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 GRAPH = ROOT / "verification" / "authoritative_graph.json"
 CATALOGUE = ROOT / "verification" / "rarity_catalogue.json"
-EXPECTED = Counter({"triple-rare": 4, "super-rare": 4, "character-rare": 2})
+EXPECTED = Counter({
+    "triple-rare": 4,
+    "super-rare": 4,
+    "character-rare": 2,
+    "hyper-rare": 4,
+})
 SOURCE_NATIVE_MAPPINGS = [
     {
         "locality": "WEST",
@@ -77,10 +82,13 @@ SOURCE_NATIVE_MAPPINGS = [
     {
         "locality": "KR",
         "sourceVocabulary": "printed-Korean-card",
-        "basis": "Reviewed Korean card mappings admitted under issue #260.",
+        "basis": (
+            "Reviewed Korean card mappings admitted under issue #260. Historical HR remains "
+            "unmapped because the catalogue's Hyper Rare id describes the later SV-era UR tier."
+        ),
         "values": {
             "AR": "illustration-rare", "C": "common", "fixed product": "fixed",
-            "HR": "hyper-rare", "no printed rarity symbol": "fixed", "PROMO": "promo",
+            "no printed rarity symbol": "fixed", "PROMO": "promo",
             "R": "rare", "RR": "double-rare", "S": "shiny-rare", "U": "uncommon",
             "UR": "ultra-rare",
         },
@@ -98,9 +106,13 @@ SOURCE_NATIVE_MAPPINGS = [
     {
         "locality": "TW",
         "sourceVocabulary": "printed-Traditional-Chinese-card",
-        "basis": "Reviewed official and retained Traditional Chinese card mappings admitted under issue #263.",
+        "basis": (
+            "Reviewed official and retained Traditional Chinese card mappings admitted under issue #263. "
+            "Historical HR remains unmapped because the catalogue's Hyper Rare id describes the later "
+            "SV-era UR tier."
+        ),
         "values": {
-            "AR": "illustration-rare", "C": "common", "HR": "hyper-rare", "PROMO": "promo",
+            "AR": "illustration-rare", "C": "common", "PROMO": "promo",
             "R": "rare", "RR": "double-rare", "S": "shiny-rare", "U": "uncommon",
         },
     },
@@ -125,7 +137,7 @@ def main() -> int:
         and row["payload"].get("normalizedRarityId") in EXPECTED
     ]
     counts = Counter(row["normalizedRarityId"] for row in claims)
-    if counts and counts != EXPECTED:
+    if any(count != EXPECTED[rarity_id] for rarity_id, count in counts.items()):
         raise SystemExit(f"unexpected unsupported rarity claims: {dict(counts)}")
     for claim in claims:
         claim["normalizedRarityId"] = None
