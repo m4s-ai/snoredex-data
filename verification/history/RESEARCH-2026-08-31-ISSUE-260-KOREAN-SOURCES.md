@@ -41,7 +41,7 @@ and the merged PR #333 specimen registry. No new mapping is asserted by this rep
 | U0260 | Korean number is `sv4K 060/066 U`, not legacy `059` | [Pokepolio Korean record](https://www.pokepolio.com/cards/8ae3d25e-9838-4724-bcf3-cf5ed897d22b) and retained photo (`SPEC-0445`); positive correction |
 | U0306 | `sv4a 145/190 N` | [Collectory KR record](https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed); identity/rarity positive |
 | U0379 | Korean promo is `017/SM-P`, not Japanese `001/SM-P` | [Korean promo list](https://www.namu.moe/w/%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%B9%B4%EB%93%9C%20%EA%B2%8C%EC%9E%84/%ED%95%9C%EA%B5%AD%20%ED%94%84%EB%A1%9C%EB%AA%A8%20%EC%B9%B4%EB%93%9C%20%EC%9D%BC%EB%9E%8C) and retained TCGBOX/photo evidence (`SPEC-0439`) |
-| U0402 | `svM 094/175` Snorlax ex | [Collectory KR record](https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f); sealed Korean product corroborates release identity |
+| U0402 | `svM 094/175` Snorlax ex | [Collectory KR record](https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f) and retained Korean render (`SPEC-0464`); sealed Korean product corroborates release identity |
 | U0413 | `sm9 066/095 RR` | [Collectory KR record](https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb) and retained Bunjang photo (`SPEC-0449`) |
 | U0440 | Fixed Venusaur Deck row `016/034` | [Pokémon TCG Classic article](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)); fixed-product identity, no Korean card face found |
 | U0508 | `s1H 070/060 HR` | [Shield Korean set list](https://www.namu.moe/w/%EC%8B%A4%EB%93%9C(%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%B9%B4%EB%93%9C%20%EA%B2%8C%EC%9E%84)); identity/rarity positive, finish not inferred |
