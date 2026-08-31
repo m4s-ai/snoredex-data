@@ -101,6 +101,17 @@ RESEARCH_ROWS = [
 ]
 
 
+def korean_name(card_name: str) -> str:
+    return {
+        "Eevee & Snorlax GX": "이브이&잠만보 GX",
+        "Snorlax GX": "잠만보 GX",
+        "Snorlax ex": "잠만보 ex",
+        "Snorlax VMAX": "잠만보 VMAX",
+        "Snorlax Doll": "잠만보인형",
+        "Hop's Snorlax": "호브의 잠만보",
+    }.get(card_name, "잠만보")
+
+
 def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
     if row in base.OFFICIAL + base.PROMOS:
         return base.source_first_row(row)
@@ -112,7 +123,7 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
     result = {
         "printId": row["printId"], "locality": "KR", "localSetCode": row["localSetCode"],
         "localNumber": row["localNumber"], "variant": "base", "language": "Korean",
-        "script": "Hang", "name": "이브이&잠만보 GX" if row["cardName"].startswith("Eevee") else "잠만보",
+        "script": "Hang", "name": korean_name(row["cardName"]),
         "cardName": row["cardName"],
         "catchUpOf": "positive Korean research applied to the issue #260 legacy queue",
         "specimenId": row.get("specimenId"), "providerId": row["providerId"],

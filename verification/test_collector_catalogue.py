@@ -22,6 +22,25 @@ def read(name: str) -> dict:
 
 def main() -> None:
     assert collector.collector_number("076/095") == collector.collector_number("076")
+    source_backed_rarity = collector.normalized_rarity(
+        "release:test",
+        {"rarity": "Fixed"},
+        {"release:test": [{
+            "normalizedRarityId": "uncommon",
+            "sourceNativeValue": "U",
+            "rarityClaimId": "CLAIM:test",
+        }]},
+    )
+    assert source_backed_rarity["display"] == "U"
+    source_first = read("verification/source_first_prints.json")
+    korean_names = {
+        (row["localSetCode"], row["localNumber"]): row["name"]
+        for row in source_first["prints"]
+        if row["locality"] == "KR"
+    }
+    assert korean_names[("m2a", "136/193")] == "호브의 잠만보"
+    assert korean_names[("sv4K", "060/066")] == "잠만보인형"
+    assert korean_names[("svM", "094/175")] == "잠만보 ex"
     legacy_row = {
         "checklistId": "legacy-semantic-row",
         "printingId": "F0167-P01",

@@ -512,6 +512,16 @@ def release_event_view(events: list[dict[str, Any]]) -> dict[str, dict[str, Any]
     return result
 
 
+def _rarity_display(
+    status: str,
+    old_item: dict[str, Any] | None,
+    source_display: str | None,
+) -> str | None:
+    if status == "source-backed" and source_display:
+        return source_display
+    return (old_item or {}).get("rarity") or source_display
+
+
 def normalized_rarity(
     release_id: str,
     old_item: dict[str, Any] | None,
@@ -531,9 +541,10 @@ def normalized_rarity(
     else:
         status = "unknown"
         normalized_id = None
-    display = (old_item or {}).get("rarity") or next(
+    source_display = next(
         (row.get("sourceNativeValue") for row in claims if row.get("sourceNativeValue")), None
     )
+    display = _rarity_display(status, old_item, source_display)
     return {
         "display": display,
         "normalizedId": normalized_id,
