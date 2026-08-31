@@ -71,7 +71,7 @@ UNITS_BY_ID = {row["unitId"]: row for row in read(UNITS)}
 # rows are represented by their corresponding Bulbapedia KTCG set/promo pages
 # in the active registry; no finish is inferred from any of these records.
 RESEARCH_ROWS = [
-    research("U0049", "sv2a", "181/165", ("AR", "art-rare"), "https://pokemoncard.co.kr/cards/detail/BS2023014181", "pokemon-card-korea"),
+    research("U0049", "sv2a", "181/165", ("AR", "illustration-rare"), "https://pokemoncard.co.kr/cards/detail/BS2023014181", "pokemon-card-korea"),
     research("U0103", "sv2a", "143/165", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2023014143", "pokemon-card-korea"),
     research("U0127", "m2a", "136/193", ("not stated", "unknown"), "https://globalbunjang.com/product/423487583", "seller-listing-photo", specimen_id="SPEC-0436"),
     research("U0233", "sv5a", "051/066", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2024007051", "pokemon-card-korea", specimen_id="SPEC-0441"),
