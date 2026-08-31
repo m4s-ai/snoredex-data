@@ -119,12 +119,13 @@ def main() -> None:
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {
         ("ID", "pokemon-card-asia"): 30,
-        ("KR", "pokemon-card-korea"): 17,
+        ("KR", "pokemon-card-korea"): 19,
         ("TH", "pokemon-card-asia"): 25,
         ("TW", "pokemon-card-asia"): 40,
     }
     independently_corroborated_prints = {
-        "KR:BS2:30/40:base", "KR:S-P:101:base",
+        "KR:BS2:30/40:base", "KR:S-P:101:base", "KR:BW7:055/070:base",
+        "KR:XY2:066/080:base", "KR:sv5a:051/066:base",
     }
     for provider_key, expected_count in single_provider_counts.items():
         official_prints = [
@@ -538,6 +539,8 @@ def main() -> None:
         )
         if source_key not in registry_by_source:
             source_key = source_key.split("#", 1)[0]
+        if source_key not in registry_by_source:
+            source_key = "evidence:inspected-specimen"
         registry_row = registry_by_source[source_key]
         assert "identity" in registry_row["dimensions"]
         assert specimen["specimenId"] in registry_row["stableIds"]

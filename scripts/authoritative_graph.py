@@ -40,7 +40,6 @@ ISSUE304_NEEDS_EXPLICIT_RELEASES = frozenset({
     "RELEASE:JP:Japanese:DP-P:126:None",
     "RELEASE:JP:Japanese:DP-P:127:None",
     "RELEASE:JP:Japanese:UNP:unnumbered:None",
-    "RELEASE:KR:Korean:via-DP-P:unknown-local-set:via-127:None:unknown-local-id",
     "RELEASE:WEST:English:RR:111:None",
     "RELEASE:WEST:French:RR:111:None",
     "RELEASE:WEST:German:RR:111:None",

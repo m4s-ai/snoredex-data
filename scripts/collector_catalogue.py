@@ -512,6 +512,16 @@ def release_event_view(events: list[dict[str, Any]]) -> dict[str, dict[str, Any]
     return result
 
 
+def _rarity_display(
+    status: str,
+    old_item: dict[str, Any] | None,
+    source_display: str | None,
+) -> str | None:
+    if status == "source-backed" and source_display:
+        return source_display
+    return (old_item or {}).get("rarity") or source_display
+
+
 def normalized_rarity(
     release_id: str,
     old_item: dict[str, Any] | None,
@@ -519,21 +529,28 @@ def normalized_rarity(
 ) -> dict[str, Any]:
     claims = claims_by_release.get(release_id, [])
     normalized = sorted({row.get("normalizedRarityId") for row in claims if row.get("normalizedRarityId")})
+    source_display = next(
+        (row.get("sourceNativeValue") for row in claims if row.get("sourceNativeValue")), None
+    )
+    positive_source_display = source_display and str(source_display).strip().casefold() not in {
+        "not stated", "unknown", "none"
+    }
     if len(normalized) > 1:
         status = "conflicting"
         normalized_id = None
     elif normalized:
         status = "source-backed"
         normalized_id = normalized[0]
+    elif positive_source_display:
+        status = "source-backed"
+        normalized_id = None
     elif old_item and old_item.get("rarity"):
         status = "marketplace-claimed"
         normalized_id = None
     else:
         status = "unknown"
         normalized_id = None
-    display = (old_item or {}).get("rarity") or next(
-        (row.get("sourceNativeValue") for row in claims if row.get("sourceNativeValue")), None
-    )
+    display = _rarity_display(status, old_item, source_display)
     return {
         "display": display,
         "normalizedId": normalized_id,

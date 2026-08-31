@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-30",
+  "generated": "2026-08-31",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1175,
-   "uniqueUrls": 1168,
+   "evidenceRecords": 1186,
+   "uniqueUrls": 1179,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3535
+   "claimsAttributed": 3556
   }
  },
  "providers": [
@@ -134,8 +134,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 27,
-   "claimsSupported": 27
+   "uniqueSources": 32,
+   "claimsSupported": 32
   },
   {
    "providerId": "tcgdex",
@@ -721,7 +721,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 29,
-   "claimsSupported": 66
+   "claimsSupported": 68
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -764,8 +764,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 62,
-   "claimsSupported": 106
+   "uniqueSources": 68,
+   "claimsSupported": 120
   }
  ],
  "evidence": [
@@ -10474,7 +10474,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 24,
+   "stableIdCount": 26,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -10490,6 +10490,7 @@
     "SPEC-0002",
     "SPEC-0005",
     "SPEC-0006",
+    "SPEC-0061",
     "U0100",
     "U0189",
     "U0192",
@@ -10499,10 +10500,11 @@
     "U0231",
     "U0452",
     "U0752",
-    "U0772"
+    "U0772",
+    "U0780"
    ],
-   "retrievedAt": "2026-07-23",
-   "usageCount": 35
+   "retrievedAt": "2026-08-26",
+   "usageCount": 37
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -12926,6 +12928,40 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2013001055",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:BW7:055/070:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2014002066",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:XY2:066/080:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -13028,6 +13064,40 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023014143",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv2a:143/165:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023014181",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv2a:181/165:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -13057,6 +13127,23 @@
    "stableIdCount": 1,
    "stableIds": [
     "KR:sv4a:310/190:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024007051",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv5a:051/066:base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -17064,6 +17151,24 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/404911233_1_1777515904_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0442",
+    "U0579"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -17081,6 +17186,24 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/411963518_1_1781756877_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0443",
+    "U0257"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -17096,6 +17219,24 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/416373605_1_1782484118_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0441",
+    "U0233"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/418966418_1_1784832595_w480.jpg",
@@ -17122,14 +17263,35 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0604-P01"
+    "F0604-P01",
+    "SPEC-0437",
+    "U0790"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-30",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/421867656_1_1787253313_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0457",
+    "U0541"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg",
@@ -17232,6 +17394,42 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/426224532_1_1787819127_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0438",
+    "U0677"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/427231898_1_1788108932_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0449",
+    "U0413"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
