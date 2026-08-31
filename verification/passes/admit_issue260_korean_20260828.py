@@ -426,21 +426,38 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])
 
 
-def mapping(row: dict[str, Any], legacy_id: str) -> dict[str, Any]:
-    return {"legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertionType": "same-work-decision", "assertedBy": "repository verification pass", "assertedAt": "2026-08-28", "evidenceUrl": row["sourceUrl"], "evidence": "The exact Korean card identity and printed attacks establish this local counterpart without merging release identities."}
+def mapping(
+    row: dict[str, Any],
+    legacy_id: str,
+    *,
+    asserted_at: str = "2026-08-28",
+) -> dict[str, Any]:
+    return {"legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertionType": "same-work-decision", "assertedBy": "repository verification pass", "assertedAt": asserted_at, "evidenceUrl": row["sourceUrl"], "evidence": "The exact Korean card identity and printed attacks establish this local counterpart without merging release identities."}
 
 
-def apply_mapping_graph(graph: dict[str, Any], row: dict[str, Any], legacy_id: str) -> None:
+def apply_mapping_graph(
+    graph: dict[str, Any],
+    row: dict[str, Any],
+    legacy_id: str,
+    *,
+    asserted_at: str = "2026-08-28",
+) -> None:
     rid = release_id(row)
     assertion_id = f"ASSERT:same-work:{legacy_id}:{row['printId']}"
-    assertion = {"assertionId": assertion_id, "assertionType": "same-work-decision", "fromId": rid, "toId": f"WORK:{row['work']}", "legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertedBy": "repository verification pass", "assertedAt": "2026-08-28", "evidenceUrl": row["sourceUrl"], "evidence": "The exact Korean card identity and printed attacks establish this local counterpart without merging release identities.", "destructiveMergeAllowed": False}
+    assertion = {"assertionId": assertion_id, "assertionType": "same-work-decision", "fromId": rid, "toId": f"WORK:{row['work']}", "legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertedBy": "repository verification pass", "assertedAt": asserted_at, "evidenceUrl": row["sourceUrl"], "evidence": "The exact Korean card identity and printed attacks establish this local counterpart without merging release identities.", "destructiveMergeAllowed": False}
     upsert_entity(graph, "equivalence-assertion", assertion_id, assertion, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "equivalence-assertion", assertion_id, "relates", "card-release", rid, assertion)
     upsert_edge(graph, "equivalence-assertion", assertion_id, "relates", "work", f"WORK:{row['work']}", assertion)
     upsert_migration(graph, {"sourceKind": "legacy-issue-rekey", "sourceId": legacy_id, "disposition": "linked-local-counterpart", "targetRef": rid, "targetRefs": [rid], "reason": "issue #260 re-key"})
 
 
-def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], rows: list[dict[str, Any]]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+def apply_graph(
+    graph: dict[str, Any],
+    profiles: dict[str, dict[str, Any]],
+    rows: list[dict[str, Any]],
+    *,
+    asserted_at: str = "2026-08-28",
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     for disposition in graph["migrationDispositions"]:
         if disposition.get("sourceKind") not in {"legacy-cardmarket-product", "legacy-issue-rekey"} \
                 and disposition.get("targetRefs") == []:
@@ -454,8 +471,8 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], rows
     for row in rows:
         apply_release_graph(graph, profiles[row["localSetCode"]], row)
         for legacy_id in row["legacy"]:
-            apply_mapping_graph(graph, row, legacy_id)
-            mappings.append(mapping(row, legacy_id))
+            apply_mapping_graph(graph, row, legacy_id, asserted_at=asserted_at)
+            mappings.append(mapping(row, legacy_id, asserted_at=asserted_at))
     mapped_ids = {row["legacyUnitId"] for row in mappings}
     for legacy_id in set(ISSUE_UNITS) - mapped_ids:
         upsert_migration(graph, {"sourceKind": "legacy-issue-rekey", "sourceId": legacy_id, "disposition": "needs-positive-local-identity", "targetRef": None, "targetRefs": [], "reason": "issue #260 re-key"})

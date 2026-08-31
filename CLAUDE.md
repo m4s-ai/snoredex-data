@@ -60,7 +60,7 @@ existing Python workflow owners rather than copying their contracts.
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **14 units rest on owner attestation alone** and 9
+   A single non-URL source may confirm a unit: **13 units rest on owner attestation alone** and 9
    on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 
@@ -69,7 +69,7 @@ existing Python workflow owners rather than copying their contracts.
    itself, and 3 resolved units do — never report a lone tier-3 source as a rule violation, and
    never state the tiers more strictly than this ([LESSONS](LESSONS.md#a-rule-stated-more-strictly-than-the-check-enforces)).
    `E4` fails when the attestation count stops matching the data. Prefer corroboration where it
-   exists — it covers 80 of 719 units, so it usually does not.
+   exists — it covers 81 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in

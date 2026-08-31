@@ -50,11 +50,15 @@ def main() -> None:
     assert source_first_by_print["KR:xsv2a:143/165:base"].get("corroboratingSourceUrls") is None
     units = read("verification/units.json")
     units_by_id = {row["unitId"]: row for row in units}
-    for unit_id in ("U0233", "U0257", "U0413", "U0541", "U0561", "U0579", "U0677", "U0775"):
+    for unit_id in ("U0233", "U0257", "U0413", "U0541", "U0561", "U0579", "U0677", "U0780", "U0790"):
         assert units_by_id[unit_id]["corroborated"] is True
+    assert units_by_id["U0775"]["corroborated"] is False
     specimens = read("verification/specimens.json")["specimens"]
     specimen_0061 = next(row for row in specimens if row["specimenId"] == "SPEC-0061")
-    assert "U0775" in specimen_0061["citedBy"]
+    assert "U0780" in specimen_0061["citedBy"]
+    assert "U0775" not in specimen_0061["citedBy"]
+    specimen_0437 = next(row for row in specimens if row["specimenId"] == "SPEC-0437")
+    assert "U0790" in specimen_0437["citedBy"]
     set_sources = read("verification/set_catalogue_sources.json")["sourceRecords"]
     korean_profiles = {
         row["providerRecordKey"]: row

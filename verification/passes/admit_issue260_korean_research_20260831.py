@@ -28,6 +28,7 @@ GRAPH = ROOT / "verification" / "authoritative_graph.json"
 UNITS = ROOT / "verification" / "units.json"
 SPECIMENS = ROOT / "verification" / "specimens.json"
 RETRIEVED_AT = "2026-08-30"
+ASSERTED_AT = "2026-08-30"
 
 
 def read(path: Path) -> dict[str, Any]:
@@ -82,6 +83,7 @@ SPECIMEN_CORROBORATION_URLS: dict[str, str | None] = {
     "SPEC-0411": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
     "SPEC-0442": "https://globalbunjang.com/product/404911233",
     "SPEC-0438": "https://globalbunjang.com/product/426224532",
+    "SPEC-0437": "https://globalbunjang.com/product/420832203",
     "SPEC-0061": None,
 }
 
@@ -94,7 +96,8 @@ UNIT_CORROBORATION_SPECIMENS = {
     "U0561": "SPEC-0411",
     "U0579": "SPEC-0442",
     "U0677": "SPEC-0438",
-    "U0775": "SPEC-0061",
+    "U0780": "SPEC-0061",
+    "U0790": "SPEC-0437",
 }
 
 
@@ -127,7 +130,7 @@ RESEARCH_ROWS = [
     research("U0680", "20th", "047/072", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)", "bulbapedia"),
     research("U0683", "mC", "567/742", ("N", "normal"), "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d", "collectory", specimen_id="SPEC-0458"),
     research("U0763", "mC", "569/742", ("N", "normal"), "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec", "collectory", specimen_id="SPEC-0460"),
-    research("U0775", "xsv2a", "143/165", ("not stated", None), "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
+    research("U0780", "xsv2a", "143/165", ("not stated", None), "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
     research("U0785", "xm2a", "136/193", ("not stated", None), "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136", "cardmarket-listing-photo", specimen_id="SPEC-0410", corroborating=["https://globalbunjang.com/product/420832203"], legacy=["U0785", "U0790"]),
 ]
 
@@ -177,6 +180,15 @@ def apply_unit_corroboration(
 ) -> None:
     by_id = {row["unitId"]: row for row in units}
     specimen_by_id = {row["specimenId"]: row for row in specimens}
+    stale_unit = by_id["U0775"]
+    stale_sentence = (
+        " Independent positive specimen evidence retained as SPEC-0061 shows the same "
+        "localized card identity and corroborates this unit without replacing its primary provider."
+    )
+    stale_unit["corroborated"] = False
+    stale_unit["evidence"] = stale_unit["evidence"].replace(stale_sentence, "").rstrip()
+    stale_specimen = specimen_by_id["SPEC-0061"]
+    stale_specimen["citedBy"] = [ref for ref in stale_specimen.get("citedBy") or [] if ref != "U0775"]
     for unit_id, specimen_id in UNIT_CORROBORATION_SPECIMENS.items():
         unit = by_id[unit_id]
         specimen = specimen_by_id[specimen_id]
@@ -234,7 +246,7 @@ def main() -> int:
         base.write(CAPABILITIES, capabilities)
         base.write(UNITS, units)
         base.write(SPECIMENS, specimen_document)
-    graph, mappings = base.apply_graph(graph, profiles, rows)
+    graph, mappings = base.apply_graph(graph, profiles, rows, asserted_at=ASSERTED_AT)
     question = {"issueNumber": 260, "locality": "KR", "language": "Korean", "legacyUnitIds": base.ISSUE_UNITS, "defaultDisposition": "needs-positive-local-identity", "mappings": mappings}
     by_issue = {row["issueNumber"]: row for row in rekeys["questionSets"]}
     by_issue[260] = question
