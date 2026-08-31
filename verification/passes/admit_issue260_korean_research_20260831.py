@@ -26,6 +26,8 @@ SET_SOURCES = ROOT / "verification" / "set_catalogue_sources.json"
 CAPABILITIES = ROOT / "verification" / "source_capabilities.json"
 GRAPH = ROOT / "verification" / "authoritative_graph.json"
 UNITS = ROOT / "verification" / "units.json"
+SPECIMENS = ROOT / "verification" / "specimens.json"
+RETRIEVED_AT = "2026-08-30"
 
 
 def read(path: Path) -> dict[str, Any]:
@@ -36,7 +38,7 @@ def research(
     unit_id: str,
     set_code: str,
     number: str,
-    rarity: tuple[str, str],
+    rarity: tuple[str, str | None],
     source_url: str,
     provider: str,
     *,
@@ -47,6 +49,11 @@ def research(
 ) -> dict[str, Any]:
     unit = UNITS_BY_ID[unit_id]
     legacy_ids = legacy if legacy is not None else [unit_id]
+    derived_corroboration = SPECIMEN_CORROBORATION_URLS.get(specimen_id)
+    corroborating_urls = [
+        *(corroborating or []),
+        *([derived_corroboration] if derived_corroboration else []),
+    ]
     return {
         "printId": f"KR:{set_code}:{number}:base",
         "localSetCode": set_code,
@@ -58,13 +65,37 @@ def research(
         "cardName": card_name or unit["cardName"],
         "providerId": provider,
         "sourceUrl": source_url,
-        "corroborated": bool(corroborating),
-        "corroboratingSourceUrls": corroborating or [],
+        "corroborated": bool(corroborating_urls) or specimen_id in SPECIMEN_CORROBORATION_URLS,
+        "corroboratingSourceUrls": corroborating_urls,
         "legacyVariants": sorted({str(UNITS_BY_ID[item].get("variant") or "base") for item in legacy_ids}),
     }
 
 
 UNITS_BY_ID = {row["unitId"]: row for row in read(UNITS)}
+
+
+SPECIMEN_CORROBORATION_URLS: dict[str, str | None] = {
+    "SPEC-0441": "https://globalbunjang.com/product/416373605",
+    "SPEC-0443": "https://globalbunjang.com/product/411963518",
+    "SPEC-0449": "https://globalbunjang.com/product/427231898",
+    "SPEC-0457": "https://globalbunjang.com/product/421867656",
+    "SPEC-0411": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
+    "SPEC-0442": "https://globalbunjang.com/product/404911233",
+    "SPEC-0438": "https://globalbunjang.com/product/426224532",
+    "SPEC-0061": None,
+}
+
+
+UNIT_CORROBORATION_SPECIMENS = {
+    "U0233": "SPEC-0441",
+    "U0257": "SPEC-0443",
+    "U0413": "SPEC-0449",
+    "U0541": "SPEC-0457",
+    "U0561": "SPEC-0411",
+    "U0579": "SPEC-0442",
+    "U0677": "SPEC-0438",
+    "U0775": "SPEC-0061",
+}
 
 
 # Positive source observations from the current Korean research.  Namu-only
@@ -73,7 +104,7 @@ UNITS_BY_ID = {row["unitId"]: row for row in read(UNITS)}
 RESEARCH_ROWS = [
     research("U0049", "sv2a", "181/165", ("AR", "illustration-rare"), "https://pokemoncard.co.kr/cards/detail/BS2023014181", "pokemon-card-korea"),
     research("U0103", "sv2a", "143/165", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2023014143", "pokemon-card-korea"),
-    research("U0127", "m2a", "136/193", ("not stated", "unknown"), "https://globalbunjang.com/product/423487583", "seller-listing-photo", specimen_id="SPEC-0436"),
+    research("U0127", "m2a", "136/193", ("not stated", None), "https://globalbunjang.com/product/423487583", "seller-listing-photo", specimen_id="SPEC-0436"),
     research("U0233", "sv5a", "051/066", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2024007051", "pokemon-card-korea", specimen_id="SPEC-0441"),
     research("U0257", "m3", "062/080", ("C", "common"), "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e", "collectory", specimen_id="SPEC-0443"),
     research("U0260", "sv4K", "060/066", ("U", "uncommon"), "https://globalbunjang.com/product/407721760", "seller-listing-photo", specimen_id="SPEC-0445", corroborating=["https://www.pokepolio.com/cards/8ae3d25e-9838-4724-bcf3-cf5ed897d22b"]),
@@ -96,8 +127,8 @@ RESEARCH_ROWS = [
     research("U0680", "20th", "047/072", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)", "bulbapedia"),
     research("U0683", "mC", "567/742", ("N", "normal"), "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d", "collectory", specimen_id="SPEC-0458"),
     research("U0763", "mC", "569/742", ("N", "normal"), "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec", "collectory", specimen_id="SPEC-0460"),
-    research("U0775", "xsv2a", "143/165", ("not stated", "unknown"), "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
-    research("U0785", "xm2a", "136/193", ("not stated", "unknown"), "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136", "cardmarket-listing-photo", specimen_id="SPEC-0410", corroborating=["https://globalbunjang.com/product/420832203"], legacy=["U0785", "U0790"]),
+    research("U0775", "xsv2a", "143/165", ("not stated", None), "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
+    research("U0785", "xm2a", "136/193", ("not stated", None), "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136", "cardmarket-listing-photo", specimen_id="SPEC-0410", corroborating=["https://globalbunjang.com/product/420832203"], legacy=["U0785", "U0790"]),
 ]
 
 
@@ -141,6 +172,27 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def apply_unit_corroboration(
+    units: list[dict[str, Any]], specimens: list[dict[str, Any]]
+) -> None:
+    by_id = {row["unitId"]: row for row in units}
+    specimen_by_id = {row["specimenId"]: row for row in specimens}
+    for unit_id, specimen_id in UNIT_CORROBORATION_SPECIMENS.items():
+        unit = by_id[unit_id]
+        specimen = specimen_by_id[specimen_id]
+        unit["corroborated"] = True
+        sentence = (
+            f" Independent positive specimen evidence retained as {specimen_id} shows the same "
+            "localized card identity and corroborates this unit without replacing its primary provider."
+        )
+        if sentence not in unit["evidence"]:
+            unit["evidence"] = unit["evidence"].rstrip() + sentence
+        cited_by = specimen.setdefault("citedBy", [])
+        if unit_id not in cited_by:
+            cited_by.append(unit_id)
+            cited_by.sort()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -149,6 +201,13 @@ def main() -> int:
     for row in rows:
         row.setdefault("legacyVariants", sorted({str(UNITS_BY_ID[item].get("variant") or "base") for item in row["legacy"]}))
     source_rows = [source_first_row(row) for row in rows]
+
+    units = read(UNITS)
+    specimen_document = read(SPECIMENS)
+    specimens = specimen_document["specimens"]
+    before_units = base.encoded(units)
+    before_specimens = base.encoded(specimen_document)
+    apply_unit_corroboration(units, specimens)
 
     prints = read(PRINTS)
     before = base.encoded(prints)
@@ -160,7 +219,7 @@ def main() -> int:
 
     sources = read(SET_SOURCES)
     before_sources = base.encoded(sources)
-    profiles = base.apply_profiles(sources, rows)
+    profiles = base.apply_profiles(sources, rows, retrieved_at=RETRIEVED_AT)
     capabilities = read(CAPABILITIES)
     before_capabilities = base.encoded(capabilities)
     base.apply_capabilities(capabilities)
@@ -173,6 +232,8 @@ def main() -> int:
         base.write(PRINTS, prints)
         base.write(SET_SOURCES, sources)
         base.write(CAPABILITIES, capabilities)
+        base.write(UNITS, units)
+        base.write(SPECIMENS, specimen_document)
     graph, mappings = base.apply_graph(graph, profiles, rows)
     question = {"issueNumber": 260, "locality": "KR", "language": "Korean", "legacyUnitIds": base.ISSUE_UNITS, "defaultDisposition": "needs-positive-local-identity", "mappings": mappings}
     by_issue = {row["issueNumber"]: row for row in rekeys["questionSets"]}
@@ -185,6 +246,8 @@ def main() -> int:
         ("capabilities", before_capabilities, base.encoded(capabilities)),
         ("rekeys", before_rekeys, base.encoded(rekeys)),
         ("graph", before_graph, base.encoded(graph)),
+        ("units", before_units, base.encoded(units)),
+        ("specimens", before_specimens, base.encoded(specimen_document)),
     ) if old != new]
     if args.check:
         if stale:

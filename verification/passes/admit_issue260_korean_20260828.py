@@ -214,12 +214,17 @@ def update_promo_specimens(document: dict[str, Any]) -> None:
         specimen["observed"] = base + conclusion
 
 
-def build_profile(code: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
+def build_profile(
+    code: str,
+    rows: list[dict[str, Any]],
+    *,
+    retrieved_at: str = "2026-08-28",
+) -> dict[str, Any]:
     numbers = sorted(row["localNumber"] for row in rows)
     denominators = {number.partition("/")[2] for number in numbers if number.partition("/")[2].isdigit()}
     return {
         "sourceRecordId": stable_profile_id("KR", code), "sourceKind": "source-first-local-set-profile",
-        "provider": "mixed-positive-evidence", "providerRecordKey": f"KR\x1f{code}", "retrieved": "2026-08-28",
+        "provider": "mixed-positive-evidence", "providerRecordKey": f"KR\x1f{code}", "retrieved": retrieved_at,
         "raw": {
             "localCode": code, "localName": None, "locality": "KR", "languages": ["Korean"],
             "scripts": ["Hang"], "printIds": sorted(row["printId"] for row in rows),
@@ -234,11 +239,19 @@ def build_profile(code: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def apply_profiles(document: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+def apply_profiles(
+    document: dict[str, Any],
+    rows: list[dict[str, Any]],
+    *,
+    retrieved_at: str = "2026-08-28",
+) -> dict[str, dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     for row in rows:
         grouped.setdefault(row["localSetCode"], []).append(row)
-    profiles = {code: build_profile(code, group) for code, group in grouped.items()}
+    profiles = {
+        code: build_profile(code, group, retrieved_at=retrieved_at)
+        for code, group in grouped.items()
+    }
     by_id = {row["sourceRecordId"]: row for row in document["sourceRecords"]}
     by_id.update({profile["sourceRecordId"]: profile for profile in profiles.values()})
     document["sourceRecords"] = sorted(by_id.values(), key=lambda row: row["sourceRecordId"])

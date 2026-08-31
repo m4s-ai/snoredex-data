@@ -41,6 +41,29 @@ def main() -> None:
     assert korean_names[("m2a", "136/193")] == "호브의 잠만보"
     assert korean_names[("sv4K", "060/066")] == "잠만보인형"
     assert korean_names[("svM", "094/175")] == "잠만보 ex"
+    source_first_by_print = {row["printId"]: row for row in source_first["prints"]}
+    assert source_first_by_print["KR:sv5a:051/066:base"]["corroborated"] is True
+    assert "https://globalbunjang.com/product/416373605" in source_first_by_print[
+        "KR:sv5a:051/066:base"
+    ]["corroboratingSourceUrls"]
+    assert source_first_by_print["KR:xsv2a:143/165:base"]["corroborated"] is True
+    assert source_first_by_print["KR:xsv2a:143/165:base"].get("corroboratingSourceUrls") is None
+    units = read("verification/units.json")
+    units_by_id = {row["unitId"]: row for row in units}
+    for unit_id in ("U0233", "U0257", "U0413", "U0541", "U0561", "U0579", "U0677", "U0775"):
+        assert units_by_id[unit_id]["corroborated"] is True
+    specimens = read("verification/specimens.json")["specimens"]
+    specimen_0061 = next(row for row in specimens if row["specimenId"] == "SPEC-0061")
+    assert "U0775" in specimen_0061["citedBy"]
+    set_sources = read("verification/set_catalogue_sources.json")["sourceRecords"]
+    korean_profiles = {
+        row["providerRecordKey"]: row
+        for row in set_sources
+        if row["sourceKind"] == "source-first-local-set-profile"
+        and row["providerRecordKey"].startswith("KR\x1f")
+    }
+    assert korean_profiles["KR\x1fm2a"]["retrieved"] == "2026-08-30"
+    assert korean_profiles["KR\x1fsv2a"]["retrieved"] == "2026-08-30"
     legacy_row = {
         "checklistId": "legacy-semantic-row",
         "printingId": "F0167-P01",
