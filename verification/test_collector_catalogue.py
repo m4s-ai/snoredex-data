@@ -45,6 +45,8 @@ def main() -> None:
     assert korean_names[("DP", "006")] == "잠만보 Lv.X"
     source_first_by_print = {row["printId"]: row for row in source_first["prints"]}
     assert source_first_by_print["KR:sv5a:051/066:base"]["corroborated"] is True
+    assert source_first_by_print["KR:sv9:075/100:base"]["corroborated"] is False
+    assert source_first_by_print["KR:DP:006:base"]["corroborated"] is False
     assert "https://globalbunjang.com/product/416373605" in source_first_by_print[
         "KR:sv5a:051/066:base"
     ]["corroboratingSourceUrls"]
@@ -52,8 +54,10 @@ def main() -> None:
     assert source_first_by_print["KR:xsv2a:143/165:base"].get("corroboratingSourceUrls") is None
     units = read("verification/units.json")
     units_by_id = {row["unitId"]: row for row in units}
-    for unit_id in ("U0233", "U0257", "U0370", "U0413", "U0541", "U0561", "U0579", "U0623", "U0677", "U0780", "U0790"):
+    for unit_id in ("U0233", "U0257", "U0413", "U0541", "U0561", "U0579", "U0677", "U0780", "U0790"):
         assert units_by_id[unit_id]["corroborated"] is True
+    for unit_id in ("U0370", "U0623"):
+        assert units_by_id[unit_id]["corroborated"] is False
     assert units_by_id["U0775"]["corroborated"] is False
     specimens = read("verification/specimens.json")["specimens"]
     specimen_0061 = next(row for row in specimens if row["specimenId"] == "SPEC-0061")
@@ -68,6 +72,16 @@ def main() -> None:
         and row["payload"]["work"] == "Snorlax-LvX-Big-Appetite-Exercise"
         for row in graph["entities"]
     )
+    catalogue = read("collector_catalogue.json")
+    catalogue_by_release = {row["cardReleaseId"]: row for row in catalogue["items"]}
+    for release_id in (
+        "RELEASE:KR:Korean:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+        "RELEASE:KR:Korean:mC:567/742:Snorlax-But-First-Food-Heavy-Impact",
+        "RELEASE:KR:Korean:mC:568/742:Snorlax-Lazy-Press",
+        "RELEASE:KR:Korean:mC:569/742:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+    ):
+        assert catalogue_by_release[release_id]["rarity"]["display"] == "N"
+        assert catalogue_by_release[release_id]["rarity"]["normalizedId"] is None
     set_sources = read("verification/set_catalogue_sources.json")["sourceRecords"]
     korean_profiles = {
         row["providerRecordKey"]: row

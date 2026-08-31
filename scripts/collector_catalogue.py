@@ -529,21 +529,27 @@ def normalized_rarity(
 ) -> dict[str, Any]:
     claims = claims_by_release.get(release_id, [])
     normalized = sorted({row.get("normalizedRarityId") for row in claims if row.get("normalizedRarityId")})
+    source_display = next(
+        (row.get("sourceNativeValue") for row in claims if row.get("sourceNativeValue")), None
+    )
+    positive_source_display = source_display and str(source_display).strip().casefold() not in {
+        "not stated", "unknown", "none"
+    }
     if len(normalized) > 1:
         status = "conflicting"
         normalized_id = None
     elif normalized:
         status = "source-backed"
         normalized_id = normalized[0]
+    elif positive_source_display:
+        status = "source-backed"
+        normalized_id = None
     elif old_item and old_item.get("rarity"):
         status = "marketplace-claimed"
         normalized_id = None
     else:
         status = "unknown"
         normalized_id = None
-    source_display = next(
-        (row.get("sourceNativeValue") for row in claims if row.get("sourceNativeValue")), None
-    )
     display = _rarity_display(status, old_item, source_display)
     return {
         "display": display,

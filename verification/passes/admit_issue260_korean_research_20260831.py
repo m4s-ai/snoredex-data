@@ -54,7 +54,7 @@ def research(
     derived_corroboration = SPECIMEN_CORROBORATION_URLS.get(specimen_id)
     corroborating_urls = [
         *(corroborating or []),
-        *([derived_corroboration] if derived_corroboration else []),
+        *([derived_corroboration] if derived_corroboration and derived_corroboration != source_url else []),
     ]
     return {
         "printId": f"KR:{set_code}:{number}:base",
@@ -86,8 +86,6 @@ SPECIMEN_CORROBORATION_URLS: dict[str, str | None] = {
     "SPEC-0442": "https://globalbunjang.com/product/404911233",
     "SPEC-0438": "https://globalbunjang.com/product/426224532",
     "SPEC-0437": "https://globalbunjang.com/product/420832203",
-    "SPEC-0440": "https://globalbunjang.com/product/386929037",
-    "SPEC-0444": "https://globalbunjang.com/product/423230156",
     "SPEC-0061": None,
 }
 
@@ -100,8 +98,6 @@ UNIT_CORROBORATION_SPECIMENS = {
     "U0561": "SPEC-0411",
     "U0579": "SPEC-0442",
     "U0677": "SPEC-0438",
-    "U0370": "SPEC-0444",
-    "U0623": "SPEC-0440",
     "U0780": "SPEC-0061",
     "U0790": "SPEC-0437",
 }
@@ -119,7 +115,7 @@ RESEARCH_ROWS = [
     research("U0233", "sv5a", "051/066", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2024007051", "pokemon-card-korea", specimen_id="SPEC-0441"),
     research("U0257", "m3", "062/080", ("C", "common"), "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e", "collectory", specimen_id="SPEC-0443"),
     research("U0260", "sv4K", "060/066", ("U", "uncommon"), "https://globalbunjang.com/product/407721760", "seller-listing-photo", specimen_id="SPEC-0445", corroborating=["https://www.pokepolio.com/cards/8ae3d25e-9838-4724-bcf3-cf5ed897d22b"]),
-    research("U0306", "sv4a", "145/190", ("N", "normal"), "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed", "collectory"),
+    research("U0306", "sv4a", "145/190", ("N", None), "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed", "collectory"),
     research("U0370", "sv9", "075/100", ("R", "rare"), "https://globalbunjang.com/product/423230156", "seller-listing-photo", specimen_id="SPEC-0444"),
     research("U0379", "SM-P", "017/SM-P", ("PROMO", "promo"), "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)", "bulbapedia", specimen_id="SPEC-0439", corroborating=["https://tcgbox.co.kr/product/%EC%9E%A0%EB%A7%8C%EB%B3%B4gx/3966/"]),
     research("U0402", "svM", "094/175", ("U", "uncommon"), "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f", "collectory", specimen_id="SPEC-0464"),
@@ -130,7 +126,7 @@ RESEARCH_ROWS = [
     research("U0557", "sm9", "115/095", ("HR", "hyper-rare"), "https://bulbapedia.bulbagarden.net/wiki/Eevee_%26_Snorlax-GX_(Team_Up_120)", "bulbapedia", corroborating=["https://collectory.cc/cards/d3bcbd09-e544-468a-a596-7745da852bba"]),
     research("U0561", "XY2", "066/080", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2014002066", "pokemon-card-korea", specimen_id="SPEC-0411"),
     research("U0579", "BW7", "055/070", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2013001055", "pokemon-card-korea", specimen_id="SPEC-0442"),
-    research("U0590", "mC", "568/742", ("N", "normal"), "https://collectory.cc/cards/f7c4636f-8030-40a7-86d6-994a0bc3283c", "collectory", specimen_id="SPEC-0459"),
+    research("U0590", "mC", "568/742", ("N", None), "https://collectory.cc/cards/f7c4636f-8030-40a7-86d6-994a0bc3283c", "collectory", specimen_id="SPEC-0459"),
     research("U0601", "s5a", "093/070", ("UR", "ultra-rare"), "https://bulbapedia.bulbagarden.net/wiki/Matchless_Fighters_(TCG)", "bulbapedia"),
     research("U0610", "sA", "010/023", ("fixed product", "fixed"), "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39", "collectory", specimen_id="SPEC-0462"),
     research("U0623", "DP", "006", ("PROMO", "promo"), "https://globalbunjang.com/product/386929037", "seller-listing-photo", specimen_id="SPEC-0440", card_name="Snorlax Lv.X", legacy_aliases=[("DP-P", "127")]),
@@ -138,8 +134,8 @@ RESEARCH_ROWS = [
     research("U0648", "svI", "046/066", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)", "bulbapedia", specimen_id="SPEC-0463", corroborating=["https://collectory.cc/cards/73c55006-427b-45ae-9a58-f7facd855820"]),
     research("U0677", "svLN", "010/022", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Stellar_Tera_Type_Starter_Set_(TCG)", "bulbapedia", specimen_id="SPEC-0438"),
     research("U0680", "20th", "047/072", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)", "bulbapedia"),
-    research("U0683", "mC", "567/742", ("N", "normal"), "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d", "collectory", specimen_id="SPEC-0458"),
-    research("U0763", "mC", "569/742", ("N", "normal"), "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec", "collectory", specimen_id="SPEC-0460"),
+    research("U0683", "mC", "567/742", ("N", None), "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d", "collectory", specimen_id="SPEC-0458"),
+    research("U0763", "mC", "569/742", ("N", None), "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec", "collectory", specimen_id="SPEC-0460"),
     research("U0780", "xsv2a", "143/165", ("not stated", None), "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
     research("U0785", "xm2a", "136/193", ("not stated", None), "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136", "cardmarket-listing-photo", specimen_id="SPEC-0410", corroborating=["https://globalbunjang.com/product/420832203"], legacy=["U0785", "U0790"]),
 ]
@@ -217,6 +213,17 @@ def apply_unit_corroboration(
     stale_unit["evidence"] = stale_unit["evidence"].replace(stale_sentence, "").rstrip()
     stale_specimen = specimen_by_id["SPEC-0061"]
     stale_specimen["citedBy"] = [ref for ref in stale_specimen.get("citedBy") or [] if ref != "U0775"]
+    for unit_id, specimen_id in (("U0370", "SPEC-0444"), ("U0623", "SPEC-0440")):
+        unit = by_id[unit_id]
+        unit["corroborated"] = False
+        unit["evidence"] = unit["evidence"].replace(
+            f" Independent positive specimen evidence retained as {specimen_id} shows the same "
+            "localized card identity and corroborates this unit without replacing its primary provider.",
+            "",
+        ).rstrip()
+        specimen_by_id[specimen_id]["citedBy"] = [
+            ref for ref in specimen_by_id[specimen_id].get("citedBy") or [] if ref != unit_id
+        ]
     for unit_id, specimen_id in UNIT_CORROBORATION_SPECIMENS.items():
         unit = by_id[unit_id]
         specimen = specimen_by_id[specimen_id]
