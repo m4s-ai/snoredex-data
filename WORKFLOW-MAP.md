@@ -24,8 +24,8 @@ HANDOVER link here instead of maintaining another command sequence.
 | Graph entity | Stable identity for a claim, release, set, work, source, specimen, finish, or physical printing | Identified by semantic ID, never array position |
 | Graph edge | Typed relation between entities with provenance | Must preserve positive support, scope, and conflicts |
 | Projection | Generated consumer view such as finish, checklist, collector, database, or site | Never an input to another truth decision |
-| Gate | A check at a defined scope and cost | A smaller gate may not claim full-gate coverage |
-| Run | Immutable source-first or refresh attempt with inputs and hashes | A failed/empty run is not evidence of absence |
+| Gate | A read-only check at a defined scope and cost | A smaller gate may not claim full-gate coverage or mutate state |
+| Run | Immutable source-first or refresh attempt with inputs and hashes | Only an eligible compatible complete run may back canonical staging; a failed/empty run is not evidence of absence |
 
 The following invariants apply to every path:
 
@@ -41,6 +41,8 @@ The following invariants apply to every path:
    photograph is positive evidence only for visible card properties; a Cardmarket filter, offer,
    count or omission is not a print-manifest assertion.
 6. Historical passes under `verification/archive/` are provenance, not recurring workflow.
+7. Reconciliation consumes the complete candidate set. It refines an unknown dimension only when
+   exactly one compatible value remains, so equivalent input order cannot change the result.
 
 ## 2. Canonical stores
 
@@ -68,6 +70,12 @@ The source-first raw runs and refresh candidates are immutable transport evidenc
 
 Their staging/record files are review surfaces. They do not write `units.json`,
 `finish_units.json`, or the graph verdicts without reconciliation.
+
+Canonical staging selects the newest complete retained run that is compatible with the acquisition
+contract and the scoped capability pin. Failed, incomplete, empty, or acquisition-incompatible runs
+remain retained but noncanonical. A replay may reuse the source run's bytes and retrieval metadata
+only under that same acquisition boundary; it renders with the current reviewed projection contract
+and capability state and never mutates the retained source run.
 
 ## 3. Full projection DAG
 

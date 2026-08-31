@@ -19,6 +19,16 @@ from authoritative_graph import identity_view, project_physical_evidence, valida
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("normalizedRarityId")
+    )["normalizedRarityId"] = "unknown"
+    assert any(
+        "rarity claim normalized id is not in the catalogue" in error
+        for error in validate(tampered)
+    )
     assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"

@@ -22,6 +22,7 @@ OUTPUT = ROOT / "verification" / "authoritative_graph.json"
 FINISH_UNITS = ROOT / "verification" / "finish_units.json"
 SPECIMENS = ROOT / "verification" / "specimens.json"
 UNITS = ROOT / "verification" / "units.json"
+RARITY_CATALOGUE = ROOT / "verification" / "rarity_catalogue.json"
 GRAPH_SCHEMA = "snoredex-authoritative-locality-graph"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 MARKING_ROLES = {"print-identity", "reverse-holo-treatment", "distribution-promo"}
@@ -1765,6 +1766,19 @@ def _validate_refs(
             errors.append(f"catalogue release edition edge is missing: {ref_id}")
 
 # Source-native rarity claims.
+def _validate_rarity_catalogue_refs(
+    errors: list[str],
+    rarities: dict[str, dict[str, Any]],
+    rarity_ids: set[str],
+) -> None:
+    for rarity_id, rarity in rarities.items():
+        normalized_id = rarity.get("normalizedRarityId")
+        if normalized_id is not None and (
+            not isinstance(normalized_id, str) or normalized_id not in rarity_ids
+        ):
+            errors.append(f"rarity claim normalized id is not in the catalogue: {rarity_id}")
+
+
 def _validate_rarities(
     errors: list[str],
     rarities: dict[str, dict[str, Any]],
@@ -1926,6 +1940,11 @@ def validate(
     profiles = by_type["finish-profile"]
     refs = by_type["catalogue-card-release-ref"]
     rarities = by_type["rarity-claim"]
+    rarity_ids = {
+        row["rarityId"]
+        for row in _read_json(RARITY_CATALOGUE).get("rarities", [])
+        if isinstance(row.get("rarityId"), str)
+    }
     profile_claims = by_type["profile-finish-claim"]
     aliases = by_type["catalogue-alias-assertion"]
     source_assertions = by_type["source-assertion"]
@@ -1934,6 +1953,7 @@ def validate(
     _validate_events(errors, events, local_sets, editions, graph_sources, relations)
     _validate_profiles(errors, profiles, local_sets, editions, graph_sources, relations)
     _validate_refs(errors, refs, releases, editions, relations)
+    _validate_rarity_catalogue_refs(errors, rarities, rarity_ids)
     _validate_rarities(errors, rarities, releases, graph_sources, relations)
     _validate_profile_claims(errors, profile_claims, profiles, refs, relations)
     _validate_aliases(errors, aliases, graph_sources, local_sets, relations)

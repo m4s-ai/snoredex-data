@@ -119,7 +119,7 @@ OFFICIAL = [
     card("2220", "SPEC-0281", "scD F", "111/159", "Snorlax-Slap-Push-Single-Strike-Tackle", ("no printed rarity symbol", None)),
     card("2395", "SPEC-0282", "sc1a F", "127/154", "Snorlax-Collect-Collapse", ("U", "uncommon")),
     card("2541", "SPEC-0283", "sc1b F", "119/153", "Snorlax-V-Swallow-Falling-Down", ("RR", "double-rare"), card_name="Snorlax V"),
-    card("2542", "SPEC-0284", "sc1b F", "120/153", "Snorlax-VMAX-G-Max-Fall", ("RRR", "triple-rare"), card_name="Snorlax VMAX"),
+    card("2542", "SPEC-0284", "sc1b F", "120/153", "Snorlax-VMAX-G-Max-Fall", ("RRR", None), card_name="Snorlax VMAX"),
     card("2707", "SPEC-0285", "sc1D F", "132/164", "Snorlax-Rolling-Tackle-Heavy-Impact", ("no printed rarity symbol", None)),
     card("2708", "SPEC-0286", "sc1D F", "133/164", "Snorlax-V-Swallow-Falling-Down", ("no printed rarity symbol", None), card_name="Snorlax V"),
     card("2856", "SPEC-0287", "AS5a", "117/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("RR", "double-rare"), "U0414", card_name="Eevee & Snorlax-GX"),
@@ -133,7 +133,7 @@ OFFICIAL = [
     card("6424", "SPEC-0295", "S10a F", "058/071", "Snorlax-Unfazed-Fat-Thumping-Snore", ("R", "rare"), "U0345"),
     card("6589", "SPEC-0296", "S10b F", "056/071", "Snorlax-Block-Collapse", ("R", "rare"), "U0203"),
     card("7016", "SPEC-0297", "SN F", "008/024", "Snorlax-Heavy-Impact", ("no printed rarity symbol", None), "U0771"),
-    card("7426", "SPEC-0298", "sc1b F", "165/153", "Snorlax-V-Swallow-Falling-Down", ("SR", "super-rare"), card_name="Snorlax V"),
+    card("7426", "SPEC-0298", "sc1b F", "165/153", "Snorlax-V-Swallow-Falling-Down", ("SR", None), card_name="Snorlax V"),
     card("8266", "SPEC-0299", "sv2a F", "143/165", "Snorlax-Voraciousness-Thudding-Press", ("U", "uncommon"), "U0104"),
     card("8304", "SPEC-0300", "sv2a F", "181/165", "Snorlax-Voraciousness-Thudding-Press", ("AR", "illustration-rare"), "U0050"),
     card("8943", "SPEC-0301", "sv4K F", "059/066", "Snorlax-Doll", ("U", "uncommon"), "U0261", card_name="Snorlax Doll"),
@@ -187,14 +187,14 @@ PHOTO_ROWS = [
         "photograph": "SPEC-0322.jpg",
     },
     {
-        **card("s10a077-nacg", "SPEC-0323", "S10a F", "077/071", "Snorlax-Unfazed-Fat-Thumping-Snore", ("CHR", "character-rare"), "U0169"),
+        **card("s10a077-nacg", "SPEC-0323", "S10a F", "077/071", "Snorlax-Unfazed-Fat-Thumping-Snore", ("CHR", None), "U0169"),
         "providerId": "nacg",
         "sourceUrl": "https://www.nacg.tw/product-details.php?id=149595",
         "cardImageUrl": "https://www.nacg.tw/files/item/149595.jpg?v=1748956270",
         "photograph": "SPEC-0323.jpg",
     },
     {
-        **card("s10a077-ruten", "SPEC-0324", "S10a F", "077/071", "Snorlax-Unfazed-Fat-Thumping-Snore", ("CHR", "character-rare"), "U0169"),
+        **card("s10a077-ruten", "SPEC-0324", "S10a F", "077/071", "Snorlax-Unfazed-Fat-Thumping-Snore", ("CHR", None), "U0169"),
         "providerId": "ruten",
         "sourceUrl": "https://www.ruten.com.tw/item/22223353127192/",
         "cardImageUrl": "https://a.rimg.com.tw/s6/76c/3b0/akb5566/9/18/22223353127192_302.jpeg",
@@ -204,7 +204,7 @@ PHOTO_ROWS = [
 
 
 SUPPLEMENTAL = [
-    card("existing-as5a203", "SPEC-0039", "AS5a", "203/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("SR", "super-rare"), "U0634", card_name="Eevee & Snorlax-GX"),
+    card("existing-as5a203", "SPEC-0039", "AS5a", "203/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("SR", None), "U0634", card_name="Eevee & Snorlax-GX"),
     card("existing-as5a222", "SPEC-0038", "AS5a", "222/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("HR", "hyper-rare"), "U0558", card_name="Eevee & Snorlax-GX"),
     card("existing-smp053", "SPEC-0029", "SM-P", "053", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("PROMO", "promo"), "U0414", card_name="Eevee & Snorlax-GX"),
     card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", "hyper-rare"), card_name="Snorlax VMAX"),
