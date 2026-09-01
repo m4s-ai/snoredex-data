@@ -28730,19 +28730,19 @@
     {
       "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:KR:BS2:30/40:base",
-      "origin": "authoritative-locality-migration",
+      "origin": "reviewed-evidence-issue-260",
       "payload": {
         "claimId": "CLAIM:source-first:KR:BS2:30/40:base",
         "claimKind": "card-release",
         "sourceKind": "source-first-record",
         "sourceId": "KR:BS2:30/40:base",
         "sourceRecord": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+        "retrievedAt": "2026-09-01",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
         "proposedTargetId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
         "materializedTargetId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
-        "reason": "positive source-first specimen/card record",
-        "retrievedAt": "2026-09-01"
+        "reason": "positive exact Korean card record and retained image"
       }
     },
     {
@@ -39586,7 +39586,7 @@
     {
       "entityType": "card-release",
       "entityId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
-      "origin": "authoritative-locality-migration",
+      "origin": "reviewed-evidence-issue-260",
       "payload": {
         "cardReleaseId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
         "setEditionId": "EDITION:KR:Korean:BS2",
@@ -39611,11 +39611,16 @@
         "legacyVariants": [],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://pokemoncard.co.kr/cards/detail/BS2010002030"
+          "https://collectory.cc/cards/d097dd94-c89c-4c3f-b3b6-d4d3b7baca79?lang=en",
+          "https://daldagury.com/tcg/pokemon/card/8473",
+          "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1",
+          "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+          "https://pokemonkorea.co.kr/templates/default/special_site/Wcs2014/battle_p.pdf"
         ],
         "sourceFirstRecordIds": [
           "KR:BS2:30/40:base"
-        ]
+        ],
+        "legacyCounterpartUnitIds": []
       }
     },
     {
@@ -63328,12 +63333,12 @@
     {
       "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-issue-260",
       "payload": {
         "cardReleaseId": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
         "setEditionId": "EDITION:KR:Korean:BS2",
         "collectorNumber": "30/40",
-        "origin": "print-identity-dryrun"
+        "origin": "issue-260-positive-evidence"
       }
     },
     {
@@ -106398,22 +106403,6 @@
     },
     {
       "entityType": "rarity-claim",
-      "entityId": "RARITYCLAIM:issue260:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "origin": "reviewed-evidence-issue-260",
-      "payload": {
-        "rarityClaimId": "RARITYCLAIM:issue260:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "cardReleaseId": "RELEASE:KR:Korean:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "sourceRecordId": "SET-SRC-SF-EBC661CA979D",
-        "sourceProvider": "mixed-positive-evidence",
-        "sourceVocabulary": "printed-Korean-card",
-        "sourceNativeValue": "not stated",
-        "normalizedRarityId": null,
-        "sourceProductKey": "https://globalbunjang.com/product/423487583",
-        "retrievedAt": "2026-08-30"
-      }
-    },
-    {
-      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:issue260:m3:062/080:Snorlax-Gormandizer-Collapse",
       "origin": "reviewed-evidence-issue-260",
       "payload": {
@@ -106488,7 +106477,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "R",
         "normalizedRarityId": "rare",
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106504,7 +106493,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "CHR",
         "normalizedRarityId": null,
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2022011126",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106520,7 +106509,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "R",
         "normalizedRarityId": "rare",
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2022010056",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106616,7 +106605,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "R",
         "normalizedRarityId": "rare",
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2020014084",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106648,7 +106637,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "no printed rarity symbol",
         "normalizedRarityId": "fixed",
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2022001126",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106808,7 +106797,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "no printed rarity symbol",
         "normalizedRarityId": "fixed",
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106888,7 +106877,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "S",
         "normalizedRarityId": "shiny-rare",
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2024001310",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106936,7 +106925,7 @@
         "sourceVocabulary": "printed-Korean-card",
         "sourceNativeValue": "no printed rarity symbol",
         "normalizedRarityId": "fixed",
-        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512",
         "retrievedAt": "2026-08-28"
       }
     },
@@ -106985,38 +106974,6 @@
         "sourceNativeValue": "U",
         "normalizedRarityId": "uncommon",
         "sourceProductKey": "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f",
-        "retrievedAt": "2026-08-30"
-      }
-    },
-    {
-      "entityType": "rarity-claim",
-      "entityId": "RARITYCLAIM:issue260:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "origin": "reviewed-evidence-issue-260",
-      "payload": {
-        "rarityClaimId": "RARITYCLAIM:issue260:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "cardReleaseId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "sourceRecordId": "SET-SRC-SF-BE4749055DF1",
-        "sourceProvider": "mixed-positive-evidence",
-        "sourceVocabulary": "printed-Korean-card",
-        "sourceNativeValue": "not stated",
-        "normalizedRarityId": null,
-        "sourceProductKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
-        "retrievedAt": "2026-08-30"
-      }
-    },
-    {
-      "entityType": "rarity-claim",
-      "entityId": "RARITYCLAIM:issue260:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-      "origin": "reviewed-evidence-issue-260",
-      "payload": {
-        "rarityClaimId": "RARITYCLAIM:issue260:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-        "cardReleaseId": "RELEASE:KR:Korean:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-        "sourceRecordId": "SET-SRC-SF-34389B3ACFA7",
-        "sourceProvider": "mixed-positive-evidence",
-        "sourceVocabulary": "printed-Korean-card",
-        "sourceNativeValue": "not stated",
-        "normalizedRarityId": null,
-        "sourceProductKey": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)",
         "retrievedAt": "2026-08-30"
       }
     },
@@ -113730,7 +113687,8 @@
           "localCode": "BS2",
           "state": "identified",
           "establishingEvidenceIds": [
-            "CLAIM:source-first:KR:BS2:30/40:base"
+            "CLAIM:source-first:KR:BS2:30/40:base",
+            "SET-SRC-SF-5398FFDCABCD"
           ],
           "localizationId": "LOCALIZATION:KR:ko"
         }
@@ -133320,12 +133278,12 @@
     {
       "entityType": "set-source-disposition",
       "entityId": "SET-SRC-SF-5398FFDCABCD",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-issue-260",
       "payload": {
         "sourceRecordId": "SET-SRC-SF-5398FFDCABCD",
         "disposition": "mapped",
         "targetRef": "LOCALSET:KR:BS2",
-        "reason": "provider locality and raw local code identify this local-set node"
+        "reason": "positive Korean source-first card records establish this local set"
       }
     },
     {
@@ -143637,7 +143595,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY2/XY2_066.jpg?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -143728,7 +143687,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S-P/S-P_101.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -143960,7 +143920,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SA/SA_G_010.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -144008,7 +143969,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVLN/SVLN_010.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -144243,7 +144205,8 @@
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -144351,7 +144314,8 @@
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -144517,6 +144481,8 @@
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
             "https://pokemoncard.co.kr/cards/detail/BS2022011097",
             "https://pokemoncard.co.kr/cards/detail/BS2022011126"
           ],
@@ -144536,7 +144502,8 @@
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -144779,7 +144746,8 @@
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_066.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -144834,7 +144802,8 @@
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_017.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_191.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -144954,6 +144923,7 @@
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
             "https://pokemoncard.co.kr/cards/detail/BS2022001126"
           ],
           "retrievedByPrintId": {
@@ -144969,7 +144939,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -145070,7 +145041,7 @@
     {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-SF-5398FFDCABCD",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-issue-260",
       "payload": {
         "sourceRecordId": "SET-SRC-SF-5398FFDCABCD",
         "sourceKind": "source-first-local-set-profile",
@@ -145091,9 +145062,9 @@
             "KR:BS2:30/40:base"
           ],
           "providers": [
+            "inspected-specimen",
             "pokemon-card-korea",
-            "retailer-listing",
-            "inspected-specimen"
+            "retailer-listing"
           ],
           "sourceUrls": [
             "https://collectory.cc/cards/d097dd94-c89c-4c3f-b3b6-d4d3b7baca79?lang=en",
@@ -145168,7 +145139,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -145246,6 +145218,7 @@
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
             "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed",
             "https://pokemoncard.co.kr/cards/detail/BS2024001145",
             "https://pokemoncard.co.kr/cards/detail/BS2024001310"
@@ -145266,7 +145239,8 @@
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_145.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -145402,7 +145376,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SH/SH_013_L.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -145656,6 +145631,7 @@
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
             "https://pokemoncard.co.kr/cards/detail/BS2020014084"
           ],
           "retrievedByPrintId": {
@@ -145671,7 +145647,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -145717,7 +145694,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5a/SV5a_051.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -145838,6 +145816,7 @@
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
             "https://pokemoncard.co.kr/cards/detail/BS2022010056"
           ],
           "retrievedByPrintId": {
@@ -145853,7 +145832,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -145945,7 +145925,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -146005,7 +145986,8 @@
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_567.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_568.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_569.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -146382,7 +146364,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/FXY/FXY_G_026.jpg?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -146532,7 +146515,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/PROMO/XYpromo_167.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -146861,7 +146845,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_094.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -147002,7 +146987,8 @@
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_143.png?w=512",
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_181.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -147050,7 +147036,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_075.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -147096,7 +147083,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW7/bw7_055.jpg?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -147232,7 +147220,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -147507,6 +147496,7 @@
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512",
             "https://pokemoncard.co.kr/cards/detail/BS2023023021"
           ],
           "retrievedByPrintId": {
@@ -147522,7 +147512,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -148209,6 +148200,7 @@
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
             "https://pokemoncard.co.kr/cards/detail/BS2019006059"
           ],
           "retrievedByPrintId": {
@@ -148224,7 +148216,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML_/SML_038.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -148429,7 +148422,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -148567,7 +148561,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4K/SV4K_060.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -148614,7 +148609,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -148848,7 +148844,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVI/SVI_046_L.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -148896,7 +148893,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -149030,7 +149028,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY10/XY10_057.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -149123,7 +149122,8 @@
           "markAssetUrls": [],
           "cardImageUrls": [
             "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M3/M3_062.png?w=512"
-          ]
+          ],
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
         }
       }
     },
@@ -233751,22 +233751,6 @@
     },
     {
       "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue260:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "relation": "asserts-rarity-for",
-      "toType": "card-release",
-      "toId": "RELEASE:KR:Korean:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue260:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "relation": "observed-by",
-      "toType": "set-source-record",
-      "toId": "SET-SRC-SF-EBC661CA979D",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue260:m3:062/080:Snorlax-Gormandizer-Collapse",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -234339,38 +234323,6 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-9AC7F89A0FCC",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue260:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "relation": "asserts-rarity-for",
-      "toType": "card-release",
-      "toId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue260:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "relation": "observed-by",
-      "toType": "set-source-record",
-      "toId": "SET-SRC-SF-BE4749055DF1",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue260:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-      "relation": "asserts-rarity-for",
-      "toType": "card-release",
-      "toId": "RELEASE:KR:Korean:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue260:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-      "relation": "observed-by",
-      "toType": "set-source-record",
-      "toId": "SET-SRC-SF-34389B3ACFA7",
       "provenance": {}
     },
     {
@@ -280386,7 +280338,7 @@
       "sourceId": "SET-SRC-SF-5398FFDCABCD",
       "disposition": "mapped",
       "targetRef": "LOCALSET:KR:BS2",
-      "reason": "provider locality and raw local code identify this local-set node"
+      "reason": "positive Korean source-first card records establish this local set"
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -281387,7 +281339,7 @@
       "sourceId": "KR:BS2:30/40:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037",
-      "reason": "positive source-first specimen/card record"
+      "reason": "positive exact Korean card record and retained image"
     },
     {
       "sourceKind": "source-first-record",
@@ -283379,8 +283331,8 @@
     }
   ],
   "summary": {
-    "entities": 7842,
-    "edges": 11720,
+    "entities": 7839,
+    "edges": 11714,
     "migrationInputs": 2720,
     "migrationDispositions": {
       "bounded-contradicted": 84,

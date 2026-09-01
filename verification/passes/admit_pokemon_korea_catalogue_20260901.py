@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -29,7 +30,6 @@ ASIA_MATRIX = ROOT / "verification" / "asia_locality_matrix.json"
 FINISH_SNAPSHOT = ROOT / "verification" / "finish_tcgdex_snapshot.json"
 SNAPSHOT = "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
 REVIEWED_AT = "2026-09-01"
-UNMAPPED_OFFICIAL_PRINT_ID = "KR:BS2:30/40:base"
 
 
 ALIASES = {
@@ -42,6 +42,7 @@ ALIASES = {
     "KR:sv4K:060/066:base": [("sv4K", "059")],
     "KR:svI:046/066:base": [("svIba", "046")],
 }
+RENDER_RARITY_PRINT_IDS = {row["printId"] for row in base.OFFICIAL}
 
 U0523_ORIGINAL_EVIDENCE = (
     "Validated absence. A collector-database search for S-P Snorlax promos returns "
@@ -88,6 +89,8 @@ def new_rows() -> list[dict[str, Any]]:
         "localSetCode": "SM30A",
         "localNumber": "060/080",
         "work": "Snorlax-Incredible-Snore",
+        "workMappingState": "mapped",
+        "workMappingBasis": "the official Korean detail carries 굉장한코골기 100",
         "legacy": [],
         "rarity": ("fixed product", "fixed"),
         "raritySourceUrl": "https://pokemoncard.co.kr/card/277",
@@ -116,18 +119,25 @@ def apply_official_rows(
     rows: list[dict[str, Any]], identities: dict[str, dict[str, Any]]
 ) -> None:
     for row in rows:
+        # Identity, rarity and Work evidence are separate observations even
+        # when one source happens to support more than one field. Make that
+        # boundary explicit before replacing any identity-level provenance.
+        if row.get("rarity") is not None:
+            rarity_source = (
+                row.get("cardImageUrl")
+                if row["printId"] in RENDER_RARITY_PRINT_IDS
+                else row.get("sourceUrl")
+            )
+            row.setdefault("raritySourceUrl", rarity_source)
+            row.setdefault(
+                "rarityProviderId", row.get("providerId", "pokemon-card-korea")
+            )
+            row.setdefault("rarityRetrievedAt", row.get("retrievedAt"))
         identity = identities.get(row["printId"])
         if identity is None:
             continue
         record_ids = identity["providerRecordIds"]
         source_url = official_url(record_ids[0])
-        # The official detail becomes the identity source, but it does not
-        # restate every source-native rarity captured by earlier research.
-        # Keep that field's evidence attached to the record that supplied it.
-        if row.get("rarity") is not None:
-            row.setdefault("raritySourceUrl", row.get("sourceUrl"))
-            row.setdefault("rarityProviderId", row.get("providerId"))
-            row.setdefault("rarityRetrievedAt", row.get("retrievedAt"))
         prior_urls = {
             *(row.get("corroboratingSourceUrls") or []),
             *([row["sourceUrl"]] if row.get("sourceUrl") else []),
@@ -162,8 +172,6 @@ def apply_prints(
     by_print = {row["printId"]: row for row in document["prints"]}
     by_print.update({row["printId"]: research.source_first_row(row) for row in rows})
     for source_row in rows:
-        if source_row["printId"] not in {"KR:FXY:026/036:base", "KR:SM30A:060/080:base"}:
-            continue
         for field in ("raritySourceUrl", "rarityProviderId", "rarityRetrievedAt", "raritySupportingSourceUrls"):
             if source_row.get(field) is not None:
                 by_print[source_row["printId"]][field] = source_row[field]
@@ -206,45 +214,104 @@ def apply_prints(
     document["meta"]["counts"]["admitted"] = len(document["prints"])
 
 
-def apply_unmapped_official_profile(
-    document: dict[str, Any], row: dict[str, Any]
-) -> dict[str, Any]:
-    """Refresh the official observation without inventing a Work mapping."""
-    profile = next(
-        item for item in document["sourceRecords"]
-        if item.get("raw", {}).get("printIds") == [row["printId"]]
-    )
-    profile["retrieved"] = row["retrievedAt"]
-    raw = profile["raw"]
-    raw["retrievedByPrintId"] = {row["printId"]: row["retrievedAt"]}
-    raw["evidenceSnapshot"] = row["evidenceSnapshot"]
-    raw["sourceUrls"] = sorted({
-        *raw["sourceUrls"], row["sourceUrl"],
-        *(row.get("corroboratingSourceUrls") or []),
-    })
-    raw["cardImageUrls"] = sorted({
-        *raw.get("cardImageUrls", []),
-        *([row["cardImageUrl"]] if row.get("cardImageUrl") else []),
-    })
-    return profile
+def projection_rows(
+    rows: list[dict[str, Any]],
+    prints: dict[str, Any],
+    graph: dict[str, Any],
+    identities: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Return one projection row for every retained official identity."""
+    by_print = {row["printId"]: row for row in rows}
+    source_rows = {row["printId"]: row for row in prints["prints"]}
+    releases_by_print: dict[str, list[dict[str, Any]]] = {}
+    for entity in graph["entities"]:
+        if entity.get("entityType") != "card-release":
+            continue
+        for print_id in entity.get("payload", {}).get("sourceFirstRecordIds") or []:
+            releases_by_print.setdefault(print_id, []).append(entity)
+    for print_id in sorted(identities):
+        if print_id in by_print:
+            continue
+        source = source_rows.get(print_id)
+        releases = releases_by_print.get(print_id) or []
+        if source is None or len(releases) != 1:
+            raise ValueError(
+                f"{print_id} needs one retained source-first row and card release"
+            )
+        release = releases[0]
+        payload = release["payload"]
+        by_print[print_id] = {
+            "printId": print_id,
+            "localSetCode": source["localSetCode"],
+            "localNumber": source["localNumber"],
+            "work": payload.get("work"),
+            "workMappingState": payload["workMappingState"],
+            "cardReleaseId": release["entityId"],
+            "legacy": payload.get("legacyCounterpartUnitIds") or [],
+            "legacyVariants": payload.get("legacyVariants") or [],
+            "rarity": None,
+            "specimenId": source.get("specimenId"),
+            "cardName": source["cardName"],
+            "providerId": source["providerId"],
+            "providerRecordId": source.get("providerRecordId"),
+            "providerRecordIds": source.get("providerRecordIds") or [],
+            "retrievedAt": source["retrievedAt"],
+            "sourceUrl": source["sourceUrl"],
+            "cardImageUrl": source.get("cardImageUrl"),
+            "alternateCardImageUrls": source.get("alternateCardImageUrls") or [],
+            "evidenceSnapshot": source.get("evidenceSnapshot"),
+            "corroborated": bool(source.get("corroborated")),
+            "corroboratingSourceUrls": source.get("corroboratingSourceUrls") or [],
+            "legacyIdentityAliases": payload.get("legacyIdentityAliases") or [],
+        }
+    projected = sorted(by_print.values(), key=lambda row: row["printId"])
+    projected_ids = {row["printId"] for row in projected}
+    if not set(identities).issubset(projected_ids):
+        raise ValueError("official Korean identities are not projection-complete")
+    for row in projected:
+        if row.get("rarity") is not None and not all(
+            row.get(field)
+            for field in ("raritySourceUrl", "rarityProviderId", "rarityRetrievedAt")
+        ):
+            raise ValueError(f"{row['printId']} has incomplete rarity provenance")
+    return projected
 
 
-def apply_unmapped_official_graph(
-    graph: dict[str, Any], profile: dict[str, Any], row: dict[str, Any]
-) -> None:
-    """Project fresh provenance while preserving issue #240's unmapped Work state."""
-    claim_id = f"CLAIM:source-first:{row['printId']}"
-    claim = next(
-        item["payload"] for item in graph["entities"]
-        if item.get("entityType") == "candidate-claim" and item["entityId"] == claim_id
+def apply_profiles(
+    document: dict[str, Any], rows: list[dict[str, Any]]
+) -> dict[str, dict[str, Any]]:
+    """Refresh observed rows while retaining richer positive profile context."""
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        grouped.setdefault(row["localSetCode"], []).append(row)
+    existing = {row["sourceRecordId"]: row for row in document["sourceRecords"]}
+    profiles: dict[str, dict[str, Any]] = {}
+    for code, group in grouped.items():
+        generated = base.build_profile(code, group, retrieved_at=REVIEWED_AT)
+        profile = deepcopy(existing.get(generated["sourceRecordId"], generated))
+        profile["retrieved"] = generated["retrieved"]
+        raw = profile["raw"]
+        fresh = generated["raw"]
+        for field in ("printIds", "retrievedByPrintId", "printedSetSize"):
+            raw[field] = fresh[field]
+        for field in ("providers", "sourceUrls", "markAssetUrls", "cardImageUrls"):
+            raw[field] = sorted({*raw.get(field, []), *fresh.get(field, [])})
+        snapshots = sorted({
+            row["evidenceSnapshot"] for row in group if row.get("evidenceSnapshot")
+        })
+        if len(snapshots) == 1:
+            raw["evidenceSnapshot"] = snapshots[0]
+        elif snapshots:
+            raw["evidenceSnapshots"] = snapshots
+        existing[profile["sourceRecordId"]] = profile
+        profiles[code] = profile
+    document["sourceRecords"] = sorted(existing.values(), key=lambda row: row["sourceRecordId"])
+    document["meta"]["counts"]["sourceRecords"] = len(document["sourceRecords"])
+    document["meta"]["counts"]["sourceFirstLocalSets"] = sum(
+        row["sourceKind"] == "source-first-local-set-profile"
+        for row in document["sourceRecords"]
     )
-    claim.update({"sourceRecord": row["sourceUrl"], "retrievedAt": row["retrievedAt"]})
-    source = next(
-        item for item in graph["entities"]
-        if item.get("entityType") == "set-source-record"
-        and item["entityId"] == profile["sourceRecordId"]
-    )
-    source["payload"] = profile
+    return profiles
 
 
 def apply_units(
@@ -294,7 +361,9 @@ def apply_units(
             })
 
 
-def apply_capabilities(document: dict[str, Any], evidence: dict[str, Any]) -> None:
+def apply_capabilities(
+    document: dict[str, Any], evidence: dict[str, Any], rows: list[dict[str, Any]]
+) -> None:
     base.apply_capabilities(document)
     document["meta"]["reviewedAt"] = REVIEWED_AT
     historical = next(
@@ -319,6 +388,31 @@ def apply_capabilities(document: dict[str, Any], evidence: dict[str, Any]) -> No
             retailer_edge["coverage"]["scripts"].append(value)
     if "identity" not in retailer_edge["positiveEvidenceCapabilities"]:
         retailer_edge["positiveEvidenceCapabilities"].append("identity")
+    seller = next(
+        row for row in document["surfaces"]
+        if row["surfaceId"] == "seller-listing-photos"
+    )
+    seller_edge = seller["coverageEdges"][0]
+    if "KR" not in seller_edge["coverage"]["localities"]:
+        seller_edge["coverage"]["localities"].append("KR")
+    if "rarity" not in seller_edge["positiveEvidenceCapabilities"]:
+        seller_edge["positiveEvidenceCapabilities"].append("rarity")
+    if "printed rarity" not in seller["query"]["expectedIdentifiers"]:
+        seller["query"]["expectedIdentifiers"].append("printed rarity")
+    pokumon = next(
+        row for row in document["surfaces"]
+        if row["surfaceId"] == "pokumon-search"
+    )
+    pokumon_exact = next(
+        edge for edge in pokumon["coverageEdges"]
+        if edge["edgeId"] == "pokumon-exact-card-finish-positive"
+    )
+    if "rarity" not in pokumon_exact["positiveEvidenceCapabilities"]:
+        pokumon_exact["positiveEvidenceCapabilities"].append("rarity")
+    if "explicit rarity or promo marker" not in pokumon["query"]["expectedIdentifiers"]:
+        pokumon["query"]["expectedIdentifiers"].append(
+            "explicit rarity or promo marker"
+        )
     surface = {
         "surfaceId": "pokemon-card-korea-card-search",
         "providerId": "pokemon-card-korea",
@@ -437,13 +531,90 @@ def apply_capabilities(document: dict[str, Any], evidence: dict[str, Any]) -> No
         "validatesEdges": ["pokemon-card-korea-sm30a-fixed-product-positive"],
         "outcome": "The official product statement and bounded named-deck membership positively support SM30A 060/080 as a fixed constructed-deck card; no finish or absence conclusion is attached.",
     }
+    retained_rarity_rows = [
+        row for row in rows
+        if row.get("rarityProviderId") == "pokemon-card-korea"
+        and str(row.get("raritySourceUrl") or "").startswith(
+            "https://pokemoncard.co.kr/cards/detail/"
+        )
+    ]
+    retained_rarity_urls = sorted({
+        row["raritySourceUrl"] for row in retained_rarity_rows
+    })
+    surface["match"]["urlPrefixes"] = sorted({
+        official_url(record_id)
+        for identity in evidence["identities"]
+        for record_id in identity["providerRecordIds"]
+    } - set(retained_rarity_urls))
+    rarity_surface = {
+        "surfaceId": "pokemon-card-korea-retained-rarity-details",
+        "providerId": "pokemon-card-korea",
+        "label": "Pokémon Korea retained exact detail rarity observations",
+        "match": {"urlPrefixes": retained_rarity_urls, "nonUrlEvidenceIds": []},
+        "state": "incomplete",
+        "failureState": "Only the exact retained detail observations listed by this surface carry rarity capability; other catalogue details remain identity-only unless separately observed.",
+        "accessMode": "browser",
+        "adapterState": "planned",
+        "lastCheckedAt": max(row["rarityRetrievedAt"] for row in retained_rarity_rows),
+        "freshnessPolicy": "Retain each exact field observation with its original date; never generalize rarity capability to the name-search surface or an uninspected detail.",
+        "query": {
+            "method": "GET",
+            "endpoint": "https://pokemoncard.co.kr/cards/detail/{providerRecordId}",
+            "parameters": ["the exact retained provider record ids only"],
+            "pagination": "not paginated; every retained detail establishes only its named card",
+            "expectedIdentifiers": ["Korean card identity", "printed rarity"],
+        },
+        "finishCapability": {
+            "mode": "none", "vocabulary": [],
+            "publicationForm": "official catalogue detail/render, not a physical finish record",
+            "closedWithinScope": False,
+        },
+        "coverageEdges": [{
+            "edgeId": "pokemon-card-korea-retained-rarity-details-positive",
+            "coverage": {
+                "localities": ["KR"], "languages": ["Korean"], "scripts": ["Hang"],
+                "productCategories": ["card"],
+                "timeRange": {"start": None, "end": None, "basis": "the exact retained field observations only"},
+            },
+            "positiveEvidenceCapabilities": ["identity", "image", "language", "card-existence", "card-release", "local-set-identifier", "collector-number", "rarity", "set-membership", "product-membership", "illustrator"],
+            "exhaustive": False,
+            "absenceCapability": {"enabled": False, "dimensions": [], "exactScopes": [], "rationale": "Each retained detail proves only its observed positive fields; other rows and unavailable routes remain unknown."},
+            "knownPositiveObservationId": "obs-pokemon-card-korea-retained-rarity-details",
+            "boundary": {
+                "outsideScope": ["unlisted Korean details", "catalogue-wide rarity", "physical finish", "absence"],
+                "zeroResultMeans": "unknown",
+                "challenge": "Field-level rarity provenance is narrower than the bounded name-search response.",
+            },
+        }],
+    }
+    rarity_observation = {
+        "observationId": "obs-pokemon-card-korea-retained-rarity-details",
+        "surfaceId": rarity_surface["surfaceId"], "kind": "known-positive",
+        "queryUrl": rarity_surface["query"]["endpoint"],
+        "queryParameters": {"sourceUrls": retained_rarity_urls},
+        "retrievedAt": rarity_surface["lastCheckedAt"],
+        "fixtureRef": {"kind": "inline-record", "record": {
+            "observations": [{
+                "printId": row["printId"],
+                "sourceUrl": row["raritySourceUrl"],
+                "retrievedAt": row["rarityRetrievedAt"],
+                "sourceNativeValue": row["rarity"][0],
+            } for row in retained_rarity_rows],
+            "absenceCapability": False, "finishCapability": False,
+        }},
+        "expectedIdentifiers": sorted(row["printId"] for row in retained_rarity_rows),
+        "validatesEdges": ["pokemon-card-korea-retained-rarity-details-positive"],
+        "outcome": "The retained exact detail observations support only their recorded card identities and source-native rarity values; no catalogue-wide rarity, finish or absence capability is inferred.",
+    }
     surfaces = {row["surfaceId"]: row for row in document["surfaces"]}
     surfaces[surface["surfaceId"]] = surface
     surfaces[fixed_surface["surfaceId"]] = fixed_surface
+    surfaces[rarity_surface["surfaceId"]] = rarity_surface
     document["surfaces"] = list(surfaces.values())
     observations = {row["observationId"]: row for row in document["observations"]}
     observations[observation["observationId"]] = observation
     observations[fixed_observation["observationId"]] = fixed_observation
+    observations[rarity_observation["observationId"]] = rarity_observation
     document["observations"] = list(observations.values())
 
 
@@ -528,28 +699,14 @@ def add_graph_corroboration(graph: dict[str, Any], rows: list[dict[str, Any]]) -
 
 
 def normalize_graph_semantics(graph: dict[str, Any]) -> None:
-    sm30a_release_id = "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore"
     for entity in graph["entities"]:
         payload = entity.get("payload", {})
-        if entity.get("entityType") == "card-release" \
-                and entity.get("entityId") == sm30a_release_id:
-            # This new source-native release needs no legacy equivalence assertion:
-            # the retained official detail carries the matching attack directly.
-            payload["workMappingState"] = "mapped"
-        elif entity.get("entityType") == "rarity-claim" \
+        if entity.get("entityType") == "rarity-claim" \
                 and payload.get("sourceVocabulary") == "printed-Korean-card" \
                 and payload.get("sourceNativeValue") in {"HR", "UR"}:
             # rarity_catalogue.json deliberately leaves historical Korean HR and
             # unqualified UR unmapped because their meaning varies by era.
             payload["normalizedRarityId"] = None
-    for edge in graph["edges"]:
-        if edge.get("fromType") == "card-release" \
-                and edge.get("fromId") == sm30a_release_id \
-                and edge.get("relation") == "implements":
-            edge["provenance"] = {
-                "state": "mapped",
-                "basis": "the official Korean detail carries 굉장한코골기 100",
-            }
 
 
 def main() -> int:
@@ -562,7 +719,7 @@ def main() -> int:
     if len(identities) != 45 or sum(len(row["providerRecordIds"]) for row in identities.values()) != 47:
         raise SystemExit("Pokémon Korea snapshot must retain 45 identities / 47 endpoints")
 
-    rows = base.OFFICIAL + base.PROMOS + research.RESEARCH_ROWS + new_rows()
+    rows = deepcopy(base.OFFICIAL + base.PROMOS + research.RESEARCH_ROWS + new_rows())
     for row in rows:
         row.setdefault("legacyVariants", sorted({
             str(research.UNITS_BY_ID[item].get("variant") or "base") for item in row["legacy"]
@@ -579,15 +736,11 @@ def main() -> int:
     before = {label: base.encoded(value) for label, value in documents.items()}
 
     apply_prints(documents["prints"], rows, identities)
-    profiles = base.apply_profiles(documents["sources"], rows, retrieved_at=REVIEWED_AT)
-    unmapped_row = next(
-        row for row in documents["prints"]["prints"]
-        if row["printId"] == UNMAPPED_OFFICIAL_PRINT_ID
+    rows = projection_rows(
+        rows, documents["prints"], documents["graph"], identities
     )
-    profiles[unmapped_row["localSetCode"]] = apply_unmapped_official_profile(
-        documents["sources"], unmapped_row
-    )
-    apply_capabilities(documents["capabilities"], evidence)
+    profiles = apply_profiles(documents["sources"], rows)
+    apply_capabilities(documents["capabilities"], evidence, rows)
     apply_units(documents["units"], rows, identities)
     if not args.check:
         # project_physical_evidence reads units.json to refresh legacy claim sources.
@@ -604,9 +757,6 @@ def main() -> int:
         documents["graph"], mappings = base.apply_graph(
             documents["graph"], profiles, rows, asserted_at=REVIEWED_AT
         )
-    apply_unmapped_official_graph(
-        documents["graph"], profiles[unmapped_row["localSetCode"]], unmapped_row
-    )
     normalize_graph_semantics(documents["graph"])
     add_graph_corroboration(documents["graph"], rows)
     legacy_ids = sorted(set(base.ISSUE_UNITS) | {"U0586"})

@@ -144,7 +144,9 @@ def write(path: Path, payload: dict[str, Any]) -> None:
 
 
 def release_id(row: dict[str, Any]) -> str:
-    return f"RELEASE:KR:Korean:{row['localSetCode']}:{row['localNumber']}:{row['work']}"
+    return row.get("cardReleaseId") or (
+        f"RELEASE:KR:Korean:{row['localSetCode']}:{row['localNumber']}:{row['work']}"
+    )
 
 
 def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
@@ -436,6 +438,10 @@ def remove_obsolete_release(
 
 def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dict[str, Any]) -> None:
     rid = release_id(row)
+    work = row.get("work")
+    work_mapping_state = row.get("workMappingState") or (
+        "mapped-by-explicit-equivalence" if work else "needs-explicit-equivalence"
+    )
     legacy_claims, finish_claims, heritage = remove_obsolete_release(graph, row, rid)
     # A previous run may have materialized a release before its Work key was
     # known.  Replace any derived rarity claim for that same local identity so
@@ -468,7 +474,7 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     upsert_migration(graph, {"sourceKind": "source-first-record", "sourceId": row["printId"], "disposition": "established-and-mapped", "targetRef": rid, "reason": claim["reason"]})
     claim_ids = sorted([claim_id, *(item[0] for item in legacy_claims)])
     source_records = sorted({row["sourceUrl"], *(item[1] for item in legacy_claims if item[1])})
-    payload = {"cardReleaseId": rid, "setEditionId": edition_id, "locality": "KR", "language": "Korean", "script": "Hang", "localSetCode": row["localSetCode"], "localNumber": row["localNumber"], "localIdentifierKnown": True, "state": "identified", "work": row["work"], "workMappingState": "mapped-by-explicit-equivalence", "viaLegacySetCode": None, "viaLegacyNumber": None, "claimIds": claim_ids, "establishingClaimIds": claim_ids, "nonEstablishingClaimIds": [], "legacyVariants": sorted(set(heritage["legacyVariants"]) | set(row["legacyVariants"])), "legacyProducts": heritage["legacyProducts"], "sourceRecords": source_records, "sourceFirstRecordIds": [row["printId"]], "legacyCounterpartUnitIds": row["legacy"]}
+    payload = {"cardReleaseId": rid, "setEditionId": edition_id, "locality": "KR", "language": "Korean", "script": "Hang", "localSetCode": row["localSetCode"], "localNumber": row["localNumber"], "localIdentifierKnown": True, "state": "identified", "work": work, "workMappingState": work_mapping_state, "viaLegacySetCode": None, "viaLegacyNumber": None, "claimIds": claim_ids, "establishingClaimIds": claim_ids, "nonEstablishingClaimIds": [], "legacyVariants": sorted(set(heritage["legacyVariants"]) | set(row["legacyVariants"])), "legacyProducts": heritage["legacyProducts"], "sourceRecords": source_records, "sourceFirstRecordIds": [row["printId"]], "legacyCounterpartUnitIds": row["legacy"]}
     for field in ("releaseDate", "releaseDatePrecision", "releaseApproximate"):
         if row.get(field) is not None:
             payload[field] = row[field]
@@ -480,7 +486,23 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     for finish_claim_id in finish_claims:
         upsert_edge(graph, "candidate-claim", finish_claim_id, "proposes-for", "card-release", rid)
     upsert_edge(graph, "card-release", rid, "belongs-to", "set-edition", edition_id)
-    upsert_edge(graph, "card-release", rid, "implements", "work", f"WORK:{row['work']}", {"state": "mapped-by-explicit-equivalence", "basis": "exact Korean printed attacks and card traits"})
+    graph["edges"] = [
+        edge for edge in graph["edges"]
+        if not (
+            edge.get("fromType") == "card-release"
+            and edge.get("fromId") == rid
+            and edge.get("relation") == "implements"
+        )
+    ]
+    if work:
+        upsert_edge(
+            graph, "card-release", rid, "implements", "work", f"WORK:{work}",
+            {
+                "state": work_mapping_state,
+                "basis": row.get("workMappingBasis")
+                or "exact Korean printed attacks and card traits",
+            },
+        )
     upsert_entity(graph, "catalogue-card-release-ref", rid, {"cardReleaseId": rid, "setEditionId": edition_id, "collectorNumber": row["localNumber"], "origin": "issue-260-positive-evidence"}, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
@@ -555,6 +577,10 @@ def apply_graph(
     for row in rows:
         apply_release_graph(graph, profiles[row["localSetCode"]], row)
         row_asserted_at = row.get("retrievedAt") or asserted_at
+        if row["legacy"] and not row.get("work"):
+            raise ValueError(
+                f"{row['printId']} cannot map legacy units without an explicit Work"
+            )
         for legacy_id in row["legacy"]:
             apply_mapping_graph(graph, row, legacy_id, asserted_at=row_asserted_at)
             mappings.append(mapping(row, legacy_id, asserted_at=row_asserted_at))

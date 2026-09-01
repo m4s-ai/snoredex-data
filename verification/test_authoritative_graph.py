@@ -130,7 +130,7 @@ def main() -> None:
         )["identities"]
     }
     assert len(official_korean) == 45
-    bs2_print_id = korean_catalogue_pass.UNMAPPED_OFFICIAL_PRINT_ID
+    bs2_print_id = "KR:BS2:30/40:base"
     bs2_profile = next(
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "set-source-record"
@@ -170,6 +170,48 @@ def main() -> None:
         + korean_catalogue_pass.base.PROMOS
         + korean_catalogue_pass.research.RESEARCH_ROWS
         + korean_catalogue_pass.new_rows()
+    )
+    for row in catalogue_rows:
+        row.setdefault("legacyVariants", sorted({
+            str(korean_catalogue_pass.research.UNITS_BY_ID[item].get("variant") or "base")
+            for item in row["legacy"]
+        }))
+    korean_catalogue_pass.apply_official_rows(catalogue_rows, catalogue_identities)
+    projected_prints = korean_catalogue_pass.read(korean_catalogue_pass.PRINTS)
+    korean_catalogue_pass.apply_prints(
+        projected_prints, catalogue_rows, catalogue_identities
+    )
+    catalogue_rows = korean_catalogue_pass.projection_rows(
+        catalogue_rows, projected_prints, graph, catalogue_identities
+    )
+    assert len(catalogue_rows) == 52
+    assert {row["printId"] for row in catalogue_rows} == (
+        official_korean | unmatched_korean
+    )
+    assert {
+        row["printId"] for row in catalogue_rows if not row.get("work")
+    } == {bs2_print_id}
+    assert all(
+        all(row.get(field) for field in (
+            "raritySourceUrl", "rarityProviderId", "rarityRetrievedAt"
+        ))
+        for row in catalogue_rows if row.get("rarity") is not None
+    )
+    unsupported_rarity_prints = {
+        "KR:m2a:136/193:base",
+        "KR:xsv2a:143/165:base",
+        "KR:xm2a:136/193:base",
+    }
+    assert all(
+        row.get("rarity") is None
+        for row in catalogue_rows if row["printId"] in unsupported_rarity_prints
+    )
+    assert not any(
+        entity["entityType"] == "rarity-claim"
+        and entity["payload"].get("cardReleaseId")
+        == korean_catalogue_pass.base.release_id(row)
+        for row in catalogue_rows if row["printId"] in unsupported_rarity_prints
+        for entity in graph["entities"]
     )
     fxy_row = next(row for row in catalogue_rows if row["printId"] == "KR:FXY:026/036:base")
     assert fxy_row["corroboratingSourceUrls"] == [
@@ -230,7 +272,8 @@ def main() -> None:
     assert fixed_product_rarities.issubset(rarity_provenance)
     capabilities = korean_catalogue_pass.read(korean_catalogue_pass.CAPABILITIES)
     korean_catalogue_pass.apply_capabilities(
-        capabilities, korean_catalogue_pass.read(korean_catalogue_pass.EVIDENCE)
+        capabilities, korean_catalogue_pass.read(korean_catalogue_pass.EVIDENCE),
+        catalogue_rows,
     )
     korea_edge = next(
         edge for surface in capabilities["surfaces"]
@@ -238,35 +281,77 @@ def main() -> None:
         for edge in surface["coverageEdges"]
     )
     assert "rarity" not in korea_edge["positiveEvidenceCapabilities"]
-    korean_catalogue_pass.apply_official_rows(catalogue_rows, catalogue_identities)
+    exact_rarity_surface = next(
+        surface for surface in capabilities["surfaces"]
+        if surface["surfaceId"] == "pokemon-card-korea-retained-rarity-details"
+    )
+    assert "rarity" in exact_rarity_surface["coverageEdges"][0][
+        "positiveEvidenceCapabilities"
+    ]
+    assert set(exact_rarity_surface["match"]["urlPrefixes"]) == {
+        row["raritySourceUrl"] for row in catalogue_rows
+        if row.get("rarityProviderId") == "pokemon-card-korea"
+        and row["raritySourceUrl"].startswith(
+            "https://pokemoncard.co.kr/cards/detail/"
+        )
+    }
     for row in catalogue_rows:
+        if row.get("rarity") is not None:
+            persisted = source_first_rows[row["printId"]]
+            assert persisted["raritySourceUrl"] == row["raritySourceUrl"]
+            assert persisted["rarityProviderId"] == row["rarityProviderId"]
+            assert persisted["rarityRetrievedAt"] == row["rarityRetrievedAt"]
         if row["printId"] not in official_korean:
             continue
-        source_url, retrieved_at = rarity_provenance[row["printId"]]
-        assert row["raritySourceUrl"] == source_url
-        assert row["rarityRetrievedAt"] == retrieved_at
-        rarity_id = (
-            "RARITYCLAIM:issue260:"
-            + korean_catalogue_pass.base.release_id(row).removeprefix(
-                "RELEASE:KR:Korean:"
+        if row.get("rarity") is not None:
+            source_url, retrieved_at = rarity_provenance[row["printId"]]
+            assert row["raritySourceUrl"] == source_url
+            assert row["rarityRetrievedAt"] == retrieved_at
+            rarity_id = (
+                "RARITYCLAIM:issue260:"
+                + korean_catalogue_pass.base.release_id(row).removeprefix(
+                    "RELEASE:KR:Korean:"
+                )
             )
-        )
-        rarity_claim = next(
-            entity["payload"] for entity in graph["entities"]
-            if entity["entityId"] == rarity_id
-        )
-        assert rarity_claim["sourceProductKey"] == source_url
-        assert rarity_claim["retrievedAt"] == retrieved_at
-        if row.get("raritySupportingSourceUrls"):
-            assert rarity_claim["supportingSourceUrls"] == row["raritySupportingSourceUrls"]
-            source_profile = next(
+            rarity_claim = next(
                 entity["payload"] for entity in graph["entities"]
-                if entity["entityType"] == "set-source-record"
-                and entity["entityId"] == rarity_claim["sourceRecordId"]
+                if entity["entityId"] == rarity_id
             )
-            assert set(row["raritySupportingSourceUrls"]) < set(
-                source_profile["raw"]["sourceUrls"]
-            )
+            assert rarity_claim["sourceProductKey"] == source_url
+            assert rarity_claim["retrievedAt"] == retrieved_at
+            if row.get("raritySupportingSourceUrls"):
+                assert rarity_claim["supportingSourceUrls"] == row["raritySupportingSourceUrls"]
+                source_profile = next(
+                    entity["payload"] for entity in graph["entities"]
+                    if entity["entityType"] == "set-source-record"
+                    and entity["entityId"] == rarity_claim["sourceRecordId"]
+                )
+                assert set(row["raritySupportingSourceUrls"]) < set(
+                    source_profile["raw"]["sourceUrls"]
+                )
+        profile = next(
+            entity["payload"] for entity in graph["entities"]
+            if entity["entityType"] == "set-source-record"
+            and row["printId"] in entity["payload"].get("raw", {}).get("printIds", [])
+        )
+        assert profile["raw"]["retrievedByPrintId"][row["printId"]] == (
+            row["retrievedAt"]
+        )
+        assert row["sourceUrl"] in profile["raw"]["sourceUrls"]
+        if row.get("cardImageUrl"):
+            assert row["cardImageUrl"] in profile["raw"]["cardImageUrls"]
+        candidate = next(
+            entity["payload"] for entity in graph["entities"]
+            if entity["entityId"] == f"CLAIM:source-first:{row['printId']}"
+        )
+        assert candidate["sourceRecord"] == row["sourceUrl"]
+        assert candidate["retrievedAt"] == row["retrievedAt"]
+        release = next(
+            entity["payload"] for entity in graph["entities"]
+            if entity["entityType"] == "card-release"
+            and row["printId"] in entity["payload"].get("sourceFirstRecordIds", [])
+        )
+        assert row["sourceUrl"] in release["sourceRecords"]
     source_registry = {
         row["canonicalUrl"]: row for row in json.loads(
             (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")
