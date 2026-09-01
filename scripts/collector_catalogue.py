@@ -81,6 +81,8 @@ CUMULATIVE_CHECKLIST_REKEYS = {
     "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
 }
 CUMULATIVE_CATALOGUE_REKEYS = {
+    "item-d86cb23d-68d9-5725-9bce-462525985029":
+        "item-f54a780c-14bf-5178-b029-00891c08ce6c",
     "item-b48b5aad-6829-51d0-98fe-f1baaa08ffd3":
         "item-1c8618e5-967b-560a-a982-c21979091df6",
 }
