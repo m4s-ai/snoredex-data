@@ -73,6 +73,7 @@ def new_rows() -> list[dict[str, Any]]:
     fxy = research.research(
         "U0586", "FXY", "026/036", ("fixed product", "fixed"),
         official_url("ST2014001026"), "pokemon-card-korea",
+        corroborating=["https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"],
         legacy_aliases=ALIASES["KR:FXY:026/036:base"],
     )
     fxy["retrievedAt"] = REVIEWED_AT
@@ -378,7 +379,8 @@ def apply_asia_matrix(document: dict[str, Any]) -> None:
             track.update({
                 "terminalState": "complete",
                 "scope": "The bounded official Korean 잠만보 exact-name slice and all 45 retained positive local identities.",
-                "cardSliceIds": ["pokemon-korea-snorlax-positive"], "gapIds": [],
+                "cardSliceIds": ["pokemon-korea-snorlax-positive"],
+                "gapIds": ["official-korean-historical-positive-frontier"],
                 "evidenceRefs": ["source-first:KR:FXY:026/036:base", "source-first:KR:SM30A:060/080:base"],
                 "retryCondition": "Rerun the exact Korean name slice for deltas; preserve new positives as candidates and never treat a missing row as absence.",
             })

@@ -141,7 +141,7 @@ def main() -> None:
         if (row["locality"], row["providerId"]) == ("KR", "pokemon-card-korea")
     ]
     assert len(korean_official) == 45
-    assert sum(row["corroborated"] is False for row in korean_official) == 21
+    assert sum(row["corroborated"] is False for row in korean_official) == 20
     new_korean = {
         row["printId"]: row for row in korean_official
         if row["printId"] in {
@@ -151,7 +151,7 @@ def main() -> None:
     assert set(new_korean) == {
         "KR:FXY:026/036:base", "KR:SM30A:060/080:base",
     }
-    assert new_korean["KR:FXY:026/036:base"]["corroborated"] is False
+    assert new_korean["KR:FXY:026/036:base"]["corroborated"] is True
     assert new_korean["KR:SM30A:060/080:base"]["corroborated"] is False
     independently_corroborated_promos = {
         "KR:S-P:101:base", "KR:SM-P:140:base", "KR:XY-P:167:base",

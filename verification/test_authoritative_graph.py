@@ -141,6 +141,20 @@ def main() -> None:
         + korean_catalogue_pass.research.RESEARCH_ROWS
         + korean_catalogue_pass.new_rows()
     )
+    fxy_row = next(row for row in catalogue_rows if row["printId"] == "KR:FXY:026/036:base")
+    assert fxy_row["corroboratingSourceUrls"] == [
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
+    ]
+    assert fxy_row["corroborated"] is True
+    assert source_first_rows[fxy_row["printId"]]["corroboratingSourceUrls"] == (
+        fxy_row["corroboratingSourceUrls"]
+    )
+    units = {
+        row["unitId"]: row for row in json.loads(
+            (ROOT / "verification/units.json").read_text(encoding="utf-8")
+        )
+    }
+    assert units["U0586"]["corroborated"] is True
     rarity_provenance = {
         row["printId"]: (row["sourceUrl"], row["retrievedAt"])
         for row in catalogue_rows if row["printId"] in official_korean

@@ -27,6 +27,15 @@ class CompletenessGateTests(unittest.TestCase):
         _, errors = gate.validate_inputs()
         self.assertEqual(errors, [])
 
+    def test_korean_historical_gap_survives_summary(self) -> None:
+        inputs, errors = gate.validate_inputs()
+        self.assertEqual(errors, [])
+        gaps = {row["id"]: row for row in gate.summary(inputs)["gaps"]}
+        self.assertEqual(
+            gaps["official-korean-historical-positive-frontier"]["state"],
+            "needs-evidence",
+        )
+
     def test_missing_svqp_regression_fails(self) -> None:
         mutated = copy.deepcopy(self.asia)
         mutated["minimumRegressions"] = [
