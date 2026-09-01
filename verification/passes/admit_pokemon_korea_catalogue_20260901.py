@@ -232,6 +232,9 @@ def apply_units(
                 continue
             marker = " OFFICIAL KOREAN CATALOGUE 2026-09-01:"
             evidence = unit.get("evidence", "").split(marker, 1)[0].rstrip()
+            if unit_id == "U0260":
+                evidence = ""
+            evidence_prefix = evidence + marker if evidence else marker.lstrip()
             unit.update({
                 "sourceUrl": source_url,
                 "sourceType": "Pokémon Korea official card catalogue detail",
@@ -241,7 +244,7 @@ def apply_units(
                 "corroborated": bool(row["corroborated"]),
                 "checkedAt": REVIEWED_AT,
                 "evidence": (
-                    evidence + marker + f" {source_url} positively identifies {identity['name']} "
+                    evidence_prefix + f" {source_url} positively identifies {identity['name']} "
                     f"{identity['collectorNumber']} in {identity['product']} and credits "
                     f"{identity['illustrator']}. This supports identity and Work mapping only; "
                     "no finish or absence is inferred."

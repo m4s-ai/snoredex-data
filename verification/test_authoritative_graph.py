@@ -182,6 +182,8 @@ def main() -> None:
             (ROOT / "verification/units.json").read_text(encoding="utf-8")
         )
     }
+    assert "대지의 그릇" not in units["U0260"]["evidence"]
+    assert "잠만보인형 060/066" in units["U0260"]["evidence"]
     assert units["U0586"]["corroborated"] is True
     rarity_provenance = {
         row["printId"]: (
