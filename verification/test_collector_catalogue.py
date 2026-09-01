@@ -247,6 +247,20 @@ def main() -> None:
         assert bs2["toItemIds"] == [new_bs2]
         assert bs2["changeKind"] == "rekey-1:1"
         assert bs2["automaticStateAction"] == "preserve"
+    old_promo_reverse = "item-ba258f3e-4106-5795-87f4-97d9c19a3e42"
+    promo_mirror_targets = {
+        "item-9e12f0a7-cf6b-58ac-bb90-0d82a72559e8",
+        "item-c7eec9be-fb9a-5be1-a093-39b147541339",
+    }
+    for route in routes.values():
+        promo_reverse = next(
+            row for row in route["transitions"]
+            if old_promo_reverse in row["fromItemIds"]
+        )
+        assert set(promo_reverse["toItemIds"]) == promo_mirror_targets
+        assert promo_reverse["changeKind"] == "split-1:N"
+        assert promo_reverse["automaticStateAction"] == "none"
+        assert promo_reverse["reconciliation"] == "requires-user-resolution"
     assert {
         row["changeKind"] for row in deployed_route["transitions"]
     } == {"retained", "rekey-1:1", "retired-1:0", "split-1:N", "merge-N:1", "unresolved"}
