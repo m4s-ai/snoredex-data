@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-09-01",
-  "projectionVersion": "c94b250a29f4c37eea11fb0ae8283979eaa722c6a81aced2f7144c6851be8420",
+  "projectionVersion": "71a5b5345dca6d83339e2d80a62bc80da3e07bfc824ed970eb10b1adc47ce4cd",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -34920,15 +34920,65 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:fb6541c22a59ee3d8a463709",
+              "semanticPrintingId": "PRINTING:fb6541c22a59ee3d8a463709",
+              "cardReleaseId": "RELEASE:WEST:Italian:BA20:MWT:Snorlax-Incredible-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "deck-logo",
+                  "role": "distribution-promo",
+                  "text": "Mewtwo"
+                }
+              ],
+              "distribution": {
+                "kind": "fixed-deck",
+                "name": "Battle Academy 2020 Mewtwo Deck"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0009",
+              "sourcePrintingId": "F0009-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:fb6541c22a59ee3d8a463709",
+              "specimenIds": [
+                "SPEC-0466"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Italian Battle Academy 2020 Snorlax 50/68. BASE, PS 150, Russare Impossibile, the Hidden Fates set symbol, 50/68 and the purple Mewtwo deck silhouette establish the exact localized fixed-deck card. The collection owner explicitly confirmed on 2026-09-01 that the evenly flat photographed surface is diagnostic of this copy's non-holo finish. Retained as SPEC-0466.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Akira Komayama",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Mewtwo"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -34943,6 +34993,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0009-P01:0:ab21a8d9abcd8bdc",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Italian Battle Academy 2020 Snorlax 50/68. BASE, PS 150, Russare Impossibile, the Hidden Fates set symbol, 50/68 and the purple Mewtwo deck silhouette establish the exact localized fixed-deck card. The collection owner explicitly confirmed on 2026-09-01 that the evenly flat photographed surface is diagnostic of this copy's non-holo finish. Retained as SPEC-0466.",
+              "contentHash": "1abd666a7904a7367ccea451ecd23a281b9467f8d34790934973a9aff34e200d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0009-P01:1:638eaad5103366e0",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "2f0c143d2504834ca1af1a6445d9b93d334ca33a727b1ed6ca7744bb456e716b",
+              "image": null
+            },
             {
               "observationId": "unit:U0297",
               "kind": "unit",
@@ -53878,39 +53946,7 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
-              "semanticPrintingId": "PRINTING:7ec04aea1f3c1eb520aec304",
-              "cardReleaseId": "RELEASE:WEST:Italian:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0138",
-              "sourcePrintingId": "F0138-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:7ec04aea1f3c1eb520aec304",
-              "specimenIds": [
-                "SPEC-0465"
-              ],
-              "sources": [
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-                },
-                {
-                  "url": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
-                  "sourceType": "Seller listing photograph",
-                  "evidence": "Complete seller photograph of Italian Generations Snorlax 58/83. BASE, PS 130, Lasciadormir, Sonnopressa, the Generations set symbol and 58/83 establish the exact localized card. The photographed card surface is uniformly printed, and the exact listing classifies this item as Rara rather than Reverse Holo. Retained as SPEC-0465."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -53938,24 +53974,6 @@
             }
           ],
           "observations": [
-            {
-              "observationId": "finish:F0138-P01:0:7408347bd100316b",
-              "kind": "finish",
-              "provider": "Cardmarket catalogue hint (not external verification)",
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "c9d8046a1a214538cfddcd9359ea30b8543404fbaf3999ff748af798523b3de0",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0138-P01:1:b1e08b0eed3a1595",
-              "kind": "finish",
-              "provider": "Seller listing photograph",
-              "url": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
-              "evidence": "Complete seller photograph of Italian Generations Snorlax 58/83. BASE, PS 130, Lasciadormir, Sonnopressa, the Generations set symbol and 58/83 establish the exact localized card. The photographed card surface is uniformly printed, and the exact listing classifies this item as Rara rather than Reverse Holo. Retained as SPEC-0465.",
-              "contentHash": "c4762b4a6bfcb55e786297d47cf0e731b21e5a2520f99b061fae95c97024a202",
-              "image": null
-            },
             {
               "observationId": "unit:U0246",
               "kind": "unit",

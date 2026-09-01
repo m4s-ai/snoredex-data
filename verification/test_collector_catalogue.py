@@ -171,12 +171,23 @@ def main() -> None:
     previous_route, = migrations["catalogueTransitions"]
     assert previous_route["fromFingerprint"] == catalogue["meta"]["previousFingerprint"]
     assert previous_route["toFingerprint"] == catalogue["meta"]["catalogueFingerprint"]
+    previous_route_by_source = {
+        row["fromItemId"]: row for row in previous_route["transitions"]
+    }
     assert {
         row["fromItemId"] for row in previous_route["transitions"]
-    } == {row["itemId"] for row in catalogue["items"]}
+    } == (
+        {row["itemId"] for row in catalogue["items"]}
+        | set(collector.CUMULATIVE_CATALOGUE_REKEYS)
+    )
     assert all(
-        row == collector.retained_state_transition(row["fromItemId"])
-        for row in previous_route["transitions"]
+        previous_route_by_source[row["itemId"]]
+        == collector.retained_state_transition(row["itemId"])
+        for row in catalogue["items"]
+    )
+    assert all(
+        previous_route_by_source[old_id] == collector.state_transition(old_id, [new_id])
+        for old_id, new_id in collector.CUMULATIVE_CATALOGUE_REKEYS.items()
     )
     assert not collector.validate_catalogue(
         fixture["catalogue"], check_asset_bytes=False
@@ -534,6 +545,15 @@ def main() -> None:
         row for row in tampered_migrations["transitions"] if row["fromItemId"] != old_id
     ]
     assert any("cumulative checklist" in error for error in collector.validate_migrations(
+        tampered_migrations, catalogue, graph, predecessor
+    ))
+    tampered_migrations = copy.deepcopy(migrations)
+    old_catalogue_id = next(iter(collector.CUMULATIVE_CATALOGUE_REKEYS))
+    tampered_migrations["catalogueTransitions"][0]["transitions"] = [
+        row for row in tampered_migrations["catalogueTransitions"][0]["transitions"]
+        if row["fromItemId"] != old_catalogue_id
+    ]
+    assert any("previous catalogue" in error for error in collector.validate_migrations(
         tampered_migrations, catalogue, graph, predecessor
     ))
 

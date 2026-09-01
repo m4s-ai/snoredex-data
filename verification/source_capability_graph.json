@@ -20,7 +20,7 @@
       "coverageEdges": 40,
       "absenceEdges": 0,
       "observations": 42,
-      "resolvedVerdictSources": 1188
+      "resolvedVerdictSources": 1189
     },
     "surfaceStates": {
       "active": 18,
@@ -5141,7 +5141,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:b307c0d33fb79521dc240561c4893dd226ec4ac6e9892842e038db6b9a4be85a",
+      "rawRecordHash": "sha256:84ed26a69adef6e6e5802cfdeeec4549e8fffe0c362e2735573b0395ff4cdb7b",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -5158,8 +5158,9 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 61,
+        "stableIdCount": 62,
         "stableIds": [
+          "F0009-P01",
           "F0067-P03",
           "F0067-P04",
           "F0071-P01",
@@ -5208,11 +5209,10 @@
           "U0097",
           "U0098",
           "U0099",
-          "U0311",
-          "U0312"
+          "U0311"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 61
+        "usageCount": 62
       }
     },
     {
@@ -15657,6 +15657,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -15900,7 +15912,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "identity"
       ]
     },
