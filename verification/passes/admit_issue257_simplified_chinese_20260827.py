@@ -229,14 +229,14 @@ OVERRIDES = [
 
 SOURCE_FIRST_PRINTS = [
     {
-        "printId": "CN:CS2aC:086:base", "locality": "CN", "localSetCode": "CS2aC", "localNumber": "086", "variant": "base",
+        "printId": "CN:CS2aC:086/115:base", "locality": "CN", "localSetCode": "CS2aC", "localNumber": "086/115", "variant": "base",
         "language": "S-Chinese", "script": "Hans", "name": "卡比兽", "cardName": "Snorlax", "catchUpOf": "the legacy Japanese s4 084 work",
         "specimenId": "SPEC-0473", "providerId": "52poke", "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89", "corroborated": True,
         "markAssetUrl": None, "cardImageUrl": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
-        "evidence": "52poke's per-card language table identifies the Simplified-Chinese Vivid Portrayals printing as collector number 086, rarity R, released 2023-08-18. SPEC-0473 and SPEC-0474 retain the two exact PokiPair set-list images. The existing reviewed U0289 evidence and shared card identity establish it as the local counterpart of legacy s4 084; the local release remains distinct.",
+        "evidence": "52poke's per-card language table identifies the Simplified-Chinese Vivid Portrayals printing as collector number 086, rarity R, released 2023-08-18. SPEC-0473 and SPEC-0474 retain the two exact PokiPair set-list images and show the complete printed number 086/115. The existing reviewed U0289 evidence and shared card identity establish it as the local counterpart of legacy s4 084; the local release remains distinct.",
     },
     {
-        "printId": "CN:CS2aC:142:base", "locality": "CN", "localSetCode": "CS2aC", "localNumber": "142", "variant": "base",
+        "printId": "CN:CS2aC:142/115:base", "locality": "CN", "localSetCode": "CS2aC", "localNumber": "142/115", "variant": "base",
         "language": "S-Chinese", "script": "Hans", "name": "卡比兽", "cardName": "Snorlax", "catchUpOf": "the Chilling Reign CRE 224 work",
         "specimenId": "SPEC-0475", "providerId": "bulbapedia", "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)", "corroborated": True,
         "markAssetUrl": None, "cardImageUrl": "https://media.pokipair.com/2024/09/06025344/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-240.png",
@@ -280,8 +280,8 @@ QUESTION_SET = {
             "evidence": evidence,
         }
         for legacy, target, url, evidence in [
-            ("U0289", "CN:CS2aC:086:base", "https://github.com/m4s-ai/snoredex-data/issues/257", "The collection owner explicitly confirms that Simplified-Chinese CS2aC 086 corresponds to Japanese s4 084. This release-level same-work decision covers every finish variant attached to either release while keeping the Japanese and Simplified-Chinese release identities distinct. It does not by itself confirm an individual finish. Cardmarket product: https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086"),
-            ("U0592", "CN:CS2aC:142:base", "https://github.com/m4s-ai/snoredex-data/issues/257", "The collection owner identifies Simplified-Chinese CS2aC 142/115 as the gold Snorlax from Chilling Reign. SPEC-0475 retains the exact local card image; the shared rules text establishes the same Snorlax-Gormandize-Body-Slam work while keeping the releases distinct."),
+            ("U0289", "CN:CS2aC:086/115:base", "https://github.com/m4s-ai/snoredex-data/issues/257", "The collection owner explicitly confirms that Simplified-Chinese CS2aC 086/115 corresponds to Japanese s4 084. This release-level same-work decision covers every finish variant attached to either release while keeping the Japanese and Simplified-Chinese release identities distinct. It does not by itself confirm an individual finish. Cardmarket product: https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086"),
+            ("U0592", "CN:CS2aC:142/115:base", "https://github.com/m4s-ai/snoredex-data/issues/257", "The collection owner identifies Simplified-Chinese CS2aC 142/115 as the gold Snorlax from Chilling Reign. SPEC-0475 retains the exact local card image; the shared rules text establishes the same Snorlax-Gormandize-Body-Slam work while keeping the releases distinct."),
             ("U0639", "CN:CS2DaC:038/053:base", "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)", "The closed Family Pokémon Card Game list and independent CS2DaC checklist establish the exact Simplified-Chinese 038/053 counterpart of legacy sH 038; both release identities remain distinct."),
             ("U0651", "CN:CS4DaC:341/414:base", "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568", "The Start Deck 100 list and SPEC-0155 establish the exact Simplified-Chinese CS4DaC 341/414 counterpart of legacy sI100 341."),
             ("U0655", "CN:CS4DaC:342/414:base", "https://www.ebay.com/itm/356156650452", "The Start Deck 100 list and SPEC-0156 establish the exact Simplified-Chinese CS4DaC 342/414 counterpart of legacy sI100 342."),
@@ -291,13 +291,13 @@ QUESTION_SET = {
 
 
 RELEASES = {
-    "CN:CS2aC:086:base": {
-        "releaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
+    "CN:CS2aC:086/115:base": {
+        "releaseId": "RELEASE:CN:S-Chinese:CS2aC:086/115:Snorlax-Gormandize-Body-Slam",
         "work": "Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0289",
     },
-    "CN:CS2aC:142:base": {
-        "releaseId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+    "CN:CS2aC:142/115:base": {
+        "releaseId": "RELEASE:CN:S-Chinese:CS2aC:142/115:Snorlax-Gormandize-Body-Slam",
         "work": "Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0592",
     },
@@ -319,6 +319,18 @@ RELEASES = {
 }
 
 
+GRAPH_VALUE_REKEYS = {
+    "CN:CS2aC:086:base": "CN:CS2aC:086/115:base",
+    "CN:CS2aC:142:base": "CN:CS2aC:142/115:base",
+    "CLAIM:source-first:CN:CS2aC:086:base": "CLAIM:source-first:CN:CS2aC:086/115:base",
+    "CLAIM:source-first:CN:CS2aC:142:base": "CLAIM:source-first:CN:CS2aC:142/115:base",
+    "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam": "RELEASE:CN:S-Chinese:CS2aC:086/115:Snorlax-Gormandize-Body-Slam",
+    "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam": "RELEASE:CN:S-Chinese:CS2aC:142/115:Snorlax-Gormandize-Body-Slam",
+    "ASSERT:same-work:U0289:CN:CS2aC:086:base": "ASSERT:same-work:U0289:CN:CS2aC:086/115:base",
+    "ASSERT:same-work:U0592:CN:CS2aC:142:base": "ASSERT:same-work:U0592:CN:CS2aC:142/115:base",
+}
+
+
 def stable_profile_id(locality: str, local_code: str) -> str:
     material = f"{locality}\x1f{local_code}".encode()
     return f"SET-SRC-SF-{hashlib.sha256(material).hexdigest()[:12].upper()}"
@@ -326,6 +338,14 @@ def stable_profile_id(locality: str, local_code: str) -> str:
 
 def encoded(payload: dict) -> str:
     return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+
+
+def rekey_graph_values(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {key: rekey_graph_values(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [rekey_graph_values(item) for item in value]
+    return GRAPH_VALUE_REKEYS.get(value, value)
 
 
 def append_unique(values: list[str], *new_values: str) -> None:
@@ -597,6 +617,7 @@ def apply_graph(
             release = release_matches[0]["payload"]
             if release.get("work") != facts["work"]:
                 raise ValueError(f"existing release has a different Work: {release_id}")
+            release["localNumber"] = row["localNumber"]
             release["workMappingState"] = "mapped-by-explicit-equivalence"
             append_unique(release.setdefault("claimIds", []), claim_id)
             append_unique(release.setdefault("establishingClaimIds", []), claim_id)
@@ -743,7 +764,8 @@ def main() -> int:
     prints = read(PRINTS)
     before_prints = json.dumps(prints, sort_keys=True, ensure_ascii=False)
     prints_by_id = {row["printId"]: row for row in prints["prints"]}
-    prints_by_id.pop("CN:CS2aC:086/115:base", None)
+    prints_by_id.pop("CN:CS2aC:086:base", None)
+    prints_by_id.pop("CN:CS2aC:142:base", None)
     prints_by_id.update({row["printId"]: row for row in SOURCE_FIRST_PRINTS})
     prints["prints"] = sorted(prints_by_id.values(), key=lambda row: row["printId"])
     prints["meta"]["generated"] = "2026-09-02"
@@ -761,6 +783,7 @@ def main() -> int:
 
     graph = read(GRAPH)
     before_graph = encoded(graph)
+    graph = rekey_graph_values(graph)
     graph = apply_graph(graph, profiles)
 
     specimens = {row["specimenId"]: row for row in read(SPECIMENS)["specimens"]}

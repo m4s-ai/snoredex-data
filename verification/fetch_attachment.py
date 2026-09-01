@@ -770,7 +770,11 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
     observations = manifest.get("observations") if isinstance(manifest, dict) else manifest
     if not isinstance(observations, list) or not observations:
         fail("manifest must contain a non-empty observations list")
-    if isinstance(manifest, dict) and manifest.get("issue") not in (None, args.issue):
+    if (
+        args.issue is not None
+        and isinstance(manifest, dict)
+        and manifest.get("issue") not in (None, args.issue)
+    ):
         fail(f"manifest is for issue #{manifest['issue']}, not #{args.issue}")
     try:
         finish_units = json.loads(FINISH_UNITS.read_text(encoding="utf-8-sig")).get("units", [])

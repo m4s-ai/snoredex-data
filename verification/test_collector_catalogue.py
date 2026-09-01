@@ -71,11 +71,15 @@ def main() -> None:
         for row in graph["entities"]
     )
     catalogue = read("collector_catalogue.json")
-    cs2ac_086_release = "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam"
+    cs2ac_086_release = "RELEASE:CN:S-Chinese:CS2aC:086/115:Snorlax-Gormandize-Body-Slam"
     cs2ac_086_items = [
         row for row in catalogue["items"] if row["cardReleaseId"] == cs2ac_086_release
     ]
     assert {row["finish"] for row in cs2ac_086_items} == {"holo", "reverse-holo"}
+    assert all(
+        row["collectorNumber"] == "086" and row["collectorNumberDenominator"] == "115"
+        for row in cs2ac_086_items
+    )
     reverse_086 = next(row for row in cs2ac_086_items if row["finish"] == "reverse-holo")
     assert reverse_086["foilPattern"] == "star"
     assert all(
@@ -86,23 +90,25 @@ def main() -> None:
     owner_mapping = next(
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "equivalence-assertion"
-        and row["entityId"] == "ASSERT:same-work:U0289:CN:CS2aC:086:base"
+        and row["entityId"] == "ASSERT:same-work:U0289:CN:CS2aC:086/115:base"
     )
     assert owner_mapping["assertedBy"] == "collection owner"
     assert owner_mapping["evidenceUrl"] == "https://github.com/m4s-ai/snoredex-data/issues/257"
     gold_mapping = next(
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "equivalence-assertion"
-        and row["entityId"] == "ASSERT:same-work:U0592:CN:CS2aC:142:base"
+        and row["entityId"] == "ASSERT:same-work:U0592:CN:CS2aC:142/115:base"
     )
     assert gold_mapping["assertedBy"] == "collection owner"
     assert gold_mapping["toId"] == "WORK:Snorlax-Gormandize-Body-Slam"
-    cs2ac_142_release = "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam"
+    cs2ac_142_release = "RELEASE:CN:S-Chinese:CS2aC:142/115:Snorlax-Gormandize-Body-Slam"
     cs2ac_142_items = [
         row for row in catalogue["items"] if row["cardReleaseId"] == cs2ac_142_release
     ]
     assert len(cs2ac_142_items) == 1
     assert cs2ac_142_items[0]["finish"] == "holo"
+    assert cs2ac_142_items[0]["collectorNumber"] == "142"
+    assert cs2ac_142_items[0]["collectorNumberDenominator"] == "115"
     catalogue_by_release = {row["cardReleaseId"]: row for row in catalogue["items"]}
     for release_id in (
         "RELEASE:KR:Korean:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
