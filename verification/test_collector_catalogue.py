@@ -166,26 +166,45 @@ def main() -> None:
     assert not collector.validate_migrations(migrations, catalogue, graph, predecessor)
     assert catalogue["meta"]["previousFingerprint"] == collector.PREVIOUS_CATALOGUE_FINGERPRINT
     assert migrations["meta"]["schemaVersion"] == "1.1.0"
-    previous_route, = migrations["catalogueTransitions"]
-    assert previous_route["fromFingerprint"] == catalogue["meta"]["previousFingerprint"]
-    assert previous_route["toFingerprint"] == catalogue["meta"]["catalogueFingerprint"]
-    previous_route_by_source = {
-        row["fromItemId"]: row for row in previous_route["transitions"]
-    }
+    routes = {row["fromFingerprint"]: row for row in migrations["catalogueTransitions"]}
+    assert set(routes) == {fingerprint for _commit, fingerprint in collector.PUBLISHED_CATALOGUE_SOURCES}
+    current_item_ids = {row["itemId"] for row in catalogue["items"]}
+    for commit, fingerprint in collector.PUBLISHED_CATALOGUE_SOURCES:
+        source = collector.git_json_at(commit, "collector_catalogue.json")
+        route = routes[fingerprint]
+        source_item_ids = {row["itemId"] for row in source["items"]}
+        covered_source_ids = [
+            item_id
+            for transition in route["transitions"]
+            for item_id in transition["fromItemIds"]
+        ]
+        assert route["sourceArtifactCommit"] == commit
+        assert route["sourceItemIds"] == sorted(source_item_ids)
+        assert len(covered_source_ids) == len(set(covered_source_ids)) == len(source_item_ids)
+        assert set(covered_source_ids) == source_item_ids
+        assert route["toFingerprint"] == catalogue["meta"]["catalogueFingerprint"]
+        assert route["compatibility"] == "compatible-data-only"
+        assert route["rollbackFingerprint"] == fingerprint
+        for transition in route["transitions"]:
+            sources = transition["fromItemIds"]
+            targets = transition["toItemIds"]
+            assert transition["fromItemId"] == sources[0]
+            assert set(targets) <= current_item_ids
+            if transition["automaticStateAction"] == "preserve":
+                assert len(sources) == len(targets) == 1
+                assert transition["changeKind"] in {"retained", "rekey-1:1"}
+            else:
+                assert transition["automaticStateAction"] == "none"
+                assert transition["reconciliation"] in {
+                    "retire-to-orphan", "requires-user-resolution",
+                }
+    deployed_route = routes[collector.DEPLOYED_CATALOGUE_FINGERPRINT]
     assert {
-        row["fromItemId"] for row in previous_route["transitions"]
-    } == (
-        {row["itemId"] for row in catalogue["items"]}
-        | set(collector.CUMULATIVE_CATALOGUE_REKEYS)
-    )
+        row["changeKind"] for row in deployed_route["transitions"]
+    } == {"retained", "rekey-1:1", "retired-1:0", "split-1:N", "merge-N:1", "unresolved"}
     assert all(
-        previous_route_by_source[row["itemId"]]
-        == collector.retained_state_transition(row["itemId"])
-        for row in catalogue["items"]
-    )
-    assert all(
-        previous_route_by_source[old_id] == collector.state_transition(old_id, [new_id])
-        for old_id, new_id in collector.CUMULATIVE_CATALOGUE_REKEYS.items()
+        not row["toItemIds"] and row.get("candidateItemIds")
+        for row in deployed_route["transitions"] if row["changeKind"] == "unresolved"
     )
     assert not collector.validate_catalogue(
         fixture["catalogue"], check_asset_bytes=False
@@ -546,12 +565,8 @@ def main() -> None:
         tampered_migrations, catalogue, graph, predecessor
     ))
     tampered_migrations = copy.deepcopy(migrations)
-    old_catalogue_id = next(iter(collector.CUMULATIVE_CATALOGUE_REKEYS))
-    tampered_migrations["catalogueTransitions"][0]["transitions"] = [
-        row for row in tampered_migrations["catalogueTransitions"][0]["transitions"]
-        if row["fromItemId"] != old_catalogue_id
-    ]
-    assert any("previous catalogue" in error for error in collector.validate_migrations(
+    tampered_migrations["catalogueTransitions"][0]["transitions"].pop()
+    assert any("published catalogue transition" in error for error in collector.validate_migrations(
         tampered_migrations, catalogue, graph, predecessor
     ))
 
@@ -596,7 +611,7 @@ def main() -> None:
 
     tampered_migrations = copy.deepcopy(migrations)
     tampered_migrations["catalogueTransitions"][0]["transitions"].pop()
-    assert any("previous catalogue" in error for error in collector.validate_migrations(
+    assert any("published catalogue transition" in error for error in collector.validate_migrations(
         tampered_migrations, catalogue, graph, predecessor
     ))
 
