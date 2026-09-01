@@ -71,7 +71,7 @@ def independent_url(url: str) -> bool:
 
 def new_rows() -> list[dict[str, Any]]:
     fxy = research.research(
-        "U0586", "FXY", "026/036", ("fixed product", "fixed"),
+        "U0586", "FXY", "026/036", None,
         official_url("ST2014001026"), "pokemon-card-korea",
         corroborating=["https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"],
         legacy_aliases=ALIASES["KR:FXY:026/036:base"],
@@ -83,7 +83,7 @@ def new_rows() -> list[dict[str, Any]]:
         "localNumber": "060/080",
         "work": "Snorlax-Incredible-Snore",
         "legacy": [],
-        "rarity": ("B", None),
+        "rarity": None,
         "specimenId": None,
         "cardName": "Snorlax",
         "providerId": "pokemon-card-korea",
@@ -111,9 +111,10 @@ def apply_official_rows(
         # The official detail becomes the identity source, but it does not
         # restate every source-native rarity captured by earlier research.
         # Keep that field's evidence attached to the record that supplied it.
-        row.setdefault("raritySourceUrl", row.get("sourceUrl"))
-        row.setdefault("rarityProviderId", row.get("providerId"))
-        row.setdefault("rarityRetrievedAt", row.get("retrievedAt"))
+        if row.get("rarity") is not None:
+            row.setdefault("raritySourceUrl", row.get("sourceUrl"))
+            row.setdefault("rarityProviderId", row.get("providerId"))
+            row.setdefault("rarityRetrievedAt", row.get("retrievedAt"))
         prior_urls = {
             *(row.get("corroboratingSourceUrls") or []),
             *([row["sourceUrl"]] if row.get("sourceUrl") else []),

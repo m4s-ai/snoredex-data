@@ -39,7 +39,7 @@ def research(
     unit_id: str,
     set_code: str,
     number: str,
-    rarity: tuple[str, str | None],
+    rarity: tuple[str, str | None] | None,
     source_url: str,
     provider: str,
     *,
@@ -162,6 +162,11 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
         if row.get("specimenId") else
         " This is catalogue/set-list evidence only; no physical finish or appearance is inferred."
     )
+    rarity_clause = (
+        f" and states rarity {row['rarity'][0]}."
+        if row.get("rarity") is not None
+        else ". No rarity is claimed from this record."
+    )
     result = {
         "printId": row["printId"], "locality": "KR", "localSetCode": row["localSetCode"],
         "localNumber": row["localNumber"], "variant": "base", "language": "Korean",
@@ -174,7 +179,7 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
         "markAssetUrl": None, "cardImageUrl": None,
         "evidence": (
             f"The retained positive {row['providerId']} record identifies Korean {row['localSetCode']} "
-            f"{row['localNumber']} for {row['cardName']} and states rarity {row['rarity'][0] or 'not printed in the retained record'}."
+            f"{row['localNumber']} for {row['cardName']}{rarity_clause}"
             " This establishes local identity and the explicit Work mapping while keeping the Korean release distinct."
             + specimen_clause
         ),

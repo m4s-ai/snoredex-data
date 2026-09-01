@@ -481,6 +481,13 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue260:" + rid.removeprefix("RELEASE:KR:Korean:")
+    if row.get("rarity") is None:
+        graph["entities"] = [item for item in graph["entities"] if item.get("entityId") != rarity_id]
+        graph["edges"] = [
+            edge for edge in graph["edges"]
+            if edge.get("fromId") != rarity_id and edge.get("toId") != rarity_id
+        ]
+        return
     rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"], "retrievedAt": row.get("rarityRetrievedAt") or row.get("retrievedAt") or profile["retrieved"]}
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)

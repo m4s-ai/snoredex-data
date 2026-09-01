@@ -157,12 +157,27 @@ def main() -> None:
     assert units["U0586"]["corroborated"] is True
     rarity_provenance = {
         row["printId"]: (row["sourceUrl"], row["retrievedAt"])
-        for row in catalogue_rows if row["printId"] in official_korean
+        for row in catalogue_rows
+        if row["printId"] in official_korean and row.get("rarity") is not None
     }
-    assert rarity_provenance["KR:FXY:026/036:base"][1] == "2026-09-01"
+    unsupported_rarities = {
+        "KR:FXY:026/036:base",
+        "KR:SM30A:060/080:base",
+    }
+    assert unsupported_rarities.isdisjoint(rarity_provenance)
     korean_catalogue_pass.apply_official_rows(catalogue_rows, catalogue_identities)
     for row in catalogue_rows:
         if row["printId"] not in official_korean:
+            continue
+        if row["printId"] in unsupported_rarities:
+            assert "raritySourceUrl" not in row
+            rarity_id = (
+                "RARITYCLAIM:issue260:"
+                + korean_catalogue_pass.base.release_id(row).removeprefix(
+                    "RELEASE:KR:Korean:"
+                )
+            )
+            assert not any(entity["entityId"] == rarity_id for entity in graph["entities"])
             continue
         source_url, retrieved_at = rarity_provenance[row["printId"]]
         assert row["raritySourceUrl"] == source_url
