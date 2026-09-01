@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-08-30",
+    "generated": "2026-09-01",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 457,
-      "withOnlyMarketplaceClaim": 53,
-      "pendingFinish": 52,
+      "withConfirmedFinish": 460,
+      "withOnlyMarketplaceClaim": 52,
+      "pendingFinish": 50,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 2,
-      "withNonHolo": 301,
-      "withHolo": 227,
+      "withNonHolo": 302,
+      "withHolo": 228,
       "withReverseHolo": 229,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 89,
-      "withAnyUnresolvedDetail": 171,
+      "withUnresolvedProductMapping": 87,
+      "withAnyUnresolvedDetail": 169,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -758,23 +758,55 @@
           "image": "images/BA20_MWT_Snorlax_550296.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "deck-logo",
+              "role": "distribution-promo",
+              "text": "Mewtwo"
+            }
+          ],
+          "distribution": {
+            "kind": "fixed-deck",
+            "name": "Battle Academy 2020 Mewtwo Deck"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Italian Battle Academy 2020 Snorlax 50/68. BASE, PS 150, Russare Impossibile, the Hidden Fates set symbol, 50/68 and the purple Mewtwo deck silhouette establish the exact localized fixed-deck printing. The card face is uniformly printed, establishing the non-holo treatment; the listing title independently identifies the Italian Mewtwo-deck card. Retained as SPEC-0466."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0466"
+          ],
+          "image": "verification/specimens/SPEC-0466.jpg",
+          "printingId": "F0009-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0010",
@@ -12717,13 +12749,13 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
@@ -12734,17 +12766,26 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Italian Generations Snorlax 58/83. BASE, PS 130, Lasciadormir, Sonnopressa, the Generations set symbol and 58/83 establish the exact localized card. The photographed card surface is uniformly printed, and the exact listing classifies this item as Rara rather than Reverse Holo. Retained as SPEC-0465."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0465"
+          ],
+          "image": "verification/specimens/SPEC-0465.jpg",
           "printingId": "F0138-P01"
         },
         {
@@ -52115,23 +52156,52 @@
           "image": "images/XYPR_179_Snorlax_295168.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "print-identity",
+              "text": "black-star promo symbol"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2110027735/2110027735.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete Cardmarket seller photograph showing the front and back of Italian XY179 Snorlax. BASE, LIV. 20, 130 PS, Abilita: Immunita, Corposcontro, the Italian Pokedex line, XY179 and the black-star promo symbol establish the exact localized card. Large coloured circles and star-like sparkles in the artwork window establish the Cosmos Holo treatment. Retained as SPEC-0467."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0467"
+          ],
+          "image": "verification/specimens/SPEC-0467.jpg",
+          "printingId": "F0634-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0635",

@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-08-31",
+    "generated": "2026-09-01",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 40,
       "absenceEdges": 0,
       "observations": 42,
-      "resolvedVerdictSources": 1186
+      "resolvedVerdictSources": 1189
     },
     "surfaceStates": {
       "active": 18,
@@ -11087,6 +11087,18 @@
       ]
     },
     {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2110027735/2110027735.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -15645,6 +15657,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -15877,6 +15901,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
       ]
     },
     {
