@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Curated finish, foil-pattern, marking, distribution, release-date, size, and Cardmarket-product mappings that cannot be represented by TCGdex's group-level normal/holo/reverse flags.",
-    "lastUpdated": "2026-08-29",
+    "lastUpdated": "2026-09-01",
     "policy": [
       "A physical stamp is recorded in markings; the way a card was distributed is recorded separately in distribution.",
       "Printed identity features such as a rarity symbol or contest credit use role=print-identity; they do not imply a finish.",
@@ -405,6 +405,15 @@
       "sourceType": "Owner attestation plus downloaded scan review",
       "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
       "supportsAbsence": false
+    },
+    "issue-268-owner-gen58-it": {
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/268#issuecomment-5490777316",
+      "sourceType": "Collection owner attestation (finish)",
+      "evidence": "On 2026-09-01 the collection owner explicitly confirmed that Italian Generations Snorlax 58/83 exists as reverse holo, while clarifying that SPEC-0465 pictures the separate non-holo printing. This confirms reverse-holo existence only and does not attribute it to that photograph or close the finish list.",
+      "supportsAbsence": false,
+      "languages": [
+        "Italian"
+      ]
     },
     "snkrdunk-mp1-012": {
       "url": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",
@@ -5850,6 +5859,30 @@
           "verificationStatus": "confirmed",
           "sourceRefs": [
             "fst-official-checklist-es"
+          ]
+        }
+      ]
+    },
+    {
+      "setCode": "GEN",
+      "number": "58",
+      "languages": [
+        "Italian"
+      ],
+      "printings": [
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "type-symbol-background",
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "owner-attested",
+          "sourceRefs": [
+            "issue-268-owner-gen58-it",
+            "holofoil-patterns"
           ]
         }
       ]

@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-08-31",
+  "generated": "2026-09-01",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1186,
-   "uniqueUrls": 1179,
+   "evidenceRecords": 1190,
+   "uniqueUrls": 1183,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3556
+   "claimsAttributed": 3565
   }
  },
  "providers": [
@@ -699,7 +699,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 61
+   "claimsSupported": 65
   },
   {
    "providerId": "inspected-specimen",
@@ -742,8 +742,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 7,
-   "claimsSupported": 12
+   "uniqueSources": 8,
+   "claimsSupported": 13
   },
   {
    "providerId": "seller-listing-photo",
@@ -764,8 +764,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 68,
-   "claimsSupported": 120
+   "uniqueSources": 70,
+   "claimsSupported": 124
   }
  ],
  "evidence": [
@@ -9438,6 +9438,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2110027735/2110027735.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0634-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-listing-photo",
@@ -11088,14 +11105,16 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 61,
+   "stableIdCount": 63,
    "stableIds": [
+    "F0009-P01",
     "F0067-P03",
     "F0067-P04",
     "F0071-P01",
     "F0072-P01",
     "F0072-P02",
     "F0093-P01",
+    "F0138-P01",
     "F0140-P01",
     "F0146-P01",
     "F0148-P01",
@@ -11137,12 +11156,29 @@
     "F0616-P02",
     "U0097",
     "U0098",
-    "U0099",
-    "U0311",
-    "U0312"
+    "U0099"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 61
+   "usageCount": 63
+  },
+  {
+   "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
+   "nonUrlEvidenceId": null,
+   "providerId": "owner-attestation",
+   "sourceTypes": [
+    "Collection owner attestation (finish)"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0138-P02",
+    "override:issue-268-owner-gen58-it"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
@@ -16543,6 +16579,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0009-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -16887,6 +16940,25 @@
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0138-P01",
+    "SPEC-0465",
+    "U0246"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/iMAAAeSwQIpp678y/s-l1600.jpg",

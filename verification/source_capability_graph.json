@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-08-31",
+    "generated": "2026-09-01",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 40,
       "absenceEdges": 0,
       "observations": 42,
-      "resolvedVerdictSources": 1186
+      "resolvedVerdictSources": 1190
     },
     "surfaceStates": {
       "active": 18,
@@ -5141,7 +5141,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:b307c0d33fb79521dc240561c4893dd226ec4ac6e9892842e038db6b9a4be85a",
+      "rawRecordHash": "sha256:35789e57a3acd0a4958dae2b4b7a9d23f2b7a923995e16f88e21470912978094",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -5158,14 +5158,16 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 61,
+        "stableIdCount": 63,
         "stableIds": [
+          "F0009-P01",
           "F0067-P03",
           "F0067-P04",
           "F0071-P01",
           "F0072-P01",
           "F0072-P02",
           "F0093-P01",
+          "F0138-P01",
           "F0140-P01",
           "F0146-P01",
           "F0148-P01",
@@ -5207,12 +5209,10 @@
           "F0616-P02",
           "U0097",
           "U0098",
-          "U0099",
-          "U0311",
-          "U0312"
+          "U0099"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 61
+        "usageCount": 63
       }
     },
     {
@@ -11087,6 +11087,18 @@
       ]
     },
     {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2110027735/2110027735.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -12186,6 +12198,19 @@
         "finish",
         "finish-override",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/m4s-ai/snoredex-data/issues/268",
+      "providerId": "owner-attestation",
+      "surfaceId": "owner-attestations",
+      "capabilityEdgeIds": [
+        "owner-attestation-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
       ]
     },
     {
@@ -15645,6 +15670,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -15877,6 +15914,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {

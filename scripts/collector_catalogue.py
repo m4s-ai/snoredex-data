@@ -80,6 +80,12 @@ CUMULATIVE_CHECKLIST_REKEYS = {
     "ju-27-dutch-1e-unresolved-unknown": "ju-27-dutch-1e-non-holo-edition-stamp-editie-1",
     "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
 }
+CUMULATIVE_CATALOGUE_REKEYS = {
+    "item-d86cb23d-68d9-5725-9bce-462525985029":
+        "item-f54a780c-14bf-5178-b029-00891c08ce6c",
+    "item-b48b5aad-6829-51d0-98fe-f1baaa08ffd3":
+        "item-1c8618e5-967b-560a-a982-c21979091df6",
+}
 
 
 class ContractError(ValueError):
@@ -370,6 +376,45 @@ def retained_state_transition(item_id: str) -> dict[str, Any]:
         "automaticStateAction": "preserve",
         "reconciliation": "identity-retained",
     }
+
+
+def cumulative_catalogue_transitions(item_ids: set[str]) -> list[dict[str, Any]]:
+    """Preserve current ids and explicitly rekey every superseded catalogue id."""
+    stale_ids = set(CUMULATIVE_CATALOGUE_REKEYS) & item_ids
+    if stale_ids:
+        raise ContractError(
+            "cumulative catalogue rekeys still exist as current items: "
+            + ", ".join(sorted(stale_ids))
+        )
+    missing_targets = set(CUMULATIVE_CATALOGUE_REKEYS.values()) - item_ids
+    if missing_targets:
+        raise ContractError(
+            "cumulative catalogue rekey targets are missing: "
+            + ", ".join(sorted(missing_targets))
+        )
+    by_source = {iid: retained_state_transition(iid) for iid in item_ids}
+    by_source.update({
+        old_id: state_transition(old_id, [new_id])
+        for old_id, new_id in CUMULATIVE_CATALOGUE_REKEYS.items()
+    })
+    return [by_source[iid] for iid in sorted(by_source)]
+
+
+def catalogue_route_transitions_match(
+    transitions: list[dict[str, Any]], item_ids: set[str]
+) -> bool:
+    """Return whether a cumulative route preserves current and superseded ids."""
+    by_source = {row.get("fromItemId"): row for row in transitions}
+    expected_sources = item_ids | set(CUMULATIVE_CATALOGUE_REKEYS)
+    if len(by_source) != len(transitions) or set(by_source) != expected_sources:
+        return False
+    for iid in item_ids:
+        if by_source[iid] != retained_state_transition(iid):
+            return False
+    for old_id, new_id in CUMULATIVE_CATALOGUE_REKEYS.items():
+        if by_source.get(old_id) != state_transition(old_id, [new_id]):
+            return False
+    return True
 
 
 def natural_key(value: Any) -> str:
@@ -1290,9 +1335,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
                 "toSchemaVersion": SCHEMA_VERSION,
                 "toFingerprint": document["meta"]["catalogueFingerprint"],
                 "cumulative": True,
-                "transitions": [
-                    retained_state_transition(iid) for iid in sorted(item_ids)
-                ],
+                "transitions": cumulative_catalogue_transitions(item_ids),
             }
         ],
         "transitions": [
@@ -1723,16 +1766,11 @@ def validate_catalogue(
     return errors
 
 
-def validate_migrations(
-    migrations: dict[str, Any], catalogue: dict[str, Any], graph: dict[str, Any], predecessor: dict[str, Any]
+def validate_catalogue_transition_route(
+    migrations: dict[str, Any], catalogue: dict[str, Any], item_ids: set[str]
 ) -> list[str]:
-    errors: list[str] = []
-    if migrations.get("meta", {}).get("toFingerprint") != catalogue["meta"]["catalogueFingerprint"]:
-        errors.append("migration target fingerprint differs")
-    if migrations.get("meta", {}).get("schemaVersion") != MIGRATIONS_SCHEMA_VERSION:
-        errors.append("migration schema version differs")
-    item_ids = {row["itemId"] for row in catalogue["items"]}
-    catalogue_routes = migrations.get("catalogueTransitions", [])
+    """Validate the cumulative route from the published predecessor catalogue."""
+    routes = migrations.get("catalogueTransitions", [])
     expected_route_meta = {
         "fromSchema": SCHEMA_NAME,
         "fromSchemaVersion": SCHEMA_VERSION,
@@ -1742,17 +1780,29 @@ def validate_migrations(
         "toFingerprint": catalogue["meta"]["catalogueFingerprint"],
         "cumulative": True,
     }
-    if catalogue["meta"].get("previousFingerprint") != PREVIOUS_CATALOGUE_FINGERPRINT \
-            or len(catalogue_routes) != 1 \
-            or any(catalogue_routes[0].get(key) != value for key, value in expected_route_meta.items()):
-        errors.append("previous catalogue fingerprint route differs")
-    else:
-        route_transitions = catalogue_routes[0].get("transitions", [])
-        route_by_source = {row.get("fromItemId"): row for row in route_transitions}
-        if len(route_by_source) != len(route_transitions) \
-                or set(route_by_source) != item_ids \
-                or any(route_by_source[iid] != retained_state_transition(iid) for iid in item_ids):
-            errors.append("previous catalogue transitions do not preserve every item identity")
+    if catalogue["meta"].get("previousFingerprint") != PREVIOUS_CATALOGUE_FINGERPRINT:
+        return ["previous catalogue fingerprint route differs"]
+    if len(routes) != 1:
+        return ["previous catalogue fingerprint route differs"]
+    route = routes[0]
+    if any(route.get(key) != value for key, value in expected_route_meta.items()):
+        return ["previous catalogue fingerprint route differs"]
+    transitions = route.get("transitions", [])
+    if not catalogue_route_transitions_match(transitions, item_ids):
+        return ["previous catalogue transitions do not preserve or rekey every item identity"]
+    return []
+
+
+def validate_migrations(
+    migrations: dict[str, Any], catalogue: dict[str, Any], graph: dict[str, Any], predecessor: dict[str, Any]
+) -> list[str]:
+    errors: list[str] = []
+    if migrations.get("meta", {}).get("toFingerprint") != catalogue["meta"]["catalogueFingerprint"]:
+        errors.append("migration target fingerprint differs")
+    if migrations.get("meta", {}).get("schemaVersion") != MIGRATIONS_SCHEMA_VERSION:
+        errors.append("migration schema version differs")
+    item_ids = {row["itemId"] for row in catalogue["items"]}
+    errors.extend(validate_catalogue_transition_route(migrations, catalogue, item_ids))
     legacy_ids = {row["checklistId"] for row in predecessor["items"]}
     transitions = migrations.get("transitions", [])
     transition_by_source = {row.get("fromItemId"): row for row in transitions}

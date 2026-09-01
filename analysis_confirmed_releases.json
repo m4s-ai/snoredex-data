@@ -10642,18 +10642,18 @@
       "reverse-holo"
      ],
      "finishStatus": {
-      "non-holo": "marketplace-claimed",
+      "non-holo": "confirmed",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "owner-attested",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
+      "non-holo": "confirmed",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "owner-attested",
       "mirror-holo": "pending"
      },
-     "status": "marketplace-claimed",
+     "status": "confirmed",
      "finishUnitId": "F0138",
      "productMappingStatus": "confirmed",
      "printings": [
@@ -10664,8 +10664,12 @@
        "markings": null,
        "distribution": null,
        "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0465.jpg",
+       "specimenIds": [
+        "SPEC-0465"
+       ]
       },
       {
        "printingId": "F0138-P02",
@@ -10674,7 +10678,7 @@
        "markings": null,
        "distribution": null,
        "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
+       "verificationStatus": "owner-attested",
        "productMapping": "mapped"
       }
      ]
@@ -12682,24 +12686,49 @@
     {
      "language": "Italian",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0634",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0634-P01",
+       "finish": "holo",
+       "foilPattern": "cosmos",
+       "markings": [
+        {
+         "kind": "observed-marking",
+         "role": "print-identity",
+         "text": "black-star promo symbol"
+        }
+       ],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0467.jpg",
+       "specimenIds": [
+        "SPEC-0467"
+       ]
+      }
+     ]
     },
     {
      "language": "Portuguese",
@@ -12753,7 +12782,7 @@
     "English": "positive-evidence-only",
     "French": "positive-evidence-only",
     "German": "positive-evidence-only",
-    "Italian": "pending",
+    "Italian": "positive-evidence-only",
     "Spanish": "pending",
     "Portuguese": "positive-evidence-only"
    },
@@ -19568,24 +19597,52 @@
     {
      "language": "Italian",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0009",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0009-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [
+        {
+         "kind": "deck-logo",
+         "role": "distribution-promo",
+         "text": "Mewtwo"
+        }
+       ],
+       "distribution": {
+        "kind": "fixed-deck",
+        "name": "Battle Academy 2020 Mewtwo Deck"
+       },
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0466.jpg",
+       "specimenIds": [
+        "SPEC-0466"
+       ]
+      }
+     ]
     },
     {
      "language": "Portuguese",
@@ -19614,7 +19671,7 @@
     "English": "positive-evidence-only",
     "French": "positive-evidence-only",
     "German": "positive-evidence-only",
-    "Italian": "pending"
+    "Italian": "positive-evidence-only"
    },
    "languageEvidence": {
     "English": {
