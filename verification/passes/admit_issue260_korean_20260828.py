@@ -249,7 +249,11 @@ def build_profile(
             "sourceUrls": sorted({
                 url
                 for row in rows
-                for url in (row["sourceUrl"], row.get("raritySourceUrl"))
+                for url in (
+                    row["sourceUrl"],
+                    row.get("raritySourceUrl"),
+                    *(row.get("raritySupportingSourceUrls") or []),
+                )
                 if url
             }),
             "retrievedByPrintId": dict(sorted(retrieved_by_print_id.items())),
@@ -489,6 +493,9 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
         ]
         return
     rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"], "retrievedAt": row.get("rarityRetrievedAt") or row.get("retrievedAt") or profile["retrieved"]}
+    supporting_urls = row.get("raritySupportingSourceUrls") or []
+    if supporting_urls:
+        rarity["supportingSourceUrls"] = supporting_urls
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])

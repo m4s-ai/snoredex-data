@@ -89,7 +89,11 @@ def new_rows() -> list[dict[str, Any]]:
         "work": "Snorlax-Incredible-Snore",
         "legacy": [],
         "rarity": ("fixed product", "fixed"),
-        "raritySourceUrl": official_url("BS2019018060"),
+        "raritySourceUrl": "https://pokemoncard.co.kr/card/277",
+        "raritySupportingSourceUrls": [
+            official_url("BS2019018060"),
+            "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+        ],
         "rarityProviderId": "pokemon-card-korea",
         "rarityRetrievedAt": REVIEWED_AT,
         "specimenId": None,

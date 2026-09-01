@@ -156,9 +156,24 @@ def main() -> None:
     )
     assert sm30a_row["rarity"] == ("fixed product", "fixed")
     assert sm30a_row["raritySourceUrl"] == (
-        "https://pokemoncard.co.kr/cards/detail/BS2019018060"
+        "https://pokemoncard.co.kr/card/277"
     )
+    assert sm30a_row["raritySupportingSourceUrls"] == [
+        "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+        "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+    ]
     assert sm30a_row["rarityRetrievedAt"] == "2026-09-01"
+    fixed_product_observations = {
+        row["printId"]: row for row in json.loads(
+            korean_catalogue_pass.EVIDENCE.read_text(encoding="utf-8")
+        )["fixedProductObservations"]
+    }
+    assert fixed_product_observations[sm30a_row["printId"]]["sourceUrl"] == (
+        sm30a_row["raritySourceUrl"]
+    )
+    assert fixed_product_observations[sm30a_row["printId"]]["supportingSourceUrls"] == (
+        sm30a_row["raritySupportingSourceUrls"]
+    )
     assert source_first_rows[fxy_row["printId"]]["corroboratingSourceUrls"] == (
         fxy_row["corroboratingSourceUrls"]
     )
@@ -210,6 +225,16 @@ def main() -> None:
         )
         assert rarity_claim["sourceProductKey"] == source_url
         assert rarity_claim["retrievedAt"] == retrieved_at
+        if row.get("raritySupportingSourceUrls"):
+            assert rarity_claim["supportingSourceUrls"] == row["raritySupportingSourceUrls"]
+            source_profile = next(
+                entity["payload"] for entity in graph["entities"]
+                if entity["entityType"] == "set-source-record"
+                and entity["entityId"] == rarity_claim["sourceRecordId"]
+            )
+            assert set(row["raritySupportingSourceUrls"]) < set(
+                source_profile["raw"]["sourceUrls"]
+            )
     assert {
         print_id: source_first_rows[print_id]["retrievedAt"]
         for print_id in official_korean
