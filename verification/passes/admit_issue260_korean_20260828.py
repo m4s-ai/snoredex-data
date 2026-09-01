@@ -228,8 +228,21 @@ def build_profile(
         "raw": {
             "localCode": code, "localName": None, "locality": "KR", "languages": ["Korean"],
             "scripts": ["Hang"], "printIds": sorted(row["printId"] for row in rows),
-            "providers": sorted({row.get("providerId", "pokemon-card-korea") for row in rows}),
-            "sourceUrls": sorted({row["sourceUrl"] for row in rows}),
+            "providers": sorted({
+                provider
+                for row in rows
+                for provider in (
+                    row.get("providerId", "pokemon-card-korea"),
+                    row.get("rarityProviderId"),
+                )
+                if provider
+            }),
+            "sourceUrls": sorted({
+                url
+                for row in rows
+                for url in (row["sourceUrl"], row.get("raritySourceUrl"))
+                if url
+            }),
             "printedSetSize": int(next(iter(denominators))) if len(denominators) == 1 else None,
             "printedSetSizeBasis": "the denominator printed on every observed card" if len(denominators) == 1 else "no common printed denominator is inferred",
             "localeSuffix": None, "observedCollectorNumbers": numbers,
@@ -458,7 +471,7 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue260:" + rid.removeprefix("RELEASE:KR:Korean:")
-    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row["sourceUrl"]}
+    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"]}
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])

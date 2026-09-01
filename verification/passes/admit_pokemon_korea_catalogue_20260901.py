@@ -105,6 +105,11 @@ def apply_official_rows(
             continue
         record_ids = identity["providerRecordIds"]
         source_url = official_url(record_ids[0])
+        # The official detail becomes the identity source, but it does not
+        # restate every source-native rarity captured by earlier research.
+        # Keep that field's evidence attached to the record that supplied it.
+        row.setdefault("raritySourceUrl", row.get("sourceUrl"))
+        row.setdefault("rarityProviderId", row.get("providerId"))
         prior_urls = {
             *(row.get("corroboratingSourceUrls") or []),
             *([row["sourceUrl"]] if row.get("sourceUrl") else []),

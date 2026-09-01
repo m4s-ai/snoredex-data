@@ -89,6 +89,22 @@ def main() -> None:
         "rarity claim normalized id does not match source-native mapping" in error
         for error in validate(tampered)
     )
+    # Updating a Korean release to an official identity page must not rewrite
+    # the source that supplied an already-reviewed rarity value.
+    korean_rarity = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityId"]
+        == "RARITYCLAIM:issue260:m3:062/080:Snorlax-Gormandizer-Collapse"
+    )
+    assert korean_rarity["sourceProductKey"] == (
+        "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e"
+    )
+    korean_profile = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "set-source-record"
+        and row["entityId"] == korean_rarity["sourceRecordId"]
+    )
+    assert korean_rarity["sourceProductKey"] in korean_profile["raw"]["sourceUrls"]
     assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
