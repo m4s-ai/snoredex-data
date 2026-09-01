@@ -130,6 +130,36 @@ def main() -> None:
         )["identities"]
     }
     assert len(official_korean) == 45
+    bs2_print_id = korean_catalogue_pass.UNMAPPED_OFFICIAL_PRINT_ID
+    bs2_profile = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "set-source-record"
+        and row["payload"].get("raw", {}).get("printIds") == [bs2_print_id]
+    )
+    assert bs2_profile["retrieved"] == "2026-09-01"
+    assert bs2_profile["raw"]["retrievedByPrintId"] == {
+        bs2_print_id: "2026-09-01"
+    }
+    assert bs2_profile["raw"]["evidenceSnapshot"] == korean_catalogue_pass.SNAPSHOT
+    assert set(source_first_rows[bs2_print_id]["corroboratingSourceUrls"]) < set(
+        bs2_profile["raw"]["sourceUrls"]
+    )
+    assert source_first_rows[bs2_print_id]["cardImageUrl"] in (
+        bs2_profile["raw"]["cardImageUrls"]
+    )
+    bs2_claim = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityId"] == f"CLAIM:source-first:{bs2_print_id}"
+    )
+    assert bs2_claim["sourceRecord"] == source_first_rows[bs2_print_id]["sourceUrl"]
+    assert bs2_claim["retrievedAt"] == "2026-09-01"
+    bs2_release = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "card-release"
+        and bs2_print_id in row["payload"].get("sourceFirstRecordIds", [])
+    )
+    assert bs2_release["work"] is None
+    assert bs2_release["workMappingState"] == "needs-explicit-equivalence"
     catalogue_identities = {
         row["printId"]: row for row in json.loads(
             korean_catalogue_pass.EVIDENCE.read_text(encoding="utf-8")

@@ -29,6 +29,7 @@ ASIA_MATRIX = ROOT / "verification" / "asia_locality_matrix.json"
 FINISH_SNAPSHOT = ROOT / "verification" / "finish_tcgdex_snapshot.json"
 SNAPSHOT = "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
 REVIEWED_AT = "2026-09-01"
+UNMAPPED_OFFICIAL_PRINT_ID = "KR:BS2:30/40:base"
 
 
 ALIASES = {
@@ -203,6 +204,47 @@ def apply_prints(
     document["prints"] = sorted(by_print.values(), key=lambda row: row["printId"])
     document["meta"]["generated"] = REVIEWED_AT
     document["meta"]["counts"]["admitted"] = len(document["prints"])
+
+
+def apply_unmapped_official_profile(
+    document: dict[str, Any], row: dict[str, Any]
+) -> dict[str, Any]:
+    """Refresh the official observation without inventing a Work mapping."""
+    profile = next(
+        item for item in document["sourceRecords"]
+        if item.get("raw", {}).get("printIds") == [row["printId"]]
+    )
+    profile["retrieved"] = row["retrievedAt"]
+    raw = profile["raw"]
+    raw["retrievedByPrintId"] = {row["printId"]: row["retrievedAt"]}
+    raw["evidenceSnapshot"] = row["evidenceSnapshot"]
+    raw["sourceUrls"] = sorted({
+        *raw["sourceUrls"], row["sourceUrl"],
+        *(row.get("corroboratingSourceUrls") or []),
+    })
+    raw["cardImageUrls"] = sorted({
+        *raw.get("cardImageUrls", []),
+        *([row["cardImageUrl"]] if row.get("cardImageUrl") else []),
+    })
+    return profile
+
+
+def apply_unmapped_official_graph(
+    graph: dict[str, Any], profile: dict[str, Any], row: dict[str, Any]
+) -> None:
+    """Project fresh provenance while preserving issue #240's unmapped Work state."""
+    claim_id = f"CLAIM:source-first:{row['printId']}"
+    claim = next(
+        item["payload"] for item in graph["entities"]
+        if item.get("entityType") == "candidate-claim" and item["entityId"] == claim_id
+    )
+    claim.update({"sourceRecord": row["sourceUrl"], "retrievedAt": row["retrievedAt"]})
+    source = next(
+        item for item in graph["entities"]
+        if item.get("entityType") == "set-source-record"
+        and item["entityId"] == profile["sourceRecordId"]
+    )
+    source["payload"] = profile
 
 
 def apply_units(
@@ -538,6 +580,13 @@ def main() -> int:
 
     apply_prints(documents["prints"], rows, identities)
     profiles = base.apply_profiles(documents["sources"], rows, retrieved_at=REVIEWED_AT)
+    unmapped_row = next(
+        row for row in documents["prints"]["prints"]
+        if row["printId"] == UNMAPPED_OFFICIAL_PRINT_ID
+    )
+    profiles[unmapped_row["localSetCode"]] = apply_unmapped_official_profile(
+        documents["sources"], unmapped_row
+    )
     apply_capabilities(documents["capabilities"], evidence)
     apply_units(documents["units"], rows, identities)
     if not args.check:
@@ -555,6 +604,9 @@ def main() -> int:
         documents["graph"], mappings = base.apply_graph(
             documents["graph"], profiles, rows, asserted_at=REVIEWED_AT
         )
+    apply_unmapped_official_graph(
+        documents["graph"], profiles[unmapped_row["localSetCode"]], unmapped_row
+    )
     normalize_graph_semantics(documents["graph"])
     add_graph_corroboration(documents["graph"], rows)
     legacy_ids = sorted(set(base.ISSUE_UNITS) | {"U0586"})
