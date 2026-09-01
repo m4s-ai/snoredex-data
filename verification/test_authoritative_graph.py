@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "verification" / "passes"))
 import authoritative_graph as graph_module  # noqa: E402
 import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
+import admit_pokemon_korea_catalogue_20260901 as korean_catalogue_pass  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
@@ -89,6 +90,342 @@ def main() -> None:
         "rarity claim normalized id does not match source-native mapping" in error
         for error in validate(tampered)
     )
+    # Updating a Korean release to an official identity page must not rewrite
+    # the source that supplied an already-reviewed rarity value.
+    korean_rarity = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityId"]
+        == "RARITYCLAIM:issue260:m3:062/080:Snorlax-Gormandizer-Collapse"
+    )
+    assert korean_rarity["sourceProductKey"] == (
+        "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e"
+    )
+    assert korean_rarity["retrievedAt"] == "2026-08-30"
+    korean_profile = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "set-source-record"
+        and row["entityId"] == korean_rarity["sourceRecordId"]
+    )
+    assert korean_rarity["sourceProductKey"] in korean_profile["raw"]["sourceUrls"]
+    source_first_rows = {
+        row["printId"]: row for row in json.loads(
+            (ROOT / "verification/source_first_prints.json").read_text(encoding="utf-8")
+        )["prints"]
+    }
+    unmatched_korean = {
+        "KR:CLF:016/034:base", "KR:s1H:070/060:base", "KR:sm9:115/095:base",
+        "KR:s5a:093/070:base", "KR:20th:047/072:base",
+        "KR:xsv2a:143/165:base", "KR:xm2a:136/193:base",
+    }
+    assert {
+        print_id: source_first_rows[print_id]["retrievedAt"]
+        for print_id in unmatched_korean
+    } == {print_id: "2026-08-30" for print_id in unmatched_korean}
+    official_korean = {
+        row["printId"] for row in json.loads(
+            (
+                ROOT
+                / "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
+            ).read_text(encoding="utf-8")
+        )["identities"]
+    }
+    assert len(official_korean) == 45
+    bs2_print_id = "KR:BS2:30/40:base"
+    bs2_profile = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "set-source-record"
+        and row["payload"].get("raw", {}).get("printIds") == [bs2_print_id]
+    )
+    assert bs2_profile["retrieved"] == "2026-09-01"
+    assert bs2_profile["raw"]["retrievedByPrintId"] == {
+        bs2_print_id: "2026-09-01"
+    }
+    assert bs2_profile["raw"]["evidenceSnapshot"] == korean_catalogue_pass.SNAPSHOT
+    assert set(source_first_rows[bs2_print_id]["corroboratingSourceUrls"]) < set(
+        bs2_profile["raw"]["sourceUrls"]
+    )
+    assert source_first_rows[bs2_print_id]["cardImageUrl"] in (
+        bs2_profile["raw"]["cardImageUrls"]
+    )
+    bs2_claim = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityId"] == f"CLAIM:source-first:{bs2_print_id}"
+    )
+    assert bs2_claim["sourceRecord"] == source_first_rows[bs2_print_id]["sourceUrl"]
+    assert bs2_claim["retrievedAt"] == "2026-09-01"
+    bs2_release = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "card-release"
+        and bs2_print_id in row["payload"].get("sourceFirstRecordIds", [])
+    )
+    assert bs2_release["work"] is None
+    assert bs2_release["workMappingState"] == "needs-explicit-equivalence"
+    catalogue_identities = {
+        row["printId"]: row for row in json.loads(
+            korean_catalogue_pass.EVIDENCE.read_text(encoding="utf-8")
+        )["identities"]
+    }
+    catalogue_rows = deepcopy(
+        korean_catalogue_pass.base.OFFICIAL
+        + korean_catalogue_pass.base.PROMOS
+        + korean_catalogue_pass.research.RESEARCH_ROWS
+        + korean_catalogue_pass.new_rows()
+    )
+    for row in catalogue_rows:
+        row.setdefault("legacyVariants", sorted({
+            str(korean_catalogue_pass.research.UNITS_BY_ID[item].get("variant") or "base")
+            for item in row["legacy"]
+        }))
+    korean_catalogue_pass.apply_official_rows(catalogue_rows, catalogue_identities)
+    projected_prints = korean_catalogue_pass.read(korean_catalogue_pass.PRINTS)
+    korean_catalogue_pass.apply_prints(
+        projected_prints, catalogue_rows, catalogue_identities
+    )
+    catalogue_rows = korean_catalogue_pass.projection_rows(
+        catalogue_rows, projected_prints, graph, catalogue_identities
+    )
+    assert len(catalogue_rows) == 52
+    assert {row["printId"] for row in catalogue_rows} == (
+        official_korean | unmatched_korean
+    )
+    assert {
+        row["printId"] for row in catalogue_rows if not row.get("work")
+    } == {bs2_print_id}
+    assert all(
+        all(row.get(field) for field in (
+            "raritySourceUrl", "rarityProviderId", "rarityRetrievedAt"
+        ))
+        for row in catalogue_rows if row.get("rarity") is not None
+    )
+    unsupported_rarity_prints = {
+        "KR:m2a:136/193:base",
+        "KR:xsv2a:143/165:base",
+        "KR:xm2a:136/193:base",
+    }
+    assert all(
+        row.get("rarity") is None
+        for row in catalogue_rows if row["printId"] in unsupported_rarity_prints
+    )
+    assert not any(
+        entity["entityType"] == "rarity-claim"
+        and entity["payload"].get("cardReleaseId")
+        == korean_catalogue_pass.base.release_id(row)
+        for row in catalogue_rows if row["printId"] in unsupported_rarity_prints
+        for entity in graph["entities"]
+    )
+    fxy_row = next(row for row in catalogue_rows if row["printId"] == "KR:FXY:026/036:base")
+    assert fxy_row["corroboratingSourceUrls"] == [
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
+    ]
+    assert fxy_row["corroborated"] is True
+    assert fxy_row["rarity"] == ("fixed product", "fixed")
+    assert fxy_row["raritySourceUrl"] == (
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
+    )
+    assert fxy_row["rarityRetrievedAt"] == "2026-08-10"
+    sm30a_row = next(
+        row for row in catalogue_rows if row["printId"] == "KR:SM30A:060/080:base"
+    )
+    assert sm30a_row["rarity"] == ("fixed product", "fixed")
+    assert sm30a_row["raritySourceUrl"] == (
+        "https://pokemoncard.co.kr/card/277"
+    )
+    assert sm30a_row["raritySupportingSourceUrls"] == [
+        "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+        "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+    ]
+    assert sm30a_row["rarityRetrievedAt"] == "2026-09-01"
+    fixed_product_observations = {
+        row["printId"]: row for row in json.loads(
+            korean_catalogue_pass.EVIDENCE.read_text(encoding="utf-8")
+        )["fixedProductObservations"]
+    }
+    assert fixed_product_observations[sm30a_row["printId"]]["sourceUrl"] == (
+        sm30a_row["raritySourceUrl"]
+    )
+    assert fixed_product_observations[sm30a_row["printId"]]["supportingSourceUrls"] == (
+        sm30a_row["raritySupportingSourceUrls"]
+    )
+    assert source_first_rows[fxy_row["printId"]]["corroboratingSourceUrls"] == (
+        fxy_row["corroboratingSourceUrls"]
+    )
+    units = {
+        row["unitId"]: row for row in json.loads(
+            (ROOT / "verification/units.json").read_text(encoding="utf-8")
+        )
+    }
+    assert "대지의 그릇" not in units["U0260"]["evidence"]
+    assert "잠만보인형 060/066" in units["U0260"]["evidence"]
+    assert units["U0586"]["corroborated"] is True
+    rarity_provenance = {
+        row["printId"]: (
+            row.get("raritySourceUrl", row["sourceUrl"]),
+            row.get("rarityRetrievedAt", row["retrievedAt"]),
+        )
+        for row in catalogue_rows
+        if row["printId"] in official_korean and row.get("rarity") is not None
+    }
+    fixed_product_rarities = {
+        "KR:FXY:026/036:base",
+        "KR:SM30A:060/080:base",
+    }
+    assert fixed_product_rarities.issubset(rarity_provenance)
+    capabilities = korean_catalogue_pass.read(korean_catalogue_pass.CAPABILITIES)
+    korean_catalogue_pass.apply_capabilities(
+        capabilities, korean_catalogue_pass.read(korean_catalogue_pass.EVIDENCE),
+        catalogue_rows,
+    )
+    korea_edge = next(
+        edge for surface in capabilities["surfaces"]
+        if surface["surfaceId"] == "pokemon-card-korea-card-search"
+        for edge in surface["coverageEdges"]
+    )
+    assert "rarity" not in korea_edge["positiveEvidenceCapabilities"]
+    exact_rarity_surface = next(
+        surface for surface in capabilities["surfaces"]
+        if surface["surfaceId"] == "pokemon-card-korea-retained-rarity-details"
+    )
+    assert "rarity" in exact_rarity_surface["coverageEdges"][0][
+        "positiveEvidenceCapabilities"
+    ]
+    assert set(exact_rarity_surface["match"]["urlPrefixes"]) == {
+        row["raritySourceUrl"] for row in catalogue_rows
+        if row.get("rarityProviderId") == "pokemon-card-korea"
+        and row["raritySourceUrl"].startswith(
+            "https://pokemoncard.co.kr/cards/detail/"
+        )
+    }
+    for row in catalogue_rows:
+        if row.get("rarity") is not None:
+            persisted = source_first_rows[row["printId"]]
+            assert persisted["raritySourceUrl"] == row["raritySourceUrl"]
+            assert persisted["rarityProviderId"] == row["rarityProviderId"]
+            assert persisted["rarityRetrievedAt"] == row["rarityRetrievedAt"]
+        if row["printId"] not in official_korean:
+            continue
+        if row.get("rarity") is not None:
+            source_url, retrieved_at = rarity_provenance[row["printId"]]
+            assert row["raritySourceUrl"] == source_url
+            assert row["rarityRetrievedAt"] == retrieved_at
+            rarity_id = (
+                "RARITYCLAIM:issue260:"
+                + korean_catalogue_pass.base.release_id(row).removeprefix(
+                    "RELEASE:KR:Korean:"
+                )
+            )
+            rarity_claim = next(
+                entity["payload"] for entity in graph["entities"]
+                if entity["entityId"] == rarity_id
+            )
+            assert rarity_claim["sourceProductKey"] == source_url
+            assert rarity_claim["retrievedAt"] == retrieved_at
+            if row.get("raritySupportingSourceUrls"):
+                assert rarity_claim["supportingSourceUrls"] == row["raritySupportingSourceUrls"]
+                source_profile = next(
+                    entity["payload"] for entity in graph["entities"]
+                    if entity["entityType"] == "set-source-record"
+                    and entity["entityId"] == rarity_claim["sourceRecordId"]
+                )
+                assert set(row["raritySupportingSourceUrls"]) < set(
+                    source_profile["raw"]["sourceUrls"]
+                )
+        profile = next(
+            entity["payload"] for entity in graph["entities"]
+            if entity["entityType"] == "set-source-record"
+            and row["printId"] in entity["payload"].get("raw", {}).get("printIds", [])
+        )
+        assert profile["raw"]["retrievedByPrintId"][row["printId"]] == (
+            row["retrievedAt"]
+        )
+        assert row["sourceUrl"] in profile["raw"]["sourceUrls"]
+        if row.get("cardImageUrl"):
+            assert row["cardImageUrl"] in profile["raw"]["cardImageUrls"]
+        candidate = next(
+            entity["payload"] for entity in graph["entities"]
+            if entity["entityId"] == f"CLAIM:source-first:{row['printId']}"
+        )
+        assert candidate["sourceRecord"] == row["sourceUrl"]
+        assert candidate["retrievedAt"] == row["retrievedAt"]
+        release = next(
+            entity["payload"] for entity in graph["entities"]
+            if entity["entityType"] == "card-release"
+            and row["printId"] in entity["payload"].get("sourceFirstRecordIds", [])
+        )
+        assert row["sourceUrl"] in release["sourceRecords"]
+    source_registry = {
+        row["canonicalUrl"]: row for row in json.loads(
+            (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")
+        )["evidence"] if row.get("canonicalUrl")
+    }
+    fxy_rarity_url = fxy_row["raritySourceUrl"]
+    assert source_registry[fxy_rarity_url]["providerId"] == "bulbapedia"
+    assert "rarity" in source_registry[fxy_rarity_url]["dimensions"]
+    assert fxy_row["printId"] in source_registry[fxy_rarity_url]["stableIds"]
+    product_url = sm30a_row["raritySourceUrl"]
+    detail_url, membership_url = sm30a_row["raritySupportingSourceUrls"]
+    assert source_registry[product_url]["providerId"] == "pokemon-card-korea"
+    assert source_registry[product_url]["dimensions"] == ["rarity"]
+    assert sm30a_row["printId"] in source_registry[product_url]["stableIds"]
+    assert "set-membership" in source_registry[detail_url]["dimensions"]
+    assert source_registry[membership_url]["dimensions"] == ["set-membership"]
+    capability_resolution = {
+        row["sourceKey"]: row for row in json.loads(
+            (ROOT / "verification/source_capability_graph.json").read_text(encoding="utf-8")
+        )["sourceResolution"]
+    }
+    assert capability_resolution[fxy_rarity_url]["surfaceId"] == (
+        "bulbapedia-mediawiki"
+    )
+    assert "rarity" in capability_resolution[fxy_rarity_url]["dimensions"]
+    assert capability_resolution[product_url]["surfaceId"] == (
+        "pokemon-card-korea-fixed-product"
+    )
+    assert capability_resolution[membership_url]["surfaceId"] == (
+        "pokemon-card-korea-fixed-product"
+    )
+    assert capability_resolution[detail_url]["surfaceId"] == (
+        "pokemon-card-korea-card-search"
+    )
+    assert "rarity" not in capability_resolution[detail_url]["dimensions"]
+    assert {
+        print_id: source_first_rows[print_id]["retrievedAt"]
+        for print_id in official_korean
+    } == {print_id: "2026-09-01" for print_id in official_korean}
+    mixed_profile = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "set-source-record"
+        and row["payload"].get("providerRecordKey") == "KR\x1fs1H"
+    )
+    assert mixed_profile["retrieved"] == "2026-09-01"
+    assert mixed_profile["raw"]["retrievedByPrintId"] == {
+        "KR:s1H:045/060:base": "2026-09-01",
+        "KR:s1H:046/060:base": "2026-09-01",
+        "KR:s1H:066/060:base": "2026-09-01",
+        "KR:s1H:070/060:base": "2026-08-30",
+    }
+    unmatched_rarity = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityId"]
+        == "RARITYCLAIM:issue260:s1H:070/060:Snorlax-VMAX-G-Max-Fall"
+    )
+    assert unmatched_rarity["retrievedAt"] == "2026-08-30"
+    same_work_assertions = [
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "equivalence-assertion"
+        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean
+    ]
+    unmatched_assertions = [
+        row for row in same_work_assertions
+        if row["sourceFirstRecordId"] in unmatched_korean
+    ]
+    official_assertions = [
+        row for row in same_work_assertions
+        if row["sourceFirstRecordId"] in official_korean
+    ]
+    assert {row["sourceFirstRecordId"] for row in unmatched_assertions} == unmatched_korean
+    assert {row["assertedAt"] for row in unmatched_assertions} == {"2026-08-30"}
+    assert official_assertions
+    assert {row["assertedAt"] for row in official_assertions} == {"2026-09-01"}
     assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"

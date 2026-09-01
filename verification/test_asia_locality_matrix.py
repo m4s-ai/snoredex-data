@@ -22,6 +22,11 @@ class AsiaLocalityMatrixTests(unittest.TestCase):
     def test_current_matrix_is_valid(self) -> None:
         self.assertEqual(matrix.validate(self.manifest, self.data), [])
 
+    def test_korean_bounded_slice_retains_historical_gap(self) -> None:
+        track = next(row for row in self.manifest["tracks"] if row["trackId"] == "asia-kr")
+        self.assertEqual(track["terminalState"], "complete")
+        self.assertEqual(track["gapIds"], ["official-korean-historical-positive-frontier"])
+
     def test_missing_track_is_rejected(self) -> None:
         mutated = copy.deepcopy(self.manifest)
         mutated["tracks"].pop()

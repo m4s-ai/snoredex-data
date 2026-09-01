@@ -262,12 +262,14 @@ def summary(inputs: dict[str, Any]) -> dict[str, Any]:
     source_run = source["meta"]["generatedFromRun"]
     card_run = card["meta"]["generatedFromRun"]
     gaps = []
+    adapter_gaps = {row["gapId"]: row for row in card.get("gaps", [])}
     for row in asia.get("localGaps", []):
         gaps.append({"id": row["gapId"], "state": row["terminalState"], "reason": row["reason"]})
     for track in asia.get("tracks", []):
         for gap_id in track.get("gapIds", []):
             if not any(item["id"] == gap_id for item in gaps):
-                gaps.append({"id": gap_id, "state": track["terminalState"], "reason": track["scope"]})
+                gap = adapter_gaps.get(gap_id, track) if track["terminalState"] == "complete" else track
+                gaps.append({"id": gap_id, "state": gap["terminalState"], "reason": gap.get("reason", track["scope"])})
     return {
         "meta": {
             "schema": "snoredex-completeness-gate",

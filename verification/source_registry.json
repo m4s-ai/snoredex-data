@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1190,
-   "uniqueUrls": 1183,
+   "evidenceRecords": 1267,
+   "uniqueUrls": 1260,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3565
+   "claimsAttributed": 3689
   }
  },
  "providers": [
@@ -134,8 +134,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 32,
-   "claimsSupported": 32
+   "uniqueSources": 93,
+   "claimsSupported": 158
   },
   {
    "providerId": "tcgdex",
@@ -158,8 +158,8 @@
     "tcgdex.net",
     "tcgdex.dev"
    ],
-   "uniqueSources": 309,
-   "claimsSupported": 747
+   "uniqueSources": 308,
+   "claimsSupported": 745
   },
   {
    "providerId": "bulbapedia",
@@ -182,8 +182,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 87,
-   "claimsSupported": 670
+   "uniqueSources": 84,
+   "claimsSupported": 636
   },
   {
    "providerId": "tcgcsv",
@@ -273,8 +273,8 @@
     "pokumon.com",
     "www.pokumon.com"
    ],
-   "uniqueSources": 7,
-   "claimsSupported": 11
+   "uniqueSources": 9,
+   "claimsSupported": 13
   },
   {
    "providerId": "pokecottage",
@@ -374,8 +374,8 @@
     "www.collectory.cc",
     "cdn.collectory.cc"
    ],
-   "uniqueSources": 1,
-   "claimsSupported": 2
+   "uniqueSources": 15,
+   "claimsSupported": 22
   },
   {
    "providerId": "wikidex",
@@ -659,7 +659,7 @@
     "www.ebay.de"
    ],
    "uniqueSources": 7,
-   "claimsSupported": 33
+   "claimsSupported": 34
   },
   {
    "providerId": "internal-derivation",
@@ -721,7 +721,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 29,
-   "claimsSupported": 68
+   "claimsSupported": 72
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -764,8 +764,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 70,
-   "claimsSupported": 124
+   "uniqueSources": 74,
+   "claimsSupported": 131
   }
  ],
  "evidence": [
@@ -901,6 +901,23 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Awakening_Psychic_King_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:XY10:057/078:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/BW-P_Promotional_cards_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -999,23 +1016,6 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), per-language promo series article"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "U0623"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Blade_Awakening_(ATCG)",
@@ -1563,16 +1563,18 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), expansion article",
-    "Bulbapedia (fan wiki), expansion article, \"Languages this set is released in\", card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
     "date",
-    "language"
+    "language",
+    "rarity"
    ],
    "stableIdCount": 13,
    "stableIds": [
     "HXY",
+    "KR:FXY:026/036:base",
     "U0482",
     "U0484",
     "U0485",
@@ -1583,10 +1585,9 @@
     "U0492",
     "U0493",
     "U0494",
-    "U0495",
-    "U0586"
+    "U0495"
    ],
-   "retrievedAt": "2026-07-31",
+   "retrievedAt": "2026-08-10",
    "usageCount": 13
   },
   {
@@ -1600,48 +1601,34 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 66,
+   "stableIdCount": 45,
    "stableIds": [
-    "U0049",
     "U0085",
     "U0086",
     "U0087",
     "U0092",
     "U0093",
-    "U0103",
     "U0122",
     "U0123",
-    "U0127",
-    "U0168",
     "U0169",
     "U0170",
     "U0171",
-    "U0173",
     "U0200",
     "U0212",
-    "U0233",
     "U0239",
     "U0244",
     "U0245",
     "U0246",
     "U0247",
     "U0248",
-    "U0257",
-    "U0264",
-    "U0287",
     "U0288",
-    "U0306",
     "U0336",
-    "U0344",
     "U0347",
     "U0357",
     "U0361",
     "U0362",
     "U0363",
     "U0364",
-    "U0370",
-    "U0384",
-    "U0413",
     "U0445",
     "U0450",
     "U0471",
@@ -1650,11 +1637,20 @@
     "U0502",
     "U0508",
     "U0509",
-    "U0511",
-    "U0512"
+    "U0512",
+    "U0529",
+    "U0533",
+    "U0549",
+    "U0557",
+    "U0601",
+    "U0602",
+    "U0603",
+    "U0604",
+    "U0621",
+    "U0630"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 66
+   "usageCount": 45
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Lost_Link_(TCG)",
@@ -1854,32 +1850,14 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 3,
    "stableIds": [
     "U0646",
     "U0647",
-    "U0648",
     "U0649"
    ],
    "retrievedAt": "2026-08-02",
-   "usageCount": 4
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "U0202"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)",
@@ -2096,18 +2074,17 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), per-language promo series article"
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "language"
+    "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "U0379",
-    "U0627"
+    "KR:SM-P:017/SM-P:base"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 2
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(ITCG)",
@@ -2182,6 +2159,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svI:046/066:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Elite_Trainer_Box",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -2200,6 +2194,23 @@
    ],
    "retrievedAt": null,
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Stellar_Tera_Type_Starter_Set_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svLN:010/022:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_(ATCG)",
@@ -2266,23 +2277,6 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 3
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), card article redirect target + collector listing"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "U0661"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Call_of_Legends_33)",
@@ -2374,37 +2368,30 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 2,
    "stableIds": [
     "U0651",
-    "U0653",
-    "U0655",
-    "U0657"
+    "U0655"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 4
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product/card article",
     "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
-    "date",
-    "language"
+    "date"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 1,
    "stableIds": [
-    "U0590",
-    "U0683",
-    "U0763",
     "mC"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 4
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_CoroCiao_Version_(TCG)",
@@ -2425,41 +2412,21 @@
    "usageCount": 2
   },
   {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field, card list row"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "U0770"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list",
     "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
-    "date",
-    "language"
+    "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "U0677",
     "svLN"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Storming_Emergence_(ATCG)",
@@ -2486,38 +2453,36 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list",
     "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
-    "date",
-    "language"
+    "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "U0583",
     "smL"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list",
-    "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field, card list row"
+    "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field, card list row",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "language"
+    "language",
+    "rarity"
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "U0639",
-    "U0641"
+    "KR:sH:038/053:base",
+    "U0639"
    ],
-   "retrievedAt": "2026-07-22",
+   "retrievedAt": "2026-08-30",
    "usageCount": 2
   },
   {
@@ -2567,13 +2532,12 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "U0610",
     "U0611"
    ],
    "retrievedAt": "2026-08-02",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
@@ -2593,23 +2557,6 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Venusaur_%26_Charizard_%26_Blastoise_Special_Deck_Set_ex_(TCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "U0466"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)",
@@ -2634,23 +2581,6 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 4
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), product article, \"In other languages\" table + set list"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "U0291"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/XY-P_Promotional_cards_(TCG)",
@@ -10377,6 +10307,42 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2020001/010_023.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Collectory Korean card database render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0462",
+    "U0610"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2024006/046_066.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Collectory Korean card database render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0463",
+    "U0648"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2024018/094_175.webp",
    "nonUrlEvidenceId": null,
    "providerId": "collectory",
@@ -10393,6 +10359,214 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2026001/567_742.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Collectory Korean card database render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0458",
+    "U0683"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2026001/568_742.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Collectory Korean card database render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0459",
+    "U0590"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2026001/569_742.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Collectory Korean card database render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0460",
+    "U0763"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn.collectory.cc/cards/kr/ST2014001/026_036.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Collectory Korean card database render"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0461",
+    "U0586"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sm9:066/095:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sA:010/023:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:mC:569/742:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svM:094/175:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:mC:567/742:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:m3:062/080:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv4a:145/190:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://collectory.cc/cards/f7c4636f-8030-40a7-86d6-994a0bc3283c",
+   "nonUrlEvidenceId": null,
+   "providerId": "collectory",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:mC:568/742:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.elitefourum.com/t/black-star-promos-languages/36573",
@@ -10484,14 +10658,15 @@
     "Owner-supplied physical card photograph",
     "Physical card, photographed sealed product",
     "Physical card, photographed sealed specimen",
-    "Physical card, photographed specimen"
+    "Physical card, photographed specimen",
+    "owner photograph"
    ],
    "dimensions": [
     "finish",
     "identity",
     "language"
    ],
-   "stableIdCount": 26,
+   "stableIdCount": 30,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -10507,6 +10682,8 @@
     "SPEC-0002",
     "SPEC-0005",
     "SPEC-0006",
+    "SPEC-0028",
+    "SPEC-0031",
     "SPEC-0061",
     "U0100",
     "U0189",
@@ -10516,12 +10693,14 @@
     "U0230",
     "U0231",
     "U0452",
+    "U0627",
+    "U0661",
     "U0752",
     "U0772",
     "U0780"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 37
+   "usageCount": 41
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -12658,7 +12837,7 @@
    "usageCount": 11
   },
   {
-   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW7/bw7_055.jpg?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
@@ -12669,132 +12848,320 @@
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "KR:s10a:058/071:base"
+    "KR:BW7:055/070:base"
    ],
    "retrievedAt": null,
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS2/bs2_kr_30.jpg?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:BS2:30/40:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:DP:006:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:m2a:136/193:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M3/M3_062.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:m3:062/080:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_567.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:mC:567/742:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_568.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:mC:568/742:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_569.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:mC:569/742:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S-P/S-P_101.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:S-P:101:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s10a:058/071:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:s10a:077/071:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:s10b:056/071:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:s1H:045/060:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:s1H:046/060:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:s1H:066/060:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:s2:077/096:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:s4:084/100:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:s8b:126/184:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SA/SA_G_010.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
@@ -12805,7 +13172,24 @@
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "KR:s8b:126/184:base"
+    "KR:sA:010/023:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SH/SH_013_L.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sH:038/053:base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -12815,37 +13199,60 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:sI:341/414:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:sI:342/414:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sN:008/024:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_017.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
@@ -12856,7 +13263,24 @@
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "KR:sN:008/024:base"
+    "KR:SM-P:017/SM-P:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_191.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:SM-P:140:base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -12866,20 +13290,22 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:sm10:076/095:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
-   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
@@ -12890,13 +13316,66 @@
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "KR:sm9:106/095:base"
+    "KR:SM30A:060/080:base"
    ],
    "retrievedAt": null,
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_066.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sm9:066/095:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sm9:106/095:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:smL:038/051:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML_/SML_038.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
@@ -12913,7 +13392,7 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_143.png?w=512",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
@@ -12924,7 +13403,111 @@
    ],
    "stableIdCount": 1,
    "stableIds": [
+    "KR:sv2a:143/165:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_181.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv2a:181/165:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4K/SV4K_060.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv4K:060/066:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_145.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv4a:145/190:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
     "KR:sv4a:310/190:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5a/SV5a_051.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv5a:051/066:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_075.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv9:075/100:base"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -12934,6 +13517,25 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svG:021/049:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVI/SVI_046_L.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
     "Positive source-first card record"
    ],
    "dimensions": [
@@ -12941,9 +13543,128 @@
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "KR:svG:021/049:base"
+    "KR:svI:046/066:base"
    ],
    "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVLN/SVLN_010.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svLN:010/022:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_094.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:svM:094/175:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/FXY/FXY_G_026.jpg?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:FXY:026/036:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/PROMO/XYpromo_167.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:XY-P:167:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY10/XY10_057.png?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:XY10:057/078:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY2/XY2_066.jpg?w=512",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:XY2:066/080:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/277",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:SM30A:060/080:base"
+   ],
+   "retrievedAt": "2026-09-01",
    "usageCount": 1
   },
   {
@@ -12968,237 +13689,904 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language",
+    "rarity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:BW7:055/070:base"
+    "KR:BW7:055/070:base",
+    "U0579"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2014002066",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language",
+    "rarity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:XY2:066/080:base",
+    "U0561"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2016020057",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:XY2:066/080:base"
+    "KR:XY10:057/078:base",
+    "U0541"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019001066",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sm9:066/095:base",
+    "U0413"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019001106",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sm9:106/095:base",
+    "U0633"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:smL:038/051:base",
+    "U0583"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019007076",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sm10:076/095:base",
+    "U0264"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive fixed-product membership record",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "set-membership"
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "KR:smL:038/051:base"
+    "KR:SM30A:060/080:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020001010",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sA:010/023:base",
+    "U0610"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020003045",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:s1H:045/060:base",
+    "U0511"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020003046",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:s1H:046/060:base",
+    "U0287"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020003066",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:s1H:066/060:base",
+    "U0548"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020005077",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:s2:077/096:base",
+    "U0532"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020014084",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:s4:084/100:base"
+    "KR:s4:084/100:base",
+    "U0291"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2021013039",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sH:038/053:base",
+    "U0641"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022001126",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:s8b:126/184:base"
+    "KR:s8b:126/184:base",
+    "U0173"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022003341",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sI:341/414:base",
+    "U0653"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022003342",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sI:342/414:base",
+    "U0657"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022009008",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sN:008/024:base",
+    "U0770"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022010056",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:s10b:056/071:base"
+    "KR:s10b:056/071:base",
+    "U0202"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:s10a:058/071:base"
+    "KR:s10a:058/071:base",
+    "U0344"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011126",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:s10a:077/071:base"
+    "KR:s10a:077/071:base",
+    "U0168"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023014143",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language",
+    "rarity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:sv2a:143/165:base"
+    "KR:sv2a:143/165:base",
+    "U0103"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023014181",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language",
+    "rarity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sv2a:181/165:base",
+    "U0049"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023021060",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:sv2a:181/165:base"
+    "KR:sv4K:060/066:base",
+    "U0260"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:svG:021/049:base"
+    "KR:svG:021/049:base",
+    "U0466"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024001145",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sv4a:145/190:base",
+    "U0306"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024001310",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:sv4a:310/190:base"
+    "KR:sv4a:310/190:base",
+    "U0384"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024006084",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:svI:046/066:base",
+    "U0648"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024007051",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language",
+    "rarity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sv5a:051/066:base",
+    "U0233"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024014010",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:sv5a:051/066:base"
+    "KR:svLN:010/022:base",
+    "U0677"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024018094",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:svM:094/175:base",
+    "U0402"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2025001075",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:sv9:075/100:base",
+    "U0370"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2025015136",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:m2a:136/193:base",
+    "U0127"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2026001567",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:mC:567/742:base",
+    "U0683"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2026001568",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:mC:568/742:base",
+    "U0590"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2026001569",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:mC:569/742:base",
+    "U0763"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2026002062",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:m3:062/080:base",
+    "U0257"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:DP:006:base",
+    "U0623"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/PR2015001167",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:XY-P:167:base",
+    "U0661"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/SMP0000000017",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:SM-P:017/SM-P:base",
+    "U0379"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/SMP000000191",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:SM-P:140:base",
+    "U0627"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/SP000000101",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:S-P:101:base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/ST2014001026",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Pokémon Korea official card catalogue detail",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-release",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:FXY:026/036:base",
+    "U0586"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive fixed-product membership record"
+   ],
+   "dimensions": [
+    "set-membership"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:SM30A:060/080:base"
+   ],
+   "retrievedAt": "2026-09-01",
    "usageCount": 1
   },
   {
@@ -16146,6 +17534,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:SM-P:140:base"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokumon.com/card/snorlax-061-s-p-simplified-chinese-promo",
    "nonUrlEvidenceId": null,
    "providerId": "pokumon",
@@ -16179,6 +17584,23 @@
     "override:pokumon-th-svp082"
    ],
    "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:XY-P:167:base"
+   ],
+   "retrievedAt": "2026-08-28",
    "usageCount": 1
   },
   {
@@ -16284,6 +17706,24 @@
    "usageCount": 6
   },
   {
+   "canonicalUrl": "https://tcgbox.co.kr/product/%EC%9E%A0%EB%A7%8C%EB%B3%B4gx/3966",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listing"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0439",
+    "U0379"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://www.copagloja.com.br/pokemon",
    "nonUrlEvidenceId": null,
    "providerId": "retailer-listing",
@@ -16300,23 +17740,6 @@
    ],
    "retrievedAt": "2026-08-02",
    "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://www.ebay.de/itm/167623600843",
-   "nonUrlEvidenceId": null,
-   "providerId": "retailer-listing",
-   "sourceTypes": [
-    "Marketplace listing, sealed Korean product from a Korean commercial seller"
-   ],
-   "dimensions": [
-    "language"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "U0402"
-   ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.nacg.tw/product-details.php?id=149595",
@@ -16539,6 +17962,57 @@
     "F0146-P02"
    ],
    "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/386929037",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:DP:006:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/407721760",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv4K:060/066:base"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/423230156",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:sv9:075/100:base"
+   ],
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -17241,6 +18715,24 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/407721760_1_1787157533_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0445",
+    "U0260"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -17407,14 +18899,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0209-P01"
+    "F0209-P01",
+    "SPEC-0436",
+    "U0127"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-30",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
@@ -23010,26 +24505,6 @@
    "stableIds": [
     "F0499-P01",
     "U0676"
-   ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://api.tcgdex.net/v2/ko/cards/SV4K-059",
-   "nonUrlEvidenceId": null,
-   "providerId": "tcgdex",
-   "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
-   ],
-   "dimensions": [
-    "finish",
-    "language"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0482-P01",
-    "U0260"
    ],
    "retrievedAt": "2026-07-21",
    "usageCount": 2

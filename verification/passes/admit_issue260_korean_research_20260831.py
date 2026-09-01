@@ -39,7 +39,7 @@ def research(
     unit_id: str,
     set_code: str,
     number: str,
-    rarity: tuple[str, str | None],
+    rarity: tuple[str, str | None] | None,
     source_url: str,
     provider: str,
     *,
@@ -63,6 +63,7 @@ def research(
         "work": unit["cardKey"],
         "legacy": legacy_ids,
         "rarity": rarity,
+        "retrievedAt": RETRIEVED_AT,
         "specimenId": specimen_id,
         "cardName": card_name or unit["cardName"],
         "providerId": provider,
@@ -103,6 +104,9 @@ UNIT_CORROBORATION_SPECIMENS = {
 }
 
 KOREAN_LVX_WORK = "Snorlax-LvX-Big-Appetite-Exercise"
+BASE_SOURCE_FIRST_PRINT_IDS = {
+    row["printId"] for row in base.OFFICIAL + base.PROMOS
+}
 
 
 # Positive source observations from the current Korean research.  Namu-only
@@ -111,7 +115,7 @@ KOREAN_LVX_WORK = "Snorlax-LvX-Big-Appetite-Exercise"
 RESEARCH_ROWS = [
     research("U0049", "sv2a", "181/165", ("AR", "illustration-rare"), "https://pokemoncard.co.kr/cards/detail/BS2023014181", "pokemon-card-korea"),
     research("U0103", "sv2a", "143/165", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2023014143", "pokemon-card-korea"),
-    research("U0127", "m2a", "136/193", ("not stated", None), "https://globalbunjang.com/product/423487583", "seller-listing-photo", specimen_id="SPEC-0436"),
+    research("U0127", "m2a", "136/193", None, "https://globalbunjang.com/product/423487583", "seller-listing-photo", specimen_id="SPEC-0436"),
     research("U0233", "sv5a", "051/066", ("U", "uncommon"), "https://pokemoncard.co.kr/cards/detail/BS2024007051", "pokemon-card-korea", specimen_id="SPEC-0441"),
     research("U0257", "m3", "062/080", ("C", "common"), "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e", "collectory", specimen_id="SPEC-0443"),
     research("U0260", "sv4K", "060/066", ("U", "uncommon"), "https://globalbunjang.com/product/407721760", "seller-listing-photo", specimen_id="SPEC-0445", corroborating=["https://www.pokepolio.com/cards/8ae3d25e-9838-4724-bcf3-cf5ed897d22b"]),
@@ -136,8 +140,8 @@ RESEARCH_ROWS = [
     research("U0680", "20th", "047/072", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)", "bulbapedia"),
     research("U0683", "mC", "567/742", ("N", None), "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d", "collectory", specimen_id="SPEC-0458"),
     research("U0763", "mC", "569/742", ("N", None), "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec", "collectory", specimen_id="SPEC-0460"),
-    research("U0780", "xsv2a", "143/165", ("not stated", None), "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
-    research("U0785", "xm2a", "136/193", ("not stated", None), "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136", "cardmarket-listing-photo", specimen_id="SPEC-0410", corroborating=["https://globalbunjang.com/product/420832203"], legacy=["U0785", "U0790"]),
+    research("U0780", "xsv2a", "143/165", None, "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
+    research("U0785", "xm2a", "136/193", None, "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136", "cardmarket-listing-photo", specimen_id="SPEC-0410", corroborating=["https://globalbunjang.com/product/420832203"], legacy=["U0785", "U0790"]),
 ]
 
 
@@ -154,12 +158,17 @@ def korean_name(card_name: str) -> str:
 
 
 def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
-    if row in base.OFFICIAL + base.PROMOS:
+    if row["printId"] in BASE_SOURCE_FIRST_PRINT_IDS:
         return base.source_first_row(row)
     specimen_clause = (
         f" Retained {row['specimenId']} is the positive physical/card-face observation."
         if row.get("specimenId") else
         " This is catalogue/set-list evidence only; no physical finish or appearance is inferred."
+    )
+    rarity_clause = (
+        f" and states rarity {row['rarity'][0]}."
+        if row.get("rarity") is not None
+        else ". No rarity is claimed from this record."
     )
     result = {
         "printId": row["printId"], "locality": "KR", "localSetCode": row["localSetCode"],
@@ -167,12 +176,13 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
         "script": "Hang", "name": korean_name(row["cardName"]),
         "cardName": row["cardName"],
         "catchUpOf": "positive Korean research applied to the issue #260 legacy queue",
+        "retrievedAt": row.get("retrievedAt", RETRIEVED_AT),
         "specimenId": row.get("specimenId"), "providerId": row["providerId"],
         "sourceUrl": row["sourceUrl"], "corroborated": row["corroborated"],
         "markAssetUrl": None, "cardImageUrl": None,
         "evidence": (
             f"The retained positive {row['providerId']} record identifies Korean {row['localSetCode']} "
-            f"{row['localNumber']} for {row['cardName']} and states rarity {row['rarity'][0] or 'not printed in the retained record'}."
+            f"{row['localNumber']} for {row['cardName']}{rarity_clause}"
             " This establishes local identity and the explicit Work mapping while keeping the Korean release distinct."
             + specimen_clause
         ),

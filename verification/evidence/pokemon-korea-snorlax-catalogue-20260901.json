@@ -1,0 +1,135 @@
+{
+  "schema": "snoredex-positive-catalogue-observation",
+  "schemaVersion": "1.0.0",
+  "providerId": "pokemon-card-korea",
+  "surfaceId": "pokemon-card-korea-card-search",
+  "retrievedAt": "2026-09-01",
+  "query": {
+    "landingUrl": "https://pokemoncard.co.kr/cards",
+    "method": "POST",
+    "endpoint": "https://pokemoncard.co.kr/v2/ajax2_dev2",
+    "parameters": {
+      "search_params": "cardname",
+      "search_text": "잠만보"
+    },
+    "sessionRequirement": "Prime a browser session at /cards; the route is region/session dependent and was reachable while the user-provided VPN was active.",
+    "pageRecordCounts": [30, 17, 0],
+    "endpointRecordCount": 47,
+    "uniqueIdentityCount": 45,
+    "productDropdownOptionCount": 557,
+    "uniqueProductDropdownOptionCount": 551
+  },
+  "policy": {
+    "positiveOnly": true,
+    "absenceCapability": false,
+    "finishCapability": false,
+    "scope": "The bounded exact Korean card-name response and its reachable detail pages. Missing rows, unavailable routes and alternate publisher renders prove no absence or physical finish."
+  },
+  "identities": [
+    {"printId":"KR:BS2:30/40:base","localSetCode":"BS2","collectorNumber":"30/40","name":"잠만보","illustrator":"Ken Sugimori","hp":"HP100","product":"DP 확장팩 불꽃 튀는 대결","providerRecordIds":["BS2010002030"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS2/bs2_kr_30.jpg?w=512"]},
+    {"printId":"KR:BW7:055/070:base","localSetCode":"BW7","collectorNumber":"055/070","name":"잠만보","illustrator":"5ban Graphics","hp":"HP130","product":"BW 확장팩 제7탄 「플라스마게일」","providerRecordIds":["BS2013001055"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW7/bw7_055.jpg?w=512"]},
+    {"printId":"KR:DP:006:base","localSetCode":"DP","collectorNumber":"6","name":"잠만보 LV.X","illustrator":"SHizURow","hp":"HP130","product":"DP 프로모 카드","providerRecordIds":["PR2010001006"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512"]},
+    {"printId":"KR:FXY:026/036:base","localSetCode":"FXY","collectorNumber":"026/036","name":"잠만보","illustrator":"Naoki Saito","hp":"HP120","product":"XY 퍼스트세트 「도치마론의 진화」","providerRecordIds":["ST2014001026"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/FXY/FXY_G_026.jpg?w=512"]},
+    {"printId":"KR:m2a:136/193:base","localSetCode":"m2a","collectorNumber":"136/193","name":"호브의 잠만보","illustrator":"OKACHEKE","hp":"HP150","product":"MEGA 하이클래스팩 「MEGA 드림 ex」","providerRecordIds":["BS2025015136"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png?w=512"]},
+    {"printId":"KR:m3:062/080:base","localSetCode":"m3","collectorNumber":"062/080","name":"잠만보","illustrator":"Toshinao Aoki","hp":"HP160","product":"MEGA 확장팩 「니힐제로」","providerRecordIds":["BS2026002062"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M3/M3_062.png?w=512"]},
+    {"printId":"KR:mC:567/742:base","localSetCode":"mC","collectorNumber":"567/742","name":"잠만보","illustrator":"Souichirou Gunjima","hp":"HP160","product":"MEGA 「스타트 덱 100 배틀컬렉션」","providerRecordIds":["BS2026001567"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_567.png?w=512"]},
+    {"printId":"KR:mC:568/742:base","localSetCode":"mC","collectorNumber":"568/742","name":"잠만보","illustrator":"Po-Suzuki","hp":"HP160","product":"MEGA 「스타트 덱 100 배틀컬렉션」","providerRecordIds":["BS2026001568"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_568.png?w=512"]},
+    {"printId":"KR:mC:569/742:base","localSetCode":"mC","collectorNumber":"569/742","name":"호브의 잠만보","illustrator":"GOSSAN","hp":"HP150","product":"MEGA 「스타트 덱 100 배틀컬렉션」","providerRecordIds":["BS2026001569"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_569.png?w=512"]},
+    {"printId":"KR:S-P:101:base","localSetCode":"S-P","collectorNumber":"101/S-P","name":"잠만보","illustrator":"Yuya Oka","hp":"HP140","product":"포켓몬 카드 게임 온라인 공식 인증샵 구입특전","providerRecordIds":["SP000000101"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S-P/S-P_101.png?w=512"]},
+    {"printId":"KR:s1H:045/060:base","localSetCode":"s1H","collectorNumber":"045/060","name":"잠만보 V","illustrator":"Masakazu Fukuda","hp":"HP220","product":"소드&실드 확장팩 「실드」","providerRecordIds":["BS2020003045"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512"]},
+    {"printId":"KR:s1H:046/060:base","localSetCode":"s1H","collectorNumber":"046/060","name":"잠만보 VMAX","illustrator":"aky CG Works","hp":"HP340","product":"소드&실드 확장팩 「실드」","providerRecordIds":["BS2020003046"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512"]},
+    {"printId":"KR:s1H:066/060:base","localSetCode":"s1H","collectorNumber":"066/060","name":"잠만보 V","illustrator":"aky CG Works","hp":"HP220","product":"소드&실드 확장팩 「실드」","providerRecordIds":["BS2020003066"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512"]},
+    {"printId":"KR:s2:077/096:base","localSetCode":"s2","collectorNumber":"077/096","name":"잠만보","illustrator":"Eri Yamaki","hp":"HP150","product":"소드&실드 확장팩 「반역크래시」","providerRecordIds":["BS2020005077"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512"]},
+    {"printId":"KR:s4:084/100:base","localSetCode":"s4","collectorNumber":"084/100","name":"잠만보","illustrator":"Atsuko Nishida","hp":"HP130","product":"소드&실드 확장팩 「앙천의 볼트태클」","providerRecordIds":["BS2020014084"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512"]},
+    {"printId":"KR:s8b:126/184:base","localSetCode":"s8b","collectorNumber":"126/184","name":"잠만보","illustrator":"Narumi Sato","hp":"HP130","product":"소드&실드 하이클래스팩 「VMAX 클라이맥스」","providerRecordIds":["BS2022001126"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512"]},
+    {"printId":"KR:s10a:058/071:base","localSetCode":"s10a","collectorNumber":"058/071","name":"잠만보","illustrator":"0313","hp":"HP150","product":"소드&실드 강화 확장팩 「다크판타스마」","providerRecordIds":["BS2022011097"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512"]},
+    {"printId":"KR:s10a:077/071:base","localSetCode":"s10a","collectorNumber":"077/071","name":"잠만보","illustrator":"Kouki Saitou","hp":"HP150","product":"소드&실드 강화 확장팩 「다크판타스마」","providerRecordIds":["BS2022011126"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512"]},
+    {"printId":"KR:s10b:056/071:base","localSetCode":"s10b","collectorNumber":"056/071","name":"잠만보","illustrator":"N-DESIGN Inc.","hp":"HP150","product":"소드&실드 강화 확장팩 「Pokémon GO」","providerRecordIds":["BS2022010056"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512"]},
+    {"printId":"KR:sA:010/023:base","localSetCode":"sA","collectorNumber":"010/023","name":"잠만보","illustrator":"chibi","hp":"HP150","product":"소드&실드 스타터 세트 V 풀","providerRecordIds":["BS2020001010"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SA/SA_G_010.png?w=512"]},
+    {"printId":"KR:sH:038/053:base","localSetCode":"sH","collectorNumber":"038/053","name":"잠만보","illustrator":"Oswaldo KATO","hp":"HP160","product":"소드&실드 「패밀리 포켓몬 카드 게임」","providerRecordIds":["BS2021013039"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SH/SH_013_L.png?w=512"]},
+    {"printId":"KR:sI:341/414:base","localSetCode":"sI","collectorNumber":"341/414","name":"잠만보","illustrator":"Oswaldo KATO","hp":"HP160","product":"소드&실드 「스타트 덱 100」","providerRecordIds":["BS2022003341"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"]},
+    {"printId":"KR:sI:342/414:base","localSetCode":"sI","collectorNumber":"342/414","name":"잠만보","illustrator":"Asako Ito","hp":"HP160","product":"소드&실드 「스타트 덱 100」","providerRecordIds":["BS2022003342"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"]},
+    {"printId":"KR:sN:008/024:base","localSetCode":"sN","collectorNumber":"008/024","name":"잠만보","illustrator":"Oswaldo KATO","hp":"HP160","product":"소드 & 실드 「스타트 덱 100 피카츄 V & 이브이 V」","providerRecordIds":["BS2022009008"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512"]},
+    {"printId":"KR:SM-P:017/SM-P:base","localSetCode":"SM-P","collectorNumber":"017/SM-P","name":"잠만보 GX","illustrator":"5ban Graphics","hp":"HP190","product":"썬&문 프로모 카드 포켓몬 카드 게임 썬&문 카드 박스 세트 「잠만보 GX」","providerRecordIds":["SMP0000000017"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_017.png?w=512"]},
+    {"printId":"KR:SM-P:140:base","localSetCode":"SM-P","collectorNumber":"140/SM-P","name":"이브이&잠만보 GX","illustrator":"Tomokazu Komiya","hp":"HP270","product":"「태그볼트」 「나이트유니슨」 각 1BOX 구매자 프로모 카드","providerRecordIds":["SMP000000191"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_191.png?w=512"]},
+    {"printId":"KR:SM30A:060/080:base","localSetCode":"SM30A","collectorNumber":"060/080","name":"잠만보","illustrator":"Akira Komayama","hp":"HP150","product":"썬&문 「랜덤30장덱」","providerRecordIds":["BS2019018060"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512"]},
+    {"printId":"KR:sm9:066/095:base","localSetCode":"sm9","collectorNumber":"066/095","name":"이브이&잠만보 GX","illustrator":"Mitsuhiro Arita","hp":"HP270","product":"썬&문 확장팩 「태그볼트」","providerRecordIds":["BS2019001066"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_066.png?w=512"]},
+    {"printId":"KR:sm9:106/095:base","localSetCode":"sm9","collectorNumber":"106/095","name":"이브이&잠만보 GX","illustrator":"5ban Graphics","hp":"HP270","product":"썬&문 확장팩 「태그볼트」","providerRecordIds":["BS2019001106"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512"]},
+    {"printId":"KR:sm10:076/095:base","localSetCode":"sm10","collectorNumber":"076/095","name":"잠만보","illustrator":"kanahei","hp":"HP150","product":"썬&문 확장팩 「더블블레이즈」","providerRecordIds":["BS2019007076"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512"]},
+    {"printId":"KR:smL:038/051:base","localSetCode":"smL","collectorNumber":"038/051","name":"잠만보","illustrator":"Akira Komayama","hp":"HP150","product":"패밀리 포켓몬 카드 게임 「뮤츠 GX 덱」","providerRecordIds":["BS2019006059"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML_/SML_038.png?w=512"]},
+    {"printId":"KR:sv2a:143/165:base","localSetCode":"sv2a","collectorNumber":"143/165","name":"잠만보","illustrator":"HYOGONOSUKE","hp":"HP150","product":"스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」","providerRecordIds":["BS2023014143","BS2023014143m"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_143.png?w=512","https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_143_m.png?w=512"]},
+    {"printId":"KR:sv2a:181/165:base","localSetCode":"sv2a","collectorNumber":"181/165","name":"잠만보","illustrator":"GOSSAN","hp":"HP150","product":"스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」","providerRecordIds":["BS2023014181"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_181.png?w=512"]},
+    {"printId":"KR:sv4a:145/190:base","localSetCode":"sv4a","collectorNumber":"145/190","name":"잠만보","illustrator":"HYOGONOSUKE","hp":"HP150","product":"스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」","providerRecordIds":["BS2024001145","BS2024001145m"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_145.png?w=512","https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_145m.png?w=512"]},
+    {"printId":"KR:sv4a:310/190:base","localSetCode":"sv4a","collectorNumber":"310/190","name":"잠만보","illustrator":"Shigenori Negishi","hp":"HP150","product":"스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」","providerRecordIds":["BS2024001310"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512"]},
+    {"printId":"KR:sv4K:060/066:base","localSetCode":"sv4K","collectorNumber":"060/066","name":"잠만보인형","illustrator":"AYUMI ODASHIMA","hp":null,"product":"스칼렛&바이올렛 확장팩 「고대의 포효」","providerRecordIds":["BS2023021060"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4K/SV4K_060.png?w=512"]},
+    {"printId":"KR:sv5a:051/066:base","localSetCode":"sv5a","collectorNumber":"051/066","name":"잠만보","illustrator":"Souichirou Gunjima","hp":"HP160","product":"스칼렛&바이올렛 강화 확장팩 「크림슨헤이즈」","providerRecordIds":["BS2024007051"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5a/SV5a_051.png?w=512"]},
+    {"printId":"KR:sv9:075/100:base","localSetCode":"sv9","collectorNumber":"075/100","name":"호브의 잠만보","illustrator":"GOSSAN","hp":"HP150","product":"스칼렛&바이올렛 확장팩 「배틀파트너즈」","providerRecordIds":["BS2025001075"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_075.png?w=512"]},
+    {"printId":"KR:svG:021/049:base","localSetCode":"svG","collectorNumber":"021/049","name":"잠만보","illustrator":"0313","hp":"HP150","product":"스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」","providerRecordIds":["BS2023023021"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512"]},
+    {"printId":"KR:svI:046/066:base","localSetCode":"svI","collectorNumber":"046/066","name":"잠만보","illustrator":"Po-Suzuki","hp":"HP160","product":"스칼렛&바이올렛 「배틀 아카데미」","providerRecordIds":["BS2024006084"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVI/SVI_046_L.png?w=512"]},
+    {"printId":"KR:svLN:010/022:base","localSetCode":"svLN","collectorNumber":"010/022","name":"잠만보","illustrator":"Ounishi","hp":"HP150","product":"스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「님피아 ex」","providerRecordIds":["BS2024014010"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVLN/SVLN_010.png?w=512"]},
+    {"printId":"KR:svM:094/175:base","localSetCode":"svM","collectorNumber":"094/175","name":"잠만보 ex","illustrator":"N-DESIGN Inc.","hp":"HP260","product":"스칼렛&바이올렛 랜덤 스타트 덱 Generations","providerRecordIds":["BS2024018094"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_094.png?w=512"]},
+    {"printId":"KR:XY-P:167:base","localSetCode":"XY-P","collectorNumber":"167/XY-P","name":"잠만보","illustrator":"Kouki Saitou","hp":"HP120","product":"XY 프로모 카드","providerRecordIds":["PR2015001167"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/PROMO/XYpromo_167.png?w=512"]},
+    {"printId":"KR:XY2:066/080:base","localSetCode":"XY2","collectorNumber":"066/080","name":"잠만보","illustrator":"Mitsuhiro Arita","hp":"HP130","product":"XY 확장팩 제2탄 「와일드 블레이즈」","providerRecordIds":["BS2014002066"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY2/XY2_066.jpg?w=512"]},
+    {"printId":"KR:XY10:057/078:base","localSetCode":"XY10","collectorNumber":"057/078","name":"잠만보","illustrator":"Tomokazu Komiya","hp":"HP140","product":"XY BREAK 확장팩 제10탄 「초능력의 제왕」","providerRecordIds":["BS2016020057"],"imageUrls":["https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY10/XY10_057.png?w=512"]}
+  ],
+  "newPositiveObservations": [
+    {
+      "printId": "KR:FXY:026/036:base",
+      "detailUrl": "https://pokemoncard.co.kr/cards/detail/ST2014001026",
+      "work": "Snorlax-Rock-Smash-Strength",
+      "legacyCounterpartUnitId": "U0586",
+      "basis": "The official Korean detail identifies 잠만보 026/036 in XY 퍼스트세트 「도치마론의 진화」, HP120, illustrator Naoki Saito, with 바위깨기 and 괴력. These positive traits resolve the prior HXY 026 Korean placeholder to local identity FXY 026/036."
+    },
+    {
+      "printId": "KR:SM30A:060/080:base",
+      "detailUrl": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+      "work": "Snorlax-Incredible-Snore",
+      "legacyCounterpartUnitId": null,
+      "basis": "The official Korean detail identifies 잠만보 060/080 in 썬&문 「랜덤30장덱」, HP150, illustrator Akira Komayama, with 굉장한코골기 100. This is a positive Korean release not present in the identified graph at capture time."
+    }
+  ],
+  "fixedProductObservations": [
+    {
+      "printId": "KR:FXY:026/036:base",
+      "classification": "fixed",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+      "retrievedAt": "2026-08-10",
+      "basis": "The retained closed Beginning Set deck list contains Snorlax 026/039 and the same article states that the Beginning Set was released in Korean. The fixed-product evidence was already recorded for legacy unit U0586; the official Korean catalogue resolves that legacy placeholder to FXY 026/036."
+    },
+    {
+      "printId": "KR:SM30A:060/080:base",
+      "classification": "fixed",
+      "sourceUrl": "https://pokemoncard.co.kr/card/277",
+      "retrievedAt": "2026-09-01",
+      "supportingSourceUrls": [
+        "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+        "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1"
+      ],
+      "membershipQueryUrl": "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+      "membershipQueryParameters": {
+        "action": "search_text_cards",
+        "search_params": "all",
+        "search_text": "리자몽 GX 30장덱"
+      },
+      "pageRecordCounts": [15, 0],
+      "providerRecordIds": [
+        "BS2019018082",
+        "BS2019018078",
+        "BS2019018074",
+        "BS2019018071",
+        "BS2019018070",
+        "BS2019018068",
+        "BS2019018067",
+        "BS2019018066",
+        "BS2019018060",
+        "BS2019018059",
+        "BS2019018013",
+        "BS2019018012",
+        "BS2019018011",
+        "BS2019018010",
+        "BS2019018009"
+      ],
+      "basis": "The official detail assigns Snorlax BS2019018060 to the named Charizard GX 30-card deck. The official product page says each box contains one of nine decks at random, but explicitly describes the contained product as a constructed deck and notes that the same card occurs multiple times because it is constructed. The exact named-deck query returns a bounded 15-record membership list followed by zero further records. The random choice is between deck variants, not random card contents within the named deck."
+    }
+  ]
+}

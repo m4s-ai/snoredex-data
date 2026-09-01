@@ -58,6 +58,7 @@ def card(
         "work": work,
         "legacy": [legacy],
         "rarity": rarity,
+        "retrievedAt": "2026-08-28",
         "specimenId": specimen,
         "cardName": card_name,
         "providerRecordId": provider_record,
@@ -95,6 +96,7 @@ PROMOS = [
         "printId": "KR:S-P:101:base", "localSetCode": "S-P", "localNumber": "101",
         "work": "Snorlax-Slap-Push-Single-Strike-Tackle", "legacy": ["U0523"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0014", "cardName": "Snorlax",
+        "retrievedAt": "2026-08-28",
         "providerId": "pokemon-card-korea", "providerRecordId": "SP000000101",
         "sourceUrl": "https://pokemoncard.co.kr/cards/detail/SP000000101",
         "corroboratingSourceUrls": ["https://pokumon.com/card/snorlax-101-s-p-korean-promo/"],
@@ -105,6 +107,7 @@ PROMOS = [
         "printId": "KR:SM-P:140:base", "localSetCode": "SM-P", "localNumber": "140",
         "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", "legacy": ["U0627"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0028", "cardName": "Eevee & Snorlax GX",
+        "retrievedAt": "2026-08-28",
         "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
         "corroborated": True,
         "releaseDate": "2019", "releaseDatePrecision": "year",
@@ -113,6 +116,7 @@ PROMOS = [
         "printId": "KR:XY-P:167:base", "localSetCode": "XY-P", "localNumber": "167",
         "work": "Snorlax-Plump-Body-Knock-Away", "legacy": ["U0661"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0031", "cardName": "Snorlax",
+        "retrievedAt": "2026-08-28",
         "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
         "corroborated": True,
         "releaseDate": "2017", "releaseDatePrecision": "year",
@@ -140,7 +144,9 @@ def write(path: Path, payload: dict[str, Any]) -> None:
 
 
 def release_id(row: dict[str, Any]) -> str:
-    return f"RELEASE:KR:Korean:{row['localSetCode']}:{row['localNumber']}:{row['work']}"
+    return row.get("cardReleaseId") or (
+        f"RELEASE:KR:Korean:{row['localSetCode']}:{row['localNumber']}:{row['work']}"
+    )
 
 
 def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
@@ -150,6 +156,7 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
         "script": "Hang", "name": "이브이&잠만보 GX" if row["cardName"].startswith("Eevee") else "잠만보",
         "cardName": row["cardName"],
         "catchUpOf": "the exact Korean counterpart established by the printed Korean attacks and card traits",
+        "retrievedAt": row.get("retrievedAt", "2026-08-28"),
         "specimenId": row["specimenId"], "providerId": row.get("providerId", "pokemon-card-korea"),
         "sourceUrl": row["sourceUrl"],
         "corroborated": bool(row.get("corroborated")), "markAssetUrl": None,
@@ -222,14 +229,36 @@ def build_profile(
 ) -> dict[str, Any]:
     numbers = sorted(row["localNumber"] for row in rows)
     denominators = {number.partition("/")[2] for number in numbers if number.partition("/")[2].isdigit()}
+    retrieved_by_print_id = {
+        row["printId"]: row.get("retrievedAt") or retrieved_at for row in rows
+    }
     return {
         "sourceRecordId": stable_profile_id("KR", code), "sourceKind": "source-first-local-set-profile",
-        "provider": "mixed-positive-evidence", "providerRecordKey": f"KR\x1f{code}", "retrieved": retrieved_at,
+        "provider": "mixed-positive-evidence", "providerRecordKey": f"KR\x1f{code}",
+        "retrieved": max(retrieved_by_print_id.values()),
         "raw": {
             "localCode": code, "localName": None, "locality": "KR", "languages": ["Korean"],
             "scripts": ["Hang"], "printIds": sorted(row["printId"] for row in rows),
-            "providers": sorted({row.get("providerId", "pokemon-card-korea") for row in rows}),
-            "sourceUrls": sorted({row["sourceUrl"] for row in rows}),
+            "providers": sorted({
+                provider
+                for row in rows
+                for provider in (
+                    row.get("providerId", "pokemon-card-korea"),
+                    row.get("rarityProviderId"),
+                )
+                if provider
+            }),
+            "sourceUrls": sorted({
+                url
+                for row in rows
+                for url in (
+                    row["sourceUrl"],
+                    row.get("raritySourceUrl"),
+                    *(row.get("raritySupportingSourceUrls") or []),
+                )
+                if url
+            }),
+            "retrievedByPrintId": dict(sorted(retrieved_by_print_id.items())),
             "printedSetSize": int(next(iter(denominators))) if len(denominators) == 1 else None,
             "printedSetSizeBasis": "the denominator printed on every observed card" if len(denominators) == 1 else "no common printed denominator is inferred",
             "localeSuffix": None, "observedCollectorNumbers": numbers,
@@ -409,6 +438,10 @@ def remove_obsolete_release(
 
 def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dict[str, Any]) -> None:
     rid = release_id(row)
+    work = row.get("work")
+    work_mapping_state = row.get("workMappingState") or (
+        "mapped-by-explicit-equivalence" if work else "needs-explicit-equivalence"
+    )
     legacy_claims, finish_claims, heritage = remove_obsolete_release(graph, row, rid)
     # A previous run may have materialized a release before its Work key was
     # known.  Replace any derived rarity claim for that same local identity so
@@ -435,13 +468,13 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
         ]
     claim_id = f"CLAIM:source-first:{row['printId']}"
     edition_id = f"EDITION:KR:Korean:{row['localSetCode']}"
-    claim = {"claimId": claim_id, "claimKind": "card-release", "sourceKind": "source-first-record", "sourceId": row["printId"], "sourceRecord": row["sourceUrl"], "evidenceStatus": "confirmed", "disposition": "established-and-mapped", "proposedTargetId": rid, "materializedTargetId": rid, "reason": "positive exact Korean card record and retained image"}
+    claim = {"claimId": claim_id, "claimKind": "card-release", "sourceKind": "source-first-record", "sourceId": row["printId"], "sourceRecord": row["sourceUrl"], "retrievedAt": row.get("retrievedAt") or profile["retrieved"], "evidenceStatus": "confirmed", "disposition": "established-and-mapped", "proposedTargetId": rid, "materializedTargetId": rid, "reason": "positive exact Korean card record and retained image"}
     upsert_entity(graph, "candidate-claim", claim_id, claim, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "candidate-claim", claim_id, "materializes", "card-release", rid, {"disposition": "established-and-mapped"})
     upsert_migration(graph, {"sourceKind": "source-first-record", "sourceId": row["printId"], "disposition": "established-and-mapped", "targetRef": rid, "reason": claim["reason"]})
     claim_ids = sorted([claim_id, *(item[0] for item in legacy_claims)])
     source_records = sorted({row["sourceUrl"], *(item[1] for item in legacy_claims if item[1])})
-    payload = {"cardReleaseId": rid, "setEditionId": edition_id, "locality": "KR", "language": "Korean", "script": "Hang", "localSetCode": row["localSetCode"], "localNumber": row["localNumber"], "localIdentifierKnown": True, "state": "identified", "work": row["work"], "workMappingState": "mapped-by-explicit-equivalence", "viaLegacySetCode": None, "viaLegacyNumber": None, "claimIds": claim_ids, "establishingClaimIds": claim_ids, "nonEstablishingClaimIds": [], "legacyVariants": sorted(set(heritage["legacyVariants"]) | set(row["legacyVariants"])), "legacyProducts": heritage["legacyProducts"], "sourceRecords": source_records, "sourceFirstRecordIds": [row["printId"]], "legacyCounterpartUnitIds": row["legacy"]}
+    payload = {"cardReleaseId": rid, "setEditionId": edition_id, "locality": "KR", "language": "Korean", "script": "Hang", "localSetCode": row["localSetCode"], "localNumber": row["localNumber"], "localIdentifierKnown": True, "state": "identified", "work": work, "workMappingState": work_mapping_state, "viaLegacySetCode": None, "viaLegacyNumber": None, "claimIds": claim_ids, "establishingClaimIds": claim_ids, "nonEstablishingClaimIds": [], "legacyVariants": sorted(set(heritage["legacyVariants"]) | set(row["legacyVariants"])), "legacyProducts": heritage["legacyProducts"], "sourceRecords": source_records, "sourceFirstRecordIds": [row["printId"]], "legacyCounterpartUnitIds": row["legacy"]}
     for field in ("releaseDate", "releaseDatePrecision", "releaseApproximate"):
         if row.get(field) is not None:
             payload[field] = row[field]
@@ -453,12 +486,38 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     for finish_claim_id in finish_claims:
         upsert_edge(graph, "candidate-claim", finish_claim_id, "proposes-for", "card-release", rid)
     upsert_edge(graph, "card-release", rid, "belongs-to", "set-edition", edition_id)
-    upsert_edge(graph, "card-release", rid, "implements", "work", f"WORK:{row['work']}", {"state": "mapped-by-explicit-equivalence", "basis": "exact Korean printed attacks and card traits"})
+    graph["edges"] = [
+        edge for edge in graph["edges"]
+        if not (
+            edge.get("fromType") == "card-release"
+            and edge.get("fromId") == rid
+            and edge.get("relation") == "implements"
+        )
+    ]
+    if work:
+        upsert_edge(
+            graph, "card-release", rid, "implements", "work", f"WORK:{work}",
+            {
+                "state": work_mapping_state,
+                "basis": row.get("workMappingBasis")
+                or "exact Korean printed attacks and card traits",
+            },
+        )
     upsert_entity(graph, "catalogue-card-release-ref", rid, {"cardReleaseId": rid, "setEditionId": edition_id, "collectorNumber": row["localNumber"], "origin": "issue-260-positive-evidence"}, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue260:" + rid.removeprefix("RELEASE:KR:Korean:")
-    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row["sourceUrl"]}
+    if row.get("rarity") is None:
+        graph["entities"] = [item for item in graph["entities"] if item.get("entityId") != rarity_id]
+        graph["edges"] = [
+            edge for edge in graph["edges"]
+            if edge.get("fromId") != rarity_id and edge.get("toId") != rarity_id
+        ]
+        return
+    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"], "retrievedAt": row.get("rarityRetrievedAt") or row.get("retrievedAt") or profile["retrieved"]}
+    supporting_urls = row.get("raritySupportingSourceUrls") or []
+    if supporting_urls:
+        rarity["supportingSourceUrls"] = supporting_urls
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])
@@ -517,9 +576,14 @@ def apply_graph(
     mappings = []
     for row in rows:
         apply_release_graph(graph, profiles[row["localSetCode"]], row)
+        row_asserted_at = row.get("retrievedAt") or asserted_at
+        if row["legacy"] and not row.get("work"):
+            raise ValueError(
+                f"{row['printId']} cannot map legacy units without an explicit Work"
+            )
         for legacy_id in row["legacy"]:
-            apply_mapping_graph(graph, row, legacy_id, asserted_at=asserted_at)
-            mappings.append(mapping(row, legacy_id, asserted_at=asserted_at))
+            apply_mapping_graph(graph, row, legacy_id, asserted_at=row_asserted_at)
+            mappings.append(mapping(row, legacy_id, asserted_at=row_asserted_at))
     mapped_ids = {row["legacyUnitId"] for row in mappings}
     for legacy_id in set(ISSUE_UNITS) - mapped_ids:
         upsert_migration(graph, {"sourceKind": "legacy-issue-rekey", "sourceId": legacy_id, "disposition": "needs-positive-local-identity", "targetRef": None, "targetRefs": [], "reason": "issue #260 re-key"})

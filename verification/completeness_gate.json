@@ -4,27 +4,27 @@
     "schemaVersion": "1.0.0",
     "coverageVersion": {
       "setDiscovery": "1.2.0",
-      "cardDiscovery": "1.18.0",
+      "cardDiscovery": "1.19.0",
       "asia": "1.0.0",
       "locality": "1.0.0",
       "graph": "2026-09-01"
     },
     "setDiscoveryRun": "20260830T132131Z",
-    "cardDiscoveryRun": "20260830T114212Z",
+    "cardDiscoveryRun": "20260901T132110Z",
     "previousSetDiscoveryRun": "20260830T131628Z",
-    "previousCardDiscoveryRun": "20260830T111240Z",
+    "previousCardDiscoveryRun": "20260901T120430Z",
     "setDiscoveryRecordsHash": "sha256:9158233feba9f7df2a4ad0728d4b9f9595b5b8f84d5b44495ee365847cec8391",
-    "cardDiscoveryRecordsHash": "sha256:c66a3808ae38ba3d485e6e536f1c23a5a9c8c5cd1218e1499a4d777ecdaf44aa",
+    "cardDiscoveryRecordsHash": "sha256:30a71122b6f0e016395d9b1c51f7e985d2f1ed7712a701c4985836323962e973",
     "terminalState": "complete",
     "terminalMeaning": "Both bounded discovery loops and the authoritative graph are accounted; needs-evidence and blocked-by-source gaps remain explicit and are not absence claims."
   },
   "counts": {
     "setDiscoverySlices": 15,
     "setDiscoveryRecords": 1621,
-    "cardDiscoverySlices": 14,
-    "cardDiscoveryRecords": 354,
-    "graphEntities": 7834,
-    "graphEdges": 11722,
+    "cardDiscoverySlices": 15,
+    "cardDiscoveryRecords": 399,
+    "graphEntities": 7839,
+    "graphEdges": 11714,
     "asiaTracks": 8,
     "localityTracks": 12
   },
@@ -45,9 +45,14 @@
       "reason": "Official Japanese card discovery, including categories omitted by the current search surface."
     },
     {
-      "id": "official-asia-kr-cn",
+      "id": "official-asia-cn",
       "state": "blocked-by-source",
       "reason": "Provider-native Simplified-Chinese card discovery and local identifiers."
+    },
+    {
+      "id": "official-korean-historical-positive-frontier",
+      "state": "needs-evidence",
+      "reason": "The retained official Korean 잠만보 response accounts for 45 positive identities within that bounded response, while additional independently retained Korean releases and the region-dependent route prevent any provider-wide historical-completeness claim."
     }
   ],
   "mutationChecks": [

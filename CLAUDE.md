@@ -69,7 +69,7 @@ existing Python workflow owners rather than copying their contracts.
    itself, and 3 resolved units do — never report a lone tier-3 source as a rule violation, and
    never state the tiers more strictly than this ([LESSONS](LESSONS.md#a-rule-stated-more-strictly-than-the-check-enforces)).
    `E4` fails when the attestation count stops matching the data. Prefer corroboration where it
-   exists — it covers 81 of 719 units, so it usually does not.
+   exists — it covers 96 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in

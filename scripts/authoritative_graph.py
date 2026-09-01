@@ -145,6 +145,18 @@ def _release_index(graph: dict[str, Any]) -> dict[tuple[str, str, str], str]:
     return index
 
 
+def _release_alias_index(graph: dict[str, Any]) -> dict[tuple[str, str, str], str]:
+    """Index only unambiguous reviewed legacy aliases for fallback lookup."""
+    candidates: dict[tuple[str, str, str], set[str]] = defaultdict(set)
+    for row in graph["entities"]:
+        payload = row.get("payload") or {}
+        language = payload.get("language")
+        if row.get("entityType") == "card-release" and language:
+            for set_code, number in payload.get("legacyIdentityAliases") or []:
+                candidates[(str(set_code), _number(number), str(language))].add(row["entityId"])
+    return {key: next(iter(values)) for key, values in candidates.items() if len(values) == 1}
+
+
 def _entity(entity_type: str, entity_id: str, payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "entityType": entity_type,
@@ -179,6 +191,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     specimens = [row for row in specimen_document.get("specimens", [])
                  if row.get("physicalObservation")]
     release_ids = _release_index(graph)
+    release_aliases = _release_alias_index(graph)
     specimen_by_id = {str(row["specimenId"]): row for row in specimens}
     existing_finish_proposals = {
         str(row.get("payload", {}).get("sourceId")): row.get("payload", {}).get("proposedCardReleaseId")
@@ -221,7 +234,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
 
     for unit in finish_units:
         unit_key = finish_unit_release_key(unit)
-        release_id = release_ids.get(unit_key)
+        release_id = release_ids.get(unit_key) or release_aliases.get(unit_key)
         for printing in sorted(unit.get("printings", []), key=lambda row: row.get("printingId", "")):
             printing_id = str(printing["printingId"])
             semantic_scope = release_id or "finish-unit:" + "|".join(unit_key)

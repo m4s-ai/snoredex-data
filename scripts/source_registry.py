@@ -751,6 +751,7 @@ def resolve_evidence_provider(
 
 SPECIMEN_SOURCE_TYPES = {
     "collection owner": "Owner-supplied physical card photograph",
+    "third-party retailer": "Retail listing",
     "third-party seller": "Seller listing photograph",
     "third-party scan archive": "Third-party scan archive",
 }
@@ -865,6 +866,17 @@ def main() -> int:
             record(
                 url, "Positive source-first card record", "card-release",
                 entry["printId"], provider_id=entry["providerId"],
+            )
+        if entry.get("raritySourceUrl"):
+            record(
+                entry["raritySourceUrl"], "Positive source-native rarity record", "rarity",
+                entry["printId"], entry.get("rarityRetrievedAt"),
+                provider_id=entry.get("rarityProviderId"),
+            )
+        for url in entry.get("raritySupportingSourceUrls") or []:
+            record(
+                url, "Positive fixed-product membership record", "set-membership",
+                entry["printId"], entry.get("rarityRetrievedAt"),
             )
 
     for unit in finish_units:
