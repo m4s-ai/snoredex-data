@@ -57,8 +57,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 459,
-      "withOnlyMarketplaceClaim": 53,
+      "withConfirmedFinish": 460,
+      "withOnlyMarketplaceClaim": 52,
       "pendingFinish": 50,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 2,
@@ -12759,13 +12759,13 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "owner-attested",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
@@ -12776,17 +12776,36 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Italian Generations Snorlax 58/83. BASE, PS 130, Lasciadormir, Sonnopressa, the Generations set symbol and 58/83 establish the exact localized card. The collection owner explicitly confirmed on 2026-09-01 that the pictured copy is non-holo. The owner's separate confirmation that an Italian reverse-holo printing also exists is not attributed to this photograph. Retained as SPEC-0465.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0465"
+          ],
+          "image": "verification/specimens/SPEC-0465.jpg",
           "printingId": "F0138-P01"
         },
         {
@@ -12798,7 +12817,7 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "owner-attested",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
@@ -12810,6 +12829,15 @@
               "sourceType": "Bulbapedia holofoil pattern history",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
               "supportsAbsence": false
+            },
+            {
+              "url": "https://github.com/m4s-ai/snoredex-data/issues/268#issuecomment-5490777316",
+              "sourceType": "Collection owner attestation (finish)",
+              "evidence": "On 2026-09-01 the collection owner explicitly confirmed that Italian Generations Snorlax 58/83 exists as reverse holo, while clarifying that SPEC-0465 pictures the separate non-holo printing. This confirms reverse-holo existence only and does not attribute it to that photograph or close the finish list.",
+              "supportsAbsence": false,
+              "languages": [
+                "Italian"
+              ]
             }
           ],
           "printingId": "F0138-P02"

@@ -20,7 +20,7 @@
       "coverageEdges": 40,
       "absenceEdges": 0,
       "observations": 42,
-      "resolvedVerdictSources": 1189
+      "resolvedVerdictSources": 1190
     },
     "surfaceStates": {
       "active": 18,
@@ -5141,7 +5141,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:84ed26a69adef6e6e5802cfdeeec4549e8fffe0c362e2735573b0395ff4cdb7b",
+      "rawRecordHash": "sha256:35789e57a3acd0a4958dae2b4b7a9d23f2b7a923995e16f88e21470912978094",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -5158,7 +5158,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 62,
+        "stableIdCount": 63,
         "stableIds": [
           "F0009-P01",
           "F0067-P03",
@@ -5167,6 +5167,7 @@
           "F0072-P01",
           "F0072-P02",
           "F0093-P01",
+          "F0138-P01",
           "F0140-P01",
           "F0146-P01",
           "F0148-P01",
@@ -5208,11 +5209,10 @@
           "F0616-P02",
           "U0097",
           "U0098",
-          "U0099",
-          "U0311"
+          "U0099"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 62
+        "usageCount": 63
       }
     },
     {
@@ -12198,6 +12198,19 @@
         "finish",
         "finish-override",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/m4s-ai/snoredex-data/issues/268",
+      "providerId": "owner-attestation",
+      "surfaceId": "owner-attestations",
+      "capabilityEdgeIds": [
+        "owner-attestation-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
       ]
     },
     {

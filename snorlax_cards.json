@@ -39,8 +39,8 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-09-01",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 459,
-      "withOnlyMarketplaceClaim": 53,
+      "withConfirmedFinish": 460,
+      "withOnlyMarketplaceClaim": 52,
       "pendingFinish": 50,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 2,
@@ -15970,18 +15970,18 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "owner-attested",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "owner-attested",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0138",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -15992,8 +15992,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0465.jpg",
+                "specimenIds": [
+                  "SPEC-0465"
+                ]
               },
               {
                 "printingId": "F0138-P02",
@@ -16002,7 +16006,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "owner-attested",
                 "productMapping": "mapped"
               }
             ]

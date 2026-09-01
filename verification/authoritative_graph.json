@@ -8529,7 +8529,7 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0138-P02",
         "semanticPrintingId": "PRINTING:00137ff5e75857c9a4175a1a",
-        "evidenceStatus": "marketplace-claimed",
+        "evidenceStatus": "owner-attested",
         "disposition": "candidate-needs-evidence",
         "proposedTargetId": null,
         "materializedTargetId": null,
@@ -12413,12 +12413,14 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0138-P01",
         "semanticPrintingId": "PRINTING:7ec04aea1f3c1eb520aec304",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Italian:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+        "materializedTargetId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0465"
+        ]
       }
     },
     {
@@ -33480,6 +33482,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:3e443d8df54425a555c9dad7, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:3e443d8df54425a555c9dad7"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0465",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0465",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0465",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304"
       }
     },
     {
@@ -94219,6 +94238,30 @@
         "sourceFinishUnitId": "F0293",
         "sourcePrintingId": "F0293-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:7de696c06d74d669430bcd69"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+        "semanticPrintingId": "PRINTING:7ec04aea1f3c1eb520aec304",
+        "cardReleaseId": "RELEASE:WEST:Italian:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0138",
+        "sourcePrintingId": "F0138-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:7ec04aea1f3c1eb520aec304",
+        "specimenIds": [
+          "SPEC-0465"
+        ]
       }
     },
     {
@@ -164356,10 +164399,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:7ec04aea1f3c1eb520aec304",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Italian:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -175657,6 +175702,16 @@
       "toId": "PHYSICAL:PRINTING:3e443d8df54425a555c9dad7",
       "provenance": {
         "specimenId": "SPEC-0456"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0465",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+      "provenance": {
+        "specimenId": "SPEC-0465"
       }
     },
     {
@@ -221813,6 +221868,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:7ec04aea1f3c1eb520aec304",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Italian:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:7edb1c20c49a8bd373f39244",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -263841,9 +263912,9 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0138-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -282776,6 +282847,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0465",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0466",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -282790,14 +282868,14 @@
     }
   ],
   "summary": {
-    "entities": 7832,
-    "edges": 11719,
-    "migrationInputs": 2715,
+    "entities": 7834,
+    "edges": 11722,
+    "migrationInputs": 2716,
     "migrationDispositions": {
       "bounded-contradicted": 84,
       "candidate-needs-evidence": 269,
       "carried": 67,
-      "established-and-mapped": 1518,
+      "established-and-mapped": 1519,
       "linked-local-counterpart": 117,
       "mapped": 302,
       "needs-evidence": 126,
@@ -282805,9 +282883,9 @@
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1946,
+    "candidateClaims": 1947,
     "cardReleases": 639,
-    "physicalPrintings": 716,
+    "physicalPrintings": 717,
     "setSourceRecords": 430,
     "setSourceDispositions": 430,
     "localizations": 16
