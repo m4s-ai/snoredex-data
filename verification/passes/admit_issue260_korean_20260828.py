@@ -96,6 +96,7 @@ PROMOS = [
         "printId": "KR:S-P:101:base", "localSetCode": "S-P", "localNumber": "101",
         "work": "Snorlax-Slap-Push-Single-Strike-Tackle", "legacy": ["U0523"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0014", "cardName": "Snorlax",
+        "retrievedAt": "2026-08-28",
         "providerId": "pokemon-card-korea", "providerRecordId": "SP000000101",
         "sourceUrl": "https://pokemoncard.co.kr/cards/detail/SP000000101",
         "corroboratingSourceUrls": ["https://pokumon.com/card/snorlax-101-s-p-korean-promo/"],
@@ -106,6 +107,7 @@ PROMOS = [
         "printId": "KR:SM-P:140:base", "localSetCode": "SM-P", "localNumber": "140",
         "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", "legacy": ["U0627"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0028", "cardName": "Eevee & Snorlax GX",
+        "retrievedAt": "2026-08-28",
         "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
         "corroborated": True,
         "releaseDate": "2019", "releaseDatePrecision": "year",
@@ -114,6 +116,7 @@ PROMOS = [
         "printId": "KR:XY-P:167:base", "localSetCode": "XY-P", "localNumber": "167",
         "work": "Snorlax-Plump-Body-Knock-Away", "legacy": ["U0661"],
         "rarity": ("PROMO", "promo"), "specimenId": "SPEC-0031", "cardName": "Snorlax",
+        "retrievedAt": "2026-08-28",
         "providerId": "pokumon", "sourceUrl": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
         "corroborated": True,
         "releaseDate": "2017", "releaseDatePrecision": "year",
@@ -478,7 +481,7 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue260:" + rid.removeprefix("RELEASE:KR:Korean:")
-    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"], "retrievedAt": row.get("retrievedAt") or profile["retrieved"]}
+    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"], "retrievedAt": row.get("rarityRetrievedAt") or row.get("retrievedAt") or profile["retrieved"]}
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])
@@ -537,9 +540,10 @@ def apply_graph(
     mappings = []
     for row in rows:
         apply_release_graph(graph, profiles[row["localSetCode"]], row)
+        row_asserted_at = row.get("retrievedAt") or asserted_at
         for legacy_id in row["legacy"]:
-            apply_mapping_graph(graph, row, legacy_id, asserted_at=asserted_at)
-            mappings.append(mapping(row, legacy_id, asserted_at=asserted_at))
+            apply_mapping_graph(graph, row, legacy_id, asserted_at=row_asserted_at)
+            mappings.append(mapping(row, legacy_id, asserted_at=row_asserted_at))
     mapped_ids = {row["legacyUnitId"] for row in mappings}
     for legacy_id in set(ISSUE_UNITS) - mapped_ids:
         upsert_migration(graph, {"sourceKind": "legacy-issue-rekey", "sourceId": legacy_id, "disposition": "needs-positive-local-identity", "targetRef": None, "targetRefs": [], "reason": "issue #260 re-key"})

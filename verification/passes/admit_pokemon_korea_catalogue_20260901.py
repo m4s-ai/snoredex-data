@@ -111,6 +111,7 @@ def apply_official_rows(
         # Keep that field's evidence attached to the record that supplied it.
         row.setdefault("raritySourceUrl", row.get("sourceUrl"))
         row.setdefault("rarityProviderId", row.get("providerId"))
+        row.setdefault("rarityRetrievedAt", row.get("retrievedAt"))
         prior_urls = {
             *(row.get("corroboratingSourceUrls") or []),
             *([row["sourceUrl"]] if row.get("sourceUrl") else []),

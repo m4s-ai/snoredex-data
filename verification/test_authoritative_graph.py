@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "verification" / "passes"))
 import authoritative_graph as graph_module  # noqa: E402
 import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
+import admit_pokemon_korea_catalogue_20260901 as korean_catalogue_pass  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
@@ -99,6 +100,7 @@ def main() -> None:
     assert korean_rarity["sourceProductKey"] == (
         "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e"
     )
+    assert korean_rarity["retrievedAt"] == "2026-08-30"
     korean_profile = next(
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "set-source-record"
@@ -128,6 +130,40 @@ def main() -> None:
         )["identities"]
     }
     assert len(official_korean) == 45
+    catalogue_identities = {
+        row["printId"]: row for row in json.loads(
+            korean_catalogue_pass.EVIDENCE.read_text(encoding="utf-8")
+        )["identities"]
+    }
+    catalogue_rows = deepcopy(
+        korean_catalogue_pass.base.OFFICIAL
+        + korean_catalogue_pass.base.PROMOS
+        + korean_catalogue_pass.research.RESEARCH_ROWS
+        + korean_catalogue_pass.new_rows()
+    )
+    rarity_provenance = {
+        row["printId"]: (row["sourceUrl"], row["retrievedAt"])
+        for row in catalogue_rows if row["printId"] in official_korean
+    }
+    korean_catalogue_pass.apply_official_rows(catalogue_rows, catalogue_identities)
+    for row in catalogue_rows:
+        if row["printId"] not in official_korean:
+            continue
+        source_url, retrieved_at = rarity_provenance[row["printId"]]
+        assert row["raritySourceUrl"] == source_url
+        assert row["rarityRetrievedAt"] == retrieved_at
+        rarity_id = (
+            "RARITYCLAIM:issue260:"
+            + korean_catalogue_pass.base.release_id(row).removeprefix(
+                "RELEASE:KR:Korean:"
+            )
+        )
+        rarity_claim = next(
+            entity["payload"] for entity in graph["entities"]
+            if entity["entityId"] == rarity_id
+        )
+        assert rarity_claim["sourceProductKey"] == source_url
+        assert rarity_claim["retrievedAt"] == retrieved_at
     assert {
         print_id: source_first_rows[print_id]["retrievedAt"]
         for print_id in official_korean
@@ -150,6 +186,23 @@ def main() -> None:
         == "RARITYCLAIM:issue260:s1H:070/060:Snorlax-VMAX-G-Max-Fall"
     )
     assert unmatched_rarity["retrievedAt"] == "2026-08-30"
+    same_work_assertions = [
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "equivalence-assertion"
+        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean
+    ]
+    unmatched_assertions = [
+        row for row in same_work_assertions
+        if row["sourceFirstRecordId"] in unmatched_korean
+    ]
+    official_assertions = [
+        row for row in same_work_assertions
+        if row["sourceFirstRecordId"] in official_korean
+    ]
+    assert {row["sourceFirstRecordId"] for row in unmatched_assertions} == unmatched_korean
+    assert {row["assertedAt"] for row in unmatched_assertions} == {"2026-08-30"}
+    assert official_assertions
+    assert {row["assertedAt"] for row in official_assertions} == {"2026-09-01"}
     assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
