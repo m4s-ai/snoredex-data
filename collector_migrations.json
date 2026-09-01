@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:9ad56f9aebd8cedb049c72eb2bf6698b3c339a4622799381c86c4af77d4e2777",
+    "fromFingerprint": "sha256:44fff15689ca17587d5af74d207bc900cc347b7c15f0944cb4b724b8778ded69",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:58959ac9aad8894ec21d5d40a43e996fc18dd91e502701a79343e0eabdde3de1",
+    "toFingerprint": "sha256:b186b6730560b7291ccf20ee56f29b2050d7aca83a1047ba4393deaa3362af91",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -18,7 +18,7 @@
       "fromFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:58959ac9aad8894ec21d5d40a43e996fc18dd91e502701a79343e0eabdde3de1",
+      "toFingerprint": "sha256:b186b6730560b7291ccf20ee56f29b2050d7aca83a1047ba4393deaa3362af91",
       "cumulative": true,
       "transitions": [
         {
@@ -7402,6 +7402,15 @@
           "reconciliation": "identity-retained"
         },
         {
+          "fromItemId": "item-d86cb23d-68d9-5725-9bce-462525985029",
+          "toItemIds": [
+            "item-d86cb23d-68d9-5725-9bce-462525985029"
+          ],
+          "changeKind": "retained",
+          "automaticStateAction": "preserve",
+          "reconciliation": "identity-retained"
+        },
+        {
           "fromItemId": "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085",
           "toItemIds": [
             "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085"
@@ -8455,15 +8464,6 @@
           "reconciliation": "identity-retained"
         },
         {
-          "fromItemId": "item-f54a780c-14bf-5178-b029-00891c08ce6c",
-          "toItemIds": [
-            "item-f54a780c-14bf-5178-b029-00891c08ce6c"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
           "fromItemId": "item-f5a54726-9f6d-5839-94be-87744896b386",
           "toItemIds": [
             "item-f5a54726-9f6d-5839-94be-87744896b386"
@@ -9043,9 +9043,9 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "ba20-mwt-italian-none-non-holo-deck-logo-mewtwo-fixed-deck-battle-academy-2020-mewtwo-deck",
+      "fromItemId": "ba20-mwt-italian-none-unresolved-unknown",
       "toItemIds": [
-        "item-f54a780c-14bf-5178-b029-00891c08ce6c"
+        "item-d86cb23d-68d9-5725-9bce-462525985029"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -17455,10 +17455,10 @@
         ]
       },
       {
-        "legacyChecklistId": "ba20-mwt-italian-none-non-holo-deck-logo-mewtwo-fixed-deck-battle-academy-2020-mewtwo-deck",
+        "legacyChecklistId": "ba20-mwt-italian-none-unresolved-unknown",
         "disposition": "projected",
         "targetItemIds": [
-          "item-f54a780c-14bf-5178-b029-00891c08ce6c"
+          "item-d86cb23d-68d9-5725-9bce-462525985029"
         ]
       },
       {
@@ -27590,7 +27590,7 @@
         "cardReleaseId": "RELEASE:WEST:Italian:BA20:MWT:Snorlax-Incredible-Snore",
         "disposition": "projected",
         "targetItemIds": [
-          "item-f54a780c-14bf-5178-b029-00891c08ce6c"
+          "item-d86cb23d-68d9-5725-9bce-462525985029"
         ],
         "reason": null
       },
@@ -32441,11 +32441,6 @@
         "targetItemId": "item-4aa6783c-ad14-5abe-a557-78ac9c79afe7"
       },
       {
-        "physicalPrintingId": "PHYSICAL:PRINTING:fb6541c22a59ee3d8a463709",
-        "disposition": "projected",
-        "targetItemId": "item-f54a780c-14bf-5178-b029-00891c08ce6c"
-      },
-      {
         "physicalPrintingId": "PHYSICAL:PRINTING:fbfbd896a1f06b781605d51d",
         "disposition": "projected",
         "targetItemId": "item-ec20e7cf-0996-5ef8-b437-925d8f29c0d9"
@@ -32589,7 +32584,7 @@
     "summary": {
       "legacyChecklistRows": 878,
       "cardReleases": 639,
-      "physicalPrintings": 717,
+      "physicalPrintings": 716,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

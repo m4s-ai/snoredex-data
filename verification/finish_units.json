@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 460,
+      "withConfirmedFinish": 459,
       "withOnlyMarketplaceClaim": 52,
-      "pendingFinish": 50,
+      "pendingFinish": 51,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 2,
-      "withNonHolo": 302,
+      "withNonHolo": 301,
       "withHolo": 228,
       "withReverseHolo": 229,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 87,
-      "withAnyUnresolvedDetail": 169,
+      "withUnresolvedProductMapping": 88,
+      "withAnyUnresolvedDetail": 170,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     },
@@ -758,55 +758,23 @@
           "image": "images/BA20_MWT_Snorlax_550296.jpg"
         }
       ],
-      "availableFinishes": [
-        "non-holo"
-      ],
+      "availableFinishes": [],
       "finishStatus": {
-        "non-holo": "confirmed",
+        "non-holo": "pending",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "confirmed",
+      "availabilityStatus": "pending",
+      "completenessStatus": "pending",
+      "productMappingStatus": "pending",
       "patternStatus": "not-applicable",
-      "printings": [
-        {
-          "finish": "non-holo",
-          "foilPattern": null,
-          "markings": [
-            {
-              "kind": "deck-logo",
-              "role": "distribution-promo",
-              "text": "Mewtwo"
-            }
-          ],
-          "distribution": {
-            "kind": "fixed-deck",
-            "name": "Battle Academy 2020 Mewtwo Deck"
-          },
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
-              "sourceType": "Seller listing photograph",
-              "evidence": "Complete seller photograph of Italian Battle Academy 2020 Snorlax 50/68. BASE, PS 150, Russare Impossibile, the Hidden Fates set symbol, 50/68 and the purple Mewtwo deck silhouette establish the exact localized fixed-deck printing. The card face is uniformly printed, establishing the non-holo treatment; the listing title independently identifies the Italian Mewtwo-deck card. Retained as SPEC-0466."
-            }
-          ],
-          "specimenIds": [
-            "SPEC-0466"
-          ],
-          "image": "verification/specimens/SPEC-0466.jpg",
-          "printingId": "F0009-P01"
-        }
-      ],
-      "unresolved": []
+      "printings": [],
+      "unresolved": [
+        "No positive finish evidence has been recorded for this set-number-language unit.",
+        "One or more Cardmarket product variants are not mapped to a logical printing: base"
+      ]
     },
     {
       "finishUnitId": "F0010",

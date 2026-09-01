@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-09-01",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 460,
+      "withConfirmedFinish": 459,
       "withOnlyMarketplaceClaim": 52,
-      "pendingFinish": 50,
+      "pendingFinish": 51,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 2,
-      "withNonHolo": 302,
+      "withNonHolo": 301,
       "withHolo": 228,
       "withReverseHolo": 229,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 87,
-      "withAnyUnresolvedDetail": 169,
+      "withUnresolvedProductMapping": 88,
+      "withAnyUnresolvedDetail": 170,
       "tcgdexUrlsRequested": 309,
       "tcgdexFetchErrors": 0
     }
@@ -19144,7 +19144,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "confirmed",
+        "status": "partial",
         "availableFinishes": [
           "non-holo"
         ],
@@ -19324,52 +19324,24 @@
           {
             "language": "Italian",
             "claimStatus": "confirmed",
-            "availableFinishes": [
-              "non-holo"
-            ],
-            "unitAvailableFinishes": [
-              "non-holo"
-            ],
+            "availableFinishes": [],
+            "unitAvailableFinishes": [],
             "finishStatus": {
-              "non-holo": "confirmed",
+              "non-holo": "pending",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
+              "non-holo": "pending",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "confirmed",
+            "status": "pending",
             "finishUnitId": "F0009",
-            "productMappingStatus": "confirmed",
-            "printings": [
-              {
-                "printingId": "F0009-P01",
-                "finish": "non-holo",
-                "foilPattern": null,
-                "markings": [
-                  {
-                    "kind": "deck-logo",
-                    "role": "distribution-promo",
-                    "text": "Mewtwo"
-                  }
-                ],
-                "distribution": {
-                  "kind": "fixed-deck",
-                  "name": "Battle Academy 2020 Mewtwo Deck"
-                },
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped",
-                "image": "verification/specimens/SPEC-0466.jpg",
-                "specimenIds": [
-                  "SPEC-0466"
-                ]
-              }
-            ]
+            "productMappingStatus": "pending",
+            "printings": []
           },
           {
             "language": "Portuguese",
