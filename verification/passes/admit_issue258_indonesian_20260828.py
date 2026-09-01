@@ -42,7 +42,7 @@ CAPABILITIES = ROOT / "verification" / "source_capabilities.json"
 OFFICIAL: dict[str, dict[str, Any]] = {
     "454": {"print": "ID:sc1a I:127/154:base", "code": "sc1a I", "number": "127/154", "work": "Snorlax-Collect-Collapse", "rarity": ("U", "uncommon")},
     "600": {"print": "ID:sc1b I:119/153:base", "code": "sc1b I", "number": "119/153", "work": "Snorlax-V-Swallow-Falling-Down", "rarity": ("RR", "double-rare")},
-    "601": {"print": "ID:sc1b I:120/153:base", "code": "sc1b I", "number": "120/153", "work": "Snorlax-VMAX-G-Max-Fall", "rarity": ("RRR", "triple-rare")},
+    "601": {"print": "ID:sc1b I:120/153:base", "code": "sc1b I", "number": "120/153", "work": "Snorlax-VMAX-G-Max-Fall", "rarity": ("RRR", None)},
     "764": {"print": "ID:sc1D I:132/164:base", "code": "sc1D I", "number": "132/164", "work": "Snorlax-Rolling-Tackle-Heavy-Impact", "rarity": ("no printed rarity symbol", "fixed")},
     "765": {"print": "ID:sc1D I:133/164:base", "code": "sc1D I", "number": "133/164", "work": "Snorlax-V-Swallow-Falling-Down", "rarity": ("no printed rarity symbol", "fixed")},
     "1605": {"print": "ID:AS1b:112/150:base", "code": "AS1b", "number": "112/150", "work": "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX", "rarity": ("RR", "double-rare")},

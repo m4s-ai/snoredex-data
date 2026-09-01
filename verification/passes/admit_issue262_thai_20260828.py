@@ -91,7 +91,7 @@ SET_DATES = {
 OFFICIAL = [
     card("127", "SPEC-0253", "sc1a T", "127/154", "Snorlax-Collect-Collapse", ("U", "uncommon")),
     card("273", "SPEC-0254", "sc1b T", "119/153", "Snorlax-V-Swallow-Falling-Down", ("RR", "double-rare"), card_name="Snorlax V"),
-    card("274", "SPEC-0255", "sc1b T", "120/153", "Snorlax-VMAX-G-Max-Fall", ("RRR", "triple-rare"), card_name="Snorlax VMAX"),
+    card("274", "SPEC-0255", "sc1b T", "120/153", "Snorlax-VMAX-G-Max-Fall", ("RRR", None), card_name="Snorlax VMAX"),
     card("439", "SPEC-0256", "sc1D T", "132/164", "Snorlax-Rolling-Tackle-Heavy-Impact", ("no printed rarity symbol", "fixed")),
     card("440", "SPEC-0257", "sc1D T", "133/164", "Snorlax-V-Swallow-Falling-Down", ("no printed rarity symbol", "fixed"), card_name="Snorlax V"),
     card("1006", "SPEC-0258", "sc3b T", "126/158", "Snorlax-Gormandize-Body-Slam", ("R", "rare")),

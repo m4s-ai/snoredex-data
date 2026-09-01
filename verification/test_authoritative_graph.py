@@ -12,13 +12,83 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+sys.path.insert(0, str(ROOT / "verification" / "passes"))
 import authoritative_graph as graph_module  # noqa: E402
+import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
+
+
+def issue263_rebuilt_graph() -> dict:
+    prints = issue263_pass.read(issue263_pass.PRINTS)
+    existing = {row["printId"]: row for row in prints["prints"]}
+    official = issue263_pass.official_rows()
+    photos = issue263_pass.enrich_photo_rows()
+    rows = official + photos + issue263_pass.supplemental_rows(existing)
+    sources = issue263_pass.read(issue263_pass.SET_SOURCES)
+    profiles = issue263_pass.apply_profiles(sources, rows)
+    units = {row["unitId"]: row for row in issue263_pass.read(issue263_pass.UNITS)}
+    graph = issue263_pass.read(issue263_pass.GRAPH)
+    issue263_pass.remove_superseded_graph_records(graph)
+    rebuilt, _ = issue263_pass.apply_graph(graph, profiles, rows, units)
+    return rebuilt
 
 
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
+    assert not validate(issue263_rebuilt_graph())
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("normalizedRarityId")
+    )["normalizedRarityId"] = "unknown"
+    assert any(
+        "rarity claim normalized id is not in the catalogue" in error
+        for error in validate(tampered)
+    )
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("sourceNativeValue") == "RRR"
+    )["normalizedRarityId"] = "common"
+    assert any(
+        "rarity claim normalized id does not match source-native mapping" in error
+        for error in validate(tampered)
+    )
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("sourceNativeValue") == "HR"
+    )["normalizedRarityId"] = "hyper-rare"
+    assert any(
+        "rarity claim normalized id does not match source-native mapping" in error
+        for error in validate(tampered)
+    )
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("sourceVocabulary") == "printed-Korean-card"
+        and row["payload"].get("sourceNativeValue") == "R"
+    )["normalizedRarityId"] = None
+    assert any(
+        "rarity claim normalized id does not match source-native mapping" in error
+        for error in validate(tampered)
+    )
+    tampered = deepcopy(graph)
+    next(
+        row["payload"] for row in tampered["entities"]
+        if row["entityType"] == "rarity-claim"
+        and row["payload"].get("sourceVocabulary") == "printed-Korean-card"
+        and row["payload"].get("sourceNativeValue") == "UR"
+    )["normalizedRarityId"] = "ultra-rare"
+    assert any(
+        "rarity claim normalized id does not match source-native mapping" in error
+        for error in validate(tampered)
+    )
     assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"

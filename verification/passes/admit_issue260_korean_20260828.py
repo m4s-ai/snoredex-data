@@ -71,7 +71,7 @@ def card(
 
 OFFICIAL = [
     card("SPEC-0236", "s10a", "058/071", "Snorlax-Unfazed-Fat-Thumping-Snore", "U0344", ("R", "rare"), "S/S10a/S10a_058.png", provider_record="BS2022011097"),
-    card("SPEC-0237", "s10a", "077/071", "Snorlax-Unfazed-Fat-Thumping-Snore", "U0168", ("CHR", "character-rare"), "S/S10a/S10a_077.png", provider_record="BS2022011126"),
+    card("SPEC-0237", "s10a", "077/071", "Snorlax-Unfazed-Fat-Thumping-Snore", "U0168", ("CHR", None), "S/S10a/S10a_077.png", provider_record="BS2022011126"),
     card("SPEC-0238", "s10b", "056/071", "Snorlax-Block-Collapse", "U0202", ("R", "rare"), "S/S10b/S10b_056.png", provider_record="BS2022010056"),
     card("SPEC-0239", "s2", "077/096", "Snorlax-Collect-Collapse", "U0532", ("U", "uncommon"), "S/S2/S2_077.png"),
     card("SPEC-0240", "s4", "084/100", "Snorlax-Gormandize-Body-Slam", "U0291", ("R", "rare"), "S/S4/S4_084.png", provider_record="BS2020014084"),
@@ -79,12 +79,12 @@ OFFICIAL = [
     card("SPEC-0242", "sI", "341/414", "Snorlax-Heavy-Impact", "U0653", ("no printed rarity symbol", "fixed"), "S/SI/SI_341.png"),
     card("SPEC-0243", "sI", "342/414", "Snorlax-Heavy-Impact", "U0657", ("no printed rarity symbol", "fixed"), "S/SI/SI_342.png"),
     card("SPEC-0244", "s1H", "045/060", "Snorlax-V-Swallow-Falling-Down", "U0511", ("RR", "double-rare"), "S/S1H/S1H_045.png", card_name="Snorlax V"),
-    card("SPEC-0245", "s1H", "046/060", "Snorlax-VMAX-G-Max-Fall", "U0287", ("RRR", "triple-rare"), "S/S1H/S1H_046.png", card_name="Snorlax VMAX"),
-    card("SPEC-0246", "s1H", "066/060", "Snorlax-V-Swallow-Falling-Down", "U0548", ("SR", "super-rare"), "S/S1H/S1H_066.png", card_name="Snorlax V"),
+    card("SPEC-0245", "s1H", "046/060", "Snorlax-VMAX-G-Max-Fall", "U0287", ("RRR", None), "S/S1H/S1H_046.png", card_name="Snorlax VMAX"),
+    card("SPEC-0246", "s1H", "066/060", "Snorlax-V-Swallow-Falling-Down", "U0548", ("SR", None), "S/S1H/S1H_066.png", card_name="Snorlax V"),
     card("SPEC-0247", "sN", "008/024", "Snorlax-Heavy-Impact", "U0770", ("no printed rarity symbol", "fixed"), "S/SN/SN_008.png"),
     card("SPEC-0248", "sm10", "076/095", "Snorlax-Lazy-Eating-Big-Counter", "U0264", ("R", "rare"), "SM/SM10/SM10_076.png"),
     card("SPEC-0249", "smL", "038/051", "Snorlax-Incredible-Snore", "U0583", ("no printed rarity symbol", "fixed"), "SM/SML/SML_038.png", provider_record="BS2019006059"),
-    card("SPEC-0250", "sm9", "106/095", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", "U0633", ("SR", "super-rare"), "SM/SM9/SM9_106.png", card_name="Eevee & Snorlax GX"),
+    card("SPEC-0250", "sm9", "106/095", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", "U0633", ("SR", None), "SM/SM9/SM9_106.png", card_name="Eevee & Snorlax GX"),
     card("SPEC-0251", "sv4a", "310/190", "Snorlax-Voraciousness-Thudding-Press", "U0384", ("S", "shiny-rare"), "SV/SV4a/SV4a_310.png", provider_record="BS2024001310"),
     card("SPEC-0252", "svG", "021/049", "Snorlax-Unfazed-Fat-Thumping-Snore", "U0466", ("no printed rarity symbol", "fixed"), "SV/SVG/SVG_021.png", provider_record="BS2023023021"),
 ]

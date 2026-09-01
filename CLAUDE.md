@@ -78,6 +78,13 @@ existing Python workflow owners rather than copying their contracts.
    ([LESSONS](LESSONS.md#the-neighbours-evidence-is-not-this-units-evidence)). `S13` and `S14` hold
    the line: `sourceRef` carries a reference or nothing, and only a cited specimen may claim
    specimen authority.
+
+   **Source-backed is a field-level claim.** Preserve the exact source-native value and qualified
+   identity the evidence states. A normalized id must exist in its canonical registry; when no
+   reviewed mapping exists, keep the native value and leave the normalized id null. Source silence
+   creates no positive field, and a legacy marketplace value is only a fallback when no
+   source-backed value exists. Retrieval and assertion dates come from the supporting observation,
+   never from a reused pass default.
 3. **Never contradict on bare absence.** A source that fails to list a printing has a gap. It has
    not proved the printing does not exist. Official Pokémon sources confirm only the releases they
    name for the matching language and region. Missing rows, fields, pages, and results stay unknown.
@@ -192,6 +199,9 @@ These are the things that have actually caused mistakes. Full treatment in `HAND
   ids are retained through that semantic lookup; a new semantic printing gets a hash-based id.
   The collector projection uses the same fingerprint when reconciling predecessor checklist rows,
   so inserting a printing cannot silently move collection state to a neighbouring card.
+- **Reconciliation is order-independent.** Collect every candidate before refining an unknown
+  dimension. Refine only when one compatible value remains; ambiguity stays `unknown`. Reordering
+  equivalent inputs may not change semantic identity, provenance attachment, or checklist output.
 
 ## Commands
 
@@ -229,6 +239,11 @@ python scripts/publish.py --out _site             # build the artifact, THEN ver
 python scripts/publish.py --out _site --verify    # --verify, not --check; exits 1 without --out
 git diff --exit-code -- . ':(exclude)*.sqlite'   # equivalent scope enforced inside regen.py
 ```
+
+Every `--check` mode is observational: it may not create or replace files, update timestamps, or
+write databases, and it must be mutually exclusive with refresh, replay, acceptance, and other
+write actions. An acceptance command must render from the newly accepted canonical state; an
+immediate second offline check must be clean.
 
 `scripts/regen.py` owns the dependency order and core suite. The reusable
 `.github/workflows/release-gate.yml` calls that command directly: draft PRs skip it, ready PRs run
@@ -324,6 +339,11 @@ the index lives in the code rather than here.
 - `verification/checks.py` is the check protocol shared by the two suites: `review_integrity.py`
   validates invariants *within* each store, `review_findings.py` validates consistency *between*
   the stores and the artifacts consumers read.
+- **Active instructions are one live truth.** When new research invalidates operational guidance,
+  reconcile every contradictory active occurrence in the same change; appending a later correction
+  does not repair an earlier stop instruction. Dated history remains a snapshot, but it cites
+  retained photographs and renders by `SPEC-nnnn` and checks any remaining-work list against the
+  canonical stores at the stated snapshot.
 
 ## Counts are reported, never asserted — but a losing move fails
 

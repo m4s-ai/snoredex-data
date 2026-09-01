@@ -69,12 +69,18 @@ Each refresh follows one loop:
 4. project without discarding source-native fields;
 5. put every record in exactly one bucket and balance fetched against accounted;
 6. diff against the preceding immutable run; and
-7. publish the latest staging projection only when the committed run remains reproducible.
+7. publish canonical staging from the newest complete retained run compatible with the acquisition
+   contract and scoped capability pin.
 
 A slice is `complete` only when every row returned by that bounded request was retained and
 accounted. It is not a claim that the provider population or Pokémon set universe is complete. An
 empty response is `needs-evidence` plus a run error. A blocked or failed request is
 `blocked-by-source` plus a run error. Neither state establishes absence.
+
+Failed, incomplete, empty, and acquisition-incompatible runs remain immutable evidence but cannot
+displace canonical staging. Replay preserves the selected source run's bytes and retrieval metadata
+while applying the current reviewed projection contract and capability state; it never rewrites the
+retained acquisition.
 
 ## Source gaps and corrections retained
 

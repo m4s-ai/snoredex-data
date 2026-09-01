@@ -19,11 +19,19 @@ not commit, merge, or publish. Review every `newCandidate`, `ambiguous`, `needsE
 delta before opening a PR. A failed request remains a source failure in the immutable run; it is
 not an empty catalogue.
 
+Canonical staging uses the newest complete retained run compatible with the acquisition contract
+and scoped capability pin. Failed, incomplete, empty, and incompatible runs stay retained but do
+not displace it. Replay preserves the selected source run's bytes and retrieval metadata while
+rendering through the current reviewed projection contract and capability state.
+
 For a local or CI check without network access:
 
 ```console
 python scripts/discovery_cycle.py --check
 ```
+
+Check mode is read-only and cannot be combined with refresh, replay, acceptance, or another write
+action.
 
 The gate records both run ids, both coverage versions, raw-record hashes, the graph counts and the
 explicit Asia/non-Asia gap states. `terminalState=complete` means the bounded inputs balance; it
