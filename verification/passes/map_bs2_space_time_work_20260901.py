@@ -63,7 +63,31 @@ def validate_evidence() -> None:
         row for row in evidence["observations"]
         if row["observationId"] == "BULBAPEDIA-BURNING-CONFRONTATION-30-REDIRECT"
     )
-    if redirect["sourceUrl"] != REDIRECT_URL or redirect["canonicalUrl"] != CANONICAL_URL:
+    if (
+        redirect["sourceUrl"] != REDIRECT_URL
+        or redirect["canonicalUrl"] != CANONICAL_URL
+        or redirect["observed"] != {
+            "redirectedFrom": "Snorlax (Burning Confrontation 30)",
+            "canonicalTitle": "Snorlax (Diamond & Pearl 37)",
+            "japaneseExpansion": "Space-Time Creation",
+            "cardName": "Snorlax",
+            "level": 35,
+            "hp": 100,
+            "illustrator": "Ken Sugimori",
+            "attacks": ["Block", "Ease Up"],
+        }
+        or redirect["establishes"] != [
+            "Burning Confrontation 30 and Diamond & Pearl 37 are aliases for the same card",
+            "the canonical card has a Japanese Space-Time Creation release",
+            "KR:BS2:30/40:base maps to Work Snorlax-Lv35-Block-Ease-Up",
+        ]
+        or redirect["doesNotEstablish"] != [
+            "identical local release identity",
+            "printed finish",
+            "rarity",
+            "provider-wide catalogue completeness",
+        ]
+    ):
         raise ValueError("Bulbapedia redirect evidence drifted")
 
 

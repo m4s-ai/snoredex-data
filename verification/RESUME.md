@@ -670,10 +670,15 @@ but deliberately not collapsed:
 
 The source-first identity is therefore `KR:BS2:30/40:base`. `BS2010002-kr` remains a catalogue id
 and is not rewritten as the printed/local code. No official provider-set identifier is asserted.
-Synthetic `BCR`, guessed `DP2`, finish and Japanese `DP1` work equivalence remain forbidden. The
-historical publisher card endpoint returned HTTP 410
-when rechecked, so the retained exact positive observation is evidence while the current endpoint
-state is only an access limitation. This one card does not establish provider-wide Korean catalogue
+Synthetic `BCR`, guessed `DP2`, finish and rarity remain forbidden. Japanese `DP1` Work equivalence
+is established only for this exact card by
+`verification/evidence/issue-260-bs2-space-time-equivalence-20260901.json`: Bulbapedia redirects
+`Snorlax (Burning Confrontation 30)` to `Snorlax (Diamond & Pearl 37)`, whose canonical page names
+the Japanese `Space-Time Creation` release and the matching Snorlax Lv.35 card facts. The Korean and
+Japanese releases remain separate identities, and this decision must not be generalized from
+artwork similarity. The historical publisher endpoint returned HTTP 410 when rechecked; the later
+exact Pokémon Korea catalogue row and the retained redirect are positive evidence, while endpoint
+availability proves no absence. This one card does not establish provider-wide Korean catalogue
 coverage; the Korean locality track remains `blocked-by-source` for enumeration.
 
 ### TCGdex answers 200 for languages and eras it holds no cards for

@@ -9,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "verification" / "passes"))
@@ -109,6 +110,32 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
         )
         self.assertNotIn("finish", source_row)
         self.assertEqual(source_row["workEvidenceSnapshot"], equivalence.SNAPSHOT)
+
+    def test_bs2_work_observation_drift_is_rejected(self) -> None:
+        snapshot = equivalence.read(equivalence.EVIDENCE)
+        redirect = next(row for row in snapshot["observations"]
+                        if row["observationId"] ==
+                        "BULBAPEDIA-BURNING-CONFRONTATION-30-REDIRECT")
+        redirect["observed"]["japaneseExpansion"] = "drifted"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "evidence.json"
+            path.write_text(json.dumps(snapshot, ensure_ascii=False), encoding="utf-8")
+            with mock.patch.object(equivalence, "EVIDENCE", path):
+                with self.assertRaisesRegex(ValueError, "redirect evidence drifted"):
+                    equivalence.validate_evidence()
+
+    def test_bs2_work_establishes_drift_is_rejected(self) -> None:
+        snapshot = equivalence.read(equivalence.EVIDENCE)
+        redirect = next(row for row in snapshot["observations"]
+                        if row["observationId"] ==
+                        "BULBAPEDIA-BURNING-CONFRONTATION-30-REDIRECT")
+        redirect["establishes"].pop()
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "evidence.json"
+            path.write_text(json.dumps(snapshot, ensure_ascii=False), encoding="utf-8")
+            with mock.patch.object(equivalence, "EVIDENCE", path):
+                with self.assertRaisesRegex(ValueError, "redirect evidence drifted"):
+                    equivalence.validate_evidence()
 
 
 if __name__ == "__main__":

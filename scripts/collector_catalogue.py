@@ -16,6 +16,7 @@ import copy
 import hashlib
 import json
 import re
+import subprocess
 import sys
 import uuid
 from collections import defaultdict
@@ -41,6 +42,19 @@ SCHEMA_VERSION = "1.0.0"
 MIGRATIONS_SCHEMA_VERSION = "1.1.0"
 PREVIOUS_CATALOGUE_FINGERPRINT = (
     "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f"
+)
+DEPLOYED_CATALOGUE_FINGERPRINT = (
+    "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15"
+)
+PUBLISHED_CATALOGUE_SOURCES = (
+    (
+        "ff045df123f05f107cc86ce3c5fdc32bc5f24cd9",
+        PREVIOUS_CATALOGUE_FINGERPRINT,
+    ),
+    (
+        "44d72b0a33125efc595309592afbf24d4eb210c1",
+        DEPLOYED_CATALOGUE_FINGERPRINT,
+    ),
 )
 DATASET_ID = "snoredex-data/snorlax-current-known"
 SOURCE_REPOSITORY = "https://github.com/m4s-ai/snoredex-data"
@@ -80,16 +94,10 @@ CUMULATIVE_CHECKLIST_REKEYS = {
     "ju-27-dutch-1e-unresolved-unknown": "ju-27-dutch-1e-non-holo-edition-stamp-editie-1",
     "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
 }
-CUMULATIVE_CATALOGUE_REKEYS = {
-    "item-d86cb23d-68d9-5725-9bce-462525985029":
-        "item-f54a780c-14bf-5178-b029-00891c08ce6c",
-    "item-b48b5aad-6829-51d0-98fe-f1baaa08ffd3":
-        "item-1c8618e5-967b-560a-a982-c21979091df6",
-    "item-aedf859e-be3c-5774-8750-b675f1ddd84d":
-        "item-20cf798c-be66-58e6-bf68-f3cc437822c4",
+REVIEWED_CARD_RELEASE_REKEYS = {
+    "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037":
+        "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up",
 }
-
-
 class ContractError(ValueError):
     pass
 
@@ -380,43 +388,176 @@ def retained_state_transition(item_id: str) -> dict[str, Any]:
     }
 
 
-def cumulative_catalogue_transitions(item_ids: set[str]) -> list[dict[str, Any]]:
-    """Preserve current ids and explicitly rekey every superseded catalogue id."""
-    stale_ids = set(CUMULATIVE_CATALOGUE_REKEYS) & item_ids
-    if stale_ids:
-        raise ContractError(
-            "cumulative catalogue rekeys still exist as current items: "
-            + ", ".join(sorted(stale_ids))
-        )
-    missing_targets = set(CUMULATIVE_CATALOGUE_REKEYS.values()) - item_ids
-    if missing_targets:
-        raise ContractError(
-            "cumulative catalogue rekey targets are missing: "
-            + ", ".join(sorted(missing_targets))
-        )
-    by_source = {iid: retained_state_transition(iid) for iid in item_ids}
-    by_source.update({
-        old_id: state_transition(old_id, [new_id])
-        for old_id, new_id in CUMULATIVE_CATALOGUE_REKEYS.items()
-    })
-    return [by_source[iid] for iid in sorted(by_source)]
+def git_json_at(commit: str, relative_path: str) -> dict[str, Any]:
+    """Read an immutable published artifact from repository history."""
+    result = subprocess.run(
+        ["git", "show", f"{commit}:{relative_path}"], cwd=ROOT,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+    )
+    if result.returncode:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        raise ContractError(f"cannot reconstruct {relative_path} from {commit}: {detail}")
+    try:
+        value = json.loads(result.stdout.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ContractError(f"invalid published artifact at {commit}:{relative_path}") from error
+    if not isinstance(value, dict):
+        raise ContractError(f"published artifact is not an object: {commit}:{relative_path}")
+    return value
 
 
-def catalogue_route_transitions_match(
-    transitions: list[dict[str, Any]], item_ids: set[str]
-) -> bool:
-    """Return whether a cumulative route preserves current and superseded ids."""
-    by_source = {row.get("fromItemId"): row for row in transitions}
-    expected_sources = item_ids | set(CUMULATIVE_CATALOGUE_REKEYS)
-    if len(by_source) != len(transitions) or set(by_source) != expected_sources:
-        return False
-    for iid in item_ids:
-        if by_source[iid] != retained_state_transition(iid):
-            return False
-    for old_id, new_id in CUMULATIVE_CATALOGUE_REKEYS.items():
-        if by_source.get(old_id) != state_transition(old_id, [new_id]):
-            return False
-    return True
+def item_identity_values(item: dict[str, Any], field: str) -> list[str]:
+    value = item.get(field)
+    values = value if isinstance(value, list) else [value]
+    return [candidate for candidate in values if isinstance(candidate, str) and candidate]
+
+
+def target_identity_index(items: list[dict[str, Any]]) -> dict[str, dict[str, set[str]]]:
+    fields = (
+        "physicalPrintingId", "legacyChecklistIds", "sourcePrintingId",
+        "finishUnitId", "cardReleaseId",
+    )
+    index: dict[str, dict[str, set[str]]] = {
+        field: defaultdict(set) for field in fields
+    }
+    for item in items:
+        for field in fields:
+            for value in item_identity_values(item, field):
+                index[field][value].add(item["itemId"])
+    return index
+
+
+def migration_targets(
+    source: dict[str, Any], target_ids: set[str],
+    index: dict[str, dict[str, set[str]]],
+) -> set[str]:
+    """Find targets only through producer-owned identity, never presentation fields."""
+    if source["itemId"] in target_ids:
+        return {source["itemId"]}
+    exact: set[str] = set()
+    for field in ("physicalPrintingId", "legacyChecklistIds", "sourcePrintingId"):
+        for value in item_identity_values(source, field):
+            exact.update(index[field].get(value, set()))
+    if exact:
+        return exact
+    for field in ("finishUnitId", "cardReleaseId"):
+        candidates: set[str] = set()
+        for value in item_identity_values(source, field):
+            if field == "cardReleaseId":
+                value = REVIEWED_CARD_RELEASE_REKEYS.get(value, value)
+            candidates.update(index[field].get(value, set()))
+        if candidates:
+            return candidates
+    return set()
+
+
+def transition_component(
+    start: str, edges: dict[str, set[str]], reverse: dict[str, set[str]],
+) -> tuple[set[str], set[str]]:
+    sources: set[str] = set()
+    targets: set[str] = set()
+    pending = [("source", start)]
+    while pending:
+        kind, item_id = pending.pop()
+        visited = sources if kind == "source" else targets
+        if item_id in visited:
+            continue
+        visited.add(item_id)
+        neighbours = edges[item_id] if kind == "source" else reverse[item_id]
+        next_kind = "target" if kind == "source" else "source"
+        pending.extend((next_kind, neighbour) for neighbour in neighbours)
+    return sources, targets
+
+
+def transition_components(edges: dict[str, set[str]]) -> list[tuple[list[str], list[str]]]:
+    """Group the bipartite source/target graph so N:1 and N:M cannot look like safe 1:1."""
+    reverse: defaultdict[str, set[str]] = defaultdict(set)
+    for source_id, target_ids in edges.items():
+        for target_id in target_ids:
+            reverse[target_id].add(source_id)
+    seen: set[str] = set()
+    components: list[tuple[list[str], list[str]]] = []
+    for start in sorted(edges):
+        if start in seen or not edges[start]:
+            continue
+        sources, targets = transition_component(start, edges, reverse)
+        seen.update(sources)
+        components.append((sorted(sources), sorted(targets)))
+    return components
+
+
+def catalogue_state_transition(source_ids: list[str], target_ids: list[str]) -> dict[str, Any]:
+    sources = sorted(set(source_ids))
+    targets = sorted(set(target_ids))
+    transition: dict[str, Any] = {
+        "fromItemId": sources[0], "fromItemIds": sources, "toItemIds": targets,
+    }
+    if len(sources) == len(targets) == 1:
+        retained = sources[0] == targets[0]
+        transition.update({
+            "changeKind": "retained" if retained else "rekey-1:1",
+            "automaticStateAction": "preserve",
+            "reconciliation": "identity-retained" if retained else "one-to-one-preserve",
+        })
+    elif len(sources) == 1 and not targets:
+        transition.update({
+            "changeKind": "retired-1:0", "automaticStateAction": "none",
+            "reconciliation": "retire-to-orphan",
+        })
+    elif len(sources) == 1:
+        transition.update({
+            "changeKind": "split-1:N", "automaticStateAction": "none",
+            "reconciliation": "requires-user-resolution",
+        })
+    elif len(targets) == 1:
+        transition.update({
+            "changeKind": "merge-N:1", "automaticStateAction": "none",
+            "reconciliation": "requires-user-resolution",
+        })
+    else:
+        transition["toItemIds"] = []
+        transition.update({
+            "changeKind": "unresolved", "automaticStateAction": "none",
+            "reconciliation": "requires-user-resolution", "candidateItemIds": targets,
+        })
+    return transition
+
+
+def build_catalogue_transition_route(
+    source: dict[str, Any], target: dict[str, Any], source_commit: str,
+) -> dict[str, Any]:
+    source_items = source.get("items", [])
+    target_items = target.get("items", [])
+    source_ids = {row["itemId"] for row in source_items}
+    target_ids = {row["itemId"] for row in target_items}
+    index = target_identity_index(target_items)
+    edges = {
+        row["itemId"]: migration_targets(row, target_ids, index)
+        for row in source_items
+    }
+    transitions = [
+        catalogue_state_transition([source_id], [])
+        for source_id in sorted(source_ids) if not edges[source_id]
+    ]
+    transitions.extend(
+        catalogue_state_transition(sources, targets)
+        for sources, targets in transition_components(edges)
+    )
+    transitions.sort(key=lambda row: row["fromItemId"])
+    return {
+        "fromSchema": source["meta"]["schema"],
+        "fromSchemaVersion": source["meta"]["schemaVersion"],
+        "fromFingerprint": source["meta"]["catalogueFingerprint"],
+        "sourceArtifactCommit": source_commit,
+        "sourceItemIds": sorted(source_ids),
+        "toSchema": target["meta"]["schema"],
+        "toSchemaVersion": target["meta"]["schemaVersion"],
+        "toFingerprint": target["meta"]["catalogueFingerprint"],
+        "compatibility": "compatible-data-only",
+        "rollbackFingerprint": source["meta"]["catalogueFingerprint"],
+        "cumulative": True,
+        "transitions": transitions,
+    }
 
 
 def natural_key(value: Any) -> str:
@@ -1329,16 +1470,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "cumulative": True,
         },
         "catalogueTransitions": [
-            {
-                "fromSchema": SCHEMA_NAME,
-                "fromSchemaVersion": SCHEMA_VERSION,
-                "fromFingerprint": PREVIOUS_CATALOGUE_FINGERPRINT,
-                "toSchema": SCHEMA_NAME,
-                "toSchemaVersion": SCHEMA_VERSION,
-                "toFingerprint": document["meta"]["catalogueFingerprint"],
-                "cumulative": True,
-                "transitions": cumulative_catalogue_transitions(item_ids),
-            }
+            build_catalogue_transition_route(
+                git_json_at(commit, "collector_catalogue.json"), document, commit
+            )
+            for commit, _fingerprint in PUBLISHED_CATALOGUE_SOURCES
         ],
         "transitions": [
             {
@@ -1768,30 +1903,20 @@ def validate_catalogue(
     return errors
 
 
-def validate_catalogue_transition_route(
-    migrations: dict[str, Any], catalogue: dict[str, Any], item_ids: set[str]
+def validate_catalogue_transition_routes(
+    migrations: dict[str, Any], catalogue: dict[str, Any]
 ) -> list[str]:
-    """Validate the cumulative route from the published predecessor catalogue."""
-    routes = migrations.get("catalogueTransitions", [])
-    expected_route_meta = {
-        "fromSchema": SCHEMA_NAME,
-        "fromSchemaVersion": SCHEMA_VERSION,
-        "fromFingerprint": catalogue["meta"].get("previousFingerprint"),
-        "toSchema": SCHEMA_NAME,
-        "toSchemaVersion": SCHEMA_VERSION,
-        "toFingerprint": catalogue["meta"]["catalogueFingerprint"],
-        "cumulative": True,
-    }
+    """Rebuild every published-source route and require byte-equivalent decisions."""
     if catalogue["meta"].get("previousFingerprint") != PREVIOUS_CATALOGUE_FINGERPRINT:
         return ["previous catalogue fingerprint route differs"]
-    if len(routes) != 1:
-        return ["previous catalogue fingerprint route differs"]
-    route = routes[0]
-    if any(route.get(key) != value for key, value in expected_route_meta.items()):
-        return ["previous catalogue fingerprint route differs"]
-    transitions = route.get("transitions", [])
-    if not catalogue_route_transitions_match(transitions, item_ids):
-        return ["previous catalogue transitions do not preserve or rekey every item identity"]
+    expected = []
+    for commit, fingerprint in PUBLISHED_CATALOGUE_SOURCES:
+        source = git_json_at(commit, "collector_catalogue.json")
+        if source.get("meta", {}).get("catalogueFingerprint") != fingerprint:
+            return [f"published catalogue fingerprint differs at {commit}"]
+        expected.append(build_catalogue_transition_route(source, catalogue, commit))
+    if migrations.get("catalogueTransitions") != expected:
+        return ["published catalogue transition routes differ"]
     return []
 
 
@@ -1804,7 +1929,7 @@ def validate_migrations(
     if migrations.get("meta", {}).get("schemaVersion") != MIGRATIONS_SCHEMA_VERSION:
         errors.append("migration schema version differs")
     item_ids = {row["itemId"] for row in catalogue["items"]}
-    errors.extend(validate_catalogue_transition_route(migrations, catalogue, item_ids))
+    errors.extend(validate_catalogue_transition_routes(migrations, catalogue))
     legacy_ids = {row["checklistId"] for row in predecessor["items"]}
     transitions = migrations.get("transitions", [])
     transition_by_source = {row.get("fromItemId"): row for row in transitions}
