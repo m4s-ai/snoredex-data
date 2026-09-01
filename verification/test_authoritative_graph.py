@@ -146,6 +146,19 @@ def main() -> None:
         "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
     ]
     assert fxy_row["corroborated"] is True
+    assert fxy_row["rarity"] == ("fixed product", "fixed")
+    assert fxy_row["raritySourceUrl"] == (
+        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
+    )
+    assert fxy_row["rarityRetrievedAt"] == "2026-08-10"
+    sm30a_row = next(
+        row for row in catalogue_rows if row["printId"] == "KR:SM30A:060/080:base"
+    )
+    assert sm30a_row["rarity"] == ("fixed product", "fixed")
+    assert sm30a_row["raritySourceUrl"] == (
+        "https://pokemoncard.co.kr/cards/detail/BS2019018060"
+    )
+    assert sm30a_row["rarityRetrievedAt"] == "2026-09-01"
     assert source_first_rows[fxy_row["printId"]]["corroboratingSourceUrls"] == (
         fxy_row["corroboratingSourceUrls"]
     )
@@ -156,28 +169,31 @@ def main() -> None:
     }
     assert units["U0586"]["corroborated"] is True
     rarity_provenance = {
-        row["printId"]: (row["sourceUrl"], row["retrievedAt"])
+        row["printId"]: (
+            row.get("raritySourceUrl", row["sourceUrl"]),
+            row.get("rarityRetrievedAt", row["retrievedAt"]),
+        )
         for row in catalogue_rows
         if row["printId"] in official_korean and row.get("rarity") is not None
     }
-    unsupported_rarities = {
+    fixed_product_rarities = {
         "KR:FXY:026/036:base",
         "KR:SM30A:060/080:base",
     }
-    assert unsupported_rarities.isdisjoint(rarity_provenance)
+    assert fixed_product_rarities.issubset(rarity_provenance)
+    capabilities = korean_catalogue_pass.read(korean_catalogue_pass.CAPABILITIES)
+    korean_catalogue_pass.apply_capabilities(
+        capabilities, korean_catalogue_pass.read(korean_catalogue_pass.EVIDENCE)
+    )
+    korea_edge = next(
+        edge for surface in capabilities["surfaces"]
+        if surface["surfaceId"] == "pokemon-card-korea-card-search"
+        for edge in surface["coverageEdges"]
+    )
+    assert "rarity" not in korea_edge["positiveEvidenceCapabilities"]
     korean_catalogue_pass.apply_official_rows(catalogue_rows, catalogue_identities)
     for row in catalogue_rows:
         if row["printId"] not in official_korean:
-            continue
-        if row["printId"] in unsupported_rarities:
-            assert "raritySourceUrl" not in row
-            rarity_id = (
-                "RARITYCLAIM:issue260:"
-                + korean_catalogue_pass.base.release_id(row).removeprefix(
-                    "RELEASE:KR:Korean:"
-                )
-            )
-            assert not any(entity["entityId"] == rarity_id for entity in graph["entities"])
             continue
         source_url, retrieved_at = rarity_provenance[row["printId"]]
         assert row["raritySourceUrl"] == source_url

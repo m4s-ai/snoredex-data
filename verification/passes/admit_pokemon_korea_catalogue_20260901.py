@@ -71,19 +71,27 @@ def independent_url(url: str) -> bool:
 
 def new_rows() -> list[dict[str, Any]]:
     fxy = research.research(
-        "U0586", "FXY", "026/036", None,
+        "U0586", "FXY", "026/036", ("fixed product", "fixed"),
         official_url("ST2014001026"), "pokemon-card-korea",
         corroborating=["https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"],
         legacy_aliases=ALIASES["KR:FXY:026/036:base"],
     )
-    fxy["retrievedAt"] = REVIEWED_AT
+    fxy.update({
+        "retrievedAt": REVIEWED_AT,
+        "raritySourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "rarityProviderId": "bulbapedia",
+        "rarityRetrievedAt": "2026-08-10",
+    })
     sm30a = {
         "printId": "KR:SM30A:060/080:base",
         "localSetCode": "SM30A",
         "localNumber": "060/080",
         "work": "Snorlax-Incredible-Snore",
         "legacy": [],
-        "rarity": None,
+        "rarity": ("fixed product", "fixed"),
+        "raritySourceUrl": official_url("BS2019018060"),
+        "rarityProviderId": "pokemon-card-korea",
+        "rarityRetrievedAt": REVIEWED_AT,
         "specimenId": None,
         "cardName": "Snorlax",
         "providerId": "pokemon-card-korea",
@@ -289,7 +297,7 @@ def apply_capabilities(document: dict[str, Any], evidence: dict[str, Any]) -> No
                 "productCategories": ["card"],
                 "timeRange": {"start": None, "end": None, "basis": "the retained 2026-09-01 exact 잠만보 response only"},
             },
-            "positiveEvidenceCapabilities": ["identity", "image", "language", "card-existence", "card-release", "local-set-identifier", "collector-number", "rarity", "set-membership", "product-membership", "illustrator"],
+            "positiveEvidenceCapabilities": ["identity", "image", "language", "card-existence", "card-release", "local-set-identifier", "collector-number", "set-membership", "product-membership", "illustrator"],
             "exhaustive": False,
             "absenceCapability": {"enabled": False, "dimensions": [], "exactScopes": [], "rationale": "The response is a positive exact-name frontier; omissions, route failures and zero results are unknown."},
             "knownPositiveObservationId": "obs-pokemon-card-korea-snorlax-search-20260901",

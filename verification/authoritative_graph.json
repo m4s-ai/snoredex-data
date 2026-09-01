@@ -106265,6 +106265,22 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue260:FXY:026/036:Snorlax-Rock-Smash-Strength",
+      "origin": "reviewed-evidence-issue-260",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue260:FXY:026/036:Snorlax-Rock-Smash-Strength",
+        "cardReleaseId": "RELEASE:KR:Korean:FXY:026/036:Snorlax-Rock-Smash-Strength",
+        "sourceRecordId": "SET-SRC-SF-8C84DDA3F2CE",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Korean-card",
+        "sourceNativeValue": "fixed product",
+        "normalizedRarityId": "fixed",
+        "sourceProductKey": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
+        "retrievedAt": "2026-08-10"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:issue260:S-P:101:Snorlax-Slap-Push-Single-Strike-Tackle",
       "origin": "reviewed-evidence-issue-260",
       "payload": {
@@ -106309,6 +106325,22 @@
         "normalizedRarityId": "promo",
         "sourceProductKey": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
         "retrievedAt": "2026-08-28"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue260:SM30A:060/080:Snorlax-Incredible-Snore",
+      "origin": "reviewed-evidence-issue-260",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue260:SM30A:060/080:Snorlax-Incredible-Snore",
+        "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+        "sourceRecordId": "SET-SRC-SF-A7CC525CE73E",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Korean-card",
+        "sourceNativeValue": "fixed product",
+        "normalizedRarityId": "fixed",
+        "sourceProductKey": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+        "retrievedAt": "2026-09-01"
       }
     },
     {
@@ -146320,9 +146352,11 @@
             "KR:FXY:026/036:base"
           ],
           "providers": [
+            "bulbapedia",
             "pokemon-card-korea"
           ],
           "sourceUrls": [
+            "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
             "https://pokemoncard.co.kr/cards/detail/ST2014001026"
           ],
           "retrievedByPrintId": {
@@ -233577,6 +233611,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue260:FXY:026/036:Snorlax-Rock-Smash-Strength",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:FXY:026/036:Snorlax-Rock-Smash-Strength",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue260:FXY:026/036:Snorlax-Rock-Smash-Strength",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-8C84DDA3F2CE",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue260:S-P:101:Snorlax-Slap-Push-Single-Strike-Tackle",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -233621,6 +233671,22 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-3F07705BCB4E",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue260:SM30A:060/080:Snorlax-Incredible-Snore",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue260:SM30A:060/080:Snorlax-Incredible-Snore",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-A7CC525CE73E",
       "provenance": {}
     },
     {
@@ -283301,8 +283367,8 @@
     }
   ],
   "summary": {
-    "entities": 7840,
-    "edges": 11716,
+    "entities": 7842,
+    "edges": 11720,
     "migrationInputs": 2720,
     "migrationDispositions": {
       "bounded-contradicted": 84,
