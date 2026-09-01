@@ -199,6 +199,16 @@ def main() -> None:
                     "retire-to-orphan", "requires-user-resolution",
                 }
     deployed_route = routes[collector.DEPLOYED_CATALOGUE_FINGERPRINT]
+    old_bs2 = "item-aedf859e-be3c-5774-8750-b675f1ddd84d"
+    new_bs2 = "item-20cf798c-be66-58e6-bf68-f3cc437822c4"
+    for route in routes.values():
+        bs2 = next(
+            row for row in route["transitions"] if old_bs2 in row["fromItemIds"]
+        )
+        assert bs2["fromItemIds"] == [old_bs2]
+        assert bs2["toItemIds"] == [new_bs2]
+        assert bs2["changeKind"] == "rekey-1:1"
+        assert bs2["automaticStateAction"] == "preserve"
     assert {
         row["changeKind"] for row in deployed_route["transitions"]
     } == {"retained", "rekey-1:1", "retired-1:0", "split-1:N", "merge-N:1", "unresolved"}

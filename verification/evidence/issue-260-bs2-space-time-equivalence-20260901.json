@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "schema": "snoredex-reviewed-card-evidence",
+    "schemaVersion": "1.0.0",
+    "issue": 260,
+    "reviewedAt": "2026-09-01",
+    "rule": "The exact Bulbapedia redirect establishes card equivalence for this one Korean release; artwork similarity alone would not establish a Work mapping."
+  },
+  "identity": {
+    "printId": "KR:BS2:30/40:base",
+    "locality": "KR",
+    "language": "Korean",
+    "localSetCode": "BS2",
+    "localSetName": "불꽃 튀는 대결",
+    "localNumber": "30/40",
+    "providerRecordId": "BS2010002030"
+  },
+  "decision": {
+    "work": "Snorlax-Lv35-Block-Ease-Up",
+    "basis": "Bulbapedia redirects Snorlax (Burning Confrontation 30) to Snorlax (Diamond & Pearl 37); that canonical card page lists the Japanese expansion Space-Time Creation and the same Snorlax Lv.35 card facts.",
+    "releaseIdentityMerged": false,
+    "finishEstablished": false,
+    "rarityEstablished": false
+  },
+  "observations": [
+    {
+      "observationId": "KR-OFFICIAL-BS2-30-IDENTITY",
+      "providerId": "pokemon-card-korea",
+      "authorityTier": 1,
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "sourceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+      "captureMethod": "retained official exact-name catalogue identity",
+      "observed": {
+        "name": "잠만보",
+        "localSetCode": "BS2",
+        "localNumber": "30/40",
+        "localProductName": "DP 확장팩 불꽃 튀는 대결",
+        "hp": "HP100",
+        "illustrator": "Ken Sugimori"
+      },
+      "establishes": [
+        "the exact Korean card release used by the redirect alias"
+      ],
+      "doesNotEstablish": [
+        "same Work by itself",
+        "printed finish"
+      ]
+    },
+    {
+      "observationId": "BULBAPEDIA-BURNING-CONFRONTATION-30-REDIRECT",
+      "providerId": "bulbapedia",
+      "authorityTier": 3,
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28Burning_Confrontation_30%29",
+      "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28Diamond_%26_Pearl_37%29",
+      "captureMethod": "rendered Bulbapedia article with the visible redirect notice retained in the in-app browser",
+      "observed": {
+        "redirectedFrom": "Snorlax (Burning Confrontation 30)",
+        "canonicalTitle": "Snorlax (Diamond & Pearl 37)",
+        "japaneseExpansion": "Space-Time Creation",
+        "cardName": "Snorlax",
+        "level": 35,
+        "hp": 100,
+        "illustrator": "Ken Sugimori",
+        "attacks": [
+          "Block",
+          "Ease Up"
+        ]
+      },
+      "establishes": [
+        "Burning Confrontation 30 and Diamond & Pearl 37 are aliases for the same card",
+        "the canonical card has a Japanese Space-Time Creation release",
+        "KR:BS2:30/40:base maps to Work Snorlax-Lv35-Block-Ease-Up"
+      ],
+      "doesNotEstablish": [
+        "identical local release identity",
+        "printed finish",
+        "rarity",
+        "provider-wide catalogue completeness"
+      ]
+    }
+  ]
+}

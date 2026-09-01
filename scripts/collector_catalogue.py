@@ -94,6 +94,10 @@ CUMULATIVE_CHECKLIST_REKEYS = {
     "ju-27-dutch-1e-unresolved-unknown": "ju-27-dutch-1e-non-holo-edition-stamp-editie-1",
     "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
 }
+REVIEWED_CARD_RELEASE_REKEYS = {
+    "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037":
+        "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up",
+}
 class ContractError(ValueError):
     pass
 
@@ -439,6 +443,8 @@ def migration_targets(
     for field in ("finishUnitId", "cardReleaseId"):
         candidates: set[str] = set()
         for value in item_identity_values(source, field):
+            if field == "cardReleaseId":
+                value = REVIEWED_CARD_RELEASE_REKEYS.get(value, value)
             candidates.update(index[field].get(value, set()))
         if candidates:
             return candidates

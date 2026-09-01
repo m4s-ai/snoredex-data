@@ -3891,6 +3891,102 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "bulbapedia-bs2-card-redirect",
+      "providerId": "bulbapedia",
+      "label": "Bulbapedia exact Burning Confrontation 30 card redirect",
+      "match": {
+        "urlPrefixes": [
+          "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28Burning_Confrontation_30%29",
+          "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28Diamond_%26_Pearl_37%29"
+        ],
+        "nonUrlEvidenceIds": [
+          "verification/evidence/issue-260-bs2-space-time-equivalence-20260901.json"
+        ]
+      },
+      "state": "incomplete",
+      "failureState": "Only the exact rendered redirect and canonical card fields retained on 2026-09-01 are in scope.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-09-01",
+      "freshnessPolicy": "Re-check the exact redirect and canonical card page; never generalize this decision to another card or infer absence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28Burning_Confrontation_30%29",
+        "parameters": [],
+        "pagination": "not paginated; one exact redirect and its canonical article",
+        "expectedIdentifiers": [
+          "Snorlax (Burning Confrontation 30)",
+          "Snorlax (Diamond & Pearl 37)",
+          "Space-Time Creation",
+          "Block",
+          "Ease Up"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "rendered card identity fields, not a physical card photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "bulbapedia-bs2-card-redirect-positive",
+          "coverage": {
+            "localities": [
+              "KR",
+              "JP",
+              "WEST"
+            ],
+            "languages": [
+              "Korean",
+              "Japanese",
+              "English"
+            ],
+            "scripts": [
+              "Hang",
+              "Jpan",
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the exact retained Burning Confrontation 30 redirect only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "card-existence",
+            "card-release",
+            "collector-number",
+            "set-membership",
+            "artist",
+            "cross-language-equivalence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The redirect establishes one positive equivalence and no absence claim."
+          },
+          "knownPositiveObservationId": "obs-bulbapedia-bs2-card-redirect-20260901",
+          "boundary": {
+            "outsideScope": [
+              "other Burning Confrontation cards",
+              "printed finish",
+              "rarity",
+              "catalogue completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Artwork similarity alone is insufficient; this edge depends on the exact redirect."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -5124,6 +5220,35 @@
         "pokemon-card-korea-retained-rarity-details-positive"
       ],
       "outcome": "The retained exact detail observations support only their recorded card identities and source-native rarity values; no catalogue-wide rarity, finish or absence capability is inferred."
+    },
+    {
+      "observationId": "obs-bulbapedia-bs2-card-redirect-20260901",
+      "surfaceId": "bulbapedia-bs2-card-redirect",
+      "kind": "known-positive",
+      "queryUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28Burning_Confrontation_30%29",
+      "queryParameters": {},
+      "retrievedAt": "2026-09-01",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "evidenceSnapshot": "verification/evidence/issue-260-bs2-space-time-equivalence-20260901.json",
+          "redirectedFrom": "Snorlax (Burning Confrontation 30)",
+          "canonicalTitle": "Snorlax (Diamond & Pearl 37)",
+          "japaneseExpansion": "Space-Time Creation",
+          "work": "Snorlax-Lv35-Block-Ease-Up",
+          "absenceCapability": false,
+          "finishCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "KR:BS2:30/40:base",
+        "Snorlax-Lv35-Block-Ease-Up",
+        "Space-Time Creation"
+      ],
+      "validatesEdges": [
+        "bulbapedia-bs2-card-redirect-positive"
+      ],
+      "outcome": "The exact redirect establishes the BS2 card's cross-language Work mapping while keeping release identity and finish separate."
     }
   ]
 }
