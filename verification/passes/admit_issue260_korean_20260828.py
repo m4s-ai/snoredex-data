@@ -58,6 +58,7 @@ def card(
         "work": work,
         "legacy": [legacy],
         "rarity": rarity,
+        "retrievedAt": "2026-08-28",
         "specimenId": specimen,
         "cardName": card_name,
         "providerRecordId": provider_record,
@@ -150,6 +151,7 @@ def source_first_row(row: dict[str, Any]) -> dict[str, Any]:
         "script": "Hang", "name": "이브이&잠만보 GX" if row["cardName"].startswith("Eevee") else "잠만보",
         "cardName": row["cardName"],
         "catchUpOf": "the exact Korean counterpart established by the printed Korean attacks and card traits",
+        "retrievedAt": row.get("retrievedAt", "2026-08-28"),
         "specimenId": row["specimenId"], "providerId": row.get("providerId", "pokemon-card-korea"),
         "sourceUrl": row["sourceUrl"],
         "corroborated": bool(row.get("corroborated")), "markAssetUrl": None,
@@ -222,9 +224,13 @@ def build_profile(
 ) -> dict[str, Any]:
     numbers = sorted(row["localNumber"] for row in rows)
     denominators = {number.partition("/")[2] for number in numbers if number.partition("/")[2].isdigit()}
+    retrieved_by_print_id = {
+        row["printId"]: row.get("retrievedAt") or retrieved_at for row in rows
+    }
     return {
         "sourceRecordId": stable_profile_id("KR", code), "sourceKind": "source-first-local-set-profile",
-        "provider": "mixed-positive-evidence", "providerRecordKey": f"KR\x1f{code}", "retrieved": retrieved_at,
+        "provider": "mixed-positive-evidence", "providerRecordKey": f"KR\x1f{code}",
+        "retrieved": max(retrieved_by_print_id.values()),
         "raw": {
             "localCode": code, "localName": None, "locality": "KR", "languages": ["Korean"],
             "scripts": ["Hang"], "printIds": sorted(row["printId"] for row in rows),
@@ -243,6 +249,7 @@ def build_profile(
                 for url in (row["sourceUrl"], row.get("raritySourceUrl"))
                 if url
             }),
+            "retrievedByPrintId": dict(sorted(retrieved_by_print_id.items())),
             "printedSetSize": int(next(iter(denominators))) if len(denominators) == 1 else None,
             "printedSetSizeBasis": "the denominator printed on every observed card" if len(denominators) == 1 else "no common printed denominator is inferred",
             "localeSuffix": None, "observedCollectorNumbers": numbers,
@@ -448,7 +455,7 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
         ]
     claim_id = f"CLAIM:source-first:{row['printId']}"
     edition_id = f"EDITION:KR:Korean:{row['localSetCode']}"
-    claim = {"claimId": claim_id, "claimKind": "card-release", "sourceKind": "source-first-record", "sourceId": row["printId"], "sourceRecord": row["sourceUrl"], "evidenceStatus": "confirmed", "disposition": "established-and-mapped", "proposedTargetId": rid, "materializedTargetId": rid, "reason": "positive exact Korean card record and retained image"}
+    claim = {"claimId": claim_id, "claimKind": "card-release", "sourceKind": "source-first-record", "sourceId": row["printId"], "sourceRecord": row["sourceUrl"], "retrievedAt": row.get("retrievedAt") or profile["retrieved"], "evidenceStatus": "confirmed", "disposition": "established-and-mapped", "proposedTargetId": rid, "materializedTargetId": rid, "reason": "positive exact Korean card record and retained image"}
     upsert_entity(graph, "candidate-claim", claim_id, claim, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "candidate-claim", claim_id, "materializes", "card-release", rid, {"disposition": "established-and-mapped"})
     upsert_migration(graph, {"sourceKind": "source-first-record", "sourceId": row["printId"], "disposition": "established-and-mapped", "targetRef": rid, "reason": claim["reason"]})
@@ -471,7 +478,7 @@ def apply_release_graph(graph: dict[str, Any], profile: dict[str, Any], row: dic
     upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue260:" + rid.removeprefix("RELEASE:KR:Korean:")
-    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"]}
+    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Korean-card", "sourceNativeValue": row["rarity"][0], "normalizedRarityId": row["rarity"][1], "sourceProductKey": row.get("raritySourceUrl") or row["sourceUrl"], "retrievedAt": row.get("retrievedAt") or profile["retrieved"]}
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin="reviewed-evidence-issue-260")
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])

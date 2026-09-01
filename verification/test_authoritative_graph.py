@@ -105,6 +105,51 @@ def main() -> None:
         and row["entityId"] == korean_rarity["sourceRecordId"]
     )
     assert korean_rarity["sourceProductKey"] in korean_profile["raw"]["sourceUrls"]
+    source_first_rows = {
+        row["printId"]: row for row in json.loads(
+            (ROOT / "verification/source_first_prints.json").read_text(encoding="utf-8")
+        )["prints"]
+    }
+    unmatched_korean = {
+        "KR:CLF:016/034:base", "KR:s1H:070/060:base", "KR:sm9:115/095:base",
+        "KR:s5a:093/070:base", "KR:20th:047/072:base",
+        "KR:xsv2a:143/165:base", "KR:xm2a:136/193:base",
+    }
+    assert {
+        print_id: source_first_rows[print_id]["retrievedAt"]
+        for print_id in unmatched_korean
+    } == {print_id: "2026-08-30" for print_id in unmatched_korean}
+    official_korean = {
+        row["printId"] for row in json.loads(
+            (
+                ROOT
+                / "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
+            ).read_text(encoding="utf-8")
+        )["identities"]
+    }
+    assert len(official_korean) == 45
+    assert {
+        print_id: source_first_rows[print_id]["retrievedAt"]
+        for print_id in official_korean
+    } == {print_id: "2026-09-01" for print_id in official_korean}
+    mixed_profile = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "set-source-record"
+        and row["payload"].get("providerRecordKey") == "KR\x1fs1H"
+    )
+    assert mixed_profile["retrieved"] == "2026-09-01"
+    assert mixed_profile["raw"]["retrievedByPrintId"] == {
+        "KR:s1H:045/060:base": "2026-09-01",
+        "KR:s1H:046/060:base": "2026-09-01",
+        "KR:s1H:066/060:base": "2026-09-01",
+        "KR:s1H:070/060:base": "2026-08-30",
+    }
+    unmatched_rarity = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityId"]
+        == "RARITYCLAIM:issue260:s1H:070/060:Snorlax-VMAX-G-Max-Fall"
+    )
+    assert unmatched_rarity["retrievedAt"] == "2026-08-30"
     assert graph_module._number("058/071") == graph_module._number("58")
     assert graph_module.specimen_markings({
         "markings": "EDIZIONE 1", "markingRole": "print-identity"
