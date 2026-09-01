@@ -75,6 +75,7 @@ def new_rows() -> list[dict[str, Any]]:
         official_url("ST2014001026"), "pokemon-card-korea",
         legacy_aliases=ALIASES["KR:FXY:026/036:base"],
     )
+    fxy["retrievedAt"] = REVIEWED_AT
     sm30a = {
         "printId": "KR:SM30A:060/080:base",
         "localSetCode": "SM30A",

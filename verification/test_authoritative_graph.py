@@ -145,6 +145,7 @@ def main() -> None:
         row["printId"]: (row["sourceUrl"], row["retrievedAt"])
         for row in catalogue_rows if row["printId"] in official_korean
     }
+    assert rarity_provenance["KR:FXY:026/036:base"][1] == "2026-09-01"
     korean_catalogue_pass.apply_official_rows(catalogue_rows, catalogue_identities)
     for row in catalogue_rows:
         if row["printId"] not in official_korean:
