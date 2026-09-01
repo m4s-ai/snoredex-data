@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "verification" / "passes"))
 import authoritative_graph as graph_module  # noqa: E402
 import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
 import admit_pokemon_korea_catalogue_20260901 as korean_catalogue_pass  # noqa: E402
+import map_bs2_space_time_work_20260901 as bs2_work_pass  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
@@ -141,6 +142,7 @@ def main() -> None:
         bs2_print_id: "2026-09-01"
     }
     assert bs2_profile["raw"]["evidenceSnapshot"] == korean_catalogue_pass.SNAPSHOT
+    assert bs2_profile["raw"]["workEvidenceSnapshot"] == bs2_work_pass.SNAPSHOT
     assert set(source_first_rows[bs2_print_id]["corroboratingSourceUrls"]) < set(
         bs2_profile["raw"]["sourceUrls"]
     )
@@ -158,8 +160,11 @@ def main() -> None:
         if row["entityType"] == "card-release"
         and bs2_print_id in row["payload"].get("sourceFirstRecordIds", [])
     )
-    assert bs2_release["work"] is None
-    assert bs2_release["workMappingState"] == "needs-explicit-equivalence"
+    assert bs2_release["work"] == "Snorlax-Lv35-Block-Ease-Up"
+    assert bs2_release["workMappingState"] == "mapped"
+    assert bs2_release["cardReleaseId"] == (
+        "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up"
+    )
     catalogue_identities = {
         row["printId"]: row for row in json.loads(
             korean_catalogue_pass.EVIDENCE.read_text(encoding="utf-8")
@@ -190,7 +195,7 @@ def main() -> None:
     )
     assert {
         row["printId"] for row in catalogue_rows if not row.get("work")
-    } == {bs2_print_id}
+    } == set()
     assert all(
         all(row.get(field) for field in (
             "raritySourceUrl", "rarityProviderId", "rarityRetrievedAt"

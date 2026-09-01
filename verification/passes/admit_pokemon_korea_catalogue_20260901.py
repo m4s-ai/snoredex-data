@@ -224,6 +224,12 @@ def projection_rows(
     by_print = {row["printId"]: row for row in rows}
     source_rows = {row["printId"]: row for row in prints["prints"]}
     releases_by_print: dict[str, list[dict[str, Any]]] = {}
+    work_basis_by_release = {
+        edge["fromId"]: edge.get("provenance", {}).get("basis")
+        for edge in graph["edges"]
+        if edge.get("fromType") == "card-release"
+        and edge.get("relation") == "implements"
+    }
     for entity in graph["entities"]:
         if entity.get("entityType") != "card-release":
             continue
@@ -240,7 +246,7 @@ def projection_rows(
             )
         release = releases[0]
         payload = release["payload"]
-        by_print[print_id] = {
+        projected_row = {
             "printId": print_id,
             "localSetCode": source["localSetCode"],
             "localNumber": source["localNumber"],
@@ -264,6 +270,9 @@ def projection_rows(
             "corroboratingSourceUrls": source.get("corroboratingSourceUrls") or [],
             "legacyIdentityAliases": payload.get("legacyIdentityAliases") or [],
         }
+        if work_basis_by_release.get(release["entityId"]):
+            projected_row["workMappingBasis"] = work_basis_by_release[release["entityId"]]
+        by_print[print_id] = projected_row
     projected = sorted(by_print.values(), key=lambda row: row["printId"])
     projected_ids = {row["printId"] for row in projected}
     if not set(identities).issubset(projected_ids):

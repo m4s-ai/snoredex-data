@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "verification" / "passes"))
 
 import admit_korean_burning_confrontation_20260820 as korean  # noqa: E402
+import map_bs2_space_time_work_20260901 as equivalence  # noqa: E402
 
 
 class KoreanBurningConfrontationTests(unittest.TestCase):
@@ -80,6 +81,34 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
         self.assertNotIn("finish", korean.ADMITTED_ENTRY)
         self.assertNotIn("providerSetId", korean.ADMITTED_ENTRY)
         self.assertIsNone(korean.ADMITTED_ENTRY["catchUpOf"])
+
+    def test_bs2_maps_to_space_time_creation_work_without_finish(self) -> None:
+        equivalence.validate_evidence()
+        graph = json.loads(equivalence.GRAPH.read_text(encoding="utf-8"))
+        releases = {
+            row["entityId"]: row["payload"] for row in graph["entities"]
+            if row["entityType"] == "card-release"
+        }
+        self.assertNotIn(equivalence.OLD_RELEASE_ID, releases)
+        release = releases[equivalence.RELEASE_ID]
+        self.assertEqual(release["work"], equivalence.WORK)
+        self.assertEqual(release["workMappingState"], "mapped")
+        self.assertIn(equivalence.REDIRECT_URL, release["sourceRecords"])
+        implements = [
+            edge for edge in graph["edges"]
+            if edge["fromType"] == "card-release"
+            and edge["fromId"] == equivalence.RELEASE_ID
+            and edge["relation"] == "implements"
+        ]
+        self.assertEqual(len(implements), 1)
+        self.assertEqual(implements[0]["toId"], f"WORK:{equivalence.WORK}")
+        self.assertEqual(implements[0]["provenance"]["basis"], equivalence.BASIS)
+        source_row = next(
+            row for row in json.loads(equivalence.PRINTS.read_text(encoding="utf-8"))["prints"]
+            if row["printId"] == equivalence.PRINT_ID
+        )
+        self.assertNotIn("finish", source_row)
+        self.assertEqual(source_row["workEvidenceSnapshot"], equivalence.SNAPSHOT)
 
 
 if __name__ == "__main__":

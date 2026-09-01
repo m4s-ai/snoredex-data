@@ -85,6 +85,8 @@ CUMULATIVE_CATALOGUE_REKEYS = {
         "item-f54a780c-14bf-5178-b029-00891c08ce6c",
     "item-b48b5aad-6829-51d0-98fe-f1baaa08ffd3":
         "item-1c8618e5-967b-560a-a982-c21979091df6",
+    "item-aedf859e-be3c-5774-8750-b675f1ddd84d":
+        "item-20cf798c-be66-58e6-bf68-f3cc437822c4",
 }
 
 
