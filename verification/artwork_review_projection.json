@@ -3,8 +3,8 @@
   "schemaVersion": "1.1.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
-  "generated": "2026-09-01",
-  "projectionVersion": "54e975e61c6611856b2db0f553ba820c762ba9596e67cb49fd0991d154017e2e",
+  "generated": "2026-09-02",
+  "projectionVersion": "cd5c580260ae73aa73b07d90f65bb9850efd2010e50ac8329a5eb6687314e10b",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -14,8 +14,8 @@
     "mappedAppearances": 181,
     "unmappedReleases": 74,
     "cardReleases": 633,
-    "physicalPrintings": 716,
-    "sourceObservations": 2357
+    "physicalPrintings": 720,
+    "sourceObservations": 2367
   },
   "groups": [
     {
@@ -25078,32 +25078,74 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-              "semanticPrintingId": "PRINTING:1aa8c6c82d3fdc27f9b30f85",
+              "physicalPrintingId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+              "semanticPrintingId": "PRINTING:c21c93ac1949817b294c3b22",
               "cardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
-              "foilPattern": null,
-              "markings": null,
+              "foilPattern": "star",
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0057",
-              "sourcePrintingId": "F0057-P03",
-              "establishingClaimId": "CLAIM:finish:PRINTING:1aa8c6c82d3fdc27f9b30f85",
+              "sourcePrintingId": "F0057-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:c21c93ac1949817b294c3b22",
+              "specimenIds": [
+                "SPEC-0474"
+              ],
               "sources": [
                 {
-                  "url": "https://www.pokemon.cn/tcg/product/16377.html",
-                  "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
-                  "authorityTier": "official-primary",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "languages": [
-                    "S-Chinese"
+                  "url": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+                  "sourceType": "Retail listing",
+                  "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. Repeating large stars are visible across the reflective card body; the collection owner identifies this second image as Reverse Holo with a star pattern. Retained as SPEC-0474.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
                   ],
-                  "retrievedAt": "2026-08-27",
-                  "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+                  "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+              "semanticPrintingId": "PRINTING:f9ef48c2b8ba907c7ee79afa",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0057",
+              "sourcePrintingId": "F0057-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f9ef48c2b8ba907c7ee79afa",
+              "specimenIds": [
+                "SPEC-0473"
+              ],
+              "sources": [
+                {
+                  "url": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+                  "sourceType": "Retail listing",
+                  "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. The collection owner identifies this first image as the Holo printing and states that 086 has exactly Holo and Reverse Holo finishes. Retained as SPEC-0473.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
                 }
               ]
             }
@@ -25114,11 +25156,12 @@
             "artist": null,
             "variant": "V1",
             "finish": [
-              "mirror-holo",
-              "non-holo",
+              "holo",
               "reverse-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "star"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -25131,16 +25174,51 @@
               "contentHash": "db5d50dc5bdb12e1c5448be0ae51a0d54e2eb33dfa87b50ecb4cb99d7ece57eb",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+              "label": "publisher card image",
+              "observationId": "source-first:CN:CS2aC:086:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0057-P03:0:d4c48dae59a72376",
+              "observationId": "finish:F0057-P01:0:a85e03e4fb4b10e5",
               "kind": "finish",
-              "provider": "Official Mainland China Simplified Chinese card-finish guide",
-              "url": "https://www.pokemon.cn/tcg/product/16377.html",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings.",
-              "contentHash": "4f2b895e55134226ac54425e830dc51f9814a324287ca9b7f35834ac75a14a54",
+              "provider": "Retail listing",
+              "url": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. The collection owner identifies this first image as the Holo printing and states that 086 has exactly Holo and Reverse Holo finishes. Retained as SPEC-0473.",
+              "contentHash": "1acf553b1079fea73a21435d701f96d338f6915231d314a56867cf9c9e53cea5",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0057-P01:1:db6c2551f3a0b5c3",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
+              "contentHash": "d3d50cafbd0511e4e0ab94e60dcc007adbd905a1a312a05383f9cfc1d12c974a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0057-P02:0:ae40d500ea209476",
+              "kind": "finish",
+              "provider": "Retail listing",
+              "url": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. Repeating large stars are visible across the reflective card body; the collection owner identifies this second image as Reverse Holo with a star pattern. Retained as SPEC-0474.",
+              "contentHash": "2e1c248d14df8392b09b566f830c75d6bf9f4ceb86d1d773f72334890185d48c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0057-P02:1:db6c2551f3a0b5c3",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
+              "contentHash": "57dd3b127c2489d85033bb4aa720b3c65bb83f64de98de222d25c5cbf52bf607",
               "image": null
             },
             {
@@ -25148,9 +25226,9 @@
               "kind": "source-first",
               "provider": "52poke",
               "url": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89",
-              "evidence": "52poke's per-card language table identifies the Simplified-Chinese Vivid Portrayals printing as collector number 086, rarity R, released 2023-08-18. The existing reviewed U0289 evidence and shared card identity establish it as the local counterpart of legacy s4 084; the local release remains distinct.",
-              "contentHash": "8834c61e906721ebcfca1a732b059c82a846df4e12e54e6fab7248917e35eba0",
-              "image": null
+              "evidence": "52poke's per-card language table identifies the Simplified-Chinese Vivid Portrayals printing as collector number 086, rarity R, released 2023-08-18. SPEC-0473 and SPEC-0474 retain the two exact PokiPair set-list images. The existing reviewed U0289 evidence and shared card identity establish it as the local counterpart of legacy s4 084; the local release remains distinct.",
+              "contentHash": "9b9ff2e398141aa0c780bd3f354c0f0c4d350c72ff17ecdc15221108e1479861",
+              "image": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png"
             },
             {
               "observationId": "unit:U0255",
@@ -27039,8 +27117,10 @@
           "localNumber": "142",
           "localIdentifierKnown": true,
           "state": "identified",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0592"
+          ],
           "legacyVariants": [
             "V2"
           ],
@@ -27097,6 +27177,14 @@
               "contentHash": "6696811bcebadd4a6b8ec0bf4f492b208c32785141c0fb1c7b5f6db02ef8d98a",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://media.pokipair.com/2024/09/06025344/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-240.png",
+              "label": "publisher card image",
+              "observationId": "source-first:CN:CS2aC:142:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -27108,6 +27196,15 @@
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings.",
               "contentHash": "329abdeb013bae374b0aaf76a9acfbed3c91904961356b5ea3770a244216ece7",
               "image": null
+            },
+            {
+              "observationId": "source-first:CN:CS2aC:142:base",
+              "kind": "source-first",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)",
+              "evidence": "The Vivid Portrayals set list identifies Simplified-Chinese Snorlax 142/115 UR. SPEC-0475 retains the exact gold card image, and the collection owner identifies it as the gold Snorlax known from Chilling Reign. The shared rules text and card identity establish the same Snorlax-Gormandize-Body-Slam work while the local release remains distinct.",
+              "contentHash": "35cf5ffac56a01458f378a6bd19b7cbe6366d03c5d8163821201e2056125f217",
+              "image": "https://media.pokipair.com/2024/09/06025344/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-240.png"
             },
             {
               "observationId": "unit:U0592",
@@ -50982,16 +51079,129 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+              "semanticPrintingId": "PRINTING:31ae3cadc286170698bdc014",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+              "finish": "mirror-holo",
+              "edition": null,
+              "foilPattern": "poke-ball",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0456",
+              "sourcePrintingId": "F0456-P03",
+              "establishingClaimId": "CLAIM:finish:PRINTING:31ae3cadc286170698bdc014",
+              "specimenIds": [
+                "SPEC-0471"
+              ],
+              "sources": [
+                {
+                  "url": "cropped from SPEC-0469 (lower-left card), supplied by the collection owner",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Lower-left Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. Large repeated Poké Ball silhouettes are directly visible across the reflective card body, and the collection owner identifies this copy as Pokeball Reverse. Retained as SPEC-0471.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+              "semanticPrintingId": "PRINTING:9ba9e79d59ffa49ecc15e7d4",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+              "finish": "mirror-holo",
+              "edition": null,
+              "foilPattern": "master-ball",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0456",
+              "sourcePrintingId": "F0456-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+              "specimenIds": [
+                "SPEC-0472"
+              ],
+              "sources": [
+                {
+                  "url": "cropped from SPEC-0469 (lower-right card), supplied by the collection owner",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Lower-right Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. The large Master Ball silhouette is directly visible across the reflective card body, and the collection owner identifies this copy as Masterball Reverse. Retained as SPEC-0472.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+              "semanticPrintingId": "PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0456",
+              "sourcePrintingId": "F0456-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+              "specimenIds": [
+                "SPEC-0470"
+              ],
+              "sources": [
+                {
+                  "url": "cropped from SPEC-0469 (top card), supplied by the collection owner",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Top Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The printed number, Simplified Chinese text and Pikachu PROMO stamp establish the exact card. Its face is evenly printed without a ball mirror symbol, and the collection owner explicitly identifies this copy as Non-holo. Retained as SPEC-0470.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
             "finish": [
-              "reverse-holo"
+              "mirror-holo",
+              "non-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "master-ball",
+              "poke-ball"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -51007,6 +51217,60 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0456-P01:0:cf5382dbd45bcfdd",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "cropped from SPEC-0469 (top card), supplied by the collection owner",
+              "evidence": "Top Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The printed number, Simplified Chinese text and Pikachu PROMO stamp establish the exact card. Its face is evenly printed without a ball mirror symbol, and the collection owner explicitly identifies this copy as Non-holo. Retained as SPEC-0470.",
+              "contentHash": "03b5a51d8fe48719a77e17cb3c1e1bbaa41b8077a2840d27fd65c7418f6db52a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0456-P01:1:192b3746ec8c4cf8",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "2be172aafb149b5a94b50960cd707cab95676ef677b338ba7518e3060156dc51",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0456-P02:0:2e18cd8bbcce5b74",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "cropped from SPEC-0469 (lower-right card), supplied by the collection owner",
+              "evidence": "Lower-right Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. The large Master Ball silhouette is directly visible across the reflective card body, and the collection owner identifies this copy as Masterball Reverse. Retained as SPEC-0472.",
+              "contentHash": "16f19345b1f4ea1dffb24d694240842b7c18b2a02239fc1173d085955c26981b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0456-P02:1:192b3746ec8c4cf8",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "2e5366bdff54a7c7d9d31a7040e73cf350edb527ca28ae066da82ca18f143bf8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0456-P03:0:93675fce5fdc5ec4",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "cropped from SPEC-0469 (lower-left card), supplied by the collection owner",
+              "evidence": "Lower-left Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. Large repeated Poké Ball silhouettes are directly visible across the reflective card body, and the collection owner identifies this copy as Pokeball Reverse. Retained as SPEC-0471.",
+              "contentHash": "1ad9074aa4d417633081e751d7708b18cc1be46d76e708d5c53169756344b122",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0456-P03:1:192b3746ec8c4cf8",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "e4a7fdb70f66f24cf10821172e1aa61d6b329dae617820ad79e147dddf86ac71",
+              "image": null
+            },
             {
               "observationId": "unit:U0503",
               "kind": "unit",

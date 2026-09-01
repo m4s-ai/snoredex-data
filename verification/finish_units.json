@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-09-01",
+    "generated": "2026-09-02",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 459,
-      "withOnlyMarketplaceClaim": 53,
+      "withConfirmedFinish": 460,
+      "withOnlyMarketplaceClaim": 52,
       "pendingFinish": 50,
       "notApplicableFinish": 75,
-      "withOwnerAdjudication": 2,
+      "withOwnerAdjudication": 5,
       "withNonHolo": 302,
-      "withHolo": 228,
-      "withReverseHolo": 229,
+      "withHolo": 229,
+      "withReverseHolo": 228,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 55,
       "withUnresolvedProductMapping": 87,
-      "withAnyUnresolvedDetail": 169,
+      "withAnyUnresolvedDetail": 167,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -5186,64 +5186,25 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
-        "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "non-holo": "pending",
+        "holo": "confirmed",
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "pending",
+      "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "non-holo",
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
+          "finish": "holo",
           "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0057-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0057-P02"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": null,
+          "markings": [],
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -5252,24 +5213,62 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.pokemon.cn/tcg/product/16377.html",
-              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
-              "authorityTier": "official-primary",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "languages": [
-                "S-Chinese"
+              "url": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+              "sourceType": "Retail listing",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. The collection owner identifies this first image as the Holo printing and states that 086 has exactly Holo and Reverse Holo finishes. Retained as SPEC-0473.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
               ],
-              "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
             }
           ],
-          "printingId": "F0057-P03"
+          "specimenIds": [
+            "SPEC-0473"
+          ],
+          "image": "verification/specimens/SPEC-0473.png",
+          "printingId": "F0057-P01"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "star",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+              "sourceType": "Retail listing",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. Repeating large stars are visible across the reflective card body; the collection owner identifies this second image as Reverse Holo with a star pattern. Retained as SPEC-0474.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0474"
+          ],
+          "image": "verification/specimens/SPEC-0474.png",
+          "printingId": "F0057-P02"
         }
       ],
-      "unresolved": [
-        "The exact reverse- or mirror-holo pattern is not identified for every known printing of those types."
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0058",
@@ -5305,7 +5304,7 @@
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
@@ -38427,43 +38426,122 @@
         }
       ],
       "availableFinishes": [
-        "reverse-holo"
+        "non-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "reverse-holo": "pending",
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
-      "completenessStatus": "positive-evidence-only",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "pending",
+      "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "reverse-holo",
+          "finish": "non-holo",
           "foilPattern": null,
-          "markings": null,
+          "markings": [],
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Simplified-Chinese-Promos/Snorlax-SV-PCS277",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "cropped from SPEC-0469 (top card), supplied by the collection owner",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Top Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The printed number, Simplified Chinese text and Pikachu PROMO stamp establish the exact card. Its face is evenly printed without a ball mirror symbol, and the collection owner explicitly identifies this copy as Non-holo. Retained as SPEC-0470.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
             }
           ],
+          "specimenIds": [
+            "SPEC-0470"
+          ],
+          "image": "verification/specimens/SPEC-0470.png",
           "printingId": "F0456-P01"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "master-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "cropped from SPEC-0469 (lower-right card), supplied by the collection owner",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Lower-right Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. The large Master Ball silhouette is directly visible across the reflective card body, and the collection owner identifies this copy as Masterball Reverse. Retained as SPEC-0472.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0472"
+          ],
+          "image": "verification/specimens/SPEC-0472.png",
+          "printingId": "F0456-P02"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "poke-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "cropped from SPEC-0469 (lower-left card), supplied by the collection owner",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Lower-left Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. Large repeated Poké Ball silhouettes are directly visible across the reflective card body, and the collection owner identifies this copy as Pokeball Reverse. Retained as SPEC-0471.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0471"
+          ],
+          "image": "verification/specimens/SPEC-0471.png",
+          "printingId": "F0456-P03"
         }
       ],
-      "unresolved": [
-        "The exact reverse- or mirror-holo pattern is not identified for every known printing of those types."
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0457",

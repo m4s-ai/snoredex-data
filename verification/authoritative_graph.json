@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-09-01",
+    "generated": "2026-09-02",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -8699,24 +8699,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:06fd30a3117f1886bcadd4c6",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:06fd30a3117f1886bcadd4c6",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0456-P01",
-        "semanticPrintingId": "PRINTING:06fd30a3117f1886bcadd4c6",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:085041b1c853fa80570d19b9",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -9402,23 +9384,6 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:1a7e140cd50a6fb97f7e03f5",
         "materializedTargetId": "PHYSICAL:PRINTING:1a7e140cd50a6fb97f7e03f5",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0057-P03",
-        "semanticPrintingId": "PRINTING:1aa8c6c82d3fdc27f9b30f85",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-        "materializedTargetId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
         "reason": "finish printing record carries positive evidence"
       }
     },
@@ -10155,6 +10120,26 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:WEST:Portuguese:JU:11:Snorlax-Thick-Skinned-Body-Slam"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:31ae3cadc286170698bdc014",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:31ae3cadc286170698bdc014",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0456-P03",
+        "semanticPrintingId": "PRINTING:31ae3cadc286170698bdc014",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+        "materializedTargetId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0471"
+        ]
       }
     },
     {
@@ -11047,24 +11032,6 @@
         "specimenIds": [
           "SPEC-0234"
         ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:4b2dbd9abe630b51d3b0c73d",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:4b2dbd9abe630b51d3b0c73d",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0057-P02",
-        "semanticPrintingId": "PRINTING:4b2dbd9abe630b51d3b0c73d",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam"
       }
     },
     {
@@ -13073,6 +13040,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0456-P02",
+        "semanticPrintingId": "PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "materializedTargetId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0472"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:9bf49828b8e00d1381d81c89",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -13498,24 +13485,6 @@
         "specimenIds": [
           "SPEC-0061"
         ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:a6a23c49f28df2bc993e4ce6",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:a6a23c49f28df2bc993e4ce6",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0057-P01",
-        "semanticPrintingId": "PRINTING:a6a23c49f28df2bc993e4ce6",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam"
       }
     },
     {
@@ -14202,6 +14171,26 @@
         "proposedTargetId": "PHYSICAL:PRINTING:c1a938b9fdc2b787d25781b3",
         "materializedTargetId": "PHYSICAL:PRINTING:c1a938b9fdc2b787d25781b3",
         "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:c21c93ac1949817b294c3b22",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:c21c93ac1949817b294c3b22",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0057-P02",
+        "semanticPrintingId": "PRINTING:c21c93ac1949817b294c3b22",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+        "materializedTargetId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0474"
+        ]
       }
     },
     {
@@ -15243,6 +15232,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0456-P01",
+        "semanticPrintingId": "PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "materializedTargetId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0470"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:ee1b9961135079bbb5f51e49",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -15498,6 +15507,26 @@
         "proposedTargetId": "PHYSICAL:PRINTING:f7aed41a151b2184f8d835e7",
         "materializedTargetId": "PHYSICAL:PRINTING:f7aed41a151b2184f8d835e7",
         "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0057-P01",
+        "semanticPrintingId": "PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "materializedTargetId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0473"
+        ]
       }
     },
     {
@@ -28082,6 +28111,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:CN:CS2aC:142:base",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "claimId": "CLAIM:source-first:CN:CS2aC:142:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "CN:CS2aC:142:base",
+        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+        "materializedTargetId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+        "reason": "positive source-first specimen/card record"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:CN:CS4DaC:341/414:base",
       "origin": "reviewed-evidence-issue-257",
       "payload": {
@@ -33623,6 +33669,91 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0470",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0470",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0470",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0471",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0471",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0471",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:31ae3cadc286170698bdc014, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0472",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0472",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0472",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0473",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0473",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0473",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0474",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0474",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0474",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:c21c93ac1949817b294c3b22, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -34008,14 +34139,16 @@
         "localIdentifierKnown": true,
         "state": "identified",
         "work": "Snorlax-Gormandize-Body-Slam",
-        "workMappingState": "mapped",
+        "workMappingState": "mapped-by-explicit-equivalence",
         "viaLegacySetCode": "CS2aC",
         "viaLegacyNumber": "142",
         "claimIds": [
-          "CLAIM:legacy:U0592"
+          "CLAIM:legacy:U0592",
+          "CLAIM:source-first:CN:CS2aC:142:base"
         ],
         "establishingClaimIds": [
-          "CLAIM:legacy:U0592"
+          "CLAIM:legacy:U0592",
+          "CLAIM:source-first:CN:CS2aC:142:base"
         ],
         "nonEstablishingClaimIds": [],
         "legacyVariants": [
@@ -34026,6 +34159,12 @@
         ],
         "sourceRecords": [
           "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)"
+        ],
+        "sourceFirstRecordIds": [
+          "CN:CS2aC:142:base"
+        ],
+        "legacyCounterpartUnitIds": [
+          "U0592"
         ]
       }
     },
@@ -61916,12 +62055,12 @@
     {
       "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-issue-257",
       "payload": {
         "cardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
         "setEditionId": "EDITION:CN:S-Chinese:CS2aC",
         "collectorNumber": "142",
-        "origin": "print-identity-dryrun"
+        "origin": "issue-257-source-first-evidence"
       }
     },
     {
@@ -69958,10 +70097,10 @@
         "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0289",
         "sourceFirstRecordId": "CN:CS2aC:086:base",
-        "assertedBy": "repository verification pass",
-        "assertedAt": "2026-08-27",
-        "evidenceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89",
-        "evidence": "The exact Simplified-Chinese 086 printing is the reviewed local counterpart of legacy s4 084; both release identities remain distinct.",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-09-01",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/257",
+        "evidence": "The collection owner explicitly confirms that Simplified-Chinese CS2aC 086 corresponds to Japanese s4 084. This release-level same-work decision covers every finish variant attached to either release while keeping the Japanese and Simplified-Chinese release identities distinct. It does not by itself confirm an individual finish. Cardmarket product: https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
         "destructiveMergeAllowed": false
       }
     },
@@ -70718,6 +70857,24 @@
         "assertedAt": "2026-08-28",
         "evidenceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/17039/",
         "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "entityType": "equivalence-assertion",
+      "entityId": "ASSERT:same-work:U0592:CN:CS2aC:142:base",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "assertionId": "ASSERT:same-work:U0592:CN:CS2aC:142:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+        "legacyUnitId": "U0592",
+        "sourceFirstRecordId": "CN:CS2aC:142:base",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-09-02",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/257",
+        "evidence": "The collection owner identifies Simplified-Chinese CS2aC 142/115 as the gold Snorlax from Chilling Reign. SPEC-0475 retains the exact local card image; the shared rules text establishes the same Snorlax-Gormandize-Body-Slam work while keeping the releases distinct.",
         "destructiveMergeAllowed": false
       }
     },
@@ -91717,27 +91874,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-        "semanticPrintingId": "PRINTING:1aa8c6c82d3fdc27f9b30f85",
-        "cardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
-        "finish": "mirror-holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0057",
-        "sourcePrintingId": "F0057-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:1aa8c6c82d3fdc27f9b30f85"
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:1ab6f344ac3c5595fd338d46",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -92374,6 +92510,30 @@
         "establishingClaimId": "CLAIM:finish:PRINTING:2f457100ca45b33dfaab2e74",
         "specimenIds": [
           "SPEC-0448"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+        "semanticPrintingId": "PRINTING:31ae3cadc286170698bdc014",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+        "finish": "mirror-holo",
+        "edition": null,
+        "foilPattern": "poke-ball",
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0456",
+        "sourcePrintingId": "F0456-P03",
+        "establishingClaimId": "CLAIM:finish:PRINTING:31ae3cadc286170698bdc014",
+        "specimenIds": [
+          "SPEC-0471"
         ]
       }
     },
@@ -94945,6 +95105,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "semanticPrintingId": "PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+        "finish": "mirror-holo",
+        "edition": null,
+        "foilPattern": "master-ball",
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0456",
+        "sourcePrintingId": "F0456-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "specimenIds": [
+          "SPEC-0472"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:9bf49828b8e00d1381d81c89",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -96039,6 +96223,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+        "semanticPrintingId": "PRINTING:c21c93ac1949817b294c3b22",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
+        "finish": "reverse-holo",
+        "edition": null,
+        "foilPattern": "star",
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0057",
+        "sourcePrintingId": "F0057-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:c21c93ac1949817b294c3b22",
+        "specimenIds": [
+          "SPEC-0474"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:c287885c01d81814c6e46d96",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -96815,6 +97023,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "semanticPrintingId": "PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0456",
+        "sourcePrintingId": "F0456-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "specimenIds": [
+          "SPEC-0470"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:ee1b9961135079bbb5f51e49",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -97069,6 +97301,30 @@
         "sourceFinishUnitId": "F0336",
         "sourcePrintingId": "F0336-P01",
         "establishingClaimId": "CLAIM:finish:PRINTING:f7aed41a151b2184f8d835e7"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "semanticPrintingId": "PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0057",
+        "sourcePrintingId": "F0057-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:f9ef48c2b8ba907c7ee79afa",
+        "specimenIds": [
+          "SPEC-0473"
+        ]
       }
     },
     {
@@ -109343,7 +109599,8 @@
           "establishingClaimIds": [
             "CLAIM:legacy:U0255",
             "CLAIM:legacy:U0592",
-            "CLAIM:source-first:CN:CS2aC:086:base"
+            "CLAIM:source-first:CN:CS2aC:086:base",
+            "CLAIM:source-first:CN:CS2aC:142:base"
           ],
           "localizationId": "LOCALIZATION:CN:zh-Hans"
         },
@@ -145533,7 +145790,7 @@
         "sourceKind": "source-first-local-set-profile",
         "provider": "mixed-positive-evidence",
         "providerRecordKey": "CN\u001fCS2aC",
-        "retrieved": "2026-08-27",
+        "retrieved": "2026-09-02",
         "raw": {
           "localCode": "CS2aC",
           "localName": null,
@@ -145545,23 +145802,30 @@
             "Hans"
           ],
           "printIds": [
-            "CN:CS2aC:086:base"
+            "CN:CS2aC:086:base",
+            "CN:CS2aC:142:base"
           ],
           "providers": [
-            "52poke"
+            "52poke",
+            "bulbapedia"
           ],
           "sourceUrls": [
+            "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)",
             "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89"
           ],
           "printedSetSize": null,
           "printedSetSizeBasis": "the observed collector number has no printed denominator; no set size is inferred",
           "localeSuffix": null,
           "observedCollectorNumbers": [
-            "086"
+            "086",
+            "142"
           ],
           "observedCoverage": "cards returned by the issue #257 Snorlax research, not an enumeration of the set",
           "markAssetUrls": [],
-          "cardImageUrls": []
+          "cardImageUrls": [
+            "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+            "https://media.pokipair.com/2024/09/06025344/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-240.png"
+          ]
         }
       }
     },
@@ -162995,14 +163259,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:06fd30a3117f1886bcadd4c6",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:085041b1c853fa80570d19b9",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -163359,16 +163615,6 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:1a7e140cd50a6fb97f7e03f5",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -163744,6 +163990,16 @@
       "toType": "card-release",
       "toId": "RELEASE:WEST:Portuguese:JU:11:Snorlax-Thick-Skinned-Body-Slam",
       "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:31ae3cadc286170698bdc014",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -164194,14 +164450,6 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:4b2dbd9abe630b51d3b0c73d",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
-      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -165245,6 +165493,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:9bf49828b8e00d1381d81c89",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -165470,14 +165728,6 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:a6a23c49f28df2bc993e4ce6",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
-      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -165837,6 +166087,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:c1a938b9fdc2b787d25781b3",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:c21c93ac1949817b294c3b22",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -166365,6 +166625,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:ee1b9961135079bbb5f51e49",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -166493,6 +166763,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:f7aed41a151b2184f8d835e7",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -173031,6 +173311,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:CN:CS2aC:142:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:CN:CS4DaC:341/414:base",
       "relation": "materializes",
       "toType": "card-release",
@@ -176250,6 +176540,56 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0470",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "provenance": {
+        "specimenId": "SPEC-0470"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0471",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+      "provenance": {
+        "specimenId": "SPEC-0471"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0472",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "provenance": {
+        "specimenId": "SPEC-0472"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0473",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "provenance": {
+        "specimenId": "SPEC-0473"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0474",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+      "provenance": {
+        "specimenId": "SPEC-0474"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -176444,7 +176784,7 @@
       "toType": "work",
       "toId": "WORK:Snorlax-Gormandize-Body-Slam",
       "provenance": {
-        "state": "mapped"
+        "state": "mapped-by-explicit-equivalence"
       }
     },
     {
@@ -202271,10 +202611,10 @@
         "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0289",
         "sourceFirstRecordId": "CN:CS2aC:086:base",
-        "assertedBy": "repository verification pass",
-        "assertedAt": "2026-08-27",
-        "evidenceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89",
-        "evidence": "The exact Simplified-Chinese 086 printing is the reviewed local counterpart of legacy s4 084; both release identities remain distinct.",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-09-01",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/257",
+        "evidence": "The collection owner explicitly confirms that Simplified-Chinese CS2aC 086 corresponds to Japanese s4 084. This release-level same-work decision covers every finish variant attached to either release while keeping the Japanese and Simplified-Chinese release identities distinct. It does not by itself confirm an individual finish. Cardmarket product: https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
         "destructiveMergeAllowed": false
       }
     },
@@ -202291,10 +202631,10 @@
         "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0289",
         "sourceFirstRecordId": "CN:CS2aC:086:base",
-        "assertedBy": "repository verification pass",
-        "assertedAt": "2026-08-27",
-        "evidenceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89",
-        "evidence": "The exact Simplified-Chinese 086 printing is the reviewed local counterpart of legacy s4 084; both release identities remain distinct.",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-09-01",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/257",
+        "evidence": "The collection owner explicitly confirms that Simplified-Chinese CS2aC 086 corresponds to Japanese s4 084. This release-level same-work decision covers every finish variant attached to either release while keeping the Japanese and Simplified-Chinese release identities distinct. It does not by itself confirm an individual finish. Cardmarket product: https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
         "destructiveMergeAllowed": false
       }
     },
@@ -203975,6 +204315,46 @@
         "assertedAt": "2026-08-28",
         "evidenceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/17039/",
         "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0592:CN:CS2aC:142:base",
+      "relation": "relates",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0592:CN:CS2aC:142:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+        "legacyUnitId": "U0592",
+        "sourceFirstRecordId": "CN:CS2aC:142:base",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-09-02",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/257",
+        "evidence": "The collection owner identifies Simplified-Chinese CS2aC 142/115 as the gold Snorlax from Chilling Reign. SPEC-0475 retains the exact local card image; the shared rules text establishes the same Snorlax-Gormandize-Body-Slam work while keeping the releases distinct.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0592:CN:CS2aC:142:base",
+      "relation": "relates",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0592:CN:CS2aC:142:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+        "legacyUnitId": "U0592",
+        "sourceFirstRecordId": "CN:CS2aC:142:base",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-09-02",
+        "evidenceUrl": "https://github.com/m4s-ai/snoredex-data/issues/257",
+        "evidence": "The collection owner identifies Simplified-Chinese CS2aC 142/115 as the gold Snorlax from Chilling Reign. SPEC-0475 retains the exact local card image; the shared rules text establishes the same Snorlax-Gormandize-Body-Slam work while keeping the releases distinct.",
         "destructiveMergeAllowed": false
       }
     },
@@ -220616,22 +220996,6 @@
     },
     {
       "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:1ab6f344ac3c5595fd338d46",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -221044,6 +221408,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:KR:Korean:s1H:066/060:Snorlax-V-Swallow-Falling-Down",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:31ae3cadc286170698bdc014",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
       "provenance": {}
     },
     {
@@ -222728,6 +223108,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:9bf49828b8e00d1381d81c89",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -223480,6 +223876,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:c21c93ac1949817b294c3b22",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:c287885c01d81814c6e46d96",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -224008,6 +224420,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:ee1b9961135079bbb5f51e49",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -224180,6 +224608,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:S10b F:056/071:Snorlax-Block-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
       "provenance": {}
     },
     {
@@ -263459,23 +263903,16 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0057-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0057-P02",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0057-P03",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:1aa8c6c82d3fdc27f9b30f85",
-      "reason": "finish printing record carries positive evidence"
+      "targetRef": "PHYSICAL:PRINTING:c21c93ac1949817b294c3b22",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -267253,9 +267690,23 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0456-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0456-P02",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0456-P03",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -272474,6 +272925,16 @@
         "RELEASE:TW:T-Chinese:MC F:568/742:Snorlax-Lazy-Press"
       ],
       "reason": "issue #263 re-key"
+    },
+    {
+      "sourceKind": "legacy-issue-rekey",
+      "sourceId": "U0592",
+      "disposition": "linked-local-counterpart",
+      "targetRef": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+      "targetRefs": [
+        "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam"
+      ],
+      "reason": "issue #257 re-key"
     },
     {
       "sourceKind": "legacy-issue-rekey",
@@ -281087,6 +281548,13 @@
     },
     {
       "sourceKind": "source-first-record",
+      "sourceId": "CN:CS2aC:142:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
       "sourceId": "CN:CS4DaC:341/414:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
@@ -283345,27 +283813,62 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:af5c153eafc9a28ee9e27426, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0470",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0471",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:31ae3cadc286170698bdc014, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0472",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0473",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:f9ef48c2b8ba907c7ee79afa, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0474",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:c21c93ac1949817b294c3b22, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 7839,
-    "edges": 11715,
-    "migrationInputs": 2720,
+    "entities": 7851,
+    "edges": 11732,
+    "migrationInputs": 2728,
     "migrationDispositions": {
       "bounded-contradicted": 84,
-      "candidate-needs-evidence": 270,
+      "candidate-needs-evidence": 272,
       "carried": 67,
-      "established-and-mapped": 1520,
-      "linked-local-counterpart": 118,
+      "established-and-mapped": 1525,
+      "linked-local-counterpart": 119,
       "mapped": 304,
       "needs-evidence": 126,
       "needs-positive-local-identity": 23,
       "positively-excluded": 84,
       "split": 124
     },
-    "candidateClaims": 1949,
+    "candidateClaims": 1956,
     "cardReleases": 633,
-    "physicalPrintings": 716,
+    "physicalPrintings": 720,
     "setSourceRecords": 432,
     "setSourceDispositions": 432,
     "localizations": 16

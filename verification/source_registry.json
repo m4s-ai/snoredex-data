@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-01",
+  "generated": "2026-09-02",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1267,
-   "uniqueUrls": 1260,
+   "evidenceRecords": 1269,
+   "uniqueUrls": 1262,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3689
+   "claimsAttributed": 3695
   }
  },
  "providers": [
@@ -65,7 +65,7 @@
     "image.pokemon.com.cn"
    ],
    "uniqueSources": 10,
-   "claimsSupported": 45
+   "claimsSupported": 44
   },
   {
    "providerId": "pokemon-card-jp",
@@ -542,7 +542,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 349,
-   "claimsSupported": 868
+   "claimsSupported": 865
   },
   {
    "providerId": "cardmarket-product-image",
@@ -642,7 +642,7 @@
    "licenseOrTerms": "Individual retailer site terms; used for identification only.",
    "category": "retail-listing",
    "authorityTier": 3,
-   "coverage": "individual listings whose photography identifies an exact physical printing",
+   "coverage": "individual listings or retained set-list images that identify an exact physical printing",
    "supportsAbsence": false,
    "usedFor": [
     "finish",
@@ -650,16 +650,19 @@
     "language"
    ],
    "attribution": "Retail listings from independent sellers.",
-   "notes": "Grouped deliberately: these are one-off listings, not catalogues, so per-host provider entries would imply a coverage guarantee none of them offers. A listing counts only when its image identifies the printing; stock photography does not.",
+   "notes": "Grouped deliberately: these are one-off listings or retained retailer set-list images, not authoritative catalogues, so per-host provider entries would imply a coverage guarantee none of them offers. An image counts only when it identifies the printing.",
    "hosts": [
     "www.target.com",
     "exorgames.com",
     "shopping.fullcomp.jp",
     "www.pokeca.net",
-    "www.ebay.de"
+    "www.ebay.de",
+    "pokipair.com",
+    "www.pokipair.com",
+    "media.pokipair.com"
    ],
-   "uniqueSources": 7,
-   "claimsSupported": 34
+   "uniqueSources": 9,
+   "claimsSupported": 36
   },
   {
    "providerId": "internal-derivation",
@@ -699,7 +702,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 65
+   "claimsSupported": 70
   },
   {
    "providerId": "inspected-specimen",
@@ -721,7 +724,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 29,
-   "claimsSupported": 72
+   "claimsSupported": 75
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -8093,20 +8096,17 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket catalogue hint (not external verification)",
     "Cardmarket product page"
    ],
    "dimensions": [
-    "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "F0456-P01",
     "SV-P/CS 277 base"
    ],
    "retrievedAt": null,
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Thai-Promos/Snorlax-SV-PTH082",
@@ -9045,21 +9045,17 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket catalogue hint (not external verification)",
     "Cardmarket product page"
    ],
    "dimensions": [
-    "finish",
     "product"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 1,
    "stableIds": [
-    "CS2aC 086 V1",
-    "F0057-P01",
-    "F0057-P02"
+    "CS2aC 086 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 3
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V2-CS2aC142",
@@ -10666,7 +10662,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 30,
+   "stableIdCount": 33,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -10675,6 +10671,9 @@
     "F0291-P02",
     "F0294-P02",
     "F0441-P01",
+    "F0456-P01",
+    "F0456-P02",
+    "F0456-P03",
     "F0519-P02",
     "F0534-P01",
     "F0615-P03",
@@ -10700,7 +10699,7 @@
     "U0780"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 41
+   "usageCount": 44
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -11284,9 +11283,11 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 63,
+   "stableIdCount": 68,
    "stableIds": [
     "F0009-P01",
+    "F0057-P01",
+    "F0057-P02",
     "F0067-P03",
     "F0067-P04",
     "F0071-P01",
@@ -11301,6 +11302,9 @@
     "F0289-P02",
     "F0402-P02",
     "F0403-P02",
+    "F0456-P01",
+    "F0456-P02",
+    "F0456-P03",
     "F0569-P02",
     "F0569-P03",
     "F0570-P02",
@@ -11330,15 +11334,10 @@
     "F0614-P02",
     "F0614-P03",
     "F0615-P02",
-    "F0615-P03",
-    "F0616-P01",
-    "F0616-P02",
-    "U0097",
-    "U0098",
-    "U0099"
+    "F0615-P03"
    ],
    "retrievedAt": "2026-07-23",
-   "usageCount": 63
+   "usageCount": 68
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -14737,7 +14736,7 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 19,
+   "stableIdCount": 18,
    "stableIds": [
     "F0000-P03",
     "F0001-P01",
@@ -14745,7 +14744,6 @@
     "F0052-P01",
     "F0053-P01",
     "F0055-P01",
-    "F0057-P03",
     "F0058-P01",
     "F0060-P03",
     "F0063-P03",
@@ -14760,7 +14758,7 @@
     "override:pokemon-cn-simplified-finish-rules"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 19
+   "usageCount": 18
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/19640.html",
@@ -17681,6 +17679,40 @@
    ],
    "retrievedAt": null,
    "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listing"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0057-P01"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listing"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0057-P02"
+   ],
+   "retrievedAt": null,
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
