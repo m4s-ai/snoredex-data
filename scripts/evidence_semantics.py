@@ -26,7 +26,7 @@ MARKET_ERA = re.compile(r"Pok[eé]mon in |market-history", re.IGNORECASE)
 SIBLING = re.compile(r"units of the same product", re.IGNORECASE)
 DIRECT_OWNER_ATTESTATION = re.compile(r"^Owner attestation", re.IGNORECASE)
 CARD_LEVEL = re.compile(
-    r"card database|TCGdex|photographed|specimen|set list|card article|card page|"
+    r"card database|card catalogue detail|TCGdex|photographed|specimen|set list|card article|card page|"
     r"locale card archive|promo search|"
     r"promo series article|card list|deck list|"
     r"Owner attestation|Marketplace listing|retail listings|Elite Fourum|collector guide|"

@@ -57,8 +57,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 460,
-      "withOnlyMarketplaceClaim": 52,
+      "withConfirmedFinish": 459,
+      "withOnlyMarketplaceClaim": 53,
       "pendingFinish": 50,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 2,
@@ -69,7 +69,7 @@
       "withBothNonHoloAndHolo": 55,
       "withUnresolvedProductMapping": 87,
       "withAnyUnresolvedDetail": 169,
-      "tcgdexUrlsRequested": 309,
+      "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
     "fetchErrors": {}
@@ -40015,39 +40015,34 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
+        "non-holo": "marketplace-claimed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
+      "availabilityStatus": "marketplace-claimed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "confirmed",
+          "verificationStatus": "marketplace-claimed",
           "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/ko/cards/SV4K-059",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "SV4K-059 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            },
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "printingId": "F0482-P01"
         }
       ],

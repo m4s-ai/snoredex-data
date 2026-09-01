@@ -54,7 +54,24 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
         source_first = json.loads(korean.PRINTS.read_text(encoding="utf-8"))
         matches = [row for row in source_first["prints"]
                    if row["printId"] == korean.ADMITTED_ENTRY["printId"]]
-        self.assertEqual(matches, [korean.ADMITTED_ENTRY])
+        self.assertEqual(len(matches), 1)
+        admitted = matches[0]
+        for field in (
+            "printId", "locality", "localSetCode", "localNumber", "variant",
+            "language", "script", "name", "cardName", "catchUpOf", "specimenId",
+            "providerId", "providerRecordId", "catalogueSetId", "localSetName",
+            "sourceUrl", "corroborated", "markAssetUrl",
+        ):
+            self.assertEqual(admitted[field], korean.ADMITTED_ENTRY[field])
+        self.assertEqual(
+            admitted["cardImageUrl"],
+            "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS2/bs2_kr_30.jpg?w=512",
+        )
+        self.assertEqual(admitted["illustrator"], "Ken Sugimori")
+        self.assertEqual(admitted["hp"], "HP100")
+        self.assertEqual(admitted["localProductName"], "DP 확장팩 불꽃 튀는 대결")
+        self.assertTrue(set(korean.ADMITTED_ENTRY["corroboratingSourceUrls"]) <=
+                        set(admitted["corroboratingSourceUrls"]))
         self.assertFalse(any(row["specimenId"] == "SPEC-0037"
                              for row in source_first.get("held", [])))
         specimens = json.loads(korean.SPECIMENS.read_text(encoding="utf-8"))["specimens"]

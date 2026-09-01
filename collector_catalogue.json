@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-09-01",
-    "catalogueFingerprint": "sha256:a7f621fda279341f806ebb0c7eb3f403801cdd0738dd9ed2161884ec24fa6b91",
+    "catalogueFingerprint": "sha256:2f46070a14b864c3745c451b32144fb710c884e8f1f946d1a555b80364cea1fe",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -1667,6 +1667,18 @@
       "sortKey": "KR|dp||LOCALSET:KR:DP"
     },
     {
+      "localSetId": "LOCALSET:KR:FXY",
+      "locality": "KR",
+      "localSetCode": "FXY",
+      "localSetName": null,
+      "productKind": "physical-card-set-or-product",
+      "identityState": "identified",
+      "sourceRefs": [
+        "SET-SRC-SF-8C84DDA3F2CE"
+      ],
+      "sortKey": "KR|fxy||LOCALSET:KR:FXY"
+    },
+    {
       "localSetId": "LOCALSET:KR:m2a",
       "locality": "KR",
       "localSetCode": "m2a",
@@ -1869,6 +1881,18 @@
         "SET-SRC-SF-55C1A6C5CF0D"
       ],
       "sortKey": "KR|sm000000000010||LOCALSET:KR:sm10"
+    },
+    {
+      "localSetId": "LOCALSET:KR:SM30A",
+      "locality": "KR",
+      "localSetCode": "SM30A",
+      "localSetName": null,
+      "productKind": "physical-card-set-or-product",
+      "identityState": "identified",
+      "sourceRefs": [
+        "SET-SRC-SF-A7CC525CE73E"
+      ],
+      "sortKey": "KR|sm000000000030a||LOCALSET:KR:SM30A"
     },
     {
       "localSetId": "LOCALSET:KR:smL",
@@ -5956,6 +5980,19 @@
       "sortKey": "9999|KR|dp|EDITION:KR:Korean:DP"
     },
     {
+      "setEditionId": "EDITION:KR:Korean:FXY",
+      "localSetId": "LOCALSET:KR:FXY",
+      "localizationId": "LOCALIZATION:KR:ko",
+      "localSetCode": "FXY",
+      "localSetName": null,
+      "identityState": "identified",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseEventId": null,
+      "sortKey": "9999|KR|fxy|EDITION:KR:Korean:FXY"
+    },
+    {
       "setEditionId": "EDITION:KR:Korean:m2a",
       "localSetId": "LOCALSET:KR:m2a",
       "localizationId": "LOCALIZATION:KR:ko",
@@ -6175,6 +6212,19 @@
       "releaseApproximate": false,
       "releaseEventId": null,
       "sortKey": "9999|KR|sm000000000010|EDITION:KR:Korean:sm10"
+    },
+    {
+      "setEditionId": "EDITION:KR:Korean:SM30A",
+      "localSetId": "LOCALSET:KR:SM30A",
+      "localizationId": "LOCALIZATION:KR:ko",
+      "localSetCode": "SM30A",
+      "localSetName": null,
+      "identityState": "identified",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseEventId": null,
+      "sortKey": "9999|KR|sm000000000030a|EDITION:KR:Korean:SM30A"
     },
     {
       "setEditionId": "EDITION:KR:Korean:smL",
@@ -17722,7 +17772,7 @@
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax Lv.X",
-      "localCardName": "잠만보 Lv.X",
+      "localCardName": "잠만보 LV.X",
       "localSetCode": "DP",
       "localSetName": null,
       "collectorNumber": "006",
@@ -17755,12 +17805,12 @@
       "imageAssetId": "asset-a05cf000-a0eb-5d53-ad44-f9efe58ff5cf",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
-        "https://globalbunjang.com/product/386929037"
+        "https://globalbunjang.com/product/386929037",
+        "https://pokemoncard.co.kr/cards/detail/PR2010001006"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
-        "https://globalbunjang.com/product/386929037"
+        "https://globalbunjang.com/product/386929037",
+        "https://pokemoncard.co.kr/cards/detail/PR2010001006"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+Lv.X+%E2%80%94+DP+006+%28research-placeholder%29&row-id=item-839bcbad-dbce-5134-9a26-74420582a2f2&card-name=Snorlax+Lv.X&set-code=DP&card-number=006&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -20205,12 +20255,12 @@
       "imageAssetId": "asset-680458c0-193c-544d-ab82-1661f62f722f",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://globalbunjang.com/product/404911233",
         "https://pokemoncard.co.kr/cards/detail/BS2013001055",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://globalbunjang.com/product/404911233",
         "https://pokemoncard.co.kr/cards/detail/BS2013001055",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055"
       ],
@@ -21950,55 +22000,58 @@
       "itemKind": "research-placeholder",
       "progressClass": "research",
       "workId": "WORK:Snorlax-Rock-Smash-Strength",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-HXY:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:e5f8e7419fe044d163af",
-      "cardReleaseId": "RELEASE:KR:Korean:via-HXY:unknown-local-set:via-026:Snorlax-Rock-Smash-Strength:unknown-local-id",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:FXY",
+      "localSetId": "LOCALSET:KR:FXY",
+      "cardReleaseId": "RELEASE:KR:Korean:FXY:026/036:Snorlax-Rock-Smash-Strength",
       "physicalPrintingId": null,
       "sourcePrintingId": null,
       "finishUnitId": "F0153",
       "sourceClaimRefs": [
-        "CLAIM:legacy:U0586"
+        "CLAIM:legacy:U0586",
+        "CLAIM:source-first:KR:FXY:026/036:base"
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": null,
+      "localCardName": "잠만보",
+      "localSetCode": "FXY",
       "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
+      "collectorNumber": "026",
+      "collectorNumberDenominator": "036",
       "collectorNumberSortKey": "000000000026",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
       "finishVerificationStatus": "pending",
       "finish": null,
       "finishFamily": null,
-      "finishGroupId": "finish-group-7706d25f-69ea-5e0a-a1dc-2fc21ed0e152",
+      "finishGroupId": "finish-group-fa4c7ad2-cffd-58ba-a7da-c7264afdca4c",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
       "cardSize": "unknown",
       "errorClass": null,
       "rarity": {
-        "display": "Fixed",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
+        "display": "fixed product",
+        "normalizedId": "fixed",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:FXY:026/036:Snorlax-Rock-Smash-Strength"
+        ]
       },
       "completenessStatus": "pending",
       "releaseDate": "2013-11-08",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2013-11-08|LOCALIZATION:KR:ko||000000000026|research:legacy-checklist:hxy-026-korean-none-unresolved-unknown",
+      "releaseSortKey": "2013-11-08|LOCALIZATION:KR:ko|fxy|000000000026|research:legacy-checklist:hxy-026-korean-none-unresolved-unknown",
       "imageAssetId": "asset-83c61332-d740-528f-a27b-2fe1073c1347",
       "imageScope": "legacy-product",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
+        "https://pokemoncard.co.kr/cards/detail/ST2014001026"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
+        "https://pokemoncard.co.kr/cards/detail/ST2014001026"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+unknown+unknown+%28research-placeholder%29&row-id=item-46b1acf6-e6e2-589a-9be8-740a25c4ec38&card-name=Snorlax&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+FXY+026+%28research-placeholder%29&row-id=item-46b1acf6-e6e2-589a-9be8-740a25c4ec38&card-name=Snorlax&set-code=FXY&card-number=026&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-d28cdce4-81be-519f-8b05-3f62681f20b5",
@@ -23024,12 +23077,10 @@
       "imageAssetId": "asset-5afc4dcc-dc3e-51a3-bdbd-27ca19b583d7",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2014002066",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2014002066",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066"
       ],
@@ -24060,68 +24111,6 @@
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+XY-P+%E2%80%94+XY+Promos+149+%28finish-candidate%29&row-id=item-5f6fb249-fc93-523c-bcb7-c21c86c05e56&card-name=Snorlax&set-code=XY-P+%E2%80%94+XY+Promos&card-number=149&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
-    },
-    {
-      "itemId": "item-f7373f6f-3a6d-5f52-8621-31d371f2d52d",
-      "legacyChecklistIds": [
-        "xy-p-149-korean-none-reverse-holo"
-      ],
-      "active": true,
-      "itemKind": "finish-candidate",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Plump-Body-Knock-Away",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-XY-P:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:cc3a8be465e7e908266c",
-      "cardReleaseId": "RELEASE:KR:Korean:via-XY-P:unknown-local-set:via-149:Snorlax-Plump-Body-Knock-Away:unknown-local-id",
-      "physicalPrintingId": null,
-      "sourcePrintingId": "F0620-P01",
-      "finishUnitId": "F0620",
-      "sourceClaimRefs": [
-        "CLAIM:finish:PRINTING:154faa5d0a0f0c42585e773e",
-        "CLAIM:legacy:U0661"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": null,
-      "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000149",
-      "edition": null,
-      "editionAssignmentStatus": "not-applicable",
-      "finishVerificationStatus": "marketplace-claimed",
-      "finish": "reverse-holo",
-      "finishFamily": "reverse-holo",
-      "finishGroupId": "finish-group-55e1730c-33db-5154-88f4-d064fad2dc6c",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "standard",
-      "errorClass": null,
-      "rarity": {
-        "display": "Promo",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": "2015-07",
-      "releaseDatePrecision": "month",
-      "releaseApproximate": false,
-      "releaseSortKey": "2015-07|LOCALIZATION:KR:ko||000000000149|claim:CLAIM:finish:PRINTING:154faa5d0a0f0c42585e773e",
-      "imageAssetId": "asset-d278abfa-cf8d-5063-ae03-ea8766a7b01f",
-      "imageScope": "legacy-product",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
-        "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
-        "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+unknown+unknown+%28finish-candidate%29&row-id=item-f7373f6f-3a6d-5f52-8621-31d371f2d52d&card-name=Snorlax&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
       "itemId": "item-a06f3188-3c41-5751-a5e3-32fd24058c79",
@@ -26155,12 +26144,14 @@
       "imageScope": "card-release",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Awakening_Psychic_King_(TCG)",
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://globalbunjang.com/product/421867656",
+        "https://pokemoncard.co.kr/cards/detail/BS2016020057",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Awakening_Psychic_King_(TCG)",
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://globalbunjang.com/product/421867656",
+        "https://pokemoncard.co.kr/cards/detail/BS2016020057",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+XY10+057+%28finish-candidate%29&row-id=item-3c9f3740-c118-5fc0-9e61-f93a21de5b20&card-name=Snorlax&set-code=XY10&card-number=057&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+Unlimited+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -28067,55 +28058,129 @@
       "itemKind": "research-placeholder",
       "progressClass": "research",
       "workId": "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-SM-P:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:54c748b5d0f2f8a14f36",
-      "cardReleaseId": "RELEASE:KR:Korean:via-SM-P:unknown-local-set:via-1:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX:unknown-local-id",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:SM-P",
+      "localSetId": "LOCALSET:KR:SM-P",
+      "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "physicalPrintingId": null,
       "sourcePrintingId": null,
       "finishUnitId": "F0399",
       "sourceClaimRefs": [
-        "CLAIM:legacy:U0379"
+        "CLAIM:legacy:U0379",
+        "CLAIM:source-first:KR:SM-P:017/SM-P:base"
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax GX",
-      "localCardName": null,
-      "localSetCode": null,
+      "localCardName": "잠만보 GX",
+      "localSetCode": "SM-P",
       "localSetName": null,
-      "collectorNumber": null,
+      "collectorNumber": "017/SM-P",
       "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000001",
+      "collectorNumberSortKey": "000000000017/sm-p",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
       "finishVerificationStatus": "pending",
       "finish": null,
       "finishFamily": null,
-      "finishGroupId": "finish-group-c632509c-4a87-5a89-8c5c-3a5e0d00acc9",
+      "finishGroupId": "finish-group-9e5c8cde-849f-5870-b214-ca89e3155552",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
       "cardSize": "unknown",
       "errorClass": null,
       "rarity": {
-        "display": "Promo",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
+        "display": "PROMO",
+        "normalizedId": "promo",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
+        ]
       },
       "completenessStatus": "pending",
       "releaseDate": "2016-12",
       "releaseDatePrecision": "month",
       "releaseApproximate": true,
-      "releaseSortKey": "2016-12|LOCALIZATION:KR:ko||000000000001|research:legacy-checklist:sm-p-1-korean-none-unresolved-unknown",
-      "imageAssetId": "asset-cebeb01c-1e1f-5925-92f7-db3411aa78b9",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2016-12|LOCALIZATION:KR:ko|sm-p|000000000017/sm-p|research:legacy-checklist:sm-p-1-korean-none-unresolved-unknown",
+      "imageAssetId": "asset-33fda730-42c1-5607-b6c4-8ec330953602",
+      "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)",
+        "https://pokemoncard.co.kr/cards/detail/SMP0000000017",
+        "https://tcgbox.co.kr/product/%EC%9E%A0%EB%A7%8C%EB%B3%B4gx/3966/"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)",
+        "https://pokemoncard.co.kr/cards/detail/SMP0000000017",
+        "https://tcgbox.co.kr/product/%EC%9E%A0%EB%A7%8C%EB%B3%B4gx/3966/"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+GX+%E2%80%94+unknown+unknown+%28research-placeholder%29&row-id=item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3&card-name=Snorlax+GX&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+GX+%E2%80%94+SM-P+017%2FSM-P+%28research-placeholder%29&row-id=item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3&card-name=Snorlax+GX&set-code=SM-P&card-number=017%2FSM-P&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+    },
+    {
+      "itemId": "item-54f5a9da-3928-5f09-baef-1bcedd62e80e",
+      "legacyChecklistIds": [
+        "xy-p-149-korean-none-reverse-holo"
+      ],
+      "active": true,
+      "itemKind": "finish-candidate",
+      "progressClass": "research",
+      "workId": "WORK:Snorlax-Plump-Body-Knock-Away",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:XY-P",
+      "localSetId": "LOCALSET:KR:XY-P",
+      "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+      "physicalPrintingId": null,
+      "sourcePrintingId": "F0620-P01",
+      "finishUnitId": "F0620",
+      "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:0336e888841192b092652819",
+        "CLAIM:legacy:U0661",
+        "CLAIM:source-first:KR:XY-P:167:base"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Snorlax",
+      "localCardName": "잠만보",
+      "localSetCode": "XY-P",
+      "localSetName": null,
+      "collectorNumber": "167",
+      "collectorNumberDenominator": null,
+      "collectorNumberSortKey": "000000000167",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "marketplace-claimed",
+      "finish": "reverse-holo",
+      "finishFamily": "reverse-holo",
+      "finishGroupId": "finish-group-6253a8b5-e98c-5f93-8764-96254d139987",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "standard",
+      "errorClass": null,
+      "rarity": {
+        "display": "PROMO",
+        "normalizedId": "promo",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:XY-P:167:Snorlax-Plump-Body-Knock-Away"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2017",
+      "releaseDatePrecision": "year",
+      "releaseApproximate": false,
+      "releaseSortKey": "2017|LOCALIZATION:KR:ko|xy-p|000000000167|claim:CLAIM:finish:PRINTING:0336e888841192b092652819",
+      "imageAssetId": "asset-deaf5ac8-ffdb-5f2e-b1c3-5c7943329d0f",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/PR2015001167",
+        "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149"
+      ],
+      "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/PR2015001167",
+        "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+XY-P+167+%28finish-candidate%29&row-id=item-54f5a9da-3928-5f09-baef-1bcedd62e80e&card-name=Snorlax&set-code=XY-P&card-number=167&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
       "itemId": "item-3c46e61a-a289-5805-96a2-7a7793278d13",
@@ -28132,6 +28197,7 @@
       "sourcePrintingId": null,
       "finishUnitId": null,
       "sourceClaimRefs": [
+        "CLAIM:legacy:U0661",
         "CLAIM:source-first:KR:XY-P:167:base",
         "CLAIM:specimen:SPEC-0031"
       ],
@@ -28170,9 +28236,11 @@
       "imageAssetId": "asset-deaf5ac8-ffdb-5f2e-b1c3-5c7943329d0f",
       "imageScope": "exact-printing",
       "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/PR2015001167",
         "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/"
       ],
       "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/PR2015001167",
         "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+XY-P+167+%28verified-printing%29&row-id=item-3c46e61a-a289-5805-96a2-7a7793278d13&card-name=Snorlax&set-code=XY-P&card-number=167&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -28424,14 +28492,78 @@
       "imageAssetId": "asset-1220682a-8ba2-5c1d-b32f-fe9075db2fb2",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb"
+        "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb",
+        "https://globalbunjang.com/product/427231898",
+        "https://pokemoncard.co.kr/cards/detail/BS2019001066"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb"
+        "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb",
+        "https://globalbunjang.com/product/427231898",
+        "https://pokemoncard.co.kr/cards/detail/BS2019001066"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+sm9+066+%28research-placeholder%29&row-id=item-0b724891-36d9-5b56-8296-96cdb5ae4828&card-name=Eevee+%26+Snorlax+GX&set-code=sm9&card-number=066&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+    },
+    {
+      "itemId": "item-81e5bb06-6d11-56a7-9820-5d494f862464",
+      "legacyChecklistIds": [
+        "sm9-106-korean-none-unresolved-unknown"
+      ],
+      "active": true,
+      "itemKind": "research-placeholder",
+      "progressClass": "research",
+      "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:sm9",
+      "localSetId": "LOCALSET:KR:sm9",
+      "cardReleaseId": "RELEASE:KR:Korean:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "physicalPrintingId": null,
+      "sourcePrintingId": null,
+      "finishUnitId": "F0409",
+      "sourceClaimRefs": [
+        "CLAIM:legacy:U0633",
+        "CLAIM:source-first:KR:sm9:106/095:base"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Eevee & Snorlax GX",
+      "localCardName": "이브이&잠만보 GX",
+      "localSetCode": "sm9",
+      "localSetName": null,
+      "collectorNumber": "106",
+      "collectorNumberDenominator": "095",
+      "collectorNumberSortKey": "000000000106",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "pending",
+      "finish": null,
+      "finishFamily": null,
+      "finishGroupId": "finish-group-373773b6-aaf2-534c-b6cc-d56fabd2daec",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "SR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+        ]
+      },
+      "completenessStatus": "pending",
+      "releaseDate": "2018-12-07",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2018-12-07|LOCALIZATION:KR:ko|sm000000000009|000000000106|research:legacy-checklist:sm9-106-korean-none-unresolved-unknown",
+      "imageAssetId": "asset-118f0761-dbf7-5fa9-b3c2-4d7760b27200",
+      "imageScope": "card-release",
+      "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2019001106"
+      ],
+      "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2019001106"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+sm9+106+%28research-placeholder%29&row-id=item-81e5bb06-6d11-56a7-9820-5d494f862464&card-name=Eevee+%26+Snorlax+GX&set-code=sm9&card-number=106&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-ee62219c-7039-5a75-b715-c7d4de186d11",
@@ -28496,65 +28628,6 @@
         "https://www.pokemon-card.com/card-search/details.php/card/36138/regu/all"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+SM-P+%E2%80%94+Sun+%26+Moon+Promos+297+%28verified-printing%29&row-id=item-ee62219c-7039-5a75-b715-c7d4de186d11&card-name=Eevee+%26+Snorlax+GX&set-code=SM-P+%E2%80%94+Sun+%26+Moon+Promos&card-number=297&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+full-art+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
-    },
-    {
-      "itemId": "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4",
-      "legacyChecklistIds": [
-        "sm-p-297-korean-none-unresolved-unknown"
-      ],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-SM-P:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:54c748b5d0f2f8a14f36",
-      "cardReleaseId": "RELEASE:KR:Korean:via-SM-P:unknown-local-set:via-297:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX:unknown-local-id",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": "F0401",
-      "sourceClaimRefs": [
-        "CLAIM:legacy:U0627"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Eevee & Snorlax GX",
-      "localCardName": null,
-      "localSetCode": null,
-      "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000297",
-      "edition": null,
-      "editionAssignmentStatus": "not-applicable",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-37402a79-e422-5f15-8d93-ce5cc5fac252",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "Promo",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
-      },
-      "completenessStatus": "pending",
-      "releaseDate": "2018-12",
-      "releaseDatePrecision": "month",
-      "releaseApproximate": false,
-      "releaseSortKey": "2018-12|LOCALIZATION:KR:ko||000000000297|research:legacy-checklist:sm-p-297-korean-none-unresolved-unknown",
-      "imageAssetId": "asset-32d61a3a-da78-59d5-b56f-b9334ba2fe70",
-      "imageScope": "legacy-product",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+unknown+unknown+%28research-placeholder%29&row-id=item-21227d52-c2c4-5c5c-a73f-b29329cb58e4&card-name=Eevee+%26+Snorlax+GX&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-9f03055a-6a7b-5ff9-84ab-244d4b7650a3",
@@ -31252,13 +31325,11 @@
       "imageAssetId": "asset-9d9f2f81-4da3-5ca0-9990-d103e51d4b4b",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2019007076",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Double-Blaze/Snorlax-sm10076"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2019007076",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Double-Blaze/Snorlax-sm10076"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sm10+076+%28finish-candidate%29&row-id=item-50f0b8be-644f-5c97-8d0a-b6495a228791&card-name=Snorlax&set-code=sm10&card-number=076&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -31319,14 +31390,12 @@
       "imageAssetId": "asset-f2514a9f-6796-5456-b132-9cdbad799f60",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
-        "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view"
+        "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view",
+        "https://pokemoncard.co.kr/cards/detail/BS2019007076"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
-        "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view"
+        "https://drive.google.com/file/d/1tyi8O2-Kxyk2EFfif7qD2VyTjiudo_o2/view",
+        "https://pokemoncard.co.kr/cards/detail/BS2019007076"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sm10+076+%28verified-printing%29&row-id=item-91277dcc-9ca5-5d3d-be62-04168710ec83&card-name=Snorlax&set-code=sm10&card-number=076&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -31386,13 +31455,11 @@
       "imageAssetId": "asset-9d9f2f81-4da3-5ca0-9990-d103e51d4b4b",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2019007076",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Double-Blaze/Snorlax-sm10076"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2019007076",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Double-Blaze/Snorlax-sm10076"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sm10+076+%28finish-candidate%29&row-id=item-7e4429c7-57f4-529f-9e44-f966efec4c61&card-name=Snorlax&set-code=sm10&card-number=076&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -31513,11 +31580,9 @@
       "imageAssetId": "asset-67d25d90-f4ef-5541-82ac-96c46966623e",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_Family_Pok%C3%A9mon_Card_Game_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2019006059"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_Family_Pok%C3%A9mon_Card_Game_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2019006059"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+smL+038+%28research-placeholder%29&row-id=item-aa8519bb-35d5-57f2-af83-dc9a850d088c&card-name=Snorlax&set-code=smL&card-number=038&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
@@ -34055,12 +34120,12 @@
       "imageAssetId": "asset-fad69ebe-15f2-51a7-bcae-b08c28c0c196",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/V_Starter_Sets_(TCG)",
-        "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39"
+        "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39",
+        "https://pokemoncard.co.kr/cards/detail/BS2020001010"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/V_Starter_Sets_(TCG)",
-        "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39"
+        "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39",
+        "https://pokemoncard.co.kr/cards/detail/BS2020001010"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sA+010+%28research-placeholder%29&row-id=item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b&card-name=Snorlax&set-code=sA&card-number=010&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -34343,7 +34408,7 @@
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax V",
-      "localCardName": "잠만보",
+      "localCardName": "잠만보 V",
       "localSetCode": "s1H",
       "localSetName": null,
       "collectorNumber": "045",
@@ -34376,14 +34441,12 @@
       "imageAssetId": "asset-04d578b1-7ddc-5a50-a595-3b2afbc16779",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
-        "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg"
+        "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2020003045"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
-        "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg"
+        "https://media.bunjang.co.kr/product/414684191_1_1785047609_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2020003045"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+V+%E2%80%94+s1H+045+%28verified-printing%29&row-id=item-ab4ce5b1-e686-5593-a8a4-1d6bad8157fd&card-name=Snorlax+V&set-code=s1H&card-number=045&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+full-art+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -34410,7 +34473,7 @@
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax VMAX",
-      "localCardName": "잠만보",
+      "localCardName": "잠만보 VMAX",
       "localSetCode": "s1H",
       "localSetName": null,
       "collectorNumber": "046",
@@ -34443,16 +34506,79 @@
       "imageAssetId": "asset-dead767e-9630-5579-965f-f6a4a6448e8c",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
-        "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg"
+        "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2020003046"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
-        "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg"
+        "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2020003046"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+VMAX+%E2%80%94+s1H+046+%28verified-printing%29&row-id=item-5353619e-bd8b-584c-8d76-59cb8f8554fe&card-name=Snorlax+VMAX&set-code=s1H&card-number=046&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+full-art+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-1ad05d20-8e12-5cb1-99f0-6652b0c3f6c4",
+      "legacyChecklistIds": [
+        "s1h-66-korean-none-holo-textured-full-art"
+      ],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-V-Swallow-Falling-Down",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:s1H",
+      "localSetId": "LOCALSET:KR:s1H",
+      "cardReleaseId": "RELEASE:KR:Korean:s1H:066/060:Snorlax-V-Swallow-Falling-Down",
+      "physicalPrintingId": "PHYSICAL:PRINTING:2f457100ca45b33dfaab2e74",
+      "sourcePrintingId": "F0346-P01",
+      "finishUnitId": "F0346",
+      "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:2f457100ca45b33dfaab2e74",
+        "CLAIM:legacy:U0548",
+        "CLAIM:source-first:KR:s1H:066/060:base"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Snorlax V",
+      "localCardName": "잠만보 V",
+      "localSetCode": "s1H",
+      "localSetName": null,
+      "collectorNumber": "066",
+      "collectorNumberDenominator": "060",
+      "collectorNumberSortKey": "000000000066",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "confirmed",
+      "finish": "holo",
+      "finishFamily": "holo",
+      "finishGroupId": "finish-group-d9753fd7-712e-5ee8-9503-9fe3b867beb0",
+      "foilPattern": "textured full-art",
+      "markings": [],
+      "distribution": null,
+      "cardSize": "standard",
+      "errorClass": null,
+      "rarity": {
+        "display": "SR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:s1H:066/060:Snorlax-V-Swallow-Falling-Down"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2019-12-06",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2019-12-06|LOCALIZATION:KR:ko|s000000000001h|000000000066|claim:CLAIM:finish:PRINTING:2f457100ca45b33dfaab2e74",
+      "imageAssetId": "asset-d5338782-a0b6-5cd1-9737-285df28327f8",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2020003066"
+      ],
+      "evidenceLinks": [
+        "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2020003066"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+V+%E2%80%94+s1H+066+%28verified-printing%29&row-id=item-1ad05d20-8e12-5cb1-99f0-6652b0c3f6c4&card-name=Snorlax+V&set-code=s1H&card-number=066&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+textured+full-art+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
       "itemId": "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc",
@@ -34469,6 +34595,7 @@
       "sourcePrintingId": null,
       "finishUnitId": null,
       "sourceClaimRefs": [
+        "CLAIM:legacy:U0627",
         "CLAIM:source-first:KR:SM-P:140:base",
         "CLAIM:specimen:SPEC-0028"
       ],
@@ -34507,12 +34634,78 @@
       "imageAssetId": "asset-2611e781-b16c-57f5-966e-6f357ea7eb38",
       "imageScope": "exact-printing",
       "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/SMP000000191",
         "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/"
       ],
       "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/SMP000000191",
         "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+SM-P+140+%28verified-printing%29&row-id=item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc&card-name=Eevee+%26+Snorlax+GX&set-code=SM-P&card-number=140&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+ripple+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4",
+      "legacyChecklistIds": [
+        "sm-p-297-korean-none-unresolved-unknown"
+      ],
+      "active": true,
+      "itemKind": "research-placeholder",
+      "progressClass": "research",
+      "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:SM-P",
+      "localSetId": "LOCALSET:KR:SM-P",
+      "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "physicalPrintingId": null,
+      "sourcePrintingId": null,
+      "finishUnitId": "F0401",
+      "sourceClaimRefs": [
+        "CLAIM:legacy:U0627",
+        "CLAIM:source-first:KR:SM-P:140:base"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Eevee & Snorlax GX",
+      "localCardName": "이브이&잠만보 GX",
+      "localSetCode": "SM-P",
+      "localSetName": null,
+      "collectorNumber": "140",
+      "collectorNumberDenominator": null,
+      "collectorNumberSortKey": "000000000140",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "pending",
+      "finish": null,
+      "finishFamily": null,
+      "finishGroupId": "finish-group-0cf5d476-59ac-5bfe-ae0b-425ad2349ee3",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "PROMO",
+        "normalizedId": "promo",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+        ]
+      },
+      "completenessStatus": "pending",
+      "releaseDate": "2019",
+      "releaseDatePrecision": "year",
+      "releaseApproximate": false,
+      "releaseSortKey": "2019|LOCALIZATION:KR:ko|sm-p|000000000140|research:legacy-checklist:sm-p-297-korean-none-unresolved-unknown",
+      "imageAssetId": "asset-2611e781-b16c-57f5-966e-6f357ea7eb38",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/SMP000000191",
+        "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/"
+      ],
+      "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/SMP000000191",
+        "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+SM-P+140+%28research-placeholder%29&row-id=item-21227d52-c2c4-5c5c-a73f-b29329cb58e4&card-name=Eevee+%26+Snorlax+GX&set-code=SM-P&card-number=140&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-ca8048a9-24a4-57b4-ab29-fda38e2b2d92",
@@ -37600,13 +37793,11 @@
       "imageAssetId": "asset-c6e4c769-9cf3-59fb-9eac-281022de3ede",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2020005077",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2020005077",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s2+077+%28finish-candidate%29&row-id=item-e8e43551-0a58-5ed7-be08-b118f0466d42&card-name=Snorlax&set-code=s2&card-number=077&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -37667,13 +37858,11 @@
       "imageAssetId": "asset-c6e4c769-9cf3-59fb-9eac-281022de3ede",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2020005077",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+        "https://pokemoncard.co.kr/cards/detail/BS2020005077",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s2+077+%28finish-candidate%29&row-id=item-33347c5d-462a-5d6b-9f1e-4efb1c47c6c4&card-name=Snorlax&set-code=s2&card-number=077&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -40455,12 +40644,10 @@
       "imageAssetId": "asset-f62d1b90-310c-5acb-a50a-3778742d6257",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
         "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2020014084"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
         "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2020014084"
       ],
@@ -40522,12 +40709,10 @@
       "imageAssetId": "asset-9e44b385-f0f4-5d0f-ad8f-3808e6c4adde",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2020014084",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shocking-Volt-Tackle/Snorlax-s484"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2020014084",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shocking-Volt-Tackle/Snorlax-s484"
       ],
@@ -40589,12 +40774,10 @@
       "imageAssetId": "asset-9e44b385-f0f4-5d0f-ad8f-3808e6c4adde",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2020014084",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shocking-Volt-Tackle/Snorlax-s484"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2020014084",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shocking-Volt-Tackle/Snorlax-s484"
       ],
@@ -43860,10 +44043,12 @@
       "imageAssetId": "asset-17a4e6cc-15aa-5dac-b539-b811d0016f8d",
       "imageScope": "legacy-product",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
+        "https://pokemoncard.co.kr/cards/detail/BS2021013039"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
+        "https://pokemoncard.co.kr/cards/detail/BS2021013039"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sH+038+%28research-placeholder%29&row-id=item-a8ab050e-e847-5e00-a2d2-f16812d0f68f&card-name=Snorlax&set-code=sH&card-number=038&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -45404,12 +45589,10 @@
       "imageAssetId": "asset-60c0ce97-2fff-51d2-bd90-b4c78d928ac9",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2022001126",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2022001126",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax"
       ],
@@ -45471,12 +45654,10 @@
       "imageAssetId": "asset-8ec3552f-0ace-5d88-b76e-5d39d739f03d",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://media.bunjang.co.kr/product/418966418_1_1784832595_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2022001126"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://media.bunjang.co.kr/product/418966418_1_1784832595_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2022001126"
       ],
@@ -45735,7 +45916,7 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sI100+%E2%80%94+Start+Deck+100+342+%28finish-candidate%29&row-id=item-ccd8284d-aee0-50f7-8839-821194128c14&card-name=Snorlax&set-code=sI100+%E2%80%94+Start+Deck+100&card-number=342&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
-      "itemId": "item-f85b3cdd-da6f-5f16-a537-4737c54db34d",
+      "itemId": "item-56a74968-3c00-5c1d-b8d0-4501f36c29e2",
       "legacyChecklistIds": [
         "si100-341-korean-none-reverse-holo"
       ],
@@ -45743,61 +45924,64 @@
       "itemKind": "finish-candidate",
       "progressClass": "research",
       "workId": "WORK:Snorlax-Heavy-Impact",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-sI100:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:1625c87802fff0cb11c5",
-      "cardReleaseId": "RELEASE:KR:Korean:via-sI100:unknown-local-set:via-341:Snorlax-Heavy-Impact:unknown-local-id",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:sI",
+      "localSetId": "LOCALSET:KR:sI",
+      "cardReleaseId": "RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
       "physicalPrintingId": null,
       "sourcePrintingId": "F0376-P01",
       "finishUnitId": "F0376",
       "sourceClaimRefs": [
-        "CLAIM:finish:PRINTING:95c31c876cec2e6e259f8476",
-        "CLAIM:legacy:U0653"
+        "CLAIM:finish:PRINTING:95faa21f2314568cc99e0baf",
+        "CLAIM:legacy:U0653",
+        "CLAIM:source-first:KR:sI:341/414:base"
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": null,
+      "localCardName": "잠만보",
+      "localSetCode": "sI",
       "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
+      "collectorNumber": "341",
+      "collectorNumberDenominator": "414",
       "collectorNumberSortKey": "000000000341",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
       "finishVerificationStatus": "marketplace-claimed",
       "finish": "reverse-holo",
       "finishFamily": "reverse-holo",
-      "finishGroupId": "finish-group-77a322a6-d611-5502-a05d-f17f43c4f9be",
+      "finishGroupId": "finish-group-8b4582b2-97c0-5291-8312-8afccd5fa34d",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
       "cardSize": "standard",
       "errorClass": null,
       "rarity": {
-        "display": "Fixed",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
+        "display": "no printed rarity symbol",
+        "normalizedId": "fixed",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:sI:341/414:Snorlax-Heavy-Impact"
+        ]
       },
       "completenessStatus": "positive-evidence-only",
       "releaseDate": "2021-12-17",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2021-12-17|LOCALIZATION:KR:ko||000000000341|claim:CLAIM:finish:PRINTING:95c31c876cec2e6e259f8476",
-      "imageAssetId": "asset-8089b151-2d6b-51b9-aa54-f9d3ead2b570",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2021-12-17|LOCALIZATION:KR:ko|si|000000000341|claim:CLAIM:finish:PRINTING:95faa21f2314568cc99e0baf",
+      "imageAssetId": "asset-64e209ef-65ed-59de-b916-7050fc58595d",
+      "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+        "https://pokemoncard.co.kr/cards/detail/BS2022003341",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+        "https://pokemoncard.co.kr/cards/detail/BS2022003341",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+unknown+unknown+%28finish-candidate%29&row-id=item-f85b3cdd-da6f-5f16-a537-4737c54db34d&card-name=Snorlax&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sI+341+%28finish-candidate%29&row-id=item-56a74968-3c00-5c1d-b8d0-4501f36c29e2&card-name=Snorlax&set-code=sI&card-number=341&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
-      "itemId": "item-d63308be-2e60-5a48-adf1-e65bb166e41e",
+      "itemId": "item-7869f413-0a28-5197-90c4-a9f006add914",
       "legacyChecklistIds": [
         "si100-342-korean-none-reverse-holo"
       ],
@@ -45805,58 +45989,61 @@
       "itemKind": "finish-candidate",
       "progressClass": "research",
       "workId": "WORK:Snorlax-Heavy-Impact",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-sI100:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:1625c87802fff0cb11c5",
-      "cardReleaseId": "RELEASE:KR:Korean:via-sI100:unknown-local-set:via-342:Snorlax-Heavy-Impact:unknown-local-id",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:sI",
+      "localSetId": "LOCALSET:KR:sI",
+      "cardReleaseId": "RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
       "physicalPrintingId": null,
       "sourcePrintingId": "F0380-P01",
       "finishUnitId": "F0380",
       "sourceClaimRefs": [
-        "CLAIM:finish:PRINTING:ae437f9b9fd2a3b863796d7b",
-        "CLAIM:legacy:U0657"
+        "CLAIM:finish:PRINTING:37a9fe1c5549d8ae7c94a7fe",
+        "CLAIM:legacy:U0657",
+        "CLAIM:source-first:KR:sI:342/414:base"
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": null,
+      "localCardName": "잠만보",
+      "localSetCode": "sI",
       "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
+      "collectorNumber": "342",
+      "collectorNumberDenominator": "414",
       "collectorNumberSortKey": "000000000342",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
       "finishVerificationStatus": "marketplace-claimed",
       "finish": "reverse-holo",
       "finishFamily": "reverse-holo",
-      "finishGroupId": "finish-group-261b76fd-ec1a-59fe-b059-d0d9cdfcb83c",
+      "finishGroupId": "finish-group-4a9602b7-506f-5f81-bc52-5f072f1eb0d3",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
       "cardSize": "standard",
       "errorClass": null,
       "rarity": {
-        "display": "Fixed",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
+        "display": "no printed rarity symbol",
+        "normalizedId": "fixed",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:sI:342/414:Snorlax-Heavy-Impact"
+        ]
       },
       "completenessStatus": "positive-evidence-only",
       "releaseDate": "2021-12-17",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2021-12-17|LOCALIZATION:KR:ko||000000000342|claim:CLAIM:finish:PRINTING:ae437f9b9fd2a3b863796d7b",
-      "imageAssetId": "asset-3e3ac696-5f1b-5ea7-9ea7-203118d71118",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2021-12-17|LOCALIZATION:KR:ko|si|000000000342|claim:CLAIM:finish:PRINTING:37a9fe1c5549d8ae7c94a7fe",
+      "imageAssetId": "asset-8cc4f6d8-bc9f-50ca-aeb3-abea3237110d",
+      "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+        "https://pokemoncard.co.kr/cards/detail/BS2022003342",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V2-sI100342"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+        "https://pokemoncard.co.kr/cards/detail/BS2022003342",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V2-sI100342"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+unknown+unknown+%28finish-candidate%29&row-id=item-d63308be-2e60-5a48-adf1-e65bb166e41e&card-name=Snorlax&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sI+342+%28finish-candidate%29&row-id=item-7869f413-0a28-5197-90c4-a9f006add914&card-name=Snorlax&set-code=sI&card-number=342&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
       "itemId": "item-5ea374c0-9b85-5824-a376-48b871dea4e6",
@@ -46226,10 +46413,12 @@
       "imageAssetId": "asset-e3e89182-39ee-57a9-aa6d-4fae027d4292",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://pokemoncard.co.kr/cards/detail/SP000000101"
+        "https://pokemoncard.co.kr/cards/detail/SP000000101",
+        "https://pokumon.com/card/snorlax-101-s-p-korean-promo/"
       ],
       "evidenceLinks": [
-        "https://pokemoncard.co.kr/cards/detail/SP000000101"
+        "https://pokemoncard.co.kr/cards/detail/SP000000101",
+        "https://pokumon.com/card/snorlax-101-s-p-korean-promo/"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+S-P+101+%28verified-printing%29&row-id=item-d6202bd1-6110-528f-abcf-2a47928d4eb8&card-name=Snorlax&set-code=S-P&card-number=101&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -46718,12 +46907,10 @@
       "imageAssetId": "asset-a6d9b82f-62ca-5971-be58-97b27d0e89d3",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512"
+        "https://pokemoncard.co.kr/cards/detail/BS2022009008"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512"
+        "https://pokemoncard.co.kr/cards/detail/BS2022009008"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sN+008+%28research-placeholder%29&row-id=item-5f049ce0-68e0-5971-9c75-dedb8ed213f1&card-name=Snorlax&set-code=sN&card-number=008&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -47163,12 +47350,10 @@
       "imageAssetId": "asset-57694e39-a7c5-54fb-93ff-c5675da5a1d6",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2022011097",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2022011097",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058"
       ],
@@ -47230,12 +47415,10 @@
       "imageAssetId": "asset-57694e39-a7c5-54fb-93ff-c5675da5a1d6",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2022011097",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2022011097",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058"
       ],
@@ -47297,16 +47480,76 @@
       "imageAssetId": "asset-61b07031-0dc9-5a6a-b2b5-bf7c4ecbadfe",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://media.bunjang.co.kr/product/425674631_1_1787968532_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2022011097"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://media.bunjang.co.kr/product/425674631_1_1787968532_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2022011097"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s10a+058+%28verified-printing%29&row-id=item-8b12078d-e71a-5e7f-947c-d07cde95fc13&card-name=Snorlax&set-code=s10a&card-number=058&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-d4384b2e-e4b2-5d09-b04a-a7103e936616",
+      "legacyChecklistIds": [
+        "s10a-077-korean-none-unresolved-unknown"
+      ],
+      "active": true,
+      "itemKind": "research-placeholder",
+      "progressClass": "research",
+      "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:s10a",
+      "localSetId": "LOCALSET:KR:s10a",
+      "cardReleaseId": "RELEASE:KR:Korean:s10a:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": null,
+      "sourcePrintingId": null,
+      "finishUnitId": "F0330",
+      "sourceClaimRefs": [
+        "CLAIM:legacy:U0168",
+        "CLAIM:source-first:KR:s10a:077/071:base"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Snorlax",
+      "localCardName": "잠만보",
+      "localSetCode": "s10a",
+      "localSetName": null,
+      "collectorNumber": "077",
+      "collectorNumberDenominator": "071",
+      "collectorNumberSortKey": "000000000077",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "pending",
+      "finish": null,
+      "finishFamily": null,
+      "finishGroupId": "finish-group-80b51d2b-9fcd-5889-8961-6f2fbddce500",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "CHR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:s10a:077/071:Snorlax-Unfazed-Fat-Thumping-Snore"
+        ]
+      },
+      "completenessStatus": "pending",
+      "releaseDate": "2022-05-13",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2022-05-13|LOCALIZATION:KR:ko|s000000000010a|000000000077|research:legacy-checklist:s10a-077-korean-none-unresolved-unknown",
+      "imageAssetId": "asset-185e920e-0ead-52cf-8b55-d797562af977",
+      "imageScope": "card-release",
+      "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2022011126"
+      ],
+      "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2022011126"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s10a+077+%28research-placeholder%29&row-id=item-d4384b2e-e4b2-5d09-b04a-a7103e936616&card-name=Snorlax&set-code=s10a&card-number=077&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-b9c67249-0538-544f-a3be-857a34859126",
@@ -47613,12 +47856,10 @@
       "imageAssetId": "asset-a673f4c5-727f-5e2c-a6ed-1ceb1f1349c7",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
         "https://media.bunjang.co.kr/product/423230216_1_1786302836_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2022010056"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
         "https://media.bunjang.co.kr/product/423230216_1_1786302836_w480.jpg",
         "https://pokemoncard.co.kr/cards/detail/BS2022010056"
       ],
@@ -47680,12 +47921,10 @@
       "imageAssetId": "asset-8df1fa66-7509-570b-a816-0a07a5e97a38",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2022010056",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO-Enhanced-Expansion-Pack/Snorlax-s10b056"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2022010056",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO-Enhanced-Expansion-Pack/Snorlax-s10b056"
       ],
@@ -55079,16 +55318,76 @@
       "imageAssetId": "asset-97d7acd8-fd38-5a86-8fff-f14656567784",
       "imageScope": "legacy-product",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2023014143",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://pokemoncard.co.kr/cards/detail/BS2023014143",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sv2a+143+%28finish-candidate%29&row-id=item-f5a692cb-4ac1-5488-9581-6562e01463b5&card-name=Snorlax&set-code=sv2a&card-number=143&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-a38f3815-77db-5faa-8c93-c031a4dfa194",
+      "legacyChecklistIds": [
+        "sv2a-181-korean-none-unresolved-unknown"
+      ],
+      "active": true,
+      "itemKind": "research-placeholder",
+      "progressClass": "research",
+      "workId": "WORK:Snorlax-Voraciousness-Thudding-Press",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:sv2a",
+      "localSetId": "LOCALSET:KR:sv2a",
+      "cardReleaseId": "RELEASE:KR:Korean:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press",
+      "physicalPrintingId": null,
+      "sourcePrintingId": null,
+      "finishUnitId": "F0467",
+      "sourceClaimRefs": [
+        "CLAIM:legacy:U0049",
+        "CLAIM:source-first:KR:sv2a:181/165:base"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Snorlax",
+      "localCardName": "잠만보",
+      "localSetCode": "sv2a",
+      "localSetName": null,
+      "collectorNumber": "181",
+      "collectorNumberDenominator": "165",
+      "collectorNumberSortKey": "000000000181",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "pending",
+      "finish": null,
+      "finishFamily": null,
+      "finishGroupId": "finish-group-92c3bcc1-4fc8-5d51-9299-fe26ab98db15",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "AR",
+        "normalizedId": "illustration-rare",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press"
+        ]
+      },
+      "completenessStatus": "pending",
+      "releaseDate": "2023-06-16",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2023-06-16|LOCALIZATION:KR:ko|sv000000000002a|000000000181|research:legacy-checklist:sv2a-181-korean-none-unresolved-unknown",
+      "imageAssetId": "asset-c40ada67-71aa-5c86-8467-ba74eecb9157",
+      "imageScope": "legacy-product",
+      "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2023014181"
+      ],
+      "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2023014181"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sv2a+181+%28research-placeholder%29&row-id=item-a38f3815-77db-5faa-8c93-c031a4dfa194&card-name=Snorlax&set-code=sv2a&card-number=181&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-f3bd904f-17b6-53c8-916f-61b5b1d46971",
@@ -57382,66 +57681,73 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+Doll+%E2%80%94+sv4K+%E2%80%94+Ancient+Roar+059+%28verified-printing%29&row-id=item-4f3c9c9c-a0ce-576b-b00e-2292aa204d3e&card-name=Snorlax+Doll&set-code=sv4K+%E2%80%94+Ancient+Roar&card-number=059&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
-      "itemId": "item-66586af0-5c49-5e9c-b9fe-d10a70b775e1",
+      "itemId": "item-9db09373-42dd-593a-8a8b-eaaeed98f390",
       "legacyChecklistIds": [
         "sv4k-059-korean-none-non-holo"
       ],
       "active": true,
-      "itemKind": "verified-printing",
-      "progressClass": "current-known",
+      "itemKind": "finish-candidate",
+      "progressClass": "research",
       "workId": "WORK:Snorlax-Doll",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-sv4K:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:03465090357fbbab2267",
-      "cardReleaseId": "RELEASE:KR:Korean:via-sv4K:unknown-local-set:via-059:Snorlax-Doll:unknown-local-id",
-      "physicalPrintingId": "PHYSICAL:F0482-P01",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:sv4K",
+      "localSetId": "LOCALSET:KR:sv4K",
+      "cardReleaseId": "RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
+      "physicalPrintingId": null,
       "sourcePrintingId": "F0482-P01",
       "finishUnitId": "F0482",
       "sourceClaimRefs": [
-        "CLAIM:finish:F0482-P01",
-        "CLAIM:legacy:U0260"
+        "CLAIM:finish:PRINTING:4a5417dbaef2eec83c6c12d0",
+        "CLAIM:legacy:U0260",
+        "CLAIM:source-first:KR:sv4K:060/066:base"
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax Doll",
-      "localCardName": null,
-      "localSetCode": null,
+      "localCardName": "잠만보인형",
+      "localSetCode": "sv4K",
       "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000059",
+      "collectorNumber": "060",
+      "collectorNumberDenominator": "066",
+      "collectorNumberSortKey": "000000000060",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
-      "finishVerificationStatus": "confirmed",
+      "finishVerificationStatus": "marketplace-claimed",
       "finish": "non-holo",
       "finishFamily": "non-holo",
-      "finishGroupId": "finish-group-dafed002-6c85-5933-9f2d-09e51baca30f",
+      "finishGroupId": "finish-group-fb0d39a5-59da-5ce2-a235-399cacd2323a",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
       "cardSize": "standard",
       "errorClass": null,
       "rarity": {
-        "display": "Uncommon",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
+        "display": "U",
+        "normalizedId": "uncommon",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:sv4K:060/066:Snorlax-Doll"
+        ]
       },
       "completenessStatus": "positive-evidence-only",
       "releaseDate": "2023-10-27",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2023-10-27|LOCALIZATION:KR:ko||000000000059|claim:CLAIM:finish:F0482-P01",
-      "imageAssetId": "asset-6fd32225-1a39-5d31-a3b7-5f1b337bd99c",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2023-10-27|LOCALIZATION:KR:ko|sv000000000004k|000000000060|claim:CLAIM:finish:PRINTING:4a5417dbaef2eec83c6c12d0",
+      "imageAssetId": "asset-4966ddb7-874e-550d-89c5-e77a6b009d07",
+      "imageScope": "card-release",
       "sourceLinks": [
-        "https://api.tcgdex.net/v2/ko/cards/SV4K-059",
-        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059"
+        "https://globalbunjang.com/product/407721760",
+        "https://pokemoncard.co.kr/cards/detail/BS2023021060",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
+        "https://www.pokepolio.com/cards/8ae3d25e-9838-4724-bcf3-cf5ed897d22b"
       ],
       "evidenceLinks": [
-        "https://api.tcgdex.net/v2/ko/cards/SV4K-059",
-        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059"
+        "https://globalbunjang.com/product/407721760",
+        "https://pokemoncard.co.kr/cards/detail/BS2023021060",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
+        "https://www.pokepolio.com/cards/8ae3d25e-9838-4724-bcf3-cf5ed897d22b"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+Doll+%E2%80%94+unknown+unknown+%28verified-printing%29&row-id=item-66586af0-5c49-5e9c-b9fe-d10a70b775e1&card-name=Snorlax+Doll&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+Doll+%E2%80%94+sv4K+060+%28finish-candidate%29&row-id=item-9db09373-42dd-593a-8a8b-eaaeed98f390&card-name=Snorlax+Doll&set-code=sv4K&card-number=060&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
       "itemId": "item-8e438727-6c03-50c4-84d0-29c11822e494",
@@ -58401,11 +58707,9 @@
       "imageAssetId": "asset-540ed374-92bc-56da-b690-099c1ceaf8f7",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Venusaur_%26_Charizard_%26_Blastoise_Special_Deck_Set_ex_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2023023021"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Venusaur_%26_Charizard_%26_Blastoise_Special_Deck_Set_ex_(TCG)",
         "https://pokemoncard.co.kr/cards/detail/BS2023023021"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+svG+021+%28research-placeholder%29&row-id=item-9943ba98-9cc1-525c-bf28-3786b5c6f7fb&card-name=Snorlax&set-code=svG&card-number=021&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
@@ -59334,16 +59638,78 @@
       "imageAssetId": "asset-94052024-abc9-5cb1-a024-222ec7163d2e",
       "imageScope": "legacy-product",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed",
+        "https://pokemoncard.co.kr/cards/detail/BS2024001145",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed",
+        "https://pokemoncard.co.kr/cards/detail/BS2024001145",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sv4a+145+%28finish-candidate%29&row-id=item-a22e504d-495f-50b8-9423-5ca6fa6ecf3d&card-name=Snorlax&set-code=sv4a&card-number=145&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-b4c8074d-c95a-5752-8ab0-e44245d87b04",
+      "legacyChecklistIds": [
+        "sv4a-310-korean-none-unresolved-unknown"
+      ],
+      "active": true,
+      "itemKind": "research-placeholder",
+      "progressClass": "research",
+      "workId": "WORK:Snorlax-Voraciousness-Thudding-Press",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:sv4a",
+      "localSetId": "LOCALSET:KR:sv4a",
+      "cardReleaseId": "RELEASE:KR:Korean:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
+      "physicalPrintingId": null,
+      "sourcePrintingId": null,
+      "finishUnitId": "F0477",
+      "sourceClaimRefs": [
+        "CLAIM:legacy:U0384",
+        "CLAIM:source-first:KR:sv4a:310/190:base"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Snorlax",
+      "localCardName": "잠만보",
+      "localSetCode": "sv4a",
+      "localSetName": null,
+      "collectorNumber": "310",
+      "collectorNumberDenominator": "190",
+      "collectorNumberSortKey": "000000000310",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "pending",
+      "finish": null,
+      "finishFamily": null,
+      "finishGroupId": "finish-group-32c229d1-e2d8-5155-8d8c-da668d6e064a",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "S",
+        "normalizedId": "shiny-rare",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press"
+        ]
+      },
+      "completenessStatus": "pending",
+      "releaseDate": "2023-12-01",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2023-12-01|LOCALIZATION:KR:ko|sv000000000004a|000000000310|research:legacy-checklist:sv4a-310-korean-none-unresolved-unknown",
+      "imageAssetId": "asset-0482e147-3545-5210-a55c-02b3829231d3",
+      "imageScope": "card-release",
+      "sourceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2024001310"
+      ],
+      "evidenceLinks": [
+        "https://pokemoncard.co.kr/cards/detail/BS2024001310"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sv4a+310+%28research-placeholder%29&row-id=item-b4c8074d-c95a-5752-8ab0-e44245d87b04&card-name=Snorlax&set-code=sv4a&card-number=310&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-27cf809f-7815-5d38-a2ad-c2da7effba41",
@@ -61018,55 +61384,62 @@
       "itemKind": "research-placeholder",
       "progressClass": "research",
       "workId": "WORK:Snorlax-Lazy-Press",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:KR:Korean:via-svIba:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:ce017a21eabbd07a0f39",
-      "cardReleaseId": "RELEASE:KR:Korean:via-svIba:unknown-local-set:via-046:Snorlax-Lazy-Press:unknown-local-id",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:svI",
+      "localSetId": "LOCALSET:KR:svI",
+      "cardReleaseId": "RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
       "physicalPrintingId": null,
       "sourcePrintingId": null,
       "finishUnitId": "F0496",
       "sourceClaimRefs": [
-        "CLAIM:legacy:U0648"
+        "CLAIM:legacy:U0648",
+        "CLAIM:source-first:KR:svI:046/066:base"
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": null,
+      "localCardName": "잠만보",
+      "localSetCode": "svI",
       "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
+      "collectorNumber": "046",
+      "collectorNumberDenominator": "066",
       "collectorNumberSortKey": "000000000046",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
       "finishVerificationStatus": "pending",
       "finish": null,
       "finishFamily": null,
-      "finishGroupId": "finish-group-933f3dd6-e200-5551-8b7b-51d8e0f59a3d",
+      "finishGroupId": "finish-group-45659547-3a12-5d63-bdbc-dda9180c1872",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
       "cardSize": "unknown",
       "errorClass": null,
       "rarity": {
-        "display": "Fixed",
-        "normalizedId": null,
-        "evidenceStatus": "marketplace-claimed",
-        "claimRefs": []
+        "display": "fixed product",
+        "normalizedId": "fixed",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:svI:046/066:Snorlax-Lazy-Press"
+        ]
       },
       "completenessStatus": "pending",
       "releaseDate": "2024-03-08",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2024-03-08|LOCALIZATION:KR:ko||000000000046|research:legacy-checklist:sviba-046-korean-none-unresolved-unknown",
-      "imageAssetId": "asset-143a2cff-ab23-58dc-a2f2-a84c4dbc838c",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2024-03-08|LOCALIZATION:KR:ko|svi|000000000046|research:legacy-checklist:sviba-046-korean-none-unresolved-unknown",
+      "imageAssetId": "asset-d3c18377-46ff-573b-924c-ea2fea20a7ad",
+      "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Card_Game_Battle_Academy_(TCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)",
+        "https://collectory.cc/cards/73c55006-427b-45ae-9a58-f7facd855820",
+        "https://pokemoncard.co.kr/cards/detail/BS2024006084"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Card_Game_Battle_Academy_(TCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)",
+        "https://collectory.cc/cards/73c55006-427b-45ae-9a58-f7facd855820",
+        "https://pokemoncard.co.kr/cards/detail/BS2024006084"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+unknown+unknown+%28research-placeholder%29&row-id=item-931885a3-52ab-56f0-97b3-b6c5bc0e3301&card-name=Snorlax&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+svI+046+%28research-placeholder%29&row-id=item-931885a3-52ab-56f0-97b3-b6c5bc0e3301&card-name=Snorlax&set-code=svI&card-number=046&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-888706de-5178-5bd3-98de-fa7153a32be3",
@@ -61188,12 +61561,12 @@
       "imageAssetId": "asset-6823668e-488b-5653-9d9e-d4890c011e2f",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://globalbunjang.com/product/416373605",
         "https://pokemoncard.co.kr/cards/detail/BS2024007051",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Crimson-Haze/Snorlax-sv5a051"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://globalbunjang.com/product/416373605",
         "https://pokemoncard.co.kr/cards/detail/BS2024007051",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Crimson-Haze/Snorlax-sv5a051"
       ],
@@ -62935,11 +63308,13 @@
       "imageScope": "card-release",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Stellar_Tera_Type_Starter_Set_(TCG)",
-        "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_(TCG)"
+        "https://globalbunjang.com/product/426224532",
+        "https://pokemoncard.co.kr/cards/detail/BS2024014010"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Stellar_Tera_Type_Starter_Set_(TCG)",
-        "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_(TCG)"
+        "https://globalbunjang.com/product/426224532",
+        "https://pokemoncard.co.kr/cards/detail/BS2024014010"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+svLN+010+%28research-placeholder%29&row-id=item-a0432a33-d9ad-5f13-8e5f-d588128dc831&card-name=Snorlax&set-code=svLN&card-number=010&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -64298,11 +64673,11 @@
       "imageScope": "card-release",
       "sourceLinks": [
         "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f",
-        "https://www.ebay.de/itm/167623600843"
+        "https://pokemoncard.co.kr/cards/detail/BS2024018094"
       ],
       "evidenceLinks": [
         "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f",
-        "https://www.ebay.de/itm/167623600843"
+        "https://pokemoncard.co.kr/cards/detail/BS2024018094"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+ex+%E2%80%94+svM+094+%28research-placeholder%29&row-id=item-e59a7c10-d2a2-5d7b-adae-87d36c1d4dbe&card-name=Snorlax+ex&set-code=svM&card-number=094&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -65622,14 +65997,14 @@
       "imageAssetId": "asset-e5ae6323-c0d3-556c-9b7d-8241551f4a27",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://globalbunjang.com/product/423230156",
-        "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg"
+        "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2025001075"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://globalbunjang.com/product/423230156",
-        "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg"
+        "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2025001075"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Hop%27s+Snorlax+%E2%80%94+sv9+075+%28verified-printing%29&row-id=item-5168b7b7-94bf-556c-8096-5cc921bb33fa&card-name=Hop%27s+Snorlax&set-code=sv9&card-number=075&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -65689,13 +66064,13 @@
       "imageAssetId": "asset-e5ae6323-c0d3-556c-9b7d-8241551f4a27",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://globalbunjang.com/product/423230156",
+        "https://pokemoncard.co.kr/cards/detail/BS2025001075",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Partners/Hops-Snorlax-sv9075"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://globalbunjang.com/product/423230156",
+        "https://pokemoncard.co.kr/cards/detail/BS2025001075",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Battle-Partners/Hops-Snorlax-sv9075"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Hop%27s+Snorlax+%E2%80%94+sv9+075+%28finish-candidate%29&row-id=item-0cd5fff3-b917-5ee0-94be-37eb151a2774&card-name=Hop%27s+Snorlax&set-code=sv9&card-number=075&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -69871,14 +70246,14 @@
       "imageAssetId": "asset-94ffd3e6-f080-5613-b093-3a38ff5334a8",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://globalbunjang.com/product/423487583",
-        "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg"
+        "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2025015136"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://globalbunjang.com/product/423487583",
-        "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg"
+        "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg",
+        "https://pokemoncard.co.kr/cards/detail/BS2025015136"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Hop%27s+Snorlax+%E2%80%94+m2a+136+%28verified-printing%29&row-id=item-9bde3ccf-6520-5659-8dc8-b8985b5d954d&card-name=Hop%27s+Snorlax&set-code=m2a&card-number=136&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -69939,12 +70314,14 @@
       "imageAssetId": "asset-eb067306-3524-5071-afc3-1bd30f7ed12a",
       "imageScope": "exact-printing",
       "sourceLinks": [
+        "https://globalbunjang.com/product/420832203",
         "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
         "https://www.pokeca.net/product/22292",
         "https://www.pokemon-card.com/ex/m2a/index.html"
       ],
       "evidenceLinks": [
+        "https://globalbunjang.com/product/420832203",
         "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
         "https://www.pokeca.net/product/22292",
@@ -70009,6 +70386,7 @@
       "imageAssetId": "asset-e500f6b2-8b3b-5f91-99d9-09dac69b72d1",
       "imageScope": "exact-printing",
       "sourceLinks": [
+        "https://globalbunjang.com/product/420832203",
         "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
         "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
@@ -70016,6 +70394,7 @@
         "https://www.pokemon-card.com/ex/m2a/index.html"
       ],
       "evidenceLinks": [
+        "https://globalbunjang.com/product/420832203",
         "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
         "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
@@ -70620,12 +70999,12 @@
       "imageAssetId": "asset-1814d458-d1aa-5d65-a6aa-0ffe12b02f8f",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
-        "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d"
+        "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d",
+        "https://pokemoncard.co.kr/cards/detail/BS2026001567"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
-        "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d"
+        "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d",
+        "https://pokemoncard.co.kr/cards/detail/BS2026001567"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+mC+567+%28research-placeholder%29&row-id=item-682f2ee1-5724-52df-b350-296c53314988&card-name=Snorlax&set-code=mC&card-number=567&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -70685,13 +71064,13 @@
       "imageAssetId": "asset-3b60582d-308d-59c4-ae04-aae469a7f498",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
         "https://collectory.cc/cards/f7c4636f-8030-40a7-86d6-994a0bc3283c",
+        "https://pokemoncard.co.kr/cards/detail/BS2026001568",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC568"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
         "https://collectory.cc/cards/f7c4636f-8030-40a7-86d6-994a0bc3283c",
+        "https://pokemoncard.co.kr/cards/detail/BS2026001568",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC568"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+mC+568+%28finish-candidate%29&row-id=item-fe7f86cb-ec63-5207-b6b4-14612e086704&card-name=Snorlax&set-code=mC&card-number=568&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -70751,12 +71130,12 @@
       "imageAssetId": "asset-cb7aebf7-5c8b-5455-b074-5ce6bf6269a5",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
-        "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec"
+        "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec",
+        "https://pokemoncard.co.kr/cards/detail/BS2026001569"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
-        "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec"
+        "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec",
+        "https://pokemoncard.co.kr/cards/detail/BS2026001569"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Hop%27s+Snorlax+%E2%80%94+mC+569+%28research-placeholder%29&row-id=item-527314a1-4456-593a-968c-8195a39e8d1f&card-name=Hop%27s+Snorlax&set-code=mC&card-number=569&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
@@ -72581,13 +72960,15 @@
       "imageAssetId": "asset-72194362-c177-5f18-ade0-9e2ce405d1c5",
       "imageScope": "card-release",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e",
+        "https://globalbunjang.com/product/411963518",
+        "https://pokemoncard.co.kr/cards/detail/BS2026002062",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e",
+        "https://globalbunjang.com/product/411963518",
+        "https://pokemoncard.co.kr/cards/detail/BS2026002062",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+m3+062+%28finish-candidate%29&row-id=item-29716ae3-0746-5311-a34e-d344d758b45b&card-name=Snorlax&set-code=m3&card-number=062&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
@@ -74696,7 +75077,7 @@
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax Lv.X",
-      "localCardName": "잠만보 Lv.X",
+      "localCardName": "잠만보 LV.X",
       "localSetCode": "DP",
       "localSetName": null,
       "collectorNumber": "006",
@@ -74729,79 +75110,14 @@
       "imageAssetId": "asset-a05cf000-a0eb-5d53-ad44-f9efe58ff5cf",
       "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
-        "https://globalbunjang.com/product/386929037"
+        "https://globalbunjang.com/product/386929037",
+        "https://pokemoncard.co.kr/cards/detail/PR2010001006"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
-        "https://globalbunjang.com/product/386929037"
+        "https://globalbunjang.com/product/386929037",
+        "https://pokemoncard.co.kr/cards/detail/PR2010001006"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+Lv.X+%E2%80%94+DP+006+%28verified-printing%29&row-id=item-14290aa1-a43c-56ef-a455-084efdbe20a5&card-name=Snorlax+Lv.X&set-code=DP&card-number=006&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
-    },
-    {
-      "itemId": "item-1ad05d20-8e12-5cb1-99f0-6652b0c3f6c4",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "verified-printing",
-      "progressClass": "current-known",
-      "workId": "WORK:Snorlax-V-Swallow-Falling-Down",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:s1H",
-      "localSetId": "LOCALSET:KR:s1H",
-      "cardReleaseId": "RELEASE:KR:Korean:s1H:066/060:Snorlax-V-Swallow-Falling-Down",
-      "physicalPrintingId": "PHYSICAL:PRINTING:2f457100ca45b33dfaab2e74",
-      "sourcePrintingId": "F0346-P01",
-      "finishUnitId": "F0346",
-      "sourceClaimRefs": [
-        "CLAIM:finish:PRINTING:2f457100ca45b33dfaab2e74",
-        "CLAIM:legacy:U0548",
-        "CLAIM:source-first:KR:s1H:066/060:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax V",
-      "localCardName": "잠만보",
-      "localSetCode": "s1H",
-      "localSetName": null,
-      "collectorNumber": "066",
-      "collectorNumberDenominator": "060",
-      "collectorNumberSortKey": "000000000066",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "confirmed",
-      "finish": "holo",
-      "finishFamily": "holo",
-      "finishGroupId": "finish-group-d9753fd7-712e-5ee8-9503-9fe3b867beb0",
-      "foilPattern": "textured full-art",
-      "markings": [],
-      "distribution": null,
-      "cardSize": "standard",
-      "errorClass": null,
-      "rarity": {
-        "display": "SR",
-        "normalizedId": null,
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:s1H:066/060:Snorlax-V-Swallow-Falling-Down"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|s000000000001h|000000000066|claim:CLAIM:finish:PRINTING:2f457100ca45b33dfaab2e74",
-      "imageAssetId": "asset-d5338782-a0b6-5cd1-9737-285df28327f8",
-      "imageScope": "exact-printing",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
-        "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
-        "https://media.bunjang.co.kr/product/408219334_1_1778836100_w480.jpg"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+V+%E2%80%94+s1H+066+%28verified-printing%29&row-id=item-1ad05d20-8e12-5cb1-99f0-6652b0c3f6c4&card-name=Snorlax+V&set-code=s1H&card-number=066&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+textured+full-art+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
       "itemId": "item-0b8244d5-2b0a-5145-a418-431de37ebf3c",
@@ -74928,307 +75244,6 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s5a+093+%28research-placeholder%29&row-id=item-2c567705-ea09-502c-88f5-76870e3bc0cf&card-name=Snorlax&set-code=s5a&card-number=093&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
-      "itemId": "item-e26a051a-2cb7-54e8-bd1a-0db682ef032c",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:s10a",
-      "localSetId": "LOCALSET:KR:s10a",
-      "cardReleaseId": "RELEASE:KR:Korean:s10a:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:legacy:U0168",
-        "CLAIM:source-first:KR:s10a:077/071:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax",
-      "localCardName": "잠만보",
-      "localSetCode": "s10a",
-      "localSetName": null,
-      "collectorNumber": "077",
-      "collectorNumberDenominator": "071",
-      "collectorNumberSortKey": "000000000077",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-80b51d2b-9fcd-5889-8961-6f2fbddce500",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "CHR",
-        "normalizedId": null,
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:s10a:077/071:Snorlax-Unfazed-Fat-Thumping-Snore"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|s000000000010a|000000000077|research:card-release:RELEASE:KR:Korean:s10a:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "imageAssetId": "asset-185e920e-0ead-52cf-8b55-d797562af977",
-      "imageScope": "card-release",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://pokemoncard.co.kr/cards/detail/BS2022011126"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://pokemoncard.co.kr/cards/detail/BS2022011126"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s10a+077+%28research-placeholder%29&row-id=item-e26a051a-2cb7-54e8-bd1a-0db682ef032c&card-name=Snorlax&set-code=s10a&card-number=077&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-ee5e78c3-5d49-5d0f-829f-10caff31ade3",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Heavy-Impact",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:sI",
-      "localSetId": "LOCALSET:KR:sI",
-      "cardReleaseId": "RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:source-first:KR:sI:341/414:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax",
-      "localCardName": "잠만보",
-      "localSetCode": "sI",
-      "localSetName": null,
-      "collectorNumber": "341",
-      "collectorNumberDenominator": "414",
-      "collectorNumberSortKey": "000000000341",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-fb31214a-2527-502b-87cd-74a3c6a87c0e",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "no printed rarity symbol",
-        "normalizedId": "fixed",
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:sI:341/414:Snorlax-Heavy-Impact"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|si|000000000341|research:card-release:RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
-      "imageAssetId": "asset-64e209ef-65ed-59de-b916-7050fc58595d",
-      "imageScope": "card-release",
-      "sourceLinks": [
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"
-      ],
-      "evidenceLinks": [
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sI+341+%28research-placeholder%29&row-id=item-ee5e78c3-5d49-5d0f-829f-10caff31ade3&card-name=Snorlax&set-code=sI&card-number=341&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-d4189bf4-e26c-5985-85ce-15a98c168dc8",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Heavy-Impact",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:sI",
-      "localSetId": "LOCALSET:KR:sI",
-      "cardReleaseId": "RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:source-first:KR:sI:342/414:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax",
-      "localCardName": "잠만보",
-      "localSetCode": "sI",
-      "localSetName": null,
-      "collectorNumber": "342",
-      "collectorNumberDenominator": "414",
-      "collectorNumberSortKey": "000000000342",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-62a880f7-ae95-5eb1-927a-257f95950d8d",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "no printed rarity symbol",
-        "normalizedId": "fixed",
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:sI:342/414:Snorlax-Heavy-Impact"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|si|000000000342|research:card-release:RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
-      "imageAssetId": "asset-8cc4f6d8-bc9f-50ca-aeb3-abea3237110d",
-      "imageScope": "card-release",
-      "sourceLinks": [
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
-      ],
-      "evidenceLinks": [
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sI+342+%28research-placeholder%29&row-id=item-d4189bf4-e26c-5985-85ce-15a98c168dc8&card-name=Snorlax&set-code=sI&card-number=342&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-fe513efe-da33-55d0-894b-1b78bd56fdd8",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:SM-P",
-      "localSetId": "LOCALSET:KR:SM-P",
-      "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:source-first:KR:SM-P:017/SM-P:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax GX",
-      "localCardName": "잠만보 GX",
-      "localSetCode": "SM-P",
-      "localSetName": null,
-      "collectorNumber": "017/SM-P",
-      "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000017/sm-p",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-9e5c8cde-849f-5870-b214-ca89e3155552",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "PROMO",
-        "normalizedId": "promo",
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|sm-p|000000000017/sm-p|research:card-release:RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-      "imageAssetId": "asset-33fda730-42c1-5607-b6c4-8ec330953602",
-      "imageScope": "card-release",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+GX+%E2%80%94+SM-P+017%2FSM-P+%28research-placeholder%29&row-id=item-fe513efe-da33-55d0-894b-1b78bd56fdd8&card-name=Snorlax+GX&set-code=SM-P&card-number=017%2FSM-P&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-2aa92034-5d9c-5bfe-b57a-e713b233050b",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:sm9",
-      "localSetId": "LOCALSET:KR:sm9",
-      "cardReleaseId": "RELEASE:KR:Korean:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:legacy:U0633",
-        "CLAIM:source-first:KR:sm9:106/095:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Eevee & Snorlax GX",
-      "localCardName": "이브이&잠만보 GX",
-      "localSetCode": "sm9",
-      "localSetName": null,
-      "collectorNumber": "106",
-      "collectorNumberDenominator": "095",
-      "collectorNumberSortKey": "000000000106",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-373773b6-aaf2-534c-b6cc-d56fabd2daec",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "SR",
-        "normalizedId": null,
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|sm000000000009|000000000106|research:card-release:RELEASE:KR:Korean:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "imageAssetId": "asset-118f0761-dbf7-5fa9-b3c2-4d7760b27200",
-      "imageScope": "card-release",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+sm9+106+%28research-placeholder%29&row-id=item-2aa92034-5d9c-5bfe-b57a-e713b233050b&card-name=Eevee+%26+Snorlax+GX&set-code=sm9&card-number=106&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
       "itemId": "item-09755a72-7bae-51cf-9eab-ea74fc6a56a5",
       "legacyChecklistIds": [],
       "active": true,
@@ -75282,255 +75297,74 @@
       "imageScope": "unknown",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Eevee_%26_Snorlax-GX_(Team_Up_120)",
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://collectory.cc/cards/d3bcbd09-e544-468a-a596-7745da852bba"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Eevee_%26_Snorlax-GX_(Team_Up_120)",
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://collectory.cc/cards/d3bcbd09-e544-468a-a596-7745da852bba"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+sm9+115+%28research-placeholder%29&row-id=item-09755a72-7bae-51cf-9eab-ea74fc6a56a5&card-name=Eevee+%26+Snorlax+GX&set-code=sm9&card-number=115&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
-      "itemId": "item-7fe49f30-5752-5193-8726-23f1611e2193",
+      "itemId": "item-2784a253-55ef-51d0-a91f-fce89531f857",
       "legacyChecklistIds": [],
       "active": true,
       "itemKind": "research-placeholder",
       "progressClass": "research",
-      "workId": "WORK:Snorlax-Voraciousness-Thudding-Press",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:sv2a",
-      "localSetId": "LOCALSET:KR:sv2a",
-      "cardReleaseId": "RELEASE:KR:Korean:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press",
+      "workId": "WORK:Snorlax-Incredible-Snore",
+      "workMappingState": "mapped",
+      "setEditionId": "EDITION:KR:Korean:SM30A",
+      "localSetId": "LOCALSET:KR:SM30A",
+      "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
       "physicalPrintingId": null,
       "sourcePrintingId": null,
       "finishUnitId": null,
       "sourceClaimRefs": [
-        "CLAIM:legacy:U0049",
-        "CLAIM:source-first:KR:sv2a:181/165:base"
+        "CLAIM:source-first:KR:SM30A:060/080:base"
       ],
       "localizationId": "LOCALIZATION:KR:ko",
       "cardName": "Snorlax",
       "localCardName": "잠만보",
-      "localSetCode": "sv2a",
-      "localSetName": null,
-      "collectorNumber": "181",
-      "collectorNumberDenominator": "165",
-      "collectorNumberSortKey": "000000000181",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-92c3bcc1-4fc8-5d51-9299-fe26ab98db15",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "AR",
-        "normalizedId": "illustration-rare",
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|sv000000000002a|000000000181|research:card-release:RELEASE:KR:Korean:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press",
-      "imageAssetId": null,
-      "imageScope": "unknown",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://pokemoncard.co.kr/cards/detail/BS2023014181"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://pokemoncard.co.kr/cards/detail/BS2023014181"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sv2a+181+%28research-placeholder%29&row-id=item-7fe49f30-5752-5193-8726-23f1611e2193&card-name=Snorlax&set-code=sv2a&card-number=181&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-c3353a0e-ecb7-560c-a689-db4df7726c01",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Voraciousness-Thudding-Press",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:sv4a",
-      "localSetId": "LOCALSET:KR:sv4a",
-      "cardReleaseId": "RELEASE:KR:Korean:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:legacy:U0384",
-        "CLAIM:source-first:KR:sv4a:310/190:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax",
-      "localCardName": "잠만보",
-      "localSetCode": "sv4a",
-      "localSetName": null,
-      "collectorNumber": "310",
-      "collectorNumberDenominator": "190",
-      "collectorNumberSortKey": "000000000310",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-32c229d1-e2d8-5155-8d8c-da668d6e064a",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "S",
-        "normalizedId": "shiny-rare",
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|sv000000000004a|000000000310|research:card-release:RELEASE:KR:Korean:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
-      "imageAssetId": "asset-0482e147-3545-5210-a55c-02b3829231d3",
-      "imageScope": "card-release",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://pokemoncard.co.kr/cards/detail/BS2024001310"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://pokemoncard.co.kr/cards/detail/BS2024001310"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sv4a+310+%28research-placeholder%29&row-id=item-c3353a0e-ecb7-560c-a689-db4df7726c01&card-name=Snorlax&set-code=sv4a&card-number=310&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-d189b75a-a8d7-5707-bc86-cc72266b0f28",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Doll",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:sv4K",
-      "localSetId": "LOCALSET:KR:sv4K",
-      "cardReleaseId": "RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:source-first:KR:sv4K:060/066:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax Doll",
-      "localCardName": "잠만보인형",
-      "localSetCode": "sv4K",
+      "localSetCode": "SM30A",
       "localSetName": null,
       "collectorNumber": "060",
-      "collectorNumberDenominator": "066",
+      "collectorNumberDenominator": "080",
       "collectorNumberSortKey": "000000000060",
       "edition": null,
       "editionAssignmentStatus": "unresolved",
       "finishVerificationStatus": "pending",
       "finish": null,
       "finishFamily": null,
-      "finishGroupId": "finish-group-5fab8c0f-66a6-54db-a5ff-de0871fb6de4",
+      "finishGroupId": "finish-group-07fd30a5-5c04-5b3a-89e3-188c341a1713",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
       "cardSize": "unknown",
       "errorClass": null,
       "rarity": {
-        "display": "U",
-        "normalizedId": "uncommon",
+        "display": "B",
+        "normalizedId": null,
         "evidenceStatus": "source-backed",
         "claimRefs": [
-          "RARITYCLAIM:issue260:sv4K:060/066:Snorlax-Doll"
+          "RARITYCLAIM:issue260:SM30A:060/080:Snorlax-Incredible-Snore"
         ]
       },
       "completenessStatus": "positive-evidence-only",
       "releaseDate": null,
       "releaseDatePrecision": null,
       "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|sv000000000004k|000000000060|research:card-release:RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
-      "imageAssetId": "asset-4966ddb7-874e-550d-89c5-e77a6b009d07",
-      "imageScope": "card-release",
+      "releaseSortKey": "9999|LOCALIZATION:KR:ko|sm000000000030a|000000000060|research:card-release:RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+      "imageAssetId": null,
+      "imageScope": "unknown",
       "sourceLinks": [
-        "https://globalbunjang.com/product/407721760"
+        "https://pokemoncard.co.kr/cards/detail/BS2019018060"
       ],
       "evidenceLinks": [
-        "https://globalbunjang.com/product/407721760"
+        "https://pokemoncard.co.kr/cards/detail/BS2019018060"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+Doll+%E2%80%94+sv4K+060+%28research-placeholder%29&row-id=item-d189b75a-a8d7-5707-bc86-cc72266b0f28&card-name=Snorlax+Doll&set-code=sv4K&card-number=060&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-9ee6b061-0c62-5e52-8ae6-cf04159cbbd5",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Lazy-Press",
-      "workMappingState": "mapped-by-explicit-equivalence",
-      "setEditionId": "EDITION:KR:Korean:svI",
-      "localSetId": "LOCALSET:KR:svI",
-      "cardReleaseId": "RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:source-first:KR:svI:046/066:base"
-      ],
-      "localizationId": "LOCALIZATION:KR:ko",
-      "cardName": "Snorlax",
-      "localCardName": "잠만보",
-      "localSetCode": "svI",
-      "localSetName": null,
-      "collectorNumber": "046",
-      "collectorNumberDenominator": "066",
-      "collectorNumberSortKey": "000000000046",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-45659547-3a12-5d63-bdbc-dda9180c1872",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "fixed product",
-        "normalizedId": "fixed",
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:issue260:svI:046/066:Snorlax-Lazy-Press"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:KR:ko|svi|000000000046|research:card-release:RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
-      "imageAssetId": "asset-d3c18377-46ff-573b-924c-ea2fea20a7ad",
-      "imageScope": "card-release",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+svI+046+%28research-placeholder%29&row-id=item-9ee6b061-0c62-5e52-8ae6-cf04159cbbd5&card-name=Snorlax&set-code=svI&card-number=046&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+SM30A+060+%28research-placeholder%29&row-id=item-2784a253-55ef-51d0-a91f-fce89531f857&card-name=Snorlax&set-code=SM30A&card-number=060&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-972f6826-8bb6-5fa8-b9e4-c6714b5c5af6",
@@ -77493,20 +77327,6 @@
       "mimeType": "image/png",
       "imageScope": "legacy-product",
       "altTextBasis": "Snorlax — Vivid Portrayals - Obsidian; legacy-product",
-      "attribution": {
-        "rightsStatus": "third-party-rights-excluded-from-project-grants",
-        "licenceRef": "LICENSE.md",
-        "noticeRef": "THIRD_PARTY_NOTICES.md"
-      }
-    },
-    {
-      "assetId": "asset-32d61a3a-da78-59d5-b56f-b9334ba2fe70",
-      "path": "images/SM-P_297_Eevee___Snorlax_GX_470044.jpg",
-      "url": "https://m4s-ai.github.io/snoredex-data/images/SM-P_297_Eevee___Snorlax_GX_470044.jpg",
-      "sha256": "sha256:78e4f154d823433761fd1077c83d741566e484d99568b410739860168547762a",
-      "mimeType": "image/jpeg",
-      "imageScope": "legacy-product",
-      "altTextBasis": "Eevee & Snorlax GX — unknown local set; legacy-product",
       "attribution": {
         "rightsStatus": "third-party-rights-excluded-from-project-grants",
         "licenceRef": "LICENSE.md",
@@ -81154,20 +80974,6 @@
       }
     },
     {
-      "assetId": "asset-cebeb01c-1e1f-5925-92f7-db3411aa78b9",
-      "path": "images/SM-P_1_Snorlax_GX_468359.jpg",
-      "url": "https://m4s-ai.github.io/snoredex-data/images/SM-P_1_Snorlax_GX_468359.jpg",
-      "sha256": "sha256:37c8f182d8402f769ff8a95d1d0ee7d6995ae9a4d0a966710911e9d5d5753dc3",
-      "mimeType": "image/jpeg",
-      "imageScope": "legacy-product",
-      "altTextBasis": "Snorlax GX — unknown local set; legacy-product",
-      "attribution": {
-        "rightsStatus": "third-party-rights-excluded-from-project-grants",
-        "licenceRef": "LICENSE.md",
-        "noticeRef": "THIRD_PARTY_NOTICES.md"
-      }
-    },
-    {
       "assetId": "asset-cf6bf813-4638-5064-a8f8-3a67779fb8a6",
       "path": "verification/specimens/SPEC-0160.png",
       "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0160.png",
@@ -82275,32 +82081,32 @@
     }
   ],
   "qualitySummary": {
-    "authoritativeGraphFingerprint": "sha256:98e5870d67b6c4db642018b80f550279e076a1023d6dcb9170b61cf2b789f84e",
+    "authoritativeGraphFingerprint": "sha256:ed48fbbe97a1573e9bc7ed241f3de8ad02f056f97d0082f962b1a992dbf4f274",
     "authoritativeGraphSchemaVersion": "1.1.0",
     "discoveryTerminalState": "complete",
     "setDiscoveryRun": "20260830T132131Z",
-    "cardDiscoveryRun": "20260830T114212Z",
+    "cardDiscoveryRun": "20260901T073443Z",
     "counts": {
       "localizations": 16,
-      "localSets": 336,
-      "setEditions": 543,
+      "localSets": 338,
+      "setEditions": 545,
       "works": 40,
-      "items": 993,
-      "verifiedPrintings": 717,
-      "finishCandidates": 115,
-      "researchPlaceholders": 161,
-      "currentKnown": 717,
-      "research": 276,
-      "assets": 419
+      "items": 989,
+      "verifiedPrintings": 716,
+      "finishCandidates": 116,
+      "researchPlaceholders": 157,
+      "currentKnown": 716,
+      "research": 273,
+      "assets": 417
     },
     "predecessor": {
       "schema": "snoredex-checklist",
       "schemaVersion": "1.5.0",
-      "rows": 878
+      "rows": 883
     },
     "graphAccounting": {
-      "cardReleases": 639,
-      "physicalPrintings": 717
+      "cardReleases": 633,
+      "physicalPrintings": 716
     },
     "candidateProgressPolicy": {
       "progressClass": "research",

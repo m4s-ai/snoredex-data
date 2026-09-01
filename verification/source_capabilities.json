@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-manifest",
     "schemaVersion": "2.0.0",
-    "reviewedAt": "2026-08-30",
+    "reviewedAt": "2026-09-01",
     "policies": [
       "External providers record positive evidence only. A missing page, row, field, result, language, region, card, or finish remains unknown.",
       "Authority tier and card-existence capability never imply finish completeness or absence authority.",
@@ -955,11 +955,11 @@
       "providerId": "pokemon-card-korea",
       "label": "Pokémon Korea historical card details and official rules",
       "state": "incomplete",
-      "failureState": "Historical card-detail endpoints currently return HTTP 410; only retained exact positive observations are usable.",
+      "failureState": "Reachability is region/session dependent: these detail routes returned HTTP 200 with the user-provided VPN active on 2026-09-01; the earlier HTTP 410 observation remains an access-route result, never absence evidence.",
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-20",
-      "freshnessPolicy": "Preserve the exact indexed publisher fields and official rules statement; re-check access before adding another card, never reinterpret HTTP 410 as absence.",
+      "lastCheckedAt": "2026-09-01",
+      "freshnessPolicy": "Retain exact publisher fields and re-check region/session reachability before refresh; neither HTTP 410 nor an unavailable route is absence evidence.",
       "query": {
         "method": "GET",
         "endpoint": "https://pokemoncard.co.kr/cards/detail/{providerRecordId}",
@@ -2482,14 +2482,16 @@
           "coverage": {
             "localities": [
               "WEST",
-              "TW"
+              "TW",
+              "KR"
             ],
             "languages": [
               "MULTIPLE"
             ],
             "scripts": [
               "Latn",
-              "Hant"
+              "Hant",
+              "Hang"
             ],
             "productCategories": [
               "retailer-product",
@@ -2506,7 +2508,8 @@
             "product",
             "language",
             "specimen-existence",
-            "image"
+            "image",
+            "identity"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -3566,6 +3569,104 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "The image host is positive-only and does not publish a completeness contract."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "pokemon-card-korea-card-search",
+      "providerId": "pokemon-card-korea",
+      "label": "Pokémon Korea bounded exact Korean card-name catalogue",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/cards"
+        ],
+        "nonUrlEvidenceIds": [
+          "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
+        ]
+      },
+      "state": "incomplete",
+      "failureState": "The search POST requires a primed browser session and region-dependent access; only the retained bounded positive response is replayable.",
+      "accessMode": "browser",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-09-01",
+      "freshnessPolicy": "Rerun the exact 잠만보 card-name query through a primed browser session, retain every returned endpoint and detail, and treat missing or failed responses as unknown.",
+      "query": {
+        "method": "POST",
+        "endpoint": "https://pokemoncard.co.kr/v2/ajax2_dev2",
+        "parameters": [
+          "search_params=cardname",
+          "search_text=잠만보",
+          "browser session from GET /cards"
+        ],
+        "pagination": "30, 17 and 0 endpoint records were observed in consecutive batches; 47 endpoints normalized to 45 unique displayed set/number identities",
+        "expectedIdentifiers": [
+          "opaque provider record id",
+          "Korean card name",
+          "printed collector number",
+          "product membership",
+          "illustrator",
+          "publisher render"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher catalogue detail and render, not a physical card photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokemon-card-korea-card-search-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the retained 2026-09-01 exact 잠만보 response only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "image",
+            "language",
+            "card-existence",
+            "card-release",
+            "local-set-identifier",
+            "collector-number",
+            "rarity",
+            "set-membership",
+            "product-membership",
+            "illustrator"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The response is a positive exact-name frontier; omissions, route failures and zero results are unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-card-korea-snorlax-search-20260901",
+          "boundary": {
+            "outsideScope": [
+              "other Korean names",
+              "provider-wide historical completeness",
+              "physical finish",
+              "unreturned products"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Region/session dependence and alternate positive routes prevent any missing result from supporting absence."
           }
         }
       ]
@@ -4629,6 +4730,42 @@
         "pokemon-card-korea-image-positive"
       ],
       "outcome": "The retained exact publisher render positively identifies Korean Snorlax s10a 058/071 and its printed rarity; it establishes no physical finish."
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-snorlax-search-20260901",
+      "surfaceId": "pokemon-card-korea-card-search",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/v2/ajax2_dev2",
+      "queryParameters": {
+        "search_params": "cardname",
+        "search_text": "잠만보"
+      },
+      "retrievedAt": "2026-09-01",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "evidenceSnapshot": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+          "endpointRecordCount": 47,
+          "uniqueIdentityCount": 45,
+          "newPositivePrintIds": [
+            "KR:FXY:026/036:base",
+            "KR:SM30A:060/080:base"
+          ],
+          "absenceCapability": false,
+          "finishCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "잠만보",
+        "47 endpoint records",
+        "45 unique identities",
+        "FXY 026/036",
+        "SM30A 060/080"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-card-search-positive"
+      ],
+      "outcome": "The bounded exact-name response retained 47 official endpoint records representing 45 unique Korean identities, including FXY 026/036 and SM30A 060/080; no absence or finish conclusion is attached."
     }
   ]
 }

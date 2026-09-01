@@ -17,31 +17,44 @@ def main() -> int:
     temp = ROOT / "verification" / "cache" / "gate-handoff-test"
     temp.mkdir(parents=True, exist_ok=True)
     try:
+        committed_catalogue = temp / "collector_catalogue.json"
+        committed_catalogue.write_bytes(subprocess.check_output(
+            ["git", "show", f"{commit}:collector_catalogue.json"], cwd=ROOT,
+        ))
         linux = build_manifest(
             commit=commit, gate_level="L4", runner_os="Linux", workflow="test", run_id="test-run",
-            generated_at="2026-01-01T00:00:00Z",
+            generated_at="2026-01-01T00:00:00Z", catalogue=committed_catalogue,
         )
         windows = build_manifest(
             commit=commit, gate_level="L4", runner_os="Windows", workflow="test", run_id="test-run",
-            generated_at="2026-01-01T00:00:01Z",
+            generated_at="2026-01-01T00:00:01Z", catalogue=committed_catalogue,
         )
-        assert not validate_manifest(linux, expected_commit=commit, expected_gate="L4")
+        assert not validate_manifest(
+            linux, catalogue=committed_catalogue, expected_commit=commit, expected_gate="L4"
+        )
         (temp / "gate-manifest-Linux.json").write_text(json.dumps(linux), encoding="utf-8")
         (temp / "gate-manifest-Windows.json").write_text(json.dumps(windows), encoding="utf-8")
-        assert not validate_directory(temp, expected_commit=commit, expected_gate="L4", minimum=2)
+        assert not validate_directory(
+            temp, catalogue=committed_catalogue,
+            expected_commit=commit, expected_gate="L4", minimum=2,
+        )
 
         tampered = dict(linux)
         tampered["gateResult"] = "failed"
-        assert "gateResult is not passed" in validate_manifest(tampered, expected_commit=commit)
+        assert "gateResult is not passed" in validate_manifest(
+            tampered, catalogue=committed_catalogue, expected_commit=commit
+        )
         tampered = dict(linux)
         tampered["manifestFingerprint"] = manifest_fingerprint({**tampered, "gateResult": "passed"})
         tampered["catalogueFingerprint"] = "sha256:stale"
         assert "catalogueFingerprint differs from the checked-out catalogue" in validate_manifest(
-            tampered, expected_commit=commit, expected_gate="L4"
+            tampered, catalogue=committed_catalogue,
+            expected_commit=commit, expected_gate="L4"
         )
     finally:
         for path in temp.glob("gate-manifest-*.json"):
             path.unlink(missing_ok=True)
+        (temp / "collector_catalogue.json").unlink(missing_ok=True)
         try:
             temp.rmdir()
         except OSError:

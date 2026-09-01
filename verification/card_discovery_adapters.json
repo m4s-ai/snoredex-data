@@ -2,8 +2,8 @@
   "meta": {
     "schema": "snoredex-card-discovery-contract",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.18.0",
-    "reviewedAt": "2026-08-25",
+    "coverageVersion": "1.19.0",
+    "reviewedAt": "2026-09-01",
     "policies": [
       "Discovery starts from provider-native localized name queries and never from snorlax_cards.json, units.json, or the legacy Cardmarket candidate list.",
       "Every fetched detail record is retained before identity matching and reaches exactly one visible accounting bucket.",
@@ -358,6 +358,81 @@
           ],
           "retainedPrintIds": [
             "LATAM:POR LA:063/088:base"
+          ],
+          "positiveNameExclusions": []
+        }
+      ]
+    },
+    {
+      "adapterId": "pokemon-korea-reviewed-name-search",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "source-first-print-json",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-card-search",
+      "state": "active",
+      "listEndpointTemplate": "https://pokemoncard.co.kr/cards",
+      "detailEndpointTemplate": "https://pokemoncard.co.kr/cards/detail/{rawProviderId}",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "retained-print-id",
+      "pageSize": 45,
+      "slices": [
+        {
+          "sliceId": "pokemon-korea-snorlax-positive",
+          "coverageEdgeId": "pokemon-card-korea-card-search-positive",
+          "rawLocale": "ko",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "nameQueries": [
+            "잠만보"
+          ],
+          "retainedPrintIds": [
+            "KR:BS2:30/40:base",
+            "KR:BW7:055/070:base",
+            "KR:DP:006:base",
+            "KR:FXY:026/036:base",
+            "KR:S-P:101:base",
+            "KR:SM-P:017/SM-P:base",
+            "KR:SM-P:140:base",
+            "KR:SM30A:060/080:base",
+            "KR:XY-P:167:base",
+            "KR:XY10:057/078:base",
+            "KR:XY2:066/080:base",
+            "KR:m2a:136/193:base",
+            "KR:m3:062/080:base",
+            "KR:mC:567/742:base",
+            "KR:mC:568/742:base",
+            "KR:mC:569/742:base",
+            "KR:s10a:058/071:base",
+            "KR:s10a:077/071:base",
+            "KR:s10b:056/071:base",
+            "KR:s1H:045/060:base",
+            "KR:s1H:046/060:base",
+            "KR:s1H:066/060:base",
+            "KR:s2:077/096:base",
+            "KR:s4:084/100:base",
+            "KR:s8b:126/184:base",
+            "KR:sA:010/023:base",
+            "KR:sH:038/053:base",
+            "KR:sI:341/414:base",
+            "KR:sI:342/414:base",
+            "KR:sN:008/024:base",
+            "KR:sm10:076/095:base",
+            "KR:sm9:066/095:base",
+            "KR:sm9:106/095:base",
+            "KR:smL:038/051:base",
+            "KR:sv2a:143/165:base",
+            "KR:sv2a:181/165:base",
+            "KR:sv4K:060/066:base",
+            "KR:sv4a:145/190:base",
+            "KR:sv4a:310/190:base",
+            "KR:sv5a:051/066:base",
+            "KR:sv9:075/100:base",
+            "KR:svG:021/049:base",
+            "KR:svI:046/066:base",
+            "KR:svLN:010/022:base",
+            "KR:svM:094/175:base"
           ],
           "positiveNameExclusions": []
         }
@@ -964,13 +1039,13 @@
       "retryCondition": "Activate a Japanese slice after retained pagination fixtures and omission-preserving tests exist."
     },
     {
-      "gapId": "official-asia-kr-cn",
-      "track": "Korean and Simplified-Chinese card discovery",
+      "gapId": "official-asia-cn",
+      "track": "Simplified-Chinese card discovery",
       "providerId": "pokemon-card-asia",
       "surfaceId": "asia-card-search",
       "terminalState": "blocked-by-source",
-      "reason": "The official Asia card-search capability does not cover KR or CN.",
-      "retryCondition": "Activate only after a provider-native official or bounded specialist surface is registered in the capability graph."
+      "reason": "The official Asia card-search capability does not cover mainland China.",
+      "retryCondition": "Activate only after a provider-native official or bounded specialist Simplified-Chinese surface is registered in the capability graph."
     },
     {
       "gapId": "official-italian-archive-filter-coverage",
@@ -1061,6 +1136,15 @@
       "terminalState": "needs-evidence",
       "reason": "PokéCottage is a tier-3 positive confirmation source, but no active retained adapter currently snapshots its editable structured rows; every newly relevant row therefore requires an explicit retained source record before use.",
       "retryCondition": "Whenever a newly announced or released set contains Snorlax, inspect the PokéCottage Snorlax master list and matching set guide and retain the exact positive card, set, promo or named-variant rows. Apply each stated fact as tier-3 confirmation. For another Western language, retain the basis that identifies the matching release before carrying a shared fact; omissions and unstated alternatives remain unknown."
+    },
+    {
+      "gapId": "official-korean-historical-positive-frontier",
+      "track": "Korean historical card discovery beyond the retained exact-name slice",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-card-search",
+      "terminalState": "needs-evidence",
+      "reason": "The retained official Korean 잠만보 response accounts for 45 positive identities within that bounded response, while additional independently retained Korean releases and the region-dependent route prevent any provider-wide historical-completeness claim.",
+      "retryCondition": "Rerun the exact Korean name slice for positive deltas and retain any alternate positive routes; missing rows, failed routes and zero results remain unknown."
     }
   ]
 }

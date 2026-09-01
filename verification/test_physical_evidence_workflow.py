@@ -119,7 +119,6 @@ def main() -> None:
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {
         ("ID", "pokemon-card-asia"): 30,
-        ("KR", "pokemon-card-korea"): 19,
         ("TH", "pokemon-card-asia"): 25,
         ("TW", "pokemon-card-asia"): 40,
     }
@@ -137,6 +136,23 @@ def main() -> None:
         assert all(row["corroborated"] is False for row in official_prints), (
             "matching an existing graph identity is not independent corroboration"
         )
+    korean_official = [
+        row for row in source_first_prints
+        if (row["locality"], row["providerId"]) == ("KR", "pokemon-card-korea")
+    ]
+    assert len(korean_official) == 45
+    assert sum(row["corroborated"] is False for row in korean_official) == 21
+    new_korean = {
+        row["printId"]: row for row in korean_official
+        if row["printId"] in {
+            "KR:FXY:026/036:base", "KR:SM30A:060/080:base",
+        }
+    }
+    assert set(new_korean) == {
+        "KR:FXY:026/036:base", "KR:SM30A:060/080:base",
+    }
+    assert new_korean["KR:FXY:026/036:base"]["corroborated"] is False
+    assert new_korean["KR:SM30A:060/080:base"]["corroborated"] is False
     independently_corroborated_promos = {
         "KR:S-P:101:base", "KR:SM-P:140:base", "KR:XY-P:167:base",
         "TH:SM-P:083:base",
@@ -286,9 +302,27 @@ def main() -> None:
     registry_by_source = {
         row.get("canonicalUrl") or row["nonUrlEvidenceId"]: row for row in source_registry
     }
+    registry_by_source.update({
+        unquote(source_key): row
+        for source_key, row in list(registry_by_source.items())
+    })
+    registry_by_source.update({
+        source_key.rstrip("/") + "/": row
+        for source_key, row in list(registry_by_source.items())
+        if source_key.startswith("http")
+    })
     capability_by_source = {
         row["sourceKey"]: row for row in read("source_capability_graph.json")["sourceResolution"]
     }
+    capability_by_source.update({
+        unquote(source_key): row
+        for source_key, row in list(capability_by_source.items())
+    })
+    capability_by_source.update({
+        source_key.rstrip("/") + "/": row
+        for source_key, row in list(capability_by_source.items())
+        if source_key.startswith("http")
+    })
     for specimen_id, provider_id in database_provider_by_specimen.items():
         specimen = next(row for row in specimens if row["specimenId"] == specimen_id)
         canonical_source = unquote(specimen["photographSource"])

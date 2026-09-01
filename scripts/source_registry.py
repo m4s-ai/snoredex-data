@@ -751,6 +751,7 @@ def resolve_evidence_provider(
 
 SPECIMEN_SOURCE_TYPES = {
     "collection owner": "Owner-supplied physical card photograph",
+    "third-party retailer": "Retail listing",
     "third-party seller": "Seller listing photograph",
     "third-party scan archive": "Third-party scan archive",
 }

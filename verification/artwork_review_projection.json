@@ -4,17 +4,17 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-09-01",
-  "projectionVersion": "6dfdb0b1443694c318e44bf8eb8e1c6ed6039aa7c80c4c937099a5afa9bc7010",
+  "projectionVersion": "504fcb42d6f2348927f36420b9cc9978aadedde03520aaa29999ac6b8a5f6ea4",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 261,
+    "groups": 255,
     "mappedWorks": 39,
     "mappedAppearances": 181,
-    "unmappedReleases": 80,
-    "cardReleases": 639,
-    "physicalPrintings": 717,
+    "unmappedReleases": 74,
+    "cardReleases": 633,
+    "physicalPrintings": 716,
     "sourceObservations": 2357
   },
   "groups": [
@@ -1947,7 +1947,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-SM-P:unknown-local-set:via-297:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
           "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
           "cardKey": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
           "appearanceId": "APPEARANCE:IMAGE:801de99ae9c1cdf0b4dfb3b9",
@@ -1955,24 +1955,50 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-SM-P:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:SM-P",
+          "localSetCode": "SM-P",
+          "localNumber": "140",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0627"
+          ],
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0028",
+              "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "ripple",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Pokumon's exact Korean 140/SM-P record positively identifies the Full Art purchase promo with Ripple treatment.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0028",
+              "specimenIds": [
+                "SPEC-0028"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": "Tomokazu Komiya",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "ripple"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -1985,16 +2011,33 @@
               "contentHash": "78e4f154d823433761fd1077c83d741566e484d99568b410739860168547762a",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_191.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:SM-P:140:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:SM-P:140:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/SMP000000191",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 이브이&잠만보 GX SM-P 140/SM-P in 「태그볼트」 「나이트유니슨」 각 1BOX 구매자 프로모 카드, with illustrator Tomokazu Komiya and HP270. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "ee1551f245f631cbbbff93693298a6fbe015afa02e9c48e029b318203c495ffc",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_191.png?w=512"
+            },
+            {
               "observationId": "unit:U0627",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)",
-              "evidence": "Korean promo series article, set list row 140/SM-P Eevee & Snorlax-GX (Tag Bolt & Night Unison booster box purchase campaign). NOTE: Korean promo numbering is independent; Cardmarket files it under the Japanese number SM-P 297.",
-              "contentHash": "c486bc6205f0ef57a3e502e2b654e1c0a202450e1558abdcbc361f7757728502",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/SMP000000191",
+              "evidence": "Korean promo series article, set list row 140/SM-P Eevee & Snorlax-GX (Tag Bolt & Night Unison booster box purchase campaign). NOTE: Korean promo numbering is independent; Cardmarket files it under the Japanese number SM-P 297. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/SMP000000191 positively identifies 이브이&잠만보 GX 140/SM-P in 「태그볼트」 「나이트유니슨」 각 1BOX 구매자 프로모 카드 and credits Tomokazu Komiya. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "7ab8fe2f030187a6db35a4172abb4e4450e17374120b686528fabd2fbd6a81d1",
               "image": "images/SM-P_297_Eevee___Snorlax_GX_470044.jpg"
             }
           ]
@@ -2675,7 +2718,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
-            "artist": null,
+            "artist": "Mitsuhiro Arita",
             "variant": "V1",
             "finish": [],
             "foilPattern": [],
@@ -2691,25 +2734,33 @@
               "contentHash": "c72c0ce26d11348cbcbe0cb2b56cac002e4af7fabc657f8be541d29b2dddf36c",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_066.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sm9:066/095:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:sm9:066/095:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb",
-              "evidence": "The retained positive collectory record identifies Korean sm9 066/095 for Eevee & Snorlax GX and states rarity RR. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0449 is the positive physical/card-face observation.",
-              "contentHash": "94a4237a23564af6cdf5f397ae81edf9de479277030d8e746a39fefdb2f6e45e",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019001066",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 이브이&잠만보 GX sm9 066/095 in 썬&문 확장팩 「태그볼트」, with illustrator Mitsuhiro Arita and HP270. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "9ae61510167e0286cbf231fda4e3da1e345a66df52c7aacee38ecbfabadc1ff1",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_066.png?w=512"
             },
             {
               "observationId": "unit:U0413",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Tag Bolt (sm9) is listed with a Korean release as \"태그볼트\" in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0449 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "5bd5cdea50c34b29ba2866c9197b66209471fdd48b00c166f4bb66e313d2c92a",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019001066",
+              "evidence": "expansion Tag Bolt (sm9) is listed with a Korean release as \"태그볼트\" in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0449 shows the same localized card identity and corroborates this unit without replacing its primary provider. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2019001066 positively identifies 이브이&잠만보 GX 066/095 in 썬&문 확장팩 「태그볼트」 and credits Mitsuhiro Arita. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "766c0f60267c3017b42297f2a1ada86401b8f6b50e62f9f434716cd2253602cb",
               "image": "images/sm9_066_Eevee___Snorlax_GX_V1_558416.jpg"
             }
           ]
@@ -3706,7 +3757,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
-            "artist": null,
+            "artist": "5ban Graphics",
             "variant": "V2, base",
             "finish": [],
             "foilPattern": [],
@@ -3737,18 +3788,18 @@
               "observationId": "source-first:KR:sm9:106/095:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0250 shows sm9 106/095, including its Korean name, printed attacks and rarity SR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "5b3624ae98b264c92e1db26cb8b6fe349bc149e6c90786a654cf32f7df6c6e72",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019001106",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 이브이&잠만보 GX sm9 106/095 in 썬&문 확장팩 「태그볼트」, with illustrator 5ban Graphics and HP270. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "d1fc07bb7c63e219fb7390e2caaf8725a02fdcc70a20cc0a406c3eef27269327",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_106.png?w=512"
             },
             {
               "observationId": "unit:U0633",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Tag Bolt (sm9) is listed with a Korean release as \"태그볼트\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "aa9edde918de1c41f3dc0b52d96b272e3c0bc396baa4ba3482e31590e3f12e1f",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019001106",
+              "evidence": "expansion Tag Bolt (sm9) is listed with a Korean release as \"태그볼트\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2019001106 positively identifies 이브이&잠만보 GX 106/095 in 썬&문 확장팩 「태그볼트」 and credits 5ban Graphics. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "852257d071960be16b1fd859c71d6462513b14deed49d67b5df06c2ce8fce7a4",
               "image": "images/sm9_106_Eevee___Snorlax_GX_V2_558481.jpg"
             }
           ]
@@ -4053,7 +4104,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Hop's Snorlax",
-            "artist": null,
+            "artist": "GOSSAN",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -4069,25 +4120,33 @@
               "contentHash": "5f5075059aa9c0a5701ea1c2c4d3a538436bee6d0195f517ae3fbbe6fada8dfd",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_569.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:mC:569/742:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:mC:569/742:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec",
-              "evidence": "The retained positive collectory record identifies Korean mC 569/742 for Hop's Snorlax and states rarity N. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0460 is the positive physical/card-face observation.",
-              "contentHash": "2ec5cc2e99b1d48f4d02c02670310e8026e70eeb401d88c1609f5d82a78a2763",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026001569",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 호브의 잠만보 mC 569/742 in MEGA 「스타트 덱 100 배틀컬렉션」, with illustrator GOSSAN and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "48f7833bdd8d5c5d1cdc4f7ac3da42a2a8b4c24540e7a2bc3073aa3d3daa29a0",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_569.png?w=512"
             },
             {
               "observationId": "unit:U0763",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
-              "evidence": "Product article \"In other languages\": |ko=스타트 덱 100 배틀컬렉션 (\"Start Deck 100 Battle Collection\"), plus zh_yue/zh_cmn entries; fr/de/it/es/pt_br/id/th are present but EMPTY, i.e. deliberately not released there. External links include the Korean official shop pokemoncard.co.kr. Set list rows 567/742, 568/742 and 569/742 cover all three Cardmarket products.",
-              "contentHash": "aa1e57d5ef69b8842ab1e5ad8526f3e7e0269ff196e97981dc4878cffdf53a1a",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026001569",
+              "evidence": "Product article \"In other languages\": |ko=스타트 덱 100 배틀컬렉션 (\"Start Deck 100 Battle Collection\"), plus zh_yue/zh_cmn entries; fr/de/it/es/pt_br/id/th are present but EMPTY, i.e. deliberately not released there. External links include the Korean official shop pokemoncard.co.kr. Set list rows 567/742, 568/742 and 569/742 cover all three Cardmarket products. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2026001569 positively identifies 호브의 잠만보 569/742 in MEGA 「스타트 덱 100 배틀컬렉션」 and credits GOSSAN. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "4bc6085aa051ace43378ade3406502fb15834390a48355ef420356f3221dc21e",
               "image": "images/mC_569_Hop_s_Snorlax_863871.png"
             }
           ]
@@ -5393,7 +5452,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Hop's Snorlax",
-            "artist": null,
+            "artist": "OKACHEKE",
             "variant": "base",
             "finish": [
               "holo"
@@ -5411,6 +5470,14 @@
               "contentHash": "8cf770e83ff0014e3ea5378d38945d819dacc3ef72cd994658a025c4e4214740",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:m2a:136/193:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -5426,19 +5493,19 @@
             {
               "observationId": "source-first:KR:m2a:136/193:base",
               "kind": "source-first",
-              "provider": "seller-listing-photo",
-              "url": "https://globalbunjang.com/product/423487583",
-              "evidence": "The retained positive seller-listing-photo record identifies Korean m2a 136/193 for Hop's Snorlax and states rarity not stated. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0436 is the positive physical/card-face observation.",
-              "contentHash": "bc7616db99cbd981df2c8076b046891fef6284611b9990887a61eade3429b105",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2025015136",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 호브의 잠만보 m2a 136/193 in MEGA 하이클래스팩 「MEGA 드림 ex」, with illustrator OKACHEKE and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "207d71d8aec6c6446c3242ca7a06d5ef2931e8828973f431938aa590334b844f",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png?w=512"
             },
             {
               "observationId": "unit:U0127",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion MEGA Dream ex (m2a) is listed with a Korean release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "6d3ed16f17df2e838771275874191fa266df2bbe142a43b35feae5411ce64773",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2025015136",
+              "evidence": "expansion MEGA Dream ex (m2a) is listed with a Korean release in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2025015136 positively identifies 호브의 잠만보 136/193 in MEGA 하이클래스팩 「MEGA 드림 ex」 and credits OKACHEKE. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "791762fb834488a52a865059b39bae59f8856153b0d048733d50871367f62ff3",
               "image": "images/m2a_136_Hop_s_Snorlax_861379.png"
             }
           ]
@@ -8819,7 +8886,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Hop's Snorlax",
-            "artist": null,
+            "artist": "GOSSAN",
             "variant": "base",
             "finish": [
               "holo"
@@ -8837,6 +8904,14 @@
               "contentHash": "7bf0445f4d4c4b6f7ad2dab6bfaf866fd6173226826a446a81805408e2b0e006",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_075.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sv9:075/100:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -8852,19 +8927,19 @@
             {
               "observationId": "source-first:KR:sv9:075/100:base",
               "kind": "source-first",
-              "provider": "seller-listing-photo",
-              "url": "https://globalbunjang.com/product/423230156",
-              "evidence": "The retained positive seller-listing-photo record identifies Korean sv9 075/100 for Hop's Snorlax and states rarity R. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0444 is the positive physical/card-face observation.",
-              "contentHash": "581704621bc7f9793893177ce08e5ed040e9aeda5b29bfa2912938c0d4775e2f",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2025001075",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 호브의 잠만보 sv9 075/100 in 스칼렛&바이올렛 확장팩 「배틀파트너즈」, with illustrator GOSSAN and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "1b277e595b2af716353fc8ba8394d656e2450a0d01ef769cd8c545eba38c3c18",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_075.png?w=512"
             },
             {
               "observationId": "unit:U0370",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Battle Partners (sv9) is listed with a Korean release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "1036654b7b1ddc0eab534d47bc9abaf2f6c2531bca1eb59ac2a067638a1d4be0",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2025001075",
+              "evidence": "expansion Battle Partners (sv9) is listed with a Korean release in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2025001075 positively identifies 호브의 잠만보 075/100 in 스칼렛&바이올렛 확장팩 「배틀파트너즈」 and credits GOSSAN. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "d851c51ed1d54fdc68596ff5f477e0a4002616e274fe90b047c3e59aefee28c7",
               "image": "images/sv9_075_Hop_s_Snorlax_807662.jpg"
             }
           ]
@@ -11803,7 +11878,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "N-DESIGN Inc.",
             "variant": "base",
             "finish": [
               "holo"
@@ -11846,17 +11921,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2022010056",
-              "evidence": "The retained exact Korean card image SPEC-0238 shows s10b 056/071, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "0ef78bae78710b80cb6123f0c88c8b31798fff5e5fe18f3e83b19965958bc44f",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 s10b 056/071 in 소드&실드 강화 확장팩 「Pokémon GO」, with illustrator N-DESIGN Inc. and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "eb06c304e6328ff1f188853a6e6f9f03e89cb740464bd78eade675972564b484",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512"
             },
             {
               "observationId": "unit:U0202",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
-              "evidence": "official Korean set name |ko=Pokémon GO; Japanese set list row 056/071 Snorlax, Colorless, R",
-              "contentHash": "eddf1ab7ee28dee7b657fa2e053f85c53c82ca49b22f92958c7ffd8f6f907738",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022010056",
+              "evidence": "official Korean set name |ko=Pokémon GO; Japanese set list row 056/071 Snorlax, Colorless, R OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2022010056 positively identifies 잠만보 056/071 in 소드&실드 강화 확장팩 「Pokémon GO」 and credits N-DESIGN Inc.. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "6784762546e5fca97e97aee3d5751ef1f2d7cb89f640cb44bb9fde68e25a2ffd",
               "image": "images/s10b_056_Snorlax_664610.jpg"
             }
           ]
@@ -14872,7 +14947,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "5ban Graphics",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -14888,6 +14963,14 @@
               "contentHash": "68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW7/bw7_055.jpg?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:BW7:055/070:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -14896,17 +14979,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2013001055",
-              "evidence": "The retained positive pokemon-card-korea record identifies Korean BW7 055/070 for Snorlax and states rarity U. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0442 is the positive physical/card-face observation.",
-              "contentHash": "ec3f5201cd7bf7657373ff09f1fe4a1a9c5f58cf1db0dbb3d02f83ac17cadd06",
-              "image": null
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 BW7 055/070 in BW 확장팩 제7탄 「플라스마게일」, with illustrator 5ban Graphics and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "fc3464232807ef71bfc2e8e4a4f34b415fd1a37ab275bed370228e0c78f4d74b",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW7/bw7_055.jpg?w=512"
             },
             {
               "observationId": "unit:U0579",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Plasma Gale (BW7) is listed with a Korean release as \"플라스마게일\" in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0442 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "0fd2c882c95a51c3a7591b0766f4612e29be9f61f63baf89b31faa01bfa49d04",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2013001055",
+              "evidence": "expansion Plasma Gale (BW7) is listed with a Korean release as \"플라스마게일\" in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0442 shows the same localized card identity and corroborates this unit without replacing its primary provider. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2013001055 positively identifies 잠만보 055/070 in BW 확장팩 제7탄 「플라스마게일」 and credits 5ban Graphics. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "2f6c82d6d448d985a03486f798e0d0aa1fe39b37b5f44f8ae37867333c2956ab",
               "image": "images/BW7_055_Snorlax_568344.jpg"
             }
           ]
@@ -15039,7 +15122,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Souichirou Gunjima",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -15055,25 +15138,33 @@
               "contentHash": "252c7f1cb4fb955aa19561fcdecd39a0a9ebf34225a9f2d90ad821184c657669",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_567.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:mC:567/742:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:mC:567/742:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d",
-              "evidence": "The retained positive collectory record identifies Korean mC 567/742 for Snorlax and states rarity N. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0458 is the positive physical/card-face observation.",
-              "contentHash": "ac0769f6517f387130063dbb0a08e962a6fb1d0310e3b097b2b0cb03cf633f54",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026001567",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 mC 567/742 in MEGA 「스타트 덱 100 배틀컬렉션」, with illustrator Souichirou Gunjima and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "a62f9c30d6d356bb7c32aa896a8415465bc7e94fc6faff306b63695cd02e5ea8",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_567.png?w=512"
             },
             {
               "observationId": "unit:U0683",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
-              "evidence": "Product article \"In other languages\": |ko=스타트 덱 100 배틀컬렉션 (\"Start Deck 100 Battle Collection\"), plus zh_yue/zh_cmn entries; fr/de/it/es/pt_br/id/th are present but EMPTY, i.e. deliberately not released there. External links include the Korean official shop pokemoncard.co.kr. Set list rows 567/742, 568/742 and 569/742 cover all three Cardmarket products.",
-              "contentHash": "7437b2336c8a01ed43c7b5b79f729cdc31c94213a11990c2352f4b6676a45f6e",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026001567",
+              "evidence": "Product article \"In other languages\": |ko=스타트 덱 100 배틀컬렉션 (\"Start Deck 100 Battle Collection\"), plus zh_yue/zh_cmn entries; fr/de/it/es/pt_br/id/th are present but EMPTY, i.e. deliberately not released there. External links include the Korean official shop pokemoncard.co.kr. Set list rows 567/742, 568/742 and 569/742 cover all three Cardmarket products. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2026001567 positively identifies 잠만보 567/742 in MEGA 「스타트 덱 100 배틀컬렉션」 and credits Souichirou Gunjima. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "f140aee4620cefc786e3aae1772d550531cc8b0e6cacb1afaa01bff04a7b8e20",
               "image": "images/mC_567_Snorlax_863869.png"
             }
           ]
@@ -16643,7 +16734,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Souichirou Gunjima",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -16659,6 +16750,14 @@
               "contentHash": "566f83e46e3f2259bc468d9d9c2e0fcc6bfa7d0d3af66434ac66f0329cbc3bc2",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5a/SV5a_051.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sv5a:051/066:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -16667,17 +16766,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2024007051",
-              "evidence": "The retained positive pokemon-card-korea record identifies Korean sv5a 051/066 for Snorlax and states rarity U. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0441 is the positive physical/card-face observation.",
-              "contentHash": "8ac545480aa7b3aded2925337269a694a8c279e180d9631ff903b84f57b1cf64",
-              "image": null
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv5a 051/066 in 스칼렛&바이올렛 강화 확장팩 「크림슨헤이즈」, with illustrator Souichirou Gunjima and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "5e7ee9c763d6fa71582cd7ba62a2f32e575b055fde5e6b1100a9d7126d7a17bf",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5a/SV5a_051.png?w=512"
             },
             {
               "observationId": "unit:U0233",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Crimson Haze (sv5a) is listed with a Korean release in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0441 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "e72dcb95f4bfbdf7ee68d58c9c7f2f75b891152c4a90574e35058779abf756eb",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024007051",
+              "evidence": "expansion Crimson Haze (sv5a) is listed with a Korean release in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0441 shows the same localized card identity and corroborates this unit without replacing its primary provider. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2024007051 positively identifies 잠만보 051/066 in 스칼렛&바이올렛 강화 확장팩 「크림슨헤이즈」 and credits Souichirou Gunjima. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "da7c3ad602bcb61072ddb90f2298750fe92d24d9a54e13853e7704ac7e1d87c9",
               "image": "images/sv5a_051_Snorlax_761511.jpg"
             }
           ]
@@ -17171,7 +17270,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Eri Yamaki",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -17202,18 +17301,18 @@
               "observationId": "source-first:KR:s2:077/096:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0239 shows s2 077/096, including its Korean name, printed attacks and rarity U. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "38001f4fa27efc0b3d4cca359fff271f5ffa4a9c26d9c607e3095284a94f0252",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020005077",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 s2 077/096 in 소드&실드 확장팩 「반역크래시」, with illustrator Eri Yamaki and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "70f1e633bfcdfc73b18f80fa84938d7e1d8d429e31cb0086c02afaddf24edf0e",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512"
             },
             {
               "observationId": "unit:U0532",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Rebellion Crash (s2) is listed with a Korean release as \"반역크래시\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "731d820c292a9f6cd3e313a6ab27191c52b3938622c34aa49be02194714ecb37",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020005077",
+              "evidence": "expansion Rebellion Crash (s2) is listed with a Korean release as \"반역크래시\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2020005077 positively identifies 잠만보 077/096 in 소드&실드 확장팩 「반역크래시」 and credits Eri Yamaki. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "39500b1b7837e9828838a527a50d5150e09341d858963c77d4cfc5137d74f2d2",
               "image": "images/s2_77_Snorlax_464294.jpg"
             }
           ]
@@ -20043,7 +20142,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sv4K:unknown-local-set:via-059:Snorlax-Doll:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
           "workId": "WORK:Snorlax-Doll",
           "cardKey": "Snorlax-Doll",
           "appearanceId": "APPEARANCE:IMAGE:2fc7743e1508c53cbbe5a8dd",
@@ -20051,54 +20150,25 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sv4K:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sv4K",
+          "localSetCode": "sv4K",
+          "localNumber": "060/066",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0260"
+          ],
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0482-P01",
-              "semanticPrintingId": "PRINTING:3c0397ca4de11678c44e8a48",
-              "cardReleaseId": "RELEASE:KR:Korean:via-sv4K:unknown-local-set:via-059:Snorlax-Doll:unknown-local-id",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0482",
-              "sourcePrintingId": "F0482-P01",
-              "establishingClaimId": "CLAIM:finish:F0482-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/ko/cards/SV4K-059",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "SV4K-059 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax Doll",
-            "artist": null,
+            "artist": "AYUMI ODASHIMA",
             "variant": "base",
-            "finish": [
-              "non-holo"
-            ],
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -20112,34 +20182,33 @@
               "contentHash": "b862c16e4ac65578c73baf61ead4f8b8b7808f77f474fb3c13128ca8ff59d1a2",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4K/SV4K_060.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sv4K:060/066:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0482-P01:0:1d8d688a993ccb01",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/ko/cards/SV4K-059",
-              "evidence": "SV4K-059 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "c13079c8b64c480479f43c1499aa6f73e3a0a2fc886b63a2d59b9313f2f00eb2",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0482-P01:1:da003a5877402d68",
-              "kind": "finish",
-              "provider": "Cardmarket catalogue hint (not external verification)",
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "4a2351207c1da092ecf1dda70d0b60fda5536a13fb352214ae7c180df928d355",
-              "image": null
+              "observationId": "source-first:KR:sv4K:060/066:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2023021060",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보인형 sv4K 060/066 in 스칼렛&바이올렛 확장팩 「고대의 포효」, with illustrator AYUMI ODASHIMA. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "9a891c2017d9307c9975a660eba7b546119bb2839f1677be3586356cb50b0813",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4K/SV4K_060.png?w=512"
             },
             {
               "observationId": "unit:U0260",
               "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/ko/cards/SV4K-059",
-              "evidence": "ko card '대지의 그릇' id=SV4K-059",
-              "contentHash": "501ba19252e2d3f9dfc5f6439fb9dcfbf0d22a82705779e7b36a45133cd751ff",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2023021060",
+              "evidence": "ko card '대지의 그릇' id=SV4K-059 OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2023021060 positively identifies 잠만보인형 060/066 in 스칼렛&바이올렛 확장팩 「고대의 포효」 and credits AYUMI ODASHIMA. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "e92cc1680820e5e4a76529d74a601967c79039be5fee1300418914cffb40992e",
               "image": "images/sv4K_059_Snorlax_Doll_741448.jpg"
             }
           ]
@@ -23616,7 +23685,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-SM-P:unknown-local-set:via-1:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
           "workId": "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
           "cardKey": "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
           "appearanceId": "APPEARANCE:IMAGE:fcafc9025c0b580abdb61d15",
@@ -23624,13 +23693,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-SM-P:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:SM-P",
+          "localSetCode": "SM-P",
+          "localNumber": "017/SM-P",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0379"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -23654,16 +23725,33 @@
               "contentHash": "37c8f182d8402f769ff8a95d1d0ee7d6995ae9a4d0a966710911e9d5d5753dc3",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_017.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:SM-P:017/SM-P:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:SM-P:017/SM-P:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/SMP0000000017",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 GX SM-P 017/SM-P in 썬&문 프로모 카드 포켓몬 카드 게임 썬&문 카드 박스 세트 「잠만보 GX」, with illustrator 5ban Graphics and HP190. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "75e3701f8788e03b4c75340b6fd9bbb0966a3e9433d0ad86df407585a39fc3da",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_017.png?w=512"
+            },
+            {
               "observationId": "unit:U0379",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)",
-              "evidence": "Korean promo series article, set list row 017/SM-P Snorlax-GX (Snorlax-GX Card Box Set). NOTE: the Korean promo series numbers independently, so the Korean printing of this card is 017/SM-P while Cardmarket files it under the Japanese number SM-P 1.",
-              "contentHash": "5752fed19dce6f56422f0e63a3ca62baf1cfa6bdb6b611760c594e002e946662",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/SMP0000000017",
+              "evidence": "Korean promo series article, set list row 017/SM-P Snorlax-GX (Snorlax-GX Card Box Set). NOTE: the Korean promo series numbers independently, so the Korean printing of this card is 017/SM-P while Cardmarket files it under the Japanese number SM-P 1. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/SMP0000000017 positively identifies 잠만보 GX 017/SM-P in 썬&문 프로모 카드 포켓몬 카드 게임 썬&문 카드 박스 세트 「잠만보 GX」 and credits 5ban Graphics. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "4e3ffdafcb7a6af44b37115bb7c8853b866130676e1db9df4c4787ac31e0ff1e",
               "image": "images/SM-P_1_Snorlax_GX_468359.jpg"
             }
           ]
@@ -26685,7 +26773,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Narumi Sato",
             "variant": "base",
             "finish": [
               "holo"
@@ -26728,17 +26816,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2022001126",
-              "evidence": "The retained exact Korean card image SPEC-0241 shows s8b 126/184, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "ad5bbdb6cb9359f8a383efe30bf3edf2b9166e48b5fa2baca821df34ace902d7",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 s8b 126/184 in 소드&실드 하이클래스팩 「VMAX 클라이맥스」, with illustrator Narumi Sato and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "bf15b34af55b7d73a82243b427d797b4a4ece616925d320fe75d579eaee2fa9d",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512"
             },
             {
               "observationId": "unit:U0173",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion VMAX Climax (s8b) is listed with a Korean release as \"VMAX 클라이맥스\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "16cfa406a1fefecff0deaa9d52619a7b0f7f4cf9f955222303eca9f1f6cf45ef",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022001126",
+              "evidence": "expansion VMAX Climax (s8b) is listed with a Korean release as \"VMAX 클라이맥스\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2022001126 positively identifies 잠만보 126/184 in 소드&실드 하이클래스팩 「VMAX 클라이맥스」 and credits Narumi Sato. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "37478d0a8ee54ab0d44651bff8f02ac6257bdb89324abc45c0f275a1bc0620ab",
               "image": "images/s8b_126_Snorlax_586642.jpg"
             }
           ]
@@ -28468,7 +28556,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Atsuko Nishida",
             "variant": "base",
             "finish": [
               "holo"
@@ -28511,17 +28599,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2020014084",
-              "evidence": "The retained exact Korean card image SPEC-0240 shows s4 084/100, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "ded67b48c2ce39771c58bd2f79d67d0c9a3de332bd73b704945166e361950beb",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 s4 084/100 in 소드&실드 확장팩 「앙천의 볼트태클」, with illustrator Atsuko Nishida and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "ae03413adffcd8bf8c6a5d2117f4d81c6b38c891a3c3e27b5c6658074ee142fb",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512"
             },
             {
               "observationId": "unit:U0291",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_(TCG)",
-              "evidence": "official Korean set name |ko=앙천의 볼트태클; Japanese set list row 084/100 Snorlax, Colorless, R. Cardmarket \"Shocking Volt Tackle\" = Bulbapedia \"Amazing Volt Tackle\".",
-              "contentHash": "74beb2aade3017c6f362aa44c4220b72dccb6d44854be6574b58fb4e0ae882ba",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020014084",
+              "evidence": "official Korean set name |ko=앙천의 볼트태클; Japanese set list row 084/100 Snorlax, Colorless, R. Cardmarket \"Shocking Volt Tackle\" = Bulbapedia \"Amazing Volt Tackle\". OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2020014084 positively identifies 잠만보 084/100 in 소드&실드 확장팩 「앙천의 볼트태클」 and credits Atsuko Nishida. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "488fc949b7682c53cba0658b54a3e9986a5f65f0ba788e650247dbdf33fac53e",
               "image": "images/s4_84_Snorlax_499775.jpg"
             }
           ]
@@ -29127,7 +29215,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Toshinao Aoki",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -29143,25 +29231,33 @@
               "contentHash": "6f625dcd75cd758b878c19107973659be1b1a0a0fef6af0b351faf87a1e43e05",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M3/M3_062.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:m3:062/080:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:m3:062/080:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/b6401ed6-1c9a-4703-9b55-762ac6e6d33e",
-              "evidence": "The retained positive collectory record identifies Korean m3 062/080 for Snorlax and states rarity C. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0443 is the positive physical/card-face observation.",
-              "contentHash": "51345bb2b6b1638c2ca9067517a3f338aef36bf274b2b49044e612e82445d67c",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026002062",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 m3 062/080 in MEGA 확장팩 「니힐제로」, with illustrator Toshinao Aoki and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "1394fa7e86f43eb30584c12c33771c29fc69cb8750d17e11401fa51826626cb6",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M3/M3_062.png?w=512"
             },
             {
               "observationId": "unit:U0257",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Nihil Zero (m3) is listed with a Korean release in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0443 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "36bd2a3ebd48c00b7344b79e14680e8f56ad61fcf0116d21c6c82a3f3ee1552c",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026002062",
+              "evidence": "expansion Nihil Zero (m3) is listed with a Korean release in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0443 shows the same localized card identity and corroborates this unit without replacing its primary provider. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2026002062 positively identifies 잠만보 062/080 in MEGA 확장팩 「니힐제로」 and credits Toshinao Aoki. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "be0773252617e027343be78c27350aba6f600ad1db44f3c95298d0159566d993",
               "image": "images/m3_062_Snorlax_868040.png"
             }
           ]
@@ -30964,7 +31060,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Oswaldo KATO",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -30980,25 +31076,33 @@
               "contentHash": "2b0932810746ba554d46970bda99b559ae94e8fed87f50448c0faed554b99730",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SH/SH_013_L.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sH:038/053:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:sH:038/053:base",
               "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
-              "evidence": "The retained positive bulbapedia record identifies Korean sH 038/053 for Snorlax and states rarity fixed product. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. This is catalogue/set-list evidence only; no physical finish or appearance is inferred.",
-              "contentHash": "68d69d350f0c3d299608b62c8518774fee0ac6d00ede5cc45810b4dea790d25d",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2021013039",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sH 038/053 in 소드&실드 「패밀리 포켓몬 카드 게임」, with illustrator Oswaldo KATO and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "61e27e8e384b809ac7091aaa9846fc24c7026a95f2958bd69bc7dad06b834506",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SH/SH_013_L.png?w=512"
             },
             {
               "observationId": "unit:U0641",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
-              "evidence": "official Korean product name |ko=패밀리 포켓몬 카드 게임; set list row 038/053 Snorlax, Colorless",
-              "contentHash": "1a86c40e75b96d29f41254487216ed92997b4d63600dc8a19b077289209cd671",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2021013039",
+              "evidence": "official Korean product name |ko=패밀리 포켓몬 카드 게임; set list row 038/053 Snorlax, Colorless OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2021013039 positively identifies 잠만보 038/053 in 소드&실드 「패밀리 포켓몬 카드 게임」 and credits Oswaldo KATO. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "7cc86b247029da351a99613df3ad33350ef04619f754a34dd2bab97c392e2752",
               "image": "images/sH_038_Snorlax_564222.jpg"
             }
           ]
@@ -31236,7 +31340,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sI100:unknown-local-set:via-341:Snorlax-Heavy-Impact:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
           "workId": "WORK:Snorlax-Heavy-Impact",
           "cardKey": "Snorlax-Heavy-Impact",
           "appearanceId": "APPEARANCE:IMAGE:46d3d03d96127c3b1b1b7e8b",
@@ -31244,25 +31348,26 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sI100:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sI",
+          "localSetCode": "sI",
+          "localNumber": "341/414",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0653"
+          ],
           "legacyVariants": [
-            "V1"
+            "V1",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Oswaldo KATO",
-            "variant": "V1",
-            "finish": [
-              "reverse-holo"
-            ],
+            "variant": "V1, base",
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -31276,16 +31381,33 @@
               "contentHash": "47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sI:341/414:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:sI:341/414:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022003341",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sI 341/414 in 소드&실드 「스타트 덱 100」, with illustrator Oswaldo KATO and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "fe15c79d9b3c12590da817a34f4dc86b6b4c1a6c0440ffe8dde2f5d071ce77d2",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"
+            },
+            {
               "observationId": "unit:U0653",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
-              "evidence": "Infobox release field: \"Japanese: December 17, 2021 / Traditional Chinese: February 18, 2022 / Korean: April 23, 2022 / Simplified Chinese: May 17, 2024\". CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Setlist/entry|341/414|E|{{TCG ID|Start Deck 100|Snorlax|341}}|Colorless||}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged.",
-              "contentHash": "82eeb5eb689f57be32566f30e97b950a44435cfd8ed4c9fa7ddd04613e6d18c6",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022003341",
+              "evidence": "Infobox release field: \"Japanese: December 17, 2021 / Traditional Chinese: February 18, 2022 / Korean: April 23, 2022 / Simplified Chinese: May 17, 2024\". CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Setlist/entry|341/414|E|{{TCG ID|Start Deck 100|Snorlax|341}}|Colorless||}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2022003341 positively identifies 잠만보 341/414 in 소드&실드 「스타트 덱 100」 and credits Oswaldo KATO. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "ec5d2bca88a85dc790211828ad5ee5c7ae990c9a661a9f7fa62dabad4a67cba1",
               "image": "images/sI100_341_Snorlax_V1_588051.jpg"
             }
           ]
@@ -33958,7 +34080,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Oswaldo KATO",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -33989,18 +34111,18 @@
               "observationId": "source-first:KR:sN:008/024:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0247 shows sN 008/024, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "55f95d83a82987a0fef8df17a41db4fbaa7f36125a34aa5c6612f482fb57177f",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022009008",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sN 008/024 in 소드 & 실드 「스타트 덱 100 피카츄 V & 이브이 V」, with illustrator Oswaldo KATO and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "932e34e2f518fa90fa8f6fddff63fa436e91539f8e9c2de6367497526b9573e4",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512"
             },
             {
               "observationId": "unit:U0770",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
-              "evidence": "Infobox release field: \"Japanese: March 2022 / Korean: May 27, 2022 / Traditional Chinese: October 2, 2022\". Article text: \"The deck was later released in South Korea on May 27, 2022 under the name Start Deck 100 「피카츄 V & 이브이 V」\". CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{halfdecklist/entry|008/024|E|{{TCG ID|Start Deck 100 CoroCoro Comic Version|Snorlax|8}}|Colorless||1}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged.",
-              "contentHash": "f914e4e3cb130d674ecbd08af6aee2ae63d740884e73300a683ccb88a9f47a24",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022009008",
+              "evidence": "Infobox release field: \"Japanese: March 2022 / Korean: May 27, 2022 / Traditional Chinese: October 2, 2022\". Article text: \"The deck was later released in South Korea on May 27, 2022 under the name Start Deck 100 「피카츄 V & 이브이 V」\". CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{halfdecklist/entry|008/024|E|{{TCG ID|Start Deck 100 CoroCoro Comic Version|Snorlax|8}}|Colorless||1}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2022009008 positively identifies 잠만보 008/024 in 소드 & 실드 「스타트 덱 100 피카츄 V & 이브이 V」 and credits Oswaldo KATO. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "0159b7802c68ff23c7d9b67a34059b9882c5aa1b7bf1e0958eca69468e9be149",
               "image": "images/sN_008_Snorlax_606631.jpg"
             }
           ]
@@ -34238,7 +34360,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-sI100:unknown-local-set:via-342:Snorlax-Heavy-Impact:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
           "workId": "WORK:Snorlax-Heavy-Impact",
           "cardKey": "Snorlax-Heavy-Impact",
           "appearanceId": "APPEARANCE:IMAGE:e00fac2f6bbbd4899abafde2",
@@ -34246,25 +34368,26 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-sI100:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:sI",
+          "localSetCode": "sI",
+          "localNumber": "342/414",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0657"
+          ],
           "legacyVariants": [
-            "V2"
+            "V2",
+            "base"
           ],
           "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Asako Ito",
-            "variant": "V2",
-            "finish": [
-              "reverse-holo"
-            ],
+            "variant": "V2, base",
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -34278,16 +34401,33 @@
               "contentHash": "c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sI:342/414:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:sI:342/414:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022003342",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sI 342/414 in 소드&실드 「스타트 덱 100」, with illustrator Asako Ito and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "699c802efff5e68057c3edc94705b3ed18853c87169dd9d6c2aac0f794f7e4cc",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
+            },
+            {
               "observationId": "unit:U0657",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
-              "evidence": "Infobox release field: \"Japanese: December 17, 2021 / Traditional Chinese: February 18, 2022 / Korean: April 23, 2022 / Simplified Chinese: May 17, 2024\". CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Setlist/entry|342/414|E|{{TCG ID|Start Deck 100|Snorlax|342}}|Colorless||}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged.",
-              "contentHash": "afc5ebf70753c802e8c2efb1d99bf61ba17d78bb2c909872d7cdc1c1b343c4e4",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022003342",
+              "evidence": "Infobox release field: \"Japanese: December 17, 2021 / Traditional Chinese: February 18, 2022 / Korean: April 23, 2022 / Simplified Chinese: May 17, 2024\". CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Setlist/entry|342/414|E|{{TCG ID|Start Deck 100|Snorlax|342}}|Colorless||}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2022003342 positively identifies 잠만보 342/414 in 소드&실드 「스타트 덱 100」 and credits Asako Ito. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "e438511cea838203c1138d56a048f49bacfc3b872b381b738251b49ef0d1dc6e",
               "image": "images/sI100_342_Snorlax_V2_588052.jpg"
             }
           ]
@@ -34458,7 +34598,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Akira Komayama",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -34476,7 +34616,7 @@
               "reviewable": true
             },
             {
-              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML_/SML_038.png?w=512",
               "label": "publisher card image",
               "observationId": "source-first:KR:smL:038/051:base",
               "contentHash": null,
@@ -34490,17 +34630,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
-              "evidence": "The retained exact Korean card image SPEC-0249 shows smL 038/051, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "03059299552ea0882459b8ca42e4b1fbed9aebeb94c7a141c87695d0083fe34e",
-              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512"
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 smL 038/051 in 패밀리 포켓몬 카드 게임 「뮤츠 GX 덱」, with illustrator Akira Komayama and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "7ad2d4b0d27b15c85ed05ada1395471e22b4a537960a2bed16561be6578b24ea",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML_/SML_038.png?w=512"
             },
             {
               "observationId": "unit:U0583",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_Family_Pok%C3%A9mon_Card_Game_(TCG)",
-              "evidence": "official Korean product name |ko=패밀리 포켓몬 카드 게임 (\"Family Pokémon Card Game\"); set list row 038/051 Snorlax, Colorless",
-              "contentHash": "302f12c2af6382a143a544ec65fe468555b0eab1b07b8f79d64277e2301019ff",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
+              "evidence": "official Korean product name |ko=패밀리 포켓몬 카드 게임 (\"Family Pokémon Card Game\"); set list row 038/051 Snorlax, Colorless OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2019006059 positively identifies 잠만보 038/051 in 패밀리 포켓몬 카드 게임 「뮤츠 GX 덱」 and credits Akira Komayama. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "22fbb4dd0e2c8becc2c1503c25e98c43baea424e44e19bdba494c8cdf1fbc487",
               "image": "images/smL_038_Snorlax_564732.jpg"
             }
           ]
@@ -39786,7 +39926,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "kanahei",
             "variant": "base",
             "finish": [
               "holo"
@@ -39837,18 +39977,18 @@
               "observationId": "source-first:KR:sm10:076/095:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0248 shows sm10 076/095, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "c09dc0d7b363fe85a56745e974a791d44c689e00199099a1740257071fe748fe",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019007076",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sm10 076/095 in 썬&문 확장팩 「더블블레이즈」, with illustrator kanahei and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "9b115de122964e2912905a326b410044a75b88eb46a3f4737a6f739a01d1cc02",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM10/SM10_076.png?w=512"
             },
             {
               "observationId": "unit:U0264",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Double Blaze (sm10) is listed with a Korean release as \"더블블레이즈\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "70947931952968af954bbcce0310db3622cb8cbab7dc2375bf4e758adc1f0d8c",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019007076",
+              "evidence": "expansion Double Blaze (sm10) is listed with a Korean release as \"더블블레이즈\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2019007076 positively identifies 잠만보 076/095 in 썬&문 확장팩 「더블블레이즈」 and credits kanahei. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "a79edc940083868e7e493c2c8bf7e4d2cdc38043f5e3985014c23740873f7155",
               "image": "images/sm10_076_Snorlax_557434.jpg"
             }
           ]
@@ -39975,7 +40115,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-svIba:unknown-local-set:via-046:Snorlax-Lazy-Press:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
           "workId": "WORK:Snorlax-Lazy-Press",
           "cardKey": "Snorlax-Lazy-Press",
           "appearanceId": "APPEARANCE:IMAGE:5e7faa4bd89c7aee16613630",
@@ -39983,13 +40123,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-svIba:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:svI",
+          "localSetCode": "svI",
+          "localNumber": "046/066",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0648"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -39997,7 +40139,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Po-Suzuki",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -40013,16 +40155,33 @@
               "contentHash": "192b23d48e87938111c288ee93273337f89c12741346443ffd8bcaea695c3797",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVI/SVI_046_L.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:svI:046/066:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:svI:046/066:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024006084",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 svI 046/066 in 스칼렛&바이올렛 「배틀 아카데미」, with illustrator Po-Suzuki and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "5fc0a03530eae7c4259750544fffad0d5f284d8783a9d7e3a50805cb27bf3374",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVI/SVI_046_L.png?w=512"
+            },
+            {
               "observationId": "unit:U0648",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Card_Game_Battle_Academy_(TCG)",
-              "evidence": "official Korean product name |ko=배틀 아카데미; set list row 046/066 Snorlax, Colorless",
-              "contentHash": "c41e6d3c665b191126bfb422e44600dbf2c7ced7ad2f1acd4041d600a1348ad3",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024006084",
+              "evidence": "official Korean product name |ko=배틀 아카데미; set list row 046/066 Snorlax, Colorless OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2024006084 positively identifies 잠만보 046/066 in 스칼렛&바이올렛 「배틀 아카데미」 and credits Po-Suzuki. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "5ffd57128397e5b59377323d7c27cda608cfc783bc15a208603cfb884b8b4983",
               "image": "images/svIba_046_Snorlax_761066.jpg"
             }
           ]
@@ -40156,7 +40315,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Po-Suzuki",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -40172,25 +40331,33 @@
               "contentHash": "3a680750c179a9aa242c293823641a06e3852812419bb89a8c23400359172de1",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_568.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:mC:568/742:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:mC:568/742:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/f7c4636f-8030-40a7-86d6-994a0bc3283c",
-              "evidence": "The retained positive collectory record identifies Korean mC 568/742 for Snorlax and states rarity N. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0459 is the positive physical/card-face observation.",
-              "contentHash": "807caeefe497591576d9bc6be75daa003885303088d253d4566e8f31be9a5ea7",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026001568",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 mC 568/742 in MEGA 「스타트 덱 100 배틀컬렉션」, with illustrator Po-Suzuki and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "d1c4b394cec9aeaa9e6f32f67ffc452eee77198eebbcecc12cb4d48ae643cfff",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/MC/MC_568.png?w=512"
             },
             {
               "observationId": "unit:U0590",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_(TCG)",
-              "evidence": "Product article \"In other languages\": |ko=스타트 덱 100 배틀컬렉션 (\"Start Deck 100 Battle Collection\"), plus zh_yue/zh_cmn entries; fr/de/it/es/pt_br/id/th are present but EMPTY, i.e. deliberately not released there. External links include the Korean official shop pokemoncard.co.kr. Set list rows 567/742, 568/742 and 569/742 cover all three Cardmarket products.",
-              "contentHash": "aafba9c5bb042a1721328ce9c891b34d774e39afd8dad926685b1e0a1f0c1e61",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2026001568",
+              "evidence": "Product article \"In other languages\": |ko=스타트 덱 100 배틀컬렉션 (\"Start Deck 100 Battle Collection\"), plus zh_yue/zh_cmn entries; fr/de/it/es/pt_br/id/th are present but EMPTY, i.e. deliberately not released there. External links include the Korean official shop pokemoncard.co.kr. Set list rows 567/742, 568/742 and 569/742 cover all three Cardmarket products. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2026001568 positively identifies 잠만보 568/742 in MEGA 「스타트 덱 100 배틀컬렉션」 and credits Po-Suzuki. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "46ae98b90066fb2b4c2c009f9ca543c7793e39bbd423e4d0f2e6f813ab3d1469",
               "image": "images/mC_568_Snorlax_863870.png"
             }
           ]
@@ -44715,7 +44882,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-XY-P:unknown-local-set:via-149:Snorlax-Plump-Body-Knock-Away:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
           "workId": "WORK:Snorlax-Plump-Body-Knock-Away",
           "cardKey": "Snorlax-Plump-Body-Knock-Away",
           "appearanceId": "APPEARANCE:IMAGE:144124dca482952f1f0dbdd6",
@@ -44723,24 +44890,47 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-XY-P:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "V1"
+          "setEditionId": "EDITION:KR:Korean:XY-P",
+          "localSetCode": "XY-P",
+          "localNumber": "167",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0661"
           ],
-          "physicalPrintings": [],
+          "legacyVariants": [
+            "V1",
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0031",
+              "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Pokumon's exact Korean 167/XY-P Kisstick promotion record positively classifies the card as Non-holo.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0031",
+              "specimenIds": [
+                "SPEC-0031"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
-            "variant": "V1",
+            "artist": "Kouki Saitou",
+            "variant": "V1, base",
             "finish": [
-              "reverse-holo"
+              "non-holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -44755,16 +44945,33 @@
               "contentHash": "9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/PROMO/XYpromo_167.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:XY-P:167:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:XY-P:167:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/PR2015001167",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 XY-P 167/XY-P in XY 프로모 카드, with illustrator Kouki Saitou and HP120. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "6f7deece27c3dc7992138c3f6372281dce30fdc73f034704f6c17efabf660ca2",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/PROMO/XYpromo_167.png?w=512"
+            },
+            {
               "observationId": "unit:U0661",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
-              "evidence": "Korean printing exists as XY-P 167. Bulbapedia redirects both \"Snorlax (XY-P Promo 149)\" and \"Snorlax (XY-P Promo 167)\" to the same card article, \"Snorlax (BREAKthrough 118)\", so the wiki treats them as one card with matching artwork. Each market ran its own food-company campaign: Japan via Marumiya (furikake mini packs / curry, July 2015), Korea via the Kisstick sausages promotion (2017). Illustrator Kouki Saitou matches on both. Korean listing: https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
-              "contentHash": "c5023ac3672ca32a418a1def6c98fe4aa8982521928f84e811587524de266a67",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/PR2015001167",
+              "evidence": "Korean printing exists as XY-P 167. Bulbapedia redirects both \"Snorlax (XY-P Promo 149)\" and \"Snorlax (XY-P Promo 167)\" to the same card article, \"Snorlax (BREAKthrough 118)\", so the wiki treats them as one card with matching artwork. Each market ran its own food-company campaign: Japan via Marumiya (furikake mini packs / curry, July 2015), Korea via the Kisstick sausages promotion (2017). Illustrator Kouki Saitou matches on both. Korean listing: https://pokumon.com/card/snorlax-167-xy-p-korean-promo/ OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/PR2015001167 positively identifies 잠만보 167/XY-P in XY 프로모 카드 and credits Kouki Saitou. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "cf30bad18c8fb267b2298b1a51e7401410c2096a9ce2af8a057751278954b2c4",
               "image": "images/XY-P_149_Snorlax_V1_553464.jpg"
             }
           ]
@@ -47555,7 +47762,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:KR:Korean:via-HXY:unknown-local-set:via-026:Snorlax-Rock-Smash-Strength:unknown-local-id",
+          "cardReleaseId": "RELEASE:KR:Korean:FXY:026/036:Snorlax-Rock-Smash-Strength",
           "workId": "WORK:Snorlax-Rock-Smash-Strength",
           "cardKey": "Snorlax-Rock-Smash-Strength",
           "appearanceId": "APPEARANCE:IMAGE:9c689fc840dd0e5fb9f503a2",
@@ -47563,13 +47770,15 @@
           "locality": "KR",
           "language": "Korean",
           "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:via-HXY:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:KR:Korean:FXY",
+          "localSetCode": "FXY",
+          "localNumber": "026/036",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0586"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -47593,16 +47802,33 @@
               "contentHash": "f50abdda4442f3830018ce34705331321a95a28c446ddbba86176830e6a7616c",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/FXY/FXY_G_026.jpg?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:FXY:026/036:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "source-first:KR:FXY:026/036:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/ST2014001026",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 FXY 026/036 in XY 퍼스트세트 「도치마론의 진화」, with illustrator Naoki Saito and HP120. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "e30c6ab151f71c3b87177f11f31803e4ff08a85b5613646440689a1d1d6036be",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/FXY/FXY_G_026.jpg?w=512"
+            },
+            {
               "observationId": "unit:U0586",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-              "evidence": "The article covers two separate products. Quote: \"The Beginning Set is released in Japanese and Korean, both only available in unlimited edition. The Kalos Starter Set is released in English, German, French, Italian, Spanish, Portuguese and Russian.\" Cardmarket's HXY is the Japanese Beginning Set; set list row 026/039 Beginning Set Snorlax 26. The statement is exhaustive, which also corroborates the separate contradiction of T-Chinese for this product. CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Halfdecklist/nmentry|026/039|{{TCG ID|Beginning Set|Snorlax|26}}|Colorless||1}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged.",
-              "contentHash": "1b890b94094ab9b5e35a74ed86f9494b012548f4ab7b8981dd93261811a4a536",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/ST2014001026",
+              "evidence": "The article covers two separate products. Quote: \"The Beginning Set is released in Japanese and Korean, both only available in unlimited edition. The Kalos Starter Set is released in English, German, French, Italian, Spanish, Portuguese and Russian.\" Cardmarket's HXY is the Japanese Beginning Set; set list row 026/039 Beginning Set Snorlax 26. The statement is exhaustive, which also corroborates the separate contradiction of T-Chinese for this product. CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Halfdecklist/nmentry|026/039|{{TCG ID|Beginning Set|Snorlax|26}}|Colorless||1}}\". The cited article carries the source product's closed card list beside its own statement of which language editions exist. A fixed product has the same contents in every language edition, so the list reaches the card the way a Prize Pack article does. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/ST2014001026 positively identifies 잠만보 026/036 in XY 퍼스트세트 「도치마론의 진화」 and credits Naoki Saito. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "c3a57850b952b4f399723f875451cd94719d05d942fb947eaac88f63395384fe",
               "image": "images/HXY_026_Snorlax_564579.jpg"
             }
           ]
@@ -49663,7 +49889,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "chibi",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -49679,25 +49905,33 @@
               "contentHash": "8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SA/SA_G_010.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sA:010/023:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:sA:010/023:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39",
-              "evidence": "The retained positive collectory record identifies Korean sA 010/023 for Snorlax and states rarity fixed product. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0462 is the positive physical/card-face observation.",
-              "contentHash": "1743f3a5fae002f7818eb3b673f19ff4dbfe935be2714b391bb4f95331ba5579",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020001010",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sA 010/023 in 소드&실드 스타터 세트 V 풀, with illustrator chibi and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "3f194f127c011ac61657e44fa30225885803b3a28b31f879e6159d770f716091",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SA/SA_G_010.png?w=512"
             },
             {
               "observationId": "unit:U0610",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/V_Starter_Sets_(TCG)",
-              "evidence": "The V Starter Sets article describes the products as Japanese and Korean Standard Decks and the Grass deck contains Snorlax 010/023. This confirms the Korean sA 10 printing.",
-              "contentHash": "03099347f791edb4f00d3f41b079a5c603159c637ebf0fd319d9899908c878f9",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020001010",
+              "evidence": "The V Starter Sets article describes the products as Japanese and Korean Standard Decks and the Grass deck contains Snorlax 010/023. This confirms the Korean sA 10 printing. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2020001010 positively identifies 잠만보 010/023 in 소드&실드 스타터 세트 V 풀 and credits chibi. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "1c1f95c91b106ca5409e8ed44c1cce346e13d86cd9cd25998a98a60c613f366c",
               "image": "images/sA_10_Snorlax_524195.jpg"
             }
           ]
@@ -50667,7 +50901,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Ounishi",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -50683,25 +50917,33 @@
               "contentHash": "2952a07dfb424457d87dfb19b36875ca0e718ba9bcec0324637baf1b122cbf7b",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVLN/SVLN_010.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:svLN:010/022:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:svLN:010/022:base",
               "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Stellar_Tera_Type_Starter_Set_(TCG)",
-              "evidence": "The retained positive bulbapedia record identifies Korean svLN 010/022 for Snorlax and states rarity fixed product. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0438 is the positive physical/card-face observation.",
-              "contentHash": "65d8da6b332e65517d19e1ed827e85c8b5f1199d6a0fe821aa5444bddf1c7cf5",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024014010",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 svLN 010/022 in 스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「님피아 ex」, with illustrator Ounishi and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "e59b45ccbd15703e05eba56255a73ec8806fbb8ec22fa897c0d2df365332979e",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVLN/SVLN_010.png?w=512"
             },
             {
               "observationId": "unit:U0677",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_(TCG)",
-              "evidence": "official Korean product name |ko=스타터 세트 테라스탈타입:스텔라 「님피아 ex」; deck list row 010/022 Snorlax, Colorless Independent positive specimen evidence retained as SPEC-0438 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "d356c1310f4e02dfa1892a8ff002c3da4d6e7fa4e4fb2d963b2906d354b40af9",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024014010",
+              "evidence": "official Korean product name |ko=스타터 세트 테라스탈타입:스텔라 「님피아 ex」; deck list row 010/022 Snorlax, Colorless Independent positive specimen evidence retained as SPEC-0438 shows the same localized card identity and corroborates this unit without replacing its primary provider. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2024014010 positively identifies 잠만보 010/022 in 스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「님피아 ex」 and credits Ounishi. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "7f78c4ca32f0444630ebb801ae891245580bb3d66d1175aa279f24484718f7f7",
               "image": "images/svLN_010_Snorlax_785477.jpg"
             }
           ]
@@ -53491,7 +53733,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Mitsuhiro Arita",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -53507,6 +53749,14 @@
               "contentHash": "cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY2/XY2_066.jpg?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:XY2:066/080:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -53515,17 +53765,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2014002066",
-              "evidence": "The retained positive pokemon-card-korea record identifies Korean XY2 066/080 for Snorlax and states rarity U. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0411 is the positive physical/card-face observation.",
-              "contentHash": "928789c9ad5976c89780d226595c4a1b035875702543e8e0287fb1c2d478d421",
-              "image": null
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 XY2 066/080 in XY 확장팩 제2탄 「와일드 블레이즈」, with illustrator Mitsuhiro Arita and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "b9128703424144bf763ce93e53c4e6aa8a491cfabcc7854a0eed7ddf2c8c5fba",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY2/XY2_066.jpg?w=512"
             },
             {
               "observationId": "unit:U0561",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Wild Blaze (XY2) is listed with a Korean release as \"와일드 블레이즈\" in the cross-language expansion index (set-level evidence) Independent positive seller-photo evidence retained as SPEC-0411 shows the same localized card identity and corroborates this unit without replacing its primary provider. Independent positive specimen evidence retained as SPEC-0411 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "835ae389b173b0be5061f98043f1a001fecf12556a95e505781cbe3d8ed97a6c",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2014002066",
+              "evidence": "expansion Wild Blaze (XY2) is listed with a Korean release as \"와일드 블레이즈\" in the cross-language expansion index (set-level evidence) Independent positive seller-photo evidence retained as SPEC-0411 shows the same localized card identity and corroborates this unit without replacing its primary provider. Independent positive specimen evidence retained as SPEC-0411 shows the same localized card identity and corroborates this unit without replacing its primary provider. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2014002066 positively identifies 잠만보 066/080 in XY 확장팩 제2탄 「와일드 블레이즈」 and credits Mitsuhiro Arita. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "3335633df36b353443ad59035ffaf969e2691566350a3efe7a1f8d3f6c8e585d",
               "image": "images/XY2_066_Snorlax_564369.jpg"
             }
           ]
@@ -57103,7 +57353,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Tomokazu Komiya",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -57119,25 +57369,33 @@
               "contentHash": "bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY10/XY10_057.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:XY10:057/078:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:XY10:057/078:base",
               "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Awakening_Psychic_King_(TCG)",
-              "evidence": "The retained positive bulbapedia record identifies Korean XY10 057/078 for Snorlax and states rarity C. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0457 is the positive physical/card-face observation.",
-              "contentHash": "11478c34da13bff93e0f02db69b170eb8d5198c077cd332194ef7421b5c1d3cb",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2016020057",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 XY10 057/078 in XY BREAK 확장팩 제10탄 「초능력의 제왕」, with illustrator Tomokazu Komiya and HP140. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "dc9d0fda16c438896ad433e4f8a3c23459b9e20cc2d9a91b62e9b851e235e3a1",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY10/XY10_057.png?w=512"
             },
             {
               "observationId": "unit:U0541",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Awakening Psychic King (XY10) is listed with a Korean release in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0457 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "5b69c19728b4cd2dbe819953f21daefe6c50d9a51f5e339c5505158b4743b9c0",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2016020057",
+              "evidence": "expansion Awakening Psychic King (XY10) is listed with a Korean release in the cross-language expansion index (set-level evidence) Independent positive specimen evidence retained as SPEC-0457 shows the same localized card identity and corroborates this unit without replacing its primary provider. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2016020057 positively identifies 잠만보 057/078 in XY BREAK 확장팩 제10탄 「초능력의 제왕」 and credits Tomokazu Komiya. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "cb85898004e2effe389a98028b14e8e6445d9cf6cc94b30c21ac5c7baaba84fa",
               "image": "images/XY10_057_Snorlax_562999.jpg"
             }
           ]
@@ -58429,7 +58687,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Kouki Saitou",
             "variant": "V2, base",
             "finish": [],
             "foilPattern": [],
@@ -58461,17 +58719,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2022011126",
-              "evidence": "The retained exact Korean card image SPEC-0237 shows s10a 077/071, including its Korean name, printed attacks and rarity CHR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "8efdd8cd5f751ce0eeb0f3d7ae93cc23cdc2cd654afde5e7c9822fafec6864c6",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 s10a 077/071 in 소드&실드 강화 확장팩 「다크판타스마」, with illustrator Kouki Saitou and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "09e664845260310bf737d1c8a2410713dc48b66a3fad718cda68b0e249005c67",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512"
             },
             {
               "observationId": "unit:U0168",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Dark Phantasma (s10a) is listed with a Korean release as \"다크판타스마\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "1d72d8b36cdbcd56d961816566b6ce5399526b54d3a5b65fcad83d624e6ed7f5",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022011126",
+              "evidence": "expansion Dark Phantasma (s10a) is listed with a Korean release as \"다크판타스마\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2022011126 positively identifies 잠만보 077/071 in 소드&실드 강화 확장팩 「다크판타스마」 and credits Kouki Saitou. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "7851105dbd5585330a62552998f779a7eacf7da0df65ac33b1ac22b71ff18b66",
               "image": "images/s10a_077_Snorlax_V2_657056.jpg"
             }
           ]
@@ -61973,7 +62231,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "0313",
             "variant": "V1, base",
             "finish": [
               "holo"
@@ -62016,17 +62274,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
-              "evidence": "The retained exact Korean card image SPEC-0236 shows s10a 058/071, including its Korean name, printed attacks and rarity R. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "9f8f88a8ec9ffc6b77184b574fbe235ac8d25453a9e0380a25384c6182673725",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 s10a 058/071 in 소드&실드 강화 확장팩 「다크판타스마」, with illustrator 0313 and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "d71b2e7130bc103cbd79e43f05acfad57154d9c22a25e6f39f487300ddce2bee",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_058.png?w=512"
             },
             {
               "observationId": "unit:U0344",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Dark Phantasma (s10a) is listed with a Korean release as \"다크판타스마\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "770b9e85f4cb350819602459e658c4eee040db55df6c47053052df7e01a528d5",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
+              "evidence": "expansion Dark Phantasma (s10a) is listed with a Korean release as \"다크판타스마\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2022011097 positively identifies 잠만보 058/071 in 소드&실드 강화 확장팩 「다크판타스마」 and credits 0313. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "66dcef8ad7efd8fc0d9578ba9a4e831941de5365e4c6b26862f55a9f3664e391",
               "image": "images/s10a_058_Snorlax_V1_656382.jpg"
             }
           ]
@@ -63416,7 +63674,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "0313",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -63448,17 +63706,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
-              "evidence": "The retained exact Korean card image SPEC-0252 shows svG 021/049, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "9a33693ff79d27371a85b0c07e55aeed4eac9eaa69a240ce64810fda4ca91684",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 svG 021/049 in 스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」, with illustrator 0313 and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "277b8eaedb3179df3b48ad67225582c8fd29ee3fb1aaf700ca96c72b5dde22ce",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512"
             },
             {
               "observationId": "unit:U0466",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Venusaur_%26_Charizard_%26_Blastoise_Special_Deck_Set_ex_(TCG)",
-              "evidence": "official Korean product name |ko=스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」; set list row 021/049 Snorlax, Colorless",
-              "contentHash": "1eb8e399a73eee0a0e3eafdde3c3cf8d1d27720f17fbb3e9c4a4d839a02455ad",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
+              "evidence": "official Korean product name |ko=스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」; set list row 021/049 Snorlax, Colorless OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2023023021 positively identifies 잠만보 021/049 in 스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」 and credits 0313. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "a06bd09957f4e2bdea54bd811aac67253bf4e026abcc05ab5988dadab196cc84",
               "image": "images/svG_021_Snorlax_744984.jpg"
             }
           ]
@@ -64451,7 +64709,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax V",
-            "artist": null,
+            "artist": "aky CG Works",
             "variant": "V2, base",
             "finish": [
               "holo"
@@ -64495,18 +64753,18 @@
               "observationId": "source-first:KR:s1H:066/060:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0246 shows s1H 066/060, including its Korean name, printed attacks and rarity SR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "4fc26256bf5a6722f9503c481ec1eade8a1d803f282e4430cb79ce4c8c6fea2e",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020003066",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 V s1H 066/060 in 소드&실드 확장팩 「실드」, with illustrator aky CG Works and HP220. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "004ef9ac614e056e454a42b2a81cc6bfd0cb2be2ee64af5a6a602ad512dd0cb4",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512"
             },
             {
               "observationId": "unit:U0548",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Shield (s1H) is listed with a Korean release as \"실드\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "517ac19837737916907e353edb77abd9c45e43c28b368dde75575ca8656703d7",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020003066",
+              "evidence": "expansion Shield (s1H) is listed with a Korean release as \"실드\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2020003066 positively identifies 잠만보 V 066/060 in 소드&실드 확장팩 「실드」 and credits aky CG Works. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "079de81439cd1c61ff290d67a1087b3214d17a10f95d85572788dee9f824253d",
               "image": "images/s1H_66_Snorlax_V_V2_467624.jpg"
             }
           ]
@@ -64672,7 +64930,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax V",
-            "artist": null,
+            "artist": "Masakazu Fukuda",
             "variant": "V1, base",
             "finish": [
               "holo"
@@ -64716,18 +64974,18 @@
               "observationId": "source-first:KR:s1H:045/060:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0244 shows s1H 045/060, including its Korean name, printed attacks and rarity RR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "3b3a9360a3ba5eb63112ba328fe3458da60578dc81f60558352a1e7869ba82ee",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020003045",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 V s1H 045/060 in 소드&실드 확장팩 「실드」, with illustrator Masakazu Fukuda and HP220. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "389987706ca95ed6c416b845c2589820a6579d86f3d0974cd8c0194392e63b99",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512"
             },
             {
               "observationId": "unit:U0511",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Shield (s1H) is listed with a Korean release as \"실드\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "ee6a8e030e6ef5b7f9937342a1fae958d1f300067bd910dc83dd141e8f8d248f",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020003045",
+              "evidence": "expansion Shield (s1H) is listed with a Korean release as \"실드\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2020003045 positively identifies 잠만보 V 045/060 in 소드&실드 확장팩 「실드」 and credits Masakazu Fukuda. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "07afa214af354da18e910754cb139ca46eb8bd19e198a8aa0daf2d82ba71fea5",
               "image": "images/s1H_45_Snorlax_V_V1_467619.jpg"
             }
           ]
@@ -66719,7 +66977,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax VMAX",
-            "artist": null,
+            "artist": "aky CG Works",
             "variant": "V1, base",
             "finish": [
               "holo"
@@ -66763,18 +67021,18 @@
               "observationId": "source-first:KR:s1H:046/060:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0245 shows s1H 046/060, including its Korean name, printed attacks and rarity RRR. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "ef4bdde498637b3f90656f896f6c19413271bba844af60d33af3f678752596db",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020003046",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 VMAX s1H 046/060 in 소드&실드 확장팩 「실드」, with illustrator aky CG Works and HP340. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "08775cefc674e4bafaa1137c459856638fce752795784c80f42121e47ef6cf23",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512"
             },
             {
               "observationId": "unit:U0287",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Shield (s1H) is listed with a Korean release as \"실드\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "c84a397567094c22e8a6e1461c26c481f22ffa50cade34a274e1d927185a1d24",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2020003046",
+              "evidence": "expansion Shield (s1H) is listed with a Korean release as \"실드\" in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2020003046 positively identifies 잠만보 VMAX 046/060 in 소드&실드 확장팩 「실드」 and credits aky CG Works. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "0cba0db3a543eb17f311d64e630db489a9cfc532fe01cc9b23659212f052a170",
               "image": "images/s1H_46_Snorlax_VMAX_V1_467634.jpg"
             }
           ]
@@ -67974,7 +68232,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "GOSSAN",
             "variant": "V2",
             "finish": [],
             "foilPattern": [],
@@ -67990,6 +68248,14 @@
               "contentHash": "1a0a9c17c6a6b6bef3dada95340d849f8d157d84bcc3a87d2ab45fa22bcd613d",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_181.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sv2a:181/165:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -67998,17 +68264,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2023014181",
-              "evidence": "The retained positive pokemon-card-korea record identifies Korean sv2a 181/165 for Snorlax and states rarity AR. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. This is catalogue/set-list evidence only; no physical finish or appearance is inferred.",
-              "contentHash": "cd7b423bd9abac89a3af2d119194383b61d3bc2796a62c89354ae07a3d515c9f",
-              "image": null
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv2a 181/165 in 스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」, with illustrator GOSSAN and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "8e8c2906300cb16d3bcd7d9d9e62ec3593e8c573b3ca5853ab736b147636bcf3",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_181.png?w=512"
             },
             {
               "observationId": "unit:U0049",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Pokémon Card 151 (sv2a) is listed with a Korean release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "8b98be78e1bc09dc247f625ed433246200fde8a342e4c85dd6bef9ff7ef47ec9",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2023014181",
+              "evidence": "expansion Pokémon Card 151 (sv2a) is listed with a Korean release in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2023014181 positively identifies 잠만보 181/165 in 스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」 and credits GOSSAN. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "e5cbf5426ee4ab6875347cdb038a2bf3786449b266aeae33344b62ddb594fee6",
               "image": "images/sv2a_181_Snorlax_V2_719634.jpg"
             }
           ]
@@ -69421,7 +69687,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "HYOGONOSUKE",
             "variant": "V1",
             "finish": [],
             "foilPattern": [],
@@ -69437,6 +69703,14 @@
               "contentHash": "c6697bd6a380833adb350b05032538b3883b4fbafa498c0028bf56a71fc6ed0e",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_143.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sv2a:143/165:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -69445,17 +69719,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2023014143",
-              "evidence": "The retained positive pokemon-card-korea record identifies Korean sv2a 143/165 for Snorlax and states rarity U. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. This is catalogue/set-list evidence only; no physical finish or appearance is inferred.",
-              "contentHash": "6b5a31ea4825d38285672b92e9e5738d4217325fa63c27fd724b06d38df5b1cb",
-              "image": null
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv2a 143/165 in 스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」, with illustrator HYOGONOSUKE and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "3beadbe35678617f0f7e94ac1cd73e43a0f765bdd0201dba15cd71b96285190e",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_143.png?w=512"
             },
             {
               "observationId": "unit:U0103",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Pokémon Card 151 (sv2a) is listed with a Korean release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "f5331b30dad05b9b072d367c582fda49756671cdb862cbefc2a67cf860485434",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2023014143",
+              "evidence": "expansion Pokémon Card 151 (sv2a) is listed with a Korean release in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2023014143 positively identifies 잠만보 143/165 in 스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」 and credits HYOGONOSUKE. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "3247b73cb55d952f706754eee1608449a243d99e7ed6c0d9d8e01144a3ee4ed5",
               "image": "images/sv2a_143_Snorlax_V1_719596.jpg"
             }
           ]
@@ -69732,7 +70006,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "HYOGONOSUKE",
             "variant": "V1",
             "finish": [],
             "foilPattern": [],
@@ -69748,25 +70022,33 @@
               "contentHash": "c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_145.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:sv4a:145/190:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:sv4a:145/190:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/cba4c986-3c69-4a8c-b065-30efbaac86ed",
-              "evidence": "The retained positive collectory record identifies Korean sv4a 145/190 for Snorlax and states rarity N. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. This is catalogue/set-list evidence only; no physical finish or appearance is inferred.",
-              "contentHash": "43ea7a9f71378b0e82da373c252bddfc33a20d17c72435ea62ee8188f8e63435",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024001145",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv4a 145/190 in 스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」, with illustrator HYOGONOSUKE and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "1194cf8019f6005ce07e47561ba6a670ffb54ad4db505b86aca01f518a3ad9f3",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_145.png?w=512"
             },
             {
               "observationId": "unit:U0306",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Shiny Treasure ex (sv4a) is listed with a Korean release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "32e5be43f8f0bb009904145a85adcb3838b1278879ad9b710440b3729c2ab721",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024001145",
+              "evidence": "expansion Shiny Treasure ex (sv4a) is listed with a Korean release in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2024001145 positively identifies 잠만보 145/190 in 스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」 and credits HYOGONOSUKE. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "5fb4b21cab1087234ff3e3d1b1b1f7ff993f724832fd15f2c3b66254030053b1",
               "image": "images/sv4a_145_Snorlax_V1_746527.jpg"
             }
           ]
@@ -70134,7 +70416,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": null,
+            "artist": "Shigenori Negishi",
             "variant": "V2, base",
             "finish": [],
             "foilPattern": [],
@@ -70166,17 +70448,17 @@
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2024001310",
-              "evidence": "The retained exact Korean card image SPEC-0251 shows sv4a 310/190, including its Korean name, printed attacks and rarity S. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "1a736d7df375a4852ff46d25e330d1cc79ecac1492d9563b3269187b5e6be2ef",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv4a 310/190 in 스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」, with illustrator Shigenori Negishi and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "1ab3e859746d78268561341d2c5720916631c0bf2ffaf3911d8919b21a030d02",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_310.png?w=512"
             },
             {
               "observationId": "unit:U0384",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Shiny Treasure ex (sv4a) is listed with a Korean release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "e75ab3116f36c0844e08cd005a097db39067036c31ac8c263a53cefc6d95e8d6",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024001310",
+              "evidence": "expansion Shiny Treasure ex (sv4a) is listed with a Korean release in the cross-language expansion index (set-level evidence) OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2024001310 positively identifies 잠만보 310/190 in 스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」 and credits Shigenori Negishi. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "ceae5e4a7e0ba9dfd4a4cf115c7c0573ddf0f8d41b61b263931b7b9df2bf8f47",
               "image": "images/sv4a_310_Snorlax_V2_747664.jpg"
             }
           ]
@@ -73166,7 +73448,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax ex",
-            "artist": null,
+            "artist": "N-DESIGN Inc.",
             "variant": "base",
             "finish": [],
             "foilPattern": [],
@@ -73182,25 +73464,33 @@
               "contentHash": "42408eb764cd043f554523fb522fed1c91b209e14add6d78e6150e0331752044",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_094.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:svM:094/175:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:svM:094/175:base",
               "kind": "source-first",
-              "provider": "collectory",
-              "url": "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f",
-              "evidence": "The retained positive collectory record identifies Korean svM 094/175 for Snorlax ex and states rarity U. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0464 is the positive physical/card-face observation.",
-              "contentHash": "460569b934450ad5487d3e419114ae28ddb24ff38a65acfdb6aef30ff5fa07e8",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024018094",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 ex svM 094/175 in 스칼렛&바이올렛 랜덤 스타트 덱 Generations, with illustrator N-DESIGN Inc. and HP260. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "062e89ab0b38b2f183c8a4bc26089859bf3a13fb178ac8459fb362621a2b5e65",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_094.png?w=512"
             },
             {
               "observationId": "unit:U0402",
               "kind": "unit",
-              "provider": "retailer-listing",
-              "url": "https://www.ebay.de/itm/167623600843",
-              "evidence": "Sealed Korean product listing. eBay item 167623600843, title \"Pikachu ex & Snorlax ex Pokemon Start Deck Generations 60 Cards Korean ver\", offered new / factory sealed by the commercial Korean seller RAON_KR (2518 feedback, 99.8% positive), 9 units available. The deck name matches the Japanese product exactly - Bulbapedia lists it as \"Generations Start Deck Pikachu ex & Snorlax ex\" (Japanese: スタートデッキGenerations ピカチュウex・カビゴンex), whose set list row 094/175 is this Snorlax ex. A sealed Korean printing of that deck therefore contains a Korean printing of this card. NOTE: this is marketplace evidence, not a card database - no database carries Korean deck contents for this product.",
-              "contentHash": "3b17393cb3e48e2ecf79721e0a10fb480f761401a0e8ea5dbb890846a7a3d037",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2024018094",
+              "evidence": "Sealed Korean product listing. eBay item 167623600843, title \"Pikachu ex & Snorlax ex Pokemon Start Deck Generations 60 Cards Korean ver\", offered new / factory sealed by the commercial Korean seller RAON_KR (2518 feedback, 99.8% positive), 9 units available. The deck name matches the Japanese product exactly - Bulbapedia lists it as \"Generations Start Deck Pikachu ex & Snorlax ex\" (Japanese: スタートデッキGenerations ピカチュウex・カビゴンex), whose set list row 094/175 is this Snorlax ex. A sealed Korean printing of that deck therefore contains a Korean printing of this card. NOTE: this is marketplace evidence, not a card database - no database carries Korean deck contents for this product. OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2024018094 positively identifies 잠만보 ex 094/175 in 스칼렛&바이올렛 랜덤 스타트 덱 Generations and credits N-DESIGN Inc.. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "bb2472944e26b45deec0b2d6b4ac6b513f58d510f6e8171e282e2571ee5ded9d",
               "image": "images/svM_094_Snorlax_ex_801337.jpg"
             }
           ]
@@ -75487,7 +75777,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax Lv.X",
-            "artist": null,
+            "artist": "SHizURow",
             "variant": "base",
             "finish": [
               "holo"
@@ -75505,25 +75795,33 @@
               "contentHash": "ce8e845cde5c7af6778589fbc431464b866d9c924a1ec62d41761e9a474b758d",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:DP:006:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
               "observationId": "source-first:KR:DP:006:base",
               "kind": "source-first",
-              "provider": "seller-listing-photo",
-              "url": "https://globalbunjang.com/product/386929037",
-              "evidence": "The retained positive seller-listing-photo record identifies Korean DP 006 for Snorlax Lv.X and states rarity PROMO. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0440 is the positive physical/card-face observation.",
-              "contentHash": "67d5be9353aaf975b8f099ccb76b237e1843fa21fcf878710507967d8663dcec",
-              "image": null
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 LV.X DP 6 in DP 프로모 카드, with illustrator SHizURow and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "26d7bc64d6a9c9db52e1567db09e4f57684fbc647535d66fde794f35f11d12be",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512"
             },
             {
               "observationId": "unit:U0623",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Black_Star_Promos_(KTCG)",
-              "evidence": "Korean Black Star Promos set list row: 006 Snorlax LV.X, Colorless, Promo pack 2. NOTE: the Korean promo series numbers independently (006 there vs the Japanese DP-P 127 that Cardmarket files it under).",
-              "contentHash": "5ce47ea3a9b7a814740f65920e0aada8a4020b364de39b9a440eb1623c180500",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
+              "evidence": "Korean Black Star Promos set list row: 006 Snorlax LV.X, Colorless, Promo pack 2. NOTE: the Korean promo series numbers independently (006 there vs the Japanese DP-P 127 that Cardmarket files it under). OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/PR2010001006 positively identifies 잠만보 LV.X 6 in DP 프로모 카드 and credits SHizURow. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "f4ddc7651726ba3e6562dcf4db689e5b45630fc0222cdca5a7d3ed1f2b1572ea",
               "image": "images/DP-P_127_Snorlax_Lv_X_566758.jpg"
             }
           ]
@@ -76350,91 +76648,6 @@
               "url": "https://pokumon.com/card/eevee-snorlax-tag-team-gx-166-sm-p-indonesian-promo/",
               "evidence": "SPEC-0027 shows the exact Indonesian 166/SM-P Indomaret card. Pokumon and the Indonesian SM-P list independently identify the July 25-August 31, 2020 campaign and ripple treatment.",
               "contentHash": "31935412939b761cb5a99158f4e866a98dcd7bd2c86de9efefbe337baffc02b3",
-              "image": null
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
-      ],
-      "cardKeys": [
-        "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
-      ],
-      "label": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-          "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-          "cardKey": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:SM-P",
-          "localSetCode": "SM-P",
-          "localNumber": "140",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0627"
-          ],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0028",
-              "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": "ripple",
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "Pokumon's exact Korean 140/SM-P record positively identifies the Full Art purchase promo with Ripple treatment.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0028",
-              "specimenIds": [
-                "SPEC-0028"
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "이브이&잠만보 GX",
-            "artist": null,
-            "variant": "base",
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [
-              "ripple"
-            ],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:SM-P:140:base",
-              "kind": "source-first",
-              "provider": "pokumon",
-              "url": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
-              "evidence": "The retained exact Korean card image SPEC-0028 shows SM-P 140, including its Korean name, printed attacks and rarity PROMO. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "fd45ea77a1c18cd2a3fba247a6a8698d068965adc93b44674fc278b71b5f6fe7",
               "image": null
             }
           ]
@@ -77824,67 +78037,6 @@
       ]
     },
     {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-Doll"
-      ],
-      "cardKeys": [
-        "Snorlax-Doll"
-      ],
-      "label": "Snorlax-Doll",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
-          "workId": "WORK:Snorlax-Doll",
-          "cardKey": "Snorlax-Doll",
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:sv4K",
-          "localSetCode": "sv4K",
-          "localNumber": "060/066",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0260"
-          ],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보인형",
-            "artist": null,
-            "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:sv4K:060/066:base",
-              "kind": "source-first",
-              "provider": "seller-listing-photo",
-              "url": "https://globalbunjang.com/product/407721760",
-              "evidence": "The retained positive seller-listing-photo record identifies Korean sv4K 060/066 for Snorlax Doll and states rarity U. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0445 is the positive physical/card-face observation.",
-              "contentHash": "cf556e1276829c3c2225e8c20bcbf3aae6c8919bad65aa9c5004f9d85205905b",
-              "image": null
-            }
-          ]
-        }
-      ]
-    },
-    {
       "groupId": "APPEARANCE:RELEASE:RELEASE:ID:Indonesian:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "groupKind": "unmapped-release",
       "appearanceId": "APPEARANCE:RELEASE:RELEASE:ID:Indonesian:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
@@ -78015,67 +78167,6 @@
               "evidence": "The retained official Indonesian card detail 1605 and SPEC-0162 show SnorlaxGX 112/150 in AS1b, including the printed attacks used for the explicit Work mapping. The exact render prints rarity RR. The image is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "470a7e47e3839375071e1b50118f82ce7e892bde547288b33e275338c09ba9bb",
               "image": "https://asia.pokemon-card.com/id/card-img/id00001605.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
-      ],
-      "cardKeys": [
-        "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
-      ],
-      "label": "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-          "workId": "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-          "cardKey": "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:SM-P",
-          "localSetCode": "SM-P",
-          "localNumber": "017/SM-P",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0379"
-          ],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보 GX",
-            "artist": null,
-            "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:SM-P:017/SM-P:base",
-              "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)",
-              "evidence": "The retained positive bulbapedia record identifies Korean SM-P 017/SM-P for Snorlax GX and states rarity PROMO. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0439 is the positive physical/card-face observation.",
-              "contentHash": "cbc48f4cd8e17fe7a85ed52e35601eb7955cd696fd67ad1224b1daa3a61f35bc",
-              "image": null
             }
           ]
         }
@@ -79080,148 +79171,6 @@
       ]
     },
     {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-Heavy-Impact"
-      ],
-      "cardKeys": [
-        "Snorlax-Heavy-Impact"
-      ],
-      "label": "Snorlax-Heavy-Impact",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
-          "workId": "WORK:Snorlax-Heavy-Impact",
-          "cardKey": "Snorlax-Heavy-Impact",
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:sI",
-          "localSetCode": "sI",
-          "localNumber": "341/414",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0653"
-          ],
-          "legacyVariants": [
-            "V1",
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보",
-            "artist": null,
-            "variant": "V1, base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
-              "label": "publisher card image",
-              "observationId": "source-first:KR:sI:341/414:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:KR:sI:341/414:base",
-              "kind": "source-first",
-              "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0242 shows sI 341/414, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "2ec79e19f9ff2a74719eaf1bea60aeb00eeacc7324e0b5e566598f3293a3aef8",
-              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-Heavy-Impact"
-      ],
-      "cardKeys": [
-        "Snorlax-Heavy-Impact"
-      ],
-      "label": "Snorlax-Heavy-Impact",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
-          "workId": "WORK:Snorlax-Heavy-Impact",
-          "cardKey": "Snorlax-Heavy-Impact",
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:sI",
-          "localSetCode": "sI",
-          "localNumber": "342/414",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0657"
-          ],
-          "legacyVariants": [
-            "V2",
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보",
-            "artist": null,
-            "variant": "V2, base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
-              "label": "publisher card image",
-              "observationId": "source-first:KR:sI:342/414:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:KR:sI:342/414:base",
-              "kind": "source-first",
-              "provider": "pokemon-card-korea",
-              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
-              "evidence": "The retained exact Korean card image SPEC-0243 shows sI 342/414, including its Korean name, printed attacks and rarity no printed rarity symbol. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "0562728468cbb757c264a3ad688ca82adbb8b3c82b973303b197d796e236f0b5",
-              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "groupId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
       "groupKind": "unmapped-release",
       "appearanceId": "APPEARANCE:RELEASE:RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
@@ -79284,6 +79233,72 @@
               "evidence": "The retained official Thai detail 3343 and SPEC-0263 show คาบิกอน SH 026/038, including the printed attacks used for the explicit Work mapping and rarity no printed rarity symbol. The publisher render is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "e86fe426ade9299b752838f317a0ada59f277c966390780e694325ed527b8da1",
               "image": "https://asia.pokemon-card.com/th/card-img/th00003343.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+      "groupKind": "unmapped-release",
+      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+      "appearanceIdentityState": "unresolved-release",
+      "workIds": [
+        "WORK:Snorlax-Incredible-Snore"
+      ],
+      "cardKeys": [
+        "Snorlax-Incredible-Snore"
+      ],
+      "label": "Snorlax-Incredible-Snore",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+          "workId": "WORK:Snorlax-Incredible-Snore",
+          "cardKey": "Snorlax-Incredible-Snore",
+          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+          "appearanceIdentityState": "unresolved-release",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:SM30A",
+          "localSetCode": "SM30A",
+          "localNumber": "060/080",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "잠만보",
+            "artist": null,
+            "variant": null,
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:SM30A:060/080:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:KR:SM30A:060/080:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 SM30A 060/080 in 썬&문 「랜덤30장덱」, with illustrator Akira Komayama and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "1ef145e366b50af3c22b12266d709f7bbeca33ba948440dfc6e00f8f3dc01c40",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512"
             }
           ]
         }
@@ -79593,67 +79608,6 @@
       ]
     },
     {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-Lazy-Press"
-      ],
-      "cardKeys": [
-        "Snorlax-Lazy-Press"
-      ],
-      "label": "Snorlax-Lazy-Press",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
-          "workId": "WORK:Snorlax-Lazy-Press",
-          "cardKey": "Snorlax-Lazy-Press",
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:svI",
-          "localSetCode": "svI",
-          "localNumber": "046/066",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0648"
-          ],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보",
-            "artist": null,
-            "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:svI:046/066:base",
-              "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_Battle_Academy_(TCG)",
-              "evidence": "The retained positive bulbapedia record identifies Korean svI 046/066 for Snorlax and states rarity fixed product. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. Retained SPEC-0463 is the positive physical/card-face observation.",
-              "contentHash": "14ef767ef3ae516f61d095c3be879355774a4e4e82d23505a13545331aa673ff",
-              "image": null
-            }
-          ]
-        }
-      ]
-    },
-    {
       "groupId": "APPEARANCE:RELEASE:RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press",
       "groupKind": "unmapped-release",
       "appearanceId": "APPEARANCE:RELEASE:RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press",
@@ -79716,90 +79670,6 @@
               "evidence": "The retained official Taiwan detail 11337 and SPEC-0305 show 卡比獸 SVI F 046/066, including the printed attacks used for the explicit Work mapping and rarity no printed rarity symbol. The publisher render is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "898babb624df6215b4fdee6d6d27473233ffb1b03e65805e52455e6b745888c5",
               "image": "https://asia.pokemon-card.com/tw/card-img/tw00011337.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-Plump-Body-Knock-Away"
-      ],
-      "cardKeys": [
-        "Snorlax-Plump-Body-Knock-Away"
-      ],
-      "label": "Snorlax-Plump-Body-Knock-Away",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-          "workId": "WORK:Snorlax-Plump-Body-Knock-Away",
-          "cardKey": "Snorlax-Plump-Body-Knock-Away",
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:XY-P",
-          "localSetCode": "XY-P",
-          "localNumber": "167",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0661"
-          ],
-          "legacyVariants": [
-            "V1",
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0031",
-              "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "Pokumon's exact Korean 167/XY-P Kisstick promotion record positively classifies the card as Non-holo.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0031",
-              "specimenIds": [
-                "SPEC-0031"
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보",
-            "artist": null,
-            "variant": "V1, base",
-            "finish": [
-              "non-holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:KR:XY-P:167:base",
-              "kind": "source-first",
-              "provider": "pokumon",
-              "url": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
-              "evidence": "The retained exact Korean card image SPEC-0031 shows XY-P 167, including its Korean name, printed attacks and rarity PROMO. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "6d4699a19a176dbb38c83226ab4c530235676dd9ede07439c05b6529272f7bfc",
-              "image": null
             }
           ]
         }
@@ -80213,16 +80083,25 @@
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
-          "images": [],
+          "images": [
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S-P/S-P_101.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:S-P:101:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            }
+          ],
           "observations": [
             {
               "observationId": "source-first:KR:S-P:101:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/SP000000101",
-              "evidence": "The retained exact Korean card image SPEC-0014 shows S-P 101, including its Korean name, printed attacks and rarity PROMO. Those positive traits establish the local card identity and explicit Work mapping. A publisher/database render is not a physical finish photograph; no finish is inferred.",
-              "contentHash": "02bd190960604ad044d406807566a831b72c76df64229c7f3994906db1837215",
-              "image": null
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 S-P 101/S-P in 포켓몬 카드 게임 온라인 공식 인증샵 구입특전, with illustrator Yuya Oka and HP140. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "f049a25761d1927d66ddc8b4354500217a0e34c647378b5b0432dff7afd4150b",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S-P/S-P_101.png?w=512"
             }
           ]
         }
@@ -82059,16 +81938,25 @@
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
-          "images": [],
+          "images": [
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS2/bs2_kr_30.jpg?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:BS2:30/40:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            }
+          ],
           "observations": [
             {
               "observationId": "source-first:KR:BS2:30/40:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
-              "evidence": "The retained exact Pokémon Korea card observation BS2010002030 identifies Korean 잠만보 Lv.35, 30/40, rarity U, in DP 확장팩 불꽃 튀는 대결. The publisher rules call 불꽃 튀는 대결 expansion pack number 2; Daldagury displays the same card as BS2 30; Collectory retains the distinct catalogue set id BS2010002-kr; and the owner photograph remains SPEC-0037. BS2 is the human catalogue code and BS2010002-kr is a separate catalogue id. This record establishes only Korean language and local card identity. The low-resolution specimen establishes no finish, and no same-work equivalence to the Japanese DP1 product is asserted. Reviewed 2026-08-20.",
-              "contentHash": "d7dec0d5ca0607553a5dd1fe670d32a4462dd3a73dcf8b0ccd6a9c57beb40317",
-              "image": null
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 BS2 30/40 in DP 확장팩 불꽃 튀는 대결, with illustrator Ken Sugimori and HP100. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "01f88b2ff7419968814f3530ddd020a142b3e9f0c8879116b676745d54b3d5fe",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS2/bs2_kr_30.jpg?w=512"
             }
           ]
         }
