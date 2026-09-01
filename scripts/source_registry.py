@@ -867,6 +867,17 @@ def main() -> int:
                 url, "Positive source-first card record", "card-release",
                 entry["printId"], provider_id=entry["providerId"],
             )
+        if entry.get("raritySourceUrl"):
+            record(
+                entry["raritySourceUrl"], "Positive source-native rarity record", "rarity",
+                entry["printId"], entry.get("rarityRetrievedAt"),
+                provider_id=entry.get("rarityProviderId"),
+            )
+        for url in entry.get("raritySupportingSourceUrls") or []:
+            record(
+                url, "Positive fixed-product membership record", "set-membership",
+                entry["printId"], entry.get("rarityRetrievedAt"),
+            )
 
     for unit in finish_units:
         for printing in unit["printings"]:

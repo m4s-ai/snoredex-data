@@ -3579,7 +3579,7 @@
       "label": "Pokémon Korea bounded exact Korean card-name catalogue",
       "match": {
         "urlPrefixes": [
-          "https://pokemoncard.co.kr/cards"
+          "https://pokemoncard.co.kr/cards/detail/"
         ],
         "nonUrlEvidenceIds": [
           "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json"
@@ -3666,6 +3666,88 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "Region/session dependence and alternate positive routes prevent any missing result from supporting absence."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "pokemon-card-korea-fixed-product",
+      "providerId": "pokemon-card-korea",
+      "label": "Pokémon Korea retained SM30A constructed-deck evidence",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/card/277",
+          "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "The retained product and membership pages require region-dependent browser access; unavailable routes remain unknown.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-09-01",
+      "freshnessPolicy": "Retain the exact product statement and bounded named-deck membership query; never generalize them to other products or infer absence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokemoncard.co.kr/card/277",
+        "parameters": [],
+        "pagination": "The supporting named-deck query retained 15 records followed by zero further records.",
+        "expectedIdentifiers": [
+          "constructed deck",
+          "one of nine decks",
+          "리자몽 GX 30장덱"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "official product statement and bounded deck membership, not a physical finish record",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokemon-card-korea-sm30a-fixed-product-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "constructed-deck"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "retained SM30A product 277 evidence only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "rarity",
+            "set-membership",
+            "product-membership"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained records establish only the named constructed deck; missing products or cards remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-card-korea-sm30a-fixed-product",
+          "boundary": {
+            "outsideScope": [
+              "other Korean products",
+              "other random deck variants",
+              "physical finish",
+              "catalogue completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The fixed classification depends on the retained product statement plus positive named-deck membership, not provider silence."
           }
         }
       ]
@@ -4765,6 +4847,69 @@
         "pokemon-card-korea-card-search-positive"
       ],
       "outcome": "The bounded exact-name response retained 47 official endpoint records representing 45 unique Korean identities, including FXY 026/036 and SM30A 060/080; no absence or finish conclusion is attached."
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-sm30a-fixed-product",
+      "surfaceId": "pokemon-card-korea-fixed-product",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/277",
+      "queryParameters": {
+        "action": "search_text_cards",
+        "search_params": "all",
+        "search_text": "리자몽 GX 30장덱"
+      },
+      "retrievedAt": "2026-09-01",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "printId": "KR:SM30A:060/080:base",
+          "classification": "fixed",
+          "sourceUrl": "https://pokemoncard.co.kr/card/277",
+          "retrievedAt": "2026-09-01",
+          "supportingSourceUrls": [
+            "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+            "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1"
+          ],
+          "membershipQueryUrl": "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+          "membershipQueryParameters": {
+            "action": "search_text_cards",
+            "search_params": "all",
+            "search_text": "리자몽 GX 30장덱"
+          },
+          "pageRecordCounts": [
+            15,
+            0
+          ],
+          "providerRecordIds": [
+            "BS2019018082",
+            "BS2019018078",
+            "BS2019018074",
+            "BS2019018071",
+            "BS2019018070",
+            "BS2019018068",
+            "BS2019018067",
+            "BS2019018066",
+            "BS2019018060",
+            "BS2019018059",
+            "BS2019018013",
+            "BS2019018012",
+            "BS2019018011",
+            "BS2019018010",
+            "BS2019018009"
+          ],
+          "basis": "The official detail assigns Snorlax BS2019018060 to the named Charizard GX 30-card deck. The official product page says each box contains one of nine decks at random, but explicitly describes the contained product as a constructed deck and notes that the same card occurs multiple times because it is constructed. The exact named-deck query returns a bounded 15-record membership list followed by zero further records. The random choice is between deck variants, not random card contents within the named deck."
+        }
+      },
+      "expectedIdentifiers": [
+        "KR:SM30A:060/080:base",
+        "fixed",
+        "BS2019018060",
+        "15 records"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-sm30a-fixed-product-positive"
+      ],
+      "outcome": "The official product statement and bounded named-deck membership positively support SM30A 060/080 as a fixed constructed-deck card; no finish or absence conclusion is attached."
     }
   ]
 }

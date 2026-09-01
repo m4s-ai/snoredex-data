@@ -235,6 +235,41 @@ def main() -> None:
             assert set(row["raritySupportingSourceUrls"]) < set(
                 source_profile["raw"]["sourceUrls"]
             )
+    source_registry = {
+        row["canonicalUrl"]: row for row in json.loads(
+            (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")
+        )["evidence"] if row.get("canonicalUrl")
+    }
+    fxy_rarity_url = fxy_row["raritySourceUrl"]
+    assert source_registry[fxy_rarity_url]["providerId"] == "bulbapedia"
+    assert "rarity" in source_registry[fxy_rarity_url]["dimensions"]
+    assert fxy_row["printId"] in source_registry[fxy_rarity_url]["stableIds"]
+    product_url = sm30a_row["raritySourceUrl"]
+    detail_url, membership_url = sm30a_row["raritySupportingSourceUrls"]
+    assert source_registry[product_url]["providerId"] == "pokemon-card-korea"
+    assert source_registry[product_url]["dimensions"] == ["rarity"]
+    assert sm30a_row["printId"] in source_registry[product_url]["stableIds"]
+    assert "set-membership" in source_registry[detail_url]["dimensions"]
+    assert source_registry[membership_url]["dimensions"] == ["set-membership"]
+    capability_resolution = {
+        row["sourceKey"]: row for row in json.loads(
+            (ROOT / "verification/source_capability_graph.json").read_text(encoding="utf-8")
+        )["sourceResolution"]
+    }
+    assert capability_resolution[fxy_rarity_url]["surfaceId"] == (
+        "bulbapedia-mediawiki"
+    )
+    assert "rarity" in capability_resolution[fxy_rarity_url]["dimensions"]
+    assert capability_resolution[product_url]["surfaceId"] == (
+        "pokemon-card-korea-fixed-product"
+    )
+    assert capability_resolution[membership_url]["surfaceId"] == (
+        "pokemon-card-korea-fixed-product"
+    )
+    assert capability_resolution[detail_url]["surfaceId"] == (
+        "pokemon-card-korea-card-search"
+    )
+    assert "rarity" not in capability_resolution[detail_url]["dimensions"]
     assert {
         print_id: source_first_rows[print_id]["retrievedAt"]
         for print_id in official_korean

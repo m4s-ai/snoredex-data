@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1247,
-   "uniqueUrls": 1240,
+   "evidenceRecords": 1249,
+   "uniqueUrls": 1242,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3644
+   "claimsAttributed": 3648
   }
  },
  "providers": [
@@ -134,8 +134,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 90,
-   "claimsSupported": 132
+   "uniqueSources": 92,
+   "claimsSupported": 135
   },
   {
    "providerId": "tcgdex",
@@ -183,7 +183,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 80,
-   "claimsSupported": 630
+   "claimsSupported": 631
   },
   {
    "providerId": "tcgcsv",
@@ -1546,15 +1546,18 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), expansion article",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
     "date",
-    "language"
+    "language",
+    "rarity"
    ],
-   "stableIdCount": 12,
+   "stableIdCount": 13,
    "stableIds": [
     "HXY",
+    "KR:FXY:026/036:base",
     "U0482",
     "U0484",
     "U0485",
@@ -1567,8 +1570,8 @@
     "U0494",
     "U0495"
    ],
-   "retrievedAt": "2026-07-31",
-   "usageCount": 12
+   "retrievedAt": "2026-08-10",
+   "usageCount": 13
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
@@ -13392,6 +13395,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/277",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:SM30A:060/080:base"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -13553,17 +13573,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Positive fixed-product membership record",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "set-membership"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:SM30A:060/080:base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020001010",
@@ -14281,6 +14303,23 @@
    ],
    "retrievedAt": "2026-09-01",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive fixed-product membership record"
+   ],
+   "dimensions": [
+    "set-membership"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:SM30A:060/080:base"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/15499.html",

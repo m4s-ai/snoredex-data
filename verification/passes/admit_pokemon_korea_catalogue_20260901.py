@@ -160,6 +160,12 @@ def apply_prints(
 ) -> None:
     by_print = {row["printId"]: row for row in document["prints"]}
     by_print.update({row["printId"]: research.source_first_row(row) for row in rows})
+    for source_row in rows:
+        if source_row["printId"] not in {"KR:FXY:026/036:base", "KR:SM30A:060/080:base"}:
+            continue
+        for field in ("raritySourceUrl", "rarityProviderId", "rarityRetrievedAt", "raritySupportingSourceUrls"):
+            if source_row.get(field) is not None:
+                by_print[source_row["printId"]][field] = source_row[field]
     for print_id, identity in identities.items():
         row = by_print[print_id]
         source_url = official_url(identity["providerRecordIds"][0])
@@ -273,7 +279,7 @@ def apply_capabilities(document: dict[str, Any], evidence: dict[str, Any]) -> No
         "providerId": "pokemon-card-korea",
         "label": "Pokémon Korea bounded exact Korean card-name catalogue",
         "match": {
-            "urlPrefixes": ["https://pokemoncard.co.kr/cards"],
+            "urlPrefixes": ["https://pokemoncard.co.kr/cards/detail/"],
             "nonUrlEvidenceIds": [SNAPSHOT],
         },
         "state": "incomplete",
@@ -327,11 +333,72 @@ def apply_capabilities(document: dict[str, Any], evidence: dict[str, Any]) -> No
         "validatesEdges": ["pokemon-card-korea-card-search-positive"],
         "outcome": "The bounded exact-name response retained 47 official endpoint records representing 45 unique Korean identities, including FXY 026/036 and SM30A 060/080; no absence or finish conclusion is attached.",
     }
+    fixed_evidence = next(
+        row for row in evidence["fixedProductObservations"]
+        if row["printId"] == "KR:SM30A:060/080:base"
+    )
+    fixed_surface = {
+        "surfaceId": "pokemon-card-korea-fixed-product",
+        "providerId": "pokemon-card-korea",
+        "label": "Pokémon Korea retained SM30A constructed-deck evidence",
+        "match": {
+            "urlPrefixes": [fixed_evidence["sourceUrl"], fixed_evidence["membershipQueryUrl"]],
+            "nonUrlEvidenceIds": [],
+        },
+        "state": "incomplete",
+        "failureState": "The retained product and membership pages require region-dependent browser access; unavailable routes remain unknown.",
+        "accessMode": "browser",
+        "adapterState": "planned",
+        "lastCheckedAt": REVIEWED_AT,
+        "freshnessPolicy": "Retain the exact product statement and bounded named-deck membership query; never generalize them to other products or infer absence.",
+        "query": {
+            "method": "GET",
+            "endpoint": fixed_evidence["sourceUrl"],
+            "parameters": [],
+            "pagination": "The supporting named-deck query retained 15 records followed by zero further records.",
+            "expectedIdentifiers": ["constructed deck", "one of nine decks", "리자몽 GX 30장덱"],
+        },
+        "finishCapability": {
+            "mode": "none", "vocabulary": [],
+            "publicationForm": "official product statement and bounded deck membership, not a physical finish record",
+            "closedWithinScope": False,
+        },
+        "coverageEdges": [{
+            "edgeId": "pokemon-card-korea-sm30a-fixed-product-positive",
+            "coverage": {
+                "localities": ["KR"], "languages": ["Korean"], "scripts": ["Hang"],
+                "productCategories": ["constructed-deck"],
+                "timeRange": {"start": None, "end": None, "basis": "retained SM30A product 277 evidence only"},
+            },
+            "positiveEvidenceCapabilities": ["rarity", "set-membership", "product-membership"],
+            "exhaustive": False,
+            "absenceCapability": {"enabled": False, "dimensions": [], "exactScopes": [], "rationale": "The retained records establish only the named constructed deck; missing products or cards remain unknown."},
+            "knownPositiveObservationId": "obs-pokemon-card-korea-sm30a-fixed-product",
+            "boundary": {
+                "outsideScope": ["other Korean products", "other random deck variants", "physical finish", "catalogue completeness"],
+                "zeroResultMeans": "unknown",
+                "challenge": "The fixed classification depends on the retained product statement plus positive named-deck membership, not provider silence.",
+            },
+        }],
+    }
+    fixed_observation = {
+        "observationId": "obs-pokemon-card-korea-sm30a-fixed-product",
+        "surfaceId": fixed_surface["surfaceId"], "kind": "known-positive",
+        "queryUrl": fixed_evidence["sourceUrl"],
+        "queryParameters": fixed_evidence["membershipQueryParameters"],
+        "retrievedAt": fixed_evidence["retrievedAt"],
+        "fixtureRef": {"kind": "inline-record", "record": fixed_evidence},
+        "expectedIdentifiers": ["KR:SM30A:060/080:base", "fixed", "BS2019018060", "15 records"],
+        "validatesEdges": ["pokemon-card-korea-sm30a-fixed-product-positive"],
+        "outcome": "The official product statement and bounded named-deck membership positively support SM30A 060/080 as a fixed constructed-deck card; no finish or absence conclusion is attached.",
+    }
     surfaces = {row["surfaceId"]: row for row in document["surfaces"]}
     surfaces[surface["surfaceId"]] = surface
+    surfaces[fixed_surface["surfaceId"]] = fixed_surface
     document["surfaces"] = list(surfaces.values())
     observations = {row["observationId"]: row for row in document["observations"]}
     observations[observation["observationId"]] = observation
+    observations[fixed_observation["observationId"]] = fixed_observation
     document["observations"] = list(observations.values())
 
 
