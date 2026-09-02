@@ -5573,12 +5573,14 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:8012e85a85bc3e8ce6a74ae9b9e606f3372645d6487bd73243469997ebfa7735",
+      "rawRecordHash": "sha256:6ee2f71a08291c579f8852f6ea9110a11e601983940f93235a6f5e7684066abc",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
         "providerId": "owner-attestation",
         "sourceTypes": [
+          "Collection owner attestation (localized prerelease variants)",
+          "Collection owner attestation (not-printed adjudication); retained English product image for product identity only",
           "Owner attestation (domain expert)",
           "Owner attestation (domain expert) + set release schedule",
           "Owner attestation (domain expert); localized product image",
@@ -5590,7 +5592,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 68,
+        "stableIdCount": 85,
         "stableIds": [
           "F0009-P01",
           "F0057-P01",
@@ -5612,6 +5614,16 @@
           "F0456-P01",
           "F0456-P02",
           "F0456-P03",
+          "F0520-P01",
+          "F0520-P02",
+          "F0521-P01",
+          "F0521-P02",
+          "F0522-P01",
+          "F0522-P02",
+          "F0523-P01",
+          "F0523-P02",
+          "F0524-P01",
+          "F0524-P02",
           "F0569-P02",
           "F0569-P03",
           "F0570-P02",
@@ -5631,20 +5643,10 @@
           "F0603-P01",
           "F0603-P02",
           "F0604-P01",
-          "F0604-P02",
-          "F0605-P01",
-          "F0605-P02",
-          "F0606-P01",
-          "F0606-P02",
-          "F0607-P01",
-          "F0607-P02",
-          "F0614-P02",
-          "F0614-P03",
-          "F0615-P02",
-          "F0615-P03"
+          "F0604-P02"
         ],
-        "retrievedAt": "2026-07-23",
-        "usageCount": 68
+        "retrievedAt": "2026-09-02",
+        "usageCount": 85
       }
     },
     {
@@ -5665,7 +5667,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:263df1da32e2b1aca641885825beb46f040d1650c938377e261c0d00c85a924a",
+      "rawRecordHash": "sha256:83286221431905ae7d0c813d228b3d7b6f15024a7c6645126f952591dee06380",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -5683,7 +5685,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 33,
+        "stableIdCount": 34,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
@@ -5696,6 +5698,7 @@
           "F0456-P02",
           "F0456-P03",
           "F0519-P02",
+          "F0530-P01",
           "F0534-P01",
           "F0615-P03",
           "SPEC-0001",
@@ -5720,7 +5723,7 @@
           "U0780"
         ],
         "retrievedAt": "2026-08-26",
-        "usageCount": 44
+        "usageCount": 45
       }
     },
     {
@@ -7925,18 +7928,6 @@
     },
     {
       "sourceKey": "https://product-images.s3.cardmarket.com/51/FLF/281563/281563.jpg",
-      "providerId": "cardmarket",
-      "surfaceId": "cardmarket-products",
-      "capabilityEdgeIds": [
-        "cardmarket-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "image"
-      ]
-    },
-    {
-      "sourceKey": "https://product-images.s3.cardmarket.com/51/FLF/886906/886906.jpg",
       "providerId": "cardmarket",
       "surfaceId": "cardmarket-products",
       "capabilityEdgeIds": [
@@ -11839,6 +11830,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "image"
+      ]
+    },
+    {
+      "sourceKey": "https://product-images.s3.cardmarket.com/51/FLF/886906/886906.jpg",
+      "providerId": "cardmarket-product-image",
+      "surfaceId": "cardmarket-product-images",
+      "capabilityEdgeIds": [
+        "cardmarket-product-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "image",
+        "language"
       ]
     },
     {

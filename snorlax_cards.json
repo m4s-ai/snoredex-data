@@ -21,12 +21,12 @@
     ],
     "verification": {
       "description": "Every card x language x variant claim was checked against sources outside Cardmarket. See verification/RESUME.md.",
-      "confirmed": 635,
-      "contradicted": 84,
+      "confirmed": 629,
+      "contradicted": 90,
       "needsManualReview": 0,
       "open": 0,
       "totalUnits": 719,
-      "lastUpdated": "2026-08-13"
+      "lastUpdated": "2026-09-02"
     },
     "editionRuleset": {
       "westernFirstEdition": "Base Set through Neo Destiny except Base Set 2 (WOTC, English+European)",
@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-09-02",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 460,
+      "withConfirmedFinish": 461,
       "withOnlyMarketplaceClaim": 52,
-      "pendingFinish": 50,
+      "pendingFinish": 49,
       "notApplicableFinish": 75,
-      "withOwnerAdjudication": 5,
+      "withOwnerAdjudication": 8,
       "withNonHolo": 302,
-      "withHolo": 229,
-      "withReverseHolo": 228,
+      "withHolo": 230,
+      "withReverseHolo": 227,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 87,
-      "withAnyUnresolvedDetail": 167,
+      "withUnresolvedProductMapping": 75,
+      "withAnyUnresolvedDetail": 152,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -18156,7 +18156,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -18213,13 +18213,15 @@
           {
             "language": "French",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -18229,32 +18231,37 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0520",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0520-P01",
+                "printingId": "F0520-P02",
                 "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
-                "distribution": null,
-                "cardSize": "unknown",
+                "distribution": {
+                  "kind": "prerelease",
+                  "name": null
+                },
+                "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "German",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -18264,32 +18271,37 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0521",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0521-P01",
+                "printingId": "F0521-P02",
                 "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
-                "distribution": null,
-                "cardSize": "unknown",
+                "distribution": {
+                  "kind": "prerelease",
+                  "name": null
+                },
+                "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "Spanish",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -18299,32 +18311,43 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0523",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0523-P01",
                 "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "unknown",
+                "markings": [
+                  {
+                    "kind": "set-logo",
+                    "text": "Juntos de Aventuras",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "prerelease",
+                  "name": "Juntos de Aventuras Prerelease"
+                },
+                "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "Italian",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -18334,32 +18357,37 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0522",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0522-P01",
+                "printingId": "F0522-P02",
                 "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
-                "distribution": null,
-                "cardSize": "unknown",
+                "distribution": {
+                  "kind": "prerelease",
+                  "name": null
+                },
+                "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "Portuguese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -18369,19 +18397,22 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0524",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0524-P01",
+                "printingId": "F0524-P02",
                 "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
-                "distribution": null,
-                "cardSize": "unknown",
+                "distribution": {
+                  "kind": "prerelease",
+                  "name": null
+                },
+                "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           }
@@ -20416,7 +20447,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -20480,13 +20511,15 @@
           {
             "language": "French",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -20496,32 +20529,43 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0520",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0520-P01",
                 "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
+                "markings": [
+                  {
+                    "kind": "staff",
+                    "text": "Staff",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "prerelease-staff",
+                  "name": null
+                },
                 "cardSize": "unknown",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "German",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -20531,32 +20575,43 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0521",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0521-P01",
                 "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
+                "markings": [
+                  {
+                    "kind": "staff",
+                    "text": "Staff",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "prerelease-staff",
+                  "name": null
+                },
                 "cardSize": "unknown",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "Spanish",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -20566,32 +20621,43 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0523",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0523-P01",
+                "printingId": "F0523-P02",
                 "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
+                "markings": [
+                  {
+                    "kind": "staff",
+                    "text": "Staff",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "prerelease-staff",
+                  "name": "Juntos de Aventuras Prerelease Staff"
+                },
                 "cardSize": "unknown",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "Italian",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -20601,32 +20667,43 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0522",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0522-P01",
                 "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
+                "markings": [
+                  {
+                    "kind": "staff",
+                    "text": "Staff",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "prerelease-staff",
+                  "name": null
+                },
                 "cardSize": "unknown",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           },
           {
             "language": "Portuguese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "unmapped",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
@@ -20636,19 +20713,28 @@
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0524",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0524-P01",
                 "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
-                "distribution": null,
+                "markings": [
+                  {
+                    "kind": "staff",
+                    "text": "Staff",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "prerelease-staff",
+                  "name": null
+                },
                 "cardSize": "unknown",
                 "verificationStatus": "confirmed",
-                "productMapping": "unresolved"
+                "productMapping": "mapped"
               }
             ]
           }
@@ -21477,7 +21563,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0120",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0120-P01",
@@ -21526,7 +21612,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0121",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0121-P01",
@@ -21575,7 +21661,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0123",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0123-P01",
@@ -21624,7 +21710,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0122",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0122-P01",
@@ -21652,28 +21738,26 @@
             "language": "Portuguese",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "non-holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "non-holo"
             ],
             "finishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
             "finishUnitId": "F0124",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0124-P01",
@@ -21683,16 +21767,6 @@
                 "distribution": null,
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "mapped"
-              },
-              {
-                "printingId": "F0124-P02",
-                "finish": "reverse-holo",
-                "foilPattern": "type-symbol-background",
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
                 "productMapping": "mapped"
               }
             ]
@@ -21722,7 +21796,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0125",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0125-P01",
@@ -27068,24 +27142,49 @@
           {
             "language": "Portuguese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0530",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0530-P01",
+                "finish": "holo",
+                "foilPattern": "cosmos",
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "print-identity",
+                    "text": "black-star promo symbol"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0476.jpg",
+                "specimenIds": [
+                  "SPEC-0476"
+                ]
+              }
+            ]
           }
         ]
       },
@@ -39711,17 +39810,17 @@
           },
           {
             "language": "French",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -39729,24 +39828,24 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0120",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
             "language": "German",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -39754,24 +39853,24 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0121",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
             "language": "Spanish",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -39779,24 +39878,24 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0123",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
             "language": "Italian",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -39804,49 +39903,48 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0122",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
             "language": "Portuguese",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
-              "non-holo",
-              "reverse-holo"
+              "non-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0124",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
             "language": "Russian",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -39854,41 +39952,17 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0125",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           }
         ]
       },
       "languagesConfirmed": [
-        "English",
-        "French",
-        "German",
-        "Italian",
-        "Spanish",
-        "Portuguese"
+        "English"
       ],
-      "languagesContradicted": [],
-      "languagesUnresolved": [
-        "Russian"
-      ],
-      "languageVerification": {
-        "status": "partial",
-        "claimed": 7,
-        "repositoryConfirmed": 7,
-        "confirmed": 6,
-        "contradicted": 0,
-        "notPrinted": 0,
-        "disputed": 0,
-        "needsEvidence": 1,
-        "unresolved": 1,
-        "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
-      },
-      "languagesNotPrinted": [],
-      "languagesDisputed": [],
-      "languagesRepositoryConfirmed": [
-        "English",
+      "languagesContradicted": [
         "French",
         "German",
         "Italian",
@@ -39896,9 +39970,34 @@
         "Portuguese",
         "Russian"
       ],
-      "languagesNeedsEvidence": [
+      "languagesUnresolved": [],
+      "languageVerification": {
+        "status": "resolved",
+        "claimed": 7,
+        "repositoryConfirmed": 1,
+        "confirmed": 1,
+        "contradicted": 6,
+        "notPrinted": 6,
+        "disputed": 0,
+        "needsEvidence": 0,
+        "unresolved": 0,
+        "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
+      },
+      "languagesNotPrinted": [
+        "French",
+        "German",
+        "Italian",
+        "Spanish",
+        "Portuguese",
         "Russian"
-      ]
+      ],
+      "languagesDisputed": [],
+      "languagesRepositoryConfirmed": [
+        "English"
+      ],
+      "languagesNeedsEvidence": [],
+      "variantName": "Build-A-Bear Workshop promo (English/USA only)",
+      "variantNameSource": "Exact retained product image plus collection-owner distribution adjudication"
     },
     {
       "name": "Snorlax Lv.X",

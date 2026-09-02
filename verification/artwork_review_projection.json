@@ -4,18 +4,18 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-09-02",
-  "projectionVersion": "adefedd8e4c32528fc765e1aac46572f844c8ce2dac4442295feaa6d92e5b9ce",
+  "projectionVersion": "56136ea2a031ea21b8c4d7484c5e29cc7a72ef7290664860f5dbd067cc8f1834",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 255,
+    "groups": 254,
     "mappedWorks": 39,
     "mappedAppearances": 181,
-    "unmappedReleases": 74,
-    "cardReleases": 633,
-    "physicalPrintings": 720,
-    "sourceObservations": 2367
+    "unmappedReleases": 73,
+    "cardReleases": 632,
+    "physicalPrintings": 727,
+    "sourceObservations": 2379
   },
   "groups": [
     {
@@ -8209,25 +8209,87 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0520-P01",
-              "semanticPrintingId": "PRINTING:01f684d736bf06bf1c3f3b4f",
+              "physicalPrintingId": "PHYSICAL:PRINTING:24e2951248afdc1a98283be0",
+              "semanticPrintingId": "PRINTING:24e2951248afdc1a98283be0",
               "cardReleaseId": "RELEASE:WEST:French:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
+              "distribution": {
+                "kind": "prerelease",
+                "name": null
+              },
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0520",
-              "sourcePrintingId": "F0520-P01",
-              "establishingClaimId": "CLAIM:finish:F0520-P01",
+              "sourcePrintingId": "F0520-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:24e2951248afdc1a98283be0",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/fr/cards/svp-184",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:4a9b90841e9c9355e5fb14ca",
+              "semanticPrintingId": "PRINTING:4a9b90841e9c9355e5fb14ca",
+              "cardReleaseId": "RELEASE:WEST:French:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "staff",
+                  "text": "Staff",
+                  "role": "distribution-promo"
+                }
+              ],
+              "distribution": {
+                "kind": "prerelease-staff",
+                "name": null
+              },
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0520",
+              "sourcePrintingId": "F0520-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4a9b90841e9c9355e5fb14ca",
+              "sources": [
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
                 }
               ]
             }
@@ -8241,7 +8303,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Staff"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -8265,12 +8329,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0520-P01:0:8cfec1ae9c4ee3a1",
+              "observationId": "finish:F0520-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "55e96b1f3798e5c5690844d5f51d40e5768671aba147f74f5fb01dff6b643e1a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0520-P02:0:8cfec1ae9c4ee3a1",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/fr/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "ec34293e2c3b719818c02ae79c0528b928c3b376a5c956a5d0d72a7aa6b85001",
+              "contentHash": "85a68f75e5662d06094cc6202f662d3c5add2ec2bcb567db4625cafb3cdd318a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0520-P02:1:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "d63fdfc8efe25156319d2e45c2660369aaebe4bf6f881b83e3d33fdf65c5d13c",
               "image": null
             },
             {
@@ -8315,25 +8397,87 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0521-P01",
-              "semanticPrintingId": "PRINTING:a9da8352bc997eedd2277967",
+              "physicalPrintingId": "PHYSICAL:PRINTING:52f9e9efc813585389511b28",
+              "semanticPrintingId": "PRINTING:52f9e9efc813585389511b28",
               "cardReleaseId": "RELEASE:WEST:German:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
+              "distribution": {
+                "kind": "prerelease",
+                "name": null
+              },
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0521",
-              "sourcePrintingId": "F0521-P01",
-              "establishingClaimId": "CLAIM:finish:F0521-P01",
+              "sourcePrintingId": "F0521-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:52f9e9efc813585389511b28",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/de/cards/svp-184",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f1dc368dd1f7976730f3aad7",
+              "semanticPrintingId": "PRINTING:f1dc368dd1f7976730f3aad7",
+              "cardReleaseId": "RELEASE:WEST:German:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "staff",
+                  "text": "Staff",
+                  "role": "distribution-promo"
+                }
+              ],
+              "distribution": {
+                "kind": "prerelease-staff",
+                "name": null
+              },
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0521",
+              "sourcePrintingId": "F0521-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f1dc368dd1f7976730f3aad7",
+              "sources": [
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
                 }
               ]
             }
@@ -8347,7 +8491,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Staff"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -8371,12 +8517,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0521-P01:0:136a1dae8ee22e9f",
+              "observationId": "finish:F0521-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "ab58749035abe438e54092aec88b91c1086bf235cb3b5c85bba8f55337a82a71",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0521-P02:0:136a1dae8ee22e9f",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/de/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "ae6fb7d9a57f7194771128b99f0d3393d03a54aeb19cb8e3b6b75f5be1b20de4",
+              "contentHash": "00c29619b7bdae5219e73b3c1ac8ae9aac88470aba2695df8aa4be81b71041b3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0521-P02:1:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "49e6865b6f03248ac7ef6aeb5836aa38dc88582d70524dc30c0acc18b8e2b768",
               "image": null
             },
             {
@@ -8421,25 +8585,87 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0522-P01",
-              "semanticPrintingId": "PRINTING:3e31a19a891ea95b639a8d82",
+              "physicalPrintingId": "PHYSICAL:PRINTING:9e341c1597c99ae3eba2e748",
+              "semanticPrintingId": "PRINTING:9e341c1597c99ae3eba2e748",
               "cardReleaseId": "RELEASE:WEST:Italian:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
-              "distribution": null,
+              "markings": [
+                {
+                  "kind": "staff",
+                  "text": "Staff",
+                  "role": "distribution-promo"
+                }
+              ],
+              "distribution": {
+                "kind": "prerelease-staff",
+                "name": null
+              },
               "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0522",
               "sourcePrintingId": "F0522-P01",
-              "establishingClaimId": "CLAIM:finish:F0522-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:9e341c1597c99ae3eba2e748",
+              "sources": [
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d9c191bcb125c60aff7574bb",
+              "semanticPrintingId": "PRINTING:d9c191bcb125c60aff7574bb",
+              "cardReleaseId": "RELEASE:WEST:Italian:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": {
+                "kind": "prerelease",
+                "name": null
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0522",
+              "sourcePrintingId": "F0522-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d9c191bcb125c60aff7574bb",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/it/cards/svp-184",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
                 }
               ]
             }
@@ -8453,7 +8679,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Staff"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -8477,12 +8705,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0522-P01:0:d1c03c914e154fdb",
+              "observationId": "finish:F0522-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "9079545f72a1cf61541b2a003b7594c07874fe84e01382ce55c5b31653ab2dd0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0522-P02:0:d1c03c914e154fdb",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/it/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "4cb93d7a2033a8c8e4b9a657f99e8a2d05751bfde2d1b4065f525c3feeaa4dd6",
+              "contentHash": "57e84905fe3633eb49bde09cd307b2c9c41fe8e70588387b4977a8ac73a1935b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0522-P02:1:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "536cc6d42d3e490cb2aa09fddb5694d1a831b0749b79bddd410738dd69953c35",
               "image": null
             },
             {
@@ -8527,25 +8773,87 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0524-P01",
-              "semanticPrintingId": "PRINTING:1acbf4832c72df9949097e09",
+              "physicalPrintingId": "PHYSICAL:PRINTING:407977fae552ce2eead81d70",
+              "semanticPrintingId": "PRINTING:407977fae552ce2eead81d70",
               "cardReleaseId": "RELEASE:WEST:Portuguese:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
-              "distribution": null,
+              "markings": [
+                {
+                  "kind": "staff",
+                  "text": "Staff",
+                  "role": "distribution-promo"
+                }
+              ],
+              "distribution": {
+                "kind": "prerelease-staff",
+                "name": null
+              },
               "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0524",
               "sourcePrintingId": "F0524-P01",
-              "establishingClaimId": "CLAIM:finish:F0524-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:407977fae552ce2eead81d70",
+              "sources": [
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:73cdc5d5a13f0ab92b81492a",
+              "semanticPrintingId": "PRINTING:73cdc5d5a13f0ab92b81492a",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": {
+                "kind": "prerelease",
+                "name": null
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0524",
+              "sourcePrintingId": "F0524-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:73cdc5d5a13f0ab92b81492a",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/pt/cards/svp-184",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
                 }
               ]
             }
@@ -8559,7 +8867,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Staff"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -8583,12 +8893,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0524-P01:0:5c7ded2b9f9117b2",
+              "observationId": "finish:F0524-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "a4ae1ba3878a4d0255a5cfe506b99a030353a52550bb147f8a3631de27c16a85",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0524-P02:0:5c7ded2b9f9117b2",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/pt/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "15780beada3f8803a726e7c48e65e063d46d8f1451da62c46fa2473c06365a81",
+              "contentHash": "4d8c4f4876acf7ffb6a750fc6e7084d0cc4842a055d0edc06befdc86b7b594ee",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0524-P02:1:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "6adc776cfdd53ba48f09d78ad44e74ca7d3f93b638e31551b925a1e10c6fc4b3",
               "image": null
             },
             {
@@ -8612,7 +8940,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:WEST:Spanish:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+          "cardReleaseId": "RELEASE:WEST:Spanish:SVP ES:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "workId": "WORK:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "cardKey": "Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "appearanceId": "APPEARANCE:IMAGE:a69c5e59838be6c9b90b14d4",
@@ -8620,38 +8948,109 @@
           "locality": "WEST",
           "language": "Spanish",
           "script": "Latn",
-          "setEditionId": "EDITION:WEST:Spanish:SVP",
-          "localSetCode": "SVP",
+          "setEditionId": "EDITION:WEST:Spanish:SVP ES",
+          "localSetCode": "SVP ES",
           "localNumber": "184",
           "localIdentifierKnown": true,
           "state": "identified",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0282",
+            "U0319"
+          ],
           "legacyVariants": [
             "V1",
             "V2"
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0523-P01",
-              "semanticPrintingId": "PRINTING:b59d33a69d29e8b45df2caba",
-              "cardReleaseId": "RELEASE:WEST:Spanish:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "physicalPrintingId": "PHYSICAL:PRINTING:492656a36e0460a2d1d96e18",
+              "semanticPrintingId": "PRINTING:492656a36e0460a2d1d96e18",
+              "cardReleaseId": "RELEASE:WEST:Spanish:SVP ES:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
-              "distribution": null,
+              "markings": [
+                {
+                  "kind": "staff",
+                  "text": "Staff",
+                  "role": "distribution-promo"
+                }
+              ],
+              "distribution": {
+                "kind": "prerelease-staff",
+                "name": "Juntos de Aventuras Prerelease Staff"
+              },
               "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0523",
+              "sourcePrintingId": "F0523-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:492656a36e0460a2d1d96e18",
+              "sources": [
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:9dc3221772641a1c08a33523",
+              "semanticPrintingId": "PRINTING:9dc3221772641a1c08a33523",
+              "cardReleaseId": "RELEASE:WEST:Spanish:SVP ES:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "set-logo",
+                  "text": "Juntos de Aventuras",
+                  "role": "distribution-promo"
+                }
+              ],
+              "distribution": {
+                "kind": "prerelease",
+                "name": "Juntos de Aventuras Prerelease"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0523",
               "sourcePrintingId": "F0523-P01",
-              "establishingClaimId": "CLAIM:finish:F0523-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:9dc3221772641a1c08a33523",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/es/cards/svp-184",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "sourceType": "Collection owner attestation (localized prerelease variants)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English",
+                    "French",
+                    "German",
+                    "Italian",
+                    "Spanish",
+                    "Portuguese"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
                 }
               ]
             }
@@ -8665,7 +9064,10 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Juntos de Aventuras",
+              "Staff"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -8685,6 +9087,14 @@
               "contentHash": "f0fad2d1c9d7ee744f3689ef0454dc7b9f44d472597337a2b2d920c87be6974f",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+              "label": "publisher card image",
+              "observationId": "source-first:WEST:SVP ES:184:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -8694,8 +9104,35 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/es/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "1d9b0ea1e6a1ac8b49711cb1e9fdfbff2622b230a74943a653949b67c69d04db",
+              "contentHash": "e4ceb2936c8635a4a0f42d445d0e685634116f6c511e70ce1c24c57edfccc93a",
               "image": null
+            },
+            {
+              "observationId": "finish:F0523-P01:1:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "98f8ade01a0faaed6ccfdf0bb1f6c428f1596cdacfe9eae11bac43cca0c1c733",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0523-P02:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "fe280205d3b46eb28e0058cc0d51919998063b6701d145d12b044c3bcc13b9c4",
+              "image": null
+            },
+            {
+              "observationId": "source-first:WEST:SVP ES:184:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
+              "evidence": "The official European-Spanish promo asset is retained as SPEC-0034. It reads the complete printed code \"SVP ES 184\", carries the \"Juntos de Aventuras\" stamp, and uses \"Presión Dinámica\". The publisher's LATAM counterpart SPEC-0033 instead reads \"SVP LA 184\", carries \"Aventuras Compartidas\", and uses \"Plancha Dinámica\". The full printed modifier remains part of the local set code. Retrieved 2026-08-11.",
+              "contentHash": "84499ae6b246250bb396c8036f65de021f418973d97193f9d091974024f6a5aa",
+              "image": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png"
             },
             {
               "observationId": "unit:U0282",
@@ -48466,15 +48903,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:e5d2e31a32ac116518455a64",
+              "semanticPrintingId": "PRINTING:e5d2e31a32ac116518455a64",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "cosmos",
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "print-identity",
+                  "text": "black-star promo symbol"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0530",
+              "sourcePrintingId": "F0530-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e5d2e31a32ac116518455a64",
+              "specimenIds": [
+                "SPEC-0476"
+              ],
+              "sources": [
+                {
+                  "url": "user-provided attachment 1-Foto-1.jpg (2026-09-02)",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Uncut owner photograph showing two physical Portuguese SWSH032 Snorlax cards. BÁSICO, 150 PS, Golpe de Colisão Rolante, Impacto Pesado, the black-star promo symbol and SWSH032 establish the exact localized card. Large multicolored reflective circles and fine sparkles are directly visible in the artwork, establishing the Cosmos Holo treatment. Retained as SPEC-0476."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Tika Matsuno",
             "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "cosmos"
+            ],
+            "markings": [
+              "black-star promo symbol"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -48489,6 +48965,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0530-P01:0:fa08e6f9ab40cbb9",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "user-provided attachment 1-Foto-1.jpg (2026-09-02)",
+              "evidence": "Uncut owner photograph showing two physical Portuguese SWSH032 Snorlax cards. BÁSICO, 150 PS, Golpe de Colisão Rolante, Impacto Pesado, the black-star promo symbol and SWSH032 establish the exact localized card. Large multicolored reflective circles and fine sparkles are directly visible in the artwork, establishing the Cosmos Holo treatment. Retained as SPEC-0476.",
+              "contentHash": "e153c33b429ecf6f899ff7ffda047a0fc8d9a1795dd0e6b47117e378e316590d",
+              "image": null
+            },
             {
               "observationId": "unit:U0420",
               "kind": "unit",
@@ -52641,6 +53126,14 @@
               "contentHash": "bfbd62fc147c335fda7b86f1f93a96360ca7dcb27325430641e44a7be5454bfa",
               "kind": "repository",
               "reviewable": true
+            },
+            {
+              "src": "verification/specimens/SPEC-0479.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0479",
+              "contentHash": "bfbd62fc147c335fda7b86f1f93a96360ca7dcb27325430641e44a7be5454bfa",
+              "kind": "repository",
+              "reviewable": true
             }
           ],
           "observations": [
@@ -52699,6 +53192,15 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0479",
+              "kind": "specimen",
+              "provider": "collection-owner",
+              "url": null,
+              "evidence": "The complete card face visibly shows the English name Snorlax, English attack text, collector number 80/106 and the Build-A-Bear Workshop retailer stamp. This establishes the English V2 promo only; it does not establish another language or an exhaustive distribution list.",
+              "contentHash": "34db373742e29192d9a534e04645b4548e7bc13a00caae08df19e09fbff1d656",
+              "image": "verification/specimens/SPEC-0479.png"
+            },
+            {
               "observationId": "unit:U0330",
               "kind": "unit",
               "provider": "tcgdex",
@@ -52710,10 +53212,10 @@
             {
               "observationId": "unit:U0615",
               "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/en/cards/xy2-80",
-              "evidence": "en card 'Snorlax' id=xy2-80 localId=80",
-              "contentHash": "2a83d2ff11255f64b114efb069ad88e0f838793e0d497b59493c83866b2fc3cf",
+              "provider": "cardmarket-product-image",
+              "url": "https://product-images.s3.cardmarket.com/51/FLF/886906/886906.jpg",
+              "evidence": "The retained exact Cardmarket product image shows English card text, collector number 80/106 and the Build-A-Bear Workshop retailer stamp. It establishes Cardmarket V2 as the English promo and is retained as SPEC-0479.",
+              "contentHash": "e9c28f30679d60d49b3a4e62e94f0c69ecf9d49c4398cfab5f8cc0f46da57965",
               "image": "images/FLF_80_Snorlax_V2_886906.png"
             }
           ]
@@ -52761,6 +53263,11 @@
                   "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 },
                 {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
                   "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
                   "sourceType": "Official Pokémon localized expansion checklist",
                   "authorityTier": "official-primary",
@@ -52772,11 +53279,6 @@
                   "retrievedAt": "2026-08-27",
                   "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
                   "evidenceScope": "standard-set"
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             },
@@ -52864,25 +53366,25 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/fr/cards/xy2-80",
               "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "3989e98ed9bad7934d7155bf3be665fa746fbe213f8da5438e03e43491f4f938",
+              "contentHash": "b952cf1ca1b55922c5a6f948ea193dc65187b8561f41e81faf4d960d645f1820",
               "image": null
             },
             {
-              "observationId": "finish:F0120-P01:1:99662a21aecae7d4",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
-              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "contentHash": "502239fa4910ed084afe0dd9dfdc582309b0558e68cb7a85dbb2f205a607648e",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0120-P01:2:01d809516c50c37e",
+              "observationId": "finish:F0120-P01:1:01d809516c50c37e",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "6c74f914d0e688202f8c1b0d7d9acb935db68f869038f7d0c30c440a8a6759b7",
+              "contentHash": "c8613e56fc05d2055233b4532e6be5597991c10355758e90dbde2337db1fe90c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0120-P01:2:99662a21aecae7d4",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/xy2_web_cardlist_fr.pdf",
+              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
+              "contentHash": "0a1d6eae7f4930094dd18e9fcb372e9d1e046c615a00cac21f383f272399928b",
               "image": null
             },
             {
@@ -52924,10 +53426,10 @@
             {
               "observationId": "unit:U0616",
               "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/fr/cards/xy2-80",
-              "evidence": "fr card 'Ronflex' id=xy2-80 localId=80",
-              "contentHash": "b1824da7b71c3d28faf557435be8160a83f20a525e726c377b38a702ef41a162",
+              "provider": "owner-attestation",
+              "url": null,
+              "evidence": "The retained exact Cardmarket product image identifies FLF 80 V2 as the English Build-A-Bear Workshop promo. The collection owner explicitly adjudicates that this promo was distributed only in the USA and printed only in English: \"Diese v2 ist nur für English belegt, vermisch das nicht. Diese promo gab es nur in den USA.\" The regular localized FLF 80 V1 remains separate; this decision excludes only a French V2 promo.",
+              "contentHash": "570ec8424f47f53ffca86b6542431c11bd73c42d53a24fd8e06edfe9a9c38b40",
               "image": "images/FLF_80_Snorlax_V2_886906.png"
             }
           ]
@@ -52975,6 +53477,11 @@
                   "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 },
                 {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
                   "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
                   "sourceType": "Official Pokémon localized expansion checklist",
                   "authorityTier": "official-primary",
@@ -52986,11 +53493,6 @@
                   "retrievedAt": "2026-08-27",
                   "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
                   "evidenceScope": "standard-set"
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             },
@@ -53078,25 +53580,25 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/de/cards/xy2-80",
               "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "75ed65385e37bb435510349b332269d300aa1c4f35b3ec5edcae575ae97ae633",
+              "contentHash": "fe25e4ab006be4ec74a363c5ca1c5884c46f5a0f4e5e5a4e1011707a1321049e",
               "image": null
             },
             {
-              "observationId": "finish:F0121-P01:1:8969b0eb3fb68eac",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
-              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "contentHash": "1e3308fd2628c4a734f50ba82814ee9c59d43a5fb8a56fa0490322abc84f1087",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0121-P01:2:01d809516c50c37e",
+              "observationId": "finish:F0121-P01:1:01d809516c50c37e",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "6b5ad63dedb8e3836cf92332568e1d456bce602cec5d1a23332b71df89722097",
+              "contentHash": "c2ccae989fe2706d7b8d329a261d8208af7c454eecb9e1f6cc492438b2dfd407",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0121-P01:2:8969b0eb3fb68eac",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/xy2_web_cardlist_de.pdf",
+              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
+              "contentHash": "ab78f8e7888d6e4aa24bb22e58bad4b0f2f84c9f5f406f82051771d0ca2d11a0",
               "image": null
             },
             {
@@ -53138,10 +53640,10 @@
             {
               "observationId": "unit:U0617",
               "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/de/cards/xy2-80",
-              "evidence": "de card 'Relaxo' id=xy2-80 localId=80",
-              "contentHash": "8e4e99ccb9bba2257959774043dc898db57e21b7e5f4f7575cee9843fad00433",
+              "provider": "owner-attestation",
+              "url": null,
+              "evidence": "The retained exact Cardmarket product image identifies FLF 80 V2 as the English Build-A-Bear Workshop promo. The collection owner explicitly adjudicates that this promo was distributed only in the USA and printed only in English: \"Diese v2 ist nur für English belegt, vermisch das nicht. Diese promo gab es nur in den USA.\" The regular localized FLF 80 V1 remains separate; this decision excludes only a German V2 promo.",
+              "contentHash": "67c7ba9f27dbf8d85ff2621cb08eb61bef5ac83cfd7848405c39dd9133d67d1b",
               "image": "images/FLF_80_Snorlax_V2_886906.png"
             }
           ]
@@ -53189,6 +53691,11 @@
                   "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 },
                 {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
                   "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
                   "sourceType": "Official Pokémon localized expansion checklist",
                   "authorityTier": "official-primary",
@@ -53200,11 +53707,6 @@
                   "retrievedAt": "2026-08-27",
                   "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
                   "evidenceScope": "standard-set"
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             },
@@ -53292,25 +53794,25 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/it/cards/xy2-80",
               "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "a84590ec3747b09dee187af5cb0d2cc4d744b32586925c1bb5df81131bc054a3",
+              "contentHash": "0b517086beb7e19a211ba550d9a80f71f7574898bb0b9f0c7851549c84862555",
               "image": null
             },
             {
-              "observationId": "finish:F0122-P01:1:8e7693a417764755",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
-              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "contentHash": "7705ca7917a7737c7a67b180f8d0fbcbfaa0a4d49f42abe7b53e674ce642140f",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0122-P01:2:01d809516c50c37e",
+              "observationId": "finish:F0122-P01:1:01d809516c50c37e",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "0cd3e81645f92b25ff4b3ff9d84ad416401a12ab4782ea8183af909a381a7ee3",
+              "contentHash": "64cdf86232882c571da5cc07c92de69c06481c153f2bb86b59d1bd8f55a94558",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0122-P01:2:8e7693a417764755",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/xy2_web_cardlist_it.pdf",
+              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
+              "contentHash": "2940f8d8d2a96b4e7756633cd95078c1f1a3c7f8c1668d034a0b07a0dc16cb7a",
               "image": null
             },
             {
@@ -53352,10 +53854,10 @@
             {
               "observationId": "unit:U0619",
               "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/it/cards/xy2-80",
-              "evidence": "it card 'Snorlax' id=xy2-80 localId=80",
-              "contentHash": "5e0922aae9f7260acdaf1f5c5949423b34426e4126a1514d7e36da8d639337df",
+              "provider": "owner-attestation",
+              "url": null,
+              "evidence": "The retained exact Cardmarket product image identifies FLF 80 V2 as the English Build-A-Bear Workshop promo. The collection owner explicitly adjudicates that this promo was distributed only in the USA and printed only in English: \"Diese v2 ist nur für English belegt, vermisch das nicht. Diese promo gab es nur in den USA.\" The regular localized FLF 80 V1 remains separate; this decision excludes only an Italian V2 promo.",
+              "contentHash": "6f1b4596e8be38b9fd5a27c0d45be26dd20672563b84365ba9621945cfa9d46b",
               "image": "images/FLF_80_Snorlax_V2_886906.png"
             }
           ]
@@ -53416,12 +53918,9 @@
             "artist": "Mitsuhiro Arita",
             "variant": "V1, V2",
             "finish": [
-              "non-holo",
-              "reverse-holo"
+              "non-holo"
             ],
-            "foilPattern": [
-              "type-symbol-background"
-            ],
+            "foilPattern": [],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -53475,10 +53974,10 @@
             {
               "observationId": "unit:U0620",
               "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/pt/cards/xy2-80",
-              "evidence": "pt card 'Snorlax' id=xy2-80 localId=80",
-              "contentHash": "d74f11615f25f4fa81e96f7906cbbbf0563374b5318dda40a791bb71e075d373",
+              "provider": "owner-attestation",
+              "url": null,
+              "evidence": "The retained exact Cardmarket product image identifies FLF 80 V2 as the English Build-A-Bear Workshop promo. The collection owner explicitly adjudicates that this promo was distributed only in the USA and printed only in English: \"Diese v2 ist nur für English belegt, vermisch das nicht. Diese promo gab es nur in den USA.\" The regular localized FLF 80 V1 remains separate; this decision excludes only a Portuguese V2 promo.",
+              "contentHash": "d707baa76552c96d66595c7299a6825831b9fb4e6b89542dbefb4b8b985f8f59",
               "image": "images/FLF_80_Snorlax_V2_886906.png"
             }
           ]
@@ -53680,10 +54179,10 @@
             {
               "observationId": "unit:U0621",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "Flashfire listed in the Russian column (set-level evidence; V2 is a promo printing of the same set)",
-              "contentHash": "bcc94d59dfdd450e07c146c90865dfd4032bdebe0b54ca8ce86d0c878220b715",
+              "provider": "owner-attestation",
+              "url": null,
+              "evidence": "The retained exact Cardmarket product image identifies FLF 80 V2 as the English Build-A-Bear Workshop promo. The collection owner explicitly adjudicates that this promo was distributed only in the USA and printed only in English: \"Diese v2 ist nur für English belegt, vermisch das nicht. Diese promo gab es nur in den USA.\" The regular localized FLF 80 V1 remains separate; this decision excludes only a Russian V2 promo.",
+              "contentHash": "b30b75f70bd9c4346afd8b33fdd0e9f9d7654d3ec5846fc6d652b224d45ce34c",
               "image": "images/FLF_80_Snorlax_V2_886906.png"
             }
           ]
@@ -53731,6 +54230,11 @@
                   "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 },
                 {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
                   "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
                   "sourceType": "Official Pokémon localized expansion checklist",
                   "authorityTier": "official-primary",
@@ -53742,11 +54246,6 @@
                   "retrievedAt": "2026-08-27",
                   "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
                   "evidenceScope": "standard-set"
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             },
@@ -53834,25 +54333,25 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/es/cards/xy2-80",
               "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "a66f574c2d9afde91ae682d4c9c3347ad0e54ff78159c3322776fd1f421e9847",
+              "contentHash": "a304ff36e80d075f3c5369f5476908dca462640dbcc74bf0c8d462e4453f9a4e",
               "image": null
             },
             {
-              "observationId": "finish:F0123-P01:1:d4d8304b8a12516d",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
-              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "contentHash": "561e66a30934c36d0b2c37af742bc0018af9adb1fbec5fa152ba5326ccbc8684",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0123-P01:2:01d809516c50c37e",
+              "observationId": "finish:F0123-P01:1:01d809516c50c37e",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "e32145027066aeab30b9754f2732b59db1a5ae627752ae2087fec1c190394320",
+              "contentHash": "84c36714d282fe782db2151e0e5ff0ab565d679ff8a9146b0dcc1cc4d42a5aac",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0123-P01:2:d4d8304b8a12516d",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/xy2_web_cardlist_es.pdf",
+              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
+              "contentHash": "4582269f99a5175bbe93bc8e57d6dd7d52cf547abd9b88ae873056ec8f0d824b",
               "image": null
             },
             {
@@ -53894,10 +54393,10 @@
             {
               "observationId": "unit:U0618",
               "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/es/cards/xy2-80",
-              "evidence": "es card 'Snorlax' id=xy2-80 localId=80",
-              "contentHash": "0d814299e2a9cdd8c9911030005ff348a4ee3970c5a44fb937329244c33d9af5",
+              "provider": "owner-attestation",
+              "url": null,
+              "evidence": "The retained exact Cardmarket product image identifies FLF 80 V2 as the English Build-A-Bear Workshop promo. The collection owner explicitly adjudicates that this promo was distributed only in the USA and printed only in English: \"Diese v2 ist nur für English belegt, vermisch das nicht. Diese promo gab es nur in den USA.\" The regular localized FLF 80 V1 remains separate; this decision excludes only a Spanish V2 promo.",
+              "contentHash": "6bb63e9483bc8d4552dc691dc3032e7036af688564e36f3a4a037f3ac241457b",
               "image": "images/FLF_80_Snorlax_V2_886906.png"
             }
           ]
@@ -77665,7 +78164,36 @@
               ],
               "establishingClaimId": "CLAIM:positive:56aee25aabfce91a",
               "specimenIds": [
-                "SPEC-0033"
+                "SPEC-0033",
+                "SPEC-0478"
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0477",
+              "cardReleaseId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "staff",
+                  "role": "distribution-promo",
+                  "text": "Staff"
+                }
+              ],
+              "distribution": {
+                "kind": "prerelease-staff",
+                "name": "Aventuras Compartidas Prerelease Staff"
+              },
+              "cardSize": "standard",
+              "basis": "The right-hand physical card visibly reads SVP LA 184 and STAFF, carries the Aventuras Compartidas prerelease logo, and shows rainbow foil reflection along the border. The photograph and caption establish the Latin-American Spanish STAFF prerelease printing; no foil pattern or complete finish list is inferred.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0477",
+              "specimenIds": [
+                "SPEC-0477"
               ]
             }
           ],
@@ -77679,7 +78207,8 @@
             ],
             "foilPattern": [],
             "markings": [
-              "Aventuras Compartidas"
+              "Aventuras Compartidas",
+              "Staff"
             ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -82225,68 +82754,6 @@
               "evidence": "The retained official Indonesian card detail 15253 and SPEC-0182 show Snorlax ex 094/175 in SVM I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity no printed rarity symbol. The image is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "277cf8391f2c83ea1c63611e97438e58f402474c786cc7308d0de49397d715ba",
               "image": "https://asia.pokemon-card.com/id/card-img/id00015253.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:RELEASE:RELEASE:WEST:Spanish:SVP ES:184:unmapped-work:SPEC-0034",
-      "groupKind": "unmapped-release",
-      "appearanceId": "APPEARANCE:RELEASE:RELEASE:WEST:Spanish:SVP ES:184:unmapped-work:SPEC-0034",
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [],
-      "cardKeys": [],
-      "label": "Unresolved artwork appearance",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:WEST:Spanish:SVP ES:184:unmapped-work:SPEC-0034",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:RELEASE:RELEASE:WEST:Spanish:SVP ES:184:unmapped-work:SPEC-0034",
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "WEST",
-          "language": "Spanish",
-          "script": "Latn",
-          "setEditionId": "EDITION:WEST:Spanish:SVP ES",
-          "localSetCode": "SVP ES",
-          "localNumber": "184",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax de Paul",
-            "artist": null,
-            "variant": null,
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
-              "label": "publisher card image",
-              "observationId": "source-first:WEST:SVP ES:184:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:WEST:SVP ES:184:base",
-              "kind": "source-first",
-              "provider": "pokemon-official",
-              "url": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png",
-              "evidence": "The official European-Spanish promo asset is retained as SPEC-0034. It reads the complete printed code \"SVP ES 184\", carries the \"Juntos de Aventuras\" stamp, and uses \"Presión Dinámica\". The publisher's LATAM counterpart SPEC-0033 instead reads \"SVP LA 184\", carries \"Aventuras Compartidas\", and uses \"Plancha Dinámica\". The full printed modifier remains part of the local set code. Retrieved 2026-08-11.",
-              "contentHash": "84499ae6b246250bb396c8036f65de021f418973d97193f9d091974024f6a5aa",
-              "image": "https://assets.pokemon.com/static-assets/content-assets/cms2-es-es/img/cards/web/SVP/SVP_ES_184.png"
             }
           ]
         }

@@ -20,6 +20,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 DATABASE = ROOT / "snoredex.sqlite"
+FLF_TCGPLAYER_URL = (
+    "https://www.tcgplayer.com/product/232309/pokemon-miscellaneous-cards-and-products-"
+    "snorlax-80-106-build-a-bear-workshop-exclusive?page=1&Language=all"
+)
+FLF_IMAGE_URL = "https://product-images.s3.cardmarket.com/51/FLF/886906/886906.jpg"
 
 
 def main() -> int:
@@ -44,6 +49,29 @@ def main() -> int:
         raise AssertionError("owner adjudication store is empty")
     if len(decisions) != len(decision_ids):
         raise AssertionError("owner adjudication ids are not one-per-unit")
+    flf_v2_excluded = {f"U{number:04d}" for number in range(616, 622)}
+    journal_rows = [
+        json.loads(line)
+        for line in (ROOT / "verification" / "evidence.jsonl").read_text(
+            encoding="utf-8-sig"
+        ).splitlines()
+        if line.strip()
+    ]
+    required_history = {
+        "owner attestation",
+        "Owner attestation (domain expert)",
+        FLF_TCGPLAYER_URL,
+        FLF_IMAGE_URL,
+    }
+    for unit_id in flf_v2_excluded:
+        unit = raw_units[unit_id]
+        if unit.get("providerId") != "owner-attestation" or unit.get("sourceUrl") is not None:
+            raise AssertionError(
+                f"English-only FLF V2 decision is attributed to the wrong source: {unit_id}"
+            )
+        sources = {row.get("source") for row in journal_rows if row.get("unitId") == unit_id}
+        if not required_history <= sources:
+            raise AssertionError(f"FLF V2 correction erased journal history: {unit_id}")
     for decision in decisions:
         raw = raw_units.get(decision["unitId"])
         if not raw or raw["status"] != "contradicted":

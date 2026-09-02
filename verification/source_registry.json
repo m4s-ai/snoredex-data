@@ -13,7 +13,7 @@
    "evidenceRecords": 1269,
    "uniqueUrls": 1262,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3695
+   "claimsAttributed": 3705
   }
  },
  "providers": [
@@ -159,7 +159,7 @@
     "tcgdex.dev"
    ],
    "uniqueSources": 308,
-   "claimsSupported": 745
+   "claimsSupported": 739
   },
   {
    "providerId": "bulbapedia",
@@ -183,7 +183,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 84,
-   "claimsSupported": 636
+   "claimsSupported": 634
   },
   {
    "providerId": "tcgcsv",
@@ -541,8 +541,8 @@
     "cardmarket.com",
     "product-images.s3.cardmarket.com"
    ],
-   "uniqueSources": 349,
-   "claimsSupported": 865
+   "uniqueSources": 348,
+   "claimsSupported": 863
   },
   {
    "providerId": "cardmarket-product-image",
@@ -564,8 +564,8 @@
    "attribution": "Exact retained product image via Cardmarket.",
    "notes": "The image is positive evidence only for properties visible on the pictured card. The surrounding product page, selected language filter, offers and counts remain tier-5 catalogue metadata and never establish another localized release or absence. Retain accepted images as SPEC-nnnn records so the observation is reviewable.",
    "hosts": [],
-   "uniqueSources": 47,
-   "claimsSupported": 70
+   "uniqueSources": 48,
+   "claimsSupported": 72
   },
   {
    "providerId": "pokemontcgio",
@@ -702,7 +702,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 70
+   "claimsSupported": 87
   },
   {
    "providerId": "inspected-specimen",
@@ -724,7 +724,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 29,
-   "claimsSupported": 75
+   "claimsSupported": 76
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -1414,7 +1414,7 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 172,
+   "stableIdCount": 171,
    "stableIds": [
     "F0012-P02",
     "F0013-P02",
@@ -1465,10 +1465,10 @@
     "F0121-P02",
     "F0122-P02",
     "F0123-P02",
-    "F0124-P02"
+    "F0125-P02"
    ],
    "retrievedAt": null,
-   "usageCount": 172
+   "usageCount": 171
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Hungry_Snorlax_(Nintendo_64_promo)",
@@ -1604,7 +1604,7 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 45,
+   "stableIdCount": 44,
    "stableIds": [
     "U0085",
     "U0086",
@@ -1649,11 +1649,10 @@
     "U0602",
     "U0603",
     "U0604",
-    "U0621",
     "U0630"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 45
+   "usageCount": 44
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Lost_Link_(TCG)",
@@ -3466,23 +3465,6 @@
    "stableIdCount": 1,
    "stableIds": [
     "FLF 80 V1"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/FLF/886906/886906.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "FLF 80 V2"
    ],
    "retrievedAt": null,
    "usageCount": 1
@@ -6261,7 +6243,7 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 15,
+   "stableIdCount": 14,
    "stableIds": [
     "F0119-P02",
     "F0119-P03",
@@ -6274,13 +6256,12 @@
     "F0123-P01",
     "F0123-P02",
     "F0124-P01",
-    "F0124-P02",
     "F0125-P01",
     "F0125-P02",
     "FLF 80 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 15
+   "usageCount": 14
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V2-FLF1",
@@ -9597,6 +9578,26 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/FLF/886906/886906.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket exact card catalogue detail with retained product image",
+    "Cardmarket product image"
+   ],
+   "dimensions": [
+    "image",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "FLF 80 V2",
+    "U0615"
+   ],
+   "retrievedAt": "2026-09-02",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/G2/605388/605388.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
@@ -10662,7 +10663,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 33,
+   "stableIdCount": 34,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -10675,6 +10676,7 @@
     "F0456-P02",
     "F0456-P03",
     "F0519-P02",
+    "F0530-P01",
     "F0534-P01",
     "F0615-P03",
     "SPEC-0001",
@@ -10699,7 +10701,7 @@
     "U0780"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 44
+   "usageCount": 45
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -11272,6 +11274,8 @@
    "nonUrlEvidenceId": "evidence:owner-attestation",
    "providerId": "owner-attestation",
    "sourceTypes": [
+    "Collection owner attestation (localized prerelease variants)",
+    "Collection owner attestation (not-printed adjudication); retained English product image for product identity only",
     "Owner attestation (domain expert)",
     "Owner attestation (domain expert) + set release schedule",
     "Owner attestation (domain expert); localized product image",
@@ -11283,7 +11287,7 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 68,
+   "stableIdCount": 85,
    "stableIds": [
     "F0009-P01",
     "F0057-P01",
@@ -11305,6 +11309,16 @@
     "F0456-P01",
     "F0456-P02",
     "F0456-P03",
+    "F0520-P01",
+    "F0520-P02",
+    "F0521-P01",
+    "F0521-P02",
+    "F0522-P01",
+    "F0522-P02",
+    "F0523-P01",
+    "F0523-P02",
+    "F0524-P01",
+    "F0524-P02",
     "F0569-P02",
     "F0569-P03",
     "F0570-P02",
@@ -11324,20 +11338,10 @@
     "F0603-P01",
     "F0603-P02",
     "F0604-P01",
-    "F0604-P02",
-    "F0605-P01",
-    "F0605-P02",
-    "F0606-P01",
-    "F0606-P02",
-    "F0607-P01",
-    "F0607-P02",
-    "F0614-P02",
-    "F0614-P03",
-    "F0615-P02",
-    "F0615-P03"
+    "F0604-P02"
    ],
-   "retrievedAt": "2026-07-23",
-   "usageCount": 68
+   "retrievedAt": "2026-09-02",
+   "usageCount": 85
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -19974,7 +19978,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0521-P01",
+    "F0521-P02",
     "U0281",
     "U0318"
    ],
@@ -20361,14 +20365,13 @@
     "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "F0121-P01",
-    "U0332",
-    "U0617"
+    "U0332"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/de/cards/xy8-118",
@@ -21495,14 +21498,13 @@
     "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "F0119-P02",
-    "U0330",
-    "U0615"
+    "U0330"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/en/cards/xy8-118",
@@ -22292,14 +22294,13 @@
     "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "F0123-P01",
-    "U0333",
-    "U0618"
+    "U0333"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/es/cards/xy8-118",
@@ -22927,7 +22928,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0520-P01",
+    "F0520-P02",
     "U0280",
     "U0317"
    ],
@@ -23314,14 +23315,13 @@
     "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "F0120-P01",
-    "U0331",
-    "U0616"
+    "U0331"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/fr/cards/xy8-118",
@@ -23804,7 +23804,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0522-P01",
+    "F0522-P02",
     "U0283",
     "U0320"
    ],
@@ -24191,14 +24191,13 @@
     "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "F0122-P01",
-    "U0334",
-    "U0619"
+    "U0334"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/it/cards/xy8-118",
@@ -24922,7 +24921,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0524-P01",
+    "F0524-P02",
     "U0284",
     "U0321"
    ],
@@ -25309,14 +25308,13 @@
     "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "F0124-P01",
-    "U0335",
-    "U0620"
+    "U0335"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/pt/cards/xy8-118",

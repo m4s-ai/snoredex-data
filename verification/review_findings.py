@@ -1665,13 +1665,26 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
             )
             sys.path.insert(0, str(ROOT / "scripts"))
             try:
-                from source_registry import resolve_provider  # noqa: E402
+                from source_registry import (  # noqa: E402
+                    resolve_evidence_provider,
+                    retained_cardmarket_product_image_urls,
+                )
+
+                retained_cardmarket_images = retained_cardmarket_product_image_urls(
+                    load("verification/specimens.json")["specimens"]
+                )
+
+                def inferred_provider(unit):
+                    return resolve_evidence_provider(
+                        unit.get("sourceUrl"), unit.get("sourceType"), None,
+                        retained_cardmarket_images,
+                    )
 
                 provider_disagreements = [
                     f"{u['unitId']}: stored {u.get('providerId')} vs resolved "
-                    f"{resolve_provider(u.get('sourceUrl'), u.get('sourceType'))}"
+                    f"{inferred_provider(u)}"
                     for u in resolved_units
-                    if resolve_provider(u.get("sourceUrl"), u.get("sourceType")) != u.get("providerId")
+                    if inferred_provider(u) != u.get("providerId")
                 ]
                 check(
                     "S15",

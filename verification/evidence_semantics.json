@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-evidence-semantics",
     "schemaVersion": "1.0.0",
-    "generated": "2026-09-01",
+    "generated": "2026-09-02",
     "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
     "status": "active application policy. Raw verdicts remain unchanged",
     "description": "Every unit classified by the granularity of the evidence it rests on, and, for set-level confirmations, whether the inference from set to card carries. applicationStatus is the conservative consumer projection."
@@ -137,43 +137,43 @@
         "contradicted": 28
       },
       "product-or-set": {
-        "confirmed": 64,
+        "confirmed": 63,
         "contradicted": 23
       },
       "specimen-or-card": {
-        "confirmed": 571,
-        "contradicted": 33
+        "confirmed": 566,
+        "contradicted": 39
       }
     },
-    "setLevelConfirmations": 64,
+    "setLevelConfirmations": 63,
     "setLevelConfirmationsThatCarry": 52,
-    "setLevelConfirmationsThatDoNotCarry": 12,
+    "setLevelConfirmationsThatDoNotCarry": 11,
     "setLevelConfirmationsNeedingSetSize": 0,
-    "setLevelConfirmationsNotReachingTheCard": 12,
+    "setLevelConfirmationsNotReachingTheCard": 11,
     "contradictionsByBacking": {
-      "owner-adjudicated": 80,
+      "owner-adjudicated": 86,
       "source-disagreement": 4
     },
     "setLevelConfirmationsByRunBasis": {
       "rarity-table": 43,
       "printed-set-size": 18,
-      "distribution-rarity": 3
+      "distribution-rarity": 2
     },
     "unsoundByRarity": {
       "Secret Rare": 4,
       "Character Rare": 3,
-      "Promo": 3,
+      "Promo": 2,
       "Rainbow Rare": 2
     },
-    "verdictsBeyondTheirGranularity": 16,
+    "verdictsBeyondTheirGranularity": 15,
     "verdictsBeyondTheirGranularityByRule": {
-      "step-from-product-to-card": 12,
+      "step-from-product-to-card": 11,
       "source-disagreement-does-not-establish-absence": 4
     },
     "applicationStatuses": {
-      "exists": 623,
-      "not-printed": 80,
-      "needs-evidence": 12,
+      "exists": 618,
+      "not-printed": 86,
+      "needs-evidence": 11,
       "disputed": 4
     }
   },
@@ -445,25 +445,6 @@
       "applicationStatus": "needs-evidence"
     },
     {
-      "unitId": "U0621",
-      "setCode": "FLF",
-      "number": "80",
-      "variant": "V2",
-      "language": "Russian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "distribution-rarity",
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "does-not-carry",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "step-from-product-to-card",
-      "applicationStatus": "needs-evidence"
-    },
-    {
       "unitId": "U0634",
       "setCode": "sm9",
       "number": "106",
@@ -687,25 +668,6 @@
       "insideNumberedRun": false,
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 93 against the set's printed size 70, recorded in the set database: numbered above the printed size",
-      "sourceCarriesCardList": false,
-      "inference": "does-not-carry",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "step-from-product-to-card",
-      "applicationStatus": "needs-evidence"
-    },
-    {
-      "unitId": "U0621",
-      "setCode": "FLF",
-      "number": "80",
-      "variant": "V2",
-      "language": "Russian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "distribution-rarity",
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
       "inference": "does-not-carry",
       "verdictWithinGranularity": false,
@@ -12293,7 +12255,7 @@
       "variant": "V2",
       "language": "English",
       "status": "confirmed",
-      "providerId": "tcgdex",
+      "providerId": "cardmarket-product-image",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
@@ -12311,18 +12273,18 @@
       "number": "80",
       "variant": "V2",
       "language": "French",
-      "status": "confirmed",
-      "providerId": "tcgdex",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": null,
+      "inference": "owner-adjudicated",
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0617",
@@ -12330,18 +12292,18 @@
       "number": "80",
       "variant": "V2",
       "language": "German",
-      "status": "confirmed",
-      "providerId": "tcgdex",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": null,
+      "inference": "owner-adjudicated",
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0618",
@@ -12349,18 +12311,18 @@
       "number": "80",
       "variant": "V2",
       "language": "Spanish",
-      "status": "confirmed",
-      "providerId": "tcgdex",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": null,
+      "inference": "owner-adjudicated",
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0619",
@@ -12368,18 +12330,18 @@
       "number": "80",
       "variant": "V2",
       "language": "Italian",
-      "status": "confirmed",
-      "providerId": "tcgdex",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": null,
+      "inference": "owner-adjudicated",
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0620",
@@ -12387,18 +12349,18 @@
       "number": "80",
       "variant": "V2",
       "language": "Portuguese",
-      "status": "confirmed",
-      "providerId": "tcgdex",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": null,
+      "inference": "owner-adjudicated",
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0621",
@@ -12406,18 +12368,18 @@
       "number": "80",
       "variant": "V2",
       "language": "Russian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
+      "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": "does-not-carry",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "step-from-product-to-card",
-      "applicationStatus": "needs-evidence"
+      "inference": "owner-adjudicated",
+      "verdictWithinGranularity": true,
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0622",
