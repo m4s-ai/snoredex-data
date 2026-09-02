@@ -591,7 +591,7 @@ HOST_TO_PROVIDER = {
 }
 
 # Fallback matching for non-URL evidence, keyed on the wording the stores already use.
-SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
+SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str | None]] = [
     # Ahead of both `photograph` and `cardmarket`: a seller's listing photograph is evidence and
     # the catalogue it sits on is not, so the two must never collapse onto one provider. The
     # tie-break is earliest mention, and "Cardmarket seller ..." starts at the same offset as the
@@ -600,6 +600,9 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
     (re.compile(r"pok[eé]cardex", re.I), "pokecardex"),
+    # A generic archive is not a provider.  Keep it in the earliest-source tie-break as an
+    # unresolved sentinel so later corroborators cannot inherit an unknown archive URL.
+    (re.compile(r"third-party scan archive", re.I), None),
     (re.compile(r"pkparaiso", re.I), "pkparaiso"),
     (re.compile(r"collectory", re.I), "collectory"),
     (re.compile(r"wikidex", re.I), "wikidex"),
@@ -723,7 +726,7 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
                 return provider_id
     if not source_type:
         return None
-    named: list[tuple[int, int, str]] = []
+    named: list[tuple[int, int, str | None]] = []
     for order, (pattern, provider_id) in enumerate(SOURCE_TYPE_PATTERNS):
         found = pattern.search(source_type)
         if found:

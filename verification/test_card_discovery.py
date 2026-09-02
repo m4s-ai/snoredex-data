@@ -290,6 +290,25 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertIsNone(
             registry.resolve_provider(None, "Third-party scan archive")
         )
+        self.assertIsNone(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive corroborated by owner attestation",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                None,
+                "Third-party scan archive corroborated by owner attestation",
+            )
+        )
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Owner attestation corroborated by third-party scan archive",
+            ),
+            "owner-attestation",
+        )
 
     def test_cardmarket_product_images_are_separate_visible_card_evidence(self):
         image_url = "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg"
