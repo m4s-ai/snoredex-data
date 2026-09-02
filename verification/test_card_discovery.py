@@ -266,6 +266,101 @@ class CardDiscoveryTests(unittest.TestCase):
             "cardmarket-listing-photo",
         )
 
+    def test_scan_archives_use_the_actual_host(self):
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://www.coleka.com/media/item/example.webp",
+                "Third-party scan archive",
+            ),
+            "retailer-listing",
+        )
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://pokecardex-scans.b-cdn.net/sets/example.jpg",
+                "Third-party scan archive",
+            ),
+            "pokecardex",
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(None, "Third-party scan archive")
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive corroborated by owner attestation",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                None,
+                "Third-party scan archive corroborated by owner attestation",
+            )
+        )
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Owner attestation corroborated by third-party scan archive",
+            ),
+            "owner-attestation",
+        )
+        for source_name, provider_id in (
+            ("PokéCardex", "pokecardex"),
+            ("PKParaiso", "pkparaiso"),
+            ("Collectory", "collectory"),
+            ("WikiDex", "wikidex"),
+        ):
+            with self.subTest(source_name=source_name):
+                self.assertEqual(
+                    registry.resolve_provider(
+                        None,
+                        f"Third-party scan archive from {source_name}",
+                    ),
+                    provider_id,
+                )
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive from PokéCardex corroborated by owner attestation",
+            ),
+            "pokecardex",
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive with owner attestation",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                None,
+                "Third-party scan archive and Bulbapedia confirmation",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive and PokéCardex confirmation",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                None,
+                "Third-party scan archive from unknown with PokéCardex confirmation",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                None,
+                "Third-party scan archive; supporting screenshot from PokéCardex",
+            )
+        )
+
     def test_cardmarket_product_images_are_separate_visible_card_evidence(self):
         image_url = "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg"
         self.assertEqual(

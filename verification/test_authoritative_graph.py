@@ -645,6 +645,31 @@ def main() -> None:
         "issue #304 release has unexpected work mapping state" in error
         for error in validate(tampered)
     )
+    rr111_releases = {
+        "RELEASE:JP:Japanese:DP-P:127:None",
+        "RELEASE:WEST:English:RR:111:None",
+        "RELEASE:WEST:French:RR:111:None",
+        "RELEASE:WEST:German:RR:111:None",
+        "RELEASE:WEST:Italian:RR:111:None",
+    }
+    rr111_work_id = "WORK:Snorlax-LvX-Big-Appetite-Exercise"
+    assert {
+        row["entityId"]
+        for row in graph["entities"]
+        if row["entityType"] == "card-release"
+        and row["entityId"] in rr111_releases
+        and row["payload"]["workMappingState"] == "mapped"
+        and row["payload"]["work"] == "Snorlax-LvX-Big-Appetite-Exercise"
+    } == rr111_releases
+    assert {
+        row["fromId"]
+        for row in graph["edges"]
+        if row["fromType"] == "card-release"
+        and row["fromId"] in rr111_releases
+        and row["relation"] == "implements"
+        and row["toType"] == "work"
+        and row["toId"] == rr111_work_id
+    } == rr111_releases
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.

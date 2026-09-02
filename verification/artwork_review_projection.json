@@ -4,18 +4,18 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-09-02",
-  "projectionVersion": "56136ea2a031ea21b8c4d7484c5e29cc7a72ef7290664860f5dbd067cc8f1834",
+  "projectionVersion": "e251bbf26e6b22501e408dcfef9e7782397c5c7e80c6d02d1381b5576b6b94ac",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
     "groups": 254,
-    "mappedWorks": 39,
+    "mappedWorks": 40,
     "mappedAppearances": 181,
     "unmappedReleases": 73,
     "cardReleases": 632,
-    "physicalPrintings": 727,
-    "sourceObservations": 2379
+    "physicalPrintings": 728,
+    "sourceObservations": 2381
   },
   "groups": [
     {
@@ -45348,6 +45348,668 @@
       ]
     },
     {
+      "groupId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
+      "groupKind": "mapped-appearance",
+      "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
+      "appearanceIdentityState": "verified-image-match",
+      "workIds": [
+        "WORK:Snorlax-LvX-Big-Appetite-Exercise"
+      ],
+      "cardKeys": [
+        "Snorlax-LvX-Big-Appetite-Exercise"
+      ],
+      "label": "Snorlax-LvX-Big-Appetite-Exercise",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:JP:Japanese:DP-P:127:None",
+          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
+          "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
+          "appearanceIdentityState": "verified-image-match",
+          "locality": "JP",
+          "language": "Japanese",
+          "script": "Jpan",
+          "setEditionId": "EDITION:JP:Japanese:DP-P",
+          "localSetCode": "DP-P",
+          "localNumber": "127",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:27f7305d8849e092d8ae6325",
+              "semanticPrintingId": "PRINTING:27f7305d8849e092d8ae6325",
+              "cardReleaseId": "RELEASE:JP:Japanese:DP-P:127:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "sparkle",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0098",
+              "sourcePrintingId": "F0098-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:27f7305d8849e092d8ae6325",
+              "specimenIds": [
+                "SPEC-0231"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.X DP-P 127 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Multicolour reflective points are visible throughout the artwork window. Retained as SPEC-0231."
+                }
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax Lv.X",
+            "artist": "Shizurow",
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "sparkle"
+            ],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "images/DP-P_127_Snorlax_Lv_X_566758.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0622",
+              "contentHash": "ce8e845cde5c7af6778589fbc431464b866d9c924a1ec62d41761e9a474b758d",
+              "kind": "repository",
+              "reviewable": true
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "finish:F0098-P01:0:23f17dc7a3253e68",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.X DP-P 127 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Multicolour reflective points are visible throughout the artwork window. Retained as SPEC-0231.",
+              "contentHash": "a9067f1d6fd3df52496503f2c0ada5dcd4e52e26a9e2641d423b3114cd5fc949",
+              "image": null
+            },
+            {
+              "observationId": "unit:U0622",
+              "kind": "unit",
+              "provider": "pokemon-card-jp",
+              "url": "https://www.pokemon-card.com/card-search/details.php/card/22277/regu/all",
+              "evidence": "official JP promo entry: set=DPP name=カビゴン illustrator=Shizurow (promo page carries no collector number; match is unambiguous by set + card name)",
+              "contentHash": "44cb667d6d3d48997aeb812f7de0997bba1f18a733f69d63c975928cf6e49b5b",
+              "image": "images/DP-P_127_Snorlax_Lv_X_566758.jpg"
+            }
+          ]
+        },
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
+          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
+          "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
+          "appearanceIdentityState": "verified-image-match",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:DP",
+          "localSetCode": "DP",
+          "localNumber": "006",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0623"
+          ],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0440",
+              "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Reflective points are directly visible across the photographed Korean Lv.X card face.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0440",
+              "specimenIds": [
+                "SPEC-0440"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax Lv.X",
+            "artist": "SHizURow",
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "images/DP-P_127_Snorlax_Lv_X_566758.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0623",
+              "contentHash": "ce8e845cde5c7af6778589fbc431464b866d9c924a1ec62d41761e9a474b758d",
+              "kind": "repository",
+              "reviewable": true
+            },
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:DP:006:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:KR:DP:006:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 LV.X DP 6 in DP 프로모 카드, with illustrator SHizURow and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "75a6dfd1212d382c005897390d3f50b5bec191c745222589446575f75715ed3c",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512"
+            },
+            {
+              "observationId": "unit:U0623",
+              "kind": "unit",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
+              "evidence": "Korean Black Star Promos set list row: 006 Snorlax LV.X, Colorless, Promo pack 2. NOTE: the Korean promo series numbers independently (006 there vs the Japanese DP-P 127 that Cardmarket files it under). OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/PR2010001006 positively identifies 잠만보 LV.X 6 in DP 프로모 카드 and credits SHizURow. This supports identity and Work mapping only; no finish or absence is inferred.",
+              "contentHash": "f4ddc7651726ba3e6562dcf4db689e5b45630fc0222cdca5a7d3ed1f2b1572ea",
+              "image": "images/DP-P_127_Snorlax_Lv_X_566758.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
+      "groupKind": "mapped-appearance",
+      "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
+      "appearanceIdentityState": "verified-image-match",
+      "workIds": [
+        "WORK:Snorlax-LvX-Big-Appetite-Exercise"
+      ],
+      "cardKeys": [
+        "Snorlax-LvX-Big-Appetite-Exercise"
+      ],
+      "label": "Snorlax-LvX-Big-Appetite-Exercise",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:English:RR:111:None",
+          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
+          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
+          "appearanceIdentityState": "verified-image-match",
+          "locality": "WEST",
+          "language": "English",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:English:RR",
+          "localSetCode": "RR",
+          "localNumber": "111",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:F0316-P01",
+              "semanticPrintingId": "PRINTING:477c30656d99a78514fbc98b",
+              "cardReleaseId": "RELEASE:WEST:English:RR:111:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0316",
+              "sourcePrintingId": "F0316-P01",
+              "establishingClaimId": "CLAIM:finish:F0316-P01",
+              "sources": [
+                {
+                  "url": "https://api.tcgdex.net/v2/en/cards/pl2-111",
+                  "sourceType": "TCGdex API card variants",
+                  "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
+                  "sourceType": "Official Pokémon localized expansion checklist",
+                  "authorityTier": "official-primary",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "English"
+                  ],
+                  "retrievedAt": "2026-08-27",
+                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+                  "evidenceScope": "standard-set"
+                }
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax Lv.X",
+            "artist": "Shizurow",
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0365",
+              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
+              "kind": "repository",
+              "reviewable": true
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "finish:F0316-P01:0:3c7eeab2c3c4259c",
+              "kind": "finish",
+              "provider": "TCGdex API card variants",
+              "url": "https://api.tcgdex.net/v2/en/cards/pl2-111",
+              "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
+              "contentHash": "3aad6cc8dc39a5cf5125043466d311320b76c5df5b9f325287b6e1b8e0bbf8c3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0316-P01:1:135d3c6471b3eb53",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
+              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+              "contentHash": "68a9e3224a0892064fd83d1c2c231d9db1224b726d36f13937cc643f9ebc8543",
+              "image": null
+            },
+            {
+              "observationId": "unit:U0365",
+              "kind": "unit",
+              "provider": "tcgdex",
+              "url": "https://api.tcgdex.net/v2/en/cards/pl2-111",
+              "evidence": "en card 'Snorlax' id=pl2-111 localId=111",
+              "contentHash": "cd74d06c3e23bbe6b411a4948ea782521e1d9c6fbba71a64cf83b683d5605b0a",
+              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
+            }
+          ]
+        },
+        {
+          "cardReleaseId": "RELEASE:WEST:French:RR:111:None",
+          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
+          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
+          "appearanceIdentityState": "verified-image-match",
+          "locality": "WEST",
+          "language": "French",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:French:RR",
+          "localSetCode": "RR",
+          "localNumber": "111",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:F0317-P01",
+              "semanticPrintingId": "PRINTING:6fd23c4558122755bf3d37c8",
+              "cardReleaseId": "RELEASE:WEST:French:RR:111:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0317",
+              "sourcePrintingId": "F0317-P01",
+              "establishingClaimId": "CLAIM:finish:F0317-P01",
+              "sources": [
+                {
+                  "url": "https://api.tcgdex.net/v2/fr/cards/pl2-111",
+                  "sourceType": "TCGdex API card variants",
+                  "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
+                  "sourceType": "Official Pokémon localized expansion checklist",
+                  "authorityTier": "official-primary",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "French"
+                  ],
+                  "retrievedAt": "2026-08-27",
+                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+                  "evidenceScope": "standard-set"
+                }
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax Lv.X",
+            "artist": "Shizurow",
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0366",
+              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
+              "kind": "repository",
+              "reviewable": true
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "finish:F0317-P01:0:b217de9e9ecef6ff",
+              "kind": "finish",
+              "provider": "TCGdex API card variants",
+              "url": "https://api.tcgdex.net/v2/fr/cards/pl2-111",
+              "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
+              "contentHash": "8d5ac2915bae19e624ffae48f0f273a066087a200193b5e5c90e50bbbac94b08",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0317-P01:1:2b4a7c49c0eb86e5",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
+              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+              "contentHash": "659ea6a92d7cd8273815511be69b055cda8b844455f49e120c2dc674e9695a59",
+              "image": null
+            },
+            {
+              "observationId": "unit:U0366",
+              "kind": "unit",
+              "provider": "tcgdex",
+              "url": "https://api.tcgdex.net/v2/fr/cards/pl2-111",
+              "evidence": "fr card 'Ronflex Niv. X' id=pl2-111 localId=111",
+              "contentHash": "92a422eae4616f92bbcf089ba800530e3784bf6de53a720722eb4dbbb6133d6a",
+              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
+            }
+          ]
+        },
+        {
+          "cardReleaseId": "RELEASE:WEST:German:RR:111:None",
+          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
+          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
+          "appearanceIdentityState": "verified-image-match",
+          "locality": "WEST",
+          "language": "German",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:German:RR",
+          "localSetCode": "RR",
+          "localNumber": "111",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:F0318-P01",
+              "semanticPrintingId": "PRINTING:862910000fc6d631dec7f38a",
+              "cardReleaseId": "RELEASE:WEST:German:RR:111:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0318",
+              "sourcePrintingId": "F0318-P01",
+              "establishingClaimId": "CLAIM:finish:F0318-P01",
+              "sources": [
+                {
+                  "url": "https://api.tcgdex.net/v2/de/cards/pl2-111",
+                  "sourceType": "TCGdex API card variants",
+                  "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
+                {
+                  "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
+                  "sourceType": "Official Pokémon localized expansion checklist",
+                  "authorityTier": "official-primary",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "German"
+                  ],
+                  "retrievedAt": "2026-08-27",
+                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+                  "evidenceScope": "standard-set"
+                }
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax Lv.X",
+            "artist": "Shizurow",
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0367",
+              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
+              "kind": "repository",
+              "reviewable": true
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "finish:F0318-P01:0:d9ba9e3bcbe5c838",
+              "kind": "finish",
+              "provider": "TCGdex API card variants",
+              "url": "https://api.tcgdex.net/v2/de/cards/pl2-111",
+              "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
+              "contentHash": "3fc95c89b444bb0777fa3200adad7a680f35200ff25ceb465ea7d54834df6cdb",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0318-P01:1:88c239f8b7a93482",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
+              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+              "contentHash": "62cc2bae308de18e444dac5a290f8d8ad9eaa953638b8de15e1087a0c505eaa6",
+              "image": null
+            },
+            {
+              "observationId": "unit:U0367",
+              "kind": "unit",
+              "provider": "tcgdex",
+              "url": "https://api.tcgdex.net/v2/de/cards/pl2-111",
+              "evidence": "de card 'Relaxo' id=pl2-111 localId=111",
+              "contentHash": "de9aafbd8c4222447baa5ee768726bc24ce74cac1cc0a7eb5e39e9e094821900",
+              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
+            }
+          ]
+        },
+        {
+          "cardReleaseId": "RELEASE:WEST:Italian:RR:111:None",
+          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
+          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
+          "appearanceIdentityState": "verified-image-match",
+          "locality": "WEST",
+          "language": "Italian",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:Italian:RR",
+          "localSetCode": "RR",
+          "localNumber": "111",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:ffae450dbabd7a908e312565",
+              "semanticPrintingId": "PRINTING:ffae450dbabd7a908e312565",
+              "cardReleaseId": "RELEASE:WEST:Italian:RR:111:None",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": "sparkle holo across artwork and frame",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0319",
+              "sourcePrintingId": "F0319-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:ffae450dbabd7a908e312565",
+              "specimenIds": [
+                "SPEC-0119"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax LIV.X 111/111. Grande Appetito, Allenarsi and 111/111 establish the exact local identity; multicolour sparkle and reflective treatment are visible across the artwork and card frame. The exact seller title independently identifies Holo rare Ita. Retained as SPEC-0119."
+                },
+                {
+                  "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
+                  "sourceType": "Official Pokémon localized expansion checklist",
+                  "authorityTier": "official-primary",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "Italian"
+                  ],
+                  "retrievedAt": "2026-08-27",
+                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+                  "evidenceScope": "standard-set"
+                }
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax Lv.X",
+            "artist": "Shizurow",
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [
+              "sparkle holo across artwork and frame"
+            ],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0368",
+              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
+              "kind": "repository",
+              "reviewable": true
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "finish:F0319-P01:0:7040f9cffbdcaa97",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax LIV.X 111/111. Grande Appetito, Allenarsi and 111/111 establish the exact local identity; multicolour sparkle and reflective treatment are visible across the artwork and card frame. The exact seller title independently identifies Holo rare Ita. Retained as SPEC-0119.",
+              "contentHash": "a1c7c433149fa0ae9efb6cd91c132f9f526bdeeb3db1c1b54999f348ff74d1fa",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0319-P01:1:d5dae368532fb69f",
+              "kind": "finish",
+              "provider": "Official Pokémon localized expansion checklist",
+              "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
+              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
+              "contentHash": "09b70ec2e77aa750b2ed97dd8b2cf0cbefc17586ca3cdd04bd19c37236b48857",
+              "image": null
+            },
+            {
+              "observationId": "unit:U0368",
+              "kind": "unit",
+              "provider": "pokemon-official",
+              "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/",
+              "evidence": "The Pokémon Company's Italian locale card archive serves this exact card as Snorlax in Platino - L'Ascesa dei Rivali, identifies it as Pokémon LIV.X, and uses the Italian CMS image PL2_IT_111.png. This card-level page replaces the previous set-level inference that an Italian release of Rising Rivals must contain a secret-numbered card. The earlier cross-language-index observation remains in evidence.jsonl as history. No finish or archive absence is inferred. Retrieved 2026-08-11.",
+              "contentHash": "55a8c0a67aa168a9f914120117ac43d08c57c7585f0873ea83311f6a93084f2f",
+              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "groupId": "APPEARANCE:IMAGE:144124dca482952f1f0dbdd6",
       "groupKind": "mapped-appearance",
       "appearanceId": "APPEARANCE:IMAGE:144124dca482952f1f0dbdd6",
@@ -59938,15 +60600,65 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+              "semanticPrintingId": "PRINTING:b2f2ecdd65e9dba9b836f5b2",
+              "cardReleaseId": "RELEASE:WEST:French:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "championship-signature",
+                  "role": "distribution-promo",
+                  "text": "Gabriel Fernandez"
+                }
+              ],
+              "distribution": {
+                "kind": "world-championship-deck",
+                "name": "2023 Colorless Lugia"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0585",
+              "sourcePrintingId": "F0585-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+              "specimenIds": [
+                "SPEC-0480"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.coleka.com/media/item/202403/06/deck-2-champion-categorie-senior-gabriel-fernandez-bresil-colorless-lugia-ronflex-143-196.webp",
+                  "sourceType": "Third-party scan archive",
+                  "evidence": "Complete Coleka scan of French WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Ronflex, Graisse Impassible, Ronflement Retentissant 180 and 143/196 establish the localized card. The silver-grey World Championships border and Gabriel Fernandez replica signature at the lower right of the artwork establish the championship-deck printing. Retained as SPEC-0480.",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained third-party scan archive supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "0313",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Gabriel Fernandez"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -59961,6 +60673,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0585-P01:0:c2be3e33f7096e19",
+              "kind": "finish",
+              "provider": "Third-party scan archive",
+              "url": "https://www.coleka.com/media/item/202403/06/deck-2-champion-categorie-senior-gabriel-fernandez-bresil-colorless-lugia-ronflex-143-196.webp",
+              "evidence": "Complete Coleka scan of French WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Ronflex, Graisse Impassible, Ronflement Retentissant 180 and 143/196 establish the localized card. The silver-grey World Championships border and Gabriel Fernandez replica signature at the lower right of the artwork establish the championship-deck printing. Retained as SPEC-0480.",
+              "contentHash": "ecf956c687b3cd09e9ddcf50c622417fa8ea42fa29d32142ac2c7582c1ae6136",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0585-P01:1:c9277a2f5fd5383b",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained third-party scan archive supports card identity and any independently visible properties.",
+              "contentHash": "84af377f6ffc01204558663c529a65f23c04e368b98f9bacfdfa7cfee2d1658c",
+              "image": null
+            },
             {
               "observationId": "unit:U0433",
               "kind": "unit",
@@ -76384,664 +77114,6 @@
               "evidence": "Simplified Chinese set article; set list row: Snorlax ex|6, Colorless. CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{setlist/entry|006/006|H|{{TCG ID|Happy Set Reward Pack|Snorlax ex|6|Snorlax}}{{ex}}|Colorless}} (Cardmarket's p-prefix names the Reward Pack)\". The cited article is this edition's own article, so its card list is a card list in this language; the row reaches the card directly, with no inference about the set in between. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged.",
               "contentHash": "afcf1056f7d2d18e78059ef370ca327564c01c79fc2dd01c3b0cf450c54f91c4",
               "image": "images/CSVH4C_p006_Snorlax_ex_888095.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
-      "groupKind": "mapped-appearance",
-      "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
-      "appearanceIdentityState": "verified-image-match",
-      "workIds": [
-        "WORK:Snorlax-LvX-Big-Appetite-Exercise"
-      ],
-      "cardKeys": [
-        "Snorlax-LvX-Big-Appetite-Exercise"
-      ],
-      "label": "Unresolved artwork appearance",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:JP:Japanese:DP-P:127:None",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
-          "appearanceIdentityState": "verified-image-match",
-          "locality": "JP",
-          "language": "Japanese",
-          "script": "Jpan",
-          "setEditionId": "EDITION:JP:Japanese:DP-P",
-          "localSetCode": "DP-P",
-          "localNumber": "127",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:27f7305d8849e092d8ae6325",
-              "semanticPrintingId": "PRINTING:27f7305d8849e092d8ae6325",
-              "cardReleaseId": "RELEASE:JP:Japanese:DP-P:127:None",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": "sparkle",
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0098",
-              "sourcePrintingId": "F0098-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:27f7305d8849e092d8ae6325",
-              "specimenIds": [
-                "SPEC-0231"
-              ],
-              "sources": [
-                {
-                  "url": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
-                  "sourceType": "Inspected physical specimen photograph",
-                  "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.X DP-P 127 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Multicolour reflective points are visible throughout the artwork window. Retained as SPEC-0231."
-                }
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax Lv.X",
-            "artist": "Shizurow",
-            "variant": "base",
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [
-              "sparkle"
-            ],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/DP-P_127_Snorlax_Lv_X_566758.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0622",
-              "contentHash": "ce8e845cde5c7af6778589fbc431464b866d9c924a1ec62d41761e9a474b758d",
-              "kind": "repository",
-              "reviewable": true
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "finish:F0098-P01:0:23f17dc7a3253e68",
-              "kind": "finish",
-              "provider": "Inspected physical specimen photograph",
-              "url": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
-              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.X DP-P 127 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Multicolour reflective points are visible throughout the artwork window. Retained as SPEC-0231.",
-              "contentHash": "a9067f1d6fd3df52496503f2c0ada5dcd4e52e26a9e2641d423b3114cd5fc949",
-              "image": null
-            },
-            {
-              "observationId": "unit:U0622",
-              "kind": "unit",
-              "provider": "pokemon-card-jp",
-              "url": "https://www.pokemon-card.com/card-search/details.php/card/22277/regu/all",
-              "evidence": "official JP promo entry: set=DPP name=カビゴン illustrator=Shizurow (promo page carries no collector number; match is unambiguous by set + card name)",
-              "contentHash": "44cb667d6d3d48997aeb812f7de0997bba1f18a733f69d63c975928cf6e49b5b",
-              "image": "images/DP-P_127_Snorlax_Lv_X_566758.jpg"
-            }
-          ]
-        },
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
-          "workId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
-          "cardKey": "Snorlax-LvX-Big-Appetite-Exercise",
-          "appearanceId": "APPEARANCE:IMAGE:38e491df3ed500782d2e0e79",
-          "appearanceIdentityState": "verified-image-match",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:DP",
-          "localSetCode": "DP",
-          "localNumber": "006",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0623"
-          ],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0440",
-              "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "Reflective points are directly visible across the photographed Korean Lv.X card face.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0440",
-              "specimenIds": [
-                "SPEC-0440"
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax Lv.X",
-            "artist": "SHizURow",
-            "variant": "base",
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/DP-P_127_Snorlax_Lv_X_566758.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0623",
-              "contentHash": "ce8e845cde5c7af6778589fbc431464b866d9c924a1ec62d41761e9a474b758d",
-              "kind": "repository",
-              "reviewable": true
-            },
-            {
-              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512",
-              "label": "publisher card image",
-              "observationId": "source-first:KR:DP:006:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:KR:DP:006:base",
-              "kind": "source-first",
-              "provider": "pokemon-card-korea",
-              "url": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
-              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 LV.X DP 6 in DP 프로모 카드, with illustrator SHizURow and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
-              "contentHash": "75a6dfd1212d382c005897390d3f50b5bec191c745222589446575f75715ed3c",
-              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/PROMO/pr_kr_6.jpg?w=512"
-            },
-            {
-              "observationId": "unit:U0623",
-              "kind": "unit",
-              "provider": "pokemon-card-korea",
-              "url": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
-              "evidence": "Korean Black Star Promos set list row: 006 Snorlax LV.X, Colorless, Promo pack 2. NOTE: the Korean promo series numbers independently (006 there vs the Japanese DP-P 127 that Cardmarket files it under). OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/PR2010001006 positively identifies 잠만보 LV.X 6 in DP 프로모 카드 and credits SHizURow. This supports identity and Work mapping only; no finish or absence is inferred.",
-              "contentHash": "f4ddc7651726ba3e6562dcf4db689e5b45630fc0222cdca5a7d3ed1f2b1572ea",
-              "image": "images/DP-P_127_Snorlax_Lv_X_566758.jpg"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
-      "groupKind": "mapped-appearance",
-      "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
-      "appearanceIdentityState": "verified-image-match",
-      "workIds": [],
-      "cardKeys": [],
-      "label": "Unresolved artwork appearance",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:WEST:English:RR:111:None",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
-          "appearanceIdentityState": "verified-image-match",
-          "locality": "WEST",
-          "language": "English",
-          "script": "Latn",
-          "setEditionId": "EDITION:WEST:English:RR",
-          "localSetCode": "RR",
-          "localNumber": "111",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0316-P01",
-              "semanticPrintingId": "PRINTING:477c30656d99a78514fbc98b",
-              "cardReleaseId": "RELEASE:WEST:English:RR:111:None",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0316",
-              "sourcePrintingId": "F0316-P01",
-              "establishingClaimId": "CLAIM:finish:F0316-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/en/cards/pl2-111",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
-                {
-                  "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
-                  "sourceType": "Official Pokémon localized expansion checklist",
-                  "authorityTier": "official-primary",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "languages": [
-                    "English"
-                  ],
-                  "retrievedAt": "2026-08-27",
-                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-                  "evidenceScope": "standard-set"
-                }
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax LV.X",
-            "artist": "Shizurow",
-            "variant": "base",
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0365",
-              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
-              "kind": "repository",
-              "reviewable": true
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "finish:F0316-P01:0:3c7eeab2c3c4259c",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/en/cards/pl2-111",
-              "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "3aad6cc8dc39a5cf5125043466d311320b76c5df5b9f325287b6e1b8e0bbf8c3",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0316-P01:1:135d3c6471b3eb53",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/pl2_web_cardlist_en.pdf",
-              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-              "contentHash": "68a9e3224a0892064fd83d1c2c231d9db1224b726d36f13937cc643f9ebc8543",
-              "image": null
-            },
-            {
-              "observationId": "unit:U0365",
-              "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/en/cards/pl2-111",
-              "evidence": "en card 'Snorlax' id=pl2-111 localId=111",
-              "contentHash": "cd74d06c3e23bbe6b411a4948ea782521e1d9c6fbba71a64cf83b683d5605b0a",
-              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
-            }
-          ]
-        },
-        {
-          "cardReleaseId": "RELEASE:WEST:French:RR:111:None",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
-          "appearanceIdentityState": "verified-image-match",
-          "locality": "WEST",
-          "language": "French",
-          "script": "Latn",
-          "setEditionId": "EDITION:WEST:French:RR",
-          "localSetCode": "RR",
-          "localNumber": "111",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0317-P01",
-              "semanticPrintingId": "PRINTING:6fd23c4558122755bf3d37c8",
-              "cardReleaseId": "RELEASE:WEST:French:RR:111:None",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0317",
-              "sourcePrintingId": "F0317-P01",
-              "establishingClaimId": "CLAIM:finish:F0317-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/fr/cards/pl2-111",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
-                {
-                  "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
-                  "sourceType": "Official Pokémon localized expansion checklist",
-                  "authorityTier": "official-primary",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "languages": [
-                    "French"
-                  ],
-                  "retrievedAt": "2026-08-27",
-                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-                  "evidenceScope": "standard-set"
-                }
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax LV.X",
-            "artist": "Shizurow",
-            "variant": "base",
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0366",
-              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
-              "kind": "repository",
-              "reviewable": true
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "finish:F0317-P01:0:b217de9e9ecef6ff",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/fr/cards/pl2-111",
-              "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "8d5ac2915bae19e624ffae48f0f273a066087a200193b5e5c90e50bbbac94b08",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0317-P01:1:2b4a7c49c0eb86e5",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pl2_web_cardlist_fr.pdf",
-              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-              "contentHash": "659ea6a92d7cd8273815511be69b055cda8b844455f49e120c2dc674e9695a59",
-              "image": null
-            },
-            {
-              "observationId": "unit:U0366",
-              "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/fr/cards/pl2-111",
-              "evidence": "fr card 'Ronflex Niv. X' id=pl2-111 localId=111",
-              "contentHash": "92a422eae4616f92bbcf089ba800530e3784bf6de53a720722eb4dbbb6133d6a",
-              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
-            }
-          ]
-        },
-        {
-          "cardReleaseId": "RELEASE:WEST:German:RR:111:None",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
-          "appearanceIdentityState": "verified-image-match",
-          "locality": "WEST",
-          "language": "German",
-          "script": "Latn",
-          "setEditionId": "EDITION:WEST:German:RR",
-          "localSetCode": "RR",
-          "localNumber": "111",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0318-P01",
-              "semanticPrintingId": "PRINTING:862910000fc6d631dec7f38a",
-              "cardReleaseId": "RELEASE:WEST:German:RR:111:None",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0318",
-              "sourcePrintingId": "F0318-P01",
-              "establishingClaimId": "CLAIM:finish:F0318-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/de/cards/pl2-111",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
-                {
-                  "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
-                  "sourceType": "Official Pokémon localized expansion checklist",
-                  "authorityTier": "official-primary",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "languages": [
-                    "German"
-                  ],
-                  "retrievedAt": "2026-08-27",
-                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-                  "evidenceScope": "standard-set"
-                }
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax LV.X",
-            "artist": "Shizurow",
-            "variant": "base",
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0367",
-              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
-              "kind": "repository",
-              "reviewable": true
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "finish:F0318-P01:0:d9ba9e3bcbe5c838",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/de/cards/pl2-111",
-              "evidence": "pl2-111 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "3fc95c89b444bb0777fa3200adad7a680f35200ff25ceb465ea7d54834df6cdb",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0318-P01:1:88c239f8b7a93482",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pl2_web_cardlist_de.pdf",
-              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-              "contentHash": "62cc2bae308de18e444dac5a290f8d8ad9eaa953638b8de15e1087a0c505eaa6",
-              "image": null
-            },
-            {
-              "observationId": "unit:U0367",
-              "kind": "unit",
-              "provider": "tcgdex",
-              "url": "https://api.tcgdex.net/v2/de/cards/pl2-111",
-              "evidence": "de card 'Relaxo' id=pl2-111 localId=111",
-              "contentHash": "de9aafbd8c4222447baa5ee768726bc24ce74cac1cc0a7eb5e39e9e094821900",
-              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
-            }
-          ]
-        },
-        {
-          "cardReleaseId": "RELEASE:WEST:Italian:RR:111:None",
-          "workId": null,
-          "cardKey": null,
-          "appearanceId": "APPEARANCE:IMAGE:399742d84ce1c72e06b1f9ae",
-          "appearanceIdentityState": "verified-image-match",
-          "locality": "WEST",
-          "language": "Italian",
-          "script": "Latn",
-          "setEditionId": "EDITION:WEST:Italian:RR",
-          "localSetCode": "RR",
-          "localNumber": "111",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "needs-explicit-equivalence",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:ffae450dbabd7a908e312565",
-              "semanticPrintingId": "PRINTING:ffae450dbabd7a908e312565",
-              "cardReleaseId": "RELEASE:WEST:Italian:RR:111:None",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": "sparkle holo across artwork and frame",
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0319",
-              "sourcePrintingId": "F0319-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:ffae450dbabd7a908e312565",
-              "specimenIds": [
-                "SPEC-0119"
-              ],
-              "sources": [
-                {
-                  "url": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
-                  "sourceType": "Seller listing photograph",
-                  "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax LIV.X 111/111. Grande Appetito, Allenarsi and 111/111 establish the exact local identity; multicolour sparkle and reflective treatment are visible across the artwork and card frame. The exact seller title independently identifies Holo rare Ita. Retained as SPEC-0119."
-                },
-                {
-                  "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
-                  "sourceType": "Official Pokémon localized expansion checklist",
-                  "authorityTier": "official-primary",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "languages": [
-                    "Italian"
-                  ],
-                  "retrievedAt": "2026-08-27",
-                  "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-                  "evidenceScope": "standard-set"
-                }
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax LV.X",
-            "artist": "Shizurow",
-            "variant": "base",
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [
-              "sparkle holo across artwork and frame"
-            ],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/RR_111_Snorlax_LV_X_278685.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0368",
-              "contentHash": "b84b6e7b7ded897f87e5c62c8822766f060344bc15159ff5b0213e1bf3d4720e",
-              "kind": "repository",
-              "reviewable": true
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "finish:F0319-P01:0:7040f9cffbdcaa97",
-              "kind": "finish",
-              "provider": "Seller listing photograph",
-              "url": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
-              "evidence": "Complete seller photograph of Italian Rising Rivals Snorlax LIV.X 111/111. Grande Appetito, Allenarsi and 111/111 establish the exact local identity; multicolour sparkle and reflective treatment are visible across the artwork and card frame. The exact seller title independently identifies Holo rare Ita. Retained as SPEC-0119.",
-              "contentHash": "a1c7c433149fa0ae9efb6cd91c132f9f526bdeeb3db1c1b54999f348ff74d1fa",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0319-P01:1:d5dae368532fb69f",
-              "kind": "finish",
-              "provider": "Official Pokémon localized expansion checklist",
-              "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pl2_web_cardlist_it.pdf",
-              "evidence": "The complete localized Rising Rivals checklist gives two versions for cards 14-102 and one holo version for cards 103-111; this resolves 33 Snorlax Lv.37: Standard Set/non-holo + Parallel Set/reverse-holo; 81 Snorlax Lv.40: Standard Set/non-holo + Parallel Set/reverse-holo; 111 Snorlax LV.X: Standard Set Foil/holo.",
-              "contentHash": "09b70ec2e77aa750b2ed97dd8b2cf0cbefc17586ca3cdd04bd19c37236b48857",
-              "image": null
-            },
-            {
-              "observationId": "unit:U0368",
-              "kind": "unit",
-              "provider": "pokemon-official",
-              "url": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/",
-              "evidence": "The Pokémon Company's Italian locale card archive serves this exact card as Snorlax in Platino - L'Ascesa dei Rivali, identifies it as Pokémon LIV.X, and uses the Italian CMS image PL2_IT_111.png. This card-level page replaces the previous set-level inference that an Italian release of Rising Rivals must contain a secret-numbered card. The earlier cross-language-index observation remains in evidence.jsonl as history. No finish or archive absence is inferred. Retrieved 2026-08-11.",
-              "contentHash": "55a8c0a67aa168a9f914120117ac43d08c57c7585f0873ea83311f6a93084f2f",
-              "image": "images/RR_111_Snorlax_LV_X_278685.jpg"
             }
           ]
         }

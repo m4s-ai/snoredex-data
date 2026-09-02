@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 461,
+      "withConfirmedFinish": 462,
       "withOnlyMarketplaceClaim": 52,
-      "pendingFinish": 49,
+      "pendingFinish": 48,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 8,
-      "withNonHolo": 302,
+      "withNonHolo": 303,
       "withHolo": 230,
       "withReverseHolo": 227,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 75,
-      "withAnyUnresolvedDetail": 152,
+      "withUnresolvedProductMapping": 74,
+      "withAnyUnresolvedDetail": 151,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -28613,7 +28613,7 @@
     },
     {
       "finishUnitId": "F0316",
-      "cardName": "Snorlax LV.X",
+      "cardName": "Snorlax Lv.X",
       "setCode": "RR",
       "releaseSetCode": null,
       "setName": "Rising Rivals",
@@ -28686,7 +28686,7 @@
     },
     {
       "finishUnitId": "F0317",
-      "cardName": "Snorlax LV.X",
+      "cardName": "Snorlax Lv.X",
       "setCode": "RR",
       "releaseSetCode": null,
       "setName": "Rising Rivals",
@@ -28759,7 +28759,7 @@
     },
     {
       "finishUnitId": "F0318",
-      "cardName": "Snorlax LV.X",
+      "cardName": "Snorlax Lv.X",
       "setCode": "RR",
       "releaseSetCode": null,
       "setName": "Rising Rivals",
@@ -28832,7 +28832,7 @@
     },
     {
       "finishUnitId": "F0319",
-      "cardName": "Snorlax LV.X",
+      "cardName": "Snorlax Lv.X",
       "setCode": "RR",
       "releaseSetCode": null,
       "setName": "Rising Rivals",
@@ -48502,23 +48502,65 @@
           "image": "images/WCD23_LOR_LOR_143_Snorlax_833025.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "championship-signature",
+              "role": "distribution-promo",
+              "text": "Gabriel Fernandez"
+            }
+          ],
+          "distribution": {
+            "kind": "world-championship-deck",
+            "name": "2023 Colorless Lugia"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.coleka.com/media/item/202403/06/deck-2-champion-categorie-senior-gabriel-fernandez-bresil-colorless-lugia-ronflex-143-196.webp",
+              "sourceType": "Third-party scan archive",
+              "evidence": "Complete Coleka scan of French WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Ronflex, Graisse Impassible, Ronflement Retentissant 180 and 143/196 establish the localized card. The silver-grey World Championships border and Gabriel Fernandez replica signature at the lower right of the artwork establish the championship-deck printing. Retained as SPEC-0480.",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained third-party scan archive supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0480"
+          ],
+          "image": "verification/specimens/SPEC-0480.png",
+          "printingId": "F0585-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0586",

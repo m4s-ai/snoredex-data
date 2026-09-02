@@ -13841,6 +13841,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0585-P01",
+        "semanticPrintingId": "PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "materializedTargetId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0480"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:b3277f4ea39b9b87c278a2c8",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -33876,6 +33896,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0480",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0480",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0480",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -37610,8 +37647,8 @@
         "localNumber": "127",
         "localIdentifierKnown": true,
         "state": "identified",
-        "work": null,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": "Snorlax-LvX-Big-Appetite-Exercise",
+        "workMappingState": "mapped",
         "viaLegacySetCode": "DP-P",
         "viaLegacyNumber": "127",
         "claimIds": [
@@ -37628,6 +37665,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/DP-Promos/Snorlax-LvX"
         ],
         "sourceRecords": [
+          "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809",
           "https://www.pokemon-card.com/card-search/details.php/card/22277/regu/all"
         ]
       }
@@ -47258,8 +47296,8 @@
         "localNumber": "111",
         "localIdentifierKnown": true,
         "state": "identified",
-        "work": null,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": "Snorlax-LvX-Big-Appetite-Exercise",
+        "workMappingState": "mapped",
         "viaLegacySetCode": "RR",
         "viaLegacyNumber": "111",
         "claimIds": [
@@ -47276,7 +47314,8 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-LVX-RR111"
         ],
         "sourceRecords": [
-          "https://api.tcgdex.net/v2/en/cards/pl2-111"
+          "https://api.tcgdex.net/v2/en/cards/pl2-111",
+          "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
         ]
       }
     },
@@ -49543,8 +49582,8 @@
         "localNumber": "111",
         "localIdentifierKnown": true,
         "state": "identified",
-        "work": null,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": "Snorlax-LvX-Big-Appetite-Exercise",
+        "workMappingState": "mapped",
         "viaLegacySetCode": "RR",
         "viaLegacyNumber": "111",
         "claimIds": [
@@ -49561,7 +49600,8 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-LVX-RR111"
         ],
         "sourceRecords": [
-          "https://api.tcgdex.net/v2/fr/cards/pl2-111"
+          "https://api.tcgdex.net/v2/fr/cards/pl2-111",
+          "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
         ]
       }
     },
@@ -51709,8 +51749,8 @@
         "localNumber": "111",
         "localIdentifierKnown": true,
         "state": "identified",
-        "work": null,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": "Snorlax-LvX-Big-Appetite-Exercise",
+        "workMappingState": "mapped",
         "viaLegacySetCode": "RR",
         "viaLegacyNumber": "111",
         "claimIds": [
@@ -51727,7 +51767,8 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-LVX-RR111"
         ],
         "sourceRecords": [
-          "https://api.tcgdex.net/v2/de/cards/pl2-111"
+          "https://api.tcgdex.net/v2/de/cards/pl2-111",
+          "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
         ]
       }
     },
@@ -53870,8 +53911,8 @@
         "localNumber": "111",
         "localIdentifierKnown": true,
         "state": "identified",
-        "work": null,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": "Snorlax-LvX-Big-Appetite-Exercise",
+        "workMappingState": "mapped",
         "viaLegacySetCode": "RR",
         "viaLegacyNumber": "111",
         "claimIds": [
@@ -53888,6 +53929,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-LVX-RR111"
         ],
         "sourceRecords": [
+          "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809",
           "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111/"
         ]
       }
@@ -96122,6 +96164,39 @@
         "establishingClaimId": "CLAIM:finish:PRINTING:af5c153eafc9a28ee9e27426",
         "specimenIds": [
           "SPEC-0467"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "semanticPrintingId": "PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "cardReleaseId": "RELEASE:WEST:French:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "championship-signature",
+            "role": "distribution-promo",
+            "text": "Gabriel Fernandez"
+          }
+        ],
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0585",
+        "sourcePrintingId": "F0585-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+        "specimenIds": [
+          "SPEC-0480"
         ]
       }
     },
@@ -166281,6 +166356,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:b3277f4ea39b9b87c278a2c8",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -176958,6 +177043,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0480",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "provenance": {
+        "specimenId": "SPEC-0480"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -178732,6 +178827,18 @@
       "toType": "set-edition",
       "toId": "EDITION:JP:Japanese:DP-P",
       "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:JP:Japanese:DP-P:127:None",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+      "provenance": {
+        "state": "mapped",
+        "evidenceSnapshot": "verification/evidence/issue-267-rr111-work-equivalence-20260902.json",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
+      }
     },
     {
       "fromType": "card-release",
@@ -182910,6 +183017,18 @@
     },
     {
       "fromType": "card-release",
+      "fromId": "RELEASE:WEST:English:RR:111:None",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+      "provenance": {
+        "state": "mapped",
+        "evidenceSnapshot": "verification/evidence/issue-267-rr111-work-equivalence-20260902.json",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
+      }
+    },
+    {
+      "fromType": "card-release",
       "fromId": "RELEASE:WEST:English:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -184016,6 +184135,18 @@
     },
     {
       "fromType": "card-release",
+      "fromId": "RELEASE:WEST:French:RR:111:None",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+      "provenance": {
+        "state": "mapped",
+        "evidenceSnapshot": "verification/evidence/issue-267-rr111-work-equivalence-20260902.json",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
+      }
+    },
+    {
+      "fromType": "card-release",
       "fromId": "RELEASE:WEST:French:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -185068,6 +185199,18 @@
     },
     {
       "fromType": "card-release",
+      "fromId": "RELEASE:WEST:German:RR:111:None",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+      "provenance": {
+        "state": "mapped",
+        "evidenceSnapshot": "verification/evidence/issue-267-rr111-work-equivalence-20260902.json",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
+      }
+    },
+    {
+      "fromType": "card-release",
       "fromId": "RELEASE:WEST:German:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -186117,6 +186260,18 @@
       "toType": "set-edition",
       "toId": "EDITION:WEST:Italian:RR",
       "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:WEST:Italian:RR:111:None",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+      "provenance": {
+        "state": "mapped",
+        "evidenceSnapshot": "verification/evidence/issue-267-rr111-work-equivalence-20260902.json",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
+      }
     },
     {
       "fromType": "card-release",
@@ -224104,6 +224259,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Italian:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:French:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {}
     },
     {
@@ -269380,6 +269551,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0585-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0586-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:2b7b3e2cd4941cdf6a55a403",
@@ -284447,17 +284625,24 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0477",
       "reason": "physical observation establishes standalone printing for RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0480",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 7865,
-    "edges": 11748,
-    "migrationInputs": 2737,
+    "entities": 7868,
+    "edges": 11757,
+    "migrationInputs": 2739,
     "migrationDispositions": {
       "bounded-contradicted": 90,
-      "candidate-needs-evidence": 272,
+      "candidate-needs-evidence": 273,
       "carried": 68,
-      "established-and-mapped": 1526,
+      "established-and-mapped": 1527,
       "linked-local-counterpart": 121,
       "mapped": 304,
       "needs-evidence": 126,
@@ -284465,9 +284650,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 1963,
+    "candidateClaims": 1965,
     "cardReleases": 632,
-    "physicalPrintings": 727,
+    "physicalPrintings": 728,
     "setSourceRecords": 432,
     "setSourceDispositions": 432,
     "localizations": 16

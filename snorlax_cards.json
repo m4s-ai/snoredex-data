@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-09-02",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 461,
+      "withConfirmedFinish": 462,
       "withOnlyMarketplaceClaim": 52,
-      "pendingFinish": 49,
+      "pendingFinish": 48,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 8,
-      "withNonHolo": 302,
+      "withNonHolo": 303,
       "withHolo": 230,
       "withReverseHolo": 227,
       "withMirrorHolo": 19,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 75,
-      "withAnyUnresolvedDetail": 152,
+      "withUnresolvedProductMapping": 74,
+      "withAnyUnresolvedDetail": 151,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -28094,7 +28094,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo"
         ],
@@ -28155,24 +28155,52 @@
           {
             "language": "French",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0585",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0585-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "championship-signature",
+                    "role": "distribution-promo",
+                    "text": "Gabriel Fernandez"
+                  }
+                ],
+                "distribution": {
+                  "kind": "world-championship-deck",
+                  "name": "2023 Colorless Lugia"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0480.png",
+                "specimenIds": [
+                  "SPEC-0480"
+                ]
+              }
+            ]
           },
           {
             "language": "German",

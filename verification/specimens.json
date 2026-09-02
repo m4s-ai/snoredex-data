@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 479,
+  "count": 480,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -9765,6 +9765,39 @@
         "U0615"
       ],
       "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V2-FLF1"
+    },
+    {
+      "specimenId": "SPEC-0480",
+      "setCode": "WCD23 LOR",
+      "number": "LOR 143",
+      "variant": "base",
+      "language": "French",
+      "heldBy": "third-party scan archive",
+      "inspectedFrom": "Coleka French World Championships 2023 catalogue scan",
+      "photograph": "SPEC-0480.png",
+      "photographSource": "https://www.coleka.com/media/item/202403/06/deck-2-champion-categorie-senior-gabriel-fernandez-bresil-colorless-lugia-ronflex-143-196.webp",
+      "photographSha256": "sha256:b6848eae6442d79720919d7b62aef251c6e7d4c95fb0903c3053e07f20fc9b9a",
+      "observed": "Complete Coleka scan of French WCD 2023 Snorlax LOR 143 from Gabriel Fernandez's Colorless Lugia deck. Ronflex, Graisse Impassible, Ronflement Retentissant 180 and 143/196 establish the localized card. The silver-grey World Championships border and Gabriel Fernandez replica signature at the lower right of the artwork establish the championship-deck printing.",
+      "recordedAt": "2026-09-02",
+      "citedBy": [
+        "U0433"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "foilPattern": null,
+        "markings": "Gabriel Fernandez replica signature",
+        "markingRole": "distribution-promo",
+        "distribution": {
+          "kind": "world-championship-deck",
+          "name": "2023 Colorless Lugia"
+        },
+        "cardSize": "standard",
+        "basis": "The retained French card face directly shows the silver-grey World Championships border and Gabriel Fernandez replica signature. The collection owner explicitly confirms: \"sie ist non holo wie die andren sprachen auch\"."
+      },
+      "listingUrl": "https://www.coleka.com/fr/cartes-de-collection/cartes-pokemon/world-championships/world-championships-2023/deck-2-champion-categorie-senior-gabriel-fernandez-bresil-colorless-lugia/ronflex_i1612924"
     }
   ]
 }

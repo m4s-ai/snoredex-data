@@ -484,6 +484,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "hosts": [
             "www.target.com", "exorgames.com", "shopping.fullcomp.jp", "www.pokeca.net",
             "www.ebay.de", "pokipair.com", "www.pokipair.com", "media.pokipair.com",
+            "coleka.com", "www.coleka.com",
         ],
         "licenseOrTerms": "Individual retailer site terms; used for identification only.",
         "category": "retail-listing",
@@ -590,7 +591,7 @@ HOST_TO_PROVIDER = {
 }
 
 # Fallback matching for non-URL evidence, keyed on the wording the stores already use.
-SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
+SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str | None]] = [
     # Ahead of both `photograph` and `cardmarket`: a seller's listing photograph is evidence and
     # the catalogue it sits on is not, so the two must never collapse onto one provider. The
     # tie-break is earliest mention, and "Cardmarket seller ..." starts at the same offset as the
@@ -598,7 +599,10 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"cardmarket seller", re.I), "cardmarket-listing-photo"),
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
-    (re.compile(r"third-party scan archive|pok[eé]cardex", re.I), "pokecardex"),
+    (re.compile(r"pok[eé]cardex", re.I), "pokecardex"),
+    # A generic archive is not a provider.  Keep it in the earliest-source tie-break as an
+    # unresolved sentinel so later corroborators cannot inherit an unknown archive URL.
+    (re.compile(r"third-party scan archive", re.I), None),
     (re.compile(r"pkparaiso", re.I), "pkparaiso"),
     (re.compile(r"collectory", re.I), "collectory"),
     (re.compile(r"wikidex", re.I), "wikidex"),
@@ -627,6 +631,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"limitless", re.I), "limitlesstcg"),
     (re.compile(r"same card as|shared card identity|sibling|reprint of", re.I), "internal-derivation"),
 ]
+SCAN_ARCHIVE_PROVIDER_IDS = {"pokecardex", "pkparaiso", "collectory", "wikidex"}
 
 
 def read_json(path: Path) -> Any:
@@ -689,6 +694,28 @@ def retained_cardmarket_product_image_urls(
     }
 
 
+def prefer_explicit_archive_provider(
+    source_type: str,
+    named: list[tuple[int, int, str | None]],
+) -> list[tuple[int, int, str | None]]:
+    archive = re.search(r"third-party scan archive", source_type, re.I)
+    if not archive:
+        return named
+    names_archive_provider = any(
+        provider_id in SCAN_ARCHIVE_PROVIDER_IDS
+        and start >= archive.end()
+        and re.fullmatch(r"\s+from\s+", source_type[archive.end():start], re.I)
+        for start, _order, provider_id in named
+    )
+    if not names_archive_provider:
+        return named
+    return [
+        candidate
+        for candidate in named
+        if candidate[2] is not None or candidate[0] != archive.start()
+    ]
+
+
 def resolve_provider(url: str | None, source_type: str | None) -> str | None:
     """Infer the provider for a record that does not carry one.
 
@@ -722,13 +749,14 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
                 return provider_id
     if not source_type:
         return None
-    named: list[tuple[int, int, str]] = []
+    named: list[tuple[int, int, str | None]] = []
     for order, (pattern, provider_id) in enumerate(SOURCE_TYPE_PATTERNS):
         found = pattern.search(source_type)
         if found:
             # List order stays the tie-break for two sources named at the same offset, so the
             # result is deterministic rather than dependent on dict or set iteration.
             named.append((found.start(), order, provider_id))
+    named = prefer_explicit_archive_provider(source_type, named)
     return min(named)[2] if named else None
 
 
