@@ -330,6 +330,18 @@ class CardDiscoveryTests(unittest.TestCase):
             ),
             "pokecardex",
         )
+        self.assertIsNone(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive with owner attestation",
+            )
+        )
+        self.assertIsNone(
+            registry.resolve_provider(
+                None,
+                "Third-party scan archive and Bulbapedia confirmation",
+            )
+        )
 
     def test_cardmarket_product_images_are_separate_visible_card_evidence(self):
         image_url = "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg"

@@ -631,6 +631,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str | None]] = [
     (re.compile(r"limitless", re.I), "limitlesstcg"),
     (re.compile(r"same card as|shared card identity|sibling|reprint of", re.I), "internal-derivation"),
 ]
+SCAN_ARCHIVE_PROVIDER_IDS = {"pokecardex", "pkparaiso", "collectory", "wikidex"}
 
 
 def read_json(path: Path) -> Any:
@@ -708,7 +709,7 @@ def prefer_explicit_archive_provider(
         else len(source_type)
     )
     names_archive_provider = any(
-        provider_id is not None
+        provider_id in SCAN_ARCHIVE_PROVIDER_IDS
         and archive.end() <= start < archive_description_end
         for start, _order, provider_id in named
     )
