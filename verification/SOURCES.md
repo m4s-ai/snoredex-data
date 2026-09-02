@@ -35,9 +35,9 @@ in `verification/owner_adjudications.json`.
 | **LigaPokemon** | marketplace | 3 | positive only | 2 | 3 | language, finish |
 | **Limitless TCG** | open-database | 3 | positive only | 0 | 0 | artist |
 | **PKParaiso** | collector-database | 3 | positive only | 1 | 2 | identity |
-| **PokéCardex** | collector-database | 3 | positive only | 2 | 6 | language, identity, finish, product |
+| **PokéCardex** | collector-database | 3 | positive only | 1 | 3 | language, identity, finish, product |
 | **PokéCottage** | collector-checklist | 3 | positive only | 0 | 0 | language, finish, product, date, artist, rarity |
-| **Retailer and specialist card listings** | retail-listing | 3 | positive only | 9 | 36 | finish, product, language |
+| **Retailer and specialist card listings** | retail-listing | 3 | positive only | 10 | 39 | finish, product, language |
 | **TCGCSV (TCGplayer product data)** | marketplace-catalogue | 3 | positive only | 8 | 49 | finish, product |
 | **WikiDex** | collector-database | 3 | positive only | 5 | 10 | identity |
 | **koreanpokemoncards.com** | collector-database | 3 | positive only | 0 | 0 | language, finish |

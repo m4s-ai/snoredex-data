@@ -484,6 +484,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "hosts": [
             "www.target.com", "exorgames.com", "shopping.fullcomp.jp", "www.pokeca.net",
             "www.ebay.de", "pokipair.com", "www.pokipair.com", "media.pokipair.com",
+            "coleka.com", "www.coleka.com",
         ],
         "licenseOrTerms": "Individual retailer site terms; used for identification only.",
         "category": "retail-listing",
@@ -598,7 +599,8 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"cardmarket seller", re.I), "cardmarket-listing-photo"),
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
-    (re.compile(r"third-party scan archive|pok[eé]cardex", re.I), "pokecardex"),
+    (re.compile(r"pok[eé]cardex", re.I), "pokecardex"),
+    (re.compile(r"third-party scan archive", re.I), "retailer-listing"),
     (re.compile(r"pkparaiso", re.I), "pkparaiso"),
     (re.compile(r"collectory", re.I), "collectory"),
     (re.compile(r"wikidex", re.I), "wikidex"),

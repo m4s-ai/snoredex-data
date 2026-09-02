@@ -266,6 +266,22 @@ class CardDiscoveryTests(unittest.TestCase):
             "cardmarket-listing-photo",
         )
 
+    def test_scan_archives_use_the_actual_host(self):
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://www.coleka.com/media/item/example.webp",
+                "Third-party scan archive",
+            ),
+            "retailer-listing",
+        )
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://pokecardex-scans.b-cdn.net/sets/example.jpg",
+                "Third-party scan archive",
+            ),
+            "pokecardex",
+        )
+
     def test_cardmarket_product_images_are_separate_visible_card_evidence(self):
         image_url = "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg"
         self.assertEqual(
