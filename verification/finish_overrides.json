@@ -2154,6 +2154,23 @@
       ],
       "retrievedAt": "2026-08-28",
       "evidence": "Independent seller photograph of exact Traditional Chinese S10a F 077/071 CHR."
+    },
+    "owner-svp184-western-prerelease-variants": {
+      "url": null,
+      "sourceType": "Collection owner attestation (localized prerelease variants)",
+      "authorityTier": "owner-attestation",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "languages": [
+        "English",
+        "French",
+        "German",
+        "Italian",
+        "Spanish",
+        "Portuguese"
+      ],
+      "retrievedAt": "2026-09-02",
+      "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern."
     }
   },
   "overrides": [
@@ -2699,6 +2716,16 @@
           "V1"
         ]
       }
+    },
+    {
+      "setCode": "FLF",
+      "number": "80",
+      "languages": [
+        "Portuguese"
+      ],
+      "suppressAutoFinishes": [
+        "reverse-holo"
+      ]
     },
     {
       "setCode": "FLF",
@@ -10056,6 +10083,108 @@
       ],
       "suppressAutoFinishes": [
         "reverse-holo"
+      ]
+    },
+    {
+      "setCode": "SVP",
+      "number": "184",
+      "languages": [
+        "French",
+        "German",
+        "Italian",
+        "Portuguese"
+      ],
+      "suppressAutoFinishes": [
+        "holo"
+      ],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "owner-svp184-western-prerelease-variants"
+          ]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "staff",
+              "text": "Staff",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease-staff",
+            "name": "Journey Together Prerelease Staff"
+          },
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "owner-svp184-western-prerelease-variants"
+          ]
+        }
+      ]
+    },
+    {
+      "setCode": "SVP",
+      "number": "184",
+      "languages": [
+        "Spanish"
+      ],
+      "releaseSetCode": "SVP ES",
+      "suppressAutoFinishes": [
+        "holo"
+      ],
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "owner-svp184-western-prerelease-variants"
+          ]
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "staff",
+              "text": "Staff",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "prerelease-staff",
+            "name": "Juntos de Aventuras Prerelease Staff"
+          },
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "owner-svp184-western-prerelease-variants"
+          ]
+        }
       ]
     }
   ]

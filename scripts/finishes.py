@@ -1377,10 +1377,7 @@ def _build_finish_unit(
             )
         if pattern_status in {"partial", "pending"}:
             unresolved.append("The exact reverse- or mirror-holo pattern is not identified for every known printing of those types.")
-        if not all_claims_contradicted and any(
-            product["claimStatus"] == "contradicted" for product in products
-        ):
-            unresolved.append("The underlying Cardmarket language claim is contradicted for at least one product variant.")
+        # A contradicted language-product claim is already resolved and cannot create a finish TODO.
         if all_claims_contradicted:
             completeness_status = "not-applicable"
         elif known_printings and (set_code, number, language) in owner_finish_decisions:

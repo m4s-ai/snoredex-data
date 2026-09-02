@@ -582,7 +582,15 @@ def main() -> None:
     assert next(
         row for row in migrations["transitions"]
         if row["fromItemId"] == previous_placeholder
-    ) == collector.state_transition(previous_placeholder, [latam_svp["itemId"]])
+    ) == collector.state_transition(
+        previous_placeholder,
+        [
+            row["itemId"]
+            for row in catalogue["items"]
+            if row["cardReleaseId"]
+            == "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033"
+        ],
+    )
     transition_by_source = {
         row["fromItemId"]: row for row in migrations["transitions"]
     }
