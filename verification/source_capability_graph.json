@@ -16,16 +16,16 @@
     ],
     "counts": {
       "providers": 32,
-      "surfaces": 42,
-      "coverageEdges": 44,
+      "surfaces": 43,
+      "coverageEdges": 45,
       "absenceEdges": 0,
-      "observations": 46,
-      "resolvedVerdictSources": 1269
+      "observations": 47,
+      "resolvedVerdictSources": 1270
     },
     "surfaceStates": {
       "active": 18,
       "blocked-by-browser": 3,
-      "incomplete": 15,
+      "incomplete": 16,
       "internal": 1,
       "needs-evidence": 2,
       "non-url": 2,
@@ -1915,6 +1915,49 @@
       },
       "coverageEdgeIds": [
         "bulbapedia-bs2-card-redirect-positive"
+      ]
+    },
+    {
+      "surfaceId": "bulbapedia-rr111-card-equivalence",
+      "providerId": "bulbapedia",
+      "label": "Bulbapedia exact Rising Rivals 111 card equivalence",
+      "match": {
+        "urlPrefixes": [
+          "https://bulbapedia.bulbagarden.net/wiki/Snorlax_LV.X_%28Rising_Rivals_111%29",
+          "https://bulbapedia.bulbagarden.net/wiki/Snorlax_LV.X_%28DP-P_Promo_127%29",
+          "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)"
+        ],
+        "nonUrlEvidenceIds": [
+          "verification/evidence/issue-267-rr111-work-equivalence-20260902.json"
+        ]
+      },
+      "state": "incomplete",
+      "failureState": "Only the exact pinned card article and localized releases named in the reviewed snapshot are in scope.",
+      "accessMode": "browser",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-09-02",
+      "freshnessPolicy": "Re-check the pinned card article; never generalize this equivalence to another card or infer finish or absence.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809",
+        "parameters": [],
+        "pagination": "not paginated; one pinned card article",
+        "expectedIdentifiers": [
+          "Snorlax LV.X",
+          "Rising Rivals 111/111",
+          "DP-P Promotional cards 127/DP-P",
+          "Big Appetite",
+          "Exercise"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "pinned card identity and release fields, not a physical card photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "bulbapedia-rr111-equivalence-positive"
       ]
     }
   ],
@@ -4143,6 +4186,62 @@
         "zeroResultMeans": "unknown",
         "challenge": "Artwork similarity alone is insufficient; this edge depends on the exact redirect."
       }
+    },
+    {
+      "edgeId": "bulbapedia-rr111-equivalence-positive",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-rr111-card-equivalence",
+      "coverage": {
+        "localities": [
+          "WEST",
+          "JP"
+        ],
+        "languages": [
+          "English",
+          "French",
+          "German",
+          "Italian",
+          "Japanese"
+        ],
+        "scripts": [
+          "Latn",
+          "Jpan"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "the exact pinned Rising Rivals 111 card article only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "identity",
+        "card-release",
+        "collector-number",
+        "set-membership",
+        "artist",
+        "cross-language-equivalence"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "The pinned article establishes one positive equivalence and no absence claim."
+      },
+      "knownPositiveObservationId": "obs-bulbapedia-rr111-equivalence-20260902",
+      "boundary": {
+        "outsideScope": [
+          "other Rising Rivals cards",
+          "printed finish",
+          "rarity",
+          "catalogue completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "Shared character or artwork alone is insufficient; this edge depends on the exact card article and printed card facts."
+      }
     }
   ],
   "observations": [
@@ -5573,7 +5672,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:6ee2f71a08291c579f8852f6ea9110a11e601983940f93235a6f5e7684066abc",
+      "rawRecordHash": "sha256:835459f14d738f208affdd0d37e29dacb4e235c2f043b58048f0e3db986b089e",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -5592,7 +5691,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 85,
+        "stableIdCount": 86,
         "stableIds": [
           "F0009-P01",
           "F0057-P01",
@@ -5637,16 +5736,16 @@
           "F0574-P02",
           "F0574-P03",
           "F0584-P01",
+          "F0585-P01",
           "F0597-P01",
           "F0597-P02",
           "F0597-P03",
           "F0603-P01",
           "F0603-P02",
-          "F0604-P01",
-          "F0604-P02"
+          "F0604-P01"
         ],
         "retrievedAt": "2026-09-02",
-        "usageCount": 85
+        "usageCount": 86
       }
     },
     {
@@ -6160,6 +6259,35 @@
         "canonicalTitle": "Snorlax (Diamond & Pearl 37)",
         "japaneseExpansion": "Space-Time Creation",
         "work": "Snorlax-Lv35-Block-Ease-Up",
+        "absenceCapability": false,
+        "finishCapability": false
+      }
+    },
+    {
+      "observationId": "obs-bulbapedia-rr111-equivalence-20260902",
+      "surfaceId": "bulbapedia-rr111-card-equivalence",
+      "kind": "known-positive",
+      "queryUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809",
+      "queryParameters": {},
+      "retrievedAt": "2026-09-02",
+      "expectedIdentifiers": [
+        "RELEASE:WEST:English:RR:111:None",
+        "RELEASE:WEST:French:RR:111:None",
+        "RELEASE:WEST:German:RR:111:None",
+        "RELEASE:WEST:Italian:RR:111:None",
+        "Snorlax-LvX-Big-Appetite-Exercise"
+      ],
+      "validatesEdges": [
+        "bulbapedia-rr111-equivalence-positive"
+      ],
+      "outcome": "The pinned card article establishes the four localized Western RR 111 releases as implementations of the Big Appetite / Exercise Work while keeping release identity and finish separate.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:f889bef9e7a90bfaf58dbe6c5c3324e0b9ace7449a018a8ee74996a96838b22d",
+      "rawRecord": {
+        "evidenceSnapshot": "verification/evidence/issue-267-rr111-work-equivalence-20260902.json",
+        "englishRelease": "Rising Rivals 111/111",
+        "japaneseRelease": "DP-P Promotional cards 127/DP-P",
+        "work": "Snorlax-LvX-Big-Appetite-Exercise",
         "absenceCapability": false,
         "finishCapability": false
       }
@@ -13015,6 +13143,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.coleka.com/media/item/202403/06/deck-2-champion-categorie-senior-gabriel-fernandez-bresil-colorless-lugia-ronflex-143-196.webp",
+      "providerId": "pokecardex",
+      "surfaceId": "pokecardex-scan-archive",
+      "capabilityEdgeIds": [
+        "pokecardex-positive-scan"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },

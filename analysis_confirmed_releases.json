@@ -31017,24 +31017,52 @@
     {
      "language": "French",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0585",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0585-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [
+        {
+         "kind": "championship-signature",
+         "role": "distribution-promo",
+         "text": "Gabriel Fernandez"
+        }
+       ],
+       "distribution": {
+        "kind": "world-championship-deck",
+        "name": "2023 Colorless Lugia"
+       },
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0480.png",
+       "specimenIds": [
+        "SPEC-0480"
+       ]
+      }
+     ]
     },
     {
      "language": "German",
@@ -31185,7 +31213,7 @@
    ],
    "finishCompletenessByLanguage": {
     "English": "positive-evidence-only",
-    "French": "pending",
+    "French": "positive-evidence-only",
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only"
    },
