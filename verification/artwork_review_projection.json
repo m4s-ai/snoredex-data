@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-09-02",
-  "projectionVersion": "2ccc92f53316995c35d1f9d4c9d77f1849a7e3461ac2e4eba4b5771e4f216c5d",
+  "projectionVersion": "56136ea2a031ea21b8c4d7484c5e29cc7a72ef7290664860f5dbd067cc8f1834",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -8209,30 +8209,29 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:553776d055b92c212cec91cc",
-              "semanticPrintingId": "PRINTING:553776d055b92c212cec91cc",
+              "physicalPrintingId": "PHYSICAL:PRINTING:24e2951248afdc1a98283be0",
+              "semanticPrintingId": "PRINTING:24e2951248afdc1a98283be0",
               "cardReleaseId": "RELEASE:WEST:French:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [
-                {
-                  "kind": "staff",
-                  "text": "Staff",
-                  "role": "distribution-promo"
-                }
-              ],
+              "markings": null,
               "distribution": {
-                "kind": "prerelease-staff",
-                "name": "Journey Together Prerelease Staff"
+                "kind": "prerelease",
+                "name": null
               },
-              "cardSize": "unknown",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0520",
               "sourcePrintingId": "F0520-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:553776d055b92c212cec91cc",
+              "establishingClaimId": "CLAIM:finish:PRINTING:24e2951248afdc1a98283be0",
               "sources": [
+                {
+                  "url": "https://api.tcgdex.net/v2/fr/cards/svp-184",
+                  "sourceType": "TCGdex API card variants",
+                  "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
                 {
                   "sourceType": "Collection owner attestation (localized prerelease variants)",
                   "authorityTier": "owner-attestation",
@@ -8252,35 +8251,30 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:815337299c00d9510f2a15a4",
-              "semanticPrintingId": "PRINTING:815337299c00d9510f2a15a4",
+              "physicalPrintingId": "PHYSICAL:PRINTING:4a9b90841e9c9355e5fb14ca",
+              "semanticPrintingId": "PRINTING:4a9b90841e9c9355e5fb14ca",
               "cardReleaseId": "RELEASE:WEST:French:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [
                 {
-                  "kind": "set-logo",
-                  "text": "Journey Together",
+                  "kind": "staff",
+                  "text": "Staff",
                   "role": "distribution-promo"
                 }
               ],
               "distribution": {
-                "kind": "prerelease",
-                "name": "Journey Together Prerelease"
+                "kind": "prerelease-staff",
+                "name": null
               },
-              "cardSize": "standard",
+              "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0520",
               "sourcePrintingId": "F0520-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:815337299c00d9510f2a15a4",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4a9b90841e9c9355e5fb14ca",
               "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/fr/cards/svp-184",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
                 {
                   "sourceType": "Collection owner attestation (localized prerelease variants)",
                   "authorityTier": "owner-attestation",
@@ -8310,7 +8304,6 @@
             ],
             "foilPattern": [],
             "markings": [
-              "Journey Together",
               "Staff"
             ],
             "confidence": null,
@@ -8336,30 +8329,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0520-P01:0:8cfec1ae9c4ee3a1",
+              "observationId": "finish:F0520-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "55e96b1f3798e5c5690844d5f51d40e5768671aba147f74f5fb01dff6b643e1a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0520-P02:0:8cfec1ae9c4ee3a1",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/fr/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "06ff574eaed6afe3147687e65dd40158c1890dfcf4a54b557cad69134f50c270",
+              "contentHash": "85a68f75e5662d06094cc6202f662d3c5add2ec2bcb567db4625cafb3cdd318a",
               "image": null
             },
             {
-              "observationId": "finish:F0520-P01:1:40f8c6b5cff5d668",
+              "observationId": "finish:F0520-P02:1:40f8c6b5cff5d668",
               "kind": "finish",
               "provider": "Collection owner attestation (localized prerelease variants)",
               "url": null,
               "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "8078fb3aa37553c2513da58d71007a60f44d0506011564545d51b95fe2654377",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0520-P02:0:40f8c6b5cff5d668",
-              "kind": "finish",
-              "provider": "Collection owner attestation (localized prerelease variants)",
-              "url": null,
-              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "f330502cf8fdf7c561e1764651390c0ec5c2547a51208448ca0695f2dd4f79df",
+              "contentHash": "d63fdfc8efe25156319d2e45c2660369aaebe4bf6f881b83e3d33fdf65c5d13c",
               "image": null
             },
             {
@@ -8404,30 +8397,29 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:3dc124fe701f5316bca9475a",
-              "semanticPrintingId": "PRINTING:3dc124fe701f5316bca9475a",
+              "physicalPrintingId": "PHYSICAL:PRINTING:52f9e9efc813585389511b28",
+              "semanticPrintingId": "PRINTING:52f9e9efc813585389511b28",
               "cardReleaseId": "RELEASE:WEST:German:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [
-                {
-                  "kind": "staff",
-                  "text": "Staff",
-                  "role": "distribution-promo"
-                }
-              ],
+              "markings": null,
               "distribution": {
-                "kind": "prerelease-staff",
-                "name": "Journey Together Prerelease Staff"
+                "kind": "prerelease",
+                "name": null
               },
-              "cardSize": "unknown",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0521",
               "sourcePrintingId": "F0521-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:3dc124fe701f5316bca9475a",
+              "establishingClaimId": "CLAIM:finish:PRINTING:52f9e9efc813585389511b28",
               "sources": [
+                {
+                  "url": "https://api.tcgdex.net/v2/de/cards/svp-184",
+                  "sourceType": "TCGdex API card variants",
+                  "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+                },
                 {
                   "sourceType": "Collection owner attestation (localized prerelease variants)",
                   "authorityTier": "owner-attestation",
@@ -8447,35 +8439,30 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:e02756ef041f5f7165d591f1",
-              "semanticPrintingId": "PRINTING:e02756ef041f5f7165d591f1",
+              "physicalPrintingId": "PHYSICAL:PRINTING:f1dc368dd1f7976730f3aad7",
+              "semanticPrintingId": "PRINTING:f1dc368dd1f7976730f3aad7",
               "cardReleaseId": "RELEASE:WEST:German:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [
                 {
-                  "kind": "set-logo",
-                  "text": "Journey Together",
+                  "kind": "staff",
+                  "text": "Staff",
                   "role": "distribution-promo"
                 }
               ],
               "distribution": {
-                "kind": "prerelease",
-                "name": "Journey Together Prerelease"
+                "kind": "prerelease-staff",
+                "name": null
               },
-              "cardSize": "standard",
+              "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0521",
               "sourcePrintingId": "F0521-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:e02756ef041f5f7165d591f1",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f1dc368dd1f7976730f3aad7",
               "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/de/cards/svp-184",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
                 {
                   "sourceType": "Collection owner attestation (localized prerelease variants)",
                   "authorityTier": "owner-attestation",
@@ -8505,7 +8492,6 @@
             ],
             "foilPattern": [],
             "markings": [
-              "Journey Together",
               "Staff"
             ],
             "confidence": null,
@@ -8531,30 +8517,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0521-P01:0:136a1dae8ee22e9f",
+              "observationId": "finish:F0521-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "ab58749035abe438e54092aec88b91c1086bf235cb3b5c85bba8f55337a82a71",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0521-P02:0:136a1dae8ee22e9f",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/de/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "ee8b100202a59566b53e8a916e53b89be8beb23bfce972b78bf1c301ad89898e",
+              "contentHash": "00c29619b7bdae5219e73b3c1ac8ae9aac88470aba2695df8aa4be81b71041b3",
               "image": null
             },
             {
-              "observationId": "finish:F0521-P01:1:40f8c6b5cff5d668",
+              "observationId": "finish:F0521-P02:1:40f8c6b5cff5d668",
               "kind": "finish",
               "provider": "Collection owner attestation (localized prerelease variants)",
               "url": null,
               "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "8513a311a1ee228e258a5fa343488874416fba2569b66ea610aacd6f0a3b4c25",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0521-P02:0:40f8c6b5cff5d668",
-              "kind": "finish",
-              "provider": "Collection owner attestation (localized prerelease variants)",
-              "url": null,
-              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "0239282583d3d75288e73fbc930d78c7eefd28bf2e923875dec69d526ff69699",
+              "contentHash": "49e6865b6f03248ac7ef6aeb5836aa38dc88582d70524dc30c0acc18b8e2b768",
               "image": null
             },
             {
@@ -8599,8 +8585,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:5bdfe760f5b03642293707cb",
-              "semanticPrintingId": "PRINTING:5bdfe760f5b03642293707cb",
+              "physicalPrintingId": "PHYSICAL:PRINTING:9e341c1597c99ae3eba2e748",
+              "semanticPrintingId": "PRINTING:9e341c1597c99ae3eba2e748",
               "cardReleaseId": "RELEASE:WEST:Italian:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
@@ -8614,14 +8600,14 @@
               ],
               "distribution": {
                 "kind": "prerelease-staff",
-                "name": "Journey Together Prerelease Staff"
+                "name": null
               },
               "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0522",
-              "sourcePrintingId": "F0522-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:5bdfe760f5b03642293707cb",
+              "sourcePrintingId": "F0522-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:9e341c1597c99ae3eba2e748",
               "sources": [
                 {
                   "sourceType": "Collection owner attestation (localized prerelease variants)",
@@ -8642,29 +8628,23 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:975ce77bee31aa971ed5c500",
-              "semanticPrintingId": "PRINTING:975ce77bee31aa971ed5c500",
+              "physicalPrintingId": "PHYSICAL:PRINTING:d9c191bcb125c60aff7574bb",
+              "semanticPrintingId": "PRINTING:d9c191bcb125c60aff7574bb",
               "cardReleaseId": "RELEASE:WEST:Italian:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [
-                {
-                  "kind": "set-logo",
-                  "text": "Journey Together",
-                  "role": "distribution-promo"
-                }
-              ],
+              "markings": null,
               "distribution": {
                 "kind": "prerelease",
-                "name": "Journey Together Prerelease"
+                "name": null
               },
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0522",
-              "sourcePrintingId": "F0522-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:975ce77bee31aa971ed5c500",
+              "sourcePrintingId": "F0522-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d9c191bcb125c60aff7574bb",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/it/cards/svp-184",
@@ -8700,7 +8680,6 @@
             ],
             "foilPattern": [],
             "markings": [
-              "Journey Together",
               "Staff"
             ],
             "confidence": null,
@@ -8726,30 +8705,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0522-P01:0:d1c03c914e154fdb",
+              "observationId": "finish:F0522-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "9079545f72a1cf61541b2a003b7594c07874fe84e01382ce55c5b31653ab2dd0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0522-P02:0:d1c03c914e154fdb",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/it/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "65ec51d99483a53e96f68e281be253a181b8ceca0ce106ba9eebe55d39123170",
+              "contentHash": "57e84905fe3633eb49bde09cd307b2c9c41fe8e70588387b4977a8ac73a1935b",
               "image": null
             },
             {
-              "observationId": "finish:F0522-P01:1:40f8c6b5cff5d668",
+              "observationId": "finish:F0522-P02:1:40f8c6b5cff5d668",
               "kind": "finish",
               "provider": "Collection owner attestation (localized prerelease variants)",
               "url": null,
               "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "5ace2d4c5a4d3c14d3cc3c463901b9b8cb104babb32ddff760e16d162dfb0584",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0522-P02:0:40f8c6b5cff5d668",
-              "kind": "finish",
-              "provider": "Collection owner attestation (localized prerelease variants)",
-              "url": null,
-              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "7b9be897f285a7abedfdba2389d479d84a8e33fb57de18e528219aecfd41d1e1",
+              "contentHash": "536cc6d42d3e490cb2aa09fddb5694d1a831b0749b79bddd410738dd69953c35",
               "image": null
             },
             {
@@ -8794,8 +8773,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:6f3c98897e8c437eec550df2",
-              "semanticPrintingId": "PRINTING:6f3c98897e8c437eec550df2",
+              "physicalPrintingId": "PHYSICAL:PRINTING:407977fae552ce2eead81d70",
+              "semanticPrintingId": "PRINTING:407977fae552ce2eead81d70",
               "cardReleaseId": "RELEASE:WEST:Portuguese:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
@@ -8809,14 +8788,14 @@
               ],
               "distribution": {
                 "kind": "prerelease-staff",
-                "name": "Journey Together Prerelease Staff"
+                "name": null
               },
               "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0524",
-              "sourcePrintingId": "F0524-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:6f3c98897e8c437eec550df2",
+              "sourcePrintingId": "F0524-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:407977fae552ce2eead81d70",
               "sources": [
                 {
                   "sourceType": "Collection owner attestation (localized prerelease variants)",
@@ -8837,29 +8816,23 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:7e07b232896c777855c1b925",
-              "semanticPrintingId": "PRINTING:7e07b232896c777855c1b925",
+              "physicalPrintingId": "PHYSICAL:PRINTING:73cdc5d5a13f0ab92b81492a",
+              "semanticPrintingId": "PRINTING:73cdc5d5a13f0ab92b81492a",
               "cardReleaseId": "RELEASE:WEST:Portuguese:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [
-                {
-                  "kind": "set-logo",
-                  "text": "Journey Together",
-                  "role": "distribution-promo"
-                }
-              ],
+              "markings": null,
               "distribution": {
                 "kind": "prerelease",
-                "name": "Journey Together Prerelease"
+                "name": null
               },
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0524",
-              "sourcePrintingId": "F0524-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:7e07b232896c777855c1b925",
+              "sourcePrintingId": "F0524-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:73cdc5d5a13f0ab92b81492a",
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/pt/cards/svp-184",
@@ -8895,7 +8868,6 @@
             ],
             "foilPattern": [],
             "markings": [
-              "Journey Together",
               "Staff"
             ],
             "confidence": null,
@@ -8921,30 +8893,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0524-P01:0:5c7ded2b9f9117b2",
+              "observationId": "finish:F0524-P01:0:40f8c6b5cff5d668",
+              "kind": "finish",
+              "provider": "Collection owner attestation (localized prerelease variants)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
+              "contentHash": "a4ae1ba3878a4d0255a5cfe506b99a030353a52550bb147f8a3631de27c16a85",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0524-P02:0:5c7ded2b9f9117b2",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/pt/cards/svp-184",
               "evidence": "svp-184 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "19e5a8f9ec35cd8f1f75f14e94221117c4fe7bc2d7886b657a58d92b286e64a3",
+              "contentHash": "4d8c4f4876acf7ffb6a750fc6e7084d0cc4842a055d0edc06befdc86b7b594ee",
               "image": null
             },
             {
-              "observationId": "finish:F0524-P01:1:40f8c6b5cff5d668",
+              "observationId": "finish:F0524-P02:1:40f8c6b5cff5d668",
               "kind": "finish",
               "provider": "Collection owner attestation (localized prerelease variants)",
               "url": null,
               "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "7a6ebbd6f71b1a0d55898033992e78b38fb6f0566f1b1b758488be72ad2b7d14",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0524-P02:0:40f8c6b5cff5d668",
-              "kind": "finish",
-              "provider": "Collection owner attestation (localized prerelease variants)",
-              "url": null,
-              "evidence": "The collection owner explicitly confirms that Hop's Snorlax SVP 184 exists as the normal prerelease promo and as the Staff prerelease promo in every Western language, and explicitly keeps European Spanish and Latin-American Spanish as separate localized releases. This establishes the two positive printings only; it does not close the finish list or identify a foil pattern.",
-              "contentHash": "51e96bf0e8daefab1a2b7bd02b68e62e9b4514ad5e2b06e4339542c5117194bc",
+              "contentHash": "6adc776cfdd53ba48f09d78ad44e74ca7d3f93b638e31551b925a1e10c6fc4b3",
               "image": null
             },
             {

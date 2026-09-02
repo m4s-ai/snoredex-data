@@ -62,8 +62,8 @@ SOURCES = {
 }
 
 
-def printing(variant: str, *, staff: bool, spanish: bool = False) -> dict[str, Any]:
-    label = "Juntos de Aventuras" if spanish else "Journey Together"
+def printing(variant: str, *, staff: bool, label: str | None = None) -> dict[str, Any]:
+    distribution_name = f"{label} Prerelease" if label else None
     return {
         "finish": "holo",
         "foilPattern": None,
@@ -75,13 +75,13 @@ def printing(variant: str, *, staff: bool, spanish: bool = False) -> dict[str, A
             "kind": "set-logo",
             "text": label,
             "role": "distribution-promo",
-        }]),
+        }] if label else None),
         "distribution": ({
             "kind": "prerelease-staff",
-            "name": f"{label} Prerelease Staff",
+            "name": f"{distribution_name} Staff" if distribution_name else None,
         } if staff else {
             "kind": "prerelease",
-            "name": f"{label} Prerelease",
+            "name": distribution_name,
         }),
         "cardSize": "unknown",
         "mappedVariants": [variant],
@@ -108,8 +108,8 @@ OVERRIDES = [
         "suppressAutoFinishes": ["holo"],
         "mapAutoFinishes": {"holo": ["V1"]},
         "printings": [
-            printing("V1", staff=False, spanish=True),
-            printing("V2", staff=True, spanish=True),
+            printing("V1", staff=False, label="Juntos de Aventuras"),
+            printing("V2", staff=True, label="Juntos de Aventuras"),
         ],
     },
 ]
