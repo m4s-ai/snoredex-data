@@ -21,7 +21,6 @@ GRAPH = ROOT / "verification" / "authoritative_graph.json"
 REVIEWED_AT = "2026-08-25"
 EXPECTED_RELEASES = frozenset({
     "RELEASE:JP:Japanese:DP-P:126:None",
-    "RELEASE:JP:Japanese:DP-P:127:None",
     "RELEASE:JP:Japanese:UNP:unnumbered:None",
 })
 EXPECTED_STATE = "needs-explicit-equivalence"
