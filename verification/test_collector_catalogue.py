@@ -202,6 +202,40 @@ def main() -> None:
 
     assert not collector.validate_catalogue(catalogue, graph)
     assert not collector.validate_migrations(migrations, catalogue, graph, predecessor)
+    assets = {row["assetId"]: row for row in catalogue["assets"]}
+    assert all(
+        item["imageScope"] == (
+            assets[item["imageAssetId"]]["imageScope"]
+            if item["imageAssetId"] else "unknown"
+        )
+        for item in catalogue["items"]
+    )
+    shared_specimen_assets = {
+        "asset-53984045-44f5-5f60-82fe-45e3718eb0f1",
+        "asset-5901cd2c-e9e3-5019-b60f-b2ae12c08979",
+        "asset-5d002e29-9fde-5a5d-8c3e-191b24712df9",
+    }
+    assert {assets[aid]["imageScope"] for aid in shared_specimen_assets} == {"card-release"}
+    assert all(
+        item["imageScope"] == "card-release"
+        for item in catalogue["items"]
+        if item["imageAssetId"] in shared_specimen_assets
+    )
+    mismatched_scope = copy.deepcopy(catalogue)
+    mismatched_item = next(
+        item for item in mismatched_scope["items"]
+        if item["imageAssetId"] in shared_specimen_assets
+    )
+    mismatched_item["imageScope"] = "exact-printing"
+    mismatched_scope["meta"]["catalogueFingerprint"] = collector.semantic_fingerprint(
+        mismatched_scope
+    )
+    assert any(
+        "image scope differs" in error
+        for error in collector.validate_catalogue(
+            mismatched_scope, graph, check_asset_bytes=False
+        )
+    )
     assert catalogue["meta"]["previousFingerprint"] == collector.PREVIOUS_CATALOGUE_FINGERPRINT
     assert migrations["meta"]["schemaVersion"] == "1.1.0"
     routes = {row["fromFingerprint"]: row for row in migrations["catalogueTransitions"]}

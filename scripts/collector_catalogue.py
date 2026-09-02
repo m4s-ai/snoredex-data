@@ -372,6 +372,32 @@ def asset_id(path: str) -> str:
     return "asset-" + str(value)
 
 
+def align_item_asset_scopes(
+    items: list[dict[str, Any]], assets: dict[str, dict[str, Any]]
+) -> None:
+    """Apply each shared asset's weakest safe scope to every item reference."""
+    for item in items:
+        aid = item["imageAssetId"]
+        item["imageScope"] = assets[aid]["imageScope"] if aid else "unknown"
+
+
+def item_asset_errors(
+    item: dict[str, Any], assets: dict[str, dict[str, Any]]
+) -> list[str]:
+    iid = item.get("itemId")
+    aid = item.get("imageAssetId")
+    if aid is None:
+        return [] if item.get("imageScope") == "unknown" else [
+            f"item without asset has non-unknown image scope: {iid}"
+        ]
+    asset = assets.get(aid)
+    if asset is None:
+        return [f"item asset does not resolve: {iid}"]
+    if item.get("imageScope") != asset.get("imageScope"):
+        return [f"item image scope differs from its asset: {iid}"]
+    return []
+
+
 def state_transition(from_item_id: str, to_item_ids: list[str]) -> dict[str, Any]:
     targets = sorted(set(to_item_ids))
     if not targets:
@@ -1094,7 +1120,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             return None, "unknown"
         aid = asset_id(relative)
         existing = assets.get(aid)
-        if existing and IMAGE_SCOPE_RANK[existing["imageScope"]] >= IMAGE_SCOPE_RANK[scope]:
+        if existing:
+            if IMAGE_SCOPE_RANK[scope] < IMAGE_SCOPE_RANK[existing["imageScope"]]:
+                existing["imageScope"] = scope
+                existing["altTextBasis"] = alt_text
             return aid, existing["imageScope"]
         assets[aid] = {
             "assetId": aid,
@@ -1373,6 +1402,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             physical=None, source_printing_id=None, unit=None, old=None, claim=None,
         ))
 
+    align_item_asset_scopes(items, assets)
     ids = [row["itemId"] for row in items]
     if len(ids) != len(set(ids)):
         raise ContractError("collector item ids are not unique")
@@ -1857,8 +1887,7 @@ def validate_catalogue(
             errors.append(f"item localization does not resolve through its edition: {iid}")
         if item.get("workId") is not None and item.get("workId") not in works:
             errors.append(f"item work does not resolve: {iid}")
-        if item.get("imageAssetId") is not None and item.get("imageAssetId") not in assets:
-            errors.append(f"item asset does not resolve: {iid}")
+        errors.extend(item_asset_errors(item, assets))
         try:
             normalized_markings(item.get("markings"))
         except ContractError:
