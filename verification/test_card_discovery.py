@@ -309,6 +309,27 @@ class CardDiscoveryTests(unittest.TestCase):
             ),
             "owner-attestation",
         )
+        for source_name, provider_id in (
+            ("PokéCardex", "pokecardex"),
+            ("PKParaiso", "pkparaiso"),
+            ("Collectory", "collectory"),
+            ("WikiDex", "wikidex"),
+        ):
+            with self.subTest(source_name=source_name):
+                self.assertEqual(
+                    registry.resolve_provider(
+                        None,
+                        f"Third-party scan archive from {source_name}",
+                    ),
+                    provider_id,
+                )
+        self.assertEqual(
+            registry.resolve_provider(
+                "https://unknown.example/card.jpg",
+                "Third-party scan archive from PokéCardex corroborated by owner attestation",
+            ),
+            "pokecardex",
+        )
 
     def test_cardmarket_product_images_are_separate_visible_card_evidence(self):
         image_url = "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg"

@@ -693,6 +693,34 @@ def retained_cardmarket_product_image_urls(
     }
 
 
+def prefer_explicit_archive_provider(
+    source_type: str,
+    named: list[tuple[int, int, str | None]],
+) -> list[tuple[int, int, str | None]]:
+    archive = re.search(r"third-party scan archive", source_type, re.I)
+    if not archive:
+        return named
+    remainder = source_type[archive.end():]
+    corroboration = re.search(r"\bcorroborat\w*\b", remainder, re.I)
+    archive_description_end = (
+        archive.end() + corroboration.start()
+        if corroboration
+        else len(source_type)
+    )
+    names_archive_provider = any(
+        provider_id is not None
+        and archive.end() <= start < archive_description_end
+        for start, _order, provider_id in named
+    )
+    if not names_archive_provider:
+        return named
+    return [
+        candidate
+        for candidate in named
+        if candidate[2] is not None or candidate[0] != archive.start()
+    ]
+
+
 def resolve_provider(url: str | None, source_type: str | None) -> str | None:
     """Infer the provider for a record that does not carry one.
 
@@ -733,6 +761,7 @@ def resolve_provider(url: str | None, source_type: str | None) -> str | None:
             # List order stays the tie-break for two sources named at the same offset, so the
             # result is deterministic rather than dependent on dict or set iteration.
             named.append((found.start(), order, provider_id))
+    named = prefer_explicit_archive_provider(source_type, named)
     return min(named)[2] if named else None
 
 
