@@ -600,7 +600,6 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
     (re.compile(r"pok[eé]cardex", re.I), "pokecardex"),
-    (re.compile(r"third-party scan archive", re.I), "retailer-listing"),
     (re.compile(r"pkparaiso", re.I), "pkparaiso"),
     (re.compile(r"collectory", re.I), "collectory"),
     (re.compile(r"wikidex", re.I), "wikidex"),
