@@ -176,7 +176,7 @@ throughout this project and is genuinely uncommon:
 | Single tier 1-2 source | 620 |
 | Single tier 3 source | 3 |
 
-623 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 18 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+623 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 24 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in

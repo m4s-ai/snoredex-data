@@ -60,7 +60,7 @@ existing Python workflow owners rather than copying their contracts.
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **13 units rest on owner attestation alone** and 9
+   A single non-URL source may confirm a unit: **19 units rest on owner attestation alone** and 9
    on an inspected specimen alone. The owner holds those cards and no database records them, so
    refusing the evidence buys a false "open" count rather than better evidence.
 

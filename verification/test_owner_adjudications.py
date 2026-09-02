@@ -44,6 +44,13 @@ def main() -> int:
         raise AssertionError("owner adjudication store is empty")
     if len(decisions) != len(decision_ids):
         raise AssertionError("owner adjudication ids are not one-per-unit")
+    flf_v2_excluded = {f"U{number:04d}" for number in range(616, 622)}
+    for unit_id in flf_v2_excluded:
+        unit = raw_units[unit_id]
+        if unit.get("providerId") != "owner-attestation" or unit.get("sourceUrl") is not None:
+            raise AssertionError(
+                f"English-only FLF V2 decision is attributed to the wrong source: {unit_id}"
+            )
     for decision in decisions:
         raw = raw_units.get(decision["unitId"])
         if not raw or raw["status"] != "contradicted":

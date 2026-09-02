@@ -22,9 +22,9 @@ in `verification/owner_adjudications.json`.
 | **52poke (Wiki)** | collector-database | 2 | positive only | 1 | 1 | language, artist, edition, finish |
 | **Bulbapedia** | fan-wiki | 2 | positive only | 84 | 634 | language, edition, date, finish |
 | **CGC certification and registry** | grading-registry | 2 | positive only | 0 | 0 | finish, language |
-| **Cardmarket exact product image** | marketplace-photo | 2 | positive only | 48 | 78 | language, identity, finish, edition, image |
+| **Cardmarket exact product image** | marketplace-photo | 2 | positive only | 48 | 72 | language, identity, finish, edition, image |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | positive only | 8 | 13 | language, identity, finish, edition |
-| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 81 | language, finish, edition |
+| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 87 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | positive only | 4 | 16 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | positive only | 1 | 2 | finish |
 | **SNKRDUNK** | marketplace | 2 | positive only | 1 | 3 | finish, language |

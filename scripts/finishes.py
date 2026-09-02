@@ -441,6 +441,48 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         existing["image"] = candidate["image"]
 
 
+def refine_auto_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> bool:
+    """Replace one generic auto identity with a positively established curated identity."""
+    if not candidate.pop("_refinesAuto", False):
+        return False
+    expected_key = (
+        "auto",
+        candidate.get("finish"),
+        tuple(sorted(candidate.get("mappedVariants") or [])),
+        "null",
+        "null",
+    )
+    matches = [
+        printing for printing in printings
+        if (
+            printing.get("_origin"),
+            printing.get("finish"),
+            tuple(sorted(printing.get("mappedVariants") or [])),
+            json.dumps(printing.get("markings") or None, sort_keys=True),
+            json.dumps(printing.get("distribution"), sort_keys=True),
+        ) == expected_key
+    ]
+    if len(matches) != 1:
+        raise ValueError(f"expected one generic auto printing to refine, found {len(matches)}")
+    existing = matches[0]
+    if candidate.get("cardSize") == "unknown":
+        candidate["cardSize"] = existing.get("cardSize", "unknown")
+    candidate["sources"] = existing["sources"] + candidate["sources"]
+    candidate["verificationStatus"] = max(
+        (existing["verificationStatus"], candidate["verificationStatus"]),
+        key=STATUS_RANK.__getitem__,
+    )
+    candidate["_origin"] = "manual"
+    printings.remove(existing)
+    add_printing(printings, candidate)
+    return True
+
+
+def add_or_refine_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> None:
+    if not refine_auto_printing(printings, candidate):
+        add_printing(printings, candidate)
+
+
 def apply_standard_scope_card_size(candidate: dict[str, Any]) -> None:
     if candidate.get("cardSize") == "unknown" and any(
         source.get("evidenceScope") == "standard-set"
@@ -1281,6 +1323,7 @@ def _build_finish_unit(
                             manual.get("sourceRefs") or [], source_registry, products, mapped_variants
                         ),
                         "_origin": "manual",
+                        "_refinesAuto": manual.get("refinesAuto", False),
                     }
                     if "edition" in manual:
                         candidate["edition"] = manual["edition"]
@@ -1288,7 +1331,7 @@ def _build_finish_unit(
                         candidate["releaseDate"] = manual["releaseDate"]
                     if "image" in manual:
                         candidate["image"] = manual["image"]
-                    add_printing(printings, candidate)
+                    add_or_refine_printing(printings, candidate)
 
         _build_finish_unit_part7_suppression()
         _build_finish_unit_part7_manual()

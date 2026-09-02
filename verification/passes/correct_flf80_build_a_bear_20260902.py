@@ -95,7 +95,7 @@ def update_graph() -> None:
         claim = claims[claim_id]
         target = claim["proposedTargetId"]
         claim.update({
-            "sourceRecord": IMAGE_URL,
+            "sourceRecord": None,
             "evidenceStatus": "contradicted",
             "disposition": "bounded-contradicted",
             "materializedTargetId": None,
@@ -197,9 +197,9 @@ def main() -> None:
             "variantName": VARIANT_NAME,
             "variantNameSource": VARIANT_SOURCE,
             "status": "contradicted",
-            "sourceUrl": IMAGE_URL,
-            "sourceType": "Cardmarket exact card catalogue detail with retained product image plus owner distribution adjudication",
-            "providerId": "cardmarket-product-image",
+            "sourceUrl": None,
+            "sourceType": "Collection owner attestation (not-printed adjudication); retained English product image for product identity only",
+            "providerId": "owner-attestation",
             "sourceRef": None,
             "corroborated": False,
             "evidence": evidence,
@@ -209,18 +209,34 @@ def main() -> None:
             "unitId": unit_id,
             "lang": language,
             "status": "contradicted",
-            "source": IMAGE_URL,
+            "source": "Owner attestation (domain expert)",
             "evidence": evidence,
             "at": CHECKED_AT,
         })
     write(units_path, units)
 
     journal_path = VERIFY / "evidence.jsonl"
-    existing = {
-        journal_key(row)
+    existing_rows = [
+        json.loads(line)
         for line in journal_path.read_text(encoding="utf-8-sig").splitlines()
-        if line.strip() and (row := json.loads(line))
-    }
+        if line.strip()
+    ]
+    # Replace only the unpublished rows created by this pass. The image remains the English
+    # identity evidence; the localized non-print decisions come from the owner adjudication.
+    existing_rows = [
+        row for row in existing_rows
+        if not (
+            row.get("unitId") in EXCLUDED
+            and row.get("status") == "contradicted"
+            and row.get("at") == CHECKED_AT
+        )
+    ]
+    existing = {journal_key(row) for row in existing_rows}
+    journal_path.write_text(
+        "\n".join(json.dumps(row, ensure_ascii=False, separators=(",", ":")) for row in existing_rows)
+        + "\n",
+        encoding="utf-8",
+    )
     with journal_path.open("a", encoding="utf-8", newline="\n") as handle:
         for row in journal_rows:
             if journal_key(row) not in existing:

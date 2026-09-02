@@ -71,13 +71,21 @@ def printing(variant: str, *, staff: bool, spanish: bool = False) -> dict[str, A
             "kind": "staff",
             "text": "Staff",
             "role": "distribution-promo",
-        }] if staff else None),
+        }] if staff else [{
+            "kind": "set-logo",
+            "text": label,
+            "role": "distribution-promo",
+        }]),
         "distribution": ({
             "kind": "prerelease-staff",
             "name": f"{label} Prerelease Staff",
-        } if staff else None),
+        } if staff else {
+            "kind": "prerelease",
+            "name": f"{label} Prerelease",
+        }),
         "cardSize": "unknown",
         "mappedVariants": [variant],
+        "refinesAuto": not staff,
         "verificationStatus": "confirmed",
         "sourceRefs": [OWNER_SOURCE_ID],
     }
@@ -89,6 +97,7 @@ OVERRIDES = [
         "number": "184",
         "languages": ["French", "German", "Italian", "Portuguese"],
         "suppressAutoFinishes": ["holo"],
+        "mapAutoFinishes": {"holo": ["V1"]},
         "printings": [printing("V1", staff=False), printing("V2", staff=True)],
     },
     {
@@ -97,6 +106,7 @@ OVERRIDES = [
         "languages": ["Spanish"],
         "releaseSetCode": "SVP ES",
         "suppressAutoFinishes": ["holo"],
+        "mapAutoFinishes": {"holo": ["V1"]},
         "printings": [
             printing("V1", staff=False, spanish=True),
             printing("V2", staff=True, spanish=True),

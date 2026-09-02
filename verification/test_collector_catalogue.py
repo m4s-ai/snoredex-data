@@ -500,6 +500,41 @@ def main() -> None:
         "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
         "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
     } <= set(latam_svp["evidenceLinks"])
+    western_svp_labels = {
+        "LOCALIZATION:WEST:fr": "Journey Together",
+        "LOCALIZATION:WEST:de": "Journey Together",
+        "LOCALIZATION:WEST:it": "Journey Together",
+        "LOCALIZATION:WEST:pt": "Journey Together",
+        "LOCALIZATION:WEST:es-ES": "Juntos de Aventuras",
+    }
+    western_svp_regular = {
+        row["localizationId"]: row
+        for row in catalogue["items"]
+        if row.get("collectorNumber") == "184"
+        and (row.get("distribution") or {}).get("kind") == "prerelease"
+        and row.get("localizationId") in western_svp_labels
+    }
+    western_svp_rows = [
+        row for row in catalogue["items"]
+        if row.get("collectorNumber") == "184"
+        and row.get("localizationId") in western_svp_labels
+    ]
+    assert len(western_svp_rows) == 2 * len(western_svp_labels)
+    assert {
+        (row.get("distribution") or {}).get("kind") for row in western_svp_rows
+    } == {"prerelease", "prerelease-staff"}
+    assert set(western_svp_regular) == set(western_svp_labels)
+    for localization_id, label in western_svp_labels.items():
+        row = western_svp_regular[localization_id]
+        assert row["markings"] == [{
+            "kind": "set-logo",
+            "text": label,
+            "role": "distribution-promo",
+        }]
+        assert row["distribution"] == {
+            "kind": "prerelease",
+            "name": f"{label} Prerelease",
+        }
     normal_latam_expectations = {
         "RELEASE:LATAM:Spanish:JTG LA:117/159:unmapped-work:SPEC-0035": {
             "work": "WORK:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
