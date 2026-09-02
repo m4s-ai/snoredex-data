@@ -45,11 +45,11 @@ def write(path: Path, payload) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def journal_key(row: dict) -> tuple[str | None, str | None, str]:
+def journal_key(row: dict) -> tuple[str | None, str | None, str | None, str]:
     evidence = row.get("evidence")
     if not isinstance(evidence, str):
         evidence = json.dumps(evidence, ensure_ascii=False, sort_keys=True)
-    return row.get("unitId"), row.get("status"), evidence
+    return row.get("unitId"), row.get("status"), row.get("source"), evidence
 
 
 def excluded_evidence(language: str) -> str:
@@ -216,27 +216,11 @@ def main() -> None:
     write(units_path, units)
 
     journal_path = VERIFY / "evidence.jsonl"
-    existing_rows = [
-        json.loads(line)
+    existing = {
+        journal_key(row)
         for line in journal_path.read_text(encoding="utf-8-sig").splitlines()
-        if line.strip()
-    ]
-    # Replace only the unpublished rows created by this pass. The image remains the English
-    # identity evidence; the localized non-print decisions come from the owner adjudication.
-    existing_rows = [
-        row for row in existing_rows
-        if not (
-            row.get("unitId") in EXCLUDED
-            and row.get("status") == "contradicted"
-            and row.get("at") == CHECKED_AT
-        )
-    ]
-    existing = {journal_key(row) for row in existing_rows}
-    journal_path.write_text(
-        "\n".join(json.dumps(row, ensure_ascii=False, separators=(",", ":")) for row in existing_rows)
-        + "\n",
-        encoding="utf-8",
-    )
+        if line.strip() and (row := json.loads(line))
+    }
     with journal_path.open("a", encoding="utf-8", newline="\n") as handle:
         for row in journal_rows:
             if journal_key(row) not in existing:
