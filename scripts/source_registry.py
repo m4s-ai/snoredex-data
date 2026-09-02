@@ -701,16 +701,10 @@ def prefer_explicit_archive_provider(
     archive = re.search(r"third-party scan archive", source_type, re.I)
     if not archive:
         return named
-    remainder = source_type[archive.end():]
-    corroboration = re.search(r"\bcorroborat\w*\b", remainder, re.I)
-    archive_description_end = (
-        archive.end() + corroboration.start()
-        if corroboration
-        else len(source_type)
-    )
     names_archive_provider = any(
         provider_id in SCAN_ARCHIVE_PROVIDER_IDS
-        and archive.end() <= start < archive_description_end
+        and start >= archive.end()
+        and re.search(r"\bfrom\s*$", source_type[archive.end():start], re.I)
         for start, _order, provider_id in named
     )
     if not names_archive_provider:

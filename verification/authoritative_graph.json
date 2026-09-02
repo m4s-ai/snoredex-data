@@ -37647,8 +37647,8 @@
         "localNumber": "127",
         "localIdentifierKnown": true,
         "state": "identified",
-        "work": null,
-        "workMappingState": "needs-explicit-equivalence",
+        "work": "Snorlax-LvX-Big-Appetite-Exercise",
+        "workMappingState": "mapped",
         "viaLegacySetCode": "DP-P",
         "viaLegacyNumber": "127",
         "claimIds": [
@@ -37665,6 +37665,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/DP-Promos/Snorlax-LvX"
         ],
         "sourceRecords": [
+          "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809",
           "https://www.pokemon-card.com/card-search/details.php/card/22277/regu/all"
         ]
       }
@@ -178829,6 +178830,18 @@
     },
     {
       "fromType": "card-release",
+      "fromId": "RELEASE:JP:Japanese:DP-P:127:None",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-LvX-Big-Appetite-Exercise",
+      "provenance": {
+        "state": "mapped",
+        "evidenceSnapshot": "verification/evidence/issue-267-rr111-work-equivalence-20260902.json",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
+      }
+    },
+    {
+      "fromType": "card-release",
       "fromId": "RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -284623,7 +284636,7 @@
   ],
   "summary": {
     "entities": 7868,
-    "edges": 11756,
+    "edges": 11757,
     "migrationInputs": 2739,
     "migrationDispositions": {
       "bounded-contradicted": 90,

@@ -39,7 +39,6 @@ WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
 # retain the reviewed pending state until a separate equivalence decision exists.
 ISSUE304_NEEDS_EXPLICIT_RELEASES = frozenset({
     "RELEASE:JP:Japanese:DP-P:126:None",
-    "RELEASE:JP:Japanese:DP-P:127:None",
     "RELEASE:JP:Japanese:UNP:unnumbered:None",
 })
 FOIL_PATTERN_ALIASES = {

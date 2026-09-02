@@ -646,6 +646,7 @@ def main() -> None:
         for error in validate(tampered)
     )
     rr111_releases = {
+        "RELEASE:JP:Japanese:DP-P:127:None",
         "RELEASE:WEST:English:RR:111:None",
         "RELEASE:WEST:French:RR:111:None",
         "RELEASE:WEST:German:RR:111:None",

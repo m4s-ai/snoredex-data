@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Map the four established Western RR 111 releases to their reviewed Work."""
+"""Map the established RR 111 and Japanese DP-P 127 releases to their reviewed Work."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ SNAPSHOT = "verification/evidence/issue-267-rr111-work-equivalence-20260902.json
 WORK = "Snorlax-LvX-Big-Appetite-Exercise"
 WORK_ID = f"WORK:{WORK}"
 RELEASE_IDS = (
+    "RELEASE:JP:Japanese:DP-P:127:None",
     "RELEASE:WEST:English:RR:111:None",
     "RELEASE:WEST:French:RR:111:None",
     "RELEASE:WEST:German:RR:111:None",
@@ -34,7 +35,13 @@ SOURCE_URL = (
     "title=Snorlax_LV.X_(Rising_Rivals_111)&oldid=4616809"
 )
 REVIEWED_AT = "2026-09-02"
-UNIT_IDS = ("U0365", "U0366", "U0367", "U0368")
+UNIT_IDS = {
+    "U0365": ("RR", "111"),
+    "U0366": ("RR", "111"),
+    "U0367": ("RR", "111"),
+    "U0368": ("RR", "111"),
+    "U0622": ("DP-P", "127"),
+}
 
 
 def read(path: Path) -> dict[str, Any]:
@@ -160,7 +167,7 @@ def apply_capability(document: dict[str, Any]) -> None:
         },
         "expectedIdentifiers": [*RELEASE_IDS, WORK],
         "validatesEdges": ["bulbapedia-rr111-equivalence-positive"],
-        "outcome": "The pinned card article establishes the four localized Western RR 111 releases as implementations of the Big Appetite / Exercise Work while keeping release identity and finish separate.",
+        "outcome": "The pinned card article establishes Japanese DP-P 127 and the four localized Western RR 111 releases as implementations of the Big Appetite / Exercise Work while keeping release identity and finish separate.",
     }
     surfaces = {row["surfaceId"]: row for row in document["surfaces"]}
     surfaces[surface["surfaceId"]] = surface
@@ -173,11 +180,11 @@ def apply_capability(document: dict[str, Any]) -> None:
 
 def apply_units(document: list[dict[str, Any]]) -> None:
     units = {row["unitId"]: row for row in document}
-    for unit_id in UNIT_IDS:
+    for unit_id, expected_identity in UNIT_IDS.items():
         row = units.get(unit_id)
         if not row:
             raise ValueError(f"RR 111 identity unit is missing: {unit_id}")
-        if (row.get("setCode"), row.get("number")) != ("RR", "111"):
+        if (row.get("setCode"), row.get("number")) != expected_identity:
             raise ValueError(f"RR 111 identity unit drifted: {unit_id}")
         if row.get("cardKey") not in {None, WORK}:
             raise ValueError(f"RR 111 identity unit has another Work: {unit_id}")
@@ -254,11 +261,11 @@ def main() -> int:
     if args.check:
         if stale:
             raise SystemExit("RR 111 Work mapping inputs are stale: " + ", ".join(stale))
-        print(f"RR 111 Western Work mapping is current: {len(RELEASE_IDS)} releases -> {WORK}")
+        print(f"RR 111 / DP-P 127 Work mapping is current: {len(RELEASE_IDS)} releases -> {WORK}")
         return 0
     for label in stale:
         write(paths[label], documents[label])
-    print(f"mapped {len(RELEASE_IDS)} RR 111 releases to {WORK}; changed: {', '.join(stale) or 'none'}")
+    print(f"mapped {len(RELEASE_IDS)} RR 111 / DP-P 127 releases to {WORK}; changed: {', '.join(stale) or 'none'}")
     return 0
 
 
