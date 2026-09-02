@@ -704,7 +704,7 @@ def prefer_explicit_archive_provider(
     names_archive_provider = any(
         provider_id in SCAN_ARCHIVE_PROVIDER_IDS
         and start >= archive.end()
-        and re.search(r"\bfrom\s*$", source_type[archive.end():start], re.I)
+        and re.fullmatch(r"\s+from\s+", source_type[archive.end():start], re.I)
         for start, _order, provider_id in named
     )
     if not names_archive_provider:
