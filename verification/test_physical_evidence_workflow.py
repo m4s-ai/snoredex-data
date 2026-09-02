@@ -94,6 +94,12 @@ def main() -> None:
         if key != "edition"
     }
     assert "edition" not in finish_projector().specimen_printing(no_edition)
+    assert finish_projector().specimen_source({
+        "specimenId": "SPEC-TEST",
+        "heldBy": "third-party retailer",
+        "photographSource": "https://media.pokipair.com/card.png",
+        "observed": "Exact retailer set-list card image.",
+    })["sourceType"] == "Retail listing"
 
     by_signature: dict[tuple, list[str]] = defaultdict(list)
     for specimen in fixture:
@@ -111,11 +117,23 @@ def main() -> None:
     simplified_chinese_promo = next(
         unit for unit in finish_units if unit["finishUnitId"] == "F0456"
     )
+    assert simplified_chinese_promo["completenessStatus"] == "owner-adjudicated"
+    assert simplified_chinese_promo["availableFinishes"] == ["non-holo", "mirror-holo"]
     assert simplified_chinese_promo["finishStatus"]["holo"] == "pending"
-    assert all(
-        printing["verificationStatus"] != "confirmed"
-        for printing in simplified_chinese_promo["printings"]
-    ), "the R/C/U finish guide does not establish a Promo-card finish"
+    assert simplified_chinese_promo["finishStatus"]["reverse-holo"] == "pending"
+    assert simplified_chinese_promo["patternStatus"] == "confirmed"
+    assert simplified_chinese_promo["unresolved"] == []
+    promo_printings = simplified_chinese_promo["printings"]
+    assert len(promo_printings) == 3
+    assert all(row["verificationStatus"] == "confirmed" for row in promo_printings)
+    assert {
+        (row["finish"], row["foilPattern"], tuple(row["specimenIds"]))
+        for row in promo_printings
+    } == {
+        ("non-holo", None, ("SPEC-0470",)),
+        ("mirror-holo", "poke-ball", ("SPEC-0471",)),
+        ("mirror-holo", "master-ball", ("SPEC-0472",)),
+    }, "the owner photograph establishes exactly the three named Promo-card printings"
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {
         ("ID", "pokemon-card-asia"): 30,

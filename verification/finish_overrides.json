@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Curated finish, foil-pattern, marking, distribution, release-date, size, and Cardmarket-product mappings that cannot be represented by TCGdex's group-level normal/holo/reverse flags.",
-    "lastUpdated": "2026-09-01",
+    "lastUpdated": "2026-09-02",
     "policy": [
       "A physical stamp is recorded in markings; the way a card was distributed is recorded separately in distribution.",
       "Printed identity features such as a rarity symbol or contest credit use role=print-identity; they do not imply a finish.",
@@ -8951,21 +8951,9 @@
       "languages": [
         "S-Chinese"
       ],
-      "printings": [
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "confirmed",
-          "sourceRefs": [
-            "pokemon-cn-simplified-finish-rules"
-          ]
-        }
+      "suppressAutoFinishes": [
+        "non-holo",
+        "reverse-holo"
       ]
     },
     {
@@ -10058,6 +10046,16 @@
             "tw-clf016-shopee-d"
           ]
         }
+      ]
+    },
+    {
+      "setCode": "SV-P/CS",
+      "number": "277",
+      "languages": [
+        "S-Chinese"
+      ],
+      "suppressAutoFinishes": [
+        "reverse-holo"
       ]
     }
   ]

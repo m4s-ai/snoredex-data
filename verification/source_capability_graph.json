@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-01",
+    "generated": "2026-09-02",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 44,
       "absenceEdges": 0,
       "observations": 46,
-      "resolvedVerdictSources": 1267
+      "resolvedVerdictSources": 1269
     },
     "surfaceStates": {
       "active": 18,
@@ -1203,8 +1203,8 @@
       "failureState": "Listings are one-off, mutable and not catalogue-complete.",
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Retain retailer, exact listing URL and original identified image at review time.",
+      "lastCheckedAt": "2026-09-02",
+      "freshnessPolicy": "Retain retailer, exact listing or set-list URL and original identified image at review time.",
       "query": {
         "method": "GET",
         "endpoint": "exact retailer listing URL",
@@ -3282,7 +3282,8 @@
         "localities": [
           "WEST",
           "TW",
-          "KR"
+          "KR",
+          "CN"
         ],
         "languages": [
           "MULTIPLE"
@@ -3290,7 +3291,8 @@
         "scripts": [
           "Latn",
           "Hant",
-          "Hang"
+          "Hang",
+          "Hans"
         ],
         "productCategories": [
           "retailer-product",
@@ -5571,7 +5573,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:35789e57a3acd0a4958dae2b4b7a9d23f2b7a923995e16f88e21470912978094",
+      "rawRecordHash": "sha256:8012e85a85bc3e8ce6a74ae9b9e606f3372645d6487bd73243469997ebfa7735",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -5588,9 +5590,11 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 63,
+        "stableIdCount": 68,
         "stableIds": [
           "F0009-P01",
+          "F0057-P01",
+          "F0057-P02",
           "F0067-P03",
           "F0067-P04",
           "F0071-P01",
@@ -5605,6 +5609,9 @@
           "F0289-P02",
           "F0402-P02",
           "F0403-P02",
+          "F0456-P01",
+          "F0456-P02",
+          "F0456-P03",
           "F0569-P02",
           "F0569-P03",
           "F0570-P02",
@@ -5634,15 +5641,10 @@
           "F0614-P02",
           "F0614-P03",
           "F0615-P02",
-          "F0615-P03",
-          "F0616-P01",
-          "F0616-P02",
-          "U0097",
-          "U0098",
-          "U0099"
+          "F0615-P03"
         ],
         "retrievedAt": "2026-07-23",
-        "usageCount": 63
+        "usageCount": 68
       }
     },
     {
@@ -5663,7 +5665,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:a3f2fb966e4e53d4253a37fcb4b13b02d2e82d636822cd4557700f022c4d05f7",
+      "rawRecordHash": "sha256:263df1da32e2b1aca641885825beb46f040d1650c938377e261c0d00c85a924a",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -5681,7 +5683,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 30,
+        "stableIdCount": 33,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
@@ -5690,6 +5692,9 @@
           "F0291-P02",
           "F0294-P02",
           "F0441-P01",
+          "F0456-P01",
+          "F0456-P02",
+          "F0456-P03",
           "F0519-P02",
           "F0534-P01",
           "F0615-P03",
@@ -5715,7 +5720,7 @@
           "U0780"
         ],
         "retrievedAt": "2026-08-26",
-        "usageCount": 41
+        "usageCount": 44
       }
     },
     {
@@ -5849,7 +5854,7 @@
       ],
       "outcome": "The retained official article positively states that rarity R and above cards are foil, and that Simplified Chinese C, U and R cards can appear as the locality-specific patterned random foil treatment.",
       "rawRecordRef": "verification/source_registry.json:https://www.pokemon.cn/tcg/product/16377.html",
-      "rawRecordHash": "sha256:9b843cd68da239b0a1bf9ceee394f9af20b99eabc87552956996ce1f708ea37c",
+      "rawRecordHash": "sha256:7d7889d85ed7818854404371df508d23ca56f7c64b16e722f038beed54d2da3b",
       "rawRecord": {
         "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
         "nonUrlEvidenceId": null,
@@ -5861,7 +5866,7 @@
           "finish",
           "finish-override"
         ],
-        "stableIdCount": 19,
+        "stableIdCount": 18,
         "stableIds": [
           "F0000-P03",
           "F0001-P01",
@@ -5869,7 +5874,6 @@
           "F0052-P01",
           "F0053-P01",
           "F0055-P01",
-          "F0057-P03",
           "F0058-P01",
           "F0060-P03",
           "F0063-P03",
@@ -5884,7 +5888,7 @@
           "override:pokemon-cn-simplified-finish-rules"
         ],
         "retrievedAt": "2026-08-27",
-        "usageCount": 19
+        "usageCount": 18
       }
     },
     {
@@ -10883,7 +10887,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "product"
       ]
     },
@@ -11487,7 +11490,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "product"
       ]
     },
@@ -17042,6 +17044,30 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {

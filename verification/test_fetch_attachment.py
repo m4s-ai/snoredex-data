@@ -323,7 +323,7 @@ def main() -> None:
     direct_source = ROOT / ".fetch-attachment-test-direct-source.png"
     direct_source.write_bytes(image)
     direct_manifest = ROOT / ".fetch-attachment-test-direct-manifest.json"
-    direct_manifest.write_text(json.dumps({"observations": [{
+    direct_manifest.write_text(json.dumps({"issue": 999, "observations": [{
         "attachment": str(direct_source),
         "photographSource": "https://drive.example.test/file/card/view",
         "setCode": "OWNER", "number": "001/001", "variant": "base",

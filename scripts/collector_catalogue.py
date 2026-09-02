@@ -98,6 +98,14 @@ REVIEWED_CARD_RELEASE_REKEYS = {
     "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037":
         "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up",
 }
+REVIEWED_ITEM_SPLITS = {
+    "item-ba258f3e-4106-5795-87f4-97d9c19a3e42": (
+        "sv-p-cs-277-s-chinese-none-mirror-holo-master-ball",
+        "sv-p-cs-277-s-chinese-none-mirror-holo-poke-ball",
+    ),
+}
+
+
 class ContractError(ValueError):
     pass
 
@@ -427,6 +435,23 @@ def target_identity_index(items: list[dict[str, Any]]) -> dict[str, dict[str, se
     return index
 
 
+def reviewed_split_targets(
+    source_item_id: str, index: dict[str, dict[str, set[str]]],
+) -> set[str] | None:
+    legacy_ids = REVIEWED_ITEM_SPLITS.get(source_item_id)
+    if not legacy_ids:
+        return None
+    targets: set[str] = set()
+    for legacy_id in legacy_ids:
+        matches = index["legacyChecklistIds"].get(legacy_id, set())
+        if len(matches) != 1:
+            raise ContractError(
+                f"reviewed split target {legacy_id} resolves to {len(matches)} items"
+            )
+        targets.update(matches)
+    return targets
+
+
 def migration_targets(
     source: dict[str, Any], target_ids: set[str],
     index: dict[str, dict[str, set[str]]],
@@ -434,6 +459,9 @@ def migration_targets(
     """Find targets only through producer-owned identity, never presentation fields."""
     if source["itemId"] in target_ids:
         return {source["itemId"]}
+    reviewed_targets = reviewed_split_targets(source["itemId"], index)
+    if reviewed_targets is not None:
+        return reviewed_targets
     exact: set[str] = set()
     for field in ("physicalPrintingId", "legacyChecklistIds", "sourcePrintingId"):
         for value in item_identity_values(source, field):

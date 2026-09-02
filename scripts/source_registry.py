@@ -483,19 +483,19 @@ PROVIDERS: list[dict[str, Any]] = [
         "homepage": None,
         "hosts": [
             "www.target.com", "exorgames.com", "shopping.fullcomp.jp", "www.pokeca.net",
-            "www.ebay.de",
+            "www.ebay.de", "pokipair.com", "www.pokipair.com", "media.pokipair.com",
         ],
         "licenseOrTerms": "Individual retailer site terms; used for identification only.",
         "category": "retail-listing",
         "authorityTier": 3,
-        "coverage": "individual listings whose photography identifies an exact physical printing",
+        "coverage": "individual listings or retained set-list images that identify an exact physical printing",
         "supportsAbsence": False,
         "usedFor": ["finish", "product", "language"],
         "attribution": "Retail listings from independent sellers.",
         "notes": (
-            "Grouped deliberately: these are one-off listings, not catalogues, so per-host "
-            "provider entries would imply a coverage guarantee none of them offers. A listing "
-            "counts only when its image identifies the printing; stock photography does not."
+            "Grouped deliberately: these are one-off listings or retained retailer set-list images, "
+            "not authoritative catalogues, so per-host provider entries would imply a coverage "
+            "guarantee none of them offers. An image counts only when it identifies the printing."
         ),
     },
     {

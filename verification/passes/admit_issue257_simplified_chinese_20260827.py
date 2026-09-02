@@ -145,7 +145,10 @@ OVERRIDES = [
         "CS1DC", "152", "non-holo", "base", "pokemon-cn-dynamax-clash-starter",
         distribution={"kind": "fixed-deck", "name": "Dynamax Clash V Starter Deck"},
     ),
-    simple_override("CS2aC", "086", "mirror-holo", "V1", "pokemon-cn-simplified-finish-rules"),
+    {
+        "setCode": "CS2aC", "number": "086", "languages": ["S-Chinese"],
+        "suppressAutoFinishes": ["non-holo", "reverse-holo"],
+    },
     simple_override("CS2aC", "142", "holo", "V2", "pokemon-cn-simplified-finish-rules"),
     simple_override(
         "CS3DC", "117", "non-holo", "base", "pokemon-cn-primordial-arts-starter",
@@ -226,11 +229,18 @@ OVERRIDES = [
 
 SOURCE_FIRST_PRINTS = [
     {
-        "printId": "CN:CS2aC:086:base", "locality": "CN", "localSetCode": "CS2aC", "localNumber": "086", "variant": "base",
+        "printId": "CN:CS2aC:086/115:base", "locality": "CN", "localSetCode": "CS2aC", "localNumber": "086/115", "variant": "base",
         "language": "S-Chinese", "script": "Hans", "name": "卡比兽", "cardName": "Snorlax", "catchUpOf": "the legacy Japanese s4 084 work",
-        "specimenId": None, "providerId": "52poke", "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89", "corroborated": True,
-        "markAssetUrl": None, "cardImageUrl": None,
-        "evidence": "52poke's per-card language table identifies the Simplified-Chinese Vivid Portrayals printing as collector number 086, rarity R, released 2023-08-18. The existing reviewed U0289 evidence and shared card identity establish it as the local counterpart of legacy s4 084; the local release remains distinct.",
+        "specimenId": "SPEC-0473", "providerId": "52poke", "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89", "corroborated": True,
+        "markAssetUrl": None, "cardImageUrl": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+        "evidence": "52poke's per-card language table identifies the Simplified-Chinese Vivid Portrayals printing as collector number 086, rarity R, released 2023-08-18. SPEC-0473 and SPEC-0474 retain the two exact PokiPair set-list images and show the complete printed number 086/115. The existing reviewed U0289 evidence and shared card identity establish it as the local counterpart of legacy s4 084; the local release remains distinct.",
+    },
+    {
+        "printId": "CN:CS2aC:142/115:base", "locality": "CN", "localSetCode": "CS2aC", "localNumber": "142/115", "variant": "base",
+        "language": "S-Chinese", "script": "Hans", "name": "卡比兽", "cardName": "Snorlax", "catchUpOf": "the Chilling Reign CRE 224 work",
+        "specimenId": "SPEC-0475", "providerId": "bulbapedia", "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)", "corroborated": True,
+        "markAssetUrl": None, "cardImageUrl": "https://media.pokipair.com/2024/09/06025344/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-240.png",
+        "evidence": "The Vivid Portrayals set list identifies Simplified-Chinese Snorlax 142/115 UR. SPEC-0475 retains the exact gold card image, and the collection owner identifies it as the gold Snorlax known from Chilling Reign. The shared rules text and card identity establish the same Snorlax-Gormandize-Body-Slam work while the local release remains distinct.",
     },
     {
         "printId": "CN:CS2DaC:038/053:base", "locality": "CN", "localSetCode": "CS2DaC", "localNumber": "038/053", "variant": "base",
@@ -260,16 +270,18 @@ QUESTION_SET = {
     "issueNumber": 257,
     "locality": "CN",
     "language": "S-Chinese",
-    "legacyUnitIds": ["U0289", "U0639", "U0646", "U0651", "U0655"],
+    "legacyUnitIds": ["U0289", "U0592", "U0639", "U0646", "U0651", "U0655"],
     "defaultDisposition": "needs-positive-local-identity",
     "mappings": [
         {
             "legacyUnitId": legacy, "sourceFirstRecordId": target, "assertionType": "same-work-decision",
-            "assertedBy": "repository verification pass", "assertedAt": "2026-08-27", "evidenceUrl": url,
+            "assertedBy": "collection owner" if legacy in {"U0289", "U0592"} else "repository verification pass",
+            "assertedAt": {"U0289": "2026-09-01", "U0592": "2026-09-02"}.get(legacy, "2026-08-27"), "evidenceUrl": url,
             "evidence": evidence,
         }
         for legacy, target, url, evidence in [
-            ("U0289", "CN:CS2aC:086:base", "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89", "The exact Simplified-Chinese 086 printing is the reviewed local counterpart of legacy s4 084; both release identities remain distinct."),
+            ("U0289", "CN:CS2aC:086/115:base", "https://github.com/m4s-ai/snoredex-data/issues/257", "The collection owner explicitly confirms that Simplified-Chinese CS2aC 086/115 corresponds to Japanese s4 084. This release-level same-work decision covers every finish variant attached to either release while keeping the Japanese and Simplified-Chinese release identities distinct. It does not by itself confirm an individual finish. Cardmarket product: https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086"),
+            ("U0592", "CN:CS2aC:142/115:base", "https://github.com/m4s-ai/snoredex-data/issues/257", "The collection owner identifies Simplified-Chinese CS2aC 142/115 as the gold Snorlax from Chilling Reign. SPEC-0475 retains the exact local card image; the shared rules text establishes the same Snorlax-Gormandize-Body-Slam work while keeping the releases distinct."),
             ("U0639", "CN:CS2DaC:038/053:base", "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)", "The closed Family Pokémon Card Game list and independent CS2DaC checklist establish the exact Simplified-Chinese 038/053 counterpart of legacy sH 038; both release identities remain distinct."),
             ("U0651", "CN:CS4DaC:341/414:base", "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568", "The Start Deck 100 list and SPEC-0155 establish the exact Simplified-Chinese CS4DaC 341/414 counterpart of legacy sI100 341."),
             ("U0655", "CN:CS4DaC:342/414:base", "https://www.ebay.com/itm/356156650452", "The Start Deck 100 list and SPEC-0156 establish the exact Simplified-Chinese CS4DaC 342/414 counterpart of legacy sI100 342."),
@@ -279,10 +291,15 @@ QUESTION_SET = {
 
 
 RELEASES = {
-    "CN:CS2aC:086:base": {
-        "releaseId": "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam",
+    "CN:CS2aC:086/115:base": {
+        "releaseId": "RELEASE:CN:S-Chinese:CS2aC:086/115:Snorlax-Gormandize-Body-Slam",
         "work": "Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0289",
+    },
+    "CN:CS2aC:142/115:base": {
+        "releaseId": "RELEASE:CN:S-Chinese:CS2aC:142/115:Snorlax-Gormandize-Body-Slam",
+        "work": "Snorlax-Gormandize-Body-Slam",
+        "legacyUnitId": "U0592",
     },
     "CN:CS2DaC:038/053:base": {
         "releaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
@@ -302,6 +319,18 @@ RELEASES = {
 }
 
 
+GRAPH_VALUE_REKEYS = {
+    "CN:CS2aC:086:base": "CN:CS2aC:086/115:base",
+    "CN:CS2aC:142:base": "CN:CS2aC:142/115:base",
+    "CLAIM:source-first:CN:CS2aC:086:base": "CLAIM:source-first:CN:CS2aC:086/115:base",
+    "CLAIM:source-first:CN:CS2aC:142:base": "CLAIM:source-first:CN:CS2aC:142/115:base",
+    "RELEASE:CN:S-Chinese:CS2aC:086:Snorlax-Gormandize-Body-Slam": "RELEASE:CN:S-Chinese:CS2aC:086/115:Snorlax-Gormandize-Body-Slam",
+    "RELEASE:CN:S-Chinese:CS2aC:142:Snorlax-Gormandize-Body-Slam": "RELEASE:CN:S-Chinese:CS2aC:142/115:Snorlax-Gormandize-Body-Slam",
+    "ASSERT:same-work:U0289:CN:CS2aC:086:base": "ASSERT:same-work:U0289:CN:CS2aC:086/115:base",
+    "ASSERT:same-work:U0592:CN:CS2aC:142:base": "ASSERT:same-work:U0592:CN:CS2aC:142/115:base",
+}
+
+
 def stable_profile_id(locality: str, local_code: str) -> str:
     material = f"{locality}\x1f{local_code}".encode()
     return f"SET-SRC-SF-{hashlib.sha256(material).hexdigest()[:12].upper()}"
@@ -309,6 +338,14 @@ def stable_profile_id(locality: str, local_code: str) -> str:
 
 def encoded(payload: dict) -> str:
     return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+
+
+def rekey_graph_values(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {key: rekey_graph_values(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [rekey_graph_values(item) for item in value]
+    return GRAPH_VALUE_REKEYS.get(value, value)
 
 
 def append_unique(values: list[str], *new_values: str) -> None:
@@ -402,7 +439,7 @@ def source_profile(group: list[dict[str, Any]]) -> dict[str, Any]:
         "sourceKind": "source-first-local-set-profile",
         "provider": "mixed-positive-evidence",
         "providerRecordKey": f"{locality}\x1f{local_code}",
-        "retrieved": "2026-08-27",
+        "retrieved": "2026-09-02" if local_code == "CS2aC" else "2026-08-27",
         "raw": {
             "localCode": local_code,
             "localName": None,
@@ -580,6 +617,7 @@ def apply_graph(
             release = release_matches[0]["payload"]
             if release.get("work") != facts["work"]:
                 raise ValueError(f"existing release has a different Work: {release_id}")
+            release["localNumber"] = row["localNumber"]
             release["workMappingState"] = "mapped-by-explicit-equivalence"
             append_unique(release.setdefault("claimIds", []), claim_id)
             append_unique(release.setdefault("establishingClaimIds", []), claim_id)
@@ -717,19 +755,20 @@ def main() -> int:
     updated_overrides = []
     for row in finish["overrides"]:
         key = (row["setCode"], row["number"], tuple(row.get("languages") or []))
-        if key in retired_keys:
+        if key in retired_keys and row.get("printings"):
             continue
         updated_overrides.append(issue_rows.pop(key, row))
     finish["overrides"] = updated_overrides + list(issue_rows.values())
-    finish["meta"]["lastUpdated"] = "2026-08-27"
+    finish["meta"]["lastUpdated"] = "2026-09-02"
 
     prints = read(PRINTS)
     before_prints = json.dumps(prints, sort_keys=True, ensure_ascii=False)
     prints_by_id = {row["printId"]: row for row in prints["prints"]}
-    prints_by_id.pop("CN:CS2aC:086/115:base", None)
+    prints_by_id.pop("CN:CS2aC:086:base", None)
+    prints_by_id.pop("CN:CS2aC:142:base", None)
     prints_by_id.update({row["printId"]: row for row in SOURCE_FIRST_PRINTS})
     prints["prints"] = sorted(prints_by_id.values(), key=lambda row: row["printId"])
-    prints["meta"]["generated"] = "2026-08-27"
+    prints["meta"]["generated"] = "2026-09-02"
     prints["meta"]["counts"]["admitted"] = len(prints["prints"])
 
     rekeys = read(REKEYS)
@@ -744,10 +783,15 @@ def main() -> int:
 
     graph = read(GRAPH)
     before_graph = encoded(graph)
+    graph = rekey_graph_values(graph)
     graph = apply_graph(graph, profiles)
 
     specimens = {row["specimenId"]: row for row in read(SPECIMENS)["specimens"]}
-    for specimen_id in ("SPEC-0146", "SPEC-0147", "SPEC-0148", "SPEC-0149", "SPEC-0150", "SPEC-0151", "SPEC-0152", "SPEC-0153", "SPEC-0154", "SPEC-0155", "SPEC-0156"):
+    for specimen_id in (
+        "SPEC-0146", "SPEC-0147", "SPEC-0148", "SPEC-0149", "SPEC-0150",
+        "SPEC-0151", "SPEC-0152", "SPEC-0153", "SPEC-0154", "SPEC-0155",
+        "SPEC-0156", "SPEC-0473", "SPEC-0474", "SPEC-0475",
+    ):
         row = specimens.get(specimen_id)
         if not row or not row.get("photograph") or not row.get("photographSha256"):
             raise SystemExit(f"{specimen_id} is not a pinned issue-257 specimen")
@@ -770,7 +814,10 @@ def main() -> int:
     write(REKEYS, rekeys)
     SET_SOURCES.write_text(encoded(set_sources), encoding="utf-8", newline="\n")
     GRAPH.write_text(encoded(graph), encoding="utf-8", newline="\n")
-    print(f"admitted {len(OVERRIDES)} finish overrides, {len(SOURCE_FIRST_PRINTS)} local prints and 4 positive re-keys for issue #257")
+    print(
+        f"admitted {len(OVERRIDES)} finish overrides, {len(SOURCE_FIRST_PRINTS)} "
+        f"local prints and {len(QUESTION_SET['mappings'])} positive re-keys for issue #257"
+    )
     return 0
 
 
