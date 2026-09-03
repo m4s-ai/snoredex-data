@@ -494,14 +494,10 @@ def main() -> None:
     empty_release = next(
         row for row in tampered["entities"]
         if row["entityType"] == "card-release"
-        and row["payload"]["workMappingState"] == "needs-explicit-equivalence"
+        and row["payload"]["workMappingState"] == "mapped"
     )
     empty_release["payload"]["workMappingState"] = "unmapped"
     empty_release["payload"]["work"] = None
-    tampered["edges"].append({
-        "fromType": "card-release", "fromId": empty_release["entityId"],
-        "relation": "implements", "toType": "work", "toId": other_work_id,
-    })
     assert any("unmapped card release has an implements edge" in error for error in validate(tampered))
     # Work entity IDs are the stable relation targets.  Swapping only the
     # payload workId values (and retargeting release edges to those values)
@@ -631,20 +627,6 @@ def main() -> None:
         "re-keyed release must retain mapped-by-explicit-equivalence state" in error
         for error in validate(tampered)
     )
-    # The reviewed #304 pending state is distinct from generic unmapped: a
-    # later downgrade would discard the explicit-equivalence research signal.
-    tampered = deepcopy(graph)
-    pending_release = next(
-        row for row in tampered["entities"]
-        if row["entityType"] == "card-release"
-        and row["entityId"] == "RELEASE:JP:Japanese:DP-P:126:None"
-    )
-    pending_release["payload"]["workMappingState"] = "unmapped"
-    pending_release["payload"]["work"] = None
-    assert any(
-        "issue #304 release has unexpected work mapping state" in error
-        for error in validate(tampered)
-    )
     rr111_releases = {
         "RELEASE:JP:Japanese:DP-P:127:None",
         "RELEASE:WEST:English:RR:111:None",
@@ -670,6 +652,42 @@ def main() -> None:
         and row["toType"] == "work"
         and row["toId"] == rr111_work_id
     } == rr111_releases
+    dpp126_release_id = "RELEASE:JP:Japanese:DP-P:126:None"
+    dpp126_work_id = "WORK:Snorlax-Lv37-Pick-and-Collect-Roll-Over"
+    dpp126_release = next(
+        row for row in graph["entities"]
+        if row["entityType"] == "card-release" and row["entityId"] == dpp126_release_id
+    )
+    assert dpp126_release["payload"]["workMappingState"] == "mapped"
+    assert dpp126_release["payload"]["work"] == "Snorlax-Lv37-Pick-and-Collect-Roll-Over"
+    assert any(
+        row["fromType"] == "card-release"
+        and row["fromId"] == dpp126_release_id
+        and row["relation"] == "implements"
+        and row["toType"] == "work"
+        and row["toId"] == dpp126_work_id
+        for row in graph["edges"]
+    )
+    hungry_release_id = "RELEASE:JP:Japanese:UNP:unnumbered:None"
+    hungry_work_id = "WORK:Hungry-Snorlax-Lv50-Eat-Rollout"
+    hungry_releases = [
+        row for row in graph["entities"]
+        if row["entityType"] == "card-release"
+        and row["payload"].get("localSetCode") == "UNP"
+        and row["payload"].get("localNumber") == ""
+    ]
+    assert len(hungry_releases) == 1
+    assert hungry_releases[0]["entityId"] == hungry_release_id
+    assert hungry_releases[0]["payload"]["workMappingState"] == "mapped"
+    assert hungry_releases[0]["payload"]["work"] == "Hungry-Snorlax-Lv50-Eat-Rollout"
+    assert any(
+        row["fromType"] == "card-release"
+        and row["fromId"] == hungry_release_id
+        and row["relation"] == "implements"
+        and row["toType"] == "work"
+        and row["toId"] == hungry_work_id
+        for row in graph["edges"]
+    )
     assert project_physical_evidence(deepcopy(graph)) == graph
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.

@@ -1,7 +1,7 @@
 {
  "schema": "snoredex-confirmed-releases",
  "schemaVersion": "1.0.0",
- "generated": "2026-09-02",
+ "generated": "2026-09-03",
  "note": "One row per card-variant-edition. confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order. Use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
@@ -143,9 +143,14 @@
    "dateSort": "1997-03-05"
   },
   {
-   "date": "1997-12",
+   "date": "1997-12-10",
    "dateExact": true,
-   "dateSource": null,
+   "dateSource": {
+    "provider": "Bulbapedia",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Hungry_Snorlax_%28Nintendo_64_promo%29",
+    "page": "Hungry Snorlax (Nintendo 64 promo)",
+    "field": "release information: Nintendo 64 Double Get Campaign start"
+   },
    "name": "Hungry Snorlax",
    "setCode": "UNP",
    "number": "",
@@ -261,9 +266,9 @@
     "Japanese"
    ],
    "rowId": "unp-nonumber-base-none",
-   "datePrecision": "month",
+   "datePrecision": "day",
    "dateApproximate": false,
-   "dateSort": "1997-12-01"
+   "dateSort": "1997-12-10"
   },
   {
    "date": "1998-03-23",
@@ -7067,24 +7072,43 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0149",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0149-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0481.jpg",
+       "specimenIds": [
+        "SPEC-0481"
+       ]
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -7132,7 +7156,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending"
+    "Japanese": "positive-evidence-only"
    },
    "languageEvidence": {
     "Japanese": {
@@ -8344,24 +8368,43 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0152",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0152-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0482.jpg",
+       "specimenIds": [
+        "SPEC-0482"
+       ]
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -8409,7 +8452,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending",
+    "Japanese": "positive-evidence-only",
     "Korean": "pending"
    },
    "languageEvidence": {
@@ -14952,24 +14995,43 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0414",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0414-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0485.jpg",
+       "specimenIds": [
+        "SPEC-0485"
+       ]
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -15017,7 +15079,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending",
+    "Japanese": "owner-adjudicated",
     "Korean": "pending"
    },
    "languageEvidence": {
@@ -15951,24 +16013,57 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo",
+      "mirror-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo",
+      "mirror-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
-      "mirror-holo": "pending"
+      "mirror-holo": "confirmed"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
-      "mirror-holo": "pending"
+      "mirror-holo": "confirmed"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0368",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0368-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": {
+        "kind": "fixed-deck",
+        "name": "Starter Set V Grass Deck"
+       },
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0368-P02",
+       "finish": "mirror-holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": {
+        "kind": "fixed-deck",
+        "name": "Starter Set V Grass Deck hit variant"
+       },
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -16016,7 +16111,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending",
+    "Japanese": "positive-evidence-only",
     "Korean": "pending"
    },
    "languageEvidence": {
@@ -21126,24 +21221,43 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0320",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0320-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0483.jpg",
+       "specimenIds": [
+        "SPEC-0483"
+       ]
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -21191,7 +21305,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending"
+    "Japanese": "positive-evidence-only"
    },
    "languageEvidence": {
     "Japanese": {
@@ -22101,24 +22215,43 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0371",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0371-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0484.jpg",
+       "specimenIds": [
+        "SPEC-0484"
+       ]
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -22181,7 +22314,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending",
+    "Japanese": "positive-evidence-only",
     "Korean": "pending",
     "T-Chinese": "positive-evidence-only",
     "S-Chinese": "pending"
@@ -31655,24 +31788,43 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0492",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0492-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0486.jpg",
+       "specimenIds": [
+        "SPEC-0486"
+       ]
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -31720,7 +31872,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending",
+    "Japanese": "positive-evidence-only",
     "Korean": "pending",
     "T-Chinese": "pending"
    },
@@ -33118,24 +33270,43 @@
     {
      "language": "Japanese",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0495",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0495-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0487.jpg",
+       "specimenIds": [
+        "SPEC-0487"
+       ]
+      }
+     ]
     },
     {
      "language": "Korean",
@@ -33183,7 +33354,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "pending",
+    "Japanese": "positive-evidence-only",
     "Korean": "pending",
     "S-Chinese": "pending"
    },

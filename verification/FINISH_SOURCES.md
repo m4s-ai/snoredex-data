@@ -100,7 +100,7 @@ The live split is `meta.pendingByLanguage` in
 | Language | Finish source that can answer | Notes |
 |---|---|---|
 | English, French, German, Italian, Spanish, Portuguese | TCGdex `variants`, official checklist PDFs, TCGCSV subtypes | The only languages with all three. Each source confirms listed finishes only. |
-| Japanese | **Official product pages** (`pokemon-card.com/ex/<set>/index.html`) | **Not** the card database — see below. |
+| Japanese | **Official product pages** (`pokemon-card.com/ex/<set>/index.html`) | **Not** the card database — see below. The retained [Elite Fourum Starter Set V post](https://www.elitefourum.com/t/help-cant-find-these-snorlax-raw-cards-anywhere-for-the-master-set/57319/10) is a scoped exception for the explicitly named sA 10 non-holo and mirror-foil treatments; it does not close the finish list. |
 | Traditional Chinese | `asia.pokemon-card.com`, TCGdex `zh-tw` | TCGdex coverage is partial, so many rows need the Asia site. |
 | Indonesian, Thai | `asia.pokemon-card.com`, TCGdex `id` / `th` | Both TCGdex locale slices are thin. |
 | Korean | No source found | TCGdex serves `ko`, but see below. Needs pokumon, Elite Fourum, or an inspected card. |

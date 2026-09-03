@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Repair the reviewed CardRelease-to-Work state defect from producer issue #304.
+"""Retain the historical CardRelease-to-Work repair check from issue #304.
 
-The affected releases carry no reviewed Work relation.  They therefore remain
-``needs-explicit-equivalence`` until a positive equivalence decision exists; this
-pass never invents a Work id.  The precondition is deliberately exact so a future
-graph change cannot silently broaden the repair.
+Every formerly pending release now has a later positive Work decision, so the
+expected unresolved set is empty. This pass remains as an idempotence check and
+never invents a Work id.
 
     python verification/passes/repair_issue304_work_mapping_20260825.py
     python verification/passes/repair_issue304_work_mapping_20260825.py --check
@@ -19,10 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 GRAPH = ROOT / "verification" / "authoritative_graph.json"
 REVIEWED_AT = "2026-08-25"
-EXPECTED_RELEASES = frozenset({
-    "RELEASE:JP:Japanese:DP-P:126:None",
-    "RELEASE:JP:Japanese:UNP:unnumbered:None",
-})
+EXPECTED_RELEASES = frozenset()
 EXPECTED_STATE = "needs-explicit-equivalence"
 
 

@@ -70,7 +70,7 @@ EN_NAME_MAP = {
 
 DATES = {
     # Japanese classics
-    "PJU": ("1997-03", False), "UNP": ("1997-12", True),  # Hungry Snorlax N64 campaign Dec 1997
+    "PJU": ("1997-03", False),
     "EXS": ("1998-03-23", True),  # Later Quick Starter printings are dated per checklist item.
     "G2": ("1999", False), "EC5": ("2002", False),
     "PCG1": ("2004", False), "PCG3": ("2004", False), "PCG9": ("2006", False),

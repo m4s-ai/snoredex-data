@@ -34,13 +34,6 @@ WORK_MAPPING_STATES = {
 }
 WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
 WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
-# These releases were explicitly reviewed in producer issue #304 as positive
-# local releases whose Work identity is still unresolved.  They must
-# retain the reviewed pending state until a separate equivalence decision exists.
-ISSUE304_NEEDS_EXPLICIT_RELEASES = frozenset({
-    "RELEASE:JP:Japanese:DP-P:126:None",
-    "RELEASE:JP:Japanese:UNP:unnumbered:None",
-})
 FOIL_PATTERN_ALIASES = {
     "poke ball mirror": "poke-ball",
     "poké ball mirror": "poke-ball",
@@ -806,9 +799,6 @@ def _validate_release_work_mappings(
             errors.append(f"card-release payload id mismatch: {release_id}")
         mapping_state = release.get("workMappingState")
         work_key = release.get("work")
-        if release_id in ISSUE304_NEEDS_EXPLICIT_RELEASES \
-                and mapping_state != "needs-explicit-equivalence":
-            errors.append(f"issue #304 release has unexpected work mapping state: {release_id}")
         if mapping_state not in WORK_MAPPING_STATES:
             errors.append(f"card release has unknown work mapping state: {release_id}")
         elif mapping_state in WORK_REQUIRED_STATES:
@@ -902,10 +892,6 @@ def _validate_release_editions(
         if not isinstance(known, bool) or has_set_code != has_number or known != has_set_code:
             errors.append(f"card release local identifier invariant failed: {release_id}")
         _validate_release_claim_refs(errors, release_id, release, claims)
-    for release_id in ISSUE304_NEEDS_EXPLICIT_RELEASES - set(releases):
-        errors.append(f"issue #304 release is missing: {release_id}")
-
-
 def _validate_releases(
     errors: list[str],
     by_type: defaultdict[str, dict[str, dict[str, Any]]],
