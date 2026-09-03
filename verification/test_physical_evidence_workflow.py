@@ -135,6 +135,33 @@ def main() -> None:
         "text": "red 16th-anniversary marking",
     }]
     assert hsz027_non_holo["distribution"] is None
+    new_specimen_ids = {f"SPEC-048{i}" for i in range(1, 8)}
+    for unit in finish_units:
+        for printing in unit["printings"]:
+            if new_specimen_ids.intersection(printing.get("specimenIds") or []):
+                assert all(
+                    source.get("retrievedAt") == "2026-09-03"
+                    for source in printing["sources"]
+                )
+    fixed_deck_expectations = {
+        "F0152": ("green deck mark", "XY Beginning Set"),
+        "F0371": ("Pikachu", "Sword & Shield Family Pokémon Card Game"),
+        "F0414": ("Mewtwo", "Sun & Moon Family Pokémon Card Game"),
+        "F0495": ("Battle Academy deck mark", "Scarlet & Violet Battle Academy"),
+    }
+    for finish_unit_id, (marking, distribution_name) in fixed_deck_expectations.items():
+        printing = next(
+            printing for printing in next(
+                unit for unit in finish_units if unit["finishUnitId"] == finish_unit_id
+            )["printings"] if printing["finish"] == "non-holo"
+        )
+        assert printing["markings"][0]["role"] == "distribution-promo"
+        assert marking in printing["markings"][0]["text"]
+        assert printing["distribution"] == {
+            "kind": "fixed-deck",
+            "name": distribution_name,
+        }
+        assert all(source.get("retrievedAt") == "2026-09-03" for source in printing["sources"])
     simplified_chinese_promo = next(
         unit for unit in finish_units if unit["finishUnitId"] == "F0456"
     )
@@ -537,6 +564,13 @@ def main() -> None:
                         if source.get("canonicalUrl") == bulbapedia_url)
     assert wcd_registry["providerId"] == "bulbapedia"
     assert "finish" in wcd_registry["dimensions"]
+    bulbapedia_registry = {source.get("canonicalUrl"): source for source in source_registry}
+    assert bulbapedia_registry[
+        "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)"
+    ]["retrievedAt"] == "2026-07-31"
+    assert bulbapedia_registry[
+        "https://bulbapedia.bulbagarden.net/wiki/Hungry_Snorlax_(Nintendo_64_promo)"
+    ]["retrievedAt"] == "2026-09-03"
     german_units = {
         unit["finishUnitId"]: unit for unit in finish_units
         if unit["language"] == "German"

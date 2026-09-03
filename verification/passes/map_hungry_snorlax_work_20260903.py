@@ -32,6 +32,7 @@ SOURCE_URL = (
 )
 CURRENT_URL = "https://bulbapedia.bulbagarden.net/wiki/Hungry_Snorlax_(Nintendo_64_promo)"
 REVIEWED_AT = "2026-09-03"
+LEGACY_RETRIEVED_AT = "2026-07-31"
 OBSERVED_AT = "2026-09-03T09:36:58+02:00"
 EVIDENCE_TEXT = (
     "The pinned Bulbapedia card article identifies Hungry Snorlax LV.50 as its own "
@@ -232,8 +233,15 @@ def apply_dates(document: dict[str, Any]) -> None:
         "page": "Hungry Snorlax (Nintendo 64 promo)",
         "field": "release information: Nintendo 64 Double Get Campaign start",
         "note": "The later January 1, 1999 CD reprint is physically indistinguishable and remains the same collector entry by owner decision.",
+        "retrievedAt": REVIEWED_AT,
     }
-    records = [row for row in document["records"] if row["setCode"] != record["setCode"]]
+    records = []
+    for row in document["records"]:
+        if row["setCode"] == record["setCode"]:
+            continue
+        retained = dict(row)
+        retained.setdefault("retrievedAt", LEGACY_RETRIEVED_AT)
+        records.append(retained)
     insert_at = next(
         (index + 1 for index, row in enumerate(records) if row["setCode"] == "PJU"),
         len(records),

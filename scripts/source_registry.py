@@ -948,7 +948,7 @@ def main() -> int:
         page = entry["page"].replace(" ", "_")
         record(f"https://bulbapedia.bulbagarden.net/wiki/{page}",
                "Bulbapedia expansion/product release field", "date",
-               entry["setCode"], bulbapedia_dates["generated"])
+               entry["setCode"], entry.get("retrievedAt") or bulbapedia_dates["generated"])
 
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):
