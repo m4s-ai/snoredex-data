@@ -127,6 +127,14 @@ def main() -> None:
         "region": "Japan",
         "date": "2021-03",
     }
+    hsz027 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0149")
+    hsz027_non_holo = next(printing for printing in hsz027["printings"] if printing["finish"] == "non-holo")
+    assert hsz027_non_holo["markings"] == [{
+        "kind": "observed-marking",
+        "role": "print-identity",
+        "text": "red 16th-anniversary marking",
+    }]
+    assert hsz027_non_holo["distribution"] is None
     simplified_chinese_promo = next(
         unit for unit in finish_units if unit["finishUnitId"] == "F0456"
     )

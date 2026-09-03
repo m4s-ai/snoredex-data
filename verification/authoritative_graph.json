@@ -13244,6 +13244,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:a06ec4321a00f65409248235",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:a06ec4321a00f65409248235",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0149-P01",
+        "semanticPrintingId": "PRINTING:a06ec4321a00f65409248235",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+        "materializedTargetId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0481"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:a10c991e04df76f0971e6da1",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -14567,26 +14587,6 @@
         "proposedTargetId": "PHYSICAL:PRINTING:cc2bdcc737584632ac55a1be",
         "materializedTargetId": "PHYSICAL:PRINTING:cc2bdcc737584632ac55a1be",
         "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0149-P01",
-        "semanticPrintingId": "PRINTING:cc3df4c9f1d27d9cf4080a7d",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-        "materializedTargetId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
-        "specimenIds": [
-          "SPEC-0481"
-        ]
       }
     },
     {
@@ -34097,10 +34097,10 @@
         "sourceId": "SPEC-0481",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
+        "proposedTargetId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
         "materializedTargetId": null,
-        "reason": "provides provenance for PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d, already established from the finish store",
-        "provenanceTargetId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d"
+        "reason": "provides provenance for PHYSICAL:PRINTING:a06ec4321a00f65409248235, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235"
       }
     },
     {
@@ -95899,6 +95899,36 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+        "semanticPrintingId": "PRINTING:a06ec4321a00f65409248235",
+        "cardReleaseId": "RELEASE:JP:Japanese:HSZ:027:Snorlax-Double-Lariat-Rollout",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "observed-marking",
+            "role": "print-identity",
+            "text": "red 16th-anniversary marking"
+          }
+        ],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0149",
+        "sourcePrintingId": "F0149-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:a06ec4321a00f65409248235",
+        "specimenIds": [
+          "SPEC-0481"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:a10c991e04df76f0971e6da1",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -97163,30 +97193,6 @@
         "sourceFinishUnitId": "F0605",
         "sourcePrintingId": "F0605-P01",
         "establishingClaimId": "CLAIM:finish:PRINTING:cc2bdcc737584632ac55a1be"
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-        "semanticPrintingId": "PRINTING:cc3df4c9f1d27d9cf4080a7d",
-        "cardReleaseId": "RELEASE:JP:Japanese:HSZ:027:Snorlax-Double-Lariat-Rollout",
-        "finish": "non-holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": [],
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0149",
-        "sourcePrintingId": "F0149-P01",
-        "establishingClaimId": "CLAIM:finish:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-        "specimenIds": [
-          "SPEC-0481"
-        ]
       }
     },
     {
@@ -166567,6 +166573,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:a06ec4321a00f65409248235",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:a10c991e04df76f0971e6da1",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -167261,16 +167277,6 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:cc2bdcc737584632ac55a1be",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -177678,7 +177684,7 @@
       "fromId": "CLAIM:specimen:SPEC-0481",
       "relation": "provenance",
       "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
+      "toId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
       "provenance": {
         "specimenId": "SPEC-0481"
       }
@@ -224595,6 +224601,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:a06ec4321a00f65409248235",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:JP:Japanese:HSZ:027:Snorlax-Double-Lariat-Rollout",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:a10c991e04df76f0971e6da1",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -225455,22 +225477,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:M2a F:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:JP:Japanese:HSZ:027:Snorlax-Double-Lariat-Rollout",
       "provenance": {}
     },
     {
@@ -266493,7 +266499,7 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0149-P01",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
+      "targetRef": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
@@ -285561,7 +285567,7 @@
       "sourceId": "SPEC-0481",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
-      "reason": "provides provenance for PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d, already established from the finish store"
+      "reason": "provides provenance for PHYSICAL:PRINTING:a06ec4321a00f65409248235, already established from the finish store"
     },
     {
       "sourceKind": "specimen-observation",

@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-09-03",
-  "projectionVersion": "bf280ffd2f56a5377d7d756ff40b3c033f9dac3ac62e18d3efe198a006c0979c",
+  "projectionVersion": "330327d7b3a12ec573bfd32d1bc7cf13b311d1127fbbe8c70ff16a2ce23d1c3c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -22159,20 +22159,26 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:cc3df4c9f1d27d9cf4080a7d",
-              "semanticPrintingId": "PRINTING:cc3df4c9f1d27d9cf4080a7d",
+              "physicalPrintingId": "PHYSICAL:PRINTING:a06ec4321a00f65409248235",
+              "semanticPrintingId": "PRINTING:a06ec4321a00f65409248235",
               "cardReleaseId": "RELEASE:JP:Japanese:HSZ:027:Snorlax-Double-Lariat-Rollout",
               "finish": "non-holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [],
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "print-identity",
+                  "text": "red 16th-anniversary marking"
+                }
+              ],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0149",
               "sourcePrintingId": "F0149-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:cc3df4c9f1d27d9cf4080a7d",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a06ec4321a00f65409248235",
               "specimenIds": [
                 "SPEC-0481"
               ],
@@ -22194,7 +22200,9 @@
               "non-holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "red 16th-anniversary marking"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -22215,7 +22223,7 @@
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/o4EAAeSwrKZqeeWs/s-l1600.jpg",
               "evidence": "The complete seller photograph and three close views visibly show Japanese Snorlax HSZ 027/034 with the red 16th-anniversary mark. Across the directly lit artwork and card body, the surface remains uniformly printed without a separate reflective foil layer or foil pattern, establishing the non-holo printing. Retained as SPEC-0481.",
-              "contentHash": "6586df24b4f997e7379e440f56d335f112dc1271ce5b012982ed46698547b6ab",
+              "contentHash": "d706491133412784e74df0d0dcf6ef3ca4cf77e21ca6d14a1deb987ba0591bf6",
               "image": null
             },
             {
