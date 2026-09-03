@@ -37,20 +37,20 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-09-02",
+      "lastUpdated": "2026-09-03",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 462,
+      "withConfirmedFinish": 470,
       "withOnlyMarketplaceClaim": 52,
-      "pendingFinish": 48,
+      "pendingFinish": 40,
       "notApplicableFinish": 75,
-      "withOwnerAdjudication": 8,
-      "withNonHolo": 303,
-      "withHolo": 230,
+      "withOwnerAdjudication": 9,
+      "withNonHolo": 310,
+      "withHolo": 231,
       "withReverseHolo": 227,
-      "withMirrorHolo": 19,
+      "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 74,
-      "withAnyUnresolvedDetail": 151,
+      "withUnresolvedProductMapping": 66,
+      "withAnyUnresolvedDetail": 144,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -30339,31 +30339,54 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "partial",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0492",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0492-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0486.jpg",
+                "specimenIds": [
+                  "SPEC-0486"
+                ]
+              }
+            ]
           },
           {
             "language": "Korean",
@@ -33547,31 +33570,65 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "confirmed",
+        "availableFinishes": [
+          "holo"
+        ],
+        "unitAvailableFinishes": [
+          "holo"
+        ],
         "byLanguage": [
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0320",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0320-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "distribution-promo",
+                    "text": "コロコロイチバン! (CoroCoro Ichiban!) magazine logo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "magazine-insert",
+                  "name": "CoroCoro Ichiban! March 2021 issue insert",
+                  "region": "Japan",
+                  "date": "2021-03"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0483.jpg",
+                "specimenIds": [
+                  "SPEC-0483"
+                ]
+              }
+            ]
           },
           {
             "language": "Korean",
@@ -37352,31 +37409,63 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "partial",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0414",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0414-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "deck-logo",
+                    "role": "distribution-promo",
+                    "text": "Mewtwo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "fixed-deck",
+                  "name": "Sun & Moon Family Pokémon Card Game"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0485.jpg",
+                "specimenIds": [
+                  "SPEC-0485"
+                ]
+              }
+            ]
           },
           {
             "language": "Korean",
@@ -37507,31 +37596,63 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "partial",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0152",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0152-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "distribution-promo",
+                    "text": "green deck mark"
+                  }
+                ],
+                "distribution": {
+                  "kind": "fixed-deck",
+                  "name": "XY Beginning Set"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0482.jpg",
+                "specimenIds": [
+                  "SPEC-0482"
+                ]
+              }
+            ]
           },
           {
             "language": "Korean",
@@ -39232,31 +39353,70 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "partial",
+        "availableFinishes": [
+          "non-holo",
+          "mirror-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo",
+          "mirror-holo"
+        ],
         "byLanguage": [
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo",
+              "mirror-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo",
+              "mirror-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0368",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0368-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": null,
+                "distribution": {
+                  "kind": "fixed-deck",
+                  "name": "Starter Set V Grass Deck"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              },
+              {
+                "printingId": "F0368-P02",
+                "finish": "mirror-holo",
+                "foilPattern": null,
+                "markings": null,
+                "distribution": {
+                  "kind": "fixed-deck",
+                  "name": "Starter Set V Grass Deck hit variant"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              }
+            ]
           },
           {
             "language": "Korean",
@@ -41456,24 +41616,52 @@
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0371",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0371-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "deck-logo",
+                    "role": "distribution-promo",
+                    "text": "Pikachu"
+                  }
+                ],
+                "distribution": {
+                  "kind": "fixed-deck",
+                  "name": "Sword & Shield Family Pokémon Card Game"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0484.jpg",
+                "specimenIds": [
+                  "SPEC-0484"
+                ]
+              }
+            ]
           },
           {
             "language": "Korean",
@@ -41619,31 +41807,60 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "confirmed",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0149",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0149-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "print-identity",
+                    "text": "red 16th-anniversary marking"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0481.jpg",
+                "specimenIds": [
+                  "SPEC-0481"
+                ]
+              }
+            ]
           },
           {
             "language": "Korean",
@@ -41776,9 +41993,13 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "partial",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "S-Chinese",
@@ -41805,24 +42026,52 @@
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0495",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0495-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "distribution-promo",
+                    "text": "Battle Academy deck mark"
+                  }
+                ],
+                "distribution": {
+                  "kind": "fixed-deck",
+                  "name": "Scarlet & Violet Battle Academy"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0487.jpg",
+                "specimenIds": [
+                  "SPEC-0487"
+                ]
+              }
+            ]
           },
           {
             "language": "Korean",

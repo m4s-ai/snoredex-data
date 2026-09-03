@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-02",
+  "generated": "2026-09-03",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1270,
-   "uniqueUrls": 1263,
+   "evidenceRecords": 1278,
+   "uniqueUrls": 1271,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3709
+   "claimsAttributed": 3720
   }
  },
  "providers": [
@@ -183,7 +183,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 84,
-   "claimsSupported": 634
+   "claimsSupported": 635
   },
   {
    "providerId": "tcgcsv",
@@ -493,8 +493,8 @@
     "elitefourum.com",
     "www.elitefourum.com"
    ],
-   "uniqueSources": 4,
-   "claimsSupported": 16
+   "uniqueSources": 5,
+   "claimsSupported": 19
   },
   {
    "providerId": "ligapokemon",
@@ -769,8 +769,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 74,
-   "claimsSupported": 131
+   "uniqueSources": 81,
+   "claimsSupported": 138
   }
  ],
  "evidence": [
@@ -1477,17 +1477,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), product/card article"
+    "Bulbapedia (fan wiki), product/card article",
+    "Bulbapedia expansion/product release field"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "U0504"
+    "U0504",
+    "UNP"
    ],
-   "retrievedAt": "2026-07-22",
-   "usageCount": 1
+   "retrievedAt": "2026-09-03",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Journey_Theme_Pack_(ATCG)",
@@ -9288,7 +9291,7 @@
    "stableIds": [
     "F0174-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-24",
    "usageCount": 1
   },
   {
@@ -9305,7 +9308,7 @@
    "stableIds": [
     "F0315-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -9360,7 +9363,7 @@
    "stableIds": [
     "F0634-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-09-01",
    "usageCount": 1
   },
   {
@@ -9377,7 +9380,7 @@
    "stableIds": [
     "F0174-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-24",
    "usageCount": 1
   },
   {
@@ -9485,7 +9488,7 @@
     "CLF 016 base",
     "F0035-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9505,7 +9508,7 @@
     "DP-P 126 base",
     "F0095-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9525,7 +9528,7 @@
     "DP-P 127 base",
     "F0098-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9667,7 +9670,7 @@
     "F0193-P01",
     "LL 028 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9687,7 +9690,7 @@
     "F0255-P02",
     "PJU  base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9741,7 +9744,7 @@
     "F0398-P01",
     "SM-P 1 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9761,7 +9764,7 @@
     "F0400-P01",
     "SM-P 297 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9781,7 +9784,7 @@
     "F0575-P01",
     "UNP  base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9818,7 +9821,7 @@
     "F0622-P01",
     "XY-P 261 V2"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9872,7 +9875,7 @@
     "F0324-P02",
     "s10a 058 V1"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9892,7 +9895,7 @@
     "F0329-P01",
     "s10a 077 V2"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9912,7 +9915,7 @@
     "F0334-P02",
     "s10b 056 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9932,7 +9935,7 @@
     "F0339-P01",
     "s1H 45 V1"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9952,7 +9955,7 @@
     "F0345-P01",
     "s1H 66 V2"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9972,7 +9975,7 @@
     "F0348-P01",
     "s1H 70 V2"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -9992,7 +9995,7 @@
     "F0342-P01",
     "s1H 46 V1"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10029,7 +10032,7 @@
     "F0354-P02",
     "s4 84 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10049,7 +10052,7 @@
     "F0358-P01",
     "s5a 93 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10154,7 +10157,7 @@
     "F0417-P01",
     "sN 008 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10174,7 +10177,7 @@
     "F0405-P01",
     "sm9 066 V1"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10194,7 +10197,7 @@
     "F0408-P01",
     "sm9 106 V2"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10214,7 +10217,7 @@
     "F0411-P01",
     "sm9 115 V3"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10302,7 +10305,7 @@
     "F0502-P01",
     "svM 094 base"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 2
   },
   {
@@ -10607,6 +10610,26 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://www.elitefourum.com/t/help-cant-find-these-snorlax-raw-cards-anywhere-for-the-master-set/57319/10",
+   "nonUrlEvidenceId": null,
+   "providerId": "elitefourum",
+   "sourceTypes": [
+    "Elite Fourum collector-community post"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0368-P01",
+    "F0368-P02",
+    "override:elitefourum-starter-v-deck-finishes"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://www.elitefourum.com/t/modern-world-championships-decks-languages/55804",
    "nonUrlEvidenceId": null,
    "providerId": "elitefourum",
@@ -10702,7 +10725,7 @@
     "U0772",
     "U0780"
    ],
-   "retrievedAt": "2026-08-26",
+   "retrievedAt": "2026-09-02",
    "usageCount": 45
   },
   {
@@ -10719,7 +10742,7 @@
    "stableIds": [
     "F0094-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -10736,7 +10759,7 @@
    "stableIds": [
     "F0572-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10753,7 +10776,7 @@
    "stableIds": [
     "F0573-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10770,7 +10793,7 @@
    "stableIds": [
     "F0570-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10787,7 +10810,7 @@
    "stableIds": [
     "F0572-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10804,7 +10827,7 @@
    "stableIds": [
     "F0571-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10821,7 +10844,7 @@
    "stableIds": [
     "F0072-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10838,7 +10861,7 @@
    "stableIds": [
     "F0569-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10855,7 +10878,7 @@
    "stableIds": [
     "F0574-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10872,7 +10895,7 @@
    "stableIds": [
     "F0573-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10889,7 +10912,7 @@
    "stableIds": [
     "F0570-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10906,7 +10929,7 @@
    "stableIds": [
     "F0071-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10923,7 +10946,7 @@
    "stableIds": [
     "F0571-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10940,7 +10963,7 @@
    "stableIds": [
     "F0574-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10957,7 +10980,7 @@
    "stableIds": [
     "F0569-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10974,7 +10997,7 @@
    "stableIds": [
     "F0402-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -10991,7 +11014,7 @@
    "stableIds": [
     "F0067-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -11008,7 +11031,7 @@
    "stableIds": [
     "F0072-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -11025,7 +11048,7 @@
    "stableIds": [
     "F0403-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -11042,7 +11065,7 @@
    "stableIds": [
     "F0067-P04"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-29",
    "usageCount": 1
   },
   {
@@ -11059,7 +11082,7 @@
    "stableIds": [
     "F0024-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -11076,7 +11099,7 @@
    "stableIds": [
     "F0125-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -11093,7 +11116,7 @@
    "stableIds": [
     "F0584-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -11130,7 +11153,7 @@
    "stableIds": [
     "F0167-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-24",
    "usageCount": 1
   },
   {
@@ -11147,7 +11170,7 @@
    "stableIds": [
     "F0167-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-24",
    "usageCount": 1
   },
   {
@@ -11164,7 +11187,7 @@
    "stableIds": [
     "F0174-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-24",
    "usageCount": 1
   },
   {
@@ -11181,7 +11204,7 @@
    "stableIds": [
     "F0125-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -11198,7 +11221,7 @@
    "stableIds": [
     "F0183-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -17700,7 +17723,7 @@
    "stableIds": [
     "F0057-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-09-02",
    "usageCount": 1
   },
   {
@@ -17717,7 +17740,7 @@
    "stableIds": [
     "F0057-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-09-02",
    "usageCount": 1
   },
   {
@@ -17882,7 +17905,7 @@
    "stableIds": [
     "F0024-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -17899,7 +17922,7 @@
    "stableIds": [
     "F0037-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 1
   },
   {
@@ -17916,7 +17939,7 @@
    "stableIds": [
     "F0037-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 1
   },
   {
@@ -17933,7 +17956,7 @@
    "stableIds": [
     "F0037-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 1
   },
   {
@@ -17950,7 +17973,7 @@
    "stableIds": [
     "F0037-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-28",
    "usageCount": 1
   },
   {
@@ -17967,7 +17990,7 @@
    "stableIds": [
     "F0118-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -17984,7 +18007,7 @@
    "stableIds": [
     "F0140-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -18001,7 +18024,7 @@
    "stableIds": [
     "F0146-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18018,7 +18041,7 @@
    "stableIds": [
     "F0146-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18073,6 +18096,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/1vUAAeSw5Jpp7Xrg/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0152-P01"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -18106,7 +18146,7 @@
    "stableIds": [
     "F0319-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18123,7 +18163,7 @@
    "stableIds": [
     "F0009-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-09-01",
    "usageCount": 1
   },
   {
@@ -18180,7 +18220,7 @@
    "stableIds": [
     "F0587-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18202,6 +18242,23 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/GlsAAOSwCkFlTZzd/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0492-P01"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
@@ -18237,7 +18294,7 @@
    "stableIds": [
     "F0311-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18254,7 +18311,7 @@
    "stableIds": [
     "F0034-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18297,6 +18354,40 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/MRAAAeSwQw5qVjfE/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0414-P01"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/NlQAAeSwGatqkuNY/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0371-P01"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -18310,7 +18401,7 @@
    "stableIds": [
     "F0385-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18346,7 +18437,7 @@
    "stableIds": [
     "F0073-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18363,7 +18454,24 @@
    "stableIds": [
     "F0171-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/QfgAAOSw4mBmD6XT/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0495-P01"
+   ],
+   "retrievedAt": "2026-09-03",
    "usageCount": 1
   },
   {
@@ -18380,7 +18488,7 @@
    "stableIds": [
     "F0587-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18397,7 +18505,7 @@
    "stableIds": [
     "F0093-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -18415,7 +18523,7 @@
    "stableIds": [
     "F0166-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 2
   },
   {
@@ -18439,6 +18547,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/do0AAOSw~-RmRu8w/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0320-P01"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -18452,7 +18577,7 @@
    "stableIds": [
     "F0148-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -18469,7 +18594,7 @@
    "stableIds": [
     "F0083-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18505,7 +18630,7 @@
    "stableIds": [
     "F0066-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18589,6 +18714,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/o4EAAeSwrKZqeeWs/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "F0149-P01"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -18642,7 +18784,7 @@
    "stableIds": [
     "F0164-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18699,7 +18841,7 @@
    "stableIds": [
     "F0562-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -18716,7 +18858,7 @@
    "stableIds": [
     "F0164-P03"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18733,7 +18875,7 @@
    "stableIds": [
     "F0528-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-27",
    "usageCount": 1
   },
   {
@@ -18750,7 +18892,7 @@
    "stableIds": [
     "F0094-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -18803,7 +18945,7 @@
    "stableIds": [
     "F0346-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -18838,7 +18980,7 @@
    "stableIds": [
     "F0340-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -18873,7 +19015,7 @@
    "stableIds": [
     "F0364-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -18928,7 +19070,7 @@
    "stableIds": [
     "F0490-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -18945,7 +19087,7 @@
    "stableIds": [
     "F0335-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -18982,7 +19124,7 @@
    "stableIds": [
     "F0355-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -18999,7 +19141,7 @@
    "stableIds": [
     "F0343-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -19016,7 +19158,7 @@
    "stableIds": [
     "F0325-P02"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-30",
    "usageCount": 1
   },
   {
@@ -19069,7 +19211,7 @@
    "stableIds": [
     "F0636-P01"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-26",
    "usageCount": 1
   },
   {
@@ -19224,7 +19366,7 @@
     "F0231-P01",
     "override:snkrdunk-mp1-012"
    ],
-   "retrievedAt": null,
+   "retrievedAt": "2026-08-08",
    "usageCount": 3
   },
   {

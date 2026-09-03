@@ -545,6 +545,8 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
 
 def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> list[dict[str, Any]]:
     photograph_source = specimen_source(specimen)
+    if specimen.get("recordedAt"):
+        photograph_source["retrievedAt"] = specimen["recordedAt"]
     sources = [photograph_source]
     owner_fields = observation.get("ownerAttestedFields") or []
     if owner_fields:
@@ -561,6 +563,7 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
         sources.append({
             "sourceType": "Owner attestation (domain expert)",
             "claimFields": owner_fields,
+            "retrievedAt": specimen.get("recordedAt"),
             "evidence": (
                 f"The collection owner's explicit {specimen.get('recordedAt', '')} confirmation "
                 f"establishes the specimen's {established}; the retained {photograph_label} "
