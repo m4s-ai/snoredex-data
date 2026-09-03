@@ -14663,6 +14663,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:d161622227aabcd9d28f8acc",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:d161622227aabcd9d28f8acc",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0320-P01",
+        "semanticPrintingId": "PRINTING:d161622227aabcd9d28f8acc",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+        "materializedTargetId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0483"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:d18114f015bcde03b71b6c15",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -15341,26 +15361,6 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:CN:S-Chinese:CS6bC:113:Snorlax-Unfazed-Fat-Thumping-Snore"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:e8dd657341b2795f65d8c26d",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:e8dd657341b2795f65d8c26d",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0320-P01",
-        "semanticPrintingId": "PRINTING:e8dd657341b2795f65d8c26d",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-        "materializedTargetId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
-        "specimenIds": [
-          "SPEC-0483"
-        ]
       }
     },
     {
@@ -34131,10 +34131,10 @@
         "sourceId": "SPEC-0483",
         "evidenceStatus": "observed",
         "disposition": "candidate-needs-evidence",
-        "proposedTargetId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
+        "proposedTargetId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
         "materializedTargetId": null,
-        "reason": "provides provenance for PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d, already established from the finish store",
-        "provenanceTargetId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d"
+        "reason": "provides provenance for PHYSICAL:PRINTING:d161622227aabcd9d28f8acc, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc"
       }
     },
     {
@@ -97191,6 +97191,41 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+        "semanticPrintingId": "PRINTING:d161622227aabcd9d28f8acc",
+        "cardReleaseId": "RELEASE:JP:Japanese:S-P:156:Snorlax-Slap-Push-Single-Strike-Tackle",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "observed-marking",
+            "role": "distribution-promo",
+            "text": "コロコロイチバン! (CoroCoro Ichiban!) magazine logo"
+          }
+        ],
+        "distribution": {
+          "kind": "magazine-insert",
+          "name": "CoroCoro Ichiban! March 2021 issue insert",
+          "region": "Japan",
+          "date": "2021-03"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0320",
+        "sourcePrintingId": "F0320-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:d161622227aabcd9d28f8acc",
+        "specimenIds": [
+          "SPEC-0483"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:d308802e3de534a43bd4634d",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -97779,30 +97814,6 @@
         "establishingClaimId": "CLAIM:finish:PRINTING:e5d2e31a32ac116518455a64",
         "specimenIds": [
           "SPEC-0476"
-        ]
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-        "semanticPrintingId": "PRINTING:e8dd657341b2795f65d8c26d",
-        "cardReleaseId": "RELEASE:JP:Japanese:S-P:156:Snorlax-Slap-Push-Single-Strike-Tackle",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": [],
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0320",
-        "sourcePrintingId": "F0320-P01",
-        "establishingClaimId": "CLAIM:finish:PRINTING:e8dd657341b2795f65d8c26d",
-        "specimenIds": [
-          "SPEC-0483"
         ]
       }
     },
@@ -167298,6 +167309,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:d161622227aabcd9d28f8acc",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:d18114f015bcde03b71b6c15",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -167641,16 +167662,6 @@
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:CS6bC:113:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:e8dd657341b2795f65d8c26d",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
     },
     {
       "fromType": "candidate-claim",
@@ -177687,7 +177698,7 @@
       "fromId": "CLAIM:specimen:SPEC-0483",
       "relation": "provenance",
       "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
+      "toId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
       "provenance": {
         "specimenId": "SPEC-0483"
       }
@@ -225464,6 +225475,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:d161622227aabcd9d28f8acc",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:JP:Japanese:S-P:156:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:d308802e3de534a43bd4634d",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -225860,22 +225887,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Portuguese:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:e8dd657341b2795f65d8c26d",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:JP:Japanese:S-P:156:Snorlax-Slap-Push-Single-Strike-Tackle",
       "provenance": {}
     },
     {
@@ -268197,7 +268208,7 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0320-P01",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
+      "targetRef": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
@@ -285564,7 +285575,7 @@
       "sourceId": "SPEC-0483",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
-      "reason": "provides provenance for PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d, already established from the finish store"
+      "reason": "provides provenance for PHYSICAL:PRINTING:d161622227aabcd9d28f8acc, already established from the finish store"
     },
     {
       "sourceKind": "specimen-observation",

@@ -114,6 +114,19 @@ def main() -> None:
     ]
 
     finish_units = read("finish_units.json")["units"]
+    sp156 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0320")
+    sp156_holo = next(printing for printing in sp156["printings"] if printing["finish"] == "holo")
+    assert sp156_holo["markings"] == [{
+        "kind": "observed-marking",
+        "role": "distribution-promo",
+        "text": "コロコロイチバン! (CoroCoro Ichiban!) magazine logo",
+    }]
+    assert sp156_holo["distribution"] == {
+        "kind": "magazine-insert",
+        "name": "CoroCoro Ichiban! March 2021 issue insert",
+        "region": "Japan",
+        "date": "2021-03",
+    }
     simplified_chinese_promo = next(
         unit for unit in finish_units if unit["finishUnitId"] == "F0456"
     )

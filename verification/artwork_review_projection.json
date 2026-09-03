@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.1.0",
   "generated": "2026-09-03",
-  "projectionVersion": "e1f2a90457e26ad81f8da0f565f6ba671296dcc09956699aa20462692143c157",
+  "projectionVersion": "bf280ffd2f56a5377d7d756ff40b3c033f9dac3ac62e18d3efe198a006c0979c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -52477,20 +52477,31 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:e8dd657341b2795f65d8c26d",
-              "semanticPrintingId": "PRINTING:e8dd657341b2795f65d8c26d",
+              "physicalPrintingId": "PHYSICAL:PRINTING:d161622227aabcd9d28f8acc",
+              "semanticPrintingId": "PRINTING:d161622227aabcd9d28f8acc",
               "cardReleaseId": "RELEASE:JP:Japanese:S-P:156:Snorlax-Slap-Push-Single-Strike-Tackle",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [],
-              "distribution": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "distribution-promo",
+                  "text": "コロコロイチバン! (CoroCoro Ichiban!) magazine logo"
+                }
+              ],
+              "distribution": {
+                "kind": "magazine-insert",
+                "name": "CoroCoro Ichiban! March 2021 issue insert",
+                "region": "Japan",
+                "date": "2021-03"
+              },
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0320",
               "sourcePrintingId": "F0320-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:e8dd657341b2795f65d8c26d",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d161622227aabcd9d28f8acc",
               "specimenIds": [
                 "SPEC-0483"
               ],
@@ -52498,7 +52509,7 @@
                 {
                   "url": "https://i.ebayimg.com/images/g/do0AAOSw~-RmRu8w/s-l1600.jpg",
                   "sourceType": "Seller listing photograph",
-                  "evidence": "The complete seller photograph visibly shows Japanese Snorlax PROMO 156/S-P. A distinct reflective rainbow foil sheen is visible across the artwork, border and text area, establishing the holo printing. Retained as SPEC-0483."
+                  "evidence": "The complete seller photograph visibly shows Japanese Snorlax PROMO 156/S-P with the コロコロイチバン! (CoroCoro Ichiban!) magazine logo printed over the artwork. A distinct reflective rainbow foil sheen is visible across the artwork, border and text area, establishing the holo printing. Retained as SPEC-0483."
                 }
               ]
             }
@@ -52512,7 +52523,9 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "コロコロイチバン! (CoroCoro Ichiban!) magazine logo"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -52528,12 +52541,12 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0320-P01:0:8e30fd0ef0025cc6",
+              "observationId": "finish:F0320-P01:0:86efc67dcd1fbd04",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/do0AAOSw~-RmRu8w/s-l1600.jpg",
-              "evidence": "The complete seller photograph visibly shows Japanese Snorlax PROMO 156/S-P. A distinct reflective rainbow foil sheen is visible across the artwork, border and text area, establishing the holo printing. Retained as SPEC-0483.",
-              "contentHash": "e720054aa5069a9f29806c4269079ec7d26941a50494741727ffdbe67134d439",
+              "evidence": "The complete seller photograph visibly shows Japanese Snorlax PROMO 156/S-P with the コロコロイチバン! (CoroCoro Ichiban!) magazine logo printed over the artwork. A distinct reflective rainbow foil sheen is visible across the artwork, border and text area, establishing the holo printing. Retained as SPEC-0483.",
+              "contentHash": "9b9a5b6d15215bd40a7b5bc42ab7d533aaa7334f52c2ea09de13e9dca4c2e864",
               "image": null
             },
             {
